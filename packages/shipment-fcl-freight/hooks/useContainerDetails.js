@@ -4,6 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getControls from '../common/Tasks/TaskExecution/CustomTasks/UpdateContainerDetails/TaskForm/controls';
 
@@ -119,7 +120,7 @@ const useContainerDetails = ({
 
 		const valArray = (trimmedData?.split(' ') || [])?.filter(Boolean);
 
-		const containerError = [];
+		const CONTAINER_ERROR = [];
 
 		const containerDetails = (formValues?.container || []).map(
 			(item, index) => {
@@ -131,7 +132,7 @@ const useContainerDetails = ({
 
 				if (num) {
 					if (date && (invalidDate || pickup_date > new Date())) {
-						containerError[index] = {
+						CONTAINER_ERROR[index] = {
 							picked_up_from_yard_at: getError({
 								index,
 								dateError: invalidDate ? 'Invalid Date' : 'maxDate',
@@ -156,8 +157,8 @@ const useContainerDetails = ({
 
 		setValue('container', containerDetails);
 
-		if (containerError.length > 0) {
-			setError('container', containerError);
+		if (!isEmpty(CONTAINER_ERROR)) {
+			setError('container', CONTAINER_ERROR);
 		}
 	};
 
