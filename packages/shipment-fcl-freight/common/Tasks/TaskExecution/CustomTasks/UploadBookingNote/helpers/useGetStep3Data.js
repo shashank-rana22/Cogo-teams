@@ -19,8 +19,12 @@ const DEFAULT_VALUES = {};
 const HTTP_SUCCESS_CODE = 200;
 
 const useGetStep3Data = ({
-	servicesList = [], shipment_data, onCancel, task,
-	taskListRefetch = () => {}, primary_service,
+	servicesList = [],
+	shipment_data = {},
+	onCancel = () => {},
+	task = {},
+	taskListRefetch = () => {},
+	primary_service = {},
 }) => {
 	const { trade_type } = primary_service || {};
 
