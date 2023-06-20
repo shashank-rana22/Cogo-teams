@@ -1,16 +1,11 @@
 import { Button } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import useDocumentTag from '../../../../../../hooks/useDocumentTag';
 import useDocumentTypeControls from '../../../../../../hooks/useDocumentTypeControls';
 
 import styles from './styles.module.css';
-
-const CONTROLLER_MAPPING = {
-	select: SelectController,
-};
 
 function DocumentTypeSID({
 	orgId = '',
@@ -55,18 +50,17 @@ function DocumentTypeSID({
 				</div>
 				<div key={watchListShipment}>
 					{controls.map((eachControl = {}) => {
-						const { label = '', controlType = '', name = '' } = eachControl || {};
-						const Element = CONTROLLER_MAPPING[controlType] || null;
+						const { label = '', name = '' } = eachControl || {};
 
-						return (Element && (
+						return (
 							<div className={styles.styled_element} key={name}>
 								<div>{label}</div>
-								<Element control={control} {...eachControl} />
+								<SelectController control={control} {...eachControl} />
 								<div className={styles.error_text}>
 									{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
 								</div>
 							</div>
-						));
+						);
 					})}
 				</div>
 				<div className={styles.button_styles}>

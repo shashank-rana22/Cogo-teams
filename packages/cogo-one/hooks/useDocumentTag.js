@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useDocumentTag = () => {
@@ -12,10 +13,10 @@ const useDocumentTag = () => {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Success');
+			Toast.success('Document Tag Successful');
 			setOpenModal(false);
 		} catch (e) {
-			Toast.error(e?.response?.data?.message || 'something went wrong');
+			Toast.error(getApiErrorString(e?.response?.data));
 		}
 	};
 	return {

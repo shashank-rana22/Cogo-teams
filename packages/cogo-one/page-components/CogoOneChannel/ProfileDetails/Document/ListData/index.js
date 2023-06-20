@@ -1,7 +1,7 @@
 import { Button, cl } from '@cogoport/components';
 import { IcMPdf } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
@@ -12,9 +12,16 @@ import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
-	userId = '', userMobile = '', leadUserId = '',
-	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
-	isGstUploaded, isPanUploaded, formattedMessageData = {},
+	userId = '',
+	userMobile = '',
+	leadUserId = '',
+	list = [],
+	orgId = '',
+	setShowModal = () => {},
+	setSingleItem = () => {},
+	isGstUploaded,
+	isPanUploaded,
+	formattedMessageData = {},
 }) {
 	const [openModal, setOpenModal] = useState('');
 
@@ -118,7 +125,7 @@ function ListData({
 										)}
 									</div>
 								</div>
-								{openModal === document_url && orgId && (
+								{(openModal === document_url && orgId) && (
 									<DocumentTypeSID
 										key={document_url}
 										id={id}
