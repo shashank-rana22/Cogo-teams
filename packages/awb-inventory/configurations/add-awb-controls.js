@@ -1,4 +1,4 @@
-import checkValidation from '../helper/checkValidation';
+import checkValidation from '../utils/checkValidation';
 
 const ALLOWED_TOTAL_AWB_ALLOTED = 200;
 
@@ -93,7 +93,7 @@ const awbControls = ({
 		type        : 'async-select',
 		asyncKey    : 'partner_users',
 		label       : 'Procured by Cogoport Agent',
-		placeholder : 'Search via name email',
+		placeholder : 'Search via name/email',
 
 		span   : 6,
 		params : {
@@ -108,7 +108,7 @@ const awbControls = ({
 	{
 		name  : 'awb_block',
 		type  : 'checkbox',
-		label : 'Are you sure want to block this AWB Number',
+		label : 'Are you sure want to block this AWB Number?',
 	},
 	{
 		name        : 'destination_location_id',

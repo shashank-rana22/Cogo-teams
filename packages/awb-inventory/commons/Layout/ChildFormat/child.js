@@ -8,7 +8,6 @@ import getErrorMessage from '../getErrorMessage';
 import styles from './styles.module.css';
 
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
-const FIRST_INDEX = 1;
 
 function Child({
 	controls,
@@ -88,7 +87,7 @@ function Child({
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove ${styles.delete_icon}`}
-								onClick={() => remove(index, FIRST_INDEX)}
+								onClick={() => remove(index)}
 							/>
 						) : null}
 					</div>

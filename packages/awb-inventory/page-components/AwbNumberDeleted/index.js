@@ -49,7 +49,7 @@ function AwbNumberDeleted({
 						{singleItem?.airline?.logo_url ? (
 							<img
 								src={singleItem?.airline?.logo_url}
-								alt=""
+								alt="Airline Logo"
 								style={{ maxWidth: '20px', marginRight: '8px' }}
 							/>
 						) : (

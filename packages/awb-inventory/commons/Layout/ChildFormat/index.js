@@ -1,13 +1,10 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
-
-import CONSTANTS from '../../../constants/constants';
 
 import Child from './child';
 import styles from './styles.module.css';
-
-const { EMPTY_LIST_SIZE } = CONSTANTS;
 
 function FieldArray({
 	name,
@@ -21,7 +18,7 @@ function FieldArray({
 	error,
 	...rest
 }) {
-	const { fields, append, remove } = useFieldArray({
+	const { fields = [], append, remove } = useFieldArray({
 		control,
 		name,
 	});
@@ -29,7 +26,7 @@ function FieldArray({
 	const CHILD_EMPTY_VALUES = { };
 
 	useEffect(() => {
-		if (fields.length === EMPTY_LIST_SIZE) {
+		if (isEmpty(fields)) {
 			append(CHILD_EMPTY_VALUES);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

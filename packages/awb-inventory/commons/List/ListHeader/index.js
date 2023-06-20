@@ -10,7 +10,7 @@ function Header({ fields }) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header_row}>
-				{fields.map((field) => (
+				{(fields || []).map((field) => (
 					<div
 						className={`${styles.col}`}
 						style={{ '--span': field.span || DEFAULT_SPAN }}

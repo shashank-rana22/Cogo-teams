@@ -9,15 +9,15 @@ import useGetAWBPrefix from '../../hooks/useGetAWBPrefix';
 
 import styles from './styles.module.css';
 
-const AWB_ZERO_INDEX = 0;
-const AWB_THIRD_INDEX = 3;
-const AWB_FOURTH_INDEX = 4;
-const AWB_EIGHTH_INDEX = 8;
-const AWB_NINETH_INDEX = 9;
-const CHECK_LENGTH_FOUR = 4;
-const CHECK_LENGTH_FIVE = 5;
-const CHECK_LENGTH_NINE = 9;
-const CHECK_LENGTH_TEN = 10;
+const AIRLINE_PREFIX_START = 0;
+const AIRLINE_PREFIX_END = 3;
+const SERIAL_NUMBER_START = 4;
+const AWB_DIGIT_CHECK = 8;
+const SERIAL_NUMBER_END = 9;
+const CHECK_FOUR_AWB_LENGTH = 4;
+const CHECK_FIVE_AWB_LENGTH = 5;
+const CHECK_NINE_AWB_LENGTH = 9;
+const CHECK_TEN_AWB_LENGTH = 10;
 
 function AddAwbNumber({
 	setShow,
@@ -69,21 +69,21 @@ function AddAwbNumber({
 
 	useEffect(() => {
 		let awbNumber = firstAwbNumber;
-		if (firstAwbNumber.length === CHECK_LENGTH_FOUR) {
-			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}-${firstAwbNumber.slice(
-				AWB_THIRD_INDEX,
+		if (firstAwbNumber.length === CHECK_FOUR_AWB_LENGTH) {
+			awbNumber = `${firstAwbNumber.slice(AIRLINE_PREFIX_START, AIRLINE_PREFIX_END)}-${firstAwbNumber.slice(
+				AIRLINE_PREFIX_END,
 			)}`;
 		}
-		if (firstAwbNumber.length === CHECK_LENGTH_FIVE && firstAwbNumber[AWB_FOURTH_INDEX] === '-') {
-			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}`;
+		if (firstAwbNumber.length === CHECK_FIVE_AWB_LENGTH && firstAwbNumber[SERIAL_NUMBER_START] === '-') {
+			awbNumber = `${firstAwbNumber.slice(AIRLINE_PREFIX_START, AIRLINE_PREFIX_END)}`;
 		}
-		if (firstAwbNumber.length === CHECK_LENGTH_NINE) {
-			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}-${firstAwbNumber.slice(
-				AWB_EIGHTH_INDEX,
+		if (firstAwbNumber.length === CHECK_NINE_AWB_LENGTH) {
+			awbNumber = `${firstAwbNumber.slice(AIRLINE_PREFIX_START, AWB_DIGIT_CHECK)}-${firstAwbNumber.slice(
+				AWB_DIGIT_CHECK,
 			)}`;
 		}
-		if (firstAwbNumber.length === CHECK_LENGTH_TEN && firstAwbNumber[AWB_NINETH_INDEX] === '-') {
-			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}`;
+		if (firstAwbNumber.length === CHECK_TEN_AWB_LENGTH && firstAwbNumber[SERIAL_NUMBER_END] === '-') {
+			awbNumber = `${firstAwbNumber.slice(AIRLINE_PREFIX_START, AWB_DIGIT_CHECK)}`;
 		}
 		setValue('first_awb_number', awbNumber);
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -77,7 +77,7 @@ function Filters({ filters, setFilters, activeTab }) {
 				themeType="secondary"
 				size="md"
 				onClick={() => {
-					setOpen(!open);
+					setOpen((prev) => !prev);
 				}}
 				style={{ marginLeft: '8px' }}
 			>

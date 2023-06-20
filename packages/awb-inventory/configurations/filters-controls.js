@@ -54,7 +54,7 @@ const controls = [
 		type        : 'async-select',
 		asyncKey    : 'partner_users',
 		label       : 'Procured by Cogoport Agent',
-		placeholder : 'Search via name email',
+		placeholder : 'Search via name/email',
 		valueKey    : 'user_id',
 		multiple    : true,
 		span        : 6,

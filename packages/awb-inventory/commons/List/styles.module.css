@@ -4,14 +4,7 @@
 	padding: 16px;
 }
 
-.center {
-	align-items: center;
-	width: 0;
-	margin-left: 8px;
-}
-
 .flex {
-	width: var(--span) px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -23,7 +16,6 @@
 }
 
 .loading_style {
-	margin-top: 40px;
-	margin-bottom: 40px;
+	margin: 40px 0;
 	text-align: center;
 }

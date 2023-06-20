@@ -1,4 +1,4 @@
-import checkValidation from '../helper/checkValidation';
+import checkValidation from '../utils/checkValidation';
 
 const awbControls = ({
 	item,

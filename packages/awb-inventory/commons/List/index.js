@@ -10,9 +10,9 @@ import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-const { START_PAGE, MOBILE_SCREEN_SIZE, EMPTY_LIST_SIZE } = CONSTANTS;
+const { START_PAGE, MOBILE_SCREEN_SIZE } = CONSTANTS;
 const TIMEOUT_TIME = 1000;
-const HAS_MORE_COUNT = 10;
+const SCROLLING_LIMIT = 10;
 
 function List({
 	fields = [],
@@ -72,7 +72,7 @@ function List({
 			if (page === START_PAGE) {
 				setFinalList([...list]);
 			} else {
-				setFinalList(finalList.concat(list));
+				setFinalList((prev) => prev.concat(list));
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +86,7 @@ function List({
 					pageStart={1}
 					initialLoad={false}
 					loadMore={loadMore}
-					hasMore={page < Math.ceil(totalCount / HAS_MORE_COUNT)}
+					hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
 					loader={!loading ? (
 						<div className={styles.loading_style}>
 							<Loader />
@@ -103,7 +103,7 @@ function List({
 						<Loader />
 					</div>
 				)}
-				{finalList.length === totalCount && finalList.length > EMPTY_LIST_SIZE ? (
+				{finalList.length === totalCount && !isEmpty(finalList) ? (
 					<div className={styles.end_message}>No more data to show</div>
 				) : null}
 			</div>
