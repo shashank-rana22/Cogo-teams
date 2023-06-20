@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { useRef } from 'react';
 
 import styles from '../styles.module.css';
@@ -14,6 +15,14 @@ function InvoicingPartyDetail({
 		live_invoice_number,
 		billing_address,
 	} = invoice;
+
+	const registrationLabel = getCountrySpecificData({
+		country_id    : billing_address?.organization_country_id,
+		accessorType  : 'registration_number',
+		accessor      : 'label',
+		isDefaultData : true,
+
+	});
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
@@ -31,7 +40,12 @@ function InvoicingPartyDetail({
 			</div>
 
 			<div className={styles.gst}>
-				<div className={styles.label}>TAX Number :</div>
+				<div className={styles.label}>
+					{registrationLabel}
+					{' '}
+					Number
+					:
+				</div>
 				<Tooltip
 					theme="light"
 					placement="bottom"
