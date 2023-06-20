@@ -3,13 +3,13 @@ const getLocalControls = (service_type, shipment_data) => {
 		(serviceObj) => serviceObj?.service_type.includes('air_freight_local_service'),
 	);
 
-	const export_values = values.filter(
-		(serviceObj) => serviceObj.trade_type === 'export',
-	).pop();
+	const export_values = values?.find(
+		(serviceObj) => serviceObj?.trade_type === 'export',
+	);
 
-	const import_values = values.filter(
-		(serviceObj) => serviceObj.trade_type === 'import',
-	).pop();
+	const import_values = values?.find(
+		(serviceObj) => serviceObj?.trade_type === 'import',
+	);
 
 	const controlMapping = {
 		air_freight_service: [
