@@ -66,14 +66,14 @@ function Outstanding({ entityCode }) {
 
 			{outstandingLoading ? (
 				<div>
-					{[...Array(7)].map(() => (
-						<OrgLoader />
+					{[...Array(7)].map((val) => (
+						<OrgLoader key={val} />
 					))}
 				</div>
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} entityCode={entityCode} />
+						<OutstandingList key={item} item={item} entityCode={entityCode} />
 					))}
 					{list?.length === 0 && <div className={styles.empty_state}><EmptyState /></div>}
 					{list?.length > 0 && (
