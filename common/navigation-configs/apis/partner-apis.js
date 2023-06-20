@@ -3238,6 +3238,11 @@ const partner = {
 	],
 	sales_dashboard: [
 		{
+			api          : 'get_partner_user_report',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
