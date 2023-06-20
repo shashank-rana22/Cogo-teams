@@ -3,12 +3,6 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 
 import { handleServiceType } from './handleServiceType';
 
-const DEFAULT_PRICE = 0;
-const DEFAULT_QUANTITY = 0;
-const DEFAULT_EXCHANGE_RATE = 1;
-const DEFAULT_TAX_PERCENT = 0;
-const DEFAULT_TOTAL = 0;
-
 const commonControls = (service) => [
 	{
 		label    : handleServiceType(service),
