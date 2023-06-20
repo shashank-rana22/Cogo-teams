@@ -98,7 +98,7 @@ const useHistorySettlemet = () => {
 			});
 			setApiData(res.data);
 		} catch (error) {
-			setApiData({});
+			setApiData();
 		}
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 
