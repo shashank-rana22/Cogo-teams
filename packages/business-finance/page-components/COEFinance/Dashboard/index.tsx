@@ -65,7 +65,14 @@ function Dashboard({ statsData }) {
 				<div className={styles.service_stats}>
 					<div className={styles.invoice}>
 						Service Ops 2 Statistics
-						<Tooltip content="Percentage of Invoices approved" placement="top">
+						<Tooltip
+							content={(
+								<div className={styles.tooltip_text}>
+									Percentage of Invoices approved
+								</div>
+							)}
+							placement="top"
+						>
 							<div className={styles.icon}>
 								<IcMInfo />
 							</div>
@@ -92,7 +99,14 @@ function Dashboard({ statsData }) {
 			<div className={styles.stats}>
 				<div className={styles.jobs}>
 					Job Statistics & Profitability
-					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
+					<Tooltip
+						content={(
+							<div className={styles.tooltip_text}>
+								No. of Jobs/Shipment IDs and it’s profitability
+							</div>
+						)}
+						placement="top"
+					>
 						<div className={styles.icon}>
 							<IcMInfo />
 						</div>
