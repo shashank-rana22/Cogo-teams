@@ -1,8 +1,8 @@
 export const TOOLTIP_MAPPING = {
-	vessel_name   : 'Name',
-	latitude      : 'Latitude',
-	longitude     : 'Longitude',
-	lastUpdatedAt : 'Last Update',
+	vessel_name     : 'Name',
+	latitude        : 'Latitude',
+	longitude       : 'Longitude',
+	last_updated_at : 'Last Update',
 };
 export const ICON_SIZE = 24;
 export const ICON_ANCHOR_X = 10;

@@ -20,11 +20,22 @@ const ICON_MAPPING = {
 	black  : GLOBAL_CONSTANTS.image_url.black_vessel,
 };
 
+const getData = ({ info, props }) => {
+	if (info === 'last_updated_at') {
+		return formatDate({
+			date       : props?.last_updated_at,
+			dateFormat : geo.formats.date.default,
+			timeFormat : geo.formats.time['12hrs'],
+			formatType : 'dateTime',
+		});
+	}
+	return props?.[info];
+};
+
 function Pointer(props) {
 	const {
 		latitude: lat = '',
 		longitude: lng = '',
-		lastUpdatedAt = '',
 		cog: direction,
 		arrow = 'black',
 	} = props;
@@ -37,28 +48,13 @@ function Pointer(props) {
 				height={16}
 				style={{
 					transform: `rotate(${direction}deg)`,
-					// height    : '16px',
-					// width     : '8px',
 				}}
 				alt="ship"
 			/>,
 		),
 		iconSize   : [ICON_SIZE, ICON_SIZE],
 		iconAnchor : [ICON_ANCHOR_X, ICON_ANCHOR_Y],
-		className  : 'divIcon',
 	});
-
-	const getData = (key) => {
-		if (key === 'lastUpdatedAt') {
-			return formatDate({
-				date       : lastUpdatedAt,
-				dateFormat : geo.formats.date.default,
-				timeFormat : geo.formats.time['12hrs'],
-				formatType : 'dateTime',
-			});
-		}
-		return props?.[key];
-	};
 
 	return (
 		<FeatureGroup key={lat}>
@@ -68,7 +64,9 @@ function Pointer(props) {
 						{Object.keys(TOOLTIP_MAPPING).map((info) => (
 							<div key={info}>
 								<span className={styles.heading}>{TOOLTIP_MAPPING[info]}</span>
-								<span className={styles.value}>{getData(info)}</span>
+								:
+								{' '}
+								<span className={styles.value}>{getData({ info, props })}</span>
 							</div>
 						))}
 					</div>
