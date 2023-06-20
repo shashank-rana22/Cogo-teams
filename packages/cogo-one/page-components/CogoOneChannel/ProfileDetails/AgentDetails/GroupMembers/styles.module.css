@@ -1,4 +1,4 @@
-.content {
+s.content {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -37,7 +37,6 @@
 	color: #4f4f4f;
 }
 
-
 .conversation_title {
 	display: flex;
 	align-items: center;
@@ -49,9 +48,9 @@
 	color: #221f20;
 }
 
-.cross_icon{
-	height: 22px;
+.cross_icon {
 	width: 22px;
+	height: 22px;
 	margin-left: 35px;
 	cursor: pointer;
 }
