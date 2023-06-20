@@ -31,5 +31,6 @@ export default function useGetServiceTimeline({ defaultParams = {}, defaultFilte
 		timelineLoading : loading,
 		timelineData    : data || [],
 		getShipmentTimeline,
+		refetch         : getShipmentTimeline,
 	};
 }
