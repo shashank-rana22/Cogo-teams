@@ -8,7 +8,6 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
-const ZERO_SPAN = 0;
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
@@ -20,23 +19,14 @@ function Layout({
 	(fields || []).forEach((field) => {
 		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field?.span || TOTAL_SPAN;
-			if (span === TOTAL_SPAN) {
-				span = ZERO_SPAN;
-
-				ROW_WISE_FIELDS.push(field);
-				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-
-				ROW_WISE_FIELDS = [];
-			} else if (span > TOTAL_SPAN) {
-				span = ZERO_SPAN;
-
+			if ((span + field.span) > TOTAL_SPAN) {
 				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 				ROW_WISE_FIELDS = [];
-
 				ROW_WISE_FIELDS.push(field);
+				span = field.span;
 			} else {
 				ROW_WISE_FIELDS.push(field);
+				span += field.span;
 			}
 		}
 	});

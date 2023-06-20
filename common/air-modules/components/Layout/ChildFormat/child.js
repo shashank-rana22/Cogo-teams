@@ -9,7 +9,6 @@ import getAsyncFields from '../Item/getAsyncKeys';
 import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
-const ZERO_SPAN = 0;
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 const FLEX_HUNDRED = 100;
 const INCREMENT_BY_ONE = 1;
@@ -32,19 +31,14 @@ function Child({
 	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || TOTAL_SPAN;
-		if (span === TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-			ROW_WISE_FIELDS = [];
-			span = ZERO_SPAN;
-		} else if (span < TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-		} else {
+		if ((span + fields.span) > TOTAL_SPAN) {
 			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 			ROW_WISE_FIELDS = [];
 			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
+		} else {
+			ROW_WISE_FIELDS.push(fields);
+			span += fields.span;
 		}
 	});
 	if (ROW_WISE_FIELDS.length) {
