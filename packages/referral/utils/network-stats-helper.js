@@ -8,16 +8,10 @@ const NETWORK_LENGTH_VALUE_EQUAL_TO_20 = 20;
 
 export const formatData = (data) => {
 	const keys = Object.keys(data || {});
-	let details = [];
-	keys.forEach((key, index) => {
-		details = [
-			...details,
-			{
-				x : `L${index + LEVEL_INDEX_VALUE}`,
-				y : handleValues(data?.[key]),
-			},
-		];
-	});
+	const details = keys.map((key, index) => ({
+		x : `L${index + LEVEL_INDEX_VALUE}`,
+		y : handleValues(data?.[key]),
+	}));
 	return details;
 };
 

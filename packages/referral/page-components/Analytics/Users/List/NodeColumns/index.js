@@ -1,6 +1,6 @@
-import styles from './styles.module.css';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const INDEX_VALUE = 0;
+import styles from './styles.module.css';
 
 function NodeColumns({ index = 0, item = {}, type = '' }) {
 	const { cogopoints = {} } = item || {};
@@ -27,7 +27,7 @@ function NodeColumns({ index = 0, item = {}, type = '' }) {
 	return (
 		subTitleOptions.map((node) => (
 			<div className={styles.node} key={node.name}>
-				{index === INDEX_VALUE ? (
+				{index === GLOBAL_CONSTANTS.zeroth_index ? (
 					<div className={styles.node_title}>
 						{node.title}
 					</div>

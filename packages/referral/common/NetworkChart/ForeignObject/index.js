@@ -7,11 +7,12 @@ import { useState } from 'react';
 import DirectNode from './DirectNode';
 import styles from './styles.module.css';
 
-const SUBSTRING_MIN_VALUE = 0;
-const ORG_COUNT_LENGTH_VALUE = 1;
-const USERID_SLICE_VALUE = -6;
-const SUBSTRING_MAX_VALUE = 2;
-const COGOPOINT_DEFAULT_VALUE = 0;
+const FIRST_TWO_LETTER = {
+	defaultIndex : 0,
+	maxIndex     : 2,
+};
+const REMAINING_ORGANIZATION_COUNT = 1;
+const UNIQUE_USER_ID = -6;
 
 function RenderForeignObjectNode({
 	nodeDatum,
@@ -38,7 +39,7 @@ function RenderForeignObjectNode({
 
 	const topPerformer = topPerformerId === topUser;
 
-	const orgCount = organization.length - ORG_COUNT_LENGTH_VALUE;
+	const orgCount = organization.length - REMAINING_ORGANIZATION_COUNT;
 
 	const checkActiveNode = nodeData?.referee_id === nodeDatum?.referee_id;
 
@@ -50,11 +51,11 @@ function RenderForeignObjectNode({
 		status = '',
 	} = referralData || {};
 
-	const firstTwoLetters = userData?.name.substring(SUBSTRING_MIN_VALUE, SUBSTRING_MAX_VALUE);
+	const firstTwoLetters = userData?.name.substring(FIRST_TWO_LETTER.defaultIndex, FIRST_TWO_LETTER.maxIndex);
 
 	const avatarContent = firstTwoLetters?.toUpperCase();
 
-	const lastUserId = referee_id?.slice(USERID_SLICE_VALUE).toUpperCase();
+	const lastUserId = referee_id?.slice(UNIQUE_USER_ID).toUpperCase();
 
 	const handleFunc = () => {
 		handleConnections(nodeDatum, toggleNode);
@@ -109,7 +110,9 @@ function RenderForeignObjectNode({
 							className={styles.cogopoints_img}
 						/>
 						{' '}
-						<div className={styles.cogopoints_count}>{userCogopoints || COGOPOINT_DEFAULT_VALUE}</div>
+						<div className={styles.cogopoints_count}>
+							{userCogopoints || GLOBAL_CONSTANTS.cogopoint_default_value}
+						</div>
 					</div>
 				</div>
 			</foreignObject>

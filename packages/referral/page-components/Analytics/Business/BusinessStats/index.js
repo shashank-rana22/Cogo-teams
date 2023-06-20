@@ -9,8 +9,8 @@ import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBus
 
 import styles from './styles.module.css';
 
-const renderSliceTooltip = ({ slice }) => {
-	const { data } = slice?.points?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+function RenderSliceTooltip({ item = {} }) {
+	const { data } = item?.slice?.points?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return (
 		<div className={styles.tooltip_div}>
 			<div className={styles.title}>
@@ -23,7 +23,7 @@ const renderSliceTooltip = ({ slice }) => {
 			</div>
 		</div>
 	);
-};
+}
 
 function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => {}, selectedDate = {} }) {
 	const { data: businessData = {}, loading = false } = useGetReferralBusinessAnalytics({
@@ -116,7 +116,7 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 							useMesh
 							legends={[]}
 							enableSlices="x"
-							sliceTooltip={renderSliceTooltip}
+							sliceTooltip={(item) => <RenderSliceTooltip item={item} />}
 						/>
 					)}
 				</div>

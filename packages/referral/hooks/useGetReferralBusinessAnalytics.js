@@ -17,7 +17,7 @@ const useGetReferralBusinessAnalytics = ({ selectedDate = {}, businessFilterType
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_referral_business_analytics',
+		url    : '/get_referral_business_analytics',
 	}, { manual: true });
 
 	const userAnalyticStats = useCallback(() => {

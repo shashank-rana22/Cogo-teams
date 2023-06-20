@@ -11,7 +11,7 @@ import styles from '../styles.module.css';
 
 const DEFAULT_CHILD_COUNT = 0;
 const DEFAULT_INDEX = 0;
-const ORGNIZATION_LIST_LENGTH = 1;
+const MIN_ORGNIZATION_LIST_LENGTH = 1;
 
 function DirectNode(
 	nodeProps = {},
@@ -85,12 +85,13 @@ function DirectNode(
 							caret={false}
 						>
 							<div className={styles.user_company_name}>
-								<div className={`${styles.company_name} ${organization?.length > ORGNIZATION_LIST_LENGTH
+								<div className={`${styles.company_name}
+								${organization?.length > MIN_ORGNIZATION_LIST_LENGTH
 									? styles.user_org_name : styles.full_width}`}
 								>
 									{startCase(organization?.[DEFAULT_INDEX] || '\u00A0')}
 								</div>
-								{organization?.length > ORGNIZATION_LIST_LENGTH && (
+								{organization?.length > MIN_ORGNIZATION_LIST_LENGTH && (
 									<div className={styles.more}>
 										+
 										{orgCount}

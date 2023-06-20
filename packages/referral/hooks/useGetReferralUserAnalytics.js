@@ -12,7 +12,7 @@ const useGetReferralUserAnalytics = ({ filterType = '', selectedDate = {} }) => 
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_referral_user_analytics',
+		url    : '/get_referral_user_analytics',
 	}, { manual: true });
 
 	const userAnalyticStats = useCallback(() => {

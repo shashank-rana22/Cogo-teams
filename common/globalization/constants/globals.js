@@ -239,7 +239,7 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
-
+	cogopoint_default_value: 0,
 };
 
 export default GLOBAL_CONSTANTS;

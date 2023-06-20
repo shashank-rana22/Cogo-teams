@@ -8,20 +8,22 @@ import tableTabs from '../../../configurations/table-tabs';
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
-const func = () => {};
-const PAGINATION_DEFAULT_VALUE = 0;
-const PAGE_LIMIT_DEFAULT_VALUE = 10;
+const PAGINATION_DATA = {
+	currentPage : 0,
+	totalItem   : 10,
+	pageLimit   : 10,
+};
 
 function ListTables({
-	setActiveTab = func,
+	setActiveTab = () => {},
 	activeTab = '',
 	listReferals = {},
-	setListPagination = func,
+	setListPagination = () => {},
 	listLoading = false,
 	showPopover = {},
-	setShowPopover = func,
-	setActivityModal = func,
-	setUserData = func,
+	setShowPopover = () => {},
+	setActivityModal = () => {},
+	setUserData = () => {},
 
 }) {
 	const { tabs = [] } = tableTabs();
@@ -76,9 +78,9 @@ function ListTables({
 								<Pagination
 									type="table"
 									className={styles.pagination_container}
-									currentPage={page || PAGINATION_DEFAULT_VALUE}
-									totalItems={total_count || PAGINATION_DEFAULT_VALUE}
-									pageSize={page_limit || PAGE_LIMIT_DEFAULT_VALUE}
+									currentPage={page || PAGINATION_DATA.currentPage}
+									totalItems={total_count || PAGINATION_DATA.totalItem}
+									pageSize={page_limit || PAGINATION_DATA.pageLimit}
 									onPageChange={setListPagination}
 								/>
 							</TabPanel>

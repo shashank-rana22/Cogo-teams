@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import { SIGN_UP_TITLE_OPTIONS } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-const INDEX_VALUE = 0;
-const DIRECT_DATA_DEFAULT_COUNT = 0;
+const SIGN_UP_MIN_COUNT = 0;
 
 function SignedUpColumns({ index = 0, item = {} }) {
 	const { direct_data = {} } = item || {};
@@ -11,13 +12,13 @@ function SignedUpColumns({ index = 0, item = {} }) {
 	return (
 		SIGN_UP_TITLE_OPTIONS.map((node) => (
 			<div className={styles.node} key={node.name}>
-				{index === INDEX_VALUE ? (
+				{index === GLOBAL_CONSTANTS.zeroth_index ? (
 					<div className={styles.node_title}>
 						{node.title}
 					</div>
 				) : ''}
 				<div className={styles.node_count}>
-					{direct_data[node.name] || DIRECT_DATA_DEFAULT_COUNT}
+					{direct_data[node.name] || SIGN_UP_MIN_COUNT}
 				</div>
 			</div>
 		))
