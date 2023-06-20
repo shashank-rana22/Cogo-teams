@@ -5,17 +5,18 @@ const BULK_ASSIGN_SEEN_MINUTES = 15;
 const HIDE_MAIN_QUERY_FOR_SUB_TABS = ['groups', 'contacts'];
 
 const getMainQuery = ({ userId, type, isObserver }) => {
-	switch (type) {
-		case 'admin_view':
-			return [];
-		case 'shipment_view':
-			return [where('booking_agent_ids', 'array-contains', userId)];
-		default:
-			return [
-				!isObserver
-					? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
-			];
-	}
+	const VIEW_MAPPING = {
+		admin_view    : [],
+		shipment_view : [where('booking_agent_ids', 'array-contains', userId)],
+	};
+
+	const defaultFilter = [
+		isObserver
+			? where('spectators_ids', 'array-contains', userId)
+			: where('support_agent_id', '==', userId),
+	];
+
+	return VIEW_MAPPING?.[type] || defaultFilter;
 };
 
 const getSessionQuery = ({ viewType, showBotMessages, tab }) => {
@@ -27,14 +28,12 @@ const getSessionQuery = ({ viewType, showBotMessages, tab }) => {
 };
 
 const getTabQuery = ({ tab, userId }) => {
-	switch (tab) {
-		case 'groups':
-			return [where('group_members', 'array-contains', userId)];
-		case 'contacts':
-			return [where('user_details.account_type', '==', 'service_provider')];
-		default:
-			return [];
-	}
+	const TABS_QUERY_MAPPING = {
+		groups   : [where('group_members', 'array-contains', userId)],
+		contacts : [where('user_details.account_type', '==', 'service_provider')],
+	};
+
+	return TABS_QUERY_MAPPING?.[tab] || [];
 };
 
 function getFireStoreQuery({
