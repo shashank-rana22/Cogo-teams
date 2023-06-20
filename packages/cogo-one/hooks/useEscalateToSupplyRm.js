@@ -9,9 +9,9 @@ const useEscalateToSupplyRm = () => {
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const escalateToSupplyRm = useCallback(async ({ payload }) => {
+	const escalateToSupplyRm = useCallback(({ payload }) => {
 		try {
-			await trigger({
+			trigger({
 				data: payload,
 			});
 		} catch (err) {

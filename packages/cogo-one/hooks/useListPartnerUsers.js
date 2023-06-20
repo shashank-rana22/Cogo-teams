@@ -1,6 +1,14 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const getParams = ({ group_members, requested_group_members }) => ({
+	filters: {
+		user_id: [...(group_members || []), ...(requested_group_members || [])],
+	},
+	rm_mappings_data_required : false,
+	partner_data_required     : false,
+});
+
 const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
@@ -12,13 +20,7 @@ const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 			const { group_members, requested_group_members } = activeMessageCard || {};
 
 			await trigger({
-				params: {
-					filters: {
-						user_id: [...(group_members || []), ...(requested_group_members || [])],
-					},
-					rm_mappings_data_required : false,
-					partner_data_required     : false,
-				},
+				params: getParams({ group_members, requested_group_members }),
 			});
 		} catch (err) {
 			console.error(err);
@@ -27,7 +29,7 @@ const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 
 	useEffect(() => {
 		fetchPartnerUsers();
-	}, [fetchPartnerUsers, activeMessageCard]);
+	}, [fetchPartnerUsers]);
 
 	return {
 		partnerUsers: data?.list || [],
