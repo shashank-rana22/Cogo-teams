@@ -4,7 +4,7 @@
 	display: flex;
 	align-items: center;
 	height: 40px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #fff;
 	background-color: #393f70;
@@ -48,12 +48,12 @@
 }
 
 .asc {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }
 
 .desc {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }
 
@@ -71,7 +71,7 @@
 
 .tablelabel {
 	display: flex;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #303b67;
 }
