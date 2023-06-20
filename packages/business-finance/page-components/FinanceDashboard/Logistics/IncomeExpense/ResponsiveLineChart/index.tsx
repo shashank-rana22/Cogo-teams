@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { getAmountInLakh } from '../../getAmountInLakh';
+import styles from '../styles.module.css';
 
 const CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 function ResponsiveLineChart({ lineData }) {
@@ -48,7 +49,7 @@ function ResponsiveLineChart({ lineData }) {
 				>
 					<div style={{ display: 'flex' }}>
 						<div>Contribution Margin :</div>
-						<div style={{ marginLeft: '10px', display: 'flex' }}>
+						<div className={styles.amount_style}>
 							{formatAmount({
 								amount   : point.data.y as any,
 								currency : CURRENCY,
