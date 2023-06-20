@@ -1,27 +1,31 @@
 .list_left_part {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  width: 20%;
+	display: flex;
+	justify-content: space-between;
+	width: 20%;
+	padding: 8px;
 }
+
 .container {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 16px;
-  width: 85%;
+	display: flex;
+	flex-direction: column;
+	width: 85%;
+	padding: 8px 16px;
 }
+
 .business_name {
-  font-size: 12px;
-  color: #333333;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+	overflow: hidden;
+	font-size: 12px;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
+
 .agent_name {
-  font-size: 10px;
-  color: #bdbdbd;
-  line-height: 12px;
+	font-size: 10px;
+	line-height: 12px;
+	color: #bdbdbd;
 }
+
 .line {
-  border-right: 1px solid #e0e0e0;
+	border-right: 1px solid #e0e0e0;
 }

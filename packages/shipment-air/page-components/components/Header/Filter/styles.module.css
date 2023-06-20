@@ -1,11 +1,13 @@
 .filter_header {
-  color: #221f20;
-  margin-top: 16px;
+	margin-top: 16px;
+	color: #221f20;
 }
+
 .button_container {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
+
 .reset_button {
-  margin-right: 12px;
+	margin-right: 12px;
 }
