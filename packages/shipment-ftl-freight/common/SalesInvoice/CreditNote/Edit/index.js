@@ -29,7 +29,7 @@ function Edit({
 
 	const services = item?.services || [];
 
-	const servicesIDs = services?.map((_item) => _item?.id);
+	const servicesIDs = services?.map((_item) => _item?.service_id);
 
 	const controls = creditNoteControls({
 		services,
