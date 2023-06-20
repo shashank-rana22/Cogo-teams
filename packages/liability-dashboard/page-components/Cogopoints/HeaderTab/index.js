@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, SingleDateRange } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { HEADER_TAB_OPTIONS } from '../../../constants';
 
@@ -28,7 +29,7 @@ function HeaderTab({
 			<div className={styles.date_container}>
 				<SingleDateRange
 					placeholder="Enter Date"
-					dateFormat="MM/dd/yyyy"
+					dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 					name="date"
 					onChange={setSelectedDate}
 					value={selectedDate}
