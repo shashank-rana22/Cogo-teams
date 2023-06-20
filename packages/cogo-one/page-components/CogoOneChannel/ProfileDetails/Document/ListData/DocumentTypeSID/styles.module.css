@@ -33,12 +33,7 @@
 }
 
 .styled_element {
-	margin-bottom: 10px;
-	margin-left: 13px;
-}
-
-.label {
-	font-size: 14px;
+	margin: 0 0 10px 13px;
 }
 
 .button_styles {

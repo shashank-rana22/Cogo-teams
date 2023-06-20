@@ -19,10 +19,6 @@ function DocumentTypeSID({
 	openModal = '',
 	setOpenModal = () => {},
 }) {
-	const {
-		postDocumentTag,
-	} = useDocumentTag();
-
 	const { account_type = '' } = formattedMessageData || {};
 	const { control, formState:{ errors = {} }, watch, handleSubmit, resetField } = useForm();
 	const watchListShipment = watch('list_shipments');
@@ -35,6 +31,10 @@ function DocumentTypeSID({
 		watchListShipmentPendingTasks,
 		resetField,
 	});
+
+	const {
+		postDocumentTag = () => {},
+	} = useDocumentTag();
 
 	const createDocumentTag = () => {
 		const payload = {
@@ -60,7 +60,7 @@ function DocumentTypeSID({
 
 						return (Element && (
 							<div className={styles.styled_element} key={name}>
-								<div className={styles.label}>{label}</div>
+								<div>{label}</div>
 								<Element control={control} {...eachControl} />
 								<div className={styles.error_text}>
 									{errors?.[name] && (errors?.[name]?.message || 'This is Required')}

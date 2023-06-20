@@ -15,7 +15,7 @@ const useDocumentTag = () => {
 			Toast.success('Success');
 			setOpenModal(false);
 		} catch (e) {
-			Toast.error('something went wrong');
+			Toast.error(e?.response?.data?.message || 'something went wrong');
 		}
 	};
 	return {

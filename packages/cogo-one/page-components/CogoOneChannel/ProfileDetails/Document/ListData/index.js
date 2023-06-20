@@ -16,11 +16,11 @@ function ListData({
 	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
 	isGstUploaded, isPanUploaded, formattedMessageData = {},
 }) {
+	const [openModal, setOpenModal] = useState('');
+
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
-
-	const [openModal, setOpenModal] = useState('');
 
 	const checkStatus = (status, state) => {
 		let finalStatus = '';
