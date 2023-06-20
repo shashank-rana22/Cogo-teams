@@ -12219,6 +12219,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'create_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'escalate_supplier_to_rm',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{

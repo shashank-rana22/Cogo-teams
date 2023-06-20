@@ -27,7 +27,7 @@ export function CommonButton({
 }
 
 export function getOptionsMapping({
-	addToGroup, assignChat,
+	requestToJoinGroup, assignChat,
 	openAssignModal, formattedData, requestForAssignChat, userId, setPopoverProps,
 
 }) {
@@ -38,7 +38,7 @@ export function getOptionsMapping({
 	return {
 		add_me_to_group: {
 			onClick: () => {
-				addToGroup();
+				requestToJoinGroup();
 				callBackFunc();
 			},
 			label: 'Add me To Group',
@@ -113,15 +113,16 @@ export function getAccessableButtonOptions({
 		if (supportAgentId === userId) {
 			ACCESSABLE_BUTTON_OPTIONS = ['assign_modal'];
 		}
-
 		if (!isGroupFormed) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'request_for_assign'];
 		}
-		if (!showBotMessages) {
+		if (!showBotMessages && supportAgentId !== userId) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'add_me_to_group'];
-		} else {
+		}
+		if (showBotMessages) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'assign_to_me'];
 		}
+
 		return ACCESSABLE_BUTTON_OPTIONS;
 	}
 

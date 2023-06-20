@@ -24,7 +24,7 @@ const emptyState = (
 	</div>
 );
 
-export default function FlashReverts({
+function FlashReverts({
 	orgId = '',
 	activeVoiceCard,
 	formattedMessageData,
@@ -103,3 +103,5 @@ export default function FlashReverts({
 		</div>
 	);
 }
+
+export default FlashReverts;

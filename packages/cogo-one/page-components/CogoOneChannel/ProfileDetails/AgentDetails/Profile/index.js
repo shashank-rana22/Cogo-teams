@@ -1,4 +1,5 @@
 import { Avatar, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import hideDetails from '../../../../../utils/hideDetails';
 
@@ -8,7 +9,7 @@ function Profile({ loading, name, userEmail }) {
 	return (
 		<div className={styles.content}>
 			<Avatar
-				src="https://www.w3schools.com/howto/img_avatar.png"
+				src={GLOBAL_CONSTANTS.image_url.user_avatar}
 				alt="img"
 				disabled={false}
 				className={styles.user_div}

@@ -1,56 +1,20 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { updateDoc, doc } from 'firebase/firestore';
-
-import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 function useAssignChat({
 	closeModal = () => {},
 	activeMessageCard = {},
 	formattedData = {},
 	canMessageOnBotSession = false,
-	firestore,
+
 }) {
-	const { profile = {} } = useSelector((state) => state);
 	const { user_id, lead_user_id, organization_id, mobile_no, sender = null, cogo_entity_id } = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
 	}, { manual: true, autoCancel: false });
-
-	const roomRef = doc(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${id}`,
-	);
-
-	const addToGroup = async () => {
-		const { requested_group_members = [], group_members = [] } = activeMessageCard || [];
-
-		if (group_members.includes(profile.user.id)) {
-			Toast.warn('You are alredy in group');
-			return;
-		}
-
-		if (requested_group_members.includes(profile.user.id)) {
-			Toast.warn('You have alredy sent request');
-			return;
-		}
-
-		await updateDoc(roomRef, {
-			requested_group_members: [...new Set([...requested_group_members, profile.user.id])],
-		});
-		Toast.success('Successfully Sent Request');
-	};
-
-	const updateRequestsOfRoom = async () => {
-		await updateDoc(roomRef, {
-			has_requested_by: {},
-		});
-		Toast.info('Request dissmissed');
-	};
 
 	const assignChat = async ({ payload, callBackFunc = () => {} }) => {
 		try {
@@ -70,11 +34,8 @@ function useAssignChat({
 			});
 
 			if (!canMessageOnBotSession) {
-				Toast.success('Successfully Assigned');
-			}
-
-			if (!canMessageOnBotSession) {
 				closeModal();
+				Toast.success('Successfully Assigned');
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
@@ -86,8 +47,6 @@ function useAssignChat({
 	return {
 		assignChat,
 		loading,
-		updateRequestsOfRoom,
-		addToGroup,
 	};
 }
 export default useAssignChat;

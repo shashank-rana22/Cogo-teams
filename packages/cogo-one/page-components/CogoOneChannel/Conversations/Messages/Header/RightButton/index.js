@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function RightButton({
 	assignChat,
 	openAssignModal,
-	addToGroup,
+	requestToJoinGroup,
 	formattedData,
 	requestForAssignChat,
 	userId,
@@ -23,7 +23,7 @@ function RightButton({
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
 	const buttonsMapping = getOptionsMapping({
-		addToGroup,
+		requestToJoinGroup,
 		assignChat,
 		openAssignModal,
 		formattedData,

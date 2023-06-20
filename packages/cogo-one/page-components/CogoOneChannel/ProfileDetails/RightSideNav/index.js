@@ -23,7 +23,6 @@ function RightSideNav({
 	quotationEmailSentAt = '',
 	orgId = '',
 	viewType,
-
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
@@ -64,6 +63,7 @@ function RightSideNav({
 	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
 
 	const ICON_MAPPING = getIconMapping(viewType) || [];
+
 	return (
 		<div className={styles.right_container}>
 			{ICON_MAPPING.map((item) => {

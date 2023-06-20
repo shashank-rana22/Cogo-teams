@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import useAssignChat from '../../../../hooks/useAssignChat';
+import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
@@ -35,6 +36,9 @@ function Messages({
 	const [uploading, setUploading] = useState({});
 
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
+
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
 	const closeModal = () => {
@@ -90,7 +94,7 @@ function Messages({
 		formattedData,
 	});
 
-	const { assignChat = () => {}, loading: assignLoading, updateRequestsOfRoom, addToGroup } = useAssignChat({
+	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,
 		channel_type,
 		firestore,
@@ -169,9 +173,10 @@ function Messages({
 					requestForAssignChat={requestForAssignChat}
 					requestAssignLoading={requestAssignLoading}
 					canMessageOnBotSession={canMessageOnBotSession}
-					updateRequestsOfRoom={updateRequestsOfRoom}
-					addToGroup={addToGroup}
 					viewType={viewType}
+					firestore={firestore}
+					escalateToSupplyRm={escalateToSupplyRm}
+					supplierLoading={supplierLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

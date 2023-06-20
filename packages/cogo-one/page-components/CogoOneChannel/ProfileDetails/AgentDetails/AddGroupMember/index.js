@@ -5,11 +5,14 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 function AddGroupMember({ addGroupMember = () => {} }) {
-	const [agentId, setAgentId] = useState();
+	const [agentId, setAgentId] = useState('');
 
 	const addMember = () => {
+		if (!agentId) {
+			return;
+		}
 		addGroupMember(agentId);
-		setAgentId(null);
+		setAgentId('');
 	};
 
 	return (
@@ -17,10 +20,10 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 			<div className={styles.conversation_title}>Add Group Member</div>
 			<div className={styles.container}>
 				<AsyncSelect
+					key={agentId}
 					name="agent_id"
 					asyncKey="partner_users"
 					value={agentId}
-					endpoint="list_partner_users"
 					valueKey="user_id"
 					onChange={setAgentId}
 					params={{
@@ -31,7 +34,11 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					className={styles.select}
 					isClearable
 				/>
-				<IcMPlusInCircle className={styles.icon} onClick={() => addMember()} />
+				<IcMPlusInCircle
+					className={styles.icon}
+					onClick={addMember}
+					cursor={agentId ? 'pointer' : 'not-allowed'}
+				/>
 			</div>
 		</div>
 	);

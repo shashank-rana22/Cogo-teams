@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
+import useTransferChat from '../../../../../hooks/useTransferChat';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -36,11 +37,14 @@ function Header({
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
-	updateRequestsOfRoom,
-	addToGroup,
 	viewType = '',
+	firestore,
+	escalateToSupplyRm,
+	supplierLoading,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
+
+	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -50,6 +54,7 @@ function Header({
 				assignLoading,
 				assignChat,
 				support_agent_id,
+				accountType: formattedData?.account_type,
 			},
 		});
 	};
@@ -61,7 +66,18 @@ function Header({
 		channel_type,
 		has_requested_by = {},
 		group_members = [],
+		organization_id = '',
+		user_id,
 	} = formattedData || {};
+
+	const handleEsclateClick = () => {
+		escalateToSupplyRm({
+			payload: {
+				organization_id,
+				organization_user_id: user_id,
+			},
+		});
+	};
 
 	const handleUpdateUser = () => {
 		if (!updateRoomLoading) {
@@ -119,7 +135,7 @@ function Header({
 						<RightButton
 							assignChat={assignChat}
 							openAssignModal={openAssignModal}
-							addToGroup={addToGroup}
+							requestToJoinGroup={requestToJoinGroup}
 							formattedData={formattedData}
 							requestForAssignChat={requestForAssignChat}
 							userId={userId}
@@ -150,20 +166,32 @@ function Header({
 				</div>
 				<div className={styles.flex_space_between}>
 					<HeaderName formattedData={formattedData} />
-					<Button
-						themeType="primary"
-						size="sm"
-						disabled={!hasPermissionToEdit || canMessageOnBotSession}
-						onClick={() => setOpenModal({
-							type : 'mark_as_closed',
-							data : {
-								updateChat,
-								loading,
-							},
-						})}
-					>
-						Mark as Closed
-					</Button>
+					<div className={styles.button_flex}>
+						<Button
+							themeType="secondary"
+							size="sm"
+							disabled={!hasPermissionToEdit || canMessageOnBotSession}
+							onClick={handleEsclateClick}
+							loading={supplierLoading}
+							className={styles.escalate_button}
+						>
+							escalate
+						</Button>
+						<Button
+							themeType="primary"
+							size="sm"
+							disabled={!hasPermissionToEdit || canMessageOnBotSession}
+							onClick={() => setOpenModal({
+								type : 'mark_as_closed',
+								data : {
+									updateChat,
+									loading,
+								},
+							})}
+						>
+							Mark as Closed
+						</Button>
+					</div>
 				</div>
 			</div>
 			<div className={styles.approve_req} style={{ height: showApprovePanel ? '30px' : '0' }}>
@@ -185,7 +213,7 @@ function Header({
 						<IcCFcrossInCircle
 							className={styles.icon_styles}
 							cursor="pointer"
-							onClick={updateRequestsOfRoom}
+							onClick={dissmissTransferRequest}
 						/>
 					</>
 				)}

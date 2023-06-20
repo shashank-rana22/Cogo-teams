@@ -27,8 +27,7 @@
 }
 
 .tabs {
-	margin: 0 -10px 0px;
-
+	
 	:global {
 		.ui_tab_active {
 			box-shadow: inset 0px 1px 1px  var(--color-primary-error-red-2);

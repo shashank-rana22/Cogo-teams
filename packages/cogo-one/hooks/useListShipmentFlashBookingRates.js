@@ -18,6 +18,18 @@ const PAYLOAD_MAPPING = {
 	},
 };
 
+const getParams = ({ activeTab, orgId, page }) => ({
+	filters: {
+		service_provider_id: orgId,
+		...(PAYLOAD_MAPPING[activeTab] || {}),
+	},
+	shipment_flash_booking_tag_required : true,
+	is_indicative_price_required        : true,
+	page,
+	sort_by                             : 'created_at',
+	sort_type                           : 'desc',
+});
+
 const useListShipmentFlashBookingRates = ({
 	orgId = '',
 	hasFlashBookings = false,
@@ -34,21 +46,9 @@ const useListShipmentFlashBookingRates = ({
 			return;
 		}
 
-		const params = {
-			filters: {
-				service_provider_id: orgId,
-				...(PAYLOAD_MAPPING[activeTab] || {}),
-			},
-			shipment_flash_booking_tag_required : true,
-			is_indicative_price_required        : true,
-			page,
-			sort_by                             : 'created_at',
-			sort_type                           : 'desc',
-		};
-
 		try {
 			await trigger({
-				params,
+				params: getParams({ activeTab, orgId, page }),
 			});
 		} catch (error) {
 			console.error('error:', error);
