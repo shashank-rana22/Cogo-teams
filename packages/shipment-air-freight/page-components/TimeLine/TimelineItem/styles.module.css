@@ -65,12 +65,12 @@
 }
 
 .display_milestone {
-	text-align: center;
 	position: absolute;
 	top: 100%;
 	left: 0;
 	max-width: 100%;
 	font-size: 10px;
+	text-align: center;
 	transform: translateX(-30%);
 }
 

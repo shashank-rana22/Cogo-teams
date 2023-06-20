@@ -1,0 +1,21 @@
+.mawb_container {
+	display: flex;
+
+	svg {
+		height: 16px;
+		padding: 0;
+		color: red;
+		cursor: pointer;
+		background-color: transparent;
+
+		:hover {
+			background-color: none;
+			border: "none";
+		}
+	}
+
+	.ui_button_container {
+		height: 0;
+		border: none;
+	}
+}
