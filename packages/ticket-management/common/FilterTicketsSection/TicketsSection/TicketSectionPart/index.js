@@ -5,7 +5,7 @@ import TicketStructure from '../../../TicketStructure';
 
 import styles from './styles.module.css';
 
-function TicketsSectionPart({ label, status, searchParams, refreshList, setRefreshList, isAdmin }) {
+function TicketsSectionPart({ label, status, searchParams, refreshList, setRefreshList, isAdmin, setModalData }) {
 	const { tickets, listLoading, handleScroll } = useListTickets({
 		searchParams,
 		status,
@@ -16,15 +16,15 @@ function TicketsSectionPart({ label, status, searchParams, refreshList, setRefre
 
 	const refreshTickets = () => {
 		setRefreshList((prev) => {
-			const newState = {};
+			const NEW_STATE = {};
 			Object.keys(prev).forEach((key) => {
-				newState[key] = true;
+				NEW_STATE[key] = true;
 			});
-			return newState;
+			return NEW_STATE;
 		});
 	};
 
-	const { list, total = 0 } = tickets;
+	const { list, total = 0 } = tickets || {};
 
 	return (
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
@@ -34,10 +34,11 @@ function TicketsSectionPart({ label, status, searchParams, refreshList, setRefre
 			</div>
 			<TicketStructure
 				data={list}
-				handleScroll={handleScroll}
-				loading={listLoading}
-				refreshTickets={refreshTickets}
 				label={label}
+				loading={listLoading}
+				setModalData={setModalData}
+				handleScroll={handleScroll}
+				refreshTickets={refreshTickets}
 			/>
 		</div>
 	);

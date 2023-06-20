@@ -137,6 +137,9 @@ const GLOBAL_CONSTANTS = {
 		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		bot_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/web_bot',
+		cogoport_logo       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoLogo.svg',
+		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
 		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
@@ -145,6 +148,9 @@ const GLOBAL_CONSTANTS = {
 		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		yellow_vessel : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
+		red_vessel    : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
+		black_vessel  : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
 	},
 
 	options: {
@@ -203,13 +209,16 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		white_space     : /\s+/,
 		number          : /^[+-]?\d*\.?\d+$/,
+		white_space     : /\s+/,
 		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		url_match:
+		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+		image_extension: /\.(jpg|jpeg|png|gif|svg)$/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
