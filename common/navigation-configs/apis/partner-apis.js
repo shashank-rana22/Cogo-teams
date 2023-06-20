@@ -3238,6 +3238,11 @@ const partner = {
 	],
 	sales_dashboard: [
 		{
+			api          : 'get_partner_user_report',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -12482,6 +12487,38 @@ const partner = {
 	referral_simulation: [
 		{
 			api          : 'get_referral_simulation',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_analytics: [
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_user_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_business_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_top_ten_referral',
 			access_type  : 'private',
 			service_name : 'referral',
 		},
