@@ -54,6 +54,7 @@ function Pointer(props) {
 		),
 		iconSize   : [ICON_SIZE, ICON_SIZE],
 		iconAnchor : [ICON_ANCHOR_X, ICON_ANCHOR_Y],
+		className  : styles.divIcon,
 	});
 
 	return (
