@@ -71,11 +71,13 @@ export const FILTERS : ControlProps[] = [
 				type      : 'tags',
 				multiple  : true,
 				className : 'primary md',
+				style  	  : { display: 'flex', flexWrap: 'wrap' },
 				span      : 12,
 				options   : [
 					{ label: 'Purchase', value: 'PURCHASE' },
 					{ label: 'Proforma', value: 'PROFORMA' },
 					{ label: 'Credit Note', value: 'CREDIT_NOTE' },
+					{ label: 'Consolidated', value: 'CONSOLIDATED' },
 					{ label: 'Reimbursement', value: 'REIMBURSEMENT' },
 				],
 			},

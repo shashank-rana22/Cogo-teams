@@ -1574,7 +1574,7 @@ const navigationMappingAdmin = {
 				href          : '/cogo-assured/fcl_freight_local',
 				as            : '/cogo-assured/fcl_freight_local',
 				type          : 'link',
-				possible_apis : apis.cogo_assured,
+				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
 
 				main_apis: [],
 			},
@@ -2403,6 +2403,14 @@ const navigationMappingAdmin = {
 				as            : '/v2/referral/simulation',
 				type          : 'link',
 				possible_apis : apis.referral_simulation,
+			},
+			{
+				key           : 'referral-referral_analytics',
+				title         : 'Analytics',
+				href          : '/v2/referral/analytics',
+				as            : '/v2/referral/analytics',
+				type          : 'link',
+				possible_apis : apis.referral_analytics,
 			},
 		],
 	},
