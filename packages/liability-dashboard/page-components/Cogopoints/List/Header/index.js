@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE_NUMBER = 1;
 
-const USER_TYPE_MAPPING = {
+const TITLE_MAPPING = {
 	liability_point_value               : 'Earner',
 	total_burnt_point_value             : 'Users',
 	shipment_burnt_point_value          : 'Users',
@@ -23,7 +23,7 @@ function Header({
 		<div className={styles.header_div}>
 			<div className={styles.title}>
 				Cogopoint
-				<span>{USER_TYPE_MAPPING[activeStatsCard]}</span>
+				<span>{TITLE_MAPPING[activeStatsCard]}</span>
 			</div>
 			<AsyncSelect
 				name="id"
