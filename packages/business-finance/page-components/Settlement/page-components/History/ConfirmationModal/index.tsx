@@ -36,7 +36,7 @@ function ConfirmationModal(
 				{' '}
 				{notSettledIds?.length || 0}
 				{' '}
-				Settlement. Are you sure you want to post?
+				Settlements. Are you sure you want to post?
 			</div>
 			<div className={styles.buttons}>
 				<Button

@@ -39,7 +39,7 @@ function History() {
 
 	const [checkedRows, setCheckedRows] = useState({});
 
-	const { loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
+	const { data, loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
 
 	const { list = [] } = (apiData as DataInterface) || {};
 
@@ -147,7 +147,7 @@ function History() {
 				</div>
 			</div>
 			<CustomTable
-				data={apiData}
+				apiData={apiData}
 				filters={filters}
 				setFilters={setFilters}
 				loading={loading}
@@ -157,11 +157,13 @@ function History() {
 				getTableBodyCheckbox={getTableBodyCheckbox}
 				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
 				checkedRows={checkedRows}
+				setCheckedRows={setCheckedRows}
 				refetch={refetch}
+				data={data}
 
 			/>
-			{!list && !loading && <SelectState />}
-			{!loading && list?.length <= 0 && <EmptyStateDocs />}
+			{!apiData?.list && !loading && <SelectState />}
+			{!loading && data?.list?.length <= 0 && <EmptyStateDocs />}
 		</div>
 	);
 }

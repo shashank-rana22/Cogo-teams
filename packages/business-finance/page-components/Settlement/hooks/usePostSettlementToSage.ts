@@ -2,7 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const usePostSettlementToSage = (refetch) => {
+interface PostSettlementProps {
+	refetch: ()=> void;
+	setCheckedRows?: (p: object)=> void;
+}
+
+const usePostSettlementToSage = ({ refetch, setCheckedRows } :PostSettlementProps) => {
 	interface Profile {
 		profile?: { user: { id: string } }
 	}
@@ -28,7 +33,8 @@ const usePostSettlementToSage = (refetch) => {
 				},
 			});
 			refetch();
-			Toast.success('Processing your request. Please comeback later.');
+			setCheckedRows({});
+			Toast.success('Processing your request. Please come back later.');
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');
 		}

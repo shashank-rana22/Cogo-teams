@@ -32,7 +32,7 @@ interface DataInterface {
 }
 
 interface Props {
-	data: DataInterface | {};
+	apiData: DataInterface | {};
 	onPageChange: (val: number) => void;
 	loading: boolean;
 	setFilters: React.Dispatch<React.SetStateAction<{}>>;
@@ -43,25 +43,30 @@ interface Props {
 	checkedRows: Object;
 	getTableBodyCheckbox: (item: object) => React.JSX.Element;
 	refetch: ()=>void;
+	setCheckedRows: (p: object)=> void;
+	data: object;
 }
 
 function CustomTable({
-	data = {}, onPageChange, loading, setFilters, filters,
+	apiData = {}, onPageChange, loading, setFilters, filters,
 	getTableBodyCheckbox, isAllChecked, onChangeTableHeaderCheckbox,
-	showHeaderCheckbox, checkedRows, refetch,
+	showHeaderCheckbox, checkedRows, refetch, setCheckedRows, data,
 }:Props) {
-	const { list = [], pageNo = 1, totalRecords = 0 } = (data as DataInterface || {});
+	const { list = [], pageNo = 1, totalRecords = 0 } = (apiData as DataInterface || {});
 
 	return (
 		<div className={styles.table}>
-			<Header
-				setFilters={setFilters}
-				filters={filters}
-				isAllChecked={isAllChecked}
-				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
-				showHeaderCheckbox={showHeaderCheckbox}
-				loading={loading}
-			/>
+			{data && !isEmpty(apiData)
+				? (
+					<Header
+						setFilters={setFilters}
+						filters={filters}
+						isAllChecked={isAllChecked}
+						onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
+						showHeaderCheckbox={showHeaderCheckbox}
+						loading={loading}
+					/>
+				) : null}
 			{loading ? <Loader /> : (
 				<ListData
 					list={list}
@@ -80,7 +85,7 @@ function CustomTable({
 							pageSize={10}
 							onPageChange={onPageChange}
 						/>
-						<FooterCard checkedRows={checkedRows} refetch={refetch} />
+						<FooterCard checkedRows={checkedRows} refetch={refetch} setCheckedRows={setCheckedRows} />
 					</>
 
 				) : null}

@@ -6,12 +6,18 @@ import ConfirmationModal from '../ConfirmationModal';
 
 import styles from './styles.module.css';
 
-function FooterCard({ checkedRows, refetch }) {
+interface FooterCardProps {
+	checkedRows?: object;
+	refetch: ()=> void;
+	setCheckedRows: (p: object)=> void;
+}
+
+function FooterCard({ checkedRows, refetch, setCheckedRows } : FooterCardProps) {
 	const [confirmation, setConfirmation] = useState(false);
 	const {
 		bulkPostToSageAction,
 		loading,
-	} = usePostSettlementToSage(refetch);
+	} = usePostSettlementToSage({ refetch, setCheckedRows });
 
 	const NO_POSTED_IDS = [];
 

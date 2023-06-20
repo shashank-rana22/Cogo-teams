@@ -79,7 +79,7 @@ const DEFAULT_VALUE = {
 function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }: Props) {
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 
-	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage(refetch);
+	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage({ refetch });
 
 	const { list = [], pageNo = 0, totalRecords = 0 } = data || {};
 
