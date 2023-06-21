@@ -1,0 +1,51 @@
+.form_element {
+	position: relative;
+	right: auto;
+	left: auto;
+	box-sizing: border-box;
+	flex: 0 0 50%;
+	width: 30%;
+	max-width: 50%;
+	min-height: 1px;
+	padding-right: 8px;
+	padding-left: 8px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	color: #333;
+
+	:global {
+		.ui_input_container {
+			max-height: 32px;
+
+			.ui_input_control {
+				font-size: 12px;
+			}
+
+			.ui_input_control::placeholder {
+				font-size: 12px;
+				color: #333;
+			}
+		}
+	}
+}
+
+.label,
+.value {
+	width: 48%;
+}
+
+.value {
+	font-weight: 600;
+}
+
+.error {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-top: 20px;
+}

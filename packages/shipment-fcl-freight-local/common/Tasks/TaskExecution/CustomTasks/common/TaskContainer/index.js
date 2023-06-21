@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import taskDisplayNames from '../../../../../../configurations/display-name-mappings';
 
