@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
@@ -8,6 +8,7 @@ import Card from './Card';
 import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
+const STEP_STATE = 2;
 function SelectRate({
 	setStep,
 	setSelectedCard,
@@ -30,7 +31,7 @@ function SelectRate({
 	useEffect(() => {
 		if (selected_priority) {
 			setSelectedCard(selected_priority);
-			setStep(2);
+			setStep(STEP_STATE);
 		}
 	}, [selected_priority, setStep, setSelectedCard]);
 

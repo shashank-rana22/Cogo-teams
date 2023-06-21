@@ -229,6 +229,12 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'get_shipment_invoice_preference',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'update_shipment_document',
 			access_type  : 'private',
 			feature      : 'coe_finance',

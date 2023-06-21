@@ -24,7 +24,6 @@ const useOrgOutStanding = ({ org_reg_nums }) => {
 	}, [trigger]);
 
 	const OUTSTANDING_BY_REG_NUM = {};
-
 	(proformaData?.list || []).forEach((org) => {
 		OUTSTANDING_BY_REG_NUM[org?.registration_number] = org;
 	});
