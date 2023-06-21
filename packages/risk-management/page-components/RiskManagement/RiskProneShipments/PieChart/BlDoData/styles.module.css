@@ -1,7 +1,10 @@
 .bl_do_container {
 	display: flex;
-	gap: 12px;
 	padding: 2px;
+}
+
+.late_collection {
+	margin-right: 36px;
 }
 
 .sub_container {

@@ -1,4 +1,5 @@
 import { Input, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -46,7 +47,7 @@ function ShipmentId({
 			return (
 				<div className={styles.no_data}>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg"
+						src={GLOBAL_CONSTANTS.image_url.empty_list}
 						alt="empty_data"
 					/>
 				</div>

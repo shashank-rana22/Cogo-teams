@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcAShipAmber, IcASchedules } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -82,7 +83,7 @@ function Header({ data = {}, loading = false }) {
 				</div>
 				<div className={styles.image}>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png"
+						src={GLOBAL_CONSTANTS.image_url.risk_free}
 						alt="badge-icon"
 					/>
 				</div>

@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -43,7 +44,7 @@ function PieChart({ activeTab = '', chartData = {}, loading = false }) {
 				<div className={styles.pie_chart}>
 					{loading ? (
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg"
+							src={GLOBAL_CONSTANTS.image_url.pie_chart_loader}
 							alt="badge-icon"
 						/>
 					)

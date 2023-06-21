@@ -14,7 +14,7 @@ function BlDoData({ stats }) {
 	const { late_release_total = '', payment_not_received = '' } = late_release_stats || {};
 	return (
 		<div className={styles.bl_do_container}>
-			<div>
+			<div className={styles.late_collection}>
 				<div className={styles.bl_square1} />
 				<div className={styles.sub_container}>
 

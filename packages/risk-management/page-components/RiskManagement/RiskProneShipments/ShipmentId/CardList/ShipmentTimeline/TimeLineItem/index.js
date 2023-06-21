@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 
 import {
 	container, connecting_line, circle, big,
@@ -43,7 +43,7 @@ function TimelineItem({ item = {}, isLast = '', consecutivelyCompleted = false }
 
 			<div className={display_milestone}>
 				<div className={ellipsis}>{milestone}</div>
-				{completed_on === null ? null
+				{isEmpty(completed_on) ? null
 					: <div className={ellipsis}>{format(completed_on, 'dd MMM yyyy')}</div>}
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 	padding: 0 10px;
 
 	:global {
-		.tippy-box.multiple-cargo {
+		.tippy-box.multiple_cargo {
 			max-width: initial !important;
 		}
 	}

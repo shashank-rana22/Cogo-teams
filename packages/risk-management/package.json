@@ -8,6 +8,7 @@
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.366",
+    "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/constants": "workspace:0.1.0",
     "@cogoport/map-components": "workspace:0.0.1",
     "@cogoport/forms": "workspace:^0.1.0",

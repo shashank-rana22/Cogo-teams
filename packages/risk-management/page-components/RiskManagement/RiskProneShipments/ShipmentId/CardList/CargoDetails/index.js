@@ -37,7 +37,7 @@ export default function CargoDetails({ cargo_details }) {
 							))}
 						</div>
 					)}
-					className="multiple-cargo"
+					className="multiple_cargo"
 					interactive
 				>
 					<div className={styles.more_details}>

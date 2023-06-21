@@ -6,7 +6,6 @@ import useGetShipmentTimeLine from '../../../../hooks/useGetShipmentTimline';
 import styles from './styles.module.css';
 import TimelineItem from './TimeLineItem';
 
-const CONSECUTIVELY_COMPLETED = true;
 const NEXT_INDEX_TIMELINE_DATA = 1;
 function ShipmentTimeline({ itemData, isAccordionActive }) {
 	const {
@@ -31,7 +30,7 @@ function ShipmentTimeline({ itemData, isAccordionActive }) {
 							key={item.id}
 							item={item}
 							isLast={isLast}
-							consecutivelyCompleted={CONSECUTIVELY_COMPLETED}
+							consecutivelyCompleted
 						/>
 					);
 				})}
