@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const CONTROLS_EDITABLE_CONDITIONS = [
 	{
 		state      : ['confirmed_by_service_provider'],
@@ -24,7 +26,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
