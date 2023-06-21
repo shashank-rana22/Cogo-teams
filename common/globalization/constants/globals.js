@@ -111,41 +111,6 @@ const GLOBAL_CONSTANTS = {
 
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 
-	cogoport_gst_numbers: {
-		GURUGRAM : '06AAICC8838P1ZV',
-		MUMBAI   : '27AAICC8838P1ZR',
-	},
-	cargo_insurance: {
-		IN: ['fcl_freight'],
-	},
-	services: {
-		ltl_freight: {
-			params: {
-				supported_country_code: ['IN', 'VN'],
-			},
-		},
-		ftl_freight: {
-			params: {
-				supported_country_code: ['IN', 'VN'],
-			},
-		},
-	},
-	service_supported_countries: {
-		navigation: {
-			saas_cogo_insurance: {
-				countries: ['IN'],
-			},
-		},
-		feature_supported_service: {
-			cargo_insurance: {
-				countries: ['IN'],
-			},
-			ftl_flash_booking: {
-				currency: 'INR',
-			},
-		},
-	},
-
 	image_url: {
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
