@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Toast } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,6 +7,10 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 	const { label, value, icon, is_available } = data;
 
 	const handleClick = () => {
+		if (!is_available) {
+			Toast.success('COMING SOON');
+			return;
+		}
 		if (selectedMode.mode_value === value) setSelectedMode({});
 		else setSelectedMode({ mode_label: label, mode_value: value });
 		setSelectedService(null);

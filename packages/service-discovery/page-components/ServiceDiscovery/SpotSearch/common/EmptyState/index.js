@@ -6,6 +6,7 @@ function EmptyState({ heading = 'data', placement = 'center' }) {
 			<div className={`${styles.wrapper} ${styles[placement]}`}>
 				<div className={styles.heading}>
 					No
+					{' '}
 					{heading}
 					{' '}
 					found

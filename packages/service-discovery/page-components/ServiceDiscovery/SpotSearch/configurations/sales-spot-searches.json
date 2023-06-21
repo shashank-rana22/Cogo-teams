@@ -49,6 +49,13 @@
 			"label": "Created at",
 			"func": "renderCreated",
 			"span": 1.5
+		},
+		{
+			"key": "button",
+			"label": "",
+			"btnLabel":"Show Rates",
+			"func": "renderButton",
+			"span": 1.5
 		}
 	],
 	"filterProps": {
