@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/schedules/page-components/VesselSchedule';
+export { default } from "@cogoport/schedules/page-components/VesselSchedules";

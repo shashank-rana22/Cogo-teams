@@ -1,0 +1,20 @@
+.route_details {
+  background-color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #221f20;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.route_points {
+  max-height: 650px;
+  overflow: scroll;
+}
