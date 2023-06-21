@@ -38,8 +38,8 @@ interface ElementProps {
 	key?: string;
 	name?: string;
 	onChange?: (val: any) => void;
-	options?: Options[];
 	radioOptions?: RadioOptions[];
+	options?: Options[];
 	setFilters: (p: object) => void;
 	filters: object;
 	[key: string]:
@@ -60,10 +60,11 @@ function Element({
 	name,
 	filters,
 	checkboxLabel = '',
+	radioOptions,
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
-	const { style, selectWidth, options, onlyNumbersAllowed = false, radioOptions } = rest;
+	const { style, selectWidth, options, onlyNumbersAllowed = false } = rest;
 	const { setFilters } = rest;
 	const tagClick = (val: Options) => {
 		setFilters((prev: object) => ({
@@ -292,7 +293,9 @@ function Element({
 						style={style as CSSProperties}
 						value={value}
 						options={radioOptions}
-						{...rest}
+						id={String(rest?.id)}
+						onChange={rest?.onChange}
+
 					/>
 				);
 			case 'checkbox':

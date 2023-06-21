@@ -21,12 +21,16 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 	const STEP_CHANGE = 1;
 
 	const [formData, setFormData] = useState({
-		frequency       : 'DAILY',
-		severityLevel   : '1',
-		timezone        : 'IST',
-		scheduledHour   : '00',
-		scheduledMinute : '00',
-		ageingBucket    : 'ALL',
+		frequency           : 'DAILY',
+		severityLevel       : '1',
+		timezone            : 'IST',
+		scheduledHour       : '00',
+		scheduledMinute     : '00',
+		ageingBucket        : 'ALL',
+		cycleName           : null,
+		cycleType           : null,
+		cogoEntityId        : null,
+		totalDueOutstanding : null,
 	});
 
 	const [step, setStep] = useState(DEFAULT_STEP);

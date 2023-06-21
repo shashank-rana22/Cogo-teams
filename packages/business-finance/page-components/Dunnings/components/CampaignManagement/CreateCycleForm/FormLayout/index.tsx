@@ -144,7 +144,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	useEffect(() => {
 		// setting currency value based on selected entity
 		if (cogoEntityId && !isEditMode) {
-			const currencyEntityData = Object.values(
+			const currencyEntityData:{ currency?:string }[] = Object.values(
 				GLOBAL_CONSTANTS.cogoport_entities,
 			)?.filter((obj:{ id?:string }) => obj?.id === cogoEntityId);
 
