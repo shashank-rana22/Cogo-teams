@@ -67,6 +67,18 @@ const navigationMappingShipper = {
 				possible_apis: app_apis.saas_trade_partner,
 				module_type: 'dashboards',
 			},
+			{
+				key: 'saas_planning-contract_management',
+				title: 'Contract Management',
+				href: '/contract-management',
+				as: '/contract-management',
+				type: 'link',
+				icon: 'nav-payments',
+				main_apis: [],
+				possible_apis: app_apis.app_contract_management,
+				module_type: 'dashboards',
+				showInNav: true,
+			},
 		],
 	},
 	saas_premium_services: {
