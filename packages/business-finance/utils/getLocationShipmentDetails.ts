@@ -24,7 +24,7 @@ const getLocationShipmentDetails = (data, summary, type) => {
 		lcl_freight_local       : 'port',
 	};
 
-	const suffix =		SUFFIX_CONFIG[`${type}_${searchType}`] || SUFFIX_CONFIG[searchType];
+	const suffix =	SUFFIX_CONFIG[`${type}_${searchType}`] || SUFFIX_CONFIG[searchType];
 
 	const objName =		!isSingleLocation(searchType)
 		&& !['ftl_freight', 'ltl_freight'].includes(searchType)
