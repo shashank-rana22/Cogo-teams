@@ -3,6 +3,10 @@ const welcome = {
 		navigation : 'schedules',
 		isMainNav  : true,
 	},
+	'/[partner_id]/schedules/sailing-schedules': {
+		navigation : 'schedules',
+		isMainNav  : true,
+	},
 	'/[partner_id]/schedules/service-lanes': {
 		navigation : 'schedules',
 		isMainNav  : true,
