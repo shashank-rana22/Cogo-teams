@@ -10,7 +10,7 @@ const removeTypeField = (element) => {
 
 function RenderFields({ control, errors, watch }) {
 	const controls = getControls({});
-	const watchTargetEnteredManually = watch('is_target_entered_manually');
+	const watchOperationType = watch('operation_type');
 
 	return (
 		<div className={styles.form}>
@@ -23,7 +23,7 @@ function RenderFields({ control, errors, watch }) {
 					const { name, type, label } = subControlItem || {};
 					const DynamicController = getElementController(type);
 
-					if (name === 'is_target_achieved_manually' && watchTargetEnteredManually !== 'manual') {
+					if (name === 'is_target_achieved_manually' && watchOperationType !== 'manual') {
 						return null;
 					}
 

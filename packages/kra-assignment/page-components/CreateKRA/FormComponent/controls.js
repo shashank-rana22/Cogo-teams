@@ -146,9 +146,9 @@ const getControls = ({ setSelectedValue }) => ([
 		group       : 'end_controls',
 		subControls : [
 			{
-				name    : 'is_target_entered_manually',
+				name    : 'operation_type',
 				type    : 'select',
-				label   : 'Is target entered manually',
+				label   : 'Operation Type',
 				options : [
 					{
 						value : 'manual',
@@ -196,6 +196,21 @@ const getControls = ({ setSelectedValue }) => ([
 				name    : 'is_rating_schema_in_percentage',
 				type    : 'radioGroup',
 				label   : 'Is rating schema in %',
+				options : [
+					{
+						value : 'yes',
+						label : 'Yes',
+					},
+					{
+						value : 'no',
+						label : 'No',
+					},
+				],
+			},
+			{
+				name    : 'can_assign_targets_individually',
+				type    : 'radioGroup',
+				label   : 'Can assign Targets Individually',
 				options : [
 					{
 						value : 'yes',
