@@ -13,14 +13,10 @@ function CheckboxItem({
 }:Props) {
 	const { tradePartyDetailId } = row || {};
 	const handleChange = () => {
-		if ((uncheckedRows || []).includes(tradePartyDetailId)) {
-			const filteredRows = (uncheckedRows || []).filter((rowId?:string) => rowId !== tradePartyDetailId);
-			setUncheckedRows([...filteredRows]);
-		} else {
-			setUncheckedRows((prev:string[]) => [...prev, tradePartyDetailId]);
-		}
+		setUncheckedRows((prevUncheckedRows) => (prevUncheckedRows.includes(tradePartyDetailId)
+			? prevUncheckedRows.filter((rowId) => rowId !== tradePartyDetailId)
+			: [...prevUncheckedRows, tradePartyDetailId]));
 	};
-
 	return (
 		<div>
 			<Checkbox

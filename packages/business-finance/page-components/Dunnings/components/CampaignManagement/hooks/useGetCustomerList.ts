@@ -9,19 +9,20 @@ interface FormData {
 	ageingBucket?:string,
 	totalDueOutstanding?:number | string,
 	dueOutstandingCurrency?:string,
+	pageIndex?:number | string,
 }
 
 interface Props {
 	formData?:FormData,
 	search?:string,
-	page?:number,
-	setPage?:Function,
+	setFormData?:Function,
 }
 
-const useGetCustomerList = ({ formData, search, page, setPage }:Props) => {
+const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
 	const {
 		cogoEntityId, creditController, serviceType,
 		ageingBucket, totalDueOutstanding, dueOutstandingCurrency,
+		pageIndex,
 	} = formData || {};
 	const [
 		{ data: customerList, loading },
@@ -39,8 +40,11 @@ const useGetCustomerList = ({ formData, search, page, setPage }:Props) => {
 
 	useEffect(() => {
 		debounceQuery(search);
-		setPage(1);
-	}, [search, debounceQuery, setPage]);
+		setFormData((prev) => ({
+			...prev,
+			pageIndex: 1,
+		}));
+	}, [search, debounceQuery, setFormData]);
 
 	const getCustomerList = useCallback((async () => {
 		try {
@@ -53,19 +57,19 @@ const useGetCustomerList = ({ formData, search, page, setPage }:Props) => {
 					ageingBucket,
 					totalDueOutstanding,
 					dueOutstandingCurrency,
-					pageIndex                  : page,
+					pageIndex,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
 	}), [ageingBucket, cogoEntityId, creditController,
-		dueOutstandingCurrency, page, query, serviceType,
+		dueOutstandingCurrency, pageIndex, query, serviceType,
 		totalDueOutstanding, trigger]);
 
 	useEffect(() => {
 		getCustomerList();
-	}, [query, page, getCustomerList]);
+	}, [query, pageIndex, getCustomerList]);
 
 	return {
 		customerList,

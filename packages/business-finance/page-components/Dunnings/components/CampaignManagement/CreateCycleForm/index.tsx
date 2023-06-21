@@ -27,6 +27,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 		scheduledHour       : '00',
 		scheduledMinute     : '00',
 		ageingBucket        : 'ALL',
+		pageIndex           : 1,
 		cycleName           : null,
 		cycleType           : null,
 		cogoEntityId        : null,
@@ -75,6 +76,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 			uncheckedRows={uncheckedRows}
 			setUncheckedRows={setUncheckedRows}
 			formData={formData}
+			setFormData={setFormData}
 		/>,
 		3: <MailView
 			formData={formData}

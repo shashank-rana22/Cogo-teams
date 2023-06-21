@@ -11,12 +11,12 @@ interface Props {
 	uncheckedRows?:string[],
 	setUncheckedRows?:Function,
 	formData?:object,
+	setFormData?:Function,
 }
 
-function ExcludeListView({ uncheckedRows, setUncheckedRows, formData }:Props) {
+function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormData }:Props) {
 	const [search, setSearch] = useState('');
-	const [page, setPage] = useState(1);
-	const { customerList, loading } = useGetCustomerList({ formData, search, page, setPage });
+	const { customerList, loading } = useGetCustomerList({ formData, search, setFormData });
 
 	return (
 		<div>
@@ -43,13 +43,11 @@ function ExcludeListView({ uncheckedRows, setUncheckedRows, formData }:Props) {
 			<div>
 
 				<ExcludeList
-					list={customerList?.list}
-					page={page}
-					setPage={setPage}
-					totalRecords={customerList?.totalRecords}
+					data={customerList}
 					uncheckedRows={uncheckedRows}
 					setUncheckedRows={setUncheckedRows}
 					loading={loading}
+					setFilters={setFormData}
 				/>
 
 			</div>

@@ -5,37 +5,44 @@ import StyledTable from '../../../../../../AccountReceivables/commons/styledTabl
 import { config } from './config';
 import styles from './styles.module.css';
 
-interface Props {
-	list?:object[],
-	page?:number,
-	setPage?:Function,
-	totalRecords?:number,
-	uncheckedRows?:string[],
-	setUncheckedRows?:Function,
-	loading?:boolean,
+export interface ListDataProps {
+	list: object[];
+	pageNo?: number;
+	totalRecords?: number;
+}
+interface ExcludeListInterface {
+	data?: ListDataProps;
+	uncheckedRows?: string[];
+	setUncheckedRows?: Function;
+	loading?: boolean;
+	setFilters?: Function;
 }
 
-function ExcludeList({ list, page, setPage, totalRecords, uncheckedRows, setUncheckedRows, loading }:Props) {
+function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilters }:ExcludeListInterface) {
+	const { list = [], pageNo = 0, totalRecords } = data || {};
+
 	return (
 		<>
-			<StyledTable
-				data={list}
-				columns={config({
-					uncheckedRows,
-					setUncheckedRows,
-				})}
-				loading={loading}
-			/>
-			<div className={styles.pagination}>
-				{list?.length > 0 && (
-					<Pagination
-						type="number"
-						currentPage={page}
-						totalItems={totalRecords}
-						pageSize={10}
-						onPageChange={(pageIndex) => setPage(pageIndex)}
-					/>
-				)}
+			<div className={styles.table}>
+				<StyledTable
+					data={list}
+					columns={config({
+						uncheckedRows,
+						setUncheckedRows,
+					})}
+					loading={loading}
+				/>
+			</div>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Pagination
+					type="table"
+					currentPage={pageNo}
+					totalItems={totalRecords}
+					pageSize={10}
+					onPageChange={(pageValue: number) => {
+						setFilters((prev) => ({ ...prev, pageIndex: pageValue }));
+					}}
+				/>
 			</div>
 		</>
 	);

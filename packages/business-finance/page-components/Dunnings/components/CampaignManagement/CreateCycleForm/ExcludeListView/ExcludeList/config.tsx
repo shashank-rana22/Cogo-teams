@@ -20,13 +20,11 @@ export const config = (
 				row={row}
 			/>
 		),
-		span: 1,
 	},
 	{
 		Header   : 'Customer Name',
 		id       : 'tradePartyDetailName',
 		accessor : ({ tradePartyDetailName }) => <div>{showOverflowingNumber(tradePartyDetailName, 24)}</div>,
-		span     : 3,
 	},
 	{
 		Header   : 'Total Outstanding',
@@ -44,7 +42,6 @@ export const config = (
 				})}
 			</div>
 		),
-		span: 3,
 	},
 	{
 		Header   : 'On Account',
@@ -62,7 +59,6 @@ export const config = (
 				})}
 			</div>
 		),
-		span: 3,
 	},
 ];
 
