@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    height: 32%;
+    width: 100%;
+    margin: 12px 24px 0 24px;
+    padding: 12px 0;
+    justify-content: space-between;
+    border-bottom: 1px dotted #bdbdbd;
+}
+
+.company_logo_name {
+    display: flex;
+    align-items: center;
+}
+
+.date_type {
+    display: flex;
+}
