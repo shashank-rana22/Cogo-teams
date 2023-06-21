@@ -1,11 +1,11 @@
-import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
-import { IcMAppSearch, IcMFilter } from '@cogoport/icons-react';
+import { Tabs, TabPanel, Input, Popover,ButtonIcon } from '@cogoport/components';
+import { IcMAppSearch, IcMFilter ,IcMCross} from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select/components';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 import serviceWiseTabMappings from '../../constants/service-tabs-mappings';
 import shipmentStateMappings from '../../constants/shipment-state-mappings';
-
+import { isEmpty }  from'@cogoport/utils';
 import Filter from './Filter';
 import styles from './styles.module.css';
 
@@ -19,11 +19,11 @@ function Header({
 	filters,
 }) {
 	const [filterPopover, setFilterPopover] = useState(false);
+	const [searchValue,setSearchValue]=useState('');	
 
-	const handleSearchValue = (e) => {
-		debounceQuery(e);
-	};
-
+	useEffect(()=>{
+		debounceQuery(searchValue);
+	},[searchValue])
 	return (
 		<div>
 			<Tabs
@@ -73,7 +73,9 @@ function Header({
 						prefix={<IcMAppSearch />}
 						placeholder="Search via Customer/SID/Booking No"
 						style={{ marginRight: '8px', width: 350 }}
-						onChange={(e) => handleSearchValue(e)}
+						onChange={(e) => setSearchValue(e)}
+						value={searchValue}
+						suffix={<ButtonIcon onClick={()=>setSearchValue('')} size="sm" icon={<IcMCross />} disabled={isEmpty(searchValue)} />}
 					/>
 					<div className={styles.icon_wrapper}>
 						<Popover
@@ -87,6 +89,7 @@ function Header({
 									setFilterPopover={setFilterPopover}
 								/>
 							)}
+							width={300}
 							visible={filterPopover}
 							shipmentType={serviceActiveTab}
 							onClickOutside={() => setFilterPopover(false)}

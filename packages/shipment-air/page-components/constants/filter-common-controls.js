@@ -12,6 +12,7 @@ const filterCommonControls = [
 			},
 		],
 		isClearable: true,
+		className      : 'primary md',
 	},
 	{
 		label          : 'Customer/Channel Partner',
@@ -39,6 +40,7 @@ const filterCommonControls = [
 		type        : 'select',
 		className   : 'primary md',
 		placeholder : 'Select status',
+		className      : 'primary md',
 		options     : [
 			{
 				label : 'YES',
