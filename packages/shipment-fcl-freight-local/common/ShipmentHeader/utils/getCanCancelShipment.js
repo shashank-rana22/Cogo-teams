@@ -12,7 +12,7 @@ export default function getCanCancelShipment({ shipment_data, user_data, stakeho
 
 	const isShipmentInCancellationState = SHIPMENT_CANCELLATION_STATES.includes(state);
 
-	const allowedUser = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const allowedUser = user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	return isShipmentInCancellationState && (can_cancel || allowedUser);
 }

@@ -17,6 +17,9 @@
     "emails":{
         "tab_title":"Emails"
     },
+    "edit_params": {
+        "can_edit": true
+    },
     "cancel_shipment": {
         "can_cancel": true,
         "list_reasons": {

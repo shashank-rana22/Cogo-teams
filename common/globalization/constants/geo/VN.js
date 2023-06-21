@@ -56,6 +56,7 @@ export default {
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
 		sales_role_ids            : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
@@ -75,6 +76,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
+
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
@@ -101,6 +104,7 @@ export default {
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
+		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
 		shipping_line_supply_agents      : [
 			'1e3ee025-88a2-43ea-abd5-08017f61f2d2',
 			'4248e4d4-59cf-441e-a4a8-83bb29c86bcf',
@@ -144,11 +148,13 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
