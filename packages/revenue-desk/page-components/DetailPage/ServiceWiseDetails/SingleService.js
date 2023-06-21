@@ -160,6 +160,7 @@ function SingleService({
 							sellRates={sellRates}
 							prefrence_key={item?.prefrence_key}
 							loading={ratesLoading}
+							shipmentData={shipmentData}
 						/>
 					))}
 				</>

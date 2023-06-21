@@ -3,11 +3,7 @@ import { startCase } from '@cogoport/utils';
 const getSystemFormatedRates = (data, singleServiceData) => {
 	const container_count = singleServiceData?.containers_count || 1;
 	const rows = [];
-	const check = (source) => {
-		if (source === null) return 'Market Rate';
-		if (source) return startCase(source);
-		return '';
-	};
+
 	(data || []).forEach((element) => {
 		const row = {};
 		const rowData = {};
@@ -27,6 +23,9 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
+		rowData.profit = element?.profit || 0;
+		rowData.schedule_type = element?.schedule_type;
+		rowData.agent = element?.procured_by?.name;
 		rowData.profit_percentage = element?.profit_percentage;
 		rowData.currency = element?.total_price_currency;
 		rowData.validity_end = element?.validity_end;
@@ -42,7 +41,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			&& element?.destination_main_port_id !== 'None'
 			? element?.destination_main_port_id
 			: null;
-		rowData.source = check(element?.source);
+		rowData.mode = element?.mode;
 		row.rowData = rowData;
 		rowData.via_route = element?.destination_main_port?.name;
 		rows.push(row);

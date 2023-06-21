@@ -136,6 +136,32 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 						</div>
 					)
 						: <Placeholder height="25px" width="150px" />}
+					{!loading ? (
+						<div style={{ marginLeft: '5px', display: 'flex' }}>
+							{formatAmount({
+								amount   : Number(profitAmount) / Number(itemData?.containers_count),
+								currency : profitCurrency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
+							<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
+							{formatAmount({
+								amount: (Number(profitAmount) / Number(data?.exchange_rate))
+								/ Number(itemData?.containers_count),
+								currency : 'USD',
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
+							/Contr.
+						</div>
+					)
+						: <Placeholder height="25px" width="150px" />}
 				</div>
 
 			</div>
