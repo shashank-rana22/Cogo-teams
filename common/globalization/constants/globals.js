@@ -287,6 +287,7 @@ const GLOBAL_CONSTANTS = {
 	others                       : {
 		old_shipment_serial_id  : 120347,
 		cogopoint_default_value : 0,
+
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
