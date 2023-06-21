@@ -1,11 +1,15 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { getAmountInLakh } from '../../getAmountInLakh';
 import styles from '../styles.module.css';
 
-const CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
+interface ListDataInterface {
+	income?: number;
+	expense?: number;
+	month?: string;
+	currency?: string;
+}
 function ResponsiveLineChart({ lineData }) {
 	const lineChartData = [
 		{
@@ -14,11 +18,13 @@ function ResponsiveLineChart({ lineData }) {
 			data  : [],
 		},
 	];
-	(lineData || []).forEach((item:any) => {
+	(lineData || []).forEach((item:ListDataInterface) => {
+		const { income, expense, month = '', currency = '' } = item;
 		const pushData = {
-			y : Number(item.income - item.expense),
-			x : (item.month[0].toUpperCase() + item.month.slice(1).toLowerCase()).substring(0, 3),
-			z : item.income !== 0 ? Number((item.income - item.expense) / item.income) * 100 : 0,
+			y : Number(income - expense),
+			x : (month[0].toUpperCase() + month.slice(1).toLowerCase()).substring(0, 3),
+			z : income !== 0 ? Number((income - expense) / income) * 100 : 0,
+			currency,
 		};
 		lineChartData[0].data.push(pushData);
 	});
@@ -52,7 +58,7 @@ function ResponsiveLineChart({ lineData }) {
 						<div className={styles.amount_style}>
 							{formatAmount({
 								amount   : (point.data.y || '')?.toString(),
-								currency : CURRENCY,
+								currency : point?.data?.currency,
 								options  : {
 									currencyDisplay       : 'code',
 									compactDisplay        : 'short',

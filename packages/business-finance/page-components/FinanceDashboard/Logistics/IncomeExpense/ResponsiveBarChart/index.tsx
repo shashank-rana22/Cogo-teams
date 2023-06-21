@@ -1,5 +1,4 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
@@ -8,8 +7,9 @@ import { getAmountLineChartInLakh } from '../../getAmountLineChartInLakh';
 
 import styles from './styles.module.css';
 
-const CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 function ResponsiveBarChart({ barData }) {
+	const foundCurrency = barData.find((item) => item.currency);
+
 	return (
 		<ResponsiveBar
 			data={barData}
@@ -37,14 +37,14 @@ function ResponsiveBarChart({ barData }) {
 				tickSize     : 0,
 				tickPadding  : -10,
 				tickRotation : 0,
-				format       : (value) => `${getAmountInLakhCrK(value, CURRENCY)}`,
+				format       : (value) => `${getAmountInLakhCrK(value, foundCurrency?.currency)}`,
 			}}
 			labelSkipWidth={36}
 			labelSkipHeight={12}
 			labelTextColor={{
 				from: 'color', modifiers: [['darker',	1]],
 			}}
-			tooltip={({ label, value }) => (
+			tooltip={({ label, value, data }) => (
 				<div className={styles.tooltip}>
 					{label?.split('-')[0]}
 					{' '}
@@ -53,7 +53,7 @@ function ResponsiveBarChart({ barData }) {
 					<tspan color="#000">
 						{formatAmount({
 							amount   : (value || '')?.toString(),
-							currency : CURRENCY,
+							currency : data?.currency,
 							options  : {
 								currencyDisplay       : 'code',
 								compactDisplay        : 'short',
