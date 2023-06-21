@@ -14,53 +14,55 @@ function Filter({ serviceActiveTab = 'air_freight', setFilters = () => {}, setFi
 
 	const handleReset = () => {
 		reset({
-			tags:'',
-			fault_alarms_raised:'',
-			origin_airport_id:'',
-			destination_airport_id:'',
-			trade_type:'',
-			airport_id:'',
-			importer_exporter_id:''
+			tags                   : '',
+			fault_alarms_raised    : '',
+			origin_airport_id      : '',
+			destination_airport_id : '',
+			trade_type             : '',
+			airport_id             : '',
+			importer_exporter_id   : '',
 		});
 		setFilters({});
 		setFilterPopover(false);
 	};
 
-	
-
 	const handleApplyFilters = () => {
-		const serviceName=serviceActiveTab.concat('_service');
-		const data=getValues();
-		const { tags='',importer_exporter_id='',fault_alarms_raised='',origin_airport_id='',trade_type='',destination_airport_id='',airport_id=''}=data || {}
+		const serviceName = serviceActiveTab.concat('_service');
+		const data = getValues();
+		const {
+			tags = '', importer_exporter_id = '',
+			fault_alarms_raised = '', origin_airport_id = '',
+			trade_type = '', destination_airport_id = '', airport_id = '',
+		} = data || {};
 
 		setFilters({
-			tags:tags ? [tags] : undefined,
-			fault_alarms_raised:fault_alarms_raised || undefined,
-			importer_exporter_id:importer_exporter_id || undefined,
-			[serviceName]:{
-				origin_airport_id:origin_airport_id || undefined,
-				destination_airport_id:destination_airport_id || undefined,
-				trade_type:trade_type || undefined,
-				airport_id:airport_id || undefined
-			}
+			tags                 : tags ? [tags] : undefined,
+			fault_alarms_raised  : fault_alarms_raised || undefined,
+			importer_exporter_id : importer_exporter_id || undefined,
+			[serviceName]        : {
+				origin_airport_id      : origin_airport_id || undefined,
+				destination_airport_id : destination_airport_id || undefined,
+				trade_type             : trade_type || undefined,
+				airport_id             : airport_id || undefined,
+			},
 
-		})
+		});
 		setFilterPopover(false);
 	};
 
 	useEffect(() => {
 		reset({
-			tags:'',
-			fault_alarms_raised:'',
-			origin_airport_id:'',
-			destination_airport_id:'',
-			trade_type:'',
-			airport_id:'',
-			importer_exporter_id:''
+			tags                   : '',
+			fault_alarms_raised    : '',
+			origin_airport_id      : '',
+			destination_airport_id : '',
+			trade_type             : '',
+			airport_id             : '',
+			importer_exporter_id   : '',
 
 		});
-		setFilters({})
-	}, [serviceActiveTab, reset]);
+		setFilters({});
+	}, [serviceActiveTab, reset, setFilters]);
 
 	return (
 		<div>

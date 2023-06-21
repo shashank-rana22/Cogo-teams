@@ -1,9 +1,10 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useState } from 'react';
 
-import Body from './components/Body';
-import Header from './components/Header';
-import useListShipment from './hooks/useListShipment';
+import useListShipment from '../hooks/useListShipment';
+
+import Body from './Body';
+import Header from './Header';
 
 function ShipmentAir() {
 	const [serviceActiveTab, setServiceActiveTab] = useState('air_freight');

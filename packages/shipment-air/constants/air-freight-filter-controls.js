@@ -11,7 +11,7 @@ const airFreightControls = [
 				],
 			},
 		},
-		isClearable: true,
+		isClearable : true,
 		className   : 'primary md',
 	},
 	{
@@ -26,7 +26,7 @@ const airFreightControls = [
 				],
 			},
 		},
-		isClearable: true,
+		isClearable : true,
 		className   : 'primary md',
 	},
 	{

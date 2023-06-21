@@ -1,8 +1,8 @@
+import EmptyState from '@cogoport/air-modules/components/Sop/EmptyState';
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../common/EmptyState';
-import Loader from '../../common/Loader';
+import Loader from '../../commons/Loader';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
@@ -23,7 +23,14 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 			{loading ? <Loader />
 				: (
 					<div>
-						{isEmpty(list) ? <EmptyState /> : (
+						{isEmpty(list) ? (
+							<EmptyState
+								height="50%"
+								width="50%"
+								emptyText="No Shipments found !!"
+								subEmptyText="Looks like no results were found..."
+							/>
+						) : (
 							<div>
 								{list.map((item) => {
 									const { id = '' } = item;
@@ -40,7 +47,6 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 										onPageChange={(pageVal) => handlePageChange(pageVal)}
 									/>
 								</div>
-
 							</div>
 						)}
 
