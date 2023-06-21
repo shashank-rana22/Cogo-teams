@@ -22,11 +22,11 @@ function FieldArray({
 		name,
 	});
 
-	const CHILDEMPTYVALUES = {};
+	const CHILD_EMPTY_VALUES = {};
 
 	useEffect(() => {
 		if (fields.length === 0) {
-			append(CHILDEMPTYVALUES);
+			append(CHILD_EMPTY_VALUES);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -53,7 +53,7 @@ function FieldArray({
 						style={{ margin: '4px' }}
 						size="sm"
 						themeType="secondary"
-						onClick={() => append(CHILDEMPTYVALUES)}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
 					>
 						+
 						{' '}
