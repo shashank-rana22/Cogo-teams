@@ -287,20 +287,6 @@ const GLOBAL_CONSTANTS = {
 	others                       : {
 		old_shipment_serial_id  : 120347,
 		cogopoint_default_value : 0,
-		services_unit_mapping   : {
-			fcl_freight_service     : '/Cont',
-			fcl_customs_service     : '/Cont',
-			fcl_cfs_service         : '/Cont',
-			air_freight_service     : '/Kg',
-			air_customs_service     : '/Kg',
-			lcl_freight_service     : '/CBM',
-			lcl_customs_service     : '/CBM',
-			haulage_freight_service : '/Cont',
-			trailer_freigth_service : '/Truck',
-			ltl_freight_service     : '/Truck',
-			ftl_freight_service     : '/Truck',
-		},
-
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -315,7 +301,63 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
-
+	services: {
+		fcl_freight: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		fcl_customs: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		fcl_cfs: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		air_freight: {
+			unit: {
+				name: 'per kg', short_name: '/Kg',
+			},
+		},
+		air_customs: {
+			unit: {
+				name: 'per kg', short_name: '/Kg',
+			},
+		},
+		lcl_freight: {
+			unit: {
+				name: 'per CBM', short_name: '/CBM',
+			},
+		},
+		lcl_customs: {
+			unit: {
+				name: 'per CBM', short_name: '/CBM',
+			},
+		},
+		haulage_freight: {
+			unit: {
+				name: 'per Container', short_name: '/Cont',
+			},
+		},
+		trailer_freight: {
+			unit: {
+				name: 'per Truck', short_name: '/Truck',
+			},
+		},
+		ltl_freight: {
+			unit: {
+				name: 'per Truck', short_name: '/Truck',
+			},
+		},
+		ftl_freight: {
+			unit: {
+				name: 'per Truck', short_name: '/Truck',
+			},
+		},
+	},
 };
 
 export default GLOBAL_CONSTANTS;

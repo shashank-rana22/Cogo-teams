@@ -1,10 +1,13 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
+import getServicesUnitMapping from '../../../../../../../utils/getServicesUnitMapping';
 
 const geo = getGeoConstants();
 
 const FALLBACK_AMOUNT = 0;
+
+const SERVICES_UNIT_MAPPING = getServicesUnitMapping();
 
 function PriceRange({ item }) {
 	return (
@@ -31,7 +34,7 @@ function PriceRange({ item }) {
 				},
 			})}
 			&nbsp;
-			{GLOBAL_CONSTANTS.others.services_unit_mapping[item?.service_type] || ''}
+			{SERVICES_UNIT_MAPPING[item?.service_type] || ''}
 		</span>
 	);
 }

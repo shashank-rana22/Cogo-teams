@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import {
@@ -9,11 +8,14 @@ import {
 	REVERT_STATUS_LABEL_MAPPING,
 	REVERTABLE_SERVICES,
 } from '../../../../../../../constants/flashRatesMapping';
+import getServicesUnitMapping from '../../../../../../../utils/getServicesUnitMapping';
 import PriceRange from '../PriceRange';
 
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+
+const SERVICES_UNIT_MAPPING = getServicesUnitMapping();
 
 function WinBooking({ item, setModalState = () => {}, type = '' }) {
 	return (
@@ -56,7 +58,7 @@ function RevertedBooking({ item }) {
 						},
 					})}
 					&nbsp;
-					{GLOBAL_CONSTANTS.others.services_unit_mapping[item?.service_type] || ''}
+					{SERVICES_UNIT_MAPPING[item?.service_type] || ''}
 				</span>
 			</div>
 		</div>
@@ -88,7 +90,7 @@ function ClosedBooking({ item }) {
 								},
 							})}
                         &nbsp;
-							{GLOBAL_CONSTANTS.others.services_unit_mapping[item?.service_type] || ''}
+							{SERVICES_UNIT_MAPPING[item?.service_type] || ''}
 						</span>
 					</div>
 				)}
