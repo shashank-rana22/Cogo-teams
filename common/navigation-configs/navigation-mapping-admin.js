@@ -335,6 +335,26 @@ const navigationMappingAdmin = {
 		possible_apis : [
 			...apis.schedules
 		],
+		options       : [
+			{
+				title : 'Sailing Schedules',
+				href  : '/schedules/[type]',
+				as    : '/schedules/sailing-schedules',
+				type  : 'link',
+			},
+			{
+				title : 'Vessel Schedules',
+				href  : '/schedules/[type]',
+				as    : '/schedules/vessel-schedules',
+				type  : 'link',
+			},
+			{
+				title : 'Service Lanes',
+				href  : '/schedules/service-lanes',
+				as    : '/schedules/sailing-schedules',
+				type  : 'link',
+			},
+		],
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
