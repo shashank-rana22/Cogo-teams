@@ -21,7 +21,7 @@
 }
 
 .edit_icon {
-	margin: 0 10px 24px 0;
+	margin-right: 26px;
 	cursor: pointer;
 	fill: var(--color-accent-orange-2);
 }
