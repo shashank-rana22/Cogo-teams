@@ -13,6 +13,7 @@ import {
 	SingleLocation,
 	Accordian,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import KamDeskContext from '../../../context/KamDeskContext';
 import isSingleLocation from '../../../utils/checkSingleLocation';
 
@@ -24,7 +25,8 @@ function Card({ data = {}, activeTab = '' }) {
 	const { stepperTab } = useContext(KamDeskContext);
 
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
