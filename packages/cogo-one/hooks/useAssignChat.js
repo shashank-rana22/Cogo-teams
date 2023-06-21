@@ -6,8 +6,8 @@ function useAssignChat({
 	closeModal = () => {},
 	activeMessageCard = {},
 	formattedData = {},
-	setDisableButton = () => {},
 	canMessageOnBotSession = false,
+
 }) {
 	const { user_id, lead_user_id, organization_id, mobile_no, sender = null, cogo_entity_id } = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};
@@ -16,7 +16,7 @@ function useAssignChat({
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const assignChat = async (payload, callbackFun = () => {}) => {
+	const assignChat = async ({ payload, callBackFunc = () => {} }) => {
 		try {
 			await trigger({
 				data: {
@@ -32,7 +32,7 @@ function useAssignChat({
 
 				},
 			});
-			callbackFun();
+
 			if (!canMessageOnBotSession) {
 				closeModal();
 				Toast.success('Successfully Assigned');
@@ -40,9 +40,10 @@ function useAssignChat({
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		} finally {
-			setDisableButton('');
+			callBackFunc();
 		}
 	};
+
 	return {
 		assignChat,
 		loading,

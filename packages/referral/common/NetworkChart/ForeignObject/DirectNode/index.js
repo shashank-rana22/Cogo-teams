@@ -1,12 +1,17 @@
 import { cl, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import React from 'react';
 
-import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, COGOPOINT_IMG } from '../../../../constants';
+import { USER_STATUS_MAPPING, USER_STATUS_COLOUR } from '../../../../constants';
 import TooltipContent from '../../../TooltipContent';
 import styles from '../styles.module.css';
+
+const DEFAULT_CHILD_COUNT = 0;
+const DEFAULT_INDEX = 0;
+const MIN_ORGNIZATION_LIST_LENGTH = 1;
 
 function DirectNode(
 	nodeProps = {},
@@ -80,12 +85,13 @@ function DirectNode(
 							caret={false}
 						>
 							<div className={styles.user_company_name}>
-								<div className={`${styles.company_name} ${organization?.length > 1
+								<div className={`${styles.company_name}
+								${organization?.length > MIN_ORGNIZATION_LIST_LENGTH
 									? styles.user_org_name : styles.full_width}`}
 								>
-									{startCase(organization?.[0] || '\u00A0')}
+									{startCase(organization?.[DEFAULT_INDEX] || '\u00A0')}
 								</div>
-								{organization?.length > 1 && (
+								{organization?.length > MIN_ORGNIZATION_LIST_LENGTH && (
 									<div className={styles.more}>
 										+
 										{orgCount}
@@ -101,7 +107,7 @@ function DirectNode(
 						Total:
 					</div>
 					<Image
-						src={COGOPOINT_IMG}
+						src={GLOBAL_CONSTANTS.image_url.cogopoint_image}
 						alt="cogopoint"
 						width={18}
 						height={18}
@@ -121,12 +127,12 @@ function DirectNode(
 			>
 				<div className={styles.child_network}>
 					<div className={styles.user_company_name}>
-						{totalChildCount !== 0 && '+'}
+						{totalChildCount !== DEFAULT_CHILD_COUNT && '+'}
 						{totalChildCount}
 						{' '}
 						connections
 					</div>
-					{totalChildCount > 0
+					{totalChildCount > DEFAULT_CHILD_COUNT
 						? (
 							<IcMArrowDown
 								className={cl`
