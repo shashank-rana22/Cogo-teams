@@ -11,11 +11,14 @@ import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
-const shipmentRefetchTasks = [
+const ROLLOVER_TASKS = ['mark_container_gated_in', 'mark_vessel_departed'];
+
+const SHIPMENT_REFETCH_TASKS = [
 	'confirm_booking',
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
 	'update_airway_bill_number',
+	...ROLLOVER_TASKS,
 ];
 
 function useHandleSubmit({
@@ -76,6 +79,7 @@ function useHandleSubmit({
 			task,
 			dataToSend,
 			serviceIdMapping,
+			ROLLOVER_TASKS,
 			primary_service,
 		);
 
@@ -138,7 +142,7 @@ function useHandleSubmit({
 
 				getShipmentTimeline();
 
-				if (shipmentRefetchTasks.includes(task?.task)) {
+				if (SHIPMENT_REFETCH_TASKS.includes(task?.task)) {
 					getShipment();
 				}
 			} else {
@@ -161,6 +165,7 @@ function useHandleSubmit({
 	return {
 		onSubmit,
 		loading: loading || loadingTask || isLoading,
+		setIsLoading,
 	};
 }
 export default useHandleSubmit;

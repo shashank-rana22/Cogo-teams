@@ -7,8 +7,9 @@ const injectForm = ({
 	task = {},
 	shipment_data = {},
 	formValues = {},
+	getApisData = {},
 }) => {
-	const showElements = getShowTaskFields(formValues, stepConfig.controls);
+	const showElements = getShowTaskFields(formValues, stepConfig.controls, getApisData);
 
 	const finalControls = mutateControls(
 		stepConfig?.controls,

@@ -4,6 +4,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
@@ -12,6 +13,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import Rollover from '../../../common/RolloverModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -29,6 +31,12 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+
+	const { serial_id, state, container_details } = shipment_data || {};
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -118,7 +126,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 					<ShipmentChat />
 				</div>
 
-				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+				{state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
@@ -152,8 +160,8 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
+								filters={{ q: serial_id }}
+								pre_subject_text={`${serial_id}`}
 							/>
 						</TabPanel>
 
@@ -162,6 +170,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<Rollover rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

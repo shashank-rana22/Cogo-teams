@@ -5,7 +5,7 @@ const getFunction = {
 	),
 };
 
-const getShowElement = (field, formValues) => {
+const getShowElement = (field, formValues, getApisData) => {
 	let flag = true;
 
 	if (field?.type === 'fieldArray') {
@@ -58,6 +58,12 @@ const getShowElement = (field, formValues) => {
 		return true;
 	}
 
+	if (['shipment_rollover', 'editBookingParams'].includes(field.name)) {
+		const total_containers_count = getApisData?.list_shipment_container_details?.length;
+		const entered_count = formValues?.containers_count;
+		if (+entered_count < total_containers_count && entered_count !== '') { return true; }
+	}
+
 	if ('show' in field) return field.show;
 
 	const { show_conditions: condition } = field;
@@ -69,10 +75,10 @@ const getShowElement = (field, formValues) => {
 	return flag;
 };
 
-const getShowTaskFields = (formValues, controls = []) => {
+const getShowTaskFields = (formValues, controls = [], getApisData = {}) => {
 	const showElements = {};
 
-	controls.forEach((ctrl) => { showElements[ctrl?.name] = getShowElement(ctrl, formValues); });
+	controls.forEach((ctrl) => { showElements[ctrl?.name] = getShowElement(ctrl, formValues, getApisData); });
 
 	return showElements;
 };
