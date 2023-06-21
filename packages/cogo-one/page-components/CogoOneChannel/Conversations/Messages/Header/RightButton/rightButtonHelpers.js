@@ -43,8 +43,9 @@ export function getOptionsMapping({
 					sender          : sender || undefined,
 					channel         : channel_type,
 					channel_chat_id : id,
-					agent_id        : support_agent_id || undefined,
+					...(support_agent_id ? { agent_id: support_agent_id } : {}),
 				};
+
 				requestForAssignChat({ payload, callBackFunc });
 			},
 			label: 'Request for Assign',
