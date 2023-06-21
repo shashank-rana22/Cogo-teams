@@ -4,7 +4,6 @@ const filterCommonControls = [
 		name     : 'tags',
 		type     : 'select',
 		multiple : true,
-		span     : 12,
 		options  : [
 			{
 				label : 'Cogoverse',
@@ -13,6 +12,7 @@ const filterCommonControls = [
 		],
 		isClearable : true,
 		className   : 'primary md',
+		span        : 6,
 	},
 	{
 		label          : 'Customer/Channel Partner',
@@ -31,7 +31,7 @@ const filterCommonControls = [
 		placeholder : 'Select Customer/Channel Partner',
 		caret       : true,
 		isClearable : true,
-		span        : 12,
+		span        : 6,
 	},
 
 	{
@@ -46,7 +46,8 @@ const filterCommonControls = [
 				value : 'active',
 			},
 		],
-		isClearable: true,
+		isClearable : true,
+		span        : 6,
 	},
 ];
 

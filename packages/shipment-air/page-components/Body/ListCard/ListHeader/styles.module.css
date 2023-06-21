@@ -1,21 +1,21 @@
 .trade_type {
-	background: rgb(224 228 255 / 50%);
+  background: #fcedbf;
 }
 
 .importer_exporter_tags {
-	background: rgb(224 228 255 / 50%);
+  background: #e0e4ff;
 }
 
 .source {
-	background: #cfeaed;
+  background: #cfeaed;
 }
 
 .cogoverse {
-	background: #ffd3d3;
+  background: #ffd3d3;
 }
 
 .cogoport_assured {
-	background: #d8fade;
+  background: #d8fade;
 }
 
 .trade_type,
@@ -23,9 +23,9 @@
 .source,
 .cogoverse,
 .cogoport_assured {
-	width: max-content;
-	min-height: 16px;
-	padding: 2px 4px;
-	margin-right: 8px;
-	border-radius: 0 0 4px 4px;
+  width: max-content;
+  min-height: 16px;
+  padding: 2px 4px;
+  margin-right: 8px;
+  border-radius: 0 0 4px 4px;
 }

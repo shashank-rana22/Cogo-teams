@@ -1,25 +1,25 @@
 import {
-	IcCFair,
+	IcMFair,
 	IcMFlocalCharges,
 	IcMFairport,
-	IcCFairCustoms,
+	IcMFcustoms,
 } from '@cogoport/icons-react';
 
 const SERVICE_ICON_MAPPINGS = {
 	air_freight: {
-		icon : <IcCFair />,
+		icon : <IcMFair />,
 		text : 'AIR',
 	},
 	domestic_air_freight: {
-		icon : <IcMFairport fill="#5936f0" />,
+		icon : <IcMFairport />,
 		text : 'Domestic AIR',
 	},
 	air_freight_local: {
-		icon : <IcMFlocalCharges fill="#EF9B9B" />,
+		icon : <IcMFlocalCharges />,
 		text : 'AIR Local',
 	},
 	air_customs: {
-		icon : <IcCFairCustoms />,
+		icon : <IcMFcustoms />,
 		text : 'AIR Customs',
 	},
 };
