@@ -330,32 +330,32 @@ const GLOBAL_CONSTANTS = {
 		},
 		lcl_freight: {
 			unit: {
-				name: 'per CBM', short_name: '/CBM',
+				name: 'per cbm', short_name: '/CBM',
 			},
 		},
 		lcl_customs: {
 			unit: {
-				name: 'per CBM', short_name: '/CBM',
+				name: 'per cbm', short_name: '/CBM',
 			},
 		},
 		haulage_freight: {
 			unit: {
-				name: 'per Container', short_name: '/Cont',
+				name: 'per container', short_name: '/Cont',
 			},
 		},
 		trailer_freight: {
 			unit: {
-				name: 'per Truck', short_name: '/Truck',
+				name: 'per truck', short_name: '/Truck',
 			},
 		},
 		ltl_freight: {
 			unit: {
-				name: 'per Truck', short_name: '/Truck',
+				name: 'per truck', short_name: '/Truck',
 			},
 		},
 		ftl_freight: {
 			unit: {
-				name: 'per Truck', short_name: '/Truck',
+				name: 'per truck', short_name: '/Truck',
 			},
 		},
 	},
