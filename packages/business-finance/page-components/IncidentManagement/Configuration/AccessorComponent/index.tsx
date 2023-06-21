@@ -10,6 +10,20 @@ import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
 
+const typeComponentMapping = {
+	BANK_DETAIL_APPROVAL                   : BankDetails,
+	TDS_APPROVAL                           : TDSModal,
+	ISSUE_CREDIT_NOTE                      : RequestCN,
+	JOURNAL_VOUCHER_APPROVAL               : JvModal,
+	SETTLEMENT_APPROVAL                    : SettlementModal,
+	INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJVModal,
+	PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
+	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
+	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
+	SEZ_APPROVAL                           : SezApproval,
+	CONCOR_PDA_APPROVAL                    : ConcorModal,
+};
+
 function AccessorComponent({ row, getIncidentData }) {
 	const { type = '', id = '', data = '', remark = '', status = '' } = row || {};
 	const {
@@ -26,23 +40,13 @@ function AccessorComponent({ row, getIncidentData }) {
 		advanceSecurityDepositRefund,
 	} = data || {};
 
-	const typeComponentMapping = {
-		BANK_DETAIL_APPROVAL                   : BankDetails,
-		TDS_APPROVAL                           : TDSModal,
-		ISSUE_CREDIT_NOTE                      : RequestCN,
-		JOURNAL_VOUCHER_APPROVAL               : JvModal,
-		SETTLEMENT_APPROVAL                    : SettlementModal,
-		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJVModal,
-		PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
-		ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
-		ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
-		SEZ_APPROVAL                           : SezApproval,
-		CONCOR_PDA_APPROVAL                    : ConcorModal,
-	};
+	const Component = typeComponentMapping[type] || {};
 
-	const Component = typeComponentMapping[type];
+	if (!Component) {
+		return null;
+	}
 
-	return Component ? (
+	return (
 		<Component
 			tdsData={tdsRequest}
 			bankData={bankRequest}
@@ -62,7 +66,7 @@ function AccessorComponent({ row, getIncidentData }) {
 			status={status}
 			remark={remark}
 		/>
-	) : null;
+	);
 }
 
 export default AccessorComponent;

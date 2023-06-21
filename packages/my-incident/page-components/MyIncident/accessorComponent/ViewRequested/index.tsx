@@ -13,6 +13,18 @@ import RequestCN from './RequestCN';
 import SettlementModal from './SettlementModal';
 import TdsDeviationModal from './TdsDeviationModal';
 
+const typeComponentMapping = {
+	BANK_DETAIL_APPROVAL                   : BankDatailsModal,
+	TDS_APPROVAL                           : TdsDeviationModal,
+	ISSUE_CREDIT_NOTE                      : RequestCN,
+	JOURNAL_VOUCHER_APPROVAL               : JournalVoucher,
+	SETTLEMENT_APPROVAL                    : SettlementModal,
+	INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : IcJvApproval,
+	PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
+	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDepositModal,
+	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefundModal,
+};
+
 function ViewRequested({ itemData, name, refetch }) {
 	const [remarks, setRemarks] = useState('');
 	const { type, id } = itemData || {};
@@ -26,21 +38,14 @@ function ViewRequested({ itemData, name, refetch }) {
 		refetch,
 		setShowModal,
 	});
-	const typeComponentMapping = {
-		BANK_DETAIL_APPROVAL                   : BankDatailsModal,
-		TDS_APPROVAL                           : TdsDeviationModal,
-		ISSUE_CREDIT_NOTE                      : RequestCN,
-		JOURNAL_VOUCHER_APPROVAL               : JournalVoucher,
-		SETTLEMENT_APPROVAL                    : SettlementModal,
-		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : IcJvApproval,
-		PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
-		ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDepositModal,
-		ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefundModal,
-	};
 
-	const Component = typeComponentMapping[type];
+	const Component = typeComponentMapping[type] || {};
 
-	return Component ? (
+	if (!Component) {
+		return null;
+	}
+
+	return (
 		<Component
 			itemData={itemData}
 			setRemarks={setRemarks}
@@ -55,7 +60,7 @@ function ViewRequested({ itemData, name, refetch }) {
 			loadingOnSave={loadingOnSave}
 			loadingOnRaise={loadingOnRaise}
 		/>
-	) : null;
+	);
 }
 
 export default ViewRequested;
