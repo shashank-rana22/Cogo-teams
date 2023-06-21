@@ -18,8 +18,7 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 		setPage(pageVal);
 	};
 	return (
-
-		<div>
+		<div className={styles.body_container}>
 			{loading ? <Loader />
 				: (
 					<div>
@@ -49,10 +48,8 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 								</div>
 							</div>
 						)}
-
 					</div>
 				)}
-
 		</div>
 	);
 }

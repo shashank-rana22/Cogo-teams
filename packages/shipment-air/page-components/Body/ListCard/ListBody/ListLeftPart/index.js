@@ -3,9 +3,9 @@ import { Tooltip } from '@cogoport/components';
 import styles from './styles.module.css';
 
 const SERIAL_ID_LABEL = {
-	consol       : 'CONSOL ID',
-	coload       : 'COLOAD ID',
-	defaultValue : 'SHIPMENT ID',
+	consol       : 'Consol ID',
+	coload       : 'Coload ID',
+	defaultValue : 'Shipment ID',
 };
 
 const INCLUDES_SHIPMENT = ['air_freight', 'domestic_air_freight'];
