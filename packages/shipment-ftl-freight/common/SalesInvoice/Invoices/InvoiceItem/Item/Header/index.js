@@ -120,7 +120,6 @@ function Header({
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
-
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
