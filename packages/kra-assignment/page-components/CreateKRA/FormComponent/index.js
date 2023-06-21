@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import getElementController from '../../../configs/getElementController';
 
-import getControls from './controls';
+import DescriptionControls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ function FormComponent() {
 		loading,
 	} = useCreateKRA();
 
-	const controls = getControls({ setSelectedValue });
+	const controls = DescriptionControls();
 
 	return (
 		<div className={styles.container}>
