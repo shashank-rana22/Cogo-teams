@@ -28,6 +28,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1021,6 +1026,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_organization_account_conversion_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1876,6 +1886,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -2660,6 +2675,31 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_approval_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'update_organization_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_partner_approval_details',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partner_approvals',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'update_organization_document',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -3197,6 +3237,11 @@ const partner = {
 		},
 	],
 	sales_dashboard: [
+		{
+			api          : 'get_partner_user_report',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
@@ -6586,6 +6631,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'create_outbound_voice_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7187,6 +7237,18 @@ const partner = {
 		},
 		{
 			api         : 'get_pnl_statement_salary',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_job_closure_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_shipment_statistics',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_monthly_trends',
 			access_type : 'private',
 		},
 		{
@@ -8743,6 +8805,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_bulk_post_to_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'post_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
@@ -9146,6 +9214,11 @@ const partner = {
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
 		},
 		{
 			api          : 'create_campaign_segment',
@@ -9886,6 +9959,41 @@ const partner = {
 	],
 	communication_control: [
 		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'update_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api        	 : 'create_campaign_email_configuration',
+			access_type	 : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_channel_view',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_credential',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_channel_management',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
 			api          : 'list_organization_users',
 			access_type  : 'private',
 			service_name : 'communication_control',
@@ -10094,6 +10202,11 @@ const partner = {
 		},
 		{
 			api          : 'update_agent_budget_allocation',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_agent_budget_allocation_status',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
@@ -12131,6 +12244,36 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'escalate_supplier_to_rm',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12354,9 +12497,58 @@ const partner = {
 			service_name : 'referral',
 		},
 	],
+	referral_config: [
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'create_referral_configuration',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_configuration',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	referral_simulation: [
 		{
 			api          : 'get_referral_simulation',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_analytics: [
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_user_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_business_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_top_ten_referral',
 			access_type  : 'private',
 			service_name : 'referral',
 		},

@@ -2,6 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -18,9 +19,17 @@ import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
+const EMPTY_TRADE_PARTY_LENGTH = 0;
+const SERVICE_WRAPPER_LAST_INDEX = 2;
+const SERVICE_WRAPPER_START_INDEX = 0;
+const DEFAULT_COLECTION_PARTY_COUNT = 0;
+const DEFAULT_STEP = 1;
+const DEFAULT_NET_TOTAL = 0;
+const MAX_LEN_FOR_TOOLTIP = 25;
+
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 
-const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
+const LAST_INDEX = 1;
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -35,22 +44,14 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(DEFAULT_STEP);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
-	const {
-		user,
-	} = useSelector(({ profile }) => ({
-		user: profile,
-	}));
-
+	const { user } = useSelector(({ profile }) => ({ user: profile }));
 	const geo = getGeoConstants();
-
-	const {
-		shipment_data,
-	} = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
 		(item) => STATE.includes(item?.detail?.state),
@@ -73,9 +74,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		<>
 			{(allservices || []).map((ser, i) => (
 				<span key={ser}>
-					{startCase(ser)}
-					{' '}
-					{(services).length - 1 === i ? '' : ', '}
+					{`${startCase(ser)} ${(services).length - LAST_INDEX === i ? '' : ', '}`}
 				</span>
 			))}
 		</>
@@ -83,7 +82,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
-		setStep(1);
+		setStep(DEFAULT_STEP);
 		setOpenComparision(false);
 	};
 
@@ -96,22 +95,22 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		shipment_data,
 	});
 
-	const servicesList = [];
+	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
 		if (element?.is_active === true) {
-			servicesList.push(element);
+			SERVICES_LIST.push(element);
 		}
 	});
 
 	if (shipment_type === 'ftl_freight') {
 		disableInvoice = !shipment_data?.all_services?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
-				&& (item?.lr_numbers || []).length > 0,
+				&& (item?.lr_numbers || []).length,
 		);
 		errorMsg = 'LR task not completed';
 
 		if (
-			tdata?.list?.length === 0
+			tdata?.list?.length === EMPTY_TRADE_PARTY_LENGTH
 			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
 		) {
 			disableInvoice = true;
@@ -131,7 +130,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					<span className={styles.spankey}>Services :</span>
 					<ToolTipWrapper
 						text={services}
-						maxlength={2}
+						maxlength={SERVICE_WRAPPER_LAST_INDEX}
 						render
 						content={(
 							<>
@@ -139,40 +138,33 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							</>
 						)}
 					>
-						{serviceswrapper(services?.slice(0, 2) || [])}
-						{services.length > 2 ? '...' : ''}
+						{serviceswrapper(services?.slice(
+							SERVICE_WRAPPER_START_INDEX,
+							SERVICE_WRAPPER_LAST_INDEX,
+						) || [])}
+						{services.length > SERVICE_WRAPPER_LAST_INDEX ? '...' : ''}
 					</ToolTipWrapper>
 				</div>
 			</div>
 			<div className={styles.invoices}>
-				<div>
-					Total Invoice Value -
-				</div>
+				<div>Total Invoice Value -</div>
 				<div className={styles.value}>
 					<ToolTipWrapper
 						text={getFormattedAmount(
 							collectionParty.invoice_total,
 							collectionParty.invoice_currency,
 						)}
-						maxlength={25}
+						maxlength={MAX_LEN_FOR_TOOLTIP}
 					/>
 					<span className={styles.paddingleft}>
-						{' '}
-						- (
-						{collectionParty?.collection_parties?.length || 0}
-						)
+						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}
 					</span>
 				</div>
 			</div>
 			<div className={styles.lineitems}>
 				<div>
-					No. Of Line Items -
-					{' '}
-					{collectionParty?.total_line_items}
-					{' '}
-					| Locked -
-					{' '}
-					{ collectionParty?.locked_line_items}
+					{`No. Of Line Items 
+					- ${collectionParty?.total_line_items} | Locked - ${collectionParty?.locked_line_items}`}
 				</div>
 			</div>
 			<div className={styles.mode}>
@@ -201,7 +193,8 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				/>
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
-					{(showUpload || user?.email === AJEET_EMAIL_ID) && !airServiceProviderConfirmation ? (
+					{(showUpload || user?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id)
+					&& !airServiceProviderConfirmation ? (
 						<Button
 							size="md"
 							themeType="secondary"
@@ -210,7 +203,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						>
 							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
 						</Button>
-					) : null}
+						) : null}
 					{disableInvoice ? (
 						<div className="upload-tooltip">{errorMsg}</div>
 					) : null}
@@ -219,16 +212,17 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<div className={styles.totalamount}>
 					Total With TAX
 					<span className={styles.amount}>
-						{getFormattedAmount(collectionParty?.net_total || 0, collectionParty?.net_total_price_currency)}
+						{getFormattedAmount(
+							collectionParty?.net_total || DEFAULT_NET_TOTAL,
+							collectionParty?.net_total_price_currency,
+						)}
 					</span>
 				</div>
 				{open ? (
 					<Modal
 						show={open}
 						size="sm"
-						onClose={() => {
-							setOpen(false);
-						}}
+						onClose={() => { setOpen(false); }}
 					>
 						<Modal.Header title="Upload Scan of Invoice" />
 						<Modal.Body>

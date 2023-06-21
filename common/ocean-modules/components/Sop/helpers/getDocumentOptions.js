@@ -27,10 +27,11 @@ const getDocumentOptions = (data = []) => {
 	});
 
 	Object.keys(tempData).forEach((key) => {
-		const setToArray = [];
-		tempData[key].forEach((i) => setToArray.push(i));
+		const TEMP_ARRAY = [];
 
-		tempData[key] = setToArray.map((i) => ({ label: i, value: i }));
+		tempData[key].forEach((i) => TEMP_ARRAY.push(i));
+
+		tempData[key] = TEMP_ARRAY.map((i) => ({ label: i, value: i }));
 	});
 
 	return tempData;

@@ -7,6 +7,7 @@ import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
+import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
@@ -14,6 +15,7 @@ import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
+import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import ingestion from './config/ingestion';
@@ -23,6 +25,7 @@ import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
+import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
@@ -30,6 +33,11 @@ import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import serviceDiscovery from './config/service-discovery';
+import shipmentAir from './config/shipment-air';
+import shipmentAirCustoms from './config/shipment-air-customs';
+import shipmentAirFreight from './config/shipment-air-freight';
+import shipmentAirFreightLocal from './config/shipment-air-freight-local';
+import shipmentDomesticAirFreight from './config/shipment-domestic-air-freight';
 import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
@@ -65,9 +73,15 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...employeePortal,
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
+	...shipmentAir,
+	...shipmentAirFreight,
+	...shipmentAirFreightLocal,
+	...shipmentAirCustoms,
+	...shipmentDomesticAirFreight,
 	...shipmentRailDomesticFreight,
 	...shipmentHaulageFreight,
 	...bookingDesk,
@@ -82,8 +96,10 @@ const routeConfig = {
 	...airRepository,
 	...documentDesk,
 	...ingestion,
+	...newEmployeeDashboard,
 	...blDoCollectionRelease,
 	...saasTools,
+	...chro,
 	...controlledBooking,
 	...saasSubscription,
 	...so2Surface,
