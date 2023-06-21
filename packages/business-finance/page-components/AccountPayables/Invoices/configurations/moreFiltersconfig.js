@@ -1,7 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { CountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 
-
 const geo = getGeoConstants();
 export const moreFilters = [
 	{
