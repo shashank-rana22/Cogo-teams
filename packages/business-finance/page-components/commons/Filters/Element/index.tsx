@@ -39,6 +39,7 @@ interface ElementProps {
 	name?: string;
 	onChange?: (val: any) => void;
 	options?: Options[];
+	radioOptions?: RadioOptions[];
 	setFilters: (p: object) => void;
 	filters: object;
 	[key: string]:
@@ -46,7 +47,6 @@ interface ElementProps {
 	| undefined
 	| ((val: any) => void)
 	| Options[]
-	| RadioOptions[]
 	| object
 	| CSSProperties;
 }
