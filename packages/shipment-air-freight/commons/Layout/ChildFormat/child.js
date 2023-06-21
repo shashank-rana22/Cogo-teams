@@ -45,7 +45,7 @@ function Child({
 
 	return (
 		<div className={styles.fieldarray} key={field?.id}>
-			{Object.entries(totalFieldsObject).map((key) => (
+			{Object.keys(totalFieldsObject).map((key) => (
 				<div className={styles.row} key={key}>
 					{totalFieldsObject[key].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
