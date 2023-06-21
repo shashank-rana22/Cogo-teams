@@ -133,7 +133,7 @@ function Dashboard() {
 						{ !isEmpty(filters)
 							? KrasAssignedData?.list?.map((item, index) => (
 								<AccordianDisplay
-									key={`${index}`}
+									key={`${JSON.stringify(item)}`}
 									data={item}
 									index={index}
 									loading={LoadingKrasAssigned}

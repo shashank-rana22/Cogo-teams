@@ -11,7 +11,6 @@ const getControls = ({ setSelectedValue }) => ([
 					required: 'name is required',
 				},
 			},
-
 			{
 				name        : 'kra_description',
 				type        : 'text',
@@ -24,7 +23,6 @@ const getControls = ({ setSelectedValue }) => ([
 
 		],
 	},
-
 	{
 		group       : 'mid_controls',
 		subControls : [
@@ -149,16 +147,20 @@ const getControls = ({ setSelectedValue }) => ([
 		subControls : [
 			{
 				name    : 'is_target_entered_manually',
-				type    : 'radioGroup',
+				type    : 'select',
 				label   : 'Is target entered manually',
 				options : [
 					{
-						value : 'yes',
-						label : 'Yes',
+						value : 'manual',
+						label : 'MANUAL',
 					},
 					{
-						value : 'no',
-						label : 'No',
+						value : 'jira',
+						label : 'JIRA',
+					},
+					{
+						value : 'sql',
+						label : 'SQL',
 					},
 				],
 			},
@@ -177,7 +179,6 @@ const getControls = ({ setSelectedValue }) => ([
 					},
 				],
 			},
-
 			{
 				label : 'Anything else?',
 				name  : 'description',

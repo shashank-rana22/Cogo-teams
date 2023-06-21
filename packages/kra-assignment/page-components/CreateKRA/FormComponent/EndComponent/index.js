@@ -23,7 +23,7 @@ function RenderFields({ control, errors, watch }) {
 					const { name, type, label } = subControlItem || {};
 					const DynamicController = getElementController(type);
 
-					if (name === 'is_target_achieved_manually' && watchTargetEnteredManually !== 'yes') {
+					if (name === 'is_target_achieved_manually' && watchTargetEnteredManually !== 'manual') {
 						return null;
 					}
 
