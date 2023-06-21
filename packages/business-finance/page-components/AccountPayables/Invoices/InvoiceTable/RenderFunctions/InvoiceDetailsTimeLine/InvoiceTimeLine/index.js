@@ -4,6 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -46,7 +47,7 @@ function InvoiceTimeLine({ data, loading }) {
 			);
 		}
 
-		if (data?.length === ZERO) {
+		if (isEmpty(data)) {
 			return <div>TimeLine Does Not Exist</div>;
 		}
 
