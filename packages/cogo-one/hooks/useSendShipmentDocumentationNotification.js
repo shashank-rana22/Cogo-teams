@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useDocumentTag = () => {
+const useSendShipmentDocumentationNotification = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_shipment_document_notification',
 		method : 'post',
@@ -24,4 +24,4 @@ const useDocumentTag = () => {
 		loading,
 	};
 };
-export default useDocumentTag;
+export default useSendShipmentDocumentationNotification;

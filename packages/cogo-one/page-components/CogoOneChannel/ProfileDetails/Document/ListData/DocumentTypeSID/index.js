@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
-import useDocumentTag from '../../../../../../hooks/useDocumentTag';
 import useDocumentTypeControls from '../../../../../../hooks/useDocumentTypeControls';
+import useSendShipmentDocumentationNotification from '../../../../../../hooks/useSendShipmentDocumentationNotification';
 
 import styles from './styles.module.css';
 
@@ -29,7 +29,7 @@ function DocumentTypeSID({
 
 	const {
 		postDocumentTag = () => {},
-	} = useDocumentTag();
+	} = useSendShipmentDocumentationNotification();
 
 	const createDocumentTag = () => {
 		const payload = {
