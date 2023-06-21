@@ -1,0 +1,60 @@
+.title{
+    display: flex;
+    justify-content: space-between;
+    color:#4f4f4f;
+}
+.serial_id{
+    font-weight:600;
+}
+.created_at{
+    display: flex;
+    justify-content: end;
+    font-weight: 400;
+    color:#4f4f4f;
+    font-size:12px;
+}
+.detail_name{
+    font-weight:600;
+    font-size:16px;
+    color:#221f20;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+    width:80%;
+    cursor:pointer;
+    padding:8px 0;
+}
+.body_name{
+    width:100%;
+}
+.currency{
+    font-weight:600;
+    font-size:14px;
+}
+.body_section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.text{
+    font-weight: 400;
+    color:#4f4f4f;
+    font-size:12px;
+}
+.negative_profit{
+    color:rgb(255, 50, 50);
+    margin:0 4px;
+    font-weight:600;
+    align-items: center;
+}
+.positive_profit{
+    color:rgb(66 218 40);
+    margin:0 4px;
+    font-weight:600;
+    align-items: center;
+}
+.status{
+    display:flex;
+    justify-content: flex-end;
+    font-weight:500;
+}

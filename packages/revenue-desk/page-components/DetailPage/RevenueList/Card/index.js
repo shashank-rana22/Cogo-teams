@@ -1,41 +1,51 @@
+import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function Card({ item }) {
+	const ZERO = 0;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_section}>
-				<div>
-					<div>
-						SID:
+				<div className={styles.title}>
+					<div className={styles.serial_id}>
+						SID :&nbsp;
 						{item?.serial_id}
 					</div>
-					<div>
-						Created At:
-						{' '}
-						{format(item?.created_at, 'dd MMM YYYY')}
-					</div>
-				</div>
-				{item?.contract_reference_id
-					? (
-						<div>
-							Contract Id:
-							{
+					{item?.contract_reference_id
+						? (
+							<div>
+								Contract Id :&nbsp;
+								{
                         item?.contract_reference_id
                     }
-						</div>
-					)
-					: null}
+							</div>
+						)
+						: null}
+				</div>
+				<div className={styles.created_at}>
+					Created At:
+					{' '}
+					{format(item?.created_at, 'dd MMM YYYY')}
+				</div>
+
 			</div>
 			<div className={styles.body_section}>
-				<div>
-					{item?.shipping_line_id?.short_name}
+				<div className={styles.body_name}>
+
+					<Tooltip content={item?.shipping_line_id?.business_name}>
+
+						<div className={styles.detail_name}>
+							{item?.shipping_line_id?.business_name}
+						</div>
+					</Tooltip>
 				</div>
-				<div>
+				<div className={styles.currency}>
 					{formatAmount({
-						amount   : item?.buy_price || 0,
+						amount   : item?.buy_price || ZERO,
 						currency : item?.buy_price_currency || 'INR',
 						options  : {
 							style                 : 'currency',
@@ -46,14 +56,14 @@ function Card({ item }) {
 				</div>
 			</div>
 			<div className={styles.footer_section}>
-				<div>
+				<div className={styles.text}>
 					Procured By :
 					{' '}
 					{item?.procured_by_id?.name}
 				</div>
-				<div className={item?.profit_or_loss >= 0 ? styles.positive_profit : styles.negative_profit}>
+				<div className={styles.status}>
 					{formatAmount({
-						amount   : item?.profit_or_loss || 0,
+						amount   : item?.profit_or_loss || ZERO,
 						currency : item?.buy_price_currency || 'INR',
 						options  : {
 							style                 : 'currency',
@@ -61,7 +71,12 @@ function Card({ item }) {
 							maximumFractionDigits : 2,
 						},
 					})}
-					{item?.profit_or_loss > 0 ? 'Profit' : 'Loss'}
+					<div className={item?.profit_or_loss >= ZERO ? styles.positive_profit : styles.negative_profit}>
+						{item?.profit_or_loss > ZERO ? 'Profit ' : 'Loss '}
+						{item?.profit_or_loss > ZERO
+							? <IcMArrowDoubleUp width="12px" height="12px" />
+							: <IcMArrowDoubleDown width="12px" height="12px" />}
+					</div>
 				</div>
 			</div>
 		</div>
