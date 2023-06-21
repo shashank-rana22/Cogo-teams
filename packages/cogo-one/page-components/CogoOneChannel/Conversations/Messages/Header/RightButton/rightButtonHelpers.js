@@ -96,11 +96,11 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 		isPartOfGroup,
 	}) => {
 		let accesableButtons = [];
-		if (supportAgentId === userId || isPartOfGroup) {
+		if ((supportAgentId === userId) || isPartOfGroup) {
 			accesableButtons = ['assign_modal'];
 		}
 
-		if (!isGroupFormed) {
+		if (!isGroupFormed && supportAgentId !== userId) {
 			accesableButtons = [...accesableButtons, 'request_for_assign'];
 		}
 
