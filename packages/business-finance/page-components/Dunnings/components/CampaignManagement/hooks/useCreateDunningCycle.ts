@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const useCreateDunningCycle = ({
 	formData,
@@ -63,7 +64,7 @@ const useCreateDunningCycle = ({
 						organizationStakeholderIds : creditController || undefined,
 						totalDueOutstanding,
 						dueOutstandingCurrency     : dueOutstandingCurrency || undefined,
-						serviceTypes               : serviceType?.length > 0 ? serviceType : undefined,
+						serviceTypes               : !isEmpty(serviceType) ? serviceType : undefined,
 					},
 					scheduleRule: {
 						scheduleTime              : `${scheduledHour}:${scheduledMinute}`,

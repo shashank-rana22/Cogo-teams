@@ -1,4 +1,5 @@
 import { Button, Modal, Toast } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useCreateDunningCycle from '../hooks/useCreateDunningCycle';
@@ -89,7 +90,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 			// putting validations
 			const requiredFields = [cycleName, cycleType,
 				cogoEntityId, totalDueOutstanding];
-			if (requiredFields.some((field) => !field || (Array.isArray(field) && field.length === 0))) {
+			if (requiredFields.some((field) => !field || (Array.isArray(field) && isEmpty(field)))) {
 				Toast.error('Please fill all the details to proceed');
 				return;
 			}
@@ -121,7 +122,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 
 				<Modal.Footer>
 					<div className={styles.footer}>
-						{step === EXCLUDE_STEP && uncheckedRows?.length > 0 && (
+						{step === EXCLUDE_STEP && !isEmpty(uncheckedRows) && (
 							<div>
 								<div style={{ marginRight: '8px' }}>
 									{uncheckedRows?.length}

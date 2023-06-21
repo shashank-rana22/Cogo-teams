@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
 interface Props {
@@ -17,7 +19,7 @@ function Details({
 
 	return (
 		<div className={styles.section}>
-			{bodyData?.length > 0 ?	(
+			{!isEmpty(bodyData) ?	(
 				<div>
 					{bodyData}
 				</div>

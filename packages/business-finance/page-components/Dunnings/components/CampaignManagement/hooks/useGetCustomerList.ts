@@ -1,5 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
 interface FormData {
@@ -50,10 +51,10 @@ const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
 		try {
 			await trigger({
 				params: {
-					query                      : query?.length > 0 ? query : undefined,
+					query                      : !isEmpty(query) ? query : undefined,
 					cogoEntityId,
 					serviceTypes               : serviceType,
-					organizationStakeholderIds : creditController?.length > 0 ? creditController : undefined,
+					organizationStakeholderIds : !isEmpty(creditController) ? creditController : undefined,
 					ageingBucket,
 					totalDueOutstanding,
 					dueOutstandingCurrency,

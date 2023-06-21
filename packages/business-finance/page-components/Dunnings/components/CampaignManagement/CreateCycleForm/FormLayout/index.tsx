@@ -1,5 +1,6 @@
 import { Chips, Datepicker, Select, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import Filter from '../../../../../commons/Filters';
@@ -118,7 +119,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 					? String(dayOfMonth) : undefined,
 				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
 				dueOutstandingCurrency : dueOutstandingCurrency || undefined,
-				isAllCreditControllers : !(organizationStakeholderIds?.length > 0),
+				isAllCreditControllers : isEmpty(organizationStakeholderIds),
 				creditController       : organizationStakeholderIds || undefined,
 				serviceType            : serviceTypes || undefined,
 				cycleName              : name || undefined,
