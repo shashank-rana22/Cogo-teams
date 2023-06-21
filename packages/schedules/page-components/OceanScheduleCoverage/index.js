@@ -29,11 +29,13 @@ function OceanScheduleCoverage() {
         setIsPortToPort,
         setShow,
     });
+
     return (
         <>
             {!isPortToPort && (
                 <>
                     <Filter filters={filters} setFilters={setFilters} />
+                    <div style={{ padding: "8px" }} />
                     {!loading ? (
                         columns &&
                         data && (
@@ -51,7 +53,7 @@ function OceanScheduleCoverage() {
                             type="table"
                             currentPage={currentPage}
                             totalItems={totalCount}
-                            pageSize={10}
+                            pageSize={15}
                             onPageChange={onPageChange}
                         />
                     </div>
@@ -66,6 +68,7 @@ function OceanScheduleCoverage() {
                     columnsForPattern={columnsForPattern}
                     show={show}
                     setShow={setShow}
+                    portPairData={data}
                 />
             )}
         </>

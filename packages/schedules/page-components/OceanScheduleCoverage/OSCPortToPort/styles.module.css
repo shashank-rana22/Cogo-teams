@@ -1,3 +1,14 @@
+.top_bar {
+    display: flex;
+}
+
+.port_pair {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    font-weight: 600;
+}
+
 .table {
     background-color: rgb(255 244 244);
 }
@@ -9,8 +20,4 @@
 .pagination {
     display: flex;
     justify-content: right;
-}
-
-.td {
-    padding: 8px 0;
 }

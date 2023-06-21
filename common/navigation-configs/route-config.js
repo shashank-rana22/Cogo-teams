@@ -39,7 +39,6 @@ import shipmentAirFreightLocal from './config/shipment-air-freight-local';
 import shipmentDomesticAirFreight from './config/shipment-domestic-air-freight';
 import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclCustom from './config/shipment-fcl-custom';
-import schedules from './config/schedules';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentFclFreightLocal from './config/shipment-fcl-freight-local';
 import shipmentFtlFreight from './config/shipment-ftl-freight';
@@ -111,6 +110,7 @@ const routeConfig = {
 	...ticketManagement,
 	...rfqDashboard,
 	...schedules,
+	...rfqDashboard,
 };
 
 export default routeConfig;

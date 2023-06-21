@@ -9,25 +9,29 @@ const useGetSailingSchedulePortPairCoverage = ({
     const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
     const [{ data, loading }, trigger] = useRequest(
         {
-            method: "get",
+            method: "GET",
             url: "get_sailing_schedule_port_pair_coverages",
             scope,
         },
         { manual: true }
     );
 
-    const getSailingSchedulePortPairCoverageData = () =>
-        trigger({
-            params: {
-                origin_port_id: originPort,
-                destination_port_id: destinationPort,
-                page: 1,
-            },
-        });
+    const getSailingSchedulePortPairCoverageData = async () => {
+        try {
+            await trigger({
+                params: {
+                    origin_port_id: originPort,
+                    destination_port_id: destinationPort,
+                    page: 1,
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         getSailingSchedulePortPairCoverageData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return {
