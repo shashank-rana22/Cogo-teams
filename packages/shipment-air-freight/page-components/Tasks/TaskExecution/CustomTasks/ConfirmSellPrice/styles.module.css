@@ -1,0 +1,16 @@
+.container {
+	padding: 4px;
+	margin: 4px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: right;
+	margin-top: 8px;
+}
+
+.note_container {
+	padding: 4px;
+	font-weight: 500;
+	color: #f55;
+}

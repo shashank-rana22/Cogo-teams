@@ -35,6 +35,7 @@ function CogoOne() {
 	const { status = '' } = agentStatus || {};
 
 	const [activeTab, setActiveTab] = useState('message');
+	const [activeSubTab, setActiveSubTab] = useState('all');
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
@@ -59,14 +60,15 @@ function CogoOne() {
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
-	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
+	const { userRoleIds, userId, token, emailAddress, authRoleData } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
 		token        : general.firestoreToken,
 		emailAddress : profile?.user?.email,
+		authRoleData : profile?.auth_role_data,
 	}));
 
-	const viewType = getViewType(userRoleIds);
+	const viewType = getViewType({ userRoleIds, userId, authRoleData });
 
 	const isomniChannelAdmin = viewType === 'admin_view';
 
@@ -127,6 +129,7 @@ function CogoOne() {
 		searchValue,
 		viewType,
 		setShowFeedback,
+		activeSubTab,
 	});
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
@@ -145,7 +148,7 @@ function CogoOne() {
 		if (isomniChannelAdmin) {
 			setAppliedFilters({});
 		}
-	}, [activeTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
+	}, [activeTab, activeSubTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
@@ -175,6 +178,8 @@ function CogoOne() {
 					filterVisible={filterVisible}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
+					activeSubTab={activeSubTab}
+					setActiveSubTab={setActiveSubTab}
 					setToggleStatus={setToggleStatus}
 					toggleStatus={toggleStatus}
 					chatsData={chatsData}

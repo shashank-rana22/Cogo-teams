@@ -1,0 +1,13 @@
+.container {
+	padding: 16px;
+	color: #393f70;
+}
+
+.anchor {
+	margin-left: 4px;
+	color: #5936f0;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

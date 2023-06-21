@@ -8,7 +8,7 @@ function useGetPaymentTable(organizationId: string, entityCode?: string) {
 		page       : 1,
 		pageLimit  : 10,
 		orgId      : organizationId,
-		statusList : [],
+		statusList : ['UNUTILIZED', 'PARTIAL_UTILIZED'],
 		query      : '',
 	});
 
