@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
 import useDocumentTypeControls from '../../../../../../hooks/useDocumentTypeControls';
@@ -55,7 +55,7 @@ function DocumentTypeSID({
 						return (
 							<div className={styles.styled_element} key={name}>
 								<div>{label}</div>
-								<SelectController control={control} {...eachControl} />
+								<AsyncSelectController control={control} {...eachControl} />
 								<div className={styles.error_text}>
 									{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
 								</div>

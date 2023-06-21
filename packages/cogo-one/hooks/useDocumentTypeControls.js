@@ -1,10 +1,23 @@
-import {
-	asyncListShipmentPendingTasks,
-	asyncListShipmentServices,
-	asyncListShipments,
-	useGetAsyncOptions,
-} from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+
+const getParamsOptionsMapping = ({ orgId }) => ({
+	service_provider: {
+		asyncKey : 'list_shipment_services',
+		params   : {
+			filters: {
+				service_provider_id: orgId,
+			},
+		},
+	},
+	importer_exporter: {
+		asyncKey : 'list_shipments',
+		params   : {
+			filters: {
+				importer_exporter_id: orgId,
+			},
+		},
+	},
+});
 
 const useDocumentTypeControls = ({
 	orgId = '',
@@ -12,67 +25,41 @@ const useDocumentTypeControls = ({
 	watchListShipment = '',
 	resetField = () => {},
 }) => {
-	const listShipments = useGetAsyncOptions(
-		account_type === 'service_provider' ? {
-			...asyncListShipmentServices(),
-			params: {
-				filters: {
-					service_provider_id: orgId,
-				},
-			},
-		} : {
-			...asyncListShipments(),
-			params: {
-				filters: {
-					importer_exporter_id: orgId,
-				},
-			},
-		},
-	);
-
-	const listShipmentsPendingTasks = useGetAsyncOptions({
-		...asyncListShipmentPendingTasks(),
-		params: {
-			filters: {
-				organization_id : orgId,
-				shipment_id     : watchListShipment,
-				status          : ['pending', 'rejected', 'deleted'],
-			},
-		},
-	});
-
-	const options = listShipmentsPendingTasks?.options;
-
-	const filteredOptions = watchListShipment ? options.filter((itm) => itm?.document_type) : [];
+	const paramsMapping = getParamsOptionsMapping({ orgId });
 
 	return [
 		{
 			name        : 'list_shipments',
 			label       : 'Shipment Serial ID',
-			controlType : 'select',
 			placeholder : 'Select SID',
 			rules       : {
 				required: '*This is required',
 			},
-
-			renderLabel: (item) => (account_type === 'service_provider'
+			initialCall : true,
+			onChange    : () => resetField('list_shipment_pending_tasks'),
+			renderLabel : (item) => (account_type === 'service_provider'
 				? `${item?.shipment_serial_id}, ${startCase(item?.service_type)}` : `${item?.serial_id}`),
-
-			onChange: () => { resetField('list_shipment_pending_tasks'); },
-			...listShipments,
+			...(paramsMapping?.[account_type]),
 		},
 		{
 			name        : 'list_shipment_pending_tasks',
 			label       : 'Pending Tasks',
-			controlType : 'select',
 			placeholder : 'Select Pending Tasks',
 			value       : '',
 			rules       : {
 				required: '*This is required',
 			},
-			renderLabel : (item) => `${startCase(item?.document_type)}`,
-			...(watchListShipment ? listShipmentsPendingTasks : []),
-			options     : filteredOptions,
+			initialCall : true,
+			params      : {
+				filters: {
+					task_type       : 'upload_document',
+					organization_id : orgId,
+					shipment_id     : watchListShipment,
+					status          : ['pending', 'rejected', 'deleted'],
+				},
+			},
+			asyncKey    : watchListShipment ? 'list_shipment_pending_tasks' : null,
+			renderLabel : (item) => startCase(item?.document_type),
 		},
 	];
 };
