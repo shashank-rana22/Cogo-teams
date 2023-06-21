@@ -55,15 +55,15 @@ function CustomTable({
 
 	return (
 		<div className={styles.table}>
-					<Header
-						setFilters={setFilters}
-						filters={filters}
-						isAllChecked={isAllChecked}
-						onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
-						showHeaderCheckbox={showHeaderCheckbox}
-						loading={loading}
-					/>
-			
+			<Header
+				setFilters={setFilters}
+				filters={filters}
+				isAllChecked={isAllChecked}
+				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
+				showHeaderCheckbox={showHeaderCheckbox}
+				loading={loading}
+			/>
+
 			{loading ? <Loader /> : (
 				<ListData
 					list={list}
