@@ -13,6 +13,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = 
 		method : 'GET',
 		url    : '/list_revenue_desk_available_rates',
 	}, { manual: true });
+
 	const ListRevenueAvailableRates = async () => {
 		try {
 			await trigger({
@@ -42,6 +43,9 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = 
 						stacking_type           : singleServiceData?.packages?.[0]?.handling_type || undefined,
 						shipment_type           : singleServiceData?.packages?.[0]?.packing_type || undefined,
 						cargo_handling_type     : singleServiceData?.cargo_handling_type || undefined,
+
+						destination_main_port_id : shipmentData?.destination_main_port_id || undefined,
+						origin_main_port_id      : shipmentData?.origin_main_port_id || undefined,
 
 					},
 				},
