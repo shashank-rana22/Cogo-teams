@@ -10,6 +10,8 @@ import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
 
+import getPropsByType from './getPropsByType';
+
 const typeComponentMapping = {
 	BANK_DETAIL_APPROVAL                   : BankDetails,
 	TDS_APPROVAL                           : TDSModal,
@@ -25,20 +27,8 @@ const typeComponentMapping = {
 };
 
 function AccessorComponent({ row, getIncidentData }) {
-	const { type = '', id = '', data = '', remark = '', status = '' } = row || {};
-	const {
-		tdsRequest,
-		bankRequest,
-		organization,
-		settlementRequest,
-		journalVoucherRequest,
-		interCompanyJournalVoucherRequest,
-		concorPdaApprovalRequest,
-		sezRequest,
-		paymentConfirmationRequest,
-		advanceSecurityDeposit,
-		advanceSecurityDepositRefund,
-	} = data || {};
+	const { type = '', id = '', data, remark = '', status = '' } = row || {};
+	const { organization } = data || {};
 
 	const Component = typeComponentMapping[type] || {};
 
@@ -48,16 +38,7 @@ function AccessorComponent({ row, getIncidentData }) {
 
 	return (
 		<Component
-			tdsData={tdsRequest}
-			bankData={bankRequest}
-			settlementData={settlementRequest}
-			concorData={concorPdaApprovalRequest}
-			journalVoucherRequest={journalVoucherRequest}
-			interCompanyJournalVoucherRequest={interCompanyJournalVoucherRequest}
-			sezRequest={sezRequest}
-			paymentConfirmationRequest={paymentConfirmationRequest}
-			advanceSecurityDeposit={advanceSecurityDeposit}
-			advanceSecurityDepositRefund={advanceSecurityDepositRefund}
+			{...getPropsByType(type, data)}
 			id={id}
 			organization={organization}
 			refetch={getIncidentData}
