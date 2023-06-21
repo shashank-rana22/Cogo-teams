@@ -52,6 +52,7 @@ import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import welcome from './config/welcome';
+import schedules from './config/schedules'
 
 const routeConfig = {
 	...rolesAndPermissions,
