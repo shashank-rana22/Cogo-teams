@@ -82,10 +82,10 @@ const useHistorySettlemet = () => {
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 
 	useEffect(() => {
-		if(!isEmpty(orgId)){
-		refetch()
+		if (!isEmpty(orgId)) {
+			refetch();
 		}
-	}, [refetch]);
+	}, [orgId, refetch]);
 
 	return {
 		filters,

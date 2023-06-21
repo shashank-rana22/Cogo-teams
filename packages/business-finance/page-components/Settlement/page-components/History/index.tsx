@@ -146,21 +146,23 @@ function History() {
 					/>
 				</div>
 			</div>
-			{filters?.orgId &&	<CustomTable
-				apiData={apiData}
-				filters={filters}
-				setFilters={setFilters}
-				loading={loading}
-				onPageChange={onPageChange}
-				isAllChecked={isAllChecked}
-				showHeaderCheckbox={showHeaderCheckbox}
-				getTableBodyCheckbox={getTableBodyCheckbox}
-				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
-				checkedRows={checkedRows}
-				setCheckedRows={setCheckedRows}
-				refetch={refetch}
-			/>}
-			{!filters?.orgId && <SelectState/>}
+			{filters?.orgId &&	(
+				<CustomTable
+					apiData={apiData}
+					filters={filters}
+					setFilters={setFilters}
+					loading={loading}
+					onPageChange={onPageChange}
+					isAllChecked={isAllChecked}
+					showHeaderCheckbox={showHeaderCheckbox}
+					getTableBodyCheckbox={getTableBodyCheckbox}
+					onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
+					checkedRows={checkedRows}
+					setCheckedRows={setCheckedRows}
+					refetch={refetch}
+				/>
+			)}
+			{!filters?.orgId && <SelectState />}
 			{!loading && data?.list?.length <= 0 && <EmptyStateDocs />}
 		</div>
 	);
