@@ -135,7 +135,9 @@ function Card({
 						{
 							data?.rowData?.agent ? (
 								<div>
-									<Pill size="md" color="#F7FAEF">{data?.rowData?.agent}</Pill>
+									Supply Agent :
+									{' '}
+									{data?.rowData?.agent}
 								</div>
 							) : null
 						}

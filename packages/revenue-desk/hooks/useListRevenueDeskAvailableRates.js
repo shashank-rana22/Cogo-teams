@@ -44,6 +44,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = 
 						cargo_handling_type     : singleServiceData?.cargo_handling_type || undefined,
 
 					},
+					preferred_currency: 'USD',
 				},
 			});
 		} catch (err) {

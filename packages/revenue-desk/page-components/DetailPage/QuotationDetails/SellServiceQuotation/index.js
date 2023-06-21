@@ -136,7 +136,8 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 						</div>
 					)
 						: <Placeholder height="25px" width="150px" />}
-					{!loading ? (
+
+					{itemData?.shipment_type === 'fcl_freight' ? (
 						<div style={{ marginLeft: '5px', display: 'flex' }}>
 							{formatAmount({
 								amount   : Number(profitAmount) / Number(itemData?.containers_count),
@@ -161,7 +162,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 							/Contr.
 						</div>
 					)
-						: <Placeholder height="25px" width="150px" />}
+						: null}
 				</div>
 
 			</div>

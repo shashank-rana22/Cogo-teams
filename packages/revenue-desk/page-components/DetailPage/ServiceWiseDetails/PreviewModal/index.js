@@ -2,6 +2,8 @@ import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useListShipmentCurrencyConversions from '../../../../hooks/useListShipmentCurrencyConversions';
+
 import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
@@ -9,6 +11,7 @@ function PreviewModal({
 	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger, priceData,
 }) {
 	const newFilteredGroupedShowServicesData = {};
+	const { data, loading } = useListShipmentCurrencyConversions({ shipmentData });
 
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
 		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(
@@ -24,16 +27,26 @@ function PreviewModal({
 		}, {});
 
 	const consBuyPrice = Object.values(supplierPayload)
-		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_buy_price || 0 : []))
+		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_price_in_preferred_currency || 0 : []))
 		.reduce((sum, price) => sum + price, 0);
-	const consSellPrice = Object.values(filteredPriceData)
-		.map((price) => Number(price.replace(/[^\d.]/g, '')))
-		.reduce((sum, price) => sum + price, 0);
+	const exchangesRates = data?.list?.[0]?.updated_currency_conversion_rate?.currencies
+	|| data?.list?.[0]?.currency_conversion_rate?.currencies;
+	const baseCurrency = data?.list?.[0]?.updated_currency_conversion_rate?.base_currency
+	|| data?.list?.[0]?.currency_conversion_rate?.base_currency;
+
+	const conSellPrice = Object.values(filteredPriceData)
+		.reduce((sum, value) => {
+			const currency = value.match(/[A-Z]+/)[0];
+			const amount = value.replace(/[^\d]/g, '');
+			const exchangeRate = exchangesRates?.[currency] || 1;
+			return sum + amount * exchangeRate;
+		}, 0);
+
+
 	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(
 		(serviceType) => newFilteredGroupedShowServicesData[serviceType].length > 0,
 	);
 	const [previewActiveTab, setPreviewActiveTab] = useState(previewTabsKey[0]);
-
 	let hasNegativeProfitability = false;
 	Object.values(supplierPayload).forEach((rates) => {
 		rates.forEach((rate) => {

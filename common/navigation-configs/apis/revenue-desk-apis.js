@@ -241,6 +241,11 @@ const apis = [
 		service_name : 'unified_dashboard',
 		feature      : 'revenue_desk',
 	},
+	{
+		api          : 'list_shipment_currency_conversions',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

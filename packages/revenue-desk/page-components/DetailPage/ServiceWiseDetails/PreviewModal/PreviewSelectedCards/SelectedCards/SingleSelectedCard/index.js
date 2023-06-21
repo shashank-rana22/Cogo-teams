@@ -48,6 +48,22 @@ function SingleSelectedCard({ data, shipmentType, priority }) {
 							</div>
 						</div>
 						<div className={styles.label}>
+							Profit : &nbsp;
+							<div className={Number(data?.rowData?.profit) > 0
+								? styles.positive_profit : styles.negative_profit}
+							>
+								{formatAmount({
+									amount   : data?.rowData?.profit,
+									currency : data?.rowData?.total_buy_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+							</div>
+						</div>
+						<div className={styles.label}>
 							Total Buy Price :
 							<div className={styles.total_price_text}>
 								{formatAmount({

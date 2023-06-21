@@ -23,6 +23,8 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
+		rowData.total_price_in_preferred_currency = element?.total_price_in_preferred_currency;
+		rowData.preferred_currency = element?.preferred_currency;
 		rowData.profit = element?.profit || 0;
 		rowData.schedule_type = element?.schedule_type;
 		rowData.agent = element?.procured_by?.name;
