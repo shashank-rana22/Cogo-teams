@@ -3,7 +3,6 @@
 	align-items: center;
 	min-height: 40px;
 	background-color: #fff;
-	border-bottom: 1px solid #f8f2e7;
 }
 
 @media screen and (max-width: 768px) {
@@ -39,6 +38,7 @@
 	padding: 8px;
 	word-wrap: wrap;
 	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
 }
 
 .tablelabel {
@@ -63,4 +63,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.info_tag {
+	display: flex;
+	justify-content: right;
+	margin-right: 10%;
 }
