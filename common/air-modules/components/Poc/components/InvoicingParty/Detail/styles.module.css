@@ -1,0 +1,25 @@
+.container {
+	margin-top: 8px;
+}
+
+.detail_card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 10px 18px;
+	margin-bottom: 8px;
+	border: 1px solid #f6f5fe;
+	border-radius: 4px;
+}
+
+.label_value_container {
+	display: flex;
+}
+
+.label {
+	color: #828282;
+}
+
+.value {
+	margin-left: 4px;
+}
