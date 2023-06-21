@@ -1,4 +1,4 @@
-import { differenceInDays, upperCase } from '@cogoport/utils';
+import { differenceInDays } from '@cogoport/utils';
 import React from 'react';
 
 import getValue from '../../../../../../utils/getValue';
@@ -16,7 +16,7 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 	}
 	const service_type = getValue(item, field);
 
-	const { icon: Icon, color } = SERVICE_TYPE_ICON_MAPPING[service_type];
+	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING[service_type];
 
 	return (
 		<div className={styles.container}>
@@ -25,7 +25,7 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 			</div>
 
 			<div className={styles.label} style={{ color }}>
-				{upperCase(service_type.split('_')[0])}
+				{label}
 			</div>
 		</div>
 	);
