@@ -1,4 +1,5 @@
 import { Placeholder, Toggle, Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -62,7 +63,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 		{
 			amount: list?.[0],
 		},
-	];
+	] as any;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -114,7 +115,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 							item?.amount
 								? (
-									<div className={styles.month_container}>
+									<div className={styles.month_container} key={item?.amount}>
 										{loading ? (
 											<Placeholder
 												className={styles.loader}
@@ -127,7 +128,15 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 														placement="top"
 														interactive
 													>
-														{item?.amount?.dpo?.toFixed(2)}
+														{formatAmount({
+															amount   : item?.amount?.dpo?.toFixed(2),
+															currency : item?.currency,
+															options  : {
+																currencyDisplay : 'code',
+																style           : 'currency',
+															},
+														})}
+														{/* {item?.amount?.dpo?.toFixed(2)} */}
 													</Tooltip>
 
 												</div>
@@ -143,7 +152,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 												</div>
 											)}
 									</div>
-								) : <div className={styles.dash}> -- </div>
+								) : <div key={item?.amount} className={styles.dash}> -- </div>
 
 						))}
 
@@ -152,7 +161,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 					<div className={styles.sub_container}>
 
 						{QUARTER_MAPPING.map((item) => (
-							<div className={styles.month_box}>
+							<div className={styles.month_box} key={item?.amount}>
 								{loading ? (
 									<Placeholder
 										className={styles.loader}

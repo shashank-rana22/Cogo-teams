@@ -1,16 +1,19 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import useGetShipmentCreditNotes from '../../../hooks/useGetShipmentCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
+import useListShipmentCreditNotes from '../../../hooks/useListShipmentCreditNotes';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
-// import CreditNote from '../CreditNote';
+import CreditNote from '../CreditNote';
 import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
+
+const INCREMENTER_BY_ONE = 1;
 
 function Invoices({
 	invoiceData = {},
@@ -20,7 +23,7 @@ function Invoices({
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -32,7 +35,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += 1;
+			count += INCREMENTER_BY_ONE;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
@@ -40,12 +43,13 @@ function Invoices({
 		disableAction = true;
 	}
 
-	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id <= 120347
+	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id
+	<= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 		&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { cnRefetch } = useGetShipmentCreditNotes({});
+	const { cnRefetch, list, loading:cNLoading } = useListShipmentCreditNotes({});
 
 	return (
 		<main className={styles.container}>
@@ -70,14 +74,14 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-						org_outstanding={outstanding_by_reg_num[item]}
+						org_outstanding={OUTSTANDING_BY_REG_NUM[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>
 				))}
 			</section>
 
-			{/* {list?.length
+			{list?.length
 				? (
 					<CreditNote
 						cnRefetch={cnRefetch}
@@ -86,7 +90,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 					/>
-				) : null} */}
+				) : null}
 		</main>
 	);
 }
