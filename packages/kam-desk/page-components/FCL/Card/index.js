@@ -11,6 +11,7 @@ import {
 	Header,
 	SingleLocation,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import KamDeskContext from '../../../context/KamDeskContext';
 import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
@@ -37,8 +38,9 @@ function Card({ data = {} }) {
 
 	const handleCardClick = () => {
 		const newUrl = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && STEPPER_TAB.includes(stepperTab)
-			? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/${data?.id}`
-			: `${window.location.origin}/${partner_id}/shipments/${data?.id}`;
+			? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/${data?.id}
+			?${CONSTANTS.url_navigation_params}`
+			: `${window.location.origin}/${partner_id}/shipments/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
