@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
+	const MIN_LENGTH = 0;
+
 	const [idArray, setIdArray] = useState([]);
 
 	const [uploadDocument, setUploadDocument] = useState('');
@@ -27,7 +29,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		if (idArray.length === 0) {
+		if (idArray.length === MIN_LENGTH) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
 			handleSubmit((values) => {

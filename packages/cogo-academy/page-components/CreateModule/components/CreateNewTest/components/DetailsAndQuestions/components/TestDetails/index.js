@@ -7,6 +7,7 @@ import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 import useCreateNewTest from '../../../../../../hooks/useCreateNewTest';
+import useCreateTest from '../../../../../../hooks/useCreateTest';
 import useGetTestSheet from '../../../../../../hooks/useGetTestSheet';
 import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 
@@ -19,21 +20,27 @@ const BUTTON_TEXT_MAPPING = {
 };
 
 const onNavigate = ({ push }) => {
-	const href = '/learning?activeTab=test_module';
-	push(href, href);
+	const HREF = '/learning?activeTab=test_module';
+	push(HREF, HREF);
 };
 
 function CreateNewTest({
 	control, errors, data,
 	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal,
 }) {
+	const MIN_LENGTH = 0;
+
 	const router = useRouter();
+
+	const { query : { mode } } = router;
 
 	const { push } = router;
 
-	const test_sheet_id = router.query?.test_sheet_id;
-
 	const { loading, createNewTest } = useCreateNewTest();
+
+	const { loading: updateTestLoading, createTest } = useCreateTest({});
+
+	const test_sheet_id = data?.test_sheet?.id;
 
 	const { data: test_sheet_data, getTestSheet } = useGetTestSheet();
 
@@ -60,7 +67,7 @@ function CreateNewTest({
 	}, [cogoEntityWatch, data, setValue]);
 
 	const controls = useMemo(
-		() => getControls([...audienceOptions] || [], (select_user_group.length === 0), !isEmpty(data)),
+		() => getControls([...audienceOptions] || [], (select_user_group.length === MIN_LENGTH), !isEmpty(data)),
 		[select_user_group.length, audienceOptions, data],
 	);
 
@@ -116,15 +123,19 @@ function CreateNewTest({
 							{
 								name === 'select_users' && 	(
 									<div className={styles.save_btn}>
-										{isEmpty(data) && radioGroupVal && (
+										{radioGroupVal && (
 											<Button
 												size="sm"
 												themeType="primary"
 												className={styles.btn}
-												loading={loading || getTestLoading}
+												loading={loading || getTestLoading || updateTestLoading}
 												onClick={
 										handleSubmit((values) => {
-											createNewTest({ data: values });
+											if (mode === 'edit') {
+												createTest({ values });
+											} else {
+												createNewTest({ data: values });
+											}
 										})
 									}
 											>
