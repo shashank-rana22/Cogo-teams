@@ -89,7 +89,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					},
 				});
 			} catch (err) {
-				// console.log(err);
+				console.log(err);
 			}
 		})();
 	}, [activeTab, filter, page, query, relevantToMe, trigger, userData.user.id]);
