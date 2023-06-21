@@ -1,5 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 
 import RenderTruckShipments from './renderTruckShipments';
 import styles from './styles.module.css';
@@ -114,7 +114,7 @@ const renderShipment = (itemData, field) => {
 
 				{itemData?.inco_term ? (
 					<Pill size="md" color="#FDEBE9">
-						{`Inco: ${startCase(itemData.inco_term)}`}
+						{`Inco: ${upperCase(itemData.inco_term)}`}
 					</Pill>
 				) : null}
 

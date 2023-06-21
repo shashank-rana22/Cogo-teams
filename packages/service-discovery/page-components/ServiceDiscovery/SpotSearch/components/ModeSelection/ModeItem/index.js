@@ -1,14 +1,20 @@
-import { Pill, Toast } from '@cogoport/components';
-import React from 'react';
+import { Pill } from '@cogoport/components';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedService, setLocation }) {
+	const [bouncing, setBouncing] = useState(false);
+
 	const { label, value, icon, is_available } = data;
 
 	const handleClick = () => {
 		if (!is_available) {
-			Toast.success('COMING SOON');
+			setBouncing(true);
+
+			setTimeout(() => {
+				setBouncing(false);
+			}, 1500);
 			return;
 		}
 		if (selectedMode.mode_value === value) setSelectedMode({});
@@ -49,7 +55,11 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 			</div>
 
 			{!is_available ? (
-				<div className={styles.pill}><Pill size="sm" color="yellow">Coming Soon</Pill></div>
+				<div
+					className={`${styles.pill} ${bouncing ? styles.bounce : {}}`}
+				>
+					<Pill size="sm" color="yellow">Coming Soon</Pill>
+				</div>
 			) : null}
 		</div>
 	);

@@ -69,7 +69,7 @@ function FieldPair({ item = {}, field = {} }) {
 			onClickOutside={() => setShow(false)}
 			render={renderBody()}
 		>
-			<div role="presentation" onClick={handleClick}>
+			<div role="presentation" onClick={handleClick} style={{ cursor: 'pointer' }}>
 				{getValue(item, field?.lowerKey)}
 				{' '}
 				{SUFFIX[field?.lowerKey?.key]}

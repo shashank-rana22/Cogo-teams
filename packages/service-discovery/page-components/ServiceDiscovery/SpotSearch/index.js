@@ -45,24 +45,25 @@ function SpotSearch() {
 			</div>
 
 			{!isEmpty(selectedMode) ? (
-				<div className={styles.locations}>
-					<Routes
-						mode={selectedMode}
-						location={location}
-						setLocation={setLocation}
-						organization={organization}
-						handleSubmit={handleSubmit}
-						errors={errors}
-						watch={watch}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-					/>
-				</div>
+				<>
+					<div className={styles.locations}>
+						<Routes
+							mode={selectedMode}
+							location={location}
+							setLocation={setLocation}
+							organization={organization}
+							handleSubmit={handleSubmit}
+							errors={errors}
+							watch={watch}
+							createSearch={createSearch}
+							createSearchLoading={loading}
+						/>
+					</div>
+					<div className={styles.sales_dashboard}>
+						<SalesDashboard importer_exporter_id={importer_exporter_id} />
+					</div>
+				</>
 			) : null}
-
-			<div className={styles.sales_dashboard}>
-				<SalesDashboard importer_exporter_id={importer_exporter_id} />
-			</div>
 
 			<div className={styles.other_services}>
 				<OtherServices
