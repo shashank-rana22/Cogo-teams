@@ -66,7 +66,14 @@ function PreviewModal({
 		<>
 			{' '}
 			<Modal size="xl" show={modalStep === 1} onClose={() => setModalStep(0)} placement="center">
-				<Modal.Header title="PREVIEW" />
+				<Modal.Header title={`PREVIEW CONS BUY PRICE:-
+					${consBuyPrice}
+					CONS SELL PRICE:-
+					${conSellPrice}
+
+					PROFIT:-
+					${conSellPrice - consBuyPrice}`}
+				/>
 				<Modal.Body>
 					<Tabs
 						activeTab={previewActiveTab}
