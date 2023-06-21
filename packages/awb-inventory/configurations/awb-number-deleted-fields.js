@@ -27,12 +27,12 @@ export const AwbNumberDeletedFields = {
 		{
 			key   : 'awb_number',
 			label : 'AWB Number',
-			span  : 1,
+			span  : 1.2,
 		},
 		{
 			key   : 'procured_by',
 			label : 'Procured Agent',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleAgent',
 		},
 		{

@@ -106,7 +106,7 @@ function AwbNumberDeleted({
 							setShowConfirm(true);
 						}}
 					>
-						<IcMProvision fill="#8B8B8B" />
+						<IcMProvision height={16} width={16} fill="#8B8B8B" />
 					</Button>
 				</Tooltip>
 			</div>

@@ -80,12 +80,13 @@ const awbControls = ({
 		label       : 'Service Provider',
 		span        : 6,
 		placeholder : 'Service Provider',
-		onChange    : (val) => setServiceProviderData(val),
+		onChange    : (val, obj) => setServiceProviderData(obj),
 		params      : {
 			filters: {
 				account_type : 'service_provider',
 				status       : 'active',
 				kyc_status   : 'verified',
+				service_type : 'air_freight',
 			},
 		},
 		rules: {
@@ -102,7 +103,7 @@ const awbControls = ({
 		span   : 6,
 		params : {
 			filters: {
-				partner_id: serviceProviderData,
+				partner_id: serviceProviderData?.partner_id,
 			},
 		},
 		rules: {

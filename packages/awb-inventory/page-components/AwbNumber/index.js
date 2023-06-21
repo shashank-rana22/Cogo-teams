@@ -103,7 +103,7 @@ function AwbNumber({
 						setShowEdit(true);
 					}}
 				>
-					<IcMEdit fill="#8B8B8B" />
+					<IcMEdit height={16} width={16} fill="#8B8B8B" />
 				</Button>
 				<Button
 					themeType="linkUi"
@@ -112,7 +112,7 @@ function AwbNumber({
 						setShowConfirm(true);
 					}}
 				>
-					<IcMDelete fill="#8B8B8B" />
+					<IcMDelete height={16} width={16} fill="#8B8B8B" />
 				</Button>
 			</div>
 		),

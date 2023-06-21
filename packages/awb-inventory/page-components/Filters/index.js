@@ -47,7 +47,7 @@ function Filters({ filters, setFilters, activeTab }) {
 							themeType="tertiary"
 							onClick={() => setOpen(false)}
 						>
-							<IcMCrossInCircle width={18} height={18} fill="#ee3425" />
+							<IcMCrossInCircle width={18} height={18} fill="#333" />
 						</Button>
 					</div>
 					<Layout

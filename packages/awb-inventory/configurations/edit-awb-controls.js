@@ -62,6 +62,7 @@ const awbControls = ({
 			branches_data_required : true,
 			filters                : { status: 'active', account_type: 'importer_exporter' },
 		},
+		isClearable: true,
 	},
 	{
 		name        : 'awb_number',
@@ -100,6 +101,7 @@ const awbControls = ({
 				role_ids: geo?.uuid.kam_ids,
 			},
 		},
+		isClearable: true,
 	},
 	{
 		name        : 'service_provider_id',
@@ -108,7 +110,7 @@ const awbControls = ({
 		label       : 'Service Provider',
 		span        : 6,
 		placeholder : 'Service Provider',
-		onChange    : (val) => setServiceProviderData(val),
+		onChange    : (val, obj) => setServiceProviderData(obj),
 		params      : {
 			filters: { service_type: 'air_freight' },
 		},
@@ -126,7 +128,7 @@ const awbControls = ({
 		span        : 6,
 		params      : {
 			filters: {
-				partner_id: serviceProviderData || item?.service_provider?.partner_id,
+				partner_id: serviceProviderData?.partner_id || item?.service_provider?.partner_id,
 			},
 		},
 		rules: {
