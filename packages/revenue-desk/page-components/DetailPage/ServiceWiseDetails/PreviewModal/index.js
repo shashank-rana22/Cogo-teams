@@ -31,17 +31,15 @@ function PreviewModal({
 		.reduce((sum, price) => sum + price, 0);
 	const exchangesRates = data?.list?.[0]?.updated_currency_conversion_rate?.currencies
 	|| data?.list?.[0]?.currency_conversion_rate?.currencies;
-	const baseCurrency = data?.list?.[0]?.updated_currency_conversion_rate?.base_currency
-	|| data?.list?.[0]?.currency_conversion_rate?.base_currency;
 
 	const conSellPrice = Object.values(filteredPriceData)
 		.reduce((sum, value) => {
 			const currency = value.match(/[A-Z]+/)[0];
 			const amount = value.replace(/[^\d]/g, '');
-			const exchangeRate = exchangesRates?.[currency] || 1;
-			return sum + amount * exchangeRate;
+			const exchangeRate1 = exchangesRates?.[currency] || 1;
+			const exchangeRate2 = exchangesRates?.USD || 1;
+			return sum + ((amount * exchangeRate1) / exchangeRate2);
 		}, 0);
-
 
 	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(
 		(serviceType) => newFilteredGroupedShowServicesData[serviceType].length > 0,
