@@ -11827,7 +11827,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_organization_wise_fx_configurations',
+			api          : 'list_org_wise_exchange_rate_configurations',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
