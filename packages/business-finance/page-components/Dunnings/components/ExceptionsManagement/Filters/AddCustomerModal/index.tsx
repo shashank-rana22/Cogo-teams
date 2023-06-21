@@ -13,7 +13,7 @@ const TRADE_PARTY_PARAMS = {
 	filters: { status: 'active', account_type: 'importer_exporter' },
 
 };
-const SAMPLE_PDF_URL = GLOBAL_CONSTANTS?.pdf_url?.exception_customer_sample_url;
+const SAMPLE_PDF_URL = GLOBAL_CONSTANTS.pdf_url.exception_customer_sample_url;
 
 function AddCustomerModal({
 	show,
