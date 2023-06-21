@@ -341,20 +341,20 @@ const navigationMappingAdmin = {
             },
 			{
 				title : 'Sailing Schedules',
-				href  : '/schedules/[type]',
+				href  : '/schedules/sailing-schedules',
 				as    : '/schedules/sailing-schedules',
 				type  : 'link',
 			},
 			{
 				title : 'Vessel Schedules',
-				href  : '/schedules/[type]',
+				href  : '/schedules/vessel-schedules',
 				as    : '/schedules/vessel-schedules',
 				type  : 'link',
 			},
 			{
 				title : 'Service Lanes',
 				href  : '/schedules/service-lanes',
-				as    : '/schedules/sailing-schedules',
+				as    : '/schedules/service-lanes',
 				type  : 'link',
 			},
         ],
