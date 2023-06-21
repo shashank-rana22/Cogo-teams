@@ -7,7 +7,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 
 	const entityOptions = Object.keys(entityData).map((entity) => ({
 		label : `${entity} (${entityData[entity].currency})`,
-		name  : entity,
+		name  : String(entity),
 		value : entityData[entity].id,
 	}));
 
@@ -37,23 +37,23 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			],
 		},
 		{
-			label   : 'Cycle Type',
-			name    : 'cycleType',
-			type    : 'radioGroup',
-			span    : 12,
-			options : [
+			label        : 'Cycle Type',
+			name         : 'cycleType',
+			type         : 'radioGroup',
+			span         : 12,
+			radioOptions : [
 				{ name: 'SOA', value: 'SOA', label: 'SOA' },
 				{ name: 'WIS', value: 'WIS', label: 'WIS' },
 				{ name: 'BALANCE_CONFIRMATION', value: 'BALANCE_CONFIRMATION', label: 'Balance Confirmation' },
 			],
 		},
 		{
-			label    : 'Cogo Entity',
-			name     : 'cogoEntityId',
-			type     : 'radioGroup',
-			options  : entityOptions,
-			disabled : isEditMode,
-			span     : 12,
+			label        : 'Cogo Entity',
+			name         : 'cogoEntityId',
+			type         : 'radioGroup',
+			radioOptions : entityOptions,
+			disabled     : isEditMode,
+			span         : 12,
 		},
 		{
 			name          : 'isAllCreditControllers',
@@ -151,8 +151,8 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			onChange : (value:string) => {
 				setFormData({ ...formData, triggerType: value });
 			},
-			span    : 12,
-			options : [
+			span         : 12,
+			radioOptions : [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },
 				{ name: 'PERIODIC', value: 'PERIODIC', label: 'Periodic' },
 			],

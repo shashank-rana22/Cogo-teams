@@ -20,7 +20,7 @@ import React, { CSSProperties, useState } from 'react';
 
 import freightMapping from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
-import { Options } from '../../Interfaces';
+import { Options, RadioOptions } from '../../Interfaces';
 import SegmentedControl from '../../SegmentedControl';
 
 import styles from './styles.module.css';
@@ -46,6 +46,7 @@ interface ElementProps {
 	| undefined
 	| ((val: any) => void)
 	| Options[]
+	| RadioOptions[]
 	| object
 	| CSSProperties;
 }
@@ -62,7 +63,7 @@ function Element({
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
-	const { style, selectWidth, options, onlyNumbersAllowed = false } = rest;
+	const { style, selectWidth, options, onlyNumbersAllowed = false, radioOptions } = rest;
 	const { setFilters } = rest;
 	const tagClick = (val: Options) => {
 		setFilters((prev: object) => ({
@@ -290,6 +291,7 @@ function Element({
 						className={className}
 						style={style as CSSProperties}
 						value={value}
+						options={radioOptions}
 						{...rest}
 					/>
 				);
