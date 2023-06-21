@@ -2,6 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 interface DateObj {
@@ -18,28 +19,6 @@ interface FiltersParams {
 	sortType: string;
 }
 
-interface ListItem {
-	id: string;
-	documentValue: string;
-	documentAmount: number;
-	settledAmount: number;
-	balanceAmount: number;
-	transactionDate: string;
-	lastEditedDate: string;
-	currency: string;
-	documentNo: string;
-	accountType: string;
-	accMode: string;
-	notPostedSettlementIds : Array<number>;
-	ledCurrency: string;
-}
-
-interface DataInterface {
-	list: ListItem[],
-	pageNo: number,
-	totalRecords: number,
-}
-
 const useHistorySettlemet = () => {
 	const [filters, setFilters] = useState<FiltersParams>({
 		query       : '',
@@ -50,7 +29,7 @@ const useHistorySettlemet = () => {
 		sortBy      : '',
 		sortType    : '',
 	});
-	const [apiData, setApiData] = useState();
+	const [apiData, setApiData] = useState({});
 
 	const { query: search = '', debounceQuery } = useDebounceQuery();
 
@@ -98,12 +77,14 @@ const useHistorySettlemet = () => {
 			});
 			setApiData(res.data);
 		} catch (error) {
-			setApiData();
+			setApiData({});
 		}
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 
 	useEffect(() => {
-		refetch();
+		if(!isEmpty(orgId)){
+		refetch()
+		}
 	}, [refetch]);
 
 	return {

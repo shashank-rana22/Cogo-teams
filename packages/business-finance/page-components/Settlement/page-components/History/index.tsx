@@ -146,7 +146,7 @@ function History() {
 					/>
 				</div>
 			</div>
-			<CustomTable
+			{filters?.orgId &&	<CustomTable
 				apiData={apiData}
 				filters={filters}
 				setFilters={setFilters}
@@ -159,10 +159,8 @@ function History() {
 				checkedRows={checkedRows}
 				setCheckedRows={setCheckedRows}
 				refetch={refetch}
-				data={data}
-
-			/>
-			{!apiData?.list && !loading && <SelectState />}
+			/>}
+			{!filters?.orgId && <SelectState/>}
 			{!loading && data?.list?.length <= 0 && <EmptyStateDocs />}
 		</div>
 	);
