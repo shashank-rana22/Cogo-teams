@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const PAGE = 1;
 const useViewDataList = ({ id, docType, irnStatus, tradePartyGst }) => {
@@ -34,9 +35,7 @@ const useViewDataList = ({ id, docType, irnStatus, tradePartyGst }) => {
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	}, [docType, id, irnStatus, listTrigger, page, query]);
 

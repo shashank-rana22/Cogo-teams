@@ -1,5 +1,6 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const useDeleteData = ({ refetch }) => {
 	const [{ loading:deleteIdLoading }, trigger] = useRequestBf(
@@ -19,9 +20,7 @@ const useDeleteData = ({ refetch }) => {
 			});
 			refetch();
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	};
 

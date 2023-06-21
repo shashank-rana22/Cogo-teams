@@ -1,9 +1,10 @@
-import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const MONTH_MINUS = 1;
 const PAGE = 1;
@@ -59,9 +60,7 @@ const useOutwardFileList = ({ entity, gstIn, month, year }) => {
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	}, [listTrigger, page]);
 
@@ -83,9 +82,7 @@ const useOutwardFileList = ({ entity, gstIn, month, year }) => {
 			});
 			refetch();
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	};
 

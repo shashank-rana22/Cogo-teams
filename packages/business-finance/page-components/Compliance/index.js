@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 import Register from './Register';
 import styles from './styles.module.css';
 
-const tabs = [
+const TABS = [
 	{
 		key   : 'dashboard',
 		label : 'Dashboard',
@@ -17,7 +17,7 @@ const tabs = [
 	},
 ];
 
-const tabsKeyComponentMapping = {
+const TABS_KEY_COMPONENT_MAPPING = {
 	dashboard : Dashboard,
 	register  : Register,
 };
@@ -34,7 +34,7 @@ function Compliance() {
 			activeTab,
 		},
 	};
-	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
+	const ActiveTabComponent = TABS_KEY_COMPONENT_MAPPING[activeTab] || null;
 	const onChange = (view) => {
 		setActiveTab(view);
 		push(
@@ -57,7 +57,7 @@ function Compliance() {
 					fullWidth
 					themeType="primary"
 				>
-					{tabs.map(({ key = '', label = '' }) => (
+					{TABS.map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
 							key={key}

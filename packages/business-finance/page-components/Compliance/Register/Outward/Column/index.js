@@ -3,15 +3,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import { MAPPING_ENABLE_STATUS, MAPPING_FILE_STATUS, MAPPING_FILE_STATUS_COLOR } from '../utils';
 
 import styles from './styles.module.css';
 
-const GET_ZERO = 0;
-const CALC_PER = 100;
-const GET_FIXED_AMOUNT = 2;
+const PERCENTAGE_FACTOR = 100;
+const DECIMAL_UPTO_SECOND_PLACE = 2;
 const Column = (refresh, deleteId) => {
 	const { push } = useRouter();
 
@@ -118,7 +117,7 @@ const Column = (refresh, deleteId) => {
 						date,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-						formatType : 'date',
+						formatType : 'dateTime',
 						separator  : ' ',
 					})}
 				</div>
@@ -129,22 +128,22 @@ const Column = (refresh, deleteId) => {
 			id       : 'irn',
 			accessor : ({ failureCount, successCount, status }) => {
 				const total = failureCount + successCount;
-				const successPer = total !== GET_ZERO ? (successCount / total) * CALC_PER : null;
-				const failurePer = total !== GET_ZERO ? (failureCount / total) * CALC_PER : null;
+				const successPer = isEmpty(total) ? (successCount / total) * PERCENTAGE_FACTOR : null;
+				const failurePer = isEmpty(total) ? (failureCount / total) * PERCENTAGE_FACTOR : null;
 
 				return (
-					total !== GET_ZERO ? (
+					isEmpty(total) ? (
 						<div className={styles.main_summary}>
 							<div
 								className={styles.success}
 								style={{
-									width      : `${successPer?.toFixed(GET_FIXED_AMOUNT)}%`,
+									width      : `${successPer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`,
 									background : `${status === 'DISABLE' ? '#E0E0E0' : '#abcd62'}`,
 								}}
 							>
 								{ status !== 'DISABLE' && (
 									<span className={styles.tooltip_text}>
-										{`${successPer?.toFixed(GET_FIXED_AMOUNT)}%`}
+										{`${successPer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`}
 									</span>
 								)}
 							</div>
@@ -152,13 +151,13 @@ const Column = (refresh, deleteId) => {
 							<div
 								className={styles.failure}
 								style={{
-									width           : `${failurePer?.toFixed(GET_FIXED_AMOUNT)}%`,
+									width           : `${failurePer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`,
 									backgroundColor : `${status === 'DISABLE' ? '#e0e0e0' : '#ee3425'}`,
 								}}
 							>
 								{	status !== 'DISABLE' && (
 									<span className={styles.tooltip_text}>
-										{ `${failurePer?.toFixed(GET_FIXED_AMOUNT)}%`}
+										{ `${failurePer?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}%`}
 
 									</span>
 								)}

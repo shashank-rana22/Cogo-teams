@@ -5,7 +5,7 @@ import Inward from './Inward';
 import Outward from './Outward';
 import styles from './styles.module.css';
 
-const tabs = [
+const TABS = [
 	{
 		key   : 'outward',
 		label : 'Outward',
@@ -16,7 +16,7 @@ const tabs = [
 	},
 ];
 
-const tabsKeyComponentMapping = {
+const TABS_KEY_COMPONENT_MAPPING = {
 	outward : Outward,
 	inward  : Inward,
 };
@@ -33,7 +33,7 @@ function Register() {
 		},
 		inward: { },
 	};
-	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+	const ActiveTabComponent = TABS_KEY_COMPONENT_MAPPING[subActiveTab] || null;
 
 	const handleTabChange = (tab) => {
 		setSubActiveTab(tab.key);
@@ -50,7 +50,7 @@ function Register() {
 
 				<div className={styles.flex}>
 
-					{tabs.map((tab) => (
+					{TABS.map((tab) => (
 						<div
 							key={tab.key}
 							onClick={() => {

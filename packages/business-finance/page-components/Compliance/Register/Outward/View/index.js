@@ -12,8 +12,8 @@ import filterControls from './filterControls';
 import styles from './styles.module.css';
 import viewColumn from './ViewColumn';
 
-const EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
-const PAGE = 1;
+const EMPTY_STATE_IMAGE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
+const PAGE_INDEX = 1;
 const TOTAL_RECORDS = 0;
 const PAGE_SIZE = 10;
 
@@ -80,14 +80,14 @@ function View() {
 			</div>
 
 			<div className={styles.table_body}>
-				<StyledTable data={list} columns={viewColumn} loading={loading} imageFind={EMPTY_STATE} />
+				<StyledTable data={list} columns={viewColumn} loading={loading} imageFind={EMPTY_STATE_IMAGE} />
 			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="number"
 					totalItems={totalRecord || TOTAL_RECORDS}
-					currentPage={page || PAGE}
+					currentPage={page || PAGE_INDEX}
 					pageSize={PAGE_SIZE}
 					onPageChange={setPage}
 				/>

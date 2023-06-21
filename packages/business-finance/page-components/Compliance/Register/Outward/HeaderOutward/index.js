@@ -24,7 +24,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				/>
 			</div>
 
-			<div>
+			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>GSTIN</div>
 				<Select
 					value={filters?.gstIn}
@@ -38,7 +38,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				/>
 			</div>
 
-			<div>
+			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>Return Period</div>
 				<Select
 					value={filters?.month}
@@ -51,7 +51,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				/>
 			</div>
 
-			<div>
+			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>Year</div>
 				<Select
 					value={filters?.year}
@@ -64,7 +64,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 				/>
 			</div>
 
-			<div>
+			<div className={styles.margin_select}>
 				<Button loading={loading} onClick={exportTrigger}>Export </Button>
 			</div>
 		</div>

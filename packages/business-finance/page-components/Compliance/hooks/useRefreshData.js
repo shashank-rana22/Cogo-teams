@@ -1,5 +1,6 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const useRefreshData = () => {
 	const [{ loading:refreshLoading }, trigger] = useRequestBf(
@@ -18,9 +19,7 @@ const useRefreshData = () => {
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	};
 

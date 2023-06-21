@@ -5,7 +5,7 @@ import { MAPPING_IRN_STATUS, MAPPING_IRN_STATUS_COLOR } from '../../utils';
 
 import styles from './styles.module.css';
 
-const GET_FIXED_AMOUNT = 2;
+const DECIMAL_UPTO_SECOND_PLACE = 2;
 
 function openPDF(event) {
 	event.preventDefault();
@@ -53,7 +53,7 @@ const viewColumn = [
 				{invoiceCurrency}
 				{' '}
 
-				{taxableValue?.toFixed(GET_FIXED_AMOUNT)}
+				{taxableValue?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}
 			</div>
 		),
 	},
@@ -88,17 +88,17 @@ const viewColumn = [
 					<div>
 						{invoiceCurrency}
 						{' '}
-						{igstAmount?.toFixed(GET_FIXED_AMOUNT)}
+						{igstAmount?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}
 					</div>
 					<div>
 						{invoiceCurrency}
 						{' '}
-						{cgstAmount?.toFixed(GET_FIXED_AMOUNT)}
+						{cgstAmount?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}
 					</div>
 					<div>
 						{invoiceCurrency}
 						{' '}
-						{sgstAmount?.toFixed(GET_FIXED_AMOUNT)}
+						{sgstAmount?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}
 					</div>
 				</div>
 			</div>
@@ -111,7 +111,7 @@ const viewColumn = [
 			<div className={styles.invoice_value}>
 				{invoiceCurrency}
 				{' '}
-				{invoiceValue?.toFixed(GET_FIXED_AMOUNT)}
+				{invoiceValue?.toFixed(DECIMAL_UPTO_SECOND_PLACE)}
 			</div>
 		),
 	},

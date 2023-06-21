@@ -1,6 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const useDashboard = (year) => {
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -19,9 +20,7 @@ const useDashboard = (year) => {
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	}, [trigger, year]);
 
