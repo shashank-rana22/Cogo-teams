@@ -1,4 +1,5 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/StyledTable/EmptyState';
@@ -46,7 +47,7 @@ function ExceptionList({
 				{...rest}
 			/>
 			{!loading && (
-				data?.length === 0 && <EmptyState imageFind="FinanceDashboard" />
+				isEmpty(data) && <EmptyState imageFind="FinanceDashboard" />
 			)}
 
 		</div>

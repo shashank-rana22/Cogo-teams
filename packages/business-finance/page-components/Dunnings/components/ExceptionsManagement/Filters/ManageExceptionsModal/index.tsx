@@ -82,7 +82,7 @@ function ManageExceptionsModal({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				{ !isEmpty(uncheckedRows) ? (
+				{ uncheckedRows.length > 0 ? (
 					<div style={{ margin: '6px 20px' }}>
 						{uncheckedRows?.length}
 						{' '}
@@ -93,6 +93,7 @@ function ManageExceptionsModal({
 						Exclude customers you do not want in this cycle by unselecting them.
 					</div>
 				)}
+
 				<Button
 					onClick={handleSubmit(onSubmit)}
 					disabled={uploadListLoading}

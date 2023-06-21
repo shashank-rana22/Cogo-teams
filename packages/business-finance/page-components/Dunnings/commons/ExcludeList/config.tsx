@@ -1,5 +1,4 @@
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import CheckboxItem from './CheckboxItem';
@@ -51,7 +50,7 @@ export const config = (
 			<div className={styles.text}>
 				{formatAmount({
 					amount   : row?.totalOutstanding,
-					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					currency : row?.currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
@@ -68,7 +67,7 @@ export const config = (
 			<div className={styles.text}>
 				{formatAmount({
 					amount   : row?.totalOnAccount,
-					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					currency : row?.currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',

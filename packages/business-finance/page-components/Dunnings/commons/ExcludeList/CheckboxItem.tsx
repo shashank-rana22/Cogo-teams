@@ -12,15 +12,12 @@ function CheckboxItem({
 	row,
 }:Props) {
 	const { registrationNumber	} = row || {};
-	const handleChange = () => {
-		if ((uncheckedRows || []).includes(registrationNumber)) {
-			const filteredRows = (uncheckedRows || []).filter((rowId?:string) => rowId !== registrationNumber);
-			setUncheckedRows([...filteredRows]);
-		} else {
-			setUncheckedRows((prev:string[]) => [...prev, registrationNumber]);
-		}
-	};
 
+	const handleChange = () => {
+		setUncheckedRows((prevUncheckedRows) => (prevUncheckedRows.includes(registrationNumber)
+			? prevUncheckedRows.filter((rowId) => rowId !== registrationNumber)
+			: [...prevUncheckedRows, registrationNumber]));
+	};
 	return (
 		<div>
 			<Checkbox

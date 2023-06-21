@@ -5,31 +5,33 @@ import styles from './styles.module.css';
 function GetSortingData({
 	exceptionFilter,
 	setExceptionFilter,
-	setOrderBy, sortStyleDesc,
-	sortStyleAsc, type,
+	setSort,
+	type,
+	sort,
 }) {
+	const { sortType = '', sortBy = '' } = sort || {};
+
+	const handleSortingClick = (sortingType) => {
+		setSort({
+			sortType : sortingType,
+			sortBy   : type,
+		});
+		setExceptionFilter({ ...exceptionFilter, page: 1 });
+	};
 	return (
-		<div className={styles.icon_div}>
+		<div
+			role="presentation"
+			className={styles.icon_div}
+
+		>
 			<IcMArrowRotateUp
-				style={{ color: sortStyleAsc }}
-				onClick={() => {
-					setOrderBy({
-						sortType : 'ASC',
-						sortBy   : type,
-					});
-					setExceptionFilter({ ...exceptionFilter, page: 1 });
-				}}
+				onClick={() => handleSortingClick('ASC')}
+				style={{ color: sortBy === type && sortType === 'ASC' ? '#F68B21' : '#BDBDBD' }}
 			/>
 
 			<IcMArrowRotateDown
-				style={{ color: sortStyleDesc }}
-				onClick={() => {
-					setOrderBy({
-						sortType : 'DESC',
-						sortBy   : type,
-					});
-					setExceptionFilter({ ...exceptionFilter, page: 1 });
-				}}
+				onClick={() => handleSortingClick('DESC')}
+				style={{ color: sortBy === type && sortType === 'DESC' ? '#F68B21' : '#BDBDBD' }}
 			/>
 		</div>
 	);

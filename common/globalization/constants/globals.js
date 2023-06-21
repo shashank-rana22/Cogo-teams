@@ -160,6 +160,10 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 	},
+	pdf_url: {
+		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+	},
 
 	options: {
 		upload_file_size: {

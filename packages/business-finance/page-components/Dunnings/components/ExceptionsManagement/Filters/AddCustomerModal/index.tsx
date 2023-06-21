@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -12,8 +13,7 @@ const TRADE_PARTY_PARAMS = {
 	filters: { status: 'active', account_type: 'importer_exporter' },
 
 };
-const SAMPLE_PDF_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx';
+const SAMPLE_PDF_URL = GLOBAL_CONSTANTS?.pdf_url?.exception_customer_sample_url;
 
 function AddCustomerModal({
 	show,
