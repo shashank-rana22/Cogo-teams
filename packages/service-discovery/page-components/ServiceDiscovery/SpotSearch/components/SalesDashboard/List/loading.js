@@ -12,7 +12,7 @@ function Loading() {
 						key={`stats_item_placeholder-${idx}`}
 						height="32px"
 						width="120px"
-						margin="4px 36px 0px 0px"
+						margin="8px 36px 0px 0px"
 					/>
 				))}
 			</div>

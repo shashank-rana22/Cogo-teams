@@ -9,7 +9,7 @@ function SearchInput({
 	onChange = () => {},
 	style = {},
 	placeholder = '',
-	size = 'lg',
+	size = 'md',
 }) {
 	return (
 		<section className={styles.container} style={style}>

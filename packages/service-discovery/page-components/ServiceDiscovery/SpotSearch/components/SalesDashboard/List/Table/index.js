@@ -35,6 +35,7 @@ function TableComponent(props) {
 				columns={columns}
 				data={list}
 				loading={loading}
+				loadingRowsCount={10}
 			/>
 
 			<div className={styles.pagination}>

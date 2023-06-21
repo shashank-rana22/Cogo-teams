@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Stats({
+function StatItem({
 	text = '',
 	count = 0,
 	subText = null,
@@ -33,4 +33,4 @@ function Stats({
 		</div>
 	);
 }
-export default Stats;
+export default StatItem;

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import CC from '../utils/condition-constants';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
@@ -27,7 +27,7 @@ const useGetSalesDashboardData = ({
 	isRateList = false,
 	api = '',
 	stats = [],
-	importer_exporter_id = '',
+	importer_exporter_id,
 	...rest
 }) => {
 	const { user_profile, pathname } = useSelector(({ general, profile }) => ({
@@ -77,6 +77,25 @@ const useGetSalesDashboardData = ({
 		stats,
 	});
 
+	// const keyToSend = globalViewKeys[rest.type];
+	// const agentFilter = keyToSend ? { [keyToSend]: selected_agent_id } : {};
+
+	// const timeKeysToSend = globalTimeKeys[rest.type];
+
+	// const dateFilters = {};
+	// if (timeKeysToSend) {
+	// 	const initialDateFilters = {
+	// 		startDate: subtractDays(new Date(), 2).setHours(0, 0, 0, 0),
+	// 		endDate: new Date(),
+	// 	};
+	// 	dateFilters[timeKeysToSend?.startDate] = formatDateToString(
+	// 		initialDateFilters?.startDate,
+	// 	);
+	// 	dateFilters[timeKeysToSend?.endDate] = formatDateToString(
+	// 		initialDateFilters?.endDate,
+	// 	);
+	// }
+
 	const getList = async () => {
 		try {
 			await trigger({
@@ -90,7 +109,7 @@ const useGetSalesDashboardData = ({
 							...(activeStat?.filter || {}),
 							// ...agentFilter,
 							importer_exporter_id,
-							...createdByFilter,
+							// ...createdByFilter,
 							...getKeyName({ type: rest.type, serviceType }),
 						},
 						{
@@ -128,6 +147,7 @@ const useGetSalesDashboardData = ({
 		importer_exporter_id,
 		initialPath,
 		pathname,
+		filters,
 	]);
 
 	useEffect(() => {

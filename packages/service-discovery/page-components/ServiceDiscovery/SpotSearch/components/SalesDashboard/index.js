@@ -7,10 +7,6 @@ import List from './List';
 import styles from './styles.module.css';
 
 function SalesDashboard({ importer_exporter_id = '' }) {
-	const [selectedRow, setSelectedRow] = useState({ data: null, type: null });
-
-	console.log('importer_exporter_id', importer_exporter_id);
-
 	const centerLists = configurations.filter((list) => list.placement === 'center');
 
 	const [activeTab, setActiveTab] = useState(centerLists[0].type);
@@ -40,7 +36,6 @@ function SalesDashboard({ importer_exporter_id = '' }) {
 								key={newList.type}
 								{...newList}
 								importer_exporter_id={importer_exporter_id || undefined}
-								setSelectedRow={setSelectedRow}
 								dashboard="sales"
 							/>
 						</TabPanel>

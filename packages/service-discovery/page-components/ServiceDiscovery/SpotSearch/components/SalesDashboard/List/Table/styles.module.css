@@ -18,8 +18,9 @@
     align-items: center;
 }
 .status_tag{
-    display:flex;
+    display: flex;
     padding: 4px 6px;
+	width: max-content;
     border-radius: 6px;
 
     &.rejected {

@@ -7,3 +7,7 @@
 .content{
 	
 }
+.tooltip{
+	text-align: left;
+	word-break: keep-all;
+}

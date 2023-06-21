@@ -18,6 +18,7 @@ function FieldPair({ item = {}, field = {} }) {
 	};
 	const renderBody = () => {
 		const popoverData = item[popoverKey];
+
 		const userItem = (userData) => (
 			<div className={styles.card} role="presentation" onClick={(e) => e.stopPropagation()}>
 				<div className={styles.option_label} style={{ width: '33%' }}>{userData?.name}</div>
@@ -63,9 +64,10 @@ function FieldPair({ item = {}, field = {} }) {
 	const renderLowerText = withPopover ? (
 		<Popover
 			visible={show}
-			usePortal
+			placement="bottom"
+			trigger="click"
 			onClickOutside={() => setShow(false)}
-			content={renderBody}
+			render={renderBody()}
 		>
 			<div role="presentation" onClick={handleClick}>
 				{getValue(item, field?.lowerKey)}

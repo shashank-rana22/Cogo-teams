@@ -1,38 +1,20 @@
-// import FiltersUi from '@cogo/business-modules/components/filters';
-// import SearchInput from '@cogo/commons/components/SearchInput';
-import { Toggle } from '@cogoport/components';
-import { IcMArrowNext, IcMFilter, IcMRefresh } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import {
-	FilterContainer,
-	Main,
-	IconContainer,
-} from '../../../components/styles';
-import getLocalFilters from '../../../utils/get-local-filters';
 import SearchInput from '../../../../../../../common/SearchInput';
 
 import ExtraFilters from './ExtraFilters';
-import showElements from './showElements';
-import { Heading, Container, Button, Row } from './styles';
+import styles from './styles.module.css';
 
 const rateListTabs = ['missing_rates', 'disliked_rates'];
 
 function Header({
-	heading = '',
 	filters = {},
 	filterProps = {},
 	setFilters = () => {},
-	href = '',
-	as = '',
 	type = '',
 	serviceType = '',
 	setServiceType = () => {},
 }) {
-	const { push } = useRouter();
-
 	const [isOpen, setIsOpen] = useState(false);
 
 	const {
@@ -43,52 +25,47 @@ function Header({
 	} = filterProps;
 	const otherFilters = filters || {};
 
-	// const filtersToButton = {};
-	// (controls || []).forEach((control) => {
-	// 	if (otherFilters[control.name]) {
-	// 		filtersToButton[control.name] = otherFilters[control.name];
-	// 	}
-	// });
-
 	const isRateList = rateListTabs.includes(type);
 
 	const searchParam = searchKey ? { [searchKey]: filters?.[searchKey] } : {};
 
-	const { reset, applyFilters, fields, processedControls } = getLocalFilters({
-		controls,
-		type,
-		setFilters,
-		searchParam,
-	});
+	// const { reset, applyFilters, fields, processedControls } = getLocalFilters({
+	// 	controls,
+	// 	type,
+	// 	setFilters,
+	// 	searchParam,
+	// });
 
-	const handleReset = () => {
-		reset();
-		setFilters({
-			...otherFilters,
-			...processedControls.reduce(
-				(pv, cv) => ({
-					...pv,
-					[cv.name]: '',
-				}),
-				{},
-			),
-			page: 1,
-		});
-	};
+	// const handleReset = () => {
+	// 	reset();
+	// 	setFilters({
+	// 		...otherFilters,
+	// 		...processedControls.reduce(
+	// 			(pv, cv) => ({
+	// 				...pv,
+	// 				[cv.name]: '',
+	// 			}),
+	// 			{},
+	// 		),
+	// 		page: 1,
+	// 	});
+	// };
 
 	let searchBar = null;
+
 	if (searchKey) {
 		searchBar = (
 			<SearchInput
 				type="search"
 				style={{ marginRight: 8 }}
-				onChange={(e) => {
+				onChange={(val) => {
 					setFilters({
 						...otherFilters,
-						[searchKey] : e.target.value,
+						[searchKey] : val,
 						page        : 1,
 					});
 				}}
+				size="sm"
 				value={filters?.[searchKey]}
 				placeholder={searchPlaceholder || 'Org Name email phone'}
 			/>
@@ -96,20 +73,13 @@ function Header({
 	}
 
 	return (
-		<Container>
-			<Heading>
-				{heading}
+		<div className={styles.container}>
 
-				{href ? (
-					<Button type="button" onClick={() => push(href, as)}>
-						<IcMArrowNext width={28} height={28} />
-					</Button>
-				) : null}
-			</Heading>
-
-			<Row>
+			<div className={styles.search_bar}>
 				{searchBar}
+			</div>
 
+			<div className={styles.extra_filters}>
 				<ExtraFilters
 					type={type}
 					filters={filters}
@@ -117,37 +87,9 @@ function Header({
 					setFilters={setFilters}
 					setServiceType={setServiceType}
 				/>
+			</div>
 
-				{rest.showToggle && (
-					<Container>
-						<Toggle
-							onLabel={{ label: rest.toggle?.onLabel, value: rest.toggle?.on }}
-							offLabel={{
-								label : rest.toggle?.offLabel,
-								value : rest.toggle?.off,
-							}}
-							value={filters[rest.toggle?.key]}
-							onChange={(e) => {
-								setFilters({
-									...otherFilters,
-									[rest.toggle?.key] : e,
-									page               : 1,
-								});
-							}}
-						/>
-					</Container>
-				)}
-
-				{rest.showReset && (
-					<Main>
-						<Button size="sm" ghost onClick={() => reset()}>
-							<IcMRefresh width={21} height={21} />
-							&nbsp; Reset Filters
-						</Button>
-					</Main>
-				)}
-
-				{/* {!isEmpty(controls) ? (
+			{/* {!isEmpty(controls) ? (
 					<FilterContainer>
 						<FiltersUi
 							controls={processedControls}
@@ -177,9 +119,7 @@ function Header({
 					</FilterContainer>
 				) : null} */}
 
-				{/* {type === 'shipments' ? searchBar : null} */}
-			</Row>
-		</Container>
+		</div>
 	);
 }
 
