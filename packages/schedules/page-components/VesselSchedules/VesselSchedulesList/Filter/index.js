@@ -7,7 +7,7 @@ const shippingLineOptions = [
     {label:"dev",value:"abc"}
 ]
 
-const Filter = ()=>
+const Filter = ({filter,setFilter})=>
 {
     const [date,setDate] = useState(null)
     return <>
@@ -16,6 +16,7 @@ const Filter = ()=>
         <Input
             className={styles.input}
             placeholder="Vessel Name / Code"
+            onChange = {(value)=>setFilter({...filter,vessel_name:value})}
         />            
         
         <Datepicker
@@ -24,13 +25,14 @@ const Filter = ()=>
             showTimeSelect
             dateFormat="MM/dd/yyyy HH:mm"
             name="date"
-            onChange={setDate}
-            value={date}
+            onChange={(value)=>setFilter({...filter,date:value})}
+            value={filter?.date}
             size="md"
         />
         <Select 
             className={styles.input}
             placeholder ="Shipping Line"
+            onChange={(value)=>setFilter({...filter,shipping_line:value})}
             options={shippingLineOptions}/>
         
         </div>        
@@ -39,6 +41,7 @@ const Filter = ()=>
             className={styles.input}
             options={sortByOptions}
             placeholder="Sort By"
+            onChange={(value)=>setFilter({...filter,sort_by:value})}
             />
         </div>            
 
