@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 function SailingSchedulesManagement({ activeTab, setActiveTab }) {
     return (
-        <>
+        <div className={styles.outer_box}>
             <div className={styles.title}>Sailing Schedules Management</div>
             <Tabs
                 activeTab={activeTab}
@@ -19,10 +19,10 @@ function SailingSchedulesManagement({ activeTab, setActiveTab }) {
                 </TabPanel>
 
                 <TabPanel name="service_lanes" title="Service Lanes">
-                    <div>Sailing Schedules</div>
+                    <></>
                 </TabPanel>
             </Tabs>
-        </>
+        </div>
     );
 }
 export default SailingSchedulesManagement;
