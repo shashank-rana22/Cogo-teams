@@ -49,6 +49,8 @@ function Customers({
 	viewType = '',
 	flashMessagesLoading,
 	hasVoiceCallAccess,
+	activeSubTab,
+	setActiveSubTab = () => {},
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -108,6 +110,8 @@ function Customers({
 		viewType,
 		flashMessagesList,
 		flashMessagesLoading,
+		activeTab    : activeSubTab,
+		setActiveTab : setActiveSubTab,
 	};
 
 	const voiceProps = {
