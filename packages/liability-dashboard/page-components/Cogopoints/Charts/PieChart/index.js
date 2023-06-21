@@ -27,7 +27,7 @@ function PieChart({
 		return (
 			<div className={styles.empty_state}>
 				<Image
-					src={GLOBAL_CONSTANTS.image_url.empty_list_state}
+					src={GLOBAL_CONSTANTS.image_url.empty_image}
 					alt="empty-state"
 					width={150}
 					height={150}
