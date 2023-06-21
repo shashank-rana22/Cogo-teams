@@ -3,12 +3,14 @@ import { IcMFfcl, IcMFlcl, IcMFlocalCharges } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useCallback } from 'react';
 
+import CONSTANTS from '../../../configs/constants.json';
 import serviceNameMapping from '../../../configs/short-disply-names.json';
 import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const INDEX_FOR_ROUTER_PATH = 1;
+const PARTNER_ID_INDEX_IN_PATH = 1;
+
 const iconMapping = {
 	fcl_freight : IcMFfcl,
 	lcl_freight : IcMFlcl,
@@ -20,7 +22,10 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 
 	const handleClick = useCallback(() => {
 		const path = router.asPath.split('/');
-		const newPathname = `/${path[INDEX_FOR_ROUTER_PATH]}/shipments/${item.id}`;
+
+		const newPathname = `/${path[PARTNER_ID_INDEX_IN_PATH]}/shipments/${item.id}
+		?${CONSTANTS.url_navigation_params}`;
+
 		window.location.replace(newPathname);
 	}, [router.asPath, item.id]);
 

@@ -29,6 +29,7 @@ const GLOBAL_CONSTANTS = {
 			'dd MMMM yyyy'      : 'dd MMMM yyyy',
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
+			'dd MMM'            : 'dd MMM',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
@@ -137,14 +138,27 @@ const GLOBAL_CONSTANTS = {
 		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		bot_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/web_bot',
+		cogoport_logo       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoLogo.svg',
+		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
 		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
-		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
+		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
+		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
+		cogo_logo_without_bg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg',
+		spinner_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
+		empty_image          : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
+		list_empty_image     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state.svg',
+		list_empty           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png',
+		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
+		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 	},
 
 	options: {
@@ -203,21 +217,38 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		white_space     : /\s+/,
 		number          : /^[+-]?\d*\.?\d+$/,
+		white_space     : /\s+/,
 		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		url_match:
+		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+		image_extension: /\.(jpg|jpeg|png|gif|svg)$/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id: 120347,
-	},
+		old_shipment_serial_id  : 120347,
+		cogopoint_default_value : 0,
 
+	},
+	shipment_types: [
+		{ value: 'fcl_freight', label: 'FCL' },
+		{ value: 'lcl_freight', label: 'LCL' },
+		{ value: 'air_freight', label: 'AIR' },
+		{ value: 'trailer_freight', label: 'Container Transportation' },
+		{ value: 'ftl_freight', label: 'FTL' },
+		{ value: 'ltl_freight', label: 'LTL' },
+		{ value: 'haulage_freight', label: 'Rail Haulage' },
+		{ value: 'fcl_customs', label: 'FCL Customs' },
+		{ value: 'lcl_customs', label: 'LCL Customs' },
+		{ value: 'air_customs', label: 'AIR Customs' },
+		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+	],
 };
 
 export default GLOBAL_CONSTANTS;
