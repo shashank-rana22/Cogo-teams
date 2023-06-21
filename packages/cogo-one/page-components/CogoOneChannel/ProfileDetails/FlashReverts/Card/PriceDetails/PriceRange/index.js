@@ -31,7 +31,7 @@ function PriceRange({ item }) {
 				},
 			})}
 			&nbsp;
-			{GLOBAL_CONSTANTS.services_unit_mapping[item?.service_type] || ''}
+			{GLOBAL_CONSTANTS.others.services_unit_mapping[item?.service_type] || ''}
 		</span>
 	);
 }

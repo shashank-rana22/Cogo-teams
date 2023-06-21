@@ -1,31 +1,3 @@
-import { Button } from '@cogoport/components';
-
-import styles from './styles.module.css';
-
-export function CommonButton({
-	onClick = () => {},
-	label = '',
-	setPopoverProps = () => {}, disabled = false,
-	loading = false,
-	buttonType = '',
-}) {
-	return (
-		<Button
-			themeType="secondary"
-			size="md"
-			className={styles.popover_button}
-			disabled={disabled}
-			loading={loading}
-			onClick={() => {
-				setPopoverProps((p) => ({ ...p, clickedButton: buttonType }));
-				onClick();
-			}}
-		>
-			{label}
-		</Button>
-	);
-}
-
 export function getOptionsMapping({
 	requestToJoinGroup, assignChat,
 	openAssignModal, formattedData, requestForAssignChat, userId, setPopoverProps,
@@ -123,24 +95,24 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 		isServiceProvider,
 		isPartOfGroup,
 	}) => {
-		let ACCESSABLE_BUTTON_OPTIONS = [];
+		let accesableButtons = [];
 		if (supportAgentId === userId || isPartOfGroup) {
-			ACCESSABLE_BUTTON_OPTIONS = ['assign_modal'];
+			accesableButtons = ['assign_modal'];
 		}
 
 		if (!isGroupFormed) {
-			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'request_for_assign'];
+			accesableButtons = [...accesableButtons, 'request_for_assign'];
 		}
 
 		if (!showBotMessages && supportAgentId !== userId && isServiceProvider && !isPartOfGroup) {
-			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'add_me_to_group'];
+			accesableButtons = [...accesableButtons, 'add_me_to_group'];
 		}
 
 		if (showBotMessages) {
-			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'assign_to_me'];
+			accesableButtons = [...accesableButtons, 'assign_to_me'];
 		}
 
-		return ACCESSABLE_BUTTON_OPTIONS;
+		return accesableButtons;
 	},
 	shipment_view: ({
 		supportAgentId,

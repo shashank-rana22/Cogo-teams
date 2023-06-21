@@ -3,7 +3,7 @@ import { IcMListView } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { CommonButton, getOptionsMapping, ACCESSABLE_BUTTON_FUNC_MAPPING } from './rightButtonHelpers';
+import { getOptionsMapping, ACCESSABLE_BUTTON_FUNC_MAPPING } from './rightButtonHelpers';
 import styles from './styles.module.css';
 
 function RightButton({
@@ -63,16 +63,25 @@ function RightButton({
 		<Popover
 			placement="bottom"
 			trigger="click"
-			render={accessableButtons.map((eachButtonType) => (
-				<CommonButton
-					key={eachButtonType}
-					{...(buttonsMapping[eachButtonType] || {})}
-					setPopoverProps={setPopoverProps}
-					loading={loading && (eachButtonType === popoverProps?.clickedButton)}
-					disabled={loading}
-					buttonType={eachButtonType}
-				/>
-			))}
+			render={accessableButtons.map((eachButtonType) => {
+				const { onClick = () => {}, label } = (buttonsMapping[eachButtonType] || {});
+				return (
+					<Button
+						key={eachButtonType}
+						themeType="secondary"
+						size="md"
+						className={styles.popover_button}
+						disabled={loading}
+						loading={loading && (eachButtonType === popoverProps?.clickedButton)}
+						onClick={() => {
+							setPopoverProps((p) => ({ ...p, clickedButton: eachButtonType }));
+							onClick();
+						}}
+					>
+						{label}
+					</Button>
+				);
+			})}
 			visible={popoverProps?.isOpen}
 			onClickOutside={() => setPopoverProps({ isOpen: false, clickedButton: '' })}
 		>
