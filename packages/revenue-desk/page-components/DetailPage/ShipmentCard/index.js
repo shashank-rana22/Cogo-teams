@@ -77,7 +77,60 @@ function ShipmentCard({ itemData, priceData }) {
 									},
 								})}
 						</span>
+						<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
+						<span style={{ fontWeight: '700', color: '#221F20' }}>
+							{!priceData?.sell_price
+								? <Placeholder width="150px" height="25px" />
+								: formatAmount({
+									amount: Number(priceData?.sell_price?.split(' ')?.[1])
+									/ Number(priceData?.exchange_rate),
+									currency : 'USD',
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+						</span>
 					</div>
+					{
+						itemData?.shipment_type === 'fcl_freight' ? (
+							<div className={styles.kamdiscount_text}>
+								Sell Price/Contr.:
+								<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '3px' }}>
+									{!priceData?.sell_price
+										? <Placeholder width="150px" height="25px" />
+										: formatAmount({
+											amount: Number(priceData?.sell_price?.split(' ')?.[1])
+											/ Number(itemData?.containers_count),
+											currency : priceData?.sell_price?.split(' ')?.[0],
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+								</span>
+								<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
+								<span style={{ fontWeight: '700', color: '#221F20' }}>
+									{!priceData?.sell_price
+										? <Placeholder width="150px" height="25px" />
+										: formatAmount({
+											amount: (Number(priceData?.sell_price?.split(' ')?.[1])
+											/ Number(itemData?.containers_count))
+										/ Number(priceData?.exchange_rate),
+											currency : 'USD',
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+								</span>
+							</div>
+						) : null
+					}
+
 					<div className={styles.kamdiscount_text}>
 						{itemData?.promotion_category === 'marketing' ? 'MARKETING' : 'KAM'}
 						{' '}
@@ -87,6 +140,18 @@ function ShipmentCard({ itemData, priceData }) {
 							{formatAmount({
 								amount   : itemData?.discount_amount,
 								currency : itemData?.discount_amount_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
+						</span>
+						<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
+						<span>
+							{formatAmount({
+								amount   : Number(itemData?.discount_amount) / Number(priceData?.exchange_rate),
+								currency : 'USD',
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'code',

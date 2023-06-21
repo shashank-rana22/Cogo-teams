@@ -11,6 +11,7 @@ import CancelledShipmentCard from './CancelledShipmentCard';
 import LastShipmentDetails from './LastShipmentDetails';
 import PocSopModal from './PocSopModal';
 import QuotationDetails from './QuotationDetails';
+import RevenueList from './RevenueList/index.js';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
@@ -203,6 +204,37 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							</div>
 						)}
 					</TabPanel>
+					{['fcl_freight', 'air_freight'].includes(
+						itemData?.shipment_type,
+					) && itemData?.source === 'contract' ? (
+						<TabPanel name="contract" title="Contract">
+							{showDetail === true ? (
+								<div>
+									<RevenueList itemData={itemData} />
+									<div
+										role="presentation"
+										className={styles.show_detail_tab}
+										onClick={() => setShowDetail(false)}
+									>
+										Hide Details
+										{' '}
+										<IcMArrowUp />
+									</div>
+								</div>
+							) : (
+								<div
+									role="presentation"
+									className={styles.show_detail_tab}
+									onClick={() => setShowDetail(true)}
+								>
+									Show more
+									{' '}
+									<IcMArrowDown />
+								</div>
+							)}
+						</TabPanel>
+						) : null}
+
 				</Tabs>
 			</div>
 

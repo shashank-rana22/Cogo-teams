@@ -34,7 +34,7 @@ function Footer({ data }) {
 		<div className={styles.container}>
 			{infoArray.map((item) => (item.value ? (
 				<div className={styles.text} key={item.key}>
-					{item.key}
+					<span style={{ fontWeight: '600' }}>{item.key}</span>
 					{' '}
 					:
 					{' '}

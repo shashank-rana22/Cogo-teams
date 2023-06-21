@@ -235,6 +235,12 @@ const apis = [
 		service_name : 'communication',
 		feature      : 'revenue_desk',
 	},
+	{
+		api          : 'get_contract_previous_service_providers',
+		access_type  : 'private',
+		service_name : 'unified_dashboard',
+		feature      : 'revenue_desk',
+	},
 ];
 
 export default apis;

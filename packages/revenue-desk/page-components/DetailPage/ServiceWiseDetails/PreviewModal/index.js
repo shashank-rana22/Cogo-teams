@@ -6,7 +6,7 @@ import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
 	modalStep, setModalStep,
-	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger,
+	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger, priceData,
 }) {
 	const newFilteredGroupedShowServicesData = {};
 
@@ -15,6 +15,20 @@ function PreviewModal({
 			(service) => supplierPayload?.[(service?.id)] && (supplierPayload[service?.id] || []).length,
 		);
 	});
+	const filteredPriceData = Object.keys(supplierPayload)
+		.filter((key) => supplierPayload[key].length > 0)
+		.reduce((x, key) => {
+			const obj = x;
+			obj[key] = priceData[key];
+			return obj;
+		}, {});
+
+	const consBuyPrice = Object.values(supplierPayload)
+		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_buy_price || 0 : []))
+		.reduce((sum, price) => sum + price, 0);
+	const consSellPrice = Object.values(filteredPriceData)
+		.map((price) => Number(price.replace(/[^\d.]/g, '')))
+		.reduce((sum, price) => sum + price, 0);
 	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(
 		(serviceType) => newFilteredGroupedShowServicesData[serviceType].length > 0,
 	);
