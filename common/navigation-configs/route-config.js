@@ -110,7 +110,6 @@ const routeConfig = {
 	...ticketManagement,
 	...rfqDashboard,
 	...schedules,
-	...rfqDashboard,
 };
 
 export default routeConfig;
