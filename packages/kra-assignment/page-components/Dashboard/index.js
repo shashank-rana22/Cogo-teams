@@ -47,10 +47,6 @@ function Dashboard() {
 		setSelectArrayAccordian,
 	} = useGetkrasAssigned({ filters });
 
-	// console.log('selectAccordian', selectAccordian);
-	// console.log('selectArrayAccordian', selectArrayAccordian);
-	// console.log('KrasAssignedData', KrasAssignedData);
-
 	const [filtersFields, setFiltersFields] = useState();
 
 	const onClickConfiguration = () => {
@@ -66,15 +62,11 @@ function Dashboard() {
 	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
 	const CHECK_SINGLE_EMPLOYEE_SELECTED = isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
-	console.log('selectAccordian', selectAccordian);
-
 	return (
 		<div>
 			<div className={styles.header}>
 				<h2>KRA Mapping</h2>
-				<div>
-					<Button onClick={onClickConfiguration}>ADD KRA</Button>
-				</div>
+				<Button onClick={onClickConfiguration}>ADD KRA</Button>
 			</div>
 
 			<div className={styles.redirect}>
@@ -166,6 +158,7 @@ function Dashboard() {
 							getUnassignedEmployee={getUnassignedEmployee}
 							getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
 							selectAccordian={selectAccordian}
+							setShowKRACalculationTable={setShowKRACalculationTable}
 						/>
 					</div>
 				)}

@@ -25,9 +25,9 @@ function KRAWeightCalculationTable({
 	inputValue, selectArray,
 	getEmployeesWithLowWeightage,
 	getkrasAssigned, getUnassignedEmployee,
+	selectAccordian,
+	setShowKRACalculationTable,
 }) {
-	const updatedValue = [...inputValue];
-
 	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
 		inputValue,
 		selectArray,
@@ -35,13 +35,17 @@ function KRAWeightCalculationTable({
 		getkrasAssigned,
 		getUnassignedEmployee,
 		setInputValue,
+		setShowKRACalculationTable,
 	});
+
+	const updatedValue = [...inputValue];
 
 	const renderFields = () => (inputValue || []).map((element, index) => (
 		<div className={styles.value} key={element?.kra_assigned}>
 			<Input
-				value={Math.round((inputValue[index]?.weightage || 1)
-					* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+				// value={Math.round((inputValue[index]?.weightage)
+				// 	* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+				value={inputValue[index]?.weightage}
 				size="sm"
 				placeholder="0"
 				onChange={(event) => {

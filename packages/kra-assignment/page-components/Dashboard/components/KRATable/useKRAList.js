@@ -1,4 +1,5 @@
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 const TOTAL_WEIGHTAGE = 1;
@@ -20,12 +21,16 @@ const useKRAList = ({ filters = {} }) => {
 
 	const { list } = data || {};
 
-	const KRAOptions = (list || []).map((element) => (
+	const initialKRAOptions = (list || []).map((element) => (
 		{
 			value : element?.id,
 			label : element?.kra_name,
 		}
 	));
+
+	const selectedKRAkeys = (inputValue || []).map((item) => item?.kra_assigned);
+
+	const KRAOptions = (initialKRAOptions || []).filter((element) => !selectedKRAkeys.includes(element?.value));
 
 	const onClickAddKRAs = () => {
 		(selectedValue || []).map((value) => (
@@ -34,7 +39,7 @@ const useKRAList = ({ filters = {} }) => {
 				{
 					kra_assigned : value,
 					name         : (list || []).find((element) => (element?.id === value)).kra_name,
-					weightage    : TOTAL_WEIGHTAGE / ((selectedValue || []).length),
+					weightage    : isEmpty(inputValue) ? TOTAL_WEIGHTAGE / ((selectedValue || []).length) : 0,
 				},
 
 			]))

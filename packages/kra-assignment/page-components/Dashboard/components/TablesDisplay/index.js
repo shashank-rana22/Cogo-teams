@@ -1,5 +1,3 @@
-// import React, { useState } from 'react';
-
 import StyledTable from '../../../common/StyledTable';
 
 import getColumns from './getColumns';
@@ -17,12 +15,11 @@ function TableDisplay({
 	setSelectArray,
 	type = '',
 }) {
-	// console.log(':::::', type);
-
 	const removeItem = (valueToRemove) => {
 		const updatedItems = selectArray.filter((item) => item !== valueToRemove);
 		setSelectArray(updatedItems);
 	};
+
 	const columns = type === TABLE_USED_FOR
 		? getColumnsAccordian({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading })
 		: getColumns({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading });

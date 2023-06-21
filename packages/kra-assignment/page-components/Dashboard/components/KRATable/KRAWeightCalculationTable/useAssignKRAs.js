@@ -8,6 +8,7 @@ const useAssignKRAs = ({
 	getkrasAssigned,
 	getUnassignedEmployee,
 	setInputValue,
+	setShowKRACalculationTable,
 }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
@@ -23,6 +24,7 @@ const useAssignKRAs = ({
 			getEmployeesWithLowWeightage();
 			getkrasAssigned();
 			getUnassignedEmployee();
+			setShowKRACalculationTable(false);
 		} catch (error) {
 			if (error.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
