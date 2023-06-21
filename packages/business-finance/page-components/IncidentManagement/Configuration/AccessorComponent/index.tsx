@@ -12,7 +12,7 @@ import TDSModal from '../../Modals/TDSModal';
 
 import getPropsByType from './getPropsByType';
 
-const typeComponentMapping = {
+const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDetails,
 	TDS_APPROVAL                           : TDSModal,
 	ISSUE_CREDIT_NOTE                      : RequestCN,
@@ -30,7 +30,7 @@ function AccessorComponent({ row, getIncidentData }) {
 	const { type = '', id = '', data, remark = '', status = '' } = row || {};
 	const { organization } = data || {};
 
-	const Component = typeComponentMapping[type] || {};
+	const Component = TYPE_COMPONENT_MAPPING[type] || null;
 
 	if (!Component) {
 		return null;

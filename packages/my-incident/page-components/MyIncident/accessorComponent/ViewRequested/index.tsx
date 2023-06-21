@@ -13,7 +13,7 @@ import RequestCN from './RequestCN';
 import SettlementModal from './SettlementModal';
 import TdsDeviationModal from './TdsDeviationModal';
 
-const typeComponentMapping = {
+const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDatailsModal,
 	TDS_APPROVAL                           : TdsDeviationModal,
 	ISSUE_CREDIT_NOTE                      : RequestCN,
@@ -39,7 +39,7 @@ function ViewRequested({ itemData, name, refetch }) {
 		setShowModal,
 	});
 
-	const Component = typeComponentMapping[type] || {};
+	const Component = TYPE_COMPONENT_MAPPING[type] || null;
 
 	if (!Component) {
 		return null;
