@@ -1,13 +1,15 @@
 import Filter from "./Filter";
 import VesselScheduleCard from "./VesselScheduleCard";
 import useGetVesselSchedules from "./hooks/useGetVesselSchedules";
+import {useState} from 'react'
 
 function  VesselSchedulesList(){
     
-    const {data} = useGetVesselSchedules();
-    console.log(data)
+    const [filter,setFilter] = useState({})
+    const {data} = useGetVesselSchedules({filter});
+    console.log(filter)
     return <>
-        <Filter/>
+        <Filter filter={filter} setFilter={setFilter}/>
         {
             data && data?.map((vessel)=>(
                 <>
