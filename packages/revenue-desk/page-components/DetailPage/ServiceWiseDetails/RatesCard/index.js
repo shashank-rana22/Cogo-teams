@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function RatesCard({
 	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
-	sellRates, loading,
+	sellRates, loading, shipmentData,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
 	const initialCardCount = 2;
@@ -37,6 +37,7 @@ function RatesCard({
 								setSellRates={setSellRates}
 								sellRates={sellRates}
 								prefrence_key={type}
+								shipmentData={shipmentData}
 							/>
 						))}
 					</div>

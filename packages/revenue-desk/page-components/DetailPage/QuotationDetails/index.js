@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function QuotationDetails({ itemData, setPriceData, priceData }) {
 	const { data:SellData, loading } = useGetShipmentQuotation({ shipmentData: itemData });
-	const { data:BuyData, BuyLoading } = useGetBuyQuotation({ shipmentData: itemData });
+	const { data:BuyData, loading:BuyLoading } = useGetBuyQuotation({ shipmentData: itemData });
 	const totalBuyPrice = BuyData?.net_pre_tax_total;
 	const totalBuyPriceCurrency = BuyData?.net_total_price_currency;
 	const totalSellPrice = SellData?.net_pre_tax_total;

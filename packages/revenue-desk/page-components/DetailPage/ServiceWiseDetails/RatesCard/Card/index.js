@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
-	sellRates, prefrence_key, fromkey, priority_no,
+	sellRates, prefrence_key, fromkey, priority_no, shipmentData,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -53,6 +53,10 @@ function Card({
 		}
 		return null;
 	};
+	const isExpired = (rowData, shipmentData) => (
+		prefrence_key === 'System Rates'
+			&& rowData?.validity_end <= shipmentData?.schedule_departure
+	);
 	const showData = (val) => val || '';
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const updated_at = data?.rowData?.updated_at;
@@ -104,8 +108,21 @@ function Card({
 							) : null}
 						</div>
 						<div className={styles.source}>
-							{startCase(data?.rowData?.source || '')}
+							{
+							data?.rowData?.mode ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">{data?.rowData?.mode}</Pill>
+								</div>
+							) : null
+							}
 						</div>
+						{
+							data?.rowData?.schedule_type ? (
+								<div>
+									<Pill size="md" color="#F2F3FA">{data?.rowData?.schedule_type}</Pill>
+								</div>
+							) : null
+						}
 					</div>
 					<div style={{ display: 'flex' }}>
 						{rate_key ? (<div><Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill></div>
@@ -115,6 +132,13 @@ function Card({
 								<Pill size="md" color="#F9F9F9"><div style={{ color: '#7278AD' }}>So1 Selected Rate</div></Pill>
 							</div>
 						) : null}
+						{
+							data?.rowData?.agent ? (
+								<div>
+									<Pill size="md" color="#F7FAEF">{data?.rowData?.agent}</Pill>
+								</div>
+							) : null
+						}
 					</div>
 				</div>
 				<div className={styles.lower_section}>
@@ -125,6 +149,9 @@ function Card({
 						</div>
 						<div className={styles.text2}>
 							{showValidity(data)}
+						</div>
+						<div className={styles.text2}>
+							{isExpired(data?.rowData, shipmentData)}
 						</div>
 						{data?.rowData?.platform ? (
 							<div>
@@ -161,7 +188,6 @@ function Card({
 								15 Days:
 								{' '}
 								{(data?.rowData?.fulfillment_ratio_15 === 0 || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
-								{console.log(data, 'data')}
 							</div>
 						</div>
 					</div>
@@ -240,6 +266,22 @@ function Card({
 							>
 								{Number(data?.rowData?.profit_percentage).toFixed(2)}
 								%
+							</div>
+						</div>
+						<div style={{ display: 'flex' }}>
+							Profit : &nbsp;
+							<div className={Number(data?.rowData?.profit) > 0
+								? styles.positive_profit : styles.negative_profit}
+							>
+								{formatAmount({
+									amount   : data?.rowData?.profit,
+									currency : data?.rowData?.total_price_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
 							</div>
 						</div>
 					</div>
