@@ -4,7 +4,7 @@ import {
 	IcMArrowRotateUp,
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';

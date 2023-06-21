@@ -1,5 +1,5 @@
-import { IcMPortArrow } from '@cogoport/icons-react';
 import { Tooltip } from '@cogoport/components';
+import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 

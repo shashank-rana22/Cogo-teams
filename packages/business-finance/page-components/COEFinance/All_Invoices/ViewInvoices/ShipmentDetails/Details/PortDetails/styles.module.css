@@ -24,11 +24,11 @@
 }
 
 .value {
+	width: 150px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 700;
 	color: #333;
-	width: 150px;
-	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
