@@ -100,7 +100,7 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 			accesableButtons = ['assign_modal'];
 		}
 
-		if (!isGroupFormed && supportAgentId !== userId) {
+		if (!isGroupFormed && supportAgentId !== userId && !showBotMessages) {
 			accesableButtons = [...accesableButtons, 'request_for_assign'];
 		}
 
