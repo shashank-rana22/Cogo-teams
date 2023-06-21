@@ -106,7 +106,6 @@ function AwbNumberUsed({
 					date       : singleItem.procured_date,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
-					separator  : ' ',
 				})}
 			</div>
 		),
