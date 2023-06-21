@@ -32,6 +32,7 @@ import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import serviceDiscovery from './config/service-discovery';
 import shipmentAir from './config/shipment-air';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
