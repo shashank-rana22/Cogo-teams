@@ -1,4 +1,4 @@
-import { Input, Popover, cl } from '@cogoport/components';
+import { Input, Popover, cl, Tabs, TabPanel } from '@cogoport/components';
 import {
 	IcMFilter,
 	IcMSearchlight,
@@ -8,6 +8,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import TABS_MAPPING from '../../../../constants/messgesTabsMapping';
 import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
@@ -17,6 +18,9 @@ import AutoAssignComponent from './AutoAssignComponent';
 import FlashUserChats from './FlashUserChats';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
+
+const GROUP_TABS_VIEW_ACCESS = ['admin_view', 'supply_view'];
+const FLASH_MESSAGES_VIEW_ACCESS = ['admin_view', 'kam_view'];
 
 function MessageList(messageProps) {
 	const {
@@ -43,6 +47,8 @@ function MessageList(messageProps) {
 		viewType = '',
 		flashMessagesList = [],
 		flashMessagesLoading = false,
+		activeTab = 'all',
+		setActiveTab,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -63,7 +69,7 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
-	const canShowCarousel = viewType !== 'shipment_view' && showCarousel
+	const canShowCarousel = FLASH_MESSAGES_VIEW_ACCESS.includes(viewType) && showCarousel
 	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
 
 	const getListHeightStyles = () => {
@@ -103,6 +109,26 @@ function MessageList(messageProps) {
 
 	return (
 		<>
+			{GROUP_TABS_VIEW_ACCESS.includes(viewType)
+			&& (
+				<div className={styles.tabs}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						{TABS_MAPPING.map((eachTab) => (
+							<TabPanel
+								key={eachTab.name}
+								name={eachTab.name}
+								title={eachTab.title}
+							/>
+						))}
+					</Tabs>
+				</div>
+			)}
+
 			<FlashUserChats
 				flashMessagesList={flashMessagesList}
 				activeCardId={activeCardId}
