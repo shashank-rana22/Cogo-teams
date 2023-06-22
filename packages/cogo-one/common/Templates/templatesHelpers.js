@@ -15,11 +15,10 @@ const PREVIEW_REPLACE_MAPPING = [
 const LOADER_COUNT = 6;
 
 export function Preview({ previewData }) {
-	let formattedPreview = previewData;
-
-	PREVIEW_REPLACE_MAPPING.forEach((eachPreview) => {
-		formattedPreview = formattedPreview?.replaceAll(eachPreview?.find, eachPreview?.replace);
-	});
+	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce((
+		accumulator,
+		currentValue,
+	) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace), previewData);
 
 	return <div dangerouslySetInnerHTML={{ __html: formattedPreview }} />;
 }
