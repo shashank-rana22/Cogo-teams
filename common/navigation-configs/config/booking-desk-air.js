@@ -1,7 +1,7 @@
-const shipmentAir = {
+const bookingDeskAir = {
 	'/[partner_id]/booking-desk/air': {
 		navigation: 'coe-shipment_air',
 	},
 };
 
-export default shipmentAir;
+export default bookingDeskAir;

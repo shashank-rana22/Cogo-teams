@@ -1,7 +1,7 @@
 {
-	"name": "@cogoport/shipment-air",
+	"name": "@cogoport/booking-desk-air",
 	"version": "1.0.0",
-	"description": "Package for Air Shipment",
+	"description": "Package for Air Booking Desk",
 	"private": true,
 	"dependencies": {
 		"@cogoport/components": "^1.0.322",
