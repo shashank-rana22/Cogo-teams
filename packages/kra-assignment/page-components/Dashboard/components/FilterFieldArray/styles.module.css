@@ -10,7 +10,7 @@
 }
 
 .container{
-    margin-bottom: 20px;
+    margin: 10px 0 0 0;
 	border: 1px solid var(--color-tertiary-beige-4);
     border-radius: 6px;
 }

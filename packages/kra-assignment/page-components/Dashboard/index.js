@@ -13,7 +13,8 @@ import useGetEmployeesWithLowWeightage from './useGetEmployeesWithLowWeightage';
 import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
-const REDIRECT_URL = '/kra-assignment/create';
+const REDIRECT_URL_CREATE = '/kra-assignment/create';
+const REDIRECT_URL_RATING = '/kra-assignment/performance-rating-review';
 const DISPLAY_ADD_KRA_BUTTON = 1;
 
 function Dashboard() {
@@ -39,7 +40,7 @@ function Dashboard() {
 		getkrasAssigned,
 		selectAccordian,
 		setSelectAccordian,
-		selectArrayAccordian,
+		selectArrayAccordian = [],
 		setSelectArrayAccordian,
 	} = useGetkrasAssigned({ filters });
 
@@ -53,18 +54,27 @@ function Dashboard() {
 	const ARRAY_OF_UNASSIGNED_IDS = unassignedList?.map((obj) => obj.id);
 	const ARRAY_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.map((obj) => obj.id);
 
-	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
-	const CHECK_SINGLE_EMPLOYEE_SELECTED = isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
+	const CHECK_IF_ONE_EMPLOYEE_SELECTED = (selectArrayUnassignedEmployee.length
+		+ selectArrayAccordian.length
+		+ selectArrayLowWeightEmployee.length) === DISPLAY_ADD_KRA_BUTTON;
 
-	const onClickConfiguration = () => {
-		router.push(REDIRECT_URL, REDIRECT_URL);
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
+
+	const onClickConfiguration = (type) => {
+		if (type === 'add') {
+			router.push(REDIRECT_URL_CREATE, REDIRECT_URL_CREATE);
+		}
+		if (type === 'review') {
+			router.push(REDIRECT_URL_RATING, REDIRECT_URL_RATING);
+		}
 	};
 
 	return (
 		<div>
 			<div className={styles.header}>
 				<h2>KRA Mapping</h2>
-				<Button onClick={onClickConfiguration}>ADD KRA</Button>
+				<Button onClick={() => onClickConfiguration('review')}>Go To Performance Rating Review</Button>
+				<Button onClick={() => onClickConfiguration('add')}>ADD KRA</Button>
 			</div>
 
 			<div className={styles.redirect}>
@@ -103,12 +113,12 @@ function Dashboard() {
 						check={CHECK_SINGLE_EMPLOYEE_SELECTED}
 					/>
 
-					<div className={styles.table_display}>
-						{CHECK_SINGLE_EMPLOYEE_SELECTED
-							? <FilterFieldArray setFilters={setFiltersFields} />
-							: null}
-						<div className={styles.filter}>All Unassigned KRA Employee List : </div>
+					{CHECK_SINGLE_EMPLOYEE_SELECTED
+						? <FilterFieldArray setFilters={setFiltersFields} />
+						: null}
 
+					<div className={styles.table_display}>
+						<h4>All Unassigned KRA Employee List : </h4>
 						<TableDisplay
 							data={unassignedList}
 							loading={loading}

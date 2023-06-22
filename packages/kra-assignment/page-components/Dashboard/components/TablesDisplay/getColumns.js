@@ -1,19 +1,19 @@
 import { Checkbox } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import EqualArray from '../../../config/EqualArray';
+// import EqualArray from '../../../config/EqualArray';
 
 // import styles from './styles.module.css';
 
-const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading }) => [
+const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading, allElementsPresent }) => [
 	{
 		id     : 'select_options',
 		Header : (
 			<div role="presentation">
 				<Checkbox
-					checked={loading ? null : EqualArray(selectArray, ARRAY_OF_IDS)}
+					checked={loading ? null : allElementsPresent}
 					onChange={() => {
-						if (EqualArray(selectArray, ARRAY_OF_IDS)) {
+						if (allElementsPresent) {
 							setSelectArray([]);
 						} else {
 							setSelectArray([...ARRAY_OF_IDS]);
@@ -27,6 +27,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 				<Checkbox
 					checked={selectArray.includes(item.id)}
 					onChange={() => {
+						console.log('rrr', selectArray);
 						if (!selectArray.includes(item.id)) { setSelectArray([...selectArray, item.id]); } else {
 							removeItem(item.id);
 						}
