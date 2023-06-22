@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 function useGetkrasAssigned({ filters }) {
@@ -36,8 +37,8 @@ function useGetkrasAssigned({ filters }) {
 	}, [trigger, filters]);
 
 	useEffect(() => {
-		getkrasAssigned();
-	}, [getkrasAssigned]);
+		if (!isEmpty(filters)) { getkrasAssigned(); }
+	}, [getkrasAssigned, filters]);
 
 	return {
 		data,

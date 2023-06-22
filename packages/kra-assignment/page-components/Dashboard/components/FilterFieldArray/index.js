@@ -7,8 +7,14 @@ import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
-function FiltersDisplay({ setFilters }) {
-	const { watch, control, handleSubmit, onSubmit, onClickReset, errors } = useFilterDisplay({ setFilters });
+function FiltersDisplay({ setFilters, setShowKRACalculationTable }) {
+	const {
+		watch,
+		control,
+		handleSubmit,
+		onSubmit,
+		errors,
+	} = useFilterDisplay({ setFilters, setShowKRACalculationTable });
 
 	const WATCH_VALUES = watch();
 
@@ -31,16 +37,6 @@ function FiltersDisplay({ setFilters }) {
 			</section>
 
 			<div className={styles.button_container}>
-				{/* <Button
-					type="button"
-					themeType="secondary"
-					style={{ marginRight: '8px' }}
-					onClick={onClickReset}
-					size="sm"
-				>
-					Reset
-				</Button> */}
-
 				<Button
 					size="sm"
 					themeType="secondary"

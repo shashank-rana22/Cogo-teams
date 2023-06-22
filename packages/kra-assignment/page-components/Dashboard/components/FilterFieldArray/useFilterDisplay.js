@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const CHECK_LENGTH = 0;
 
-const useFilterDisplay = ({ setFilters }) => {
+const useFilterDisplay = ({ setFilters, setShowKRACalculationTable }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
 	const { control, handleSubmit, reset, watch, formState: { errors } } = useForm();
@@ -21,7 +21,7 @@ const useFilterDisplay = ({ setFilters }) => {
 		}
 
 		setFilters({ ...values });
-
+		setShowKRACalculationTable(true);
 		setShowFilter(true);
 	};
 

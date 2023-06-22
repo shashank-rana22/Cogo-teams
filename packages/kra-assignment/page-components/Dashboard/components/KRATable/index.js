@@ -1,16 +1,25 @@
+import { isEmpty } from '@cogoport/utils';
+
 import KRAWeightCalculationTable from './KRAWeightCalculationTable';
 import SelectKRAs from './SelectKRAs';
 import useKRAList from './useKRAList';
 
+const ARRAY_LENGTH_CONST = 1;
+
 function KRATable({
 	selectArray,
 	selectAccordian,
-	filters,
+	appliedFilters,
 	getEmployeesWithLowWeightage,
 	getkrasAssigned,
 	getUnassignedEmployee,
 	setShowKRACalculationTable,
+	filtersFields,
 }) {
+	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH_CONST]
+	|| [];
+	const filters = isEmpty(filtersFields) ? appliedFilters : fieldsFilterLastElement;
+
 	const {
 		selectedValue,
 		setSelectedValue,

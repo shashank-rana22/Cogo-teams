@@ -22,7 +22,11 @@ function Dashboard() {
 
 	const {
 		data:unassignedData = [],
-		loading, filters, setFilters,
+		loading,
+		filters,
+		setFilters,
+		filtersFields,
+		setFiltersFields,
 		getUnassignedEmployee,
 		showKRACalculationTable,
 		setShowKRACalculationTable,
@@ -47,7 +51,6 @@ function Dashboard() {
 	const { list:unassignedList = [] } = unassignedData;
 	const { list:lowWeightageEmployeeList = [] } = lowWeightageEmployeeData;
 
-	const [filtersFields, setFiltersFields] = useState();
 	const [selectArrayUnassignedEmployee, setSelectArrayUnassignedEmployee] = useState([]);
 	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
 
@@ -114,10 +117,16 @@ function Dashboard() {
 						setSelectArrayAccordian={setSelectArrayAccordian}
 						setSelectArrayLowWeightEmployee={setSelectArrayLowWeightEmployee}
 						setSelectArrayUnassignedEmployee={setSelectArrayUnassignedEmployee}
+						setShowKRACalculationTable={setShowKRACalculationTable}
 					/>
 
 					{CHECK_SINGLE_EMPLOYEE_SELECTED
-						? <FilterFieldArray setFilters={setFiltersFields} />
+						? (
+							<FilterFieldArray
+								setFilters={setFiltersFields}
+								setShowKRACalculationTable={setShowKRACalculationTable}
+							/>
+						)
 						: null}
 
 					<div className={styles.table_display}>
@@ -168,12 +177,13 @@ function Dashboard() {
 					<div className={styles.section_right}>
 						<KRATable
 							selectArray={selectArrayAccordian}
-							filters={filters}
+							appliedFilters={filters}
 							getkrasAssigned={getkrasAssigned}
 							getUnassignedEmployee={getUnassignedEmployee}
 							getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
 							selectAccordian={selectAccordian}
 							setShowKRACalculationTable={setShowKRACalculationTable}
+							filtersFields={filtersFields}
 						/>
 					</div>
 				)}

@@ -8,6 +8,7 @@ const useFilterDisplay = ({
 	setSelectArrayAccordian,
 	setSelectArrayLowWeightEmployee,
 	setSelectArrayUnassignedEmployee,
+	setShowKRACalculationTable,
 }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
@@ -39,6 +40,7 @@ const useFilterDisplay = ({
 		setSelectArrayAccordian([]);
 		setSelectArrayLowWeightEmployee([]);
 		setSelectArrayUnassignedEmployee([]);
+		setShowKRACalculationTable();
 	};
 
 	return {

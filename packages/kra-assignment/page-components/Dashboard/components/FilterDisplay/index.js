@@ -13,6 +13,7 @@ function FilterFieldArray({
 	setSelectArrayAccordian,
 	setSelectArrayLowWeightEmployee,
 	setSelectArrayUnassignedEmployee,
+	setShowKRACalculationTable,
 }) {
 	const {
 		showFilter,
@@ -26,6 +27,7 @@ function FilterFieldArray({
 		setSelectArrayAccordian,
 		setSelectArrayLowWeightEmployee,
 		setSelectArrayUnassignedEmployee,
+		setShowKRACalculationTable,
 	});
 
 	const WATCH_VALUES = watch();
