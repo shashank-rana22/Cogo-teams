@@ -1,11 +1,11 @@
 import { Toast, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 import calculateAccrue from './calculateAccrue';
 
@@ -34,8 +34,12 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '', milestone,
+		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
+
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
 
 	const { startDate, endDate } = date || {};
 
@@ -85,12 +89,13 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					tradeType            : tradeType || undefined,
 					jobType              : shipmentType || undefined,
 					entityCode           : entity || undefined,
-					entityId             : entityMappingData[entity] || undefined,
+					entityId             : entityId || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
 					sortType             : sortType || undefined,
+					channel              : channel || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
@@ -136,7 +141,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		tradeType,
 		year,
 		entity,
+		entityId,
 		milestone,
+		channel,
 	]);
 
 	useEffect(() => {

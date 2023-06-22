@@ -7,6 +7,7 @@ import {
 	Textarea,
 	Checkbox,
 } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -14,6 +15,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import isDisabled from '../../../../utils/isDisabled';
 
 import LineItemCard from './lineItemCard/index';
@@ -75,6 +77,11 @@ function ShipmentDetailsCard({
 		shipmentType = '',
 		reasonForCN = '',
 		outstandingDocument = '',
+		paymentType = '',
+		isIncidental = '',
+		advancedAmount = 0,
+		advancedAmountCurrency = '',
+
 	} = billAdditionalObject || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
@@ -119,11 +126,11 @@ function ShipmentDetailsCard({
 		setRejected(undoRejectedData);
 
 		if (id === 1) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
 		} else if (id === 2) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else if (id === 3) {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
 		}
 	};
 
@@ -139,11 +146,11 @@ function ShipmentDetailsCard({
 	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
 		} else if (Object.keys(showRejected).includes('2')) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
 		}
 		setShowRejected(false);
 	};
@@ -710,7 +717,7 @@ function ShipmentDetailsCard({
 											{shipmentType === 'ftl_freight' && outstandingDocument
 											&& (
 												<div className={styles.document}>
-													Outstanding Document -
+													Outstanding Proforma Approval -
 													{' '}
 													<Button
 														className={styles.button}
@@ -729,9 +736,49 @@ function ShipmentDetailsCard({
 												<div className={styles.margin_bottom}>
 													Reason For CN -
 													{' '}
-													<span>{reasonForCN}</span>
+													<span>{startCase(reasonForCN)}</span>
 												</div>
 											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL' && 	paymentType
+											&& (
+												<div className={styles.margin_bottom}>
+													Payment Type-
+													{' '}
+													<span>{startCase(paymentType)}</span>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL'
+												&& !!advancedAmount
+											&& (
+												<div className={styles.advanced_amount}>
+													Advanced Amount -
+													{' '}
+													<div className={styles.text_decoration}>
+
+														<div className={styles.values}>
+															{showOverflowingNumber(getFormattedPrice(
+																advancedAmount,
+																advancedAmountCurrency,
+															) || 0, 10)}
+														</div>
+
+													</div>
+
+												</div>
+											)}
+
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL' && 		isIncidental
+											&& (
+												<div className={styles.margin_bottom}>
+													Is Incidental-
+													{' '}
+													<span>{startCase(isIncidental)}</span>
+												</div>
+											)}
+
 										</div>
 									</div>
 								)}

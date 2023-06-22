@@ -1,21 +1,21 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-const geo = getGeoConstants();
-export const cogoOneAdmins = [
-	geo?.uuid?.tech_super_admin_id,
-	geo?.uuid?.cogoverse_admin_id,
-	geo?.uuid?.super_admin_id,
-];
+const getViewTypeMapping = () => {
+	const geo = getGeoConstants();
 
-export const PARAMOUNT_ORG_ID = '1e4b9f43-4863-4e29-a944-8e9e8780e514';
+	const USER_IDS_CHECK = {
+		admin_view: geo.uuid.cogo_one_admin_user_ids,
+	};
 
-export const COGOVERSE_USER_ID = geo?.uuid.cogoverse_user_id;
+	const ROLE_IDS_CHECK = {
+		shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
+		kam_view      : geo.uuid.cogo_one_kam_agent_ids,
+		admin_view    : geo.uuid.cogo_one_admin_ids,
+	};
 
-export const shipmentAgentView = [
-	geo?.uuid?.cogoverse_shipment_specialist_id,
-];
-
-export const VIEW_MAPPING = {
-	admin_view    : cogoOneAdmins,
-	shipment_view : shipmentAgentView,
+	return {
+		USER_IDS_CHECK, ROLE_IDS_CHECK,
+	};
 };
+
+export default getViewTypeMapping;

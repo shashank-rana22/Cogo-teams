@@ -1,13 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
-import controls from '../utils/controls';
+import getControls from '../utils/controls';
 
 function useVendorBankDetail({
 	setActiveStepper = () => {},
@@ -51,7 +52,7 @@ function useVendorBankDetail({
 	}, { manual: true });
 
 	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
+		const regex = GLOBAL_CONSTANTS.regex_patterns.ifsc_code;
 
 		if (ifscCode?.match(regex)) {
 			try {
@@ -110,6 +111,8 @@ function useVendorBankDetail({
 		initialCall: true, params: { filters: { type: ['pincode'], country_id } },
 	}));
 
+	const controls = getControls({ country_id });
+
 	const newControls = (controls || []).map((controlItem) => {
 		const { name } = controlItem;
 		let newControl = { ...controlItem };
@@ -133,6 +136,7 @@ function useVendorBankDetail({
 				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [payment_details, setValue, vendorInformation]);
 
 	return {

@@ -778,6 +778,12 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'exchange_rate',
 	},
+	{
+		api          : 'update_contract_stakeholder',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;

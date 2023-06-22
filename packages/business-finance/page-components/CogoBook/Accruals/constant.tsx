@@ -1,7 +1,9 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import React from 'react';
 
 import SortIcon from '../common/SortIcon';
 
@@ -9,7 +11,7 @@ import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
 import DeleteModal from './ViewSelectedInvoice/DeleteModal';
 
-export const monthData = {
+export const MONTH_DATA = {
 	1  : 'January',
 	2  : 'February',
 	3  : 'March',
@@ -24,12 +26,21 @@ export const monthData = {
 	12 : 'December',
 };
 
-export const optionsEntity = [
-	{ label: '201', value: '201' },
-	{ label: '301', value: '301' },
-	{ label: '401', value: '401' },
-	{ label: '501', value: '501' },
-];
+export const getEntityOptions = () => {
+	const filteredEntity = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).filter(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		([_, value]: any) => value.feature_supported.includes('cogo_books'),
+	);
+
+	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (
+		{
+			label : Number(key),
+			value : Number(key),
+		}
+	));
+
+	return ENTITY_OPTIONS;
+};
 
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
@@ -172,14 +183,28 @@ export const bookedColumn = (
 					<div className={styles.quotation_styles}>
 						<div>
 							<span>
-								{getFormattedPrice(expenseBooked, expenseCurrency)}
+								{formatAmount({
+									amount   :	expenseBooked,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</span>
 						</div>
 
 						<div className={styles.quotation_value}>
 							Quotation :
 							{' '}
-							{getFormattedPrice(buyQuotation, buyQuotationCurrency) || 'INR 0.00'}
+							{formatAmount({
+								amount   :	buyQuotation,
+								currency : buyQuotationCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) }
 						</div>
 						<div className={styles.line_value}>
 							<div className={quotationDiffProfit >= 0
@@ -191,7 +216,14 @@ export const bookedColumn = (
 							<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
 							{' '}
 							<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-								{getFormattedPrice(quotationDiff, expenseCurrency) || 'INR 0.00'}
+								{formatAmount({
+									amount   :	quotationDiff as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}) }
 							</div>
 						</div>
 
@@ -222,12 +254,29 @@ export const bookedColumn = (
 
 				return (
 					<div className={styles.quotation_styles}>
-						<span>{getFormattedPrice(incomeBooked, incomeCurrency)}</span>
+						<span>
+							{formatAmount({
+								amount   :	incomeBooked,
+								currency : incomeCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+
+						</span>
 
 						<div className={styles.quotation_value}>
 							Quotation :
 							{' '}
-							{getFormattedPrice(sellQuotation, sellQuotationCurrency) || 'INR 0.00'}
+							{formatAmount({
+								amount   :	sellQuotation,
+								currency : sellQuotationCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) }
 						</div>
 						<div className={styles.line_value}>
 							<div className={quotationDiffProfit >= 0
@@ -239,7 +288,14 @@ export const bookedColumn = (
 							<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
 							{' '}
 							<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-								{getFormattedPrice(quotationDiff, sellQuotationCurrency) || 'INR 0.00'}
+								{formatAmount({
+									amount   :	quotationDiff as any,
+									currency : sellQuotationCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}) }
 							</div>
 						</div>
 					</div>
@@ -255,7 +311,14 @@ export const bookedColumn = (
 				return (
 					<div>
 						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
-							{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
+							{formatAmount({
+								amount   :	quotationProfit,
+								currency : sellQuotationCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
 							{(quotationMargin || 0.00).toFixed(2) || '0'}
@@ -303,7 +366,14 @@ export const bookedColumn = (
 
 				return (
 					<span className={renderClassName()}>
-						{getFormattedPrice(profit, expenseCurrency) || '-' }
+						{formatAmount({
+							amount   :	profit,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) || '-' }
 						<div>
 							{profitPercentage
 								? `${(profitPercentage || 0.00).toFixed(2)}%`
@@ -472,7 +542,14 @@ export const column = ({
 			const { expenseBooked = '', expenseCurrency = '' } = original || {};
 			return (
 				<span>
-					{ getFormattedPrice(expenseBooked, expenseCurrency)}
+					{ formatAmount({
+						amount   :	expenseBooked,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</span>
 			);
 		},
@@ -482,7 +559,18 @@ export const column = ({
 		id       : 'adjusted_expense',
 		Cell     : ({ row: { original } }) => {
 			const { expenseAccrued = {}, expenseCurrency } = original || {};
-			return <span>{ getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{ formatAmount({
+						amount   :	expenseAccrued,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 
 	}, {
@@ -499,7 +587,18 @@ export const column = ({
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked = '' } = original || {};
-			return <span>{ getFormattedPrice(incomeBooked, 'INR') || '-' }</span>;
+			return (
+				<span>
+					{ formatAmount({
+						amount   :	incomeBooked,
+						currency : GLOBAL_CONSTANTS.currency_code.INR,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	}, {
 		Header   : 'Adjusted Income ',
@@ -507,7 +606,18 @@ export const column = ({
 		id       : 'adjusted_income',
 		Cell     : ({ row: { original } }) => {
 			const { incomeAccrued = {}, incomeCurrency } = original || {};
-			return <span>{ getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{ formatAmount({
+						amount   :	incomeAccrued,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	}, {
 		Header: () => (
@@ -537,7 +647,14 @@ export const column = ({
 			} return (
 				<>
 					<span className={renderClassName()}>
-						{getFormattedPrice(profit, expenseCurrency) || '-' }
+						{formatAmount({
+							amount   :	profit,
+							currency : expenseCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) || '-' }
 					</span>
 					<div>
 						{profitPercentage ? `${(profitPercentage || 0.00).toFixed(2)}%` : '---'}
@@ -668,3 +785,12 @@ export const MILESTONE_OPTIONS = [
 	{ label: 'Cargo Dropped', value: 'cargo_dropped' },
 	{ label: 'Flight Departed', value: 'flight_departed' },
 ];
+
+export const CHANNEL_OPTIONS = [{
+	label : 'Review Channel',
+	value : 'REVIEW',
+
+}, {
+	label : 'Audit Channel',
+	value : 'AUDIT',
+}];

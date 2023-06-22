@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -38,16 +38,18 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'expenseBooked',
 		Cell     : ({ row: { original } }) => {
 			const { expenseBooked, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseBooked, expenseCurrency) || '-' }</span>;
-		},
-	},
-	{
-		Header   : 'Expense Accrued',
-		accessor : 'expenseAccrued',
-		id       : 'expenseAccrued',
-		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseBooked,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -56,16 +58,18 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'incomeBooked',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
-		},
-	},
-	{
-		Header   : 'Income Accrued',
-		accessor : 'incomeAccrued',
-		id       : 'incomeAccrued',
-		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeBooked,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -103,8 +107,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualExpense
-								- (expenseBooked + expenseAccrued)), expenseCurrency)}
+								{formatAmount({
+									amount   :	(actualExpense - (expenseBooked + expenseAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
@@ -115,8 +125,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualIncome - (
-									incomeBooked + incomeAccrued)), expenseCurrency)}
+								{formatAmount({
+									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
@@ -129,7 +145,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 					placement="bottom"
 					content={renderContent()}
 				>
-					<div style={{ display: 'flex', cursor: 'pointer' }}>
+					<div className={styles.cursor}>
 						<ValuePercentage data={original} keys="variance" />
 						<div><IcMArrowRotateDown /></div>
 					</div>
@@ -170,7 +186,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'expenseBooked',
 		Cell     : ({ row: { original } }) => {
 			const { expenseBooked, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseBooked, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseBooked,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -179,7 +206,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'expenseAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { expenseAccrued, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseAccrued,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -188,7 +226,19 @@ export const ARCHIVE_DECLARED = (
 		id       : 'incomeBooked',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeBooked,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -197,7 +247,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'incomeAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { incomeAccrued, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeAccrued,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -233,6 +294,157 @@ export const ARCHIVE_DECLARED = (
 				<div className={styles.button}>
 					<Button className="arrow" onClick={clickHandle} themeType="secondary"> View</Button>
 				</div>
+			);
+		},
+	},
+];
+
+export const ARCHIVE_MONTH_ACCRUED = [
+	{
+		Header   : 'SID',
+		accessor : 'sid',
+		id       : 'sid',
+		Cell     : ({ row: { original } }) => {
+			const { jobNumber = '', serviceType = '' } = original || {};
+			return (
+
+				<div className={styles.job_number}>
+					<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
+					<div>{startCase(serviceType || '-')}</div>
+				</div>
+
+			);
+		},
+	},
+	{
+		Header   : 'Transaction Date',
+		accessor : 'etd',
+		id       : 'etd',
+		Cell     : ({ row: { original } }) => {
+			const { etd } = original || {};
+			return <span>{ format(etd, 'dd/MM/yyy') || '-' }</span>;
+		},
+	},
+	{
+		Header   : 'Expense Accrued',
+		accessor : 'expenseAccrued',
+		id       : 'expenseAccrued',
+		Cell     : ({ row: { original } }) => {
+			const { expenseAccrued, expenseCurrency } = original || {};
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseAccrued,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
+		},
+	},
+	{
+		Header   : 'Income Accrued',
+		accessor : 'incomeAccrued',
+		id       : 'incomeAccrued',
+		Cell     : ({ row: { original } }) => {
+			const { incomeAccrued, incomeCurrency } = original || {};
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeAccrued,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
+		},
+	},
+	{
+		Header   : 'Booked Profit',
+		accessor : 'bookedProfit',
+		id       : 'bookedProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="bookedProfit" />,
+	},
+	{
+		Header   : 'Actual Profit',
+		accessor : 'actualProfit',
+		id       : 'actualProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="actualProfit" />,
+	},
+	{
+		Header   : 'Variance',
+		accessor : 'variance',
+		id       : 'variance',
+		Cell     : ({ row: { original } }) => {
+			const {
+				expenseBooked = 0,
+				actualExpense = 0,
+				incomeBooked = 0,
+				actualIncome = 0,
+				expenseAccrued = 0,
+				incomeAccrued = 0,
+				expenseCurrency,
+			} = original || {};
+
+			const renderContent = () => (
+				<div className={styles.variance_styles}>
+					<div>
+						<div className={styles.expense}>Expense Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>
+
+								{formatAmount({
+									amount:	(
+										actualExpense - (expenseBooked + expenseAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
+
+							</span>
+						</div>
+					</div>
+					<div>
+						<div className={styles.income}>Income Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>
+								{formatAmount({
+									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									currency :	expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
+
+							</span>
+						</div>
+					</div>
+				</div>
+			);
+
+			return (
+				<Tooltip
+					placement="bottom"
+					content={renderContent()}
+				>
+					<div className={styles.cursor}>
+						<ValuePercentage data={original} keys="variance" />
+						<div><IcMArrowRotateDown /></div>
+					</div>
+				</Tooltip>
 			);
 		},
 	},

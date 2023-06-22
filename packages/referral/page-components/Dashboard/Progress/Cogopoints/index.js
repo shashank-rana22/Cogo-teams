@@ -18,7 +18,7 @@ function Cogopoints({ cogopointData = {} }) {
 		esitimated: estimated = 0,
 	} = cogopointData;
 
-	const { detailsPieChart } = pieChartMapping(alloted);
+	const { detailsPieChart } = pieChartMapping({ alloted });
 	const { bonusPoints } = cogopointsMapping(network_bonus, referral_bonus);
 
 	return (

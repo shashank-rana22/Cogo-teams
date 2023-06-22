@@ -1,13 +1,12 @@
 import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import BarChart from '../../../commons/BarChart';
 import DashboardLoader from '../../../commons/DashboardLoader';
-import { months } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -36,7 +35,7 @@ function DailySalesOutstanding({
 		graphView   : 'normalView',
 	});
 
-	const margin = {
+	const MARGIN = {
 		top    : 10,
 		right  : 0,
 		bottom : 30,
@@ -53,7 +52,7 @@ function DailySalesOutstanding({
 		);
 	}
 
-	const arrayMonths = [];
+	const ARRAY_MONTHS = [];
 
 	const d = new Date();
 
@@ -62,23 +61,23 @@ function DailySalesOutstanding({
 	let currentMonth1; let currentMonth2; let currentMonth3;
 
 	if (d.getMonth() >= 2) {
-		currentMonth1 = months[d.getMonth()];
-		currentMonth2 = months[d.getMonth() - 1];
-		currentMonth3 = months[d.getMonth() - 2];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
+		currentMonth2 = GLOBAL_CONSTANTS.months[d.getMonth() - 1];
+		currentMonth3 = GLOBAL_CONSTANTS.months[d.getMonth() - 2];
 
 		newArray = [currentMonth3, currentMonth2, currentMonth1];
 	} else if (d.getMonth() === 1) {
-		currentMonth1 = months[d.getMonth()];
-		currentMonth2 = months[d.getMonth() - 1];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
+		currentMonth2 = GLOBAL_CONSTANTS.months[d.getMonth() - 1];
 		newArray = [currentMonth2, currentMonth1];
 	} else {
-		currentMonth1 = months[d.getMonth()];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
 		newArray = [currentMonth1];
 	}
 
 	(dailySalesOutstandingData || []).forEach((element) => {
 		if (newArray.includes(element?.month)) {
-			arrayMonths.push(element);
+			ARRAY_MONTHS.push(element);
 		}
 	});
 
@@ -154,21 +153,25 @@ function DailySalesOutstanding({
 				<div style={{ marginTop }}>
 					<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
 						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
-							(arrayMonths || []).map((item) => (
+							(ARRAY_MONTHS || []).map((item) => (
 								<div
+									key={item.month}
 									className={styles.price_container}
 								>
 									<div className={styles.amount}>
-										{getFormattedPrice(
-											item.dsoForTheMonth,
-											item.currency,
-											{
+										{
+										formatAmount({
+											amount   : item.dsoForTheMonth,
+											currency : item.currency,
+											options  : {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
-												style                 : 'decimal',
+												style                 : 'currency',
+												currencyDisplay       : 'code',
 											},
-										)}
+										})
+										}
 									</div>
 									<div style={{ fontWeight: '500', fontSize: '16px' }}>
 										{item.month}
@@ -182,18 +185,18 @@ function DailySalesOutstanding({
 
 						{params.quarterView === 'quarterView' && params.graphView !== 'graphView' && (
 							(quaterly).map((item, index) => (
-								<div className={styles.price_container}>
+								<div className={styles.price_container} key={item.currency}>
 									<div className={styles.amount}>
-										{getFormattedPrice(
-											item.qsoForQuarter || 0,
-											item.currency,
-											{
+										{formatAmount({
+											amount   : item.qsoForQuarter as any || 0,
+											currency : item.currency,
+											options  :	{
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
-												style                 : 'decimal',
+												style                 : 'currency',
 											},
-										)}
+										})}
 									</div>
 									<div
 										className={styles.quarter_container}
@@ -219,7 +222,7 @@ function DailySalesOutstanding({
 					<div className={styles.vertical_bar_graph}>
 						<BarChart
 							currencyType={dailySalesOutstandingData[0]?.currency || GLOBAL_CONSTANTS.currency_code.INR}
-							margin={margin}
+							margin={MARGIN}
 							data={dailySalesOutstandingData || []}
 							dsoResponse
 						/>
