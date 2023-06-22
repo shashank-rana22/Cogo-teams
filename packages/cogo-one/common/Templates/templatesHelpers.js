@@ -44,6 +44,8 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 
 	const disabled = third_party_template_status !== 'approved' || openCreateReply;
 
+	const { label, color } = STATUS_MAPPING[third_party_template_status || 'pending'] || {};
+
 	const handleClick = () => {
 		handleSelect(
 			{
@@ -70,9 +72,9 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 				<div>
 					<Pill
 						size="md"
-						color={STATUS_MAPPING[third_party_template_status || 'pending']?.color}
+						color={color}
 					>
-						{STATUS_MAPPING[third_party_template_status || 'pending']?.label}
+						{label}
 					</Pill>
 				</div>
 			</div>
