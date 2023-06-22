@@ -114,7 +114,7 @@ function ShipmentDetailsCard({
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
 	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
-										.toFixed(MAX_DECIMAL_PLACES);
+		.toFixed(MAX_DECIMAL_PLACES);
 	const isAdvancedATHAmountGreaterThan80Percent = !Number.isNaN(advancedATHAmountPercentage)
 														&& advancedATHAmountPercentage > VALID_ADVANCE_ATH_RANGE;
 
