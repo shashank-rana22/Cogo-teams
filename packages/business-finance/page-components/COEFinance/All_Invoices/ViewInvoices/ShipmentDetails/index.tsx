@@ -102,7 +102,6 @@ interface ShipmentDetailsInterface {
 	lineItem?: boolean;
 	status: string;
 	jobType?:string;
-	organizationId?: string,
 }
 function ShipmentDetails({
 	data,
