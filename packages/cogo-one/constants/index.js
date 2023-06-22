@@ -138,14 +138,14 @@ export const DEFAULT_PILLS_ITEMS = [
 		value : 'other',
 	},
 ];
-export const statusMapping = {
+export const STATUS_MAPPING = {
 	approved : 'Approved',
 	rejected : 'Rejected',
 	pending  : 'Pending',
 
 };
 
-export const statusColorMapping = {
+export const STATUS_COLOR_MAPPING = {
 	approved : 'green',
 	rejected : 'red',
 	pending  : 'orange',

@@ -1,6 +1,6 @@
 import { Placeholder, cl, Pill } from '@cogoport/components';
 
-import { statusMapping, statusColorMapping } from '../../constants';
+import { STATUS_MAPPING, STATUS_COLOR_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -24,7 +24,7 @@ export function Preview({ previewData }) {
 }
 
 export function Loader() {
-	return Array(LOADER_COUNT).fill().map((key) => (
+	return [...Array(LOADER_COUNT).keys()].map((key) => (
 		<div className={styles.loader_div} key={key}>
 			<Placeholder height="10px" width="100px" margin="0 0 10px 0" />
 			<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
@@ -70,11 +70,11 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 					<Pill
 						size="md"
 						color={
-                        statusColorMapping[third_party_template_status || 'pending']
+                        STATUS_COLOR_MAPPING[third_party_template_status || 'pending']
                     }
 					>
 						{
-                        statusMapping[third_party_template_status || 'pending']
+                        STATUS_MAPPING[third_party_template_status || 'pending']
                     }
 					</Pill>
 				</div>
