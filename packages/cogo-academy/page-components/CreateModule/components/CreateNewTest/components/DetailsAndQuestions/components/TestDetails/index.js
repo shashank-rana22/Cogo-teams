@@ -21,8 +21,9 @@ const BUTTON_TEXT_MAPPING = {
 
 const MIN_LENGTH = 0;
 
+const HREF = '/learning?activeTab=test_module';
+
 const onNavigate = ({ push }) => {
-	const HREF = '/learning?activeTab=test_module';
 	push(HREF, HREF);
 };
 
