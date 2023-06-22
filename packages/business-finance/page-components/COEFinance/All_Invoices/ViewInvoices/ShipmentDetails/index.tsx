@@ -87,7 +87,8 @@ export interface DataInterface {
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
 	consolidatedShipmentIds:Array<string>;
-	organizationId?: string
+	organizationId?: string;
+	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {

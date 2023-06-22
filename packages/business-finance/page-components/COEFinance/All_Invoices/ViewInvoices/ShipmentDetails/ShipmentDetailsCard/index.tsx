@@ -7,9 +7,10 @@ import {
 	Textarea,
 	Checkbox,
 	ButtonIcon,
+	Toast,
 } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -52,7 +53,7 @@ function ShipmentDetailsCard({
 	const [showRejected, setShowRejected] = useState({});
 	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
 	const {
-		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail
 	} = data || {};
 	const {
 		entityCode = '',
@@ -95,6 +96,8 @@ function ShipmentDetailsCard({
 
 	} = billAdditionalObject || {};
 
+	const {organizationId: serviceProviderOrgId} = serviceProviderDetail || {};
+
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -106,6 +109,10 @@ function ShipmentDetailsCard({
 	] as any);
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
+
+	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || 1)) * 100).toFixed(2);
+	const isAdvancedATHAmountGreaterThan80Percent = !Number.isNaN(advancedATHAmountPercentage)
+														&& advancedATHAmountPercentage > 80;
 
 	const handleClick = (id: number) => {
 		const approveData = [...showValue, id];
@@ -201,6 +208,7 @@ function ShipmentDetailsCard({
 						advancedPaymentObj,
 						sellerOrganizationId,
 					}}
+					serviceProviderOrgId={serviceProviderOrgId}
 					modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
 					refetchShipmentDocument={refetchShipmentDocument}
 				/>
@@ -778,7 +786,7 @@ function ShipmentDetailsCard({
 												<div className={styles.document}>
 													Advance amount -
 													{' '}
-													{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
+													{advancedATHAmountPercentage}
 													%
 													{' '}
 													{advancedAmountCurrency}
@@ -789,27 +797,39 @@ function ShipmentDetailsCard({
 													{grandTotal}
 													)
 
-													{!advancedPaymentObj?.remarks?.includes('accepted') ? (
-														<Button
-															className={styles.button}
-															onClick={() => {
-																setShowHighAdvancedModal(true);
-															}}
-														>
-															View
+													{!Number.isNaN(advancedATHAmountPercentage)
+														&& isAdvancedATHAmountGreaterThan80Percent
+														? !advancedPaymentObj?.remarks?.includes('accepted', 'rejected')
+															? (
+																<Tooltip
+																	placement="top"
+																	trigger="mouseenter"
+																	interactive
+																	content={<div>ATH document was rejected</div>}
+																>
+															<Button
+																	className={styles.button}
+																	onClick={() => {
+																		setShowHighAdvancedModal(true);
+																	}}
+																	disabled={advancedPaymentObj?.remarks?.includes( 'rejected')}
+																>
+																	View
 
-														</Button>
-													) : (
-														<ButtonIcon
-															size="sm"
-															icon={<IcMDownload />}
-															onClick={() => {
-																viewDocument(advancedPaymentObj?.document_url);
-															}}
-															themeType="primary"
-														/>
-													)}
-
+																</Button>
+																</Tooltip>
+					
+															) : (
+																<ButtonIcon
+																	size="sm"
+																	icon={<IcMDownload />}
+																	onClick={() => {
+																		viewDocument(advancedPaymentObj?.document_url);
+																	}}
+																	themeType="primary"
+																/>
+															)
+														: null}
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'

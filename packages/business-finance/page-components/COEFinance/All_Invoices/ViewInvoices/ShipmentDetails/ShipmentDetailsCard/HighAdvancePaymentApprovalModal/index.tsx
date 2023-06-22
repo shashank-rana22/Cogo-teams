@@ -18,6 +18,7 @@ const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 
 function HighAmountRequestModal({
 	invoiceData, modalData,
+	serviceProviderOrgId,
 	shipmentData = { list: [] }, refetchShipmentDocument = () => {},
 }) {
 	const {
@@ -61,10 +62,10 @@ function HighAmountRequestModal({
 		}
 
 		if (!advancePaymentProof) {
-			const { id, importer_exporter: importerExporter = {} } = currShipmentData || {};
+			const { id } = currShipmentData || {};
 			const payload = {
 				shipment_id        : id,
-				uploaded_by_org_id : importerExporter?.id,
+				uploaded_by_org_id : serviceProviderOrgId,
 				document_type      : HIGH_ADVANCE_PAYMENT_PROOF,
 				documents          : [{
 					data: {
@@ -84,7 +85,7 @@ function HighAmountRequestModal({
 		updateDocument({
 			id                  : advancedPaymentObj?.id,
 			remarks             : [ACCEPTED, remark],
-			performed_by_org_id : currShipmentData?.importer_exporter?.id,
+			performed_by_org_id : serviceProviderOrgId,
 		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
@@ -96,7 +97,7 @@ function HighAmountRequestModal({
 		updateDocument({
 			id                  : advancedPaymentObj?.id,
 			remarks             : [REJECTED, remark],
-			performed_by_org_id : currShipmentData?.importer_exporter?.id,
+			performed_by_org_id : serviceProviderOrgId,
 		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
