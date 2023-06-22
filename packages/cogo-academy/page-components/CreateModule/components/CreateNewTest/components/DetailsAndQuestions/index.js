@@ -9,10 +9,10 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
+const MIN_LENGTH = 0;
+
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
-
-	const MIN_LENGTH = 0;
 
 	const [idArray, setIdArray] = useState([]);
 
