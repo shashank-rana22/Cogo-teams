@@ -35,7 +35,7 @@ function ShipmentId({
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{Array(ARRAY_LENGTH).fill().map((item) => (
+					{[...Array(ARRAY_LENGTH).keys()].map((item) => (
 						<div key={item}>
 							<LoadingState />
 						</div>
