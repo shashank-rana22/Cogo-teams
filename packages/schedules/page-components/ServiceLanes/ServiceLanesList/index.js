@@ -10,7 +10,7 @@ function ServiceLanesList() {
     const [activeTab, setActiveTab] = useState("service_lanes");
 
     const { data } = useListServiceLanes();
-    // console.log("data: ", data);
+
     return (
         <>
             <div className={styles.button}>
@@ -23,16 +23,10 @@ function ServiceLanesList() {
                     + Create
                 </Button>
             </div>
-
-            <div>
-                <Filters></Filters>
-            </div>
-
-            <div>
-                {data?.map((item) => (
-                    <Cards item={item} />
-                ))}
-            </div>
+            <Filters />
+            {data?.map((item) => (
+                <Cards item={item} />
+            ))}
         </>
     );
 }

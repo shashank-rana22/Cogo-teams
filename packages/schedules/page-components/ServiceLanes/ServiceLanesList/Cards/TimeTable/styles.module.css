@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 16px 16px 0;
+    width: 40%;
+    padding-left: 48px;
+    position: relative;
+}
+
+.frequency {
+    display: flex;
+}
+
+.frequency_text {
+    color: var(--black-60, #828282);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.times {
+    color: var(--black, #221f20);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.week {
+    display: flex;
+    color: var(--black, #828282);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.bold {
+    color: var(--black, #221f20);
+    font-size: 16px;
+    font-weight: 600;
+}

@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+    padding-left: 24px;
+    padding-right: 68px;
+    width: 60%;
+    padding-right: 68px;
+    border-right: dotted 1px #bdbdbd;
+    position: relative;
+}
+
+.origin {
+    color: #4f4f4f;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.origin_heading {
+    color: var(--black-60, #828282);
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 500;
+}
+
+.arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 0%;
+}
+
+.destination {
+    color: #4f4f4f;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 150%;
+    position: absolute;
+    left: 55%;
+}
+
+.destination_heading {
+    color: var(--black-60, #828282);
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 500;
+}
