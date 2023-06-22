@@ -65,6 +65,7 @@ function List({
 							...(val || {}),
 							activeStat,
 							page_limit,
+							page: 1,
 						});
 					}}
 				/>

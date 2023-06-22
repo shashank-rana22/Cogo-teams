@@ -103,8 +103,7 @@
 			{
 				"name": "source",
 				"label": "Select Source",
-				"type": "select",
-				"multiple": true,
+				"type": "multi-select",
 				"options": [
 					{
 						"label": "Spot Search",
@@ -127,7 +126,7 @@
 						"value": "quick_checkout"
 					},
 					{
-            "label": "Sell Without Buy",
+            			"label": "Sell Without Buy",
 						"value": "direct"
 					},
 					{
