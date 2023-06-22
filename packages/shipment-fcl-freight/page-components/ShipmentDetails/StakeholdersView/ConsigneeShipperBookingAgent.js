@@ -20,7 +20,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
 
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
