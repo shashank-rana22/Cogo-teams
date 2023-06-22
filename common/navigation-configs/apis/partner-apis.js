@@ -11861,6 +11861,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'update_org_bulk_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	contracts: [
 		{
