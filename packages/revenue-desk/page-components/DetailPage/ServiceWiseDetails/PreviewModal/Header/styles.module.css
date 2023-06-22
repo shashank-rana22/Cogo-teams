@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+}
+.heading{
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+    width:10vw;
+}
+.sub_container{
+    display: flex;
+    justify-content: space-between;
+    width:40vw;
+}
+.key{
+    font-weight: 500;
+    font-size: 12px;
+    color: #828282;
+    display: flex;
+    justify-content: center;
+}
+
+.value{
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: #221F20;
+}
+
+.positive_container{
+    font-weight: 600;
+    font-size: 16px;
+    color: #849E4C;
+    display: flex;
+    justify-content: center;
+}
+.negative_container{
+    font-weight: 600;
+    font-size: 16px;
+    color: #EE3425;
+    display: flex;
+    justify-content: center; 
+}

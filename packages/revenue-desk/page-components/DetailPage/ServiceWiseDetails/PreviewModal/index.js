@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import useListShipmentCurrencyConversions from '../../../../hooks/useListShipmentCurrencyConversions';
 
+import Header from './Header';
 import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
@@ -29,6 +30,7 @@ function PreviewModal({
 	const consBuyPrice = Object.values(supplierPayload)
 		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_price_in_preferred_currency || 0 : []))
 		.reduce((sum, price) => sum + price, 0);
+	const preferredCurrency = Object.values(supplierPayload)?.[0]?.[0]?.data?.rowData?.preferred_currency;
 	const exchangesRates = data?.list?.[0]?.updated_currency_conversion_rate?.currencies
 	|| data?.list?.[0]?.currency_conversion_rate?.currencies;
 
@@ -37,7 +39,7 @@ function PreviewModal({
 			const currency = value.match(/[A-Z]+/)[0];
 			const amount = value.replace(/[^\d]/g, '');
 			const exchangeRate1 = exchangesRates?.[currency] || 1;
-			const exchangeRate2 = exchangesRates?.USD || 1;
+			const exchangeRate2 = exchangesRates?.[preferredCurrency] || 1;
 			return sum + ((amount * exchangeRate1) / exchangeRate2);
 		}, 0);
 
@@ -61,18 +63,17 @@ function PreviewModal({
 			updateTrigger();
 		}
 	};
-
 	return (
 		<>
 			{' '}
 			<Modal size="xl" show={modalStep === 1} onClose={() => setModalStep(0)} placement="center">
-				<Modal.Header title={`PREVIEW CONS BUY PRICE:-
-					${consBuyPrice}
-					CONS SELL PRICE:-
-					${conSellPrice}
-
-					PROFIT:-
-					${conSellPrice - consBuyPrice}`}
+				<Modal.Header title={(
+					<Header
+						consBuyPrice={consBuyPrice}
+						conSellPrice={conSellPrice}
+						preferredCurrency={preferredCurrency}
+					/>
+				)}
 				/>
 				<Modal.Body>
 					<Tabs

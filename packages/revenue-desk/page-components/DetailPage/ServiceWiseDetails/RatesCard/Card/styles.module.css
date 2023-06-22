@@ -60,6 +60,7 @@
 	color: #828282;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 .text1 {
@@ -194,4 +195,7 @@
 	font-weight: 600;
 	color: #454545;
 	margin-left: 10px;
+}
+.infoicon{
+	margin-left: 3px;
 }

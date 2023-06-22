@@ -1,6 +1,6 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import PriorityNumber from './PriorityNumber';
@@ -164,17 +164,31 @@ function Card({
 						) : null}
 					</div>
 					<div className={styles.progress_bar_section}>
+
 						<div style={{ marginRight: '20px' }}>
 							<div className={styles.text}>
 								Allocation Ratio
+								{' '}
+								<Tooltip content="Total bookings accepted by supplier / Total bookings promised to supplier (30 days)" placement="top">
+									<div className={styles.infoicon}>
+										<IcMInfo />
+									</div>
+								</Tooltip>
 							</div>
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								{data?.rowData?.allocation_ratio || '--'}
 							</div>
 						</div>
+
 						<div>
 							<div className={styles.text}>
 								Fulfillment Ratio
+								{' '}
+								<Tooltip content="(Total Bookings given By SO1-cancelled)/Total bookings given" placement="top">
+									<div className={styles.infoicon}>
+										<IcMInfo />
+									</div>
+								</Tooltip>
 							</div>
 							<div className={styles.text}>
 								2 Days :
@@ -192,6 +206,7 @@ function Card({
 								{(data?.rowData?.fulfillment_ratio_15 === 0 || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
 							</div>
 						</div>
+
 					</div>
 					<div className={styles.price_section}>
 						<div style={{ display: 'flex' }}>
