@@ -10,7 +10,14 @@ function MyResponsiveBar({ data }) {
 		<>
 			<div className={styles.invoice}>
 				Daily Invoices Trend
-				<Tooltip content="Daily approval and rejection statistics " placement="top">
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							Invoices uploaded, approved and rejected
+						</div>
+					)}
+					placement="top"
+				>
 					<div className={styles.icon}>
 						<IcMInfo />
 					</div>
