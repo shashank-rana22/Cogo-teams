@@ -23,7 +23,7 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
 		{
 			url     : '/payments/dunning/list-dunning-cycle-execution',
 			method  : 'get',
-			authKey : 'get__payments_dunning_list_dunning_cycle_execution',
+			authKey : 'get_payments_dunning_list_dunning_cycle_execution',
 		},
 		{ manual: true },
 	);

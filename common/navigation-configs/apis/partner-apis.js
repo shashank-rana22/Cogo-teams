@@ -12563,7 +12563,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get__payments_dunning_list_dunning_cycle_execution',
+			api         : 'get_payments_dunning_list_dunning_cycle_execution',
 			access_type : 'private',
 		},
 		{
