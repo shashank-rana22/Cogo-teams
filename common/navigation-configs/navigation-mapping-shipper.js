@@ -248,7 +248,7 @@ const navigationMappingShipper = {
 			},
 			{
 				key           : 'saas_tools-air_ocean_tracking_v2',
-				title         : 'Air Ocean Tracking',
+				title         : 'Track & Trace',
 				href          : '/saas/tools/air-ocean-tracking',
 				as            : '/saas/tools/air-ocean-tracking',
 				type          : 'link',
