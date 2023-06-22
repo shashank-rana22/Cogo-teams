@@ -1,21 +1,9 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {
-	IcMFrupee,
-	IcMFdollar,
-	IcMFeuro,
-	IcMFpound,
-	IcMFsingaporeDollar,
-	IcMFdong,
-} from '@cogoport/icons-react';
+import { CURRENCY_MAPPING } from '@cogoport/globalization/constants/currencyCode';
 
-const CURRENCY_ICON_MAPPING = {
-	[GLOBAL_CONSTANTS.currency_code.INR] : IcMFrupee,
-	[GLOBAL_CONSTANTS.currency_code.USD] : IcMFdollar,
-	[GLOBAL_CONSTANTS.currency_code.SGD] : IcMFsingaporeDollar,
-	[GLOBAL_CONSTANTS.currency_code.GBP] : IcMFpound,
-	[GLOBAL_CONSTANTS.currency_code.EUR] : IcMFeuro,
-	[GLOBAL_CONSTANTS.currency_code.VND] : IcMFdong,
-};
+const CURRENCY_ICON_MAPPING = Object.keys(CURRENCY_MAPPING).reduce((prev, curr) => ({
+	...prev,
+	[curr]: CURRENCY_MAPPING[curr].icon,
+}), {});
 
 const getContentMapping = ({ width, height, mapping }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
 	...pv,
