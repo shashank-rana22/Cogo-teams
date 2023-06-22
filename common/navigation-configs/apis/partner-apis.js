@@ -12555,7 +12555,7 @@ const partner = {
 	],
 	business_finance_dunnings: [
 		{
-			api         : 'get_payments_dunning_credit_controllers',
+			api         : 'get_payments_dunning_organization_stakeholders',
 			access_type : 'private',
 		},
 		{

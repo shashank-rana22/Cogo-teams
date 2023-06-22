@@ -595,11 +595,11 @@ function asyncListDunningTemplates() {
 	};
 }
 
-function asyncListCreditControllers() {
+function asyncListOrganizationStakeholders() {
 	return {
 		labelKey    : 'name',
 		valueKey    : 'id',
-		endpoint    : 'payments/dunning/credit-controllers',
+		endpoint    : 'payments/dunning/organization-stakeholders',
 		initialCall : true,
 	};
 }
@@ -653,5 +653,5 @@ export {
 	asyncListCourseCategories,
 	asyncListTests,
 	asyncListDunningTemplates,
-	asyncListCreditControllers,
+	asyncListOrganizationStakeholders,
 };

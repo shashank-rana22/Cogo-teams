@@ -42,7 +42,7 @@ import {
 	asyncListCourseCategories,
 	asyncListTests,
 	asyncListDunningTemplates,
-	asyncListCreditControllers,
+	asyncListOrganizationStakeholders,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -103,7 +103,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
 	list_dunning_templates               : asyncListDunningTemplates,
-	list_credit_controllers              : asyncListCreditControllers,
+	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 };
 
 function AsyncSelect(props) {
