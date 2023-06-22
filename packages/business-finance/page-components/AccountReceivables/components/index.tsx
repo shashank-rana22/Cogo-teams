@@ -1,9 +1,12 @@
 import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useListCogoEntity from '../hooks/useListCogoEntity';
+import useListCogoEntities from '../../AccountPayables/Dashboard/hooks/useListCogoEntities';
+// import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
 import Defaulters from './Defaulters';
@@ -12,12 +15,23 @@ import ManageBpr from './ManageBpr';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
+interface ItemProps {
+	business_name:string,
+	entity_code:string,
+}
+
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
-	const { loading, EntityData = [] } = useListCogoEntity();
+	const profile = useSelector((state) => state);
 
-	const [entityCode, setEntityCode] = useState('301');
+	const { profile:{ partner } } = profile || {};
+	const { id: partnerId } = partner || {};
+
+	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
+
+	const entity = getEntityCode(partnerId);
+
+	const [activeEntity, setActiveEntity] = useState(entity);
 
 	const handleChange = (val:string) => {
 		setReceivables(val);
@@ -26,11 +40,16 @@ function AccountReceivables() {
 			`/business-finance/account-receivables/${val}`,
 		);
 	};
+	const { loading, entityData = [] } = useListCogoEntities();
 
-	const EntityOptions = EntityData.map((entityData) => ({
-		label : `${upperCase(entityData.business_name)} (${entityData.entity_code})`,
-		value : entityData.entity_code,
-	}));
+	const EntityOptions = (entityData || []).map((item:ItemProps) => {
+		const { business_name:companyName = '', entity_code:entityCode = '' } = item || {};
+
+		return {
+			label : `${upperCase(companyName)} (${entityCode})`,
+			value : entityCode,
+		};
+	});
 
 	return (
 		<div>
@@ -48,8 +67,8 @@ function AccountReceivables() {
 						<div className={styles.input}>
 							<Select
 								name="business_name"
-								onChange={(entityVal: string) => setEntityCode(entityVal)}
-								value={entityCode}
+								onChange={(entityVal: string) => setActiveEntity(entityVal)}
+								value={activeEntity}
 								options={EntityOptions}
 								placeholder="Select Entity Code"
 								size="sm"
@@ -66,17 +85,17 @@ function AccountReceivables() {
 					themeType="primary"
 				>
 					<TabPanel name="dashboard" title="Dashboard">
-						<Dashboard entityCode={entityCode} />
+						<Dashboard entityCode={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						<Invoice entityCode={entityCode} />
+						<Invoice entityCode={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
-						<Outstanding entityCode={entityCode} />
+						<Outstanding entityCode={activeEntity} />
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						<Defaulters entityCode={entityCode} />
+						<Defaulters entityCode={activeEntity} />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						<ManageBpr />
