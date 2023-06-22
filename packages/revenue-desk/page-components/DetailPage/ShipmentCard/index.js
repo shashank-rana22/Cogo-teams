@@ -68,8 +68,8 @@ function ShipmentCard({ itemData, priceData }) {
 							{!priceData?.sell_price
 								? <Placeholder width="150px" height="25px" />
 								: formatAmount({
-									amount   : priceData?.sell_price?.split(' ')?.[1],
-									currency : priceData?.sell_price?.split(' ')?.[0],
+									amount   : priceData?.sell_price?.[1],
+									currency : priceData?.sell_price?.[0],
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -82,7 +82,7 @@ function ShipmentCard({ itemData, priceData }) {
 							{!priceData?.sell_price
 								? <Placeholder width="150px" height="25px" />
 								: formatAmount({
-									amount: Number(priceData?.sell_price?.split(' ')?.[1])
+									amount: Number(priceData?.sell_price?.[1])
 									/ Number(priceData?.exchange_rate),
 									currency : 'USD',
 									options  : {
@@ -101,9 +101,9 @@ function ShipmentCard({ itemData, priceData }) {
 									{!priceData?.sell_price
 										? <Placeholder width="150px" height="25px" />
 										: formatAmount({
-											amount: Number(priceData?.sell_price?.split(' ')?.[1])
+											amount: Number(priceData?.sell_price?.[1])
 											/ Number(itemData?.containers_count),
-											currency : priceData?.sell_price?.split(' ')?.[0],
+											currency : priceData?.sell_price?.[0],
 											options  : {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -116,7 +116,7 @@ function ShipmentCard({ itemData, priceData }) {
 									{!priceData?.sell_price
 										? <Placeholder width="150px" height="25px" />
 										: formatAmount({
-											amount: (Number(priceData?.sell_price?.split(' ')?.[1])
+											amount: (Number(priceData?.sell_price?.[1])
 											/ Number(itemData?.containers_count))
 										/ Number(priceData?.exchange_rate),
 											currency : 'USD',

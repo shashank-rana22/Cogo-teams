@@ -25,16 +25,19 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 					maximumFractionDigits : 2,
 				},
 			}),
-			source: startCase(source),
+			source               : startCase(source),
 			service_id,
+			currency,
+			total_price_discount : total_price_discounted,
+
 		}));
 	const updatedPriceData = {};
 	useEffect(() => {
 		(chargesData || []).forEach((item) => {
-			updatedPriceData[item.service_id] = item.total_price_discounted;
+			updatedPriceData[item.service_id] = [item?.currency, item?.total_price_discount];
 		});
 		if (data?.net_total_price_currency) {
-			updatedPriceData.sell_price = `${data?.net_total_price_currency} ${data?.net_pre_tax_total}`;
+			updatedPriceData.sell_price = [data?.net_total_price_currency, data?.net_pre_tax_total];
 			updatedPriceData.exchange_rate = data?.exchange_rate;
 		}
 		setPriceData(updatedPriceData);

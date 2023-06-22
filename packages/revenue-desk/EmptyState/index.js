@@ -6,7 +6,7 @@ export default function EmptyState({ isSmall = false, heading = '' }) {
 		<div className={!isSmall ? styles.container : styles.small_container}>
 			{!heading ? (
 				<div>
-					<h1 className={styles.header}>No SIds found !!</h1>
+					<h1 className={styles.header}>No Sids found !!</h1>
 					<h3>Looks like no results were found...</h3>
 				</div>
 			) : (

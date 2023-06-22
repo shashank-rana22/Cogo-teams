@@ -1,3 +1,5 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import CargoDetails from '../../../../List/Card/Body/CargoDetails';
 import PortDetails from '../../../../List/Card/Body/PortDetails';
 import EditSellQuotation from '../../../ShipmentCard/EditSellQuotation';
@@ -21,7 +23,15 @@ function Body({ data, price, shipmentData }) {
 				&& !data?.is_preference_set && <EditSellQuotation data={shipmentData} />}
 				Sell Price
 				<div className={styles.text2}>
-					{price || 0}
+					{formatAmount({
+						amount   : price?.[1],
+						currency : price?.[0],
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					})}
 				</div>
 			</div>
 		</div>

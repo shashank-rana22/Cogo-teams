@@ -30,16 +30,19 @@ function PreviewModal({
 	const consBuyPrice = Object.values(supplierPayload)
 		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_price_in_preferred_currency || 0 : []))
 		.reduce((sum, price) => sum + price, 0);
-	const preferredCurrency = Object.values(supplierPayload)?.[0]?.[0]?.data?.rowData?.preferred_currency;
+
+	const preferredCurrency = Object.values(supplierPayload)
+		?.filter((arr) => arr?.length)?.[0]?.[0]?.data?.rowData?.preferred_currency;
+
 	const exchangesRates = data?.list?.[0]?.currency_conversion_rate?.currencies;
 
 	const conSellPrice = Object.values(filteredPriceData)
 		.reduce((sum, value) => {
-			const currency = value.match(/[A-Z]+/)[0];
-			const amount = value.replace(/[^\d]/g, '');
+			const currency = value?.[0];
+			const amount = value?.[1];
 			const exchangeRate1 = exchangesRates?.[currency] || 1;
 			const exchangeRate2 = exchangesRates?.[preferredCurrency] || 1;
-			return sum + ((amount * exchangeRate1) / exchangeRate2);
+			return sum + ((Number(amount) * Number(exchangeRate1)) / Number(exchangeRate2));
 		}, 0);
 
 	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(

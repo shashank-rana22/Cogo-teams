@@ -7,7 +7,7 @@ import Card from '../RatesCard/Card';
 import styles from './styles.module.css';
 
 function SelectedRatesCard({
-	prefrences, price, serviceData, setSellRates,
+	prefrences, serviceData, setSellRates,
 	sellRates, emailModal, setEmailModal, singleServiceSellRateDetails, shipmentData,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
@@ -27,16 +27,6 @@ function SelectedRatesCard({
 				<div className={styles.heading}>
 					Selected Rates
 				</div>
-				{/* <div className={styles.text_container}>
-					<div className={styles.text}>
-						Consolidated Buy Price  :
-						<span className={styles.key}> USD 910</span>
-					</div>
-					<div className={styles.text2}>
-						Consolidated Profitability :
-						<span className={styles.key}> 1.1 %</span>
-					</div>
-				</div> */}
 				<div className={styles.mailButton}>
 					{serviceData?.service_type === 'fcl_freight_service' ? (
 						<Button onClick={() => { setEmailModal(true); }} size="sm" theme="primary">
@@ -52,7 +42,6 @@ function SelectedRatesCard({
 							data={singleItem?.data}
 							rate_key="selected_rate"
 							fromkey={singleItem?.key}
-							price={price}
 							serviceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}

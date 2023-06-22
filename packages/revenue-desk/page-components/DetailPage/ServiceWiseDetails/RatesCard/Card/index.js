@@ -1,10 +1,9 @@
-import { Pill, Tooltip } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
+import { Pill } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
+import Footer from './Footer';
 import PriorityNumber from './PriorityNumber';
-import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Card({
@@ -33,32 +32,7 @@ function Card({
 			setPrefrences({ ...prefrences, [serviceData?.id]: [...newList] });
 		}
 	};
-	const handleCardClick = (e) => {
-		e.stopPropagation();
-	};
-	const showValidity = (item) => {
-		if (item?.rowData?.is_rate_expired) {
-			return <span style={{ color: 'red' }}> (This Rate is Expired)</span>;
-		}
-
-		if (item?.rowData?.validity_end) {
-			return (
-				<span style={{ color: 'red' }}>
-					(Valid till:
-					{' '}
-					{format(data?.rowData?.validity_end, 'dd MMM YYYY')}
-					)
-				</span>
-			);
-		}
-		return null;
-	};
-	const isExpired = (rowData, shipmentData) => (
-		prefrence_key === 'System Rates'
-			&& rowData?.validity_end <= shipmentData?.schedule_departure
-	);
 	const showData = (val) => val || '';
-	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const updated_at = data?.rowData?.updated_at;
 
 	const handleLeftSectionPriority = (ratekey) => {
@@ -124,14 +98,26 @@ function Card({
 							) : null
 						}
 					</div>
-					<div style={{ display: 'flex' }}>
-						{rate_key ? (<div><Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill></div>
-						) : null}
-						{((data?.rowData?.selected_priority) && (data?.rowData?.selected_priority === data?.rowData?.priority)) ? (
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						{rate_key
+							? (
+								<div>
+									<Pill size="md" color="#F2F3FA">
+										{startCase(fromkey || data?.rowData?.source)}
+									</Pill>
+								</div>
+							) : null}
+						{((data?.rowData?.selected_priority)
+						&& (data?.rowData?.selected_priority === data?.rowData?.priority)) ? (
 							<div>
-								<Pill size="md" color="#F9F9F9"><div style={{ color: '#7278AD' }}>So1 Selected Rate</div></Pill>
+								<Pill size="md" color="#F9F9F9">
+									<div style={{ color: '#7278AD' }}>
+										So1 Selected Rate
+									</div>
+
+								</Pill>
 							</div>
-						) : null}
+							) : null}
 						{
 							data?.rowData?.agent ? (
 								<div>
@@ -143,179 +129,15 @@ function Card({
 						}
 					</div>
 				</div>
-				<div className={styles.lower_section}>
-					<div className={styles.first_section}>
-						<div className={styles.text1}>
-							Active Bookings :
-							{data?.rowData?.active_booking}
-						</div>
-						<div className={styles.text2}>
-							{showValidity(data)}
-						</div>
-						<div className={styles.text2}>
-							{isExpired(data?.rowData, shipmentData)}
-						</div>
-						{data?.rowData?.platform ? (
-							<div>
-								<Pill>
-									{`Reverted from ${data?.rowData?.platform} platform`}
-								</Pill>
-							</div>
-						) : null}
-					</div>
-					<div className={styles.progress_bar_section}>
-
-						<div style={{ marginRight: '20px' }}>
-							<div className={styles.text}>
-								Allocation Ratio
-								{' '}
-								<Tooltip content="Total bookings accepted by supplier / Total bookings promised to supplier (30 days)" placement="top">
-									<div className={styles.infoicon}>
-										<IcMInfo />
-									</div>
-								</Tooltip>
-							</div>
-							<div style={{ display: 'flex', justifyContent: 'center' }}>
-								{data?.rowData?.allocation_ratio || '--'}
-							</div>
-						</div>
-
-						<div>
-							<div className={styles.text}>
-								Fulfillment Ratio
-								{' '}
-								<Tooltip content="(Total Bookings given By SO1-cancelled)/Total bookings given" placement="top">
-									<div className={styles.infoicon}>
-										<IcMInfo />
-									</div>
-								</Tooltip>
-							</div>
-							<div className={styles.text}>
-								2 Days :
-								{' '}
-								{(data?.rowData?.fulfillment_ratio_2 === 0 || data?.rowData?.fulfillment_ratio_2 > 0) ? data?.rowData?.fulfillment_ratio_2 : '--'}
-							</div>
-							<div className={styles.text}>
-								7 Days:
-								{' '}
-								{(data?.rowData?.fulfillment_ratio_7 === 0 || data?.rowData?.fulfillment_ratio_7 > 0) ? data?.rowData?.fulfillment_ratio_7 : '--' }
-							</div>
-							<div className={styles.text}>
-								15 Days:
-								{' '}
-								{(data?.rowData?.fulfillment_ratio_15 === 0 || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
-							</div>
-						</div>
-
-					</div>
-					<div className={styles.price_section}>
-						<div style={{ display: 'flex' }}>
-							<div>
-								{startCase(serviceData?.service_type)}
-								{' '}
-								:
-								&nbsp;
-							</div>
-							<div className={styles.price_value}>
-								{formatAmount({
-									amount   : data?.rowData?.total_buy_price,
-									currency : data?.rowData?.total_buy_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
-							</div>
-						</div>
-						<div>
-							{
-							data?.rowData?.origin_locals_price
-								? (
-									<div style={{ display: 'flex' }}>
-										Origin Local Price :
-										&nbsp;
-										<div className={styles.price_value}>
-											{formatAmount({
-												amount   : data?.rowData?.origin_locals_price,
-												currency : data?.rowData?.origin_locals_price_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-										</div>
-									</div>
-								)
-								: null
-						}
-							{
-							data?.rowData?.origin_locals_price
-								? (
-									<div style={{ display: 'flex' }}>
-										Destination Local Price :
-										&nbsp;
-										<div className={styles.price_value}>
-											{formatAmount({
-												amount   : data?.rowData?.destination_locals_price,
-												currency : data?.rowData?.destination_locals_price_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-
-										</div>
-
-									</div>
-								)
-								: null
-						}
-						</div>
-					</div>
-					<div className={styles.total_price_section}>
-						<div style={{ display: 'flex' }}>
-							Profitability : &nbsp;
-							<div className={Number(data?.rowData?.profit_percentage) > 0
-								? styles.positive_profit : styles.negative_profit}
-							>
-								{Number(data?.rowData?.profit_percentage).toFixed(2)}
-								%
-							</div>
-						</div>
-						<div style={{ display: 'flex' }}>
-							Profit : &nbsp;
-							<div className={Number(data?.rowData?.profit) > 0
-								? styles.positive_profit : styles.negative_profit}
-							>
-								{formatAmount({
-									amount   : data?.rowData?.profit,
-									currency : data?.rowData?.total_price_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
-							</div>
-						</div>
-					</div>
-					{isShowSellRate && (
-						<div
-							role="presentation"
-							className={styles.edit_price_section}
-							onClick={handleCardClick}
-						>
-							<div className={styles.edit_price_heading}>Sell Rate / Contr.</div>
-							<ShowSellRates
-								data={data}
-								sellRates={sellRates}
-								setSellRates={setSellRates}
-							/>
-						</div>
-					)}
+				<div>
+					<Footer
+						data={data}
+						shipmentData={shipmentData}
+						serviceData={serviceData}
+						setSellRates={setSellRates}
+						sellRates={sellRates}
+						prefrence_key={prefrence_key}
+					/>
 				</div>
 
 			</div>

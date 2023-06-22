@@ -120,7 +120,6 @@ function SingleService({
 			{singleServiceData?.is_preference_set ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
-					price={priceData?.[singleServiceData?.id]}
 					shipmentData={shipmentData}
 				/>
 			) : null}
@@ -131,7 +130,6 @@ function SingleService({
 						? (
 							<SelectedRatesCard
 								prefrences={supplierPayload?.[singleServiceData?.id]}
-								price={priceData?.[singleServiceData?.id]}
 								serviceData={singleServiceData}
 								setSellRates={setSellRates}
 								sellRates={sellRates}

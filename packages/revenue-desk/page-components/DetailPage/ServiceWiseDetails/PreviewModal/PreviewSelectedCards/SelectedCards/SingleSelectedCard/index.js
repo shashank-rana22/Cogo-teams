@@ -1,8 +1,10 @@
+import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function SingleSelectedCard({ data, shipmentType, priority }) {
+function SingleSelectedCard({ data, shipmentType, priority, fromKey }) {
 	const showData = (val) => val || '';
 	return (
 		<div className={Number(data?.rowData?.profit_percentage) > 0
@@ -24,19 +26,34 @@ function SingleSelectedCard({ data, shipmentType, priority }) {
 								: showData(data?.rowData?.shipping_line)}
 						</div>
 					</div>
-					{/* <div className={styles.upper_right_section}>
-						<div className={styles.tag}>
-							KAM Selected Rate
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<div>
+							<Pill size="md" color="#F2F3FA">
+								{startCase(fromKey)}
+							</Pill>
 						</div>
-					</div> */}
+						{((data?.rowData?.selected_priority)
+						&& (data?.rowData?.selected_priority === data?.rowData?.priority)) ? (
+							<div>
+								<Pill size="md" color="#F9F9F9">
+									<div style={{ color: '#7278AD' }}>
+										So1 Selected Rate
+									</div>
+								</Pill>
+							</div>
+							) : null}
+						{
+							data?.rowData?.agent ? (
+								<div>
+									Supply Agent :
+									{' '}
+									{data?.rowData?.agent}
+								</div>
+							) : null
+						}
+					</div>
 				</div>
 				<div className={styles.lower_section}>
-					{/* <div className={styles.lower_left_section}>
-						KAM Discount Applied :
-						<div className={styles.price}>
-							USD 10
-						</div>
-					</div> */}
 					<div className={styles.lower_right_section}>
 						<div className={styles.label}>
 							Profitability : &nbsp;
