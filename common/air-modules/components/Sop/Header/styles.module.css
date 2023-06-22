@@ -1,0 +1,39 @@
+.container {
+	padding: 12px 8px;
+}
+
+.buttons_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+	.core-ui-button-root {
+		height: fit-content;
+		text-transform: capitalize;
+	}
+}
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
+
+	.tippy-content {
+		padding: 0;
+	}
+}
+
+.filter_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: fit-content;
+	padding: 4px;
+	cursor: pointer;
+	border: 1px solid #cbcff5;
+	border-radius: 4px;
+}
+
+.line {
+	margin: 16px 0 12px;
+	border-bottom: 1px solid #ded7fc;
+}
