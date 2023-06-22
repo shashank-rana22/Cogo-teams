@@ -82,13 +82,15 @@ const sopConditions = (primary_service, trade_partners_details) => {
 		},
 	};
 
-	const conditions = [];
+	const CONDITIONS = [];
+
 	preConditions.forEach((condition) => {
 		if (conditions_values[condition.value].data) {
-			conditions.push(condition);
+			CONDITIONS.push(condition);
 		}
 	});
-	return conditions;
+
+	return CONDITIONS;
 };
 
 export default sopConditions;

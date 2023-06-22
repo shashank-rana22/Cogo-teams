@@ -1,0 +1,27 @@
+.conversation_title {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding-top: 30px;
+	margin-bottom: 11px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.icon {
+	width: 25px;
+	height: 25px;
+	margin-left: 10px;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.select {
+	width: 90%;
+}

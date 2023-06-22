@@ -12,12 +12,13 @@ function Assured({ shipmentData = {} }) {
 					width="20"
 					height="20"
 				/>
+
 				<div className={styles.text}>Assured By Cogoport</div>
 			</div>
 
 			<div className={styles.assured_details}>
 				{shipmentData?.cogo_assured_value_props?.map((element) => (
-					<div style={{ marginBottom: '14px' }}>
+					<div className={styles.mt_14} key={element}>
 						<div className={styles.heading}>
 							<div className={styles.icon_wrapper}>
 								<IcCFtick />

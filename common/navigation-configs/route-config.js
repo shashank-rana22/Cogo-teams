@@ -34,6 +34,11 @@ import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import shipmentAir from './config/shipment-air';
+import shipmentAirCustoms from './config/shipment-air-customs';
+import shipmentAirFreight from './config/shipment-air-freight';
+import shipmentAirFreightLocal from './config/shipment-air-freight-local';
+import shipmentDomesticAirFreight from './config/shipment-domestic-air-freight';
 import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
@@ -73,6 +78,11 @@ const routeConfig = {
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
+	...shipmentAir,
+	...shipmentAirFreight,
+	...shipmentAirFreightLocal,
+	...shipmentAirCustoms,
+	...shipmentDomesticAirFreight,
 	...shipmentRailDomesticFreight,
 	...shipmentHaulageFreight,
 	...bookingDesk,

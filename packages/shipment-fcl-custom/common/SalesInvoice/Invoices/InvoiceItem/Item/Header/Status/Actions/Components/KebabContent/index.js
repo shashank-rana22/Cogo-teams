@@ -1,10 +1,10 @@
 import { Popover, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
 function KebabContent({
@@ -19,7 +19,8 @@ function KebabContent({
 	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
@@ -47,7 +48,7 @@ function KebabContent({
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true)
-		|| user_data.email === 'ajeet@cogoport.com';
+		|| user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const content = (
 		<div className={styles.dialog_box}>
@@ -132,7 +133,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > 0)
+			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

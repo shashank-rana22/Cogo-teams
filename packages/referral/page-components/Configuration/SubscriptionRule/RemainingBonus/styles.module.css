@@ -1,0 +1,65 @@
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.input_box {
+	width: 120px;
+	margin: 0 8px;
+}
+
+.select_box {
+	width: 130px;
+	margin: 0 8px;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+
+.error {
+	margin-left: 14px;
+	font-size: 12px;
+	color: #ee3425;
+}
+
+.input_controller {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.ml_12 {
+	margin-left: 12px;
+}
+
+@media (max-width: 768px) {
+	.input_controller {
+		width: 100%;
+		margin: 16px 0;
+	}
+
+	.flex {
+		flex-wrap: wrap;
+	}
+
+	.input_box {
+		width: 100%;
+		margin: 0;
+	}
+
+	.select_box {
+		width: 100%;
+		margin: 0;
+	}
+}

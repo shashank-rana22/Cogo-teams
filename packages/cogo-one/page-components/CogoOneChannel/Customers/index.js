@@ -48,6 +48,9 @@ function Customers({
 	firestore,
 	viewType = '',
 	flashMessagesLoading,
+	hasVoiceCallAccess,
+	activeSubTab,
+	setActiveSubTab = () => {},
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -107,6 +110,8 @@ function Customers({
 		viewType,
 		flashMessagesList,
 		flashMessagesLoading,
+		activeTab    : activeSubTab,
+		setActiveTab : setActiveSubTab,
 	};
 
 	const voiceProps = {
@@ -168,8 +173,8 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-					<TabPanel name="voice" title="Voice" />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount || null} />
+					{hasVoiceCallAccess && <TabPanel name="voice" title="Voice" />}
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>

@@ -4,9 +4,11 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import FormatData from '../../../../utils/formatData';
+import getIconMapping from '../../../../utils/getIconMapping';
 
-import iconMapping from './iconMapping';
 import styles from './styles.module.css';
+
+const MAX_DISPLAY_COUNT = 100;
 
 function RightSideNav({
 	activeSelect,
@@ -14,12 +16,13 @@ function RightSideNav({
 	openNewTab,
 	loading,
 	disableQuickActions = false,
-	documents_count = {},
+	documentsCount = 0,
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
 	quotationEmailSentAt = '',
 	orgId = '',
+	viewType,
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
@@ -59,48 +62,50 @@ function RightSideNav({
 
 	const checkConditions = isEmpty(userId) && isEmpty(userMobile) && isEmpty(leadUserId);
 
+	const ICON_MAPPING = getIconMapping(viewType) || [];
+
 	return (
 		<div className={styles.right_container}>
-			{iconMapping.map((item) => {
-				const { icon, name, content, hide = false } = item;
+			{ICON_MAPPING.map((item) => {
+				const { icon, name, content } = item;
+
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
-				&& documents_count > 0 && !checkConditions;
+				&& !!documentsCount && !checkConditions;
+
 				const showquotationSentData = orgId && activeSelect !== 'organization'
 				&& name === 'organization' && !!quotationEmailSentAt;
 
 				return (
-					!hide && (
-						<div
-							key={snakeCase(name)}
-							className={cl`${styles.icon_div} ${
-								activeSelect === name ? styles.active : ''
-							}
+					<div
+						key={snakeCase(name)}
+						className={cl`${styles.icon_div} ${
+							activeSelect === name ? styles.active : ''
+						}
 						 ${
 							disabledSpotSearch && item.name === 'spot_search'
 								? styles.icon_div_load
 								: ''
-							}`}
-							role="button"
-							tabIndex={0}
-							onClick={() => handleClick(name)}
-						>
-							<Tooltip content={content} placement="left">
-								{showDocumentCount && (
-									<div className={styles.count}>
-										{documents_count > 100 ? '99+' : (
-											documents_count
-										)}
-									</div>
-								)}
-								{showquotationSentData && (
-									<div className={styles.quotation} />
-								)}
-								<div>
-									{icon && icon}
+						}`}
+						role="button"
+						tabIndex={0}
+						onClick={() => handleClick(name)}
+					>
+						<Tooltip content={content} placement="left">
+							{showDocumentCount && (
+								<div className={styles.count}>
+									{documentsCount > MAX_DISPLAY_COUNT ? '99+' : (
+										documentsCount
+									)}
 								</div>
-							</Tooltip>
-						</div>
-					)
+							)}
+							{showquotationSentData && (
+								<div className={styles.quotation} />
+							)}
+							<div>
+								{icon && icon}
+							</div>
+						</Tooltip>
+					</div>
 				);
 			})}
 		</div>
