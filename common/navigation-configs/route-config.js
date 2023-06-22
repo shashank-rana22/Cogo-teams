@@ -29,7 +29,6 @@ import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
-import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
@@ -104,7 +103,6 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
-	...riskManagement,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
