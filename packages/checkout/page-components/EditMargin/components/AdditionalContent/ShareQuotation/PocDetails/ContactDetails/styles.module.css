@@ -1,0 +1,24 @@
+.contact_details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user_name {
+    font-weight: 700;
+}
+
+.sub_text {
+    font-size: 12px;
+}
+
+.no_whatsapp {
+    color: #cb6464;
+	display: flex;
+	align-items: center;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}

@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    border: 1px solid #F4F5F5;
+    border-radius: 4px;
+    padding: 6px 24px;
+    align-items: center;
+}
+
+.service_name {
+    flex-basis: 36%;
+    font-weight: 600;
+}
+
+.currency {
+    flex-basis: 10%;
+    max-width: 10%;
+    padding: 8px;
+}
+
+.buy_price {
+    flex-basis: 9%;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.unit {
+    flex-basis: 11%;
+    padding: 8px;
+}
+
+.quantity {
+    flex-basis: 6%;
+    margin-left: 4px;
+    padding: 8px;
+}
+
+.per_container_value {
+    font-size: 10px;
+	color: #ee3425;
+}

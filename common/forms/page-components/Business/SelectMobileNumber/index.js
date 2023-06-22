@@ -29,7 +29,7 @@ function SelectMobileNumber({
 
 	return (
 		<div className={styles.row_container} style={width ? { width: '104%' } : {}}>
-			<div className={styles.country_code} style={{ paddingRight: 0 }}>
+			<div className={`${styles.country_code} country_code`} style={{ paddingRight: 0 }}>
 				<SelectCountryCode
 					{...rest}
 					value={country_code || (value || {})[codeKey]}
@@ -41,7 +41,7 @@ function SelectMobileNumber({
 				/>
 			</div>
 
-			<div className={styles.mobile_number}>
+			<div className={`${styles.mobile_number} mobile_number`}>
 				<Input
 					{...rest}
 					width="100%"

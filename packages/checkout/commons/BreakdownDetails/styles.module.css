@@ -1,0 +1,52 @@
+.service_name {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.container {
+    margin: 20px;
+    align-items: center;
+
+    :global {
+        .ui_accordion_content {
+            padding: 16px 0px;
+            width: 100%;
+            background: #FDFDFD;
+        }
+
+        .ui_accordion_title {
+            width: 100%;
+            padding: 10px 16px;
+        }
+    }
+}
+
+.service_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total_display {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.add_line_item {
+    color: #FF7F00 !important;
+    font-weight: 600;
+    padding: unset 16px !important;
+    margin: 16px 0px 0px 16px !important;
+}

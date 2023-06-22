@@ -1,0 +1,20 @@
+.options_container {
+    cursor: pointer;
+	width: 100%;
+
+	:hover {
+		background-color: #f6f5fe;
+	}
+}
+
+.container {
+    border-radius: 4px;
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+}
+
+.label_text {
+    font-size: 12px;
+    padding: 12px;
+}

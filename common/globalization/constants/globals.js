@@ -159,6 +159,27 @@ const GLOBAL_CONSTANTS = {
 	currency_conversion_constant    : 0.04,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 	invoice_check_id                : 120347,
+	freight_unit_mapping            : {
+		per_container         : '/Ctr.',
+		per_shipment          : '/Shipment',
+		per_bl                : '/BL',
+		per_kg                : '/Kg',
+		per_truck             : '/Truck',
+		per_awb               : '/Awb',
+		per_cbm               : '/Cbm',
+		per_kg_per_day        : ' /Kg Per Day',
+		per_document          : '/Document',
+		per_package           : '/Package',
+		percentage_of_freight : 'Percentage of Freight',
+		per_ton               : '/Ton',
+	},
+	applicable_stage_options: [
+		{ label: 'Quotation', value: 'quotation' },
+		// { label: 'Proforma Approval', value: 'proforma_approval' },
+		// { label: 'Sales Invoice Generation', value: 'sales_invoice_generation' },
+		{ label: 'ETA', value: 'eta' },
+		{ label: 'ETD', value: 'etd' },
+	],
 };
 
 GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
