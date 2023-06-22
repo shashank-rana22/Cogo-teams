@@ -3541,6 +3541,11 @@ const partner = {
 			service_name : 'cogo_assured_rate',
 			feature      : 'rate_feedbacks',
 		},
+		{
+			api          : 'update_checkout_risk_category',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	okam_dashboard: [
 		{
