@@ -15,7 +15,7 @@ const AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO = 166.67;
 export const renderValue = (label, detail = {}) => {
 	const {
 		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type,
-		payment_term, inco_term, price_type, service_type, source, cargo_readiness_date,
+		payment_term, inco_term, price_type, service_type, source, cargo_readiness_date, awb_execution_date,
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
 
@@ -142,6 +142,8 @@ export const renderValue = (label, detail = {}) => {
 			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
 		case 'schedule_arrival':
 			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
+		case 'awb_execution_date':
+			return `AWB Exe. Date: ${format(awb_execution_date || awb_execution_date, 'dd MMM yyyy')}`;
 		default:
 			return detail[label] || null;
 	}

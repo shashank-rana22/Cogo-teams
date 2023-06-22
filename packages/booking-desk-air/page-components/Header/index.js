@@ -73,7 +73,7 @@ function Header({
 					<Input
 						size="sm"
 						prefix={<IcMAppSearch />}
-						placeholder="Search via Customer/SID/Booking No"
+						placeholder="Search via Customer/SID/AWB No"
 						style={{ marginRight: '8px', width: 350 }}
 						onChange={(e) => setSearchValue(e)}
 						value={searchValue}

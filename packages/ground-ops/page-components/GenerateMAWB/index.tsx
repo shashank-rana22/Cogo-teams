@@ -28,7 +28,10 @@ const UNSAVED_FIELDS = ['document_number',
 	'shipperName',
 	'shipperAddress',
 	'consigneeName',
-	'chargeableWeight'];
+	'chargeableWeight',
+	'remark',
+	'totalPackagesCount',
+];
 
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
@@ -343,6 +346,9 @@ function GenerateMAWB({
 	}, [edit, editCopies]);
 
 	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			return;
+		}
 		let totalVolume:number = 0;
 		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
