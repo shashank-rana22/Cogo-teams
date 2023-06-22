@@ -1080,7 +1080,7 @@ const partner = {
 			api          : 'onboard_credit_application',
 			access_type  : 'private',
 			feature      : 'demand_crm',
-			service_name : 'organization',
+			service_name : 'credit',
 		},
 		{
 			api          : 'list_organization_payment_modes',
