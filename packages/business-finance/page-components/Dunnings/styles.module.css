@@ -8,5 +8,6 @@
 }
 
 .tab_panel_dashboard {
-	background-color: red;
+	background-color: var(--color-primary-error-red-1);
 }
+
