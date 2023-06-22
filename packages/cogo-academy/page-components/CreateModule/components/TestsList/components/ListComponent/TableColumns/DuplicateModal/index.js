@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 import styles from './styles.module.css';
 
-function ExtendValidityModal({
+function DuplicateModal({
 	showDuplicateModal,
 	setShowDuplicateModal,
 	id,
@@ -62,4 +62,4 @@ function ExtendValidityModal({
 	);
 }
 
-export default ExtendValidityModal;
+export default DuplicateModal;
