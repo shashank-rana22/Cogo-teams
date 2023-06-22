@@ -1,5 +1,5 @@
 import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
-import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
@@ -29,7 +29,7 @@ function AccountReceivables() {
 
 	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
 
-	const entity = getEntityCode(partnerId);
+	const entity = getDefaultEntityCode(partnerId);
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 

@@ -1,5 +1,5 @@
 import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
-import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
@@ -23,7 +23,7 @@ function AccountPayables() {
 	const { id: partnerId } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
 
-	const entity = getEntityCode(partnerId);
+	const entity = getDefaultEntityCode(partnerId);
 
 	const handleTabChange = (v:string) => {
 		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
