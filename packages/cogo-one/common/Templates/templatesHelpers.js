@@ -1,4 +1,4 @@
-import { Placeholder, cl, Pill } from '@cogoport/components';
+import { Placeholder, Pill } from '@cogoport/components';
 
 import { STATUS_MAPPING, STATUS_COLOR_MAPPING } from '../../constants';
 
@@ -15,10 +15,10 @@ const PREVIEW_REPLACE_MAPPING = [
 const LOADER_COUNT = 6;
 
 export function Preview({ previewData }) {
-	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce((
-		accumulator,
-		currentValue,
-	) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace), previewData);
+	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
+		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
+		previewData,
+	);
 
 	return <div dangerouslySetInnerHTML={{ __html: formattedPreview }} />;
 }
@@ -42,25 +42,26 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 		id,
 	} = item || {};
 
+	const disabled = third_party_template_status !== 'approved' || openCreateReply;
+
+	const handleClick = () => {
+		handleSelect(
+			{
+				val    : html_template,
+				status : third_party_template_status,
+				name   : templateTitle,
+				id,
+			},
+		);
+	};
+
 	return (
 		<div
 			key={id}
 			role="presentation"
-			className={cl`${activeCard === id ? styles.active : styles.each_message
-			}`}
-			onClick={() => handleSelect(
-				{
-					val    : html_template,
-					status : third_party_template_status,
-					name   : templateTitle,
-					id,
-				},
-			)}
-			style={{
-				cursor: third_party_template_status
-                    !== 'approved'
-                || openCreateReply ? 'not-allowed' : 'pointer',
-			}}
+			className={activeCard === id ? styles.active : styles.each_message}
+			onClick={handleClick}
+			style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
 		>
 			<div className={styles.wrap}>
 				<div className={styles.title}>
@@ -69,13 +70,9 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 				<div>
 					<Pill
 						size="md"
-						color={
-                        STATUS_COLOR_MAPPING[third_party_template_status || 'pending']
-                    }
+						color={STATUS_COLOR_MAPPING[third_party_template_status || 'pending']}
 					>
-						{
-                        STATUS_MAPPING[third_party_template_status || 'pending']
-                    }
+						{STATUS_MAPPING[third_party_template_status || 'pending']}
 					</Pill>
 				</div>
 			</div>
