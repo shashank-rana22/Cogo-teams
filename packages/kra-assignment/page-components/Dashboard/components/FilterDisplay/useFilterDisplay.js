@@ -3,7 +3,12 @@ import { useState } from 'react';
 
 const CHECK_LENGTH = 0;
 
-const useFilterDisplay = ({ setFilters }) => {
+const useFilterDisplay = ({
+	setFilters,
+	setSelectArrayAccordian,
+	setSelectArrayLowWeightEmployee,
+	setSelectArrayUnassignedEmployee,
+}) => {
 	const [showFilter, setShowFilter] = useState(false);
 
 	const { control, handleSubmit, reset, watch } = useForm();
@@ -21,7 +26,9 @@ const useFilterDisplay = ({ setFilters }) => {
 		}
 
 		setFilters({ ...values });
-
+		setSelectArrayAccordian([]);
+		setSelectArrayLowWeightEmployee([]);
+		setSelectArrayUnassignedEmployee([]);
 		setShowFilter(true);
 	};
 
@@ -29,6 +36,9 @@ const useFilterDisplay = ({ setFilters }) => {
 		setFilters({});
 		setShowFilter(false);
 		reset();
+		setSelectArrayAccordian([]);
+		setSelectArrayLowWeightEmployee([]);
+		setSelectArrayUnassignedEmployee([]);
 	};
 
 	return {

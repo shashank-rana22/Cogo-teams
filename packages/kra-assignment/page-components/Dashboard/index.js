@@ -111,6 +111,9 @@ function Dashboard() {
 					<FiltersDisplay
 						setFilters={setFilters}
 						check={CHECK_SINGLE_EMPLOYEE_SELECTED}
+						setSelectArrayAccordian={setSelectArrayAccordian}
+						setSelectArrayLowWeightEmployee={setSelectArrayLowWeightEmployee}
+						setSelectArrayUnassignedEmployee={setSelectArrayUnassignedEmployee}
 					/>
 
 					{CHECK_SINGLE_EMPLOYEE_SELECTED

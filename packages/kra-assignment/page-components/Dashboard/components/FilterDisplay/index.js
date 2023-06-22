@@ -7,7 +7,13 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
-function FilterFieldArray({ setFilters, check }) {
+function FilterFieldArray({
+	setFilters,
+	check,
+	setSelectArrayAccordian,
+	setSelectArrayLowWeightEmployee,
+	setSelectArrayUnassignedEmployee,
+}) {
 	const {
 		showFilter,
 		control,
@@ -15,7 +21,12 @@ function FilterFieldArray({ setFilters, check }) {
 		onSubmit,
 		onClickReset,
 		watch,
-	} = useFilterDisplay({ setFilters });
+	} = useFilterDisplay({
+		setFilters,
+		setSelectArrayAccordian,
+		setSelectArrayLowWeightEmployee,
+		setSelectArrayUnassignedEmployee,
+	});
 
 	const WATCH_VALUES = watch();
 
