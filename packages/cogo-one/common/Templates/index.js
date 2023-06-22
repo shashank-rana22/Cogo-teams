@@ -78,10 +78,6 @@ function Templates({
 		});
 	};
 
-	useEffect(() => {
-		setShowPreview(isDefaultOpen);
-	}, [isDefaultOpen]);
-
 	const createAction = () => {
 		setOpenCreateReply(true);
 		setShowPreview(false);
@@ -89,6 +85,10 @@ function Templates({
 		setPreviewData('');
 		setTemplateName('');
 	};
+
+	useEffect(() => {
+		setShowPreview(isDefaultOpen);
+	}, [isDefaultOpen]);
 
 	return (
 		<div className={styles.main_container}>
