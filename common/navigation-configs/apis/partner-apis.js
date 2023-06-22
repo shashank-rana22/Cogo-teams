@@ -3541,6 +3541,11 @@ const partner = {
 			service_name : 'cogo_assured_rate',
 			feature      : 'rate_feedbacks',
 		},
+		{
+			api          : 'update_checkout_risk_category',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	okam_dashboard: [
 		{
@@ -9700,6 +9705,31 @@ const partner = {
 		},
 		{
 			api          : 'list_sms_sender_mappings',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_template_groups',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_communication_templates_to_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_template_group_tags',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

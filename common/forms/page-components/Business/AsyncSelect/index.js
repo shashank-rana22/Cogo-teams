@@ -1,4 +1,5 @@
 import { MultiSelect, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
@@ -35,6 +36,7 @@ import {
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
@@ -62,6 +64,7 @@ import {
  * getModifiedOptions
  */
 
+const REST_VALUE_SLICE_INDEX = -1;
 const keyAsyncFieldsParamsMapping = {
 	organizations                        : asyncFieldsOrganizations,
 	organization_users                   : asyncFieldsOrganizationUser,
@@ -94,6 +97,7 @@ const keyAsyncFieldsParamsMapping = {
 	allocation_rejection_type            : asyncAllocationRequestRejectionType,
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
 	faq_topics                           : asyncListFAQTopics,
@@ -138,14 +142,14 @@ function AsyncSelect(props) {
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(REST_VALUE_SLICE_INDEX);
 		} else {
 			selectedValue = rest.value;
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;
