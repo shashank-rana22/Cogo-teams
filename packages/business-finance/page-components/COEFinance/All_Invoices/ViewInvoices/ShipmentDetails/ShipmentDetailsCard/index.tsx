@@ -7,10 +7,9 @@ import {
 	Textarea,
 	Checkbox,
 	ButtonIcon,
-	Toast,
 } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
-import { format, startCase, isEmpty } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -53,7 +52,7 @@ function ShipmentDetailsCard({
 	const [showRejected, setShowRejected] = useState({});
 	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
 	const {
-		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail,
 	} = data || {};
 	const {
 		entityCode = '',
@@ -96,7 +95,7 @@ function ShipmentDetailsCard({
 
 	} = billAdditionalObject || {};
 
-	const {organizationId: serviceProviderOrgId} = serviceProviderDetail || {};
+	const { organizationId: serviceProviderOrgId } = serviceProviderDetail || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
 		{
@@ -807,18 +806,18 @@ function ShipmentDetailsCard({
 																	interactive
 																	content={<div>ATH document was rejected</div>}
 																>
-															<Button
-																	className={styles.button}
-																	onClick={() => {
-																		setShowHighAdvancedModal(true);
-																	}}
-																	disabled={advancedPaymentObj?.remarks?.includes( 'rejected')}
-																>
-																	View
-
-																</Button>
+																	<Button
+																		className={styles.button}
+																		onClick={() => {
+																			setShowHighAdvancedModal(true);
+																		}}
+																		disabled={advancedPaymentObj
+																			?.remarks?.includes('rejected')}
+																	>
+																		View
+																	</Button>
 																</Tooltip>
-					
+
 															) : (
 																<ButtonIcon
 																	size="sm"
