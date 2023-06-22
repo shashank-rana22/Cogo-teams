@@ -35,6 +35,10 @@ interface ShipmentDetailsCardInterface {
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
+const VALID_ADVANCE_ATH_RANGE = 80;
+const PERCENTAGE_FACTOR = 100;
+const MAX_DECIMAL_PLACES = 2;
+const DEFAULT_GRAND_TOTAL = 1;
 
 function ShipmentDetailsCard({
 	data,
@@ -109,9 +113,10 @@ function ShipmentDetailsCard({
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
-	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || 1)) * 100).toFixed(2);
+	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+										.toFixed(MAX_DECIMAL_PLACES);
 	const isAdvancedATHAmountGreaterThan80Percent = !Number.isNaN(advancedATHAmountPercentage)
-														&& advancedATHAmountPercentage > 80;
+														&& advancedATHAmountPercentage > VALID_ADVANCE_ATH_RANGE;
 
 	const handleClick = (id: number) => {
 		const approveData = [...showValue, id];
