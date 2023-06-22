@@ -1,8 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
-import { CSSProperties } from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -16,13 +15,13 @@ import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
-const status = {
+const STATUS = {
 	UNPAID           : '#FEF1DF',
 	'PARTIALLY PAID' : '#D9EAFD',
 	PAID             : '#CDF7D4',
 };
 
-const invoiceType = {
+const INVOICE_TYPE = {
 	REIMBURSEMENT : '#FEF1DF',
 	CREDIT_NOTE   : '#D9EAFD',
 	INVOICE       : '#CDF7D4',
@@ -133,7 +132,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			(
 				<div className={styles.fieldPair}>
-					{(getDocumentNumber({ itemData: row }) as string).length > 10 ? (
+					{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
@@ -165,7 +164,7 @@ const completedColumn = ({
 							</div>
 						)}
 					<div>
-						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
+						<Pill size="sm" color={INVOICE_TYPE[(getByKey(row, 'invoiceType') as string)]}>
 
 							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
 
@@ -204,19 +203,24 @@ const completedColumn = ({
 			<div className={styles.fieldPair}>
 				<div>
 					<div>
-						{getPrice(
-							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'invoiceCurrency') as string,
-						)}
-
+						{
+						formatAmount({
+							amount   : getByKey(row, 'invoiceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 					</div>
 				</div>
 
 				<div
 					className={styles.styled_pills}
 					style={{
-						'--color': status[(getByKey(row, 'status') as string)],
-					} as CSSProperties}
+						'--color': STATUS[(getByKey(row, 'status') as string)],
+					} as any}
 				>
 
 					{startCase(getByKey(row, 'status') as string).length > 10 ? (
@@ -253,11 +257,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'ledgerAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
-					)}
-
+					{
+					formatAmount({
+						amount   : getByKey(row, 'ledgerAmount') as any,
+						currency : getByKey(row, 'ledgerCurrency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})
+					}
 				</div>
 			</div>
 		),
@@ -267,10 +276,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'invoiceCurrency') as string,
-					)}
+					{
+						formatAmount({
+							amount   : getByKey(row, 'balanceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 
 				</div>
 			</div>
@@ -344,7 +359,7 @@ const completedColumn = ({
 				className={styles.styled_pills}
 				style={{
 					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus') as string)],
-				} as CSSProperties}
+				} as any}
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>

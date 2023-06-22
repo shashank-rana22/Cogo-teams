@@ -1,0 +1,26 @@
+.container{
+    margin-top: 12px;
+    
+    :global{
+        .ui_tab_list_container{
+            background-color: #FCFCFC;
+            padding-top: 14px;
+
+            .ui_tabs_list_title{
+                color: #828282;
+            }
+        }
+        .ui_tab_container{
+            padding-bottom: 14px;
+        }
+        .ui_tab_active{
+            border-bottom: 3px solid #FCDC00 !important;
+
+            .ui_tabs_list_title{
+                font-weight: 600;
+                color: #000 ;
+            }
+        }
+       
+    }
+}

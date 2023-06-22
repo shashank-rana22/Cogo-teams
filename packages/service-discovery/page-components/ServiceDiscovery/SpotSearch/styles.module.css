@@ -1,0 +1,33 @@
+.container{
+    margin: -20px;
+    background: #FFFFFF;
+    min-height: 100vh;
+}
+.header{
+    background: #F7F9F9;
+    padding: 24px 40px;
+    min-height: 300px;
+
+    @media (max-width: 950px) {
+        min-height: 320px;
+	}
+}
+.mode_selection{
+    padding: 24px 40px;
+    margin-top: -100px;
+    display: inline-block;
+
+    @media (max-width: 950px) {
+        margin-top: -120px;
+	}
+}
+.locations{
+    padding: 24px 40px;
+    margin-left: 20px;
+}
+.sales_dashboard{
+    padding: 24px 40px;
+}
+.other_services{
+    padding: 24px 40px;
+}

@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const EDIT_PARAMS_STAKEHOLDERS = ['booking_agent', 'superadmin'];
 
 const CONTROLS_EDITABLE_CONDITIONS = [
@@ -20,7 +22,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 

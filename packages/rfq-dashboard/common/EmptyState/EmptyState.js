@@ -14,7 +14,7 @@ function EmptyState({
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`} style={{ marginTop }}>
 			<Image
-				src={GLOBAL_CONSTANTS.image_url.rfq_loading}
+				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				width={width}
 				height={height}
 				alt="Empty-state"

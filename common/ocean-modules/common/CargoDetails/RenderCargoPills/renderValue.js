@@ -2,16 +2,88 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase } from '@cogoport/utils';
+import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const VOLUME_FACTOR = 166.67;
+const PACKAGES_LENGTH_GREATER_THAN = 1;
+const INCR_CERTIFICATE_BY = 1;
+const CONTAINERS_COUNT = 1;
+const TRUCKS_COUNT = 1;
+const PACKAGES_COUNT = 1;
+const CHARGEABLE_WEIGHT_UPTO_DECIMAL = 2;
+const BUY_QUOTATION_RATE_UPTO_DECIMAL = 2;
+
+const formatPocData = (pocDetails) => (
+	<div>
+		<div>{pocDetails?.name}</div>
+		<div>
+			{pocDetails?.mobile_country_code}
+			-
+			{pocDetails?.mobile_number}
+		</div>
+		<div>{pocDetails?.email}</div>
+	</div>
+);
+
+const packageDetails = (packages, inputValue) => {
+	if (packages?.length > PACKAGES_LENGTH_GREATER_THAN) {
+		return (
+			<Tooltip
+				placement="bottom"
+				theme="light"
+				content={(
+					<div style={{ fontSize: '10px' }}>
+						{(packages || []).map((item) => {
+							const values = item
+								? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
+								}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
+								: '';
+							return <div key={values}>{values}</div>;
+						})}
+					</div>
+				)}
+			>
+				<div className="cargo-details-info">
+					{`Package: ${inputValue} + ${packages.length - PACKAGES_LENGTH_GREATER_THAN} more`}
+
+				</div>
+			</Tooltip>
+		);
+	}
+
+	return `Package: ${inputValue}`;
+};
+
+const formatShipperDetails = (shipperDetails) => (
+	<div>
+		<div>{shipperDetails?.name}</div>
+		<div>{shipperDetails?.address}</div>
+	</div>
+);
+
+const formatCertificate = (certificates) => (
+	<div className={styles.certificate_container}>
+		{(certificates || []).map((item, i) => (
+			<a href={item} target="_blank" rel="noreferrer" key={item}>
+				Click to view certificate
+				&nbsp;
+				{i + INCR_CERTIFICATE_BY}
+			&nbsp;
+				<IcMOpenlink />
+				<br />
+			</a>
+		))}
+	</div>
+);
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const valueForInput = Array.isArray(packages) && packages?.length ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
-	const chargableWeight = Math.max(detail.volume * 166.67, detail?.weight);
+	const chargableWeight = Math.max(detail.volume * VOLUME_FACTOR, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -25,69 +97,6 @@ export const renderValue = (label, detail) => {
 
 	const volume = ` ${detail.volume} cbm`;
 
-	const packageDetails = () => {
-		if (packages?.length > 1) {
-			return (
-				<Tooltip
-					placement="bottom"
-					theme="light"
-					content={(
-						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
-								const values = item
-									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
-									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
-									: '';
-								return <div key={values}>{values}</div>;
-							})}
-						</div>
-					)}
-				>
-					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
-						} more`}
-
-					</div>
-				</Tooltip>
-			);
-		}
-		return `Package: ${inputValue}`;
-	};
-
-	const formatPocData = (pocDetails) => (
-		<div>
-			<div>{pocDetails?.name}</div>
-			<div>
-				{pocDetails?.mobile_country_code}
-				-
-				{pocDetails?.mobile_number}
-			</div>
-			<div>{pocDetails?.email}</div>
-		</div>
-	);
-
-	const formatShipperDetails = (shipperDetails) => (
-		<div>
-			<div>{shipperDetails?.name}</div>
-			<div>{shipperDetails?.address}</div>
-		</div>
-	);
-
-	const formatCertificate = (certificates) => (
-		<div className={styles.certificate_container}>
-			{(certificates || []).map((item, i) => (
-				<a href={item} target="_blank" rel="noreferrer" key={item}>
-					Click to view certificate
-					&nbsp;
-					{i + 1}
-				&nbsp;
-					<IcMOpenlink />
-					<br />
-				</a>
-			))}
-		</div>
-	);
-
 	switch (label) {
 		case 'container_size':
 			if (detail?.container_size?.includes('HC')) {
@@ -99,7 +108,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.containers_count === 1) {
+			if (detail.containers_count === CONTAINERS_COUNT) {
 				return '1 Container';
 			}
 
@@ -109,7 +118,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.packages_count === 1) {
+			if (detail.packages_count === PACKAGES_COUNT) {
 				return '1 Package';
 			}
 
@@ -119,7 +128,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === TRUCKS_COUNT) {
 				return '1 Truck';
 			}
 
@@ -137,16 +146,16 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (isEmpty(packages)) {
 				return null;
 			}
-			return packageDetails();
+			return packageDetails(packages, inputValue);
 
 		case 'volume':
 			return ` ${volume} ${detail.service_type === 'ftl_freight_service'
 				|| detail.service_type === 'haulage_freight_service'
 				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
+				: `, Chargeable Weight: ${chargableWeight.toFixed(CHARGEABLE_WEIGHT_UPTO_DECIMAL)} kg`
 			}`;
 		case 'weight':
 			return ` ${detail.weight} kgs`;
@@ -281,7 +290,7 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(BUY_QUOTATION_RATE_UPTO_DECIMAL)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':

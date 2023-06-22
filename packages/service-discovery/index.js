@@ -1,1 +1,1 @@
-export { default as ServiceDiscovery } from './page-components/Service-Discovery';
+export { default as ServiceDiscovery } from './page-components/ServiceDiscovery';

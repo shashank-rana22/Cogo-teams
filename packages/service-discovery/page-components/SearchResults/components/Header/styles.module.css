@@ -1,0 +1,30 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-bottom: 1px solid #EBEBF0;
+    box-shadow: 0px 8px 8px 0 #EBEBF0;  
+}
+.details_header{
+    display: flex;
+}
+.location_details{
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    max-width: 50%;
+}
+.additional_header{
+    height:200px;
+    transition: height 0.5s ease-in-out;
+}
+.show{
+    height:100%;
+    transition: height 0.5s ease-in-out;
+}
+.back_button{
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

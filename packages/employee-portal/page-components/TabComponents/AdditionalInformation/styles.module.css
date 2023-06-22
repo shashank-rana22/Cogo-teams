@@ -1,0 +1,47 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.title {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	color: #221f20;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.status {
+	display: flex;
+	flex-basis: 80%;
+	align-items: center;
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.accordion {
+	margin-bottom: 20px !important;
+	overflow-y: scroll;
+	background-color: #fff;
+	border: 0.5px solid gold;
+	transition: height 1s ease-out;
+
+	:global {
+		.ui_accordion_header {
+			position: sticky;
+			top: 0;
+		}
+	}
+}

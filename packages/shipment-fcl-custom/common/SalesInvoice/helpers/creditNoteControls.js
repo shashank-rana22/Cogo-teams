@@ -1,4 +1,4 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
@@ -52,7 +52,7 @@ const commonControls = (handleChange, charge) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 
