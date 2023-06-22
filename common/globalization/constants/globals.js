@@ -201,10 +201,6 @@ const GLOBAL_CONSTANTS = {
 		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
-		risk_free:
-		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png',
-		empty_list           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg',
-		pie_chart_loader     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
 		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
 		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
 		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
@@ -216,6 +212,10 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
+	},
+	pdf_url: {
+		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
 	options: {
