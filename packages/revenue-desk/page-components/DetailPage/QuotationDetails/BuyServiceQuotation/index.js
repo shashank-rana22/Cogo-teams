@@ -36,8 +36,14 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 					{' '}
 					:
 					{' '}
-					{Number(Number(profitPercentage) * 100).toFixed(2)}
-					%
+					{!loading
+						? (
+							<div>
+								{Number(Number(profitPercentage) * 100).toFixed(2)}
+								%
+							</div>
+						) : <Placeholder height="25px" width="100px" />}
+
 				</div>
 				<div className={styles.text2}>
 					<div style={{ textDecoration: 'underline' }}>
