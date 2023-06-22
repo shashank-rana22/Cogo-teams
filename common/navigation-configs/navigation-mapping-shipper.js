@@ -78,6 +78,18 @@ const navigationMappingShipper = {
 				possible_apis : app_apis.app_contract_management,
 				module_type   : 'dashboards',
 			},
+			{
+				key           : 'saas_planning-manage_rfq',
+				title         : 'Manage RFQ',
+				href          : '/manage-rfq',
+				as            : '/manage-rfq',
+				type          : 'link',
+				icon          : 'nav-payments',
+				main_apis     : [],
+				possible_apis : app_apis.app_manage_rfq,
+				module_type   : 'dashboards',
+			},
+
 		],
 	},
 	saas_premium_services: {

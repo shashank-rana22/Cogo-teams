@@ -111,7 +111,7 @@ const navigationMappingSeller = {
 				key           : 'saas_premium_services-order_history',
 				title         : 'Order History',
 				href          : '/saas/premium-services/order-history',
-				as            : '/saas/premium-servicpes/order-history',
+				as            : '/saas/premium-services/order-history',
 				icon          : 'nav-transaction-history',
 				main_apis     : [],
 				possible_apis : app_apis.saas_order_history,
