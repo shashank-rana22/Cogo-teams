@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import {
 	Button,
-	Pill,
 	Tooltip,
 	Modal,
 	Textarea,
@@ -194,7 +193,6 @@ function ShipmentDetailsCard({
 									<IcMInfo width={15} height={15} />
 								</div>
 							</Tooltip>
-							<Pill color="blue">{invoiceType}</Pill>
 						</div>
 
 						{!isInvoiceApproved && (
@@ -692,6 +690,11 @@ function ShipmentDetailsCard({
 
 										<div className={styles.hr} />
 										<div className={styles.billing_party_container}>
+											<div className={styles.margin_bottom}>
+												Bill -
+												{' '}
+												<span>{invoiceType}</span>
+											</div>
 											<div className={styles.margin_bottom}>
 												Invoice Number -
 												{' '}
