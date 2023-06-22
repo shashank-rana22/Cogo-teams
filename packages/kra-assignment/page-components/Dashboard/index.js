@@ -60,7 +60,7 @@ function Dashboard() {
 	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
 
 	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
-	const CHECK_SINGLE_EMPLOYEE_SELECTED = isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
 	return (
 		<div>
@@ -86,7 +86,9 @@ function Dashboard() {
 						<Button
 							size="md"
 							onClick={() => setShowKRACalculationTable(true)}
-							// disabled={isEmpty(selectArrayUnassignedEmployee)}
+							disabled={isEmpty(selectArrayUnassignedEmployee)
+								&& isEmpty(selectArrayLowWeightEmployee)
+								&& isEmpty(selectArrayAccordian)}
 						>
 							Proceed to Allocate KRAs
 						</Button>
@@ -107,7 +109,8 @@ function Dashboard() {
 						{CHECK_SINGLE_EMPLOYEE_SELECTED
 							? <FilterFieldArray setFilters={setFiltersFields} />
 							: null}
-						<h4>All Unassigned KRA Employee List : </h4>
+						<div className={styles.filter}>All Unassigned KRA Employee List : </div>
+
 						<TableDisplay
 							data={UnassignedList}
 							loading={loading}
@@ -118,7 +121,8 @@ function Dashboard() {
 					</div>
 
 					<div className={styles.table_display}>
-						<h4>All Low Weightage KRA Employee List : </h4>
+						<div className={styles.filter}>All Low Weightage KRA Employee List : </div>
+
 						<TableDisplay
 							data={LowWeightageEmployeeList}
 							loading={LoadingLowWeightageEmployee}
@@ -152,7 +156,7 @@ function Dashboard() {
 				&& (
 					<div className={styles.section_right}>
 						<KRATable
-							selectArray={selectArrayUnassignedEmployee}
+							selectArray={selectArrayAccordian}
 							filters={filters}
 							getkrasAssigned={getkrasAssigned}
 							getUnassignedEmployee={getUnassignedEmployee}

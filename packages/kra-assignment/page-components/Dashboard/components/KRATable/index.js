@@ -18,7 +18,7 @@ function KRATable({
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,
-	} = useKRAList({ filters });
+	} = useKRAList({ filters, selectAccordian });
 
 	return (
 		<div>

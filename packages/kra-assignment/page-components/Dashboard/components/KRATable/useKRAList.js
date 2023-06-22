@@ -1,10 +1,11 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TOTAL_WEIGHTAGE = 1;
+const DEFAULT_WEIGHTAGE_OF_KRA = 0;
 
-const useKRAList = ({ filters = {} }) => {
+const useKRAList = ({ filters = {}, selectAccordian = [] }) => {
 	const [selectedValue, setSelectedValue] = useState();
 	const [inputValue, setInputValue] = useState([]);
 
@@ -18,6 +19,17 @@ const useKRAList = ({ filters = {} }) => {
 		},
 		{ manual: false },
 	);
+
+	useEffect(() => {
+		if (!isEmpty(selectAccordian)) {
+			const ARRAY = (selectAccordian || []).map(({ id: kra_assigned, kra_name: name, weightage }) => ({
+				kra_assigned,
+				name,
+				weightage,
+			}));
+			setInputValue(ARRAY);
+		}
+	}, [selectAccordian]);
 
 	const { list } = data || {};
 
@@ -39,7 +51,8 @@ const useKRAList = ({ filters = {} }) => {
 				{
 					kra_assigned : value,
 					name         : (list || []).find((element) => (element?.id === value)).kra_name,
-					weightage    : isEmpty(inputValue) ? TOTAL_WEIGHTAGE / ((selectedValue || []).length) : 0,
+					weightage    : isEmpty(inputValue)
+						? TOTAL_WEIGHTAGE / ((selectedValue || []).length) : DEFAULT_WEIGHTAGE_OF_KRA,
 				},
 
 			]))

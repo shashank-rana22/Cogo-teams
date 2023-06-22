@@ -41,3 +41,8 @@
 .table_display{
     margin: 20px 0;
 }
+
+.filter{
+    font-weight: 600;
+    padding:10px
+}

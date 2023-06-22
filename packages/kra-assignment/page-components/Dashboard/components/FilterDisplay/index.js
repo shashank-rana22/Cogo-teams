@@ -3,7 +3,6 @@ import React from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 
-// import controls from './controls';
 import getControls from './getControls';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
@@ -26,7 +25,8 @@ function FilterFieldArray({ setFilters, check }) {
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
 			<div className={styles.header}>
 				<div>
-					{showFilter ? <Pill color="green">Filters Applied</Pill> : <h4>Apply Filters</h4>}
+					{showFilter ? <Pill color="green">Filters Applied</Pill>
+						: <div className={styles.filter}>Apply Filters</div>}
 				</div>
 
 				<div className={styles.button_container}>
