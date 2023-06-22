@@ -58,8 +58,7 @@ function History() {
 
 		if (event.target.checked) {
 			const filterData = (list || [])
-				?.filter((item) => item?.notPostedSettlementIds?.length > 0
-				&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND));
+				?.filter((item) => item?.notPostedSettlementIds?.length > 0);
 
 			const NEW_CHECKED = {};
 			filterData.forEach((item) => { NEW_CHECKED[item?.id] = item.notPostedSettlementIds; });
@@ -102,7 +101,7 @@ function History() {
 			item?.id,
 		);
 
-		return item?.notPostedSettlementIds?.length && !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND) ? (
+		return item?.notPostedSettlementIds?.length ? (
 			<Checkbox
 				checked={isChecked}
 				disabled={loading}
@@ -116,12 +115,10 @@ function History() {
 	};
 
 	const isAllChecked = isEmpty((list || [])?.filter((item) => item?.notPostedSettlementIds?.length > 0
-	&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND)
 	&& !Object.keys(checkedRows).includes(item?.id)));
 
 	const showHeaderCheckbox = !isEmpty((list || [])?.filter(
-		(item) => item?.notPostedSettlementIds?.length > 0
-		&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND),
+		(item) => item?.notPostedSettlementIds?.length > 0,
 	));
 
 	return (

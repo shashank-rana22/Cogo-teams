@@ -123,7 +123,6 @@
 .ribbon_render {
 	flex: 0.2;
 	width: calc(0.2*(100 / 12));
-	margin-right: -26px;
 }
 
 .actions_container {

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -77,6 +78,7 @@ const useHistorySettlemet = () => {
 			});
 			setApiData(res.data);
 		} catch (error) {
+			Toast.error('Please select a Business Partner, Try adjusting filters to find what you’re looking for.');
 			setApiData({});
 		}
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);

@@ -58,7 +58,6 @@
 .ribbon_render {
 	flex: 0.2;
 	width: calc(0.2*(100 / 12));
-	margin-right: -22px;
 }
 
 .ribbon_red {
