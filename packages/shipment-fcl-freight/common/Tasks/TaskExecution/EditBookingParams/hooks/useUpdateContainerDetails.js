@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
@@ -45,15 +44,10 @@ const useUpdateContainerDetails = ({
 		const additionalDataToSend = formatForContainerDetails({ rawData: selectedContainers, formValues });
 
 		try {
-			const promiseStatus = await updateBookingParams(bookingParamPayload);
-
-			console.log(promiseStatus);
-			promiseReject();
-
-			// setValue('editBookingParams', additionalDataToSend);
-			// promiseResolve();
+			await updateBookingParams(bookingParamPayload);
+			setValue('editBookingParams', additionalDataToSend);
+			promiseResolve();
 		} catch (e) {
-			// Toast.error(e.error?.message || e.message || 'Something went wrong !!');
 			promiseReject();
 		}
 	};

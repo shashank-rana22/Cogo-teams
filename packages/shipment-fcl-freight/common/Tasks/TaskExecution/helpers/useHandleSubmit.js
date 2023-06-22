@@ -36,7 +36,7 @@ function useHandleSubmit({
 	const {
 		shipment_data,
 		primary_service,
-		getShipment,
+		refetch: getShipment,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
@@ -138,12 +138,11 @@ function useHandleSubmit({
 				}
 				// feedbacks to cogolens ends
 
-				refetch();
-
-				getShipmentTimeline();
-
 				if (SHIPMENT_REFETCH_TASKS.includes(task?.task)) {
 					getShipment();
+				} else {
+					refetch();
+					getShipmentTimeline();
 				}
 			} else {
 				Toast.error('Something went wrong');

@@ -49,18 +49,18 @@ function ExecuteStep({
 		showElements,
 	});
 
-	const handleTaskSubmit = () => {
+	const handleTaskSubmit = async () => {
 		if (isShipmentRolloverable && editBookingParams) {
 			setIsLoading(true);
 
-			editParams.current?.handleSubmit()
-				.then(() => handleSubmit(onSubmit)())
-				.finally(() => setIsLoading(false));
-			// .then(() => console.log('then'))
-			// .catch(() => console.log('catch'))
-			// .finally(() => console.log('finally'));
+			try {
+				await editParams.current?.handleSubmit();
+				handleSubmit(onSubmit)();
+			} finally {
+				setIsLoading(false);
+			}
 		} else {
-			handleSubmit(onSubmit);
+			handleSubmit(onSubmit)();
 		}
 	};
 
