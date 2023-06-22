@@ -1,6 +1,6 @@
 import { Placeholder, Pill } from '@cogoport/components';
 
-import { STATUS_MAPPING, STATUS_COLOR_MAPPING } from '../../constants';
+import { STATUS_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -70,9 +70,9 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 				<div>
 					<Pill
 						size="md"
-						color={STATUS_COLOR_MAPPING[third_party_template_status || 'pending']}
+						color={STATUS_MAPPING[third_party_template_status || 'pending']?.color}
 					>
-						{STATUS_MAPPING[third_party_template_status || 'pending']}
+						{STATUS_MAPPING[third_party_template_status || 'pending']?.label}
 					</Pill>
 				</div>
 			</div>
