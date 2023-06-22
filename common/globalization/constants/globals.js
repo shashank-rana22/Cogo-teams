@@ -213,6 +213,10 @@ const GLOBAL_CONSTANTS = {
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
 	},
+	pdf_url: {
+		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+	},
 
 	options: {
 		upload_file_size: {
@@ -289,6 +293,27 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_default_value : 0,
 
 	},
+	freight_unit_mapping: {
+		per_container         : '/Ctr.',
+		per_shipment          : '/Shipment',
+		per_bl                : '/BL',
+		per_kg                : '/Kg',
+		per_truck             : '/Truck',
+		per_awb               : '/Awb',
+		per_cbm               : '/Cbm',
+		per_kg_per_day        : ' /Kg Per Day',
+		per_document          : '/Document',
+		per_package           : '/Package',
+		percentage_of_freight : 'Percentage of Freight',
+		per_ton               : '/Ton',
+	},
+	applicable_stage_options: [
+		{ label: 'Quotation', value: 'quotation' },
+		// { label: 'Proforma Approval', value: 'proforma_approval' },
+		// { label: 'Sales Invoice Generation', value: 'sales_invoice_generation' },
+		{ label: 'ETA', value: 'eta' },
+		{ label: 'ETD', value: 'etd' },
+	],
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
 		{ value: 'lcl_freight', label: 'LCL' },

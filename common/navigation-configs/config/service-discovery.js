@@ -6,5 +6,9 @@ const serviceDiscovery = {
 	'/[partner_id]/book/[spot_search_id]/[importer_exporter_id]': {
 		navigation: 'service_discovery',
 	},
+	'/[partner_id]/checkout/[checkout_id]': {
+		navigation : 'service_discovery',
+		isMainNav  : false,
+	},
 };
 module.exports = serviceDiscovery;

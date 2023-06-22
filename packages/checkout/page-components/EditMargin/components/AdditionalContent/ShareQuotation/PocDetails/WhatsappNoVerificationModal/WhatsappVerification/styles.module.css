@@ -1,0 +1,46 @@
+.submit_button {
+    width: 100%;
+	margin-top: 16px;
+	padding: 8px;
+}
+
+.title {
+    color: #333333;
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 16px;
+}
+
+.form {
+    display: flex;
+	flex-direction: column;
+    padding: 24px;
+    padding-top: unset;
+
+
+
+    :global {
+        .ui_input_container {
+            margin-left: 12px;
+        }
+
+        .country_code {
+            width: 38%;
+        }
+
+        .mobile_number {
+            width: 58%;
+        }
+    }
+}
+
+.label {
+    margin-bottom: 6px;
+    color: #858484;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.otp_container {
+    margin: 16px 0;
+}
