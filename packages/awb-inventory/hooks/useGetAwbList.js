@@ -37,7 +37,7 @@ const useGetAwbList = (activeTab) => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				console.error(err);
 			}
 		})();
 	}, [activeTab, filters, page, query, trigger]);

@@ -11,7 +11,7 @@ const useGetAWBPrefix = () => {
 				},
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
 	return { loading, data, getAWBPrefix };

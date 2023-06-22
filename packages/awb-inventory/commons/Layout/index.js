@@ -66,6 +66,7 @@ function Layout({
 						}
 						return show ? (
 							<Item
+								key={fieldsItem.name}
 								control={control}
 								error={errors[fieldsItem.name]}
 								{...fieldsItem}
