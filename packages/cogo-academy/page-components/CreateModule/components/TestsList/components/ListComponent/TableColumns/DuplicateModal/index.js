@@ -42,6 +42,7 @@ function DuplicateModal({
 						themeType="secondary"
 						onClick={() => setShowDuplicateModal(false)}
 						className={styles.btn_container}
+						loading={loading}
 					>
 						Cancel
 					</Button>
