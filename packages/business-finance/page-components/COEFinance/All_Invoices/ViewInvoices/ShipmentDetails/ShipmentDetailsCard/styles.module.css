@@ -90,7 +90,10 @@
 }
 
 .form_style {
-	font-size: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
 }
 
 .completed {
