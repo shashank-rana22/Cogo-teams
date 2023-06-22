@@ -10,10 +10,10 @@ import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
 const STAKEHOLDER_MAPPING = {
-	booking_desk          : 'service_ops1',
-	booking_desk_manager  : 'service_ops1',
-	document_desk         : 'service_ops2',
-	document_desk_manager : 'service_ops2',
+	booking_desk          : ['service_ops1'],
+	booking_desk_manager  : ['service_ops1'],
+	document_desk         : ['service_ops2'],
+	document_desk_manager : ['service_ops2'],
 	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
 };
 
@@ -30,27 +30,18 @@ export default function CancelShipment({ setShow = () => {} }) {
 	const { shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
-	let stakeholder_type = useMemo(() => [activeStakeholder], [activeStakeholder]);
-
-	if (activeStakeholder in STAKEHOLDER_MAPPING) {
-		if (Array.isArray(STAKEHOLDER_MAPPING[activeStakeholder])) {
-			stakeholder_type =	(STAKEHOLDER_MAPPING[activeStakeholder] || []);
-		} else {
-			stakeholder_type = [STAKEHOLDER_MAPPING[activeStakeholder]];
-		}
-	}
-
 	useEffect(() => {
 		getReasons({
 			filters: {
-				shipment_type: 'fcl_freight',
-				stakeholder_type,
-
+				shipment_type    : 'fcl_freight',
+				stakeholder_type : activeStakeholder in STAKEHOLDER_MAPPING
+					? STAKEHOLDER_MAPPING[activeStakeholder]
+					: activeStakeholder,
 			},
 			shipment_id          : id,
 			options_key_required : true,
 		});
-	}, [id, getReasons, stakeholder_type]);
+	}, [id, activeStakeholder, getReasons]);
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 
