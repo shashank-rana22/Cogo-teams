@@ -18,10 +18,6 @@
     align-items: center;
 }
 .status_tag{
-    display: flex;
-    padding: 4px 6px;
-	width: max-content;
-    border-radius: 6px;
 
     &.rejected {
 		background-color: #f7cdcd;

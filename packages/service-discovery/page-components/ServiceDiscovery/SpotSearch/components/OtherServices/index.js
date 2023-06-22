@@ -6,7 +6,7 @@ import ServiceItem from './ServiceItem';
 import styles from './styles.module.css';
 
 function OtherServices({
-	selectedService = '',
+	selectedService = {},
 	setSelectedService = () => {},
 	setSelectedMode = () => {},
 }) {
@@ -17,8 +17,8 @@ function OtherServices({
 			<div className={styles.modes_container}>
 				{OTHER_SERVICES.map((mode_item) => (
 					<ServiceItem
-						data={mode_item}
 						key={mode_item.value}
+						data={mode_item}
 						selectedService={selectedService}
 						setSelectedService={setSelectedService}
 						setSelectedMode={setSelectedMode}

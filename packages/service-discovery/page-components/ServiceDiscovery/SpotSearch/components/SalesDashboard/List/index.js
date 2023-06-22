@@ -4,7 +4,7 @@ import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
 import CC from '../../../utils/condition-constants';
 
 import Header from './Header';
-import Loading from './loading';
+// import Loading from './loading';
 import Statistics from './Statistics';
 import styles from './styles.module.css';
 import Table from './Table';
@@ -43,19 +43,15 @@ function List({
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.header}>
-				{listLoading ? (
-					<Loading />
-				) : (
-					<Statistics
-						statsArray={stats}
-						statsData={statsData}
-						setFilters={setFilters}
-						setBucketParams={setBucketParams}
-						activeStat={activeStat}
-						restFilters={restFilters}
-					/>
-				)}
+			<div className={styles.header_wrapper}>
+				<Statistics
+					statsArray={stats}
+					statsData={statsData}
+					setFilters={setFilters}
+					setBucketParams={setBucketParams}
+					activeStat={activeStat}
+					restFilters={restFilters}
+				/>
 
 				<Header
 					{...(rest || {})}
