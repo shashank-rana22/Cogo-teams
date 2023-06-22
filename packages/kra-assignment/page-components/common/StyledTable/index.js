@@ -6,7 +6,7 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function StyledTable({ columns = [], data = [], loading = false, emptyText }) {
+function StyledTable({ columns = [], data = [], loading = false, emptyText, onRowClick }) {
 	if (isEmpty(data) && !loading) {
 		return (
 			<div style={{ paddingTop: 6, paddingLeft: 6 }}>
@@ -17,7 +17,7 @@ function StyledTable({ columns = [], data = [], loading = false, emptyText }) {
 
 	return (
 		<section className={styles.container}>
-			<Table columns={columns} data={data} loading={loading} />
+			<Table columns={columns} data={data} loading={loading} onRowClick={onRowClick} />
 		</section>
 	);
 }

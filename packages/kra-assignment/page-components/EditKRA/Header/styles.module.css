@@ -1,0 +1,16 @@
+.container {
+	padding: 20px 0 0 20px;
+}
+
+.title1 {
+	color: #f00;
+}
+
+.target_remains_ctn {
+	width: 230px;
+	height: 40px;
+	padding: 8px 0 0 10px;
+	margin: 10px 0;
+	border: 1px solid #888;
+	border-radius: 50px;
+}

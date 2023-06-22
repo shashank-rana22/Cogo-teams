@@ -14,6 +14,7 @@ import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const REDIRECT_URL = '/kra-assignment/create';
+const REDIRECT_EDIT_URL = '/kra-assignment/edit';
 const DISPLAY_ADD_KRA_BUTTON = 1;
 
 function Dashboard() {
@@ -53,6 +54,10 @@ function Dashboard() {
 		router.push(REDIRECT_URL, REDIRECT_URL);
 	};
 
+	const handleEditKRA = () => {
+		router.push(REDIRECT_EDIT_URL, REDIRECT_EDIT_URL);
+	};
+
 	const ARRAY_OF_UNASSIGNED_IDS = UnassignedList?.map((obj) => obj.id);
 	const [selectArrayUnassignedEmployee, setSelectArrayUnassignedEmployee] = useState([]);
 
@@ -66,7 +71,17 @@ function Dashboard() {
 		<div>
 			<div className={styles.header}>
 				<h2>KRA Mapping</h2>
-				<Button onClick={onClickConfiguration}>ADD KRA</Button>
+				<div className={styles.botton_add_edit}>
+					<Button onClick={onClickConfiguration}>ADD KRA</Button>
+					<Button
+						className={styles.butonn_edit_kra}
+						themeType="secondary"
+						onClick={handleEditKRA}
+					>
+						EDIT KRA
+
+					</Button>
+				</div>
 			</div>
 
 			<div className={styles.redirect}>
