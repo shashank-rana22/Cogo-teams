@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import useAssignChat from '../../../../hooks/useAssignChat';
+import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
@@ -33,14 +34,19 @@ function Messages({
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [disableButton, setDisableButton] = useState('');
+
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
+
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+
 	const closeModal = () => {
 		setOpenModal({ type: null, data: {} });
-		setDisableButton('');
 	};
+
 	let activeChatCollection;
+
 	const {
 		id = '',
 		channel_type = '',
@@ -59,7 +65,7 @@ function Messages({
 	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
 
 	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
-		|| ['admin_view', 'shipment_view'].includes(viewType)));
+		|| ['admin_view', 'shipment_view'].includes(viewType))) || activeMessageCard.group_members?.includes(userId);
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
@@ -90,10 +96,11 @@ function Messages({
 
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,
+		channel_type,
+		firestore,
 		closeModal,
 		activeMessageCard,
 		formattedData,
-		setDisableButton,
 		canMessageOnBotSession,
 	});
 
@@ -126,8 +133,10 @@ function Messages({
 			return callbackFunc;
 		}
 		return (scrollToBottom, val) => assignChat(
-			{ agent_id: userId, is_allowed_to_chat: true },
-			() => callbackFunc(scrollToBottom, val),
+			{
+				payload      : { agent_id: userId, is_allowed_to_chat: true },
+				callbackFunc : () => callbackFunc(scrollToBottom, val),
+			},
 		);
 	};
 
@@ -159,13 +168,15 @@ function Messages({
 					showBotMessages={showBotMessages}
 					userId={userId}
 					isomniChannelAdmin={isomniChannelAdmin}
-					setDisableButton={setDisableButton}
-					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
 					requestForAssignChat={requestForAssignChat}
 					requestAssignLoading={requestAssignLoading}
 					canMessageOnBotSession={canMessageOnBotSession}
+					viewType={viewType}
+					firestore={firestore}
+					escalateToSupplyRm={escalateToSupplyRm}
+					supplierLoading={supplierLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -220,6 +231,7 @@ function Messages({
 					)}
 					<ActiveModalComp
 						data={openModal?.data || {}}
+						activeMessageCard={activeMessageCard}
 						assignLoading={assignLoading}
 						loading={loading}
 					/>

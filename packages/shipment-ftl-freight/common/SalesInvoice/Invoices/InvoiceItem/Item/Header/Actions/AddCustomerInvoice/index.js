@@ -97,7 +97,7 @@ function AddCustomerInvoice({
 							</>
 						)}
 				</Modal.Body>
-				<Modal.Footer className={styles.button_wrapper}>
+				<Modal.Footer>
 					<FooterButtonWrapper>
 						<Button onClick={handleCloseModal} themeType="secondary"> Cancel</Button>
 						<Button onClick={customHandleSubmit} disabled={loading}>Submit</Button>
