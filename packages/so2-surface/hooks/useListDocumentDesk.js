@@ -18,6 +18,7 @@ const useListDocumentDesk = () => {
 	const [{ loading }, trigger] = useRequest({
 
 		url    : '/list_surface_so2_dashboard_shipments',
+		// url    : '/list_shipments',
 		params : {
 			filters: {
 				from_created_at,
@@ -30,6 +31,10 @@ const useListDocumentDesk = () => {
 			task_stats_required      : true,
 			pagination_data_required : true,
 			page,
+
+			// shipment_type: 'rail_domestic_freight',
+			// filters: {			shipment_type: 'rail_domestic_freight' },
+
 		},
 	});
 

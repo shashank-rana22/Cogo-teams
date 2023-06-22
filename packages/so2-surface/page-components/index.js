@@ -34,7 +34,7 @@ export default function SO2Surface() {
 
 	return (
 		<DashboardContext.Provider value={contextValues}>
-			{activeTab ? <FTL /> : null}
+			{activeTab ? <FTL stepperTab={stepperTab} /> : null}
 		</DashboardContext.Provider>
 	);
 }
