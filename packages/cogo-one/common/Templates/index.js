@@ -1,4 +1,4 @@
-import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
@@ -6,12 +6,12 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
-import { statusMapping, statusColorMapping } from '../../constants';
 import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
 import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
 
 import styles from './styles.module.css';
+import { Preview, Loader, ListItem } from './templatesHelpers';
 
 function Templates({
 	openCreateReply,
@@ -26,7 +26,7 @@ function Templates({
 		communicationLoading = false,
 	} = data || {};
 	const [showPreview, setShowPreview] = useState(false);
-	const [previewData, setPreviewData] = useState();
+	const [previewData, setPreviewData] = useState('');
 	const [templateName, setTemplateName] = useState('');
 	const [activeCard, setActiveCard] = useState('');
 	const { title, content = '' } = controls;
@@ -61,7 +61,7 @@ function Templates({
 		setOpenCreateReply,
 	});
 
-	const handleSelect = (val, status, name, id) => {
+	const handleSelect = ({ val, status, name, id }) => {
 		if (status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
@@ -78,25 +78,6 @@ function Templates({
 		});
 	};
 
-	function handlePreview() {
-		const preview = previewData
-			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
-			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
-			?.replaceAll('<p', '<div')
-			?.replaceAll('<p>', '<div>')
-			?.replaceAll('</p>', '&nbsp;</div>')
-			?.replaceAll('</span>', '&nbsp;</span>');
-
-		return <div dangerouslySetInnerHTML={{ __html: preview }} />;
-	}
-
-	const loader = () => [...Array(6)].map(() => (
-		<div className={styles.loader_div}>
-			<Placeholder height="10px" width="100px" margin="0 0 10px 0" />
-			<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
-		</div>
-	));
-
 	useEffect(() => {
 		setShowPreview(isDefaultOpen);
 	}, [isDefaultOpen]);
@@ -108,6 +89,7 @@ function Templates({
 		setPreviewData('');
 		setTemplateName('');
 	};
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
@@ -155,58 +137,17 @@ function Templates({
 							)}
 						>
 							{(list || []).map(
-								({
-									content: { name: messageTitle = '' } = {},
-									description: messageContent = '',
-									whatsapp_approval_status,
-									html_template,
-									name: templateTitle,
-									id,
-								}) => (
-									<div
-										role="presentation"
-										className={cl`${
-											activeCard === id
-												? styles.active
-												: styles.each_message
-										}`}
-										onClick={() => handleSelect(
-											html_template,
-											whatsapp_approval_status,
-											templateTitle,
-											id,
-										)}
-										style={{
-											cursor:
-                                                whatsapp_approval_status
-                                                    !== 'approved'
-                                                || openCreateReply ? 'not-allowed' : 'pointer',
-										}}
-									>
-										<div className={styles.wrap}>
-											<div className={styles.title}>
-												{messageTitle}
-											</div>
-											<div>
-												<Pill
-													size="md"
-													color={
-                                                        statusColorMapping[whatsapp_approval_status || 'pending']
-                                                    }
-												>
-													{
-                                                        statusMapping[whatsapp_approval_status || 'pending']
-                                                    }
-												</Pill>
-											</div>
-										</div>
-										<div className={styles.message}>
-											{messageContent}
-										</div>
-									</div>
+								(eachItem) => (
+									<ListItem
+										key={eachItem?.id}
+										item={eachItem}
+										activeCard={activeCard}
+										handleSelect={handleSelect}
+										openCreateReply={openCreateReply}
+									/>
 								),
 							)}
-							{loading && loader()}
+							{loading && <Loader />}
 							{isEmpty(list) && !loading && (
 								<div className={styles.empty_div}>
 									No Templates Found
@@ -285,7 +226,7 @@ function Templates({
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									{handlePreview()}
+									<Preview previewData={previewData} />
 								</div>
 							</div>
 						</div>
