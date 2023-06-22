@@ -10,7 +10,7 @@ import CardList from './CardList';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
-const ARRAY_LENGTH = 5;
+const ARRAY_LENGTH_FOR_LOADER = 5;
 
 function ShipmentId({
 	data = {}, loading = false, filters = '', setFilters = () => {}, activeTab = '',
@@ -35,7 +35,7 @@ function ShipmentId({
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{[...Array(ARRAY_LENGTH).keys()].map((item) => (
+					{[...Array(ARRAY_LENGTH_FOR_LOADER).keys()].map((item) => (
 						<div key={item}>
 							<LoadingState />
 						</div>
