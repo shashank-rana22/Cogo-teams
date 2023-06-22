@@ -9733,6 +9733,31 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_template_groups',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_communication_templates_to_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_template_group_tags',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -12631,6 +12656,32 @@ const partner = {
 			service_name : 'checkout',
 		},
 
+	],
+	business_finance_dunnings: [
+		{
+			api         : 'list_organization_trade_party_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_create_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_cycle_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_master_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_dunning',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
 	],
 };
 
