@@ -30,6 +30,10 @@ export const rdStatusOptions = [
 		value : 'completed',
 		label : 'Completed',
 	},
+	{
+		value : 'long_sail',
+		label : 'Long Sail',
+	},
 ];
 
 export const tradeOptions = [

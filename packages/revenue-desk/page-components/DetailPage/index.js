@@ -11,7 +11,7 @@ import CancelledShipmentCard from './CancelledShipmentCard';
 import LastShipmentDetails from './LastShipmentDetails';
 import PocSopModal from './PocSopModal';
 import QuotationDetails from './QuotationDetails';
-import RevenueList from './RevenueList/index.js';
+import RevenueList from './RevenueList';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
@@ -68,7 +68,9 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						</Pill>
 					</div>
 					<div className={styles.port_pair_container}>
-						{itemData?.importer_exporter?.business_name}
+						<div className={styles.header_container}>
+							{itemData?.importer_exporter?.business_name}
+						</div>
 						{(itemData?.tags || []).map((i) => (
 							<Pill key={i}>{startCase(i)}</Pill>
 						))}

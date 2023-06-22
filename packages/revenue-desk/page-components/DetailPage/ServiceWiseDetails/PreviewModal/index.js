@@ -31,8 +31,7 @@ function PreviewModal({
 		.flatMap((arr) => (arr.length > 0 ? arr[0]?.data?.rowData?.total_price_in_preferred_currency || 0 : []))
 		.reduce((sum, price) => sum + price, 0);
 	const preferredCurrency = Object.values(supplierPayload)?.[0]?.[0]?.data?.rowData?.preferred_currency;
-	const exchangesRates = data?.list?.[0]?.updated_currency_conversion_rate?.currencies
-	|| data?.list?.[0]?.currency_conversion_rate?.currencies;
+	const exchangesRates = data?.list?.[0]?.currency_conversion_rate?.currencies;
 
 	const conSellPrice = Object.values(filteredPriceData)
 		.reduce((sum, value) => {

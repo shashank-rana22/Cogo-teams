@@ -33,7 +33,7 @@ function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 					<div className={profit >= 0 ? styles.positive_container : styles.negative_container}>
 						{
 						consBuyPrice !== 0
-							? (Number(Number(profit) / Number(consBuyPrice)).toFixed(2))
+							? (Number(Number(profit) / Number(consBuyPrice)) * 100).toFixed(2)
 							: 0
 					}
 						%
