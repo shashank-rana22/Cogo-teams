@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	flex-direction: row;
+
+	button {
+		background: white;
+		border-right: 1px solid #e0e0e0;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		gap: 10;
+	}
+}

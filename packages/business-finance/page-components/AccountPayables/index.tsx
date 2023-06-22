@@ -9,6 +9,7 @@ import AdvancePayment from './AdvancePayment';
 import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
 import styles from './styles.module.css';
+import Treasury from './Treasury';
 
 interface ItemProps {
 	business_name:string,
@@ -26,7 +27,7 @@ function AccountPayables() {
 	const entity = getEntityCode(partnerId);
 
 	const handleTabChange = (v:string) => {
-		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
+		if (['invoices', 'payruns', 'outstanding'].includes(v)) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
 		}
@@ -92,7 +93,7 @@ function AccountPayables() {
 						<h1>Outstandings</h1>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
-						<h1>Treasury</h1>
+						<Treasury />
 					</TabPanel>
 
 				</Tabs>
