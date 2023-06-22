@@ -1,6 +1,7 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useEffect } from 'react';
 
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
@@ -52,7 +53,7 @@ export default function CancelShipment({ setShow = () => {} }) {
 	let modalBody = null;
 	if (reasonsLoading) {
 		modalBody = <Loader />;
-	} else if (!reasonsLoading && reasons.length === 0) {
+	} else if (!reasonsLoading && isEmpty(reasons)) {
 		modalBody = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
 	} else {
 		modalBody = (
@@ -104,7 +105,7 @@ export default function CancelShipment({ setShow = () => {} }) {
 				</Button>
 
 				<Button
-					disabled={updateShipmentLoading || reasonsLoading || reasons.length === 0}
+					disabled={updateShipmentLoading || reasonsLoading || isEmpty(reasons)}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Submit
