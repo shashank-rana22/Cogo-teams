@@ -11,7 +11,8 @@ const airCustomControls = [
 				],
 			},
 		},
-		isClearable: true,
+		isClearable : true,
+		span        : 6,
 	},
 	{
 		name        : 'trade_type',
@@ -29,7 +30,8 @@ const airCustomControls = [
 				value : 'export',
 			},
 		],
-		isClearable: true,
+		isClearable : true,
+		span        : 6,
 	},
 ];
 export default airCustomControls;

@@ -11,7 +11,8 @@ const domesticAirFreightControls = [
 				],
 			},
 		},
-		isClearable: true,
+		isClearable : true,
+		span        : 6,
 	},
 	{
 		name           : 'destination_airport_id',
@@ -25,25 +26,9 @@ const domesticAirFreightControls = [
 				],
 			},
 		},
-		isClearable: true,
+		isClearable : true,
+		span        : 6,
 	},
-	{
-		name        : 'trade_type',
-		label       : 'Trade Type',
-		type        : 'select',
-		placeholder : 'Select Trade type',
-		className   : 'primary md',
-		options     : [
-			{
-				label : 'Import',
-				value : 'import',
-			},
-			{
-				label : 'Export',
-				value : 'export',
-			},
-		],
-		isClearable: true,
-	},
+
 ];
 export default domesticAirFreightControls;
