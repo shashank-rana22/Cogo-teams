@@ -103,7 +103,7 @@ function MailTemplate({ formData, setFormData }:Props) {
 			<div className={styles.subject}>
 				<Details
 					isBody
-					bodyData={formData?.templateData?.body?.[0]}
+					bodyData={formData?.templateData?.body}
 				/>
 			</div>
 
