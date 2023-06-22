@@ -19,7 +19,7 @@ function ListHeader({ item = {} }) {
 	const tradeType = trade_type || INCO_TERM_MAPING[inco_term];
 
 	return (
-		<div>
+		<div className={styles.header_pills}>
 			{is_cogo_assured && (
 				<span className={styles.cogoport_assured}>
 					<IcCCogoassured />

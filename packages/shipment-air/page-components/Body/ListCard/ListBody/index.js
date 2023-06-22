@@ -1,14 +1,14 @@
-import ListLeftPart from './ListLeftPart';
-import ListMiddlePart from './ListMiddlePart';
-import ListRightPart from './ListRightPart';
+import CargoDetails from './CargoDetails';
+import PortDetails from './PortDetails';
+import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
 function ListBody({ item = {} }) {
 	return (
 		<div className={styles.list_body}>
-			<ListLeftPart item={item} />
-			<ListMiddlePart item={item} />
-			<ListRightPart item={item} />
+			<ShipmentDetails item={item} />
+			<PortDetails item={item} />
+			<CargoDetails item={item} />
 		</div>
 	);
 }

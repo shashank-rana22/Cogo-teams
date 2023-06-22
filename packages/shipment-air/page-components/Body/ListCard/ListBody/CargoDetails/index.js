@@ -4,11 +4,11 @@ import SERVICE_WISE_LABELS from '../../../../../constants/service-wise-label';
 
 import styles from './styles.module.css';
 
-function ListRightPart({ item = {} }) {
+function CargoDetails({ item = {} }) {
 	const { shipment_type = '' } = item;
 
 	return (
-		<div className={styles.list_right_part}>
+		<div className={styles.cargo_details_container}>
 			<RenderPills
 				detail={item}
 				labels={SERVICE_WISE_LABELS[shipment_type]}
@@ -16,4 +16,4 @@ function ListRightPart({ item = {} }) {
 		</div>
 	);
 }
-export default ListRightPart;
+export default CargoDetails;

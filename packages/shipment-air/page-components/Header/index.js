@@ -27,7 +27,7 @@ function Header({
 	}, [debounceQuery, searchValue]);
 
 	return (
-		<div>
+		<div className={styles.header_container}>
 			<Tabs
 				fullWidth
 				themeType="primary"

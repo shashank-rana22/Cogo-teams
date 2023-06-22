@@ -21,7 +21,7 @@ const SingleCountryDataServices = {
 	},
 };
 
-function ListMiddlePart({ item = {} }) {
+function PortDetails({ item = {} }) {
 	const {
 		shipment_type = '',
 		trade_type = '',
@@ -39,7 +39,7 @@ function ListMiddlePart({ item = {} }) {
 		return (
 			<div className={styles.port_details_description}>
 				{port_code || postal_code ? (
-					<div>
+					<div className={styles.port_code}>
 						(
 						{port_code || postal_code}
 						)
@@ -57,13 +57,13 @@ function ListMiddlePart({ item = {} }) {
 						</div>
 					)}
 				>
-					<div>{display_name}</div>
+					<div className={styles.display_name}>{display_name}</div>
 				</Tooltip>
 			</div>
 		);
 	};
 	return (
-		<div className={styles.list_middle_part}>
+		<div className={styles.port_details_container}>
 			<div className={styles.service_icon}>
 				{icon}
 				<div className={styles.service_name}>
@@ -103,4 +103,4 @@ function ListMiddlePart({ item = {} }) {
 		</div>
 	);
 }
-export default ListMiddlePart;
+export default PortDetails;

@@ -1,7 +1,7 @@
-.list_left_part {
+.shipment_details_container {
 	display: flex;
 	justify-content: space-between;
-	width: 20%;
+	width: 18%;
 	padding: 8px;
 }
 
@@ -9,7 +9,11 @@
 	display: flex;
 	flex-direction: column;
 	width: 85%;
-	padding: 8px 16px;
+	padding: 4px 16px;
+}
+
+.serial_id {
+	font-size: 13px;
 }
 
 .business_name {

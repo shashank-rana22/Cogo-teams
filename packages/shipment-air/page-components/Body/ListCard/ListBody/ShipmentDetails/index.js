@@ -10,7 +10,7 @@ const SERIAL_ID_LABEL = {
 
 const INCLUDES_SHIPMENT = ['air_freight', 'domestic_air_freight'];
 
-function ListLeftPart({ item = {} }) {
+function ShipmentDetails({ item = {} }) {
 	const {
 		serial_id = '',
 		source = '',
@@ -25,9 +25,9 @@ function ListLeftPart({ item = {} }) {
 	const { business_name:airline_business_name = '' } = airline || {};
 
 	return (
-		<div className={styles.list_left_part}>
+		<div className={styles.shipment_details_container}>
 			<div className={styles.container}>
-				<div>
+				<div className={styles.serial_id}>
 					{SERIAL_ID_LABEL[source] || SERIAL_ID_LABEL.defaultValue}
 					{' '}
 					#
@@ -42,7 +42,7 @@ function ListLeftPart({ item = {} }) {
 						</div>
 					)}
 				>
-					<p className={styles.business_name}>{business_name}</p>
+					<div className={styles.business_name}>{business_name}</div>
 				</Tooltip>
 				{INCLUDES_SHIPMENT.includes(item?.shipment_type) && (
 					<Tooltip
@@ -50,11 +50,11 @@ function ListLeftPart({ item = {} }) {
 						interactive
 						content={<div>{airline_business_name}</div>}
 					>
-						<p className={styles.business_name}>
+						<div className={styles.business_name}>
 							<span>Airline:</span>
 							{' '}
 							{airline_business_name}
-						</p>
+						</div>
 					</Tooltip>
 				)}
 				<div className={styles.agent_name}>
@@ -67,4 +67,4 @@ function ListLeftPart({ item = {} }) {
 		</div>
 	);
 }
-export default ListLeftPart;
+export default ShipmentDetails;
