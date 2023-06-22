@@ -86,10 +86,11 @@ function Card({
 							</div>
 						</div>
 						<div>
-							<div className={styles.heading}>Carrier</div>
+							<div className={styles.heading}>Airline</div>
 							<div className={styles.sub_heading}>
-								{dataObj?.operator?.business_name
-											|| dataObj?.airline?.business_name}
+								{item?.source === 'system_rate'
+									? dataObj?.airline?.business_name || '-'
+									: dataObj?.reverted_airline?.business_name || '-'}
 							</div>
 						</div>
 						{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
