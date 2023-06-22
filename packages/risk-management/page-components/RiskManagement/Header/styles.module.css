@@ -1,0 +1,101 @@
+.count_text {
+	font-weight: 600;
+	color: #333;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 8px;
+
+	@media (max-width: 1068px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 8px;
+	}
+}
+
+.div_container {
+	display: flex;
+}
+
+.shipment_icon {
+	margin-left: 16px;
+}
+
+.ongoing_container {
+	padding: 24px;
+}
+
+.count {
+	font-size: 32px;
+	font-weight: 500;
+	color: #333;
+}
+
+.risk_prone {
+	box-sizing: border-box;
+	display: flex;
+	padding: 8px;
+	margin: 12px 0;
+	background: #fdebe9;
+	border: 1px solid #ee3425;
+	border-radius: 8px;
+}
+
+.risk_prone_count {
+	margin-left: 2px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+}
+
+.vr {
+	margin: 8px 0;
+	border: 0.4px solid #ee3425;
+	border-radius: 8px;
+}
+
+.sub_container {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 28px 4px 12px;
+}
+
+.release_count {
+	font-size: 20px;
+	font-weight: 600;
+	color: #333;
+}
+
+.risk {
+	display: flex;
+	padding: 36px 24px 36px 12px;
+}
+
+.risk_free_container {
+	display: flex;
+	padding: 8px;
+	margin: 12px 0 12px 16px;
+	background: #f7faef;
+	border: 1px solid #abcd62;
+	border-radius: 8px;
+}
+
+.image {
+	display: flex;
+	justify-content: flex-end;
+	height: 100px;
+}
+
+.loader {
+	width: 58px;
+	height: 16px;
+	margin: 2px 0 12px;
+}

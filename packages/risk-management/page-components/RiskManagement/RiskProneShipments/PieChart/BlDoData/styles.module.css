@@ -1,0 +1,51 @@
+.bl_do_container {
+	display: flex;
+	padding: 2px;
+}
+
+.late_collection {
+	margin-right: 36px;
+}
+
+.sub_container {
+	display: flex;
+	align-items: center;
+	padding: 2px;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: #000;
+}
+
+.value {
+	margin-left: 4px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+}
+
+.bl_square1 {
+	width: 40px;
+	height: 8px;
+	margin-bottom: 4px;
+	background: #ee3425;
+	border-radius: 4px;
+}
+
+.bl_square5 {
+	width: 40px;
+	height: 8px;
+	margin-bottom: 4px;
+	background: #ffd1cc;
+	border-radius: 4px;
+}
+
+.point {
+	width: 4px;
+	height: 4px;
+	margin-right: 8px;
+	background: #000;
+	border-radius: 4px;
+}
