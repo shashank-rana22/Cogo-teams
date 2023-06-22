@@ -1,7 +1,6 @@
 import StyledTable from '../../../common/StyledTable';
 
 import getColumns from './getColumns';
-import getColumnsAccordian from './getColumnsAccordian';
 import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
@@ -19,10 +18,7 @@ function TableDisplay({
 		const updatedItems = selectArray.filter((item) => item !== valueToRemove);
 		setSelectArray(updatedItems);
 	};
-
-	const columns = type === TABLE_USED_FOR
-		? getColumnsAccordian({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading })
-		: getColumns({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading });
+	const columns = getColumns({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading });
 
 	return (
 		<div className={type === TABLE_USED_FOR ? styles.accordian : styles.container}>

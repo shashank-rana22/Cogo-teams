@@ -93,7 +93,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 									options  : {
 										style           : 'currency',
 										currencyDisplay : 'code',
-										notation        : 'copmpact',
+										notation        : 'compact',
 									},
 								}),
 							)}
@@ -115,8 +115,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',
-											notation        : 'copmpact',
-
+											notation        : 'compact',
 										},
 									}),
 								)}
@@ -159,7 +158,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',
-											notation        : 'copmpact',
+											notation        : 'compact',
 
 										},
 									}),
@@ -209,7 +208,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
-												notation        : 'copmpact',
+												notation        : 'compact',
 
 											},
 										}),
@@ -267,7 +266,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
-												notation        : 'copmpact',
+												notation        : 'compact',
 
 											},
 										}),

@@ -3,20 +3,27 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
 	collectionGroup,
-	onSnapshot,
 	updateDoc,
 	doc,
 	query,
-	limit, where, getDocs, orderBy,
+	where, getDocs, orderBy,
 } from 'firebase/firestore';
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import { PAGE_LIMIT } from '../constants';
+import filterAndSortFlashMessages from '../helpers/filterAndSortFlashMessages';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
+import {
+	snapshotCleaner,
+	mountFlashChats, mountPinnedSnapShot, mountUnreadCountSnapShot, mountSnapShot, getPrevChats,
+	mountActiveRoomSnapShot,
+} from '../helpers/snapshotHelpers';
 import sortChats from '../helpers/sortChats';
 
-const useListChats = ({
+const MAX_DISTANCE_FROM_BOTTOM = 150;
+const DEFAULT_ASSINED_CHAT_COUNT = 0;
+
+function useListChats({
 	firestore,
 	userId,
 	isomniChannelAdmin,
@@ -24,7 +31,8 @@ const useListChats = ({
 	searchValue = '',
 	viewType = '',
 	setShowFeedback = () => {},
-}) => {
+	activeSubTab,
+}) {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
@@ -33,9 +41,9 @@ const useListChats = ({
 
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
-	const unreadCountSnapshotListner = useRef(null);
-	const activeRoomSnapshotListner = useRef(null);
-	const flashSalesSnapShotListener = useRef(null);
+	const unreadCountSnapshotListener = useRef(null);
+	const activeRoomSnapshotListener = useRef(null);
+	const flashMessagesSnapShotListener = useRef(null);
 	const [firstMount, setFirstMount] = useState(false);
 
 	const [activeCard, setActiveCard] = useState({
@@ -61,13 +69,6 @@ const useListChats = ({
 
 	const canShowPinnedChats = !(observer || chat_tags);
 
-	const snapshotCleaner = ({ ref }) => {
-		const tempRef = ref;
-		if (tempRef.current) {
-			tempRef.current();
-			tempRef.current = null;
-		}
-	};
 	useEffect(() => {
 		debounceQuery(searchValue?.trim()?.toUpperCase());
 	}, [debounceQuery, searchValue]);
@@ -78,30 +79,12 @@ const useListChats = ({
 		}
 	}, [assigned_chat, firstMount, queryChannelType]);
 
-	const dataFormatter = (list) => {
-		let resultList = {};
-		list?.forEach((item) => {
-			const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
-			const userData = {
-				id         : item?.id,
-				created_at : item.data().created_at || Date.now(),
-				new_message_count,
-				...rest,
-			};
-
-			resultList = { ...resultList, [item?.id]: userData };
-		});
-
-		return {
-			resultList,
-		};
-	};
-
 	useEffect(() => {
 		if (type === 'openFeedbackModal') {
 			setShowFeedback(true);
 		}
 	}, [setShowFeedback, type]);
+
 	const omniChannelCollection = useMemo(
 		() => collectionGroup(firestore, 'rooms'),
 		[firestore],
@@ -114,8 +97,9 @@ const useListChats = ({
 			appliedFilters,
 			showBotMessages,
 			viewType,
+			activeSubTab,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType, activeSubTab],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -125,195 +109,81 @@ const useListChats = ({
 
 	), [searchQuery]);
 
-	const mountFlashChats = useCallback(() => {
-		setFlashMessagesLoading(true);
-		snapshotCleaner({ ref: flashSalesSnapShotListener });
-		setFlashMessagesData({});
-		try {
-			const newChatsQuery = query(
-				omniChannelCollection,
-				where('session_type', '==', 'bot'),
-				where('can_claim_chat', '==', true),
-				orderBy('updated_at', 'desc'),
-			);
-			flashSalesSnapShotListener.current = onSnapshot(
-				newChatsQuery,
-				(querySnapshot) => {
-					const { resultList } = dataFormatter(querySnapshot);
-					setFlashMessagesData(resultList);
-					setFlashMessagesLoading(false);
-				},
+	const { activeCardId = '', activeCardData } = activeCard || {};
+	const { channel_type:activeChannelType = '' } = activeCardData || {};
 
-			);
-		} catch (error) {
-			console.log('error', error);
-		} finally {
-			setFlashMessagesLoading(false);
-		}
+	useEffect(() => {
+		mountPinnedSnapShot({
+			setLoading,
+			pinSnapshotListener,
+			setListData,
+			userId,
+			omniChannelCollection,
+			queryForSearch,
+			canShowPinnedChats,
+			omniChannelQuery,
+			viewType,
+			activeSubTab,
+		});
+
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [omniChannelCollection]);
+	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab]);
 
-	const mountPinnedSnapShot = useCallback(() => {
-		setLoading(true);
-		snapshotCleaner({ ref: pinSnapshotListener });
-		setListData((p) => ({ ...p, pinnedMessagesData: {} }));
-		if (canShowPinnedChats) {
-			const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
-			const newChatsQuery = query(
-				omniChannelCollection,
-				queryForPinnedChat,
-				...queryForSearch,
-				...omniChannelQuery,
-			);
-			pinSnapshotListener.current = onSnapshot(
-				newChatsQuery,
-				(pinSnapShot) => {
-					const { resultList } = dataFormatter(pinSnapShot);
-					setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
-					setLoading(false);
-				},
-			);
-		}
-		return () => {
-			snapshotCleaner({ ref: pinSnapshotListener });
-		};
-	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch, canShowPinnedChats]);
-
-	const mountUnreadCountSnapShot = useCallback(() => {
-		const queryForUnreadChats = status !== 'unread'
-			? [where('has_admin_unread_messages', '==', true)] : [];
-
-		snapshotCleaner({ ref: unreadCountSnapshotListner });
-
-		const countUnreadChatQuery = query(
+	useEffect(() => {
+		mountSnapShot({
+			setLoading,
+			setListData,
+			snapshotListener,
 			omniChannelCollection,
-			...queryForUnreadChats,
-			...omniChannelQuery,
-		);
-
-		unreadCountSnapshotListner.current = onSnapshot(
-			countUnreadChatQuery,
-			(countUnreadChatSnapshot) => {
-				setListData((p) => ({
-					...p,
-					unReadChatsCount: countUnreadChatSnapshot.size || 0,
-				}));
-			},
-		);
-
-		return () => {
-			snapshotCleaner({ ref: unreadCountSnapshotListner });
-		};
-	}, [omniChannelCollection, omniChannelQuery, status]);
-
-	const mountSnapShot = useCallback(() => {
-		setLoading(true);
-		setListData((p) => ({ ...p, messagesListData: {} }));
-		snapshotCleaner({ ref: snapshotListener });
-		const newChatsQuery = query(
-			omniChannelCollection,
-			...queryForSearch,
-			...omniChannelQuery,
-			limit(PAGE_LIMIT),
-		);
-		snapshotListener.current = onSnapshot(
-			newChatsQuery,
-			(querySnapshot) => {
-				const isLastPage = querySnapshot.docs.length < PAGE_LIMIT;
-				const lastMessageTimeStamp = querySnapshot
-					.docs[querySnapshot.docs.length - 1]?.data()?.new_message_sent_at;
-				const { resultList } = dataFormatter(querySnapshot);
-				setListData((p) => ({
-					...p,
-					messagesListData: { ...resultList },
-					isLastPage,
-					lastMessageTimeStamp,
-				}));
-				setLoading(false);
-			},
-		);
-
+			queryForSearch,
+			omniChannelQuery,
+		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
 	}, [omniChannelCollection, omniChannelQuery, queryForSearch]);
 
-	const getPrevChats = useCallback(async () => {
-		const prevChatsQuery = query(
+	useEffect(() => {
+		mountUnreadCountSnapShot({
+			status,
+			unreadCountSnapshotListener,
 			omniChannelCollection,
-			...omniChannelQuery,
-			where(
-				'new_message_sent_at',
-				'<=',
-				Number(listData?.lastMessageTimeStamp),
-			),
-			limit(PAGE_LIMIT),
-		);
-		setLoading(true);
-
-		const prevChatsPromise = await getDocs(prevChatsQuery);
-		const prevChats = prevChatsPromise?.docs;
-
-		const { resultList = {} } = dataFormatter(prevChats);
-
-		const lastMessageTimeStamp = prevChats[(prevChats.length || 0) - 1]?.data()?.new_message_sent_at;
-		const isLastPage = prevChats?.length < PAGE_LIMIT;
-
-		setListData((p) => ({
-			...p,
-			messagesListData: { ...(p?.messagesListData || {}), ...resultList },
-			isLastPage,
-			lastMessageTimeStamp,
-		}));
-		setLoading(false);
-	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery]);
-
-	const { activeCardId = '', activeCardData } = activeCard || {};
-	const { channel_type:activeChannelType = '' } = activeCardData || {};
-
-	const mountActiveRoomSnapShot = useCallback(() => {
-		setActiveRoomLoading(true);
-		snapshotCleaner({ ref: activeRoomSnapshotListner });
-		if (activeCardId) {
-			const activeMessageDoc = doc(
-				firestore,
-				`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
-			);
-			activeRoomSnapshotListner.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
-				setActiveCard((p) => ({
-					...p,
-					activeCardId,
-					activeCardData:
-					{ id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
-				}));
-			});
-			setActiveRoomLoading(false);
-		}
-	}, [firestore, activeCardId, activeChannelType]);
+			omniChannelQuery,
+			setListData,
+		});
+		return () => {
+			snapshotCleaner({ ref: unreadCountSnapshotListener });
+		};
+	}, [omniChannelCollection, omniChannelQuery, status]);
 
 	useEffect(() => {
-		if (viewType !== 'shipment_view') {
-			mountPinnedSnapShot();
-		}
-	}, [mountPinnedSnapShot, viewType]);
+		mountActiveRoomSnapShot({
+			activeRoomSnapshotListener,
+			setActiveRoomLoading,
+			activeCardId,
+			firestore,
+			activeChannelType,
+			setActiveCard,
+		});
+		return () => {
+			snapshotCleaner({ ref: activeRoomSnapshotListener });
+		};
+	}, [activeCardId, activeChannelType, firestore]);
 
 	useEffect(() => {
-		mountSnapShot();
-	}, [mountSnapShot]);
-
-	useEffect(() => {
-		mountUnreadCountSnapShot();
-	}, [mountUnreadCountSnapShot]);
-
-	useEffect(() => {
-		mountActiveRoomSnapShot();
-	}, [mountActiveRoomSnapShot]);
-
-	useEffect(() => {
-		mountFlashChats();
-	}, [mountFlashChats]);
+		mountFlashChats({
+			setFlashMessagesLoading,
+			setFlashMessagesData,
+			omniChannelCollection,
+			flashMessagesSnapShotListener,
+			viewType,
+		});
+		return () => {
+			snapshotCleaner({ ref: flashMessagesSnapShotListener });
+		};
+	}, [omniChannelCollection, viewType]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
@@ -331,12 +201,13 @@ const useListChats = ({
 		}
 	};
 
-	const handleScroll = (e) => {
-		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= 150;
+	const handleScroll = useCallback((e) => {
+		const reachBottom = e.target.scrollHeight - (e.target.clientHeight
+			+ e.target.scrollTop) <= MAX_DISTANCE_FROM_BOTTOM;
 		if (reachBottom && !listData?.isLastPage && !loading) {
-			getPrevChats();
+			getPrevChats({ omniChannelCollection, omniChannelQuery, listData, setLoading, setListData });
 		}
-	};
+	}, [listData, loading, omniChannelCollection, omniChannelQuery]);
 
 	const { sortedPinnedChatList, sortedUnpinnedList } = sortChats(listData, userId);
 
@@ -357,10 +228,6 @@ const useListChats = ({
 		}
 	};
 
-	const sortedFlashMessages = Object.keys(flashMessagesData || {})
-		.sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0))
-		.map((sortedkeys) => flashMessagesData[sortedkeys]);
-
 	const getAssignedChats = useCallback(async () => {
 		const assignedChatsQuery = query(
 			omniChannelCollection,
@@ -368,7 +235,7 @@ const useListChats = ({
 			where('support_agent_id', '==', userId),
 		);
 		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
-		return getAssignedChatsQuery.size || 0;
+		return getAssignedChatsQuery.size || DEFAULT_ASSINED_CHAT_COUNT;
 	}, [omniChannelCollection, userId]);
 
 	return {
@@ -376,7 +243,7 @@ const useListChats = ({
 			messagesList      : sortedUnpinnedList || [],
 			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
-			flashMessagesList : sortedFlashMessages || [],
+			flashMessagesList : filterAndSortFlashMessages(flashMessagesData) || [],
 		},
 		setActiveMessage,
 		activeMessageCard: activeCardData,
@@ -392,6 +259,6 @@ const useListChats = ({
 		getAssignedChats,
 		flashMessagesLoading,
 	};
-};
+}
 
 export default useListChats;

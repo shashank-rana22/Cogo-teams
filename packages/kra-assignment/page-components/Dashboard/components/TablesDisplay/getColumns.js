@@ -55,7 +55,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 		Header   : 'TRIBE',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.tribe?.tribe_name) || '-'}
+				{startCase(item?.tribe_name) || '-'}
 			</div>
 		),
 	},
@@ -63,7 +63,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 		Header   : 'SQUAD',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.squad?.squad_name) || '-'}
+				{startCase(item?.squad_name) || '-'}
 			</div>
 		),
 	},
@@ -71,7 +71,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 		Header   : 'CHAPTER',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.chapter?.chapter_name) || '-'}
+				{startCase(item?.chapter_name) || '-'}
 			</div>
 		),
 	},
@@ -79,7 +79,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 		Header   : 'SUB CHAPTER',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.sub_chapter?.sub_chapter_name) || '-'}
+				{startCase(item?.sub_chapter_name) || '-'}
 			</div>
 		),
 	},

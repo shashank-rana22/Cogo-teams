@@ -3,25 +3,24 @@
 	flex-direction: column;
 	width: 30%;
 	height: 515px;
-	margin: 0 15px 15px 0;
+	margin-right: 12px;
 	background: #fdfbf6;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	&:last-child {
+		margin-right: 0;
+	}
 }
 
 .admin_ticket_view {
 	height: 80vh;
 }
 
-.tickets_section_part:last-child {
-	margin-right: 0;
-}
-
 .status_heading {
 	display: flex;
 	align-items: center;
-	padding: 15px 15px 0;
-	margin-bottom: 10px;
+	padding: 12px;
 	font-size: 16px;
 	font-weight: 500;
 	color: #221f20;

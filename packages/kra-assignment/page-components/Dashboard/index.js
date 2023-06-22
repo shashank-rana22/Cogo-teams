@@ -20,26 +20,22 @@ function Dashboard() {
 	const router = useRouter();
 
 	const {
-		data:UnassignedData = [],
+		data:unassignedData = [],
 		loading, filters, setFilters,
 		getUnassignedEmployee,
 		showKRACalculationTable,
 		setShowKRACalculationTable,
 	} = useGetUnassignedEmployee();
 
-	const { list:UnassignedList = [] } = UnassignedData;
-
 	const {
-		data:LowWeightageEmployeeData = [],
-		loading:LoadingLowWeightageEmployee,
+		data:lowWeightageEmployeeData = [],
+		loading:loadingLowWeightageEmployee,
 		getEmployeesWithLowWeightage,
 	} = useGetEmployeesWithLowWeightage({ filters });
 
-	const { list:LowWeightageEmployeeList = [] } = LowWeightageEmployeeData;
-
 	const {
-		data: KrasAssignedData,
-		loading:LoadingKrasAssigned,
+		data: krasAssignedData,
+		loading:loadingKrasAssigned,
 		getkrasAssigned,
 		selectAccordian,
 		setSelectAccordian,
@@ -47,20 +43,22 @@ function Dashboard() {
 		setSelectArrayAccordian,
 	} = useGetkrasAssigned({ filters });
 
+	const { list:unassignedList = [] } = unassignedData;
+	const { list:lowWeightageEmployeeList = [] } = lowWeightageEmployeeData;
+
 	const [filtersFields, setFiltersFields] = useState();
+	const [selectArrayUnassignedEmployee, setSelectArrayUnassignedEmployee] = useState([]);
+	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
+
+	const ARRAY_OF_UNASSIGNED_IDS = unassignedList?.map((obj) => obj.id);
+	const ARRAY_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.map((obj) => obj.id);
+
+	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);
 	};
-
-	const ARRAY_OF_UNASSIGNED_IDS = UnassignedList?.map((obj) => obj.id);
-	const [selectArrayUnassignedEmployee, setSelectArrayUnassignedEmployee] = useState([]);
-
-	const ARRAY_OF_LOW_WEIGHTAGE_IDS = LowWeightageEmployeeList?.map((obj) => obj.id);
-	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
-
-	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
-	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
 	return (
 		<div>
@@ -112,7 +110,7 @@ function Dashboard() {
 						<div className={styles.filter}>All Unassigned KRA Employee List : </div>
 
 						<TableDisplay
-							data={UnassignedList}
+							data={unassignedList}
 							loading={loading}
 							ARRAY_OF_IDS={ARRAY_OF_UNASSIGNED_IDS}
 							selectArray={selectArrayUnassignedEmployee}
@@ -124,8 +122,8 @@ function Dashboard() {
 						<div className={styles.filter}>All Low Weightage KRA Employee List : </div>
 
 						<TableDisplay
-							data={LowWeightageEmployeeList}
-							loading={LoadingLowWeightageEmployee}
+							data={lowWeightageEmployeeList}
+							loading={loadingLowWeightageEmployee}
 							ARRAY_OF_IDS={ARRAY_OF_LOW_WEIGHTAGE_IDS}
 							selectArray={selectArrayLowWeightEmployee}
 							setSelectArray={setSelectArrayLowWeightEmployee}
@@ -135,12 +133,12 @@ function Dashboard() {
 					<div>
 						<h4>All KRA List : </h4>
 						{ !isEmpty(filters)
-							? KrasAssignedData?.list?.map((item, index) => (
+							? krasAssignedData?.list?.map((item, index) => (
 								<AccordianDisplay
-									key={`${index}`}
+									key={`${JSON.stringify(item)}`}
 									data={item}
 									index={index}
-									loading={LoadingKrasAssigned}
+									loading={loadingKrasAssigned}
 									selectAccordian={selectAccordian}
 									setSelectAccordian={setSelectAccordian}
 									selectArrayAccordian={selectArrayAccordian}

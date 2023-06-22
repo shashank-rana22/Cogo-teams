@@ -1,0 +1,14 @@
+.container {
+	width: 100%;
+	padding: 10px 5px;
+}
+
+.cargo_detail_pill {
+	margin: 2px 0;
+	margin-right: 4px;
+	font-weight: 400;
+}
+
+.cargo_detail {
+	margin-top: 12px;
+}

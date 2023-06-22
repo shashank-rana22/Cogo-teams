@@ -1,3 +1,27 @@
 .container{
     margin-bottom: 10px;
 }
+
+.accordian_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(44,62,80,.2);
+    border: 1px solid rgba(0,0%,88%,.2) ;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 12px 24px;
+    text-align: left;
+    width: 100%;
+}
+
+.accordian_container{
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 12px 20px;
+    background-color: var(--color-tertiary-beige-5);;
+}

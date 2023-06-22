@@ -1,31 +1,5 @@
 const getControls = ({ setSelectedValue }) => ([
 	{
-		group       : 'top_controls',
-		subControls : [
-			{
-				name        : 'kra_name',
-				type        : 'text',
-				label       : 'Enter an appropriate name for the KRA',
-				placeholder : 'Name for the KRA',
-				rules       : {
-					required: 'name is required',
-				},
-			},
-
-			{
-				name        : 'kra_description',
-				type        : 'text',
-				label       : 'Enter an appropriate description for the KRA',
-				placeholder : 'Description for the KRA',
-				rules       : {
-					required: 'name is required',
-				},
-			},
-
-		],
-	},
-
-	{
 		group       : 'mid_controls',
 		subControls : [
 			{
@@ -148,17 +122,21 @@ const getControls = ({ setSelectedValue }) => ([
 		group       : 'end_controls',
 		subControls : [
 			{
-				name    : 'is_target_entered_manually',
-				type    : 'radioGroup',
-				label   : 'Is target entered manually',
+				name    : 'operation_type',
+				type    : 'select',
+				label   : 'Operation Type',
 				options : [
 					{
-						value : 'yes',
-						label : 'Yes',
+						value : 'manual',
+						label : 'MANUAL',
 					},
 					{
-						value : 'no',
-						label : 'No',
+						value : 'jira',
+						label : 'JIRA',
+					},
+					{
+						value : 'sql',
+						label : 'SQL',
 					},
 				],
 			},
@@ -177,7 +155,6 @@ const getControls = ({ setSelectedValue }) => ([
 					},
 				],
 			},
-
 			{
 				label : 'Anything else?',
 				name  : 'description',
@@ -206,6 +183,26 @@ const getControls = ({ setSelectedValue }) => ([
 					},
 				],
 			},
+			{
+				name    : 'can_assign_targets_individually',
+				type    : 'radioGroup',
+				label   : 'Can assign Targets Individually',
+				options : [
+					{
+						value : 'yes',
+						label : 'Yes',
+					},
+					{
+						value : 'no',
+						label : 'No',
+					},
+				],
+			},
+		],
+	},
+	{
+		group       : 'rating',
+		subControls : [
 			{
 				name        : 'rating_1',
 				type        : 'number',
@@ -241,7 +238,6 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Rating 5 is required' },
 			},
-
 		],
 	},
 
