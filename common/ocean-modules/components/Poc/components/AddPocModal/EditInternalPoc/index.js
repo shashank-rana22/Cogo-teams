@@ -1,13 +1,19 @@
-import { Button, Modal, Select } from '@cogoport/components';
-import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import { Button, Modal } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useUpdateShipmentStakeholders from '../../../../../hooks/useUpdateShipmentStakeholders';
+import EditBulkStakeholders from '../../EditBulkStakeholders';
 
 import styles from './styles.module.css';
 
-function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholdersTrigger = () => {} }) {
+function EditInternalPoc({
+	setAddPoc = () => {},
+	addPoc,
+	servicesList = {},
+	shipment_id,
+	stakeholdersTrigger = () => {},
+}) {
 	const { stakeholder_type = '', service_type = '', stakeholder_id:current_stakeholder_id = '', service_id } = addPoc;
 
 	const [stakeholder_id, set_stakeholder_id] = useState('');
@@ -34,18 +40,6 @@ function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholde
 		apiTrigger(params);
 	};
 
-	const stakeholderOptions = useGetAsyncOptions({
-		...asyncFieldsPartnerUsers(),
-		valueKey    : 'user_id',
-		initialCall : false,
-		labelKey    : 'query_name',
-		params      : {
-			filters: {
-				partner_entity_types: ['cogoport'],
-			},
-		},
-	});
-
 	useEffect(() => {
 		set_stakeholder_id(current_stakeholder_id);
 	}, [current_stakeholder_id]);
@@ -66,14 +60,9 @@ function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholde
 							<span className={styles.content}>{startCase(service_type)}</span>
 						</div>
 					) : null}
+
 					<div className={styles.form_item_container}>
-						<div>Stakeholder Name</div>
-						<Select
-							value={stakeholder_id}
-							onChange={set_stakeholder_id}
-							size="sm"
-							{...stakeholderOptions}
-						/>
+						<EditBulkStakeholders servicesList={servicesList} addPoc={addPoc} />
 					</div>
 				</div>
 			</Modal.Body>

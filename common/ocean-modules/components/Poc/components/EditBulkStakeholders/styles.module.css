@@ -1,0 +1,11 @@
+.check_box_container {
+    display: flex;
+    align-items: center;
+    width: 55%;
+    margin-right: 10px;
+}
+
+.form_item {
+    display: flex;
+    align-items: center;
+}
