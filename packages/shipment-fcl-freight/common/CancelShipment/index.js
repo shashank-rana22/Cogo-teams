@@ -37,7 +37,7 @@ export default function CancelShipment({ setShow = () => {} }) {
 				shipment_type    : 'fcl_freight',
 				stakeholder_type : activeStakeholder in STAKEHOLDER_MAPPING
 					? STAKEHOLDER_MAPPING[activeStakeholder]
-					: activeStakeholder,
+					: [activeStakeholder],
 			},
 			shipment_id          : id,
 			options_key_required : true,

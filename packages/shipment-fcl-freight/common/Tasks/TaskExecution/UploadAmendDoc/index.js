@@ -56,11 +56,13 @@ function UploadAmendDoc({
 			pending_task_id     : task.id,
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url:
-				values?.documents?.[0]?.url?.url?.finalUrl || values?.documents?.[0]?.url?.finalUrl,
+				values?.documents?.[0]?.url?.url?.finalUrl || values?.documents?.[0]?.url?.finalUrl
+					|| values?.documents?.[0]?.url,
 			documents: (values.documents || []).map((documentData) => ({
 				file_name    : documentData?.url?.fileName || documentData?.name,
-				document_url : documentData?.url?.url?.finalUrl || documentData?.url?.finalUrl,
-				data         : {
+				document_url : documentData?.url?.url?.finalUrl || documentData?.url?.finalUrl
+					|| values?.documents?.[0]?.url,
+				data: {
 					...documentData,
 					status   : 'uploaded',
 					price    : documentData?.amount?.price || undefined,
