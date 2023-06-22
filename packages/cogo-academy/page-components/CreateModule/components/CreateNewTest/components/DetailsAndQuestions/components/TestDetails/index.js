@@ -19,6 +19,8 @@ const BUTTON_TEXT_MAPPING = {
 	all   : 'Save',
 };
 
+const MIN_LENGTH = 0;
+
 const onNavigate = ({ push }) => {
 	const HREF = '/learning?activeTab=test_module';
 	push(HREF, HREF);
@@ -28,8 +30,6 @@ function CreateNewTest({
 	control, errors, data,
 	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal,
 }) {
-	const MIN_LENGTH = 0;
-
 	const router = useRouter();
 
 	const { query : { mode } } = router;
