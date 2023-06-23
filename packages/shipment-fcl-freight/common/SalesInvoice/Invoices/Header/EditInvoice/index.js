@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -10,6 +11,7 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+const INITIAL_STATE = 0;
 
 function EditInvoice({
 	show = 'false',
@@ -43,8 +45,8 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > 130000;
+	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
+	&& shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 
 	const formValues = watch();
 

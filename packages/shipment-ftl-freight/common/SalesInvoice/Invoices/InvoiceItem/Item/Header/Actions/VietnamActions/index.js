@@ -10,7 +10,7 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateShipmentInvoiceStatus from '../../../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
 
@@ -96,7 +96,7 @@ function Actions({
 		refetch();
 	};
 
-	const { updateInvoiceStatus = () => {}, loading } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
+	const { updateInvoiceStatus = () => {}, loading } = useUpdateShipmentInvoiceStatus({ refetch: refetchAfterCall });
 
 	const handleShowModal = (type) => {
 		setShowModal(type);
