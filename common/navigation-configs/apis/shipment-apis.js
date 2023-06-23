@@ -463,6 +463,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'bulk_shipment_stakeholder_reallocation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_shipment_quotation',
 		access_type  : 'private',
 		service_name : 'shipment',

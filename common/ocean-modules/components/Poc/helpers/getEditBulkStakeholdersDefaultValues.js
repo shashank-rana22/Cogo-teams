@@ -6,7 +6,15 @@ export default function getEditBulkStakeholdersDefaultValues({ services = [], st
 	};
 
 	DEFAULT_VALUES[FIELD_ARRAY_KEY] = (services || []).map((service) => {
-		const { id, service_type, trade_type } = service || {};
+		const {
+			id,
+			service_type,
+			trade_type,
+			container_size,
+			container_type,
+			commodity,
+			shipment_type,
+		} = service || {};
 
 		return {
 			is_checked      : true,
@@ -14,6 +22,10 @@ export default function getEditBulkStakeholdersDefaultValues({ services = [], st
 			service_id      : id,
 			service_type,
 			trade_type,
+			container_size,
+			container_type,
+			commodity,
+			shipment_type,
 		};
 	});
 

@@ -15,11 +15,19 @@
 .error_text {
     color: var(--color-primary-error-red-2);
     font-size: var(--font-size-md);
+}
+
+.service_additional_details {
     margin-top: -10px;
-    margin-left: 14px;
+    margin-left: 48px;
 }
 
 .form_item_container {
     display: flex;
     align-items: center;
+}
+
+.description_details {
+    font-size: var(--font-size-md);
+    color: var(--color-secondary-greyscale-3);
 }

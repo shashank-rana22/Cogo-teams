@@ -14,7 +14,7 @@ export default function useBulkShipmentStakeholderReallocation({
 
 	const apiTrigger = async (payload) => {
 		try {
-			await trigger({ data: { updateData: payload } });
+			await trigger({ data: { update_data: payload } });
 
 			Toast.success(successMessage);
 			refetch();
