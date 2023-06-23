@@ -5,11 +5,13 @@ import styles from "./styles.module.css";
 import Filters from "./Filters";
 import Cards from "./Cards";
 import useListServiceLanes from "./hooks/useListServiceLanes";
+import LoadingState from "../LoadingState";
 
-function ServiceLanesList() {
+function ServiceLanesList({ mapTab, setMapTab }) {
     const [activeTab, setActiveTab] = useState("service_lanes");
+    const filters = null;
 
-    const { data } = useListServiceLanes();
+    const { data, loading } = useListServiceLanes({ filters });
 
     return (
         <>
@@ -24,9 +26,13 @@ function ServiceLanesList() {
                 </Button>
             </div>
             <Filters />
-            {data?.map((item) => (
-                <Cards item={item} />
-            ))}
+            {!loading ? (
+                data?.map((item) => (
+                    <Cards item={item} mapTab={mapTab} setMapTab={setMapTab} />
+                ))
+            ) : (
+                <LoadingState />
+            )}
         </>
     );
 }
