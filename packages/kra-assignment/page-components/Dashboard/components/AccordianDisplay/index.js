@@ -18,11 +18,18 @@ function AccordianDisplay({
 	loading,
 	selectAccordian,
 	setSelectAccordian,
-	setSelectArrayAccordian,
-	selectArrayAccordian,
+	setSelectAccordianObject,
+	selectAccordianObject = {},
+	resetObjects,
+	dataFrom,
+	setDataFrom,
 }) {
 	const { employee_details, kra_details } = data;
-	const ARRAY_OF_EMPLOYEE_IDS = employee_details?.map((obj) => obj.id);
+
+	const OBJECT_OF_EMPLOYEE_IDS = employee_details?.reduce((acc, obj) => {
+		acc[obj.id] = true;
+		return acc;
+	}, {});
 
 	const active = JSON.stringify(selectAccordian);
 	const current = JSON.stringify(kra_details);
@@ -30,9 +37,10 @@ function AccordianDisplay({
 	const [isActive, setIsActive] = useState(false);
 
 	const Clicked = () => {
-		setSelectArrayAccordian();
+		setSelectAccordianObject();
 		setSelectAccordian(kra_details);
 		setIsActive(!isActive);
+		resetObjects();
 	};
 
 	if (loading) {
@@ -71,10 +79,13 @@ function AccordianDisplay({
 					<TableDisplay
 						data={employee_details}
 						loading={loading}
-						ARRAY_OF_IDS={ARRAY_OF_EMPLOYEE_IDS}
-						selectArray={selectArrayAccordian}
-						setSelectArray={setSelectArrayAccordian}
+						OBJECT_OF_IDS={OBJECT_OF_EMPLOYEE_IDS}
+						selectObject={selectAccordianObject}
+						setSelectObject={setSelectAccordianObject}
 						type={TABLE_USED_FOR}
+						resetObjects={resetObjects}
+						setDataFrom={setDataFrom}
+						dataFrom={dataFrom}
 					/>
 				</div>
 			)}

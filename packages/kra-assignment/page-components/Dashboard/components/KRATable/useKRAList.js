@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const TOTAL_WEIGHTAGE = 1;
 const DEFAULT_WEIGHTAGE_OF_KRA = 0;
 
-const useKRAList = ({ filters = {}, selectAccordian = [] }) => {
+const useKRAList = ({ filters = {}, selectAccordian = [], dataFrom }) => {
 	const [selectedValue, setSelectedValue] = useState();
 	const [inputValue, setInputValue] = useState([]);
 
@@ -21,7 +21,7 @@ const useKRAList = ({ filters = {}, selectAccordian = [] }) => {
 	);
 
 	useEffect(() => {
-		if (!isEmpty(selectAccordian)) {
+		if (!isEmpty(selectAccordian) && dataFrom === 'AccordianData') {
 			const ARRAY = (selectAccordian || []).map(({ id: kra_assigned, kra_name: name, weightage }) => ({
 				kra_assigned,
 				name,
@@ -29,7 +29,7 @@ const useKRAList = ({ filters = {}, selectAccordian = [] }) => {
 			}));
 			setInputValue(ARRAY);
 		}
-	}, [selectAccordian]);
+	}, [selectAccordian, dataFrom]);
 
 	const { list } = data || {};
 

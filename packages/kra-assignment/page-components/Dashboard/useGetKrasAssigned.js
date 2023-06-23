@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 function useGetkrasAssigned({ filters }) {
 	const [selectAccordian, setSelectAccordian] = useState();
-	const [selectArrayAccordian, setSelectArrayAccordian] = useState([]);
+	const [selectAccordianObject, setSelectAccordianObject] = useState({});
 
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -46,8 +46,8 @@ function useGetkrasAssigned({ filters }) {
 		getkrasAssigned,
 		selectAccordian,
 		setSelectAccordian,
-		selectArrayAccordian,
-		setSelectArrayAccordian,
+		selectAccordianObject,
+		setSelectAccordianObject,
 	};
 }
 

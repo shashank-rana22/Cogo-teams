@@ -5,10 +5,7 @@ const CHECK_LENGTH = 0;
 
 const useFilterDisplay = ({
 	setFilters,
-	setSelectArrayAccordian,
-	setSelectArrayLowWeightEmployee,
-	setSelectArrayUnassignedEmployee,
-	setShowKRACalculationTable,
+	resetObjects,
 }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
@@ -27,9 +24,7 @@ const useFilterDisplay = ({
 		}
 
 		setFilters({ ...values });
-		setSelectArrayAccordian([]);
-		setSelectArrayLowWeightEmployee([]);
-		setSelectArrayUnassignedEmployee([]);
+		resetObjects();
 		setShowFilter(true);
 	};
 
@@ -37,10 +32,7 @@ const useFilterDisplay = ({
 		setFilters({});
 		setShowFilter(false);
 		reset();
-		setSelectArrayAccordian([]);
-		setSelectArrayLowWeightEmployee([]);
-		setSelectArrayUnassignedEmployee([]);
-		setShowKRACalculationTable();
+		resetObjects();
 	};
 
 	return {
