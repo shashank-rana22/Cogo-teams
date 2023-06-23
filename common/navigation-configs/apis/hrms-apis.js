@@ -292,6 +292,17 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_employee_level',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_rating_review_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+
 	],
 };
 

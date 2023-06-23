@@ -1,58 +1,24 @@
 import { Button, Select } from '@cogoport/components';
-import { useState } from 'react';
 
-import StyledTable from '../common/StyledTable';
-
-import dummyData from './dummyData';
-import getColumns from './getColumns';
+import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
 import KraModal from './KraModal';
 import RenderVerticalHeadComponent from './RenderVerticalHeadComponent';
 import styles from './styles.module.css';
 
-const TABLE_EMPTY_TEXT = 'No data found';
-
-const VERTICAL_HEAD_OPTIONS = [
-	{
-		label : 'All Employees',
-		value : 'all_employees',
-	},
-	{
-		label : 'Reporting Manager Wise',
-		value : 'reporting_manager_wise',
-	},
-	{
-		label : 'Chapter Wise',
-		value : 'chapter_wise',
-	},
-	{
-		label : 'Squad Wise',
-		value : 'squad_wise',
-	},
-];
-
-const FUNCTIONAL_HEAD_OPTIONS = [
-	{
-		label : 'All Employees',
-		value : 'all_employees',
-	},
-];
-
-function RenderFunctionalHeadComponent({ columns }) {
-	return (
-		<StyledTable
-			columns={columns}
-			data={[{}]}
-			emptyText={TABLE_EMPTY_TEXT}
-		/>
-	);
-}
-
 function PerformanceRatingReview() {
-	const [selectValue, setSelectValue] = useState('');
-	const [selectedEmployees, setSelectedEmployees] = useState({});
-	const [show, setShow] = useState(false);
+	const {
+		selectOptions,
+		selectValue,
+		setSelectValue,
+		selectedEmployees,
+		setSelectedEmployees,
+		show,
+		setShow,
+		level,
+	} = useGetEmployeeLevels();
 
-	const { main_key, list } = dummyData || {};
+	const { data } = useGetRatingReviewDetails({ selectValue, level });
 
 	const onClickCheckbox = ({ event, item, identifier_key }) => {
 		setSelectedEmployees((previousValue) => {
@@ -63,12 +29,12 @@ function PerformanceRatingReview() {
 			if (event.target?.checked) {
 				newCheckedValues = {
 					...previousValue,
-					[identifier_key]: [...previousIds, item?.id],
+					[identifier_key]: [...previousIds, item?.employee_id],
 				};
 			} else {
 				newCheckedValues = {
 					...previousValue,
-					[identifier_key]: previousIds.filter((selectedId) => selectedId !== item?.id),
+					[identifier_key]: previousIds.filter((selectedId) => selectedId !== item?.employee_id),
 				};
 			}
 
@@ -77,8 +43,8 @@ function PerformanceRatingReview() {
 	};
 
 	const onClickHeaderCheckbox = ({ event, identifier_key }) => {
-		const { employee_list } = (list || []).find((item) => (item?.key === identifier_key));
-		const employeeIds = (employee_list || []).map((employee) => (employee?.id));
+		const { details } = (data || []).find((item) => (item?.label === identifier_key));
+		const employeeIds = (details || []).map((employee) => (employee?.employee_id));
 
 		setSelectedEmployees((previousValue) => {
 			let newCheckedValues = {};
@@ -95,7 +61,6 @@ function PerformanceRatingReview() {
 			return newCheckedValues;
 		});
 	};
-	const columns = getColumns({ setSelectedEmployees, onClickCheckbox, selectedEmployees });
 
 	return (
 		<div className={styles.container}>
@@ -103,9 +68,7 @@ function PerformanceRatingReview() {
 				Performance Rating Review
 			</div>
 
-			<Button
-				onClick={() => setShow(true)}
-			>
+			<Button onClick={() => setShow(true)}>
 				Add
 			</Button>
 
@@ -114,7 +77,7 @@ function PerformanceRatingReview() {
 					<Select
 						value={selectValue}
 						onChange={setSelectValue}
-						options={main_key === 'vertical_head' ? VERTICAL_HEAD_OPTIONS : FUNCTIONAL_HEAD_OPTIONS}
+						options={selectOptions}
 					/>
 				</div>
 
@@ -124,25 +87,16 @@ function PerformanceRatingReview() {
 
 			</div>
 
-			{
-				main_key === 'vertical_head'
-					? (
-						<RenderVerticalHeadComponent
-							list={list}
-							setSelectedEmployees={setSelectedEmployees}
-							onClickCheckbox={onClickCheckbox}
-							selectedEmployees={selectedEmployees}
-							onClickHeaderCheckbox={onClickHeaderCheckbox}
-						/>
-					)
-					: <RenderFunctionalHeadComponent columns={columns} />
-			}
+			<RenderVerticalHeadComponent
+				list={data}
+				setSelectedEmployees={setSelectedEmployees}
+				onClickCheckbox={onClickCheckbox}
+				selectedEmployees={selectedEmployees}
+				onClickHeaderCheckbox={onClickHeaderCheckbox}
+				level={level}
+			/>
 
-			{
-				show
-					? <KraModal show={show} setShow={setShow} />
-					: null
-			}
+			{show ? <KraModal show={show} setShow={setShow} /> : null}
 		</div>
 	);
 }

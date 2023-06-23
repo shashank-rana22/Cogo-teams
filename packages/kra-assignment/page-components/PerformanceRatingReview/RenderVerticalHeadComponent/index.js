@@ -8,18 +8,23 @@ import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data found';
 
-function RenderTitle({ title, averageValue }) {
+function RenderTitle({ title, averageValue, level }) {
 	return (
 		<div className={styles.title}>
 			<div>
 				{startCase(title)}
 			</div>
 
-			<div className={styles.average_value}>
-				Average Rating :
-				{' '}
-				{averageValue}
-			</div>
+			{
+				level === 'vertical_manager' && (
+					<div className={styles.average_value}>
+						Average Rating :
+						{' '}
+						{averageValue || '-'}
+					</div>
+				)
+			}
+
 		</div>
 	);
 }
@@ -41,13 +46,11 @@ function RenderStyledTable({
 	});
 
 	return (
-		<div>
-			<StyledTable
-				columns={columns}
-				data={employee_list}
-				emptyText={TABLE_EMPTY_TEXT}
-			/>
-		</div>
+		<StyledTable
+			columns={columns}
+			data={employee_list}
+			emptyText={TABLE_EMPTY_TEXT}
+		/>
 	);
 }
 
@@ -58,26 +61,28 @@ function RenderVerticalHeadComponent({
 	setSelectedEmployees,
 	onClickCheckbox,
 	selectedEmployees,
+	level,
 }) {
 	return (list || []).map((element) => {
-		const { employee_list, key, average_value } = element || {};
+		const { details:employee_list, label, average_value } = element || {};
 
 		return (
-			<div key={key} className={styles.single_accordian}>
+			<div key={label} className={styles.single_accordian}>
 				<Accordion
 					type="text"
 					title={(
 						<RenderTitle
-							title={key}
+							title={label}
 							averageValue={average_value}
 							employee_list={employee_list}
 							setAccordianList={setAccordianList}
+							level={level}
 						/>
 					)}
 				>
 					<RenderStyledTable
 						employee_list={employee_list}
-						identifier_key={key}
+						identifier_key={label}
 						setSelectedEmployees={setSelectedEmployees}
 						onClickCheckbox={onClickCheckbox}
 						selectedEmployees={selectedEmployees}

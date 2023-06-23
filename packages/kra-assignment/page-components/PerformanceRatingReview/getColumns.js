@@ -21,7 +21,7 @@ const getColumns = ({
 		accessor: (item) => (
 			<div>
 				<Checkbox
-					checked={(selectedEmployees[identifier_key] || []).includes(item?.id)}
+					checked={(selectedEmployees[identifier_key] || []).includes(item?.employee_id)}
 					onChange={(event) => onClickCheckbox({ event, item, identifier_key })}
 				/>
 			</div>
@@ -31,7 +31,7 @@ const getColumns = ({
 		Header   : 'Name',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.name) || '-'}
+				{startCase(item?.employee_name) || '-'}
 			</div>
 		),
 	},
@@ -39,7 +39,7 @@ const getColumns = ({
 		Header   : 'Calculated Rating',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.calculated_rating) || '-'}
+				{startCase(item?.system_rating) || '-'}
 			</div>
 		),
 	},
@@ -63,7 +63,7 @@ const getColumns = ({
 		Header   : 'Manager',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.manager) || '-'}
+				{startCase(item?.reporting_manager_name) || '-'}
 			</div>
 		),
 	},
@@ -71,7 +71,7 @@ const getColumns = ({
 		Header   : 'HRBP',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.hrbp) || '-'}
+				{startCase(item?.hrbp_name) || '-'}
 			</div>
 		),
 	},
