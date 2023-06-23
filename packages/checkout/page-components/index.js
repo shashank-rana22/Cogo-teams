@@ -8,6 +8,7 @@ import useGetCheckout from '../hooks/useGetCheckout';
 import useGetOrganization from '../hooks/useGetOrganization';
 
 import EditMargin from './EditMargin';
+import PreviewBooking from './PreviewBooking';
 
 function Checkout() {
 	const {
@@ -23,6 +24,7 @@ function Checkout() {
 	const { checkout_id = '', checkoutType = '', rfq_id = '' } = query;
 
 	const [bookingConfirmationMode, setBookingConfirmationMode] = useState('');
+	const [checkoutState, setCheckoutState] = useState('add_or_edit_margin');
 
 	const {
 		data = {},
@@ -106,6 +108,7 @@ function Checkout() {
 			setBookingConfirmationMode,
 			isChannelPartner,
 			shouldEditMargin,
+			setCheckoutState,
 		}),
 		[
 			checkout_id,
@@ -128,11 +131,29 @@ function Checkout() {
 		],
 	);
 
+	const COMPONENT_MAPPING = {
+		add_or_edit_margin: {
+			Component : EditMargin,
+			props     : {
+				data,
+				userSettings,
+				rate,
+			},
+		},
+		preview_booking: {
+			Component : PreviewBooking,
+			props     : {
+				data,
+			},
+		},
+	};
+
+	const { Component:ActiveComponent, props:activeComponentProps } = COMPONENT_MAPPING[checkoutState];
+
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
-			<EditMargin
-				data={data}
-				userSettings={userSettings}
+			<ActiveComponent
+				{...activeComponentProps}
 			/>
 		</CheckoutContext.Provider>
 	);

@@ -1,22 +1,29 @@
-import { isEmpty } from '@cogoport/utils';
+import { Input } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import BreakdownDetails from '../../commons/BreakdownDetails';
 
 import AdditionalContent from './components/AdditionalContent';
+import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
+
+const FIRST_INDEX = 0;
 
 function EditMargin({
 	data,
 	userSettings,
+	rate,
 }) {
 	const [rateDetails, setRateDetails] = useState([]);
+	const [additionalRemark, setAdditionalRemark] = useState('');
+	const [convenienceDetails, setConvenienceDetails] = useState({});
+	const [shouldResetMargins, setShouldResetMargins] = useState(true);
 
-	console.log('rateDetails', rateDetails);
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[FIRST_INDEX];
 
 	useEffect(() => {
-		if (isEmpty(rateDetails)) {
+		if (shouldResetMargins) {
 			setRateDetails(Object.entries(data?.rate?.services || {}).map(([key, serviceData = {}]) => {
 				const { line_items = [] } = serviceData;
 
@@ -67,17 +74,36 @@ function EditMargin({
 				};
 			}));
 		}
-	}, [data, rateDetails]);
+	}, [data?.rate?.services, shouldResetMargins]);
 
 	return (
 		<div>
 			<BreakdownDetails
 				rateDetails={rateDetails}
 				setRateDetails={setRateDetails}
+				convenienceDetails={convenienceDetails}
+				setConvenienceDetails={setConvenienceDetails}
+				convenience_line_item={convenience_line_item}
+				setShouldResetMargins={setShouldResetMargins}
 			/>
+
+			<div className={styles.additional_remark}>
+				<div className={styles.sub_heading}>Additional Remark</div>
+
+				<Input
+					value={additionalRemark}
+					onChange={setAdditionalRemark}
+					placeholder="Additional Remark that KAM can write if he wants to based on customers input....."
+				/>
+			</div>
 
 			<AdditionalContent
 				userSettings={userSettings}
+				additionalRemark={additionalRemark}
+				rateDetails={rateDetails}
+				convenienceDetails={convenienceDetails}
+				convenience_line_item={convenience_line_item}
+				setShouldResetMargins={setShouldResetMargins}
 			/>
 		</div>
 	);

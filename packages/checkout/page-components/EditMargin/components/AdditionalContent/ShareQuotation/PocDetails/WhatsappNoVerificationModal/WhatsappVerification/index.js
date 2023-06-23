@@ -72,6 +72,7 @@ function WhatsappVerification({
 						setOtpValue={setOtpNumber}
 						loading={false}
 						sendOtp={(obj) => sendOtpNumber({ ...obj })}
+						verifyOtpNumber={verifyOtpNumber}
 					/>
 				</div>
 			)}

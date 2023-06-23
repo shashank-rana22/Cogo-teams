@@ -1,19 +1,22 @@
-// import { useKey } from '@cogoport/front/hooks';
-import { useState, useEffect, useImperativeHandle, useRef } from 'react';
+import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'react';
 
 import useOtpInputEvents from './useOtpInputEvents';
+
+const INDEX_TO_VALUE_DIFF = 1;
+
+const INPUT_MAX_LEN = 1;
 
 const getInitialOtpValues = (otpLength) => {
 	const HASH = {};
 
-	for (let i = 0; i < otpLength; i += 1) {
-		HASH[`otp-${i + 1}`] = '';
+	for (let i = 0; i < otpLength; i += INDEX_TO_VALUE_DIFF) {
+		HASH[`otp-${i + INDEX_TO_VALUE_DIFF}`] = '';
 	}
 
 	return HASH;
 };
 
-const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
+const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null, verifyOtpNumber = () => {} }) => {
 	const [values, setValues] = useState(getInitialOtpValues(otpLength));
 
 	const IS_BACKSPACE_PRESSED = false;
@@ -26,54 +29,55 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		setOtp: setValues,
 		otpContainerRef,
 		otpInputElementsRef,
+		verifyOtpNumber,
 	});
 
 	useEffect(() => {
 		let isAllOtpInputValuePresent = true;
 		let value = '';
 
-		for (let i = 0; i < otpLength; i += 1) {
-			if (!values[`otp-${i + 1}`]) {
+		for (let i = 0; i < otpLength; i += INDEX_TO_VALUE_DIFF) {
+			if (!values[`otp-${i + INDEX_TO_VALUE_DIFF}`]) {
 				isAllOtpInputValuePresent = false;
 				break;
 			}
 
-			value += values[`otp-${i + 1}`];
+			value += values[`otp-${i + INDEX_TO_VALUE_DIFF}`];
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
-	}, [JSON.stringify(values)]);
+	}, [onChange, otpLength, values]);
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
-			element.setAttribute('maxlength', 1);
+			element.setAttribute('maxlength', INPUT_MAX_LEN);
 			element.setAttribute('inputmode', 'numeric');
 		});
-	}, [JSON.stringify(values)]);
+	}, [values]);
 
-	const handleChange = (index) => (event) => {
+	const handleChange = (index) => (value) => {
 		setValues((previousState) => ({
 			...previousState,
-			[`otp-${index + 1}`]: event.target.value,
+			[`otp-${index + INDEX_TO_VALUE_DIFF}`]: value,
 		}));
 
 		if (IS_BACKSPACE_PRESSED) {
 			return;
 		}
 
-		const nextOtpInputElement = otpInputElementsRef.current[index + 1];
+		const nextOtpInputElement = otpInputElementsRef.current[index + INDEX_TO_VALUE_DIFF];
 		nextOtpInputElement?.focus();
 	};
 
-	const resetOtp = () => {
+	const resetOtp = useCallback(() => {
 		setValues(getInitialOtpValues(otpLength));
-	};
+	}, [otpLength]);
 
 	const imperativeHandles = () => ({
 		resetOtp,
 	});
 
-	useImperativeHandle(ref, imperativeHandles, []);
+	useImperativeHandle(ref, imperativeHandles, [resetOtp]);
 
 	return {
 		values,

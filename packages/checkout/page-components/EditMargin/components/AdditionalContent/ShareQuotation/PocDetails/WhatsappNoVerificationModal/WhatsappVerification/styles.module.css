@@ -20,10 +20,6 @@
 
 
     :global {
-        .ui_input_container {
-            margin-left: 12px;
-        }
-
         .country_code {
             width: 38%;
         }
@@ -41,6 +37,14 @@
     font-weight: 400;
 }
 
+.input_group {
+    :global {
+        .ui_input_container {
+            margin-left: 12px;
+        }
+    }
+}
+
 .otp_container {
-    margin: 16px 0;
+    margin: 16px auto;
 }

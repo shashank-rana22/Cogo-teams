@@ -11,6 +11,7 @@ function OTPLayout({
 	loading = false,
 	sendOtp = () => {},
 	resendOtpTimerDuration = 30,
+	verifyOtpNumber = () => {},
 }) {
 	const useImperativeHandleRef = useRef({});
 
@@ -28,6 +29,7 @@ function OTPLayout({
 				onChange={(value) => {
 					setOtpValue(value.length === otpLength ? `${value}` : '');
 				}}
+				verifyOtpNumber={verifyOtpNumber}
 				ref={useImperativeHandleRef}
 			/>
 

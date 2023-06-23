@@ -1,30 +1,44 @@
 import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
+const INDEX_TO_VALUE_DIFF = 1;
+
+const ZERO_VALUE = 0;
+
 const useOtpInputEvents = ({
 	otpLength = 0,
 	setOtp = () => {},
 	otpContainerRef = null,
 	otpInputElementsRef = [],
+	verifyOtpNumber = () => {},
 }) => {
 	const isCtrlDown = useRef(false);
 
-	const validateInputKeydownEvent = (event) => {
+	const validateInputKeydownEvent = useCallback((event) => {
 		if (Number.isInteger(+event.key)) {
 			return;
 		}
 
 		if (event.key === 'Backspace') {
-			if (event.target.value) {
+			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
+
+			if (!currentFocusedOtpInputElementIndex) {
 				return;
 			}
 
-			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
+			const nextOtpInputElementToFocus = otpInputElementsRef.current[
+				currentFocusedOtpInputElementIndex - INDEX_TO_VALUE_DIFF
+			];
 
-			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex - 1];
-			nextOtpInputElementToFocus?.focus();
+			setTimeout(() => {
+				nextOtpInputElementToFocus?.focus();
+			}, ZERO_VALUE);
 
 			return;
+		}
+
+		if (event.key === 'Enter') {
+			verifyOtpNumber();
 		}
 
 		if (event.key === 'Tab') {
@@ -42,9 +56,9 @@ const useOtpInputEvents = ({
 		}
 
 		event.preventDefault();
-	};
+	}, [otpInputElementsRef, verifyOtpNumber]);
 
-	const validateInputPasteEvent = (event) => {
+	const validateInputPasteEvent = useCallback((event) => {
 		event.preventDefault();
 
 		try {
@@ -56,28 +70,29 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(0, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(ZERO_VALUE, otpLength);
 
-			const currentFocusedOtpInputElementIndex =				otpInputElementsRef.current.indexOf(event.target);
+			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
-				const newStateValues = {};
+				const NEW_STATE_VALUES = {};
 
-				for (let i = 0; i < otpLength; i += 1) {
+				for (let i = 0; i < otpLength; i += INDEX_TO_VALUE_DIFF) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						newStateValues[`otp-${i + 1}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+						const currentValue = content[i - currentFocusedOtpInputElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i + INDEX_TO_VALUE_DIFF}`] = currentValue;
 					}
 				}
 
 				return {
 					...previousState,
-					...newStateValues,
+					...NEW_STATE_VALUES,
 				};
 			});
 		} catch (error) {
 			Toast.info('Copy-Paste not working');
 		}
-	};
+	}, [otpInputElementsRef, otpLength, setOtp]);
 
 	const validateInputs = useCallback((event) => {
 		if (event.type === 'keydown') {
@@ -87,20 +102,23 @@ const useOtpInputEvents = ({
 		if (event.type === 'paste') {
 			validateInputPasteEvent(event);
 		}
-	}, []);
+	}, [validateInputKeydownEvent, validateInputPasteEvent]);
 
 	useEffect(() => {
 		const events = ['keydown', 'paste'];
+
+		const currentRef = otpContainerRef.current;
+
 		events.forEach((eventType) => {
-			otpContainerRef.current?.addEventListener(eventType, validateInputs);
+			currentRef?.addEventListener(eventType, validateInputs);
 		});
 
 		return () => {
 			events.forEach((eventType) => {
-				otpContainerRef.current?.removeEventListener(eventType, validateInputs);
+				currentRef?.removeEventListener(eventType, validateInputs);
 			});
 		};
-	}, []);
+	}, [otpContainerRef, validateInputs]);
 };
 
 export default useOtpInputEvents;

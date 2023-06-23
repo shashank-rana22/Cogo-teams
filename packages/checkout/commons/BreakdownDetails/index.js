@@ -14,11 +14,13 @@ import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 0;
-
 function BreakdownDetails({
 	rateDetails,
 	setRateDetails,
+	convenienceDetails,
+	setConvenienceDetails,
+	convenience_line_item,
+	setShouldResetMargins,
 }) {
 	const {
 		rate,
@@ -30,9 +32,6 @@ function BreakdownDetails({
 		shouldEditMargin,
 	} = useContext(CheckoutContext);
 
-	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[FIRST_INDEX];
-
-	const [convenienceDetails, setConvenienceDetails] = useState({});
 	const [addLineItemData, setAddLineItemData] = useState({});
 
 	useEffect(() => {
@@ -43,7 +42,7 @@ function BreakdownDetails({
 				unit     : convenience_line_item?.unit,
 			},
 		});
-	}, [convenience_line_item]);
+	}, [convenience_line_item, setConvenienceDetails]);
 
 	if (getCheckoutLoading && isEmpty(rateDetails)) {
 		return <QuoteLoader />;
@@ -134,6 +133,7 @@ function BreakdownDetails({
 							themeType="tertiary"
 							className={styles.add_line_item}
 							onClick={() => {
+								setShouldResetMargins(false);
 								setAddLineItemData({ index, service_type: item?.service_type, service_id: item?.id });
 							}}
 						>

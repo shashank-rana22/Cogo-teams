@@ -67,8 +67,6 @@ const useUpdateCustomizeQuotation = ({ setAddLineItemData, setRateDetails, getCh
 						};
 					}
 
-					console.log('newlyAddedLineItem', newlyAddedLineItem);
-
 					newlyAddedLineItem = { ...newlyAddedLineItem, filteredMargins: newlyAddedFilteredMargin };
 
 					const updatedLineItems = [...line_items, newlyAddedLineItem];

@@ -9,6 +9,11 @@ import styles from './styles.module.css';
 
 function AdditionalContent({
 	userSettings,
+	rateDetails,
+	additionalRemark,
+	convenienceDetails,
+	convenience_line_item,
+	setShouldResetMargins,
 }) {
 	const {
 		rate,
@@ -22,6 +27,8 @@ function AdditionalContent({
 		setBookingConfirmationMode,
 		isChannelPartner,
 		getCheckout,
+		checkout_id,
+		setCheckoutState,
 	} = useContext(CheckoutContext);
 
 	const { services = {}, trade_type = '' } = detail;
@@ -55,6 +62,14 @@ function AdditionalContent({
 				setBookingConfirmationMode={setBookingConfirmationMode}
 				isChannelPartner={isChannelPartner}
 				getCheckout={getCheckout}
+				additionalRemark={additionalRemark}
+				rateDetails={rateDetails}
+				rate={rate}
+				checkout_id={checkout_id}
+				convenienceDetails={convenienceDetails}
+				convenience_line_item={convenience_line_item}
+				setShouldResetMargins={setShouldResetMargins}
+				setCheckoutState={setCheckoutState}
 			/>
 		</div>
 	);
