@@ -2,6 +2,7 @@ import { Button, Tooltip } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMArrowBack, IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
@@ -31,9 +32,11 @@ function CreateNewTest({
 	control, errors, data,
 	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal,
 }) {
-	const router = useRouter();
+	const { general = {} } = useSelector((state) => state);
 
-	const { query : { mode } } = router;
+	const { query : { mode } } = general;
+
+	const router = useRouter();
 
 	const { push } = router;
 
