@@ -1,8 +1,7 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber';
-
-import CheckboxItem from './CheckboxItem';
+import CheckboxItem from '../../../../../commons/ExcludeList/CheckboxItem';
 
 export const config = (
 	{
@@ -18,6 +17,7 @@ export const config = (
 				uncheckedRows={uncheckedRows}
 				setUncheckedRows={setUncheckedRows}
 				row={row}
+				feature="campaign-management"
 			/>
 		),
 	},

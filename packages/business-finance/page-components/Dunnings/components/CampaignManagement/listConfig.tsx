@@ -20,7 +20,7 @@ const BODY_STYLES = {
 	padding    : '0px 16px',
 };
 
-export const listConfig = () => ({
+export const LIST_CONFIG = {
 	showHeader   : true,
 	headerStyles : HEADER_STYLES,
 	bodyStyles   : BODY_STYLES,
@@ -73,4 +73,4 @@ export const listConfig = () => ({
 			span : 1.5,
 		},
 	],
-});
+};

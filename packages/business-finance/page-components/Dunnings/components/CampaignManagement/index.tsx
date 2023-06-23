@@ -10,17 +10,28 @@ import ActionModal from './ActionModal';
 import CreateCycleForm from './CreateCycleForm';
 import FilterHeaders from './FilterHeaders';
 import useListDunningCycle from './hooks/useListDunningCycle';
-import { listConfig } from './listConfig';
+import { LIST_CONFIG } from './listConfig';
 import RenderActions from './RenderActions';
 import RenderViewMore from './RenderViewMore';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 
+const DEFAULT_PAGE_INDEX = 1;
+const DEFAULT_PAGE_SIZE = 10;
+
+const STATUS_COLOR_MAPPING = {
+	SCHEDULED   : '#CFEAED',
+	CANCELLED   : '#F7CDCD',
+	COMPLETED   : '#DDEBC0',
+	IN_PROGRESS : '#FEF199',
+	FAILED      : '#F7CDCD',
+};
+
 function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({
-		page: 1,
+		page: DEFAULT_PAGE_INDEX,
 	});
-	const [dropdown, setDropdown] = useState('');
+	const [dropdown, setDropdown] = useState([]);
 	const [showCreateForm, setShowCreateForm] = useState(false);
 	const [actionModal, setActionModal] = useState({
 		visible : false,
@@ -31,14 +42,6 @@ function CampaignManagement() {
 	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters });
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
-
-	const STATUS_COLOR_MAPPING = {
-		SCHEDULED   : '#CFEAED',
-		CANCELLED   : '#F7CDCD',
-		COMPLETED   : '#DDEBC0',
-		IN_PROGRESS : '#FEF199',
-		FAILED      : '#F7CDCD',
-	};
 
 	const functions = () => ({
 		renderName: ({ name }) => (
@@ -155,16 +158,15 @@ function CampaignManagement() {
 
 			<div className={styles.custom_list}>
 				<CustomList
-					config={listConfig()}
+					config={LIST_CONFIG}
 					itemData={data}
 					loading={loading}
 					functions={functions()}
 					page={globalFilters.page || 1}
-					pageSize={10}
+					pageSize={DEFAULT_PAGE_SIZE}
 					handlePageChange={(pageValue:number) => {
 						setGlobalFilters((p) => ({ ...p, page: pageValue }));
 					}}
-					showPagination
 					renderDropdown={showDropDown}
 				/>
 			</div>

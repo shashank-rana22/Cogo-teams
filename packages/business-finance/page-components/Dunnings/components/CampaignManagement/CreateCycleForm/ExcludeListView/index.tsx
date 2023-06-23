@@ -22,9 +22,7 @@ function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormDat
 		<div>
 			<div className={styles.header}>
 				<div>
-					<div
-						style={{ margin: '8px 0px 0px 24px' }}
-					>
+					<div className={styles.exclude_text}>
 						Exclude Customers You Do Not Want In This Cycle By Unselecting Them.
 					</div>
 

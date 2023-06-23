@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { ReactNode } from 'react';
 
 import {
@@ -8,6 +9,7 @@ import {
 	FunctionObjects,
 	ListDataProps,
 } from '../Interfaces/index';
+import EmptyState from '../StyledTable/EmptyState';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
@@ -25,8 +27,13 @@ export interface Props {
 	page?: number;
 	handlePageChange?: (currentPage: number) => void;
 	pageSize?: number;
-	showPagination?: boolean;
 	renderDropdown?: (p:any) => JSX.Element | null ;
+}
+
+interface StateInterface {
+	general?: {
+		isMobile?: boolean;
+	};
 }
 
 function CustomList({
@@ -40,7 +47,6 @@ function CustomList({
 	page = 1,
 	handlePageChange = () => {},
 	pageSize = 10,
-	showPagination = true,
 	renderDropdown = () => null,
 }: Props) {
 	const {
@@ -55,9 +61,9 @@ function CustomList({
 
 	const {
 		general: { isMobile = false },
-	}:any = useSelector((state: object) => state);
+	} = useSelector((state: StateInterface) => state);
 
-	const isListEmpty = !itemData || list?.length === 0;
+	const isListEmpty = isEmpty(itemData) || isEmpty(list);
 
 	return (
 		<section>
@@ -72,46 +78,39 @@ function CustomList({
 				/>
 			)}
 			{!isListEmpty || loading ? (
-				<div style={bodyStyles}>
-					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-						<div className={styles.card_container} key={singleitem?.id}>
-							<CardColumn
-								fields={fields}
-								itemStyles={itemStyles}
-								singleitem={singleitem}
-								config={config}
-								loading={loading}
-								functions={commonFunctions(functions)}
-								isMobile={isMobile}
-							/>
-							{renderDropdown(singleitem)}
-						</div>
-					))}
-				</div>
+				<>
+					<div style={bodyStyles}>
+						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+							<div className={styles.card_container} key={singleitem?.id}>
+								<CardColumn
+									fields={fields}
+									itemStyles={itemStyles}
+									singleitem={singleitem}
+									config={config}
+									loading={loading}
+									functions={commonFunctions(functions)}
+									isMobile={isMobile}
+								/>
+								{renderDropdown(singleitem)}
+							</div>
+						))}
+					</div>
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={totalRecords}
+							pageSize={pageSize}
+							onPageChange={handlePageChange}
+						/>
+					</div>
+				</>
 			) : (
 				<div className={styles.no_data}>
-					<img
-						style={{ width: '24%', margin: '8%' }}
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
-						alt="no data"
-					/>
+					<EmptyState imageFind="NoDataFound" />
 				</div>
 			)}
-			{showPagination && (
-				<div>
-					{totalRecords ? (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={totalRecords}
-								pageSize={pageSize}
-								onPageChange={handlePageChange}
-							/>
-						</div>
-					) : null}
-				</div>
-			)}
+
 		</section>
 	);
 }

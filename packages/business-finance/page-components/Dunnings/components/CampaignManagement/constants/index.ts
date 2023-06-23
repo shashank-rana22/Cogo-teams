@@ -1,12 +1,11 @@
-export const SERVICE_OPTIONS = [
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-	{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
-	{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
-	{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
-	{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
-	{ label: 'Air Freight', value: 'AIR_FREIGHT' },
-	{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
-];
+const geo = getGeoConstants();
+
+const SINGLE_INT_START = 0;
+const SINGLE_INT_END = 9;
+
+export const SERVICE_OPTIONS = geo?.options.services;
 
 export const CYCLE_OPTIONS = [
 	{ label: 'Scheduled', value: 'SCHEDULED' },
@@ -34,7 +33,7 @@ export const MONTH_DAYS = Array(28).fill(null).map((item, index) => (
 ));
 
 export const HOURS = Array(24).fill(null).map((item, index) => {
-	if (index >= 0 && index <= 9) {
+	if (index >= SINGLE_INT_START && index <= SINGLE_INT_END) {
 		return { label: `0${String(index)}`, value: `0${String(index)}` };
 	}
 	return (
@@ -43,7 +42,7 @@ export const HOURS = Array(24).fill(null).map((item, index) => {
 });
 
 export const MINUTES = Array(60).fill(null).map((item, index) => {
-	if (index >= 0 && index <= 9) {
+	if (index >= SINGLE_INT_START && index <= SINGLE_INT_END) {
 		return { label: `0${String(index)}`, value: `0${String(index)}` };
 	}
 	return (

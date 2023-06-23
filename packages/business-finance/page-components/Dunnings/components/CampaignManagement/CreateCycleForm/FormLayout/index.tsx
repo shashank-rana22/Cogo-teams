@@ -1,4 +1,5 @@
 import { Chips, Datepicker, Select, TabPanel, Tabs } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -42,6 +43,9 @@ interface Props {
 }
 
 function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
+	const geo = getGeoConstants();
+	const timezoneOptions = geo?.options.timezone;
+
 	const {
 		triggerType, frequency, weekDay,
 		monthDay, timezone, scheduledHour, scheduledMinute,
@@ -71,28 +75,30 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	} = scheduleRule || {};
 
 	const handleTabChange = (val?: string) => {
-		if (val === 'DAILY') {
-			setFormData({
-				...formData,
-				weekDay   : undefined,
-				monthDay  : undefined,
-				frequency : val,
-			});
-		} else if (val === 'WEEKLY') {
-			setFormData({
-				...formData,
-				monthDay    : undefined,
-				oneTimeDate : undefined,
-				frequency   : val,
-			});
-		} else if (val === 'MONTHLY') {
-			setFormData({
-				...formData,
-				weekDay     : undefined,
-				oneTimeDate : undefined,
-				frequency   : val,
-			});
+		const updatedFormData = { ...formData };
+
+		switch (val) {
+			case 'DAILY':
+				updatedFormData.weekDay = undefined;
+				updatedFormData.monthDay = undefined;
+
+				break;
+			case 'WEEKLY':
+				updatedFormData.monthDay = undefined;
+				updatedFormData.oneTimeDate = undefined;
+
+				break;
+			case 'MONTHLY':
+				updatedFormData.weekDay = undefined;
+				updatedFormData.oneTimeDate = undefined;
+
+				break;
+			default:
+				break;
 		}
+
+		updatedFormData.frequency = val;
+		setFormData(updatedFormData);
 	};
 
 	useEffect(() => {
@@ -107,14 +113,16 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 			const stringDate = oneTimeDate || oneTimeDateSchedule;
 			const formattedOneTimeDate = new Date(stringDate);
 			const timeArray = (scheduleTime)?.split(':');
+			const scheduledHourValue = timeArray?.[0];
+			const scheduledMinuteValue = timeArray?.[1];
 
 			setFormData((prev:object) => ({
 				...prev,
 				frequency       : dunningExecutionFrequency,
 				weekDay         : week,
 				timezone        : scheduleTimeZone,
-				scheduledHour   : timeArray?.[0],
-				scheduledMinute : timeArray?.[1],
+				scheduledHour   : scheduledHourValue,
+				scheduledMinute : scheduledMinuteValue,
 				monthDay        : dayOfMonth
 					? String(dayOfMonth) : undefined,
 				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
@@ -222,24 +230,14 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 
 					<div>
 						<h4>Select Time Slot (24 hour format)</h4>
-						<div style={{ display: 'flex', alignItems: 'center' }}>
+						<div className={styles.timezone_container}>
 							<div>
 								<h5>Timezone</h5>
 								<Select
 									value={timezone}
 									onChange={(e) => setFormData({ ...formData, timezone: e })}
 									placeholder="Timezone"
-									options={[
-										{
-											label: 'IST', value: 'IST',
-										},
-										{
-											label: 'GMT', value: 'GMT',
-										},
-										{
-											label: 'VNM', value: 'VNM',
-										},
-									]}
+									options={timezoneOptions}
 									className={styles.timezone}
 								/>
 							</div>

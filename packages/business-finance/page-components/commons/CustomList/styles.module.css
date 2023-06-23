@@ -1,4 +1,3 @@
-/* stylelint-disable selector-class-pattern */
 
 .header {
 	display: flex;
@@ -7,7 +6,7 @@
 	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #fff;
-	background-color: #393f70;
+	background-color: var(--color-tertiary-lavendar-1);
 }
 
 .paginations {
@@ -21,7 +20,7 @@
 	min-height: 40px;
 	padding: 4px 8px;
 	background-color: #fff;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid #fff;
 	border-radius: 8px;
 }
 

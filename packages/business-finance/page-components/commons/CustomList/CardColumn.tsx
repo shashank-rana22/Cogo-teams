@@ -24,7 +24,7 @@ function CardColumn({
 	config,
 	isMobile,
 	loading,
-}:Props) {
+}: Props) {
 	const { clickable } = config;
 	return (
 		<section style={itemStyles}>
@@ -33,7 +33,7 @@ function CardColumn({
 					isMobile ? styles.isMobile : ''
 				}`}
 			>
-				{fields.map((field) => {
+				{(fields || []).map((field) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div

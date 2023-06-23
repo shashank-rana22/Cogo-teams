@@ -27,3 +27,8 @@
 	height: 54px;
 	margin-top: 12px;
 }
+
+.timezone_container {
+	display: flex; 
+	align-items: center;
+}

@@ -22,19 +22,13 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 
 	return [
 		{
-			label   : '',
-			span    : 6,
-			groupBy : [
-				{
-					label       : 'Enter Cycle Name (5 letters minimum)',
-					name        : 'cycleName',
-					type        : 'input',
-					prefix      : null,
-					placeholder : 'Insert Cycle Name',
-					disabled    : isEditMode,
-					span        : 12,
-				},
-			],
+			label       : 'Enter Cycle Name (5 letters minimum)',
+			name        : 'cycleName',
+			type        : 'input',
+			prefix      : null,
+			placeholder : 'Insert Cycle Name',
+			disabled    : isEditMode,
+			span        : 12,
 		},
 		{
 			label        : 'Cycle Type',

@@ -21,7 +21,7 @@ function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }:Pr
 
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<Input
-					value={globalFilters?.search || ''}
+					value={globalFilters?.search}
 					onChange={(value:string) => setGlobalFilters({
 						...globalFilters,
 						search: value || undefined,

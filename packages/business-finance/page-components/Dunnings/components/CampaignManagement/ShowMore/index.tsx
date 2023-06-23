@@ -8,7 +8,7 @@ interface Props {
 }
 
 function ShowMore({ dropdown, rowId, data = null }:Props) {
-	if (dropdown === rowId) {
+	if (dropdown.includes(rowId)) {
 		return (
 			<div className={styles.dropdown_container_visible}>
 				{data ? (

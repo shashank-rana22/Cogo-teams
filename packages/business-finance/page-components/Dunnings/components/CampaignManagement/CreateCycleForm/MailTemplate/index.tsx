@@ -55,13 +55,14 @@ function MailTemplate({ formData, setFormData }:Props) {
 					initialCall
 					value={formData?.templateData?.name}
 					onChange={(id, object) => {
+						const { name, subject, body, id:objId } = object || {};
 						setFormData((prev) => ({
 							...prev,
 							templateData: {
-								name    : object?.name,
-								subject : object?.subject,
-								body    : object?.body,
-								id      : object?.id,
+								name,
+								subject,
+								body,
+								id: objId,
 							},
 						}));
 					}}

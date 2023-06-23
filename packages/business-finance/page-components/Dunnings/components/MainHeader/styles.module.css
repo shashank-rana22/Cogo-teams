@@ -11,8 +11,8 @@
 	width: 32%;
 	height: 92px;
 	cursor: pointer;
-	background: white;
-	border: 1px solid #dfdfdf;
+	background: #fff;
+	border: 1px solid #fff;
 	border-radius: 12px;
 	box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 20%);
 }
@@ -27,7 +27,7 @@
 	justify-content: center;
 	width: 32%;
 	height: 92px;
-	color: white;
+	color: #fff;
 	background: var(--color-primary-error-red-2);
 	border: 1px solid  var(--color-primary-error-red-3);
 	border-radius: 12px;

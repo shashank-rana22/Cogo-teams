@@ -1,4 +1,5 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
@@ -9,7 +10,7 @@ import styles from './styles.module.css';
 function StyledTable({ id, className, columns, data, loading, ...rest }:TableProps) {
 	return (
 		<div className={styles.table}>
-			{(data?.length > 0 || loading) && (
+			{(!isEmpty(data) || loading) && (
 				<Table
 					columns={columns}
 					data={data || [{}]}

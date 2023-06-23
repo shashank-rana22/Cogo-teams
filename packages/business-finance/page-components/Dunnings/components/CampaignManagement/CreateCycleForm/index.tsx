@@ -15,20 +15,23 @@ interface Props {
 	getDunningList?: Function;
 }
 
-function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:Props) {
-	const DEFAULT_STEP = 1;
-	const EXCLUDE_STEP = 2;
-	const MAIL_STEP = 3;
-	const STEP_CHANGE = 1;
+const DEFAULT_STEP = 1;
+const EXCLUDE_STEP = 2;
+const MAIL_STEP = 3;
+const STEP_CHANGE = 1;
+const FINAL_STEP = 3;
+const DEFAULT_SEVERITY_LEVEL = '1';
+const DEFAULT_PAGE_INDEX = 1;
 
+function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:Props) {
 	const [formData, setFormData] = useState({
 		frequency           : 'DAILY',
-		severityLevel       : '1',
+		severityLevel       : DEFAULT_SEVERITY_LEVEL,
 		timezone            : 'IST',
 		scheduledHour       : '00',
 		scheduledMinute     : '00',
 		ageingBucket        : 'ALL',
-		pageIndex           : 1,
+		pageIndex           : DEFAULT_PAGE_INDEX,
 		cycleName           : null,
 		cycleType           : null,
 		cogoEntityId        : null,
@@ -63,7 +66,8 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 				Step
 				{' '}
 				{step}
-				/3
+				/
+				{FINAL_STEP}
 			</span>
 		</div>
 	);
@@ -86,11 +90,11 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 	};
 
 	const handleClick = () => {
-		if (step === 1) {
+		if (step === DEFAULT_STEP) {
 			// putting validations
 			const requiredFields = [cycleName, cycleType,
 				cogoEntityId, totalDueOutstanding];
-			if (requiredFields.some((field) => !field || (Array.isArray(field) && isEmpty(field)))) {
+			if (requiredFields.some((field) => isEmpty(field))) {
 				Toast.error('Please fill all the details to proceed');
 				return;
 			}

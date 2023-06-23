@@ -7,10 +7,18 @@ interface Props {
 	setActionModal?: Function;
 }
 
+interface StateInterface {
+	profile?: {
+		user?: {
+			id?: string | number;
+		};
+	};
+}
+
 function useUpdateCycle({ getDunningList, setActionModal }:Props) {
 	const {
 		profile,
-	} = useSelector((state:any) => state);
+	} = useSelector((state: StateInterface) => state);
 	const [
 		{ data, loading },
 		trigger,

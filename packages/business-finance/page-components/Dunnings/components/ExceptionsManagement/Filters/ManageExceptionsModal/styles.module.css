@@ -1,3 +1,19 @@
+.tooltip_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+}
+
+.text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.customer_name {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
 
 .table {
 	:global {

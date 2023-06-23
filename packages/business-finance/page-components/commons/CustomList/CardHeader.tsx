@@ -17,22 +17,17 @@ export interface Props {
 function Header({
 	fields, sort, setSort = () => [], headerStyles, renderHeaderCheckbox = () => '', showHeaderCheckbox = false,
 }:Props) {
-	const handleOnChangeUp = (item: FieldType) => {
+	const handleOnChangeSort = (item: FieldType, sortType) => {
 		const fieldType = item.sorting!.name;
 		setSort(() => ({
-			[fieldType]: sort?.[fieldType] === 'asc' ? 'asc' : 'asc',
+			[fieldType]: sort?.[fieldType] === sortType,
 		}));
 	};
-	const handleOnChangeDown = (item: FieldType) => {
-		const fieldType = item.sorting!.name;
-		setSort(() => ({
-			[fieldType]: sort?.[fieldType] === 'desc' ? 'desc' : 'desc',
-		}));
-	};
+
 	return (
 		<header className={styles.header} style={headerStyles}>
 			{showHeaderCheckbox && renderHeaderCheckbox()}
-			{fields.map((field) => (
+			{(fields || []).map((field) => (
 				<div
 					key={String(field?.label)}
 					className={`${styles.col} ${field.className || ''}`}
@@ -43,18 +38,14 @@ function Header({
 						<>
 							<div className={styles.center}>
 								<IcMArrowRotateUp
-									className={
-									sort?.[field.sorting.name] === 'asc' && styles.asc
-								}
-									onClick={() => handleOnChangeUp(field)}
+									className={styles.asc}
+									onClick={() => handleOnChangeSort(field, 'asc')}
 								/>
 							</div>
 							<div className={styles.centers}>
 								<IcMArrowRotateDown
-									className={
-								sort?.[field.sorting.name] === 'desc' && styles.desc
-							}
-									onClick={() => handleOnChangeDown(field)}
+									className={styles.desc}
+									onClick={() => handleOnChangeSort(field, 'desc')}
 								/>
 							</div>
 						</>

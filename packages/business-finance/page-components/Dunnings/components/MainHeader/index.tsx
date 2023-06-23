@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
@@ -28,27 +27,29 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 		},
 		{
 			id      : 'campaign-management',
-			content : <div className={styles.campaign_card}>
-				<div style={{ textAlign: 'left' }}>
-					<h3>Campaign</h3>
-					<h3>Management</h3>
-				</div>
-				<div className={styles.vertical_border} />
-				<div className={styles.campaign_card_data}>
-					<div style={{ display: 'flex' }}>
-						<span>Ongoing Campaigns:&nbsp;</span>
-						<span>
-							-
-						</span>
+			content : (
+				<div className={styles.campaign_card}>
+					<div style={{ textAlign: 'left' }}>
+						<h3>Campaign</h3>
+						<h3>Management</h3>
 					</div>
-					<div className={styles.collection_rate}>
-						<span>Collection Rate:&nbsp;</span>
-						<span>
-							-
-						</span>
+					<div className={styles.vertical_border} />
+					<div className={styles.campaign_card_data}>
+						<div style={{ display: 'flex' }}>
+							<span>Ongoing Campaigns:&nbsp;</span>
+							<span>
+								-
+							</span>
+						</div>
+						<div className={styles.collection_rate}>
+							<span>Collection Rate:&nbsp;</span>
+							<span>
+								-
+							</span>
+						</div>
 					</div>
 				</div>
-			</div>,
+			),
 		},
 		{
 			id      : 'exceptions-management',

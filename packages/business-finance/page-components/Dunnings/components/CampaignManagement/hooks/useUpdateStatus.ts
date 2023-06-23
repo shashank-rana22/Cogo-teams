@@ -6,10 +6,18 @@ interface Props {
 	getDunningList?: Function;
 }
 
+interface StateInterface {
+	profile?: {
+		user?: {
+			id?: string | number;
+		};
+	};
+}
+
 function useUpdateStatus({ getDunningList }:Props) {
 	const {
 		profile,
-	} = useSelector((state:any) => state);
+	} = useSelector((state: StateInterface) => state);
 
 	const [
 		{ data, loading },

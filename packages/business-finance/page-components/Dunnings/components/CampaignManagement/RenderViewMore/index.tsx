@@ -3,17 +3,17 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
 interface Props {
 	id?: string;
-	dropdown?: string;
+	dropdown?: string[];
 	setDropdown?: Function;
 }
 
 function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 	return 		(
 		<div>
-			{dropdown !== id ? (
+			{!dropdown.includes(id) ? (
 				<Button
 					themeType="secondary"
-					onClick={() => setDropdown(id)}
+					onClick={() => setDropdown([...dropdown, id])}
 				>
 					View More
 					{' '}
@@ -23,7 +23,13 @@ function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 				: (
 					<Button
 						themeType="secondary"
-						onClick={() => setDropdown('')}
+						onClick={() => {
+							const index = dropdown.indexOf(id);
+							if (index > -1) {
+								dropdown.splice(index, 1);
+							}
+							setDropdown([...dropdown]);
+						}}
 					>
 						View Less
 						{' '}
