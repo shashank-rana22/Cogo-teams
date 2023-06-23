@@ -26,7 +26,8 @@ function EditInternalPoc({
 		...addPoc,
 	});
 
-	const { formState: { errors }, control, handleSubmit } = useForm({ defaultValues: DEFAULT_VALUES });
+	const formProps = useForm({ defaultValues: DEFAULT_VALUES });
+	const { control, handleSubmit } = formProps;
 	const { fields } = useFieldArray({ control, name: FIELD_ARRAY_KEY });
 
 	const refetch = () => {
@@ -64,8 +65,7 @@ function EditInternalPoc({
 
 					<EditBulkStakeholders
 						fields={fields}
-						control={control}
-						errors={errors}
+						formProps={formProps}
 						FIELD_ARRAY_KEY={FIELD_ARRAY_KEY}
 					/>
 				</div>

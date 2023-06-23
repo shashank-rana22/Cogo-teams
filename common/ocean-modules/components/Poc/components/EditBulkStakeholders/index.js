@@ -18,13 +18,16 @@ const STAKEHOLDERS_CONTROLS = {
 	},
 };
 
-export default function EditBulkStakeholders({ fields, errors, control, FIELD_ARRAY_KEY }) {
+export default function EditBulkStakeholders({ fields = [], formProps = {}, FIELD_ARRAY_KEY = '' }) {
+	const { control, formState: { errors }, clearErrors, setError } = formProps;
+
 	const fieldArrayErrors = errors?.[FIELD_ARRAY_KEY];
 
 	return (
 		<div className={styles.form_container}>
 			{fields.map(({ id: fieldId, trade_type, service_type }, index) => (
 				<div key={fieldId} className={styles.form_item_container}>
+
 					<div className={styles.form_item}>
 						<div className={styles.check_box_container}>
 							<CheckboxController
@@ -32,13 +35,16 @@ export default function EditBulkStakeholders({ fields, errors, control, FIELD_AR
 								name={`${FIELD_ARRAY_KEY}.${index}.is_checked`}
 								rules={{
 									validate: (_, formValues) => checkBulkUpdateStakeholderFormValid({
-										formValues, FIELD_ARRAY_KEY,
+										formValues, FIELD_ARRAY_KEY, clearErrors, setError,
 									}),
 								}}
 							/>
+
 							{startCase(service_type)}
+
 							{trade_type ? ` (${startCase(trade_type)}) ` : null}
 						</div>
+
 						{fieldArrayErrors?.[index]?.is_checked ? (
 							<div className={styles.error_text}>
 								{fieldArrayErrors?.[index]?.is_checked?.message}

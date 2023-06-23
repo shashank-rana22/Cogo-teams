@@ -1,4 +1,4 @@
-const FIELD_ARRAY_KEY = 'new_stakeholders';
+const FIELD_ARRAY_KEY = 'new_stakeholders_field';
 
 export default function getEditBulkStakeholdersDefaultValues({ services = [], stakeholder_type = '' }) {
 	const DEFAULT_VALUES = {
