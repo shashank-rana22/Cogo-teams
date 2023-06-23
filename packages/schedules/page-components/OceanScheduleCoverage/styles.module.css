@@ -14,3 +14,11 @@
 .td {
     padding: 8px 0;
 }
+
+.styled_table {
+    :global {
+        .ui_placeholder_skeleton_loader {
+            height: 40px !important;
+        }
+    }
+}

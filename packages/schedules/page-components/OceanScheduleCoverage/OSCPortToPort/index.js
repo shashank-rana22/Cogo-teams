@@ -2,8 +2,9 @@ import { Button, Table } from "@cogoport/components";
 import { IcMArrowBack, IcMArrowNext } from "@cogoport/icons-react";
 import useGetSailingSchedulePortPairCoverage from "../hooks/useGetSailingSchedulePortPairCoverage";
 import ViewScheduleModal from "../ViewScheduleModal";
-import LoadingState from "../LoadingState";
+// import LoadingState from "../LoadingState";
 import styles from "./styles.module.css";
+import EmptyState from "../../common/EmptyState";
 
 function OSCPortToPort({
     originPort,
@@ -52,17 +53,16 @@ function OSCPortToPort({
 
             <div style={{ padding: "8px" }} />
 
-            {!loading ? (
-                columnsForPortToPort &&
-                data && (
-                    <Table
-                        columns={columnsForPortToPort}
-                        data={data}
-                        className={styles.table}
-                    />
-                )
+            {(data || []).length || loading ? (
+                <Table
+                    columns={columnsForPortToPort}
+                    data={data || []}
+                    className={styles.table}
+                    loading={loading}
+                    loadingRowsCount={10}
+                />
             ) : (
-                <LoadingState />
+                <EmptyState height={300} />
             )}
         </>
     );
