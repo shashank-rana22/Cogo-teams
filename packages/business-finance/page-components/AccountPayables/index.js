@@ -5,22 +5,21 @@ import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AdvancePayment from './AdvancePayment';
-import Dashboard from './Dashboard';
-import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
+import AdvancePayment from './AdvancePayment/index.tsx';
+import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
+import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
-interface ItemProps {
-	business_name:string,
-	entity_code:string,
-}
-
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
+	const [activePayables, setActivePayables] = useState(
+		query?.active_tab || 'dashboard',
+	);
 	const profile = useSelector((state) => state);
-	const { profile:{ partner } } = profile || {};
+	const {
+		profile: { partner },
+	} = profile || {};
 	const { id: partnerId } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
 
@@ -28,8 +27,10 @@ function AccountPayables() {
 
 	const FILTER_TABS = ['dashboard', 'advance-payment'];
 
-	const handleTabChange = (v:string) => {
-		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
+	const handleTabChange = (v) => {
+		if (
+			['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)
+		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
 		}
@@ -42,8 +43,11 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || []).map((item:ItemProps) => {
-		const { business_name:companyName = '', entity_code:entityCode = '' } = item || {};
+	const EntityOptions = (entityData || []).map((item) => {
+		const {
+			business_name: companyName = '',
+			entity_code: entityCode = '',
+		} = item || {};
 
 		return {
 			label : `${upperCase(companyName)} (${entityCode})`,
@@ -54,25 +58,24 @@ function AccountPayables() {
 	return (
 		<div>
 			<div className={styles.div_container}>
-				<div className={styles.heading}>
-					Account Payables
-				</div>
-				{loading ? <Placeholder className={styles.loader} />
-					: (
-						<div>
-							{FILTER_TABS?.includes(activePayables) ? (
-								<Select
-									name="activeEntity"
-									value={activeEntity}
-									onChange={(entityVal: string) => setActiveEntity(entityVal)}
-									placeholder="Select Entity"
-									options={EntityOptions}
-									size="sm"
-									style={{ width: '284px' }}
-								/>
-							) : null}
-						</div>
-					)}
+				<div className={styles.heading}>Account Payables</div>
+				{loading ? (
+					<Placeholder className={styles.loader} />
+				) : (
+					<div>
+						{FILTER_TABS.includes(activePayables) ? (
+							<Select
+								name="activeEntity"
+								value={activeEntity}
+								onChange={(entityVal) => setActiveEntity(entityVal)}
+								placeholder="Select Entity"
+								options={EntityOptions}
+								size="sm"
+								style={{ width: '284px' }}
+							/>
+						) : null}
+					</div>
+				)}
 			</div>
 			<div className={styles.container}>
 				<Tabs
@@ -99,7 +102,6 @@ function AccountPayables() {
 					<TabPanel name="treasury-chest" title="TREASURY">
 						<h1>Treasury</h1>
 					</TabPanel>
-
 				</Tabs>
 			</div>
 		</div>

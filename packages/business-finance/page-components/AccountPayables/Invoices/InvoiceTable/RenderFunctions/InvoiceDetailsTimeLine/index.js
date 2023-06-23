@@ -18,7 +18,7 @@ import Profitability from './Profitability';
 import styles from './styles.module.css';
 import SupplierInformation from './SupplierInformation';
 
-const THREE = 3;
+const THIRD_INDEX = 3;
 
 const geo = geoConstants();
 function InvoiceDetailsTimeLine({ item }) {
@@ -66,6 +66,65 @@ function InvoiceDetailsTimeLine({ item }) {
 
 	const { invoiceNumber = '', jobNumber = '', billNumber = '', sid = '', objectNumber = '' } = item || {};
 
+	const invoiceDetailsComp = (
+		<div className={styles.content_caret}>
+			<div
+				className={styles.icon_container}
+				onClick={() => {
+					setShowDetailsCard(false);
+				}}
+				role="presentation"
+			>
+				<IcMArrowRotateLeft />
+			</div>
+
+			<div className={styles.header_details}>
+				INVOICE DETAILS -
+				<span style={{ textDecorationLine: 'underline' }}>
+					{objectNumber || invoiceNumber || billNumber}
+				</span>
+				{' '}
+				- SID :-
+				<span>
+					{jobNumber || sid}
+				</span>
+			</div>
+		</div>
+	);
+
+	const supplierComp = (
+		<div className={styles.body_details_card}>
+			<div className={styles.invoice_card_data}>
+				<div className={styles.supplier_data_header}>
+					<span style={{ fontWeight: '600' }}>
+						Supplier Name :
+					</span>
+					<span style={{ fontWeight: '600' }}>
+						{item?.organizationName}
+					</span>
+				</div>
+				<div className={styles.flex}>
+					{DETAILS?.map((detail) => (
+						<div className={styles.supplier_data_body} key={detail.key}>
+							<div>{detail?.label}</div>
+							<div>
+								{getFormattedPrice(
+									invoiceDetails?.[detail?.key],
+									geo.country.currency.code,
+									{
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 0,
+									},
+								)}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<>
 			<div
@@ -84,69 +143,17 @@ function InvoiceDetailsTimeLine({ item }) {
 					<div className={styles.invoice_details_container_bg} />
 					<div className={styles.invoice_details_container}>
 						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
-							<div className={styles.content_caret}>
-								<div
-									className={styles.icon_container}
-									onClick={() => {
-										setShowDetailsCard(false);
-									}}
-									role="presentation"
-								>
-									<IcMArrowRotateLeft />
-								</div>
-
-								<div className={styles.header_details}>
-									INVOICE DETAILS -
-									<span style={{ textDecorationLine: 'underline' }}>
-										{objectNumber || invoiceNumber || billNumber}
-									</span>
-									{' '}
-									- SID :-
-									<span>
-										{jobNumber || sid}
-									</span>
-								</div>
-							</div>
-
+							{invoiceDetailsComp}
 							<div className={styles.body_details}>
 								{invoiceDetailsLoading ? (
 									<Placeholder
 										className={styles.placeholder_container}
 									/>
 								) : (
-									<div className={styles.body_details_card}>
-										<div className={styles.invoice_card_data}>
-											<div className={styles.supplier_data_header}>
-												<span style={{ fontWeight: '600' }}>
-													Supplier Name :
-												</span>
-												<span style={{ fontWeight: '600' }}>
-													{item?.organizationName}
-												</span>
-											</div>
-											<div className={styles.flex}>
-												{DETAILS?.map((detail) => (
-													<div className={styles.supplier_data_body} key={detail.key}>
-														<div>{detail?.label}</div>
-														<div>
-															{getFormattedPrice(
-																invoiceDetails?.[detail?.key],
-																geo.country.currency.code,
-																{
-																	style                 : 'currency',
-																	currencyDisplay       : 'code',
-																	maximumFractionDigits : 0,
-																},
-															)}
-														</div>
-													</div>
-												))}
-											</div>
-										</div>
-									</div>
+									supplierComp
 								)}
 								{invoiceDetailsLoading ? (
-									[...Array(THREE).keys()].map((key) => (
+									[...Array(THIRD_INDEX).keys()].map((key) => (
 										<Placeholder
 											key={key}
 											className={styles.placeholder_container}

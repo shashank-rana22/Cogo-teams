@@ -37,7 +37,7 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<div className={styles.currencys}>Currency</div>
 					<div className={styles.currencycontainer}>
 						{CURRENCY_DATA.map((item) => {
-							const { icon, text } = item;
+							const { icon: Icon, text } = item;
 							return (
 								<div
 									className={`${styles.currency_values} 
@@ -52,7 +52,9 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 									}}
 									role="presentation"
 								>
-									<div className="iconShow">{icon}</div>
+									<div className="iconShow">
+										<Icon height={25} width={25} />
+									</div>
 									<div className="textShow">{text}</div>
 								</div>
 							);

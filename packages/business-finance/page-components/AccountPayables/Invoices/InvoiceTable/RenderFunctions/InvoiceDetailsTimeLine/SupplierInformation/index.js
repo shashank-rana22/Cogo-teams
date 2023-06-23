@@ -17,6 +17,19 @@ const goTo = (href) => {
 function SupplierInformation({ data, loading }) {
 	const { name = '', serialId = '', kycStatus = '', businessAddressProofUrl = '', panUrl = '' } = data || {};
 
+	const documentConfig = [
+		{
+			name : 'ADDRESS PROOF',
+			url  : businessAddressProofUrl,
+			icon : IcMDocument,
+		},
+		{
+			name : 'PAN PROOF',
+			url  : panUrl,
+			icon : IcMCreditCard,
+		},
+	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.namecontainer}>{loading ? <Placeholder /> : name}</div>
@@ -36,22 +49,18 @@ function SupplierInformation({ data, loading }) {
 
 			{kycStatus === 'verified' ? (
 				<div className={styles.wrapper}>
-					{businessAddressProofUrl && (
-						<div
-							className={styles.documentcontainer}
-							onClick={() => goTo(businessAddressProofUrl)}
-							role="presentation"
-						>
-							<IcMDocument />
-							ADDRESS PROOF
-						</div>
-					)}
-					{panUrl && (
-						<div className={styles.documentcontainer} onClick={() => goTo(panUrl)} role="presentation">
-							<IcMCreditCard width="20px" height="20px" />
-							PAN PROOF
-						</div>
-					)}
+					{documentConfig.map((config) => (
+						config.url ? (
+							<div
+								className={styles.documentcontainer}
+								key={config.name}
+								onClick={() => goTo(config.url)}
+								role="presentation"
+							>
+								<config.icon />
+								{config.name}
+							</div>
+						) : null))}
 				</div>
 			) : null}
 		</div>

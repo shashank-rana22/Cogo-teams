@@ -1,22 +1,20 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const FIRST = 1;
-const SECOND = 2;
-
 function formatToTimeStamp(dateString) {
 	const date = new Date(dateString);
-	const year = date.getFullYear();
-	const month = String(date.getMonth() + FIRST).padStart(SECOND, '0');
-	const day = String(date.getDate()).padStart(SECOND, '0');
-	const hours = String(date.getHours()).padStart(SECOND, '0');
-	const minutes = String(date.getMinutes()).padStart(SECOND, '0');
-	const seconds = String(date.getSeconds()).padStart(SECOND, '0');
-	const timestamp = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-	return timestamp;
+	const formatedDate = formatDate({
+		date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		formatType : 'dateTime',
+		seperator  : 'T',
+	});
+	return formatedDate;
 }
 
 function useGetBillsList({ activeTab }) {

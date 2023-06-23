@@ -66,7 +66,6 @@ function GetState({ show, setShow }) {
 						</>
 					) : (
 						<>
-							{' '}
 							<InvoiceList data={data} />
 							<div className={styles.flexend}>
 								<Button

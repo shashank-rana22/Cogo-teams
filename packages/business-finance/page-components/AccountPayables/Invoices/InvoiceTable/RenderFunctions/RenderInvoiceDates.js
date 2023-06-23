@@ -14,7 +14,7 @@ const DATES = [
 export function RenderInvoiceDates({ itemData }) {
 	return (
 		<div>
-			{DATES?.map((date) => (
+			{DATES.map((date) => (
 				<div className={date?.bold ? styles?.bold : ''} key={date?.key}>
 					<span>{date?.label}</span>
 					<span className={styles.val}>

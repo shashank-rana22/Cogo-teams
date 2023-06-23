@@ -1,6 +1,7 @@
 import { Button, Input, Toggle } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filter from '../../commons/Filters/index.tsx';
@@ -28,8 +29,7 @@ const TABS = [
 	{ label: 'Not Due', value: 'notDue' },
 ];
 
-const ZERO = 0;
-const ONE = 1;
+const FIRST_PAGE = 1;
 
 function Invoices() {
 	const { query } = useRouter();
@@ -124,7 +124,7 @@ function Invoices() {
 				</div>
 			</div>
 			<div className={styles.list_container}>
-				{(list?.length > ZERO || billsLoading) ? (
+				{(!isEmpty(list) || billsLoading) ? (
 					<List
 						itemData={billsData}
 						loading={billsLoading}
@@ -132,7 +132,7 @@ function Invoices() {
 						functions={functions}
 						sort={orderBy}
 						setSort={setOrderBy}
-						page={billsFilters?.pageIndex || ONE}
+						page={billsFilters?.pageIndex || FIRST_PAGE}
 						pageSize={10}
 						handlePageChange={(val) => setBillsFilters({
 							...billsFilters,
