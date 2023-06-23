@@ -27,7 +27,6 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loa
 				<Checkbox
 					checked={selectArray.includes(item.id)}
 					onChange={() => {
-						console.log('rrr', selectArray);
 						if (!selectArray.includes(item.id)) { setSelectArray([...selectArray, item.id]); } else {
 							removeItem(item.id);
 						}

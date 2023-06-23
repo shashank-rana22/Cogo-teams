@@ -5,6 +5,7 @@ import StyledTable from '../common/StyledTable';
 
 import dummyData from './dummyData';
 import getColumns from './getColumns';
+import KraModal from './KraModal';
 import RenderVerticalHeadComponent from './RenderVerticalHeadComponent';
 import styles from './styles.module.css';
 
@@ -49,6 +50,7 @@ function RenderFunctionalHeadComponent({ columns }) {
 function PerformanceRatingReview() {
 	const [selectValue, setSelectValue] = useState('');
 	const [selectedEmployees, setSelectedEmployees] = useState({});
+	const [show, setShow] = useState(false);
 
 	const { main_key, list } = dummyData || {};
 
@@ -101,7 +103,9 @@ function PerformanceRatingReview() {
 				Performance Rating Review
 			</div>
 
-			<Button>
+			<Button
+				onClick={() => setShow(true)}
+			>
 				Add
 			</Button>
 
@@ -134,6 +138,11 @@ function PerformanceRatingReview() {
 					: <RenderFunctionalHeadComponent columns={columns} />
 			}
 
+			{
+				show
+					? <KraModal show={show} setShow={setShow} />
+					: null
+			}
 		</div>
 	);
 }
