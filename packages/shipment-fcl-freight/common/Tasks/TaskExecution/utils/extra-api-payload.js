@@ -11,16 +11,18 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
+const DEFAULT_VALUE = 1;
+
 const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'send_nomination_notification') {
 		return {
 			booking_reference_number: values?.booking_reference_number,
 			booking_reference_proof: {
-				success: true,
-				url: values?.booking_reference_proof,
-				name: 'Booking Reference Proof',
+				success : true,
+				url		: values?.booking_reference_proof,
+				name	: 'Booking Reference Proof',
 			}
-		}
+		};
 	}
 
 	if (end_point === 'create_shipment_document') {
@@ -68,7 +70,7 @@ const extraApiPayload = (values, end_point, task) => {
 							}
 						} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(lineItem)) {
 							if (NUMBER_KEYS.includes(lineItem)) {
-								data[lineItem] = Number(values[key][index][lineItem] || 1);
+								data[lineItem] = Number(values[key][index][lineItem] || DEFAULT_VALUE);
 							} else {
 								data[lineItem] = values[key][index][lineItem];
 							}
@@ -76,7 +78,7 @@ const extraApiPayload = (values, end_point, task) => {
 					});
 				} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(key)) {
 					if (NUMBER_KEYS.includes(key)) {
-						data[key] = Number(values[key] || 1);
+						data[key] = Number(values[key] || DEFAULT_VALUE);
 					} else {
 						data[key] = values[key];
 					}
