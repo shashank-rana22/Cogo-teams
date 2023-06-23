@@ -1,0 +1,98 @@
+.container{
+	.custom-select-input-chipcontainer {
+		padding: 0px 8px;
+	}
+
+	.form-item-label {
+		margin-bottom: 4px;
+		margin-top: 20px;
+	}
+
+	.ui-single-date-picker-input-container {
+		border-color: #cbcff5;
+		border-radius: 4px;
+
+		.core-ui-input-root {
+			&:focus-within {
+				border: none;
+				box-shadow: none !important;
+			}
+		}
+	}
+
+	.custom-select-input-subcontainer {
+		border: 1px solid #cbcff5;
+		height: 32px !important;
+
+		&:hover {
+			border: 1.5px solid #5936f0;
+		}
+	}
+
+	:global{
+		.form_layout_row{
+			flex-wrap: nowrap;
+		}
+	}
+}
+
+.button_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 28px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+	}
+
+	.core-ui-button-root.primary.md.draft {
+		margin-right: 6px;
+	}
+
+	.core-ui-button-root.secondary.md {
+		margin-right: 6px;
+	}
+}
+
+.sub_header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0 0 10px;
+}
+
+.label_val{
+	color: #393f70;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.flex_row{
+	display: flex;
+
+	&.flex {
+		flex: 1;
+
+		> main {
+			width: 100%;
+		}
+	}
+
+	&.values {
+		align-items: center;
+		justify-content: space-between;
+		width: 50%;
+	}
+
+	&.label {
+		align-items: center;
+		justify-content: space-between;
+		width: 30%;
+	}
+}
+
+.title{
+	margin: 20px 0px 4px 0px;
+	font-weight: 700;
+	color: #393f70;
+}

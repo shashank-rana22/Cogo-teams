@@ -16,6 +16,7 @@ import {
 	AmendDraftBl,
 	UploadSI,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -23,6 +24,8 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
+const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
+const STEPS_LENGTH = 1;
 
 function ExecuteTask({
 	task = {},
@@ -44,7 +47,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - STEPS_LENGTH]
 		: {};
 
 	if (loading) {
@@ -184,13 +187,20 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task?.task === 'generate_cargo_insurance'
+		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
+	) {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - STEPS_LENGTH}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

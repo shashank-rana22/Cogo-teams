@@ -1,0 +1,104 @@
+.container{
+	padding: 16px;
+
+	:global{
+		.css-zolqoa-container.size-md .core-ui-select__control {
+			min-height: 42px;
+			font-size: 12px;
+		}
+	
+		.css-1o6boke.size-md {
+			height: 42px;
+			font-size: 12px;
+		}
+	
+		.core-ui-select__indicators {
+			height: 10px 0;
+		}
+		.ui_select_display_container{
+			height: 10px 0;
+		}
+	}
+}
+
+.text{
+	margin-top: -8px;
+}
+
+.header{
+	display: flex;
+	align-items: center;
+}
+
+.icon_container{
+	margin-right: 10px;
+
+	svg {
+		vertical-align: middle;
+	}
+}
+
+.title{
+	margin: 0;
+	font-weight: 500;
+}
+
+.section{
+	padding: 20px;
+	padding-bottom: 0px;
+	font-size: 13px;
+}
+
+.section_title{
+	display: flex;
+	align-items: center;
+
+	.title {
+		font-weight: 400;
+		padding-right: 20px;
+		font-size: 14px;
+	}
+}
+
+.row{
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	display: grid;
+	grid-template-columns: 45% 45%;
+}
+
+.col{
+	width: 100% !important;
+
+	.taxNumber {
+		width: 50% !important;
+	}
+}
+
+.check_box_wrapper{
+	display: flex;
+	margin: 10px 0px;
+	font-size: 14px;
+	align-items: center;
+
+	.ui-core-checkbox-root.primary.checked {
+		background-color: #ee3425 !important;
+		border: 1px solid #ee3425 !important;
+	}
+
+	.gst {
+		margin: 0px 3px;
+	}
+
+	&.addressType {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.addressSave {
+		font-size: 14px;
+		font-weight: 500;
+	}
+}

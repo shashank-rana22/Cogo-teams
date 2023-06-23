@@ -1,0 +1,85 @@
+import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
+
+export const bilingAddressControl = ({ insuranceDetails = {} }) => [
+	{
+		label       : 'GST',
+		name        : 'gstin',
+		type        : 'text',
+		placeholder : 'Enter GST Number',
+		showLabel   : false,
+		span        : 3,
+		value       : insuranceDetails?.gstin,
+		rules       : {
+			pattern: {
+				value   : formValuePatterns.GST_NUMBER,
+				message : 'GST Number is invalid',
+			},
+			required: 'GST Number is required',
+		},
+	},
+	{
+		label       : 'Billing Name',
+		name        : 'partyName',
+		placeholder : 'Enter Billing Name',
+		type        : 'text',
+		span        : 3,
+		height      : 25,
+		value       : insuranceDetails?.partyName,
+		rules       : { required: { value: true, message: 'Billing Name is required' } },
+	},
+	{
+		label       : 'Address',
+		name        : 'billingAddress',
+		type        : 'text',
+		placeholder : 'Enter Address',
+		rules       : { required: { value: true, message: 'Address is required' } },
+		span        : 3,
+		height      : 25,
+		className   : 'primary md',
+		value       : insuranceDetails?.billingAddress,
+		style       : {
+			resize: 'vertical',
+		},
+	},
+	{
+		label       : 'Pincode',
+		name        : 'billingPincode',
+		type        : 'text',
+		value       : insuranceDetails?.billingPincode,
+		placeholder : 'Enter Pincode',
+		rules       : { required: 'required *' },
+		span        : 3,
+	},
+	{
+		label    : 'City',
+		name     : 'billingCity',
+		type     : 'text',
+		value    : insuranceDetails?.billingCity,
+		span     : 3,
+		disabled : true,
+	},
+	{
+		label    : 'State',
+		name     : 'billingState',
+		type     : 'text',
+		value    : insuranceDetails?.billingState,
+		span     : 3,
+		disabled : true,
+	},
+	{
+		label       : 'PAN Number',
+		name        : 'panNumber',
+		type        : 'text',
+		placeholder : 'Enter PAN Number',
+		showLabel   : false,
+		span        : 3,
+		value       : insuranceDetails?.panNumber,
+		rules       : {
+			pattern: {
+				value   : formValuePatterns.PAN_NUMBER,
+				message : 'Enter a valid PAN',
+			},
+			required: 'PAN Number is required',
+		},
+	},
+];

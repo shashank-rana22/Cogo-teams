@@ -59,9 +59,18 @@ const apis = [
 		service_name : 'saas',
 	},
 	{
-		api          : 'list_address_for_insurance',
+		api         : 'list_address_for_insurance',
+		access_type : 'private',
+	},
+	{
+		api          : 'insurance/rate',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'saas',
+	},
+	{
+		api          : 'insurance/draft/details',
+		access_type  : 'private',
+		service_name : 'saas',
 	},
 ];
 

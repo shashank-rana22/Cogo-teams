@@ -41,6 +41,7 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncInsuranceCommoditiesList,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -100,6 +101,7 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 };
 
 function AsyncSelect(props) {
