@@ -3,13 +3,10 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-import useGetTest from './useGetTest';
-
-function useCreateTest({ setActiveStepper = '' }) {
+function useCreateTest({ setActiveStepper = '', getTest }) {
 	const router = useRouter();
-	const test_id = router.query?.id;
 
-	const { getTest } = useGetTest({ test_id });
+	const test_id = router.query?.id;
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'update_test',

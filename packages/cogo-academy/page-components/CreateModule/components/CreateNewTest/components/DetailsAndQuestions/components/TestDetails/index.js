@@ -28,7 +28,7 @@ const onNavigate = ({ push }) => {
 
 function CreateNewTest({
 	control, errors, data,
-	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal,
+	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal, getTest,
 }) {
 	const { general = {} } = useSelector((state) => state);
 
@@ -40,7 +40,7 @@ function CreateNewTest({
 
 	const { loading, createNewTest } = useCreateNewTest();
 
-	const { loading: updateTestLoading, createTest } = useCreateTest({});
+	const { loading: updateTestLoading, createTest } = useCreateTest({ getTest });
 
 	const test_sheet_id = data?.test_sheet?.id;
 
