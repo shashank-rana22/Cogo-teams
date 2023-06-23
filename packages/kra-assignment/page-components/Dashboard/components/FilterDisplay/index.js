@@ -10,10 +10,7 @@ import useFilterDisplay from './useFilterDisplay';
 function FilterFieldArray({
 	setFilters,
 	check,
-	setSelectArrayAccordian,
-	setSelectArrayLowWeightEmployee,
-	setSelectArrayUnassignedEmployee,
-	setShowKRACalculationTable,
+	resetObjects,
 }) {
 	const {
 		showFilter,
@@ -24,10 +21,7 @@ function FilterFieldArray({
 		watch,
 	} = useFilterDisplay({
 		setFilters,
-		setSelectArrayAccordian,
-		setSelectArrayLowWeightEmployee,
-		setSelectArrayUnassignedEmployee,
-		setShowKRACalculationTable,
+		resetObjects,
 	});
 
 	const WATCH_VALUES = watch();

@@ -3,6 +3,8 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import countTrueValues from '../config/countTrueValues';
+
 import AccordianDisplay from './components/AccordianDisplay';
 import FiltersDisplay from './components/FilterDisplay';
 import FilterFieldArray from './components/FilterFieldArray';
@@ -44,22 +46,36 @@ function Dashboard() {
 		getkrasAssigned,
 		selectAccordian,
 		setSelectAccordian,
-		selectArrayAccordian = [],
-		setSelectArrayAccordian,
+		selectAccordianObject = {},
+		setSelectAccordianObject,
 	} = useGetkrasAssigned({ filters });
 
 	const { list:unassignedList = [] } = unassignedData;
 	const { list:lowWeightageEmployeeList = [] } = lowWeightageEmployeeData;
 
-	const [selectArrayUnassignedEmployee, setSelectArrayUnassignedEmployee] = useState([]);
-	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
+	const [selectUnassignedEmployeeObject, setSelectUnassignedEmployeeObject] = useState({});
+	const [selectLowWeightEmployeeObject, setSelectLowWeightEmployeeObject] = useState({});
+	const [dataFrom, setDataFrom] = useState();
 
-	const ARRAY_OF_UNASSIGNED_IDS = unassignedList?.map((obj) => obj.id);
-	const ARRAY_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.map((obj) => obj.id);
+	const resetObjects = () => {
+		setSelectLowWeightEmployeeObject();
+		setSelectUnassignedEmployeeObject();
+		setSelectAccordianObject();
+		setShowKRACalculationTable();
+	};
 
-	const CHECK_IF_ONE_EMPLOYEE_SELECTED = (selectArrayUnassignedEmployee.length
-		+ selectArrayAccordian.length
-		+ selectArrayLowWeightEmployee.length) === DISPLAY_ADD_KRA_BUTTON;
+	const OBJECT_OF_UNASSIGNED_IDS = unassignedList?.reduce((acc, obj) => {
+		acc[obj.id] = true;
+		return acc;
+	}, {});
+	const OBJECT_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.reduce((acc, obj) => {
+		acc[obj.id] = true;
+		return acc;
+	}, {});
+
+	const CHECK_IF_ONE_EMPLOYEE_SELECTED = (countTrueValues(selectUnassignedEmployeeObject)
+		+ countTrueValues(selectAccordianObject)
+		+ countTrueValues(selectLowWeightEmployeeObject)) === DISPLAY_ADD_KRA_BUTTON;
 
 	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
@@ -70,6 +86,12 @@ function Dashboard() {
 		if (type === 'review') {
 			router.push(REDIRECT_URL_RATING, REDIRECT_URL_RATING);
 		}
+	};
+
+	const EMPLOYEE_OBJECT_MAPPING = {
+		Unassigned    : selectUnassignedEmployeeObject,
+		AccordianData : selectAccordianObject,
+		LowWeightage  : selectAccordianObject,
 	};
 
 	return (
@@ -97,27 +119,22 @@ function Dashboard() {
 						<Button
 							size="md"
 							onClick={() => setShowKRACalculationTable(true)}
-							disabled={isEmpty(selectArrayUnassignedEmployee)
-								&& isEmpty(selectArrayLowWeightEmployee)
-								&& isEmpty(selectArrayAccordian)}
+							disabled={isEmpty(selectUnassignedEmployeeObject)
+								&& isEmpty(selectLowWeightEmployeeObject)
+								&& isEmpty(selectAccordianObject)}
 						>
 							Proceed to Allocate KRAs
 						</Button>
 					)
 				}
-
 			</div>
 
 			<div className={styles.section}>
 				<div className={styles.section_left}>
-
 					<FiltersDisplay
 						setFilters={setFilters}
 						check={CHECK_SINGLE_EMPLOYEE_SELECTED}
-						setSelectArrayAccordian={setSelectArrayAccordian}
-						setSelectArrayLowWeightEmployee={setSelectArrayLowWeightEmployee}
-						setSelectArrayUnassignedEmployee={setSelectArrayUnassignedEmployee}
-						setShowKRACalculationTable={setShowKRACalculationTable}
+						resetObjects={resetObjects}
 					/>
 
 					{CHECK_SINGLE_EMPLOYEE_SELECTED
@@ -134,9 +151,13 @@ function Dashboard() {
 						<TableDisplay
 							data={unassignedList}
 							loading={loading}
-							ARRAY_OF_IDS={ARRAY_OF_UNASSIGNED_IDS}
-							selectArray={selectArrayUnassignedEmployee}
-							setSelectArray={setSelectArrayUnassignedEmployee}
+							OBJECT_OF_IDS={OBJECT_OF_UNASSIGNED_IDS}
+							selectObject={selectUnassignedEmployeeObject}
+							setSelectObject={setSelectUnassignedEmployeeObject}
+							type="Unassigned"
+							resetObjects={resetObjects}
+							setDataFrom={setDataFrom}
+							dataFrom={dataFrom}
 						/>
 					</div>
 
@@ -146,9 +167,13 @@ function Dashboard() {
 						<TableDisplay
 							data={lowWeightageEmployeeList}
 							loading={loadingLowWeightageEmployee}
-							ARRAY_OF_IDS={ARRAY_OF_LOW_WEIGHTAGE_IDS}
-							selectArray={selectArrayLowWeightEmployee}
-							setSelectArray={setSelectArrayLowWeightEmployee}
+							OBJECT_OF_IDS={OBJECT_OF_LOW_WEIGHTAGE_IDS}
+							selectObject={selectLowWeightEmployeeObject}
+							setSelectObject={setSelectLowWeightEmployeeObject}
+							type="LowWeightage"
+							resetObjects={resetObjects}
+							setDataFrom={setDataFrom}
+							dataFrom={dataFrom}
 						/>
 					</div>
 
@@ -163,20 +188,23 @@ function Dashboard() {
 									loading={loadingKrasAssigned}
 									selectAccordian={selectAccordian}
 									setSelectAccordian={setSelectAccordian}
-									selectArrayAccordian={selectArrayAccordian}
-									setSelectArrayAccordian={setSelectArrayAccordian}
+									selectAccordianObject={selectAccordianObject}
+									setSelectAccordianObject={setSelectAccordianObject}
+									resetObjects={resetObjects}
+									setDataFrom={setDataFrom}
+									dataFrom={dataFrom}
+
 								/>
 							))
 							: <div>Select/Apply Filters to Display List of KRAs</div> }
 					</div>
-
 				</div>
 
 				{showKRACalculationTable
 				&& (
 					<div className={styles.section_right}>
 						<KRATable
-							selectArray={selectArrayAccordian}
+							selectedObject={EMPLOYEE_OBJECT_MAPPING[dataFrom]}
 							appliedFilters={filters}
 							getkrasAssigned={getkrasAssigned}
 							getUnassignedEmployee={getUnassignedEmployee}
@@ -184,6 +212,7 @@ function Dashboard() {
 							selectAccordian={selectAccordian}
 							setShowKRACalculationTable={setShowKRACalculationTable}
 							filtersFields={filtersFields}
+							dataFrom={dataFrom}
 						/>
 					</div>
 				)}

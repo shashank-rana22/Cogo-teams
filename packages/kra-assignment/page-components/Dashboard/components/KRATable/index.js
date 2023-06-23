@@ -7,7 +7,7 @@ import useKRAList from './useKRAList';
 const ARRAY_LENGTH_CONST = 1;
 
 function KRATable({
-	selectArray,
+	selectedObject,
 	selectAccordian,
 	appliedFilters,
 	getEmployeesWithLowWeightage,
@@ -15,7 +15,10 @@ function KRATable({
 	getUnassignedEmployee,
 	setShowKRACalculationTable,
 	filtersFields,
+	dataFrom,
 }) {
+	const selectArray = Object.keys(selectedObject).filter((key) => selectedObject[key] === true);
+
 	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH_CONST]
 	|| [];
 	const filters = isEmpty(filtersFields) ? appliedFilters : fieldsFilterLastElement;
@@ -27,7 +30,7 @@ function KRATable({
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,
-	} = useKRAList({ filters, selectAccordian });
+	} = useKRAList({ filters, selectAccordian, dataFrom });
 
 	return (
 		<div>
