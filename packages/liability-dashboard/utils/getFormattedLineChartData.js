@@ -8,7 +8,8 @@ const INDEX_VALUE = 0;
 const checkDateDifference = ({ endDate, startDate }) => {
 	const differenceInDay = differenceInDays(endDate, startDate);
 
-	const dateFormat = differenceInDay >= THRESHOLD_DAY ? 'MMM yyyy' : 'dd MMM';
+	const dateFormat = differenceInDay >= THRESHOLD_DAY
+		? GLOBAL_CONSTANTS.formats.date['MMM yyyy'] : GLOBAL_CONSTANTS.formats.date['dd MMM'];
 
 	return GLOBAL_CONSTANTS.formats.date[dateFormat];
 };

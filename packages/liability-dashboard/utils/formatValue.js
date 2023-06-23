@@ -5,6 +5,7 @@ const CHECK_IN_THOUSAND = 1;
 const CHECK_IN_MILLION = 2;
 const CHECK_IN_BILLION = 3;
 const MAXIMUM_PERCENTAGE_VALUE = 100;
+const SHOW_STATS_NAME = ['liability_point_value', 'total_burnt_point_value'];
 
 const UNIT_MAPPING = {
 	1 : 'K',
@@ -39,7 +40,7 @@ export const formatValue = (val) => {
 };
 
 export const statsPercentageValue = ({ data, name }) => {
-	const showStats = !['liability_point_value', 'total_burnt_point_value'].includes(name);
+	const showStats = !SHOW_STATS_NAME.includes(name);
 	const { total_burnt_point_value = '' } = data || {};
 	let percentageValue = INITIAL_VALUE;
 

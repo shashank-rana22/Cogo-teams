@@ -15,7 +15,7 @@ function LiabilityDashboard() {
 
 	const handleTabChange = (tab) => {
 		if (tab === 'promotion') {
-			window.location.href = `/${partnerId}/liability-dashboard`;
+			window.location.href = `/${partnerId}/liability-dashboard`; // ROUTE TO THE OLD ADMIN LIABILITY DASHBOARD
 		}
 	};
 
