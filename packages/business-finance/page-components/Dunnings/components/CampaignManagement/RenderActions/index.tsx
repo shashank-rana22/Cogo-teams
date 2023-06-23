@@ -6,9 +6,9 @@ import useUpdateStatus from '../hooks/useUpdateStatus';
 import styles from './styles.module.css';
 
 interface Props {
-	setActionModal?:Function,
-	rowData?:{ isDunningCycleActive?:boolean, id?:string },
-	getDunningList?:Function,
+	setActionModal?: Function;
+	rowData?: { isDunningCycleActive?: boolean; id?: string };
+	getDunningList?: Function;
 }
 
 function RenderActions({ setActionModal, rowData, getDunningList }:Props) {

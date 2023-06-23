@@ -3,9 +3,9 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 interface Props {
-	id?:string,
-	getDunningList?:Function,
-	setActionModal?:Function
+	id?: string;
+	getDunningList?: Function;
+	setActionModal?: Function;
 }
 
 function useDeleteDunningCycle({ id, getDunningList, setActionModal }:Props) {

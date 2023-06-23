@@ -9,12 +9,12 @@ import styles from './styles.module.css';
 
 interface Props {
 	actionModal?: {
-		rowData?:{ id?:string, name?:string },
-		action?:string,
-		visible?:boolean,
-	},
-	setActionModal?:Function,
-	getDunningList?:Function,
+		rowData?: { id?: string, name?: string };
+		action?: string;
+		visible?: boolean;
+	};
+	setActionModal?: Function;
+	getDunningList?: Function;
 }
 
 function ActionModal({ actionModal, setActionModal, getDunningList }:Props) {

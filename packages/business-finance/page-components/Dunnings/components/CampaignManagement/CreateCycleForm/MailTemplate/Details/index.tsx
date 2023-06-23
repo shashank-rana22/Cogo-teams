@@ -3,9 +3,9 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 interface Props {
-	text?:string,
-	isBody?:boolean,
-	bodyData?:string[],
+	text?: string;
+	isBody?: boolean;
+	bodyData?: string[];
 }
 
 function Details({

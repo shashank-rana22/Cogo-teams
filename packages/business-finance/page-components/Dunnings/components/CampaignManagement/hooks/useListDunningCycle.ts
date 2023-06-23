@@ -3,14 +3,14 @@ import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
 interface GlobalFilters {
-	search?:string,
-	page?:number,
-	cycleStatus?:string,
-	dunningCycleType?:string,
+	search?: string;
+	page?: number;
+	cycleStatus?: string;
+	dunningCycleType?: string;
 }
 interface Props {
-	globalFilters?:GlobalFilters,
-	setGlobalFilters?:Function,
+	globalFilters?: GlobalFilters;
+	setGlobalFilters?: Function;
 }
 
 function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {

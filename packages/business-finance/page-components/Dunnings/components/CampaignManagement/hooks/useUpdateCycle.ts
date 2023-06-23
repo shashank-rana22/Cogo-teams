@@ -3,8 +3,8 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 interface Props {
-	getDunningList?:Function,
-	setActionModal?:Function,
+	getDunningList?: Function;
+	setActionModal?: Function;
 }
 
 function useUpdateCycle({ getDunningList, setActionModal }:Props) {

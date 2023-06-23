@@ -8,10 +8,10 @@ import ExcludeList from './ExcludeList';
 import styles from './styles.module.css';
 
 interface Props {
-	uncheckedRows?:string[],
-	setUncheckedRows?:Function,
-	formData?:object,
-	setFormData?:Function,
+	uncheckedRows?: string[];
+	setUncheckedRows?: Function;
+	formData?: object;
+	setFormData?: Function;
 }
 
 function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormData }:Props) {

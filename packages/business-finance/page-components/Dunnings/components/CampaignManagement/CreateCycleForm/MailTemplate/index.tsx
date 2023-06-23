@@ -6,12 +6,12 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 interface FormData {
-	severityLevel?:string,
-	templateData?:{ name?:string, subject?:string, body?:string[] },
+	severityLevel?: string;
+	templateData?: { name?: string; subject?: string; body?: string[] };
 }
 interface Props {
-	setFormData?:Function,
-	formData?:FormData,
+	setFormData?: Function;
+	formData?: FormData;
 }
 
 function MailTemplate({ formData, setFormData }:Props) {

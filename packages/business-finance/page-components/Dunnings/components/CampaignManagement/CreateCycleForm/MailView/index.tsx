@@ -1,8 +1,8 @@
 import MailTemplate from '../MailTemplate';
 
 interface Props {
-	formData?:object,
-	setFormData?:(p:object)=>void,
+	formData?: object;
+	setFormData?: (p: object)=>void;
 }
 
 function MailView({ formData, setFormData }:Props) {

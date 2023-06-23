@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
 interface Props {
-	id?:string,
-	dropdown?:string,
-	setDropdown?:Function
+	id?: string;
+	dropdown?: string;
+	setDropdown?: Function;
 }
 
 function RenderViewMore({ id, dropdown, setDropdown }:Props) {

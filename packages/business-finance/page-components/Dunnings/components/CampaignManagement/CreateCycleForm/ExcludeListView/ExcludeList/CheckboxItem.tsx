@@ -1,9 +1,9 @@
 import { Checkbox } from '@cogoport/components';
 
 interface Props {
-	uncheckedRows?:string[],
-	setUncheckedRows?:Function,
-	row?:{ tradePartyDetailId?:string },
+	uncheckedRows?: string[];
+	setUncheckedRows?: Function;
+	row?: { tradePartyDetailId?: string };
 }
 
 function CheckboxItem({

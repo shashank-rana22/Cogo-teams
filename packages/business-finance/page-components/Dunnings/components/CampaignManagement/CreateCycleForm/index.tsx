@@ -10,9 +10,9 @@ import MailView from './MailView';
 import styles from './styles.module.css';
 
 interface Props {
-	showCreateForm?:boolean,
-	setShowCreateForm?:Function,
-	getDunningList?:Function,
+	showCreateForm?: boolean;
+	setShowCreateForm?: Function;
+	getDunningList?: Function;
 }
 
 function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:Props) {

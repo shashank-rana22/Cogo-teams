@@ -10,35 +10,35 @@ import { controls } from './controls';
 import styles from './styles.module.css';
 
 interface FormData {
-	triggerType?:string,
-	frequency?:string,
-	weekDay?:string,
-	monthDay?:string,
-	timezone?:string,
-	time?:Date,
-	isAllCreditControllers?:boolean,
-	creditController?:string[],
-	oneTimeDate?:Date,
-	scheduledHour?:string,
-	scheduledMinute?:string,
-	scheduleRule?:any,
-	name?:string,
-	dunningCycleType?:string,
-	cogoEntityId?:string
-	filters?:{
-		dueOutstandingCurrency?:string,
-		organizationStakeholderIds?:string[],
-		serviceTypes?:string[],
-		cogoEntityId?:string,
-		ageingBucket?:string,
-		totalDueOutstanding?:number | string,
+	triggerType?: string;
+	frequency?: string;
+	weekDay?: string;
+	monthDay?: string;
+	timezone?: string;
+	time?: Date;
+	isAllCreditControllers?: boolean;
+	creditController?: string[];
+	oneTimeDate?: Date;
+	scheduledHour?: string;
+	scheduledMinute?: string;
+	scheduleRule?: any;
+	name?: string;
+	dunningCycleType?: string;
+	cogoEntityId?: string;
+	filters?: {
+		dueOutstandingCurrency?: string;
+		organizationStakeholderIds?: string[];
+		serviceTypes?: string[];
+		cogoEntityId?: string;
+		ageingBucket?: string;
+		totalDueOutstanding?: number | string;
 	}
 }
 
 interface Props {
-	formData?:FormData,
-	setFormData?:(p:object)=>void,
-	isEditMode?:boolean,
+	formData?: FormData;
+	setFormData?: (p:object)=>void;
+	isEditMode?: boolean;
 }
 
 function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
@@ -70,7 +70,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		oneTimeDate:oneTimeDateSchedule,
 	} = scheduleRule || {};
 
-	const handleTabChange = (val?:string) => {
+	const handleTabChange = (val?: string) => {
 		if (val === 'DAILY') {
 			setFormData({
 				...formData,
@@ -145,9 +145,9 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	useEffect(() => {
 		// setting currency value based on selected entity
 		if (cogoEntityId && !isEditMode) {
-			const currencyEntityData:{ currency?:string }[] = Object.values(
+			const currencyEntityData:{ currency?: string }[] = Object.values(
 				GLOBAL_CONSTANTS.cogoport_entities,
-			)?.filter((obj:{ id?:string }) => obj?.id === cogoEntityId);
+			)?.filter((obj:{ id?: string }) => obj?.id === cogoEntityId);
 
 			const currencyValue = currencyEntityData?.[0]?.currency;
 			setFormData((prev:object) => ({
@@ -172,7 +172,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 							<Tabs
 								activeTab={frequency}
 								themeType="primary"
-								onChange={(e?:string) => handleTabChange(e)}
+								onChange={(e?: string) => handleTabChange(e)}
 							>
 								<TabPanel name="DAILY" title="Daily">
 									<div className={styles.empty_space} />
@@ -185,7 +185,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 											size="md"
 											items={WEEK_OPTIONS}
 											selectedItems={weekDay}
-											onItemChange={(val?:string) => setFormData({
+											onItemChange={(val?: string) => setFormData({
 												...formData,
 												weekDay: val,
 											})}

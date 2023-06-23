@@ -2,9 +2,9 @@ import PieData from './PieData';
 import styles from './styles.module.css';
 
 interface Props {
-	dropdown?:string,
-	rowId?:string,
-	data?:object[],
+	dropdown?: string;
+	rowId?: string;
+	data?: object[];
 }
 
 function ShowMore({ dropdown, rowId, data = null }:Props) {

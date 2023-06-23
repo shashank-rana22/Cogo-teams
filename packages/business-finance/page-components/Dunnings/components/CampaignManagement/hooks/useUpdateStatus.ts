@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 interface Props {
-	getDunningList?:Function,
+	getDunningList?: Function;
 }
 
 function useUpdateStatus({ getDunningList }:Props) {
