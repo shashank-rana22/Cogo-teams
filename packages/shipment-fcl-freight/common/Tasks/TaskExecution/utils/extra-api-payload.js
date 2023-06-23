@@ -12,6 +12,17 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const extraApiPayload = (values, end_point, task) => {
+	if (end_point === 'send_nomination_notification') {
+		return {
+			booking_reference_number: values?.booking_reference_number,
+			booking_reference_proof: {
+				success: true,
+				url: values?.booking_reference_proof,
+				name: 'Booking Reference Proof',
+			}
+		}
+	}
+
 	if (end_point === 'create_shipment_document') {
 		let documentArr = values?.documents;
 
