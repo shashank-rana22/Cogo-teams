@@ -6,6 +6,8 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
+const PAID_STATUS = ['FULL', 'OVERPAID'];
+
 function TimeLineInitialStage({ loading, data, dateWithTimeForPaymentDueDate, timeLine }) {
 	const { zeroth_index } = GLOBAL_CONSTANTS || {};
 
@@ -26,7 +28,7 @@ function TimeLineInitialStage({ loading, data, dateWithTimeForPaymentDueDate, ti
 
 	return (
 		<div className={styles.subcontainer}>
-			{['FULL', 'OVERPAID'].includes(timeLine[zeroth_index]?.eventName) ? null : (
+			{PAID_STATUS.includes(timeLine[zeroth_index]?.eventName) ? null : (
 				<div className={styles.datecontainer}>
 					{dateWithTimeForPaymentDueDate[zeroth_index]}
 					<div>
@@ -41,7 +43,7 @@ function TimeLineInitialStage({ loading, data, dateWithTimeForPaymentDueDate, ti
 				</div>
 			)}
 			<div className={styles.dullcircle} />
-			{['FULL', 'OVERPAID'].includes(timeLine[zeroth_index]?.eventName) ? null : (
+			{PAID_STATUS.includes(timeLine[zeroth_index]?.eventName) ? null : (
 				<div className={styles.eventcontainer}>PAYMENT DUE</div>
 			)}
 		</div>

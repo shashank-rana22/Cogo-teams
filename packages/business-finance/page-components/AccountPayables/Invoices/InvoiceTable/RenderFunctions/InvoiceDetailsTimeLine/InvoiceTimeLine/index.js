@@ -13,7 +13,7 @@ const geo = getGeoConstants();
 
 const { zeroth_index } = GLOBAL_CONSTANTS || {};
 
-const FIRST_INDEX = 1;
+const INITIAL_EVENT = 1;
 
 function InvoiceTimeLine({ data, loading }) {
 	const [complete, setComplete] = useState(false);
@@ -22,7 +22,7 @@ function InvoiceTimeLine({ data, loading }) {
 
 	const gettimeLineData = () => {
 		if (timeLine[zeroth_index]?.eventName === 'POSTED') {
-			return timeLine?.slice(FIRST_INDEX, timeLine.length);
+			return timeLine?.slice(INITIAL_EVENT, timeLine.length);
 		}
 
 		return timeLine;

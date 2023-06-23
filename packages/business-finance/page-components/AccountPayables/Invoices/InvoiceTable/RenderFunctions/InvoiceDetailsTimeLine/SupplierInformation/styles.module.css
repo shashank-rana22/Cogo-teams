@@ -4,7 +4,6 @@
 
 .documentcontainer {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	cursor: pointer;
 }
@@ -17,7 +16,6 @@
 
 .verifieddata {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 }
 

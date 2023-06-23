@@ -1,16 +1,15 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const { zeroth_index } = GLOBAL_CONSTANTS || {};
+const FIRST_ELE = 0;
 
 export function RenderUrgency({ itemData, field = {} }) {
-	return (getByKey(itemData, field?.key)?.[zeroth_index]
+	return (getByKey(itemData, field?.key)?.[FIRST_ELE]
 		? (
 			<div className={styles.urgency}>
-				{startCase(getByKey(itemData, field?.key)?.[zeroth_index])}
+				{startCase(getByKey(itemData, field?.key)?.[FIRST_ELE])}
 			</div>
 		) : '-'
 	);

@@ -111,7 +111,7 @@ export const ALL_INVOICE_CONFIG = {
 		{
 			label : 'Action',
 			key   : 'action',
-			span  : 0.8,
+			span  : 0.6,
 			func  : 'renderAction',
 		},
 	],

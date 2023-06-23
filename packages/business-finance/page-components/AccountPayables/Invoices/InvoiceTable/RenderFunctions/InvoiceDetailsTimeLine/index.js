@@ -18,7 +18,7 @@ import Profitability from './Profitability';
 import styles from './styles.module.css';
 import SupplierInformation from './SupplierInformation';
 
-const THIRD_INDEX = 3;
+const PLACEHOLDERS = 3;
 
 const geo = geoConstants();
 function InvoiceDetailsTimeLine({ item }) {
@@ -153,7 +153,7 @@ function InvoiceDetailsTimeLine({ item }) {
 									supplierComp
 								)}
 								{invoiceDetailsLoading ? (
-									[...Array(THIRD_INDEX).keys()].map((key) => (
+									[...Array(PLACEHOLDERS).keys()].map((key) => (
 										<Placeholder
 											key={key}
 											className={styles.placeholder_container}
@@ -182,9 +182,7 @@ function InvoiceDetailsTimeLine({ item }) {
 														)}
 													</div>
 												</div>
-
 												{dropDownData[id] && <div className={styles.hr} />}
-
 												{dropDownData[id] && (
 													<div
 														className={dropDownData ? styles.enter_down : styles.exit_down}
