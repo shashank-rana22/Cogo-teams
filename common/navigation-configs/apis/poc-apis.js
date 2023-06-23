@@ -54,6 +54,11 @@ const poc_apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'bulk_shipment_stakeholder_reallocation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default poc_apis;

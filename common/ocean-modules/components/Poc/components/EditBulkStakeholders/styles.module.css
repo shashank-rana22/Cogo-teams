@@ -1,11 +1,25 @@
-.check_box_container {
-    display: flex;
-    align-items: center;
+.form_container {
+    margin: 10px 0;
+}
+
+.form_item {
     width: 55%;
     margin-right: 10px;
 }
 
-.form_item {
+.check_box_container {
+    display: flex;
+    align-items: center;
+}
+
+.error_text {
+    color: var(--color-primary-error-red-2);
+    font-size: var(--font-size-md);
+    margin-top: -10px;
+    margin-left: 14px;
+}
+
+.form_item_container {
     display: flex;
     align-items: center;
 }

@@ -1,9 +1,6 @@
 const FIELD_ARRAY_KEY = 'new_stakeholders';
 
-export default function getEditBulkStakeholdersDefaultValues({
-	services = [],
-	stakeholder_id = '',
-}) {
+export default function getEditBulkStakeholdersDefaultValues({ services = [], stakeholder_type = '' }) {
 	const DEFAULT_VALUES = {
 		[FIELD_ARRAY_KEY]: [],
 	};
@@ -13,7 +10,7 @@ export default function getEditBulkStakeholdersDefaultValues({
 
 		return {
 			is_checked      : true,
-			new_stakeholder : stakeholder_id,
+			new_stakeholder : service?.[stakeholder_type]?.id,
 			service_id      : id,
 			service_type,
 			trade_type,
