@@ -12,29 +12,37 @@ const weightSlabs = (values) => {
 	return [{ currency, tariff_price: price, unit: 'per_kg', lower_limit, upper_limit }];
 };
 
-const getPayload = ({ lineItemsParams, values = {}, id, service_type = '' }) => {
+const getAirServicePayload = ({ values, service_type }) => {
 	const checkWeightSlabs = service_type === 'air_freight_service'
 	&& !isEmpty(values.weight_slabs?.[GLOBAL_CONSTANTS.zeroth_index].lower_limit);
 	return {
-		line_items                 : lineItemsParams,
-		shipping_line_id           : values.shipping_line_id || undefined,
+		chargeable_weight          : Number(values?.chargeable_weight) || undefined,
+		operation_type             : values.operation_type || undefined,
 		airline_id                 : values.airline_id || undefined,
 		price_type                 : values.price_type || undefined,
-		operation_type             : values.operation_type || undefined,
-		is_reverted                : true,
-		id,
-		supplier_contract_no       : values.supplier_contract_no || undefined,
-		validity_end               : values.validity_end || undefined,
-		sourced_by_id              : values.sourced_by_id,
-		remarks                    : values.remarks || undefined,
-		chargeable_weight          : Number(values?.chargeable_weight) || undefined,
 		weight_slabs               : checkWeightSlabs ? weightSlabs(values) : undefined,
 		rate_procurement_proof_url : service_type === 'air_freight_service'
 			? values.rate_procurement_proof?.finalUrl : undefined,
 		schedule_type: values.schedule_type || undefined,
-
 	};
 };
+
+const actievService = {
+	air_freight_service: getAirServicePayload,
+};
+
+const getPayload = ({ lineItemsParams, values = {}, id, service_type = '' }) => ({
+	line_items           : lineItemsParams,
+	shipping_line_id     : values.shipping_line_id || undefined,
+	is_reverted          : true,
+	id,
+	supplier_contract_no : values.supplier_contract_no || undefined,
+	validity_end         : values.validity_end || undefined,
+	sourced_by_id        : values.sourced_by_id,
+	remarks              : values.remarks || undefined,
+	...(actievService[service_type]?.({ values, service_type })),
+
+});
 
 const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 	const [{ loading }, trigger] = useRequest({

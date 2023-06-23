@@ -1,12 +1,12 @@
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
-import ActiveControlsMapping from './active-controls-mapping';
+import useActiveControlsMapping from './active-controls-mapping';
 
 const MAX_WEIGHT_SLAB = 500;
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
-
+const MIN_CHARGEABLE_WEIGHT = 45;
 const MIN_VALUE = 0;
 
 const useGetRevertFormControls = ({ data, watch }) => {
@@ -18,7 +18,12 @@ const useGetRevertFormControls = ({ data, watch }) => {
 
 	const isChargeableWeight = watch('chargeable_weight');
 
-	const SERVICE_CONTROLS_MAPPING = ActiveControlsMapping({ isChargeableWeight });
+	const SERVICE_CONTROLS_MAPPING = useActiveControlsMapping({ isChargeableWeight });
+
+	const showElements = {
+		min_price    : isChargeableWeight < MIN_CHARGEABLE_WEIGHT,
+		weight_slabs : isChargeableWeight < MAX_WEIGHT_SLAB,
+	};
 
 	const controls = [
 		{
@@ -241,8 +246,8 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			],
 		},
 	];
-
-	return controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
+	const fields = controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
+	return { fields, showElements };
 };
 
 export default useGetRevertFormControls;

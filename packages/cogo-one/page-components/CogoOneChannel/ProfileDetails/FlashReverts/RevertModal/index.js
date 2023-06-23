@@ -29,7 +29,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		handleRevertPrice,
 	} = useRevertPrice({ item: data, setModalState, shipmentFlashBookingRates });
 
-	const controls = useGetRevertFormControls({
+	const { fields: controls, showElements } = useGetRevertFormControls({
 		data,
 		userId,
 		watch,
@@ -44,7 +44,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		>
 			<Modal.Header title="ADD PRICE" />
 			<Modal.Body>
-				<Form control={control} errors={errors} controls={controls} />
+				<Form control={control} errors={errors} controls={controls} showElements={showElements} />
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button_container}>

@@ -2,12 +2,16 @@ import { getFieldController } from '../../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function Form({ control, controls, errors }) {
+function Form({
+	control, controls, errors,
+	// showElements
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((eachControl) => {
 				const { controlType, name, label } = eachControl || {};
 				const Element = getFieldController(controlType);
+
 				if (!Element) {
 					return null;
 				}
