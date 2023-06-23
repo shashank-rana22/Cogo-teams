@@ -5,7 +5,7 @@ import { merge } from "@cogoport/utils";
 import { asyncFieldsLocations } from "@cogoport/forms/utils/getAsyncFields";
 import styles from "./styles.module.css";
 
-function Filter({ filters, setFilters }) {
+function Filter({ filters, setFilters, setCurrentPage }) {
     const originPortOptions = useGetAsyncOptions(
         merge(asyncFieldsLocations(), {
             params: { filters: { type: ["seaport"] } },
@@ -22,6 +22,11 @@ function Filter({ filters, setFilters }) {
         setFilters(null);
     };
 
+    const handleFilter = (value, location_type) => {
+        setFilters((prev) => ({ ...prev, [location_type]: value }))
+        setCurrentPage(1)
+    }
+
     return (
         <div className={styles.filter}>
             <MultiSelect
@@ -30,7 +35,7 @@ function Filter({ filters, setFilters }) {
                 placeholder="Origin Port"
                 value={filters?.origin_port}
                 onChange={(value) =>
-                    setFilters((prev) => ({ ...prev, origin_port: value }))
+                    handleFilter(value, 'origin_port')
                 }
             />
             <MultiSelect
@@ -39,7 +44,7 @@ function Filter({ filters, setFilters }) {
                 placeholder="Destination Port"
                 value={filters?.destination_port}
                 onChange={(value) =>
-                    setFilters((prev) => ({ ...prev, destination_port: value }))
+                    handleFilter(value, 'destination_port')
                 }
             />
             <Button themeType="tirtery" onClick={clearFilters}>
