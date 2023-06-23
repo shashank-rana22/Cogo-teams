@@ -6,10 +6,6 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 				label : 'Same as Booking Party',
 			},
 			{
-				value : 'self',
-				label : 'Self',
-			},
-			{
 				value : 'trade_partner',
 				label : 'Select Trade Partner',
 			},
