@@ -29,6 +29,7 @@ const GLOBAL_CONSTANTS = {
 			'dd MMMM yyyy'      : 'dd MMMM yyyy',
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
+			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
 		},
 		time: {
@@ -213,6 +214,8 @@ const GLOBAL_CONSTANTS = {
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
 		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
+		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
+		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
