@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'create_customer_number_request',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
@@ -1010,6 +1015,11 @@ const partner = {
 		},
 	],
 	demand_crm: [
+		{
+			api          : 'create_customer_number_request',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'create_event',
 			access_type  : 'private',
