@@ -25,6 +25,7 @@ const useListDocumentDesk = () => {
 				to_created_at,
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
+				shipment_type: 'ftl_freight',
 			},
 			sort_by                  : filters?.sortValue,
 			sort_type                : filters?.order,

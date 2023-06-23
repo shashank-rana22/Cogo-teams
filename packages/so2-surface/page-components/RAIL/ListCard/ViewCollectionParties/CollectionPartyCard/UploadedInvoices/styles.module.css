@@ -1,0 +1,46 @@
+.line {
+  margin: 0px 24px 16px 24px;
+  border: 0.5px solid #88CAD1;
+}
+
+.main{
+  margin: 0px 24px;
+  border: 1px solid #88CAD1;
+  border-radius: 4px;
+}
+
+.modal{
+  border: 1px solid #88CAD1;
+  border-radius: 4px;
+}
+
+.table{
+  max-height: 500px;
+  overflow: auto;
+  & > div:not(:last-child){
+    border-bottom: 1px solid #E9E9E9;
+  }
+}
+
+.row{
+  display: flex;
+  align-items: center;
+
+  &:hover{
+    background-color: #E9E9E9;
+  }
+}
+
+.column{
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.modal_button{
+  margin-left: auto;
+  margin-right: 20px;
+  & > span{
+    color: #ff0000;
+  }
+}

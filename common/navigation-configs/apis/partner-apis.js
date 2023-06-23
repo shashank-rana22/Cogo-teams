@@ -8959,6 +8959,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'list_shipment_collection_party',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 
 	campaigns: [
