@@ -68,6 +68,7 @@ function CardItem({ itemData }) {
 				<div className={styles.vr} />
 			</div>
 			<div className={styles.column2}>
+				Risk Reason
 				{reason.map((item) => (
 					<div className={styles.container_pickup} key={item}>
 						<div className={styles.not_picked}>

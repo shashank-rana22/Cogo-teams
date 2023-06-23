@@ -11,7 +11,10 @@ function BlDoData({ stats }) {
 	const { late_collection_stats, late_release_stats } = stats || {};
 	const { late_collection_total = '' } = late_collection_stats || {};
 
-	const { late_release_total = '', payment_not_received = '' } = late_release_stats || {};
+	const {
+		late_release_total = '', payment_not_received = '',
+		payment_done_but_bl_not_released = '',
+	} = late_release_stats || {};
 	return (
 		<div className={styles.bl_do_container}>
 			<div className={styles.late_collection}>
@@ -54,6 +57,14 @@ function BlDoData({ stats }) {
 							Customer - Payment Not Received :
 							{'  '}
 							{ payment_not_received || '-'}
+						</div>
+					</div>
+					<div className={styles.sub_container}>
+						<div className={styles.point} />
+						<div>
+							Payment Done But BL Not Released :
+							{'  '}
+							{ payment_done_but_bl_not_released || '-'}
 						</div>
 					</div>
 
