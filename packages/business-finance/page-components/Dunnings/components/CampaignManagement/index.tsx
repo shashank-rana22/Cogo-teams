@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CustomList from '../../../commons/CustomList';
@@ -43,9 +44,57 @@ function CampaignManagement() {
 		renderName: ({ name }) => (
 			<div>{showOverflowingNumber(name, 20)}</div>
 		),
-		renderFrequency: ({ scheduleRule }) => (
-			<div>{(scheduleRule?.dunningExecutionFrequency || '').replaceAll('_', ' ')}</div>
-		),
+		renderFrequency: ({ scheduleRule }) => {
+			const {
+				dunningExecutionFrequency = '', oneTimeDate = '',
+				scheduleTime = '', dayOfMonth = '',
+				week = '', scheduleTimeZone = '',
+			} = scheduleRule || {};
+			return (
+				<div>
+					<span style={{ marginRight: '6px' }}>
+						{startCase(dunningExecutionFrequency.toLowerCase())}
+					</span>
+					<div className={styles.date_time}>
+						(
+						{oneTimeDate
+							? (
+								<>
+									<span className={styles.frequency_value}>
+										{formatDate({
+											date       : oneTimeDate,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											formatType : 'date',
+										})}
+									</span>
+									<span className={styles.border} />
+
+								</>
+							)
+							: ''}
+						{dayOfMonth
+							? (
+								<span>
+									{dayOfMonth}
+								</span>
+							)
+							: ''}
+						{week ? (
+							<span>
+								{week.slice(0, 3)}
+							</span>
+						) : ''}
+					&nbsp;|&nbsp;
+						<span style={{ marginLeft: '4px' }}>
+							{scheduleTime}
+							{' '}
+							{scheduleTimeZone}
+						</span>
+						)
+					</div>
+				</div>
+			);
+		},
 		renderCreatedOn: ({ createdAt }) => (
 			<div>
 				{formatDate({
@@ -88,6 +137,9 @@ function CampaignManagement() {
 				{(status || '').replaceAll('_', ' ')}
 
 			</div>
+		),
+		renderType: ({ dunningCycleType }) => (
+			<div>{(dunningCycleType || '').replaceAll('_', ' ')}</div>
 		),
 	});
 

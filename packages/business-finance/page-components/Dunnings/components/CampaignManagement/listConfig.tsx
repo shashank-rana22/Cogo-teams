@@ -34,6 +34,7 @@ export const listConfig = () => ({
 		{
 			label : 'Type',
 			key   : 'dunningCycleType',
+			func  : 'renderType',
 			span  : 1.5,
 		},
 		{

@@ -11,3 +11,7 @@
 	color: black;
 	border-radius: 8px;
 }
+
+.date_time { 
+	font-size: var(--font-size-md);
+}
