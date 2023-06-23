@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import useGetRevertFormControls from '../../../../../configurations/revert-form-controls';
+import useGetRevertFormControls from '../../../../../configurations/revert-form-controls.';
 import useRevertPrice from '../../../../../hooks/useRevertPrice';
 
 import Form from './Form';
@@ -14,7 +14,15 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		control,
 		handleSubmit,
 		formState: { errors = {} },
-	} = useForm();
+		watch,
+	} = useForm({
+		defaultValues: {
+			weight_slabs: [{
+				lower_limit : '',
+				upper_limit : '',
+			}],
+		},
+	});
 
 	const {
 		loading,
@@ -24,6 +32,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 	const controls = useGetRevertFormControls({
 		data,
 		userId,
+		watch,
 	});
 
 	return (

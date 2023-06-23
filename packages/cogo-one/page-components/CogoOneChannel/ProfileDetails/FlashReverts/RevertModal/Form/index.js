@@ -15,7 +15,7 @@ function Form({ control, controls, errors }) {
 				return (
 					<div className={styles.each_element} key={name}>
 						<label className={styles.label_styles}>{label}</label>
-						<Element control={control} {...eachControl} />
+						<Element control={control} {...eachControl} error={errors?.[name]} />
 						<text className={styles.error_text}>
 							{errors?.[name] && (errors[name]?.message || 'This is Required') }
 						</text>

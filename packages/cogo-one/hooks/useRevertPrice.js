@@ -1,9 +1,17 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
 import { formatLineItems, formatFirstLineItem } from '../helpers/revertPriceHelpers';
+
+const weightSlabs = (values) => {
+	const { price = 0, currency = '', weight_slabs = [] } = values || {};
+	const { lower_limit = '', upper_limit = '' } = weight_slabs[GLOBAL_CONSTANTS.zeroth_index];
+
+	return [{ currency, tariff_price: price, unit: 'per_kg', lower_limit, upper_limit }];
+};
 
 const getPayload = ({ lineItemsParams, values = {}, id }) => ({
 	line_items           : lineItemsParams,
@@ -18,6 +26,8 @@ const getPayload = ({ lineItemsParams, values = {}, id }) => ({
 	sourced_by_id        : values.sourced_by_id,
 	remarks              : values.remarks || undefined,
 	chargeable_weight    : Number(values?.chargeable_weight) || undefined,
+	weight_slabs         : values.weight_slabs ? weightSlabs(values) : undefined,
+
 });
 
 const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {

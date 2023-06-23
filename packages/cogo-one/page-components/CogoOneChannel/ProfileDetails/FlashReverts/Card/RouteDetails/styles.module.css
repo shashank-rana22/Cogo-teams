@@ -41,5 +41,5 @@
 	font-size: 12px;
 	text-align: center;
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	white-space: wrap;
 }

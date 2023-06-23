@@ -1,26 +1,40 @@
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
+import ActiveControlsMapping from './active-controls-mapping';
+
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
 
-const SERVICE_CONTROLS_MAPPING = {
-	fcl_freight_service: ['sourced_by_id', 'shipping_line_id', 'validity_end', 'remarks', 'currency', 'price',
-		'supplier_contract_no'],
-	lcl_freight_service     : ['sourced_by_id', 'validity_end', 'remarks', 'currency', 'price', 'supplier_contract_no'],
-	air_freight_service     : [],
-	ltl_freight_service     : [],
-	ftl_freight_service     : [],
-	haulage_freight_service : [],
-	trailer_freight_service : [],
-	air_customs_service     : [],
-	fcl_customs_service     : [],
-};
+const MIN_VALUE = 0;
 
-const useGetRevertFormControls = ({ data }) => {
-	const { service_type, service_provider_id } = data || {};
+const useGetRevertFormControls = ({ data, watch }) => {
+	const {
+		service_type,
+		service_provider_id,
+	} = data || {};
+
+	const isChargeableWeight = watch('chargeable_weight');
+
+	const SERVICE_CONTROLS_MAPPING = ActiveControlsMapping({ isChargeableWeight });
 
 	const controls = [
+		{
+			label       : 'Service Provider',
+			name        : 'service_provider_id',
+			placeholder : 'Select Service Provider',
+			controlType : 'asyncSelect',
+			isClearable : true,
+			rules       : { required: 'Service Provider is required' },
+			asyncKey    : 'organizations',
+			initialCall : true,
+			params      : {
+				filters: {
+					service_type:
+					service_type === 'air_freight_service' ? service_type : undefined,
+				},
+			},
+		},
 		{
 			label       : 'Rate Provided by user',
 			name        : 'sourced_by_id',
@@ -170,6 +184,58 @@ const useGetRevertFormControls = ({ data }) => {
 			placeholder : 'Add remarks',
 			className   : 'primary lg',
 			rows        : 2,
+		},
+
+		{
+			name        : 'rate_procurement_proof',
+			label       : 'Upload Proof of Rate Procured',
+			controlType : 'fileUpload',
+			type        : 'file',
+			drag        : true,
+			maxSize     : '10485760',
+			uploadType  : 'aws',
+			height      : '88',
+			uploadIcon  : 'ic-upload',
+			accept      : '.png,.pdf,.jpg,.jpeg',
+			rules       : { required: 'Upload Proof of Rate Procured is Required' },
+		},
+		{
+			name               : 'weight_slabs',
+			label              : 'Weight Slabs (in Kgs)',
+			controlType        : 'fieldArray',
+			showOptional       : false,
+			showButtons        : false,
+			noDeleteButtonTill : 1,
+			defaultValues      : [
+				{
+					lower_limit : '',
+					upper_limit : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'lower_limit',
+					controlType : 'input',
+					type        : 'number',
+					placeholder : 'Lower Limit',
+					span        : 4,
+					rules       : {
+						required : 'Lower Limit is required',
+						validate : (value) => (value < MIN_VALUE ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'upper_limit',
+					controlType : 'input',
+					type        : 'number',
+					placeholder : 'Upper Limit',
+					span        : 4,
+					rules       : {
+						required : 'Upper Limit is required',
+						validate : (value) => (value < MIN_VALUE ? 'Cannot be Negative' : true),
+					},
+				},
+			],
 		},
 	];
 
