@@ -216,6 +216,10 @@ const GLOBAL_CONSTANTS = {
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
 	},
+	pdf_url: {
+		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+	},
 
 	options: {
 		upload_file_size: {
