@@ -5,7 +5,7 @@ export const getDefaultEntityCode = (entityId = '') => {
 
 	Object.values(GLOBAL_CONSTANTS.cogoport_entities).forEach((value) => {
 		if (value.id === entityId) {
-			entityCode = value.default;
+			entityCode = value.default_entity_code;
 		}
 	});
 

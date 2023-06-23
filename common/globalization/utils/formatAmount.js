@@ -56,9 +56,7 @@ const formatCurrency = ({ amount, locale, options }) => {
 	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale]).forEach(([current, newVal]) => {
 		if (amount.includes('T') && locale === 'en-IN') {
 			formattedAmount = amount.replace(current, newVal);
-		}
-
-		if (splittedAmount.includes(current)) {
+		} else if (splittedAmount.includes(current)) {
 			formattedAmount = amount.replace(current, newVal);
 		}
 	});

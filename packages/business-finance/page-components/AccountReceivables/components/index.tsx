@@ -15,24 +15,32 @@ import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
 interface ItemProps {
-	business_name:string,
-	entity_code:string,
+	business_name: string;
+	entity_code: string;
+}
+interface Profile {
+	profile?: { partner: { id: string } };
 }
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
 	const profile = useSelector((state) => state);
 
-	const { profile:{ partner } } = profile || {};
+	const {
+		profile: { partner },
+	}:Profile = profile || {};
+
 	const { id: partnerId } = partner || {};
 
-	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
+	const [receivables, setReceivables] = useState(
+		query.active_tab || 'dashboard',
+	);
 
 	const entity = getDefaultEntityCode(partnerId);
 
 	const [entityCode, setEntityCode] = useState(entity);
 
-	const handleChange = (val:string) => {
+	const handleChange = (val: string) => {
 		setReceivables(val);
 		push(
 			'/business-finance/account-receivables/[active_tab]',
@@ -41,8 +49,11 @@ function AccountReceivables() {
 	};
 	const { loading, entityData = [] } = useListCogoEntities();
 
-	const EntityOptions = (entityData || []).map((item:ItemProps) => {
-		const { business_name:companyName = '', entity_code:listEntityCode = '' } = item || {};
+	const EntityOptions = (entityData || []).map((item: ItemProps) => {
+		const {
+			business_name: companyName = '',
+			entity_code: listEntityCode = '',
+		} = item || {};
 
 		return {
 			label : `${upperCase(companyName)} (${listEntityCode})`,
@@ -52,34 +63,29 @@ function AccountReceivables() {
 
 	return (
 		<div>
-
 			<div className={styles.header}>
-				<div className={styles.header_style}>
-					Account Receivables
-				</div>
+				<div className={styles.header_style}>Account Receivables</div>
 
 				{loading ? (
 					<Placeholder width="200px" height="30px" />
-				)
-
-					: (
-						<div className={styles.input}>
-							<Select
-								name="business_name"
-								onChange={(entityVal: string) => setEntityCode(entityVal)}
-								value={entityCode}
-								options={EntityOptions}
-								placeholder="Select Entity Code"
-								size="sm"
-							/>
-						</div>
-					)}
+				) : (
+					<div className={styles.input}>
+						<Select
+							name="business_name"
+							onChange={(entityVal: string) => setEntityCode(entityVal)}
+							value={entityCode}
+							options={EntityOptions}
+							placeholder="Select Entity Code"
+							size="sm"
+						/>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val:string) => handleChange(val)}
+					onChange={(val: string) => handleChange(val)}
 					fullWidth
 					themeType="primary"
 				>
