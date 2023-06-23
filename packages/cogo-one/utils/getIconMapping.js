@@ -1,9 +1,16 @@
 import {
 	IcMSearchdark,
-	IcMDocument, IcMDefault,
+	IcMDocument, IcMShip, IcMDefault,
 } from '@cogoport/icons-react';
 
-const IconMapping = [
+const HIDE_NAVIGATION_MAPPING = {
+	admin_view    : ['quick_actions', 'reminder'],
+	kam_view      : ['quick_actions', 'reminder', 'flash_shipment_bookings'],
+	shipment_view : ['quick_actions', 'reminder', 'flash_shipment_bookings'],
+	supply_view   : ['quick_actions', 'reminder'],
+};
+
+const ICON_MAPPING = [
 	{
 		name    : 'profile',
 		content : 'Profile',
@@ -21,6 +28,11 @@ const IconMapping = [
 			alt="organization"
 			style={{ width: '20px', heigh: '20px' }}
 		/>,
+	},
+	{
+		name    : 'flash_shipment_bookings',
+		content : 'Flash Shipment Bookings',
+		icon    : <IcMShip />,
 	},
 	{
 		name    : 'user_activity',
@@ -53,7 +65,6 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
-		hide: true,
 	},
 	{
 		name    : 'tickets',
@@ -93,4 +104,8 @@ const IconMapping = [
 	},
 ];
 
-export default IconMapping;
+const getIconMapping = (viewType) => ICON_MAPPING.filter(
+	(eachIcon) => !HIDE_NAVIGATION_MAPPING[viewType || 'kam_view']?.includes(eachIcon?.name),
+);
+
+export default getIconMapping;
