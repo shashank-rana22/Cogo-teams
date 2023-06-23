@@ -42,7 +42,7 @@ function DuplicateModal({
 						themeType="secondary"
 						onClick={() => setShowDuplicateModal(false)}
 						className={styles.btn_container}
-						loading={loading}
+						disabled={loading}
 					>
 						Cancel
 					</Button>
@@ -51,7 +51,7 @@ function DuplicateModal({
 						type="button"
 						style={{ marginLeft: '8px' }}
 						onClick={() => { handleDuplicateSubmit(); }}
-						loading={loading}
+						disabled={loading}
 					>
 						Duplicate
 					</Button>
