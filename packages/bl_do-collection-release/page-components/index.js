@@ -2,7 +2,6 @@ import { Tabs, TabPanel, cl, Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import ClickableDiv from '../commons/ClickableDiv';
 import STATIONARY_PERMISSIONS from '../configs/STATIONARY_PERMISSION.json';
@@ -73,7 +72,7 @@ export default function BLDoCollectionDesk() {
 						inner_tab        : item.value,
 						page             : 1,
 					})}
-					key={uuid()}
+					key={item?.value}
 				>
 					<div className={cl`${stateProps.inner_tab === item.value ? styles.active : ''} 
 				${styles.service_tab}`}

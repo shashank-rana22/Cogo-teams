@@ -1,6 +1,5 @@
 import { cl, Select, Toggle, Input } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
-import { v4 as uuid } from 'uuid';
 
 import ClickableDiv from '../../commons/ClickableDiv';
 import TAB_CONFIG from '../../configs/TAB_CONFIG.json';
@@ -26,7 +25,7 @@ export default function Filters({ setStateProps, stateProps }) {
 				TAB_CONFIG.SHIPMENT_TYPES.map((item) => (
 					<ClickableDiv
 						onClick={() => setStateProps({ ...stateProps, shipment_type: item.value, page: 1 })}
-						key={uuid()}
+						key={item?.value}
 					>
 						<div className={cl`${stateProps.shipment_type === item.value ? styles.active : ''} 
 						 ${styles.service_tab}`}

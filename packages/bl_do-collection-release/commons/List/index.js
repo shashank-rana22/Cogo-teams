@@ -29,7 +29,12 @@ export default function List({
 		</div>
 	);
 
-	return (isEmpty(list) ? <EmptyState /> : (
+	if (isEmpty(list)) {
+		return (
+			<EmptyState />
+		);
+	}
+	return (
 		<div className={styles.container}>
 			{renderPagination}
 			<div className={styles.list_container}>
@@ -48,6 +53,5 @@ export default function List({
 				{renderPagination}
 			</div>
 		</div>
-	)
 	);
 }
