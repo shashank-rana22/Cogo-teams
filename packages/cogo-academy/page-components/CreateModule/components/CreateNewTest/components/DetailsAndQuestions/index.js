@@ -27,7 +27,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		if (!idArray.length) {
+		if (isEmpty(idArray)) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
 			handleSubmit((values) => {
