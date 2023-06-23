@@ -9,26 +9,32 @@ import { formatLineItems, formatFirstLineItem } from '../helpers/revertPriceHelp
 const weightSlabs = (values) => {
 	const { price = 0, currency = '', weight_slabs = [] } = values || {};
 	const { lower_limit = '', upper_limit = '' } = weight_slabs[GLOBAL_CONSTANTS.zeroth_index];
-
 	return [{ currency, tariff_price: price, unit: 'per_kg', lower_limit, upper_limit }];
 };
 
-const getPayload = ({ lineItemsParams, values = {}, id }) => ({
-	line_items           : lineItemsParams,
-	shipping_line_id     : values.shipping_line_id || undefined,
-	airline_id           : values.airline_id || undefined,
-	price_type           : values.price_type || undefined,
-	operation_type       : values.operation_type || undefined,
-	is_reverted          : true,
-	id,
-	supplier_contract_no : values.supplier_contract_no || undefined,
-	validity_end         : values.validity_end || undefined,
-	sourced_by_id        : values.sourced_by_id,
-	remarks              : values.remarks || undefined,
-	chargeable_weight    : Number(values?.chargeable_weight) || undefined,
-	weight_slabs         : values.weight_slabs ? weightSlabs(values) : undefined,
+const getPayload = ({ lineItemsParams, values = {}, id, service_type = '' }) => {
+	const checkWeightSlabs = service_type === 'air_freight_service'
+	&& !isEmpty(values.weight_slabs?.[GLOBAL_CONSTANTS.zeroth_index].lower_limit);
+	return {
+		line_items                 : lineItemsParams,
+		shipping_line_id           : values.shipping_line_id || undefined,
+		airline_id                 : values.airline_id || undefined,
+		price_type                 : values.price_type || undefined,
+		operation_type             : values.operation_type || undefined,
+		is_reverted                : true,
+		id,
+		supplier_contract_no       : values.supplier_contract_no || undefined,
+		validity_end               : values.validity_end || undefined,
+		sourced_by_id              : values.sourced_by_id,
+		remarks                    : values.remarks || undefined,
+		chargeable_weight          : Number(values?.chargeable_weight) || undefined,
+		weight_slabs               : checkWeightSlabs ? weightSlabs(values) : undefined,
+		rate_procurement_proof_url : service_type === 'air_freight_service'
+			? values.rate_procurement_proof?.finalUrl : undefined,
+		schedule_type: values.schedule_type || undefined,
 
-});
+	};
+};
 
 const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -36,7 +42,7 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 		method : 'post',
 	}, { manual: true });
 
-	const { line_items = [], id = '' } = item || {};
+	const { line_items = [], id = '', service_type } = item || {};
 
 	const handleRevertPrice = async (values) => {
 		try {
@@ -54,7 +60,7 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 			}
 
 			await trigger({
-				data: getPayload({ lineItemsParams, values, id }),
+				data: getPayload({ lineItemsParams, values, id, service_type }),
 			});
 
 			Toast.success('Price successfully reverted.');

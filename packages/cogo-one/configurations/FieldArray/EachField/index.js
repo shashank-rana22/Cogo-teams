@@ -1,17 +1,14 @@
-import { ButtonIcon } from '@cogoport/components';
-import { IcMDelete } from '@cogoport/icons-react';
-
-import { getFieldController } from '../../../utils/getFieldController';
+import { getSpecifiedController } from '../../../utils/getSpecifiedController';
 import styles from '../styles.module.css';
 
 function EachField({
-	field, controls, parentName, index, control, error, remove, showButton = false,
+	field, controls, parentName, index, control, error,
 }) {
 	return (
 		<>
 			{controls.map((eachControl) => {
 				const { controlType, name } = eachControl;
-				const EleController = getFieldController(controlType) || null;
+				const EleController = getSpecifiedController(controlType) || null;
 				if (!EleController) {
 					return null;
 				}
@@ -26,19 +23,10 @@ function EachField({
 							source="edit_line_items"
 							label={eachControl?.label}
 							error={error?.[eachControl.name]}
-							showButton={showButton}
 						/>
 					</div>
 				);
 			})}
-
-			{showButton && (
-				<ButtonIcon
-					size="xl"
-					icon={<IcMDelete width={5} height={5} />}
-					onClick={() => remove(index)}
-				/>
-			)}
 
 		</>
 	);

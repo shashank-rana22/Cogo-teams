@@ -3,6 +3,7 @@ import { addDays } from '@cogoport/utils';
 
 import ActiveControlsMapping from './active-controls-mapping';
 
+const MAX_WEIGHT_SLAB = 500;
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
 
@@ -12,6 +13,7 @@ const useGetRevertFormControls = ({ data, watch }) => {
 	const {
 		service_type,
 		service_provider_id,
+		service = {},
 	} = data || {};
 
 	const isChargeableWeight = watch('chargeable_weight');
@@ -20,20 +22,16 @@ const useGetRevertFormControls = ({ data, watch }) => {
 
 	const controls = [
 		{
-			label       : 'Service Provider',
-			name        : 'service_provider_id',
-			placeholder : 'Select Service Provider',
-			controlType : 'asyncSelect',
-			isClearable : true,
-			rules       : { required: 'Service Provider is required' },
-			asyncKey    : 'organizations',
-			initialCall : true,
-			params      : {
-				filters: {
-					service_type:
-					service_type === 'air_freight_service' ? service_type : undefined,
-				},
-			},
+			name    : 'schedule_type',
+			label   : 'Schedule Type',
+			type    : 'select',
+			options : [
+				{ label: 'Transhipment', value: 'transhipment' },
+				{ label: 'Direct', value: 'direct' },
+			],
+			placeholder : 'Select Schedule Type',
+			rules       : { required: true },
+			value       : 'direct',
 		},
 		{
 			label       : 'Rate Provided by user',
@@ -89,8 +87,8 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			label       : 'Chargeable Weight',
 			controlType : 'input',
 			type        : 'number',
+			value       : service?.chargeable_weight,
 			placeholder : 'Enter Chargeable Weight',
-			value       : 0,
 			rules       : { required: 'Chargeable Weight is required' },
 		},
 		{
@@ -175,6 +173,11 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			controlType : 'datePicker',
 			minDate     : addDays(new Date(), MIN_DAYS_FOR_VALIDITY),
 			placeholder : 'Select a date',
+			rules       : {
+				required:
+					service_type === 'air_freight_service'
+					&& isChargeableWeight < MAX_WEIGHT_SLAB,
+			},
 
 		},
 		{

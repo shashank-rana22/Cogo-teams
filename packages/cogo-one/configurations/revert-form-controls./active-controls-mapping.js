@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const MIN_CHARGEABLE_WEIGHT = 45;
 const MAX_WEIGHT_SLAB = 500;
+
 const ActiveControlsMapping = ({ isChargeableWeight }) => {
 	const airServiceField = [
 		'sourced_by_id', 'airline_id',
