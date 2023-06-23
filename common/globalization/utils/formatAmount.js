@@ -7,11 +7,18 @@ const geo = getGeoConstants();
 
 const LOCALE_CURRENCY_ABBR_MAPPING = {
 	'en-IN': {
-		T: 'K',
+		split_key   : '',
+		replace_key : {
+			T: 'K',
+		},
+
 	},
 	'vi-VN': {
-		Tr : 'M',
-		T  : 'B',
+		split_key   : GLOBAL_CONSTANTS.regex_patterns.white_space,
+		replace_key : {
+			Tr : 'M',
+			T  : 'B',
+		},
 	},
 };
 
@@ -51,12 +58,10 @@ const formatCurrency = ({ amount, locale, options }) => {
 
 	let formattedAmount = amount;
 
-	const splittedAmount = formattedAmount.split(GLOBAL_CONSTANTS.regex_patterns.white_space);
+	const splittedAmount = formattedAmount.split(LOCALE_CURRENCY_ABBR_MAPPING[locale].split_key);
 
-	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale]).forEach(([current, newVal]) => {
-		if (amount.includes('T') && locale === 'en-IN') {
-			formattedAmount = amount.replace(current, newVal);
-		} else if (splittedAmount.includes(current)) {
+	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale].replace_key).forEach(([current, newVal]) => {
+		if (splittedAmount.includes(current)) {
 			formattedAmount = amount.replace(current, newVal);
 		}
 	});
