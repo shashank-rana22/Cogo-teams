@@ -50,9 +50,7 @@ function DuplicateModal({
 					<Button
 						type="button"
 						style={{ marginLeft: '8px' }}
-						onClick={() => {
-							handleDuplicateSubmit();
-						}}
+						onClick={() => { handleDuplicateSubmit(); }}
 						loading={loading}
 					>
 						Duplicate
