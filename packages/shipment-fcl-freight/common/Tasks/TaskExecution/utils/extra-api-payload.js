@@ -11,7 +11,7 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
-const DEFAULT_VALUE = 1;
+const DEFAULT_VALUE_FOR_NUMBER_KEYS = 1;
 
 const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'send_nomination_notification') {
@@ -70,7 +70,7 @@ const extraApiPayload = (values, end_point, task) => {
 							}
 						} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(lineItem)) {
 							if (NUMBER_KEYS.includes(lineItem)) {
-								DATA[lineItem] = Number(values[key][index][lineItem] || DEFAULT_VALUE);
+								DATA[lineItem] = Number(values[key][index][lineItem] || DEFAULT_VALUE_FOR_NUMBER_KEYS);
 							} else {
 								DATA[lineItem] = values[key][index][lineItem];
 							}
@@ -78,7 +78,7 @@ const extraApiPayload = (values, end_point, task) => {
 					});
 				} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(key)) {
 					if (NUMBER_KEYS.includes(key)) {
-						DATA[key] = Number(values[key] || DEFAULT_VALUE);
+						DATA[key] = Number(values[key] || DEFAULT_VALUE_FOR_NUMBER_KEYS);
 					} else {
 						DATA[key] = values[key];
 					}
