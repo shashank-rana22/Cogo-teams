@@ -1,0 +1,82 @@
+.current_payment_row {
+	display: flex;
+	margin-bottom: 2rem;
+
+	.current_payment_cols {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		.heading {
+			color: #6a6a6a;
+			white-space: nowrap;
+		}
+
+		.value {
+			font-weight: 500;
+			color: #221f20;
+		}
+	}
+}
+
+.payment_history_heading {
+	font-weight: 600;
+	color: #231f20;
+}
+
+.payment_history_list {
+	margin-block: 1rem;
+	border: 1px solid #f3f3f3;
+	border-radius: 5px;
+
+	.row {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		padding-inline: 10px;
+		font-size: 12px;
+		color: #333;
+		text-transform: capitalize;
+
+		.col {
+			flex: 1;
+			padding-block: 0.5rem;
+		}
+	}
+
+	.row:not(:first-of-type):nth-of-type(odd) {
+		background: #fbfaf9;
+	}
+
+	.heading_row {
+		font-weight: 600;
+		color: #c26d1a;
+		background: #fffaee;
+	}
+}
+
+.user_input_row {
+	display: flex;
+	margin-block: 1rem;
+
+	> .item {
+		flex: 0.35;
+		flex-grow: 0;
+		margin-inline: 5px;
+	}
+}
+
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.location {
+	width: 25%;
+	margin: 6px 0;
+}
+
+.form_item_container {
+	width: 25%;
+	margin-top: 6px;
+	margin-left: 20px;
+}
