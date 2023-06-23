@@ -1077,6 +1077,19 @@ const partner = {
 			service_name : 'contract',
 		},
 		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_organization_payment_modes',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+
+		{
 			api          : 'get_domestic_contract',
 			access_type  : 'private',
 			feature      : 'demand_crm',
