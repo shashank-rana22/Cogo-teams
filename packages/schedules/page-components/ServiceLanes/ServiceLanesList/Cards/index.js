@@ -2,10 +2,16 @@ import styles from "./styles.module.css";
 import ShippingLineDetails from "./ShippingLineDetails";
 import PortPair from "./PortPairs";
 import TimeTable from "./TimeTable";
+import { useRouter } from "@cogoport/next";
 
 function Cards({ item, mapTab, setMapTab }) {
+    const { push } = useRouter();
     const onClickHandle = () => {
         setMapTab(item);
+        push(
+            "/schedules/service-lanes/[id]",
+            `/schedules/service-lanes/${item?.id}`
+        );
     };
 
     return (

@@ -20,7 +20,7 @@ function ShippingLineDetails({ item }) {
 
             <div className={styles.date_type}>
                 <div>
-                    <Toggler />
+                    <Toggler item={item} />
                 </div>
                 <div className={styles.updated_on}>
                     Updated On :{" "}

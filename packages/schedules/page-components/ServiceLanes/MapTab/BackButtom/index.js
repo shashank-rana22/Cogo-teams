@@ -1,10 +1,13 @@
+import { useRouter } from "@cogoport/next";
 import styles from "./styles.module.css";
 import { IcMArrowBack } from "@cogoport/icons-react";
 
-function BackButton({ mapTab, setMapTab }) {
+function BackButton() {
+    const { push } = useRouter();
     const onClickHandle = () => {
-        setMapTab(null);
+        push("/schedules/service-lanes/", `/schedules/service-lanes`);
     };
+    // console.log("mapTab: ", mapTab);
     return (
         <div
             className={styles.container}
