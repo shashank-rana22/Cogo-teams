@@ -20,7 +20,7 @@ function Header({
 	const handleOnChangeSort = (item: FieldType, sortType) => {
 		const fieldType = item.sorting!.name;
 		setSort(() => ({
-			[fieldType]: sort?.[fieldType] === sortType,
+			[fieldType]: sortType,
 		}));
 	};
 
@@ -36,15 +36,19 @@ function Header({
 					{field.label}
 					{field.sorting && (
 						<>
-							<div className={styles.center}>
+							<div className={`${styles.up_icon} ${Object.values(sort || {})?.includes('asc')
+								? styles.is_active
+								: null} `}
+							>
 								<IcMArrowRotateUp
-									className={styles.asc}
 									onClick={() => handleOnChangeSort(field, 'asc')}
 								/>
 							</div>
-							<div className={styles.centers}>
+							<div className={`${styles.down_icon} ${Object.values(sort || {})?.includes('desc')
+								? styles.is_active
+								: null} `}
+							>
 								<IcMArrowRotateDown
-									className={styles.desc}
 									onClick={() => handleOnChangeSort(field, 'desc')}
 								/>
 							</div>

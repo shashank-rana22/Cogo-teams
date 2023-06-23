@@ -2,7 +2,7 @@ import PieData from './PieData';
 import styles from './styles.module.css';
 
 interface Props {
-	dropdown?: string;
+	dropdown?: string[];
 	rowId?: string;
 	data?: object[];
 }

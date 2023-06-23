@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 
 interface Props {
 	uncheckedRows?: string[];
-	setUncheckedRows?: Function;
+	setUncheckedRows?: React.Dispatch<React.SetStateAction<string[]>>;
 	formData?: object;
-	setFormData?: Function;
+	setFormData?: React.Dispatch<React.SetStateAction<object>>;
 }
 
 function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormData }:Props) {
