@@ -878,6 +878,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.business_finance_dashboard,
 			},
 			{
+				key           : 'business_finance-dunnings',
+				title         : 'Dunnings',
+				href          : '/v2/business-finance/dunnings/[active_tab]',
+				as            : '/v2/business-finance/dunnings/campaign-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.business_finance_dunnings,
+			},
+			{
 				key           : 'business_finance-manual_invoice',
 				title         : 'Manual Invoice',
 				href          : '/business-finance/manual-invoice',
@@ -1140,6 +1149,15 @@ const navigationMappingAdmin = {
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+			},
+			{
+				key           : 'coe-shipment_air',
+				title         : 'Air Booking Desk',
+				href          : '/v2/booking-desk/air',
+				as            : '/v2/booking-desk/air',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : [...apis.shipment],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1566,7 +1584,7 @@ const navigationMappingAdmin = {
 				href          : '/cogo-assured/fcl_freight_local',
 				as            : '/cogo-assured/fcl_freight_local',
 				type          : 'link',
-				possible_apis : apis.cogo_assured,
+				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
 
 				main_apis: [],
 			},
@@ -2295,6 +2313,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/saas-tools/standard-milestones',
 				possible_apis : apis.saas_tools_standard_milestones,
 			},
+			{
+				key           : 'saas_tools-vessel_tracking',
+				title         : 'Live Vessel Tracking',
+				href          : '/v2/saas-tools/live-vessel-tracking',
+				as            : '/v2/saas-tools/live-vessel-tracking',
+				possible_apis : apis.saas_live_vessel_tracking,
+			},
 		],
 	},
 	new_employee_dashboard: {
@@ -2366,12 +2391,20 @@ const navigationMappingAdmin = {
 		main_apis   : [],
 		options     : [
 			{
-				key           : 'referral-dashboard',
+				key           : 'referral-referral_dashboard',
 				title         : 'Dashboard',
 				href          : '/v2/referral/dashboard',
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-referral_configuration',
+				title         : 'Configuration',
+				href          : '/v2/referral/configuration',
+				as            : '/v2/referral/configuration',
+				type          : 'link',
+				possible_apis : apis.referral_config,
 			},
 			{
 				key           : 'referral-simulation',
@@ -2380,6 +2413,14 @@ const navigationMappingAdmin = {
 				as            : '/v2/referral/simulation',
 				type          : 'link',
 				possible_apis : apis.referral_simulation,
+			},
+			{
+				key           : 'referral-referral_analytics',
+				title         : 'Analytics',
+				href          : '/v2/referral/analytics',
+				as            : '/v2/referral/analytics',
+				type          : 'link',
+				possible_apis : apis.referral_analytics,
 			},
 		],
 	},

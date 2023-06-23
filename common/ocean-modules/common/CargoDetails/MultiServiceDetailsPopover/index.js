@@ -5,8 +5,11 @@ import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
+const MIN_MAIN_SERVICE_LENGTH = 1;
+const MAIN_SERVICE_FIRST_INDEX = 0;
+
 function MultiServiceDetailsPopover({
-	children = {},
+	children = null,
 	mainServices = [],
 }) {
 	const keysForServices = useMemo(
@@ -14,12 +17,12 @@ function MultiServiceDetailsPopover({
 		[mainServices.length],
 	);
 
-	if (mainServices?.length <= 1) {
+	if (mainServices?.length <= MIN_MAIN_SERVICE_LENGTH) {
 		return null;
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item, idx) => (idx !== 0 ? (
+		mainServices?.map((item, idx) => (idx !== MAIN_SERVICE_FIRST_INDEX ? (
 			<div className={styles.container} key={keysForServices[idx]}>
 				<RenderCargoPills detail={item} />
 			</div>
@@ -35,7 +38,6 @@ function MultiServiceDetailsPopover({
 			<div className={styles.tooltip_customise}>
 				{children}
 			</div>
-
 		</Tooltip>
 	);
 }
