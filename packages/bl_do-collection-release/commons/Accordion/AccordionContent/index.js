@@ -31,11 +31,7 @@ export default function AccordionContent({
 		text  : 'initial_step',
 		count : 0,
 	});
-	let accordianTab = 'invoice';
-	if (showTask) {
-		accordianTab = 'tasks';
-	}
-	const [activeAccordionTab, setActiveAccordionTab] = useState(accordianTab);
+	const [activeAccordionTab, setActiveAccordionTab] = useState(showTask ? 'tasks' : 'invoice');
 
 	const formRef = useRef(null);
 
@@ -153,7 +149,7 @@ export default function AccordionContent({
 		return (
 			<div className={styles.container}>
 				<Tabs
-					className="horizontal two"
+					themeType="tertiary"
 					activeTab={activeAccordionTab}
 					onChange={setActiveAccordionTab}
 				>

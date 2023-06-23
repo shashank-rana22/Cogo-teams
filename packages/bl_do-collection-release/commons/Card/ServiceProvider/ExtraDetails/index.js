@@ -63,7 +63,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 				const { collection_details, collection_mode = '-' } = itemData || {};
 				const { name = '-', tracking_id = '-' } = collection_details || {};
 				renderElem = (
-					<div className={styles.collection}>
+					<div className={styles.collection} key={tracking_id}>
 						<div className={styles.collection_box}>
 							<div className={cl`${styles.text} ${styles.thin}`}>Collected By</div>
 
@@ -107,7 +107,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 				}
 
 				renderElem = (
-					<div className={styles.delivery_mode}>
+					<div className={styles.delivery_mode} key={tracking_id}>
 						<div className={styles.left}>
 							<div className={cl`${styles.text} ${styles.thin}`}>Status</div>
 
@@ -152,7 +152,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 				const isSurrendered = (itemData?.status || []).includes('surrendered');
 
 				renderElem = (
-					<div className={styles.collection}>
+					<div className={styles.collection} key={tracking_id}>
 						{isSurrendered ? (
 							<div>
 								<div className={cl`${styles.text} ${styles.thin}`}>Mode of Delivery</div>

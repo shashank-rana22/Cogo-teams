@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import { v4 as uuid } from 'uuid';
 
 import renderTooltip from '../../../renderTooltip';
 
@@ -28,7 +27,7 @@ export default function BLPopver({ bl_do = '', blDetails = [] }) {
 				const { collection_details, collection_mode = '-', bl_number = '-' } = item || {};
 				const { name = '-' } = collection_details || {};
 				return (
-					<div className={cl`${styles.container} ${styles.card}`} key={uuid()}>
+					<div className={cl`${styles.container} ${styles.card}`} key={bl_number}>
 						<div className={styles.item_content}>{bl_number}</div>
 						<div className={styles.item_content}>
 							{COLLECTION_MODE[collection_mode]}
