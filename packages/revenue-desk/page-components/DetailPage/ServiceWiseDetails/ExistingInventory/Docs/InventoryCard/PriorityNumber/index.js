@@ -15,7 +15,7 @@ function PriorityNumber({ data, id }) {
 			className={styles.container}
 			style={{ background: show ? '#4F4F4F' : null }}
 		>
-			{show ? <div className={styles.text} /> : null}
+			{show ? <div className={styles.text}>{priority + 1}</div> : null}
 		</div>
 	);
 }

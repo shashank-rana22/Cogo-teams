@@ -5,6 +5,7 @@ import getAvailableRatesDetails from '../../../helper/getAvailableRatesDetails';
 import getFormatedRates from '../../../helper/getFormatedRates';
 import getSellRateDetailPayload from '../../../helper/getSellRateDetailPayload';
 import getSystemFormatedRates from '../../../helper/getSystemFormatedRates';
+import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
@@ -57,6 +58,10 @@ function SingleService({
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
+	});
+	const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
+		shipmentData,
+		singleServiceData,
 	});
 
 	const options = [];
@@ -140,8 +145,8 @@ function SingleService({
 							/>
 						) : null}
 					<ExistingInventory
-						docs={ratesData?.eligible_booking_document?.docs}
-						loading={ratesLoading}
+						docs={existingData?.docs}
+						loading={existingDataLoading}
 						prefrences={inventory}
 						setPrefrences={setInventory}
 						serviceId={singleServiceData?.id}

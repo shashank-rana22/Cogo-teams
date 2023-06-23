@@ -25,9 +25,9 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.via_route = element?.destination_main_port?.name;
 			rowData.allocation_ratio = undefined;
 			rowData.fulfillment_ratio = 0;
-			rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20;
-			rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
-			rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
+			rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_2;
+			rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_7;
+			rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_15;
 			rowData.total_price_in_preferred_currency = element?.reverted_price_in_preferred_currency;
 			rowData.preferred_currency = element?.preferred_currency;
 			rowData.remarks = element?.remarks;

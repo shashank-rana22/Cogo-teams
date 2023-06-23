@@ -159,11 +159,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
-	{
-		api          : 'list_revenue_desk_available_rates',
-		access_type  : 'private',
-		service_name : 'revenue_desk',
-	},
+	// {
+	// 	api          : 'list_revenue_desk_showed_available_rates',
+	// 	access_type  : 'private',
+	// 	service_name : 'revenue_desk',
+	// },
 	{
 		api          : 'get_customers_last_shipment_details',
 		access_type  : 'private',
@@ -243,6 +243,11 @@ const apis = [
 	},
 	{
 		api          : 'list_shipment_currency_conversions',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_elligible_booking_document',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

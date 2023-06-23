@@ -86,8 +86,8 @@ const useUpdateRatesPreferences = ({
 		try {
 			await trigger({
 				data: {
-					shipment_id           : shipmentData?.id,
-					remarks               : othertext || reason,
+					shipment_id            : shipmentData?.id,
+					remarks                : othertext || reason,
 					revenue_desk_decisions : revenueDeskDecision,
 
 				},

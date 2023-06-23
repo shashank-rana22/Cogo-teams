@@ -1,3 +1,4 @@
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import getRows from './getRows';
@@ -12,7 +13,7 @@ const columns = [
 	'Sailing Date',
 	'Booking Party',
 ];
-function InventoryCard({ type, data: details, preferences, setPreferences, expanded, serviceId }) {
+function InventoryCard({ type, data: details, preferences, setPreferences, serviceId }) {
 	const key = type[1];
 	const rowKeyMapping = {
 		splitable_booking_notes: getRows({
@@ -31,10 +32,8 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 	const [showAll, setShowAll] = useState(false);
 	const currentData = rowKeyMapping[key];
 	const inceremt = 4;
-	const min = currentData?.length > inceremt ? inceremt : currentData?.length;
-	const len = showAll ? currentData?.length : min;
-	const sliceLength = expanded ? currentData?.length : len;
-	const currentDataRows = currentData?.slice(0, sliceLength);
+	const currentDataRows = showAll ? currentData : currentData?.slice(0, inceremt);
+	const expandable = currentData?.length > inceremt;
 
 	const renderSingle = key === 'single_booking_notes';
 	const showData = (val) => val || '';
@@ -120,7 +119,6 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 				<PriorityNumber
 					data={preferences?.[serviceId]}
 					id={element?.id}
-					showPriority={false}
 				/>
 			</div>
 
@@ -145,8 +143,14 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 					</div>
 
 					<div className={styles.addmore} role="presentation" onClick={() => setShowAll(!showAll)}>
-						{currentData?.length > min && !expanded ? (
-							<div>{showAll && currentData?.length ? 'See Less' : 'See More'}</div>
+						{currentData?.length > inceremt && expandable ? (
+							<div className={styles.show_container}>
+								{showAll && currentData?.length ? (
+									'See Less'
+								) : (
+									'See More'
+								)}
+							</div>
 						) : null}
 					</div>
 				</div>

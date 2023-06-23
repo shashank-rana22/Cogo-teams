@@ -66,7 +66,7 @@ function ShipmentCard({ itemData, priceData }) {
 						Sell Price:
 						<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '3px' }}>
 							{!priceData?.sell_price
-								? <Placeholder width="150px" height="25px" />
+								? <Placeholder width="100px" height="25px" />
 								: formatAmount({
 									amount   : priceData?.sell_price?.[1],
 									currency : priceData?.sell_price?.[0],
@@ -80,7 +80,7 @@ function ShipmentCard({ itemData, priceData }) {
 						<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 						<span style={{ fontWeight: '700', color: '#221F20' }}>
 							{!priceData?.sell_price
-								? <Placeholder width="150px" height="25px" />
+								? <Placeholder width="100px" height="25px" />
 								: formatAmount({
 									amount: Number(priceData?.sell_price?.[1])
 									/ Number(priceData?.exchange_rate),
@@ -99,7 +99,7 @@ function ShipmentCard({ itemData, priceData }) {
 								Sell Price/Contr.:
 								<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '3px' }}>
 									{!priceData?.sell_price
-										? <Placeholder width="150px" height="25px" />
+										? <Placeholder width="80px" height="25px" />
 										: formatAmount({
 											amount: Number(priceData?.sell_price?.[1])
 											/ Number(itemData?.containers_count),
@@ -114,7 +114,7 @@ function ShipmentCard({ itemData, priceData }) {
 								<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 								<span style={{ fontWeight: '700', color: '#221F20' }}>
 									{!priceData?.sell_price
-										? <Placeholder width="150px" height="25px" />
+										? <Placeholder width="80px" height="25px" />
 										: formatAmount({
 											amount: (Number(priceData?.sell_price?.[1])
 											/ Number(itemData?.containers_count))

@@ -1,6 +1,6 @@
 import getFormatedNotPreferenceData from '../../../../helper/getFormatedNotPreferenceData';
 import getFormatedPreferenceSetData from '../../../../helper/getFormatedPreferenceSetData';
-import useListRevenueDeskShowedRates from '../../../../hooks/useListRevenueDeskShowedRates';
+import useListRevenueDeskAvailableRates from '../../../../hooks/useListRevenueDeskAvailableRates';
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../hooks/useListShipmentBookingConfirmationPreferences';
 
@@ -12,7 +12,7 @@ function PreferenceSetServiceData({ singleServiceData, shipmentData }) {
 		singleServiceData,
 		shipmentData,
 	});
-	const { data:ratesDataNotPrefered, loading:show_rates_loading } = useListRevenueDeskShowedRates({
+	const { data:ratesDataNotPrefered, loading:show_rates_loading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
 	});

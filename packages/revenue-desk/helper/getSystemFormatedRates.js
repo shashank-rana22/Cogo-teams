@@ -1,5 +1,3 @@
-import { startCase } from '@cogoport/utils';
-
 const getSystemFormatedRates = (data, singleServiceData) => {
 	const container_count = singleServiceData?.containers_count || 1;
 	const rows = [];
@@ -17,10 +15,9 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.allocation_ratio = undefined;
 		rowData.buy_price = Number(element?.total_price) / Number(container_count);
-		rowData.fulfillment_ratio = 0;
-		rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20;
-		rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
-		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
+		rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_2;
+		rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_7;
+		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_15;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
 		rowData.total_price_in_preferred_currency = element?.total_price_in_preferred_currency;

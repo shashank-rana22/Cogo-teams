@@ -15,7 +15,6 @@ function Docs({ data, preferences, setPreferences, serviceId }) {
 					<InventoryCard
 						type={type}
 						data={data}
-						expanded
 						preferences={preferences}
 						setPreferences={setPreferences}
 						serviceId={serviceId}
