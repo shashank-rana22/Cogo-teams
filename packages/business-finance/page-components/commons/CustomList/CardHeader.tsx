@@ -27,35 +27,38 @@ function Header({
 	return (
 		<header className={styles.header} style={headerStyles}>
 			{showHeaderCheckbox && renderHeaderCheckbox()}
-			{(fields || []).map((field) => (
-				<div
-					key={String(field?.label)}
-					className={`${styles.col} ${field.className || ''}`}
-					style={{ '--span': field.span || 1 } as React.CSSProperties}
-				>
-					{field.label}
-					{field.sorting && (
-						<>
-							<div className={`${styles.up_icon} ${Object.values(sort || {})?.includes('asc')
-								? styles.is_active
-								: null} `}
-							>
-								<IcMArrowRotateUp
-									onClick={() => handleOnChangeSort(field, 'asc')}
-								/>
-							</div>
-							<div className={`${styles.down_icon} ${Object.values(sort || {})?.includes('desc')
-								? styles.is_active
-								: null} `}
-							>
-								<IcMArrowRotateDown
-									onClick={() => handleOnChangeSort(field, 'desc')}
-								/>
-							</div>
-						</>
-					)}
-				</div>
-			))}
+			{(fields || []).map((field) => {
+				const { label, className, sorting } = field || {};
+				return (
+					<div
+						key={String(label)}
+						className={`${styles.col} ${className || ''}`}
+						style={{ '--span': field.span || 1 } as React.CSSProperties}
+					>
+						{label}
+						{sorting && (
+							<>
+								<div className={`${styles.up_icon} ${sort[sorting?.name] === 'asc'
+									? styles.is_active
+									: null} `}
+								>
+									<IcMArrowRotateUp
+										onClick={() => handleOnChangeSort(field, 'asc')}
+									/>
+								</div>
+								<div className={`${styles.down_icon} ${sort[sorting?.name] === 'desc'
+									? styles.is_active
+									: null} `}
+								>
+									<IcMArrowRotateDown
+										onClick={() => handleOnChangeSort(field, 'desc')}
+									/>
+								</div>
+							</>
+						)}
+					</div>
+				);
+			})}
 		</header>
 	);
 }
