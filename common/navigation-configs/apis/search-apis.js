@@ -455,6 +455,20 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+		module       : 'insurance',
+		feature      : 'insurance',
+	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+		module       : 'insurance',
+		feature      : 'insurance',
+	},
+	{
 		api         : 'get_saas_hs_code_list',
 		access_type : 'private',
 		module      : 'hs-code',
