@@ -34,7 +34,7 @@ function OceanScheduleCoverage() {
         <>
             {!isPortToPort && (
                 <>
-                    <Filter filters={filters} setFilters={setFilters} />
+                    <Filter filters={filters} setFilters={setFilters} setCurrentPage={setCurrentPage} />
                     <div style={{ padding: "8px" }} />
                     <div className={styles.styled_table}>
                         {(data || []).length || loading ? (
