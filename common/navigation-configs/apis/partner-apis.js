@@ -1079,7 +1079,7 @@ const partner = {
 		{
 			api          : 'onboard_credit_application',
 			access_type  : 'private',
-			feature      : 'demand_crm',
+			feature      : 'credit',
 			service_name : 'credit',
 		},
 		{
