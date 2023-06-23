@@ -86,8 +86,8 @@ const extraApiPayload = (values, end_point, task) => {
 			});
 
 			return {
-				service_id: item,
-				DATA,
+				service_id : item,
+				data       : DATA,
 			};
 		});
 
