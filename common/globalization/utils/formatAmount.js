@@ -6,6 +6,9 @@ import GLOBAL_CONSTANTS from '../constants/globals';
 const geo = getGeoConstants();
 
 const LOCALE_CURRENCY_ABBR_MAPPING = {
+	'en-IN': {
+		T: 'K',
+	},
 	'vi-VN': {
 		Tr : 'M',
 		T  : 'B',
@@ -14,10 +17,10 @@ const LOCALE_CURRENCY_ABBR_MAPPING = {
 
 const isAmountValid = ({ amount }) => !(
 	amount === null
-		|| Array.isArray(amount)
-		|| typeof amount === 'boolean'
-		// eslint-disable-next-line no-restricted-globals
-		|| isNaN(amount)
+        || Array.isArray(amount)
+        || typeof amount === 'boolean'
+        // eslint-disable-next-line no-restricted-globals
+        || isNaN(amount)
 );
 
 const getCurrencyLocale = ({ currency }) => {
@@ -51,6 +54,10 @@ const formatCurrency = ({ amount, locale, options }) => {
 	const splittedAmount = formattedAmount.split(GLOBAL_CONSTANTS.regex_patterns.white_space);
 
 	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale]).forEach(([current, newVal]) => {
+		if (amount.includes('T') && locale === 'en-IN') {
+			formattedAmount = amount.replace(current, newVal);
+		}
+
 		if (splittedAmount.includes(current)) {
 			formattedAmount = amount.replace(current, newVal);
 		}

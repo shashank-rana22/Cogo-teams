@@ -6,7 +6,6 @@ import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListCogoEntities from '../../AccountPayables/Dashboard/hooks/useListCogoEntities';
-// import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
 import Defaulters from './Defaulters';
@@ -31,7 +30,7 @@ function AccountReceivables() {
 
 	const entity = getDefaultEntityCode(partnerId);
 
-	const [activeEntity, setActiveEntity] = useState(entity);
+	const [entityCode, setEntityCode] = useState(entity);
 
 	const handleChange = (val:string) => {
 		setReceivables(val);
@@ -43,11 +42,11 @@ function AccountReceivables() {
 	const { loading, entityData = [] } = useListCogoEntities();
 
 	const EntityOptions = (entityData || []).map((item:ItemProps) => {
-		const { business_name:companyName = '', entity_code:entityCode = '' } = item || {};
+		const { business_name:companyName = '', entity_code:listEntityCode = '' } = item || {};
 
 		return {
-			label : `${upperCase(companyName)} (${entityCode})`,
-			value : entityCode,
+			label : `${upperCase(companyName)} (${listEntityCode})`,
+			value : listEntityCode,
 		};
 	});
 
@@ -67,8 +66,8 @@ function AccountReceivables() {
 						<div className={styles.input}>
 							<Select
 								name="business_name"
-								onChange={(entityVal: string) => setActiveEntity(entityVal)}
-								value={activeEntity}
+								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								value={entityCode}
 								options={EntityOptions}
 								placeholder="Select Entity Code"
 								size="sm"
@@ -85,17 +84,17 @@ function AccountReceivables() {
 					themeType="primary"
 				>
 					<TabPanel name="dashboard" title="Dashboard">
-						<Dashboard entityCode={activeEntity} />
+						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						<Invoice entityCode={activeEntity} />
+						<Invoice entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
-						<Outstanding entityCode={activeEntity} />
+						<Outstanding entityCode={entityCode} />
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						<Defaulters entityCode={activeEntity} />
+						<Defaulters entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						<ManageBpr />

@@ -15,12 +15,16 @@ const GLOBAL_CONSTANTS = {
 		USD : 'en-US',
 		VND : 'vi-VN',
 		AED : 'en-AE',
+		SGD : 'en-SG',
+
 	},
 	currency_symbol: {
 		USD : '$',
 		INR : '₹',
 		VND : '₫',
 		AED : 'AED',
+		SGD : '$',
+
 	},
 	formats: {
 		date: {
