@@ -31,11 +31,11 @@ export default function AccordionContent({
 		text  : 'initial_step',
 		count : 0,
 	});
-	let AccordianTab = 'invoice';
+	let accordianTab = 'invoice';
 	if (showTask) {
-		AccordianTab = 'tasks';
+		accordianTab = 'tasks';
 	}
-	const [activeAccordionTab, setActiveAccordionTab] = useState(AccordianTab);
+	const [activeAccordionTab, setActiveAccordionTab] = useState(accordianTab);
 
 	const formRef = useRef(null);
 
