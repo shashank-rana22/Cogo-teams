@@ -9,8 +9,6 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-const MIN_LENGTH = 0;
-
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
@@ -29,7 +27,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		if (idArray.length === MIN_LENGTH) {
+		if (!idArray.length) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
 			handleSubmit((values) => {
