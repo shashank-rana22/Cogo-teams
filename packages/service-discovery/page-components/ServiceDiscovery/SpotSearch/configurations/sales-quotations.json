@@ -89,8 +89,7 @@
 			{
 				"name": "selected_source",
 				"label": "Select Source",
-				"type": "select",
-				"multiple": true,
+				"type": "multi-select",
 				"options": [
 					{
 						"label": "Spot Search",

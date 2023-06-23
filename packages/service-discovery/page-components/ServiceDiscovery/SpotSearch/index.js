@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function SpotSearch() {
 	const [organization, setOrganization] = useState({});
 	const [selectedMode, setSelectedMode] = useState({});
-	const [selectedService, setSelectedService] = useState('');
+	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
@@ -49,8 +49,8 @@ function SpotSearch() {
 					<div className={styles.locations}>
 						<Routes
 							mode={selectedMode}
-							location={location}
-							setLocation={setLocation}
+							formValues={location}
+							setFormValues={setLocation}
 							organization={organization}
 							handleSubmit={handleSubmit}
 							errors={errors}
@@ -72,6 +72,22 @@ function SpotSearch() {
 					setSelectedMode={setSelectedMode}
 				/>
 			</div>
+
+			{isEmpty(selectedService) ? null : (
+				<div className={styles.locations}>
+					<Routes
+						mode={selectedService}
+						formValues={location}
+						setFormValues={setLocation}
+						organization={organization}
+						handleSubmit={handleSubmit}
+						errors={errors}
+						watch={watch}
+						createSearch={createSearch}
+						createSearchLoading={loading}
+					/>
+				</div>
+			)}
 
 		</div>
 	);

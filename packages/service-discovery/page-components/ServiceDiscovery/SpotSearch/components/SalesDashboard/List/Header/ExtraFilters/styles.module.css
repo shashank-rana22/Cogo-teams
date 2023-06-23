@@ -2,6 +2,13 @@
 	display: flex;
 	align-items: center;
 }
+.service_select{
+	:global{
+		.ui_select_toggle_button{
+			min-width: 180px;
+		}
+	}
+}
 .date_filter_wrap{
     border: 1px solid #e0e0e0;
 	border-radius: 10px;
