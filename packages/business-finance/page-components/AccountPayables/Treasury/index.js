@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import StyledTable from '../../commons/StyledTable';
 
+import EntityConfig from './Configuration/EntityConfig';
 import Header from './Header';
 import useGetEntityList from './hooks/useGetEntityList';
 import SelectFilters from './SelectFilters';
@@ -17,6 +18,8 @@ function Treasury() {
 		setEntityFilters,
 	} = useGetEntityList();
 
+	const { list = [] } = entityListData || {};
+
 	console.log('entityListData', entityListData);
 
 	console.log('reportsListData', reportsListData);
@@ -28,17 +31,12 @@ function Treasury() {
 				filters={entityFilters}
 				setFilters={setEntityFilters}
 			/>
-			{/* <StyledTable
+			<StyledTable
 				data={list}
-				columns={PaymentList({
-					paymentFilters,
-					setPaymentFilters,
-					setOrderBy,
-					sortStyleAsc,
-					sortStyleDesc,
-				})}
-				loading={paymentLoading}
-			/> */}
+				columns={EntityConfig({ refetch })}
+				loading={entityListLoading}
+				imageFind="FinanceDashboard"
+			/>
 		</>
 	);
 }

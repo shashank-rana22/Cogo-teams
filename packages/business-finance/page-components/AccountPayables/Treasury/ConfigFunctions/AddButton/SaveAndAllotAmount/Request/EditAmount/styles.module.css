@@ -1,0 +1,12 @@
+.value_text {
+	padding: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #5936f0;
+}
+
+.div_style {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
