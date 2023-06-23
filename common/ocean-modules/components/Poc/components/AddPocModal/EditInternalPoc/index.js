@@ -13,16 +13,17 @@ import styles from './styles.module.css';
 function EditInternalPoc({
 	setAddPoc = () => {},
 	addPoc,
-	servicesList = {},
 	shipment_id,
 	stakeholdersTrigger = () => {},
+	listStakeholdersData = [],
+	servicesList = {},
 }) {
 	const { stakeholder_type = '', service_type = '' } = addPoc;
 
-	const { stakeholderTaggedInServices } = getServicesWithStakeholder({ servicesList, ...addPoc });
+	const { modifiedServicesList } = getServicesWithStakeholder({ listStakeholdersData, addPoc, servicesList });
 
 	const { DEFAULT_VALUES, FIELD_ARRAY_KEY } = getEditBulkStakeholdersDefaultValues({
-		services: stakeholderTaggedInServices,
+		modifiedServicesList,
 		...addPoc,
 	});
 
