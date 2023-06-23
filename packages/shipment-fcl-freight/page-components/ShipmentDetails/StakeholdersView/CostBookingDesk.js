@@ -19,7 +19,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {

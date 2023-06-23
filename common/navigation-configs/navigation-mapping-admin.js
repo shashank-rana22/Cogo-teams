@@ -879,6 +879,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.business_finance_dashboard,
 			},
 			{
+				key           : 'business_finance-dunnings',
+				title         : 'Dunnings',
+				href          : '/v2/business-finance/dunnings/[active_tab]',
+				as            : '/v2/business-finance/dunnings/campaign-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.business_finance_dunnings,
+			},
+			{
 				key           : 'business_finance-manual_invoice',
 				title         : 'Manual Invoice',
 				href          : '/business-finance/manual-invoice',

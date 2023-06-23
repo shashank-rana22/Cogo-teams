@@ -1,4 +1,5 @@
 import { MultiSelect, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
@@ -68,6 +69,7 @@ import {
  * getModifiedOptions
  */
 
+const REST_VALUE_SLICE_INDEX = -1;
 const keyAsyncFieldsParamsMapping = {
 	organizations                        : asyncFieldsOrganizations,
 	organization_users                   : asyncFieldsOrganizationUser,
@@ -150,14 +152,14 @@ function AsyncSelect(props) {
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(REST_VALUE_SLICE_INDEX);
 		} else {
 			selectedValue = rest.value;
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;

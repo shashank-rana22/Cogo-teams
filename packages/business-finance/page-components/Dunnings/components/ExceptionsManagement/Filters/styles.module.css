@@ -1,0 +1,44 @@
+.filter_div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.search {
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	margin-top: 4px;
+
+	:global {
+		width: 35%;
+		margin-right: 20px;
+
+		.ui_input_container {
+			height: 38px;
+		}
+	}
+
+	::placeholder {
+		font-size: var(--font-size-md);
+		color: #8f8f8f;
+	}
+}
+
+.filter_style {
+	:global {
+		.filter {
+			flex-flow: nowrap;
+		}
+	}
+}
+
+.button {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 30px;
+}
+
+.search_icon {
+	display: flex;
+	margin: 4px;
+}
