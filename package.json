@@ -23,6 +23,7 @@
     "clean": "turbo run clean",
     "lint": "eslint",
     "precommit": "lint-staged"
+    
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
