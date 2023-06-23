@@ -49,33 +49,7 @@ function BreakdownDetails({
 		return <QuoteLoader />;
 	}
 
-	const addLineItem = ({ index }) => {
-		setRateDetails((prev) => prev.map((rateDetail, rateDetailIndex) => {
-			const { line_items = [] } = rateDetail || {};
-
-			if (rateDetailIndex === index) {
-				return {
-					...rateDetail,
-					line_items: [...line_items, {
-						filteredMargins: {
-							type     : 'absolute_unit',
-							value    : 0,
-							currency : 'USD',
-							code     : '',
-							isNew    : true,
-						},
-						isNew: true,
-					}],
-				};
-			}
-
-			return rateDetail;
-		}));
-	};
-
 	let total = 0;
-
-	console.log('rateDetails', rateDetails);
 
 	return (
 		<div>
@@ -126,8 +100,6 @@ function BreakdownDetails({
 					},
 				});
 
-				console.log('itemitem', item);
-
 				return (
 					<Accordion
 						className={styles.container}
@@ -152,7 +124,6 @@ function BreakdownDetails({
 							rate={rate}
 							setRateDetails={setRateDetails}
 							fclLocalEmpty={fclLocalEmpty}
-							addLineItem={addLineItem}
 							service_name={service_name}
 							shouldEditMargin={shouldEditMargin}
 							getCheckout={getCheckout}
