@@ -20,8 +20,6 @@ const BUTTON_TEXT_MAPPING = {
 	all   : 'Save',
 };
 
-const MIN_LENGTH = 0;
-
 const HREF = '/learning?activeTab=test_module';
 
 const onNavigate = ({ push }) => {
@@ -71,7 +69,7 @@ function CreateNewTest({
 	}, [cogoEntityWatch, data, setValue]);
 
 	const controls = useMemo(
-		() => getControls([...audienceOptions] || [], (select_user_group.length === MIN_LENGTH), !isEmpty(data)),
+		() => getControls([...audienceOptions] || [], (!select_user_group.length), !isEmpty(data)),
 		[select_user_group.length, audienceOptions, data],
 	);
 
