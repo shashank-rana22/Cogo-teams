@@ -714,6 +714,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
 	],
 	terms_and_conditons: [
 		{
