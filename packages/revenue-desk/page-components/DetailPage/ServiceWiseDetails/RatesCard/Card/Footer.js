@@ -97,7 +97,7 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
                              || data?.rowData?.fulfillment_ratio_7 > 0) ? data?.rowData?.fulfillment_ratio_7 : '--' }
 					</div>
 					<div className={styles.text}>
-						15 Days:
+						30 Days:
 						{' '}
 						{(data?.rowData?.fulfillment_ratio_15 === 0
                              || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
