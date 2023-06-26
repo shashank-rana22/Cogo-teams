@@ -3,6 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const MULTI_SELECT_PLACEHOLDER = 'Select KRAs';
+
 function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRAs }) {
 	return (
 		<div className={styles.container}>
@@ -14,7 +16,7 @@ function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRA
 				<div className={styles.select_container}>
 					<MultiSelect
 						size="sm"
-						placeholder="Select KRAs"
+						placeholder={MULTI_SELECT_PLACEHOLDER}
 						value={selectedValue}
 						onChange={(e) => setSelectedValue(e)}
 						options={KRAOptions || []}
