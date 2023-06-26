@@ -7,7 +7,6 @@ import { useRouter } from "@cogoport/next";
 function Cards({ item }) {
     const { push } = useRouter();
     const onClickHandle = () => {
-        // setMapTab(item);
         push(
             "/schedules/service-lanes/[id]",
             `/schedules/service-lanes/${item?.id}`

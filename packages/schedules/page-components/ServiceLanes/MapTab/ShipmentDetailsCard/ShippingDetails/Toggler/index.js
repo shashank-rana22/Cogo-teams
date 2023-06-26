@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 
-function Toggler({ mapTab }) {
+function Toggler({ data }) {
     return (
         <>
-            {mapTab?.source === "manual" ? (
+            {data?.[0]?.source === "manual" ? (
                 <div className={styles.manual_container}>Manual Upload</div>
             ) : (
                 <div className={styles.system_container}>System Upload</div>

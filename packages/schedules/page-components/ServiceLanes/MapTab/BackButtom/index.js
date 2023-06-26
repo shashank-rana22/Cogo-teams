@@ -7,7 +7,7 @@ function BackButton() {
     const onClickHandle = () => {
         push("/schedules/service-lanes/", `/schedules/service-lanes`);
     };
-    // console.log("mapTab: ", mapTab);
+
     return (
         <div
             className={styles.container}
