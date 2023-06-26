@@ -91,14 +91,48 @@
 		margin: 0px 3px;
 	}
 
-	&.addressType {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
 	.addressSave {
 		font-size: 14px;
 		font-weight: 500;
 	}
+}
+
+.inactive {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-5);
+		}
+	}
+}
+
+.active {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-4);
+		}
+	}
+}
+
+.filter_by_buttons {
+	:global {
+		.ui_button_container {
+			margin: 4px;
+			margin-left: 0;
+			color: black;
+
+			&:hover {
+				background-color: var(--color-tertiary-blue-4);
+			}
+		}
+	}
+}
+
+.addresses{
+	display: flex;
+}
+
+.addressType {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }

@@ -1,3 +1,4 @@
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { useState } from 'react';
@@ -13,8 +14,10 @@ export const addAddressControls = [
 		name        : 'name',
 		type        : 'text',
 		placeholder : 'Enter Billing Party Name',
-		rules       : { required: 'required *' },
-		span        : 6,
+		rules       : {
+			required: { value: true, message: 'Billing Party Name is required' },
+		},
+		span: 6,
 	},
 	{
 		label       : 'Address',
@@ -22,7 +25,7 @@ export const addAddressControls = [
 		type        : 'text',
 		placeholder : 'Enter Address',
 		rules       : {
-			required: 'required *',
+			required: { value: true, message: 'Address is required' },
 		},
 		span: 6,
 	},
@@ -43,20 +46,24 @@ export const addAddressControls = [
 		name        : 'pincode',
 		type        : 'text',
 		placeholder : 'Enter Pincode',
-		rules       : { required: 'required *' },
-		span        : 3,
+		rules       : {
+			required: { value: true, message: 'Pincode is required' },
+		},
+		span: 3,
 	},
 	{
-		label          : 'Country',
-		name           : 'country_id',
-		type           : 'select',
-		placeholder    : 'Enter Country',
-		rules          : { required: 'required *' },
-		optionsListKey : 'countries',
-		valueKey       : 'id',
-		params         : {
+		label       : 'Country',
+		name        : 'country_id',
+		type        : 'async_select',
+		placeholder : 'Enter Country',
+		rules       : {
+			required: { value: true, message: 'Country is required' },
+		},
+		asyncKey    : 'list_locations',
+		initialCall : false,
+		params      : {
 			filters: {
-				type: 'country',
+				type: ['country'],
 			},
 		},
 		span: 6,
@@ -128,20 +135,19 @@ export const addAddressControls = [
 ];
 
 export const useGetControls = ({ checked }) => {
+	const {
+		handleSubmit = () => {},
+		watch,
+		formState: { errors },
+	} = useForm();
+	const formValues = watch();
+	console.log(formValues, ' :formValues');
 	const [country, setCountry] = useState();
 	const countryCode = getCountryDetails({
 		country_id: country?.id,
 	});
 
 	return (addAddressControls || []).map((control) => {
-		if (control.name === 'country_id') {
-			return {
-				...control,
-				handleChange: (e) => {
-					setCountry(e);
-				},
-			};
-		}
 		if (control.name === 'tax_number') {
 			return {
 				...control,

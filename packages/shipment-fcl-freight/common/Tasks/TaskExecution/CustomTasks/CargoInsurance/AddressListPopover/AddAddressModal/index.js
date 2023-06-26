@@ -1,7 +1,8 @@
-import { Toast, Checkbox, Pill, Modal, Button } from '@cogoport/components';
+import { Toast, Checkbox, cl, Modal, Button } from '@cogoport/components';
 import {
 	InputController, MobileNumberController,
 	SelectController, TextAreaController, UploadController, useForm,
+	AsyncSelectController,
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
@@ -28,6 +29,7 @@ const CONTROL_TYPE_MAPPING = {
 	textarea     : TextAreaController,
 	select       : SelectController,
 	mobileSelect : MobileNumberController,
+	async_select : AsyncSelectController,
 };
 
 const VALIDATION_ERROR = ['required', 'pattern', 'maxLength', 'length'];
@@ -214,15 +216,22 @@ function AddModal({
 
 						{!checked && (
 							<div className={styles.addressType}>
-								<div className="addressSave">Save address as</div>
-								<div className={styles.addressType}>
-									<Pill
-										value={addressType}
-										onChange={(e) => {
-											setAddressType(e);
-										}}
-										options={OPTIONS}
-									/>
+								<div className={styles.addressSave}>Save address as</div>
+								<div className={styles.addresses}>
+									{OPTIONS.map((item) => (
+										<div
+											key={item.label}
+											className={cl`${item.value === addressType
+												? styles.active : styles.inactive} ${styles.filter_by_buttons}`}
+										>
+											<Button
+												onClick={(e) => setAddressType(item.value)}
+												size="xs"
+											>
+												{item.label}
+											</Button>
+										</div>
+									))}
 								</div>
 							</div>
 						)}

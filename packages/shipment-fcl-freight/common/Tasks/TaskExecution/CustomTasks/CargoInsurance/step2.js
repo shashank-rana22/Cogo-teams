@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 import { cargoControls } from './utils/cargoControls';
 
 const BACK_STEP = 1;
+const LAST_STEP = 3;
+const INCREMENT_FACTOR = 1;
 
 function Step2({
 	setStep = () => {},
@@ -38,6 +40,12 @@ function Step2({
 
 	const formValues = watch();
 
+	const refetch = (key) => {
+		if (key === 'next_step') {
+			setStep(() => (step !== LAST_STEP ? step + INCREMENT_FACTOR : step));
+		}
+	};
+
 	const { premiumData, premiumLoading } = useGetInsuranceRate({
 		insuranceDetails,
 		formValues,
@@ -46,7 +54,6 @@ function Step2({
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
 		policyId,
-		setStep,
 		step,
 		premiumData,
 		insuranceDetails : { ...insuranceDetails, ...formData },
@@ -54,6 +61,7 @@ function Step2({
 		policyForSelf    : insuranceDetails?.policyForSelf,
 		billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
 		billingData,
+		refetch,
 	});
 
 	const newControls = mutatedFields({

@@ -3,17 +3,13 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useCallback } from 'react';
 
 const EXCHANGE_VALUE = 500000000;
 const CONDITION_ON_STEP = 2;
-const LAST_STEP = 3;
-const INCREMENT_FACTOR = 1;
 
 const useSaveDraft = ({
 	shipmentData = {},
 	policyId = '',
-	setStep = () => {},
 	step,
 	premiumData = {},
 	insuranceDetails = {},
@@ -21,6 +17,8 @@ const useSaveDraft = ({
 	billingData = {},
 	exchangeVal = null,
 	addressId = '',
+	refetch = () => {},
+	successMessage = 'Saved Successfully',
 }) => {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
@@ -81,14 +79,14 @@ const useSaveDraft = ({
 
 	const { cargoAmount = 0 } = payload || {};
 
-	const saveData = useCallback(async (key) => {
+	const saveData = async (key) => {
 		if (step === CONDITION_ON_STEP && cargoAmount * exchangeVal > EXCHANGE_VALUE) {
 			return Toast.error(
 				'We do not provide insurance for cargo value more than INR 50cr',
 			);
 		}
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					source         : 'SHIPMENT',
 					organizationId : shipmentData?.importer_exporter_id,
@@ -97,20 +95,14 @@ const useSaveDraft = ({
 					sid            : shipmentData?.serial_id,
 				},
 			});
-			if (!res.hasError) {
-				Toast.success('Saved Successfully');
-
-				if (key === 'next_step') {
-					setStep(() => (step !== LAST_STEP ? step + INCREMENT_FACTOR : step));
-				}
-			}
+			Toast.success(successMessage);
+			refetch(key);
 		} catch (err) {
 			toastApiError(err);
 		}
 
 		return null;
-	}, [exchangeVal, setStep,
-		shipmentData?.importer_exporter_id, shipmentData?.serial_id, step, trigger, userId]);
+	};
 
 	return {
 		loading,

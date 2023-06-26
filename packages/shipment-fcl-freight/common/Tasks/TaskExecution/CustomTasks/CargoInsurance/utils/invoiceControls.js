@@ -23,6 +23,8 @@ export const invoiceControls = ({
 		rules                 : { required: 'Invoice Date is required' },
 		isPreviousDaysAllowed : true,
 		showOptional          : false,
+		showTimeSelect        : true,
+		dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
 	},
 	{
 		label      : 'Upload GST Certificate',

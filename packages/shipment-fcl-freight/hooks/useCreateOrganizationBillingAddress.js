@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationBillingAddress = ({
@@ -19,7 +19,7 @@ const useCreateOrganizationBillingAddress = ({
 		const { poc_name, email, phoneNumber, ...rest } = item || {};
 		const { number, country_code } = phoneNumber || {};
 		try {
-			const resp = await trigger({
+			await trigger({
 				data: {
 					...rest,
 					poc_details:
@@ -36,22 +36,10 @@ const useCreateOrganizationBillingAddress = ({
 					organization_id,
 				},
 			});
-			Toast.success(successMessage, {
-				autoClose : 5000,
-				style     : { background: '#f2fff1' },
-			});
+			Toast.success(successMessage);
 			handleCloseModal();
-			return resp;
 		} catch (error) {
-			Toast.error(
-				error?.error?.gst_number?.[GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase()
-					|| error?.error?.pincode?.[GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase(),
-				{
-					autoClose : 7000,
-					style     : { backgroundColor: 'white' },
-				},
-			);
-			return null;
+			Toast.error(getApiError(error?.response?.data));
 		}
 	};
 

@@ -132,10 +132,12 @@ export const cargoControls = ({
 		value       : insuranceDetails?.transitDate
 			? new Date(insuranceDetails?.transitDate)
 			: addDays(new Date(), MIN_DATE_LIMIT),
-		minDate      : addDays(new Date(), MIN_DATE_LIMIT),
-		maxDate      : addDays(new Date(), MAX_DATE_LIMIT),
-		rules        : { required: 'Transition Date is required' },
-		showOptional : false,
+		minDate        : addDays(new Date(), MIN_DATE_LIMIT),
+		maxDate        : addDays(new Date(), MAX_DATE_LIMIT),
+		rules          : { required: 'Transition Date is required' },
+		showTimeSelect : true,
+		dateFormat     : 'MMM dd, yyyy, hh:mm:ss aaa',
+		showOptional   : false,
 	},
 	{
 		name           : 'policyCurrency',

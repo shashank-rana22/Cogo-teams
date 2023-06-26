@@ -52,6 +52,7 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} }) => {
 	return {
 		premiumLoading : loading,
 		premiumData    : data,
+		premiumRate,
 	};
 };
 export default useGetInsuranceRate;

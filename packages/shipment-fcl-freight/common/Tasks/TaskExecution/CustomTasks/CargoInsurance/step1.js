@@ -14,6 +14,9 @@ import { bilingAddressControl } from './utils/bilingAddressControl';
 import { bilingAddressControlForSelf } from './utils/bilingAddressControlForSelf';
 import { personalDetailsControl } from './utils/personalDetailsControl';
 
+const LAST_STEP = 3;
+const INCREMENT_FACTOR = 1;
+
 function Step1({
 	setStep = () => {},
 	step,
@@ -33,15 +36,21 @@ function Step1({
 	const [prosporerAddress, setProsporerAddress] = useState({});
 	const [checked, setChecked] = useState([]);
 
+	const refetch = (key) => {
+		if (key === 'next_step') {
+			setStep(() => (step !== LAST_STEP ? step + INCREMENT_FACTOR : step));
+		}
+	};
+
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
 		policyId,
-		setStep,
 		step,
 		insuranceDetails: { ...insuranceDetails, ...formData },
 		billingData,
 		policyForSelf,
 		addressId,
+		refetch,
 	});
 
 	const formProps = useForm([

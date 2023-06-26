@@ -17,18 +17,21 @@ import styles from './styles.module.css';
 const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
 const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
 const AddService = dynamic(() => import('./AddService'), { ssr: false });
+const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
 
 const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
+const SERVICES_FOR_INSURANCE = ['fcl_freight'];
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder } = useContext(
+	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
+	const [showInsurance, setShowInsurance] = useState(false);
 
 	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
 
@@ -47,6 +50,10 @@ function List({ isSeller = false }) {
 		refetch : refetchForUpdateSubService,
 		showIp  : showModal === 'ip',
 	});
+
+	const isCargoInsured = servicesList?.find(
+		(service) => service?.service_type === 'cargo_insurance_service',
+	);
 
 	return (
 		<div className={styles.container}>
@@ -123,6 +130,17 @@ function List({ isSeller = false }) {
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
 				</Button>
+
+				{SERVICES_FOR_INSURANCE.includes(shipment_data?.shipment_type) ? (
+					<Button
+						onClick={() => setShowInsurance(true)}
+						style={{ marginLeft: '10px' }}
+						disabled={!!isCargoInsured}
+					>
+						<div className={styles.add_icon}>+</div>
+						Add Cargo Insurance
+					</Button>
+				) : null}
 			</div>
 
 			{showModal === 'add_sell_price'
@@ -171,6 +189,17 @@ function List({ isSeller = false }) {
 					/>
 				)
 				: null}
+
+			{showInsurance ? (
+				<CargoInsurance
+					setAddCargoInsurance={setShowInsurance}
+					data={shipment_data}
+					refetch={refetch}
+					showInsurance={showInsurance}
+					setShowInsurance={setShowInsurance}
+					primary_service={primary_service}
+				/>
+			) : null}
 		</div>
 	);
 }
