@@ -23,6 +23,10 @@ export const filterControls = (activeTab) => {
 							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 							label : 'Advance Container Security Deposit Refund',
 						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
+						},
 					],
 				},
 				{
@@ -69,6 +73,10 @@ export const filterControls = (activeTab) => {
 							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 							label : 'Advance Container Security Deposit Refund',
 						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
+						},
 					],
 				},
 				{
@@ -114,6 +122,10 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 							label : 'Advance Container Security Deposit Refund',
+						},
+						{
+							value : 'PAYMENT_CONFIRMATION_APPROVAL',
+							label : 'Payment Confirmation Approval',
 						},
 					],
 				},
