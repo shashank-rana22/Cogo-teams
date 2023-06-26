@@ -1,10 +1,13 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 import controls from '../../../configurations/create-instant-reply';
 import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function CreateTemplateForm({
 	createTemplate,
@@ -19,7 +22,7 @@ function CreateTemplateForm({
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm({ defaultValues: { language: 'english' } });
+	} = useForm({ defaultValues: { language: geo.others.navigations.cogo_one.template_default_language } });
 
 	const sucessCallBackFunc = () => {
 		setOpenCreateReply(false);
