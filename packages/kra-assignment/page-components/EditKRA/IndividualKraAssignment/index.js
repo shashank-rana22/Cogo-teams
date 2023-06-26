@@ -37,6 +37,7 @@ function IndividualKraAssignment({ data, loading }) {
 
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.table_container}>
 				<StyledTable
 					columns={columns}
@@ -49,10 +50,11 @@ function IndividualKraAssignment({ data, loading }) {
 
 			<div className={styles.container1}>
 				<RatingInfo ratingInfo={ratingInfo} loading={loading} />
-				<div>
-					<Button loading={submitLoading} onClick={handleSubmitTarget}>Submit Target</Button>
-				</div>
+				<Button loading={submitLoading} onClick={handleSubmitTarget} className={styles.button}>
+					Submit Targets
+				</Button>
 			</div>
+
 		</div>
 	);
 }

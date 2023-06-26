@@ -11,8 +11,9 @@ function EditKRA() {
 
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.title}>
-				<h2>KRA Edit Request</h2>
+				<h2>Edit KRA Request</h2>
 			</div>
 
 			<Header data={data} />
@@ -24,23 +25,15 @@ function EditKRA() {
 						themeType="primary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="kra_wise" title="KRA-Wise">
-							<div>KRA-Wise</div>
-						</TabPanel>
-
 						<TabPanel name="individual" title="Individual">
 							<div className={styles.individual_kra}>
 								<IndividualKraAssignment data={data?.list} loading={loading} />
 							</div>
 						</TabPanel>
-
-						<TabPanel name="definition_change" title="Definition Change">
-							<div>This is international rates</div>
-						</TabPanel>
 					</Tabs>
 				</div>
-
 			</div>
+
 		</div>
 
 	);

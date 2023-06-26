@@ -29,3 +29,9 @@
 	justify-content: space-between;
 	padding: 22px 0 0 30px;
 }
+
+.button {
+	width: 40%;
+	margin-top: 10px;
+	margin-left: 4px;
+}

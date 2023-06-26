@@ -1,7 +1,8 @@
 .kra_description {
-	width: 350px;
+	width: 380px;
 	height: 100px;
 	padding: 10px;
+	margin-left: 6px;
 	border: 1px solid red;
 	border-radius: 5px;
 }
