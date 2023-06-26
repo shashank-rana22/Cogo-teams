@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 function FieldArrayController({ control, name, controls, error = [] }) {
 	const { fields = [] } = useFieldArray({ control, name });
+
 	return (
 		<div className={styles.main_container}>
 			{fields.map((field, index) => (

@@ -7,6 +7,9 @@ import useRevertPrice from '../../../../../hooks/useRevertPrice';
 import Form from './Form';
 import styles from './styles.module.css';
 
+const MAX_WEIGHT_SLAB = 500;
+const MIN_CHARGEABLE_WEIGHT = 45;
+
 function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRates }) {
 	const { data } = modalState || {};
 
@@ -32,11 +35,16 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 
 	const chargeableWeight = watch('chargeable_weight');
 
-	const { fields: controls, showElements } = useGetRevertFormControls({
+	const controls = useGetRevertFormControls({
 		data,
 		userId,
 		chargeableWeight,
 	});
+
+	const showElements = {
+		min_price    : chargeableWeight < MIN_CHARGEABLE_WEIGHT,
+		weight_slabs : chargeableWeight < MAX_WEIGHT_SLAB,
+	};
 
 	return (
 		<Modal

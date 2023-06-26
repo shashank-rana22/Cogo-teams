@@ -8,4 +8,4 @@ const CONTROLLER_MAPPING = {
 
 };
 
-export const getSpecifiedController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
+export const getFieldArrayControllers = (type = 'text') => CONTROLLER_MAPPING[type] || null;

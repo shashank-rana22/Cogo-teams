@@ -1,12 +1,12 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
-import useActiveControlsMapping from './active-controls-mapping';
+import { SERVICE_CONTROLS_MAPPING } from './active-controls-mapping';
 
 const MAX_WEIGHT_SLAB = 500;
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
-const MIN_CHARGEABLE_WEIGHT = 45;
 const MIN_VALUE = 0;
 
 const useGetRevertFormControls = ({ data, chargeableWeight }) => {
@@ -14,13 +14,6 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 		service_type,
 		service_provider_id,
 	} = data || {};
-
-	const SERVICE_CONTROLS_MAPPING = useActiveControlsMapping();
-
-	const showElements = {
-		min_price    : chargeableWeight < MIN_CHARGEABLE_WEIGHT,
-		weight_slabs : chargeableWeight < MAX_WEIGHT_SLAB,
-	};
 
 	const controls = [
 		{
@@ -197,7 +190,7 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 			controlType : 'fileUpload',
 			type        : 'file',
 			drag        : true,
-			maxSize     : '10485760',
+			maxSize     : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 			uploadType  : 'aws',
 			height      : '88',
 			uploadIcon  : 'ic-upload',
@@ -243,8 +236,7 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 			],
 		},
 	];
-	const fields = controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
-	return { fields, showElements };
+	return controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
 };
 
 export default useGetRevertFormControls;
