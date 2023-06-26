@@ -8,7 +8,7 @@ export default function useBulkShipmentStakeholderReallocation({
 	refetch = () => { },
 }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/bulk_shipment_stakeholder_reallocation',
+		url    : '/bulk_reallocate_shipment_stakeholders',
 		method : 'POST',
 	}, { manual: true });
 

@@ -1,4 +1,4 @@
-function checkForServiceOrShipment(key, stakeholderObj, stakeholder_id) {
+function checkForServiceOrShipment(key, stakeholderObj, stakeholder_id, stakeholder_type) {
 	const { service_id, service_type } = stakeholderObj || {};
 
 	let flag = false;
@@ -9,7 +9,10 @@ function checkForServiceOrShipment(key, stakeholderObj, stakeholder_id) {
 		flag = !service_id && !service_type;
 	}
 
-	return stakeholder_id && stakeholder_id === stakeholderObj?.stakeholder_id && flag;
+	return stakeholder_id
+	&& stakeholder_id === stakeholderObj?.stakeholder_id
+	&& flag && stakeholder_type
+	&& stakeholder_type === stakeholderObj?.stakeholder_type;
 }
 
 export default function getServicesWithStakeholder({
@@ -20,6 +23,7 @@ export default function getServicesWithStakeholder({
 	const {
 		shipment_type = '',
 		stakeholder_id = '',
+		stakeholder_type = '',
 		service_type = '',
 	} = addPoc || {};
 
@@ -27,7 +31,7 @@ export default function getServicesWithStakeholder({
 
 	if (service_type) {
 		const filteredStakeholdersData = (listStakeholdersData || []).filter(
-			(stakeholder) => checkForServiceOrShipment('service', stakeholder, stakeholder_id),
+			(stakeholder) => checkForServiceOrShipment('service', stakeholder, stakeholder_id, stakeholder_type),
 		);
 
 		filteredStakeholdersData.forEach((stakeholder) => {
@@ -43,7 +47,7 @@ export default function getServicesWithStakeholder({
 		});
 	} else if (shipment_type) {
 		modifiedServicesList = (listStakeholdersData || []).filter(
-			(stakeholder) => checkForServiceOrShipment('shipment', stakeholder, stakeholder_id),
+			(stakeholder) => checkForServiceOrShipment('shipment', stakeholder, stakeholder_id, stakeholder_type),
 		).map((stakeholder) => ({
 			...stakeholder,
 			new_stakeholder_id: stakeholder_id,

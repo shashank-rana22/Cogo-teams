@@ -463,7 +463,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'bulk_shipment_stakeholder_reallocation',
+		api          : 'bulk_reallocate_shipment_stakeholders',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
