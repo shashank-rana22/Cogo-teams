@@ -1,13 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle } from 'react';
 
 import useGetAudiences from '../../../../hooks/useGetAudiences';
 import useUpdateCourse from '../../../../hooks/useUpdateCourse';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
-
-const FIRST_INDEX = 0;
 
 const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCourse, state, eligible_users }) => {
 	const {
@@ -66,7 +65,7 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 			setValue('frequency', data.frequency);
 
 			if (cogo_academy_sheets && !isEmpty(cogo_academy_sheets)) {
-				setValue('upload_excel', cogo_academy_sheets[FIRST_INDEX].resulted_file_url);
+				setValue('upload_excel', cogo_academy_sheets[GLOBAL_CONSTANTS.zeroth_index].resulted_file_url);
 			}
 		}
 	}, [data, setValue, listAudienceLoading]);

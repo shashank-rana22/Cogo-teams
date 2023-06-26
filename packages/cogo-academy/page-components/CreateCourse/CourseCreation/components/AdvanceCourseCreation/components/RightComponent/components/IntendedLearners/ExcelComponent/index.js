@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -5,8 +6,6 @@ import { useMemo } from 'react';
 import downloadFileFromUrl from '../../../../../utils/downloadFileFromUrl';
 
 import styles from './styles.module.css';
-
-const FIRST_INDEX = 0;
 
 function ExcelComponent({
 	Element,
@@ -22,7 +21,7 @@ function ExcelComponent({
 	const { dropareaProps, draggable, multiple, placeholder, rules, accept } = controlItem || {};
 
 	const { MAPPING, sheetData } = useMemo(() => {
-		const cogoAcademySheet = cogo_academy_sheets?.[FIRST_INDEX] || {};
+		const cogoAcademySheet = cogo_academy_sheets?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		return {
 			sheetData : cogoAcademySheet,
