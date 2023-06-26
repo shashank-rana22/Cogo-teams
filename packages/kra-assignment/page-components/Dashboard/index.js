@@ -18,6 +18,7 @@ import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const REDIRECT_URL_CREATE = '/kra-assignment/create';
 const REDIRECT_URL_RATING = '/kra-assignment/performance-rating-review';
+const REDIRECT_EDIT_URL = '/kra-assignment/edit';
 const DISPLAY_ADD_KRA_BUTTON = 1;
 const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
@@ -74,6 +75,10 @@ function Dashboard() {
 		acc[obj.id] = true;
 		return acc;
 	}, {});
+
+	const handleEditKRA = () => {
+		router.push(REDIRECT_EDIT_URL, REDIRECT_EDIT_URL);
+	};
 
 	const OBJECT_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.reduce(
 		(acc, obj) => {
@@ -144,6 +149,7 @@ function Dashboard() {
 		<div>
 			<div className={styles.header}>
 				<h2>KRA Mapping</h2>
+
 				<Button onClick={() => onClickConfiguration(BUTTON_FUNCTION_REVIEW)}>
 					Go To Performance Rating Review
 				</Button>
@@ -151,6 +157,17 @@ function Dashboard() {
 				<Button onClick={() => onClickConfiguration(BUTTON_FUNCTION_ADD)}>
 					ADD KRA
 				</Button>
+
+				<div className={styles.botton_add_edit}>
+					<Button onClick={onClickConfiguration}>ADD KRA</Button>
+					<Button
+						className={styles.butonn_edit_kra}
+						themeType="secondary"
+						onClick={handleEditKRA}
+					>
+						EDIT KRA
+					</Button>
+				</div>
 			</div>
 
 			<div className={styles.redirect}>

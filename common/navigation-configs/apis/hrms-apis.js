@@ -293,7 +293,7 @@ const hrms = {
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_employee_level',
+			api          : 'list_individual_kra',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
@@ -302,7 +302,16 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-
+		{
+			api          : 'get_employee_level',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_individual_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

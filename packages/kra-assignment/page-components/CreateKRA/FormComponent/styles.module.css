@@ -1,18 +1,18 @@
-.container{
-    padding:20px ;
+.container {
+	padding: 20px;
 }
 
-.label{
-    font-weight: 600;
-    padding:8px 4px
+.label {
+	padding: 8px 4px;
+	font-weight: 600;
 }
 
-.form{
-    padding-top:10px;
-    display: flex;
-    flex-wrap: wrap;
+.form {
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 10px;
 }
 
-.form_container{
-    padding-right: 20px;
+.form_container {
+	padding-right: 20px;
 }

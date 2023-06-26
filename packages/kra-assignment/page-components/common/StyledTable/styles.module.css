@@ -8,6 +8,7 @@
 
 		background-color: transparent;
 		border-radius: 10px;
+
 		.ui_table_head_cell {
 			padding: 10px;
 			background-color: #deebed;
@@ -41,10 +42,9 @@
 			border-radius: 0 6px 6px 0;
 		}
 
-		.ui_table_container{
-			margin-bottom: 0px;
+		.ui_table_container {
+			margin-bottom: 0;
 		}
-
 	}
 
 	@media (max-width: 1010px) {

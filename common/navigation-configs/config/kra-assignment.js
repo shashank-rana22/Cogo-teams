@@ -9,6 +9,10 @@ const kraAssignment = {
 	'/[partner_id]/kra-assignment/performance-rating-review': {
 		navigation: 'kra_assignment',
 	},
+	'/[partner_id]/kra-assignment/edit': {
+		navigation: 'kra_assignment',
+
+	},
 };
 
 export default kraAssignment;
