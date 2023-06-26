@@ -12,7 +12,7 @@ function getIndividualColumn({
 }) {
 	const handleTargetChange = (val, item, name) => {
 		const newData = valuesIndividualKRA?.map((element) => {
-			if (element.kra_id === item.kra_id
+			if (element.employee_id === item.employee_id
 			) {
 				return {
 					...element,
@@ -51,7 +51,8 @@ function getIndividualColumn({
 					<InputNumber
 						size="sm"
 						min={0}
-						value={valuesIndividualKRA?.find((element) => element.kra_id === item.kra_id)?.targeted_value}
+						value={valuesIndividualKRA?.find((element) => element.employee_id
+							=== item.employee_id)?.targeted_value}
 						onChange={(e) => handleTargetChange(e, item, 'targeted_value')}
 					/>
 				</div>
@@ -66,7 +67,8 @@ function getIndividualColumn({
 						placeholder="is percent"
 						size="sm"
 						options={OPTIONS || []}
-						value={valuesIndividualKRA?.find((element) => element.kra_id === item.kra_id)?.is_percent}
+						value={valuesIndividualKRA?.find((element) => element.employee_id
+							=== item.employee_id)?.is_percent}
 						onChange={(e) => handleTargetChange(e, item, 'is_percent')}
 					/>
 				</div>
