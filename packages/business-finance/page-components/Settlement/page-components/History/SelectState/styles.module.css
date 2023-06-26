@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	padding: 60px 30px 36px;
+	background: var(--color-secondary-5);
+	border-radius: 10px;
+}
+
+.select_icon {
+	width: 25%;
+	height: 50%;
+}
+
+.container_div {
+	top: 57%;
+	left: 36%;
+	margin: 8%;
+}
+
+.text_div {
+	align-items: center;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 21px;
+	letter-spacing: 0.04em;
+}
+
+.hr {
+	width: 30%;
+	height: 5px;
+	margin-top: 3%;
+	background: var(--color-primary-error-red-2);
+	border-radius: 4px;
+}
+
+.text_line {
+	display: flex;
+	align-items: center;
+	margin-top: 3%;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 21px;
+	text-align: center;
+	letter-spacing: 0.04em;
+}

@@ -20,3 +20,25 @@ export const STEPPER_ITEMS_DOWNLOAD_FILE_FORMAT = [
 export const TRADE_PARTY_OPTIONS = [
 	{ name: 'R1', value: 'AP', label: 'AP' }, { name: 'R2', value: 'AR', label: 'AR' },
 ];
+
+export const INVOICE_STATUS = {
+	Unpaid               : '#FEF1DF',
+	Unutilized           : '#FEF1DF',
+	Utilized             : '#CDF7D4',
+	'Partially Paid'     : '#D9EAFD',
+	Paid                 : '#CDF7D4',
+	'Knocked Off'        : '#CDF7D4',
+	'Partially Utilized' : '#D9EAFD',
+};
+
+export const INVOICE_STATUS_MAPPING = {
+	DRAFT            : '#fcedbf',
+	POSTED           : '#a1f0ae',
+	FINANCE_ACCEPTED : '#CDF7D4',
+	CONSOLIDATED     : '#D9EAFD',
+	IRN_GENERATED    : '#b8debe',
+	IRN_FAILED       : '#F89880',
+	FAILED           : '#f9b498',
+	IRN_CANCELLED    : '#fbc5b0',
+	FINANCE_REJECTED : '#f9ac98',
+};
