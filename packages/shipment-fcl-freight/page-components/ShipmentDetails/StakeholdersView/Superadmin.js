@@ -14,6 +14,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
 import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -109,6 +110,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
+
+					<RolloveDetails />
 
 					<div className={styles.toggle_chat}>
 						<Toggle

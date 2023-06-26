@@ -123,6 +123,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 					<ShipmentInfo />
 
 					<RolloveDetails />
+
 					<ShipmentChat />
 				</div>
 
