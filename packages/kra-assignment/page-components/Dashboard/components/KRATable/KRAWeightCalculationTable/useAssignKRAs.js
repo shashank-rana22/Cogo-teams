@@ -5,10 +5,9 @@ import { useHarbourRequest } from '@cogoport/request';
 const useAssignKRAs = ({
 	inputValue, selectArray,
 	getEmployeesWithLowWeightage,
-	getkrasAssigned,
 	getUnassignedEmployee,
 	setInputValue,
-	setShowKRACalculationTable,
+	resetObjects,
 }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
@@ -22,9 +21,10 @@ const useAssignKRAs = ({
 			});
 
 			getEmployeesWithLowWeightage();
-			getkrasAssigned();
 			getUnassignedEmployee();
-			setShowKRACalculationTable(false);
+			resetObjects();
+
+			Toast.success('KRAs Assigned successfully!');
 		} catch (error) {
 			if (error.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));

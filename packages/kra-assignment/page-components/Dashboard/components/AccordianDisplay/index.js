@@ -1,15 +1,11 @@
-import { Placeholder } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../common/EmptyState';
 import TableDisplay from '../TablesDisplay';
 
 import styles from './styles.module.css';
 
 const TABLE_USED_FOR = 'AccordianData';
-const EMPTY_TEXT = 'No Data to Show';
 const INDEX_VALUE = 1;
 
 function AccordianDisplay({
@@ -42,24 +38,6 @@ function AccordianDisplay({
 		setIsActive(!isActive);
 		resetObjects();
 	};
-
-	if (loading) {
-		return (
-			<>
-				<Placeholder height="30px" width="100%" margin="5px" />
-				<Placeholder height="30px" width="100%" margin="5px" />
-			</>
-
-		);
-	}
-
-	if (isEmpty(data) && !loading) {
-		return (
-			<div style={{ paddingTop: 6, paddingLeft: 6 }}>
-				<EmptyState emptyText={EMPTY_TEXT} />
-			</div>
-		);
-	}
 
 	return (
 		<div

@@ -22,20 +22,19 @@ const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element
 
 function KRAWeightCalculationTable({
 	setInputValue,
-	inputValue, selectArray,
+	inputValue,
+	selectArray,
 	getEmployeesWithLowWeightage,
-	getkrasAssigned, getUnassignedEmployee,
-	selectAccordian,
-	setShowKRACalculationTable,
+	getUnassignedEmployee,
+	resetObjects,
 }) {
 	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
 		inputValue,
 		selectArray,
 		getEmployeesWithLowWeightage,
-		getkrasAssigned,
 		getUnassignedEmployee,
 		setInputValue,
-		setShowKRACalculationTable,
+		resetObjects,
 	});
 
 	const updatedValue = [...inputValue];

@@ -11,11 +11,10 @@ function KRATable({
 	selectAccordian,
 	appliedFilters,
 	getEmployeesWithLowWeightage,
-	getkrasAssigned,
 	getUnassignedEmployee,
-	setShowKRACalculationTable,
 	filtersFields,
 	dataFrom,
+	resetObjects,
 }) {
 	const selectArray = Object.keys(selectedObject).filter((key) => selectedObject[key] === true);
 
@@ -45,11 +44,9 @@ function KRATable({
 				inputValue={inputValue}
 				setInputValue={setInputValue}
 				selectArray={selectArray}
-				getkrasAssigned={getkrasAssigned}
 				getUnassignedEmployee={getUnassignedEmployee}
 				getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
-				selectAccordian={selectAccordian}
-				setShowKRACalculationTable={setShowKRACalculationTable}
+				resetObjects={resetObjects}
 			/>
 		</div>
 	);
