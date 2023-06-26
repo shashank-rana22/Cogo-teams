@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -80,10 +80,14 @@ function Card({
 					<div className={styles.space_between} key={keysForArr[index]}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
-
-							<div className={styles.sub_heading}>
-								{dataObj?.service_provider?.business_name}
-							</div>
+							<Tooltip
+								content={dataObj?.service_provider?.business_name}
+								placement="top"
+							>
+								<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+									{dataObj?.service_provider?.business_name}
+								</div>
+							</Tooltip>
 						</div>
 						<div>
 							<div className={styles.heading}>Airline</div>
@@ -105,6 +109,32 @@ function Card({
 										} Kg`}
 									</div>
 								</div>
+								{dataObj?.service?.commodity_description && (
+									<div>
+										<div className={styles.heading}>Commodity Des.</div>
+										<Tooltip
+											content={dataObj?.service?.commodity_description}
+											placement="top"
+										>
+											<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												{dataObj?.service?.commodity_description}
+											</div>
+										</Tooltip>
+									</div>
+								)}
+								{dataObj?.service?.hs_code &&	(
+									<div>
+										<div className={styles.heading}>HS Code</div>
+										<Tooltip
+											content={dataObj?.service?.hs_code}
+											placement="top"
+										>
+											<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												{dataObj?.service?.hs_code}
+											</div>
+										</Tooltip>
+									</div>
+								)}
 								<div>
 									<div className={styles.heading}>Price Type</div>
 									<div className={styles.sub_heading}>
