@@ -1,27 +1,23 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
 function useCreateIndividualKra() {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { user = {} } = profile;
+	const { user = {} } = useSelector((state) => state?.profile);
 
 	const { id:user_id } = user;
 
-	const [{ data, loading }, trigger] = useRequest(
-		{
-			url    : '/create_individual_kra',
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+	const [{ data, loading }, trigger] = useHarbourRequest({
+		url    : '/create_individual_kra',
+		method : 'POST',
+	}, { manual: true });
 
 	const createIndividualKra = useCallback(async (valuesIndividualKRA) => {
 		const DEFAULT_VALUE = 0;
-		const objData = valuesIndividualKRA?.map((item) => (
+
+		const objData = valuesIndividualKRA?.map((i-mtem) => (
 			{
 				employee_id                    : item?.employee_id,
 				kra_id                         : item?.kra_id,

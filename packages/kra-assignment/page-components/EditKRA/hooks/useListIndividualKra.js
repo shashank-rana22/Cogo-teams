@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -11,13 +11,10 @@ function useListIndividualKra() {
 
 	const { id: user_id } = user;
 
-	const [{ data, loading }, trigger] = useRequest(
-		{
-			url    : '/list_individual_kra',
-			method : 'GET',
-		},
-		{ manual: true },
-	);
+	const [{ data, loading }, trigger] = useHarbourRequest({
+		url    : '/list_individual_kra',
+		method : 'GET',
+	}, { manual: true });
 
 	const listIndividualKra = useCallback(() => {
 		try {
@@ -28,9 +25,7 @@ function useListIndividualKra() {
 			});
 		} catch (error) {
 			if (error?.response?.data) {
-				Toast.error(
-					getApiErrorString(error?.response?.data) || 'Something went wrong',
-				);
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
 	}, [trigger, user_id]);
