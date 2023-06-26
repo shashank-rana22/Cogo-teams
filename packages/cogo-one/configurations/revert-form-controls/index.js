@@ -201,8 +201,6 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 			name               : 'weight_slabs',
 			label              : 'Weight Slabs (in Kgs)',
 			controlType        : 'fieldArray',
-			showOptional       : false,
-			showButtons        : false,
 			noDeleteButtonTill : 1,
 			defaultValues      : [
 				{

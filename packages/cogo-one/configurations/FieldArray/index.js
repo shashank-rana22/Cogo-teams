@@ -18,7 +18,6 @@ function FieldArrayController({ control, name, controls, error = [] }) {
 					parentName={name}
 				/>
 			))}
-
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import useGetRevertFormControls from '../../../../../configurations/revert-form-controls.';
+import useGetRevertFormControls from '../../../../../configurations/revert-form-controls';
 import useRevertPrice from '../../../../../hooks/useRevertPrice';
 
 import Form from './Form';

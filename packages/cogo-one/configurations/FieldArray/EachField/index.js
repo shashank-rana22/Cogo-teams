@@ -5,7 +5,6 @@ function EachField({
 	field, controls, parentName, index, control, error,
 }) {
 	return (
-
 		controls.map((eachControl) => {
 			const { controlType, name } = eachControl;
 
@@ -16,19 +15,17 @@ function EachField({
 			}
 
 			return (
-				<div className={styles.container} key={`${name}.${index}.${eachControl?.name}`}>
+				<div className={styles.container} key={`${parentName}.${index}.${name}`}>
 					<EleController
 						{...eachControl}
 						name={`${parentName}.${index}.${name}`}
 						value={field?.[eachControl?.name]}
 						control={control}
-						label={eachControl?.label}
 						error={error?.[eachControl.name]}
 					/>
 				</div>
 			);
 		})
-
 	);
 }
 export default EachField;
