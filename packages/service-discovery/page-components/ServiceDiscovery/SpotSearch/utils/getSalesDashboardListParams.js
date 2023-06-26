@@ -127,7 +127,7 @@ const getSalesDashboardListParams = (
 			allocation_stats_required : true,
 		};
 	}
-	if (type === 'spot_searches') {
+	if (['spot_searches', 'most_searched', 'most_booked'].includes(type)) {
 		const { rates_availability, ...rest } = filterValues;
 		const r_a = rates_availability ? { [rates_availability]: true } : {};
 		return {

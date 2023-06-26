@@ -13,6 +13,8 @@ import useGetPermission from './useGetPermission';
 
 const getKeyName = ({ type, serviceType }) => {
 	const mapping = {
+		most_searched   : { search_type: serviceType || undefined },
+		most_booked     : { search_type: serviceType || undefined },
 		spot_searches   : { search_type: serviceType || undefined },
 		sales_shipments : { shipment_type: serviceType || undefined },
 		spot_booking    : { primary_service: serviceType || undefined },
