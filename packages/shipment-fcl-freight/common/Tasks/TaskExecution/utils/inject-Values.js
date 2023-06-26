@@ -1,5 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
+const DEFAULT_BL_COUNT = 1;
+const DEFAULT_VALUE_OF_ARRAY_ELEMENTS = 0;
 const injectValues = (
 	selectedMail,
 	populatedControls,
@@ -13,11 +17,11 @@ const injectValues = (
 	if (!controls?.length) return controls;
 
 	if (task?.task === 'upload_si') {
-		controls[0].value = [
+		controls[GLOBAL_CONSTANTS.zeroth_index].value = [
 			{
-				url         : selectedMail?.formatted?.[0]?.url,
-				description : selectedMail?.formatted?.[0]?.description,
-				si_filed_at : selectedMail?.formatted?.[0]?.si_filed_at,
+				url         : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
+				description : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.description,
+				si_filed_at : selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.si_filed_at,
 			},
 		];
 	} else if (
@@ -50,8 +54,8 @@ const injectValues = (
 	) {
 		(controls || []).forEach((control, index) => {
 			if (control?.type === 'fieldArray') {
-				controls[index].value = Array(shipment_data.bls_count || 1)
-					.fill(0)
+				controls[index].value = Array(shipment_data.bls_count || DEFAULT_BL_COUNT)
+					.fill(DEFAULT_VALUE_OF_ARRAY_ELEMENTS)
 					?.map(() => ({
 						description : '',
 						url         : selectedMail?.formatted?.[index]?.url || '',
@@ -66,7 +70,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	} else if (task?.task === 'mark_container_gated_out') {
@@ -78,6 +82,32 @@ const injectValues = (
 					container_number : i?.container_number,
 					id               : i?.id,
 					gated_out_at     : '',
+				}));
+			}
+		});
+	} else if (task.task === 'update_mbl_collection_status') {
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'bl_detail') {
+				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
+					(i) => i?.bl_document_type === 'draft_bill_of_lading',
+				);
+
+				controls[index].value = shipment_bl_details?.map((bl_detail) => ({
+					id        : bl_detail?.id,
+					bl_number : bl_detail?.bl_number,
+				}));
+			}
+		});
+	} else if (task.task === 'update_hbl_collection_status') {
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'bl_detail') {
+				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
+					(i) => i?.bl_document_type === 'draft_house_bill_of_lading',
+				);
+
+				controls[index].value = shipment_bl_details?.map((bl_detail) => ({
+					id        : bl_detail?.id,
+					bl_number : bl_detail?.bl_number,
 				}));
 			}
 		});

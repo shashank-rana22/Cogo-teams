@@ -10,8 +10,9 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 ];
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
+const DEFAULT_NUMBER_KEYS_VALUE = 1;
 
-const extraApiPayload = (values, end_point, task, getApisData) => {
+const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'fcl_freight/create_document' || end_point === 'create_shipment_document') {
 		let documentArr = values?.documents;
 
@@ -41,7 +42,7 @@ const extraApiPayload = (values, end_point, task, getApisData) => {
 		};
 
 		payload.service_data = task.task_field_ids.map((item) => {
-			const data = {};
+			const DATA = {};
 
 			Object.keys(values).forEach((key) => {
 				if (key === 'truck_details') {
@@ -49,51 +50,44 @@ const extraApiPayload = (values, end_point, task, getApisData) => {
 
 					Object.keys(values[key][index]).forEach((lineItem) => {
 						if (lineItem === 'name' || lineItem === 'contact') {
-							if ('driver_details' in data) {
-								data.driver_details[lineItem] = values[key][index][lineItem];
+							if ('driver_details' in DATA) {
+								DATA.driver_details[lineItem] = values[key][index][lineItem];
 							} else {
-								data.driver_details = {};
-								data.driver_details[lineItem] = values[key][index][lineItem];
+								DATA.driver_details = {};
+								DATA.driver_details[lineItem] = values[key][index][lineItem];
 							}
 						} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(lineItem)) {
 							if (NUMBER_KEYS.includes(lineItem)) {
-								data[lineItem] = Number(values[key][index][lineItem] || 1);
+								DATA[lineItem] = Number(values[key][index][lineItem] || DEFAULT_NUMBER_KEYS_VALUE);
 							} else {
-								data[lineItem] = values[key][index][lineItem];
+								DATA[lineItem] = values[key][index][lineItem];
 							}
 						}
 					});
 				} else if (!NOT_INCLUDE_FIELD_IN_FTL.includes(key)) {
 					if (NUMBER_KEYS.includes(key)) {
-						data[key] = Number(values[key] || 1);
+						DATA[key] = Number(values[key] || DEFAULT_NUMBER_KEYS_VALUE);
 					} else {
-						data[key] = values[key];
+						DATA[key] = values[key];
 					}
 				}
 			});
 
 			return {
-				service_id: item,
-				data,
+				service_id : item,
+				data       : DATA,
 			};
 		});
 
 		return payload;
 	}
 
-	if (
-
-		end_point === 'update_shipment_bl_details'
-
+	if (end_point === 'update_shipment_bl_details'
         && ['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)
-
 	) {
 		const payload = {
-
-			ids: getApisData?.list_shipment_bl_details?.map((i) => i?.id),
-
-			data: { bl_detail: values?.bl_detail },
-
+			ids  : values?.bl_detail?.map((i) => i?.id),
+			data : { bl_detail: values?.bl_detail },
 		};
 
 		return payload;
