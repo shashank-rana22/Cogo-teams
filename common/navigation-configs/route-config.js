@@ -6,6 +6,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
+import byodDashboard from './config/byod-dashboard';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
@@ -109,6 +110,7 @@ const routeConfig = {
 	...shipmentLtlFreight,
 	...ticketManagement,
 	...rfqDashboard,
+	...byodDashboard,
 };
 
 export default routeConfig;

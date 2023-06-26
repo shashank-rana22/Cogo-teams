@@ -58,6 +58,7 @@ importers:
       '@cogoport/bn-salvage': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/byod-dashboards': workspace:0.1.0
       '@cogoport/chakravyuh': workspace:0.1.0
       '@cogoport/chro': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
@@ -138,6 +139,7 @@ importers:
       '@cogoport/bn-salvage': link:../packages/bn-salvage
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/byod-dashboards': link:../packages/byod-dashboards
       '@cogoport/chakravyuh': link:../packages/chakravyuh
       '@cogoport/chro': link:../packages/chro
       '@cogoport/cogo-academy': link:../packages/cogo-academy
@@ -803,6 +805,34 @@ importers:
     devDependencies:
       '@types/file-saver': 2.0.5
       '@types/react': 18.2.11
+
+  packages/byod-dashboards:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.428
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.80
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+      stylelint: ^14.16.1
+    dependencies:
+      '@cogoport/charts': 1.0.3_react@18.2.0
+      '@cogoport/components': 1.0.428_mzj6eebdlkz5ykvcshgnpbbfgq
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.81_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+      stylelint: 14.16.1
 
   packages/chakravyuh:
     specifiers:
@@ -3574,6 +3604,39 @@ packages:
       - sass
     dev: false
 
+  /@cogoport/components/1.0.428_mzj6eebdlkz5ykvcshgnpbbfgq:
+    resolution: {integrity: sha512-EPQPYpMc9k6UAV2QHfveMf9UQ6LIaT4GJ5O3ZSUtR/K+f3YKYWHfu8kpHbbmU2p0huK8XZD5fnUalss/JvI/8A==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.81_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-hook-form: 7.44.3_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /@cogoport/eslint-config/1.1.0-beta.9_eslint@8.42.0:
     resolution: {integrity: sha512-3s/vokp3CLBp1dT5y2p6ypTkqkHeHhPQuJZ2GWyRQvKeFP59kd8+Nsr3bg32SdPO2feZoyaYBxkFg8P0ADVVYg==}
     peerDependencies:
@@ -3630,8 +3693,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.81_react@18.2.0:
+    resolution: {integrity: sha512-pVN5lAejKb4U1o2YMnSu/0Be/JrrRpCrzjA8L4H1eV17MxkHZ3ebE4nLiKADvLbd2AxOvcKJ4Il97Qa5mIY7LA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.81
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.79:
     resolution: {integrity: sha512-H09ulr+sVqqwHCjY49o5P/ksMLcSQrsICJId6mfwGw3nqWKA0I9d8qsk5IU5GzW6/sUmhRnI4IsW5w0bGRtSuw==}
+    dev: false
+
+  /@cogoport/icons/1.0.81:
+    resolution: {integrity: sha512-8DH58shmALp5dcnFyWWE7zm1ad4lxkxp2maUzhlnn9DLjjArmvDbbvhxuOwD+mu2ODxIHUg722HyUvRpRkC2mA==}
     dev: false
 
   /@cogoport/maps/1.0.3_bsu6urv6jm3npkveoaymjbpkh4:

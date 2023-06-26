@@ -2413,7 +2413,33 @@ const navigationMappingAdmin = {
 				possible_apis : apis.pricing_trends,
 			},
 		],
-
+	},
+	byod_dashboard: {
+		key         : 'byod_dashboard',
+		title       : 'BYOD',
+		isSubNavs   : true,
+		icon        : IcMDashboard,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'byod_dashboard-employee',
+				title         : 'Employee Dashboard',
+				href          : '/v2/byod/employee-dashboard',
+				as            : '/v2/byod/employee-dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.employee_dashboard,
+			},
+			{
+				key           : 'byod_dashboard-employee_list',
+				title         : 'Employee List',
+				href          : '/v2/byod/employee',
+				as            : '/v2/byod/employee',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.employee_list,
+			},
+		],
 	},
 };
 

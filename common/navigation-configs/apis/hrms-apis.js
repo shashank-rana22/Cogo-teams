@@ -130,6 +130,35 @@ const consolidated_invoices = {
 			service_name : 'hrms',
 		},
 	],
+	employee_dashboard: [
+		{
+			api          : 'create_employee_device_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	employee_list: [
+		{
+			api          : 'list_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_device_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_device_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default consolidated_invoices;
