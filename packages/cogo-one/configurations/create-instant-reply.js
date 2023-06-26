@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const EMPTY_VALUE_LENGTH = 0;
+
 const controls = [
 	{
 		name        : 'title',
@@ -8,7 +10,7 @@ const controls = [
 		placeholder : 'Enter name ',
 		rules       : {
 			required : true,
-			validate : (val) => (val?.trim()?.length <= GLOBAL_CONSTANTS.zeroth_index ? 'This cannot be Empty' : true),
+			validate : (val) => (val?.trim()?.length <= EMPTY_VALUE_LENGTH ? 'This cannot be Empty' : true),
 		},
 	},
 	{
@@ -29,7 +31,7 @@ const controls = [
 		placeholder : 'Enter content',
 		rules       : {
 			required : true,
-			validate : (val) => (val?.trim()?.length <= GLOBAL_CONSTANTS.zeroth_index ? 'This cannot be Empty' : true),
+			validate : (val) => (val?.trim()?.length <= EMPTY_VALUE_LENGTH ? 'This cannot be Empty' : true),
 		},
 	},
 ];
