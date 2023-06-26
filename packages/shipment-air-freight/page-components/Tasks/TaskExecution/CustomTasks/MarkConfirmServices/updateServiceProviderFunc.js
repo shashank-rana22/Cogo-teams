@@ -93,6 +93,7 @@ const useUpdateServiceProvider = ({
 				};
 				if (!CHECK_UNIQ[serviceObj.id]) {
 					CHECK_UNIQ[serviceObj.id] = true;
+
 					PROMISES_ARRAY.push(
 						updateShipmentTriggerFunc(
 							payloadForUpdateShipment,
@@ -102,21 +103,29 @@ const useUpdateServiceProvider = ({
 				}
 			});
 			try {
-				const resArr = await Promise.all(PROMISES_ARRAY);
+				// const resArr = await Promise.all(PROMISES_ARRAY);
 
-				let check = false;
-				let error = '';
-				(resArr || []).forEach((res) => {
-					if (res?.hasError) {
-						check = true;
-						error += `${res?.data}, `;
-					}
+				Promise.all(PROMISES_ARRAY).then(
+					(res) => {
+						console.log(res, 'hello');
+						Toast.success('Services Successfully Allocated !');
+					},
+				).catch((e) => {
+					Toast.error(e);
 				});
-				if (check) {
-					Toast.error(error);
-				} else {
-					Toast.success('Services Successfully Allocated !');
-				}
+				// const check = false;
+				// const error = '';
+				// (resArr || []).forEach((res) => {
+				// 	if (res?.hasError) {
+				// 		check = true;
+				// 		error += `${res?.data}, `;
+				// 	}
+				// });
+				// if (check) {
+				// 	Toast.error(error);
+				// } else {
+				// 	Toast.success('Services Successfully Allocated !');
+				// }
 			} catch (err) {
 				toastApiError(err);
 			}
