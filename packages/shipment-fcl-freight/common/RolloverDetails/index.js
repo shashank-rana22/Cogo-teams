@@ -1,12 +1,29 @@
-import { IcMError } from '@cogoport/icons-react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import { IcCError } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
+import { useContext } from 'react';
 
 import styles from './styles.module.css';
 
 const INITIAL_CONTAINERS_COUNT_FOR_ROLLOVER = 0;
+const MINIMUM_COUNT_FOR_PLURAL = 2;
 
-export default function RolloveDetails({ shipment_data }) {
-	const { rollover_shipments_details = [], parent_shipment_id = '', isGettingShipment } = shipment_data || {};
+const defaultRolloverDetails = [
+	{
+		id                    : 'cc9f2fb8-84ec-46c0-a797-f6d3360d5004',
+		serial_id             : 160536,
+		containers_count_data : [1],
+	},
+	{
+		id                    : 'cc9f2fb8-84ec-46c0-a797-f6d3360d5004',
+		serial_id             : 160536,
+		containers_count_data : [1],
+	},
+];
+
+export default function RolloveDetails() {
+	const rollover_shipments_details = defaultRolloverDetails;
+	// const { rollover_shipments_details = [], isGettingShipment = false } = useContext(ShipmentDetailContext) || {};
 
 	const [firstRollover, secondRollover] = (
 		rollover_shipments_details || []
@@ -23,18 +40,19 @@ export default function RolloveDetails({ shipment_data }) {
 	}
 
 	return (
-		<div>
+		<div className={styles.rollover_details}>
 			{firstRollover ? (
-				<div className={styles.rollover_tag}>
-					<IcMError width={20} height={20} fill="#CB6464" />
+				<p className={styles.rollover_tag}>
+					<IcCError width={20} height={20} />
 
-					<div>Rollover:</div>
+					<span>Rollover:</span>
+
 					<b>
-						{firstRollover.containers_count_data}
-						{' '}
-						containers
+						{`${firstRollover.containers_count_data} container ${
+							firstRollover.containers_count_data >= MINIMUM_COUNT_FOR_PLURAL
+						}`}
 					</b>
-					{' '}
+
 					<Link
 						href="/booking/fcl/[shipment_id]"
 						as={`/booking/fcl/${firstRollover.id}`}
@@ -66,16 +84,16 @@ export default function RolloveDetails({ shipment_data }) {
 							</Link>
 						</>
 					) : null}
-				</div>
+				</p>
 			) : null}
-			{parent_shipment_id && !isGettingShipment ? (
+			{/* {parent_shipment_id && !isGettingShipment ? (
 				<Link
 					as={`/shipments/${parent_shipment_id}`}
 					href="/shipments/[id]"
 				>
 					<div className="link margin-around">Parent Shipment</div>
 				</Link>
-			) : null}
+			) : null} */}
 		</div>
 	);
 }

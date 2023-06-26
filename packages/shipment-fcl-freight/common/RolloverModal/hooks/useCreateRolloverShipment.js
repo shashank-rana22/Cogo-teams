@@ -6,14 +6,14 @@ import { useContext } from 'react';
 import useUpdateShipmentContainerDetails from '../../../hooks/useUpdateShipmentContainerDetails';
 
 const useCreateRolloverShipment = ({
-	rollover = false,
+	isRollover = false,
 	rollover_containers = [],
 }) => {
 	const { shipment_data, refetch: getShipmentRefetch } = useContext(ShipmentDetailContext);
 
 	const { id: shipment_id } = shipment_data || {};
 
-	const updateContainerDetailsSuccessMessage = rollover
+	const updateContainerDetailsSuccessMessage = isRollover
 		? 'Rollover shipment has been created successfully'
 		: 'Details have been updated successfully';
 
@@ -27,11 +27,11 @@ const useCreateRolloverShipment = ({
 		refetch        : getShipmentRefetch,
 	});
 
-	const updateContainerDetails = async () => {
+	const updateContainerDetails = () => {
 		const update_data = rollover_containers.map((container) => ({
 			id   : container.id,
 			data : {
-				rollover_status : rollover ? 'confirmed' : 'cancelled',
+				rollover_status : isRollover ? 'confirmed' : 'cancelled',
 				is_deleted      : true,
 			},
 		}));
@@ -52,7 +52,7 @@ const useCreateRolloverShipment = ({
 	};
 
 	const handleSubmit = () => {
-		if (rollover) {
+		if (isRollover) {
 			createRollover();
 		} else {
 			updateContainerDetails();

@@ -13,7 +13,8 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
-import Rollover from '../../../common/RolloverModal';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -30,9 +31,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
-
-	const { serial_id, state, container_details } = shipment_data || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
 	const rollover_containers = (container_details || []).filter(
 		(container) => container?.rollover_status === 'requested',
@@ -123,10 +122,11 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
+					<RolloveDetails />
 					<ShipmentChat />
 				</div>
 
-				{state === 'cancelled' ? <CancelDetails /> : null}
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
@@ -160,8 +160,8 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
-								filters={{ q: serial_id }}
-								pre_subject_text={`${serial_id}`}
+								filters={{ q: shipment_data?.serial_id }}
+								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
 
@@ -172,7 +172,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 				</div>
 
 				{!isEmpty(rollover_containers) ? (
-					<Rollover rollover_containers={rollover_containers} />
+					<RolloverActionModal rollover_containers={rollover_containers} />
 				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>

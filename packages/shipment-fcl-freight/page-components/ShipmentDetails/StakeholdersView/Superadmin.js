@@ -5,6 +5,7 @@ import { Tracking } from '@cogoport/ocean-modules';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
@@ -13,6 +14,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
@@ -31,13 +33,17 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -167,6 +173,10 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverRequestedModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

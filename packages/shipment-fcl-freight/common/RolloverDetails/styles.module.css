@@ -1,9 +1,15 @@
+.rollover_details {
+    display: flex;
+    background-color: var(--color-tertiary-blue-3);
+    padding: 4px;
+}
 .rollover_tag {
-
+    display: flex;
+    margin-bottom: 0;
 }
 
 .link {
-
+    margin-left: 10px;
 }
 
 .vertical_line {
