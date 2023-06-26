@@ -32,13 +32,11 @@ export function Loader() {
 	));
 }
 
-export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
+export function ListItem({ item, activeCard, handleTemplateSelect, openCreateReply }) {
 	const {
 		content: { name: messageTitle = '' } = {},
 		description: messageContent = '',
 		third_party_template_status,
-		html_template,
-		name: templateTitle,
 		id,
 	} = item || {};
 
@@ -46,23 +44,12 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 
 	const { label, color } = STATUS_MAPPING[third_party_template_status || 'pending'] || {};
 
-	const handleClick = () => {
-		handleSelect(
-			{
-				val    : html_template,
-				status : third_party_template_status,
-				name   : templateTitle,
-				id,
-			},
-		);
-	};
-
 	return (
 		<div
 			key={id}
 			role="presentation"
 			className={activeCard === id ? styles.active : styles.each_message}
-			onClick={handleClick}
+			onClick={() => handleTemplateSelect(item)}
 			style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
 		>
 			<div className={styles.wrap}>

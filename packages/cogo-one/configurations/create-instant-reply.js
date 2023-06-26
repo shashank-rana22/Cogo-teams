@@ -1,23 +1,36 @@
-const controls = {
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-	title: {
+const controls = [
+	{
 		name        : 'title',
 		type        : 'input',
+		label       : 'Name',
 		placeholder : 'Enter name ',
 		rules       : {
 			required : true,
-			validate : (val) => (val?.trim()?.length <= 0 ? 'This cannot be Empty' : true),
+			validate : (val) => (val?.trim()?.length <= GLOBAL_CONSTANTS.zeroth_index ? 'This cannot be Empty' : true),
 		},
 	},
-	content: {
+	{
+		name        : 'language',
+		type        : 'select',
+		label       : 'Language',
+		placeholder : 'select language',
+		options     : GLOBAL_CONSTANTS.languages,
+		rules       : {
+			required: true,
+		},
+	},
+	{
 		name        : 'content',
 		type        : 'textarea',
+		label       : 'Content',
+		rows        : 6,
 		placeholder : 'Enter content',
 		rules       : {
 			required : true,
-			validate : (val) => (val?.trim()?.length <= 0 ? 'This cannot be Empty' : true),
+			validate : (val) => (val?.trim()?.length <= GLOBAL_CONSTANTS.zeroth_index ? 'This cannot be Empty' : true),
 		},
 	},
-
-};
+];
 export default controls;
