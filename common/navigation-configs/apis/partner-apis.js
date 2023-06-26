@@ -12644,6 +12644,10 @@ const partner = {
 			api         : 'get_payments_dunning_delete_master_exception',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
+			access_type : 'private',
+		},
 	],
 };
 

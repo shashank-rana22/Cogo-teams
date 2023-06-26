@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import CampaignManagement from './components/CampaignManagement';
 import ExceptionsManagement from './components/ExceptionsManagement';
+import FinancialSummary from './components/FinancialSummary';
 import styles from './styles.module.css';
 
 function Dunnings() {
@@ -30,6 +31,9 @@ function Dunnings() {
 					fullWidth
 					themeType="primary"
 				>
+					<TabPanel name="dashboard" title="Financial Summary">
+						<FinancialSummary />
+					</TabPanel>
 					<TabPanel
 						className={styles.tab_panel_dashboard}
 						name="campaign-management"

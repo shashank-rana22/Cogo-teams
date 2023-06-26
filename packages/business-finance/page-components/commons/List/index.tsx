@@ -90,7 +90,7 @@ function List({
 					/>
 				))}
 
-				{!(list?.length > 0) && 	(
+				{!(list?.length > 0) && !loading &&	(
 					<div className={styles.no_data}>
 						<img
 							style={{ width: '24%', margin: '8%' }}
