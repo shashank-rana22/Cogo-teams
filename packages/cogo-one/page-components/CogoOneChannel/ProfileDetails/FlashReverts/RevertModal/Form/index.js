@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function Form({
 	control, controls, errors,
-	// showElements
+	showElements,
 }) {
 	return (
 		<div className={styles.container}>
@@ -12,7 +12,9 @@ function Form({
 				const { controlType, name, label } = eachControl || {};
 				const Element = getFieldController(controlType);
 
-				if (!Element) {
+				const show = !(eachControl.name in showElements) || showElements[eachControl.name];
+
+				if (!Element || !show) {
 					return null;
 				}
 

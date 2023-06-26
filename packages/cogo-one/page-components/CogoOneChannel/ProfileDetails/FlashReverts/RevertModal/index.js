@@ -21,6 +21,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 				lower_limit : '',
 				upper_limit : '',
 			}],
+			chargeable_weight: data?.service?.chargeable_weight || '',
 		},
 	});
 
@@ -29,10 +30,12 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		handleRevertPrice,
 	} = useRevertPrice({ item: data, setModalState, shipmentFlashBookingRates });
 
+	const chargeableWeight = watch('chargeable_weight');
+
 	const { fields: controls, showElements } = useGetRevertFormControls({
 		data,
 		userId,
-		watch,
+		chargeableWeight,
 	});
 
 	return (

@@ -9,20 +9,17 @@ const NEGATIVE_VALUE = 0;
 const MIN_CHARGEABLE_WEIGHT = 45;
 const MIN_VALUE = 0;
 
-const useGetRevertFormControls = ({ data, watch }) => {
+const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 	const {
 		service_type,
 		service_provider_id,
-		service = {},
 	} = data || {};
 
-	const isChargeableWeight = watch('chargeable_weight');
-
-	const SERVICE_CONTROLS_MAPPING = useActiveControlsMapping({ isChargeableWeight });
+	const SERVICE_CONTROLS_MAPPING = useActiveControlsMapping();
 
 	const showElements = {
-		min_price    : isChargeableWeight < MIN_CHARGEABLE_WEIGHT,
-		weight_slabs : isChargeableWeight < MAX_WEIGHT_SLAB,
+		min_price    : chargeableWeight < MIN_CHARGEABLE_WEIGHT,
+		weight_slabs : chargeableWeight < MAX_WEIGHT_SLAB,
 	};
 
 	const controls = [
@@ -30,13 +27,14 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			name    : 'schedule_type',
 			label   : 'Schedule Type',
 			type    : 'select',
+			value   : 'direct',
 			options : [
 				{ label: 'Transhipment', value: 'transhipment' },
 				{ label: 'Direct', value: 'direct' },
 			],
 			placeholder : 'Select Schedule Type',
 			rules       : { required: true },
-			value       : 'direct',
+
 		},
 		{
 			label       : 'Rate Provided by user',
@@ -92,7 +90,6 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			label       : 'Chargeable Weight',
 			controlType : 'input',
 			type        : 'number',
-			value       : service?.chargeable_weight,
 			placeholder : 'Enter Chargeable Weight',
 			rules       : { required: 'Chargeable Weight is required' },
 		},
@@ -181,7 +178,7 @@ const useGetRevertFormControls = ({ data, watch }) => {
 			rules       : {
 				required:
 					service_type === 'air_freight_service'
-					&& isChargeableWeight < MAX_WEIGHT_SLAB,
+					&& chargeableWeight < MAX_WEIGHT_SLAB,
 			},
 
 		},
