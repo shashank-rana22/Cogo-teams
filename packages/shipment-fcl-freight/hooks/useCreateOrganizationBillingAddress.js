@@ -7,6 +7,7 @@ const useCreateOrganizationBillingAddress = ({
 	addressType,
 	organization_id = '',
 	successMessage = 'Successfully Added Address',
+	refetch = () => {},
 }) => {
 	const END_POINT = checked ? '/create_organization_billing_address' : '/create_organization_address';
 
@@ -15,7 +16,7 @@ const useCreateOrganizationBillingAddress = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const createSellerAddres = async (item, handleCloseModal) => {
+	const createSellerAddres = async (item) => {
 		const { poc_name, email, phoneNumber, ...rest } = item || {};
 		const { number, country_code } = phoneNumber || {};
 		try {
@@ -37,7 +38,7 @@ const useCreateOrganizationBillingAddress = ({
 				},
 			});
 			Toast.success(successMessage);
-			handleCloseModal();
+			refetch();
 		} catch (error) {
 			Toast.error(getApiError(error?.response?.data));
 		}

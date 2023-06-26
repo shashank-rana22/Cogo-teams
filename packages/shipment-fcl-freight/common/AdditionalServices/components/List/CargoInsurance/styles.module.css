@@ -29,6 +29,11 @@
 .box_div{
 	display: flex;
 	align-items: center;
+
+	& > div:nth-child(2){
+		display: flex;
+		margin-left: 4px;
+	}
 }
 
 .btn_wrap{

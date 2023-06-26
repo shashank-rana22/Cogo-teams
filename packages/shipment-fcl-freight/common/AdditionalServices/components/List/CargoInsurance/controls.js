@@ -6,9 +6,11 @@ const controls = () => [
 		name           : 'cargo_insurance_commodity',
 		type           : 'select',
 		span           : 12,
-		optionsListKey : 'insurance-commodities',
+		optionsListKey : 'insurance_commodities',
 		defaultOptions : true,
-		rules          : { required: true },
+		options        : [],
+		placeholder    : 'select Commodity',
+		rules          : { required: 'Commodity is required' },
 	},
 	{
 		name  : 'cargo_insurance_commodity_description',

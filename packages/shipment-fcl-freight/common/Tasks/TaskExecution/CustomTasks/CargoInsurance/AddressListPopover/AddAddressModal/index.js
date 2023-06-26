@@ -54,10 +54,19 @@ function AddModal({
 		control,
 	} = useForm();
 
+	const handleCloseModal = () => {
+		setAddAddressModal(false);
+	};
+
+	const refetchAfterApiCall = () => {
+		handleCloseModal();
+	};
+
 	const { createSellerAddres, createAddressLoading, response } =	useCreateOrganizationBillingAddress({
 		checked,
 		addressType,
-		organization_id: shipmentData?.importer_exporter?.id,
+		organization_id : shipmentData?.importer_exporter?.id,
+		refetch         : refetchAfterApiCall,
 	});
 
 	const pincode = watch('pincode');
@@ -113,10 +122,6 @@ function AddModal({
 			</div>
 		) : null;
 	}
-
-	const handleCloseModal = () => {
-		setAddAddressModal(false);
-	};
 
 	const onSubmit = async (data) => {
 		await createSellerAddres(data, handleCloseModal);

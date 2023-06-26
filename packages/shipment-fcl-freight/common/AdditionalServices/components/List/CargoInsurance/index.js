@@ -1,8 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
-// import { useDebounceQuery, useForm } from '@cogoport/forms';
+import { useDebounceQuery, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
-// import { Layout } from '@cogoport/ocean-modules';
+import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
+import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
@@ -13,10 +13,10 @@ import useGetInsuranceListCommodities from '../../../../../hooks/useGetInsurance
 import useGetInsuranceRate from '../../../../../hooks/useGetInsuranceRate';
 
 import controls from './controls';
-// import EmptyState from './EmptyState';
-// import Loading from './Loading';
-// import PremiumRate from './PremiumRate';
-import styles from './styles.modules.css';
+import EmptyState from './EmptyState';
+import Loading from './Loading';
+import PremiumRate from './PremiumRate';
+import styles from './styles.module.css';
 
 const LABEL_MAPPING = {
 	export   : 'Destination Location',
@@ -48,14 +48,12 @@ function CargoInsurance({
 	servicesList = [],
 }) {
 	const [commodity, setCommodity] = useState('');
-	const [rateData, setRateData] = useState({});
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
-	// const { query = '', debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const { userId } = useSelector(({ profile }) => ({
-		userId: profile.id,
-	}));
+	const { user } = useSelector((state) => state?.profile);
+	const { id: userId } = user || {};
 
 	const {
 		origin_country_id = '',
@@ -68,97 +66,95 @@ function CargoInsurance({
 		refetch();
 	};
 
-	// const trade_type = getTradeTypeByIncoTerm(data?.inco_term);
+	const {
+		premiumLoading: loading, premiumData,
+		premiumRate,
+	} = useGetInsuranceRate();
 
-	// const cargoInsuranceCountryId =	trade_type === 'export'
-	// 	? primary_service?.destination_port?.id : primary_service?.origin_port?.id;
-	console.log({ primary_service, data });
+	const trade_type = getTradeTypeByIncoTerm(data?.inco_term);
+
+	const cargoInsuranceCountryId =	trade_type === 'export'
+		? primary_service?.destination_port?.country_id : primary_service?.origin_port?.country_id;
 
 	const { isEligible, loading: apiLoading } =	useGetInsuranceCountrySupported({
-		country_id: '345f3aa9-ae78-40cf-b70a-fc5c3af2af99',
+		country_id: cargoInsuranceCountryId,
 	});
 
 	const transitMode = TRANSIT_MODE_MAPPING[service_type] || 'ROAD';
 
 	const { handleAddCargoInsurance, cargoLoading } = useCreateSpotSearch({
-		data,
+		shipmentData           : data,
 		setAddCargoInsurance,
-		rateData,
+		rateData               : premiumData,
 		commodity,
 		transitMode,
-		primary_service,
-		// trade_type,
-		refetch: refetchAfterApiCall,
-	});
-
-	const {
-		premiumLoading: loading,
-		premiumRate,
-	} = useGetInsuranceRate({
-		setRateData,
+		origin_country_id      : primary_service?.origin_port?.country_id,
+		destination_country_id : primary_service?.destination_port?.country_id,
+		trade_type             : primary_service?.trade_type,
+		refetch                : refetchAfterApiCall,
 	});
 
 	const { list = [] } = useGetInsuranceListCommodities();
 
-	// const finalControls = controls({
-	// 	locationLabel: LABEL_MAPPING[trade_type] || 'Select Country',
-	// 	transitMode,
-	// });
+	const finalControls = controls({
+		locationLabel: LABEL_MAPPING[trade_type] || 'Select Country',
+		transitMode,
+	});
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+		setValue,
+		watch,
+	} = useForm();
 
-	// const {
-	// 	control,
-	// 	handleSubmit,
-	// 	formState: { errors },
-	// 	setValue,
-	// 	watch,
-	// } = useForm();
+	const cargoValue = watch('cargo_value');
+	const cargoValueCurrency = watch('cargo_value_currency');
+	const cargoInsuranceCommodityDescription = watch(
+		'cargo_insurance_commodity_description',
+	);
+	const cargoInsuranceCommodity = watch('cargo_insurance_commodity');
+	const formValues = watch();
 
-	// const cargoValue = watch('cargo_value');
-	// const cargoValueCurrency = watch('cargo_value_currency');
-	// const cargoInsuranceCommodityDescription = watch(
-	// 	'cargo_insurance_commodity_description',
-	// );
-	// const cargoInsuranceCommodity = watch('cargo_insurance_commodity');
-	// const formValues = watch();
+	useEffect(() => {
+		if (!isEmpty(cargoValue) && !isEmpty(cargoInsuranceCommodity)) {
+			setCurrentCargoInsurance({
+				descriptionOfCargo : cargoInsuranceCommodityDescription,
+				policyCommodityId  : cargoInsuranceCommodity,
+				invoiceValue       : cargoValue,
+				policyCurrency     : cargoValueCurrency,
+				policyType         : POLICY_TYPE_MAPPING[primary_service?.trade_type] || 'INLAND',
+				// policyCountryId    : '345f3aa9-ae78-40cf-b70a-fc5c3af2af99',
+				policyCountryId    : cargoInsuranceCountryId,
+				performedBy        : userId,
+			});
+		}
+	}, [JSON.stringify(formValues)]);
 
-	// useEffect(() => {
-	// 	if (!isEmpty(cargoValue) && !isEmpty(cargoInsuranceCommodity)) {
-	// 		setCurrentCargoInsurance({
-	// 			descriptionOfCargo : cargoInsuranceCommodityDescription,
-	// 			policyCommodityId  : cargoInsuranceCommodity,
-	// 			invoiceValue       : cargoValue,
-	// 			policyCurrency     : cargoValueCurrency,
-	// 			policyType         : POLICY_TYPE_MAPPING[trade_type] || 'INLAND',
-	// 			policyCountryId    : cargoInsuranceCountryId,
-	// 			performedBy        : userId,
-	// 		});
-	// 	}
-	// }, [JSON.stringify(formValues)]);
+	useEffect(() => {
+		debounceQuery(currentCargoInsurance);
+	}, [debounceQuery, currentCargoInsurance]);
 
-	// useEffect(() => {
-	// 	debounceQuery(currentCargoInsurance);
-	// }, [debounceQuery, currentCargoInsurance]);
+	useEffect(() => {
+		if (!isEmpty(query)) {
+			premiumRate(query);
+		}
+	}, [query]);
 
-	// useEffect(() => {
-	// 	if (!isEmpty(query)) {
-	// 		premiumRate(query);
-	// 	}
-	// }, [query]);
+	useEffect(() => {
+		const optionselected = (list || []).find(
+			(option) => option.id === cargoInsuranceCommodity,
+		);
+		setCommodity(optionselected?.commodity);
+		setValue(
+			'cargo_insurance_commodity_description',
+			optionselected?.cargoDescription,
+		);
+	}, [cargoInsuranceCommodity]);
 
-	// useEffect(() => {
-	// 	const optionselected = (list || []).find(
-	// 		(option) => option.id === cargoInsuranceCommodity,
-	// 	);
-	// 	setCommodity(optionselected?.commodity);
-	// 	setValue(
-	// 		'cargo_insurance_commodity_description',
-	// 		optionselected?.cargoDescription,
-	// 	);
-	// }, [cargoInsuranceCommodity]);
-
-	// if (apiLoading) {
-	// 	return <Loading />;
-	// }
+	if (apiLoading) {
+		return <Loading />;
+	}
 
 	// if (
 	// 	![origin_country_id, destination_country_id].includes(
@@ -174,26 +170,27 @@ function CargoInsurance({
 
 	return (
 		<Modal
-			size="xl"
+			size="sm"
 			// show={showInsurance}
 			show
 			onClose={() => setShowInsurance(false)}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Add Cargo Insurance" />
-			{/* <Modal.Body>
+			<Modal.Body>
 				<div className={styles.container}>
-					<Layout controls={control} fields={finalControls} errors={errors} />
+					<Layout control={control} fields={finalControls} errors={errors} />
 
 					{loading ? <Loading /> : null}
 
-					{!isEmpty(rateData) && !loading ? (
-						<PremiumRate rateData={rateData} />
+					{!isEmpty(premiumData) && !loading ? (
+						<PremiumRate rateData={premiumData} />
 					) : null}
 				</div>
-			</Modal.Body> */}
+			</Modal.Body>
 			<Modal.Footer>
 				<Button
+					themeType="secondary"
 					disabled={loading || cargoLoading}
 					loading={cargoLoading}
 					onClick={() => setAddCargoInsurance(false)}
@@ -202,9 +199,10 @@ function CargoInsurance({
 				</Button>
 
 				<Button
-					// onClick={handleSubmit(handleAddCargoInsurance)}
+					onClick={handleSubmit(handleAddCargoInsurance)}
 					loading={cargoLoading}
-					disabled={isEmpty(rateData)}
+					disabled={isEmpty(premiumData)}
+					style={{ marginLeft: '16px' }}
 				>
 					Save and proceed
 				</Button>

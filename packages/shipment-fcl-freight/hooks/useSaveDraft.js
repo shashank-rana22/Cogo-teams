@@ -41,9 +41,9 @@ const useSaveDraft = ({
 			invoiceDoc,
 			...rest
 		} = policyForSelf
-			? { ...insuranceDetails, ...billingData }
-			: insuranceDetails;
-
+			? insuranceDetails
+			: { ...insuranceDetails, ...billingData };
+		console.log(policyForSelf, ' :policyForSelf');
 		if (insuranceDetails[key]) {
 			payload = {
 				...addressId,

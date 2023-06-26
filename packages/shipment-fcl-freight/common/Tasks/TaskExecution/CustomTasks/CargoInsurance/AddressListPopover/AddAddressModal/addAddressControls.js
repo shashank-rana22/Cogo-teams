@@ -141,7 +141,7 @@ export const useGetControls = ({ checked }) => {
 		formState: { errors },
 	} = useForm();
 	const formValues = watch();
-	console.log(formValues, ' :formValues');
+
 	const [country, setCountry] = useState();
 	const countryCode = getCountryDetails({
 		country_id: country?.id,

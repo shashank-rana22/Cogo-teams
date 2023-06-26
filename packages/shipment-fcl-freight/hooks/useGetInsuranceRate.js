@@ -4,8 +4,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} }) => {
-	const userId = useSelector(({ profile }) => profile?.id);
+const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} } = {}) => {
+	const { user } = useSelector((state) => state?.profile);
+	const { id: userId } = user || {};
 	const {
 		cargoAmount,
 		policyCurrency,
@@ -29,9 +30,9 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} }) => {
 		},
 	}, { manual: true });
 
-	const premiumRate = useCallback(async () => {
+	const premiumRate = useCallback(async (payload) => {
 		try {
-			await trigger({});
+			await trigger({ ...(payload && { params: { ...payload } }) });
 		} catch (err) {
 			toastApiError(err);
 		}

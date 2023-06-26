@@ -2,24 +2,26 @@ import { Toast } from '@cogoport/components';
 import { getApiError } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useCreateSpotSearch = ({
-	data = {},
+	shipmentData = {},
 	rateData = {},
 	commodity = '',
 	transitMode = '',
-	primary_service = {},
+	origin_country_id = '',
+	destination_country_id = '',
 	trade_type = '',
 	refetch = () => {},
 	successMessage = 'Cargo Insurance added successfully!',
 }) => {
+	const { user } = useSelector((state) => state?.profile);
+	const { id: userId } = user || {};
 	const router = useRouter();
 
-	const { origin_country_id = '', destination_country_id = '' } =		primary_service;
+	const { user_id, importer_exporter_id, importer_exporter_branch_id, id } =	shipmentData || {};
 
-	const { user_id, importer_exporter_id, importer_exporter_branch_id, id } =		data || {};
-
-	const [{ loading, data: res }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_spot_search',
 		method : 'POST',
 	}, { manual: true });
@@ -30,7 +32,7 @@ const useCreateSpotSearch = ({
 			source                              : 'upsell',
 			importer_exporter_id,
 			importer_exporter_branch_id,
-			user_id,
+			user_id                             : '12aa63d6-a13c-42cd-bbee-645e47b8055f',
 			source_id                           : id,
 			cargo_insurance_services_attributes : [
 				{
@@ -51,17 +53,18 @@ const useCreateSpotSearch = ({
 				},
 			],
 		};
-
 		try {
-			trigger({
+			const res = await trigger({
 				data: payload,
 			});
-
 			Toast.success(successMessage);
 			refetch();
-			const HREF = '/book/[search_id]/[importer_exporter_id]';
+			const href = `/book/${res?.data?.id}/${importer_exporter_id}`;
 			const as = `/book/${res?.data?.id}/${importer_exporter_id}`;
-			router.push(HREF, as);
+			// const HREF = '/book/[search_id]/[importer_exporter_id]';
+			// const as = `/book/${data?.id}/${importer_exporter_id}`;
+
+			router.push(href, as);
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));
 		}

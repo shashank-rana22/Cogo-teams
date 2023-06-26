@@ -31,7 +31,7 @@ function Step1({
 	setBillingData = () => {},
 }) {
 	const [policyForSelf, setPolicyForSelf] = useState(
-		insuranceDetails?.policyForSelf ?? true,
+		insuranceDetails?.policyForSelf,
 	);
 	const [prosporerAddress, setProsporerAddress] = useState({});
 	const [checked, setChecked] = useState([]);
@@ -41,7 +41,6 @@ function Step1({
 			setStep(() => (step !== LAST_STEP ? step + INCREMENT_FACTOR : step));
 		}
 	};
-
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
 		policyId,
@@ -95,15 +94,15 @@ function Step1({
 	useEffect(() => {
 		if (policyForSelf) {
 			setAddressId(
-				billingData?.address_type === 'billing'
-					? { organizationBillingAddressId: billingData?.billingId }
-					: { organizationAddressId: billingData?.billingId },
-			);
-		} else {
-			setAddressId(
 				prosporerAddress?.address_type === 'billing'
 					? { organizationBillingAddressId: prosporerAddress?.id }
 					: { organizationAddressId: prosporerAddress?.id },
+			);
+		} else {
+			setAddressId(
+				billingData?.address_type === 'billing'
+					? { organizationBillingAddressId: billingData?.billingId }
+					: { organizationAddressId: billingData?.billingId },
 			);
 		}
 	}, [billingData, prosporerAddress]);
@@ -121,7 +120,7 @@ function Step1({
 					<Toggle
 						offLabel="Self"
 						onLabel="Other"
-						value={policyForSelf}
+						checked={policyForSelf}
 						onChange={() => setPolicyForSelf((p) => !p)}
 					/>
 				</div>
@@ -154,11 +153,13 @@ function Step1({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(handleNextStep)}
+					onClick={
+						handleSubmit(handleNextStep)
+					}
 					disabled={
 						policyForSelf || loading
-							? isEmpty(billingData.billingId)
-							: isEmpty(prosporerAddress)
+							? isEmpty(prosporerAddress)
+							: isEmpty(billingData.billingId)
 					}
 					style={{ marginLeft: '16px' }}
 				>

@@ -47,7 +47,7 @@ function useGetStateFromPincode({ pincode = '', policyForSelf = true }) {
 	);
 
 	useEffect(() => {
-		if (pincode !== '' && pincode?.length === PINCODE_LENGTH && !policyForSelf) {
+		if (pincode !== '' && pincode?.length === PINCODE_LENGTH && policyForSelf) {
 			responseCity();
 		}
 	}, [pincode, policyForSelf, responseCity]);

@@ -1,9 +1,9 @@
-import { ToolTip, cl } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 
-import styles from './styles.modules.css';
+import styles from './styles.module.css';
 
 function PremiumRate({ rateData }) {
 	const {
@@ -27,20 +27,18 @@ function PremiumRate({ rateData }) {
 		<div>
 			<div className={styles.rate}>
 				<div className={styles.box_div}>
-					Premium:
-					<ToolTip
+					<span>Premium:</span>
+					<Tooltip
 						theme="light"
-						placement="top"
+						placement="bottom"
 						content={(
 							<div className={styles.tooltip_container}>
 								<div>Inclusive of Taxes</div>
 							</div>
 						)}
 					>
-						<div>
-							<IcMInfo />
-						</div>
-					</ToolTip>
+						<IcMInfo />
+					</Tooltip>
 				</div>
 
 				<div>{formatAmounts(netPremium)}</div>

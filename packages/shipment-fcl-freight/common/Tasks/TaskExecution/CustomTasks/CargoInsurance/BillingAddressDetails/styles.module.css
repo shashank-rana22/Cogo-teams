@@ -52,7 +52,7 @@
 .list{
 	display: flex;
 	width: 100%;
-	overflow: scroll;
+	overflow: auto;
 	gap: 10px;
 	padding: 10px;
 }

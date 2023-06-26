@@ -5,6 +5,7 @@ import {
 	Radio,
 	cl,
 } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/ocean-modules';
@@ -20,8 +21,7 @@ import { bilingAddressControlForSelf } from '../utils/bilingAddressControlForSel
 import styles from './styles.module.css';
 
 function BillingAddressDetails({
-	policyForSelf = true,
-	formProps = {},
+	policyForSelf = false,
 	billingData = {},
 	setBillingData = () => {},
 	formData = {},
@@ -41,13 +41,15 @@ function BillingAddressDetails({
 	});
 
 	const {
+		handleSubmit = () => {},
 		watch,
 		setValue,
 		control,
 		formState: { errors },
-	} = formProps;
+	} = useForm();
 
 	const formValues = watch();
+
 	const pincode = watch('billingPincode');
 
 	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf });
@@ -62,7 +64,7 @@ function BillingAddressDetails({
 			setValue('billingCity', city?.name);
 			setValue('billingState', region?.name);
 		}
-	}, [list, city, region?.name]);
+	}, [city, region?.name]);
 
 	useEffect(() => {
 		setFormData({ ...formData, ...formValues });
@@ -71,6 +73,43 @@ function BillingAddressDetails({
 	return (
 		<div className={styles.container}>
 			{policyForSelf ? (
+				<div className={styles.popover}>
+					<Layout
+						fields={bilingAddressControl({ insuranceDetails })}
+						control={control}
+						errors={errors}
+					/>
+					<Popover
+						placement="bottom"
+						visible={showFilters && !addAddressModal}
+						trigger="click"
+						render={addres({
+							data,
+							checked,
+							setChecked,
+							loading: addressLoading,
+							setshowFilters,
+							policyForSelf,
+							addAddressModal,
+							setAddAddressModal,
+							setProsporerAddress,
+							shipmentData,
+						})}
+					>
+						<div
+							className={styles.align_div}
+							role="presentation"
+							onClick={() => {
+								setshowFilters(!showFilters);
+							}}
+						>
+							<IcMPlus />
+							{' '}
+							Add/Change proposer address
+						</div>
+					</Popover>
+				</div>
+			) : (
 				<div>
 					{addressLoading ? (
 						<Loader />
@@ -119,46 +158,9 @@ function BillingAddressDetails({
 						</div>
 					)}
 				</div>
-			) : (
-				<div className={styles.popover}>
-					<Layout
-						fields={bilingAddressControl({ insuranceDetails })}
-						control={control}
-						errors={errors}
-					/>
-					<Popover
-						placement="bottom"
-						visible={showFilters && !addAddressModal}
-						trigger="click"
-						render={addres({
-							data,
-							checked,
-							setChecked,
-							loading: addressLoading,
-							setshowFilters,
-							policyForSelf,
-							addAddressModal,
-							setAddAddressModal,
-							setProsporerAddress,
-							shipmentData,
-						})}
-					>
-						<div
-							className={styles.align_div}
-							role="presentation"
-							onClick={() => {
-								setshowFilters(!showFilters);
-							}}
-						>
-							<IcMPlus />
-							{' '}
-							Add/Change proposer address
-						</div>
-					</Popover>
-				</div>
 			) }
 
-			{!policyForSelf && !isEmpty(Object.keys(prosporerAddress)) ? (
+			{policyForSelf && !isEmpty(Object.keys(prosporerAddress)) ? (
 				<div className={styles.section2}>
 					<div className={styles.selected}>
 						<div className={`${styles.card_txt} ${styles.orgName}`}>
