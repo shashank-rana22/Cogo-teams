@@ -6,6 +6,8 @@ import downloadFileFromUrl from '../../../../../utils/downloadFileFromUrl';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 0;
+
 function ExcelComponent({
 	Element,
 	name,
@@ -14,12 +16,13 @@ function ExcelComponent({
 	control,
 	errors,
 	cogo_academy_sheets = [],
-	getCogoAcademyCourse = () => [],
+	getCogoAcademyCourse = () => {},
+	disableExcel = false,
 }) {
 	const { dropareaProps, draggable, multiple, placeholder, rules, accept } = controlItem || {};
 
 	const { MAPPING, sheetData } = useMemo(() => {
-		const cogoAcademySheet = cogo_academy_sheets?.[0] || {};
+		const cogoAcademySheet = cogo_academy_sheets?.[FIRST_INDEX] || {};
 
 		return {
 			sheetData : cogoAcademySheet,
@@ -96,8 +99,15 @@ function ExcelComponent({
 					placeholder={placeholder}
 					accept={accept}
 					rules={rules}
+					disabled={disableExcel}
 				/>
 			</div>
+
+			{disableExcel ? (
+				<div className={styles.error_message}>
+					please click on save and generate to proceed
+				</div>
+			) : null}
 
 			{errors?.[name]?.message ? (
 				<div className={styles.error_message}>{errors?.[name]?.message}</div>
