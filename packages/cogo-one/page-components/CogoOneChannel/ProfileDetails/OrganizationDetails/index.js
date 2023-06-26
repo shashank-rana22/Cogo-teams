@@ -23,6 +23,7 @@ function OrganizationDetails({
 	openNewTab = () => {},
 	hideCpButton = false,
 	getOrgDetails = () => {},
+	hasVoiceCallAccess = false,
 }) {
 	const { organization_id:messageOrgId = '', account_type: accountType = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
@@ -189,7 +190,12 @@ function OrganizationDetails({
 				<>
 					<div className={styles.agent_title}>Organization Users</div>
 					{(organizationUserList || []).map((item) => (
-						<OrganizationUsers user={item} key={item.id} />
+						<OrganizationUsers
+							user={item}
+							key={item.id}
+							activeTab={activeTab}
+							hasVoiceCallAccess={hasVoiceCallAccess}
+						/>
 					))}
 
 				</>

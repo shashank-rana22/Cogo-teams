@@ -46,3 +46,26 @@
 		color: #221f20;
 	}
 }
+
+.disable_call_icon {
+	cursor: not-allowed;
+}
+
+.call_icon {
+	width: 13px;
+	height: 18px;
+	fill: #fff;
+}
+
+.dialer_icon_div {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 2px 4px;
+	cursor: pointer;
+	background: #abcd62;
+	border-radius: 6px;
+}
