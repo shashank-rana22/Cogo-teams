@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-export default function useBulkShipmentStakeholderReallocation({
+export default function useBulkReallocateShipmentStakeholders({
 	successMessage = 'Successfully Updated',
 	refetch = () => { },
 }) {

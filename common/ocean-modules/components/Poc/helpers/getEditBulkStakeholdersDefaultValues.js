@@ -30,5 +30,5 @@ export default function getEditBulkStakeholdersDefaultValues({ modifiedServicesL
 		};
 	});
 
-	return { DEFAULT_VALUES, FIELD_ARRAY_KEY };
+	return { DEFAULT_VALUES, fieldArrayKey: FIELD_ARRAY_KEY };
 }

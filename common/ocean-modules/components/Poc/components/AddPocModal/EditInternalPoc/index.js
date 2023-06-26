@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { useFieldArray, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import useBulkShipmentStakeholderReallocation from '../../../../../hooks/useBulkShipmentStakeholderReallocation';
+import useBulkReallocateShipmentStakeholders from '../../../../../hooks/useBulkReallocateShipmentStakeholders';
 import getBulkUpdateStakeholdersPayload from '../../../helpers/getBulkUpdateStakeholdersPayload';
 import getEditBulkStakeholdersDefaultValues from '../../../helpers/getEditBulkStakeholdersDefaultValues';
 import getServicesWithStakeholder from '../../../helpers/getServicesWithStakeholder';
@@ -22,26 +22,26 @@ function EditInternalPoc({
 
 	const { modifiedServicesList } = getServicesWithStakeholder({ listStakeholdersData, addPoc, servicesList });
 
-	const { DEFAULT_VALUES, FIELD_ARRAY_KEY } = getEditBulkStakeholdersDefaultValues({
+	const { DEFAULT_VALUES, fieldArrayKey } = getEditBulkStakeholdersDefaultValues({
 		modifiedServicesList,
 		...addPoc,
 	});
 
 	const formProps = useForm({ defaultValues: DEFAULT_VALUES });
 	const { control, handleSubmit } = formProps;
-	const { fields } = useFieldArray({ control, name: FIELD_ARRAY_KEY });
+	const { fields } = useFieldArray({ control, name: fieldArrayKey });
 
 	const refetch = () => {
 		setAddPoc(null);
 		stakeholdersTrigger();
 	};
 
-	const { loading, apiTrigger: updateBulkStakeholders } = useBulkShipmentStakeholderReallocation({ refetch });
+	const { loading, apiTrigger: updateBulkStakeholders } = useBulkReallocateShipmentStakeholders({ refetch });
 
 	const onClose = () => setAddPoc(null);
 
 	const onSubmit = (formValues) => {
-		const payload = getBulkUpdateStakeholdersPayload({ addPoc, shipment_id, formValues, FIELD_ARRAY_KEY });
+		const payload = getBulkUpdateStakeholdersPayload({ addPoc, shipment_id, formValues, fieldArrayKey });
 
 		updateBulkStakeholders(payload);
 	};
@@ -67,7 +67,7 @@ function EditInternalPoc({
 					<EditBulkStakeholders
 						fields={fields}
 						formProps={formProps}
-						FIELD_ARRAY_KEY={FIELD_ARRAY_KEY}
+						fieldArrayKey={fieldArrayKey}
 					/>
 				</div>
 			</Modal.Body>

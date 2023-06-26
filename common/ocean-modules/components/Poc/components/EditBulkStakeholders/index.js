@@ -20,10 +20,10 @@ const STAKEHOLDERS_CONTROLS = {
 
 const DESCRIPTION_DETAILS_KEYS = ['container_size', 'container_type', 'commodity', 'trade_type'];
 
-export default function EditBulkStakeholders({ fields = [], formProps = {}, FIELD_ARRAY_KEY = '' }) {
+export default function EditBulkStakeholders({ fields = [], formProps = {}, fieldArrayKey = '' }) {
 	const { control, formState: { errors }, clearErrors, setError } = formProps;
 
-	const fieldArrayErrors = errors?.[FIELD_ARRAY_KEY];
+	const fieldArrayErrors = errors?.[fieldArrayKey];
 
 	return (
 		<div className={styles.form_container}>
@@ -44,10 +44,10 @@ export default function EditBulkStakeholders({ fields = [], formProps = {}, FIEL
 							<div className={styles.check_box_container}>
 								<CheckboxController
 									control={control}
-									name={`${FIELD_ARRAY_KEY}.${index}.is_checked`}
+									name={`${fieldArrayKey}.${index}.is_checked`}
 									rules={{
 										validate: (_, formValues) => checkBulkUpdateStakeholderFormValid({
-											formValues, FIELD_ARRAY_KEY, clearErrors, setError,
+											formValues, fieldArrayKey, clearErrors, setError,
 										}),
 									}}
 								/>
@@ -77,7 +77,7 @@ export default function EditBulkStakeholders({ fields = [], formProps = {}, FIEL
 
 						<AsyncSelectController
 							{...STAKEHOLDERS_CONTROLS}
-							name={`${FIELD_ARRAY_KEY}.${index}.new_stakeholder`}
+							name={`${fieldArrayKey}.${index}.new_stakeholder`}
 							control={control}
 						/>
 					</div>

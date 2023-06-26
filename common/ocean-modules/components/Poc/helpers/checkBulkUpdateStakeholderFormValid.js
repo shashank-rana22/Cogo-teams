@@ -1,19 +1,19 @@
 export default function checkBulkUpdateStakeholderFormValid({
 	formValues = {},
-	FIELD_ARRAY_KEY = '',
+	fieldArrayKey = '',
 	clearErrors = () => {},
 	setError = () => {},
 }) {
-	const isAtLeastOneChecked = formValues?.[FIELD_ARRAY_KEY]
+	const isAtLeastOneChecked = formValues?.[fieldArrayKey]
 		.some((formValue) => !!formValue?.is_checked);
 
 	if (isAtLeastOneChecked) {
-		clearErrors(FIELD_ARRAY_KEY);
+		clearErrors(fieldArrayKey);
 		return true;
 	}
 
-	formValues?.[FIELD_ARRAY_KEY].forEach((_, index) => {
-		setError(`${FIELD_ARRAY_KEY}.${index}.is_checked`, {
+	formValues?.[fieldArrayKey].forEach((_, index) => {
+		setError(`${fieldArrayKey}.${index}.is_checked`, {
 			type    : 'custom',
 			message : 'Please select at least one service',
 		});
