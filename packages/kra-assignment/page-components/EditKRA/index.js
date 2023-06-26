@@ -11,6 +11,7 @@ function EditKRA() {
 
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.title}>
 				<h2>Edit KRA Request</h2>
 			</div>
@@ -20,7 +21,6 @@ function EditKRA() {
 			</div>
 
 			<div className={styles.container1}>
-
 				<div className={styles.tab_container}>
 					<Tabs
 						activeTab={activeTab}
@@ -34,7 +34,6 @@ function EditKRA() {
 						</TabPanel>
 					</Tabs>
 				</div>
-
 			</div>
 
 		</div>
