@@ -1,0 +1,31 @@
+.box{
+    background: #f8f2e7;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex{
+    display: flex;
+}
+.port_code{
+    font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+	color: #333;
+	letter-spacing: 0.02em;
+    margin: 0;
+}
+.label{
+    color: #4f4f4f;
+    font-weight: 600;
+}
+.sub_container{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}

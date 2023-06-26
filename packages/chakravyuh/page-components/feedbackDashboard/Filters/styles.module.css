@@ -1,0 +1,25 @@
+.container{
+    border-radius: 6px;
+    padding: 12px 8px;
+    background: #fff;
+    margin-bottom: 16px;
+}
+.filter_heading{
+    color: #4f4f4f;
+    font-weight: 600;
+}
+.flex{
+    display: flex;
+}
+.filter{
+    width: 180px;
+    margin-right: 8px;
+    :last-child{
+        margin-right: 0px;
+    }
+}
+.link_text{
+    margin-top: 36px;
+    text-decoration: underline;
+    cursor: pointer;
+}
