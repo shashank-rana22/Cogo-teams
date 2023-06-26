@@ -17,7 +17,7 @@ function useCreateIndividualKra() {
 	const createIndividualKra = useCallback(async (valuesIndividualKRA) => {
 		const DEFAULT_VALUE = 0;
 
-		const objData = valuesIndividualKRA?.map((i-mtem) => (
+		const objData = valuesIndividualKRA?.map((item) => (
 			{
 				employee_id                    : item?.employee_id,
 				kra_id                         : item?.kra_id,
