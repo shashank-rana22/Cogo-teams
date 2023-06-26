@@ -1,15 +1,15 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateShipmentInvoiceStatus from '../../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
 import Confirmation from './Confirmation';
 import LinersExchangeRateConfirm from './LinersExchangeRate';
 import styles from './styles.module.css';
 
 function ReviewServices({
-	showReview = false,
-	setShowReview = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -20,16 +20,18 @@ function ReviewServices({
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
 
 	const refetchAfterCall = () => {
-		setShowReview(false);
+		setShow(false);
 		refetch();
 	};
 
-	const { loading, apiTrigger } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
+	const { loading, apiTrigger } = useUpdateShipmentInvoiceStatus({ refetch: refetchAfterCall });
 
 	const handleUpdate = () => {
 		apiTrigger({
-			id     : invoice?.id,
-			status : value ? 'reviewed' : undefined,
+			payload: {
+				id     : invoice?.id,
+				status : value ? 'reviewed' : undefined,
+			},
 		});
 	};
 
@@ -38,10 +40,10 @@ function ReviewServices({
 			invoice={invoice}
 			setShowExchangeRateConfirmation={setShowExchangeRateConfirmation}
 			showExchangeRateConfirmation={showExchangeRateConfirmation}
-			setShow={setShowReview}
+			setShow={setShow}
 		/>
 	) : (
-		<Modal show={showReview} onClose={() => setShowReview(false)} closeOnOuterClick={false}>
+		<Modal show={show === 'showReview'} onClose={() => setShow(false)} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED" />
 			<Modal.Body>
 				<div className={styles.form}>
@@ -52,7 +54,7 @@ function ReviewServices({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setShowReview(false)}
+					onClick={() => setShow(false)}
 				>
 					Close
 				</Button>

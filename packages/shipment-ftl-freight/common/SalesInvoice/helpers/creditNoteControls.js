@@ -1,7 +1,10 @@
-import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import FTL_UNITS from '@cogoport/surface-modules/constants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
+
+const FALLBACK_VALUE_ZERO = 0;
+const FALLBACK_VALUE_ONE = 0;
 
 const commonControls = (handleChange, charge) => [
 	{
@@ -26,7 +29,6 @@ const commonControls = (handleChange, charge) => [
 		label          : 'Currency',
 		type           : 'select',
 		showOptional   : false,
-		className      : 'size-sm',
 		optionsListKey : 'exchange-rate-currencies',
 		placeholder    : 'Select Currency',
 		disabled       : true,
@@ -52,7 +54,7 @@ const commonControls = (handleChange, charge) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 
@@ -100,8 +102,7 @@ const rawControls = (charge, isEdit) => ({
 						value : 'true',
 					},
 				],
-				themeType : 'primary lg',
-				span      : 1,
+				span: 1,
 			},
 			...commonControls(charge, isEdit),
 		]
@@ -138,16 +139,15 @@ const creditNoteControls = ({
 			code             : item?.code,
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || 0,
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
+			price_discounted : item?.price_discounted || FALLBACK_VALUE_ZERO,
+			quantity         : item?.quantity || FALLBACK_VALUE_ZERO,
+			exchange_rate    : item?.exchange_rate || FALLBACK_VALUE_ONE,
+			tax_percent      : item?.tax_percent || FALLBACK_VALUE_ZERO,
 			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || 0,
+			total            : item?.tax_total_price_discounted || FALLBACK_VALUE_ZERO,
 			name             : item?.name,
 		})),
 	}));
-
 	control.push(...controls);
 	return control;
 };
