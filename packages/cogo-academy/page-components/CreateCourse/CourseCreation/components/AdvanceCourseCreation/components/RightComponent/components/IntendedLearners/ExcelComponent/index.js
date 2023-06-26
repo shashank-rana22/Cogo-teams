@@ -105,7 +105,7 @@ function ExcelComponent({
 
 			{disableExcel ? (
 				<div className={styles.error_message}>
-					please click on save and generate to proceed
+					Please click on save and generate to proceed
 				</div>
 			) : null}
 

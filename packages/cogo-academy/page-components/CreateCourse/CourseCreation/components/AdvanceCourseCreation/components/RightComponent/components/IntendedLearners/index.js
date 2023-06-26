@@ -21,7 +21,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 		loading,
 	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse, state, eligible_users });
 
-	const DATA_NOT_SAVED = mandatoryAudiencesUserWatch === 'custom' && eligible_users !== 'custom';
+	const dataNotSaved = mandatoryAudiencesUserWatch === 'custom' && eligible_users !== 'custom';
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +51,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 							errors={errors}
 							cogo_academy_sheets={cogo_academy_sheets}
 							getCogoAcademyCourse={getCogoAcademyCourse}
-							disableExcel={DATA_NOT_SAVED}
+							disableExcel={dataNotSaved}
 						/>
 					);
 				}
@@ -84,7 +84,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 							) : null}
 						</div>
 
-						{name === 'mandatory_audiences_user' && DATA_NOT_SAVED ? (
+						{name === 'mandatory_audiences_user' && dataNotSaved ? (
 							<div className={styles.generate_button}>
 								<Button
 									type="button"
