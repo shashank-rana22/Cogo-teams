@@ -23,7 +23,7 @@ function ListData({
 	isPanUploaded,
 	formattedMessageData = {},
 }) {
-	const [openModal, setOpenModal] = useState('');
+	const [documentTagUrl, setDocumentTagUrl] = useState('');
 
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
@@ -118,21 +118,21 @@ function ListData({
 											<Button
 												key={document_url}
 												className={styles.tag_button}
-												onClick={() => setOpenModal(document_url)}
+												onClick={() => setDocumentTagUrl(document_url)}
 											>
 												Tag
 											</Button>
 										)}
 									</div>
 								</div>
-								{(openModal === document_url && orgId) && (
+								{(documentTagUrl === document_url && orgId) && (
 									<DocumentTypeSID
 										key={document_url}
 										id={id}
 										orgId={orgId}
 										formattedMessageData={formattedMessageData}
-										openModal={openModal}
-										setOpenModal={setOpenModal}
+										documentTagUrl={documentTagUrl}
+										setDocumentTagUrl={setDocumentTagUrl}
 									/>
 								)}
 							</>

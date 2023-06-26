@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
-import useDocumentTypeControls from '../../../../../../hooks/useDocumentTypeControls';
+import useGetDocumentTypeControls from '../../../../../../hooks/useGetDocumentTypeControls';
 import useSendShipmentDocumentationNotification from '../../../../../../hooks/useSendShipmentDocumentationNotification';
 
 import styles from './styles.module.css';
@@ -11,15 +11,15 @@ function DocumentTypeSID({
 	orgId = '',
 	id = '',
 	formattedMessageData = {},
-	openModal = '',
-	setOpenModal = () => {},
+	documentTagUrl = '',
+	setDocumentTagUrl = () => {},
 }) {
 	const { account_type = '' } = formattedMessageData || {};
 	const { control, formState:{ errors = {} }, watch, handleSubmit, resetField } = useForm();
 	const watchListShipment = watch('list_shipments');
 	const watchListShipmentPendingTasks = watch('list_shipment_pending_tasks');
 
-	const controls = useDocumentTypeControls({
+	const controls = useGetDocumentTypeControls({
 		orgId,
 		account_type,
 		watchListShipment,
@@ -36,17 +36,17 @@ function DocumentTypeSID({
 			document_id   : id,
 			document_type : watchListShipmentPendingTasks,
 			shipment_id   : watchListShipment,
-			document_link : openModal,
+			document_link : documentTagUrl,
 		};
-		postDocumentTag({ payload, setOpenModal });
+		postDocumentTag({ payload, setDocumentTagUrl });
 	};
 
 	return (
-		openModal && (
+		documentTagUrl ? (
 			<div className={styles.main_container}>
 				<div className={styles.title}>
 					<div>Document Tag</div>
-					<IcMCross className={styles.cross} onClick={() => setOpenModal('')} />
+					<IcMCross className={styles.cross} onClick={() => setDocumentTagUrl('')} />
 				</div>
 				<div key={watchListShipment}>
 					{controls.map((eachControl = {}) => {
@@ -69,7 +69,7 @@ function DocumentTypeSID({
 					</Button>
 				</div>
 			</div>
-		)
+		) : null
 	);
 }
 

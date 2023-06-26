@@ -19,7 +19,7 @@ const getParamsOptionsMapping = ({ orgId }) => ({
 	},
 });
 
-const useDocumentTypeControls = ({
+const useGetDocumentTypeControls = ({
 	orgId = '',
 	account_type = '',
 	watchListShipment = '',
@@ -64,4 +64,4 @@ const useDocumentTypeControls = ({
 	];
 };
 
-export default useDocumentTypeControls;
+export default useGetDocumentTypeControls;
