@@ -744,7 +744,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Bill -
+												Bill Type -
 												{' '}
 												<span>{invoiceType}</span>
 											</div>

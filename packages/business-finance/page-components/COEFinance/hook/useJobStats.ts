@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 interface FilterInterface {
 	zone?:string
 	serviceType?:string
-	days?:string
+	timePeriod?:string
 	dateRange?:DateInterface
 	rest?:any
 }
@@ -24,7 +24,7 @@ const useJobStats = (filters :FilterInterface) => {
 		},
 		{ autoCancel: false },
 	);
-	const { serviceType, dateRange } = filters || {};
+	const { zone, serviceType, dateRange, timePeriod } = filters || {};
 
 	const billDatesStart = 	(dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
@@ -39,9 +39,11 @@ const useJobStats = (filters :FilterInterface) => {
 			try {
 				await trigger({
 					params: {
-						service  : serviceType || undefined,
-						fromDate : billDatesStart || undefined,
-						toDate   : billDatesEnd || undefined,
+						zone       : zone || undefined,
+						service    : serviceType || undefined,
+						fromDate   : billDatesStart || undefined,
+						toDate     : billDatesEnd || undefined,
+						timePeriod : timePeriod || undefined,
 					},
 				});
 			} catch (err) {
@@ -49,8 +51,7 @@ const useJobStats = (filters :FilterInterface) => {
 			}
 		};
 		getData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, filters]);
+	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod, zone]);
 
 	return { jobStatsData, loading };
 };

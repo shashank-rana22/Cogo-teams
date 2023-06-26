@@ -39,7 +39,7 @@ export const filterControls = [
 
 	},
 	{
-		name           : 'days',
+		name           : 'timePeriod',
 		type           : 'select',
 		placeholder    : 'Days',
 		isClearable    : true,
@@ -47,13 +47,12 @@ export const filterControls = [
 		multiple       : true,
 		defaultOptions : false,
 		options        : [
-			{ value: 'today', label: 'Today' },
-			{ value: 'Last 3 Days', label: 'Last 3 Days' },
-			{ value: 'Last 7 Days', label: 'Last 7 Days' },
-			{ value: 'Last 14 Days', label: 'Last 14 Days' },
-			{ value: 'Last Month', label: 'Last Month' },
-			{ value: 'Last 3 Months', label: 'Last 3 Months' },
-			{ value: 'Last 6 Months', label: 'Last 6 Months' },
+			{ label: 'Last 3 Days', value: 'three' },
+			{ label: 'Last 7 Days', value: 'seven' },
+			{ label: 'Last 15 Days', value: 'fifteen' },
+			{ label: 'Last Month', value: 'thirty' },
+			{ label: 'Last 3 Months', value: 'threeMonth' },
+			{ label: 'Last 6 Months', value: 'sixMonth' },
 		],
 	},
 	{

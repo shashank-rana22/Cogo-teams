@@ -116,7 +116,7 @@ function ShipmentDetails({
 	jobType,
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(false);
+	const [showDocuments, setShowDocuments] = useState(true);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;

@@ -25,23 +25,14 @@ function Dashboard({ statsData }) {
 
 	const Status = [
 		{ id: 1, label: 'Pending', value: LOCKED || '-' },
-		{ id: 2, label: 'Approved', value: FINANCE_ACCEPTED || '-' },
-		{ id: 3, label: 'Rejected', value: COE_REJECTED || '-' },
+		{ id: 2, label: 'COE Approved', value: '-' },
+		{ id: 3, label: 'COE Rejected', value: COE_REJECTED || '-' },
+		{ id: 2, label: 'Finance Approved', value: FINANCE_ACCEPTED || '-' },
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
 	];
 
 	return (
 		<>
-			<div className={styles.card_flex}>
-				{Status.map((item) => (
-					<div key={item.id} className={styles.card}>
-						<div className={styles.card_label}>{item?.label}</div>
-						<div className={styles.border} />
-						<div className={styles.card_value}>{item?.value}</div>
-					</div>
-				))}
-			</div>
-
 			<div className={styles.filter_flex}>
 				<Filter
 					controls={filterControls}
@@ -56,9 +47,18 @@ function Dashboard({ statsData }) {
 					Request Report
 				</div>
 			</div>
+			<div className={styles.card_flex}>
+				{Status.map((item) => (
+					<div key={item.id} className={styles.card}>
+						<div className={styles.card_label}>{item?.label}</div>
+						<div className={styles.border} />
+						<div className={styles.card_value}>{item?.value}</div>
+					</div>
+				))}
+			</div>
 
 			<div className={styles.responsive}>
-				<MyResponsiveBar data={BarData()} />
+				<MyResponsiveBar data={BarData(filters)} />
 			</div>
 
 			<div className={styles.space_between}>

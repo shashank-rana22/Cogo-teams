@@ -60,7 +60,8 @@ function JobStats({ jobData }) {
 								placement="bottom"
 							>
 								<div className={styles.ship_id}>
-									Shipment ID’s :
+									Shipment Count :
+									{' '}
 									{count}
 								</div>
 							</Tooltip>

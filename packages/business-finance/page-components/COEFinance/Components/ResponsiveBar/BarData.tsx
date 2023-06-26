@@ -2,8 +2,8 @@ import { format } from '@cogoport/utils';
 
 import useGetDashboardData from '../../hook/useGetDashboardData';
 
-const BarData = () => {
-	const { dashboardData = [{}] } = useGetDashboardData();
+const BarData = (filters) => {
+	const { dashboardData = [{}] } = useGetDashboardData(filters);
 	return dashboardData.map((item) => (
 		{
 			date     : format(item?.date, 'dd MMM ', {}, false),

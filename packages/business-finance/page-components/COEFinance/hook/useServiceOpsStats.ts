@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 interface FilterInterface {
 	zone?:string
 	serviceType?:string
-	days?:string
+	timePeriod?:string
 	dateRange?:DateInterface
 	rest?:any
 }
@@ -24,7 +24,7 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 		},
 		{ autoCancel: false },
 	);
-	const { zone = '', serviceType = '', dateRange, rest } = filters || {};
+	const { zone = '', serviceType = '', dateRange, timePeriod } = filters || {};
 
 	const billDatesStart = (dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
@@ -39,11 +39,11 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 			try {
 				await trigger({
 					params: {
-						...rest,
-						zone     : zone || undefined,
-						service  : serviceType || undefined,
-						fromDate : billDatesStart || undefined,
-						toDate   : billDatesEnd || undefined,
+						zone       : zone || undefined,
+						service    : serviceType || undefined,
+						fromDate   : billDatesStart || undefined,
+						toDate     : billDatesEnd || undefined,
+						timePeriod : timePeriod || undefined,
 					},
 
 				});
@@ -52,8 +52,7 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 			}
 		};
 		getData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, zone, serviceType, billDatesEnd]);
+	}, [trigger, zone, serviceType, billDatesEnd, billDatesStart, timePeriod]);
 
 	return { So2statsData, loading };
 };
