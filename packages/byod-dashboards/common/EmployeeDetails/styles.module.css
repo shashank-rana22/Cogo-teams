@@ -4,7 +4,7 @@
 }
 
 .flex_40 {
-    flex: 0 0 40%; /* Occupies 40% of the container width */
+    flex: 0 0 40%;
     
 
     iframe {
@@ -13,18 +13,18 @@
     }
 
     @media (max-width: 768px) {
-		flex: 0 0 100%; /* Occupies 60% of the container width */
+		flex: 0 0 100%;
         padding-right: 0;
         margin-bottom: 12px;
 	}
 }
 
 .flex_60 {
-    flex: 0 0 60%; /* Occupies 60% of the container width */
+    flex: 0 0 60%;
     padding-left: 16px;
 
     @media (max-width: 768px) {
-		flex: 0 0 100%; /* Occupies 60% of the container width */
+		flex: 0 0 100%;
         padding-left: 0;
 	}
 

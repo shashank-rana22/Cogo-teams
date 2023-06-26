@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController,
