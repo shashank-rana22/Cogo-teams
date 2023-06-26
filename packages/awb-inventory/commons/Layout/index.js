@@ -32,16 +32,14 @@ function Layout({
 		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
-	const totalFieldsObject = { ...TOTAL_FIELDS };
-
 	return (
 		<div className={styles.layout}>
-			{Object.keys(totalFieldsObject).map((field) => (
+			{Object.keys(TOTAL_FIELDS).map((field) => (
 				<div className={styles.row} key={field}>
-					{totalFieldsObject[field].map((fieldsItem) => {
+					{TOTAL_FIELDS[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
-						const show = (!(totalFieldsObject[field].name in showElements)
+						const show = (!(TOTAL_FIELDS[field].name in showElements)
 						|| showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
