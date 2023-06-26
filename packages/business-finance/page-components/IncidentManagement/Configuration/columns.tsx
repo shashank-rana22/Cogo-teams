@@ -1,18 +1,10 @@
 import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
-import AdvanceSecurityDeposit from '../Modals/AdvanceSecurityDeposit';
-import AdvanceSecurityDepositRefund from '../Modals/AdvanceSecurityDepositRefund';
-import BankDetails from '../Modals/BankDetails';
-import ICJVModal from '../Modals/ICJV_Modal';
-import JvModal from '../Modals/JvModal';
-import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
-import SezApproval from '../Modals/SezApproval';
-import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
+import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
@@ -189,123 +181,9 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	},
 
 	{
-		accessor: (row:any) => {
-			const {
-				tdsRequest,
-				bankRequest,
-				organization,
-				settlementRequest,
-				journalVoucherRequest,
-				interCompanyJournalVoucherRequest,
-				sezRequest,
-				advanceSecurityDeposit,
-				advanceSecurityDepositRefund,
-			} = row.data || {};
-
-			const { type: requestType, id, remark, status } = row || {};
-
-			return (
-				<>
-					{requestType === 'TDS_APPROVAL' && (
-						<TDSModal
-							tdsData={tdsRequest}
-							id={id}
-							refetch={getIncidentData}
-							isEditable={false}
-							row={row}
-						/>
-					)}
-					{requestType === 'SETTLEMENT_APPROVAL' && (
-						<SettlementModal
-							settlementData={settlementRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
-						<JvModal
-							journalVoucherRequest={journalVoucherRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
-						<ICJVModal
-							interCompanyJournalVoucherRequest={
-							interCompanyJournalVoucherRequest
-								}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-							id={id}
-						/>
-					)}
-					{requestType === 'BANK_DETAIL_APPROVAL' && (
-						<BankDetails
-							bankData={bankRequest}
-							bankId={id}
-							row={row}
-							organization={organization}
-							refetch={getIncidentData}
-							isEditable={false}
-							remark={remark}
-						/>
-					)}
-
-					{requestType === 'ISSUE_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-					{requestType === 'CONSOLIDATED_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-					{requestType === 'SEZ_APPROVAL' && (
-						<SezApproval
-							sezRequest={sezRequest}
-							organization={organization}
-							isEditable={false}
-							remark={remark}
-						/>
-					)}
-					{requestType === 'ADVANCE_SECURITY_DEPOSIT' && (
-						<AdvanceSecurityDeposit
-							advanceSecurityDeposit={advanceSecurityDeposit}
-							id={id}
-							isEditable={false}
-							row={row}
-							refetch={getIncidentData}
-						/>
-					)}
-					{requestType === 'ADVANCE_SECURITY_DEPOSIT_REFUND' && (
-						<AdvanceSecurityDepositRefund
-							advanceSecurityDepositRefund={advanceSecurityDepositRefund}
-							id={id}
-							isEditable={false}
-							row={row}
-							refetch={getIncidentData}
-						/>
-					)}
-
-				</>
-			);
-		},
+		accessor: (row:any) => (
+			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+		),
 		id: 'actionColumn',
 	},
 ];
