@@ -14,6 +14,7 @@ function IndividualKraAssignment({ data, loading }) {
 	const { loading:submitLoading, createIndividualKra } = useCreateIndividualKra();
 
 	const [valuesIndividualKRA, setValuesIndividualKRA] = useState();
+
 	const [ratingInfo, setRatingInfo] = useState();
 
 	useEffect(() => {
@@ -45,6 +46,7 @@ function IndividualKraAssignment({ data, loading }) {
 					emptyText={TABLE_EMPTY_TEXT}
 					loading={loading}
 					onRowClick={(item) => onRowClick(item)}
+
 				/>
 			</div>
 

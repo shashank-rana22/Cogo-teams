@@ -21,8 +21,8 @@ function useCreateIndividualKra() {
 			{
 				employee_id                    : item?.employee_id,
 				kra_id                         : item?.kra_id,
-				target_value                   : item?.targeted_value || DEFAULT_TARGET_VALUE,
-				is_value_entered_in_percentage : item?.is_percent === 'yes',
+				target_value                   : item?.target_value || DEFAULT_TARGET_VALUE,
+				is_value_entered_in_percentage : item?.selected_value_type === 'percentage',
 			}
 		));
 
