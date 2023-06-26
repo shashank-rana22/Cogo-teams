@@ -3,14 +3,14 @@
 	align-items: center;
 	justify-content: center;
 	height: max-content;
-	background: #fff;
 	padding: 100px 0;
+	background: #fff;
 }
 
 .text {
 	font-size: 16px;
-	color: #000;
 	font-weight: 500;
+	color: #000;
 
 	&.lg {
 		font-size: 18px;
