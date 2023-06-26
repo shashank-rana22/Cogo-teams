@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Chapter from './Chapter';
 import Employees from './Employees';
 import Squad from './Squad';
-import styles from './styles.module.css';
 import SubChapter from './SubChapter';
 import Tribe from './Tribe';
 
@@ -21,7 +20,7 @@ function TabComponent() {
 	const [activeTab, setActiveTab] = useState('squad');
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
