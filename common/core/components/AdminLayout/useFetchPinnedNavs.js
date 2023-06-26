@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setUserSettingsState } from '@cogoport/store/reducers/user-settings';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -12,6 +13,8 @@ const useFetchPinnedNavs = ({ user_id, partner_id, setPinnedNavKeys = () => {}, 
 	const { scope = '' } = general;
 	const { country_id = '', id = '' } = partner;
 
+	const dispatch = useDispatch();
+
 	const [{ loading: pinListLoading = false }, trigger] = useRequest({
 		url    : 'list_partner_user_settings',
 		method : 'GET',
@@ -22,26 +25,25 @@ const useFetchPinnedNavs = ({ user_id, partner_id, setPinnedNavKeys = () => {}, 
 
 	const fetchPinnedNavs = async () => {
 		try {
-			const response = await trigger(
-				{
-					params:
-					{
-						filters              : { user_id, partner_id },
-						announcement_filters : {
-							status         : 'active',
-							cogo_entity_id : id,
-							country_id,
-							...(scope === 'partner'
-								? {
-									auth_function     : roleFunction,
-									auth_sub_function : roleSubFunction,
-									persona           : 'admin_user',
-								}
-								: { persona: 'importer_exporter' }),
-						},
-					},
+			const params = {
+				filters              : { user_id, partner_id },
+				announcement_filters : {
+					status         : 'active',
+					cogo_entity_id : id,
+					country_id,
+					...(scope === 'partner'
+						? {
+							auth_function     : roleFunction,
+							auth_sub_function : roleSubFunction,
+							persona           : 'admin_user',
+						}
+						: { persona: 'importer_exporter' }),
 				},
-			);
+			};
+
+			const response = await trigger({ params });
+
+			dispatch(setUserSettingsState(response.data?.list || []));
 
 			setPinnedNavKeys(
 				(response.data?.list || [])
