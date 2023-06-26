@@ -4,10 +4,12 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
+const DEFAULT_TARGET_VALUE = 0;
+
 function useCreateIndividualKra() {
 	const { user = {} } = useSelector((state) => state?.profile);
 
-	const { id:user_id } = user;
+	const { id: user_id } = user;
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/create_individual_kra',
@@ -15,13 +17,11 @@ function useCreateIndividualKra() {
 	}, { manual: true });
 
 	const createIndividualKra = useCallback(async (valuesIndividualKRA) => {
-		const DEFAULT_VALUE = 0;
-
 		const objData = valuesIndividualKRA?.map((item) => (
 			{
 				employee_id                    : item?.employee_id,
 				kra_id                         : item?.kra_id,
-				target_value                   : item?.targeted_value || DEFAULT_VALUE,
+				target_value                   : item?.targeted_value || DEFAULT_TARGET_VALUE,
 				is_value_entered_in_percentage : item?.is_percent === 'yes',
 			}
 		));

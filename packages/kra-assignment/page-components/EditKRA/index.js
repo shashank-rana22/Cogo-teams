@@ -15,9 +15,7 @@ function EditKRA() {
 				<h2>KRA Edit Request</h2>
 			</div>
 
-			<div>
-				<Header data={data} />
-			</div>
+			<Header data={data} />
 
 			<div className={styles.container1}>
 				<div className={styles.tab_container}>
@@ -32,7 +30,7 @@ function EditKRA() {
 
 						<TabPanel name="individual" title="Individual">
 							<div className={styles.individual_kra}>
-								<IndividualKraAssignment data={data} loading={loading} />
+								<IndividualKraAssignment data={data?.list} loading={loading} />
 							</div>
 						</TabPanel>
 

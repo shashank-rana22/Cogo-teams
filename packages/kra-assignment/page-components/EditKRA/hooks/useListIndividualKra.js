@@ -20,7 +20,7 @@ function useListIndividualKra() {
 		try {
 			trigger({
 				params: {
-					manager_user_id: 'cb6b0ef5-3a79-4a6f-a2a4-ea8f6908dfa4' || user_id,
+					manager_user_id: '2fac2a22-dd10-49db-8a5e-ca6188d63cf8' || user_id,
 				},
 			});
 		} catch (error) {
@@ -35,7 +35,7 @@ function useListIndividualKra() {
 	}, [listIndividualKra]);
 
 	return {
-		data: data?.list,
+		data,
 		loading,
 		listIndividualKra,
 		setActiveTab,
