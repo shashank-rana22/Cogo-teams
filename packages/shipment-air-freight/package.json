@@ -1,0 +1,23 @@
+{
+	"name": "@cogoport/shipment-air-freight",
+	"version": "1.0.0",
+	"description": "Package for Air Freight Shipment",
+	"private": true,
+	"dependencies": {
+		"@cogoport/components": "^1.0.322",
+		"@cogoport/context": "workspace:^0.1.0",
+		"@cogoport/forms": "workspace:0.1.0",
+		"@cogoport/icons-react": "^1.0.51",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:0.1.0",
+		"@cogoport/store": "workspace:0.1.0",
+		"@cogoport/utils": "^1.2.2",
+		"@cogoport/globalization": "^0.0.1",
+		"@cogoport/shipment-chat": "workspace:^0.1.0",
+		"@cogoport/shipment-mails": "workspace:^0.1.0",
+		"@cogoport/navigation-configs": "workspace:^0.1.0",
+		"@cogoport/air-modules": "workspace:^1.0.0",
+		"@cogoport/purchase-invoicing": "workspace:^0.1.0",
+		"react": "18.2.0"
+	}
+}

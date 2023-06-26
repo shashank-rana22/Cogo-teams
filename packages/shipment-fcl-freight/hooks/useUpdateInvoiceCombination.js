@@ -13,7 +13,7 @@ const useUpdateInvoiceCombination = ({
 	successMessage = 'Invoice Preference edited!',
 	servicesList,
 	selectedParties,
-	initial_service_invoice_id,
+	INITIAL_SERVICE_INVOICE_ID,
 	allServiceLineitemsCount,
 	importer_exporter_id,
 	updateExportInvoices,
@@ -45,24 +45,23 @@ const useUpdateInvoiceCombination = ({
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
-			const finalParties = [];
+			const FINAL_PARTIES = [];
 
 			filteredParties.forEach((party) => {
-				const partyServices = [];
-				party?.services?.map((item) => {
+				const PARTY_SERVICES = party?.services?.map((item) => {
 					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
-					const partyService = {
+
+					return ({
 						...rest,
 						invoice_combination_id: updateExportInvoices
-							? initial_service_invoice_id[item?.serviceKey] || undefined
+							? INITIAL_SERVICE_INVOICE_ID[item?.serviceKey] || undefined
 							: undefined,
-					};
-					partyServices.push(partyService);
-					return partyServices;
+					});
 				});
+
 				const partyDetails = {
 					...party,
-					services: partyServices,
+					services: PARTY_SERVICES,
 				};
 
 				if (
@@ -72,14 +71,14 @@ const useUpdateInvoiceCombination = ({
 					if (typeof partyDetails.id === 'number') {
 						delete partyDetails.id;
 					}
-					finalParties.push(partyDetails);
+					FINAL_PARTIES.push(partyDetails);
 				}
 			});
 
 			await trigger({
 				data: {
 					shipment_id          : shipment_data.id,
-					invoice_combinations : finalParties,
+					invoice_combinations : FINAL_PARTIES,
 					performed_by_org_id  : importer_exporter_id,
 				},
 			});

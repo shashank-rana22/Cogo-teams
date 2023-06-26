@@ -1563,6 +1563,21 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'platform_config',
 	},
+	{
+		api          : 'get_shipment_eway_bill_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_ftl_freight_spot_rate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'read_collection_party_line_items',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

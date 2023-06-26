@@ -7,7 +7,13 @@ import {
 	useCallback,
 } from 'react';
 
-import { ticketSectionMapping } from '../constants';
+import { TICKET_SECTION_MAPPING } from '../constants';
+
+const DEFAULT_PAGE = 1;
+const PAGE_DECREMENT = 1;
+const PAGE_INCREMENT = 1;
+const MIN_TICKET_COUNT = 1;
+const WINDOW_VIEW = 20;
 
 const useListTickets = ({
 	searchParams,
@@ -16,7 +22,7 @@ const useListTickets = ({
 	refreshList,
 	setRefreshList,
 }) => {
-	const [pagination, setPagination] = useState(1);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -33,12 +39,12 @@ const useListTickets = ({
 		const payload = {
 			PerformedByID : profile?.user?.id,
 			size          : 10,
-			page          : pageIndex - 1,
-			AgentID       : searchParams.agent,
+			page          : pageIndex - PAGE_DECREMENT,
+			AgentID       : searchParams.agent || undefined,
 			QFilter       : searchQuery || undefined,
 			Type          : searchParams.category,
 		};
-		return { ...payload, ...(ticketSectionMapping?.[status] || {}) };
+		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
 	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
@@ -54,7 +60,7 @@ const useListTickets = ({
 					total: response.data.total,
 				}));
 			}
-			setPagination(pageIndex + 1);
+			setPagination(pageIndex + PAGE_INCREMENT);
 		} catch (error) {
 			console.log('error:', error);
 		}
@@ -62,7 +68,7 @@ const useListTickets = ({
 
 	useEffect(() => {
 		setTickets({ list: [], total: 0 });
-		fetchTickets(1);
+		fetchTickets(MIN_TICKET_COUNT);
 		if (refreshList?.[label]) {
 			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
@@ -73,8 +79,8 @@ const useListTickets = ({
 	}, [debounceQuery, searchParams?.text]);
 
 	const handleScroll = ({ clientHeight, scrollTop, scrollHeight }) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 20;
-		const hasMoreData = pagination <= (data?.total_pages || 0);
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= WINDOW_VIEW;
+		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
 		}
