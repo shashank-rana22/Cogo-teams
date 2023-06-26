@@ -21,7 +21,7 @@ const useUpdateServiceProvider = ({
 			url    : '/update_shipment_service',
 			method : 'POST',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: payload });
@@ -102,33 +102,14 @@ const useUpdateServiceProvider = ({
 					);
 				}
 			});
-			try {
-				// const resArr = await Promise.all(PROMISES_ARRAY);
 
-				Promise.all(PROMISES_ARRAY).then(
-					(res) => {
-						console.log(res, 'hello');
-						Toast.success('Services Successfully Allocated !');
-					},
-				).catch((e) => {
-					Toast.error(e);
-				});
-				// const check = false;
-				// const error = '';
-				// (resArr || []).forEach((res) => {
-				// 	if (res?.hasError) {
-				// 		check = true;
-				// 		error += `${res?.data}, `;
-				// 	}
-				// });
-				// if (check) {
-				// 	Toast.error(error);
-				// } else {
-				// 	Toast.success('Services Successfully Allocated !');
-				// }
-			} catch (err) {
+			await Promise.all(PROMISES_ARRAY).then(
+				() => {
+					Toast.success('Services Successfully Allocated !');
+				},
+			).catch((err) => {
 				toastApiError(err);
-			}
+			});
 		}
 	};
 	return {
