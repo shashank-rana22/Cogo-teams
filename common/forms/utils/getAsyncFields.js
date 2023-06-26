@@ -654,6 +654,20 @@ function asyncListRoles() {
 		},
 	};
 }
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -693,6 +707,7 @@ export {
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncListPromotions,
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,

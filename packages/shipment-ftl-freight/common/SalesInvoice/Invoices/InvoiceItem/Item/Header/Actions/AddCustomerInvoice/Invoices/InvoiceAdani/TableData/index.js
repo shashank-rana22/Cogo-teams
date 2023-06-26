@@ -5,12 +5,14 @@ import { customerToCin } from '../../../utils/serviceDescriptionMappings';
 import { getLineItems } from '../getLineItems';
 import { getOtherData, getChargesData } from '../getOtherData';
 
+import ChildTableData from './ChildTableData';
+
 function TableData({
 	billing_address = {},
 	customData = {},
 	importerExporterId = '',
 }) {
-	const { lineItems = [], lineItemsKeysMapping = {} } = getLineItems({
+	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 	});
 	const {
@@ -47,7 +49,7 @@ function TableData({
 						}}
 					>
 						<b>GSTIN:</b>
-						{' '}
+						&nbsp;
 						{billing_address?.tax_number}
 					</td>
 					<td
@@ -70,7 +72,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice No:- </b>
-						{' '}
+						&nbsp;
 						{invoice_no}
 					</td>
 				</tr>
@@ -103,7 +105,7 @@ function TableData({
 						}}
 					>
 						SAC Code:
-						{' '}
+						&nbsp;
 						{sac_code}
 					</td>
 					<td
@@ -115,7 +117,7 @@ function TableData({
 						}}
 					>
 						<b>Invoice Date:- </b>
-						{' '}
+						&nbsp;
 						{formatDate({
 							date       : bill_date,
 							formatType : 'date',
@@ -124,294 +126,7 @@ function TableData({
 					</td>
 				</tr>
 			</table>
-			<div
-				style={{ padding: '8px 8px', borderLeft: '2px solid black', borderRight: '2px solid black' }}
-			>
-				<table
-					border="0"
-					cellPadding="0"
-					cellSpacing="0"
-					style={{ width: '100%', borderWidth: '0 0 1px 1px' }}
-				>
-					<thead>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-								borderLeft  : '1px solid black',
-							}}
-						>
-							SI No
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Date
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Shipment number
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Invoice No.
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							GR No
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							From Station
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							To Station
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Truck No
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							LR No
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Gross Weight
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Rate PMT
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Total Amount
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Deduction
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Net Amount
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Other Charges
-
-						</th>
-						<th
-							style={{
-								textAlign   : 'center',
-								padding     : '2px',
-								borderWidth : '1px 1px 2px 0px',
-								borderStyle : 'solid',
-								borderColor : 'black',
-								fontWeight  : 'bold',
-								maxWidth    : 'auto',
-								margin      : '0px',
-								wordWrap    : 'break-word',
-							}}
-						>
-							Remark
-
-						</th>
-					</thead>
-					{lineItems.map((lineItem) => (
-						<tr key={lineItem?.id}>
-							{Object.keys(lineItemsKeysMapping).map((key) => (
-								<td
-									style={{
-										padding     : '1px',
-										textAlign   : 'center',
-										borderWidth : '1px 1px 2px 0px',
-										borderStyle : 'solid',
-										borderColor : 'black',
-									}}
-									key={key}
-								>
-									{lineItem[key]}
-								</td>
-							))}
-						</tr>
-					))}
-				</table>
-			</div>
+			<ChildTableData lineItems={lineItems} LINE_ITEMS_KEYS_MAPPING={LINE_ITEMS_KEYS_MAPPING} />
 			<table
 				style={{
 					paddingTop  : '10px',
@@ -436,6 +151,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -461,6 +177,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -486,6 +203,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -511,6 +229,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',

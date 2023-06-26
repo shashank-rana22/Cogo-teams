@@ -1,0 +1,55 @@
+[
+	{
+		"service_type"  : "ftl_freight_service",
+		"display_label" : "Origin FTL Transportation",
+		"trade_type"    : "export",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "ltl_freight_service",
+		"display_label" : "Origin LTL Transportation",
+		"trade_type"    : "export",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "air_customs_service",
+		"display_label" : "Origin Custom Clearance",
+		"trade_type"    : "export",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "air_freight_local_service",
+		"display_label" : "Origin AIR Locals",
+		"trade_type"    : "export",
+		"is_main"       : true
+	},
+	{
+		"service_type"  : "air_freight_service",
+		"display_label" : "AIR Freight",
+		"is_main"       : true
+	},
+	{
+		"service_type"  : "air_freight_local_service",
+		"display_label" : "Destination AIR Local",
+		"trade_type"    : "import",
+		"is_main"       : true
+	},
+	{
+		"service_type"  : "air_customs_service",
+		"display_label" : "Destination Custom Clearance",
+		"trade_type"    : "import",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "ltl_freight_service",
+		"display_label" : "Destintaion LTL Transportation",
+		"trade_type"    : "import",
+		"is_main"       : false
+	},
+	{
+		"service_type"  : "ftl_freight_service",
+		"display_label" : "Destintaion FTL Transportation",
+		"trade_type"    : "import",
+		"is_main"       : false
+	}
+]
