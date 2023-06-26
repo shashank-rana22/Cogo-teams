@@ -1,10 +1,10 @@
 import { cl, Placeholder } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import { NETWORK_EMPTY_STATE } from '../../../constants';
 import useGetSimulation from '../../../hooks/useGetSimulation';
 import styles from '../styles.module.css';
 
@@ -40,7 +40,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		return (
 			<div className={cl`${styles.empty_state} `}>
 				<Image
-					src={NETWORK_EMPTY_STATE}
+					src={GLOBAL_CONSTANTS.image_url.empty_image}
 					alt="empty-state"
 					width={150}
 					height={150}
