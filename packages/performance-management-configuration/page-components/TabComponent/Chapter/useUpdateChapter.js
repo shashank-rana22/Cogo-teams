@@ -14,7 +14,7 @@ const useUpdateChapter = ({ fetchList, setShowChapterModal, showChapterModal }) 
 
 	const onClickUpdateButton = async (values) => {
 		const { sub_chapter_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showChapterModal.sub_chapters.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showChapterModal.sub_chapters.map((obj) => obj?.id);
 
 		const sub_chapters_added = (sub_chapter_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),

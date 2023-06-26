@@ -27,7 +27,6 @@ function Squad() {
 		search, setSearch, columns, loading: listApiLoading, data, page, setPage, setShowDeleteModal,
 		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowSquadModal, showSquadModal,
 		activeTab, setActiveTab,
-
 	} = useSquad();
 
 	const { list = [], ...paginationData } = data || {};
@@ -36,7 +35,7 @@ function Squad() {
 
 	const {
 		onClickSubmitButton,
-		loading:CreateLoading,
+		loading: CreateLoading,
 	} = useCreateSquad({ fetchList, setShowSquadModal });
 
 	const {

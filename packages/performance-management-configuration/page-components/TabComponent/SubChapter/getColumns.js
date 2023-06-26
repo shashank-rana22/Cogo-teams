@@ -114,7 +114,7 @@ const getColumns = ({ setShowDeleteModal, setShowSubChapterModal }) => [
 				/>
 			</div>
 		) : (
-			<Button themeType="secondary">Restore</Button>
+			<Button themeType="secondary" disabled>Restore</Button>
 		)),
 	},
 ];

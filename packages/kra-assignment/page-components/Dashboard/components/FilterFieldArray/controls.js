@@ -9,6 +9,8 @@ const getControls = (WATCH_VALUES = '') => {
 				asyncKey    : 'list_roles',
 				label       : 'Roles',
 				placeholder : 'Select',
+				initialCall : true,
+
 				isClearable : true,
 				params      : {
 					filters: {
@@ -26,7 +28,9 @@ const getControls = (WATCH_VALUES = '') => {
 				label       : 'Tribes',
 				placeholder : 'Select',
 				isClearable : true,
-				params      : {
+				initialCall : true,
+
+				params: {
 					filters: {
 						status               : 'active',
 						partner_entity_types : ['cogoport'],
@@ -42,6 +46,8 @@ const getControls = (WATCH_VALUES = '') => {
 				asyncKey    : 'list_squads',
 				label       : 'Squads',
 				placeholder : 'Select',
+				initialCall : true,
+
 				disabled    : !WATCH_VALUES.tribe_id,
 				isClearable : true,
 				params      : {
@@ -61,6 +67,8 @@ const getControls = (WATCH_VALUES = '') => {
 			// 	disabled    : !WATCH_VALUES.squad_id,
 			// 	placeholder : 'Select',
 			// 	isClearable : true,
+			// initialCall : true,
+
 			// 	params      : {
 			// 		filters: {
 			// 			status               : 'active',
@@ -79,6 +87,7 @@ const getControls = (WATCH_VALUES = '') => {
 			// 	disabled    : !WATCH_VALUES.chapter_id,
 			// 	placeholder : 'Select',
 			// 	isClearable : true,
+		// initialCall : true,
 			// 	params      : {
 			// 		filters: {
 			// 			status               : 'active',

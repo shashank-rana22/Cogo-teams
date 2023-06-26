@@ -15,7 +15,7 @@ const useUpdateTribe = ({ fetchList, setShowTribeModal, showTribeModal }) => {
 
 	const onClickUpdateButton = async (values) => {
 		const { squad_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showTribeModal.squads.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showTribeModal.squads.map((obj) => obj?.id);
 
 		const squads_added = (squad_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),

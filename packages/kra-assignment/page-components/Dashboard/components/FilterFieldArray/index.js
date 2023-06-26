@@ -7,6 +7,9 @@ import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
+const FIELD_ARRAY_NAME = 'single_item';
+const BUTTON_TEXT = 'Add More KRA';
+
 function FiltersDisplay({ setFilters, setShowKRACalculationTable }) {
 	const {
 		watch,
@@ -25,12 +28,12 @@ function FiltersDisplay({ setFilters, setShowKRACalculationTable }) {
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
 			<section className={styles.form_container}>
 				<FieldArray
-					name="single_item"
+					name={FIELD_ARRAY_NAME}
 					control={control}
 					watch={watch}
 					error={errors}
 					controls={controls}
-					buttonText="Add More KRA"
+					buttonText={BUTTON_TEXT}
 					showButtons
 					disabled={false}
 				/>
