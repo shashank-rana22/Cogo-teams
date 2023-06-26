@@ -20,6 +20,8 @@ import SupplierInformation from './SupplierInformation';
 
 const PLACEHOLDERS = 3;
 
+const TIMELINEKEY = '4';
+
 const geo = geoConstants();
 function InvoiceDetailsTimeLine({ item }) {
 	const {
@@ -61,7 +63,7 @@ function InvoiceDetailsTimeLine({ item }) {
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
-		if (key === '4') getTimeLineDetailsApi();
+		if (key === TIMELINEKEY) getTimeLineDetailsApi();
 	};
 
 	const { invoiceNumber = '', jobNumber = '', billNumber = '', sid = '', objectNumber = '' } = item || {};
@@ -125,6 +127,22 @@ function InvoiceDetailsTimeLine({ item }) {
 		</div>
 	);
 
+	const ComponentMappings = {
+		Profitability: <Profitability
+			data={profitabilityDetails}
+			loading={profitabilityLoading}
+		/>,
+		'Invoice Timeline': <InvoiceTimeLine
+			data={timeLineDetails}
+			loading={timeLineDetailsLoading}
+		/>,
+		'Supplier Information': <SupplierInformation
+			data={supplierDetails}
+			loading={supplierDetailsLoading}
+		/>,
+		'Customer Information': <CustomerInformation data={invoiceDetails} />,
+	};
+
 	return (
 		<>
 			<div
@@ -182,35 +200,18 @@ function InvoiceDetailsTimeLine({ item }) {
 														)}
 													</div>
 												</div>
-												{dropDownData[id] && <div className={styles.hr} />}
 												{dropDownData[id] && (
-													<div
-														className={dropDownData ? styles.enter_down : styles.exit_down}
-													>
-														<div className={styles.information_data}>
-															{label === 'Profitability' && (
-																<Profitability
-																	data={profitabilityDetails}
-																	loading={profitabilityLoading}
-																/>
-															)}
-															{label === 'Invoice Timeline' && (
-																<InvoiceTimeLine
-																	data={timeLineDetails}
-																	loading={timeLineDetailsLoading}
-																/>
-															)}
-															{label === 'Supplier Information' && (
-																<SupplierInformation
-																	data={supplierDetails}
-																	loading={supplierDetailsLoading}
-																/>
-															)}
-															{label === 'Customer Information' && (
-																<CustomerInformation data={invoiceDetails} />
-															)}
+													<>
+														<div className={styles.hr} />
+														<div
+															className={dropDownData
+																? styles.enter_down : styles.exit_down}
+														>
+															<div className={styles.information_data}>
+																{ComponentMappings[label]}
+															</div>
 														</div>
-													</div>
+													</>
 												)}
 											</div>
 										);

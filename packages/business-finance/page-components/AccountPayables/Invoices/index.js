@@ -1,12 +1,10 @@
 import { Button, Input, Toggle } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filter from '../../commons/Filters/index.tsx';
 import List from '../../commons/List/index.tsx';
-import EmptyState from '../../commons/StyledTable/EmptyState/index.tsx';
 
 import { invoiceFilters } from './configurations';
 import GetState from './GetState';
@@ -45,7 +43,7 @@ function Invoices() {
 		setOrderBy,
 	} = useGetBillsList({ activeTab });
 
-	const { stats = {}, list = [] } = billsData || {};
+	const { stats = {} } = billsData || {};
 
 	const { generateInvoice, loading: generating } = useGetDownloadReport({
 		size          : stats?.all,
@@ -124,26 +122,23 @@ function Invoices() {
 				</div>
 			</div>
 			<div className={styles.list_container}>
-				{(!isEmpty(list) || billsLoading) ? (
-					<List
-						itemData={billsData}
-						loading={billsLoading}
-						config={ALL_INVOICE_CONFIG}
-						functions={functions}
-						sort={orderBy}
-						setSort={setOrderBy}
-						page={billsFilters?.pageIndex || FIRST_PAGE}
-						pageSize={10}
-						handlePageChange={(val) => setBillsFilters({
-							...billsFilters,
-							pageIndex: val,
-						})}
-						rowStyle="border"
-						showPagination
-						paginationType="number"
-					/>
-				)
-					: <EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
+				<List
+					itemData={billsData}
+					loading={billsLoading}
+					config={ALL_INVOICE_CONFIG}
+					functions={functions}
+					sort={orderBy}
+					setSort={setOrderBy}
+					page={billsFilters?.pageIndex || FIRST_PAGE}
+					pageSize={10}
+					handlePageChange={(val) => setBillsFilters({
+						...billsFilters,
+						pageIndex: val,
+					})}
+					rowStyle="border"
+					showPagination
+					paginationType="number"
+				/>
 			</div>
 			{show ? <GetState show={show} setShow={setShow} /> : null}
 		</div>

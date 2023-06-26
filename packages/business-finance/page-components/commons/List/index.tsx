@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { ReactNode } from 'react';
 
 import {
@@ -28,7 +29,7 @@ export interface Props {
 	showPagination?: boolean;
 	subActiveTab?: string;
 	width?: string;
-	rowStyle?:string;
+	rowStyle?: string;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 
@@ -46,7 +47,8 @@ function List({
 	showPagination = true,
 	subActiveTab,
 	width,
-	rowStyle, paginationType = 'table',
+	rowStyle,
+	paginationType = 'table',
 }: Props) {
 	const {
 		showHeader = true,
@@ -91,7 +93,7 @@ function List({
 					/>
 				))}
 
-				{!(list?.length > 0) && 	(
+				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>
 						<img
 							style={{ width: '24%', margin: '8%' }}
@@ -99,7 +101,7 @@ function List({
 							alt="no data"
 						/>
 					</div>
-				)}
+				) : null}
 			</div>
 			{showPagination && (
 				<div>

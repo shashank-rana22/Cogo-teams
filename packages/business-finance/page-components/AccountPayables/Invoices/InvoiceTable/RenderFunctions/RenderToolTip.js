@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const FIRST_ELE = 0;
+const FIRST_ELEMENT_INDEX = 0;
 
 export function RenderToolTip({ itemData, field = {} }) {
 	const { maxLength } = field || {};
@@ -13,7 +13,7 @@ export function RenderToolTip({ itemData, field = {} }) {
 		return (
 			<Tooltip interactive placement="top" content={content}>
 				<div className={styles.value}>
-					{`${content.substring(FIRST_ELE, maxLength)}...`}
+					{`${content.substring(FIRST_ELEMENT_INDEX, maxLength)}...`}
 				</div>
 			</Tooltip>
 		);
