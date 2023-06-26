@@ -75,7 +75,7 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 		handleSubmit: () => {
 			const onSubmit = (values) => {
 				if (mandatoryAudiencesUserWatch === 'custom' && eligible_users !== 'custom') {
-					Toast.error('please click on save and generate');
+					Toast.error('Please click on save and generate');
 
 					return {
 						hasError : true,
