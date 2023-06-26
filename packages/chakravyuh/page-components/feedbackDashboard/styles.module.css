@@ -1,15 +1,17 @@
-.main_heading{
-    font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
+.main_heading {
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
 }
-.container{
-    background: #fff;
-    border-radius: 6px;
-    padding:16px;
-    max-height: 75vh;
+
+.container {
+	max-height: 75vh;
+	padding: 16px;
+	background: #fff;
+	border-radius: 6px;
 }
-.list_panel{
-    max-height: 70vh;
-    overflow: auto;
+
+.list_panel {
+	max-height: 70vh;
+	overflow: auto;
 }
