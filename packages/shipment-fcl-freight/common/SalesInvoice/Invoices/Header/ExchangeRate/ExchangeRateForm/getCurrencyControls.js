@@ -1,6 +1,9 @@
-function validateExchangeRate(value, availableCurrencyConversions, currency) {
-	const initialConversion = availableCurrencyConversions?.[currency];
-	const ten_percent_initial = initialConversion * 0.1;
+const TEN_PERCENT = 0.1;
+const DEFAULT_VALUES = {};
+
+function validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency) {
+	const initialConversion = AVAILABLE_CURRENCY_CONVERSION?.[currency];
+	const ten_percent_initial = initialConversion * TEN_PERCENT;
 	const ten_less = initialConversion - ten_percent_initial;
 	const ten_more = initialConversion + ten_percent_initial;
 	if (value < ten_less) {
@@ -13,10 +16,10 @@ function validateExchangeRate(value, availableCurrencyConversions, currency) {
 
 export const getCurrencyControls = ({
 	invoiceCurrency,
-	differentCurrenciesHash,
-	availableCurrencyConversions,
+	DIFFERENT_CURRENCIES_HASH,
+	AVAILABLE_CURRENCY_CONVERSION,
 }) => {
-	const controls = Object.keys(differentCurrenciesHash || {}).map(
+	const controls = Object.keys(DIFFERENT_CURRENCIES_HASH || {}).map(
 		(currency) => ({
 			name             : `currency_control_${currency}`,
 			type             : 'fieldArray',
@@ -26,7 +29,7 @@ export const getCurrencyControls = ({
 				{
 					to_currency   : invoiceCurrency,
 					from_currency : currency,
-					exchange_rate : availableCurrencyConversions[currency],
+					exchange_rate : AVAILABLE_CURRENCY_CONVERSION[currency],
 				},
 			],
 			controls: [
@@ -56,15 +59,14 @@ export const getCurrencyControls = ({
 					size        : 'sm',
 					rules       : {
 						required : 'Exchange Rate is required',
-						validate : (value) => validateExchangeRate(value, availableCurrencyConversions, currency),
+						validate : (value) => validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency),
 					},
 				},
 			],
 		}),
 	);
-	const defaultValues = {};
 	controls.forEach((ctrl) => {
-		defaultValues[ctrl.name] = ctrl.value;
+		DEFAULT_VALUES[ctrl.name] = ctrl.value;
 	});
-	return { controls, defaultValues };
+	return { controls, DEFAULT_VALUES };
 };
