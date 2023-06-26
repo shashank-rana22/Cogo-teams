@@ -1,10 +1,11 @@
+/* eslint-disable max-lines-per-function */
 import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController,
 	RadioGroupController, DatepickerController, UploadController,
 } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DeviceDetails from '../../common/DeviceDetails';
 import Spinner from '../../common/Spinner';
@@ -19,6 +20,7 @@ import styles from './styles.module.css';
 
 function EmployeeDashboard() {
 	const { profile = {} } = useSelector((state) => state);
+	const [deviceTypeDisabled, setDeviceTypeDisabled] = useState(false);
 
 	const { user = {} } = profile;
 
@@ -47,12 +49,14 @@ function EmployeeDashboard() {
 		createDeviceDetail(values);
 	};
 
-	const { current_device_status, vendor_name, device_type } = formValues;
+	const { current_device_status, vendor_name, device_type, surrendering_reason } = formValues;
 
 	useEffect(() => {
+		setDeviceTypeDisabled(false);
 		if (current_device_status === 'retain') {
-			setValue('device_type', 'existing');
+			setValue('device_type', 'existing_laptop');
 			setValue('surrendering_reason', '');
+			setDeviceTypeDisabled(true);
 		}
 		if (current_device_status === 'surrender') {
 			setValue('device_type', '');
@@ -61,8 +65,25 @@ function EmployeeDashboard() {
 	}, [current_device_status, setValue]);
 
 	useEffect(() => {
+		setDeviceTypeDisabled(false);
+		setValue('warranty', '');
+		if (surrendering_reason === 'allotted_desktop') {
+			setValue('device_type', 'desktop');
+			setDeviceTypeDisabled(true);
+		}
+		if (['buying_new_laptop_from_our_vendor', 'buying_new_laptop_from_outside'].includes(surrendering_reason)) {
+			setValue('device_type', 'new_laptop');
+			setDeviceTypeDisabled(true);
+		}
+	}, [surrendering_reason, setValue]);
+
+	useEffect(() => {
 		setValue('vendor_name', '');
 		setValue('other_vendor_name', '');
+
+		if (device_type === 'desktop') {
+			setValue('warranty', 'not_applicable');
+		}
 	}, [device_type, setValue]);
 
 	if (dataLoading) {
@@ -76,7 +97,7 @@ function EmployeeDashboard() {
 	if (data) {
 		return (
 			<>
-				<div className={styles.title}>Employee Dashboard</div>
+				<div className={styles.title}>Employee BYOD Form</div>
 				<DeviceDetails deviceData={employee_device_detail} />
 			</>
 		);
@@ -84,7 +105,7 @@ function EmployeeDashboard() {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.title}>Employee Dashboard</div>
+			<div className={styles.title}>Employee BYOD Form</div>
 			<form onSubmit={handleSubmit(handleForm)}>
 				<div className={styles.heading}>Current Device</div>
 				<div className={styles.controller}>
@@ -124,7 +145,7 @@ function EmployeeDashboard() {
 							control={control}
 							name="device_type"
 							size="md"
-							disabled={current_device_status === 'retain'}
+							disabled={current_device_status === 'retain' || deviceTypeDisabled}
 							placeholder="Device type"
 							rules={{ required: true }}
 							options={getDeviceTypeOptions(current_device_status)}
@@ -167,7 +188,7 @@ function EmployeeDashboard() {
 							name="invoice_amount"
 							size="md"
 							type="number"
-							placeholder="Invoice Amount"
+							placeholder="Invoice Amount or 0"
 							rules={{ required: true }}
 						/>
 						{errors.invoice_amount && (
@@ -181,7 +202,7 @@ function EmployeeDashboard() {
 							name="tax_amount"
 							size="md"
 							type="number"
-							placeholder="GST Amount"
+							placeholder="GST Amount or 0"
 							rules={{ required: true }}
 						/>
 						{errors.tax_amount && (
@@ -195,7 +216,7 @@ function EmployeeDashboard() {
 							name="warranty_amount"
 							size="md"
 							type="number"
-							placeholder="GST Amount"
+							placeholder="Warranty Amount or 0"
 							rules={{ required: true }}
 						/>
 						{errors.warranty_amount && (
@@ -229,7 +250,7 @@ function EmployeeDashboard() {
 							<div className={styles.error}>Required</div>
 						)}
 					</div>
-					{vendor_name === 'others' && (
+					{vendor_name === 'other' && (
 						<div className={styles.controller}>
 							<div className={styles.label}>Other Vendor Name</div>
 							<InputController
@@ -257,7 +278,7 @@ function EmployeeDashboard() {
 						)}
 					</div>
 				</div>
-				<Button type="submit" disabled={loading}>Submit</Button>
+				<Button type="submit" disabled={loading} size="lg">Submit</Button>
 			</form>
 		</div>
 	);

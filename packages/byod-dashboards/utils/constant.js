@@ -119,11 +119,11 @@ export const EXISTING_DEVICE_OPTIONS = [
 export const SURRENDER_OPTIONS = [
 	{
 		label : 'Buying a new laptop from our vendor',
-		value : 'buy_vendor',
+		value : 'buying_new_laptop_from_our_vendor',
 	},
 	{
 		label : 'Buying a new laptop from outside',
-		value : 'buy_outside',
+		value : 'buying_new_laptop_from_outside',
 	},
 	{
 		label : 'Allotted a desktop',
@@ -131,11 +131,11 @@ export const SURRENDER_OPTIONS = [
 	},
 	{
 		label : 'Bringing your device',
-		value : 'bring_device',
+		value : 'bring_your_device',
 	},
 	{
 		label : 'Does not apply to me',
-		value : 'not_applicable',
+		value : 'not_applicable_to_me',
 	},
 ];
 
@@ -176,13 +176,13 @@ export const VENDOR_NAME = [
 export const getDeviceTypeOptions = (existingDevice) => {
 	if (existingDevice === 'retain') {
 		return [{
-			label : 'Existing',
-			value : 'existing',
+			label : 'Existing Laptop',
+			value : 'existing_laptop',
 		}];
 	}
 	return [{
-		label : 'New',
-		value : 'new',
+		label : 'New Laptop',
+		value : 'new_laptop',
 	},
 	{
 		label : 'Desktop',
@@ -191,7 +191,7 @@ export const getDeviceTypeOptions = (existingDevice) => {
 };
 
 export const getVendorNameOptions = (deviceType) => {
-	if (deviceType === 'existing') {
+	if (deviceType === 'existing_laptop') {
 		return [{
 			label : 'Micron Computers',
 			value : 'micron_computers',
@@ -202,7 +202,7 @@ export const getVendorNameOptions = (deviceType) => {
 		}];
 	}
 
-	if (deviceType === 'new') {
+	if (deviceType === 'new_laptop') {
 		return [{
 			label : 'Team Computer',
 			value : 'team_computer',
@@ -213,5 +213,8 @@ export const getVendorNameOptions = (deviceType) => {
 		}];
 	}
 
-	return [];
+	return [{
+		label : 'Alloted By Cogoport',
+		value : 'alloted_by_cogoport',
+	}];
 };

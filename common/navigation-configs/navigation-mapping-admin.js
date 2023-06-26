@@ -2448,7 +2448,7 @@ const navigationMappingAdmin = {
 		options     : [
 			{
 				key           : 'byod_dashboard-employee',
-				title         : 'Employee Dashboard',
+				title         : 'Employee BYOD Form',
 				href          : '/v2/byod/employee-dashboard',
 				as            : '/v2/byod/employee-dashboard',
 				type          : 'link',

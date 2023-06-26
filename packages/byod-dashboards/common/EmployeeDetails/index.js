@@ -67,7 +67,7 @@ function EmployeeDetails() {
 
 	const getButtonType = () => {
 		if (isAdmin && status === 'active') {
-			return handleTags('Verification status pending from HRBP', 'blue');
+			return handleTags('Verification pending from HRBP', 'blue');
 		}
 
 		if (['rejected_by_hr', 'rejected_by_admin'].includes(status)) {
@@ -75,7 +75,7 @@ function EmployeeDetails() {
 		}
 
 		if (((isAdmin && status === 'approved') || (!isAdmin && ['approved', 'verified'].includes(status)))) {
-			return handleTags('Verified');
+			return handleTags(startCase(status));
 		}
 
 		return (
@@ -97,7 +97,7 @@ function EmployeeDetails() {
 					size="lg"
 					className={styles.verify_btn}
 				>
-					Verify
+					{isAdmin ? 'Approve' : 'Verify'}
 				</Button>
 			</div>
 		);

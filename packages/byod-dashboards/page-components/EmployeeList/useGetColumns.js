@@ -108,7 +108,16 @@ const useGetColumns = () => {
 	return [
 		{
 			Header   : 'Name',
-			accessor : (item) => <div className={styles.employee_name}>{item.employee_detail.name}</div>,
+			accessor : (item) => (
+				<div className={styles.employee_name}>
+					{item.employee_detail.name}
+					<span className={styles.email_span}>
+						(
+						{item.employee_detail.personal_email}
+						)
+					</span>
+				</div>
+			),
 		},
 		{
 			Header   : 'Verified',

@@ -36,3 +36,9 @@
     align-items: center;
     margin-top: 16px;
 }
+
+.email_span {
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 8px;
+}
