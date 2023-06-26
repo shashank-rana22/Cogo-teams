@@ -10,6 +10,7 @@ function useCreateIndividualKra() {
 	const { user = {} } = profile;
 
 	const { id:user_id } = user;
+
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/create_individual_kra',

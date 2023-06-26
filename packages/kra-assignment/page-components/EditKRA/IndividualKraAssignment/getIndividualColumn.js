@@ -21,6 +21,7 @@ function getIndividualColumn({
 			}
 			return x;
 		});
+
 		if (newData?.length) { setValuesIndividualKRA(newData); }
 	};
 

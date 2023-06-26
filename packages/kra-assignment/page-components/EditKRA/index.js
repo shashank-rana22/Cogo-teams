@@ -1,5 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Header from './Header';
 import useListIndividualKra from './hooks/useListIndividualKra';
@@ -7,17 +7,18 @@ import IndividualKraAssignment from './IndividualKraAssignment';
 import styles from './styles.module.css';
 
 function EditKRA() {
-	const [activeTab, setActiveTab] = useState('individual');
+	const { data, loading, setActiveTab, activeTab } = useListIndividualKra();
 
-	const { data, loading } = useListIndividualKra();
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
 				<h2>KRA Edit Request</h2>
 			</div>
+
 			<div>
 				<Header data={data} />
 			</div>
+
 			<div className={styles.container1}>
 				<div className={styles.tab_container}>
 					<Tabs
