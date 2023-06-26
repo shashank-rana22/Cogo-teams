@@ -51,7 +51,7 @@ function CreateConfigurationModal({
 	useEffect(() => {
 		if (!isEmpty(showModal) && Type === CHECK_USE_TYPE_UPDATE) {
 			if (showModal?.squad_name) {
-				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj.id);
+				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
 
 				setValue('squad_name', showModal?.squad_name);
 				setValue('squad_leader_id', showModal?.squad_leader?.id);

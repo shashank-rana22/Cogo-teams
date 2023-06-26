@@ -112,7 +112,7 @@ const getColumns = ({ setShowDeleteModal, setShowTribeModal }) => [
 				/>
 			</div>
 		) : (
-			<Button themeType="secondary">Restore</Button>
+			<Button themeType="secondary" disabled>Restore</Button>
 		)),
 	},
 ];

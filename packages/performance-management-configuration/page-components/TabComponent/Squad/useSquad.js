@@ -37,7 +37,9 @@ const useSquad = () => {
 			});
 		} catch (error) {
 			if (error?.response?.data) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				Toast.error(
+					getApiErrorString(error?.response?.data) || 'Something went wrong',
+				);
 			}
 		}
 	}, [page, search, trigger, activeTab]);
@@ -69,6 +71,7 @@ const useSquad = () => {
 		setShowSquadModal,
 		activeTab,
 		setActiveTab,
+		fetchList,
 	};
 };
 

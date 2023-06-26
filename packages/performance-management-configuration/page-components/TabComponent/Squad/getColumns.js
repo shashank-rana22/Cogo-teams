@@ -107,7 +107,7 @@ const getColumns = ({ setShowDeleteModal, setShowSquadModal }) => [
 				/>
 			</div>
 		) : (
-			<Button themeType="secondary">Restore</Button>
+			<Button themeType="secondary" disabled>Restore</Button>
 		)),
 	},
 ];

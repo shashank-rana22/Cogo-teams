@@ -14,7 +14,7 @@ const useUpdateSquad = ({ fetchList, setShowSquadModal, showSquadModal }) => {
 
 	const onClickUpdateButton = async (values) => {
 		const { employee_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showSquadModal.employees.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showSquadModal.employees.map((obj) => obj?.id);
 
 		const employees_added = (employee_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
