@@ -17,6 +17,7 @@ type ItemData = {
 	invoiceStatus?: string;
 	entityCode?: number;
 	irnGeneratedAt?: string;
+	isRevoked?: boolean;
 };
 interface INRCancel {
 	itemData?: ItemData;
@@ -27,7 +28,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id, entityCode, irnGeneratedAt } = itemData || {};
+	const { invoiceStatus, id, entityCode, irnGeneratedAt, isRevoked } = itemData || {};
 
 	const isAfterADay =	irnGeneratedAt !== null
 		? Number(irnGeneratedAt) + TIME_VALUE >= Date.now()
@@ -39,7 +40,9 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const { irn_label: IRNLabel } = labels || {};
 
-	const GET_ENTITY = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('irn_cancel');
+	const entityFeatures = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('is_revoked');
+
+	const GET_ENTITY = (isRevoked && entityFeatures) || !entityFeatures;
 
 	const content = () => (
 		<div className={styles.container}>

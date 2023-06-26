@@ -34,7 +34,7 @@ const ENTITY_MAPPING = {
 		id                : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 		icon              : IcCCountryIndia,
 		currency          : 'INR',
-		feature_supported : ['cogo_books', 'post_to_sage', 'irn_cancel', 'cancel_irn'],
+		feature_supported : ['cogo_books', 'post_to_sage', 'cancel_irn'],
 		labels            : {
 			irn_label: 'IRN',
 		},
@@ -59,7 +59,7 @@ const ENTITY_MAPPING = {
 		feature_supported : ['cogo_books',
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
-			'upload_invoice'],
+			'is_revoked'],
 		labels: {
 			irn_label: 'E-invoice',
 		},
