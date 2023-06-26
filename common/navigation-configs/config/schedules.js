@@ -1,4 +1,4 @@
-const welcome = {
+const schedules = {
     "/[partner_id]/schedules": {
         navigation: "schedules",
         isMainNav: true,
@@ -28,4 +28,4 @@ const welcome = {
         isMainNav: true,
     },
 };
-module.exports = welcome;
+module.exports = schedules;
