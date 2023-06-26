@@ -23,7 +23,7 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 	const cardsData = [
 		{
 			id      : 'dashboard',
-			content : <h3>Dashboard Data</h3>,
+			content : <h3>Dashboard</h3>,
 		},
 		{
 			id      : 'campaign-management',
