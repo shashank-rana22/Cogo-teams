@@ -12,7 +12,7 @@ function EditKRA() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				<h2>KRA Edit Request</h2>
+				<h2>Edit KRA Request</h2>
 			</div>
 
 			<div>
