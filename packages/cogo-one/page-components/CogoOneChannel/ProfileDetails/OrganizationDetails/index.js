@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
+import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -22,12 +23,19 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 }) {
-	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
+	const { organization_id:messageOrgId = '', account_type: accountType = '' } = formattedMessageData || {};
+	console.log('accountType:', accountType);
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
+
+	const {
+		organizationUsersData,
+		organizationUsersLoading,
+	} = useGetListOrganizationUsers({ organizationId, accountType });
+	console.log('organizationUsersData:', organizationUsersData);
 
 	const [showConvertModal, setShowConvertModal] = useState(false);
 
