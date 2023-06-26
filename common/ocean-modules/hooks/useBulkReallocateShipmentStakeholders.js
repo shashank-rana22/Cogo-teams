@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 export default function useBulkReallocateShipmentStakeholders({
 	successMessage = 'Successfully Updated',
-	refetch = () => { },
+	refetch = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/bulk_reallocate_shipment_stakeholders',
