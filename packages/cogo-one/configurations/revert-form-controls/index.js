@@ -13,6 +13,7 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 	const {
 		service_type,
 		service_provider_id,
+		service = {},
 	} = data || {};
 
 	const controls = [
@@ -131,6 +132,7 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 			],
 			placeholder : 'Select Price Type',
 			rules       : { required: true },
+			value       : service?.price_type,
 		},
 		{
 			name        : 'operation_type',
