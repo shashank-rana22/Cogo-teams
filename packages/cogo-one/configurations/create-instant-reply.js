@@ -16,7 +16,7 @@ const controls = [
 		type        : 'select',
 		label       : 'Language',
 		placeholder : 'select language',
-		options     : GLOBAL_CONSTANTS.languages,
+		options     : GLOBAL_CONSTANTS.languages.filter((eachLanguage) => !!eachLanguage?.code),
 		rules       : {
 			required: true,
 		},
