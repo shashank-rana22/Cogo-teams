@@ -117,12 +117,12 @@ function CancelEinvoice({
 										placeholder="Agreement Date"
 										rules={{ required: 'Agreement Date is required.' }}
 									/>
-									{AGREEMENT_DATE && (
+									{AGREEMENT_DATE ? (
 										<span className={styles.errors}>
 											{' '}
 											{AGREEMENT_DATE_MESSAGE.toString()}
 										</span>
-									)}
+									) : null}
 								</div>
 								<div className={styles.div_width}>
 									<div className={styles.lable_style}>E-Invoice Date</div>
@@ -135,12 +135,12 @@ function CancelEinvoice({
 										placeholder="E-invoice Date"
 										rules={{ required: 'E invoice Date is required.' }}
 									/>
-									{E_INVOICE_DATE && (
+									{E_INVOICE_DATE ? (
 										<span className={styles.errors}>
 											{' '}
 											{E_INVOICE_DATE_MESSAGE.toString()}
 										</span>
-									)}
+									) : null}
 								</div>
 							</div>
 							<div className={styles.upload_container}>
@@ -153,12 +153,12 @@ function CancelEinvoice({
 											required: 'Agreement pdf file is required',
 										}}
 									/>
-									{AGREEMENT_PDF_FILE && (
+									{AGREEMENT_PDF_FILE ? (
 										<span className={styles.errors}>
 											{' '}
 											{AGREEMENT_PDF_FILE_MESSAGE.toString()}
 										</span>
-									)}
+									) : null}
 								</div>
 								<div className={styles.upload_Width}>
 									<div className={styles.lable_style}>Cancellation Reason *</div>
@@ -168,12 +168,12 @@ function CancelEinvoice({
 										value={response?.remarks}
 										onChange={(event) => setResponse((r) => ({ ...r, remarks: event }))}
 									/>
-									{CANCELLATION_REASON && (
+									{CANCELLATION_REASON ? (
 										<span className={styles.errors}>
 											{' '}
 											{CANCELLATION_REASON_MESSAGE.toString()}
 										</span>
-									)}
+									) : null}
 								</div>
 							</div>
 						</div>
