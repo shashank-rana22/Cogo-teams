@@ -19,7 +19,7 @@ function CreateTemplateForm({
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm();
+	} = useForm({ defaultValues: { language: 'english' } });
 
 	const sucessCallBackFunc = () => {
 		setOpenCreateReply(false);
@@ -37,9 +37,11 @@ function CreateTemplateForm({
 				{controls.map((eachControl) => {
 					const { name, label, type } = eachControl;
 					const Element = getFieldController(type);
+
 					if (!Element) {
 						return null;
 					}
+
 					return (
 						<div key={name}>
 							<div className={styles.label}>{label}</div>
@@ -56,6 +58,7 @@ function CreateTemplateForm({
 					themeType="tertiary"
 					size="md"
 					className={styles.button_styles}
+					disabled={createLoading}
 					onClick={() => {
 						setOpenCreateReply(false);
 						setActiveCard({ show: isDefaultOpen, data: {} });

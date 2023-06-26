@@ -177,6 +177,7 @@ function Templates({
 								onClick={() => {
 									setActiveCard({ show: false, data: {} });
 								}}
+								disabled={communicationLoading}
 							>
 								Cancel
 							</Button>
@@ -185,7 +186,8 @@ function Templates({
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							disabled={!name || communicationLoading}
+							disabled={!name}
+							loading={communicationLoading}
 						>
 							Send
 						</Button>
