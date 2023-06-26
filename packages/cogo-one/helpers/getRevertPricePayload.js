@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 
 const getWeightSlabs = ({ values }) => {
 	const { price = 0, currency = '', weight_slabs = [] } = values || {};
@@ -9,14 +8,14 @@ const getWeightSlabs = ({ values }) => {
 };
 
 const getAirServicePayload = ({ values }) => {
-	const isWeightSlabsEmpty = !isEmpty(values.weight_slabs?.[GLOBAL_CONSTANTS.zeroth_index].lower_limit);
+	const isWeightSlabsEmpty = !values.weight_slabs?.[GLOBAL_CONSTANTS.zeroth_index].lower_limit;
 
 	return {
 		chargeable_weight          : Number(values?.chargeable_weight) || undefined,
 		operation_type             : values.operation_type || undefined,
 		airline_id                 : values.airline_id || undefined,
 		price_type                 : values.price_type || undefined,
-		weight_slabs               : isWeightSlabsEmpty ? getWeightSlabs({ values }) : undefined,
+		weight_slabs               : !isWeightSlabsEmpty ? getWeightSlabs({ values }) : undefined,
 		rate_procurement_proof_url : values.rate_procurement_proof?.finalUrl || undefined,
 		schedule_type              : values.schedule_type || undefined,
 	};
