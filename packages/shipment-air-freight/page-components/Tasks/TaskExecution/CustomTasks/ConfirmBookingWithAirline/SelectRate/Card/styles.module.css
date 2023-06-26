@@ -48,3 +48,40 @@
 .button_head {
 	margin: 8px;
 }
+
+.ribbon_container{
+	margin-bottom:4px;
+	position: relative;
+	top:-4px;
+	left:-26px;
+}
+
+.ribbon_pop {
+	background: #C4DC91;
+	display: inline-block;
+	padding-right:16px;
+	padding-left:12px;
+	position: relative;
+  }
+  .ribbon_pop:after {
+	content: "";
+	width: 0;
+	height: 0;
+	top: 0;
+	position: absolute;
+	right: 0;
+	border-right: 10px solid #fff;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+  }
+  .ribbon_pop:before {
+	height: 0;
+	width: 0;
+	border-bottom: 8px solid #849E4C;
+	border-left: 8px solid transparent;
+	position: absolute;
+	content: "";
+	top: -8px;
+	left:0;
+  }
+  

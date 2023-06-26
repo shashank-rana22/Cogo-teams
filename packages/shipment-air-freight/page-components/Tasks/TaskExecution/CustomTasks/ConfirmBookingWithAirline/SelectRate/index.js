@@ -64,7 +64,6 @@ function SelectRate({
 		(item) => item?.booking_confirmation_status === 'pending' && item?.is_email_sent,
 	);
 
-	// const serviceProvidersData = [];
 	const SERVICE_PROVIDERS_DATA = [];
 	(list || []).forEach((itm) => {
 		const {

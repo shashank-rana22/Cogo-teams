@@ -7,6 +7,7 @@ import useSendBookingRequestEmail from '../../hooks/useSendBookingRequestEmail';
 import useUpdateBookingPreference from '../../hooks/useUpdateBookingPreference';
 
 import CancelledBookingModal from './CancelledBookingModal';
+import EBookingStatus from './EBookingStatus';
 import ListItem from './ListItem';
 import PreviewEmail from './PreviewEmail';
 import styles from './styles.module.css';
@@ -27,6 +28,7 @@ function Card({
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showEmailPreview, setShowEmailPreview] = useState(false);
+	const [showBookingStatus, setShowBookingStatus] = useState(false);
 
 	const data = Array.isArray(item?.data) ? item?.data[GLOBAL_CONSTANTS.zeroth_index] : item?.data;
 
@@ -112,6 +114,9 @@ function Card({
 				/>
 			</Modal>
 			<div className={styles.header}>
+				<div className={styles.ribbon_container}>
+					<div className={styles.ribbon_pop}>E-Booking</div>
+				</div>
 				<div className={styles.row}>
 					<div className={styles.priority_text}>
 						(
@@ -133,6 +138,9 @@ function Card({
 				step={step}
 				bookingMode={bookingMode}
 			/>
+			{showBookingStatus && (
+				<EBookingStatus setShowBookingStatus={setShowBookingStatus} showBookingStatus={showBookingStatus} />
+			)}
 			{step === CONFIRM_PREFERENCE_STEP && (
 				<div className={styles.footer}>
 					<div className={styles.priority_text}>Received Booking Confirmation ?</div>
