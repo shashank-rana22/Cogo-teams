@@ -16,10 +16,10 @@ function useGetkrasAssigned({ filters }) {
 		{ manual: true },
 	);
 
-	const getkrasAssigned = useCallback(async () => {
+	const getkrasAssigned = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
 		try {
-			await trigger({
+			trigger({
 				params: {
 					filters: {
 						employee_ids,
@@ -37,7 +37,9 @@ function useGetkrasAssigned({ filters }) {
 	}, [trigger, filters]);
 
 	useEffect(() => {
-		if (!isEmpty(filters)) { getkrasAssigned(); }
+		if (!isEmpty(filters)) {
+			getkrasAssigned();
+		}
 	}, [getkrasAssigned, filters]);
 
 	return {

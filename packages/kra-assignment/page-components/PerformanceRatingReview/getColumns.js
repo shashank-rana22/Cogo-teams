@@ -9,7 +9,7 @@ const getColumns = ({
 	employee_list,
 	level,
 }) => {
-	const a = [
+	const columns = [
 		{
 			id     : 'select_options',
 			Header : (
@@ -33,7 +33,7 @@ const getColumns = ({
 			Header   : 'Name',
 			accessor : (item) => (
 				<div>
-					{startCase(item?.employee_name) || '-'}
+					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
 			),
 		},
@@ -95,8 +95,8 @@ const getColumns = ({
 		},
 	];
 
-	if (level === 'vertical_manager') {
-		return [...a, {
+	if (level === 'vertical_head') {
+		return [...columns, {
 			Header   : 'Surprise Gift',
 			accessor : (item) => (
 				<div>
@@ -105,7 +105,7 @@ const getColumns = ({
 			),
 		}];
 	}
-	return a;
+	return columns;
 };
 
 export default getColumns;

@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRAs }) {
+function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions = [], onClickAddKRAs }) {
 	return (
 		<div className={styles.container}>
 			<div>
@@ -17,7 +17,7 @@ function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRA
 						placeholder="Select KRAs"
 						value={selectedValue}
 						onChange={(e) => setSelectedValue(e)}
-						options={KRAOptions || []}
+						options={KRAOptions}
 					/>
 				</div>
 			</div>

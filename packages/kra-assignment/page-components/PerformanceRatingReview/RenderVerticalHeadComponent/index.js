@@ -1,6 +1,7 @@
 import { Accordion } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
+import EmptyState from '../../common/EmptyState';
 import StyledTable from '../../common/StyledTable';
 import getColumns from '../getColumns';
 
@@ -65,6 +66,14 @@ function RenderVerticalHeadComponent({
 	selectedEmployees,
 	level,
 }) {
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.single_accordian}>
+				<EmptyState />
+			</div>
+		);
+	}
+
 	return (list || []).map((element) => {
 		const { details:employee_list, label, average_value } = element || {};
 
@@ -72,6 +81,7 @@ function RenderVerticalHeadComponent({
 			<div key={label} className={styles.single_accordian}>
 				<Accordion
 					type="text"
+					isOpen={label === 'all_employees'}
 					title={(
 						<RenderTitle
 							title={label}

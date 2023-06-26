@@ -20,6 +20,7 @@ function KRATable({
 
 	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH_CONST]
 	|| [];
+
 	const filters = isEmpty(filtersFields) ? appliedFilters : fieldsFilterLastElement;
 
 	const {

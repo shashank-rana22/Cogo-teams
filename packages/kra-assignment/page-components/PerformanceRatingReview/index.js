@@ -1,4 +1,5 @@
 import { Button, Select } from '@cogoport/components';
+import { IcMDownload } from '@cogoport/icons-react';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
@@ -82,6 +83,9 @@ function PerformanceRatingReview() {
 				</div>
 
 				<Button themeType="secondary">
+					<span style={{ paddingRight: 6, display: 'flex', alignItems: 'center' }}>
+						<IcMDownload width={14} height={14} />
+					</span>
 					Download CSV
 				</Button>
 

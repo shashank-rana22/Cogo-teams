@@ -13,10 +13,11 @@ function useGetUnassignedEmployee() {
 		method : 'GET',
 	}, { manual: true });
 
-	const getUnassignedEmployee = useCallback(async () => {
+	const getUnassignedEmployee = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
+
 		try {
-			await trigger({
+			trigger({
 				params: {
 					filters: {
 						employee_ids,

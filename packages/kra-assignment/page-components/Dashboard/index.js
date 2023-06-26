@@ -73,6 +73,7 @@ function Dashboard() {
 		acc[obj.id] = true;
 		return acc;
 	}, {});
+
 	const OBJECT_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.reduce(
 		(acc, obj) => {
 			acc[obj.id] = true;

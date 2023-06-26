@@ -16,9 +16,12 @@ const useGetRatingReviewDetails = ({ selectValue, level }) => {
 		try {
 			trigger({
 				params: {
-					manager_id : '17db9959-664d-4946-9b46-aba747998ee0',
+					manager_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8',
 					label      : selectValue,
 					level,
+					end_date   : '2023-07-21',
+					start_date : '2023-06-21',
+
 				},
 			});
 		} catch (error) {

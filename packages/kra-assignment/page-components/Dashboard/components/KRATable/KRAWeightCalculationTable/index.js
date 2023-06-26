@@ -10,7 +10,6 @@ const ROUND_OFF_DIGIT = 100;
 
 const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element) => {
 	const { weightage } = element;
-
 	const parsedValue = parseFloat(weightage);
 
 	if (!Number.isNaN(parsedValue)) {
