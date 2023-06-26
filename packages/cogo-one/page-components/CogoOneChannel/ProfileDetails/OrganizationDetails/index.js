@@ -11,6 +11,7 @@ import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCo
 
 import ConvertToCpModal from './ConvertToCpModal';
 import OrgAgentDetails from './OrgAgentDetails';
+import OrganizationUsers from './OrganizationUsers';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
@@ -24,7 +25,6 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 }) {
 	const { organization_id:messageOrgId = '', account_type: accountType = '' } = formattedMessageData || {};
-	console.log('accountType:', accountType);
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
@@ -35,7 +35,8 @@ function OrganizationDetails({
 		organizationUsersData,
 		organizationUsersLoading,
 	} = useGetListOrganizationUsers({ organizationId, accountType });
-	console.log('organizationUsersData:', organizationUsersData);
+
+	const { list: organizationUserList = [] } = organizationUsersData || {};
 
 	const [showConvertModal, setShowConvertModal] = useState(false);
 
@@ -89,7 +90,7 @@ function OrganizationDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Organization Details</div>
-			{orgLoading ? (
+			{orgLoading || organizationUsersLoading ? (
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
@@ -184,31 +185,47 @@ function OrganizationDetails({
 
 			)}
 
-			<div className={styles.agent_title}>Reedemable Cogopoints</div>
-			<div className={styles.points}>
-				<div className={styles.cogo_icon}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
-						alt="coin"
-						className={styles.cogocoins_icon}
-					/>
-				</div>
+			{!isEmpty(organizationUserList) && (
+				<>
+					<div className={styles.agent_title}>Organization Users</div>
+					{(organizationUserList || []).map((item) => (
+						<OrganizationUsers user={item} key={item.id} />
+					))}
 
-				<div className={styles.cogopoints}>Cogopoints : </div>
-				{pointLoading ? (
-					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
-				) : (
-					<div className={styles.value}>{total_redeemable || '0'}</div>
-				)}
-			</div>
-			<div className={styles.agent_title}>Available Promocodes</div>
-			{promoLoading ? (
-				<div className={styles.loader_div}>
-					<Loader themeType="primary" />
-				</div>
-			) : (
-				<ListPromos />
+				</>
+
 			)}
+
+			{accountType !== 'service_provider' && (
+				<>
+					<div className={styles.agent_title}>Reedemable Cogopoints</div>
+					<div className={styles.points}>
+						<div className={styles.cogo_icon}>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+								alt="coin"
+								className={styles.cogocoins_icon}
+							/>
+						</div>
+
+						<div className={styles.cogopoints}>Cogopoints : </div>
+						{pointLoading ? (
+							<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
+						) : (
+							<div className={styles.value}>{total_redeemable || '0'}</div>
+						)}
+					</div>
+					<div className={styles.agent_title}>Available Promocodes</div>
+					{promoLoading ? (
+						<div className={styles.loader_div}>
+							<Loader themeType="primary" />
+						</div>
+					) : (
+						<ListPromos />
+					)}
+				</>
+			)}
+
 			<QuotationDetails organizationId={organizationId} />
 		</div>
 	);
