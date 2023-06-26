@@ -11,14 +11,14 @@ function SelectedOrgInfo({ org_name, user_name, setShow = () => {}, show }) {
 				<div className={styles.user_name}>{user_name || ''}</div>
 			</div>
 
-			<div className={styles.icon}>
+			{/* <div className={styles.icon}>
 				<IcMArrowDown
 					height={15}
 					width={15}
 					onClick={() => setShow((prev) => !prev)}
 					style={{ rotate: show ? '180deg' : '0deg' }}
 				/>
-			</div>
+			</div> */}
 		</div>
 	);
 }

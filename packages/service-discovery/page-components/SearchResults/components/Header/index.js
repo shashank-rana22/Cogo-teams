@@ -1,36 +1,28 @@
-import { useForm } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+import { IcMArrowBack, IcMEdit, IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-
-import OrganisationForm from '../../../ServiceDiscovery/SpotSearch/components/Header/OrganisationForm';
+import React from 'react';
 
 import LocationDetails from './LocationDetails';
 import SelectedOrgInfo from './SelectedOrgInfo';
 import styles from './styles.module.css';
 
-function Header({ data = {} }) {
+function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setHeaderProps, setShowFilterModal }) {
 	const router = useRouter();
 
 	const {
 		importer_exporter = {},
-		importer_exporter_id = '',
-		importer_exporter_branch_id = '',
-		user_id = '',
 		user = {},
 	} = data || {};
-
-	const [showAdditionalHeader, setShowAdditionalHeader] = useState(false);
-	const [organization, setOrganization] = useState({
-		organization_id        : importer_exporter_id,
-		organization_branch_id : importer_exporter_branch_id,
-	});
-
-	const { control, formState:{ errors }, watch, setValue } = useForm();
 
 	const { business_name = '' } = importer_exporter || {};
 
 	const { name = '' } = user || {};
+
+	const handleEdit = () => {
+		setHeaderProps({ key: 'edit_details', data });
+		setShowAdditionalHeader((prev) => !prev);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -53,25 +45,17 @@ function Header({ data = {} }) {
 					<div className={styles.location_details}>
 						<LocationDetails data={data} />
 					</div>
+
+					<div className={styles.edit_details}>
+						<IcMEdit height={16} width={16} onClick={handleEdit} />
+					</div>
+
+					<Button size="lg" themeType="link" onClick={() => setShowFilterModal(true)}>
+						<IcMFilter />
+						Filters
+					</Button>
 				</div>
 			</div>
-
-			{showAdditionalHeader ? (
-				<div className={`${styles.additional_header} ${showAdditionalHeader && styles.show}`}>
-					<OrganisationForm
-						organization={organization}
-						setOrganization={setOrganization}
-						control={control}
-						errors={errors}
-						watch={watch}
-						setValue={setValue}
-						style={{ margin: '40px 12px', maxWidth: '50%' }}
-						organization_id={importer_exporter_id}
-						user_id={user_id}
-						disabled
-					/>
-				</div>
-			) : null}
 
 		</div>
 	);

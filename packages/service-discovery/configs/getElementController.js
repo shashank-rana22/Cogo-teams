@@ -9,6 +9,7 @@ import {
 	UploadController,
 	RadioGroupController,
 	MultiselectController,
+	InputNumberController,
 } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
@@ -16,13 +17,14 @@ const CONTROLLER_MAPPING = {
 	select         : SelectController,
 	chips          : ChipsController,
 	'multi-select' : MultiselectController,
-	number         : InputController,
 	'async-select' : AsyncSelectController,
 	datepicker     : DatepickerController,
 	upload         : UploadController,
 	textarea       : TextAreaController,
 	checkbox       : CheckboxController,
 	radio          : RadioGroupController,
+	text           : InputController,
+	number         : InputNumberController,
 };
 
 const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type];

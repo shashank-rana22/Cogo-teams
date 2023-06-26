@@ -1,17 +1,27 @@
 import { Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
+import EditDetailsHeader from './components/EditDetailsHeader';
+import Filters from './components/Filters';
 import Header from './components/Header';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import styles from './styles.module.css';
 
 function SearchResults() {
+	const [showAdditionalHeader, setShowAdditionalHeader] = useState(false);
+	const [showFilterModal, setShowFilterModal] = useState(false);
+	const [headerProps, setHeaderProps] = useState({});
+
 	const { query } = useRouter();
 
 	const { spot_search_id, importer_exporter_id } = query;
 
 	const { refetchSearch, loading, data } = useGetSpotSearch();
+
+	const COMPONENT_MAPPING = useMemo(() => ({
+		edit_details: EditDetailsHeader,
+	}), []);
 
 	useEffect(() => {
 		refetchSearch({ spot_search_id, importer_exporter_id });
@@ -26,9 +36,27 @@ function SearchResults() {
 		);
 	}
 
+	const Component = COMPONENT_MAPPING[headerProps?.key] || null;
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}><Header data={data?.detail} /></div>
+			<div className={styles.header}>
+				<Header
+					data={data?.detail}
+					showAdditionalHeader={showAdditionalHeader}
+					setShowAdditionalHeader={setShowAdditionalHeader}
+					setHeaderProps={setHeaderProps}
+					setShowFilterModal={setShowFilterModal}
+				/>
+
+				{showAdditionalHeader ? (
+					<Component {...headerProps} />
+				) : null}
+			</div>
+
+			{showFilterModal ? (
+				<Filters show={showFilterModal} setShow={setShowFilterModal} />
+			) : null}
 		</div>
 	);
 }

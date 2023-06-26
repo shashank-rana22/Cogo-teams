@@ -7,6 +7,7 @@
     align-items: center;
     justify_content: space-between;
     margin-right: 24px;
+    margin-left: -24px;
 }
 .name_container{
     width: 90%;

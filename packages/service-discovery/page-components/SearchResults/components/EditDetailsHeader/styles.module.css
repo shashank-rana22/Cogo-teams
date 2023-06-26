@@ -1,0 +1,37 @@
+.container{
+    background: #fff;
+    margin: 20px 0;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+}
+.form{
+    display: flex;
+    width: 80%;
+}
+.form_item{
+    margin-right: 28px;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.label{
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+    display: flex;
+    margin-bottom: 8px;
+}
+.required_mark{
+    color: #e74c3c;
+    margin-left: 4px;
+}
+.error_message{
+    margin-top: 8px;
+    font-size: 12px;
+	color: #cb6464;
+}
+.button{
+
+}

@@ -5,7 +5,10 @@
 .header{
     position: fixed;
     top: 0;
-    width:100%;
+    width: 100%;
+    background: #FFFFFF;
+    padding: 16px 24px 0 24px;
+    box-shadow: 0px 8px 8px 0 #EBEBF0;  
 }
 .loading{
     display: flex;
@@ -23,4 +26,13 @@
 }
 .loader{
     width: 40px;
+}
+.additional_header{
+    padding: 16px 24px;
+    height: 200px;
+    transition: height 0.5s ease-in-out;
+}
+.show{
+    height: 100%;
+    transition: height 0.5s ease-in-out;
 }
