@@ -8,6 +8,7 @@ import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values
 import { QuoteLoader } from '../LoadingState';
 
 import AddLineItemModal from './components/AddLineItemModal';
+import ContainerDetails from './components/ContainerDetails';
 import ConvenienceDetails from './components/ConvenienceDetails';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
@@ -15,12 +16,13 @@ import ServiceBreakup from './components/ServiceBreakup';
 import styles from './styles.module.css';
 
 function BreakdownDetails({
-	rateDetails,
-	setRateDetails,
-	convenienceDetails,
-	setConvenienceDetails,
-	convenience_line_item,
-	setShouldResetMargins,
+	rateDetails = {},
+	setRateDetails = () => {},
+	convenienceDetails = {},
+	setConvenienceDetails = () => {},
+	convenience_line_item = {},
+	setShouldResetMargins = () => {},
+	source = '',
 }) {
 	const {
 		rate,
@@ -50,18 +52,24 @@ function BreakdownDetails({
 
 	let total = 0;
 
+	const disableForm = source === 'preview_booking';
+
+	const { primary_service = '' } = detail || {};
+
 	return (
 		<div>
-			<div className={styles.header}>
-				<div className={styles.heading}>Add or Edit Margin </div>
-				<Button
-					type="button"
-					themeType="secondary"
-					size="xl"
-				>
-					Skip
-				</Button>
-			</div>
+			{!disableForm ? (
+				<div className={styles.header}>
+					<div className={styles.heading}>Add or Edit Margin </div>
+					<Button
+						type="button"
+						themeType="secondary"
+						size="xl"
+					>
+						Skip
+					</Button>
+				</div>
+			) : null}
 
 			{rateDetails.map((item, index) => {
 				const { id = '', service_name = '' } = item || {};
@@ -101,12 +109,20 @@ function BreakdownDetails({
 
 				return (
 					<Accordion
-						className={styles.container}
+						className={`${styles.container} ${styles[source]}`}
 						key={id}
 						isOpen={!index}
 						title={(
 							<div className={styles.service_container}>
-								<div className={styles.service_name}>{startCase(service_name)}</div>
+								<div className={styles.service_details}>
+									<div className={styles.service_name}>{startCase(service_name)}</div>
+
+									<ContainerDetails
+										primary_service={primary_service}
+										details={detail.services[id] || {}}
+									/>
+								</div>
+
 								<div className={styles.total_display}>{totalDisplayString}</div>
 							</div>
 						)}
@@ -126,19 +142,26 @@ function BreakdownDetails({
 							service_name={service_name}
 							shouldEditMargin={shouldEditMargin}
 							getCheckout={getCheckout}
+							disableForm={disableForm}
 						/>
 
-						<Button
-							size="md"
-							themeType="tertiary"
-							className={styles.add_line_item}
-							onClick={() => {
-								setShouldResetMargins(false);
-								setAddLineItemData({ index, service_type: item?.service_type, service_id: item?.id });
-							}}
-						>
-							+ Add Line Item
-						</Button>
+						{!disableForm ? (
+							<Button
+								size="md"
+								themeType="tertiary"
+								className={styles.add_line_item}
+								onClick={() => {
+									setShouldResetMargins(false);
+									setAddLineItemData({
+										index,
+										service_type : item?.service_type,
+										service_id   : item?.id,
+									});
+								}}
+							>
+								+ Add Line Item
+							</Button>
+						) : null}
 					</Accordion>
 				);
 			})}
@@ -159,6 +182,7 @@ function BreakdownDetails({
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				rate={rate}
+				disableForm={disableForm}
 			/>
 
 			<LandingCost

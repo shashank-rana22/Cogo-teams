@@ -144,6 +144,7 @@ function Checkout() {
 			Component : PreviewBooking,
 			props     : {
 				data,
+				primaryService,
 			},
 		},
 	};

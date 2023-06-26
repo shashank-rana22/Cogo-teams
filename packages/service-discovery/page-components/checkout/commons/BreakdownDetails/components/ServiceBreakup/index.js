@@ -1,75 +1,17 @@
-import { startCase } from '@cogoport/utils';
-
-import getShippingLine from '../../../../utils/getShippingLine';
 import RenderLineItem from '../RenderLineItem';
 
 import styles from './styles.module.css';
 
-const renderServiceType = ({ item, service_details, primaryService }) => {
-	const serviceName = item.service_name
-		? item?.service_name
-		: item.service_type;
-	if (item.service_type === 'fcl_freight') {
-		return getShippingLine(item?.service_type, primaryService);
-	}
-	if (item.service_type === 'air_freight') {
-		return getShippingLine(item?.service_type, primaryService);
-	}
-	if (item.service_type === 'cargo_insurance') {
-		return startCase(serviceName);
-	}
-	if (item?.trade_type) {
-		if (item?.trade_type === 'export') {
-			return startCase(`origin_${serviceName}`);
-		}
-		if (item?.trade_type === 'import') {
-			return startCase(`destination_${serviceName}`);
-		}
-	}
-	if (
-		service_details?.service_type === 'air_freight_local'
-        && service_details?.trade_type === 'domestic'
-	) {
-		return `Terminal ${startCase(service_details?.terminal_charge_type)}`;
-	}
-	return startCase(serviceName || '');
-};
-
 function ServiceBreakup({
-	item = {}, index, conversions, detail, primaryService, rate, setRateDetails, fclLocalEmpty, shouldEditMargin,
+	item = {},
+	index,
+	detail,
+	rate,
+	setRateDetails,
+	fclLocalEmpty,
+	shouldEditMargin,
+	disableForm,
 }) {
-	const serviceKey = item?.id;
-
-	// const serviceEditedMargins = editedMargins?.[serviceKey];
-
-	// const totalDisplay = displayTotal(
-	// 	item?.line_items || [],
-	// 	item?.defaultValues,
-	// 	conversions,
-	// 	item?.tax_total_price_currency,
-	// );
-
-	const service_details = detail?.services?.[item?.id];
-
-	const total = 0;
-
-	// total += convertCurrencyValue(
-	// 	Number(Math.floor(totalDisplay)),
-	// 	item?.tax_total_price_currency,
-	// 	rate?.total_price_currency,
-	// 	conversions,
-	// );
-
-	// const totalDisplayString = formatAmount({
-	// 	amount   : totalDisplay,
-	// 	currency : item.tax_total_price_currency,
-	// 	options  : {
-	// 		style                 : 'currency',
-	// 		currencyDisplay       : 'code',
-	// 		maximumFractionDigits : 0,
-	// 	},
-	// });
-
 	if (fclLocalEmpty) {
 		return (
 			<div style={{ marginTop: '12px' }}>
@@ -92,6 +34,7 @@ function ServiceBreakup({
 					shouldEditMargin={shouldEditMargin}
 					detail={detail}
 					service_type={item.service_type}
+					disableForm={disableForm}
 				/>
 			))}
 		</div>

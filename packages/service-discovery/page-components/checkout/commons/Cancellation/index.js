@@ -5,13 +5,14 @@ import CANCELLATION_MAPPINGS from '../../utils/cancellationMappings';
 
 import styles from './styles.module.css';
 
-function Cancellation({ detail, serviceType }) {
+function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 	const { cancellation_charges } = detail;
 
 	return (
-		<div className={`${styles.container} ${serviceType === 'fcl_freight' ? 'fcl' : ''}`}>
+		<div className={`${styles.container} ${styles[source]} ${serviceType === 'fcl_freight' ? 'fcl' : ''}`}>
 			<div className={styles.header}>
 				<div className={styles.cancellation_policy}>Cancellation Policy</div>
+				<div className={styles.horizontal_line} />
 				<div>Days Between</div>
 			</div>
 

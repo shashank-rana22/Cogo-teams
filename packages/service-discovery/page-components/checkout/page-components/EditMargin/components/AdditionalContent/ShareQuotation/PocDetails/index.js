@@ -2,12 +2,12 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ChangeOpsExecutive from '../../../../../../commons/ChangeOpsExecutive';
+import ContactDetails from '../../../../../../commons/ContactDetails';
+import WhatsappNoVerificationModal from '../../../../../../commons/WhatsappNoVerificationModal';
 import useUpdateCheckout from '../../../../../../hooks/useUpdateCheckout';
 
-import ChangeOpsExecutive from './ChangeOpsExecutive';
-import ContactDetails from './ContactDetails';
 import styles from './styles.module.css';
-import WhatsappNoVerificationModal from './WhatsappNoVerificationModal';
 
 function PocDetails({
 	detail,

@@ -1,11 +1,15 @@
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcCWhatsapp } from '@cogoport/icons-react';
 
-import hideDetails from '../../../../../../../helpers/hideDetails';
+import hideDetails from '../../helpers/hideDetails';
 
 import styles from './styles.module.css';
 
-function ContactDetails({ bookingConfirmationMode, importer_exporter_poc, setShowWhatsappVerificationModal }) {
+function ContactDetails({
+	bookingConfirmationMode,
+	importer_exporter_poc,
+	setShowWhatsappVerificationModal = () => {},
+}) {
 	const {
 		name = '',
 		mobile_number = '',
@@ -40,10 +44,7 @@ function ContactDetails({ bookingConfirmationMode, importer_exporter_poc, setSho
 					<IcCWhatsapp />
 					{whatsapp_country_code || ''}
 					-
-					{hideDetails(
-						whatsapp_number,
-						'number',
-					)}
+					{hideDetails(whatsapp_number, 'number')}
 					{whatsapp_verified ? (
 						<IcCFtick />
 					) : (
@@ -65,7 +66,7 @@ function ContactDetails({ bookingConfirmationMode, importer_exporter_poc, setSho
 
 	return (
 		<div className={styles.no_whatsapp}>
-			{'User Does\'t have Whatsapp Number'}
+			User Does't have Whatsapp Number
 			{' '}
 			<Button
 				themeType="accent"

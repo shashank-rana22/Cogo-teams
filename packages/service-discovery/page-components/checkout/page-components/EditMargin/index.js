@@ -11,7 +11,7 @@ const DEFAULT_VALUE = 0;
 const FIRST_INDEX = 0;
 
 function EditMargin({
-	data,
+	data = {},
 	userSettings,
 	rate,
 }) {
@@ -21,6 +21,10 @@ function EditMargin({
 	const [shouldResetMargins, setShouldResetMargins] = useState(true);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[FIRST_INDEX];
+
+	const { detail = {} } = data || {};
+
+	const { margin_approval_request_remarks = [] } = detail;
 
 	useEffect(() => {
 		if (shouldResetMargins) {
@@ -75,6 +79,10 @@ function EditMargin({
 			}));
 		}
 	}, [data?.rate?.services, shouldResetMargins]);
+
+	useEffect(() => {
+		setAdditionalRemark(margin_approval_request_remarks[FIRST_INDEX]);
+	}, [margin_approval_request_remarks]);
 
 	return (
 		<div>

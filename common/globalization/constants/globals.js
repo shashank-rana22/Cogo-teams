@@ -212,6 +212,12 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
+		booking_verification_png:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_verification-s2c',
+		point_of_contact_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/poc_icon_new_s2c',
+		hs_code_s2c_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hs_code-s2c',
+		cargo_value_s2c_png          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargo_value-s2c',
+		cargo_readiness_date_s2c_png : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cargo_readiness-s2c',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

@@ -3,9 +3,12 @@
 	align-items: center;
 	margin: 12px 0px;
 	padding: 24px 40px;
-	border: 1px solid #d0cddb;
 	border-radius: 4px;
-    background: #FFFBF8;
+
+	&.edit_margin {
+		border: 1px solid #d0cddb;
+		background: #FFFBF8;
+	}
 
 	&.fcl {
 		width: 70%;
@@ -13,16 +16,17 @@
 	}
 }
 
+.horizontal_line {
+	border: 0.5px solid #d0cddb;
+	margin: 12px 20px 12px 0px;
+}
+
 .header {
     display: flex;
 	justify-content: space-between;
 	flex-direction: column;
 	margin-right: 12px;
-    min-width: 20%;
-
-	.cancellation_policy {
-		margin-bottom: 8px;
-	}
+    min-width: 16%;
 }
 
 .timeline {

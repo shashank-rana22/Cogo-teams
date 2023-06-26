@@ -10,6 +10,7 @@ function ConvenienceDetails({
 	convenienceDetails,
 	setConvenienceDetails,
 	rate,
+	disableForm,
 }) {
 	const subTotal = total;
 
@@ -50,6 +51,7 @@ function ConvenienceDetails({
 							size="sm"
 							options={currencies}
 							value={convenienceDetails?.convenience_rate.currency}
+							disabled={disableForm}
 							onChange={(val) => {
 								if (val) {
 									onChange({ value: val, itemKey: 'currency' });
@@ -62,6 +64,7 @@ function ConvenienceDetails({
 							size="sm"
 							onChange={(val) => onChange({ value: val, itemKey: 'price' })}
 							style={{ marginLeft: '12px' }}
+							disabled={disableForm}
 						/>
 					</div>
 				</div>

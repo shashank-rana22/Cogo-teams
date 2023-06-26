@@ -586,6 +586,19 @@ function asyncListPromotions() {
 	};
 }
 
+function asyncListSaasHsCodes() {
+	return {
+		finalValueKey  : 'id',
+		finalLabelKey  : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -634,4 +647,5 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListSaasHsCodes,
 };

@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useState } from 'react';
 
-import getDistinctOptions from '../../../../../../../../../helpers/getDistinctOptions';
-import useListOrganizationUsers from '../../../../../../../../../hooks/useListOrganizationUsers';
+import getDistinctOptions from '../../../../helpers/getDistinctOptions';
+import useListOrganizationUsers from '../../../../hooks/useListOrganizationUsers';
 
 const useHandleChangeExecutive = ({
 	onUpdate,

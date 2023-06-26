@@ -1,6 +1,7 @@
 .container {
     display: flex;
-    padding: 0px 28px;
+    padding: 0px 40px;
+    padding-right: 24px;
 }
 
 .item {

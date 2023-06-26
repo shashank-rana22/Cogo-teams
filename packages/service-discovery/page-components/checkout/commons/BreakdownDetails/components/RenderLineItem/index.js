@@ -6,7 +6,7 @@ import ServiceMargin from './ServiceMargin';
 import styles from './styles.module.css';
 
 function RenderLineItem({
-	lineItem = {}, id_prefix, setRateDetails, serviceIndex, lineItemIndex, rate, shouldEditMargin, detail,
+	lineItem = {}, id_prefix, setRateDetails, serviceIndex, lineItemIndex, rate, shouldEditMargin, detail, disableForm,
 }) {
 	const {
 		margins = [],
@@ -109,7 +109,7 @@ function RenderLineItem({
 					(shouldEditMargin
 					&& isServiceMarginAllowedRate
 					&& isLineItemMarginEditAllowed
-					&& isQutationEditAllowed) || isNew
+					&& isQutationEditAllowed && !disableForm) || isNew
 				}
 			/>
 		</div>

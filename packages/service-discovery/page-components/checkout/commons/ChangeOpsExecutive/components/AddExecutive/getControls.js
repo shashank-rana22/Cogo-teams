@@ -1,4 +1,4 @@
-import workScopes from '../../../../../../../../../constants/work-scope';
+import workScopes from '../../../../constants/work-scope';
 
 const getControls = ({ geo }) => [
 	{

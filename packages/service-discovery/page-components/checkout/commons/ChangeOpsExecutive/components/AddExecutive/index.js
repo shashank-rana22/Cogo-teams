@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-import getElementController from '../../../../../../../../../commons/forms/getElementController';
+import getElementController from '../../../forms/getElementController';
 
 import styles from './styles.module.css';
 import useCreateNewUser from './useCreateNewUser';

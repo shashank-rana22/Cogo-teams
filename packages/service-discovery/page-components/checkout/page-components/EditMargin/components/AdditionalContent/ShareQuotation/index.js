@@ -28,7 +28,6 @@ function ShareQuotation({
 	convenience_line_item = {},
 	setShouldResetMargins,
 	setCheckoutState = () => {},
-
 }) {
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
 
@@ -98,7 +97,7 @@ function ShareQuotation({
 			margin_approval_request_remarks         : additionalRemark ? [additionalRemark] : undefined,
 		};
 
-		await updateCheckoutMargin({ finalPayload });
+		updateCheckoutMargin({ finalPayload });
 	};
 
 	const BUTTON_MAPPING = [

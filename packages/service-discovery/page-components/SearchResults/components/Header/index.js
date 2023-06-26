@@ -3,9 +3,9 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+import LocationDetails from '../../../../common/LocationDetails';
 import OrganisationForm from '../../../ServiceDiscovery/SpotSearch/components/Header/OrganisationForm';
 
-import LocationDetails from './LocationDetails';
 import SelectedOrgInfo from './SelectedOrgInfo';
 import styles from './styles.module.css';
 

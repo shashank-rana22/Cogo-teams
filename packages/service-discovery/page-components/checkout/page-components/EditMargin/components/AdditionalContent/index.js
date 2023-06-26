@@ -39,6 +39,7 @@ function AdditionalContent({
 			<Cancellation
 				detail={detail}
 				serviceType={primaryService?.service_type}
+				source="edit_margin"
 			/>
 
 			<ConfirmationTexts

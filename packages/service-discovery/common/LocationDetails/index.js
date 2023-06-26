@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
-import getLocationInfo from '../../../utils/locations-search';
+import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
 
 import styles from './styles.module.css';
 
