@@ -10,8 +10,8 @@ function Header({ data }) {
 			<div className={styles.target_remains_ctn}>
 				Manual Targets Remaining :
 				{data?.remaining_unassigned_target || '6'}
-
 			</div>
+
 		</div>
 	);
 }

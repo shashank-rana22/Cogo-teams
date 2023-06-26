@@ -1,8 +1,8 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 }
 
-.header{
-    font-weight: 800;
-    font-size: 20px;
+.header {
+	font-size: 20px;
+	font-weight: 800;
 }
