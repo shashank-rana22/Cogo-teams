@@ -20,13 +20,13 @@ function EditKRA() {
 			</div>
 
 			<div className={styles.container1}>
+
 				<div className={styles.tab_container}>
 					<Tabs
 						activeTab={activeTab}
 						themeType="primary"
 						onChange={setActiveTab}
 					>
-
 						<TabPanel name="individual" title="Individual">
 							<div className={styles.individual_kra}>
 								<IndividualKraAssignment data={data} loading={loading} />
@@ -36,6 +36,7 @@ function EditKRA() {
 				</div>
 
 			</div>
+
 		</div>
 
 	);
