@@ -19,6 +19,7 @@ import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 const REDIRECT_URL_CREATE = '/kra-assignment/create';
 const REDIRECT_URL_RATING = '/kra-assignment/performance-rating-review';
 const DISPLAY_ADD_KRA_BUTTON = 1;
+const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
 const TABLE_TYPE_LOW_WEIGHTAGE = 'LowWeightage';
 const BUTTON_FUNCTION_ADD = 'add';
@@ -83,10 +84,10 @@ function Dashboard() {
 
 	const CHECK_IF_ONE_EMPLOYEE_SELECTED = countTrueValues(selectUnassignedEmployeeObject)
       + countTrueValues(selectAccordianObject)
-      + countTrueValues(selectLowWeightEmployeeObject)
-    === DISPLAY_ADD_KRA_BUTTON;
+      + countTrueValues(selectLowWeightEmployeeObject);
 
-	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters)
+	&& (CHECK_IF_ONE_EMPLOYEE_SELECTED === DISPLAY_ADD_KRA_BUTTON);
 
 	const onClickConfiguration = (type) => {
 		if (type === BUTTON_FUNCTION_ADD) {
@@ -167,11 +168,7 @@ function Dashboard() {
 					<Button
 						size="md"
 						onClick={() => setShowKRACalculationTable(true)}
-						disabled={
-							isEmpty(selectUnassignedEmployeeObject)
-							&& isEmpty(selectLowWeightEmployeeObject)
-							&& isEmpty(selectAccordianObject)
-						}
+						disabled={CHECK_IF_ONE_EMPLOYEE_SELECTED < DISPLAY_ALLOCATE_KRA_BUTTON}
 					>
 						Proceed to Allocate KRAs
 					</Button>
