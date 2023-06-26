@@ -4,10 +4,10 @@ import PortPair from "./PortPairs";
 import TimeTable from "./TimeTable";
 import { useRouter } from "@cogoport/next";
 
-function Cards({ item, mapTab, setMapTab }) {
+function Cards({ item }) {
     const { push } = useRouter();
     const onClickHandle = () => {
-        setMapTab(item);
+        // setMapTab(item);
         push(
             "/schedules/service-lanes/[id]",
             `/schedules/service-lanes/${item?.id}`

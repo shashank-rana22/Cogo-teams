@@ -139,7 +139,7 @@ export const getColumns = ({
             Header: "No of Stops",
             accessor: (item) => (
                 <div className={styles.td}>
-                    {item?.number_of_stops || "Direct"}
+                    {item?.number_of_stops || '-'}
                 </div>
             ),
         },

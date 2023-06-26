@@ -328,16 +328,16 @@ const navigationMappingAdmin = {
 	schedules: {
         key: "schedules",
         title: "Schedules",
-        href: "/schedules",
-        as: "/schedules",
-        type: "link",
+		isSubNavs: true,
         icon: IcMDashboard,
-        possible_apis: [...apis.schedules],
+		module_type: "dashboards",
         options: [
-            {
+            {	
+				key: 'schedules-ocean_schedule_coverage',
                 title: "Ocean Schedule Coverage",
                 href: "/schedules/ocean-schedule-coverage",
                 as: "/schedules/ocean-schedule-coverage",
+				possible_apis: [...apis.schedules],
             },
 			{
 				title : 'Sailing Schedules',
@@ -358,8 +358,6 @@ const navigationMappingAdmin = {
 				type  : 'link',
 			},
         ],
-        main_apis: [],
-        module_type: "dashboards",
     },
 	okam_dashboard: {
 		key           : 'okam_dashboard',

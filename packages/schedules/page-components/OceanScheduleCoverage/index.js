@@ -6,7 +6,7 @@ import { getColumns } from "./helpers/column";
 import useListSailingSchedulePortPairs from "./hooks/useListSailingSchedulePortPairs";
 import OSCPortToPort from "./OSCPortToPort";
 import styles from "./styles.module.css";
-import LoadingState from "./LoadingState";
+import EmptyState from "../common/EmptyState";
 
 function OceanScheduleCoverage() {
     const [filters, setFilters] = useState({});
@@ -34,20 +34,21 @@ function OceanScheduleCoverage() {
         <>
             {!isPortToPort && (
                 <>
-                    <Filter filters={filters} setFilters={setFilters} />
+                    <Filter filters={filters} setFilters={setFilters} setCurrentPage={setCurrentPage} />
                     <div style={{ padding: "8px" }} />
-                    {!loading ? (
-                        columns &&
-                        data && (
+                    <div className={styles.styled_table}>
+                        {(data || []).length || loading ? (
                             <Table
                                 columns={columns}
-                                data={data}
+                                data={data || []}
                                 className={styles.table}
+                                loading={loading}
+                                loadingRowsCount={15}
                             />
-                        )
-                    ) : (
-                        <LoadingState />
-                    )}
+                        ) : (
+                            <EmptyState height={300} />
+                        )}
+                    </div>
                     <div className={styles.pagination}>
                         <Pagination
                             type="table"

@@ -25,7 +25,7 @@
 import { useEffect } from "react";
 import { useRequest } from "@cogoport/request";
 
-const useListServiceLanes = ({ filter }) => {
+const useListServiceLanes = ({ routeId }) => {
     const [{ data, loading }, trigger] = useRequest(
         {
             url: "/list_service_lanes",
@@ -37,7 +37,9 @@ const useListServiceLanes = ({ filter }) => {
     const makeRequest = async () => {
         try {
             const payload = {
-                filter,
+                filter: {
+                    id: routeId,
+                },
                 page_limit: 10,
                 page: 1,
                 pagination_data_required: true,
@@ -54,7 +56,7 @@ const useListServiceLanes = ({ filter }) => {
 
     useEffect(() => {
         makeRequest();
-    }, [filter]);
+    }, [routeId]);
     return {
         data: data?.list,
         loading,
