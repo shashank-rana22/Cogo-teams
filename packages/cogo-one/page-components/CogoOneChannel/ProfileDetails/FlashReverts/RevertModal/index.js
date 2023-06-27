@@ -1,13 +1,14 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import useGetRevertFormControls from '../../../../../configurations/revert-form-controls';
+import getRevertFormControls from '../../../../../configurations/revert-form-controls';
+import { MAX_WEIGHT_SLAB } from '../../../../../constants';
+import { getDefaultValues } from '../../../../../helpers/getDefaultValues';
 import useRevertPrice from '../../../../../hooks/useRevertPrice';
 
 import Form from './Form';
 import styles from './styles.module.css';
 
-const MAX_WEIGHT_SLAB = 500;
 const MIN_CHARGEABLE_WEIGHT = 45;
 
 function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRates }) {
@@ -19,13 +20,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		formState: { errors = {} },
 		watch,
 	} = useForm({
-		defaultValues: {
-			weight_slabs: [{
-				lower_limit : '',
-				upper_limit : '',
-			}],
-			chargeable_weight: data?.service?.chargeable_weight || '',
-		},
+		defaultValues: getDefaultValues({ data }),
 	});
 
 	const chargeableWeight = watch('chargeable_weight');
@@ -35,7 +30,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 		handleRevertPrice,
 	} = useRevertPrice({ item: data, setModalState, shipmentFlashBookingRates, chargeableWeight });
 
-	const controls = useGetRevertFormControls({
+	const controls = getRevertFormControls({
 		data,
 		userId,
 		chargeableWeight,

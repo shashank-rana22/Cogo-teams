@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const MAX_WEIGHT_SLAB = 500;
+import { MAX_WEIGHT_SLAB } from '../constants';
 
 const getWeightSlabs = ({ values }) => {
 	const { price = 0, currency = '', weight_slabs = [] } = values || {};
@@ -22,7 +22,6 @@ const getAirServicePayload = ({ values, chargeableWeight }) => ({
 	price_type                 : values.price_type || undefined,
 	weight_slabs               : chargeableWeight < MAX_WEIGHT_SLAB ? getWeightSlabs({ values }) : undefined,
 	rate_procurement_proof_url : values.rate_procurement_proof?.finalUrl || undefined,
-	schedule_type              : values.schedule_type || undefined,
 });
 
 const getFclServicePayload = ({ values }) => ({

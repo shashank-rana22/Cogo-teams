@@ -2,18 +2,18 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
+import { MAX_WEIGHT_SLAB } from '../../constants';
+
 import { SERVICE_CONTROLS_MAPPING } from './active-controls-mapping';
 
-const MAX_WEIGHT_SLAB = 500;
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
 const MIN_VALUE = 0;
 
-const useGetRevertFormControls = ({ data, chargeableWeight }) => {
+const getRevertFormControls = ({ data, chargeableWeight }) => {
 	const {
 		service_type,
 		service_provider_id,
-		service = {},
 	} = data || {};
 
 	const controls = [
@@ -58,7 +58,6 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 				{ label: 'Transhipment', value: 'transhipment' },
 				{ label: 'Direct', value: 'direct' },
 			],
-			value       : 'direct',
 			placeholder : 'Select Schedule Type',
 			rules       : { required: true },
 
@@ -132,7 +131,6 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 			],
 			placeholder : 'Select Price Type',
 			rules       : { required: true },
-			value       : service?.price_type,
 		},
 		{
 			name        : 'operation_type',
@@ -239,4 +237,4 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 	return controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
 };
 
-export default useGetRevertFormControls;
+export default getRevertFormControls;
