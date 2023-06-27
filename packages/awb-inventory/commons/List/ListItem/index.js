@@ -24,27 +24,29 @@ function CardItem({
 				}`}
 			>
 				{(fields || []).map((field) => {
-					const itemStyle = field.styles || {};
+					const { className, span, key, render, label, styles:fieldStyles } = field || {};
+					const itemStyle = fieldStyles || {};
+
 					return (
 						<>
 							<div
-								className={`${styles.col} ${field.className || ''} ${
+								className={`${styles.col} ${className || ''} ${
 									isMobile ? styles.is_mobile : ''
 								}`}
 								style={{
-									'--span': (field.span || DEFAULT_SPAN),
+									'--span': (span || DEFAULT_SPAN),
 									...itemStyle,
 								}}
-								key={field.key}
+								key={key}
 							>
 								{isMobile && (
-									<div className={styles.tablelabel}>{field.label}</div>
+									<div className={styles.tablelabel}>{label}</div>
 								)}
 
 								<div
 									className={styles.flex}
 								>
-									{field.render ? field.render(singleitem) : getValue(
+									{render ? field.render(singleitem) : getValue(
 										singleitem,
 										field,
 										functions,
@@ -53,7 +55,7 @@ function CardItem({
 								</div>
 
 							</div>
-							{INCLUDE_LINE_SEPARATION.includes(field.key)
+							{INCLUDE_LINE_SEPARATION.includes(key)
 								&& <div className="line_division" />}
 						</>
 					);

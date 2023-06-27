@@ -4,10 +4,6 @@ import {
 
 import OverflowCheck from './OverflowCheck';
 
-const ACTIONS = {
-	startCase,
-};
-
 const getValue = (
 	itemData,
 	itemField,
@@ -23,8 +19,8 @@ const getValue = (
 	if (itemField.func) {
 		if (functions[itemField.func]) {
 			val = functions[itemField.func](itemData, itemField);
-		} else if (ACTIONS[itemField.func]) {
-			val = ACTIONS[itemField.func](val);
+		} else if (itemField.func === 'startCase') {
+			val = startCase(val);
 		} else {
 			val = '-';
 		}

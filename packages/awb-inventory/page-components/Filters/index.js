@@ -18,11 +18,6 @@ function Filters({ filters, setFilters, activeTab }) {
 		setFilters(val);
 		setOpen(false);
 	};
-	useEffect(() => {
-		reset();
-		setFilters({});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
 
 	const handleReset = () => {
 		setFilters({});
@@ -34,6 +29,12 @@ function Filters({ filters, setFilters, activeTab }) {
 
 		return isFilterApplied ? <IcCRedCircle height={8} width={8} className={styles.filter_dot} /> : null;
 	};
+
+	useEffect(() => {
+		reset();
+		setFilters({});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeTab]);
 
 	return (
 		<Popover

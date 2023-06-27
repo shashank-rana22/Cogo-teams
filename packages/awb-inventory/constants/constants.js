@@ -1,7 +1,6 @@
 const CONSTANTS = {
 	START_PAGE         : 1,
 	MOBILE_SCREEN_SIZE : 768,
-	EMPTY_LIST_SIZE    : 0,
 	DEFAULT_SPAN       : 1,
 	TOTAL_SPAN         : 12,
 	FLEX_ONE           : 1,

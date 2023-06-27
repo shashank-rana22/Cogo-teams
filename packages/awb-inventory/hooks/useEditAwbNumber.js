@@ -50,7 +50,7 @@ const useEditAwbNumber = ({
 			}
 		} catch (error) {
 			const { data = {} } = error;
-			const { base = '' } = data;
+			const { base = '' } = data || {};
 			const cleanStr = base.replace(/Base/g, '');
 			Toast.error(cleanStr || 'Unable to Update AWB Number');
 		}

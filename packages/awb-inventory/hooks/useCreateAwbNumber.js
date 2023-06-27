@@ -38,7 +38,7 @@ const useCreateAwbNumber = (
 			}
 		} catch (error) {
 			const { data = {} } = error;
-			const { base = '' } = data;
+			const { base = '' } = data || {};
 			const cleanStr = base.replace(/Base/g, '');
 			Toast.error(cleanStr || 'Unable to Add AWB Number');
 		}

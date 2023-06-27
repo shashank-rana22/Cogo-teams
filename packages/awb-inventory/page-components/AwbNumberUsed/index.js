@@ -10,8 +10,6 @@ import { AwbNumberUsedFields } from '../../configurations/awb-number-used-fields
 
 import styles from './styles.module.css';
 
-const ZEROTH_INDEX = 0;
-
 function AwbNumberUsed({
 	data,
 	loading,
@@ -85,8 +83,8 @@ function AwbNumberUsed({
 			const { shipments = [] } = singleItem;
 
 			const handleClick = () => {
-				if (shipments[ZEROTH_INDEX]?.id) {
-					redirectToShipment(shipments[ZEROTH_INDEX].id);
+				if (shipments[GLOBAL_CONSTANTS.zeroth_index]?.id) {
+					redirectToShipment(shipments[GLOBAL_CONSTANTS.zeroth_index].id);
 				}
 			};
 			return (
@@ -95,7 +93,7 @@ function AwbNumberUsed({
 						themeType="linkUi"
 						onClick={handleClick}
 					>
-						{shipments[ZEROTH_INDEX]?.serial_id || '-'}
+						{shipments[GLOBAL_CONSTANTS.zeroth_index]?.serial_id || '-'}
 					</Button>
 				</div>
 			);

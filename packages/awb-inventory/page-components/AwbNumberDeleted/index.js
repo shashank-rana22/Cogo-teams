@@ -5,7 +5,7 @@ import { IcMAirport, IcMProvision } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
-import { AwbNumberDeletedFields } from '../../configurations/awb-number-deleted-fields';
+import { AwbNumberFields } from '../../configurations/awb-number-fields';
 import useEditAwbNumber from '../../hooks/useEditAwbNumber';
 import ConfirmDelete from '../ConfirmDelete';
 
@@ -25,7 +25,7 @@ function AwbNumberDeleted({
 	const [item, setItem] = useState({ id: '' });
 	const [showConfirm, setShowConfirm] = useState(false);
 
-	const { fields } = AwbNumberDeletedFields;
+	const { fields } = AwbNumberFields;
 
 	const { editAwbNumber, loading:editLoading } = useEditAwbNumber({
 		item,
