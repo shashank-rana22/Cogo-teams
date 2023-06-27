@@ -28,6 +28,7 @@ function CreateTemplateForm({
 		setOpenCreateReply(false);
 		refetch();
 		reset({ title: '', content: '' });
+		setActiveCard({ show: isDefaultOpen, data: {} });
 	};
 
 	const onCreateClick = (data) => {
