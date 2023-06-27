@@ -21,6 +21,8 @@ const NAME_ARRAY_MAPPING = {
 	subjective  : 'subjective',
 };
 
+const EXPLANATION_EDITOR_SETTER_INDEX = 0;
+
 function QuestionForm({
 	control,
 	register,
@@ -109,16 +111,18 @@ function QuestionForm({
 				const updatedObj = { ...prev };
 				const keys = Object.keys(updatedObj);
 
-				delete updatedObj[funcIndex === 0 ? `case_questions_${index}_explanation`
+				delete updatedObj[funcIndex === EXPLANATION_EDITOR_SETTER_INDEX ? `case_questions_${index}_explanation`
 					: `case_questions_${index}`];
 
-				for (let i = index + 1; i < keys.length; i += 1) {
-					const currentKey = keys[i];
-					const newKey = funcIndex === 0 ? `case_questions_${index}_explanation`
-						: `case_questions_${index}`;
-					updatedObj[newKey] = updatedObj[currentKey];
-					delete updatedObj[currentKey];
-				}
+				keys.forEach((currentKey, i) => {
+					if (i > index) {
+						const newKey = funcIndex === EXPLANATION_EDITOR_SETTER_INDEX
+							? `case_questions_${index}_explanation`
+							: `case_questions_${index}`;
+						updatedObj[newKey] = updatedObj[currentKey];
+						delete updatedObj[currentKey];
+					}
+				});
 
 				return updatedObj;
 			});
