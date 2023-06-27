@@ -1,21 +1,20 @@
-import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Header({ data }) {
-	const router = useRouter();
-
-	const handleCreateKRA = () => {
-		router.push('/performance-management/kra-management/create-kra');
-	};
+	const userName = useSelector(({ profile }) => profile?.user?.name);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.top}>
-				<div className={styles.title1}>Hello, Bhaskar Priyadarshi</div>
-				<Button onClick={handleCreateKRA}>Create KRA</Button>
+				<div className={styles.title1}>
+					Hello,
+					{' '}
+					{startCase(userName)}
+				</div>
 			</div>
 
 			<div className={styles.target_remains_ctn}>

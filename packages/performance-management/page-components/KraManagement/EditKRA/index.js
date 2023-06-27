@@ -1,4 +1,4 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
@@ -13,17 +13,34 @@ function EditKRA() {
 
 	const router = useRouter();
 
+	const handleCreateKRA = () => {
+		router.push('/performance-management/kra-management/create-kra');
+	};
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.header_content}>
-				<div className={styles.back_arrow}>
-					<IcMArrowBack width={22} height={22} style={{ marginRight: 2 }} onClick={() => router.back()} />
+
+				<div className={styles.top}>
+
+					<div className={styles.back_arrow}>
+						<div>
+							<IcMArrowBack
+								width={22}
+								height={22}
+								style={{ marginRight: 2 }}
+								onClick={() => router.back()}
+							/>
+						</div>
+
+						<div className={styles.title}>
+							<h2>Edit KRA Request</h2>
+						</div>
+					</div>
+					<Button onClick={handleCreateKRA}>Create KRA</Button>
 				</div>
 
-				<div className={styles.title}>
-					<h2>Edit KRA Request</h2>
-				</div>
 			</div>
 
 			<Header data={data} />
