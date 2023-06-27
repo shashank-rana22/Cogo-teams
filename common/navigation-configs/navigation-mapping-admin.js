@@ -205,7 +205,7 @@ const navigationMappingAdmin = {
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
 			...apis.sales_dashboard,
-
+			...apis.cogopoints,
 		],
 		main_apis: [
 			'list_organization_users',
