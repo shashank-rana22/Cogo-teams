@@ -4,6 +4,9 @@ const geo = getGeoConstants();
 
 const SINGLE_INT_START = 0;
 const SINGLE_INT_END = 9;
+const TOTAL_MONTH_DAYS = 28;
+const TOTAL_HOURS = 24;
+const TOTAL_MINUTES = 60;
 
 export const SERVICE_OPTIONS = geo?.options.services;
 
@@ -28,11 +31,11 @@ export const CYCLE_TYPE = [
 	},
 ];
 
-export const MONTH_DAYS = Array(28).fill(null).map((item, index) => (
+export const MONTH_DAYS = Array(TOTAL_MONTH_DAYS).fill(null).map((item, index) => (
 	{ label: String(index + 1), value: String(index + 1) }
 ));
 
-export const HOURS = Array(24).fill(null).map((item, index) => {
+export const HOURS = Array(TOTAL_HOURS).fill(null).map((item, index) => {
 	if (index >= SINGLE_INT_START && index <= SINGLE_INT_END) {
 		return { label: `0${String(index)}`, value: `0${String(index)}` };
 	}
@@ -41,7 +44,7 @@ export const HOURS = Array(24).fill(null).map((item, index) => {
 	);
 });
 
-export const MINUTES = Array(60).fill(null).map((item, index) => {
+export const MINUTES = Array(TOTAL_MINUTES).fill(null).map((item, index) => {
 	if (index >= SINGLE_INT_START && index <= SINGLE_INT_END) {
 		return { label: `0${String(index)}`, value: `0${String(index)}` };
 	}

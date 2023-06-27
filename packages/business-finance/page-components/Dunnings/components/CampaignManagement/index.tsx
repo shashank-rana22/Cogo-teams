@@ -33,11 +33,7 @@ function CampaignManagement() {
 	});
 	const [dropdown, setDropdown] = useState([]);
 	const [showCreateForm, setShowCreateForm] = useState(false);
-	const [actionModal, setActionModal] = useState({
-		visible : false,
-		action  : '',
-		rowData : null,
-	});
+	const [actionModal, setActionModal] = useState({});
 
 	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters });
 

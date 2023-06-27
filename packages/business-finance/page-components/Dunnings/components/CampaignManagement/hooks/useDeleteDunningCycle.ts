@@ -43,11 +43,7 @@ function useDeleteDunningCycle({ id, getDunningList, setActionModal }:Props) {
 			});
 			Toast.success('Cycle Deleted Successfully');
 			getDunningList();
-			setActionModal({
-				visible : false,
-				action  : '',
-				id      : null,
-			});
+			setActionModal({});
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong !');
 		}

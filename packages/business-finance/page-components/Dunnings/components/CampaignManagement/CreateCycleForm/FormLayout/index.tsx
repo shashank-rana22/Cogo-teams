@@ -22,7 +22,14 @@ interface FormData {
 	oneTimeDate?: Date;
 	scheduledHour?: string;
 	scheduledMinute?: string;
-	scheduleRule?: any;
+	scheduleRule?: {
+		scheduleTime?: string;
+		dunningExecutionFrequency?: string;
+		week?: string;
+		scheduleTimeZone?: string;
+		dayOfMonth?: string | number;
+		oneTimeDate?: string;
+	};
 	name?: string;
 	dunningCycleType?: string;
 	cogoEntityId?: string;

@@ -7,6 +7,8 @@ interface Props {
 	setDropdown?: Function;
 }
 
+const NEGATIVE_INDEX = -1;
+
 function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 	return 		(
 		<div>
@@ -25,10 +27,10 @@ function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 						themeType="secondary"
 						onClick={() => {
 							const index = dropdown.indexOf(id);
-							if (index > -1) {
+							if (index > NEGATIVE_INDEX) {
 								dropdown.splice(index, 1);
 							}
-							setDropdown([...dropdown]);
+							setDropdown((prev: string[]) => [...prev]);
 						}}
 					>
 						View Less

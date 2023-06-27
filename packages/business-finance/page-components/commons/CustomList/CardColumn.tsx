@@ -34,20 +34,21 @@ function CardColumn({
 				}`}
 			>
 				{(fields || []).map((field) => {
-					const itemStyle = field.styles || {};
+					const { styles:fieldStyles, label, className, span } = field || {};
+					const itemStyle = fieldStyles || {};
 					return (
 						<div
-							key={String(field?.label)}
-							className={`${styles.col} ${field.className || ''} ${
+							key={String(label)}
+							className={`${styles.col} ${className || ''} ${
 								isMobile ? styles.isMobile : ''
 							}`}
 							style={{
-								'--span': (field.span || 1),
+								'--span': (span || 1),
 								...itemStyle,
 							} as React.CSSProperties}
 						>
 							{isMobile && (
-								<div className={styles.tablelabel}>{field.label}</div>
+								<div className={styles.tablelabel}>{label}</div>
 							)}
 							{loading ? <Placeholder />
 								: (
