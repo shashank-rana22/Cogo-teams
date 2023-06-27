@@ -23,7 +23,8 @@ function Form({
 						<label className={styles.label_styles}>{label}</label>
 						<Element control={control} {...eachControl} error={errors?.[name]} />
 						<text className={styles.error_text}>
-							{errors?.[name] && (errors[name]?.message || 'This is Required') }
+							{controlType !== 'fieldArray'
+							&& (errors?.[name] && (errors[name]?.message || 'This is Required'))}
 						</text>
 					</div>
 				);

@@ -14,7 +14,7 @@ function FieldArrayController({ control, name, controls, error = [] }) {
 					controls={controls}
 					control={control}
 					index={index}
-					error={error}
+					error={error?.[index]}
 					parentName={name}
 				/>
 			))}

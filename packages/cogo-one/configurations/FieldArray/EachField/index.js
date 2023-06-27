@@ -1,5 +1,6 @@
 import { getFieldArrayControllers } from '../../../utils/getFieldArrayControllers';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 function EachField({
 	field, controls, parentName, index, control, error,
@@ -21,8 +22,10 @@ function EachField({
 						name={`${parentName}.${index}.${name}`}
 						value={field?.[eachControl?.name]}
 						control={control}
-						error={error?.[eachControl.name]}
 					/>
+					<text className={styles.error_text}>
+						{error?.[eachControl.name] && (error?.[eachControl.name]?.message || 'This is Required')}
+					</text>
 				</div>
 			);
 		})

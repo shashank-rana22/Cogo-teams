@@ -152,7 +152,7 @@ const getRevertFormControls = ({ data, chargeableWeight }) => {
 				},
 			],
 			rules: {
-				required: true,
+				required: 'Operation Type is required',
 			},
 		},
 		{
