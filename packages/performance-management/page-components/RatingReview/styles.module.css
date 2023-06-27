@@ -15,7 +15,7 @@
 
 .header_container {
 	display: flex;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 }
 
 .back_arrow {
@@ -27,5 +27,6 @@
 
 .employee_name:hover {
 	cursor: pointer;
-	box-shadow: 0 0 0 1px #deebed;
+	text-decoration: underline;
+	width: fit-content;
 }
