@@ -1,9 +1,7 @@
 .loader {
-	display: flex;
-	flex-direction: column-reverse;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
+	padding: 16px;
+	background: #fff;
+	border-radius: 4px;
 }
 
 .list_container {
