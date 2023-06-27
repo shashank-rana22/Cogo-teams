@@ -3,7 +3,7 @@ const performanceManagement = {
 		navigation : 'performance_management-performance_management_configuration',
 		isMainNav  : true,
 	},
-	'/[partner_id]/performance-management/performance-rating-review': {
+	'/[partner_id]/performance-management/rating-review': {
 		navigation: 'performance_management-performance_rating_review',
 	},
 	'/[partner_id]/performance-management/kra-assignment': {

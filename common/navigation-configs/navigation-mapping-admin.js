@@ -2383,7 +2383,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/performance-management/rating-review',
 				as            : '/v2/performance-management/rating-review',
 				type          : 'link',
-				possible_apis : apis.performance_management_configuration,
+				possible_apis : apis.kra_assignment,
 			},
 		],
 	},
