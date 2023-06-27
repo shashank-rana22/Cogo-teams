@@ -45,7 +45,7 @@ function CancelIrn({
 							options={IRN_CANCEL_OPTIONS}
 							value={response?.value}
 							onChange={(e) => {
-								setResponse((r) => ({ ...r, value: e }));
+								setResponse((prev) => ({ ...prev, value: e }));
 							}}
 						/>
 					</div>
@@ -56,7 +56,7 @@ function CancelIrn({
 						<Textarea
 							value={response?.remarks}
 							onChange={(e) => {
-								setResponse((r) => ({ ...r, remarks: e }));
+								setResponse((prev) => ({ ...prev, remarks: e }));
 							}}
 							placeholder="Not more than 100 characters"
 						/>
