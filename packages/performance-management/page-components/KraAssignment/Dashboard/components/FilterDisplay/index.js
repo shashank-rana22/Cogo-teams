@@ -63,7 +63,7 @@ function FilterFieldArray({
 					const Element = getElementController(type);
 
 					return (
-						<div key={name}>
+						<div key={name} style={{ width: '100%' }}>
 							<div className={styles.title}>{label}</div>
 
 							<Element

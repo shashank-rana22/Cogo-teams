@@ -7,17 +7,17 @@
 
 .filter_container {
 	display: flex;
-	flex-flow: row wrap;
 	align-items: center;
+	width:100%;
 
 	:global {
 		.ui_select_container {
-			width: 200px;
+			width: 90%;
 			margin-right: 10px;
 		}
 
 		.ui_multiselect_container {
-			width: 200px;
+			width: 90%;
 			margin-right: 10px;
 		}
 	}

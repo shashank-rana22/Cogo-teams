@@ -154,7 +154,7 @@ function Dashboard() {
 			</div>
 
 			<div className={styles.section}>
-				<div className={styles.section_left}>
+				<div className={styles.section_left} style={{ width: showKRACalculationTable ? '70%' : '85%' }}>
 					<FiltersDisplay
 						setFilters={setFilters}
 						check={CHECK_SINGLE_EMPLOYEE_SELECTED}

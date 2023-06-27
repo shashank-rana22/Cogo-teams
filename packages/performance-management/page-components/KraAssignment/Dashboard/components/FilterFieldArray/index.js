@@ -19,9 +19,10 @@ function FiltersDisplay({ setFilters, setShowKRACalculationTable }) {
 		errors,
 	} = useFilterDisplay({ setFilters, setShowKRACalculationTable });
 
-	const WATCH_VALUES = watch();
+	const watchTribeId = watch('tribe_id');
 
-	const controlItems = getControls(WATCH_VALUES);
+	const controlItems = getControls(watchTribeId);
+
 	const { controls } = controlItems;
 
 	return (
@@ -45,7 +46,9 @@ function FiltersDisplay({ setFilters, setShowKRACalculationTable }) {
 					themeType="secondary"
 					type="submit"
 				>
-					Proceed to Allocate KRAs &nbsp;
+					<span style={{ paddingRight: 6 }}>
+						Proceed
+					</span>
 					<IcMArrowNext />
 				</Button>
 			</div>
