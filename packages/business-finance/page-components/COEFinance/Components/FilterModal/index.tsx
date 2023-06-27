@@ -85,6 +85,7 @@ function FilterModal({ filters, setFilters }: Props) {
 							const { id = '', icon, text } = item;
 							return (
 								<div
+									key={id}
 									className={`${styles.currency_values}
 											${
                         currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected

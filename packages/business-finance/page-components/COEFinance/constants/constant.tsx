@@ -4,6 +4,7 @@ import {
 	IcMFeuro,
 	IcMFpound,
 	IcMFsingaporeDollar,
+	IcMFdong,
 } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -17,6 +18,7 @@ const CURRENCY_DATA = [
 	},
 	{ id: '4', icon: <IcMFpound width={25} height={25} />, text: 'GBP' },
 	{ id: '5', icon: <IcMFeuro width={25} height={25} />, text: 'EUR' },
+	{ id: '6', icon: <IcMFdong width={25} height={25} />, text: 'VND' },
 ];
 const POC_DATA_MAPPING = [
 	{ id: '1', label: 'Customer Information' },
