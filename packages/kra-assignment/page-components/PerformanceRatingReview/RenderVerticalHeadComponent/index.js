@@ -37,6 +37,7 @@ function RenderStyledTable({
 	selectedEmployees,
 	onClickHeaderCheckbox,
 	level,
+	onClickEmployee,
 }) {
 	const columns = getColumns({
 		setSelectedEmployees,
@@ -46,6 +47,7 @@ function RenderStyledTable({
 		onClickHeaderCheckbox,
 		employee_list,
 		level,
+		onClickEmployee,
 	});
 
 	return (
@@ -65,6 +67,7 @@ function RenderVerticalHeadComponent({
 	onClickCheckbox,
 	selectedEmployees,
 	level,
+	onClickEmployee,
 }) {
 	if (isEmpty(list)) {
 		return (
@@ -100,6 +103,7 @@ function RenderVerticalHeadComponent({
 						selectedEmployees={selectedEmployees}
 						onClickHeaderCheckbox={onClickHeaderCheckbox}
 						level={level}
+						onClickEmployee={onClickEmployee}
 
 					/>
 				</Accordion>

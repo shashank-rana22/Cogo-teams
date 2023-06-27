@@ -298,6 +298,11 @@ const hrms = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'list_employee_kra_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'get_rating_review_details',
 			access_type  : 'private',
 			service_name : 'hrms',
@@ -307,8 +312,18 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+
 		{
 			api          : 'create_individual_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_final_rating',
+			access_type  : 'private',
+			service_name : 'hrms',
+		}, {
+			api          : 'update_employee_manual_target',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

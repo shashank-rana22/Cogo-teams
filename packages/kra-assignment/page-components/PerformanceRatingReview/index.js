@@ -1,5 +1,6 @@
 import { Button, Select } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
@@ -20,6 +21,8 @@ function PerformanceRatingReview() {
 	} = useGetEmployeeLevels();
 
 	const { data } = useGetRatingReviewDetails({ selectValue, level });
+
+	console.log('selectedEmployees', selectedEmployees);
 
 	const onClickCheckbox = ({ event, item, identifier_key }) => {
 		setSelectedEmployees((previousValue) => {
@@ -63,15 +66,23 @@ function PerformanceRatingReview() {
 		});
 	};
 
+	const onClickEmployee = (id) => {
+		console.log('id', id);
+		setShow(id);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div>
+				{
+				show
+					? <KraModal show={show} setShow={setShow} />
+					: null
+			}
+			</div>
+			<div>
 				Performance Rating Review
 			</div>
-
-			<Button onClick={() => setShow(true)}>
-				Add
-			</Button>
 
 			<div className={styles.button_wrapper}>
 				<div className={styles.select_container}>
@@ -98,6 +109,7 @@ function PerformanceRatingReview() {
 				selectedEmployees={selectedEmployees}
 				onClickHeaderCheckbox={onClickHeaderCheckbox}
 				level={level}
+				onClickEmployee={onClickEmployee}
 			/>
 
 			{show ? <KraModal show={show} setShow={setShow} /> : null}

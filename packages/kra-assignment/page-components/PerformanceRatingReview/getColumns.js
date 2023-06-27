@@ -8,6 +8,7 @@ const getColumns = ({
 	identifier_key,
 	employee_list,
 	level,
+	onClickEmployee,
 }) => {
 	const columns = [
 		{
@@ -32,9 +33,11 @@ const getColumns = ({
 		{
 			Header   : 'Name',
 			accessor : (item) => (
-				<div>
+
+				<div role="presentation" onClick={() => onClickEmployee(item?.employee_id)}>
 					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
+
 			),
 		},
 		{
