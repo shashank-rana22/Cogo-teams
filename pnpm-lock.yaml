@@ -818,6 +818,7 @@ importers:
       '@cogoport/components': ^1.0.366
       '@cogoport/constants': workspace:0.1.0
       '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/map-components': workspace:0.0.1
       '@cogoport/maps': ^1.0.2
@@ -832,6 +833,7 @@ importers:
       '@cogoport/components': 1.0.428_dg23ndsn4wwobkbkrnrdsh7fca
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.82_react@18.2.0
       '@cogoport/map-components': link:../../common/map-components
       '@cogoport/maps': 1.0.3_up2fg6euhh2jpwyxdz5hz5pigq
