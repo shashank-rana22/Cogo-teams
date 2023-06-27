@@ -15,7 +15,7 @@
     "@cogoport/enrichment": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
-    "@cogoport/operators": "workspace:0.1.0",
+    "@cogoport/operators": "workspace:1.0.0",
     "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/air-repository": "workspace:0.1.0",
     "@cogoport/air-modules": "workspace:1.0.0",

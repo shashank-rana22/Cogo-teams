@@ -85,7 +85,7 @@ importers:
       '@cogoport/new-employee-dashboard': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/ocean-modules': workspace:0.1.0
-      '@cogoport/operators': workspace:0.1.0
+      '@cogoport/operators': workspace:1.0.0
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/referral': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
