@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.form_subgroup{
+    margin-bottom: 24px;
+}
+.heading{
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 0;
+}
+.form_item_wrapper{
+    width: 100%;
+    display: flex;
+}
+.form_item{
+    width: 40%;
+    margin-right: 32px;
+}
+.label{
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+}
+.button_container{
+    margin-top: 12px;
+    display: flex;
+    align-item: center;
+    justify-content: flex-end;
+}
+.button{
+    margin-right: 20px;
+}

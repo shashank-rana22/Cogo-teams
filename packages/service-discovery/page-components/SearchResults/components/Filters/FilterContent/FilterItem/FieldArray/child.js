@@ -1,9 +1,23 @@
+import containerSizes from '@cogoport/constants/container-sizes.json';
+import containerTypes from '@cogoport/constants/container-types.json';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import getElementController from '../../../../../../configs/getElementController';
+import getElementController from '../../../../../../../configs/getElementController';
 
 import styles from './styles.module.css';
+
+const getOptions = (key) => {
+	let options = [];
+	if (key === 'container-sizes') {
+		options = containerSizes;
+	} else if (key === 'container-types') {
+		options = containerTypes;
+	}
+
+	return options;
+};
 
 function Child({
 	controls,
@@ -17,44 +31,56 @@ function Child({
 	error = {},
 	length = 0,
 	watch,
+	setValue,
 }) {
-	// const fieldArrayValues = watch(name) || [];
+	const fieldArrayValues = watch(name) || [];
+
+	const CHANGE_MAPPING = {
+		container_type: {
+			onChange: () => {
+				setValue(`container[${index}].commodity`, '');
+			},
+		},
+	};
+
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.content}>
 				{controls.map((controlItem) => {
+					let newControl = { ...controlItem };
+
 					const {
 						type,
 						name: controlName,
-						options = [],
 						optionsListKey = '',
 						commodityType = '',
 						span,
 						subLabel = '',
 						controls: innerControls,
-					} = controlItem;
+					} = newControl;
 
-					// const finalOptions = [];
+					if (optionsListKey) {
+						const finalOptions = getOptions(optionsListKey, type);
 
-					// if (optionsListKey || options) {
-					// 	const containerType = fieldArrayValues?.[index]?.container_type;
+						newControl = { ...newControl, options: finalOptions };
+					}
 
-					// 	const keyOptions = getOptions(options, optionsListKey, {
-					// 		commodityType,
-					// 		containerType,
-					// 	});
+					if (commodityType) {
+						const containerType = fieldArrayValues?.[index]?.container_type;
 
-					// 	const keyOptions = [];
+						const keyOptions = getCommodityList(commodityType, containerType);
 
-					// 	finalOptions = isEmpty(options) ? keyOptions?.finalOptions : options;
-					// }
+						const finalOptions = keyOptions;
+
+						newControl = { ...newControl, options: finalOptions };
+					}
 
 					const flex = (span || 12) / 12 * 100;
 
 					if (innerControls) {
 						return (
 							<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
-								<div className={styles.heading}>{controlItem.label || lowerlabel}</div>
+								<div className={styles.heading}>{newControl.label || lowerlabel}</div>
 
 								<div className={styles.content}>
 									{innerControls.map((innerControlItem) => {
@@ -77,6 +103,9 @@ function Child({
 											|| (!showLabelOnce && innerControlItem.label) ? (
 												<div className={styles.heading}>
 													{innerControlItem.label || lowerlabel}
+													{innerControlItem?.rules?.required ? (
+														<div className={styles.required_mark}>*</div>
+													) : null}
 												</div>
 													) : null}
 
@@ -92,7 +121,8 @@ function Child({
 												/>
 
 												<div className={styles.error_message}>
-													{error?.[innerControlName]?.message || error?.[innerControlName]?.type}
+													{error?.[innerControlName]?.message
+													|| error?.[innerControlName]?.type}
 												</div>
 											</div>
 										);
@@ -108,23 +138,28 @@ function Child({
 						<div
 							className={styles.form_item}
 							style={{ width: `${flex}%` }}
-							key={`create_form_${controlItem.name}_${index}`}
+							key={`create_form_${newControl.name}_${index}`}
 						>
-							{(showLabelOnce && index === 0 && controlItem.label)
-							|| (!showLabelOnce && controlItem.label) ? (
-								<div className={styles.heading}>{controlItem.label || lowerlabel}</div>
+							{(showLabelOnce && index === 0 && newControl.label)
+							|| (!showLabelOnce && newControl.label) ? (
+								<div className={styles.heading}>
+									{newControl.label || lowerlabel}
+									{newControl?.rules?.required ? (
+										<div className={styles.required_mark}>*</div>
+									) : null}
+								</div>
 								) : null}
 
 							<Element
 								width="100%"
-								key={`create_form_${controlItem.name}_${index}`}
-								itemKey={`create_form_${controlItem.name}_${index}`}
+								key={`create_form_${newControl.name}_${index}`}
+								itemKey={`create_form_${newControl.name}_${index}`}
 								control={control}
-								id={`create_form_${controlItem.name}_${index}`}
-								{...controlItem}
+								id={`create_form_${newControl.name}_${index}`}
+								{...newControl}
+								{...CHANGE_MAPPING[controlName] || {}}
 								disabled={disabled}
-								name={`${name}[${index}].${controlItem.name}`}
-								// options={finalOptions}
+								name={`${name}[${index}].${newControl.name}`}
 							/>
 							{subLabel ? (
 								<div className={styles.sub_label}>{subLabel}</div>

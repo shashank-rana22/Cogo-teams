@@ -4,7 +4,7 @@ import React from 'react';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function Filters({ show, setShow }) {
+function Filters({ data, show, setShow }) {
 	return (
 		<div className={styles.container}>
 			<Modal
@@ -16,7 +16,7 @@ function Filters({ show, setShow }) {
 				className={styles.modal}
 			>
 				<Modal.Body>
-					<FilterContent />
+					<FilterContent data={data} setShow={setShow} />
 				</Modal.Body>
 
 			</Modal>

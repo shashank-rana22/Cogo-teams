@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
@@ -18,6 +18,8 @@ function FieldArray({
 	disabled = false,
 	buttonText = 'Add',
 	watch,
+	handleSubmit,
+	setValue,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -38,6 +40,11 @@ function FieldArray({
 		append(childEmptyValues);
 	}
 
+	useEffect(() => {
+		if (!rest.defaultValue) return;
+		setValue(name, rest.defaultValue);
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.childs_container}>
@@ -57,6 +64,7 @@ function FieldArray({
 							length={fields.length}
 							showLabelOnce={showLabelOnce}
 							watch={watch}
+							setValue={setValue}
 						/>
 					</div>
 
@@ -68,7 +76,7 @@ function FieldArray({
 						type="button"
 						size="md"
 						themeType="link"
-						onClick={() => handleAppendChild()}
+						onClick={handleSubmit(handleAppendChild)}
 					>
 						<IcMPlus height={22} width={22} className={styles.add_icon} fill="black" />
 						{buttonText}

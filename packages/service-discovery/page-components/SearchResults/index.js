@@ -55,7 +55,11 @@ function SearchResults() {
 			</div>
 
 			{showFilterModal ? (
-				<Filters show={showFilterModal} setShow={setShowFilterModal} />
+				<Filters
+					data={data?.detail}
+					show={showFilterModal}
+					setShow={setShowFilterModal}
+				/>
 			) : null}
 		</div>
 	);

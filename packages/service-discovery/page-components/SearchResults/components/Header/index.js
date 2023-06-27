@@ -50,7 +50,12 @@ function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setH
 						<IcMEdit height={16} width={16} onClick={handleEdit} />
 					</div>
 
-					<Button size="lg" themeType="link" onClick={() => setShowFilterModal(true)}>
+					<Button
+						type="button"
+						size="lg"
+						themeType="link"
+						onClick={() => setShowFilterModal(true)}
+					>
 						<IcMFilter />
 						Filters
 					</Button>
