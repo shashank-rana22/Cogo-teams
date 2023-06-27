@@ -7,7 +7,8 @@ const portData = ({ item }) => {
 
     const origin = item?.service_lane_links[0]?.display_name;
     const splitOrigin =
-        origin?.indexOf(",") < origin?.indexOf("(")
+        origin?.indexOf(",") <
+        (origin?.indexOf("(") < 0 ? 10000 : origin?.indexOf("("))
             ? origin?.indexOf(",")
             : origin?.indexOf("(");
 

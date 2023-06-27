@@ -1,34 +1,61 @@
 import { format } from "@cogoport/utils";
 import styles from "./styles.module.css";
+import { IcMArrowRight } from "@cogoport/icons-react";
+
 const RoutePort = ({ isFirst, isLast, port, diffInDays }) => {
-  return (
-    <>
-      <div className={styles.route_port}>
-        <div className={styles.left}>
-          <div className={styles.eta_etd}>
-            <div className={styles.eta}>
-              ETA : {format(port?.eta, "dd MMM yyyy HH:mm")}
+    const dayChoices = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
+
+    const getPortName = (name) => {
+        const splitIndex =
+            name?.indexOf(",") <
+            (name?.indexOf("(") < 0 ? 10000 : name?.indexOf("("))
+                ? name?.indexOf(",")
+                : name?.indexOf("(");
+
+        return name?.substring(0, splitIndex - 1);
+    };
+
+    return (
+        <>
+            <div className={styles.route_port}>
+                <div className={styles.left}>
+                    <div className={styles.eta_etd}>
+                        <div className={styles.eta}>
+                            ETA : {dayChoices[port?.eta_day - 1]} ( Day &nbsp;
+                            {port?.eta_day_count})
+                        </div>
+                        <div className={styles.etd}>
+                            ETD : {dayChoices[port?.etd_day - 1]} ( Day &nbsp;
+                            {port?.etd_day_count})
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.middle}>
+                    {!isFirst && <div className={styles.hr_line_up}></div>}
+                    <div className={styles.circle}></div>
+                    {!isLast && <div className={styles.hr_line_down}></div>}
+                </div>
+                <div className={styles.right}>
+                    <div className={styles.port_name}>
+                        {getPortName(port?.display_name)}{" "}
+                        <IcMArrowRight width={24} height={30} />
+                    </div>
+                    {!isLast && (
+                        <div className={styles.diff_in_days}>
+                            {diffInDays} Days
+                        </div>
+                    )}
+                </div>
             </div>
-            <div className={styles.etd}>
-              ETD : {format(port?.etd, "dd MMM yyyy HH:mm")}
-            </div>
-          </div>
-        </div>
-        <div className={styles.middle}>
-          {!isFirst && <div className={styles.hr_line_up}></div>}
-          <div className={styles.circle}></div>
-          {!isLast && <div className={styles.hr_line_down}></div>}
-        </div>
-        <div className={styles.right}>
-          <div className={styles.port_name}>
-            {port?.display_name}, <span className={styles.port_terminal}></span>
-          </div>
-          {!isLast && (
-            <div className={styles.diff_in_days}>{diffInDays} Days</div>
-          )}
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 export default RoutePort;

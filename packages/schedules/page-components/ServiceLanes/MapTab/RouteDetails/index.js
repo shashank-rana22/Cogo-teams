@@ -3,9 +3,15 @@ import styles from "./styles.module.css";
 import RoutePort from "./RoutePort";
 import { differenceInDays } from "@cogoport/utils";
 import { IcMEdit } from "@cogoport/icons-react";
+import WeekFrequency from "../../WeekFrequency";
+import WeekCalendar from "../../ServiceLanesList/WeekCalander";
 
-function RouteDetails({ route }) {
-    console.log("route: ", route);
+function RouteDetails({ route, dayOfWeek }) {
+    console.log("routeDetails: ", route);
+
+    const totalTransit =
+        route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
+
     return (
         <div className={styles.box}>
             <div className={styles.header}>
@@ -13,12 +19,22 @@ function RouteDetails({ route }) {
                     <div className={styles.total_transit}>
                         Total Transit &emsp;:
                         <div className={styles.total_transit_data}>
-                            &emsp; data
+                            &emsp; {totalTransit} Days
                         </div>
                     </div>
                     <div className={styles.frequency}>
                         Frequency &emsp;&emsp;:
-                        <div className={styles.frequency_data}>&emsp;data</div>
+                        <div className={styles.frequency_data}>
+                            &emsp;
+                            <WeekFrequency
+                                dayOfWeek={dayOfWeek || 10}
+                                starting_day={route?.[0]?.eta_day - 1}
+                            />
+                            <WeekCalendar
+                                dayOfWeek={dayOfWeek || 10}
+                                starting_day={route?.[0]?.eta_day - 1}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className={styles.button}>
@@ -33,45 +49,24 @@ function RouteDetails({ route }) {
                 </div>
             </div>
 
-            <div>routes</div>
-            {/* <div className={styles.route_details}>
-                <div className={styles.heading}>
-                    <div>
-                        Total Transit :{" "}
-                        {route &&
-                            differenceInDays(
-                                Date.parse(
-                                    route?.[route.length - 1]?.eta?.slice(0, 10)
-                                ),
-                                Date.parse(route?.[0]?.etd?.slice(0, 10))
-                            )}{" "}
-                        Days
-                    </div>
-                    <div>
-                        <Button>Edit</Button>
-                    </div>
-                </div>
-                <div className={styles.route_points}>
-                    {route?.map((port, index) => {
-                        if (index === route.length - 1)
-                            return <RoutePort isLast={true} port={port} />;
-                        return (
+            <div className={styles.route_points}>
+                {route?.map((port, index) => {
+                    if (index === route.length - 1)
+                        return <RoutePort isLast={true} port={port} />;
+                    return (
+                        <>
                             <RoutePort
                                 isFirst={index === 0}
                                 port={port}
-                                diffInDays={differenceInDays(
-                                    Date.parse(
-                                        route?.[index + 1]?.etd?.slice(0, 10)
-                                    ),
-                                    Date.parse(
-                                        route?.[index]?.etd?.slice(0, 10)
-                                    )
-                                )}
+                                diffInDays={
+                                    route?.[index + 1]?.eta_day_count -
+                                    route?.[index]?.etd_day_count
+                                }
                             />
-                        );
-                    })}
-                </div>
-            </div> */}
+                        </>
+                    );
+                })}
+            </div>
         </div>
     );
 }

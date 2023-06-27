@@ -9,13 +9,17 @@ function MapTab() {
     const { query } = useRouter();
     const routeId = query?.id;
     const { data, loading } = useListServiceLanes({ routeId });
-    console.log("route: ", data);
+
+    // console.log("data: ", data);
 
     return (
         <>
             <BackButton />
             <ShipmentDetailsCard data={data} loading={loading} />
-            <RouteDetails route={data?.[0]?.service_lane_links} />
+            <RouteDetails
+                route={data?.[0]?.service_lane_links}
+                dayOfWeek={data?.day_of_week || 10}
+            />
         </>
     );
 }
