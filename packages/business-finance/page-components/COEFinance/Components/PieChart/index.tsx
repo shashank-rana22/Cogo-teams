@@ -9,7 +9,14 @@ function MyResponsivePie({ data }) {
 		<>
 			<div className={styles.invoice}>
 				Rejection Statistics
-				<Tooltip content="Rejection statistics of the Invoices that coe finance rejects" placement="top">
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							Rejection statistics of the Invoices that coe finance rejects
+						</div>
+					)}
+					placement="top"
+				>
 					<div className={styles.icon}>
 						<IcMInfo />
 					</div>
@@ -20,7 +27,7 @@ function MyResponsivePie({ data }) {
 
 			<ResponsivePie
 				data={data}
-				margin={{ top: 40, right: 10, bottom: 80, left: 110 }}
+				margin={{ top: 40, right: 10, bottom: 80, left: 300 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
 				borderWidth={1}
@@ -74,8 +81,8 @@ function MyResponsivePie({ data }) {
 						anchor        : 'top-left',
 						direction     : 'column',
 						justify       : false,
-						translateX    : -70,
-						translateY    : 50,
+						translateX    : -250,
+						translateY    : 20,
 						itemsSpacing  : 0,
 						itemWidth     : 100,
 						itemHeight    : 30,

@@ -3238,6 +3238,11 @@ const partner = {
 	],
 	sales_dashboard: [
 		{
+			api          : 'get_partner_user_report',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -9223,6 +9228,11 @@ const partner = {
 			service_name : 'platform_config',
 		},
 		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
 			api          : 'create_campaign_segment',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -9705,6 +9715,31 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_template_groups',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_communication_templates_to_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_template_group_tags',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -9960,6 +9995,41 @@ const partner = {
 		},
 	],
 	communication_control: [
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'update_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api        	 : 'create_campaign_email_configuration',
+			access_type	 : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_channel_view',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_credential',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_channel_management',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
 		{
 			api          : 'list_organization_users',
 			access_type  : 'private',
@@ -10902,6 +10972,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_cogopoint_top_history',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_liability_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+
 	],
 	air_revenue_desk: [
 		{
@@ -12211,6 +12292,36 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'escalate_supplier_to_rm',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12458,6 +12569,38 @@ const partner = {
 			service_name : 'referral',
 		},
 	],
+	referral_analytics: [
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_user_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_business_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_top_ten_referral',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	air_repository: [
 		{
 			api          : 'list_shipment_service_ops_repository',
@@ -12487,6 +12630,32 @@ const partner = {
 			service_name : 'checkout',
 		},
 
+	],
+	business_finance_dunnings: [
+		{
+			api         : 'list_organization_trade_party_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_create_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_cycle_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_master_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_dunning',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
 	],
 };
 
