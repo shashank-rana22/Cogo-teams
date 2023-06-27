@@ -1,4 +1,6 @@
 const getLocalControls = (service_type, formattedRate) => {
+	const formattedValue = formattedRate?.[formattedRate?.primary_service?.id];
+
 	const controlMapping = {
 		air_freight_service: [
 			{
@@ -10,7 +12,7 @@ const getLocalControls = (service_type, formattedRate) => {
 				caret         : true,
 				span          : 5,
 				name          : 'origin_airline_id',
-				value         : formattedRate?.[formattedRate?.primary_service?.id]?.airline_id,
+				value         : formattedValue?.airline_id,
 				subType       : 'select',
 				label         : 'Please select airline (Air Local Origin)',
 				placeholder   : 'Search airline...',
@@ -22,7 +24,7 @@ const getLocalControls = (service_type, formattedRate) => {
 				type           : 'select',
 				span           : 5,
 				label          : 'Service Provider (Air Local Origin)',
-				value          : formattedRate?.[formattedRate?.primary_service?.id]?.service_provider_id,
+				value          : formattedValue?.service_provider_id,
 				optionsListKey : 'verified-service-providers',
 				placeholder    : 'Select Service Provider',
 				rules          : { required: 'Service Provider is Required' },
@@ -36,7 +38,7 @@ const getLocalControls = (service_type, formattedRate) => {
 				caret         : true,
 				span          : 5,
 				name          : 'destination_airline_id',
-				value         : formattedRate?.[formattedRate?.primary_service?.id]?.airline_id,
+				value         : formattedValue?.airline_id,
 				subType       : 'select',
 				label         : 'Please select airline (Air Local Destination)',
 				placeholder   : 'Search airline...',
@@ -48,7 +50,7 @@ const getLocalControls = (service_type, formattedRate) => {
 				type           : 'select',
 				span           : 5,
 				label          : 'Service Provider (Air Local Destination)',
-				value          : formattedRate?.[formattedRate?.primary_service?.id]?.service_provider_id,
+				value          : formattedValue?.service_provider_id,
 				optionsListKey : 'verified-service-providers',
 				placeholder    : 'Select Service Provider',
 				rules          : { required: 'Service Provider is Required' },

@@ -111,7 +111,7 @@ function Card({
 								</div>
 								{dataObj?.service?.commodity_description && (
 									<div>
-										<div className={styles.heading}>Commodity Des.</div>
+										<div className={styles.heading}>Commodity Desc.</div>
 										<Tooltip
 											content={dataObj?.service?.commodity_description}
 											placement="top"

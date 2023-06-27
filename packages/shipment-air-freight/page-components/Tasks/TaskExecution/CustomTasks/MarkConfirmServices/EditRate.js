@@ -13,8 +13,8 @@ import useUpdateServiceProvider from './updateServiceProviderFunc';
 
 const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
 
-const CONSTANT_ZERO = 0;
-const CONSTANT_TWO = 2;
+const START_INDEX_FOR_ORIGIN_LOCAL = 0;
+const START_INDEX_FOR_DESTINATION_LOCAL = 2;
 
 function CustomLayout({ localControls, controlForLocal, errors, task }) {
 	return (
@@ -33,8 +33,8 @@ function LocalsLayout(props) {
 		service.service_type === 'air_freight_local_service'
 	));
 	const CONTROLS_MAPPING = {
-		export : localControls.slice(CONSTANT_ZERO, CONSTANT_TWO),
-		import : localControls.slice(CONSTANT_TWO),
+		export : localControls.slice(START_INDEX_FOR_ORIGIN_LOCAL, START_INDEX_FOR_DESTINATION_LOCAL),
+		import : localControls.slice(START_INDEX_FOR_DESTINATION_LOCAL),
 	};
 
 	return validation.map((service) => (
