@@ -24,20 +24,22 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 	hasVoiceCallAccess = false,
+	viewType = '',
 }) {
-	const { organization_id:messageOrgId = '', account_type: accountType = '' } = formattedMessageData || {};
+	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
+	const isOrgUsersVisible = ['supply_view', 'admin_view'].includes(viewType);
 
 	const {
 		organizationUsersData,
 		organizationUsersLoading,
-	} = useGetListOrganizationUsers({ organizationId, accountType });
-
+	} = useGetListOrganizationUsers({ organizationId, isOrgUsersVisible });
 	const { list: organizationUserList = [] } = organizationUsersData || {};
+	const showOrgUsers = isOrgUsersVisible && !organizationUsersLoading && !isEmpty(organizationUserList);
 
 	const [showConvertModal, setShowConvertModal] = useState(false);
 
@@ -176,7 +178,7 @@ function OrganizationDetails({
 				/>
 			) }
 
-			{!isEmpty(agent) && (
+			{!orgLoading && !isEmpty(agent) && (
 				<>
 					<div className={styles.agent_title}>Agent Details</div>
 					<div>
@@ -186,50 +188,46 @@ function OrganizationDetails({
 
 			)}
 
-			{!isEmpty(organizationUserList) && (
+			{showOrgUsers && (
 				<>
 					<div className={styles.agent_title}>Organization Users</div>
-					{(organizationUserList || []).map((item) => (
-						<OrganizationUsers
-							user={item}
-							key={item.id}
-							activeTab={activeTab}
-							hasVoiceCallAccess={hasVoiceCallAccess}
-						/>
-					))}
-
+					<div className={styles.organization_users}>
+						{(organizationUserList || []).map((item) => (
+							<OrganizationUsers
+								user={item}
+								key={item.id}
+								hasVoiceCallAccess={hasVoiceCallAccess}
+							/>
+						))}
+					</div>
 				</>
 
 			)}
 
-			{accountType !== 'service_provider' && (
-				<>
-					<div className={styles.agent_title}>Reedemable Cogopoints</div>
-					<div className={styles.points}>
-						<div className={styles.cogo_icon}>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
-								alt="coin"
-								className={styles.cogocoins_icon}
-							/>
-						</div>
+			<div className={styles.agent_title}>Reedemable Cogopoints</div>
+			<div className={styles.points}>
+				<div className={styles.cogo_icon}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+						alt="coin"
+						className={styles.cogocoins_icon}
+					/>
+				</div>
 
-						<div className={styles.cogopoints}>Cogopoints : </div>
-						{pointLoading ? (
-							<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
-						) : (
-							<div className={styles.value}>{total_redeemable || '0'}</div>
-						)}
-					</div>
-					<div className={styles.agent_title}>Available Promocodes</div>
-					{promoLoading ? (
-						<div className={styles.loader_div}>
-							<Loader themeType="primary" />
-						</div>
-					) : (
-						<ListPromos />
-					)}
-				</>
+				<div className={styles.cogopoints}>Cogopoints : </div>
+				{pointLoading ? (
+					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
+				) : (
+					<div className={styles.value}>{total_redeemable || '0'}</div>
+				)}
+			</div>
+			<div className={styles.agent_title}>Available Promocodes</div>
+			{promoLoading ? (
+				<div className={styles.loader_div}>
+					<Loader themeType="primary" />
+				</div>
+			) : (
+				<ListPromos />
 			)}
 
 			<QuotationDetails organizationId={organizationId} />

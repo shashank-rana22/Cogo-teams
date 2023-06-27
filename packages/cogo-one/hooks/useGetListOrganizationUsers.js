@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetListOrganizationUsers = ({ organizationId = '', accountType = '' }) => {
+const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = false }) => {
 	const [
 		{ data, loading }, trigger,
 	] = useRequest(
@@ -27,10 +27,10 @@ const useGetListOrganizationUsers = ({ organizationId = '', accountType = '' }) 
 	}, [organizationId, trigger]);
 
 	useEffect(() => {
-		if (accountType === 'service_provider') {
+		if (isOrgUsersVisible) {
 			listOrganizationsUsers();
 		}
-	}, [accountType, listOrganizationsUsers]);
+	}, [isOrgUsersVisible, listOrganizationsUsers]);
 
 	return {
 		organizationUsersData    : data,

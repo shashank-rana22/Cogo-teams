@@ -157,3 +157,13 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.organization_users {
+	max-height: 40vh;
+	padding: 2px;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

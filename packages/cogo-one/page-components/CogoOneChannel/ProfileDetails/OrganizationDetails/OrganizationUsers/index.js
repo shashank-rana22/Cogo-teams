@@ -7,32 +7,10 @@ import styles from './styles.module.css';
 
 function OrganizationUsers({
 	user = {},
-	activeTab,
 	hasVoiceCallAccess,
 }) {
 	const dispatch = useDispatch();
 	const { user_id, email, mobile_country_code, mobile_number, name, organization_id } = user || {};
-
-	const DATA_MAPPING = {
-		// voice: {
-		// 	userId        : user_data?.id,
-		// 	name          : user_data?.name,
-		// 	userEmail     : user_data?.email,
-		// 	mobile_number : user_number,
-		// 	orgId         : voiceOrgId,
-		// 	leadUserId    : null,
-		// },
-		message: {
-			userId : user_id,
-			name,
-			mobile_number,
-			orgId  : organization_id,
-			mobile_country_code,
-
-		},
-	};
-
-	const { userId, name: userName, mobile_number: number, orgId } = DATA_MAPPING[activeTab];
 
 	const handleCall = () => {
 		if (mobile_number && hasVoiceCallAccess) {
@@ -40,13 +18,13 @@ function OrganizationUsers({
 				setProfileState({
 					is_in_voice_call          : true,
 					voice_call_recipient_data : {
-						startTime     : new Date(),
-						orgId,
-						userId,
-						mobile_number : number,
+						startTime    : new Date(),
+						orgId        : organization_id,
+						userId       : user_id,
+						mobile_number,
 						mobile_country_code,
-						userName,
-						isUnkownUser  : !userId,
+						userName     : name,
+						isUnkownUser : !user_id,
 					},
 				}),
 			);
@@ -54,6 +32,7 @@ function OrganizationUsers({
 	};
 
 	return (
+
 		<div className={styles.container}>
 			<div className={styles.dialer_icon_div} role="presentation" onClick={handleCall}>
 				<IcMCall
@@ -79,6 +58,7 @@ function OrganizationUsers({
 				</div>
 			</div>
 		</div>
+
 	);
 }
 
