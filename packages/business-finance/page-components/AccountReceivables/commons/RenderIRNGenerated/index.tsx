@@ -13,7 +13,7 @@ function RenderIRNGenerated({ itemData, refetch }) {
 			return <IRNGenerate itemData={itemData} refetch={refetch} />;
 		}
 		if (IS_CANCELLABLE_CHECK.includes((getByKey(itemData, 'invoiceStatus') as string))) {
-			return <IRNCancel itemData={itemData} />;
+			return <IRNCancel itemData={itemData} refetch={refetch} />;
 		}
 		return null;
 	};

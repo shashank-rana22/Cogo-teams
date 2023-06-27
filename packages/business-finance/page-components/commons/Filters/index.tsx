@@ -18,7 +18,7 @@ interface FilterProps {
 
 function Filter({
 	controls = [],
-	filters,
+	filters = {},
 	setFilters = () => {},
 	showClearBtn = false,
 	clearFilters,
