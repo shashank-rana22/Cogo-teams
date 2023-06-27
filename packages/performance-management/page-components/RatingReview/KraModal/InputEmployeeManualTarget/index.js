@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
-function InputEmployeeManualTarget({ kra_id }) {
+function InputEmployeeManualTarget({ item }) {
 	const [inputValue, setInputValue] = useState();
 
 	const {
 		loading: UpdateLoading,
 		updateEmployeeManualTarget,
-	} = useUpdateEmployeeManualTarget({ kra_id });
+	} = useUpdateEmployeeManualTarget({ item });
 
 	return (
 		<div className={styles.input_display}>

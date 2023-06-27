@@ -1,5 +1,4 @@
 import { Button, Placeholder } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -16,20 +15,13 @@ import useGetEmployeesWithLowWeightage from './useGetEmployeesWithLowWeightage';
 import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
-const REDIRECT_URL_CREATE = '/kra-assignment/create';
-const REDIRECT_URL_RATING = '/kra-assignment/performance-rating-review';
-const REDIRECT_EDIT_URL = '/kra-assignment/edit';
 const DISPLAY_ADD_KRA_BUTTON = 1;
 const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
 const TABLE_TYPE_LOW_WEIGHTAGE = 'LowWeightage';
-const BUTTON_FUNCTION_ADD = 'add';
-const BUTTON_FUNCTION_REVIEW = 'review';
 const EMPTY_KRA_TEXT = 'No KRAs to Show';
 
 function Dashboard() {
-	const router = useRouter();
-
 	const {
 		data: unassignedData = [],
 		loading,
@@ -76,10 +68,6 @@ function Dashboard() {
 		return acc;
 	}, {});
 
-	const handleEditKRA = () => {
-		router.push(REDIRECT_EDIT_URL, REDIRECT_EDIT_URL);
-	};
-
 	const OBJECT_OF_LOW_WEIGHTAGE_IDS = lowWeightageEmployeeList?.reduce(
 		(acc, obj) => {
 			acc[obj.id] = true;
@@ -95,15 +83,6 @@ function Dashboard() {
 	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters)
 	&& (CHECK_IF_ONE_EMPLOYEE_SELECTED === DISPLAY_ADD_KRA_BUTTON);
 
-	const onClickConfiguration = (type) => {
-		if (type === BUTTON_FUNCTION_ADD) {
-			router.push(REDIRECT_URL_CREATE, REDIRECT_URL_CREATE);
-		}
-		if (type === BUTTON_FUNCTION_REVIEW) {
-			router.push(REDIRECT_URL_RATING, REDIRECT_URL_RATING);
-		}
-	};
-
 	const EMPLOYEE_OBJECT_MAPPING = {
 		Unassigned    : selectUnassignedEmployeeObject,
 		AccordianData : selectAccordianObject,
@@ -113,10 +92,10 @@ function Dashboard() {
 	const renderAccordians = () => {
 		if (loadingKrasAssigned) {
 			return (
-				<>
+				<div>
 					<Placeholder height="40px" width="100%" margin="5px" />
 					<Placeholder height="40px" width="100%" margin="5px" />
-				</>
+				</div>
 			);
 		}
 
@@ -148,26 +127,7 @@ function Dashboard() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<h2>KRA Mapping</h2>
-
-				<Button onClick={() => onClickConfiguration(BUTTON_FUNCTION_REVIEW)}>
-					Go To Performance Rating Review
-				</Button>
-
-				<Button onClick={() => onClickConfiguration(BUTTON_FUNCTION_ADD)}>
-					ADD KRA
-				</Button>
-
-				<div className={styles.botton_add_edit}>
-					<Button onClick={onClickConfiguration}>ADD KRA</Button>
-					<Button
-						className={styles.butonn_edit_kra}
-						themeType="secondary"
-						onClick={handleEditKRA}
-					>
-						EDIT KRA
-					</Button>
-				</div>
+				KRA Mapping
 			</div>
 
 			<div className={styles.redirect}>
