@@ -22,6 +22,7 @@ function AccountPayables() {
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
 
 	const entity = getDefaultEntityCode(partnerId);
 
@@ -65,6 +66,7 @@ function AccountPayables() {
 								options={EntityOptions}
 								size="sm"
 								style={{ width: '284px' }}
+								disabled={entityDataCount <= 1}
 							/>
 						</div>
 					)}
