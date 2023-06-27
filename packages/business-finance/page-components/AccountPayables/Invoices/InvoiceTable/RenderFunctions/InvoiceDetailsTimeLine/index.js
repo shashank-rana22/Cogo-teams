@@ -19,9 +19,7 @@ import styles from './styles.module.css';
 import SupplierInformation from './SupplierInformation';
 
 const PLACEHOLDERS = 3;
-
 const TIMELINEKEY = '4';
-
 const geo = geoConstants();
 function InvoiceDetailsTimeLine({ item }) {
 	const {
@@ -163,13 +161,7 @@ function InvoiceDetailsTimeLine({ item }) {
 						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
 							{invoiceDetailsComp}
 							<div className={styles.body_details}>
-								{invoiceDetailsLoading ? (
-									<Placeholder
-										className={styles.placeholder_container}
-									/>
-								) : (
-									supplierComp
-								)}
+								{supplierComp}
 								{invoiceDetailsLoading ? (
 									[...Array(PLACEHOLDERS).keys()].map((key) => (
 										<Placeholder
