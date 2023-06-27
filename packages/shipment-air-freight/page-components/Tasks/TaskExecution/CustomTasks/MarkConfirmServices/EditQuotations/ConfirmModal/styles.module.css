@@ -42,9 +42,9 @@
 }
 
 .description {
-	margin-right: 16px;
 	display: flex;
 	justify-content: flex-start;
+	margin-right: 16px;
 	font-size: 12px;
 }
 
@@ -63,8 +63,8 @@
 }
 
 .controller {
-	margin-top: 8px;
 	width: 60%;
+	margin-top: 8px;
 
 	:global {
 		.ui_select_display_container {
