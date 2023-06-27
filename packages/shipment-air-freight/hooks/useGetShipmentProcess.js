@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useGetShipmentProcess = ({ defaultParams = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'get_shipment_process',
+		url    : '/get_shipment_process',
 		method : 'GET',
 		params : {
 			shipment_type: 'air_freight',

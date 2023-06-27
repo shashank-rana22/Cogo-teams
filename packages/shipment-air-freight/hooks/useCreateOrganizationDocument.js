@@ -7,7 +7,7 @@ const useCreateOrganizationDocument = ({
 	successMessage = 'Document Added To Organization Wallet',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_organization_document',
+		url    : '/create_organization_document',
 		method : 'POST',
 
 	}, { manual: true });

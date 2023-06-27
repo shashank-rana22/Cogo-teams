@@ -10,7 +10,6 @@ function WalletForm({
 	showWalletDocs,
 	activeWallet,
 	setActiveWallet = () => {},
-	showDoc,
 	handleDocClick = () => {},
 }) {
 	const [searchDocs, setSearchDocs] = useState('');
@@ -48,7 +47,6 @@ function WalletForm({
 					<Wallet
 						showWalletDocs={showWalletDocs}
 						searchDocsVal={searchDocs}
-						showDoc={showDoc}
 						handleDocClick={handleDocClick}
 						activeWallet={activeWallet}
 					/>

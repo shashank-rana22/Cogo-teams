@@ -35,7 +35,6 @@ function UploadForm({
 					showWalletDocs={showDoc.type}
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
-					showDoc={showDoc}
 					handleDocClick={handleDocClick}
 				/>
 			);

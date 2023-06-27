@@ -10,7 +10,7 @@ const useListRpaMails = ({ params = {} }) => {
 	const entityType = useRef(entity_type);
 
 	const [response, trigger] = useLensRequest({
-		url    : 'list_rpa_mails',
+		url    : '/list_rpa_mails',
 		method : 'GET',
 		params : {
 			filters: {

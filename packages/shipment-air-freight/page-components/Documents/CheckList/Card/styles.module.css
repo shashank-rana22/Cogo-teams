@@ -80,11 +80,6 @@
 	align-items: center;
 }
 
-.hold_document {
-	width: 140px;
-	color: #cb6464;
-}
-
 .single_item_child {
 	display: flex;
 	align-items: center;
@@ -111,5 +106,9 @@
 	gap: 4px;
 	font-size: 10px;
 	font-weight: 400;
-	color: #cb6464;
+	color: #bf291e;
+}
+
+.hold_document {
+	color: #bf291e;
 }

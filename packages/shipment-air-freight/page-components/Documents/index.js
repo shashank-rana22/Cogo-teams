@@ -11,6 +11,7 @@ import CheckList from './CheckList';
 import Header from './Header';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import UpdateAirwayBill from './UpdateAirwayBill';
 import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
@@ -26,6 +27,7 @@ function Documents() {
 	const [activeWallet, setActiveWallet] = useState(documents.default_wallet);
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
+	const [updateAirwayBill, setUpdateAirwayBill] = useState(null);
 
 	const { apiTrigger:createDocumentTrigger } = useCreateOrganizationDocument({});
 
@@ -82,6 +84,7 @@ function Documents() {
 					completedDocs={completedDocs?.list}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					setUpdateAirwayBill={setUpdateAirwayBill}
 				/>
 			);
 		}
@@ -132,6 +135,15 @@ function Documents() {
 				handleApprove={handleApprove}
 				setShowDoc={setShowDoc}
 			/>
+
+			{updateAirwayBill ? (
+				<UpdateAirwayBill
+					updateAirwayBill={updateAirwayBill}
+					setUpdateAirwayBill={setUpdateAirwayBill}
+					refetch={refetch}
+					details={updateAirwayBill}
+				/>
+			) : null}
 		</div>
 	);
 }

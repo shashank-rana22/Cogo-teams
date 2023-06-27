@@ -6,7 +6,7 @@ const useListShipmentOrganizations = ({ defaultFilters = {}, defaultParams = {} 
 	const [filters, setFilters] = useState({});
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_shipment_organizations',
+		url    : '/list_shipment_organizations',
 		method : 'GET',
 		params : {
 			filters: {

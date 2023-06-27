@@ -12,9 +12,9 @@ const Card = ({
 	completedDocs,
 	emailDocs,
 	shipment_data,
-	primary_service,
 	setShowDoc,
 	setShowApproved,
+	setUpdateAirwayBill,
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -53,10 +53,10 @@ const Card = ({
 					docType={docType}
 					handleView={handleView}
 					handleSave={handleSave}
-					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
 					key={uploadedItem?.id || docType}
+					setUpdateAirwayBill={setUpdateAirwayBill}
 				/>
 			);
 		});

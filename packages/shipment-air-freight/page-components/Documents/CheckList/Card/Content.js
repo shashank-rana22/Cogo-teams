@@ -5,11 +5,14 @@ import { startCase, format } from '@cogoport/utils';
 
 import VerticleLine from '../VerticleLine';
 
+import CheckBlDoStatus from './CheckBlDoStatus';
 import styles from './styles.module.css';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
 const INCREMENT_BY_ONE = 1;
 const STATE_NAME_INDEX = 1;
+
+const SHOW_UPDATE_AWB_STAKEHOLDERS = ['superadmin', 'service_ops2'];
 
 function Content({
 	uploadedItem,
@@ -20,16 +23,14 @@ function Content({
 	shipment_data,
 	handleSave,
 	handleView,
-	primary_service,
 	receivedViaEmail,
 	showUploadText,
 	setShowDoc,
 	setShowApproved,
 	docType,
+	setUpdateAirwayBill,
 }) {
-	const isBlReleased = ['approved', 'released', 'surrendered', 'delivered'].includes(uploadedItem?.bl_detail_status);
-
-	const tradeType = primary_service?.trade_type;
+	const allowedStakeHolder = shipment_data?.stakeholder_types?.some((e) => SHOW_UPDATE_AWB_STAKEHOLDERS.includes(e));
 
 	const getUploadButton = () => {
 		if (showUploadText.length) {
@@ -117,24 +118,24 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(['house_bill_of_lading', 'bill_of_lading']
-							.includes(uploadedItem?.document_type) && tradeType === 'export') || isBlReleased)
-							? (
-								<>
-									<Button
-										themeType="link"
-										onClick={() => handleView(uploadedItem?.document_url)}
-									>
-										View
-									</Button>
-									<Button
-										themeType="link"
-										onClick={() => handleSave(uploadedItem?.document_url)}
-									>
-										Download
-									</Button>
-								</>
-							) : null}
+						<CheckBlDoStatus
+							docType={docType}
+							item={item}
+							uploadedItem={uploadedItem}
+							handleView={handleView}
+							handleSave={handleSave}
+						/>
+
+						{docType === 'airway_bill'
+						&& uploadedItem?.state === 'document_accepted'
+						&& allowedStakeHolder && (
+							<Button
+								themeType="link"
+								onClick={() => setUpdateAirwayBill(uploadedItem)}
+							>
+								Update
+							</Button>
+						)}
 
 					</div>
 				) : getUploadButton()}
