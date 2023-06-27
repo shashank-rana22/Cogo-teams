@@ -82,7 +82,6 @@ request.interceptors.request.use((oldConfig) => {
         PEEWEE_SERVICES.includes(serviceName) ||
         (serviceName === "location" && isDevMode)
     ) {
-        console.log(process.env.NEXT_PUBLIC_STAGE_URL, "urls");
         newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
         newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
     }

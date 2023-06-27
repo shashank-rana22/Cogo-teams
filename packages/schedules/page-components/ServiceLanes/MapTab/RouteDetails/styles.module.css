@@ -1,0 +1,72 @@
+.box {
+    /* display: flex; */
+    width: 50%;
+    margin-right: 8px;
+    border-radius: 8px;
+    background: var(--greyscale-secondary-white, #fff);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px #bdbdbd;
+}
+
+.total_transit {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 24px;
+    color: var(--black-80, #4f4f4f);
+    font-size: 14px;
+    line-height: 150%;
+}
+
+.total_transit_data {
+    color: var(--black, #221f20);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.frequency {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 24px;
+    color: var(--black-60, #828282);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.frequency_data {
+    color: var(--black, #221f20);
+    font-size: 16px;
+    font-family: Poppins;
+    font-weight: 500;
+}
+
+.button {
+    padding-top: 12px;
+    padding-right: 20px;
+}
+
+/* .route_details {
+  background-color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #221f20;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.route_points {
+  max-height: 650px;
+  overflow: scroll;
+} */

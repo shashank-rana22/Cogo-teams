@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useRequest } from "@cogoport/request";
 
 const useListServiceLanes = ({ routeId }) => {
-    console.log("routeID: ", routeId);
-
     const [{ data, loading }, trigger] = useRequest(
         {
             url: "/list_service_lanes",
@@ -40,4 +38,5 @@ const useListServiceLanes = ({ routeId }) => {
         loading,
     };
 };
+
 export default useListServiceLanes;

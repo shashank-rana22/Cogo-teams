@@ -15,8 +15,6 @@ function PortPair({ data }) {
         links,
     } = portData({ data });
 
-    console.log("data:", data);
-
     return (
         <div className={styles.container}>
             <div className={styles.origin}>
