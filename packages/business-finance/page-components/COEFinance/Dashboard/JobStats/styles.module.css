@@ -43,8 +43,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-
-	/* padding: 0 40px 0 20px; */
 }
 
 .ship_id {

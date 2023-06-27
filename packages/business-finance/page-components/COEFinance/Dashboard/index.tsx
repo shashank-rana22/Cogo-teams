@@ -16,19 +16,19 @@ import { filterControls, reportControls } from './controls';
 import JobStats from './JobStats';
 import styles from './styles.module.css';
 
-function Dashboard({ statsData }) {
-	const [filters, setFilters] = useState({ zone: '', serviceType: '', days: '' });
+function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
-	const { LOCKED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
+	const { LOCKED = 0, FINANCE_ACCEPTED = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
+	const { PAYRUN_BILL_APPROVED = 0	} = statsCOEApprovedData || {};
 
 	const Status = [
-		{ id: 1, label: 'Pending', value: LOCKED || '-' },
-		{ id: 2, label: 'COE Approved', value: '-' },
-		{ id: 3, label: 'COE Rejected', value: COE_REJECTED || '-' },
-		{ id: 2, label: 'Finance Approved', value: FINANCE_ACCEPTED || '-' },
-		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
+		{ id: 1, label: 'Pending', value: LOCKED },
+		{ id: 2, label: 'COE Approved', value: PAYRUN_BILL_APPROVED },
+		{ id: 3, label: 'COE Rejected', value: COE_REJECTED },
+		{ id: 2, label: 'Finance Approved', value: FINANCE_ACCEPTED },
+		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED },
 	];
 
 	return (

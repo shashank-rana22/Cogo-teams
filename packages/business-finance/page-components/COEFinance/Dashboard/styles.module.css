@@ -65,14 +65,12 @@
 }
 
 .card_label {
-	/* padding: 0 60px 0 36px; */
 	padding: 0 20px 0 0;
 	font-size: 14px;
 	font-weight: 500;
 }
 
 .card_value {
-	/* padding: 0 14px 0 28px; */
 	padding: 0 4px 0 26px;
 	font-size: 30px;
 	font-weight: 600;
