@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
+import { useContext } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
@@ -22,6 +24,8 @@ function UploadAmendDoc({
 			performed_by_org_id: task.organization_id,
 		},
 	});
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const newRefetch = () => {
 		onClose();
@@ -75,6 +79,24 @@ function UploadAmendDoc({
 	return (
 		<div className={styles.container}>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div>
+					<div className={styles.remark}>
+						<div className={styles.remark_head}>Remarks:</div>
+						<div className={styles.remark_head}>{details?.remarks}</div>
+					</div>
+					{/* {(shipment_data?.movement_details || []).map((movement_detail) => (
+						<div>
+							<p>
+								<b>Vessel: </b>
+								{movement_detail?.vessel}
+							</p>
+							{', '}
+							<p>
+								<b>Voyage: </b> {movement_detail?.voyage}
+							</p>
+						</div>
+					))} */}
+				</div>
 				<div className={styles.remark}>
 					<div className={styles.remark_head}>Remarks:</div>
 					<div className={styles.remark_head}>{details?.remarks}</div>

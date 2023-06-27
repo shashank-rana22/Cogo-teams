@@ -52,6 +52,10 @@ export default function RolloveDetails() {
 		),
 	}));
 
+	if (!firstRollover && !parent_shipment_id) {
+		return null;
+	}
+
 	return (
 		<div className={styles.rollover_details}>
 			{firstRollover ? (
