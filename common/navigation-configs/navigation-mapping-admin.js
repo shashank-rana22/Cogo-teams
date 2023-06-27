@@ -6,7 +6,6 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
-	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
