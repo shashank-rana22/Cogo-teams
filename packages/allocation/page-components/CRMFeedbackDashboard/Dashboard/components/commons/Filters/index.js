@@ -42,6 +42,7 @@ function Filters({
 	const kamOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
+		valueKey    : 'user_id',
 		params      : {
 			filters: {
 				status               : 'active',
