@@ -1,0 +1,10 @@
+.container {
+	border-bottom: 1px solid;
+}
+
+.row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 8px 16px;
+}
