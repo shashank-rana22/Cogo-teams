@@ -90,6 +90,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 												maximumFractionDigits : 2,
 											},
 										})}
+										/Contr.
 									<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 									{loading
 										? <Placeholder width="150px" height="25px" />
@@ -151,6 +152,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 									maximumFractionDigits : 2,
 								},
 							})}
+							/Contr.
 							<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 							{formatAmount({
 								amount: (Number(profitAmount) / Number(data?.exchange_rate))

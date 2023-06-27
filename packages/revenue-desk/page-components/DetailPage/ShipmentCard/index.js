@@ -38,6 +38,13 @@ function ShipmentCard({ itemData, priceData }) {
 				</div>
 				<div className={styles.second_section}>
 					<Pill size="md" color="#F2F3FA">
+						<div style={{ color: '#7278AD' }}>Inco:
+							{startCase([itemData?.inco_term])}
+
+						</div>
+
+					</Pill>
+					<Pill size="md" color="#F2F3FA">
 						<div style={{ color: '#7278AD' }}>
 							{startCase(itemData?.state)
 							|| startCase(itemData?.state)}

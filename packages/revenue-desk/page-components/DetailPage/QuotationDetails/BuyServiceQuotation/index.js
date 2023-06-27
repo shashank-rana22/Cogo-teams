@@ -33,12 +33,9 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 			<div className={styles.container}>
 				<div className={profitPercentage >= 0 ? styles.postive_container : styles.negative_container}>
 					Profit
-					{' '}
-					:
-					{' '}
-					{!loading
+					:{!loading
 						? (
-							<div>
+							<div style={{ padding: '10px' }}>
 								{Number(Number(profitPercentage) * 100).toFixed(2)}
 								%
 							</div>
@@ -90,6 +87,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 												maximumFractionDigits : 2,
 											},
 										})}
+										/Contr.
 									<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 									{!data?.net_pre_tax_total
 										? <Placeholder width="150px" height="25px" />

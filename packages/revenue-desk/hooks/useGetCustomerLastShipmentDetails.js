@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const useGetCustomerLastShipmentDetails = ({ itemData }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/get_customers_last_shipment_details',
+		url    : '/list_customers_last_shipment_details',
 	}, { manual: true });
 	const getLastShipmentDetails = async () => {
 		try {
@@ -18,6 +18,7 @@ const useGetCustomerLastShipmentDetails = ({ itemData }) => {
 							destination_airport_id : itemData?.destination_airport_id,
 						},
 					},
+					page_limit : 1,
 				},
 			});
 		} catch (err) {
