@@ -12,7 +12,7 @@ function Form({
 				const { controlType, name, label } = eachControl || {};
 				const Element = getFieldController(controlType);
 
-				const show = !(eachControl.name in showElements) || showElements[eachControl.name];
+				const show = !(name in showElements) || showElements[name];
 
 				if (!Element || !show) {
 					return null;

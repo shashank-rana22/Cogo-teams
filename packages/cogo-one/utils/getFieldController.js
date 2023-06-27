@@ -7,7 +7,7 @@ import {
 	AsyncSelectController,
 } from '@cogoport/forms';
 
-import FieldArrayController from '../configurations/FieldArray';
+import FieldArrayController from './FieldArray';
 
 const CONTROLLER_MAPPING = {
 	input       : InputController,

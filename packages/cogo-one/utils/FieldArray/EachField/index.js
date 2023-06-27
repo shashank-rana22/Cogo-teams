@@ -1,4 +1,4 @@
-import { getFieldArrayControllers } from '../../../utils/getFieldArrayControllers';
+import { getFieldArrayControllers } from '../../getFieldArrayControllers';
 
 import styles from './styles.module.css';
 
