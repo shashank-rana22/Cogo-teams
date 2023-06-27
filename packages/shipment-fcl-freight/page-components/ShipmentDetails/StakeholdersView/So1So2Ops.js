@@ -21,7 +21,8 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
+const UNAUTHORIZED_STATUS_CODE = 403;
 
 function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -64,7 +65,7 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -84,7 +85,7 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>

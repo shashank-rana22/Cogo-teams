@@ -1,10 +1,10 @@
-import { Loader, Placeholder, Pill, Popover } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
@@ -12,6 +12,7 @@ import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
+import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import Details from './Details/index';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
@@ -36,6 +37,7 @@ interface SellerDetailInterface {
 	organizationName?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	organizationId?: string,
 }
 
 interface SellerBankDetailInterface {
@@ -70,6 +72,11 @@ interface BillAdditionalObjectInterface {
 	shipmentType?: string;
 	reasonForCN? : string;
 	outstandingDocument? : string;
+	paymentType? : string;
+	isIncidental? : string;
+	advancedAmountCurrency? : string;
+	serialId?: string,
+	advancedAmount?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -80,6 +87,8 @@ export interface DataInterface {
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
 	consolidatedShipmentIds:Array<string>;
+	organizationId?: string;
+	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {
@@ -110,7 +119,6 @@ function ShipmentDetails({
 	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
-	const [showConsolidatedSID, setShowConsolidatedSID] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
@@ -140,37 +148,7 @@ function ShipmentDetails({
 		}
 		return <div>NO DATA FOUND</div>;
 	};
-	const rest = { onClickOutside: () => { setShowConsolidatedSID(false); } };
 
-	const getConsolidatedSID = () => {
-		if (isEmpty(consolidatedShipmentIds)) {
-			return (
-				<div>
-					Not Available
-				</div>
-			);
-		}
-		return (
-			<div>
-				{consolidatedShipmentIds.map((item:string) => (
-					<div key={item} className={styles.sid_div}>
-						<div>
-							SID
-						</div>
-						<div>
-							-
-						</div>
-						<div>
-							{item}
-						</div>
-					</div>
-				))}
-			</div>
-		);
-	};
-	const handleConsolidatedSID = () => {
-		setShowConsolidatedSID(!showConsolidatedSID);
-	};
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
@@ -292,6 +270,17 @@ function ShipmentDetails({
 				</>
 			)}
 			<div>
+				{jobType === 'CONSOLIDATED' && (
+					<div className={styles.consolidated_shipment_details}>
+						<Accordion
+							type="text"
+							title="Shipment Details"
+						>
+							<div className={styles.line} />
+							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />
+						</Accordion>
+					</div>
+				)}
 				{collectionPartyId ? (
 					<div className={styles.variance}>
 						<div>
@@ -314,35 +303,6 @@ function ShipmentDetails({
 						)}
 					</div>
 				) : null}
-				{jobType === 'CONSOLIDATED'
-				&& (
-					<div className={styles.show_consolidated}>
-						<Popover
-							placement="bottom"
-							caret
-							visible={showConsolidatedSID}
-							render={getConsolidatedSID()}
-							{...rest}
-						>
-							<div
-								className={styles.consolidated_sid}
-								onClick={() => {
-									handleConsolidatedSID();
-								}}
-								role="presentation"
-							>
-								<div className={styles.consolidated_text}>
-									Consolidated SID
-								</div>
-
-								<div className={styles.consolidated_icon}>
-									{showConsolidatedSID ? <IcMArrowRotateUp height={20} width={20} />
-										: <IcMArrowRotateDown height={20} width={20} />}
-								</div>
-							</div>
-						</Popover>
-					</div>
-				)}
 				<POC itemData={data} />
 			</div>
 

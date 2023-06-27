@@ -1,3 +1,5 @@
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
@@ -11,6 +13,7 @@ import {
 	SingleLocation,
 	Accordian,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import KamDeskContext from '../../../context/KamDeskContext';
 import isSingleLocation from '../../../utils/checkSingleLocation';
 
@@ -22,7 +25,8 @@ function Card({ data = {}, activeTab = '' }) {
 	const { stepperTab } = useContext(KamDeskContext);
 
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
@@ -65,6 +69,24 @@ function Card({ data = {}, activeTab = '' }) {
 
 					<div className={styles.pill_container}>
 						<CargoPills data={data} />
+						{data?.fm_rejection_reason && (
+							<Tooltip
+								content={(
+									<div className={styles.rejection_tooltip}>
+										{data?.fm_rejection_reason}
+									</div>
+								)}
+								placement="top"
+							>
+								<div style={{ marginBlock: 'auto' }}>
+									<IcMInfo
+										width={15}
+										height={15}
+										style={{ marginBottom: '2px', color: 'red' }}
+									/>
+								</div>
+							</Tooltip>
+						)}
 					</div>
 				</div>
 			</div>

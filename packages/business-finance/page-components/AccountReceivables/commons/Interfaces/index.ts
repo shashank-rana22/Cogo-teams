@@ -19,3 +19,5 @@ export interface TableProps {
 export interface GenericObject {
 	[key: string]: any;
 }
+
+export type Refetch = () => void;

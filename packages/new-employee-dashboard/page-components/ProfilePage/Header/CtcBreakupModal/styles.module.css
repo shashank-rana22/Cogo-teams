@@ -1,0 +1,19 @@
+.popover_container {
+	:global(.ui_popover_container) {
+		width: 280px;
+		height: 120px;
+	}
+
+	:global(.tippy-content) {
+		box-sizing: border-box;
+		width: 100%;
+		max-height: 380px;
+		padding: 16px 16px 16px 13px;
+		overflow-y: auto;
+		border-radius: 10px;
+	}
+
+	:global(.ui_chips_container) {
+		flex-wrap: wrap;
+	}
+}

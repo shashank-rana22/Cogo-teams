@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/surface-modules';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import React, { useEffect } from 'react';
 
 import editLineItemsHelper from './editLineItemsHelper';
@@ -8,7 +9,6 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 function EditInvoice({
-	show = 'false',
 	onClose,
 	invoice = {},
 	refetch = () => {},
@@ -47,9 +47,9 @@ function EditInvoice({
 
 	return (
 		<Modal
+			show
 			size="xl"
 			onClose={onClose}
-			show={show}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Edit Invoice" />
@@ -57,7 +57,7 @@ function EditInvoice({
 				<div className={styles.forms}>
 					<div className={styles.invoice_value}>
 						Invoice Value -
-						{' '}
+						&nbsp;
 						<span className={styles.amount}>
 							{formatAmount({
 								amount   : invoice?.invoicing_party_total,
@@ -82,22 +82,24 @@ function EditInvoice({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={onClose}
-				>
-					Cancel
-				</Button>
+				<FooterButtonWrapper>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={onClose}
+					>
+						Cancel
+					</Button>
 
-				<Button
-					size="md"
-					onClick={handleSubmit(onCreate)}
-					style={{ marginLeft: '16px' }}
-					disabled={loading}
-				>
-					Save
-				</Button>
+					<Button
+						size="md"
+						onClick={handleSubmit(onCreate)}
+						style={{ marginLeft: '16px' }}
+						disabled={loading}
+					>
+						Save
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

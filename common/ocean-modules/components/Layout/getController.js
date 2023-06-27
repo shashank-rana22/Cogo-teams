@@ -20,8 +20,6 @@ const getElementController = (type = 'text') => {
 			return AsyncSelectController;
 
 		case 'text':
-			return InputController;
-
 		case 'number':
 			return InputController;
 
