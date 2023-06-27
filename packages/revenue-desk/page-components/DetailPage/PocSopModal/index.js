@@ -1,19 +1,30 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
-import { Sop, SopOld } from '@cogoport/ocean-modules';
+import { IcCRedCircle } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import POCDetails from './POCDetails';
+import Sop from './Sop';
+import SopOld from './SopOld';
 import styles from './styles.module.css';
 
 function PocSopModal({ itemData }) {
-	const [activePocTab, setActivePocTab] = useState('poc');
+	const [activePocTab, setActivePocTab] = useState('sop');
 	const [showPocSop, setShowPocSop] = useState(false);
+	const [indicator, showIndicator] = useState(false);
 	return (
 		<div>
-			<Button size="xl" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
+			<div>
+				<Button size="xl" themeType="secondary" onClick={() => setShowPocSop(true)}>
+					{indicator
+						? <IcCRedCircle /> : null}
+					POC & SOP
+					{' '}
+				</Button>
+			</div>
+
 			<Modal
 				size="xl"
-				show={showPocSop === true}
+				show={showPocSop}
 				onClose={() => setShowPocSop(false)}
 				placement="center"
 				className={styles.modal_container}
@@ -31,7 +42,14 @@ function PocSopModal({ itemData }) {
 						</TabPanel>
 						<TabPanel name="sop" title="SOP">
 							{['fcl_freight', 'lcl_freight'].includes(itemData?.shipment_type)
-								? <div><Sop shipment_data={itemData} /></div>
+								? (
+									<div>
+										<Sop
+											shipment_data={itemData}
+											showIndicator={showIndicator}
+										/>
+									</div>
+								)
 								: <div><SopOld shipment_data={itemData} /></div>}
 						</TabPanel>
 					</Tabs>
