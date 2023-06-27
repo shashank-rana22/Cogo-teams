@@ -10,10 +10,10 @@
     { "label":"Pending Collection", "value": "collection_pending", "isCriticalVisible": true },
     { "label":"Under Collection", "value": "under_collection", "isCriticalVisible": true,
 		"readyToCollectVisible": true },
-    { "label":"Collected", "value": "collected", "readyToCollectVisible": true },
-    { "label":"Released", "value": "released", "readyToCollectVisible": true },
-    { "label":"Surrender", "value": "surrendered", "readyToCollectVisible": true },
-    { "label":"On Hold", "value": "on_hold", "readyToCollectVisible": true }
+    { "label":"Collected", "value": "collected", "readyToReleaseVisible": true },
+    { "label":"Released", "value": "released", "readyToReleased": true },
+    { "label":"Surrender", "value": "surrendered", "readyToSurrender": true },
+    { "label":"On Hold", "value": "on_hold", "readyToHold": true }
   ],
   "ACCORDIAN_TABS": [
     { "label": "Invoivces", "value": "invoices"},
