@@ -103,7 +103,7 @@ function DefaultView() {
 				</div>
 			</div>
 
-			<DocumentHoldHeader />
+			{!isEmpty(shipment_data?.document_delay_status) && <DocumentHoldHeader />}
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
