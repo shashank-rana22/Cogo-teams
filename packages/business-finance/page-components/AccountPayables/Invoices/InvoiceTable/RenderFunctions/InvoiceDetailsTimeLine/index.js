@@ -180,7 +180,6 @@ function InvoiceDetailsTimeLine({ item }) {
 								) : (
 									(INVOICE_DATA_MAPPING || [{}]).map((items) => {
 										const { id, label } = items;
-
 										return (
 											<div className={styles.information} key={id}>
 												<div
@@ -189,7 +188,6 @@ function InvoiceDetailsTimeLine({ item }) {
 														handleDropdown(id);
 													}}
 													role="presentation"
-
 												>
 													{label}
 													<div className={styles.dropdown_container}>

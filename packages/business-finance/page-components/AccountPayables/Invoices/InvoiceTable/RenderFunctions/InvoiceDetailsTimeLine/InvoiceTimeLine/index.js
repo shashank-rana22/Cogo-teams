@@ -28,13 +28,13 @@ function InvoiceTimeLine({ data, loading }) {
 		return timeLine;
 	};
 
-	useEffect(() => {
-		setComplete(timeLine[zeroth_index]?.eventName === 'POSTED');
-	}, [timeLine]);
-
 	const dateWithTimeForPaymentDueDate = timeLine[zeroth_index]?.paymentDueDate?.split(' ') || '';
 
 	const dateWithTimeForPosted = timeLine[zeroth_index]?.occurredAt?.split(' ') || '';
+
+	useEffect(() => {
+		setComplete(timeLine[zeroth_index]?.eventName === 'POSTED');
+	}, [timeLine]);
 
 	return (
 		<div className={styles.container}>
