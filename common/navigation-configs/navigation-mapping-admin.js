@@ -1204,7 +1204,7 @@ const navigationMappingAdmin = {
 				as            : '/cost-booking',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.cost_booking,
+				possible_apis : apis.ff_cost_booking,
 				icon          : IcMBooking,
 			},
 			{
