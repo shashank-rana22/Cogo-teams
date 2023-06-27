@@ -9,11 +9,11 @@ function useGetEmployeesWithLowWeightage({ filters }) {
 		method : 'GET',
 	}, { manual: true });
 
-	const getEmployeesWithLowWeightage = useCallback(async () => {
+	const getEmployeesWithLowWeightage = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
 
 		try {
-			await trigger({
+			trigger({
 				params: {
 					filters: {
 						employee_ids,

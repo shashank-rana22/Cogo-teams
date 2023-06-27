@@ -34,6 +34,8 @@ function useCreateIndividualKra() {
 					performed_by_type : 'user',
 				},
 			});
+
+			Toast('Targets submitted successfully');
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(
