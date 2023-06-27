@@ -1,7 +1,7 @@
 import { CURRENCY_MAPPING } from '@cogoport/globalization/constants/currencyCode';
 
-const CURRENCY_DATA = Object.keys(CURRENCY_MAPPING).map((key, index) => {
-	const Icon = CURRENCY_MAPPING[key].icon;
+const CURRENCY_DATA = Object.entries(CURRENCY_MAPPING).map(([key, value], index) => {
+	const Icon = value.icon;
 
 	return ({
 		id   : index,
