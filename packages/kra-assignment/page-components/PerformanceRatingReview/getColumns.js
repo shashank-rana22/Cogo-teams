@@ -1,6 +1,8 @@
 import { Checkbox } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 const getColumns = ({
 	onClickCheckbox,
 	selectedEmployees,
@@ -34,7 +36,11 @@ const getColumns = ({
 			Header   : 'Name',
 			accessor : (item) => (
 
-				<div role="presentation" onClick={() => onClickEmployee(item?.employee_id)}>
+				<div
+					className={styles.employee_name}
+					role="presentation"
+					onClick={() => onClickEmployee(item?.employee_id)}
+				>
 					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
 

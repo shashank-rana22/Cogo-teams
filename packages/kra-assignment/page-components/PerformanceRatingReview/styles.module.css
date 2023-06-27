@@ -24,3 +24,9 @@
     padding-right: 6px;
     cursor: pointer;
 }
+.employee_name:hover {
+    box-shadow: 0 0 0 1px #deebed;
+    cursor: pointer;
+  }
+
+
