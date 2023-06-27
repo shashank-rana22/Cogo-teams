@@ -1,8 +1,4 @@
-export const invoiceControls = ({
-	insuranceDetails = {},
-	policyDetails = {},
-	INVOICE_DATE = '',
-}) => [
+export const invoiceControls = [
 	{
 		label       : 'Invoice Number',
 		name        : 'invoiceNo',
@@ -10,7 +6,6 @@ export const invoiceControls = ({
 		placeholder : 'Enter Invoice Number',
 		span        : 5,
 		rules       : { required: 'Invoice No is required' },
-		value       : insuranceDetails?.invoiceNo,
 	},
 	{
 		label                 : 'Invoice Date',
@@ -19,7 +14,6 @@ export const invoiceControls = ({
 		span                  : 5,
 		isClearable           : true,
 		maxDate               : new Date(),
-		value                 : INVOICE_DATE,
 		rules                 : { required: 'Invoice Date is required' },
 		isPreviousDaysAllowed : true,
 		showOptional          : false,
@@ -40,7 +34,6 @@ export const invoiceControls = ({
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'
 			+ 'msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		uploadType : 'aws',
-		value      : insuranceDetails?.verificationDoc?.gstDoc,
 		rules      : { required: 'Required' },
 	},
 	{
@@ -57,7 +50,6 @@ export const invoiceControls = ({
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'
 			+ '/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		uploadType : 'aws',
-		value      : insuranceDetails?.verificationDoc?.panDoc,
 		rules      : { required: 'Required' },
 	},
 	{
@@ -73,10 +65,7 @@ export const invoiceControls = ({
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'
 			+ '/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType: 'aws',
-		value:
-			insuranceDetails?.verificationDoc?.invoiceDoc
-			|| policyDetails?.commercial_invoice?.url,
-		rules: { required: 'Required' },
+		uploadType : 'aws',
+		rules      : { required: 'Required' },
 	},
 ];

@@ -2,13 +2,12 @@ import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
 const MOBILE_NUMBER_LIMIT = 10;
 
-export const personalDetailsControl = ({ insuranceDetails = {} }) => [
+export const personalDetailsControl = [
 	{
 		label   : 'Transit Mode',
 		name    : 'transitMode',
 		span    : 6,
 		type    : 'radio',
-		value   : insuranceDetails.transitMode,
 		options : [
 			{ label: 'Sea', value: 'SEA', disabled: true },
 			{ label: 'Road', value: 'ROAD', disabled: true },
@@ -22,7 +21,6 @@ export const personalDetailsControl = ({ insuranceDetails = {} }) => [
 		name     : 'policyType',
 		span     : 6,
 		type     : 'radio',
-		value    : insuranceDetails.policyType,
 		disabled : true,
 		options  : [
 			{ label: 'Export', value: 'EXPORT', disabled: true },
@@ -36,9 +34,7 @@ export const personalDetailsControl = ({ insuranceDetails = {} }) => [
 		name        : 'insuredFirstName',
 		span        : 3,
 		type        : 'text',
-		className   : 'primary md',
 		placeholder : 'Enter First Name',
-		value       : insuranceDetails?.insuredFirstName,
 		rules       : {
 			required: ' First Name is required',
 		},
@@ -48,9 +44,7 @@ export const personalDetailsControl = ({ insuranceDetails = {} }) => [
 		name        : 'insuredLastName',
 		span        : 3,
 		type        : 'text',
-		className   : 'primary md',
 		placeholder : 'Enter Last Name',
-		value       : insuranceDetails?.insuredLastName,
 		rules       : {
 			required: 'Last Name is required',
 		},
@@ -59,10 +53,8 @@ export const personalDetailsControl = ({ insuranceDetails = {} }) => [
 		label       : 'Email',
 		name        : 'email',
 		type        : 'email',
-		className   : 'primary md',
 		span        : 3,
 		placeholder : 'Enter Email',
-		value       : insuranceDetails?.email,
 		rules       : {
 			required : 'Email is required',
 			pattern  : {
@@ -75,9 +67,7 @@ export const personalDetailsControl = ({ insuranceDetails = {} }) => [
 		label       : 'Mobile Number',
 		name        : 'phoneNo',
 		type        : 'number',
-		className   : 'primary md',
 		span        : 3,
-		value       : insuranceDetails?.phoneNo,
 		placeholder : 'Enter your mobile number',
 		rules       : {
 			required : 'Mobile Number is required',

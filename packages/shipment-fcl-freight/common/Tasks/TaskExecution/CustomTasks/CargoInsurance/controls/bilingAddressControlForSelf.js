@@ -1,6 +1,6 @@
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
-export const bilingAddressControlForSelf = ({ insuranceDetails = {} }) => [
+export const bilingAddressControlForSelf = [
 	{
 		label       : 'PAN Number',
 		name        : 'panNumber',
@@ -8,8 +8,6 @@ export const bilingAddressControlForSelf = ({ insuranceDetails = {} }) => [
 		placeholder : 'Enter PAN Number',
 		showLabel   : false,
 		span        : 3,
-		className   : 'primary md',
-		value       : insuranceDetails?.panNumber,
 		disabled    : false,
 		rules       : {
 			pattern: {

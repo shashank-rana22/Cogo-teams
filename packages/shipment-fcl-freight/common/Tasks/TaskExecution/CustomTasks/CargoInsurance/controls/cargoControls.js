@@ -3,11 +3,7 @@ import { addDays } from '@cogoport/utils';
 const MIN_DATE_LIMIT = 1;
 const MAX_DATE_LIMIT = 31;
 
-export const cargoControls = ({
-	insuranceDetails = {},
-	shipmentData = {},
-	policyDetails = {},
-}) => [
+export const cargoControls = ({ insuranceDetails = {} }) => [
 	{
 		name           : 'policyCommodityId',
 		label          : 'Commodity',
@@ -15,9 +11,6 @@ export const cargoControls = ({
 		options        : [],
 		span           : 4,
 		optionsListKey : 'insurance_commodities',
-		value:
-			insuranceDetails?.policyCommodityId
-			|| policyDetails?.cargo_insurance_commodity_id,
 		placeholder    : 'select Commodity',
 		defaultOptions : true,
 		rules          : { required: 'Commodity is required' },
@@ -28,10 +21,7 @@ export const cargoControls = ({
 		type        : 'text',
 		span        : 4,
 		placeholder : 'Enter Commodity Description',
-		value:
-			insuranceDetails?.cargoDescription
-			|| policyDetails?.cargo_insurance_commodity_description,
-		rules: { required: 'Commodity Description is required' },
+		rules       : { required: 'Commodity Description is required' },
 	},
 	{
 		label       : 'Packaging Description',
@@ -39,7 +29,6 @@ export const cargoControls = ({
 		type        : 'text',
 		span        : 4,
 		placeholder : 'Enter Packaging Description',
-		value       : insuranceDetails?.packaging,
 		rules       : { required: 'Packaging Description is required' },
 	},
 	{
@@ -48,11 +37,8 @@ export const cargoControls = ({
 		type        : 'select',
 		placeholder : 'Select Inco Term',
 		span        : 4,
-		value       : (
-			insuranceDetails?.incoterm || shipmentData?.inco_term
-		)?.toUpperCase(),
-		disabled : true,
-		options  : [
+		disabled    : true,
+		options     : [
 			{ label: 'FOB - Free On Board', value: 'FOB' },
 			{ label: 'EXW - Ex Works', value: 'EXW' },
 			{ label: 'FCA - Free Carrier', value: 'FCA' },
@@ -77,13 +63,8 @@ export const cargoControls = ({
 		type           : 'location-select',
 		span           : 5,
 		optionsListKey : 'locations',
-		value:
-			insuranceDetails?.policyCountryId
-			|| (insuranceDetails?.policyType === 'IMPORT'
-				? policyDetails?.origin_country_id
-				: policyDetails?.destination_country_id),
-		disabled : true,
-		params   : {
+		disabled       : true,
+		params         : {
 			filters: {
 				type: ['country'],
 			},
@@ -101,7 +82,6 @@ export const cargoControls = ({
 		type        : 'text',
 		span        : 4,
 		placeholder : 'Coverage From',
-		value       : insuranceDetails?.locationFrom,
 		rules       : { required: 'Coverage From is required' },
 	},
 	{
@@ -110,7 +90,6 @@ export const cargoControls = ({
 		type        : 'text',
 		span        : 4,
 		placeholder : 'Coverage To',
-		value       : insuranceDetails?.locationTo,
 		rules       : { required: 'Coverage To is required' },
 	},
 	{
@@ -118,20 +97,16 @@ export const cargoControls = ({
 		label   : 'Coverage',
 		type    : 'select',
 		span    : 4,
-		value   : insuranceDetails?.riskCoverage || 'ALL_RISK',
 		options : [{ label: 'All Risk', value: 'ALL_RISK' }],
 	},
 
 	{
-		name        : 'transitDate',
-		label       : 'Transition Date',
-		placeholder : 'Select Transition Date',
-		type        : 'datepicker',
-		span        : 4,
-		isClearable : true,
-		value       : insuranceDetails?.transitDate
-			? new Date(insuranceDetails?.transitDate)
-			: addDays(new Date(), MIN_DATE_LIMIT),
+		name           : 'transitDate',
+		label          : 'Transition Date',
+		placeholder    : 'Select Transition Date',
+		type           : 'datepicker',
+		span           : 4,
+		isClearable    : true,
 		minDate        : addDays(new Date(), MIN_DATE_LIMIT),
 		maxDate        : addDays(new Date(), MAX_DATE_LIMIT),
 		rules          : { required: 'Transition Date is required' },
@@ -146,8 +121,7 @@ export const cargoControls = ({
 		type           : 'select',
 		placeholder    : 'INR',
 		optionsListKey : 'currencies',
-		value:
-			insuranceDetails?.policyCurrency || policyDetails?.cargo_value_currency,
+
 		rules: { required: 'Required' },
 	},
 	{
@@ -156,7 +130,6 @@ export const cargoControls = ({
 		type        : 'number',
 		placeholder : 'Enter Consignment Value',
 		span        : 3,
-		value       : insuranceDetails?.cargoAmount || policyDetails?.cargo_value,
 		rules       : {
 			required: {
 				message : 'Required',

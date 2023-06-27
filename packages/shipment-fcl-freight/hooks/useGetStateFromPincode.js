@@ -54,7 +54,7 @@ function useGetStateFromPincode({ pincode = '', policyForSelf = true }) {
 
 	return {
 		cityLoading : loading,
-		cityState   : data,
+		cityState   : data?.list,
 	};
 }
 

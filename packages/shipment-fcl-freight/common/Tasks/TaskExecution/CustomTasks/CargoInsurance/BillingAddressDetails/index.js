@@ -1,33 +1,24 @@
-import {
-	Loader,
-	Toast,
-	Popover,
-	Radio,
-	cl,
-} from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Loader, Toast, Popover, Radio, cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState, useContext } from 'react';
 
 import useGetStateFromPincode from '../../../../../../hooks/useGetStateFromPincode';
 import useListAddressForInsurance from '../../../../../../hooks/useListAddressForInsurance';
 import addres from '../AddressListPopover';
-import { bilingAddressControl } from '../utils/bilingAddressControl';
-import { bilingAddressControlForSelf } from '../utils/bilingAddressControlForSelf';
+import { bilingAddressControl } from '../controls/bilingAddressControl';
+import { bilingAddressControlForSelf } from '../controls/bilingAddressControlForSelf';
 
 import styles from './styles.module.css';
 
 function BillingAddressDetails({
 	policyForSelf = false,
+	formProps = {},
 	billingData = {},
 	setBillingData = () => {},
-	formData = {},
-	setFormData = () => {},
-	insuranceDetails = {},
-	shipmentData = {},
 	prosporerAddress = {},
 	setProsporerAddress = () => {},
 	checked = [],
@@ -35,47 +26,42 @@ function BillingAddressDetails({
 }) {
 	const [showFilters, setshowFilters] = useState(false);
 	const [addAddressModal, setAddAddressModal] = useState(false);
+	const { shipment_data } = useContext(
+		ShipmentDetailContext,
+	);
 
 	const { data, loading: addressLoading } = useListAddressForInsurance({
-		organization_id: shipmentData?.importer_exporter?.id,
+		organization_id: shipment_data?.importer_exporter?.id,
 	});
 
 	const {
-		handleSubmit = () => {},
 		watch,
 		setValue,
 		control,
 		formState: { errors },
-	} = useForm();
-
-	const formValues = watch();
+	} = formProps;
 
 	const pincode = watch('billingPincode');
 
 	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf });
-	const { list } = cityState || {};
-	const { region, city } = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { region, city } = cityState?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	useMemo(() => {
-		if (isEmpty(list)) {
+		if (isEmpty(cityState)) {
 			Toast.error('Invalid Pincode');
 		}
 		if (city || region?.name) {
-			setValue('billingCity', city?.name);
-			setValue('billingState', region?.name);
+			setValue('city', city?.name);
+			setValue('state', region?.name);
 		}
-	}, [city, region?.name]);
-
-	useEffect(() => {
-		setFormData({ ...formData, ...formValues });
-	}, [JSON.stringify(formValues)]);
+	}, [cityState, city, region?.name, setValue]);
 
 	return (
 		<div className={styles.container}>
 			{policyForSelf ? (
 				<div className={styles.popover}>
 					<Layout
-						fields={bilingAddressControl({ insuranceDetails })}
+						fields={bilingAddressControl}
 						control={control}
 						errors={errors}
 					/>
@@ -87,13 +73,13 @@ function BillingAddressDetails({
 							data,
 							checked,
 							setChecked,
-							loading: addressLoading,
+							loading      : addressLoading,
 							setshowFilters,
 							policyForSelf,
 							addAddressModal,
 							setAddAddressModal,
 							setProsporerAddress,
-							shipmentData,
+							shipmentData : shipment_data,
 						})}
 					>
 						<div
@@ -151,7 +137,7 @@ function BillingAddressDetails({
 								))}
 							</div>
 							<Layout
-								fields={bilingAddressControlForSelf({ insuranceDetails })}
+								fields={bilingAddressControlForSelf}
 								control={control}
 								errors={errors}
 							/>

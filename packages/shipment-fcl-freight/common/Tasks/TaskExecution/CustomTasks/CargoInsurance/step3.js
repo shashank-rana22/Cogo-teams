@@ -1,16 +1,16 @@
 import { Button, FileSelect } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useInsuranceCheckoutAndGenerate from '../../../../../hooks/useInsuranceCheckoutAndGenerate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 import useSendShipmentCargoInsuranceEmail from '../../../../../hooks/useSendShipmentCargoInsuranceEmail';
-import { getDate } from '../../../../TimeLine/utils/getDate';
 
+import { invoiceControls } from './controls/invoiceControls';
 import styles from './styles.module.css';
-import { invoiceControls } from './utils/invoiceControls';
+import getPayload from './utils/getPayload';
+import getPayloadForUpdateShipment from './utils/getPayloadForUpdateShipment';
 
 const BACK_STEP = 2;
 
@@ -18,8 +18,7 @@ function Step3({
 	setStep = () => {},
 	step,
 	policyId = '',
-	formData = {},
-	setFormData = () => {},
+	formProps = {},
 	insuranceDetails = {},
 	shipmentData = {},
 	onCancel = () => {},
@@ -31,31 +30,22 @@ function Step3({
 }) {
 	const [uploadProof, setUploadProof] = useState(null);
 
-	const policyDetails = shipmentData?.all_services?.find(
-		(item) => item?.service_type === 'cargo_insurance_service',
-	);
-
 	const {
 		handleSubmit = () => {},
-		watch,
 		control,
 		formState: { errors },
-	} = useForm();
-
-	const formValues = watch();
-	const INVOICE_DATE = getDate(insuranceDetails?.invoiceDate);
+		getValues,
+	} = formProps;
 
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
-		policyId,
-		setStep,
 		step,
-		insuranceDetails : { ...insuranceDetails, ...formData },
-		addressId,
-		policyForSelf    : insuranceDetails?.policyForSelf,
-		billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
-		billingData,
 	});
+
+	const refetchAfterApiCall = () => {
+		refetch();
+		onCancel();
+	};
 
 	const { loading: sendCustomerEmailLoading, sendCustomerEmail } = useSendShipmentCargoInsuranceEmail({
 		shipmentData,
@@ -65,14 +55,13 @@ function Step3({
 		policyId,
 		uploadProof,
 		insuranceDetails,
-		onCancel,
-		refetch,
-		formData,
+		refetch: refetchAfterApiCall,
 		shipmentData,
 		primary_service,
 		task,
 	});
 
+	const formData = getValues();
 	const showLoading =	loading || sendCustomerEmailLoading || policyGenerationLoading;
 
 	const isDisableForCustomerConfirmation = () => (
@@ -83,23 +72,31 @@ function Step3({
 			|| isEmpty(formData.invoiceDoc)
 			|| isEmpty(formData.panDoc)
 	);
-	// console.log(
-	// 	showLoading,
-	// 	' : ',
-	// 	formValues,
-	// 	' : ',
-	// 	policyGenerationLoading,
-	// );
 
-	useEffect(() => {
-		setFormData({ ...formData, ...formValues });
-	}, [JSON.stringify(formValues)]);
+	const handleNextStep = ({ submit = false }) => {
+		const newFormValues = { ...insuranceDetails, ...getValues() };
+		const payload = getPayload({
+			policyId,
+			insuranceDetails : newFormValues,
+			billingData,
+			policyForSelf    : insuranceDetails?.policyForSelf,
+			addressId,
+			billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
+		});
+		const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
+
+		if (submit) {
+			generateInsurance({ payload, payloadForUpdateShipment });
+		} else {
+			saveData({ payload });
+		}
+	};
 
 	return (
 		<div className={styles.container}>
 			<Layout
 				control={control}
-				fields={invoiceControls({ insuranceDetails, policyDetails, INVOICE_DATE })}
+				fields={invoiceControls}
 				errors={errors}
 			/>
 
@@ -136,7 +133,7 @@ function Step3({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(saveData)}
+					onClick={handleSubmit(handleNextStep)}
 					disabled={showLoading}
 					style={{ marginLeft: '16px' }}
 				>
@@ -146,7 +143,7 @@ function Step3({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(generateInsurance)}
+					onClick={() => handleSubmit(handleNextStep({ submit: true }))}
 					disabled={showLoading || isEmpty(uploadProof)}
 					style={{ marginLeft: '16px' }}
 				>

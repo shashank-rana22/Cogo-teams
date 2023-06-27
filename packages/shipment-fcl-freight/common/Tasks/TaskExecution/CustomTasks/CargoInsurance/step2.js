@@ -1,15 +1,14 @@
 import { Button, cl } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useEffect } from 'react';
 
 import useGetInsuranceRate from '../../../../../hooks/useGetInsuranceRate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 
-import mutatedFields from './mutateFields';
+import { cargoControls } from './controls/cargoControls';
 import PremiumRate from './PremiumRate';
 import styles from './styles.module.css';
-import { cargoControls } from './utils/cargoControls';
+import getPayload from './utils/getPayload';
+import mutatedFields from './utils/mutateFields';
 
 const BACK_STEP = 1;
 const LAST_STEP = 3;
@@ -18,25 +17,21 @@ const INCREMENT_FACTOR = 1;
 function Step2({
 	setStep = () => {},
 	step,
-	formData = {},
-	setFormData = () => {},
 	insuranceDetails = {},
 	shipmentData = {},
 	policyId = '',
 	addressId = '',
 	billingData = {},
+	formProps = {},
 }) {
-	const policyDetails = shipmentData?.all_services?.find(
-		(item) => item?.service_type === 'cargo_insurance_service',
-	);
-
 	const {
 		handleSubmit = () => {},
 		watch,
 		setValue,
 		control,
+		getValues,
 		formState: { errors },
-	} = useForm();
+	} = formProps;
 
 	const formValues = watch();
 
@@ -53,14 +48,7 @@ function Step2({
 
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
-		policyId,
 		step,
-		premiumData,
-		insuranceDetails : { ...insuranceDetails, ...formData },
-		addressId,
-		policyForSelf    : insuranceDetails?.policyForSelf,
-		billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
-		billingData,
 		refetch,
 	});
 
@@ -71,13 +59,19 @@ function Step2({
 		watch,
 	});
 
-	const handleNextStep = () => {
-		saveData('next_step');
+	const handleNextStep = (key) => {
+		const newFormValues = { ...insuranceDetails, ...getValues() };
+		const payload = getPayload({
+			policyId,
+			insuranceDetails : newFormValues,
+			billingData,
+			policyForSelf    : insuranceDetails?.policyForSelf,
+			addressId,
+			premiumData,
+			billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
+		});
+		saveData({ key, payload });
 	};
-
-	useEffect(() => {
-		setFormData({ ...formData, ...formValues });
-	}, [JSON.stringify(formValues)]);
 
 	return (
 		<div className={styles.container}>
@@ -111,7 +105,7 @@ function Step2({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(saveData)}
+					onClick={handleSubmit(handleNextStep)}
 					disabled={loading}
 					style={{ marginLeft: '16px' }}
 				>
@@ -121,7 +115,7 @@ function Step2({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(handleNextStep)}
+					onClick={() => handleSubmit(handleNextStep('next_step'))}
 					disabled={loading}
 					style={{ marginLeft: '16px' }}
 				>

@@ -52,7 +52,7 @@ function Addres({
 
 			{loading ? (
 				<div>
-					{/* {[...Array(CARD_LENGTH)]?.map(() => (
+					{[...Array(CARD_LENGTH)]?.map(() => (
 						<div className={styles.card} key={uuid()}>
 							<div className={styles.section}>
 								<Placeholder className="checkboxPlaceholder" />
@@ -66,8 +66,7 @@ function Addres({
 								</div>
 							</div>
 						</div>
-					))} */}
-					hii
+					))}
 				</div>
 			) : (
 				<div className={styles.address_container}>
@@ -87,6 +86,7 @@ function Addres({
 								organization_pocs = [],
 								address,
 							} = item;
+							const organization_poc_at_zeroth_index = organization_pocs[GLOBAL_CONSTANTS.zeroth_index];
 
 							return (
 								<div className={styles.card} key={item.id} role="presentation">
@@ -111,10 +111,14 @@ function Addres({
 										<div className={styles.card_txt}>{`${address} - ${pincode}`}</div>
 
 										<div className="number">
-											{organization_pocs[GLOBAL_CONSTANTS.zeroth_index]?.mobile_country_code
-											&& organization_pocs[GLOBAL_CONSTANTS.zeroth_index]?.mobile_number ? (
+											{organization_poc_at_zeroth_index?.mobile_country_code
+											&& organization_poc_at_zeroth_index?.mobile_number ? (
 												<div className={styles.card_txt}>
-													{`${organization_pocs[GLOBAL_CONSTANTS.zeroth_index]?.mobile_country_code} ${organization_pocs[GLOBAL_CONSTANTS.zeroth_index]?.mobile_number}`}
+													{
+													`${organization_poc_at_zeroth_index?.mobile_country_code} `
+													+ `${organization_poc_at_zeroth_index?.mobile_number}`
+}
+
 												</div>
 												) : null}
 

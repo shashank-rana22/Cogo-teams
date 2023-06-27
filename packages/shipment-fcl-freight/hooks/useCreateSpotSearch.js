@@ -19,9 +19,9 @@ const useCreateSpotSearch = ({
 	const { id: userId } = user || {};
 	const router = useRouter();
 
-	const { user_id, importer_exporter_id, importer_exporter_branch_id, id } =	shipmentData || {};
+	const { importer_exporter_id, importer_exporter_branch_id, id } =	shipmentData || {};
 
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/create_spot_search',
 		method : 'POST',
 	}, { manual: true });
@@ -59,7 +59,9 @@ const useCreateSpotSearch = ({
 			});
 			Toast.success(successMessage);
 			refetch();
-			const href = `${window.location.origin}/${router?.query?.partner_id}/book/${res?.data?.id}/${importer_exporter_id}`;
+			const ORIGIN = window.location.origin;
+			const PARTNER_ID = router?.query?.partner_id;
+			const href = `${ORIGIN}/${PARTNER_ID}/book/${res?.data?.id}/${importer_exporter_id}`;
 			window.location.href = href;
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));

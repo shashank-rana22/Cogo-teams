@@ -1,5 +1,4 @@
 import { Button, Toggle, Toast, cl } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
@@ -9,10 +8,9 @@ import useGetStateFromPincode from '../../../../../hooks/useGetStateFromPincode'
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 
 import BillingAddressDetails from './BillingAddressDetails';
+import { personalDetailsControl } from './controls/personalDetailsControl';
 import styles from './styles.module.css';
-import { bilingAddressControl } from './utils/bilingAddressControl';
-import { bilingAddressControlForSelf } from './utils/bilingAddressControlForSelf';
-import { personalDetailsControl } from './utils/personalDetailsControl';
+import getPayload from './utils/getPayload';
 
 const LAST_STEP = 3;
 const INCREMENT_FACTOR = 1;
@@ -20,8 +18,6 @@ const INCREMENT_FACTOR = 1;
 function Step1({
 	setStep = () => {},
 	step,
-	formData = {},
-	setFormData = () => {},
 	insuranceDetails = {},
 	shipmentData = {},
 	policyId = '',
@@ -29,6 +25,7 @@ function Step1({
 	setAddressId = () => {},
 	billingData = {},
 	setBillingData = () => {},
+	formProps = {},
 }) {
 	const [policyForSelf, setPolicyForSelf] = useState(
 		insuranceDetails?.policyForSelf,
@@ -43,52 +40,44 @@ function Step1({
 	};
 	const { loading, saveData } = useSaveDraft({
 		shipmentData,
-		policyId,
-		step,
-		insuranceDetails: { ...insuranceDetails, ...formData },
-		billingData,
-		policyForSelf,
-		addressId,
 		refetch,
 	});
-
-	const formProps = useForm([
-		...personalDetailsControl({ insuranceDetails }),
-		...bilingAddressControl({ insuranceDetails }),
-		...bilingAddressControlForSelf({ insuranceDetails }),
-	]);
 
 	const {
 		handleSubmit = () => {},
 		watch,
 		setValue,
 		control,
+		getValues,
 		formState: { errors },
-	} = useForm();
+	} = formProps;
 
-	const formValues = watch();
 	const pincode = watch('billingPincode');
 
 	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf });
-	const { list } = cityState || {};
-	const { region, city } = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { region, city } = cityState?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	useMemo(() => {
-		if (isEmpty(list)) {
+		if (isEmpty(cityState)) {
 			Toast.error('Invalid Pincode');
 		}
 		if (city || region?.name) {
 			setValue('city', city?.name);
 			setValue('state', region?.name);
 		}
-	}, [list, city, region?.name, setValue]);
+	}, [cityState, city, region?.name, setValue]);
 
-	useEffect(() => {
-		setFormData({ ...formData, ...formValues });
-	}, [JSON.stringify(formValues)]);
-
-	const handleNextStep = () => {
-		saveData('next_step');
+	const handleNextStep = (key) => {
+		const newFormValues = { ...insuranceDetails, ...getValues() };
+		const payload = getPayload({
+			policyId,
+			step,
+			insuranceDetails: newFormValues,
+			billingData,
+			policyForSelf,
+			addressId,
+		});
+		saveData({ key, payload });
 	};
 
 	useEffect(() => {
@@ -105,15 +94,16 @@ function Step1({
 					: { organizationAddressId: billingData?.billingId },
 			);
 		}
-	}, [billingData, prosporerAddress]);
+	}, [billingData, prosporerAddress, policyForSelf, setAddressId]);
 
 	return (
 		<div className={styles.container}>
 			<Layout
-				fields={personalDetailsControl({ insuranceDetails })}
+				fields={personalDetailsControl}
 				control={control}
 				errors={errors}
 			/>
+
 			<div className={styles.sub_header}>
 				<div className={cl`${styles.flex_row} ${styles.label}`}>
 					<div className={styles.label_val}>Billing Address Details</div>
@@ -131,10 +121,6 @@ function Step1({
 				formProps={formProps}
 				billingData={billingData}
 				setBillingData={setBillingData}
-				formData={formData}
-				setFormData={setFormData}
-				insuranceDetails={insuranceDetails}
-				shipmentData={shipmentData}
 				prosporerAddress={prosporerAddress}
 				setProsporerAddress={setProsporerAddress}
 				checked={checked}
@@ -145,7 +131,7 @@ function Step1({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={handleSubmit(saveData)}
+					onClick={handleSubmit(handleNextStep)}
 					disabled={loading}
 				>
 					Save As Draft
@@ -154,7 +140,7 @@ function Step1({
 					size="md"
 					themeType="primary"
 					onClick={
-						handleSubmit(handleNextStep)
+						() => handleSubmit(handleNextStep('next_step'))
 					}
 					disabled={
 						policyForSelf || loading

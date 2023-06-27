@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { useForm } from '@cogoport/forms';
 import React, { useState, useContext } from 'react';
 
 import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDraftDetails';
@@ -6,6 +7,7 @@ import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDra
 import Step1 from './step1';
 import Step2 from './step2';
 import Step3 from './step3';
+import getDefaultValues from './utils/getDefaultValues';
 
 const DEFAULT_STEP = 1;
 const FIRST_STEP = 1;
@@ -17,7 +19,6 @@ function CargoInsurance({
 	task = {},
 }) {
 	const [step, setStep] = useState(DEFAULT_STEP);
-	const [formData, setFormData] = useState({});
 	const [addressId, setAddressId] = useState('');
 
 	const { shipment_data, primary_service } = useContext(
@@ -33,6 +34,7 @@ function CargoInsurance({
 		policyId,
 		setAddressId,
 	});
+
 	const [billingData, setBillingData] = useState({
 		address_type: '',
 		billingId:
@@ -46,21 +48,24 @@ function CargoInsurance({
 		partyName      : insuranceDetails?.partyName,
 	});
 
+	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data });
+
+	const formProps = useForm({ values: defaultValues });
+
 	if (step === FIRST_STEP) {
 		return (
 			<Step1
 				setStep={setStep}
 				step={step}
-				formData={formData}
-				setFormData={setFormData}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
 				policyId={policyId}
-				key={JSON.stringify(insuranceDetails)}
+				// key={JSON.stringify(insuranceDetails)}
 				addressId={addressId}
 				setAddressId={setAddressId}
 				billingData={billingData}
 				setBillingData={setBillingData}
+				formProps={formProps}
 			/>
 		);
 	}
@@ -70,14 +75,13 @@ function CargoInsurance({
 			<Step2
 				setStep={setStep}
 				step={step}
-				formData={formData}
-				setFormData={setFormData}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
 				policyId={policyId}
-				key={`${JSON.stringify(insuranceDetails)} ${step}`}
+				// key={`${JSON.stringify(insuranceDetails)} ${step}`}
 				addressId={addressId}
 				billingData={billingData}
+				formProps={formProps}
 			/>
 		);
 	}
@@ -86,8 +90,6 @@ function CargoInsurance({
 		<Step3
 			setStep={setStep}
 			step={step}
-			formData={formData}
-			setFormData={setFormData}
 			insuranceDetails={insuranceDetails}
 			shipmentData={shipment_data}
 			policyId={policyId}
@@ -95,9 +97,10 @@ function CargoInsurance({
 			refetch={refetch}
 			primary_service={primary_service}
 			task={task}
-			key={JSON.stringify(insuranceDetails)}
+			// key={JSON.stringify(insuranceDetails)}
 			addressId={addressId}
 			billingData={billingData}
+			formProps={formProps}
 		/>
 	);
 }

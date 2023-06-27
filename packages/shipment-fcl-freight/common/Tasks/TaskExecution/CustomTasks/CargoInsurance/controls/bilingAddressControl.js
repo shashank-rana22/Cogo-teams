@@ -1,6 +1,6 @@
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
-export const bilingAddressControl = ({ insuranceDetails = {} }) => [
+export const bilingAddressControl = [
 	{
 		label       : 'GST',
 		name        : 'gstin',
@@ -8,7 +8,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		placeholder : 'Enter GST Number',
 		showLabel   : false,
 		span        : 3,
-		value       : insuranceDetails?.gstin,
 		rules       : {
 			pattern: {
 				value   : formValuePatterns.GST_NUMBER,
@@ -24,7 +23,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		type        : 'text',
 		span        : 3,
 		height      : 25,
-		value       : insuranceDetails?.partyName,
 		rules       : { required: { value: true, message: 'Billing Name is required' } },
 	},
 	{
@@ -36,7 +34,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		span        : 3,
 		height      : 25,
 		className   : 'primary md',
-		value       : insuranceDetails?.billingAddress,
 		style       : {
 			resize: 'vertical',
 		},
@@ -45,7 +42,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		label       : 'Pincode',
 		name        : 'billingPincode',
 		type        : 'text',
-		value       : insuranceDetails?.billingPincode,
 		placeholder : 'Enter Pincode',
 		rules       : { required: 'required *' },
 		span        : 3,
@@ -54,7 +50,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		label    : 'City',
 		name     : 'billingCity',
 		type     : 'text',
-		value    : insuranceDetails?.billingCity,
 		span     : 3,
 		disabled : true,
 	},
@@ -62,7 +57,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		label    : 'State',
 		name     : 'billingState',
 		type     : 'text',
-		value    : insuranceDetails?.billingState,
 		span     : 3,
 		disabled : true,
 	},
@@ -73,7 +67,6 @@ export const bilingAddressControl = ({ insuranceDetails = {} }) => [
 		placeholder : 'Enter PAN Number',
 		showLabel   : false,
 		span        : 3,
-		value       : insuranceDetails?.panNumber,
 		rules       : {
 			pattern: {
 				value   : formValuePatterns.PAN_NUMBER,
