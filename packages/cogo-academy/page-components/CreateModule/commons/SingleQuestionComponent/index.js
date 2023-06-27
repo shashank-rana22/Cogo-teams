@@ -60,10 +60,10 @@ function SingleQuestionComponent({
 	});
 
 	const questionText = questionTypeWatch === 'case_study'
-		? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0;
+		? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0 || {};
 
 	const error = questionTypeWatch === 'case_study'
-		? questionError[`case_questions_${index}`] : questionError.question_0;
+		? questionError[`case_questions_${index}`] : questionError.question_0 || false;
 
 	return (
 		<div className={styles.container}>
