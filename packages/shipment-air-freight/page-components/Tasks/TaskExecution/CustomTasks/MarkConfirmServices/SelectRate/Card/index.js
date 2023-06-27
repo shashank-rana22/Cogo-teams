@@ -76,95 +76,97 @@ function Card({
 			</div>
 
 			<div className={styles.body}>
-				{(dataArr || []).map((dataObj, index) => (
-					<div className={styles.space_between} key={keysForArr[index]}>
-						<div>
-							<div className={styles.heading}>Supplier Name</div>
-							<Tooltip
-								content={dataObj?.service_provider?.business_name}
-								placement="top"
-							>
-								<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-									{dataObj?.service_provider?.business_name}
-								</div>
-							</Tooltip>
-						</div>
-						<div>
-							<div className={styles.heading}>Airline</div>
-							<div className={styles.sub_heading}>
-								{item?.source === 'system_rate'
-									? dataObj?.airline?.business_name || '-'
-									: dataObj?.reverted_airline?.business_name || '-'}
+				{(dataArr || []).map((dataObj, index) => {
+					const { hs_code, commodity_description } = dataObj?.service || {};
+					return (
+						<div className={styles.space_between} key={keysForArr[index]}>
+							<div>
+								<div className={styles.heading}>Supplier Name</div>
+								<Tooltip
+									content={dataObj?.service_provider?.business_name}
+									placement="top"
+								>
+									<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+										{dataObj?.service_provider?.business_name}
+									</div>
+								</Tooltip>
 							</div>
-						</div>
-						{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
-							<>
-								<div>
-									<div className={styles.heading}>Chargeable Wt.</div>
-									<div className={styles.sub_heading}>
-										{`${
-											dataObj?.data?.chargeable_weight
+							<div>
+								<div className={styles.heading}>Airline</div>
+								<div className={styles.sub_heading}>
+									{item?.source === 'system_rate'
+										? dataObj?.airline?.business_name || '-'
+										: dataObj?.reverted_airline?.business_name || '-'}
+								</div>
+							</div>
+							{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+								<>
+									<div>
+										<div className={styles.heading}>Chargeable Wt.</div>
+										<div className={styles.sub_heading}>
+											{`${
+												dataObj?.data?.chargeable_weight
 													|| dataObj?.service?.chargeable_weight
 													|| '--'
-										} Kg`}
+											} Kg`}
+										</div>
 									</div>
-								</div>
-								{dataObj?.service?.commodity_description && (
+									{commodity_description && (
+										<div>
+											<div className={styles.heading}>Commodity Desc.</div>
+											<Tooltip
+												content={commodity_description}
+												placement="top"
+											>
+												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+													{commodity_description}
+												</div>
+											</Tooltip>
+										</div>
+									)}
+									{hs_code &&	(
+										<div>
+											<div className={styles.heading}>HS Code</div>
+											<Tooltip
+												content={hs_code}
+												placement="top"
+											>
+												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+													{hs_code}
+												</div>
+											</Tooltip>
+										</div>
+									)}
 									<div>
-										<div className={styles.heading}>Commodity Desc.</div>
-										<Tooltip
-											content={dataObj?.service?.commodity_description}
-											placement="top"
-										>
-											<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-												{dataObj?.service?.commodity_description}
-											</div>
-										</Tooltip>
+										<div className={styles.heading}>Price Type</div>
+										<div className={styles.sub_heading}>
+											{startCase(dataObj?.data?.price_type) || '--'}
+										</div>
 									</div>
-								)}
-								{dataObj?.service?.hs_code &&	(
 									<div>
-										<div className={styles.heading}>HS Code</div>
-										<Tooltip
-											content={dataObj?.service?.hs_code}
-											placement="top"
-										>
-											<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-												{dataObj?.service?.hs_code}
-											</div>
-										</Tooltip>
+										<div className={styles.heading}>Min. Price</div>
+										<div className={styles.sub_heading}>
+											{dataObj?.service?.is_minimum_price_shipment
+												? 'Yes'
+												: 'No'}
+										</div>
 									</div>
-								)}
-								<div>
-									<div className={styles.heading}>Price Type</div>
-									<div className={styles.sub_heading}>
-										{startCase(dataObj?.data?.price_type) || '--'}
-									</div>
-								</div>
-								<div>
-									<div className={styles.heading}>Min. Price</div>
-									<div className={styles.sub_heading}>
-										{dataObj?.service?.is_minimum_price_shipment
-											? 'Yes'
-											: 'No'}
-									</div>
-								</div>
-							</>
-						)}
+								</>
+							)}
 
-						<div>
-							<div className={styles.heading}>Source of Rate</div>
+							<div>
+								<div className={styles.heading}>Source of Rate</div>
 
-							<div className={styles.sub_heading}>{startCase(item?.source)}</div>
-						</div>
+								<div className={styles.sub_heading}>{startCase(item?.source)}</div>
+							</div>
 
-						<div>
-							<div className={styles.heading}>Buy Rate</div>
+							<div>
+								<div className={styles.heading}>Buy Rate</div>
 
-							<div className={styles.sub_heading}>{getBuyPrice(dataObj, item.source)}</div>
-						</div>
+								<div className={styles.sub_heading}>{getBuyPrice(dataObj, item.source)}</div>
+							</div>
 
-						{dataObj?.data?.rate_procurement_proof_url
+							{dataObj?.data?.rate_procurement_proof_url
 						&& item?.source === 'flash_booking' && (
 							<div>
 								<div className={styles.heading}>Rate Procurement Proof</div>
@@ -181,11 +183,12 @@ function Card({
 									</Button>
 								</div>
 							</div>
-						)}
+							)}
 
-					</div>
+						</div>
 
-				))}
+					);
+				})}
 
 				<div className={styles.button_wrap}>
 					<Button
