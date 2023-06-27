@@ -44,17 +44,19 @@ export const LIST_CONFIG = {
 			span  : 1.5,
 		},
 		{
-			label : 'Created On',
-			key   : 'CreatedOn',
-			func  : 'renderCreatedOn',
-			span  : 1.5,
+			label   : 'Created On',
+			key     : 'CreatedOn',
+			func    : 'renderCreatedOn',
+			sorting : { name: 'createdAt' },
+			span    : 1.5,
 		},
 
 		{
-			label : 'Last Edited On',
-			key   : 'LastEditedOn',
-			func  : 'renderUpdatedAt',
-			span  : 1.5,
+			label   : 'Last Edited On',
+			key     : 'LastEditedOn',
+			func    : 'renderUpdatedAt',
+			sorting : { name: 'updatedAt' },
+			span    : 1.5,
 		},
 		{
 			label : 'Status',

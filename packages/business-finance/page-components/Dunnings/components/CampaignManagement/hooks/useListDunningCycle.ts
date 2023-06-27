@@ -12,10 +12,13 @@ interface GlobalFilters {
 interface Props {
 	globalFilters?: GlobalFilters;
 	setGlobalFilters?: Function;
+	sort?: object;
 }
 
-function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
+function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 	const { search, page, cycleStatus, dunningCycleType, frequency } = globalFilters || {};
+	const [sortBy] = Object.keys(sort);
+	const [sortType] = Object.values(sort);
 
 	const [
 		{ data, loading },
@@ -44,18 +47,22 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
 					cycleStatus      : cycleStatus || undefined,
 					dunningCycleType : dunningCycleType || undefined,
 					frequency        : frequency || undefined,
+					sortBy,
+					sortType,
 					pageIndex        : page,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency]);
+	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency, sortBy, sortType]);
 
 	useEffect(() => {
 		getDunningList();
 	}, [query, page, cycleStatus,
-		dunningCycleType, getDunningList]);
+		dunningCycleType, getDunningList,
+		sortType, sortBy,
+	]);
 
 	return {
 		data,

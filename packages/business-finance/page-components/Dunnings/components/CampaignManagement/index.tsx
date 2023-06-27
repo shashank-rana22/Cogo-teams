@@ -38,8 +38,9 @@ function CampaignManagement() {
 		action  : '',
 		rowData : null,
 	});
+	const [sort, setSort] = useState({});
 
-	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters });
+	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters, sort });
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
 
@@ -162,6 +163,8 @@ function CampaignManagement() {
 					itemData={data}
 					loading={loading}
 					functions={functions()}
+					sort={sort}
+					setSort={setSort}
 					page={globalFilters.page || 1}
 					pageSize={DEFAULT_PAGE_SIZE}
 					handlePageChange={(pageValue:number) => {
