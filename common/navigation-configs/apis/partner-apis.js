@@ -10975,6 +10975,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_cogopoint_top_history',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_liability_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+
 	],
 	air_revenue_desk: [
 		{
