@@ -48,7 +48,7 @@ function UploadForm({
 					<div
 						role="button"
 						tabIndex={0}
-						className={styles.Choose_from_wallet}
+						className={styles.choose_from_wallet}
 						onClick={() => setShowDoc({ ...showDoc, type: 'wallet' })}
 					>
 						<IcMPdf height={30} width={30} />

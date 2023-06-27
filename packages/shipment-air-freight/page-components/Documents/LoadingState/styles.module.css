@@ -1,9 +1,9 @@
 .main {
 	display: flex;
-	gap: 12px;
 	width: 100%;
+	margin: 0 8px;
 	font-weight: 500;
-	color: #393f70;
+	color: var(--color-secondary);
 }
 
 .sub_container {
@@ -13,8 +13,8 @@
 .gap {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 	width: 100%;
+	margin: 0 4px;
 }
 
 .loader {
@@ -24,13 +24,12 @@
 .heading {
 	font-weight: 500;
 	line-height: 18px;
-	color: #393f70;
+	color: var(--color-secondary);
 }
 
 .single_item {
 	position: relative;
 	display: flex;
-	gap: 16px;
 	align-items: center;
 	padding: 4px 16px 6px;
 	margin: 16px 0 8px;

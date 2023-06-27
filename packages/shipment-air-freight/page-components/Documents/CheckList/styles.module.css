@@ -9,16 +9,11 @@
 	padding: 12px 24px;
 	font-size: 10px;
 	font-weight: 400;
-	color: #828282;
+	color: var(--color-secondary-3);
 	border-bottom: none;
 
 	&:hover {
 		cursor: pointer;
-		background: #f2f2f291;
+		background: var(--color-tertiary-beige-2);
 	}
-}
-
-.action_wrapper {
-	padding: 4px;
-	margin: -6px -8px;
 }

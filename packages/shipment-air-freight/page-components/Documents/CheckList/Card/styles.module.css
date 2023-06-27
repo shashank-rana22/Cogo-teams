@@ -8,7 +8,6 @@
 	display: flex;
 	align-items: center;
 	width: 80%;
-	font-size: 14px;
 	font-weight: 500;
 
 	& > div {
@@ -22,7 +21,7 @@
 	margin-right: 10px;
 	font-size: 10px;
 	white-space: nowrap;
-	background: #f2f4f7;
+	background: var(--color-secondary-4);
 	border-radius: 12px;
 }
 
@@ -31,17 +30,17 @@
 	padding: 4px 12px;
 	margin-right: 10px;
 	font-size: 10px;
-	background: #f2f4f7;
+	background: var(--color-secondary-4);
 	border-radius: 12px;
 
 	&.accepted {
-		color: #027a48;
-		background: #ecfdf3;
+		color: var(--color-tertiary-success-green-1);
+		background: var(--color-tertiary-success-green-5);
 	}
 
 	&.pending {
-		color: #c4320a;
-		background: #fff6ed;
+		color: var(--color-primary-error-red-2);
+		background: var(--color-primary-error-red-5);
 	}
 }
 
@@ -49,8 +48,8 @@
 	display: flex;
 
 	.ui_pill_container {
-		background: #f2f4f7;
-		background-color: #f2f4f7;
+		background: var(--color-secondary-4);
+		background-color: var(--color-secondary-4);
 		border-radius: 16px;
 	}
 }
@@ -60,7 +59,7 @@
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 600;
-	color: #221f20;
+	color: var(--color-secondary-greyscale-2);
 }
 
 .dots {
@@ -87,7 +86,7 @@
 	width: 100%;
 	padding: 10px 16px;
 	margin-bottom: 16px;
-	border: 1px solid #ececec;
+	border: 1px solid var(--color-secondary-4);
 	border-radius: 4px;
 }
 
@@ -98,7 +97,7 @@
 	width: 100%;
 	padding: 10px 16px;
 	margin-bottom: 16px;
-	border: 1px solid #ececec;
+	border: 1px solid var(--color-secondary-4);
 	border-radius: 4px;
 }
 
@@ -106,9 +105,9 @@
 	gap: 4px;
 	font-size: 10px;
 	font-weight: 400;
-	color: #bf291e;
+	color: var(--color-primary-error-red-2);
 }
 
 .hold_document {
-	color: #bf291e;
+	color: var(--color-primary-error-red-2);
 }

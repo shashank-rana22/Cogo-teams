@@ -55,7 +55,7 @@ function UploadDocument({
 						/>
 
 						{errors?.document_type ? (
-							<div style={{ fontSize: '12px', color: '#cb6464' }}>
+							<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
 								{handleError({ error: errors?.document_type })}
 							</div>
 						) : null}
@@ -75,7 +75,7 @@ function UploadDocument({
 						/>
 
 						{errors?.upload_document ? (
-							<div style={{ fontSize: '12px', color: '#cb6464' }}>
+							<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
 								{handleError({ error: errors?.upload_document })}
 							</div>
 						) : null}
@@ -103,7 +103,7 @@ function UploadDocument({
 							/>
 
 							{errors?.organizations ? (
-								<div style={{ fontSize: '12px', color: '#cb6464' }}>
+								<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
 									{handleError({ error: errors?.organizations })}
 								</div>
 							) : null}

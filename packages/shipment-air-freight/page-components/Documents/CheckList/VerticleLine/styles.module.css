@@ -15,12 +15,12 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #dfe1ef;
+	background: var(--color-secondary-3);
 	border-radius: 50%;
 
 	> svg {
 		font-size: 16px;
-		color: #fff;
+		color: var(--color-secondary-5);
 	}
 }
 
@@ -32,14 +32,13 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #5936f0;
 	background: var(--color-accent-orange-2);
 	border-radius: 50%;
 }
 
 .line {
 	height: 50px;
-	border: 1px dashed #dfe1ef;
+	border: 1px dashed var(--color-secondary-3);
 	transform: translateY(22px);
 }
 

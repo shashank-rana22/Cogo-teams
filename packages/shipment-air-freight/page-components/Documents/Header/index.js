@@ -78,7 +78,7 @@ function Header({
 					onLabel="Wallet"
 					value={activeToggle}
 					className={styles.custom_toggle}
-					onChange={() => setActiveToggle((p) => !p)}
+					onChange={() => setActiveToggle((prev) => !prev)}
 				/>
 			</div>
 
