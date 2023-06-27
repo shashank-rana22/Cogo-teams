@@ -17,26 +17,9 @@ import EmptyState from './EmptyState';
 import Loading from './Loading';
 import PremiumRate from './PremiumRate';
 import styles from './styles.module.css';
-
-const LABEL_MAPPING = {
-	export   : 'Destination Location',
-	import   : 'Origin Location',
-	domestic : 'Select Country',
-};
-
-const TRANSIT_MODE_MAPPING = {
-	fcl_freight : 'SEA',
-	lcl_freight : 'SEA',
-	air_freight : 'AIR',
-	ftl_freight : 'ROAD',
-	ltl_freight : 'ROAD',
-};
-
-const POLICY_TYPE_MAPPING = {
-	export   : 'EXPORT',
-	import   : 'IMPORT',
-	domestic : 'INLAND',
-};
+import LABEL_MAPPING from './utils/labelMapping';
+import POLICY_TYPE_MAPPING from './utils/policyTypeMapping';
+import TRANSIT_MODE_MAPPING from './utils/transitModeMapping';
 
 function CargoInsurance({
 	setAddCargoInsurance = () => {},
@@ -156,17 +139,17 @@ function CargoInsurance({
 		return <Loading />;
 	}
 
-	// if (
-	// 	![origin_country_id, destination_country_id].includes(
-	// 		GLOBAL_CONSTANTS.country_entity_ids.IN,
-	// 	)
-	// ) {
-	// 	return <EmptyState reason="non_indian_search" />;
-	// }
+	if (
+		![origin_country_id, destination_country_id].includes(
+			GLOBAL_CONSTANTS.country_entity_ids.IN,
+		)
+	) {
+		return <EmptyState reason="non_indian_search" />;
+	}
 
-	// if (!isEligible) {
-	// 	return <EmptyState reason="blocked_country" />;
-	// }
+	if (!isEligible) {
+		return <EmptyState reason="blocked_country" />;
+	}
 
 	return (
 		<Modal

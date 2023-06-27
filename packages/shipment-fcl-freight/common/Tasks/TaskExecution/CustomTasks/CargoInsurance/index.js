@@ -21,7 +21,7 @@ function CargoInsurance({
 	const [step, setStep] = useState(DEFAULT_STEP);
 	const [addressId, setAddressId] = useState('');
 
-	const { shipment_data, primary_service } = useContext(
+	const { shipment_data, primary_service, servicesList } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -48,7 +48,7 @@ function CargoInsurance({
 		partyName      : insuranceDetails?.partyName,
 	});
 
-	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data });
+	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data, primary_service, servicesList });
 
 	const formProps = useForm({ values: defaultValues });
 
