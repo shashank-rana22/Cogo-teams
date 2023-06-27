@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetTicketStats = () => {
-	const { profile:{ user:{ id } } } = useSelector((state) => state);
+	const { profile:{ user:{ id = '' } } } = useSelector((state) => state);
 
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/stats',
