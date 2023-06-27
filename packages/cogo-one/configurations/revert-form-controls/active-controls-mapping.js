@@ -1,6 +1,6 @@
 export const SERVICE_CONTROLS_MAPPING = {
 	fcl_freight_service: ['sourced_by_id', 'shipping_line_id', 'validity_end', 'remarks', 'currency', 'price',
-		'supplier_contract_no'],
+		'supplier_contract_no', 'schedule_type'],
 	lcl_freight_service: ['sourced_by_id', 'validity_end',
 		'remarks', 'currency', 'price', 'supplier_contract_no'],
 	air_freight_service: [

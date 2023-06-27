@@ -18,19 +18,6 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 
 	const controls = [
 		{
-			name    : 'schedule_type',
-			label   : 'Schedule Type',
-			type    : 'select',
-			value   : 'direct',
-			options : [
-				{ label: 'Transhipment', value: 'transhipment' },
-				{ label: 'Direct', value: 'direct' },
-			],
-			placeholder : 'Select Schedule Type',
-			rules       : { required: true },
-
-		},
-		{
 			label       : 'Rate Provided by user',
 			name        : 'sourced_by_id',
 			placeholder : 'Search via name',
@@ -62,6 +49,19 @@ const useGetRevertFormControls = ({ data, chargeableWeight }) => {
 				sort_type  : 'asc',
 			},
 			initialCall: true,
+		},
+		{
+			label       : 'Schedule Type',
+			name        : 'schedule_type',
+			controlType : 'select',
+			options     : [
+				{ label: 'Transhipment', value: 'transhipment' },
+				{ label: 'Direct', value: 'direct' },
+			],
+			value       : 'direct',
+			placeholder : 'Select Schedule Type',
+			rules       : { required: true },
+
 		},
 		{
 			name        : 'airline_id',

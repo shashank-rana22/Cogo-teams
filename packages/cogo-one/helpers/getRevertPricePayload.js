@@ -4,7 +4,13 @@ const getWeightSlabs = ({ values }) => {
 	const { price = 0, currency = '', weight_slabs = [] } = values || {};
 	const { lower_limit = '', upper_limit = '' } = weight_slabs[GLOBAL_CONSTANTS.zeroth_index];
 
-	return [{ currency, tariff_price: price, unit: 'per_kg', lower_limit, upper_limit }];
+	return [{
+		currency,
+		tariff_price : Number(price),
+		unit         : 'per_kg',
+		lower_limit  : Number(lower_limit),
+		upper_limit  : Number(upper_limit),
+	}];
 };
 
 const getAirServicePayload = ({ values }) => {
@@ -22,7 +28,8 @@ const getAirServicePayload = ({ values }) => {
 };
 
 const getFclServicePayload = ({ values }) => ({
-	shipping_line_id: values.shipping_line_id || undefined,
+	shipping_line_id : values.shipping_line_id || undefined,
+	schedule_type    : values.schedule_type || undefined,
 });
 
 const ACTIVE_SERVICE_PAYLOAD = {
