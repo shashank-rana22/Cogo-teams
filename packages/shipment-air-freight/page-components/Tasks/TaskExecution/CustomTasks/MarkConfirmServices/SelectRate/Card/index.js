@@ -1,7 +1,6 @@
 import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
 
 import useUpdateBookingPreferences
 	from '../../../../../../../hooks/useUpdateBookingPreferences';
@@ -43,11 +42,6 @@ function Card({
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
-	const keysForArr = useMemo(
-		() => Array(dataArr.length).fill(null).map(() => Math.random()),
-		[dataArr.length],
-	);
-
 	const handleProceed = async () => {
 		const service_providers = serviceProvidersData;
 		await apiTrigger(item, service_providers);
@@ -76,10 +70,10 @@ function Card({
 			</div>
 
 			<div className={styles.body}>
-				{(dataArr || []).map((dataObj, index) => {
+				{(dataArr || []).map((dataObj) => {
 					const { hs_code, commodity_description } = dataObj?.service || {};
 					return (
-						<div className={styles.space_between} key={keysForArr[index]}>
+						<div className={styles.space_between} key={dataObj?.id}>
 							<div>
 								<div className={styles.heading}>Supplier Name</div>
 								<Tooltip
