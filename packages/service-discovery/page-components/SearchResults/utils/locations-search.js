@@ -21,7 +21,8 @@ const isSingleLocation = (search_type) => {
 };
 
 const getLocationDetails = (data, type, service_key) => {
-	const service_type = data[service_key];
+	const service_type = data[service_key] || data.service_type;
+
 	const SUFFIX_MAPPING = {
 		lcl_freight                 : 'port',
 		fcl_freight                 : 'port',
@@ -56,6 +57,8 @@ const getLocationDetails = (data, type, service_key) => {
 	const objName = !isSingleLocation(service_type)
 		? `${type}_${suffix}`
 		: suffix;
+
+	console.log('objName', service_type);
 
 	return data[objName];
 };

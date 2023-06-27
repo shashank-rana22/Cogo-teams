@@ -1,0 +1,96 @@
+{
+    "fcl_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "lcl_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "air_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Airport or Pin",
+            "destination": "City, Airport or Pin"
+        }
+    },
+    "trailer_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "haulage_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "ftl_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "ltl_freight": {
+        "label":{
+            "origin": "Origin Point",
+            "destination": "Destination Point"
+        },
+        "placeholder":{
+            "origin": "City, Port or Pin",
+            "destination": "City, Port or Pin"
+        }
+    },
+    "customs": {
+        "label": {
+            "location":"Customs Location",
+            "type": "Custom Type",
+            "service": "Service Type"
+        },
+        "placeholder": {
+            "location":"Port, or, Airport",
+            "type": "Import, or, Export",
+            "service": "Select Service"
+        }
+    },
+    "locals": {
+        "label": {
+            "location":"Locals Location",
+            "type": "Local Type",
+            "service": "Service Type"
+        },
+        "placeholder": {
+            "location":"Port, or, Airport",
+            "type": "Import, or, Export",
+            "service": "Select Service"
+        }
+    }
+}

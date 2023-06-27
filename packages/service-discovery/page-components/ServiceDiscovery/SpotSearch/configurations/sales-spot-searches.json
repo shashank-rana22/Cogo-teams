@@ -7,14 +7,12 @@
 		{
 			"key": "serial_id",
 			"label": "ID",
-			"func": "renderSerialId",
-			"span": 1
+			"func": "renderSerialId"
 		},
 		{
 			"label": "Service",
 			"key": "search_type",
-			"func": "renderSearchType",
-			"span": 1
+			"func": "renderSearchType"
 		},
 		{
 			"label": "Shipper",
@@ -27,28 +25,30 @@
 				"popoverKey": "created_by",
 				"withPopover": true
 			},
-			"func": "renderFieldPair",
-			"span": 3
+			"func": "renderFieldPair"
 		},
 		{
 			"label": "Port pair",
 			"key": "",
 			"pair_type": "search_type",
-			"func": "renderPortPair",
-			"span": 2
+			"func": "renderPortPair"
 		},
 		{
 			"key": "cargo_details",
 			"label": "Cargo/Load Details",
 			"commodityKey": "spot_search_cargo_details",
-			"func": "renderShipment",
-			"span": 2
+			"func": "renderShipment"
 		},
 		{
 			"key": "created_at",
 			"label": "Created at",
-			"func": "renderCreated",
-			"span": 1.5
+			"func": "renderCreated"
+		},
+		{
+			"key": "button",
+			"label": "",
+			"btnLabel":"Show Rates",
+			"func": "renderButton"
 		}
 	],
 	"filterProps": {

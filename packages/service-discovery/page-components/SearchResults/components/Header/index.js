@@ -3,7 +3,8 @@ import { IcMArrowBack, IcMEdit, IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import LocationDetails from './LocationDetails';
+import LocationDetails from '../../../../common/LocationDetails';
+
 import SelectedOrgInfo from './SelectedOrgInfo';
 import styles from './styles.module.css';
 

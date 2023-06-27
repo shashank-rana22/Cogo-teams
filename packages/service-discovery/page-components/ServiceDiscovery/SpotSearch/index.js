@@ -6,17 +6,19 @@ import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
 import Routes from './components/Routes';
-// import SalesDashboard from './components/SalesDashboard';
+import SalesDashboard from './components/SalesDashboard';
 import useCreateSearch from './hooks/useCreateSearch';
 import styles from './styles.module.css';
 
 function SpotSearch() {
 	const [organization, setOrganization] = useState({});
-	const [selectedMode, setSelectedMode] = useState({ mode_label: 'FCL', mode_value: 'fcl_freight' });
-	const [selectedService, setSelectedService] = useState('');
+	const [selectedMode, setSelectedMode] = useState({});
+	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
+
+	const importer_exporter_id = watch('organization_id');
 
 	const { createSearch, loading } = useCreateSearch();
 
@@ -43,24 +45,25 @@ function SpotSearch() {
 			</div>
 
 			{!isEmpty(selectedMode) ? (
-				<div className={styles.locations}>
-					<Routes
-						mode={selectedMode}
-						location={location}
-						setLocation={setLocation}
-						organization={organization}
-						handleSubmit={handleSubmit}
-						errors={errors}
-						watch={watch}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-					/>
-				</div>
+				<>
+					<div className={styles.locations}>
+						<Routes
+							mode={selectedMode}
+							formValues={location}
+							setFormValues={setLocation}
+							organization={organization}
+							handleSubmit={handleSubmit}
+							errors={errors}
+							watch={watch}
+							createSearch={createSearch}
+							createSearchLoading={loading}
+						/>
+					</div>
+					<div className={styles.sales_dashboard}>
+						<SalesDashboard importer_exporter_id={importer_exporter_id} />
+					</div>
+				</>
 			) : null}
-
-			{/* <div className={styles.sales_dashboard}>
-				<SalesDashboard />
-			</div> */}
 
 			<div className={styles.other_services}>
 				<OtherServices
@@ -69,6 +72,22 @@ function SpotSearch() {
 					setSelectedMode={setSelectedMode}
 				/>
 			</div>
+
+			{isEmpty(selectedService) ? null : (
+				<div className={styles.locations}>
+					<Routes
+						mode={selectedService}
+						formValues={location}
+						setFormValues={setLocation}
+						organization={organization}
+						handleSubmit={handleSubmit}
+						errors={errors}
+						watch={watch}
+						createSearch={createSearch}
+						createSearchLoading={loading}
+					/>
+				</div>
+			)}
 
 		</div>
 	);
