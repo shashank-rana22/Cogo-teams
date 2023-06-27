@@ -69,3 +69,22 @@
 	background: #abcd62;
 	border-radius: 6px;
 }
+
+.user_work_scope {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.scope_name {
+	padding: 2px 8px;
+	margin: 5px 10px 0 0;
+	font-size: 10px;
+	background: #c4dc91;
+	border-radius: 6px;
+}
+
+.more_tags {
+	margin: 0 5px;
+	font-size: 10px;
+}
