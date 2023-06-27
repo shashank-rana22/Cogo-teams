@@ -8,8 +8,8 @@ import { isEmpty } from '@cogoport/utils';
 import useGetSimulation from '../../../hooks/useGetSimulation';
 import styles from '../styles.module.css';
 
-const LIST_OF_PLACEHOLDER_MAPPING = 14;
-const PICK_MAX_DECIMAL_VALUE = 2;
+const PLACEHOLDER_COUNT = 14;
+const MAX_DECIMAL_VALUE = 2;
 
 function LevelPayouts({ singleData = {}, activeTab = '' }) {
 	const geo = getGeoConstants();
@@ -31,7 +31,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		return (
 			<div>
 				<div className={styles.networks_chart}>
-					{[...Array(LIST_OF_PLACEHOLDER_MAPPING).keys()].map((itm) => (
+					{[...Array(PLACEHOLDER_COUNT).keys()].map((itm) => (
 						<Placeholder className={styles.networks_skeleton} key={itm} />
 					))}
 				</div>
@@ -61,7 +61,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 							{key}
 						</div>
 						<div className={`${styles.single_payouts} ${styles.payouts_level}`}>
-							{value.toFixed(PICK_MAX_DECIMAL_VALUE)}
+							{value.toFixed(MAX_DECIMAL_VALUE)}
 						</div>
 					</div>
 				))}
