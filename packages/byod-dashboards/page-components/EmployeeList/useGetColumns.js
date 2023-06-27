@@ -1,21 +1,10 @@
 import { Button } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
-const useGetColumns = () => {
-	const profile = useSelector((state) => state.profile || {});
-
-	const { auth_role_data } = profile || {};
-
-	const { id : adminId } = auth_role_data;
-
-	const isAdmin = adminId === geo.uuid.hrbp_admin_role_id;
+const useGetColumns = (isAdmin) => {
 	const router = useRouter();
 
 	const handleVerification = (item) => {

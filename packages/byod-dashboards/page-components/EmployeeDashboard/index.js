@@ -1,26 +1,22 @@
-/* eslint-disable max-lines-per-function */
 import { Button } from '@cogoport/components';
 import {
-	useForm, InputController, SelectController,
-	RadioGroupController, DatepickerController, UploadController,
+	useForm, InputController, SelectController, DatepickerController, UploadController,
 } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import DeviceDetails from '../../common/DeviceDetails';
 import Spinner from '../../common/Spinner';
 import useCreateInvoice from '../../hooks/useCreateDeviceDetail';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
 import {
-	EXISTING_DEVICE_OPTIONS,
-	SURRENDER_OPTIONS, WARRANTY, getDeviceTypeOptions, getVendorNameOptions,
+	DEVICE_OPTIONS, WARRANTY, getVendorNameOptions,
 } from '../../utils/constant';
 
 import styles from './styles.module.css';
 
 function EmployeeDashboard() {
 	const { profile = {} } = useSelector((state) => state);
-	const [deviceTypeDisabled, setDeviceTypeDisabled] = useState(false);
 
 	const { user = {} } = profile;
 
@@ -35,8 +31,8 @@ function EmployeeDashboard() {
 		control,
 		formState: { errors },
 		handleSubmit,
-		setValue,
 		watch,
+		setValue,
 	} = useForm({
 		defaultValues: {
 			current_device_status: 'retain',
@@ -49,41 +45,11 @@ function EmployeeDashboard() {
 		createDeviceDetail(values);
 	};
 
-	const { current_device_status, vendor_name, device_type, surrendering_reason } = formValues;
-
-	useEffect(() => {
-		setDeviceTypeDisabled(false);
-		if (current_device_status === 'retain') {
-			setValue('device_type', 'existing_laptop');
-			setValue('surrendering_reason', '');
-			setDeviceTypeDisabled(true);
-		}
-		if (current_device_status === 'surrender') {
-			setValue('device_type', '');
-			setValue('surrendering_reason', '');
-		}
-	}, [current_device_status, setValue]);
-
-	useEffect(() => {
-		setDeviceTypeDisabled(false);
-		setValue('warranty', '');
-		if (surrendering_reason === 'allotted_desktop') {
-			setValue('device_type', 'desktop');
-			setDeviceTypeDisabled(true);
-		}
-		if (['buying_new_laptop_from_our_vendor', 'buying_new_laptop_from_outside'].includes(surrendering_reason)) {
-			setValue('device_type', 'new_laptop');
-			setDeviceTypeDisabled(true);
-		}
-	}, [surrendering_reason, setValue]);
+	const { vendor_name, device_type } = formValues;
 
 	useEffect(() => {
 		setValue('vendor_name', '');
 		setValue('other_vendor_name', '');
-
-		if (device_type === 'desktop') {
-			setValue('warranty', 'not_applicable');
-		}
 	}, [device_type, setValue]);
 
 	if (dataLoading) {
@@ -107,36 +73,6 @@ function EmployeeDashboard() {
 		<div className={styles.main_container}>
 			<div className={styles.title}>Employee BYOD Form</div>
 			<form onSubmit={handleSubmit(handleForm)}>
-				<div className={styles.heading}>Current Device</div>
-				<div className={styles.controller}>
-					<div className={styles.label}>What do you want to do with your Existing Device</div>
-					<RadioGroupController
-						options={EXISTING_DEVICE_OPTIONS}
-						control={control}
-						name="current_device_status"
-						rules={{ required: true }}
-					/>
-					{errors.current_device_status && (
-						<div className={styles.error}>Required</div>
-					)}
-				</div>
-				{formValues.current_device_status === 'surrender' && (
-					<div className={styles.surrender_controller}>
-						<div className={styles.label}>If surrending your laptop, then?</div>
-						<SelectController
-							control={control}
-							name="surrendering_reason"
-							size="md"
-							placeholder="Select..."
-							rules={{ required: true }}
-							options={SURRENDER_OPTIONS}
-						/>
-						{errors.surrendering_reason && (
-							<div className={styles.error}>Required</div>
-						)}
-					</div>
-				)}
-
 				<div className={styles.heading}>Apply for Device</div>
 				<div className={styles.container}>
 					<div className={styles.controller}>
@@ -145,10 +81,9 @@ function EmployeeDashboard() {
 							control={control}
 							name="device_type"
 							size="md"
-							disabled={current_device_status === 'retain' || deviceTypeDisabled}
 							placeholder="Device type"
 							rules={{ required: true }}
-							options={getDeviceTypeOptions(current_device_status)}
+							options={DEVICE_OPTIONS}
 						/>
 						{errors.device_type && (
 							<div className={styles.error}>Required</div>

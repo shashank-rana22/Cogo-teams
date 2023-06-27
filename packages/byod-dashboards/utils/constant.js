@@ -111,11 +111,6 @@ export const LOCATIONS = [
 	},
 ];
 
-export const EXISTING_DEVICE_OPTIONS = [
-	{ label: 'Surrender', value: 'surrender' },
-	{ label: 'Retain', value: 'retain' },
-];
-
 export const SURRENDER_OPTIONS = [
 	{
 		label : 'Buying a new laptop from our vendor',
@@ -149,46 +144,25 @@ export const WARRANTY = [
 		value : 'no',
 	},
 	{
-		label : 'Not Applicable',
+		label : 'Not Applicable (Desktop)',
 		value : 'not_applicable',
 	},
 ];
 
-export const VENDOR_NAME = [
+export const DEVICE_OPTIONS = [
 	{
-		label : 'Micron Computers',
-		value : 'micron_computers',
+		label : 'Existing Laptop',
+		value : 'existing_laptop',
 	},
 	{
-		label : 'Global System',
-		value : 'global_systems',
-	},
-	{
-		label : 'Team Computer',
-		value : 'team_computer',
-	},
-	{
-		label : 'Others',
-		value : 'others',
-	},
-];
-
-export const getDeviceTypeOptions = (existingDevice) => {
-	if (existingDevice === 'retain') {
-		return [{
-			label : 'Existing Laptop',
-			value : 'existing_laptop',
-		}];
-	}
-	return [{
 		label : 'New Laptop',
 		value : 'new_laptop',
 	},
 	{
 		label : 'Desktop',
 		value : 'desktop',
-	}];
-};
+	},
+];
 
 export const getVendorNameOptions = (deviceType) => {
 	if (deviceType === 'existing_laptop') {
@@ -218,3 +192,33 @@ export const getVendorNameOptions = (deviceType) => {
 		value : 'alloted_by_cogoport',
 	}];
 };
+
+export const HRBP_TAB_OPTIONS = [
+	{
+		label : 'Pending',
+		value : 'active',
+	},
+	{
+		label : 'Verified',
+		value : 'verified',
+	},
+	{
+		label : 'Rejected',
+		value : 'rejected_by_hr',
+	},
+];
+
+export const ADMIN_TAB_OPTIONS = [
+	{
+		label : 'Pending',
+		value : 'verified',
+	},
+	{
+		label : 'Approved',
+		value : 'approved',
+	},
+	{
+		label : 'Rejected',
+		value : 'rejected_by_admin',
+	},
+];
