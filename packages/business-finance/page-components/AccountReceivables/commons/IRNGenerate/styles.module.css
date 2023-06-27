@@ -1,5 +1,5 @@
 .button_style {
-	width: 100px;
+	width: 96px;
 }
 
 .button_val {
@@ -10,7 +10,7 @@
 }
 
 .button_container {
-	margin-top: 8px;
+	margin-left: 8px;
 }
 
 .style_cancel {
@@ -22,4 +22,12 @@
 	flex-direction: column;
 	width: max-content;
 	margin: 8px;
+}
+
+.upload_invoice {
+	margin-bottom: 10px;
+}
+
+.finance_reject {
+	width: 96px;
 }
