@@ -27,17 +27,9 @@ const useCreateQuestion = ({
 
 	const [uploadable, setUploadable] = useState(false);
 
-	const [questionEditorValue, setQuestionEditorValue] = useState(
-		questionTypeWatch === 'case_study'
-			? { case_questions_0: RichTextEditor.createEmptyValue() }
-			: { question_0: RichTextEditor.createEmptyValue() },
-	);
+	const [questionEditorValue, setQuestionEditorValue] = useState({});
 
-	const [questionError, setQuestionError] = useState(
-		questionTypeWatch === 'case_study'
-			? { case_questions_0: false }
-			: { question_0: false },
-	);
+	const [questionError, setQuestionError] = useState({});
 
 	const [caseStudyQuestionEditorValue, setCaseStudyQuestionEditorValue] = useState(RichTextEditor.createEmptyValue());
 
@@ -152,6 +144,16 @@ const useCreateQuestion = ({
 	};
 
 	const watchQuestionType = watch('question_type');
+
+	useEffect(() => {
+		if (questionTypeWatch === 'case_study') {
+			setQuestionEditorValue({ case_questions_0: RichTextEditor.createEmptyValue() });
+			setQuestionError({ case_questions_0: false });
+		} else {
+			setQuestionEditorValue({ question_0: RichTextEditor.createEmptyValue() });
+			setQuestionError({ question_0: false });
+		}
+	}, [questionTypeWatch]);
 
 	useEffect(() => {
 		if (!isEmpty(topic)) {

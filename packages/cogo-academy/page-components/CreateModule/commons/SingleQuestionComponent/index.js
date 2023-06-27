@@ -59,6 +59,12 @@ function SingleQuestionComponent({
 		...restProps,
 	});
 
+	const questionText = questionTypeWatch === 'case_study'
+		? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0;
+
+	const error = questionTypeWatch === 'case_study'
+		? questionError[`case_questions_${index}`] : questionError.question_0;
+
 	return (
 		<div className={styles.container}>
 
@@ -85,8 +91,7 @@ function SingleQuestionComponent({
 			</div>
 
 			<RichTextEditor
-				value={questionTypeWatch === 'case_study'
-					? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0}
+				value={questionText}
 				onChange={handleChangeQuestionEditor}
 				required
 				id="question-text"
@@ -101,9 +106,7 @@ function SingleQuestionComponent({
 				}}
 			/>
 
-			{(questionTypeWatch === 'case_study'
-				? questionError[`case_questions_${index}`] : questionError.question_0)
-				&& <p className={styles.error_msg}>Question is required</p>}
+			{error && <p className={styles.error_msg}>Question is required</p>}
 
 			{questionTypeWatch !== 'subjective' ? (
 				<OptionsComponent

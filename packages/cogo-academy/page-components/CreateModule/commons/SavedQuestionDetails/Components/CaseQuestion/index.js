@@ -2,7 +2,7 @@ import IconComponent from '../../IconComponent';
 
 import styles from './styles.module.css';
 
-function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow }) {
+function CaseQuestion({ item, from: source, caseToShow, setQuestionToShow, setCaseToShow }) {
 	const { test_case_study_questions = [], id = '' } = item || {};
 
 	return (
@@ -12,13 +12,13 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 				<div
 					role="presentation"
 					className={`${styles.question_text} 
-				${(from === 'tooltip') ? styles.question_text_content : null}`}
+				${(source === 'tooltip') ? styles.question_text_content : null}`}
 					onClick={() => setQuestionToShow(id)}
 				>
 					click to see details
 				</div>
 
-				{from !== 'tooltip' ? (
+				{source !== 'tooltip' ? (
 					<div
 						role="presentation"
 						onClick={() => setCaseToShow(item.id === caseToShow ? '' : item.id)}
