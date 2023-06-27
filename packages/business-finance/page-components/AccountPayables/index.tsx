@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import AdvancePayment from './AdvancePayment';
 import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
+import Payruns from './Payruns';
 import styles from './styles.module.css';
 
 interface ItemProps {
@@ -17,7 +18,7 @@ interface ItemProps {
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
+	const [activePayables, setActivePayables] = useState(query?.active_tab || 'dashboard');
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
@@ -26,7 +27,7 @@ function AccountPayables() {
 	const entity = getEntityCode(partnerId);
 
 	const handleTabChange = (v:string) => {
-		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
+		if (['outstanding', 'treasury-chest'].includes(v)) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
 		}
@@ -86,7 +87,7 @@ function AccountPayables() {
 						<AdvancePayment activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="payruns" title="PAYRUN">
-						<h1>Payruns</h1>
+						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="OUTSTANDING">
 						<h1>Outstandings</h1>
