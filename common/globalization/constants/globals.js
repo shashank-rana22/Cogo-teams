@@ -29,6 +29,8 @@ const GLOBAL_CONSTANTS = {
 			'dd MMMM yyyy'      : 'dd MMMM yyyy',
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
+			'MMM yyyy'          : 'MMM yyyy',
+			'dd MMM'            : 'dd MMM',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
@@ -70,6 +72,58 @@ const GLOBAL_CONSTANTS = {
 		'CCD',
 		'CCO',
 		'RTC',
+		'DCG',
+		'OE',
+		'DSI',
+		'TRCG',
+		'EDI',
+		'WNOC',
+		'THCG',
+		'COC',
+		'FLC',
+		'PDC',
+		'ADCRC',
+		'DO',
+		'ACMES',
+		'LBL',
+		'LUC',
+		'FC',
+		'EC',
+		'LR',
+		'OCG',
+		'DCG',
+		'MLR',
+		'WRC',
+		'PLI',
+		'WC',
+		'WEH',
+		'WHT',
+		'IGT',
+		'SAC',
+		'PYC',
+		'CTGC',
+		'WRSC',
+		'LRPC',
+		'QDF',
+		'PTC',
+		'SUR',
+		'BTT',
+		'LC',
+		'RPC',
+		'WHC',
+		'MIF',
+		'LIDC',
+		'NOCC',
+		'HLC',
+		'MCS',
+		'ADDCH',
+		'SORCH',
+		'FCHC',
+		'HAZL',
+		'CECC',
+		'MNLC',
+		'ADSI',
+		'CCOV',
 	],
 	uuid: {
 		amitabh_user_id        : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
@@ -145,9 +199,26 @@ const GLOBAL_CONSTANTS = {
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
-		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
+		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
+		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
+		cogo_logo_without_bg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg',
+		spinner_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
+		empty_image          : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
+		list_empty_image     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state.svg',
+		list_empty           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png',
+		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
+		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
+		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
+		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
+		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+	},
+	pdf_url: {
+		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
 	options: {
@@ -221,7 +292,9 @@ const GLOBAL_CONSTANTS = {
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id: 120347,
+		old_shipment_serial_id  : 120347,
+		cogopoint_default_value : 0,
+
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -236,7 +309,63 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
-
+	services: {
+		fcl_freight: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		fcl_customs: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		fcl_cfs: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		air_freight: {
+			unit: {
+				name: 'per kg', short_name: '/Kg',
+			},
+		},
+		air_customs: {
+			unit: {
+				name: 'per kg', short_name: '/Kg',
+			},
+		},
+		lcl_freight: {
+			unit: {
+				name: 'per cbm', short_name: '/CBM',
+			},
+		},
+		lcl_customs: {
+			unit: {
+				name: 'per cbm', short_name: '/CBM',
+			},
+		},
+		haulage_freight: {
+			unit: {
+				name: 'per container', short_name: '/Cont',
+			},
+		},
+		trailer_freight: {
+			unit: {
+				name: 'per truck', short_name: '/Truck',
+			},
+		},
+		ltl_freight: {
+			unit: {
+				name: 'per truck', short_name: '/Truck',
+			},
+		},
+		ftl_freight: {
+			unit: {
+				name: 'per truck', short_name: '/Truck',
+			},
+		},
+	},
 };
 
 export default GLOBAL_CONSTANTS;

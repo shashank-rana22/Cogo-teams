@@ -1,5 +1,6 @@
 import { Accordion } from '@cogoport/components';
 
+import { AdditionalServiceList } from '../../AdditionalServices';
 import Services from '../Services';
 
 import styles from './styles.module.css';
@@ -12,6 +13,8 @@ function OverviewManageServices() {
 	return (
 		<Accordion title={getTitle} isOpen>
 			<Services />
+
+			<AdditionalServiceList />
 		</Accordion>
 	);
 }

@@ -15,10 +15,11 @@ const CancelDetails = dynamic(() => import('../../common/CancelDetails'), { ssr:
 const DocumentHoldDetails = dynamic(() => import('../../common/DocumentHoldDetails'), { ssr: false });
 
 const TAB_MAPPING = {
-	overview  : dynamic(() => import('../../common/Overview'), { ssr: false }),
-	tasks     : dynamic(() => import('../../common/Tasks'), { ssr: false }),
-	documents : dynamic(() => import('../../common/Documents'), { ssr: false }),
-	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	overview      : dynamic(() => import('../../common/Overview'), { ssr: false }),
+	tasks         : dynamic(() => import('../../common/Tasks'), { ssr: false }),
+	sales_invoice : dynamic(() => import('../../common/SalesInvoice'), { ssr: false }),
+	documents     : dynamic(() => import('../../common/Documents'), { ssr: false }),
+	emails        : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 };
 
 function DefaultView() {
