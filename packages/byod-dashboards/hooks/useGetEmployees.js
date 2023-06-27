@@ -31,8 +31,7 @@ const useGetEmployees = (isAdmin) => {
 						q: query,
 						status,
 					},
-					employee_details_required : true,
-					required_keys             : ['id', 'employee_detail_id', 'status'],
+					employee_details_required: true,
 					page,
 				},
 			});
