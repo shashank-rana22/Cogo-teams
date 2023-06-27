@@ -1,7 +1,8 @@
 import { Input, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
+
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
 function InputEmployeeManualTarget({ item }) {
