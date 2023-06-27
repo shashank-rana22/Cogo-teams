@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback } from 'react';
 
+import DocumentHoldHeader from '../DocumentHoldHeader';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -101,6 +102,8 @@ function DefaultView() {
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
+
+			<DocumentHoldHeader />
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
