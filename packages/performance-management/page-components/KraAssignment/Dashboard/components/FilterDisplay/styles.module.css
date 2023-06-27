@@ -8,7 +8,7 @@
 .filter_container {
 	display: flex;
 	align-items: center;
-	width:100%;
+	width: 100%;
 
 	:global {
 		.ui_select_container {
@@ -23,11 +23,11 @@
 	}
 }
 
-.button_container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+.button_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .header {
@@ -38,7 +38,7 @@
 	width: 100%;
 }
 
-.filter{
-    font-weight: 600;
-    padding:10px
+.filter {
+	padding: 10px;
+	font-weight: 600;
 }
