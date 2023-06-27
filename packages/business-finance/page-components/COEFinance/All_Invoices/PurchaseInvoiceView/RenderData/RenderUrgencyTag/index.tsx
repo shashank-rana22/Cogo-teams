@@ -21,7 +21,6 @@ function RenderUrgencyTag({ item, field }:Props) {
 	return (
 		<div>
 			{item?.urgencyTag && field?.key === 'urgencyTag' ? (
-
 				<div className={styled.urgency}>
 					{showOverflowingNumber(startCase(item?.urgencyTag[0]), 8)}
 				</div>
