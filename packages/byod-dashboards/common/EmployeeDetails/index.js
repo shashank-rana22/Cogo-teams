@@ -1,5 +1,6 @@
 import { Button, Modal, Textarea, Toast, Tags } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -130,11 +131,20 @@ function EmployeeDetails() {
 
 	return (
 		<>
-			<div className={styles.title}>
-				{isAdmin ? 'Admin' : 'HR Business Partner'}
-				{' '}
-				Dashboard
+			<div className={styles.flex}>
+				<IcMArrowBack
+					onClick={() => router.push('/byod/employee')}
+					className={styles.back_icon}
+					width={25}
+					height={25}
+				/>
+				<div className={styles.title}>
+					{isAdmin ? 'Admin' : 'HR Business Partner'}
+					{' '}
+					Dashboard
+				</div>
 			</div>
+
 			<div className={styles.flex_container}>
 				<div className={styles.flex_40}>
 					{invoice_url && (
