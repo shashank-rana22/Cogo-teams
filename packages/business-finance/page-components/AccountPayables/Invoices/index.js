@@ -10,6 +10,7 @@ import { invoiceFilters } from './configurations';
 import GetState from './GetState';
 import useGetBillsList from './hooks/useGetBillsList';
 import useGetDownloadReport from './hooks/useGetDownloadReport';
+import PayRunModal from './InvoiceTable/PayrunModal';
 import { RenderAction } from './InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from './InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from './InvoiceTable/RenderFunctions/RenderToolTip';
@@ -29,10 +30,11 @@ const TABS = [
 
 const FIRST_PAGE = 1;
 
-function Invoices() {
+function Invoices({ activeEntity }) {
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
+	const [showPayrunModal, setShowPayrunModal] = useState(false);
 
 	const {
 		billsData,
@@ -54,7 +56,7 @@ function Invoices() {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
 	};
 
-	const functions = {
+	const FUNCTIONS = {
 		renderToolTip: (itemData, field) => (
 			<RenderToolTip itemData={itemData} field={field} />
 		),
@@ -96,6 +98,16 @@ function Invoices() {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
+					<div>
+						<Button
+							size="md"
+							onClick={() => {
+								setShowPayrunModal(true);
+							}}
+						>
+							Create Pay Run
+						</Button>
+					</div>
 					<Button onClick={() => { setShow(true); }} className={styles.button}>Get State</Button>
 					<Button
 						onClick={generateInvoice}
@@ -126,7 +138,7 @@ function Invoices() {
 					itemData={billsData}
 					loading={billsLoading}
 					config={ALL_INVOICE_CONFIG}
-					functions={functions}
+					functions={FUNCTIONS}
 					sort={orderBy}
 					setSort={setOrderBy}
 					page={billsFilters?.pageIndex || FIRST_PAGE}
@@ -141,6 +153,13 @@ function Invoices() {
 				/>
 			</div>
 			{show ? <GetState show={show} setShow={setShow} /> : null}
+			{showPayrunModal ? (
+				<PayRunModal
+					activeEntity={activeEntity}
+					showPayrunModal={showPayrunModal}
+					setShowPayrunModal={setShowPayrunModal}
+				/>
+			) : null}
 		</div>
 	);
 }

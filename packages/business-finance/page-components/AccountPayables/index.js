@@ -25,7 +25,7 @@ function AccountPayables() {
 
 	const entity = getEntityCode(partnerId);
 
-	const FILTER_TABS = ['dashboard', 'advance-payment'];
+	const FILTER_TABS = ['invoices', 'dashboard', 'advance-payment'];
 
 	const handleTabChange = (v) => {
 		if (
@@ -88,7 +88,7 @@ function AccountPayables() {
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
-						<Invoices />
+						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
 						<AdvancePayment activeEntity={activeEntity} />

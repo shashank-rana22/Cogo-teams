@@ -330,12 +330,10 @@ const useGetAdvancePaymentList = ({
 		const isCheckedLength = list.filter((value) => value?.checked).length;
 		const isAllRowsChecked = isCheckedLength === dataList.length;
 		return (
-			<div className={styles.checkbox_style}>
-				<Checkbox
-					checked={isAllRowsChecked && !loading}
-					onChange={onChangeTableHeaderCheckbox}
-				/>
-			</div>
+			<Checkbox
+				checked={isAllRowsChecked && !loading}
+				onChange={onChangeTableHeaderCheckbox}
+			/>
 		);
 	};
 
@@ -367,10 +365,12 @@ const useGetAdvancePaymentList = ({
 		)?.checked;
 
 		return (
-			<Checkbox
-				checked={isChecked}
-				onChange={() => onChangeTableBodyCheckbox(itemData)}
-			/>
+			<div className={styles.checkbox_style}>
+				<Checkbox
+					checked={isChecked}
+					onChange={() => onChangeTableBodyCheckbox(itemData)}
+				/>
+			</div>
 		);
 	};
 

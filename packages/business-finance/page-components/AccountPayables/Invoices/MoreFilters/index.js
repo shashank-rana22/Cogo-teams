@@ -11,9 +11,9 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => { } }) {
+function FilterModal({ filters = {}, setFilters = () => { }, filterLength = FILTER_LENGTH }) {
 	const [showModal, setShowModal] = useState(false);
-	const [modalFilters, setModalFilters] = useState({});
+	const [modalFilters, setModalFilters] = useState({ currency: filters?.currency });
 	const { currency = '' } = modalFilters || {};
 
 	const handleClose = () => {
@@ -78,8 +78,10 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
 										category    : filters?.category || '',
+										currency    : filters?.currency || '',
+										entity      : filters?.entity || '',
 									});
-									setModalFilters({});
+									setModalFilters({ currency: filters?.currency || '' });
 									setShowModal(false);
 								}}
 							>
@@ -111,7 +113,7 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<IcMFilter />
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
-					&& (!isEmpty(filters?.[key])))).length > FILTER_LENGTH
+					&& (!isEmpty(filters?.[key])))).length > filterLength
 					&& <IcCRedCircle height={8} width={8} />}
 			</div>
 		</div>
