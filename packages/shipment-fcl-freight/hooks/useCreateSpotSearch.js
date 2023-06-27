@@ -59,12 +59,8 @@ const useCreateSpotSearch = ({
 			});
 			Toast.success(successMessage);
 			refetch();
-			const href = `/book/${res?.data?.id}/${importer_exporter_id}`;
-			const as = `/book/${res?.data?.id}/${importer_exporter_id}`;
-			// const HREF = '/book/[search_id]/[importer_exporter_id]';
-			// const as = `/book/${data?.id}/${importer_exporter_id}`;
-
-			router.push(href, as);
+			const href = `${window.location.origin}/${router?.query?.partner_id}/book/${res?.data?.id}/${importer_exporter_id}`;
+			window.location.href = href;
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));
 		}
