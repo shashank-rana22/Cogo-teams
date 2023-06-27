@@ -1573,6 +1573,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'read_collection_party_line_items',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
