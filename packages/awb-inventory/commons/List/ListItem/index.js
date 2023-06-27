@@ -63,7 +63,7 @@ function CardItem({
 			</div>
 			{singleitem?.booking_agent?.name && (
 				<div className={styles.info_tag}>
-					<Pill size="sm" color="orange">{`KAM: ${singleitem.booking_agent.name}`}</Pill>
+					<Pill size="sm" color="#fbd1a6">{`KAM: ${singleitem.booking_agent.name}`}</Pill>
 				</div>
 			)}
 		</section>

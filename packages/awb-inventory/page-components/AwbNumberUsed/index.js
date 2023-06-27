@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import { Functions } from '../../commons/Functions';
+import { functions } from '../../commons/Functions';
 import List from '../../commons/List';
 import { AwbNumberUsedFields } from '../../configurations/awb-number-used-fields';
 
@@ -51,7 +51,7 @@ function AwbNumberUsed({
 		},
 	};
 
-	const allFunctions = { ...Functions, ...otherFunctions };
+	const allFunctions = { ...functions, ...otherFunctions };
 
 	return (
 		<div className={styles.awbnumber_container}>

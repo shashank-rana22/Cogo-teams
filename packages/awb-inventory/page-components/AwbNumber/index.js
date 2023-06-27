@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { Functions } from '../../commons/Functions';
+import { functions } from '../../commons/Functions';
 import List from '../../commons/List';
 import { AwbNumberFields } from '../../configurations/awb-number-fields';
 import useEditAwbNumber from '../../hooks/useEditAwbNumber';
@@ -64,7 +64,7 @@ function AwbNumber({
 		),
 	};
 
-	const allFunctions = { ...Functions, ...otherFunctions };
+	const allFunctions = { ...functions, ...otherFunctions };
 
 	return (
 		<div className={styles.awbnumber_container}>
