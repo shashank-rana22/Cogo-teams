@@ -10,7 +10,7 @@ function FormatAmountCurrency({ itemData }) {
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
-					maximumFractionDigits : 4,
+					maximumFractionDigits : 2,
 				},
 			})}
 		</div>

@@ -6,6 +6,7 @@ import Header from './Header';
 import useGetPayrun from './hooks/useGetPayrun';
 import DeletePayrun from './renderFunction/DeletePayrun';
 import FormatAmountCurrency from './renderFunction/FormatAmountCurrency';
+import RibbonData from './renderFunction/RibbonData/index';
 import ViewInvoices from './renderFunction/ViewInvoice';
 import styles from './styles.module.css';
 
@@ -21,6 +22,9 @@ function Payruns({ activeEntity }) {
 		),
 		renderViewInvoice: (itemData) => (
 			<ViewInvoices itemData={itemData} />
+		),
+		renderRibbon: (itemData) => (
+			<RibbonData itemData={itemData} />
 		),
 	};
 	return (

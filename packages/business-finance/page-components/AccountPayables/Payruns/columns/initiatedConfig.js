@@ -45,6 +45,10 @@ export const initiatedConfig = {
 			func : 'renderViewInvoice',
 			span : 1,
 		},
+		{
+			func : 'renderRibbon',
+			span : 1,
+		},
 
 	],
 };
