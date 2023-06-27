@@ -18,11 +18,10 @@ function KraModal({ show, setShow }) {
 	} = useEmployeeKraDetails({ show });
 
 	const { list = [], modification_history = [] } = data;
-
 	const {
 		loading: SubmitLoading,
 		updateEmployeeFinalRating,
-	} = useUpdateEmployeeFinalRating();
+	} = useUpdateEmployeeFinalRating(data);
 
 	if (loading) {
 		return (
@@ -36,12 +35,25 @@ function KraModal({ show, setShow }) {
 				<div className={styles.container}>
 					<div className={styles.employee_name}>
 						Employee Name:
+						{' '}
+						{data?.employee_details?.employee_name}
 					</div>
-
 					<div className={styles.squad}>
-						<div className={styles.squad_name}>Squad:</div>
-						<div className={styles.tribe_name}>Tribe:</div>
-						<div className={styles.total_kra}>Total Kra:</div>
+						<div className={styles.squad_name}>
+							Squad:
+							{' '}
+							{data?.employee_details?.squad_name}
+						</div>
+						<div className={styles.tribe_name}>
+							Tribe:
+							{' '}
+							{data?.employee_details?.tribe_name}
+						</div>
+						<div className={styles.total_kra}>
+							Total Kra:
+							{' '}
+							{(list || [])?.length}
+						</div>
 					</div>
 				</div>
 			)}
@@ -63,7 +75,7 @@ function KraModal({ show, setShow }) {
 								<div className={styles.label}>
 									KRA Achieved:
 									{' '}
-									{item.rating_manual ? <InputEmployeeManualTarget kra_id={item.kra_id} />
+									{item.rating_manual ? <InputEmployeeManualTarget item={item} />
 										: item.achieved_rating}
 								</div>
 								<div className={styles.label}>
@@ -72,19 +84,20 @@ function KraModal({ show, setShow }) {
 									{item.weightage}
 								</div>
 							</div>
-
 						))}
+
 					</div>
 					<div className={styles.right_section}>
 						<div className={styles.overall_rating}>
 							<div className={styles.rating}>
-
 								<div className={styles.average_overall_rating}>
 									Average Overall Rating:
+									{' '}
 									{data?.average_overall_rating}
 								</div>
 								<div className={styles.rating_obtained}>
 									Rating:
+									{' '}
 									{data?.average_overall_rating}
 								</div>
 
@@ -95,7 +108,7 @@ function KraModal({ show, setShow }) {
 
 								{ !isEmpty(modification_history)
 									? modification_history?.map((item) => (
-										<div className={styles.modification_history} key={item.id}>
+										<div className={styles.modification} key={item.id}>
 
 											<div>
 												Modified By:
@@ -107,12 +120,12 @@ function KraModal({ show, setShow }) {
 												{item.new_rating}
 											</div>
 											<div>
-												comment:
+												Comments:
 												{' '}
 												{item.comments}
 											</div>
 											<div>
-												modified_on:
+												Modified On:
 												{' '}
 												{item.modified_on}
 											</div>
@@ -174,7 +187,10 @@ function KraModal({ show, setShow }) {
 						<Button
 							themeType="accent"
 							loading={SubmitLoading}
-							onClick={() => updateEmployeeFinalRating(starRating, comments)}
+							onClick={() => updateEmployeeFinalRating({
+								starRating,
+								comments,
+							})}
 						>
 							Submit
 
