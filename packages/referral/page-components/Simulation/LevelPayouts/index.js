@@ -8,6 +8,9 @@ import { isEmpty } from '@cogoport/utils';
 import useGetSimulation from '../../../hooks/useGetSimulation';
 import styles from '../styles.module.css';
 
+const LIST_OF_PLACEHOLDER_MAPPING = 14;
+const PICK_MAX_DECIMAL_VALUE = 2;
+
 function LevelPayouts({ singleData = {}, activeTab = '' }) {
 	const geo = getGeoConstants();
 	const currencyCode = geo.country.currency.code;
@@ -22,13 +25,13 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 
 	const totalPayouts = singleData?.cell?.label;
 
-	const checkLevelEmptyState = isEmpty(levelData);
+	const hasLevelEmptyState = isEmpty(levelData);
 
 	if (loading) {
 		return (
 			<div>
 				<div className={styles.networks_chart}>
-					{[...Array(14).keys()].map((itm) => (
+					{[...Array(LIST_OF_PLACEHOLDER_MAPPING).keys()].map((itm) => (
 						<Placeholder className={styles.networks_skeleton} key={itm} />
 					))}
 				</div>
@@ -36,7 +39,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		);
 	}
 
-	if (checkLevelEmptyState) {
+	if (hasLevelEmptyState) {
 		return (
 			<div className={cl`${styles.empty_state} `}>
 				<Image
@@ -48,6 +51,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.user_lavel_payouts}>
@@ -57,13 +61,13 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 							{key}
 						</div>
 						<div className={`${styles.single_payouts} ${styles.payouts_level}`}>
-							{value.toFixed(2)}
+							{value.toFixed(PICK_MAX_DECIMAL_VALUE)}
 						</div>
 					</div>
 				))}
 			</div>
 
-			{!checkLevelEmptyState && (
+			{!hasLevelEmptyState && (
 				<div className={styles.total_payouts}>
 					Total Payout:
 					<div className={styles.amount}>
