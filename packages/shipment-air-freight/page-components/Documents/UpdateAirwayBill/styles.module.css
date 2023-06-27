@@ -1,11 +1,11 @@
 .update_container {
-    color: #333;
 	font-size: 16px;
 	font-weight: 500;
+	color: #333;
 }
 
 .button_container {
-    margin-top: 20px;
 	display: flex;
 	flex-direction: row-reverse;
+	margin-top: 20px;
 }

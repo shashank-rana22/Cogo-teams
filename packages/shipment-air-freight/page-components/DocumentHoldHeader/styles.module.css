@@ -8,11 +8,11 @@
 	:global {
 		svg {
 			path {
-				fill: --color-primary-error-red-2;
+				fill: var(--color-primary-error-red-2);
 			}
 
 			circle {
-				stroke: --color-primary-error-red-2;
+				stroke: var(--color-primary-error-red-2);
 			}
 		}
 	}

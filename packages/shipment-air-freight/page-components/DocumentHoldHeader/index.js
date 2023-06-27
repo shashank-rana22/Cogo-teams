@@ -37,14 +37,23 @@ function DocumentHoldHeader() {
 	return (
 		<div
 			className={styles.document_hold_container}
-			style={{ background: color === 'yellow' ? '#FEF6DF' : '#fff0f0' }}
+			style={{
+				background: color === 'yellow'
+					? 'var(--color-primary-yellow-5)' : 'var(--color-primary-error-red-5)',
+			}}
 		>
 			<div className={styles.icon_wrapper}>
 				<IcCError height={26} width={26} />
 			</div>
 
 			<div className={styles.flex_col}>
-				<div className={styles.heading} style={{ color: color === 'yellow' ? '#d6b300' : '#ee3425' }}>
+				<div
+					className={styles.heading}
+					style={{
+						color: color === 'yellow'
+							? 'var(--color-primary-yellow-1)' : 'var(--color-primary-error-red-2)',
+					}}
+				>
 					Your
 					{' '}
 					{tradeType === 'export' ? 'AWB' : 'DO'}
