@@ -1,0 +1,28 @@
+import getTableColumnFunction from './get-table-column-function';
+
+const getTableColumns = ({ activeTab = 'spot_searches', fields = [] }) => {
+	const columns = fields.map((field) => ({
+		Header   : field.label,
+		id       : field.key,
+		accessor : (item) => {
+			const func = getTableColumnFunction(field.func);
+
+			let data = { ...item };
+
+			if (['quotations', 'spot_booking'].includes(activeTab)) {
+				const { primary_service, services } = item || {};
+				const primary_service_data = Object.values(services || {}).find(
+					(itm) => itm.service_type === primary_service,
+				);
+				const quotationData = { ...(item || {}), ...(primary_service_data || {}) };
+
+				data = { ...quotationData };
+			}
+
+			return func(data, field);
+		},
+	}));
+
+	return columns;
+};
+export default getTableColumns;

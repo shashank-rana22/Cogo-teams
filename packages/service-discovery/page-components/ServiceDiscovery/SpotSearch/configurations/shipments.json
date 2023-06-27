@@ -14,14 +14,12 @@
 		{
 			"key": "serial_id",
 			"label": "ID",
-			"func": "renderSerialId",
-			"span": 1
+			"func": "renderSerialId"
 		},
 		{
 			"label": "Service",
 			"key": "shipment_type",
-			"func": "renderSearchType",
-			"span": 1
+			"func": "renderSearchType"
 		},
 		{
 			"label": "Shipper",
@@ -34,52 +32,44 @@
 				"popoverKey": "quotation_email_sent_by",
 				"withPopover": true
 			},
-			"func": "renderFieldPair",
-			"span": 1.5
+			"func": "renderFieldPair"
 		},
 		{
 			"label": "Port pair",
 			"key": "shipments_port_pair",
 			"pair_type": "shipment_type",
-			"func": "renderPortPair",
-			"span": 1.5
+			"func": "renderPortPair"
 		},
 		{
 			"key": "shipment",
 			"label": "Cargo/Load Details",
 			"commodityKey": "shipment_cargo_details",
-			"func": "renderShipment",
-			"span": 2
+			"func": "renderShipment"
 		},
 		{
 			"key": "source",
 			"label": "Source",
-			"func": "renderSource",
-			"span": 1
+			"func": "renderSource"
 		},
 		{
 			"key": "created_at",
 			"label": "Created at",
-			"func": "renderCreated",
-			"span": 1
+			"func": "renderCreated"
 		},
 		{
 			"key": "last_mile_stone",
 			"label": "Last MileStone",
-			"func": "renderLastMileStone",
-			"span": 1
+			"func": "renderLastMileStone"
 		},
 		{
 			"key": "next_mile_stone",
 			"label": "UpComing Task",
-			"func": "renderNextMileStone",
-			"span": 1
+			"func": "renderNextMileStone"
 		},
 		{
 			"key": "shipment_status",
 			"label": "Shipment Status",
-			"func": "renderShipmentStatus",
-			"span": 1
+			"func": "renderShipmentStatus"
 		}
 	],
 	"defaultFilters": {
@@ -113,8 +103,7 @@
 			{
 				"name": "source",
 				"label": "Select Source",
-				"type": "select",
-				"multiple": true,
+				"type": "multi-select",
 				"options": [
 					{
 						"label": "Spot Search",
@@ -137,7 +126,7 @@
 						"value": "quick_checkout"
 					},
 					{
-            "label": "Sell Without Buy",
+            			"label": "Sell Without Buy",
 						"value": "direct"
 					},
 					{

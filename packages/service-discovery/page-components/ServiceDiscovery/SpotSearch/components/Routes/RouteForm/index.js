@@ -1,118 +1,113 @@
+import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+
+import LABEL_MAPPING from '../label-mapping.json';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
 
-const singleLocationServices = ['fcl_freight_local'];
+const singleLocationServices = ['customs', 'locals'];
 
-// const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
+const DEFAULT_SPAN = 12;
+const PERCENT_FACTOR = 100;
+const FLEX_OFFSET = 2;
 
-const LABEL_MAPPING = {
-	fcl_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	lcl_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	air_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	ftl_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	ltl_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	trailer_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
-	haulage_freight: {
-		origin      : 'Origin Point',
-		destination : 'Destination Point',
-	},
+const getFlex = (span) => {
+	const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
+	return flex;
 };
 
-function RouteForm({ mode = {}, setLocation, location }) {
-	// const INDIA_COUNTRY_CODE = getCountryDetails({
-	// 	country_id: INDIA_COUNTRY_ID,
-	// })?.country_code;
+function RouteForm({ mode = {}, setFormValues, formValues }) {
+	const serviceType = mode.mode_value;
 
-	const label = LABEL_MAPPING[mode.mode_value];
+	const { label = {}, placeholder = {} } = LABEL_MAPPING[serviceType] || {};
 
-	const { origin, destination } = label;
+	const controls = getFormControls({ mode: serviceType, label, placeholder });
 
-	const [originControls, destinationControls] = getFormControls({ mode: mode.mode_value });
+	if (singleLocationServices.includes(serviceType)) {
+		const [locationControls, typeControls, serviceControls] = controls;
 
-	// useEffect(() => {
-	// 	if (isEmpty(location.origin) && isEmpty(location.destination)) {
-	// 		return;
-	// 	}
-	// 	let object = location;
-	// 	if (location.destination.country_code === INDIA_COUNTRY_CODE) {
-	// 		object = { ...object, serviceType: 'import' };
-	// 	} else {
-	// 		object = { ...object, serviceType: 'export' };
-	// 	}
+		return (
+			<div className={styles.container}>
+				<div className={styles.form_item} style={{ width: `${getFlex(locationControls.span)}%` }}>
+					<div className={styles.label}>
+						{label?.location || ''}
+						{' '}
+						<div className={styles.required_mark}>*</div>
+					</div>
 
-	// 	setLocation(object);
-	// }, [INDIA_COUNTRY_CODE, location, setLocation]);
+					<AsyncSelect
+						{...locationControls}
+						value={formValues?.location}
+						onChange={(val) => setFormValues((prev) => ({ ...prev, location: val }))}
+					/>
 
-	if (singleLocationServices.includes[mode?.mode_value]) {
-		// Single Location Here
+				</div>
+
+				<div className={styles.form_item} style={{ width: `${getFlex(typeControls.span)}%` }}>
+					<div className={styles.label}>
+						{label?.type || ''}
+						{' '}
+						<div className={styles.required_mark}>*</div>
+					</div>
+
+					<Select
+						{...typeControls}
+						value={formValues?.type}
+						onChange={(val) => setFormValues((prev) => ({ ...prev, type: val }))}
+					/>
+
+				</div>
+
+				<div className={styles.form_item} style={{ width: `${getFlex(serviceControls.span)}%` }}>
+					<div className={styles.label}>
+						{label?.service || ''}
+						{' '}
+						<div className={styles.required_mark}>*</div>
+					</div>
+
+					<Select
+						{...serviceControls}
+						value={formValues?.service}
+						onChange={(val) => setFormValues((prev) => ({ ...prev, service: val }))}
+					/>
+
+				</div>
+
+			</div>
+		);
 	}
+
+	const [originControls, destinationControls] = controls;
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.form_item}>
+			<div className={styles.form_item} style={{ width: `${getFlex(originControls.span)}%` }}>
 				<div className={styles.label}>
-					{origin || ''}
+					{originControls.label || ''}
 					{' '}
 					<div className={styles.required_mark}>*</div>
 				</div>
 
-				{/* <LocationSelect
-							{...controlItem}
-							name={name}
-							label={label}
-							control={control}
-							role="button"
-							aria-label="input"
-							caret={false}
-							handleChange={(obj) => {
-								setLocation((pv) => ({
-									...pv,
-									origin: obj,
-								}));
-							}}
-						/> */}
-
 				<AsyncSelect
 					{...originControls}
-					value={location?.origin}
-					onChange={(val) => setLocation((prev) => ({ ...prev, origin: val }))}
+					value={formValues?.origin}
+					onChange={(val) => setFormValues((prev) => ({ ...prev, origin: val }))}
 				/>
 
 			</div>
 
-			<div className={styles.form_item}>
+			<div className={styles.form_item} style={{ width: `${getFlex(destinationControls.span)}%` }}>
 				<div className={styles.label}>
-					{destination || ''}
+					{destinationControls.label || ''}
 					{' '}
 					<div className={styles.required_mark}>*</div>
 				</div>
 
 				<AsyncSelect
 					{...destinationControls}
-					value={location?.destination}
-					onChange={(val) => setLocation((prev) => ({ ...prev, destination: val }))}
+					value={formValues?.destination}
+					onChange={(val) => setFormValues((prev) => ({ ...prev, destination: val }))}
 				/>
 
 			</div>

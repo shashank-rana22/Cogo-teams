@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import getDefaultPayload from '../../utils/getDefaultPayload';
 
@@ -10,8 +10,8 @@ import styles from './styles.module.css';
 
 function Routes({
 	mode = {},
-	location = {},
-	setLocation = () => {},
+	formValues = {},
+	setFormValues = () => {},
 	handleSubmit,
 	errors,
 	organization,
@@ -19,13 +19,12 @@ function Routes({
 	createSearch,
 	createSearchLoading,
 }) {
+	const [buttonDisabled, setButtonDisabled] = useState(true);
 	const router = useRouter();
-
-	const buttonDisabled = !location?.origin || !location?.destination;
 
 	const service_type = mode.mode_value;
 
-	const formValues = watch();
+	const form = watch();
 
 	const onClickSearch = async () => {
 		if (!isEmpty(errors)) {
@@ -34,20 +33,32 @@ function Routes({
 
 		const default_payload = getDefaultPayload({
 			serviceType : service_type,
-			origin      : location.origin,
-			destination : location.destination,
+			origin      : formValues.origin,
+			destination : formValues.destination,
 		});
 
 		const spot_search_id = await createSearch({
 			action : 'default',
-			values : { default_payload, service_type, ...organization, ...formValues },
+			values : { default_payload, service_type, ...organization, ...form },
 		});
 
-		router.push(
-			'/book/[spot_search_id]/[importer_exporter_id]',
-			`/book/${spot_search_id}/${organization.organization_id}`,
-		);
+		if (spot_search_id) {
+			router.push(
+				'/book/[spot_search_id]/[importer_exporter_id]',
+				`/book/${spot_search_id}/${organization.organization_id}`,
+			);
+		}
 	};
+
+	useEffect(() => {
+		let canContinue = true;
+		Object.keys(formValues || {}).forEach((key) => {
+			if (!formValues[key] || isEmpty(formValues[key])) {
+				canContinue = false;
+			}
+		});
+		setButtonDisabled(!canContinue);
+	}, [formValues]);
 
 	return (
 		<div className={styles.container}>
@@ -57,8 +68,8 @@ function Routes({
 
 				<RouteForm
 					mode={mode}
-					location={location}
-					setLocation={setLocation}
+					formValues={formValues}
+					setFormValues={setFormValues}
 				/>
 			</div>
 

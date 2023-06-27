@@ -1,15 +1,12 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import List from '../../common/List';
 import { salesDashboard as configurations } from '../../configurations/sales-dashboard';
 
+import List from './List';
 import styles from './styles.module.css';
 
-function SalesDashboard() {
-	const [selectedRow, setSelectedRow] = useState({ data: null, type: null });
-	const [ie, setIe] = useState('');
-
+function SalesDashboard({ importer_exporter_id = '' }) {
 	const centerLists = configurations.filter((list) => list.placement === 'center');
 
 	const [activeTab, setActiveTab] = useState(centerLists[0].type);
@@ -38,8 +35,7 @@ function SalesDashboard() {
 							<List
 								key={newList.type}
 								{...newList}
-								importer_exporter_id={ie || undefined}
-								setSelectedRow={setSelectedRow}
+								importer_exporter_id={importer_exporter_id || undefined}
 								dashboard="sales"
 							/>
 						</TabPanel>
