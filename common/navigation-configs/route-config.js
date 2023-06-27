@@ -22,14 +22,12 @@ import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
-import kraAssignment from './config/kra-assignment';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
-import performanceManagementConfiguration from './config/performance-management-configuration';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
@@ -111,8 +109,6 @@ const routeConfig = {
 	...shipmentFtlFreight,
 	...shipmentLtlFreight,
 	...ticketManagement,
-	...performanceManagementConfiguration,
-	...kraAssignment,
 	...liabilityDashboard,
 	...rfqDashboard,
 };
