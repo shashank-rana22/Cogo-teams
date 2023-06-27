@@ -19,7 +19,7 @@ const useGetTicketStats = () => {
 				},
 			});
 		} catch (error) {
-			console.log('error', error);
+			console.error('error', error);
 		}
 	}, [id, trigger]);
 
