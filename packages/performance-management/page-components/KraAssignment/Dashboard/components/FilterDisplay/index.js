@@ -32,7 +32,8 @@ function FilterFieldArray({
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
 			<div className={styles.header}>
 				<div>
-					{showFilter ? <Pill color="green">Filters Applied</Pill>
+					{showFilter
+						? <Pill color="green">Filters Applied</Pill>
 						: <div className={styles.filter}>Apply Filters</div>}
 				</div>
 

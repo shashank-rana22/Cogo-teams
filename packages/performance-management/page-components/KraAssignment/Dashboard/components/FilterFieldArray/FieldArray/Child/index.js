@@ -1,7 +1,7 @@
 import { IcMDelete } from '@cogoport/icons-react';
 
+import getFieldController from '../../../../../../../configs/getElementController';
 import getControls from '../../controls';
-import { getFieldController } from '../getFieldController';
 
 import styles from './styles.module.css';
 

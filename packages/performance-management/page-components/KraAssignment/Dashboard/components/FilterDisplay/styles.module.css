@@ -40,5 +40,9 @@
 
 .filter{
     font-weight: 600;
-    padding:10px
+    padding:10px 0px
+}
+
+.title{
+	padding-bottom: 6px;
 }
