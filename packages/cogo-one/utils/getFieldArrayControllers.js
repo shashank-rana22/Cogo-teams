@@ -1,7 +1,4 @@
-import {
-	InputController,
-
-} from '@cogoport/forms';
+import { InputController } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
 	input: InputController,
