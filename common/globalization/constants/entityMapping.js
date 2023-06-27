@@ -59,6 +59,7 @@ const ENTITY_MAPPING = {
 		feature_supported : ['cogo_books',
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
+			'upload_invoice',
 			'is_revoked'],
 		labels: {
 			irn_label: 'E-invoice',
