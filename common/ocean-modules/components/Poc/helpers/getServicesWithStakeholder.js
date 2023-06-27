@@ -1,12 +1,10 @@
 function checkForServiceOrShipment(key, stakeholderObj, stakeholder_id, stakeholder_type) {
 	const { service_id, service_type } = stakeholderObj || {};
 
-	let flag = false;
+	let flag = !service_id && !service_type;
 
 	if (key === 'service') {
 		flag = service_id && service_type;
-	} else {
-		flag = !service_id && !service_type;
 	}
 
 	return stakeholder_id
@@ -29,6 +27,10 @@ export default function getServicesWithStakeholder({
 
 	let modifiedServicesList = [];
 
+	if (!service_type && !shipment_type) {
+		return { modifiedServicesList };
+	}
+
 	if (service_type) {
 		const filteredStakeholdersData = (listStakeholdersData || []).filter(
 			(stakeholder) => checkForServiceOrShipment('service', stakeholder, stakeholder_id, stakeholder_type),
@@ -45,7 +47,11 @@ export default function getServicesWithStakeholder({
 				return false;
 			});
 		});
-	} else if (shipment_type) {
+
+		return { modifiedServicesList };
+	}
+
+	if (shipment_type) {
 		modifiedServicesList = (listStakeholdersData || []).filter(
 			(stakeholder) => checkForServiceOrShipment('shipment', stakeholder, stakeholder_id, stakeholder_type),
 		).map((stakeholder) => ({
@@ -53,6 +59,8 @@ export default function getServicesWithStakeholder({
 			new_stakeholder_id: stakeholder_id,
 			shipment_type,
 		}));
+
+		return { modifiedServicesList };
 	}
 
 	return { modifiedServicesList };
