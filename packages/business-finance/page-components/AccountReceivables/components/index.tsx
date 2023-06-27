@@ -24,11 +24,9 @@ interface Profile {
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const profile = useSelector((state) => state);
+	const { profile }:Profile = useSelector((state) => state);
 
-	const {
-		profile: { partner },
-	}:Profile = profile || {};
+	const { partner } = profile || {};
 
 	const { id: partnerId } = partner || {};
 
@@ -51,7 +49,7 @@ function AccountReceivables() {
 
 	const entityDataCount = entityData.length;
 
-	const EntityOptions = (entityData || []).map((item: ItemProps) => {
+	const entityOptions = (entityData || []).map((item: ItemProps) => {
 		const {
 			business_name: companyName = '',
 			entity_code: listEntityCode = '',
@@ -76,7 +74,7 @@ function AccountReceivables() {
 							name="business_name"
 							onChange={(entityVal: string) => setEntityCode(entityVal)}
 							value={entityCode}
-							options={EntityOptions}
+							options={entityOptions}
 							placeholder="Select Entity Code"
 							size="sm"
 							disabled={entityDataCount <= 1}
