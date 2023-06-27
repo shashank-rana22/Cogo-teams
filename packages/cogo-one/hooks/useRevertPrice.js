@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import getPayload from '../helpers/getRevertPricePayload';
 import { formatLineItems, formatFirstLineItem } from '../helpers/revertPriceHelpers';
 
-const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
+const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates, chargeableWeight }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_flash_booking_rate',
 		method : 'post',
@@ -30,7 +30,7 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 			}
 
 			await trigger({
-				data: getPayload({ lineItemsParams, values, id, service_type }),
+				data: getPayload({ lineItemsParams, values, id, service_type, chargeableWeight }),
 			});
 
 			Toast.success('Price successfully reverted.');

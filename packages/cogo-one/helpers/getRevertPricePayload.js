@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const MAX_WEIGHT_SLAB = 500;
+
 const getWeightSlabs = ({ values }) => {
 	const { price = 0, currency = '', weight_slabs = [] } = values || {};
 	const { lower_limit = '', upper_limit = '' } = weight_slabs[GLOBAL_CONSTANTS.zeroth_index];
@@ -13,19 +15,15 @@ const getWeightSlabs = ({ values }) => {
 	}];
 };
 
-const getAirServicePayload = ({ values }) => {
-	const isWeightSlabsEmpty = !values.weight_slabs?.[GLOBAL_CONSTANTS.zeroth_index].lower_limit;
-
-	return {
-		chargeable_weight          : Number(values?.chargeable_weight) || undefined,
-		operation_type             : values.operation_type || undefined,
-		airline_id                 : values.airline_id || undefined,
-		price_type                 : values.price_type || undefined,
-		weight_slabs               : !isWeightSlabsEmpty ? getWeightSlabs({ values }) : undefined,
-		rate_procurement_proof_url : values.rate_procurement_proof?.finalUrl || undefined,
-		schedule_type              : values.schedule_type || undefined,
-	};
-};
+const getAirServicePayload = ({ values, chargeableWeight }) => ({
+	chargeable_weight          : Number(values?.chargeable_weight) || undefined,
+	operation_type             : values.operation_type || undefined,
+	airline_id                 : values.airline_id || undefined,
+	price_type                 : values.price_type || undefined,
+	weight_slabs               : chargeableWeight < MAX_WEIGHT_SLAB ? getWeightSlabs({ values }) : undefined,
+	rate_procurement_proof_url : values.rate_procurement_proof?.finalUrl || undefined,
+	schedule_type              : values.schedule_type || undefined,
+});
 
 const getFclServicePayload = ({ values }) => ({
 	shipping_line_id : values.shipping_line_id || undefined,
@@ -37,7 +35,7 @@ const ACTIVE_SERVICE_PAYLOAD = {
 	fcl_freight_service : getFclServicePayload,
 };
 
-const getPayload = ({ lineItemsParams, values = {}, id, service_type = '' }) => ({
+const getPayload = ({ lineItemsParams, values = {}, id, service_type = '', chargeableWeight = 0 }) => ({
 	line_items           : lineItemsParams,
 	is_reverted          : true,
 	id,
@@ -45,7 +43,7 @@ const getPayload = ({ lineItemsParams, values = {}, id, service_type = '' }) => 
 	validity_end         : values.validity_end || undefined,
 	sourced_by_id        : values.sourced_by_id,
 	remarks              : values.remarks || undefined,
-	...(ACTIVE_SERVICE_PAYLOAD[service_type]?.({ values }) || {}),
+	...(ACTIVE_SERVICE_PAYLOAD[service_type]?.({ values, chargeableWeight }) || {}),
 
 });
 
