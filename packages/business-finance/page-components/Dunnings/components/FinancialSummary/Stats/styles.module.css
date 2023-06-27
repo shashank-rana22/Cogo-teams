@@ -1,0 +1,17 @@
+.header {
+    margin: 0px 32px;
+    padding-top: 20px;
+    display: flex;
+}
+
+.subject {
+    font-weight: 600;
+    font-size: var(--font-size-xl);
+    border-bottom: 2px solid var(--color-primary-error-red-3);
+    margin-right: 8px;
+}
+
+.flex_align{
+    display: flex;
+    align-items: center;
+}
