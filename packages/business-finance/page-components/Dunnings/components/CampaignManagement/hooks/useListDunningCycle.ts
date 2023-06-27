@@ -7,6 +7,7 @@ interface GlobalFilters {
 	page?: number;
 	cycleStatus?: string;
 	dunningCycleType?: string;
+	frequency?: string;
 }
 interface Props {
 	globalFilters?: GlobalFilters;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
-	const { search, page, cycleStatus, dunningCycleType } = globalFilters || {};
+	const { search, page, cycleStatus, dunningCycleType, frequency } = globalFilters || {};
 
 	const [
 		{ data, loading },
@@ -42,13 +43,14 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
 					query            : query || undefined,
 					cycleStatus      : cycleStatus || undefined,
 					dunningCycleType : dunningCycleType || undefined,
+					frequency        : frequency || undefined,
 					pageIndex        : page,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	}), [cycleStatus, dunningCycleType, page, query, trigger]);
+	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency]);
 
 	useEffect(() => {
 		getDunningList();
