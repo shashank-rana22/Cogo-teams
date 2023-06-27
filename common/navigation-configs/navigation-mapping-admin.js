@@ -1203,9 +1203,8 @@ const navigationMappingAdmin = {
 				href          : '/cost-booking',
 				as            : '/cost-booking',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_shipment_air_csr_sheets'],
 				possible_apis : apis.ff_cost_booking,
-				icon          : IcMBooking,
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',

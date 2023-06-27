@@ -1,4 +1,4 @@
-const apis = [
+const FF_COST_BOOKING_APIS = [
 	{
 		api          : 'list_organizations',
 		access_type  : 'private',
@@ -66,4 +66,4 @@ const apis = [
 	},
 ];
 
-export default apis;
+export default FF_COST_BOOKING_APIS;
