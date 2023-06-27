@@ -2,12 +2,6 @@
 	color: #f00;
 }
 
-.top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
 .target_remains_ctn {
 	width: 230px;
 	height: 40px;
