@@ -13,11 +13,11 @@
 	width: 100%;
 }
 
-.header_content{
+.header_content {
 	display: flex;
 	align-items: center;
 }
 
-.back_arrow{
+.back_arrow {
 	cursor: pointer;
 }

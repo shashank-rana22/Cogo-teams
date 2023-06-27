@@ -12,6 +12,9 @@ const performanceManagement = {
 	'/[partner_id]/performance-management/kra-management': {
 		navigation: 'performance_management-kra_management',
 	},
+	'/[partner_id]/performance-management/kra-management/create-kra': {
+		navigation: 'performance_management-kra_management',
+	},
 };
 
 module.exports = performanceManagement;
