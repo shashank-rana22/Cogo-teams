@@ -18,7 +18,7 @@ function RiskMangement() {
 
 	return (
 		<div>
-			<div className={styles.header}>Risk Mangement</div>
+			<div className={styles.header}>Risk Management</div>
 			<div className={styles.container}>
 				FCL
 			</div>

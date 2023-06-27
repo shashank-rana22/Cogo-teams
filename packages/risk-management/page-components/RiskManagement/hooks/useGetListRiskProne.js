@@ -35,7 +35,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 							risk_sub_reason     : reason,
 							q                   : query || undefined,
 							hs_code             : hsCode,
-							risk_type           : activeTab,
+							risk_type           : activeTab === 'both' ? ['container_movement', 'bl_do'] : activeTab,
 						},
 						sort_by            : 'created_at',
 						sort_type          : 'desc',
