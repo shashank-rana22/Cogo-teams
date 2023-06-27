@@ -3,13 +3,24 @@
     width:100%
 }
 
-.button_wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .select_container{
     width:40%;
-    padding: 4px 0px;
+    padding: 4px 0px 16px 0px;
+}
+
+.header{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.header_container{
+    padding-bottom: 20px;
+    display: flex;
+}
+
+.back_arrow{
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    cursor: pointer;
 }

@@ -1,6 +1,6 @@
-import { Button, Select } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { Select } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
@@ -22,7 +22,7 @@ function PerformanceRatingReview() {
 
 	const { data } = useGetRatingReviewDetails({ selectValue, level });
 
-	console.log('selectedEmployees', selectedEmployees);
+	const router = useRouter();
 
 	const onClickCheckbox = ({ event, item, identifier_key }) => {
 		setSelectedEmployees((previousValue) => {
@@ -67,39 +67,27 @@ function PerformanceRatingReview() {
 	};
 
 	const onClickEmployee = (id) => {
-		console.log('id', id);
 		setShow(id);
 	};
 
 	return (
 		<div className={styles.container}>
-			<div>
-				{
-				show
-					? <KraModal show={show} setShow={setShow} />
-					: null
-			}
-			</div>
-			<div>
-				Performance Rating Review
-			</div>
-
-			<div className={styles.button_wrapper}>
-				<div className={styles.select_container}>
-					<Select
-						value={selectValue}
-						onChange={setSelectValue}
-						options={selectOptions}
-					/>
+			<div className={styles.header_container}>
+				<div className={styles.back_arrow}>
+					<IcMArrowBack width={22} height={22} style={{ marginRight: 2 }} onClick={() => router.back()} />
 				</div>
 
-				<Button themeType="secondary">
-					<span style={{ paddingRight: 6, display: 'flex', alignItems: 'center' }}>
-						<IcMDownload width={14} height={14} />
-					</span>
-					Download CSV
-				</Button>
+				<div className={styles.header}>
+					Performance Rating Review
+				</div>
+			</div>
 
+			<div className={styles.select_container}>
+				<Select
+					value={selectValue}
+					onChange={setSelectValue}
+					options={selectOptions}
+				/>
 			</div>
 
 			<RenderVerticalHeadComponent
