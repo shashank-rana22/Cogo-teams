@@ -49,12 +49,13 @@ function AccountReceivables() {
 	};
 	const { loading, entityData = [] } = useListCogoEntities();
 
+	const entityDataCount = entityData.length;
+
 	const EntityOptions = (entityData || []).map((item: ItemProps) => {
 		const {
 			business_name: companyName = '',
 			entity_code: listEntityCode = '',
 		} = item || {};
-
 		return {
 			label : `${upperCase(companyName)} (${listEntityCode})`,
 			value : listEntityCode,
@@ -70,6 +71,7 @@ function AccountReceivables() {
 					<Placeholder width="200px" height="30px" />
 				) : (
 					<div className={styles.input}>
+
 						<Select
 							name="business_name"
 							onChange={(entityVal: string) => setEntityCode(entityVal)}
@@ -77,7 +79,9 @@ function AccountReceivables() {
 							options={EntityOptions}
 							placeholder="Select Entity Code"
 							size="sm"
+							disabled={entityDataCount <= 1}
 						/>
+
 					</div>
 				)}
 			</div>
