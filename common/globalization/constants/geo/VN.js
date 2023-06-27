@@ -445,8 +445,9 @@ export default {
 				validate_registration: false,
 			},
 			cogo_one: {
-				has_voice_call_access : false,
-				default_country_code  : 'IN',
+				has_voice_call_access     : false,
+				default_country_code      : 'IN',
+				template_default_language : 'vietnamese',
 			},
 		},
 	},
