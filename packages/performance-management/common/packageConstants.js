@@ -5,5 +5,7 @@ const PACKAGE_CONSTANTS = {
 		default_total_count  : 10,
 	},
 
+	DEFAULT_ACTIVE_TAB: 'active',
+
 };
 export default PACKAGE_CONSTANTS;
