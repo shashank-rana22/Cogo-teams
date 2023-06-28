@@ -46,7 +46,7 @@ function useGetShipment({ additional_methods = [] }) {
 			shipment_data              : data?.summary,
 			document_delay_status      : data?.document_delay_status,
 			container_details          : data?.container_details || [],
-			rollover_shipments_details : data?.rollover_shipments_details || [],
+			rollover_shipments_details : data?.rollover_shipments_details || {},
 			getShipmentStatusCode,
 		},
 	};
