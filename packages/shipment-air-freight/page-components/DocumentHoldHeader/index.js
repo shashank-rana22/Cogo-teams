@@ -1,9 +1,8 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
-
-import IncoTermMapping from '../../configurations/inco_term_mapping.json';
 
 import styles from './styles.module.css';
 
@@ -21,7 +20,7 @@ function DocumentHoldHeader() {
 
 	const { inco_term } = primary_service || {};
 	const { document_delay_status } = shipment_data || {};
-	const tradeType = IncoTermMapping[inco_term];
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term[inco_term].trade_type;
 
 	let status = startCase(document_delay_status);
 	if (document_delay_status === 'hold') {
