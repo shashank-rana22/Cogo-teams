@@ -15,6 +15,7 @@ const useCreateChapter = ({ fetchList, setShowChapterModal }) => {
 					...values,
 				},
 			});
+
 			Toast.success('Chapter has been created successfully');
 			setShowChapterModal(false);
 			fetchList();

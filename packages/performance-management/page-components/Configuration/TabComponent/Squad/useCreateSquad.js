@@ -15,6 +15,7 @@ const useCreateSquad = ({ fetchList, setShowSquadModal }) => {
 					...values,
 				},
 			});
+
 			Toast.success('Squad has been created successfully');
 			setShowSquadModal(false);
 			fetchList();

@@ -19,6 +19,7 @@ const useDeleteSquad = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
 			await trigger({
 				data: payload,
 			});
+
 			Toast.success('Squad has been deleted successfully');
 			setShowDeleteModal(false);
 			fetchList();
