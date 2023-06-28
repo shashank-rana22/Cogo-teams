@@ -21,7 +21,7 @@ const useUpdateEmployeeManualTarget = ({ item }) => {
 				},
 			});
 
-			Toast.success('Sucessfully Update Rating');
+			Toast.success('Rating has been updated successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
