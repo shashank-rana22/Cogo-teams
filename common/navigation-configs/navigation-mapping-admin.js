@@ -2215,44 +2215,6 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
-	// performance_management: {
-	// 	key         : 'performance_management',
-	// 	title       : 'Performance Management',
-	// 	isSubNavs   : true,
-	// 	module_type : 'dashboards',
-	// 	main_apis   : ['list_user_feedbacks'],
-	// 	icon        : IcMPartnersCogoport,
-	// 	options     : [
-	// 		{
-	// 			key           : 'performance_management-employee_directory',
-	// 			title         : 'Employee Directory',
-	// 			href          : '/v2/performance-management/employee-directory',
-	// 			as            : '/v2/performance-management/employee-directory',
-	// 			possible_apis : apis.employee_directory,
-	// 		},
-	// 		{
-	// 			key           : 'performance_management-user_dashboard',
-	// 			title         : 'User Dashboard',
-	// 			href          : '/v2/performance-management/user-dashboard',
-	// 			as            : '/v2/performance-management/user-dashboard',
-	// 			possible_apis : apis.user_dashboard,
-	// 		},
-	// 		{
-	// 			key           : 'performance_management-manager_dashboard',
-	// 			title         : 'Manager Dashboard',
-	// 			href          : '/v2/performance-management/manager-dashboard',
-	// 			as            : '/v2/performance-management/manager-dashboard',
-	// 			possible_apis : apis.manager_dashboard,
-	// 		},
-	// 		{
-	// 			key           : 'performance_management-hr_dashboard',
-	// 			title         : 'HR Dashboard',
-	// 			href          : '/v2/performance-management/hr-dashboard',
-	// 			as            : '/v2/performance-management/hr-dashboard',
-	// 			possible_apis : apis.hr_dashboard,
-	// 		},
-	// 	],
-	// },
 	ihls: {
 		key         : 'ihls',
 		title       : 'IHLS',
@@ -2355,7 +2317,7 @@ const navigationMappingAdmin = {
 		options     : [
 			{
 				key           : 'performance_management-performance_management_configuration',
-				title         : 'Performance Management Configuration',
+				title         : 'Configuration',
 				href          : '/v2/performance-management/configuration',
 				as            : '/v2/performance-management/configuration',
 				type          : 'link',
