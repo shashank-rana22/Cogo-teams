@@ -14,7 +14,11 @@ const ENTITY_MAPPING = {
 		currency          : 'INR',
 		feature_supported : ['post_to_sage'],
 		labels            : {
-			irn_label: 'IRN',
+			irn_label                 : 'IRN',
+			tax_label                 : 'PAN Number',
+			sage_label                : 'Sage ID',
+			search_options_label_pan  : 'Business Name/PAN Number',
+			search_options_label_sage : 'Sage ID',
 		},
 	},
 	201: {
@@ -25,7 +29,11 @@ const ENTITY_MAPPING = {
 		currency          : 'EUR',
 		feature_supported : ['cogo_books', 'post_to_sage'],
 		labels            : {
-			irn_label: 'IRN',
+			irn_label                 : 'IRN',
+			tax_label                 : 'PAN Number',
+			sage_label                : 'Sage ID',
+			search_options_label_pan  : 'Business Name/PAN Number',
+			search_options_label_sage : 'Sage ID',
 		},
 	},
 	301: {
@@ -36,7 +44,11 @@ const ENTITY_MAPPING = {
 		currency          : 'INR',
 		feature_supported : ['cogo_books', 'post_to_sage', 'cancel_irn'],
 		labels            : {
-			irn_label: 'IRN',
+			irn_label                 : 'IRN',
+			tax_label                 : 'PAN Number',
+			sage_label                : 'Sage ID',
+			search_options_label_pan  : 'Business Name/PAN Number',
+			search_options_label_sage : 'Sage ID',
 		},
 	},
 	401: {
@@ -47,7 +59,11 @@ const ENTITY_MAPPING = {
 		currency          : 'SGD',
 		feature_supported : ['cogo_books', 'post_to_sage'],
 		labels            : {
-			irn_label: 'IRN',
+			irn_label                 : 'IRN',
+			tax_label                 : 'PAN Number',
+			sage_label                : 'Sage ID',
+			search_options_label_pan  : 'Business Name/PAN Number',
+			search_options_label_sage : 'Sage ID',
 		},
 	},
 	501: {
@@ -62,7 +78,11 @@ const ENTITY_MAPPING = {
 			'upload_invoice',
 			'is_revoked'],
 		labels: {
-			irn_label: 'E-invoice',
+			irn_label                 : 'E-invoice',
+			tax_label                 : 'VAT Number',
+			sage_label                : null,
+			search_options_label_pan  : 'Business Name/VAT Number',
+			search_options_label_sage : null,
 		},
 	},
 };

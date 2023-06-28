@@ -3,7 +3,7 @@ import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@
 import { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
-import { SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
+import { SORTBY_OPTION, getSearchOptionsLabels } from '../../../constants/index';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
@@ -26,6 +26,7 @@ interface OutstandingFilterProps {
 	clearFilter: () => void;
 	queryKey: string,
 	setQueryKey: (p:string) => void,
+	entityCode
 }
 
 function Filters({
@@ -39,6 +40,7 @@ function Filters({
 	setFormFilters,
 	clearFilter,
 	queryKey,
+	entityCode,
 	setQueryKey,
 }: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
@@ -65,13 +67,13 @@ function Filters({
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
 				<div className={styles.sort_container}>
-
 					<Popover
 						placement="bottom"
 						render={(
 							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
 									<div
+										key={item.value}
 										className={styles.styled_col}
 										onClick={() => {
 											setOrderBy({
@@ -127,18 +129,22 @@ function Filters({
 							placement="bottom"
 							render={(
 								<div className={styles.styled_row}>
-									{SEARCH_OPTIONS.map((item) => (
-										<div
-											className={styles.styled_col}
-											onClick={() => {
-												setQueryKey(item?.value || 'q');
-												setShowSearchPopover(!showSearchPopover);
-												setParams({ ...params, page: 1 });
-											}}
-											role="presentation"
-										>
-											<div className={styles.tile_heading}>{item.label}</div>
-										</div>
+									{getSearchOptionsLabels(entityCode).map((item) => (
+										item.label
+										&& (
+											<div
+												key={item.value}
+												className={styles.styled_col}
+												onClick={() => {
+													setQueryKey(item?.value || 'q');
+													setShowSearchPopover(!showSearchPopover);
+													setParams({ ...params, page: 1 });
+												}}
+												role="presentation"
+											>
+												<div className={styles.tile_heading}>{item.label}</div>
+											</div>
+										)
 									))}
 								</div>
 							)}
