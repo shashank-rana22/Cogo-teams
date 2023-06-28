@@ -8,7 +8,7 @@ const openLink = (url) => {
 	window.open(url, '_blank');
 };
 
-const VISIT_COGO_ACADEMY_EXCLUSION_LIST = ['training'];
+const VISIT_COGO_ACADEMY_EXCLUSION_ROLE = 'training';
 
 function Courses() {
 	const { auth_role_data } = useSelector((state) => state.profile);
@@ -35,7 +35,7 @@ function Courses() {
 					<div className={styles.description}>{description}</div>
 				</div>
 
-				{!role_functions.some((r) => VISIT_COGO_ACADEMY_EXCLUSION_LIST.includes(r)) ? (
+				{!role_functions.includes(VISIT_COGO_ACADEMY_EXCLUSION_ROLE) ? (
 					<div className={styles.tag_and_link_container}>
 						<div className={styles.tag_container}>
 							<img src={tag_icon} alt="img" width={16} />

@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const VISIT_COGO_ACADEMY_EXCLUSION_LIST = ['training'];
+const VISIT_COGO_ACADEMY_EXCLUSION_ROLE = 'training';
 
 function CardItem({ data = {} }) {
 	const { auth_role_data } = useSelector((state) => state.profile);
@@ -28,7 +28,7 @@ function CardItem({ data = {} }) {
 	};
 
 	const isVisitCogoAcademyVisible = title !== 'CogoAcademy'
-			|| !role_functions.some((r) => VISIT_COGO_ACADEMY_EXCLUSION_LIST.includes(r));
+			|| !role_functions.includes(VISIT_COGO_ACADEMY_EXCLUSION_ROLE);
 
 	return (
 		<div className={styles.container}>
