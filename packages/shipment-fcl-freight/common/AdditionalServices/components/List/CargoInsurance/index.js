@@ -23,8 +23,7 @@ const geo = getGeoConstants();
 
 function CargoInsurance({
 	setAddCargoInsurance = () => {},
-	setShowInsurance = () => {},
-	showInsurance = false,
+	setShowModal = () => {},
 	data = {},
 	refetch = () => {},
 	primary_service = {},
@@ -136,10 +135,10 @@ function CargoInsurance({
 	return (
 		<Modal
 			size="sm"
-			show={showInsurance}
-			onClose={() => setShowInsurance(false)}
-			closeOnOuterClick={false}
 			showCloseIcon={!{ cargoLoading }}
+			show
+			onClose={() => setShowModal(false)}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>

@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
-
-const MOBILE_NUMBER_LIMIT = 10;
 
 export const personalDetailsControl = [
 	{
@@ -14,7 +13,6 @@ export const personalDetailsControl = [
 			{ label: 'Air', value: 'AIR', disabled: true },
 		],
 
-		className: 'primary md',
 	},
 	{
 		label    : 'Policy Type',
@@ -27,7 +25,6 @@ export const personalDetailsControl = [
 			{ label: 'Import', value: 'IMPORT', disabled: true },
 			{ label: 'Inland', value: 'INLAND', disabled: true },
 		],
-		className: 'primary md',
 	},
 	{
 		label       : 'First Name',
@@ -71,7 +68,11 @@ export const personalDetailsControl = [
 		placeholder : 'Enter your mobile number',
 		rules       : {
 			required : 'Mobile Number is required',
-			validate : (value) => (value?.length !== MOBILE_NUMBER_LIMIT ? 'Invalid Mobile Number' : true),
+			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Mobile Number',
+			pattern  : {
+				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
+				message : 'Invalid Mobile Number',
+			},
 		},
 	},
 ];

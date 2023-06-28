@@ -44,12 +44,6 @@ const useGetInsuranceRate = ({ insuranceDetails = {}, formValues = {} } = {}) =>
 		}
 	}, [cargoAmount, policyCurrency, premiumRate]);
 
-	useEffect(() => {
-		if (cargoAmount && !isEmpty(policyCurrency)) {
-			premiumRate();
-		}
-	}, [cargoAmount, policyCurrency, premiumRate]);
-
 	return {
 		premiumLoading : loading,
 		premiumData    : data,

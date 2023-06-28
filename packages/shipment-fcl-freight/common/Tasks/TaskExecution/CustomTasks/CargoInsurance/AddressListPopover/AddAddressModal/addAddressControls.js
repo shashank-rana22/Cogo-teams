@@ -1,20 +1,18 @@
-import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
 import FORM_VALUE_PATTERNS from '../../../../utils/formValuePatterns';
 
 const { EMAIL, GST_NUMBER } = FORM_VALUE_PATTERNS;
-const MOBILE_VALIDATOR = /^[0-9]{10}$/;
 
-export const addAddressControls = [
+export const addAddressControls = ({ setValue = () => {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
 		type        : 'text',
 		placeholder : 'Enter Billing Party Name',
 		rules       : {
-			required: { value: true, message: 'Billing Party Name is required' },
+			required: { message: 'Billing Party Name is required' },
 		},
 		span: 6,
 	},
@@ -24,36 +22,52 @@ export const addAddressControls = [
 		type        : 'text',
 		placeholder : 'Enter Address',
 		rules       : {
-			required: { value: true, message: 'Address is required' },
+			required: { message: 'Address is required' },
 		},
 		span: 6,
 	},
 	{
 		label       : 'Pincode',
 		name        : 'pincode',
-		type        : 'text',
+		type        : 'async_select',
 		placeholder : 'Enter Pincode',
+		asyncKey    : 'list_locations',
+		valueKey    : 'postal_code',
+		labelKey    : 'postal_code',
 		rules       : {
-			required: { value: true, message: 'Pincode is required' },
+			required: { message: 'Pincode is required' },
 		},
-		span: 3,
+		getSelectedOption: (option) => {
+			setValue('country_id', option?.country?.name);
+			setValue('state', option?.region?.name);
+			setValue('city', option?.city?.name);
+		},
+		initialCall : false,
+		params      : {
+			filters: {
+				type: ['pincode'],
+			},
+			includes: {
+				country                 : true,
+				region                  : true,
+				city                    : true,
+				default_params_required : true,
+			},
+		},
+		show : true,
+		span : 3,
+
 	},
 	{
 		label       : 'Country',
 		name        : 'country_id',
-		type        : 'async_select',
+		type        : 'text',
 		placeholder : 'Enter Country',
 		rules       : {
 			required: { value: true, message: 'Country is required' },
 		},
-		asyncKey    : 'list_locations',
-		initialCall : false,
-		params      : {
-			filters: {
-				type: ['country'],
-			},
-		},
-		span: 6,
+		span     : 6,
+		disabled : true,
 	},
 	{
 		label       : 'State',
@@ -112,26 +126,22 @@ export const addAddressControls = [
 		type        : 'mobileSelect',
 		placeholder : 'Enter Phone Number',
 		rules       : {
-			pattern: {
-				value   : MOBILE_VALIDATOR,
-				message : 'Invalid phone number',
+			required : 'Mobile Number is required',
+			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Phone Number',
+			pattern  : {
+				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
+				message : 'Invalid Phone Number',
 			},
 		},
 		span: 6,
 	},
 ];
 
-export const useGetControls = ({ checked }) => {
-	const {
-		watch,
-	} = useForm();
-	const country_id = watch('country_id');
+export const useGetControls = ({ checked, country_id = '', setValue = () => {} }) => {
+	const countryCode = getCountryDetails({ country_id });
+	const controls = addAddressControls({ setValue });
 
-	const countryCode = getCountryDetails({
-		country_id,
-	});
-
-	return (addAddressControls || []).map((control) => {
+	return (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
 				...control,

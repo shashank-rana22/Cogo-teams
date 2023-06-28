@@ -45,7 +45,7 @@ const getDefaultValues = ({ insuranceDetails = {}, shipment_data = {}, policyDet
 		policyCommodityId : policyCommodityId || cargo_insurance_commodity_id,
 		cargoDescription  : cargoDescription || cargo_insurance_commodity_description,
 		policyCountryId   : policyCountryId || (policyType === 'IMPORT' ? origin_country_id : destination_country_id),
-		transitDate       : transitDate ? new Date(insuranceDetails?.transitDate) : addDays(new Date(), MIN_DATE_LIMIT),
+		transitDate       : transitDate ? getDate(insuranceDetails?.transitDate) : addDays(new Date(), MIN_DATE_LIMIT),
 	};
 	return values;
 };

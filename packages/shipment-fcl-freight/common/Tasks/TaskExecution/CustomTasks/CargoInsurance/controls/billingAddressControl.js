@@ -1,6 +1,6 @@
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
-export const billingAddressControl = [
+export const billingAddressControl = ({ setValue = () => {} }) => [
 	{
 		label       : 'GST',
 		name        : 'gstin',
@@ -33,18 +33,39 @@ export const billingAddressControl = [
 		rules       : { required: { message: 'Address is required' } },
 		span        : 3,
 		height      : 25,
-		className   : 'primary md',
 		style       : {
 			resize: 'vertical',
 		},
 	},
 	{
 		label       : 'Pincode',
-		name        : 'billingPincode',
-		type        : 'text',
+		name        : 'pincode',
+		type        : 'async-select',
 		placeholder : 'Enter Pincode',
-		rules       : { required: 'required *' },
-		span        : 3,
+		asyncKey    : 'list_locations',
+		valueKey    : 'postal_code',
+		labelKey    : 'postal_code',
+		rules       : {
+			required: { message: 'Pincode is required' },
+		},
+		getSelectedOption: (option) => {
+			setValue('billingState', option?.region?.name);
+			setValue('billingCity', option?.city?.name);
+		},
+		initialCall : false,
+		params      : {
+			filters: {
+				type: ['pincode'],
+			},
+			includes: {
+				country                 : true,
+				region                  : true,
+				city                    : true,
+				default_params_required : true,
+			},
+		},
+		show : true,
+		span : 3,
 	},
 	{
 		label    : 'City',

@@ -103,7 +103,7 @@
 }
 
 .popover {
-	[role="button"] {
+	& > [role="button"] {
 		width: fit-content;
 		text-decoration: underline;
 	}

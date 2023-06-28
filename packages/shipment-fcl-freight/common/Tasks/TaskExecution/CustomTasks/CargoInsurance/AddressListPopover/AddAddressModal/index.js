@@ -1,16 +1,13 @@
-import { Toast, Checkbox, cl, Modal, Button } from '@cogoport/components';
+import { Checkbox, cl, Modal, Button } from '@cogoport/components';
 import {
 	InputController, MobileNumberController,
 	SelectController, TextAreaController, UploadController, useForm,
 	AsyncSelectController,
 } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useCreateOrganizationBillingAddress';
-import useGetStateFromPincode from '../../../../../../../hooks/useGetStateFromPincode';
 
 import { useGetControls } from './addAddressControls';
 import styles from './styles.module.css';
@@ -44,14 +41,14 @@ function AddModal({
 	const [checked, setChecked] = useState(false);
 	const [showPoc, setShowPoc] = useState(false);
 	const [addressType, setAddressType] = useState('office');
-	const addAddressControls = useGetControls({ checked });
 	const {
 		handleSubmit,
 		formState: { errors },
-		setValue,
-		watch,
 		control,
+		setValue,
 	} = useForm();
+
+	const addAddressControls = useGetControls({ checked, setValue });
 
 	const handleCloseModal = () => {
 		setAddAddressModal(false);
@@ -68,23 +65,7 @@ function AddModal({
 		refetch         : refetchAfterApiCall,
 	});
 
-	const pincode = watch('pincode');
-
-	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf: false });
-	const { list } = cityState || {};
-	const { region, city } = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	useMemo(() => {
-		if (isEmpty(list)) {
-			Toast.error('Invalid Pincode');
-		}
-		if (city || region?.name) {
-			setValue('city', city?.name);
-			setValue('state', region?.name);
-		}
-	}, [list, city, region?.name, setValue]);
-
-	function FormElement({ name, label, errorss, type, span, ...rest }) {
+	function FormElement({ name, label, type, span, ...rest }) {
 		const Element = CONTROL_TYPE_MAPPING[type];
 		return Element ? (
 			<div>
@@ -93,14 +74,11 @@ function AddModal({
 					name={name}
 					type={type}
 					{...rest}
-					className={`${
-						name === 'tax_number' ? styles.taxNumber : ''
-					} element input`}
+					className={`${name === 'tax_number' ? styles.taxNumber : ''} element input`}
 				/>
-				{errorss?.[name] ? <div>{errorss?.[name]?.message}</div> : null}
-				{VALIDATION_ERROR.includes(errors[name]?.type) ? (
-					<div className={styles.text} size={10} color="#CB6464">
-						{errors[name]?.message}
+				{VALIDATION_ERROR.includes(errors?.[name]?.type) ? (
+					<div className={styles.text}>
+						{errors?.[name]?.message}
 					</div>
 				) : null}
 			</div>
@@ -119,7 +97,7 @@ function AddModal({
 		<Modal
 			show={addAddressModal}
 			onClose={handleCloseModal}
-			width="600"
+			size="md"
 		>
 			<form>
 				<div className={styles.container}>

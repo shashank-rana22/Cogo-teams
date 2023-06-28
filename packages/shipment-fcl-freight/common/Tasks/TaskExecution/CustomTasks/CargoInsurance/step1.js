@@ -1,10 +1,8 @@
-import { Button, Toggle, Toast, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Button, Toggle, cl } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import useGetStateFromPincode from '../../../../../hooks/useGetStateFromPincode';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 
 import BillingAddressDetails from './BillingAddressDetails';
@@ -45,27 +43,10 @@ function Step1({
 
 	const {
 		handleSubmit = () => {},
-		watch,
-		setValue,
 		control,
 		getValues,
 		formState: { errors },
 	} = formProps;
-
-	const pincode = watch('billingPincode');
-
-	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf });
-	const { region, city } = cityState?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	useMemo(() => {
-		if (isEmpty(cityState)) {
-			Toast.error('Invalid Pincode');
-		}
-		if (city || region?.name) {
-			setValue('city', city?.name);
-			setValue('state', region?.name);
-		}
-	}, [cityState, city, region?.name, setValue]);
 
 	const handleNextStep = (key) => {
 		const newFormValues = { ...insuranceDetails, ...getValues() };

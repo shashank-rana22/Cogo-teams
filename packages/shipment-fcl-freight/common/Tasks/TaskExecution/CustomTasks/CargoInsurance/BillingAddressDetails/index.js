@@ -1,12 +1,10 @@
-import { Loader, Toast, Popover, Radio, cl } from '@cogoport/components';
+import { Loader, Popover, Radio, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useMemo, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
-import useGetStateFromPincode from '../../../../../../hooks/useGetStateFromPincode';
 import useListAddressForInsurance from '../../../../../../hooks/useListAddressForInsurance';
 import AddressListPopover from '../AddressListPopover';
 import { billingAddressControl } from '../controls/billingAddressControl';
@@ -26,41 +24,24 @@ function BillingAddressDetails({
 }) {
 	const [showFilters, setshowFilters] = useState(false);
 	const [addAddressModal, setAddAddressModal] = useState(false);
-	const { shipment_data } = useContext(
-		ShipmentDetailContext,
-	);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { data, loading: addressLoading } = useListAddressForInsurance({
 		organization_id: shipment_data?.importer_exporter?.id,
 	});
 
 	const {
-		watch,
 		setValue,
 		control,
 		formState: { errors },
 	} = formProps;
 
-	const pincode = watch('billingPincode');
-
-	const { cityState } = useGetStateFromPincode({ pincode, policyForSelf });
-	const { region, city } = cityState?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	useMemo(() => {
-		if (isEmpty(cityState)) {
-			Toast.error('Invalid Pincode');
-		}
-		if (city || region?.name) {
-			setValue('city', city?.name);
-			setValue('state', region?.name);
-		}
-	}, [cityState, city, region?.name, setValue]);
 	return (
 		<div>
 			{policyForSelf ? (
 				<div className={styles.popover}>
 					<Layout
-						fields={billingAddressControl}
+						fields={billingAddressControl({ setValue })}
 						control={control}
 						errors={errors}
 					/>

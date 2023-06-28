@@ -31,7 +31,6 @@ function List({ isSeller = false }) {
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
-	const [showInsurance, setShowInsurance] = useState(false);
 
 	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
 
@@ -135,7 +134,7 @@ function List({ isSeller = false }) {
 
 				{SERVICES_FOR_INSURANCE.includes(shipment_data?.shipment_type) ? (
 					<Button
-						onClick={() => setShowInsurance(true)}
+						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
 						disabled={!!isCargoInsured}
 					>
@@ -192,13 +191,11 @@ function List({ isSeller = false }) {
 				)
 				: null}
 
-			{showInsurance ? (
+			{showModal === 'cargo_insurance_service' ? (
 				<CargoInsurance
-					setAddCargoInsurance={setShowInsurance}
 					data={shipment_data}
 					refetch={refetch}
-					showInsurance={showInsurance}
-					setShowInsurance={setShowInsurance}
+					setShowModal={setShowModal}
 					primary_service={primary_service}
 				/>
 			) : null}
