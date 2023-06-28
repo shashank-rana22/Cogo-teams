@@ -15,11 +15,11 @@ const CONSTANTS = {
 
 const getLeaderBoardColumns = ({
 	setScoreTrendIds,
-	checkedRowsId,
-	setCheckedRowsId,
-	currentPageListIds,
-	setIsAllChecked,
-	isAllChecked,
+	checkedRowsId = [],
+	setCheckedRowsId = () => {},
+	currentPageListIds = [],
+	setIsAllChecked = () => {},
+	isAllChecked = false,
 	selectAllHelper = () => {},
 }) => {
 	const onChangeBodyCheckbox = ({ event, user_id }) => {

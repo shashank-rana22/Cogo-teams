@@ -1,5 +1,6 @@
 import { useForm } from '@cogoport/forms';
-import { useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 
 import controls from '../configurations/get-leaderboard-filters-controls';
 
@@ -7,6 +8,11 @@ import useGetAccountDistributionGraph from './useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderboard';
 
 const useGetAccountLeaderboardData = () => {
+	const [checkedRowsId, setCheckedRowsId] = useState([]);
+	const [isAllChecked, setIsAllChecked] = useState(false);
+
+	console.log('checkedRowsId', checkedRowsId);
+
 	const {
 		graphData,
 		graphLoading,
@@ -68,6 +74,25 @@ const useGetAccountLeaderboardData = () => {
 		}));
 	}, [organization, user_id, date, service, warmth, segment, setGraphParams, setLeaderboardParams]);
 
+	const currentPageListIds = useMemo(() => leaderboardList
+		.filter(() => warmth === 'ice_cold' || warmth === 'cold')
+		.map(() => user_id), [leaderboardList, warmth, user_id]);
+
+	const selectAllHelper = useCallback((listArgument = []) => {
+		const isRowsChecked = currentPageListIds.every((id) => listArgument?.includes(id));
+		if (isRowsChecked !== isAllChecked) {
+			setIsAllChecked(isRowsChecked);
+		}
+	}, [currentPageListIds, isAllChecked]);
+
+	useEffect(() => {
+		if (isEmpty(currentPageListIds)) {
+			return;
+		}
+
+		selectAllHelper(checkedRowsId);
+	}, [currentPageListIds, selectAllHelper, checkedRowsId]);
+
 	useEffect(() => {
 		resetField('user_id');
 	}, [service, resetField]);
@@ -83,6 +108,12 @@ const useGetAccountLeaderboardData = () => {
 		getNextPage,
 		control,
 		filterControls: mutatedControls,
+		checkedRowsId,
+		setCheckedRowsId,
+		isAllChecked,
+		setIsAllChecked,
+		currentPageListIds,
+		selectAllHelper,
 	};
 };
 

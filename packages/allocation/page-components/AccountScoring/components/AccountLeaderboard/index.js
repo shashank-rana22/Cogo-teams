@@ -15,6 +15,12 @@ function AccountLeaderboard() {
 		getNextPage,
 		control,
 		filterControls,
+		checkedRowsId,
+		setCheckedRowsId = () => {},
+		currentPageListIds = [],
+		isAllChecked,
+		setIsAllChecked = () => {},
+		selectAllHelper = () => {},
 	} = useGetAccountLeaderboardData();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -40,6 +46,12 @@ function AccountLeaderboard() {
 				page_limit={page_limit}
 				total_count={total_count}
 				getNextPage={getNextPage}
+				checkedRowsId={checkedRowsId}
+				setCheckedRowsId={setCheckedRowsId}
+				currentPageListIds={currentPageListIds}
+				isAllChecked={isAllChecked}
+				setIsAllChecked={setIsAllChecked}
+				selectAllHelper={selectAllHelper}
 			/>
 		</section>
 	);
