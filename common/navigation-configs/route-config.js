@@ -106,11 +106,8 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
-<<<<<<< HEAD
-	...revenueDesk,
-=======
 	...awbInventory,
->>>>>>> 36b489cc59bbe1bd63e8e1d947878535b576ad98
+	...revenueDesk,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
