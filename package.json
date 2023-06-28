@@ -20,7 +20,16 @@
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "eslint_file": "eslint",
     "stylelint": "stylelint \"**/*.css\"",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "lint": "eslint",
+    "precommit": "lint-staged"
+
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "@cogoport/maps": "^1.0.3",
@@ -38,6 +47,7 @@
     "fs-extra": "^11.1.1",
     "git-precommit-checks": "^3.1.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^6.0.1",

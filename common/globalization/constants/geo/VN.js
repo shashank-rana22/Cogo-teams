@@ -205,8 +205,12 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_shipment_agent_ids: [
+		cogo_one_admin_user_ids     : [], // todo
+		cogo_one_shipment_agent_ids : [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		cogo_one_kam_agent_ids: [
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
 		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
 		fortigo_network_ids : [
@@ -422,8 +426,9 @@ export default {
 				validate_registration: false,
 			},
 			cogo_one: {
-				has_voice_call_access : false,
-				default_country_code  : 'IN',
+				has_voice_call_access     : false,
+				default_country_code      : 'IN',
+				template_default_language : 'vietnamese',
 			},
 		},
 	},

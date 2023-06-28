@@ -9703,6 +9703,31 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_template_groups',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_communication_templates_to_group',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_template_group_tags',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -9953,6 +9978,21 @@ const partner = {
 		},
 		{
 			api          : 'list_cogostore_product_codes',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_product_sub_categories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_attributes',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product_subcategory',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -10935,6 +10975,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_cogopoint_top_history',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_liability_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+
 	],
 	air_revenue_desk: [
 		{
@@ -12244,6 +12295,36 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_cogoone_timeline',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'escalate_supplier_to_rm',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12552,6 +12633,32 @@ const partner = {
 			service_name : 'checkout',
 		},
 
+	],
+	business_finance_dunnings: [
+		{
+			api         : 'list_organization_trade_party_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_create_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_cycle_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_master_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_dunning',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
 	],
 };
 
