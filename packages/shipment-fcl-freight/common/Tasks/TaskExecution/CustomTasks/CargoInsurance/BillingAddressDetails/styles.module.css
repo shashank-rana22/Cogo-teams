@@ -1,50 +1,50 @@
-.title{
-	margin: 20px 0px 4px 0px;
+.title {
+	margin: 20px 0 4px;
 	font-weight: 700;
 	color: #393f70;
 }
 
-.billing_party_container{
+.billing_party_container {
 	display: flex;
+	gap: 10px;
 	align-items: flex-start;
-	gap: 10px;
 	min-width: 355px;
-	padding: 10px;
-	border-radius: 10px;
-	border: 1px solid rgb(255, 254, 249);
-	box-shadow: rgba(71, 111, 211, 0.2) 0px 2px 12px;
 	height: 130px;
-	cursor: pointer;
-}
-
-.list{
-	display: flex;
-	width: 100%;
-	overflow: auto;
-	gap: 10px;
 	padding: 10px;
+	cursor: pointer;
+	border: 1px solid rgb(255 254 249);
+	border-radius: 10px;
+	box-shadow: rgb(71 111 211 / 20%) 0 2px 12px;
 }
 
-.details{
+.list {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	padding: 10px;
+	overflow: auto;
+}
+
+.details {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 }
 
-.billing_party{
+.billing_party {
 	font-size: 15px;
 	font-weight: 500;
 
 	&.details {
-		font-weight: 400;
 		font-size: 12px;
+		font-weight: 400;
 	}
 }
 
-.align_div{
+.align_div {
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
+	justify-content: flex-start;
 	font-size: 15px;
 
 	.changeAddress {
@@ -61,38 +61,40 @@
 
 	&.marginLeft {
 		margin-left: 10px;
+
 		.marginLeft {
 			margin-left: 2px;
 		}
+
 		.core-ui-radio-label {
 			margin-left: 3px !important;
 		}
 	}
 
 	&.addAddress {
-		width: 30%;
 		justify-content: flex-start;
+		width: 30%;
+		margin: 50px 0 10px;
 		text-decoration: underline;
-		margin: 50px 0 10px 0;
 	}
 }
 
-.section2{
-	margin: 10px;
+.section2 {
 	max-width: 30%;
-	border-radius: 10px;
+	margin: 10px;
 	background: #fffef9;
 	border: 1px solid #d6483a;
-	box-shadow: 0px 2px 12px rgba(71, 111, 211, 0.2);
+	border-radius: 10px;
+	box-shadow: 0 2px 12px rgb(71 111 211 / 20%);
 
 	.selected {
 		padding: 10px;
 	}
 }
 
-.card_txt{
-	font-size: 12px;
+.card_txt {
 	margin: 3px 0;
+	font-size: 12px;
 
 	&.orgName {
 		font-size: 14px;
@@ -100,8 +102,9 @@
 	}
 }
 
-.popover{
-	[role="button"]{
-		width:fit-content;
+.popover {
+	[role="button"] {
+		width: fit-content;
+		text-decoration: underline;
 	}
 }

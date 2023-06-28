@@ -1,31 +1,31 @@
-.container{
-	:global{
-		.form_layout_row{
+.container {
+	:global {
+		.form_layout_row {
 			flex-wrap: nowrap;
 		}
 	}
 }
 
-.button_container{
+.button_container {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 28px;
 }
 
-.sub_header{
+.sub_header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin: 20px 0 0 10px;
 }
 
-.label_val{
-	color: #393f70;
-	font-weight: 700;
+.label_val {
 	font-size: 16px;
+	font-weight: 700;
+	color: #393f70;
 }
 
-.flex_row{
+.flex_row {
 	display: flex;
 
 	&.flex {
@@ -49,8 +49,8 @@
 	}
 }
 
-.title{
-	margin: 20px 0px 4px 0px;
+.title {
+	margin: 20px 0 4px;
 	font-weight: 700;
 	color: #393f70;
 }

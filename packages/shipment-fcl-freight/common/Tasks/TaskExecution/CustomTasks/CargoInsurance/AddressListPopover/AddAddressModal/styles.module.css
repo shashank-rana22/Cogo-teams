@@ -1,17 +1,17 @@
-.container{
+.container {
 	padding: 16px;
 }
 
-.text{
+.text {
 	margin-top: -8px;
 }
 
-.header{
+.header {
 	display: flex;
 	align-items: center;
 }
 
-.icon_container{
+.icon_container {
 	margin-right: 10px;
 
 	svg {
@@ -19,37 +19,37 @@
 	}
 }
 
-.title{
+.title {
 	margin: 0;
 	font-weight: 500;
 }
 
-.section{
+.section {
 	padding: 20px;
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	font-size: 13px;
 }
 
-.section_title{
+.section_title {
 	display: flex;
 	align-items: center;
 
 	.title {
-		font-weight: 400;
 		padding-right: 20px;
 		font-size: 14px;
+		font-weight: 400;
 	}
 }
 
-.row{
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 20px;
+.row {
 	display: grid;
 	grid-template-columns: 45% 45%;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
-.col{
+.col {
 	width: 100% !important;
 
 	.taxNumber {
@@ -57,14 +57,14 @@
 	}
 }
 
-.check_box_wrapper{
+.check_box_wrapper {
 	display: flex;
-	margin: 10px 0px;
-	font-size: 14px;
 	align-items: center;
+	margin: 10px 0;
+	font-size: 14px;
 
 	.gst {
-		margin: 0px 3px;
+		margin: 0 3px;
 	}
 
 	.addressSave {
@@ -103,7 +103,7 @@
 	}
 }
 
-.addresses{
+.addresses {
 	display: flex;
 }
 

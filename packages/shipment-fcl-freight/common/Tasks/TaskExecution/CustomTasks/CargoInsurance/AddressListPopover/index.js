@@ -1,10 +1,6 @@
 import { Placeholder, Checkbox, cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {
-	IcMPlansExpiring,
-	IcMCrossInCircle,
-	IcMPlus,
-} from '@cogoport/icons-react';
+import { IcMPlansExpiring, IcMCrossInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
 
@@ -29,10 +25,10 @@ function Addres({
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				<div className={styles.title}>Select Address</div>
-				{policyForSelf ? (
+				{!policyForSelf ? (
 					<Button
 						size="md"
-						themeType="primary"
+						themeType="secondary"
 						onClick={() => {
 							setshowFilters(false);
 						}}
@@ -42,7 +38,7 @@ function Addres({
 				) : (
 					<Button
 						size="md"
-						themeType="primary"
+						themeType="secondary"
 						onClick={() => setAddAddressModal(true)}
 					>
 						<IcMPlus height="20px" width="20px" />
@@ -55,12 +51,12 @@ function Addres({
 					{[...Array(CARD_LENGTH)]?.map(() => (
 						<div className={styles.card} key={uuid()}>
 							<div className={styles.section}>
-								<Placeholder className="checkboxPlaceholder" />
+								<Placeholder />
 							</div>
 
 							<div className={cl`${styles.Section} ${styles.info}`}>
 								<Placeholder />
-								<div className="number footerPlaceholder">
+								<div>
 									<Placeholder />
 									<Placeholder />
 								</div>
@@ -73,7 +69,7 @@ function Addres({
 					{isEmpty(data) && (
 						<div className={styles.empty_state}>
 							<IcMPlansExpiring width={100} height={100} />
-							<div className="txt">No Data Found</div>
+							<div className={styles.txt}>No Data Found</div>
 						</div>
 					)}
 

@@ -13,7 +13,6 @@ import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useC
 import useGetStateFromPincode from '../../../../../../../hooks/useGetStateFromPincode';
 
 import { useGetControls } from './addAddressControls';
-import FormItem from './FormItem';
 import styles from './styles.module.css';
 
 export const OPTIONS = [
@@ -85,26 +84,6 @@ function AddModal({
 		}
 	}, [list, city, region?.name, setValue]);
 
-	const returnFieldFunction = ({ Element, item }) => (
-		<div className={styles.col} key={item?.name}>
-			<FormItem label={item.label}>
-				<Element
-					name={item?.name}
-					placeholder={item.placeholder}
-					type={item.type}
-					className={`${
-						item.name === 'tax_number' ? styles.taxNumber : ''
-					} element input`}
-				/>
-			</FormItem>
-
-			{VALIDATION_ERROR.includes(errors[item.name]?.type) ? (
-				<div className={styles.text} size={10} color="#CB6464">
-					{errors[item.name]?.message}
-				</div>
-			) : null}
-		</div>
-	);
 	function FormElement({ name, label, errorss, type, span, ...rest }) {
 		const Element = CONTROL_TYPE_MAPPING[type];
 		return Element ? (
@@ -119,6 +98,11 @@ function AddModal({
 					} element input`}
 				/>
 				{errorss?.[name] ? <div>{errorss?.[name]?.message}</div> : null}
+				{VALIDATION_ERROR.includes(errors[name]?.type) ? (
+					<div className={styles.text} size={10} color="#CB6464">
+						{errors[name]?.message}
+					</div>
+				) : null}
 			</div>
 		) : null;
 	}
@@ -230,7 +214,7 @@ function AddModal({
 												? styles.active : styles.inactive} ${styles.filter_by_buttons}`}
 										>
 											<Button
-												onClick={(e) => setAddressType(item.value)}
+												onClick={() => setAddressType(item.value)}
 												size="xs"
 											>
 												{item.label}

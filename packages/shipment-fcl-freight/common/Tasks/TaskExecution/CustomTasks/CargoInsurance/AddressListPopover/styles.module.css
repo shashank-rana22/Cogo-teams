@@ -1,33 +1,33 @@
-.container{
+.container {
 	width: 400px;
 	margin-right: 15px;
 }
 
-.address_container{
+.address_container {
 	max-height: 333px;
 	overflow-y: auto;
 }
 
-.heading{
+.heading {
 	display: flex;
 	justify-content: space-between;
 	padding: 8px;
 	margin-bottom: 6px;
 }
 
-.card{
+.card {
 	display: flex;
 	align-items: center;
-	background: #fff;
 	padding: 10px 5px;
-	border-top: 0.5px solid #838383;
 	cursor: pointer;
+	background: #fff;
+	border-top: 0.5px solid #838383;
 }
 
-.card_txt{
+.card_txt {
 	margin: 0;
-	font-size: 12px;
 	margin: 3px 0;
+	font-size: 12px;
 
 	&.orgName {
 		font-size: 14px;
@@ -35,23 +35,23 @@
 	}
 }
 
-.section{
+.section {
 	margin-left: 10px;
 
 	&.info {
-		margin-left: 20px;
 		width: 88%;
+		margin-left: 20px;
 	}
 
 	.number {
-		margin-top: 10px;
 		display: flex;
 		justify-content: space-between;
+		margin-top: 10px;
 		margin-right: 15px;
 	}
 }
 
-.empty_state{
+.empty_state {
 	padding: 20px;
 	text-align: center;
 

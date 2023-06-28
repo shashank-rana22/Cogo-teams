@@ -55,7 +55,6 @@ function BillingAddressDetails({
 			setValue('state', region?.name);
 		}
 	}, [cityState, city, region?.name, setValue]);
-
 	return (
 		<div>
 			{policyForSelf ? (
