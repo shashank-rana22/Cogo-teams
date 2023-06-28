@@ -81,7 +81,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 	});
 
 	const onSubmit = (values) => {
-		const doc = Object.keys(component).map((item) => {
+		const doc = Object.keys(values).map((item) => {
 			const docNumber = `${item}_number`;
 
 			const checkDocument = (documents || []).find((element) => (element.document_type === item));
