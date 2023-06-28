@@ -1,6 +1,6 @@
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
-export const bilingAddressControlForSelf = [
+export const billingAddressControlForSelf = [
 	{
 		label       : 'PAN Number',
 		name        : 'panNumber',

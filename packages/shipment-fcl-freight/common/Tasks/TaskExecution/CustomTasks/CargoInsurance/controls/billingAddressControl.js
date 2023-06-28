@@ -1,6 +1,6 @@
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
-export const bilingAddressControl = [
+export const billingAddressControl = [
 	{
 		label       : 'GST',
 		name        : 'gstin',

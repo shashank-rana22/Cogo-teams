@@ -1,7 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
-import { useState } from 'react';
 
 import FORM_VALUE_PATTERNS from '../../../../utils/formValuePatterns';
 
@@ -29,18 +28,6 @@ export const addAddressControls = [
 		},
 		span: 6,
 	},
-	// {
-	// 	label          : 'Pincode',
-	// 	name           : 'pincode',
-	// 	type           : 'location-select',
-	// 	valueKey       : 'postal_code',
-	// 	labelKey       : 'postal_code',
-	// 	placeholder    : 'Enter Pincode',
-	// 	params         : { filters: { type: ['pincode'] } },
-	// 	optionsListKey : 'locations',
-	// 	rules          : { required: 'required *' },
-	// 	span           : 6,
-	// },
 	{
 		label       : 'Pincode',
 		name        : 'pincode',
@@ -136,15 +123,12 @@ export const addAddressControls = [
 
 export const useGetControls = ({ checked }) => {
 	const {
-		handleSubmit = () => {},
 		watch,
-		formState: { errors },
 	} = useForm();
-	const formValues = watch();
+	const country_id = watch('country_id');
 
-	const [country, setCountry] = useState();
 	const countryCode = getCountryDetails({
-		country_id: country?.id,
+		country_id,
 	});
 
 	return (addAddressControls || []).map((control) => {

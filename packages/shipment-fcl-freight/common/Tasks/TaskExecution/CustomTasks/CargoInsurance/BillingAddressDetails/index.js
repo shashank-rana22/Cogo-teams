@@ -8,9 +8,9 @@ import React, { useMemo, useState, useContext } from 'react';
 
 import useGetStateFromPincode from '../../../../../../hooks/useGetStateFromPincode';
 import useListAddressForInsurance from '../../../../../../hooks/useListAddressForInsurance';
-import addres from '../AddressListPopover';
-import { bilingAddressControl } from '../controls/bilingAddressControl';
-import { bilingAddressControlForSelf } from '../controls/bilingAddressControlForSelf';
+import AddressListPopover from '../AddressListPopover';
+import { billingAddressControl } from '../controls/billingAddressControl';
+import { billingAddressControlForSelf } from '../controls/billingAddressControlForSelf';
 
 import styles from './styles.module.css';
 
@@ -61,7 +61,7 @@ function BillingAddressDetails({
 			{policyForSelf ? (
 				<div className={styles.popover}>
 					<Layout
-						fields={bilingAddressControl}
+						fields={billingAddressControl}
 						control={control}
 						errors={errors}
 					/>
@@ -69,7 +69,7 @@ function BillingAddressDetails({
 						placement="bottom"
 						visible={showFilters && !addAddressModal}
 						trigger="click"
-						render={addres({
+						render={AddressListPopover({
 							data,
 							checked,
 							setChecked,
@@ -137,7 +137,7 @@ function BillingAddressDetails({
 								))}
 							</div>
 							<Layout
-								fields={bilingAddressControlForSelf}
+								fields={billingAddressControlForSelf}
 								control={control}
 								errors={errors}
 							/>

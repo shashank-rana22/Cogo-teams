@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const controls = () => [
+const controls = [
 	{
 		label          : 'Commodity',
 		name           : 'cargo_insurance_commodity',

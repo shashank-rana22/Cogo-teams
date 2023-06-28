@@ -16,7 +16,6 @@ import controls from './controls';
 import EmptyState from './EmptyState';
 import Loading from './Loading';
 import PremiumRate from './PremiumRate';
-import LABEL_MAPPING from './utils/labelMapping';
 import POLICY_TYPE_MAPPING from './utils/policyTypeMapping';
 import TRANSIT_MODE_MAPPING from './utils/transitModeMapping';
 
@@ -74,10 +73,6 @@ function CargoInsurance({
 
 	const { list = [] } = useGetInsuranceListCommodities();
 
-	const finalControls = controls({
-		locationLabel: LABEL_MAPPING[trade_type] || 'Select Country',
-		transitMode,
-	});
 	const {
 		control,
 		handleSubmit,
@@ -151,7 +146,7 @@ function CargoInsurance({
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>
 				<div>
-					<Layout control={control} fields={finalControls} errors={errors} />
+					<Layout control={control} fields={controls} errors={errors} />
 
 					{loading ? <Loading /> : null}
 
