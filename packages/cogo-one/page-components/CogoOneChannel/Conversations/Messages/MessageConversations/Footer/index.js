@@ -1,18 +1,17 @@
-import { cl, Popover, Button } from '@cogoport/components';
+import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
-	IcMSend,
 	IcMDelete,
-	IcMQuickreply,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
 import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
-import useSendPromotionalRate from '../../../../../../hooks/useSendPromotionalRate';
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
+
+import SendActions from './SendActions';
 
 const COMMON_FUNC = () => {};
 function Footer({
@@ -39,10 +38,6 @@ function Footer({
 	finalUrl = '',
 }) {
 	const { id = '', channel_type = '' } = activeMessageCard;
-	const {
-		sendPromotionalRate = () => {},
-		loading = false,
-	} = useSendPromotionalRate({ activeMessageCard });
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -208,54 +203,17 @@ function Footer({
 							/>
 						</Popover>
 					</div>
-					<div className={styles.send_messages}>
-						<Button
-							size="sm"
-							themeType="primary"
-							className={styles.promotional_rate}
-							loading={loading}
-							disabled={!hasPermissionToEdit}
-							onClick={() => {
-								if (hasPermissionToEdit) {
-									sendPromotionalRate();
-								}
-							}}
-							style={{
-								cursor: !hasPermissionToEdit
-									? 'not-allowed'
-									: 'pointer',
-							}}
-						>
-							Send Promotional Rate
-						</Button>
-						<IcMQuickreply
-							fill="#828282"
-							onClick={() => {
-								if (hasPermissionToEdit) {
-									openInstantMessages();
-								}
-							}}
-							style={{
-								cursor: !hasPermissionToEdit
-									? 'not-allowed'
-									: 'pointer',
-							}}
-						/>
-						<IcMSend
-							fill="#EE3425"
-							onClick={() => {
-								if (hasPermissionToEdit && !messageLoading) {
-									sendChatMessage(scrollToBottom);
-								}
-							}}
-							style={{
-								cursor: !hasPermissionToEdit || messageLoading
-								|| (isEmpty(draftMessage?.trim()) && !finalUrl)
-									? 'not-allowed'
-									: 'pointer',
-							}}
-						/>
-					</div>
+					<SendActions
+						hasPermissionToEdit={hasPermissionToEdit}
+						openInstantMessages={openInstantMessages}
+						activeMessageCard={activeMessageCard}
+						sendChatMessage={sendChatMessage}
+						messageLoading={messageLoading}
+						scrollToBottom={scrollToBottom}
+						finalUrl={finalUrl}
+						draftMessage={draftMessage}
+					/>
+
 				</div>
 			</div>
 		</>
