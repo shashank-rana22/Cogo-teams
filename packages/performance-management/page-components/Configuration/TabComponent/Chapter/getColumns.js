@@ -33,12 +33,14 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 		Header   : 'CHAPTER NAME',
 		accessor : (item) => <div>{startCase(item?.chapter_name) || '-'}</div>,
 	},
+
 	{
 		Header   : 'CHAPTER LEADER',
 		accessor : (item) => (
 			<div>{startCase(item?.chapter_leader?.name) || '-'}</div>
 		),
 	},
+
 	{
 		Header   : 'SUB CHAPTERS',
 		accessor : (item) => (
@@ -71,6 +73,7 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 			</div>
 		),
 	},
+
 	{
 		Header   : 'LAST UPDATED AT',
 		accessor : (item) => (
@@ -83,6 +86,7 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 			</div>
 		),
 	},
+
 	{
 		Header   : 'STATUS',
 		accessor : (item) => (
@@ -93,6 +97,7 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 			</Pill>
 		),
 	},
+
 	{
 		Header   : 'ACTION',
 		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
