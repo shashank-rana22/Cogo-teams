@@ -1354,11 +1354,13 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key   : 'coe-communication',
-				title : 'Communcation',
-				href  : '/communication',
-				as    : '/communication',
-				type  : 'link',
+				key           : 'coe-communication',
+				title         : 'Communcation',
+				href          : '/communication',
+				as            : '/communication',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.shipment,
 			},
 			{
 				key           : 'coe-ltl_run_sheets',
