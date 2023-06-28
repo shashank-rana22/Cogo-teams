@@ -55,6 +55,7 @@ const cycleWiseExceptionTable = ({
 					dunningExecutionFrequency = '', oneTimeDate = '',
 					scheduleTime = '', dayOfMonth = '',
 					week = '',
+					scheduleTimeZone = '',
 				} = row?.scheduleRule || {};
 				return (
 					<div className={styles.text}>
@@ -98,6 +99,8 @@ const cycleWiseExceptionTable = ({
 
 						<span style={{ marginLeft: '4px' }}>
 							{scheduleTime}
+							{' '}
+							{scheduleTimeZone}
 						</span>
 						)
 					</div>
