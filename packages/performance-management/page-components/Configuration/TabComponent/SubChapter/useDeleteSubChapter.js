@@ -1,12 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useDeleteSubChapter = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
-	const { user = {} } = useSelector((state) => state.profile);
-	const { id: user_id } = user;
-
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
 			method : 'DELETE',
@@ -17,15 +13,13 @@ const useDeleteSubChapter = ({ fetchList, setShowDeleteModal, showDeleteModal })
 
 	const deleteSubChapter = async () => {
 		const payload = {
-			sub_chapter_id    : showDeleteModal,
-			performed_by_id   : user_id,
-			performed_by_type : 'user',
+			sub_chapter_id: showDeleteModal,
 		};
 		try {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Successfully Deleted');
+			Toast.success('Subchapter has been deleted successfully');
 
 			setShowDeleteModal(false);
 			fetchList();

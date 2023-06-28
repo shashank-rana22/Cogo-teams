@@ -1,12 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useDeleteTribe = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
-	const { user = {} } = useSelector((state) => state.profile);
-	const { id: user_id } = user;
-
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
 			method : 'DELETE',
@@ -17,15 +13,13 @@ const useDeleteTribe = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
 
 	const deleteTribe = async () => {
 		const payload = {
-			tribe_id          : showDeleteModal,
-			performed_by_id   : user_id,
-			performed_by_type : 'user',
+			tribe_id: showDeleteModal,
 		};
 		try {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Successfully Deleted');
+			Toast.success('Tribe has been deleted successfully');
 			setShowDeleteModal(false);
 			fetchList();
 		} catch (error) {

@@ -1,12 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useUpdateSquad = ({ fetchList, setShowSquadModal, showSquadModal }) => {
-	const { user = {} } = useSelector((state) => state.profile);
-	const { id: user_id } = user;
-
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_squad',
@@ -26,14 +22,12 @@ const useUpdateSquad = ({ fetchList, setShowSquadModal, showSquadModal }) => {
 			await trigger({
 				data: {
 					...rest,
-					squad_id          : showSquadModal?.id,
-					performed_by_id   : user_id,
-					performed_by_type : 'user',
+					squad_id: showSquadModal?.id,
 					employees_added,
 					employees_removed,
 				},
 			});
-			Toast.success('Successfully Updated');
+			Toast.success('Squad has been updated successfully');
 			setShowSquadModal(false);
 			fetchList();
 		} catch (err) {
