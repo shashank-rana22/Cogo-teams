@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import {
 	DatepickerController,
 	InputController,
@@ -8,6 +7,7 @@ import {
 	AsyncSelectController,
 } from '@cogoport/forms';
 
+// eslint-disable-next-line import/no-cycle
 import FieldArrayController from './FieldArray';
 
 const CONTROLLER_MAPPING = {
