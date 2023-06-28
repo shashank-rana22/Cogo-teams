@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
+import getEditorValue from '../SavedQuestionDetails/utils/getEditorValue';
 
 let RichTextEditor;
 if (typeof window !== 'undefined') {
@@ -206,9 +207,7 @@ const useCreateQuestion = ({
 
 				setQuestionEditorValue((prev) => ({
 					...prev,
-					[`case_questions_${index}`]: isEmpty(indQuestionText)
-						? RichTextEditor.createEmptyValue()
-						: RichTextEditor?.createValueFromString((indQuestionText || ''), 'html'),
+					[`case_questions_${index}`]: getEditorValue({ question_text: indQuestionText, RichTextEditor }),
 				}));
 
 				indTestQuestionAnswers.forEach((answer, answerIndex) => {
@@ -228,9 +227,7 @@ const useCreateQuestion = ({
 
 			setQuestionEditorValue((prev) => ({
 				...prev,
-				question_0: isEmpty(question_text)
-					? RichTextEditor.createEmptyValue()
-					: RichTextEditor?.createValueFromString((question_text || ''), 'html'),
+				question_0: getEditorValue({ question_text, RichTextEditor }),
 			}));
 
 			setSubjectiveEditorValue(isEmpty(test_question_answers)
