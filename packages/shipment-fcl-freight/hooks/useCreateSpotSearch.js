@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { getApiError } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useCreateSpotSearch = ({
 	shipmentData = {},
@@ -15,11 +14,9 @@ const useCreateSpotSearch = ({
 	refetch = () => {},
 	successMessage = 'Cargo Insurance added successfully!',
 }) => {
-	const { user } = useSelector((state) => state?.profile);
-	const { id: userId } = user || {};
 	const router = useRouter();
 
-	const { importer_exporter_id, importer_exporter_branch_id, id } =	shipmentData || {};
+	const { importer_exporter_id, importer_exporter_branch_id, id, importer_exporter_poc_id } =	shipmentData || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_spot_search',
@@ -32,7 +29,7 @@ const useCreateSpotSearch = ({
 			source                              : 'upsell',
 			importer_exporter_id,
 			importer_exporter_branch_id,
-			user_id                             : '12aa63d6-a13c-42cd-bbee-645e47b8055f',
+			user_id                             : importer_exporter_poc_id,
 			source_id                           : id,
 			cargo_insurance_services_attributes : [
 				{

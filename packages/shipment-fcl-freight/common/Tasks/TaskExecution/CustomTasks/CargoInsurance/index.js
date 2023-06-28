@@ -25,13 +25,13 @@ function CargoInsurance({
 		ShipmentDetailContext,
 	);
 
-	const policyId = shipment_data?.all_services?.find(
+	const policyDetails = servicesList.find(
 		(item) => item?.service_type === 'cargo_insurance_service',
-	)?.cargo_insurance_policy_id ?? '2b98befa-0f6f-4a70-ad02-90e1bf6bf9eb';
+	);
 
 	const { insuranceDetails } = useGetInsuranceDraftDetails({
 		step,
-		policyId,
+		policyId: policyDetails?.cargo_insurance_policy_id,
 		setAddressId,
 	});
 
@@ -48,7 +48,7 @@ function CargoInsurance({
 		partyName      : insuranceDetails?.partyName,
 	});
 
-	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data, primary_service, servicesList });
+	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data, policyDetails });
 
 	const formProps = useForm({ values: defaultValues });
 
@@ -59,8 +59,7 @@ function CargoInsurance({
 				step={step}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
-				policyId={policyId}
-				// key={JSON.stringify(insuranceDetails)}
+				policyId={policyDetails?.cargo_insurance_policy_id}
 				addressId={addressId}
 				setAddressId={setAddressId}
 				billingData={billingData}
@@ -77,8 +76,7 @@ function CargoInsurance({
 				step={step}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
-				policyId={policyId}
-				// key={`${JSON.stringify(insuranceDetails)} ${step}`}
+				policyId={policyDetails?.cargo_insurance_policy_id}
 				addressId={addressId}
 				billingData={billingData}
 				formProps={formProps}
@@ -92,12 +90,11 @@ function CargoInsurance({
 			step={step}
 			insuranceDetails={insuranceDetails}
 			shipmentData={shipment_data}
-			policyId={policyId}
+			policyId={policyDetails?.cargo_insurance_policy_id}
 			onCancel={onCancel}
 			refetch={refetch}
 			primary_service={primary_service}
 			task={task}
-			// key={JSON.stringify(insuranceDetails)}
 			addressId={addressId}
 			billingData={billingData}
 			formProps={formProps}

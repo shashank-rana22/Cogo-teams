@@ -4,11 +4,7 @@ import { getDate } from '../../../../../TimeLine/utils/getDate';
 
 const MIN_DATE_LIMIT = 1;
 
-const getDefaultValues = ({ insuranceDetails = {}, shipment_data = {} }) => {
-	const policyDetails = shipment_data?.all_services?.find(
-		(item) => item?.service_type === 'cargo_insurance_service',
-	);
-
+const getDefaultValues = ({ insuranceDetails = {}, shipment_data = {}, policyDetails = {} }) => {
 	const {
 		cargo_insurance_commodity_id,
 		destination_country_id,
@@ -16,7 +12,6 @@ const getDefaultValues = ({ insuranceDetails = {}, shipment_data = {} }) => {
 		cargo_insurance_commodity_description,
 		cargo_value_currency,
 		cargo_value,
-		commercial_invoice,
 	} = policyDetails || {};
 
 	const {
@@ -46,7 +41,7 @@ const getDefaultValues = ({ insuranceDetails = {}, shipment_data = {} }) => {
 		panDoc            : verificationDoc?.panDoc,
 		incoterm          : (incoterm || inco_term)?.toUpperCase(),
 		policyCurrency    : policyCurrency || cargo_value_currency,
-		invoiceDoc        : verificationDoc?.invoiceDoc || commercial_invoice?.url,
+		invoiceDoc        : verificationDoc?.invoiceDoc,
 		policyCommodityId : policyCommodityId || cargo_insurance_commodity_id,
 		cargoDescription  : cargoDescription || cargo_insurance_commodity_description,
 		policyCountryId   : policyCountryId || (policyType === 'IMPORT' ? origin_country_id : destination_country_id),

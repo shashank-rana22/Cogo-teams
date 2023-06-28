@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useDebounceQuery, useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -28,7 +28,6 @@ function CargoInsurance({
 	data = {},
 	refetch = () => {},
 	primary_service = {},
-	servicesList = [],
 }) {
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
@@ -38,11 +37,8 @@ function CargoInsurance({
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
-	const {
-		origin_country_id = '',
-		destination_country_id = '',
-		service_type = '',
-	} = primary_service;
+	const { service_type = '' } = primary_service;
+	const geo = getGeoConstants();
 
 	const refetchAfterApiCall = () => {
 		setAddCargoInsurance(false);
@@ -92,22 +88,17 @@ function CargoInsurance({
 	} = useForm();
 
 	const cargoValue = watch('cargo_value');
-	const cargoValueCurrency = watch('cargo_value_currency');
-	const cargoInsuranceCommodityDescription = watch(
-		'cargo_insurance_commodity_description',
-	);
 	const cargoInsuranceCommodity = watch('cargo_insurance_commodity');
 	const formValues = watch();
 
 	useEffect(() => {
 		if (!isEmpty(cargoValue) && !isEmpty(cargoInsuranceCommodity)) {
 			setCurrentCargoInsurance({
-				descriptionOfCargo : cargoInsuranceCommodityDescription,
+				descriptionOfCargo : formValues?.cargo_insurance_commodity_description,
 				policyCommodityId  : cargoInsuranceCommodity,
 				invoiceValue       : cargoValue,
-				policyCurrency     : cargoValueCurrency,
+				policyCurrency     : formValues?.cargo_value_currency,
 				policyType         : POLICY_TYPE_MAPPING[primary_service?.trade_type] || 'INLAND',
-				// policyCountryId    : '345f3aa9-ae78-40cf-b70a-fc5c3af2af99',
 				policyCountryId    : cargoInsuranceCountryId,
 				performedBy        : userId,
 			});
@@ -122,7 +113,7 @@ function CargoInsurance({
 		if (!isEmpty(query)) {
 			premiumRate(query);
 		}
-	}, [query]);
+	}, [premiumRate, query]);
 
 	useEffect(() => {
 		const optionselected = (list || []).find(
@@ -133,15 +124,15 @@ function CargoInsurance({
 			'cargo_insurance_commodity_description',
 			optionselected?.cargoDescription,
 		);
-	}, [cargoInsuranceCommodity]);
+	}, [cargoInsuranceCommodity, list, setValue]);
 
 	if (apiLoading) {
 		return <Loading />;
 	}
 
 	if (
-		![origin_country_id, destination_country_id].includes(
-			GLOBAL_CONSTANTS.country_entity_ids.IN,
+		![primary_service?.destination_port?.country_id, primary_service?.origin_port?.country_id].includes(
+			geo.country.id,
 		)
 	) {
 		return <EmptyState reason="non_indian_search" />;
@@ -154,8 +145,7 @@ function CargoInsurance({
 	return (
 		<Modal
 			size="sm"
-			// show={showInsurance}
-			show
+			show={showInsurance}
 			onClose={() => setShowInsurance(false)}
 			closeOnOuterClick={false}
 		>
