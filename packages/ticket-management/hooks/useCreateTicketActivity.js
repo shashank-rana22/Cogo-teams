@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 const useCreateTicketActivity = ({
 	ticketId,
-	refetchTicket,
+	refreshTicket,
 	scrollToBottom,
 }) => {
 	const { profile } = useSelector((state) => state);
@@ -33,7 +33,7 @@ const useCreateTicketActivity = ({
 				},
 			});
 
-			refetchTicket();
+			refreshTicket();
 			scrollToBottom();
 		} catch (error) {
 			Toast.error(error?.error);

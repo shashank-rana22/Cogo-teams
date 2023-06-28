@@ -15,6 +15,7 @@ import TicketSummary from './TicketSummary';
 
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
+const SET_DEFAULT_TIMEOUT = 1;
 
 const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
 	if (!ticketExists) {
@@ -29,7 +30,7 @@ const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
 	return 'calc(100% - 75px)';
 };
 
-function TicketChat({ modalData = {}, setModalData = () => {} }) {
+function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () => {} }) {
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
@@ -70,7 +71,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const refetchTicket = () => {
+	const refreshTicket = () => {
 		setListData({
 			items       : [],
 			page        : 0,
@@ -78,13 +79,18 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		});
 		getTicketDetails();
 		getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
+
+		setUpdated(true);
+		setTimeout(() => {
+			setUpdated(false);
+		}, SET_DEFAULT_TIMEOUT);
 	};
 
 	const isEmptyChat = isEmpty(listData?.items || {});
 
 	const { createTicketActivity = () => {}, createLoading = false } =		useCreateTicketActivity({
 		ticketId: modalData?.ticketId || '',
-		refetchTicket,
+		refreshTicket,
 		scrollToBottom,
 	});
 
@@ -124,8 +130,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
-						refetchTicket={refetchTicket}
-						ticketExists={ticketExists}
+						refreshTicket={refreshTicket}
 					/>
 				)}
 			/>

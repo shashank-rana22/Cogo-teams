@@ -10,14 +10,20 @@ import TicketsSection from './TicketsSection';
 function FilterTicketsSection({ type = '' }) {
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState({ });
+	const [updated, setUpdated] = useState(false);
 
 	const isAdmin = type === 'admin';
 
 	return (
 		<div className={cl`${styles.filter_tickets_container} ${isAdmin ? styles.bridge_gap : ''}`}>
 			<FilterType setSearchParams={setSearchParams} searchParams={searchParams} isAdmin={isAdmin} />
-			<TicketsSection searchParams={searchParams} isAdmin={isAdmin} setModalData={setModalData} />
-			<Modals modalData={modalData} setModalData={setModalData} />
+			<TicketsSection
+				searchParams={searchParams}
+				isAdmin={isAdmin}
+				setModalData={setModalData}
+				updated={updated}
+			/>
+			<Modals modalData={modalData} setModalData={setModalData} setUpdated={setUpdated} />
 		</div>
 	);
 }

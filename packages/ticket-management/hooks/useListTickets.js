@@ -21,6 +21,7 @@ const useListTickets = ({
 	label,
 	refreshList,
 	setRefreshList,
+	updated,
 }) => {
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
@@ -72,7 +73,7 @@ const useListTickets = ({
 		if (refreshList?.[label]) {
 			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
-	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList]);
+	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList, updated]);
 
 	useEffect(() => {
 		debounceQuery(searchParams?.text);
