@@ -4,6 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import EmptyState from '../../../common/EmptyState';
 import StyledTable from '../../../common/StyledTable';
 import getColumns from '../getColumns';
+import usePerformanceRatingReview from '../hooks/usePerformanceRatingReview';
 
 import styles from './styles.module.css';
 
@@ -37,7 +38,7 @@ function RenderStyledTable({
 	selectedEmployees,
 	onClickHeaderCheckbox,
 	level,
-	onClickEmployee,
+	setShow,
 }) {
 	const columns = getColumns({
 		setSelectedEmployees,
@@ -47,7 +48,7 @@ function RenderStyledTable({
 		onClickHeaderCheckbox,
 		employee_list,
 		level,
-		onClickEmployee,
+		setShow,
 	});
 
 	return (
@@ -61,14 +62,14 @@ function RenderStyledTable({
 
 function RenderVerticalHeadComponent({
 	list,
-	onClickHeaderCheckbox,
 	setAccordianList,
 	setSelectedEmployees,
-	onClickCheckbox,
 	selectedEmployees,
 	level,
-	onClickEmployee,
+	setShow,
 }) {
+	const { onClickCheckbox, onClickHeaderCheckbox } = usePerformanceRatingReview({ setSelectedEmployees, data: list });
+
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.single_accordian}>
@@ -103,7 +104,7 @@ function RenderVerticalHeadComponent({
 						selectedEmployees={selectedEmployees}
 						onClickHeaderCheckbox={onClickHeaderCheckbox}
 						level={level}
-						onClickEmployee={onClickEmployee}
+						setShow={setShow}
 
 					/>
 				</Accordion>

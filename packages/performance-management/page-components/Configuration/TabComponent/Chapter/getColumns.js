@@ -98,7 +98,6 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 		),
 	},
 
-<<<<<<< Updated upstream
 	{
 		Header   : 'ACTION',
 		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
@@ -120,8 +119,6 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 			<Button themeType="secondary" disabled>Restore</Button>
 		)),
 	},
-=======
->>>>>>> Stashed changes
 ];
 
 export default getColumns;
