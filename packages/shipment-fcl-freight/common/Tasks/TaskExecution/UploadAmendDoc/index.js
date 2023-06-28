@@ -12,6 +12,8 @@ import getDefaultValues from '../utils/get-default-values';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const REQUIRED_OBJ = {};
+
 function UploadAmendDoc({
 	task = {},
 	onClose = () => {},
@@ -43,7 +45,6 @@ function UploadAmendDoc({
 	const details = list.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const payloadData = details?.data;
-	const REQUIRED_OBJ = {};
 	(allControls[GLOBAL_CONSTANTS.zeroth_index].controls || []).forEach((controlObj) => {
 		REQUIRED_OBJ[controlObj.name] = '';
 	});
@@ -66,11 +67,13 @@ function UploadAmendDoc({
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url:
 				values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.url?.finalUrl
-				|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.finalUrl,
+				|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.finalUrl
+				|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
 			documents: (values.documents || []).map((documentData) => ({
 				file_name    : documentData?.url?.fileName || documentData?.name,
-				document_url : documentData?.url?.url?.finalUrl || documentData?.url?.finalUrl,
-				data         : {
+				document_url : documentData?.url?.url?.finalUrl || documentData?.url?.finalUrl
+					|| values?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
+				data: {
 					...documentData,
 					status   : 'uploaded',
 					price    : documentData?.amount?.price || undefined,

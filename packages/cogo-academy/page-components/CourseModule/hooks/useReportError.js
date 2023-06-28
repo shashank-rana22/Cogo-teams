@@ -18,7 +18,7 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 			const payload = {
 				type          : 'platform_notification',
 				service       : 'user',
-				template_name : 'api_error_request_response',
+				template_name : 'cogoacademy_coursemodule_api_error_request_response',
 				provider_name : 'cogoport',
 				user_id       : id,
 				service_id    : id,

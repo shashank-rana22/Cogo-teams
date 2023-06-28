@@ -24,7 +24,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
 export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
