@@ -1,3 +1,11 @@
+const params = {
+	filters: {
+		status               : 'active',
+		partner_entity_types : ['cogoport'],
+	},
+	page_limit: 100,
+};
+
 const controls = [
 	{
 		name        : 'squad_name',
@@ -5,24 +13,20 @@ const controls = [
 		type        : 'input',
 		placeholder : 'Enter squad name',
 	},
+
 	{
 		name        : 'squad_leader_id',
 		label       : 'Squad leader',
 		placeholder : 'Select Squad leader',
 		type        : 'asyncSelect',
-		// initialCall : false,
 		asyncKey    : 'list_employees',
 		valueKey    : 'id',
 		rules       : {
 			required: 'Squad leader is required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-			},
-		},
+		params,
 	},
+
 	{
 		name        : 'employee_ids',
 		type        : 'asyncSelect',
@@ -33,13 +37,7 @@ const controls = [
 		rules       : {
 			required: 'Employees are required',
 		},
-		params: {
-			filters: {
-				status: 'active',
-
-			},
-			page_limit: 100,
-		},
+		params,
 	},
 ];
 

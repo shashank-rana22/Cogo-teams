@@ -48,6 +48,7 @@ const getColumns = () => [
 		Header   : 'PROFILE COMPLETION',
 		accessor : (item) => {
 			const progress_percentage = item?.progress?.progress_percentage || PROGRESS_PERCENTAGE;
+
 			return (
 				<div className={styles.profile_completion}>
 					<div className={styles.animate}>
@@ -58,6 +59,7 @@ const getColumns = () => [
 							<div className={styles.progress} />
 						</div>
 					</div>
+
 					<div>
 						{Math.round(progress_percentage * NUMBER) / NUMBER}
 						% complete
