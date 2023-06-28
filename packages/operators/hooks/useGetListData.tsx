@@ -2,11 +2,12 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import { OPERATORS } from '../configurations/operators';
+import CONSTANTS from '../constants/constants';
 
 const useGetListData = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [finalList, setFinalList] = useState([]);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 
 	const [{ data = {}, loading }, trigger] = useRequest('/list_operators', { manual: true });
 
@@ -28,7 +29,7 @@ const useGetListData = () => {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				console.error(err);
 			}
 		})();
 	}, [page, searchValue, trigger]);

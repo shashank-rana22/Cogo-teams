@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import fields from '../configurations/controls';
+import CONSTANTS from '../constants/constants';
 
 const useCreateOperators = ({
 	setShow,
@@ -49,10 +50,10 @@ const useCreateOperators = ({
 			setFinalList([]);
 			setShow(false);
 			setShowLoading(true);
-			if (page === 1) {
+			if (page === CONSTANTS.START_PAGE) {
 				refetch();
 			} else {
-				setPage(1);
+				setPage(CONSTANTS.START_PAGE);
 			}
 		} catch (error) {
 			Toast.error(error?.data);

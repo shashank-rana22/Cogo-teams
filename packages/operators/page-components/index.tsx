@@ -2,9 +2,9 @@ import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
+import CardList from '../common/CardList';
 import useGetListData from '../hooks/useGetListData';
 
-import CardList from './CardList';
 import CreateOperators from './CreateOperators';
 import EditOperators from './EditOperators';
 import Header from './Header';
@@ -76,8 +76,6 @@ function Operators() {
 			<Modal
 				show={show}
 				onClose={() => setShow(false)}
-				className="primary lg"
-
 			>
 				<CreateOperators
 					setShow={setShow}
@@ -92,7 +90,6 @@ function Operators() {
 			<Modal
 				show={edit}
 				onClose={() => setEdit(false)}
-				className="primary md"
 			>
 				<EditOperators
 					item={item}

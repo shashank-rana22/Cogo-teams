@@ -78,7 +78,6 @@ function EditOperators({
 					</div>
 					<div className={styles.button_container}>
 						<Button
-							className="primary md"
 							onClick={handleSubmit(handleEditOperators, onError)}
 						>
 							{!loading ? 'Submit' : 'Submiting'}

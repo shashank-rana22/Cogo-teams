@@ -65,7 +65,6 @@ function CreateOperators({
 					</div>
 					<div className={styles.button_container}>
 						<Button
-							className="primary md"
 							onClick={handleSubmit(handleCreateOperators, onError)}
 						>
 							{!loading ? 'Submit' : 'Submiting'}

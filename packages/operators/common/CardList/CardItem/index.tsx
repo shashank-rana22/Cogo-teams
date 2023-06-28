@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 
+import CONSTANTS from '../../../constants/constants';
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 
 import getValue from './getValue';
@@ -20,7 +21,7 @@ function CardItem({
 
 	useEffect(() => {
 		const handleResize = () => {
-			if (window.innerWidth < 768) {
+			if (window.innerWidth < CONSTANTS.MOBILE_SCREEN_SIZE) {
 				setIsMobile(true);
 			} else {
 				setIsMobile(false);
@@ -34,6 +35,7 @@ function CardItem({
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
+
 	return (
 		<section className={styles.list_container}>
 			<div
@@ -49,7 +51,7 @@ function CardItem({
 								isMobile ? styles.is_mobile : ''
 							}`}
 							style={{
-								'--span': (field.span || 1),
+								'--span': (field.span || CONSTANTS.DEFAULT_SPAN),
 								...itemStyle,
 							} as React.CSSProperties}
 							key={field.key}

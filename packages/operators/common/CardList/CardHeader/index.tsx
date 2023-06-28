@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CONSTANTS from '../../../constants/constants';
 import { FieldType } from '../Interfaces/index';
 
 import styles from './styles.module.css';
@@ -16,7 +17,7 @@ function Header({
 			{fields.map((field) => (
 				<div
 					className={`${styles.col} ${field.className || ''}`}
-					style={{ '--span': field.span || 1 } as React.CSSProperties}
+					style={{ '--span': field.span || CONSTANTS.DEFAULT_SPAN } as React.CSSProperties}
 					key={field.key}
 				>
 					{ field.label }

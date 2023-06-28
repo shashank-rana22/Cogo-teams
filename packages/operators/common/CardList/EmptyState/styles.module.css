@@ -27,7 +27,7 @@
 	max-width: 30%;
 }
 
-@media (max-width: _md) {
+@media (max-width: 768px) {
 	.ic_container {
 		display: none;
 	}
@@ -36,3 +36,4 @@
 		max-width: 100%;
 	}
 }
+

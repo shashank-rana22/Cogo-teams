@@ -3,10 +3,12 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
+import CONSTANTS from '../../constants/constants';
+
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, DataType } from './Interfaces';
+import { FunctionObjects, FieldType, DataType, GenericObject } from './Interfaces';
 import styles from './styles.module.css';
 
 interface Props {
@@ -20,6 +22,9 @@ interface Props {
 	functions?: FunctionObjects;
 }
 
+const TIMEOUT_TIME = 1000;
+const SCROLLING_LIMIT = 10;
+
 function CardList({
 	fields = [],
 	data = {},
@@ -30,17 +35,17 @@ function CardList({
 	setFinalList,
 	functions,
 } :Props) {
-	const { list = [], total_count:totalCount = 0 } = data;
+	const { list = [], total_count:totalCount } = data;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!loading) {
-				setPage((p) => p + 1);
+				setPage((p) => p + CONSTANTS.START_PAGE);
 			}
-		}, 1000);
+		}, TIMEOUT_TIME);
 	}, [loading, setPage]);
 
-	const handleRender = () => (finalList || [1, 2, 3, 4, 5]).map((singleitem) => (
+	const handleRender = () => (finalList || []).map((singleitem:GenericObject) => (
 		<CardItem
 			key={singleitem.id}
 			singleitem={singleitem}
@@ -57,8 +62,7 @@ function CardList({
 				setFinalList(finalList.concat(list));
 			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [list]);
+	}, [finalList, list, page, setFinalList]);
 
 	return (
 		<section>
@@ -68,7 +72,7 @@ function CardList({
 					pageStart={1}
 					initialLoad={false}
 					loadMore={loadMore}
-					hasMore={page < Math.ceil(totalCount / 10)}
+					hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
 					loader={!loading ? (
 						<div className={styles.loading_style}>
 							<Loader />
@@ -77,7 +81,7 @@ function CardList({
 					useWindow={false}
 					threshold={600}
 				>
-					<div className="card-list-data">{handleRender()}</div>
+					<div>{handleRender()}</div>
 				</InfiniteScroll>
 				{isEmpty(finalList) && !loading ? <EmptyState /> : null}
 				{loading && (
@@ -85,7 +89,7 @@ function CardList({
 						<Loader />
 					</div>
 				)}
-				{finalList.length === totalCount && finalList.length > 0 ? (
+				{finalList.length === totalCount && !isEmpty(finalList) ? (
 					<div className={styles.end_message}>No more data to show</div>
 				) : null}
 			</div>
