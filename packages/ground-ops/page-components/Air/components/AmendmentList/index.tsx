@@ -97,8 +97,8 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 					themeType="linkUi"
 					style={{ fontSize: 12 }}
 					onClick={documentData?.status === 'uploaded'
-						? () => { setShowUpload(docData); setEdit('edit'); }
-						: () => { handleEditMAWB(docData, 'edit'); }}
+						? () => { setShowUpload(docData); setEdit(true); }
+						: () => { handleEditMAWB(docData, true); }}
 				>
 					<IcMEdit fill="#8B8B8B" />
 				</Button>

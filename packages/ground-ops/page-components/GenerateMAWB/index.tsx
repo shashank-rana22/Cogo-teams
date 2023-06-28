@@ -57,6 +57,8 @@ function GenerateMAWB({
 	const [editCopies, setEditCopies] = useState(null);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
+	const formValues = watch();
+	const [unitDefaultValue, setUnitDefaultValue] = useState(formValues?.dimension?.[0]?.unit);
 	const {
 		data: airportData = {},
 		listAirport,
@@ -82,11 +84,9 @@ function GenerateMAWB({
 
 	const [customHawbNumber, setCustomHawbNumber] = useState(false);
 
-	const fields = mawbControls(disableClass, !customHawbNumber);
+	const fields = mawbControls(disableClass, !customHawbNumber, unitDefaultValue);
 
 	const { packingData, packingList } = usePackingList();
-
-	const formValues = watch();
 
 	const formData = {
 		agent_name: null,
@@ -102,7 +102,7 @@ function GenerateMAWB({
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
-	const pendingTaskId = item.id;
+	const pendingTaskId = item?.id || item?.taskId || undefined;
 
 	const [activeCategory, setActiveCategory] = useState('mawb');
 
@@ -365,6 +365,10 @@ function GenerateMAWB({
 			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
 		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
+
+	useEffect(() => {
+		setUnitDefaultValue(formValues?.dimension?.[0]?.unit);
+	}, [JSON.stringify(formValues?.dimension)]);
 
 	return (
 		<div className={styles.container}>

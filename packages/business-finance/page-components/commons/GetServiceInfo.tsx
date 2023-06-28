@@ -4,6 +4,7 @@ import {
 	IcMAirport,
 	IcMFhaulage,
 	IcMFftl,
+	IcCFhaulage,
 } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -27,6 +28,7 @@ function GetServiceInfo(service:any = '') {
 	if (service === 'ftl_freight') return <IcMFftl color="#5936F0" height={20} width={20} />;
 	if (service === 'ltl_freight') return <IcMFftl color="#5936F0" height={20} width={20} />;
 	if (service === 'fcl_freight_local_service') return <IcCFclLocals color="#5936F0" height={20} width={20} />;
+	if (service === 'rail_domestic_freight') return <IcCFhaulage color="#5936F0" height={20} width={20} />;
 
 	return <div>-</div>;
 }

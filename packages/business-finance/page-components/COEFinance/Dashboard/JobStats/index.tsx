@@ -1,9 +1,13 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const MAPPING_STATE = {
+	OPR_CLOSED : 'OPERATIONALLY CLOSED',
+	CLOSED     : 'FINANCIALLY CLOSED',
+};
 
 function JobStats({ jobData }) {
 	return (
@@ -17,8 +21,8 @@ function JobStats({ jobData }) {
 
 						<div className={styles.sub_flex}>
 							<div className={styles.label}>
-								<div>{startCase(state)}</div>
-								<div>Job</div>
+								<div>{ MAPPING_STATE[state] || state}</div>
+								<div>JOBS</div>
 							</div>
 							<Tooltip
 								content={(
