@@ -16,7 +16,6 @@ import controls from './controls';
 import EmptyState from './EmptyState';
 import Loading from './Loading';
 import PremiumRate from './PremiumRate';
-import styles from './styles.module.css';
 import LABEL_MAPPING from './utils/labelMapping';
 import POLICY_TYPE_MAPPING from './utils/policyTypeMapping';
 import TRANSIT_MODE_MAPPING from './utils/transitModeMapping';
@@ -151,7 +150,7 @@ function CargoInsurance({
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>
-				<div className={styles.container}>
+				<div>
 					<Layout control={control} fields={finalControls} errors={errors} />
 
 					{loading ? <Loading /> : null}
