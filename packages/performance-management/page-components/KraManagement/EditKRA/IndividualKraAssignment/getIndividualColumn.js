@@ -15,7 +15,7 @@ function getIndividualColumn({
 			if (element.employee_id === item.employee_id) {
 				return {
 					...element,
-					[name]: val,
+					[name]: val === 'yes' ? 'percentage' : 'flat',
 				};
 			}
 			return element;
