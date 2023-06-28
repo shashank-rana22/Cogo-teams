@@ -1,3 +1,11 @@
+const validate = (val) => {
+	if (Number.isNaN(Number(val))) {
+		return 'Not a valid Number';
+	}
+
+	return null;
+};
+
 const fclControls = () => {
 	const controls = [
 		{
@@ -42,18 +50,21 @@ const fclControls = () => {
 					controls : [
 						{
 							name  : 'cargo_weight_per_container',
-							type  : 'number',
-							span  : 5,
+							type  : 'input',
+							span  : 6,
 							value : 1,
-							max   : 30,
-							min   : 0.1,
-							rules : { required: 'Weight is required' },
+							rules : {
+								required : 'Weight is required',
+								validate : (val) => validate(val),
+								max      : 30,
+								min      : 0.1,
+							},
 						},
 						{
 							name        : 'weight_unit',
 							type        : 'select',
 							placeholder : 'Select Unit',
-							span        : 6,
+							span        : 5,
 							value       : 'mt',
 							options     : [
 								{
@@ -68,13 +79,16 @@ const fclControls = () => {
 				{
 					name        : 'containers_count',
 					label       : 'Count',
-					type        : 'number',
+					type        : 'input',
 					placeholder : 'Enter Count',
 					span        : 5,
 					value       : 1,
-					max         : 1000,
-					min         : 1,
-					rules       : { required: 'Count is required' },
+					rules       : {
+						required : 'Count is required',
+						validate : (val) => validate(val),
+						max      : 1000,
+						min      : 1,
+					},
 				},
 			],
 		},

@@ -1,5 +1,6 @@
 import EXTRA_FILTERS from './extra-filter-controls';
 import fclControls from './fcl-controls';
+import lclControls from './lcl-controls';
 
 const MAIN_CONTROLS_MAPPING = {
 	fcl_freight: {
@@ -9,8 +10,8 @@ const MAIN_CONTROLS_MAPPING = {
 	},
 	lcl_freight: {
 		label         : 'Package Details',
-		mainControls  : fclControls,
-		extraControls : [],
+		mainControls  : lclControls,
+		extraControls : ['operator', 'readiness_date', 'rate_type', 'payment_type', 'offers'],
 	},
 	air_freight: {
 		label         : 'Container Details',

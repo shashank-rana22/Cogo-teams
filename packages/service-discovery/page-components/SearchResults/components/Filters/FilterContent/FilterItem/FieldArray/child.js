@@ -1,23 +1,12 @@
-import containerSizes from '@cogoport/constants/container-sizes.json';
-import containerTypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
 import getElementController from '../../../../../../../configs/getElementController';
+import getErrorMessage from '../../../../../../../configs/getErrorMessage';
+import getOptions from '../../../../../utils/getOptions';
 
 import styles from './styles.module.css';
-
-const getOptions = (key) => {
-	let options = [];
-	if (key === 'container-sizes') {
-		options = containerSizes;
-	} else if (key === 'container-types') {
-		options = containerTypes;
-	}
-
-	return options;
-};
 
 function Child({
 	controls,
@@ -91,7 +80,14 @@ function Child({
 										} = innerControlItem;
 
 										const innerFlex = (innerSpan || 12) / 12 * 100;
+
 										const Element = getElementController(innerType);
+
+										const innerErrorMessage = getErrorMessage({
+											error : error?.[innerControlItem.name],
+											rules : innerControlItem?.rules,
+											label : innerControlItem?.label,
+										});
 
 										return (
 											<div
@@ -121,8 +117,7 @@ function Child({
 												/>
 
 												<div className={styles.error_message}>
-													{error?.[innerControlName]?.message
-													|| error?.[innerControlName]?.type}
+													{innerErrorMessage}
 												</div>
 											</div>
 										);
@@ -133,6 +128,12 @@ function Child({
 					}
 
 					const Element = getElementController(type);
+
+					const errorOriginal = getErrorMessage({
+						error : error?.[controlItem.name],
+						rules : controlItem?.rules,
+						label : controlItem?.label,
+					});
 
 					return (
 						<div
@@ -165,7 +166,7 @@ function Child({
 								<div className={styles.sub_label}>{subLabel}</div>
 							) : null}
 							<div className={styles.error_message}>
-								{error?.[controlName]?.message || error?.[controlName]?.type}
+								{errorOriginal}
 							</div>
 						</div>
 					);

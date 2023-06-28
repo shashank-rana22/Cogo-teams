@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowBack, IcMEdit, IcMFilter } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMEdit, IcMFilter, IcMCross } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -48,7 +48,12 @@ function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setH
 					</div>
 
 					<div className={styles.edit_details}>
-						<IcMEdit height={16} width={16} onClick={handleEdit} />
+						{showAdditionalHeader ? (
+							<IcMCross height={16} width={16} onClick={() => setShowAdditionalHeader(false)} />
+						) : (
+							<IcMEdit height={16} width={16} onClick={handleEdit} />
+						)}
+
 					</div>
 
 					<Button

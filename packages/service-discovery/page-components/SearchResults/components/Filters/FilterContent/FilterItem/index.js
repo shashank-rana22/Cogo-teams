@@ -1,6 +1,9 @@
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import React from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
+import getErrorMessage from '../../../../../../configs/getErrorMessage';
+import getOptions from '../../../../utils/getOptions';
 
 import Detention from './Detention';
 import FieldArray from './FieldArray';
@@ -12,7 +15,9 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { label, type, name, controls: innerControls, span } = controlItem;
+				let newControl = { ...controlItem };
+
+				const { label, type, name, controls: innerControls, span, ...rest } = newControl;
 
 				const flex = (span || 12) / 12 * 100;
 
@@ -20,7 +25,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
 							<FieldArray
-								{...controlItem}
+								{...newControl}
 								formValues={formValues}
 								control={control}
 								watch={watch}
@@ -44,9 +49,9 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 					return (
 						<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
 							<div
-								className={`${styles.label} ${controlItem?.boldLabel ? styles.bold_label : {}}`}
+								className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}
 							>
-								{controlItem.label}
+								{newControl.label}
 							</div>
 
 							<div className={styles.content}>
@@ -60,6 +65,12 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 									const innerFlex = (innerSpan || 12) / 12 * 100;
 
 									const Element = getElementController(innerType);
+
+									const innerErrorMessage = getErrorMessage({
+										error : errors?.[innerControlItem.name],
+										rules : innerControlItem?.rules,
+										label : innerControlItem?.label,
+									});
 
 									return (
 										<div
@@ -87,8 +98,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 											/>
 
 											<div className={styles.error_message}>
-												{errors?.[innerControlName]?.message
-												|| errors?.[innerControlName]?.type}
+												{innerErrorMessage}
 											</div>
 										</div>
 									);
@@ -98,20 +108,42 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 					);
 				}
 
+				if (rest.optionsListKey) {
+					const finalOptions = getOptions(rest.optionsListKey, type);
+
+					newControl = { ...newControl, options: finalOptions };
+				}
+
+				if (rest.commodityType) {
+					const containerType = formValues?.container_type;
+
+					const keyOptions = getCommodityList(rest.commodityType, containerType || null);
+
+					const finalOptions = keyOptions;
+
+					newControl = { ...newControl, options: finalOptions };
+				}
+
 				const Element = getElementController(type);
+
+				const errorOriginal = getErrorMessage({
+					error : errors?.[newControl.name],
+					rules : newControl?.rules,
+					label : newControl?.label,
+				});
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
 						<div className={styles.label}>
 							{label || ''}
 							{' '}
-							{controlItem?.rules ? (
+							{newControl?.rules?.required ? (
 								<div className={styles.required_mark}>*</div>
 							) : null}
 						</div>
 
 						<Element
-							{...controlItem}
+							{...newControl}
 							name={name}
 							label={label}
 							control={control}
@@ -119,7 +151,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 						{errors[name] && (
 							<div className={styles.error_message}>
-								{errors[name]?.message || errors?.[name]?.type}
+								{errorOriginal}
 							</div>
 						)}
 

@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import {
 	COMMODITY_NAME_MAPPING,
 	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
+	LCL_FRIEGHT_COMMODITIES,
 } from '../constants/commodities';
 
 const getCommoditiesDetails = (list = [], isNullValue = true) => {
@@ -25,6 +26,8 @@ const getCommodityList = (type, container_type) => {
 	switch (type) {
 		case 'freight':
 			return getCommoditiesDetails(FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType] || []);
+		case 'lcl_freight':
+			return getCommoditiesDetails(LCL_FRIEGHT_COMMODITIES);
 		default: return [];
 	}
 };

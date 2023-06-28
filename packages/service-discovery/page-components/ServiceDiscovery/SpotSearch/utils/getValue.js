@@ -17,9 +17,8 @@ const iterateSubKeys = (itemField, value) => {
 const getValue = (
 	itemData,
 	itemField,
-	// eslint-disable-next-line default-param-last
-	functions = {},
 	emptyState,
+	functions = {},
 ) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';

@@ -1,6 +1,6 @@
 import { addDays } from '@cogoport/utils';
 
-const getCommonPayload = (serviceType, origin, destination) => {
+const getPayload = (serviceType, origin, destination) => {
 	const COMMON_PAYLOAD_MAPPING = {
 		fcl_freight: {
 			bls_count                  : 1,
@@ -62,6 +62,20 @@ const getCommonPayload = (serviceType, origin, destination) => {
 					touch_point_type        : 'destination',
 				},
 			],
+			load_selection_type : 'truck',
+			packages            : [
+				{
+					handling_type  : 'stackable',
+					height         : 1,
+					length         : 1,
+					width          : 1,
+					package_weight : 1,
+					packages_count : 1,
+					packing_type   : 'box',
+				},
+			],
+			truck_type              : 'open_body_pickup_1ton',
+			trucks_count            : 1,
 			destination_location_id : destination,
 			origin_location_id      : origin,
 			status                  : 'active',
@@ -69,7 +83,7 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			trip_type               : 'one_way',
 		},
 		ltl_freight: {
-			cargo_readiness_date    : new Date(),
+			cargo_readiness_date    : addDays(new Date(), 1),
 			commodity               : null,
 			load_selection_type     : 'cargo_gross',
 			destination_location_id : destination,
@@ -120,66 +134,13 @@ const getCommonPayload = (serviceType, origin, destination) => {
 	return COMMON_PAYLOAD_MAPPING[serviceType];
 };
 
-const getExtraPayload = (serviceType, subType) => {
-	const EXTRA_PAYLOAD_MAPPING = {
-		fcl_freight: {
-			containers: {},
-		},
-		lcl_freight: {
-			packages: {},
-		},
-		air_freight: {
-			packages: {},
-		},
-		ftl_freight: {
-			truck: {
-				load_selection_type : 'truck',
-				packages            : [
-					{
-						handling_type  : 'stackable',
-						height         : 1,
-						length         : 1,
-						width          : 1,
-						package_weight : 1,
-						packages_count : 1,
-						packing_type   : 'box',
-					},
-				],
-				truck_type   : 'open_body_pickup_1ton',
-				trucks_count : 1,
-			},
-			cargo_full_truck: {
-				load_selection_type : 'cargo_gross',
-				packages            : [],
-				volume              : 1,
-				weight              : 1,
-			},
-		},
-		ltl_freight: {
-			cargo_partial_truck: {},
-		},
-		trailer_freight: {
-			mode_by_truck: {},
-		},
-		haulage_freight: {
-			mode_by_rail: {},
-		},
-	};
-
-	return EXTRA_PAYLOAD_MAPPING[serviceType][subType] || {};
-};
-
 const getDefaultPayload = ({
 	serviceType = '',
 	origin = '',
 	destination = '',
-	sub_type = '',
 }) => {
-	const extraPayloadKey = serviceType === 'ftl_freight' ? 'truck' : sub_type;
-
 	const payloadObject = {
-		...getCommonPayload(serviceType, origin, destination),
-		...getExtraPayload(serviceType, extraPayloadKey),
+		...getPayload(serviceType, origin, destination),
 	};
 
 	const payloadKey = [serviceType, 'services_attributes'].join('_');

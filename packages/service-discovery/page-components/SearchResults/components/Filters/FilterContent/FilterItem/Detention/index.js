@@ -14,6 +14,7 @@ const renderFormItem = ({ name, control }) => (
 		<div className={styles.form_item_wrapper}>
 			<div className={styles.form_item}>
 				<div className={styles.label}>At Origin</div>
+
 				<InputNumberController
 					name={`${name}_origin`}
 					control={control}
@@ -25,6 +26,7 @@ const renderFormItem = ({ name, control }) => (
 
 			<div className={styles.form_item}>
 				<div className={styles.label}>At Destination</div>
+
 				<InputNumberController
 					name={`${name}_destination`}
 					control={control}

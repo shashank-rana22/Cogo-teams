@@ -1,6 +1,8 @@
 import { Button, Accordion } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import getPrefillForm from '../../../utils/getPrefillForm';
 
 import FilterItem from './FilterItem';
 import getFilterControls from './getControls';
@@ -12,8 +14,12 @@ function FilterContent({ data = {}, setShow }) {
 	const controls = getFilterControls(data, 'search_type');
 
 	const handleApply = () => {
-		setShow(false);
+		// setShow(false);
 	};
+
+	useEffect(() => {
+		getPrefillForm({ load_details: data, setValue });
+	}, [data, setValue]);
 
 	return (
 		<div className={styles.container}>

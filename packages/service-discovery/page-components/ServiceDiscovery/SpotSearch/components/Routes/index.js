@@ -42,7 +42,7 @@ function Routes({
 			values : { default_payload, service_type, ...organization, ...form },
 		});
 
-		if (spot_search_id) {
+		if (spot_search_id && typeof spot_search_id === 'string') {
 			router.push(
 				'/book/[spot_search_id]/[importer_exporter_id]',
 				`/book/${spot_search_id}/${organization.organization_id}`,
