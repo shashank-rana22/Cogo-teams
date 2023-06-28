@@ -229,6 +229,11 @@ const common_apis = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
+			api          : 'create_air_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',
