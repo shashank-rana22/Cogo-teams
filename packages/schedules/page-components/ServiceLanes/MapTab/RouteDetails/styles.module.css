@@ -23,7 +23,7 @@
 .total_transit_data {
     color: var(--black, #221f20);
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 150%;
 }
 
@@ -38,10 +38,7 @@
 }
 
 .frequency_data {
-    color: var(--black, #221f20);
-    font-size: 16px;
-    font-family: Poppins;
-    font-weight: 500;
+    margin-left: 16px;
 }
 
 .button {

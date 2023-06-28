@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 
 function WeekFrequency({ dayOfWeek, starting_day }) {
+    // console.log("dayOfWeek", dayOfWeek);
     const weekMessage = [
         "Once a week",
         "Twice a week",
@@ -44,7 +45,7 @@ function WeekFrequency({ dayOfWeek, starting_day }) {
 
     const printMessage = message();
 
-    return <div>{printMessage}</div>;
+    return <div className={styles.container}>{printMessage}</div>;
 }
 
 export default WeekFrequency;

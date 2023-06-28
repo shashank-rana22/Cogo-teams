@@ -1,82 +1,40 @@
 import styles from "./styles.module.css";
+import WeekFrequency from "../../WeekFrequency";
+import WeekCalendar from "../../WeekCalendar";
 
 function TimeTable({ item }) {
-    const freq = [
-        "Once a week",
-        "Twice a week",
-        "Thrice a week",
-        "Four times a week",
-        "Five times a week",
-        "Six times a week",
-        "Daily",
-    ];
+    console.log("item: ", item?.service_lane_links?.[0]?.eta_day - 1, item);
 
+    const totalTransit =
+        item?.service_lane_links?.[item?.service_lane_links?.length - 1]
+            ?.eta_day_count - item?.service_lane_links?.[0]?.etd_day_count;
     return (
         <div className={styles.container}>
             <div className={styles.frequency}>
-                <div className={styles.frequency_text}>Frequency : &nbsp;</div>
-                <div>
-                    <div className={styles.times}>{freq[2]}</div>
-                    <div className={styles.week}>
-                        <div
-                            className={
-                                item?.week?.[0] === "M" ? styles.bold : " "
-                            }
-                        >
-                            M&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[1] === "T" ? styles.bold : " "
-                            }
-                        >
-                            T&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[2] !== "W" ? styles.bold : " "
-                            }
-                        >
-                            W&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[0] !== "T" ? styles.bold : " "
-                            }
-                        >
-                            T&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[0] === "F" ? styles.bold : " "
-                            }
-                        >
-                            F&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[0] !== "S" ? styles.bold : " "
-                            }
-                        >
-                            S&nbsp;
-                        </div>
-                        <div
-                            className={
-                                item?.week?.[0] === "S" ? styles.bold : " "
-                            }
-                        >
-                            S
-                        </div>
-                    </div>
+                Frequency :
+                <div className={styles.data}>
+                    <WeekFrequency
+                        dayOfWeek={item?.day_of_week || 12}
+                        startingDay={
+                            item?.service_lane_links?.[0]?.eta_day - 1 || 20
+                        }
+                    />
+                    <WeekCalendar
+                        dayOfWeek={item?.day_of_week || 12}
+                        startingDay={
+                            item?.service_lane_links?.[0]?.eta_day - 1 || 4
+                        }
+                    />
                 </div>
             </div>
-            <div className={styles.frequency}>
-                <div className={styles.frequency_text}>
-                    Total Transit : &nbsp;
-                </div>
-                <div>
-                    <div className={styles.times}>21 Days</div>
-                    <div className={styles.week}>Round Trip</div>
+
+            <div className={styles.transit}>
+                Total Transit :
+                <div className={styles.data}>
+                    <div className={styles.days}>{totalTransit} Days</div>
+                    <div className={styles.trip}>
+                        {item?.trip_type || "Round Trip"}
+                    </div>
                 </div>
             </div>
         </div>

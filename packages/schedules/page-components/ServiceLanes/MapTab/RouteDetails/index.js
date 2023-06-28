@@ -3,12 +3,10 @@ import styles from "./styles.module.css";
 import RoutePort from "./RoutePort";
 import { differenceInDays } from "@cogoport/utils";
 import { IcMEdit } from "@cogoport/icons-react";
-import WeekFrequency from "../../WeekFrequency";
-import WeekCalendar from "../../ServiceLanesList/WeekCalander";
+import WeekCalendar from "../../ServiceLanesList/WeekCalendar";
+import WeekFrequency from "../../ServiceLanesList/WeekFrequency";
 
 function RouteDetails({ route, dayOfWeek }) {
-    console.log("routeDetails: ", route);
-
     const totalTransit =
         route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
 
@@ -25,14 +23,13 @@ function RouteDetails({ route, dayOfWeek }) {
                     <div className={styles.frequency}>
                         Frequency &emsp;&emsp;:
                         <div className={styles.frequency_data}>
-                            &emsp;
                             <WeekFrequency
                                 dayOfWeek={dayOfWeek || 10}
-                                starting_day={route?.[0]?.eta_day - 1}
+                                startingDay={route?.[0]?.eta_day - 1}
                             />
                             <WeekCalendar
                                 dayOfWeek={dayOfWeek || 10}
-                                starting_day={route?.[0]?.eta_day - 1}
+                                startingDay={route?.[0]?.eta_day - 1}
                             />
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 const portData = ({ item }) => {
     const truncate = (str) => {
-        return str?.length > 30 ? `${str.substring(0, 27)}...` : str;
+        return str?.length > 16 ? `${str.substring(0, 14)}...` : str;
     };
 
     const links = item?.service_lane_links?.length;

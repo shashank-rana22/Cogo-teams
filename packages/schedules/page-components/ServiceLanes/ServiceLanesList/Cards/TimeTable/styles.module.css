@@ -1,37 +1,38 @@
 .container {
     display: flex;
+    width: 38%;
     justify-content: space-between;
-    margin: 16px 16px 16px 0;
-    width: 40%;
-    padding-left: 48px;
-    position: relative;
 }
 
 .frequency {
     display: flex;
-}
-
-.frequency_text {
+    margin: 16px 16px 0px 48px;
     color: var(--black-60, #828282);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.times {
+.data {
+    padding-left: 16px;
+}
+
+.transit {
+    display: flex;
+    margin-top: 16px;
+    color: var(--black-60, #828282);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.days {
     color: var(--black, #221f20);
     font-size: 16px;
     font-weight: 600;
 }
 
-.week {
+.trip {
     display: flex;
     color: var(--black, #828282);
     font-size: 16px;
     font-weight: 500;
-}
-
-.bold {
-    color: var(--black, #221f20);
-    font-size: 16px;
-    font-weight: 600;
 }
