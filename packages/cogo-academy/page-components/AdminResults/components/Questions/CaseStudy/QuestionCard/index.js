@@ -44,7 +44,10 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 						</div>
 
 						<div className={styles.display_question}>
-							<div className={styles.question_text}>{question}</div>
+							<div
+								className={styles.question_text}
+								dangerouslySetInnerHTML={{ __html: question }}
+							/>
 						</div>
 					</div>
 				</div>

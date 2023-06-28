@@ -11,9 +11,7 @@ function Description({ question_text = '', id = '', test_id = '', activeAttempt 
 	return (
 		<div>
 			<div className={styles.content_container}>
-				<div className={styles.content}>
-					{question_text}
-				</div>
+				<div className={styles.content} dangerouslySetInnerHTML={{ __html: question_text }} />
 
 				<div
 					className={styles.view_question}

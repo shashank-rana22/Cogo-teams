@@ -28,9 +28,7 @@ function TitleComponent({
 
 			</div>
 
-			<div className={styles.section}>
-				{question}
-			</div>
+			<div className={styles.section} dangerouslySetInnerHTML={{ __html: question }} />
 
 			<div className={styles.small_section}>
 				{startCase(question_type)}
