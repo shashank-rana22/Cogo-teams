@@ -9209,6 +9209,30 @@ const partner = {
 			service_name : 'campaign',
 		},
 	],
+	utm_parameters: [
+
+		{
+			api          : 'create_utm',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
+		{
+			api          : 'update_utm',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
+		{
+			api          : 'get_utm',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
+		{
+			api          : 'list_utms',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
+	],
+
 	campaign_dashboard: [
 		{
 			api          : 'list_platform_config_constants',
