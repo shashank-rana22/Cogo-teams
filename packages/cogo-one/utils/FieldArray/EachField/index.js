@@ -1,4 +1,5 @@
-import { getFieldArrayControllers } from '../../getFieldArrayControllers';
+// eslint-disable-next-line import/no-cycle
+import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
 
@@ -9,7 +10,7 @@ function EachField({
 		controls.map((eachControl) => {
 			const { controlType, name } = eachControl;
 
-			const EleController = getFieldArrayControllers(controlType) || null;
+			const EleController = getFieldController(controlType) || null;
 
 			if (!EleController) {
 				return null;
