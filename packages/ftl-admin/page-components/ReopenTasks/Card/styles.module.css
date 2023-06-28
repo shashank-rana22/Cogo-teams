@@ -14,8 +14,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 4px 16px;
 	width: 100%;
+	padding: 4px 16px;
 }
 
 .details_container {
@@ -24,16 +24,15 @@
 	width: 100%;
 }
 
-.taskDetails{
-
+.taskDetails {
 	display: flex;
 	align-items: center;
 	width: 100%;
 	font-weight: 500;
 
-	> .label{
-		font-weight: 600;
+	> .label {
 		width: 50%;
+		font-weight: 600;
 		text-transform: capitalize;
 	}
 
@@ -43,6 +42,6 @@
 
 	> .completedOn {
 		width: 25%;
-		color: #67c676
+		color: #67c676;
 	}
 }

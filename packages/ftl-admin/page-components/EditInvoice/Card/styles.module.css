@@ -14,8 +14,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 4px 16px;
 	width: 100%;
+	padding: 4px 16px;
 }
 
 .divider {
@@ -30,9 +30,9 @@
 }
 
 .details_container {
-	width: 17%;
 	display: flex;
 	align-items: center;
+	width: 17%;
 }
 
 .icon_container {
@@ -52,23 +52,22 @@
 	width: 35%;
 }
 
-.taskDetails{
-
+.taskDetails {
 	display: flex;
 	align-items: center;
 	width: 100%;
 	font-weight: 500;
 
-	.label{
-		font-weight: 600;
+	.label {
 		width: 25%;
+		font-weight: 600;
 		text-transform: capitalize;
 	}
 
 	.shipment_type {
-		text-transform: capitalize;
 		margin-left: 1rem;
 		font-weight: 500;
+		text-transform: capitalize;
 	}
 }
 
@@ -98,21 +97,20 @@
 
 .accordian_control {
 	display: flex;
-	justify-content: center;	
+	justify-content: center;
 
 	.accordian_body {
 		display: flex;
-		justify-content: center;
 		flex-direction: column;
+		justify-content: center;
 		width: 100%;
-		
 	}
 
 	.invoice_card {
 		display: flex;
 		align-items: center;
-		padding: 0.5rem 1rem;
 		justify-content: space-between;
+		padding: 0.5rem 1rem;
 		background-color: #f9f9f9;
 	}
 

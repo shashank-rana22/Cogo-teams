@@ -4,6 +4,7 @@
 	> .search_sids {
 		max-width: fit-content;
 		margin-left: auto;
+
 		:global {
 			.ui_input_container {
 				min-width: 20rem;
@@ -13,7 +14,7 @@
 
 		> .lowerLabel {
 			font-size: 12px;
-			color: #f00
+			color: #f00;
 		}
 	}
 }

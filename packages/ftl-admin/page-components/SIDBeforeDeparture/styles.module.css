@@ -2,11 +2,11 @@
 	display: flex;
 	align-items: center;
 
-	 .serial_id {
+	.serial_id {
 		margin-right: 1rem;
-	 }
+	}
 
-	 .bold {
+	.bold {
 		font-weight: 600;
 	}
 }

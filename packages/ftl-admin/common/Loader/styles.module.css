@@ -5,7 +5,7 @@
 	margin: 14px;
 	background: var(--color-secondary-5);
 	border-radius: 4px;
-	box-shadow: 0 0 6px 2px #44444433;
+	box-shadow: 0 0 6px 2px #4443;
 
 	&:hover {
 		box-shadow: 0 0 6px 2px #856ef933;

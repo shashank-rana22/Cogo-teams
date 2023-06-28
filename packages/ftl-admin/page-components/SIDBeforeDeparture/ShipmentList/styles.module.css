@@ -13,8 +13,8 @@
 .action_wrapper {
 	display: flex;
 	align-items: center;
+	padding: 5px 1rem;
 	background: white;
 	border-radius: 4px;
-	padding: 5px 1rem;
-    box-shadow: 0 1px 6px #a9bcdaa6;
+	box-shadow: 0 1px 6px #a9bcdaa6;
 }
