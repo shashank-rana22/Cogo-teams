@@ -38,7 +38,8 @@ function Card({
 	serviceProvidersData = [],
 	task = {},
 }) {
-	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
+	const { data, source } = item;
+	const dataArr = Array.isArray(data) ? data : [data];
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
@@ -64,14 +65,24 @@ function Card({
 					</div>
 
 					<div className={styles.priority_text}>
-						{`${startCase(item.source)} Booking Note`}
+						{`${startCase(source)} Booking Note`}
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.body}>
 				{(dataArr || []).map((dataObj) => {
-					const { hs_code, commodity_description } = dataObj?.service || {};
+					const {
+						chargeable_weight: dataChargeableWeight,
+						price_type,
+						rate_procurement_proof_url,
+					} = dataObj?.data || {};
+					const {
+						hs_code,
+						commodity_description,
+						chargeable_weight,
+						is_minimum_price_shipment,
+					} = dataObj?.service || {};
 					return (
 						<div className={styles.space_between} key={dataObj?.id}>
 							<div>
@@ -88,19 +99,19 @@ function Card({
 							<div>
 								<div className={styles.heading}>Airline</div>
 								<div className={styles.sub_heading}>
-									{item?.source === 'system_rate'
+									{source === 'system_rate'
 										? dataObj?.airline?.business_name || '-'
 										: dataObj?.reverted_airline?.business_name || '-'}
 								</div>
 							</div>
-							{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+							{source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
 								<>
 									<div>
 										<div className={styles.heading}>Chargeable Wt.</div>
 										<div className={styles.sub_heading}>
 											{`${
-												dataObj?.data?.chargeable_weight
-													|| dataObj?.service?.chargeable_weight
+												dataChargeableWeight
+													|| chargeable_weight
 													|| '--'
 											} Kg`}
 										</div>
@@ -134,13 +145,13 @@ function Card({
 									<div>
 										<div className={styles.heading}>Price Type</div>
 										<div className={styles.sub_heading}>
-											{startCase(dataObj?.data?.price_type) || '--'}
+											{startCase(price_type) || '--'}
 										</div>
 									</div>
 									<div>
 										<div className={styles.heading}>Min. Price</div>
 										<div className={styles.sub_heading}>
-											{dataObj?.service?.is_minimum_price_shipment
+											{is_minimum_price_shipment
 												? 'Yes'
 												: 'No'}
 										</div>
@@ -151,17 +162,17 @@ function Card({
 							<div>
 								<div className={styles.heading}>Source of Rate</div>
 
-								<div className={styles.sub_heading}>{startCase(item?.source)}</div>
+								<div className={styles.sub_heading}>{startCase(source)}</div>
 							</div>
 
 							<div>
 								<div className={styles.heading}>Buy Rate</div>
 
-								<div className={styles.sub_heading}>{getBuyPrice(dataObj, item.source)}</div>
+								<div className={styles.sub_heading}>{getBuyPrice(dataObj, source)}</div>
 							</div>
 
-							{dataObj?.data?.rate_procurement_proof_url
-						&& item?.source === 'flash_booking' && (
+							{rate_procurement_proof_url
+						&& source === 'flash_booking' && (
 							<div>
 								<div className={styles.heading}>Rate Procurement Proof</div>
 								<div className={styles.sub_heading}>
@@ -169,7 +180,7 @@ function Card({
 										themeType="linkUi"
 										size="md"
 										onClick={() => window.open(
-											dataObj?.data?.rate_procurement_proof_url,
+											rate_procurement_proof_url,
 											'_blank',
 										)}
 									>
