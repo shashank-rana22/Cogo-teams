@@ -32,3 +32,28 @@
 	display: flex;
 	align-items: center;
 }
+
+.filter_container {
+	margin: 4px 20px;
+}
+
+.cycleName {
+	width: 500px;
+	margin-bottom: 12px;
+}
+
+.cycleType div {
+		padding: 8px 44px;
+}
+
+.cogoEntityId div {
+	padding: 8px 44px;
+}
+
+.dueOutstandingCurrency > div {
+     margin-right: 32px;
+}
+
+.triggerType div {
+	padding: 8px 44px;
+}

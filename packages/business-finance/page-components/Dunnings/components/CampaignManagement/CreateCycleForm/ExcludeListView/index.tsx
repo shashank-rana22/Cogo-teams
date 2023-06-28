@@ -23,7 +23,7 @@ function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormDat
 			<div className={styles.header}>
 				<div>
 					<div className={styles.exclude_text}>
-						Exclude Customers You Do Not Want In This Cycle By Unselecting Them.
+						<h4>Exclude Customers You Do Not Want In This Cycle By Unselecting Them.</h4>
 					</div>
 
 				</div>

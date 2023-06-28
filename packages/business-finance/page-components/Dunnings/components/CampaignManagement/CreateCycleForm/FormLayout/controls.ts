@@ -2,6 +2,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { SERVICE_OPTIONS } from '../../constants';
 
+import styles from './styles.module.css';
+
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
@@ -28,6 +30,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			prefix      : null,
 			placeholder : 'Insert Cycle Name',
 			disabled    : isEditMode,
+			className   : styles.cycleName,
 			span        : 12,
 		},
 		{
@@ -35,6 +38,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			name         : 'cycleType',
 			type         : 'radioGroup',
 			span         : 12,
+			className    : styles.cycleType,
 			radioOptions : [
 				{ name: 'SOA', value: 'SOA', label: 'SOA' },
 				{ name: 'WIS', value: 'WIS', label: 'WIS' },
@@ -47,6 +51,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			type         : 'radioGroup',
 			radioOptions : entityOptions,
 			disabled     : isEditMode,
+			className    : styles.cogoEntityId,
 			span         : 12,
 		},
 		{
@@ -73,9 +78,10 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					name     : 'serviceType',
 					type     : 'multiSelect',
 					prefix   : () => {},
-					span     : 2,
 					disabled : isEditMode,
 					options  : SERVICE_OPTIONS,
+					style    : { width: '288px' },
+					span     : 4,
 				},
 				{
 					name        : 'creditController',
@@ -92,15 +98,14 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					valueKey     : 'organization_stakeholder_id',
 					initialCall  : true,
 					disabled     : formData?.isAllCreditControllers || isEditMode,
-					span         : 3,
-					style        : { width: '270px' },
+					span         : 4,
+					style        : { width: '288px' },
 				},
 				{
 					label    : 'Ageing Bucket',
 					name     : 'ageingBucket',
 					type     : 'select',
 					disabled : isEditMode,
-					span     : 2,
 					options  : [
 						{ label: '1-30 Days', value: 'AB_1_30' },
 						{ label: '31-60 Days', value: 'AB_31_60' },
@@ -109,8 +114,9 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 						{ label: '181+ Days', value: 'AB_181_PLUS' },
 						{ label: 'All Days', value: 'ALL' },
 					],
+					style : { width: '288px' },
+					span  : 3,
 				},
-
 			],
 		},
 		{
@@ -122,9 +128,10 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					name        : 'dueOutstandingCurrency',
 					placeholder : 'Currency',
 					type        : 'select',
-					span        : 1,
 					options     : currencyOptions,
 					disabled    : true,
+					className   : styles.dueOutstandingCurrency,
+					span        : 1,
 				},
 				{
 					name               : 'totalDueOutstanding',
@@ -145,11 +152,12 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			onChange : (value:string) => {
 				setFormData({ ...formData, triggerType: value });
 			},
-			span         : 12,
-			radioOptions : [
+			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },
 				{ name: 'PERIODIC', value: 'PERIODIC', label: 'Periodic' },
 			],
+			className : styles.triggerType,
+			span      : 12,
 		},
 
 	];

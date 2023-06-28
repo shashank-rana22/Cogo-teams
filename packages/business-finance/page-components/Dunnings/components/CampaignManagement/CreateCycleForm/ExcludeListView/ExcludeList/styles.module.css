@@ -1,6 +1,5 @@
 .table {
 	:global {
-		padding: 24px 16px;
 		margin-bottom: 0 !important;
 		overflow: unset;
 		background-color: var(--color-secondary-5);
@@ -11,7 +10,7 @@
 		}
 
 		.ui_table_body_cell {
-			padding: 21px 10px !important;
+			padding: 4px 8px !important;
 			overflow: unset;
 			border-bottom: 1px solid var(--color-tertiary-blue-3);
 		}

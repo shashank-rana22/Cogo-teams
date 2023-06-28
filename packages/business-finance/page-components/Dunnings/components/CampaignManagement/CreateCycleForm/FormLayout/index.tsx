@@ -173,7 +173,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	}, [cogoEntityId, setFormData, isEditMode]);
 
 	return (
-		<div>
+		<div className={styles.filter_container}>
 			<Filter
 				controls={controls({ formData, setFormData, isEditMode })}
 				filters={formData}
