@@ -3,6 +3,7 @@ import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
 import CardList from '../common/CardList';
+import { OPERATORS } from '../configurations/operators';
 import useGetListData from '../hooks/useGetListData';
 
 import CreateOperators from './CreateOperators';
@@ -18,9 +19,9 @@ function Operators() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [item, setItem] = useState(null);
+	const [activeTab, setActiveTab] = useState('airline');
 
 	const {
-		config,
 		listData,
 		loading,
 		searchValue,
@@ -30,7 +31,7 @@ function Operators() {
 		setFinalList,
 		finalList,
 		getLocationData,
-	} = useGetListData();
+	} = useGetListData(activeTab);
 
 	const functions = {
 		handleLogo: (singleItem:NestedObj) => (
@@ -45,7 +46,7 @@ function Operators() {
 		handleStatus: (singleItem:NestedObj) => (
 			<div className={styles.title_black}>
 				{singleItem?.status === 'active' ? (
-					<div className={styles.event} style={{ backgroundColor: '#d2ffe4' }}>{singleItem?.status}</div>
+					<div className={styles.event} style={{ backgroundColor: '#b4f3be' }}>{singleItem?.status}</div>
 				) : (
 					<div className={styles.event} style={{ backgroundColor: '#ffd0d0' }}>
 						{singleItem?.status}
@@ -55,6 +56,7 @@ function Operators() {
 		),
 		handleEdit: (singleItem:NestedObj) => (
 			<Button
+				size="lg"
 				className={styles.edit}
 				onClick={() => {
 					setEdit(true);
@@ -66,14 +68,20 @@ function Operators() {
 		),
 	};
 
+	const airlineFields = [...OPERATORS.common_first, ...OPERATORS.airline, ...OPERATORS.common_second];
+	const shippingLineFields = [...OPERATORS.common_first, ...OPERATORS.common_second];
+
 	return (
 		<div className={styles.container}>
 			<Header
 				setShow={setShow}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
 			/>
 			<Modal
+				size="md"
 				show={show}
 				onClose={() => setShow(false)}
 			>
@@ -88,6 +96,7 @@ function Operators() {
 			</Modal>
 
 			<Modal
+				size="md"
 				show={edit}
 				onClose={() => setEdit(false)}
 			>
@@ -103,7 +112,7 @@ function Operators() {
 			</Modal>
 
 			<CardList
-				fields={config.fields}
+				fields={activeTab === 'airline' ? airlineFields : shippingLineFields}
 				data={listData}
 				loading={loading}
 				page={page}

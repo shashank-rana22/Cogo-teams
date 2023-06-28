@@ -1,28 +1,26 @@
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-import { OPERATORS } from '../configurations/operators';
 import CONSTANTS from '../constants/constants';
 
-const useGetListData = () => {
+const useGetListData = (activeTab) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [finalList, setFinalList] = useState([]);
 	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 
-	const [{ data = {}, loading }, trigger] = useRequest('/list_operators', { manual: true });
+	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const config = OPERATORS;
+	const [{ data = {}, loading }, trigger] = useRequest('/list_operators', { manual: true });
 
 	const getLocationData = useCallback(() => {
 		(async () => {
-			if (searchValue) {
-				setPage(1);
-			}
 			try {
 				await trigger({
 					params: {
 						filters: {
-							q: (searchValue || '').trim() || undefined,
+							q             : query,
+							operator_type : activeTab,
 						},
 						page,
 						sort_type: 'desc',
@@ -32,21 +30,31 @@ const useGetListData = () => {
 				console.error(err);
 			}
 		})();
-	}, [page, searchValue, trigger]);
+	}, [activeTab, page, query, trigger]);
+
+	useEffect(() => {
+		if (searchValue) {
+			setPage(1);
+		}
+		debounceQuery(searchValue);
+	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
 		getLocationData();
-	}, [getLocationData, page]);
+	}, [getLocationData, page, query]);
 
 	useEffect(() => {
 		setFinalList([]);
-		setPage(1);
-		getLocationData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+		setPage(CONSTANTS.START_PAGE);
+		setSearchValue('');
+	}, [activeTab]);
+
+	useEffect(() => {
+		setFinalList([]);
+		setPage(CONSTANTS.START_PAGE);
+	}, [query]);
 
 	return {
-		config,
 		listData: data,
 		loading,
 		getLocationData,

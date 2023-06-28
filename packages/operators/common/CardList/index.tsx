@@ -62,7 +62,8 @@ function CardList({
 				setFinalList(finalList.concat(list));
 			}
 		}
-	}, [finalList, list, page, setFinalList]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	return (
 		<section>

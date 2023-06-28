@@ -1,5 +1,5 @@
 export const OPERATORS = {
-	fields: [
+	common_first: [
 		{
 			key   : 'logo',
 			label : 'Logo',
@@ -12,12 +12,8 @@ export const OPERATORS = {
 			span  : 2,
 			func  : 'startCase',
 		},
-		{
-			key   : 'operator_type',
-			label : 'Operator Type',
-			span  : 2,
-			func  : 'startCase',
-		},
+	],
+	airline: [
 		{
 			key   : 'iata_code',
 			label : 'IATA Code',
@@ -30,6 +26,8 @@ export const OPERATORS = {
 			span  : 2,
 			func  : 'startCase',
 		},
+	],
+	common_second: [
 		{
 			key   : 'status',
 			label : 'Status',
