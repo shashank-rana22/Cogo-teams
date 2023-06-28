@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { useFieldArray } from '@cogoport/forms';
 
 import EachField from './EachField';
