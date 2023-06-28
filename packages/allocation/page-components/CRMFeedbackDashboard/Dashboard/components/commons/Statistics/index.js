@@ -6,12 +6,17 @@ import useChartStats from '../../../../hooks/useChartStats';
 import { getStatsData } from './get-stats-data';
 import styles from './styles.module.css';
 
-function Statistics({ activeTab = '' }) {
-	const { stats = {}, loading = false } = useChartStats({ activeTab });
+const MINIMUM_COUNT_VALUE = 0;
+
+function Statistics({ activeTab, filters }) {
+	const {
+		stats = {},
+		loading,
+	} = useChartStats({ activeTab, filters });
 
 	const statsControl = getStatsData(stats)[activeTab];
 
-	const isEmpty = Object.values(stats).every((item) => item === 0);
+	const isEmpty = Object.values(stats).every((item) => item === MINIMUM_COUNT_VALUE);
 
 	if (isEmpty && !loading) {
 		return (
@@ -27,8 +32,8 @@ function Statistics({ activeTab = '' }) {
 	return (
 		<section className={styles.container}>
 			{Object.values(statsControl).map((chartData) => (
-				<div className={styles.chart_container}>
-					<div className={styles.chart_title}>{chartData?.title}</div>
+				<div key={chartData.title} className={styles.chart_container}>
+					<div className={styles.chart_title}>{chartData.title}</div>
 
 					<div className={styles.single_chart_container}>
 						<ResponsivePie
@@ -38,7 +43,7 @@ function Statistics({ activeTab = '' }) {
 							activeOuterRadiusOffset={4}
 							enableArcLinkLabels={false}
 							enableArcLabels={false}
-							colors={chartData?.colors}
+							colors={chartData.colors}
 							colorBy="index"
 							margin={{ top: 20, right: 10, bottom: 10, left: 150 }}
 							legends={[
