@@ -12465,6 +12465,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'get_tickets_dashboard',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
