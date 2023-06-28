@@ -1,11 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
 import STEPPER_CONFIG from '../config/SHIPMENT_STEPPER_TABS.json';
 import ShipmentTabMapping from '../config/SHIPMENT_TAB_MAPPING';
 
-const ZERO = 0;
 const getLocalStorageVal = () => {
 	const storedValues = JSON.parse(localStorage?.getItem('kam_desk_values'));
-	const kamDeskVersion = localStorage.getItem('kam_desk_version');
 
 	const { filters = {}, scopeFilters = {} } = storedValues || {};
 
@@ -18,14 +18,14 @@ const getLocalStorageVal = () => {
 	}
 
 	if (!stepperTab && shipment_type !== 'all') {
-		stepperTab = STEPPER_CONFIG[shipment_type]?.[ZERO]?.value;
+		stepperTab = STEPPER_CONFIG[shipment_type]?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
 	}
 
 	if (!activeTab) {
 		if (shipment_type === 'all') {
 			activeTab = 'ongoing';
 		} else {
-			activeTab = ShipmentTabMapping?.[shipment_type]?.[stepperTab]?.tabs?.[0]?.value;
+			activeTab = ShipmentTabMapping?.[shipment_type]?.[stepperTab]?.tabs?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
 		}
 	}
 
@@ -37,7 +37,6 @@ const getLocalStorageVal = () => {
 		filters,
 		shipment_type,
 		scopeFilters,
-		kamDeskVersion,
 		activeTab,
 		stepperTab,
 	};
