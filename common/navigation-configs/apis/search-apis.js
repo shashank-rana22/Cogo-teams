@@ -474,5 +474,42 @@ const apis = [
 		module      : 'hs-code',
 		feature     : 'controlled checkout',
 	},
+	{
+		api          : 'create_nominated_shipment',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_nominated_shipments',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_nominated_shipment',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_nominated_shipment',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_nominated_spot_search',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_nominee_trade_party',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+
 ];
 export default apis;
