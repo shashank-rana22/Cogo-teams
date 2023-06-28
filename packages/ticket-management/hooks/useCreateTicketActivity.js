@@ -28,7 +28,7 @@ const useCreateTicketActivity = ({
 			await trigger({
 				data: {
 					...payload,
-					UserType      : 'ticket_user',
+					UserType      : 'user',
 					PerformedByID : profile?.user?.id,
 				},
 			});

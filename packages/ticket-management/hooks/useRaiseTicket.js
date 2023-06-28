@@ -35,9 +35,10 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			organization_id,
 			user_id,
 			priority,
-			file_url: { finalUrl },
+			file_url,
 			...rest
 		} = val || {};
+		const { finalUrl = '' } = file_url || {};
 
 		const ADDITIONAL_DATA = {};
 

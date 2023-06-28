@@ -19,7 +19,7 @@ const useUpdateTicketActivity = ({
 
 			const res = await trigger({
 				data: {
-					UserType      : 'ticket_user',
+					UserType      : 'user',
 					PerformedByID : profile?.user?.id,
 					Type          : isReslove ? 'mark_as_resolved' : 'reopened',
 					TicketID      : [Number(id)],
