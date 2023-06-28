@@ -6,17 +6,14 @@ import useChartStats from '../../../../hooks/useChartStats';
 import { getStatsData } from './get-stats-data';
 import styles from './styles.module.css';
 
-const MINIMUM_COUNT_VALUE = 0;
-
 function Statistics({ activeTab, filters }) {
 	const {
 		stats = {},
 		loading,
+		isEmpty = false,
 	} = useChartStats({ activeTab, filters });
 
-	const statsControl = getStatsData(stats)[activeTab];
-
-	const isEmpty = Object.values(stats).every((item) => item === MINIMUM_COUNT_VALUE);
+	const statsControl = getStatsData({ stats })[activeTab] || {};
 
 	if (isEmpty && !loading) {
 		return (
