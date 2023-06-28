@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	height: 68vh;
+	overflow-y: scroll;
 }
 
 .pagination_container {
