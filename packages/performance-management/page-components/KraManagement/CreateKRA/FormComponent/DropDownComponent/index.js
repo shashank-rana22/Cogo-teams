@@ -1,6 +1,6 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import getElementController from '../../../configs/getElementController';
+import getElementController from '../../../../../configs/getElementController';
 import getControls from '../controls';
 
 import styles from './styles.module.css';

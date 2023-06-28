@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import getElementController from '../../configs/getElementController';
+import getElementController from '../../../../configs/getElementController';
 
 import styles from './styles.module.css';
 

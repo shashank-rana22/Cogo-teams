@@ -10,10 +10,10 @@ import FiltersDisplay from './components/FilterDisplay';
 import FilterFieldArray from './components/FilterFieldArray';
 import KRATable from './components/KRATable';
 import TableDisplay from './components/TablesDisplay';
+import useGetEmployeesWithLowWeightage from './hooks/useGetEmployeesWithLowWeightage';
+import useGetkrasAssigned from './hooks/useGetKrasAssigned';
+import useGetUnassignedEmployee from './hooks/useGetUnassignedEmployees';
 import styles from './styles.module.css';
-import useGetEmployeesWithLowWeightage from './useGetEmployeesWithLowWeightage';
-import useGetkrasAssigned from './useGetKrasAssigned';
-import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const DISPLAY_ADD_KRA_BUTTON = 1;
 const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
