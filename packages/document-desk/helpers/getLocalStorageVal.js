@@ -13,6 +13,7 @@ const ResolveTabs = {
 	fcl_freight : FCL_TABS,
 	lcl_freight : LCL_TABS,
 };
+const TAB_CONFIG_COUNT = 0;
 
 // make changes here for imports according to shipment type
 const getLocalStorageVal = () => {
@@ -39,7 +40,7 @@ const getLocalStorageVal = () => {
 	const stepperConfig = ResolveTabs[shipment_type][stepperTab];
 
 	if (!stepperConfig.some((tab) => tab.value === activeTab)) {
-		const tabConfig = stepperConfig?.[0];
+		const tabConfig = stepperConfig?.[TAB_CONFIG_COUNT];
 		activeTab = tabConfig?.value || '';
 		filters.isCriticalOn = tabConfig?.isCriticalVisible && filters?.isCritical;
 	}

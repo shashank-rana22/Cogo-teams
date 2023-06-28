@@ -11,6 +11,8 @@ import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
+const ENTITY_CODE_LENGTH = 1;
+
 function AccountPayables() {
 	const { query, push } = useRouter();
 	const [activePayables, setActivePayables] = useState(
@@ -73,7 +75,7 @@ function AccountPayables() {
 								options={EntityOptions}
 								size="sm"
 								style={{ width: '284px' }}
-								disabled={entityDataCount <= 1}
+								disabled={entityDataCount <= ENTITY_CODE_LENGTH}
 							/>
 						) : null}
 					</div>

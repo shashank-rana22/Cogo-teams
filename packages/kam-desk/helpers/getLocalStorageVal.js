@@ -2,6 +2,7 @@ import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
 import STEPPER_CONFIG from '../config/SHIPMENT_STEPPER_TABS.json';
 import ShipmentTabMapping from '../config/SHIPMENT_TAB_MAPPING';
 
+const ZERO = 0;
 const getLocalStorageVal = () => {
 	const storedValues = JSON.parse(localStorage?.getItem('kam_desk_values'));
 	const kamDeskVersion = localStorage.getItem('kam_desk_version');
@@ -17,7 +18,7 @@ const getLocalStorageVal = () => {
 	}
 
 	if (!stepperTab && shipment_type !== 'all') {
-		stepperTab = STEPPER_CONFIG[shipment_type]?.[0]?.value;
+		stepperTab = STEPPER_CONFIG[shipment_type]?.[ZERO]?.value;
 	}
 
 	if (!activeTab) {
