@@ -19,6 +19,7 @@ const useDeleteChapter = ({ fetchList, setShowDeleteModal, showDeleteModal }) =>
 			await trigger({
 				data: payload,
 			});
+
 			Toast.success('Chapter has been deleted successfully');
 			setShowDeleteModal(false);
 			fetchList();
