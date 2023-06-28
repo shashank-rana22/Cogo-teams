@@ -123,15 +123,17 @@ function ShareQuotation({
 
 	const getModalSize = () => {
 		if (selectedModes.includes('email') && selectedModes.length > 1) {
-			return 'xl';
+			return { size: 'xl', widths: { email: '70%', message: '30%' } };
 		}
 
 		if (selectedModes.includes('email') && selectedModes.length === 1) {
-			return 'lg';
+			return { size: 'lg', widths: { email: '100%', message: '0%' } };
 		}
 
-		return 'md';
+		return { size: 'md', widths: { email: '0%', message: '100%' } };
 	};
+
+	const { size, widths } = getModalSize();
 
 	const BUTTON_MAPPING = [
 		{
@@ -186,7 +188,7 @@ function ShareQuotation({
 
 			{showShareQuotationModal ? (
 				<QuotationModal
-					modalSize={getModalSize()}
+					modalSize={size}
 					selectedModes={selectedModes}
 					setShowShareQuotationModal={setShowShareQuotationModal}
 					showShareQuotationModal={showShareQuotationModal}
@@ -194,6 +196,7 @@ function ShareQuotation({
 					rate={rate}
 					detail={detail}
 					organization={orgData}
+					widths={widths}
 				/>
 			) : null}
 

@@ -17,6 +17,7 @@ function QuotationModal({
 	detail = {},
 	checkout_type = '',
 	organization,
+	widths,
 }) {
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
@@ -38,7 +39,7 @@ function QuotationModal({
 	const MAPPING = {
 		customize: {
 			component      : Customize,
-			compoenntProps : { detail, organization },
+			compoenntProps : { detail, organization, selectedModes, widths },
 			buttons        : [
 				{
 					key       : 'next',
