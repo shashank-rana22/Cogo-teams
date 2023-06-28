@@ -122,6 +122,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								services={services}
 								stakeholdersTrigger={stakeholdersTrigger}
 								servicesList={servicesList}
+								listStakeholdersData={shipmentStakeholderData}
 							/>
 						)}
 					</div>

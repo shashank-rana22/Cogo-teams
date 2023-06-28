@@ -1,4 +1,4 @@
-const getControls = (userOptions, isDisabled = false, isempty = false) => [
+const getControls = (userOptions) => [
 	{
 		name        : 'name',
 		label       : 'Name of Test',
@@ -28,7 +28,6 @@ const getControls = (userOptions, isDisabled = false, isempty = false) => [
 		options     : userOptions,
 		type        : 'multi-select',
 		placeholder : 'User groups',
-		disabled    : isempty,
 		style       : {
 			width: '100%',
 		},
@@ -39,16 +38,14 @@ const getControls = (userOptions, isDisabled = false, isempty = false) => [
 		type    : 'radioGroup',
 		options : [
 			{
-				name     : 'all',
-				value    : 'all',
-				label    : 'All',
-				disabled : (isDisabled || isempty),
+				name  : 'all',
+				value : 'all',
+				label : 'All',
 			},
 			{
-				name     : 'excel',
-				value    : 'excel',
-				label    : 'Upload User list Excel',
-				disabled : (isDisabled || isempty),
+				name  : 'excel',
+				value : 'excel',
+				label : 'Upload User list Excel',
 			},
 		],
 		rules: { required: 'This is required' },
