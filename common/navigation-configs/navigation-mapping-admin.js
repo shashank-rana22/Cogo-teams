@@ -2429,17 +2429,6 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
-	// kra_assignment: {
-	// 	key           : 'kra_assignment',
-	// 	title         : 'KRA Assignment',
-	// 	isSubNavs     : false,
-	// 	module_type   : 'dashboards',
-	// 	main_apis     : [],
-	// 	href          : '/v2/kra-assignment',
-	// 	as            : '/v2/kra-assignment',
-	// 	possible_apis : apis.kra_assignment,
-	// 	icon          : IcMFsoppoc,
-	// },
 	chakravyuh: {
 		key         : 'chakravyuh',
 		title       : 'Chakravyuh',

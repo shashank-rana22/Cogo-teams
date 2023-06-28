@@ -34,7 +34,9 @@ const useDay1Download = () => {
 					},
 				});
 			} catch (error) {
-				Toast.error(getApiErrorString(error?.response?.data));
+				if (error?.response?.data) {
+					Toast.error(getApiErrorString(error?.response?.data));
+				}
 			}
 		},
 		[listTrigger],
