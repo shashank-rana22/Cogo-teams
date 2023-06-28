@@ -20,7 +20,7 @@ const EXCLUDE_STEP = 2;
 const MAIL_STEP = 3;
 const STEP_CHANGE = 1;
 const FINAL_STEP = 3;
-const DEFAULT_SEVERITY_LEVEL = '1';
+const DEFAULT_SEVERITY_LEVEL = 'LOW';
 const DEFAULT_PAGE_INDEX = 1;
 
 function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:Props) {
