@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-import getElementController from '../../configs/getElementController';
+import getElementController from '../../../../configs/getElementController';
 
 import DescriptionControls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';

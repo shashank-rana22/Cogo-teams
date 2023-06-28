@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Chapter from './Chapter';
 import Employees from './Employees';
 import Squad from './Squad';
+import styles from './styles.module.css';
 import SubChapter from './SubChapter';
 import Tribe from './Tribe';
 
@@ -21,6 +22,8 @@ function TabComponent() {
 
 	return (
 		<div>
+			<div className={styles.container}>Performance Management Configuration</div>
+
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"

@@ -25,14 +25,14 @@
 }
 
 .employee_name:hover {
-	cursor: pointer;
-	text-decoration: underline;
 	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-.select_row{
+.select_row {
 	display: flex;
 	align-items: center;
-	padding: 4px 0 16px;
 	justify-content: space-between;
+	padding: 4px 0 16px;
 }
