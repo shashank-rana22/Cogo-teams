@@ -9,6 +9,7 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Roles',
 				placeholder : 'Roles',
 				multiple    : true,
+				initialCall : true,
 				onChange    : (_, e) => {
 					setSelectedValue((pv) => ({
 						...pv,
@@ -31,6 +32,7 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Tribes',
 				placeholder : 'Tribes',
 				multiple    : true,
+				initialCall : true,
 				onChange    : (_, e) => {
 					setSelectedValue((pv) => ({
 						...pv,
@@ -54,6 +56,7 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Squads',
 				placeholder : 'Squads',
 				multiple    : true,
+				initialCall : true,
 				onChange    : (_, e) => {
 					setSelectedValue((pv) => ({
 						...pv,
@@ -77,6 +80,7 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Chapters',
 				placeholder : 'Chapters',
 				multiple    : true,
+				initialCall : true,
 				onChange    : (_, e) => {
 					setSelectedValue((pv) => ({
 						...pv,
@@ -100,6 +104,7 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Sub chapter',
 				placeholder : 'Sub chapter',
 				multiple    : true,
+				initialCall : true,
 				onChange    : (_, e) => {
 					setSelectedValue((pv) => ({
 						...pv,

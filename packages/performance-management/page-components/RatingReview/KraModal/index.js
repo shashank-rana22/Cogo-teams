@@ -65,19 +65,19 @@ function KraModal({ show, setShow }) {
 						{ list?.map((item, index) => (
 
 							<div className={styles.sub_section} key={item.kra_id}>
-								{index + 1}
 								<div className={styles.label}>
 									KRA Name:
 									{' '}
 									{item.kra_name}
-
 								</div>
+
 								<div className={styles.label}>
 									KRA Achieved:
 									{' '}
 									{item.rating_manual ? <InputEmployeeManualTarget item={item} />
 										: item.achieved_rating}
 								</div>
+
 								<div className={styles.label}>
 									Weightage:
 									{' '}

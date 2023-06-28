@@ -75,7 +75,10 @@ function RenderFields({ control, errors, setSelectedValue, showSelectedValue }) 
 								className={styles.show_selected_values}
 								style={{ opacity: isEmpty(showSelectedValue[name]) ? '0.5' : '1' }}
 							>
-								<RenderSelectedFields selectedValues={showSelectedValue[name]} name={name} />
+								<RenderSelectedFields
+									selectedValues={showSelectedValue[name]}
+									name={name}
+								/>
 							</div>
 
 						</div>
