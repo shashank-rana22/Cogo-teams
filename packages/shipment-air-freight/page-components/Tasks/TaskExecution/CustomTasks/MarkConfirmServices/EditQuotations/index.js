@@ -11,8 +11,8 @@ function EditQuotations({
 	data,
 	shipment_id,
 	onCancel,
-	airInput,
-	localAirInput,
+	airServiceFormValues,
+	airLocalServiceFormValues,
 	reallocationFunc,
 	watchServiceProvider,
 }) {
@@ -76,8 +76,8 @@ function EditQuotations({
 				<ConfirmModal
 					confirmModal={confirmModal}
 					setConfirmModal={setConfirmModal}
-					airInput={airInput}
-					localAirInput={localAirInput}
+					airServiceFormValues={airServiceFormValues}
+					airLocalServiceFormValues={airLocalServiceFormValues}
 					handleSubmit={handleSubmit}
 					onCreate={onSubmit}
 					reallocationFunc={reallocationFunc}
