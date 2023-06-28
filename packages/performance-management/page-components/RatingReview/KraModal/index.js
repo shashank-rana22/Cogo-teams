@@ -21,8 +21,10 @@ function KraModal({ show, setShow }) {
 		updateEmployeeFinalRating,
 	} = useUpdateEmployeeFinalRating(data);
 
-	const [starRating, setStarRating] = useState();
-	const [comments, setCommemts] = useState();
+	const MIN_RATING = 0;
+
+	const [starRating, setStarRating] = useState(MIN_RATING);
+	const [comments, setCommemts] = useState('');
 
 	if (loading) {
 		return (
