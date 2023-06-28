@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-cycle
+/* eslint-disable import/no-cycle */
 import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
