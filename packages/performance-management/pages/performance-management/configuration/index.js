@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/performance-management/page-components/Configuration/Tabomponent';
+export { default } from '@cogoport/performance-management/page-components/Configuration/TabComponent';
