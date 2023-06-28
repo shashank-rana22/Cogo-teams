@@ -16,19 +16,19 @@
 
 .show_selected_values {
 	height: 230px;
-	overflow-y: scroll;
 	padding: 10px;
 	margin: 30px 0;
+	overflow-y: scroll;
 	background-color: rgb(193 233 233);
 	border: 1px solid steelblue;
 	border-radius: 6px;
 }
 
 .value_container {
-	background-color: #fff;
-	border: 1px solid #fff;
-	border-radius : 5px;
+	padding: 4px;
 	margin-bottom: 8px;
 	text-align: center;
-	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 5px;
 }
