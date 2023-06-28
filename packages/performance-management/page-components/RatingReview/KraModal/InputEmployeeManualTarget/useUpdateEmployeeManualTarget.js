@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 
 const useUpdateEmployeeManualTarget = ({ item }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_manual_target',
 		method : 'POST',
 	}, { manual: true });
@@ -20,6 +20,7 @@ const useUpdateEmployeeManualTarget = ({ item }) => {
 					end_date              : '2023-07-20',
 				},
 			});
+
 			Toast.success('Rating has been updated successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

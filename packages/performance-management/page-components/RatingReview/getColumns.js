@@ -10,7 +10,7 @@ const getColumns = ({
 	identifier_key,
 	employee_list,
 	level,
-	onClickEmployee,
+	setShow,
 }) => {
 	const columns = [
 		{
@@ -32,18 +32,20 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Name',
 			accessor : (item) => (
 				<div
 					className={styles.employee_name}
 					role="presentation"
-					onClick={() => onClickEmployee(item?.employee_id)}
+					onClick={() => setShow(item?.employee_id)}
 				>
 					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Calculated Rating',
 			accessor : (item) => (
@@ -52,6 +54,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Revised Rating',
 			accessor : (item) => (
@@ -60,6 +63,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Final Rating',
 			accessor : (item) => (
@@ -68,6 +72,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Manager',
 			accessor : (item) => (
@@ -76,6 +81,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'HRBP',
 			accessor : (item) => (
@@ -84,6 +90,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Average Rating',
 			accessor : (item) => (
@@ -92,6 +99,7 @@ const getColumns = ({
 				</div>
 			),
 		},
+
 		{
 			Header   : 'Z-Score',
 			accessor : (item) => (
