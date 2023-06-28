@@ -1,12 +1,12 @@
 import { Pagination } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import PACKAGE_CONSTANTS from '../../../../common/packageConstants';
 import StyledTable from '../../../../common/StyledTable';
 import ActiveInactiveTabs from '../../commons/ActiveInactiveTabs';
 import Header from '../../commons/CommonHeader';
 import CreateConfigurationModal from '../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../commons/DeleteConfigurationModal';
-import PACKAGE_CONSTANTS from '../../commons/packageConstants';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -51,7 +51,6 @@ function Chapter() {
 
 	return (
 		<div>
-
 			<div className={styles.header}>
 				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
