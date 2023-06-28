@@ -1,7 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import CheckboxItem from './CheckboxItem';
+import CheckboxItem from '../../../../commons/ExcludeList/CheckboxItem';
+
 import styles from './styles.module.css';
 
 export const config = (
