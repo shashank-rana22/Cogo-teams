@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 
 function WeekCalendar({ dayOfWeek, startingDay }) {
-    const week = ["M", "T", "W", "T", "F", "S", "S"];
+    const week = ["S", "M", "T", "W", "T", "F", "S"];
 
     return (
         <div className={styles.box}>

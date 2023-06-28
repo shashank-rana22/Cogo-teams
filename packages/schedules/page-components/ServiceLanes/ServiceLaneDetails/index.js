@@ -4,7 +4,7 @@ import RouteDetails from "./RouteDetails";
 import useListServiceLanes from "../ServiceLanesList/hooks/useListServiceLanes";
 import ShipmentDetailsCard from "./ShipmentDetailsCard";
 
-function MapTab() {
+function ServiceLaneDetails() {
     const { query } = useRouter();
     const routeId = query?.id;
     const { data, loading } = useListServiceLanes({ routeId });
@@ -21,4 +21,4 @@ function MapTab() {
     );
 }
 
-export default MapTab;
+export default ServiceLaneDetails;

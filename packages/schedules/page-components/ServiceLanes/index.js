@@ -1,6 +1,6 @@
 import ServiceLanesList from "./ServiceLanesList";
 import { useState } from "react";
-import MapTab from "./MapTab";
+import ServiceLaneDetails from "./ServiceLaneDetails";
 
 function ServiceLane() {
     const [mapTab, setMapTab] = useState(null);
@@ -9,7 +9,7 @@ function ServiceLane() {
             {!mapTab ? (
                 <ServiceLanesList mapTab={mapTab} setMapTab={setMapTab} />
             ) : (
-                <MapTab mapTab={mapTab} setMapTab={setMapTab} />
+                <ServiceLaneDetails mapTab={mapTab} setMapTab={setMapTab} />
             )}
         </>
     );

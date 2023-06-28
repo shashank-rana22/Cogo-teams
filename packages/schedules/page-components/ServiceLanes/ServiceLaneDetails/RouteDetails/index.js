@@ -27,6 +27,7 @@ function RouteDetails({ route, dayOfWeek }) {
                                 dayOfWeek={dayOfWeek || 10}
                                 startingDay={route?.[0]?.eta_day - 1}
                             />
+                            &ensp;
                             <WeekCalendar
                                 dayOfWeek={dayOfWeek || 10}
                                 startingDay={route?.[0]?.eta_day - 1}

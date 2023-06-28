@@ -38,6 +38,8 @@
 }
 
 .frequency_data {
+    display: flex;
+    align-items: center;
     margin-left: 16px;
 }
 
