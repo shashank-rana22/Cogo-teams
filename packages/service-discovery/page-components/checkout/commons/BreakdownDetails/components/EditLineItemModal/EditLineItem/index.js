@@ -1,58 +1,40 @@
 import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import { useImperativeHandle, forwardRef } from 'react';
 
 import getElementController from '../../../../forms/getElementController';
 
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
 
-function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
-	const [unitOptions, setUnitOptions] = useState([]);
+function EditLineItem({ lineItemOptions, service_type = '', lineItems = [], detail = {} }, ref) {
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
 
-	const { control, watch, handleSubmit, formState:{ errors } } = useForm();
-
-	const { code, unit } = watch();
-
-	const controls = getlineItemControls(
-		CHARGE_CODE_DATA,
-		unit,
-	);
-
-	useEffect(() => {
-		if (!isEmpty(code)) {
-			const { units = [] } = CHARGE_CODE_DATA[code];
-
-			setUnitOptions(units.map((val) => ({ label: `${val}`, value: `${val}` })));
-		}
-	}, [CHARGE_CODE_DATA, code]);
+	const controls = getlineItemControls({ lineItems: lineItemOptions });
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
 			const onSubmit = (values) => {
+				const val = values.line_item;
+
+				const code = lineItems.find((item) => item.name === val)?.code;
+
 				const payloadValues = {
-					id                : checkout_id,
-					line_items_to_add : {
-						[service_id]: [
-							{
-								code     : CHARGE_CODE_DATA[values?.code]?.code,
-								unit     : values.unit,
-								currency : values.currency,
-								price    : Number(values.price),
-								...(unit === 'per_wm' ? {
-									cbm_weight_ratio: Number(
-										values.cbm_weight_ratio,
-									),
-								} : {}),
-							},
-						],
-					},
-					get_checkout_data: true,
+					service           : service_type,
+					code,
+					alias             : values.name,
+					organization_id   : detail.importer_exporter_id,
+					performed_by_id   : detail.importer_exporter_id,
+					performed_by_type : detail.importer_exporter_id,
 				};
 
 				return {
 					hasError : false,
 					values   : payloadValues,
+					code,
 				};
 			};
 
@@ -78,9 +60,7 @@ function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
 
 				return (
 					<div key={name} className={styles.form_group}>
-						<div className={styles.label}>
-							{label}
-						</div>
+						<div className={styles.label}>{label}</div>
 
 						<div className={styles.input_group}>
 							<Element
@@ -88,7 +68,6 @@ function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
 								key={name}
 								control={control}
 								id={`${name}_input`}
-								{...(name === 'unit' ? { options: unitOptions } : {})}
 							/>
 						</div>
 
@@ -104,4 +83,4 @@ function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
 	);
 }
 
-export default forwardRef(AddLineItem);
+export default forwardRef(EditLineItem);

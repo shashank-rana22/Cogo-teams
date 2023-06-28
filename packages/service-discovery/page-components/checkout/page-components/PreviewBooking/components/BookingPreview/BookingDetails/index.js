@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function BookingDetails({ showBreakup, setShowBreakup = () => {} }) {
+function BookingDetails({ setShowBreakup = () => {} }) {
 	const {
 		detail = {},
 		rate = {},

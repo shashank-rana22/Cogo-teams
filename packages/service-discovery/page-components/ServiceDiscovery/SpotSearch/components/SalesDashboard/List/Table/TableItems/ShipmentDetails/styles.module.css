@@ -1,13 +1,15 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	text-align: left;
 }
+
 .content{
-	
+
 }
-.tooltip{
+
+.tooltip {
 	text-align: left;
 	word-break: keep-all;
 }

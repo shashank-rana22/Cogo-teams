@@ -1,4 +1,4 @@
-import { Button, Modal, Toast } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
@@ -7,7 +7,7 @@ import useUpdateCustomizeQuotation from '../../../../hooks/useUpdateCustomizeQuo
 import AddLineItem from './AddLineItem';
 import useListRateChargeCodes from './useListRateChargeCodes';
 
-function AddLineItemModal({ setAddLineItemData, addLineItemData, getCheckout = () => {}, setRateDetails, rate }) {
+function AddLineItemModal({ setAddLineItemData, addLineItemData, setRateDetails, checkout_id }) {
 	const ref = useRef({});
 
 	const { service_type, service_id = '', index } = addLineItemData || {};
@@ -17,7 +17,7 @@ function AddLineItemModal({ setAddLineItemData, addLineItemData, getCheckout = (
 	const {
 		updateCustomizeQuotation,
 		loading,
-	} = useUpdateCustomizeQuotation({ setAddLineItemData, rate, setRateDetails, getCheckout, index });
+	} = useUpdateCustomizeQuotation({ setAddLineItemData, setRateDetails, index, checkout_id });
 
 	const handleSubmitForm = async () => {
 		await ref.current.handleSubmit().then((res) => {
@@ -39,11 +39,10 @@ function AddLineItemModal({ setAddLineItemData, addLineItemData, getCheckout = (
 			<Modal.Body>
 				<AddLineItem
 					CHARGE_CODE_DATA={CHARGE_CODE_DATA}
-					updateCustomizeQuotation={updateCustomizeQuotation}
-					setAddLineItemData={setAddLineItemData}
 					service_id={service_id}
 					loading={loading}
 					ref={ref}
+					checkout_id={checkout_id}
 				/>
 			</Modal.Body>
 

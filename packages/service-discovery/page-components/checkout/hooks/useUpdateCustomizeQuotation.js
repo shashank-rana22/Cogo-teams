@@ -1,33 +1,40 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+
+import useGetCheckout from './useGetCheckout';
 
 const DEFAULT_VALUE = 0;
 
-const useUpdateCustomizeQuotation = ({ setAddLineItemData, setRateDetails, getCheckout, index }) => {
+const VALUE_TO_INDEX_DIF = 1;
+
+const useUpdateCustomizeQuotation = ({ setAddLineItemData, setRateDetails, index, checkout_id }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_checkout_customize_quotation',
 	}, { manual: true });
 
+	const { trigger:triggerCheckout } = useGetCheckout({ checkout_id });
+
 	const updateCustomizeQuotation = async ({ values }) => {
 		try {
 			await trigger({ data: values });
 
+			const res = await triggerCheckout({ params: { id: checkout_id } });
+
+			const { data = {} } = res;
+
 			setAddLineItemData({});
 
-			const { data, hasError } = await getCheckout();
-
-			if (!hasError) {
+			if (!isEmpty(data)) {
 				const { rate = {} } = data;
 
 				const { services = {} } = rate;
 
-				const requiredLineItems = Object.values(services).map((serviceItem) => serviceItem)?.[index]?.line_items;
+				const requiredLineItems = Object.values(services)?.[index]?.line_items;
 
-				let newlyAddedLineItem = requiredLineItems[requiredLineItems.length - 1];
-
-				console.log('newlyAddedLineItemnewlyAddedLineItem', newlyAddedLineItem);
+				let newlyAddedLineItem = requiredLineItems[requiredLineItems.length - VALUE_TO_INDEX_DIF];
 
 				setRateDetails((prev) => prev.map((rateItem, rateIndex) => {
 					if (rateIndex !== index) {

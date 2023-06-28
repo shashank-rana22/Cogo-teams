@@ -1,6 +1,6 @@
 .options_container {
-    cursor: pointer;
 	width: 100%;
+	cursor: pointer;
 
 	:hover {
 		background-color: #f6f5fe;
@@ -8,13 +8,13 @@
 }
 
 .container {
-    border-radius: 4px;
-    display: flex;
-    width: 200px;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	border-radius: 4px;
 }
 
 .label_text {
-    font-size: 12px;
-    padding: 12px;
+	padding: 12px;
+	font-size: 12px;
 }

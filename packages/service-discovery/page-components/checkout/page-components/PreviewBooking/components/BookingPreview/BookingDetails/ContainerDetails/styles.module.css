@@ -1,16 +1,16 @@
 .pills_container {
-    display: flex;
+	display: flex;
 
-    :global {
-        .ui_pill_container {
-            border-radius: 24px;
-        }
+	:global {
+		.ui_pill_container {
+			border-radius: 24px;
+		}
 
-        .ui_pill_text {
-            max-width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-    }
+		.ui_pill_text {
+			max-width: 120px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
 }

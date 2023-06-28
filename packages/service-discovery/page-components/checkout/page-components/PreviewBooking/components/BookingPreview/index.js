@@ -74,11 +74,7 @@ function BookingPreview({ data = {}, setShowBreakup, showBreakup }) {
 		<div className={styles.container}>
 			<div className={styles.heading}>Booking Preview</div>
 
-			<BookingDetails
-				data={data}
-				setShowBreakup={setShowBreakup}
-				showBreakup={showBreakup}
-			/>
+			<BookingDetails setShowBreakup={setShowBreakup} />
 
 			{showBreakup ? (
 				<div className={styles.breakdown_details}>

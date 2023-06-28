@@ -1,64 +1,68 @@
-.mode_item{
-    background: #fff;
-    border: 1px solid #E8F3F3;
-    box-shadow: 0px 0px 2px rgba(111, 165, 171, 0.12);
-    border-radius: 8px;
-    min-width: 160px;
-    padding: 20px 16px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    position: relative;
-    transition: 0.5s;
+.mode_item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-width: 160px;
+	padding: 20px 16px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e8f3f3;
+	border-radius: 8px;
+	box-shadow: 0 0 2px rgb(111 165 171 / 12%);
+	transition: 0.5s;
 
 	&:hover {
+		.icon_hover {
+			transition: 0.5s;
+			transform: scale(1.12);
+			transform-origin: top left;
+		}
 
-        .icon_hover{
-            transition: 0.5s;
-            transform-origin: top left;
-            transform: scale(1.12);
-        }
-
-        .yellow_circle{
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            position: absolute;
-            background: #FCDC00;
-            top: 2px;
-            left: 2px;
-            transition: 0.4s;
-        }
-
+		.yellow_circle {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 32px;
+			height: 32px;
+			background: #fcdc00;
+			border-radius: 50%;
+			transition: 0.4s;
+		}
 	}
 }
-.pill{
-    position: absolute;
-    top: -14px;
-    right: -8px;
-    transition: transform 0.5s ease-in-out;
+
+.pill {
+	position: absolute;
+	top: -14px;
+	right: -8px;
+	transition: transform 0.5s ease-in-out;
 }
+
 .bounce {
-    animation: bounce-animation 0.6s ease-in-out 2;
-  }
-  
-  @keyframes bounce-animation {
-    0%,
-    100% {
-      transform: translateY(0) scale(1); 
-    }
-    50% {
-      transform: translateY(-10px) scale(1.12); 
-    }
-  }
-.img_container{
-    position: relative;
+	animation: bounce-animation 0.6s ease-in-out 2;
 }
-.icon{
-    margin-right: 16px;
+
+@keyframes bounce-animation {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+
+	50% {
+		transform: translateY(-10px) scale(1.12);
+	}
 }
-.label{
-    font-weight: 500;
-    font-size: 14px;
-    color: #000000;
+
+.img_container {
+	position: relative;
+}
+
+.icon {
+	margin-right: 16px;
+}
+
+.label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
 }

@@ -1,23 +1,25 @@
-import { Button, RadioGroup } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { Button, CheckboxGroup } from '@cogoport/components';
+// import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import getBookingTypeOptions from '../../../../../helpers/getBookingTypeOptions';
+// import getBookingTypeOptions from '../../../../../helpers/getBookingTypeOptions';
 import useUpdateCheckoutMargin from '../../../../../hooks/useUpdateCheckoutMargin';
 import { transformMargins } from '../../../../../utils/transformMargins';
 
 import PocDetails from './PocDetails';
+import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 
 function ShareQuotation({
 	detail,
-	organization_settings,
-	userSettings = [],
-	isOrgCP,
-	checkoutMethod,
-	excludeWhatsapp,
-	bookingConfirmationMode,
-	setBookingConfirmationMode,
+	// organization_settings,
+	// userSettings = [],
+	// isOrgCP,
+	// checkoutMethod,
+	// excludeWhatsapp,
+	// bookingConfirmationMode,
+	// setBookingConfirmationMode,
 	isChannelPartner,
 	getCheckout = () => {},
 	rateDetails = [],
@@ -32,28 +34,45 @@ function ShareQuotation({
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
 
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
+	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
+	const [selectedModes, setSelectedModes] = useState([]);
 
 	const {
 		updateCheckoutMargin,
 		loading,
 	} = useUpdateCheckoutMargin({ getCheckout, setShouldResetMargins, setCheckoutState });
 
-	let bookingTypeOptions = getBookingTypeOptions({
-		organization_settings,
-		userSettings,
-		isOrgCP,
-	});
+	// let bookingTypeOptions = getBookingTypeOptions({
+	// 	organization_settings,
+	// 	userSettings,
+	// 	isOrgCP,
+	// });
 
-	if (checkoutMethod === 'controlled_checkout') {
-		bookingTypeOptions = bookingTypeOptions.filter((item) => !['whatsapp', 'email'].includes(item));
-	}
+	// if (checkoutMethod === 'controlled_checkout') {
+	// 	bookingTypeOptions = bookingTypeOptions.filter((item) => !['whatsapp', 'email'].includes(item));
+	// }
 
-	const filteredBookingTypeOptions = bookingTypeOptions
-		.map((item) => {
-			if (item === 'whatsapp' && excludeWhatsapp) return null;
-			return { label: startCase(item), value: item };
-		})
-		.filter((val) => val);
+	// const filteredBookingTypeOptions = bookingTypeOptions
+	// 	.map((item) => {
+	// 		if (item === 'whatsapp' && excludeWhatsapp) return null;
+	// 		return { label: startCase(item), value: item };
+	// 	})
+	// 	.filter((val) => val);
+
+	const quotationOptions = [
+		{
+			label : 'Email',
+			value : 'email',
+		},
+		{
+			label : 'Whatsapp',
+			value : 'whatsapp',
+		},
+		{
+			label : 'Sms',
+			value : 'sms',
+		},
+	];
 
 	const updateQuote = async () => {
 		const marginValues = rateDetails.reduce((acc, curr) => {
@@ -100,6 +119,18 @@ function ShareQuotation({
 		updateCheckoutMargin({ finalPayload });
 	};
 
+	const getModalSize = () => {
+		if (selectedModes.includes('email') && selectedModes.length > 1) {
+			return 'xl';
+		}
+
+		if (selectedModes.includes('email') && selectedModes.length === 1) {
+			return 'lg';
+		}
+
+		return 'md';
+	};
+
 	const BUTTON_MAPPING = [
 		{
 			key       : 'copy_link',
@@ -109,11 +140,13 @@ function ShareQuotation({
 			loading   : false,
 		},
 		{
-			key       : 'share_quotation',
-			label     : 'Share Quotation',
-			themeType : 'secondary',
-			style     : { marginLeft: '20px' },
-			loading   : false,
+			key             : 'share_quotation',
+			label           : 'Share Quotation',
+			themeType       : 'secondary',
+			onClickFunction : () => setShowShareQuotationModal(true),
+			style           : { marginLeft: '20px' },
+			disabled        : isEmpty(selectedModes),
+			loading         : false,
 		},
 		{
 			key             : 'proceed_to_booking',
@@ -133,23 +166,30 @@ function ShareQuotation({
 				<div className={styles.main_container}>
 					<PocDetails
 						detail={detail}
-						bookingConfirmationMode={bookingConfirmationMode}
+						bookingConfirmationMode={selectedModes}
 						showWhatsappVerificationModal={showWhatsappVerificationModal}
 						setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
 						isChannelPartner={isChannelPartner}
 						getCheckout={getCheckout}
 					/>
 
-					{!isEmpty(filteredBookingTypeOptions) ? (
-						<RadioGroup
-							className="primary md"
-							options={filteredBookingTypeOptions}
-							value={bookingConfirmationMode || ''}
-							onChange={(item) => setBookingConfirmationMode(item)}
-						/>
-					) : null}
+					<CheckboxGroup
+						className="primary md"
+						options={quotationOptions}
+						value={selectedModes || ''}
+						onChange={setSelectedModes}
+					/>
 				</div>
 			</div>
+
+			{showShareQuotationModal ? (
+				<QuotationModal
+					modalSize={getModalSize()}
+					selectedModes={selectedModes}
+					setShowShareQuotationModal={setShowShareQuotationModal}
+					showShareQuotationModal={showShareQuotationModal}
+				/>
+			) : null}
 
 			<div className={styles.button_container}>
 				{BUTTON_MAPPING.map((item) => {

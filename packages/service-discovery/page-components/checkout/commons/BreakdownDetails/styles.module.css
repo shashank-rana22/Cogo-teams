@@ -1,77 +1,80 @@
 .service_name {
-    font-weight: 500;
-    font-size: 16px;
-    margin-right: 16px;
+	margin-right: 16px;
+	font-size: 16px;
+	font-weight: 500;
 }
 
 .container {
-    margin: 20px;
-    align-items: center;
+	align-items: center;
+	margin: 20px;
 
-    :global {
-        .ui_accordion_content {
-            padding: 16px 0px;
-            width: 100%;
-            background: #FDFDFD;
-        }
+	:global {
+		.ui_accordion_content {
+			width: 100%;
+			padding: 16px 0;
+			background: #fdfdfd;
+		}
 
-        .ui_accordion_title {
-            width: 100%;
-            padding: 10px 16px;
-        }
-    }
+		.ui_accordion_title {
+			width: 100%;
+			padding: 10px 16px;
+		}
+	}
 
-    &.preview_booking {
-        margin: unset;
-        margin-bottom: 20px;
-    }
+	&.preview_booking {
+		margin: unset;
+		margin-bottom: 20px;
+	}
 }
 
 .service_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 20px;
 }
 
 .total_display {
-    font-weight: 600;
-    font-size: 14px;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .heading {
-    font-size: 24px;
-    font-weight: 500;
+	font-size: 24px;
+	font-weight: 500;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px;
 }
 
 .add_line_item {
-    color: #FF7F00 !important;
-    font-weight: 600;
-    padding: unset 16px !important;
-    margin: 16px 0px 0px 16px !important;
+	padding: unset 16px !important;
+	margin: 16px 0 0 16px !important;
+	font-weight: 600;
+	color: #ff7f00 !important;
 }
 
 .service_details {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    :global {
-        .ui_pill_container {
-            border: 1px solid  #24C7D9;
-            background-color: #fff;
-            border-radius: 36px;
-           
-        }
+	:global {
+		.ui_pill_container {
+			background-color: #fff;
+			border: 1px solid  #24c7d9;
+			border-radius: 36px;
+		}
 
-        .ui_pill_text {
-            color: #24C7D9;
-        }
-    }
+		.ui_pill_text {
+			color: #24c7d9;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
 }

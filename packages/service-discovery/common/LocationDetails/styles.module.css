@@ -1,32 +1,38 @@
-.container{
-    display: flex;
-    align-items: center;
+.container {
+	display: flex;
+	align-items: center;
 }
-.location{
-    display: flex;
-    flex-direction: column;
+
+.location {
+	display: flex;
+	flex-direction: column;
 }
-.icon{
-    margin: 0 40px;
+
+.icon {
+	margin: 0 40px;
 }
-.location_country_text{
-    font-weight: 500;
-    font-size: 14px;
-    color: #D6B300;
+
+.location_country_text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #d6b300;
 }
-.location_port_text{
-    font-weight: 600;
-    font-size: 16px;
-    color: #000000;
-    max-width: 180px;
-	white-space: nowrap;
+
+.location_port_text {
+	max-width: 180px;
 	overflow: hidden;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-.tooltip{
-    width: max-content;
+
+.tooltip {
+	width: max-content;
 }
-.tooltip_content{
-    text-align: left;
+
+.tooltip_content {
+	text-align: left;
 	word-break: keep-all;
 }

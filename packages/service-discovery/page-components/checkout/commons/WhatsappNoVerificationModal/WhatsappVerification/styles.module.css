@@ -1,50 +1,48 @@
 .submit_button {
-    width: 100%;
-	margin-top: 16px;
+	width: 100%;
 	padding: 8px;
+	margin-top: 16px;
 }
 
 .title {
-    color: #333333;
+	margin-bottom: 16px;
 	font-size: 16px;
 	font-weight: 500;
-	margin-bottom: 16px;
+	color: #333;
 }
 
 .form {
-    display: flex;
+	display: flex;
 	flex-direction: column;
-    padding: 24px;
-    padding-top: unset;
+	padding: 24px;
+	padding-top: unset;
 
+	:global {
+		.country_code {
+			width: 38%;
+		}
 
-
-    :global {
-        .country_code {
-            width: 38%;
-        }
-
-        .mobile_number {
-            width: 58%;
-        }
-    }
+		.mobile_number {
+			width: 58%;
+		}
+	}
 }
 
 .label {
-    margin-bottom: 6px;
-    color: #858484;
-    font-size: 12px;
-    font-weight: 400;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #858484;
 }
 
 .input_group {
-    :global {
-        .ui_input_container {
-            margin-left: 12px;
-        }
-    }
+	:global {
+		.ui_input_container {
+			margin-left: 12px;
+		}
+	}
 }
 
 .otp_container {
-    margin: 16px auto;
+	margin: 16px auto;
 }

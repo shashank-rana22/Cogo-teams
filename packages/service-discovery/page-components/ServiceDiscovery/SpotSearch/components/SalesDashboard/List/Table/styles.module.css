@@ -1,42 +1,51 @@
-.container{
-    :global{
-        .ui_table_head_cell{
-            padding: 12px 20px 12px 8px;
-            font-size: 14px;
-        }
-		.ui_table_body_cell{
+.container {
+	:global {
+		.ui_table_head_cell {
+			padding: 12px 20px 12px 8px;
+			font-size: 14px;
+		}
+
+		.ui_table_body_cell {
 			white-space: normal;
 		}
-    }
+	}
 }
-.pagination{
+
+.pagination {
 	display: flex;
 	justify-content: flex-end;
 }
-.booking_status{
-    display: flex;
-    align-items: center;
-}
-.status_tag{
 
-    &.rejected {
+.booking_status {
+	display: flex;
+	align-items: center;
+}
+
+.status_tag {
+	&.rejected {
 		background-color: #f7cdcd;
 	}
+
 	&.accepted {
 		background-color: #ded7fc;
 	}
+
 	&.pending {
 		background-color: #cdf7d4;
 	}
+
 	&.active {
 		background-color: #cdf7d4;
 	}
+
 	&.in_progress {
 		background-color: #fef6df;
 	}
+
 	&.completed {
 		background-color: #e6fbe9;
 	}
+
 	&.cancelled {
 		background-color: #fbe6e6;
 	}

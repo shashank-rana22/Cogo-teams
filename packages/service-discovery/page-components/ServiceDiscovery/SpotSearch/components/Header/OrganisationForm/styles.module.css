@@ -1,27 +1,32 @@
-.container{
-    margin-top:20px;
+.container {
+	margin-top: 20px;
 }
-.form{
-    display:flex;
-    justify-content:space-between;
+
+.form {
+	display: flex;
+	justify-content: space-between;
 }
-.form_item{
-    display:flex;
-    flex-direction:column;
-    width:44%;
-    gap:8px
+
+.form_item {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 44%;
 }
-.label{
-    font-weight: 400;
-    font-size: 14px;
-    color: #000000;
-    display: flex;
+
+.label {
+	display: flex;
+	font-size: 14px;
+	font-weight: 400;
+	color: #000;
 }
-.required_mark{
-    color: #e74c3c;
-    margin-left: 4px;
+
+.required_mark {
+	margin-left: 4px;
+	color: #e74c3c;
 }
-.error_message{
-    font-size: 12px;
+
+.error_message {
+	font-size: 12px;
 	color: #cb6464;
 }

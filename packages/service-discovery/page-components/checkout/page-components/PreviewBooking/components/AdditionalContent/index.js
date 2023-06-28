@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import Cancellation from '../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../commons/ConfirmationTexts';
+import DefaultQuotationInfo from '../../../../commons/DefaultQuotationInfo';
 import { CheckoutContext } from '../../../../context';
 
 import BookingContent from './BookingContent';
@@ -59,6 +60,8 @@ function AdditionalContent({ value, onChange, cargoDetails = {}, setCargoDetails
 						detailedServices={Object.values(services)}
 					/>
 				</div>
+
+				<DefaultQuotationInfo />
 			</div>
 		</div>
 	);

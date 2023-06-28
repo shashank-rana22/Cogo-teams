@@ -1,32 +1,36 @@
-.container{
-    background: #FFFAFA;
-    height: 100%;
-    max-width: max-content;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify_content: space-between;
-    margin-right: 24px;
+.container {
+	display: flex;
+	align-items: center;
+	max-width: max-content;
+	height: 100%;
+	padding: 16px 24px;
+	margin-right: 24px;
+	background: #fffafa;
+	justify_content: space-between;
 }
-.name_container{
-    width: 90%;
-    margin-right: 20px;
+
+.name_container {
+	width: 90%;
+	margin-right: 20px;
 }
-.org_name{
-    font-weight: 400;
-    font-size: 14px;
-    text-transform: capitalize;
-    color: #000000;
-    opacity: 0.6;
-    margin-bottom: 6px;
+
+.org_name {
+	margin-bottom: 6px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #000;
+	text-transform: capitalize;
+	opacity: 0.6;
 }
-.user_name{
-    font-family: 'Poppins';
-    font-weight: 600;
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #000000;
+
+.user_name {
+	font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+	text-transform: capitalize;
 }
-.icon{
-    cursor: pointer;
+
+.icon {
+	cursor: pointer;
 }

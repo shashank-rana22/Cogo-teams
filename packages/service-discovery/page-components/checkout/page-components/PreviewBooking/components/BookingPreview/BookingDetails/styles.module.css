@@ -1,50 +1,50 @@
 .container {
-    width: 100%;
-    background: #FBFFFF;
-    border: 1px solid #D7EAEA;
-    border-radius: 8px;
-    position: absolute;
-    top: 0px;
-    position: relative;
-    margin-top: 12px;
+	position: absolute;
+	position: relative;
+	top: 0;
+	width: 100%;
+	margin-top: 12px;
+	background: #fbffff;
+	border: 1px solid #d7eaea;
+	border-radius: 8px;
 }
 
 .main_content {
-    padding: 24px 32px 40px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px 32px 40px;
 }
 
 .bottom_container {
-    width: 100%;
-    position: absolute;
-    bottom: -20px;
+	position: absolute;
+	bottom: -20px;
+	width: 100%;
 }
 
 .bottom_content {
-    width: 96%;
-    background: #F5FFFF;
-    border: 1px solid #D7EAEA;
-    border-radius: 8px;
-    margin: auto;
-    padding: 10px 24px;
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	width: 96%;
+	padding: 10px 24px;
+	margin: auto;
+	background: #f5ffff;
+	border: 1px solid #d7eaea;
+	border-radius: 8px;
 }
 
 .quotation_expiry {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
 }
 
 .validity_time {
-    margin-left: 12px;
+	margin-left: 12px;
+	font-weight: 600;
+	color: #ee3425;
 	text-align: center;
 	white-space: nowrap;
-    color: #EE3425;
-    font-weight: 600;
 
 	.hidden {
 		display: none;
@@ -52,24 +52,24 @@
 }
 
 .total_price {
-    font-size: 24px;
-    display: flex;
-    font-weight: 600;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
 
-    svg {
-        fill: #ee3425;
-    }
+	svg {
+		fill: #ee3425;
+	}
 }
 
 .button_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    :global {
-        .ui_button_container {
-            padding: unset !important;
-            height: unset;
-        }
-    }
+	:global {
+		.ui_button_container {
+			height: unset;
+			padding: unset !important;
+		}
+	}
 }

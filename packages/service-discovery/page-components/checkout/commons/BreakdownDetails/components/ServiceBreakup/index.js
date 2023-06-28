@@ -14,9 +14,7 @@ function ServiceBreakup({
 }) {
 	if (fclLocalEmpty) {
 		return (
-			<div style={{ marginTop: '12px' }}>
-				<div>Locals charges will be billed at Actual</div>
-			</div>
+			<div className={styles.locals_rate}>Locals charges will be billed at Actual</div>
 		);
 	}
 

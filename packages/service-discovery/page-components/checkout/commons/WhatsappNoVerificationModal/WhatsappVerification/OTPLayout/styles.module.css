@@ -5,12 +5,12 @@
 }
 
 .resend_otp_container {
-	margin-top: 12px;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 12px;
 }
 
 .timer_text {

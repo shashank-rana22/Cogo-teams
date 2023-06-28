@@ -1,22 +1,24 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 	flex-direction: column;
+	width: fit-content;
 	text-align: left;
-    width: fit-content
 }
-.org_details{
-    display: flex;
+
+.org_details {
+	display: flex;
 	align-items: center;
 	margin: 0 16px;
 }
-.option_label{
-    margin: 0px;
+
+.option_label {
+	margin: 0;
 	margin-bottom: 4px;
+	overflow: hidden;
 	font-size: 12px;
-	color: #000000;
+	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 
 	&.bold {
 		font-weight: bold;
@@ -24,13 +26,15 @@
 
 	&.clickable {
 		cursor: pointer;
+
 		&:hover {
 			text-decoration: underline;
 		}
 	}
 }
-.upper_name{
-    /* background: #FFFFFF;
+
+.upper_name {
+	/* background: #FFFFFF;
     border: 0.5px solid #BDBDBD;
     border-radius: 6px;
     padding: 0 16px;
@@ -38,25 +42,27 @@
     font-size: 12px;
     color: #4F4F4F; */
 }
-.card{
-    border-radius: 4px;
-	background: #ffffff;
-	padding: 10px 6px;
+
+.card {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	max-width: 350px;
 	width: 350px;
+	max-width: 350px;
+	padding: 10px 6px;
+	background: #fff;
+	border-radius: 4px;
 
 	@media (max-width: _md) {
-		max-width: 310px;
 		width: 310px;
+		max-width: 310px;
 	}
+
 	&.selected {
 		background: #cddbff;
 	}
 
 	@media (max-width: _md) {
-		padding: 4px 4px;
+		padding: 4px;
 	}
 }

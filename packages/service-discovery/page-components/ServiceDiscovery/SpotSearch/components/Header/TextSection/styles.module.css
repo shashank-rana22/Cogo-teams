@@ -1,12 +1,14 @@
-.container{
-    margin-top: 40px;
+.container {
+	margin-top: 40px;
 }
-.back_button{
-    font-size: 26px;
-    margin-bottom: 8px;
-    cursor: pointer;
+
+.back_button {
+	margin-bottom: 8px;
+	font-size: 26px;
+	cursor: pointer;
 }
-.text{  
-    font-size: 44px;
-    color: #221F20;
+
+.text {
+	font-size: 44px;
+	color: #221f20;
 }

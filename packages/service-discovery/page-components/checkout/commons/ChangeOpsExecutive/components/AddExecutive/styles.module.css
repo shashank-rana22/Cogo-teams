@@ -12,8 +12,8 @@
 
 .layout_container {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
-    flex-direction: column;
 }
 
 .input_group {
@@ -23,13 +23,13 @@
 .form_group {
 	margin-top: 20px;
 
-    &.name {
-        margin-top: unset;
-    }
+	&.name {
+		margin-top: unset;
+	}
 
-    .country_code {
-        margin-right: 30px;
-    }
+	.country_code {
+		margin-right: 30px;
+	}
 }
 
 .error_message {

@@ -10,6 +10,7 @@ import { QuoteLoader } from '../LoadingState';
 import AddLineItemModal from './components/AddLineItemModal';
 import ContainerDetails from './components/ContainerDetails';
 import ConvenienceDetails from './components/ConvenienceDetails';
+import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
@@ -32,9 +33,11 @@ function BreakdownDetails({
 		loading:getCheckoutLoading,
 		getCheckout,
 		shouldEditMargin,
+		checkout_id,
 	} = useContext(CheckoutContext);
 
 	const [addLineItemData, setAddLineItemData] = useState({});
+	const [editLineItemData, setEditLineItemData] = useState({});
 
 	useEffect(() => {
 		setConvenienceDetails({
@@ -55,6 +58,8 @@ function BreakdownDetails({
 	const disableForm = source === 'preview_booking';
 
 	const { primary_service = '' } = detail || {};
+
+	console.log('rateDetails', rateDetails);
 
 	return (
 		<div>
@@ -146,21 +151,40 @@ function BreakdownDetails({
 						/>
 
 						{!disableForm ? (
-							<Button
-								size="md"
-								themeType="tertiary"
-								className={styles.add_line_item}
-								onClick={() => {
-									setShouldResetMargins(false);
-									setAddLineItemData({
-										index,
-										service_type : item?.service_type,
-										service_id   : item?.id,
-									});
-								}}
-							>
-								+ Add Line Item
-							</Button>
+							<div className={styles.button_container}>
+								<Button
+									size="md"
+									themeType="tertiary"
+									className={styles.add_line_item}
+									onClick={() => {
+										setShouldResetMargins(false);
+										setAddLineItemData({
+											index,
+											service_type : item?.service_type,
+											service_id   : item?.id,
+										});
+									}}
+								>
+									+ Add Line Item
+								</Button>
+
+								<Button
+									size="md"
+									themeType="tertiary"
+									className={styles.add_line_item}
+									onClick={() => {
+										setShouldResetMargins(false);
+										setEditLineItemData({
+											index,
+											service_type : item?.service_type,
+											service_id   : item?.id,
+										});
+									}}
+								>
+									Edit Line Item
+								</Button>
+							</div>
+
 						) : null}
 					</Accordion>
 				);
@@ -171,9 +195,20 @@ function BreakdownDetails({
 					<AddLineItemModal
 						addLineItemData={addLineItemData}
 						setAddLineItemData={setAddLineItemData}
-						getCheckout={getCheckout}
 						setRateDetails={setRateDetails}
-						rate={rate}
+						checkout_id={checkout_id}
+					/>
+				) : null}
+
+			{!isEmpty(editLineItemData)
+				? (
+					<EditLineItemModal
+						editLineItemData={editLineItemData}
+						setEditLineItemData={setEditLineItemData}
+						setRateDetails={setRateDetails}
+						checkout_id={checkout_id}
+						rateDetails={rateDetails}
+						detail={detail}
 					/>
 				) : null}
 
