@@ -174,7 +174,6 @@
 
 .label {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	height: 24px;
 }
@@ -185,7 +184,6 @@
 
 .input_display {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	margin-left: 12px;
 
