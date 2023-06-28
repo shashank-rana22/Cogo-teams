@@ -3,8 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import getDefaultPayload from '../../utils/getDefaultPayload';
-
 import RouteForm from './RouteForm';
 import styles from './styles.module.css';
 
@@ -31,15 +29,9 @@ function Routes({
 			return;
 		}
 
-		const default_payload = getDefaultPayload({
-			serviceType : service_type,
-			origin      : formValues.origin,
-			destination : formValues.destination,
-		});
-
 		const spot_search_id = await createSearch({
 			action : 'default',
-			values : { default_payload, service_type, ...organization, ...form },
+			values : { service_type, ...organization, ...form, ...formValues },
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {

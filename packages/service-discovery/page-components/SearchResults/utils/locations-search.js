@@ -58,8 +58,6 @@ const getLocationDetails = (data, type, service_key) => {
 		? `${type}_${suffix}`
 		: suffix;
 
-	console.log('objName', service_type);
-
 	return data[objName];
 };
 

@@ -60,20 +60,20 @@ const fclControls = () => {
 								min      : 0.1,
 							},
 						},
-						{
-							name        : 'weight_unit',
-							type        : 'select',
-							placeholder : 'Select Unit',
-							span        : 5,
-							value       : 'mt',
-							options     : [
-								{
-									label : 'MT',
-									value : 'mt',
-								},
-							],
-							rules: { required: 'Weight is required' },
-						},
+						// {
+						// 	name        : 'weight_unit',
+						// 	type        : 'select',
+						// 	placeholder : 'Select Unit',
+						// 	span        : 5,
+						// 	value       : 'mt',
+						// 	options     : [
+						// 		{
+						// 			label : 'MT',
+						// 			value : 'mt',
+						// 		},
+						// 	],
+						// 	rules: { required: 'Weight is required' },
+						// },
 					],
 				},
 				{

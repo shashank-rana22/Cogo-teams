@@ -2,7 +2,7 @@ import EXTRA_FILTERS from './extra-filter-controls';
 import fclControls from './fcl-controls';
 import lclControls from './lcl-controls';
 
-const MAIN_CONTROLS_MAPPING = {
+export const MAIN_CONTROLS_MAPPING = {
 	fcl_freight: {
 		label         : 'Container Details',
 		mainControls  : fclControls,

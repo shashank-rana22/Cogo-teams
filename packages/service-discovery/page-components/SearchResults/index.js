@@ -25,7 +25,7 @@ function SearchResults() {
 
 	useEffect(() => {
 		refetchSearch({ spot_search_id, importer_exporter_id });
-	}, []);
+	}, [spot_search_id]);
 
 	if (loading) {
 		return (

@@ -135,15 +135,15 @@ const getPayload = (serviceType, origin, destination) => {
 };
 
 const getDefaultPayload = ({
-	serviceType = '',
+	service_type = '',
 	origin = '',
 	destination = '',
 }) => {
 	const payloadObject = {
-		...getPayload(serviceType, origin, destination),
+		...getPayload(service_type, origin, destination),
 	};
 
-	const payloadKey = [serviceType, 'services_attributes'].join('_');
+	const payloadKey = [service_type, 'services_attributes'].join('_');
 
 	const payload = { [payloadKey]: [payloadObject] };
 
