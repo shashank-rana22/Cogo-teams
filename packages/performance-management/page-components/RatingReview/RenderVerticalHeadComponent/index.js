@@ -38,7 +38,6 @@ function RenderStyledTable({
 	selectedEmployees,
 	onClickHeaderCheckbox,
 	level,
-	onClickEmployee,
 	setShow,
 }) {
 	const columns = getColumns({
@@ -49,7 +48,6 @@ function RenderStyledTable({
 		onClickHeaderCheckbox,
 		employee_list,
 		level,
-		onClickEmployee,
 		setShow,
 	});
 
@@ -68,7 +66,6 @@ function RenderVerticalHeadComponent({
 	setSelectedEmployees,
 	selectedEmployees,
 	level,
-	onClickEmployee,
 	setShow,
 }) {
 	const { onClickCheckbox, onClickHeaderCheckbox } = usePerformanceRatingReview({ setSelectedEmployees, data: list });
@@ -107,7 +104,6 @@ function RenderVerticalHeadComponent({
 						selectedEmployees={selectedEmployees}
 						onClickHeaderCheckbox={onClickHeaderCheckbox}
 						level={level}
-						onClickEmployee={onClickEmployee}
 						setShow={setShow}
 
 					/>

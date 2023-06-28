@@ -25,10 +25,6 @@ function PerformanceRatingReview() {
 
 	const router = useRouter();
 
-	const onClickEmployee = (id) => {
-		setShow(id);
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -61,7 +57,6 @@ function PerformanceRatingReview() {
 				setSelectedEmployees={setSelectedEmployees}
 				selectedEmployees={selectedEmployees}
 				level={level}
-				onClickEmployee={onClickEmployee}
 				setShow={setShow}
 			/>
 
