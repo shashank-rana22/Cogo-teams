@@ -10,11 +10,12 @@ import styles from './styles.module.css';
 function CompletionAndFeedback({ course_id, feedbackData = {}, name }) {
 	const { rating = 0, remark = '', id = '' } = feedbackData || {};
 
+	const { loading, createCourseFeedback } = useCreateCourseFeedback({ course_id });
+
+	const { updateCourseFeedbackLoading, updateCourseFeedback } = useUpdateCourseFeedback();
+
 	const [starRating, setStarRating] = useState(rating);
 	const [feedback, setFeedback] = useState(remark);
-
-	const { loading, createCourseFeedback } = useCreateCourseFeedback({ course_id });
-	const { updateCourseFeedbackLoading, updateCourseFeedback } = useUpdateCourseFeedback();
 
 	const onClickSubmit = () => {
 		if (id) {
