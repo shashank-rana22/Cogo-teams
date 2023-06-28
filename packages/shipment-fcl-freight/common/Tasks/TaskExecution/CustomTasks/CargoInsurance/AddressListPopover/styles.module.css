@@ -49,24 +49,6 @@
 		justify-content: space-between;
 		margin-right: 15px;
 	}
-
-	.ui-core-checkbox-root {
-		border-radius: 92px;
-		padding: 8px;
-	}
-
-	.ui-core-checkbox-root.primary.checked {
-		background-color: #000000;
-		border: 1px solid #000000;
-	}
-
-	.checkboxSkeleton {
-		width: 20px;
-	}
-
-	.footerSkeleton {
-		width: 300px;
-	}
 }
 
 .empty_state{

@@ -57,7 +57,7 @@ function BillingAddressDetails({
 	}, [cityState, city, region?.name, setValue]);
 
 	return (
-		<div className={styles.container}>
+		<div>
 			{policyForSelf ? (
 				<div className={styles.popover}>
 					<Layout
