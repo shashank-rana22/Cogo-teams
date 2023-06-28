@@ -1,5 +1,5 @@
 .link {
+	margin-right: auto;
 	color: var(--color-accent-orange-2) !important;
 	cursor: pointer;
-	margin-right: auto;
 }

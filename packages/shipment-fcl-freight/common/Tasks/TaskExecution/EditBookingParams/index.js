@@ -18,7 +18,7 @@ const TASK_CONTROL_CONFIG = {
 
 const INITIAL_CONTAINERS_COUNT_FOR_ROLLOVER = 0;
 
-function EditBookingParams({ task, formProps = {}, getApisData = {} }, ref) {
+function EditBookingParams({ task = {}, formProps = {}, getApisData = {} }, ref) {
 	const {
 		updateData,
 		total_containers_count,

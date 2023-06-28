@@ -1,6 +1,6 @@
 .form_container {
-	margin-top: 26px;
 	padding-left: 12px;
+	margin-top: 26px;
 }
 
 .container {
@@ -19,5 +19,5 @@
 }
 
 .service_details {
-	font-size: var(--font-size-md)
+	font-size: var(--font-size-md);
 }

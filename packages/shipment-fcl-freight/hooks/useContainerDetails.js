@@ -4,7 +4,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 
 import getControls from '../common/Tasks/TaskExecution/CustomTasks/UpdateContainerDetails/TaskForm/controls';
 
@@ -116,7 +115,7 @@ const useContainerDetails = ({
 	const formValues = watch();
 
 	const handleFillData = (data) => {
-		const trimmedData = data?.replace(/ +(?=\t)/g, '');
+		const trimmedData = data?.replace(GLOBAL_CONSTANTS.regex_patterns.empty_spaces_before_tab_character, '');
 
 		const valArray = (trimmedData?.split(' ') || [])?.filter(Boolean);
 

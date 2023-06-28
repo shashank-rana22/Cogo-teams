@@ -5,32 +5,34 @@ const getFunction = {
 	),
 };
 
+const LOOP_VARIABLE_INCREASE_BY = 1;
+
 const getShowElement = (field, formValues, getApisData) => {
 	let flag = true;
 
 	if (field?.type === 'fieldArray') {
-		const showElements = [];
+		const SHOW_ELEMENTS = [];
 
-		for (let i = 0; i < formValues?.[field?.name]?.length; i += 1) {
-			showElements.push({});
+		for (let i = 0; i < formValues?.[field?.name]?.length; i += LOOP_VARIABLE_INCREASE_BY) {
+			SHOW_ELEMENTS.push({});
 		}
 
 		(field?.controls || []).forEach((controlObj) => {
 			if ('show' in controlObj) {
-				for (let j = 0; j < showElements.length; j += 1) {
+				for (let j = 0; j < SHOW_ELEMENTS.length; j += LOOP_VARIABLE_INCREASE_BY) {
 					if (formValues?.destination_cargo_handling_type
 						&& ['dpd_without_cfs', 'dpd_cfs_dock_destuffing', 'dpd_cfs_factory_destuffing']
 							.includes(formValues?.destination_cargo_handling_type)
 					) {
-						showElements[j][controlObj?.name] = true;
+						SHOW_ELEMENTS[j][controlObj?.name] = true;
 					} else {
-						showElements[j][controlObj?.name] = controlObj?.show;
+						SHOW_ELEMENTS[j][controlObj?.name] = controlObj?.show;
 					}
 				}
 			}
 		});
 
-		return showElements;
+		return SHOW_ELEMENTS;
 	}
 
 	if (formValues.booking_ref_status === 'not_placed') {
@@ -76,11 +78,11 @@ const getShowElement = (field, formValues, getApisData) => {
 };
 
 const getShowTaskFields = (formValues, controls = [], getApisData = {}) => {
-	const showElements = {};
+	const SHOW_ELEMENTS = {};
 
-	controls.forEach((ctrl) => { showElements[ctrl?.name] = getShowElement(ctrl, formValues, getApisData); });
+	controls.forEach((ctrl) => { SHOW_ELEMENTS[ctrl?.name] = getShowElement(ctrl, formValues, getApisData); });
 
-	return showElements;
+	return SHOW_ELEMENTS;
 };
 
 export default getShowTaskFields;

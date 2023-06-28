@@ -7,10 +7,10 @@ import styles from './styles.module.css';
 const DETAILS_KEYS = ['container_size', 'container_type', 'commodity'];
 
 function EditContainerNumbers({
-	task,
-	item,
-	index,
-	selectedContainers,
+	task = {},
+	item = {},
+	index = 0,
+	selectedContainers = [],
 	setSelectedContainers = () => {},
 }) {
 	const handleSelectedNumber = (val) => {
