@@ -30,6 +30,8 @@ function ShareQuotation({
 	convenience_line_item = {},
 	setShouldResetMargins,
 	setCheckoutState = () => {},
+	invoice,
+	orgData,
 }) {
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
 
@@ -188,6 +190,10 @@ function ShareQuotation({
 					selectedModes={selectedModes}
 					setShowShareQuotationModal={setShowShareQuotationModal}
 					showShareQuotationModal={showShareQuotationModal}
+					invoice={invoice}
+					rate={rate}
+					detail={detail}
+					organization={orgData}
 				/>
 			) : null}
 

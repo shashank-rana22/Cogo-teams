@@ -30,6 +30,8 @@ function AdditionalContent({
 		getCheckout,
 		checkout_id,
 		setCheckoutState,
+		invoice,
+		orgData,
 	} = useContext(CheckoutContext);
 
 	const { services = {}, trade_type = '' } = detail;
@@ -74,6 +76,8 @@ function AdditionalContent({
 				convenience_line_item={convenience_line_item}
 				setShouldResetMargins={setShouldResetMargins}
 				setCheckoutState={setCheckoutState}
+				invoice={invoice}
+				orgData={orgData}
 			/>
 		</div>
 	);

@@ -32,7 +32,7 @@ function Checkout() {
 		getCheckout,
 	} = useGetCheckout({ checkout_id });
 
-	const { detail = {}, rate, currency_conversions: conversions } = data;
+	const { detail = {}, rate, currency_conversions: conversions, invoice } = data;
 
 	const {
 		primary_service,
@@ -109,6 +109,7 @@ function Checkout() {
 			isChannelPartner,
 			shouldEditMargin,
 			setCheckoutState,
+			invoice,
 		}),
 		[
 			checkout_id,
@@ -128,6 +129,7 @@ function Checkout() {
 			bookingConfirmationMode,
 			isChannelPartner,
 			shouldEditMargin,
+			invoice,
 		],
 	);
 
