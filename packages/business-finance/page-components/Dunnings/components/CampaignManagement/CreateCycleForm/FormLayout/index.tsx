@@ -185,7 +185,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 						<div>
 							<h3>Frequency</h3>
 							<Tabs
-								activeTab={frequency}
+								activeTab={frequency === 'ONE_TIME' ? 'DAILY' : frequency}
 								themeType="primary"
 								onChange={(e?: string) => handleTabChange(e)}
 							>
@@ -277,7 +277,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 						</div>
 					</div>
 				</div>
-
+				<div className={styles.margined_section} />
 			</div>
 		</div>
 	);

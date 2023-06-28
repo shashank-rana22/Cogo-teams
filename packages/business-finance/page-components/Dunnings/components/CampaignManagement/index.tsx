@@ -80,6 +80,7 @@ function CampaignManagement() {
 							? (
 								<span>
 									{dayOfMonth}
+									th
 								</span>
 							)
 							: ''}

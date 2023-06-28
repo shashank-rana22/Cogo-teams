@@ -423,6 +423,11 @@ export default {
 				},
 			},
 		},
+		dunnings: {
+			campaign_management: {
+				eligible_entites: [],
+			},
+		},
 	},
 	others: {
 		registration_number: {
