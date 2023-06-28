@@ -9981,6 +9981,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'list_cogostore_product_sub_categories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_attributes',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product_subcategory',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
 	],
 	communication_control: [
 		{
@@ -10960,6 +10975,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'list_cogopoint_top_history',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_liability_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+
 	],
 	air_revenue_desk: [
 		{

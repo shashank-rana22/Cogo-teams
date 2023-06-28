@@ -1,0 +1,36 @@
+.container {
+	background-color: #fff;
+}
+
+.documentcontainer {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.datawrapper {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.verifieddata {
+	display: flex;
+	align-items: center;
+}
+
+.namecontainer {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	font-size: 16px;
+	color: #303b67;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+	color: #ed3726;
+	text-decoration: underline;
+}

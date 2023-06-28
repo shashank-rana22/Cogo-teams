@@ -19,6 +19,7 @@ const controls = [
 			{ label: 'Curriculum', value: 'curriculum' },
 			{ label: 'Completion', value: 'completion' },
 			{ label: 'Pre publish', value: 'pre_publish' },
+			{ label: 'Published', value: 'published' },
 		],
 	},
 	{
