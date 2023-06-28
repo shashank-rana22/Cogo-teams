@@ -11,8 +11,8 @@ import PortDetails from '../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
 
-function LastShipmentDetails({ itemData }) {
-	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData });
+function LastShipmentDetails({ itemData, isPillSelected}) {
+	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData , isPillSelected});
 	return (
 		<div>
 			{(loading || ((data || [])?.length)) ? (

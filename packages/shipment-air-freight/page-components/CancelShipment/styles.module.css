@@ -13,6 +13,11 @@
 
 		.ui_input_container {
 			width: 48%;
+			min-width: 180px;
+		}
+
+		.ui_select_container {
+			min-width: 180px;
 		}
 	}
 }
@@ -23,7 +28,7 @@
 }
 
 .label {
-	margin: 30px 0 10px;
+	margin: 8px 0 16px 10px;
 	font-weight: 600;
 }
 

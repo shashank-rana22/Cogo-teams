@@ -11,6 +11,7 @@ function RatesCard({
 	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
 	sellRates, loading, shipmentData,
 }) {
+	console.log(ratesData,';ratesData');
 	const [showFullList, setShowFullList] = useState(false);
 	const initialCardCount = 2;
 	const toggleList = () => {

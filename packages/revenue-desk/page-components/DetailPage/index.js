@@ -1,5 +1,5 @@
 import { Pill, TabPanel, Tabs } from '@cogoport/components';
-import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp, IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -16,11 +16,15 @@ import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
+import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
+	console.log(itemData,'itemData')
+	const [isPillSelected,setIsPillSelected] = useState(false);
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState(null);
+	const { data:revenueDeskDecisionsData ,loading: revenueDeskLoading } = useListRevenueDeskDecisions({ shipmentId: itemData?.id })
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 	const excludedServices = [
 		'fcl_freight_local_service',
@@ -180,10 +184,19 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							</div>
 						)}
 					</TabPanel>
+					{['air_freight','fcl_freight'].includes(itemData?.shipment_type) &&
 					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
+						<div
+							className={styles.custom_pill}
+							onClick={()=>setIsPillSelected(!isPillSelected)}
+						>
+							view customers last shipment with same configuration&nbsp;
+							{isPillSelected?<IcMTick/>:''}
+						</div>
+
 						{showDetail === true ? (
 							<div>
-								<LastShipmentDetails itemData={itemData} />
+								<LastShipmentDetails itemData={itemData} isPillSelected={isPillSelected}/>
 								<div
 									role="presentation"
 									className={styles.show_detail_tab}
@@ -206,6 +219,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							</div>
 						)}
 					</TabPanel>
+				}
 					{['fcl_freight', 'air_freight'].includes(
 						itemData?.shipment_type,
 					) && itemData?.source === 'contract' ? (
@@ -249,6 +263,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							serviceData={servicesData?.list}
 							priceData={priceData}
 							setShowDetailPage={setShowDetailPage}
+							revenueDeskDecisionsData={revenueDeskDecisionsData?.[0] || []}
 						/>
 					)}
 			</div>

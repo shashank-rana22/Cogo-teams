@@ -11,7 +11,8 @@ import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData, priceData, setShowDetailPage }) {
+function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData, priceData, setShowDetailPage, revenueDeskDecisionsData = [] }) {
+	const {services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [rateOptions, setRateOptions] = useState({});
@@ -38,7 +39,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 		const ZERO = 0;
 		let pref = items.length > ZERO;
 		items?.forEach((item) => {
-			if (!item?.is_preference_set) pref = false;
+			if (!servicesWithPreferenceSet.includes(item?.id)) pref = false;
 		});
 		return pref;
 	};
@@ -96,6 +97,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 							shipmentData={shipmentData}
 							emailModal={emailModal}
 							setEmailModal={setEmailModal}
+							revenueDeskDecisionsData={revenueDeskDecisionsData}
 						/>
 					</TabPanel>
 				))}

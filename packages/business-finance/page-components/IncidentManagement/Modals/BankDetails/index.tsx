@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function BankDetails({
 	bankData,
-	bankId,
+	id:bankId,
 	organization,
 	refetch,
 	row,
@@ -209,14 +209,14 @@ function BankDetails({
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
-								<a href={url} target="_blank" rel="noreferrer">
+								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>View Document</div>
 										<IcMEyeopen />
 									</div>
 								</a>
 							) : (
-								<div> No document available</div>
+								<div key={url}> No document available</div>
 							)))}
 						</div>
 						{isEditable && (

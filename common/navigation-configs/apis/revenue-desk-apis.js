@@ -251,6 +251,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_revenue_desk_decisions',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
 ];
 
 export default apis;

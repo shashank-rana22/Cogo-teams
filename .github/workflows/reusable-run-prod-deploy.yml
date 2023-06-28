@@ -23,4 +23,11 @@ jobs:
             git pull
             pnpm install
             pnpm run deploy
+      
+      - name: Notify Team
+        if: ${{ success() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+          "text": "Deployment on ${{ github.repository }} was completed!. Deployment was triggerd by ${{ github.actor }}."
+          }' "https://cogofreight.webhook.office.com/webhookb2/2b4cef02-485b-4109-a57a-bdb242bee56d@fcbc2156-6b46-42c3-8745-0acb9d2dd22d/IncomingWebhook/745b829e328b4b2db27314c830e8fc38/b92c97ef-b062-4398-83c4-2d4b6ad67585"
             

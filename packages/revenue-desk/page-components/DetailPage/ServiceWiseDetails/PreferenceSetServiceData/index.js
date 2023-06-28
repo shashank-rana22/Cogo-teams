@@ -7,7 +7,7 @@ import useListShipmentBookingConfirmationPreferences from
 import RatesCards from './RateCards';
 import styles from './styles.module.css';
 
-function PreferenceSetServiceData({ singleServiceData, shipmentData }) {
+function PreferenceSetServiceData({ singleServiceData, shipmentData, isPreferenceSet }) {
 	const { data:allPreferenceCardsData, loading } = useListShipmentBookingConfirmationPreferences({
 		singleServiceData,
 		shipmentData,
@@ -15,6 +15,7 @@ function PreferenceSetServiceData({ singleServiceData, shipmentData }) {
 	const { data:ratesDataNotPrefered, loading:show_rates_loading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
+		isPreferenceSet,
 	});
 	const formatedData = getFormatedPreferenceSetData({ allPreferenceCardsData });
 	const formaredAvailableRatesData = getFormatedNotPreferenceData({ ratesDataNotPrefered, singleServiceData });
