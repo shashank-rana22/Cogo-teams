@@ -51,9 +51,11 @@ function List({ isSeller = false }) {
 		showIp  : showModal === 'ip',
 	});
 
-	const isCargoInsured = servicesList?.find(
-		(service) => service?.service_type === 'cargo_insurance_service',
-	);
+	function checkIfCargoInsuranceService(service) {
+		return service?.service_type === 'cargo_insurance_service';
+	}
+
+	const isCargoInsured = servicesList?.some(checkIfCargoInsuranceService);
 
 	return (
 		<div className={styles.container}>
@@ -134,7 +136,7 @@ function List({ isSeller = false }) {
 				{SERVICES_FOR_INSURANCE.includes(shipment_data?.shipment_type) ? (
 					<Button
 						onClick={() => setShowInsurance(true)}
-						style={{ marginLeft: '10px' }}
+						className={styles.btn_div}
 						disabled={!!isCargoInsured}
 					>
 						<div className={styles.add_icon}>+</div>

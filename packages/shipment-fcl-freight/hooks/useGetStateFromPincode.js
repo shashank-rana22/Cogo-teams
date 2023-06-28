@@ -7,7 +7,7 @@ import { useEffect, useCallback } from 'react';
 
 const PINCODE_LENGTH = 6;
 
-function useGetStateFromPincode({ pincode = '', policyForSelf = true }) {
+function useGetStateFromPincode({ pincode = '', policyForSelf = false }) {
 	const COUNTRY_IDS = [];
 	const countryCode =	GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
 		.cargo_insurance.countries || [];

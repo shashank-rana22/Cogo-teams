@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import styles from './styles.modules.css';
 
 function Loading() {
@@ -6,7 +8,7 @@ function Loading() {
 			<div className={styles.text}>Please wait while we fetch Details!!</div>
 			{' '}
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg"
+				src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}
 				alt=" loading details"
 			/>
 		</div>

@@ -215,6 +215,8 @@ const GLOBAL_CONSTANTS = {
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		cargo_insurance_loader:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

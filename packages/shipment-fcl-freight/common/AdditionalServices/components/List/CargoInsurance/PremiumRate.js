@@ -5,6 +5,16 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const formatAmounts = (amount) => formatAmount({
+	amount,
+	currency : GLOBAL_CONSTANTS.currency_code.INR,
+	options  : {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 2,
+	},
+});
+
 function PremiumRate({ rateData }) {
 	const {
 		convenienceFee = 0,
@@ -12,16 +22,6 @@ function PremiumRate({ rateData }) {
 		netPremium = 0,
 		totalApplicableCharges = 0,
 	} = rateData || {};
-
-	const formatAmounts = (amount) => formatAmount({
-		amount,
-		currency : GLOBAL_CONSTANTS.currency_code.INR,
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 2,
-		},
-	});
 
 	return (
 		<div>

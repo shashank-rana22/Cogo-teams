@@ -3,7 +3,8 @@
 }
 
 .text {
-	margin-top: -8px;
+	color: var(--color-primary-error-red-2);
+	font-size: var(--font-size-md);
 }
 
 .header {
@@ -36,7 +37,7 @@
 
 	.title {
 		padding-right: 20px;
-		font-size: 14px;
+		font-size: var(--font-size-md);;
 		font-weight: 400;
 	}
 }
@@ -61,14 +62,14 @@
 	display: flex;
 	align-items: center;
 	margin: 10px 0;
-	font-size: 14px;
+	font-size: var(--font-size-lg);;
 
 	.gst {
 		margin: 0 3px;
 	}
 
 	.addressSave {
-		font-size: 14px;
+		font-size: var(--font-size-lg);;
 		font-weight: 500;
 	}
 }

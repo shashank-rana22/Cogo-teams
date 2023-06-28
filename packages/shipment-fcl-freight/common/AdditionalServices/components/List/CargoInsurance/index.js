@@ -16,8 +16,10 @@ import controls from './controls';
 import EmptyState from './EmptyState';
 import Loading from './Loading';
 import PremiumRate from './PremiumRate';
-import POLICY_TYPE_MAPPING from './utils/policyTypeMapping';
-import TRANSIT_MODE_MAPPING from './utils/transitModeMapping';
+import styles from './styles.module.css';
+import POLICY_TYPE_MAPPING from './utils/policyTypeMapping.json';
+
+const geo = getGeoConstants();
 
 function CargoInsurance({
 	setAddCargoInsurance = () => {},
@@ -34,9 +36,6 @@ function CargoInsurance({
 
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
-
-	const { service_type = '' } = primary_service;
-	const geo = getGeoConstants();
 
 	const refetchAfterApiCall = () => {
 		setAddCargoInsurance(false);
@@ -57,14 +56,12 @@ function CargoInsurance({
 		country_id: cargoInsuranceCountryId,
 	});
 
-	const transitMode = TRANSIT_MODE_MAPPING[service_type] || 'ROAD';
-
 	const { handleAddCargoInsurance, cargoLoading } = useCreateSpotSearch({
 		shipmentData           : data,
 		setAddCargoInsurance,
 		rateData               : premiumData,
 		commodity,
-		transitMode,
+		transitMode            : 'SEA',
 		origin_country_id      : primary_service?.origin_port?.country_id,
 		destination_country_id : primary_service?.destination_port?.country_id,
 		trade_type             : primary_service?.trade_type,
@@ -142,18 +139,17 @@ function CargoInsurance({
 			show={showInsurance}
 			onClose={() => setShowInsurance(false)}
 			closeOnOuterClick={false}
+			showCloseIcon={!{ cargoLoading }}
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 			<Modal.Body>
-				<div>
-					<Layout control={control} fields={controls} errors={errors} />
+				<Layout control={control} fields={controls} errors={errors} />
 
-					{loading ? <Loading /> : null}
+				{loading ? <Loading /> : null}
 
-					{!isEmpty(premiumData) && !loading ? (
-						<PremiumRate rateData={premiumData} />
-					) : null}
-				</div>
+				{!isEmpty(premiumData) && !loading ? (
+					<PremiumRate rateData={premiumData} />
+				) : null}
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
@@ -168,8 +164,8 @@ function CargoInsurance({
 				<Button
 					onClick={handleSubmit(handleAddCargoInsurance)}
 					loading={cargoLoading}
-					disabled={isEmpty(premiumData)}
-					style={{ marginLeft: '16px' }}
+					disabled={cargoLoading || isEmpty(premiumData)}
+					className={styles.btn_div}
 				>
 					Save and proceed
 				</Button>

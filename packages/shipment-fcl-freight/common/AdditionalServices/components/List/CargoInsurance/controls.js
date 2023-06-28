@@ -17,7 +17,7 @@ const controls = [
 		label : 'Commodity Description',
 		type  : 'text',
 		span  : 12,
-		rules : { required: true },
+		rules : { message: 'Commodity Description is required' },
 	},
 	{
 		name           : 'cargo_value_currency',
@@ -33,7 +33,7 @@ const controls = [
 		label : 'Consignment Value',
 		type  : 'number',
 		span  : 8,
-		rules : { required: true },
+		rules : { message: 'Consignment Value is required' },
 	},
 ];
 export default controls;

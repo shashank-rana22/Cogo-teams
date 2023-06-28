@@ -6,7 +6,7 @@
 .sad_text {
 	width: 70%;
 	margin: 10px 0;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 	color: #b6bfd4;
 	text-align: center;
@@ -21,4 +21,8 @@
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 6px rgb(0 0 0 / 15%);
+}
+
+.icon{
+	margin-top: 10px;
 }
