@@ -2,17 +2,23 @@ import { Button } from '@cogoport/components';
 import { IcMSend, IcMQuickreply } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import { ICON_STYLING } from '../../../../../../../constants';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
 
 import styles from './styles.module.css';
 
-const COMMON_FUNC = () => {};
 function SendActions({
-	hasPermissionToEdit, openInstantMessages = COMMON_FUNC,
-	activeMessageCard = {}, sendChatMessage = COMMON_FUNC,
-	messageLoading, scrollToBottom = COMMON_FUNC,
-	finalUrl = '', draftMessage,
+	hasPermissionToEdit,
+	openInstantMessages = () => {},
+	activeMessageCard = {},
+	sendChatMessage = () => {},
+	messageLoading,
+	scrollToBottom = () => {},
+	finalUrl = '',
+	draftMessage,
 }) {
+	const { channel_type = '' } = activeMessageCard;
+	const iconStyles = ICON_STYLING({ hasPermissionToEdit });
 	const {
 		sendPromotionalRate = () => {},
 		loading = false,
@@ -20,25 +26,24 @@ function SendActions({
 
 	return (
 		<div className={styles.send_messages}>
-			<Button
-				size="sm"
-				themeType="primary"
-				className={styles.promotional_rate}
-				loading={loading}
-				disabled={!hasPermissionToEdit}
-				onClick={() => {
-					if (hasPermissionToEdit) {
-						sendPromotionalRate();
-					}
-				}}
-				style={{
-					cursor: !hasPermissionToEdit
-						? 'not-allowed'
-						: 'pointer',
-				}}
-			>
-				Send Promotional Rate
-			</Button>
+			{channel_type === 'whatsapp' && (
+				<Button
+					size="sm"
+					themeType="primary"
+					className={styles.promotional_rate}
+					loading={loading}
+					disabled={!hasPermissionToEdit}
+					onClick={() => {
+						if (hasPermissionToEdit) {
+							sendPromotionalRate();
+						}
+					}}
+					style={iconStyles}
+				>
+					Send Promotional Rate
+				</Button>
+			)}
+
 			<IcMQuickreply
 				fill="#828282"
 				onClick={() => {
@@ -46,11 +51,7 @@ function SendActions({
 						openInstantMessages();
 					}
 				}}
-				style={{
-					cursor: !hasPermissionToEdit
-						? 'not-allowed'
-						: 'pointer',
-				}}
+				style={iconStyles}
 			/>
 			<IcMSend
 				fill="#EE3425"
@@ -60,8 +61,7 @@ function SendActions({
 					}
 				}}
 				style={{
-					cursor: !hasPermissionToEdit || messageLoading
-								|| (isEmpty(draftMessage?.trim()) && !finalUrl)
+					cursor: !hasPermissionToEdit || messageLoading || (isEmpty(draftMessage?.trim()) && !finalUrl)
 						? 'not-allowed'
 						: 'pointer',
 				}}

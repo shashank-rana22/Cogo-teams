@@ -7,36 +7,37 @@ import {
 import { isEmpty } from '@cogoport/utils';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
-import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
+import { ICON_STYLING, ACCEPT_FILE_MAPPING } from '../../../../../../constants';
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
 
 import SendActions from './SendActions';
 
-const COMMON_FUNC = () => {};
 function Footer({
-	getPlaceHolder = COMMON_FUNC,
+	getPlaceHolder = () => {},
 	draftMessage = '',
-	sentQuickSuggestions = COMMON_FUNC,
+	sentQuickSuggestions = () => {},
 	messageLoading = false,
 	canMessageOnBotSession,
 	emojisList = {},
-	setOnClicked = COMMON_FUNC,
+	setOnClicked = () => {},
 	onClicked = false,
 	handleProgress,
-	openInstantMessages = COMMON_FUNC,
+	openInstantMessages = () => {},
 	hasPermissionToEdit = false,
 	suggestions = [],
-	scrollToBottom = COMMON_FUNC,
-	setDraftMessages = COMMON_FUNC,
-	sendChatMessage = COMMON_FUNC,
+	scrollToBottom = () => {},
+	setDraftMessages = () => {},
+	sendChatMessage = () => {},
 	activeMessageCard = {},
-	setDraftUploadedFiles = COMMON_FUNC,
+	setDraftUploadedFiles = () => {},
 	uploading,
 	uploadedFileName,
 	fileIcon,
 	finalUrl = '',
 }) {
+	const iconStyles = ICON_STYLING({ hasPermissionToEdit });
+
 	const { id = '', channel_type = '' } = activeMessageCard;
 
 	const handleKeyPress = (event) => {
@@ -65,11 +66,7 @@ function Footer({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									window.open(
-										finalUrl,
-										'_blank',
-										'noreferrer',
-									);
+									window.open(finalUrl, '_blank', 'noreferrer');
 								}}
 							>
 								{uploadedFileName}
@@ -111,7 +108,7 @@ function Footer({
 									}}
 									style={{
 										cursor:
-											(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
+										(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
@@ -126,14 +123,9 @@ function Footer({
 					placeholder={getPlaceHolder(hasPermissionToEdit, canMessageOnBotSession)}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({
-						...p,
-						[id]: e.target.value,
-					}))}
+					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
 					disabled={!hasPermissionToEdit}
-					style={{
-						cursor: !hasPermissionToEdit ? 'not-allowed' : 'text',
-					}}
+					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'text' }}
 					onKeyPress={(e) => handleKeyPress(e)}
 				/>
 
@@ -150,19 +142,12 @@ function Footer({
 								uploadIcon={(
 									<IcMAttach
 										className={styles.upload_icon}
-										style={{
-											cursor: !hasPermissionToEdit
-												? 'not-allowed'
-												: 'pointer',
-										}}
+										style={iconStyles}
 									/>
 								)}
 								channel={channel_type}
 								onChange={(val) => {
-									setDraftUploadedFiles((prev) => ({
-										...prev,
-										[id]: val,
-									}));
+									setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
 								}}
 							/>
 						)}
@@ -174,8 +159,7 @@ function Footer({
 									setOnClicked={setOnClicked}
 									updateMessage={(val) => setDraftMessages((p) => ({
 										...p,
-										[id]: !p?.[id]
-											? val
+										[id]: !p?.[id] ? val
 											: p?.[id]?.concat(val),
 									}))}
 								/>
@@ -195,11 +179,7 @@ function Footer({
 										setOnClicked((p) => !p);
 									}
 								}}
-								style={{
-									cursor: !hasPermissionToEdit
-										? 'not-allowed'
-										: 'pointer',
-								}}
+								style={iconStyles}
 							/>
 						</Popover>
 					</div>
