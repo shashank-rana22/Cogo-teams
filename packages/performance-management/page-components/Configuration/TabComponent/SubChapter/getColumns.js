@@ -96,27 +96,7 @@ const getColumns = ({ setShowDeleteModal, setShowSubChapterModal }) => [
 			</Pill>
 		),
 	},
-	{
-		Header   : 'ACTION',
-		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
-			<div className={styles.button}>
-				<IcMDelete
-					width={16}
-					height={16}
-					style={{ cursor: 'pointer' }}
-					onClick={() => setShowDeleteModal(item.id)}
-				/>
-				<IcMEdit
-					width={16}
-					height={16}
-					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowSubChapterModal(item)}
-				/>
-			</div>
-		) : (
-			<Button themeType="secondary" disabled>Restore</Button>
-		)),
-	},
+
 ];
 
 export default getColumns;
