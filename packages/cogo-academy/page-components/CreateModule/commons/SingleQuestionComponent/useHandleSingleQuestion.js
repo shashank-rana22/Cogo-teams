@@ -4,7 +4,7 @@ import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
 
 import getControls from './controls';
 
-const EXPLANATION_EDITOR_SETTER_INDEX = 0;
+const OFFSET = 1;
 
 function useHandleSingleQuestion({
 	getValues,
@@ -60,25 +60,17 @@ function useHandleSingleQuestion({
 		if (field.isNew) {
 			remove(index, 1);
 
-			STATE_FUNCTIONS.forEach((stateChanger, funcIndex) => {
+			STATE_FUNCTIONS.forEach((stateChanger) => {
 				stateChanger((prev) => {
 					const updatedObj = { ...prev };
 					const keys = Object.keys(updatedObj);
 
-					delete updatedObj[funcIndex === EXPLANATION_EDITOR_SETTER_INDEX
-						? `case_questions_${index}_explanation`
-						: `case_questions_${index}`];
-
 					keys.forEach((currentKey, i) => {
 						if (i > index) {
-							const newKey = funcIndex === EXPLANATION_EDITOR_SETTER_INDEX
-								? `case_questions_${index}_explanation`
-								: `case_questions_${index}`;
-							updatedObj[newKey] = updatedObj[currentKey];
-							delete updatedObj[currentKey];
+							if (i < keys.length - OFFSET) updatedObj[currentKey] = updatedObj[keys[i + OFFSET]];
+							else delete updatedObj[i];
 						}
 					});
-
 					return updatedObj;
 				});
 			});
