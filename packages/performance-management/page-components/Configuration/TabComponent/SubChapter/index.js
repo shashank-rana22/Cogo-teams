@@ -1,11 +1,11 @@
 import { Pagination } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import StyledTable from '../../../../common/StyledTable';
 import ActiveInactiveTabs from '../../commons/ActiveInactiveTabs';
 import Header from '../../commons/CommonHeader';
 import CreateConfigurationModal from '../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../commons/DeleteConfigurationModal';
-import StyledTable from '../../commons/StyledTable';
 
 import controls from './controls';
 import styles from './styles.module.css';

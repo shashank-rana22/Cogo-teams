@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
-import StyledTable from '../../../KraAssignment/common/StyledTable';
+import StyledTable from '../../../../common/StyledTable';
 import useCreateIndividualKra from '../hooks/useCreateIndividualKra';
 import RatingInfo from '../RatingInfo';
 

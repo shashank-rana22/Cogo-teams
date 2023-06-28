@@ -2,7 +2,7 @@ import { Button, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../common/EmptyState';
+import EmptyState from '../../../common/EmptyState';
 import countTrueValues from '../config/countTrueValues';
 
 import AccordianDisplay from './components/AccordianDisplay';

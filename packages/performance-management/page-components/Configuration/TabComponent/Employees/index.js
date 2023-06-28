@@ -1,6 +1,6 @@
 import { Input, Pagination } from '@cogoport/components';
 
-import StyledTable from '../../commons/StyledTable';
+import StyledTable from '../../../../common/StyledTable';
 
 import styles from './styles.module.css';
 import useEmployeeDetails from './useEmployeeDetails';

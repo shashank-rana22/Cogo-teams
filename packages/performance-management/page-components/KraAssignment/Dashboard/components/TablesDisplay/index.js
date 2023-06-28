@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import StyledTable from '../../../common/StyledTable';
+import StyledTable from '../../../../../common/StyledTable';
 import countTrueValues from '../../../config/countTrueValues';
 
 import getColumns from './getColumns';

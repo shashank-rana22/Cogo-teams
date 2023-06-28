@@ -5,7 +5,6 @@
 
 .select_container {
 	width: 40%;
-	padding: 4px 0 16px;
 }
 
 .header {
@@ -29,4 +28,11 @@
 	cursor: pointer;
 	text-decoration: underline;
 	width: fit-content;
+}
+
+.select_row{
+	display: flex;
+	align-items: center;
+	padding: 4px 0 16px;
+	justify-content: space-between;
 }

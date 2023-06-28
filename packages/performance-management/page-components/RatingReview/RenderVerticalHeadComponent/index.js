@@ -1,8 +1,8 @@
 import { Accordion } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import EmptyState from '../common/EmptyState';
-import StyledTable from '../common/StyledTable';
+import EmptyState from '../../../common/EmptyState';
+import StyledTable from '../../../common/StyledTable';
 import getColumns from '../getColumns';
 
 import styles from './styles.module.css';

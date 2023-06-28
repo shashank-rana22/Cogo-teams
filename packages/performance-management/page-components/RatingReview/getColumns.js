@@ -35,7 +35,6 @@ const getColumns = ({
 		{
 			Header   : 'Name',
 			accessor : (item) => (
-
 				<div
 					className={styles.employee_name}
 					role="presentation"
@@ -43,7 +42,6 @@ const getColumns = ({
 				>
 					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
-
 			),
 		},
 		{

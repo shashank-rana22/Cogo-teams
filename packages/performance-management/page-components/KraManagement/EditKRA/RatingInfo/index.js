@@ -1,6 +1,6 @@
 import React from 'react';
 
-import StyledTable from '../../../KraAssignment/common/StyledTable';
+import StyledTable from '../../../../common/StyledTable';
 
 import getRatingInfoColumn from './getRatingInfoColumn';
 import styles from './styles.module.css';

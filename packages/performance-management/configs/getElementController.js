@@ -5,16 +5,20 @@ import {
 	RadioGroupController,
 	TextAreaController,
 	MultiselectController,
+	DateRangePickerController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
-	asyncSelect : AsyncSelectController,
-	select      : SelectController,
-	text        : InputController,
-	radioGroup  : RadioGroupController,
-	textarea    : TextAreaController,
-	multiSelect : MultiselectController,
-	number      : InputController,
+	asyncSelect    : AsyncSelectController,
+	select         : SelectController,
+	text           : InputController,
+	radioGroup     : RadioGroupController,
+	textarea       : TextAreaController,
+	multiSelect    : MultiselectController,
+	number         : InputController,
+	input          : InputController,
+	'date-picker'  : DateRangePickerController,
+	'multi-select' : MultiselectController,
 
 };
 

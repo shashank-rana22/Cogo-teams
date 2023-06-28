@@ -1,6 +1,7 @@
-import { Select } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
@@ -82,12 +83,19 @@ function PerformanceRatingReview() {
 				</div>
 			</div>
 
-			<div className={styles.select_container}>
-				<Select
-					value={selectValue}
-					onChange={setSelectValue}
-					options={selectOptions}
-				/>
+			<div className={styles.select_row}>
+				<div className={styles.select_container}>
+					<Select
+						value={selectValue}
+						onChange={setSelectValue}
+						options={selectOptions}
+					/>
+				</div>
+
+				<Button disabled={isEmpty(selectedEmployees)}>
+					Publish
+				</Button>
+
 			</div>
 
 			<RenderVerticalHeadComponent
