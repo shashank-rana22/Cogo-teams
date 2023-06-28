@@ -9,9 +9,9 @@ function useEmployeeKraDetails({ show }) {
 		method : 'GET',
 	}, { manual: true });
 
-	const employeeKraDetails = useCallback(async () => {
+	const employeeKraDetails = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					employee_id : show,
 					start_date  : '2023-06-21',

@@ -54,7 +54,7 @@ function CreateConfigurationModal({
 				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
 
 				setValue('squad_name', showModal?.squad_name);
-				setValue('squad_leader_id', showModal?.squad_leader?.id);
+				setValue('squad_leader', showModal?.squad_leader?.id);
 				setValue('employee_ids', ARRAY_OF_IDS);
 			}
 
@@ -62,7 +62,7 @@ function CreateConfigurationModal({
 				const ARRAY_OF_IDS = showModal.squads.map((obj) => obj?.id);
 
 				setValue('tribe_name', showModal?.tribe_name);
-				setValue('tribe_leader_id', showModal?.tribe_leader?.id);
+				setValue('tribe_leader', showModal?.tribe_leader?.id);
 				setValue('"squad_ids"', ARRAY_OF_IDS);
 			}
 
@@ -70,7 +70,7 @@ function CreateConfigurationModal({
 				const ARRAY_OF_IDS = showModal.sub_chapters.map((obj) => obj?.id);
 
 				setValue('chapter_name', showModal?.chapter_name);
-				setValue('chapter_leader_id', showModal?.chapter_leader?.id);
+				setValue('chapter_leader', showModal?.chapter_leader?.id);
 				setValue('"sub_chapter_ids"', ARRAY_OF_IDS);
 			}
 
@@ -78,7 +78,7 @@ function CreateConfigurationModal({
 				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
 
 				setValue('"sub_chapter_name', showModal?.sub_chapter_name);
-				setValue('sub_chapter_leader_id', showModal?.sub_chapter_leader?.id);
+				setValue('sub_chapter_leader', showModal?.sub_chapter_leader?.id);
 				setValue('employee_ids', ARRAY_OF_IDS);
 			}
 		}

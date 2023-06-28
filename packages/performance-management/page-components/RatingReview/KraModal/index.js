@@ -7,20 +7,23 @@ import styles from './styles.module.css';
 import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
-function KraModal({ show, setShow }) {
-	const [starRating, setStarRating] = useState();
-	const [comments, setCommemts] = useState();
+const MIN_RATING = 0;
 
+function KraModal({ show, setShow }) {
 	const {
 		data = [],
 		loading,
 	} = useEmployeeKraDetails({ show });
 
 	const { list = [], modification_history = [] } = data;
+
 	const {
 		loading: SubmitLoading,
 		updateEmployeeFinalRating,
 	} = useUpdateEmployeeFinalRating(data);
+
+	const [starRating, setStarRating] = useState(MIN_RATING);
+	const [comments, setCommemts] = useState('');
 
 	if (loading) return <Placeholder height="20px" width="100%" />;
 
@@ -60,22 +63,21 @@ function KraModal({ show, setShow }) {
 			<Modal.Body className={styles.body}>
 				<div className={styles.modal_body_container}>
 					<div className={styles.left_section}>
-						{ list?.map((item, index) => (
-
+						{(list || []).map((item) => (
 							<div className={styles.sub_section} key={item.kra_id}>
-								{index + 1}
 								<div className={styles.label}>
 									KRA Name:
 									{' '}
 									{item.kra_name}
-
 								</div>
+
 								<div className={styles.label}>
 									KRA Achieved:
 									{' '}
 									{item.rating_manual ? <InputEmployeeManualTarget item={item} />
 										: item.achieved_rating}
 								</div>
+
 								<div className={styles.label}>
 									Weightage:
 									{' '}
@@ -140,19 +142,18 @@ function KraModal({ show, setShow }) {
 						</div>
 						<div className={styles.remarks}>
 							<div className={styles.comments}>
-								<div className={styles.rating_component}>
-									<div className={styles.revised_rating}>Revised Rating:</div>
-									<div className={styles.rating_assigned}>
-										<RatingComponent
-											type="star"
-											totalStars={5}
-											value={starRating}
-											onChange={setStarRating}
-										/>
-									</div>
-								</div>
+								<div className={styles.revised_rating}>Revised Rating:</div>
 
+								<div className={styles.rating_assigned}>
+									<RatingComponent
+										type="star"
+										totalStars={5}
+										value={starRating}
+										onChange={setStarRating}
+									/>
+								</div>
 							</div>
+
 							<Textarea
 								value={comments}
 								onChange={(e) => setCommemts(e)}
@@ -160,11 +161,8 @@ function KraModal({ show, setShow }) {
 								rows={6}
 								placeholder="Please input your feedback about the employee"
 							/>
-
 						</div>
-
 					</div>
-
 				</div>
 
 			</Modal.Body>
@@ -181,19 +179,17 @@ function KraModal({ show, setShow }) {
 
 					</div>
 
-					<div>
-						<Button
-							themeType="accent"
-							loading={SubmitLoading}
-							onClick={() => updateEmployeeFinalRating({
-								starRating,
-								comments,
-							})}
-						>
-							Submit
+					<Button
+						themeType="accent"
+						loading={SubmitLoading}
+						onClick={() => updateEmployeeFinalRating({
+							starRating,
+							comments,
+						})}
+					>
+						Submit
+					</Button>
 
-						</Button>
-					</div>
 				</div>
 			</Modal.Footer>
 

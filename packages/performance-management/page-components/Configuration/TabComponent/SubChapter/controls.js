@@ -6,7 +6,7 @@ const controls = [
 		placeholder : 'Enter subchapter name',
 	},
 	{
-		name        : 'sub_chapter_leader_id',
+		name        : 'sub_chapter_leader',
 		label       : 'Sub-Chapter leader',
 		placeholder : 'Select sub-chapter leader',
 		type        : 'asyncSelect',

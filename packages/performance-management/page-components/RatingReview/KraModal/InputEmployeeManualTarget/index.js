@@ -6,12 +6,14 @@ import styles from '../styles.module.css';
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
 function InputEmployeeManualTarget({ item }) {
-	const [inputValue, setInputValue] = useState();
-
 	const {
-		loading: UpdateLoading,
+		loading: updateLoading,
 		updateEmployeeManualTarget,
 	} = useUpdateEmployeeManualTarget({ item });
+
+	const MIN_RATING = 0;
+
+	const [inputValue, setInputValue] = useState(MIN_RATING);
 
 	return (
 		<div className={styles.input_display}>
@@ -24,7 +26,7 @@ function InputEmployeeManualTarget({ item }) {
 			<Button
 				size="sm"
 				style={{ marginLeft: '12px' }}
-				loading={UpdateLoading}
+				loading={updateLoading}
 				onClick={() => updateEmployeeManualTarget(inputValue)}
 			>
 				Submit
