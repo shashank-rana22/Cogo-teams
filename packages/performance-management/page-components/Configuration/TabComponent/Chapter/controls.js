@@ -1,3 +1,11 @@
+const params = {
+	filters: {
+		status               : 'active',
+		partner_entity_types : ['cogoport'],
+	},
+	page_limit: 100,
+};
+
 const controls = [
 	{
 		name        : 'chapter_name',
@@ -17,12 +25,7 @@ const controls = [
 		rules       : {
 			required: 'Chapter leader is required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-			},
-		},
+		params,
 	},
 
 	{
@@ -35,14 +38,7 @@ const controls = [
 		rules       : {
 			required: 'Sub chapters are required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-
-			},
-			page_limit: 100,
-		},
+		params,
 	},
 
 ];
