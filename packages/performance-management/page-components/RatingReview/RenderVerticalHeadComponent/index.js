@@ -13,19 +13,15 @@ const TABLE_EMPTY_TEXT = 'No data found';
 function RenderTitle({ title, averageValue, level }) {
 	return (
 		<div className={styles.title}>
-			<div>
-				{startCase(title)}
-			</div>
+			<div>{startCase(title)}</div>
 
-			{
-				level === 'vertical_manager' && (
-					<div className={styles.average_value}>
-						Average Rating :
-						{' '}
-						{averageValue || '-'}
-					</div>
-				)
-			}
+			{level === 'vertical_manager' && (
+				<div className={styles.average_value}>
+					Average Rating :
+					{' '}
+					{averageValue || '-'}
+				</div>
+			)}
 
 		</div>
 	);

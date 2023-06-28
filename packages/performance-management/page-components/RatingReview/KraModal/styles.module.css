@@ -74,6 +74,7 @@
 .comments {
 	display: flex;
 	padding-bottom: 10px;
+	align-items: center;
 }
 
 .revised_rating {
@@ -101,11 +102,6 @@
 			}
 		}
 	}
-}
-
-.rating_component {
-	display: flex;
-	align-items: center;
 }
 
 .rating {
