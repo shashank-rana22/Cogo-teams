@@ -12,7 +12,7 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		type        : 'text',
 		placeholder : 'Enter Billing Party Name',
 		rules       : {
-			required: { message: 'Billing Party Name is required' },
+			required: { value: true, message: 'Billing Party Name is required' },
 		},
 		span: 6,
 	},
@@ -22,7 +22,7 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		type        : 'text',
 		placeholder : 'Enter Address',
 		rules       : {
-			required: { message: 'Address is required' },
+			required: { value: true, message: 'Address is required' },
 		},
 		span: 6,
 	},
@@ -35,7 +35,7 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		valueKey    : 'postal_code',
 		labelKey    : 'postal_code',
 		rules       : {
-			required: { message: 'Pincode is required' },
+			required: { value: true, message: 'Pincode is required' },
 		},
 		getSelectedOption: (option) => {
 			setValue('country_id', option?.country?.name);
@@ -63,11 +63,8 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		name        : 'country_id',
 		type        : 'text',
 		placeholder : 'Enter Country',
-		rules       : {
-			required: { value: true, message: 'Country is required' },
-		},
-		span     : 6,
-		disabled : true,
+		span        : 6,
+		disabled    : true,
 	},
 	{
 		label       : 'State',
@@ -91,7 +88,8 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		type        : 'text',
 		placeholder : 'Enter Tax Number',
 		rules       : {
-			pattern: {
+			required : { value: true, message: 'Tax Number is required' },
+			pattern  : {
 				value   : GST_NUMBER,
 				message : 'Invalid Tax number',
 			},
@@ -126,19 +124,19 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		type        : 'mobileSelect',
 		placeholder : 'Enter Phone Number',
 		rules       : {
-			required : 'Mobile Number is required',
+			required : { value: true, message: 'Mobile Number is required' },
 			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Phone Number',
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
 				message : 'Invalid Phone Number',
 			},
 		},
-		span: 6,
+		span: 12,
 	},
 ];
 
-export const useGetControls = ({ checked, country_id = '', setValue = () => {} }) => {
-	const countryCode = getCountryDetails({ country_id });
+export const useGetControls = ({ checked, countryId = '', setValue = () => {} }) => {
+	const countryCode = getCountryDetails({ country_id: countryId });
 	const controls = addAddressControls({ setValue });
 
 	return (controls || []).map((control) => {

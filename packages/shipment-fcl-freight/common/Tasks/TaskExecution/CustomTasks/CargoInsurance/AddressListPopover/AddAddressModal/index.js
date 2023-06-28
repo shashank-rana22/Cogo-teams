@@ -1,15 +1,12 @@
 import { Checkbox, cl, Modal, Button } from '@cogoport/components';
-import {
-	InputController, MobileNumberController,
-	SelectController, TextAreaController, UploadController, useForm,
-	AsyncSelectController,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useCreateOrganizationBillingAddress';
 
 import { useGetControls } from './addAddressControls';
+import FormElement from './FormElement';
 import styles from './styles.module.css';
 
 export const OPTIONS = [
@@ -18,17 +15,6 @@ export const OPTIONS = [
 	{ label: 'Ware House', value: 'warehouse' },
 ];
 
-const CONTROL_TYPE_MAPPING = {
-	file         : UploadController,
-	text         : InputController,
-	number       : InputController,
-	textarea     : TextAreaController,
-	select       : SelectController,
-	mobileSelect : MobileNumberController,
-	async_select : AsyncSelectController,
-};
-
-const VALIDATION_ERROR = ['required', 'pattern', 'maxLength', 'length'];
 const INDEX_LIMIT_FOR_ADDRESS_CONTROLS = 6;
 
 function AddModal({
@@ -46,9 +32,12 @@ function AddModal({
 		formState: { errors },
 		control,
 		setValue,
+		getValues,
 	} = useForm();
 
-	const addAddressControls = useGetControls({ checked, setValue });
+	const countryId = getValues('country_id');
+
+	const addAddressControls = useGetControls({ checked, countryId, setValue });
 
 	const handleCloseModal = () => {
 		setAddAddressModal(false);
@@ -64,26 +53,6 @@ function AddModal({
 		organization_id : shipmentData?.importer_exporter?.id,
 		refetch         : refetchAfterApiCall,
 	});
-
-	function FormElement({ name, label, type, span, ...rest }) {
-		const Element = CONTROL_TYPE_MAPPING[type];
-		return Element ? (
-			<div>
-				<div className={styles.label}>{label}</div>
-				<Element
-					name={name}
-					type={type}
-					{...rest}
-					className={`${name === 'tax_number' ? styles.taxNumber : ''} element input`}
-				/>
-				{VALIDATION_ERROR.includes(errors?.[name]?.type) ? (
-					<div className={styles.text}>
-						{errors?.[name]?.message}
-					</div>
-				) : null}
-			</div>
-		) : null;
-	}
 
 	const onSubmit = async (data) => {
 		await createSellerAddres(data, handleCloseModal);
@@ -120,20 +89,6 @@ function AddModal({
 						<div className={styles.section_title}>
 							<div className="title">Billing Details</div>
 						</div>
-
-						<div className={styles.row}>
-							{(addAddressControls || [])
-								.filter((items, index) => index < INDEX_LIMIT_FOR_ADDRESS_CONTROLS)
-								.map((item) => (
-									<FormElement
-										control={control}
-										errors={errors}
-										{...item}
-										key={item?.name}
-									/>
-								))}
-						</div>
-
 						<div className={styles.check_box_wrapper}>
 							<Checkbox
 								checked={checked}
@@ -145,6 +100,18 @@ function AddModal({
 								}}
 							/>
 							<div className={styles.gst}>Include Tax Number</div>
+						</div>
+						<div className={styles.row}>
+							{(addAddressControls || [])
+								.filter((items, index) => index < INDEX_LIMIT_FOR_ADDRESS_CONTROLS)
+								.map((item) => (
+									<FormElement
+										control={control}
+										errors={errors}
+										{...item}
+										key={item?.name}
+									/>
+								))}
 						</div>
 
 						{(addAddressControls || [])

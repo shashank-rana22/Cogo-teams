@@ -22,7 +22,6 @@ import POLICY_TYPE_MAPPING from './utils/policyTypeMapping.json';
 const geo = getGeoConstants();
 
 function CargoInsurance({
-	setAddCargoInsurance = () => {},
 	setShowModal = () => {},
 	data = {},
 	refetch = () => {},
@@ -37,7 +36,7 @@ function CargoInsurance({
 	const { id: userId } = user || {};
 
 	const refetchAfterApiCall = () => {
-		setAddCargoInsurance(false);
+		setShowModal(false);
 		refetch();
 	};
 
@@ -57,7 +56,6 @@ function CargoInsurance({
 
 	const { handleAddCargoInsurance, cargoLoading } = useCreateSpotSearch({
 		shipmentData           : data,
-		setAddCargoInsurance,
 		rateData               : premiumData,
 		commodity,
 		transitMode            : 'SEA',
@@ -155,7 +153,7 @@ function CargoInsurance({
 					themeType="secondary"
 					disabled={loading || cargoLoading}
 					loading={cargoLoading}
-					onClick={() => setAddCargoInsurance(false)}
+					onClick={() => setShowModal(false)}
 				>
 					Cancel
 				</Button>

@@ -72,6 +72,12 @@
 		font-size: var(--font-size-lg);;
 		font-weight: 500;
 	}
+
+	:global{
+		.ui_checkbox_container{
+			padding: 0px;
+		}
+	}
 }
 
 .inactive {

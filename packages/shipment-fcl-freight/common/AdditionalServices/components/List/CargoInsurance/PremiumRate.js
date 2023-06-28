@@ -5,6 +5,10 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const PREMIUM = 0;
+const PLATFORM_CHARGES = 1;
+const CONVENIENCE_CHARGES = 2;
+
 const formatAmounts = (amount) => formatAmount({
 	amount,
 	currency : GLOBAL_CONSTANTS.currency_code.INR,
@@ -17,10 +21,8 @@ const formatAmounts = (amount) => formatAmount({
 
 function PremiumRate({ rateData }) {
 	const {
-		convenienceFee = 0,
-		platformCharges = 0,
-		netPremium = 0,
-		totalApplicableCharges = 0,
+		serviceChargeList = [],
+		totalCharges = 0,
 	} = rateData || {};
 
 	return (
@@ -33,7 +35,7 @@ function PremiumRate({ rateData }) {
 						placement="bottom"
 						content={(
 							<div className={styles.tooltip_container}>
-								<div>Inclusive of Taxes</div>
+								<div>Exclusive of Taxes</div>
 							</div>
 						)}
 					>
@@ -41,22 +43,22 @@ function PremiumRate({ rateData }) {
 					</Tooltip>
 				</div>
 
-				<div>{formatAmounts(netPremium)}</div>
+				<div>{formatAmounts(serviceChargeList?.[PREMIUM]?.totalCharges)}</div>
 			</div>
 
 			<div className={styles.rate}>
 				<div>Platform Charges:</div>
-				<div>{formatAmounts(platformCharges)}</div>
+				<div>{formatAmounts(serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}</div>
 			</div>
 
 			<div className={cl`${styles.rate} ${styles.final}`}>
 				<div>Convenience Fee:</div>
-				<div>{formatAmounts(convenienceFee)}</div>
+				<div>{formatAmounts(serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}</div>
 			</div>
 
 			<div className={styles.rate}>
 				<div>Amount Payable:</div>
-				<div>{formatAmounts(totalApplicableCharges)}</div>
+				<div>{formatAmounts(totalCharges)}</div>
 			</div>
 		</div>
 	);
