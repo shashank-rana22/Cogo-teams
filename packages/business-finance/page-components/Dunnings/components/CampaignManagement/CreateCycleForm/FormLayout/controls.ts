@@ -8,9 +8,10 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => ({
-		label : `${entity} (${entityData[entity].currency})`,
-		name  : String(entity),
-		value : entityData[entity].id,
+		label    : `${entity} (${entityData[entity].currency})`,
+		name     : String(entity),
+		value    : entityData[entity].id,
+		disabled : isEditMode,
 	}));
 
 	const currencyData = GLOBAL_CONSTANTS.currency_code;
@@ -40,9 +41,14 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			span         : 12,
 			className    : styles.cycleType,
 			radioOptions : [
-				{ name: 'SOA', value: 'SOA', label: 'SOA' },
-				{ name: 'WIS', value: 'WIS', label: 'WIS' },
-				{ name: 'BALANCE_CONFIRMATION', value: 'BALANCE_CONFIRMATION', label: 'Balance Confirmation' },
+				{ name: 'SOA', value: 'SOA', label: 'SOA', disabled: isEditMode },
+				{ name: 'WIS', value: 'WIS', label: 'WIS', disabled: isEditMode },
+				{
+					name     : 'BALANCE_CONFIRMATION',
+					value    : 'BALANCE_CONFIRMATION',
+					label    : 'Balance Confirmation',
+					disabled : isEditMode,
+				},
 			],
 		},
 		{
@@ -50,7 +56,6 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			name         : 'cogoEntityId',
 			type         : 'radioGroup',
 			radioOptions : entityOptions,
-			disabled     : isEditMode,
 			className    : styles.cogoEntityId,
 			span         : 12,
 		},
