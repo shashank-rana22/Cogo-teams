@@ -31,6 +31,7 @@ function CreateTest() {
 				loading,
 				data,
 				test_id,
+				getTest,
 			},
 		},
 		review_and_criteria: {
@@ -40,6 +41,7 @@ function CreateTest() {
 				loading,
 				data,
 				test_id,
+				getTest,
 			},
 		},
 	};

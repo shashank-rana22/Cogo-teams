@@ -43,6 +43,8 @@ import {
 	asyncListCourseCategories,
 	asyncListTests,
 	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -104,6 +106,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	list_dunning_templates               : asyncListDunningTemplates,
+	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 };
 
 function AsyncSelect(props) {
@@ -147,7 +151,9 @@ function AsyncSelect(props) {
 			selectedValue = rest.value;
 		}
 
-		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+		const selectedOption = getAsyncOptionsProps.options.filter(
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
