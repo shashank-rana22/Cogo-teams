@@ -12,6 +12,10 @@ const getShowElements = (formValues) => {
 
 	SHOW_ELEMENTS.cancellation_reason = true;
 
+	SHOW_ELEMENTS.sid = ['truck_type_changed', 'cargo_weight_changed'].includes(
+		formValues.cancellation_reason,
+	);
+
 	SHOW_ELEMENTS.cargo_ready_date = formValues.cancellation_reason === 'my_cargo_is_delayed';
 
 	SHOW_ELEMENTS.consignee_reason = formValues.cancellation_reason === 'cancelled_by_the_consignee';

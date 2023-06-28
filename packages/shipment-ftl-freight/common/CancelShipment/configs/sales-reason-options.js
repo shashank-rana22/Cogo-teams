@@ -23,5 +23,13 @@ const sales_reason_options = [
 		label : 'Contracted Fleet Unavailable',
 		value : 'contracted_fleet_unavailable',
 	},
+	{
+		label : 'Truck Type Changed',
+		value : 'truck_type_changed',
+	},
+	{
+		label : 'Cargo Weight Increased / Decreased',
+		value : 'cargo_weight_changed',
+	},
 ];
 export default sales_reason_options;

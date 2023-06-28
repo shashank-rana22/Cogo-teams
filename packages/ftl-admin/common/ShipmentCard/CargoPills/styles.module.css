@@ -1,0 +1,27 @@
+.container {
+	:global {
+		.ui_pill_container {
+			font-size: var(--font-size-sm);
+		}
+	}
+}
+
+.popover_container {
+	display: inline-block;
+
+	:global {
+		.tippy-box {
+			padding: 2px;
+		}
+
+		.tippy-content {
+			padding: 2px;
+		}
+	}
+}
+
+.popover_button_content {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-accent-orange-2);
+}
