@@ -16,7 +16,7 @@ const useCreateTribe = ({ fetchList, setShowTribeModal }) => {
 				},
 			});
 
-			Toast.success('Successfully Created');
+			Toast.success('Tribe has been created successfully');
 			setShowTribeModal(false);
 			fetchList();
 		} catch (err) {

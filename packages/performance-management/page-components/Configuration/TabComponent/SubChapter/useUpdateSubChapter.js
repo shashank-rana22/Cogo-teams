@@ -1,12 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useUpdateSubChapter = ({ fetchList, setShowSubChapterModal, showSubChapterModal }) => {
-	const { user = {} } = useSelector((state) => state.profile);
-	const { id: user_id } = user;
-
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_sub_chapter',
@@ -27,14 +23,12 @@ const useUpdateSubChapter = ({ fetchList, setShowSubChapterModal, showSubChapter
 			await trigger({
 				data: {
 					...rest,
-					sub_chapter_id    : showSubChapterModal?.id,
-					performed_by_id   : user_id,
-					performed_by_type : 'user',
+					sub_chapter_id: showSubChapterModal?.id,
 					employees_added,
 					employees_removed,
 				},
 			});
-			Toast.success('Successfully Updated');
+			Toast.success('Subchapter has been updated successfully');
 			setShowSubChapterModal(false);
 			fetchList();
 		} catch (err) {

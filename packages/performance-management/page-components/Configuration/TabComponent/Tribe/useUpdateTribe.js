@@ -1,13 +1,8 @@
 import { Toast } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useUpdateTribe = ({ fetchList, setShowTribeModal, showTribeModal }) => {
-	const { user = {} } = useSelector((state) => state.profile);
-	const { id: user_id } = user;
-
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_tribe',
@@ -27,14 +22,12 @@ const useUpdateTribe = ({ fetchList, setShowTribeModal, showTribeModal }) => {
 			await trigger({
 				data: {
 					...rest,
-					tribe_id          : showTribeModal?.id,
-					performed_by_id   : user_id,
-					performed_by_type : 'user',
+					tribe_id: showTribeModal?.id,
 					squads_added,
 					squads_removed,
 				},
 			});
-			Toast.success('Successfully Updated');
+			Toast.success('Tribe has been updated successfully');
 			setShowTribeModal(false);
 			fetchList();
 		} catch (err) {
