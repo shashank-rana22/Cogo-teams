@@ -1,4 +1,4 @@
-import { getFieldController } from '../../getFieldController';
+import { getFieldArrayControllers } from '../../getFieldArrayControllers';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function EachField({
 		controls.map((eachControl) => {
 			const { controlType, name } = eachControl;
 
-			const EleController = getFieldController(controlType) || null;
+			const EleController = getFieldArrayControllers(controlType) || null;
 
 			if (!EleController) {
 				return null;
