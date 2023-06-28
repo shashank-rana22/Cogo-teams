@@ -20,7 +20,6 @@ const useUpdateEmployeeManualTarget = ({ item }) => {
 					end_date              : '2023-07-20',
 				},
 			});
-
 			Toast.success('Rating has been updated successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
