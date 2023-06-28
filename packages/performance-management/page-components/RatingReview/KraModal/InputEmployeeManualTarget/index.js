@@ -20,6 +20,7 @@ function InputEmployeeManualTarget({ item }) {
 				onChange={(val) => setInputValue(val)}
 				placeholder="Input Rating"
 			/>
+
 			<Button
 				size="sm"
 				style={{ marginLeft: '12px' }}

@@ -14,7 +14,6 @@ function KraModal({ show, setShow }) {
 	const {
 		data = [],
 		loading,
-		employeeKraDetails,
 	} = useEmployeeKraDetails({ show });
 
 	const { list = [], modification_history = [] } = data;
@@ -23,11 +22,7 @@ function KraModal({ show, setShow }) {
 		updateEmployeeFinalRating,
 	} = useUpdateEmployeeFinalRating(data);
 
-	if (loading) {
-		return (
-			<Placeholder height="20px" width="100%" />
-		);
-	}
+	if (loading) return <Placeholder height="20px" width="100%" />;
 
 	return (
 		<Modal show={show} placement="top" className={styles.modal} size="xl" onClose={() => setShow(false)}>
@@ -38,17 +33,20 @@ function KraModal({ show, setShow }) {
 						{' '}
 						{data?.employee_details?.employee_name}
 					</div>
+
 					<div className={styles.squad}>
 						<div className={styles.squad_name}>
 							Squad:
 							{' '}
 							{data?.employee_details?.squad_name}
 						</div>
+
 						<div className={styles.tribe_name}>
 							Tribe:
 							{' '}
 							{data?.employee_details?.tribe_name}
 						</div>
+
 						<div className={styles.total_kra}>
 							Total Kra:
 							{' '}
