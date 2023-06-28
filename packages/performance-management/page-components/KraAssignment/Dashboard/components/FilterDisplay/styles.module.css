@@ -37,13 +37,12 @@
 	justify-content: space-between;
 	width: 100%;
 }
-.title{
+
+.title {
 	padding-bottom: 6px;
 }
 
-.filter{
-    font-weight: 600;
-    padding:10px 0px
+.filter {
+	padding: 10px 0;
+	font-weight: 600;
 }
-
-

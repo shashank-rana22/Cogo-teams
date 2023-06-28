@@ -13,7 +13,7 @@
 	font-family: var(--font-family);
 	text-align: left;
 	cursor: pointer;
-	border: 1px solid rgba(0,0%,88%,0.2);
+	border: 1px solid rgb(0 0% 88% / 20%);
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
 }
