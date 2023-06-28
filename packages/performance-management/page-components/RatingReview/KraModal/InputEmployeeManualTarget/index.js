@@ -9,7 +9,7 @@ function InputEmployeeManualTarget({ item }) {
 	const [inputValue, setInputValue] = useState();
 
 	const {
-		loading: UpdateLoading,
+		loading: updateLoading,
 		updateEmployeeManualTarget,
 	} = useUpdateEmployeeManualTarget({ item });
 
@@ -23,7 +23,7 @@ function InputEmployeeManualTarget({ item }) {
 			<Button
 				size="sm"
 				style={{ marginLeft: '12px' }}
-				loading={UpdateLoading}
+				loading={updateLoading}
 				onClick={() => updateEmployeeManualTarget(inputValue)}
 			>
 				Submit
