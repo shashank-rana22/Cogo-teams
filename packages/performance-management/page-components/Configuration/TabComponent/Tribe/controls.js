@@ -8,7 +8,7 @@ const controls = [
 	},
 
 	{
-		name        : 'tribe_leader_id',
+		name        : 'tribe_leader',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_employees',
 		label       : 'Tribe leader',

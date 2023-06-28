@@ -15,7 +15,7 @@ const controls = [
 	},
 
 	{
-		name        : 'squad_leader_id',
+		name        : 'squad_leader',
 		label       : 'Squad leader',
 		placeholder : 'Select Squad leader',
 		type        : 'asyncSelect',

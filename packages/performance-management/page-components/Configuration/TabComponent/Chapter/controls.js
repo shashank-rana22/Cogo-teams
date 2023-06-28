@@ -15,7 +15,7 @@ const controls = [
 	},
 
 	{
-		name        : 'chapter_leader_id',
+		name        : 'chapter_leader',
 		label       : 'Chapter leader',
 		placeholder : 'Select Chapter leader',
 		type        : 'asyncSelect',

@@ -1,7 +1,6 @@
-import { Button, Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -98,27 +97,6 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 		),
 	},
 
-	{
-		Header   : 'ACTION',
-		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
-			<div className={styles.button}>
-				<IcMDelete
-					width={16}
-					height={16}
-					style={{ cursor: 'pointer' }}
-					onClick={() => setShowDeleteModal(item.id)}
-				/>
-				<IcMEdit
-					width={16}
-					height={16}
-					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowChapterModal(item)}
-				/>
-			</div>
-		) : (
-			<Button themeType="secondary" disabled>Restore</Button>
-		)),
-	},
 ];
 
 export default getColumns;
