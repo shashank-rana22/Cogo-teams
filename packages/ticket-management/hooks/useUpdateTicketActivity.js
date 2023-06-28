@@ -3,7 +3,7 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useUpdateTicketActivity = ({
-	refreshTickets = () => {},
+	refetchTicket = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
 
@@ -26,8 +26,8 @@ const useUpdateTicketActivity = ({
 					Status        : isReslove ? 'resolved' : 'reopened',
 				},
 			});
+			refetchTicket();
 			Toast.success(res?.data || 'Ticket Status Updated Successfully!');
-			refreshTickets();
 		} catch (e) {
 			Toast.error(e?.response?.data || 'something went wrong');
 		}
