@@ -12569,7 +12569,31 @@ const partner = {
 	],
 	business_finance_dunnings: [
 		{
+			api         : 'get_payments_dunning_organization_stakeholders',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_dunning_cycle',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_dunning_cycle_execution',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_payments_dunning_delete_dunning_cycle',
+			access_type : 'private',
+		},
+		{
+			api         : 'payments_dunning_customer_outstanding_and_on_account',
+			access_type : 'private',
+		},
+		{
 			api         : 'list_organization_trade_party_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_payments_dunning',
 			access_type : 'private',
 		},
 		{
