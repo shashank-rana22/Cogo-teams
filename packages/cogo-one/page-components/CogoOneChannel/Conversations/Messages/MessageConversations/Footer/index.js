@@ -14,24 +14,25 @@ import useSendPromotionalRate from '../../../../../../hooks/useSendPromotionalRa
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
 
+const COMMON_FUNC = () => {};
 function Footer({
-	getPlaceHolder = () => {},
+	getPlaceHolder = COMMON_FUNC,
 	draftMessage = '',
-	sentQuickSuggestions = () => {},
+	sentQuickSuggestions = COMMON_FUNC,
 	messageLoading = false,
 	canMessageOnBotSession,
 	emojisList = {},
-	setOnClicked = () => {},
+	setOnClicked = COMMON_FUNC,
 	onClicked = false,
 	handleProgress,
-	openInstantMessages = () => {},
+	openInstantMessages = COMMON_FUNC,
 	hasPermissionToEdit = false,
 	suggestions = [],
-	scrollToBottom = () => {},
-	setDraftMessages = () => {},
-	sendChatMessage = () => {},
+	scrollToBottom = COMMON_FUNC,
+	setDraftMessages = COMMON_FUNC,
+	sendChatMessage = COMMON_FUNC,
 	activeMessageCard = {},
-	setDraftUploadedFiles = () => {},
+	setDraftUploadedFiles = COMMON_FUNC,
 	uploading,
 	uploadedFileName,
 	fileIcon,

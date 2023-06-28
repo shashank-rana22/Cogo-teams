@@ -1,5 +1,7 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
@@ -13,6 +15,8 @@ import styles from './styles.module.css';
 import TimeLine from './TimeLine';
 
 const SET_TIME_OUT = 200;
+const DEFAULT_VALUE = 0;
+const LAST_VALUE = -1;
 
 function MessageMapping({ conversation_type, ...restProps }) {
 	switch (conversation_type) {
@@ -24,6 +28,7 @@ function MessageMapping({ conversation_type, ...restProps }) {
 			return <TimeLine {...restProps} />;
 	}
 }
+
 const getPlaceHolder = (hasPermissionToEdit, canMessageOnBotSession) => {
 	if (canMessageOnBotSession) {
 		return 'This chat is currently in bot session, send a message to talk with customer';
@@ -70,7 +75,7 @@ function MessageConversations({
 	} = useGetEmojiList({ activeMessageCard });
 
 	const urlArray = decodeURI(finalUrl)?.split('/');
-	const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+	const fileName = urlArray[(urlArray?.length || DEFAULT_VALUE) - LAST_VALUE] || '';
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
@@ -83,16 +88,12 @@ function MessageConversations({
 		}, SET_TIME_OUT);
 	};
 
-	useEffect(() => {
-		scrollToBottom();
-	}, [firstLoadingMessages, id]);
-
 	const handleProgress = (val) => {
 		setUploading((prev) => ({ ...prev, [id]: val }));
 	};
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === 0;
+		const bottom = e.target.scrollTop === DEFAULT_VALUE;
 		if (bottom && !lastPage && !loadingPrevMessages) {
 			getNextData();
 		}
@@ -113,12 +114,17 @@ function MessageConversations({
 			</div>
 		);
 	};
+
 	useEffect(() => {
 		if (id) {
 			emojiListFetch();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [firstLoadingMessages, id]);
 
 	const openInstantMessages = () => {
 		setOpenModal({
@@ -153,27 +159,29 @@ function MessageConversations({
 
 	const loader = (
 		<div className={styles.loader}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.spinner_loader}
 				alt="load"
+				width={10}
+				height={10}
 			/>
 		</div>
 	);
 
 	const firstLoadingDiv = (
 		<div className={styles.flex_div}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif"
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
 				type="video/gif"
 				alt="loading"
-				className={styles.object_styles}
+				width={80}
+				height={80}
 			/>
 		</div>
-
 	);
 
 	const unreadIndex = new_user_message_count > messagesData.length
-		? 0 : messagesData.length - new_user_message_count;
+		? DEFAULT_VALUE : messagesData.length - new_user_message_count;
 
 	const messageConversation = (
 		<>
