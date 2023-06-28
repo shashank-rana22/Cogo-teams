@@ -14,7 +14,7 @@ export const billingAddressControlForSelf = [
 				value   : formValuePatterns.PAN_NUMBER,
 				message : 'Enter a valid PAN',
 			},
-			required: 'PAN Number is required',
+			required: { value: true, message: 'PAN Number is required' },
 		},
 	},
 ];

@@ -67,9 +67,13 @@ export const personalDetailsControl = [
 		span        : 3,
 		placeholder : 'Enter your mobile number',
 		rules       : {
-			required : 'Mobile Number is required',
-			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Mobile Number',
-			pattern  : {
+			validate: (v) => {
+				if (!v?.number || !v?.country_code) {
+					return 'Mobile Number is required';
+				}
+				return GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v.number) || 'Invalid Mobile Number';
+			},
+			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
 				message : 'Invalid Mobile Number',
 			},

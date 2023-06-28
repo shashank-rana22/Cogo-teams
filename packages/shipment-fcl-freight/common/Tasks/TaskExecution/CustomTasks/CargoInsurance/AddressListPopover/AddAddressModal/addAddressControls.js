@@ -87,14 +87,7 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		name        : 'tax_number',
 		type        : 'text',
 		placeholder : 'Enter Tax Number',
-		rules       : {
-			required : { value: true, message: 'Tax Number is required' },
-			pattern  : {
-				value   : GST_NUMBER,
-				message : 'Invalid Tax number',
-			},
-		},
-		span: 6,
+		span        : 6,
 	},
 
 	{
@@ -124,9 +117,13 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 		type        : 'mobileSelect',
 		placeholder : 'Enter Phone Number',
 		rules       : {
-			required : { value: true, message: 'Mobile Number is required' },
-			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Phone Number',
-			pattern  : {
+			validate: (v) => {
+				if (!v?.number || !v?.country_code) {
+					return 'Phone Number is required';
+				}
+				return GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v.number) || 'Invalid Phone Number';
+			},
+			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
 				message : 'Invalid Phone Number',
 			},
@@ -144,7 +141,8 @@ export const useGetControls = ({ checked, countryId = '', setValue = () => {} })
 			return {
 				...control,
 				rules: {
-					required : checked,
+					required : checked && { value: true, message: 'Tax Number is required' },
+					validate : (v) => GST_NUMBER.test(v) || 'Invalid Tax Number',
 					pattern  : {
 						value:
 							GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
