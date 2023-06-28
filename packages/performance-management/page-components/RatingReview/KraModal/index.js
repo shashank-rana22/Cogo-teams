@@ -8,9 +8,6 @@ import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
 function KraModal({ show, setShow }) {
-	const [starRating, setStarRating] = useState();
-	const [comments, setCommemts] = useState();
-
 	const {
 		data = [],
 		loading,
@@ -18,10 +15,14 @@ function KraModal({ show, setShow }) {
 	} = useEmployeeKraDetails({ show });
 
 	const { list = [], modification_history = [] } = data;
+
 	const {
 		loading: SubmitLoading,
 		updateEmployeeFinalRating,
 	} = useUpdateEmployeeFinalRating(data);
+
+	const [starRating, setStarRating] = useState();
+	const [comments, setCommemts] = useState();
 
 	if (loading) {
 		return (
