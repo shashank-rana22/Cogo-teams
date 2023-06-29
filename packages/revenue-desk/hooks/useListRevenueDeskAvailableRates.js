@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 
 import incoTermMapping from '../helper/incoTermMapping';
 
-const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = {}) => {
+const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isPreferenceSet } = {}) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-
+	console.log(singleServiceData,';singleServiceData');
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_revenue_desk_showed_rates',
@@ -46,7 +46,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = 
 					service_id         : singleServiceData?.id,
 					service_type       : singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
 					preferred_currency : 'USD',
-					refresh_rates      : !singleServiceData?.is_preference_set,
+					refresh_rates      : !isPreferenceSet,
 				},
 			});
 		} catch (err) {

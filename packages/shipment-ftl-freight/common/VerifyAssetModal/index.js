@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useMemo, useState, useEffect, useContext, useCallback } from 'react';
 
 import useCreateCustomerInvoice from '../../hooks/useCreateCustomerInvoice';
@@ -10,7 +11,7 @@ import AddOrganizationAssetModal from './AddOrganizationAssetModal';
 import useCreateOrganizationAsset from './AddOrganizationAssetModal/hooks/useCreateOrganizationAsset';
 import styles from './styles.module.css';
 
-const SkeletonGroup = [1, 2, 3].map((item) => (
+const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
@@ -27,7 +28,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		[truckList],
 	);
 
-	const organizationId = truckList[0]?.service_provider_id;
+	const organizationId = truckList[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id;
 	const { data: verifiedTruckList, getData: getVerifiedTruckList } = useListOrganizationAssets({
 		id: organizationId,
 		truckNumbers,
@@ -102,7 +103,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 			<div className={styles.truck_type_heading} key={truckType}>
 				<span className={styles.truck_type}>
 					{truckType}
-					{' '}
+					&nbsp;
 					trucks
 				</span>
 				<ul>
@@ -111,7 +112,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 							<div className="truckBox">
 								<span>
 									Truck Number:
-									{' '}
+									&nbsp;
 									{truck.truck_number || truck?.data?.truck_number}
 								</span>
 								<div className={styles.action_row}>
@@ -121,7 +122,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 									>
 										Edit Info
 									</Button>
-									{' '}
+									&nbsp;
 									<Button
 										onClick={() => {
 											setUploadProof(null);

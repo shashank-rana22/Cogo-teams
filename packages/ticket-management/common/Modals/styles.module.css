@@ -1,0 +1,16 @@
+.modal_container {
+	left: 99% !important;
+	width: 350px !important;
+
+	:global {
+		.ui_modal_header_container {
+			padding: 10px;
+		}
+
+		.ui_modal_header_title {
+			padding-left: 6px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+	}
+}

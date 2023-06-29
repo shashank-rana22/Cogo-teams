@@ -12,7 +12,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.service_provider = element?.service_provider;
 		rowData.service_provider_id = element?.service_provider_id;
 		rowData.price_type = element?.price_type;
-		rowData.container_count = singleServiceData?.containers_count;
+		rowData.container_count = container_count;
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.allocation_ratio = undefined;
 		rowData.price = Number(element?.validities?.[0]?.total_price) / Number(container_count);
@@ -41,8 +41,10 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			? element?.destination_main_port_id
 			: null;
 		rowData.mode = element?.mode;
-		row.rowData = rowData;
 		rowData.via_route = element?.destination_main_port?.name;
+		rowData.total_price = element?.validities?.[0].total_price;
+		rowData.total_price_currency = element?.validities?.[0].currency;
+		row.rowData = rowData;
 		rows.push(row);
 	});
 	return { rows };

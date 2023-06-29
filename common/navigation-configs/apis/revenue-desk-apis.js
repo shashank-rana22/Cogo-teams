@@ -165,7 +165,7 @@ const apis = [
 	// 	service_name : 'revenue_desk',
 	// },
 	{
-		api          : 'get_customers_last_shipment_details',
+		api          : 'list_customers_last_shipment_details',
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
@@ -250,6 +250,11 @@ const apis = [
 		api          : 'get_shipment_elligible_booking_document',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_revenue_desk_decisions',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
 	},
 ];
 

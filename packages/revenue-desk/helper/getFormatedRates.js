@@ -1,4 +1,5 @@
 const getFormatedRates = (type, data, singleServiceData) => {
+	console.log(singleServiceData,'singleServiceData;');
 	const rows = [];
 	const container_count = singleServiceData?.containers_count || 1;
 	if (type === 'present' || type === 'current') {
@@ -9,7 +10,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.shipping_line = element?.reverted_shipping_line?.business_name
 				|| element?.shipping_line?.business_name
 				|| element?.shipping_line?.short_name;
-			rowData.air_line =				element?.reverted_airline?.business_name
+			rowData.air_line = element?.reverted_airline?.business_name
 				|| element?.airline?.business_name;
 			rowData.price_type = element?.data?.price_type;
 			rowData.container_count = container_count;
@@ -25,7 +26,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.allocation_ratio = undefined;
 			rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_2;
 			rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_7;
-			rowData.fulfillment_ratio_35 = element?.fulfillment_ratio_35;
+			rowData.fulfillment_ratio_30 = element?.fulfillment_ratio_30;
 			rowData.total_price_in_preferred_currency = element?.validities?.[0]?.total_price_in_preferred_currency;
 			rowData.preferred_currency = element?.validities?.[0]?.preferred_currency;
 			rowData.remarks = element?.remarks;
@@ -38,6 +39,8 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.destination_locals_price = element?.destination_locals?.total_price;
 			rowData.destination_locals_currency = element?.destination_locals?.currency;
 			rowData.updated_at = element?.updated_at;
+			rowData.total_price = element?.validities?.[0].total_price;
+			rowData.total_price_currency = element?.validities?.[0].currency;
 			row.rowData = rowData;
 			rows.push(row);
 		});

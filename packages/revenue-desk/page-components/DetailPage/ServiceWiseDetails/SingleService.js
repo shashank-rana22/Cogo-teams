@@ -52,13 +52,18 @@ function SingleService({
 	shipmentData,
 	emailModal,
 	setEmailModal,
+	revenueDeskDecisionsData,
 }) {
+	const {services_with_preferences_set: servicesWithPreferenceSet = [] }= revenueDeskDecisionsData;
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
+	const isPreferenceSet = servicesWithPreferenceSet.includes(singleServiceData?.id);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
+		isPreferenceSet,
 	});
+	console.log(ratesData,'rates;;');
 	const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 		shipmentData,
 		singleServiceData,
@@ -122,14 +127,15 @@ function SingleService({
 				price={priceData?.[singleServiceData?.id]}
 				shipmentData={shipmentData}
 			/>
-			{singleServiceData?.is_preference_set ? (
+			{isPreferenceSet ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
 					shipmentData={shipmentData}
+					isPreferenceSet={isPreferenceSet}
 				/>
 			) : null}
 			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state)
-			&& !singleServiceData?.is_preference_set ? (
+			&& !isPreferenceSet ? (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || [])?.length
 						? (

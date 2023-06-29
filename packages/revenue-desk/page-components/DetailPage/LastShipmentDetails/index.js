@@ -11,19 +11,19 @@ import PortDetails from '../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
 
-function LastShipmentDetails({ itemData }) {
-	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData });
+function LastShipmentDetails({ itemData, isPillSelected}) {
+	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData , isPillSelected});
 	return (
 		<div>
-			{(loading || (Object.keys(data || {})?.length)) ? (
+			{(loading || ((data || [])?.length)) ? (
 				<div className={styles.container}>
 					<div className={styles.header_section}>
 						<div className={styles.header_left_section}>
 							{loading ? <Placeholder height="25px" width="100px" margin="0 5px" /> : (
 								<Pill size="md" color="#F2F3FA">
 									<div style={{ color: '#7278AD' }}>
-										{startCase(data?.trade_type)
-						|| startCase(incoTermMapping[data?.inco_term])}
+										{startCase(data[0]?.trade_type)
+						|| startCase(incoTermMapping[data[0]?.inco_term])}
 
 									</div>
 								</Pill>
@@ -31,9 +31,9 @@ function LastShipmentDetails({ itemData }) {
 							{loading ? <Placeholder height="25px" width="100px" /> : (
 								<Pill size="md" color="#F7FAEF">
 									<div style={{ color: '#849E4C' }}>
-										{data?.source === 'direct'
+										{data[0]?.source === 'direct'
 											? 'Sell Without Buy'
-											: startCase(data?.source || '')}
+											: startCase(data[0]?.source || '')}
 									</div>
 								</Pill>
 							)}
@@ -47,9 +47,9 @@ function LastShipmentDetails({ itemData }) {
 						) : (
 							<div className={styles.header_right_section}>
 								<div className={styles.sid_section}>
-									{iconMapping[data?.shipment_type]}
+									{iconMapping[data[0]?.shipment_type]}
 									<div className={styles.text}>
-										{serviceLabelMapping[data?.shipment_type]}
+										{serviceLabelMapping[data[0]?.shipment_type]}
 									</div>
 
 									<Pill
@@ -59,14 +59,14 @@ function LastShipmentDetails({ itemData }) {
 										<div style={{ fontSize: '14px', fontWeight: '400', color: '#221F20' }}>
 											SID :
 											{' '}
-											{data?.serial_id}
+											{data[0]?.serial_id}
 										</div>
 									</Pill>
 								</div>
 								<div className={styles.date_text}>
 									Created on -
 									{' '}
-									{format(data?.created_at, 'dd MMM yyyy')}
+									{format(data[0]?.created_at, 'dd MMM yyyy')}
 								</div>
 							</div>
 						)}
@@ -86,14 +86,14 @@ function LastShipmentDetails({ itemData }) {
 									</div>
 
 								</div>
-							) : <PortDetails data={data} />}
+							) : <PortDetails data={data[0]} />}
 
 						</div>
 						<div className={styles.body_right_section}>
 							Service Provider :
 							<div className={styles.service_provider_text}>
 								{loading ? <Placeholder height="25px" width="300px" margin="0 5px" />
-									: <div>{data?.service_provider?.business_name}</div>}
+									: <div>{data[0]?.service_provider?.business_name}</div>}
 
 							</div>
 						</div>
@@ -107,7 +107,7 @@ function LastShipmentDetails({ itemData }) {
 								<Placeholder height="25px" width="100px" margin="10px 20px" />
 								<Placeholder height="25px" width="100px" margin="10px 20px" />
 							</div>
-						) : <CargoDetails data={data} />}
+						) : <CargoDetails data={data[0]} />}
 					</div>
 				</div>
 			) : (
