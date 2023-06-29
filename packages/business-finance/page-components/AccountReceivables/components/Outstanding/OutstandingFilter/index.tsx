@@ -1,4 +1,5 @@
 import { Input, Popover } from '@cogoport/components';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -53,7 +54,7 @@ function Filters({
 
 	let placeholder;
 	if (queryKey === 'q') {
-		placeholder = 'Search By Business Name/Pan Number';
+		placeholder = ENTITY_MAPPING[entityCode].placeholder.tax_number;
 	} else if (queryKey === 'tradePartySerialId') {
 		placeholder = 'Search By Trade Party';
 	} else if (queryKey === 'sageId') {

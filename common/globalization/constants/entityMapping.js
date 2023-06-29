@@ -20,6 +20,9 @@ const ENTITY_MAPPING = {
 			search_options_label_pan  : 'Business Name/PAN Number',
 			search_options_label_sage : 'Sage ID',
 		},
+		placeholder: {
+			tax_number: 'Search By Business Name/Pan Number',
+		},
 	},
 	201: {
 		country_code      : 'NL',
@@ -34,6 +37,9 @@ const ENTITY_MAPPING = {
 			sage_label                : 'Sage ID',
 			search_options_label_pan  : 'Business Name/PAN Number',
 			search_options_label_sage : 'Sage ID',
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/Pan Number',
 		},
 	},
 	301: {
@@ -50,6 +56,9 @@ const ENTITY_MAPPING = {
 			search_options_label_pan  : 'Business Name/PAN Number',
 			search_options_label_sage : 'Sage ID',
 		},
+		placeholder: {
+			tax_number: 'Search By Business Name/Pan Number',
+		},
 	},
 	401: {
 		country_code      : 'SG',
@@ -64,6 +73,9 @@ const ENTITY_MAPPING = {
 			sage_label                : 'Sage ID',
 			search_options_label_pan  : 'Business Name/PAN Number',
 			search_options_label_sage : 'Sage ID',
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/Pan Number',
 		},
 	},
 	501: {
@@ -83,6 +95,9 @@ const ENTITY_MAPPING = {
 			sage_label                : null,
 			search_options_label_pan  : 'Business Name/VAT Number',
 			search_options_label_sage : null,
+		},
+		placeholder: {
+			tax_number: 'Search By Business Name/VAT Number',
 		},
 	},
 };

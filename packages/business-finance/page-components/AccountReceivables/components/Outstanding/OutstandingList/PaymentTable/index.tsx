@@ -38,6 +38,16 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 
 	const sortStyleDesc = orderBy.sortType === 'Desc' ? '#303B67' : '#BDBDBD';
 
+	const tableColumns = PaymentList({
+		paymentFilters,
+		setPaymentFilters,
+		setOrderBy,
+		sortStyleAsc,
+		sortStyleDesc,
+	});
+
+	const filterTableColumns = tableColumns.filter((item) => entityCode !== '501' || item.id !== 'sageRefNumber');
+
 	return (
 		<div>
 			<div className={styles.filter_wrap}>
@@ -62,13 +72,7 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 
 			<StyledTable
 				data={list}
-				columns={PaymentList({
-					paymentFilters,
-					setPaymentFilters,
-					setOrderBy,
-					sortStyleAsc,
-					sortStyleDesc,
-				})}
+				columns={filterTableColumns}
 				loading={paymentLoading}
 			/>
 			<div className={styles.pagination_container}>
