@@ -60,7 +60,7 @@ export function getOptionsMapping({
 }
 
 export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
-	admin_view: ({
+	cogoone_admin: ({
 		showBotMessages,
 		isServiceProvider,
 		isPartOfGroup,

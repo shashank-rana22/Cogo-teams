@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 const getCarouselData = ({
 	flashMessagesList = [],
-	activeCardId,
+	activeTab,
 	userId,
 	setActiveMessage,
 	firestore,
@@ -18,7 +18,7 @@ const getCarouselData = ({
 				<div className={styles.flash_message_wrapper}>
 					<MessageCardData
 						item={eachRoom}
-						activeCardId={activeCardId}
+						activeTab={activeTab}
 						userId={userId}
 						setActiveMessage={setActiveMessage}
 						firestore={firestore}

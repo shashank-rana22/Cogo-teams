@@ -1,12 +1,20 @@
 import { Modal, Button, RatingComponent, Textarea } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useCreateCustomerFeedback from '../../../hooks/useCreateCustomerFeedback';
 
 import styles from './styles.module.css';
 
-function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
-	const [starRating, setStarRating] = useState(0);
+const DEFAULT_RATING = 0;
+
+function FeedbackModal() {
+	const {
+		query: { type = '' },
+	} = useRouter();
+
+	const [showFeedback, setShowFeedback] = useState(type === 'openFeedbackModal');
+	const [starRating, setStarRating] = useState(DEFAULT_RATING);
 	const [feedbackMessage, setFeedbackMessage] = useState('');
 
 	const {

@@ -31,7 +31,6 @@ function Header({
 	support_agent_id = null,
 	showBotMessages = false,
 	userId = '',
-	isomniChannelAdmin = false,
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
@@ -88,7 +87,8 @@ function Header({
 
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
-	const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
+	// const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
+	const hasAccessToApprove = support_agent_id === userId;
 
 	const hasRequests = !!agent_id;
 
@@ -151,7 +151,7 @@ function Header({
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
 						/>
-						{isomniChannelAdmin && channel_type === 'whatsapp' && (
+						{channel_type === 'whatsapp' && (
 							<div
 								role="button"
 								tabIndex="0"

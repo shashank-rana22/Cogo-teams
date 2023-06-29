@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 function MessageCardData({
 	item = {},
-	activeCardId = '',
+	activeTab = {},
 	userId = '',
 	setActiveMessage,
 	firestore,
@@ -44,7 +44,8 @@ function MessageCardData({
 	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
-	const checkActiveCard = activeCardId === id;
+
+	const checkActiveCard = activeTab?.data?.id === id;
 
 	const { renderTime } = dateTimeConverter(
 		Date.now() - Number(lastActive),
@@ -64,6 +65,7 @@ function MessageCardData({
 			userId,
 		});
 	};
+
 	const isFlashMessages = source === 'flash_messages';
 
 	return (

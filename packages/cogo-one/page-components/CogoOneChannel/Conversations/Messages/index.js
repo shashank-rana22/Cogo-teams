@@ -1,9 +1,10 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
+import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
 import useGetMessages from '../../../../hooks/useGetMessages';
@@ -20,14 +21,14 @@ import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
 function Messages({
-	activeMessageCard = {},
+	activeTab = {},
 	firestore,
 	suggestions = [],
 	userId = '',
-	isomniChannelAdmin = false,
-	setActiveMessage = () => {},
 	setRaiseTicketModal = () => {},
 	viewType = '',
+	setActiveRoomLoading,
+	setActiveTab,
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -35,11 +36,13 @@ function Messages({
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
 
+	const activeRoomSnapshotListener = useRef(null);
+
 	const { tagOptions = [] } = useListAssignedChatTags();
 
 	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
 
-	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+	const formattedData = getActiveCardDetails(activeTab?.data) || {};
 
 	const closeModal = () => {
 		setOpenModal({ type: null, data: {} });
@@ -53,7 +56,7 @@ function Messages({
 		support_agent_id = '',
 		spectators_data = [],
 		session_type = '',
-	} = activeMessageCard || {};
+	} = formattedData || {};
 
 	const {
 		sendCommunicationTemplate,
@@ -65,7 +68,7 @@ function Messages({
 	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
 
 	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
-		|| ['admin_view', 'shipment_view'].includes(viewType))) || activeMessageCard.group_members?.includes(userId);
+		|| ['cogoone_admin', 'shipment_view'].includes(viewType))) || formattedData.group_members?.includes(userId);
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
@@ -99,7 +102,7 @@ function Messages({
 		channel_type,
 		firestore,
 		closeModal,
-		activeMessageCard,
+		activeMessageCard: activeTab?.data,
 		formattedData,
 		canMessageOnBotSession,
 	});
@@ -113,8 +116,8 @@ function Messages({
 	} = useGetMessages({ activeChatCollection, id });
 
 	const { updateChat, loading } = useUpdateAssignedChat({
-		onClose: closeModal,
-		activeMessageCard,
+		onClose           : closeModal,
+		activeMessageCard : activeTab?.data,
 		formattedData,
 	});
 
@@ -146,6 +149,21 @@ function Messages({
 		modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
+	useEffect(() => {
+		mountActiveRoomSnapShot({
+			activeRoomSnapshotListener,
+			setActiveRoomLoading,
+			activeCardId      : activeTab?.data?.id,
+			firestore,
+			activeChannelType : activeTab?.data?.channel_type,
+			setActiveTab,
+		});
+
+		return () => {
+			snapshotCleaner({ ref: activeRoomSnapshotListener });
+		};
+	}, [activeTab?.data?.id, activeTab?.data?.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -157,7 +175,7 @@ function Messages({
 					formattedData={formattedData}
 					updateChat={updateChat}
 					loading={loading}
-					activeMessageCard={activeMessageCard}
+					activeMessageCard={activeTab?.data}
 					closeModal={closeModal}
 					assignLoading={assignLoading}
 					activeAgentName={activeAgentName}
@@ -167,7 +185,6 @@ function Messages({
 					support_agent_id={support_agent_id}
 					showBotMessages={showBotMessages}
 					userId={userId}
-					isomniChannelAdmin={isomniChannelAdmin}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
 					requestForAssignChat={requestForAssignChat}
@@ -192,7 +209,7 @@ function Messages({
 						firstLoadingMessages={firstLoadingMessages}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
-						activeMessageCard={activeMessageCard}
+						activeMessageCard={activeTab?.data}
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
@@ -202,7 +219,6 @@ function Messages({
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
 						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
-						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
 						canMessageOnBotSession={canMessageOnBotSession}
 						changeSessionAndMessage={changeSessionAndMessage}
@@ -231,7 +247,7 @@ function Messages({
 					)}
 					<ActiveModalComp
 						data={openModal?.data || {}}
-						activeMessageCard={activeMessageCard}
+						activeMessageCard={activeTab?.data}
 						assignLoading={assignLoading}
 						loading={loading}
 					/>

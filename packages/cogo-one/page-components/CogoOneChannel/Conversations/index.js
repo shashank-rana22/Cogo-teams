@@ -5,39 +5,47 @@ import Messages from './Messages';
 import styles from './styles.module.css';
 import VoiceCall from './VoiceCall';
 
+const CONVERSATION_COMPONENT_MAPPING = {
+	message : Messages,
+	voice   : VoiceCall,
+	mail    : MailConversation,
+};
+
 function Conversations({
-	activeTab = '',
-	activeMessageCard = {},
+	activeTab = {},
 	firestore,
-	activeVoiceCard,
-	suggestions = [],
 	userId,
-	isomniChannelAdmin = false,
-	mailProps,
-	setActiveMessage = () => {},
 	setRaiseTicketModal = () => {},
 	viewType = '',
+	setActiveRoomLoading,
+	mailProps,
+	setActiveTab,
+	suggestions,
 }) {
+	const Component = CONVERSATION_COMPONENT_MAPPING[activeTab?.tab] || null;
+
+	const COMPONENT_PROPS_MAPPING = {
+		message: {
+			firestore,
+			activeTab,
+			userId,
+			viewType,
+			setRaiseTicketModal,
+			setActiveRoomLoading,
+			setActiveTab,
+			suggestions,
+		},
+		voice : { activeVoiceCard: activeTab?.data || {} },
+		mail  : { mailProps },
+	};
+
+	if (!Component) {
+		return null;
+	}
+
 	return (
-		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
-			{activeTab === 'message' && (
-				<Messages
-					activeMessageCard={activeMessageCard}
-					firestore={firestore}
-					suggestions={suggestions}
-					userId={userId}
-					isomniChannelAdmin={isomniChannelAdmin}
-					setActiveMessage={setActiveMessage}
-					setRaiseTicketModal={setRaiseTicketModal}
-					viewType={viewType}
-				/>
-			)}
-			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}
-			{activeTab === 'mail' && (
-				<MailConversation
-					mailProps={mailProps}
-				/>
-			)}
+		<div className={cl`${activeTab?.tab === 'mail' ? styles.mail_div : styles.container}`}>
+			<Component {...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})} />
 		</div>
 	);
 }

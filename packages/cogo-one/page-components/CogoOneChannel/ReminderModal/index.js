@@ -2,6 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
+import { getAssignedChats } from '../../../helpers/reminderModalHelpers';
 import useShipmentReminder from '../../../hooks/useShipmentReminder';
 import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
@@ -9,27 +10,35 @@ import FillContainer from './FillContainer';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-function ReminderModal({ firestore, agentId, getAssignedChats }) {
-	const [reminderModal, setReminderModal] = useState(false);
+const SNAPSHOT_TIMEOUT = 100;
 
+function ReminderModal({ firestore, agentId }) {
+	const [reminderModal, setReminderModal] = useState(false);
 	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
-		{ setReminderModal, firestore, agentId, getAssignedChats },
+		{
+			setReminderModal,
+			firestore,
+			agentId,
+			getAssignedChats: () => {
+				getAssignedChats({ firestore, userId: agentId });
+			},
+		},
 	);
+
+	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	useEffect(() => {
 		let addSnapShotAfterfewSeconds = '';
 		clearTimeout(addSnapShotAfterfewSeconds);
 		addSnapShotAfterfewSeconds = setTimeout(
 			mountReminderSnapShot,
-			100,
+			SNAPSHOT_TIMEOUT,
 		);
 		return () => {
 			cleanUpTimeout();
 			clearTimeout(addSnapShotAfterfewSeconds);
 		};
 	}, [cleanUpTimeout, mountReminderSnapShot]);
-
-	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	return (
 		<Modal

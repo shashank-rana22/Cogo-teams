@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import {
 	onSnapshot,
 	doc,
@@ -7,7 +8,8 @@ import {
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
-import { HIDE_FLASH_MESSAGES_FOR } from '../constants/viewTypeConstants';
+
+import { VIEW_TYPE_GLOBAL_MAPPING } from './viewTypeMapping';
 
 const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
@@ -40,20 +42,21 @@ function dataFormatter(list) {
 }
 
 export function mountFlashChats({
-	setFlashMessagesLoading,
+	setLoadingState,
 	setFlashMessagesData,
 	omniChannelCollection,
 	flashMessagesSnapShotListener,
 	viewType,
+	setCarouselState,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
 
-	if (HIDE_FLASH_MESSAGES_FOR.includes(viewType)) {
+	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats) {
 		return;
 	}
 
-	setFlashMessagesLoading(true);
+	setLoadingState((p) => ({ ...p, flashMessagesLoading: true }));
 	setFlashMessagesData({});
 
 	try {
@@ -68,33 +71,49 @@ export function mountFlashChats({
 			(querySnapshot) => {
 				const { resultList } = dataFormatter(querySnapshot);
 				setFlashMessagesData(resultList);
-				setFlashMessagesLoading(false);
+				setLoadingState((p) => {
+					if (p?.flashMessagesLoading) {
+						return { ...p, flashMessagesLoading: false };
+					}
+					return p;
+				});
+				setCarouselState((p) => {
+					if (p === 'in_timeout') {
+						return p;
+					}
+					return isEmpty(resultList) ? 'hide' : 'show';
+				});
 			},
 
 		);
 	} catch (error) {
 		console.log('error', error);
 	} finally {
-		setFlashMessagesLoading(false);
+		setLoadingState((p) => {
+			if (p?.flashMessagesLoading) {
+				return { ...p, flashMessagesLoading: false };
+			}
+			return p;
+		});
 	}
 }
 
 export function mountPinnedSnapShot({
-	setLoading, pinSnapshotListener, setListData, userId,
+	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
 	activeSubTab,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
-	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
+	setListData((p) => ({ ...p, pinnedMessagesData: {}, messagesListData: {} }));
 
 	if (activeSubTab !== 'all' || viewType === 'shipment_view') {
 		return;
 	}
 
 	if (canShowPinnedChats) {
-		setLoading(true);
+		setLoadingState((p) => ({ ...p, pinnedChatsLoading: true }));
 		const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
 		const newChatsQuery = query(
 			omniChannelCollection,
@@ -107,54 +126,59 @@ export function mountPinnedSnapShot({
 			(pinSnapShot) => {
 				const { resultList } = dataFormatter(pinSnapShot);
 				setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
-				setLoading(false);
+				setLoadingState((p) => {
+					if (p?.pinnedChatsLoading) {
+						return { ...p, pinnedChatsLoading: false };
+					}
+					return p;
+				});
 			},
 		);
 	}
 }
 
 export function mountUnreadCountSnapShot({
-	status, unreadCountSnapshotListener,
-	omniChannelCollection, omniChannelQuery, setListData,
+	unreadCountSnapshotListener,
+	omniChannelCollection, baseQuery,
+	setUnReadChatsCount,
+	sessionQuery,
 }) {
 	const snapshotRef = unreadCountSnapshotListener;
-
-	const queryForUnreadChats = status !== 'unread'
-		? [where('has_admin_unread_messages', '==', true)] : [];
 
 	snapshotCleaner({ ref: unreadCountSnapshotListener });
 
 	const countUnreadChatQuery = query(
 		omniChannelCollection,
-		...queryForUnreadChats,
-		...omniChannelQuery,
+		where('has_admin_unread_messages', '==', true),
+		...baseQuery,
+		...sessionQuery,
+		orderBy('new_message_sent_at', 'desc'),
 	);
 
 	snapshotRef.current = onSnapshot(
 		countUnreadChatQuery,
 		(countUnreadChatSnapshot) => {
-			setListData((p) => ({
-				...p,
-				unReadChatsCount: countUnreadChatSnapshot.size || FALLBACK_VALUE,
-			}));
+			setUnReadChatsCount(countUnreadChatSnapshot.size || FALLBACK_VALUE);
 		},
 	);
 }
 
 export function mountSnapShot({
-	setLoading, setListData, snapshotListener, omniChannelCollection,
+	setLoadingState, setListData, snapshotListener, omniChannelCollection,
 	queryForSearch, omniChannelQuery,
 }) {
 	const snapshotRef = snapshotListener;
-	setLoading(true);
-	setListData((p) => ({ ...p, messagesListData: {} }));
+	setListData((p) => ({ ...p, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
+	setLoadingState((p) => ({ ...p, chatsLoading: true }));
+
 	const newChatsQuery = query(
 		omniChannelCollection,
 		...queryForSearch,
 		...omniChannelQuery,
 		limit(PAGE_LIMIT),
 	);
+
 	snapshotRef.current = onSnapshot(
 		newChatsQuery,
 		(querySnapshot) => {
@@ -168,12 +192,22 @@ export function mountSnapShot({
 				isLastPage,
 				lastMessageTimeStamp,
 			}));
-			setLoading(false);
+			setLoadingState((p) => {
+				if (p?.chatsLoading) {
+					return { ...p, chatsLoading: false };
+				}
+				return p;
+			});
 		},
 	);
 }
 
-export async function getPrevChats({ omniChannelCollection, omniChannelQuery, listData, setLoading, setListData }) {
+export async function getPrevChats({
+	omniChannelCollection,
+	omniChannelQuery, listData,
+	setLoadingState,
+	setListData,
+}) {
 	const prevChatsQuery = query(
 		omniChannelCollection,
 		...omniChannelQuery,
@@ -184,7 +218,8 @@ export async function getPrevChats({ omniChannelCollection, omniChannelQuery, li
 		),
 		limit(PAGE_LIMIT),
 	);
-	setLoading(true);
+
+	setLoadingState((p) => ({ ...p, chatsLoading: true }));
 
 	const prevChatsPromise = await getDocs(prevChatsQuery);
 	const prevChats = prevChatsPromise?.docs;
@@ -201,12 +236,18 @@ export async function getPrevChats({ omniChannelCollection, omniChannelQuery, li
 		isLastPage,
 		lastMessageTimeStamp,
 	}));
-	setLoading(false);
+
+	setLoadingState((p) => {
+		if (p?.chatsLoading) {
+			return { ...p, chatsLoading: false };
+		}
+		return p;
+	});
 }
 
 export function mountActiveRoomSnapShot({
 	activeRoomSnapshotListener, setActiveRoomLoading,
-	activeCardId, firestore, activeChannelType, setActiveCard,
+	activeCardId, firestore, activeChannelType, setActiveTab,
 }) {
 	const snapshotRef = activeRoomSnapshotListener;
 
@@ -219,11 +260,9 @@ export function mountActiveRoomSnapShot({
 			`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
 		);
 		snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
-			setActiveCard((p) => ({
+			setActiveTab((p) => ({
 				...p,
-				activeCardId,
-				activeCardData:
-                { id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
+				data: { ...(p.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
 			}));
 		});
 		setActiveRoomLoading(false);

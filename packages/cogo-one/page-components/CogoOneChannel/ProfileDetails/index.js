@@ -19,17 +19,15 @@ function ProfileDetails({
 	activeMessageCard,
 	activeTab,
 	activeVoiceCard,
-	updateLeaduser,
 	activeCardId,
 	setModalType = () => {},
-	setActiveMessage = () => {},
 	activeRoomLoading,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
 	viewType = '',
-	hasVoiceCallAccess,
 	firestore,
 	userId = '',
+	setActiveTab,
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -84,14 +82,12 @@ function ProfileDetails({
 						loading={loading}
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}
-						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
 						setModalType={setModalType}
 						hideCpButton={hideCpButton}
 						getOrgDetails={getOrgDetails}
-						setActiveMessage={setActiveMessage}
 						activeRoomLoading={activeRoomLoading}
 						setActiveSelect={setActiveSelect}
 						showMore={showMore}
@@ -100,9 +96,9 @@ function ProfileDetails({
 						zippedTicketsData={zippedTicketsData}
 						quotationSentData={quotationEmailSentAt}
 						viewType={viewType}
-						hasVoiceCallAccess={hasVoiceCallAccess}
 						firestore={firestore}
 						userId={userId}
+						setActiveTab={setActiveTab}
 					/>
 				)}
 			</div>

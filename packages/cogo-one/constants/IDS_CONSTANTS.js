@@ -4,13 +4,13 @@ const getViewTypeMapping = () => {
 	const geo = getGeoConstants();
 
 	const USER_IDS_CHECK = {
-		admin_view: geo.uuid.cogo_one_admin_user_ids,
+		cogoone_admin: geo.uuid.cogo_one_admin_user_ids,
 	};
 
 	const ROLE_IDS_CHECK = {
 		shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
 		kam_view      : geo.uuid.cogo_one_kam_agent_ids,
-		admin_view    : geo.uuid.cogo_one_admin_ids,
+		cogoone_admin : geo.uuid.cogo_one_admin_ids,
 	};
 
 	return {
