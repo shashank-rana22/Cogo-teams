@@ -77,7 +77,7 @@ function ButtonComponent({ isModal, status, isClosureAuthoriser, handleTicket })
 		return <ResolveRequestButton {...commonProps} />;
 	}
 
-	if ((status === 'pending' && isClosureAuthoriser)) {
+	if ((['pending', 'resolve_requested'].includes(status) && isClosureAuthoriser)) {
 		return (
 			<div className={styles.pending_actions}>
 				<ApproveButton {...commonProps} />
