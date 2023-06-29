@@ -6,8 +6,8 @@ import {
 	TextAreaController,
 	AsyncSelectController,
 	CheckboxController,
+	UploadController,
 } from '@cogoport/forms';
-import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 const getElementController = (type = 'text') => {
 	switch (type) {

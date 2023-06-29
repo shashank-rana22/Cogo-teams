@@ -1,8 +1,10 @@
+import { IcMCloudUpload } from '@cogoport/icons-react';
+
 const fields = [
 	{
 		name        : 'short_name',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'Short Name',
 		rules       : {
@@ -12,7 +14,7 @@ const fields = [
 	{
 		name        : 'business_name',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'Business Name',
 		rules       : {
@@ -22,7 +24,7 @@ const fields = [
 	{
 		name        : 'operator_type',
 		type        : 'select',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Select here...',
 		label       : 'Operator Type',
 		options     : [
@@ -39,42 +41,42 @@ const fields = [
 	{
 		name        : 'iata_code',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'IATA Code',
 	},
 	{
 		name        : 'icao_code',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'ICAO Code',
 	},
 	{
 		name        : 'airway_bill_prefix',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'Airway Bill Prefix',
 	},
 	{
 		name        : 'masked_name',
 		type        : 'text',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Type here...',
 		label       : 'Masked Name',
 	},
 	{
 		name        : 'web_url',
 		type        : 'text',
-		span        : 8,
+		span        : 12,
 		placeholder : 'Type here...',
 		label       : 'Web URL',
 	},
 	{
 		name        : 'status',
 		type        : 'select',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Select here...',
 		label       : 'Status',
 		options     : [
@@ -85,7 +87,7 @@ const fields = [
 	{
 		name        : 'is_nvocc',
 		type        : 'select',
-		span        : 4,
+		span        : 6,
 		placeholder : 'Select here...',
 		label       : 'Is NVOCC',
 		options     : [
@@ -98,11 +100,10 @@ const fields = [
 		label      : 'Logo URL',
 		type       : 'file',
 		drag       : true,
-		span       : 6,
+		span       : 12,
 		maxSize    : '10485760',
 		uploadType : 'aws',
-		height     : '88',
-		uploadIcon : 'ic-upload',
+		uploadIcon : <IcMCloudUpload />,
 		accept     : '.png,.jpg,.jpeg',
 	},
 ];

@@ -1,7 +1,9 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
-import getElementController from '../../hooks/getController';
+import Layout from '../../common/Layout';
+import fields from '../../configurations/controls';
 import useEditOperators from '../../hooks/useEditOperators';
 
 import styles from './styles.module.css';
@@ -15,15 +17,19 @@ function EditOperators({
 	setFinalList,
 	page,
 }) {
+	const { control, watch, handleSubmit, setValue, formState:{ errors } } = useForm();
+
+	const operatorType = watch('operator_type');
+
+	const showElements = {
+		iata_code          : operatorType === 'airline',
+		icao_code          : operatorType === 'airline',
+		airway_bill_prefix : operatorType === 'airline',
+		is_nvocc           : operatorType === 'shipping_line',
+	};
+
 	const {
 		handleEditOperators,
-		control,
-		fields,
-		setValue,
-		handleSubmit,
-		showElements,
-		onError,
-		errors,
 		loading,
 	} = useEditOperators({
 		setEdit,
@@ -34,59 +40,58 @@ function EditOperators({
 		page,
 	});
 
-	(fields || []).forEach((ctrl:any, index) => {
+	(fields || []).forEach((ctrl, index) => {
 		if (ctrl.name === 'operator_type') {
 			fields[index].disabled = true;
 		}
 	});
 
+	console.log('item', item);
+
 	useEffect(() => {
 		if (edit) {
+			setValue('logo_url', '');
 			fields.forEach((c) => {
 				setValue(c.name, item[c.name]);
 			});
+
+			// console.log('item.logo_url', item.logo_url);
+
 			setValue('is_nvocc', String(item.is_nvocc));
-			setValue('logo_url', String(item.logo_url));
+			// setValue('logo_url', String(item.logo_url));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [item, fields]);
+	}, [item, edit, setValue]);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>Edit Operators</div>
-
-			<div className={styles.flex}>
-				<form onSubmit={handleSubmit(handleEditOperators, onError)}>
-					<div className={styles.content}>
-						{fields.map((field) => {
-							const show = !(field.name in showElements)
-							|| showElements[field.name];
-							const { ...rest } = field;
-							const Element = getElementController(rest.type);
-							return show ? (
-								<div className={styles.list}>
-									<h4>{field.label}</h4>
-									<Element
-										width="100%"
-										control={control}
-										{...rest}
-									/>
-									<div className={styles.error}>{errors[field.name]?.message}</div>
-								</div>
-							) : null;
-						})}
-					</div>
-					<div className={styles.button_container}>
-						<Button
-							onClick={handleSubmit(handleEditOperators, onError)}
-						>
-							{!loading ? 'Submit' : 'Submiting'}
-						</Button>
-					</div>
-				</form>
+		<Modal
+			show={edit}
+			onClose={() => { setEdit(false); }}
+			className={styles.modal_container}
+		>
+			<div className={styles.modal_header}>
+				Edit Operators
 			</div>
-
-		</div>
+			<Layout
+				fields={fields}
+				control={control}
+				errors={errors}
+				showElements={showElements}
+			/>
+			<div className={styles.modal_footer}>
+				<Button
+					size="md"
+					themeType="secondary"
+					disabled={loading}
+					style={{ marginRight: 12 }}
+					onClick={() => { setEdit(false); }}
+				>
+					Cancel
+				</Button>
+				<Button size="md" disabled={loading} onClick={handleSubmit(handleEditOperators)}>
+					Apply
+				</Button>
+			</div>
+		</Modal>
 	);
 }
 

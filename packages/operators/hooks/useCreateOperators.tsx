@@ -1,9 +1,6 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-import fields from '../configurations/controls';
 import CONSTANTS from '../constants/constants';
 
 const useCreateOperators = ({
@@ -11,26 +8,12 @@ const useCreateOperators = ({
 	refetch,
 	setPage,
 	setFinalList,
-	setShowLoading,
 	page,
 }) => {
-	const { control, watch, handleSubmit } = useForm();
-	const [errors, setErrors] = useState({});
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_operators',
 		method : 'POST',
 	});
-
-	const operatorType = watch('operator_type');
-
-	const showElements = {
-		iata_code          : operatorType === 'airline',
-		icao_code          : operatorType === 'airline',
-		airway_bill_prefix : operatorType === 'airline',
-		status             : false,
-		is_nvocc           : operatorType === 'shipping_line',
-	};
 
 	const handleCreateOperators = async (value) => {
 		let isNvocc;
@@ -49,7 +32,6 @@ const useCreateOperators = ({
 			Toast.success('Operators Added Successfully');
 			setFinalList([]);
 			setShow(false);
-			setShowLoading(true);
 			if (page === CONSTANTS.START_PAGE) {
 				refetch();
 			} else {
@@ -59,18 +41,10 @@ const useCreateOperators = ({
 			Toast.error(error?.data);
 		}
 	};
-	const onError = (errs = {}) => {
-		setErrors({ ...errs });
-	};
+
 	return {
-		control,
-		fields,
 		handleCreateOperators,
-		handleSubmit,
-		showElements,
 		loading,
-		onError,
-		errors,
 	};
 };
 export default useCreateOperators;

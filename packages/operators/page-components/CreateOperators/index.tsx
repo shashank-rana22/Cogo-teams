@@ -1,34 +1,41 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import getElementController from '../../hooks/getController';
+import Layout from '../../common/Layout';
+import fields from '../../configurations/controls';
 import useCreateOperators from '../../hooks/useCreateOperators';
 
 import styles from './styles.module.css';
 
 function CreateOperators({
+	show,
 	setShow,
 	refetch,
 	setPage,
 	setFinalList,
-	setShowLoading = () => {},
 	page,
 }) {
+	const { control, watch, handleSubmit, formState:{ errors } } = useForm();
+
+	const operatorType = watch('operator_type');
+
+	const showElements = {
+		iata_code          : operatorType === 'airline',
+		icao_code          : operatorType === 'airline',
+		airway_bill_prefix : operatorType === 'airline',
+		status             : false,
+		is_nvocc           : operatorType === 'shipping_line',
+	};
+
 	const {
 		handleCreateOperators,
-		control,
-		fields,
-		handleSubmit,
-		showElements,
-		onError,
-		errors,
 		loading,
 	} = useCreateOperators({
 		setShow,
 		refetch,
 		setPage,
 		setFinalList,
-		setShowLoading,
 		page,
 	});
 
@@ -39,41 +46,35 @@ function CreateOperators({
 	});
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>Create Operators</div>
-
-			<div className={styles.flex}>
-				<form onSubmit={handleSubmit(handleCreateOperators, onError)}>
-					<div className={styles.content}>
-						{fields.map((field) => {
-							const show = !(field.name in showElements)
-							|| showElements[field.name];
-							const { ...rest } = field;
-							const Element = getElementController(rest.type);
-							return show ? (
-								<div className={styles.list}>
-									<h4>{field.label}</h4>
-									<Element
-										width="100%"
-										control={control}
-										{...rest}
-									/>
-									<div className={styles.error}>{errors[field.name]?.message}</div>
-								</div>
-							) : null;
-						})}
-					</div>
-					<div className={styles.button_container}>
-						<Button
-							onClick={handleSubmit(handleCreateOperators, onError)}
-						>
-							{!loading ? 'Submit' : 'Submiting'}
-						</Button>
-					</div>
-				</form>
+		<Modal
+			show={show}
+			onClose={() => { setShow(false); }}
+			className={styles.modal_container}
+		>
+			<div className={styles.modal_header}>
+				Create Operators
 			</div>
-
-		</div>
+			<Layout
+				fields={fields}
+				control={control}
+				errors={errors}
+				showElements={showElements}
+			/>
+			<div className={styles.modal_footer}>
+				<Button
+					size="md"
+					themeType="secondary"
+					disabled={loading}
+					style={{ marginRight: 12 }}
+					onClick={() => { setShow(false); }}
+				>
+					Cancel
+				</Button>
+				<Button size="md" disabled={loading} onClick={handleSubmit(handleCreateOperators)}>
+					Apply
+				</Button>
+			</div>
+		</Modal>
 	);
 }
 

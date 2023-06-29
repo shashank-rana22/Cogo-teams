@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
@@ -80,36 +80,24 @@ function Operators() {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 			/>
-			<Modal
-				size="md"
+			<CreateOperators
 				show={show}
-				onClose={() => setShow(false)}
-			>
-				<CreateOperators
-					setShow={setShow}
-					refetch={getLocationData}
-					setPage={setPage}
-					setFinalList={setFinalList}
-					page={page}
-				/>
+				setShow={setShow}
+				refetch={getLocationData}
+				setPage={setPage}
+				setFinalList={setFinalList}
+				page={page}
+			/>
 
-			</Modal>
-
-			<Modal
-				size="md"
-				show={edit}
-				onClose={() => setEdit(false)}
-			>
-				<EditOperators
-					item={item}
-					edit={edit}
-					setEdit={setEdit}
-					refetch={getLocationData}
-					setPage={setPage}
-					setFinalList={setFinalList}
-					page={page}
-				/>
-			</Modal>
+			<EditOperators
+				item={item}
+				edit={edit}
+				setEdit={setEdit}
+				refetch={getLocationData}
+				setPage={setPage}
+				setFinalList={setFinalList}
+				page={page}
+			/>
 
 			<CardList
 				fields={activeTab === 'airline' ? airlineFields : shippingLineFields}
