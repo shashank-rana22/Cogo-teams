@@ -71,7 +71,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const refreshTicket = () => {
+	const refreshTickets = () => {
 		setListData({
 			items       : [],
 			page        : 0,
@@ -90,7 +90,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 
 	const { createTicketActivity = () => {}, createLoading = false } =		useCreateTicketActivity({
 		ticketId: modalData?.ticketId || '',
-		refreshTicket,
+		refreshTickets,
 		scrollToBottom,
 	});
 
@@ -130,7 +130,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
-						refreshTicket={refreshTicket}
+						refreshTickets={refreshTickets}
 					/>
 				)}
 			/>

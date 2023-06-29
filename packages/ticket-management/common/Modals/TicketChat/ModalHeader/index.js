@@ -7,14 +7,14 @@ import styles from './styles.module.css';
 
 function ModalHeader({
 	ticketData = {},
-	refreshTicket = () => {},
+	refreshTickets = () => {},
 	modalData,
 }) {
 	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
 	const { isClosureAuthorizer } = modalData || {};
 
 	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
-		refreshTicket,
+		refreshTickets,
 	});
 
 	const handleTicket = (e, val) => {
@@ -26,7 +26,7 @@ function ModalHeader({
 		<div className={styles.header_container}>
 			<div className={styles.tickets_header}>
 				<div className={styles.tickets_header_text}>Chat</div>
-				<IcMRefresh className={styles.refresh_icon} onClick={refreshTicket} />
+				<IcMRefresh className={styles.refresh_icon} onClick={refreshTickets} />
 			</div>
 			<TicketActions
 				isModal
