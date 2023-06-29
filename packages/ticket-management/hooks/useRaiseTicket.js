@@ -56,7 +56,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 		try {
 			await trigger({
 				data: getPayload({
-					id: profile?.id,
+					id: profile?.user?.id,
 					priority,
 					finalUrl,
 					selectedServices,
