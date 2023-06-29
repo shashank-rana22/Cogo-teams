@@ -9,14 +9,26 @@ export const STATUS_MAPPING = {
 	escalated         : 'escalated',
 };
 
-export const ACTION_KEYS = {
-	unresolved: {
-		label : 'Resolve',
-		name  : 'resolve',
+export const STATUS_TYPE_MAPPING = {
+	resolve: {
+		Status : 'resolved',
+		Type   : 'mark_as_resolved',
 	},
-	closed: {
-		label : 'Reopen',
-		name  : 'reopen',
+	resolve_requested: {
+		Status : 'resolve_requested',
+		Type   : 'resolve_requested',
+	},
+	approve: {
+		Status : 'resolved',
+		Type   : 'mark_as_resolved',
+	},
+	reject: {
+		Status : 'unresolved',
+		Type   : 'resolution_rejected',
+	},
+	reopen: {
+		Status : 'reopened',
+		Type   : 'reopened',
 	},
 };
 

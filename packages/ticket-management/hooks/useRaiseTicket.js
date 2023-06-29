@@ -5,17 +5,18 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	ADDITIONAL_DATA,
+	notify_customer, ADDITIONAL_DATA,
 }) => ({
-	UserID      : id,
-	Source      : 'admin',
-	Category    : '',
-	Subcategory : '',
-	Priority    : priority,
-	Usertype    : 'ticket_user',
-	Data        : { Attachment: [finalUrl] || [], ...selectedServices },
-	Type        : issue_type,
-	Description : additional_information,
+	UserID         : id,
+	Source         : 'admin',
+	Category       : '',
+	Subcategory    : '',
+	Priority       : priority,
+	Usertype       : 'ticket_user',
+	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
+	Type           : issue_type,
+	Description    : additional_information,
+	NotifyCustomer : notify_customer,
 	...ADDITIONAL_DATA,
 });
 
@@ -36,6 +37,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			user_id,
 			priority,
 			file_url,
+			notify_customer,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -60,6 +62,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					selectedServices,
 					issue_type,
 					additional_information,
+					notify_customer,
 					ADDITIONAL_DATA,
 				}),
 			});

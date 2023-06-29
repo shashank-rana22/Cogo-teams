@@ -81,6 +81,11 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			controllerType : 'uploader',
 			showOptional   : false,
 		},
+		{
+			label          : 'Notify customer',
+			name           : 'notify_customer',
+			controllerType : 'checkbox',
+		},
 	];
 };
 

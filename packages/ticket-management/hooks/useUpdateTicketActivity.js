@@ -2,28 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const STATUS_TYPE_MAPPING = {
-	resolve: {
-		Status : 'resolved',
-		Type   : 'mark_as_resolved',
-	},
-	resolve_requested: {
-		Status : 'resolve_requested',
-		Type   : 'resolve_requested',
-	},
-	approve: {
-		Status : 'resolved',
-		Type   : 'mark_as_resolved',
-	},
-	reject: {
-		Status : 'unresolved',
-		Type   : 'resolution_rejected',
-	},
-	reopen: {
-		Status : 'reopened',
-		Type   : 'reopened',
-	},
-};
+import { STATUS_TYPE_MAPPING } from '../constants';
 
 const getPayload = ({ profile, status, id }) => ({
 	UserType      : 'user',
