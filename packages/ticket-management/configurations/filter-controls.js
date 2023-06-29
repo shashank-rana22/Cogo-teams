@@ -39,7 +39,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			controllerType : 'select',
 			placeholder    : 'Select Organization',
 			isClearable    : true,
-			rules          : { required: true },
 			showOptional   : true,
 		},
 		{

@@ -13,6 +13,7 @@ const getPayload = ({ profile, status, id }) => ({
 
 const useUpdateTicketActivity = ({
 	refreshTicket = () => {},
+	fetchTickets = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
 
@@ -29,6 +30,7 @@ const useUpdateTicketActivity = ({
 			});
 
 			refreshTicket();
+			fetchTickets();
 			Toast.success('Ticket Status Updated Successfully!');
 		} catch (e) {
 			Toast.error(e?.response?.data || 'something went wrong');

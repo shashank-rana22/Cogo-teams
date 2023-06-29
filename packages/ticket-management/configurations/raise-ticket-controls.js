@@ -2,7 +2,7 @@ import { asyncFieldsTicketTypes } from '@cogoport/forms';
 
 import useGetAsyncTicketOptions from '../utils/useGetAsyncTicketOptions';
 
-const useRaiseTicketControls = () => {
+const useRaiseTicketControls = ({ searchParams }) => {
 	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
 
 	return (
@@ -14,6 +14,11 @@ const useRaiseTicketControls = () => {
 				required: 'This is Required',
 			},
 			...(loadOptions || {}),
+			params: {
+				filters: {
+					QFilter: searchParams,
+				},
+			},
 		}
 	);
 };

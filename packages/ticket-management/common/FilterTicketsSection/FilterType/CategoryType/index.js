@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function CategoryType(props) {
 	const { searchParams, setSearchParams, isAdmin } = props;
-	const raiseTicketControl = useRaiseTicketControls();
+	const raiseTicketControl = useRaiseTicketControls({ searchParams });
 	const ticketControlOption = raiseTicketControl?.options.map(
 		(item) => ({ value: item.TicketType, label: item.TicketType }),
 	);

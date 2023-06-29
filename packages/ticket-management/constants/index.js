@@ -36,7 +36,7 @@ export const TICKET_SECTION_MAPPING = {
 	Open: {
 		Statuses: 'unresolved',
 	},
-	Pending: {
+	'Closure Pending': {
 		Statuses: 'pending,reject_requested,resolve_requested',
 	},
 	Escalated: {
