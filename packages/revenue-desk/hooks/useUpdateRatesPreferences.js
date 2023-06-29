@@ -29,6 +29,7 @@ const useUpdateRatesPreferences = ({
 				priority                    : index + 1,
 				rate_id                     : provider?.rate_id,
 				id                          : provider?.id,
+				validity_id                 : provider?.validity_id,
 				booking_confirmation_status : data?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
 		});
@@ -64,7 +65,7 @@ const useUpdateRatesPreferences = ({
 		});
 
 		const final_payload = {
-			is_final                  : true,
+			is_confirmation_set_by_rd : true,
 			service_providers,
 			booking_confirmation_docs : bookingConformationDocs,
 			service_id                : service_id || undefined,

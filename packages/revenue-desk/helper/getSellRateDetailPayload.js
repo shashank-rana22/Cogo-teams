@@ -15,7 +15,7 @@ const getSellRateDetailPayload = ({
 				(rate) => rate.id === rate_id,
 			);
 			const rate = currentRate || systemRate || {};
-			const sellPrice = Number(rate?.rowData?.buy_price) * SELL_RATE_INCREASE_BY;
+			const sellPrice = Number(rate?.rowData?.price) * SELL_RATE_INCREASE_BY;
 			return {
 				basic_freight_rate : (Number(sellRates?.[rate_id]) || Number(sellPrice)),
 				priority           : index + 1,

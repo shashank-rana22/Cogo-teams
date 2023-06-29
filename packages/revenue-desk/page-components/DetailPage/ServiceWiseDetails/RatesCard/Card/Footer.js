@@ -115,8 +115,8 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					</div>
 					<div className={styles.price_value}>
 						{formatAmount({
-							amount   : data?.rowData?.total_buy_price,
-							currency : data?.rowData?.total_buy_currency,
+							amount   : data?.rowData?.total_price,
+							currency : data?.rowData?.currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -189,7 +189,7 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					>
 						{formatAmount({
 							amount   : data?.rowData?.profit,
-							currency : data?.rowData?.total_price_currency,
+							currency : data?.rowData?.currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',

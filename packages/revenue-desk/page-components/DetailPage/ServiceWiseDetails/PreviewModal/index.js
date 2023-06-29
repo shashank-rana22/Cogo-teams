@@ -12,7 +12,7 @@ function PreviewModal({
 	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger, priceData,
 }) {
 	const newFilteredGroupedShowServicesData = {};
-	const { data, loading } = useListShipmentCurrencyConversions({ shipmentData });
+	const { data } = useListShipmentCurrencyConversions({ shipmentData });
 
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
 		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(

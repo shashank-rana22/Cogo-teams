@@ -23,7 +23,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 	const [othertext, setOthertext] = useState(null);
 	const [sellRateDetails, setSellRateDetails] = useState({});
 	const [emailModal, setEmailModal] = useState(false);
-	const { loading, updateTrigger } = useUpdateRatesPreferences({
+	const { updateTrigger } = useUpdateRatesPreferences({
 		supplierPayload,
 		inventory,
 		serviceData,

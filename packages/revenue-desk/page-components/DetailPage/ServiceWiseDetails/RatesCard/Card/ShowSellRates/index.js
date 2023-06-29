@@ -9,10 +9,10 @@ function ShowSellRates({
 }) {
 	const { rowData = {}, id = '' } = data || {};
 
-	const { currency = '', buy_price = 0, sell_price_per_container = 0, sell_price_currency = '', api = '' } = rowData;
+	const { currency = '', price = 0, sell_price_per_container = 0, sell_price_currency = '', api = '' } = rowData;
 
 	const sellPrice = api === 'showed_rates' ? Number(sell_price_per_container) * Number(SELL_RATE_INCREASE_BY)
-		: Number(buy_price) * Number(SELL_RATE_INCREASE_BY);
+		: Number(price) * Number(SELL_RATE_INCREASE_BY);
 	return (
 		<div>
 			{api ? 	(

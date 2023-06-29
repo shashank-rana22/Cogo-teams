@@ -24,10 +24,11 @@ function Card({
 		} else {
 			const newList = prefrences?.[serviceData?.id] || [];
 			newList.push({
-				rate_id : rate?.id,
-				id      : rate?.rowData?.service_provider?.id,
-				key     : prefrence_key,
-				data    : rate,
+				rate_id     : rate?.id,
+				id          : rate?.rowData?.service_provider_id,
+				key         : prefrence_key,
+				data        : rate,
+				validity_id : rate?.validities?.[0]?.id,
 			});
 			setPrefrences({ ...prefrences, [serviceData?.id]: [...newList] });
 		}
