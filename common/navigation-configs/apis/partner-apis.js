@@ -5023,7 +5023,7 @@ const partner = {
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'payment',
+			service_name : 'partner',
 		},
 	],
 	condition: [
@@ -8006,8 +8006,9 @@ const partner = {
 			feature     : 'Expenses',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'list_organization_trade_parties',
@@ -8075,8 +8076,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_shipment_cost_sheet',
@@ -8207,10 +8209,11 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
-			module      : 'Dashboard',
-			feature     : 'Dashboard',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			module       : 'Dashboard',
+			feature      : 'Dashboard',
+			service_name : 'partner',
 		},
 
 		{
@@ -8599,8 +8602,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_payments_parent_jv_gl_code_master',
@@ -8641,8 +8645,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
@@ -9638,7 +9643,7 @@ const partner = {
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'segmentation',
+			service_name : 'partner',
 		},
 		{
 			api          : 'list_partners',
