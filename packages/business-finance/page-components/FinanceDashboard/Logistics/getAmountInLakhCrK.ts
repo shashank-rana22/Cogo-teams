@@ -1,4 +1,4 @@
-const getAmountInLakhCrK = (value:number, currency:string) => {
+const getAmountInLakhCrK = (value?: number, currency?: string) => {
 	const val = value;
 
 	let formatedAmount = '';
@@ -19,7 +19,7 @@ const getAmountInLakhCrK = (value:number, currency:string) => {
 		formatedAmount = `${(val / 1000).toFixed(2)} K`;
 	}
 
-	return `${currency || 'INR'} ${formatedAmount}`;
+	return `${currency} ${formatedAmount}`;
 };
 
 export { getAmountInLakhCrK };

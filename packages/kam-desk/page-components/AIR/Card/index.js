@@ -9,6 +9,7 @@ import {
 	Header,
 	SingleLocation,
 } from '../../../common/ShipmentCard';
+import CONSTANTS from '../../../config/constants.json';
 import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
@@ -17,7 +18,8 @@ function Card({ data = {} }) {
 	const router = useRouter();
 
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;

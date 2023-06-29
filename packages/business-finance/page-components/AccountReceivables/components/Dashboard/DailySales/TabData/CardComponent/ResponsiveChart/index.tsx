@@ -76,6 +76,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						options : {
 							currencyDisplay : 'code',
 							style           : 'currency',
+
 						},
 					})}
 					axisTop={null}
@@ -101,6 +102,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 							options : {
 								currencyDisplay : 'code',
 								style           : 'currency',
+								notation        : 'compact',
+								compactDisplay  : 'short',
 							},
 						}),
 					}}

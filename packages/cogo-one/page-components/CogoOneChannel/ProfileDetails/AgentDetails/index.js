@@ -1,20 +1,25 @@
-import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
+import { Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { getHasAccessToEditGroup } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
-import hideDetails from '../../../../utils/hideDetails';
+import useGroupChat from '../../../../hooks/useGroupChat';
+import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
+import AddGroupMember from './AddGroupMember';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
+import GroupMembers from './GroupMembers';
+import GroupMembersRequests from './GroupMembersRequests';
+import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const LINK_BEFORE_QUERY_PARAMS = 0;
-
 function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
@@ -29,7 +34,18 @@ function AgentDetails({
 	setActiveSelect = () => {},
 	setShowMore = () => {},
 	hasVoiceCallAccess = false,
+	firestore,
+	userId: agentId,
+	viewType,
 }) {
+	const [showAddNumber, setShowAddNumber] = useState(false);
+	const [profileValue, setProfilevalue] = useState({
+		name         : '',
+		country_code : '+91',
+		number       : '',
+	});
+	const [showError, setShowError] = useState(false);
+
 	const {
 		user_id,
 		lead_user_id,
@@ -40,15 +56,26 @@ function AgentDetails({
 		sender,
 		channel_type = '',
 		user_type, id = '',
+		session_type = '',
+		account_type,
 	} = formattedMessageData || {};
 
-	const [showAddNumber, setShowAddNumber] = useState(false);
-	const [profileValue, setProfilevalue] = useState({
-		name         : '',
-		country_code : '+91',
-		number       : '',
+	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
+
+	const {
+		deleteGroupMember,
+		approveGroupRequest,
+		deleteGroupRequest,
+		addGroupMember,
+	} = useGroupChat({ activeMessageCard, firestore });
+
+	const hasAccessToEditGroup = getHasAccessToEditGroup({
+		sessionType : session_type,
+		accountType : account_type,
+		activeMessageCard,
+		agentId,
+		viewType,
 	});
-	const [showError, setShowError] = useState(false);
 
 	const {
 		user_data = {},
@@ -97,7 +124,6 @@ function AgentDetails({
 			prefixIcon : <IcCWhatsapp />,
 		},
 	];
-
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
 			await leadUserProfile({ profileValue });
@@ -118,6 +144,7 @@ function AgentDetails({
 		setShowMore(true);
 		setActiveSelect('user_activity');
 	};
+
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
 			<>
@@ -152,40 +179,7 @@ function AgentDetails({
 					</div>
 				)}
 			</div>
-			<div className={styles.content}>
-				<Avatar
-					src="https://www.w3schools.com/howto/img_avatar.png"
-					alt="img"
-					disabled={false}
-					className={styles.user_div}
-				/>
-
-				<div className={styles.details}>
-					{loading ? (
-						<>
-							<Placeholder
-								height="13px"
-								width="120px"
-								margin="0px 0px 10px 0px"
-							/>
-							<Placeholder
-								height="13px"
-								width="120px"
-								margin="0px 0px 0px 0px"
-							/>
-						</>
-					) : (
-						<>
-							<div className={styles.name}>
-								{name || 'unknown user'}
-							</div>
-							<div className={styles.email}>
-								{userEmail ? hideDetails({ data: userEmail, type: 'mail' }) : ''}
-							</div>
-						</>
-					)}
-				</div>
-			</div>
+			<Profile loading={loading} name={name} userEmail={userEmail} />
 			{(leadUserId || userId) && (
 				<div className={styles.verification_pills}>
 					{VERIFICATION_STATUS.map((item, index) => {
@@ -232,6 +226,20 @@ function AgentDetails({
 					hasVoiceCallAccess={hasVoiceCallAccess}
 				/>
 			)}
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
+			<GroupMembersRequests
+				deleteGroupRequest={deleteGroupRequest}
+				approveGroupRequest={approveGroupRequest}
+				groupMembers={activeMessageCard.requested_group_members}
+				partnerUsers={partnerUsers}
+				hasAccessToEditGroup={hasAccessToEditGroup}
+			/>
+			<GroupMembers
+				deleteGroupMember={deleteGroupMember}
+				groupMembers={activeMessageCard?.group_members}
+				partnerUsers={partnerUsers}
+				hasAccessToEditGroup={hasAccessToEditGroup}
+			/>
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
