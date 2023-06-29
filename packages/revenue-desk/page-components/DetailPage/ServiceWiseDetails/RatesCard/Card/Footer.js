@@ -7,7 +7,6 @@ import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, prefrence_key }) {
-	console.log(data,';data');
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const showValidity = (item) => {
 		if (item?.rowData?.is_rate_expired) {
