@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
 import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
+import useGetAsyncTicketOptions from '../../../hooks/useGetAsyncTicketOptions';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -42,6 +43,7 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncFieldsTicketTypes,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -102,6 +104,7 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
 };
 
 function AsyncSelect(props) {
@@ -114,14 +117,17 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		service,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = (microService || defaultParams.microService)
+	const microServiceAsyncOptionsHook = (microService || defaultParams.microService)
 		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
+
+	const asyncOptionsHook = service === 'tickets' ? useGetAsyncTicketOptions : microServiceAsyncOptionsHook;
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
