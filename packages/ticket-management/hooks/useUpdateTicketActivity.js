@@ -12,7 +12,7 @@ const getPayload = ({ profile, status, id }) => ({
 });
 
 const useUpdateTicketActivity = ({
-	refreshTicket = () => {},
+	refreshTickets = () => {},
 	fetchTickets = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
@@ -29,7 +29,7 @@ const useUpdateTicketActivity = ({
 				data: getPayload({ profile, status, id }),
 			});
 
-			refreshTicket();
+			refreshTickets();
 			fetchTickets();
 			Toast.success('Ticket Status Updated Successfully!');
 		} catch (e) {
