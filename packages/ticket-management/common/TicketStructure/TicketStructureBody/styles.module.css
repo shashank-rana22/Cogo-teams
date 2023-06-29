@@ -26,6 +26,12 @@
 .subcontainer_header {
 	display: flex;
 	justify-content: space-between;
+
+	:global {
+		.ui_button_container {
+			height: 16px;
+		}
+	}
 }
 
 .ticket_id {
