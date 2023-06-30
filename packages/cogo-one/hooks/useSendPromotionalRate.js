@@ -25,7 +25,7 @@ function useSendPromotionalRate({ activeMessageCard = {} }) {
 			await trigger({
 				data: getPayload({ activeMessageCard }),
 			});
-			Toast.success('Promotional Rate Send Sucessfully');
+			Toast.success('Promotional Rate Sent Sucessfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
