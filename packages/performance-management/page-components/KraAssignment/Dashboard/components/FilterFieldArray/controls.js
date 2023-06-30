@@ -1,4 +1,12 @@
 const getControls = (watchTribeId) => {
+	const params = {
+		filters: {
+			status               : 'active',
+			partner_entity_types : ['cogoport'],
+		},
+		page_limit: 100,
+	};
+
 	const controlItems = {
 		name     : 'single_item',
 		type     : 'fieldArray',
@@ -11,13 +19,7 @@ const getControls = (watchTribeId) => {
 				placeholder : 'Select',
 				initialCall : true,
 				isClearable : true,
-				params      : {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 			{
 				name        : 'tribe_id',
@@ -27,14 +29,7 @@ const getControls = (watchTribeId) => {
 				placeholder : 'Select',
 				isClearable : true,
 				initialCall : true,
-				params      : {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 
 			{
@@ -47,12 +42,11 @@ const getControls = (watchTribeId) => {
 				disabled    : !watchTribeId,
 				isClearable : true,
 				params      : {
+					...params,
 					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-						tribe_id             : watchTribeId,
+						...params.filters,
+						tribe_id: watchTribeId,
 					},
-					page_limit: 100,
 				},
 			},
 		],
