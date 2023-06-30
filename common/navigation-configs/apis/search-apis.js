@@ -475,7 +475,7 @@ const apis = [
 		feature     : 'controlled checkout',
 	},
 	{
-		api          : 'get_recent_search_locations',
+		api          : 'get_spot_search_location_recommendations',
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
