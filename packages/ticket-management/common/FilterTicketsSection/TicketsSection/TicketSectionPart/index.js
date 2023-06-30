@@ -19,6 +19,8 @@ function TicketsSectionPart({
 		updated,
 	});
 
+	const { list, total = 0 } = tickets || {};
+
 	const refreshTickets = () => {
 		setRefreshList((prev) => {
 			const NEW_STATE = {};
@@ -34,8 +36,6 @@ function TicketsSectionPart({
 		fetchTickets,
 	});
 
-	const { list, total = 0 } = tickets || {};
-
 	return (
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
 			{listLoading ? <TicketStructureLoader /> : (
@@ -47,10 +47,8 @@ function TicketsSectionPart({
 					<TicketStructure
 						data={list}
 						label={label}
-						// loading={listLoading}
 						setModalData={setModalData}
 						handleScroll={handleScroll}
-						// refreshTickets={refreshTickets}
 						updateTicketActivity={updateTicketActivity}
 					/>
 

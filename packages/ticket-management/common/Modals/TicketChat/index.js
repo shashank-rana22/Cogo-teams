@@ -15,7 +15,7 @@ import TicketSummary from './TicketSummary';
 
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
-const SET_DEFAULT_TIMEOUT = 1;
+const DEFAULT_TIMEOUT = 1;
 
 const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
 	if (!ticketExists) {
@@ -71,6 +71,8 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		ticketId: modalData?.ticketId || '',
 	});
 
+	const isEmptyChat = isEmpty(listData?.items || {});
+
 	const refreshTickets = () => {
 		setListData({
 			items       : [],
@@ -83,16 +85,18 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		setUpdated(true);
 		setTimeout(() => {
 			setUpdated(false);
-		}, SET_DEFAULT_TIMEOUT);
+		}, DEFAULT_TIMEOUT);
 	};
 
-	const isEmptyChat = isEmpty(listData?.items || {});
-
-	const { createTicketActivity = () => {}, createLoading = false } =		useCreateTicketActivity({
+	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({
 		ticketId: modalData?.ticketId || '',
 		refreshTickets,
 		scrollToBottom,
 	});
+
+	const ticketExists = typeof ticketData === 'object' || false;
+
+	const loading = chatLoading || createLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -112,10 +116,6 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 			scrollToBottom();
 		}
 	};
-
-	const ticketExists = typeof ticketData === 'object' || false;
-
-	const loading = chatLoading || createLoading;
 
 	useEffect(() => {
 		if (!isEmptyChat) {
