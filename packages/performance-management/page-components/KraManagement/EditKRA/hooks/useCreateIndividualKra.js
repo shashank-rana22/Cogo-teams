@@ -2,12 +2,16 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 const DEFAULT_TARGET_VALUE = 0;
 
-function useCreateIndividualKra() {
+function useCreateIndividualKra({ data: createKraData }) {
 	const { user = {} } = useSelector((state) => state?.profile);
+
+	const [valuesIndividualKRA, setValuesIndividualKRA] = useState();
+
+	const [ratingInfo, setRatingInfo] = useState();
 
 	const { id: user_id } = user;
 
@@ -16,15 +20,20 @@ function useCreateIndividualKra() {
 		method : 'POST',
 	}, { manual: true });
 
-	const createIndividualKra = useCallback(async (valuesIndividualKRA) => {
-		const objData = valuesIndividualKRA?.map((item) => (
-			{
-				employee_id                    : item?.employee_id,
-				kra_id                         : item?.kra_id,
-				target_value                   : item?.target_value || DEFAULT_TARGET_VALUE,
-				is_value_entered_in_percentage : item?.selected_value_type === 'percentage',
-			}
-		));
+	useEffect(() => {
+		setValuesIndividualKRA(createKraData);
+		setRatingInfo();
+	}, [createKraData]);
+
+	const getPayload = (values) => values?.map((item) => ({
+		employee_id                    : item?.employee_id,
+		kra_id                         : item?.kra_id,
+		target_value                   : item?.target_value || DEFAULT_TARGET_VALUE,
+		is_value_entered_in_percentage : item?.selected_value_type === 'percentage',
+	}));
+
+	const createIndividualKra = useCallback(async (values) => {
+		const objData = getPayload(values);
 
 		try {
 			await trigger({
@@ -49,6 +58,10 @@ function useCreateIndividualKra() {
 		data,
 		loading,
 		createIndividualKra,
+		valuesIndividualKRA,
+		setValuesIndividualKRA,
+		ratingInfo,
+		setRatingInfo,
 	};
 }
 
