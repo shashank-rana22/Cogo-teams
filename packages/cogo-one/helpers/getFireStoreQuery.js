@@ -26,7 +26,7 @@ function getFireStoreQuery({
 		if (item === 'channels') {
 			queryFilters = [
 				...queryFilters,
-				where('channel_type', '==', appliedFilters[item]),
+				where('channel_type', 'in', appliedFilters[item]),
 			];
 		} else if (item === 'status') {
 			if (appliedFilters[item] === 'unread') {
@@ -92,6 +92,7 @@ function getFireStoreQuery({
 		...queryFilters,
 		orderBy('new_message_sent_at', 'desc'),
 	];
+	console.log('firestoreQuery', firestoreQuery);
 
 	return firestoreQuery;
 }

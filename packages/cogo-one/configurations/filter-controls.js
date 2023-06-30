@@ -38,9 +38,10 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Channels',
 			name           : 'channels',
-			controllerType : 'radio',
+			controllerType : 'checkboxgroup',
 			className      : 'channels_field_controller',
-			value          : '',
+			multiple       : true,
+			value          : [],
 			options        : [
 				{ label: 'Whatsapp', value: 'whatsapp' },
 				{ label: 'Platform Chat', value: 'platform_chat' },
