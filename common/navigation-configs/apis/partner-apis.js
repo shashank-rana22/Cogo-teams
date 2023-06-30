@@ -905,6 +905,36 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'check_partner_user_offboarding_eligibility',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partner_user_taggings',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'offboard_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_taggings',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'transfer_partner_user_accounts',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'transfer_partner_user_shipments',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'get_partner_user_rm_mapping',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -5023,7 +5053,7 @@ const partner = {
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'payment',
+			service_name : 'partner',
 		},
 	],
 	condition: [
@@ -8006,8 +8036,9 @@ const partner = {
 			feature     : 'Expenses',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'list_organization_trade_parties',
@@ -8075,8 +8106,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_shipment_cost_sheet',
@@ -8207,10 +8239,11 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
-			module      : 'Dashboard',
-			feature     : 'Dashboard',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			module       : 'Dashboard',
+			feature      : 'Dashboard',
+			service_name : 'partner',
 		},
 
 		{
@@ -8599,8 +8632,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'get_payments_parent_jv_gl_code_master',
@@ -8641,8 +8675,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
@@ -9638,7 +9673,7 @@ const partner = {
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'segmentation',
+			service_name : 'partner',
 		},
 		{
 			api          : 'list_partners',
