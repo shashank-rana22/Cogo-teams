@@ -3,35 +3,31 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
 
 import formatDeadlineDate from './formatDeadlineDate';
+import getTaskDisplayName from './helpers/getTaskDisplayName';
 import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
 	isTaskOpen = false,
 }) {
-	const { servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
-	const requiredServiceArr = [];
+	const REQUIRED_SERVICE_ARR = [];
 	(task.task_field_ids || []).forEach((id) => {
 		(servicesList || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
-				requiredServiceArr.push(serviceObj);
+				REQUIRED_SERVICE_ARR.push(serviceObj);
 			}
 		});
 	});
-	let taskName = startCase(task?.label || task?.task);
 
-	if (task?.service_type === 'subsidiary_service') {
-		taskName = `Mark ( ${requiredServiceArr?.[0]?.service_name} ) ${
-			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
-		}` || 	startCase(task?.label) || startCase(task?.task);
-	}
+	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR });
 
 	return (
 		<div className={styles.container}>
@@ -118,7 +114,7 @@ function TaskDetails({
 
 				{!isTaskOpen && task?.service_type ? (
 					<div className={styles.cargo_details}>
-						<CargoDetails primary_service={requiredServiceArr?.[0] || {}} />
+						<CargoDetails primary_service={REQUIRED_SERVICE_ARR?.[GLOBAL_CONSTANTS.zeroth_index] || {}} />
 					</div>
 				) : null}
 			</div>
