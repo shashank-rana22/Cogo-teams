@@ -53,7 +53,6 @@ function FilterModal({ filters, setFilters }: Props) {
 		setCurrencies([]);
 		setShowModal(false);
 	};
-	console.log(filters?.currency?.length, 'filters');
 	const checkFilterCurrencyLength = filters?.currency?.length > 0;
 	return (
 		<div className={styles.modal_container}>
@@ -115,7 +114,7 @@ function FilterModal({ filters, setFilters }: Props) {
 							<div className={styles.select_input}>
 								<MultiSelect
 									value={filters?.currency}
-									onChange={(val:string) => setFilters({ currency: val })}
+									onChange={(val:string[]) => setFilters({ currency: val })}
 									placeholder="select currency"
 									options={getCurrencyOptions()}
 									size="md"

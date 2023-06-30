@@ -54,7 +54,6 @@ function MyResponsiveBar({ data }) {
 				axisBottom={{
 					tickSize    : 0,
 					tickPadding : 10,
-					// tickRotation : -10,
 				}}
 				axisLeft={{
 					tickSize     : 0,
