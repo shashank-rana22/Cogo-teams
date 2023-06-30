@@ -73,13 +73,6 @@ function TrackingInfo({ data = [], tripInfo = {} }) {
 									km
 								</div>
 							)}
-							{tripInfo?.truck_number && (
-								<div className={cl`${styles.Info} ${styles.weight}`}>
-									Truck Number :
-									{' '}
-									{tripInfo.truck_number}
-								</div>
-							)}
 							<div className={cl`${styles.Info} ${styles.date}`}>
 								{item?.event_date || item?.actual_date
 									? format(

@@ -59,7 +59,12 @@ function FtlTracker({
 	const disabledButton = DISABLED_STATE.includes(servicesData.state);
 
 	useEffect(() => {
-		if (startTruckTracker) setValue('mobile_number', mobileNumber);
+		if (startTruckTracker) {
+			setValue(
+				'mobile_number',
+				mobileNumber ? Number(mobileNumber) : undefined,
+			);
+		}
 	}, [startTruckTracker, servicesData, mobileNumber, setValue]);
 
 	const content = (

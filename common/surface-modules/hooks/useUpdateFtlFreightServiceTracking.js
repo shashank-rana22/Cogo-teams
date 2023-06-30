@@ -28,7 +28,7 @@ const useUpdateFtlFreightServiceTracking = () => {
 					serial_id               : serialId ? serialId.toString() : undefined,
 					origin_location_id      : servicesData?.origin_location_id,
 					destination_location_id : servicesData.destination_location_id,
-					mobile_number           : values.mobile_number,
+					mobile_number           : values.mobile_number ? values.mobile_number.toString() : undefined,
 					service_provider_id     : servicesData.service_provider_id,
 					refresh,
 					trip_id                 : servicesData.trip_id ? servicesData.trip_id : undefined,
