@@ -29,6 +29,5 @@
 
 .button {
 	width: 40%;
-	margin-top: 16px;
-	margin-left: 4px;
+	margin: 16px 0 0 4px;
 }
