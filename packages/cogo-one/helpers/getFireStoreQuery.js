@@ -92,7 +92,6 @@ function getFireStoreQuery({
 		...queryFilters,
 		orderBy('new_message_sent_at', 'desc'),
 	];
-	console.log('firestoreQuery', firestoreQuery);
 
 	return firestoreQuery;
 }

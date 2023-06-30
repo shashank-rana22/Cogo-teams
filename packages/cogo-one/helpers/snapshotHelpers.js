@@ -46,7 +46,7 @@ export function mountFlashChats({
 	omniChannelCollection,
 	flashMessagesSnapShotListener,
 	viewType,
-	setCarouselState,
+	setCarouselState, updateLoadingState,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
@@ -70,12 +70,7 @@ export function mountFlashChats({
 			(querySnapshot) => {
 				const { resultList } = dataFormatter(querySnapshot);
 				setFlashMessagesData(resultList);
-				setLoadingState((p) => {
-					if (p?.flashMessagesLoading) {
-						return { ...p, flashMessagesLoading: false };
-					}
-					return p;
-				});
+				updateLoadingState('flashMessagesLoading');
 				setCarouselState((p) => {
 					if (p === 'in_timeout') {
 						return p;
@@ -86,21 +81,14 @@ export function mountFlashChats({
 
 		);
 	} catch (error) {
-		console.log('error', error);
-	} finally {
-		setLoadingState((p) => {
-			if (p?.flashMessagesLoading) {
-				return { ...p, flashMessagesLoading: false };
-			}
-			return p;
-		});
+		updateLoadingState('flashMessagesLoading');
 	}
 }
 
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab,
+	activeSubTab, updateLoadingState,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
@@ -124,12 +112,7 @@ export function mountPinnedSnapShot({
 		(pinSnapShot) => {
 			const { resultList } = dataFormatter(pinSnapShot);
 			setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
-			setLoadingState((p) => {
-				if (p?.pinnedChatsLoading) {
-					return { ...p, pinnedChatsLoading: false };
-				}
-				return p;
-			});
+			updateLoadingState('pinnedChatsLoading');
 		},
 	);
 }
@@ -162,7 +145,7 @@ export function mountUnreadCountSnapShot({
 
 export function mountSnapShot({
 	setLoadingState, setListData, snapshotListener, omniChannelCollection,
-	queryForSearch, omniChannelQuery,
+	queryForSearch, omniChannelQuery, updateLoadingState,
 }) {
 	const snapshotRef = snapshotListener;
 	setListData((p) => ({ ...p, messagesListData: {}, pinnedMessagesData: {} }));
@@ -189,12 +172,7 @@ export function mountSnapShot({
 				isLastPage,
 				lastMessageTimeStamp,
 			}));
-			setLoadingState((p) => {
-				if (p?.chatsLoading) {
-					return { ...p, chatsLoading: false };
-				}
-				return p;
-			});
+			updateLoadingState('chatsLoading');
 		},
 	);
 }
@@ -204,6 +182,7 @@ export async function getPrevChats({
 	omniChannelQuery, listData,
 	setLoadingState,
 	setListData,
+	updateLoadingState,
 }) {
 	const prevChatsQuery = query(
 		omniChannelCollection,
@@ -233,13 +212,7 @@ export async function getPrevChats({
 		isLastPage,
 		lastMessageTimeStamp,
 	}));
-
-	setLoadingState((p) => {
-		if (p?.chatsLoading) {
-			return { ...p, chatsLoading: false };
-		}
-		return p;
-	});
+	updateLoadingState('chatsLoading');
 }
 
 export function mountActiveRoomSnapShot({

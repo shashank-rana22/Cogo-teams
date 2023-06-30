@@ -11,7 +11,6 @@
 	font-weight: 600;
 }
 
-
 .empty_state {
 	display: flex;
 	align-items: center;
@@ -44,7 +43,6 @@
 	overflow-y: auto;
 	transition: height 0.5s ease;
 }
-
 
 .list_container::-webkit-scrollbar {
 	display: none;
@@ -149,4 +147,3 @@
 	color: #828282;
 	user-select: none;
 }
-

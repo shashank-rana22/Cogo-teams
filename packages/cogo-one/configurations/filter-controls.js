@@ -161,8 +161,7 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_filters?.[activeSubTab] || []),
 	];
 
-	const newControls = controls.filter((item) => ACCESIBLE_FILTERS.includes(item.name));
-	return newControls;
+	return controls.filter((item) => ACCESIBLE_FILTERS.includes(item.name)) || [];
 };
 
 export default useGetControls;

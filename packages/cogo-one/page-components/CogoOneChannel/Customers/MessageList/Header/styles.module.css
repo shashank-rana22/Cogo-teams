@@ -22,15 +22,15 @@
 
 .active_tab_styles {
 	width: 34%;
-	border: 1px solid #EE3425;
+	border: 1px solid #ee3425;
 
-	text{
+	text {
 		display: block;
-		color: #EE3425;
+		color: #ee3425;
 	}
 
-	svg{
-		fill:#EE3425;
+	svg {
+		fill: #ee3425;
 	}
 }
 
@@ -40,8 +40,8 @@
 
 .label {
 	display: none;
-	font-size: 12px;
 	margin-left: 5px;
+	font-size: 12px;
 }
 
 .parent_tab_div {
@@ -102,7 +102,6 @@
 	align-items: center;
 	width: calc(100% - 44px);
 }
-
 
 .styled_popover {
 	padding: 0;

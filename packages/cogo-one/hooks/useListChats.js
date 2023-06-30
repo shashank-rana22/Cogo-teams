@@ -92,14 +92,30 @@ function useListChats({
 		}
 	}, [firestore, setActiveTab]);
 
+	const updateLoadingState = useCallback((key) => {
+		setLoadingState((p) => {
+			if (p?.[key]) {
+				return { ...p, [key]: false };
+			}
+			return p;
+		});
+	}, []);
+
 	const handleScroll = useCallback((e) => {
 		const reachBottom = e.target.scrollHeight - (e.target.clientHeight
 			+ e.target.scrollTop) <= MAX_DISTANCE_FROM_BOTTOM;
 
 		if (reachBottom && !listData?.isLastPage && !loadingState?.chatsLoading) {
-			getPrevChats({ omniChannelCollection, omniChannelQuery, listData, setLoadingState, setListData });
+			getPrevChats({
+				omniChannelCollection,
+				omniChannelQuery,
+				listData,
+				setLoadingState,
+				setListData,
+				updateLoadingState,
+			});
 		}
-	}, [listData, omniChannelCollection, omniChannelQuery, loadingState?.chatsLoading]);
+	}, [listData, omniChannelCollection, omniChannelQuery, loadingState?.chatsLoading, updateLoadingState]);
 
 	const { sortedPinnedChatList, sortedUnpinnedList } = sortChats(listData, userId);
 
@@ -119,12 +135,14 @@ function useListChats({
 			omniChannelQuery,
 			viewType,
 			activeSubTab,
+			updateLoadingState,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab]);
+	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab,
+		updateLoadingState]);
 
 	useEffect(() => {
 		mountSnapShot({
@@ -134,11 +152,12 @@ function useListChats({
 			omniChannelCollection,
 			queryForSearch,
 			omniChannelQuery,
+			updateLoadingState,
 		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState]);
 
 	useEffect(() => {
 		mountFlashChats({
@@ -148,11 +167,12 @@ function useListChats({
 			flashMessagesSnapShotListener,
 			viewType,
 			setCarouselState,
+			updateLoadingState,
 		});
 		return () => {
 			snapshotCleaner({ ref: flashMessagesSnapShotListener });
 		};
-	}, [omniChannelCollection, viewType, setCarouselState]);
+	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState]);
 
 	return {
 		chatsData: {
