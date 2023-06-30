@@ -6,17 +6,20 @@ import {
 	asyncFieldsPartner,
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useState } from 'react';
 
 import { controlsFeedbacks, controlsRequests } from './controls';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function Filters({
 	pageFilters = {},
 	onChangeFilters = () => {},
 	activeTab = '',
 }) {
-	const [date, setDate] = useState();
+	const [date, setDate] = useState({});
 
 	const cogoEntityOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
@@ -37,16 +40,26 @@ function Filters({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
 		valueKey    : 'user_id',
+		params      : {
+			filters: {
+				status     : 'active',
+				partner_id : geo.uuid.parent_entity_id,
+			},
+			page_limit: 100,
+		},
 	});
 
 	const kamOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),
 		initialCall : false,
+		valueKey    : 'user_id',
 		params      : {
 			filters: {
 				status               : 'active',
+				partner_id           : geo.uuid.parent_entity_id,
 				reporting_manager_id : pageFilters?.manager_id || undefined,
 			},
+			page_limit: 100,
 		},
 	});
 
@@ -84,6 +97,7 @@ function Filters({
 					className={styles.time}
 					value={date}
 					isPreviousDaysAllowed
+					maxDate={new Date()}
 					onChange={(val) => {
 						onChangeFilters({
 							created_at_greater_than : val.startDate || undefined,

@@ -1,7 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
 
 import useUpdateBookingPreferences
 	from '../../../../../../../hooks/useUpdateBookingPreferences';
@@ -39,14 +38,10 @@ function Card({
 	serviceProvidersData = [],
 	task = {},
 }) {
-	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
+	const { data, source } = item;
+	const dataArr = Array.isArray(data) ? data : [data];
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
-
-	const keysForArr = useMemo(
-		() => Array(dataArr.length).fill(null).map(() => Math.random()),
-		[dataArr.length],
-	);
 
 	const handleProceed = async () => {
 		const service_providers = serviceProvidersData;
@@ -70,71 +65,114 @@ function Card({
 					</div>
 
 					<div className={styles.priority_text}>
-						{`${startCase(item.source)} Booking Note`}
+						{`${startCase(source)} Booking Note`}
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.body}>
-				{(dataArr || []).map((dataObj, index) => (
-					<div className={styles.space_between} key={keysForArr[index]}>
-						<div>
-							<div className={styles.heading}>Supplier Name</div>
-
-							<div className={styles.sub_heading}>
-								{dataObj?.service_provider?.business_name}
+				{(dataArr || []).map((dataObj) => {
+					const {
+						chargeable_weight: dataChargeableWeight,
+						price_type,
+						rate_procurement_proof_url,
+					} = dataObj?.data || {};
+					const {
+						hs_code,
+						commodity_description,
+						chargeable_weight,
+						is_minimum_price_shipment,
+					} = dataObj?.service || {};
+					return (
+						<div className={styles.space_between} key={dataObj?.id}>
+							<div>
+								<div className={styles.heading}>Supplier Name</div>
+								<Tooltip
+									content={dataObj?.service_provider?.business_name}
+									placement="top"
+								>
+									<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+										{dataObj?.service_provider?.business_name}
+									</div>
+								</Tooltip>
 							</div>
-						</div>
-						<div>
-							<div className={styles.heading}>Carrier</div>
-							<div className={styles.sub_heading}>
-								{dataObj?.operator?.business_name
-											|| dataObj?.airline?.business_name}
+							<div>
+								<div className={styles.heading}>Airline</div>
+								<div className={styles.sub_heading}>
+									{source === 'system_rate'
+										? dataObj?.airline?.business_name || '-'
+										: dataObj?.reverted_airline?.business_name || '-'}
+								</div>
 							</div>
-						</div>
-						{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
-							<>
-								<div>
-									<div className={styles.heading}>Chargeable Wt.</div>
-									<div className={styles.sub_heading}>
-										{`${
-											dataObj?.data?.chargeable_weight
-													|| dataObj?.service?.chargeable_weight
+							{source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+								<>
+									<div>
+										<div className={styles.heading}>Chargeable Wt.</div>
+										<div className={styles.sub_heading}>
+											{`${
+												dataChargeableWeight
+													|| chargeable_weight
 													|| '--'
-										} Kg`}
+											} Kg`}
+										</div>
 									</div>
-								</div>
-								<div>
-									<div className={styles.heading}>Price Type</div>
-									<div className={styles.sub_heading}>
-										{startCase(dataObj?.data?.price_type) || '--'}
+									{commodity_description && (
+										<div>
+											<div className={styles.heading}>Commodity Desc.</div>
+											<Tooltip
+												content={commodity_description}
+												placement="top"
+											>
+												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+													{commodity_description}
+												</div>
+											</Tooltip>
+										</div>
+									)}
+									{hs_code &&	(
+										<div>
+											<div className={styles.heading}>HS Code</div>
+											<Tooltip
+												content={hs_code}
+												placement="top"
+											>
+												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+													{hs_code}
+												</div>
+											</Tooltip>
+										</div>
+									)}
+									<div>
+										<div className={styles.heading}>Price Type</div>
+										<div className={styles.sub_heading}>
+											{startCase(price_type) || '--'}
+										</div>
 									</div>
-								</div>
-								<div>
-									<div className={styles.heading}>Min. Price</div>
-									<div className={styles.sub_heading}>
-										{dataObj?.service?.is_minimum_price_shipment
-											? 'Yes'
-											: 'No'}
+									<div>
+										<div className={styles.heading}>Min. Price</div>
+										<div className={styles.sub_heading}>
+											{is_minimum_price_shipment
+												? 'Yes'
+												: 'No'}
+										</div>
 									</div>
-								</div>
-							</>
-						)}
+								</>
+							)}
 
-						<div>
-							<div className={styles.heading}>Source of Rate</div>
+							<div>
+								<div className={styles.heading}>Source of Rate</div>
 
-							<div className={styles.sub_heading}>{startCase(item?.source)}</div>
-						</div>
+								<div className={styles.sub_heading}>{startCase(source)}</div>
+							</div>
 
-						<div>
-							<div className={styles.heading}>Buy Rate</div>
+							<div>
+								<div className={styles.heading}>Buy Rate</div>
 
-							<div className={styles.sub_heading}>{getBuyPrice(dataObj, item.source)}</div>
-						</div>
+								<div className={styles.sub_heading}>{getBuyPrice(dataObj, source)}</div>
+							</div>
 
-						{dataObj?.data?.rate_procurement_proof_url
-						&& item?.source === 'flash_booking' && (
+							{rate_procurement_proof_url
+						&& source === 'flash_booking' && (
 							<div>
 								<div className={styles.heading}>Rate Procurement Proof</div>
 								<div className={styles.sub_heading}>
@@ -142,7 +180,7 @@ function Card({
 										themeType="linkUi"
 										size="md"
 										onClick={() => window.open(
-											dataObj?.data?.rate_procurement_proof_url,
+											rate_procurement_proof_url,
 											'_blank',
 										)}
 									>
@@ -150,11 +188,12 @@ function Card({
 									</Button>
 								</div>
 							</div>
-						)}
+							)}
 
-					</div>
+						</div>
 
-				))}
+					);
+				})}
 
 				<div className={styles.button_wrap}>
 					<Button
