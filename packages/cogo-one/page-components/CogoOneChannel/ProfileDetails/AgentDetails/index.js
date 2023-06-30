@@ -66,7 +66,6 @@ function AgentDetails({
 		agentId,
 		viewType,
 	});
-	console.log('hasAccessToEditGroup', hasAccessToEditGroup);
 
 	const {
 		user_data = {},
