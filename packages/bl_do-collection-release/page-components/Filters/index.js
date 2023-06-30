@@ -14,8 +14,20 @@ const trade_type_options = [
 	{ label: 'Import', value: 'import' },
 ];
 
+const DOCUMENT_STATUS_OPTIONS = [
+	{ label: 'Pending', value: 'pending' },
+	{ label: 'Delivered', value: 'delivered' },
+];
+
+const DOCUMENT_FILTER_TABS = ['surrendered', 'released'];
+
 export default function Filters({ setStateProps, stateProps }) {
 	const router = useRouter();
+
+	const { inner_tab, activeTab, shipment_type, trade_type } = stateProps;
+
+	const showDocumentFilter = DOCUMENT_FILTER_TABS.includes(inner_tab)
+	&& activeTab === 'bl' && shipment_type === 'fcl_freight' && trade_type === 'export';
 
 	const handleVersionChange = useCallback(() => {
 		const newPathname = `${router.asPath}`;
@@ -46,6 +58,17 @@ export default function Filters({ setStateProps, stateProps }) {
 					onChange={(val) => setStateProps({ ...stateProps, trade_type: val, page: 1 })}
 					placeholder="Trade Type"
 				/>
+
+				{ showDocumentFilter ? (
+					<Select
+						value={stateProps.document_status}
+						options={DOCUMENT_STATUS_OPTIONS}
+						onChange={(val) => setStateProps({ ...stateProps, document_status: val, page: 1 })}
+						placeholder="Document Status"
+						className={styles.document_filter}
+					/>
+				) : null}
+
 			</div>
 			<div className={styles.right_filters}>
 				<Toggle

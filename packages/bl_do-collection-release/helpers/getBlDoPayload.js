@@ -1,15 +1,19 @@
 import payloadConfig from '../configs/payloadConfig.json';
 
 export default function getBlDoPayload({ stateProps = {} }) {
-	const { trade_type, page, q } = stateProps;
+	const { trade_type, page, q, document_status = '' } = stateProps;
 
 	const payload = payloadConfig[stateProps.inner_tab];
+
+	console.log(payload, 'payload');
 
 	const { filters: commonFilters, ...commonRestPayload } = payload.common;
 
 	const {
 		filters: shipmentTypeFilters, ...shipmentTypePayload
 	} = payload[stateProps.shipment_type][stateProps.trade_type];
+
+	console.log(payload[stateProps.activeTab], 'wertyui');
 
 	const { filters: bldoFilters, ...bldoPayload } = payload[stateProps.activeTab];
 
