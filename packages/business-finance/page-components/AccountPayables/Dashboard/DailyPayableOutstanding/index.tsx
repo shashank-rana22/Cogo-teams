@@ -27,25 +27,25 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 	const QUARTER_MAPPING = [
 		{
-			averageTime   : list?.[0],
+			amount        : list?.[0],
 			formatedMonth : formatedJan === 'Jan'
 			&& 'Jan-Feb-March',
 			quarter: 'Q1',
 		},
 		{
-			averageTime   : list?.[1],
+			amount        : list?.[1],
 			formatedMonth : formatedApr === 'Apr'
 			&& ' Apr-May-Jun',
 			quarter: 'Q2',
 		},
 		{
-			averageTime   : list?.[2],
+			amount        : list?.[2],
 			formatedMonth : formatedJul === 'Jul'
 			&& ' Jul-Aug-Sep',
 			quarter: 'Q3',
 		},
 		{
-			averageTime   : list?.[3],
+			amount        : list?.[3],
 			formatedMonth : formatedOct === 'Oct'
 			&& ' Oct-Nov-Dec',
 			quarter: 'Q4',
@@ -54,13 +54,13 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 	const MONTH_MAPPING = [
 		{
-			averageTime: list?.[2],
+			amount: list?.[2],
 		},
 		{
-			averageTime: list?.[1],
+			amount: list?.[1],
 		},
 		{
-			averageTime: list?.[0],
+			amount: list?.[0],
 		},
 	] as any;
 	return (
@@ -112,9 +112,9 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 						{MONTH_MAPPING.map((item) => (
 
-							item?.averageTime
+							item?.amount
 								? (
-									<div className={styles.month_container} key={item?.averageTime?.dpo}>
+									<div className={styles.month_container} key={item?.amount?.dpo}>
 										{loading ? (
 											<Placeholder
 												className={styles.loader}
@@ -123,11 +123,11 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 											: (
 												<div className={styles.value}>
 													<Tooltip
-														content={item?.averageTime?.dpo}
+														content={item?.amount?.dpo}
 														placement="top"
 														interactive
 													>
-														{item?.averageTime?.dpo?.toFixed(2)}
+														{item?.amount?.dpo?.toFixed(2)}
 													</Tooltip>
 
 												</div>
@@ -139,11 +139,11 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 										)
 											: (
 												<div className={styles.label}>
-													{format(item?.averageTime?.yearMonth, ' MMM yyyy')}
+													{format(item?.amount?.yearMonth, ' MMM yyyy')}
 												</div>
 											)}
 									</div>
-								) : <div key={item?.averageTime} className={styles.dash}> -- </div>
+								) : <div key={item?.amount} className={styles.dash}> -- </div>
 
 						))}
 
@@ -152,7 +152,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 					<div className={styles.sub_container}>
 
 						{QUARTER_MAPPING.map((item) => (
-							<div className={styles.month_box} key={item?.averageTime?.dpo}>
+							<div className={styles.month_box} key={item?.amount?.dpo}>
 								{loading ? (
 									<Placeholder
 										className={styles.loader}
@@ -160,14 +160,14 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 								)
 									: (
 										<div className={styles.value}>
-											{item?.averageTime
+											{item?.amount
 												? (
 													<Tooltip
-														content={item?.averageTime?.dpo}
+														content={item?.amount?.dpo}
 														placement="top"
 														interactive
 													>
-														{item?.averageTime?.dpo?.toFixed(2)}
+														{item?.amount?.dpo?.toFixed(2)}
 													</Tooltip>
 												)
 												: '--'}
