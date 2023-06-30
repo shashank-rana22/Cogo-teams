@@ -132,20 +132,20 @@ function Filters({
 								<div className={styles.styled_row}>
 									{getSearchOptionsLabels(entityCode).map((item) => (
 										item.label
-										&& (
-											<div
-												key={item.value}
-												className={styles.styled_col}
-												onClick={() => {
-													setQueryKey(item?.value || 'q');
-													setShowSearchPopover(!showSearchPopover);
-													setParams((prev) => ({ ...prev, page: 1 }));
-												}}
-												role="presentation"
-											>
-												<div className={styles.tile_heading}>{item.label}</div>
-											</div>
-										)
+											? (
+												<div
+													key={item.value}
+													className={styles.styled_col}
+													onClick={() => {
+														setQueryKey(item?.value || 'q');
+														setShowSearchPopover(!showSearchPopover);
+														setParams((prev) => ({ ...prev, page: 1 }));
+													}}
+													role="presentation"
+												>
+													<div className={styles.tile_heading}>{item.label}</div>
+												</div>
+											) : null
 									))}
 								</div>
 							)}
