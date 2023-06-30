@@ -8,12 +8,10 @@ const DEFAULT_TARGET_VALUE = 0;
 
 function useCreateIndividualKra({ data: createKraData }) {
 	const { user = {} } = useSelector((state) => state?.profile);
+	const { id: user_id } = user;
 
 	const [valuesIndividualKRA, setValuesIndividualKRA] = useState();
-
 	const [ratingInfo, setRatingInfo] = useState();
-
-	const { id: user_id } = user;
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/create_individual_kra',
