@@ -1,12 +1,9 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
-import useRaiseTicketControls from '../../../../configurations/raise-ticket-controls';
-
 import styles from './styles.module.css';
 
 function CategoryType(props) {
 	const { searchParams, setSearchParams, isAdmin } = props;
-	const raiseTicketControl = useRaiseTicketControls({ searchParams });
 
 	return (
 		<div className={styles.category_container}>
@@ -32,7 +29,7 @@ function CategoryType(props) {
 					category: val,
 				}))}
 				asyncKey="default_types"
-				value={raiseTicketControl.loading ? '' : searchParams.category}
+				value={searchParams.category}
 				placeholder="Ticket type"
 				service="tickets"
 				isClearable

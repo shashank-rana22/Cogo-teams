@@ -17,9 +17,9 @@ function ModalHeader({
 		refreshTickets,
 	});
 
-	const handleTicket = (e, val) => {
+	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
-		updateTicketActivity(val, id);
+		updateTicketActivity({ actionType, id });
 	};
 
 	return (

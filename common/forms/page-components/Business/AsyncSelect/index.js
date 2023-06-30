@@ -111,6 +111,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 };
 
+const MICRO_SERVICE_HOOKS_MAPPING = {
+	ticktets: useGetAsyncTicketOptions,
+};
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -127,13 +131,15 @@ function AsyncSelect(props) {
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const microServiceAsyncOptionsHook = (microService || defaultParams.microService)
-		? useGetAsyncOptionsMicroservice
+	const mircoService = (microService || defaultParams.microService);
+	const microservicHook = mircoService ? MICRO_SERVICE_HOOKS_MAPPING[microService]
+	|| useGetAsyncOptionsMicroservice : null;
+
+	const microServiceAsyncOptionsHook = microService
+		? microservicHook
 		: useGetAsyncOptions;
 
-	const asyncOptionsHook = service === 'tickets' ? useGetAsyncTicketOptions : microServiceAsyncOptionsHook;
-
-	const getAsyncOptionsProps = asyncOptionsHook({
+	const getAsyncOptionsProps = microServiceAsyncOptionsHook({
 		...defaultParams,
 		initialCall,
 		onOptionsChange,

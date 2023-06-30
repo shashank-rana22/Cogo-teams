@@ -27,9 +27,9 @@ function TicketStructureBody({
 
 	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
 
-	const handleTicket = (e, val) => {
+	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
-		updateTicketActivity(val, id);
+		updateTicketActivity({ actionType, id });
 	};
 
 	return (

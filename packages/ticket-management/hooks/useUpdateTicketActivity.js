@@ -4,11 +4,11 @@ import { useSelector } from '@cogoport/store';
 
 import { STATUS_TYPE_MAPPING } from '../constants';
 
-const getPayload = ({ profile, status, id }) => ({
+const getPayload = ({ profile, actionType, id }) => ({
 	UserType      : 'user',
 	PerformedByID : profile?.user?.id,
 	TicketID      : [Number(id)],
-	...(STATUS_TYPE_MAPPING[status]),
+	...(STATUS_TYPE_MAPPING[actionType]),
 });
 
 const useUpdateTicketActivity = ({
@@ -23,10 +23,10 @@ const useUpdateTicketActivity = ({
 		authkey : 'post_tickets_activity',
 	}, { manual: false });
 
-	const updateTicketActivity = async (status = '', id = '') => {
+	const updateTicketActivity = async ({ actionType = '', id = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ profile, status, id }),
+				data: getPayload({ profile, actionType, id }),
 			});
 
 			refreshTickets();

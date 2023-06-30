@@ -3,7 +3,6 @@ import { cl } from '@cogoport/components';
 import useListTickets from '../../../../hooks/useListTickets';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 import TicketStructure from '../../../TicketStructure';
-import TicketStructureLoader from '../../../TicketStructure/TicketStructureLoader';
 
 import styles from './styles.module.css';
 
@@ -38,22 +37,18 @@ function TicketsSectionPart({
 
 	return (
 		<div className={cl`${styles.tickets_section_part} ${isAdmin ? styles.admin_ticket_view : ''}`}>
-			{listLoading ? <TicketStructureLoader /> : (
-				<>
-					<div className={styles.status_heading}>
-						{label}
-						<div className={styles.tickets_count_label}>{`(${total} tickets)`}</div>
-					</div>
-					<TicketStructure
-						data={list}
-						label={label}
-						setModalData={setModalData}
-						handleScroll={handleScroll}
-						updateTicketActivity={updateTicketActivity}
-					/>
-
-				</>
-			)}
+			<div className={styles.status_heading}>
+				{label}
+				<div className={styles.tickets_count_label}>{`(${total} tickets)`}</div>
+			</div>
+			<TicketStructure
+				data={list}
+				label={label}
+				listLoading={listLoading}
+				setModalData={setModalData}
+				handleScroll={handleScroll}
+				updateTicketActivity={updateTicketActivity}
+			/>
 		</div>
 	);
 }

@@ -21,7 +21,7 @@ function ChatBody({
 	getTicketActivity = () => {},
 	messageRef = {},
 	ticketData = {},
-	ticketExists = false,
+	doesTicketsExists = false,
 	modalData = {},
 	detailsLoading = false,
 }) {
@@ -38,7 +38,7 @@ function ChatBody({
 		}
 	};
 
-	if (!ticketExists && !chatLoading) {
+	if (!doesTicketsExists && !chatLoading) {
 		const emptyText = `No records for ticket #${
 			modalData?.ticketId
 		} found`;

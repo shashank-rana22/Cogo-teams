@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	notify_customer, ADDITIONAL_DATA,
+	notify_customer, additionalData,
 }) => ({
 	UserID         : id,
 	Source         : 'admin',
@@ -17,7 +17,7 @@ const getPayload = ({
 	Type           : issue_type,
 	Description    : additional_information,
 	NotifyCustomer : notify_customer,
-	...ADDITIONAL_DATA,
+	...additionalData,
 });
 
 const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
@@ -42,15 +42,17 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
 
-		const ADDITIONAL_DATA = {};
+		let additionalData = {};
 
 		const selectedServices = Object.fromEntries(
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
 
 		if (!isEmpty(organization_id)) {
-			ADDITIONAL_DATA.OrganizationID = organization_id;
-			ADDITIONAL_DATA.UserID = user_id;
+			additionalData = {
+				OrganizationID : organization_id,
+				UserID         : user_id,
+			};
 		}
 
 		try {
@@ -63,7 +65,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					issue_type,
 					additional_information,
 					notify_customer,
-					ADDITIONAL_DATA,
+					additionalData,
 				}),
 			});
 			Toast.success('Successfully Created');

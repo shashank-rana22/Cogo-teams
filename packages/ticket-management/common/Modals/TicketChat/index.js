@@ -1,5 +1,4 @@
 import { Modal } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -16,9 +15,10 @@ import TicketSummary from './TicketSummary';
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 const DEFAULT_TIMEOUT = 1;
+const DEFAULT_TICKET_ACTIVITY = 0;
 
-const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
-	if (!ticketExists) {
+const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
+	if (!doesTicketsExists) {
 		return '100%';
 	}
 	if (['closed', 'rejected'].includes(status)) {
@@ -71,7 +71,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const isEmptyChat = isEmpty(listData?.items || {});
+	const isEmptyChat = isEmpty(listData?.items);
 
 	const refreshTickets = () => {
 		setListData({
@@ -80,7 +80,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 			total_pages : 0,
 		});
 		getTicketDetails();
-		getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
+		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
 
 		setUpdated(true);
 		setTimeout(() => {
@@ -94,7 +94,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		scrollToBottom,
 	});
 
-	const ticketExists = typeof ticketData === 'object' || false;
+	const doesTicketsExists = typeof ticketData === 'object' || false;
 
 	const loading = chatLoading || createLoading;
 
@@ -140,7 +140,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 					style={{
 						height: chatBodyHeight(
 							rating,
-							ticketExists,
+							doesTicketsExists,
 							status,
 							file,
 							uploading,
@@ -154,12 +154,12 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 						messageRef={messageRef}
 						getTicketActivity={getTicketActivity}
 						ticketData={ticketData}
-						ticketExists={ticketExists}
+						doesTicketsExists={doesTicketsExists}
 						setModalData={setModalData}
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{ticketExists && (
+				{doesTicketsExists && (
 					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
 						{!['closed', 'rejected'].includes(status)
 							&& (
@@ -176,9 +176,9 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 							)}
 					</div>
 				)}
-				{ticketExists && (
+				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} ticketExists={ticketExists} />
+						<TicketSummary {...ticketData} />
 					</div>
 				)}
 			</Modal.Body>

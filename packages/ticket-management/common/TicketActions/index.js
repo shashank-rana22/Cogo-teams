@@ -1,96 +1,25 @@
 import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function ResolveButton({ handleTicket, isModal }) {
-	return (
-		<Button
-			size={isModal ? 'md' : 'sm'}
-			themeType={isModal ? 'primary' : 'linkUi'}
-			className={styles.reopen_resolve}
-			onClick={(e) => handleTicket(e, 'resolve')}
-		>
-			Resolve
-		</Button>
-	);
-}
-
-function ResolveRequestButton({ handleTicket, isModal }) {
-	return (
-		<Button
-			size={isModal ? 'md' : 'sm'}
-			themeType={isModal ? 'primary' : 'linkUi'}
-			className={styles.reopen_resolve}
-			onClick={(e) => handleTicket(e, 'resolve_requested')}
-		>
-			Resolve Request
-		</Button>
-	);
-}
-
-function ApproveButton({ handleTicket, isModal }) {
-	return (
-		<Button
-			size={isModal ? 'md' : 'sm'}
-			themeType={isModal ? 'primary' : 'linkUi'}
-			className={styles.reopen_resolve}
-			onClick={(e) => handleTicket(e, 'approve')}
-		>
-			Approve
-		</Button>
-	);
-}
-
-function RejectButton({ handleTicket, isModal }) {
-	return (
-		<Button
-			size={isModal ? 'md' : 'sm'}
-			themeType={isModal ? 'primary' : 'linkUi'}
-			className={styles.reopen_resolve}
-			onClick={(e) => handleTicket(e, 'reject')}
-		>
-			Reject
-		</Button>
-	);
-}
-
-function ReopenButton({ handleTicket, isModal }) {
-	return (
-		<Button
-			size={isModal ? 'md' : 'sm'}
-			themeType={isModal ? 'primary' : 'linkUi'}
-			className={styles.reopen_resolve}
-			onClick={(e) => handleTicket(e, 'reopen')}
-		>
-			Reopen
-		</Button>
-	);
-}
-
-function ButtonComponent({ isModal, status, isClosureAuthoriser, handleTicket }) {
-	const commonProps = { handleTicket, isModal };
-
+function getActionMapping({ status, isClosureAuthorizer }) {
 	if (['escalated', 'unresolved'].includes(status)) {
-		if (isClosureAuthoriser) {
-			return (<ResolveButton {...commonProps} />);
+		if (isClosureAuthorizer) {
+			return ['resolve'];
 		}
-		return <ResolveRequestButton {...commonProps} />;
+		return ['resolve_requested'];
 	}
 
-	if ((['pending', 'resolve_requested'].includes(status) && isClosureAuthoriser)) {
-		return (
-			<div className={styles.pending_actions}>
-				<ApproveButton {...commonProps} />
-				<RejectButton {...commonProps} />
-			</div>
-		);
+	if ((['pending', 'resolve_requested'].includes(status) && isClosureAuthorizer)) {
+		return ['approve', 'reject'];
 	}
 
 	if (status === 'closed') {
-		return	(<ReopenButton {...commonProps} />);
+		return	['reopen'];
 	}
 
-	return null;
+	return [];
 }
 
 function TicketActions({
@@ -99,13 +28,22 @@ function TicketActions({
 	handleTicket,
 	isClosureAuthorizer,
 }) {
+	const actionMappings = getActionMapping({ status, isClosureAuthorizer });
+
 	return (
-		<ButtonComponent
-			isModal={isModal}
-			status={status}
-			handleTicket={handleTicket}
-			isClosureAuthoriser={isClosureAuthorizer}
-		/>
+		<>
+			{actionMappings.map((item) => (
+				<Button
+					key={item}
+					size={isModal ? 'md' : 'sm'}
+					themeType={isModal ? 'primary' : 'linkUi'}
+					className={styles.reopen_resolve}
+					onClick={(e) => handleTicket(e, { actionType: item })}
+				>
+					{startCase(item)}
+				</Button>
+			))}
+		</>
 	);
 }
 

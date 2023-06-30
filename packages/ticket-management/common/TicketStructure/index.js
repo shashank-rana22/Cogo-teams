@@ -4,6 +4,7 @@ import EmptyTicket from '../EmptyTicket';
 
 import styles from './styles.module.css';
 import TicketStructureBody from './TicketStructureBody';
+import TicketStructureLoader from './TicketStructureLoader';
 
 function TicketStructure({
 	data = [],
@@ -11,7 +12,12 @@ function TicketStructure({
 	setModalData = () => {},
 	label = '',
 	updateTicketActivity = () => {},
+	listLoading = false,
 }) {
+	if (listLoading) {
+		return <TicketStructureLoader />;
+	}
+
 	if (isEmpty(data)) {
 		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
 	}
