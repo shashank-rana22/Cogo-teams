@@ -21,6 +21,10 @@ function AccountLeaderboard() {
 		isAllChecked,
 		setIsAllChecked = () => {},
 		selectAllHelper = () => {},
+		setLeaderboardParams = () => {},
+		setValue = () => {},
+		bulkDeallocateFilter,
+		setBulkDeallocateFilter = () => {},
 	} = useGetAccountLeaderboardData();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -52,6 +56,10 @@ function AccountLeaderboard() {
 				isAllChecked={isAllChecked}
 				setIsAllChecked={setIsAllChecked}
 				selectAllHelper={selectAllHelper}
+				setLeaderboardParams={setLeaderboardParams}
+				setValue={setValue}
+				bulkDeallocateFilter={bulkDeallocateFilter}
+				setBulkDeallocateFilter={setBulkDeallocateFilter}
 			/>
 		</section>
 	);

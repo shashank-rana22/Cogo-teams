@@ -1,4 +1,4 @@
-import { Table, Pagination } from '@cogoport/components';
+import { Table, Pagination, Toggle, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -22,6 +22,9 @@ function Leaderboard(props) {
 		isAllChecked,
 		setIsAllChecked = () => {},
 		selectAllHelper = () => {},
+		setValue = () => {},
+		setBulkDeallocateFilter = () => {},
+		bulkDeallocateFilter,
 	} = props;
 
 	const [scoreTrendIds, setScoreTrendIds] = useState({});
@@ -34,6 +37,7 @@ function Leaderboard(props) {
 		isAllChecked,
 		setIsAllChecked,
 		selectAllHelper,
+		bulkDeallocateFilter,
 	});
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
@@ -50,9 +54,35 @@ function Leaderboard(props) {
 		);
 	}
 
+	const onChangeBulkToggle = (event) => {
+		setBulkDeallocateFilter(() => {
+			if (event.target?.checked) {
+				return true;
+			} return false;
+		});
+		if (event?.target?.checked) {
+			setValue('warmth', ['ice_cold', 'cold']);
+		} else { setValue('warmth', undefined); setCheckedRowsId([]); }
+	};
+
 	return (
 		<>
 			<div className={styles.header_text}>Leaderboard List</div>
+			<div className={styles.bulk_container}>
+				<Toggle
+					name="bulk_deallocate"
+					size="md"
+					offLabel="off"
+					onLabel="on"
+					onChange={(event) => onChangeBulkToggle(event)}
+				/>
+
+				<div>
+					<Button disabled={bulkDeallocateFilter && isEmpty(checkedRowsId)}>De-allocate</Button>
+				</div>
+
+			</div>
+
 			<div className={styles.table_container}>
 				<Table
 					className={styles.table}

@@ -21,6 +21,7 @@ const getLeaderBoardColumns = ({
 	setIsAllChecked = () => {},
 	isAllChecked = false,
 	selectAllHelper = () => {},
+	bulkDeallocateFilter = () => {},
 }) => {
 	const onChangeBodyCheckbox = ({ event, user_id }) => {
 		setCheckedRowsId((previousIds) => {
@@ -58,17 +59,14 @@ const getLeaderBoardColumns = ({
 		{
 			id       : 'check',
 			Header   : <Checkbox onChange={(event) => onChangeTableHeadCheckbox(event)} checked={isAllChecked} />,
-			accessor : ({ user_id = '', warmth = '' }) => {
-				const isHotTransactable = warmth === 'ice_cold' || warmth === 'cold';
-				return (
-					<Checkbox
-						checked={checkedRowsId.includes(user_id)}
-						onChange={(event) => onChangeBodyCheckbox({ event, user_id })}
-						disabled={!isHotTransactable}
-					/>
+			accessor : ({ user_id = '' }) => (
+				<Checkbox
+					checked={checkedRowsId.includes(user_id)}
+					onChange={(event) => onChangeBodyCheckbox({ event, user_id })}
+					disabled={!bulkDeallocateFilter}
+				/>
 
-				);
-			},
+			),
 
 		},
 		{

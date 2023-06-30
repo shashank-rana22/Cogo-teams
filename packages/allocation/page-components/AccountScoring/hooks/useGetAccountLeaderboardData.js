@@ -10,8 +10,7 @@ import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderb
 const useGetAccountLeaderboardData = () => {
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [isAllChecked, setIsAllChecked] = useState(false);
-
-	console.log('checkedRowsId', checkedRowsId);
+	const [bulkDeallocateFilter, setBulkDeallocateFilter] = useState(false);
 
 	const {
 		graphData,
@@ -27,13 +26,13 @@ const useGetAccountLeaderboardData = () => {
 		getNextPage,
 	} = useGetEngagementScoringLeaderboard();
 
-	const { control, watch, resetField } = useForm({
+	const { control, watch, resetField, setValue } = useForm({
 		defaultValues: {
 			date: new Date(),
 		},
 	});
 
-	const { organization, user_id, date, service, warmth, segment } = watch();
+	const { organization, user_id: userId, date, service, warmth: accountWarmth, segment } = watch();
 
 	const mutatedControls = controls.map((singleControl) => {
 		let newControl = { ...singleControl };
@@ -42,6 +41,13 @@ const useGetAccountLeaderboardData = () => {
 			newControl = {
 				...newControl,
 				disabled: false,
+			};
+		}
+
+		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
+			newControl = {
+				...newControl,
+				disabled: true,
 			};
 		}
 
@@ -55,8 +61,8 @@ const useGetAccountLeaderboardData = () => {
 			service    : service || undefined,
 			filters    : {
 				service_id : organization || undefined,
-				user_id    : user_id || undefined,
-				warmth     : warmth || undefined,
+				user_id    : userId || undefined,
+				warmth     : accountWarmth || undefined,
 				segment    : segment || undefined,
 			},
 		}));
@@ -67,19 +73,17 @@ const useGetAccountLeaderboardData = () => {
 			service    : service || undefined,
 			filters    : {
 				service_id : organization || undefined,
-				user_id    : user_id || undefined,
-				warmth     : warmth || undefined,
+				user_id    : userId || undefined,
+				warmth     : accountWarmth || undefined,
 				segment    : segment || undefined,
 			},
 		}));
-	}, [organization, user_id, date, service, warmth, segment, setGraphParams, setLeaderboardParams]);
+	}, [organization, userId, date, service, accountWarmth, segment, setGraphParams, setLeaderboardParams]);
 
-	const currentPageListIds = useMemo(() => leaderboardList
-		.filter(() => warmth === 'ice_cold' || warmth === 'cold')
-		.map(() => user_id), [leaderboardList, warmth, user_id]);
+	const currentPageListIds = useMemo(() => leaderboardList.map(({ user_id }) => user_id), [leaderboardList]);
 
 	const selectAllHelper = useCallback((listArgument = []) => {
-		const isRowsChecked = currentPageListIds.every((id) => listArgument?.includes(id));
+		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
 		if (isRowsChecked !== isAllChecked) {
 			setIsAllChecked(isRowsChecked);
 		}
@@ -114,6 +118,9 @@ const useGetAccountLeaderboardData = () => {
 		setIsAllChecked,
 		currentPageListIds,
 		selectAllHelper,
+		setValue,
+		bulkDeallocateFilter,
+		setBulkDeallocateFilter,
 	};
 };
 
