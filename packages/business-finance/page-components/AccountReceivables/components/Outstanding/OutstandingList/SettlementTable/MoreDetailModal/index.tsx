@@ -33,7 +33,6 @@ function MoreDetailsModal({
 	const { list: singleList = [], pageNo, totalRecords } = singleData || {};
 
 	const filterTableColumns = settlementKnockOffList.filter((item) => entityCode !== '501' || item.Header !== 'TDS');
-	console.log('fgertgetg', filterTableColumns);
 
 	return (
 		<div>
