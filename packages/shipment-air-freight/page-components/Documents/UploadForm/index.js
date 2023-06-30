@@ -14,11 +14,11 @@ function UploadForm({
 	refetch = () => {},
 }) {
 	const handleDocClick = (doc) => {
-		setShowDoc({
-			...(showDoc || {}),
+		setShowDoc((prev) => ({
+			...(prev || {}),
 			url  : doc?.image_url,
 			type : 'task',
-		});
+		}));
 	};
 
 	let content = null;
@@ -49,7 +49,7 @@ function UploadForm({
 						role="button"
 						tabIndex={0}
 						className={styles.choose_from_wallet}
-						onClick={() => setShowDoc({ ...showDoc, type: 'wallet' })}
+						onClick={() => setShowDoc((prev) => ({ ...prev, type: 'wallet' }))}
 					>
 						<IcMPdf height={30} width={30} />
 
@@ -62,9 +62,7 @@ function UploadForm({
 
 					<div className={styles.styled_button}>
 						<Button
-							onClick={() => {
-								setShowDoc({ ...showDoc, type: 'task' });
-							}}
+							onClick={() => { setShowDoc((prev) => ({ ...prev, type: 'task' })); }}
 						>
 							Manual Upload
 						</Button>
@@ -74,7 +72,7 @@ function UploadForm({
 						<Button
 							className="secondary md"
 							onClick={() => {
-								setShowDoc(null);
+								setShowDoc(undefined);
 							}}
 						>
 							Cancel

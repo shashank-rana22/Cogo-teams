@@ -40,15 +40,14 @@ function Header({
 							type="search"
 							placeholder="Search..."
 							suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
-							style={{ padding: '6px', marginRight: '6px', width: '250px' }}
 							onChange={(e) => setSearchValue(e)}
+							className={styles.input_heading}
 						/>
 
 						<Select
 							className={styles.select}
 							size="sm"
 							placeholder="Select Source"
-							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
 							value={filters?.uploaded_by_org_id}
 							options={sourceOptions || []}
 							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
@@ -59,7 +58,6 @@ function Header({
 							className={styles.select}
 							size="sm"
 							placeholder="Select Service"
-							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
 							value={filters?.service_type}
 							onChange={(e) => setFilters({ ...filters, service_type: e })}
 							options={serviceOptions || {}}

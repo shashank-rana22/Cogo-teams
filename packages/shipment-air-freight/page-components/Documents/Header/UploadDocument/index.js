@@ -1,6 +1,8 @@
 import { handleError, RadioGroupController, SelectController, UploadController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 const getConsigneeShipperId = (shipment_data) => {
 	const options = [
 		{
@@ -27,9 +29,9 @@ function UploadDocument({
 	orgId = '',
 	setOrgId = () => {},
 }) {
-	const documents = document_data?.list?.map((e) => ({
-		label : startCase(e?.document_type),
-		value : e?.document_type,
+	const documents = document_data?.list?.map((event) => ({
+		label : startCase(event?.document_type),
+		value : event?.document_type,
 	})) || [];
 
 	return (
@@ -55,7 +57,7 @@ function UploadDocument({
 						/>
 
 						{errors?.document_type ? (
-							<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
+							<div className={styles.document_error}>
 								{handleError({ error: errors?.document_type })}
 							</div>
 						) : null}
@@ -75,7 +77,7 @@ function UploadDocument({
 						/>
 
 						{errors?.upload_document ? (
-							<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
+							<div className={styles.document_error}>
 								{handleError({ error: errors?.upload_document })}
 							</div>
 						) : null}
@@ -103,7 +105,7 @@ function UploadDocument({
 							/>
 
 							{errors?.organizations ? (
-								<div style={{ fontSize: '12px', color: 'var(--color-primary-error-red-2)' }}>
+								<div className={styles.document_error}>
 									{handleError({ error: errors?.organizations })}
 								</div>
 							) : null}

@@ -53,8 +53,7 @@
 
 .action {
 	padding: 12px 24px;
-	font-size: 10px;
-	font-weight: 400;
+	font-size: var(--font-size-sm);
 	color: var(--color-secondary-greyscale-1);
 
 	&:hover {
@@ -72,4 +71,9 @@
 		max-width: 282px;
 		margin: 6px;
 	}
+}
+
+.doc_icon {
+	font-size: 32px;
+	color: var(--color-secondary-greyscale-2);
 }

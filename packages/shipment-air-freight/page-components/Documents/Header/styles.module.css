@@ -18,6 +18,12 @@
 	border-radius: 10px;
 }
 
+.input_heading {
+	width: 250px;
+	padding: 6px;
+	margin-right: 6px;
+}
+
 .custom_toggle {
 	:global {
 		.ui_toggle_onlabel {
@@ -41,12 +47,15 @@
 }
 
 .select {
-	font-size: 12px;
+	width: 200px;
+	padding: 6px;
+	margin-right: 6px;
+	font-size: var(--font-size-md);
 }
 
 .upload {
 	margin-left: 12px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: var(--color-primary-error-red-2);
 }

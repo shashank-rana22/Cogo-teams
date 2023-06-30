@@ -1,12 +1,12 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { React, useState, useContext } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 
 import useCreateOrganizationDocument from '../../hooks/useCreateOrganizationDocument';
 import useCreateTaskList from '../../hooks/useCreateTaskList';
 import useListRpaMails from '../../hooks/useListRpaMails';
 
-import Approve from './Approve';
+import ApproveModal from './ApproveModal';
 import CheckList from './CheckList';
 import Header from './Header';
 import LoadingState from './LoadingState';
@@ -21,13 +21,13 @@ function Documents() {
 		stakeholderConfig:{ documents = {} } = {},
 	} = 	useContext(ShipmentDetailContext);
 
-	const [showDoc, setShowDoc] = useState(null);
+	const [showDoc, setShowDoc] = useState(undefined);
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState(documents.default_wallet);
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
-	const [updateAirwayBill, setUpdateAirwayBill] = useState(null);
+	const [updateAirwayBill, setUpdateAirwayBill] = useState(undefined);
 
 	const { apiTrigger:createDocumentTrigger } = useCreateOrganizationDocument({});
 
@@ -44,13 +44,19 @@ function Documents() {
 
 	useCreateTaskList({ shipment_data });
 
-	const { emailList = [] } = useListRpaMails({
+	const { emailList = [], getShipmentEmails } = useListRpaMails({
 		params: {
 			cogo_shipment_id : shipment_data?.id,
 			entity_type      : docTypes,
 		},
 
 	});
+
+	useEffect(() => {
+		if (docTypes.length) {
+			getShipmentEmails();
+		}
+	}, [docTypes.length, getShipmentEmails]);
 
 	const handleApprove = async () => {
 		setShowDoc(showApproved);
@@ -65,7 +71,7 @@ function Documents() {
 			await createDocumentTrigger(values);
 		}
 
-		setShowApproved(null);
+		setShowApproved(false);
 	};
 
 	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
@@ -127,7 +133,7 @@ function Documents() {
 
 			{renderContent()}
 
-			<Approve
+			<ApproveModal
 				showApproved={showApproved}
 				setShowApproved={setShowApproved}
 				addToWallet={addToWallet}

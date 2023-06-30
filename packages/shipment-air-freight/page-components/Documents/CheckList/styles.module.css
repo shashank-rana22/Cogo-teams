@@ -7,8 +7,7 @@
 
 .action {
 	padding: 12px 24px;
-	font-size: 10px;
-	font-weight: 400;
+	font-size: var(--font-size-sm);
 	color: var(--color-secondary-3);
 	border-bottom: none;
 

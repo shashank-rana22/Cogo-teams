@@ -1,16 +1,31 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 
-const COLOR_MAPPING = {
-	eligible   : 'yellow',
-	ineligible : 'yellow',
-	hold       : 'red',
-	requested  : 'yellow',
+const STATUS_MAPPING = {
+	eligible: {
+		color         : 'var(--color-primary-yellow-1)',
+		background    : 'var(--color-primary-yellow-5)',
+		statusMessage : 'At Authority Desk',
+	},
+	ineligible: {
+		color         : 'var(--color-primary-yellow-1)',
+		background    : 'var(--color-primary-yellow-5)',
+		statusMessage : 'At Authority Desk',
+	},
+	hold: {
+		color         : 'var(--color-primary-error-red-2)',
+		background    : 'var(var(--color-primary-error-red-5))',
+		statusMessage : 'On Hold',
+	},
+	requested: {
+		color         : 'var(--color-primary-yellow-1)',
+		background    : 'var(--color-primary-yellow-5)',
+		statusMessage : 'Pending for Approval',
+	},
 };
 
 function DocumentHoldHeader() {
@@ -20,25 +35,16 @@ function DocumentHoldHeader() {
 
 	const { inco_term } = primary_service || {};
 	const { document_delay_status } = shipment_data || {};
+
 	const tradeType = GLOBAL_CONSTANTS.options.inco_term[inco_term].trade_type;
 
-	let status = startCase(document_delay_status);
-	if (document_delay_status === 'hold') {
-		status = 'On Hold';
-	} else if (['eligible', 'ineligible'].includes(document_delay_status)) {
-		status = 'At Authority Desk';
-	} else if (document_delay_status === 'requested') {
-		status = 'Pending for Approval';
-	}
-
-	const color = COLOR_MAPPING[document_delay_status];
+	const status = STATUS_MAPPING[document_delay_status];
 
 	return (
 		<div
 			className={styles.document_hold_container}
 			style={{
-				background: color === 'yellow'
-					? 'var(--color-primary-yellow-5)' : 'var(--color-primary-error-red-5)',
+				background: status.background,
 			}}
 		>
 			<div className={styles.icon_wrapper}>
@@ -49,17 +55,10 @@ function DocumentHoldHeader() {
 				<div
 					className={styles.heading}
 					style={{
-						color: color === 'yellow'
-							? 'var(--color-primary-yellow-1)' : 'var(--color-primary-error-red-2)',
+						color: status.color,
 					}}
 				>
-					Your
-					{' '}
-					{tradeType === 'export' ? 'AWB' : 'DO'}
-					{' '}
-					Document is
-					{' '}
-					{status}
+					{`Your ${tradeType === 'export' ? 'AWB' : 'DO'} Document is ${status.statusMessage}`}
 				</div>
 			</div>
 		</div>

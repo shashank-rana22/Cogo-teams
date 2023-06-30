@@ -1,9 +1,12 @@
 import { EmptyState } from '@cogoport/air-modules';
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
-import { format, startCase, isEmpty } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { startCase, isEmpty } from '@cogoport/utils';
+import React, { useEffect, useContext } from 'react';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
@@ -12,17 +15,19 @@ import Loader from '../Loader';
 import styles from './styles.module.css';
 
 const LOADER_COUNT = 3;
+const DEFAULT_TAB_INDEX = 0;
 
 function OrganizationDocuments({
 	handleSave = () => {},
 	handleView = () => {},
 	searchDocsVal,
 	showWalletDocs,
-	handleDocClick = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
+
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
 		data,
@@ -32,10 +37,10 @@ function OrganizationDocuments({
 		defaultFilters: {
 			status          : 'active',
 			organization_id : importer_exporter_id,
-			q               : searchDocsVal || undefined,
+			q               : query || undefined,
 		},
 		defaultParams: {
-			page_limit: 1000,
+			page_limit: 100,
 		},
 	});
 
@@ -59,9 +64,13 @@ function OrganizationDocuments({
 		</div>
 	);
 
+	useEffect(() => {
+		debounceQuery(searchDocsVal);
+	}, [debounceQuery, searchDocsVal]);
+
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(LOADER_COUNT)].map((key) => (
+			return Array.from(Array(LOADER_COUNT).keys()).map((key) => (
 				<Loader key={key} />
 			));
 		}
@@ -74,9 +83,8 @@ function OrganizationDocuments({
 					<div
 						key={doc?.id}
 						role="button"
-						tabIndex={0}
+						tabIndex={DEFAULT_TAB_INDEX}
 						className={styles.single_doc}
-						onClick={() => handleDocClick(doc)}
 					>
 						{!showWalletDocs && (
 							<div className={styles.dots}>
@@ -90,19 +98,20 @@ function OrganizationDocuments({
 							</div>
 						)}
 						{doc.type === 'pdf' ? (
-							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
+							<IcMPdf className={styles.doc_icon} />
 						) : (
-							<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
+							<IcMImage className={styles.doc_icon} />
 						)}
 						<div className={styles.main}>
-							<div className={styles.heading} style={{ fontSize: '14px' }}>
+							<div className={styles.heading}>
 								{startCase(doc.document_type)}
 							</div>
 							<div className={styles.upload_info}>
-								{`Uploaded On ${format(
-									doc?.updated_at,
-									'dd MMM yyyy',
-								)}`}
+								{`Uploaded On ${formatDate({
+									date       : doc?.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}`}
 							</div>
 						</div>
 						<div className={styles.button_wrapper}>

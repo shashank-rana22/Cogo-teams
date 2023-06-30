@@ -9,12 +9,7 @@ const HEIGHT = '90px';
 function Loader() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.comments_wrap}>
-				<Placeholder width={WIDTH} height={HEIGHT} />
-
-				<Placeholder width={WIDTH} height={HEIGHT} />
-
-			</div>
+			<Placeholder width={WIDTH} height={HEIGHT} />
 		</div>
 	);
 }

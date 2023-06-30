@@ -1,18 +1,19 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCError } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCError, IcMSort } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+import React, { useContext } from 'react';
 
 import VerticleLine from '../VerticleLine';
 
-import CheckBlDoStatus from './CheckBlDoStatus';
+import CheckAWBDoStatus from './CheckAWBDoStatus';
 import styles from './styles.module.css';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
 const INCREMENT_BY_ONE = 1;
 const STATE_NAME_INDEX = 1;
-
-const SHOW_UPDATE_AWB_STAKEHOLDERS = ['superadmin', 'service_ops2'];
 
 function Content({
 	uploadedItem,
@@ -30,7 +31,9 @@ function Content({
 	docType,
 	setUpdateAirwayBill,
 }) {
-	const allowedStakeHolder = shipment_data?.stakeholder_types?.some((e) => SHOW_UPDATE_AWB_STAKEHOLDERS.includes(e));
+	const {
+		stakeholderConfig:{ documents = {} } = {},
+	} = 	useContext(ShipmentDetailContext);
 
 	const getUploadButton = () => {
 		if (showUploadText.length) {
@@ -84,9 +87,11 @@ function Content({
 							</div>
 
 							<div className={styles.upload_info}>
-								Uploaded On:&nbsp;
-								{format(uploadedItem?.created_at, 'dd MMM yyyy')}
-
+								{`Uploaded On ${formatDate({
+									date       : uploadedItem?.created_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}`}
 							</div>
 
 							<div className={cl`${styles.document_status}
@@ -100,8 +105,11 @@ function Content({
 						<div className={styles.gap}>
 							{item?.pendingItem ? (
 								<div className={styles.upload_info}>
-									Due On:&nbsp;
-									{format(item?.pendingItem?.deadline, 'dd MMM yyyy')}
+									{`Due On: ${formatDate({
+										date       : item?.pendingItem?.deadline,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+									})}`}
 								</div>
 							) : null}
 
@@ -118,7 +126,7 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						<CheckBlDoStatus
+						<CheckAWBDoStatus
 							docType={docType}
 							item={item}
 							uploadedItem={uploadedItem}
@@ -128,12 +136,20 @@ function Content({
 
 						{docType === 'airway_bill'
 						&& uploadedItem?.state === 'document_accepted'
-						&& allowedStakeHolder && (
+						&& documents?.allow_update && (
 							<Button
 								themeType="link"
 								onClick={() => setUpdateAirwayBill(uploadedItem)}
 							>
-								Update
+								<div className={styles.tooltip_container}>
+									<Tooltip
+										content="Download"
+										placement="top"
+										interactive
+									>
+										<IcMSort />
+									</Tooltip>
+								</div>
 							</Button>
 						)}
 

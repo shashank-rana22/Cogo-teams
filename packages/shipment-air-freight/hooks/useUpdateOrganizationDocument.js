@@ -11,14 +11,14 @@ const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
 
 	const deleteDocument = async ({ id }) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					id,
 					...defaultParams,
 				},
 			});
 
-			if (!res.hasError) Toast.success('Document Deleted Successfully');
+			Toast.success('Document Deleted Successfully');
 
 			refetch();
 		} catch (err) {

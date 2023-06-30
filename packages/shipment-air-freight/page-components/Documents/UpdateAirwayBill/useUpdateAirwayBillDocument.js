@@ -1,7 +1,7 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentDocument = ({ details, setUpdateAirwayBill, refetch }) => {
+const useUpdateAirwayBillDocument = ({ details, setUpdateAirwayBill, refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_shipment_document',
 		method : 'POST',
@@ -37,4 +37,4 @@ const useUpdateShipmentDocument = ({ details, setUpdateAirwayBill, refetch }) =>
 		loading,
 	};
 };
-export default useUpdateShipmentDocument;
+export default useUpdateAirwayBillDocument;

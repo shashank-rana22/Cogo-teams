@@ -14,15 +14,11 @@ const useCreateOrganizationDocument = ({
 
 	const apiTrigger = async ({ values }) => {
 		try {
-			const res = await trigger({ data: values });
-
-			if (!res.hasError) {
-				refetch();
-
-				Toast.success(successMessage);
-			}
+			await trigger({ data: values });
+			refetch();
+			Toast.success(successMessage);
 		} catch (err) {
-			toastApiError(err?.data);
+			toastApiError(err);
 		}
 	};
 

@@ -11,7 +11,7 @@ import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
 const TASKS = ['upload_document', 'approve_document', 'amend_document'];
 const PAGE_LIMIT = 50;
-const PAGE = 1;
+const DEFAULT_PAGE = 1;
 const DOC_TYPE_SLICE_INDEX = -1;
 const TASK_CONFIG_FLAT_DEPTH = 2;
 
@@ -22,7 +22,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 
 	const { id:shipment_id = '', shipment_type = '' } = shipment_data || {};
 
-	const { data:processData, loading:processLoading } = useGetShipmentProcess({});
+	const { data:processData, loading:processLoading } = useGetShipmentProcess({ shipment_type });
 	const { data:orgData } = useListShipmentOrganizations({ defaultParams: { shipment_id } });
 
 	const {
@@ -35,7 +35,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		defaultParams: {
 			page_limit                       : PAGE_LIMIT,
 			created_by_user_details_required : true,
-			page                             : PAGE,
+			page                             : DEFAULT_PAGE,
 		},
 		defaultFilters: {
 			shipment_id,
@@ -61,7 +61,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 
 	const listOfUploadedDocumentTypes = useMemo(() => (documentData?.list || []).map(
 		(doc) => doc?.document_type,
-	), [documentData]);
+	), [documentData?.list]);
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (processData?.data?.services_config || [])
 		.map(({ states }) => states?.map(({ configs }) => configs?.filter(
@@ -83,11 +83,12 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		const PUSH_IN_DOC_TYPES = [];
 		if ((processData?.data?.services_config || [])?.length) {
 			let extraDocumentUploaded = (documentData?.list || []).filter((doc) => {
+				const docType = doc?.document_type;
 				if (
-					!listOfAllShipmentDocTypes?.includes(doc?.document_type)
-					&& !PUSH_IN_DOC_TYPES.includes(doc?.document_type)
+					!listOfAllShipmentDocTypes?.includes(docType)
+					&& !PUSH_IN_DOC_TYPES.includes(docType)
 				) {
-					PUSH_IN_DOC_TYPES.push(doc?.document_type);
+					PUSH_IN_DOC_TYPES.push(docType);
 					return true;
 				}
 				return false;
@@ -137,7 +138,9 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		taskConfigsForAllShipmentTasks,
 	]);
 
-	const sourceOptions = orgData?.list?.map((item) => ({ label: item?.business_name, value: item?.id })) || [];
+	const sourceOptions = useMemo(() => (orgData?.list || []).map(
+		(item) => ({ label: item?.business_name, value: item?.id }) || [],
+	), [orgData?.list]);
 
 	return {
 		filters,

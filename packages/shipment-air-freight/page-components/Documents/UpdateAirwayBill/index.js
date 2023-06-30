@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import controls from './control';
 import styles from './styles.module.css';
-import useUpdateShipmentDocument from './useUpdateShipmentDocument';
+import useUpdateAirwayBillDocument from './useUpdateAirwayBillDocument';
 
 function UpdateAirwayBill({
 	updateAirwayBill,
@@ -26,7 +26,7 @@ function UpdateAirwayBill({
 		setValue,
 	} = useForm();
 
-	const { updateApi, loading } = useUpdateShipmentDocument({
+	const { updateApi, loading } = useUpdateAirwayBillDocument({
 		details,
 		setUpdateAirwayBill,
 		refetch,
@@ -49,7 +49,7 @@ function UpdateAirwayBill({
 			style={{ padding: '20px' }}
 		>
 			<div className={styles.update_container}>
-				<h4>Upload the airway bill</h4>
+				<Modal.Header title="Upload the airway bill" />
 				<Layout
 					fields={uploadAirwayControls}
 					control={control}

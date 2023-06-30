@@ -1,15 +1,11 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useLensRequest } from '@cogoport/request';
-import { useEffect, useCallback, useRef } from 'react';
-
-const KEY_MAPPING = { shipping_instruction: 'si' };
+import { useCallback } from 'react';
 
 const useListRpaMails = ({ params = {} }) => {
 	const { page_no, entity_type, ...restPayload } = params || {};
 
-	const entityType = useRef(entity_type);
-
-	const [response, trigger] = useLensRequest({
+	const [{ data }, trigger] = useLensRequest({
 		url    : '/list_rpa_mails',
 		method : 'GET',
 		params : {
@@ -19,26 +15,24 @@ const useListRpaMails = ({ params = {} }) => {
 			},
 			page_no,
 		},
-	}, { manual: true });
+	});
 
-	const getShipmentEmails = useCallback(() => {
-		(async () => {
-			try {
-				await trigger();
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
+	const getShipmentEmails = useCallback(async () => {
+		try {
+			await trigger();
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger]);
 
 	const NEW_EMAIL_DATA = [];
 
-	if ((response?.data?.body || [])?.length) {
-		(response?.data?.body || [])?.forEach((child) => {
-			if (Object.keys(KEY_MAPPING).includes(child?.entity_type)) {
+	if ((data?.body || []).length) {
+		(data?.body || []).forEach((child) => {
+			if (child?.entity_type === 'shipping_instruction') {
 				NEW_EMAIL_DATA.push({
 					...child,
-					entity_type: KEY_MAPPING?.[child?.entity_type],
+					entity_type: 'si',
 				});
 			} else {
 				NEW_EMAIL_DATA.push(child);
@@ -46,16 +40,9 @@ const useListRpaMails = ({ params = {} }) => {
 		});
 	}
 
-	useEffect(() => { entityType.current = entity_type; }, [entity_type]);
-
-	useEffect(() => {
-		if (entityType?.current?.length) {
-			getShipmentEmails();
-		}
-	}, [entityType, getShipmentEmails]);
-
 	return {
 		emailList: NEW_EMAIL_DATA,
+		getShipmentEmails,
 	};
 };
 

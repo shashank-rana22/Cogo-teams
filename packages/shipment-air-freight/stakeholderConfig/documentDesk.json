@@ -16,7 +16,8 @@
     },
     "documents":{
         "tab_title":"Documents",
-        "default_wallet":"trade_documents"
+        "default_wallet":"trade_documents",
+        "allow_update":true
     },
     "emails":{
         "tab_title":"Emails"

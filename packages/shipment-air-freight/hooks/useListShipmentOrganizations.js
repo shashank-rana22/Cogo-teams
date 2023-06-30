@@ -1,17 +1,14 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListShipmentOrganizations = ({ defaultFilters = {}, defaultParams = {} }) => {
-	const [filters, setFilters] = useState({});
-
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ data }, trigger] = useRequest({
 		url    : '/list_shipment_organizations',
 		method : 'GET',
 		params : {
 			filters: {
 				...defaultFilters,
-				...filters,
 			},
 			...defaultParams,
 		},
@@ -31,14 +28,10 @@ const useListShipmentOrganizations = ({ defaultFilters = {}, defaultParams = {} 
 
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, filters]);
+	}, [apiTrigger]);
 
 	return {
-		loading,
 		data,
-		apiTrigger,
-		filters,
-		setFilters,
 	};
 };
 

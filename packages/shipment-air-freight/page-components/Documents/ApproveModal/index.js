@@ -2,7 +2,7 @@ import { Button, Modal, Checkbox } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Approve({
+function ApproveModal({
 	showApproved,
 	setAddToWallet = () => {},
 	addToWallet,
@@ -12,15 +12,14 @@ function Approve({
 }) {
 	const handleManualUpload = () => {
 		setShowDoc({ ...showApproved, type: 'task' });
-		setShowApproved(null);
+		setShowApproved(false);
 	};
 
 	return (
 		<Modal
-			width="auto"
 			size="lg"
 			show={showApproved}
-			closeOnOuterClick={false}
+			onClose={() => setShowApproved(false)}
 		>
 			<Modal.Body>
 				<div className={styles.main_container}>
@@ -28,7 +27,7 @@ function Approve({
 						width="100%"
 						height="500px"
 						src={showApproved?.document_url}
-						title="Something"
+						title="Approve Document"
 					/>
 				</div>
 			</Modal.Body>
@@ -38,8 +37,7 @@ function Approve({
 					<div className={styles.main}>
 						<Checkbox
 							checked={addToWallet}
-							onChange={() => { setAddToWallet(false); }}
-							className="primary md"
+							onChange={() => setAddToWallet(false)}
 						/>
 						Add document to Wallet
 					</div>
@@ -47,7 +45,7 @@ function Approve({
 					<div className={styles.buttons_container}>
 						<Button
 							themeType="secondary"
-							onClick={() => setShowApproved(null)}
+							onClick={() => setShowApproved(undefined)}
 						>
 							Cancel
 						</Button>
@@ -65,4 +63,4 @@ function Approve({
 		</Modal>
 	);
 }
-export default Approve;
+export default ApproveModal;

@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetShipmentProcess = ({ defaultParams = {} }) => {
+const useGetShipmentProcess = (defaultParams = {}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_shipment_process',
 		method : 'GET',

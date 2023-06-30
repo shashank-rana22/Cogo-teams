@@ -1,5 +1,5 @@
 import { Input, Tabs, TabPanel, Modal } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Wallet from '../../Wallet';
@@ -19,18 +19,18 @@ function WalletForm({
 			<Modal.Header title="Document Wallet" />
 
 			<div className={styles.main_container}>
-				<div className={styles.header}>
-					<div className={styles.search_container}>
-						<Input
-							className="primary md"
-							value={searchDocs}
-							placeholder="Search..."
-							suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
-							onChange={(e) => {
-								setSearchDocs(e);
-							}}
-						/>
-					</div>
+				<div className={styles.search_container}>
+					<Input
+						className="primary md"
+						value={searchDocs}
+						placeholder="Search..."
+						suffix={searchDocs
+							? <IcMCross className={styles.search_icon} onClick={() => setSearchDocs('')} />
+							: <IcMSearchlight className={styles.search_icon} />}
+						onChange={(e) => {
+							setSearchDocs(e);
+						}}
+					/>
 				</div>
 
 				<Tabs
