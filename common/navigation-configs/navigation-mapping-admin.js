@@ -2445,7 +2445,17 @@ const navigationMappingAdmin = {
 				possible_apis : apis.pricing_trends,
 			},
 		],
-
+	},
+	employee_dashboard: {
+		key           : 'employee_dashboard',
+		title         : 'Employee Dashboard',
+		href          : '/v2/employee-dashboard',
+		as            : '/v2/employee-dashboard',
+		type          : 'link',
+		icon          : IcMDashboard,
+		possible_apis : apis.employee_performance_dashboard,
+		main_apis     : [],
+		module_type   : 'dashboards',
 	},
 };
 

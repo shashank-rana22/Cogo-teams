@@ -15,6 +15,7 @@ import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
+import employeeDashboard from './config/employee-dashboard';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
@@ -111,6 +112,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...employeeDashboard,
 };
 
 export default routeConfig;
