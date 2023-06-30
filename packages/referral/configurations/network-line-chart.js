@@ -1,45 +1,11 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 
-import { FIRST_LEVEL_DATA, SECOND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../constants';
-import { handleValues } from '../utils/handleValue';
-
-const LEVEL_INDEX_VALUE = 1;
-const NETWORK_LENGTH_VALUE_EQUAL_TO_10 = 10;
-const NETWORK_LENGTH_VALUE_EQUAL_TO_20 = 20;
+import { formatData, getUserLevel } from '../utils/network-stats-helper';
 
 function NetworkLineChart({ networkData = {} }) {
 	const networkLength = Object.keys(networkData).length;
-
-	const getUserLevel = () => {
-		let userLevel = [];
-		if (networkLength <= NETWORK_LENGTH_VALUE_EQUAL_TO_10) {
-			userLevel = FIRST_LEVEL_DATA;
-		} else if (networkLength <= NETWORK_LENGTH_VALUE_EQUAL_TO_20) {
-			userLevel = SECOND_LEVEL_DATA;
-		} else {
-			userLevel = THIRD_LEVEL_DATA;
-		}
-		return userLevel;
-	};
-
-	const mapdata = (data) => {
-		const keys = Object.keys(data || {});
-		let details = [];
-		keys.forEach((key, index) => {
-			details = [
-				...details,
-				{
-					x : `L${index + LEVEL_INDEX_VALUE}`,
-					y : handleValues(data?.[key]),
-				},
-			];
-		});
-		return details;
-	};
-
-	const network = mapdata(networkData);
-
-	const filteredNetwork = network.filter((item) => getUserLevel().includes(item?.x));
+	const network = formatData(networkData);
+	const filteredNetwork = network.filter((item) => getUserLevel(networkLength).includes(item?.x));
 	const newData = [
 		{
 			id   : 'network',
