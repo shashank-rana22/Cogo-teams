@@ -84,6 +84,10 @@ const businessFinance = {
 		navigation : 'business_finance-settlement',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/dunnings/[active_tab]': {
+		navigation : 'business_finance-dunnings',
+		isMainNav  : true,
+	},
 };
 
 export default businessFinance;

@@ -31,6 +31,7 @@ function useListChats({
 	searchValue = '',
 	viewType = '',
 	setShowFeedback = () => {},
+	activeSubTab,
 }) {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
@@ -96,8 +97,9 @@ function useListChats({
 			appliedFilters,
 			showBotMessages,
 			viewType,
+			activeSubTab,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType, activeSubTab],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -121,12 +123,13 @@ function useListChats({
 			canShowPinnedChats,
 			omniChannelQuery,
 			viewType,
+			activeSubTab,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType]);
+	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab]);
 
 	useEffect(() => {
 		mountSnapShot({
