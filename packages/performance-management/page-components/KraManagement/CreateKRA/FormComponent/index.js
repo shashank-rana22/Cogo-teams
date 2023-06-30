@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import getElementController from '../../../../configs/getElementController';
 
-import DescriptionControls from './DescriptionControls';
+import controls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
@@ -20,8 +20,6 @@ function FormComponent() {
 		loading,
 	} = useCreateKRA();
 
-	const controls = DescriptionControls();
-
 	return (
 		<div className={styles.container}>
 			<div>
@@ -36,40 +34,38 @@ function FormComponent() {
 			</div>
 
 			<div className={styles.form}>
-				{ (controls || []).map((formControl) => {
-					const { group, subControls } = formControl || {};
+				{(controls || []).map((controlItem) => {
+					const { name, type, label } = controlItem || {};
 
-					if (group !== 'top_controls') return null;
+					if (!type) return null;
 
-					return (subControls || []).map((controlItem) => {
-						const { name, type, label } = controlItem || {};
-						const DynamicController = getElementController(type);
+					const DynamicController = getElementController(type);
 
-						return (
-							<div key={name} className={styles.form_container}>
-								<div key={name} className={styles.single_field}>
-									<div className={styles.label}>
-										{label}
-									</div>
-
-									<div className={styles.controller_wrapper}>
-										<DynamicController
-											{...controlItem}
-											control={control}
-											name={name}
-										/>
-									</div>
+					return (
+						<div key={name} className={styles.form_container}>
+							<div key={name} className={styles.single_field}>
+								<div className={styles.label}>
+									{label}
 								</div>
-								{errors[name] ? (
-									<div className={styles.error_message}>
-										{' '}
-										{errors[name]?.message}
-									</div>
-								) : null}
+
+								<div className={styles.controller_wrapper}>
+									<DynamicController
+										{...controlItem}
+										control={control}
+										name={name}
+									/>
+								</div>
 							</div>
 
-						);
-					});
+							{errors[name] ? (
+								<div className={styles.error_message}>
+									{' '}
+									{errors[name]?.message}
+								</div>
+							) : null}
+						</div>
+
+					);
 				})}
 			</div>
 

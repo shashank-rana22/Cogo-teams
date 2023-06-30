@@ -6,7 +6,7 @@ const TOTAL_WEIGHTAGE = 1;
 const DEFAULT_WEIGHTAGE_OF_KRA = 0;
 
 const useKRAList = ({ filters = {}, selectAccordian = [], dataFrom }) => {
-	const [selectedValue, setSelectedValue] = useState();
+	const [selectedValue, setSelectedValue] = useState([]);
 	const [inputValue, setInputValue] = useState([]);
 
 	const [{ data, loading }] = useHarbourRequest(

@@ -18,6 +18,7 @@ function useGetkrasAssigned({ filters }) {
 
 	const getkrasAssigned = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
+
 		try {
 			trigger({
 				params: {

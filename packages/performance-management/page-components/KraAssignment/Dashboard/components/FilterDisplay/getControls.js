@@ -21,9 +21,7 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			multiple    : true,
 			isClearable : true,
-			params      : {
-				...params.filters,
-			},
+			params,
 		},
 		{
 			name        : 'role_ids',
@@ -34,9 +32,7 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			isClearable : true,
 			initialCall : true,
-			params      : {
-				...params,
-			},
+			params,
 		},
 		{
 			name        : 'tribe_id',
@@ -47,9 +43,7 @@ const getControls = ({ watchTriveId, check }) => {
 			initialCall : true,
 			isClearable : true,
 			disabled    : check,
-			params      : {
-				...params,
-			},
+			params,
 		},
 
 		{
