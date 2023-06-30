@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	align-items: center;
+	position: relative;
 
 	@media (max-width: 1068px) {
 		display: flex;

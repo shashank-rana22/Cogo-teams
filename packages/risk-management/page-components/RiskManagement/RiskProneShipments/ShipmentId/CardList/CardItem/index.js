@@ -16,11 +16,17 @@ const RISK_CATEGORIES = {
 	4 : 'VERY HIGH',
 };
 const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#ed3726' };
+const COMMODITY_CATEGORIES_VALUE = {
+	general    : '#C4DC91',
+	hazardous  : '#F37166',
+	perishable : '#ed3736',
+	pharma     : '#FBD1A6',
+};
 function CardItem({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
 		commodity_description = '', cargo_value_currency, cargo_value, reason = [],
-		criticality = '',
+		criticality = '', commodity_category = '',
 	} = itemData || {};
 
 	const risk_category = RISK_CATEGORIES[criticality];
@@ -105,6 +111,19 @@ function CardItem({ itemData }) {
 					</div>
 				) : null}
 			</div>
+			{commodity_category
+				? (
+					<div className={styles.ribbons}>
+						<div
+							className={styles.ribbon}
+							style={{ background: COMMODITY_CATEGORIES_VALUE[commodity_category], marginTop: -20 }}
+						>
+							{startCase(commodity_category) }
+
+						</div>
+					</div>
+				)
+				: null}
 		</div>
 	);
 }
