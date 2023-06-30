@@ -10,6 +10,7 @@ const useGetRDShipmentList = () => {
 	});
 	const apiMapping = {
 		fcl_freight     : 'fcl_freight/list_revenue_desk_shipments',
+		fcl_customs     : 'fcl_customs/list_revenue_desk_shipments',
 		air_customs     : './list_revenue_desk_air_customs_shipments',
 		air_freight     : './list_revenue_desk_air_freight_shipments',
 		ftl_freight     : './list_revenue_desk_ftl_freight_shipments',

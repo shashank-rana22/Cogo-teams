@@ -13,14 +13,14 @@ const getFormatedRates = (type, data, singleServiceData) => {
 				|| element?.airline?.business_name;
 			rowData.price_type = element?.data?.price_type;
 			rowData.container_count = container_count;
-			rowData.service_provider = element?.service_provider?.business_name;
+			rowData.service_provider = element?.service_provider;
 			rowData.price = Number(element?.validities?.[0]?.total_price) / Number(container_count);
 			rowData.total_price = element?.validities?.[0]?.total_price || 0;
 			rowData.currency = element?.validities?.[0]?.currency;
 			rowData.profit = element?.validities?.[0]?.profit || 0;
 			rowData.profit_percentage = element?.validities?.[0]?.profit_percentage || 0;
 			rowData.active_booking = element?.ongoing_shipment;
-			rowData.service_provider = element?.service_provider;
+			rowData.service_provider_id = element?.service_provider_id || element?.service_provider?.id;
 			rowData.via_route = element?.destination_main_port?.name;
 			rowData.allocation_ratio = undefined;
 			rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_2;

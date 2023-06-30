@@ -45,8 +45,11 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 	};
 	const isSupplierPayloadEmpty = Object.keys(supplierPayload).length === 0;
 	const isAllServiceIdsEmpty = Object.values(supplierPayload).every((array) => array.length === 0);
+	const isInventoryPayloadEmpty = Object.keys(inventory).length === 0;
+	const isAllInventoryIdsEmpty = Object.values(inventory).every((array) => array.length === 0);
 
-	const isDisabled = isSupplierPayloadEmpty || isAllServiceIdsEmpty;
+	const isDisabled = (isSupplierPayloadEmpty || isAllServiceIdsEmpty)
+		&& (isInventoryPayloadEmpty || isAllInventoryIdsEmpty);
 
 	return (
 		<div className={styles.container}>

@@ -8,7 +8,6 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	console.log(singleServiceData,';singleServiceData');
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_revenue_desk_showed_rates',
@@ -46,7 +45,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 					service_id         : singleServiceData?.id,
 					service_type       : singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
 					preferred_currency : 'USD',
-					refresh_rates      : !isPreferenceSet,
+					refresh_rates      : !isPreferenceSet && !['cancelled', 'completed'].includes(shipmentData.state),
 				},
 			});
 		} catch (err) {

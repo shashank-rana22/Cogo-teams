@@ -4,6 +4,7 @@ export const serviceOptions = [
 	{ label: 'Air Custom', value: 'air_customs' },
 	{ label: 'FTL Freight', value: 'ftl_freight' },
 	{ label: 'LTL Freight', value: 'ltl_freight' },
+	{ label: 'FCL Customs', value: 'fcl_customs' },
 ];
 
 export const statusOptions = [

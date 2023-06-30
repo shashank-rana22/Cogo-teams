@@ -2,6 +2,13 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
+const getProfitabillity = ({ profit, consBuyPrice }) => {
+	if (Number.isNaN(profit)) { return '--'; }
+	return consBuyPrice !== 0
+		? (Number(Number(profit) / Number(consBuyPrice)) * 100).toFixed(2)
+		: 0;
+};
+
 function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 	const profit = Number(conSellPrice) - Number(consBuyPrice);
 	return (
@@ -32,16 +39,14 @@ function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 					</div>
 					<div className={profit >= 0 ? styles.positive_container : styles.negative_container}>
 						{
-						consBuyPrice !== 0
-							? (Number(Number(profit) / Number(consBuyPrice)) * 100).toFixed(2)
-							: 0
-					}
+							getProfitabillity({ profit, consBuyPrice })
+						}
 						%
 					</div>
 				</div>
 				<div>
 					<div className={styles.key}>
-						Cons Sell Price
+						Consolidated Sell Price
 					</div>
 					<div className={styles.value}>
 						{formatAmount({
@@ -57,7 +62,7 @@ function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 				</div>
 				<div>
 					<div className={styles.key}>
-						Cons Buy Price
+						Consolidated Buy Price
 					</div>
 					<div className={styles.value}>
 						{formatAmount({
