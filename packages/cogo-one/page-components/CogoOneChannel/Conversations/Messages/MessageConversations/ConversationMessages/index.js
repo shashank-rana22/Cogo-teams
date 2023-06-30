@@ -48,7 +48,7 @@ function ConversationMessages({
 
 	return (
 		<>
-			{!loadingPrevMessages
+			{loadingPrevMessages
 				? (
 					<div className={styles.loader}>
 						<Image
