@@ -21,7 +21,6 @@ function AccordianDisplay({
 	setDataFrom,
 }) {
 	const { employee_details, kra_details } = data;
-
 	const [isActive, setIsActive] = useState(false);
 
 	const OBJECT_OF_EMPLOYEE_IDS = employee_details?.reduce((acc, obj) => {
@@ -32,7 +31,7 @@ function AccordianDisplay({
 	const active = JSON.stringify(selectAccordian);
 	const current = JSON.stringify(kra_details);
 
-	const Clicked = () => {
+	const clicked = () => {
 		setSelectAccordianObject();
 		setSelectAccordian(kra_details);
 		setIsActive(!isActive);
@@ -45,7 +44,7 @@ function AccordianDisplay({
 		>
 			<div
 				className={styles.accordian_heading}
-				onClick={() => Clicked()}
+				onClick={() => clicked()}
 				role="button"
 				tabIndex={0}
 			>

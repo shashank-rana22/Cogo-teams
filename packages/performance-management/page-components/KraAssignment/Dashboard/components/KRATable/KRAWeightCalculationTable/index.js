@@ -41,8 +41,6 @@ function KRAWeightCalculationTable({
 	const renderFields = () => (inputValue || []).map((element, index) => (
 		<div className={styles.value} key={element?.kra_assigned}>
 			<Input
-				// value={Math.round((inputValue[index]?.weightage)
-				// 	* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
 				value={inputValue[index]?.weightage}
 				size="sm"
 				placeholder="0"
