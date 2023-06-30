@@ -21,7 +21,7 @@ function MessageMapping({ conversation_type, ...restProps }) {
 	}
 }
 
-function ConversationMessages({
+function MessagesThread({
 	loadingPrevMessages = false,
 	lastPage, getNextData, messagesData = [], activeMessageCard,
 	formattedData = {}, setRaiseTicketModal = () => {},
@@ -29,22 +29,6 @@ function ConversationMessages({
 	const { channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 	const unreadIndex = new_user_message_count > messagesData.length
 		? DEFAULT_VALUE : messagesData.length - new_user_message_count;
-
-	const ticketPopoverContent = (data) => {
-		const triggerModal = () => {
-			setRaiseTicketModal((p) => {
-				if (p?.state) {
-					return { state: false, data: {}, source: null };
-				}
-				return { state: true, data: { messageData: data, formattedData }, source: 'message' };
-			});
-		};
-		return (
-			<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
-				Raise a ticket
-			</div>
-		);
-	};
 
 	return (
 		<>
@@ -76,8 +60,9 @@ function ConversationMessages({
 					eachMessage={eachMessage}
 					activeMessageCard={activeMessageCard}
 					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
-					ticketPopoverContent={ticketPopoverContent}
 					user_name={user_name}
+					setRaiseTicketModal={setRaiseTicketModal}
+					formattedData={formattedData}
 				/>
 			))}
 
@@ -85,4 +70,4 @@ function ConversationMessages({
 	);
 }
 
-export default ConversationMessages;
+export default MessagesThread;

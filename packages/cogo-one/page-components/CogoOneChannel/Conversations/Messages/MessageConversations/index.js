@@ -6,8 +6,8 @@ import { useRef, useEffect } from 'react';
 
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
-import ConversationMessages from './ConversationMessages';
 import Footer from './Footer';
+import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
 const SET_TIME_OUT = 200;
@@ -122,7 +122,7 @@ function MessageConversations({
 						/>
 					</div>
 				) : (
-					<ConversationMessages
+					<MessagesThread
 						getNextData={getNextData}
 						lastPage={lastPage}
 						loadingPrevMessages={loadingPrevMessages}

@@ -227,6 +227,10 @@ const GLOBAL_CONSTANTS = {
 		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
+	urls: {
+		list_emojis: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
+	},
+
 	options: {
 		upload_file_size: {
 			'1MB'  : '1048576',

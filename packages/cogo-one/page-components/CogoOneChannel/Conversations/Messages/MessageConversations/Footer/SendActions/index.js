@@ -17,7 +17,9 @@ function SendActions({
 	formattedData = {},
 }) {
 	const { channel_type = '' } = formattedData;
-	const hasPermissionToSend = !hasPermissionToEdit || messageLoading || (isEmpty(draftMessage?.trim()) && !finalUrl);
+	const hasNopermissionToSend = !hasPermissionToEdit || messageLoading
+	|| (isEmpty(draftMessage?.trim()) && !finalUrl);
+
 	const {
 		sendPromotionalRate = () => {},
 		loading = false,
@@ -59,7 +61,7 @@ function SendActions({
 						sendChatMessage(scrollToBottom);
 					}
 				}}
-				style={{ cursor: hasPermissionToSend ? 'not-allowed' : 'pointer' }}
+				style={{ cursor: hasNopermissionToSend ? 'not-allowed' : 'pointer' }}
 			/>
 		</div>
 	);
