@@ -20,7 +20,7 @@ function TableDisplay({
 	dataFrom,
 	setDataFrom,
 }) {
-	const Clicked = () => {
+	const onClickTable = () => {
 		if (dataFrom !== type) {
 			setDataFrom(type);
 			resetObjects();
@@ -38,7 +38,7 @@ function TableDisplay({
 	return (
 		<div
 			className={type === TABLE_USED_FOR ? styles.accordian : styles.container}
-			onClick={() => Clicked()}
+			onClick={() => onClickTable()}
 			role="button"
 			tabIndex={0}
 		>

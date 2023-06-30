@@ -12,7 +12,7 @@ const TABLE_EMPTY_TEXT = 'No data to show';
 
 function IndividualKraAssignment({ data, loading }) {
 	const {
-		loading:submitLoading, createIndividualKra,
+		loading: submitLoading, createIndividualKra,
 		valuesIndividualKRA,
 		setValuesIndividualKRA,
 		ratingInfo,
@@ -27,7 +27,6 @@ function IndividualKraAssignment({ data, loading }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.table_container}>
 				<StyledTable
 					columns={columns}
@@ -40,6 +39,7 @@ function IndividualKraAssignment({ data, loading }) {
 
 			<div className={styles.container1}>
 				<RatingInfo ratingInfo={ratingInfo} loading={loading} />
+
 				<Button
 					loading={submitLoading}
 					onClick={() => createIndividualKra(valuesIndividualKRA)}
