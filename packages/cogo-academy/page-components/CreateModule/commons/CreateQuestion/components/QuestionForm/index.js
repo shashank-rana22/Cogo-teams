@@ -4,6 +4,7 @@ import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import updateStates from '../../../../utils/updateStates';
 import SingleQuestionComponent from '../../../SingleQuestionComponent';
 
 import controls from './controls';
@@ -105,21 +106,7 @@ function QuestionForm({
 
 	const handleDeleteNewObject = (index) => {
 		remove(index, 1);
-
-		STATE_FUNCTIONS.forEach((stateChanger) => {
-			stateChanger((prev) => {
-				const updatedObj = { ...prev };
-				const keys = Object.keys(updatedObj);
-
-				keys.forEach((currentKey, i) => {
-					if (i > index) {
-						if (i < keys.length - OFFSET) updatedObj[currentKey] = updatedObj[keys[i + OFFSET]];
-						else delete updatedObj[i];
-					}
-				});
-				return updatedObj;
-			});
-		});
+		updateStates({ STATE_FUNCTIONS, index, OFFSET });
 	};
 
 	return (

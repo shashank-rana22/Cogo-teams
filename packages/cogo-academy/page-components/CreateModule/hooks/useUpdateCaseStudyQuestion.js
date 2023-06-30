@@ -70,8 +70,6 @@ function useUpdateCaseStudyQuestion({
 			return;
 		}
 
-		if (isEmpty(payload)) return;
-
 		const triggerToUse = triggerMapping?.[action];
 
 		try {

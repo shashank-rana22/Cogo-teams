@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
+import updateStates from '../../utils/updateStates';
 
 import getControls from './controls';
 
@@ -59,21 +60,7 @@ function useHandleSingleQuestion({
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
-
-			STATE_FUNCTIONS.forEach((stateChanger) => {
-				stateChanger((prev) => {
-					const updatedObj = { ...prev };
-					const keys = Object.keys(updatedObj);
-
-					keys.forEach((currentKey, i) => {
-						if (i > index) {
-							if (i < keys.length - OFFSET) updatedObj[currentKey] = updatedObj[keys[i + OFFSET]];
-							else delete updatedObj[i];
-						}
-					});
-					return updatedObj;
-				});
-			});
+			updateStates({ STATE_FUNCTIONS, index, OFFSET });
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',

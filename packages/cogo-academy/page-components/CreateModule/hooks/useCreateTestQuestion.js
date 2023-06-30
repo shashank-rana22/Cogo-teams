@@ -63,8 +63,6 @@ function useCreateTestQuestion({
 			return;
 		}
 
-		if (isEmpty(payload)) return;
-
 		const triggerToUse = TRIGGER_MAPPING?.[question_type] || triggerNonCase;
 
 		try {

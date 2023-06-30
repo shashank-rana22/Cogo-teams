@@ -72,8 +72,6 @@ function useUpdateStandAloneTestQuestion({
 				return;
 			}
 
-			if (isEmpty(payload)) return;
-
 			await trigger({
 				data: payload,
 			});

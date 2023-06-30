@@ -26,7 +26,7 @@ const getSubjectivePayload = ({
 
 	if (!questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText()) {
 		setQuestionError({ question_0: true });
-		return {};
+		return { hasError: ['Question is required'] };
 	}
 
 	return {

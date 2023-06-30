@@ -1,4 +1,4 @@
-const checkErrors = ({ options, question_type }) => {
+const checkErrors = ({ options, question_type, hasText }) => {
 	const correctOptions = options.filter((item) => item.is_correct === 'true');
 
 	const allOptions = options.map((item) => item?.answer_text);
@@ -21,6 +21,10 @@ const checkErrors = ({ options, question_type }) => {
 
 	if (allOptions.length !== [...uniqueOptions].length) {
 		return 'All the options should be unique';
+	}
+
+	if (!hasText) {
+		return 'Question is required';
 	}
 
 	return 'noError';

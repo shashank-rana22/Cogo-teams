@@ -25,9 +25,17 @@ const getCaseStudyPayload = ({
 
 		const hasError = [];
 
-		const checkError = checkErrors({ options, question_type });
+		const checkError = checkErrors({
+			options,
+			question_type,
+			hasText: questionEditorValue?.
+				[`case_questions_${questionIndex}`]?.getEditorState().getCurrentContent().hasText(),
+		});
 
 		if (checkError !== 'noError') {
+			if (checkError === 'Question is required') {
+				setQuestionError((prev) => ({ ...prev, [`case_questions_${questionIndex}`]: true }));
+			}
 			hasError.push(checkError);
 		}
 
@@ -38,12 +46,6 @@ const getCaseStudyPayload = ({
 		const { test_case_study_questions = {} } = editDetails || {};
 
 		const { test_question_answers = [] } = test_case_study_questions?.[questionIndex] || {};
-
-		if (!questionEditorValue?.
-			[`case_questions_${questionIndex}`]?.getEditorState().getCurrentContent().hasText()) {
-			setQuestionError((prev) => ({ ...prev, [`case_questions_${questionIndex}`]: true }));
-			return {};
-		}
 
 		const answers = options.map((option, index) => {
 			const { is_correct, answer_text } = option || {};

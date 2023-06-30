@@ -24,16 +24,16 @@ const getStandAlonePayload = ({
 		return { id: testQuestionId, status: 'inactive' };
 	}
 
-	if (!questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText()) {
-		setQuestionError({ question_0: true });
-		return {};
-	}
-
 	const hasError = [];
 
-	const checkError = checkErrors({ options, question_type });
+	const checkError = checkErrors({
+		options,
+		question_type,
+		hasText: questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText(),
+	});
 
 	if (checkError !== 'noError') {
+		if (checkError === 'Question is required') setQuestionError({ question_0: true });
 		hasError.push(checkError);
 	}
 
