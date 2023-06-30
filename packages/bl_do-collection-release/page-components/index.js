@@ -57,9 +57,11 @@ export default function BLDoCollectionDesk() {
 				<ClickableDiv
 					onClick={() => setStateProps({
 						...stateProps,
-						inner_tab       : item.value,
-						document_status : undefined,
-						page            : 1,
+						ready_to_collect : false,
+						ready_to_release : false,
+						inner_tab        : item.value,
+						document_status  : undefined,
+						page             : 1,
 					})}
 					key={item?.value}
 				>
