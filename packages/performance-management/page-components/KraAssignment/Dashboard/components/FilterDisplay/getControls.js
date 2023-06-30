@@ -1,4 +1,14 @@
 const getControls = ({ watchTriveId, check }) => {
+	const PAGE_LIMIT = 100;
+
+	const params = {
+		filters: {
+			status               : 'active',
+			partner_entity_types : ['cogoport'],
+		},
+		page_limit: PAGE_LIMIT,
+	};
+
 	const controls = [
 		{
 			name        : 'employee_ids',
@@ -11,12 +21,7 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			multiple    : true,
 			isClearable : true,
-			params      : {
-				filters: {
-					status               : 'active',
-					partner_entity_types : ['cogoport'],
-				},
-			},
+			params,
 		},
 		{
 			name        : 'role_ids',
@@ -27,14 +32,7 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			isClearable : true,
 			initialCall : true,
-			params      : {
-				filters: {
-					status               : 'active',
-					partner_entity_types : ['cogoport'],
-
-				},
-				page_limit: 100,
-			},
+			params,
 		},
 		{
 			name        : 'tribe_id',
@@ -45,14 +43,7 @@ const getControls = ({ watchTriveId, check }) => {
 			initialCall : true,
 			isClearable : true,
 			disabled    : check,
-			params      : {
-				filters: {
-					status               : 'active',
-					partner_entity_types : ['cogoport'],
-
-				},
-				page_limit: 100,
-			},
+			params,
 		},
 
 		{
@@ -67,51 +58,12 @@ const getControls = ({ watchTriveId, check }) => {
 			isClearable : true,
 			params      : {
 				filters: {
-					status               : 'active',
-					partner_entity_types : ['cogoport'],
-					tribe_id             : watchTriveId,
+					...params.filters,
+					tribe_id: watchTriveId,
 				},
-				page_limit: 100,
+				...params.page_limit,
 			},
 		},
-		// {
-		// 	name        : 'chapter_id',
-		// 	type        : 'asyncSelect',
-		// 	asyncKey    : 'list_chapters',
-		// 	label       : 'Chapters',
-		// disabled    : !WATCH_VALUES.squad_id || check,
-		// 	placeholder : 'Select',
-		// isClearable : true,
-		// initialCall : true,
-		// 	params      : {
-		// 		filters: {
-		// 			status               : 'active',
-		// 			partner_entity_types : ['cogoport'],
-		// squad_id             : WATCH_VALUES.squad_id,
-
-		// 		},
-		// 		page_limit: 100,
-		// 	},
-		// },
-
-		// {
-		// 	name        : 'sub_chapter_id',
-		// 	type        : 'asyncSelect',
-		// 	asyncKey    : 'list_sub_chapters',
-		// 	label       : 'Sub chapter',
-		// disabled    : !WATCH_VALUES.chapter_id || check,
-		// 	placeholder : 'Select',
-		// isClearable : true,
-		// initialCall : true,
-		// 	params      : {
-		// 		filters: {
-		// 			status               : 'active',
-		// 			partner_entity_types : ['cogoport'],
-		// chapter_id             : WATCH_VALUES.chapter_id,
-		// 		},
-		// 		page_limit: 100,
-		// 	},
-		// },
 	];
 
 	return controls;
