@@ -112,6 +112,11 @@ function EditCancelService({ serviceData = {} }) {
 		return null;
 	}
 
+	const truckList = getTrucklistWithId(serviceData);
+
+	const isTruckPresent =	truckList.length > 0
+		&& !['cargo_dropped', 'completed'].includes(truckList?.[0]?.state);
+
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
@@ -133,7 +138,9 @@ function EditCancelService({ serviceData = {} }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
+				{isTruckPresent
+					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
+					: null}
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
@@ -143,7 +150,7 @@ function EditCancelService({ serviceData = {} }) {
 			&& (
 				<VerifyTruck
 					setShow={setShowModal}
-					truckList={getTrucklistWithId(serviceData)}
+					truckList={truckList}
 				/>
 			)}
 
@@ -175,7 +182,7 @@ function EditCancelService({ serviceData = {} }) {
 							controls={EditTruckNumberControls}
 							heading="EDIT TRUCK NUMBER"
 							type="truck_number"
-							truckList={getTrucklistWithId(serviceData)}
+							truckList={truckList}
 							refetchServices={refetchServices}
 						/>
 					</Modal.Body>
