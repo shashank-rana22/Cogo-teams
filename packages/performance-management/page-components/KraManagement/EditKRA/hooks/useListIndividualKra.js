@@ -1,6 +1,6 @@
+import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const DEFAULT_ACTIVE_TAB = 'individual';

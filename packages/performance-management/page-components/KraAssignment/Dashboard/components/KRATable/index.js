@@ -4,7 +4,7 @@ import KRAWeightCalculationTable from './KRAWeightCalculationTable';
 import SelectKRAs from './SelectKRAs';
 import useKRAList from './useKRAList';
 
-const ARRAY_LENGTH_CONST = 1;
+const ARRAY_LENGTH = 1;
 
 function KRATable({
 	selectedObject,
@@ -16,9 +16,7 @@ function KRATable({
 	dataFrom,
 	resetObjects,
 }) {
-	const selectArray = Object.keys(selectedObject).filter((key) => selectedObject[key] === true);
-
-	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH_CONST]
+	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH]
 	|| [];
 
 	const filters = isEmpty(filtersFields) ? appliedFilters : fieldsFilterLastElement;
@@ -31,6 +29,8 @@ function KRATable({
 		setInputValue,
 		onClickAddKRAs,
 	} = useKRAList({ filters, selectAccordian, dataFrom });
+
+	const selectArray = Object.keys(selectedObject).filter((key) => selectedObject[key] === true);
 
 	return (
 		<div>

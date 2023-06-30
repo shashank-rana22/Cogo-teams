@@ -33,7 +33,7 @@ const OPERATION_TYPE_OPTIONS = [
 	},
 ];
 
-const getControls = ({ setShowSelectedValue }) => ([
+const getControls = ({ setShowSelectedValue = () => {} }) => ([
 	{
 		group       : 'mid_controls',
 		subControls : [

@@ -38,7 +38,6 @@ function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue
 
 	return (
 		<div className={styles.form}>
-
 			{ (controls || []).map((formControl) => {
 				const { group, subControls } = formControl || {};
 
@@ -46,6 +45,9 @@ function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue
 
 				return (subControls || []).map((controlItem) => {
 					const { name, type, label } = controlItem || {};
+
+					if (!type) return null;
+
 					const DynamicController = getElementController(type);
 
 					return (
