@@ -24,6 +24,7 @@ const TYPE_COMPONENT_MAPPING = {
 	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
 	SEZ_APPROVAL                           : SezApproval,
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
+	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
 };
 
 function AccessorComponent({ row, getIncidentData }) {

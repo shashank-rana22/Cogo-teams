@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
@@ -150,18 +149,22 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'Start Date',
-			value : <div>
-				{startDate
-					? formatDate(startDate, 'dd/MMM/yy', {}, false)
-					: '-'}
-			</div>,
+			value : (
+				<div>
+					{startDate
+						? formatDate(startDate, 'dd/MMM/yy', {}, false)
+						: '-'}
+				</div>
+			),
 		},
 		{
 			title : 'End Date',
-			value : <div>
-				{endDate
-					? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
-			</div>,
+			value : (
+				<div>
+					{endDate
+						? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
+				</div>
+			),
 		},
 	];
 	const summaryDataThird = [
@@ -180,20 +183,22 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'Uploaded Documents',
-			value : <div>
-				{uploadedInvoice
-					? (
-						<a
-							href={uploadedInvoice}
-							style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{showOverflowingNumber(filename, 20)}
-						</a>
-					)
-					: '-'}
-			</div>,
+			value : (
+				<div>
+					{uploadedInvoice
+						? (
+							<a
+								href={uploadedInvoice}
+								style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
+								target="_blank"
+								rel="noreferrer"
+							>
+								{showOverflowingNumber(filename, 20)}
+							</a>
+						)
+						: '-'}
+				</div>
+			),
 		},
 	];
 
