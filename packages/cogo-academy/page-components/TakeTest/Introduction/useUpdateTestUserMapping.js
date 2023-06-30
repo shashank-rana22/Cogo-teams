@@ -2,7 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useUpdateTestUserMapping = () => {
+const DEFAULT_PAGE = 1;
+const DEFAULT_VISIBILITY_COUNT = 1;
+
+const useUpdateTestUserMapping = ({ setActiveState }) => {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -16,8 +19,9 @@ const useUpdateTestUserMapping = () => {
 		url    : '/update_test_user_mapping',
 	}, { manual: true });
 
-	const passStartTime = async () => {
+	const handleStartExam = async () => {
 		const start_time = new Date();
+
 		try {
 			const payload = {
 				test_id,
@@ -29,6 +33,23 @@ const useUpdateTestUserMapping = () => {
 			await trigger({
 				data: payload,
 			});
+
+			setActiveState('ongoing');
+			localStorage.setItem('visibilityChangeCount', DEFAULT_VISIBILITY_COUNT);
+			localStorage.setItem(
+				`current_question_${test_id}_${user_id}`,
+				DEFAULT_PAGE,
+			);
+
+			// const elem = document.getElementById('maincontainer');
+
+			// if (elem?.requestFullscreen) {
+			// 	elem?.requestFullscreen();
+			// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+			// 	elem?.webkitRequestFullscreen();
+			// } else if (elem?.msRequestFullscreen) { /* IE11 */
+			// 	elem?.msRequestFullscreen();
+			// }
 		} catch (err) {
 			Toast.error(err.response?.data);
 		}
@@ -36,7 +57,7 @@ const useUpdateTestUserMapping = () => {
 
 	return {
 		loading,
-		passStartTime,
+		handleStartExam,
 	};
 };
 
