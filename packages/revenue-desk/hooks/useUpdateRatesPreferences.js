@@ -82,7 +82,7 @@ const useUpdateRatesPreferences = ({
 			revenueDeskDecision.push(final_payload);
 		}
 	});
-	console.log(revenueDeskDecision, 'revenueDeskDecision');
+
 	const updateTrigger = async () => {
 		try {
 			await trigger({
