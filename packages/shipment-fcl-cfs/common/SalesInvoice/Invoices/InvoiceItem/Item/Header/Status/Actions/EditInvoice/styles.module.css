@@ -1,0 +1,15 @@
+.forms {
+	overflow: auto;
+}
+
+.invoice_value {
+	margin-bottom: 12px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #333;
+
+	.amount {
+		color: var(--color-accent-orange-2);
+	}
+}

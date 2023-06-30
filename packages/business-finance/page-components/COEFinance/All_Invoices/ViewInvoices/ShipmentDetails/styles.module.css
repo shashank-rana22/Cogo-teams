@@ -95,12 +95,8 @@
 	margin-top: 8px;
 }
 
-.consolidated_sid {
-	display: flex;
-	justify-content: space-between;
-	cursor: pointer;
-	background-color: #ffff;
-	border-radius: 8px;
+.consolidated_shipment_details {
+	margin-top: 12px;
 }
 
 .consolidated_text {
@@ -138,4 +134,9 @@
 	display: flex;
 	justify-content: space-around;
 	min-width: 130px;
+}
+
+.line {
+	margin-bottom: 12px;
+	border: 1px solid #333;
 }

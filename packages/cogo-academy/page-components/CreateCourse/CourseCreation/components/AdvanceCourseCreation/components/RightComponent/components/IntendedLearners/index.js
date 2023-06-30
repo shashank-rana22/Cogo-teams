@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 import useHandleIntendedLearners from './useHandleIntendedLearners';
 
 function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, state }, ref) {
+	const { cogo_academy_sheets = [], eligible_users = '' } = data || {};
+
 	const {
 		control,
 		errors,
@@ -17,9 +19,9 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 		audiences,
 		onClickGenerate,
 		loading,
-	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse, state });
+	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse, state, eligible_users });
 
-	const { cogo_academy_sheets = [] } = data || {};
+	const dataNotSaved = mandatoryAudiencesUserWatch === 'custom' && eligible_users !== 'custom';
 
 	return (
 		<div className={styles.container}>
@@ -49,6 +51,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 							errors={errors}
 							cogo_academy_sheets={cogo_academy_sheets}
 							getCogoAcademyCourse={getCogoAcademyCourse}
+							disableExcel={dataNotSaved}
 						/>
 					);
 				}
@@ -81,19 +84,19 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 							) : null}
 						</div>
 
-						{name === 'mandatory_audiences_user'
-						&& mandatoryAudiencesUserWatch === 'custom' && data.eligible_users !== 'custom'	? (
+						{name === 'mandatory_audiences_user' && dataNotSaved ? (
 							<div className={styles.generate_button}>
 								<Button
 									type="button"
 									onClick={onClickGenerate}
 									loading={loading}
+									className={styles.save_and_generate_button}
 									size="sm"
 								>
 									Save and Generate
 								</Button>
 							</div>
-							) : null}
+						) : null}
 					</>
 				);
 			})}

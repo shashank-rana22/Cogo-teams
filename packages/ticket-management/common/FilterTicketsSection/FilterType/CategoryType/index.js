@@ -1,7 +1,6 @@
 import { Select } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
 
 import useRaiseTicketControls from '../../../../configurations/raise-ticket-controls';
 
@@ -14,13 +13,7 @@ function CategoryType(props) {
 		(item) => ({ value: item.TicketType, label: item.TicketType }),
 	);
 
-	const serviceProviderOptions = useGetAsyncOptions(
-		merge(asyncFieldsPartnerUsers(), {
-			params: {
-				filters: { account_type: 'service_provider', kyc_status: 'verified' },
-			},
-		}),
-	);
+	const serviceProviderOptions = useGetAsyncOptions({ ...asyncFieldsPartnerUsers(), valueKey: 'user_id' });
 
 	return (
 		<div className={styles.category_container}>

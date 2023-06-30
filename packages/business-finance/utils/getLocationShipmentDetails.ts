@@ -3,11 +3,12 @@ import isSingleLocation from './isSingleLocation';
 const getLocationShipmentDetails = (data, summary, type) => {
 	const { search_type:searchType } = summary;
 
-	const suffixConfig = {
+	const SUFFIX_CONFIG = {
 		fcl_freight             : 'port',
 		lcl_freight             : 'port',
 		air_freight             : 'airport',
 		domestic_air_freight    : 'airport',
+		rail_domestic_freight   : 'location',
 		origin_ftl_freight      : 'pickup',
 		destination_ftl_freight : 'drop',
 		origin_ltl_freight      : 'pickup',
@@ -16,15 +17,14 @@ const getLocationShipmentDetails = (data, summary, type) => {
 		fcl_customs             : 'port',
 		lcl_customs             : 'location',
 		air_customs             : 'airport',
-
-		trailer_freight   : 'location',
-		fcl_cfs           : 'port',
-		fcl_freight_local : 'port',
-		air_freight_local : 'airport',
-		lcl_freight_local : 'port',
+		trailer_freight         : 'location',
+		fcl_cfs                 : 'port',
+		fcl_freight_local       : 'port',
+		air_freight_local       : 'airport',
+		lcl_freight_local       : 'port',
 	};
 
-	const suffix =		suffixConfig[`${type}_${searchType}`] || suffixConfig[searchType];
+	const suffix =	SUFFIX_CONFIG[`${type}_${searchType}`] || SUFFIX_CONFIG[searchType];
 
 	const objName =		!isSingleLocation(searchType)
 		&& !['ftl_freight', 'ltl_freight'].includes(searchType)
