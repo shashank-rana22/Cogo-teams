@@ -14,7 +14,6 @@ import TicketSummary from './TicketSummary';
 
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
-const DEFAULT_TIMEOUT = 1;
 const DEFAULT_TICKET_ACTIVITY = 0;
 
 const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
@@ -30,7 +29,7 @@ const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
 	return 'calc(100% - 75px)';
 };
 
-function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () => {} }) {
+function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = () => {} }) {
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
@@ -82,10 +81,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setUpdated = () =
 		getTicketDetails();
 		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
 
-		setUpdated(true);
-		setTimeout(() => {
-			setUpdated(false);
-		}, DEFAULT_TIMEOUT);
+		setIsUpdated(true);
 	};
 
 	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({

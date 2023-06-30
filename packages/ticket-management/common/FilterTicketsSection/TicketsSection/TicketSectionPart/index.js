@@ -7,7 +7,7 @@ import TicketStructure from '../../../TicketStructure';
 import styles from './styles.module.css';
 
 function TicketsSectionPart({
-	label, status, searchParams, refreshList, setRefreshList, isAdmin, setModalData, updated,
+	label, status, searchParams, refreshList, setRefreshList, isAdmin, setModalData, isUpdated, setIsUpdated,
 }) {
 	const { tickets, listLoading, handleScroll, fetchTickets = () => {} } = useListTickets({
 		searchParams,
@@ -15,7 +15,8 @@ function TicketsSectionPart({
 		label,
 		refreshList,
 		setRefreshList,
-		updated,
+		isUpdated,
+		setIsUpdated,
 	});
 
 	const { list, total = 0 } = tickets || {};

@@ -31,7 +31,7 @@ function TicketActions({
 	const actionMappings = getActionMapping({ status, isClosureAuthorizer });
 
 	return (
-		<>
+		<div className={styles.pending_actions}>
 			{actionMappings.map((item) => (
 				<Button
 					key={item}
@@ -43,7 +43,7 @@ function TicketActions({
 					{startCase(item)}
 				</Button>
 			))}
-		</>
+		</div>
 	);
 }
 

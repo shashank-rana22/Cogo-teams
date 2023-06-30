@@ -10,7 +10,7 @@ import TicketsSection from './TicketsSection';
 function FilterTicketsSection({ type = '' }) {
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState({ });
-	const [updated, setUpdated] = useState(false);
+	const [isUpdated, setIsUpdated] = useState(false);
 
 	const isAdmin = type === 'admin';
 
@@ -21,9 +21,10 @@ function FilterTicketsSection({ type = '' }) {
 				searchParams={searchParams}
 				isAdmin={isAdmin}
 				setModalData={setModalData}
-				updated={updated}
+				isUpdated={isUpdated}
+				setIsUpdated={setIsUpdated}
 			/>
-			<Modals modalData={modalData} setModalData={setModalData} setUpdated={setUpdated} />
+			<Modals modalData={modalData} setModalData={setModalData} setIsUpdated={setIsUpdated} />
 		</div>
 	);
 }

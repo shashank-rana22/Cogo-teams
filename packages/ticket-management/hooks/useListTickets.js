@@ -21,7 +21,8 @@ const useListTickets = ({
 	label,
 	refreshList,
 	setRefreshList,
-	updated,
+	isUpdated,
+	setIsUpdated,
 }) => {
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
@@ -73,7 +74,18 @@ const useListTickets = ({
 		if (refreshList?.[label]) {
 			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
-	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList, updated]);
+	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList, isUpdated]);
+
+	useEffect(() => {
+		if (isUpdated) {
+			setTickets({ list: [], total: 0 });
+			fetchTickets(MIN_TICKET_COUNT);
+			if (refreshList?.[label]) {
+				setRefreshList((prev) => ({ ...prev, [label]: false }));
+			}
+			setIsUpdated(false);
+		}
+	}, [fetchTickets, isUpdated, label, refreshList, setRefreshList, setIsUpdated]);
 
 	useEffect(() => {
 		debounceQuery(searchParams?.text);
