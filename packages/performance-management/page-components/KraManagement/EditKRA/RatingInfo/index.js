@@ -6,6 +6,7 @@ import getRatingInfoColumn from './getRatingInfoColumn';
 import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
+
 function RatingInfo({ ratingInfo, loading }) {
 	const { kra_name, kra_description, kra_ratings, value_type } = ratingInfo || {};
 

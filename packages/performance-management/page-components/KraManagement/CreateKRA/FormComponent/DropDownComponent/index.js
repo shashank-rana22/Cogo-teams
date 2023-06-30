@@ -33,8 +33,9 @@ function RenderSelectedFields({ selectedValues, name }) {
 	});
 }
 
-function RenderFields({ control, errors, setSelectedValue, showSelectedValue }) {
-	const controls = getControls({ setSelectedValue });
+function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue }) {
+	const controls = getControls({ setShowSelectedValue });
+
 	return (
 		<div className={styles.form}>
 
@@ -91,7 +92,7 @@ function RenderFields({ control, errors, setSelectedValue, showSelectedValue }) 
 	);
 }
 
-function DropDownComponent({ control, errors, watch, setSelectedValue, showSelectedValue }) {
+function DropDownComponent({ control, errors, watch, setShowSelectedValue, showSelectedValue }) {
 	return (
 		<div>
 			<div style={{ paddingTop: 8, width: '85%' }}>
@@ -105,7 +106,7 @@ function DropDownComponent({ control, errors, watch, setSelectedValue, showSelec
 					control={control}
 					errors={errors}
 					watch={watch}
-					setSelectedValue={setSelectedValue}
+					setShowSelectedValue={setShowSelectedValue}
 					showSelectedValue={showSelectedValue}
 				/>
 			</div>

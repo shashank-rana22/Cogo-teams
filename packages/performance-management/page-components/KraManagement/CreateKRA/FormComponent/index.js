@@ -16,7 +16,7 @@ function FormComponent() {
 		onClickSubmitButton,
 		watch,
 		showSelectedValue,
-		setSelectedValue,
+		setShowSelectedValue,
 		loading,
 	} = useCreateKRA();
 
@@ -77,7 +77,7 @@ function FormComponent() {
 				<DropDownComponent
 					control={control}
 					errors={errors}
-					setSelectedValue={setSelectedValue}
+					setShowSelectedValue={setShowSelectedValue}
 					showSelectedValue={showSelectedValue}
 				/>
 			</div>
