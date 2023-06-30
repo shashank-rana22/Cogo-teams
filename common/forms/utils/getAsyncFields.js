@@ -670,6 +670,24 @@ function asyncListPromotions() {
 	};
 }
 
+function asyncListDunningTemplates() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_dunning_templates',
+		initialCall : true,
+	};
+}
+
+function asyncListOrganizationStakeholders() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/organization-stakeholders',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -724,4 +742,6 @@ export {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
 };
