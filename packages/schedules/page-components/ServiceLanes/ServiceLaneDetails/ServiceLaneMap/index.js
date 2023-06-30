@@ -1,9 +1,10 @@
 import ScheduleMap from "../../../common/ScheduleMaps";
 
-function ServiceLanesMap() {
+function ServiceLanesMap({ data }) {
+    console.log("data:---->", data);
     return (
         <div styles={{ borderRadius: "8px" }}>
-            <ScheduleMap points={[1, 2, 34]} routesLoading={false} />
+            <ScheduleMap data={data} />
         </div>
     );
 }

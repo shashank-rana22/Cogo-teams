@@ -19,7 +19,7 @@ function ServiceLaneDetails() {
                     route={data?.[0]?.service_lane_links}
                     dayOfWeek={data?.[0]?.day_of_week || 10}
                 />
-                <ServiceLanesMap />
+                <ServiceLanesMap data={data} />
             </div>
         </>
     );

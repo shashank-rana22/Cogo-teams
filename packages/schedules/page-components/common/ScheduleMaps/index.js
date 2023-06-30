@@ -2,13 +2,17 @@ import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 
 import styles from "./styles.module.css";
+import getDecodedPath from "../../../utils/getDecodedPath";
 
 const CogoMaps = dynamic(() => import("./map"), { ssr: false });
 
-function ScheduleMap({ points = [], routesLoading = false }) {
-    const [isLoading, setLoading] = useState(true);
+function ScheduleMap({ data, points = [], routesLoading = false }) {
+    // const [isLoading, setLoading] = useState(true);
     const [curvePoints, setCurvePoints] = useState([]);
     const [remainingPoints, setRemainingPoints] = useState([]);
+    const path = getDecodedPath(data?.[0]?.route?.coordinates || []);
+
+    console.log(path);
 
     // useEffect(() => {
     //     if (points?.length > 0) {
@@ -49,10 +53,7 @@ function ScheduleMap({ points = [], routesLoading = false }) {
 
     return (
         <div className={styles.map}>
-            <CogoMaps
-                remainingPoints={remainingPoints}
-                curvePoints={curvePoints}
-            />
+            <CogoMaps remainingPoints={remainingPoints} curvePoints={path} />
         </div>
     );
 }

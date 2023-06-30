@@ -37,7 +37,6 @@ const useListServiceLanes = ({ routeId }) => {
         makeRequest();
     }, [routeId, page]);
 
-    console.log("data:", data);
     return {
         data: data?.list,
         loading,

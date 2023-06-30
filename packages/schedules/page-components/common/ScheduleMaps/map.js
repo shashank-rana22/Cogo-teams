@@ -1,5 +1,5 @@
 import { CogoMaps, L, Marker, Popup } from "@cogoport/maps";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import Pointer from "./Pointer";
 import Route from "./Route";
@@ -20,29 +20,33 @@ const baseLayer = [
     },
 ];
 
-function MapComp({ curvePointLength }) {
+function MapComp({ curvePoints, curvePointLength }) {
     const [map, setMap] = useState();
-    const corner1 = L.latLng(-90, -200);
-    const corner2 = L.latLng(90, 200);
-    const bounds = L.latLngBounds(corner1, corner2);
+    const { bounds } = useContext();
+
     curvePointLength = curvePoints?.length;
 
-    const curvePoints = [
-        [18.952, 72.948],
-        [18.952, 72.948],
-        [18.941361, 72.80777],
-        [19, 72.4],
-        [20, 70],
-        [20.0838, 64.5005],
-        [21.440441, 62.375976],
-        [22.7, 60.4],
-        [24, 59],
-        [25.5, 57.1],
-        [26.422112, 56.763061],
-        [26.4, 56.4],
-        [25.6, 55.2],
-        [25.00328, 55.052067],
-    ];
+    // const curvePoints = [
+    //     [18.952, 72.948],
+    //     [18.952, 72.948],
+    //     [18.941361, 72.80777],
+    //     [19, 72.4],
+    //     [20, 70],
+    //     [20.0838, 64.5005],
+    //     [21.440441, 62.375976],
+    //     [22.7, 60.4],
+    //     [24, 59],
+    //     [25.5, 57.1],
+    //     [26.422112, 56.763061],
+    //     [26.4, 56.4],
+    //     [25.6, 55.2],
+    //     [25.00328, 55.052067],
+    // ];
+    useEffect(() => {
+        if (map && bounds instanceof L.LatLngBounds) {
+            map.fitBounds(bounds);
+        }
+    }, [bounds, map]);
 
     const lineOptions = { color: "green" };
     return (
