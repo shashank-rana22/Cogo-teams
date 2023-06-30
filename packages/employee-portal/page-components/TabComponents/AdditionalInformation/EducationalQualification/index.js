@@ -27,8 +27,9 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	useEffect(() => {
 		setValue(FORM_TYPE_EDUCATIONAL_QUALIFICATION, employee_education_details?.map((item) => ({
 			...item,
-			started_at : new Date(item?.started_at),
-			ended_at   : new Date(item?.ended_at),
+			degree_proof : item?.degree_proof?.finalUrl,
+			started_at   : new Date(item?.started_at),
+			ended_at     : new Date(item?.ended_at),
 		})));
 	}, [employee_education_details, setValue]);
 

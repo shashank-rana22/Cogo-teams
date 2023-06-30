@@ -23,7 +23,7 @@ const getPersonalInfoPayload = (data) => ({
 });
 
 const getEducationalQualificationsPayload = (data) => ({
-	employee_education_details: (data?.education_qualifications || []).map(
+	employee_education_details: (data?.educational_qualification || []).map(
 		(item) => ({
 			...item,
 			started_at : String(item.started_at),
