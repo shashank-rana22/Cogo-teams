@@ -14,7 +14,7 @@ export const STATUS_TYPE_MAPPING = {
 		Status : 'resolved',
 		Type   : 'mark_as_resolved',
 	},
-	resolve_requested: {
+	resolve_request: {
 		Status : 'resolve_requested',
 		Type   : 'resolve_requested',
 	},
