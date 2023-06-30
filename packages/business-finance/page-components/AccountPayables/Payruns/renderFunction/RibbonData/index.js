@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 const COLOR_MAPPING = {
 	NORMAL          : '#FEF1DF',
 	OVERSEAS        : '#CDF7D4',
@@ -18,12 +20,12 @@ function RibbonData({ itemData }) {
 	}
 
 	return (
-		<div>
+		<div className={styles.container}>
 
 			{
 			type ? (
-				<div style={{ background: COLOR_MAPPING[type] }}>
-					<div className="ribbon">{value}</div>
+				<div className={styles.ribbons}>
+					<div className={styles.ribbon} style={{ background: COLOR_MAPPING[type] }}>{value}</div>
 				</div>
 			) : null
 		}

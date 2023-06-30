@@ -26,11 +26,11 @@ function AccountPayables() {
 
 	const entity = getEntityCode(partnerId);
 
-	const FILTER_TABS = ['dashboard', 'advance-payment'];
+	const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
 
 	const handleTabChange = (v) => {
 		if (
-			['invoices', 'outstanding', 'treasury-chest'].includes(v)
+			['outstanding', 'treasury-chest'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import { initiatedConfig } from '../columns/initiatedConfig';
+// import { initiatedConfig } from '../columns/initiatedConfig';
 
 const useGetPayrun = ({ activePayrunTab }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -13,7 +13,7 @@ const useGetPayrun = ({ activePayrunTab }) => {
 		},
 		{ manual: true, autoCancel: false },
 	);
-	const config = initiatedConfig;
+	// const config = initiatedConfig;
 	// let config = {};
 	// if (activePayrunTab === 'INITIATED') {
 	// 	config = initiatedConfig;
@@ -42,10 +42,11 @@ const useGetPayrun = ({ activePayrunTab }) => {
 	const { stats } = data || {};
 
 	return {
-		data,
-		loading,
-		config,
-		payrunStats: stats,
+		payrunData    : data,
+		payrunLoading : loading,
+		// config,
+		payrunStats   : stats,
+		getPayrunList,
 	};
 };
 

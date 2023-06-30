@@ -4,7 +4,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ activePayrunTab, setActivePayrunTab, payrunStats }) {
+function Header({
+	activePayrunTab,
+	setActivePayrunTab,
+	payrunStats,
+	isInvoiceView,
+	setIsInvoiceView,
+}) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
 		UPLOAD_HISTORY = 0, COMPLETED = 0,
@@ -78,7 +84,16 @@ function Header({ activePayrunTab, setActivePayrunTab, payrunStats }) {
 							/>
 						)}
 					/>
-					<Toggle name="a4" showOnOff size="md" disabled={false} onLabel="Invoices" offLabel="Payrun" />
+					<Toggle
+						name="isInvoiceView"
+						value={isInvoiceView}
+						onChange={() => setIsInvoiceView(!isInvoiceView)}
+						showOnOff
+						size="md"
+						disabled={false}
+						onLabel="Invoices"
+						offLabel="Payrun"
+					/>
 				</div>
 				<div>
 					<Button>

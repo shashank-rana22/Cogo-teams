@@ -1,13 +1,17 @@
+.container{
+	display: flex;
+	/* position: relative; */
+}
 .ribbons {
 	font-size: 10px;
 
 	.ribbon {
-		--f: 3.2px; /* control the folded part */
-		--r: 8px; /* control the ribbon shape */
-		--t: 40px; /* the top offset */
+		--f: 4px; /* control the folded part */
+		--r: 10px; /* control the ribbon shape */
+		--t: 4px; /* the top offset */
 
 		position: absolute;
-		inset: var(--t) calc(-6 * var(--f)) auto auto;
+		inset: var(--t) calc(-1 * var(--f)) auto auto;
 		padding: 0 10px var(--f) calc(10px + var(--r));
 		clip-path:
 			polygon(

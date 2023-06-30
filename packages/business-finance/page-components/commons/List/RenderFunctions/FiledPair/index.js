@@ -23,7 +23,7 @@ function FieldPair({ itemData, field }) {
 				</text>
 			);
 		} if (type === 'serviceType') {
-			return (<div>{startCase(getByKey(itemData, key))}</div>);
+			return (<div className={styled.lower_keys}>{startCase(getByKey(itemData, key))}</div>);
 		} if (type === 'amount') {
 			return (
 				<div>
