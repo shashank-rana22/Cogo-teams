@@ -1,7 +1,7 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../helpers/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
 	all      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],

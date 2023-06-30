@@ -4,7 +4,7 @@ import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../helpers/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
 import AgentStatus from './AgentStatus';

@@ -1,5 +1,3 @@
-import { cl } from '@cogoport/components';
-
 import MailConversation from './MailConversation';
 import Messages from './Messages';
 import styles from './styles.module.css';
@@ -44,7 +42,7 @@ function Conversations({
 	}
 
 	return (
-		<div className={cl`${activeTab?.tab === 'mail' ? styles.mail_div : styles.container}`}>
+		<div className={styles.container}>
 			<Component {...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})} />
 		</div>
 	);

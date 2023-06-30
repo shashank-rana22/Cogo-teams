@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetControls from '../../../../configurations/filter-controls';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../helpers/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 
 import Item from './Item';
 import styles from './styles.module.css';

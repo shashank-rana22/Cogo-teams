@@ -4,12 +4,21 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getSubTabsMapping } from '../../../../../configurations/getSubTabsMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import FilterComponents from '../../FilterComponents';
 
 import styles from './styles.module.css';
 
-function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters }) {
+function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, setIsBotSession }) {
 	const SUB_TAB_MAPPING = getSubTabsMapping({ viewType });
+
+	const handleTabClick = ({ name }) => {
+		setActiveSubTab(name);
+		setAppliedFilters({});
+		if (!VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions?.bot_message_toggle) {
+			setIsBotSession(false);
+		}
+	};
 
 	return (
 		<div className={styles.parent_tab_div}>
@@ -19,10 +28,7 @@ function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters })
 					className={cl`${styles.each_tab_flex} ${
 						activeSubTab === eachTab?.name ? styles.active_tab_styles : ''}`}
 					key={eachTab?.name}
-					onClick={() => {
-						setActiveSubTab(eachTab?.name);
-						setAppliedFilters({});
-					}}
+					onClick={() => handleTabClick({ name: eachTab?.name })}
 				>
 					{eachTab.icon || null}
 					<text className={styles.label}>{eachTab.label}</text>
@@ -53,6 +59,7 @@ function Header({
 				setActiveSubTab={setActiveSubTab}
 				viewType={viewType}
 				setAppliedFilters={setAppliedFilters}
+				setIsBotSession={setIsBotSession}
 			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>

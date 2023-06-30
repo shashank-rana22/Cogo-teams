@@ -5,11 +5,18 @@ import {
 } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-export function getHasAccessToEditGroup({ sessionType, accountType, activeMessageCard, agentId, viewType }) {
-	return (sessionType === 'admin' && accountType === 'service_provider')
-	&& (activeMessageCard.group_members?.includes(agentId)
-	|| activeMessageCard.support_agent_id === agentId || viewType === 'admin_view');
+export function getHasAccessToEditGroup({ sessionType, accountType, activeMessageCard = {}, agentId, viewType }) {
+	return (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_group_access
+		&& (sessionType === 'admin' && accountType === 'service_provider')
+	&& (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
+		|| activeMessageCard.group_members?.includes(agentId)
+		|| activeMessageCard.support_agent_id === agentId
+	)
+	);
 }
 
 export const switchUserChats = async ({ val, firestore, setActiveTab }) => {

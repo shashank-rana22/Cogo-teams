@@ -5,7 +5,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../helpers/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import useListChats from '../../../../hooks/useListChats';
 import LoadingState from '../LoadingState';

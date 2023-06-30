@@ -3,10 +3,10 @@ import {
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 import {
 	mountUnreadCountSnapShot,
 } from '../helpers/snapshotHelpers';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../helpers/viewTypeMapping';
 
 const useGetUnreadMessagesCount = ({ firestore, viewType, agentId, isBotSession }) => {
 	const [unReadChatsCount, setUnReadChatsCount] = useState(false);

@@ -8,8 +8,7 @@ import {
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
-
-import { VIEW_TYPE_GLOBAL_MAPPING } from './viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;

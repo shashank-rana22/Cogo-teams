@@ -1,6 +1,6 @@
 import { orderBy, where } from 'firebase/firestore';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from './viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const BULK_ASSIGN_SEEN_MINUTES = 15;
 

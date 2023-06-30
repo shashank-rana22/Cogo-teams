@@ -1,8 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMLiveChat, IcMCallbarge, IcMTeam, IcMAppPoc } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+import { IcMLiveChat, IcMCallbarge, IcMTeam, IcMAppPoc, IcMHourglass } from '@cogoport/icons-react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../helpers/viewTypeMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const SUB_TAB_MAPPING = [
 	{
@@ -28,7 +26,7 @@ const SUB_TAB_MAPPING = [
 	{
 		name  : 'observer',
 		label : 'History',
-		icon  : <Image height={20} width={20} src={GLOBAL_CONSTANTS.image_url.history_icon} alt="history" />,
+		icon  : <IcMHourglass height={20} width={20} />,
 	},
 ];
 

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
+import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers';
 import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
@@ -65,10 +67,16 @@ function Messages({
 
 	const showBotMessages = session_type === 'bot';
 
-	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
+	const canMessageOnBotSession = showBotMessages
+	&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.can_message_on_bot_session;
 
-	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
-		|| ['cogoone_admin', 'shipment_view'].includes(viewType))) || formattedData.group_members?.includes(userId);
+	const hasPermissionToEdit = getHasPermissionToEdit({
+		showBotMessages,
+		userId,
+		formattedData,
+		canMessageOnBotSession,
+		viewType,
+	});
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,

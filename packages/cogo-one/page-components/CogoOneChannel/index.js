@@ -10,8 +10,8 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../helpers/viewTypeMapping';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
@@ -124,7 +124,10 @@ function CogoOne() {
 				</div>
 				{!isEmpty(activeTab?.data) ? (
 					<>
-						<div className={styles.chats_layout}>
+						<div
+							className={`${activeTab?.tab === 'mail' ? styles.mail_layout : styles.chats_layout}`}
+							style={{ width: activeTab?.tab === 'mail' ? '76%' : '48%' }}
+						>
 							<Conversations
 								activeTab={activeTab}
 								firestore={firestore}
@@ -137,22 +140,24 @@ function CogoOne() {
 								suggestions={suggestions}
 							/>
 						</div>
-						<div className={styles.user_profile_layout}>
-							<ProfileDetails
-								activeMessageCard={activeTab?.data}
-								activeTab={activeTab?.tab}
-								activeVoiceCard={activeTab?.data}
-								activeCardId={activeTab?.data?.id}
-								setModalType={setModalType}
-								activeRoomLoading={activeRoomLoading}
-								setRaiseTicketModal={setRaiseTicketModal}
-								zippedTicketsData={zippedTicketsData}
-								viewType={viewType}
-								firestore={firestore}
-								userId={userId}
-								setActiveTab={setActiveTab}
-							/>
-						</div>
+						{activeTab?.tab !== 'mail' && (
+							<div className={styles.user_profile_layout}>
+								<ProfileDetails
+									activeMessageCard={activeTab?.data}
+									activeTab={activeTab?.tab}
+									activeVoiceCard={activeTab?.data}
+									activeCardId={activeTab?.data?.id}
+									setModalType={setModalType}
+									activeRoomLoading={activeRoomLoading}
+									setRaiseTicketModal={setRaiseTicketModal}
+									zippedTicketsData={zippedTicketsData}
+									viewType={viewType}
+									firestore={firestore}
+									userId={userId}
+									setActiveTab={setActiveTab}
+								/>
+							</div>
+						)}
 					</>
 				) : (
 					<div className={styles.empty_page}>

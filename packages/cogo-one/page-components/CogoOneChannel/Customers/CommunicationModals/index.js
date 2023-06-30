@@ -55,7 +55,6 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 									height={60}
 									width={60}
 								/>
-
 							</div>
 							<div className={cl`${styles.action} ${styles.mail_icon}`}>
 								<Image
@@ -75,7 +74,7 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 				setModalType={setModalType}
 				modalType={modalType}
 			/>
-			{buttonType && (
+			{!!buttonType && (
 				<MailModal
 					mailProps={mailProps}
 					userId={userId}
