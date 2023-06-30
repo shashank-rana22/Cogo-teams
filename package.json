@@ -39,7 +39,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@cogoport/eslint-config": "1.1.1-beta.19",
+    "@cogoport/eslint-config": "2.0.0",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
     "eslint": "^8.42.0",
