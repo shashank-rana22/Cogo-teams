@@ -198,7 +198,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 
 					</div>
 					<div className={styles.category_container}>
-						{getTaxLabels(entityCode).map((it) => (
+						{getTaxLabels(entityCode)?.map((it) => (
 							it.label
 								? (
 									<div className={styles.sub_category_container} key={it?.label}>

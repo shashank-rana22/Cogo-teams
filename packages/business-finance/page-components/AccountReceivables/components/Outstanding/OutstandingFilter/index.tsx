@@ -130,7 +130,7 @@ function Filters({
 							placement="bottom"
 							render={(
 								<div className={styles.styled_row}>
-									{getSearchOptionsLabels(entityCode).map((item) => (
+									{getSearchOptionsLabels(entityCode)?.map((item) => (
 										item.label
 											? (
 												<div
