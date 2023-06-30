@@ -12,7 +12,7 @@ import SingleService from './SingleService';
 import styles from './styles.module.css';
 
 function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData, priceData, setShowDetailPage, revenueDeskDecisionsData = [] }) {
-	const {services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
+	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [rateOptions, setRateOptions] = useState({});

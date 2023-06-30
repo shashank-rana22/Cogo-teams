@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
+import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 
 import CancelledShipmentCard from './CancelledShipmentCard';
@@ -16,15 +17,13 @@ import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
-import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
-	console.log(itemData,'itemData')
-	const [isPillSelected,setIsPillSelected] = useState(false);
+	const [isPillSelected, setIsPillSelected] = useState(false);
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState(null);
-	const { data:revenueDeskDecisionsData ,loading: revenueDeskLoading } = useListRevenueDeskDecisions({ shipmentId: itemData?.id })
+	const { data:revenueDeskDecisionsData, loading: revenueDeskLoading } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 	const excludedServices = [
 		'fcl_freight_local_service',
@@ -184,42 +183,43 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							</div>
 						)}
 					</TabPanel>
-					{['air_freight','fcl_freight'].includes(itemData?.shipment_type) &&
-					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
-						<div
-							className={styles.custom_pill}
-							onClick={()=>setIsPillSelected(!isPillSelected)}
-						>
-							view customers last shipment with same configuration&nbsp;
-							{isPillSelected?<IcMTick/>:''}
-						</div>
+					{['air_freight', 'fcl_freight'].includes(itemData?.shipment_type)
+					&& (
+						<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
+							<div
+								className={styles.custom_pill}
+								onClick={() => setIsPillSelected(!isPillSelected)}
+							>
+								view customers last shipment with same configuration&nbsp;
+								{isPillSelected ? <IcMTick /> : ''}
+							</div>
 
-						{showDetail === true ? (
-							<div>
-								<LastShipmentDetails itemData={itemData} isPillSelected={isPillSelected}/>
+							{showDetail === true ? (
+								<div>
+									<LastShipmentDetails itemData={itemData} isPillSelected={isPillSelected} />
+									<div
+										role="presentation"
+										className={styles.show_detail_tab}
+										onClick={() => setShowDetail(false)}
+									>
+										Hide Details
+										{' '}
+										<IcMArrowUp />
+									</div>
+								</div>
+							) : (
 								<div
 									role="presentation"
 									className={styles.show_detail_tab}
-									onClick={() => setShowDetail(false)}
+									onClick={() => setShowDetail(true)}
 								>
-									Hide Details
+									Show more
 									{' '}
-									<IcMArrowUp />
+									<IcMArrowDown />
 								</div>
-							</div>
-						) : (
-							<div
-								role="presentation"
-								className={styles.show_detail_tab}
-								onClick={() => setShowDetail(true)}
-							>
-								Show more
-								{' '}
-								<IcMArrowDown />
-							</div>
-						)}
-					</TabPanel>
-				}
+							)}
+						</TabPanel>
+					)}
 					{['fcl_freight', 'air_freight'].includes(
 						itemData?.shipment_type,
 					) && itemData?.source === 'contract' ? (

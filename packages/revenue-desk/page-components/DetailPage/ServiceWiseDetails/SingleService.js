@@ -54,7 +54,7 @@ function SingleService({
 	setEmailModal,
 	revenueDeskDecisionsData,
 }) {
-	const {services_with_preferences_set: servicesWithPreferenceSet = [] }= revenueDeskDecisionsData;
+	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const isPreferenceSet = servicesWithPreferenceSet.includes(singleServiceData?.id);
@@ -63,7 +63,6 @@ function SingleService({
 		shipmentData,
 		isPreferenceSet,
 	});
-	console.log(ratesData,'rates;;');
 	const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 		shipmentData,
 		singleServiceData,

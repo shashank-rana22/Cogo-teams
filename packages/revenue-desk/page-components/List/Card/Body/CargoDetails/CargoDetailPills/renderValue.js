@@ -32,7 +32,7 @@ export const renderValue = (label, detail) => {
 	const lr_number = detail?.lr_number;
 	const eway_bill_number = detail?.eway_bill_number;
 
-	const volume = ` ${detail.volume} ${isLTL ? 'cc' : 'cbm'}`;
+	const volume = ` ${Number(detail.volume).toFixed(2)} ${isLTL ? 'cc' : 'cbm'}`;
 	const commodityDataDetails = detail.commodity_details?.[0] || {};
 	const packageDetails = () => {
 		if (packages?.length > 1) {
@@ -269,7 +269,7 @@ export const renderValue = (label, detail) => {
 			}
 			return '';
 		case 'weight':
-			return ` ${detail.weight} ${isFTL ? 'Ton' : 'Kgs'}`;
+			return ` ${Number(detail.weight).toFixed(2)} ${isFTL ? 'Ton' : 'Kgs'}`;
 		case 'haulage_type':
 			return startCase(detail.haulage_type || '');
 		case 'transport_mode':

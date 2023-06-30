@@ -110,7 +110,8 @@ function Filters({ filters, setFilters }) {
 						</div>
 						<div>
 							<RadioGroup
-								options={rdStatusOptions}
+								options={['air_freight', 'fcl_freight'].includes(filters?.service)
+									? rdStatusOptions : rdStatusOptions.slice(0, 2)}
 								onChange={(val) => {
 									setFilters({
 										...filters,
@@ -158,21 +159,24 @@ function Filters({ filters, setFilters }) {
 				<div className={styles.sub_heading}>
 					Date
 				</div>
-				<div className={styles.date_subsection}>
-					<div className={styles.date_text}>
-						Departure Date
-					</div>
-					<div>
-						<SingleDateRange
-							placeholder="Enter Date"
-							dateFormat="MM/dd/yyyy"
-							name="date"
-							isPreviousDaysAllowed
-							onChange={(val) => setFilters({ ...filters, departure_date: val, page: 1 })}
-							value={filters?.departure_date}
-						/>
-					</div>
-				</div>
+				{!(filters?.service === 'air_customs')
+					? (
+						<div className={styles.date_subsection}>
+							<div className={styles.date_text}>
+								Departure Date
+							</div>
+							<div>
+								<SingleDateRange
+									placeholder="Enter Date"
+									dateFormat="MM/dd/yyyy"
+									name="date"
+									isPreviousDaysAllowed
+									onChange={(val) => setFilters({ ...filters, departure_date: val, page: 1 })}
+									value={filters?.departure_date}
+								/>
+							</div>
+						</div>
+					) : null}
 				<div className={styles.date_subsection}>
 					<div className={styles.date_text}>
 						Created Date

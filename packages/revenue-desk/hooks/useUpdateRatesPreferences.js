@@ -82,7 +82,7 @@ const useUpdateRatesPreferences = ({
 			revenueDeskDecision.push(final_payload);
 		}
 	});
-
+	console.log(revenueDeskDecision, 'revenueDeskDecision');
 	const updateTrigger = async () => {
 		try {
 			await trigger({
@@ -96,7 +96,6 @@ const useUpdateRatesPreferences = ({
 			Toast.success('Preferences Updated');
 			setShowDetailPage(null);
 		} catch (err) {
-			// console.log(err);
 			Toast.error("Preferences didn't save, Please Try Again");
 		}
 	};

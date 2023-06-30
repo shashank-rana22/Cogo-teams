@@ -1,5 +1,4 @@
 const getFormatedRates = (type, data, singleServiceData) => {
-	console.log(singleServiceData,'singleServiceData;');
 	const rows = [];
 	const container_count = singleServiceData?.containers_count || 1;
 	if (type === 'present' || type === 'current') {
@@ -41,6 +40,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.updated_at = element?.updated_at;
 			rowData.total_price = element?.validities?.[0].total_price;
 			rowData.total_price_currency = element?.validities?.[0].currency;
+			rowData.validity_id = element?.validities?.[0]?.id;
 			row.rowData = rowData;
 			rows.push(row);
 		});

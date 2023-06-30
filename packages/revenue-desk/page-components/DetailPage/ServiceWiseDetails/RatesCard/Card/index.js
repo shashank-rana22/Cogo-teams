@@ -28,7 +28,7 @@ function Card({
 				id          : rate?.rowData?.service_provider_id,
 				key         : prefrence_key,
 				data        : rate,
-				validity_id : rate?.validities?.[0]?.id,
+				validity_id : rate?.rowData?.validity_id,
 			});
 			setPrefrences({ ...prefrences, [serviceData?.id]: [...newList] });
 		}

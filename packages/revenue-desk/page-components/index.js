@@ -53,7 +53,8 @@ function RevenueDesk() {
 									size="sm"
 									value={filters?.sort_by}
 									onChange={(value) => setFilters({ ...filters, sort_by: value, page: 1 })}
-									options={sortByOptions}
+									options={['air_freight', 'fcl_freight'].includes(filters?.service)
+										? sortByOptions : sortByOptions.slice(0, 2)}
 								/>
 							</div>
 							<div className={styles.select_container}>

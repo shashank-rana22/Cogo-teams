@@ -27,6 +27,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.schedule_type = element?.validities?.[0]?.schedule_type;
 		rowData.agent = element?.procured_by?.name;
 		rowData.profit_percentage = element?.validities?.[0]?.profit_percentage;
+		rowData.validity_id = element?.validities?.[0]?.id;
 		rowData.validity_end = element?.validity_end || element?.validities?.[0]?.validity_end;
 		rowData.origin_locals_price = element?.origin_locals?.total_price;
 		rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
