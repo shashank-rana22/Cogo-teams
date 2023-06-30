@@ -86,7 +86,9 @@ function CargoInsurance({
 				performedBy        : userId,
 			});
 		}
-	}, [JSON.stringify(formValues)]);
+	}, [cargoInsuranceCountryId,
+		formValues?.cargo_insurance_commodity, formValues?.cargo_insurance_commodity_description,
+		formValues?.cargo_value, formValues?.cargo_value_currency, primary_service?.trade_type, userId]);
 
 	useEffect(() => {
 		debounceQuery(currentCargoInsurance);
@@ -100,14 +102,14 @@ function CargoInsurance({
 
 	useEffect(() => {
 		const optionselected = (list || []).find(
-			(option) => option.id === formValues?.cargo_insurance_commodit,
+			(option) => option.id === formValues?.cargo_insurance_commodity,
 		);
 		setCommodity(optionselected?.commodity);
 		setValue(
 			'cargo_insurance_commodity_description',
 			optionselected?.cargoDescription,
 		);
-	}, [formValues?.cargo_insurance_commodit, list, setValue]);
+	}, [formValues?.cargo_insurance_commodity, list, setValue]);
 
 	if (apiLoading) {
 		return <Loading />;

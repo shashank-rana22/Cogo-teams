@@ -2,6 +2,7 @@ import { addDays } from '@cogoport/utils';
 
 const MIN_DATE_LIMIT = 1;
 const MAX_DATE_LIMIT = 31;
+const MIN_CONSIGNMENT_VALUE = 0;
 
 export const cargoControls = ({ insuranceDetails = {} }) => [
 	{
@@ -134,6 +135,13 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 			required: {
 				message : 'Required',
 				max     : 400000000,
+				min     : 0,
+			},
+			validate: (v) => {
+				if (v < MIN_CONSIGNMENT_VALUE) {
+					return 'Consignment Value should not in negative';
+				}
+				return '';
 			},
 		},
 	},

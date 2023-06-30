@@ -37,11 +37,11 @@
 
 .line {
 	width: 100px;
-	border-bottom: 2px dashed rgb(242 227 195);
+	border-bottom: 2px dashed #F2E3C3;
 
 	&.line {
 		width: 100%;
-		border-bottom: 1px solid rgb(242 227 195);
+		border-bottom: 1px solid #F2E3C3;
 	}
 }
 
