@@ -1,11 +1,14 @@
 .map {
-	z-index: 90 !important;
-	width: 650px;
+    z-index: 90 !important;
+    width: 850px;
+    @media (max-width: 1465px) {
+        width: 600px;
+    }
 }
 
 .loading {
-	padding: 100px 0 0 200px;
-	font-size: 20px;
-	font-weight: 600;
-	color: #282b2e;
+    padding: 100px 0 0 200px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #282b2e;
 }

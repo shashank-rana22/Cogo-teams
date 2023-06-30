@@ -9,7 +9,6 @@ const icon = new L.Icon({
     iconUrl: "/images/default-red.svg",
     iconSize: [20, 20],
 });
-// NEXT_PUBLIC_MAPS_BASE_URL = https://maps.dev.cogoport.io/cogo-tiles // testing purposes
 const baseLayer = [
     {
         name: "Cogo Maps",
@@ -21,12 +20,12 @@ const baseLayer = [
     },
 ];
 
-function MapComp({}) {
+function MapComp({ curvePointLength }) {
     const [map, setMap] = useState();
     const corner1 = L.latLng(-90, -200);
     const corner2 = L.latLng(90, 200);
     const bounds = L.latLngBounds(corner1, corner2);
-    const curvePointLength = curvePoints?.length;
+    curvePointLength = curvePoints?.length;
 
     const curvePoints = [
         [18.952, 72.948],
