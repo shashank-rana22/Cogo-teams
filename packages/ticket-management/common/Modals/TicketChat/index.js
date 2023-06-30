@@ -56,7 +56,10 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } = ticketData || {};
+	const {
+		TicketFeedback: ticketFeedback = {}, Ticket: ticket = {},
+		IsClosureAuthorizer: isClosureAuthorizer = false,
+	} = ticketData || {};
 
 	const { Rating: rating = 0 } = ticketFeedback || {};
 	const { Status: status = '' } = ticket || {};
@@ -127,6 +130,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 						modalData={modalData}
 						ticketData={ticketData}
 						refreshTickets={refreshTickets}
+						isClosureAuthorizer={isClosureAuthorizer}
 					/>
 				)}
 			/>

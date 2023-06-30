@@ -8,10 +8,9 @@ import styles from './styles.module.css';
 function ModalHeader({
 	ticketData = {},
 	refreshTickets = () => {},
-	modalData,
+	isClosureAuthorizer,
 }) {
 	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
-	const { isClosureAuthorizer } = modalData || {};
 
 	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
 		refreshTickets,

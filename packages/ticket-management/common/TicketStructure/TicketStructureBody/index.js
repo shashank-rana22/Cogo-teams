@@ -10,7 +10,6 @@ const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
 	data,
-	label: key,
 	updateTicketActivity = () => {},
 	setModalData = () => {},
 }) {
@@ -36,12 +35,7 @@ function TicketStructureBody({
 		<div
 			role="presentation"
 			className={styles.ticket_container}
-			onClick={() => setModalData({
-				type     : 'ticket_details',
-				ticketId : id,
-				key,
-				isClosureAuthorizer,
-			})}
+			onClick={() => setModalData({ ticketId: id })}
 		>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
