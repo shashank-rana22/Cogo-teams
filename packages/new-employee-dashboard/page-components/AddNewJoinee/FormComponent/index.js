@@ -112,9 +112,6 @@ function FormComponent({ setActivePage }) {
 				mobile_country_code : values?.mobile_number?.country_code,
 			};
 			const res = await trigger({ data: payload });
-
-			console.log('res?.data?.id', res?.data?.id);
-
 			setActivePage(res?.data?.id);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
