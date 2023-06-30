@@ -113,6 +113,8 @@ function FormComponent({ setActivePage }) {
 			};
 			const res = await trigger({ data: payload });
 
+			console.log('res?.data?.id', res?.data?.id);
+
 			setActivePage(res?.data?.id);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

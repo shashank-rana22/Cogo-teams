@@ -21,6 +21,8 @@ function SuccessComponent({ activePage }) {
 		{ manual: false },
 	);
 
+	console.log(activePage, 'hi');
+
 	const { detail } = data || {};
 	const { name, employee_code } = detail || {};
 
