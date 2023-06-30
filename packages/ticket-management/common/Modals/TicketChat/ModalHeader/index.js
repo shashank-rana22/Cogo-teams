@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function ModalHeader({
 	ticketData = {},
 	refreshTickets = () => {},
+	setShowReassign = () => {},
 	isClosureAuthorizer,
 }) {
 	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
@@ -31,6 +32,7 @@ function ModalHeader({
 				isModal
 				status={status}
 				handleTicket={handleTicket}
+				setShowReassign={setShowReassign}
 				isClosureAuthorizer={isClosureAuthorizer}
 			/>
 		</div>
