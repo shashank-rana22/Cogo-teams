@@ -1,4 +1,4 @@
-import { InputNumber, Select, Input } from '@cogoport/components';
+import { InputNumber, Select } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 const OPTIONS = [
