@@ -31,7 +31,7 @@ const getPayload = (values) => {
 const useCreateKRA = () => {
 	const router = useRouter();
 
-	const [showSelectedValue, setSelectedValue] = useState({});
+	const [showSelectedValue, setShowSelectedValue] = useState({});
 
 	const { control, handleSubmit, formState: { errors }, watch } = useForm();
 
@@ -66,7 +66,7 @@ const useCreateKRA = () => {
 		loading,
 		watch,
 		showSelectedValue,
-		setSelectedValue,
+		setShowSelectedValue,
 	};
 };
 

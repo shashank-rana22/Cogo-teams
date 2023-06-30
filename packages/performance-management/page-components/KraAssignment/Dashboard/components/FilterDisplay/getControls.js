@@ -1,4 +1,4 @@
-const getControls = ({ WATCH_VALUES = {}, check }) => {
+const getControls = ({ watchTriveId, check }) => {
 	const controls = [
 		{
 			name        : 'employee_ids',
@@ -63,13 +63,13 @@ const getControls = ({ WATCH_VALUES = {}, check }) => {
 			placeholder : 'Select',
 			initialCall : true,
 
-			disabled    : !WATCH_VALUES.tribe_id || check,
+			disabled    : !watchTriveId || check,
 			isClearable : true,
 			params      : {
 				filters: {
 					status               : 'active',
 					partner_entity_types : ['cogoport'],
-					tribe_id             : WATCH_VALUES.tribe_id,
+					tribe_id             : watchTriveId,
 				},
 				page_limit: 100,
 			},

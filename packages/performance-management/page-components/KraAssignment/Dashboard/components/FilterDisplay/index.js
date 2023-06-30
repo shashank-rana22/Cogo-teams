@@ -13,20 +13,12 @@ function FilterFieldArray({
 	resetObjects,
 }) {
 	const {
-		showFilter,
-		control,
-		handleSubmit,
-		onSubmit,
-		onClickReset,
-		watch,
-	} = useFilterDisplay({
-		setFilters,
-		resetObjects,
-	});
+		showFilter, control, handleSubmit, onSubmit, onClickReset, watch,
+	} = useFilterDisplay({ setFilters, resetObjects });
 
-	const WATCH_VALUES = watch();
+	const watchTriveId = watch('tribe_id');
 
-	const controls = getControls({ WATCH_VALUES, check });
+	const controls = getControls({ watchTriveId, check });
 
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +51,7 @@ function FilterFieldArray({
 			</div>
 
 			<div className={styles.filter_container}>
-				{controls?.map((item) => {
+				{(controls || [])?.map((item) => {
 					const { label, type, name } = item || {};
 					const Element = getElementController(type);
 

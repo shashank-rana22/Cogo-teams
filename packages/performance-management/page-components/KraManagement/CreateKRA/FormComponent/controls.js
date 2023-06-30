@@ -1,4 +1,39 @@
-const getControls = ({ setSelectedValue }) => ([
+const params = {
+	filters: {
+		status               : 'active',
+		partner_entity_types : ['cogoport'],
+
+	},
+	page_limit: 100,
+};
+
+const OPTIONS = [
+	{
+		value : 'yes',
+		label : 'Yes',
+	},
+	{
+		value : 'no',
+		label : 'No',
+	},
+];
+
+const OPERATION_TYPE_OPTIONS = [
+	{
+		value : 'manual',
+		label : 'MANUAL',
+	},
+	{
+		value : 'jira',
+		label : 'JIRA',
+	},
+	{
+		value : 'sql',
+		label : 'SQL',
+	},
+];
+
+const getControls = ({ setShowSelectedValue }) => ([
 	{
 		group       : 'mid_controls',
 		subControls : [
@@ -11,20 +46,14 @@ const getControls = ({ setSelectedValue }) => ([
 				multiple    : true,
 				initialCall : true,
 				onChange    : (_, e) => {
-					setSelectedValue((pv) => ({
+					setShowSelectedValue((pv) => ({
 						...pv,
 						role_ids: e,
 					}));
 				},
-				params: {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
+
 			{
 				name        : 'tribe_ids',
 				type        : 'asyncSelect',
@@ -34,19 +63,12 @@ const getControls = ({ setSelectedValue }) => ([
 				multiple    : true,
 				initialCall : true,
 				onChange    : (_, e) => {
-					setSelectedValue((pv) => ({
+					setShowSelectedValue((pv) => ({
 						...pv,
 						tribe_ids: e,
 					}));
 				},
-				params: {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 
 			{
@@ -58,19 +80,12 @@ const getControls = ({ setSelectedValue }) => ([
 				multiple    : true,
 				initialCall : true,
 				onChange    : (_, e) => {
-					setSelectedValue((pv) => ({
+					setShowSelectedValue((pv) => ({
 						...pv,
 						squad_ids: e,
 					}));
 				},
-				params: {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 
 			{
@@ -82,19 +97,12 @@ const getControls = ({ setSelectedValue }) => ([
 				multiple    : true,
 				initialCall : true,
 				onChange    : (_, e) => {
-					setSelectedValue((pv) => ({
+					setShowSelectedValue((pv) => ({
 						...pv,
 						chapter_ids: e,
 					}));
 				},
-				params: {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 
 			{
@@ -106,19 +114,12 @@ const getControls = ({ setSelectedValue }) => ([
 				multiple    : true,
 				initialCall : true,
 				onChange    : (_, e) => {
-					setSelectedValue((pv) => ({
+					setShowSelectedValue((pv) => ({
 						...pv,
 						sub_chapter_ids: e,
 					}));
 				},
-				params: {
-					filters: {
-						status               : 'active',
-						partner_entity_types : ['cogoport'],
-
-					},
-					page_limit: 100,
-				},
+				params,
 			},
 
 		],
@@ -130,42 +131,22 @@ const getControls = ({ setSelectedValue }) => ([
 				name    : 'operation_type',
 				type    : 'select',
 				label   : 'Operation Type',
-				options : [
-					{
-						value : 'manual',
-						label : 'MANUAL',
-					},
-					{
-						value : 'jira',
-						label : 'JIRA',
-					},
-					{
-						value : 'sql',
-						label : 'SQL',
-					},
-				],
+				options : OPERATION_TYPE_OPTIONS,
 			},
+
 			{
 				name    : 'is_target_achieved_manually',
 				type    : 'radioGroup',
 				label   : 'Is achieved entered manually',
-				options : [
-					{
-						value : 'yes',
-						label : 'Yes',
-					},
-					{
-						value : 'no',
-						label : 'No',
-					},
-				],
+				options : OPTIONS,
 			},
+
 			{
 				label : 'Anything else?',
 				name  : 'description',
 				type  : 'textarea',
-				rows  : 3,
 			},
+
 			{
 				name        : 'target_value',
 				type        : 'number',
@@ -173,35 +154,19 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Score is required' },
 			},
+
 			{
 				name    : 'is_rating_schema_in_percentage',
 				type    : 'radioGroup',
 				label   : 'Is rating schema in %',
-				options : [
-					{
-						value : 'yes',
-						label : 'Yes',
-					},
-					{
-						value : 'no',
-						label : 'No',
-					},
-				],
+				options : OPTIONS,
 			},
+
 			{
 				name    : 'can_assign_targets_individually',
 				type    : 'radioGroup',
 				label   : 'Can assign Targets Individually',
-				options : [
-					{
-						value : 'yes',
-						label : 'Yes',
-					},
-					{
-						value : 'no',
-						label : 'No',
-					},
-				],
+				options : OPTIONS,
 			},
 		],
 	},
@@ -215,6 +180,7 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Rating 1 is required' },
 			},
+
 			{
 				name        : 'rating_2',
 				type        : 'number',
@@ -222,6 +188,7 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Rating 2 is required' },
 			},
+
 			{
 				name        : 'rating_3',
 				type        : 'number',
@@ -229,6 +196,7 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Rating 3 is required' },
 			},
+
 			{
 				name        : 'rating_4',
 				type        : 'number',
@@ -236,6 +204,7 @@ const getControls = ({ setSelectedValue }) => ([
 				placeholder : '0',
 				rules       : { required: 'Rating 4 is required' },
 			},
+
 			{
 				name        : 'rating_5',
 				type        : 'number',
