@@ -474,5 +474,10 @@ const apis = [
 		module      : 'hs-code',
 		feature     : 'controlled checkout',
 	},
+	{
+		api          : 'get_recent_search_locations',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;
