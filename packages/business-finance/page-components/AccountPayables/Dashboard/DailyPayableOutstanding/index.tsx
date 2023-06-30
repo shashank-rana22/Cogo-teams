@@ -1,5 +1,4 @@
 import { Placeholder, Toggle, Tooltip } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -28,25 +27,25 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 	const QUARTER_MAPPING = [
 		{
-			amount        : list?.[0],
+			averageTime   : list?.[0],
 			formatedMonth : formatedJan === 'Jan'
 			&& 'Jan-Feb-March',
 			quarter: 'Q1',
 		},
 		{
-			amount        : list?.[1],
+			averageTime   : list?.[1],
 			formatedMonth : formatedApr === 'Apr'
 			&& ' Apr-May-Jun',
 			quarter: 'Q2',
 		},
 		{
-			amount        : list?.[2],
+			averageTime   : list?.[2],
 			formatedMonth : formatedJul === 'Jul'
 			&& ' Jul-Aug-Sep',
 			quarter: 'Q3',
 		},
 		{
-			amount        : list?.[3],
+			averageTime   : list?.[3],
 			formatedMonth : formatedOct === 'Oct'
 			&& ' Oct-Nov-Dec',
 			quarter: 'Q4',
@@ -55,13 +54,13 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 	const MONTH_MAPPING = [
 		{
-			amount: list?.[2],
+			averageTime: list?.[2],
 		},
 		{
-			amount: list?.[1],
+			averageTime: list?.[1],
 		},
 		{
-			amount: list?.[0],
+			averageTime: list?.[0],
 		},
 	] as any;
 	return (
@@ -113,9 +112,9 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 
 						{MONTH_MAPPING.map((item) => (
 
-							item?.amount
+							item?.averageTime
 								? (
-									<div className={styles.month_container} key={item?.amount}>
+									<div className={styles.month_container} key={item?.averageTime?.dpo}>
 										{loading ? (
 											<Placeholder
 												className={styles.loader}
@@ -124,19 +123,11 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 											: (
 												<div className={styles.value}>
 													<Tooltip
-														content={item?.amount?.dpo}
+														content={item?.averageTime?.dpo}
 														placement="top"
 														interactive
 													>
-														{formatAmount({
-															amount   : item?.amount?.dpo?.toFixed(2),
-															currency : item?.currency,
-															options  : {
-																currencyDisplay : 'code',
-																style           : 'currency',
-															},
-														})}
-														{/* {item?.amount?.dpo?.toFixed(2)} */}
+														{item?.averageTime?.dpo?.toFixed(2)}
 													</Tooltip>
 
 												</div>
@@ -148,11 +139,11 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 										)
 											: (
 												<div className={styles.label}>
-													{format(item?.amount?.yearMonth, ' MMM yyyy')}
+													{format(item?.averageTime?.yearMonth, ' MMM yyyy')}
 												</div>
 											)}
 									</div>
-								) : <div key={item?.amount} className={styles.dash}> -- </div>
+								) : <div key={item?.averageTime} className={styles.dash}> -- </div>
 
 						))}
 
@@ -161,7 +152,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 					<div className={styles.sub_container}>
 
 						{QUARTER_MAPPING.map((item) => (
-							<div className={styles.month_box} key={item?.amount}>
+							<div className={styles.month_box} key={item?.averageTime?.dpo}>
 								{loading ? (
 									<Placeholder
 										className={styles.loader}
@@ -169,10 +160,14 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 								)
 									: (
 										<div className={styles.value}>
-											{item?.amount
+											{item?.averageTime
 												? (
-													<Tooltip content={item?.amount?.dpo} placement="top" interactive>
-														{item?.amount?.dpo?.toFixed(2)}
+													<Tooltip
+														content={item?.averageTime?.dpo}
+														placement="top"
+														interactive
+													>
+														{item?.averageTime?.dpo?.toFixed(2)}
 													</Tooltip>
 												)
 												: '--'}
