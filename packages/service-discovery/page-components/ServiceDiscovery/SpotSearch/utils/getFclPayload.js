@@ -21,9 +21,9 @@ const getFclPayload = (values, origin, destination) => {
 				container_size,
 				container_type,
 				containers_count           : Number(containers_count),
-				inco_term                  : getIncoterm(),
-				destination_port_id        : destination,
-				origin_port_id             : origin,
+				inco_term                  : getIncoterm(origin, destination),
+				destination_port_id        : destination?.id,
+				origin_port_id             : origin?.id,
 				status                     : 'active',
 			};
 		}),

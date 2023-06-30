@@ -21,7 +21,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 	const [filtersCount, setFiltersCount] = useState(0);
 	const [visible, setVisible] = useState(false);
 
-	const { control, watch, setValue } = useForm();
+	const { control, watch, setValue, handleSubmit } = useForm();
 
 	const formValues = watch();
 
@@ -54,7 +54,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		setVisible(false);
 	};
 
-	const handleSubmit = () => {
+	const handleApply = () => {
 		if (isObjEmpty(formValues)) {
 			return;
 		}
@@ -81,7 +81,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 						Reset
 					</Button>
 
-					<Button size="sm" themeType="secondary" onClick={handleSubmit}>
+					<Button size="sm" themeType="secondary" onClick={handleSubmit(handleApply)}>
 						Apply
 					</Button>
 				</div>

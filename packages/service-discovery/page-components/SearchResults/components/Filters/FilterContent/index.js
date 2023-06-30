@@ -29,16 +29,16 @@ function FilterContent({ data = {}, setShow, createSearch, createSearchLoading }
 	const editFormValues = watch();
 
 	const {
-		origin:{ id: origin_id = '' },
-		destination:{ id: destination_id = '' },
+		origin = {},
+		destination = {},
 	} = getLocationInfo(data, {}, SERVICE_KEY);
 
 	const requiredParams = {
 		organization_id        : data?.importer_exporter_id,
 		organization_branch_id : data?.importer_exporter_branch_id,
 		user_id                : data?.user_id,
-		origin                 : origin_id,
-		destination            : destination_id,
+		origin,
+		destination,
 	};
 
 	const handleApply = async () => {

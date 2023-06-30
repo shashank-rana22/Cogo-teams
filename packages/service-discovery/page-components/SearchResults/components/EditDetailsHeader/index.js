@@ -26,8 +26,8 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 	const service_type = data[SERVICE_KEY];
 
 	const {
-		origin:{ id: origin_id = '' },
-		destination:{ id: destination_id = '' },
+		origin = {},
+		destination = {},
 	} = getLocationInfo(data, {}, SERVICE_KEY);
 
 	const [organization, setOrganization] = useState(rest.organization || {
@@ -37,8 +37,8 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 	});
 
 	const [locationValues, setLocationValues] = useState({
-		origin      : origin_id,
-		destination : destination_id,
+		origin,
+		destination,
 	});
 
 	const onClickApply = async () => {
@@ -46,13 +46,13 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 		// 	return;
 		// }
 
-		const { origin, destination } = locationValues;
+		const { origin: { id: origin_id = '' }, destination: { id: destination_id = '' } } = locationValues;
 
-		if (!origin || !destination) {
+		if (!origin_id || !destination_id) {
 			return;
 		}
 
-		if (origin === destination) {
+		if (origin_id === destination_id) {
 			Toast.error('Origin and Destination cannot be same');
 			return;
 		}
@@ -64,8 +64,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 			values : {
 				service_type,
 				...organization,
-				origin,
-				destination,
+				...locationValues,
 				formValues: loadValues,
 			},
 		});

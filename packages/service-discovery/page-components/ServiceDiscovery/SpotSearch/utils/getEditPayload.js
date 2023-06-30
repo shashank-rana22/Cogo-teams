@@ -16,7 +16,7 @@ const PAYLOAD_FUNCTION_MAPPING = {
 };
 
 const getEditPayload = (serviceType, values) => {
-	const { origin = '', destination = '', formValues = {} } = values || {};
+	const { origin = {}, destination = {}, formValues = {} } = values || {};
 
 	const getPayload = PAYLOAD_FUNCTION_MAPPING[serviceType];
 

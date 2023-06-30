@@ -18,6 +18,12 @@
     padding-left: 40px;
     margin: -20px;
     min-height: 100vh;
+
+    :global{
+        .ui_loader{
+            background-color: #221F20;
+        }
+    }
 }
 .loading_text{
     font-size: 48px;

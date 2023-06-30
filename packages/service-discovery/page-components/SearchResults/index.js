@@ -12,22 +12,38 @@ function SearchResults() {
 	const [showAdditionalHeader, setShowAdditionalHeader] = useState(false);
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
+	const [pageLoading, setPageLoading] = useState(false);
 
-	const { query } = useRouter();
+	const router = useRouter();
 
-	const { spot_search_id, importer_exporter_id } = query;
+	const { spot_search_id, importer_exporter_id } = router.query;
 
 	const { refetchSearch, loading, data } = useGetSpotSearch();
 
-	const COMPONENT_MAPPING = useMemo(() => ({
+	const SUB_HEADER_COMPONENT_MAPPING = useMemo(() => ({
 		edit_details: EditDetailsHeader,
 	}), []);
+
+	// useEffect(() => {
+	// 	const handleStart = () => setPageLoading(true);
+	// 	const handleComplete = () => setPageLoading(false);
+
+	// 	router.events.on('routeChangeStart', handleStart);
+	// 	router.events.on('routeChangeComplete', handleComplete);
+	// 	router.events.on('routeChangeError', handleComplete);
+
+	// 	return () => {
+	// 		router.events.off('routeChangeStart', handleStart);
+	// 		router.events.off('routeChangeComplete', handleComplete);
+	// 		router.events.off('routeChangeError', handleComplete);
+	// 	};
+	// }, [router]);
 
 	useEffect(() => {
 		refetchSearch({ spot_search_id, importer_exporter_id });
 	}, [spot_search_id]);
 
-	if (loading) {
+	if (pageLoading || loading) {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>
@@ -36,7 +52,7 @@ function SearchResults() {
 		);
 	}
 
-	const Component = COMPONENT_MAPPING[headerProps?.key] || null;
+	const Component = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
 
 	return (
 		<div className={styles.container}>

@@ -1,13 +1,17 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
+const getIncoterm = (origin, destination) => {
+	const { country: { id: countryId = '' } } = getGeoConstants();
 
-const getIncoterm = () => {
 	const INDIA_COUNTRY_CODE = getCountryDetails({
-		country_id: INDIA_COUNTRY_ID,
+		country_id: countryId,
 	});
 
-	console.log('RRRRR', INDIA_COUNTRY_CODE);
+	if (origin?.country_code !== INDIA_COUNTRY_CODE && destination?.country_code === INDIA_COUNTRY_CODE) {
+		return 'fob';
+	}
+
+	return 'cif';
 };
 export default getIncoterm;

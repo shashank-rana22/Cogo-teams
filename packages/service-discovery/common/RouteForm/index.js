@@ -39,7 +39,7 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 					<AsyncSelect
 						{...locationControls}
 						value={formValues?.location}
-						onChange={(val) => setFormValues((prev) => ({ ...prev, location: val }))}
+						onChange={(val, obj) => setFormValues((prev) => ({ ...prev, location: obj }))}
 					/>
 
 				</div>
@@ -91,8 +91,8 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 				<AsyncSelect
 					{...originControls}
-					value={formValues?.origin}
-					onChange={(val) => setFormValues((prev) => ({ ...prev, origin: val }))}
+					value={formValues?.origin?.id}
+					onChange={(val, obj) => setFormValues((prev) => ({ ...prev, origin: obj }))}
 				/>
 
 			</div>
@@ -106,8 +106,8 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 				<AsyncSelect
 					{...destinationControls}
-					value={formValues?.destination}
-					onChange={(val) => setFormValues((prev) => ({ ...prev, destination: val }))}
+					value={formValues?.destination?.id}
+					onChange={(val, obj) => setFormValues((prev) => ({ ...prev, destination: obj }))}
 				/>
 
 			</div>
