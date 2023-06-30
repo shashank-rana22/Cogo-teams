@@ -198,23 +198,25 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 
 					</div>
 					<div className={styles.category_container}>
-						{getTaxLabels(entityCode)?.map((it) => (
-							it.label
-								? (
-									<div className={styles.sub_category_container} key={it?.label}>
-										<div className={styles.tag_text}>
-											{it.label}
-											:
-										</div>
-										<div className={styles.tag_text_left}>
-											{it.valueKey === 'registrationNumber'
-												? item[it.valueKey]
-												: startCase(item[it.valueKey]?.name || item[it.valueKey])
-                                            || it.defaultValueKey}
-										</div>
+						{getTaxLabels(entityCode).map((it) => {
+							if (!it.label) {
+								return null;
+							}
+							return (
+								<div className={styles.sub_category_container} key={it?.label}>
+									<div className={styles.tag_text}>
+										{it.label}
+										:
 									</div>
-								) : null
-						))}
+									<div className={styles.tag_text_left}>
+										{it.valueKey === 'registrationNumber'
+											? item[it.valueKey]
+											: startCase(item[it.valueKey]?.name || item[it.valueKey])
+                                            || it.defaultValueKey}
+									</div>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 
