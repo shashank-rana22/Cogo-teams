@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import ReassignTicket from '../../ReassignTicket';
 
 import ChatBody from './ChatBody';
 import FooterChat from './FooterChat';
@@ -29,7 +30,10 @@ const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
 	return 'calc(100% - 75px)';
 };
 
-function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = () => {} }) {
+function TicketChat({
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
+	setShowReassign = () => {},
+}) {
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
@@ -130,6 +134,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 						modalData={modalData}
 						ticketData={ticketData}
 						refreshTickets={refreshTickets}
+						setShowReassign={setShowReassign}
 						isClosureAuthorizer={isClosureAuthorizer}
 					/>
 				)}
@@ -181,6 +186,14 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 						<TicketSummary {...ticketData} />
 					</div>
 				)}
+
+				<ReassignTicket
+					ticketId={modalData?.ticketId}
+					showReassign={showReassign}
+					setShowReassign={setShowReassign}
+					getTicketActivity={getTicketActivity}
+					getTicketDetails={getTicketDetails}
+				/>
 			</Modal.Body>
 		</>
 	);

@@ -12,6 +12,7 @@ import TicketsSection from './TicketsSection';
 function FilterTicketsSection({ type = '' }) {
 	const { query: { ticket_id } } = useRouter();
 
+	const [showReassign, setShowReassign] = useState(false);
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState({});
 	const [isUpdated, setIsUpdated] = useState(false);
@@ -34,7 +35,14 @@ function FilterTicketsSection({ type = '' }) {
 				isUpdated={isUpdated}
 				setIsUpdated={setIsUpdated}
 			/>
-			<Modals modalData={modalData} setModalData={setModalData} setIsUpdated={setIsUpdated} />
+			<Modals
+				modalData={modalData}
+				setModalData={setModalData}
+				setIsUpdated={setIsUpdated}
+				showReassign={showReassign}
+				setShowReassign={setShowReassign}
+			/>
+
 		</div>
 	);
 }
