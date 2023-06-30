@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useGetSpotSearch = () => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -8,7 +9,7 @@ const useGetSpotSearch = () => {
 		url    : '/get_spot_search',
 	}, { manual: true });
 
-	const getSearch = async (props) => {
+	const getSearch = useCallback(async (props) => {
 		const { spot_search_id = '', importer_exporter_id = '' } = props;
 
 		try {
@@ -24,7 +25,8 @@ const useGetSpotSearch = () => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	};
+	}, [trigger]);
+
 	return {
 		refetchSearch: getSearch,
 		loading,

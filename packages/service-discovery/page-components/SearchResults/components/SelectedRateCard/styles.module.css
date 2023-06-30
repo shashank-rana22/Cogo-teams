@@ -1,0 +1,44 @@
+.parent{
+    background-color: #FBFBFB;
+}
+.container{
+    /* margin-top: 20px; */
+}
+
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top:20px ;
+    margin: 0px 20px 0px 20px;
+}
+
+.line{
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+}
+.services{
+    display: flex;
+    justify-content: space-between;
+}
+
+.additionalServices{
+    width: 70%;
+    /* border: 1px solid #000; */
+    margin-right: 20px;
+    margin-left: 33px;
+}
+
+.service_bundling{
+    width: 30%;
+    /* border: 1px solid #000; */
+    margin-left: 20px;
+    margin-right: 33px;
+}
+.proceedContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+

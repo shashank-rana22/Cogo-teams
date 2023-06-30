@@ -1,0 +1,33 @@
+.container{
+    margin: 20px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.line_div{
+    display: flex;
+}
+
+.pills{
+    border-radius: 24px;
+    border: 1px solid #ECECEC;
+    background: #F2F3FA;
+    height: 30px;
+    padding: 6px;
+    margin-right: 8px;
+}
+
+.traders_line{
+    margin-left: 20px;
+}
+
+.button_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button{
+    margin-right: 12px;
+}

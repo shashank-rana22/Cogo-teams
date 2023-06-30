@@ -1,0 +1,24 @@
+.container{
+    padding-right: 20px;
+}
+
+.primaryBotton{
+    white-space: nowrap;     
+    overflow: hidden;         
+    text-overflow: ellipsis; 
+    margin-left: 10px;
+    border-radius: 6px; 
+    width: 94%;
+}
+
+.secondaryBotton{
+    white-space: nowrap;     
+    overflow: hidden;         
+    text-overflow: ellipsis; 
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+    border-radius: 6px; 
+    width: 94%;
+}
+

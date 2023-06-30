@@ -1,0 +1,57 @@
+.container{
+  width: 50%;
+  padding-left: 20px;
+}
+
+.locationCode{
+    color: #000;
+    font-size: 22px;
+    font-weight: 300;
+    padding: 4px 0px 0px 0px;
+}
+
+.locationName{
+    color: #000;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 150%;
+    max-width: 20%;
+    white-space: nowrap;       
+    overflow: hidden;          
+    text-overflow: ellipsis;
+    margin-bottom: -4px;   
+}
+
+.locationNameGroup{
+    max-width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.circle {
+    background: #FFFFFF;
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    border: 1px solid #7278AD;
+    flex-shrink: 0;
+  }
+  
+  .dottedLine {
+    width: 40%;
+    height: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    border-top: 1.5px dotted #7278AD;
+  }
+
+  .activeCircle{
+    background: #b3d5fb;
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    border: 1px solid #7278AD;
+    flex-shrink: 0;
+  }

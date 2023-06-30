@@ -2,11 +2,22 @@ import { Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState, useMemo } from 'react';
 
+import BookCheckout from './components/BookToCheckout';
+import Comparison from './components/Comparison';
 import EditDetailsHeader from './components/EditDetailsHeader';
 import Filters from './components/Filters';
 import Header from './components/Header';
+import ListRateCards from './components/ListRateCards';
+import SelectedRateCard from './components/SelectedRateCard';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import styles from './styles.module.css';
+
+const SCREEN_MAPPING = {
+	listRateCard : ListRateCards,
+	selectedCard : SelectedRateCard,
+	comparison   : Comparison,
+	bookCheckout : BookCheckout,
+};
 
 function SearchResults() {
 	const [showAdditionalHeader, setShowAdditionalHeader] = useState(false);
@@ -14,34 +25,22 @@ function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
 	const [pageLoading, setPageLoading] = useState(false);
 
-	const router = useRouter();
-
-	const { spot_search_id, importer_exporter_id } = router.query;
-
+	const { query } = useRouter();
+	const { spot_search_id, importer_exporter_id } = query;
 	const { refetchSearch, loading, data } = useGetSpotSearch();
+	const { detail, rates = [] } = data || {};
+
+	const [screen, setScreen] = useState('listRateCard');
+	const [selectedCard, setSelectedCard] = useState({});
+	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
 	const SUB_HEADER_COMPONENT_MAPPING = useMemo(() => ({
 		edit_details: EditDetailsHeader,
 	}), []);
 
-	// useEffect(() => {
-	// 	const handleStart = () => setPageLoading(true);
-	// 	const handleComplete = () => setPageLoading(false);
-
-	// 	router.events.on('routeChangeStart', handleStart);
-	// 	router.events.on('routeChangeComplete', handleComplete);
-	// 	router.events.on('routeChangeError', handleComplete);
-
-	// 	return () => {
-	// 		router.events.off('routeChangeStart', handleStart);
-	// 		router.events.off('routeChangeComplete', handleComplete);
-	// 		router.events.off('routeChangeError', handleComplete);
-	// 	};
-	// }, [router]);
-
 	useEffect(() => {
 		refetchSearch({ spot_search_id, importer_exporter_id });
-	}, [spot_search_id]);
+	}, [importer_exporter_id, refetchSearch, spot_search_id]);
 
 	if (pageLoading || loading) {
 		return (
@@ -51,8 +50,44 @@ function SearchResults() {
 			</div>
 		);
 	}
-
 	const Component = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
+
+	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
+
+	const showComparison = rateCardsForComparison.length >= 2;
+
+	const RateCardsComponent = SCREEN_MAPPING[screen];
+
+	const SCREEN_PROPS_MAPPING = {
+		listRateCard: {
+			rates,
+			detail,
+			setSelectedCard,
+			selectedCard,
+			setScreen,
+			setComparisonCheckbox,
+			showComparison,
+			rateCardsForComparison,
+			comparisonCheckbox,
+		},
+		selectedCard: {
+			rateCardData: selectedCard,
+			detail,
+			setSelectedCard,
+			selectedCard,
+			setScreen,
+		},
+		comparison: {
+			setScreen,
+			rateCardsForComparison,
+		},
+		bookCheckout: {
+			rateCardData: selectedCard,
+			detail,
+			setSelectedCard,
+			setScreen,
+		},
+	};
 
 	return (
 		<div className={styles.container}>
@@ -64,11 +99,11 @@ function SearchResults() {
 					setHeaderProps={setHeaderProps}
 					setShowFilterModal={setShowFilterModal}
 				/>
-
-				{showAdditionalHeader ? (
-					<Component {...headerProps} />
-				) : null}
 			</div>
+
+			{showAdditionalHeader ? (
+				<Component {...headerProps} />
+			) : null}
 
 			{showFilterModal ? (
 				<Filters
@@ -77,6 +112,9 @@ function SearchResults() {
 					setShow={setShowFilterModal}
 				/>
 			) : null}
+
+			<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
+
 		</div>
 	);
 }

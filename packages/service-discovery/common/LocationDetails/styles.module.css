@@ -13,6 +13,13 @@
     font-weight: 500;
     font-size: 14px;
     color: #D6B300;
+    &.light{
+        color: #D6B300;
+    }
+
+    &.dark{
+        color: #D6B300;
+    }
 }
 .location_port_text{
     font-weight: 600;
@@ -22,6 +29,13 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+    &.light{
+        color: #000000;
+    }
+
+    &.dark{
+        color: #ffffff;
+    }
 }
 .tooltip{
     width: max-content;

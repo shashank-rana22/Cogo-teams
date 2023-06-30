@@ -1,0 +1,72 @@
+
+.container{
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F2F3FA;
+}
+
+.containerDetails{
+    padding: 16px 0px 8px 24px;
+  
+    :global {
+		.ui_tab_container {
+			 padding: 0px 4px 8px 4px ;
+             font-size: 12px;
+		}
+
+		.ui_tab_active.ui_ps_themeType_main_tabs {
+			margin: 0;
+			background-color: #fdebe9;
+			border-bottom: 3px solid #EE3425;
+			transition: all 0.1s;
+		}
+	}
+}
+
+.dndDetails{
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.tag{
+    border-radius: 4px;
+    background: #CFEAED;
+    padding: 2px 4px 2px 4px;
+    margin-left: 20px;
+    margin-right: 8px;
+}
+
+.plusIcon{
+    height: 20px;
+    width: 20px;
+    margin-left: 8px;
+}
+
+.otherDetails{
+    width: 40%;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrapper{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.otherDetailsTag{
+    color: #E47200;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.tabs_style{
+    padding-bottom: 8px;
+}
+

@@ -6,7 +6,7 @@ import getLocationInfo from '../../page-components/SearchResults/utils/locations
 
 import styles from './styles.module.css';
 
-function LocationDetails({ data = {} }) {
+function LocationDetails({ data = {}, platformTheme = 'light' }) {
 	const { origin, destination } = getLocationInfo(data, {}, 'search_type');
 
 	const originCountry = origin?.display_name?.split(', ');
@@ -22,18 +22,30 @@ function LocationDetails({ data = {} }) {
 		port_code: destinationPortCode = '',
 	} = destination || {};
 
+	const styledTheme = {
+		container             : `${styles.container} ${styles[platformTheme]}`,
+		location              : `${styles.location}${styles[platformTheme]}`,
+		location_country_text : `${styles.location_country_text} ${styles[platformTheme]} `,
+		tooltip               : `${styles.tooltip} ${styles[platformTheme]} `,
+		location_port_text    : `${styles.location_port_text} ${styles[platformTheme]}`,
+		icon                  : `${styles.icon} ${styles[platformTheme]}`,
+		tooltip_content       : `${styles.tooltip_content} ${styles[platformTheme]}`,
+	};
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.location}>
-				<span className={styles.location_country_text}>{`${originPortCode}, ${originCountry?.pop()}`}</span>
+		<div className={styledTheme.container}>
+			<div className={styledTheme.location}>
+				<span className={styledTheme.location_country_text}>
+					{`${originPortCode}, ${originCountry?.pop()}`}
+				</span>
 
 				<Tooltip
 					placement="top"
-					className={styles.tooltip}
-					content={<span className={styles.tooltip_content}>{originPortName}</span>}
+					className={styledTheme.tooltip}
+					content={<span className={styledTheme.tooltip_content}>{originPortName}</span>}
 				>
 					<div
-						className={styles.location_port_text}
+						className={styledTheme.location_port_text}
 						style={{ maxWidth: origin ? '' : '80%' }}
 					>
 						{originPortName}
@@ -43,22 +55,22 @@ function LocationDetails({ data = {} }) {
 
 			{destination ? (
 				<>
-					<div className={styles.icon}>
+					<div className={styledTheme.icon}>
 						<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} />
 					</div>
 
-					<div className={styles.location}>
-						<span className={styles.location_country_text}>
+					<div className={styledTheme.location}>
+						<span className={styledTheme.location_country_text}>
 							{`${destinationPortCode}, ${destinationCountry?.pop()}`}
 						</span>
 
 						<Tooltip
 							placement="top"
-							content={<span className={styles.tooltip_content}>{destinationPortName}</span>}
+							content={<span className={styledTheme.tooltip_content}>{destinationPortName}</span>}
 							style={{ minWidth: 'max-content' }}
 						>
 							<div
-								className={styles.location_port_text}
+								className={styledTheme.location_port_text}
 								style={{ maxWidth: destination ? '' : '80%' }}
 							>
 								{destinationPortName}

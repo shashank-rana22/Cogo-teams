@@ -1,0 +1,59 @@
+{
+	"cif": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs", "fcl_freight" ],
+	"cfr": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs", "fcl_freight" ],
+	"cpt": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight"
+	],
+	"cip": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight"
+	],
+	"dat": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight"
+	],
+	"dap": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight",
+		"import_haulage_freight",
+		"import_transportation"
+	],
+	"ddp": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight",
+		"import_fcl_customs",
+		"import_haulage_freight",
+		"import_transportation",
+		"import_fcl_cfs"
+	],
+	"fob": ["fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
+	"exw": [
+		"export_transportation",
+		"export_haulage_freight",
+		"export_fcl_customs",
+		"export_fcl_cfs",
+		"fcl_freight",
+		"import_fcl_customs",
+		"import_haulage_freight",
+		"import_transportation",
+		"import_fcl_cfs"
+	],
+	"fca": ["export_transportation","export_haulage_freight","fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
+	"fas": ["fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"]
+}
