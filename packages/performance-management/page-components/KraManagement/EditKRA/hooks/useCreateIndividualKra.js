@@ -14,11 +14,6 @@ function useCreateIndividualKra({ data: createKraData }) {
 		method : 'POST',
 	}, { manual: true });
 
-	useEffect(() => {
-		setValuesIndividualKRA(createKraData);
-		setRatingInfo();
-	}, [createKraData]);
-
 	const getPayload = (values) => values?.map((item) => ({
 		employee_id                    : item?.employee_id,
 		kra_id                         : item?.kra_id,
@@ -45,6 +40,11 @@ function useCreateIndividualKra({ data: createKraData }) {
 			}
 		}
 	}, [trigger]);
+
+	useEffect(() => {
+		setValuesIndividualKRA(createKraData);
+		setRatingInfo();
+	}, [createKraData]);
 
 	return {
 		data,

@@ -1,4 +1,4 @@
-import { InputNumber, Select } from '@cogoport/components';
+import { InputNumber, Select, Input } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 const OPTIONS = [
@@ -13,6 +13,12 @@ function getIndividualColumn({
 	const handleTargetChange = (val, item, name) => {
 		const newData = valuesIndividualKRA?.map((element) => {
 			if (element.employee_id === item.employee_id) {
+				if (name === 'target_value') {
+					return {
+						...element,
+						[name]: val,
+					};
+				}
 				return {
 					...element,
 					[name]: val === 'yes' ? 'percentage' : 'flat',
