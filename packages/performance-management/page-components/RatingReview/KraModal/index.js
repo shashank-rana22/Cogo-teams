@@ -31,29 +31,26 @@ function KraModal({ show, setShow }) {
 		<Modal show={show} placement="top" className={styles.modal} size="xl" onClose={() => setShow(false)}>
 			<Modal.Header title={(
 				<div className={styles.container}>
+
 					<div className={styles.employee_name}>
-						Employee Name:
-						{' '}
-						{data?.employee_details?.employee_name}
+						Employee Name:&nbsp;
+						<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.employee_name}</span>
 					</div>
 
 					<div className={styles.squad}>
 						<div className={styles.squad_name}>
-							Squad:
-							{' '}
-							{data?.employee_details?.squad_name}
+							Squad:&nbsp;
+							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.squad_name}</span>
 						</div>
 
 						<div className={styles.tribe_name}>
-							Tribe:
-							{' '}
-							{data?.employee_details?.tribe_name}
+							Tribe:&nbsp;
+							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.tribe_name}</span>
 						</div>
 
 						<div className={styles.total_kra}>
-							Total Kra:
-							{' '}
-							{(list || [])?.length}
+							Total Kra:&nbsp;
+							<span style={{ fontWeight: 'bold' }}>{(list || [])?.length}</span>
 						</div>
 					</div>
 				</div>
