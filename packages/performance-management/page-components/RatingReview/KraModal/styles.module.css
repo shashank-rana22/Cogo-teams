@@ -39,6 +39,11 @@
 	background-color: var(--color-tertiary-beige-4);
 }
 
+.employee_name{
+    display: flex;
+    font-size: medium;
+}
+
 .left_section {
 	display: flex;
 	flex-direction: column;
@@ -46,12 +51,14 @@
 	height: 470px;
 	padding-left: 15px;
 	overflow-y: scroll;
+    border-right: 1px solid black;
 }
 
 .right_section {
 	display: flex;
 	flex-direction: column;
 	width: 50%;
+    padding: 10px;
 }
 
 .overall_rating {
@@ -112,7 +119,7 @@
 }
 
 .sub_section {
-	width: 60%;
+	width: 80%;
 	padding: 10px;
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -170,6 +177,11 @@
 
 .text_area {
 	padding: 5px;
+    :global {
+		.ui_text_area_control {
+			padding: 12px;
+		}
+    }
 }
 
 .input_display {
