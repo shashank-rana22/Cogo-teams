@@ -48,7 +48,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 			}
 		} catch (err) {
 			Toast.error(
-				toastApiError(err?.error?.message || ['Something went wrong.']),
+				toastApiError(err),
 			);
 		}
 	};
