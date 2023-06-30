@@ -3,7 +3,7 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
 import StyledTable from '../../../../commons/styledTable';
-import PaymentList from '../../../../configs/Payment_Table';
+import invoicePaymentList from '../../../../configs/Payment_Table';
 import { UTILIZATION_STATUS } from '../../../../constants';
 import useGetPaymentTable from '../../../../hooks/useGetPaymentTable';
 
@@ -38,7 +38,7 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 
 	const sortStyleDesc = orderBy.sortType === 'Desc' ? '#303B67' : '#BDBDBD';
 
-	const tableColumns = PaymentList({
+	const tableColumns = invoicePaymentList({
 		paymentFilters,
 		setPaymentFilters,
 		setOrderBy,

@@ -22,7 +22,7 @@ interface PaymentTable {
 	entityCode?: string
 }
 
-const PaymentList = ({
+const invoicePaymentList = ({
 	paymentFilters,
 	setPaymentFilters,
 	setOrderBy,
@@ -148,4 +148,4 @@ const PaymentList = ({
 
 ]);
 
-export default PaymentList;
+export default invoicePaymentList;
