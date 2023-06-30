@@ -12667,6 +12667,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 };
 

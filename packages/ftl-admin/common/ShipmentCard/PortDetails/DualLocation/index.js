@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import React from 'react';
 
 import getLocation from '../../../../utils/getLocation';
@@ -32,7 +33,11 @@ const handleLocationDetails = (location) => (
 	</>
 );
 
-const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat) : null);
+const getDisplayDate = (date) => (date ? formatDate({
+	date,
+	formatType : 'dateTime',
+	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+}) : null);
 
 function PortDetails({ data = {} }) {
 	const { schedule_arrival, schedule_departure } = data;

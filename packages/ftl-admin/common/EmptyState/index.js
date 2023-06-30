@@ -1,7 +1,8 @@
 import styles from './styles.module.css';
 
+const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
+
 export default function EmptyState() {
-	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	return (
 		<div className={styles.container}>
 			<div>

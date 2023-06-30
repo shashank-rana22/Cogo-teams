@@ -10,9 +10,7 @@ import {
 	CargoPills,
 	DualLocation,
 	Header,
-	SingleLocation,
 } from '../../../common/ShipmentCard';
-import isSingleLocation from '../../../utils/checkSingleLocation';
 import { SIDBeforeDepartureContext } from '../context';
 
 import styles from './styles.module.css';
@@ -68,11 +66,7 @@ function Card({ data = {}, isSelectable = false }) {
 				</div>
 
 				<div className={styles.location_container}>
-					{isSingleLocation(data?.shipment_type) ? (
-						<SingleLocation data={data} />
-					) : (
-						<DualLocation data={data} />
-					)}
+					<DualLocation data={data} />
 				</div>
 
 				<div className={styles.divider} />
