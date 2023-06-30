@@ -1,19 +1,5 @@
 export const filterControls = [
-	{
-		name           : 'zone',
-		type           : 'multiSelect',
-		placeholder    : 'zone',
-		isClearable    : true,
-		multiple       : true,
-		span           : 1,
-		defaultOptions : false,
-		options        : [
-			{ value: 'NORTH', label: 'North' },
-			{ value: 'SOUTH', label: 'South' },
-			{ value: 'EAST', label: 'East' },
-			{ value: 'WEST', label: 'West' },
-		],
-	},
+
 	{
 
 		name           : 'serviceType',
@@ -47,12 +33,9 @@ export const filterControls = [
 		multiple       : true,
 		defaultOptions : false,
 		options        : [
-			{ label: 'Last 3 Days', value: 'three' },
-			{ label: 'Last 7 Days', value: 'seven' },
-			{ label: 'Last 15 Days', value: 'fifteen' },
-			{ label: 'Last Month', value: 'thirty' },
-			{ label: 'Last 3 Months', value: 'threeMonth' },
-			{ label: 'Last 6 Months', value: 'sixMonth' },
+			{ label: 'Last 10 Days', value: 'day' },
+			{ label: 'Last 10 weeks', value: 'week' },
+			{ label: 'Last 10 months', value: 'month' },
 		],
 	},
 	{

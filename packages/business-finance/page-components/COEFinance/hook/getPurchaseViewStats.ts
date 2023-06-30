@@ -22,7 +22,7 @@ const usePurchaseViewStats = ({ filters }) => {
 		{ autoCancel: false },
 	);
 
-	const { zone, serviceType, dateRange, timePeriod } = filters || {};
+	const { serviceType, dateRange, timePeriod } = filters || {};
 	const { startDate, endDate } = dateRange || {};
 
 	const billDatesStart = 			formatDate({
@@ -43,13 +43,12 @@ const usePurchaseViewStats = ({ filters }) => {
 	const Payload = useMemo(
 		() => ({
 			jobTypeShipment : 'false',
-			zone            : zone || undefined,
 			service         : serviceType || undefined,
 			fromDate        : billDatesStart || undefined,
 			toDate          : billDatesEnd || undefined,
 			timePeriod      : timePeriod || undefined,
 		}),
-		[billDatesEnd, billDatesStart, serviceType, timePeriod, zone],
+		[billDatesEnd, billDatesStart, serviceType, timePeriod],
 	);
 	const getStatsData = useCallback(() => {
 		try {

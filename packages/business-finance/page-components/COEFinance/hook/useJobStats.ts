@@ -5,7 +5,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 interface FilterInterface {
-	zone?:string
 	serviceType?:string
 	timePeriod?:string
 	dateRange?:DateInterface
@@ -25,7 +24,7 @@ const useJobStats = (filters :FilterInterface) => {
 		},
 		{ autoCancel: false },
 	);
-	const { zone, serviceType, dateRange, timePeriod } = filters || {};
+	const { serviceType, dateRange, timePeriod } = filters || {};
 	const { startDate, endDate } = dateRange || {};
 
 	const billDatesStart = 			formatDate({
@@ -49,7 +48,6 @@ const useJobStats = (filters :FilterInterface) => {
 			try {
 				await trigger({
 					params: {
-						zone       : zone || undefined,
 						service    : serviceType || undefined,
 						fromDate   : billDatesStart || undefined,
 						toDate     : billDatesEnd || undefined,
@@ -61,7 +59,7 @@ const useJobStats = (filters :FilterInterface) => {
 			}
 		};
 		getData();
-	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod, zone]);
+	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod]);
 
 	return { jobStatsData, loading };
 };

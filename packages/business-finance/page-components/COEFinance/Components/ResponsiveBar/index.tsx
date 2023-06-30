@@ -31,7 +31,7 @@ function MyResponsiveBar({ data }) {
 				keys={['Uploaded', 'Approved', 'Rejected']}
 				indexBy="date"
 				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
-				padding={0.2}
+				padding={0.1}
 				enableGridY
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
@@ -52,9 +52,9 @@ function MyResponsiveBar({ data }) {
 				axisRight={null}
 				minValue={0}
 				axisBottom={{
-					tickSize     : 0,
-					tickPadding  : 10,
-					tickRotation : 0,
+					tickSize    : 0,
+					tickPadding : 10,
+					// tickRotation : -10,
 				}}
 				axisLeft={{
 					tickSize     : 0,

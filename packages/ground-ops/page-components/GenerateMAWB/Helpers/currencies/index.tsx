@@ -1,5 +1,6 @@
-import countries from './countries.json';
 import sort from './sortTabel';
+
+import countries from '@/data-store/constants/countries.json';
 
 const previousCurriencies = [];
 const optionsAll = [];

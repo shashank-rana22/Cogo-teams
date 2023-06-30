@@ -1,4 +1,5 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, MultiSelect, cl } from '@cogoport/components';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -52,7 +53,8 @@ function FilterModal({ filters, setFilters }: Props) {
 		setCurrencies([]);
 		setShowModal(false);
 	};
-
+	console.log(filters?.currency?.length, 'filters');
+	const checkFilterCurrencyLength = filters?.currency?.length > 0;
 	return (
 		<div className={styles.modal_container}>
 			<Modal
@@ -85,10 +87,11 @@ function FilterModal({ filters, setFilters }: Props) {
 							const { id = '', icon, text } = item;
 							return (
 								<div
-									className={`${styles.currency_values}
-											${
-                        currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected
-									}`}
+									key={id}
+									className={cl`${styles.currency_values}
+											${currencies.includes(id as keyof typeof currencies)
+										? styles.selected : styles.unselected
+									} ${styles.currency_filter}`}
 									onClick={() => {
 										if (currencies?.includes(id)) {
 											const value = currencies.filter((it) => it !== item?.id);
@@ -104,6 +107,21 @@ function FilterModal({ filters, setFilters }: Props) {
 								</div>
 							);
 						})}
+						<div
+							className={cl`${styles.select} ${styles.currency_values}
+							${checkFilterCurrencyLength ? styles.selected : styles.unselected}`}
+						>
+							<div className={styles.text}>Other Currencys</div>
+							<div className={styles.select_input}>
+								<MultiSelect
+									value={filters?.currency}
+									onChange={(val:string) => setFilters({ currency: val })}
+									placeholder="select currency"
+									options={getCurrencyOptions()}
+									size="md"
+								/>
+							</div>
+						</div>
 					</div>
 
 					<div className={styles.container_filter}>

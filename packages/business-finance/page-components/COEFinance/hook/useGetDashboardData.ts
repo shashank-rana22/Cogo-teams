@@ -9,14 +9,13 @@ interface DateInterface {
 	endDate?:Date
 }
 interface FilterInterface {
-	zone?:string
 	serviceType?:string
 	timePeriod?:string
 	dateRange?:DateInterface
 	rest?:any
 }
 const useGetDashboardData = (filters :FilterInterface) => {
-	const { zone = '', serviceType = '', dateRange, timePeriod } = filters || {};
+	const { serviceType = '', dateRange, timePeriod } = filters || {};
 
 	const [{ data:dashboardData, loading }, trigger] = useRequestBf(
 		{
@@ -60,7 +59,7 @@ const useGetDashboardData = (filters :FilterInterface) => {
 			}
 		};
 		getData();
-	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod, zone]);
+	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod]);
 
 	return { dashboardData, loading };
 };
