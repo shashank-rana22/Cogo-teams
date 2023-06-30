@@ -46,8 +46,6 @@ function CreateConfigurationModal({
 	Type,
 	setValue,
 }) {
-	// console.log(showModal);
-
 	useEffect(() => {
 		if (!isEmpty(showModal) && Type === CHECK_USE_TYPE_UPDATE) {
 			if (showModal?.squad_name) {

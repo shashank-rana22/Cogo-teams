@@ -30,7 +30,6 @@ function Child(props) {
 				const Element = getFieldController(controlItem.type);
 
 				if (!Element) return null;
-
 				return (
 					<div className={styles.list} key={controlItem.name}>
 						<div className={styles.label}>{controlItem.label}</div>
