@@ -39,7 +39,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'irn_cancel', 'compliance'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance'],
 		labels              : {
 			irn_label: 'IRN',
 		},
