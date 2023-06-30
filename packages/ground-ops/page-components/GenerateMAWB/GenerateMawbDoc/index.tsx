@@ -47,7 +47,7 @@ interface Props {
 	setEditCopies?: Function;
 }
 
-const downloadButton = {
+const DOWNLOAD_BUTTON = {
 	document_accepted            : 'Download 12 Copies',
 	document_uploaded            : 'Download',
 	document_amendment_requested : 'Download',
@@ -129,7 +129,7 @@ function GenerateMawb({
 
 	const documentId = category === 'mawb' ? docId : id;
 	const mawbPendingTaskId = edit === 'edit' ? undefined : pendingTaskId;
-	const hawbPendingTaskId = state === 'document_amendment_requested' ? pendingTaskId : undefined;
+	const hawbPendingTaskId = state === 'document_amendment_requested' ? taskItem?.taskId : undefined;
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
@@ -344,7 +344,7 @@ function GenerateMawb({
 									}}
 									disabled={saveDocument}
 								>
-									{saveDocument ? 'Downloading...' : downloadButton[documentState]}
+									{saveDocument ? 'Downloading...' : DOWNLOAD_BUTTON[documentState]}
 								</Button>
 							)}
 					</div>
