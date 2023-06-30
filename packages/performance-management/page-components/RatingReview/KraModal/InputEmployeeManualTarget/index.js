@@ -1,19 +1,17 @@
 import { Input, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from '../styles.module.css';
 
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
-const MIN_RATING = 0;
-
 function InputEmployeeManualTarget({ item }) {
 	const {
 		loading: updateLoading,
 		updateEmployeeManualTarget,
+		inputValue,
+		setInputValue,
 	} = useUpdateEmployeeManualTarget({ item });
-
-	const [inputValue, setInputValue] = useState(MIN_RATING);
 
 	return (
 		<div className={styles.input_display}>

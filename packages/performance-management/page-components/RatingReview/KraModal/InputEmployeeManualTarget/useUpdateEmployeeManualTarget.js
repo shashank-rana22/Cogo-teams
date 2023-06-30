@@ -1,12 +1,17 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useState } from 'react';
+
+const MIN_RATING = 0;
 
 const useUpdateEmployeeManualTarget = ({ item }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_manual_target',
 		method : 'POST',
 	}, { manual: true });
+
+	const [inputValue, setInputValue] = useState(MIN_RATING);
 
 	const updateEmployeeManualTarget = async (val) => {
 		try {
@@ -30,6 +35,8 @@ const useUpdateEmployeeManualTarget = ({ item }) => {
 	return {
 		updateEmployeeManualTarget,
 		loading,
+		inputValue,
+		setInputValue,
 	};
 };
 
