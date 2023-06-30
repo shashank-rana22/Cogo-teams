@@ -6,7 +6,7 @@ import { useCallback, useState, useEffect } from 'react';
 const DEFAULT_TARGET_VALUE = 0;
 
 function useCreateIndividualKra({ data: createKraData }) {
-	const [valuesIndividualKRA, setValuesIndividualKRA] = useState([]);
+	const [individualKRAValues, setIndividualKRAValues] = useState([]);
 	const [ratingInfo, setRatingInfo] = useState(DEFAULT_TARGET_VALUE);
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
@@ -42,7 +42,7 @@ function useCreateIndividualKra({ data: createKraData }) {
 	}, [trigger]);
 
 	useEffect(() => {
-		setValuesIndividualKRA(createKraData);
+		setIndividualKRAValues(createKraData);
 		setRatingInfo();
 	}, [createKraData]);
 
@@ -50,8 +50,8 @@ function useCreateIndividualKra({ data: createKraData }) {
 		data,
 		loading,
 		createIndividualKra,
-		valuesIndividualKRA,
-		setValuesIndividualKRA,
+		individualKRAValues,
+		setIndividualKRAValues,
 		ratingInfo,
 		setRatingInfo,
 	};

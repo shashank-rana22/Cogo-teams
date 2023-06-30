@@ -7,11 +7,11 @@ const OPTIONS = [
 ];
 
 function getIndividualColumn({
-	valuesIndividualKRA,
-	setValuesIndividualKRA,
+	individualKRAValues,
+	setIndividualKRAValues,
 }) {
 	const handleTargetChange = (val, item, name) => {
-		const newData = valuesIndividualKRA?.map((element) => {
+		const newData = individualKRAValues?.map((element) => {
 			if (element.employee_id === item.employee_id) {
 				if (name === 'target_value') {
 					return {
@@ -28,7 +28,7 @@ function getIndividualColumn({
 		});
 
 		if (newData?.length) {
-			setValuesIndividualKRA(newData);
+			setIndividualKRAValues(newData);
 		}
 	};
 
@@ -58,7 +58,7 @@ function getIndividualColumn({
 					<InputNumber
 						size="sm"
 						min={0}
-						value={valuesIndividualKRA?.find((element) => element.employee_id
+						value={individualKRAValues?.find((element) => element.employee_id
 							=== item.employee_id)?.target_value}
 						onChange={(e) => handleTargetChange(e, item, 'target_value')}
 					/>
@@ -74,7 +74,7 @@ function getIndividualColumn({
 						placeholder="is percent"
 						size="sm"
 						options={OPTIONS || []}
-						value={valuesIndividualKRA?.find((element) => element.employee_id
+						value={individualKRAValues?.find((element) => element.employee_id
 							=== item.employee_id)?.selected_value_type === 'percentage' ? 'yes' : 'no'}
 						onChange={(e) => handleTargetChange(e, item, 'selected_value_type')}
 					/>

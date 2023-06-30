@@ -12,17 +12,18 @@ const TABLE_EMPTY_TEXT = 'No data to show';
 
 function IndividualKraAssignment({ data, loading }) {
 	const {
-		loading: submitLoading, createIndividualKra,
-		valuesIndividualKRA,
-		setValuesIndividualKRA,
+		loading: submitLoading,
+		createIndividualKra,
+		individualKRAValues,
+		setIndividualKRAValues,
 		ratingInfo,
 		setRatingInfo,
 	} = useCreateIndividualKra({ data });
 
 	const columns = getIndividualColumn({
 		loading,
-		valuesIndividualKRA,
-		setValuesIndividualKRA,
+		individualKRAValues,
+		setIndividualKRAValues,
 	});
 
 	return (
@@ -42,7 +43,7 @@ function IndividualKraAssignment({ data, loading }) {
 
 				<Button
 					loading={submitLoading}
-					onClick={() => createIndividualKra(valuesIndividualKRA)}
+					onClick={() => createIndividualKra(individualKRAValues)}
 					className={styles.button}
 				>
 					Submit Targets
