@@ -1,53 +1,57 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext, useEffect } from 'react';
 
 import injectUiConfigs from '../utils/inject-ui-configs';
 
+const DEFAULT_STEP = 0;
+const OFFSET_FOR_LAST_INDEX = 1;
+const OFFSET_TAG_FOR_STEP = 1;
 function useTaskExecution({ task = {}, taskConfigData = {} }) {
 	const { primary_service: primaryService = {}, servicesList = [] } = useContext(ShipmentDetailContext);
 
 	const dataConfig = injectUiConfigs(taskConfigData, task, primaryService);
 
-	let initialStep = 0;
+	let initialStep = DEFAULT_STEP;
 
 	if (task?.tags && task?.tags?.length) {
-		initialStep = Number(task?.tags?.[0]) + 1;
+		initialStep = Number(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]) + OFFSET_TAG_FOR_STEP;
 
-		if (initialStep > (dataConfig?.steps || []).length - 1 && initialStep !== 0) {
-			initialStep = (dataConfig?.steps || []).length - 1;
+		if (initialStep > (dataConfig?.steps || []).length - OFFSET_FOR_LAST_INDEX && initialStep !== DEFAULT_STEP) {
+			initialStep = (dataConfig?.steps || []).length - OFFSET_FOR_LAST_INDEX;
 		}
 	}
+
+	const [currentStep, setCurrentStep] = useState(initialStep);
 
 	if (primaryService?.nomination_type === 'agent' && primaryService?.bl_category === 'mbl') {
 		(dataConfig?.steps || []).shift();
 	}
 
-	const serviceIdMapping = {};
-
-	const idCheck = {};
+	const SERVICE_ID_MAPPING = {};
+	const ID_MAPPING = {};
 
 	(servicesList || []).forEach((obj) => {
-		if (!Array.isArray(serviceIdMapping[`${obj?.service_type}.id`])) {
-			serviceIdMapping[`${obj?.service_type}.id`] = [];
+		if (!Array.isArray(SERVICE_ID_MAPPING[`${obj?.service_type}.id`])) {
+			SERVICE_ID_MAPPING[`${obj?.service_type}.id`] = [];
 		}
 
-		if (!idCheck[obj?.id]) {
-			idCheck[obj?.id] = true;
-			serviceIdMapping[`${obj?.service_type}.id`].push(obj?.id);
+		if (!ID_MAPPING[obj?.id]) {
+			ID_MAPPING[obj?.id] = true;
+
+			SERVICE_ID_MAPPING[`${obj?.service_type}.id`].push(obj?.id);
 		}
 	});
-
-	const [currentStep, setCurrentStep] = useState(initialStep);
 
 	useEffect(() => {
 		setCurrentStep(initialStep);
 	}, [initialStep]);
 
 	return {
-		steps: dataConfig.steps || [],
+		steps            : dataConfig.steps || [],
 		currentStep,
 		setCurrentStep,
-		serviceIdMapping,
+		serviceIdMapping : SERVICE_ID_MAPPING,
 	};
 }
 export default useTaskExecution;
