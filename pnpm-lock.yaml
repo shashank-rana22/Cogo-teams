@@ -4,14 +4,14 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 1.1.0-beta.9
+      '@cogoport/eslint-config': 1.1.1-beta.19
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
       '@svgr/webpack': ^6.5.1
       axios-hooks: ^4.0.0
       eslint: ^8.42.0
-      eslint-plugin-custom-rules: link:node_modules/@cogoport/eslint-config/packages/eslint
+      eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra: ^11.1.1
       git-precommit-checks: ^3.1.0
       husky: ^8.0.3
@@ -32,11 +32,11 @@ importers:
       next: 13.1.6_react-dom@18.2.0
       react-dom: 18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 1.1.0-beta.9_eslint@8.42.0
+      '@cogoport/eslint-config': 1.1.1-beta.19_eslint@8.42.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.42.0
-      eslint-plugin-custom-rules: link:node_modules/@cogoport/eslint-config/packages/eslint
+      eslint-plugin-custom-eslint: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra: 11.1.1
       git-precommit-checks: 3.1.0
       husky: 8.0.3
@@ -3690,8 +3690,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/1.1.0-beta.9_eslint@8.42.0:
-    resolution: {integrity: sha512-3s/vokp3CLBp1dT5y2p6ypTkqkHeHhPQuJZ2GWyRQvKeFP59kd8+Nsr3bg32SdPO2feZoyaYBxkFg8P0ADVVYg==}
+  /@cogoport/eslint-config/1.1.1-beta.19_eslint@8.42.0:
+    resolution: {integrity: sha512-Vu1dKcYnzb5bvJSNxzZ17B3HUvbQ6UsN+ZRf++uiuMB029OgZHPKi2KcIbA4feZottpVMRqcTd4l3rnzIzZXEQ==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:

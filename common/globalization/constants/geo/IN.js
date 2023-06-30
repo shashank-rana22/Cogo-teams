@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
 		id   : '541d1232-58ce-4d64-83d6-556a42209eb7',
