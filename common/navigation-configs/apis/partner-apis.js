@@ -9552,6 +9552,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'get_previous_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
 	],
 	segmentation: [
 		{
