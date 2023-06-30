@@ -16,7 +16,6 @@ const ENTITY_MAPPING = {
 		feature_supported   : ['post_to_sage'],
 		labels              : {
 			irn_label: 'IRN',
-
 		},
 	},
 	201: {
