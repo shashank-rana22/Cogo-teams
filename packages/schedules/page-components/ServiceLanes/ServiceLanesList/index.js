@@ -6,12 +6,16 @@ import Filters from "./Filters";
 import Cards from "./Cards";
 import useListServiceLanes from "./hooks/useListServiceLanes";
 import LoadingState from "../LoadingState";
+import { Pagination } from "@cogoport/components";
 
 function ServiceLanesList({ mapTab, setMapTab }) {
     const [activeTab, setActiveTab] = useState("service_lanes");
     const filters = null;
 
-    const { data, loading } = useListServiceLanes({ filters });
+    const { data, loading, totalItems, currentPage, setPage } =
+        useListServiceLanes({
+            filters,
+        });
 
     return (
         <>
@@ -33,6 +37,16 @@ function ServiceLanesList({ mapTab, setMapTab }) {
             ) : (
                 <LoadingState />
             )}
+            <div>
+                <Pagination
+                    className="md"
+                    type="table"
+                    currentPage={currentPage || 1}
+                    totalItems={totalItems || 0}
+                    pageSize={10}
+                    onPageChange={setPage}
+                />
+            </div>
         </>
     );
 }

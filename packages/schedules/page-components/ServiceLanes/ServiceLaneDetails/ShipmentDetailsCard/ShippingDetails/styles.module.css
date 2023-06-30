@@ -4,6 +4,7 @@
     margin: 12px 24px 0 24px;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .company_logo_name {
@@ -12,9 +13,10 @@
     color: var(--black-80, #4f4f4f);
     text-align: center;
     font-size: 14px;
-    font-family: Poppins;
     font-weight: 500;
     letter-spacing: 0.28px;
+    position: absolute;
+    left: 50%;
 }
 
 .date_type {

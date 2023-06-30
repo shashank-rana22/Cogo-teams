@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRequest } from "@cogoport/request";
 
+const INITIAL_PAGE = 1;
+
 const useListServiceLanes = ({ routeId }) => {
+    const [page, setPage] = useState(INITIAL_PAGE);
     const [{ data, loading }, trigger] = useRequest(
         {
             url: "/list_service_lanes",
@@ -17,7 +20,7 @@ const useListServiceLanes = ({ routeId }) => {
                     id: routeId,
                 },
                 page_limit: 10,
-                page: 1,
+                page,
                 pagination_data_required: true,
                 sort_by: "updated_at",
                 sort_type: "desc",
@@ -32,10 +35,15 @@ const useListServiceLanes = ({ routeId }) => {
 
     useEffect(() => {
         makeRequest();
-    }, [routeId]);
+    }, [routeId, page]);
+
+    console.log("data:", data);
     return {
         data: data?.list,
         loading,
+        totalItems: data?.total_count,
+        currentPage: page,
+        setPage,
     };
 };
 

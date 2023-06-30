@@ -3,11 +3,16 @@ import WeekFrequency from "../../WeekFrequency";
 import WeekCalendar from "../../WeekCalendar";
 
 function TimeTable({ item }) {
-    console.log("item: ", item?.service_lane_links?.[0]?.eta_day - 1, item);
+    const tripType =
+        item?.service_lane_links?.[item?.service_lane_links?.length - 1]
+            ?.location_id === item?.service_lane_links?.[0]?.location_id
+            ? "Round Trip"
+            : "One Way";
 
     const totalTransit =
         item?.service_lane_links?.[item?.service_lane_links?.length - 1]
             ?.eta_day_count - item?.service_lane_links?.[0]?.etd_day_count;
+
     return (
         <div className={styles.container}>
             <div className={styles.frequency}>
@@ -32,9 +37,7 @@ function TimeTable({ item }) {
                 Total Transit :
                 <div className={styles.data}>
                     <div className={styles.days}>{totalTransit} Days</div>
-                    <div className={styles.trip}>
-                        {item?.trip_type || "Round Trip"}
-                    </div>
+                    <div className={styles.trip}>{tripType || "---"}</div>
                 </div>
             </div>
         </div>

@@ -8,10 +8,7 @@ function ShipmentDetailsCard({ data, loading }) {
     return (
         <>
             {!loading ? (
-                <div
-                    className={styles.container}
-                    onClick={() => onClickHandle()}
-                >
+                <div className={styles.container}>
                     <ShippingDetails data={data} />
                     <div className={styles.details}>
                         <PortPair data={data} />

@@ -1,7 +1,7 @@
-import dynamic from "next/dynamic";
+import ScheduleMap from "../../../common/ScheduleMaps";
 
-const ServiceLaneMaps = dynamic(() => import("../../../common/ScheduleMaps"), {
-    ssr: false,
-});
+function ServiceLanesMap() {
+    return <ScheduleMap points={[1, 2, 34]} routesLoading={false} />;
+}
 
-function
+export default ServiceLanesMap;

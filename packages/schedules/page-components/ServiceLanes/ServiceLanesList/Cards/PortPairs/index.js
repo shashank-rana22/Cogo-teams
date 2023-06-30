@@ -26,13 +26,13 @@ function PortPair({ item }) {
                     content={origin}
                 >
                     <div style={{ display: "flex" }}>
-                        <div
+                        <span
                             style={{ fontWeight: "600" }}
-                        >{`${originPort},`}</div>
-                        <div
+                        >{`${originPort},`}</span>
+                        <span
                             style={{ color: "#f68b21" }}
-                        >{`(${item?.service_lane_links[0]?.port_code})`}</div>
-                        <div>{`,${originLocation}`}</div>{" "}
+                        >{`(${item?.service_lane_links[0]?.port_code})`}</span>
+                        <span>{`,${originLocation}`}</span>{" "}
                     </div>
                 </Tooltip>
             </div>
@@ -50,13 +50,13 @@ function PortPair({ item }) {
                     content={destination}
                 >
                     <div style={{ display: "flex" }}>
-                        <div
+                        <span
                             style={{ fontWeight: "600" }}
-                        >{`${destinationPort},`}</div>
-                        <div style={{ color: "#f68b21" }}>{`(${
+                        >{`${destinationPort},`}</span>
+                        <span style={{ color: "#f68b21" }}>{`(${
                             item?.service_lane_links[links - 1]?.port_code
-                        })`}</div>
-                        <div>{`,${destinationLocation}`}</div>{" "}
+                        })`}</span>
+                        <span>{`,${destinationLocation}`}</span>{" "}
                     </div>
                 </Tooltip>
             </div>
