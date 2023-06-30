@@ -101,7 +101,7 @@
 		.ui_button_container {
 			margin: 4px;
 			margin-left: 0;
-			color: black;
+			color: var(--color-secondary-greyscale-2);
 
 			&:hover {
 				background-color: var(--color-tertiary-blue-4);
@@ -118,4 +118,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+}
+
+.btn_div{
+	margin-left: 16px;
+	padding: 10px;
 }

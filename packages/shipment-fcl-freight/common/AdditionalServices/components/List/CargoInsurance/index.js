@@ -1,7 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useDebounceQuery, useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -45,9 +44,7 @@ function CargoInsurance({
 		premiumRate,
 	} = useGetInsuranceRate();
 
-	const trade_type = getTradeTypeByIncoTerm(data?.inco_term);
-
-	const cargoInsuranceCountryId =	trade_type === 'export'
+	const cargoInsuranceCountryId =	primary_service?.trade_type === 'export'
 		? primary_service?.destination_port?.country_id : primary_service?.origin_port?.country_id;
 
 	const { isEligible, loading: apiLoading } =	useGetInsuranceCountrySupported({
@@ -75,16 +72,14 @@ function CargoInsurance({
 		watch,
 	} = useForm();
 
-	const cargoValue = watch('cargo_value');
-	const cargoInsuranceCommodity = watch('cargo_insurance_commodity');
 	const formValues = watch();
 
 	useEffect(() => {
-		if (!isEmpty(cargoValue) && !isEmpty(cargoInsuranceCommodity)) {
+		if (!isEmpty(formValues?.cargo_value) && !isEmpty(formValues?.cargo_insurance_commodity)) {
 			setCurrentCargoInsurance({
 				descriptionOfCargo : formValues?.cargo_insurance_commodity_description,
-				policyCommodityId  : cargoInsuranceCommodity,
-				invoiceValue       : cargoValue,
+				policyCommodityId  : formValues?.cargo_insurance_commodity,
+				invoiceValue       : formValues?.cargo_value,
 				policyCurrency     : formValues?.cargo_value_currency,
 				policyType         : POLICY_TYPE_MAPPING[primary_service?.trade_type] || 'INLAND',
 				policyCountryId    : cargoInsuranceCountryId,
@@ -105,14 +100,14 @@ function CargoInsurance({
 
 	useEffect(() => {
 		const optionselected = (list || []).find(
-			(option) => option.id === cargoInsuranceCommodity,
+			(option) => option.id === formValues?.cargo_insurance_commodit,
 		);
 		setCommodity(optionselected?.commodity);
 		setValue(
 			'cargo_insurance_commodity_description',
 			optionselected?.cargoDescription,
 		);
-	}, [cargoInsuranceCommodity, list, setValue]);
+	}, [formValues?.cargo_insurance_commodit, list, setValue]);
 
 	if (apiLoading) {
 		return <Loading />;

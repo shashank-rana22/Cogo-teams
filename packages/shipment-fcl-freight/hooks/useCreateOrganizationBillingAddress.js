@@ -46,8 +46,8 @@ const useCreateOrganizationBillingAddress = ({
 
 	return {
 		createSellerAddres,
-		createAddressLoading : loading,
-		response             : data,
+		createAddressLoading: loading,
+		data,
 	};
 };
 

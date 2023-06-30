@@ -28,7 +28,6 @@ export const invoiceControls = [
 		themeType  : 'secondary',
 		drag       : true,
 		uploadIcon : 'ic-upload',
-		className  : 'primary md',
 		height     : 80,
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'
@@ -44,7 +43,6 @@ export const invoiceControls = [
 		themeType  : 'secondary',
 		drag       : true,
 		uploadIcon : 'ic-upload',
-		className  : 'primary md',
 		height     : 80,
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'
@@ -60,7 +58,6 @@ export const invoiceControls = [
 		themeType  : 'secondary',
 		drag       : true,
 		uploadIcon : 'ic-upload',
-		className  : 'primary md',
 		height     : 80,
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'

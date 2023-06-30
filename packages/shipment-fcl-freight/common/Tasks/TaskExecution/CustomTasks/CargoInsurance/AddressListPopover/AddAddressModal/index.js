@@ -48,7 +48,10 @@ function AddModal({
 		handleCloseModal();
 	};
 
-	const { createSellerAddres, createAddressLoading, response } =	useCreateOrganizationBillingAddress({
+	const {
+		createSellerAddres, createAddressLoading,
+		data: billingAddressData,
+	} =	useCreateOrganizationBillingAddress({
 		checked,
 		addressType,
 		organization_id : shipmentData?.importer_exporter?.id,
@@ -57,7 +60,7 @@ function AddModal({
 
 	const onSubmit = async (data) => {
 		await createSellerAddres(data, handleCloseModal);
-		if (response?.data?.id) {
+		if (billingAddressData?.data?.id) {
 			organisationAddress();
 			addressApi();
 		}
@@ -78,7 +81,7 @@ function AddModal({
 									src={GLOBAL_CONSTANTS.image_url.seller_address_svg}
 									width="24px"
 									height="24px"
-									alt=""
+									alt="seller_address_logo"
 								/>
 							</div>
 							<div className={styles.title}>Add New Address</div>
@@ -188,14 +191,14 @@ function AddModal({
 						size="md"
 						onClick={handleSubmit(onSubmit)}
 						disabled={createAddressLoading}
-						style={{ marginLeft: '16px', padding: '10px' }}
+						className={styles.btn_div}
 					>
 						{createAddressLoading ? (
 							<img
 								src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading}
 								width="40px"
 								height="15px"
-								alt=""
+								alt="loader"
 							/>
 						) : (
 							'Add'

@@ -6,8 +6,19 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const CHARGES = ['Premium', 'Platform Charges', 'Convenience Fee'];
+const DEFAULT_AMOUNT = 0;
 
 function PremiumRate({ premiumLoading = false, premiumData = {} }) {
+	const formarAmountData = (amount) => formatAmount({
+		amount,
+		currency : 'INR',
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			maximumFractionDigits : 2,
+		},
+	});
+
 	if (premiumLoading) {
 		return (
 			<div className={cl`${styles.premium_value} ${styles.loading}`}>
@@ -25,15 +36,7 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 						<div className={cl`${styles.flex_row} ${styles.values}`}>
 							<div className={styles.line} />
-							{formatAmount({
-								amount   : 0,
-								currency : 'INR',
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'symbol',
-									maximumFractionDigits : 2,
-								},
-							})}
+							{formarAmountData(DEFAULT_AMOUNT)}
 						</div>
 					</div>
 				))
@@ -45,15 +48,7 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 					<div className={cl`${styles.flex_row} ${styles.values}`}>
 						<div className={styles.line} />
-						{formatAmount({
-							amount   : item?.totalCharges,
-							currency : 'INR',
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'symbol',
-								maximumFractionDigits : 2,
-							},
-						})}
+						{formarAmountData(item?.totalCharges)}
 					</div>
 				</div>
 			))}
@@ -64,15 +59,7 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 				<div className={cl`${styles.flex_row} ${styles.values}`}>
 					<div className={styles.line} />
-					{formatAmount({
-						amount   : premiumData?.totalApplicableCharges,
-						currency : 'INR',
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 2,
-						},
-					})}
+					{formarAmountData(premiumData?.totalApplicableCharges)}
 				</div>
 			</div>
 		</div>
