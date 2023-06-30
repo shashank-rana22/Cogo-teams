@@ -107,33 +107,31 @@ export function mountPinnedSnapShot({
 
 	setListData((p) => ({ ...p, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_view') {
+	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats) {
 		return;
 	}
 
-	if (canShowPinnedChats) {
-		setLoadingState((p) => ({ ...p, pinnedChatsLoading: true }));
-		const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
-		const newChatsQuery = query(
-			omniChannelCollection,
-			queryForPinnedChat,
-			...queryForSearch,
-			...omniChannelQuery,
-		);
-		snapshotRef.current = onSnapshot(
-			newChatsQuery,
-			(pinSnapShot) => {
-				const { resultList } = dataFormatter(pinSnapShot);
-				setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
-				setLoadingState((p) => {
-					if (p?.pinnedChatsLoading) {
-						return { ...p, pinnedChatsLoading: false };
-					}
-					return p;
-				});
-			},
-		);
-	}
+	setLoadingState((p) => ({ ...p, pinnedChatsLoading: true }));
+	const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
+	const newChatsQuery = query(
+		omniChannelCollection,
+		queryForPinnedChat,
+		...queryForSearch,
+		...omniChannelQuery,
+	);
+	snapshotRef.current = onSnapshot(
+		newChatsQuery,
+		(pinSnapShot) => {
+			const { resultList } = dataFormatter(pinSnapShot);
+			setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
+			setLoadingState((p) => {
+				if (p?.pinnedChatsLoading) {
+					return { ...p, pinnedChatsLoading: false };
+				}
+				return p;
+			});
+		},
+	);
 }
 
 export function mountUnreadCountSnapShot({

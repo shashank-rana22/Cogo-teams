@@ -26,7 +26,7 @@ function getFireStoreQuery({
 		if (item === 'channels') {
 			queryFilters = [
 				...queryFilters,
-				where('channel_type', 'in', appliedFilters[item]),
+				where('channel_type', '==', appliedFilters[item]),
 			];
 		} else if (item === 'status') {
 			if (appliedFilters[item] === 'unread') {

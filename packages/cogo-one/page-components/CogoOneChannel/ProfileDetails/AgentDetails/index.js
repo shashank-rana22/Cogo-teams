@@ -49,7 +49,7 @@ function AgentDetails({
 
 	const {
 		user_id, lead_user_id, email, user_name: messageName, mobile_no, organization_id, sender,
-		channel_type = '', user_type, id = '', session_type = '', account_type,
+		channel_type = '', user_type, id = '',
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
@@ -62,12 +62,11 @@ function AgentDetails({
 	} = useGroupChat({ activeMessageCard, firestore });
 
 	const hasAccessToEditGroup = getHasAccessToEditGroup({
-		sessionType : session_type,
-		accountType : account_type,
-		activeMessageCard,
+		formattedMessageData,
 		agentId,
 		viewType,
 	});
+	console.log('hasAccessToEditGroup', hasAccessToEditGroup);
 
 	const {
 		user_data = {},

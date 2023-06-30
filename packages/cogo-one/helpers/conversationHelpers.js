@@ -9,10 +9,13 @@ export function getHasPermissionToEdit({
 }) {
 	const {
 		support_agent_id = '',
+		group_members = [],
+		manager_ids = [],
 	} = formattedData || {};
 
 	return canMessageOnBotSession
     || (!showBotMessages && (VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions.has_permission_to_edit
         || userId === support_agent_id
-        || formattedData.group_members?.includes(userId)));
+        || group_members?.includes(userId)
+		|| manager_ids?.includes(userId)));
 }

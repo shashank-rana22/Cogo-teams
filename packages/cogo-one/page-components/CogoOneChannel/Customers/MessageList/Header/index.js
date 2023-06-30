@@ -9,6 +9,8 @@ import FilterComponents from '../../FilterComponents';
 
 import styles from './styles.module.css';
 
+const MORE_THAN_SINGLE_TAB = 2;
+
 function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, setIsBotSession }) {
 	const SUB_TAB_MAPPING = getSubTabsMapping({ viewType });
 
@@ -19,6 +21,9 @@ function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, s
 			setIsBotSession(false);
 		}
 	};
+	if (SUB_TAB_MAPPING?.length < MORE_THAN_SINGLE_TAB) {
+		return null;
+	}
 
 	return (
 		<div className={styles.parent_tab_div}>

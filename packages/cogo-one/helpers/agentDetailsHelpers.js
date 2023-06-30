@@ -7,14 +7,20 @@ import {
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-export function getHasAccessToEditGroup({ sessionType, accountType, activeMessageCard = {}, agentId, viewType }) {
+export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewType }) {
+	const {
+		session_type,
+		account_type, group_members, support_agent_id, manager_ids = [],
+	} = formattedMessageData || {};
+
 	return (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_group_access
-		&& (sessionType === 'admin' && accountType === 'service_provider')
+		&& (session_type === 'admin' && account_type === 'service_provider')
 	&& (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
-		|| activeMessageCard.group_members?.includes(agentId)
-		|| activeMessageCard.support_agent_id === agentId
+		|| group_members?.includes(agentId)
+		|| manager_ids?.includes(agentId)
+		|| support_agent_id === agentId
 	)
 	);
 }

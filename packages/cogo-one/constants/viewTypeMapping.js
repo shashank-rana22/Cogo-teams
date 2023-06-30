@@ -2,25 +2,73 @@ import {
 	where,
 } from 'firebase/firestore';
 
+const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
+
 function getSupplySessionQuery({ sessionType, isContactsSelected = false }) {
 	return isContactsSelected
 		? [where('session_type', 'in', ['bot', 'admin'])] : [where('session_type', '==', sessionType)];
+}
+
+function getKamButtons({
+	supportAgentId,
+	userId,
+	showBotMessages,
+}) {
+	if (supportAgentId === userId) {
+		return ['assign_modal'];
+	}
+
+	if (showBotMessages) {
+		return ['request_for_assign'];
+	}
+
+	return [];
+}
+
+function getSupplyAgentButtons({
+	showBotMessages,
+	supportAgentId,
+	userId,
+	isGroupFormed,
+	isServiceProvider,
+	isPartOfGroup,
+}) {
+	if (!isServiceProvider) {
+		return [];
+	}
+
+	if (showBotMessages) {
+		return ['assign_to_me'];
+	}
+
+	if ((supportAgentId === userId) || isPartOfGroup) {
+		return ['assign_modal'];
+	}
+
+	if (isGroupFormed) {
+		return ['add_me_to_group'];
+	}
+
+	return ['request_for_assign', 'add_me_to_group'];
 }
 
 export const VIEW_TYPE_GLOBAL_MAPPING = {
 	sales: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
-		teams_chats_base_query    : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access      : ['all', 'observer'],
+		chat_sub_tabs_access      : ['all', 'observer', 'teams'],
+		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		extra_side_bar_navs_access   : ['spot_search'],
+		get_accesible_assign_buttons : getKamButtons,
+		accesible_agent_types        : ['sales', 'sales_admin', 'bot'],
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -34,17 +82,20 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	sales_admin: {
-		all_chats_base_query   : () => [where('agent_type', '==', 'sales')],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['sales', 'sales_admin', 'bot'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		teams_chats_base_query : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
 		chat_sub_tabs_access   : ['all', 'teams'],
+		default_side_nav       : 'profile',
 		accesible_filters      : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		accesible_agent_types        : ['sales', 'sales_admin', 'bot'],
+		extra_side_bar_navs_access   : ['spot_search'],
+		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -60,17 +111,20 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	support: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
-		teams_chats_base_query    : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		contacts_base_query       : () => [where('user_details.account_type', '==', 'service_provider')],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
 		chat_sub_tabs_access      : ['all', 'observer'],
+		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		accesible_agent_types        : ['support', 'support_admin', 'bot'],
+		extra_side_bar_navs_access   : ['spot_search'],
+		get_accesible_assign_buttons : getKamButtons,
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -84,17 +138,20 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	support_admin: {
-		all_chats_base_query   : () => [where('agent_type', '==', 'support')],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['support', 'support_admin', 'bot'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		teams_chats_base_query : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
 		chat_sub_tabs_access   : ['all', 'teams'],
+		default_side_nav       : 'profile',
 		accesible_filters      : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		accesible_agent_types        : ['support', 'support_admin', 'bot'],
+		extra_side_bar_navs_access   : ['spot_search'],
+		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -110,7 +167,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	supply: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
-		teams_chats_base_query    : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		contacts_base_query       : () => [where('user_details.account_type', '==', 'service_provider')],
 		session_type_query        : getSupplySessionQuery,
@@ -120,8 +177,11 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		extra_side_bar_navs_access   : ['flash_shipment_bookings'],
+		accesible_agent_types        : ['supply', 'supply_admin', 'bot'],
+		get_accesible_assign_buttons : getSupplyAgentButtons,
+		default_side_nav             : 'flash_shipment_bookings',
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -135,9 +195,9 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	supply_admin: {
-		all_chats_base_query   : () => [where('agent_type', '==', 'supply')],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['supply', 'supply_admin', 'bot'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		teams_chats_base_query : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
 		session_type_query     : getSupplySessionQuery,
 		chat_sub_tabs_access   : ['all', 'groups', 'teams', 'contacts'],
@@ -146,8 +206,11 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		extra_side_bar_navs_access   : ['flash_shipment_bookings'],
+		accesible_agent_types        : ['supply', 'supply_admin', 'bot'],
+		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		default_side_nav             : 'flash_shipment_bookings',
+		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -160,12 +223,18 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 		},
 	},
-	shipment_view: {
-		all_chats_base_query       : ({ agentId }) => [where('booking_agent_ids', 'array-contains', agentId)],
-		session_type_query         : () => [where('session_type', 'in', ['bot', 'admin'])],
-		chat_sub_tabs_access       : ['all'],
-		extra_side_bar_navs_access : [],
-		permissions                : {
+	shipment_specialist: {
+		all_chats_base_query         : ({ agentId }) => [where('booking_agent_ids', 'array-contains', agentId)],
+		session_type_query           : () => [where('session_type', 'in', ['bot', 'admin'])],
+		chat_sub_tabs_access         : ['all'],
+		extra_side_bar_navs_access   : [],
+		default_side_nav             : 'user_activity',
+		get_accesible_assign_buttons : ({
+			supportAgentId,
+			userId,
+		}) => (supportAgentId === userId ? ['assign_modal'] : []),
+		accesible_agent_types : ['shipment_specialist', 'bot'],
+		permissions           : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
 			organization_users_contacts : false,
@@ -180,15 +249,18 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	},
 	cogoone_admin: {
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		teams_chats_base_query : ({ agentId }) => [where('manager_ids', 'array-contains', agentId)],
+		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : getSupplySessionQuery,
+		contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
 		chat_sub_tabs_access   : ['all', 'groups', 'contacts'],
 		accesible_filters      : {
 			all      : ['15_min_filter', 'assigned_to', 'assigned_agent', 'chat_tags'],
 			contacts : ['chat_tags'],
 		},
-		extra_side_bar_navs_access : [],
-		permissions                : {
+		extra_side_bar_navs_access   : ['spot_search', 'flash_shipment_bookings'],
+		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		default_side_nav             : 'profile',
+		permissions                  : {
 			auto_assign                 : true,
 			bot_message_toggle          : true,
 			organization_users_contacts : true,
