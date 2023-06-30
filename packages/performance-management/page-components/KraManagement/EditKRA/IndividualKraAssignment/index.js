@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 import useCreateIndividualKra from '../hooks/useCreateIndividualKra';
@@ -11,24 +11,13 @@ import styles from './styles.module.css';
 const TABLE_EMPTY_TEXT = 'No data to show';
 
 function IndividualKraAssignment({ data, loading }) {
-	const { loading:submitLoading, createIndividualKra } = useCreateIndividualKra();
-
-	const [valuesIndividualKRA, setValuesIndividualKRA] = useState();
-
-	const [ratingInfo, setRatingInfo] = useState();
-
-	useEffect(() => {
-		setValuesIndividualKRA(data);
-		setRatingInfo();
-	}, [data]);
-
-	const onRowClick = (item) => {
-		setRatingInfo(item);
-	};
-
-	const handleSubmitTarget = () => {
-		createIndividualKra(valuesIndividualKRA);
-	};
+	const {
+		loading:submitLoading, createIndividualKra,
+		valuesIndividualKRA,
+		setValuesIndividualKRA,
+		ratingInfo,
+		setRatingInfo,
+	} = useCreateIndividualKra({ data });
 
 	const columns = getIndividualColumn({
 		loading,
@@ -45,14 +34,17 @@ function IndividualKraAssignment({ data, loading }) {
 					data={data}
 					emptyText={TABLE_EMPTY_TEXT}
 					loading={loading}
-					onRowClick={(item) => onRowClick(item)}
-
+					onRowClick={(item) => setRatingInfo(item)}
 				/>
 			</div>
 
 			<div className={styles.container1}>
 				<RatingInfo ratingInfo={ratingInfo} loading={loading} />
-				<Button loading={submitLoading} onClick={handleSubmitTarget} className={styles.button}>
+				<Button
+					loading={submitLoading}
+					onClick={() => createIndividualKra(valuesIndividualKRA)}
+					className={styles.button}
+				>
 					Submit Targets
 				</Button>
 			</div>
