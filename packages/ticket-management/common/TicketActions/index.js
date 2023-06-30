@@ -32,7 +32,7 @@ function TicketActions({
 	const actionMappings = getActionMapping({ status, isClosureAuthorizer });
 
 	return (
-		<div>
+		<div className={styles.pending_actions}>
 			{actionMappings.map((item) => (
 				<div className={styles.pending_actions} key={`button_${item}_container`}>
 					{(isModal && item !== 'reopen') && (
