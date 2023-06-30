@@ -34,6 +34,7 @@ function TabComponent() {
 				{
 					(Object.keys(TABS_MAPPING) || []).map((tab) => {
 						const Component = TABS_MAPPING[tab];
+
 						return (
 							<TabPanel key={tab} name={tab} title={startCase(tab)}>
 								<Component />
