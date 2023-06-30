@@ -31,7 +31,7 @@ function CategoryType(props) {
 				asyncKey="default_types"
 				value={searchParams.category}
 				placeholder="Ticket type"
-				service="tickets"
+				microService="tickets"
 				isClearable
 				initialCall
 			/>

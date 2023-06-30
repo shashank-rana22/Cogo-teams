@@ -112,7 +112,7 @@ const keyAsyncFieldsParamsMapping = {
 };
 
 const MICRO_SERVICE_HOOKS_MAPPING = {
-	ticktets: useGetAsyncTicketOptions,
+	tickets: useGetAsyncTicketOptions,
 };
 
 function AsyncSelect(props) {
