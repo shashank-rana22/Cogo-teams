@@ -5,13 +5,13 @@ import styles from '../styles.module.css';
 
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
+const MIN_RATING = 0;
+
 function InputEmployeeManualTarget({ item }) {
 	const {
 		loading: updateLoading,
 		updateEmployeeManualTarget,
 	} = useUpdateEmployeeManualTarget({ item });
-
-	const MIN_RATING = 0;
 
 	const [inputValue, setInputValue] = useState(MIN_RATING);
 
