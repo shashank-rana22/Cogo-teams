@@ -45,6 +45,8 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
 	training : [
 		{ label: 'Training General', value: 'training_general' },
+		{ label: 'Tech', value: 'tech' },
+		{ label: 'Product', value: 'product' },
 	],
 	hr: [
 		{ label: 'HR Admin', value: 'hr_admin' },

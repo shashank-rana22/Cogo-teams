@@ -26,6 +26,8 @@ const functionSubFunctionMapping = {
 	finance  : [],
 	training : [
 		{ label: 'Training General', value: 'training_general' },
+		{ label: 'Tech', value: 'tech' },
+		{ label: 'Product', value: 'product' },
 	],
 	hr: [
 		{ label: 'HR Admin', value: 'hr_admin' },
