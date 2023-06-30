@@ -13,7 +13,7 @@ function AssignedStakeholder({ data = {} }) {
 
 	if (!booking_agents?.length) { return null; }
 
-	const [firstBookingAgent, secondBookingAgent] = booking_agents;
+	const [firstBookingAgent = {}, secondBookingAgent = {}] = booking_agents;
 	return (booking_agents?.length
 		? (
 			<div className={styles.container}>

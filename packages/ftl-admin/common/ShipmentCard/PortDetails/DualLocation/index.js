@@ -8,7 +8,7 @@ import getLocation from '../../../../utils/getLocation';
 
 import styles from './styles.module.css';
 
-const handleLocationDetails = (location) => (
+const handleLocationDetails = (location = {}) => (
 	<>
 		<div className={styles.port_code}>
 			<div className={`${styles.code} core_ui_port_code`}>
