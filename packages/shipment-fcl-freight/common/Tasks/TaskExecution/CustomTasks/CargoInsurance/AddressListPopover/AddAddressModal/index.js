@@ -1,5 +1,6 @@
 import { Checkbox, cl, Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -32,10 +33,10 @@ function AddModal({
 		formState: { errors },
 		control,
 		setValue,
-		getValues,
+		watch,
 	} = useForm();
 
-	const countryId = getValues('country_id');
+	const countryId = watch('country_id');
 
 	const addAddressControls = useGetControls({ checked, countryId, setValue });
 
@@ -74,7 +75,7 @@ function AddModal({
 						<div className={styles.header}>
 							<div className={styles.icon_container}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg"
+									src={GLOBAL_CONSTANTS.image_url.seller_address_svg}
 									width="24px"
 									height="24px"
 									alt=""
@@ -185,14 +186,13 @@ function AddModal({
 
 					<Button
 						size="md"
-						themeType="primary"
 						onClick={handleSubmit(onSubmit)}
 						disabled={createAddressLoading}
 						style={{ marginLeft: '16px', padding: '10px' }}
 					>
 						{createAddressLoading ? (
 							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg"
+								src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading}
 								width="40px"
 								height="15px"
 								alt=""

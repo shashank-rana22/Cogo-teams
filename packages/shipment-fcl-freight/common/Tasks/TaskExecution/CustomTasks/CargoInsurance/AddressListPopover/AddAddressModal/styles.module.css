@@ -3,8 +3,8 @@
 }
 
 .text {
-	color: var(--color-primary-error-red-2);
 	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
 }
 
 .header {
@@ -37,7 +37,7 @@
 
 	.title {
 		padding-right: 20px;
-		font-size: var(--font-size-md);;
+		font-size: var(--font-size-md);
 		font-weight: 400;
 	}
 }
@@ -62,20 +62,20 @@
 	display: flex;
 	align-items: center;
 	margin: 10px 0;
-	font-size: var(--font-size-lg);;
+	font-size: var(--font-size-lg);
 
 	.gst {
 		margin: 0 3px;
 	}
 
 	.addressSave {
-		font-size: var(--font-size-lg);;
+		font-size: var(--font-size-lg);
 		font-weight: 500;
 	}
 
-	:global{
-		.ui_checkbox_container{
-			padding: 0px;
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
 		}
 	}
 }

@@ -38,10 +38,10 @@
 
 .tooltip_container {
 	max-width: 250px;
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	font-weight: 300;
 }
 
-.btn_div{
+.btn_div {
 	margin-left: 16px;
 }

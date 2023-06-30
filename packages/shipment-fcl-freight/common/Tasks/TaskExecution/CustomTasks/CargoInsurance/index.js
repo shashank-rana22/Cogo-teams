@@ -9,7 +9,6 @@ import Step2 from './step2';
 import Step3 from './step3';
 import getDefaultValues from './utils/getDefaultValues';
 
-const DEFAULT_STEP = 1;
 const FIRST_STEP = 1;
 const SECOND_STEP = 2;
 
@@ -18,14 +17,14 @@ function CargoInsurance({
 	refetch = () => {},
 	task = {},
 }) {
-	const [step, setStep] = useState(DEFAULT_STEP);
+	const [step, setStep] = useState(FIRST_STEP);
 	const [addressId, setAddressId] = useState('');
 
 	const { shipment_data, primary_service, servicesList } = useContext(
 		ShipmentDetailContext,
 	);
 
-	const policyDetails = servicesList.find(
+	const policyDetails = (servicesList || []).find(
 		(item) => item?.service_type === 'cargo_insurance_service',
 	);
 
@@ -35,17 +34,20 @@ function CargoInsurance({
 		setAddressId,
 	});
 
+	const {
+		organizationBillingAddressId, organizationAddressId, billingAddress, billingCity,
+		billingPincode, billingState, gstin, partyName,
+	} = insuranceDetails || {};
+
 	const [billingData, setBillingData] = useState({
-		address_type: '',
-		billingId:
-			insuranceDetails?.organizationBillingAddressId
-			|| insuranceDetails?.organizationAddressId,
-		gstin          : insuranceDetails?.gstin,
-		billingAddress : insuranceDetails?.billingAddress,
-		billingCity    : insuranceDetails?.billingCity,
-		billingPincode : insuranceDetails?.billingPincode,
-		billingState   : insuranceDetails?.billingState,
-		partyName      : insuranceDetails?.partyName,
+		address_type : '',
+		billingId    : organizationBillingAddressId	|| organizationAddressId,
+		gstin,
+		billingAddress,
+		billingCity,
+		billingPincode,
+		billingState,
+		partyName,
 	});
 
 	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data, policyDetails });

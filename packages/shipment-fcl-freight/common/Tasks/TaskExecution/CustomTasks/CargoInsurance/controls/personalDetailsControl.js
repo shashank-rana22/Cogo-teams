@@ -73,10 +73,6 @@ export const personalDetailsControl = [
 				}
 				return GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v.number) || 'Invalid Mobile Number';
 			},
-			pattern: {
-				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
-				message : 'Invalid Mobile Number',
-			},
 		},
 	},
 ];

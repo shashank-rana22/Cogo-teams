@@ -218,6 +218,7 @@ const GLOBAL_CONSTANTS = {
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
 		cargo_insurance_loader:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+		seller_address_svg: 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -291,6 +292,7 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension : /\.(jpg|jpeg|png|gif|svg)$/i,
 		mobile_number   : /^[0-9]{10}$/,
+		gst_number      : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

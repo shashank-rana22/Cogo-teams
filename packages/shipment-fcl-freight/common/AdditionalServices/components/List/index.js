@@ -21,7 +21,6 @@ const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false })
 
 const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
-const SERVICES_FOR_INSURANCE = ['fcl_freight'];
 
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
@@ -132,16 +131,14 @@ function List({ isSeller = false }) {
 					Add Additional Services
 				</Button>
 
-				{SERVICES_FOR_INSURANCE.includes(shipment_data?.shipment_type) ? (
-					<Button
-						onClick={() => setShowModal('cargo_insurance_service')}
-						className={styles.btn_div}
-						disabled={!!isCargoInsured}
-					>
-						<div className={styles.add_icon}>+</div>
-						Add Cargo Insurance
-					</Button>
-				) : null}
+				<Button
+					onClick={() => setShowModal('cargo_insurance_service')}
+					className={styles.btn_div}
+					disabled={!!isCargoInsured}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Cargo Insurance
+				</Button>
 			</div>
 
 			{showModal === 'add_sell_price'

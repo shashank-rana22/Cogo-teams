@@ -133,7 +133,7 @@ function CargoInsurance({
 	return (
 		<Modal
 			size="sm"
-			showCloseIcon={!{ cargoLoading }}
+			showCloseIcon={!cargoLoading}
 			show
 			onClose={() => setShowModal(false)}
 			closeOnOuterClick={false}
@@ -151,7 +151,7 @@ function CargoInsurance({
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
-					disabled={loading || cargoLoading}
+					disabled={cargoLoading}
 					loading={cargoLoading}
 					onClick={() => setShowModal(false)}
 				>
