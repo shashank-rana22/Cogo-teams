@@ -1,12 +1,12 @@
-import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
 export const getTaxLabels = (entityCode) => [
 	{
-		label    : ENTITY_MAPPING[entityCode].labels.tax_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.tax_label,
 		valueKey : 'registrationNumber',
 	},
 	{
-		label    : ENTITY_MAPPING[entityCode].labels.sage_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.sage_label,
 		valueKey : 'sageId',
 	},
 	{
@@ -27,7 +27,7 @@ export const getSearchOptionsLabels = (entityCode) => [
 		name  : 'tradePartySerialId',
 	},
 	{
-		label : ENTITY_MAPPING[entityCode].labels.search_options_label_sage,
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_sage,
 		value : 'sageId',
 		name  : 'sageId',
 	},
@@ -37,7 +37,7 @@ export const getSearchOptionsLabels = (entityCode) => [
 		name  : 'organizationSerialId',
 	},
 	{
-		label : ENTITY_MAPPING[entityCode].labels.search_options_label_pan,
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_pan,
 		value : 'q',
 		name  : 'q',
 	},

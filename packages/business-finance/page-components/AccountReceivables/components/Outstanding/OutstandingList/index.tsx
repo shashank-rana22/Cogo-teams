@@ -200,7 +200,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 					<div className={styles.category_container}>
 						{getTaxLabels(entityCode).map((it) => (
 							it.label
-								&& (
+								? (
 									<div className={styles.sub_category_container} key={it?.label}>
 										<div className={styles.tag_text}>
 											{it.label}
@@ -213,7 +213,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
                                             || it.defaultValueKey}
 										</div>
 									</div>
-								)
+								) : null
 						))}
 					</div>
 				</div>

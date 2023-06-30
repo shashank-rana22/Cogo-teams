@@ -6,7 +6,7 @@ import { INVOICE_STATUS } from '../constants';
 
 import styles from './styles.module.css';
 
-const SettlementKnockOffList = [
+const settlementKnockOffList = [
 	{
 		Header   : <div className={styles.name}>Document No.</div>,
 		id       : 'name',
@@ -160,4 +160,4 @@ const SettlementKnockOffList = [
 
 ];
 
-export default SettlementKnockOffList;
+export default settlementKnockOffList;
