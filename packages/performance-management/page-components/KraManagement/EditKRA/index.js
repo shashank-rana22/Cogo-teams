@@ -9,13 +9,9 @@ import IndividualKraAssignment from './IndividualKraAssignment';
 import styles from './styles.module.css';
 
 function EditKRA() {
-	const { data, loading, setActiveTab, activeTab } = useListIndividualKra();
+	const { data, loading, setActiveTab, activeTab, handleCreateKRA } = useListIndividualKra();
 
 	const router = useRouter();
-
-	const handleCreateKRA = () => {
-		router.push('/performance-management/kra-management/create-kra');
-	};
 
 	return (
 		<div className={styles.container}>
