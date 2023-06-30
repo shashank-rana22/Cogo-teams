@@ -15,14 +15,8 @@ const ENTITY_MAPPING = {
 		default_entity_code : '301',
 		feature_supported   : ['post_to_sage'],
 		labels              : {
-			irn_label                 : 'IRN',
-			tax_label                 : 'PAN Number',
-			sage_label                : 'Sage ID',
-			search_options_label_pan  : 'Business Name/PAN Number',
-			search_options_label_sage : 'Sage ID',
-		},
-		placeholder: {
-			tax_number: 'Search By Business Name/Pan Number',
+			irn_label: 'IRN',
+
 		},
 	},
 	201: {
@@ -34,14 +28,7 @@ const ENTITY_MAPPING = {
 		default_entity_code : '201',
 		feature_supported   : ['cogo_books', 'post_to_sage'],
 		labels              : {
-			irn_label                 : 'IRN',
-			tax_label                 : 'PAN Number',
-			sage_label                : 'Sage ID',
-			search_options_label_pan  : 'Business Name/PAN Number',
-			search_options_label_sage : 'Sage ID',
-		},
-		placeholder: {
-			tax_number: 'Search By Business Name/Pan Number',
+			irn_label: 'IRN',
 		},
 	},
 	301: {
@@ -53,14 +40,7 @@ const ENTITY_MAPPING = {
 		default_entity_code : '301',
 		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn'],
 		labels              : {
-			irn_label                 : 'IRN',
-			tax_label                 : 'PAN Number',
-			sage_label                : 'Sage ID',
-			search_options_label_pan  : 'Business Name/PAN Number',
-			search_options_label_sage : 'Sage ID',
-		},
-		placeholder: {
-			tax_number: 'Search By Business Name/Pan Number',
+			irn_label: 'IRN',
 		},
 	},
 	401: {
@@ -72,14 +52,7 @@ const ENTITY_MAPPING = {
 		default_entity_code : '401',
 		feature_supported   : ['cogo_books', 'post_to_sage'],
 		labels              : {
-			irn_label                 : 'IRN',
-			tax_label                 : 'PAN Number',
-			sage_label                : 'Sage ID',
-			search_options_label_pan  : 'Business Name/PAN Number',
-			search_options_label_sage : 'Sage ID',
-		},
-		placeholder: {
-			tax_number: 'Search By Business Name/Pan Number',
+			irn_label: 'IRN',
 		},
 	},
 	501: {
@@ -95,14 +68,7 @@ const ENTITY_MAPPING = {
 			'upload_invoice',
 			'is_revoked'],
 		labels: {
-			irn_label                 : 'E-invoice',
-			tax_label                 : 'VAT Number',
-			sage_label                : null,
-			search_options_label_pan  : 'Business Name/VAT Number',
-			search_options_label_sage : null,
-		},
-		placeholder: {
-			tax_number: 'Search By Business Name/VAT Number',
+			irn_label: 'E-invoice',
 		},
 	},
 };
