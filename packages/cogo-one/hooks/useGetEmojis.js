@@ -1,27 +1,34 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
-const useGetEmojiList = () => {
+const useGetEmojiList = ({ formattedData = {} }) => {
 	const [onClicked, setOnClicked] = useState(false);
+
+	const { id = '' } = formattedData;
 
 	const [{ data: emojisList }, trigger] = usePublicRequest({
 		url    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
 		method : 'get',
 	}, { manual: true });
 
-	const emojiListFetch = async () => {
+	const emojiListFetch = useCallback(async () => {
 		try {
 			await trigger();
 		} catch (error) {
-			// console.log(error);
+			console.log(error);
 		}
-	};
+	}, [trigger]);
+
+	useEffect(() => {
+		if (id) {
+			emojiListFetch();
+		}
+	}, [emojiListFetch, id]);
 
 	return {
 		emojisList,
 		setOnClicked,
 		onClicked,
-		emojiListFetch,
 	};
 };
 

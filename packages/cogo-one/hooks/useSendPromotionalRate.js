@@ -2,8 +2,8 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({ activeMessageCard }) => {
-	const { user_id = '', mobile_no = '', lead_user_id = '' } = activeMessageCard;
+const getPayload = ({ formattedData }) => {
+	const { user_id = '', mobile_no = '', lead_user_id = '' } = formattedData;
 	return {
 		recipient    : mobile_no,
 		user_id      : user_id || undefined,
@@ -11,7 +11,7 @@ const getPayload = ({ activeMessageCard }) => {
 	};
 };
 
-function useSendPromotionalRate({ activeMessageCard = {} }) {
+function useSendPromotionalRate({ formattedData = {} }) {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_promotional_rate_communication',
@@ -23,7 +23,7 @@ function useSendPromotionalRate({ activeMessageCard = {} }) {
 	const sendPromotionalRate = async () => {
 		try {
 			await trigger({
-				data: getPayload({ activeMessageCard }),
+				data: getPayload({ formattedData }),
 			});
 			Toast.success('Promotional Rate Sent Sucessfully');
 		} catch (error) {

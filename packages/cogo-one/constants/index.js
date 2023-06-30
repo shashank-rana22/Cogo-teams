@@ -294,9 +294,3 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
-
-export const ICON_STYLING = ({ hasPermissionToEdit }) => ({
-	cursor: !hasPermissionToEdit
-		? 'not-allowed'
-		: 'pointer',
-});

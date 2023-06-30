@@ -1,4 +1,4 @@
-import { cl, Popover } from '@cogoport/components';
+import { cl, Popover, Textarea } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
@@ -7,21 +7,28 @@ import {
 import { isEmpty } from '@cogoport/utils';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
-import { ICON_STYLING, ACCEPT_FILE_MAPPING } from '../../../../../../constants';
+import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
+import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
 import EmojisBody from '../EmojisBody';
 import styles from '../styles.module.css';
 
 import SendActions from './SendActions';
 
+const getPlaceHolder = ({ hasPermissionToEdit, canMessageOnBotSession }) => {
+	if (canMessageOnBotSession) {
+		return 'This chat is currently in bot session, send a message to talk with customer';
+	}
+	if (hasPermissionToEdit) {
+		return 'Type your message...';
+	}
+	return 'You do not have permission to chat';
+};
+
 function Footer({
-	getPlaceHolder = () => {},
 	draftMessage = '',
 	sentQuickSuggestions = () => {},
 	messageLoading = false,
 	canMessageOnBotSession,
-	emojisList = {},
-	setOnClicked = () => {},
-	onClicked = false,
 	handleProgress,
 	openInstantMessages = () => {},
 	hasPermissionToEdit = false,
@@ -29,16 +36,20 @@ function Footer({
 	scrollToBottom = () => {},
 	setDraftMessages = () => {},
 	sendChatMessage = () => {},
-	activeMessageCard = {},
 	setDraftUploadedFiles = () => {},
 	uploading,
 	uploadedFileName,
 	fileIcon,
 	finalUrl = '',
+	formattedData = {},
 }) {
-	const iconStyles = ICON_STYLING({ hasPermissionToEdit });
+	const { id = '', channel_type = '' } = formattedData;
 
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const {
+		emojisList = {},
+		setOnClicked = () => {},
+		onClicked = false,
+	} = useGetEmojiList({ formattedData });
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -51,10 +62,7 @@ function Footer({
 		<>
 			<div
 				className={cl`${styles.nofile_container}
-				${
-					((finalUrl) || uploading?.[id])
-					&& styles.upload_file_container
-				}`}
+				${((finalUrl) || uploading?.[id]) ? styles.upload_file_container : ''}`}
 			>
 				{(finalUrl) && !uploading?.[id] && (
 					<>
@@ -118,15 +126,16 @@ function Footer({
 
 					</div>
 				)}
-				<textarea
-					rows={4}
-					placeholder={getPlaceHolder(hasPermissionToEdit, canMessageOnBotSession)}
+
+				<Textarea
+					rows={5}
+					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
+					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e }))}
 					disabled={!hasPermissionToEdit}
 					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'text' }}
-					onKeyPress={(e) => handleKeyPress(e)}
+					onKeyDown={(e) => handleKeyPress(e)}
 				/>
 
 				<div className={styles.flex_space_between}>
@@ -142,7 +151,7 @@ function Footer({
 								uploadIcon={(
 									<IcMAttach
 										className={styles.upload_icon}
-										style={iconStyles}
+										style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 									/>
 								)}
 								channel={channel_type}
@@ -179,19 +188,19 @@ function Footer({
 										setOnClicked((p) => !p);
 									}
 								}}
-								style={iconStyles}
+								style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 							/>
 						</Popover>
 					</div>
 					<SendActions
 						hasPermissionToEdit={hasPermissionToEdit}
 						openInstantMessages={openInstantMessages}
-						activeMessageCard={activeMessageCard}
 						sendChatMessage={sendChatMessage}
 						messageLoading={messageLoading}
 						scrollToBottom={scrollToBottom}
 						finalUrl={finalUrl}
 						draftMessage={draftMessage}
+						formattedData={formattedData}
 					/>
 
 				</div>

@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import { IcMSend, IcMQuickreply } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import { ICON_STYLING } from '../../../../../../../constants';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
 
 import styles from './styles.module.css';
@@ -10,19 +9,19 @@ import styles from './styles.module.css';
 function SendActions({
 	hasPermissionToEdit,
 	openInstantMessages = () => {},
-	activeMessageCard = {},
 	sendChatMessage = () => {},
 	messageLoading,
 	scrollToBottom = () => {},
 	finalUrl = '',
 	draftMessage,
+	formattedData = {},
 }) {
-	const { channel_type = '' } = activeMessageCard;
-	const iconStyles = ICON_STYLING({ hasPermissionToEdit });
+	const { channel_type = '' } = formattedData;
+	const hasPermissionToSend = !hasPermissionToEdit || messageLoading || (isEmpty(draftMessage?.trim()) && !finalUrl);
 	const {
 		sendPromotionalRate = () => {},
 		loading = false,
-	} = useSendPromotionalRate({ activeMessageCard });
+	} = useSendPromotionalRate({ formattedData });
 
 	return (
 		<div className={styles.send_messages}>
@@ -38,7 +37,7 @@ function SendActions({
 							sendPromotionalRate();
 						}
 					}}
-					style={iconStyles}
+					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 				>
 					Send Promotional Rate
 				</Button>
@@ -51,7 +50,7 @@ function SendActions({
 						openInstantMessages();
 					}
 				}}
-				style={iconStyles}
+				style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
 			/>
 			<IcMSend
 				fill="#EE3425"
@@ -60,11 +59,7 @@ function SendActions({
 						sendChatMessage(scrollToBottom);
 					}
 				}}
-				style={{
-					cursor: !hasPermissionToEdit || messageLoading || (isEmpty(draftMessage?.trim()) && !finalUrl)
-						? 'not-allowed'
-						: 'pointer',
-				}}
+				style={{ cursor: hasPermissionToSend ? 'not-allowed' : 'pointer' }}
 			/>
 		</div>
 	);
