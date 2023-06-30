@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -35,22 +35,27 @@ const useCreateShipmentDocument = ({
 	handleClick = () => {},
 	activeHawb = {},
 }:Props) => {
-	let api = 'create_shipment_document';
+	let api = 'create-shipment-document';
+	let authKey = 'post_air_coe_documents_create_shipment_document';
 	if (activeCategory === 'hawb') {
 		if (activeHawb.isNew === false) {
-			api = 'update_shipment_document';
+			api = 'update-shipment-document';
+			authKey = 'post_air_coe_documents_update_shipment_document';
 		} else {
-			api = 'create_shipment_document';
+			api = 'create-shipment-document';
+			authKey = 'post_air_coe_documents_create_shipment_document';
 		}
 	} else if (edit && activeCategory === 'mawb') {
-		api = 'update_shipment_document';
+		api = 'update-shipment-document';
+		authKey = 'post_air_coe_documents_update_shipment_document';
 	}
 
 	const [success, setSuccess] = useState(false);
 
-	const [{ loading }, trigger] = useRequest({
-		url    : `${api}`,
+	const [{ loading }, trigger] = useRequestAir({
+		url    : `/air-coe/documents/${api}`,
 		method : 'POST',
+		authKey,
 	});
 
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();

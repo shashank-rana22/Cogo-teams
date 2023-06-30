@@ -1,11 +1,14 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestAir } from '@cogoport/request';
 
 const useUpdateShipmentDocument = () => {
-	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_document',
-		method : 'POST',
-	});
+	const [{ loading }, trigger] = useRequestAir(
+		{
+			url     : '/air-coe/documents/update-shipment-document',
+			method  : 'POST',
+			authKey : 'post_air_coe_documents_update_shipment_document',
+		},
+	);
 
 	const updateDocument = async (payload, listAPI) => {
 		try {
