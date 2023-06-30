@@ -1,27 +1,34 @@
-import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Button, Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import getElementController from '../../../../configs/getElementController';
+import OrganisationForm from '../../../../common/OrganisationForm';
+import RouteForm from '../../../../common/RouteForm';
+import useCreateSearch from '../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
+import getPrefillForm from '../../utils/getPrefillForm';
 import getLocationInfo from '../../utils/locations-search';
 
-import getFormControls from './controls';
 import styles from './styles.module.css';
 
-function EditDetailsHeader({ data = {}, ...rest }) {
-	const { control, formState:{ errors }, setValue } = useForm();
+const SERVICE_KEY = 'search_type';
+
+function EditDetailsHeader({ data = {}, setShow, ...rest }) {
+	const { createSearch, loading } = useCreateSearch();
+
+	const router = useRouter();
 
 	const {
 		importer_exporter_id = '',
 		importer_exporter_branch_id = '',
 		user_id = '',
-		service_type = '',
 	} = data || {};
+
+	const service_type = data[SERVICE_KEY];
 
 	const {
 		origin:{ id: origin_id = '' },
 		destination:{ id: destination_id = '' },
-	} = getLocationInfo(data, {}, 'search_type');
+	} = getLocationInfo(data, {}, SERVICE_KEY);
 
 	const [organization, setOrganization] = useState(rest.organization || {
 		organization_id        : importer_exporter_id,
@@ -29,51 +36,81 @@ function EditDetailsHeader({ data = {}, ...rest }) {
 		user_id,
 	});
 
-	const controls = getFormControls({
-		organization,
-		setOrganization,
-		setValue,
-		mode: service_type,
-		origin_id,
-		destination_id,
+	const [locationValues, setLocationValues] = useState({
+		origin      : origin_id,
+		destination : destination_id,
 	});
+
+	const onClickApply = async () => {
+		// if (!isEmpty(errors)) {
+		// 	return;
+		// }
+
+		const { origin, destination } = locationValues;
+
+		if (!origin || !destination) {
+			return;
+		}
+
+		if (origin === destination) {
+			Toast.error('Origin and Destination cannot be same');
+			return;
+		}
+
+		const loadValues = getPrefillForm(data, 'search_type');
+
+		const spot_search_id = await createSearch({
+			action : 'quick-search',
+			values : {
+				service_type,
+				...organization,
+				origin,
+				destination,
+				formValues: loadValues,
+			},
+		});
+
+		if (spot_search_id && typeof spot_search_id === 'string') {
+			setShow(false);
+
+			router.push(
+				'/book/[spot_search_id]/[importer_exporter_id]',
+				`/book/${spot_search_id}/${organization.organization_id}`,
+			);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>
-				{controls.map((controlItem) => {
-					const { label, type, name } = controlItem;
 
-					const Element = getElementController(type);
+				<div style={{ width: '50%', marginRight: 20 }}>
+					<OrganisationForm
+						organization={organization}
+						setOrganization={setOrganization}
+						errors={{}}
+					/>
+				</div>
 
-					return (
-						<div key={`${name}_${label}`} className={styles.form_item}>
-							<div className={styles.label}>
-								{label || ''}
-								{' '}
-								{controlItem?.rules ? (
-									<div className={styles.required_mark}>*</div>
-								) : null}
-							</div>
+				<div style={{ width: '50%' }}>
+					<RouteForm
+						mode={service_type}
+						formValues={locationValues}
+						setFormValues={setLocationValues}
+					/>
+				</div>
 
-							<Element
-								{...controlItem}
-								name={name}
-								label={label}
-								control={control}
-							/>
-
-							{errors[name] && (
-								<div className={styles.error_message}>
-									{errors[name]?.message}
-								</div>
-							)}
-						</div>
-					);
-				})}
 			</div>
 
-			<Button size="lg" themeType="accent">Apply</Button>
+			<Button
+				size="lg"
+				themeType="accent"
+				loading={loading}
+				onClick={onClickApply}
+				className={styles.button}
+			>
+				Apply
+			</Button>
 		</div>
 	);
 }

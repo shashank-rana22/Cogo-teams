@@ -8,6 +8,7 @@
 .form{
     display: flex;
     width: 80%;
+    margin-right: 32px;
 }
 .form_item{
     margin-right: 28px;
@@ -33,5 +34,5 @@
 	color: #cb6464;
 }
 .button{
-
+    
 }

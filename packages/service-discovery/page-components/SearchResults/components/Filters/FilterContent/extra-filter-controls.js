@@ -1,5 +1,3 @@
-import { addDays } from '@cogoport/utils';
-
 const EXTRA_FILTERS = {
 	detention: {
 		label    : 'Detention & Demurrage Details',
@@ -17,7 +15,6 @@ const EXTRA_FILTERS = {
 			{
 				name    : 'operator_type',
 				type    : 'chips',
-				value   : 'all',
 				options : [
 					{
 						label : 'All',
@@ -42,7 +39,6 @@ const EXTRA_FILTERS = {
 				name       : 'cargo_readiness_date',
 				label      : 'Pick a Date',
 				type       : 'datepicker',
-				value      : addDays(new Date(), 1),
 				dateFormat : 'dd-MM-yyyy',
 				span       : 12,
 			},
@@ -54,7 +50,6 @@ const EXTRA_FILTERS = {
 			{
 				name    : 'rate_type',
 				type    : 'chips',
-				value   : 'all',
 				options : [
 					{
 						label : 'All',
@@ -78,7 +73,6 @@ const EXTRA_FILTERS = {
 			{
 				name    : 'payment_terms',
 				type    : 'chips',
-				value   : 'all',
 				options : [
 					{
 						label : 'All',
@@ -102,7 +96,6 @@ const EXTRA_FILTERS = {
 			{
 				name    : 'offers',
 				type    : 'chips',
-				value   : 'all',
 				options : [
 					{
 						label : 'All',

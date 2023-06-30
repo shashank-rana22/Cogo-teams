@@ -1,15 +1,14 @@
 .container{
-    margin-top:20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
-.form{
-    display:flex;
-    justify-content:space-between;
-}
+
 .form_item{
     display:flex;
     flex-direction:column;
-    width:44%;
-    gap:8px
+    width: 48%;
+    gap: 8px
 }
 .label{
     font-weight: 400;

@@ -1,7 +1,7 @@
 import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 
-import LABEL_MAPPING from '../label-mapping.json';
+import LABEL_MAPPING from '../../page-components/ServiceDiscovery/SpotSearch/components/Routes/label-mapping.json';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
@@ -17,8 +17,8 @@ const getFlex = (span) => {
 	return flex;
 };
 
-function RouteForm({ mode = {}, setFormValues, formValues }) {
-	const serviceType = mode.mode_value;
+function RouteForm({ mode = '', setFormValues, formValues }) {
+	const serviceType = mode;
 
 	const { label = {}, placeholder = {} } = LABEL_MAPPING[serviceType] || {};
 

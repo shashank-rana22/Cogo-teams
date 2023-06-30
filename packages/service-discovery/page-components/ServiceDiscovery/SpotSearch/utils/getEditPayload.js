@@ -16,11 +16,11 @@ const PAYLOAD_FUNCTION_MAPPING = {
 };
 
 const getEditPayload = (serviceType, values) => {
-	const { origin = '', destination = '', editFormValues = {} } = values || {};
+	const { origin = '', destination = '', formValues = {} } = values || {};
 
 	const getPayload = PAYLOAD_FUNCTION_MAPPING[serviceType];
 
-	const payload = getPayload(editFormValues, origin, destination);
+	const payload = getPayload(formValues, origin, destination);
 
 	return payload || [];
 };

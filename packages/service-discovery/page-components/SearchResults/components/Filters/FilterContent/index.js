@@ -55,7 +55,7 @@ function FilterContent({ data = {}, setShow, createSearch, createSearchLoading }
 
 		const spot_search_id = await createSearch({
 			action : 'edit',
-			values : { service_type, ...requiredParams, editFormValues },
+			values : { service_type, ...requiredParams, formValues: editFormValues },
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {

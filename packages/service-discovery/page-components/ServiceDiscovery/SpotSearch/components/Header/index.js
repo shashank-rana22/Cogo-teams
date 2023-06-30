@@ -1,22 +1,23 @@
 import React from 'react';
 
-import OrganisationForm from './OrganisationForm';
+import OrganisationForm from '../../../../../common/OrganisationForm';
+
 import styles from './styles.module.css';
 import TextSection from './TextSection';
 
-function Header({ organization, setOrganization, control, errors, watch, setValue }) {
+function Header({ organization, setOrganization, errors, setErrors }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.left_section}><TextSection /></div>
+			<div className={styles.left_section}>
+				<TextSection />
+			</div>
 
 			<div className={styles.right_section}>
 				<OrganisationForm
 					organization={organization}
 					setOrganization={setOrganization}
-					control={control}
 					errors={errors}
-					watch={watch}
-					setValue={setValue}
+					setErrors={setErrors}
 				/>
 			</div>
 		</div>

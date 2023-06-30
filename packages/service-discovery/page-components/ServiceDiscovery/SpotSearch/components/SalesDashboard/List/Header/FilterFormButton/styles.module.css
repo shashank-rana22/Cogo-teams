@@ -41,11 +41,11 @@
     margin-bottom: 12px;
 }
 .red_dot{
-    height: 6px;
-    width: 6px;
+    height: 12px;
+    width: 12px;
     border-radius: 50%;
     background: #ee3425;
     position: absolute;
-    right: 60%;
-    top: 15%;
+    right: 56%;
+    top: 12%;
 }

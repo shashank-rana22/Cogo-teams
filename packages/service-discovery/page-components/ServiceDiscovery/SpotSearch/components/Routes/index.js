@@ -3,35 +3,49 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import RouteForm from './RouteForm';
+import RouteForm from '../../../../../common/RouteForm';
+
 import styles from './styles.module.css';
+
+const isFormValid = (values, setErrors) => {
+	let isValid = true;
+	Object.keys(values).forEach((key) => {
+		if (!values[key] || isEmpty(values[key])) {
+			setErrors((prev) => ({
+				...prev,
+				[key]: true,
+			}));
+			isValid = false;
+		}
+	});
+
+	return isValid;
+};
 
 function Routes({
 	mode = {},
 	formValues = {},
 	setFormValues = () => {},
-	handleSubmit,
-	errors,
 	organization,
-	watch,
 	createSearch,
 	createSearchLoading,
+	setErrors,
 }) {
 	const [buttonDisabled, setButtonDisabled] = useState(true);
 	const router = useRouter();
 
 	const service_type = mode.mode_value;
 
-	const form = watch();
-
 	const onClickSearch = async () => {
-		if (!isEmpty(errors)) {
+		const isValid = isFormValid(organization, setErrors);
+
+		if (!isValid) {
 			return;
 		}
 
 		const spot_search_id = await createSearch({
 			action : 'default',
-			values : { service_type, ...organization, ...form, ...formValues },
+			values : { service_type, ...organization, ...formValues },
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
@@ -59,7 +73,7 @@ function Routes({
 				<div className={styles.heading}>{`Enter ${mode?.mode_label} Details`}</div>
 
 				<RouteForm
-					mode={mode}
+					mode={mode.mode_value}
 					formValues={formValues}
 					setFormValues={setFormValues}
 				/>
@@ -70,7 +84,7 @@ function Routes({
 					size="xl"
 					themeType="accent"
 					disabled={buttonDisabled}
-					onClick={handleSubmit(onClickSearch)}
+					onClick={onClickSearch}
 					loading={createSearchLoading}
 				>
 					Find Rates

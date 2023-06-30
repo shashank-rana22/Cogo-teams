@@ -18,6 +18,7 @@ const isObjEmpty = (obj) => {
 
 function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 	const [filterApplied, setFilterApplied] = useState(false);
+	const [filtersCount, setFiltersCount] = useState(0);
 	const [visible, setVisible] = useState(false);
 
 	const { control, watch, setValue } = useForm();
@@ -49,6 +50,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 			setValue(controlItem.name, undefined);
 		});
 		setFilterApplied(false);
+		setFiltersCount(0);
 		setVisible(false);
 	};
 
@@ -59,6 +61,14 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		setFilters(formValues);
 		setVisible(false);
 		setFilterApplied(true);
+
+		let count = 0;
+
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key] && !isEmpty(formValues[key])) count += 1;
+		});
+
+		setFiltersCount(count);
 	};
 
 	const renderFilterForm = (
@@ -94,7 +104,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 							<div className={styles.label}>
 								{label || ''}
 								{' '}
-								{controlItem?.rules ? (
+								{controlItem?.rules?.required ? (
 									<div className={styles.required_mark}>*</div>
 								) : null}
 							</div>
@@ -129,7 +139,9 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 					onClick={() => (visible ? onClickOutside() : setVisible(true))}
 				>
 					{filterApplied ? (
-						<div className={styles.red_dot} />
+						<div className={styles.red_dot}>
+							<div style={{ color: '#fff', fontSize: 9, fontWeight: 700 }}>{filtersCount}</div>
+						</div>
 					) : null}
 
 					<IcMFilter height={18} width={18} />

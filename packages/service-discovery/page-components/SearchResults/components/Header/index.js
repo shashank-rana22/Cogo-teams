@@ -8,20 +8,22 @@ import LocationDetails from '../../../../common/LocationDetails';
 import SelectedOrgInfo from './SelectedOrgInfo';
 import styles from './styles.module.css';
 
-function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setHeaderProps, setShowFilterModal }) {
+function Header({
+	data = {},
+	showAdditionalHeader = false,
+	setShowAdditionalHeader = () => {},
+	setHeaderProps = () => {},
+	setShowFilterModal = () => {},
+}) {
 	const router = useRouter();
 
 	const {
-		importer_exporter = {},
-		user = {},
+		importer_exporter: { business_name = '' },
+		user: { name: user_name = '' },
 	} = data || {};
 
-	const { business_name = '' } = importer_exporter || {};
-
-	const { name = '' } = user || {};
-
 	const handleEdit = () => {
-		setHeaderProps({ key: 'edit_details', data });
+		setHeaderProps({ key: 'edit_details', data, setShow: setShowAdditionalHeader });
 		setShowAdditionalHeader((prev) => !prev);
 	};
 
@@ -29,6 +31,7 @@ function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setH
 		<div className={styles.container}>
 			<div className={styles.header_wrapper}>
 				<div className={styles.back_button}>
+
 					<IcMArrowBack height={20} width={20} style={{ cursor: 'pointer' }} onClick={() => router.back()} />
 					<span>Back to Discover Rates</span>
 				</div>
@@ -37,7 +40,7 @@ function Header({ data = {}, showAdditionalHeader, setShowAdditionalHeader, setH
 					<div className={styles.org_details}>
 						<SelectedOrgInfo
 							org_name={business_name}
-							user_name={name}
+							user_name={user_name}
 							setShow={setShowAdditionalHeader}
 							show={showAdditionalHeader}
 						/>

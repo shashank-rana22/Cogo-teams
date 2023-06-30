@@ -2,6 +2,9 @@ import { addDays } from '@cogoport/utils';
 
 import getLoadArray from './getLoadArray';
 
+const FCL_KEYS = ['containers_count', 'container_size', 'container_type', 'commodity', 'cargo_weight_per_container'];
+const LCL_KEYS = ['packages_count', 'weight', 'volume', 'commodity'];
+
 const EXTRA_FILTERS_DEFAULT_VALUES = {
 	operator       : { operator_type: 'all' },
 	readiness_date : { cargo_readiness_date: addDays(new Date(), 1) },
@@ -12,7 +15,8 @@ const EXTRA_FILTERS_DEFAULT_VALUES = {
 
 const getExtraFiltersObj = (filtersArray) => {
 	const RESULT_OBJ = {};
-	filtersArray.forEach((item) => {
+
+	(filtersArray || []).forEach((item) => {
 		const filterObj = EXTRA_FILTERS_DEFAULT_VALUES[item] || {};
 
 		Object.keys(filterObj).forEach((key) => {
@@ -22,15 +26,6 @@ const getExtraFiltersObj = (filtersArray) => {
 
 	return RESULT_OBJ;
 };
-
-const FTL_LOAD_SELECTION_TYPE_MAPING = {
-	truck       : 'by_trucks',
-	cargo_gross : 'by_cargo',
-};
-
-const FCL_KEYS = ['containers_count', 'container_size', 'container_type', 'commodity', 'cargo_weight_per_container'];
-
-const LCL_KEYS = ['packages_count', 'weight', 'volume', 'commodity'];
 
 const FTL_CARGO_GROSS_KEYS = [
 	'packing_type',
@@ -104,17 +99,17 @@ const setValueForTrailerAndHaulage = (load, setValue) => {
 	);
 };
 
-const getPrefillForm = (values, service_key, extraFilters) => {
+const getPrefillForm = (values, service_key, extraFilters = []) => {
 	const { service_details = {} } = values || {};
 
 	const service_type = values[service_key];
 
 	const load = getLoadArray(service_type, service_details);
 
-	let data = {};
+	let loadData = {};
 
 	if (service_type === 'fcl_freight') {
-		data = {
+		loadData = {
 			container: load.map((containerItem) => (
 				FCL_KEYS.reduce((obj, key) => ({ ...obj, [key]: containerItem[key] }), {})
 			)),
@@ -122,12 +117,12 @@ const getPrefillForm = (values, service_key, extraFilters) => {
 	}
 
 	if (service_type === 'lcl_freight') {
-		data = {
+		loadData = {
 			...LCL_KEYS.reduce((obj, key) => ({ ...obj, [key]: load[0]?.[key] }), {}),
 		};
 	}
 
-	return { ...data, ...getExtraFiltersObj(extraFilters) };
+	return { ...loadData, ...getExtraFiltersObj(extraFilters) };
 
 	// switch (search_type) {
 	// 	case 'fcl_freight': {
