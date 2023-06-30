@@ -1,17 +1,21 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 
-import { FIRST_LEVEL_DATA, SECOUND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../constants';
+import { FIRST_LEVEL_DATA, SECOND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../constants';
 import { handleValues } from '../utils/handleValue';
+
+const LEVEL_INDEX_VALUE = 1;
+const NETWORK_LENGTH_VALUE_EQUAL_TO_10 = 10;
+const NETWORK_LENGTH_VALUE_EQUAL_TO_20 = 20;
 
 function NetworkLineChart({ networkData = {} }) {
 	const networkLength = Object.keys(networkData).length;
 
 	const getUserLevel = () => {
 		let userLevel = [];
-		if (networkLength <= 10) {
+		if (networkLength <= NETWORK_LENGTH_VALUE_EQUAL_TO_10) {
 			userLevel = FIRST_LEVEL_DATA;
-		} else if (networkLength <= 20) {
-			userLevel = SECOUND_LEVEL_DATA;
+		} else if (networkLength <= NETWORK_LENGTH_VALUE_EQUAL_TO_20) {
+			userLevel = SECOND_LEVEL_DATA;
 		} else {
 			userLevel = THIRD_LEVEL_DATA;
 		}
@@ -25,7 +29,7 @@ function NetworkLineChart({ networkData = {} }) {
 			details = [
 				...details,
 				{
-					x : `L${index + 1}`,
+					x : `L${index + LEVEL_INDEX_VALUE}`,
 					y : handleValues(data?.[key]),
 				},
 			];
