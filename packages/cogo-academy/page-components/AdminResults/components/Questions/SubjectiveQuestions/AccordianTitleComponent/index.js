@@ -25,19 +25,7 @@ function AccordianTitleComponent({ data = {} }) {
 			</div>
 
 			<div className={styles.section}>
-
-				<Tooltip
-					content={(
-						<div
-							className={styles.tooltip}
-							dangerouslySetInnerHTML={{ __html: question_text }}
-						/>
-					)}
-					placement="top"
-					maxWidth={600}
-				>
-					<div className={styles.question_text} dangerouslySetInnerHTML={{ __html: question_text }} />
-				</Tooltip>
+				<div className={styles.question_text} dangerouslySetInnerHTML={{ __html: question_text }} />
 			</div>
 
 			<div className={styles.small_section}>{startCase(difficulty_level)}</div>
