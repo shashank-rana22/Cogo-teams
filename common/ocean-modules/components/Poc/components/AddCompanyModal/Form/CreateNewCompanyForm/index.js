@@ -7,7 +7,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -18,16 +18,16 @@ import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 const DEFAULT_ORG_TRADE_PARTIES_PARAMS = {
 	billing_addresses_data_required : true,
 	other_addresses_data_required   : true,
 	poc_data_required               : true,
 };
+
 function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
+
 function CreateNewCompanyForm({ tradePartyType }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
@@ -94,6 +94,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
 
+	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
+
 	return (
 		<div>
 			<form>
@@ -123,7 +125,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							placeholder="Enter Registration Number"
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								pattern  : { value: geo.regex.PAN, message: 'Pan Number is invalid' },
+								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
 							}}
 						/>
 						{Error('registration_number', errors)}
@@ -200,7 +202,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							size="sm"
 							rules={{
-								pattern: { value: geo.regex.EMAIL, message: 'Enter valid email' },
+								pattern: { value: countryValidation?.regex?.EMAIL, message: 'Enter valid email' },
 							}}
 							placeholder="Enter Email Address"
 						/>
@@ -240,7 +242,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							rules={{
 								required : { value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
-								pattern  : { value: geo.regex.GST, message: 'GST Number is invalid' },
+								pattern  : { value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
 							}}
 							disabled={formValues.not_reg_under_gst}
 						/>

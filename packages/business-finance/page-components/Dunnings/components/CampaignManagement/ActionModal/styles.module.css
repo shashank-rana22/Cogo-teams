@@ -1,0 +1,25 @@
+.header {
+	display: flex;
+	justify-content: center;
+	margin: 40px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.modal_section {
+	:global {
+		.ui_modal_body_container {
+			max-height: 500px;
+		}
+	}
+}
+
+.button_update {
+	display: flex;
+	flex-direction: row-reverse;
+	width: 100%;
+}
