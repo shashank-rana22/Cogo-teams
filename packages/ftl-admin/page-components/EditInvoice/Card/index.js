@@ -19,17 +19,20 @@ import styles from './styles.module.css';
 const getShipmentKey = (shipment) => `${shipment?.id}@${shipment?.serial_id}`;
 const getInvoiceKey = (shipmentId, invoiceNumber, invoiceId) => `${shipmentId}@${invoiceNumber}#${invoiceId}`;
 
-function Card({ data = {}, isSelectable = false }) {
-	const [openAccordian, setOpenAccordian] = useState(false);
-	const { selectedInvoices, setSelectedInvoices } = useContext(EditInvoiceIndex);
-
-	const isAllInvoicesSelected = (shipmentData) => selectedInvoices
-		.has(getShipmentKey(data))
+const isAllInvoicesSelected = (shipmentData, selectedInvoices) => selectedInvoices
+	.has(getShipmentKey(shipmentData))
 		&& [...(selectedInvoices.get(getShipmentKey(shipmentData)) || new Map())
 			.keys()].length === shipmentData?.invoice_combinations?.length;
 
-	const isInvoiceSelected = (invoiceId) => selectedInvoices.has(getShipmentKey(data))
-		&& (selectedInvoices.get(getShipmentKey(data)) || new Map())?.has(invoiceId);
+const isInvoiceSelected = ({
+	selectedInvoices,
+	shipmentData, invoiceId,
+}) => selectedInvoices.has(getShipmentKey(shipmentData))
+		&& (selectedInvoices.get(getShipmentKey(shipmentData)) || new Map())?.has(invoiceId);
+
+function Card({ data = {}, isSelectable = false }) {
+	const [openAccordian, setOpenAccordian] = useState(false);
+	const { selectedInvoices, setSelectedInvoices } = useContext(EditInvoiceIndex);
 
 	const handleInvoiceClick = (e, invoice) => {
 		if (e?.target?.checked) {
@@ -58,7 +61,7 @@ function Card({ data = {}, isSelectable = false }) {
 				<div className={styles.details_container}>
 					{!!isSelectable && (
 						<Checkbox
-							checked={isAllInvoicesSelected(data)}
+							checked={isAllInvoicesSelected(data, selectedInvoices)}
 							onChange={(e) => {
 								if (e?.target?.checked) {
 									selectedInvoices.set(getShipmentKey(data), new Map(
@@ -139,13 +142,15 @@ function Card({ data = {}, isSelectable = false }) {
 									{!!isSelectable && (
 										<Checkbox
 											checked={
-												isInvoiceSelected(
-													getInvoiceKey(
+												isInvoiceSelected({
+													shipmentData : data,
+													selectedInvoices,
+													invoiceId    : getInvoiceKey(
 														data?.id,
 														invoice?.invoice_number,
 														invoice?.id,
 													),
-											)
+												})
 											}
 											onChange={(e) => handleInvoiceClick(e, invoice)}
 										/>

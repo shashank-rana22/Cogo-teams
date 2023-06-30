@@ -26,8 +26,10 @@ function SIDBeforeDeparture() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const val = new FormData(e.target);
-		const payload = Array.from(val?.entries())?.reduce((acc, [serialId, remark]) => (
-			[...acc, { serial_id: +serialId, remarks: remark }]), []);
+		const payload = Array.from(val?.entries())?.reduce((acc, [serialId, remark]) => {
+			acc.push({ serial_id: +serialId, remarks: remark });
+			return acc;
+		}, []);
 
 		udpateShipment({ objects: payload }, () => { refetchShipments(); setShowModal(false); });
 	};

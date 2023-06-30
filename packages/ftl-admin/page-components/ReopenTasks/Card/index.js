@@ -1,6 +1,7 @@
 import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import { ReopenTasksContext } from '../context';
@@ -29,7 +30,7 @@ function Card({ data = {}, isSelectable = false }) {
 					)}
 					<div className={styles.taskDetails}>
 						<div className={styles.label}>
-							{data?.label || data?.task?.split('_')?.join(' ')}
+							{data?.label || startCase(data?.task)}
 						</div>
 						<div className={styles.deadline}>
 							(Deadline:

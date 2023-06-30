@@ -12665,7 +12665,6 @@ const partner = {
 		{
 			api          : 'list_shipments',
 			access_type  : 'private',
-			feature      : 'shipment',
 			service_name : 'shipment',
 		},
 	],
