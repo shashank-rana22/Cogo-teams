@@ -14,7 +14,7 @@ function UpdateQuotation({
 }) {
 	const [show, setShow] = useState(false);
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 	const { source = '' } = shipment_data;
 
 	const invoiceStatus = invoiceData?.invoicing_parties.some(

@@ -1,10 +1,11 @@
 import { Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect } from 'react';
 
 import FtlTracker from './ftlTracker';
 import styles from './styles.module.css';
 
-const SELECTED_TRUCK_DATA = 0;
+const SELECTED_TRUCK_DATA = GLOBAL_CONSTANTS.zeroth_index;
 
 function TrackingHeader({
 	trackingLoading,

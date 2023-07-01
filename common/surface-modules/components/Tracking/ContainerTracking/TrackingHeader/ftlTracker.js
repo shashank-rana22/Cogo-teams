@@ -1,5 +1,6 @@
 import { Button, Tooltip, Popover, cl } from '@cogoport/components';
 import { InputController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -9,7 +10,7 @@ import useUpdateFtlFreightServiceTracking from '../../../../hooks/useUpdateFtlFr
 import styles from './styles.module.css';
 
 const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
-const CONSENT_INDEX = 0;
+const CONSENT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
 function FtlTracker({
 	trackingLoading,

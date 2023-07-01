@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useEffect } from 'react';
 
 import useGetSaasContainerSubscription from '../../../hooks/useGetSaasContainerSubscription';
@@ -6,14 +7,14 @@ import styles from './styles.module.css';
 import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
 
-const VALUE_INDEX = 0;
+const VALUE_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+const TRUCK_OPTIONS = [];
 
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const serialId = shipment_data?.serial_id;
 
 	const [containerNo, setContainerNo] = useState('');
 
-	const TRUCK_OPTIONS = [];
 	const ftlServices = (shipment_data?.all_services || []).filter((item) => TRUCK_OPTIONS.push({
 		label : item?.truck_number,
 		value : item?.truck_number,

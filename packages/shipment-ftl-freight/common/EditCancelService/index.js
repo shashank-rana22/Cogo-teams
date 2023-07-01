@@ -1,5 +1,6 @@
 import { Popover, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
@@ -30,7 +31,7 @@ const actionButtons = {
 	cancel                : { label: 'Cancel', value: 'cancel' },
 };
 
-const DEFAULT_INDEX = 0;
+const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
 export const getTrucklistWithId = (all_services) => {
 	const servicesList = (all_services || []).filter(
