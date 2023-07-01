@@ -27,12 +27,12 @@ const KEY_CONTENT_MAPPING = {
 	},
 };
 
-function RenderPills({ isCompleted, bankDetails, additionalInfo }) {
+function RenderPills({ isCompleted, bankDetails }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
 
-	if (!additionalInfo && !isEmpty(bankDetails)) {
+	if (!isCompleted && !isEmpty(bankDetails)) {
 		return <Pill color="orange">Waiting for approval</Pill>;
 	}
 
@@ -100,9 +100,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 										<div className={styles.accordion_title}>{title}</div>
 										<RenderPills
 											isCompleted={isCompleted}
-											key={key}
 											bankDetails={bankDetails}
-											additionalInfo={bank_details}
 										/>
 									</div>
 								)}
