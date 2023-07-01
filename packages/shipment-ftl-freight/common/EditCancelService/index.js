@@ -23,13 +23,16 @@ import getCanEditSupplier from './utils/getCanEditSupplier';
 import getEditServiceDetails from './utils/getEditServiceDetails';
 
 const ACTION_BUTTON = {
-	supplier_reallocation : { label: 'Edit Supplier', value: 'supplier_reallocation' },
-	edit_truck_number     : { label: 'Edit Truck Number', value: 'edit_truck_number' },
-	edit_eta_etd          : { label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
-	edit_driver_details   : { label: 'Edit Driver Details', value: 'edit_driver_details' },
-	verify_truck          : { label: 'Verify Truck', value: 'verify_truck' },
-	verify_driver         : { label: 'Verify Driver', value: 'verify_driver' },
-	cancel                : { label: 'Cancel', value: 'cancel' },
+	supplier_reallocation:
+	{ label: 'Edit Supplier', value: 'supplier_reallocation', visibilityFunction: getCanEditSupplier },
+	edit_truck_number:
+	{ label: 'Edit Truck Number', value: 'edit_truck_number', visibilityFunction: getEditServiceDetails },
+	edit_eta_etd: { label: 'Edit ETA/ETD', value: 'edit_eta_etd', visibilityFunction: getEditServiceDetails },
+	edit_driver_details:
+	{ label: 'Edit Driver Details', value: 'edit_driver_details', visibilityFunction: getEditServiceDetails },
+	verify_truck  : { label: 'Verify Truck', value: 'verify_truck', visibilityFunction: getEditServiceDetails },
+	verify_driver : { label: 'Verify Driver', value: 'verify_driver', visibilityFunction: getEditServiceDetails },
+	cancel        : { label: 'Cancel', value: 'cancel', visibilityFunction: getCanCancelService },
 };
 
 const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
@@ -104,15 +107,9 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	ACTION_BUTTON.supplier_reallocation.show = getCanEditSupplier({
-		shipment_data, user_data, state, activeStakeholder,
+	Object.entries(ACTION_BUTTON).forEach(([btnKey, butObj]) => {
+		ACTION_BUTTON[btnKey].show = butObj.visibilityFunction({ shipment_data, user_data, state, activeStakeholder });
 	});
-	ACTION_BUTTON.edit_truck_number.show = getEditServiceDetails({ state, activeStakeholder });
-	ACTION_BUTTON.edit_eta_etd.show = getEditServiceDetails({ state, activeStakeholder });
-	ACTION_BUTTON.edit_driver_details.show = getEditServiceDetails({ state, activeStakeholder });
-	ACTION_BUTTON.verify_truck.show = getEditServiceDetails({ state, activeStakeholder });
-	ACTION_BUTTON.verify_driver.show = getEditServiceDetails({ state, activeStakeholder });
-	ACTION_BUTTON.cancel.show = getCanCancelService({ state, activeStakeholder });
 
 	if (!Object.values(ACTION_BUTTON).some((actionButton) => actionButton.show)) {
 		return null;

@@ -8,13 +8,13 @@ import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
 
 const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
-const TRUCK_OPTIONS = [];
 
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const serialId = shipment_data?.serial_id;
 
 	const [containerNo, setContainerNo] = useState('');
 
+	const TRUCK_OPTIONS = [];
 	const ftlServices = (shipment_data?.all_services || []).filter((item) => TRUCK_OPTIONS.push({
 		label : item?.truck_number,
 		value : item?.truck_number,
@@ -29,7 +29,7 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		truckNumber: containerNo || TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value,
 	});
 
-	const ContainerOptions = Array.isArray(list)
+	const containerOptions = Array.isArray(list)
 		? (list || [])
 			.filter((e) => e?.type === 'CONTAINER_NO')
 			?.map((e) => ({ label: e?.input, value: e?.input }))
@@ -43,11 +43,11 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		<div className={styles.Container}>
 			<TrackingHeader
 				trackingLoading={loading}
-				ContainerOptions={ContainerOptions}
+				ContainerOptions={containerOptions}
 				setContainerNo={setContainerNo}
 				containerNo={
 							containerNo
-							|| ContainerOptions?.[DEFAULT_INDEX]?.value
+							|| containerOptions?.[DEFAULT_INDEX]?.value
 							|| TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value
 						}
 				truckOptions={TRUCK_OPTIONS}
