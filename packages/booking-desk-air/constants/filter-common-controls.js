@@ -1,17 +1,15 @@
 const filterCommonControls = [
 	{
-		label    : 'Tags',
-		name     : 'tags',
-		type     : 'select',
-		multiple : true,
-		options  : [
+		label   : 'Tags',
+		name    : 'tags',
+		type    : 'select',
+		options : [
 			{
 				label : 'Cogoverse',
 				value : 'cogoverse',
 			},
 		],
 		isClearable : true,
-		className   : 'primary md',
 		span        : 6,
 	},
 	{
@@ -29,7 +27,6 @@ const filterCommonControls = [
 			agent_data_required: false,
 		},
 		placeholder : 'Select Customer/Channel Partner',
-		caret       : true,
 		isClearable : true,
 		span        : 6,
 	},
@@ -38,7 +35,6 @@ const filterCommonControls = [
 		label       : 'Raised Alarm?',
 		name        : 'fault_alarms_raised',
 		type        : 'select',
-		className   : 'primary md',
 		placeholder : 'Select status',
 		options     : [
 			{
