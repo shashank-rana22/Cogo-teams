@@ -42,7 +42,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 					{item?.sub_chapters?.length > MIN_SUB_CHAPTERS_LENGTH ? (
 						<Pill>
 							<Tooltip
-								content={<TooltipContent item={item?.sub_chapters} />}
+								content={<TooltipContent item={item?.sub_chapters} source="sub_chapter_name" />}
 								placement="right"
 								theme="light"
 								caret

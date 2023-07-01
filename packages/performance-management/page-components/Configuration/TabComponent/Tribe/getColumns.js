@@ -44,7 +44,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
 						<Pill>
 							<Tooltip
-								content={<TooltipContent item={item?.squads} />}
+								content={<TooltipContent item={item?.squads} source="squad_name" />}
 								placement="right"
 								theme="light"
 								interactive

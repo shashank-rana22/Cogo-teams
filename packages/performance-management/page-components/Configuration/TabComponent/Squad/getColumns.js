@@ -38,7 +38,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 					{item?.employees?.length > MIN_EMPLOYEES_LENGTH ? (
 						<Pill>
 							<Tooltip
-								content={<TooltipContent item={item?.employees} />}
+								content={<TooltipContent item={item?.employees} source="name" />}
 								placement="right"
 								theme="light"
 								interactive
