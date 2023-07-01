@@ -85,6 +85,7 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 				singleListLoading={singleListLoading}
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
+				entityCode={entityCode}
 
 			/>
 

@@ -12,6 +12,7 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	clearFilter: () => void;
+
 }
 
 function FilterpopOver({
@@ -23,6 +24,7 @@ function FilterpopOver({
 	const onChange = (val:string, name:string) => {
 		setFilters((p:object) => ({ ...p, [name]: val }));
 	};
+	const rest = { onClickOutside: () => setShow(false) };
 
 	const content = (
 		<div>
@@ -133,6 +135,7 @@ function FilterpopOver({
 				placement="bottom"
 				render={content}
 				className={styles.pop_over_style}
+				{...rest}
 			>
 				<Button
 					themeType="secondary"
