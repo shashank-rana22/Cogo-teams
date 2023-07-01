@@ -52,8 +52,8 @@ const createOrGetRoom = async ({ agentId, firestore }) => {
 
 function activityTracker({ trackerRef, roomDoc, activity }) {
 	clearTimeout(trackerRef.current);
-	const ref = trackerRef;
-	ref.current = setTimeout(() => {
+	const refForTracker = trackerRef;
+	refForTracker.current = setTimeout(() => {
 		updateDoc(roomDoc, {
 			last_activity_timestamp : Date.now(),
 			last_activity           : activity,
