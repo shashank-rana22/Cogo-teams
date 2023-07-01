@@ -44,12 +44,15 @@ function ProfilePage() {
 		offerLetterApiRefetch,
 	} = useGetOfferLetter();
 
-	const { detail = {} } = profileData || {};
+	const { detail = {}, progress_stats = {} } = profileData || {};
+
+	const { personal_details = {} } = progress_stats || {};
 
 	return (
 		<div className={styles.container}>
 			<Header
 				detail={detail}
+				personalDetails={personal_details}
 				loading={loading}
 				setShowCtcBreakupModal={setShowCtcBreakupModal}
 				getEmployeeDetails={getEmployeeDetails}
