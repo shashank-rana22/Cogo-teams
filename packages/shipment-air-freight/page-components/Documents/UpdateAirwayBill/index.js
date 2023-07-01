@@ -42,9 +42,9 @@ function UpdateAirwayBill({
 
 	return (
 		<Modal
-			show={updateAirwayBill}
+			show={updateAirwayBill?.updateModal}
 			size="lg"
-			onClose={() => setUpdateAirwayBill(false)}
+			onClose={() => setUpdateAirwayBill({ updateModal: false })}
 			placement="top"
 			style={{ padding: '20px' }}
 		>

@@ -21,13 +21,17 @@ function Documents() {
 		stakeholderConfig:{ documents = {} } = {},
 	} = 	useContext(ShipmentDetailContext);
 
-	const [showDoc, setShowDoc] = useState(undefined);
+	const [showDoc, setShowDoc] = useState({
+		uploadModal: false,
+	});
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState(documents.default_wallet);
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
-	const [updateAirwayBill, setUpdateAirwayBill] = useState(undefined);
+	const [updateAirwayBill, setUpdateAirwayBill] = useState({
+		updateModal: false,
+	});
 
 	const { apiTrigger:createDocumentTrigger } = useCreateOrganizationDocument({});
 
@@ -59,7 +63,7 @@ function Documents() {
 	}, [docTypes.length, getShipmentEmails]);
 
 	const handleApprove = async () => {
-		setShowDoc(showApproved);
+		setShowDoc((prev) => ({ ...prev, showApproved }));
 
 		if (addToWallet) {
 			const values = {
@@ -116,11 +120,10 @@ function Documents() {
 
 			<Modal
 				className={styles.modal_container}
-				show={showDoc}
+				show={showDoc?.uploadModal}
 				size="lg"
-				onClose={() => setShowDoc(null)}
+				onClose={() => setShowDoc({ uploadModal: false })}
 				placement="top"
-				closeOnOuterClick={false}
 			>
 				<UploadForm
 					showDoc={showDoc}

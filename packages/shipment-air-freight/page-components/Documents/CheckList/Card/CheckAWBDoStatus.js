@@ -11,7 +11,9 @@ const DOCUMENT_STATUS_MAPPING = {
 	ineligible : 'At Authority Desk',
 };
 
-const includeStatus = ['generated', 'uploaded'];
+const INCLUDE_STATUS = ['generated', 'uploaded'];
+
+const INCLUDE_DOCUMENT = ['draft_airway_bill', 'hawb_freight_certificate'];
 
 function CheckAWBDoStatus({
 	docType,
@@ -22,41 +24,41 @@ function CheckAWBDoStatus({
 }) {
 	const buttonContainer = () => (
 		<>
-			<Button
-				themeType="link"
-				onClick={() => handleView(uploadedItem?.document_url)}
-			>
-				<div className={styles.tooltip_container}>
-					<Tooltip
-						content="View"
-						placement="top"
-						interactive
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					content="View"
+					placement="top"
+					interactive
+				>
+					<Button
+						themeType="link"
+						onClick={() => handleView(uploadedItem?.document_url)}
 					>
 						<IcMEyeopen />
-					</Tooltip>
-				</div>
-			</Button>
-			<Button
-				themeType="link"
-				onClick={() => handleSave(uploadedItem?.document_url, uploadedItem?.document_type)}
-			>
-				<div className={styles.tooltip_container}>
-					<Tooltip
-						content="Download"
-						placement="top"
-						interactive
+					</Button>
+				</Tooltip>
+			</div>
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					content="Download"
+					placement="top"
+					interactive
+				>
+					<Button
+						themeType="link"
+						onClick={() => handleSave(uploadedItem?.document_url, uploadedItem?.document_type)}
 					>
 						<IcMDownload />
-					</Tooltip>
-				</div>
-			</Button>
+					</Button>
+				</Tooltip>
+			</div>
 		</>
 	);
 
 	if (
-		['draft_airway_bill', 'hawb_freight_certificate']?.includes(docType) && item?.trade_type === 'export'
+		INCLUDE_DOCUMENT.includes(docType) && item?.trade_type === 'export'
 	) {
-		if (includeStatus.includes(JSON.parse(uploadedItem?.data)?.status)) {
+		if (INCLUDE_STATUS.includes(JSON.parse(uploadedItem?.data)?.status)) {
 			if (uploadedItem?.bl_detail_status === 'approved') {
 				return buttonContainer();
 			} return (

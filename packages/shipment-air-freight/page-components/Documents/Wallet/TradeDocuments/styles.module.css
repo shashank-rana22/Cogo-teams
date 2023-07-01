@@ -40,6 +40,12 @@
 .button_wrapper {
 	display: flex;
 
+	:global {
+		.ui_button_container {
+			color: var(--color-accent-orange-2);
+		}
+	}
+
 	.initial {
 		margin-right: 6px;
 	}

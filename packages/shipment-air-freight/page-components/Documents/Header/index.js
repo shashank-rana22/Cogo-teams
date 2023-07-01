@@ -16,7 +16,8 @@ function Header({
 	activeWallet = '',
 	setActiveWallet = () => {},
 }) {
-	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
+	const serviceOptions = (shipment_data?.services
+		|| []).map((service) => ({ label: startCase(service), value: service }));
 
 	return (
 		<div className={styles.heading}>
@@ -50,7 +51,7 @@ function Header({
 							placeholder="Select Source"
 							value={filters?.uploaded_by_org_id}
 							options={sourceOptions || []}
-							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
+							onChange={(e) => setFilters((prev) => ({ ...prev, uploaded_by_org_id: e }))}
 							isClearable
 						/>
 
@@ -59,7 +60,7 @@ function Header({
 							size="sm"
 							placeholder="Select Service"
 							value={filters?.service_type}
-							onChange={(e) => setFilters({ ...filters, service_type: e })}
+							onChange={(e) => setFilters((prev) => ({ ...prev, service_type: e }))}
 							options={serviceOptions || {}}
 							isClearable
 						/>

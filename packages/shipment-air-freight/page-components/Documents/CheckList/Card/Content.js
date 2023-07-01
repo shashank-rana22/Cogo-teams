@@ -54,7 +54,8 @@ function Content({
 							})
 							: setShowDoc({
 								...item,
-								document_type: docType,
+								uploadModal   : true,
+								document_type : docType,
 							}))}
 				>
 					{receivedViaEmail ? 'Approve Document' : showUploadText}
@@ -137,19 +138,18 @@ function Content({
 						&& uploadedItem?.state === 'document_accepted'
 						&& documents?.allow_update && (
 							<div className={styles.tooltip_container}>
-								<Button
-									themeType="link"
-									onClick={() => setUpdateAirwayBill(uploadedItem)}
+								<Tooltip
+									content="Update"
+									placement="top"
+									interactive
 								>
-									<Tooltip
-										content="Download"
-										placement="top"
-										interactive
+									<Button
+										themeType="link"
+										onClick={() => setUpdateAirwayBill({ ...uploadedItem, updateModal: true })}
 									>
 										<IcMSort />
-									</Tooltip>
-
-								</Button>
+									</Button>
+								</Tooltip>
 							</div>
 						)}
 					</div>

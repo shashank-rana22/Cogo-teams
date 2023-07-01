@@ -11,7 +11,7 @@ const controls = (disabledProp) => {
 			label    : 'Document Number',
 			type     : 'text',
 			span     : 6,
-			disabled : disabledProp,
+			disabled : !!disabledProp,
 			rules    : {
 				required: true,
 			},

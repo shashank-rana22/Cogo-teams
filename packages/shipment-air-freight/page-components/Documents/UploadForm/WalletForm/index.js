@@ -1,5 +1,6 @@
 import { Input, Tabs, TabPanel, Modal } from '@cogoport/components';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Wallet from '../../Wallet';
@@ -23,7 +24,7 @@ function WalletForm({
 					<Input
 						className="primary md"
 						value={searchDocs}
-						placeholder="Search..."
+						placeholder={`Search ${startCase(activeWallet)}`}
 						suffix={searchDocs
 							? <IcMCross className={styles.search_icon} onClick={() => setSearchDocs('')} />
 							: <IcMSearchlight className={styles.search_icon} />}

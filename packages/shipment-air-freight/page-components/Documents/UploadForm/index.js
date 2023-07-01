@@ -72,7 +72,7 @@ function UploadForm({
 						<Button
 							className="secondary md"
 							onClick={() => {
-								setShowDoc(undefined);
+								setShowDoc({ uploadModal: false });
 							}}
 						>
 							Cancel

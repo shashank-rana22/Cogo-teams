@@ -26,7 +26,7 @@ const useUpdateAirwayBillDocument = ({ details, setUpdateAirwayBill, refetch }) 
 		};
 		try {
 			await trigger({ data: payload });
-			setUpdateAirwayBill(false);
+			setUpdateAirwayBill({ updateModal: false });
 			refetch();
 		} catch (error) {
 			toastApiError(error);

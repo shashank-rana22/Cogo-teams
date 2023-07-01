@@ -21,7 +21,7 @@ const Card = ({
 	};
 
 	const handleSave = (url, name = 'file') => {
-		if (url) { saveAs(url, `${shipment_data.serial_id}-${name}`); }
+		if (url) { saveAs(url, `${shipment_data?.serial_id}-${name}`); }
 	};
 
 	return (taskList || []).map((item, idx) => {
@@ -32,7 +32,7 @@ const Card = ({
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
 
 		if (isEmpty(allUploadedDocs)) {
-			allUploadedDocs = [];
+			allUploadedDocs = [{}];
 		}
 
 		return allUploadedDocs.map((uploadedItem) => {

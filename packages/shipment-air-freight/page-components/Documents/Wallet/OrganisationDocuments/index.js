@@ -116,14 +116,12 @@ function OrganizationDocuments({
 						</div>
 						<div className={styles.button_wrapper}>
 							<Button
-								style={{ color: '#F68B21' }}
 								themeType="link"
 								onClick={(e) => handleView(e, doc?.image_url)}
 							>
 								View
 							</Button>
 							<Button
-								style={{ color: '#F68B21' }}
 								themeType="link"
 								onClick={(e) => handleSave(e, doc?.image_url)}
 							>

@@ -11,7 +11,7 @@ function ApproveModal({
 	setShowDoc = () => {},
 }) {
 	const handleManualUpload = () => {
-		setShowDoc({ ...showApproved, type: 'task' });
+		setShowDoc((prev) => ({ ...prev, ...showApproved, type: 'task' }));
 		setShowApproved(false);
 	};
 
@@ -45,7 +45,7 @@ function ApproveModal({
 					<div className={styles.buttons_container}>
 						<Button
 							themeType="secondary"
-							onClick={() => setShowApproved(undefined)}
+							onClick={() => setShowApproved(false)}
 						>
 							Cancel
 						</Button>

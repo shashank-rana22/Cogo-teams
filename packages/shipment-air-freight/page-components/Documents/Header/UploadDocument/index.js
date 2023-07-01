@@ -56,11 +56,11 @@ function UploadDocument({
 							}}
 						/>
 
-						{errors?.document_type ? (
+						{errors?.document_type && (
 							<div className={styles.document_error}>
 								{handleError({ error: errors?.document_type })}
 							</div>
-						) : null}
+						)}
 					</div>
 
 					<div>
@@ -76,16 +76,16 @@ function UploadDocument({
 							}}
 						/>
 
-						{errors?.upload_document ? (
+						{errors?.upload_document && (
 							<div className={styles.document_error}>
 								{handleError({ error: errors?.upload_document })}
 							</div>
-						) : null}
+						)}
 					</div>
 
 					{['superadmin', 'admin'].includes(activeStakeholder)
 					&& shipment_data?.consignee_shipper_id
-					&& formValues.upload_document ? (
+					&& formValues.upload_document && (
 						<div style={{ marginTop: '16px' }}>
 							<span style={{ fontWeight: '700' }}>Choose organization</span>
 
@@ -104,13 +104,13 @@ function UploadDocument({
 								}}
 							/>
 
-							{errors?.organizations ? (
+							{errors?.organizations && (
 								<div className={styles.document_error}>
 									{handleError({ error: errors?.organizations })}
 								</div>
-							) : null}
+							)}
 						</div>
-						) : null}
+					)}
 				</div>
 			) : null}
 		</div>
