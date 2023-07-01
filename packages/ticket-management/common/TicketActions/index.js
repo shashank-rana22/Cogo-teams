@@ -3,16 +3,16 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function getActionMapping({ status, isClosureAuthorizer }) {
+function getActionType({ status, isClosureAuthorizer }) {
 	if (['escalated', 'unresolved'].includes(status)) {
 		if (isClosureAuthorizer) {
-			return ['resolve'];
+			return ['resolve', 'reassign'];
 		}
-		return ['resolve_request'];
+		return ['resolve_request', 'reassign'];
 	}
 
 	if ((['pending', 'resolve_requested'].includes(status) && isClosureAuthorizer)) {
-		return ['approve', 'reject'];
+		return ['approve', 'reject', 'reassign'];
 	}
 
 	if (status === 'closed') {
@@ -29,34 +29,30 @@ function TicketActions({
 	setShowReassign = () => {},
 	isClosureAuthorizer,
 }) {
-	const actionMappings = getActionMapping({ status, isClosureAuthorizer });
+	const actionMappings = getActionType({ status, isClosureAuthorizer });
+
+	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => item !== 'reassign');
+
+	const handleAction = (e, item) => {
+		if (item === 'reassign') {
+			setShowReassign(true);
+		} else {
+			handleTicket(e, { actionType: item });
+		}
+	};
 
 	return (
 		<div className={styles.pending_actions}>
-			{actionMappings.map((item) => (
-				<div className={styles.pending_actions} key={`button_${item}_container`}>
-					{(isModal && item !== 'reopen') && (
-						<Button
-							key="reassign_button"
-							size="sm"
-							themeType="secondary"
-							className={styles.reopen_resolve}
-							onClick={() => setShowReassign(true)}
-						>
-							Reassign
-						</Button>
-					)}
-
-					<Button
-						key={item}
-						size="sm"
-						themeType={isModal ? 'primary' : 'linkUi'}
-						className={styles.reopen_resolve}
-						onClick={(e) => handleTicket(e, { actionType: item })}
-					>
-						{startCase(item)}
-					</Button>
-				</div>
+			{filteredActions.map((item) => (
+				<Button
+					key={`${item}`}
+					size="sm"
+					themeType={isModal ? 'primary' : 'linkUi'}
+					className={styles.reopen_resolve}
+					onClick={(e) => handleAction(e, item)}
+				>
+					{startCase(item)}
+				</Button>
 			))}
 		</div>
 	);

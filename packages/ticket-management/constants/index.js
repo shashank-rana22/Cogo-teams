@@ -4,7 +4,7 @@ export const STATUS_MAPPING = {
 	resolve_requested : 'pending',
 	closed            : 'closed',
 	rejected          : 'closed',
-	overdue           : 'closed',
+	overdue           : 'overdue',
 	unresolved        : 'open',
 	escalated         : 'escalated',
 };
@@ -64,19 +64,19 @@ export const TICKET_OPEN_STATUS = [
 
 export const STATUS_LABEL_MAPPING = {
 	open: {
-		label : 'Open',
+		label : 'OPEN',
 		color : '#D6B300',
 	},
 	closed: {
-		label : 'Closed',
-		color : '#BDBDBD',
+		label : 'CLOSED',
+		color : '#009900',
 	},
-	rejected: {
-		label : 'Rejected!!',
-		color : '#F37166',
+	overdue: {
+		label : 'OVERDUE',
+		color : '#8d99ae',
 	},
 	pending: {
-		label : 'Pending',
+		label : 'PENDING',
 		color : '#F68B21',
 	},
 	escalated: {
