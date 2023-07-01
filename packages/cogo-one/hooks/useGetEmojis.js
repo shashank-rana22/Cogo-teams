@@ -12,9 +12,9 @@ const useGetEmojiList = ({ formattedData = {} }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const emojiListFetch = useCallback(async () => {
+	const emojiListFetch = useCallback(() => {
 		try {
-			await trigger();
+			trigger();
 		} catch (error) {
 			console.error(error);
 		}
