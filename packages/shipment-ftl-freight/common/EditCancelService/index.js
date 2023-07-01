@@ -90,7 +90,7 @@ function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { state, trade_type, service_type } = serviceData?.[0] || {};
+	const { state, trade_type, service_type } = serviceData?.[DEFAULT_INDEX] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
