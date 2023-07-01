@@ -54,7 +54,7 @@ function TicketChat({
 
 	const {
 		getTicketDetails = () => {},
-		ticketData = '',
+		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
 		ticketId: modalData?.ticketId || '',

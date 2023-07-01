@@ -30,7 +30,7 @@ const useGetTicketDetails = ({ ticketId }) => {
 	return {
 		getTicketDetails,
 		detailsLoading : loading,
-		ticketData     : data || '',
+		ticketData     : data || {},
 	};
 };
 
