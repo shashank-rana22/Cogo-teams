@@ -859,6 +859,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.overheads,
 			},
 			{
+				key           : 'business_finance-compliance',
+				title         : 'Compliance',
+				href          : '/v2/business-finance/compliance/[active_tab]',
+				as            : '/v2/business-finance/compliance/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.compliance,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -1344,11 +1353,13 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key   : 'coe-communication',
-				title : 'Communcation',
-				href  : '/communication',
-				as    : '/communication',
-				type  : 'link',
+				key           : 'coe-communication',
+				title         : 'Communcation',
+				href          : '/communication',
+				as            : '/communication',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.shipment,
 			},
 			{
 				key           : 'coe-ltl_run_sheets',

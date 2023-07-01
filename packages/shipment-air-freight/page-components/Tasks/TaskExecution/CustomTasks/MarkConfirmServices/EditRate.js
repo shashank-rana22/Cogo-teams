@@ -1,8 +1,7 @@
 import { Layout } from '@cogoport/air-modules';
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import EditQuotations from './EditQuotations';
 import useEditQuotations from './EditQuotations/useEditQuotations';
@@ -13,8 +12,9 @@ import styles from './styles.module.css';
 import useUpdateServiceProvider from './updateServiceProviderFunc';
 
 const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
-const CONSTANT_ZERO = 0;
-const CONSTANT_TWO = 2;
+
+const START_INDEX_FOR_ORIGIN_LOCAL = 0;
+const START_INDEX_FOR_DESTINATION_LOCAL = 2;
 
 function CustomLayout({ localControls, controlForLocal, errors, task }) {
 	return (
@@ -33,11 +33,11 @@ function LocalsLayout(props) {
 		service.service_type === 'air_freight_local_service'
 	));
 	const CONTROLS_MAPPING = {
-		export : localControls.slice(CONSTANT_ZERO, CONSTANT_TWO),
-		import : localControls.slice(CONSTANT_TWO),
+		export : localControls.slice(START_INDEX_FOR_ORIGIN_LOCAL, START_INDEX_FOR_DESTINATION_LOCAL),
+		import : localControls.slice(START_INDEX_FOR_DESTINATION_LOCAL),
 	};
 
-	return validation.reverse().map((service) => (
+	return validation.map((service) => (
 		<div className={styles.service_provider} key={service.id}>
 			<CustomLayout
 				{...props}
@@ -60,22 +60,8 @@ function EditRate({
 }) {
 	const [errors, setError] = useState({});
 
-	const [airInput, setAirInput] = useState({
-		airline_id          : '',
-		service_provider_id : '',
-	});
-
-	const [localAirInput, setLocalAirInput] = useState({
-		airline_name          : '',
-		service_provider_name : '',
-	});
-
 	const mainAirFreight = (shipment_data?.all_services || []).find(
 		(service) => service.service_type === 'air_freight_service',
-	);
-
-	const mainLocalAirFreight = (shipment_data?.all_services || []).find(
-		(service) => service.service_type === 'air_freight_local_service',
 	);
 
 	const subsidiaryService = (shipment_data?.all_services || []).find(
@@ -89,69 +75,34 @@ function EditRate({
 
 	const otherControls = getOtherControls(task?.service_type, trade_type);
 
-	const formattedRateVal = formattedRate?.[formattedRate?.primary_service?.id];
-
 	const requiredRawControls = getControls({
 		service_type: task?.service_type,
 		servicesList,
 		subsidiaryService,
 	});
 
-	const handleAirChange = (obj, item) => {
-		let { airline_id, service_provider_id } = airInput;
-		if (item?.operator_type) {
-			airline_id = obj;
-		}
-		if (item?.trade_name) {
-			service_provider_id = obj;
-		}
-		setAirInput((prev) => ({
-			...prev,
-			airline_id,
-			service_provider_id,
-		}));
-	};
-
-	const handleAirLocalChange = (obj, item) => {
-		let { airline_name, service_provider_name } = airInput;
-		if (item?.operator_type) {
-			airline_name = item?.business_name;
-		}
-		if (item?.trade_name) {
-			service_provider_name = item?.business_name;
-		}
-		setLocalAirInput((prev) => ({
-			...prev,
-			airline_name,
-			service_provider_name,
-		}));
-	};
-
 	const requiredControls = requiredRawControls.map((ctrl) => ({
 		...ctrl,
 		value: formattedRate?.[formattedRate?.primary_service?.id]?.[ctrl.name]
 				|| ctrl.value,
-		onChange: handleAirChange,
 	}));
 
 	const localRawControls = getLocalControls(
 		task?.service_type,
-		shipment_data,
 		formattedRate,
 	);
 
-	const localControls = localRawControls.map((ctrl) => ({
-		...ctrl,
-		onChange: handleAirLocalChange,
-	}));
-
 	const { control, handleSubmit, watch } = useForm({ requiredControls });
+
+	const airServiceFormValues = watch();
 
 	const {
 		control: controlForLocal,
 		handleSubmit: handleSubmitLocal,
 		watch: watchForLocal,
-	} = useForm({ localControls });
+	} = useForm({ localRawControls });
+
+	const airLocalServiceFormValues = watchForLocal();
 
 	const { control: otherFieldControl, handleSubmit: otherHandleSubmit } = useForm({ otherControls });
 
@@ -184,49 +135,6 @@ function EditRate({
 		selectedCard,
 	});
 
-	useEffect(() => {
-		let airlineId;
-		let localAirlineId;
-		let serviceProviderId;
-		let localServiceProviderId;
-		if (!isEmpty(formattedRateVal)) {
-			airlineId = formattedRateVal?.airline_id;
-			serviceProviderId = formattedRateVal?.service_provider_id;
-			localAirlineId = formattedRateVal?.airline_id;
-			localServiceProviderId = formattedRateVal?.service_provider_id;
-		} else if (!isEmpty(servicesList)) {
-			(servicesList || []).forEach((service) => {
-				if (service?.service_type === 'air_freight_service') {
-					airlineId = service?.airline?.id;
-					serviceProviderId = service?.service_provider?.id;
-				}
-
-				if (service?.service_type === 'subsidiary_service') {
-					serviceProviderId = service?.service_provider?.id;
-				}
-
-				if (service?.service_type === 'air_freight_local_service') {
-					localAirlineId = service?.airline?.id;
-					localServiceProviderId = service?.service_provider?.id;
-				}
-			});
-		} else {
-			airlineId = mainAirFreight?.airline_id;
-			serviceProviderId = mainAirFreight?.service_provider_id;
-			localAirlineId = mainLocalAirFreight?.airline_id;
-			localServiceProviderId = mainLocalAirFreight?.service_provider_id;
-		}
-		setAirInput({
-			airline_id          : airlineId,
-			service_provider_id : serviceProviderId,
-		});
-		setLocalAirInput({
-			airline_id          : localAirlineId,
-			service_provider_id : localServiceProviderId,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Quotation Update and Reallocation</div>
@@ -239,7 +147,7 @@ function EditRate({
 				/>
 			</div>
 			<LocalsLayout
-				localControls={localControls}
+				localControls={localRawControls}
 				controlForLocal={controlForLocal}
 				errors={errors}
 				task={task}
@@ -264,8 +172,8 @@ function EditRate({
 					data={editQuote}
 					shipment_id={task?.shipment_id}
 					onCancel={onCancel}
-					airInput={airInput}
-					localAirInput={localAirInput}
+					airServiceFormValues={airServiceFormValues}
+					airLocalServiceFormValues={airLocalServiceFormValues}
 					reallocationFunc={reallocationFunc}
 					watchServiceProvider={watchServiceProvider}
 				/>

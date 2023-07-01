@@ -22,7 +22,7 @@ const FF_COST_BOOKING_APIS = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'update_shipment_air_csr_sheet',
