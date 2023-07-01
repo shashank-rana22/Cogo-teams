@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
 import { useContext } from 'react';
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 
 import { getDisplayDate } from '../utils/getDisplayDate';
 
@@ -17,20 +18,13 @@ export default function TimelineItem({
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
 
 	const { primary_service } = useContext(ShipmentDetailContext) || {};
-	const {
-		schedule_departure,
-		schedule_arrival,
-		selected_schedule_departure,
-		selected_schedule_arrival,
-		cargo_arrived_at,
-	} = primary_service || {};
 
 	const milestoneToDisplayDate = {
-		'Vessel Departed From Origin (ETD)'   : schedule_departure || selected_schedule_departure,
-		'Vessel Arrived At Destination (ETA)' : cargo_arrived_at || schedule_arrival || selected_schedule_arrival,
+		'Vessel Departed From Origin (ETD)'   : getDepartureArrivalDate(primary_service, 'departure'),
+		'Vessel Arrived At Destination (ETA)' : getDepartureArrivalDate(primary_service, 'arrival'),
 	};
 
-	const displayCompletedDate = completed_on || milestoneToDisplayDate[item?.milestone];
+	const displayCompletedDate = milestoneToDisplayDate[item?.milestone] || completed_on;
 
 	let isCompleted = (!!completed_on
 		|| (icd_milestones_to_show_completed || []).includes(milestone))
@@ -48,7 +42,7 @@ export default function TimelineItem({
 
 			{displayCompletedDate ? (
 				<>
-					<div className={label}>Completed On</div>
+					<div className={label}>{isCompleted ? 'Completed On' : 'Expected'}</div>
 					<div className={value}>
 						{getDisplayDate({ date: displayCompletedDate, formatType: 'dateTime' })}
 					</div>
