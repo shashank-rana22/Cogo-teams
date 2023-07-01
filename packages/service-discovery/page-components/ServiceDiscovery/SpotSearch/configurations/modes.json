@@ -10,7 +10,7 @@
 		"value": "lcl_freight", 
 		"label": "LCL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/3f7e67408b987cff893ec755108978b9.png",
-		"is_available": true,
+		"is_available": false,
 		"type":["seaport"] 
 	},
 	{ 

@@ -3,18 +3,8 @@
     background-color: #FFFFFF;
 }
 
-.header{
-    /* position: fixed;
-    top: 0;
-    width: 100%;
-    background: #FFFFFF;
-    padding: 16px 24px 0 24px;
-    box-shadow: 0px 8px 8px 0 #EBEBF0;  
-    width:100%; */
-}
 .loading{
     display: flex;
-    flex: 1;
     background: #FFFFFF;
     align-items: center;
     padding-left: 40px;

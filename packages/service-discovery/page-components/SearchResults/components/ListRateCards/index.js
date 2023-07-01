@@ -3,6 +3,7 @@ import React from 'react';
 import FclCard from '../RateCard/FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
+import Header from './Header';
 import styles from './styles.module.css';
 
 const RateCardMapping = {
@@ -25,6 +26,10 @@ function ListRateCards({
 	showComparison = false,
 	rateCardsForComparison = [],
 	comparisonCheckbox = {},
+	filters = {},
+	setFilters = () => {},
+	showFilterModal = {},
+	setShowFilterModal = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -36,6 +41,16 @@ function ListRateCards({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.header}>
+				<Header
+					ratesData={rates}
+					details={detail}
+					filters={filters}
+					setFilters={setFilters}
+					showFilterModal={showFilterModal}
+					setShowFilterModal={setShowFilterModal}
+				/>
+			</div>
 
 			{showComparison ? (
 				<ComparisonHeader

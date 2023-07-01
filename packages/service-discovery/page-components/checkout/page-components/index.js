@@ -2,6 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
+import Header from '../../../common/Header';
 import { CheckoutContext } from '../context';
 import bookingConfirmationType from '../helpers/bookingConfirmationType';
 import useGetCheckout from '../hooks/useGetCheckout';
@@ -9,6 +10,7 @@ import useGetOrganization from '../hooks/useGetOrganization';
 
 import EditMargin from './EditMargin';
 import PreviewBooking from './PreviewBooking';
+import styles from './styles.module.css';
 
 function Checkout() {
 	const {
@@ -149,13 +151,22 @@ function Checkout() {
 		},
 	};
 
-	const { Component:ActiveComponent, props:activeComponentProps } = COMPONENT_MAPPING[checkoutState];
+	const { Component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[checkoutState];
 
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
-			<ActiveComponent
-				{...activeComponentProps}
-			/>
+			<div className={styles.container}>
+				<Header
+					data={detail}
+					service_key="primary_service"
+					activePage="checkout"
+					loading={loading}
+				/>
+
+				<ActiveComponent
+					{...activeComponentProps}
+				/>
+			</div>
 		</CheckoutContext.Provider>
 	);
 }

@@ -2,11 +2,10 @@ import { Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState, useMemo } from 'react';
 
+import Header from '../../common/Header';
+
 import BookCheckout from './components/BookToCheckout';
 import Comparison from './components/Comparison';
-import EditDetailsHeader from './components/EditDetailsHeader';
-import Filters from './components/Filters';
-import Header from './components/Header';
 import ListRateCards from './components/ListRateCards';
 import SelectedRateCard from './components/SelectedRateCard';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
@@ -23,20 +22,19 @@ function SearchResults() {
 	const [showAdditionalHeader, setShowAdditionalHeader] = useState(false);
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
+	const [filters, setFilters] = useState({
+		currency: 'USD',
+	});
+
 	const [pageLoading, setPageLoading] = useState(false);
+	const [screen, setScreen] = useState('listRateCard');
+	const [selectedCard, setSelectedCard] = useState({});
+	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
 	const { query } = useRouter();
 	const { spot_search_id, importer_exporter_id } = query;
 	const { refetchSearch, loading, data } = useGetSpotSearch();
 	const { detail, rates = [] } = data || {};
-
-	const [screen, setScreen] = useState('listRateCard');
-	const [selectedCard, setSelectedCard] = useState({});
-	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
-
-	const SUB_HEADER_COMPONENT_MAPPING = useMemo(() => ({
-		edit_details: EditDetailsHeader,
-	}), []);
 
 	useEffect(() => {
 		refetchSearch({ spot_search_id, importer_exporter_id });
@@ -50,7 +48,6 @@ function SearchResults() {
 			</div>
 		);
 	}
-	const Component = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -69,6 +66,10 @@ function SearchResults() {
 			showComparison,
 			rateCardsForComparison,
 			comparisonCheckbox,
+			filters,
+			setFilters,
+			showFilterModal,
+			setShowFilterModal,
 		},
 		selectedCard: {
 			rateCardData: selectedCard,
@@ -89,31 +90,25 @@ function SearchResults() {
 		},
 	};
 
+	console.log('Filters', filters);
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<Header
-					data={data?.detail}
-					showAdditionalHeader={showAdditionalHeader}
-					setShowAdditionalHeader={setShowAdditionalHeader}
-					setHeaderProps={setHeaderProps}
-					setShowFilterModal={setShowFilterModal}
-				/>
+			<Header
+				data={data?.detail}
+				showAdditionalHeader={showAdditionalHeader}
+				setShowAdditionalHeader={setShowAdditionalHeader}
+				setHeaderProps={setHeaderProps}
+				headerProps={headerProps}
+				loading={loading}
+				activePage="search_results"
+			/>
+
+			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>
+
+				<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
+
 			</div>
-
-			{showAdditionalHeader ? (
-				<Component {...headerProps} />
-			) : null}
-
-			{showFilterModal ? (
-				<Filters
-					data={data?.detail}
-					show={showFilterModal}
-					setShow={setShowFilterModal}
-				/>
-			) : null}
-
-			<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
 
 		</div>
 	);

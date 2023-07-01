@@ -1,13 +1,11 @@
 
 .container{
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-
+    position: sticky;
+    top: 0;
     background: #FFFFFF;
-    border-bottom: 1px solid #EBEBF0;
+    padding: 16px 24px 0 24px;
     box-shadow: 0px 8px 8px 0 #EBEBF0;  
-    width: 100%;
+    z-index: 100;
 
     &.light{
         background:  #FFFFFF !important;
@@ -22,25 +20,15 @@
         box-shadow: 0px 8px 8px 0 #929292;  
     }
 }
+.header_wrapper{
+    height: 140px;
+}
 
 .details_header{
     display: flex;
     align-items: center;
 }
 
-.location_details{
-    display: flex;
-    align-items: center;
-    max-width: 50%;
-}
-.additional_header{
-    height:200px;
-    transition: height 0.5s ease-in-out;
-}
-.show{
-    height:100%;
-    transition: height 0.5s ease-in-out;
-}
 .back_button{
     display: flex;
     align-items: center;

@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    align-items: center;
+
+    :global {
+        .ui_select_container {
+            width: 90px;
+        }
+
+        .ui_input_container {
+            width: 90px;
+        }
+    }
+}

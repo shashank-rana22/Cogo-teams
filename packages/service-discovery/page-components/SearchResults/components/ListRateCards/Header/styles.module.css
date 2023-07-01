@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.count{
+    font-size: 24px;
+    color: #000;
+}
+.filters_container{
+    display: flex;
+    align-items: center;
+}
+.filter_button{
+    margin: 0 40px;
+}

@@ -15,7 +15,14 @@ const useCreateSearch = () => {
 		try {
 			let payload = {};
 
-			const { organization_branch_id, organization_id, service_type, user_id, origin, destination } = values;
+			const {
+				organization_branch_id,
+				organization_id,
+				service_type,
+				user_id,
+				origin,
+				destination,
+			} = values;
 
 			if (action === 'default') {
 				const defaultPayload = getDefaultPayload({

@@ -45,7 +45,7 @@ function Routes({
 
 		const spot_search_id = await createSearch({
 			action : 'default',
-			values : { service_type, ...organization, ...formValues },
+			values : { service_type, ...organization, ...formValues, setButtonDisabled },
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
@@ -57,12 +57,11 @@ function Routes({
 	};
 
 	useEffect(() => {
-		let canContinue = true;
-		Object.keys(formValues || {}).forEach((key) => {
-			if (!formValues[key] || isEmpty(formValues[key])) {
-				canContinue = false;
-			}
-		});
+		let canContinue = false;
+
+		if (!isEmpty(formValues?.origin) && !isEmpty(formValues?.destination)) {
+			canContinue = true;
+		}
 		setButtonDisabled(!canContinue);
 	}, [formValues]);
 

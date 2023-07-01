@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Placeholder } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -6,21 +6,25 @@ import getLocationInfo from '../../page-components/SearchResults/utils/locations
 
 import styles from './styles.module.css';
 
-function LocationDetails({ data = {}, platformTheme = 'light' }) {
-	const { origin, destination } = getLocationInfo(data, {}, 'search_type');
+function LocationDetails({
+	service_key = 'search_type',
+	data = {},
+	platformTheme = 'light',
+	activePage = 'search_results',
+	loading = false,
+}) {
+	let finalData = data;
 
-	const originCountry = origin?.display_name?.split(', ');
-	const destinationCountry = destination?.display_name?.split(', ');
+	if (activePage === 'checkout') {
+		const { primary_service, services } = data;
 
-	const {
-		name: originPortName = '',
-		port_code: originPortCode = '',
-	} = origin || {};
+		const primary_service_data = Object.values(services || {}).find(
+			(itm) => itm.service_type === primary_service,
+		);
+		finalData = { ...(data || {}), ...(primary_service_data || {}) };
+	}
 
-	const {
-		name: destinationPortName = '',
-		port_code: destinationPortCode = '',
-	} = destination || {};
+	const { origin, destination } = getLocationInfo(finalData, {}, service_key);
 
 	const styledTheme = {
 		container             : `${styles.container} ${styles[platformTheme]}`,
@@ -32,26 +36,57 @@ function LocationDetails({ data = {}, platformTheme = 'light' }) {
 		tooltip_content       : `${styles.tooltip_content} ${styles[platformTheme]}`,
 	};
 
-	return (
-		<div className={styledTheme.container}>
+	const renderLocationItem = (location) => {
+		const country = location?.display_name?.split(', ');
+
+		const { name, port_code } = location || {};
+
+		return (
 			<div className={styledTheme.location}>
 				<span className={styledTheme.location_country_text}>
-					{`${originPortCode}, ${originCountry?.pop()}`}
+					{`${port_code}, ${country?.pop()}`}
 				</span>
 
 				<Tooltip
 					placement="top"
 					className={styledTheme.tooltip}
-					content={<span className={styledTheme.tooltip_content}>{originPortName}</span>}
+					content={<span className={styledTheme.tooltip_content}>{name}</span>}
 				>
 					<div
 						className={styledTheme.location_port_text}
 						style={{ maxWidth: origin ? '' : '80%' }}
 					>
-						{originPortName}
+						{name}
 					</div>
 				</Tooltip>
 			</div>
+		);
+	};
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.location}>
+					<Placeholder height="25px" width="200px" margin="0px 0px 8px 0px" />
+					<Placeholder height="25px" width="150px" />
+				</div>
+
+				<div className={styledTheme.icon}>
+					<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} />
+				</div>
+				<div className={styles.location}>
+					<Placeholder height="25px" width="200px" margin="0px 0px 8px 0px" />
+					<Placeholder height="25px" width="150px" />
+				</div>
+
+			</div>
+		);
+	}
+
+	return (
+		<div className={styledTheme.container}>
+
+			{renderLocationItem(origin)}
 
 			{destination ? (
 				<>
@@ -59,24 +94,7 @@ function LocationDetails({ data = {}, platformTheme = 'light' }) {
 						<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} />
 					</div>
 
-					<div className={styledTheme.location}>
-						<span className={styledTheme.location_country_text}>
-							{`${destinationPortCode}, ${destinationCountry?.pop()}`}
-						</span>
-
-						<Tooltip
-							placement="top"
-							content={<span className={styledTheme.tooltip_content}>{destinationPortName}</span>}
-							style={{ minWidth: 'max-content' }}
-						>
-							<div
-								className={styledTheme.location_port_text}
-								style={{ maxWidth: destination ? '' : '80%' }}
-							>
-								{destinationPortName}
-							</div>
-						</Tooltip>
-					</div>
+					{renderLocationItem(destination)}
 				</>
 			) : null}
 
