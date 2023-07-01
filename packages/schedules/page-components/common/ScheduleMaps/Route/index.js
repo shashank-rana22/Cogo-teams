@@ -1,10 +1,11 @@
-import { Polyline } from "@cogoport/maps";
+import { Polyline, L } from "@cogoport/maps";
+import { useEffect } from "react";
 
-function Route({ positions, map, pathOptions }) {
-    useEffect(() => {
-        const bounds = L.LatLngBounds(positions);
-        setBounds(bounds);
-    }, [JSON.stringify(positions)]);
+function Route({ positions, map, pathOptions, setBounds = () => {} }) {
+    // useEffect(() => {
+    //     const bounds = new L.LatLngBounds(positions);
+    //     setBounds(bounds);
+    // }, [JSON.stringify(positions)]);
 
     return (
         <Polyline

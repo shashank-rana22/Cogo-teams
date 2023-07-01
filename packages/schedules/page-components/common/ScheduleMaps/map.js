@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 
 import Pointer from "./Pointer";
 import Route from "./Route";
+import { isEmpty } from "@cogoport/utils";
 
 const center = [20.5937, 78.9629];
 const icon = new L.Icon({
@@ -20,31 +21,14 @@ const baseLayer = [
     },
 ];
 
-function MapComp({ curvePoints, curvePointLength }) {
+function MapComp({ path, points, bounds, setBounds }) {
     const [map, setMap] = useState();
-    const { bounds } = useContext();
 
-    curvePointLength = curvePoints?.length;
+    const curvePointLength = path?.length;
 
-    // const curvePoints = [
-    //     [18.952, 72.948],
-    //     [18.952, 72.948],
-    //     [18.941361, 72.80777],
-    //     [19, 72.4],
-    //     [20, 70],
-    //     [20.0838, 64.5005],
-    //     [21.440441, 62.375976],
-    //     [22.7, 60.4],
-    //     [24, 59],
-    //     [25.5, 57.1],
-    //     [26.422112, 56.763061],
-    //     [26.4, 56.4],
-    //     [25.6, 55.2],
-    //     [25.00328, 55.052067],
-    // ];
     useEffect(() => {
-        if (map && bounds instanceof L.LatLngBounds) {
-            map.fitBounds(bounds);
+        if (!isEmpty(bounds) && map && bounds instanceof L.LatLngBounds) {
+            map?.fitBounds(bounds);
         }
     }, [bounds, map]);
 
@@ -55,14 +39,15 @@ function MapComp({ curvePoints, curvePointLength }) {
             style={{ height: "700px", width: "100%" }}
             zoom={4}
             baseLayer={baseLayer}
+            setMap={setMap}
         >
-            <Pointer lat={57.15} lng={-2.09} iconSvg="source" map={map} />
-            <Route
-                positions={curvePoints}
+            <Pointer
+                points={points}
+                iconSvg="source"
                 map={map}
-                pathOptions={lineOptions}
+                setBounds={setBounds}
             />
-            <Pointer lat={7.56} lng={3.44} iconSvg="source" map={map} />
+            <Route positions={path} map={map} pathOptions={lineOptions} />
         </CogoMaps>
     );
 }
