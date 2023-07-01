@@ -1,4 +1,4 @@
-import EmptyState from '@cogoport/air-modules/components/Sop/EmptyState';
+import { EmptyState } from '@cogoport/air-modules';
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 

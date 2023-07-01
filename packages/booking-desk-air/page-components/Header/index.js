@@ -4,8 +4,8 @@ import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import serviceWiseTabMappings from '../../constants/service-tabs-mappings';
-import shipmentStateMappings from '../../constants/shipment-state-mappings';
+import SERVICE_WISE_MAPPINGS from '../../constants/service-tabs-mappings';
+import SHIPMENT_STATE_MAPPINGS from '../../constants/shipment-state-mappings';
 
 import Filter from './Filter';
 import styles from './styles.module.css';
@@ -36,7 +36,7 @@ function Header({
 				className={styles.header_service_tab}
 
 			>
-				{serviceWiseTabMappings.map((item) => {
+				{SERVICE_WISE_MAPPINGS.map((item) => {
 					const { name = '', title = '' } = item;
 					return (
 						<TabPanel
@@ -54,7 +54,7 @@ function Header({
 					activeTab={shipmentStateTab}
 					onChange={setShipmentStateTab}
 				>
-					{shipmentStateMappings.map((item) => {
+					{SHIPMENT_STATE_MAPPINGS.map((item) => {
 						const { name = '', title = '' } = item;
 						return (
 							<TabPanel

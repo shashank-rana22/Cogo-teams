@@ -21,12 +21,12 @@ const SingleCountryDataServices = {
 	},
 };
 
-function PortDetails({ item = {} }) {
+function PortDetails({ item }) {
 	const {
 		shipment_type = '',
 		trade_type = '',
 		inco_term = '',
-	} = item;
+	} = item || {};
 
 	const isSingleDataCountryServices = Object.keys(SingleCountryDataServices).includes(shipment_type);
 
@@ -35,7 +35,7 @@ function PortDetails({ item = {} }) {
 	const tradeType = trade_type || INCO_TERM_MAPING[inco_term];
 
 	const handleLocationPort = (key) => {
-		const { display_name = '', port_code = '', postal_code = '' } = item[`${key}`] || {};
+		const { display_name = '', port_code = '', postal_code = '' } = item[key] || {};
 		return (
 			<div className={styles.port_details_description}>
 				{port_code || postal_code ? (

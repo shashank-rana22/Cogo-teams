@@ -1,4 +1,4 @@
-const SERVICE_WISE_LABELS = {
+const SHIPMENT_WISE_LABELS = {
 	air_freight: [
 		'inco_term',
 		'trade_type',
@@ -38,4 +38,4 @@ const SERVICE_WISE_LABELS = {
 		'awb_execution_date',
 	],
 };
-export default SERVICE_WISE_LABELS;
+export default SHIPMENT_WISE_LABELS;

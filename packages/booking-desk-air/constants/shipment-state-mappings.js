@@ -1,4 +1,4 @@
-const shipmentStateMappings = [
+const SHIPMENT_STATE_MAPPINGS = [
 	{
 		name  : 'ongoing',
 		title : 'ONGOING',
@@ -12,4 +12,4 @@ const shipmentStateMappings = [
 		title : 'CANCELLED',
 	},
 ];
-export default shipmentStateMappings;
+export default SHIPMENT_STATE_MAPPINGS;

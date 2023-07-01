@@ -1,4 +1,4 @@
-const serviceWiseTabMappings = [
+const SERVICE_WISE_MAPPINGS = [
 	{
 		name  : 'air_freight',
 		title : 'Air International',
@@ -16,4 +16,4 @@ const serviceWiseTabMappings = [
 		title : 'Air Domestic',
 	},
 ];
-export default serviceWiseTabMappings;
+export default SERVICE_WISE_MAPPINGS;
