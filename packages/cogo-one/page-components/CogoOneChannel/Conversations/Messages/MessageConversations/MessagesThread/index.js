@@ -10,16 +10,11 @@ import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
 
-function MessageMapping({ conversation_type, ...restProps }) {
-	switch (conversation_type) {
-		case 'sent':
-			return <ReceiveDiv {...restProps} />;
-		case 'received':
-			return <SentDiv {...restProps} />;
-		default:
-			return <TimeLine {...restProps} />;
-	}
-}
+const CONVERSATION_TYPE = {
+	sent     : ReceiveDiv,
+	received : SentDiv,
+	default  : TimeLine,
+};
 
 function MessagesThread({
 	loadingPrevMessages = false,
@@ -53,18 +48,22 @@ function MessagesThread({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage, index) => (
-				<MessageMapping
-					key={eachMessage?.created_at}
-					conversation_type={eachMessage?.conversation_type || 'unknown'}
-					eachMessage={eachMessage}
-					activeMessageCard={activeMessageCard}
-					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
-					user_name={user_name}
-					setRaiseTicketModal={setRaiseTicketModal}
-					formattedData={formattedData}
-				/>
-			))}
+			{(messagesData || []).map((eachMessage, index) => {
+				const Component = CONVERSATION_TYPE[eachMessage?.conversation_type] || CONVERSATION_TYPE.default;
+
+				return (
+					<Component
+						key={eachMessage?.created_at}
+						conversation_type={eachMessage?.conversation_type || 'unknown'}
+						eachMessage={eachMessage}
+						activeMessageCard={activeMessageCard}
+						messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+						user_name={user_name}
+						setRaiseTicketModal={setRaiseTicketModal}
+						formattedData={formattedData}
+					/>
+				);
+			})}
 
 		</>
 	);

@@ -11,7 +11,6 @@ import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
 const SET_TIME_OUT = 200;
-const DEFAULT_VALUE = 0;
 const DISTANCE_FROM_TOP = 0;
 const LAST_VALUE = 1;
 
@@ -44,7 +43,7 @@ function MessageConversations({
 	const { id = '', channel_type = '' } = activeMessageCard;
 
 	const urlArray = decodeURI(finalUrl)?.split('/');
-	const fileName = urlArray[(urlArray?.length || DEFAULT_VALUE) - LAST_VALUE] || '';
+	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 

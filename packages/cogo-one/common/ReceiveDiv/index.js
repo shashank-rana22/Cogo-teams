@@ -11,7 +11,7 @@ import RepliedMessage from '../RepliedMessage';
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 
-function TicketPopoverContent({ formattedData, setRaiseTicketModal, eachMessage: data }) {
+function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
 	const triggerModal = () => {
 		setRaiseTicketModal((p) => {
 			if (p?.state) {
@@ -69,7 +69,7 @@ function ReceiveDiv({
 						content={(
 							<TicketPopoverContent
 								setRaiseTicketModal={setRaiseTicketModal}
-								eachMessage={eachMessage}
+								data={eachMessage}
 								formattedData={formattedData}
 							/>
 						)}
