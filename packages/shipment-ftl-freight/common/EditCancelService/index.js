@@ -21,7 +21,7 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 import getEditServiceDetails from './utils/getEditServiceDetails';
 
-const actionButtons = {
+const ACTION_BUTTON = {
 	supplier_reallocation : { label: 'Edit Supplier', value: 'supplier_reallocation' },
 	edit_truck_number     : { label: 'Edit Truck Number', value: 'edit_truck_number' },
 	edit_eta_etd          : { label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
@@ -103,17 +103,17 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons.supplier_reallocation.show = getCanEditSupplier({
+	ACTION_BUTTON.supplier_reallocation.show = getCanEditSupplier({
 		shipment_data, user_data, state, activeStakeholder,
 	});
-	actionButtons.edit_truck_number.show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons.edit_eta_etd.show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons.edit_driver_details.show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons.verify_truck.show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons.verify_driver.show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons.cancel.show = getCanCancelService({ state, activeStakeholder });
+	ACTION_BUTTON.edit_truck_number.show = getEditServiceDetails({ state, activeStakeholder });
+	ACTION_BUTTON.edit_eta_etd.show = getEditServiceDetails({ state, activeStakeholder });
+	ACTION_BUTTON.edit_driver_details.show = getEditServiceDetails({ state, activeStakeholder });
+	ACTION_BUTTON.verify_truck.show = getEditServiceDetails({ state, activeStakeholder });
+	ACTION_BUTTON.verify_driver.show = getEditServiceDetails({ state, activeStakeholder });
+	ACTION_BUTTON.cancel.show = getCanCancelService({ state, activeStakeholder });
 
-	if (!Object.values(actionButtons).some((actionButton) => actionButton.show)) {
+	if (!Object.values(ACTION_BUTTON).some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
@@ -122,7 +122,7 @@ function EditCancelService({ serviceData = {} }) {
 	const isTruckPresent =	truckList.length > DEFAULT_INDEX
 		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
 
-	const content = Object.values(actionButtons).map(({ label, value, show }) => (show ? (
+	const content = Object.values(ACTION_BUTTON).map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
 			role="button"

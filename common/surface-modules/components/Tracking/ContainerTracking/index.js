@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
 
-const VALUE_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const TRUCK_OPTIONS = [];
 
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
@@ -26,7 +26,7 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		data: list,
 	} = useGetSaasContainerSubscription({
 		serialId,
-		truckNumber: containerNo || TRUCK_OPTIONS?.[VALUE_INDEX]?.value,
+		truckNumber: containerNo || TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value,
 	});
 
 	const ContainerOptions = Array.isArray(list)
@@ -47,8 +47,8 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 				setContainerNo={setContainerNo}
 				containerNo={
 							containerNo
-							|| ContainerOptions?.[VALUE_INDEX]?.value
-							|| TRUCK_OPTIONS?.[VALUE_INDEX]?.value
+							|| ContainerOptions?.[DEFAULT_INDEX]?.value
+							|| TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value
 						}
 				truckOptions={TRUCK_OPTIONS}
 				shipmentId={shipment_data?.id}
