@@ -23,7 +23,7 @@ const useSendChat = ({
 		user_name: profile?.user?.name,
 	}));
 
-	const { sendMessage, loading } = useSendMessage({ channel_type, activeChatCollection });
+	const { sendMessage, loading } = useSendMessage({ channel_type, activeChatCollection, formattedData });
 
 	let messageFireBaseDoc;
 	if (id && channel_type) {

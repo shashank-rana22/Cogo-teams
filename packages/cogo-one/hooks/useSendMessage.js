@@ -9,7 +9,7 @@ import { API_MAPPING } from '../constants';
 
 const geo = getGeoConstants();
 
-const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
+const useSendMessage = ({ channel_type = '', activeChatCollection, formattedData }) => {
 	const {
 		user:{ id },
 
@@ -34,6 +34,7 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 		messageFireBaseDoc,
 		scrollToBottom,
 	}) => {
+		const { agent_type = '' } = formattedData || {};
 		let service = 'user';
 		let service_id = geo.uuid.cogoverse_user_id;
 		if (user_id) {
@@ -58,7 +59,11 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 					sender_user_id : id,
 				},
 			});
-			await addDoc(activeChatCollection, { ...adminChat, communication_id: res?.data?.id });
+			await addDoc(activeChatCollection, {
+				...adminChat,
+				agent_type       : agent_type || 'bot',
+				communication_id : res?.data?.id,
+			});
 			scrollToBottom();
 			const old_count = document.data().new_user_message_count;
 
