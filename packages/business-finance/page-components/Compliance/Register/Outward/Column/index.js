@@ -72,7 +72,6 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 							<IcMDownload height={15} width={15} className={styles.download_icon} />
 						</div>
 					)}
-
 			</div>
 		);
 	};
