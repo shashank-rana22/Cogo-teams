@@ -6,8 +6,8 @@ const getSubjectivePayload = ({
 	questionSetId,
 	testQuestionId = '',
 	editDetails = {},
-	questionEditorValue = {},
-	setQuestionError = () => {},
+	questionState,
+	setQuestionState,
 	subjectiveEditorValue = {},
 	uploadable = false,
 }) => {
@@ -24,8 +24,11 @@ const getSubjectivePayload = ({
 		return { id: testQuestionId, status: 'inactive' };
 	}
 
-	if (!questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText()) {
-		setQuestionError({ question_0: true });
+	if (!questionState?.editorValue?.question_0?.getEditorState()?.getCurrentContent()?.hasText()) {
+		setQuestionState((prev) => ({
+			...prev,
+			error: { question_0: true },
+		}));
 		return { hasError: ['Question is required'] };
 	}
 
@@ -35,8 +38,8 @@ const getSubjectivePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		...(!isEmpty(questionEditorValue)
-			? { question_text: questionEditorValue?.question_0.toString('html') } : {}),
+		...(!isEmpty(questionState?.editorValue)
+			? { question_text: questionState?.editorValue?.question_0?.toString('html') } : {}),
 		character_limit,
 		answers: [{
 			test_question_answer_id : test_question_answers?.[0]?.id,

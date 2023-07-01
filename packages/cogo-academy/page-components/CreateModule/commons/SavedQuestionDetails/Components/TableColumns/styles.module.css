@@ -24,7 +24,7 @@
 	min-width: 600px;
 }
 
-.question{
+.question {
 	max-width: 600px;
 
 	img {
@@ -33,6 +33,6 @@
 	}
 }
 
-.question_text{
+.question_text {
 	text-decoration: underline;
 }

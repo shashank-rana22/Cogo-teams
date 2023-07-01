@@ -37,10 +37,8 @@ function CreateQuestion({
 		register,
 		editorValue,
 		setEditorValue,
-		questionEditorValue,
-		setQuestionEditorValue,
-		questionError,
-		setQuestionError,
+		questionState,
+		setQuestionState,
 		caseStudyQuestionEditorValue,
 		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,
@@ -102,10 +100,8 @@ function CreateQuestion({
 						listSetQuestions={listSetQuestions}
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}
-						questionEditorValue={questionEditorValue}
-						setQuestionEditorValue={setQuestionEditorValue}
-						questionError={questionError}
-						setQuestionError={setQuestionError}
+						questionState={questionState}
+						setQuestionState={setQuestionState}
 						subjectiveEditorValue={subjectiveEditorValue}
 						setSubjectiveEditorValue={setSubjectiveEditorValue}
 						uploadable={uploadable}

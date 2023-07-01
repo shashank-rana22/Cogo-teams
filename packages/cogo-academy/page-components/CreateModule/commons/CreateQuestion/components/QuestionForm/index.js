@@ -40,10 +40,8 @@ function QuestionForm({
 	listSetQuestions,
 	editorValue,
 	setEditorValue,
-	questionEditorValue,
-	setQuestionEditorValue,
-	questionError,
-	setQuestionError,
+	questionState,
+	setQuestionState,
 	subjectiveEditorValue,
 	setSubjectiveEditorValue = () => {},
 	uploadable,
@@ -60,9 +58,6 @@ function QuestionForm({
 
 		return hash;
 	}, []);
-
-	const STATE_FUNCTIONS = useMemo(() => [setEditorValue, setQuestionEditorValue,
-		setQuestionError], [setEditorValue, setQuestionEditorValue, setQuestionError]);
 
 	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
 
@@ -84,9 +79,12 @@ function QuestionForm({
 			[`case_questions_${index + 1}_explanation`]: RichTextEditor.createEmptyValue(),
 		}));
 
-		setQuestionEditorValue((prev) => ({
+		setQuestionState((prev) => ({
 			...prev,
-			[`case_questions_${index + 1}`]: RichTextEditor.createEmptyValue(),
+			editorValue: {
+				...prev.editorValue,
+				[`case_questions_${index + 1}`]: RichTextEditor.createEmptyValue(),
+			},
 		}));
 	};
 
@@ -98,15 +96,24 @@ function QuestionForm({
 			question_0_explanation: RichTextEditor.createEmptyValue(),
 		}));
 
-		setQuestionEditorValue((prev) => ({
+		setQuestionState((prev) => ({
 			...prev,
-			question_0: RichTextEditor.createEmptyValue(),
+			editorValue: {
+				...prev.editorValue,
+				question_0: RichTextEditor.createEmptyValue(),
+			},
 		}));
 	}
 
 	const handleDeleteNewObject = (index) => {
 		remove(index, 1);
-		updateStates({ STATE_FUNCTIONS, index, OFFSET });
+
+		updateStates({
+			setQuestionState,
+			setEditorValue,
+			index: questionState?.editorValue?.question_0 ? (index + OFFSET) : index,
+			OFFSET,
+		});
 	};
 
 	return (
@@ -133,10 +140,8 @@ function QuestionForm({
 							questionTypeWatch={questionTypeWatch}
 							editorValue={editorValue}
 							setEditorValue={setEditorValue}
-							questionEditorValue={questionEditorValue}
-							setQuestionEditorValue={setQuestionEditorValue}
-							questionError={questionError}
-							setQuestionError={setQuestionError}
+							questionState={questionState}
+							setQuestionState={setQuestionState}
 							subjectiveEditorValue={subjectiveEditorValue}
 							setSubjectiveEditorValue={setSubjectiveEditorValue}
 							uploadable={uploadable}

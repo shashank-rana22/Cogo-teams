@@ -11,8 +11,8 @@ const getCaseStudyPayload = ({
 	questionSetId,
 	editDetails = {},
 	index: questionIndex = '',
-	questionEditorValue = {},
-	setQuestionError = () => {},
+	questionState = {},
+	setQuestionState,
 	caseStudyQuestionEditorValue = {},
 	editorValue = {},
 }) => {
@@ -28,13 +28,19 @@ const getCaseStudyPayload = ({
 		const checkError = checkErrors({
 			options,
 			question_type,
-			hasText: questionEditorValue?.
-				[`case_questions_${questionIndex}`]?.getEditorState().getCurrentContent().hasText(),
+			hasText: questionState?.editorValue?.
+				[`case_questions_${questionIndex}`]?.getEditorState()?.getCurrentContent()?.hasText(),
 		});
 
 		if (checkError !== 'noError') {
 			if (checkError === 'Question is required') {
-				setQuestionError((prev) => ({ ...prev, [`case_questions_${questionIndex}`]: true }));
+				setQuestionState((prev) => ({
+					...prev,
+					error: {
+						...prev.error,
+						[`case_questions_${questionIndex}`]: true,
+					},
+				}));
 			}
 			hasError.push(checkError);
 		}
@@ -61,7 +67,7 @@ const getCaseStudyPayload = ({
 
 		return {
 			...(action === 'update' ? { id: caseStudyQuestionId } : { test_question_id: testQuestionId }),
-			question_text : questionEditorValue?.[`case_questions_${questionIndex}`].toString('html'),
+			question_text : questionState?.editorValue?.[`case_questions_${questionIndex}`].toString('html'),
 			question_type,
 			answers,
 			explanation   : [editorValue?.[`case_questions_${questionIndex}_explanation`].toString('html')],
@@ -93,7 +99,7 @@ const getCaseStudyPayload = ({
 
 		return {
 			question_type : indQuestionType,
-			question_text : questionEditorValue?.[`case_questions_${caseQuestionIndex}`].toString('html'),
+			question_text : questionState?.editorValue?.[`case_questions_${caseQuestionIndex}`].toString('html'),
 			answers,
 			explanation   : [editorValue?.[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
 		};
@@ -101,11 +107,25 @@ const getCaseStudyPayload = ({
 
 	const hasError = [];
 
-	case_questions.forEach((item) => {
+	case_questions.forEach((item, index) => {
 		const { options, question_type:indQuestionType } = item || {};
-		const checkError = checkErrors({ options, question_type: indQuestionType });
+		const checkError = checkErrors({
+			options,
+			question_type : indQuestionType,
+			hasText       : questionState?.editorValue?.
+				[`case_questions_${index}`]?.getEditorState()?.getCurrentContent()?.hasText(),
+		});
 
 		if (checkError !== 'noError') {
+			if (checkError === 'Question is required') {
+				setQuestionState((prev) => ({
+					...prev,
+					error: {
+						...prev.error,
+						[`case_questions_${index}`]: true,
+					},
+				}));
+			}
 			hasError.push(checkError);
 		}
 	});

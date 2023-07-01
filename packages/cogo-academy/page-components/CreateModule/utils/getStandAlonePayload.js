@@ -9,8 +9,8 @@ const getStandAlonePayload = ({
 	questionSetId,
 	editDetails = {},
 	editorValue = {},
-	questionEditorValue = {},
-	setQuestionError = () => {},
+	questionState,
+	setQuestionState,
 }) => {
 	const { question = [], topic } = values || {};
 
@@ -29,11 +29,16 @@ const getStandAlonePayload = ({
 	const checkError = checkErrors({
 		options,
 		question_type,
-		hasText: questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText(),
+		hasText: questionState?.editorValue?.question_0?.getEditorState().getCurrentContent().hasText(),
 	});
 
 	if (checkError !== 'noError') {
-		if (checkError === 'Question is required') setQuestionError({ question_0: true });
+		if (checkError === 'Question is required') {
+			setQuestionState((prev) => ({
+				...prev,
+				error: { question_0: true },
+			}));
+		}
 		hasError.push(checkError);
 	}
 
@@ -60,8 +65,8 @@ const getStandAlonePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		...(!isEmpty(questionEditorValue)
-			? { question_text: questionEditorValue?.question_0.toString('html') } : {}),
+		...(!isEmpty(questionState?.editorValue)
+			? { question_text: questionState?.editorValue?.question_0?.toString('html') } : {}),
 		...(!isEmpty(editorValue) ? { explanation: [editorValue?.question_0_explanation.toString('html')] } : {}),
 		answers,
 	};

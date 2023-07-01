@@ -23,9 +23,8 @@ function useHandleSingleQuestion({
 	questionTypeWatch,
 	editorValue,
 	setEditorValue,
-	questionEditorValue,
-	setQuestionEditorValue,
-	setQuestionError,
+	questionState = {},
+	setQuestionState = () => {},
 	caseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
@@ -39,9 +38,6 @@ function useHandleSingleQuestion({
 		return hash;
 	}, [mode]);
 
-	const STATE_FUNCTIONS = useMemo(() => [setEditorValue, setQuestionEditorValue,
-		setQuestionError], [setEditorValue, setQuestionEditorValue, setQuestionError]);
-
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
 		questionSetId,
 		setEditDetails,
@@ -52,15 +48,20 @@ function useHandleSingleQuestion({
 		editDetails,
 		index,
 		editorValue,
-		questionEditorValue,
-		setQuestionError,
+		questionState,
+		setQuestionState,
 		caseStudyQuestionEditorValue,
 	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
-			updateStates({ STATE_FUNCTIONS, index, OFFSET });
+			updateStates({
+				setQuestionState,
+				setEditorValue,
+				index: questionState?.editorValue?.question_0 ? (index + OFFSET) : index,
+				OFFSET,
+			});
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
@@ -91,11 +92,15 @@ function useHandleSingleQuestion({
 
 	const handleChangeQuestionEditor = (value) => {
 		if (questionTypeWatch === 'case_study') {
-			setQuestionEditorValue((prev) => ({ ...prev, [`case_questions_${index}`]: value }));
-			setQuestionError((prev) => ({ ...prev, [`case_questions_${index}`]: false }));
+			setQuestionState((prev) => ({
+				editorValue : { ...prev.editorValue, [`case_questions_${index}`]: value },
+				error       : { ...prev.error, [`case_questions_${index}`]: false },
+			}));
 		} else {
-			setQuestionEditorValue({ question_0: value });
-			setQuestionError({ question_0: false });
+			setQuestionState({
+				editorValue : { question_0: value },
+				error       : { question_0: false },
+			});
 		}
 	};
 

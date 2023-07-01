@@ -21,8 +21,8 @@ function useUpdateCaseStudyQuestion({
 	editDetails,
 	index,
 	editorValue = {},
-	questionEditorValue = {},
-	setQuestionError = () => {},
+	questionState = {},
+	setQuestionState = () => {},
 	caseStudyQuestionEditorValue,
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
@@ -58,8 +58,8 @@ function useUpdateCaseStudyQuestion({
 			editDetails,
 			index,
 			editorValue,
-			questionEditorValue,
-			setQuestionError,
+			questionState,
+			setQuestionState,
 			caseStudyQuestionEditorValue,
 		});
 

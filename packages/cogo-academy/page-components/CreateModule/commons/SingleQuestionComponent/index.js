@@ -26,10 +26,8 @@ function SingleQuestionComponent({
 	mode,
 	editorValue,
 	setEditorValue,
-	questionEditorValue,
-	setQuestionEditorValue = () => {},
-	questionError,
-	setQuestionError,
+	questionState = {},
+	setQuestionState = () => {},
 	subjectiveEditorValue,
 	setUploadable = () => {},
 	uploadable,
@@ -52,18 +50,17 @@ function SingleQuestionComponent({
 		questionTypeWatch,
 		editorValue,
 		setEditorValue,
-		questionEditorValue,
-		setQuestionEditorValue,
-		setQuestionError,
+		questionState,
+		setQuestionState,
 		caseStudyQuestionEditorValue,
 		...restProps,
 	});
 
 	const questionText = questionTypeWatch === 'case_study'
-		? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0 || {};
+		? questionState?.editorValue?.[`case_questions_${index}`] : questionState?.editorValue?.question_0 || {};
 
 	const error = questionTypeWatch === 'case_study'
-		? questionError[`case_questions_${index}`] : questionError.question_0 || false;
+		? questionState?.error?.[`case_questions_${index}`] : questionState?.error?.question_0 || false;
 
 	return (
 		<div className={styles.container}>
