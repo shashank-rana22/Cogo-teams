@@ -69,7 +69,7 @@ const getControls = [{
 			name        : 'degree',
 			label       : 'Degree',
 			type        : 'input',
-			placeholder : 'Enter Courses',
+			placeholder : 'Enter Degree',
 		},
 		{
 			name        : 'specialization',
