@@ -43,8 +43,8 @@ function TaskForm({
 			</div>
 
 			<div className={styles.button_wrap}>
-				<Button className="secondary md" onClick={() => onCancel()} disabled={loading}>
-					cancel
+				<Button themeType="secondary" onClick={() => onCancel()} disabled={loading}>
+					Cancel
 				</Button>
 
 				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>

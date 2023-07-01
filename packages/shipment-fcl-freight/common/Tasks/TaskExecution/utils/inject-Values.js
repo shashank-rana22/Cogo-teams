@@ -127,6 +127,15 @@ const injectValues = (
 				}));
 			}
 		});
+	} else if (task.task === 'mark_container_gated_in') {
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'containers_count') {
+				const containers_count = getApisData?.list_shipment_container_details?.length;
+
+				controls[index].value = containers_count || '';
+				controls[index].rules.max = containers_count;
+			}
+		});
 	}
 
 	const validationAddedControls = injectCustomFormValidations(controls);

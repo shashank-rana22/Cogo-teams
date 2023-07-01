@@ -95,7 +95,7 @@ const extraApiPayload = (values, end_point, task) => {
 	}
 
 	if (end_point === 'update_shipment_bl_details'
-	&& ['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task)) {
+	&& ['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)) {
 		const payload = {
 			ids  : values?.bl_detail?.map((i) => i?.id),
 			data : { bl_detail: values?.bl_detail },
@@ -103,6 +103,7 @@ const extraApiPayload = (values, end_point, task) => {
 
 		return payload;
 	}
+
 	return values;
 };
 export default extraApiPayload;
