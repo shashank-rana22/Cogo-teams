@@ -4,12 +4,16 @@
 	justify-content: space-around;
 	width: 16%;
 	padding: 5px 7px;
-	margin-right: 5px;
+	margin-right: 4px;
 	overflow-x: hidden;
 	cursor: pointer;
 	border: 1px solid #b0b0b0;
 	border-radius: 4px;
 	transition: width 0.3s ease-in-out;
+
+	.label {
+		display: none;
+	}
 
 	&:hover {
 		width: 34%;
@@ -24,8 +28,10 @@
 	width: 34%;
 	border: 1px solid #ee3425;
 
-	text {
+	.label {
 		display: block;
+		margin-left: 5px;
+		font-size: 12px;
 		color: #ee3425;
 	}
 
@@ -36,12 +42,6 @@
 
 .container {
 	width: 100%;
-}
-
-.label {
-	display: none;
-	margin-left: 5px;
-	font-size: 12px;
 }
 
 .parent_tab_div {
@@ -92,6 +92,7 @@
 }
 
 .filter_icon {
+	position: relative;
 	width: 25px;
 	height: 25px;
 	cursor: pointer;
@@ -120,11 +121,17 @@
 }
 
 .filters_applied {
-	position: relative;
-	top: -33px;
-	left: 18px;
+	position: absolute;
+	top: -2px;
+	right: -2px;
 	width: 10px;
 	height: 10px;
+	margin-left: 3px;
 	background: #f68b21;
-	border-radius: 5px;
+	border-radius: 8px;
+}
+
+.icon_styles {
+	width: 20px;
+	height: 20px;
 }

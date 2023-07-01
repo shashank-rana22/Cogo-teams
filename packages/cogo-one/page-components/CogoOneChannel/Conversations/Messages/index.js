@@ -32,13 +32,13 @@ function Messages({
 	setActiveRoomLoading,
 	setActiveTab,
 }) {
+	const activeRoomSnapshotListener = useRef(null);
+
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-
-	const activeRoomSnapshotListener = useRef(null);
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -121,7 +121,7 @@ function Messages({
 		firstLoadingMessages,
 		messagesData,
 		loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id });
+	} = useGetMessages({ activeChatCollection, id, viewType });
 
 	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose           : closeModal,

@@ -52,7 +52,7 @@ function getFireStoreQuery({
 				!isBotSession ? where('support_agent_id', '==', filterId)
 					: where('spectators_ids', 'array-contains', filterId),
 			];
-		} else if ((item === 'chat_tags')) {
+		} else if (item === 'chat_tags') {
 			queryFilters = [
 				...queryFilters,
 				where('chat_tags', 'array-contains', appliedFilters?.chat_tags),
@@ -82,13 +82,17 @@ function getFireStoreQuery({
 		}
 	});
 
+	const tabWiseQuery = (VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.(
+		{ agentId: userId },
+	) || []);
+
+	const sessionTypeQuery = (VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.(
+		{ sessionType: isBotSession ? 'bot' : 'admin', isContactsSelected: activeSubTab === 'contacts' },
+	) || []);
+
 	const firestoreQuery = [
-		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.(
-			{ agentId: userId },
-		) || []),
-		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.(
-			{ sessionType: isBotSession ? 'bot' : 'admin', isContactsSelected: activeSubTab === 'contacts' },
-		) || []),
+		...tabWiseQuery,
+		...sessionTypeQuery,
 		...queryFilters,
 		orderBy('new_message_sent_at', 'desc'),
 	];

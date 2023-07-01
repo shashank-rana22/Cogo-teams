@@ -10,7 +10,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewType }) {
 	const {
 		session_type,
-		account_type, group_members, support_agent_id, manager_ids = [],
+		account_type, group_members, support_agent_id, managers_ids = [],
 	} = formattedMessageData || {};
 
 	return (
@@ -19,7 +19,7 @@ export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewTyp
 	&& (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
 		|| group_members?.includes(agentId)
-		|| manager_ids?.includes(agentId)
+		|| managers_ids?.includes(agentId)
 		|| support_agent_id === agentId
 	)
 	);

@@ -23,6 +23,7 @@ function RightButton({
 	showBotMessages,
 	accountType,
 	isPartOfGroup,
+	isManager,
 }) {
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
@@ -36,7 +37,9 @@ function RightButton({
 		setPopoverProps,
 	});
 
-	const accessableButtons = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.get_accesible_assign_buttons?.({
+	const getViewTypeAccessibleButtons = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.get_accesible_assign_buttons;
+
+	const accessableButtons = getViewTypeAccessibleButtons?.({
 		viewType,
 		showBotMessages,
 		supportAgentId,
@@ -44,6 +47,7 @@ function RightButton({
 		isGroupFormed,
 		isServiceProvider: accountType === 'service_provider',
 		isPartOfGroup,
+		isManager,
 	}) || [];
 
 	const loading = assignLoading || requestAssignLoading;

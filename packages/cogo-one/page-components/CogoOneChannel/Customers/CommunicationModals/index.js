@@ -36,7 +36,7 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 					<div className={styles.wheel_box}>
 						<IcMPlus onClick={() => setIsChecked((p) => !p)} fill="#ffffff" width={35} height={35} />
 						<div className={styles.wheel}>
-							<div className={`${styles.action} ${styles.call_icon}`}>
+							<div className={cl`${styles.action} ${styles.call_icon}`}>
 								<Image
 									onClick={() => setShowDialModal(true)}
 									src={GLOBAL_CONSTANTS.image_url.call_icon}

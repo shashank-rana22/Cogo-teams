@@ -4,6 +4,20 @@ import { useEffect, useCallback, useState } from 'react';
 
 import getViewType from '../helpers/getViewType';
 
+const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist'];
+
+const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
+	if (viewTypeFromRoleIds === 'cogoone_admin') {
+		return viewTypeFromRoleIds;
+	}
+
+	if (agentType.includes('admin')) {
+		return agentType;
+	}
+
+	return PERSONA_KEYS_MAPPING.find((eachPersona) => agentType.includes(eachPersona)) || '';
+};
+
 function useAgentWorkPrefernce() {
 	const { userRoleIds, userId, authRoleData } = useSelector(({ profile }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
@@ -23,13 +37,11 @@ function useAgentWorkPrefernce() {
 	const fetchworkPrefernce = useCallback(async () => {
 		try {
 			const res = await trigger();
-			const agentType = res?.data?.agent_type;
 
-			if (viewTypeFromRoleIds === 'cogoone_admin') {
-				setViewType(viewTypeFromRoleIds);
-			} else {
-				setViewType(agentType);
-			}
+			const viewTypeValue = getViewTypeFromWorkPreferences(
+				{ viewTypeFromRoleIds, agentType: res?.data?.agent_type },
+			);
+			setViewType(viewTypeValue);
 		} catch (error) {
 			console.error(error);
 		}

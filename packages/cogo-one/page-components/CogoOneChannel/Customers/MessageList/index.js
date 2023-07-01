@@ -76,7 +76,7 @@ function MessageList(messageProps) {
 		}
 	};
 
-	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList);
 
 	const handleAutoAssignBack = () => {
 		setAutoAssignChats(true);

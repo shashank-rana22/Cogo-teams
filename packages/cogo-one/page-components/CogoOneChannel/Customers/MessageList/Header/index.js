@@ -35,7 +35,7 @@ function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, s
 					key={eachTab?.name}
 					onClick={() => handleTabClick({ name: eachTab?.name })}
 				>
-					{eachTab.icon || null}
+					<div className={styles.icon_styles}>{eachTab.icon || null}</div>
 					<text className={styles.label}>{eachTab.label}</text>
 				</div>
 			))}

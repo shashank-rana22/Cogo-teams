@@ -14,11 +14,14 @@ const useGetUnreadMessagesCount = ({ firestore, viewType, agentId, isBotSession 
 	const unreadCountSnapshotListener = useRef(null);
 
 	useEffect(() => {
+		const getBaseQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.all_chats_base_query;
+		const getSessionQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query;
+
 		mountUnreadCountSnapShot({
 			unreadCountSnapshotListener,
 			omniChannelCollection : collectionGroup(firestore, 'rooms'),
-			baseQuery             : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.all_chats_base_query?.({ agentId }) || [],
-			sessionQuery          : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.({
+			baseQuery             : getBaseQuery?.({ agentId }) || [],
+			sessionQuery          : getSessionQuery?.({
 				sessionType: isBotSession ? 'bot' : 'admin',
 			}) || [],
 			setUnReadChatsCount,

@@ -107,6 +107,7 @@ export function mountPinnedSnapShot({
 		...queryForSearch,
 		...omniChannelQuery,
 	);
+
 	snapshotRef.current = onSnapshot(
 		newChatsQuery,
 		(pinSnapShot) => {

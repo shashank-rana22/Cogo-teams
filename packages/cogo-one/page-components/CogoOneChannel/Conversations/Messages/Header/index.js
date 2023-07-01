@@ -69,6 +69,7 @@ function Header({
 		organization_id = '',
 		user_id,
 		account_type = '',
+		managers_ids = [],
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
@@ -98,6 +99,7 @@ function Header({
 	const showApprovePanel = (hasRequests && hasAccessToApprove);
 
 	const isPartOfGroup = group_members?.includes(userId);
+	const isManager = managers_ids?.includes(userId);
 
 	return (
 		<div className={styles.outer_container}>
@@ -151,6 +153,7 @@ function Header({
 							isGroupFormed={isGroupFormed}
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
+							isManager={isManager}
 						/>
 						{channel_type === 'whatsapp' && (
 							<div

@@ -28,7 +28,7 @@ function FlashUserChats({
 	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ '--height': !canShowCarousel ? '0' : '16%' }}>
+		<div className={styles.flash_messages_div} style={{ height: !canShowCarousel ? '0' : '16%' }}>
 			{canShowCarousel && (
 				<Carousel
 					id="flash_messages"

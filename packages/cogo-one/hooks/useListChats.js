@@ -47,7 +47,7 @@ function useListChats({
 		pinnedMessagesData   : {},
 	});
 
-	const { query:searchQuery, debounceQuery } = useDebounceQuery();
+	const { query: searchQuery, debounceQuery } = useDebounceQuery();
 
 	const { observer = '', chat_tags = '' } = appliedFilters || {};
 

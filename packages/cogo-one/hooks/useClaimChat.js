@@ -50,7 +50,8 @@ const getTimeoutConstant = async (firestore) => {
 	const cogoOneConstants = await getDocs(constantsQuery);
 
 	const cogoOneConstantsDocs = cogoOneConstants?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
-	const { flash_messages_timeout = 0 } = cogoOneConstantsDocs.data() || {};
+
+	const { flash_messages_timeout = 0 } = cogoOneConstantsDocs?.data?.() || {};
 
 	return flash_messages_timeout;
 };
