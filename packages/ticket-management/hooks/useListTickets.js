@@ -74,7 +74,7 @@ const useListTickets = ({
 		if (refreshList?.[label]) {
 			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
-	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList, isUpdated]);
+	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList]);
 
 	useEffect(() => {
 		if (isUpdated) {

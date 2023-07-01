@@ -17,7 +17,7 @@ const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 const DEFAULT_TICKET_ACTIVITY = 0;
 
-const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
+const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 	if (!doesTicketsExists) {
 		return '100%';
 	}
@@ -61,11 +61,9 @@ function TicketChat({
 	});
 
 	const {
-		TicketFeedback: ticketFeedback = {}, Ticket: ticket = {},
-		IsClosureAuthorizer: isClosureAuthorizer = false,
+		Ticket: ticket = {}, IsClosureAuthorizer: isClosureAuthorizer = false,
 	} = ticketData || {};
 
-	const { Rating: rating = 0 } = ticketFeedback || {};
 	const { Status: status = '' } = ticket || {};
 
 	const {
@@ -97,7 +95,7 @@ function TicketChat({
 		scrollToBottom,
 	});
 
-	const doesTicketsExists = typeof ticketData === 'object' || false;
+	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
 
@@ -143,13 +141,12 @@ function TicketChat({
 				<div
 					className={styles.container}
 					style={{
-						height: chatBodyHeight(
-							rating,
+						height: getChatBodyHeight({
 							doesTicketsExists,
 							status,
 							file,
 							uploading,
-						),
+						}),
 					}}
 				>
 					<ChatBody
