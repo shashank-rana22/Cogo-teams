@@ -4,13 +4,10 @@ import { useEffect, useCallback } from 'react';
 const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = false }) => {
 	const [
 		{ data, loading }, trigger,
-	] = useRequest(
-		{
-			url    : '/list_organization_users',
-			method : 'get',
-		},
-		{ manual: true },
-	);
+	] = useRequest({
+		url    : '/list_organization_users',
+		method : 'get',
+	}, { manual: true });
 
 	const listOrganizationsUsers = useCallback(async () => {
 		try {
@@ -19,10 +16,11 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 					filters: {
 						organization_id: organizationId,
 					},
+					page_limit: 50,
 				},
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [organizationId, trigger]);
 

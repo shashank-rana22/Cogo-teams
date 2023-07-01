@@ -32,7 +32,7 @@ function OrganizationDetails({
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
-	const isOrgUsersVisible = ['supply_view', 'admin_view'].includes(viewType);
+	const isOrgUsersVisible = ['supply', 'sales'].includes(viewType);
 
 	const {
 		organizationUsersData,
