@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import { LockScreen } from './LockScreen';
 import Navbar from './Navbar';
 import TnC from './newTnC';
 import styles from './styles.module.css';
@@ -93,7 +94,7 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<AnnouncementModal data={announcements} />
-
+			<LockScreen />
 			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
 		</div>
 	);
