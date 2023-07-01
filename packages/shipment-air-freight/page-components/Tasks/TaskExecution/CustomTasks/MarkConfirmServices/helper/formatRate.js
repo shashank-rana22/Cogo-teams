@@ -14,7 +14,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 	) || {};
 	const destination_local = (servicesList || []).find(
 		(service) => service.service_type === 'air_freight_local_service'
-			&& service.trade_type === 'export',
+			&& service.trade_type === 'import',
 	) || {};
 
 	if (

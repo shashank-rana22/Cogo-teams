@@ -1,9 +1,10 @@
 import { Input, Popover } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
-import { SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
+import { SORTBY_OPTION, getSearchOptionsLabels } from '../../../constants/index';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
@@ -26,6 +27,7 @@ interface OutstandingFilterProps {
 	clearFilter: () => void;
 	queryKey: string,
 	setQueryKey: (p:string) => void,
+	entityCode
 }
 
 function Filters({
@@ -39,6 +41,7 @@ function Filters({
 	setFormFilters,
 	clearFilter,
 	queryKey,
+	entityCode,
 	setQueryKey,
 }: OutstandingFilterProps) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
@@ -51,7 +54,7 @@ function Filters({
 
 	let placeholder;
 	if (queryKey === 'q') {
-		placeholder = 'Search By Business Name/Pan Number';
+		placeholder = ENTITY_FEATURE_MAPPING[entityCode].placeholder.tax_number;
 	} else if (queryKey === 'tradePartySerialId') {
 		placeholder = 'Search By Trade Party';
 	} else if (queryKey === 'sageId') {
@@ -65,13 +68,13 @@ function Filters({
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
 				<div className={styles.sort_container}>
-
 					<Popover
 						placement="bottom"
 						render={(
 							<div className={styles.styled_row}>
 								{SORTBY_OPTION.map((item) => (
 									<div
+										key={item.value}
 										className={styles.styled_col}
 										onClick={() => {
 											setOrderBy({
@@ -127,19 +130,25 @@ function Filters({
 							placement="bottom"
 							render={(
 								<div className={styles.styled_row}>
-									{SEARCH_OPTIONS.map((item) => (
-										<div
-											className={styles.styled_col}
-											onClick={() => {
-												setQueryKey(item?.value || 'q');
-												setShowSearchPopover(!showSearchPopover);
-												setParams({ ...params, page: 1 });
-											}}
-											role="presentation"
-										>
-											<div className={styles.tile_heading}>{item.label}</div>
-										</div>
-									))}
+									{getSearchOptionsLabels(entityCode)?.map((item) => {
+										if (!item.label) {
+											return null;
+										}
+										return (
+											<div
+												key={item.value}
+												className={styles.styled_col}
+												onClick={() => {
+													setQueryKey(item?.value || 'q');
+													setShowSearchPopover(!showSearchPopover);
+													setParams((prev) => ({ ...prev, page: 1 }));
+												}}
+												role="presentation"
+											>
+												<div className={styles.tile_heading}>{item.label}</div>
+											</div>
+										);
+									})}
 								</div>
 							)}
 						>

@@ -2,7 +2,7 @@ import { TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { CARD_DETAILS } from '../../../constants/index';
+import { getTaxLabels } from '../../../constants/index';
 import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
 import PopoverTags from './PopoverTags';
@@ -198,20 +198,25 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 
 					</div>
 					<div className={styles.category_container}>
-						{CARD_DETAILS.map((it) => (
-							<div className={styles.sub_category_container} key={it?.label}>
-								<div className={styles.tag_text}>
-									{it.label}
-									:
-								</div>
-								<div className={styles.tag_text_left}>
-									{it.valueKey === 'registrationNumber'
-										? item[it.valueKey]
-										: startCase(item[it.valueKey]?.name || item[it.valueKey])
+						{getTaxLabels(entityCode).map((it) => {
+							if (!it.label) {
+								return null;
+							}
+							return (
+								<div className={styles.sub_category_container} key={it?.label}>
+									<div className={styles.tag_text}>
+										{it.label}
+										:
+									</div>
+									<div className={styles.tag_text_left}>
+										{it.valueKey === 'registrationNumber'
+											? item[it.valueKey]
+											: startCase(item[it.valueKey]?.name || item[it.valueKey])
                                             || it.defaultValueKey}
+									</div>
 								</div>
-							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 

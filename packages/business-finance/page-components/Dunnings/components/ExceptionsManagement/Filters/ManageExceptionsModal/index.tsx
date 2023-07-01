@@ -8,6 +8,8 @@ import useManageExceptionList from '../../../../hooks/useManageExceptionList';
 import { ManageExceptionInterface } from '../../Interfaces';
 import styles from '../styles.module.css';
 
+import { config } from './config';
+
 function ManageExceptionsModal({
 	showCycleExceptions,
 	setShowCycleExceptions,
@@ -75,6 +77,7 @@ function ManageExceptionsModal({
 
 				<ExcludeList
 					data={manageExceptionData || {}}
+					config={config}
 					uncheckedRows={uncheckedRows}
 					setUncheckedRows={setUncheckedRows}
 					loading={manageExceptionLoading}

@@ -19,9 +19,16 @@ interface PaymentTable {
 	setOrderBy?: (p: object) => void,
 	sortStyleDesc?: string,
 	sortStyleAsc?: string
+	entityCode?: string
 }
 
-const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleDesc, sortStyleAsc }: PaymentTable) => [
+const invoicePaymentList = ({
+	paymentFilters,
+	setPaymentFilters,
+	setOrderBy,
+	sortStyleDesc,
+	sortStyleAsc,
+}: PaymentTable) => ([
 
 	{
 		Header   : 'Payment Number',
@@ -36,7 +43,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 
 	},
 	{
-		Header   : 'Sage Reference Number ',
+		Header   : 'Sage Reference Number',
 		id       : 'sageRefNumber',
 		accessor : (row) => (
 			<div style={{ marginLeft: '30px' }}>
@@ -69,7 +76,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'paymentAmount') as string,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -90,7 +97,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 				<div>
 					{formatAmount({
 						amount   :	getByKey(row, 'utilizedAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						currency :	getByKey(row, 'currency') as string,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -139,6 +146,6 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		),
 	},
 
-];
+]);
 
-export default PaymentList;
+export default invoicePaymentList;
