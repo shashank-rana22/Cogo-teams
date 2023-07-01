@@ -22,12 +22,12 @@ const useKRAList = ({ filters = {}, selectAccordian = [], dataFrom }) => {
 
 	useEffect(() => {
 		if (!isEmpty(selectAccordian) && dataFrom === 'AccordianData') {
-			const ARRAY = (selectAccordian || []).map(({ id: kra_assigned, kra_name: name, weightage }) => ({
+			const detailsArray = (selectAccordian || []).map(({ id: kra_assigned, kra_name: name, weightage }) => ({
 				kra_assigned,
 				name,
 				weightage,
 			}));
-			setInputValue(ARRAY);
+			setInputValue(detailsArray);
 		}
 	}, [selectAccordian, dataFrom]);
 

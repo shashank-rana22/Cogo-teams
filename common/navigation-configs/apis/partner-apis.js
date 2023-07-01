@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'create_user_number_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
@@ -1041,6 +1046,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_user_number_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
@@ -1906,6 +1916,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_user_number_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'get_bank_details',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -2698,6 +2713,11 @@ const partner = {
 			api          : 'get_bank_details',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_user_number_request',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 		{
 			api          : 'get_organization_swift_code_details',
@@ -8472,6 +8492,44 @@ const partner = {
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
+		},
+	],
+	compliance: [
+		{
+			api         : 'get_purchase_bills_ey_authentication_stats',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_sales_outward_export_gstr_file',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_sales_outward_get_outward_files',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_sales_outward_refresh_excel_sheet',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_sales_outward_get_sales_register_invoices',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_sales_outward',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
 		},
 	],
 	incident_controller: [
