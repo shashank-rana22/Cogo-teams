@@ -22,11 +22,11 @@ function UploadBookingNote({
 	let skipStep0 = false;
 
 	if (primary_service?.trade_type === 'import') {
-		initialStep = 1;
+		initialStep = 3;
 		skipStep0 = true;
 	}
 
-	if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
+	// if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
 
 	const [step, setStep] = useState(initialStep);
 	const [fileUrl, setFileUrl] = useState();
