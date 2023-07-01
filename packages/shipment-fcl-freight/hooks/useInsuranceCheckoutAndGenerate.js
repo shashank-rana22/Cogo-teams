@@ -38,16 +38,11 @@ const useInsuranceCheckoutAndGenerate = ({
 					customerConfirmationDoc : uploadProof?.[GLOBAL_CONSTANTS.zeroth_index]?.name,
 				},
 			});
-			if (!res.hasError) {
 				const updateShipment = await apiTrigger({
 					data: payloadForUpdateShipment,
 				});
-
-				if (!updateShipment.hasError) {
 					Toast.success(successMessage);
 					refetch();
-				}
-			}
 		} catch (err) {
 			Toast.error(err?.data?.message);
 		}

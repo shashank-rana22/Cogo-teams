@@ -1,3 +1,18 @@
+const fileUploadRestControls = {
+	type       : 'file',
+		themeType  : 'secondary',
+		drag       : true,
+		uploadIcon : 'ic-upload',
+		height     : 80,
+		accept:
+			'image/*,.pdf,.doc,.docx,.xlsx,application/'
+			+ 'msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+		uploadType : 'aws',
+		rules      : { required: 'Required' },
+		span       : 4,
+
+}
+
 export const invoiceControls = [
 	{
 		label       : 'Invoice Number',
@@ -23,46 +38,17 @@ export const invoiceControls = [
 	{
 		label      : 'Upload GST Certificate',
 		name       : 'gstDoc',
-		span       : 4,
-		type       : 'file',
-		themeType  : 'secondary',
-		drag       : true,
-		uploadIcon : 'ic-upload',
-		height     : 80,
-		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/'
-			+ 'msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType : 'aws',
-		rules      : { required: 'Required' },
+		...fileUploadRestControls
+		
 	},
 	{
 		label      : 'Upload PAN Certificate',
 		name       : 'panDoc',
-		span       : 4,
-		type       : 'file',
-		themeType  : 'secondary',
-		drag       : true,
-		uploadIcon : 'ic-upload',
-		height     : 80,
-		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'
-			+ '/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType : 'aws',
-		rules      : { required: 'Required' },
+		...fileUploadRestControls
 	},
 	{
 		label      : 'Upload Commercial Invoice',
 		name       : 'invoiceDoc',
-		span       : 4,
-		type       : 'file',
-		themeType  : 'secondary',
-		drag       : true,
-		uploadIcon : 'ic-upload',
-		height     : 80,
-		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application'
-			+ '/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType : 'aws',
-		rules      : { required: 'Required' },
+		...fileUploadRestControls
 	},
 ];

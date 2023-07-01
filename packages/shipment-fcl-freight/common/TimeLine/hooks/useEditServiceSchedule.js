@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
 import controls from '../EditSchedule/controls';
-import { getDate } from '../utils/getDate';
+import { getDate } from '../../../utils/getDate'; 
 
 export default function useEditServiceSchedule({
 	setShow = () => {},

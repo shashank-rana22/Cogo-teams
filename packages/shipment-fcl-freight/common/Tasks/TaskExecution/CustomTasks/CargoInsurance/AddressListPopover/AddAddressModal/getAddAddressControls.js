@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-export const addAddressControls = ({ setValue = () => {} }) => [
+export const getAddAddressControls = ({ setValue = () => {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
@@ -110,7 +110,7 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 	{
 		label       : 'Phone Number',
 		name        : 'phoneNumber',
-		type        : 'mobileSelect',
+		type        : 'getStep2Controlsb',
 		placeholder : 'Enter Phone Number',
 		rules       : {
 			validate: (v) => {
@@ -124,9 +124,9 @@ export const addAddressControls = ({ setValue = () => {} }) => [
 	},
 ];
 
-export const useGetControls = ({ checked, countryId = '', setValue = () => {} }) => {
+export const getModifiedControls = ({ checked, countryId = '', setValue = () => {} }) => {
 	const countryCode = getCountryDetails({ country_id: countryId });
-	const controls = addAddressControls({ setValue });
+	const controls = getAddAddressControls({ setValue });
 
 	return (controls || []).map((control) => {
 		if (control.name === 'tax_number') {

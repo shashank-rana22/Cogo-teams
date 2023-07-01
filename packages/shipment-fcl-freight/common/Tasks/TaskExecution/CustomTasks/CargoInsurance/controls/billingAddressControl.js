@@ -13,7 +13,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 				value   : formValuePatterns.GST_NUMBER,
 				message : 'GST Number is invalid',
 			},
-			required: { value: true, message: 'GST Number is required' },
+			required: 'GST Number is required' ,
 		},
 	},
 	{
@@ -23,14 +23,14 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		type        : 'text',
 		span        : 3,
 		height      : 25,
-		rules       : { required: { value: true, message: 'Billing Name is required' } },
+		rules       : { required: 'Billing Name is required'  },
 	},
 	{
 		label       : 'Address',
 		name        : 'billingAddress',
 		type        : 'text',
 		placeholder : 'Enter Address',
-		rules       : { required: { value: true, message: 'Address is required' } },
+		rules       : { required:  'Address is required' },
 		span        : 3,
 		height      : 25,
 		style       : {
@@ -46,7 +46,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		valueKey    : 'postal_code',
 		labelKey    : 'postal_code',
 		rules       : {
-			required: { value: true, message: 'Pincode is required' },
+			required: 'Pincode is required' ,
 		},
 		getSelectedOption: (option) => {
 			setValue('billingState', option?.region?.name);
@@ -93,7 +93,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 				value   : formValuePatterns.PAN_NUMBER,
 				message : 'Enter a valid PAN',
 			},
-			required: { value: true, message: 'PAN Number is required' },
+			required: 'PAN Number is required' ,
 		},
 	},
 ];

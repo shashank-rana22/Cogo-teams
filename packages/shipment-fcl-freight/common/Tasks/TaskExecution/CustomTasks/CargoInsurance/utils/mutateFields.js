@@ -14,8 +14,9 @@ const mutatedFields = ({ fields = [], setValue = () => {}, watch }) => {
 			};
 		}
 
-		if (isEmpty(watch('policyCountryId')) || isEmpty(watch('policyCommodityId'))
-				|| isEmpty(watch('cargoDescription'))) {
+		const disabledCheckForControl =[watch('policyCountryId'), watch('policyCommodityId'), watch('cargoDescription')];
+
+		if (disabledCheckForControl.some((value) => isEmpty(value))) {
 			if (controlObj.name === 'policyCurrency' || controlObj.name === 'cargoAmount') {
 				return {
 					...controlObj,

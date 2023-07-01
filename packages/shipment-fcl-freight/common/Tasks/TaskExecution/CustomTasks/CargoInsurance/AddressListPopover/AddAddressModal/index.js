@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useCreateOrganizationBillingAddress';
 
-import { useGetControls } from './addAddressControls';
+import { getModifiedControls } from './getAddAddressControls';
 import FormElement from './FormElement';
 import styles from './styles.module.css';
 
@@ -38,7 +38,7 @@ function AddModal({
 
 	const countryId = watch('country_id');
 
-	const addAddressControls = useGetControls({ checked, countryId, setValue });
+	const addAddressControls = getModifiedControls({ checked, countryId, setValue });
 
 	const handleCloseModal = () => {
 		setAddAddressModal(false);
@@ -97,10 +97,13 @@ function AddModal({
 							<Checkbox
 								checked={checked}
 								onChange={() => {
-									setChecked(!checked);
-									if (!checked) {
-										setShowPoc(false);
-									}
+									setChecked((prevChecked) => {
+										const newChecked = !prevChecked;
+										if(newChecked){
+											setShowPoc(true);
+										}
+										return newChecked;
+									})
 								}}
 							/>
 							<div className={styles.gst}>Include Tax Number</div>

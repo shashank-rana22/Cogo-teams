@@ -244,36 +244,48 @@ const GLOBAL_CONSTANTS = {
 		inco_term: {
 			cif: {
 				trade_type: 'export',
+				label: 'CIF - Cost, Insurance and Freight'
 			},
 			cfr: {
 				trade_type: 'export',
+				label: 'CFR - Cost and Freight'
 			},
 			cpt: {
 				trade_type: 'export',
+				label: 'CPT - Carriage Paid To'
 			},
 			cip: {
 				trade_type: 'export',
+				label: 'CIP - Carriage and Insurance Paid to'
 			},
 			dat: {
 				trade_type: 'export',
+				label: 'DAT - Delivered At Terminal'
 			},
 			dap: {
 				trade_type: 'export',
+				label: 'DAP - Delivered At Place'
 			},
 			ddp: {
 				trade_type: 'export',
+				label: 'DDP - Delivered Duty Paid'
 			},
 			fob: {
 				trade_type: 'import',
+				label: 'FOB - Free On Board'
 			},
 			exw: {
 				trade_type: 'import',
+				label: 'EXW - Ex Works'
 			},
 			fca: {
 				trade_type: 'import',
+				label: 'FCA - Free Carrier'
 			},
 			fas: {
 				trade_type: 'import',
+				label: 'FAS - Free Alongside Ship'
+
 			},
 		},
 		role_options: [

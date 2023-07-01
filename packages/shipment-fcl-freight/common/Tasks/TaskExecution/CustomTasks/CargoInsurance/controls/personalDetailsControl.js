@@ -67,6 +67,7 @@ export const personalDetailsControl = [
 		span        : 3,
 		placeholder : 'Enter your mobile number',
 		rules       : {
+			required : 'Mobile Number is required',
 			validate: (v) => {
 				if (!v?.number || !v?.country_code) {
 					return 'Mobile Number is required';

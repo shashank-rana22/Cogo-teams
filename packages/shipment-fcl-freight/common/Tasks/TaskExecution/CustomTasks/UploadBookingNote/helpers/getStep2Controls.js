@@ -1,4 +1,4 @@
-import { getDate } from '../../../../../TimeLine/utils/getDate';
+import { getDate } from "../../../../../../utils/getDate";
 
 const validateDate = (date, message) => (getDate(date) === null
 	? message

@@ -1,6 +1,6 @@
 import { addDays } from '@cogoport/utils';
 
-import { getDate } from '../../../../../TimeLine/utils/getDate';
+import { getDate } from '../../../../../../utils/getDate';
 
 const MIN_DATE_LIMIT = 1;
 

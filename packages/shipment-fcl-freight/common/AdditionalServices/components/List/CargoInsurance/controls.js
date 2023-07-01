@@ -9,7 +9,7 @@ const controls = [
 		optionsListKey : 'insurance_commodities',
 		defaultOptions : true,
 		options        : [],
-		placeholder    : 'select Commodity',
+		placeholder    : 'Select Commodity',
 		rules          : { required: 'Commodity is required' },
 	},
 	{

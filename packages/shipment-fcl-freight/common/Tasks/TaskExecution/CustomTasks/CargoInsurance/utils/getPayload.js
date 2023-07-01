@@ -14,7 +14,6 @@ const getPayload = ({
 
 	const { gstAmount = taxAmount } = insuranceDetails || {};
 
-	Object.keys(insuranceDetails).forEach((key) => {
 		const {
 			aadharNumber,
 			organizationAddressId,
@@ -27,7 +26,6 @@ const getPayload = ({
 			? insuranceDetails
 			: { ...insuranceDetails, ...billingData };
 
-		if (insuranceDetails[key]) {
 			payload = {
 				...addressId,
 				...rest,
@@ -57,8 +55,6 @@ const getPayload = ({
 				policyId,
 				gstAmount,
 			};
-		}
-	});
 	return payload;
 };
 

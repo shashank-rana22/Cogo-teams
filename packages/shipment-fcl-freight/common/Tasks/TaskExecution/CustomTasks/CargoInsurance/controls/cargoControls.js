@@ -1,8 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { addDays } from '@cogoport/utils';
 
 const MIN_DATE_LIMIT = 1;
 const MAX_DATE_LIMIT = 31;
 const MIN_CONSIGNMENT_VALUE = 0;
+
+const INCO_TERMS = Object.entries(GLOBAL_CONSTANTS.options.inco_term).forEach(([key, value]) => {
+    return {label: value.label, value: key};
+});
 
 export const cargoControls = ({ insuranceDetails = {} }) => [
 	{
@@ -12,7 +17,7 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		options        : [],
 		span           : 4,
 		optionsListKey : 'insurance_commodities',
-		placeholder    : 'select Commodity',
+		placeholder    : 'Select Commodity',
 		defaultOptions : true,
 		rules          : { required: 'Commodity is required' },
 	},
@@ -39,19 +44,7 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		placeholder : 'Select Inco Term',
 		span        : 4,
 		disabled    : true,
-		options     : [
-			{ label: 'FOB - Free On Board', value: 'FOB' },
-			{ label: 'EXW - Ex Works', value: 'EXW' },
-			{ label: 'FCA - Free Carrier', value: 'FCA' },
-			{ label: 'FAS - Free Alongside Ship', value: 'FAS' },
-			{ label: 'CIF - Cost, Insurance and Freight', value: 'CIF' },
-			{ label: 'CFR - Cost and Freight', value: 'CFR' },
-			{ label: 'CPT - Carriage Paid To', value: 'CPT' },
-			{ label: 'CIP - Carriage and Insurance Paid to', value: 'CIP' },
-			{ label: 'DAT - Delivered At Terminal', value: 'DAT' },
-			{ label: 'DAP - Delivered At Place', value: 'DAP' },
-			{ label: 'DDP - Delivered Duty Paid', value: 'DDP' },
-		],
+		options: INCO_TERMS,
 		rules: { required: 'Inco Term is required' },
 	},
 	{
@@ -138,10 +131,10 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 				min     : 0,
 			},
 			validate: (v) => {
-				if (v < MIN_CONSIGNMENT_VALUE) {
-					return 'Consignment Value should not in negative';
+				if (v <= MIN_CONSIGNMENT_VALUE) {
+					return 'Consignment Value cannot be negative';
 				}
-				return '';
+				return true;
 			},
 		},
 	},
