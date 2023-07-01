@@ -1,0 +1,31 @@
+.trade_type {
+	background: rgb(224 228 255 / 50%);
+}
+
+.importer_exporter_tags {
+	background: rgb(224 228 255 / 50%);
+}
+
+.source {
+	background: #cfeaed;
+}
+
+.cogoverse {
+	background: #ffd3d3;
+}
+
+.cogoport_assured {
+	background: #d8fade;
+}
+
+.trade_type,
+.importer_exporter_tags,
+.source,
+.cogoverse,
+.cogoport_assured {
+	width: max-content;
+	min-height: 16px;
+	padding: 2px 4px;
+	margin-right: 8px;
+	border-radius: 0 0 4px 4px;
+}

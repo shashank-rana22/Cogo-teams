@@ -1,0 +1,11 @@
+.filter_tickets_container {
+	width: 100%;
+	padding: 12px;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.bridge_gap {
+	margin-top: 12px;
+}

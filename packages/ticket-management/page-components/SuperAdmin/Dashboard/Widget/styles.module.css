@@ -1,0 +1,26 @@
+.container {
+	flex: 1;
+	padding: 12px;
+	background-color: #fff;
+	border-radius: 4px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.title {
+	font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.is_margin {
+	margin-right: 12px;
+}

@@ -12,7 +12,7 @@ function InstantRepliesModal({ data = {} }) {
 
 	const { channel_type = '' } = data || {};
 
-	if (channel_type === 'platform_chat') {
+	if (channel_type !== 'whatsapp') {
 		return (
 			<div className={styles.container}>
 				<InstantReplies
@@ -55,7 +55,6 @@ function InstantRepliesModal({ data = {} }) {
 						setOpenCreateReply={setOpenCreateReply}
 					/>
 				</TabPanel>
-
 			</Tabs>
 		</div>
 	);

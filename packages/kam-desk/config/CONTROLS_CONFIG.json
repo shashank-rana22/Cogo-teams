@@ -1,0 +1,34 @@
+{
+  "shipment_types": [
+    {
+      "label": "FCL",
+      "value": "fcl_freight"
+    },
+    {
+      "label": "LCL",
+      "value": "lcl_freight"
+    },
+    {
+      "label": "AIR",
+      "value": "air_freight"
+    },
+    {
+      "label": "SURFACE",
+      "value": "surface"
+    },
+    {
+      "label": "ALL",
+      "value": "all"
+    }
+  ],
+  "trade_types": [
+    {
+      "label": "Export",
+      "value": "export"
+    },
+    {
+      "label": "Import",
+      "value": "import"
+    }
+  ]
+}

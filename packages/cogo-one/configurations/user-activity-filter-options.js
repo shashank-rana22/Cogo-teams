@@ -19,12 +19,20 @@ function filterOptions() {
 			value : 'facebook',
 		},
 		{
-			label : 'Instagram',
-			value : 'instagram',
+			label : 'Telegram',
+			value : 'telegram',
 		},
 		{
 			label : 'Mail',
 			value : 'email',
+		},
+		{
+			label : 'Voice Call',
+			value : 'voice_call',
+		},
+		{
+			label : 'Zalo',
+			value : 'zalo',
 		},
 	];
 

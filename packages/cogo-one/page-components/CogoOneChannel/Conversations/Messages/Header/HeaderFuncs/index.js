@@ -17,7 +17,7 @@ function TagsPopOver({
 	loading = false,
 }) {
 	const filteredOptions = tagOptions.filter(
-		({ value }) => !prevtags.includes(value),
+		({ value }) => !prevtags?.includes(value),
 	);
 	const resetFunc = () => {
 		setheaderTags(null);

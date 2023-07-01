@@ -1,0 +1,56 @@
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 16px;
+}
+
+.info_icon {
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 60%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.filter {
+	display: flex;
+}
+
+.segmented_filter {
+	margin-top: 8px;
+}
+
+.loading {
+	margin-top: 8px;
+}
+
+.toggle {
+	display: flex;
+	justify-content: flex-end;
+	margin-left: 28px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}

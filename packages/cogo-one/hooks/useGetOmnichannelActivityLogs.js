@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetOmnichannelActivityLogs = ({
 	activityTab = '',
@@ -8,15 +8,15 @@ const useGetOmnichannelActivityLogs = ({
 	customerId,
 	user_id = null,
 	lead_user_id = null,
+	activeSubTab = '',
+	pagination,
 }) => {
-	const [pagination, setPagination] = useState(1);
-
+	const [filters, setFilters] = useState(null);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_activity_logs',
 		method : 'get',
 	}, { manual: true });
-
-	const fetchActivityLogs = async (filters = []) => {
+	const fetchActivityLogs = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -38,21 +38,21 @@ const useGetOmnichannelActivityLogs = ({
 		}
 
 		setFilterVisible(false);
-	};
+	}, [activityTab, filters, lead_user_id, pagination, setFilterVisible, trigger, user_id]);
 
 	useEffect(() => {
-		if (user_id || lead_user_id) {
+		if ((user_id || lead_user_id)
+		&& (activeSubTab === 'channels')) {
 			fetchActivityLogs();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activityTab, customerId, pagination]);
+	}, [activeSubTab, user_id, lead_user_id, fetchActivityLogs, customerId, pagination]);
 
 	return {
 		data,
 		loading,
 		fetchActivityLogs,
-		pagination,
-		setPagination,
+		filters,
+		setFilters,
 	};
 };
 

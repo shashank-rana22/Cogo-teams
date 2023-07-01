@@ -34,7 +34,7 @@
 }
 
 .small_hr {
-	width: 37%;
+	width: 20%;
 	margin: 8px 24px;
 	border: 1px solid #ed3726;
 	border-radius: 30px;
@@ -90,7 +90,10 @@
 }
 
 .form_style {
-	font-size: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
 }
 
 .completed {
@@ -105,4 +108,34 @@
 .flex_center {
 	display: flex;
 	align-items: center;
+}
+
+.document {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.button {
+	margin-left: 10px;
+}
+
+.bold_data {
+	font-weight: 600;
+}
+
+.values {
+	display: flex;
+}
+
+.advanced_amount {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.text_decoration {
+	width: 100px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

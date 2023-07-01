@@ -61,7 +61,6 @@
 
 .value {
 	flex: 1;
-	font-size: 14px;
 	color: #221f20;
 
 	:global(.ui_legend_item) {

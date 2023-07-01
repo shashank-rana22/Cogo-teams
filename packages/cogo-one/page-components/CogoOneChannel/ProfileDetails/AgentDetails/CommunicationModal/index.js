@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Templates from '../../../../../common/Templates';
 import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
+import useSendUserWhatsappTemplate from '../../../../../hooks/useSendUserWhatsappTemplate';
 
 import ComposeEmail from './ComposeEmail';
 import styles from './styles.module.css';
@@ -23,9 +24,18 @@ function CommunicationModal({
 		user_id      : userId,
 		lead_user_id : leadUserId,
 	};
+	const {
+		whatsapp_country_code = '', whatsapp_number = '',
+	} = userData || {};
+
 	const closeModal = () => {
 		setModalType(null);
 	};
+
+	const {
+		sendUserWhatsappTemplate,
+		loading: whatsappLoading,
+	} =	 useSendUserWhatsappTemplate({ callbackfunc: closeModal });
 
 	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
 		{
@@ -40,12 +50,14 @@ function CommunicationModal({
 		type = '',
 		template_name = '',
 		variables = {},
+		...restArgs
 	}) => {
 		sendCommunicationTemplate({
 			template_name,
 			otherChannelRecipient,
 			variables,
 			type,
+			...restArgs,
 		});
 	};
 
@@ -53,11 +65,13 @@ function CommunicationModal({
 	const ActiveModalComp = COMPONENT_MAPPING[modalType] || null;
 
 	const whatsappTemplatesData = {
-		sendCommunicationTemplate: (args) => sendQuickCommuncation({
-			...args,
-			otherChannelRecipient : userData?.whatsapp_number_eformat,
-			type                  : 'whatsapp',
-		}),
+		sendCommunicationTemplate: (args) => sendUserWhatsappTemplate(
+			{
+				...args,
+				country_code: whatsapp_country_code?.slice(1) || '91',
+				whatsapp_number,
+			},
+		),
 		communicationLoading: loading,
 	};
 	return (
@@ -77,6 +91,7 @@ function CommunicationModal({
 					</div>
 				)}
 			/>
+
 			{ActiveModalComp && (
 				<ActiveModalComp
 					closeModal={closeModal}
@@ -85,7 +100,7 @@ function CommunicationModal({
 					userData={userData}
 					sendQuickCommuncation={sendQuickCommuncation}
 					data={whatsappTemplatesData}
-					loading={loading}
+					loading={loading || whatsappLoading}
 				/>
 			)}
 		</Modal>

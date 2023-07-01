@@ -1,0 +1,22 @@
+.list {
+	padding: 8px 12px;
+	margin: 8px 12px;
+}
+
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			padding: unset !important;
+		}
+	}
+}
+
+.modal_body {
+	padding: 0 24px;
+	margin-top: 24px;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-between;
+}

@@ -33,7 +33,7 @@ function SentDiv({ eachList = {} }) {
 				</div>
 			</div>
 			<img
-				src="https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg"
 				alt="KAM"
 			/>
 		</div>

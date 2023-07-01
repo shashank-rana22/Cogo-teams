@@ -1,26 +1,29 @@
-import { IcMUserAllocations } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 
-import { URL_MATCH_REGEX } from '../../constants';
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
+import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
+import Order from './Order';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
-	const { message = '', media_url = '' } = response;
-	const URLRegex = new RegExp(URL_MATCH_REGEX);
+	const { message = '', media_url = '', profanity_check = '' } = response;
+	const hasProfanity = profanity_check === 'nudity';
 	const fileExtension = media_url?.split('.').pop();
-	const renderText = (txt = '') => (
-		(txt?.split(' ') || [])
-			.map((part) => (URLRegex.test(part) ? (
-				`<a href=${part} target="_blank">${part} </a>`
-			) : `${part} `))
-	).join(' ');
+	const { renderURLText, renderBoldText } = whatsappTextFormatting();
+
+	const renderText = (txt = '') => {
+		let newTxt = renderURLText(txt);
+		newTxt = renderBoldText(newTxt);
+		return newTxt;
+	};
 
 	function ShowMessage() {
-		return (
-			<div dangerouslySetInnerHTML={{ __html: renderText(message) }} />
-		);
+		return message_type === 'template'
+			? <div dangerouslySetInnerHTML={{ __html: message.replace(/(\r\n|\r|\n)/g, '<br>') }} />
+			: <div dangerouslySetInnerHTML={{ __html: renderText(message.replace(/(\r\n|\r|\n)/g, '<br>')) }} />;
 	}
 
 	function LoadMedia(type) {
@@ -30,7 +33,8 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					<img
 						src={media_url}
 						alt={message_type}
-						className={styles.object_styles}
+						className={cl`${styles.object_styles}
+						 ${hasProfanity ? styles.profanity_blur : ''}`}
 					/>
 				);
 			case 'audio':
@@ -60,10 +64,9 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		return (
 			<>
 				<div
-					className={styles.clickable_object}
+					className={cl`${styles.clickable_object} ${hasProfanity ? styles.reduce_blur : ''}`}
 					role="presentation"
 					onClick={() => {
-						// eslint-disable-next-line no-undef
 						window.open(
 							media_url,
 							'_blank',
@@ -71,6 +74,12 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
+					{hasProfanity && (
+						<div className={styles.sensitive_content}>
+							<IcMEyeclose fill="#828282" />
+							<div className={styles.sensitive_text}>Sensitive Content</div>
+						</div>
+					)}
 					{LoadMedia(message_type)}
 				</div>
 
@@ -78,7 +87,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 			</>
 		);
 	}
-	if (message_type === 'document') {
+	if (MESSAGE_MAPPING.document.includes(message_type)) {
 		return (
 			<>
 				<CustomFileDiv mediaUrl={media_url} />
@@ -96,10 +105,21 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					<div className={styles.contact_name}>
 						{formatted_name}
 					</div>
-					{(phones || []).map(({ phone = '' }) => <div className={styles.mobile_no}>{phone}</div>)}
+					{(phones || []).map(({ phone = '' }) => (
+						<div
+							key={phone}
+							className={styles.mobile_no}
+						>
+							{phone}
+						</div>
+					))}
 				</div>
 			</div>
 		);
+	}
+
+	if (message_type === 'order') {
+		return <Order message={message} />;
 	}
 
 	return <ShowMessage />;

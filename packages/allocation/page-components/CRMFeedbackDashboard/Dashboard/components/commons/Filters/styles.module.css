@@ -1,0 +1,44 @@
+/* stylelint-disable selector-class-pattern */
+
+.filter {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.select {
+	width: 200px;
+	margin-right: 4px;
+
+	:global(.ui_select_input_placeholder) {
+		font-size: 14px;
+		color: var(--color-secondary-greyscale-2);
+	}
+}
+
+.time {
+	margin-right: 4px;
+
+	:global(input) {
+		margin-right: 4px;
+
+		&::placeholder {
+			font-family: var(--font-family);
+			font-size: 14px;
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
+
+	:global(.react-datepicker__input-container) input {
+		height: 40px;
+	}
+}
+
+@media (max-width: 576px) {
+	.select,
+	.time {
+		margin-bottom: 8px;
+	}
+}

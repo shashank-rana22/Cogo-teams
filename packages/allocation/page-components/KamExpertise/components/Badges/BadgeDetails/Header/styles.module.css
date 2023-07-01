@@ -1,0 +1,71 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		width: 100%;
+	}
+}
+
+.filter_container {
+	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		width: 60%;
+	}
+}
+
+.dropdown {
+	width: 300px;
+	margin-right: 16px;
+
+	:global(.ui_multiselect_container) {
+		height: 32px;
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 4px;
+	}
+}
+
+.search_bar {
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.button_mastery {
+	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+		margin-bottom: 4px;
+	}
+}
+
+.button_badge {
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+.button_container {
+	display: flex;
+
+	:global(.ui_button_container) {
+		border: none;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-end;
+		width: 32%;
+	}
+}

@@ -1,0 +1,10 @@
+.card_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 100%;
+	padding: 2%;
+	background: #fff;
+	border: 2px;
+	box-shadow: none;
+}

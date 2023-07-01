@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	height: 100%;
+	padding: 16px;
+	margin-top: 10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	width: 20%;
+	margin-left: 36px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 2px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.vr {
+	width: 2px;
+	margin-left: 36px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.heading {
+	display: flex;
+}
+
+.loader {
+	transform: rotate(90deg);
+}

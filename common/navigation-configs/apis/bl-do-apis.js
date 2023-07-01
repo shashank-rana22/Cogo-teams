@@ -34,7 +34,7 @@ const apis = [
 		api          : 'get_shipment',
 		access_type  : 'private',
 		feature      : 'bl_do',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_cost_sheet_quotations',
@@ -208,7 +208,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_rail_cost_sheet',
+		api          : 'get_rail_shipment_cost_sheet',
 		access_type  : 'private',
 		feature      : 'bl_do',
 		service_name : 'shipment',
@@ -233,6 +233,24 @@ const apis = [
 		api          : 'get_container_sea_route',
 		access_type  : 'public',
 		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'list_authority_desk_bl_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
+	{
+		api          : 'list_authority_desk_do_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
+	{
+		api          : 'get_servics',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
 	},
 ];
 

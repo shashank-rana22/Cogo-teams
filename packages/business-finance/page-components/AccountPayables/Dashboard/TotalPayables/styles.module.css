@@ -1,0 +1,140 @@
+.container {
+	padding: 16px;
+	margin-top: -12px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 16px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 6px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 50%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.amount_container {
+	padding: 16px 8px 12px 16px;
+	margin-bottom: 8px;
+	border: 1px solid #d8d8d8;
+	border-radius: 8px;
+}
+
+.amount_div {
+	display: flex;
+}
+
+.amount {
+	display: flex;
+	padding-right: 8px;
+}
+
+.point {
+	width: 8px;
+	height: 8px;
+	margin-top: 6px;
+	background-color: #f68b21;
+	border-radius: 8px;
+}
+
+.point_label {
+	display: flex;
+}
+
+.value {
+	display: flex;
+	margin-right: 8px;
+	margin-left: 6px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #333;
+}
+
+.label {
+	margin-left: 8px;
+	font-size: 14px;
+	color: #333;
+}
+
+.vr {
+	width: 2px;
+	height: 60px;
+	margin-right: 32px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.green_point {
+	width: 8px;
+	height: 8px;
+	margin-top: 6px;
+	background-color: #ed3726;
+	border-radius: 8px;
+}
+
+.green {
+	width: 8px;
+	height: 8px;
+	margin-top: 6px;
+	background: #67c676;
+	border-radius: 8px;
+}
+
+.down {
+	margin-top: 2px;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+.popover {
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+}
+
+.row {
+	display: flex;
+	padding-bottom: 12px;
+}
+
+.progress_bar {
+	margin-top: 16px;
+	margin-right: 24px;
+}
+
+.inline_style {
+	margin-top: 2px;
+	margin-left: 2px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.loader {
+	width: 100px;
+	height: 16px;
+	margin: 4px 12px 0 8px;
+}

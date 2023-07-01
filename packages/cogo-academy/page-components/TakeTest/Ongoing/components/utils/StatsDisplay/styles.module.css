@@ -1,0 +1,21 @@
+.stats_and_time {
+	display: flex;
+	flex-direction: column;
+	margin: 24px 0;
+}
+
+.label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.value {
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.content {
+	display: flex;
+}

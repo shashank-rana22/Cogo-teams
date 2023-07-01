@@ -1,5 +1,6 @@
 .service {
 	display: flex;
+	gap: 8px;
 	align-items: center;
 	font-size: 13px;
 	font-weight: 500;
@@ -11,4 +12,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 8px;
+}
+
+.service_name {
+	display: flex;
+	align-items: center;
 }

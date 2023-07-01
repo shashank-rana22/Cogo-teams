@@ -10,7 +10,14 @@ function MyResponsiveBar({ data }) {
 		<>
 			<div className={styles.invoice}>
 				Daily Invoices Trend
-				<Tooltip content="Daily approval and rejection statistics " placement="top">
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							Invoices uploaded, approved and rejected
+						</div>
+					)}
+					placement="top"
+				>
 					<div className={styles.icon}>
 						<IcMInfo />
 					</div>
@@ -21,14 +28,14 @@ function MyResponsiveBar({ data }) {
 
 			<ResponsiveBar
 				data={data}
-				keys={['Approved', 'Rejected']}
+				keys={['Uploaded', 'Approved', 'Rejected']}
 				indexBy="date"
-				margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
-				padding={0.4}
+				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
+				padding={0.2}
 				enableGridY
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={['#ACDADF', '#F37166']}
+				colors={['#ACDADF', '#C4DC91', '#F8AEA8']}
 				layout="vertical"
 				groupMode="grouped"
 				borderColor={{
@@ -72,7 +79,7 @@ function MyResponsiveBar({ data }) {
 						direction     : 'row',
 						justify       : false,
 						translateX    : 20,
-						translateY    : -280,
+						translateY    : -300,
 						itemsSpacing  : 50,
 						itemWidth     : 100,
 						itemHeight    : 20,

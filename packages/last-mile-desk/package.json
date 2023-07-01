@@ -1,0 +1,18 @@
+{
+    "name": "@cogoport/last-mile-desk",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Package for Last Mile Desk for all shipment types",
+    "main": "index.js",
+    "dependencies": {
+      "@cogoport/components": "^1.0.390",
+      "@cogoport/icons-react": "^1.0.61",
+      "@cogoport/next": "workspace:^0.1.0",
+      "@cogoport/request": "workspace:^0.1.0",
+      "@cogoport/scope-select": "workspace:^0.1.0",
+      "@cogoport/store": "workspace:^0.1.0",
+      "@cogoport/utils": "^1.2.6",
+      "react": "18.2.0"
+    }
+  }
+  

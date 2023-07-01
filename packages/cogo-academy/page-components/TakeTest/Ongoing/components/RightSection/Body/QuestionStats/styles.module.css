@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	padding: 18px 32px;
+}
+
+.stats_container {
+	display: flex;
+	align-items: center;
+	width: 45%;
+	margin-bottom: 12px;
+}
+
+.stats_count {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	margin-right: 8px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.label {
+	display: flex;
+	width: 65%;
+	word-wrap: break-word;
+}

@@ -1,0 +1,18 @@
+.container {
+	margin: 12px 40px;
+}
+
+.module_container {
+	margin-bottom: 20px;
+	border-radius: 4px;
+
+	&.new {
+		padding: 16px 20px;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	}
+}
+
+.button {
+	margin-top: 20px;
+}

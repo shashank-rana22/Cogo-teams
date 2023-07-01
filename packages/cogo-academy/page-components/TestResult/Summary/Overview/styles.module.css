@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.component_heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.items_container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.single_item_container {
+	display: flex;
+}
+
+.svg {
+	margin-right: 16px;
+	font-size: 24px;
+}
+
+.text_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.topics_container {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 200px;
+}
+
+.item_heading {
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.item_text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}

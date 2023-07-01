@@ -7,11 +7,11 @@ import controls from '../../../../configurations/get-requests-filter-controls';
 const useFilterContent = ({ params, setParams }) => {
 	const [showFilters, setShowFilters] = useState(false);
 
-	const [filters, setFilters] = useState({});
-
-	const formProps = useForm();
+	const formProps = useForm({ defaultValues: { status: 'pending' } });
 
 	const { reset, getValues } = formProps;
+
+	const [filters, setFilters] = useState(getValues());
 
 	useEffect(() => {
 		if (!isEmpty(filters)) {
@@ -32,8 +32,15 @@ const useFilterContent = ({ params, setParams }) => {
 
 		const values = {};
 		controls.forEach((control) => {
-			if (!isEmpty(data[control.name] || {})) {
-				values[control.name] = data?.[control.name];
+			const { name } = control;
+
+			if (!isEmpty(data[name] || {})) {
+				if (name === 'created_at') {
+					values.created_at_greater_than = data[name]?.startDate || undefined;
+					values.created_at_less_than = data[name]?.endDate || undefined;
+				} else {
+					values[name] = data[name];
+				}
 			}
 		});
 		setFilters(values);

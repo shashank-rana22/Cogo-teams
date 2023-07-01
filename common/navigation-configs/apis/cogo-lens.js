@@ -101,6 +101,121 @@ const cogoLens = [
 		feature      : 'cogolens',
 		service_name : 'cogolens',
 	},
+	{
+		api          : 'send_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'outlook_scopes',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'reply_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'reply_all',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'entity_stakeholder_mappings',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'outlook_authorization_url',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'add_outlook_account',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'forward_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'update_rpa_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'detect_concor_doc',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'get_attachments',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'get_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'detect',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'list_rpa_mails',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'get_rpa_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'list_mails',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'draft_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'classify_docs',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'fcl_freight_rate_forecasting',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+
 ];
 
 export default cogoLens;

@@ -1,0 +1,33 @@
+.list_item_container {
+	height: auto;
+	padding-bottom: 20px;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.top_div {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 16px 4px;
+}
+
+.info_tag {
+	display: flex;
+	flex-direction: row;
+	width: 50%;
+	margin-left: 16px;
+}
+
+.rule {
+	width: 90%;
+	margin-left: 16px;
+}
+
+.rule_body {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
+	margin-top: 8px;
+}

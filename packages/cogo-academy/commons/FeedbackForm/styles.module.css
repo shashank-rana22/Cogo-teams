@@ -1,0 +1,79 @@
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 60px;
+	padding: 2px 5px;
+	margin-right: 8px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #c2c2c2;
+	border-radius: 12px;
+}
+
+.section_container {
+	width: 100%;
+	margin-bottom: 12px;
+
+	:global {
+		.ui_text_area_control {
+			height: 100px;
+			padding: 12px;
+			font-size: 14px;
+		}
+
+		.ui_text_area_container {
+			background: #fff;
+		}
+
+		.ui_rich_text_editor {
+			background: #fff;
+			border-radius: 8px;
+		}
+	}
+}
+
+.content {
+	width: 70vw;
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.answer_container {
+	margin-top: 16px;
+}
+
+.all_icons {
+	display: flex;
+	flex-direction: row;
+}
+
+.error_text {
+	color: #ee3425;
+}
+
+.question_text {
+	opacity: 0.6;
+}
+
+.author_name {
+	margin-bottom: 16px;
+}
+
+.aftercheckbox {
+	margin: 8px 0 6px;
+	font-weight: 600;
+}
+
+.remark {
+	display: flex;
+	flex-flow: column wrap;
+	align-content: space-around;
+	margin-bottom: 16px;
+}
+
+.errors {
+	padding-top: 4px;
+	color: #ee3425;
+}

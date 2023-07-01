@@ -1,0 +1,21 @@
+.display_assesment {
+	width: 100%;
+}
+
+.question {
+	display: flex;
+	font-weight: 600;
+}
+
+.answer {
+	display: flex;
+}
+
+.flex {
+	width: 90%;
+}
+
+.errors {
+	margin-top: 8px;
+	color: #ee3425;
+}

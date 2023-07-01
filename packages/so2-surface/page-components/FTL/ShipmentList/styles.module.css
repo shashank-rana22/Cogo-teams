@@ -1,0 +1,17 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.action_buttons {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-right: 16px;
+	margin-bottom: 20px;
+}
+
+.action_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

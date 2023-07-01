@@ -1,3 +1,4 @@
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
@@ -20,9 +21,8 @@ function RenderUrgencyTag({ item, field }:Props) {
 	return (
 		<div>
 			{item?.urgencyTag && field?.key === 'urgencyTag' ? (
-
 				<div className={styled.urgency}>
-					{showOverflowingNumber(item?.urgencyTag[0], 8)}
+					{showOverflowingNumber(startCase(item?.urgencyTag[0]), 8)}
 				</div>
 
 			) : '-'}

@@ -1,4 +1,4 @@
-import ROLE_IDS from '@cogoport/constants/role_ids';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -11,12 +11,14 @@ const useGetListRfqs = () => {
 		method : 'GET',
 		url    : '/list_rfqs',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
+
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	const fullAccessIds = [ROLE_IDS.SUPERADMIN_ID, ROLE_IDS.ADMIN_ID];
-	const isFullAccess = user_profile.partner.user_role_ids.filter((id) => fullAccessIds.includes(id)).length;
+
+	const isFullAccess = user_profile.partner.user_role_ids
+		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
 
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;
@@ -28,7 +30,19 @@ const useGetListRfqs = () => {
 				filters: {
 					...(filters || {}),
 					relevant_supply_agent_id : !isFullAccess ? user_profile?.user?.id : undefined,
+					supply_agent_preference  : true,
 					service_type             : filters.service_type,
+					origin_port_id           : filters.origin_port_id ? filters.origin_port_id : undefined,
+					destination_port_id      : filters.destination_port_id ? filters.destination_port_id : undefined,
+					origin_airport_id        : filters.origin_airport_id ? filters.origin_airport_id : undefined,
+					destination_airport_id   : filters.destination_airport_id
+						? filters.destination_airport_id : undefined,
+					origin_location_id      : filters.origin_location_id ? filters.origin_location_id : undefined,
+					destination_location_id : filters.destination_location_id
+						? filters.destination_location_id : undefined,
+					origin_country_id      : filters.origin_country_id ? filters.origin_country_id : undefined,
+					destination_country_id : filters.destination_country_id
+						? filters?.destination_country_id : undefined,
 				},
 				sort_by                          : 'updated_at',
 				created_by_user_details_required : true,

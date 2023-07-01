@@ -1,0 +1,28 @@
+.container {
+	@media (max-width: 580px) {
+		padding-top: 50px;
+	}
+}
+
+.heading {
+	margin-bottom: 20px;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.back_div {
+	display: flex;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+
+.back {
+	margin-left: 12px;
+}
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 250px;
+}

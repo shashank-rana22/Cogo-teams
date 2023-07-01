@@ -1,0 +1,16 @@
+.heading {
+	font-size: 14px;
+	color: #221f20;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 32px;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}

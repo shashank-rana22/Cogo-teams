@@ -1,18 +1,16 @@
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
+import useGetMainPortsOptions from '../hooks/useGetMainPortsOptions';
 
 import chargeControl from './charge-controls';
 
 const TrailerControls = ({ data, charge_code_name }) => {
-	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['seaport'] } },
-	}));
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: data?.data?.origin_location_id });
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: data?.data?.destination_location_id });
+
 	const controls = [
 		{
 			name        : 'origin_main_port_id',
 			type        : 'select',
-			...locationOptions,
+			...mainPortOptions1,
 			label       : 'Origin Main Port',
 			span        : 4,
 			placeholder : 'Select',
@@ -24,7 +22,7 @@ const TrailerControls = ({ data, charge_code_name }) => {
 			label       : 'Destination Main Port',
 			span        : 4,
 			placeholder : 'Select',
-			...locationOptions,
+			...mainPortOptions2,
 			rules       : { required: 'This is required' },
 		},
 		{

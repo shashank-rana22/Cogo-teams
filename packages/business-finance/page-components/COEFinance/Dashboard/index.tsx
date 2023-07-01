@@ -21,10 +21,10 @@ function Dashboard({ statsData }) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
-	const { INITIATED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
+	const { LOCKED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
 
 	const Status = [
-		{ id: 1, label: 'Pending', value: INITIATED || '-' },
+		{ id: 1, label: 'Pending', value: LOCKED || '-' },
 		{ id: 2, label: 'Approved', value: FINANCE_ACCEPTED || '-' },
 		{ id: 3, label: 'Rejected', value: COE_REJECTED || '-' },
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
@@ -34,7 +34,7 @@ function Dashboard({ statsData }) {
 		<>
 			<div className={styles.card_flex}>
 				{Status.map((item) => (
-					<div className={styles.card}>
+					<div key={item.id} className={styles.card}>
 						<div className={styles.card_label}>{item?.label}</div>
 						<div className={styles.border} />
 						<div className={styles.card_value}>{item?.value}</div>
@@ -65,7 +65,14 @@ function Dashboard({ statsData }) {
 				<div className={styles.service_stats}>
 					<div className={styles.invoice}>
 						Service Ops 2 Statistics
-						<Tooltip content="Percentage of Invoices approved" placement="top">
+						<Tooltip
+							content={(
+								<div className={styles.tooltip_text}>
+									Percentage of Invoices approved
+								</div>
+							)}
+							placement="top"
+						>
 							<div className={styles.icon}>
 								<IcMInfo />
 							</div>
@@ -78,6 +85,8 @@ function Dashboard({ statsData }) {
 						<StyledTable
 							data={So2statsData}
 							columns={columns}
+							loading={false}
+							imageFind=""
 						/>
 					</div>
 
@@ -90,7 +99,14 @@ function Dashboard({ statsData }) {
 			<div className={styles.stats}>
 				<div className={styles.jobs}>
 					Job Statistics & Profitability
-					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
+					<Tooltip
+						content={(
+							<div className={styles.tooltip_text}>
+								No. of Jobs/Shipment IDs and it’s profitability
+							</div>
+						)}
+						placement="top"
+					>
 						<div className={styles.icon}>
 							<IcMInfo />
 						</div>

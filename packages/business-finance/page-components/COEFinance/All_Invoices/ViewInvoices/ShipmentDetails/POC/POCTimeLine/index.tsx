@@ -1,5 +1,6 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -29,8 +30,6 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = data;
-
-	console.log(data, 'data');
 
 	const gettimeLineData = () => {
 		if (timeLine[0]?.eventName === 'POSTED') {
@@ -173,7 +172,14 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
                   || eventName === 'PARTIAL' ? (
 	<div className={styles.amount_container}>
 		Amount :-
-		{getFormattedPrice(payingAmount, 'INR')}
+		{formatAmount({
+			amount   :	payingAmount,
+			currency : GLOBAL_CONSTANTS.currency_code.INR,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		})}
 	</div>
 										) : null}
 								</div>

@@ -1,0 +1,40 @@
+.button {
+	margin-left: 16px;
+}
+
+.sub_container {
+	padding: 16px;
+}
+
+.loader {
+	width: 98%;
+	height: 30px;
+	margin-right: 20px;
+	margin-left: 12px;
+}
+
+.body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 24px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+	text-align: center;
+}
+
+.sub_header {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+	text-align: center;
+}

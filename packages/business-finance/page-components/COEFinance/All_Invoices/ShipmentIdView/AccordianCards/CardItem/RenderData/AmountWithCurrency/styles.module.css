@@ -3,5 +3,36 @@
 }
 
 .size {
+	display: flex;
 	font-size: 12px;
+}
+
+.ic_min_icon {
+	margin-left: 8px;
+	color: #f68b21;
+}
+
+.pre_tax {
+	color: #ed3726;
+}
+
+.pre_tax_amount {
+	margin-bottom: 5px;
+	margin-left: 10px;
+	color: rgb(51 51 51);
+	background: #fffaeb;
+}
+
+.post_tax {
+	color: #00a300;
+}
+
+.post_tax_amount {
+	margin-left: 10px;
+	color: rgb(51 51 51);
+	background: #fffaeb;
+}
+
+.amount_value {
+	min-width: 80px;
 }

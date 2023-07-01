@@ -1,0 +1,67 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	margin: 8px;
+}
+
+.div_container {
+	display: flex;
+}
+
+.date_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.div_width {
+	width: 230px;
+}
+
+.lable_style {
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.errors {
+	font-size: var(--font-size-md);
+	color: red;
+}
+
+.upload_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 32px;
+}
+
+.upload_Width {
+	width: 360px;
+
+	.ui_text_area_container {
+		padding: 42px 4px;
+	}
+}
+
+.cancel_modal {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 5px;
+}
+
+.cancel_invoice {
+	font-weight: bold;
+}
+
+.confirm_button {
+	display: flex;
+	margin-top: 12px;
+}
+
+.styled_button {
+	margin-right: 12px;
+}
+
+.styled_invoice {
+	text-decoration: underline;
+}

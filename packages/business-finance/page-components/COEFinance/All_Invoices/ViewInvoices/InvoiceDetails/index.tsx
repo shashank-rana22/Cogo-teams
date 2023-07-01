@@ -1,10 +1,8 @@
 import { Button, Tooltip, Modal, Pill } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import AddUrgencyTag from './AddUrgencyTag/index';
 import { urgencyOptions } from './controls';
@@ -15,6 +13,9 @@ interface BillInterFace {
 	grandTotal: number;
 	billCurrency: string;
 	id?: string;
+	recurringState?:string,
+	billType: string;
+	isProforma: boolean;
 }
 interface BillAdditionalObject {
 	collectionPartyId?: string;
@@ -22,7 +23,7 @@ interface BillAdditionalObject {
 	urgencyRemarks?: string;
 }
 interface RemarkObj {
-	remarks?: string;
+	remarks?: [];
 }
 interface DataProps {
 	bill: BillInterFace;
@@ -38,12 +39,10 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
 	const { bill, remarks = [], serviceType, billAdditionalObject } = data || {};
 	const { urgencyTag, urgencyRemarks } = billAdditionalObject || {};
-	const { grandTotal, billCurrency, id } = bill || {};
+	const { grandTotal, billCurrency, id, billType, isProforma } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
 	const [tagValue, setTagValue] = useState('');
-	const { query } = useRouter();
-	const { billType, isProforma } = query;
 
 	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
@@ -147,7 +146,14 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					Invoice Amount - &nbsp;
 					{' '}
 					<span className={styles.amount}>
-						{getFormattedPrice(grandTotal, billCurrency)}
+						{formatAmount({
+							amount   :	grandTotal as any,
+							currency :	billCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</span>
 				</div>
 				<div className={styles.vertical_small_hr} />

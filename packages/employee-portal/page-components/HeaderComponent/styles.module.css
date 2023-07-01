@@ -1,0 +1,21 @@
+.container {
+	margin-bottom: 20px;
+}
+
+.header {
+	padding-bottom: 8px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.sub_text {
+	padding: 6px 0 16px;
+	font-size: 13px;
+	line-height: 24px;
+}
+
+.main_text {
+	padding-top: 6px;
+	font-size: 13px;
+	line-height: 24px;
+}

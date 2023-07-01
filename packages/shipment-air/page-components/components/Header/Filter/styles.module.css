@@ -1,0 +1,13 @@
+.filter_header {
+	margin-top: 16px;
+	color: #221f20;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.reset_button {
+	margin-right: 12px;
+}

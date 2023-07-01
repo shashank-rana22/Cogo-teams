@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import getCreateConfigurationsControls from '../configurations/get-configurations-create-controls';
@@ -28,20 +29,35 @@ const useCreateConfigurations = ({
 
 	const controls = getCreateConfigurationsControls({ setSegment });
 
+	const {
+		service_type,
+		role_ids,
+		user_ids,
+		exclusion_user_ids,
+		stakeholder_type,
+		segment_id,
+		locking_criterion,
+		locking_period,
+		cooling_period,
+		schedule_type,
+		days,
+	} = item;
+
 	const formProps = useForm({
 		defaultValues: {
-			service_type      : item.service_type || 'organization',
-			role_ids          : item.role_ids,
-			user_ids          : item.user_ids,
-			stakeholder_type  : item.stakeholder_type,
-			segment_id        : item.segment_id,
-			locking_criterion : item.locking_criterion,
-			locking_period    : item.locking_period,
-			cooling_period    : item.cooling_period,
-			schedule_data     : {
-				schedule_type  : item.schedule_type || 'daily',
-				dates_of_month : item.days,
-				days_of_week   : item.days,
+			service_type  : service_type || 'organization',
+			role_ids,
+			user_ids,
+			exclusion_user_ids,
+			stakeholder_type,
+			segment_id,
+			locking_criterion,
+			locking_period,
+			cooling_period,
+			schedule_data : {
+				schedule_type  : schedule_type || 'daily',
+				dates_of_month : days,
+				days_of_week   : days,
 			},
 		},
 	});
@@ -55,7 +71,21 @@ const useCreateConfigurations = ({
 		let newControl = { ...control };
 
 		if (newControl.name === 'user_ids') {
-			if (roleIds) {
+			if (!isEmpty(roleIds)) {
+				newControl = {
+					...newControl,
+					disabled : false,
+					params   : {
+						filters: {
+							role_ids: roleIds,
+						},
+					},
+				};
+			}
+		}
+
+		if (newControl.name === 'exclusion_user_ids') {
+			if (!isEmpty(roleIds)) {
 				newControl = {
 					...newControl,
 					disabled : false,

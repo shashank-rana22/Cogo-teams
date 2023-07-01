@@ -9,12 +9,15 @@ function QuestionsCollapse({ questions }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				Q.
-				{' '}
-				{questions.question_abstract}
+				<div style={{ display: 'flex' }}>
+					<div>Q.</div>
+					{' '}
+					<div style={{ flexWrap: 'wrap' }}>{questions.question_abstract}</div>
+
+				</div>
 				{' '}
 
-				<IcMArrowRight width={16} height={16} />
+				<IcMArrowRight style={{ alignItems: 'center', marginTop: '22px' }} width={16} height={16} />
 			</div>
 
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>

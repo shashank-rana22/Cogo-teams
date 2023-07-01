@@ -91,6 +91,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -102,6 +103,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 									size="md"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}

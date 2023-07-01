@@ -1,0 +1,171 @@
+.flex_bread {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.div_left {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_button_container {
+			padding: 4px 10px;
+			margin-right: 12px;
+			border: 1px solid;
+		}
+	}
+}
+
+.filter_container {
+	display: flex;
+	justify-content: flex-start;
+	width: 90%;
+}
+
+.card_div {
+	display: flex;
+	justify-content: space-evenly;
+	height: 34px;
+	margin-top: auto;
+	margin-right: 15px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 35px;
+	text-align: center;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.filter {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	width: 500px;
+	margin: 15px -15px 15px 0;
+
+	:global {
+		.ui_input_container {
+			height: 34px !important;
+
+			input {
+				font-size: 12px !important;
+			}
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.selected {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fdebe9;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.button_tab {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	cursor: pointer;
+	background: white;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.table_data {
+	margin-top: 16px;
+}
+
+.booked_flex {
+	display: flex;
+	align-items: center;
+	width: 140px;
+}
+
+.flex_modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex {
+	display: flex;
+}
+
+.sub_comp {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 36px;
+	margin: 0 0 40px;
+	background: #f8f2e7;
+	border: 1px solid #f2e3c3;
+}
+
+.span_val {
+	padding: 2px 16px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.hide_data {
+	width: 160px;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.quo_border {
+	height: 30px;
+	margin-left: 50px;
+	border: 1px solid #f2e3c3;
+}
+
+.quo {
+	display: flex;
+	align-items: center;
+}
+
+.button_value {
+	display: flex;
+	width: 100%;
+}
+
+.steps {
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.card_small {
+	padding: 8px 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
+}

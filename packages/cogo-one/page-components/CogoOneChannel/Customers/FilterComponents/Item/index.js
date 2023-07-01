@@ -1,6 +1,4 @@
-import { cl } from '@cogoport/components';
-import CheckboxGroupController from '@cogoport/forms/page-components/Controlled/CheckboxGroupController';
-import RadioGroupController from '@cogoport/forms/page-components/Controlled/RadioGroupController';
+import { SelectController, CheckboxGroupController, RadioGroupController, InputController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -12,7 +10,10 @@ function getElementController(type = '') {
 
 		case 'checkboxgroup':
 			return CheckboxGroupController;
-
+		case 'select':
+			return SelectController;
+		case 'input':
+			return InputController;
 		default:
 			return null;
 	}
@@ -20,25 +21,28 @@ function getElementController(type = '') {
 
 function Item(props) {
 	const {
-		type,
+		controllerType = '',
 		control,
 		label,
-		botToggle = false,
+		error = {},
 	} = props || {};
 
-	const Element = getElementController(type);
+	const Element = getElementController(controllerType);
 
 	return (
 		<div className={styles.element}>
 			<div className={styles.label}>
 				{label}
 			</div>
-			<div className={cl`${styles.filters_types} ${botToggle ? styles.disabled : ''}`}>
-				<Element
-					{...props}
-					control={control}
-					className={styles.field_controller}
-				/>
+			<div className={styles.filters_types}>
+				{Element && (
+					<Element
+						{...props}
+						control={control}
+						className={styles.field_controller}
+					/>
+				)}
+				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>
 	);

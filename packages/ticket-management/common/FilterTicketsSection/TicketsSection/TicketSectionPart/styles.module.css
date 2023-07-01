@@ -1,0 +1,33 @@
+.tickets_section_part {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	height: 515px;
+	margin-right: 12px;
+	background: #fdfbf6;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.admin_ticket_view {
+	height: 80vh;
+}
+
+.status_heading {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.tickets_count_label {
+	padding-left: 5px;
+	font-size: 14px;
+	color: #828282;
+}

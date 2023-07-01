@@ -1,0 +1,6 @@
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -36px;
+	margin-bottom: 12px;
+}

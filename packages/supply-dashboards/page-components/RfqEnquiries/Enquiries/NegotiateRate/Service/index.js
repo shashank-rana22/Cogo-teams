@@ -22,7 +22,7 @@ function Service({
 }) {
 	const [selectedRate, setSelectedRate] = useState(null);
 	const [showModal, setShowModal] = useState(false);
-	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
+	const tradetype = service?.data?.trade_type === 'import' ? 'Destination' : 'Origin';
 	const status = submittedEnquiry.includes(`${service?.id}${service?.service}`)
 		? 'Submitted!' : 'Pending';
 	const handleClick = () => {
@@ -57,6 +57,21 @@ function Service({
 	const destination = service?.data?.destination_location?.name || service?.data?.destination_airport?.name
 	|| service?.data?.destination_port?.name;
 
+	const originAddress = (
+		<div>
+			{origin}
+			<br />
+			{service?.service === 'trailer_freight' && tradetype === 'Origin' && service?.data?.address}
+		</div>
+	);
+	const destinationAddress = (
+		<div>
+			{destination}
+			<br />
+			{service?.service === 'trailer_freight' && tradetype === 'Destination' && service?.data?.address}
+		</div>
+	);
+
 	return (
 		<div className={styles.container}>
 			<div
@@ -77,13 +92,13 @@ function Service({
 						: `${tradetype} ${startCase(service?.service)}`}
 				</div>
 				<div className={styles.location}>
-					<Tooltip content={origin}>
+					<Tooltip interactive content={originAddress}>
 						<div className={styles.port}>{origin}</div>
 					</Tooltip>
 					{destination ? (
 						<>
 							<IcMPortArrow style={{ paddingTop: '2px', margin: '4px' }} />
-							<Tooltip content={destination}>
+							<Tooltip interactive content={destinationAddress}>
 								<div className={styles.port}>{destination}</div>
 							</Tooltip>
 						</>

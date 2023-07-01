@@ -1,0 +1,20 @@
+.provider_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	min-height: 180px;
+	padding: 0 0 20px;
+	overflow: hidden;
+}
+
+.close_button {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.heading {
+	padding: 12px 16px;
+}

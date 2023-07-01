@@ -1,0 +1,40 @@
+.container {
+	width: 120px;
+	padding: 10px 5px;
+
+	:hover {
+		color: var(--color-accent-orange-2);
+	}
+}
+
+.final_container {
+	width: 120px;
+	padding: 10px 5px;
+}
+
+.styled_text {
+	cursor: pointer;
+}
+
+.hr {
+	width: 100%;
+	height: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: #c4c4c4;
+}
+
+.flex_data {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.text_value {
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.modal_show {
+	padding: 20px;
+}

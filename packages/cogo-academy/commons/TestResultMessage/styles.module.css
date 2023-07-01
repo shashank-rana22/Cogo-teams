@@ -1,0 +1,25 @@
+.message_container {
+	display: flex;
+}
+
+.image_container {
+	margin-right: 20px;
+}
+
+.message_content {
+	display: flex;
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.sub_text {
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
+}

@@ -1,0 +1,18 @@
+.container {
+	padding: 16px;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.body {
+	display: flex;
+	flex-wrap: row wrap;
+}
+
+.single_record {
+	display: flex;
+	flex-direction: column;
+}

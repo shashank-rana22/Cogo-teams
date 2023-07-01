@@ -14,8 +14,7 @@ const useGetDepartmentMappings = ({ department, searchValue = '' }) => {
 		params,
 	}, { manual: false });
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Qdesignation: searchValue || undefined }), [searchValue]);
+	useEffect(() => setParams((pv) => ({ ...pv, Qdesignation: searchValue || undefined })), [searchValue]);
 
 	return { data, loading };
 };

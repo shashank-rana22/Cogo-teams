@@ -1,0 +1,51 @@
+.container {
+	width: 50%;
+	padding: 16px;
+	margin-top: 10px;
+	overflow: scroll;
+	background: #fff;
+	border-radius: 8px;
+
+	@media (max-width: 1158px) {
+		width: 100%;
+	}
+}
+
+.header {
+	justify-content: space-between;
+	padding-bottom: 1px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 6px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 60%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.segmented_filter {
+	padding-top: 16px;
+}
+
+.count {
+	margin-left: 16px;
+}

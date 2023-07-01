@@ -1,0 +1,5 @@
+.serial_id {
+	font-weight: 500;
+	color: var(--color-accent-orange-2);
+	text-decoration: underline;
+}

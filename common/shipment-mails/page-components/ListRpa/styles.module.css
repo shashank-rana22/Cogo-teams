@@ -1,0 +1,55 @@
+.card_container {
+	gap: 12px;
+	min-height: 50vh;
+	max-height: 75vh;
+	overflow: auto;
+}
+
+.main_container {
+	width: 27%;
+	padding: 28px 0 0;
+	border-right: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+}
+
+.search_container {
+	display: flex;
+	justify-content: center;
+	padding: 0 12px;
+
+	:global {
+		.ui_input_container.ui_ps_size_md {
+			height: 32px;
+		}
+
+		.ui_input_suffix {
+			margin-right: 12px;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 14px;
+			color: red;
+		}
+	}
+}
+
+.line {
+	margin-top: 10px;
+	border: 1px solid #e0e0e0;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.pagination_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 10px 24px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}

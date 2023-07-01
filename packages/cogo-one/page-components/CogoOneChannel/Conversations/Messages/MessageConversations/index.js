@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
@@ -11,13 +10,35 @@ import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import ReceiveDiv from '../../../../../common/ReceiveDiv';
+import SentDiv from '../../../../../common/SentDiv';
+import { ACCEPT_FILE_MAPPING } from '../../../../../constants';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
 import EmojisBody from './EmojisBody';
-import ReceiveDiv from './ReceiveDiv';
-import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
+
+function MessageMapping({ conversation_type, ...restProps }) {
+	switch (conversation_type) {
+		case 'sent':
+			return <ReceiveDiv {...restProps} />;
+		case 'received':
+			return <SentDiv {...restProps} />;
+		default:
+			return <TimeLine {...restProps} />;
+	}
+}
+const getPlaceHolder = (hasPermissionToEdit, canMessageOnBotSession) => {
+	if (canMessageOnBotSession) {
+		return 'This chat is currently in bot session, send a message to talk with customer';
+	}
+	if (hasPermissionToEdit) {
+		return 'Type your message...';
+	}
+	return 'You do not have permission to chat';
+};
 
 function MessageConversations({
 	messagesData = [],
@@ -39,10 +60,13 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
-
+	messageLoading = false,
+	formattedData = {},
+	setRaiseTicketModal = () => {},
+	canMessageOnBotSession,
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -72,8 +96,7 @@ function MessageConversations({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage();
-			scrollToBottom();
+			sendChatMessage(scrollToBottom);
 		}
 	};
 
@@ -88,6 +111,21 @@ function MessageConversations({
 		}
 	};
 
+	const ticketPopoverContent = (data) => {
+		const triggerModal = () => {
+			setRaiseTicketModal((p) => {
+				if (p?.state) {
+					return { state: false, data: {}, source: null };
+				}
+				return { state: true, data: { messageData: data, formattedData }, source: 'message' };
+			});
+		};
+		return (
+			<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+				Raise a ticket
+			</div>
+		);
+	};
 	useEffect(() => {
 		if (id) {
 			emojiListFetch();
@@ -147,6 +185,9 @@ function MessageConversations({
 
 	);
 
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -161,20 +202,16 @@ function MessageConversations({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage) => (
-				eachMessage?.conversation_type !== 'received' ? (
-					<ReceiveDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				) : (
-					<SentDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				)
+			{(messagesData || []).map((eachMessage, index) => (
+				<MessageMapping
+					key={eachMessage?.created_at}
+					conversation_type={eachMessage?.conversation_type || 'unknown'}
+					eachMessage={eachMessage}
+					activeMessageCard={activeMessageCard}
+					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+					ticketPopoverContent={ticketPopoverContent}
+					user_name={user_name}
+				/>
 			))}
 
 		</>
@@ -207,7 +244,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',
@@ -244,18 +280,18 @@ function MessageConversations({
 							</div>
 							{(suggestions || []).map((eachSuggestion) => (
 								<div
+									key={eachSuggestion}
 									className={styles.tag_div}
-									role="presentation"
+									role="button"
+									tabIndex={0}
 									onClick={() => {
-										if (hasPermissionToEdit) {
-											sentQuickSuggestions(
-												eachSuggestion,
-												scrollToBottom,
-											);
+										if (hasPermissionToEdit && !messageLoading) {
+											sentQuickSuggestions(scrollToBottom, eachSuggestion);
 										}
 									}}
 									style={{
-										cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer',
+										cursor:
+											(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
@@ -267,11 +303,7 @@ function MessageConversations({
 				)}
 				<textarea
 					rows={4}
-					placeholder={
-						hasPermissionToEdit
-							? 'Type your message...'
-							: 'You do not have typing controls as you are observing this chat'
-					}
+					placeholder={getPlaceHolder(hasPermissionToEdit, canMessageOnBotSession)}
 					className={styles.text_area}
 					value={draftMessage || ''}
 					onChange={(e) => setDraftMessages((p) => ({
@@ -293,6 +325,7 @@ function MessageConversations({
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
+								accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 								className="file_uploader"
 								uploadIcon={(
 									<IcMAttach
@@ -304,6 +337,7 @@ function MessageConversations({
 										}}
 									/>
 								)}
+								channel={channel_type}
 								onChange={(val) => {
 									setDraftUploadedFiles((prev) => ({
 										...prev,
@@ -368,13 +402,13 @@ function MessageConversations({
 						<IcMSend
 							fill="#EE3425"
 							onClick={() => {
-								if (hasPermissionToEdit) {
-									sendChatMessage();
-									scrollToBottom();
+								if (hasPermissionToEdit && !messageLoading) {
+									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit || !(isEmpty(draftMessage?.trim()) || !finalUrl)
+								cursor: !hasPermissionToEdit || messageLoading
+								|| (isEmpty(draftMessage?.trim()) && !finalUrl)
 									? 'not-allowed'
 									: 'pointer',
 							}}

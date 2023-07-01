@@ -1,5 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useState } from 'react';
+import ScopeSelect from '@cogoport/scope-select';
+import { useSelector, useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
+import { useState, useEffect } from 'react';
 
 import Configurations from './components/AllocationConfigurations';
 import Quotas from './components/AllocationQuotas';
@@ -21,22 +24,44 @@ const TAB_PANEL_MAPPING = {
 	requests: {
 		name      : 'requests',
 		title     : 'Requests',
-		Component :	Requests,
+		Component : Requests,
 	},
 	quotas: {
 		name      : 'quotas',
 		title     : 'Quotas',
-		Component :	Quotas,
+		Component : Quotas,
 	},
 };
 
 function CoreAllocationEngine() {
+	const { profile } = useSelector((state) => state);
+
+	const dispatch = useDispatch();
+
 	const [activeAllocation, setActiveAllocation] = useState('configurations');
+
+	useEffect(() => {
+		if (activeAllocation !== 'requests') {
+			dispatch(
+				setProfileState({
+					...profile,
+					authParams: undefined,
+				}),
+			);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeAllocation, dispatch]);
 
 	return (
 		<section className={styles.container} id="core_engine_container">
-			<section className={styles.heading_container}>
-				Core Engine
+			<section className={styles.header_container}>
+				<section className={styles.heading_container}>
+					Core Engine
+				</section>
+
+				{activeAllocation === 'requests' ? (
+					<ScopeSelect size="md" showChooseAgent={false} />
+				) : null}
 			</section>
 
 			<div className={styles.tab_list}>
@@ -52,11 +77,7 @@ function CoreAllocationEngine() {
 						if (!Component) return null;
 
 						return (
-							<TabPanel
-								key={name}
-								name={name}
-								title={title}
-							>
+							<TabPanel key={name} name={name} title={title}>
 								<Component />
 							</TabPanel>
 						);

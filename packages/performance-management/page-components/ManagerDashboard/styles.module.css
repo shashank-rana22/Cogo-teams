@@ -1,3 +1,9 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .header_text {
 	font-size: 28px;
 	font-weight: 700;
@@ -8,24 +14,8 @@
 	background: #fff;
 }
 
-.stats_section {
+.tabs {
 	margin-top: 16px;
-}
-
-.page_actions {
-	display: flex;
-	justify-content: space-between;
-
-	:global(.ui_select_container) {
-		width: 160px;
-		height: 38px;
-	}
-}
-
-.filters {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
 }
 
 .question_button_container {
@@ -46,27 +36,6 @@
 	}
 }
 
-.table_section {
+.stats {
 	margin-top: 16px;
-	background: #faf5ec;
-	border-radius: 8px;
-}
-
-.list_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 16px 0 0;
-	margin-top: 16px;
-
-	.list_title {
-		margin: 0;
-		font-size: 18px;
-		font-weight: 700;
-	}
-
-	.list_actions {
-		display: flex;
-		align-items: center;
-	}
 }

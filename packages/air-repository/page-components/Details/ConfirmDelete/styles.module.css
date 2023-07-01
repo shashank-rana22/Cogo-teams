@@ -1,0 +1,15 @@
+.confirm_delete_container {
+	font-size: 12px;
+}
+
+.confirm_delete_buttons {
+	display: flex;
+	justify-content: center;
+
+	:global {
+		.ui_button_container {
+			padding: 8px !important;
+			margin: 8px;
+		}
+	}
+}

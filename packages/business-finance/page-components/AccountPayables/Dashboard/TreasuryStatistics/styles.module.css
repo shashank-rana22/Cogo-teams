@@ -1,0 +1,103 @@
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 16px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 2px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 45%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.funds_container {
+	display: flex;
+	width: 100%;
+	padding: 16px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.funds {
+	display: flex;
+	flex-direction: column;
+	width: 16%;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.account {
+	display: flex;
+	align-items: center;
+	min-width: 16%;
+	text-decoration: underline;
+}
+
+.vr {
+	width: 2px;
+	height: 50px;
+	margin-right: 30px;
+	background: #e0e0e0;
+	border-radius: 40px;
+}
+
+.label_no {
+	display: flex;
+	align-items: center;
+	min-width: 76%;
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+}
+
+.tabs_container {
+	margin-bottom: 16px;
+}
+
+.loader {
+	width: 100px;
+	height: 20px;
+	margin: 8px 12px 0 0;
+}

@@ -1,0 +1,7 @@
+.amount {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin: 14px 0 32px;
+	color: #ee3425;
+}

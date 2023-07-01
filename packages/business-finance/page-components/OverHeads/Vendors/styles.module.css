@@ -1,0 +1,78 @@
+.vendor_container {
+	margin-top: 24px;
+}
+
+.header_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.left_container {
+	display: flex;
+	gap: 8px;
+}
+
+.right_container {
+	display: flex;
+	gap: 8px;
+}
+
+.select {
+	width: 175px;
+}
+
+.search {
+	width: 341px;
+	padding: 0 4px;
+	margin-top: 2px;
+
+	svg {
+		margin: 2px;
+	}
+
+	input {
+		font-size: 11px !important;
+	}
+}
+
+.verified {
+	display: flex;
+	align-items: center;
+	width: 341px;
+	color: #67c676;
+
+	input {
+		font-size: 11px !important;
+	}
+}
+
+.pending {
+	display: flex;
+	align-items: center;
+	color: #e10d1f;
+}
+
+.dropdown {
+	border: 2px solid green;
+}
+
+.icm_info {
+	padding-bottom: 4px;
+	margin: 0 4px 8px 0;
+	font-size: 12px;
+	rotate: 180deg;
+}
+
+.no_data {
+	display: flex;
+	justify-content: center;
+}
+
+.cta_button {
+	height: 35px !important;
+	font-size: 14px !important;
+	color: white !important;
+	background: #ed3726 !important;
+}

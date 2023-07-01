@@ -1,0 +1,30 @@
+.back_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
+}
+
+.back_text {
+	margin-left: 10px;
+	font-size: 14px;
+	border-bottom: 1px solid #221f20;
+}
+
+.header {
+	margin-top: 12px;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.tab_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.form_container {
+	padding: 20px;
+	background-color: white;
+}

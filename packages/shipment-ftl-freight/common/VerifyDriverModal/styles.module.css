@@ -1,0 +1,32 @@
+.heading {
+	width: fit-content;
+	font-weight: 500;
+	border-bottom: 1px solid;
+}
+
+.driver_type_heading {
+	text-transform: capitalize;
+
+	ul {
+		padding-left: 10px;
+	}
+}
+
+.driver_type {
+	padding: 5px;
+	text-transform: capitalize;
+	background: #eaeaea;
+	border-radius: 5px;
+}
+
+.driverBox {
+	display: flex;
+	margin: 5px 0 10px 5px;
+	text-transform: capitalize;
+}
+
+.actionRow {
+	display: flex;
+	margin: 5px 0 10px 5px;
+	text-transform: capitalize;
+}

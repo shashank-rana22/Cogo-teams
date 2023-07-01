@@ -51,4 +51,4 @@ jobs:
           echo NEXT_PUBLIC_REST_BASE_API_URL=${{ secrets.NEXT_PUBLIC_REST_BASE_API_URL }} >> .env
 
       - name: Test Build
-        run: pnpm run prod:build
+        run: pnpm run build

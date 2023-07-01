@@ -1,16 +1,25 @@
 interface StatsDataInterface {
-	INITIATED?:string
+	LOCKED?:string
 	FINANCE_ACCEPTED?:string
 	ON_HOLD?:string
+	POSTED?:string
+	FAILED?:string
 }
 function filtersData(statsData:StatsDataInterface) {
-	const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
+	const { LOCKED = '', FINANCE_ACCEPTED = '', ON_HOLD = '', POSTED = '', FAILED = '' } = statsData || {};
+
+	const ALL = Object.values(statsData || {}).reduce((total, value) => total + value, 0);
 
 	return [
 		{
-			label : 'Initiated',
-			value : 'INITIATED',
-			badge : INITIATED || '0',
+			label : 'All',
+			value : 'ALL',
+			badge : ALL || '0',
+		},
+		{
+			label : 'Locked',
+			value : 'LOCKED',
+			badge : LOCKED || '0',
 		},
 		{
 			label : 'On Hold',
@@ -21,6 +30,16 @@ function filtersData(statsData:StatsDataInterface) {
 			label : 'Approved',
 			value : 'FINANCE_ACCEPTED',
 			badge : FINANCE_ACCEPTED || '0',
+		},
+		{
+			label : 'Posted',
+			value : 'POSTED',
+			badge : POSTED || '0',
+		},
+		{
+			label : 'Failed',
+			value : 'FAILED',
+			badge : FAILED || '0',
 		},
 
 	];

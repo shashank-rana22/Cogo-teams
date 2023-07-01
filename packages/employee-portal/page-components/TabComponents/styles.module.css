@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.options {
+	flex-wrap: wrap;
+	min-width: 180px;
+	padding: 24px 24px 10px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	background-color: #fcdc00;
+	border-radius: 8px;
+	transition: transform 0.2s;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.components {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 16px;
+}
+
+.header {
+	margin-bottom: 16px;
+	font-weight: 800;
+}
+
+.card_header {
+	width: 100px;
+	padding-top: 22px;
+}
+
+.arrow_wrapper {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	padding-top: 30px;
+}
+
+.icon_container {
+	display: flex;
+	align-items: flex-end;
+}

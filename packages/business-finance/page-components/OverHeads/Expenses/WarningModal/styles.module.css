@@ -1,0 +1,24 @@
+.container {
+	align-content: center;
+	padding: 12px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: 600;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-evenly;
+	width: 160px;
+	margin: 24px 0 0 180px;
+}
+
+.warning {
+	width: 100%;
+	color: #ee3425;
+	transform: rotate(180deg);
+}

@@ -1,57 +1,57 @@
 import { cl } from '@cogoport/components';
-import { IcMCall } from '@cogoport/icons-react';
-import { useDispatch, useSelector } from '@cogoport/store';
+import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
+import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { isEmpty } from '@cogoport/utils';
 
 import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
+const COUNTRY_CODE_START = 0;
+const COUNTRY_CODE_END = 2;
+
 function VoiceCallComponent({
-	userMobile,
+	userMobile = '',
 	orgId,
 	userId,
 	userName,
-	emptyState,
 	activeTab,
+	setModalType = () => {},
+	hasVoiceCallAccess,
 }) {
 	const dispatch = useDispatch();
-	const { profileData } = useSelector(({ profile }) => ({
-		profileData: profile,
-	}));
 
 	let code;
 	let number;
 	if (activeTab === 'message') {
-		code = userMobile?.slice(0, 2);
-		number = userMobile?.slice(2);
+		code = userMobile?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
+		number = userMobile?.slice(COUNTRY_CODE_END);
 	} else {
 		code = '91';
 		number = userMobile;
 	}
-
-	const handleCall = async () => {
-		if (!isEmpty(userMobile)) {
+	const handleWhatsappModal = () => {
+		setModalType({
+			type : 'voice_call_component',
+			data : {
+				number,
+				country_code: `+${code}`,
+			},
+		});
+	};
+	const handleCall = () => {
+		if (userMobile && hasVoiceCallAccess) {
 			dispatch(
 				setProfileState({
-					...profileData,
-					voice_call: {
-						...profileData.voice_call,
-						showCallModal       : true,
-						inCall              : true,
-						endCall             : false,
-						showFeedbackModal   : false,
+					is_in_voice_call          : true,
+					voice_call_recipient_data : {
 						startTime           : new Date(),
 						orgId,
 						userId,
 						mobile_number       : number,
 						mobile_country_code : `+${code}`,
-						agentId             : profileData?.user?.id,
-						name                : userName,
-						dialCall            : false,
-						emptyState,
-
+						userName,
+						isUnkownUser        : !userId,
 					},
 				}),
 			);
@@ -59,37 +59,34 @@ function VoiceCallComponent({
 	};
 
 	return (
-		<div className={styles.wrapper}>
-			<div className={styles.container}>
-				<div className={styles.number_div}>
-					<div className={styles.dialer_icon_div}>
-						<IcMCall
-							className={cl`${
-								(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
-							onClick={handleCall}
-						/>
-					</div>
-					{!isEmpty(userMobile) ? (
+		<div className={styles.number_div}>
+			{userMobile ? (
+				<>
+					<div className={styles.flex_div}>
+						<div className={styles.dialer_icon_div} onClick={handleCall} role="button" tabIndex={0}>
+							<IcMCall
+								className={cl`${styles.call_icon} ${
+									(!hasVoiceCallAccess)
+										? styles.disable_call_icon : ''}`}
+							/>
+						</div>
 						<div className={styles.call_on_div}>
-							<div className={styles.call_on}>Call on</div>
+							<div className={styles.call_on}>Contact on</div>
 							<div className={styles.show_number}>
 								+
 								{code}
-								{' '}
-								{hideDetails({
+								&nbsp;
+								{code === '91' ? hideDetails({
 									data : number,
 									type : 'number',
-								})}
+								}) : number}
 							</div>
 						</div>
-					) : (
-						<div className={styles.show_number}>Number not found</div>
-					)}
-				</div>
-			</div>
-
+					</div>
+					<IcCWhatsapp className={styles.whatsapp_icon} onClick={handleWhatsappModal} />
+				</>
+			) : <div className={styles.show_number}>Number not found</div>}
 		</div>
-
 	);
 }
 export default VoiceCallComponent;

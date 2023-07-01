@@ -1,0 +1,124 @@
+.container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 50%;
+	padding: 0 50px;
+
+	&::after {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		display: inline-block;
+		width: 1px;
+		height: 110%;
+		content: "";
+		background-color: #f2e3c3;
+		transform: translateY(-50%);
+	}
+}
+
+.flex_row_origin {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 40%;
+	margin: 0 20px;
+}
+
+.flex_row_destination {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 40%;
+	margin: 0 20px;
+}
+
+.value {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 700;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 15%;
+	margin: 0 12px;
+}
+
+.port_code {
+	display: flex;
+	align-items: center;
+	line-height: 10px;
+}
+
+.code {
+	margin: 0 0 4px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.country {
+	margin: 0;
+	overflow: hidden;
+	font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.service_name {
+	margin: 0;
+	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #5936f0;
+}
+
+.icon_and_service {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 50px;
+}
+
+.icd {
+	margin: 4px 0;
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.icons_and_service {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	font-weight: 700;
+	color: #ee3426;
+	letter-spacing: 0;
+	white-space: nowrap;
+
+	& > svg {
+		width: 24px;
+		height: 24px;
+
+		& > path {
+			fill: #ee3426;
+		}
+	}
+}
+
+.date {
+	font-size: 10px;
+	color: #828282;
+}

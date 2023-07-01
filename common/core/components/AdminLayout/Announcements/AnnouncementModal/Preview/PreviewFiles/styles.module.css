@@ -1,0 +1,32 @@
+.files_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.files {
+	display: flex;
+	width: 100%;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+}
+
+.files::-webkit-scrollbar {
+	display: none;
+}
+
+.heading {
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #000;
+}
+
+.document {
+	position: relative;
+	width: 174px;
+	height: 190px;
+	margin: 8px;
+	background: #f9f9f9;
+}

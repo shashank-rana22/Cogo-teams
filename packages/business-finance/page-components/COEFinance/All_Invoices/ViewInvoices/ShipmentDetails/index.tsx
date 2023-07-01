@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -12,6 +12,7 @@ import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
+import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import Details from './Details/index';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
@@ -36,12 +37,14 @@ interface SellerDetailInterface {
 	organizationName?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	organizationId?: string,
 }
 
 interface SellerBankDetailInterface {
 	bankName?: string;
 	accountNumber?: string;
 	ifscCode?: string;
+	beneficiaryName?: string;
 }
 
 interface BillInterface {
@@ -55,13 +58,25 @@ interface BillInterface {
 	billCurrency: string;
 	grandTotal: any;
 	subTotal: string | number;
+	recurringState?:string,
+	billType: string;
+	isProforma: boolean,
 }
+
 interface JobInterface {
 	jobNumber: string;
 }
 
 interface BillAdditionalObjectInterface {
 	collectionPartyId: string;
+	shipmentType?: string;
+	reasonForCN? : string;
+	outstandingDocument? : string;
+	paymentType? : string;
+	isIncidental? : string;
+	advancedAmountCurrency? : string;
+	serialId?: string,
+	advancedAmount?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -71,24 +86,26 @@ export interface DataInterface {
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
+	consolidatedShipmentIds:Array<string>;
+	organizationId?: string;
+	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {
 	data: DataInterface;
 	orgId: string;
-	jobNumber?: string;
-	remarksVal: RemarksValInterface;
+	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItem?: boolean;
 	status: string;
+	jobType?:string;
 }
 function ShipmentDetails({
 	data,
 	orgId,
-	jobNumber,
 	remarksVal,
 	setRemarksVal,
 	lineItemsRemarks,
@@ -96,14 +113,17 @@ function ShipmentDetails({
 	setLineItem,
 	lineItem,
 	status,
+	jobType,
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
+	const { job, consolidatedShipmentIds = [] } = data || {};
+	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
-	const { data: shipmentData } = useListShipment(jobNumber);
+	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
@@ -116,10 +136,26 @@ function ShipmentDetails({
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[0] || {};
 
+	const getPills = () => {
+		if (loadingShipment) {
+			return <Placeholder height="20px" width="80px" />;
+		}
+		if (sourceText) {
+			return <Pill color="blue">{sourceText}</Pill>;
+		}
+		if (tradeType) {
+			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
+		}
+		return <div>NO DATA FOUND</div>;
+	};
+
+	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
 			<h3>
-				Shipment Details
+				{startCase(jobTypeValue)}
+				{' '}
+				Details
 				{' '}
 				{jobNumber && (
 					<span>
@@ -135,100 +171,116 @@ function ShipmentDetails({
 
 			<div className={styles.small_hr} />
 
-			<div className={styles.card}>
-				<div
-					className={styles.card_upper}
-					onClick={() => {
-						setShowDetails(!showDetails);
-					}}
-					role="presentation"
-				>
-					<div className={styles.sub_container}>
-						Details
-						<div className={styles.tags_container}>
-							{sourceText && <Pill color="blue">{sourceText}</Pill>}
-							{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
-						</div>
-						{dataWallet?.list?.[0] && (
-							<div className={styles.data}>
-								<div className={styles.kam_data}>KAM -</div>
-								<div>
-									{agentData?.name}
+			{jobType === 'SHIPMENT' && (
+				<>
+					<div className={styles.card}>
+						<div
+							className={styles.card_upper}
+							onClick={() => {
+								setShowDetails(!showDetails);
+							}}
+							role="presentation"
+						>
+							<div className={styles.sub_container}>
+								Details
+								<div className={styles.tags_container}>
+									{getPills()}
+								</div>
+								{dataWallet?.list?.[0] && (
+									<div className={styles.data}>
+										<div className={styles.kam_data}>KAM -</div>
+										<div>
+											{agentData?.name}
                   &nbsp;(
-									{agentRoleData?.name}
-									)
-								</div>
-								<div className={styles.kam_data}>Wallet Usage - </div>
-								<div>
-									{amountCurrency || 'USD'}
+											{agentRoleData?.name}
+											)
+										</div>
+										<div className={styles.kam_data}>Wallet Usage - </div>
+										<div>
+											{amountCurrency || ''}
 
-									{amount || 0}
-								</div>
+											{amount || 0}
+										</div>
+									</div>
+								)}
 							</div>
-						)}
+
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDetails(!showDetails);
+								}}
+								role="presentation"
+							>
+								{showDetails ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDetails && <div className={styles.hr} />}
+						<div className={styles.details}>
+							{showDetails && (
+								<Details
+									orgId={orgId}
+									dataList={dataList}
+									shipmentId={shipmentId}
+								/>
+							)}
+						</div>
 					</div>
 
 					<div
-						className={styles.caret}
-						onClick={() => {
-							setShowDetails(!showDetails);
-						}}
-						role="presentation"
-					>
-						{showDetails ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDetails && <div className={styles.hr} />}
-				<div className={styles.details}>
-					{showDetails && (
-						<Details
-							orgId={orgId}
-							dataList={dataList}
-							shipmentId={shipmentId}
-						/>
-					)}
-				</div>
-			</div>
-
-			<div
-				className={styles.card}
-				onClick={() => {
-					setShowDocuments(!showDocuments);
-				}}
-				role="presentation"
-			>
-				<div className={styles.card_upper}>
-					<div className={styles.sub_container}>
-						Documents
-						<IcADocumentTemplates height="17px" width="17px" />
-					</div>
-
-					<div
-						className={styles.caret}
+						className={styles.card}
 						onClick={() => {
 							setShowDocuments(!showDocuments);
 						}}
 						role="presentation"
 					>
-						{showDocuments ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDocuments && <div className={styles.hr} />}
-				<div className={styles.documents}>
-					{showDocuments && <Documents shipmentId={shipmentId} />}
-					{' '}
-				</div>
-			</div>
+						<div className={styles.card_upper}>
+							<div className={styles.sub_container}>
+								Shipment Documents
+								<IcADocumentTemplates height="17px" width="17px" />
+								{loadingShipment && (
+									<Loader />
+								)}
+							</div>
 
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDocuments(!showDocuments);
+								}}
+								role="presentation"
+							>
+								{showDocuments ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDocuments && <div className={styles.hr} />}
+						<div className={styles.documents}>
+							{showDocuments && <Documents shipmentId={shipmentId} />}
+							{' '}
+						</div>
+					</div>
+				</>
+			)}
 			<div>
+				{jobType === 'CONSOLIDATED' && (
+					<div className={styles.consolidated_shipment_details}>
+						<Accordion
+							type="text"
+							title="Shipment Details"
+						>
+							<div className={styles.line} />
+							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />
+						</Accordion>
+					</div>
+				)}
 				{collectionPartyId ? (
 					<div className={styles.variance}>
 						<div>

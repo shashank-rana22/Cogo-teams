@@ -1,0 +1,25 @@
+.flex_column {
+	display: flex;
+	flex-direction: column;
+}
+
+.answer_key {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.whole_subjective {
+	max-height: 300px;
+	overflow-y: scroll;
+	word-break: keep-all;
+}
+
+.answer {
+	word-break: keep-all;
+}
+
+.tooltip {
+	min-width: 600px;
+}

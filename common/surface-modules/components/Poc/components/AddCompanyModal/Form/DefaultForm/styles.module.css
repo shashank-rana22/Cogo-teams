@@ -1,0 +1,19 @@
+.form_item_container {
+	&:not(:first-child) {
+		margin: 0 6px;
+	}
+}
+
+.form_container {
+	display: flex;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
+}

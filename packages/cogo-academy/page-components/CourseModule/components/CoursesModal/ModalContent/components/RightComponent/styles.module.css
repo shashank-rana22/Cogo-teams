@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.see_all {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+	padding: 8px;
+	cursor: pointer;
+	background: rgb(253 235 233 / 30%);
+	border-radius: 6px;
+	box-shadow: 0 3px 3px rgb(238 52 37 / 15%);
+}
+
+.see_all > div {
+	text-decoration: underline;
+}
+
+.outer_container {
+	width: 33%;
+	padding: 12px;
+}

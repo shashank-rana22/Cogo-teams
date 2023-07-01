@@ -1,0 +1,41 @@
+.main_container_right {
+	display: block;
+	margin: 28px;
+	overflow-x: scroll;
+}
+
+.category_division {
+	margin: 0 20px 20px 0;
+}
+
+.shipment_report {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.sort_by {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.select_box {
+	width: 250px;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+}
+
+.sort_by_box {
+	padding-top: 20px;
+}
+
+.table_container {
+	height: 850px;
+}
+
+.table {
+	display: block;
+	margin: 48px 4px 4px;
+	overflow-y: scroll;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}

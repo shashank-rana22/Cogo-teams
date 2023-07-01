@@ -1,0 +1,79 @@
+.date {
+	width: 100% !important;
+	max-height: 44px;
+}
+
+.item {
+	height: 100%;
+}
+
+.element {
+	:global {
+		.ui_input_container {
+			max-height: 32px;
+			border: 1px solid #333;
+
+			.ui_input_control {
+				font-size: 12px;
+			}
+
+			.ui_input_control::placeholder {
+				font-size: 12px;
+				color: #333;
+			}
+		}
+
+		.ui_upload_droparea_container {
+			align-items: center;
+			min-height: 40px;
+			margin-bottom: 0;
+			border: 1px solid #ebebeb;
+			border-radius: 4px;
+		}
+
+		.ui_upload_droparea_icon {
+			svg {
+				max-height: 22px;
+				margin-top: 8px;
+			}
+		}
+
+		.ui_select_container {
+			.ui_select_display_container {
+				max-height: 32px;
+				border: 1px solid #333;
+
+				.ui_select_input_control {
+					font-size: 12px;
+
+					.ui_select_input_placeholder {
+						font-size: 12px;
+						color: #333;
+					}
+				}
+			}
+		}
+	}
+}
+
+.item_heading {
+	min-height: 16px;
+	margin-bottom: 6px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.item_label {
+	max-height: 16px;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.error {
+	padding-left: 4px;
+	margin: 0;
+	font-size: 12px;
+	line-height: 16px;
+	color: #cb6464;
+}

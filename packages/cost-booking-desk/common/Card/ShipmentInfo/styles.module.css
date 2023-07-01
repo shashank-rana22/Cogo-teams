@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 10px;
+}
+
+.serial_id {
+	margin-bottom: 6px;
+	font-weight: 600;
+}
+
+.so1_container {
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.ellipsis_text {
+	max-width: 220px;
+	overflow: hidden;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-height: 30px;
+			padding: 4px 6px;
+			font-size: var(--font-size-md);
+			word-break: normal;
+		}
+
+		.tippy-content {
+			padding: 2px 0;
+		}
+	}
+}

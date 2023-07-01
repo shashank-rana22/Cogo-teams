@@ -6,7 +6,7 @@ const useGetRates = ({ service, selectedRate }) => {
 		fcl_freight     : '/get_fcl_freight_rate',
 		air_freight     : '/get_air_freight_rate',
 		lcl_freight     : '/get_lcl_freight_rate',
-		trailer_freight : './get_trailer_freight_rate',
+		trailer_freight : './get_haulage_freight_rate',
 		haulage_freight : './get_haulage_freight_rate',
 		ltl_freight     : './get_ltl_freight_rate',
 		ftl_freight     : './get_ftl_freight_rate',
@@ -18,12 +18,12 @@ const useGetRates = ({ service, selectedRate }) => {
 
 	const api = apiMapping[service?.service];
 
-	const [{ data:systemData }, triggerSystemData] = useRequest({
+	const [{ data:systemData, loading: loadingSystemRates }, triggerSystemData] = useRequest({
 		method : 'get',
 		url    : api,
 	}, { manual: true });
 
-	const [{ data:revertedData }, triggerRevertedData] = useRequest({
+	const [{ data:revertedData, loading: loadingRevertedRates }, triggerRevertedData] = useRequest({
 		method : 'get',
 		url    : '/get_spot_negotiation_rate',
 	}, { manual: true });
@@ -94,7 +94,8 @@ const useGetRates = ({ service, selectedRate }) => {
 	}, []);
 
 	return {
-		data: systemData || revertedData,
+		data    : systemData || revertedData,
+		loading : loadingRevertedRates || loadingSystemRates,
 	};
 };
 export default useGetRates;

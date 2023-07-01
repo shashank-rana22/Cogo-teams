@@ -1,0 +1,8 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}

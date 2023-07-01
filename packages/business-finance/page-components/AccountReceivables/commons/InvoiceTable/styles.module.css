@@ -1,0 +1,35 @@
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 0;
+
+	:global {
+		.ui_input_container {
+			height: 36px;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}
+
+.send_report {
+	margin-right: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.filter_div {
+	display: flex;
+	align-items: center;
+}

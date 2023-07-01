@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Input, Pagination, Tooltip, Loader } from '@cogoport/components';
-import { IcMSearchlight, IcMFolder } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -25,6 +25,14 @@ function HelpDesk() {
 		setQuestion = () => {},
 	} = useTopicList();
 
+	const generalIcon = (
+		<img
+			src={GLOBAL_CONSTANTS.image_url.general_icon}
+			alt="logo cogoport"
+			style={{ width: 40, height: 40 }}
+		/>
+	);
+
 	const render = () => {
 		if (!isEmpty(topic)) {
 			return (
@@ -47,16 +55,11 @@ function HelpDesk() {
 				}
 			});
 
-			const DisplayIcon = IconMapping[includesKey]?.icon || IcMFolder;
-			const style = IconMapping[includesKey]?.style;
-
-			if (IconMapping[includesKey]?.isSvg) {
-				return <div className={style.icon}>{DisplayIcon}</div>;
-			}
+			const DisplayIcon = IconMapping[includesKey]?.icon || generalIcon;
 
 			return (
 				<div className={styles.icon}>
-					<DisplayIcon style={{ color: style || '#1b842c' }} />
+					{DisplayIcon}
 				</div>
 			);
 		};
@@ -67,6 +70,8 @@ function HelpDesk() {
 				<div className={styles.display_topics}>
 					{(list || []).map((item) => (
 						<div
+							key={item?.id}
+							role="presentation"
 							className={styles.square_div}
 							onClick={() => setTopic(item)}
 						>
@@ -142,6 +147,14 @@ function HelpDesk() {
 				value={search}
 				onChange={(val) => setSearch(val)}
 				disabled={loading}
+				suffix={!isEmpty(search) && (
+					<IcMCross
+						className={styles.cross_icon}
+						onClick={() => {
+							setSearch('');
+						}}
+					/>
+				)}
 			/>
 			{renderQuestionList()}
 

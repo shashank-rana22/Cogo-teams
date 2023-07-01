@@ -1,0 +1,28 @@
+.container {
+	padding: 8px;
+	margin: 8px;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #333;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.text {
+	font-weight: 500;
+	color: #333;
+	text-align: center;
+}
+
+.button_container {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+}
+
+.button_head {
+	margin: 4px;
+}

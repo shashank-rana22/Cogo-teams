@@ -1,0 +1,33 @@
+.organization_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 90%;
+	font-size: 12px;
+}
+
+.business_name {
+	font-size: 12px;
+	font-weight: 700px;
+}
+
+.footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px;
+}
+
+.text {
+	padding-left: 4px;
+	color: #f68b21;
+}
+
+.validation {
+	display: flex;
+	align-items: center;
+}
+
+.is_outstanding {
+	display: flex;
+	align-items: center;
+}

@@ -1,0 +1,18 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 16px;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.back_link {
+	margin-left: 16px;
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}

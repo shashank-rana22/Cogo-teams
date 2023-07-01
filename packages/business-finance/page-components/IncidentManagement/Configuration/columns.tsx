@@ -1,15 +1,10 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
-import BankDetails from '../Modals/BankDetails';
-import ICJVModal from '../Modals/ICJV_Modal';
-import JvModal from '../Modals/JvModal';
-import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
-import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
+import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
@@ -42,7 +37,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
@@ -96,12 +91,29 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '' } = original || {};
+			const { type: requestType = '', data } = original || {};
+
+			const { creditNoteRequest } = data || {};
+
+			const { revoked } = creditNoteRequest || {};
 			return (
-				<span>
-					{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-						: toTitleCase(requestType.replace(/_/g, ' '))}
-				</span>
+				<div className={styles.credit}>
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+
+					</span>
+					<span>
+						{typeof (revoked) === 'boolean' && (
+							<div>
+								{revoked
+									? <Pill size="md" color="#C4DC91">Fully</Pill>
+									: <Pill size="md" color="#FEF199">Partial</Pill>}
+							</div>
+						)}
+					</span>
+				</div>
+
 			);
 		},
 	},
@@ -157,6 +169,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
 			const { remark = '' } = original || {};
+
 			return (
 				<Tooltip
 					content={<div className={styles.tooltip}>{remark}</div>}
@@ -168,93 +181,9 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	},
 
 	{
-		accessor: (row:any) => {
-			const {
-				tdsRequest,
-				bankRequest,
-				organization,
-				settlementRequest,
-				journalVoucherRequest,
-				interCompanyJournalVoucherRequest,
-			} = row.data || {};
-
-			const { type: requestType, id, remark, status } = row || {};
-
-			return (
-				<>
-					{requestType === 'TDS_APPROVAL' && (
-						<TDSModal
-							tdsData={tdsRequest}
-							id={id}
-							refetch={getIncidentData}
-							isEditable={false}
-							row={row}
-						/>
-					)}
-					{requestType === 'SETTLEMENT_APPROVAL' && (
-						<SettlementModal
-							settlementData={settlementRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
-						<JvModal
-							journalVoucherRequest={journalVoucherRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-						/>
-					)}
-					{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
-						<ICJVModal
-							interCompanyJournalVoucherRequest={
-							interCompanyJournalVoucherRequest
-								}
-							row={row}
-							refetch={getIncidentData}
-							isEditable={false}
-							id={id}
-						/>
-					)}
-					{requestType === 'BANK_DETAIL_APPROVAL' && (
-						<BankDetails
-							bankData={bankRequest}
-							bankId={id}
-							row={row}
-							organization={organization}
-							refetch={getIncidentData}
-							isEditable={false}
-							remark={remark}
-						/>
-					)}
-
-					{requestType === 'ISSUE_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-					{requestType === 'CONSOLIDATED_CREDIT_NOTE' && (
-						<RequestCN
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-							isEditable={false}
-							status={status}
-						/>
-					)}
-
-				</>
-			);
-		},
+		accessor: (row:any) => (
+			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+		),
 		id: 'actionColumn',
 	},
 ];

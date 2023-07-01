@@ -1,0 +1,38 @@
+.container {
+	width: 70%;
+	margin: 0 20px;
+	overflow: auto;
+}
+
+.instruction {
+	margin: 40px 0 0;
+	background: #fff;
+	border: 3px solid #fdfbf6;
+	border-radius: 6px;
+}
+
+.description_box {
+	padding: 10px;
+	background: #fdfbf6;
+	border-radius: 6px;
+}
+
+.test_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.data_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.data_display {
+	display: flex;
+	flex-direction: column;
+	padding: 0 25px;
+}

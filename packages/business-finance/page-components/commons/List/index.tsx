@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { ReactNode } from 'react';
 
 import {
@@ -27,8 +28,9 @@ export interface Props {
 	pageSize?: number;
 	showPagination?: boolean;
 	subActiveTab?: string;
-	scrollable?: boolean;
 	width?: string;
+	rowStyle?: string;
+	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 
 function List({
@@ -44,8 +46,9 @@ function List({
 	pageSize = 10,
 	showPagination = true,
 	subActiveTab,
-	scrollable = false,
 	width,
+	rowStyle,
+	paginationType = 'table',
 }: Props) {
 	const {
 		showHeader = true,
@@ -62,65 +65,60 @@ function List({
 	}: any = useSelector((state: object) => state);
 
 	return (
-		<>
-			<section style={{ overflow: 'scroll' }}>
-				{showHeader && !isMobile && (
-					<Header
+		<section>
+			{showHeader && !isMobile && (
+				<Header
+					fields={fields}
+					sort={sort}
+					setSort={setSort}
+					headerStyles={headerStyles}
+					showHeaderCheckbox={showHeaderCheckbox}
+					renderHeaderCheckbox={renderHeaderCheckbox}
+				/>
+			)}
+			<div style={bodyStyles}>
+				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+					<CardColumn
+						key={singleitem.id}
 						fields={fields}
-						sort={sort}
-						setSort={setSort}
-						headerStyles={headerStyles}
-						showHeaderCheckbox={showHeaderCheckbox}
-						renderHeaderCheckbox={renderHeaderCheckbox}
+						itemStyles={itemStyles}
+						singleitem={singleitem}
+						config={config}
+						loading={loading}
+						functions={commonFunctions(functions)}
+						isMobile={isMobile}
+						subActiveTab={subActiveTab}
+						width={width}
+						rowStyle={rowStyle}
 					/>
-				)}
-				<div style={bodyStyles}>
-					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-						<CardColumn
-							fields={fields}
-							itemStyles={itemStyles}
-							singleitem={singleitem}
-							config={config}
-							loading={loading}
-							functions={commonFunctions(functions)}
-							isMobile={isMobile}
-							subActiveTab={subActiveTab}
-							width={width}
+				))}
+
+				{isEmpty(list) && !loading ? (
+					<div className={styles.no_data}>
+						<img
+							style={{ width: '24%', margin: '8%' }}
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
+							alt="no data"
 						/>
-					))}
-				</div>
-				{showPagination && (
-					<div>
-						{itemData?.totalRecords && (
-							<div className={styles.pagination_container}>
-								<Pagination
-									type="table"
-									currentPage={page}
-									totalItems={itemData?.totalRecords}
-									pageSize={pageSize}
-									onPageChange={handlePageChange}
-								/>
-							</div>
-						)}
 					</div>
-				)}
-			</section>
-			{scrollable && (
+				) : null}
+			</div>
+			{showPagination && (
 				<div>
-					{itemData?.totalRecords && (
+					{itemData?.totalRecords ? (
 						<div className={styles.pagination_container}>
 							<Pagination
-								type="table"
+								type={paginationType}
 								currentPage={page}
 								totalItems={itemData?.totalRecords}
 								pageSize={pageSize}
 								onPageChange={handlePageChange}
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
 			)}
-		</>
+		</section>
 	);
 }
 

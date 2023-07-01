@@ -9,28 +9,24 @@ function FeedbackModal({ feedback = '' }) {
 
 	return (
 		<>
-			<div className={styles.feedback_button}>
-				<Button
-					size="sm"
-					themeType="tertiary"
-					disabled={isEmpty(feedback)}
-					onClick={() => setShow(true)}
-				>
-					View Feedback
-				</Button>
-			</div>
+			<Button
+				size="sm"
+				themeType="secondary"
+				disabled={isEmpty(feedback)}
+				onClick={() => setShow(true)}
+			>
+				View Feedback
+			</Button>
 
 			{show && (
-				<div className={styles.details_modal}>
-					<Modal size="md" show={show} onClose={() => setShow(false)} onClickOutside={() => setShow(false)}>
-						<Modal.Header title="Feedback" />
-						<Modal.Body style={{ border: 'none' }}>
-							<div className={styles.feedback}>
-								{feedback}
-							</div>
-						</Modal.Body>
-					</Modal>
-				</div>
+				<Modal size="md" show={show} onClose={() => setShow(false)} onClickOutside={() => setShow(false)}>
+					<Modal.Header title="Feedback" />
+					<Modal.Body>
+						<div className={styles.feedback}>
+							{feedback}
+						</div>
+					</Modal.Body>
+				</Modal>
 			)}
 		</>
 	);

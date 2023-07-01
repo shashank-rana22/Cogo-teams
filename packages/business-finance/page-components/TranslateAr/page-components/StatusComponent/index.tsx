@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import React from 'react';
 
-import EmptyState from '../../common/EmptyState';
+import EmptyStateDocs from '../../../commons/EmptyStateDocs';
 import Filters from '../../common/Filters';
 import { StatusObject } from '../../common/interfaces';
 import useGetShipmentInvoices from '../../hooks/useGetShipmentInvoices';
@@ -24,7 +24,7 @@ function StatusComponent({ status }: StatusObject) {
 		<>
 			<Filters onChangeFilters={setShipmentFilters} filters={shipmentFilters} />
 			<StyledTable data={list} columns={columns} loading={invoiceLoading} />
-			{list.length === 0 && <EmptyState />}
+			{list.length === 0 && !invoiceLoading && <EmptyStateDocs />}
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

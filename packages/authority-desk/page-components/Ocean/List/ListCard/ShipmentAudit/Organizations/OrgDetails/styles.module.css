@@ -1,0 +1,49 @@
+.container {
+	padding: 6px;
+	margin: 12px;
+	font-size: 12px;
+	background: #fdfbf6;
+	border: 1px solid #f2e3c3;
+	border-radius: 4px;
+
+	table {
+		width: 100%;
+	}
+
+	th,
+	tr {
+		display: flex;
+		line-height: 24px;
+		text-align: center;
+	}
+
+	td {
+		flex: 1;
+
+		&:nth-child(1) {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+	}
+
+	th td:first-child {
+		text-decoration: none;
+		cursor: initial;
+	}
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+}
+
+.loader_icon {
+	width: 50px;
+}
+
+.pagination {
+	justify-content: flex-end;
+	margin-top: 6px;
+}

@@ -22,16 +22,15 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	if (loading) {
 		return (
-			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
-				<div className={styles.spinner}>
-					<Spinner
-						height={60}
-						width={60}
-						borderWidth="7px"
-						outerBorderColor="#FBD69F"
-						spinBorderColor="red"
-					/>
-				</div>
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+
 			</div>
 		);
 	}
@@ -47,7 +46,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 			<div className={styles.grid_container} style={{ display: 'flex' }}>
 				<div
 					style={{
-						margin : '5px 0',
+						margin : '4px 0',
 						width  : '100%',
 						height : '65vh',
 						flex   : 1,
@@ -82,7 +81,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 									<div>
 										<div className={styles.title}>
 
-											{truncate(startCase(singleOption?.name))}
+											{truncate(startCase(singleOption?.display_name))}
 											{' '}
 											<Badge
 												color="#FA9E96"

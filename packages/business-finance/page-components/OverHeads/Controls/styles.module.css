@@ -1,0 +1,40 @@
+.form_element {
+	width: 180px;
+}
+
+.input_width {
+	width: 170px;
+}
+
+.select {
+	width: 170px;
+}
+
+.pan {
+	width: 170px;
+	height: 40px;
+	padding: 7px;
+	border-radius: 4px;
+}
+
+.agreement {
+	width: 164px;
+	height: 40px;
+	padding: 7px;
+	border-radius: 4px;
+}
+
+.description {
+	width: 1020px;
+	height: 72px;
+	padding: 7px;
+	margin-top: 8px;
+	border-radius: 4px;
+}
+
+.pan_area {
+	width: 164px;
+	height: 40px;
+	padding: 7px;
+	border-radius: 4px;
+}

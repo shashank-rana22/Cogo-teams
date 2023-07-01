@@ -5,38 +5,18 @@
 	color: #4f4f4f;
 }
 
-.content {
+.top_div {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	width: 100%;
-
-	:global {
-		.ui_avatar_container {
-			width: 18% !important;
-			height: 50px !important;
-			padding: 4px 6px !important;
-		}
-	}
 }
 
-.details {
-	display: flex;
-	flex-direction: column;
-	width: 77%;
-}
-
-.name {
-	display: flex;
-	width: 100%;
-	font-size: 15px;
-	color: #4f4f4f;
-	text-transform: capitalize;
-}
-
-.email {
-	display: flex;
-	width: 100%;
+.copy_link {
 	font-size: 12px;
-	color: #4f4f4f;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .conversation_title {
@@ -58,11 +38,4 @@
 .pill_name {
 	font-size: 10px;
 	color: #221f20;
-}
-
-.user_div {
-	z-index: 1;
-	padding: 2px;
-	background: #fffce6;
-	border-radius: 10px;
 }

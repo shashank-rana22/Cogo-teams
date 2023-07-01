@@ -44,6 +44,18 @@ export const controls = (partnerOptions) => [
 				label : 'Finance',
 				value : 'finance',
 			},
+			{
+				label : 'Training',
+				value : 'training',
+			},
+			{
+				label : 'HR',
+				value : 'hr',
+			},
+			{
+				label : 'External',
+				value : 'external',
+			},
 		],
 		type        : 'multiSelect',
 		isClearable : true,

@@ -1,0 +1,66 @@
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	font-weight: 600;
+	color: #828282;
+}
+
+.referral_types {
+	margin-left: 30px;
+}
+
+.chart_container {
+	display: flex;
+	align-items: center;
+}
+
+.charts {
+	width: 33%;
+	padding: 10px 15px;
+	margin-top: 10px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.estimated_container {
+	width: 33%;
+	padding: 45px 15px;
+	margin-top: 10px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.bonus_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 33%;
+}
+
+.view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 12px;
+}
+
+.number {
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.coin_icon {
+	margin: -1px 5px 0 0;
+}
+
+.sub_text {
+	font-size: 12px;
+	color: #828282;
+}
+
+.count_container {
+	display: flex;
+	align-items: center;
+}

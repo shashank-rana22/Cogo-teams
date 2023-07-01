@@ -1,0 +1,112 @@
+.under_line {
+	width: 160px;
+	margin: 4px 0 12px;
+	font-size: 16px;
+	font-weight: 500;
+	border-bottom: 2px solid #ed3726;
+}
+
+.container {
+	width: 60%;
+	height: 360px;
+	padding-bottom: 12px;
+	margin-top: 16px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.styled_text {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.amount {
+	font-size: 36px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.styled_month_text {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.vertical_bar_graph {
+	display: flex;
+	justify-content: center;
+	width: 700px;
+	height: 260px;
+	overflow-y: hidden;
+}
+
+.sub_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px 24px 0;
+}
+
+.daily_sales {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.styled_daily_text {
+	margin-right: 4px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.price_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 64px;
+}
+
+.quarter {
+	font-size: 14px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.quarter_container {
+	display: flex;
+	align-items: center;
+}
+
+.sales_container {
+	display: flex;
+}
+
+.bar_chart {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.toggle_style {
+	display: flex;
+	align-items: center;
+}
+
+.icon {
+	margin-top: 4px;
+	margin-left: 4px;
+}
+
+.dashboard_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60%;
+	height: 360px;
+	margin-top: 12px;
+	background: white;
+	border-radius: 8px;
+}
+
+.border {
+	width: 50%;
+	border: 1.5px solid #ed3726;
+}

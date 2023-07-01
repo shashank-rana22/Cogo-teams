@@ -11,7 +11,9 @@ const getAuthorizationParams = (store, url) => {
 		const { pathname } = general;
 		const fallback_navigation = routeConfig?.[pathname]?.navigation || '';
 
-		const authorizationparameters = getAuthParam(
+		const { authParams: authParamFromStore } = profile;
+
+		const authorizationparameters = authParamFromStore || getAuthParam(
 			profile?.permissions_navigations,
 			pathname,
 		);

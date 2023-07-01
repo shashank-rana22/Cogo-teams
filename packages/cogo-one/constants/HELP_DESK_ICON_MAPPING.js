@@ -1,98 +1,72 @@
-import {
-	IcMServices,
-	IcMDocument,
-	IcMSearchdark,
-	IcAOperationalExcellence,
-	IcMFinance,
-	IcAFreeOnBoard,
-} from '@cogoport/icons-react';
-
 const IconMapping = {
-	air: {
+	value_added_services: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 6.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/value_added_services.svg"
 				alt="logo cogoport"
-				width="20px"
-				height="20px"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	document: {
-		icon  : IcMDocument,
-		style : '#1b842c',
-	},
-	search: {
-		icon  : IcMSearchdark,
-		style : '#ffa701',
-	},
-	booking: {
+
+	onboarding: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 8.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Onboarding.svg"
 				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	transaction: {
+
+	industry: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 8.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Industry.svg"
 				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	operation: {
-		icon  : IcAOperationalExcellence,
-		style : '#303b67',
-	},
-	finance: {
-		icon  : IcMFinance,
-		style : '#303b67',
-	},
-	shipment: {
+
+	bookings_or_transaction_flow: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/red_container.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/bookings_transactions.svg"
 				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	service: {
-		icon  : IcMServices,
-		style : '#303b67',
-	},
-	topic: {
+
+	operations_and_shipment_execution: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 7.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/operations_shipment_execution.svg"
 				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	platform: {
+
+	platform_help: {
 		icon: (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 9.svg"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platform_help.svg"
 				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
 			/>
 		),
-		style : '#303b67',
-		isSvg : true,
 	},
-	boarding: {
-		icon  : IcAFreeOnBoard,
-		style : '#303b67',
+
+	saas_tools: {
+		icon: (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/saas_tools.svg"
+				alt="logo cogoport"
+				style={{ width: 40, height: 40 }}
+			/>
+		),
 	},
 };
 export default IconMapping;

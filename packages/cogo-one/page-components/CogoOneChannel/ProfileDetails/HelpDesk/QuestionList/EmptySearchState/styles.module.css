@@ -1,0 +1,82 @@
+.null_state {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
+}
+
+.heading {
+	margin-top: 4px;
+	color: #221f20;
+}
+
+.request_question {
+	margin-top: 10px;
+}
+
+.updated_text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.icon {
+	animation-name: animation;
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+}
+
+@keyframes animation {
+	0% {
+		opacity: 0;
+		transform: scale3d(0.3, 0.3, 0.3);
+	}
+
+	50% {
+		opacity: 1;
+	}
+}
+
+.request_text {
+	width: fit-content;
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.input_component {
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+}
+
+.button_row {
+	display: flex;
+	justify-content: right;
+	margin-top: 8px;
+}
+
+.input_heading {
+	margin-top: 15px;
+	margin-bottom: 8px;
+	font-size: 12px;
+}
+
+.cancel {
+	color: #000;
+}
+
+.sub_heading {
+	margin-bottom: 10px;
+	font-size: 18px;
+	opacity: 0.7;
+}
+
+.last_button {
+	margin-left: 10px;
+}
+
+.label {
+	margin-top: 10px;
+	font-size: 12px;
+}

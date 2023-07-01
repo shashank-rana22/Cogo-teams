@@ -1,0 +1,34 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.title {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	color: #221f20;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.rich_text {
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 180%;
+	color: #0009;
+
+	img {
+		max-width: 100%;
+		height: 100%;
+	}
+}

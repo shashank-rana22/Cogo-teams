@@ -1,10 +1,13 @@
 import {
+	Popover,
+	Loader,
 	Button,
 	Pill,
 	Placeholder,
 	Tooltip,
 	Modal,
 } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcADocumentTemplates,
 	IcCFtick,
@@ -15,10 +18,10 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
 
+import EmptyStateDocs from '../../../../commons/EmptyStateDocs';
 import List from '../../../../commons/List/index';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import DOCUMENTS from '../../../configurations/DOCUMENTS';
-import config from '../../../configurations/SUPPLIER_HISTORY';
 import useSupplierHistory from '../../../hook/useSupplierHistory';
 
 import styles from './styles.module.css';
@@ -30,11 +33,16 @@ interface SellerDetail {
 interface DocumentData {
 	list: Array<object>;
 }
+interface BillAdditionalObject {
+	shipmentType?: string;
+}
 
 interface DataProps {
 	sellerDetail?: SellerDetail;
 	serviceProviderCategory?: string;
 	serviceProviderDocuments: DocumentData;
+	billAdditionalObject? : BillAdditionalObject;
+
 }
 
 interface PaymentsData {
@@ -61,6 +69,7 @@ function SupplierDetails({
 		sellerDetail,
 		serviceProviderCategory = '',
 		serviceProviderDocuments,
+		billAdditionalObject,
 	} = data || {};
 	const { payables, receivables, payablesCurrency, receivablesCurrency } = paymentsData || {};
 
@@ -68,6 +77,7 @@ function SupplierDetails({
 		getSupplierHistory();
 		setShowModal(!showModal);
 	};
+	const rest = { onClickOutside: () => { setShowModal(false); } };
 
 	const functions = {
 		DocumentTypeFunc: (item: any) => {
@@ -92,11 +102,49 @@ function SupplierDetails({
 				<IcMDownload height={20} width={20} />
 			</div>
 		),
+		sidDetailsFunc: (item:any) => (
+			<div className={styles.sid_details}>
+				{' '}
+				SID -
+				{' '}
+				{item}
+			</div>
+		),
+	};
+
+	const getSupplierData = () => {
+		if (loading) {
+			return (
+				<div className={styles.loader_main}>
+					<Loader className={styles.loader} />
+				</div>
+			);
+		}
+		if (isEmpty(historyData)) {
+			return <div>First Time</div>;
+		}
+
+		return (
+			<>
+				<div className={styles.details}>LAST 10 SID Details</div>
+				{historyData.map((item:any) => (
+					<div key={item}>
+						{' '}
+						SID -
+						{' '}
+						{item}
+					</div>
+				))}
+
+			</>
+		);
 	};
 
 	return (
 		<div className={styles.container}>
-			<h3>Supplier Details</h3>
+			{billAdditionalObject?.shipmentType === 'ftl_freight'
+				? <h3>Collection Party Details</h3>
+				: <h3>Supplier Details</h3> }
 
 			<div className={styles.small_hr} />
 
@@ -158,11 +206,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{payablesCurrency || '-'}
-									{' '}
-&nbsp;
-									{' '}
-									{showOverflowingNumber(payables || 0, 7)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	payables,
+										currency : payablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -189,11 +240,14 @@ function SupplierDetails({
 						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
-									{receivablesCurrency || '-'}
-									{' '}
-&nbsp;
-									{' '}
-									{showOverflowingNumber(receivables || 0, 7)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	receivables,
+										currency :	receivablesCurrency,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -207,37 +261,23 @@ function SupplierDetails({
 				<div className={styles.vertical_small_hr} />
 
 				<div className={styles.supplier_details}>
-					<div
-						className={styles.supplier_history}
-						onClick={() => {
-							handleChange();
-						}}
-						role="presentation"
+					<Popover
+						placement="bottom"
+						caret
+						visible={showModal}
+						render={getSupplierData()}
+						{...rest}
 					>
-						Supplier History
-					</div>
-					{showModal && (
-						<Modal
-							size="lg"
-							show={showModal}
-							onClose={() => {
-								setShowModal(false);
+						<div
+							onClick={() => {
+								handleChange();
 							}}
+							role="presentation"
+							className={styles.supplier_history}
 						>
-							<Modal.Header title="SUPPLIER HISTORY" />
-							<Modal.Body>
-								{!isEmpty(historyData) ? (
-									<List
-										config={config}
-										itemData={{ list: historyData }}
-										loading={loading}
-									/>
-								) : (
-									<div className={styles.supply_card}>NO HISTORY</div>
-								)}
-							</Modal.Body>
-						</Modal>
-					)}
+							Supplier History
+						</div>
+					</Popover>
 
 					<div className={styles.docs_container}>
 						<div className={styles.docs_icon}>
@@ -271,7 +311,7 @@ function SupplierDetails({
 											functions={functions}
 										/>
 									) : (
-										<div className={styles.supply_card}>NO Documents</div>
+										<div className={styles.supply_card}><EmptyStateDocs /></div>
 									)}
 								</Modal.Body>
 							</Modal>

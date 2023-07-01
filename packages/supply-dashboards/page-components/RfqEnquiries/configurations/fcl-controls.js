@@ -1,13 +1,11 @@
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
+import useGetMainPortsOptions from '../hooks/useGetMainPortsOptions';
 
 import fclChildControls from './charge-controls';
 
-const FclFields = () => {
-	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['seaport'] } },
-	}));
+const FclFields = ({ data }) => {
+	const mainPortOptions1 = useGetMainPortsOptions({ location_id: data?.data?.origin_port_id });
+	const mainPortOptions2 = useGetMainPortsOptions({ location_id: data?.data?.destination_port_id });
+
 	const control = [
 		{
 			name        : 'rate_reference_number',
@@ -31,7 +29,7 @@ const FclFields = () => {
 		{
 			name        : 'origin_main_port_id',
 			type        : 'select',
-			...locationOptions,
+			...mainPortOptions1,
 			label       : 'Origin Main Port',
 			span        : 4,
 			placeholder : 'Select',
@@ -43,7 +41,7 @@ const FclFields = () => {
 			label       : 'Destination Main Port',
 			span        : 4,
 			placeholder : 'Select',
-			...locationOptions,
+			...mainPortOptions2,
 			rules       : { required: 'This is required' },
 		},
 		{

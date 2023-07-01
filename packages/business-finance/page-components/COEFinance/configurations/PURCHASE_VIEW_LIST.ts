@@ -6,7 +6,6 @@ const PURCHASE_VIEW_CONFIG = {
 		background   : '#333',
 		marginTop    : '20px',
 		paddingLeft  : '14px',
-		minWidth     : '1800px',
 	},
 	bodyStyles: {
 		color      : ' #333333',
@@ -39,13 +38,13 @@ const PURCHASE_VIEW_CONFIG = {
 				key: 'serviceType',
 			},
 			func : 'renderFieldPair',
-			span : 1.4,
+			span : 1,
 		},
 		{
 			label : 'Supplier Name',
 			key   : 'organizationName',
 			func  : 'renderCustomer',
-			span  : 2,
+			span  : 1.5,
 		},
 		{
 			label : 'Invoice Amount',
@@ -64,26 +63,26 @@ const PURCHASE_VIEW_CONFIG = {
 			label   : 'Invoice Date',
 			key     : 'billDate',
 			func    : 'renderFormate',
-			span    : 1.8,
+			span    : 1.5,
 			sorting : { name: 'billDateSortType' },
 		},
 		{
 			label   : 'Payment Due Date',
 			key     : 'dueDate',
 			func    : 'renderFormate',
-			span    : 1.8,
+			span    : 2.1,
 			sorting : { name: 'dueDateSortType' },
 		},
 		{
 			label : 'Status',
 			key   : 'status',
-			span  : 1,
+			span  : 0.9,
 			func  : 'renderStatus',
 		},
 		{
 			label : 'Remarks ',
 			key   : 'remarks',
-			span  : 1,
+			span  : 0.9,
 			func  : 'renderRemarks',
 		},
 		{
@@ -94,7 +93,7 @@ const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			key  : 'viewMore',
-			span : 1.4,
+			span : 1.8,
 			func : 'renderViewMore',
 		},
 	],

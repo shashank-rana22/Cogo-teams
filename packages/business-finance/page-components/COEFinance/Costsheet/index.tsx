@@ -1,11 +1,12 @@
-import { Button, Pill, Accordion, Placeholder } from '@cogoport/components';
+import { Loader, Button, Pill, Accordion, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcADocumentTemplates, IcMArrowNext } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../commons/Interfaces';
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details';
 import Documents from '../All_Invoices/ViewInvoices/ShipmentDetails/Documents';
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet';
@@ -23,7 +24,7 @@ import styles from './styles.module.css';
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId: shipmentid, jobNumber, orgId, IsJobClose } = query || {};
+	const { shipmentId, jobNumber, orgId, IsJobClose } = query || {};
 	const getStatus = () => {
 		if (IsJobClose === 'OPEN') {
 			return false;
@@ -41,23 +42,19 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
-		postTaxData,
 		preTaxLoading,
-		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
-	const { data: shipmentData } = useListShipment(jobNumber);
+	const { data: shipmentData, loading: loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, tradeType } = dataList;
-	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
-		agent_data:agentData, agent_role_data:agentRoleData,
-		amount, amount_currency:amountCurrency,
+		agent_data: agentData, agent_role_data: agentRoleData,
+		amount, amount_currency: amountCurrency,
 	} = dataWallet?.list?.[0] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
@@ -73,16 +70,30 @@ function CostSheet() {
 		getData(data);
 	};
 
+	const getPills = () => {
+		if (loadingShipment) {
+			return <Placeholder height="20px" width="80px" />;
+		}
+		if (sourceText) {
+			return <Pill color="blue">{sourceText}</Pill>;
+		}
+		if (tradeType) {
+			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
+		}
+		return <div>No Data Found</div>;
+	};
 	return (
 		<div>
 			<div className={styles.flex}>
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => Router.push(
-						'/business-finance/coe-finance/[active_tab]/[view]',
-						'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
-					)}
+					onClick={() => {
+						Router.push(
+							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
+						);
+					}}
 				>
 					Go Back
 				</Button>
@@ -132,12 +143,6 @@ function CostSheet() {
 					actual={preTaxActual}
 					loading={preTaxLoading}
 				/>
-				<StatRect
-					heading="Profit on Shipment - Post Tax"
-					expected={postTaxExpected}
-					actual={postTaxActual}
-					loading={postTaxLoading}
-				/>
 			</div>
 			<DiscountRect
 				heading="Discount Applied"
@@ -148,7 +153,7 @@ function CostSheet() {
 								<div className={styles.kam_data}>KAM -</div>
 								<div>
 									{agentData?.name}
-								&nbsp;(
+									&nbsp;(
 									{agentRoleData?.name}
 									)
 								</div>
@@ -160,42 +165,54 @@ function CostSheet() {
 								</div>
 							</div>
 						) : null
-                }
+				}
 				statlabel="Revenue Desk - "
 			/>
 			<Accordion
 				type="text"
 				title={
-        (
-	<span className={styles.label}>
-		Documents
-		<span className={styles.icon}>
-			<IcADocumentTemplates />
-		</span>
-	</span>
-        ) as unknown as string
-        }
+					(
+						<span className={styles.label}>
+							Shipment Documents
+							<span className={styles.icon}>
+								<IcADocumentTemplates />
+							</span>
+							{loadingShipment && <Loader />}
+						</span>
+					) as unknown as string
+				}
 				style={{
 					backgroundColor : '#FFFFFF',
 					borderRadius    : '8px',
 					margin          : '25px 0px',
 				}}
 			>
-				<Documents shipmentId={shipmentid} />
+				<Documents shipmentId={shipmentId} />
 			</Accordion>
 			<Accordion
 				type="text"
 				title={
-        (
-	<span className={styles.details}>
-		Shipment Details
-		<div className={styles.tags_container}>
-			{sourceText && <Pill color="blue">{sourceText}</Pill>}
-			{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
-		</div>
-	</span>
-        ) as unknown as string
-        }
+					(
+						<span className={styles.details}>
+							Shipment Details
+							<div className={styles.tags_container}>
+								{getPills()}
+							</div>
+
+							<div className={styles.sid}>
+								{' '}
+								SID
+								{' '}
+								<div className={styles.job}>
+									#
+									{jobNumber}
+								</div>
+
+							</div>
+
+						</span>
+					) as unknown as string
+				}
 				style={{
 					backgroundColor : '#FFFFFF',
 					borderRadius    : '8px',
@@ -205,8 +222,9 @@ function CostSheet() {
 				<Details
 					orgId={orgId}
 					dataList={shipmentData?.list?.[0]}
-					shipmentId={shipmentid}
+					shipmentId={shipmentId}
 				/>
+
 			</Accordion>
 			<div className={styles.heading}>Cost Sheet</div>
 			<Line width="60px" color="#F68B21" margin="5px 0px 0px 0px" />
@@ -242,48 +260,114 @@ function CostSheet() {
 				<div className={styles.width}>
 					<CardHeader
 						header="Sell"
-						value={getFormattedPrice(sellTotal, 'INR') || '-'}
+						value={formatAmount({
+							amount   : sellTotal,
+							currency : GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) || '-'}
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{sellData?.totalQuotational
-								? getFormattedPrice(sellData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{sellData?.totalCreditNoteActual
+									? formatAmount({
+										amount   : sellData?.totalCreditNoteActual,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{sellData?.totalQuotational
+									? formatAmount({
+										amount   : sellData?.totalQuotational,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
-            && [1, 2, 3, 4].map(() => (
-	<Placeholder margin="20px" width="96%" height="220px" />
-            ))}
+						&& [1, 2, 3, 4].map((val) => (
+							<Placeholder key={val} margin="20px" width="96%" height="220px" />
+						))}
 					{!apiloading
-            && selldata.map((charge: GenericObject) => (
-	<CardBody charge={charge} type="sell" />
-            ))}
+						&& selldata.map((charge: GenericObject) => (
+							<CardBody charge={charge} key={charge?.service_type} type="sell" />
+						))}
 				</div>
 				<div className={styles.width}>
 					<CardHeader
 						header="Buy"
-						value={getFormattedPrice(buyTotal, 'INR') || '-'}
+						value={formatAmount({
+							amount   : buyTotal,
+							currency : GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) || '-'}
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{buyData?.totalQuotational
-								? getFormattedPrice(buyData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{buyData?.totalCreditNoteActual
+									? formatAmount({
+										amount   : buyData?.totalCreditNoteActual,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{buyData?.totalQuotational
+									? formatAmount({
+										amount   : buyData?.totalQuotational,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
-            && [1, 2, 3, 4].map(() => (
-	<Placeholder margin="20px" width="96%" height="220px" />
-            ))}
+						&& [1, 2, 3, 4].map((val) => (
+							<Placeholder key={val} margin="20px" width="96%" height="220px" />
+						))}
 					{!apiloading
-            && buydata.map((charge: GenericObject) => (
-	<CardBody charge={charge} type="buy" />
-            ))}
+						&& buydata.map((charge: GenericObject) => (
+							<CardBody
+								charge={charge}
+								key={charge?.service_type}
+								type="buy"
+							/>
+						))}
 				</div>
 			</div>
 		</div>

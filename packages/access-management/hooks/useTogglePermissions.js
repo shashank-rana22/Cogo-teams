@@ -28,7 +28,7 @@ const pushPermValues = (
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	possible_apis.forEach((api) => {
 		const scopes =			type === 'none'
-			? [{ type: 'none', through_criteria: [], is_default: true }]
+			? [{ type: 'none', through_criteria: [], is_default_params_required: true }]
 			: getScopes(navigation, api);
 		groupedPermissions.push({
 			resource_name              : api.value,
