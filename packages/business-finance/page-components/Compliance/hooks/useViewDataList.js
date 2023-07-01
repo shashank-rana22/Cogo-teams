@@ -16,6 +16,14 @@ const useViewDataList = ({ id, docType, irnStatus, tradePartyGst }) => {
 		{ manual: true },
 	);
 
+	const [{ loading:deleteLoading }, deleteTrigger] = useRequestBf(
+		{
+			url     : '/sales/outward/remove-invoice',
+			method  : 'put',
+			authKey : 'put_sales_outward_remove_invoice',
+		},
+		{ manual: true },
+	);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
@@ -39,19 +47,33 @@ const useViewDataList = ({ id, docType, irnStatus, tradePartyGst }) => {
 		}
 	}, [docType, id, irnStatus, listTrigger, page, query]);
 
+	const deleteInvoice = async (idDeleteInvoice) => {
+		try {
+			await deleteTrigger({
+				params: {
+					id: idDeleteInvoice,
+				},
+			});
+			refetch();
+		} catch (error) {
+			toastApiError(error);
+		}
+	};
+
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
 
 	useEffect(() => {
-		setPage();
-	}, []);
+		setPage(PAGE);
+	}, [docType, irnStatus, query]);
 
 	return {
 		data,
 		page,
 		setPage,
-		loading,
+		loading: deleteLoading || loading,
+		deleteInvoice,
 	};
 };
 export default useViewDataList;

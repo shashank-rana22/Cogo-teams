@@ -1,7 +1,7 @@
 import { Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
+import { IcMDownload, IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -11,11 +11,11 @@ import styles from './styles.module.css';
 
 const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
-const Column = (refresh, deleteId) => {
+const Column = (refresh, deleteId, statusId, uploadId) => {
 	const { push } = useRouter();
 
 	const contentData = (row) => {
-		const { fileStatus, status, fileUrl, id } = row || {};
+		const { fileStatus, status, fileUrl, id, errorReportFile } = row || {};
 		return (
 			<div>
 				<div
@@ -41,7 +41,15 @@ const Column = (refresh, deleteId) => {
 						Delete
 					</div>
 				)
-					: fileStatus === 'READY' && <div className={styles.card_data}>Upload</div> }
+					: fileStatus === 'READY' && (
+						<div
+							className={styles.card_data}
+							onClick={() => { uploadId(id); }}
+							role="presentation"
+						>
+							Upload
+						</div>
+					) }
 
 				<div
 					className={styles.card_data}
@@ -50,6 +58,21 @@ const Column = (refresh, deleteId) => {
 				>
 					Download
 				</div>
+
+				{errorReportFile
+					&& (
+						<div
+							className={styles.card_data}
+							onClick={() => { window.open(errorReportFile, '_blank'); }}
+							role="presentation"
+						>
+							Error Report
+							{' '}
+							{' '}
+							<IcMDownload height={15} width={15} className={styles.download_icon} />
+						</div>
+					)}
+
 			</div>
 		);
 	};
@@ -87,12 +110,22 @@ const Column = (refresh, deleteId) => {
 		{
 			Header   : <div>File Status</div>,
 			id       : 'fileStatus',
-			accessor : ({ fileStatus }) => (
+			accessor : ({ fileStatus, id, ackNumber }) => (
 				fileStatus && 	(
-					<div>
+					<div className={styles.status_file}>
 						<Pill size="md" color={MAPPING_FILE_STATUS_COLOR[fileStatus]}>
-							{MAPPING_FILE_STATUS[fileStatus]}
+							{MAPPING_FILE_STATUS[fileStatus] }
 						</Pill>
+
+						{fileStatus === 'UPLOAD_IN_PROGRESS' && ackNumber && (
+							<div
+								className={styles.refresh}
+								onClick={() => { statusId(id); }}
+								role="presentation"
+							>
+								<IcMRefresh height="15px" width="15px" />
+							</div>
+						)}
 					</div>
 				)
 			),

@@ -1,9 +1,10 @@
 import { Pagination } from '@cogoport/components';
 
 import StyledTable from '../../../commons/StyledTable/index.tsx';
-import useDeleteData from '../../hooks/useDeleteData';
+import useGetStatus from '../../hooks/useGetStatus';
 import useOutwardFileList from '../../hooks/useOutwardFileList';
 import useRefreshData from '../../hooks/useRefreshData';
+import useUploadAndDelete from '../../hooks/useUploadAndDelete';
 
 import Column from './Column';
 import HeaderOutward from './HeaderOutward';
@@ -23,7 +24,12 @@ function Outward({	filters, setFilters }) {
 
 	const { refresh, refreshLoading } = useRefreshData();
 
-	const { deleteId, deleteIdLoading } = useDeleteData({ refetch });
+	const {
+		deleteId, deleteIdLoading, uploadId,
+		uploadIdLoading,
+	} = useUploadAndDelete({ refetch });
+
+	const {	statusId, statusIdLoading } = useGetStatus({ refetch });
 	const { list, totalRecord } = listData || {};
 
 	return (
@@ -38,9 +44,9 @@ function Outward({	filters, setFilters }) {
 			<div>
 				<StyledTable
 					data={list}
-					columns={Column(refresh, deleteId)}
+					columns={Column(refresh, deleteId, statusId, uploadId)}
 					imageFind={EMPTY_STATE_IMG}
-					loading={listLoading || refreshLoading || deleteIdLoading}
+					loading={listLoading || refreshLoading || deleteIdLoading || statusIdLoading || uploadIdLoading}
 				/>
 			</div>
 

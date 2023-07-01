@@ -28,7 +28,7 @@ function View() {
 	};
 	const {
 		data, loading, page,
-		setPage,
+		setPage, deleteInvoice,
 	} = useViewDataList({
 		id            : query?.id,
 		docType       : filters?.docType,
@@ -80,7 +80,12 @@ function View() {
 			</div>
 
 			<div className={styles.table_body}>
-				<StyledTable data={list} columns={viewColumn} loading={loading} imageFind={EMPTY_STATE_IMAGE} />
+				<StyledTable
+					data={list}
+					columns={viewColumn(deleteInvoice)}
+					loading={loading}
+					imageFind={EMPTY_STATE_IMAGE}
+				/>
 			</div>
 
 			<div className={styles.pagination_container}>

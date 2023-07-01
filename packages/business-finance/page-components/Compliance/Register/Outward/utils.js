@@ -1,15 +1,16 @@
 export const MAPPING_FILE_STATUS_COLOR = {
-	READY       : '#DDEBC0',
-	UPLOADED    : '#CED1ED',
-	IN_PROGRESS : '#FBD1A6',
-	PROCESSING  : '#FEF199',
-	ERROR       : '#F8AEA8',
+	READY              : '#DDEBC0',
+	UPLOADED           : '#CED1ED',
+	UPLOAD_IN_PROGRESS : '#FBD1A6',
+	PROCESSING         : '#FEF199',
+	ERROR              : '#F8AEA8',
 };
 export const MAPPING_FILE_STATUS = {
-	READY       : 'READY TO UPLOAD ',
-	UPLOADED    : 'UPLOADED',
-	IN_PROGRESS : 'EXPORT IN PROGRESS',
-	PROCESSING  : 'PROCESSING',
+	READY              : 'READY TO UPLOAD ',
+	UPLOADED           : 'UPLOADED',
+	UPLOAD_IN_PROGRESS : 'UPLOAD IN PROGRESS',
+	PROCESSING         : 'EXPORT IN PROGRESS',
+	ERROR              : 'ERROR',
 };
 
 export const MAPPING_ENABLE_STATUS = {

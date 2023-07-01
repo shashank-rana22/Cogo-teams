@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import { MAPPING_IRN_STATUS, MAPPING_IRN_STATUS_COLOR } from '../../utils';
@@ -13,7 +14,7 @@ function openPDF(event) {
 	window.open(pdfLink, '_blank');
 }
 
-const viewColumn = [
+const viewColumn = (deleteInvoice) => [
 	{
 		Header   : <div>Invoice No</div>,
 		id       : 'invoiceNo',
@@ -126,6 +127,21 @@ const viewColumn = [
 					</Pill>
 				</div>
 			)
+		),
+	},
+	{
+		id       : 'deleteInvoice',
+		accessor : ({ outwardInvoiceId }) => (
+			outwardInvoiceId &&	(
+				<div
+					onClick={() => { deleteInvoice(outwardInvoiceId); }}
+					role="presentation"
+					className={styles.delete_invoice}
+				>
+					<IcMDelete height={20} width={20} />
+				</div>
+			)
+
 		),
 	},
 
