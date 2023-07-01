@@ -3804,6 +3804,11 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
+			api          : 'list_fcl_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -3822,6 +3827,11 @@ const partner = {
 			api          : 'update_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -3847,6 +3857,11 @@ const partner = {
 			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'create_fcl_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -4797,6 +4812,11 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
+			api          : 'list_fcl_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4815,6 +4835,11 @@ const partner = {
 			api          : 'update_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_fcl_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4840,6 +4865,11 @@ const partner = {
 			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'create_fcl_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
