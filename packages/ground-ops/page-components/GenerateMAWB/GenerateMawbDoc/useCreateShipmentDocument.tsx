@@ -93,7 +93,9 @@ const useCreateShipmentDocument = ({
 	const upload = async ({ payload }) => {
 		try {
 			const res = await trigger({
-				data: payload,
+				data: {
+					req: payload,
+				},
 			});
 			Toast.success('Document saved successfully');
 			if (activeCategory === 'mawb') {

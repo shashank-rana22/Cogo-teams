@@ -13,7 +13,9 @@ const useCreateShipmentDocument = () => {
 	const createDocument = async (payload, listAPI) => {
 		try {
 			await trigger({
-				data: payload,
+				data: {
+					req: payload,
+				},
 			});
 			listAPI({ filters: {} });
 			Toast.success('Document Created Successfully');
