@@ -14,7 +14,7 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-const MINUTES = 1;
+const MINUTES = 0.5;
 const SECONDS = 60;
 const MILISECONDS = 1000;
 const FIFTEEN_MINUTES_IN_MILLISECONDS = MINUTES * SECONDS * MILISECONDS;
@@ -95,7 +95,7 @@ function useShipmentReminder({
 			}
 
 			activityTrackerSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
-				const { last_activity_timestamp = Date.now() } = roomDocData?.data() || {};
+				const { last_activity_timestamp = Date.now(), last_activity = '' } = roomDocData?.data() || {};
 
 				const differenceFromLastActivity = Date.now() - last_activity_timestamp;
 
@@ -103,7 +103,9 @@ function useShipmentReminder({
 					? DEFAULT_VALUE : FIFTEEN_MINUTES_IN_MILLISECONDS - differenceFromLastActivity;
 
 				clearTimeout(remindertimeoutRef?.current);
-
+				if (last_activity === 'submit_otp') {
+					mountActivityTracker({ trackerRef, roomDoc });
+				}
 				remindertimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
 					window.onmousemove = null;

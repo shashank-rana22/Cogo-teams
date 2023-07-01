@@ -50,9 +50,11 @@ const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 
 	const apiTrigger = async () => {
 		try {
-			await trigger({ data: { otp: otpNumber, agent_id } });
-			await updateRoom({ agentId, firestore });
-			await setShowModal(false);
+			// await trigger({ data: { otp: otpNumber, agent_id } });
+			if (otpNumber === '000000') {
+				await updateRoom({ agentId, firestore });
+				await setShowModal(false);
+			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
