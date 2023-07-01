@@ -1,0 +1,18 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.search {
+	width: 342px;
+	padding: 0 4px;
+	margin-top: 2px;
+
+	svg {
+		margin: 2px;
+	}
+}
+
+.exclude_text {
+	margin: 8px 0 0 24px;
+}

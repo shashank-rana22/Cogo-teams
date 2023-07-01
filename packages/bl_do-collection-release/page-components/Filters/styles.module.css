@@ -81,6 +81,11 @@
 	margin-left: 8px;
 }
 
+.document_filter {
+	width: 90%;
+	margin-left: 8px;
+}
+
 .ready_to_collect {
 	display: flex;
 	align-items: center;

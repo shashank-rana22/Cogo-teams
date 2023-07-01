@@ -15,12 +15,16 @@ const GLOBAL_CONSTANTS = {
 		USD : 'en-US',
 		VND : 'vi-VN',
 		AED : 'en-AE',
+		SGD : 'en-SG',
+
 	},
 	currency_symbol: {
 		USD : '$',
 		INR : '₹',
 		VND : '₫',
 		AED : 'AED',
+		SGD : '$',
+
 	},
 	formats: {
 		date: {
@@ -213,6 +217,7 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_image      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
 		network_loader       : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar_image    : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
+		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
 	},
@@ -286,7 +291,8 @@ const GLOBAL_CONSTANTS = {
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
-		image_extension: /\.(jpg|jpeg|png|gif|svg)$/i,
+		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
+		empty_spaces_before_tab_character : / +(?=\t)/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
