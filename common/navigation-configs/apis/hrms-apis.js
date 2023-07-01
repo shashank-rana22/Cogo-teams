@@ -129,6 +129,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_company_documents',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	performance_management_configuration: [
 		{

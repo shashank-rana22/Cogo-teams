@@ -2,25 +2,28 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useDeleteChapter = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
+const useDeleteComponent = ({ fetchList, setShowDeleteModal, showDeleteModal, source = 'tribe' }) => {
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
 			method : 'DELETE',
-			url    : '/delete_chapter',
+			url    : `/delete_${source}`,
 		},
 		{ manual: true },
 	);
 
-	const deleteChapter = async () => {
+	const payloadKey = `${source}_id`;
+
+	const deleteComponent = async () => {
 		const payload = {
-			chapter_id: showDeleteModal,
+			[payloadKey]: showDeleteModal,
 		};
+
 		try {
 			await trigger({
 				data: payload,
 			});
 
-			Toast.success('Chapter has been deleted successfully');
+			Toast.success(`${source} has been deleted successfully`);
 			setShowDeleteModal(false);
 			fetchList();
 		} catch (error) {
@@ -29,9 +32,9 @@ const useDeleteChapter = ({ fetchList, setShowDeleteModal, showDeleteModal }) =>
 	};
 
 	return {
-		deleteChapter,
+		deleteComponent,
 		loading,
 	};
 };
 
-export default useDeleteChapter;
+export default useDeleteComponent;

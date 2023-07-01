@@ -2,20 +2,10 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Chapter from './Chapter';
-import Employees from './Employees';
-import Squad from './Squad';
+import ActiveTabs from './getActiveTab';
 import styles from './styles.module.css';
-import SubChapter from './SubChapter';
-import Tribe from './Tribe';
 
-const TABS_MAPPING = {
-	squad       : Squad,
-	tribe       : Tribe,
-	chapter     : Chapter,
-	sub_chapter : SubChapter,
-	employees   : Employees,
-};
+const TABS_MAPPING = ['squad', 'tribe', 'chapter', 'sub_chapter', 'employee'];
 
 function TabComponent() {
 	const [activeTab, setActiveTab] = useState('squad');
@@ -32,15 +22,11 @@ function TabComponent() {
 				style={{ marginBottom: 6 }}
 			>
 				{
-					(Object.keys(TABS_MAPPING) || []).map((tab) => {
-						const Component = TABS_MAPPING[tab];
-
-						return (
-							<TabPanel key={tab} name={tab} title={startCase(tab)}>
-								<Component />
-							</TabPanel>
-						);
-					})
+					(TABS_MAPPING || []).map((tab) => (
+						<TabPanel key={tab} name={tab} title={startCase(tab)}>
+							<ActiveTabs source={tab} />
+						</TabPanel>
+					))
 				}
 			</Tabs>
 		</div>

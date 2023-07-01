@@ -1,3 +1,12 @@
+const params = {
+	filters: {
+		status               : 'active',
+		partner_entity_types : ['cogoport'],
+
+	},
+	page_limit: 100,
+};
+
 const controls = [
 	{
 		name        : 'tribe_name',
@@ -16,14 +25,7 @@ const controls = [
 		rules       : {
 			required: 'Tribe leader is required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-
-			},
-			page_limit: 100,
-		},
+		params,
 	},
 
 	{
@@ -36,14 +38,7 @@ const controls = [
 		rules       : {
 			required: 'Squads are required',
 		},
-		params: {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-
-			},
-			page_limit: 100,
-		},
+		params,
 	},
 
 ];

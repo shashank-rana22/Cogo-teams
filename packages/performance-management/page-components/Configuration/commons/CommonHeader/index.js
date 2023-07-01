@@ -18,11 +18,14 @@ function Header({ search, setSearch, label = '', onClickAddButton = () => {} }) 
 				/>
 			</div>
 
-			<Button onClick={onClickAddButton}>
-				Add
-				{' '}
-				{label}
-			</Button>
+			{label !== 'Employee' && (
+				<Button onClick={onClickAddButton}>
+					Add
+					{' '}
+					{label}
+				</Button>
+			)}
+
 		</div>
 
 	);

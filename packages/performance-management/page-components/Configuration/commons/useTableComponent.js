@@ -3,21 +3,18 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-import getColumns from './getColumns';
-import useDeleteSubChapter from './useDeleteSubChapter';
-
 const DEFAULT_PAGE = 1;
 const DEFAULT_ACTIVE_TAB = 'active';
 
-const useSubChapter = () => {
+const useTableComponent = ({ getColumns = () => {}, source = '' }) => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showSubChapterModal, setShowSubChapterModal] = useState();
+	const [showCreateModal, setShowCreateModal] = useState();
 	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
-		url    : '/list_all_sub_chapters',
+		url    : source !== 'employee' ? `/list_all_${source}s` : `list_${source}_details`,
 		method : 'GET',
 	}, { manual: true });
 
@@ -39,39 +36,31 @@ const useSubChapter = () => {
 				}
 			}
 		},
-		[page, trigger, search, activeTab],
+		[page, search, trigger, activeTab],
 	);
-
-	const { deleteSubChapter, loading: deleteLoading } = useDeleteSubChapter({
-		fetchList,
-		setShowDeleteModal,
-		showDeleteModal,
-	});
 
 	useEffect(() => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns({ setShowDeleteModal, setShowSubChapterModal });
+	const columns = getColumns({ setShowDeleteModal, setShowCreateModal, activeTab });
 
 	return {
 		columns,
 		search,
 		setSearch,
-		data,
-		loading,
 		page,
 		setPage,
+		data,
+		loading,
 		fetchList,
-		deleteSubChapter,
-		deleteLoading,
-		setShowDeleteModal,
 		showDeleteModal,
-		setShowSubChapterModal,
-		showSubChapterModal,
+		setShowDeleteModal,
+		showCreateModal,
+		setShowCreateModal,
 		activeTab,
 		setActiveTab,
 	};
 };
 
-export default useSubChapter;
+export default useTableComponent;

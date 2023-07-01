@@ -1,11 +1,10 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useCreateChapter = ({ fetchList, setShowChapterModal }) => {
+const useCreateComponent = ({ fetchList, setShowCreateModal, source = 'tribe' }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
-		url    : '/create_chapter',
+		url    : `/create_${source}`,
 	}, { manual: true });
 
 	const onClickSubmitButton = async (values) => {
@@ -16,11 +15,11 @@ const useCreateChapter = ({ fetchList, setShowChapterModal }) => {
 				},
 			});
 
-			Toast.success('Chapter has been created successfully');
-			setShowChapterModal(false);
+			Toast.success(`${source} has been created successfully`);
+			setShowCreateModal(false);
 			fetchList();
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 
@@ -30,4 +29,4 @@ const useCreateChapter = ({ fetchList, setShowChapterModal }) => {
 	};
 };
 
-export default useCreateChapter;
+export default useCreateComponent;

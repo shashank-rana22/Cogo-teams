@@ -5,6 +5,7 @@ const controls = [
 		type        : 'input',
 		placeholder : 'Enter subchapter name',
 	},
+
 	{
 		name        : 'sub_chapter_leader',
 		label       : 'Sub-Chapter leader',
@@ -23,6 +24,7 @@ const controls = [
 			},
 		},
 	},
+
 	{
 		name        : 'employee_ids',
 		type        : 'asyncSelect',

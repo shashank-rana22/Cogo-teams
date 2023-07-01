@@ -12,13 +12,6 @@
 	border-radius: 4px;
 }
 
-.pagination_container {
-	display: flex;
-	justify-content: flex-start;
-	width: 100%;
-	padding-right: 20px;
-	padding-bottom: 20px;
-}
 
 .pill_box {
 	display: flex;
@@ -39,15 +32,4 @@
 	margin-left: 20px;
 }
 
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 12px 0;
 
-	:global {
-		.ui_input_container {
-			height: 42px;
-		}
-	}
-}

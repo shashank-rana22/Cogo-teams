@@ -1,5 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
@@ -43,13 +43,11 @@ function CreateConfigurationModal({
 	loading,
 	handleSubmit,
 	errors,
-	Type,
+	type,
 	setValue,
 }) {
-	// console.log(showModal);
-
 	useEffect(() => {
-		if (!isEmpty(showModal) && Type === CHECK_USE_TYPE_UPDATE) {
+		if (!isEmpty(showModal) && type === CHECK_USE_TYPE_UPDATE) {
 			if (showModal?.squad_name) {
 				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
 
@@ -82,7 +80,7 @@ function CreateConfigurationModal({
 				setValue('employee_ids', ARRAY_OF_IDS);
 			}
 		}
-	}, [setValue, showModal, Type]);
+	}, [setValue, showModal, type]);
 
 	return (
 		<div>
@@ -92,7 +90,7 @@ function CreateConfigurationModal({
 				onClose={() => setShowModal(false)}
 				placement="center"
 			>
-				<Modal.Header title={`${Type} ${label}`} />
+				<Modal.Header title={`${type} ${startCase(label)}`} />
 
 				<Modal.Body>
 					<RenderModalBody
@@ -108,7 +106,7 @@ function CreateConfigurationModal({
 						onClick={handleSubmit(onClickSubmitButton)}
 						loading={loading}
 					>
-						{Type}
+						{type}
 					</Button>
 				</Modal.Footer>
 			</Modal>
