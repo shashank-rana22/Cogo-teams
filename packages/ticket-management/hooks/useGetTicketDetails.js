@@ -3,9 +3,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const getParams = ({ ticketId, profile }) => ({
-	ID            : Number(ticketId),
-	PerformedByID : profile?.user?.id,
+const getParams = ({ ticketId, PerformedByID }) => ({
+	ID: Number(ticketId),
+	PerformedByID,
 });
 
 const useGetTicketDetails = ({ ticketId }) => {
@@ -20,12 +20,12 @@ const useGetTicketDetails = ({ ticketId }) => {
 	const getTicketDetails = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ ticketId, profile }),
+				params: getParams({ ticketId, PerformedByID: profile?.user?.id }),
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, ticketId, profile]);
+	}, [trigger, ticketId, profile?.user?.id]);
 
 	useEffect(() => {
 		if (!(isEmpty(ticketId))) {
