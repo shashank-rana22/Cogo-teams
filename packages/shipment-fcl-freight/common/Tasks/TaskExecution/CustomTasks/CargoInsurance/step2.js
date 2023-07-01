@@ -29,7 +29,6 @@ function Step2({
 		watch,
 		setValue,
 		control,
-		getValues,
 		formState: { errors },
 	} = formProps;
 
@@ -60,17 +59,19 @@ function Step2({
 	});
 
 	const handleNextStep = (key) => {
-		const newFormValues = { ...insuranceDetails, ...getValues() };
-		const payload = getPayload({
-			policyId,
-			insuranceDetails : newFormValues,
-			billingData,
-			policyForSelf    : insuranceDetails?.policyForSelf,
-			addressId,
-			premiumData,
-			billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
-		});
-		saveData({ key, payload });
+		handleSubmit((values) => {
+			const newFormValues = { ...insuranceDetails, ...values };
+			const payload = getPayload({
+				policyId,
+				insuranceDetails : newFormValues,
+				billingData,
+				policyForSelf    : insuranceDetails?.policyForSelf,
+				addressId,
+				premiumData,
+				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
+			});
+			saveData({ key, payload });
+		})();
 	};
 
 	return (
@@ -104,20 +105,18 @@ function Step2({
 
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={handleSubmit(handleNextStep)}
+					onClick={handleNextStep}
 					disabled={loading}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Save As Draft
 				</Button>
 
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={() => handleSubmit(handleNextStep('next_step'))}
+					onClick={() => handleNextStep('next_step')}
 					disabled={loading}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Next Step
 				</Button>

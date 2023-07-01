@@ -58,12 +58,14 @@ function AddModal({
 		refetch         : refetchAfterApiCall,
 	});
 
-	const onSubmit = async (data) => {
-		await createSellerAddres(data, handleCloseModal);
-		if (billingAddressData?.data?.id) {
-			organisationAddress();
-			addressApi();
-		}
+	const onSubmit = (data) => {
+		handleSubmit(async () => {
+			await createSellerAddres(data, handleCloseModal);
+			if (billingAddressData?.data?.id) {
+				organisationAddress();
+				addressApi();
+			}
+		})();
 	};
 
 	return (
@@ -192,7 +194,7 @@ function AddModal({
 
 					<Button
 						size="md"
-						onClick={handleSubmit(onSubmit)}
+						onClick={onSubmit}
 						disabled={createAddressLoading}
 						className={styles.btn_div}
 					>

@@ -26,7 +26,7 @@ function Step1({
 	formProps = {},
 }) {
 	const [policyForSelf, setPolicyForSelf] = useState(
-		insuranceDetails?.policyForSelf,
+		!!insuranceDetails?.policyForSelf,
 	);
 	const [prosporerAddress, setProsporerAddress] = useState({});
 	const [checked, setChecked] = useState([]);
@@ -44,38 +44,43 @@ function Step1({
 	const {
 		handleSubmit = () => {},
 		control,
-		getValues,
 		formState: { errors },
 	} = formProps;
 
 	const handleNextStep = (key) => {
-		const newFormValues = { ...insuranceDetails, ...getValues() };
-		const payload = getPayload({
-			policyId,
-			step,
-			insuranceDetails: newFormValues,
-			billingData,
-			policyForSelf,
-			addressId,
-		});
-		saveData({ key, payload });
+		handleSubmit((values) => {
+			const newFormValues = { ...insuranceDetails, ...values };
+			const payload = getPayload({
+				policyId,
+				step,
+				insuranceDetails: newFormValues,
+				billingData,
+				policyForSelf,
+				addressId,
+			});
+
+			saveData({ key, payload });
+		})();
 	};
+
+	const { id: prosporerAddressId, address_type: prosporerAddressType } = prosporerAddress || {};
+	const { billingId, address_type: billingDataAddressType } = billingData || {};
 
 	useEffect(() => {
 		if (policyForSelf) {
 			setAddressId(
-				prosporerAddress?.address_type === 'billing'
-					? { organizationBillingAddressId: prosporerAddress?.id }
-					: { organizationAddressId: prosporerAddress?.id },
+				prosporerAddressType === 'billing'
+					? { organizationBillingAddressId: prosporerAddressId }
+					: { organizationAddressId: prosporerAddressId },
 			);
 		} else {
 			setAddressId(
-				billingData?.address_type === 'billing'
-					? { organizationBillingAddressId: billingData?.billingId }
-					: { organizationAddressId: billingData?.billingId },
+				billingDataAddressType === 'billing'
+					? { organizationBillingAddressId: billingId }
+					: { organizationAddressId: billingId },
 			);
 		}
-	}, [billingData, prosporerAddress, policyForSelf, setAddressId]);
+	}, [prosporerAddressId, prosporerAddressType, billingId,, billingDataAddressType, policyForSelf, setAddressId]);
 
 	return (
 		<div className={styles.container}>
@@ -111,22 +116,20 @@ function Step1({
 			<div className={styles.button_container}>
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={handleSubmit(handleNextStep)}
+					onClick={handleNextStep}
 					disabled={loading}
 				>
 					Save As Draft
 				</Button>
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={() => handleSubmit(handleNextStep('next_step'))}
+					onClick={() => handleNextStep('next_step')}
 					disabled={
 						policyForSelf || loading
 							? isEmpty(prosporerAddress)
 							: isEmpty(billingData.billingId)
 					}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Next Step
 				</Button>

@@ -74,22 +74,24 @@ function Step3({
 	);
 
 	const handleNextStep = ({ submit = false }) => {
-		const newFormValues = { ...insuranceDetails, ...getValues() };
-		const payload = getPayload({
-			policyId,
-			insuranceDetails : newFormValues,
-			billingData,
-			policyForSelf    : insuranceDetails?.policyForSelf,
-			addressId,
-			billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
-		});
-		const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
+		handleSubmit((values) => {
+			const newFormValues = { ...insuranceDetails, ...values };
+			const payload = getPayload({
+				policyId,
+				insuranceDetails : newFormValues,
+				billingData,
+				policyForSelf    : insuranceDetails?.policyForSelf,
+				addressId,
+				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
+			});
+			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
 
 		if (submit) {
 			generateInsurance({ payload, payloadForUpdateShipment });
 		} else {
 			saveData({ payload });
 		}
+		})();
 	};
 
 	return (
@@ -122,30 +124,27 @@ function Step3({
 
 				<Button
 					size="md"
-					themeType="primary"
 					onClick={sendCustomerEmail}
 					disabled={isDisableForCustomerConfirmation()}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Send email for Customer confirmation
 				</Button>
 
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={handleSubmit(handleNextStep)}
+					onClick={handleNextStep}
 					disabled={showLoading}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Save As Draft
 				</Button>
 
 				<Button
 					size="md"
-					themeType="primary"
-					onClick={() => handleSubmit(handleNextStep({ submit: true }))}
+					onClick={() => handleNextStep({ submit: true })}
 					disabled={showLoading || isEmpty(uploadProof)}
-					style={{ marginLeft: '16px' }}
+					className={styles.btn_div}
 				>
 					Generate Policy
 				</Button>
