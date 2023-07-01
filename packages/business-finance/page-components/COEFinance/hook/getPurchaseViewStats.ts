@@ -42,7 +42,7 @@ const usePurchaseViewStats = ({ filters }) => {
 	});
 	const Payload = useMemo(
 		() => ({
-			jobTypeShipment : 'false',
+			jobTypeShipment : 'true',
 			service         : serviceType || undefined,
 			fromDate        : billDatesStart || undefined,
 			toDate          : billDatesEnd || undefined,

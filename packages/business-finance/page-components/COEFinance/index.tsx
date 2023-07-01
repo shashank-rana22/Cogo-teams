@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function CoeFinance() {
 	const { query, push } = useRouter();
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({ timePeriod: 'day' });
 	const { statsData, statsCOEApprovedData } = usePurchaseViewStats({ filters });
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 	const handleTabChange = (tab:string) => {

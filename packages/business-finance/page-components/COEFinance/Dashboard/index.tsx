@@ -1,4 +1,4 @@
-import { Tooltip, Button, Modal } from '@cogoport/components';
+import { Tooltip, Button, Modal, Loader } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,6 +8,7 @@ import MyResponsivePie from '../Components/PieChart';
 import { PieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import BarData from '../Components/ResponsiveBar/BarData';
+import useGetDashboardData from '../hook/useGetDashboardData';
 import useJobStats from '../hook/useJobStats';
 import useServiceOpsStats from '../hook/useServiceOpsStats';
 
@@ -20,6 +21,7 @@ function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
+	const { dashboardData = [{}], loading } = useGetDashboardData(filters);
 	const { LOCKED = 0, FINANCE_ACCEPTED = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
 	const { PAYRUN_BILL_APPROVED = 0	} = statsCOEApprovedData || {};
 
@@ -58,7 +60,13 @@ function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
 			</div>
 
 			<div className={styles.responsive}>
-				<MyResponsiveBar data={BarData(filters)} />
+				{loading ? (
+					<div className={styles.bar_chart_loader}>
+						<Loader style={{ width: '80px' }} />
+					</div>
+				) : (
+					<MyResponsiveBar data={BarData({ dashboardData })} />
+				)}
 			</div>
 
 			<div className={styles.space_between}>

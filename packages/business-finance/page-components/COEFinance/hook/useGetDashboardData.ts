@@ -49,8 +49,8 @@ const useGetDashboardData = (filters :FilterInterface) => {
 				await trigger({
 					params: {
 						service    : serviceType || undefined,
-						fromDate   : billDatesStart || undefined,
-						toDate     : billDatesEnd || undefined,
+						// fromDate   : billDatesStart || undefined,
+						// toDate     : billDatesEnd || undefined,
 						timePeriod : timePeriod || undefined,
 					},
 				});
