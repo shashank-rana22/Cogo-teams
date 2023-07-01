@@ -1,0 +1,36 @@
+.box {
+	padding: 6px 12px;
+	margin-bottom: 8px;
+	background: #f8f2e7;
+	border-radius: 6px;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.flex {
+	display: flex;
+}
+
+.port_code {
+	margin: 0;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+	color: #333;
+	letter-spacing: 0.02em;
+}
+
+.label {
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}

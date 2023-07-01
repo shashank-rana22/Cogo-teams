@@ -44,7 +44,8 @@ const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) =>
 			}));
 			setParams((previousState) => ({
 				...previousState,
-				filters: {
+				page    : 1,
+				filters : {
 					...previousState.filters,
 					...values,
 				},

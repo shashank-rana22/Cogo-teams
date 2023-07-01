@@ -441,6 +441,25 @@ export default {
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
 		],
+		timezone: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -485,8 +504,9 @@ export default {
 				validate_registration: true,
 			},
 			cogo_one: {
-				has_voice_call_access : true,
-				default_country_code  : 'IN',
+				has_voice_call_access     : true,
+				default_country_code      : 'IN',
+				template_default_language : 'english',
 			},
 		},
 	},

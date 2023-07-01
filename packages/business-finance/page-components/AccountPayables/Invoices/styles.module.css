@@ -1,0 +1,48 @@
+.statscontainer {
+	display: flex;
+	margin-top: 16px;
+}
+
+.filtercontainer {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.search {
+	:global {
+		width: 336px;
+
+		.ui_input_container {
+			height: 40px;
+		}
+	}
+
+	::placeholder {
+		font-size: 11px;
+		color: #cacaca;
+	}
+}
+
+.search_filter {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.list_container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.button {
+	margin-right: 6px;
+}

@@ -9,7 +9,7 @@ import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const textMapping = {
+const TEXT_MAPPING = {
 	collection_pending : 'Mark BL as Under Collection',
 	under_collection   : 'Upload Scanned Copy of Document',
 	collected          : 'Select Release Mode',
@@ -23,11 +23,12 @@ export default function AccordionText({
 	handleAccordionOpen = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask = false,
+	showTask,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.text_container}>
-				{showInvoiceAndTask ? (
+				{showInvoiceAndTask || showTask ? (
 					<>
 						<IcMFtaskCompleted
 							width={20}
@@ -38,7 +39,7 @@ export default function AccordionText({
 						{' '}
 						<div className={styles.text}>
 							{!showDeliveryOrderTask
-								? textMapping?.[stateProps.inner_tab]
+								? TEXT_MAPPING?.[stateProps.inner_tab]
 								: 'Upload Delivery Order'}
 						</div>
 					</>

@@ -37,6 +37,7 @@ interface SellerDetailInterface {
 	organizationName?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	organizationId?: string,
 }
 
 interface SellerBankDetailInterface {
@@ -73,8 +74,9 @@ interface BillAdditionalObjectInterface {
 	outstandingDocument? : string;
 	paymentType? : string;
 	isIncidental? : string;
-	advancedAmount? : number;
 	advancedAmountCurrency? : string;
+	serialId?: string,
+	advancedAmount?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -85,6 +87,8 @@ export interface DataInterface {
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
 	consolidatedShipmentIds:Array<string>;
+	organizationId?: string;
+	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {
