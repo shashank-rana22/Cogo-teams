@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
@@ -119,7 +120,7 @@ function EditCancelService({ serviceData = {} }) {
 
 	const truckList = getTrucklistWithId(serviceData);
 
-	const isTruckPresent =	truckList.length > DEFAULT_INDEX
+	const isTruckPresent =	!isEmpty(truckList || [])
 		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
 
 	const content = Object.values(ACTION_BUTTON).map(({ label, value, show }) => (show ? (
