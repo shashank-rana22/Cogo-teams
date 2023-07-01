@@ -14,7 +14,7 @@ import LCL from './LCL';
 import StationaryManagement from './StationaryManagement';
 import styles from './styles.module.css';
 
-const deskMapping = {
+const DESK_MAPPING = {
 	fcl_freight : FCL,
 	lcl_freight : LCL,
 	fcl_local   : FCLLocal,
@@ -33,7 +33,7 @@ export default function BLDoCollectionDesk() {
 	});
 
 	const profile = useSelector((state) => state.profile || {});
-	const Desk = deskMapping[stateProps.shipment_type];
+	const Desk = DESK_MAPPING[stateProps.shipment_type];
 
 	const router = useRouter();
 
@@ -44,19 +44,9 @@ export default function BLDoCollectionDesk() {
 
 	const handleTabChange = (val) => {
 		if (val === 'bl') {
-			setStateProps({
-				...stateProps,
-				activeTab  : val,
-				page       : 1,
-				trade_type : 'export',
-			});
+			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'export', document_status: undefined });
 		} else {
-			setStateProps({
-				...stateProps,
-				activeTab  : val,
-				page       : 1,
-				trade_type : 'import',
-			});
+			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'import', document_status: undefined });
 		}
 	};
 
@@ -70,6 +60,7 @@ export default function BLDoCollectionDesk() {
 						ready_to_collect : false,
 						ready_to_release : false,
 						inner_tab        : item.value,
+						document_status  : undefined,
 						page             : 1,
 					})}
 					key={item?.value}
