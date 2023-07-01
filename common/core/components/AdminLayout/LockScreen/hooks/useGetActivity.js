@@ -14,7 +14,7 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-const MINUTES = 0.5;
+const MINUTES = 10;
 const SECONDS = 60;
 const MILISECONDS = 1000;
 const FIFTEEN_MINUTES_IN_MILLISECONDS = MINUTES * SECONDS * MILISECONDS;
@@ -71,12 +71,12 @@ export function mountActivityTracker({ trackerRef, roomDoc }) {
 	window.addEventListener('scroll', () => activityTracker({ trackerRef, roomDoc, activity: 'scroll' }), true);
 }
 
-function useShipmentReminder({
+function useGetActivity({
 	firestore,
 	agentId = '',
 }) {
 	const activityTrackerSnapShotRef = useRef(null);
-	const remindertimeoutRef = useRef(null);
+	const activitytimeoutRef = useRef(null);
 	const trackerRef = useRef(null);
 	const timeout = useRef(null);
 
@@ -84,7 +84,7 @@ function useShipmentReminder({
 
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
 		activityTrackerSnapShotRef?.current?.();
-		clearTimeout(remindertimeoutRef?.current);
+		clearTimeout(activitytimeoutRef?.current);
 		clearTimeout(trackerRef?.current);
 		try {
 			const roomDoc = await createOrGetRoom({ agentId, firestore });
@@ -103,11 +103,11 @@ function useShipmentReminder({
 				const timer = differenceFromLastActivity > FIFTEEN_MINUTES_IN_MILLISECONDS
 					? DEFAULT_VALUE : FIFTEEN_MINUTES_IN_MILLISECONDS - differenceFromLastActivity;
 
-				clearTimeout(remindertimeoutRef?.current);
+				clearTimeout(activitytimeoutRef?.current);
 				if (last_activity === 'submit_otp') {
 					mountActivityTracker({ trackerRef, roomDoc });
 				}
-				remindertimeoutRef.current = setTimeout(() => {
+				activitytimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
 					window.onmousemove = null;
 					window.onmousedown = null;
@@ -135,4 +135,4 @@ function useShipmentReminder({
 	return { showModal, setShowModal };
 }
 
-export default useShipmentReminder;
+export default useGetActivity;

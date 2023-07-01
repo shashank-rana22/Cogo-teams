@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import { LockScreen } from './LockScreen';
 import { firebaseConfig } from './LockScreen/configurations/firebase-config';
-import useShipmentReminder from './LockScreen/hooks/useGetActivity';
+import useGetActivity from './LockScreen/hooks/useGetActivity';
 import Navbar from './Navbar';
 import TnC from './newTnC';
 import styles from './styles.module.css';
@@ -54,7 +54,7 @@ function AdminLayout({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const { showModal, setShowModal } = useShipmentReminder({
+	const { showModal, setShowModal } = useGetActivity({
 		firestore,
 		agentId: user_id,
 	});
