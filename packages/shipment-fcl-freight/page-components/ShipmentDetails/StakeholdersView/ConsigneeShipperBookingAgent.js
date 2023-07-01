@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
@@ -11,6 +12,8 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -28,7 +31,11 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -95,6 +102,8 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
+					<RolloveDetails />
+
 					<ShipmentChat />
 				</div>
 
@@ -138,6 +147,10 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverActionModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);
