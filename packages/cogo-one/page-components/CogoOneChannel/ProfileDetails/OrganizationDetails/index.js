@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { ACCOUNT_TYPE } from '../../../../constants';
+import { ORGANIZATION_USERS_VIEW, ACCOUNT_TYPE } from '../../../../constants';
 import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -26,13 +26,13 @@ function OrganizationDetails({
 	hasVoiceCallAccess = false,
 	viewType = '',
 }) {
-	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
-	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
+	const { organization_id: messageOrgId = '' } = formattedMessageData || {};
+	const { organization_id: voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
-	const isOrgUsersVisible = ['supply', 'sales'].includes(viewType);
+	const isOrgUsersVisible = ORGANIZATION_USERS_VIEW.includes(viewType);
 
 	const {
 		organizationUsersData,

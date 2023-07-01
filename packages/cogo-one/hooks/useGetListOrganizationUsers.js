@@ -9,14 +9,14 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 		method : 'get',
 	}, { manual: true });
 
-	const listOrganizationsUsers = useCallback(async () => {
+	const listOrganizationsUsers = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					filters: {
 						organization_id: organizationId,
 					},
-					page_limit: 50,
+					page_limit: 100,
 				},
 			});
 		} catch (error) {
