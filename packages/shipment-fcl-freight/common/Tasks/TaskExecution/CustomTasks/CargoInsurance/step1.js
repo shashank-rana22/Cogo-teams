@@ -120,9 +120,7 @@ function Step1({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={
-						() => handleSubmit(handleNextStep('next_step'))
-					}
+					onClick={() => handleSubmit(handleNextStep('next_step'))}
 					disabled={
 						policyForSelf || loading
 							? isEmpty(prosporerAddress)

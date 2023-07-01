@@ -4,7 +4,7 @@ import { IcMPlansExpiring, IcMCrossInCircle, IcMPlus } from '@cogoport/icons-rea
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
 
-// import AddModal from './AddAddressModal';
+import AddModal from './AddAddressModal';
 import styles from './styles.module.css';
 
 const CARD_LENGTH = 3;
@@ -81,7 +81,7 @@ function Addres({
 										organization_pocs = [],
 										address,
 									} = item || {};
-									const organization_poc_at_zeroth_index = organization_pocs
+									const organization_poc_at_zeroth_index = organization_pocs?.
 										[GLOBAL_CONSTANTS.zeroth_index];
 
 									return (
@@ -130,13 +130,13 @@ function Addres({
 				</div>
 			)}
 
-			{/* {addAddressModal ? (
+			{addAddressModal ? (
 				<AddModal
 					addAddressModal={addAddressModal}
 					setAddAddressModal={setAddAddressModal}
 					shipmentData={shipmentData}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }
