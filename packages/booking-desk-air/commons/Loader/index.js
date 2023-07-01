@@ -4,9 +4,9 @@ import styles from './styles.module.css';
 
 const LOADER_COUNT_FOR_SHIPMENTS = 10;
 
-function Card(key) {
+function Card(prop) {
 	return (
-		<div className={styles.card} key={key}>
+		<div className={styles.card} key={prop}>
 
 			<div className={styles.head_loader}>
 				<Placeholder />
@@ -37,5 +37,5 @@ function Card(key) {
 }
 
 export default function Loader() {
-	return [...Array(LOADER_COUNT_FOR_SHIPMENTS).keys()].map((key) => Card(key));
+	return [...Array(LOADER_COUNT_FOR_SHIPMENTS).keys()].map((key) => <Card key={key} prop={key} />);
 }

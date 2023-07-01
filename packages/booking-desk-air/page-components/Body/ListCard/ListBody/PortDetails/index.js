@@ -21,6 +21,36 @@ const SingleCountryDataServices = {
 	},
 };
 
+function HandleLocationPort({ type = '', item }) {
+	const { display_name = '', port_code = '', postal_code = '' } = item[type] || {};
+
+	return (
+		<div className={styles.port_details_description}>
+			{port_code || postal_code ? (
+				<div className={styles.port_code}>
+					(
+					{port_code || postal_code}
+					)
+				</div>
+			) : (
+				<div style={{ height: '16px' }} />
+			)}
+
+			<Tooltip
+				placement="bottom"
+				theme="light"
+				content={(
+					<div>
+						<div style={{ fontSize: '10px' }}>{display_name}</div>
+					</div>
+				)}
+			>
+				<div className={styles.display_name}>{display_name}</div>
+			</Tooltip>
+		</div>
+	);
+}
+
 function PortDetails({ item }) {
 	const {
 		shipment_type = '',
@@ -34,34 +64,6 @@ function PortDetails({ item }) {
 
 	const tradeType = trade_type || INCO_TERM_MAPING[inco_term];
 
-	const handleLocationPort = (key) => {
-		const { display_name = '', port_code = '', postal_code = '' } = item[key] || {};
-		return (
-			<div className={styles.port_details_description}>
-				{port_code || postal_code ? (
-					<div className={styles.port_code}>
-						(
-						{port_code || postal_code}
-						)
-					</div>
-				) : (
-					<div style={{ height: '16px' }} />
-				)}
-
-				<Tooltip
-					placement="bottom"
-					theme="light"
-					content={(
-						<div>
-							<div style={{ fontSize: '10px' }}>{display_name}</div>
-						</div>
-					)}
-				>
-					<div className={styles.display_name}>{display_name}</div>
-				</Tooltip>
-			</div>
-		);
-	};
 	return (
 		<div className={styles.port_details_container}>
 			<div className={styles.service_icon}>
@@ -81,18 +83,16 @@ function PortDetails({ item }) {
 							<div>{SingleCountryDataServices[shipment_type].suffix_label}</div>
 						</div>
 
-						{handleLocationPort('airport')}
+						<HandleLocationPort type="airport" item={item} />
 					</div>
 				) : (
 
 					<div className={styles.port_details}>
-
-						{handleLocationPort('origin_airport')}
+						<HandleLocationPort type="origin_airport" item={item} />
 						<div>
 							<IcMPortArrow />
 						</div>
-						{handleLocationPort('destination_airport')}
-
+						<HandleLocationPort type="destination_airport" item={item} />
 					</div>
 
 				)}
