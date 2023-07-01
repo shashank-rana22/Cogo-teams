@@ -7,12 +7,15 @@ import { useMemo } from 'react';
 import styles from './styles.module.css';
 import VerticleLine from './VerticleLine';
 
-const styleIcon = {
+const STYLE_ICON = {
 	height    : '20px',
 	width     : '20px',
 	marginTop : '30px',
 	transform : 'rotateZ(90deg) rotateX(180deg)',
 };
+
+const DISTANCE_KM = 1000;
+const LINE_LENGTH = 1;
 
 function TrackingInfo({ data = [], tripInfo = {} }) {
 	const keys = useMemo(
@@ -34,14 +37,14 @@ function TrackingInfo({ data = [], tripInfo = {} }) {
 			{data?.map((item, idx) => (
 				<div className={styles.SingleItem} key={keys[idx]}>
 					{item?.transport_mode ? (
-						<IcATruck style={styleIcon} />
+						<IcATruck style={STYLE_ICON} />
 					) : (
 						<span className={cl`${styles.SingleItem} ${styles.space}`} />
 					)}
 					<VerticleLine
 						checked={item?.checked}
 						zIndex={idx}
-						isLast={data?.length === idx + 1}
+						isLast={data?.length === idx + LINE_LENGTH}
 					/>
 					<div className={styles.Main}>
 						<Tooltip
@@ -68,7 +71,7 @@ function TrackingInfo({ data = [], tripInfo = {} }) {
 								<div className={cl`${styles.Info} ${styles.piece}`}>
 									Distance Remaining:
 									{' '}
-									{Math.ceil(item.distance_remained / 1000)}
+									{Math.ceil(item.distance_remained / DISTANCE_KM)}
 									{' '}
 									km
 								</div>

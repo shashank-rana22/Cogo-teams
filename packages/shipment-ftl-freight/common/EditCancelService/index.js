@@ -20,15 +20,17 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 import getEditServiceDetails from './utils/getEditServiceDetails';
 
-const actionButtons = [
-	{ label: 'Edit Supplier', value: 'supplier_reallocation' },
-	{ label: 'Edit Truck Number', value: 'edit_truck_number' },
-	{ label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
-	{ label: 'Edit Driver Details', value: 'edit_driver_details' },
-	{ label: 'Verify Truck', value: 'verify_truck' },
-	{ label: 'Verify Driver', value: 'verify_driver' },
-	{ label: 'Cancel', value: 'cancel' },
-];
+const actionButtons = {
+	supplier_reallocation : { label: 'Edit Supplier', value: 'supplier_reallocation' },
+	edit_truck_number     : { label: 'Edit Truck Number', value: 'edit_truck_number' },
+	edit_eta_etd          : { label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
+	edit_driver_details   : { label: 'Edit Driver Details', value: 'edit_driver_details' },
+	verify_truck          : { label: 'Verify Truck', value: 'verify_truck' },
+	verify_driver         : { label: 'Verify Driver', value: 'verify_driver' },
+	cancel                : { label: 'Cancel', value: 'cancel' },
+};
+
+const DEFAULT_INDEX = 0;
 
 export const getTrucklistWithId = (all_services) => {
 	const servicesList = (all_services || []).filter(
@@ -100,28 +102,30 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[2].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[3].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[4].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[5].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[6].show = getCanCancelService({ state, activeStakeholder });
+	actionButtons.supplier_reallocation.show = getCanEditSupplier({
+		shipment_data, user_data, state, activeStakeholder,
+	});
+	actionButtons.edit_truck_number.show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons.edit_eta_etd.show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons.edit_driver_details.show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons.verify_truck.show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons.verify_driver.show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons.cancel.show = getCanCancelService({ state, activeStakeholder });
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!Object.values(actionButtons).some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
 	const truckList = getTrucklistWithId(serviceData);
 
-	const isTruckPresent =	truckList.length > 0
-		&& !['cargo_dropped', 'completed'].includes(truckList?.[0]?.state);
+	const isTruckPresent =	truckList.length > DEFAULT_INDEX
+		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
+	const content = Object.values(actionButtons).map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
 			role="button"
-			tabIndex={0}
+			tabIndex={DEFAULT_INDEX}
 			className={styles.action_button}
 			onClick={() => openModal(value)}
 		>
@@ -138,7 +142,7 @@ function EditCancelService({ serviceData = {} }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				{isTruckPresent
+				{!isTruckPresent
 					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 					: null}
 			</Popover>

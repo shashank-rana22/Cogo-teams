@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import FtlTracker from './ftlTracker';
 import styles from './styles.module.css';
 
+const SELECTED_TRUCK_DATA = 0;
+
 function TrackingHeader({
 	trackingLoading,
 	setContainerNo = () => {},
@@ -44,7 +46,7 @@ function TrackingHeader({
 						trackingLoading={trackingLoading}
 						serialId={serialId}
 						data={data}
-						servicesData={servicesData?.[0] || {}}
+						servicesData={servicesData?.[SELECTED_TRUCK_DATA] || {}}
 						listShipments={listShipments}
 						refetch={refetch}
 					/>

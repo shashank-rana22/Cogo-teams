@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const STATUS_CODE = 200;
+
 const useUpdateFtlFreightServiceTracking = () => {
 	const [data, setData] = useState([]);
 
@@ -39,7 +41,7 @@ const useUpdateFtlFreightServiceTracking = () => {
 			}
 			setData(res?.data);
 			setStartTruckTracker(false);
-			if (res?.status === 200) {
+			if (res?.status === STATUS_CODE) {
 				listShipments();
 				if (!refresh) refetch();
 			}

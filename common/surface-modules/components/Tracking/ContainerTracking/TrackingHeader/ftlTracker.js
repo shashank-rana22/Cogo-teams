@@ -9,6 +9,7 @@ import useUpdateFtlFreightServiceTracking from '../../../../hooks/useUpdateFtlFr
 import styles from './styles.module.css';
 
 const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
+const CONSENT_INDEX = 0;
 
 function FtlTracker({
 	trackingLoading,
@@ -136,19 +137,19 @@ function FtlTracker({
 				content={
 					(!consentLoading && (
 						<div>
-							{consentData?.[0]?.result?.consent && (
+							{consentData?.[CONSENT_INDEX]?.result?.consent && (
 								<div className={cl`${styles.Text} ${styles.status}`}>
 									Status:
 									{' '}
-									{consentData?.[0].result?.consent}
+									{consentData?.[CONSENT_INDEX].result?.consent}
 								</div>
 							)}
-							{consentData?.[0]?.result?.consent_suggestion && (
+							{consentData?.[CONSENT_INDEX]?.result?.consent_suggestion && (
 								<div className={styles.SuggestionBox}>
 									<div className={cl`${styles.Text} ${styles.status}`}>
 										Suggestion :
 										{' '}
-										{consentData?.[0]?.result?.consent_suggestion}
+										{consentData?.[CONSENT_INDEX]?.result?.consent_suggestion}
 									</div>
 								</div>
 							)}

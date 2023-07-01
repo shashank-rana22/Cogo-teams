@@ -6,13 +6,15 @@ import styles from './styles.module.css';
 import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
 
+const VALUE_INDEX = 0;
+
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const serialId = shipment_data?.serial_id;
 
 	const [containerNo, setContainerNo] = useState('');
 
-	const truckOptions = [];
-	const ftlServices = (shipment_data?.all_services || []).filter((item) => truckOptions.push({
+	const TRUCK_OPTIONS = [];
+	const ftlServices = (shipment_data?.all_services || []).filter((item) => TRUCK_OPTIONS.push({
 		label : item?.truck_number,
 		value : item?.truck_number,
 	}));
@@ -23,7 +25,7 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 		data: list,
 	} = useGetSaasContainerSubscription({
 		serialId,
-		truckNumber: containerNo || truckOptions?.[0]?.value,
+		truckNumber: containerNo || TRUCK_OPTIONS?.[VALUE_INDEX]?.value,
 	});
 
 	const ContainerOptions = Array.isArray(list)
@@ -44,10 +46,10 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 				setContainerNo={setContainerNo}
 				containerNo={
 							containerNo
-							|| ContainerOptions?.[0]?.value
-							|| truckOptions?.[0]?.value
+							|| ContainerOptions?.[VALUE_INDEX]?.value
+							|| TRUCK_OPTIONS?.[VALUE_INDEX]?.value
 						}
-				truckOptions={truckOptions}
+				truckOptions={TRUCK_OPTIONS}
 				shipmentId={shipment_data?.id}
 				serialId={serialId}
 				airwayBillNo={list?.airway_bill_no}
