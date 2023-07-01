@@ -5,8 +5,8 @@ import useListTasks from '../../hooks/useListTasks';
 
 function useListTasksHelper() {
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
-	const [hideCompletedTasks, setHideCompletedTasks] = useState(true);
-	const [showMyTasks, setShowMyTasks] = useState(false);
+	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
+	const [showMyTasks, setShowMyTasks] = useState(true);
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
 
