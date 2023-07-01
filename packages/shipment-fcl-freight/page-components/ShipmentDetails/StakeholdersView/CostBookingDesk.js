@@ -4,12 +4,15 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -19,7 +22,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
@@ -27,7 +30,11 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -95,6 +102,8 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
+					<RolloveDetails />
+
 					<ShipmentChat />
 				</div>
 
@@ -139,6 +148,10 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverRequestedModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

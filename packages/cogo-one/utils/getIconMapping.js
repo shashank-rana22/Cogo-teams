@@ -1,6 +1,6 @@
 import {
 	IcMSearchdark,
-	IcMDocument, IcMShip, IcMTicket,
+	IcMDocument, IcMShip, IcMDefault,
 } from '@cogoport/icons-react';
 
 const HIDE_NAVIGATION_MAPPING = {
@@ -32,7 +32,7 @@ const ICON_MAPPING = [
 	{
 		name    : 'flash_shipment_bookings',
 		content : 'Flash Shipment Bookings',
-		icon    : <IcMShip />,
+		icon    : <IcMShip width={20} height={20} />,
 	},
 	{
 		name    : 'user_activity',
@@ -71,7 +71,7 @@ const ICON_MAPPING = [
 		content : 'Tickets',
 		icon:
 		(
-			<IcMTicket width={26} height={26} />
+			<IcMDefault width={26} height={26} />
 		),
 
 	},

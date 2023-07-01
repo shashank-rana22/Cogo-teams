@@ -1,6 +1,9 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
+import { useRef } from 'react';
 
+import EditBookingParams from './EditBookingParams';
+import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
 import styles from './styles.module.css';
@@ -28,7 +31,13 @@ function ExecuteStep({
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
-	const { loading: isLoading, onSubmit } = useHandleSubmit({
+	const { editBookingParams } = showElements || {};
+
+	const editParams = useRef(null);
+
+	const isShipmentRolloverable = getCanShipmentRollover(getApisData);
+
+	const { loading: isLoading, setIsLoading, onSubmit } = useHandleSubmit({
 		finalConfig: stepConfig,
 		task,
 		onCancel,
@@ -39,6 +48,21 @@ function ExecuteStep({
 		getApisData,
 		showElements,
 	});
+
+	const handleTaskSubmit = async () => {
+		if (isShipmentRolloverable && editBookingParams) {
+			setIsLoading(true);
+
+			try {
+				await editParams.current?.handleSubmit();
+				handleSubmit(onSubmit)();
+			} finally {
+				setIsLoading(false);
+			}
+		} else {
+			handleSubmit(onSubmit)();
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -51,6 +75,15 @@ function ExecuteStep({
 					formValues={watch()}
 					shipment_id={task?.shipment_id}
 				/>
+
+				{isShipmentRolloverable && editBookingParams ? (
+					<EditBookingParams
+						task={task}
+						getApisData={getApisData}
+						formProps={formProps}
+						ref={editParams}
+					/>
+				) : null}
 			</div>
 
 			<div className={styles.button_container}>
@@ -62,7 +95,7 @@ function ExecuteStep({
 					CANCEL
 				</Button>
 
-				<Button themeType="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+				<Button themeType="primary" disabled={isLoading} onClick={handleTaskSubmit}>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>

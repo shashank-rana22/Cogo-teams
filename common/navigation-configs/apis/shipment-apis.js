@@ -463,6 +463,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'bulk_reallocate_shipment_stakeholders',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_shipment_quotation',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -615,7 +620,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -725,7 +730,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -1570,6 +1575,11 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_ftl_freight_spot_rate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'read_collection_party_line_items',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
