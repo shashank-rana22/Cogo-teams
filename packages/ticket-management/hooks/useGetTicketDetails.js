@@ -1,8 +1,16 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
+const getParams = ({ ticketId, profile }) => ({
+	ID            : Number(ticketId),
+	PerformedByID : profile?.user?.id,
+});
+
 const useGetTicketDetails = ({ ticketId }) => {
+	const profile = useSelector((state) => state.profile || {});
+
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/detail',
 		method  : 'get',
@@ -12,14 +20,12 @@ const useGetTicketDetails = ({ ticketId }) => {
 	const getTicketDetails = useCallback(() => {
 		try {
 			trigger({
-				params: {
-					ID: Number(ticketId),
-				},
+				params: getParams({ ticketId, profile }),
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, ticketId]);
+	}, [trigger, ticketId, profile]);
 
 	useEffect(() => {
 		if (!(isEmpty(ticketId))) {
@@ -30,7 +36,7 @@ const useGetTicketDetails = ({ ticketId }) => {
 	return {
 		getTicketDetails,
 		detailsLoading : loading,
-		ticketData     : data || '',
+		ticketData     : data || {},
 	};
 };
 

@@ -16,7 +16,7 @@ const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 const DEFAULT_TICKET_ACTIVITY = 0;
 
-const chatBodyHeight = (rating, doesTicketsExists, status, file, uploading) => {
+const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 	if (!doesTicketsExists) {
 		return '100%';
 	}
@@ -50,15 +50,14 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 
 	const {
 		getTicketDetails = () => {},
-		ticketData = '',
+		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } = ticketData || {};
+	const { Ticket: ticket = {} } = ticketData || {};
 
-	const { Rating: rating = 0 } = ticketFeedback || {};
 	const { Status: status = '' } = ticket || {};
 
 	const {
@@ -90,7 +89,7 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 		scrollToBottom,
 	});
 
-	const doesTicketsExists = typeof ticketData === 'object' || false;
+	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
 
@@ -134,13 +133,12 @@ function TicketChat({ modalData = {}, setModalData = () => {}, setIsUpdated = ()
 				<div
 					className={styles.container}
 					style={{
-						height: chatBodyHeight(
-							rating,
+						height: getChatBodyHeight({
 							doesTicketsExists,
 							status,
 							file,
 							uploading,
-						),
+						}),
 					}}
 				>
 					<ChatBody
