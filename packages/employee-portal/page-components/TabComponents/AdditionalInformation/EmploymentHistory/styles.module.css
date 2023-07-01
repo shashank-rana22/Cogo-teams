@@ -10,7 +10,6 @@
 	margin-bottom: 10px;
 }
 
-
 .check {
 	display: flex;
 	align-items: center;
@@ -18,7 +17,7 @@
 
 	:global {
 		.ui_checkbox_container {
-			padding-left: 0px;
+			padding-left: 0;
 		}
 	}
 }
