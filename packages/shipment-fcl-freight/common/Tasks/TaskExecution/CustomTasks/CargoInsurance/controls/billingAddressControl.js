@@ -39,7 +39,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 	},
 	{
 		label       : 'Pincode',
-		name        : 'pincode',
+		name        : 'billingPincode',
 		type        : 'async-select',
 		placeholder : 'Enter Pincode',
 		asyncKey    : 'list_locations',

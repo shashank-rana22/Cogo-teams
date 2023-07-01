@@ -32,7 +32,7 @@
 	justify-content: space-between;
 
 	&.final {
-		border-bottom: 1px solid #F2E2C3;
+		border-bottom: 1px solid #f2e2c3;
 	}
 }
 

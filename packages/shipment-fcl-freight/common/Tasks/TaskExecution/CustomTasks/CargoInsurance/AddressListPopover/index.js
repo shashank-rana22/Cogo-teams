@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const CARD_LENGTH = 3;
 
-function Addres({
+function AddressListPopover({
 	data = [],
 	checked = [],
 	setChecked = () => {},
@@ -27,22 +27,22 @@ function Addres({
 				<div className={styles.title}>Select Address</div>
 				{policyForSelf ? (
 					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => setAddAddressModal(true)}
-					>
-						<IcMPlus height="20px" width="20px" />
-					</Button>
+					size="md"
+					themeType="secondary"
+					onClick={() => setAddAddressModal(true)}
+				>
+					<IcMPlus height="20px" width="20px" />
+				</Button>
 				) : (
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => {
-							setshowFilters(false);
-						}}
-					>
-						<IcMCrossInCircle />
-					</Button>
+				<Button
+				size="md"
+				themeType="secondary"
+				onClick={() => {
+					setshowFilters(false);
+				}}
+			>
+				<IcMCrossInCircle />
+			</Button>
 				) }
 			</div>
 
@@ -66,13 +66,12 @@ function Addres({
 				</div>
 			) : (
 				<div className={styles.address_container}>
-					{!isEmpty(data)
-						? 						(
-							<div>
-								<div className={styles.empty_state}>
+					{isEmpty(data)?
+							<div className={styles.empty_state}>
 									<IcMPlansExpiring width={100} height={100} />
 									<div className={styles.txt}>No Data Found</div>
-								</div>
+								</div> : <div>
+								
 								{(data || []).map((item) => {
 									const {
 										name,
@@ -125,8 +124,7 @@ function Addres({
 									);
 								})}
 							</div>
-						)
-						: null}
+}
 				</div>
 			)}
 
@@ -141,4 +139,4 @@ function Addres({
 	);
 }
 
-export default Addres;
+export default AddressListPopover;

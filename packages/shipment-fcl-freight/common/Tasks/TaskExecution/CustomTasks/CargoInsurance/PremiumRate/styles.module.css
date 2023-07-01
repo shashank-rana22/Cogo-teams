@@ -37,11 +37,11 @@
 
 .line {
 	width: 100px;
-	border-bottom: 2px dashed #F2E3C3;
+	border-bottom: 2px dashed #f2e3c3;
 
 	&.line {
 		width: 100%;
-		border-bottom: 1px solid #F2E3C3;
+		border-bottom: 1px solid #f2e3c3;
 	}
 }
 
