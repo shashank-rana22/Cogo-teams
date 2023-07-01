@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
 
-const CONVERSATION_TYPE = {
+const CONVERSATION_TYPE_MAPPING = {
 	sent     : ReceiveDiv,
 	received : SentDiv,
 	default  : TimeLine,
@@ -49,7 +49,8 @@ function MessagesThread({
 					</div>
 				)}
 			{(messagesData || []).map((eachMessage, index) => {
-				const Component = CONVERSATION_TYPE[eachMessage?.conversation_type] || CONVERSATION_TYPE.default;
+				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
+                 || CONVERSATION_TYPE_MAPPING.default;
 
 				return (
 					<Component
