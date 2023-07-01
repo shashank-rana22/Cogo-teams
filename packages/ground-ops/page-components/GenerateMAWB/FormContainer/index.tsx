@@ -58,6 +58,7 @@ function FormContainer({
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
+			shipment_id         : taskItem?.shipment_id,
 		};
 		if (edit) {
 			if (activeHawb.isNew === false) {
