@@ -24,8 +24,7 @@
 	display: flex;
 	justify-content: flex-start;
 	width: 100%;
-	padding-right: 20px;
-	padding-bottom: 20px;
+	padding: 10px 20px 20px 0px;
 }
 
 .pill_box {
