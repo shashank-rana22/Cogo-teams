@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
 const INCREMENT_BY_ONE = 1;
 const STATE_NAME_INDEX = 1;
+const DOCUMENT_PENDING_STATES = ['document_amendment_requested', 'document_rejected'];
 
 function Content({
 	uploadedItem,
@@ -80,10 +81,8 @@ function Content({
 					{isChecked ? (
 						<div className={styles.gap}>
 							<div className={styles.upload_info}>
-								Uploaded By:&nbsp;
-								{ uploadedItem?.uploaded_by_user?.name
-									|| uploadedItem?.uploaded_by_org?.business_name}
-
+								{`Uploaded By ${uploadedItem?.uploaded_by_user?.name
+									|| uploadedItem?.uploaded_by_org?.business_name}`}
 							</div>
 
 							<div className={styles.upload_info}>
@@ -95,7 +94,7 @@ function Content({
 							</div>
 
 							<div className={cl`${styles.document_status}
-							 ${['document_amendment_requested', 'document_rejected'].includes(uploadedItem?.state)
+							 ${DOCUMENT_PENDING_STATES.includes(uploadedItem?.state)
 								? styles.pending : styles.accepted}`}
 							>
 								{startCase(uploadedItem?.state?.split('_')?.[STATE_NAME_INDEX])}
@@ -103,7 +102,7 @@ function Content({
 						</div>
 					) : (
 						<div className={styles.gap}>
-							{item?.pendingItem ? (
+							{item?.pendingItem && (
 								<div className={styles.upload_info}>
 									{`Due On: ${formatDate({
 										date       : item?.pendingItem?.deadline,
@@ -111,14 +110,14 @@ function Content({
 										formatType : 'date',
 									})}`}
 								</div>
-							) : null}
+							)}
 
-							{receivedViaEmail ? (
+							{receivedViaEmail && (
 								<div className={styles.message_text}>
 									<IcCError width={14} height={14} />
 									Document recieved - Please confirm
 								</div>
-							) : null}
+							)}
 
 						</div>
 					)}
@@ -137,11 +136,11 @@ function Content({
 						{docType === 'airway_bill'
 						&& uploadedItem?.state === 'document_accepted'
 						&& documents?.allow_update && (
-							<Button
-								themeType="link"
-								onClick={() => setUpdateAirwayBill(uploadedItem)}
-							>
-								<div className={styles.tooltip_container}>
+							<div className={styles.tooltip_container}>
+								<Button
+									themeType="link"
+									onClick={() => setUpdateAirwayBill(uploadedItem)}
+								>
 									<Tooltip
 										content="Download"
 										placement="top"
@@ -149,10 +148,10 @@ function Content({
 									>
 										<IcMSort />
 									</Tooltip>
-								</div>
-							</Button>
-						)}
 
+								</Button>
+							</div>
+						)}
 					</div>
 				) : getUploadButton()}
 
