@@ -9,12 +9,11 @@ import useGetSubmitOtp from '../../hooks/useGetSubmitOtp';
 // import { useState } from 'react';
 import styles from './styles.module.css';
 
-const OTP = 123456;
 const MAX_LIMIT = 900;
 const OTP_LENGTH = 6;
-function LockScreen() {
-	const { apiTrigger, loading, otpNumber, setOtpNumber } = useGetSubmitOtp({ OTP });
-	const { generateOtp } = useGetGenerateOtp();
+function LockScreen({ agentId, firestore, setShowModal }) {
+	const { apiTrigger, loading, otpNumber, setOtpNumber } = useGetSubmitOtp({ agentId, firestore, setShowModal });
+	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
 
 	return (
 		<Modal

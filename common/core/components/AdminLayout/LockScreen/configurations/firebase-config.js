@@ -8,10 +8,8 @@ export const firebaseConfig = {
 	appId             : process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const FIRESTORESHIPMENTREMINDERPATH = '/customer_chat/shipment_reminder/agents';
+const FIRESTORE_SHIPMENT_REMINDER_PATH = '/customer_chat/shipment_reminder/agents';
 
 export const FIRESTORE_PATH = {
-
-	shipment_reminder: FIRESTORESHIPMENTREMINDERPATH,
-
+	shipment_reminder: FIRESTORE_SHIPMENT_REMINDER_PATH,
 };
