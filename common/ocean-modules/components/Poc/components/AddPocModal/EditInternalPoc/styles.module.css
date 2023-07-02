@@ -1,5 +1,4 @@
 .form_item_container {
-	width: 60%;
 	margin: 6px 0;
 }
 
@@ -15,9 +14,7 @@
 }
 
 .actions {
-	display: flex;
-}
-
-.cancel {
-	margin-right: 8px;
+	> button:not(:last-of-type) {
+		margin-right: 10px;
+	}
 }

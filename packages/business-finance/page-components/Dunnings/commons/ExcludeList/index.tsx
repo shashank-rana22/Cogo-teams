@@ -1,8 +1,8 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import StyledTable from '../../../AccountReceivables/commons/styledTable';
 
-import { config } from './config';
 import styles from './styles.module.css';
 
 export interface ListDataProps {
@@ -16,9 +16,10 @@ interface ExcludeListInterface {
 	setUncheckedRows?: React.Dispatch<React.SetStateAction<string[]>>;
 	loading?: boolean;
 	setFilters?: React.Dispatch<React.SetStateAction<object>>;
+	config?: Function,
 }
 
-function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilters }:ExcludeListInterface) {
+function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilters, config }:ExcludeListInterface) {
 	const { list = [], pageNo = 0, totalRecords } = data || {};
 	return (
 		<>
@@ -32,17 +33,19 @@ function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilter
 					loading={loading}
 				/>
 			</div>
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<Pagination
-					type="table"
-					currentPage={pageNo}
-					totalItems={totalRecords}
-					pageSize={10}
-					onPageChange={(pageValue: number) => {
-						setFilters((prev) => ({ ...prev, pageIndex: pageValue }));
-					}}
-				/>
-			</div>
+			{!isEmpty(list) ? (
+				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<Pagination
+						type="table"
+						currentPage={pageNo}
+						totalItems={totalRecords}
+						pageSize={10}
+						onPageChange={(pageValue: number) => {
+							setFilters((prev) => ({ ...prev, pageIndex: pageValue }));
+						}}
+					/>
+				</div>
+			) : null}
 		</>
 	);
 }

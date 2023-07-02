@@ -348,7 +348,7 @@ export default {
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
@@ -382,7 +382,26 @@ export default {
 				label: '501 Cogoport Vietnam', value: '501',
 			},
 		],
-		migration_status: [],
+		migration_status : [],
+		timezone         : [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -426,8 +445,9 @@ export default {
 				validate_registration: false,
 			},
 			cogo_one: {
-				has_voice_call_access : false,
-				default_country_code  : 'IN',
+				has_voice_call_access     : false,
+				default_country_code      : 'IN',
+				template_default_language : 'vietnamese',
 			},
 		},
 	},

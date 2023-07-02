@@ -1,0 +1,44 @@
+.container {
+	height: 10%;
+	padding: 0 60px 0 5px;
+}
+
+.history_tl_container ul.tl li {
+	position: relative;
+	padding: 0 20px 30px 30px;
+	font-size: 12px;
+	list-style: none;
+	border-left: 1px dashed #67c676;
+}
+
+.history_tl_container ul.tl li:last-child {
+	border-left: 0;
+}
+
+.history_tl_container ul.tl li::before {
+	position: absolute;
+	left: -8px;
+	content: " ";
+	background: #67c676;
+	border: 8px solid #67c676;
+	border-radius: 500%;
+}
+
+.styledheading {
+	margin: 15px 10px;
+	font-size: 16px;
+}
+
+.minwidth {
+	width: 100px;
+	margin-left: 50px;
+}
+
+.flex {
+	display: flex;
+}
+
+.flexcol {
+	display: flex;
+	flex-direction: column;
+}

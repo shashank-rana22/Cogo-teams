@@ -2,6 +2,7 @@ import airRepository from './config/air-repository';
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
@@ -23,6 +24,7 @@ import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
+import liabilityDashboard from './config/liability-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
@@ -105,11 +107,13 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...riskManagement,
+	...awbInventory,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
 	...shipmentLtlFreight,
 	...ticketManagement,
+	...liabilityDashboard,
 	...rfqDashboard,
 };
 
