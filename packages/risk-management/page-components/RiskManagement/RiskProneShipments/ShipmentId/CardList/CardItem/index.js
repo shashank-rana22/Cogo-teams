@@ -1,4 +1,5 @@
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -16,17 +17,11 @@ const RISK_CATEGORIES = {
 	4 : 'VERY HIGH',
 };
 const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#ed3726' };
-const COMMODITY_CATEGORIES_VALUE = {
-	general    : '#C4DC91',
-	hazardous  : '#F37166',
-	perishable : '#ed3736',
-	pharma     : '#FBD1A6',
-};
 function CardItem({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
-		commodity_description = '', cargo_value_currency, cargo_value, reason = [],
-		criticality = '', commodity_category = '',
+		commodity_description = '', cargo_value_currency, cargo_value, estimated_inr_cargo_value, risk_reason = [],
+		criticality = '',
 	} = itemData || {};
 
 	const risk_category = RISK_CATEGORIES[criticality];
@@ -75,7 +70,7 @@ function CardItem({ itemData }) {
 			</div>
 			<div className={styles.column2}>
 				<h5>Risk Reason</h5>
-				{reason.map((item) => (
+				{risk_reason.map((item) => (
 					<div className={styles.container_pickup} key={item}>
 						<div className={styles.not_picked}>
 							{startCase(item)}
@@ -88,16 +83,47 @@ function CardItem({ itemData }) {
 			</div>
 			<div className={styles.column3}>
 				<div className={styles.sub_container}>
-					<div className={styles.commodity_text}>
-						Commodity :
-						{' '}
-						{renderTooltip(commodity_description || '-', COMMODITY_VALUE_LENGTH)}
-					</div>
-					<div className={styles.commodity_text}>
-						Cargo Value :
-						{getFormattedPrice(cargo_value, cargo_value_currency) || ' -'}
+					{commodity_description
+						? (
+							<div className={styles.commodity_text}>
+								Commodity :
+								{' '}
+								{renderTooltip(commodity_description || '-', COMMODITY_VALUE_LENGTH)}
+							</div>
+						)
+						: null}
+					{cargo_value && cargo_value_currency
+						? (
+							<div className={styles.commodity_text}>
+								Cargo Value :&nbsp;
+								{formatAmount({
+									amount   : cargo_value,
+									currency : cargo_value_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
 
-					</div>
+							</div>
+						) : null}
+					{estimated_inr_cargo_value
+						? (
+							<div className={styles.commodity_text}>
+								Estimated Cargo Value:&nbsp;
+								{formatAmount({
+									amount   : estimated_inr_cargo_value,
+									currency : GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+							</div>
+						)
+						: null}
 				</div>
 				{criticality ? (
 					<div className={styles.ribbons}>
@@ -111,19 +137,7 @@ function CardItem({ itemData }) {
 					</div>
 				) : null}
 			</div>
-			{commodity_category
-				? (
-					<div className={styles.ribbons}>
-						<div
-							className={styles.ribbon}
-							style={{ background: COMMODITY_CATEGORIES_VALUE[commodity_category], marginTop: -20 }}
-						>
-							{startCase(commodity_category) }
 
-						</div>
-					</div>
-				)
-				: null}
 		</div>
 	);
 }

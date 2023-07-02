@@ -8,8 +8,14 @@ import ResolveModal from './ResolveModal';
 import ShipmentTimline from './ShipmentTimeline';
 import styles from './styles.module.css';
 
+const COMMODITY_CATEGORIES_VALUE = {
+	general    : '#C4DC91',
+	hazardous  : '#F37166',
+	perishable : '#ed3736',
+	pharma     : '#FBD1A6',
+};
 function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
-	const { trade_type, cargo_details = [], importer_exporter } = itemData || {};
+	const { trade_type, cargo_details = [], importer_exporter, commodity_category } = itemData || {};
 	const { business_name } = importer_exporter || {};
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [showResolveModal, setShowResolveModal] = useState(false);
@@ -17,8 +23,19 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 	return (
 		<div className={styles.main_div}>
 			<div className={styles.div_container}>
-				<div className={styles.trade}>
-					{startCase(trade_type)}
+				<div className={styles.trade_container}>
+					<div className={styles.trade}>
+						{startCase(trade_type)}
+					</div>
+					{commodity_category ? (
+						<div
+							className={styles.commodity}
+							style={{ background: COMMODITY_CATEGORIES_VALUE[commodity_category] }}
+						>
+							{startCase(commodity_category) }
+
+						</div>
+					) : null}
 				</div>
 				<CardItem itemData={itemData} />
 				<div>
