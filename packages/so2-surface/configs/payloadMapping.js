@@ -3,14 +3,16 @@ const payloadMapping = {
 		mandatory_docs_upload: {
 			shipment_type : 'ftl_freight',
 			pending_tasks : {
-				task_type : 'upload_document',
+				// task_type : 'upload_document',
+				status    : 'pending',
 				mandatory : true,
 			},
 		},
 		optional_docs_upload: {
 			shipment_type : 'ftl_freight',
 			pending_tasks : {
-				task_type : 'upload_document',
+				// task_type : 'upload_document',
+				status    : 'pending',
 				mandatory : false,
 			},
 		},

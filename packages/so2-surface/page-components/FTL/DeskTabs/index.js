@@ -7,6 +7,8 @@ import DashboardContext from '../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
+const DEFAULT_BADGE_VALUE = 0;
+
 function DeskTabs({ tabData = {} }) {
 	const tabsConfig = TabContainer();
 	const { stepperTab, filters, setFilters, activeTab, setActiveTab } = useContext(DashboardContext);
@@ -29,7 +31,7 @@ function DeskTabs({ tabData = {} }) {
 					<TabPanel
 						title={tab.label}
 						name={tab.value}
-						badge={tabData[tab.stats] || 0}
+						badge={tabData[tab.stats] || DEFAULT_BADGE_VALUE}
 						key={uuidv4()}
 					/>
 				))}

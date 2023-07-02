@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Checkbox } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext, useEffect } from 'react';
@@ -48,7 +48,19 @@ function ShipmentList({ loading, data = {} }) {
 				? <EmptyState />
 				: (
 					<>
-						<Pagination />
+						<div className={styles.list_controller}>
+							<div>
+								<Checkbox
+									label="Select All"
+									checked={!isEmpty(list)
+								&& checkedRows?.size === list?.length}
+									onChange={(e) => (e?.target?.checked ? setCheckedRows(
+										new Set(list?.map((item) => item?.id)),
+									) : setCheckedRows(new Set()))}
+								/>
+							</div>
+							<Pagination />
+						</div>
 
 						{(list || [])?.map((item) => (
 							<Card

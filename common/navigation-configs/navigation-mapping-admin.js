@@ -1433,7 +1433,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/so2-surface',
 				as            : '/v2/so2-surface',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
 		],

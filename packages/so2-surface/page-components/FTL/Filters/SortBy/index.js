@@ -5,7 +5,11 @@ import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
-const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' }];
+const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' },
+	{ value: 'task_created_at', label: 'Task Creation Date' },
+	{ value: 'task_deadline', label: 'Task Deadline' },
+	{ value: 'ftl_freight_eta', label: 'Trucks Estimated Arrival' }];
+
 const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
 function SortBy({
 	popoverFilter = {},

@@ -1,26 +1,24 @@
 const TAB_CONFIG = {
 	ftl_freight: [
 		{
-			label   : 'Mandatory Docs Upload',
+			label   : 'Mandatory Tasks',
 			value   : 'mandatory_docs_upload',
 			stats   : 'mandatory_documents',
 			payload : {
 				shipment_type : 'ftl_freight',
 				pending_task  : {
-					task_type : 'upload_document',
-					mandatory : true,
+					mandatory: true,
 				},
 			},
 		},
 		{
-			label   : 'Optional Docs Upload',
+			label   : 'Optional Tasks',
 			value   : 'optional_docs_upload',
 			stats   : 'non_mandatory_documents',
 			payload : {
 				shipment_type : 'ftl_freight',
 				pending_task  : {
-					task_type : 'upload_document',
-					mandatory : false,
+					mandatory: false,
 				},
 			},
 		},

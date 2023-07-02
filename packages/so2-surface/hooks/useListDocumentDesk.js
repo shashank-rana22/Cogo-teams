@@ -1,10 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState, useEffect, useCallback } from 'react';
 
 import payloadMapping from '../configs/payloadMapping';
 import DashboardContext from '../context/DashboardContext';
+
+const PAGE_SIZE = 20;
+const MIN_PAGE_VALUE = 1;
 
 const useListDocumentDesk = () => {
 	const dashboardContextValues = useContext(DashboardContext);
@@ -25,11 +29,14 @@ const useListDocumentDesk = () => {
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
 			},
+			pending_task_required    : true,
+			service_details_required : true,
 			sort_by                  : filters?.sortValue,
 			sort_type                : filters?.order,
 			task_stats_required      : true,
 			pagination_data_required : true,
 			page,
+			page_limit               : PAGE_SIZE,
 		},
 	});
 
@@ -37,7 +44,7 @@ const useListDocumentDesk = () => {
 		try {
 			const res = await trigger();
 
-			if (res?.data?.list?.length === 0 && page > 1) setFilters({ ...filters, page: 1 });
+			if (isEmpty(res?.data?.list) && page > MIN_PAGE_VALUE) setFilters({ ...filters, page: 1 });
 
 			setApiData(res?.data || {});
 		} catch (err) {
