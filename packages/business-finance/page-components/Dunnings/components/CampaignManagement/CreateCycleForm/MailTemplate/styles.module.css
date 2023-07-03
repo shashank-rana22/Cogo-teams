@@ -1,0 +1,44 @@
+.container {
+	padding: 0 64px;
+	font-size: var(--font-size-md);
+}
+
+.heading {
+	margin-bottom: 12px;
+	font-weight: 600;
+}
+
+.section {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.keys {
+	width: 16%;
+}
+
+.recipient_values {
+	width: 80%;
+}
+
+.subject {
+	width: 96%;
+}
+
+.heading_subject {
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+
+.heading_body {
+	margin-top: 12px;
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+
+.severity {
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
+}

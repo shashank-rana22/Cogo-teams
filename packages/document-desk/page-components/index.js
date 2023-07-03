@@ -1,5 +1,5 @@
-import { dynamic, useRouter } from '@cogoport/next';
-import { useState, useCallback, useMemo } from 'react';
+import { dynamic } from '@cogoport/next';
+import { useState, useMemo } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
@@ -11,7 +11,6 @@ const ResolveDocumentDesk = {
 
 export default function DocumentDesk() {
 	const defaultValues = getLocalStorageVal();
-	const router = useRouter();
 
 	const [filters, setFilters] = useState(defaultValues?.filters);
 	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
@@ -19,19 +18,12 @@ export default function DocumentDesk() {
 	const [scopeFilters] = useState(defaultValues?.scopeFilters);
 	const [shipmentType, setShipmentType] = useState(defaultValues?.shipment_type);
 
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-		localStorage.setItem('document_desk_version', 'v1');
-	}, [router.asPath]);
-
 	const contextValues = useMemo(() => ({
 		activeTab,
 		setActiveTab,
 		filters,
 		setFilters,
 		scopeFilters,
-		handleVersionChange,
 		stepperTab,
 		setStepperTab,
 		shipmentType,
@@ -42,7 +34,6 @@ export default function DocumentDesk() {
 		filters,
 		setFilters,
 		scopeFilters,
-		handleVersionChange,
 		stepperTab,
 		setStepperTab,
 		shipmentType,
