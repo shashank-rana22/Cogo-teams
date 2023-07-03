@@ -56,7 +56,7 @@ const EntityConfig = ({ refetch }) => [
 	},
 	{
 		Header   : 'Currency',
-		id       : 'name',
+		id       : 'currency',
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'currency')}
@@ -65,6 +65,7 @@ const EntityConfig = ({ refetch }) => [
 	},
 	{
 		Header   : 'Allocated Fund',
+		id       : 'allocatedFund',
 		accessor : (row) => (
 			<div className={styles.flex_column}>
 				<div>
@@ -112,6 +113,7 @@ const EntityConfig = ({ refetch }) => [
 	},
 	{
 		Header   : 'Utilized Amount',
+		id       : 'utilizedAmount',
 		accessor : (row) => (
 			<div>
 				<div>
@@ -132,25 +134,7 @@ const EntityConfig = ({ refetch }) => [
 
 	{
 		Header   : 'Balance',
-		accessor : (row) => (
-			<div>
-				<div>
-					{
-					formatAmount({
-						amount   : getByKey(row, 'balance'),
-						currency : getByKey(row, 'currency'),
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})
-					}
-				</div>
-			</div>
-		),
-	},
-	{
-		Header   : '',
+		id       : 'balance',
 		accessor : (row) => (
 			<div>
 				<div>
