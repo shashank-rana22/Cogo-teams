@@ -18,7 +18,7 @@
     "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/air-repository": "workspace:0.1.0",
     "@cogoport/air-modules": "workspace:1.0.0",
-    "@cogoport/shipment-air": "workspace:1.0.0",
+    "@cogoport/booking-desk-air": "workspace:1.0.0",
     "@cogoport/shipment-air-freight": "workspace:1.0.0",
     "@cogoport/shipment-air-freight-local": "workspace:1.0.0",
     "@cogoport/shipment-air-customs": "workspace:1.0.0",
