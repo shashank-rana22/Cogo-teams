@@ -60,6 +60,7 @@ const useCreateSpotSearch = ({
 			const PARTNER_ID = router?.query?.partner_id;
 			const href = `${ORIGIN}/${PARTNER_ID}/book/${res?.data?.id}/${importer_exporter_id}`;
 			window.location.href = href;
+			window.sessionStorage.setItem("shipment_type", shipmentData?.shipment_type);
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));
 		}
