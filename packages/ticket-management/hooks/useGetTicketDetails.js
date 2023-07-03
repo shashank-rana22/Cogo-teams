@@ -18,19 +18,19 @@ const useGetTicketDetails = ({ ticketId }) => {
 		authkey : 'get_tickets_detail',
 	}, { manual: true });
 
-	const getTicketDetails = useCallback(() => {
+	const getTicketDetails = useCallback((id) => {
 		try {
 			trigger({
-				params: getParams({ ticketId, PerformedByID: performedById }),
+				params: getParams({ ticketId: id, PerformedByID: performedById }),
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
-	}, [trigger, ticketId, performedById]);
+	}, [trigger, performedById]);
 
 	useEffect(() => {
 		if (!(isEmpty(ticketId))) {
-			getTicketDetails();
+			getTicketDetails(ticketId);
 		}
 	}, [ticketId, getTicketDetails]);
 

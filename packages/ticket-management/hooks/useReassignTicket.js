@@ -43,7 +43,7 @@ const useReassignTicket = ({
 			getTicketDetails();
 			Toast.success('Assigned Successfully.');
 		} catch (error) {
-			Toast.error(error?.error);
+			console.error(error?.error);
 		}
 	};
 	return {

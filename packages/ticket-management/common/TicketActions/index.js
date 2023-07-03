@@ -3,20 +3,29 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const OPEN_TICKETS_CHECK = ['escalated', 'unresolved'];
+const OPEN_TICKETS_VALUES = ['resolve', 'reassign'];
+const AUTHORISER_TICKETS_VALUES = ['resolve_request', 'reassign'];
+
+const PENDING_TICKETS_CHECK = ['pending', 'resolve_requested'];
+const PENDING_TICKETS_VALUES = ['approve', 'reject', 'reassign'];
+
+const CLOSED_TICKETS_VALUES = ['reopen'];
+
 function getActionType({ status, isClosureAuthorizer }) {
-	if (['escalated', 'unresolved'].includes(status)) {
+	if (OPEN_TICKETS_CHECK.includes(status)) {
 		if (isClosureAuthorizer) {
-			return ['resolve', 'reassign'];
+			return OPEN_TICKETS_VALUES;
 		}
-		return ['resolve_request', 'reassign'];
+		return AUTHORISER_TICKETS_VALUES;
 	}
 
-	if ((['pending', 'resolve_requested'].includes(status) && isClosureAuthorizer)) {
-		return ['approve', 'reject', 'reassign'];
+	if ((PENDING_TICKETS_CHECK.includes(status) && isClosureAuthorizer)) {
+		return PENDING_TICKETS_VALUES;
 	}
 
 	if (status === 'closed') {
-		return	['reopen'];
+		return	CLOSED_TICKETS_VALUES;
 	}
 
 	return [];
@@ -45,7 +54,7 @@ function TicketActions({
 		<div className={styles.pending_actions}>
 			{filteredActions.map((item) => (
 				<Button
-					key={`${item}`}
+					key={item}
 					size="sm"
 					themeType={isModal ? 'primary' : 'linkUi'}
 					className={styles.reopen_resolve}

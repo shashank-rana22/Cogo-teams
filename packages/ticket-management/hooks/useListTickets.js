@@ -64,7 +64,7 @@ const useListTickets = ({
 			}
 			setPagination(pageIndex + PAGE_INCREMENT);
 		} catch (error) {
-			console.log('error:', error);
+			console.error('error:', error);
 		}
 	}, [getPayload, trigger]);
 
