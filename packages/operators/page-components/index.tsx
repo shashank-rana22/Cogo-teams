@@ -6,9 +6,8 @@ import CardList from '../common/CardList';
 import { OPERATORS } from '../configurations/operators';
 import useGetListData from '../hooks/useGetListData';
 
-import CreateOperators from './CreateOperators';
-import EditOperators from './EditOperators';
 import Header from './Header';
+import OperatorsModal from './OperatorsModal';
 import styles from './styles.module.css';
 
 interface NestedObj {
@@ -59,6 +58,7 @@ function Operators() {
 				size="lg"
 				className={styles.edit}
 				onClick={() => {
+					setShow(true);
 					setEdit(true);
 					setItem(singleItem);
 				}}
@@ -80,24 +80,19 @@ function Operators() {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 			/>
-			<CreateOperators
-				show={show}
-				setShow={setShow}
-				refetch={getLocationData}
-				setPage={setPage}
-				setFinalList={setFinalList}
-				page={page}
-			/>
-
-			<EditOperators
-				item={item}
-				edit={edit}
-				setEdit={setEdit}
-				refetch={getLocationData}
-				setPage={setPage}
-				setFinalList={setFinalList}
-				page={page}
-			/>
+			{show && (
+				<OperatorsModal
+					item={item}
+					show={show}
+					setShow={setShow}
+					edit={edit}
+					setEdit={setEdit}
+					refetch={getLocationData}
+					setPage={setPage}
+					setFinalList={setFinalList}
+					page={page}
+				/>
+			)}
 
 			<CardList
 				fields={activeTab === 'airline' ? airlineFields : shippingLineFields}

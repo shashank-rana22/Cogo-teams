@@ -4,12 +4,14 @@ import React, { useEffect } from 'react';
 
 import Layout from '../../common/Layout';
 import fields from '../../configurations/controls';
-import useEditOperators from '../../hooks/useEditOperators';
+import useHandleOperators from '../../hooks/useHandleOperators';
 
 import styles from './styles.module.css';
 
-function EditOperators({
+function OperatorsModal({
 	item,
+	show,
+	setShow,
 	edit,
 	setEdit,
 	refetch,
@@ -25,16 +27,19 @@ function EditOperators({
 		iata_code          : operatorType === 'airline',
 		icao_code          : operatorType === 'airline',
 		airway_bill_prefix : operatorType === 'airline',
+		status             : edit,
 		is_nvocc           : operatorType === 'shipping_line',
 	};
 
 	const {
-		handleEditOperators,
+		handleOperators,
 		loading,
-	} = useEditOperators({
+	} = useHandleOperators({
+		item,
+		edit,
+		setShow,
 		setEdit,
 		refetch,
-		item,
 		setPage,
 		setFinalList,
 		page,
@@ -42,34 +47,29 @@ function EditOperators({
 
 	(fields || []).forEach((ctrl, index) => {
 		if (ctrl.name === 'operator_type') {
-			fields[index].disabled = true;
+			fields[index].disabled = edit;
 		}
 	});
 
-	console.log('item', item);
-
 	useEffect(() => {
 		if (edit) {
-			setValue('logo_url', '');
 			fields.forEach((c) => {
 				setValue(c.name, item[c.name]);
 			});
-
-			// console.log('item.logo_url', item.logo_url);
-
 			setValue('is_nvocc', String(item.is_nvocc));
-			// setValue('logo_url', String(item.logo_url));
 		}
 	}, [item, edit, setValue]);
 
 	return (
 		<Modal
-			show={edit}
-			onClose={() => { setEdit(false); }}
+			show={show}
+			onClose={() => { setShow(false); setEdit(false); }}
 			className={styles.modal_container}
 		>
 			<div className={styles.modal_header}>
-				Edit Operators
+				{edit ? 'Edit' : 'Create'}
+				{' '}
+				Operator
 			</div>
 			<Layout
 				fields={fields}
@@ -83,11 +83,11 @@ function EditOperators({
 					themeType="secondary"
 					disabled={loading}
 					style={{ marginRight: 12 }}
-					onClick={() => { setEdit(false); }}
+					onClick={() => { setShow(false); }}
 				>
 					Cancel
 				</Button>
-				<Button size="md" disabled={loading} onClick={handleSubmit(handleEditOperators)}>
+				<Button size="md" disabled={loading} onClick={handleSubmit(handleOperators)}>
 					Apply
 				</Button>
 			</div>
@@ -95,4 +95,4 @@ function EditOperators({
 	);
 }
 
-export default EditOperators;
+export default OperatorsModal;

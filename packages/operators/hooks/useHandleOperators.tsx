@@ -1,30 +1,37 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 
 import CONSTANTS from '../constants/constants';
 
-const useCreateOperators = ({
+const useHandleOperators = ({
+	item,
+	edit,
 	setShow,
+	setEdit,
 	refetch,
 	setPage,
 	setFinalList,
 	page,
 }) => {
+	const api = edit ? '/update_operator' : '/create_operators';
+
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_operators',
+		url    : `${api}`,
 		method : 'POST',
 	});
 
-	const handleCreateOperators = async (value) => {
+	const handleOperators = async (value) => {
 		let isNvocc;
 		if (value.is_nvocc) {
 			isNvocc = value.is_nvocc === 'true';
 		}
 		const data = {
+			id       : item?.id,
 			...value,
-			logo_url : value.logo_url.finalUrl,
+			logo_url : value?.logo_url?.finalUrl,
 			is_nvocc : isNvocc,
-			status   : 'active',
+			status   : edit ? value?.status : 'active',
 		};
 
 		try {
@@ -32,19 +39,25 @@ const useCreateOperators = ({
 			Toast.success('Operators Added Successfully');
 			setFinalList([]);
 			setShow(false);
+			setEdit(false);
 			if (page === CONSTANTS.START_PAGE) {
 				refetch();
 			} else {
 				setPage(CONSTANTS.START_PAGE);
 			}
 		} catch (error) {
-			Toast.error(error?.data);
+			const message = error?.response?.data;
+			const messageinToast = Object.keys(message || {})
+				.map((_) => `${startCase(_)} ${message[_]}`)
+				.join(', ');
+
+			Toast.error(messageinToast);
 		}
 	};
 
 	return {
-		handleCreateOperators,
+		handleOperators,
 		loading,
 	};
 };
-export default useCreateOperators;
+export default useHandleOperators;

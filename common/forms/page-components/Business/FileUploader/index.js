@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
 const PERCENT_FACTOR = 100;
+const EMPTY_DEFAULT_VALUES_LENGTH = 0;
 
 function FileUploader(props) {
 	const {
@@ -48,7 +49,7 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [!isEmpty(defaultValues)]);
+	}, [defaultValues?.length > EMPTY_DEFAULT_VALUES_LENGTH]);
 
 	useEffect(() => {
 		if (multiple) {
