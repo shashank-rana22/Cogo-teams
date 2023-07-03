@@ -12,6 +12,8 @@ export const getElementController = (type = 'text') => {
 	switch (type) {
 		case 'text':
 			return InputController;
+		case 'number':
+			return InputController;
 
 		case 'select':
 			return SelectController;

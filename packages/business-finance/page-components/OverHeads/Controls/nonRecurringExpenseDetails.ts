@@ -3,32 +3,41 @@ import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 import styles from './styles.module.css';
 
 interface FormDataInterface {
-	registrationNumber?: string,
-	entityObject?:{ id?:string },
-	periodOfTransaction?:string,
-	vendorName?:string,
+	registrationNumber?: string;
+	entityObject?: { id?: string };
+	periodOfTransaction?: string;
+	vendorName?: string;
+	transactionDate?: string;
 }
 
 interface EntityInt {
-	id?:string | number,
-	entity_code?:string,
-	business_name?:string
+	id?: string | number;
+	entity_code?: string;
+	business_name?: string;
 }
 
 interface Props {
-	formData: FormDataInterface,
-	setFormData: (obj:any)=>void,
-	categoryOptions: object[],
-	subCategoryOptions:object[],
-	setCategoryOptions: (obj:any)=>void,
-	setSubCategoryOptions:(obj:any)=>void,
-	branchOptions: object,
-	setBranchOptions: (obj:any)=>void,
-	entityList: EntityInt[],
-	entityOptions: object[],
-	setEntityOptions: (obj:any)=>void,
-	handleVendorChange?:(obj:any)=>void,
+	formData: FormDataInterface;
+	setFormData: (obj: any) => void;
+	categoryOptions: object[];
+	subCategoryOptions: object[];
+	setCategoryOptions: (obj: any) => void;
+	setSubCategoryOptions: (obj: any) => void;
+	branchOptions: object;
+	setBranchOptions: (obj: any) => void;
+	entityList: EntityInt[];
+	entityOptions: object[];
+	setEntityOptions: (obj: any) => void;
+	handleVendorChange?: (obj: any) => void;
 }
+
+const getMontOptions = (minMonth) => {
+	const date = new Date(minMonth);
+	const options = MONTH_OPTIONS.filter(
+		(option) => option.key > date.getMonth(),
+	);
+	return options;
+};
 
 export const nonRecurringExpenseDetails = ({
 	formData,
@@ -39,9 +48,11 @@ export const nonRecurringExpenseDetails = ({
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
-}:Props) => {
-	const handleEntityChange = (e:number | string) => {
-		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
+}: Props) => {
+	const handleEntityChange = (e: number | string) => {
+		const entityData = entityList?.filter(
+			(entityItem) => entityItem.id === e,
+		)?.[0];
 		setFormData({
 			...formData,
 			entityObject: entityData,
@@ -59,7 +70,7 @@ export const nonRecurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item:any, obj:object) => handleVendorChange(obj),
+					onChange       : (item: any, obj: object) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -87,15 +98,17 @@ export const nonRecurringExpenseDetails = ({
 					name           : 'periodOfTransaction',
 					label          : 'Period Of Transaction',
 					type           : 'select',
-					disabled       : true,
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Select Month',
 					span           : 2.2,
 					value          : formData?.periodOfTransaction,
-					onChange       : (month:string) => setFormData({ ...formData, periodOfTransaction: month }),
-					options        : MONTH_OPTIONS,
-					className      : styles.input_width,
+					onChange       : (month: string) => setFormData({
+						...formData,
+						periodOfTransaction: month,
+					}),
+					options   : getMontOptions(formData.transactionDate),
+					className : styles.input_width,
 				},
 				{
 					name           : 'cogoEntity',
@@ -107,7 +120,7 @@ export const nonRecurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e:any) => handleEntityChange(e),
+					onChange       : (e: any) => handleEntityChange(e),
 					className      : styles.input_width,
 				},
 			],
@@ -118,10 +131,11 @@ export const nonRecurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : 'PAN',
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData?.registrationNumber || null,
 					className   : styles.pan,
 					placeholder : 'Autofilled PAN',
+					prefix      : null,
 					span        : 2.2,
 				},
 				{
@@ -134,17 +148,6 @@ export const nonRecurringExpenseDetails = ({
 					span           : 2.2,
 					className      : styles.select,
 					options        : categoryOptions,
-				},
-				{
-					name           : 'expenseSubCategory',
-					label          : 'Expense Sub-Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Sub-Category',
-					span           : 2.2,
-					className      : styles.select,
-					options        : subCategoryOptions,
 				},
 				{
 					name           : 'branch',
@@ -166,12 +169,9 @@ export const nonRecurringExpenseDetails = ({
 					className      : styles.select,
 					defaultOptions : false,
 					span           : 2.2,
-					options        : [
-						{ label: 'Pay Run', value: 'payrun' },
-					],
+					options        : [{ label: 'Pay Run', value: 'payrun' }],
 				},
 			],
-
 		},
 	];
 };

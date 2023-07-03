@@ -20,14 +20,6 @@ const controls = [
 				rules       : { required: 'Category is required' },
 			},
 			{
-				name        : 'sub_category',
-				label       : 'Select Sub-category',
-				type        : 'select',
-				placeholder : 'Select a sub-category',
-				style       : { flexBasis: '30%' },
-				rules       : { required: 'Sub-category is required' },
-			},
-			{
 				name        : 'cogoport_office_id',
 				label       : 'Select Cogoport Office',
 				type        : 'multiSelect',

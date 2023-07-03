@@ -71,10 +71,11 @@ export const recurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : 'PAN',
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData.registrationNumber || null,
 					className   : styles.pan_area,
 					placeholder : 'Autofilled PAN',
+					prefix      : null,
 					span        : 2.2,
 				},
 				{
@@ -90,17 +91,6 @@ export const recurringExpenseDetails = ({
 					style          : { width: '164px' },
 				},
 				{
-					name           : 'expenseSubCategory',
-					label          : 'Expense Sub-Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Sub-Category',
-					span           : 2.2,
-					options        : subCategoryOptions,
-					style          : { width: '168px' },
-				},
-				{
 					name           : 'cogoEntity',
 					label          : 'Cogo Entity',
 					type           : 'select',
@@ -113,11 +103,6 @@ export const recurringExpenseDetails = ({
 					onChange       : (e:any) => handleEntityChange(e),
 					style          : { width: '164px' },
 				},
-			],
-		},
-		{
-			span    : 12,
-			groupBy : [
 				{
 					name               : 'payableAmount',
 					label              : 'Payable Amount',
@@ -128,6 +113,12 @@ export const recurringExpenseDetails = ({
 					span               : 2.2,
 					size               : 'md',
 				},
+			],
+		},
+		{
+			span    : 12,
+			groupBy : [
+
 				{
 					name    : 'currency',
 					label   : 'Currency',
@@ -168,11 +159,6 @@ export const recurringExpenseDetails = ({
 					isPreviousDaysAllowed : true,
 					span                  : 2.2,
 				},
-			],
-		},
-		{
-			span    : 12,
-			groupBy : [
 				{
 					name           : 'branch',
 					label          : 'Branch',
@@ -184,12 +170,19 @@ export const recurringExpenseDetails = ({
 					options        : branchOptions,
 					style          : { width: '164px' },
 				},
+			],
+		},
+		{
+			span    : 12,
+			groupBy : [
+
 				{
 					name      : 'agreementNumber',
 					label     : 'Agreement Number',
-					type      : 'textarea',
+					type      : 'input',
 					className : styles.agreement,
 					span      : 2,
+					prefix    : null,
 					size      : 'md',
 				},
 			],
