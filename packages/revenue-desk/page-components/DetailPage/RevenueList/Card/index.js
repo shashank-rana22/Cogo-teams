@@ -3,10 +3,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
+import { VALUE_ZERO } from '../../../constants';
+
 import styles from './styles.module.css';
 
 function Card({ item }) {
-	const ZERO = 0;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_section}>
@@ -45,7 +46,7 @@ function Card({ item }) {
 				</div>
 				<div className={styles.currency}>
 					{formatAmount({
-						amount   : item?.buy_price || ZERO,
+						amount   : item?.buy_price || VALUE_ZERO,
 						currency : item?.buy_price_currency || 'INR',
 						options  : {
 							style                 : 'currency',
@@ -63,7 +64,7 @@ function Card({ item }) {
 				</div>
 				<div className={styles.status}>
 					{formatAmount({
-						amount   : item?.profit_or_loss || ZERO,
+						amount   : item?.profit_or_loss || VALUE_ZERO,
 						currency : item?.buy_price_currency || 'INR',
 						options  : {
 							style                 : 'currency',
@@ -71,9 +72,11 @@ function Card({ item }) {
 							maximumFractionDigits : 2,
 						},
 					})}
-					<div className={item?.profit_or_loss >= ZERO ? styles.positive_profit : styles.negative_profit}>
-						{item?.profit_or_loss > ZERO ? 'Profit ' : 'Loss '}
-						{item?.profit_or_loss > ZERO
+					<div className={item?.profit_or_loss >= VALUE_ZERO
+						? styles.positive_profit : styles.negative_profit}
+					>
+						{item?.profit_or_loss > VALUE_ZERO ? 'Profit ' : 'Loss '}
+						{item?.profit_or_loss > VALUE_ZERO
 							? <IcMArrowDoubleUp width="12px" height="12px" />
 							: <IcMArrowDoubleDown width="12px" height="12px" />}
 					</div>

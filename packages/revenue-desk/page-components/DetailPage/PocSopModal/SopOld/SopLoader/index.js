@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const arr = [1, 2, 3];
+const arr = ['1', '2', '3'];
 
 function SopLoader() {
 	return (
@@ -21,7 +21,7 @@ function SopLoader() {
 				</div>
 
 				{(arr || []).map((i) => (
-					<div className={i === 3 ? styles.last : ''} key={i}>
+					<div className={i === '3' ? styles.last : ''} key={i}>
 						<Placeholder height="20px" width="155px" />
 						<Placeholder style={{ marginTop: '10px' }} />
 					</div>

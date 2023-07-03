@@ -2,6 +2,7 @@ import { RadioGroup, Chips, SingleDateRange, Tags } from '@cogoport/components';
 
 import { statusOptions, tradeOptions, shipmentSourceOptions, rdStatusOptions } from '../../helper/filterOptionMapping';
 import getFiltersTagsArray from '../../helper/getFiltersTagsArray';
+import { VALUE_TWO, VALUE_ZERO } from '../constants';
 
 import FilterLocation from './FilterLocation';
 import styles from './styles.module.css';
@@ -111,7 +112,7 @@ function Filters({ filters, setFilters }) {
 						<div>
 							<RadioGroup
 								options={['air_freight', 'fcl_freight'].includes(filters?.service)
-									? rdStatusOptions : rdStatusOptions.slice(0, 2)}
+									? rdStatusOptions : rdStatusOptions.slice(VALUE_ZERO, VALUE_TWO)}
 								onChange={(val) => {
 									setFilters({
 										...filters,

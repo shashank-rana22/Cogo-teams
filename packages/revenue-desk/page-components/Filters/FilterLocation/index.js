@@ -6,6 +6,18 @@ import { merge } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const LOCATION_MAPPING = {
+	fcl_freight : 'port',
+	air_freight : 'airport',
+	ltl_freight : 'location',
+	ftl_freight : 'location',
+	air_customs : 'airport',
+	fcl_customs : 'port',
+};
+
+const IMG_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
+				+ '/314e2cdf282b4b8b6e4dd28283865a1d/radio-button-on.svg';
+
 function FilterLocation({ filters, setFilters }) {
 	const filterOption = {
 		fcl_freight     : ['seaport'],
@@ -24,19 +36,12 @@ function FilterLocation({ filters, setFilters }) {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: filterOption[filters?.service] } },
 	}));
-	const locationMapping = {
-		fcl_freight : 'port',
-		air_freight : 'airport',
-		ltl_freight : 'location',
-		ftl_freight : 'location',
-		air_customs : 'airport',
-		fcl_customs : 'port',
-	};
-	let origin_location_name = `origin_${locationMapping[filters?.service]}_id`;
-	let destination_location_name = `destination_${locationMapping[filters?.service]}_id`;
+
+	let origin_location_name = `origin_${LOCATION_MAPPING[filters?.service]}_id`;
+	let destination_location_name = `destination_${LOCATION_MAPPING[filters?.service]}_id`;
 	if (filters?.service === 'air_customs' || filters?.service === 'fcl_customs') {
-		origin_location_name = `${locationMapping[filters?.service]}_id`;
-		destination_location_name = `${locationMapping[filters?.service]}_id`;
+		origin_location_name = `${LOCATION_MAPPING[filters?.service]}_id`;
+		destination_location_name = `${LOCATION_MAPPING[filters?.service]}_id`;
 	}
 
 	return (
@@ -44,8 +49,7 @@ function FilterLocation({ filters, setFilters }) {
 			<div className={styles.icon_container}>
 				<div>
 					<img
-						// eslint-disable-next-line max-len
-						src="https://cogoport-production.sgp1.digitaloceanspaces.com/314e2cdf282b4b8b6e4dd28283865a1d/radio-button-on.svg"
+						src={IMG_SRC}
 						alt="img"
 						height="20px"
 						width="20px"

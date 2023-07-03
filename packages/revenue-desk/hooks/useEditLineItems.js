@@ -7,17 +7,17 @@ import { useState } from 'react';
 import rawControls from '../helper/sell_quotations_controls';
 
 const getDefaultValues = (oldfields) => {
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 	const newfields = oldfields.map((field) => {
 		const { value, ...rest } = field;
 		if (field.type === 'fieldArray') {
-			defaultValues[field.name] = value || [];
+			DEFAULT_VALUES[field.name] = value || [];
 		} else {
-			defaultValues[field.name] = value || '';
+			DEFAULT_VALUES[field.name] = value || '';
 		}
 		return rest;
 	});
-	return { defaultValues, fields: newfields };
+	return { DEFAULT_VALUES, fields: newfields };
 };
 
 const useEditLineItems = ({
@@ -50,7 +50,7 @@ const useEditLineItems = ({
 		}
 	};
 
-	const trade_mapping = {
+	const TRADE_MAPPING = {
 		import : 'Destination',
 		export : 'Origin',
 	};
@@ -64,7 +64,7 @@ const useEditLineItems = ({
 				isFclFreight,
 				shipment_data,
 				index,
-				trade_mapping,
+				TRADE_MAPPING,
 			},
 		),
 		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
@@ -83,13 +83,13 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	const { defaultValues, fields } = getDefaultValues(controls);
+	const { DEFAULT_VALUES, fields } = getDefaultValues(controls);
 	const {
 		watch,
 		handleSubmit,
 		control,
 		formState: { isDirty },
-	} = useForm({ defaultValues });
+	} = useForm({ DEFAULT_VALUES });
 
 	const formValues = watch();
 
@@ -99,11 +99,11 @@ const useEditLineItems = ({
 			newCtrl.controls = ctrl.controls.map((childCtrl) => {
 				const tempChildCtrl = childCtrl;
 				if (childCtrl.name === 'price_discounted') {
-					const disabled = {};
+					const DISABLED = {};
 					(formValues[ctrl.name] || []).forEach((val, idx) => {
-						disabled[idx] = val.code !== 'BAS';
+						DISABLED[idx] = val.code !== 'BAS';
 					});
-					tempChildCtrl.customProps = { disabled };
+					tempChildCtrl.customProps = { DISABLED };
 				}
 				return tempChildCtrl;
 			});
@@ -113,16 +113,16 @@ const useEditLineItems = ({
 
 	const onCreate = async (values) => {
 		try {
-			const payload = [];
+			const PAYLOAD = [];
 
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
-				const chargeCodes = {};
+				const CHARGE_CODES = {};
 				(allChargeCodes[currentService.service_type] || []).forEach(
 					(chgCode) => {
-						chargeCodes[chgCode.code] = chgCode;
+						CHARGE_CODES[chgCode.code] = chgCode;
 					},
 				);
 
@@ -132,19 +132,19 @@ const useEditLineItems = ({
 					line_items   : values[key].map((line_item) => ({
 						code             : line_item.code,
 						alias            : line_item?.alias,
-						name             : chargeCodes[line_item.code]?.name || line_item?.name,
+						name             : CHARGE_CODES[line_item.code]?.name || line_item?.name,
 						currency         : line_item.currency,
 						price_discounted : Number(line_item.price_discounted),
 						quantity         : Number(line_item.quantity),
 						unit             : line_item.unit,
 					})),
 				};
-				payload.push(service);
+				PAYLOAD.push(service);
 			});
 
 			const res = await updateLineItemsAPITrigger({
 				data: {
-					quotations             : payload,
+					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},

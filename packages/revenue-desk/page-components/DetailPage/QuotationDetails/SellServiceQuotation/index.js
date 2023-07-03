@@ -3,6 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { PERCENTAGE_CHECK } from '../../../constants';
+
 import styles from './styles.module.css';
 
 function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profitCurrency, itemData }) {
@@ -31,16 +33,16 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			total_price_discount : total_price_discounted,
 
 		}));
-	const updatedPriceData = {};
+	const UPDATED_PRICE_DATA = {};
 	useEffect(() => {
 		(chargesData || []).forEach((item) => {
-			updatedPriceData[item.service_id] = [item?.currency, item?.total_price_discount];
+			UPDATED_PRICE_DATA[item.service_id] = [item?.currency, item?.total_price_discount];
 		});
 		if (data?.net_total_price_currency) {
-			updatedPriceData.sell_price = [data?.net_total_price_currency, data?.net_pre_tax_total];
-			updatedPriceData.exchange_rate = data?.exchange_rate;
+			UPDATED_PRICE_DATA.sell_price = [data?.net_total_price_currency, data?.net_pre_tax_total];
+			UPDATED_PRICE_DATA.exchange_rate = data?.exchange_rate;
 		}
-		setPriceData(updatedPriceData);
+		setPriceData(UPDATED_PRICE_DATA);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
 	return (
@@ -90,7 +92,7 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 												maximumFractionDigits : 2,
 											},
 										})}
-										/Contr.
+									/Contr.
 									<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 									{loading
 										? <Placeholder width="150px" height="25px" />
@@ -112,7 +114,9 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 					}
 
 				</div>
-				<div className={profitAmount >= 0 ? styles.postive_container : styles.negative_container}>
+				<div className={profitAmount >= PERCENTAGE_CHECK
+					? styles.postive_container : styles.negative_container}
+				>
 					<div style={{ textDecoration: 'underline' }}>
 						Profit Amount
 					</div>

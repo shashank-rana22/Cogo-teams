@@ -1,9 +1,11 @@
 import { Placeholder } from '@cogoport/components';
 
+import { VALUE_ONE, VALUE_TWO } from '../../../../constants';
+
 import styles from './styles.module.css';
 
 function LoadingCard({ rate_key }) {
-	const LoadingArray = [1, 2];
+	const LoadingArray = [VALUE_ONE, VALUE_TWO];
 	return (
 		<div>
 			{LoadingArray.map((singleItem) => (

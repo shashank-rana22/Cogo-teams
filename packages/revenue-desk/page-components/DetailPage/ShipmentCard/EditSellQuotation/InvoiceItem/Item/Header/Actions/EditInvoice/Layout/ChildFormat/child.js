@@ -1,10 +1,14 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import { DEFAULT_INDEX, TOTAL_PERCENT, VALUE_ONE, VALUE_ZERO } from '../../../../../../../../../../constants';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
+
+const VALUE_ELEVEN = 11;
+const VALUE_TWELVE = 12;
 
 function Child({
 	controls,
@@ -19,32 +23,32 @@ function Child({
 	error,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 11;
-		if (span === 11) {
+		span += fields.span || VALUE_ELEVEN;
+		if (span === VALUE_ELEVEN) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 11) {
+			span = VALUE_ZERO;
+		} else if (span < VALUE_ELEVEN) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{totalFields.map((fields) => (
-				<div key={fields[0]?.name} className={styles.row}>
+			{TOTAL_FIELDS.map((fields) => (
+				<div key={fields[DEFAULT_INDEX]?.name} className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
@@ -53,16 +57,16 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 						if (controlItem.customProps?.disabled) {
-							extraProps.disabled = controlItem.customProps.disabled[index];
+							EXTRA_PROPS.disabled = controlItem.customProps.disabled[index];
 						}
 						const disable = (index < noDeleteButtonTill
 							&& controlItem.name === 'code') || controlItem.disabled;
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						const flex = ((controlItem?.span || VALUE_TWELVE) / VALUE_TWELVE) * TOTAL_PERCENT;
 						if (controlItem.type === 'static') {
 							return controlItem.render();
 						}
@@ -89,7 +93,7 @@ function Child({
 									index={index}
 									control={control}
 									disabled={disabled || disable}
-									{...extraProps}
+									{...EXTRA_PROPS}
 								/>
 								<div style={{
 									fontStyle     : 'normal',
@@ -110,7 +114,7 @@ function Child({
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove`}
-								onClick={() => remove(index, 1)}
+								onClick={() => remove(index, VALUE_ONE)}
 								style={{
 									width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
 								}}

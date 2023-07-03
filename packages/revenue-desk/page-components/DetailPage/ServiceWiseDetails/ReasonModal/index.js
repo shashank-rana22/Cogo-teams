@@ -1,5 +1,7 @@
 import { Button, Modal, Radio, Textarea } from '@cogoport/components';
 
+import { VALUE_TWO, VALUE_ZERO, VALUE_ONE } from '../../../constants';
+
 import styles from './styles.module.css';
 
 function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext }) {
@@ -11,7 +13,7 @@ function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason
 		}
 	};
 	return (
-		<Modal size="lg" show={modalStep === 2} onClose={() => setModalStep(0)} placement="center">
+		<Modal size="lg" show={modalStep === VALUE_TWO} onClose={() => setModalStep(VALUE_ZERO)} placement="center">
 			<Modal.Header title="PREVIEW" />
 			<Modal.Body>
 				<div className={styles.modal_text}>
@@ -61,7 +63,7 @@ function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.btn_container}>
-					<Button themeType="secondary" onClick={() => setModalStep(1)}>Back</Button>
+					<Button themeType="secondary" onClick={() => setModalStep(VALUE_ONE)}>Back</Button>
 					<Button
 						themeType="accent"
 						disabled={!reason}

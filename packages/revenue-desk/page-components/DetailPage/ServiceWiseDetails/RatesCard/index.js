@@ -2,22 +2,24 @@ import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import EmptyState from '../../../../EmptyState';
+import { VALUE_ZERO } from '../../../constants';
 
 import Card from './Card';
 import LoadingCard from './Card/LoadingCard';
 import styles from './styles.module.css';
+
+const INITIAL_CARD_COUNT = 2;
 
 function RatesCard({
 	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
 	sellRates, loading, shipmentData,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
-	const initialCardCount = 2;
 	const toggleList = () => {
 		setShowFullList(!showFullList);
 	};
-	const renderedCards = showFullList ? ratesData : ratesData?.slice(0, initialCardCount);
-	const expandable = ratesData?.length > initialCardCount;
+	const renderedCards = showFullList ? ratesData : ratesData?.slice(VALUE_ZERO, INITIAL_CARD_COUNT);
+	const expandable = ratesData?.length > INITIAL_CARD_COUNT;
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -44,7 +46,7 @@ function RatesCard({
 				)}
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'end' }}>
-				{!showFullList && expandable && ratesData?.length > initialCardCount && (
+				{!showFullList && expandable && ratesData?.length > INITIAL_CARD_COUNT && (
 					<Button size="md" themeType="link" onClick={toggleList}>See More</Button>
 				)}
 

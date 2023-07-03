@@ -1,4 +1,4 @@
-const serviceLabelMapping = {
+const SERVICE_LABEL_MAPPING = {
 	fcl_freight     : 'FCL',
 	lcl_freight     : 'LCL',
 	air_freight     : 'AIR',
@@ -12,4 +12,4 @@ const serviceLabelMapping = {
 	fcl_cfs         : 'FCL CFS',
 };
 
-export default serviceLabelMapping;
+export default SERVICE_LABEL_MAPPING;

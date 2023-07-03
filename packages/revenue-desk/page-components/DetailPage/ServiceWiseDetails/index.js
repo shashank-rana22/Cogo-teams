@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
+import { DEFAULT_INDEX, VALUE_ONE, VALUE_TWO, VALUE_ZERO } from '../../constants';
 
 import CancellationModal from './CancellationModal';
 import PreviewModal from './PreviewModal';
@@ -11,15 +12,22 @@ import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData, priceData, setShowDetailPage, revenueDeskDecisionsData = [] }) {
+function ServiceWiseDetails({
+	groupedShowServicesData,
+	serviceData,
+	shipmentData,
+	priceData,
+	setShowDetailPage,
+	revenueDeskDecisionsData = [],
+}) {
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [rateOptions, setRateOptions] = useState({});
 	const [showCancelModal, setshowCancelModal] = useState(false);
 	const [inventory, setInventory] = useState([]);
-	const [activeTab, setActiveTab] = useState(tabKeys[0]);
-	const [modalStep, setModalStep] = useState(0);
+	const [activeTab, setActiveTab] = useState(tabKeys[DEFAULT_INDEX]);
+	const [modalStep, setModalStep] = useState(VALUE_ZERO);
 	const [reason, setReason] = useState(null);
 	const [othertext, setOthertext] = useState(null);
 	const [sellRateDetails, setSellRateDetails] = useState({});
@@ -43,10 +51,10 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 		});
 		return pref;
 	};
-	const isSupplierPayloadEmpty = Object.keys(supplierPayload).length === 0;
-	const isAllServiceIdsEmpty = Object.values(supplierPayload).every((array) => array.length === 0);
-	const isInventoryPayloadEmpty = Object.keys(inventory).length === 0;
-	const isAllInventoryIdsEmpty = Object.values(inventory).every((array) => array.length === 0);
+	const isSupplierPayloadEmpty = Object.keys(supplierPayload).length === VALUE_ZERO;
+	const isAllServiceIdsEmpty = Object.values(supplierPayload).every((array) => array.length === VALUE_ZERO);
+	const isInventoryPayloadEmpty = Object.keys(inventory).length === VALUE_ZERO;
+	const isAllInventoryIdsEmpty = Object.values(inventory).every((array) => array.length === VALUE_ZERO);
 
 	const isDisabled = (isSupplierPayloadEmpty || isAllServiceIdsEmpty)
 		&& (isInventoryPayloadEmpty || isAllInventoryIdsEmpty);
@@ -66,7 +74,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 						<Button
 							size="md"
 							themeType="primary"
-							onClick={() => setModalStep(1)}
+							onClick={() => setModalStep(VALUE_ONE)}
 							disabled={isDisabled}
 						>
 							Save preference
@@ -114,7 +122,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 				/>
 			) : null}
 
-			{modalStep === 1
+			{modalStep === VALUE_ONE
 				? (
 					<PreviewModal
 						modalStep={modalStep}
@@ -126,7 +134,7 @@ function ServiceWiseDetails({ groupedShowServicesData, serviceData, shipmentData
 						priceData={priceData}
 					/>
 				) : null}
-			{modalStep === 2
+			{modalStep === VALUE_TWO
 				? (
 					<ReasonModal
 						modalStep={modalStep}

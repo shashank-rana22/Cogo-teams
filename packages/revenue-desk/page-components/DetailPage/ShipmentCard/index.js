@@ -4,9 +4,12 @@ import { IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import incoTermMapping from '../../../helper/incoTermMapping';
+import { DEFAULT_INDEX } from '../../constants';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
+
+const INDEX_ONE = 1;
 
 function ShipmentCard({ itemData, priceData }) {
 	return (
@@ -38,9 +41,9 @@ function ShipmentCard({ itemData, priceData }) {
 				</div>
 				<div className={styles.second_section}>
 					<Pill size="md" color="#F2F3FA">
-						<div style={{ color: '#7278AD' }}>Inco:
+						<div style={{ color: '#7278AD' }}>
+							Inco:
 							{startCase([itemData?.inco_term])}
-
 						</div>
 
 					</Pill>
@@ -75,8 +78,8 @@ function ShipmentCard({ itemData, priceData }) {
 							{!priceData?.sell_price
 								? <Placeholder width="100px" height="25px" />
 								: formatAmount({
-									amount   : priceData?.sell_price?.[1],
-									currency : priceData?.sell_price?.[0],
+									amount   : priceData?.sell_price?.[INDEX_ONE],
+									currency : priceData?.sell_price?.[DEFAULT_INDEX],
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -89,7 +92,7 @@ function ShipmentCard({ itemData, priceData }) {
 							{!priceData?.sell_price
 								? <Placeholder width="100px" height="25px" />
 								: formatAmount({
-									amount: Number(priceData?.sell_price?.[1])
+									amount: Number(priceData?.sell_price?.[INDEX_ONE])
 									/ Number(priceData?.exchange_rate),
 									currency : 'USD',
 									options  : {
@@ -108,9 +111,9 @@ function ShipmentCard({ itemData, priceData }) {
 									{!priceData?.sell_price
 										? <Placeholder width="80px" height="25px" />
 										: formatAmount({
-											amount: Number(priceData?.sell_price?.[1])
+											amount: Number(priceData?.sell_price?.[INDEX_ONE])
 											/ Number(itemData?.containers_count),
-											currency : priceData?.sell_price?.[0],
+											currency : priceData?.sell_price?.[DEFAULT_INDEX],
 											options  : {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -123,7 +126,7 @@ function ShipmentCard({ itemData, priceData }) {
 									{!priceData?.sell_price
 										? <Placeholder width="80px" height="25px" />
 										: formatAmount({
-											amount: (Number(priceData?.sell_price?.[1])
+											amount: (Number(priceData?.sell_price?.[INDEX_ONE])
 											/ Number(itemData?.containers_count))
 										/ Number(priceData?.exchange_rate),
 											currency : 'USD',

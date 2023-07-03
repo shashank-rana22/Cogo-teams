@@ -1,3 +1,5 @@
+import { VALUE_ZERO, INCREMENT_VALUE } from '../../../../../../constants';
+
 import styles from './styles.module.css';
 
 function PriorityNumber({ data, id }) {
@@ -8,14 +10,14 @@ function PriorityNumber({ data, id }) {
 		priority = (data || []).indexOf(searchObject);
 	}
 
-	const show = priority >= 0;
+	const show = priority >= VALUE_ZERO;
 
 	return (
 		<div
 			className={styles.container}
 			style={{ background: show ? '#4F4F4F' : null }}
 		>
-			{show ? <div className={styles.text}>{priority + 1}</div> : null}
+			{show ? <div className={styles.text}>{priority + INCREMENT_VALUE}</div> : null}
 		</div>
 	);
 }

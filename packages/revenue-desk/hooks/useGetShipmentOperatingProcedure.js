@@ -38,10 +38,9 @@ const useGetShipmentOperatingProcedure = ({
 		}
 	}, [trigger]);
 
-	useEffect(
-		() => { apiTrigger(); },
-		[apiTrigger, filters],
-	);
+	useEffect(() => {
+		apiTrigger();
+	}, [apiTrigger, filters]);
 
 	return {
 		loading,

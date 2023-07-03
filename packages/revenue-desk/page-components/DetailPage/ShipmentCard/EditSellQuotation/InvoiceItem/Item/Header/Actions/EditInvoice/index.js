@@ -10,6 +10,9 @@ import Info from './Info';
 import Layout from './Layout';
 import styles from './styles.module.css';
 
+const MOBILE_SCREEN_WIDTH_SIZE = 360;
+const SCREEN_WIDTH_SIZE = 1030;
+
 function EditInvoice({
 	show = 'false',
 	onClose,
@@ -52,7 +55,7 @@ function EditInvoice({
 				show={show}
 				size="xl"
 				styles={{
-					dialog: { width: isMobile ? 360 : 1030 },
+					dialog: { width: isMobile ? MOBILE_SCREEN_WIDTH_SIZE : SCREEN_WIDTH_SIZE },
 				}}
 			>
 				<Modal.Header title={(
@@ -73,7 +76,7 @@ function EditInvoice({
 				)}
 				/>
 				<Modal.Body>
-					<div className={styles.container}>
+					<div>
 						<div className={styles.forms}>
 							<Layout
 								control={control}

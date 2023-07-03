@@ -1,12 +1,14 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import { DECIMAL_PLACES, PERCENTAGE_CHECK, TOTAL_PERCENT, VALUE_ZERO } from '../../../../constants';
+
 import styles from './styles.module.css';
 
 const getProfitabillity = ({ profit, consBuyPrice }) => {
 	if (Number.isNaN(profit)) { return '--'; }
-	return consBuyPrice !== 0
-		? (Number(Number(profit) / Number(consBuyPrice)) * 100).toFixed(2)
-		: 0;
+	return consBuyPrice !== VALUE_ZERO
+		? (Number(Number(profit) / Number(consBuyPrice)) * TOTAL_PERCENT).toFixed(DECIMAL_PLACES)
+		: VALUE_ZERO;
 };
 
 function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
@@ -21,7 +23,7 @@ function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 					<div className={styles.key}>
 						Profit
 					</div>
-					<div className={profit >= 0 ? styles.positive_container : styles.negative_container}>
+					<div className={profit >= PERCENTAGE_CHECK ? styles.positive_container : styles.negative_container}>
 						{formatAmount({
 							amount   : profit,
 							currency : preferredCurrency,
@@ -37,7 +39,7 @@ function Header({ consBuyPrice, conSellPrice, preferredCurrency }) {
 					<div className={styles.key}>
 						Profitability
 					</div>
-					<div className={profit >= 0 ? styles.positive_container : styles.negative_container}>
+					<div className={profit >= PERCENTAGE_CHECK ? styles.positive_container : styles.negative_container}>
 						{
 							getProfitabillity({ profit, consBuyPrice })
 						}

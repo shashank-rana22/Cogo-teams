@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 export default function EmptyState({ isSmall = false, heading = '' }) {
-	const src = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
+	const SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	return (
 		<div className={!isSmall ? styles.container : styles.small_container}>
 			{!heading ? (
@@ -19,14 +19,14 @@ export default function EmptyState({ isSmall = false, heading = '' }) {
 				isSmall
 					? (
 						<img
-							src={src}
+							src={SRC}
 							alt="empty_page"
 							height="15%"
 							width="15%"
 						/>
 					) : (
 						<img
-							src={src}
+							src={SRC}
 							alt="empty_page"
 							height="50%"
 							width="50%"

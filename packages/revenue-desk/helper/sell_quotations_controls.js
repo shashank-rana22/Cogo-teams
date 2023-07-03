@@ -1,5 +1,7 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
+const CHECK_LENGTH = 3;
+
 const rawControls = (
 	{
 		handleChange,
@@ -63,7 +65,7 @@ const rawControls = (
 				name        : 'alias',
 				placeholder : 'Enter alias name/code',
 				rules       : {
-					validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+					validate: (v) => v?.length >= CHECK_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 				},
 				disabled : true,
 				span     : 2,

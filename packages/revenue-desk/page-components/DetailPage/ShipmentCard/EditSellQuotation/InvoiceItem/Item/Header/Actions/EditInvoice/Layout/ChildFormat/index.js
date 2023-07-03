@@ -23,7 +23,7 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = { };
+	const CHILD_EMPTY_VALUES = { };
 
 	return (
 		<div className={styles.child}>
@@ -49,7 +49,7 @@ function FieldArray({
 						style={{ margin: '4px' }}
 						size="sm"
 						themeType="link"
-						onClick={() => append(childEmptyValues)}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
 					>
 						+
 						{' '}

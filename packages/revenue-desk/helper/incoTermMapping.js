@@ -1,4 +1,4 @@
-const incoTermMapping = {
+const INCO_TERM_MAPPING = {
 	cif : 'export',
 	cfr : 'export',
 	cpt : 'export',
@@ -12,4 +12,4 @@ const incoTermMapping = {
 	fas : 'import',
 };
 
-export default incoTermMapping;
+export default INCO_TERM_MAPPING;

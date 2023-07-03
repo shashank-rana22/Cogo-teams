@@ -12,20 +12,22 @@ const useUpdateRatesPreferences = ({
 	setShowDetailPage,
 	shipmentData,
 }) => {
-	const apitoCall = '/bulk_update_shipment_booking_confirmation_preferences';
+	const API_TO_CALL = '/bulk_update_shipment_booking_confirmation_preferences';
 
-	const [{ loading }, trigger] = useRequest({ method: 'POST', url: apitoCall }, { manual: true, autoCancel: false });
-	const revenueDeskDecision = [];
+	const [{ loading }, trigger] = useRequest({
+		method: 'POST', url: API_TO_CALL,
+	}, { manual: true, autoCancel: false });
+	const REVENUE_DESK_DECISION = [];
 	(serviceData || []).forEach((data) => {
 		const service_id = data?.id;
 		const service_type = data?.service_type;
-		const singleBookingDocs = [];
-		const splitableBookingdocs = [];
-		const mergeableBookingdocs = [];
+		const SINGLE_BOOKING_DOCS = [];
+		const SPLITABLE_BOOKING_DOCS = [];
+		const MERGEABLE_BOOKING_DOCS = [];
 
-		const service_providers = [];
+		const SERVICE_PROVIDERS = [];
 		(supplierPayload?.[service_id] || []).forEach((provider, index) => {
-			service_providers.push({
+			SERVICE_PROVIDERS.push({
 				priority                    : index + 1,
 				rate_id                     : provider?.rate_id,
 				id                          : provider?.id,
@@ -34,40 +36,40 @@ const useUpdateRatesPreferences = ({
 			});
 		});
 		(inventory?.[service_id] || []).forEach((docs) => {
-			const doc_object = {};
+			const DOC_OBJECT = {};
 
-			doc_object.ids = docs?.allid?.[0].includes(':')
+			DOC_OBJECT.ids = docs?.allid?.[0].includes(':')
 				? docs?.allid?.[0].split(':')
 				: docs.allid;
 
-			doc_object.priority = docs?.priority;
-			doc_object.type = docs?.type?.split('_booking')[0];
+			DOC_OBJECT.priority = docs?.priority;
+			DOC_OBJECT.type = docs?.type?.split('_booking')[0];
 			if (docs?.type === 'single_booking_notes') {
-				singleBookingDocs.push(doc_object);
+				SINGLE_BOOKING_DOCS.push(DOC_OBJECT);
 			}
 			if (docs?.type === 'splitable_booking_notes') {
-				splitableBookingdocs.push(doc_object);
+				SPLITABLE_BOOKING_DOCS.push(DOC_OBJECT);
 			}
 			if (docs?.type === 'mergeable_booking_notes') {
-				mergeableBookingdocs.push(doc_object);
+				MERGEABLE_BOOKING_DOCS.push(DOC_OBJECT);
 			}
 		});
-		const bookingConformationDocs = [];
+		const BOOKING_CONFIRMATION_DOCS = [];
 		const confirmationDocs = [
-			...singleBookingDocs,
-			...mergeableBookingdocs,
-			...splitableBookingdocs,
+			...SINGLE_BOOKING_DOCS,
+			...MERGEABLE_BOOKING_DOCS,
+			...SPLITABLE_BOOKING_DOCS,
 		];
 		(confirmationDocs || []).forEach((docs, index) => {
-			const doc_object = docs;
-			doc_object.priority = index + 1;
-			bookingConformationDocs.push(doc_object);
+			const DOC_OBJECT = docs;
+			DOC_OBJECT.priority = index + 1;
+			BOOKING_CONFIRMATION_DOCS.push(DOC_OBJECT);
 		});
 
 		const final_payload = {
 			is_confirmation_set_by_rd : true,
-			service_providers,
-			booking_confirmation_docs : bookingConformationDocs,
+			SERVICE_PROVIDERS,
+			booking_confirmation_docs : BOOKING_CONFIRMATION_DOCS,
 			service_id                : service_id || undefined,
 			service_type              : service_type || undefined,
 			available_rates_for_rd    : rateOptions?.[service_id],
@@ -76,10 +78,10 @@ const useUpdateRatesPreferences = ({
 						? sellRateDetails?.[service_id]
 						: [],
 		};
-		const hasData =	supplierPayload?.[service_id]?.length || bookingConformationDocs?.length;
+		const hasData =	supplierPayload?.[service_id]?.length || BOOKING_CONFIRMATION_DOCS?.length;
 
 		if (hasData) {
-			revenueDeskDecision.push(final_payload);
+			REVENUE_DESK_DECISION.push(final_payload);
 		}
 	});
 
@@ -89,7 +91,7 @@ const useUpdateRatesPreferences = ({
 				data: {
 					shipment_id            : shipmentData?.id,
 					remarks                : othertext || reason,
-					revenue_desk_decisions : revenueDeskDecision,
+					revenue_desk_decisions : REVENUE_DESK_DECISION,
 
 				},
 			});

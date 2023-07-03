@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetKamCustomerShipmentInsights = ({ shipmentId }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -7,7 +7,7 @@ const useGetKamCustomerShipmentInsights = ({ shipmentId }) => {
 		url    : '/get_shipment_transaction_insights',
 	}, { manual: true });
 
-	const listKamCustomerInsights = async () => {
+	const listKamCustomerInsights = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -17,10 +17,10 @@ const useGetKamCustomerShipmentInsights = ({ shipmentId }) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, shipmentId]);
 	useEffect(() => {
 		listKamCustomerInsights();
-	}, []);
+	}, [listKamCustomerInsights]);
 	return {
 		data,
 		loading,
