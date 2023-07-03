@@ -57,9 +57,7 @@ function ReassignTicket({
 							const { name, label, controllerType } = elementItem || {};
 							const Element = getFieldController(controllerType);
 
-							if (!Element) { return null; }
-
-							if (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType)) {
+							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))) {
 								return null;
 							}
 

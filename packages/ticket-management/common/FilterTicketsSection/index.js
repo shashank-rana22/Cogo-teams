@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Modals from '../Modals';
 
@@ -14,16 +13,10 @@ function FilterTicketsSection({ type = '' }) {
 
 	const [showReassign, setShowReassign] = useState(false);
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
-	const [modalData, setModalData] = useState({});
+	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
 
 	const isAdmin = type === 'admin';
-
-	useEffect(() => {
-		if (!isEmpty(ticket_id)) {
-			setModalData({ ticketId: ticket_id });
-		}
-	}, [ticket_id]);
 
 	return (
 		<div className={cl`${styles.filter_tickets_container} ${isAdmin ? styles.bridge_gap : ''}`}>
