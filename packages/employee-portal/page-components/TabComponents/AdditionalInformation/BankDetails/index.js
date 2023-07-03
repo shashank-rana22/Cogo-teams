@@ -43,7 +43,8 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				Please update your bank details here !
+				Please make sure to enter accurate bank details so that your salary can be credited to this account.
+				Cogoport will not be held responsible if the salary is deposited into an incorrect bank account.
 			</div>
 
 			<div className={styles.container}>

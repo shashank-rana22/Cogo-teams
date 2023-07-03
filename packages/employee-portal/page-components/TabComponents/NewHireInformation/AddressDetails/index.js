@@ -14,6 +14,7 @@ const CURRENT_ADDRESS_MAPPING = [
 
 const CONTROL_SELECT_TYPE_ONE = 'fileUpload';
 const CONTROL_SELECT_TYPE_TWO = 'textarea';
+const INITIAL_INDEX = 0;
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -21,7 +22,7 @@ const removeTypeField = (controlItem) => {
 };
 
 function AddressDetails({ data:content, getEmployeeDetails }) {
-	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, getValues, watch } = useForm();
 
 	const { permanent_address, present_address, id } = content?.detail || {};
 
@@ -44,6 +45,12 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	const addressEqualityCheck = JSON.stringify(permanent_address) === JSON.stringify(present_address);
 
 	const [address, setAddress] = useState(addressEqualityCheck);
+
+	const permanentValues = watch(['permanent_city', 'permanent_state', 'permanent_country',
+		'permanent_pincode', 'permanent_address']);
+
+	const presentValues = watch(['current_city', 'current_state', 'current_country',
+		'current_pincode', 'current_address']);
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
@@ -99,18 +106,17 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			));
 		} else {
 			CURRENT_ADDRESS_MAPPING.map((element) => (
-				setValue(element, ADDRESS_MAPPING[element])
+				setValue(element, ADDRESS_MAPPING[element] || '')
 			));
 		}
 	};
 
 	useEffect(() => {
-		if (!address) {
-			CURRENT_ADDRESS_MAPPING.map((element) => (
-				setValue(element, '')
-			));
-		}
-	}, [address, setValue]);
+		const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
+			&& permanentValues?.[INITIAL_INDEX];
+
+		setAddress(equalityCheck);
+	}, [permanentAddress, permanentValues, presentValues]);
 
 	return (
 		<div className={styles.whole_container}>
