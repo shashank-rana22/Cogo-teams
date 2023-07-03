@@ -620,7 +620,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -730,7 +730,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',

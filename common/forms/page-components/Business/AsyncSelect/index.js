@@ -149,7 +149,9 @@ function AsyncSelect(props) {
 			selectedValue = rest.value;
 		}
 
-		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+		const selectedOption = getAsyncOptionsProps.options.filter(
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
