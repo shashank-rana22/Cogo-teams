@@ -86,11 +86,11 @@ function Step3({
 			});
 			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
 
-		if (submit) {
-			generateInsurance({ payload, payloadForUpdateShipment });
-		} else {
-			saveData({ payload });
-		}
+			if (submit) {
+				generateInsurance({ payload, payloadForUpdateShipment });
+			} else {
+				saveData({ payload });
+			}
 		})();
 	};
 

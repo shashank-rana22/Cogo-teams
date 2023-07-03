@@ -80,7 +80,8 @@ function Step1({
 					: { organizationAddressId: billingId },
 			);
 		}
-	}, [prosporerAddressId,prosporerAddressType, billingId, billingDataAddressType, policyForSelf, setAddressId]);
+	}, [prosporerAddressId,
+		prosporerAddressType, billingId, billingDataAddressType, policyForSelf, setAddressId]);
 
 	return (
 		<div className={styles.container}>
