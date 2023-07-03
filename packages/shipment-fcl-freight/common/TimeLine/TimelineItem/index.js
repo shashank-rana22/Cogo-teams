@@ -2,8 +2,8 @@ import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
 import { useContext } from 'react';
-import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 import {

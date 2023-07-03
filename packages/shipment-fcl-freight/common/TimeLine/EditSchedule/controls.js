@@ -4,11 +4,11 @@ import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	let modifiedPrimaryService = {
+	const modifiedPrimaryService = {
 		...primary_service || {},
-		schedule_departure: getDepartureArrivalDate(primary_service, 'departure'),
-		schedule_arrival: getDepartureArrivalDate(primary_service, 'arrival'),
-	}
+		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
+		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
 	const { state, origin_port, destination_port } = modifiedPrimaryService || {};
 
 	const disabledState = state === 'vessel_arrived'
