@@ -11,6 +11,7 @@ function OTPInput({
 	sendOtp = () => {},
 	resendOtpTimerDuration = 30,
 	placeholder = ' ',
+	manualOtpRequest = false,
 
 }) {
 	const useImperativeHandleRef = useRef({});
@@ -50,22 +51,9 @@ function OTPInput({
 				placeholder={placeholder}
 
 			/>
-
-			<div className={styles.resend_otp_container}>
-
-				{timer.seconds >= 1
-					? (
-						<div className={styles.timer_text}>
-							<div className={`${styles[color_text]}`}>
-								{timer.minutes}
-								:
-								{timer.seconds}
-							</div>
-
-						</div>
-					)
-
-					: (
+			{manualOtpRequest === true
+				? (
+					<div className={styles.resend_otp_container}>
 						<div
 							role="presentation"
 							className={styles.resend_text}
@@ -76,11 +64,42 @@ function OTPInput({
 							}}
 							disabled={timer.isTimeRemaining || loading}
 						>
-							Resend OTP?
+							Request OTP
 						</div>
-					)}
+					</div>
+				) : (
+					<div className={styles.resend_otp_container}>
 
-			</div>
+						{timer.seconds >= 1
+							? (
+								<div className={styles.timer_text}>
+									<div className={`${styles[color_text]}`}>
+										{timer.minutes}
+										:
+										{timer.seconds}
+									</div>
+
+								</div>
+							)
+
+							: (
+								<div
+									role="presentation"
+									className={styles.resend_text}
+									onClick={() => {
+										sendOtp({ timer });
+
+										useImperativeHandleRef.current?.resetOtp();
+									}}
+									disabled={timer.isTimeRemaining || loading}
+								>
+									Resend OTP?
+								</div>
+							)}
+
+					</div>
+				)}
+
 		</div>
 	);
 }

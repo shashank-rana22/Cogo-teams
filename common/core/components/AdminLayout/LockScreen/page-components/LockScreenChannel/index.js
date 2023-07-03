@@ -1,19 +1,19 @@
 import { Modal, Button } from '@cogoport/components';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import { Image } from '@cogoport/next';
+import { useState } from 'react';
 
 import useGetGenerateOtp from '../../hooks/useGetGenerateOtp';
 import useGetSubmitOtp from '../../hooks/useGetSubmitOtp';
 
-// import { ChipsController, TextAreaController, useForm } from '@cogoport/forms';
-// import { useState } from 'react';
 import styles from './styles.module.css';
 
-const MAX_LIMIT = 900;
+const MAX_LIMIT = 300;
 const OTP_LENGTH = 6;
 function LockScreen({ agentId, firestore, setShowModal }) {
+	const [manualOtp, setManualOtp] = useState(true);
 	const { apiTrigger, loading, otpNumber, setOtpNumber } = useGetSubmitOtp({ agentId, firestore, setShowModal });
-	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
+	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal, setManualOtp });
 
 	return (
 		<Modal
@@ -43,6 +43,7 @@ function LockScreen({ agentId, firestore, setShowModal }) {
 								resendOtpTimerDuration={MAX_LIMIT}
 								sendOtp={(obj) => generateOtp({ ...obj })}
 								placeholder=""
+								manualOtpRequest={manualOtp}
 							/>
 						</div>
 						<div className={styles.button_div}>

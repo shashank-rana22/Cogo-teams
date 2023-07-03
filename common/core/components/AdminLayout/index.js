@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import { LockScreen } from './LockScreen';
 import { firebaseConfig } from './LockScreen/configurations/firebase-config';
+import getViewTypeMapping from './LockScreen/constants';
 import useGetActivity from './LockScreen/hooks/useGetActivity';
 import Navbar from './Navbar';
 import TnC from './newTnC';
@@ -45,7 +46,14 @@ function AdminLayout({
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
 
-	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partnerData || {};
+	const {
+		id: partner_id = '',
+		partner_user_id = '',
+		is_joining_tnc_accepted = '',
+		user_role_ids = [],
+	} = partnerData || {};
+
+	const { ROLE_IDS_CHECK } = getViewTypeMapping();
 
 	const {
 		pinListLoading = false,
@@ -68,6 +76,8 @@ function AdminLayout({
 	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
 									&& is_joining_tnc_accepted === false;
 
+	const isRolePresent = user_role_ids.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
+
 	return (
 		<div className={cl`
 			${styles.container} 
@@ -75,44 +85,45 @@ function AdminLayout({
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
-			{showModal ? <LockScreen agentId={user_id} firestore={firestore} setShowModal={setShowModal} /> : (
-				<>
-					<main className={styles.children_container}>{children}</main>
-					{showTopbar ? (
-						<Topbar
-							className={topbar.className}
-							style={topbar.style}
-							logo={topbar.logo}
-							onClickMobileNav={() => setShowMobileNavbar((s) => !s)}
-							showMobileNav={showNavbar}
-							showMobileNavbar={showMobileNavbar}
-						/>
-					) : null}
-					{showNavbar ? (
-						<Navbar
-							className={navbar.className}
-							style={navbar.style}
-							nav={partner}
-							pinListLoading={pinListLoading}
-							setPinnedNavKeys={setPinnedNavKeys}
-							partner_user_id={partner_user_id}
-							pinnedNavs={pinnedNavs}
-							mobileShow={showMobileNavbar}
+			{showModal && isRolePresent
+				? <LockScreen agentId={user_id} firestore={firestore} setShowModal={setShowModal} /> : (
+					<>
+						<main className={styles.children_container}>{children}</main>
+						{showTopbar ? (
+							<Topbar
+								className={topbar.className}
+								style={topbar.style}
+								logo={topbar.logo}
+								onClickMobileNav={() => setShowMobileNavbar((s) => !s)}
+								showMobileNav={showNavbar}
+								showMobileNavbar={showMobileNavbar}
+							/>
+						) : null}
+						{showNavbar ? (
+							<Navbar
+								className={navbar.className}
+								style={navbar.style}
+								nav={partner}
+								pinListLoading={pinListLoading}
+								setPinnedNavKeys={setPinnedNavKeys}
+								partner_user_id={partner_user_id}
+								pinnedNavs={pinnedNavs}
+								mobileShow={showMobileNavbar}
+								inCall={inCall}
+							/>
+						) : null}
+						<VoiceCall
+							voice_call_recipient_data={{
+								...(voice_call_recipient_data || {}),
+								loggedInAgentId: user_id,
+							}}
 							inCall={inCall}
 						/>
-					) : null}
-					<VoiceCall
-						voice_call_recipient_data={{
-							...(voice_call_recipient_data || {}),
-							loggedInAgentId: user_id,
-						}}
-						inCall={inCall}
-					/>
-					<AnnouncementModal data={announcements} />
+						<AnnouncementModal data={announcements} />
 
-					{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
-				</>
-			)}
+						{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
+					</>
+				)}
 		</div>
 	);
 }

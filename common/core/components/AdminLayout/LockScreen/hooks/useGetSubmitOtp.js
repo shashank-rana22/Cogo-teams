@@ -15,16 +15,19 @@ import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
+const LIMIT_VALUE = 1;
+const DEFAULT_VALUE = 0;
+
 const updateRoom = async ({ agentId, firestore }) => {
 	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
 
 	const roomsQuery = query(
 		shipmentReminderRoom,
 		where('agent_id', '==', agentId),
-		limit(1),
+		limit(LIMIT_VALUE),
 	);
 	const docs = await getDocs(roomsQuery);
-	const roomId = docs?.docs?.[0]?.id;
+	const roomId = docs?.docs?.[DEFAULT_VALUE]?.id;
 
 	const docRef = doc(
 		firestore,
