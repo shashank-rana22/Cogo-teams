@@ -170,7 +170,7 @@ function DailySalesOutstanding({
 							(quaterly).map((item, index) => (
 								<div className={styles.price_container} key={item.currency}>
 									<div className={styles.amount}>
-										{item.qsoForQuarter}
+										{item?.qsoForQuarter}
 									</div>
 									<div
 										className={styles.quarter_container}
