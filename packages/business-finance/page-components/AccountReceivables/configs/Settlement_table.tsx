@@ -1,17 +1,58 @@
+import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMInfo } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
 
 import GetSortingData from '../components/Outstanding/OutstandingList/SettlementTable/sorting';
+
+import styles from './styles.module.css';
 
 const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }) => [
 	{
 		Header   : 'Reference Number',
 		id       : 'name',
 		accessor : (row) => (
-			<div>
-				{getByKey(row, 'sourceDocumentValue') as string}
+			<div style={{ display: 'flex' }}>
+				<div style={{ marginRight: '10px' }}>
+					{row?.sourceDocumentValue?.length >= 12 ? (
+						<Tooltip
+							content={(
+								<div className={styles.tooltip_text}>
+									{getByKey(row, 'sourceDocumentValue') as string}
+								</div>
+							)}
+							interactive
+						>
+							<div>
+								{(row?.sourceDocumentValue as string).substring(0, 12)}
+								...
+							</div>
+						</Tooltip>
+					) : (
+						<div>
+							{row?.sourceDocumentValue }
+
+						</div>
+					)}
+				</div>
+				{row?.sourceIrnNumber ? (
+					<div>
+						<Tooltip
+							content={(
+								<div>
+									{row?.sourceIrnNumber}
+								</div>
+							)}
+							placement="top"
+							interactive
+						>
+							<div><IcMInfo height="12px" width="12px" /></div>
+						</Tooltip>
+
+					</div>
+				) : ''}
 			</div>
 		),
 
@@ -20,11 +61,43 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 		Header   : 'Invoice Number',
 		accessor : (row) => (
 
-			<div>
-				<div>
-					{row?.destinationDocumentValue}
-
+			<div style={{ display: 'flex' }}>
+				<div style={{ marginRight: '10px' }}>
+					{row?.destinationDocumentValue?.length >= 12 ? (
+						<Tooltip
+							content={(
+								<div className={styles.tooltip_text}>
+									{getByKey(row, 'destinationDocumentValue') as string}
+								</div>
+							)}
+							interactive
+						>
+							<div>
+								{(row?.destinationDocumentValue as string).substring(0, 12)}
+								...
+							</div>
+						</Tooltip>
+					) : (
+						<div>
+							{row?.destinationDocumentValue }
+						</div>
+					)}
 				</div>
+				{row?.destinationIrnNumber ? (
+					<div>
+						<Tooltip
+							content={(
+								<div>
+									{row?.destinationIrnNumber}
+								</div>
+							)}
+							placement="top"
+							interactive
+						>
+							<div><IcMInfo height="12px" width="12px" /></div>
+						</Tooltip>
+					</div>
+				) : ''}
 			</div>
 
 		),
