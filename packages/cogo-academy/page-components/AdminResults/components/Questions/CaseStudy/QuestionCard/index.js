@@ -19,14 +19,15 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 
 	const explanationHtmlString = explanation?.[START_INDEX];
 
+	const keys = [...Array(ARRAY_LENGTH).keys()];
+
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{Array(ARRAY_LENGTH).fill('').map(() => (
-
-					// eslint-disable-next-line react/jsx-key
+				{keys.map((key) => (
 					<div
 						className={styles.placeholder_inner_container}
+						key={key}
 					>
 						<Placeholder height="24px" />
 					</div>
