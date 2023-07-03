@@ -1,12 +1,6 @@
-const getControls = (watchTribeId) => {
-	const params = {
-		filters: {
-			status               : 'active',
-			partner_entity_types : ['cogoport'],
-		},
-		page_limit: 100,
-	};
+import params from '../../../../../common/getParams';
 
+const getControls = (watchTribeId) => {
 	const controlItems = {
 		name     : 'single_item',
 		type     : 'fieldArray',

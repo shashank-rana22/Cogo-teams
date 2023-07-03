@@ -1,14 +1,6 @@
+import params from '../../../../../common/getParams';
+
 const getControls = ({ watchTriveId, check }) => {
-	const PAGE_LIMIT = 100;
-
-	const params = {
-		filters: {
-			status               : 'active',
-			partner_entity_types : ['cogoport'],
-		},
-		page_limit: PAGE_LIMIT,
-	};
-
 	const controls = [
 		{
 			name        : 'employee_ids',
@@ -23,6 +15,7 @@ const getControls = ({ watchTriveId, check }) => {
 			isClearable : true,
 			params,
 		},
+
 		{
 			name        : 'role_ids',
 			type        : 'asyncSelect',
@@ -34,6 +27,7 @@ const getControls = ({ watchTriveId, check }) => {
 			initialCall : true,
 			params,
 		},
+
 		{
 			name        : 'tribe_id',
 			type        : 'asyncSelect',

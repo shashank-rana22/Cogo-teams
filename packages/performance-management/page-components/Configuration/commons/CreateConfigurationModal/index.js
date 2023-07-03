@@ -8,6 +8,13 @@ import styles from './styles.module.css';
 
 const CHECK_USE_TYPE_UPDATE = 'Update';
 
+const MAPPING = {
+	squad       : 'employee',
+	tribe       : 'squad',
+	chapter     : 'sub_chapter',
+	sub_chapter : 'employee',
+};
+
 const RenderModalBody = ({ controls, control, errors }) => (controls || []).map((controlItem) => {
 	const { type, label: controlLabel, name } = controlItem || {};
 
@@ -46,41 +53,20 @@ function CreateConfigurationModal({
 	type,
 	setValue,
 }) {
+	const componentName = `${label}_name`;
+	const componentLeader = `${label}_leader`;
+	const subComponent = MAPPING?.[label];
+	const subComponents = `${MAPPING?.[label]}s`;
+
 	useEffect(() => {
 		if (!isEmpty(showModal) && type === CHECK_USE_TYPE_UPDATE) {
-			if (showModal?.squad_name) {
-				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
+			const ARRAY_OF_IDS = showModal?.[subComponents].map((obj) => obj?.id);
 
-				setValue('squad_name', showModal?.squad_name);
-				setValue('squad_leader', showModal?.squad_leader?.id);
-				setValue('employee_ids', ARRAY_OF_IDS);
-			}
-
-			if (showModal?.tribe_name) {
-				const ARRAY_OF_IDS = showModal.squads.map((obj) => obj?.id);
-
-				setValue('tribe_name', showModal?.tribe_name);
-				setValue('tribe_leader', showModal?.tribe_leader?.id);
-				setValue('"squad_ids"', ARRAY_OF_IDS);
-			}
-
-			if (showModal?.chapter_name) {
-				const ARRAY_OF_IDS = showModal.sub_chapters.map((obj) => obj?.id);
-
-				setValue('chapter_name', showModal?.chapter_name);
-				setValue('chapter_leader', showModal?.chapter_leader?.id);
-				setValue('"sub_chapter_ids"', ARRAY_OF_IDS);
-			}
-
-			if (showModal?.sub_chapter_name) {
-				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj?.id);
-
-				setValue('"sub_chapter_name', showModal?.sub_chapter_name);
-				setValue('sub_chapter_leader', showModal?.sub_chapter_leader?.id);
-				setValue('employee_ids', ARRAY_OF_IDS);
-			}
+			setValue(componentName, showModal?.[componentName]);
+			setValue(componentLeader, showModal?.[componentLeader]?.id);
+			setValue(`${subComponent}_ids`, ARRAY_OF_IDS);
 		}
-	}, [setValue, showModal, type]);
+	}, [componentLeader, componentName, setValue, showModal, subComponent, subComponents, type]);
 
 	return (
 		<div>

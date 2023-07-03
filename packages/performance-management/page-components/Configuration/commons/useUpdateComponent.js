@@ -32,6 +32,7 @@ const useUpdateComponent = ({ fetchList, setShowCreateModal, showCreateModal, so
 		const idsAdded = `${dataaa}s_added`;
 		const idsRemoved = `${dataaa}s_removed`;
 		const name = [`${source}_name`];
+		const leaderId = [`${source}_leader`];
 
 		try {
 			await trigger({
@@ -39,7 +40,8 @@ const useUpdateComponent = ({ fetchList, setShowCreateModal, showCreateModal, so
 					[payloadId]  : showCreateModal?.id,
 					[idsAdded]   : fields_added,
 					[idsRemoved] : fields_removed,
-					[name]       : showCreateModal?.[`${source}_name`],
+					[name]       : values?.[`${source}_name`],
+					[leaderId]   : values?.[leaderId],
 
 				},
 			});

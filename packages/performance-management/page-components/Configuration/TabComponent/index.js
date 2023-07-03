@@ -21,13 +21,11 @@ function TabComponent() {
 				onChange={setActiveTab}
 				style={{ marginBottom: 6 }}
 			>
-				{
-					(TABS_MAPPING || []).map((tab) => (
-						<TabPanel key={tab} name={tab} title={startCase(tab)}>
-							<ActiveTabs source={tab} />
-						</TabPanel>
-					))
-				}
+				{(TABS_MAPPING || []).map((tab) => (
+					<TabPanel key={tab} name={tab} title={startCase(tab)}>
+						<ActiveTabs source={tab} />
+					</TabPanel>
+				))}
 			</Tabs>
 		</div>
 	);
