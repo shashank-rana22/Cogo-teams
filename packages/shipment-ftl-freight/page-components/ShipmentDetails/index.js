@@ -49,7 +49,7 @@ function ShipmentDetails() {
 		...get,
 		...getTimeline,
 		...servicesGet,
-		ACTIVE_STAKEHOLDER,
+		activeStakeholder: ACTIVE_STAKEHOLDER,
 		stakeholderConfig,
 	}), [get, servicesGet, getTimeline, stakeholderConfig]);
 

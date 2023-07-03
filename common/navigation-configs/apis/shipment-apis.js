@@ -1583,6 +1583,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_min_max_validity_dates',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
