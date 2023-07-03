@@ -1,4 +1,4 @@
-import { Modal, Button, MultiSelect, cl } from '@cogoport/components';
+import { Modal, Button, MultiSelect, Pill } from '@cogoport/components';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -53,7 +53,7 @@ function FilterModal({ filters, setFilters }: Props) {
 		setCurrencies([]);
 		setShowModal(false);
 	};
-	const checkFilterCurrencyLength = filters?.currency?.length > 0;
+
 	return (
 		<div className={styles.modal_container}>
 			<Modal
@@ -82,7 +82,7 @@ function FilterModal({ filters, setFilters }: Props) {
 							marginLeft   : '26px',
 						}}
 					>
-						{CURRENCY_DATA.map((item) => {
+						{/* {CURRENCY_DATA.map((item) => {
 							const { id, icon, text }: Ite = item;
 							return (
 								<div
@@ -105,12 +105,10 @@ function FilterModal({ filters, setFilters }: Props) {
 									<div className="textShow">{text}</div>
 								</div>
 							);
-						})}
-						<div
-							className={cl`${styles.select} ${styles.currency_values}
-							${checkFilterCurrencyLength ? styles.selected : styles.unselected}`}
-						>
-							<div className={styles.text}>Other Currencys</div>
+						})} */}
+						<div>
+
+							{/* <div className={styles.text}>Other Currencys</div> */}
 							<div className={styles.select_input}>
 								<MultiSelect
 									value={filters?.currency}
@@ -120,6 +118,13 @@ function FilterModal({ filters, setFilters }: Props) {
 									size="md"
 								/>
 							</div>
+
+							{filters?.currency?.map((item) => (
+								<div key={item} style={{ display: 'flex' }}>
+									<Pill size="md" color="blue" style={{ display: 'coloum' }}>{item}</Pill>
+								</div>
+							))}
+
 						</div>
 					</div>
 
