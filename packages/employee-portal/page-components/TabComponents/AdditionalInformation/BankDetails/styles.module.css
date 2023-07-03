@@ -48,3 +48,7 @@
 	justify-content: flex-end;
 	padding-top: 10px;
 }
+
+.introductory_text {
+	width: 70%;
+}
