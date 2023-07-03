@@ -58,7 +58,8 @@ function FormContainer({
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
-			shipment_id         : taskItem?.shipment_id,
+			shipment_id         : taskItem?.shipmentId,
+			document_type       : 'draft_house_airway_bill',
 		};
 		if (edit) {
 			if (activeHawb.isNew === false) {
