@@ -13,14 +13,6 @@
 	justify-content: center;
 }
 
-.cancel_btn_wrap {
-	.core-ui-button-root {
-		margin-right: 20px;
-		color: #000;
-		background: #fff;
-	}
-}
-
 .text {
 	margin-bottom: 10px;
 	font-size: 20px;

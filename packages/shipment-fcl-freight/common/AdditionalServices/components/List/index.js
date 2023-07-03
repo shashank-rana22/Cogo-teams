@@ -49,11 +49,7 @@ function List({ isSeller = false }) {
 		showIp  : showModal === 'ip',
 	});
 
-	function checkIfCargoInsuranceService(service) {
-		return service?.service_type === 'cargo_insurance_service';
-	}
-
-	const isCargoInsured = servicesList?.some(checkIfCargoInsuranceService);
+	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
 
 	return (
 		<div className={styles.container}>

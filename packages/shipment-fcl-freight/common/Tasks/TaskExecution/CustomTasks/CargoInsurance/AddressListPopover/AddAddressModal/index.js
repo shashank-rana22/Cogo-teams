@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useCreateOrganizationBillingAddress';
 
-import { getModifiedControls } from './getAddAddressControls';
 import FormElement from './FormElement';
+import { getModifiedControls } from './getAddAddressControls';
 import styles from './styles.module.css';
 
 export const OPTIONS = [
@@ -101,11 +101,11 @@ function AddModal({
 								onChange={() => {
 									setChecked((prevChecked) => {
 										const newChecked = !prevChecked;
-										if(newChecked){
+										if (newChecked) {
 											setShowPoc(true);
 										}
 										return newChecked;
-									})
+									});
 								}}
 							/>
 							<div className={styles.gst}>Include Tax Number</div>
@@ -133,7 +133,7 @@ function AddModal({
 											onClick={() => setShowPoc(!showPoc)}
 											size="md"
 											themeType="accent"
-											style={{ marginTop: '16px' }}
+											className={styles.btn_div}
 										>
 											<IcMPlus />
 											{' '}
@@ -185,9 +185,8 @@ function AddModal({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => handleCloseModal()}
+						onClick={handleCloseModal}
 						disabled={createAddressLoading}
-						style={{ padding: '10px' }}
 					>
 						Cancel
 					</Button>

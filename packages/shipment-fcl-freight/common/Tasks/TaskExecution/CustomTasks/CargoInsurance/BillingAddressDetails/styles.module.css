@@ -65,10 +65,6 @@
 		.marginLeft {
 			margin-left: 2px;
 		}
-
-		.core-ui-radio-label {
-			margin-left: 3px !important;
-		}
 	}
 
 	&.addAddress {

@@ -33,7 +33,12 @@ const controls = [
 		label : 'Consignment Value',
 		type  : 'number',
 		span  : 8,
-		rules : { required: 'Consignment Value is required' },
+		rules : {
+			required: {
+				message : 'Required',
+				min     : 0,
+			},
+		},
 	},
 ];
 export default controls;

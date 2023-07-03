@@ -25,7 +25,7 @@ const useInsuranceCheckoutAndGenerate = ({
 
 	const generateInsurance = async ({ payload, payloadForUpdateShipment }) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					...payload,
 					source                  : 'SHIPMENT',
@@ -38,11 +38,11 @@ const useInsuranceCheckoutAndGenerate = ({
 					customerConfirmationDoc : uploadProof?.[GLOBAL_CONSTANTS.zeroth_index]?.name,
 				},
 			});
-				const updateShipment = await apiTrigger({
-					data: payloadForUpdateShipment,
-				});
-					Toast.success(successMessage);
-					refetch();
+			await apiTrigger({
+				data: payloadForUpdateShipment,
+			});
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
 			Toast.error(err?.data?.message);
 		}

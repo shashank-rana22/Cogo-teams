@@ -19,6 +19,16 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 		},
 	});
 
+	const getPremiumLineItem = ({ amount, item, key }) => (
+		<div className={styles.premium_line_item} key={key}>
+			<div className={styles.text}>{item}</div>
+			<div className={cl`${styles.flex_row} ${styles.values}`}>
+				<div className={styles.line} />
+				{formarAmountData(amount)}
+			</div>
+		</div>
+	);
+
 	if (premiumLoading) {
 		return (
 			<div className={cl`${styles.premium_value} ${styles.loading}`}>
@@ -30,38 +40,15 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 	return (
 		<div className={styles.premium_value}>
 			{isEmpty(premiumData?.serviceChargeList)
-				? CHARGES.map((item) => (
-					<div className={styles.premium_line_item} key={item}>
-						<div className={styles.text}>{item}</div>
-
-						<div className={cl`${styles.flex_row} ${styles.values}`}>
-							<div className={styles.line} />
-							{formarAmountData(DEFAULT_AMOUNT)}
-						</div>
-					</div>
-				))
-				: null}
-
-			{premiumData?.serviceChargeList?.map((item) => (
-				<div className={styles.premium_line_item} key={item?.displayName}>
-					<div className={styles.text}>{item?.displayName}</div>
-
-					<div className={cl`${styles.flex_row} ${styles.values}`}>
-						<div className={styles.line} />
-						{formarAmountData(item?.totalCharges)}
-					</div>
-				</div>
-			))}
+				? CHARGES.map((item) => getPremiumLineItem({ amount: DEFAULT_AMOUNT, item, key: item?.displayName }))
+				: premiumData?.serviceChargeList?.map((item) => getPremiumLineItem({
+					amount : item?.totalCharges,
+					item   : item?.displayName,
+					key    : item?.displayName,
+				}))}
 
 			<div className={styles.line} />
-			<div className={styles.premium_line_item}>
-				<div className={styles.text}>Amount Payable</div>
-
-				<div className={cl`${styles.flex_row} ${styles.values}`}>
-					<div className={styles.line} />
-					{formarAmountData(premiumData?.totalApplicableCharges)}
-				</div>
-			</div>
+			{getPremiumLineItem({ amount: premiumData?.totalApplicableCharges, item: 'Amount Payable', key: '' })}
 		</div>
 	);
 }

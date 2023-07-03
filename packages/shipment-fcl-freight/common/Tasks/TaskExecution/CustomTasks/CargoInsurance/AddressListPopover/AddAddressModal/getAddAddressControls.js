@@ -110,7 +110,7 @@ export const getAddAddressControls = ({ setValue = () => {} }) => [
 	{
 		label       : 'Phone Number',
 		name        : 'phoneNumber',
-		type        : 'getStep2Controlsb',
+		type        : 'mobileSelect',
 		placeholder : 'Enter Phone Number',
 		rules       : {
 			validate: (v) => {
@@ -143,13 +143,13 @@ export const getModifiedControls = ({ checked, countryId = '', setValue = () => 
 								)
 								? GLOBAL_CONSTANTS.regex_patterns.gst_number
 								: '',
-						message: 'Invalid Tax number',
+						message: 'Invalid Tax Number',
 					},
 				},
 			};
 		}
 		return {
-			...control,
+			control,
 		};
 	});
 };

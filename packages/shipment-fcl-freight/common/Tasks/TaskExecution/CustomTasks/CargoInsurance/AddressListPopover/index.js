@@ -2,7 +2,6 @@ import { Placeholder, Checkbox, cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlansExpiring, IcMCrossInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { v4 as uuid } from 'uuid';
 
 import AddModal from './AddAddressModal';
 import styles from './styles.module.css';
@@ -27,29 +26,27 @@ function AddressListPopover({
 				<div className={styles.title}>Select Address</div>
 				{policyForSelf ? (
 					<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => setAddAddressModal(true)}
-				>
-					<IcMPlus height="20px" width="20px" />
-				</Button>
+						size="md"
+						themeType="secondary"
+						onClick={() => setAddAddressModal(true)}
+					>
+						<IcMPlus height="20px" width="20px" />
+					</Button>
 				) : (
-				<Button
-				size="md"
-				themeType="secondary"
-				onClick={() => {
-					setshowFilters(false);
-				}}
-			>
-				<IcMCrossInCircle />
-			</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setshowFilters(false)}
+					>
+						<IcMCrossInCircle />
+					</Button>
 				) }
 			</div>
 
 			{loading ? (
 				<div>
-					{Array(CARD_LENGTH).fill(null)?.map(() => (
-						<div className={styles.card} key={uuid()}>
+					{Array(CARD_LENGTH).fill(null)?.map((i) => (
+						<div className={styles.card} key={i}>
 							<div className={styles.section}>
 								<Placeholder />
 							</div>
@@ -66,12 +63,15 @@ function AddressListPopover({
 				</div>
 			) : (
 				<div className={styles.address_container}>
-					{isEmpty(data)?
+					{isEmpty(data)
+						? (
 							<div className={styles.empty_state}>
-									<IcMPlansExpiring width={100} height={100} />
-									<div className={styles.txt}>No Data Found</div>
-								</div> : <div>
-								
+								<IcMPlansExpiring width={100} height={100} />
+								<div className={styles.txt}>No Data Found</div>
+							</div>
+						) : (
+							<div>
+
 								{(data || []).map((item) => {
 									const {
 										name,
@@ -124,7 +124,7 @@ function AddressListPopover({
 									);
 								})}
 							</div>
-}
+						)}
 				</div>
 			)}
 

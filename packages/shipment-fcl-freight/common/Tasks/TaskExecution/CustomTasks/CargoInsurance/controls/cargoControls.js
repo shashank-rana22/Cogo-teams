@@ -5,9 +5,8 @@ const MIN_DATE_LIMIT = 1;
 const MAX_DATE_LIMIT = 31;
 const MIN_CONSIGNMENT_VALUE = 0;
 
-const INCO_TERMS = Object.entries(GLOBAL_CONSTANTS.options.inco_term).forEach(([key, value]) => {
-    return {label: value.label, value: key};
-});
+const INCO_TERMS = Object.entries(GLOBAL_CONSTANTS.options.inco_term)
+	.forEach(([key, value]) => ({ label: value.label, value: key }));
 
 export const cargoControls = ({ insuranceDetails = {} }) => [
 	{
@@ -44,8 +43,8 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		placeholder : 'Select Inco Term',
 		span        : 4,
 		disabled    : true,
-		options: INCO_TERMS,
-		rules: { required: 'Inco Term is required' },
+		options     : INCO_TERMS,
+		rules       : { required: 'Inco Term is required' },
 	},
 	{
 		name  : 'policyCountryId',
@@ -115,8 +114,7 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		type           : 'select',
 		placeholder    : 'INR',
 		optionsListKey : 'currencies',
-
-		rules: { required: 'Required' },
+		rules          : { required: 'Required' },
 	},
 	{
 		name        : 'cargoAmount',
