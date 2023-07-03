@@ -27,9 +27,9 @@ function Child(props) {
 	return (
 		<div className={styles.content}>
 			{controls.map((controlItem) => {
+				if (!controlItem.type) return null;
 				const Element = getFieldController(controlItem.type);
 
-				if (!Element) return null;
 				return (
 					<div className={styles.list} key={controlItem.name}>
 						<div className={styles.label}>{controlItem.label}</div>

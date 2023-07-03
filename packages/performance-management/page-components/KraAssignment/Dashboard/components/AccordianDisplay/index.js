@@ -6,7 +6,7 @@ import TableDisplay from '../TablesDisplay';
 import styles from './styles.module.css';
 
 const TABLE_USED_FOR = 'AccordianData';
-const INDEX_VALUE = 1;
+const INCREMENTAL_ELEMENT = 1;
 
 function AccordianDisplay({
 	data = [],
@@ -48,7 +48,7 @@ function AccordianDisplay({
 				role="button"
 				tabIndex={0}
 			>
-				<div>{`Group ${index + INDEX_VALUE}`}</div>
+				<div>{`Group ${index + INCREMENTAL_ELEMENT}`}</div>
 
 				<div>{isActive && (active === current) ? <IcMArrowUp /> : <IcMArrowDown /> }</div>
 			</div>

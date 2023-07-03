@@ -1,7 +1,6 @@
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
-
-const MIN_LENGTH = 0;
 
 const useFilterDisplay = ({ setFilters, setShowKRACalculationTable }) => {
 	const [showFilter, setShowFilter] = useState(false);
@@ -12,7 +11,7 @@ const useFilterDisplay = ({ setFilters, setShowKRACalculationTable }) => {
 		let filterApplied = false;
 
 		Object.keys(values).forEach((key) => {
-			if (values[key]?.length > MIN_LENGTH) filterApplied = true;
+			if (!isEmpty(values[key])) filterApplied = true;
 		});
 
 		if (!filterApplied) {

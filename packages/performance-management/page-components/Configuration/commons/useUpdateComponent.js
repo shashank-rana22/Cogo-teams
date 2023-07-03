@@ -18,19 +18,19 @@ const useUpdateComponent = ({ fetchList, setShowCreateModal, showCreateModal, so
 	const payloadId = `${source}_id`;
 
 	const onClickUpdateButton = async (values) => {
-		const dataaa = [MAPPING?.[source]];
+		const sourceData = [MAPPING?.[source]];
 
-		const ARRAY_OF_IDS = (showCreateModal?.[`${dataaa}s`] || []).map((obj) => obj?.id);
+		const ARRAY_OF_IDS = (showCreateModal?.[`${sourceData}s`] || []).map((obj) => obj?.id);
 
-		const fields_added = (values?.[`${dataaa}_ids`] || []).filter(
+		const fields_added = (values?.[`${sourceData}_ids`] || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
 		);
 		const fields_removed = (ARRAY_OF_IDS || []).filter(
-			(id) => !(values?.[`${dataaa}_ids`] || []).includes(id),
+			(id) => !(values?.[`${sourceData}_ids`] || []).includes(id),
 		);
 
-		const idsAdded = `${dataaa}s_added`;
-		const idsRemoved = `${dataaa}s_removed`;
+		const idsAdded = `${sourceData}s_added`;
+		const idsRemoved = `${sourceData}s_removed`;
 		const name = [`${source}_name`];
 		const leaderId = [`${source}_leader`];
 
