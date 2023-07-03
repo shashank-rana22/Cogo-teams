@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useState, useEffect, useContext } from 'react';
 
 import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
-import controls from '../EditSchedule/controls';
+import getControls from '../EditSchedule/getControls';
 import { getDate } from '../utils/getDate';
 
 export default function useEditServiceSchedule({ setShow = () => {} }) {
@@ -19,7 +19,7 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 		},
 	});
 
-	const { finalControls, defaultValues } = controls({ primary_service, departureDate });
+	const { finalControls, defaultValues } = getControls({ primary_service, departureDate });
 
 	const { handleSubmit: formSubmit, formState: { errors }, watch, reset, control } = useForm({ defaultValues });
 
@@ -46,8 +46,8 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 
 	const updateData = (values) => {
 		const mainServiceIds = (servicesList || [])
-			?.filter((item) => item?.service_type === primary_service?.service_type)
-			?.map((service) => service?.id);
+			.filter((item) => item?.service_type === primary_service?.service_type)
+			.map((service) => service?.id);
 
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
