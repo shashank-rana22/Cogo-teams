@@ -1,9 +1,15 @@
-import { IcMFrupee } from '@cogoport/icons-react';
-import React from 'react';
+import { CURRENCY_MAPPING } from '@cogoport/globalization/constants/currencyCode';
 
-const CURRENCY_DATA = [
-	{ id: '1', icon: <IcMFrupee width={25} height={25} />, text: 'INR' },
-];
+const CURRENCY_DATA = Object.keys(CURRENCY_MAPPING).map((key, index) => {
+	const Icon = CURRENCY_MAPPING[key].icon;
+
+	return ({
+		id   : index,
+		icon : <Icon width={25} height={25} />,
+		text : key,
+	});
+});
+
 const POC_DATA_MAPPING = [
 	{ id: '1', label: 'Customer Information' },
 	{ id: '2', label: 'Timeline' },

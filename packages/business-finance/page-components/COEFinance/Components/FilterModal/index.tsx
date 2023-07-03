@@ -82,8 +82,8 @@ function FilterModal({ filters, setFilters }: Props) {
 							marginLeft   : '26px',
 						}}
 					>
-						{CURRENCY_DATA.map((item: Ite) => {
-							const { id = '', icon, text } = item;
+						{CURRENCY_DATA.map((item) => {
+							const { id, icon, text }: Ite = item;
 							return (
 								<div
 									key={id}
