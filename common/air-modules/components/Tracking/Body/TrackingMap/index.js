@@ -16,7 +16,6 @@ const BEZIER_POINTS_CALCULATING_FACTOR = 1;
 
 function TrackingMap({
 	points = [],
-	routesLoading = false,
 }) {
 	const [isLoading, setLoading] = useState(true);
 	const [curvePoints, setCurvePoints] = useState([]);
@@ -137,7 +136,7 @@ function TrackingMap({
 		}
 	}, [points, points?.length]);
 
-	if (routesLoading || isLoading) {
+	if (isLoading) {
 		return <div className={styles.loading}>Loading...</div>;
 	}
 

@@ -5,7 +5,7 @@
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #393f70;
+	color: var(--color-secondary);
 	letter-spacing: 0.04em;
 }
 
@@ -19,7 +19,7 @@
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 18px;
-	color: #393f70;
+	color: var(--color-secondary);
 }
 
 .single_item {

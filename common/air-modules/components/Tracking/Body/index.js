@@ -12,7 +12,7 @@ import TrackingMap from './TrackingMap';
 function Body({ list = [], loading = false }) {
 	const listToRender = list?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.tracking_data;
 
-	const { airPoints, airLoading } = useGetAirPoints({ airTrackerDetails: list });
+	const airPoints = useGetAirPoints({ airTrackerDetails: list });
 
 	if (loading) {
 		return (
@@ -32,7 +32,6 @@ function Body({ list = [], loading = false }) {
 				/>
 			)}
 			<TrackingMap
-				routesLoading={airLoading}
 				points={airPoints}
 			/>
 		</div>

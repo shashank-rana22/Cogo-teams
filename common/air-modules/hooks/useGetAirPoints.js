@@ -129,10 +129,7 @@ function useGetAirPoints({ airTrackerDetails = {} }) {
 		anchorTarget?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
 	}, [selectedMilestonesList]);
 
-	return {
-		airPoints  : MAP_POINTS.slice(MAP_POINTS_SLICE_INDEX, MAP_POINTS.length + MAP_POINTS_LAST_INDEX_CALCULATOR),
-		airLoading : !selectedMilestonesList.length,
-	};
+	return MAP_POINTS.slice(MAP_POINTS_SLICE_INDEX, MAP_POINTS.length + MAP_POINTS_LAST_INDEX_CALCULATOR);
 }
 
 export default useGetAirPoints;

@@ -7,5 +7,5 @@
 	padding: 100px 0 0 200px;
 	font-size: 20px;
 	font-weight: 600;
-	color: #282b2e;
+	color: var(--color-secondary);
 }

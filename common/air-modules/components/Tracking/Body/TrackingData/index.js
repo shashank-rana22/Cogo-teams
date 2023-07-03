@@ -1,27 +1,9 @@
 import { cl, Tooltip, Tags } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import {
-	IcATruck,
-	IcAShipAmber,
-	IcASurfaceFttRail,
-} from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 import VerticleLine from './VerticleLine';
-
-const ICON_STYLE = {
-	height    : '20px',
-	width     : '20px',
-	marginTop : '30px',
-	transform : 'rotateZ(90deg) rotateX(180deg)',
-};
-
-const ICON = {
-	TRUCK  : <IcATruck style={ICON_STYLE} />,
-	VESSEL : <IcAShipAmber style={ICON_STYLE} />,
-	RAIL   : <IcASurfaceFttRail style={ICON_STYLE} />,
-};
 
 const LAST_INDEX_CHECK = 1;
 
@@ -30,29 +12,24 @@ function TrackingData({ data = [] }) {
 		<div className={styles.container}>
 			{data?.map((item, idx) => (
 				<div className={styles.single_item} key={item.id}>
-					{item?.transport_mode ? (
-						ICON[item.transport_mode?.toUpperCase()]
-					) : (
-						<div className={styles.space} />
-					)}
+					<div className={styles.space} />
 
 					<VerticleLine
 						checked={item?.checked}
-						zIndex={idx}
 						isLast={data?.length === idx + LAST_INDEX_CHECK}
 					/>
 
 					<div className={styles.main}>
 						<Tooltip
 							theme="light"
-							content={<div className={styles.tooltip}>{item?.location || item?.station}</div>}
+							content={<div className={styles.tooltip}>{item?.station}</div>}
 							maxWidth="none"
 							placement="bottom"
 							interactive
 						>
 
 							<div className={styles.heading}>
-								{item?.location || item?.station || 'NA'}
+								{item?.station || 'NA'}
 							</div>
 						</Tooltip>
 

@@ -7,6 +7,6 @@
 	flex-direction: column;
 	width: 50%;
 	padding: 25px 15px 35px;
-	background-color: #fafcff;
+	background-color: var(--color-secondary-4);
 	border-radius: 6px;
 }

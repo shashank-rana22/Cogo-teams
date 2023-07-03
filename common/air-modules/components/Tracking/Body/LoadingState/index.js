@@ -10,7 +10,7 @@ const LAST_INDEX_CHECK = -1;
 
 const LoadingState = () => [...Array(LOADER_COUNT).keys()].map((key) => (
 	<div className={styles.single_item} key={key}>
-		<VerticleLine zIndex={key} isLast={key === LOADER_COUNT + LAST_INDEX_CHECK} />
+		<VerticleLine isLast={key === LOADER_COUNT + LAST_INDEX_CHECK} />
 
 		<div className={styles.main}>
 			<div className={styles.heading}>
