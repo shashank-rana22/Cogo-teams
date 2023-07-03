@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const NUMBER = 100;
+const ROUND_OFF_DIGIT = 100;
 const PROGRESS_PERCENTAGE = 0;
 
 const COLOR_MAPPING = {
@@ -61,7 +61,7 @@ const getColumns = () => [
 					</div>
 
 					<div>
-						{Math.round(progress_percentage * NUMBER) / NUMBER}
+						{Math.round(progress_percentage * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
 						% complete
 					</div>
 				</div>

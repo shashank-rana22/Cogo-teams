@@ -4,38 +4,39 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import PACKAGE_CONSTANTS from '../../../../common/packageConstants';
 import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
-const MIN_EMPLOYEES_LENGTH = 3;
-const EMPLOYEE_INDEX_START = 0;
-const EMPLOYEE_INDEX_END = 3;
-const STATUS_TYPE_ACTIVE = 'active';
-
 const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
+	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
+	const { min_length, start_index, end_index } = tooltip_data || {};
+
 	const columnArray = [
 		{
 			Header   : 'SQUAD NAME',
 			accessor : (item) => <div>{item?.squad_name || '-'}</div>,
 		},
+
 		{
 			Header   : 'SQUAD LEADER',
 			accessor : (item) => <div>{startCase(item?.squad_leader?.name) || '-'}</div>,
 		},
+
 		{
 			Header   : 'EMPLOYEES',
 			accessor : (item) => (
 				<div className={styles.pill_box}>
 					{item?.employees
-						?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
+						?.slice(start_index, end_index)
 						.map((singleEmplyee) => (
 							<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
 								{singleEmplyee?.name}
 							</Pill>
 						))}
 
-					{item?.employees?.length > MIN_EMPLOYEES_LENGTH ? (
+					{item?.employees?.length > min_length ? (
 						<Pill>
 							<Tooltip
 								content={<TooltipContent item={item?.employees} source="name" />}
@@ -46,7 +47,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 								styles={{ marginBottom: '24px' }}
 							>
 								+
-								{item.employees.length - EMPLOYEE_INDEX_END}
+								{item.employees.length - end_index}
 								{' '}
 								EMPLOYEES
 							</Tooltip>
@@ -55,6 +56,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 				</div>
 			),
 		},
+
 		{
 			Header   : 'LAST UPDATED AT',
 			accessor : (item) => (
@@ -67,11 +69,12 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 				</div>
 			),
 		},
+
 		{
 			Header   : 'STATUS',
 			accessor : (item) => (
 				<Pill
-					className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
+					className={item?.status === default_active_tab ? styles.active : styles.inactive}
 				>
 					{startCase(item?.status) || '-'}
 				</Pill>
@@ -79,7 +82,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 		},
 	];
 
-	if (activeTab === STATUS_TYPE_ACTIVE) {
+	if (activeTab === default_active_tab) {
 		return [...columnArray,
 			{
 				Header   : 'ACTION',
@@ -91,6 +94,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 							style={{ cursor: 'pointer' }}
 							onClick={() => setShowDeleteModal(item.id)}
 						/>
+
 						<IcMEdit
 							width={16}
 							height={16}

@@ -4,16 +4,15 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import PACKAGE_CONSTANTS from '../../../../common/packageConstants';
 import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
-const MIN_SQUADS_LENGTH = 3;
-const SQUAD_INDEX_START = 0;
-const SQUAD_INDEX_END = 3;
-const STATUS_TYPE_ACTIVE = 'active';
-
 const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
+	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
+	const { min_length, start_index, end_index } = tooltip_data || {};
+
 	const columnArray = [
 		{
 			Header   : 'TRIBE NAME',
@@ -30,7 +29,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			accessor : (item) => (
 				<div className={styles.pill_box}>
 					{item?.squads
-						?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END)
+						?.slice(start_index, end_index)
 						.map((singleSQUAD) => (
 							<Pill
 								key={singleSQUAD?.squad_name}
@@ -41,7 +40,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 							</Pill>
 						))}
 
-					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
+					{item?.squads?.length > min_length ? (
 						<Pill>
 							<Tooltip
 								content={<TooltipContent item={item?.squads} source="squad_name" />}
@@ -52,7 +51,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 								styles={{ marginBottom: '24px' }}
 							>
 								+
-								{item.squads.length - SQUAD_INDEX_END}
+								{item.squads.length - end_index}
 								{' '}
 								Squads
 							</Tooltip>
@@ -79,7 +78,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			Header   : 'STATUS',
 			accessor : (item) => (
 				<Pill
-					className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
+					className={item?.status === default_active_tab ? styles.active : styles.inactive}
 				>
 					{startCase(item?.status) || '-'}
 				</Pill>
@@ -87,7 +86,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 		},
 	];
 
-	if (activeTab === STATUS_TYPE_ACTIVE) {
+	if (activeTab === default_active_tab) {
 		return [...columnArray,
 			{
 				Header   : 'ACTION',

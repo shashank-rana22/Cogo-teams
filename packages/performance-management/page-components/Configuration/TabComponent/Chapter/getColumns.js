@@ -4,16 +4,15 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import PACKAGE_CONSTANTS from '../../../../common/packageConstants';
 import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
-const MIN_SUB_CHAPTERS_LENGTH = 3;
-const SUB_CHAPTER_INDEX_START = 0;
-const SUB_CHAPTER_INDEX_END = 3;
-const STATUS_TYPE_ACTIVE = 'active';
-
 const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
+	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
+	const { min_length, start_index, end_index } = tooltip_data || {};
+
 	const columnArray = [
 		{
 			Header   : 'CHAPTER NAME',
@@ -32,14 +31,14 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			accessor : (item) => (
 				<div className={styles.pill_box}>
 					{item?.sub_chapters
-						?.slice(SUB_CHAPTER_INDEX_START, SUB_CHAPTER_INDEX_END)
+						?.slice(start_index, end_index)
 						.map((singlesub) => (
 							<Pill key={singlesub?.name} size="md" className={styles.pill}>
 								{startCase(singlesub?.sub_chapter_name)}
 							</Pill>
 						))}
 
-					{item?.sub_chapters?.length > MIN_SUB_CHAPTERS_LENGTH ? (
+					{item?.sub_chapters?.length > min_length ? (
 						<Pill>
 							<Tooltip
 								content={<TooltipContent item={item?.sub_chapters} source="sub_chapter_name" />}
@@ -50,9 +49,9 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 								styles={{ marginBottom: '24px' }}
 							>
 								+
-								{item.sub_chapters.length - SUB_CHAPTER_INDEX_END}
+								{item.sub_chapters.length - end_index}
 								{' '}
-								SUB_CHAPTERS
+								Sub chapters
 							</Tooltip>
 						</Pill>
 					) : null}
@@ -77,7 +76,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			Header   : 'STATUS',
 			accessor : (item) => (
 				<Pill
-					className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
+					className={item?.status === default_active_tab ? styles.active : styles.inactive}
 				>
 					{startCase(item?.status) || '-'}
 				</Pill>
@@ -86,7 +85,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 
 	];
 
-	if (activeTab === STATUS_TYPE_ACTIVE) {
+	if (activeTab === default_active_tab) {
 		return [...columnArray,
 			{
 				Header   : 'ACTION',

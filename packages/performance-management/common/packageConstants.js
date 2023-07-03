@@ -5,7 +5,14 @@ const PACKAGE_CONSTANTS = {
 		default_total_count  : 10,
 	},
 
-	DEFAULT_ACTIVE_TAB: 'active',
+	tooltip_data: {
+		min_length  : 3,
+		start_index : 0,
+		end_index   : 3,
+
+	},
+
+	default_active_tab: 'active',
 
 };
 export default PACKAGE_CONSTANTS;
