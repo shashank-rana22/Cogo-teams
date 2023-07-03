@@ -1,13 +1,15 @@
-import { Button, cl, Popover } from '@cogoport/components';
-import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
+import { Button, cl } from '@cogoport/components';
+import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
+import useTransferChat from '../../../../../hooks/useTransferChat';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
+import RightButton from './RightButton';
 import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
@@ -30,29 +32,19 @@ function Header({
 	showBotMessages = false,
 	userId = '',
 	isomniChannelAdmin = false,
-	setDisableButton = () => {},
-	disableButton = '',
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
+	viewType = '',
+	firestore,
+	escalateToSupplyRm,
+	supplierLoading,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
-	const [openPopover, setOpenPopover] = useState(false);
-	const { chat_tags = [] } = activeMessageCard || {};
 
-	const {
-		mobile_no = '',
-		channel_type,
-		has_requested_by = {},
-		lead_user_id = '',
-		user_id = '',
-		sender = '',
-		id = '',
-	} = formattedData || {};
-
-	const { agent_id = '', agent_name = '' } = has_requested_by || {};
+	const { requestToJoinGroup, dissmissTransferRequest } = useTransferChat({ firestore, activeMessageCard });
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -62,150 +54,30 @@ function Header({
 				assignLoading,
 				assignChat,
 				support_agent_id,
+				accountType: formattedData?.account_type,
 			},
 		});
 	};
 
-	const assignButtonAction = (type) => {
-		setDisableButton(type);
-		if (type === 'assign') {
-			setOpenPopover(false);
-			openAssignModal();
-			return;
-		}
-		let agentIdPayload = {};
+	const { chat_tags = [] } = activeMessageCard || {};
 
-		if (type === 'approve_request') {
-			agentIdPayload = { agent_id };
-		} else if (type === 'stop_and_assign') {
-			agentIdPayload = { agent_id: userId };
-		}
+	const {
+		mobile_no = '',
+		channel_type,
+		has_requested_by = {},
+		group_members = [],
+		organization_id = '',
+		user_id,
+		account_type = '',
+	} = formattedData || {};
 
-		assignChat({ ...agentIdPayload, is_allowed_to_chat: true });
-	};
-
-	const requestAssignPaylod = () => {
-		const payload = {
-			lead_user_id    : lead_user_id || undefined,
-			user_id         : user_id || undefined,
-			sender          : sender || undefined,
-			channel         : channel_type,
-			channel_chat_id : id,
-		};
-		requestForAssignChat(payload);
-	};
-	const renderPopoverOption = () => (
-		<div className={styles.button_container}>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_buttons}
-				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={assignLoading && disableButton === 'stop_and_assign'}
-			>
-				Assign to me
-			</Button>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_buttons}
-				onClick={() => assignButtonAction('auto_assign')}
-				loading={assignLoading && disableButton === 'auto_assign'}
-			>
-				Auto Assign
-			</Button>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_button}
-				onClick={() => assignButtonAction('assign')}
-				loading={assignLoading && disableButton === 'assign'}
-			>
-				Assign
-			</Button>
-		</div>
-	);
-
-	const renderRightButton = () => {
-		const hasAnyRequests = !!agent_id;
-		if (canMessageOnBotSession) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					disabled
-					className={styles.styled_button}
-				>
-					Assign
-				</Button>
-			);
-		}
-		if (!showBotMessages) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.styled_button}
-					disabled={!hasPermissionToEdit}
-					onClick={openAssignModal}
-				>
-					Assign
-				</Button>
-			);
-		}
-		if (isomniChannelAdmin && !hasAnyRequests) {
-			return (
-				<Popover
-					placement="bottom"
-					trigger="click"
-					render={renderPopoverOption()}
-					visible={openPopover}
-					onClickOutside={() => setOpenPopover(false)}
-				>
-					<Button
-						themeType="secondary"
-						size="md"
-						className={styles.styled_button}
-						onClick={() => setOpenPopover(true)}
-					>
-						Assign To
-					</Button>
-				</Popover>
-			);
-		}
-		if (isomniChannelAdmin && hasAnyRequests) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.styled_button}
-					onClick={() => assignButtonAction('approve_request')}
-					loading={assignLoading}
-				>
-					Assign to
-					{' '}
-					{agent_name}
-				</Button>
-			);
-		}
-		if (!isomniChannelAdmin) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					disabled={hasAnyRequests}
-					className={styles.styled_button}
-					onClick={requestAssignPaylod}
-					loading={requestAssignLoading}
-				>
-					{hasAnyRequests ? 'Requested' : 'Request for Assign'}
-				</Button>
-			);
-		}
-		return null;
+	const handleEsclateClick = () => {
+		escalateToSupplyRm({
+			payload: {
+				organization_id,
+				organization_user_id: user_id,
+			},
+		});
 	};
 
 	const handleUpdateUser = () => {
@@ -214,77 +86,144 @@ function Header({
 		}
 	};
 
+	const { agent_id = '', agent_name = '' } = has_requested_by || {};
+
+	const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
+
+	const hasRequests = !!agent_id;
+
+	const isGroupFormed = !isEmpty(group_members);
+
+	const showApprovePanel = (hasRequests && hasAccessToApprove);
+
+	const isPartOfGroup = group_members?.includes(userId);
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.flex_space_between}>
-				<div className={styles.flex}>
-					<TagsPopOver
-						prevtags={chat_tags}
-						headertags={headertags}
-						setheaderTags={setheaderTags}
-						isVisible={isVisible}
-						setIsVisible={setIsVisible}
-						updateChat={updateChat}
-						loading={loading}
-						tagOptions={tagOptions}
-						hasPermissionToEdit={hasPermissionToEdit}
-					/>
-					<ShowContent
-						list={chat_tags}
-						showMorePlacement="right"
-						hasPermissionToEdit={hasPermissionToEdit}
-					/>
+		<div className={styles.outer_container}>
+			<div className={styles.container}>
+				<div className={styles.flex_space_between}>
+					<div className={styles.flex}>
+						<TagsPopOver
+							prevtags={chat_tags}
+							headertags={headertags}
+							setheaderTags={setheaderTags}
+							isVisible={isVisible}
+							setIsVisible={setIsVisible}
+							updateChat={updateChat}
+							loading={loading}
+							tagOptions={tagOptions}
+							hasPermissionToEdit={hasPermissionToEdit}
+						/>
+						<ShowContent
+							list={chat_tags}
+							showMorePlacement="right"
+							hasPermissionToEdit={hasPermissionToEdit}
+						/>
+					</div>
+					<div
+						className={styles.flex}
+					>
+						{!isEmpty(filteredSpectators) && (
+							<Assignes filteredSpectators={filteredSpectators} />
+						)}
+						{activeAgentName && (
+							<div className={styles.active_agent}>
+								<AssigneeAvatar
+									name={activeAgentName}
+									type="active"
+									key={activeAgentName}
+								/>
+							</div>
+						)}
+						<RightButton
+							assignChat={assignChat}
+							openAssignModal={openAssignModal}
+							requestToJoinGroup={requestToJoinGroup}
+							formattedData={formattedData}
+							requestForAssignChat={requestForAssignChat}
+							userId={userId}
+							assignLoading={assignLoading}
+							requestAssignLoading={requestAssignLoading}
+							showBotMessages={showBotMessages}
+							viewType={viewType}
+							supportAgentId={support_agent_id}
+							isGroupFormed={isGroupFormed}
+							accountType={account_type}
+							isPartOfGroup={isPartOfGroup}
+						/>
+						{isomniChannelAdmin && channel_type === 'whatsapp' && (
+							<div
+								role="button"
+								tabIndex="0"
+								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+								onClick={handleUpdateUser}
+							>
+								<IcMProfile
+									className={cl`${styles.profile_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+								/>
+								<IcMRefresh className={cl`${styles.update_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+								/>
+							</div>
+						)}
+					</div>
 				</div>
-				<div
-					className={styles.flex}
-				>
-					{!isEmpty(filteredSpectators) && (
-						<Assignes filteredSpectators={filteredSpectators} />
-					)}
-					{activeAgentName && (
-						<div className={styles.active_agent}>
-							<AssigneeAvatar
-								name={activeAgentName}
-								type="active"
-								key={activeAgentName}
-							/>
-						</div>
-					)}
-					<div>{renderRightButton()}</div>
-					{isomniChannelAdmin && channel_type === 'whatsapp' && (
-						<div
-							role="button"
-							tabIndex="0"
-							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
-							onClick={handleUpdateUser}
+				<div className={styles.flex_space_between}>
+					<HeaderName formattedData={formattedData} />
+					<div className={styles.button_flex}>
+						{account_type === 'service_provider' && (
+							<Button
+								themeType="secondary"
+								size="sm"
+								disabled={!hasPermissionToEdit || canMessageOnBotSession}
+								onClick={handleEsclateClick}
+								loading={supplierLoading}
+								className={styles.escalate_button}
+							>
+								escalate
+							</Button>
+						)}
+						<Button
+							themeType="primary"
+							size="sm"
+							disabled={!hasPermissionToEdit || canMessageOnBotSession}
+							onClick={() => setOpenModal({
+								type : 'mark_as_closed',
+								data : {
+									updateChat,
+									loading,
+								},
+							})}
 						>
-							<IcMProfile
-								className={cl`${styles.profile_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
-							/>
-							<IcMRefresh className={cl`${styles.update_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
-							/>
-						</div>
-					)}
+							Mark as Closed
+						</Button>
+					</div>
 				</div>
 			</div>
-			<div className={styles.flex_space_between}>
-				<HeaderName formattedData={formattedData} />
-				<Button
-					themeType="primary"
-					size="sm"
-					disabled={!hasPermissionToEdit || canMessageOnBotSession}
-					onClick={() => setOpenModal({
-						type : 'mark_as_closed',
-						data : {
-							updateChat,
-							loading,
-						},
-					})}
-				>
-					Mark as Closed
-				</Button>
+			<div className={styles.approve_req} style={{ height: showApprovePanel ? '30px' : '0' }}>
+				{showApprovePanel && (
+					<>
+						<text className={styles.agent_name}>
+							{`${agent_name || 'A agent'} 
+						has requested you to transfer chat`}
+						</text>
+						<IcCFtick
+							className={styles.icon_styles}
+							cursor={assignLoading ? 'disabled' : 'pointer'}
+							onClick={() => {
+								if (!assignLoading) {
+									assignChat({ payload: { agent_id, is_allowed_to_chat: true } });
+								}
+							}}
+						/>
+						<IcCFcrossInCircle
+							className={styles.icon_styles}
+							cursor="pointer"
+							onClick={dissmissTransferRequest}
+						/>
+					</>
+				)}
 			</div>
 		</div>
 	);

@@ -1,15 +1,24 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const CHARGABLE_WEIGHT_FACTOR_TO_CONVERT_VOLUME = 166.67;
+const KEY_INCREMENTOR = 1;
+const ONLY_ONE_ITEM = 1;
+const MORE_THAN_ONE_PACKAGE_CHECK = 1;
+const ROUND_VALUE = 2;
+const SHOW_MORE_CHECK = 1;
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const valueForInput = Array.isArray(packages) && isEmpty(packages)
+		? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
-	const chargableWeight = Math.max(detail.volume * 166.67, detail?.weight);
+	const chargableWeight = Math.max(detail.volume * CHARGABLE_WEIGHT_FACTOR_TO_CONVERT_VOLUME, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -24,26 +33,25 @@ export const renderValue = (label, detail) => {
 	const volume = ` ${detail.volume} cbm`;
 
 	const packageDetails = () => {
-		if (packages?.length > 1) {
+		if (packages?.length > MORE_THAN_ONE_PACKAGE_CHECK) {
 			return (
 				<Tooltip
 					placement="bottom"
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
+							{(packages || []).map((item, index) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={`${index + KEY_INCREMENTOR}`}>{values}</div>;
 							})}
 						</div>
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
-						} more`}
+						{`Package: ${inputValue} + ${packages.length - SHOW_MORE_CHECK} more`}
 
 					</div>
 				</Tooltip>
@@ -74,10 +82,10 @@ export const renderValue = (label, detail) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
+				<a href={item} target="_blank" rel="noreferrer" key={`${key + KEY_INCREMENTOR}`}>
 					Click to view certificate
 					&nbsp;
-					{key + 1}
+					{key + KEY_INCREMENTOR}
 					&nbsp;
 					<IcMOpenlink />
 					<br />
@@ -97,7 +105,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.containers_count === 1) {
+			if (detail.containers_count === ONLY_ONE_ITEM) {
 				return '1 Container';
 			}
 
@@ -107,7 +115,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.packages_count === 1) {
+			if (detail.packages_count === ONLY_ONE_ITEM) {
 				return '1 Package';
 			}
 
@@ -117,7 +125,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === ONLY_ONE_ITEM) {
 				return '1 Truck';
 			}
 
@@ -135,7 +143,7 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (isEmpty(packages)) {
 				return null;
 			}
 			return packageDetails();
@@ -144,7 +152,7 @@ export const renderValue = (label, detail) => {
 			return ` ${volume} ${detail.service_type === 'ftl_freight_service'
 				|| detail.service_type === 'haulage_freight_service'
 				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
+				: `, Chargeable Weight: ${chargableWeight.toFixed(ROUND_VALUE)} kg`
 			}`;
 		case 'weight':
 			return ` ${detail.weight} kgs`;
@@ -223,9 +231,9 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(ROUND_VALUE)} USD`;
 		case 'hs_code':
-			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
+			return detail?.hs_code?.hs_code_name;
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
 		default:

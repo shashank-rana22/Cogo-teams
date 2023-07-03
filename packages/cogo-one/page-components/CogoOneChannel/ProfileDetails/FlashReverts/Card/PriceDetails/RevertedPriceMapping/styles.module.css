@@ -1,0 +1,28 @@
+.price_label {
+	width: fit-content;
+	padding-right: 8px;
+	font-size: 14px;
+	color: #4f4f4f;
+
+	span {
+		margin-top: 10px;
+		font-weight: 600;
+		color: #4f4f4f;
+	}
+}
+
+.container {
+	width: 100%;
+}
+
+.rate_revert_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.closed_status {
+	padding-left: 8px;
+	font-size: 12px;
+}

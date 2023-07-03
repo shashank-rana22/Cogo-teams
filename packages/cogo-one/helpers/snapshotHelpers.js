@@ -82,14 +82,16 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoading, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
+	activeSubTab,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
-	if (viewType === 'shipment_view') {
+	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
+
+	if (activeSubTab !== 'all' || viewType === 'shipment_view') {
 		return;
 	}
-	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
 
 	if (canShowPinnedChats) {
 		setLoading(true);

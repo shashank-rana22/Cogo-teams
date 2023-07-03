@@ -161,6 +161,11 @@
 	font-weight: 600;
 }
 
+.tooltip_text {
+	word-break: break-word;
+	word-wrap: break-word;
+}
+
 .jobs {
 	display: flex;
 	gap: 4px;

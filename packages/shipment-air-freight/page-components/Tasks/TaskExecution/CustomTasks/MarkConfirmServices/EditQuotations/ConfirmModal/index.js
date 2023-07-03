@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 function ConfirmModal({
 	confirmModal,
 	setConfirmModal,
-	airInput,
-	localAirInput,
+	airServiceFormValues,
+	airLocalServiceFormValues,
 	handleSubmit,
 	onCreate,
 	reallocationFunc = () => {},
@@ -54,7 +54,7 @@ function ConfirmModal({
 					</div>
 					<div className={styles.container}>
 						<div className={styles.title}>For Air Freight</div>
-						{airInput?.airline_id && (
+						{airServiceFormValues?.airline_id && (
 							<div className={styles.info}>
 								<div className={styles.description}>
 									<div className={styles.label}>Airline:</div>
@@ -62,7 +62,7 @@ function ConfirmModal({
 										<AsyncSelect
 											name="airline_id"
 											asyncKey="list_operators"
-											value={airInput.airline_id}
+											value={airServiceFormValues.airline_id}
 											placeholder="Select Partner User"
 											disabled
 											params={{
@@ -80,7 +80,7 @@ function ConfirmModal({
 									<AsyncSelect
 										name="service_provider_id"
 										asyncKey="organizations"
-										value={airInput.service_provider_id}
+										value={airServiceFormValues.service_provider_id}
 										disabled
 										placeholder="Select Partner User"
 									/>
@@ -88,9 +88,9 @@ function ConfirmModal({
 							</div>
 						</div>
 
-						{localAirInput?.airline_id && (
+						{airLocalServiceFormValues?.origin_airline_id && (
 							<>
-								<div className={styles.title}>For Air Freight Local</div>
+								<div className={styles.title}>For Air Freight Origin Local</div>
 								<div className={styles.info}>
 									<div className={styles.description}>
 										<div className={styles.label}>Airline:</div>
@@ -98,7 +98,7 @@ function ConfirmModal({
 											<AsyncSelect
 												name="local_airline_id"
 												asyncKey="list_operators"
-												value={localAirInput.airline_id}
+												value={airLocalServiceFormValues.origin_airline_id}
 												placeholder="Select Partner User"
 												disabled
 												params={{
@@ -115,7 +115,42 @@ function ConfirmModal({
 											<AsyncSelect
 												name="local_service_provider_id"
 												asyncKey="organizations"
-												value={localAirInput.service_provider_id}
+												value={airLocalServiceFormValues.origin_service_provider_id}
+												disabled
+											/>
+										</div>
+									</div>
+								</div>
+							</>
+						)}
+						{airLocalServiceFormValues?.destination_airline_id && (
+							<>
+								<div className={styles.title}>For Air Freight Destination Local</div>
+								<div className={styles.info}>
+									<div className={styles.description}>
+										<div className={styles.label}>Airline:</div>
+										<div className={styles.controller}>
+											<AsyncSelect
+												name="local_airline_id"
+												asyncKey="list_operators"
+												value={airLocalServiceFormValues.destination_airline_id}
+												placeholder="Select Partner User"
+												disabled
+												params={{
+													filters: { operator_type: 'airline', status: 'active' },
+												}}
+											/>
+										</div>
+									</div>
+								</div>
+								<div className={styles.info}>
+									<div className={styles.description}>
+										<div className={styles.label}>Service Provider:</div>
+										<div className={styles.controller}>
+											<AsyncSelect
+												name="local_service_provider_id"
+												asyncKey="organizations"
+												value={airLocalServiceFormValues.destination_service_provider_id}
 												disabled
 											/>
 										</div>

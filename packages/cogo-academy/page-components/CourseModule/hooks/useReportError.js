@@ -18,13 +18,13 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 			const payload = {
 				type          : 'platform_notification',
 				service       : 'user',
-				template_name : 'api_error_request_response',
+				template_name : 'cogoacademy_coursemodule_api_error_request_response',
 				provider_name : 'cogoport',
 				user_id       : id,
 				service_id    : id,
 				variables     : {
 					description,
-					image_url         : finalUrl,
+					image_url         : finalUrl || error_screenshot_url,
 					status_code       : 1,
 					session_data      : '',
 					requested_payload : '',

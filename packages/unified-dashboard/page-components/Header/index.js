@@ -1,7 +1,7 @@
 import { MultiSelect, Toggle } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncListCogoEntity } from '@cogoport/forms/utils/getAsyncFields';
-import { IcCCountryIndia, IcCCountryNetherland, IcCCountrySingapore } from '@cogoport/icons-react';
+import { IcCCountryIndia, IcCCountryNetherland, IcCCountrySingapore, IcCCountryVietnam } from '@cogoport/icons-react';
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
@@ -12,7 +12,7 @@ const FLAG_MAPPING = {
 	201 : <IcCCountryNetherland />,
 	301 : <IcCCountryIndia />,
 	401 : <IcCCountrySingapore />,
-	501 : '',
+	501 : <IcCCountryVietnam />,
 };
 
 function Header({ headerFilters, setHeaderFilters }) {

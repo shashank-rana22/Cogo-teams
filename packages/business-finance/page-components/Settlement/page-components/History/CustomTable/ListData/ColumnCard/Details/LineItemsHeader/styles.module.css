@@ -1,0 +1,57 @@
+.header {
+	display: flex;
+	padding: 16px 4px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	border-bottom: 1px solid var(--color-accent-orange-2);
+}
+
+.doc_number {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.doc_amount {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.settled_amount {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.sid {
+	flex: 0.5;
+	width: calc(0.5*(100 / 12));
+}
+
+.tds {
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
+}
+
+.nostro {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.current_balance {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.doc_date {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.status {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.settlemet_status {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
