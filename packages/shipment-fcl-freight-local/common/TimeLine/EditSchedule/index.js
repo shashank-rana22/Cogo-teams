@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { cl, Modal, Button } from '@cogoport/components';
 import { DatepickerController } from '@cogoport/forms';
 
 import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
@@ -14,7 +14,7 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 
 	return (
 		<div className={styles.form_item}>
-			<div className={`${styles.label} ${required ? styles.required : ''}`}>
+			<div className={cl`${styles.label} ${required ? styles.required : ''}`}>
 				{label}
 			</div>
 

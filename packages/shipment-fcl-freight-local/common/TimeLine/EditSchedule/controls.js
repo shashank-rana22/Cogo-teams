@@ -9,12 +9,10 @@ const controls = ({ primary_service, departureDate }) => {
 		{
 			name    : 'schedule_departure',
 			label   : 'Actual time of departure',
-			maxDate : null,
 		},
 		{
 			name    : 'schedule_arrival',
 			label   : 'Actual time of arrival',
-			maxDate : null,
 			minDate : departureDate,
 			disable : false,
 		},
