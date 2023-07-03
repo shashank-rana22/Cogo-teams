@@ -1,11 +1,13 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import { SERVICE_OPTIONS } from '../../constants';
 
 import styles from './styles.module.css';
 
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
+	const { totalDueOutstanding } = formData || {};
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 	const geo = getGeoConstants();
 	const eligibleEntities = geo.navigations.dunnings.campaign_management.eligible_entites;
@@ -28,6 +30,19 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			value : currency,
 		}
 	));
+
+	function unformatNumber(string:string) {
+		if (isEmpty(string)) {
+			return undefined;
+		}
+
+		// Remove any thousands separators (commas)
+		const unformattedString = string.replaceAll(',', '');
+
+		// Convert the string to a number
+		const number = parseFloat(unformattedString);
+		return number;
+	}
 
 	return [
 		{
@@ -145,13 +160,22 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					span        : 1,
 				},
 				{
-					name               : 'totalDueOutstanding',
-					placeholder        : 'Insert Amount',
-					type               : 'input',
-					onlyNumbersAllowed : true,
-					prefix             : null,
-					disabled           : isEditMode,
-					span               : 9,
+					name        : 'totalDueOutstanding',
+					placeholder : 'Insert Amount',
+					type        : 'input',
+					onChange    : (e:string) => {
+						const unformattedNumber = unformatNumber(e);
+						if (!Number.isNaN(unformattedNumber)) {
+							setFormData({
+								...formData,
+								totalDueOutstanding: unformattedNumber,
+							});
+						}
+					},
+					value    : totalDueOutstanding ? Number(totalDueOutstanding)?.toLocaleString() : undefined,
+					prefix   : null,
+					disabled : isEditMode,
+					span     : 9,
 				},
 			],
 		},

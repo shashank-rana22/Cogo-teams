@@ -117,7 +117,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	useEffect(() => {
 		// pre-filling all the details in case of updating
 		if (isEditMode) {
-			const stringDate = oneTimeDate || oneTimeDateSchedule;
+			const stringDate = oneTimeDateSchedule;
 			const formattedOneTimeDate = new Date(stringDate);
 			const timeArray = (scheduleTime)?.split(':');
 			const scheduledHourValue = timeArray?.[0];
@@ -145,7 +145,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 			}));
 		}
 	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
-		week, isEditMode, setFormData, oneTimeDate,
+		week, isEditMode, setFormData,
 		dueOutstandingCurrency,
 		organizationStakeholderIds,
 		serviceTypes,
