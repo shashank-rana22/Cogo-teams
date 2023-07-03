@@ -15,9 +15,11 @@ function SendActions({
 	finalUrl = '',
 	draftMessage,
 	formattedData = {},
+	viewType = '',
 }) {
-	const { channel_type = '' } = formattedData;
-	const hasNopermissionToSend = !hasPermissionToEdit || messageLoading
+	const { channel_type = '', session_type } = formattedData;
+
+	const hasNoPermissionToSend = !hasPermissionToEdit || messageLoading
 	|| (isEmpty(draftMessage?.trim()) && !finalUrl);
 
 	const {
@@ -25,21 +27,24 @@ function SendActions({
 		loading = false,
 	} = useSendPromotionalRate({ formattedData });
 
+	const isSendPromotionalRate = (session_type === 'bot' || session_type === 'admin')
+ && channel_type === 'whatsapp' && viewType !== 'supply';
+
 	return (
 		<div className={styles.send_messages}>
-			{channel_type === 'whatsapp' && (
+			{isSendPromotionalRate && (
 				<Button
 					size="sm"
 					themeType="primary"
 					className={styles.promotional_rate}
 					loading={loading}
-					disabled={!hasPermissionToEdit}
+					disabled={!isSendPromotionalRate}
 					onClick={() => {
-						if (hasPermissionToEdit) {
+						if (isSendPromotionalRate) {
 							sendPromotionalRate();
 						}
 					}}
-					style={{ cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer' }}
+					style={{ cursor: !isSendPromotionalRate ? 'not-allowed' : 'pointer' }}
 				>
 					Send Promotional Rate
 				</Button>
@@ -61,7 +66,7 @@ function SendActions({
 						sendChatMessage(scrollToBottom);
 					}
 				}}
-				style={{ cursor: hasNopermissionToSend ? 'not-allowed' : 'pointer' }}
+				style={{ cursor: hasNoPermissionToSend ? 'not-allowed' : 'pointer' }}
 			/>
 		</div>
 	);

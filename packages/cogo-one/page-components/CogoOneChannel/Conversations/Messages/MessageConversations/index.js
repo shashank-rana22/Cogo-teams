@@ -38,6 +38,7 @@ function MessageConversations({
 	formattedData = {},
 	setRaiseTicketModal = () => {},
 	canMessageOnBotSession,
+	viewType = '',
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
@@ -152,6 +153,7 @@ function MessageConversations({
 				fileIcon={fileIcon}
 				finalUrl={finalUrl}
 				formattedData={formattedData}
+				viewType={viewType}
 			/>
 		</div>
 	);

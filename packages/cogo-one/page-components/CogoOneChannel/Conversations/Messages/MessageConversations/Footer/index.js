@@ -42,6 +42,7 @@ function Footer({
 	fileIcon,
 	finalUrl = '',
 	formattedData = {},
+	viewType = '',
 }) {
 	const { id = '', channel_type = '' } = formattedData;
 
@@ -201,6 +202,7 @@ function Footer({
 						finalUrl={finalUrl}
 						draftMessage={draftMessage}
 						formattedData={formattedData}
+						viewType={viewType}
 					/>
 
 				</div>
