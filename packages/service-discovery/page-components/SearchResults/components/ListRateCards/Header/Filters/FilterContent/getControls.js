@@ -1,6 +1,9 @@
+import fclControls from '../../../../../configurations/fcl/form-controls';
+import haulageControls from '../../../../../configurations/haulage-freight/form-controls';
+import lclControls from '../../../../../configurations/lcl/form-controls';
+import trailerControls from '../../../../../configurations/trailer/form-controls';
+
 import EXTRA_FILTERS from './extra-filter-controls';
-import fclControls from './fcl-controls';
-import lclControls from './lcl-controls';
 
 export const MAIN_CONTROLS_MAPPING = {
 	fcl_freight: {
@@ -20,12 +23,12 @@ export const MAIN_CONTROLS_MAPPING = {
 	},
 	trailer_freight: {
 		label         : 'Container Details',
-		mainControls  : fclControls,
+		mainControls  : trailerControls,
 		extraControls : [],
 	},
 	haulage_freight: {
 		label         : 'Container Details',
-		mainControls  : fclControls,
+		mainControls  : haulageControls,
 		extraControls : [],
 	},
 	ftl_freight: {

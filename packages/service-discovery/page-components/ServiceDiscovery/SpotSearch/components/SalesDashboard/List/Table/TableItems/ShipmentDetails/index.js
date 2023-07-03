@@ -1,4 +1,4 @@
-import { Pill, Tooltip, Popover } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArray';
@@ -7,13 +7,13 @@ import RenderTruckShipments from './renderTruckShipments';
 import styles from './styles.module.css';
 
 const renderShipment = (itemData, field) => {
-	const { shipment_type = '-', service_type = '-', service_details = {} } = itemData || {};
+	const { shipment_type = '-', service_type = '-', service_details, services } = itemData || {};
 	const { commodityKey = '' } = field || {};
 
 	const isTruckType =	['ftl_freight', 'ltl_freight'].includes(shipment_type)
 		|| ['ftl_freight', 'ltl_freight'].includes(service_type);
 
-	const load = getLoadArray(service_type, service_details);
+	const load = getLoadArray(service_type, service_details || services);
 
 	if (
 		['shipment_cargo_details', 'quotation_cargo_details', 'spot_search_cargo_details']

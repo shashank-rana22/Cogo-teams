@@ -4,7 +4,7 @@ import React from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
-import getTableColumns from './get-table-columns';
+import useGetTableColumns from './get-table-columns';
 import styles from './styles.module.css';
 
 function TableComponent(props) {
@@ -21,7 +21,7 @@ function TableComponent(props) {
 
 	const { list = [], page, total_count } = data || {};
 
-	const columns = getTableColumns({ activeTab, fields });
+	const columns = useGetTableColumns({ activeTab, fields });
 
 	if (!loading && isEmpty(list)) {
 		return (

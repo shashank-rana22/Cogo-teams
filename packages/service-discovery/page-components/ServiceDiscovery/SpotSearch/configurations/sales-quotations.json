@@ -56,14 +56,10 @@
 			"func": "renderCreated"
 		},
 		{
-			"key": "validity_end",
-			"label": "Expiry",
-			"func": "renderValidityEnd"
-		},
-		{
-			"key": "booking_status",
-			"label": "Booking Status",
-			"func": "renderBookingStatus"
+			"key": "quotations",
+			"label": "",
+			"btnLabel":"Show Rates",
+			"func": "renderButton"
 		}
 	],
 	"filterProps": {

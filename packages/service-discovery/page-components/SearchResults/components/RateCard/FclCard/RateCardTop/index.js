@@ -8,6 +8,19 @@ import styles from './styles.module.css';
 
 const SHOW_TAG_IN_SERVICES = ['fcl_freight', 'fcl_freight_local'];
 
+const LIKE_DISLIKE_ALLOWED = [
+	'fcl_freight',
+	'air_freight',
+	'ftl_freight',
+	'ltl_freight',
+	'lcl_freight',
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'haulage_freight',
+	'trailer_freight',
+];
+
 function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {} }) {
 	const { shipping_line = {}, card } = rateCardData;
 
@@ -49,7 +62,9 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 
 			<div style={{ display: 'flex', marginRight: 20 }}>
 
-				<LikeDislike rateCardData={rateCardData} detail={detail} />
+				{LIKE_DISLIKE_ALLOWED.includes(detail?.search_type) ? (
+					<LikeDislike rateCardData={rateCardData} detail={detail} />
+				) : null}
 
 				<IcMShare width="20px" height="16px" />
 			</div>

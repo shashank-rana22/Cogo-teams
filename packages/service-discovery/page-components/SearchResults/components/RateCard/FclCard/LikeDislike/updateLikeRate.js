@@ -1,25 +1,27 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 const URL = '/create_spot_search_rate_feedback';
 
-const useUpdateLikeRate = ({ rateCardData, detail }) => {
+const useUpdateLikeRate = ({ rate, detail, setLikeState = () => {} }) => {
 	const {
 		general: { query = {} },
 	} = useSelector((state) => state);
 
-	const { search_id = '' } = query;
+	const { spot_search_id = '' } = query;
 
 	const [loading, setLoading] = useState(false);
 
-	const [{ loading : apiLaoding }, trigger] = useRequest({
+	const [{ loading : apiLoading }, trigger] = useRequest({
 		url    : URL,
 		method : 'POST',
 	}, { manual: true });
 
 	const handleLikeRateCard = async () => {
-		if (rateCardData.is_liked || loading) {
+		if (rate.is_liked || loading) {
 			return;
 		}
 
@@ -27,17 +29,25 @@ const useUpdateLikeRate = ({ rateCardData, detail }) => {
 			setLoading(true);
 
 			const params = {
-				id                  : search_id,
+				id                  : spot_search_id,
 				is_liked            : true,
-				selected_card       : rateCardData.card,
+				selected_card       : rate.card,
 				performed_by_org_id : detail.importer_exporter.id,
 			};
 
 			await trigger({
 				data: params,
 			});
-		} catch (err) {
-			console.log(err);
+
+			setLikeState({
+				is_liked    : true,
+				likes_count : (rate.likes_count || 0) + 1,
+				is_disliked : false,
+			});
+		} catch (error) {
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 
 		setLoading(false);
@@ -46,6 +56,7 @@ const useUpdateLikeRate = ({ rateCardData, detail }) => {
 	return {
 		handleLikeRateCard,
 		loading,
+		apiLoading,
 	};
 };
 

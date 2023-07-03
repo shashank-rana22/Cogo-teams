@@ -1,12 +1,12 @@
 .container {
 	cursor: pointer;
 	position: relative;
-	color: #828282;
+	color: #fff;
 	margin-right: 28px;
 }
 
 .container.active {
-	color: #356efd;
+	color: #4f4f4f;
 }
 
 .container.dislike {

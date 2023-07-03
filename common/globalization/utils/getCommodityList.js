@@ -4,6 +4,7 @@ import {
 	COMMODITY_NAME_MAPPING,
 	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
 	LCL_FRIEGHT_COMMODITIES,
+	LOCAL_CONTAINER_COMMODITY_MAPPINGS,
 } from '../constants/commodities';
 
 const getCommoditiesDetails = (list = [], isNullValue = true) => {
@@ -28,6 +29,11 @@ const getCommodityList = (type, container_type) => {
 			return getCommoditiesDetails(FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType] || []);
 		case 'lcl_freight':
 			return getCommoditiesDetails(LCL_FRIEGHT_COMMODITIES);
+		case 'local':
+			return getCommoditiesDetails(
+				LOCAL_CONTAINER_COMMODITY_MAPPINGS[containerType],
+				false,
+			);
 		default: return [];
 	}
 };

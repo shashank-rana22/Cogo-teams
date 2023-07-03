@@ -283,3 +283,12 @@ export const LCL_FRIEGHT_COMMODITIES = [
 	'corrosives-8',
 	'miscellaneous_dangerous_goods-9',
 ];
+
+export const LOCAL_CONTAINER_COMMODITY_MAPPINGS = {
+	standard  : [null, ...HAZ_CLASSES],
+	refer     : [null],
+	open_top  : [null],
+	flat_rack : [null],
+	open_side : [null],
+	iso_tank  : [null, ...HAZ_CLASSES],
+};
