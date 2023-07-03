@@ -34,9 +34,9 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 		try {
 			await trigger({
 				params: {
-					manager_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8' || id,
+					manager_id : id,
 					label      : isReportingManager ? 'reporting_manager_wise' : 'all_employee',
-					level      : 'vertical_head',
+					level,
 					end_date   : formattedDate(lastDate),
 					start_date : formattedDate(firstDate),
 					filters    : { ...filters },
@@ -52,9 +52,9 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 	}, [level, trigger, filters, ratingCycle, isReportingManager, id]);
 
 	useEffect(() => {
-		// if (level) {
-		fetchRatingReviewDetails();
-		// }
+		if (level) {
+			fetchRatingReviewDetails();
+		}
 	}, [fetchRatingReviewDetails, level]);
 
 	return { data, loading, filters, setFilters, isReportingManager };

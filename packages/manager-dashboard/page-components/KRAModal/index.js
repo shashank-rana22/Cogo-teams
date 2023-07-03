@@ -15,7 +15,9 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 		loading,
 	} = useEmployeeKraDetails({ employeeId, ratingCycle });
 
-	const { list = [], modification_history = [] } = data;
+	const { list : ld = [], modification_history = [] } = data;
+
+	const list = [...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld];
 
 	return (
 		<Modal
