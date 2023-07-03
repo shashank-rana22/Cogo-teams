@@ -13,20 +13,24 @@ const HONORIFICS_OPTIONS = [
 		label : 'Ms.',
 		value : 'Ms.',
 	},
+	{
+		label : 'Dr.',
+		value : 'Dr.',
+	},
 ];
 
 const RELATION_TYPE_OPTIONS = [
 	{
-		label : 'Son of',
-		value : 'Son of',
+		label : 'Father',
+		value : 'Father',
 	},
 	{
-		label : 'Daughter of',
-		value : 'Daughter of',
+		label : 'Mother',
+		value : 'Mother',
 	},
 	{
-		label : 'Wife of',
-		value : 'Wife of',
+		label : 'Husband',
+		value : 'Husband',
 	},
 ];
 
@@ -49,7 +53,7 @@ const controls = () => [
 	},
 	{
 		name        : 'relation_type',
-		label       : 'Relation Type',
+		label       : 'Relation with you',
 		type        : 'select',
 		placeholder : 'Relation',
 		options     : RELATION_TYPE_OPTIONS,
@@ -57,7 +61,7 @@ const controls = () => [
 	},
 	{
 		name        : 'relation_person_name',
-		label       : 'Relation Person Name',
+		label       : 'Name of relative',
 		type        : 'input',
 		placeholder : 'Full Name',
 		rules       : { required: 'This is required' },
@@ -122,7 +126,7 @@ const controls = () => [
 	},
 	{
 		name        : 'emergency_contact_details',
-		label       : 'Emergency Contact Number',
+		label       : 'Relative contact number',
 		type        : 'mobilenumber',
 		placeholder : 'Number',
 		rules       : { required: 'This is required' },

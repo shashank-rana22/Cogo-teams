@@ -4,15 +4,16 @@ const controls = [
 	{
 		name        : 'name',
 		type        : 'text',
-		label       : 'Name',
+		label       : 'Name*',
 		placeholder : 'Name of the employee',
 		rules       : {
 			required: 'name is required',
 		},
 	},
+
 	{
 		name        : 'personal_email',
-		label       : 'Personal Email ID',
+		label       : 'Personal Email ID*',
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
 		rules       : {
@@ -23,9 +24,10 @@ const controls = [
 			},
 		},
 	},
+
 	{
 		name        : 'mobile_number',
-		label       : 'Contact Details',
+		label       : 'Contact Details*',
 		type        : 'mobile-number-select',
 		inputType   : 'number',
 		placeholder : 'Mobile Number*',
@@ -33,22 +35,25 @@ const controls = [
 			required: 'Mobile Number is required',
 		},
 	},
+
 	{
 		name        : 'employee_code',
 		type        : 'text',
 		label       : 'Employee ID',
 		placeholder : 'Employee Id',
 	},
+
 	{
 		name        : 'designation',
 		type        : 'select',
-		label       : 'Role',
+		label       : 'Role*',
 		placeholder : 'Role',
 		options     : GLOBAL_CONSTANTS.options.role_options,
 		rules       : {
 			required: 'Role is required',
 		},
 	},
+
 	{
 		name                  : 'date_of_joining',
 		label                 : 'Date of joining',
@@ -57,10 +62,11 @@ const controls = [
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 	},
+
 	{
 		name        : 'office_location',
 		type        : 'select',
-		label       : 'Location Details',
+		label       : 'Location Details*',
 		placeholder : 'Select Location',
 		options     : [
 			{ value: 'mumbai', label: 'Mumbai' },
@@ -70,6 +76,7 @@ const controls = [
 			required: 'Location is required',
 		},
 	},
+
 	{
 		name        : 'cogoport_email',
 		label       : 'Cogoport Email ID',
@@ -82,11 +89,12 @@ const controls = [
 			},
 		},
 	},
+
 	{
 		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'Hiring Manager',
+		label       : 'Hiring Manager*',
 		placeholder : 'Hiring Manager',
 		rules       : {
 			required: 'Hiring Manager is required',
@@ -100,11 +108,12 @@ const controls = [
 			page_limit: 100,
 		},
 	},
+
 	{
 		name        : 'hr_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'HR Name',
+		label       : 'HR Name*',
 		placeholder : 'Enter Name',
 		rules       : {
 			required: 'name is required',
@@ -117,11 +126,12 @@ const controls = [
 			page_limit: 100,
 		},
 	},
+
 	{
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'HRBP',
+		label       : 'HRBP*',
 		placeholder : 'HRBP',
 		rules       : {
 			required: 'HRBP is required',
@@ -130,7 +140,6 @@ const controls = [
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
-
 			},
 			page_limit: 100,
 		},
