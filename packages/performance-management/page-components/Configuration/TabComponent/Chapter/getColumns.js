@@ -9,9 +9,42 @@ import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
-	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
+function RenderSubChapters({ item, tooltip_data }) {
 	const { min_length, start_index, end_index } = tooltip_data || {};
+
+	return (
+		<div className={styles.pill_box}>
+			{item?.sub_chapters
+				?.slice(start_index, end_index)
+				.map((singlesub) => (
+					<Pill key={singlesub?.name} size="md" className={styles.pill}>
+						{startCase(singlesub?.sub_chapter_name)}
+					</Pill>
+				))}
+
+			{item?.sub_chapters?.length > min_length ? (
+				<Pill>
+					<Tooltip
+						content={<TooltipContent item={item?.sub_chapters} source="sub_chapter_name" />}
+						placement="right"
+						theme="light"
+						caret
+						interactive
+						styles={{ marginBottom: '24px' }}
+					>
+						+
+						{item.sub_chapters.length - end_index}
+						{' '}
+						Sub chapters
+					</Tooltip>
+				</Pill>
+			) : null}
+		</div>
+	);
+}
+
+const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
+	const { default_active_tab, tooltip_data } = PACKAGE_CONSTANTS || {};
 
 	const columnArray = [
 		{
@@ -29,33 +62,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 		{
 			Header   : 'SUB CHAPTERS',
 			accessor : (item) => (
-				<div className={styles.pill_box}>
-					{item?.sub_chapters
-						?.slice(start_index, end_index)
-						.map((singlesub) => (
-							<Pill key={singlesub?.name} size="md" className={styles.pill}>
-								{startCase(singlesub?.sub_chapter_name)}
-							</Pill>
-						))}
-
-					{item?.sub_chapters?.length > min_length ? (
-						<Pill>
-							<Tooltip
-								content={<TooltipContent item={item?.sub_chapters} source="sub_chapter_name" />}
-								placement="right"
-								theme="light"
-								caret
-								interactive
-								styles={{ marginBottom: '24px' }}
-							>
-								+
-								{item.sub_chapters.length - end_index}
-								{' '}
-								Sub chapters
-							</Tooltip>
-						</Pill>
-					) : null}
-				</div>
+				<RenderSubChapters item={item} tooltip_data={tooltip_data} />
 			),
 		},
 

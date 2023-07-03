@@ -9,9 +9,42 @@ import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
+function RenderEmployees({ item, tooltip_data }) {
+	const { min_length, start_index, end_index } = tooltip_data || {};
+
+	return 				(
+		<div className={styles.pill_box}>
+			{item?.employees
+				?.slice(start_index, end_index)
+				.map((singleEmplyee) => (
+					<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
+						{singleEmplyee?.name}
+					</Pill>
+				))}
+
+			{item?.employees?.length > min_length ? (
+				<Pill>
+					<Tooltip
+						content={<TooltipContent item={item?.employees} source="name" />}
+						placement="right"
+						theme="light"
+						interactive
+						caret
+						styles={{ marginBottom: '24px' }}
+					>
+						+
+						{item.employees.length - end_index}
+						{' '}
+						EMPLOYEES
+					</Tooltip>
+				</Pill>
+			) : null}
+		</div>
+	);
+}
+
 const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
-	const { min_length, start_index, end_index } = tooltip_data || {};
 
 	const columnArray = [
 		{
@@ -27,33 +60,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 		{
 			Header   : 'EMPLOYEES',
 			accessor : (item) => (
-				<div className={styles.pill_box}>
-					{item?.employees
-						?.slice(start_index, end_index)
-						.map((singleEmplyee) => (
-							<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
-								{singleEmplyee?.name}
-							</Pill>
-						))}
-
-					{item?.employees?.length > min_length ? (
-						<Pill>
-							<Tooltip
-								content={<TooltipContent item={item?.employees} source="name" />}
-								placement="right"
-								theme="light"
-								interactive
-								caret
-								styles={{ marginBottom: '24px' }}
-							>
-								+
-								{item.employees.length - end_index}
-								{' '}
-								EMPLOYEES
-							</Tooltip>
-						</Pill>
-					) : null}
-				</div>
+				<RenderEmployees item={item} tooltip_data={tooltip_data} />
 			),
 		},
 

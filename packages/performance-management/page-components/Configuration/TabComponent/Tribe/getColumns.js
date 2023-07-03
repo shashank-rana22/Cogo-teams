@@ -9,9 +9,46 @@ import TooltipContent from '../../commons/tooltipContent';
 
 import styles from './styles.module.css';
 
+function RenderSquads({ item, tooltip_data }) {
+	const { min_length, start_index, end_index } = tooltip_data || {};
+
+	return (
+		<div className={styles.pill_box}>
+			{item?.squads
+				?.slice(start_index, end_index)
+				.map((singleSQUAD) => (
+					<Pill
+						key={singleSQUAD?.squad_name}
+						size="md"
+						className={styles.pill}
+					>
+						{startCase(singleSQUAD?.squad_name)}
+					</Pill>
+				))}
+
+			{item?.squads?.length > min_length ? (
+				<Pill>
+					<Tooltip
+						content={<TooltipContent item={item?.squads} source="squad_name" />}
+						placement="right"
+						theme="light"
+						interactive
+						caret
+						styles={{ marginBottom: '24px' }}
+					>
+						+
+						{item.squads.length - end_index}
+						{' '}
+						Squads
+					</Tooltip>
+				</Pill>
+			) : null}
+		</div>
+	);
+}
+
 const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 	const { tooltip_data, default_active_tab } = PACKAGE_CONSTANTS || {};
-	const { min_length, start_index, end_index } = tooltip_data || {};
 
 	const columnArray = [
 		{
@@ -27,37 +64,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 		{
 			Header   : 'SQUADS',
 			accessor : (item) => (
-				<div className={styles.pill_box}>
-					{item?.squads
-						?.slice(start_index, end_index)
-						.map((singleSQUAD) => (
-							<Pill
-								key={singleSQUAD?.squad_name}
-								size="md"
-								className={styles.pill}
-							>
-								{startCase(singleSQUAD?.squad_name)}
-							</Pill>
-						))}
-
-					{item?.squads?.length > min_length ? (
-						<Pill>
-							<Tooltip
-								content={<TooltipContent item={item?.squads} source="squad_name" />}
-								placement="right"
-								theme="light"
-								interactive
-								caret
-								styles={{ marginBottom: '24px' }}
-							>
-								+
-								{item.squads.length - end_index}
-								{' '}
-								Squads
-							</Tooltip>
-						</Pill>
-					) : null}
-				</div>
+				<RenderSquads item={item} tooltip_data={tooltip_data} />
 			),
 		},
 
