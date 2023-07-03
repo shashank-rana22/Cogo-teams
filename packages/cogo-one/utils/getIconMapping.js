@@ -32,7 +32,7 @@ const ICON_MAPPING = [
 	{
 		name    : 'flash_shipment_bookings',
 		content : 'Flash Shipment Bookings',
-		icon    : <IcMShip />,
+		icon    : <IcMShip width={20} height={20} />,
 	},
 	{
 		name    : 'user_activity',

@@ -1,88 +1,57 @@
-import { Textarea, Button, RadioGroup, Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { IRN_CANCEL_OPTIONS } from '../../constants';
-import useGetIrnCancellation from '../../hooks/useGetIrnCancellation';
+import CancelEinvoice from './CancellationMapping/CancelEinvoice';
+import CancelIrn from './CancellationMapping/CancelIrn';
 
-import styles from './styles.module.css';
+type Item = {
+	entityCode?: number;
+};
+interface CancelModal {
+	itemData?: Item;
+	showCancellationModal?: boolean;
+	setShowCancellationModal?: Function;
+	IRNLabel?: string;
+	refetch?: Function;
+}
 
 function CancellationModal({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
-}) {
-	const { cancelIrn, loading } = useGetIrnCancellation({
-		id: itemData?.id,
-		setShowCancellationModal,
-	});
-	const [response, setResponse] = useState({
-		value   : '',
-		remarks : '',
-	});
+	IRNLabel,
+	refetch,
+}: CancelModal) {
+	const { entityCode } = itemData || {};
+
+	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
+
+	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+		?.feature_supported?.includes('cancel_e_invoice');
 
 	return (
-		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="md">
-			<div className={styles.cancel_modal}>
-
-				<Modal.Header
-					title={(
-						<div className={styles.cancel_invoice}>
-							Cancel IRN Of Invoice Number
-							{' '}
-							<span className={styles.styled_invoice}>
-								{itemData?.invoiceNumber}
-							</span>
-						</div>
-					)}
+		<div>
+			{ CANCEL_IRN
+			&& (
+				<CancelIrn
+					itemData={itemData}
+					showCancellationModal={showCancellationModal}
+					setShowCancellationModal={setShowCancellationModal}
+					refetch={refetch}
+					entityCode={entityCode}
 				/>
-
-				<Modal.Body>
-
-					<div className={styles.Radiodiv}>
-						<div className={styles.styled_reason}>
-							Reason
-						</div>
-
-						<RadioGroup
-							options={IRN_CANCEL_OPTIONS}
-							value={response?.value}
-							onChange={(e) => setResponse((r) => ({ ...r, value: e }))}
-						/>
-					</div>
-					<div>
-						<div className={styles.styled_remarks}>
-							Remarks
-						</div>
-						<Textarea
-							value={response?.remarks}
-							onChange={(e) => setResponse((r) => ({ ...r, remarks: e }))}
-							placeholder="Not more than 100 characters"
-						/>
-					</div>
-				</Modal.Body>
-
-				<Modal.Footer>
-					<div className={styles.confirm_button}>
-						<div className={styles.styled_button}>
-							<Button
-								onClick={() => cancelIrn(response)}
-								disabled={
-							isEmpty(response.value) || isEmpty(response.remarks) || loading
-						}
-							>
-								Confirm
-							</Button>
-						</div>
-						<Button
-							onClick={() => setShowCancellationModal(false)}
-						>
-							Cancel
-						</Button>
-					</div>
-				</Modal.Footer>
-			</div>
-		</Modal>
+			)}
+			{ CANCEL_EINVOICE
+			&& (
+				<CancelEinvoice
+					itemData={itemData}
+					showCancellationModal={showCancellationModal}
+					setShowCancellationModal={setShowCancellationModal}
+					IRNLabel={IRNLabel}
+					refetch={refetch}
+					entityCode={entityCode}
+				/>
+			)}
+		</div>
 	);
 }
 export default CancellationModal;

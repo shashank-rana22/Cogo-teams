@@ -586,6 +586,24 @@ function asyncListPromotions() {
 	};
 }
 
+function asyncListDunningTemplates() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_dunning_templates',
+		initialCall : true,
+	};
+}
+
+function asyncListOrganizationStakeholders() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/organization-stakeholders',
+		initialCall : true,
+	};
+}
+
 function asyncListShipmentPendingTasks() {
 	return {
 		labelKey    : 'document_type',
@@ -670,6 +688,8 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
 	asyncListShipmentPendingTasks,
 	asyncListShipments,
 	asyncListShipmentServices,
