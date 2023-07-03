@@ -48,7 +48,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		rules       : {
 			required: 'Pincode is required' ,
 		},
-		getSelectedOption: (option) => {
+		onChange: (_, option) => {
 			setValue('billingState', option?.region?.name);
 			setValue('billingCity', option?.city?.name);
 		},

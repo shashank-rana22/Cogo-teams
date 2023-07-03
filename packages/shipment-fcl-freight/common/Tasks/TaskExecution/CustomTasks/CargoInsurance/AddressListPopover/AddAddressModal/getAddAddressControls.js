@@ -33,7 +33,7 @@ export const getAddAddressControls = ({ setValue = () => {} }) => [
 		rules       : {
 			required: 'Pincode is required',
 		},
-		getSelectedOption: (option) => {
+		onChange: (_, option) => {
 			setValue('country_id', option?.country?.name);
 			setValue('state', option?.region?.name);
 			setValue('city', option?.city?.name);
