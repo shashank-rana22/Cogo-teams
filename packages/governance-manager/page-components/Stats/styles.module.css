@@ -1,0 +1,44 @@
+.stats{
+  display:flex;
+  justify-content: space-between	;
+}
+.pending{
+    width: 33%;
+    height: 138px;
+    border:1px solid #EE3425;
+    border-radius: 8px;
+    background-color: #FDEBE9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pending_left
+  {
+    margin-right: 36px;
+  }
+  .circle{
+    border-radius:50%;
+    height:90px;
+    width:90px;
+    border: 2px solid #88CAD1;
+    background-color:#F3FAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .pending_right
+  {
+   font-weight:Bold;
+   font-size: 26px;
+  }
+
+.onboarded_rejected{
+  width:66%;
+  height:138px;
+  border: 1px solid #849E4C;
+  background-color: #F7FAEF;
+  border-radius:8px;
+  display:flex;
+}
