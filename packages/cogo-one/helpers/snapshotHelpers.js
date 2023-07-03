@@ -46,7 +46,8 @@ export function mountFlashChats({
 	omniChannelCollection,
 	flashMessagesSnapShotListener,
 	viewType,
-	setCarouselState, updateLoadingState,
+	setCarouselState,
+	updateLoadingState,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
@@ -65,12 +66,15 @@ export function mountFlashChats({
 			where('can_claim_chat', '==', true),
 			orderBy('updated_at', 'desc'),
 		);
+
 		snapshotRef.current = onSnapshot(
 			newChatsQuery,
 			(querySnapshot) => {
 				const { resultList } = dataFormatter(querySnapshot);
 				setFlashMessagesData(resultList);
+
 				updateLoadingState('flashMessagesLoading');
+
 				setCarouselState((p) => {
 					if (p === 'in_timeout') {
 						return p;
@@ -100,7 +104,9 @@ export function mountPinnedSnapShot({
 	}
 
 	setLoadingState((p) => ({ ...p, pinnedChatsLoading: true }));
+
 	const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
+
 	const newChatsQuery = query(
 		omniChannelCollection,
 		queryForPinnedChat,
@@ -112,7 +118,11 @@ export function mountPinnedSnapShot({
 		newChatsQuery,
 		(pinSnapShot) => {
 			const { resultList } = dataFormatter(pinSnapShot);
-			setListData((p) => ({ ...p, pinnedMessagesData: { ...resultList } }));
+
+			setListData((p) => ({
+				...p,
+				pinnedMessagesData: { ...resultList },
+			}));
 			updateLoadingState('pinnedChatsLoading');
 		},
 	);
@@ -167,6 +177,7 @@ export function mountSnapShot({
 			const lastMessageTimeStamp = querySnapshot
 				.docs[querySnapshot.docs.length - LAST_ITEM]?.data()?.new_message_sent_at;
 			const { resultList } = dataFormatter(querySnapshot);
+
 			setListData((p) => ({
 				...p,
 				messagesListData: { ...resultList },
@@ -213,6 +224,7 @@ export async function getPrevChats({
 		isLastPage,
 		lastMessageTimeStamp,
 	}));
+
 	updateLoadingState('chatsLoading');
 }
 

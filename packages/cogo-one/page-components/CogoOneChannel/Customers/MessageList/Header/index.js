@@ -11,16 +11,24 @@ import styles from './styles.module.css';
 
 const MORE_THAN_SINGLE_TAB = 2;
 
-function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, setIsBotSession }) {
+function SubTabs({
+	activeSubTab,
+	setActiveSubTab,
+	viewType,
+	setAppliedFilters,
+	setIsBotSession,
+}) {
 	const SUB_TAB_MAPPING = getSubTabsMapping({ viewType });
 
 	const handleTabClick = ({ name }) => {
 		setActiveSubTab(name);
 		setAppliedFilters({});
+
 		if (!VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions?.bot_message_toggle) {
 			setIsBotSession(false);
 		}
 	};
+
 	if (SUB_TAB_MAPPING?.length < MORE_THAN_SINGLE_TAB) {
 		return null;
 	}
@@ -35,8 +43,12 @@ function SubTabs({ activeSubTab, setActiveSubTab, viewType, setAppliedFilters, s
 					key={eachTab?.name}
 					onClick={() => handleTabClick({ name: eachTab?.name })}
 				>
-					<div className={styles.icon_styles}>{eachTab.icon || null}</div>
-					<text className={styles.label}>{eachTab.label}</text>
+					<div className={styles.icon_styles}>
+						{eachTab.icon || null}
+					</div>
+					<text className={styles.label}>
+						{eachTab.label}
+					</text>
 				</div>
 			))}
 		</div>

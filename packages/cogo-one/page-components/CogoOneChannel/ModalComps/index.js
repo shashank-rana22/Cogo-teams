@@ -1,5 +1,4 @@
 import RaiseTicket from '../../../common/RaiseTicket';
-import DialCallModal from '../DialCallModal';
 import FeedbackModal from '../FeedbackModal';
 import ReminderModal from '../ReminderModal';
 

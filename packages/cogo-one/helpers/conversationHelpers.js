@@ -13,12 +13,14 @@ export function getHasPermissionToEdit({
 		managers_ids = [],
 	} = formattedData || {};
 
-	return canMessageOnBotSession
-    || (!showBotMessages
-		&& (VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions.has_permission_to_edit
-			|| userId === support_agent_id
-			|| group_members?.includes(userId)
-			|| managers_ids?.includes(userId)
+	return (
+		canMessageOnBotSession || (
+			!showBotMessages && (
+				VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions.has_permission_to_edit
+					|| userId === support_agent_id
+					|| group_members?.includes(userId)
+					|| managers_ids?.includes(userId)
+			)
 		)
-    );
+	);
 }

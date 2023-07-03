@@ -35,6 +35,7 @@ const useSendMessage = ({ channel_type = '', activeChatCollection, formattedData
 		scrollToBottom,
 	}) => {
 		const { agent_type = '' } = formattedData || {};
+
 		let service = 'user';
 		let service_id = geo.uuid.cogoverse_user_id;
 		if (user_id) {
@@ -59,11 +60,13 @@ const useSendMessage = ({ channel_type = '', activeChatCollection, formattedData
 					sender_user_id : id,
 				},
 			});
+
 			await addDoc(activeChatCollection, {
 				...adminChat,
 				agent_type       : agent_type || 'bot',
 				communication_id : res?.data?.id,
 			});
+
 			scrollToBottom();
 			const old_count = document.data().new_user_message_count;
 

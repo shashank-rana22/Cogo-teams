@@ -41,8 +41,15 @@ function Customers({
 	});
 
 	const COMPONENT_PROPS_MAPPING = {
-		message : { userId, firestore, viewType, isBotSession, setIsBotSession, tagOptions },
-		voice   : {
+		message: {
+			userId,
+			firestore,
+			viewType,
+			isBotSession,
+			setIsBotSession,
+			tagOptions,
+		},
+		voice: {
 			setActiveVoiceCard: (val) => {
 				setActiveTab((p) => ({ ...p, data: val }));
 			},
@@ -62,16 +69,23 @@ function Customers({
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
 				<div className={styles.logo}>
-					<Image src={GLOBAL_CONSTANTS.image_url.cogo_one_logo} alt="cogo_one_logo" width={25} height={25} />
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.cogo_one_logo}
+						alt="cogo_one_logo"
+						width={25}
+						height={25}
+					/>
 					<div className={styles.title}>
 						CogoOne
 					</div>
 				</div>
+
 				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
 					<div className={styles.styled_toggle}>
 						<AgentStatus />
 					</div>
 				)}
+
 				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bot_message_toggle && (
 					<div className={styles.bot_messages}>
 						<div>Bot Messages</div>

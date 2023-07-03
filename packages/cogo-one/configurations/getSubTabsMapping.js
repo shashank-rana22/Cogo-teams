@@ -1,4 +1,10 @@
-import { IcMLiveChat, IcMCallbarge, IcMTeam, IcMAppPoc, IcMHourglass } from '@cogoport/icons-react';
+import {
+	IcMLiveChat,
+	IcMCallbarge,
+	IcMTeam,
+	IcMAppPoc,
+	IcMHourglass,
+} from '@cogoport/icons-react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 

@@ -10,6 +10,8 @@ export const getAssignedChats = async ({ userId, firestore }) => {
 		where('session_type', '==', 'admin'),
 		where('support_agent_id', '==', userId),
 	);
+
 	const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
+
 	return getAssignedChatsQuery.size || DEFAULT_ASSINED_CHAT_COUNT;
 };

@@ -17,6 +17,7 @@ function FlashUserChats({
 	const { claimChat, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
 
 	const canShowCarousel = carouselState === 'show';
+
 	const carouselData = canShowCarousel ? getCarouselData({
 		flashMessagesList,
 		activeTab,
@@ -28,7 +29,10 @@ function FlashUserChats({
 	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ height: !canShowCarousel ? '0' : '16%' }}>
+		<div
+			className={styles.flash_messages_div}
+			style={{ height: canShowCarousel ? '16%' : '0' }}
+		>
 			{canShowCarousel && (
 				<Carousel
 					id="flash_messages"

@@ -34,7 +34,13 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 				/>
 				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
 					<div className={styles.wheel_box}>
-						<IcMPlus onClick={() => setIsChecked((p) => !p)} fill="#ffffff" width={35} height={35} />
+						<IcMPlus
+							onClick={() => setIsChecked((p) => !p)}
+							fill="#ffffff"
+							width={35}
+							height={35}
+						/>
+
 						<div className={styles.wheel}>
 							<div className={cl`${styles.action} ${styles.call_icon}`}>
 								<Image
@@ -48,7 +54,10 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 							</div>
 							<div className={cl`${styles.action} ${styles.whatsapp_icon}`}>
 								<Image
-									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
+									onClick={() => setModalType({
+										type : 'whatsapp_new_message_modal',
+										data : {},
+									})}
 									src={GLOBAL_CONSTANTS.image_url.whatsapp_icon}
 									alt="whatsapp icon"
 									role="presentation"
@@ -56,6 +65,7 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 									width={60}
 								/>
 							</div>
+
 							<div className={cl`${styles.action} ${styles.mail_icon}`}>
 								<Image
 									onClick={() => setButtonType('send_mail')}
@@ -70,10 +80,12 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 					</div>
 				</div>
 			</div>
+
 			<NewWhatsappMessage
 				setModalType={setModalType}
 				modalType={modalType}
 			/>
+
 			{!!buttonType && (
 				<MailModal
 					mailProps={mailProps}
@@ -85,6 +97,7 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 					replyLoading={replyLoading}
 				/>
 			)}
+
 			<DialCallModal
 				setShowDialModal={setShowDialModal}
 				showDialModal={showDialModal}
@@ -92,4 +105,5 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 		</>
 	);
 }
+
 export default CommunicationModals;

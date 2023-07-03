@@ -68,7 +68,7 @@ function Messages({
 	const showBotMessages = session_type === 'bot';
 
 	const canMessageOnBotSession = showBotMessages
-	&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.can_message_on_bot_session;
+		&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.can_message_on_bot_session;
 
 	const hasPermissionToEdit = getHasPermissionToEdit({
 		showBotMessages,

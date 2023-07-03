@@ -41,6 +41,7 @@ function MessageCardData({
 		new_message_count = 0,
 		is_likely_to_book_shipment = false,
 	} = formattedData || {};
+
 	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);

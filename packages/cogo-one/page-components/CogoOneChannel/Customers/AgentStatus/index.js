@@ -12,10 +12,14 @@ function AgentStatus() {
 		agentStatus = {},
 		fetchworkPrefernce = () => {},
 	} = useAgentWorkPrefernce();
+
 	const {
 		loading: statusLoading,
 		updateUserStatus = () => {},
-	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal: setOpenInactiveModal });
+	} = useCreateUserInactiveStatus({
+		fetchworkPrefernce,
+		setOpenModal: setOpenInactiveModal,
+	});
 
 	const { status = '' } = agentStatus || {};
 
@@ -39,6 +43,7 @@ function AgentStatus() {
 				checked={status === 'active'}
 				loading={statusLoading}
 			/>
+
 			{openInactiveModal && (
 				<InactiveModal
 					fetchworkPrefernce={fetchworkPrefernce}

@@ -1,6 +1,3 @@
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
-
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
@@ -13,10 +10,6 @@ const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
 };
 
 const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
-	const listAgentsOptions = useGetAsyncOptions(
-		asyncFieldsListAgents(),
-	);
-
 	const controls = [
 		{
 			label          : '',
@@ -88,14 +81,15 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : '',
 			name           : 'assigned_agent',
-			controllerType : 'select',
+			controllerType : 'asyncSelect',
+			asyncKey       : 'list_chat_agents',
+			initialCall    : true,
 			value          : '',
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Agent',
 			rules          : {
 				required: 'This is Requied',
 			},
-			...(listAgentsOptions || {}),
 		},
 		{
 			label          : 'Tags',

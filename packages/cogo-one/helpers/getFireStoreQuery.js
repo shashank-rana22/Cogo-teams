@@ -3,6 +3,7 @@ import { orderBy, where } from 'firebase/firestore';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const BULK_ASSIGN_SEEN_MINUTES = 15;
+const EMPTY_FUNCTION = () => {};
 
 const TAB_WISE_QUERY_KEY_MAPPING = {
 	all      : 'all_chats_base_query',
@@ -49,8 +50,9 @@ function getFireStoreQuery({
 			}
 			queryFilters = [
 				...queryFilters,
-				!isBotSession ? where('support_agent_id', '==', filterId)
-					: where('spectators_ids', 'array-contains', filterId),
+				isBotSession
+					? where('spectators_ids', 'array-contains', filterId)
+					: where('support_agent_id', '==', filterId),
 			];
 		} else if (item === 'chat_tags') {
 			queryFilters = [
@@ -82,22 +84,31 @@ function getFireStoreQuery({
 		}
 	});
 
-	const tabWiseQuery = (VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.(
-		{ agentId: userId },
-	) || []);
+	const getTabWiseQueryFunction = (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]
+		|| EMPTY_FUNCTION
+	);
 
-	const sessionTypeQuery = (VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.(
-		{ sessionType: isBotSession ? 'bot' : 'admin', isContactsSelected: activeSubTab === 'contacts' },
-	) || []);
+	const tabWiseQuery = (
+		getTabWiseQueryFunction({ agentId: userId }) || []
+	);
 
-	const firestoreQuery = [
+	const getSessionTypeQueryFunction = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query || EMPTY_FUNCTION;
+
+	const sessionTypeQuery = (
+		getSessionTypeQueryFunction({
+			sessionType        : isBotSession ? 'bot' : 'admin',
+			isContactsSelected : activeSubTab === 'contacts',
+		})
+		|| []
+	);
+
+	return [
 		...tabWiseQuery,
 		...sessionTypeQuery,
 		...queryFilters,
 		orderBy('new_message_sent_at', 'desc'),
 	];
-
-	return firestoreQuery;
 }
 
 export default getFireStoreQuery;

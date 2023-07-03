@@ -1,12 +1,11 @@
-import {
-	where,
-} from 'firebase/firestore';
+import { where } from 'firebase/firestore';
 
 const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
 
 function getSupplySessionQuery({ sessionType, isContactsSelected = false }) {
 	return isContactsSelected
-		? [where('session_type', 'in', ['bot', 'admin'])] : [where('session_type', '==', sessionType)];
+		? [where('session_type', 'in', ['bot', 'admin'])]
+		: [where('session_type', '==', sessionType)];
 }
 
 function getKamButtons({
