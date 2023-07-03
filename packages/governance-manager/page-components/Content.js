@@ -1,7 +1,10 @@
+import ListSupplier from './ListSupplier';
+
 function Content() {
 	return (
 		<>
 			Content
+			<ListSupplier />
 		</>
 	);
 }
