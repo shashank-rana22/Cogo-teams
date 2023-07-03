@@ -263,6 +263,7 @@ function Messages({
 						activeMessageCard={activeTab?.data}
 						assignLoading={assignLoading}
 						loading={loading}
+						viewType={viewType}
 					/>
 				</Modal>
 			)}

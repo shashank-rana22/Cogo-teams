@@ -13,7 +13,7 @@ const formatLastMessage = ({ lastMessage, currentAgentType }) => {
 	}
 
 	const {
-		response:{ message = '' } = {},
+		response: { message = '' } = {},
 		conversation_type = '',
 		message_type = '',
 		agent_type: lastMessageAgentType = 'bot',
