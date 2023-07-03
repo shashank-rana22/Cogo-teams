@@ -10,6 +10,8 @@ function Header({
 	payrunStats,
 	isInvoiceView,
 	setIsInvoiceView,
+	overseasData,
+	setOverseasData,
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
@@ -66,24 +68,12 @@ function Header({
 			</div>
 			<div className={styles.filter_container}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Input
-					// value={search || ''}
-					// onChange={(value) => setFilters({
-					// 	...filters,
-					// 	search: value || undefined,
-					// })}
-						style={{ width: '300px' }}
-						placeholder="Search by PayRun Name"
-						size="sm"
-						suffix={(
-							<IcMSearchlight
-								height={20}
-								width={20}
-								color="#CACACA"
-								className={styles.search_icon}
-							/>
-						)}
-					/>
+					<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
+						<TabPanel title="Domestic" name="NORMAL" />
+						<TabPanel title="Overseas" name="OVERSEAS" />
+						<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
+					</Tabs>
+
 					<Toggle
 						name="isInvoiceView"
 						value={isInvoiceView}
@@ -95,7 +85,27 @@ function Header({
 						offLabel="Payrun"
 					/>
 				</div>
-				<div>
+				<div style={{ display: 'flex' }}>
+					<div>
+						<Input
+					// value={search || ''}
+					// onChange={(value) => setFilters({
+					// 	...filters,
+					// 	search: value || undefined,
+					// })}
+							style={{ width: '300px', marginRight: '8px' }}
+							placeholder="Search by PayRun Name"
+							size="sm"
+							suffix={(
+								<IcMSearchlight
+									height={20}
+									width={20}
+									color="#CACACA"
+									className={styles.search_icon}
+								/>
+							)}
+						/>
+					</div>
 					<Button>
 						Go To Audit
 					</Button>

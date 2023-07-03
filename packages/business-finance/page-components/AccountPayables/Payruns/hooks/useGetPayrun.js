@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 // import { initiatedConfig } from '../columns/initiatedConfig';
 
-const useGetPayrun = ({ activePayrunTab }) => {
+const useGetPayrun = ({ activePayrunTab, overseasData }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun',
@@ -27,17 +27,18 @@ const useGetPayrun = ({ activePayrunTab }) => {
 						pageIndex : 1,
 						pageSize  : 10,
 						state     : activePayrunTab,
+						type      : overseasData,
 					},
 				});
 			} catch (err) {
 				Toast.error(err.message);
 			}
 		})();
-	}, [activePayrunTab, trigger]);
+	}, [activePayrunTab, overseasData, trigger]);
 
-	useEffect(() => {
-		getPayrunList();
-	}, [activePayrunTab, getPayrunList]);
+	// useEffect(() => {
+	// 	getPayrunList();
+	// }, [activePayrunTab, getPayrunList]);
 
 	const { stats } = data || {};
 
