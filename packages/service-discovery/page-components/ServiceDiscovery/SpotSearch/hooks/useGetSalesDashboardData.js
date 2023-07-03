@@ -8,7 +8,7 @@ import CC from '../utils/condition-constants';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
 import getSalesDashboardListStats from '../utils/getSalesDashboardListStats';
 
-import useAutoRefresh from './useAutoRefresh';
+// import useAutoRefresh from './useAutoRefresh';
 import useGetPermission from './useGetPermission';
 
 const getKeyName = ({ type, serviceType }) => {
@@ -48,7 +48,7 @@ const useGetSalesDashboardData = ({
 	const [extraParams, setExtraParams] = useState(rest?.extraParams || {});
 	const [bucketParams, setBucketParams] = useState({});
 
-	const { lastRefresh } = useAutoRefresh();
+	// const { lastRefresh } = useAutoRefresh();
 
 	let newApi = !isRateList
 		? api
@@ -143,7 +143,7 @@ const useGetSalesDashboardData = ({
 	}, [user_profile?.authorizationparameters,
 		page,
 		activeStat,
-		lastRefresh,
+		// lastRefresh,
 		extraParams,
 		serviceType,
 		importer_exporter_id,

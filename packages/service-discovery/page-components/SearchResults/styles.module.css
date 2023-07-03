@@ -25,12 +25,4 @@
 .loader{
     width: 40px;
 }
-.additional_header{
-    padding: 16px 24px;
-    height: 200px;
-    transition: height 0.5s ease-in-out;
-}
-.show{
-    height: 100%;
-    transition: height 0.5s ease-in-out;
-}
+

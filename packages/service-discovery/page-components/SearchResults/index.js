@@ -90,8 +90,6 @@ function SearchResults() {
 		},
 	};
 
-	console.log('Filters', filters);
-
 	return (
 		<div className={styles.container}>
 			<Header

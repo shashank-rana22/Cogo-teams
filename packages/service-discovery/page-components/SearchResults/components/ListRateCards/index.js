@@ -50,14 +50,13 @@ function ListRateCards({
 					showFilterModal={showFilterModal}
 					setShowFilterModal={setShowFilterModal}
 				/>
+				{showComparison ? (
+					<ComparisonHeader
+						rateCardsForComparison={rateCardsForComparison}
+						setScreen={setScreen}
+					/>
+				) : null}
 			</div>
-
-			{showComparison ? (
-				<ComparisonHeader
-					rateCardsForComparison={rateCardsForComparison}
-					setScreen={setScreen}
-				/>
-			) : null}
 
 			{(rates || []).map((rateCardData) => (
 				<RateCard

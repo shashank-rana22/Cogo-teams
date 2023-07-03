@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
 import React from 'react';
 
 import Currency from './CurrencyFilter';
+import DetentionDemurrage from './D&D';
 import Filters from './Filters';
 import styles from './styles.module.css';
 
@@ -26,6 +26,8 @@ function Header({
 					setFilters={setFilters}
 				/>
 
+				<DetentionDemurrage />
+
 				<Button
 					type="button"
 					size="lg"
@@ -33,7 +35,13 @@ function Header({
 					onClick={() => setShowFilterModal(true)}
 					className={styles.filter_button}
 				>
-					<IcMFilter style={{ marginRight: 4 }} />
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg"
+						alt="filter-icon"
+						width={20}
+						height={20}
+						style={{ marginRight: 12 }}
+					/>
 					Filters
 				</Button>
 			</div>

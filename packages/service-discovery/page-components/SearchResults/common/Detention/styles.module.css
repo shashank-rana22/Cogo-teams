@@ -1,11 +1,25 @@
 .container{
     display: flex;
     flex-direction: column;
+
+    :global{
+        .ui_input_number_container{
+            max-width: 160px;
+        }
+        .ui_input_number_control{
+            width: 70%
+        }
+    }
 }
 .form_subgroup{
     margin-bottom: 24px;
 }
 .heading{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.label{
     font-size: 14px;
     font-weight: 600;
     margin: 8px 0;

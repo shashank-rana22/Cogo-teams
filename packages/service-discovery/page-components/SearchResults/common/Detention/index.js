@@ -5,11 +5,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const suffix = <span style={{ paddingRight: 20 }}>Days</span>;
+const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
 
 const renderFormItem = ({ name, control }) => (
 	<div className={styles.form_subgroup}>
-		<div className={styles.heading}>{`Free ${startCase(name)} Days Required`}</div>
+		<div className={styles.label}>{`Free ${startCase(name)} Days Required`}</div>
 
 		<div className={styles.form_item_wrapper}>
 			<div className={styles.form_item}>
@@ -39,13 +39,19 @@ const renderFormItem = ({ name, control }) => (
 	</div>
 );
 
-function Detention() {
+function Detention({ values = {}, setValues = () => {}, ...rest }) {
 	const { control, handleSubmit } = useForm();
 
-	const onClickSave = () => {};
+	const onClickSave = (val) => {
+		setValues(val);
+	};
 
 	return (
 		<div className={styles.container}>
+			{rest.heading ? (
+				<strong className={styles.heading}>{rest.heading}</strong>
+			) : null}
+
 			<div className={styles.form}>
 
 				{renderFormItem({ name: 'detention', control })}
@@ -62,7 +68,7 @@ function Detention() {
 			<div className={styles.button_container}>
 				<Button
 					type="button"
-					size="lg"
+					size="md"
 					themeType="secondary"
 					className={styles.button}
 				>
@@ -71,7 +77,7 @@ function Detention() {
 
 				<Button
 					type="button"
-					size="lg"
+					size="md"
 					themeType="accent"
 					onClick={handleSubmit(onClickSave)}
 				>

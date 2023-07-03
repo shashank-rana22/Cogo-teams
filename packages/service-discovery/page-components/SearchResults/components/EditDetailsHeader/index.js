@@ -46,7 +46,10 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 		// 	return;
 		// }
 
-		const { origin: { id: origin_id = '' }, destination: { id: destination_id = '' } } = locationValues;
+		const { origin:originValues = {}, destination:destinationValues = {} } = locationValues;
+
+		const { id: origin_id = '' } = originValues;
+		const { id: destination_id = '' } = destinationValues;
 
 		if (!origin_id || !destination_id) {
 			return;
@@ -88,6 +91,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 						organization={organization}
 						setOrganization={setOrganization}
 						errors={{}}
+						action="edit"
 					/>
 				</div>
 
@@ -104,6 +108,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 			<Button
 				size="lg"
 				themeType="accent"
+				disabled={loading}
 				loading={loading}
 				onClick={onClickApply}
 				className={styles.button}

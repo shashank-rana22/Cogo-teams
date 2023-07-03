@@ -1,15 +1,19 @@
-import { Pill, Tooltip } from '@cogoport/components';
-import { startCase, upperCase } from '@cogoport/utils';
+import { Pill, Tooltip, Popover } from '@cogoport/components';
+import { isEmpty, startCase, upperCase } from '@cogoport/utils';
+
+import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArray';
 
 import RenderTruckShipments from './renderTruckShipments';
 import styles from './styles.module.css';
 
 const renderShipment = (itemData, field) => {
-	const { shipment_type = '-', service_type = '-' } = itemData || {};
+	const { shipment_type = '-', service_type = '-', service_details = {} } = itemData || {};
 	const { commodityKey = '' } = field || {};
 
 	const isTruckType =	['ftl_freight', 'ltl_freight'].includes(shipment_type)
 		|| ['ftl_freight', 'ltl_freight'].includes(service_type);
+
+	const load = getLoadArray(service_type, service_details);
 
 	if (
 		['shipment_cargo_details', 'quotation_cargo_details', 'spot_search_cargo_details']
@@ -24,91 +28,36 @@ const renderShipment = (itemData, field) => {
 		);
 	}
 
-	return (
-		<Tooltip
-			content={(
-				<div className={styles.tooltip}>
-					{itemData?.container_size && (
-						<>
-							Container size:
-							{' '}
-							{itemData.container_size}
-							{' '}
-							<br />
-						</>
-					)}
-					{itemData?.container_type && (
-						<>
-							Container type:
-							{' '}
-							{startCase(itemData.container_type)}
-							{' '}
-							<br />
-						</>
-					)}
-					{itemData?.commodity && (
-						<>
-							Commodity:
-							{' '}
-							{startCase(itemData.commodity)}
-							{' '}
-							<br />
-						</>
-					)}
-					{itemData?.containers_count && (
-						<>
-							Container count:
-							{' '}
-							{itemData.containers_count}
-							{' '}
-							<br />
-						</>
-					)}
-					{itemData?.container_numbers?.length > 0 ? (
-						<>
-							Containers:
-							<br />
-							{itemData.container_numbers.map((container_number, index) => (
-								<>
-									{`${index + 1}. ${container_number}`}
-									<br />
-								</>
-							))}
-						</>
-					) : (
-						''
-					)}
-				</div>
-			)}
-			placement="top"
-		>
-			<div className={styles.content}>
+	const firstLoadObject = load.shift();
 
-				{itemData?.container_size ? (
+	const renderLoadDetails = (data) => (
+		(
+			<>
+				{data?.container_size ? (
 					<Pill size="md" color="#F9F9F9">
-						{itemData.container_size === '20' || itemData.container_size === '40'
-							? `${itemData.container_size}ft`
-							: itemData.container_size}
+						{data.container_size === '20' || data.container_size === '40'
+							? `${data.container_size}ft`
+							: data.container_size}
 					</Pill>
 				) : null}
 
-				{itemData.containers_count > 0 ? (
+				{data.containers_count > 0 ? (
 					<Pill size="md" color="#F9F9F9">
-						{`${itemData.containers_count} Container`}
+						{`${data.containers_count} Container`}
 					</Pill>
 				) : null}
 
-				{itemData.container_type ? (
-					<Pill size="md" color="#F9F9F9">{startCase(itemData.container_type)}</Pill>
+				{data.container_type ? (
+					<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
 				) : null}
 
-				{(startCase(itemData.container_type)
-						|| itemData.container_size
-						|| itemData.containers_count) && <br />}
+				{(startCase(data.container_type)
+								|| data.container_size
+								|| data.containers_count) && <br />}
 
-				{itemData?.commodity ? (
+				{data?.commodity ? (
 					<Pill size="md" color="#F9F9F9">
-						{startCase(itemData.commodity)}
+						{startCase(data.commodity)}
 					</Pill>
 				) : null}
 
@@ -117,12 +66,32 @@ const renderShipment = (itemData, field) => {
 						{`Inco: ${upperCase(itemData.inco_term)}`}
 					</Pill>
 				) : null}
+			</>
+		)
+	);
 
+	return (
+
+		<div className={styles.container}>
+
+			{renderLoadDetails(firstLoadObject)}
+
+			{!isEmpty(load) ? (
 				<Pill size="md" color="#F9F9F9">
-					+3 more
+					<Tooltip
+						placement="top"
+						content={(
+							<div className={styles.content}>
+								{load.map((loadItem) => renderLoadDetails(loadItem))}
+							</div>
+						)}
+					>
+						{`+${load.length} more`}
+					</Tooltip>
 				</Pill>
-			</div>
-		</Tooltip>
+			) : null}
+		</div>
+
 	);
 };
 

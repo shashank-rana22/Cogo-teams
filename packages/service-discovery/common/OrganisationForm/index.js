@@ -113,7 +113,7 @@ function OrganisationForm({
 					name="organization_id"
 					placeholder="Select Organisation"
 					asyncKey="organizations"
-					initialCall
+					initialCall={rest.action !== 'edit'}
 					isClearable
 					params={ORG_PARAMS}
 					value={organization?.organization_id}

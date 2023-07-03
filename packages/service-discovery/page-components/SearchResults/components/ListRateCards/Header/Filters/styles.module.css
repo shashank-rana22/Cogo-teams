@@ -1,5 +1,5 @@
 .modal{
-    max-width: 460px;
+    max-width: 420px;
     
     :global{
         .ui_modal_body_container{
