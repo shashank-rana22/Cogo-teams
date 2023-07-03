@@ -8487,7 +8487,7 @@ const partner = {
 		},
 
 		{
-			api         : 'get_payments_settlement_history',
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',

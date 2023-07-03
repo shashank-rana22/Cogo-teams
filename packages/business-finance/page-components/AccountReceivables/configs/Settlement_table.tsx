@@ -9,7 +9,18 @@ import GetSortingData from '../components/Outstanding/OutstandingList/Settlement
 
 import styles from './styles.module.css';
 
-const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }) => [
+interface Sort {
+	sortType?: string;
+	sortBy?: string;
+}
+interface Props {
+	sort?: Sort;
+	setSort?: React.Dispatch<React.SetStateAction<object>>;
+	settlementFilters?: object;
+	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
+}
+
+const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }:Props) => [
 	{
 		Header   : 'Reference Number',
 		id       : 'name',

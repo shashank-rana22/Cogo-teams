@@ -2,13 +2,24 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+interface Sort {
+	sortType?: string;
+	sortBy?: string;
+}
+interface Props {
+	sort?: Sort;
+	setSort?: React.Dispatch<React.SetStateAction<object>>;
+	type?: string;
+	settlementFilters?: object;
+	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
+}
 function GetSortingData({
 	settlementFilters,
 	setSettlementFilters,
 	setSort,
 	type,
 	sort,
-}) {
+}:Props) {
 	const { sortType = '', sortBy = '' } = sort || {};
 
 	const handleSortingClick = (sortingType) => {
