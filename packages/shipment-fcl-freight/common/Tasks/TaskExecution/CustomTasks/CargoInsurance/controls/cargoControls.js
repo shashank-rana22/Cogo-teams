@@ -3,7 +3,7 @@ import { addDays } from '@cogoport/utils';
 
 const MIN_DATE_LIMIT = 1;
 const MAX_DATE_LIMIT = 31;
-const MIN_CONSIGNMENT_VALUE = 0;
+const MAX_CONSIGNMENT_VALUE = 400000000;
 
 const INCO_TERMS = Object.entries(GLOBAL_CONSTANTS.options.inco_term)
 	.forEach(([key, value]) => ({ label: value.label, value: key }));
@@ -114,7 +114,7 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		type           : 'select',
 		placeholder    : 'INR',
 		optionsListKey : 'currencies',
-		rules          : { required: 'Required' },
+		rules          : { required: 'Currency is Required' },
 	},
 	{
 		name        : 'cargoAmount',
@@ -122,18 +122,16 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		type        : 'number',
 		placeholder : 'Enter Consignment Value',
 		span        : 3,
-		rules       : {
-			required: {
-				message : 'Required',
-				max     : 400000000,
-				min     : 0,
-			},
-			validate: (v) => {
-				if (v <= MIN_CONSIGNMENT_VALUE) {
-					return 'Consignment Value cannot be negative';
-				}
-				return true;
-			},
+		min         : {
+			value   : 0,
+			message : 'Consignment Value cannot be negative',
+		},
+		max: {
+			value   : 400000000,
+			message : `Consignment Value cannot be greater than ${MAX_CONSIGNMENT_VALUE}`,
+		},
+		rules: {
+			required: 'Consignment Value is Required',
 		},
 	},
 ];

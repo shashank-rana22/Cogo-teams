@@ -28,6 +28,7 @@ function AddModal({
 	const [checked, setChecked] = useState(false);
 	const [showPoc, setShowPoc] = useState(false);
 	const [addressType, setAddressType] = useState('office');
+	const [countryId, setCountryId] = useState('');
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -36,9 +37,9 @@ function AddModal({
 		watch,
 	} = useForm();
 
-	const countryId = watch('country_id');
+	const countryID = watch('country_id');
 
-	const addAddressControls = getModifiedControls({ checked, countryId, setValue });
+	const addAddressControls = getModifiedControls({ checked, countryID, setValue, setCountryId, countryId });
 
 	const handleCloseModal = () => {
 		setAddAddressModal(false);
@@ -58,9 +59,10 @@ function AddModal({
 		refetch         : refetchAfterApiCall,
 	});
 
-	const onSubmit = (data) => {
-		handleSubmit(async () => {
-			await createSellerAddres(data, handleCloseModal);
+	const onSubmit = () => {
+		handleSubmit(async (data) => {
+			const updatedData = { ...data, country_id: countryId };
+			await createSellerAddres(updatedData, handleCloseModal);
 			if (billingAddressData?.data?.id) {
 				organisationAddress();
 				addressApi();

@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
-export const getAddAddressControls = ({ setValue = () => {} }) => [
+export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {} }) => [
 	{
 		label       : 'Billing Party Name',
 		name        : 'name',
@@ -34,6 +34,7 @@ export const getAddAddressControls = ({ setValue = () => {} }) => [
 			required: 'Pincode is required',
 		},
 		onChange: (_, option) => {
+			setCountryId(option?.country?.country_id);
 			setValue('country_id', option?.country?.name);
 			setValue('state', option?.region?.name);
 			setValue('city', option?.city?.name);
@@ -124,22 +125,23 @@ export const getAddAddressControls = ({ setValue = () => {} }) => [
 	},
 ];
 
-export const getModifiedControls = ({ checked, countryId = '', setValue = () => {} }) => {
+export const getModifiedControls = ({
+	checked,
+	setValue = () => {}, setCountryId = () => {}, countryId = '',
+}) => {
 	const countryCode = getCountryDetails({ country_id: countryId });
-	const controls = getAddAddressControls({ setValue });
-
-	return (controls || []).map((control) => {
+	const controls = getAddAddressControls({ setValue, setCountryId });
+	(controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
 				...control,
 				rules: {
 					required : checked && { value: true, message: 'Tax Number is required' },
-					validate : (v) => GLOBAL_CONSTANTS.regex_patterns.gst_number.test(v) || 'Invalid Tax Number',
 					pattern  : {
 						value:
 							GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
 								.cargo_insurance.countries.includes(
-									countryCode,
+									countryCode?.country_code,
 								)
 								? GLOBAL_CONSTANTS.regex_patterns.gst_number
 								: '',
@@ -148,8 +150,6 @@ export const getModifiedControls = ({ checked, countryId = '', setValue = () => 
 				},
 			};
 		}
-		return {
-			control,
-		};
+		return control;
 	});
 };
