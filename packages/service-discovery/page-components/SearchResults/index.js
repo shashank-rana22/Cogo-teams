@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useRouter } from '@cogoport/next';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../../common/Header';
 
@@ -31,10 +32,16 @@ function SearchResults() {
 	const [selectedCard, setSelectedCard] = useState({});
 	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
-	const { refetchspotSearch = () => {}, loading, data, state } = useGetSpotSearch();
+	const { query } = useRouter();
+	const { spot_search_id, importer_exporter_id } = query;
+	const { refetchSearch = () => {}, loading, data } = useGetSpotSearch();
 	const { detail, rates = [] } = data || {};
 
-	if (pageLoading || state.loading) {
+	useEffect(() => {
+		refetchSearch({ spot_search_id, importer_exporter_id });
+	}, [importer_exporter_id, refetchSearch, spot_search_id]);
+
+	if (pageLoading || loading) {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>
@@ -42,6 +49,8 @@ function SearchResults() {
 			</div>
 		);
 	}
+
+	console.log('headerProps', headerProps);
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -72,6 +81,7 @@ function SearchResults() {
 			selectedCard,
 			setScreen,
 			setHeaderProps,
+			refetchSearch,
 		},
 		comparison: {
 			setScreen,
