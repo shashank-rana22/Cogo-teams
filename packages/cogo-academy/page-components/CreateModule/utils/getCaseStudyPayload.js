@@ -23,7 +23,7 @@ const getCaseStudyPayload = ({
 			return { id: caseStudyQuestionId, status: 'inactive', answers: [] };
 		}
 
-		const hasError = [];
+		const HAS_ERROR = [];
 
 		const checkError = checkErrors({
 			options,
@@ -42,11 +42,11 @@ const getCaseStudyPayload = ({
 					},
 				}));
 			}
-			hasError.push(checkError);
+			HAS_ERROR.push(checkError);
 		}
 
-		if (!isEmpty(hasError)) {
-			return { hasError };
+		if (!isEmpty(HAS_ERROR)) {
+			return { hasError: HAS_ERROR };
 		}
 
 		const { test_case_study_questions = {} } = editDetails || {};
@@ -105,7 +105,7 @@ const getCaseStudyPayload = ({
 		};
 	});
 
-	const hasError = [];
+	const HAS_ERROR = [];
 
 	case_questions.forEach((item, index) => {
 		const { options, question_type:indQuestionType } = item || {};
@@ -126,12 +126,12 @@ const getCaseStudyPayload = ({
 					},
 				}));
 			}
-			hasError.push(checkError);
+			HAS_ERROR.push(checkError);
 		}
 	});
 
-	if (!isEmpty(hasError) && action !== 'delete') {
-		return { hasError };
+	if (!isEmpty(HAS_ERROR) && action !== 'delete') {
+		return { hasError: HAS_ERROR };
 	}
 
 	return {

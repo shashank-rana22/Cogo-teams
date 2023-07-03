@@ -2,6 +2,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import checkErrors from './checkErrors';
 
+const START_INDEX = 0;
+
 const getStandAlonePayload = ({
 	values,
 	action,
@@ -18,13 +20,13 @@ const getStandAlonePayload = ({
 		question_type,
 		difficulty_level,
 		options = [],
-	} = question?.[0] || {};
+	} = question?.[START_INDEX] || {};
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
 	}
 
-	const hasError = [];
+	const HAS_ERROR = [];
 
 	const checkError = checkErrors({
 		options,
@@ -39,11 +41,11 @@ const getStandAlonePayload = ({
 				error: { question_0: true },
 			}));
 		}
-		hasError.push(checkError);
+		HAS_ERROR.push(checkError);
 	}
 
-	if (!isEmpty(hasError)) {
-		return { hasError };
+	if (!isEmpty(HAS_ERROR)) {
+		return { hasError: HAS_ERROR };
 	}
 
 	const { test_question_answers = [] } = editDetails || {};

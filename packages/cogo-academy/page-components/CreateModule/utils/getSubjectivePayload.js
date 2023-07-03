@@ -1,5 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
+const START_INDEX = 0;
+
 const getSubjectivePayload = ({
 	action = '',
 	values,
@@ -18,7 +20,7 @@ const getSubjectivePayload = ({
 	const {
 		difficulty_level,
 		character_limit,
-	} = subjective?.[0] || {};
+	} = subjective?.[START_INDEX] || {};
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
@@ -42,7 +44,7 @@ const getSubjectivePayload = ({
 			? { question_text: questionState?.editorValue?.question_0?.toString('html') } : {}),
 		character_limit,
 		answers: [{
-			test_question_answer_id : test_question_answers?.[0]?.id,
+			test_question_answer_id : test_question_answers?.[START_INDEX]?.id,
 			answer_text             : subjectiveEditorValue.toString('html'),
 			is_correct              : true,
 			sequence_number         : 0,

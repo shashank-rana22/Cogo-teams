@@ -6,6 +6,10 @@ import QuestionCard from '../CaseStudy/QuestionCard';
 
 import styles from './styles.module.css';
 
+const START_INDEX = 0;
+const LENGTH = 10;
+const DECIMAL_PLACES = 2;
+
 function TitleComponent({
 	user_appeared_percent,
 	correct_percentage,
@@ -15,7 +19,8 @@ function TitleComponent({
 	question,
 	question_type,
 }) {
-	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 10))}...` : startCase(str));
+	const truncate = (str) => (str?.length > LENGTH ? `${startCase(str.substring(START_INDEX, LENGTH))}...`
+		: startCase(str));
 	return (
 		<div role="presentation" className={styles.container}>
 			<div className={styles.small_section}>
@@ -42,7 +47,7 @@ function TitleComponent({
 				{students_appeared}
 				{' '}
 				(
-				{toFixed(user_appeared_percent, 2)}
+				{toFixed(user_appeared_percent, DECIMAL_PLACES)}
 				%
 				)
 			</div>

@@ -13,6 +13,9 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
+const START_INDEX = 0;
+
+// eslint-disable-next-line max-lines-per-function
 const useCreateQuestion = ({
 	item,
 	setSavedQuestionDetails,
@@ -208,7 +211,7 @@ const useCreateQuestion = ({
 					...prev,
 					[`case_questions_${index}_explanation`]: isEmpty(indExplanation)
 						? RichTextEditor.createEmptyValue()
-						: RichTextEditor?.createValueFromString((indExplanation?.[0] || ''), 'html'),
+						: RichTextEditor?.createValueFromString((indExplanation?.[START_INDEX] || ''), 'html'),
 				}));
 
 				setQuestionState((prev) => ({
@@ -248,22 +251,23 @@ const useCreateQuestion = ({
 
 			setSubjectiveEditorValue(isEmpty(test_question_answers)
 				? RichTextEditor.createEmptyValue()
-				: RichTextEditor?.createValueFromString((test_question_answers?.[0]?.answer_text || ''), 'html'));
+				: RichTextEditor
+					?.createValueFromString((test_question_answers?.[START_INDEX]?.answer_text || ''), 'html'));
 
 			return;
 		}
 
-		const childKey = 'question.0';
+		const CHILD_KEY = 'question.0';
 
 		setValue('question_type', 'stand_alone');
-		setValue(`${childKey}.question_type`, question_type);
-		setValue(`${childKey}.difficulty_level`, difficulty_level);
+		setValue(`${CHILD_KEY}.question_type`, question_type);
+		setValue(`${CHILD_KEY}.difficulty_level`, difficulty_level);
 
 		setEditorValue((prev) => ({
 			...prev,
 			question_0_explanation: isEmpty(explanation)
 				? RichTextEditor?.createEmptyValue()
-				: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'),
+				: RichTextEditor?.createValueFromString((explanation?.[START_INDEX] || ''), 'html'),
 		}));
 
 		setQuestionState((prev) => ({
@@ -279,7 +283,7 @@ const useCreateQuestion = ({
 		test_question_answers.forEach((answer, index) => {
 			const { answer_text, is_correct } = answer || {};
 
-			const subChildKey = `${childKey}.options.${index}`;
+			const subChildKey = `${CHILD_KEY}.options.${index}`;
 
 			setValue(`${subChildKey}.answer_text`, answer_text);
 			setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');

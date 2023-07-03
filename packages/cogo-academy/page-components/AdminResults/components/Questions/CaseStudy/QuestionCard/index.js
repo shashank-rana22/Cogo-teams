@@ -7,18 +7,24 @@ import useGetTestResultQuestion from '../../hooks/useGetTestResultQuestion';
 import GetAnswerItem from './GetAnswerItem';
 import styles from './styles.module.css';
 
+const START_INDEX = 0;
+const OFFSET = 1;
+const ARRAY_LENGTH = 3;
+
 function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	const { data = {}, loading } = useGetTestResultQuestion({ test_id, question_id });
 
 	const { answers = [], question_data = {} } = data || {};
 	const { question = '', explanation } = question_data || {};
 
-	const explanationHtmlString = explanation?.[0];
+	const explanationHtmlString = explanation?.[START_INDEX];
 
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{Array(3).fill('').map(() => (
+				{Array(ARRAY_LENGTH).fill('').map(() => (
+
+					// eslint-disable-next-line react/jsx-key
 					<div
 						className={styles.placeholder_inner_container}
 					>
@@ -40,7 +46,7 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 					<div className={styles.question_heading}>
 						<div className={styles.question_number}>
 							Q
-							{index + 1}
+							{index + OFFSET}
 						</div>
 
 						<div className={styles.display_question}>

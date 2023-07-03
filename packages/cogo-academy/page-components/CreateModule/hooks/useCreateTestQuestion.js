@@ -5,7 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
-const actionNameMapping = {
+const ACTION_NAME_MAPPING = {
 	stand_alone : 'Stand Alone',
 	case_study  : 'Case Study',
 	subjective 	: 'Subjective',
@@ -70,7 +70,7 @@ function useCreateTestQuestion({
 				data: payload,
 			});
 
-			Toast.success(`${actionNameMapping[question_type]} question created successfully`);
+			Toast.success(`${ACTION_NAME_MAPPING[question_type]} question created successfully`);
 
 			reset();
 			listSetQuestions({ questionSetId });

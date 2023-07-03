@@ -7,6 +7,8 @@ import QuestionForm from './components/QuestionForm';
 import styles from './styles.module.css';
 import useCreateQuestion from './useCreateQuestion';
 
+const OFFSET = 1;
+
 function CreateQuestion({
 	index,
 	questionSetId,
@@ -60,7 +62,7 @@ function CreateQuestion({
 
 	return (
 		<form ref={ref} key={questionTypeWatch} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
-			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
+			<div className={styles.question_label}>{`Question ${index + OFFSET}`}</div>
 
 			<div className={styles.form_component}>
 				<BasicDetails

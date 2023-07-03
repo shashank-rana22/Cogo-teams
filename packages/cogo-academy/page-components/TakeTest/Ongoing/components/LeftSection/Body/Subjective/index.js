@@ -11,6 +11,8 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
+const START_INDEX = 0;
+
 function Subjective({
 	question = {},
 	currentQuestion,
@@ -27,7 +29,7 @@ function Subjective({
 		allow_file_upload,
 	} = question;
 
-	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[0] || {};
+	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[START_INDEX] || {};
 
 	useEffect(() => {
 		setSubjectiveAnswer(

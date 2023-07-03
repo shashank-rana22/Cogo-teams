@@ -50,13 +50,13 @@ function QuestionForm({
 	setCaseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
-		const hash = {};
+		const HASH = {};
 
 		controls.forEach((item) => {
-			hash[item?.name] = item;
+			HASH[item?.name] = item;
 		});
 
-		return hash;
+		return HASH;
 	}, []);
 
 	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
@@ -66,30 +66,30 @@ function QuestionForm({
 		name: fieldArrayControls.name,
 	});
 
-	const childEmptyValues = {};
+	const CHILD_EMPTY_VALUES = {};
 	fieldArrayControls.controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
 	});
 
 	const handleAppendChild = (index) => {
-		append({ ...childEmptyValues, isNew: true });
+		append({ ...CHILD_EMPTY_VALUES, isNew: true });
 
 		setEditorValue((prev) => ({
 			...prev,
-			[`case_questions_${index + 1}_explanation`]: RichTextEditor.createEmptyValue(),
+			[`case_questions_${index + OFFSET}_explanation`]: RichTextEditor.createEmptyValue(),
 		}));
 
 		setQuestionState((prev) => ({
 			...prev,
 			editorValue: {
 				...prev.editorValue,
-				[`case_questions_${index + 1}`]: RichTextEditor.createEmptyValue(),
+				[`case_questions_${index + OFFSET}`]: RichTextEditor.createEmptyValue(),
 			},
 		}));
 	};
 
 	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
-		append({ ...childEmptyValues, isNew: true });
+		append({ ...CHILD_EMPTY_VALUES, isNew: true });
 
 		setEditorValue((prev) => ({
 			...prev,
@@ -106,7 +106,7 @@ function QuestionForm({
 	}
 
 	const handleDeleteNewObject = (index) => {
-		remove(index, 1);
+		remove(index, OFFSET);
 
 		updateStates({
 			setQuestionState,
@@ -153,7 +153,7 @@ function QuestionForm({
 							setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 						/>
 
-						{fields.length > 1 && field?.isNew ? (
+						{fields.length > OFFSET && field?.isNew ? (
 							<IcMCrossInCircle
 								className={styles.delete_button}
 								width={16}
@@ -163,7 +163,7 @@ function QuestionForm({
 						) : null}
 					</div>
 
-					{index === fields.length - 1 && mode !== 'view' && questionTypeWatch === 'case_study' ? (
+					{index === fields.length - OFFSET && mode !== 'view' && questionTypeWatch === 'case_study' ? (
 						<div className={styles.button_container}>
 							<Button
 								type="button"

@@ -1,3 +1,6 @@
+const MIN_OPTIONS_LENGTH = 2;
+const CORRECT_OPTIONS_LENGTH = 1;
+
 const checkErrors = ({ options, question_type, hasText }) => {
 	const correctOptions = options.filter((item) => item.is_correct === 'true');
 
@@ -7,7 +10,7 @@ const checkErrors = ({ options, question_type, hasText }) => {
 
 	const correctOptionsLength = correctOptions.length;
 
-	if (allOptions.length < 2) {
+	if (allOptions.length < MIN_OPTIONS_LENGTH) {
 		return 'Atleast two option should be present';
 	}
 
@@ -15,7 +18,7 @@ const checkErrors = ({ options, question_type, hasText }) => {
 		return 'Atleast one option should be true';
 	}
 
-	if (question_type === 'single_correct' && correctOptionsLength > 1) {
+	if (question_type === 'single_correct' && correctOptionsLength > CORRECT_OPTIONS_LENGTH) {
 		return 'Only one option should be true';
 	}
 

@@ -6,6 +6,10 @@ import toFixed from '../../utils/toFixed';
 
 import styles from './styles.module.css';
 
+const ZERO_LENGTH = 0;
+const DECIMAL_PLACES = 2;
+const OFFSET = 1;
+
 function QuestionCard({
 	question = '',
 	answers = [],
@@ -27,13 +31,13 @@ function QuestionCard({
 
 				<div className={styles.answer_header}>
 
-					{peers > 0 ? (
+					{peers > ZERO_LENGTH ? (
 						<div className={styles.percentage_bar} style={{ width: `${peers}%` }} />
 
 					) : null}
 
 					<div className={styles.peer_percentage}>
-						{toFixed(peers, 2)}
+						{toFixed(peers, DECIMAL_PLACES)}
 						{' '}
 						% Peers
 					</div>
@@ -68,7 +72,7 @@ function QuestionCard({
 				<div className={styles.question_heading}>
 					<div className={styles.question_number}>
 						Q
-						{index + 1}
+						{index + OFFSET}
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
 						<div className={styles.question_text} dangerouslySetInnerHTML={{ __html: question }} />

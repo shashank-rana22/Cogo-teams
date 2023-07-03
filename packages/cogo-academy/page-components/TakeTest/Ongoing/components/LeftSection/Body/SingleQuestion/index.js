@@ -8,6 +8,9 @@ import styles from './styles.module.css';
 
 const alphabets = getAlphabets('A', 'Z');
 
+const START_INDEX = 0;
+const OFFSET = 1;
+
 function SingleQuestion({
 	question = {},
 	currentQuestion,
@@ -36,7 +39,7 @@ function SingleQuestion({
 
 	useEffect(() => {
 		if (question_type !== 'multi_correct') {
-			setAnswer(correctAnswerIds?.[0] || '');
+			setAnswer(correctAnswerIds?.[START_INDEX] || '');
 		} else {
 			setAnswer(correctAnswerIds || []);
 		}
@@ -53,7 +56,7 @@ function SingleQuestion({
 					Question
 					{' '}
 					{from === 'case_study'
-						? `${currentQuestion}${alphabets[subQuestion - 1].toLowerCase()}` : currentQuestion}
+						? `${currentQuestion}${alphabets[subQuestion - OFFSET].toLowerCase()}` : currentQuestion}
 					{' '}
 					of
 					{' '}

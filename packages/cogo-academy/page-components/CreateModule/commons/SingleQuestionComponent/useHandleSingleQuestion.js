@@ -28,14 +28,14 @@ function useHandleSingleQuestion({
 	caseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
-		const hash = {};
+		const HASH = {};
 		const controls = getControls({ mode });
 
 		controls.forEach((item) => {
-			hash[item?.name] = item;
+			HASH[item?.name] = item;
 		});
 
-		return hash;
+		return HASH;
 	}, [mode]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
@@ -55,7 +55,7 @@ function useHandleSingleQuestion({
 
 	const handleDelete = () => {
 		if (field.isNew) {
-			remove(index, 1);
+			remove(index, OFFSET);
 			updateStates({
 				setQuestionState,
 				setEditorValue,

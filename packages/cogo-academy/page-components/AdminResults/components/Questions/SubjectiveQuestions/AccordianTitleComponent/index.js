@@ -5,6 +5,8 @@ import toFixed from '../../../../../CreateModule/utils/toFixed';
 
 import styles from './styles.module.css';
 
+const DECIMAL_PLACES = 2;
+
 function AccordianTitleComponent({ data = {} }) {
 	const {
 		topic = '',
@@ -31,7 +33,7 @@ function AccordianTitleComponent({ data = {} }) {
 			<div className={styles.small_section}>{startCase(difficulty_level)}</div>
 
 			<div className={styles.small_section}>
-				{`${user_appeared_count} ( ${toFixed(user_appeared_percent, 2)}% )`}
+				{`${user_appeared_count} ( ${toFixed(user_appeared_percent, DECIMAL_PLACES)}% )`}
 			</div>
 		</div>
 	);
