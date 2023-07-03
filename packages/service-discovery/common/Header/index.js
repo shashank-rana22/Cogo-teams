@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
+import AdditionalServicesForm from '../../page-components/SearchResults/components/AdditionalServices/AdditionalServicesForm';
 import ToggleSwitch from '../../page-components/SearchResults/components/DarkLightMode';
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
 import LocationDetails from '../LocationDetails';
@@ -11,7 +12,9 @@ import SelectedOrgInfo from './SelectedOrgInfo';
 import styles from './styles.module.css';
 
 const SUB_HEADER_COMPONENT_MAPPING = {
-	edit_details: EditDetailsHeader,
+	edit_details                : EditDetailsHeader,
+	additional_services_details : AdditionalServicesForm,
+	default                     : null,
 };
 
 function Header({
@@ -102,6 +105,8 @@ function Header({
 			{showAdditionalHeader ? (
 				<SubHeaderComponent {...headerProps} />
 			) : null}
+
+			{headerProps.key === 'additional_services_details' ? <SubHeaderComponent {...headerProps} /> : null}
 
 		</div>
 

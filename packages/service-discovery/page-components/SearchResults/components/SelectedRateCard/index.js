@@ -26,6 +26,7 @@ function SelectedRateCard({
 	detail = {},
 	setSelectedCard = () => {},
 	setScreen = () => {},
+	setHeaderProps = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -67,7 +68,11 @@ function SelectedRateCard({
 						<ServiceBundling />
 					</div>
 					<div className={styles.additionalServices}>
-						<AdditionalServices rateCardData={rateCardData} />
+						<AdditionalServices
+							rateCardData={rateCardData}
+							detail={detail}
+							setHeaderProps={setHeaderProps}
+						/>
 
 						<div className={styles.proceedContainer}>
 							<div>

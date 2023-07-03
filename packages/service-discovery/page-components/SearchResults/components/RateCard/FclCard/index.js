@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
 import FreightPriceDetail from './BasicFreightDetail';
@@ -16,7 +18,7 @@ function FclCard({
 	setComparisonCheckbox = () => {},
 	comparisonCheckbox = {},
 }) {
-	const { service_rates } = rateCardData;
+	const { service_rates, arrival = '', departure = '' } = rateCardData;
 	const primaryService = detail?.search_type;
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
@@ -27,6 +29,19 @@ function FclCard({
 	const primaryServiceRates = serviceRateswithId.filter(
 		(service) => service.service_type === primaryService,
 	);
+
+	const scheduleData = {
+		arrival: formatDate({
+			date       : arrival,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		}),
+		departure: formatDate({
+			date       : departure,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		}),
+	};
 
 	return (
 		<div
@@ -43,7 +58,7 @@ function FclCard({
 			</div>
 
 			<div className={styles.middle}>
-				<Route detail={detail} />
+				<Route detail={detail} scheduleData={scheduleData} />
 				<div className={styles.rateDetails}>
 
 					<div style={{ marginRight: 24 }}>
@@ -82,7 +97,7 @@ function FclCard({
 
 			{!isSelectedCard && (
 				<div className={styles.bottom}>
-					<DetailFooter rateCardData={rateCardData} />
+					<DetailFooter rateCardData={rateCardData} detail={detail} />
 				</div>
 			)}
 		</div>

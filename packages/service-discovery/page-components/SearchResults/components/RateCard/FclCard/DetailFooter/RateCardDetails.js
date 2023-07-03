@@ -3,9 +3,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function RateCardDetails({ detailsComponentMapping, rateCardData, showDetails }) {
-	console.log('showDetails', showDetails);
-
+function RateCardDetails({ detailsComponentMapping, rateCardData, showDetails, detail }) {
 	const [activeTab, setActiveTab] = useState(showDetails);
 
 	return (
@@ -22,7 +20,7 @@ function RateCardDetails({ detailsComponentMapping, rateCardData, showDetails })
 
 					return (
 						<TabPanel key={key} name={key} title={label}>
-							<Component rateCardData={rateCardData} />
+							<Component rateCardData={rateCardData} detail={detail} />
 						</TabPanel>
 					);
 				})}

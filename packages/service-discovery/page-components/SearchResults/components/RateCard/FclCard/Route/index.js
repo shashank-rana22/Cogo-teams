@@ -24,11 +24,15 @@ function DottedLineWithTag() {
 	);
 }
 
-function Route({ detail }) {
+function Route({ detail, scheduleData = {} }) {
 	const { origin, destination } = getLocationInfo(detail, {}, 'search_type');
 
-	// const originCountry = origin?.display_name?.split(', ');
-	// const destinationCountry = destination?.display_name?.split(', ');
+	// const originIcd = detail?.trade_type === 'export'
+	// 	? detail?.origin_port?.is_icd || detail?.port?.is_icd
+	// 	: detail?.origin_port?.is_icd;
+	// const destinationIcd = detail?.trade_type === 'import'
+	// 	? detail?.destination_port?.is_icd || detail?.port?.is_icd
+	// 	: detail?.destination_port?.is_icd;
 
 	const {
 		name: originPortName = '',
@@ -39,6 +43,8 @@ function Route({ detail }) {
 		name: destinationPortName = '',
 		port_code: destinationPortCode = '',
 	} = destination || {};
+
+	const isScheduleExist = !!scheduleData.arrival;
 
 	return (
 		<div className={styles.container}>
@@ -55,7 +61,7 @@ function Route({ detail }) {
 			<div className={styles.locationNameGroup}>
 				<div className={styles.origin}>
 					<div className={styles.locationCode}>
-						{originPortCode}
+						{isScheduleExist ? scheduleData.departure : originPortCode}
 					</div>
 				</div>
 
@@ -71,7 +77,7 @@ function Route({ detail }) {
 
 				<div className={styles.destination}>
 					<div className={styles.locationCode}>
-						{destinationPortCode}
+						{isScheduleExist ? scheduleData.arrival : destinationPortCode}
 					</div>
 				</div>
 			</div>

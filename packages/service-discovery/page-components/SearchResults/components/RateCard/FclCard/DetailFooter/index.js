@@ -30,7 +30,7 @@ const detailsComponentMapping = {
 	},
 };
 
-function DetailFooter({ rateCardData }) {
+function DetailFooter({ rateCardData, detail }) {
 	const [showDetails, setShowDetails] = useState('');
 
 	return (
@@ -75,6 +75,7 @@ function DetailFooter({ rateCardData }) {
 					detailsComponentMapping={detailsComponentMapping}
 					rateCardData={rateCardData}
 					showDetails={showDetails}
+					detail={detail}
 				/>
 			) : null}
 		</>
