@@ -20,9 +20,9 @@
 .question_text {
 	max-width: 600px;
 	overflow: hidden;
+	text-decoration: underline;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	text-decoration: underline;
 }
 
 .text {

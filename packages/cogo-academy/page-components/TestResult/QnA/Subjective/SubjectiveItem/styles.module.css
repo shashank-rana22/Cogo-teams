@@ -31,10 +31,10 @@
 }
 
 .question_text {
+	display: flex;
 	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
-	display: flex;
 
 	img {
 		max-width: 70%;
@@ -42,7 +42,6 @@
 	}
 
 	@media (max-width: 768px) {
-		
 		img {
 			max-width: 100%;
 		}
