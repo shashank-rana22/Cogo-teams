@@ -7,6 +7,10 @@
 	box-shadow: 0 0 10px #fb0, 0 0 5px #fb0 !important;
 }
 
+:root {
+	--font-family: 'Roboto', 'sans-serif';
+}
+
 #nprogress .spinner-icon {
 	border-top-color: #fb0 !important;
 	border-left-color: #fb0 !important;
