@@ -11,6 +11,7 @@ import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
 const SNAPSHOT_TIMEOUT = 100;
+const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
 
 function ReminderModal({ firestore, agentId }) {
 	const [reminderModal, setReminderModal] = useState(false);
@@ -53,7 +54,7 @@ function ReminderModal({ firestore, agentId }) {
 			<Modal.Body>
 				<div className={styles.header}>
 					No. of Chats Assigned
-					<span>{shipmentData.assignedChatsCount || 0}</span>
+					<span>{shipmentData.assignedChatsCount || DEFAULT_NO_OF_CHATS_ASSIGNED}</span>
 				</div>
 				<div className={styles.header}>
 					Shipments Booked

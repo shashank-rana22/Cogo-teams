@@ -20,9 +20,7 @@ function Conversations({
 	setActiveTab,
 	suggestions,
 }) {
-	const Component = CONVERSATION_COMPONENT_MAPPING[activeTab?.tab] || null;
-
-	const COMPONENT_PROPS_MAPPING = {
+	const componentPropsMapping = {
 		message: {
 			firestore,
 			activeTab,
@@ -37,6 +35,8 @@ function Conversations({
 		mail  : { mailProps },
 	};
 
+	const Component = CONVERSATION_COMPONENT_MAPPING[activeTab?.tab] || null;
+
 	if (!Component) {
 		return null;
 	}
@@ -45,7 +45,7 @@ function Conversations({
 		<div className={styles.container}>
 			<Component
 				key={activeTab?.tab}
-				{...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})}
+				{...(componentPropsMapping[activeTab?.tab] || {})}
 			/>
 		</div>
 	);

@@ -49,7 +49,7 @@ export const switchUserChats = async ({ val, firestore, setActiveTab }) => {
 	}
 };
 
-export const updateLeaduser = async ({ data = {}, activeCardData, firestore }) => {
+export const updateLeaduser = ({ data = {}, activeCardData, firestore }) => {
 	const { channel_type, id } = activeCardData || {};
 
 	const roomCollection = doc(

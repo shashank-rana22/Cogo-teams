@@ -45,7 +45,7 @@ function AssignToForm({
 				params: {
 					filters: {
 						status            : 'active',
-						common_agent_type : getCommonAgentType({ viewType }),
+						common_agent_type : getCommonAgentType({ viewType }) || undefined,
 					},
 				},
 			},

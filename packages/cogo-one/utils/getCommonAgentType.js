@@ -15,7 +15,7 @@ const getCommonAgentType = ({ viewType }) => {
 		return 'shipment_specialist';
 	}
 
-	return undefined;
+	return '';
 };
 
 export default getCommonAgentType;

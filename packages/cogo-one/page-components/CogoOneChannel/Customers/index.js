@@ -40,7 +40,7 @@ function Customers({
 		isBotSession,
 	});
 
-	const COMPONENT_PROPS_MAPPING = {
+	const componentPropsMapping = {
 		message: {
 			userId,
 			firestore,
@@ -126,7 +126,7 @@ function Customers({
 			{Component && (
 				<Component
 					key={activeTab?.tab}
-					{...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})}
+					{...(componentPropsMapping[activeTab?.tab] || {})}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
 				/>

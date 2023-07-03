@@ -8,7 +8,7 @@ import getFileAttributes from '../utils/getFileAttributes';
 
 import useSendMessage from './useSendMessage';
 
-const DEFAULT_URLARRAY_LENGTH = 0;
+const DEFAULT_URL_ARRAY_LENGTH = 0;
 const LAST_ELEMENT_IN_A_ARRAY = 1;
 
 const useSendChat = ({
@@ -41,7 +41,7 @@ const useSendChat = ({
 
 		const urlArray = decodeURI(draftUploadedFiles?.[id])?.split('/');
 
-		const fileName = urlArray[(urlArray?.length || DEFAULT_URLARRAY_LENGTH) - LAST_ELEMENT_IN_A_ARRAY] || '';
+		const fileName = urlArray[(urlArray?.length || DEFAULT_URL_ARRAY_LENGTH) - LAST_ELEMENT_IN_A_ARRAY] || '';
 
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			finalUrl: draftUploadedFiles?.[id], fileName,
