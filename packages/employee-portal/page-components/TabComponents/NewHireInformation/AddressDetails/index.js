@@ -21,8 +21,6 @@ const removeTypeField = (controlItem) => {
 };
 
 function AddressDetails({ data:content, getEmployeeDetails }) {
-	const [address, setAddress] = useState(false);
-
 	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
 
 	const { permanent_address, present_address, id } = content?.detail || {};
@@ -42,6 +40,10 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	const permanentcontrols = permanent_controls({ content });
 
 	const { updateEmployeeDetails, loading } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+
+	const addressEqualityCheck = JSON.stringify(permanent_address) === JSON.stringify(present_address);
+
+	const [address, setAddress] = useState(addressEqualityCheck);
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
@@ -101,6 +103,14 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			));
 		}
 	};
+
+	useEffect(() => {
+		if (!address) {
+			CURRENT_ADDRESS_MAPPING.map((element) => (
+				setValue(element, '')
+			));
+		}
+	}, [address, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
@@ -181,7 +191,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			</div>
 
 			<div className={styles.check}>
-				<Checkbox onChange={handleAddressChange} />
+				<Checkbox onChange={handleAddressChange} checked={address} />
 				Current Address is same as Permanent Address
 			</div>
 
