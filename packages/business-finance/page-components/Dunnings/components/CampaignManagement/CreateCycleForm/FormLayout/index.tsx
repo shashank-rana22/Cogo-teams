@@ -227,8 +227,13 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 							<Datepicker
 								placeholder="Enter Date"
 								dateFormat="MM/dd/yyyy"
-								name="date"
-								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
+								name="oneTimeDate"
+								onChange={(date) => {
+									const newDate = new Date(date);
+
+									const timestampOneTime = newDate.getTime();
+									setFormData({ ...formData, oneTimeDate: timestampOneTime });
+								}}
 								value={oneTimeDate}
 							/>
 
