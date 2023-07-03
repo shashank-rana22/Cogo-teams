@@ -1,7 +1,6 @@
 import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -22,25 +21,21 @@ interface DailySalesProps {
 	quaterlyLoading?: boolean
 }
 
+const MARGIN = {
+	top    : 10,
+	right  : 0,
+	bottom : 30,
+	left   : 80,
+};
+
 function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
-	interface Props {
-		quarterView?: string;
-		graphView?: string;
-	}
-	const [params, onChangeParams] = useState<Props>({
+	const [params, onChangeParams] = useState({
 		quarterView : 'normalView',
 		graphView   : 'normalView',
 	});
-
-	const MARGIN = {
-		top    : 10,
-		right  : 0,
-		bottom : 30,
-		left   : 80,
-	};
 
 	const currentYear = new Date().getFullYear();
 
@@ -159,19 +154,7 @@ function DailySalesOutstanding({
 									className={styles.price_container}
 								>
 									<div className={styles.amount}>
-										{
-										formatAmount({
-											amount   : item.dsoForTheMonth,
-											currency : item.currency,
-											options  : {
-												notation              : 'compact',
-												compactDisplay        : 'short',
-												maximumFractionDigits : 2,
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-											},
-										})
-										}
+										{item.dsoForTheMonth}
 									</div>
 									<div style={{ fontWeight: '500', fontSize: '16px' }}>
 										{item.month}
@@ -187,16 +170,7 @@ function DailySalesOutstanding({
 							(quaterly).map((item, index) => (
 								<div className={styles.price_container} key={item.currency}>
 									<div className={styles.amount}>
-										{formatAmount({
-											amount   : item.qsoForQuarter as any || 0,
-											currency : item.currency,
-											options  :	{
-												notation              : 'compact',
-												compactDisplay        : 'short',
-												maximumFractionDigits : 2,
-												style                 : 'currency',
-											},
-										})}
+										{item.qsoForQuarter}
 									</div>
 									<div
 										className={styles.quarter_container}
@@ -208,7 +182,6 @@ function DailySalesOutstanding({
 											{index + 1}
 										</div>
 										<div>
-											-
 											{item.quarter}
 										</div>
 									</div>

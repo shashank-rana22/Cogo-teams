@@ -66,14 +66,15 @@
 }
 
 .quarter {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 500;
+	margin-right: 10px;
 	color: #ed3726;
 }
 
 .quarter_container {
 	display: flex;
-	align-items: center;
+	justify-content: space-between;
 }
 
 .sales_container {
