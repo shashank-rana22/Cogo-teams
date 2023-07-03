@@ -35,7 +35,7 @@ function ExecuteTask({
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData, servicesList: services, primaryService: primary_service });
 
-	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - 1] : {};
+	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - STEPS_LENGTH] : {};
 
 	if (loading) {
 		return <div><LoadingState /></div>;
@@ -97,7 +97,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - STEPS_LENGTH}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
