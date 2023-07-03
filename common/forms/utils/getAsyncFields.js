@@ -604,6 +604,17 @@ function asyncListOrganizationStakeholders() {
 	};
 }
 
+function asyncInsuranceCommoditiesList() {
+	return {
+		labelKey     : 'commodity',
+		valueKey     : 'id',
+		endpoint     : 'saas/insurance/list-commodities',
+		initialCall  : true,
+		authkey      : 'get_saas_insurance_list_commodities',
+		microService : 'business_finance',
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -654,4 +665,5 @@ export {
 	asyncListTests,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncInsuranceCommoditiesList,
 };

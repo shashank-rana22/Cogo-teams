@@ -786,6 +786,11 @@ const getAsyncFields = (key) => {
 				page       : 1,
 			},
 		},
+		insurance_commodities: {
+			valueKey : 'id',
+			lableKey : 'name',
+			asyncKey : 'insurance_commodities',
+		},
 
 	};
 

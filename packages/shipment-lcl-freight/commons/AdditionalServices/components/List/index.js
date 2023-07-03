@@ -1,5 +1,6 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -16,8 +17,10 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
+const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
+
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -47,6 +50,8 @@ function List({ isSeller = false }) {
 		refetch : refetchForUpdateSubService,
 		showIp  : showModal === 'ip',
 	});
+
+	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
 
 	return (
 		<div className={styles.container}>
@@ -120,6 +125,14 @@ function List({ isSeller = false }) {
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
 				</Button>
+				<Button
+					onClick={() => setShowModal('cargo_insurance_service')}
+					className={styles.btn_div}
+					disabled={!!isCargoInsured}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Cargo Insurance
+				</Button>
 			</div>
 
 			{showModal === 'add_sell_price' && (
@@ -161,6 +174,15 @@ function List({ isSeller = false }) {
 					closeModal={closeModal}
 				/>
 			)}
+
+			{showModal === 'cargo_insurance_service' ? (
+				<CargoInsurance
+					data={shipment_data}
+					refetch={refetch}
+					setShowModal={setShowModal}
+					primary_service={primary_service}
+				/>
+			) : null}
 
 		</div>
 	);

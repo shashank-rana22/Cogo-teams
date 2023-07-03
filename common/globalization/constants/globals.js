@@ -220,6 +220,9 @@ const GLOBAL_CONSTANTS = {
 		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		cargo_insurance_loader:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+		seller_address_svg: 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -240,37 +243,49 @@ const GLOBAL_CONSTANTS = {
 		},
 		inco_term: {
 			cif: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIF - Cost, Insurance and Freight',
 			},
 			cfr: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CFR - Cost and Freight',
 			},
 			cpt: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CPT - Carriage Paid To',
 			},
 			cip: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIP - Carriage and Insurance Paid to',
 			},
 			dat: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAT - Delivered At Terminal',
 			},
 			dap: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAP - Delivered At Place',
 			},
 			ddp: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DDP - Delivered Duty Paid',
 			},
 			fob: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FOB - Free On Board',
 			},
 			exw: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'EXW - Ex Works',
 			},
 			fca: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FCA - Free Carrier',
 			},
 			fas: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FAS - Free Alongside Ship',
+
 			},
 		},
 		role_options: [
@@ -291,6 +306,8 @@ const GLOBAL_CONSTANTS = {
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+		mobile_number                     : /^[0-9]{10}$/,
+		gst_number                        : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 	},
@@ -315,6 +332,13 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
+	service_supported_countries: {
+		feature_supported_service: {
+			cargo_insurance: {
+				countries: ['IN'],
+			},
+		},
+	},
 	services: {
 		fcl_freight: {
 			unit: {

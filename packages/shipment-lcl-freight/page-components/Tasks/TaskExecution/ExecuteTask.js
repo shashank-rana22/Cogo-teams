@@ -6,6 +6,7 @@ import {
 	MarkConfirmServices,
 	UploadDraftBL,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -24,6 +25,8 @@ function ExecuteTask({
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
+	const SERVICES_FOR_INSURANCE = ['lcl_freight_service'];
+	const STEPS_LENGTH = 1;
 
 	const {
 		steps = [],
@@ -79,6 +82,13 @@ function ExecuteTask({
 				services={services}
 			/>
 		);
+	}
+
+	if (
+		task?.task === 'generate_cargo_insurance'
+		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
+	) {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
 	return (
