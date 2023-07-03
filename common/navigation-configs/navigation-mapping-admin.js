@@ -230,6 +230,18 @@ const navigationMappingAdmin = {
 		main_apis   : ['list_organizations'],
 		module_type : 'crm',
 	},
+	governance_manager: {
+		key           : 'governance_manager',
+		title         : 'Governance Manager',
+		href          : '/governance-manager',
+		as            : '/governance-manager',
+		type          : 'link',
+		icon          : IcMCrm,
+		possible_apis : [
+		],
+		main_apis   : [],
+		module_type : 'crm',
+	},
 	support_crm: {
 		key           : 'support_crm',
 		title         : 'Support CRM',

@@ -18,6 +18,7 @@ import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
@@ -113,6 +114,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...governanceManager,
 };
 
 export default routeConfig;

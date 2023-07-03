@@ -31,10 +31,8 @@ const getSideBarConfigs = ({
 
 	const getNavMappings = (navMappingKeys) => {
 		const nav_items = [];
-
 		(navMappingKeys || []).forEach((key) => {
 			const { showInNav = true } = navigationMappingAdmin?.[key] || {};
-
 			if (
 				key
 				&& showInNav
