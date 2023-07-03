@@ -1,0 +1,104 @@
+.header {
+	font-size: 24px;
+	font-weight: 700;
+	margin-right: 30px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.employee_name:hover {
+	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	
+	@media (max-width: 768px) {
+		margin-top: 50px;
+		flex-wrap: wrap;
+	}
+}
+
+.rating_cycle_select{
+	width: 300px;
+
+	@media (max-width: 768px) {
+		margin-top: 20px;
+		width: 100%;
+	}
+}
+
+.select_container{
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
+}
+
+.async_select{
+	width: 250px;
+	margin : 0 8px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 8px 0;
+	}
+}
+
+.rating_flag {
+	min-width: 50px;
+	text-align: center;
+}
+
+.table_text {
+	text-align: center;
+}
+
+.label{
+	margin-bottom: 4px;
+}
+
+.table_container {
+	display: flex;
+	margin-top: 20px;
+	max-width: 100%;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+	}
+}
+
+.flexitem_1 {
+	width: 80%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		order: 2;
+		margin-top: 20px;
+	}
+
+	:global {
+		.ui_accordion_title div{
+			width: 100%;
+		}
+	}
+}
+
+.flexitem_2 {
+	width: 20%;
+	padding-left: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding-left: 0;
+		order: 1;
+	}
+}

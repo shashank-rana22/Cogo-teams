@@ -130,6 +130,63 @@ const consolidated_invoices = {
 			service_name : 'hrms',
 		},
 	],
+	performance_manager_dashboard: [
+		{
+			api          : 'list_employee_kra_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_rating_review_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_level',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_rating_cycles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_rating_count',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_squads',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_sub_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_tribes',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_managers',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default consolidated_invoices;

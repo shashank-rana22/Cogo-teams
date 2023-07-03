@@ -44,6 +44,11 @@ import {
 	asyncListTests,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListEmployeeDetails,
+	asyncListAllSquads,
+	asyncListAllTribes,
+	asyncListAllChapters,
+	asyncListAllManagers,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -106,6 +111,11 @@ const keyAsyncFieldsParamsMapping = {
 	list_tests                           : asyncListTests,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_employee_details                : asyncListEmployeeDetails,
+	list_all_squads                      : asyncListAllSquads,
+	list_all_tribes                      : asyncListAllTribes,
+	list_all_chapters                    : asyncListAllChapters,
+	list_all_managers                    : asyncListAllManagers,
 };
 
 function AsyncSelect(props) {

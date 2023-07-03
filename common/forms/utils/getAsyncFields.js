@@ -604,6 +604,81 @@ function asyncListOrganizationStakeholders() {
 	};
 }
 
+function asyncListEmployeeDetails() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
+function asyncListAllSquads() {
+	return {
+		labelKey    : 'squad_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_squads',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
+function asyncListAllTribes() {
+	return {
+		labelKey    : 'tribe_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_tribes',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
+function asyncListAllChapters() {
+	return {
+		labelKey    : 'chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
+function asyncListAllManagers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_managers',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -654,4 +729,9 @@ export {
 	asyncListTests,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListEmployeeDetails,
+	asyncListAllSquads,
+	asyncListAllTribes,
+	asyncListAllChapters,
+	asyncListAllManagers,
 };
