@@ -90,3 +90,5 @@ export const PRIORITY_MAPPING = {
 	medium : 'medium',
 	low    : 'low',
 };
+
+export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];

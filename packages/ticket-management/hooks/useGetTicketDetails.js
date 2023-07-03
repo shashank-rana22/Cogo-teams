@@ -10,6 +10,7 @@ const getParams = ({ ticketId, PerformedByID }) => ({
 
 const useGetTicketDetails = ({ ticketId }) => {
 	const profile = useSelector((state) => state.profile || {});
+	const performedById = profile?.user?.id;
 
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/detail',
@@ -20,12 +21,12 @@ const useGetTicketDetails = ({ ticketId }) => {
 	const getTicketDetails = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ ticketId, PerformedByID: profile?.user?.id }),
+				params: getParams({ ticketId, PerformedByID: performedById }),
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, ticketId, profile?.user?.id]);
+	}, [trigger, ticketId, performedById]);
 
 	useEffect(() => {
 		if (!(isEmpty(ticketId))) {

@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import { useReassignTicketsControls } from '../../configurations/reassign-controls';
+import { REQUIRED_ROLES } from '../../constants';
 import useReassignTicket from '../../hooks/useReassignTicket';
 import { getFieldController } from '../../utils/getFieldController';
 
@@ -58,7 +59,7 @@ function ReassignTicket({
 
 							if (!Element) { return null; }
 
-							if (name === 'assign_to' && !['partner-roles', 'partner-users'].includes(watchType)) {
+							if (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType)) {
 								return null;
 							}
 
@@ -82,7 +83,7 @@ function ReassignTicket({
 					</div>
 				</Modal.Body>
 
-				<Modal.Footer style={{ padding: 12 }}>
+				<Modal.Footer>
 					<Button size="md" type="submit" loading={reassignLoading}>
 						Submit
 					</Button>
