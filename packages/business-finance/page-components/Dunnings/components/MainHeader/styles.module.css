@@ -34,8 +34,8 @@
 
 .campaign_card {
 	display: flex;
-	justify-content: space-evenly;
 	align-items: center;
+	justify-content: space-evenly;
 	width: 100%;
 }
 
