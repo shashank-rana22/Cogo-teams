@@ -56,7 +56,7 @@ export function mountFlashChats({
 		return;
 	}
 
-	setLoadingState((p) => ({ ...p, flashMessagesLoading: true }));
+	setLoadingState((prev) => ({ ...prev, flashMessagesLoading: true }));
 	setFlashMessagesData({});
 
 	try {
@@ -75,9 +75,9 @@ export function mountFlashChats({
 
 				updateLoadingState('flashMessagesLoading');
 
-				setCarouselState((p) => {
-					if (p === 'in_timeout') {
-						return p;
+				setCarouselState((prev) => {
+					if (prev === 'in_timeout') {
+						return prev;
 					}
 					return isEmpty(resultList) ? 'hide' : 'show';
 				});
@@ -97,13 +97,13 @@ export function mountPinnedSnapShot({
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
-	setListData((p) => ({ ...p, pinnedMessagesData: {}, messagesListData: {} }));
+	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
 	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats) {
 		return;
 	}
 
-	setLoadingState((p) => ({ ...p, pinnedChatsLoading: true }));
+	setLoadingState((prev) => ({ ...prev, pinnedChatsLoading: true }));
 
 	const queryForPinnedChat = where('pinnedAgents', 'array-contains', userId);
 
@@ -119,8 +119,8 @@ export function mountPinnedSnapShot({
 		(pinSnapShot) => {
 			const { resultList } = dataFormatter(pinSnapShot);
 
-			setListData((p) => ({
-				...p,
+			setListData((prev) => ({
+				...prev,
 				pinnedMessagesData: { ...resultList },
 			}));
 			updateLoadingState('pinnedChatsLoading');
@@ -159,9 +159,9 @@ export function mountSnapShot({
 	queryForSearch, omniChannelQuery, updateLoadingState,
 }) {
 	const snapshotRef = snapshotListener;
-	setListData((p) => ({ ...p, messagesListData: {}, pinnedMessagesData: {} }));
+	setListData((prev) => ({ ...prev, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
-	setLoadingState((p) => ({ ...p, chatsLoading: true }));
+	setLoadingState((prev) => ({ ...prev, chatsLoading: true }));
 
 	const newChatsQuery = query(
 		omniChannelCollection,
@@ -178,12 +178,13 @@ export function mountSnapShot({
 				.docs[querySnapshot.docs.length - LAST_ITEM]?.data()?.new_message_sent_at;
 			const { resultList } = dataFormatter(querySnapshot);
 
-			setListData((p) => ({
-				...p,
+			setListData((prev) => ({
+				...prev,
 				messagesListData: { ...resultList },
 				isLastPage,
 				lastMessageTimeStamp,
 			}));
+
 			updateLoadingState('chatsLoading');
 		},
 	);
@@ -207,7 +208,7 @@ export async function getPrevChats({
 		limit(PAGE_LIMIT),
 	);
 
-	setLoadingState((p) => ({ ...p, chatsLoading: true }));
+	setLoadingState((prev) => ({ ...prev, chatsLoading: true }));
 
 	const prevChatsPromise = await getDocs(prevChatsQuery);
 	const prevChats = prevChatsPromise?.docs;
@@ -218,9 +219,9 @@ export async function getPrevChats({
 		(prevChats.length || FALLBACK_VALUE) - LAST_ITEM]?.data()?.new_message_sent_at;
 	const isLastPage = prevChats?.length < PAGE_LIMIT;
 
-	setListData((p) => ({
-		...p,
-		messagesListData: { ...(p?.messagesListData || {}), ...resultList },
+	setListData((prev) => ({
+		...prev,
+		messagesListData: { ...(prev?.messagesListData || {}), ...resultList },
 		isLastPage,
 		lastMessageTimeStamp,
 	}));
@@ -242,12 +243,14 @@ export function mountActiveRoomSnapShot({
 			firestore,
 			`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
 		);
+
 		snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
-			setActiveTab((p) => ({
-				...p,
-				data: { ...(p.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
+			setActiveTab((prev) => ({
+				...prev,
+				data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
 			}));
 		});
+
 		setActiveRoomLoading(false);
 	}
 }

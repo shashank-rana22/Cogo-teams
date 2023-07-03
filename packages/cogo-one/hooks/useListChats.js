@@ -85,7 +85,7 @@ function useListChats({
 					`${FIRESTORE_PATH[channel_type]}/${id}`,
 				);
 				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
-				setActiveTab((p) => ({ ...p, data: val }));
+				setActiveTab((prev) => ({ ...prev, data: val }));
 			} catch (e) {
 				Toast.error('Chat Not Found');
 			}
@@ -93,11 +93,11 @@ function useListChats({
 	}, [firestore, setActiveTab]);
 
 	const updateLoadingState = useCallback((key) => {
-		setLoadingState((p) => {
-			if (p?.[key]) {
-				return { ...p, [key]: false };
+		setLoadingState((prev) => {
+			if (prev?.[key]) {
+				return { ...prev, [key]: false };
 			}
-			return p;
+			return prev;
 		});
 	}, []);
 

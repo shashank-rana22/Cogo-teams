@@ -28,24 +28,26 @@ export function getHasAccessToEditGroup({ formattedMessageData, agentId, viewTyp
 export const switchUserChats = async ({ val, firestore, setActiveTab }) => {
 	const { channel_type, id } = val || {};
 
-	if (channel_type && id) {
-		try {
-			const messageDoc = doc(
-				firestore,
-				`${FIRESTORE_PATH[channel_type]}/${id}`,
-			);
+	if (!(channel_type && id)) {
+		return;
+	}
 
-			await updateDoc(
-				messageDoc,
-				{
-					new_message_count         : 0,
-					has_admin_unread_messages : false,
-				},
-			);
-			setActiveTab((p) => ({ ...p, data: val }));
-		} catch (e) {
-			Toast.error('Chat Not Found');
-		}
+	try {
+		const messageDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+
+		await updateDoc(
+			messageDoc,
+			{
+				new_message_count         : 0,
+				has_admin_unread_messages : false,
+			},
+		);
+		setActiveTab((prev) => ({ ...prev, data: val }));
+	} catch (e) {
+		Toast.error('Chat Not Found');
 	}
 };
 
