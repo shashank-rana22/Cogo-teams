@@ -13,6 +13,10 @@ const TABS = [
 		key   : 'shipping_line',
 		label : 'SHIPPING LINE',
 	},
+	{
+		key   : 'others',
+		label : 'OTHERS',
+	},
 ];
 
 function Header({ setShow, searchValue, setSearchValue, activeTab, setActiveTab }) {

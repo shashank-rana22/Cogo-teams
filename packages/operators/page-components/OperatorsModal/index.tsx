@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 
 function OperatorsModal({
 	item,
+	setItem,
 	show,
 	setShow,
 	edit,
@@ -63,7 +64,7 @@ function OperatorsModal({
 	return (
 		<Modal
 			show={show}
-			onClose={() => { setShow(false); setEdit(false); }}
+			onClose={() => { setShow(false); setEdit(false); setItem({}); }}
 			className={styles.modal_container}
 		>
 			<div className={styles.modal_header}>

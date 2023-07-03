@@ -27,6 +27,14 @@ export const OPERATORS = {
 			func  : 'startCase',
 		},
 	],
+	others: [
+		{
+			key   : 'operator_type',
+			label : 'Operator Type',
+			span  : 1.5,
+			func  : 'startCase',
+		},
+	],
 	common_second: [
 		{
 			key   : 'status',

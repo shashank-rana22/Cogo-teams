@@ -17,7 +17,7 @@ interface NestedObj {
 function Operators() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
-	const [item, setItem] = useState(null);
+	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('airline');
 
 	const {
@@ -70,6 +70,13 @@ function Operators() {
 
 	const airlineFields = [...OPERATORS.common_first, ...OPERATORS.airline, ...OPERATORS.common_second];
 	const shippingLineFields = [...OPERATORS.common_first, ...OPERATORS.common_second];
+	const otherFields = [...OPERATORS.common_first, ...OPERATORS.others, ...OPERATORS.common_second];
+
+	const FIELDS_MAPPING = {
+		airline       : airlineFields,
+		shipping_line : shippingLineFields,
+		others        : otherFields,
+	};
 
 	return (
 		<div className={styles.container}>
@@ -83,6 +90,7 @@ function Operators() {
 			{show && (
 				<OperatorsModal
 					item={item}
+					setItem={setItem}
 					show={show}
 					setShow={setShow}
 					edit={edit}
@@ -95,7 +103,7 @@ function Operators() {
 			)}
 
 			<CardList
-				fields={activeTab === 'airline' ? airlineFields : shippingLineFields}
+				fields={FIELDS_MAPPING[activeTab]}
 				data={listData}
 				loading={loading}
 				page={page}

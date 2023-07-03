@@ -36,7 +36,7 @@ const useHandleOperators = ({
 
 		try {
 			await trigger({ data });
-			Toast.success('Operators Added Successfully');
+			Toast.success(`Operators ${edit ? 'Updated' : 'Added'} Successfully`);
 			setFinalList([]);
 			setShow(false);
 			setEdit(false);

@@ -4,6 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 import CONSTANTS from '../constants/constants';
 
+const OPERATOR_TYPE_MAPPING = {
+	airline       : 'airline',
+	shipping_line : 'shipping_line',
+	others        : ['rail', 'barge'],
+};
+
 const useGetListData = (activeTab) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [finalList, setFinalList] = useState([]);
@@ -20,7 +26,7 @@ const useGetListData = (activeTab) => {
 					params: {
 						filters: {
 							q             : query,
-							operator_type : activeTab,
+							operator_type : OPERATOR_TYPE_MAPPING[activeTab],
 						},
 						page,
 						sort_type: 'desc',
