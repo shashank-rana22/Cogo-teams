@@ -19,6 +19,7 @@ interface Props {
 	settlementFilters?: object;
 	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
 }
+const DEFAULT_LENGTH = 12;
 
 const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }:Props) => [
 	{
@@ -27,7 +28,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 		accessor : (row) => (
 			<div style={{ display: 'flex' }}>
 				<div style={{ marginRight: '10px' }}>
-					{row?.sourceDocumentValue?.length >= 12 ? (
+					{row?.sourceDocumentValue?.length >= DEFAULT_LENGTH ? (
 						<Tooltip
 							content={(
 								<div className={styles.tooltip_text}>
@@ -37,7 +38,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 							interactive
 						>
 							<div>
-								{(row?.sourceDocumentValue as string).substring(0, 12)}
+								{(row?.sourceDocumentValue as string).substring(0, DEFAULT_LENGTH)}
 								...
 							</div>
 						</Tooltip>
@@ -74,7 +75,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ marginRight: '10px' }}>
-					{row?.destinationDocumentValue?.length >= 12 ? (
+					{row?.destinationDocumentValue?.length >= DEFAULT_LENGTH ? (
 						<Tooltip
 							content={(
 								<div className={styles.tooltip_text}>
@@ -84,7 +85,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 							interactive
 						>
 							<div>
-								{(row?.destinationDocumentValue as string).substring(0, 12)}
+								{(row?.destinationDocumentValue as string).substring(0, DEFAULT_LENGTH)}
 								...
 							</div>
 						</Tooltip>
