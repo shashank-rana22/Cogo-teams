@@ -458,6 +458,7 @@ const allocation = {
 		},
 
 	],
+	objective_configurations: [],
 };
 
 export default allocation;
