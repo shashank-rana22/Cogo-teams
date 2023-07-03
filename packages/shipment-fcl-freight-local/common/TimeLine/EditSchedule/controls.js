@@ -7,8 +7,8 @@ const controls = ({ primary_service, departureDate }) => {
 
 	const finalControls = [
 		{
-			name    : 'schedule_departure',
-			label   : 'Actual time of departure',
+			name  : 'schedule_departure',
+			label : 'Actual time of departure',
 		},
 		{
 			name    : 'schedule_arrival',
