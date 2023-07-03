@@ -1,24 +1,33 @@
-import { useSelector } from '@cogoport/store';
-
 import EmailComponent from './components/EmailComponent';
-import getPrefilledValues from './getPrefilledValues';
+import MessageComponent from './components/MessageComponent';
 import styles from './styles.module.css';
 
-function Customize({ detail, organization, selectedModes, widths = {} }) {
-	const { agent_id } = useSelector(({ profile }) => ({
-		agent_id: profile?.id,
-	}));
-
-	const prefilledValues = getPrefilledValues(detail, [
-		organization?.agent_id,
-		agent_id,
-	]);
+function Customize({
+	detail,
+	organization,
+	selectedModes,
+	widths = {},
+	billing_addresses = [],
+	setSelected,
+	selected,
+}) {
+	const { email, message } = widths;
 
 	return (
 		<div className={styles.container}>
 			{selectedModes.includes('email') ? (
-				<div className={styles.email_component}>
-					<EmailComponent />
+				<div className={styles.email_component} style={{ width: email }}>
+					<EmailComponent
+						detail={detail}
+						organization={organization}
+						billing_addresses={billing_addresses}
+					/>
+				</div>
+			) : null}
+
+			{selectedModes.some((item) => ['sms', 'whatsapp'].includes(item)) ? (
+				<div className={styles.message_component} style={{ width: message }}>
+					<MessageComponent />
 				</div>
 			) : null}
 		</div>

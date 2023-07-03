@@ -8,6 +8,7 @@ import {
 	TextAreaController,
 	MultiselectController,
 	MobileNumberController,
+	UploadController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
@@ -21,6 +22,7 @@ const ELEMENT_MAPPING = {
 	number                 : InputController,
 	'mobile-number-select' : MobileNumberController,
 	text                   : InputController,
+	'file-uploader'        : UploadController,
 };
 
 function getElementController(type) {

@@ -1,0 +1,52 @@
+.input_group {
+	margin-top: 6px;
+}
+
+.form_group {
+	margin-bottom: 32px;
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+
+	&.terms_and_conditions {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	max-height: 70vh;
+	overflow: auto;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+
+	svg {
+		color: #2f9df6;
+	}
+}
+
+.heading {
+	margin-left: 12px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.sub_heading {
+	margin-bottom: 16px;
+	font-weight: 600;
+}

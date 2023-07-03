@@ -23,9 +23,12 @@ function QuotationModal({
 		query: general.query,
 	}));
 
+	const { billing_addresses = [] } = invoice || {};
+
 	const [activeState, setActiveState] = useState('customize');
 	const [emailContent, setEmailContent] = useState({});
 	const [emailPreviews, setEmailPreviews] = useState({});
+	const [selected, setSelected] = useState('main');
 
 	const { quotation_type, checkout_ids } = detail || {};
 
@@ -39,7 +42,7 @@ function QuotationModal({
 	const MAPPING = {
 		customize: {
 			component      : Customize,
-			compoenntProps : { detail, organization, selectedModes, widths },
+			compoenntProps : { detail, organization, selectedModes, widths, billing_addresses, selected, setSelected },
 			buttons        : [
 				{
 					key       : 'next',
@@ -97,8 +100,6 @@ function QuotationModal({
 	} = MAPPING[activeState];
 
 	const getEmailPreview = useCallback(async (emailContentNew = {}) => {
-		const { billing_addresses = [] } = invoice || {};
-
 		const quotation_params = (billing_addresses || []).map((address) => ({
 			quotation_type : 'invoicing',
 			tax_number     : address?.tax_number,
@@ -151,7 +152,7 @@ function QuotationModal({
 				Toast.error('Something went wrong');
 			}
 		}
-	}, [invoice, quotation_type, emailContent, trigger, checkout_type, checkout_ids, checkout_id, shipment_id]);
+	}, [billing_addresses, quotation_type, emailContent, trigger, checkout_type, checkout_ids, checkout_id, shipment_id]);
 
 	useEffect(() => {
 		getEmailPreview();

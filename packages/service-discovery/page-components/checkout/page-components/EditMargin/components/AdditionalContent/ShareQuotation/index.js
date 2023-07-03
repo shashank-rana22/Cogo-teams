@@ -123,7 +123,7 @@ function ShareQuotation({
 
 	const getModalSize = () => {
 		if (selectedModes.includes('email') && selectedModes.length > 1) {
-			return { size: 'xl', widths: { email: '70%', message: '30%' } };
+			return { size: 'xl', widths: { email: '65%', message: '35%' } };
 		}
 
 		if (selectedModes.includes('email') && selectedModes.length === 1) {

@@ -39,6 +39,12 @@ function BreakdownDetails({
 	const [addLineItemData, setAddLineItemData] = useState({});
 	const [editLineItemData, setEditLineItemData] = useState({});
 
+	let total = 0;
+
+	const disableForm = source === 'preview_booking';
+
+	const { primary_service = '' } = detail || {};
+
 	useEffect(() => {
 		setConvenienceDetails({
 			convenience_rate: {
@@ -52,14 +58,6 @@ function BreakdownDetails({
 	if (getCheckoutLoading && isEmpty(rateDetails)) {
 		return <QuoteLoader />;
 	}
-
-	let total = 0;
-
-	const disableForm = source === 'preview_booking';
-
-	const { primary_service = '' } = detail || {};
-
-	console.log('rateDetails', rateDetails);
 
 	return (
 		<div>
