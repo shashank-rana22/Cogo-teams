@@ -14,7 +14,7 @@ interface Props {
 	setFilters: (p: object) => void;
 }
 interface Ite {
-	id?: string;
+	id?: number;
 	icon?: JSX.Element;
 	text?: string;
 }
@@ -81,10 +81,11 @@ function FilterModal({ filters, setFilters }: Props) {
 							marginLeft   : '26px',
 						}}
 					>
-						{CURRENCY_DATA.map((item: Ite) => {
-							const { id = '', icon, text } = item;
+						{CURRENCY_DATA.map((item) => {
+							const { id, icon, text }: Ite = item;
 							return (
 								<div
+									key={id}
 									className={`${styles.currency_values}
 											${
                         currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected

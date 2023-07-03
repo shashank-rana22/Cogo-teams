@@ -2,6 +2,7 @@ import airRepository from './config/air-repository';
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
@@ -105,6 +106,7 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...awbInventory,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,

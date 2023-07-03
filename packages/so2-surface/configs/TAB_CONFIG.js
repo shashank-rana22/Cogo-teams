@@ -58,19 +58,6 @@ const TAB_CONFIG = {
 			},
 		},
 		{
-			label   : 'Physical PoD to Customer',
-			value   : 'physical_pod_customer',
-			stats   : 'physical_to_pod_customer',
-			payload : {
-				shipment_type : 'ftl_freight',
-				pending_task  : {
-					task_type : 'upload_document',
-					task      : 'pod_sent_to_shipper',
-				},
-			},
-
-		},
-		{
 			label   : 'Purchase Invoice',
 			value   : 'purchase_invoice',
 			stats   : 'un_uploaded_purchase_invoice',
