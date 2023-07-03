@@ -68,12 +68,8 @@ function CheckAWBDoStatus({
 			);
 		}
 	} else if (
-		uploadedItem?.do_detail_status === 'approved'
+		uploadedItem?.do_detail_status !== 'approved'
 		&& item?.trade_type === 'import'
-	) {
-		return buttonContainer();
-	} else if (
-		item?.trade_type === 'import'
 	) {
 		return <h4 className={styles.hold_document}>{DOCUMENT_STATUS_MAPPING[uploadedItem?.bl_detail_status]}</h4>;
 	} else {
