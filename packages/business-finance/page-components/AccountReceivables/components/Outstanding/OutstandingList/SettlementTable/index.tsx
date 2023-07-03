@@ -19,7 +19,6 @@ interface Props {
 function SettlementTable({ organizationId, entityCode }: Props) {
 	const {
 		singleData,
-		getHistoryChild,
 		singleListLoading,
 		globalFilters,
 		setGlobalFilters,
@@ -30,6 +29,8 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
+		sort,
+		setSort,
 	} = useGetSettlementTable(organizationId, entityCode);
 
 	const [active, setActive] = useState(false);
@@ -61,10 +62,7 @@ function SettlementTable({ organizationId, entityCode }: Props) {
 			</div>
 			<StyledTable
 				data={list}
-				columns={SettlementList({
-					setActive,
-					getHistoryChild,
-				})}
+				columns={SettlementList({ sort, setSort, settlementFilters, setSettlementFilters })}
 				loading={loading}
 			/>
 			<div className={styles.pagination_container}>
