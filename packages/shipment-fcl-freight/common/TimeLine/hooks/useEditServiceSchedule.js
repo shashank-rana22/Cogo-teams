@@ -5,8 +5,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import { getDate } from '../../../utils/getDate';
 import controls from '../EditSchedule/controls';
-import { getDate } from '../../../utils/getDate'; 
 
 export default function useEditServiceSchedule({
 	setShow = () => {},
@@ -33,16 +33,16 @@ export default function useEditServiceSchedule({
 		if (schedule_departure && schedule_departure?.toDateString() !== departureDate?.toDateString()) {
 			setDepartureDate(schedule_departure);
 
-			const newDefaultValues = {};
+			const NEW_DEFAULT_VALUES = {};
 
 			finalControls.forEach(({ name }) => {
-				newDefaultValues[name] = (name === 'schedule_arrival'
+				NEW_DEFAULT_VALUES[name] = (name === 'schedule_arrival'
 					? formValues?.[name] < schedule_departure
 					: formValues?.[name] > schedule_departure)
 					? null : formValues?.[name];
 			});
 
-			reset(newDefaultValues);
+			reset(NEW_DEFAULT_VALUES);
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 
