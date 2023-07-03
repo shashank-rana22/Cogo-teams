@@ -41,4 +41,28 @@
   background-color: #F7FAEF;
   border-radius:8px;
   display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.onboarded{
+display:flex;
+align-items: center;
+}
+.onboarded_left{
+ margin-right: 36px;
+}
+.onboarded_right{
+  font-weight:Bold;
+   font-size: 26px;
+}
+.rejected{
+display:flex;
+align-items: center;
+}
+.rejected_left{
+  margin-right: 36px;
+}
+.rejected_right{
+  font-weight:Bold;
+   font-size: 26px;
 }
