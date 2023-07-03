@@ -21,7 +21,7 @@ const useUpdateTicketActivity = ({
 		url     : '/activity',
 		method  : 'post',
 		authkey : 'post_tickets_activity',
-	}, { manual: false });
+	}, { manual: true });
 
 	const updateTicketActivity = async ({ actionType = '', id = '' }) => {
 		try {
