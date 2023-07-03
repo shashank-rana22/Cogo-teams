@@ -54,6 +54,18 @@ function MyResponsiveBar({ data }) {
 				axisBottom={{
 					tickSize    : 0,
 					tickPadding : 10,
+					renderTick  : (tick) => (
+						<g transform={`translate(${tick.x - 30},${tick.y + 20})`}>
+							<text
+								style={{
+									fontSize    : 9,
+									marginRight : 10,
+								}}
+							>
+								{tick.value}
+							</text>
+						</g>
+					),
 				}}
 				axisLeft={{
 					tickSize     : 0,

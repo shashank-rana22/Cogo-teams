@@ -21,7 +21,7 @@ function JobStats({ jobData }) {
 
 						<div className={styles.sub_flex}>
 							<div className={styles.label}>
-								<div>{ MAPPING_STATE[state] || state}</div>
+								<div style={{ marginRight: '4px' }}>{ MAPPING_STATE[state] || state}</div>
 								<div>JOBS</div>
 							</div>
 							<Tooltip

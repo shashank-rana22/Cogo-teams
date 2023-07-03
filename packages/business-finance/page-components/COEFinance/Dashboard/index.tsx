@@ -1,4 +1,4 @@
-import { Tooltip, Button, Modal, Loader } from '@cogoport/components';
+import { Tooltip, Button, Modal, Loader, Placeholder } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -17,7 +17,7 @@ import { filterControls, reportControls } from './controls';
 import JobStats from './JobStats';
 import styles from './styles.module.css';
 
-function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
+function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters, statsLoading }) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
@@ -27,9 +27,9 @@ function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
 
 	const Status = [
 		{ id: 1, label: 'Pending', value: LOCKED },
-		{ id: 2, label: 'COE Approved', value: PAYRUN_BILL_APPROVED },
+		{ id: 2, label: 'COE Approved', value: FINANCE_ACCEPTED },
 		{ id: 3, label: 'COE Rejected', value: COE_REJECTED },
-		{ id: 2, label: 'Finance Approved', value: FINANCE_ACCEPTED },
+		{ id: 2, label: 'Finance Approved', value: PAYRUN_BILL_APPROVED },
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED },
 	];
 
@@ -52,9 +52,16 @@ function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters }) {
 			<div className={styles.card_flex}>
 				{Status.map((item) => (
 					<div key={item.id} className={styles.card}>
+
 						<div className={styles.card_label}>{item?.label}</div>
 						<div className={styles.border} />
-						<div className={styles.card_value}>{item?.value}</div>
+						{statsLoading ? (
+							<div style={{ alignItems: 'center' }}>
+								<Placeholder height="30px" width="50px" margin="16px 10px 10px 10px" />
+							</div>
+						) : (
+							<div className={styles.card_value}>{item?.value}</div>
+						)}
 					</div>
 				))}
 			</div>
