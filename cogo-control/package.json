@@ -88,6 +88,7 @@
     "@cogoport/ticket-management": "workspace:0.1.1",
     "@cogoport/saas-subscription":"workspace:0.1.0",
     "@cogoport/referral": "workspace:0.1.0",
+    "@cogoport/awb-inventory": "workspace:1.0.0",
     "@cogoport/liability-dashboard": "workspace:0.1.0",
     "@cogoport/byod-dashboards" : "workspace:0.1.0"
   },
