@@ -21,7 +21,7 @@ const CONTROLLER_MAPPING = {
 	asyncSelect   : AsyncSelectController,
 	fieldArray    : FieldArrayController,
 	radio         : RadioGroupController,
-	checkboxgroup : CheckboxGroupController,
+	checkboxGroup : CheckboxGroupController,
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;

@@ -8,12 +8,15 @@ import getFileAttributes from '../utils/getFileAttributes';
 
 import useSendMessage from './useSendMessage';
 
+const DEFAULT_URLARRAY_LENGTH = 0;
+const LAST_ELEMENT_IN_A_ARRAY = 1;
+
 const useSendChat = ({
 	setDraftMessages,
 	activeChatCollection,
 	draftMessages,
 	firestore,
-	channel_type,
+	channelType,
 	draftUploadedFiles,
 	setDraftUploadedFiles,
 	id,
@@ -23,13 +26,13 @@ const useSendChat = ({
 		user_name: profile?.user?.name,
 	}));
 
-	const { sendMessage, loading } = useSendMessage({ channel_type, activeChatCollection, formattedData });
+	const { sendMessage, loading } = useSendMessage({ channelType, activeChatCollection, formattedData });
 
 	let messageFireBaseDoc;
-	if (id && channel_type) {
+	if (id && channelType) {
 		messageFireBaseDoc = doc(
 			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${id}`,
+			`${FIRESTORE_PATH[channelType]}/${id}`,
 		);
 	}
 
@@ -37,7 +40,9 @@ const useSendChat = ({
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
 		const urlArray = decodeURI(draftUploadedFiles?.[id])?.split('/');
-		const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+
+		const fileName = urlArray[(urlArray?.length || DEFAULT_URLARRAY_LENGTH) - LAST_ELEMENT_IN_A_ARRAY] || '';
+
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			finalUrl: draftUploadedFiles?.[id], fileName,
 		});
@@ -51,7 +56,7 @@ const useSendChat = ({
 				finalUrl,
 				fileName,
 				formattedData,
-				channel_type,
+				channelType,
 				messageFireBaseDoc,
 				newMessage,
 				sendMessage,
@@ -64,7 +69,7 @@ const useSendChat = ({
 	const sentQuickSuggestions = async (scrollToBottom, val) => {
 		await sendUserMessage({
 			formattedData,
-			channel_type,
+			channelType,
 			messageFireBaseDoc,
 			newMessage: val,
 			sendMessage,

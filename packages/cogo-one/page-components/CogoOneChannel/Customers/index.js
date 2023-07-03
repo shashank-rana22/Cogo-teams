@@ -61,7 +61,7 @@ function Customers({
 		},
 	};
 
-	const TAB_MAPPINGS = getTabMappings({ unReadChatsCount });
+	const tabMappings = getTabMappings({ unReadChatsCount });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
@@ -107,7 +107,7 @@ function Customers({
 						setActiveTab({ tab: val, data: {} });
 					}}
 				>
-					{TAB_MAPPINGS.map((eachTab) => {
+					{tabMappings.map((eachTab) => {
 						if (!eachTab.show) {
 							return null;
 						}

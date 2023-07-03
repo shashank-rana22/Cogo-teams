@@ -95,7 +95,7 @@ function Messages({
 
 	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
-		channel_type,
+		channelType: channel_type,
 		id,
 		draftMessages,
 		setDraftMessages,
@@ -107,7 +107,6 @@ function Messages({
 
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,
-		channel_type,
 		firestore,
 		closeModal,
 		activeMessageCard: activeTab?.data,
@@ -133,16 +132,28 @@ function Messages({
 		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
+
 	const {
 		requestForAssignChat,
 		requestAssignLoading,
 	} = useRequestAssignChat();
 
+	const {
+		comp: ActiveModalComp = null,
+		title: { img = null, name = null } = {},
+		modalSize = 'md',
+	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
+
+	const activeCardId = activeTab?.data?.id;
+	const activeChannelType = activeTab?.data?.channel_type;
+
 	const changeSessionAndMessage = (type = '') => {
 		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
+
 		if (!canMessageOnBotSession) {
 			return callbackFunc;
 		}
+
 		return (scrollToBottom, val) => assignChat(
 			{
 				payload      : { agent_id: userId, is_allowed_to_chat: true },
@@ -151,26 +162,20 @@ function Messages({
 		);
 	};
 
-	const {
-		comp: ActiveModalComp = null,
-		title: { img = null, name = null } = {},
-		modalSize = 'md',
-	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
-
 	useEffect(() => {
 		mountActiveRoomSnapShot({
 			activeRoomSnapshotListener,
 			setActiveRoomLoading,
-			activeCardId      : activeTab?.data?.id,
+			activeCardId,
 			firestore,
-			activeChannelType : activeTab?.data?.channel_type,
+			activeChannelType,
 			setActiveTab,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: activeRoomSnapshotListener });
 		};
-	}, [activeTab?.data?.id, activeTab?.data?.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
+	}, [activeCardId, activeChannelType, activeTab.data.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
 
 	return (
 		<>

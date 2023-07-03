@@ -31,7 +31,7 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Channels',
 			name           : 'channels',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			multiple       : true,
 			value          : [],
@@ -104,16 +104,19 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Shipments',
 			name           : 'shipment_filters',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			options        : [
-				{ label: 'Is likely To Book Shipment', value: 'likely_to_book_shipment' },
+				{
+					label : 'Is likely To Book Shipment',
+					value : 'likely_to_book_shipment',
+				},
 			],
 		},
 		{
 			label          : 'Seen By User',
 			name           : '15_min_filter',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			options        : [
 				{
@@ -125,7 +128,7 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 		{
 			label          : 'Closed',
 			name           : 'closed_session',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			options        : [
 				{
@@ -135,13 +138,13 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 			],
 		},
 		{
-			label:
-		(
-			<p>
-				Mobile No.
-				<br />
-				(along with country code)
-			</p>),
+			label: (
+				<p>
+					Mobile No.
+					<br />
+					(along with country code)
+				</p>
+			),
 			name           : 'mobile_no',
 			controllerType : 'input',
 			placeholder    : 'enter here',

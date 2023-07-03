@@ -12,6 +12,10 @@ import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
+const DEFAULT_UNREAD_MESSAGES = 0;
+const MAXIMUM_UNREAD_MESSAGES = 100;
+const LAST_UPDATED_PIN_TIME = 0;
+
 function MessageCardData({
 	item = {},
 	activeTab = {},
@@ -25,6 +29,7 @@ function MessageCardData({
 	claimLoading = false,
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
+
 	const {
 		user_name = '',
 		organization_name = '',
@@ -58,6 +63,7 @@ function MessageCardData({
 
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
+
 		updatePin({
 			pinnedID    : id,
 			channelType : channel_type,
@@ -84,9 +90,9 @@ function MessageCardData({
 				tabIndex={0}
 				className={cl`
 						${styles.card_container} 
-						${!autoAssignChats ? styles.card_with_checkbox : ''}
+						${autoAssignChats ? '' : styles.card_with_checkbox}
 						${checkActiveCard ? styles.active_card : ''} 
-						 ${isFlashMessages ? styles.flash_messages_padding : ''} 
+						${isFlashMessages ? styles.flash_messages_padding : ''} 
 							`}
 				onClick={() => setActiveMessage(item)}
 			>
@@ -134,9 +140,9 @@ function MessageCardData({
 					<div className={styles.content_div}>
 						{formatLastMessage(lastMessageVar)}
 						<div className={styles.flex_div}>
-							{new_message_count > 0 && (
+							{new_message_count > DEFAULT_UNREAD_MESSAGES && (
 								<div className={styles.new_message_count}>
-									{new_message_count > 100 ? '99+' : (
+									{new_message_count > MAXIMUM_UNREAD_MESSAGES ? '99+' : (
 										new_message_count
 									)}
 								</div>
@@ -149,6 +155,7 @@ function MessageCardData({
 						</div>
 					</div>
 				</div>
+
 				{isImportant && (
 					<div className={styles.important_icon}>
 						<img
@@ -158,20 +165,8 @@ function MessageCardData({
 						/>
 					</div>
 				)}
-				{!isFlashMessages ? (
-					<div className={styles.pinned_div}>
-						{pinnedTime[userId] > 0
-							? (
-								<IcCPin
-									onClick={(e) => updatePinnedChats(e, 'unpin')}
-								/>
-							) : (
-								<IcMPin
-									onClick={(e) => updatePinnedChats(e, 'pin')}
-								/>
-							)}
-					</div>
-				) : (
+
+				{isFlashMessages ? (
 					<Button
 						size="xs"
 						themeType="primary"
@@ -184,10 +179,17 @@ function MessageCardData({
 					>
 						CLAIM
 					</Button>
+				) : (
+					<div className={styles.pinned_div}>
+						{pinnedTime[userId] > LAST_UPDATED_PIN_TIME
+							? <IcCPin onClick={(e) => updatePinnedChats(e, 'unpin')} />
+							: <IcMPin onClick={(e) => updatePinnedChats(e, 'pin')} />}
+					</div>
 				)}
 			</div>
 		</div>
 
 	);
 }
+
 export default MessageCardData;

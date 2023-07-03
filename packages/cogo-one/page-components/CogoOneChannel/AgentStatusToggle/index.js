@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function AgentStatusToggle() {
 	const [agentDetails, setAgentDetails] = useState(false);
+
 	return (
 		<>
 			<IcMSettings

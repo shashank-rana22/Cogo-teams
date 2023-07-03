@@ -43,7 +43,10 @@ function Conversations({
 
 	return (
 		<div className={styles.container}>
-			<Component {...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})} />
+			<Component
+				key={activeTab?.tab}
+				{...(COMPONENT_PROPS_MAPPING[activeTab?.tab] || {})}
+			/>
 		</div>
 	);
 }

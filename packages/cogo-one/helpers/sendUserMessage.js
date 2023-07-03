@@ -1,12 +1,15 @@
 import { Toast } from '@cogoport/components';
 import { getDoc } from 'firebase/firestore';
 
+const NO_OF_HOURS_IN_A_DAY = 24;
+const NO_OF_MILLI_SECONDS_IN_A_HOUR = 36e5;
+
 const sendUserMessage = async ({
 	fileType = '',
 	finalUrl = '',
 	fileName = '',
 	formattedData = {},
-	channel_type = '',
+	channelType = '',
 	messageFireBaseDoc,
 	newMessage = '',
 	user_name = '',
@@ -16,11 +19,12 @@ const sendUserMessage = async ({
 	const isGreaterThan24hours = (newMessageSentAt) => {
 		const lastMessageTime = new Date(newMessageSentAt);
 		const currentTime = new Date();
-		const hoursDifference = Math.abs(currentTime - lastMessageTime) / 36e5;
-		return hoursDifference >= 24 && channel_type === 'whatsapp';
+		const hoursDifference = Math.abs(currentTime - lastMessageTime) / NO_OF_MILLI_SECONDS_IN_A_HOUR;
+		return hoursDifference >= NO_OF_HOURS_IN_A_DAY && channelType === 'whatsapp';
 	};
 
 	const document = await getDoc(messageFireBaseDoc);
+
 	if (isGreaterThan24hours(document?.data()?.new_message_sent_at)) {
 		Toast.error('Message cannot be sent after 24 hours.Try sending a Template Instead');
 		return;
@@ -49,7 +53,7 @@ const sendUserMessage = async ({
 
 	let messageMetadata;
 
-	const modifiedFileType = (fileType === 'image' && channel_type === 'telegram') ? 'photo' : fileType;
+	const modifiedFileType = (fileType === 'image' && channelType === 'telegram') ? 'photo' : fileType;
 
 	if (finalUrl) {
 		messageMetadata = {

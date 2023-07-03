@@ -73,19 +73,20 @@
 }
 
 .call_icon {
-	top: 38px;
+	top: 35%;
 	right: 11px;
 	user-select: none;
 }
 
 .whatsapp_icon {
-	top: 101px;
+	top: 79%;
 	right: 40px;
 	user-select: none;
 }
 
 .mail_icon {
-	top: 33px;
+	top: 25%;
+	user-select: none;
 	background: #ffff;
 	border-radius: 50%;
 }

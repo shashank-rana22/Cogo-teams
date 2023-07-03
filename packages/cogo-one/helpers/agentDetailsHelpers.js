@@ -58,7 +58,7 @@ export const updateLeaduser = async ({ data = {}, activeCardData, firestore }) =
 	);
 
 	try {
-		await updateDoc(roomCollection, {
+		updateDoc(roomCollection, {
 			updated_at: Date.now(),
 			...data,
 		});
