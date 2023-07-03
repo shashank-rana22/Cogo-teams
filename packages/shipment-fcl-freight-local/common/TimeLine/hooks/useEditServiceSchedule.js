@@ -28,16 +28,17 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 	useEffect(() => {
 		const { schedule_departure } = formValues || {};
 
-		if (schedule_departure && schedule_departure?.toDateString() !== departureDate?.toDateString()) {
+		if (schedule_departure?.toDateString?.() !== departureDate?.toDateString?.()) {
 			setDepartureDate(schedule_departure);
 
 			const NEW_DEFAULT_VALUES = {};
 
 			finalControls.forEach(({ name }) => {
-				NEW_DEFAULT_VALUES[name] = (name === 'schedule_arrival'
-					? formValues?.[name] < schedule_departure
-					: formValues?.[name] > schedule_departure)
-					? null : formValues?.[name];
+				if (name === 'schedule_arrival') {
+					NEW_DEFAULT_VALUES[name] = formValues?.[name] < schedule_departure ? null : formValues?.[name];
+				} else {
+					NEW_DEFAULT_VALUES[name] = formValues?.[name] > schedule_departure ? null : formValues?.[name];
+				}
 			});
 
 			reset(NEW_DEFAULT_VALUES);

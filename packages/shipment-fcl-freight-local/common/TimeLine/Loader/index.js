@@ -11,14 +11,12 @@ function rendomBoolean() {
 	return Math.random() >= RANDOM_BOOLEAN_DECIDER;
 }
 
-const keysForMap = Array(NUMBER_OF_LOADERS).fill(null).map(() => Math.random());
-
 export default function Loader() {
 	return (
 		<div className={container}>
 			<Placeholder className={big_circle} />
-			{Array(NUMBER_OF_LOADERS).fill(null).map((_, index) => (
-				<React.Fragment key={keysForMap[index]}>
+			{[...Array(NUMBER_OF_LOADERS).keys()].map((key) => (
+				<React.Fragment key={key}>
 					<Placeholder height="2px" style={{ flex: 1 }} />
 					<Placeholder className={rendomBoolean() ? big_circle : small_circle} />
 				</React.Fragment>
