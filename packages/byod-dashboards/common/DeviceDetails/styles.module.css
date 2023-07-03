@@ -1,29 +1,29 @@
-.container{
-    display: flex;
-    flex-wrap: wrap;
+.container {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.detail{
-    flex-basis: calc(50% - 20px);
-    margin: 10px;
+.detail {
+	flex-basis: calc(50% - 20px);
+	margin: 10px;
 
-    @media (max-width: 768px) {
-        flex-basis: 100%;
+	@media (max-width: 768px) {
+		flex-basis: 100%;
 	}
 }
 
 .label {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
+	margin-bottom: 4px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .employee_detail {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .heading {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 4px;
+	margin-bottom: 4px;
+	font-size: 20px;
+	font-weight: 600;
 }
