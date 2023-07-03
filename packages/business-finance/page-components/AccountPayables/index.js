@@ -1,5 +1,5 @@
 import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
-import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
@@ -12,6 +12,8 @@ import Invoices from './Invoices';
 import Payruns from './Payruns';
 import styles from './styles.module.css';
 
+const ENTITY_CODE_LENGTH = 1;
+
 function AccountPayables() {
 	const { query, push } = useRouter();
 	const [activePayables, setActivePayables] = useState(
@@ -23,8 +25,9 @@ function AccountPayables() {
 	} = profile || {};
 	const { id: partnerId } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
 
-	const entity = getEntityCode(partnerId);
+	const entity = getDefaultEntityCode(partnerId);
 
 	const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment'];
 
@@ -73,6 +76,7 @@ function AccountPayables() {
 								options={EntityOptions}
 								size="sm"
 								style={{ width: '284px' }}
+								disabled={entityDataCount <= ENTITY_CODE_LENGTH}
 							/>
 						) : null}
 					</div>

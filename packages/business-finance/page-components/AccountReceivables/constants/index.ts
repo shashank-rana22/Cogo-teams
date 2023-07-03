@@ -1,3 +1,48 @@
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+
+export const getTaxLabels = (entityCode) => [
+	{
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.tax_label,
+		valueKey : 'registrationNumber',
+	},
+	{
+		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.sage_label,
+		valueKey : 'sageId',
+	},
+	{
+		label           : 'Company Type',
+		valueKey        : 'companyType',
+		defaultValueKey : '-',
+	},
+	{
+		label           : 'Credit Days',
+		valueKey        : 'creditDays',
+		defaultValueKey : '0',
+	},
+];
+export const getSearchOptionsLabels = (entityCode) => [
+	{
+		label : 'Trade Party Serial Id',
+		value : 'tradePartySerialId',
+		name  : 'tradePartySerialId',
+	},
+	{
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_sage,
+		value : 'sageId',
+		name  : 'sageId',
+	},
+	{
+		label : 'Serial Id',
+		value : 'organizationSerialId',
+		name  : 'organizationSerialId',
+	},
+	{
+		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_pan,
+		value : 'q',
+		name  : 'q',
+	},
+];
+
 export const companyType = [
 	{
 		label : 'Private Limited',
@@ -122,27 +167,6 @@ export const SORTBY_OPTION = [
 		label : 'On Account Amount',
 		value : 'onAccountPaymentLedgerAmount',
 		name  : 'onAccountPaymentLedgerAmount',
-	},
-];
-
-export const CARD_DETAILS = [
-	{
-		label    : 'Pan Number',
-		valueKey : 'registrationNumber',
-	},
-	{
-		label    : 'Sage ID',
-		valueKey : 'sageId',
-	},
-	{
-		label           : 'Company Type',
-		valueKey        : 'companyType',
-		defaultValueKey : '-',
-	},
-	{
-		label           : 'Credit Days',
-		valueKey        : 'creditDays',
-		defaultValueKey : '0',
 	},
 ];
 
