@@ -33,12 +33,12 @@ const usePostAddToSelected = ({ getPayrunInvoices, apiData }) => {
 
 		list.forEach((addToSelectdata) => {
 			const {
-				tdsValue = 0,
+				tdsAmount = 0,
 				checked = false,
 				id = '',
 				bankDetail = undefined,
 				invoiceNumber = ' ',
-				inputAmount = 0,
+				payableAmount = 0,
 				invoiceType,
 			} = addToSelectdata || {};
 
@@ -75,8 +75,8 @@ const usePostAddToSelected = ({ getPayrunInvoices, apiData }) => {
 				};
 				SELECTED_INVOICES.push({
 					billId        : id,
-					tdsAmount     : +tdsValue,
-					payableAmount : +inputAmount,
+					tdsAmount     : +tdsAmount,
+					payableAmount : +payableAmount,
 					bankDetail    : formattedBank,
 					invoiceType,
 				});

@@ -1,10 +1,10 @@
 import { Breadcrumb, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import React from 'react';
 
 import List from '../../../../commons/List/index.tsx';
-import useGetPayrunInvoices from '../../hooks/useGetPayrunInvoices';
+import useGetSelectedInvoices from '../../hooks/useGetSelectedInvoices';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
@@ -15,26 +15,15 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
-function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }, ref) {
+function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) {
 	const {
-		billsData,
-		billsLoading,
+		selectedInvoiceLoading,
 		filters,
 		setFilters,
-		orderBy,
-		setOrderBy,
-		getPayrunInvoices,
-		getTableBodyCheckbox,
-		getTableHeaderCheckbox,
-	} = useGetPayrunInvoices({ apiData, setApiData });
-
-	useImperativeHandle(ref, () => ({
-		getPayrunInvoices,
-	}));
+	} = useGetSelectedInvoices({ apiData, setApiData });
 
 	const FUNCTIONS = {
-		renderCheckbox : (itemData) => getTableBodyCheckbox(itemData),
-		renderToolTip  : (itemData, field) => (
+		renderToolTip: (itemData, field) => (
 			<RenderToolTip itemData={itemData} field={field} />
 		),
 		renderInvoiceDates: (itemData, field) => (
@@ -76,19 +65,16 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }, 
 			</div>
 			<div className={styles.list_container}>
 				<List
-					itemData={billsData}
-					loading={billsLoading}
+					itemData={apiData}
+					loading={selectedInvoiceLoading}
 					config={VIEW_SELECTED_CONFIG}
 					functions={FUNCTIONS}
-					sort={orderBy}
-					setSort={setOrderBy}
 					page={filters?.pageIndex || FIRST_PAGE}
 					pageSize={10}
 					handlePageChange={(val) => setFilters({
 						...filters,
 						pageIndex: val,
 					})}
-					renderHeaderCheckbox={getTableHeaderCheckbox}
 					rowStyle="border"
 					showPagination
 					paginationType="number"
@@ -98,4 +84,4 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }, 
 	);
 }
 
-export default forwardRef(ViewSelectedInvoices);
+export default ViewSelectedInvoices;

@@ -59,7 +59,6 @@ export const VIEW_SELECTED_CONFIG = {
 			func  : 'renderBankDetails',
 			span  : 1.8,
 		},
-
 		{
 			key   : 'requestedBy',
 			label : 'Requested by & on',

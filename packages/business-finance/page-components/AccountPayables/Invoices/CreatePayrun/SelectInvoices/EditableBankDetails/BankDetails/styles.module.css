@@ -1,0 +1,33 @@
+.container {
+	background-color: #fff;
+}
+
+.flex {
+	display: flex;
+}
+
+.font {
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.icon {
+	padding-left: 4px;
+	cursor: pointer;
+}
+
+.iconeye {
+	color: #f68b21;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.eye{
+	color: #f68b21;
+}

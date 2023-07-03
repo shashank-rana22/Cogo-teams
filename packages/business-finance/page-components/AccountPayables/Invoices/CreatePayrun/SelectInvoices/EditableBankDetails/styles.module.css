@@ -1,0 +1,33 @@
+.select {
+	:global {
+		.ui_select_container {
+			height: 32px;
+			width: 120px;
+		}
+
+		.ui_select_display_container {
+			height: 32px !important;
+		}
+
+		.ui_select_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_select_options_container {
+			width: 200px;
+		}
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.icons {
+	padding-left: 4px;
+}
+
+.pointer {
+	cursor: pointer;
+}

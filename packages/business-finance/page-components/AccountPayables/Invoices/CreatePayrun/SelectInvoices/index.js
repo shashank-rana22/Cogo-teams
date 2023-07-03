@@ -14,13 +14,15 @@ import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency'
 import FilterModal from '../../MoreFilters';
 import { CREATE_PAYRUN_CONFIG } from '../Configurations/createPayrunConfig';
 
+import BankDetails from './EditableBankDetails/BankDetails';
+import EditableTdsInput from './EditableInput';
+import EditablePayableAmount from './EditableInput/EditablePayableAmount';
 import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
 function SelectInvoices({ apiData, setApiData }, ref) {
 	const {
-		billsData,
 		billsLoading,
 		filters,
 		setFilters,
@@ -49,6 +51,11 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		renderAction: (itemData) => (
 			<RenderAction itemData={itemData} />
 		),
+		renderEditableTds: (itemData, field) => (
+			<EditableTdsInput itemData={itemData} field={field} />
+		),
+		renderEditablePayable : (itemData, field) => (<EditablePayableAmount itemData={itemData} field={field} />),
+		renderBankDetails     : (itemData, field) => (<BankDetails itemData={itemData} field={field} />),
 	};
 
 	return (
@@ -56,8 +63,8 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 			<div>
 				<Breadcrumb>
 					<Breadcrumb.Item label={(
-						<Link href="/business-finance/account-payables/advance-payment">
-							Advance Payment
+						<Link href="/business-finance/account-payables/invoices">
+							Invoices
 						</Link>
 					)}
 					/>
@@ -89,7 +96,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 			</div>
 			<div className={styles.list_container}>
 				<List
-					itemData={billsData}
+					itemData={apiData}
 					loading={billsLoading}
 					config={CREATE_PAYRUN_CONFIG}
 					functions={FUNCTIONS}

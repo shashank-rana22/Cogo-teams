@@ -1,9 +1,20 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getFormattedAmount from '../../../../Settlement/commons/Utils/getFormattedAmount.ts';
-
 import styled from './styles.module.css';
+
+const getFormattedAmount = ({ amount, currency }) => (
+	formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	})
+);
 
 function FieldPair({ itemData, field }) {
 	const { topKey, lowerKey } = field || {};

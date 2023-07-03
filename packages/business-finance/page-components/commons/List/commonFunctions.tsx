@@ -6,20 +6,18 @@ import { FunctionObjects, FieldType, GenericObject } from '../Interfaces';
 
 import FieldPair from './RenderFunctions/FiledPair';
 
-const getFormattedAmount = ({ amount, currency }) => (
-	formatAmount({
-		amount,
-		currency,
-		options: {
-			style                 : 'currency',
-			currencyDisplay       : 'symbol',
-			maximumFractionDigits : 2,
-		},
-	})
-);
+const getFormattedAmount = ({ amount, currency }) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style                 : 'currency',
+		currencyDisplay       : 'symbol',
+		maximumFractionDigits : 2,
+	},
+});
 
-const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
-	const newFunctions:any = {
+const commonFunctions = (functions: { functions?: FunctionObjects }) => {
+	const newFunctions: any = {
 		renderName: (itemData: GenericObject, field: FieldType) => (
 			<div>{itemData[field.key]}</div>
 		),
@@ -32,11 +30,9 @@ const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
 					amount   : getByKey(itemData, field?.key),
 					currency : getByKey(itemData, field?.currencyKey),
 				})}
-
 			</div>
 		),
 		...(functions || {}),
-
 	};
 
 	return newFunctions;

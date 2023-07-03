@@ -1,0 +1,57 @@
+.container {
+	background-color: #fff;
+}
+
+.edit {
+	padding-left: 4px;
+}
+
+.inputcontainer {
+	display: flex;
+	align-items: center;
+	:global {
+		.ui_input_container {
+			height: 32px;
+			width: 64px;
+		}
+
+		.ui_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: 12px;
+		}
+	}
+}
+
+.error {
+	color: red;
+	:global {
+		.ui_input_container {
+			border: 1px solid red;
+		}
+	}
+}
+
+.icon {
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.text {
+	font-size: 12px;
+	padding-right: 4px;
+}
+
+.message {
+	font-size: 12px;
+}
+
+.flex {
+	display: flex;
+}
+
+.errormessage {
+	color: red;
+}

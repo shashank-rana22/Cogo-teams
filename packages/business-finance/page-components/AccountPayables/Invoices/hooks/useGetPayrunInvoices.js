@@ -71,14 +71,13 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 				const {
 					payableAmount = '',
 					tdsAmount = '',
-					invoiceAmount = '',
+					bankDetail = {},
 				} = item || {};
 				return {
 					...item,
-					payableValue       : payableAmount,
-					tdsValue           : tdsAmount,
-					inputAmount        : payableAmount,
-					constPayableAmount : invoiceAmount,
+					payableValue : payableAmount,
+					tdsValue     : tdsAmount,
+					bankValue    : bankDetail,
 				};
 			});
 		}
@@ -97,7 +96,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 						invoiceView        : invoiceView || undefined,
 						currency           : filterCurrency || undefined,
 						invoiceType        : invoiceType || undefined,
-						entity             : filterEntity || undefined,
+						entityCode         : filterEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
 						serviceType        : serviceType || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
@@ -111,13 +110,14 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 					},
 				});
 			} catch (e) {
+				setApiData({});
 				toastApiError(e);
 			}
 		},
 		[pageIndex, pageSize,
 			query, filterCurrency, urgencyTag, filterEntity, invoiceType,
 			invoiceView, category, dueDateSortType, serviceType, startDate,
-			endDate, fromBillDate,
+			endDate, fromBillDate, setApiData,
 			toBillDate, fromUploadBillDate,
 			toUploadBillDate, trigger, payrun],
 	);
@@ -190,8 +190,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	};
 
 	return {
-		billsData    : data,
-		billsLoading : loading,
+		billsLoading: loading,
 		filters,
 		setFilters,
 		entity,
