@@ -17,7 +17,7 @@
 
 import fclIncotermsMapping from './FCL/fclIncotermsMapping.json';
 import fclAdditionalServiceControls from './FCL/serviceControls';
-import serviceLabelMapping from './FCL/serviceLabelMapping.json';
+import SERVICE_LABEL_MAPPING from './FCL/serviceLabelMapping';
 
 function Police() {
 	return (
@@ -102,7 +102,7 @@ export const nonRemovableServicesAir = [
 export const serviceMappings = {
 	fcl_freight: {
 		services     : fclIncotermsMapping,
-		serviceLabel : serviceLabelMapping,
+		serviceLabel : SERVICE_LABEL_MAPPING,
 		controls     : fclAdditionalServiceControls(),
 	},
 	// lcl_freight: {

@@ -1,9 +1,9 @@
-import { Table } from '@cogoport/components';
-import { COMMODITY_NAME_MAPPING } from '@cogoport/globalization/constants/commodities';
+import { Table, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import getDetails from './getDetails';
 import styles from './styles.module.css';
 
 const SUBSIDIARY_SERVICES = ['EDE', 'EDT', 'DET', 'DEA'];
@@ -96,31 +96,33 @@ const handleServicesNames = (item) => {
 	return isSubsidiaryService ? formattedService : `${formattedTradeType} ${formattedService}`;
 };
 
-function PriceBreakup({ rateCardData }) {
-	const { service_rates, total_price_discounted = '', total_price_currency = '' } = rateCardData;
+function PriceBreakup({ rateCardData, detail }) {
+	const { service_rates, total_price_discounted = '', total_price_currency = '', service_type = '' } = rateCardData;
+	const { service_details } = detail;
 
-	const getIndividualPriceBreakup = ({ service }) => {
+	const getIndividualPriceBreakup = ({ service, restServiceDetail }) => {
 		const {
 			line_items = [],
-			container_size = '',
-			container_type = '',
-			commodity = '',
 		} = service;
+
+		const containerDetail = getDetails({ primary_service: service_type, item: restServiceDetail });
 
 		return (
 			<>
 				<div className={styles.service_div}>
-					<div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<span className={styles.service}>{handleServicesNames(service)}</span>
 
-						<span className={styles.container_details}>
-							{container_size}
-							FT.
-							{' '}
-							{startCase(container_type)}
-							{' '}
-							{COMMODITY_NAME_MAPPING[commodity]?.name}
-						</span>
+						{(containerDetail || []).map((item) => (
+							<Pill
+								key={item}
+								size="md"
+								style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
+							>
+								{item}
+							</Pill>
+						))}
+
 					</div>
 					{isEmpty(line_items) ? (
 						<span className={styles.service}>
@@ -145,7 +147,10 @@ function PriceBreakup({ rateCardData }) {
 
 	return (
 		<div className={styles.container}>
-			{Object.values(service_rates).map((service) => getIndividualPriceBreakup({ service }))}
+			{Object.entries(service_rates).map(([key, value]) => getIndividualPriceBreakup({
+				service           : value,
+				restServiceDetail : service_details[key],
+			}))}
 			<div className={styles.total_price}>
 				Total:
 				<div style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>

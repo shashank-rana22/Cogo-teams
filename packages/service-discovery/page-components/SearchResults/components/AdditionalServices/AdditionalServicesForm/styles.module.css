@@ -1,0 +1,30 @@
+.container{
+    padding: 20px;
+    border-bottom: 1px solid #EBEBF0;
+    background: #FFF;
+}
+
+.text{
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.control_container{
+      display: flex;
+      align-items: center;
+}
+
+.control_style{
+    margin: 16px;
+}
+
+.primaryButtton{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.label{
+    color: #373737;
+    font-size: 12px;
+    margin-bottom: 4px;
+}

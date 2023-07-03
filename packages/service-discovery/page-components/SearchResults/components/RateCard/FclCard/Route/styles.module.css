@@ -5,9 +5,10 @@
 
 .locationCode{
     color: #000;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 300;
     padding: 4px 0px 0px 0px;
+width: 60px;
 }
 
 .locationName{

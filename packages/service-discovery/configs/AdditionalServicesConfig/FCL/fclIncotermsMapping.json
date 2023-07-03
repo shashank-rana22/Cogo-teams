@@ -1,18 +1,21 @@
 {
-	"cif": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs", "fcl_freight" ],
-	"cfr": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs", "fcl_freight" ],
+	"cif": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs","export_fcl_freight_local", "fcl_freight" ],
+	"cfr": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs","export_fcl_freight_local", "fcl_freight" ],
 	"cpt": [
 		"export_transportation",
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight"
+		
 	],
 	"cip": [
 		"export_transportation",
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight"
 	],
 	"dat": [
@@ -20,6 +23,7 @@
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight"
 	],
 	"dap": [
@@ -27,7 +31,9 @@
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight",
+		"import_fcl_freight_local",
 		"import_haulage_freight",
 		"import_transportation"
 	],
@@ -36,24 +42,29 @@
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight",
+		"import_fcl_freight_local",
 		"import_fcl_customs",
 		"import_haulage_freight",
 		"import_transportation",
 		"import_fcl_cfs"
 	],
-	"fob": ["fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
+	"fob": ["export_fcl_freight_local","fcl_freight","import_fcl_freight_local", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
 	"exw": [
 		"export_transportation",
 		"export_haulage_freight",
 		"export_fcl_customs",
 		"export_fcl_cfs",
+		"export_fcl_freight_local",
 		"fcl_freight",
+		"import_fcl_freight_local",
 		"import_fcl_customs",
 		"import_haulage_freight",
 		"import_transportation",
-		"import_fcl_cfs"
+		"import_fcl_cfs",
+		"export_fcl_freight_local"
 	],
-	"fca": ["export_transportation","export_haulage_freight","fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
-	"fas": ["fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"]
+	"fca": ["export_transportation","export_haulage_freight","export_fcl_freight_local","fcl_freight","import_fcl_freight_local", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
+	"fas": ["export_fcl_freight_local","fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs","import_fcl_freight_local"]
 }

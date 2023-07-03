@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../../common/Header';
 
@@ -27,13 +27,14 @@ function SearchResults() {
 	});
 
 	const [pageLoading, setPageLoading] = useState(false);
+
 	const [screen, setScreen] = useState('listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
 	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
 	const { query } = useRouter();
 	const { spot_search_id, importer_exporter_id } = query;
-	const { refetchSearch, loading, data } = useGetSpotSearch();
+	const { refetchSearch = () => {}, loading, data } = useGetSpotSearch();
 	const { detail, rates = [] } = data || {};
 
 	useEffect(() => {
@@ -48,6 +49,8 @@ function SearchResults() {
 			</div>
 		);
 	}
+
+	console.log('headerProps', headerProps);
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -77,6 +80,8 @@ function SearchResults() {
 			setSelectedCard,
 			selectedCard,
 			setScreen,
+			setHeaderProps,
+			refetchSearch,
 		},
 		comparison: {
 			setScreen,
@@ -103,11 +108,8 @@ function SearchResults() {
 			/>
 
 			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>
-
 				<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
-
 			</div>
-
 		</div>
 	);
 }
