@@ -56,7 +56,7 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 		<div className={styles.whole_container}>
 			<div className={styles.check}>
 				<Checkbox
-					onChange={() => setIsChecked(!isChecked)}
+					onChange={() => setIsChecked((pv) => !pv)}
 					checked={isChecked}
 				/>
 				I have prior work experience
