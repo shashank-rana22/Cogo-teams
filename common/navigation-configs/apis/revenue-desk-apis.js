@@ -159,11 +159,6 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
-	// {
-	// 	api          : 'list_revenue_desk_showed_available_rates',
-	// 	access_type  : 'private',
-	// 	service_name : 'revenue_desk',
-	// },
 	{
 		api          : 'list_customers_last_shipment_details',
 		access_type  : 'private',
