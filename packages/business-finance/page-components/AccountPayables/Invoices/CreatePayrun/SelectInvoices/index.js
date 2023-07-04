@@ -21,6 +21,8 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
+const ELEMENT_NOT_FOUND = -1;
+
 function SelectInvoices({ apiData, setApiData }, ref) {
 	const {
 		billsLoading,
@@ -32,6 +34,57 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 		getTableBodyCheckbox,
 		getTableHeaderCheckbox,
 	} = useGetPayrunInvoices({ apiData, setApiData });
+
+	const setEditedValue = (itemData, value, key, checked = false) => {
+		setApiData((p) => {
+			const newValue = { ...p };
+			const index = newValue?.list?.findIndex(
+				(item) => item?.id === itemData?.id,
+			);
+			const {
+				payableValue,
+				invoiceAmount,
+				tdsDeducted,
+				payableAmount,
+				tdsAmount,
+			} = newValue.list[index];
+			const checkAmount = (+invoiceAmount * 10) / 100;
+
+			let maxValueCrossed = false;
+			let lessValueCrossed = false;
+			let lessTdsValueCrossed = false;
+			let maxTdsValueCrossed = false;
+
+			if (key === 'payableAmount') {
+				maxValueCrossed = +value > +payableValue;
+				lessValueCrossed = Number.parseInt(value, 10) <= 0;
+				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+			} else if (key === 'tdsAmount') {
+				maxValueCrossed = +payableAmount > +payableValue;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(value, 10) < 0;
+			} else {
+				maxValueCrossed = +payableAmount > +payableValue;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+			}
+
+			const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
+
+			if (index !== ELEMENT_NOT_FOUND) {
+				newValue.list[index] = {
+					...itemData,
+					hasError: isError,
+					checked,
+				};
+				newValue.list[index][key] = value;
+			}
+			return newValue;
+		});
+	};
 
 	useImperativeHandle(ref, () => ({
 		getPayrunInvoices,
@@ -52,10 +105,16 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 			<RenderAction itemData={itemData} />
 		),
 		renderEditableTds: (itemData, field) => (
-			<EditableTdsInput itemData={itemData} field={field} />
+			<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />
 		),
-		renderEditablePayable : (itemData, field) => (<EditablePayableAmount itemData={itemData} field={field} />),
-		renderBankDetails     : (itemData, field) => (<BankDetails itemData={itemData} field={field} />),
+		renderEditablePayable: (itemData, field) => (
+			<EditablePayableAmount
+				itemData={itemData}
+				field={field}
+				setEditedValue={setEditedValue}
+			/>
+		),
+		renderBankDetails: (itemData, field) => (<BankDetails itemData={itemData} field={field} />),
 	};
 
 	return (

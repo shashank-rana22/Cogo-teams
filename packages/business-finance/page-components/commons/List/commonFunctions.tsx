@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
@@ -29,6 +31,15 @@ const commonFunctions = (functions: { functions?: FunctionObjects }) => {
 				{getFormattedAmount({
 					amount   : getByKey(itemData, field?.key),
 					currency : getByKey(itemData, field?.currencyKey),
+				})}
+			</div>
+		),
+		renderDate: (itemData, field) => (
+			<div>
+				{formatDate({
+					date       : getByKey(itemData, field?.key),
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
 				})}
 			</div>
 		),

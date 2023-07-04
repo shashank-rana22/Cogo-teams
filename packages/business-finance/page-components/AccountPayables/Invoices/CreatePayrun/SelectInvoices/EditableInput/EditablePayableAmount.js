@@ -18,7 +18,7 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
-function EditablePayableAmount({ itemData, field }) {
+function EditablePayableAmount({ itemData, field, setEditedValue }) {
 	const newItem = itemData;
 	const { key, fallBackKey } = field;
 	const [edit, setEdit] = useState(false);
@@ -59,7 +59,7 @@ function EditablePayableAmount({ itemData, field }) {
 	);
 
 	const handleUndo = () => {
-		newItem[key] = newItem[fallBackKey];
+		setEditedValue(newItem, newItem[fallBackKey], key, false);
 		setValue(newItem[fallBackKey]);
 		setEdit(false);
 	};
@@ -68,7 +68,7 @@ function EditablePayableAmount({ itemData, field }) {
 		<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 			<Input
 				onChange={(val) => {
-					newItem[key] = val;
+					setEditedValue(newItem, val, key, true);
 					setValue(val);
 				}}
 				defaultValue={value}
@@ -92,7 +92,15 @@ function EditablePayableAmount({ itemData, field }) {
 				currency : getByKey(newItem, field?.currencyKey),
 			})}
 			<span className={styles.edit}>
-				<IcMEdit height={12} width={12} onClick={() => { setEdit(true); }} />
+				<IcMEdit
+					height={12}
+					width={12}
+					className={styles.pointer}
+					onClick={() => {
+						setEditedValue(newItem, true, 'checked', true);
+						setEdit(true);
+					}}
+				/>
 			</span>
 		</div>
 	));

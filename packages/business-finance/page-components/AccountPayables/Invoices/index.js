@@ -101,6 +101,7 @@ function Invoices({ activeEntity }) {
 					<div>
 						<Button
 							size="md"
+							className={styles.button}
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}

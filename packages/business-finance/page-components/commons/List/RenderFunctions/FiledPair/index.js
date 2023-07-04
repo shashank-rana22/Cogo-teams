@@ -51,7 +51,7 @@ function FieldPair({ itemData, field }) {
 	return (
 		<div>
 			{!isEmpty(topKey) ? getElement(topKey?.type, topKey?.key, topKey?.currencyKey) : null}
-			{!isEmpty(topKey) ? getElement(lowerKey?.type, lowerKey?.key, lowerKey?.currencyKey) : null}
+			{!isEmpty(lowerKey) ? getElement(lowerKey?.type, lowerKey?.key, lowerKey?.currencyKey) : null}
 		</div>
 	);
 }

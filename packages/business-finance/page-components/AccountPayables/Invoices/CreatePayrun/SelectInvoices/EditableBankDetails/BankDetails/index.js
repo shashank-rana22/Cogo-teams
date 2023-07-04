@@ -82,7 +82,7 @@ function BankDetails({ itemData, payrun_type }) {
 				)}
 				{
 					tradePartyMappingId && (
-						<div>
+						<div className={styles.edit}>
 							<IcMEdit
 								className={styles.pointer}
 								height={12}

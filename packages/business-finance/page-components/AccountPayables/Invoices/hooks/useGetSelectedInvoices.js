@@ -59,7 +59,7 @@ const useGetSelectedInvoices = ({ apiData, setApiData }) => {
 		}
 	}, [getInvoices, payrun]);
 
-	return ({ apiData, setFIlters, filters, selectedInvoiceLoading });
+	return ({ apiData, setFIlters, filters, selectedInvoiceLoading, getInvoices });
 };
 
 export default useGetSelectedInvoices;

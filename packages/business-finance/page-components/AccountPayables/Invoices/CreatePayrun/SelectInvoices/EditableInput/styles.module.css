@@ -55,3 +55,7 @@
 .errormessage {
 	color: red;
 }
+
+.pointer {
+	cursor: pointer;
+}

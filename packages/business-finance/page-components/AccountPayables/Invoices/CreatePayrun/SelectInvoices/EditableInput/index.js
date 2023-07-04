@@ -18,7 +18,7 @@ const getFormattedAmount = ({ amount, currency }) => (
 	})
 );
 
-function EditableTdsInput({ itemData, field }) {
+function EditableTdsInput({ itemData, field, setEditedValue }) {
 	const newItem = itemData;
 	const { key, fallBackKey } = field;
 	const [edit, setEdit] = useState(false);
@@ -44,7 +44,7 @@ function EditableTdsInput({ itemData, field }) {
 			amount: value,
 			currency,
 		})} TDS cannot be greater than 10% of invoice amount : ${getFormattedAmount({
-			invoiceAmount,
+			amount: invoiceAmount,
 			currency,
 		})}`;
 	} else {
@@ -54,12 +54,12 @@ function EditableTdsInput({ itemData, field }) {
 	const content = (
 		<div>
 			<div className={styles.flex}>
-				{!isError && <div className={styles.text}>Actual TDS Amount :</div>}
+				{!isError && <div className={styles.text}>Actual TDS:</div>}
 				<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>{errorMessege}</div>
 			</div>
 			{!isError && (
 				<div className={styles.flex}>
-					<div className={styles.text}>Deducted TDS Amount :</div>
+					<div className={styles.text}>Deducted TDS:</div>
 					<div className={`${styles.message} ${isError ? styles.errormessage : ''}`}>
 						{getFormattedAmount({ amount: tdsDeducted, currency })}
 					</div>
@@ -69,7 +69,7 @@ function EditableTdsInput({ itemData, field }) {
 	);
 
 	const handleUndo = () => {
-		newItem[key] = newItem[fallBackKey];
+		setEditedValue(newItem, newItem[fallBackKey], key, false);
 		setValue(newItem[fallBackKey]);
 		setEdit(false);
 	};
@@ -78,7 +78,7 @@ function EditableTdsInput({ itemData, field }) {
 		<div className={`${styles.inputcontainer} ${isError ? styles.error : ''}`}>
 			<Input
 				onChange={(val) => {
-					newItem[key] = val;
+					setEditedValue(newItem, val, key, true);
 					setValue(val);
 				}}
 				defaultValue={value}
@@ -102,7 +102,15 @@ function EditableTdsInput({ itemData, field }) {
 				currency : getByKey(newItem, field?.currencyKey),
 			})}
 			<span className={styles.edit}>
-				<IcMEdit height={12} width={12} onClick={() => { setEdit(true); }} />
+				<IcMEdit
+					height={12}
+					width={12}
+					className={styles.pointer}
+					onClick={() => {
+						setEditedValue(newItem, true, 'checked', true);
+						setEdit(true);
+					}}
+				/>
 			</span>
 		</div>
 	));

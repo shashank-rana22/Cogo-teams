@@ -11,6 +11,8 @@ import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip'
 import { RenderUrgency } from '../../InvoiceTable/RenderFunctions/RenderUrgency';
 import { VIEW_SELECTED_CONFIG } from '../Configurations/viewSelectedConfig';
 
+import BankDetails from './BankDetails';
+import Delete from './Delete';
 import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
@@ -20,6 +22,7 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) 
 		selectedInvoiceLoading,
 		filters,
 		setFilters,
+		getInvoices,
 	} = useGetSelectedInvoices({ apiData, setApiData });
 
 	const FUNCTIONS = {
@@ -35,6 +38,8 @@ function ViewSelectedInvoices({ apiData, setApiData, setViewSelectedInvoices }) 
 		renderAction: (itemData) => (
 			<RenderAction itemData={itemData} />
 		),
+		renderBankDetails : (itemData) => (<BankDetails itemData={itemData} />),
+		renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
 	};
 
 	return (

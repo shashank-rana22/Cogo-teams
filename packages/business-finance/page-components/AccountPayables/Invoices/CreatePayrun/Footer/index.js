@@ -10,7 +10,7 @@ const INITIAL_VALUE = 0;
 
 function Footer({
 	apiData,
-	viewSelectedInvoice,
+	viewSelectedInvoices,
 	setViewSelectedInvoices,
 	submitSelectedInvoices,
 	loading,
@@ -24,8 +24,9 @@ function Footer({
 	const { totalValue = '', invoiceCount = '' } = apiData || {};
 	const { list: viewSelectedList = [] } = apiData || {};
 	const isChecked = (list || []).filter((item) => item.checked);
+	const hasError = !isEmpty((isChecked || []).filter((item) => item.hasError));
 	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
-	const buttonDisabled = isEmpty(isChecked) || loading;
+	const buttonDisabled = isEmpty(isChecked) || loading || hasError;
 	const handleView = () => {
 		setViewSelectedInvoices(true);
 	};
@@ -39,7 +40,7 @@ function Footer({
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
 							{formatAmount({
-								amount   : viewSelectedInvoice ? totalValue : totalInvoiceAmount,
+								amount   : viewSelectedInvoices ? totalValue : totalInvoiceAmount,
 								currency : selectedCurrency,
 								options  : {
 									currencyDisplay : 'code',
@@ -53,12 +54,12 @@ function Footer({
 							SID :
 						</div>
 						<div>
-							{viewSelectedInvoice ? invoiceCount : isChecked.length}
+							{viewSelectedInvoices ? invoiceCount : isChecked.length}
 						</div>
 					</div>
 				</div>
 				<div className={styles.button_container}>
-					{viewSelectedInvoice
+					{viewSelectedInvoices
 						? (
 							<div className={styles.view_button}>
 								<Button

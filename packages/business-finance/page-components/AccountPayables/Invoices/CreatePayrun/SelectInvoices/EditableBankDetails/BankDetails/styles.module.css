@@ -28,6 +28,10 @@
 	cursor: pointer;
 }
 
-.eye{
+.eye {
 	color: #f68b21;
+}
+
+.edit {
+	margin-left: 4px;
 }

@@ -1,25 +1,39 @@
-import { Modal, Button, Toast } from '@cogoport/components';
+import { Modal, Button, Toast, Placeholder } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
+
+import useGetListSupplier from '../../../hooks/useGetListSupplier';
+import ViewSupplierModal from '../ViewSupplierModal';
 
 import styles from './styles.module.css';
+
+const DEFAULT_CN = 0;
 
 function SavePayRunModal({
 	savePayrunModal,
 	setSavePayrunModal,
 	setViewSelectedInvoice,
 }) {
+	const [viewSupplier, showViewSupplier] = useState();
 	const { push } = useRouter();
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};
 
+	const {
+		loading,
+		suppliers,
+		trigger,
+		setApiData,
+		setFilters,
+	} = useGetListSupplier();
+
 	const handleClick = () => {
 		setViewSelectedInvoice(false);
 		push(
 			'/business-finance/account-payables/[active_tab]',
-			'/business-finance/account-payables/advance-payment',
+			'/business-finance/account-payables/payruns',
 		);
 		setSavePayrunModal(false);
 		Toast.success('Please wait while PayRun Saves...');
@@ -27,29 +41,44 @@ function SavePayRunModal({
 
 	return (
 		<div>
-			<Modal show={savePayrunModal} onClose={handleCloseModal} size="sm">
+			<Modal show={savePayrunModal} onClose={handleCloseModal} size="lg">
 				<div className={styles.container}>
 					<div className={styles.icon}>
 						<IcCError width={28} height={28} />
 					</div>
 					<div className={styles.icon}>
-						Are you sure You want to Save this payrun
+
+						<span
+							className={styles.count}
+						>
+							{loading ? <Placeholder width="50px" /> : (suppliers?.creditNotes || DEFAULT_CN)}
+						</span>
+						Credit notes available against the suppliers you have selected!
 					</div>
 				</div>
 				<Modal.Footer>
 					<Button
 						className={styles.button}
 						themeType="secondary"
-						onClick={() => setSavePayrunModal(false)}
+						onClick={() => showViewSupplier(true)}
 					>
-						Cancel
+						View Suppliers
 					</Button>
 					<Button onClick={handleClick}>
-						Yes
+						Next
 					</Button>
 				</Modal.Footer>
-
 			</Modal>
+			{viewSupplier ? (
+				<ViewSupplierModal
+					suppliers={suppliers}
+					viewSupplier={viewSupplier}
+					showViewSupplier={showViewSupplier}
+					setApiData={setApiData}
+					refetch={trigger}
+					setFilters={setFilters}
+				/>
+			) : null}
 		</div>
 	);
 }

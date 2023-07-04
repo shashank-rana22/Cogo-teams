@@ -96,7 +96,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 						invoiceView        : invoiceView || undefined,
 						currency           : filterCurrency || undefined,
 						invoiceType        : invoiceType || undefined,
-						entityCode         : filterEntity || undefined,
+						entity             : filterEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
 						serviceType        : serviceType || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
@@ -131,10 +131,26 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 	const onChangeTableHeaderCheckbox = (event) => {
 		setApiData((prevData) => {
 			const { list = [] } = prevData || {};
-			const newList = list.map((item) => ({
-				...item,
-				checked: event.target.checked,
-			}));
+			const newList = list.map((item) => {
+				const {
+					payableValue,
+					invoiceAmount,
+					tdsDeducted,
+					payableAmount,
+					tdsAmount,
+				} = item;
+				const maxValueCrossed = +payableAmount > +payableValue;
+				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				const checkAmount = (+invoiceAmount * 10) / 100;
+				const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
+				return ({
+					...item,
+					checked  : event.target.checked,
+					hasError : isError,
+				});
+			});
 			return { ...prevData, list: newList };
 		});
 	};
@@ -158,11 +174,26 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 			const index = (prevData.list || []).findIndex(
 				(item) => item.id === id,
 			);
+
 			if (index !== ELEMENT_NOT_FOUND) {
 				const newList = [...prevData.list];
+				const {
+					payableValue,
+					invoiceAmount,
+					tdsDeducted,
+					payableAmount,
+					tdsAmount,
+				} = newList[index];
+				const maxValueCrossed = +payableAmount > +payableValue;
+				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				const checkAmount = (+invoiceAmount * 10) / 100;
+				const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
+				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
 				newList[index] = {
 					...newList[index],
-					checked: !newList[index].checked,
+					checked  : !newList[index].checked,
+					hasError : isError,
 				};
 				return {
 					...prevData,

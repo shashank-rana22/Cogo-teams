@@ -42,17 +42,12 @@ export const VIEW_SELECTED_CONFIG = {
 			},
 		},
 		{
-			label : 'Entity',
-			key   : 'entityCode',
-			span  : 0.6,
-		},
-		{
 			label  : 'SID',
 			key    : 'sid',
 			func   : 'renderFieldPair',
 			span   : 1.2,
 			topKey : {
-				key: 'jobNumber',
+				key: 'sid',
 			},
 			lowerKey: {
 				key  : 'serviceType',
@@ -96,11 +91,10 @@ export const VIEW_SELECTED_CONFIG = {
 			currencyKey : 'currency',
 		},
 		{
-			label   : 'Invoice Dates',
-			key     : 'invoice_dates',
-			sorting : { name: 'dueDateSortType' },
-			span    : 1.8,
-			func    : 'renderInvoiceDates',
+			label : 'Bank Details',
+			key   : 'invoice_dates',
+			span  : 2,
+			func  : 'renderBankDetails',
 		},
 		{
 			label : 'Urgency',
@@ -113,6 +107,12 @@ export const VIEW_SELECTED_CONFIG = {
 			key   : 'action',
 			span  : 0.6,
 			func  : 'renderAction',
+		},
+		{
+			label : '',
+			key   : 'id',
+			span  : 0.4,
+			func  : 'renderDelete',
 		},
 	],
 };

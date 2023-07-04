@@ -1,0 +1,16 @@
+.container {
+	background-color: #fff;
+}
+
+.flex {
+	display: flex;
+}
+
+.font {
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.bold {
+	font-weight: 600;
+}

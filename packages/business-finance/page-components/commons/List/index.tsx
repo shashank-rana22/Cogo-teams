@@ -30,6 +30,9 @@ export interface Props {
 	subActiveTab?: string;
 	width?: string;
 	rowStyle?: string;
+	idKey?: string;
+	showId?: string;
+	renderAccordianData: Function;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 
@@ -48,6 +51,9 @@ function List({
 	subActiveTab,
 	width,
 	rowStyle,
+	showId,
+	idKey = 'id',
+	renderAccordianData = () => null,
 	paginationType = 'table',
 }: Props) {
 	const {
@@ -77,21 +83,30 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<CardColumn
-						key={singleitem.id}
-						fields={fields}
-						itemStyles={itemStyles}
-						singleitem={singleitem}
-						config={config}
-						loading={loading}
-						functions={commonFunctions(functions)}
-						isMobile={isMobile}
-						subActiveTab={subActiveTab}
-						width={width}
-						rowStyle={rowStyle}
-					/>
-				))}
+				{isEmpty(list) && !loading ? null : (
+					<>
+						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+							<>
+								<CardColumn
+									key={singleitem.id || singleitem}
+									fields={fields}
+									itemStyles={itemStyles}
+									singleitem={singleitem}
+									config={config}
+									loading={loading}
+									functions={commonFunctions(functions)}
+									isMobile={isMobile}
+									subActiveTab={subActiveTab}
+									width={width}
+									rowStyle={rowStyle}
+								/>
+								{showId === singleitem?.[idKey]
+									? renderAccordianData(singleitem)
+									: null}
+							</>
+						))}
+					</>
+				)}
 
 				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>

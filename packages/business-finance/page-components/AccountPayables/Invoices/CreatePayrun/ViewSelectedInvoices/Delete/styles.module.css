@@ -1,3 +1,13 @@
+.delete {
+	cursor: pointer;
+}
+
+.yes {
+	display: flex;
+	justify-content: flex-end;
+	margin: 12px 8px;
+}
+
 .icon {
 	display: flex;
 	justify-content: center;
@@ -5,14 +15,9 @@
 }
 
 .container {
-	margin-top: 16px;
 	margin-bottom: 16px;
 }
 
 .button {
 	margin-right: 12px;
-}
-
-.count {
-	margin-right: 4px;
 }

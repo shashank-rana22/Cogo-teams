@@ -114,13 +114,13 @@ export const CREATE_PAYRUN_CONFIG = {
 		{
 			label : 'Bank Details',
 			key   : 'bank_details',
-			span  : 1.4,
+			span  : 1.5,
 			func  : 'renderBankDetails',
 		},
 		{
 			label : 'Urgency',
 			key   : 'urgencyTag',
-			span  : 0.8,
+			span  : 0.7,
 			func  : 'renderUrgencyTag',
 		},
 		{

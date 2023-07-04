@@ -30,7 +30,13 @@ function CreatePayrun() {
 					setViewSelectedInvoices={setViewSelectedInvoices}
 				/>
 			)
-				: <SelectInvoices setApiData={setApiData} apiData={apiData} />}
+				: (
+					<SelectInvoices
+						setApiData={setApiData}
+						apiData={apiData}
+						ref={ref}
+					/>
+				)}
 			<Footer
 				viewSelectedInvoices={viewSelectedInvoices}
 				setViewSelectedInvoices={setViewSelectedInvoices}
