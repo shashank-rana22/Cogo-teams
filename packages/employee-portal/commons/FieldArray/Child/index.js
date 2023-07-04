@@ -1,4 +1,5 @@
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../getFieldController';
@@ -8,9 +9,6 @@ import styles from './styles.module.css';
 const REMOVE_INDEX = 1;
 
 const FIELD_TYPE_UPLOAD = 'fileUpload';
-
-const DISABLE_OPTIONS = ['10th', '12th', 'Diploma'];
-const COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -31,8 +29,12 @@ function Child(props) {
 		watchField,
 	} = props;
 
-	const countrySpecificOptions = getCountryConstants({ country_id: COUNTRY_ID });
-	const educationLevelOptions = countrySpecificOptions?.options?.education_level;
+	const country_id = GLOBAL_CONSTANTS?.country_ids?.IN;
+
+	const countrySpecificOptions = getCountryConstants({ country_id });
+
+	const { options } = countrySpecificOptions || {};
+	const { education_level:educationLevelOptions, disable_options } = options || {};
 
 	const { education_level } = watchField || {};
 
@@ -62,7 +64,7 @@ function Child(props) {
 									options={controlItem?.name === 'degree' && name === 'educational_qualification'
 										? educationLevelOptions?.[education_level] : controlItem?.options}
 									disabled={
-										!!(controlItem?.name === 'degree' && DISABLE_OPTIONS.includes(education_level))
+										!!(controlItem?.name === 'degree' && disable_options.includes(education_level))
 }
 								/>
 

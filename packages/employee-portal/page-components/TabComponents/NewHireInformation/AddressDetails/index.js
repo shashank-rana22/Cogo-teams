@@ -1,5 +1,6 @@
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState, useMemo } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
@@ -14,7 +15,6 @@ const CURRENT_ADDRESS_MAPPING = [
 
 const CONTROL_SELECT_TYPE_ONE = 'fileUpload';
 const CONTROL_SELECT_TYPE_TWO = 'textarea';
-const INITIAL_INDEX = 0;
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -53,7 +53,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 		'current_pincode', 'current_address']);
 
 	const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
-		&& permanentValues?.[INITIAL_INDEX] !== undefined;
+		&& permanentValues?.[GLOBAL_CONSTANTS?.zeroth_index] !== undefined;
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });

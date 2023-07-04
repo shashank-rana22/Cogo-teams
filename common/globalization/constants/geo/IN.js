@@ -460,7 +460,6 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
-
 		education_level: {
 			post_graduates_degree: [
 				{
@@ -538,6 +537,7 @@ export default {
 				{ label: 'Others', value: 'others' },
 			],
 		},
+		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
 		supply_dashboard: {
