@@ -140,7 +140,21 @@ export function TestSetButtons({
 									<div>Extend Validity</div>
 								</Button>
 							) : null }
-
+							{current_status === 'active' ? (
+								<Button
+									loading={loading}
+									themeType="secondary"
+									className={styles.btn}
+									type="button"
+									onClick={() => {
+										setShowModal(true);
+										setTestId(id);
+									}}
+								>
+									<IcMDelete />
+									<div>Delete</div>
+								</Button>
+							) : null}
 						</div>
 					)}
 					trigger="click"
