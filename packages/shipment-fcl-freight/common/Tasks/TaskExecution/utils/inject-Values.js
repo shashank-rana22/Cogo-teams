@@ -101,24 +101,15 @@ const injectValues = (
 				}));
 			}
 		});
-	} else if (task.task === 'update_hbl_collection_status') {
-		(controls || []).forEach((control, index) => {
-			if (control.name === 'bl_detail') {
-				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
-					(i) => i?.bl_document_type === 'draft_house_bill_of_lading',
-				);
+	} else if (
+		['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)) {
+		const doc_type = task.task === 'update_hbl_collection_status'
+			? 'draft_house_bill_of_lading' : 'draft_bill_of_lading';
 
-				controls[index].value = shipment_bl_details?.map((bl_detail) => ({
-					id        : bl_detail?.id,
-					bl_number : bl_detail?.bl_number,
-				}));
-			}
-		});
-	} else if (task.task === 'update_mbl_collection_status') {
 		(controls || []).forEach((control, index) => {
 			if (control.name === 'bl_detail') {
 				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
-					(i) => i?.bl_document_type === 'draft_bill_of_lading',
+					(i) => i?.bl_document_type === doc_type,
 				);
 
 				controls[index].value = shipment_bl_details?.map((bl_detail) => ({

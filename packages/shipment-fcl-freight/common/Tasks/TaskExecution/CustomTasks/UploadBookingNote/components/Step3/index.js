@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
+const STEP_ON_BACK = 2;
 
 function Step3({ data, setStep = () => {}, shipment_id }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
@@ -52,7 +53,7 @@ function Step3({ data, setStep = () => {}, shipment_id }) {
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(2)}>Back</Button>
+				<Button themeType="secondary" onClick={() => setStep(STEP_ON_BACK)}>Back</Button>
 
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
