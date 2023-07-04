@@ -10,7 +10,7 @@ import useListShipmentOrganizations from './useListShipmentOrganizations';
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
 const TASKS = ['upload_document', 'approve_document', 'amend_document'];
-const PAGE_LIMIT = 50;
+const PAGE_LIMIT = 20;
 const DEFAULT_PAGE = 1;
 const DOC_TYPE_SLICE_INDEX = -1;
 const TASK_CONFIG_FLAT_DEPTH = 2;

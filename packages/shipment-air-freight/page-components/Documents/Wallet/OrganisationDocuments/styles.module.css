@@ -5,6 +5,11 @@
 	padding: 16px;
 }
 
+.org_doc {
+	display: flex;
+	flex-direction: column;
+}
+
 .single_doc {
 	position: relative;
 	display: flex;

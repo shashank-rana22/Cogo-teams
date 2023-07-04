@@ -1,12 +1,12 @@
 import { EmptyState } from '@cogoport/air-modules';
-import { Button, Popover } from '@cogoport/components';
+import { Pagination, Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
@@ -16,6 +16,10 @@ import styles from './styles.module.css';
 
 const LOADER_COUNT = 3;
 const DEFAULT_TAB_INDEX = 0;
+const INITIAL_PAGE = 1;
+const TOTAL_COUNT_FOR_PAGINATION = 0;
+const SIZE_FOR_SHIPMENT_PAGE = 10;
+const FIRST_PAGE_LIMIT = 20;
 
 function OrganizationDocuments({
 	handleSave = () => {},
@@ -23,6 +27,8 @@ function OrganizationDocuments({
 	searchDocsVal,
 	showWalletDocs,
 }) {
+	const [page, setPage] = useState(INITIAL_PAGE);
+
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
@@ -40,9 +46,12 @@ function OrganizationDocuments({
 			q               : query || undefined,
 		},
 		defaultParams: {
-			page_limit: 100,
+			page,
+			page_limit: 20,
 		},
 	});
+
+	const { total_count, page:currPage, list } = data || {};
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
 		refetch       : getList,
@@ -74,12 +83,12 @@ function OrganizationDocuments({
 				<Loader key={key} />
 			));
 		}
-		if (!loading && isEmpty(data?.list)) {
+		if (!loading && isEmpty(list)) {
 			return <EmptyState />;
 		}
 		return (
 			<>
-				{(data?.list || []).map((doc) => (
+				{(list || []).map((doc) => (
 					<div
 						key={doc?.id}
 						role="button"
@@ -135,7 +144,21 @@ function OrganizationDocuments({
 	};
 
 	return (
-		<div className={styles.wrapper}>{contentToShow()}</div>
+		<div className={styles.org_doc}>
+			<div className={styles.wrapper}>
+				{contentToShow()}
+			</div>
+			{total_count > FIRST_PAGE_LIMIT && (
+				<Pagination
+					type="number"
+					totalItems={total_count || TOTAL_COUNT_FOR_PAGINATION}
+					currentPage={currPage || INITIAL_PAGE}
+					pageSize={SIZE_FOR_SHIPMENT_PAGE}
+					onPageChange={(pageVal) => setPage(pageVal)}
+					style={{ marginLeft: 'auto' }}
+				/>
+			)}
+		</div>
 	);
 }
 

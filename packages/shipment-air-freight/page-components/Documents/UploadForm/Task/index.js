@@ -1,12 +1,11 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 import TaskCard from '../../../Tasks/TaskExecution';
 
 import styles from './styles.module.css';
 
 function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
-	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
 
 	const {
@@ -15,18 +14,13 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 	} = useContext(ShipmentDetailContext);
 	const handleClick = () => {
 		setShowDoc(null);
-
-		setPendingTask({
-			...pendingTask,
-			[pendingItem.id]: !pendingTask?.[pendingItem?.id],
-		});
 	};
 
 	return (
 		<div className={styles.container}>
 			<TaskCard
 				task={pendingItem}
-				onCancel={() => handleClick(pendingItem)}
+				onCancel={() => handleClick()}
 				taskListRefetch={refetch}
 				shipment_data={shipment_data}
 				getShipmentTimeline={getShipmentTimeline}
