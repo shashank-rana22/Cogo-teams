@@ -113,8 +113,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	useEffect(() => {
 		const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
-			&& permanentValues?.[INITIAL_INDEX];
-
+			&& permanentValues?.[INITIAL_INDEX] !== undefined;
 		setAddress(equalityCheck);
 	}, [permanentAddress, permanentValues, presentValues]);
 
