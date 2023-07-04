@@ -1,5 +1,7 @@
 import { Pill } from '@cogoport/components';
 
+import { VALUE_ZERO } from '../../../constants';
+
 import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
@@ -21,7 +23,7 @@ function Body({ data }) {
 			<div className={styles.left_section}>
 				<div className={styles.heading}>
 					{
-						total_revert_count > 0 ? (
+						total_revert_count > VALUE_ZERO ? (
 							<div className={styles.text1}>
 								<Pill size="md" color="#E0E0E0">{`${total_revert_count} Reverts`}</Pill>
 							</div>

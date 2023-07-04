@@ -2,6 +2,8 @@ import { Placeholder, Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
+import { DECIMAL_PLACES, PERCENTAGE_CHECK, TOTAL_PERCENT } from '../../../constants';
+
 import styles from './styles.module.css';
 
 function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemData }) {
@@ -31,12 +33,14 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={profitPercentage >= 0 ? styles.postive_container : styles.negative_container}>
-					Profit
-					:{!loading
+				<div className={profitPercentage >= PERCENTAGE_CHECK
+					? styles.postive_container : styles.negative_container}
+				>
+					Profit:
+					{!loading
 						? (
 							<div style={{ padding: '10px' }}>
-								{Number(Number(profitPercentage) * 100).toFixed(2)}
+								{Number(Number(profitPercentage) * TOTAL_PERCENT).toFixed(DECIMAL_PLACES)}
 								%
 							</div>
 						) : <Placeholder height="25px" width="100px" />}
@@ -87,7 +91,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 												maximumFractionDigits : 2,
 											},
 										})}
-										/Contr.
+									/Contr.
 									<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
 									{!data?.net_pre_tax_total
 										? <Placeholder width="150px" height="25px" />

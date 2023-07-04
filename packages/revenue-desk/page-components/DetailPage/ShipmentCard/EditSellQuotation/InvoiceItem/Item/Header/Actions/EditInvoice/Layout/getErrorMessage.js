@@ -1,36 +1,38 @@
+import { VALUE_ZERO } from '../../../../../../../../../constants';
+
 const getErrorMessage = (props) => {
 	const {
 		error, rules, label,
 	} = props;
-	const errorMessage = [];
+	const ERROR_MESSAGE = [];
 
 	if (error) {
 		if (rules?.required && error.type === 'required') {
-			errorMessage.push(error?.message || `${label} is Required`);
+			ERROR_MESSAGE.push(error?.message || `${label} is Required`);
 		}
-		if ((rules?.min || rules?.min === 0) && error.type === 'min') {
-			errorMessage.push(
+		if ((rules?.min || rules?.min === VALUE_ZERO) && error.type === 'min') {
+			ERROR_MESSAGE.push(
 				`${label} cannot be less than ${rules.min}`,
 			);
 		}
 		if (rules?.max && error.type === 'max') {
-			errorMessage.push(
+			ERROR_MESSAGE.push(
 				`${label} cannot be greater than ${rules.max}`,
 			);
 		}
 		if (rules?.minLength && error.type === 'minLength') {
-			errorMessage.push(
+			ERROR_MESSAGE.push(
 				`${label} should be ${rules.minLength} character(s) long`,
 			);
 		}
 		if (rules?.maxLength && error.type === 'maxLength') {
-			errorMessage.push(
+			ERROR_MESSAGE.push(
 				`${label} should be less than ${rules.maxLength}`,
 			);
 		}
 	}
-	if (errorMessage.length) {
-		return errorMessage.join(' ,');
+	if (ERROR_MESSAGE.length) {
+		return ERROR_MESSAGE.join(' ,');
 	}
 	return error?.message;
 };

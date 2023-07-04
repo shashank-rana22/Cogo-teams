@@ -1,5 +1,3 @@
-/* eslint-disable prefer-destructuring */
-
 const routeInfo = {
 	air_customs : { origin_port: 'airport', origin_pickup: 'location' },
 	fcl_customs : {
@@ -258,11 +256,11 @@ const getLocationInfo = (
 ) => {
 	let service_type = data?.service_type || data?.shipment_type;
 	if (service_type?.includes('origin')) {
-		service_type = service_type.split('origin_')[1];
+		[, service_type] = service_type.split('origin');
 	}
 
 	if (service_type?.includes('destination')) {
-		service_type = service_type.split('destination_')[1];
+		[, service_type] = service_type.split('destination_');
 	}
 
 	const serviceRoute = routeInfo[service_type];

@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, shipmentData } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -7,22 +7,24 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 		url    : '/list_shipment_booking_confirmation_preferences',
 	}, { manual: true });
 
-	const getList = async () => {
+	const serviceId = singleServiceData?.id;
+	const shipmentId = shipmentData?.id;
+
+	const getList = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					rd_showed_rates : true,
-					filters         : { service_id: singleServiceData?.id, shipment_id: shipmentData?.id },
+					filters         : { service_id: serviceId, shipment_id: shipmentId },
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, serviceId, shipmentId]);
 	useEffect(() => {
 		getList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(singleServiceData)]);
+	}, [singleServiceData, getList]);
 	return {
 		data: data?.list,
 		loading,

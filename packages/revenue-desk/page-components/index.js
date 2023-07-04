@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { serviceOptions, sortByOptions } from '../helper/filterOptionMapping';
 import useGetRDShipmentList from '../hooks/useGetRDShipmentList';
 
+import { VALUE_TWO, VALUE_ZERO } from './constants';
 import DetailPage from './DetailPage';
 import Filters from './Filters';
 import List from './List';
@@ -54,7 +55,7 @@ function RevenueDesk() {
 									value={filters?.sort_by}
 									onChange={(value) => setFilters({ ...filters, sort_by: value, page: 1 })}
 									options={['air_freight', 'fcl_freight'].includes(filters?.service)
-										? sortByOptions : sortByOptions.slice(0, 2)}
+										? sortByOptions : sortByOptions.slice(VALUE_ZERO, VALUE_TWO)}
 								/>
 							</div>
 							<div className={styles.select_container}>
@@ -85,7 +86,7 @@ function RevenueDesk() {
 									) : (
 										<div className={styles.search_text}>
 											-
-											{shipmentList?.total_count || 0}
+											{shipmentList?.total_count || VALUE_ZERO}
 											{' '}
 											Search Results
 										</div>

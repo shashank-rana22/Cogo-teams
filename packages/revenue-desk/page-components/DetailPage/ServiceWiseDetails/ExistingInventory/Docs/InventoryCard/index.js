@@ -1,5 +1,6 @@
-import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useState } from 'react';
+
+import { DEFAULT_INDEX, VALUE_ONE, VALUE_ZERO } from '../../../../../constants';
 
 import getRows from './getRows';
 import PriorityNumber from './PriorityNumber';
@@ -14,7 +15,7 @@ const columns = [
 	'Booking Party',
 ];
 function InventoryCard({ type, data: details, preferences, setPreferences, serviceId }) {
-	const key = type[1];
+	const key = type[VALUE_ONE];
 	const rowKeyMapping = {
 		splitable_booking_notes: getRows({
 			key,
@@ -31,9 +32,9 @@ function InventoryCard({ type, data: details, preferences, setPreferences, servi
 	};
 	const [showAll, setShowAll] = useState(false);
 	const currentData = rowKeyMapping[key];
-	const inceremt = 4;
-	const currentDataRows = showAll ? currentData : currentData?.slice(0, inceremt);
-	const expandable = currentData?.length > inceremt;
+	const INCEREMT = 4;
+	const currentDataRows = showAll ? currentData : currentData?.slice(VALUE_ZERO, INCEREMT);
+	const expandable = currentData?.length > INCEREMT;
 
 	const renderSingle = key === 'single_booking_notes';
 	const showData = (val) => val || '';
@@ -56,14 +57,14 @@ function InventoryCard({ type, data: details, preferences, setPreferences, servi
 			const foundItem = (preferences?.[serviceId] || []).find((obj) => obj?.id === row_id);
 			if (foundItem) {
 				const oldItems = preferences?.[serviceId];
-				const newItems = [];
+				const NEW_ITEMS = [];
 				oldItems.forEach((item) => {
 					if (item?.id !== row_id) {
-						newItems.push(item);
+						NEW_ITEMS.push(item);
 					}
 				});
-				if (newItems.length) {
-					setPreferences({ ...preferences, [serviceId]: [...newItems] });
+				if (NEW_ITEMS.length) {
+					setPreferences({ ...preferences, [serviceId]: [...NEW_ITEMS] });
 				} else {
 					setPreferences({ ...preferences, [serviceId]: [] });
 				}
@@ -122,7 +123,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, servi
 				/>
 			</div>
 
-			{element?.childrens?.[0].map((childval) => (
+			{element?.childrens?.[DEFAULT_INDEX].map((childval) => (
 				<div className={styles.td} key={childval}>{showData(childval)}</div>
 			))}
 		</div>
@@ -131,7 +132,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, servi
 		<div className={styles.big_container}>
 			{currentDataRows?.length ? (
 				<div className={styles.ratescontainer}>
-					<div className={styles.description}>{type[0]}</div>
+					<div className={styles.description}>{type[DEFAULT_INDEX]}</div>
 					<div className={styles.table}>
 						<div className={styles.tr}>
 							<div className={styles.select_heading}>{' '}</div>
@@ -143,7 +144,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, servi
 					</div>
 
 					<div className={styles.addmore} role="presentation" onClick={() => setShowAll(!showAll)}>
-						{currentData?.length > inceremt && expandable ? (
+						{currentData?.length > INCEREMT && expandable ? (
 							<div className={styles.show_container}>
 								{showAll && currentData?.length ? (
 									'See Less'

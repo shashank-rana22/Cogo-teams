@@ -81,7 +81,6 @@
 .lower_right_section{
     display: flex;
     align-items: center;
-    /* border-left: 1px dashed #BDBDBD; */
     flex:1;
     justify-content: space-between;
     padding: 20px;

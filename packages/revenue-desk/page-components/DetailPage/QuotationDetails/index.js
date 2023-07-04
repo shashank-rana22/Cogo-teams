@@ -1,5 +1,6 @@
 import useGetBuyQuotation from '../../../hooks/useGetBuyQuotation';
 import useGetShipmentQuotation from '../../../hooks/useGetShipmentQuotation';
+import { VALUE_ZERO } from '../../constants';
 
 import BuyServiceQuotation from './BuyServiceQuotation';
 import SellServiceQuotation from './SellServiceQuotation';
@@ -14,7 +15,8 @@ function QuotationDetails({ itemData, setPriceData, priceData }) {
 	const totalSellPriceCurrency = SellData?.net_total_price_currency;
 	const profitAmount = Number(totalSellPrice) - Number(totalBuyPrice);
 	const profitCurrency = totalSellPriceCurrency || totalBuyPriceCurrency;
-	const profitPercentage = totalBuyPrice !== 0 ? Number(profitAmount) / Number(totalBuyPrice) : 0;
+	const profitPercentage = totalBuyPrice !== VALUE_ZERO
+		? Number(profitAmount) / Number(totalBuyPrice) : VALUE_ZERO;
 	return (
 		<div className={styles.container}>
 			<div>

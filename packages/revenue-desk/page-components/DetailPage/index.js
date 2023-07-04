@@ -7,6 +7,7 @@ import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
+import { DEFAULT_INDEX } from '../constants';
 
 import CancelledShipmentCard from './CancelledShipmentCard';
 import LastShipmentDetails from './LastShipmentDetails';
@@ -18,19 +19,21 @@ import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
+const excludedServices = [
+	'fcl_freight_local_service',
+	'lcl_freight_local_service',
+	'air_freight_local_service',
+	'subsidiary_service',
+];
+
+const IMAGE_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png';
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [isPillSelected, setIsPillSelected] = useState(false);
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState(null);
-	const { data:revenueDeskDecisionsData, loading: revenueDeskLoading } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
+	const { data:revenueDeskDecisionsData } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
-	const excludedServices = [
-		'fcl_freight_local_service',
-		'lcl_freight_local_service',
-		'air_freight_local_service',
-		'subsidiary_service',
-	];
 	const groupedShowServicesData = servicesData?.list?.reduce((acc, item) => {
 		const { service_type } = item;
 		if (!excludedServices.includes(service_type)) {
@@ -41,6 +44,9 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 		}
 		return acc;
 	}, {});
+	const handlePillSelected = () => {
+		setIsPillSelected((prev) => !prev);
+	};
 
 	return (
 		<div className={styles.Detail_page}>
@@ -58,7 +64,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						<div className={styles.text}>
 							{serviceLabelMapping[itemData?.shipment_type]}
 						</div>
-
 						<Pill
 							size="md"
 							color="#F9F9F9"
@@ -88,13 +93,11 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						) : null}
 					</div>
 				</div>
-
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<div className={styles.wallet_container}>
 						<div>
 							<img
-								src="
-                    https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png"
+								src={IMAGE_SRC}
 								alt="wallet"
 							/>
 						</div>
@@ -111,7 +114,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						<PocSopModal itemData={itemData} />
 					</div>
 				</div>
-
 			</div>
 			{itemData?.state === 'cancelled' ? <CancelledShipmentCard itemData={itemData} /> : null}
 			<div className={styles.card_container}>
@@ -187,13 +189,14 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					&& (
 						<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
 							<div
+								role="button"
+								tabIndex={0}
 								className={styles.custom_pill}
-								onClick={() => setIsPillSelected(!isPillSelected)}
+								onClick={handlePillSelected}
 							>
 								view customers last shipment with same configuration&nbsp;
 								{isPillSelected ? <IcMTick /> : ''}
 							</div>
-
 							{showDetail === true ? (
 								<div>
 									<LastShipmentDetails itemData={itemData} isPillSelected={isPillSelected} />
@@ -263,7 +266,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							serviceData={servicesData?.list}
 							priceData={priceData}
 							setShowDetailPage={setShowDetailPage}
-							revenueDeskDecisionsData={revenueDeskDecisionsData?.[0] || []}
+							revenueDeskDecisionsData={revenueDeskDecisionsData?.[DEFAULT_INDEX] || []}
 						/>
 					)}
 			</div>

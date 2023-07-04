@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListShipmentServices = ({ shipmentId } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -7,7 +7,7 @@ const useListShipmentServices = ({ shipmentId } = {}) => {
 		url    : '/list_shipment_services',
 	}, { manual: true });
 
-	const fetchShipmentsServices = async () => {
+	const fetchShipmentsServices = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -23,11 +23,10 @@ const useListShipmentServices = ({ shipmentId } = {}) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, shipmentId]);
 	useEffect(() => {
 		fetchShipmentsServices();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fetchShipmentsServices]);
 	return {
 		data,
 		loading,

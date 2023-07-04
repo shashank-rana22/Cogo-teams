@@ -1,3 +1,5 @@
+import { DEFAULT_INDEX, VALUE_ONE } from '../../../../constants';
+
 import CargoDetailPills from './CargoDetailPills';
 import MultiServiceDetails from './MultiServiceDetails';
 import styles from './styles.module.css';
@@ -14,14 +16,14 @@ function CargoDetails({ data }) {
 
 	if (
 		includeShipment.includes(shipment_type)
-		&& serviceMapping[shipment_type]?.length > 1
+		&& serviceMapping[shipment_type]?.length > VALUE_ONE
 	) {
 		return (
 			<div>
 				<CargoDetailPills detail={{
 					...data,
 					revert_count: serviceMapping[shipment_type]?.length
-						? serviceMapping[shipment_type][0]?.revert_count : undefined,
+						? serviceMapping[shipment_type][DEFAULT_INDEX]?.revert_count : undefined,
 				}}
 				/>
 				<MultiServiceDetails mainServices={serviceMapping[shipment_type]} />
@@ -34,7 +36,7 @@ function CargoDetails({ data }) {
 			<CargoDetailPills detail={{
 				...data,
 				revert_count: serviceMapping[shipment_type]?.length
-					? serviceMapping[shipment_type][0]?.revert_count : undefined,
+					? serviceMapping[shipment_type][DEFAULT_INDEX]?.revert_count : undefined,
 			}}
 			/>
 		</div>

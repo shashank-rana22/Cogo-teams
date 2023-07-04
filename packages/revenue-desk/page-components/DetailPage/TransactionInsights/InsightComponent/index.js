@@ -1,6 +1,11 @@
 import { Tooltip } from '@cogoport/components';
 
+import { DEFAULT_INDEX, TOTAL_PERCENT } from '../../../constants';
+
 import styles from './styles.module.css';
+
+const VALUE_TWENTY = 20;
+const VALUE_TEN = 10;
 
 const KEY_MAPPING = {
 	kam_insights      : 'KAM / Sales Agent',
@@ -9,8 +14,8 @@ const KEY_MAPPING = {
 
 const getOrdinalNumber = (number) => {
 	const suffix = ['th', 'st', 'nd', 'rd'];
-	const quotient = number % 100;
-	const ordinal = suffix[(quotient - 20) % 10] || suffix[quotient] || suffix[0];
+	const quotient = number % TOTAL_PERCENT;
+	const ordinal = suffix[(quotient - VALUE_TWENTY) % VALUE_TEN] || suffix[quotient] || suffix[DEFAULT_INDEX];
 	return (
 		<>
 			<div className={styles.bold}>{number}</div>

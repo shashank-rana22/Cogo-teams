@@ -6,24 +6,26 @@ import iconMapping from '../../../helper/iconMapping';
 import incoTermMapping from '../../../helper/incoTermMapping';
 import serviceLabelMapping from '../../../helper/serviceLabelMapping';
 import useGetCustomerLastShipmentDetails from '../../../hooks/useGetCustomerLastShipmentDetails';
+import { DEFAULT_INDEX } from '../../constants';
 import CargoDetails from '../../List/Card/Body/CargoDetails';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
 
-function LastShipmentDetails({ itemData, isPillSelected}) {
-	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData , isPillSelected});
+function LastShipmentDetails({ itemData, isPillSelected }) {
+	const { data:shipmentData, loading } = useGetCustomerLastShipmentDetails({ itemData, isPillSelected });
+	const data = shipmentData?.[DEFAULT_INDEX];
 	return (
 		<div>
-			{(loading || ((data || [])?.length)) ? (
+			{(loading || ((shipmentData || [])?.length)) ? (
 				<div className={styles.container}>
 					<div className={styles.header_section}>
 						<div className={styles.header_left_section}>
 							{loading ? <Placeholder height="25px" width="100px" margin="0 5px" /> : (
 								<Pill size="md" color="#F2F3FA">
 									<div style={{ color: '#7278AD' }}>
-										{startCase(data[0]?.trade_type)
-						|| startCase(incoTermMapping[data[0]?.inco_term])}
+										{startCase(data?.trade_type)
+						|| startCase(incoTermMapping[data?.inco_term])}
 
 									</div>
 								</Pill>
@@ -31,9 +33,9 @@ function LastShipmentDetails({ itemData, isPillSelected}) {
 							{loading ? <Placeholder height="25px" width="100px" /> : (
 								<Pill size="md" color="#F7FAEF">
 									<div style={{ color: '#849E4C' }}>
-										{data[0]?.source === 'direct'
+										{data?.source === 'direct'
 											? 'Sell Without Buy'
-											: startCase(data[0]?.source || '')}
+											: startCase(data?.source || '')}
 									</div>
 								</Pill>
 							)}
@@ -47,9 +49,9 @@ function LastShipmentDetails({ itemData, isPillSelected}) {
 						) : (
 							<div className={styles.header_right_section}>
 								<div className={styles.sid_section}>
-									{iconMapping[data[0]?.shipment_type]}
+									{iconMapping[data?.shipment_type]}
 									<div className={styles.text}>
-										{serviceLabelMapping[data[0]?.shipment_type]}
+										{serviceLabelMapping[data?.shipment_type]}
 									</div>
 
 									<Pill
@@ -59,14 +61,14 @@ function LastShipmentDetails({ itemData, isPillSelected}) {
 										<div style={{ fontSize: '14px', fontWeight: '400', color: '#221F20' }}>
 											SID :
 											{' '}
-											{data[0]?.serial_id}
+											{data?.serial_id}
 										</div>
 									</Pill>
 								</div>
 								<div className={styles.date_text}>
 									Created on -
 									{' '}
-									{format(data[0]?.created_at, 'dd MMM yyyy')}
+									{format(data?.created_at, 'dd MMM yyyy')}
 								</div>
 							</div>
 						)}
@@ -86,14 +88,14 @@ function LastShipmentDetails({ itemData, isPillSelected}) {
 									</div>
 
 								</div>
-							) : <PortDetails data={data[0]} />}
+							) : <PortDetails data={data} />}
 
 						</div>
 						<div className={styles.body_right_section}>
 							Service Provider :
 							<div className={styles.service_provider_text}>
 								{loading ? <Placeholder height="25px" width="300px" margin="0 5px" />
-									: <div>{data[0]?.service_provider?.business_name}</div>}
+									: <div>{data?.service_provider?.business_name}</div>}
 
 							</div>
 						</div>
@@ -107,7 +109,7 @@ function LastShipmentDetails({ itemData, isPillSelected}) {
 								<Placeholder height="25px" width="100px" margin="10px 20px" />
 								<Placeholder height="25px" width="100px" margin="10px 20px" />
 							</div>
-						) : <CargoDetails data={data[0]} />}
+						) : <CargoDetails data={data} />}
 					</div>
 				</div>
 			) : (

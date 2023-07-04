@@ -35,16 +35,16 @@ function Sop({
 		defaultFilters: {
 			action_name: 'update_operating_instruction',
 			shipment_id,
-
 		},
 	});
 
+	const operatingInstructions = data?.operating_instructions;
+	const tmp = JSON.stringify(operatingInstructions);
 	useEffect(() => {
-		if ((data?.operating_instructions || auditsData || []).length) {
+		if ((operatingInstructions || auditsData || []).length) {
 			showIndicator(true);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data?.operating_instructions), JSON.stringify(auditsData)]);
+	}, [tmp, operatingInstructions, auditsData, showIndicator]);
 
 	return (
 		<div>

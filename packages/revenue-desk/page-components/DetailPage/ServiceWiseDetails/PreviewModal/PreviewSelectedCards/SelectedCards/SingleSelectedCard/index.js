@@ -2,12 +2,14 @@ import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
+import { DECIMAL_PLACES, PERCENTAGE_CHECK } from '../../../../../../constants';
+
 import styles from './styles.module.css';
 
 function SingleSelectedCard({ data, shipmentType, priority, fromKey }) {
 	const showData = (val) => val || '';
 	return (
-		<div className={Number(data?.rowData?.profit_percentage) > 0
+		<div className={Number(data?.rowData?.profit_percentage) > PERCENTAGE_CHECK
 			? styles.positive_profit_container : styles.negative_profit_container}
 		>
 			<div className={styles.left_section_container}>
@@ -57,16 +59,16 @@ function SingleSelectedCard({ data, shipmentType, priority, fromKey }) {
 					<div className={styles.lower_right_section}>
 						<div className={styles.label}>
 							Profitability : &nbsp;
-							<div className={Number(data?.rowData?.profit_percentage) > 0
+							<div className={Number(data?.rowData?.profit_percentage) > PERCENTAGE_CHECK
 								? styles.positive_profit : styles.negative_profit}
 							>
-								{Number(data?.rowData?.profit_percentage).toFixed(2)}
+								{Number(data?.rowData?.profit_percentage).toFixed(DECIMAL_PLACES)}
 								%
 							</div>
 						</div>
 						<div className={styles.label}>
 							Profit : &nbsp;
-							<div className={Number(data?.rowData?.profit) > 0
+							<div className={Number(data?.rowData?.profit) > PERCENTAGE_CHECK
 								? styles.positive_profit : styles.negative_profit}
 							>
 								{formatAmount({

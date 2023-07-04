@@ -1,34 +1,58 @@
+import { DEFAULT_CONTAINER_COUNT, DEFAULT_INDEX, DEFAULT_VALUE } from '../page-components/constants';
+
 const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData }) => {
-	const container_count = singleServiceData?.containers_count || 1;
-	const rows = [];
+	const container_count = singleServiceData?.containers_count || DEFAULT_CONTAINER_COUNT;
+	const ROWS = [];
 	(ratesDataNotPrefered || [])?.forEach((element) => {
-		const row = {};
-		const rowData = {};
+		const data = element?.data?.[DEFAULT_INDEX];
+		const validities = element?.validities?.[DEFAULT_INDEX];
+
+		const row = {
+			id: element?.rate_id,
+		};
+		const rowData = {
+			service_provider         : element?.service_provider,
+			air_line                 : data?.airline?.business_name,
+			shipping_line            :	data?.shipping_line?.business_name,
+			total_price              : validities?.total_price || DEFAULT_VALUE,
+			currency                 : validities?.currency || '',
+			fulfillment_ratio_2      : element?.fulfillment_data?.fulfillment_ratio_2,
+			fulfillment_ratio_7      : element?.fulfillment_data?.fulfillment_ratio_7,
+			fulfillment_ratio_30     : element?.fulfillment_data?.fulfillment_ratio_30,
+			sell_price_currency      : validities?.currency,
+			sell_price_per_container : Number(validities?.total_price) / Number(container_count),
+			active_booking           : element?.data?.active_bookings || DEFAULT_VALUE,
+			profit                   : validities?.profit || DEFAULT_VALUE,
+			profit_percentage        : validities?.profit_percentage || DEFAULT_VALUE,
+			source                   : element?.source || undefined,
+			api                      : 'showed_rates',
+		};
+
 		let allocation_ratio = null;
 		if (element?.allocation_amount !== null) {
 			allocation_ratio = Number(element?.allocated_amount) / Number(element?.allocation_amount);
 		}
-		row.id = element?.rate_id;
-		rowData.service_provider = element?.service_provider;
-		rowData.air_line = element?.data?.[0]?.airline?.business_name;
-		rowData.shipping_line =	element?.data?.[0]?.shipping_line?.business_name;
-		rowData.total_price = element?.validities?.[0]?.total_price || 0;
-		rowData.currency = element?.validities?.[0]?.currency || '';
-		rowData.fulfillment_ratio_2 = element?.fulfillment_data?.fulfillment_ratio_2;
-		rowData.fulfillment_ratio_7 = element?.fulfillment_data?.fulfillment_ratio_7;
-		rowData.fulfillment_ratio_30 = element?.fulfillment_data?.fulfillment_ratio_30;
-		rowData.allocation_ratio = allocation_ratio || 0;
-		rowData.sell_price_per_container = Number(element?.validities?.[0]?.total_price)
-		/ Number(container_count);
-		rowData.sell_price_currency = element?.validities?.[0]?.currency;
-		rowData.active_booking = element?.data?.active_bookings || 0;
-		rowData.profit = element?.validities?.[0]?.profit || 0;
-		rowData.profit_percentage = element?.validities?.[0]?.profit_percentage || 0;
-		rowData.source = element?.source || undefined;
-		rowData.api = 'showed_rates';
+		rowData.allocation_ratio = allocation_ratio || DEFAULT_VALUE;
+		// row.id = element?.rate_id;
+		// rowData.service_provider = element?.service_provider;
+		// rowData.air_line = data?.airline?.business_name;
+		// rowData.shipping_line =	data?.shipping_line?.business_name;
+		// rowData.total_price = validities?.total_price || DEFAULT_VALUE;
+		// rowData.currency = validities?.currency || '';
+		// rowData.fulfillment_ratio_2 = element?.fulfillment_data?.fulfillment_ratio_2;
+		// rowData.fulfillment_ratio_7 = element?.fulfillment_data?.fulfillment_ratio_7;
+		// rowData.fulfillment_ratio_30 = element?.fulfillment_data?.fulfillment_ratio_30;
+		// rowData.sell_price_per_container = Number(validities?.total_price)
+		// / Number(container_count);
+		// rowData.sell_price_currency = validities?.currency;
+		// rowData.active_booking = element?.data?.active_bookings || DEFAULT_VALUE;
+		// rowData.profit = validities?.profit || DEFAULT_VALUE;
+		// rowData.profit_percentage = validities?.profit_percentage || DEFAULT_VALUE;
+		// rowData.source = element?.source || undefined;
+		// rowData.api = 'showed_rates';
 		row.rowData = rowData;
-		rows.push(row);
+		ROWS.push(row);
 	});
-	return { rows };
+	return { rows: ROWS };
 };
 export default getFormatedNotPreferenceData;

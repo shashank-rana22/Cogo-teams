@@ -1,13 +1,14 @@
+import { INCREMENT_BY_ONE } from '../../../../../constants';
+
 import SingleSelectedCard from './SingleSelectedCard';
 
 function SelectedCards({ prefrences, shipmentType }) {
-	console.log(prefrences, 'prefrences');
 	return (
 		<div>
 			{prefrences?.map((singleItem, index) => (
 				<SingleSelectedCard
 					data={singleItem?.data}
-					priority={index + 1}
+					priority={index + INCREMENT_BY_ONE}
 					shipmentType={shipmentType}
 					key={singleItem?.rate_id}
 					fromKey={singleItem?.key}

@@ -1,4 +1,4 @@
-import { SELL_RATE_INCREASE_BY } from '../page-components/constants';
+import { SELL_RATE_INCREASE_BY, INCREMENT_VALUE } from '../page-components/constants';
 
 const getSellRateDetailPayload = ({
 	systemFormatedRates,
@@ -18,7 +18,7 @@ const getSellRateDetailPayload = ({
 			const sellPrice = Number(rate?.rowData?.price) * SELL_RATE_INCREASE_BY;
 			return {
 				basic_freight_rate : (Number(sellRates?.[rate_id]) || Number(sellPrice)),
-				priority           : index + 1,
+				priority           : index + INCREMENT_VALUE,
 				currency           : rate?.rowData?.currency,
 				shipping_line_name : rate?.rowData?.shipping_line,
 			};

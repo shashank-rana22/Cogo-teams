@@ -1,6 +1,7 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+import { DEFAULT_INDEX, VALUE_ONE } from '../../../../constants';
 import CargoDetailPills from '../../../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 import SelectedCards from './SelectedCards';
@@ -29,22 +30,21 @@ const labels = [
 ];
 
 function PreviewSelectedCards({ supplierPayload, groupedServicesData, shipmentType }) {
-	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
-	const options = [];
+	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[DEFAULT_INDEX]);
+	const OPTIONS = [];
 	(groupedServicesData || []).forEach((data) => {
-		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
+		OPTIONS.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
 
 	useEffect(() => {
-		setSingleServiceData(groupedServicesData[0]);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(groupedServicesData)]);
+		setSingleServiceData(groupedServicesData[DEFAULT_INDEX]);
+	}, [groupedServicesData]);
 	return (
 		<div>
 			<div style={{ marginTop: '16px' }}>
-				{options.length > 1 && (
+				{OPTIONS.length > VALUE_ONE && (
 					<Select
-						options={options}
+						options={OPTIONS}
 						value={singleServiceData}
 						onChange={(e) => { setSingleServiceData(e); }}
 					/>

@@ -1,5 +1,6 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import { VALUE_ONE, VALUE_ZERO } from '../../../../constants';
 import CargoDetails from '../../../../List/Card/Body/CargoDetails';
 import PortDetails from '../../../../List/Card/Body/PortDetails';
 import EditSellQuotation from '../../../ShipmentCard/EditSellQuotation';
@@ -24,8 +25,8 @@ function Body({ data, price, shipmentData }) {
 				Sell Price
 				<div className={styles.text2}>
 					{formatAmount({
-						amount   : price?.[1],
-						currency : price?.[0],
+						amount   : price?.[VALUE_ONE],
+						currency : price?.[VALUE_ZERO],
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'code',

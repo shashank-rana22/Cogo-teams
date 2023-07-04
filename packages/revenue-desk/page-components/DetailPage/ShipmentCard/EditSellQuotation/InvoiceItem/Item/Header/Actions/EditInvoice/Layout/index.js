@@ -1,26 +1,30 @@
 import React from 'react';
 
+import { VALUE_ZERO } from '../../../../../../../../../constants';
+
 import FieldArray from './ChildFormat';
 import styles from './styles.module.css';
+
+const VALUE_TWELVE = 12;
 
 function Layout({
 	control, fields, showElements = {}, register, errors,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || 12;
-			if (span === 12) {
+			span += field.span || VALUE_TWELVE;
+			if (span === VALUE_TWELVE) {
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
-				span = 0;
-			} else if (span < 12) {
+				span = VALUE_ZERO;
+			} else if (span < VALUE_TWELVE) {
 				rowWiseFields.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 				rowWiseFields.push(field);
 				span = field.span;
@@ -28,11 +32,11 @@ function Layout({
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((field) => (
+			{TOTAL_FIELDS.map((field) => (
 				<div key={field.name} className={styles.row}>
 					{field.map((fieldsItem) => {
 						const { type, heading = '' } = fieldsItem;

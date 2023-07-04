@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListShipmentCurrencyConversions = ({ shipmentData } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -7,23 +7,24 @@ const useListShipmentCurrencyConversions = ({ shipmentData } = {}) => {
 		url    : '/list_shipment_currency_conversions',
 	}, { manual: true });
 
-	const getList = async () => {
+	const shipmentId = shipmentData?.id;
+
+	const getList = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					filters: {
-						shipment_id: shipmentData?.id,
+						shipment_id: shipmentId,
 					},
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, shipmentId]);
 	useEffect(() => {
 		getList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getList]);
 	return {
 		data,
 		loading,

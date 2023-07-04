@@ -2,16 +2,18 @@ import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import useSendBookingPrefrenceEmail from '../../../../hooks/useSendBookingPrefrenceEmail';
+import { INCREMENT_BY_ONE, VALUE_ZERO } from '../../../constants';
 import Card from '../RatesCard/Card';
 
 import styles from './styles.module.css';
+
+const INITIAL_CARD_COUNT = 4;
 
 function SelectedRatesCard({
 	prefrences, serviceData, setSellRates,
 	sellRates, emailModal, setEmailModal, singleServiceSellRateDetails, shipmentData,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
-	const initialCardCount = 4;
 	const { emailTrigger } = useSendBookingPrefrenceEmail(
 		singleServiceSellRateDetails,
 		shipmentData?.id,
@@ -19,8 +21,8 @@ function SelectedRatesCard({
 	const toggleList = () => {
 		setShowFullList(!showFullList);
 	};
-	const renderedCards = showFullList ? prefrences : prefrences?.slice(0, initialCardCount);
-	const expandable = prefrences?.length > initialCardCount;
+	const renderedCards = showFullList ? prefrences : prefrences?.slice(VALUE_ZERO, INITIAL_CARD_COUNT);
+	const expandable = prefrences?.length > INITIAL_CARD_COUNT;
 	return (
 		<div className={styles.container}>
 			<div className={styles.upper_section}>
@@ -45,12 +47,12 @@ function SelectedRatesCard({
 							serviceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
-							priority_no={index + 1}
+							priority_no={index + INCREMENT_BY_ONE}
 						/>
 					</div>
 				))}
 				<div style={{ display: 'flex', justifyContent: 'end' }}>
-					{!showFullList && expandable && prefrences?.length > initialCardCount && (
+					{!showFullList && expandable && prefrences?.length > INITIAL_CARD_COUNT && (
 						<Button size="md" themeType="link" onClick={toggleList}>See More</Button>
 					)}
 

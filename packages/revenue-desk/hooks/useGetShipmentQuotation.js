@@ -1,27 +1,29 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetShipmentQuotation = ({ shipmentData }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_quotation',
 	}, { manual: true });
-	const getQuotation = async () => {
+
+	const shipmentId = shipmentData?.id;
+
+	const getQuotation = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					shipment_id        : shipmentData?.id,
+					shipment_id        : shipmentId,
 					preferred_currency : 'USD',
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, shipmentId]);
 	useEffect(() => {
 		getQuotation();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getQuotation]);
 
 	return {
 		data,

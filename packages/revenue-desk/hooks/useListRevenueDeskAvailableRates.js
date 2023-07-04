@@ -1,8 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import incoTermMapping from '../helper/incoTermMapping';
+import { DEFAULT_INDEX } from '../page-components/constants';
 
 const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isPreferenceSet } = {}) => {
 	const { user_profile } = useSelector(({ profile }) => ({
@@ -13,7 +14,9 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 		url    : '/list_revenue_desk_showed_rates',
 	}, { manual: true });
 
-	const ListRevenueAvailableRates = async () => {
+	const packages = singleServiceData?.packages?.[DEFAULT_INDEX];
+
+	const ListRevenueAvailableRates = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -21,7 +24,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 						port_id           : singleServiceData?.port_id || undefined,
 						is_rate_available : true,
 						trade_type        : singleServiceData?.trade_type
-													|| incoTermMapping[singleServiceData?.inco_term],
+														|| incoTermMapping[singleServiceData?.inco_term],
 						airport_id               : singleServiceData?.airpot_id || undefined,
 						origin_port_id           : singleServiceData?.origin_port_id || undefined,
 						destination_port_id      : singleServiceData?.destination_port_id || undefined,
@@ -34,30 +37,29 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 						destination_location_id  : singleServiceData?.destination_location_id || undefined,
 						partner_id               : user_profile?.partner_id,
 						operation_type           : singleServiceData?.operation_type || undefined,
-						stacking_type            : singleServiceData?.packages?.[0]?.handling_type || undefined,
-						shipment_type            : singleServiceData?.packages?.[0]?.packing_type || undefined,
+						stacking_type            : packages?.handling_type || undefined,
+						shipment_type            : packages?.packing_type || undefined,
 						cargo_handling_type      : singleServiceData?.cargo_handling_type || undefined,
 						destination_main_port_id : shipmentData?.destination_main_port_id || undefined,
 						origin_main_port_id      : shipmentData?.origin_main_port_id || undefined,
-
+						service_id               : singleServiceData?.id,
 					},
 					shipment_id        : singleServiceData?.shipment_id,
-					service_id         : singleServiceData?.id,
 					service_type       : singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
 					preferred_currency : 'USD',
-					refresh_rates      : !isPreferenceSet && !['cancelled', 'completed'].includes(shipmentData.state),
+					refresh_rates      : !isPreferenceSet && !['cancelled', 'completed']
+						.includes(shipmentData.state),
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [singleServiceData, isPreferenceSet, shipmentData, trigger, user_profile, packages]);
 	useEffect(() => {
 		if (singleServiceData) {
 			ListRevenueAvailableRates();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [singleServiceData]);
+	}, [singleServiceData, ListRevenueAvailableRates]);
 	return {
 		loading,
 		data,

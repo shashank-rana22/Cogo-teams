@@ -2,6 +2,7 @@ import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import useGetContractPreviousServiceProviders from '../../../hooks/useGetContractPreviousServiceProviders';
+import { VALUE_THREE, VALUE_ZERO } from '../../constants';
 
 import Card from './Card';
 import styles from './styles.module.css';
@@ -11,9 +12,7 @@ function RevenueList({ itemData:currentShipmentData }) {
 		currentShipmentData,
 	});
 	const [show, setshow] = useState(false);
-	const ZERO = 0;
-	const THREE = 3;
-	const newData = Array.isArray(data) ? (data || []).slice(ZERO, THREE) : null;
+	const newData = Array.isArray(data) ? (data || []).slice(VALUE_ZERO, VALUE_THREE) : null;
 	return (
 		<div className={styles.outermost}>
 			{newData && (

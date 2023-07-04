@@ -3,6 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
+import { DECIMAL_PLACES, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
+
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
@@ -87,20 +89,23 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					<div className={styles.text}>
 						2 Days :
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_2 === 0
-                             || data?.rowData?.fulfillment_ratio_2 > 0) ? data?.rowData?.fulfillment_ratio_2 : '--'}
+						{(data?.rowData?.fulfillment_ratio_2 === VALUE_ZERO
+                             || data?.rowData?.fulfillment_ratio_2 > VALUE_ZERO)
+							? data?.rowData?.fulfillment_ratio_2 : '--'}
 					</div>
 					<div className={styles.text}>
 						7 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_7 === 0
-                             || data?.rowData?.fulfillment_ratio_7 > 0) ? data?.rowData?.fulfillment_ratio_7 : '--' }
+						{(data?.rowData?.fulfillment_ratio_7 === VALUE_ZERO
+                             || data?.rowData?.fulfillment_ratio_7 > VALUE_ZERO)
+							? data?.rowData?.fulfillment_ratio_7 : '--' }
 					</div>
 					<div className={styles.text}>
 						30 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_15 === 0
-                             || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
+						{(data?.rowData?.fulfillment_ratio_15 === VALUE_ZERO
+                             || data?.rowData?.fulfillment_ratio_15 > VALUE_ZERO)
+							? data?.rowData?.fulfillment_ratio_15 : '--' }
 					</div>
 				</div>
 
@@ -175,16 +180,16 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 			<div className={styles.total_price_section}>
 				<div style={{ display: 'flex' }}>
 					Profitability : &nbsp;
-					<div className={Number(data?.rowData?.profit_percentage) > 0
+					<div className={Number(data?.rowData?.profit_percentage) > PERCENTAGE_CHECK
 						? styles.positive_profit : styles.negative_profit}
 					>
-						{Number(data?.rowData?.profit_percentage).toFixed(2)}
+						{Number(data?.rowData?.profit_percentage).toFixed(DECIMAL_PLACES)}
 						%
 					</div>
 				</div>
 				<div style={{ display: 'flex' }}>
 					Profit : &nbsp;
-					<div className={Number(data?.rowData?.profit) > 0
+					<div className={Number(data?.rowData?.profit) > VALUE_ZERO
 						? styles.positive_profit : styles.negative_profit}
 					>
 						{formatAmount({

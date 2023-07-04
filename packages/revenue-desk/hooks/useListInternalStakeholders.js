@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListInternalStakeholders = ({ shipmentId } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -7,7 +7,7 @@ const useListInternalStakeholders = ({ shipmentId } = {}) => {
 		url    : '/list_shipment_stakeholders',
 	}, { manual: true });
 
-	const getList = async () => {
+	const getList = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -18,11 +18,10 @@ const useListInternalStakeholders = ({ shipmentId } = {}) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [trigger, shipmentId]);
 	useEffect(() => {
 		getList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getList]);
 	return {
 		data,
 		loading,

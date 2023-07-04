@@ -4,9 +4,12 @@ import { startCase } from '@cogoport/utils';
 import iconMapping from '../../../helper/iconMapping';
 import incoTermMapping from '../../../helper/incoTermMapping';
 import serviceLabelMapping from '../../../helper/serviceLabelMapping';
+import { VALUE_ONE, VALUE_ZERO } from '../../constants';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
+
+const arr = [VALUE_ZERO, VALUE_ONE];
 
 function LoadingState({ itemData }) {
 	return (
@@ -34,27 +37,25 @@ function LoadingState({ itemData }) {
 					Total Transaction
 				</div>
 			</div>
-			{
-                [1, 2].map((singleItem) => (
-	<div className={styles.single_column} key={singleItem}>
-		<div className={styles.heading}>
-			<Placeholder height="25px" width="350px" margin="0 10px" />
-		</div>
-		<div className={styles.single_box}>
-			<Placeholder height="24px" width="250px" />
-		</div>
-		<div className={styles.single_box}>
-			<Placeholder height="24px" width="250px" />
-		</div>
-		<div className={styles.port_pair_container_placeholder}>
-			<Placeholder height="24px" width="250px" />
-		</div>
-		<div className={styles.single_box}>
-			<Placeholder height="24px" width="250px" />
-		</div>
-	</div>
-                ))
-            }
+			{(arr || []).map((singleItem) => (
+				<div className={styles.single_column} key={singleItem}>
+					<div className={styles.heading}>
+						<Placeholder height="25px" width="350px" margin="0 10px" />
+					</div>
+					<div className={styles.single_box}>
+						<Placeholder height="24px" width="250px" />
+					</div>
+					<div className={styles.single_box}>
+						<Placeholder height="24px" width="250px" />
+					</div>
+					<div className={styles.port_pair_container_placeholder}>
+						<Placeholder height="24px" width="250px" />
+					</div>
+					<div className={styles.single_box}>
+						<Placeholder height="24px" width="250px" />
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }

@@ -1,3 +1,5 @@
+import { DEFAULT_VALUE } from '../page-components/constants';
+
 const getAvailableRatesDetails = ({
 	systemFormatedRates,
 	currentFormatedrates,
@@ -17,7 +19,7 @@ const getAvailableRatesDetails = ({
 			origin_local_buy_price_currency      : rate?.rowData?.origin_locals_currency,
 			destination_local_buy_price_currency : rate?.rowData?.destination_locals_currency,
 			profit_percentage                    : rate?.rowData?.profit_percentage,
-			profit                               : rate?.rowData?.profit || 0,
+			profit                               : rate?.rowData?.profit || DEFAULT_VALUE,
 		}
 	));
 	const availableRatesForRDFlashed = (currentFormatedrates?.rows || []).map((rate) => (
@@ -35,7 +37,7 @@ const getAvailableRatesDetails = ({
 			origin_local_buy_price_currency      : rate?.rowData?.origin_locals_currency,
 			destination_local_buy_price_currency : rate?.rowData?.destination_locals_currency,
 			profit_percentage                    : rate?.rowData?.profit_percentage,
-			profit                               : rate?.rowData?.profit || 0,
+			profit                               : rate?.rowData?.profit || DEFAULT_VALUE,
 		}
 	));
 

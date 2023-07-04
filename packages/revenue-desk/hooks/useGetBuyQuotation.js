@@ -1,25 +1,26 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetBuyQuotation = ({ shipmentData }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_services_quotation',
 	}, { manual: true });
-	const getBuyQuotation = async () => {
+	const shipmentId = shipmentData?.id;
+	const getBuyQuotation = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					shipment_id: shipmentData.id,
+					shipment_id: shipmentId,
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [shipmentId, trigger]);
 	useEffect(() => {
 		getBuyQuotation();
-	}, []);
+	}, [getBuyQuotation]);
 	return {
 		data,
 		loading,

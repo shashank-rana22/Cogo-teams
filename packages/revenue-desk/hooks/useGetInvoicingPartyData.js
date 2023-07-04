@@ -1,18 +1,18 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const groupByRegistrationNum = (invoices) => {
-	const groupByOrgInvoices = {};
+	const GROUP_BY_ORG_INVOICES = {};
 	(invoices || []).forEach((invoice) => {
 		const key = invoice?.billing_address?.registration_number;
-		groupByOrgInvoices[key] = {
-			invoices      : [...(groupByOrgInvoices[key]?.invoices || []), invoice],
+		GROUP_BY_ORG_INVOICES[key] = {
+			invoices      : [...(GROUP_BY_ORG_INVOICES[key]?.invoices || []), invoice],
 			business_name : invoice?.billing_address?.business_name,
 			name          : invoice?.billing_address?.name,
 		};
 	});
-	return groupByOrgInvoices;
+	return GROUP_BY_ORG_INVOICES;
 };
 
 const useGetInvoicingPartyData = ({ data, open }) => {
@@ -21,14 +21,17 @@ const useGetInvoicingPartyData = ({ data, open }) => {
 		url    : '/get_shipment_invoice_preference',
 	}, { manual: true });
 
-	const getData = async () => {
+	const shipmentId = data?.id || undefined;
+	const performedByOrgId = data?.importer_exporter_id || undefined;
+
+	const getData = useCallback(async () => {
 		await trigger({
 			params: {
-				shipment_id         : data?.id || undefined,
-				performed_by_org_id : data?.importer_exporter_id || undefined,
+				shipment_id         : shipmentId,
+				performed_by_org_id : performedByOrgId,
 			},
 		});
-	};
+	}, [trigger, shipmentId, performedByOrgId]);
 
 	const groupedInvoices = groupByRegistrationNum(
 		invoiceData?.invoicing_parties || [],
@@ -38,8 +41,7 @@ const useGetInvoicingPartyData = ({ data, open }) => {
 		if (!isEmpty(data) && data?.importer_exporter_id && open) {
 			getData();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data), open]);
+	}, [getData, data, open]);
 
 	return {
 		invoiceLoading,

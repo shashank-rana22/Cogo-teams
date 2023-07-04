@@ -35,7 +35,7 @@
 
 			:hover {
 				padding: 11px;
-				border: 1px solid black;
+				border: 1px solid #000;
 				border-radius: 4px;
 			}
 		}
@@ -128,7 +128,7 @@
 .sop_heading_error {
 	margin-right: 16px;
 	margin-left: 16px;
-	color: red;
+	color: #f00;
 }
 
 .sop_line_item {

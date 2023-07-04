@@ -5,6 +5,8 @@ import getLocations from '../../../../../helper/locations-shipment';
 
 import styles from './styles.module.css';
 
+const IS_SINGLE = true;
+
 function PortDetails({ data }) {
 	const { origin, destination } = getLocations(data) || {};
 
@@ -55,10 +57,9 @@ function PortDetails({ data }) {
 
 	const renderLocation = () => {
 		if (!destination) {
-			const isSingle = true;
 			return (
 				<div>
-					{handleLocationDetails(origin, isSingle)}
+					{handleLocationDetails(origin, IS_SINGLE)}
 				</div>
 			);
 		}
