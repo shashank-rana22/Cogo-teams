@@ -1,10 +1,26 @@
 import { IcMDownload } from '@cogoport/icons-react';
 import React from 'react';
 
-function DownloadOverseasInvoice({ itemData }) {
+import usePostDownloadPayrunHistory from '../../hooks/usePostDownloadPayrunHistory';
+
+import styles from './styles.module.css';
+
+function DownloadOverseasInvoice({ itemData, overseasData }) {
+	const { downloadPayrunHistory } = usePostDownloadPayrunHistory();
 	return (
 		<div>
-			<IcMDownload />
+			{overseasData === 'OVERSEAS'
+				? (
+					<div className={styles.button}>
+						<IcMDownload
+							onClick={() => downloadPayrunHistory(itemData)}
+							height={20}
+							width={20}
+							color="#F68B21"
+						/>
+					</div>
+				)
+				: null}
 		</div>
 	);
 }

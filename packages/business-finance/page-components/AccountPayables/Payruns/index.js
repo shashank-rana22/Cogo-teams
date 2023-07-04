@@ -20,7 +20,7 @@ function Payruns() {
 		setGlobalFilters,
 	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData });
 
-	const { functions } = RenderFunctions();
+	const { functions } = RenderFunctions(overseasData);
 
 	return (
 

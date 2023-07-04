@@ -14,7 +14,7 @@ import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
-const RenderFunctions = () => {
+const RenderFunctions = (overseasData) => {
 	const functions = {
 		renderFormatedAmount: (itemData) => (
 			<FormatAmountCurrency itemData={itemData} />
@@ -53,7 +53,7 @@ const RenderFunctions = () => {
 			<DownloadUploadHistoryStatusFile itemData={itemData} />
 		),
 		renderDownloadOverseasInvoice: (itemData) => (
-			<DownloadOverseasInvoice itemData={itemData} />
+			<DownloadOverseasInvoice itemData={itemData} overseasData={overseasData} />
 		),
 	};
 	return {
