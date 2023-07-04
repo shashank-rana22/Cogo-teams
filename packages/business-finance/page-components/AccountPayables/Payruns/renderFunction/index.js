@@ -5,6 +5,7 @@ import InvoiceDetailsTimeLine from '../../Invoices/InvoiceTable/RenderFunctions/
 
 import BankDetails from './BankDetails';
 import DeletePayrun from './DeletePayrun';
+import DownloadOverseasInvoice from './DownloadOverseasInvoice';
 import DownloadUploadHistoryStatusFile from './DownloadUplaodHistoryStatusFile.js';
 import DownloadUploadHistoryFile from './DownloadUploadHistoryFile.js';
 import FormatAmountCurrency from './FormatAmountCurrency';
@@ -50,6 +51,9 @@ const RenderFunctions = () => {
 		),
 		renderStatusDownload: (itemData) => (
 			<DownloadUploadHistoryStatusFile itemData={itemData} />
+		),
+		renderDownloadOverseasInvoice: (itemData) => (
+			<DownloadOverseasInvoice itemData={itemData} />
 		),
 	};
 	return {

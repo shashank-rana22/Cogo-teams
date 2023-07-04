@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { initiatedConfig } from '../columns/initiatedConfig';
 import { initiatedListViewConfig } from '../columns/initiatedListViewConfig';
-import { payrunHistoryConfig } from '../columns/payrunHistoryConfig';
+import { payrunHistoryInvoiceConfig } from '../columns/payrunHistoryInvoiceConfig';
 import { payrunPaidConfig } from '../columns/payrunPaidConfig';
 import { uploadHistoryConfig } from '../columns/uploadHistoryConfig';
 
@@ -56,7 +56,7 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 		loading = uploadHistoryListLoading;
 		config = uploadHistoryConfig;
 	} else if (activePayrunTab === 'COMPLETED' && isInvoiceView) {
-		config = payrunHistoryConfig;
+		config = payrunHistoryInvoiceConfig;
 		loading = billListViewLoading;
 		data = billListViewData;
 	} else if (isInvoiceView) {
