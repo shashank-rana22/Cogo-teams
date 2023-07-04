@@ -13,7 +13,7 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 		servicesList, getShipmentTimeline = () => {}, getShipment = () => {},
 	} = useContext(ShipmentDetailContext);
 	const handleClick = () => {
-		setShowDoc(null);
+		setShowDoc({});
 	};
 
 	return (

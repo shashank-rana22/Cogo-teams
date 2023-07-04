@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
 import getShipmentTradeType from '../commons/utils/getShipmentTradeType';
 
@@ -54,8 +54,8 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		},
 	});
 
-	const getDocType = useMemo(
-		() => (task) => task?.split('upload_')?.slice(DOC_TYPE_SLICE_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index],
+	const getDocType = useCallback(
+		(task) => task?.split('upload_')?.slice(DOC_TYPE_SLICE_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index],
 		[],
 	);
 
