@@ -14,7 +14,7 @@ function DislikeModal({
 	onClose = () => {},
 	setLikeState = () => {},
 }) {
-	const { control, formState:{ errors }, handleSubmit, watch } = useForm();
+	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
 	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState });
 
@@ -56,6 +56,8 @@ function DislikeModal({
 					control={control}
 					errors={errors}
 					formValues={formValues}
+					watch={watch}
+					setValue={setValue}
 				/>
 			</Modal.Body>
 

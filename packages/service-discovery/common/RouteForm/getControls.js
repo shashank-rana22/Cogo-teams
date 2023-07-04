@@ -1,145 +1,69 @@
+// import { IcMLocation } from '@cogoport/icons-react';
+
 import { IcMLocation } from '@cogoport/icons-react';
 
+import airRouteControls from '../../configs/RouteFormControls/air-route-controls';
+import customsRouteControls from '../../configs/RouteFormControls/customs-route-controls';
+import fclRouteControls from '../../configs/RouteFormControls/fcl-route-controls';
+import ftlRouteControls from '../../configs/RouteFormControls/ftl-route-controls';
+import haulageRouteControls from '../../configs/RouteFormControls/haulage-route-controls';
+import lclRouteControls from '../../configs/RouteFormControls/lcl-route-controls';
+import ltlRouteControls from '../../configs/RouteFormControls/ltl-route-controls';
+import trailerRouteControls from '../../configs/RouteFormControls/trailer-route-controls';
 import MODES from '../../page-components/ServiceDiscovery/SpotSearch/configurations/modes.json';
 import CustomSelectOption from '../CustomSelectOption';
 
-const MODES_ARRAY = [
-	'fcl_freight',
-	'lcl_freight',
-	'air_freight',
-	'trailer_freight',
-	'haulage_freight',
-	'ftl_freight',
-	'ltl_freight',
-];
+const LOCATION_PREFIX = <IcMLocation fontSize={16} />;
+function LOCATION_LABEL(option) {
+	return (
+		<>
+			{ CustomSelectOption({ data: option, key: 'locations' }) }
+		</>
+	);
+}
+const LOCATION_PARAMS = {
+	page_limit      : 20,
+	includes        : { default_params_required: true },
+	filters         : { status: 'active' },
+	recommendations : true,
+};
 
-const OTHER_ARRAY = ['customs', 'locals'];
+const ROUTE_CONTROLS_MAPPING = {
+	fcl_freight     : fclRouteControls,
+	lcl_freight     : lclRouteControls,
+	air_freight     : airRouteControls,
+	trailer_freight : trailerRouteControls,
+	haulage_freight : haulageRouteControls,
+	ftl_freight     : ftlRouteControls,
+	ltl_freight     : ltlRouteControls,
+	customs         : customsRouteControls,
+	locals          : customsRouteControls,
+};
 
-const getModesControls = ({ mode = '', label = {}, placeholder = {} }) => {
-	let type = [];
+const getControls = (service) => {
+	const routeControls = ROUTE_CONTROLS_MAPPING[service] || [];
+
+	let locationTypeFilter = [];
 
 	MODES.forEach((modeItem) => {
-		if (modeItem.value === mode) type = modeItem.type;
+		if (modeItem.value === service) locationTypeFilter = modeItem.type;
 	});
 
-	const controls = [
-		{
-			name        : 'origin_location_id',
-			type        : 'async-select',
-			label       : label?.origin,
-			placeholder : placeholder?.origin,
-			asyncKey    : 'list_locations',
-			initialCall : false,
-			span        : 6,
-			params      : {
-				page_limit      : 20,
-				includes        : { default_params_required: true },
-				filters         : { type, status: 'active' },
-				recommendations : true,
-			},
-			prefix      : <IcMLocation fontSize={16} />,
-			isClearable : true,
-			rules       : { required: 'Origin is required' },
-			renderLabel : (option) => <>{CustomSelectOption({ data: option, key: 'locations' })}</>,
-		},
-		{
-			name        : 'destination_location_id',
-			type        : 'async-select',
-			label       : label?.destination,
-			placeholder : placeholder?.destination,
-			asyncKey    : 'list_locations',
-			initialCall : false,
-			span        : 6,
-			params      : {
-				page_limit      : 20,
-				includes        : { default_params_required: true },
-				filters         : { type, status: 'active' },
-				recommendations : true,
-			},
-			prefix      : <IcMLocation fontSize={16} />,
-			isClearable : true,
-			rules       : { required: 'Destination is required' },
-			renderLabel : (option) => <>{CustomSelectOption({ data: option, key: 'locations' })}</>,
-		},
+	const newControls = routeControls.map((routeItem) => {
+		const newRouteItem = { ...routeItem };
 
-	];
-	return controls;
+		if (routeItem.asyncKey && ['list_locations', 'list_locations_v2'].includes(routeItem.asyncKey)) {
+			newRouteItem.prefix = LOCATION_PREFIX;
+			newRouteItem.renderLabel = LOCATION_LABEL;
+			newRouteItem.params = {
+				...LOCATION_PARAMS,
+				...newRouteItem.params,
+				filters: { ...LOCATION_PARAMS.filters, type: locationTypeFilter, ...newRouteItem.params?.filters },
+			};
+		}
+		return newRouteItem || {};
+	});
+
+	return newControls || [];
 };
-
-const getOtherServicesControls = ({ label = {}, placeholder = {} }) => {
-	const controls = [
-		{
-			name        : 'location',
-			type        : 'async-select',
-			label       : label?.location,
-			placeholder : placeholder?.location,
-			asyncKey    : 'list_locations',
-			initialCall : false,
-			span        : 6,
-			params      : {
-				page_limit      : 20,
-				includes        : { default_params_required: true },
-				filters         : { type: ['seaport'], status: 'active' },
-				recommendations : true,
-			},
-			prefix      : <IcMLocation fontSize={16} />,
-			isClearable : true,
-			renderLabel : (option) => <>{CustomSelectOption({ data: option, key: 'locations' })}</>,
-			rules       : { required: 'Location is required' },
-		},
-		{
-			name        : 'type',
-			type        : 'select',
-			label       : label?.type,
-			placeholder : placeholder?.type,
-			span        : 3,
-			options     : [
-				{
-					label : 'Import',
-					value : 'import',
-				},
-				{
-					label : 'Export',
-					value : 'export',
-				},
-			],
-			rules: { required: 'Type is required' },
-		},
-		{
-			name        : 'service_type',
-			type        : 'select',
-			label       : label?.service,
-			placeholder : placeholder?.service,
-			span        : 3,
-			options     : [
-				{
-					label : 'FCL',
-					value : 'fcl_customs',
-				},
-				{
-					label : 'LCL',
-					value : 'lcl_customs',
-				},
-				{
-					label : 'AIR',
-					value : 'air_customs',
-				},
-			],
-			rules: { required: 'Service is required' },
-		},
-	];
-	return controls;
-};
-
-const getFormControls = ({ mode = '', label = {}, placeholder = {} }) => {
-	let controlFn = () => {};
-
-	if (MODES_ARRAY.includes(mode)) {
-		controlFn = getModesControls;
-	} else if (OTHER_ARRAY.includes(mode)) {
-		controlFn = getOtherServicesControls;
-	}
-
-	return controlFn({ mode, label, placeholder });
-};
-export default getFormControls;
+export default getControls;

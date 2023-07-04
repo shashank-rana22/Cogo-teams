@@ -1,4 +1,5 @@
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../../../../configs/getErrorMessage';
@@ -7,7 +8,14 @@ import getFeedbackConfig from '../../../../../../configurations/getFeedBackConfi
 import getShowElements from './get-show-elements';
 import styles from './styles.module.css';
 
-function DislikeFeedbackForm({ rate = {}, control, errors = {}, formValues = {} }) {
+function DislikeFeedbackForm({
+	rate = {},
+	control,
+	errors = {},
+	formValues = {},
+	setValue = () => {},
+	watch = () => {},
+}) {
 	const controls = getFeedbackConfig(rate?.service_type);
 
 	// if (rate?.service_type === 'air_freight') {
@@ -21,6 +29,33 @@ function DislikeFeedbackForm({ rate = {}, control, errors = {}, formValues = {} 
 	// }
 
 	const showElements = getShowElements(controls, formValues);
+
+	useEffect(() => {
+		const subscription = watch((value, { name }) => {
+			if (name === 'feedbacks' && !isEmpty(value[name])) {
+				const feedbackValue = value[name];
+
+				if (!feedbackValue.includes('unsatisfactory_rate')) {
+					setValue('preferred_freight_rate_currency', null);
+					setValue('preferred_freight_rate', null);
+				}
+
+				if (!feedbackValue.includes('unsatisfactory_airline')) {
+					setValue('preferred_airline_ids', null);
+				}
+
+				if (!feedbackValue.includes('unsatisfactory_destination_detention')) {
+					setValue('preferred_detention_days', null);
+				}
+
+				if (!feedbackValue.includes('unpreferred_shipping_lines')) {
+					setValue('preferred_shipping_line_ids', null);
+				}
+			}
+		});
+
+		return () => subscription.unsubscribe();
+	}, [setValue, watch]);
 
 	return (
 		<div className={styles.container}>

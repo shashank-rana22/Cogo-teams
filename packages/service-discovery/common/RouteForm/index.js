@@ -1,7 +1,6 @@
 import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-
-import LABEL_MAPPING from '../../page-components/ServiceDiscovery/SpotSearch/components/Routes/label-mapping.json';
+// import { useEffect } from 'react';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
@@ -20,9 +19,16 @@ const getFlex = (span) => {
 function RouteForm({ mode = '', setFormValues, formValues }) {
 	const serviceType = mode;
 
-	const { label = {}, placeholder = {} } = LABEL_MAPPING[serviceType] || {};
+	const controls = getFormControls(serviceType);
 
-	const controls = getFormControls({ mode: serviceType, label, placeholder });
+	// useEffect(() => {
+	// 	controls.forEach((item) => {
+	// 		setFormValues((prev) => ({
+	// 			...prev,
+	// 			[item.name]: '',
+	// 		}));
+	// 	});
+	// }, []);
 
 	if (singleLocationServices.includes(serviceType)) {
 		const [locationControls, typeControls, serviceControls] = controls;
@@ -31,14 +37,14 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 			<div className={styles.container}>
 				<div className={styles.form_item} style={{ width: `${getFlex(locationControls.span)}%` }}>
 					<div className={styles.label}>
-						{label?.location || ''}
+						{locationControls?.label || ''}
 						{' '}
 						<div className={styles.required_mark}>*</div>
 					</div>
 
 					<AsyncSelect
 						{...locationControls}
-						value={formValues?.location}
+						value={formValues?.location?.id}
 						onChange={(val, obj) => setFormValues((prev) => ({ ...prev, location: obj }))}
 					/>
 
@@ -46,7 +52,7 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 				<div className={styles.form_item} style={{ width: `${getFlex(typeControls.span)}%` }}>
 					<div className={styles.label}>
-						{label?.type || ''}
+						{typeControls?.label || ''}
 						{' '}
 						<div className={styles.required_mark}>*</div>
 					</div>
@@ -61,7 +67,7 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 				<div className={styles.form_item} style={{ width: `${getFlex(serviceControls.span)}%` }}>
 					<div className={styles.label}>
-						{label?.service || ''}
+						{serviceControls?.label || ''}
 						{' '}
 						<div className={styles.required_mark}>*</div>
 					</div>
@@ -76,6 +82,8 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 			</div>
 		);
+
+		return null;
 	}
 
 	const [originControls, destinationControls] = controls;

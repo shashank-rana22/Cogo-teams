@@ -57,10 +57,16 @@ function Routes({
 	};
 
 	useEffect(() => {
-		let canContinue = false;
+		let canContinue = true;
 
-		if (!isEmpty(formValues?.origin) && !isEmpty(formValues?.destination)) {
-			canContinue = true;
+		if (!formValues || isEmpty(formValues)) {
+			canContinue = false;
+		} else {
+			Object.keys(formValues).forEach((key) => {
+				if (!formValues[key] || isEmpty(formValues[key])) {
+					canContinue = false;
+				}
+			});
 		}
 		setButtonDisabled(!canContinue);
 	}, [formValues]);

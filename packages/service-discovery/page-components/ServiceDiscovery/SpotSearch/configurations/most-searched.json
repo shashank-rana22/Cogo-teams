@@ -48,6 +48,7 @@
 			"key": "spot_search",
 			"label": "",
 			"btnLabel":"Show Rates",
+			"inDifferentWindow": true,
 			"func": "renderButton"
 		}
 	],
