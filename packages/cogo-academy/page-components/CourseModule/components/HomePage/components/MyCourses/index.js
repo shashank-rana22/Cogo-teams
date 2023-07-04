@@ -1,17 +1,31 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
 import TABS_MAPPING from '../../../../configs/TABS_MAPPING';
 
 import CourseContent from './CourseContent';
+import LiveCourseModal from './LiveCourseModal';
 import styles from './styles.module.css';
 
 function MyCourses({ user_id, setOngoingCategories, ongoingCategories }) {
 	const [activeTab, setActiveTab] = useState('ongoing');
+	const [liveCourseModal, setLiveCourseModal] = useState(false);
 
 	return (
 		<div>
-			<div className={styles.main_heading}>My Courses</div>
+			<div className={styles.main_heading}>
+				<div>My Courses</div>
+
+				<div>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setLiveCourseModal(true)}
+					>
+						View Live Sessions
+					</Button>
+				</div>
+			</div>
 
 			<div>
 				<Tabs
@@ -33,6 +47,23 @@ function MyCourses({ user_id, setOngoingCategories, ongoingCategories }) {
 					))}
 				</Tabs>
 			</div>
+
+			<Modal size="md" show={liveCourseModal} onClose={() => setLiveCourseModal(false)}>
+				<Modal.Header title="Live Course Recordings" />
+
+				<Modal.Body>
+					<LiveCourseModal />
+				</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						onClick={() => setLiveCourseModal(false)}
+						themeType="secondary"
+					>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }
