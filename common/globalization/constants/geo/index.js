@@ -18,8 +18,8 @@ const COUNTRY_ID_MAPPING = {
 	VN,
 };
 
-export const getCountryConstants = ({ country_id, isDefaultData = true }) => {
-	const countryData = getCountryDetails({ country_id });
+export const getCountryConstants = ({ country_id, country_code, isDefaultData = true }) => {
+	const countryData = getCountryDetails({ country_id, country_code });
 
 	const { country_code: countryCode } = countryData || {};
 
