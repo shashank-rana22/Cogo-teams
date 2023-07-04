@@ -1,5 +1,5 @@
 import { Tooltip, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 
@@ -9,9 +9,11 @@ const PREMIUM = 0;
 const PLATFORM_CHARGES = 1;
 const CONVENIENCE_CHARGES = 2;
 
+const geo = getGeoConstants();
+
 const formatAmounts = (amount) => formatAmount({
 	amount,
-	currency : GLOBAL_CONSTANTS.currency_code.INR,
+	currency : geo.country.currency.code,
 	options  : {
 		style                 : 'currency',
 		currencyDisplay       : 'code',

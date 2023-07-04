@@ -35,7 +35,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		},
 		onChange: (_, option) => {
 			setCountryId(option?.country?.country_id);
-			setValue('country_id', option?.country?.name);
+			setValue('country', option?.country?.name);
 			setValue('state', option?.region?.name);
 			setValue('city', option?.city?.name);
 		},
@@ -57,7 +57,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 	},
 	{
 		label       : 'Country',
-		name        : 'country_id',
+		name        : 'country',
 		type        : 'text',
 		placeholder : 'Enter Country',
 		span        : 6,

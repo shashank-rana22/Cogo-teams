@@ -35,8 +35,11 @@ const controls = [
 		span  : 8,
 		rules : {
 			required: {
-				message : 'Required',
-				min     : 0,
+				message: 'Consignment Value is Required',
+			},
+			min: {
+				value   : 0,
+				message : 'Consignment Value cannot be negative',
 			},
 		},
 	},

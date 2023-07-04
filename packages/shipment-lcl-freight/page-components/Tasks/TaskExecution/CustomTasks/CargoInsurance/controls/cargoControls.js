@@ -112,7 +112,7 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		label          : 'Currency',
 		span           : 2,
 		type           : 'select',
-		placeholder    : 'INR',
+		placeholder    : 'Enter Currency',
 		optionsListKey : 'currencies',
 		rules          : { required: 'Currency is Required' },
 	},

@@ -37,7 +37,7 @@ function AddModal({
 		watch,
 	} = useForm();
 
-	const countryID = watch('country_id');
+	const countryID = watch('country');
 
 	const addAddressControls = getModifiedControls({ checked, countryID, setValue, setCountryId, countryId });
 
