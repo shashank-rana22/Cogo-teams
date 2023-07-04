@@ -45,7 +45,6 @@ import {
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
-	asyncInsuranceCommoditiesList,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -109,7 +108,6 @@ const keyAsyncFieldsParamsMapping = {
 	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
-	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 };
 
 function AsyncSelect(props) {

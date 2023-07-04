@@ -1,5 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const geo = getGeoConstants();
 
 export const personalDetailsControl = [
 	{
@@ -55,7 +56,7 @@ export const personalDetailsControl = [
 		rules       : {
 			required : 'Email is required',
 			pattern  : {
-				value   : formValuePatterns.EMAIL,
+				value   : geo.regex.EMAIL,
 				message : 'Email is invalid',
 			},
 		},
@@ -68,7 +69,7 @@ export const personalDetailsControl = [
 		placeholder : 'Enter your mobile number',
 		rules       : {
 			required : 'Mobile Number is required',
-			validate : (v) => GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v) || 'Invalid Mobile Number',
+			validate : (v) => geo.regex.MOBILE_NUMBER.test(v) || 'Invalid Mobile Number',
 		},
 	},
 ];

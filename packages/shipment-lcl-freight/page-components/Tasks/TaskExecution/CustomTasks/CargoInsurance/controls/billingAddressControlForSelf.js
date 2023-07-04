@@ -1,4 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const geo = getGeoConstants();
 
 export const billingAddressControlForSelf = [
 	{
@@ -11,7 +13,7 @@ export const billingAddressControlForSelf = [
 		disabled    : false,
 		rules       : {
 			pattern: {
-				value   : GLOBAL_CONSTANTS.regex_patterns.pan_number,
+				value   : geo.regex.PAN,
 				message : 'Enter a valid PAN',
 			},
 			required: { value: true, message: 'PAN Number is required' },
