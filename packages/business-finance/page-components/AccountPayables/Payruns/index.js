@@ -16,6 +16,8 @@ function Payruns() {
 		loading,
 		payrunStats,
 		config,
+		globalFilters,
+		setGlobalFilters,
 	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData });
 
 	const { functions } = RenderFunctions();
@@ -31,9 +33,23 @@ function Payruns() {
 				setIsInvoiceView={setIsInvoiceView}
 				overseasData={overseasData}
 				setOverseasData={setOverseasData}
+				globalFilters={globalFilters}
+				setGlobalFilters={setGlobalFilters}
 			/>
 
-			<List itemData={data} config={config} loading={loading} functions={functions} />
+			<List
+				itemData={data}
+				config={config}
+				loading={loading}
+				functions={functions}
+				page={globalFilters.pageIndex}
+				pageSize={10}
+				handlePageChange={(val) => setGlobalFilters({
+					...globalFilters,
+					pageIndex: val,
+				})}
+				showPagination
+			/>
 		</div>
 	);
 }

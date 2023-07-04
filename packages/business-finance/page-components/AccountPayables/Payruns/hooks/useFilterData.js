@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { useEffect, useState } from 'react';
 
 import { initiatedConfig } from '../columns/initiatedConfig';
 import { initiatedListViewConfig } from '../columns/initiatedListViewConfig';
@@ -12,9 +13,17 @@ import useGetPayrunBillListView from './useGetPayrunBillListView';
 import useGetUploadHistoryList from './useGetUploadHistoryList';
 
 const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
+	const [globalFilters, setGlobalFilters] = useState({
+		search    : undefined,
+		pageIndex : 1,
+	});
+	const { search, pageIndex } = globalFilters || {};
+	const { query = '', debounceQuery } = useDebounceQuery();
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
 		activePayrunTab,
 		overseasData,
+		query,
+		pageIndex,
 	});
 	const { getPayrunListView, billListViewData, billListViewLoading } = useGetPayrunBillListView({ activePayrunTab });
 	const { getUploadHistoryList, uploadHistoryListLoading, uploadHistoryDataList } = useGetUploadHistoryList();
@@ -22,6 +31,10 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 	let config = {};
 	let data = {};
 	let loading = false;
+
+	useEffect(() => {
+		debounceQuery(search);
+	}, [debounceQuery, search]);
 
 	useEffect(() => {
 		if (activePayrunTab === 'PAID') {
@@ -61,6 +74,8 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 		loading,
 		payrunStats,
 		config,
+		globalFilters,
+		setGlobalFilters,
 	};
 };
 

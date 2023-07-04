@@ -12,11 +12,14 @@ function Header({
 	setIsInvoiceView,
 	overseasData,
 	setOverseasData,
+	globalFilters,
+	setGlobalFilters,
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
 		UPLOAD_HISTORY = 0, COMPLETED = 0,
 	} = payrunStats || {};
+	const { search } = globalFilters || {};
 	return (
 		<div>
 			<div>
@@ -88,11 +91,11 @@ function Header({
 				<div style={{ display: 'flex' }}>
 					<div>
 						<Input
-					// value={search || ''}
-					// onChange={(value) => setFilters({
-					// 	...filters,
-					// 	search: value || undefined,
-					// })}
+							value={search || ''}
+							onChange={(value) => setGlobalFilters({
+								...globalFilters,
+								search: value || undefined,
+							})}
 							style={{ width: '300px', marginRight: '8px' }}
 							placeholder="Search by PayRun Name"
 							size="sm"

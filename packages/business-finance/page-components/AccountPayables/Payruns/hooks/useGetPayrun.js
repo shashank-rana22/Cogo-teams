@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 // import { initiatedConfig } from '../columns/initiatedConfig';
 
-const useGetPayrun = ({ activePayrunTab, overseasData }) => {
+const useGetPayrun = ({ activePayrunTab, overseasData, query, pageIndex }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun',
@@ -24,17 +24,18 @@ const useGetPayrun = ({ activePayrunTab, overseasData }) => {
 			try {
 				await trigger({
 					params: {
-						pageIndex : 1,
-						pageSize  : 10,
-						state     : activePayrunTab,
-						type      : overseasData,
+						pageSize : 10,
+						state    : activePayrunTab,
+						type     : overseasData,
+						q        : query !== '' ? query : undefined,
+						pageIndex,
 					},
 				});
 			} catch (err) {
 				Toast.error(err.message);
 			}
 		})();
-	}, [activePayrunTab, overseasData, trigger]);
+	}, [activePayrunTab, overseasData, pageIndex, query, trigger]);
 
 	// useEffect(() => {
 	// 	getPayrunList();
