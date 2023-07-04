@@ -1578,6 +1578,7 @@ importers:
       '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
+      file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
       '@cogoport/air-modules': link:../../common/air-modules
@@ -1594,6 +1595,7 @@ importers:
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
+      file-saver: 2.0.5
       react: 18.2.0
 
   packages/shipment-air-freight-local:
