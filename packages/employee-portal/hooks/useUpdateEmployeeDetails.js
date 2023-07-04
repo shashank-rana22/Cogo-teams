@@ -4,15 +4,10 @@ import { useHarbourRequest } from '@cogoport/request';
 
 const getPersonalInfoPayload = (data) => ({
 	...data,
-	employee_code             : data?.employee_code || undefined,
-	cogoport_email            : data?.cogoport_email || undefined,
 	passport_size_photo_url   : data?.passport_size_photo_url?.finalUrl,
 	mobile_number             : data?.mobile_number?.number,
 	mobile_country_code       : data?.mobile_number?.country_code,
-	date_of_joining           : String(data?.date_of_joining),
 	date_of_birth             : String(data?.date_of_birth),
-	updated_at                : String(data?.updated_at),
-	created_at                : String(data?.created_at),
 	emergency_contact_details : [
 		{
 			mobile_number       : data?.emergency_contact_details?.number,
