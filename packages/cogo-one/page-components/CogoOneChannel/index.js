@@ -64,10 +64,8 @@ function CogoOne() {
 		setRaiseTicketModal,
 		agentId           : userId,
 	});
-	const {
-		viewType,
-	} = useAgentWorkPrefernce();
 
+	const { viewType } = useAgentWorkPrefernce();
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -76,10 +74,6 @@ function CogoOne() {
 	const firestore = getFirestore(app);
 
 	const mailProps = {
-		activeMail    : activeTab?.data,
-		setActiveMail : (val) => {
-			setActiveTab((prev) => ({ ...prev, data: val }));
-		},
 		recipientArray,
 		setRecipientArray,
 		bccArray,
@@ -89,13 +83,18 @@ function CogoOne() {
 		emailState,
 		setEmailState,
 		emailAddress,
+		activeMail    : activeTab?.data,
+		setActiveMail : (val) => {
+			setActiveTab((prev) => ({ ...prev, data: val }));
+		},
 	};
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
+
 			signInWithCustomToken(auth, token).catch((error) => {
-				console.log(error.message);
+				console.error(error.message);
 			});
 		}
 	}, [token]);
@@ -122,50 +121,56 @@ function CogoOne() {
 						suggestions={suggestions}
 					/>
 				</div>
-				{!isEmpty(activeTab?.data) ? (
-					<>
-						<div
-							className={`${activeTab?.tab === 'mail' ? styles.mail_layout : styles.chats_layout}`}
-						>
-							<Conversations
-								activeTab={activeTab}
-								firestore={firestore}
-								userId={userId}
-								setRaiseTicketModal={setRaiseTicketModal}
-								viewType={viewType}
-								setActiveRoomLoading={setActiveRoomLoading}
-								mailProps={mailProps}
-								setActiveTab={setActiveTab}
-								suggestions={suggestions}
+
+				{isEmpty(activeTab?.data)
+					? (
+						<div className={styles.empty_page}>
+							<EmptyChatPage
+								displayMessage={activeTab?.tab === 'message'
+									? 'chat' : 'call log'}
 							/>
 						</div>
-						{activeTab?.tab !== 'mail' && (
-							<div className={styles.user_profile_layout}>
-								<ProfileDetails
-									activeMessageCard={activeTab?.data}
-									activeTab={activeTab?.tab}
-									activeVoiceCard={activeTab?.data}
-									activeCardId={activeTab?.data?.id}
-									setModalType={setModalType}
-									activeRoomLoading={activeRoomLoading}
-									setRaiseTicketModal={setRaiseTicketModal}
-									zippedTicketsData={zippedTicketsData}
-									viewType={viewType}
+					) : (
+						<>
+							<div
+								className={`${activeTab?.tab === 'mail'
+									? styles.mail_layout : styles.chats_layout}`}
+							>
+								<Conversations
+									activeTab={activeTab}
 									firestore={firestore}
 									userId={userId}
+									setRaiseTicketModal={setRaiseTicketModal}
+									viewType={viewType}
+									setActiveRoomLoading={setActiveRoomLoading}
+									mailProps={mailProps}
 									setActiveTab={setActiveTab}
+									suggestions={suggestions}
 								/>
 							</div>
-						)}
-					</>
-				) : (
-					<div className={styles.empty_page}>
-						<EmptyChatPage displayMessage={activeTab?.tab === 'message' ? 'chat' : 'call log'} />
-					</div>
-				)}
-				<div
-					className={styles.download_apk}
-				>
+
+							{activeTab?.tab !== 'mail' && (
+								<div className={styles.user_profile_layout}>
+									<ProfileDetails
+										activeMessageCard={activeTab?.data}
+										activeTab={activeTab?.tab}
+										activeVoiceCard={activeTab?.data}
+										activeCardId={activeTab?.data?.id}
+										setModalType={setModalType}
+										activeRoomLoading={activeRoomLoading}
+										setRaiseTicketModal={setRaiseTicketModal}
+										zippedTicketsData={zippedTicketsData}
+										viewType={viewType}
+										firestore={firestore}
+										userId={userId}
+										setActiveTab={setActiveTab}
+									/>
+								</div>
+							)}
+						</>
+					)}
+
+				<div className={styles.download_apk}>
 					<div
 						role="button"
 						tabIndex={0}
@@ -191,6 +196,7 @@ function CogoOne() {
 					</div>
 				</div>
 			</div>
+
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

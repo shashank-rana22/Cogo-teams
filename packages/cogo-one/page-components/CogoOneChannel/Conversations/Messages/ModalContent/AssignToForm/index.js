@@ -52,23 +52,11 @@ function AssignToForm({
 		),
 	);
 
-	const resetForm = () => {
-		reset({
-			allow_user       : 'observe_and_chat',
-			assign_condition : 'shipment',
-		});
-	};
-
 	const { role_functions = [] } = profile.auth_role_data;
 	const { assignChat = () => {}, support_agent_id = null, accountType = '' } = data || {};
 
 	const { allow_user } = controls;
 	const watchCondtion = watch('assign_condition') || null;
-
-	const createSubmit = (val) => {
-		const getPayload = ASSIGN_TYPE_PAYLOAD_MAPPING[assignType];
-		return assignChat({ payload: getPayload?.(val) || {} });
-	};
 
 	const assignTypeComp = GetAssignTypeComp({
 		control,
@@ -78,6 +66,19 @@ function AssignToForm({
 		assignType,
 		accountType,
 	});
+
+	const resetForm = () => {
+		reset({
+			allow_user       : 'observe_and_chat',
+			assign_condition : 'shipment',
+		});
+	};
+
+	const createSubmit = (val) => {
+		const getPayload = ASSIGN_TYPE_PAYLOAD_MAPPING[assignType];
+
+		return assignChat({ payload: getPayload?.(val) || {} });
+	};
 
 	return (
 		<form
@@ -94,7 +95,11 @@ function AssignToForm({
 
 					const isChecked = value === assignType;
 
-					if (!(agent_types.find((roleType) => role_functions.includes(roleType)))) {
+					if (
+						!(agent_types.find(
+							(roleType) => role_functions.includes(roleType),
+						))
+					) {
 						return null;
 					}
 

@@ -32,11 +32,28 @@ function FilterComponents({
 	viewType,
 	activeSubTab,
 }) {
-	const filterControls = useGetControls({ tagOptions, viewType, activeSubTab });
+	const filterControls = useGetControls({
+		tagOptions,
+		viewType,
+		activeSubTab,
+	});
 
 	const {
-		control, formState: { errors }, watch, setValue, handleSubmit,
-	} = useForm({ defaultValues: getDefaultValues({ filters: appliedFilters, filterControls }) });
+		control,
+		formState: { errors },
+		watch,
+		setValue,
+		handleSubmit,
+	} = useForm(
+		{
+			defaultValues: getDefaultValues(
+				{
+					filters: appliedFilters,
+					filterControls,
+				},
+			),
+		},
+	);
 
 	const formValues = watch();
 
@@ -97,29 +114,52 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			<div className={styles.filters_container}>
-				{filterControls.map((singleField) => {
-					const show = !(singleField?.name in showElements) || showElements[singleField?.name];
-					if (!show) {
-						return null;
-					}
 
-					return (
-						<div className={styles.filter_container} key={singleField.name}>
-							<Item
-								{...singleField}
-								control={control}
-								value={formValues[singleField.name]}
-								setValue={setValue}
-								error={errors[singleField.name]}
-							/>
-						</div>
-					);
-				})}
+			<div className={styles.filters_container}>
+				{filterControls.map(
+					(singleField) => {
+						const show = (
+							!(singleField?.name in showElements)
+							|| showElements[singleField?.name]
+						);
+
+						if (!show) {
+							return null;
+						}
+
+						return (
+							<div
+								className={styles.filter_container}
+								key={singleField.name}
+							>
+								<Item
+									{...singleField}
+									control={control}
+									value={formValues[singleField.name]}
+									setValue={setValue}
+									error={errors[singleField.name]}
+								/>
+							</div>
+						);
+					},
+				)}
 			</div>
+
 			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
-				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
-				<Button size="md" themeType="accent" type="submit">Apply</Button>
+				<Button
+					size="md"
+					themeType="tertiary"
+					onClick={() => setFilterVisible(false)}
+				>
+					Cancel
+				</Button>
+				<Button
+					size="md"
+					themeType="accent"
+					type="submit"
+				>
+					Apply
+				</Button>
 			</div>
 		</form>
 	);

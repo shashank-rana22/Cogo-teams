@@ -12,6 +12,7 @@ function ModalComp({
 	return (
 		<>
 			<FeedbackModal />
+
 			{raiseTicketModal?.state && (
 				<RaiseTicket
 					setRaiseTicketModal={setRaiseTicketModal}
@@ -19,7 +20,11 @@ function ModalComp({
 					refetchTickets={refetchTickets}
 				/>
 			)}
-			<ReminderModal firestore={firestore} agentId={userId} />
+
+			<ReminderModal
+				firestore={firestore}
+				agentId={userId}
+			/>
 		</>
 	);
 }

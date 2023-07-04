@@ -5,8 +5,15 @@ import {
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const COMMON_ACCESIBLE_NAVIGATIONS = ['profile',
-	'organization', 'user_activity', 'tickets', 'documents', 'help_desk', 'customer_insights'];
+const COMMON_ACCESIBLE_NAVIGATIONS = [
+	'profile',
+	'organization',
+	'user_activity',
+	'tickets',
+	'documents',
+	'help_desk',
+	'customer_insights',
+];
 
 const ICON_MAPPING = [
 	{

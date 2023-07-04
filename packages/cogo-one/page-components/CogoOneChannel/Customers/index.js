@@ -98,6 +98,7 @@ function Customers({
 					</div>
 				)}
 			</div>
+
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={activeTab?.tab}
@@ -123,6 +124,7 @@ function Customers({
 					})}
 				</Tabs>
 			</div>
+
 			{Component && (
 				<Component
 					key={activeTab?.tab}
@@ -131,6 +133,7 @@ function Customers({
 					activeTab={activeTab}
 				/>
 			)}
+
 			<CommunicationModals
 				mailProps={mailProps}
 				setModalType={setModalType}

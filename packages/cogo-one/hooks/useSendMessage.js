@@ -13,8 +13,7 @@ const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const useSendMessage = ({ channelType = '', activeChatCollection, formattedData }) => {
 	const {
-		user:{ id },
-
+		user: { id },
 	} = useSelector(({ profile }) => profile);
 
 	const [{ loading }, trigger] = useRequest(

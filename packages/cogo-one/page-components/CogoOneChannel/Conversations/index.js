@@ -31,8 +31,12 @@ function Conversations({
 			setActiveTab,
 			suggestions,
 		},
-		voice : { activeVoiceCard: activeTab?.data || {} },
-		mail  : { mailProps },
+		voice: {
+			activeVoiceCard: activeTab?.data || {},
+		},
+		mail: {
+			mailProps,
+		},
 	};
 
 	const Component = CONVERSATION_COMPONENT_MAPPING[activeTab?.tab] || null;

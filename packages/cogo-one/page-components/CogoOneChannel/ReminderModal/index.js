@@ -15,16 +15,19 @@ const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
 
 function ReminderModal({ firestore, agentId }) {
 	const [reminderModal, setReminderModal] = useState(false);
-	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
-		{
-			setReminderModal,
-			firestore,
-			agentId,
-			getAssignedChats: () => {
-				getAssignedChats({ firestore, userId: agentId });
-			},
+
+	const {
+		mountReminderSnapShot,
+		cleanUpTimeout,
+		shipmentData,
+	} = useShipmentReminder({
+		setReminderModal,
+		firestore,
+		agentId,
+		getAssignedChats: () => {
+			getAssignedChats({ firestore, userId: agentId });
 		},
-	);
+	});
 
 	const statsMapping = getShipmentReminderStats(shipmentData);
 
@@ -35,6 +38,7 @@ function ReminderModal({ firestore, agentId }) {
 			mountReminderSnapShot,
 			SNAPSHOT_TIMEOUT,
 		);
+
 		return () => {
 			cleanUpTimeout();
 			clearTimeout(addSnapShotAfterfewSeconds);

@@ -31,6 +31,7 @@ function Header({
 				setAppliedFilters={setAppliedFilters}
 				setIsBotSession={setIsBotSession}
 			/>
+
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
 					<Input
@@ -41,6 +42,7 @@ function Header({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
+
 				<div className={styles.filter_icon}>
 					<Popover
 						placement="right"

@@ -34,4 +34,5 @@ const getCarouselData = ({
 		}),
 	)
 );
+
 export default getCarouselData;

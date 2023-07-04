@@ -29,6 +29,7 @@ const useSendChat = ({
 	const { sendMessage, loading } = useSendMessage({ channelType, activeChatCollection, formattedData });
 
 	let messageFireBaseDoc;
+
 	if (id && channelType) {
 		messageFireBaseDoc = doc(
 			firestore,
@@ -50,20 +51,22 @@ const useSendChat = ({
 		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
 		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
 
-		if (!isEmpty(newMessage?.trim()) || finalUrl) {
-			await sendUserMessage({
-				fileType,
-				finalUrl,
-				fileName,
-				formattedData,
-				channelType,
-				messageFireBaseDoc,
-				newMessage,
-				sendMessage,
-				user_name,
-				scrollToBottom,
-			});
+		if (isEmpty(newMessage?.trim()) && !finalUrl) {
+			return;
 		}
+
+		await sendUserMessage({
+			fileType,
+			finalUrl,
+			fileName,
+			formattedData,
+			channelType,
+			messageFireBaseDoc,
+			newMessage,
+			sendMessage,
+			user_name,
+			scrollToBottom,
+		});
 	};
 
 	const sentQuickSuggestions = async (scrollToBottom, val) => {

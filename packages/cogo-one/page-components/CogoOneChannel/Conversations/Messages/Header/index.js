@@ -90,7 +90,7 @@ function Header({
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
 	const hasAccessToApprove = (support_agent_id === userId
-		|| VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions?.has_permission_to_edit);
+		|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit);
 
 	const hasRequests = !!agent_id;
 
@@ -155,6 +155,7 @@ function Header({
 							isPartOfGroup={isPartOfGroup}
 							isManager={isManager}
 						/>
+
 						{channel_type === 'whatsapp' && (
 							<div
 								role="button"

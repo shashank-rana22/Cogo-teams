@@ -16,7 +16,7 @@ export function getHasPermissionToEdit({
 	return (
 		canMessageOnBotSession || (
 			!showBotMessages && (
-				VIEW_TYPE_GLOBAL_MAPPING[viewType].permissions.has_permission_to_edit
+				VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit
 					|| userId === support_agent_id
 					|| group_members?.includes(userId)
 					|| managers_ids?.includes(userId)

@@ -1,6 +1,7 @@
 import { cl, Tooltip, Checkbox, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
@@ -62,6 +63,8 @@ function MessageCardData({
 	const orgName = (user_name?.toLowerCase() || '').includes('anonymous')
 		? startCase(PLATFORM_MAPPING[user_type] || '') : startCase(organization_name);
 
+	const isFlashMessages = source === 'flash_messages';
+
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
 
@@ -74,8 +77,6 @@ function MessageCardData({
 		});
 	};
 
-	const isFlashMessages = source === 'flash_messages';
-
 	return (
 		<div
 			key={id}
@@ -85,17 +86,18 @@ function MessageCardData({
 				<Checkbox
 					onChange={() => handleCheckedChats(item, id)}
 				/>
-			) }
+			)}
+
 			<div
 				role="button"
 				tabIndex={0}
+				onClick={() => setActiveMessage(item)}
 				className={cl`
 						${styles.card_container} 
 						${autoAssignChats ? '' : styles.card_with_checkbox}
 						${checkActiveCard ? styles.active_card : ''} 
 						${isFlashMessages ? styles.flash_messages_padding : ''} 
-							`}
-				onClick={() => setActiveMessage(item)}
+					`}
 			>
 				<div className={styles.card}>
 					<div className={styles.user_information}>
@@ -139,15 +141,20 @@ function MessageCardData({
 					</div>
 
 					<div className={styles.content_div}>
-						{formatLastMessage({ lastMessage: lastMessageVar, viewType })}
+						{formatLastMessage({
+							lastMessage: lastMessageVar,
+							viewType,
+						})}
+
 						<div className={styles.flex_div}>
 							{new_message_count > DEFAULT_UNREAD_MESSAGES && (
 								<div className={styles.new_message_count}>
-									{new_message_count > MAXIMUM_UNREAD_MESSAGES ? '99+' : (
-										new_message_count
-									)}
+									{new_message_count > MAXIMUM_UNREAD_MESSAGES
+										? '99+'
+										: new_message_count}
 								</div>
 							)}
+
 							{is_likely_to_book_shipment && (
 								<div className={styles.likely_to_book_shipment}>
 									<IcMShip className={styles.ship_icon_container} />
@@ -159,10 +166,11 @@ function MessageCardData({
 
 				{isImportant && (
 					<div className={styles.important_icon}>
-						<img
+						<Image
 							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
 							alt="important"
-							width="10px"
+							width="10"
+							height="10"
 						/>
 					</div>
 				)}

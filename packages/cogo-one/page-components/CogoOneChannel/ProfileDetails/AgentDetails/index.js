@@ -22,6 +22,12 @@ import VoiceCallComponent from './VoiceCallComponent';
 
 const LINK_BEFORE_QUERY_PARAMS = 0;
 
+const handleClick = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
+	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
+	Toast.success('Copied!!!');
+};
+
 function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
@@ -49,8 +55,16 @@ function AgentDetails({
 	const geo = getGeoConstants();
 
 	const {
-		user_id, lead_user_id, email, user_name: messageName, mobile_no, organization_id, sender,
-		channel_type = '', user_type, id = '',
+		user_id,
+		lead_user_id,
+		email,
+		user_name: messageName,
+		mobile_no,
+		organization_id,
+		sender,
+		channel_type = '',
+		user_type,
+		id = '',
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
@@ -130,12 +144,6 @@ function AgentDetails({
 		}
 	};
 
-	const handleClick = () => {
-		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
-		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
-		Toast.success('Copied!!!');
-	};
-
 	const handleSummary = () => {
 		setShowMore(true);
 		setActiveSelect('user_activity');
@@ -173,7 +181,7 @@ function AgentDetails({
 					<div
 						role="presentation"
 						className={styles.copy_link}
-						onClick={handleClick}
+						onClick={() => handleClick({ id, channel_type })}
 					>
 						Share
 					</div>
