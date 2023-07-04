@@ -78,7 +78,7 @@ const getControls = () => [{
 		},
 		{
 			name    : 'degree_proof',
-			label   : 'Upload Degree Proof',
+			label   : 'Upload Degree Proof/Passing Certificate',
 			type    : 'fileUpload',
 			accept  : '.pdf',
 			maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
