@@ -2,35 +2,50 @@ import { useEffect } from 'react';
 
 import { initiatedConfig } from '../columns/initiatedConfig';
 import { initiatedListViewConfig } from '../columns/initiatedListViewConfig';
+import { payrunHistoryConfig } from '../columns/payrunHistoryConfig';
+import { payrunPaidConfig } from '../columns/payrunPaidConfig';
 import { uploadHistoryConfig } from '../columns/uploadHistoryConfig';
 
+import useGetPaidList from './useGetPaidList';
 import useGetPayrun from './useGetPayrun';
 import useGetPayrunBillListView from './useGetPayrunBillListView';
 import useGetUploadHistoryList from './useGetUploadHistoryList';
 
 const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
-	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({ activePayrunTab, overseasData });
+	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
+		activePayrunTab,
+		overseasData,
+	});
 	const { getPayrunListView, billListViewData, billListViewLoading } = useGetPayrunBillListView({ activePayrunTab });
 	const { getUploadHistoryList, uploadHistoryListLoading, uploadHistoryDataList } = useGetUploadHistoryList();
-
-	let config = initiatedConfig;
+	const { paidDataList, paidDataLoading, getPaidList } = useGetPaidList({ activePayrunTab });
+	let config = {};
 	let data = {};
 	let loading = false;
 
 	useEffect(() => {
-		if (activePayrunTab === 'UPLOAD_HISTORY') {
+		if (activePayrunTab === 'PAID') {
+			getPaidList();
+		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			getUploadHistoryList();
 		} else if (isInvoiceView) {
 			getPayrunListView();
 		} else {
 			getPayrunList();
 		}
-	}, [activePayrunTab, getPayrunList, getPayrunListView, getUploadHistoryList, isInvoiceView]);
-
-	if (activePayrunTab === 'UPLOAD_HISTORY') {
+	}, [activePayrunTab, getPaidList, getPayrunList, getPayrunListView, getUploadHistoryList, isInvoiceView]);
+	if (activePayrunTab === 'PAID') {
+		data = paidDataList;
+		loading = paidDataLoading;
+		config = payrunPaidConfig;
+	} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 		data = uploadHistoryDataList;
 		loading = uploadHistoryListLoading;
 		config = uploadHistoryConfig;
+	} else if (activePayrunTab === 'COMPLETED' && isInvoiceView) {
+		config = payrunHistoryConfig;
+		loading = billListViewLoading;
+		data = billListViewData;
 	} else if (isInvoiceView) {
 		data = billListViewData;
 		loading = billListViewLoading;
@@ -38,6 +53,7 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 	} else {
 		data = payrunData;
 		loading = payrunLoading;
+		config = initiatedConfig;
 	}
 
 	return {
