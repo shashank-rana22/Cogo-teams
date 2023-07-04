@@ -51,7 +51,7 @@ function Customers({
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
-				setActiveTab((p) => ({ ...p, data: val }));
+				setActiveTab((prev) => ({ ...prev, data: val }));
 			},
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
@@ -92,7 +92,7 @@ function Customers({
 						<Toggle
 							name="online"
 							size="sm"
-							onChange={() => setIsBotSession((p) => !p)}
+							onChange={() => setIsBotSession((prev) => !prev)}
 							checked={isBotSession}
 						/>
 					</div>

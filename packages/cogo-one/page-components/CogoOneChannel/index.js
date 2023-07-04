@@ -78,7 +78,7 @@ function CogoOne() {
 	const mailProps = {
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
-			setActiveTab((p) => ({ ...p, data: val }));
+			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 		recipientArray,
 		setRecipientArray,

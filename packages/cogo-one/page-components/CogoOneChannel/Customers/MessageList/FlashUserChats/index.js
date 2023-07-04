@@ -13,6 +13,7 @@ function FlashUserChats({
 	firestore,
 	carouselState,
 	setCarouselState,
+	viewType,
 }) {
 	const { claimChat, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
 
@@ -26,6 +27,7 @@ function FlashUserChats({
 		firestore,
 		claimChat,
 		claimLoading,
+		viewType,
 	}) : [];
 
 	return (

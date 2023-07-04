@@ -27,6 +27,7 @@ function MessageCardData({
 	source = '',
 	claimChat = () => {},
 	claimLoading = false,
+	viewType,
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
@@ -45,7 +46,6 @@ function MessageCardData({
 		last_message_document = null,
 		new_message_count = 0,
 		is_likely_to_book_shipment = false,
-		agent_type: currentAgentType = 'bot',
 	} = formattedData || {};
 
 	const lastMessageVar = last_message_document || last_message;
@@ -139,7 +139,7 @@ function MessageCardData({
 					</div>
 
 					<div className={styles.content_div}>
-						{formatLastMessage({ lastMessage: lastMessageVar, currentAgentType })}
+						{formatLastMessage({ lastMessage: lastMessageVar, viewType })}
 						<div className={styles.flex_div}>
 							{new_message_count > DEFAULT_UNREAD_MESSAGES && (
 								<div className={styles.new_message_count}>

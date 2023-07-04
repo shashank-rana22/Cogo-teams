@@ -47,8 +47,8 @@ const useSendChat = ({
 			finalUrl: draftUploadedFiles?.[id], fileName,
 		});
 
-		setDraftMessages((p) => ({ ...p, [id]: '' }));
-		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
+		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [id]: undefined }));
 
 		if (!isEmpty(newMessage?.trim()) || finalUrl) {
 			await sendUserMessage({

@@ -56,7 +56,10 @@ function MessageList(messageProps) {
 	const {
 		bulkAssignChat = () => {},
 		bulkAssignLoading = false,
-	} = useBulkAssignChat({ setSelectedAutoAssign, setAutoAssignChats });
+	} = useBulkAssignChat({
+		setSelectedAutoAssign,
+		setAutoAssignChats,
+	});
 
 	const {
 		messagesList,
@@ -64,26 +67,26 @@ function MessageList(messageProps) {
 		flashMessagesList,
 	} = chatsData;
 
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList);
+
+	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
+
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
-			setSelectedAutoAssign((p) => {
-				const arg = p;
+			setSelectedAutoAssign((prev) => {
+				const arg = prev;
 				delete (arg[id]);
-				return { ...p };
+				return { ...prev };
 			});
 		} else {
-			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
+			setSelectedAutoAssign((prev) => ({ ...prev, [id]: item }));
 		}
 	};
-
-	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList);
 
 	const handleAutoAssignBack = () => {
 		setAutoAssignChats(true);
 		setSelectedAutoAssign({});
 	};
-
-	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 
 	useEffect(() => {
 		handleAutoAssignBack();
@@ -99,7 +102,9 @@ function MessageList(messageProps) {
 				firestore={firestore}
 				carouselState={carouselState}
 				setCarouselState={setCarouselState}
+				viewType={viewType}
 			/>
+
 			<Header
 				activeSubTab={activeSubTab}
 				setActiveSubTab={setActiveSubTab}
@@ -112,79 +117,94 @@ function MessageList(messageProps) {
 				appliedFilters={appliedFilters}
 				isBotSession={isBotSession}
 			/>
-			{ isEmpty(messagesList) && isPinnedChatEmpty && !loadingState?.chatsLoading ? (
-				<div className={styles.list_container}>
-					<div className={styles.empty_state}>
-						No Messages Yet..
+
+			{(isEmpty(messagesList)
+				&& isPinnedChatEmpty
+				&& !loadingState?.chatsLoading
+			)
+				? (
+					<div className={styles.list_container}>
+						<div className={styles.empty_state}>
+							No Messages Yet..
+						</div>
 					</div>
-				</div>
-			) : (
-				<>
-					{isBotSession && VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bulk_auto_assign && (
-						<AutoAssignComponent
-							autoAssignChats={autoAssignChats}
-							setAutoAssignChats={setAutoAssignChats}
-							handleAutoAssignBack={handleAutoAssignBack}
-							selectedAutoAssign={selectedAutoAssign}
-							bulkAssignLoading={bulkAssignLoading}
-							bulkAssignChat={bulkAssignChat}
-						/>
-					)}
-					<div
-						className={styles.list_container}
-						onScroll={handleScroll}
-						style={{
-							height: carouselState === 'show'
-								? 'calc(100% - 330px)' : 'calc(100% - 220px)',
-						}}
-					>
-						{!isPinnedChatEmpty && (
-							<>
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.pinned_chat_flex}
-									onClick={() => setOpenPinnedChats((p) => !p)}
-								>
-									<ActiveIcon className={styles.icon} />
-									<div className={styles.pin_text}>pinned chats</div>
-								</div>
-								{openPinnedChats && (
-									<div className={styles.pinned_chats_div}>
-										{(sortedPinnedChatList || []).map((item) => (
-											<MessageCardData
-												key={item?.id}
-												item={item}
-												userId={userId}
-												firestore={firestore}
-												autoAssignChats={autoAssignChats}
-												handleCheckedChats={handleCheckedChats}
-												isBotSession={isBotSession}
-												setActiveMessage={setActiveMessage}
-												activeTab={activeTab}
-											/>
-										))}
+				) : (
+					<>
+						{isBotSession
+							&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bulk_auto_assign
+							&& (
+								<AutoAssignComponent
+									autoAssignChats={autoAssignChats}
+									setAutoAssignChats={setAutoAssignChats}
+									handleAutoAssignBack={handleAutoAssignBack}
+									selectedAutoAssign={selectedAutoAssign}
+									bulkAssignLoading={bulkAssignLoading}
+									bulkAssignChat={bulkAssignChat}
+								/>
+							)}
+						<div
+							onScroll={handleScroll}
+							className={styles.list_container}
+							style={{
+								height: carouselState === 'show'
+									? 'calc(100% - 330px)' : 'calc(100% - 220px)',
+							}}
+						>
+							{!isPinnedChatEmpty && (
+								<>
+									<div
+										role="presentation"
+										className={styles.pinned_chat_flex}
+										onClick={() => setOpenPinnedChats((prev) => !prev)}
+									>
+										<ActiveIcon className={styles.icon} />
+										<div className={styles.pin_text}>pinned chats</div>
 									</div>
-								)}
-							</>
-						)}
-						<div className={styles.recent_text}>Recent</div>
-						{(messagesList || []).map((item) => (
-							<MessageCardData
-								key={item?.id}
-								item={item}
-								userId={userId}
-								firestore={firestore}
-								autoAssignChats={autoAssignChats}
-								handleCheckedChats={handleCheckedChats}
-								setActiveMessage={setActiveMessage}
-								activeTab={activeTab}
-							/>
-						))}
-						{loadingState?.chatsLoading && <LoadingState />}
-					</div>
-				</>
-			)}
+
+									{openPinnedChats && (
+										<div className={styles.pinned_chats_div}>
+											{(sortedPinnedChatList || []).map(
+												(item) => (
+													<MessageCardData
+														key={item?.id}
+														item={item}
+														userId={userId}
+														firestore={firestore}
+														autoAssignChats={autoAssignChats}
+														handleCheckedChats={handleCheckedChats}
+														isBotSession={isBotSession}
+														setActiveMessage={setActiveMessage}
+														activeTab={activeTab}
+														viewType={viewType}
+													/>
+												),
+											)}
+										</div>
+									)}
+								</>
+							)}
+
+							<div className={styles.recent_text}>Recent</div>
+							{(messagesList || []).map(
+								(item) => (
+									<MessageCardData
+										key={item?.id}
+										item={item}
+										userId={userId}
+										firestore={firestore}
+										autoAssignChats={autoAssignChats}
+										handleCheckedChats={handleCheckedChats}
+										setActiveMessage={setActiveMessage}
+										activeTab={activeTab}
+										viewType={viewType}
+									/>
+								),
+							)}
+
+							{loadingState?.chatsLoading && <LoadingState />}
+						</div>
+					</>
+				)}
 		</>
 	);
 }

@@ -65,11 +65,13 @@ const useSendMessage = ({ channelType = '', activeChatCollection, formattedData 
 				},
 			});
 
-			await addDoc(activeChatCollection, {
+			const lastMessageDocument = {
 				...adminChat,
 				agent_type       : agent_type || 'bot',
 				communication_id : res?.data?.id,
-			});
+			};
+
+			await addDoc(activeChatCollection, lastMessageDocument);
 
 			scrollToBottom();
 			const old_count = document.data().new_user_message_count;
@@ -78,7 +80,7 @@ const useSendMessage = ({ channelType = '', activeChatCollection, formattedData 
 				new_message_count         : 0,
 				has_admin_unread_messages : false,
 				last_message              : adminChat.response.message || '',
-				last_message_document     : { ...adminChat, communication_id: res.data.id } || {},
+				last_message_document     : lastMessageDocument,
 				new_message_sent_at       : Date.now(),
 				new_user_message_count    : old_count + INCREASE_MESSAGE_COUNT_BY_ONE,
 			});

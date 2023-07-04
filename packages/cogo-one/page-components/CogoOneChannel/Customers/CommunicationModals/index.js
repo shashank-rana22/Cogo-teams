@@ -35,7 +35,7 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
 					<div className={styles.wheel_box}>
 						<IcMPlus
-							onClick={() => setIsChecked((p) => !p)}
+							onClick={() => setIsChecked((prev) => !prev)}
 							fill="#ffffff"
 							width={35}
 							height={35}

@@ -2,7 +2,7 @@ import { IcMDocument, IcMImage, IcMTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const formatLastMessage = ({ lastMessage, currentAgentType }) => {
+const formatLastMessage = ({ lastMessage, viewType }) => {
 	if (typeof lastMessage === 'string') {
 		return (
 			<div
@@ -21,7 +21,9 @@ const formatLastMessage = ({ lastMessage, currentAgentType }) => {
 
 	const ActiveIcon = message_type === 'image' ? IcMImage : IcMDocument;
 
-	const messageToBeShown = currentAgentType === lastMessageAgentType;
+	const messageToBeShown = (lastMessageAgentType === 'bot'
+								|| viewType === 'cogoone_admin'
+								|| viewType.includes(lastMessageAgentType));
 
 	if (!messageToBeShown) {
 		return <div className={styles.styled_flex} />;
@@ -40,4 +42,5 @@ const formatLastMessage = ({ lastMessage, currentAgentType }) => {
 		</div>
 	);
 };
+
 export default formatLastMessage;

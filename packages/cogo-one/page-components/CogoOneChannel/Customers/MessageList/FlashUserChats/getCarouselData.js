@@ -10,6 +10,7 @@ const getCarouselData = ({
 	firestore,
 	claimChat,
 	claimLoading,
+	viewType,
 }) => (
 	flashMessagesList.map(
 		(eachRoom) => ({
@@ -26,6 +27,7 @@ const getCarouselData = ({
 						claimChat={claimChat}
 						claimLoading={claimLoading}
 						source="flash_messages"
+						viewType={viewType}
 					/>
 				</div>
 			),
