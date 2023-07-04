@@ -13,9 +13,7 @@ const useUpdateShipmentDocument = () => {
 	const updateDocument = async (payload, listAPI) => {
 		try {
 			await trigger({
-				data: {
-					req: payload,
-				},
+				data: payload,
 			});
 			listAPI({});
 			Toast.success('Document Approved Successfully');
