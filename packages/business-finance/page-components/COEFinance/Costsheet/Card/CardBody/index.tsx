@@ -111,27 +111,27 @@ export function CardBody({ charge, type }: Props) {
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{formatAmount({
+							{lineItem?.priceQuotation && lineItem?.currencyQuotation ? formatAmount({
 								amount   : lineItem?.priceQuotation,
 								currency :	lineItem?.currencyQuotation,
 								options  : {
 									style           : 'currency',
 									currencyDisplay : 'code',
 								},
-							}) || '-'}
+							}) : '-'}
 						</div>
 						<div
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{formatAmount({
+							{lineItem?.priceActual && lineItem?.currencyActual ? formatAmount({
 								amount   :	lineItem?.priceActual,
 								currency :	lineItem?.currencyActual,
 								options  : {
 									style           : 'currency',
 									currencyDisplay : 'code',
 								},
-							}) || '-'}
+							}) : '-'}
 							{lineItem?.sameCurrencyDataPresent && (
 								<span className={iconClassName}>
 									<IcMArrowNext height={15} width={15} />
