@@ -1,6 +1,14 @@
-/* eslint-disable no-magic-numbers */
-import { Tooltip, Toast } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { format, startCase, upperCase } from '@cogoport/utils';
+
+import {
+	CBM_TO_KILOS,
+	DECIMAL_PLACES,
+	DECREMENT_BY_ONE,
+	DEFAULT_INDEX,
+	VALUE_ONE,
+	VALUE_ZERO,
+} from '../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -65,16 +73,6 @@ const KEY_MAP = {
 	container_load_type                     : 'containerLoadType',
 };
 
-const copyToClipboard = async (text) => {
-	const modifiedText = text.replace(/-/g, '');
-	try {
-		await navigator.clipboard.writeText(modifiedText);
-		Toast.success('MAWB Number copied to clipboard');
-	} catch (err) {
-		Toast.error('Failed to copy MAWB Number');
-	}
-};
-
 const details = {
 	revertCount({ detail }) {
 		return `${detail?.revert_count} Revert`;
@@ -89,7 +87,7 @@ const details = {
 		if (!detail.containers_count) {
 			return null;
 		}
-		if (detail.containers_count === 1) {
+		if (detail.containers_count === VALUE_ONE) {
 			return '1 Container';
 		}
 		return `${detail.containers_count} Containers`;
@@ -98,7 +96,7 @@ const details = {
 		if (!detail.packages_count) {
 			return null;
 		}
-		if (detail.packages_count === 1) {
+		if (detail.packages_count === VALUE_ONE) {
 			return '1 Package';
 		}
 		return `${detail.packages_count} Packages`;
@@ -107,7 +105,7 @@ const details = {
 		if (!detail.trucks_count) {
 			return null;
 		}
-		if (detail.trucks_count === 1) {
+		if (detail.trucks_count === VALUE_ONE) {
 			return '1 Truck';
 		}
 		return `${detail.trucks_count} Trucks`;
@@ -116,17 +114,17 @@ const details = {
 		return startCase(detail.truck_type || '');
 	},
 	truckTypes({ detail }) {
-		if (detail?.truck_types?.length > 1) {
+		if (detail?.truck_types?.length > VALUE_ONE) {
 			return (
 				<div style={{ display: 'flex' }}>
-					{startCase(detail?.truck_types?.[0])}
+					{startCase(detail?.truck_types?.[DEFAULT_INDEX])}
 					{' '}
 					<Tooltip
 						placement="bottom"
 						theme="light"
 						content={(
 							<div style={{ fontSize: '10px' }}>
-								{detail?.truck_types?.slice(1)?.map((item) => (
+								{detail?.truck_types?.slice(VALUE_ONE)?.map((item) => (
 									<div key={item}>{startCase(item)}</div>
 								))}
 							</div>
@@ -134,7 +132,7 @@ const details = {
 					>
 						<div className={styles.CountOfTruckTypes}>
 							{`+ ${
-								(detail?.truck_types?.length || 1) - 1
+								(detail?.truck_types?.length || VALUE_ONE) - DECREMENT_BY_ONE
 							} more`}
 
 						</div>
@@ -142,7 +140,7 @@ const details = {
 				</div>
 			);
 		}
-		return startCase(detail?.truck_types?.[0]);
+		return startCase(detail?.truck_types?.[DEFAULT_INDEX]);
 	},
 	containerType({ detail }) {
 		return startCase(detail.container_type || '');
@@ -151,7 +149,7 @@ const details = {
 		return startCase(detail.trade_type || '');
 	},
 	commodity({ detail }) {
-		const commodityDataDetails = detail.commodity_details?.[0] || {};
+		const commodityDataDetails = detail.commodity_details?.[DEFAULT_INDEX] || {};
 		if (detail.commodity === 'special_consideration') {
 			return (
 				<Tooltip
@@ -199,7 +197,7 @@ const details = {
 	},
 	packages({ detail }) {
 		const { packages = [] } = detail || {};
-		const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+		const valueForInput = Array.isArray(packages) && packages?.length > VALUE_ZERO ? packages[DEFAULT_INDEX] : null;
 		const dimension = valueForInput?.length
 			? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
 			: '';
@@ -208,10 +206,10 @@ const details = {
 				valueForInput?.packing_type,
 			)}`
 			: '';
-		if (packages?.length === 0) {
+		if (packages?.length === VALUE_ZERO) {
 			return null;
 		}
-		if (packages?.length > 1) {
+		if (packages?.length > VALUE_ONE) {
 			return (
 				<Tooltip
 					placement="bottom"
@@ -231,7 +229,7 @@ const details = {
 				>
 					<div className="cargo-details-info">
 						{`Package: ${inputValue} + ${
-							(packages?.length || 1) - 1
+							(packages?.length || VALUE_ONE) - DECREMENT_BY_ONE
 						} more`}
 
 					</div>
@@ -242,16 +240,16 @@ const details = {
 	},
 	volume({ detail }) {
 		const isLTL = detail?.service_type === 'ltl_freight_service';
-		const volume = ` ${Number(detail.volume).toFixed(2)} ${isLTL ? 'cc' : 'cbm'}`;
+		const volume = ` ${Number(detail.volume).toFixed(DECIMAL_PLACES)} ${isLTL ? 'cc' : 'cbm'}`;
 		const chargableWeight = isLTL
 			? detail?.chargable_weight || detail?.weight
 			: Number(detail?.chargeable_weight)
-		|| Math.max((detail?.volume || 0) * 166.67, detail?.weight || 0);
+		|| Math.max((detail?.volume || VALUE_ZERO) * CBM_TO_KILOS, detail?.weight || VALUE_ZERO);
 		return ` ${volume} ${
 			detail.service_type === 'ftl_freight_service'
 			|| detail.service_type === 'haulage_freight_service'
 				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
+				: `, Chargeable Weight: ${chargableWeight.toFixed(DECIMAL_PLACES)} kg`
 		}`;
 	},
 	lrNumber({ detail }) {
@@ -304,7 +302,7 @@ const details = {
 	},
 	weight({ detail }) {
 		const isFTL = detail?.service_type === 'ftl_freight_service';
-		return ` ${Number(detail.weight).toFixed(2)} ${isFTL ? 'Ton' : 'Kgs'}`;
+		return ` ${Number(detail.weight).toFixed(DECIMAL_PLACES)} ${isFTL ? 'Ton' : 'Kgs'}`;
 	},
 	haulageType({ detail }) {
 		return startCase(detail.haulage_type || '');
@@ -437,7 +435,7 @@ const details = {
 		return formatShipperDetails(detail?.shipper_details || {});
 	},
 	buyQuotationAgreedRates({ detail }) {
-		return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+		return `${detail?.buy_quotation_agreed_rates.toFixed(DECIMAL_PLACES)} USD`;
 	},
 	hsCode({ detail }) {
 		return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
