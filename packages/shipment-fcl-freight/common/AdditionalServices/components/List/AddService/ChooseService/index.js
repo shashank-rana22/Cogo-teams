@@ -47,7 +47,10 @@ function ChooseService({
 
 	const fields = tableFields(priceRequest, countObj, tagDisplay);
 
-	const serviceOptions = (shipment_data?.services || []
+	const services = (shipment_data?.services || []
+	).filter((e) => e !== 'cargo_insurance_service');
+
+	const serviceOptions = (services || []
 	).map((service) => ({ label: startCase(service), value: service }));
 
 	return (
