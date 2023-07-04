@@ -1,4 +1,6 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -51,7 +53,11 @@ function useUpdateCycle({ getDunningList, setActionModal }:Props) {
 						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 						week                      : weekDay || undefined,
 						dayOfMonth                : monthDay || undefined,
-						oneTimeDate               : triggerType !== 'PERIODIC' ? oneTimeDate : undefined,
+						oneTimeDate               : triggerType !== 'PERIODIC' ? formatDate({
+							date       : oneTimeDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+							formatType : 'date',
+						}) : undefined,
 					},
 				},
 			});

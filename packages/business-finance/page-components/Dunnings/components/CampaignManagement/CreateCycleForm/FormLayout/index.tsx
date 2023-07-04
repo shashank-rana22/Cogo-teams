@@ -108,6 +108,12 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		setFormData(updatedFormData);
 	};
 
+	const unformatDate = (stringDate:string = '') => {
+		const [day, month, year] = stringDate.split('/');
+		const date = new Date(`${year}-${month}-${day}`);
+		return date;
+	};
+
 	useEffect(() => {
 		if (isAllCreditControllers) {
 			setFormData((prev) => ({ ...prev, creditController: null }));
@@ -117,8 +123,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	useEffect(() => {
 		// pre-filling all the details in case of updating
 		if (isEditMode) {
-			const stringDate = oneTimeDateSchedule;
-			const formattedOneTimeDate = new Date(stringDate);
+			const unformattedOneTimeDate = unformatDate(oneTimeDateSchedule);
 			const timeArray = (scheduleTime)?.split(':');
 			const scheduledHourValue = timeArray?.[0];
 			const scheduledMinuteValue = timeArray?.[1];
@@ -132,7 +137,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				scheduledMinute : scheduledMinuteValue,
 				monthDay        : dayOfMonth
 					? String(dayOfMonth) : undefined,
-				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
+				oneTimeDate            : unformattedOneTimeDate || undefined,
 				dueOutstandingCurrency : dueOutstandingCurrency || undefined,
 				isAllCreditControllers : isEmpty(organizationStakeholderIds),
 				creditController       : organizationStakeholderIds || undefined,
@@ -228,12 +233,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								placeholder="Enter Date"
 								dateFormat="dd/MM/yyyy"
 								name="oneTimeDate"
-								onChange={(date) => {
-									const newDate = new Date(date);
-
-									const timestampOneTime = newDate.getTime();
-									setFormData({ ...formData, oneTimeDate: timestampOneTime });
-								}}
+								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
 								value={oneTimeDate}
 							/>
 
