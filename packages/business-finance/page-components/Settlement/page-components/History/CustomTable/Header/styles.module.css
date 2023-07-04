@@ -1,0 +1,85 @@
+.header {
+	display: flex;
+	align-items: center;
+	padding: 16px 4px;
+	font-weight: 600;
+	border-bottom: 2px solid var(--color-accent-orange-2);
+}
+
+.refnumb {
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
+	margin-left: 12px;
+}
+
+.amount {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.balance {
+	flex: 0.9;
+	width: calc(0.9*(100 / 12));
+}
+
+.utilized {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.trandate {
+	display: flex;
+	flex: 1.3;
+	width: calc(1.3*(100 / 12));
+}
+
+.last_edit_date {
+	display: flex;
+	flex: 1.3;
+	width: calc(1.3*(100 / 12));
+}
+
+.supporting_doc {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.entity {
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
+}
+
+.journal {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.exrate {
+	flex: 1.2;
+	width: calc(1*(100 / 12));
+}
+
+.legcurr {
+	flex: 1.2;
+	width: calc(1*(100 / 12));
+}
+
+.accord {
+	flex: 0.2;
+	width: calc(0.2*(100 / 12));
+}
+
+.curr {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.dots {
+	flex: 0.3;
+	width: calc(0.3*(100 / 12));
+}
+
+.status {
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
+}

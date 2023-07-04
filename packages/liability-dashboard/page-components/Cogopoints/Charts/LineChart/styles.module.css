@@ -1,0 +1,22 @@
+.tooltip {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 12px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+}
+
+.amount {
+	display: flex;
+	align-items: center;
+	margin: 0 6px;
+	font-size: 14px;
+	font-weight: 700;
+}

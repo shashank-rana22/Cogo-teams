@@ -1,15 +1,5 @@
-const getLocalControls = (service_type, shipment_data) => {
-	const values = 	(shipment_data?.all_services || []).filter(
-		(serviceObj) => serviceObj?.service_type.includes('air_freight_local_service'),
-	);
-
-	const export_values = values?.find(
-		(serviceObj) => serviceObj?.trade_type === 'export',
-	);
-
-	const import_values = values?.find(
-		(serviceObj) => serviceObj?.trade_type === 'import',
-	);
+const getLocalControls = (service_type, formattedRate) => {
+	const formattedValue = formattedRate?.[formattedRate?.primary_service?.id];
 
 	const controlMapping = {
 		air_freight_service: [
@@ -22,7 +12,7 @@ const getLocalControls = (service_type, shipment_data) => {
 				caret         : true,
 				span          : 5,
 				name          : 'origin_airline_id',
-				value         : export_values?.airline_id,
+				value         : formattedValue?.airline_id,
 				subType       : 'select',
 				label         : 'Please select airline (Air Local Origin)',
 				placeholder   : 'Search airline...',
@@ -34,7 +24,7 @@ const getLocalControls = (service_type, shipment_data) => {
 				type           : 'select',
 				span           : 5,
 				label          : 'Service Provider (Air Local Origin)',
-				value          : export_values?.service_provider_id,
+				value          : formattedValue?.service_provider_id,
 				optionsListKey : 'verified-service-providers',
 				placeholder    : 'Select Service Provider',
 				rules          : { required: 'Service Provider is Required' },
@@ -47,8 +37,8 @@ const getLocalControls = (service_type, shipment_data) => {
 				},
 				caret         : true,
 				span          : 5,
-				name          : 'destiantion_airline_id',
-				value         : import_values?.airline_id,
+				name          : 'destination_airline_id',
+				value         : formattedValue?.airline_id,
 				subType       : 'select',
 				label         : 'Please select airline (Air Local Destination)',
 				placeholder   : 'Search airline...',
@@ -56,11 +46,11 @@ const getLocalControls = (service_type, shipment_data) => {
 				rules         : { required: 'Air Line Details is Required' },
 			},
 			{
-				name           : 'destiantion_service_provider_id',
+				name           : 'destination_service_provider_id',
 				type           : 'select',
 				span           : 5,
 				label          : 'Service Provider (Air Local Destination)',
-				value          : import_values?.service_provider_id,
+				value          : formattedValue?.service_provider_id,
 				optionsListKey : 'verified-service-providers',
 				placeholder    : 'Select Service Provider',
 				rules          : { required: 'Service Provider is Required' },

@@ -4,17 +4,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 const useRequestAssignChat = () => {
-	const { uuid:{ sagar_bankar_user_id = '' } } = GLOBAL_CONSTANTS;
 	const [{ loading }, trigger] = useRequest({
 		url    : '/request_assign_chat',
 		method : 'post',
 	}, { manual: true });
 
-	const requestForAssignChat = async (payload = {}) => {
+	const requestForAssignChat = async ({ payload = {} }) => {
 		try {
 			await trigger({
 				data: {
-					agent_id: sagar_bankar_user_id,
+					agent_id: GLOBAL_CONSTANTS.uuid.sagar_bankar_user_id,
 					...payload,
 				},
 			});

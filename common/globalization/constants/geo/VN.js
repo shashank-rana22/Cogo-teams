@@ -148,6 +148,7 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
@@ -205,8 +206,12 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_shipment_agent_ids: [
+		cogo_one_admin_user_ids     : [], // todo
+		cogo_one_shipment_agent_ids : [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		cogo_one_kam_agent_ids: [
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
 		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
 		fortigo_network_ids : [
@@ -344,7 +349,7 @@ export default {
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
@@ -378,7 +383,26 @@ export default {
 				label: '501 Cogoport Vietnam', value: '501',
 			},
 		],
-		migration_status: [],
+		migration_status : [],
+		timezone         : [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -422,8 +446,9 @@ export default {
 				validate_registration: false,
 			},
 			cogo_one: {
-				has_voice_call_access : false,
-				default_country_code  : 'IN',
+				has_voice_call_access     : false,
+				default_country_code      : 'IN',
+				template_default_language : 'vietnamese',
 			},
 		},
 	},

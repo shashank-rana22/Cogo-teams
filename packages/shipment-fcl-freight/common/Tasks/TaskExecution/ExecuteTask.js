@@ -29,6 +29,8 @@ const TRADE_PARTY_TYPE = {
 	add_shipper_details: {trade_party_type: 'shipper'}
 }
 
+const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
+
 function ExecuteTask({
 	task = {},
 	onCancel = () => {},
@@ -50,7 +52,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
 		: {};
 
 	if (loading) {
@@ -209,7 +211,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

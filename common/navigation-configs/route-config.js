@@ -2,9 +2,11 @@ import airRepository from './config/air-repository';
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
+import bookingDeskAir from './config/booking-desk-air';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -23,6 +25,7 @@ import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
+import liabilityDashboard from './config/liability-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
@@ -32,7 +35,6 @@ import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
-import shipmentAir from './config/shipment-air';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -76,7 +78,7 @@ const routeConfig = {
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
-	...shipmentAir,
+	...bookingDeskAir,
 	...shipmentAirFreight,
 	...shipmentAirFreightLocal,
 	...shipmentAirCustoms,
@@ -103,11 +105,13 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...awbInventory,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
 	...shipmentLtlFreight,
 	...ticketManagement,
+	...liabilityDashboard,
 	...rfqDashboard,
 };
 

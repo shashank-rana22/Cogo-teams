@@ -18,8 +18,7 @@ const useListCogoEntities = () => {
 				trigger({
 					params: {
 						filters: {
-							status : 'active',
-							id     : countryCode === 'IN' ? undefined : id,
+							status: 'active',
 						},
 						page_limit : 100,
 						page       : 1,
@@ -29,7 +28,7 @@ const useListCogoEntities = () => {
 				console.log(e, 'e');
 			}
 		})();
-	}, [countryCode, id, trigger]);
+	}, [trigger]);
 
 	useEffect(() => {
 		getCogoList();
