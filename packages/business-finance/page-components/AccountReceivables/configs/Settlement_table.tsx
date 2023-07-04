@@ -144,18 +144,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 	},
 
 	{
-		Header: (
-			<div style={{ display: 'flex' }}>
-				<span style={{ marginRight: '8px' }}>Amount</span>
-				<GetSortingData
-					setSort={setSort}
-					sort={sort}
-					type="amount"
-					settlementFilters={settlementFilters}
-					setSettlementFilters={setSettlementFilters}
-				/>
-			</div>
-		),
+		Header   : 'Amount',
 		id       : 'amount',
 		accessor : (row) => (
 
