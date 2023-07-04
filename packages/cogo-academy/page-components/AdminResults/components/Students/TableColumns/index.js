@@ -125,15 +125,14 @@ const getAppearedColumns = ({
 		id       : 'time_taken',
 		accessor : ({ time_taken = '' }) => {
 			const timeTaken = Math.ceil(time_taken);
-			return (
-				(time_taken) ? (
-					<div className={styles.section}>
-						{timeTaken}
-						{' '}
-						{timeTaken > SINGULAR_VALUE ? 'mins' : 'min'}
-					</div>
-				) : (<div className={styles.section}> - </div>)
-			);
+
+			return time_taken ? (
+				<div className={styles.section}>
+					{timeTaken}
+					{' '}
+					{timeTaken > SINGULAR_VALUE ? 'mins' : 'min'}
+				</div>
+			) : <div className={styles.section}> - </div>;
 		},
 	},
 	{
