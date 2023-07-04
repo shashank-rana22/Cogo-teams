@@ -6,9 +6,9 @@
 .flex {
 	display: flex;
 	align-items: center;
-	padding: 4px 12px;
 	justify-content: space-between;
 	width: 98%;
+	padding: 4px 12px;
 }
 
 .modal_container {
@@ -16,7 +16,7 @@
 }
 
 .heading {
-	font-weight: 600;
-	font-size: 18px;
 	margin-right: 12px;
+	font-size: 18px;
+	font-weight: 600;
 }
