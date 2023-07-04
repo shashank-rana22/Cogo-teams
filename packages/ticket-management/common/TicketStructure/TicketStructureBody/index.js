@@ -22,9 +22,10 @@ function TicketStructureBody({
 		Type: type = '',
 		ActivityCount: activityCount = 0,
 		IsClosureAuthorizer: isClosureAuthorizer = false,
+		TicketStatus: ticketStatus= '',
 	} = data;
 
-	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
+	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
