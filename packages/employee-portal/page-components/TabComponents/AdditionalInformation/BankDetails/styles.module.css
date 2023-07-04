@@ -9,10 +9,6 @@
 	}
 }
 
-.sup {
-	color: #cb6464;
-}
-
 .control_container {
 	display: flex;
 	flex-flow: column wrap;
