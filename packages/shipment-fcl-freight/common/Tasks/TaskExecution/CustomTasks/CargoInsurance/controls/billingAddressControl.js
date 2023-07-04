@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
 export const billingAddressControl = ({ setValue = () => {} }) => [
@@ -10,7 +11,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : formValuePatterns.GST_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns.gst_number,
 				message : 'GST Number is invalid',
 			},
 			required: 'GST Number is required',
@@ -90,7 +91,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : formValuePatterns.PAN_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns.pan_number,
 				message : 'Enter a valid PAN',
 			},
 			required: 'PAN Number is required',

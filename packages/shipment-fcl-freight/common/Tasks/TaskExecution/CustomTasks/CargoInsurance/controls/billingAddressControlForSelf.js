@@ -1,4 +1,4 @@
-import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 export const billingAddressControlForSelf = [
 	{
@@ -11,7 +11,7 @@ export const billingAddressControlForSelf = [
 		disabled    : false,
 		rules       : {
 			pattern: {
-				value   : formValuePatterns.PAN_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns.pan_number,
 				message : 'Enter a valid PAN',
 			},
 			required: { value: true, message: 'PAN Number is required' },

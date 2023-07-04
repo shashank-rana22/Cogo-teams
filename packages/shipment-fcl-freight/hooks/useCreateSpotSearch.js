@@ -24,6 +24,11 @@ const useCreateSpotSearch = ({
 	}, { manual: true });
 
 	const handleAddCargoInsurance = async (values) => {
+		const {
+			cargo_value, cargo_value_currency, country_id, cargo_insurance_commodity,
+			cargo_insurance_commodity_description,
+		} = values || {};
+
 		const payload = {
 			search_type                         : 'cargo_insurance',
 			source                              : 'upsell',
@@ -36,17 +41,16 @@ const useCreateSpotSearch = ({
 					risk_coverage                : 'all_risk',
 					trade_type,
 					transit_mode                 : `${transitMode}`.toLowerCase(),
-					cargo_value                  : values.cargo_value,
-					cargo_value_currency         : values.cargo_value_currency,
-					cargo_insurance_commodity_id : values.cargo_insurance_commodity,
-					cargo_insurance_country_id   : values.country_id,
+					cargo_value,
+					cargo_value_currency,
+					cargo_insurance_commodity_id : cargo_insurance_commodity,
+					cargo_insurance_country_id   : country_id,
 					origin_country_id,
 					destination_country_id,
 					commodity,
-					cargo_insurance_commodity_description:
-						values.cargo_insurance_commodity_description,
-					status    : 'active',
-					saas_rate : { ...rateData },
+					cargo_insurance_commodity_description,
+					status                       : 'active',
+					saas_rate                    : { ...rateData },
 				},
 			],
 		};

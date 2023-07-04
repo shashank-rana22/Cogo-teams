@@ -1,4 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const geo = getGeoConstants();
 
 const controls = [
 	{
@@ -25,7 +27,7 @@ const controls = [
 		type           : 'select',
 		span           : 4,
 		optionsListKey : 'currencies',
-		value          : `${GLOBAL_CONSTANTS.currency_code.USD}`,
+		value          : `${geo.country.currency.code}`,
 		validations    : [{ type: 'required', message: 'Currency is required' }],
 	},
 	{
