@@ -190,6 +190,7 @@ function TicketChat({
 					setShowReassign={setShowReassign}
 					getTicketActivity={getTicketActivity}
 					getTicketDetails={getTicketDetails}
+					setListData={setListData}
 				/>
 			</Modal.Body>
 		</>

@@ -22,7 +22,7 @@ function TicketStructureBody({
 		Type: type = '',
 		ActivityCount: activityCount = 0,
 		IsClosureAuthorizer: isClosureAuthorizer = false,
-		TicketStatus: ticketStatus= '',
+		TicketStatus: ticketStatus = '',
 	} = data;
 
 	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};

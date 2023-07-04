@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function ReassignTicket({
 	ticketId, showReassign, setShowReassign, getTicketActivity,
 	getTicketDetails,
+	setListData,
 }) {
 	const [userData, setUserData] = useState({});
 
@@ -25,6 +26,7 @@ function ReassignTicket({
 		ticketId,
 		getTicketActivity,
 		getTicketDetails,
+		setListData,
 	});
 
 	const handleClose = () => {

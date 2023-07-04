@@ -3,6 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const DEFAULT_ACTIVITY_PAGE = 0;
+
 const getPayload = ({ profile, ticketId, val, additionalData }) => ({
 	PerformedByID : profile?.user?.id,
 	TicketID      : Number(ticketId),
@@ -12,6 +14,7 @@ const getPayload = ({ profile, ticketId, val, additionalData }) => ({
 
 const useReassignTicket = ({
 	ticketId,
+	setListData = () => {},
 	getTicketActivity = () => {},
 	getTicketDetails = () => {},
 }) => {
@@ -35,8 +38,12 @@ const useReassignTicket = ({
 
 		try {
 			await trigger({ data: getPayload({ profile, ticketId, val, additionalData }) });
-
-			getTicketActivity();
+			setListData({
+				items       : [],
+				page        : 0,
+				total_pages : 0,
+			});
+			getTicketActivity(DEFAULT_ACTIVITY_PAGE);
 			getTicketDetails(ticketId);
 			Toast.success('Assigned Successfully.');
 		} catch (error) {
