@@ -16,6 +16,8 @@ const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
 const WATCH_SALARY_SLIP = 'salary_slip';
 const WATCH_OFFER_LETTER = 'offer_letter';
 
+const DEFAULT_INDEX = 0;
+
 function EmploymentHistory({ getEmployeeDetails, data }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -50,16 +52,24 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 			started_at : new Date(item.started_at),
 			ended_at   : new Date(item.ended_at),
 		})));
+		setValue('salary_slip', employee_experience_details?.[DEFAULT_INDEX]?.payslip);
+		setValue('offer_letter', employee_experience_details?.[DEFAULT_INDEX]?.offer_letter);
 	}, [employee_experience_details, setValue]);
+
+	useEffect(() => {
+		if (employee_experience_details) {
+			setIsChecked(true);
+		}
+	}, [employee_experience_details]);
 
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.check}>
 				<Checkbox
-					onChange={() => setIsChecked((pv) => !pv)}
+					label="I have prior work experience"
+					onChange={() => setIsChecked((prev) => !prev)}
 					checked={isChecked}
 				/>
-				I have prior work experience
 			</div>
 			{isChecked ? (
 				<>
@@ -74,7 +84,6 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 							if (type === CONTROL_TYPE_FIELD_ARRAY) {
 								return (
 									<FieldArray
-										Array
 										name={FORM_TYPE_EMPLOYMENT_HISTORY}
 										control={control}
 										controls={controlItem?.controls}

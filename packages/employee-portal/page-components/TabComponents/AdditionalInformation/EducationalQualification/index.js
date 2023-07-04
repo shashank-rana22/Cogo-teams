@@ -51,7 +51,6 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 						return (
 							<FieldArray
 								{...controlItem}
-								Array
 								name={FORM_TYPE_EDUCATIONAL_QUALIFICATION}
 								control={control}
 								controls={controlItem?.controls}
