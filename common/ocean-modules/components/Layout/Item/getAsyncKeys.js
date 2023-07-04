@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 const getAsyncFields = (key) => {
 	const OPTIONS = {
 		'shipping-lines': {
