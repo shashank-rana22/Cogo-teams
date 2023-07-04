@@ -1,5 +1,5 @@
+import { getDate } from '../../../utils/getDate';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
 import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
