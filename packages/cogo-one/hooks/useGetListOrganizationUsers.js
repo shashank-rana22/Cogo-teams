@@ -1,6 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const getPayload = ({ organizationId = '' }) => ({
+	filters: {
+		organization_id: organizationId,
+	},
+	page_limit: 100,
+});
+
 const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = false }) => {
 	const [
 		{ data, loading }, trigger,
@@ -12,12 +19,7 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 	const listOrganizationsUsers = useCallback(() => {
 		try {
 			trigger({
-				params: {
-					filters: {
-						organization_id: organizationId,
-					},
-					page_limit: 100,
-				},
+				params: getPayload({ organizationId }),
 			});
 		} catch (error) {
 			console.error(error);
