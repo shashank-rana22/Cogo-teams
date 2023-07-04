@@ -66,6 +66,13 @@ export interface Options {
 	name?:string;
 }
 
+export interface RadioOptions {
+	label?: string;
+	name: string;
+	disabled?: boolean;
+	value: string;
+}
+
 export interface ControlProps {
 	span?: number,
 	name?: string,
