@@ -28,12 +28,16 @@
     align-items: center;
 
   }
-  .pending_right
+  .right_bolder
   {
-   font-weight:Bold;
+   font-weight:500;
    font-size: 26px;
   }
-
+.right_lighter
+{
+  font-weight:500;
+   font-size: 16px;
+}
 .onboarded_rejected{
   width:66%;
   height:138px;
@@ -41,12 +45,16 @@
   background-color: #F7FAEF;
   border-radius:8px;
   display:flex;
-  align-items: center;
-  justify-content: center;
+  padding-top:10px;
+  padding-bottom:10px;
 }
 .onboarded{
+width:50%;
 display:flex;
 align-items: center;
+justify-content: center;
+border-right:1px solid #849E4C
+
 }
 .onboarded_left{
  margin-right: 36px;
@@ -57,7 +65,9 @@ align-items: center;
 }
 .rejected{
 display:flex;
+width:50%;
 align-items: center;
+justify-content:center;
 }
 .rejected_left{
   margin-right: 36px;

@@ -1,3 +1,5 @@
+import { IcMAppDocumentUpload } from '@cogoport/icons-react';
+
 import styles from './styles.module.css';
 
 function Stats() {
@@ -6,12 +8,12 @@ function Stats() {
 			<div className={styles.pending}>
 				<div className={styles.pending_left}>
 					<div className={styles.circle}>
-						ifnners
+						<IcMAppDocumentUpload />
 					</div>
 				</div>
 				<div className={styles.pending_right}>
-					<div>180</div>
-					<div>Suppliers Pending</div>
+					<div className={styles.right_bolder}>180</div>
+					<div className={styles.right_lighter}>Suppliers Pending</div>
 
 				</div>
 			</div>
@@ -23,8 +25,8 @@ function Stats() {
 						</div>
 					</div>
 					<div className={styles.onboarded_right}>
-						<div>640</div>
-						<div>Suppliers Onboarded</div>
+						<div className={styles.right_bolder}>640</div>
+						<div className={styles.right_lighter}>Suppliers Onboarded</div>
 					</div>
 				</div>
 				<div className={styles.rejected}>
@@ -34,8 +36,8 @@ function Stats() {
 						</div>
 					</div>
 					<div className={styles.rejected_right}>
-						<div>640</div>
-						<div>Suppliers Rejected</div>
+						<div className={styles.right_bolder}>640</div>
+						<div className={styles.right_lighter}>Suppliers Rejected</div>
 					</div>
 				</div>
 			</div>
