@@ -1,25 +1,22 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+// import EDUCATION_LEVEL_DEGREE_MAPPING from './educationLevelDegreeMapping';
+
 const EDUCATION_LEVEL_OPTIONS = [
 	{ label: '10th', value: '10th' },
 	{ label: '12th', value: '12th' },
-	{ label: 'B.Tech', value: 'B.Tech' },
-	{ label: 'M.Tech', value: 'M.Tech' },
-	{ label: 'MBA', value: 'MBA' },
-	{ label: 'B.Sc', value: 'B.Sc' },
-	{ label: 'M.Sc', value: 'M.Sc' },
-	{ label: 'B.Com', value: 'M.Com' },
-	{ label: 'BCA', value: 'BCA' },
-	{ label: 'MCA', value: 'MCA' },
 	{ label: 'Diploma', value: 'Diploma' },
+	{ label: 'Graduate degree', value: 'graduate_degree' },
+	{ label: 'Post Graduates degree', value: 'post_graduates_degree' },
+	{ label: 'Doctorate degree', value: 'doctorate_degree' },
 ];
 
-const getControls = [{
+const getControls = () => [{
 	name     : 'education_qualifications',
 	type     : 'fieldArray',
 	controls : [
 		{
-			name        : 'type',
+			name        : 'education_level',
 			label       : 'Education Level',
 			type        : 'createselect',
 			options     : EDUCATION_LEVEL_OPTIONS,
@@ -68,8 +65,10 @@ const getControls = [{
 		{
 			name        : 'degree',
 			label       : 'Degree',
-			type        : 'input',
+			type        : 'select',
+			// options     : EDUCATION_LEVEL_DEGREE_MAPPING?.[watchEducationLevel],
 			placeholder : 'Enter Degree',
+			// disabled    : isEmpty(EDUCATION_LEVEL_DEGREE_MAPPING?.[watchEducationLevel]),
 		},
 		{
 			name        : 'specialization',

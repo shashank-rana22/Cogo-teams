@@ -5,14 +5,16 @@ import { useEffect } from 'react';
 import FieldArray from '../../../../commons/FieldArray';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
-import controls from './controls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
 const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
 const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
 
 function EducationalQualification({ getEmployeeDetails, data }) {
-	const { handleSubmit, control, setValue } = useForm();
+	const { handleSubmit, control, setValue, watch } = useForm();
+
+	const controls = getControls();
 
 	const { detail } = data || {};
 
