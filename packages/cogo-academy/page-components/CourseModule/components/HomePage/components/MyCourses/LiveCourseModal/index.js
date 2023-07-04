@@ -6,9 +6,9 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const LIVE_COURSES = {
-	introduction_to_cogoport : GLOBAL_CONSTANTS?.drive_link?.introduction_to_cogoport_link,
-	git_course               : GLOBAL_CONSTANTS?.drive_link?.git_course_link,
-	html_css_course          : GLOBAL_CONSTANTS?.drive_link?.html_css_course_link,
+	introduction_to_cogoport : GLOBAL_CONSTANTS.drive_link.introduction_to_cogoport_link,
+	git_course               : GLOBAL_CONSTANTS.drive_link.git_course_link,
+	html_css_course          : GLOBAL_CONSTANTS.drive_link.html_css_course_link,
 };
 
 const onClickOpen = (url) => {

@@ -55,7 +55,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		additional_information : true,
 		day_1                  : signDocEnableContd,
 		sign_your_docs         : signDocEnableContd && !isEmpty(signed_documents),
-		company_policies       : signDocEnableContd && documents_signed?.documents_signed,
+		company_policies       : signDocEnableContd && documents_signed?.documents_signed && !isEmpty(signed_documents),
 		// maps: {
 		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
