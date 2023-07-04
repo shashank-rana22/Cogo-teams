@@ -1,14 +1,11 @@
 import { Toggle } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { IcMEmail } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import getElementController from '../../../../../../../../../../commons/forms/getElementController';
 import ToEmailList from '../ToEmailList';
 
 import controls from './controls';
-import getPrefilledValues from './getPrefilledValues';
 import styles from './styles.module.css';
 
 const removeTypeField = (controlItem) => {
@@ -16,30 +13,17 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function EmailComponent({ detail, organization = {}, billing_addresses = [] }) {
-	const { agent_id } = useSelector(({ profile }) => ({
-		agent_id: profile?.id,
-	}));
-
-	const prefilledValues = getPrefilledValues(detail, [
-		organization?.agent_id,
-		agent_id,
-	]);
-
+function EmailComponent({
+	detail,
+	organization = {},
+	billing_addresses = [],
+	setSelected = () => {},
+	selected,
+	emailContent,
+	emailControl: control,
+	emailErrors: errors,
+}) {
 	const [activateTerms, setActivateTerms] = useState(true);
-
-	const {
-		control,
-		handleSubmit,
-		setValue,
-		formState: { errors },
-	} = useForm();
-
-	useEffect(() => {
-		Object.entries(prefilledValues).forEach(([key, value]) => {
-			setValue(key, value);
-		});
-	}, [prefilledValues, setValue]);
 
 	return (
 		<div className={styles.container}>
@@ -48,7 +32,14 @@ function EmailComponent({ detail, organization = {}, billing_addresses = [] }) {
 				<div className={styles.heading}>Customize Email</div>
 			</div>
 
-			<ToEmailList billing_addresses={billing_addresses} organization={organization} detail={detail} />
+			<ToEmailList
+				billing_addresses={billing_addresses}
+				organization={organization}
+				detail={detail}
+				setSelected={setSelected}
+				selected={selected}
+				emailContent={emailContent}
+			/>
 
 			<div className={styles.sub_heading}>Edit Email Content</div>
 

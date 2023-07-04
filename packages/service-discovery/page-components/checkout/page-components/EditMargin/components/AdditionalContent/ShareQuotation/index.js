@@ -127,7 +127,7 @@ function ShareQuotation({
 		}
 
 		if (selectedModes.includes('email') && selectedModes.length === 1) {
-			return { size: 'lg', widths: { email: '100%', message: '0%' } };
+			return { size: 'xl', widths: { email: '100%', message: '0%' } };
 		}
 
 		return { size: 'md', widths: { email: '0%', message: '100%' } };

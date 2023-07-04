@@ -10,6 +10,9 @@ function Customize({
 	billing_addresses = [],
 	setSelected,
 	selected,
+	emailContent,
+	emailControl,
+	emailErrors,
 }) {
 	const { email, message } = widths;
 
@@ -21,6 +24,11 @@ function Customize({
 						detail={detail}
 						organization={organization}
 						billing_addresses={billing_addresses}
+						setSelected={setSelected}
+						selected={selected}
+						emailContent={emailContent}
+						emailControl={emailControl}
+						emailErrors={emailErrors}
 					/>
 				</div>
 			) : null}

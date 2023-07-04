@@ -15,6 +15,10 @@
 		.ui_checkbox_group_container {
 			padding: 10px 0;
 		}
+
+		.ui_checkbox_container {
+			margin-left: unset;
+		}
 	}
 }
 

@@ -33,7 +33,7 @@
 .flex {
 	display: flex;
 	align-items: center;
-	margin-bottom: 20px;
+	margin-bottom: 4px;
 
 	svg {
 		color: #2f9df6;
