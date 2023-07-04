@@ -52,6 +52,9 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	const presentValues = watch(['current_city', 'current_state', 'current_country',
 		'current_pincode', 'current_address']);
 
+	const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
+		&& permanentValues?.[INITIAL_INDEX] !== undefined;
+
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
 	};
@@ -106,16 +109,14 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			));
 		} else {
 			CURRENT_ADDRESS_MAPPING.map((element) => (
-				setValue(element, ADDRESS_MAPPING[element] || '')
+				setValue(element, '')
 			));
 		}
 	};
 
 	useEffect(() => {
-		const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
-			&& permanentValues?.[INITIAL_INDEX] !== undefined;
 		setAddress(equalityCheck);
-	}, [permanentAddress, permanentValues, presentValues]);
+	}, [equalityCheck]);
 
 	return (
 		<div className={styles.whole_container}>
@@ -196,8 +197,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			</div>
 
 			<div className={styles.check}>
-				<Checkbox onChange={handleAddressChange} checked={address} />
-				Current Address is same as Permanent Address
+				<Checkbox
+					label="Current Address is same as Permanent Address"
+					onChange={handleAddressChange}
+					checked={address}
+				/>
 			</div>
 
 			<div className={styles.button}>
