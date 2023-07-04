@@ -226,7 +226,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 							<h4>Select Date</h4>
 							<Datepicker
 								placeholder="Enter Date"
-								dateFormat="MM/dd/yyyy"
+								dateFormat="dd/MM/yyyy"
 								name="oneTimeDate"
 								onChange={(date) => {
 									const newDate = new Date(date);
