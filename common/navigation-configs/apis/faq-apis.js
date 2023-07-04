@@ -437,6 +437,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_duplicate_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	list_courses: [
 		{
@@ -610,6 +615,11 @@ const faq = {
 		},
 		{
 			api          : 'create_course_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_user_course',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
