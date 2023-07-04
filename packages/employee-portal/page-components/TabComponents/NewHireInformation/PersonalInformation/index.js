@@ -147,7 +147,8 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
 		});
-	}, [controlsvalue, content?.detail, setValue]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [content?.detail, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
