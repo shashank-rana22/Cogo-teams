@@ -111,7 +111,7 @@ export function CardBody({ charge, type }: Props) {
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{lineItem?.priceQuotation && lineItem?.currencyQuotation ? formatAmount({
+							{(lineItem?.priceQuotation && lineItem?.currencyQuotation) ? formatAmount({
 								amount   : lineItem?.priceQuotation,
 								currency :	lineItem?.currencyQuotation,
 								options  : {
@@ -124,7 +124,7 @@ export function CardBody({ charge, type }: Props) {
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{lineItem?.priceActual && lineItem?.currencyActual ? formatAmount({
+							{(lineItem?.priceActual && lineItem?.currencyActual) ? formatAmount({
 								amount   :	lineItem?.priceActual,
 								currency :	lineItem?.currencyActual,
 								options  : {

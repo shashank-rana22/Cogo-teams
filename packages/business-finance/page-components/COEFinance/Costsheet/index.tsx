@@ -289,7 +289,7 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{sellData?.totalQuotational && sellData?.currencyQuotational
+								{(sellData?.totalQuotational && sellData?.currencyQuotational)
 									? formatAmount({
 										amount   : sellData?.totalQuotational,
 										currency : sellData?.currencyQuotational,
@@ -343,7 +343,7 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{buyData?.totalQuotational && buyData?.currencyQuotational
+								{(buyData?.totalQuotational && buyData?.currencyQuotational)
 									? formatAmount({
 										amount   : buyData?.totalQuotational,
 										currency : buyData?.currencyQuotational,
