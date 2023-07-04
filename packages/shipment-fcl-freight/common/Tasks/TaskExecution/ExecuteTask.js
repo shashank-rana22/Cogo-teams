@@ -25,7 +25,6 @@ const excludeServices = [
 	'haulage_freight_service',
 ];
 const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
-const STEPS_LENGTH = 1;
 
 const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
