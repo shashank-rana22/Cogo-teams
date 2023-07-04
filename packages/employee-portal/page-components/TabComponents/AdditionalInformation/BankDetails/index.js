@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
@@ -9,15 +9,18 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 0;
+const INITIAL_INDEX = 1;
 const CONTROL_TYPE_FILE_UPLOAD = 'fileUpload';
 
 const BANK_DETAILS_MAPPING = [
 	'ifsc_code',
 	'account_holder_name',
-	'bank_name', 'bank_branch_name', 'account_number', 'cancelled_check_url'];
+	'bank_name', 'bank_branch_name', 'account_number', 'account_number_confirmation', 'cancelled_check_url'];
 
 function BankDetails({ getEmployeeDetails, data: info }) {
-	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, watch } = useForm();
+
+	const bankAccountNumber = watch(['account_number', 'account_number_confirmation']);
 
 	const { bank_details = [], detail } = info || {};
 
@@ -31,13 +34,21 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	};
 
 	const onSubmit = (values) => {
-		createEmployeeBankDetails({ values, id });
+		if (bankAccountNumber[DEFAULT_INDEX] === bankAccountNumber[INITIAL_INDEX]) {
+			createEmployeeBankDetails({ values, id });
+		} else {
+			Toast.error('Bank Account Number in both the fields should be same');
+		}
 	};
 
 	useEffect(() => {
-		(BANK_DETAILS_MAPPING || []).map((element) => (
-			setValue(element, bank_details?.[DEFAULT_INDEX]?.[element])
-		));
+		(BANK_DETAILS_MAPPING || []).forEach((element) => {
+			if (element === 'account_number_confirmation') {
+				setValue(element, bank_details?.[DEFAULT_INDEX]?.account_number);
+			} else {
+				setValue(element, bank_details?.[DEFAULT_INDEX]?.[element]);
+			}
+		});
 	}, [bank_details, setValue]);
 
 	return (

@@ -32,6 +32,13 @@ const controls = [
 	{
 		name        : 'account_number',
 		label       : 'Bank Account Number',
+		type        : 'password',
+		placeholder : 'Enter Bank Account Number',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'account_number_confirmation',
+		label       : 'Reenter Bank Account Number',
 		type        : 'number',
 		placeholder : 'Enter Bank Account Number',
 		rules       : { required: 'This is required' },
