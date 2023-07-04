@@ -25,7 +25,7 @@ const extraApiPayload = (values, end_point, task) => {
 		};
 	}
 
-	if (end_point === 'create_shipment_document') {
+	if (end_point === 'create_shipment_document' || end_point === 'fcl_freight/create_document') {
 		let documentArr = values?.documents;
 
 		if (!documentArr) documentArr = [values];
@@ -103,6 +103,7 @@ const extraApiPayload = (values, end_point, task) => {
 
 		return payload;
 	}
+
 	return values;
 };
 export default extraApiPayload;
