@@ -68,7 +68,7 @@ const useUpdateRatesPreferences = ({
 
 		const final_payload = {
 			is_confirmation_set_by_rd : true,
-			SERVICE_PROVIDERS,
+			service_providers         : SERVICE_PROVIDERS,
 			booking_confirmation_docs : BOOKING_CONFIRMATION_DOCS,
 			service_id                : service_id || undefined,
 			service_type              : service_type || undefined,
