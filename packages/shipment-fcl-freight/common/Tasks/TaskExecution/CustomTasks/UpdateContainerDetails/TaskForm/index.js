@@ -33,8 +33,8 @@ function TaskForm({
 		modifiedControls,
 		showElements,
 		errors,
-		onSubmit,
-		handleSubmit,
+		onSubmit = () => {},
+		handleSubmit = () => {},
 	} = formProps || {};
 
 	return (
@@ -86,7 +86,7 @@ function TaskForm({
 			</div>
 
 			<div className={styles.button_wrap}>
-				<Button themeType="secondary" onClick={() => onCancel()} disabled={loading}>
+				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
 					Cancel
 				</Button>
 
