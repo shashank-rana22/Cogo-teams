@@ -73,6 +73,7 @@ function SingleService({
 	(groupedServicesData || []).forEach((data) => {
 		OPTIONS.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
+
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[DEFAULT_INDEX]);
 	}, [groupedServicesData]);
@@ -82,7 +83,8 @@ function SingleService({
 	const availableRatesForRD = getAvailableRatesDetails({ currentFormatedrates, systemFormatedRates });
 	useEffect(() => {
 		setRateOptions({ ...rateOptions, [singleServiceData?.id]: availableRatesForRD });
-	}, [availableRatesForRD, rateOptions, singleServiceData?.id, setRateOptions]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(availableRatesForRD)]);
 
 	const singleServiceSellRateDetails = getSellRateDetailPayload({
 		currentFormatedrates,
@@ -93,7 +95,9 @@ function SingleService({
 
 	useEffect(() => {
 		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: singleServiceSellRateDetails });
-	}, [singleServiceSellRateDetails, setSellRateDetails, sellRateDetails, singleServiceData?.id]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(singleServiceSellRateDetails)]);
+
 	const rateCardObj = [
 		{
 			prefrence_key : 'system',

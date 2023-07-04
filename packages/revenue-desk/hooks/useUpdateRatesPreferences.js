@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import { DEFAULT_INDEX, INCREMENT_BY_ONE } from '../page-components/constants';
+
 const useUpdateRatesPreferences = ({
 	supplierPayload,
 	inventory,
@@ -28,7 +30,7 @@ const useUpdateRatesPreferences = ({
 		const SERVICE_PROVIDERS = [];
 		(supplierPayload?.[service_id] || []).forEach((provider, index) => {
 			SERVICE_PROVIDERS.push({
-				priority                    : index + 1,
+				priority                    : index + INCREMENT_BY_ONE,
 				rate_id                     : provider?.rate_id,
 				id                          : provider?.id,
 				validity_id                 : provider?.validity_id,
@@ -38,12 +40,12 @@ const useUpdateRatesPreferences = ({
 		(inventory?.[service_id] || []).forEach((docs) => {
 			const DOC_OBJECT = {};
 
-			DOC_OBJECT.ids = docs?.allid?.[0].includes(':')
-				? docs?.allid?.[0].split(':')
+			DOC_OBJECT.ids = docs?.allid?.[DEFAULT_INDEX].includes(':')
+				? docs?.allid?.[DEFAULT_INDEX].split(':')
 				: docs.allid;
 
 			DOC_OBJECT.priority = docs?.priority;
-			DOC_OBJECT.type = docs?.type?.split('_booking')[0];
+			DOC_OBJECT.type = docs?.type?.split('_booking')[DEFAULT_INDEX];
 			if (docs?.type === 'single_booking_notes') {
 				SINGLE_BOOKING_DOCS.push(DOC_OBJECT);
 			}
@@ -62,13 +64,13 @@ const useUpdateRatesPreferences = ({
 		];
 		(confirmationDocs || []).forEach((docs, index) => {
 			const DOC_OBJECT = docs;
-			DOC_OBJECT.priority = index + 1;
+			DOC_OBJECT.priority = index + INCREMENT_BY_ONE;
 			BOOKING_CONFIRMATION_DOCS.push(DOC_OBJECT);
 		});
 
 		const final_payload = {
 			is_confirmation_set_by_rd : true,
-			SERVICE_PROVIDERS,
+			service_providers         : SERVICE_PROVIDERS,
 			booking_confirmation_docs : BOOKING_CONFIRMATION_DOCS,
 			service_id                : service_id || undefined,
 			service_type              : service_type || undefined,
