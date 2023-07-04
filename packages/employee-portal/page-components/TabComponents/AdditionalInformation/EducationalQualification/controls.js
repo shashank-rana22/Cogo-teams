@@ -1,7 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-// import EDUCATION_LEVEL_DEGREE_MAPPING from './educationLevelDegreeMapping';
-
 const EDUCATION_LEVEL_OPTIONS = [
 	{ label: '10th', value: '10th' },
 	{ label: '12th', value: '12th' },
@@ -66,9 +64,7 @@ const getControls = () => [{
 			name        : 'degree',
 			label       : 'Degree',
 			type        : 'select',
-			// options     : EDUCATION_LEVEL_DEGREE_MAPPING?.[watchEducationLevel],
 			placeholder : 'Enter Degree',
-			// disabled    : isEmpty(EDUCATION_LEVEL_DEGREE_MAPPING?.[watchEducationLevel]),
 		},
 		{
 			name        : 'specialization',

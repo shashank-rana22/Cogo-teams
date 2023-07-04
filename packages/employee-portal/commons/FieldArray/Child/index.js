@@ -1,7 +1,6 @@
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { IcMDelete } from '@cogoport/icons-react';
 
-import EDUCATION_LEVEL_DEGREE_MAPPING from
-	'../../../page-components/TabComponents/AdditionalInformation/EducationalQualification/educationLevelDegreeMapping';
 import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
@@ -13,8 +12,8 @@ const FIELD_TYPE_UPLOAD = 'fileUpload';
 const DELETE_BUTTON_HEIGHT = '26px';
 const DELETE_BUTTON_WIDTH = '26px';
 const DELETE_BUTTON_CURSOR = 'pointer';
-
 const DISABLE_OPTIONS = ['10th', '12th', 'Diploma'];
+const COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -34,6 +33,9 @@ function Child(props) {
 		error = {},
 		watchField,
 	} = props;
+
+	const countrySpecificOptions = getCountryConstants({ country_id: COUNTRY_ID });
+	const educationLevelOptions = countrySpecificOptions?.options?.education_level;
 
 	const { education_level } = watchField || {};
 
@@ -61,7 +63,7 @@ function Child(props) {
 									name={`${name}.${index}.${controlItem.name}`}
 									className={styles[`element_${controlItem.name}`]}
 									options={controlItem?.name === 'degree' && name === 'educational_qualification'
-										? EDUCATION_LEVEL_DEGREE_MAPPING?.[education_level] : controlItem?.options}
+										? educationLevelOptions?.[education_level] : controlItem?.options}
 									disabled={
 										!!(controlItem?.name === 'degree' && DISABLE_OPTIONS.includes(education_level))
 }
