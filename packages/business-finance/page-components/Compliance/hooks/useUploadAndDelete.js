@@ -22,7 +22,7 @@ const useUploadAndDelete = ({ refetch }) => {
 	const deleteId = async (id) => {
 		try {
 			await trigger({
-				params: {
+				data: {
 					id,
 				},
 			});

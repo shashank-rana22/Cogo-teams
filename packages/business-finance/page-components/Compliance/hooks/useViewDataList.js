@@ -50,7 +50,7 @@ const useViewDataList = ({ id, docType, irnStatus, tradePartyGst }) => {
 	const deleteInvoice = async (idDeleteInvoice) => {
 		try {
 			await deleteTrigger({
-				params: {
+				data: {
 					id: idDeleteInvoice,
 				},
 			});
