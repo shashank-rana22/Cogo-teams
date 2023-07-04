@@ -18,7 +18,7 @@ const getDefaultValues = (oldfields) => {
 		}
 		return rest;
 	});
-	return { DEFAULT_VALUES, fields: newfields };
+	return { defaultValues: DEFAULT_VALUES, fields: newfields };
 };
 
 const useEditLineItems = ({
@@ -84,13 +84,13 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	const { DEFAULT_VALUES, fields } = getDefaultValues(controls);
+	const { defaultValues:DEFAULT_VALUES, fields } = getDefaultValues(controls);
 	const {
 		watch,
 		handleSubmit,
 		control,
 		formState: { isDirty },
-	} = useForm({ DEFAULT_VALUES });
+	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const formValues = watch();
 
