@@ -13,12 +13,6 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
-	{ label: 'Cancel', value: 'cancel' },
-];
-
 function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
@@ -26,6 +20,7 @@ function EditCancelService({ serviceData = {} }) {
 	const { state, trade_type, service_type } = serviceData || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
+
 	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
@@ -35,13 +30,25 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
+	const actionButtons = [
+		{
+			label : 'Edit',
+			value : 'supplier_reallocation',
+			show  : getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }),
+		},
+		{
+			label : 'Edit Params',
+			value : 'edit_params',
+			show  : getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder }),
+		},
+		{
+			label : 'Cancel',
+			value : 'cancel',
+			show  : getCanCancelService({ state, activeStakeholder }),
+		},
+	];
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
-		return null;
-	}
+	if (!actionButtons.some((actionButton) => actionButton.show)) { return null; }
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<div
