@@ -24,9 +24,9 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = REVENUE_DESK_SERVICES.includes(task.service_type) ? SELECT_RATE_STEP : EDIT_RATE_STEP;
+	const initialStep = REVENUE_DESK_SERVICES.includes(task.service_type) ? SELECT_RATE_STEP : EDIT_RATE_STEP;
 	const [selectedCard, setSelectedCard] = useState(null);
-	const [step, setStep] = useState(intialStep);
+	const [step, setStep] = useState(initialStep);
 
 	if (step === SELECT_RATE_STEP) {
 		return (
