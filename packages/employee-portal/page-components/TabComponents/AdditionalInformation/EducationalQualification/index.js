@@ -13,6 +13,7 @@ const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
 
 function EducationalQualification({ getEmployeeDetails, data }) {
 	const { handleSubmit, control, setValue, watch } = useForm();
+	const watchValues = watch();
 
 	const controls = getControls();
 
@@ -55,6 +56,7 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
+								watch={watchValues?.educational_qualification}
 							/>
 
 						);
