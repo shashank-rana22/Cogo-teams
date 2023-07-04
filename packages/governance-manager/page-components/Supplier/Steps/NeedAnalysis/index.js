@@ -1,8 +1,12 @@
 import { Button, Pill, Table } from '@cogoport/components';
+import { useState } from 'react';
 
+import EvaluateModal from './EvaluateModal';
 import styles from './styles.module.css';
 
-function NeedAnalysys() {
+function NeedAnalysis() {
+	const [show, setShow] = useState(false);
+
 	const columns = [
 		{ Header: 'Origin Country', accessor: 'origin_country' },
 		{ Header: 'Destination Trade Lane', accessor: 'destination_trade_lane' },
@@ -24,7 +28,7 @@ function NeedAnalysys() {
 		{
 			Header   : ' ',
 			accessor : () => (
-				<Button themeType="accent">
+				<Button themeType="accent" onClick={() => setShow(true)}>
 					Evaluate
 				</Button>
 			),
@@ -63,7 +67,8 @@ function NeedAnalysys() {
 					Submit & Next
 				</Button>
 			</div>
+			<EvaluateModal show={show} setShow={setShow} />
 		</>
 	);
 }
-export default NeedAnalysys;
+export default NeedAnalysis;

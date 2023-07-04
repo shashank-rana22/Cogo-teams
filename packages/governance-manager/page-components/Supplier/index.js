@@ -1,5 +1,5 @@
 import { Stepper } from '@cogoport/components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Item from '../ListSupplier/Item';
 
@@ -29,6 +29,7 @@ function Supplier() {
 				className={styles.stepper}
 			/>
 			<NeedAnalysis />
+
 		</>
 	);
 }
