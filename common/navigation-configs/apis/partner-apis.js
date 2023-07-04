@@ -13,7 +13,7 @@ const partner = {
 	],
 	prm: [
 		{
-			api          : 'create_user_number_request',
+			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
 		},
@@ -1052,7 +1052,7 @@ const partner = {
 	],
 	demand_crm: [
 		{
-			api          : 'create_user_number_request',
+			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
 		},
@@ -1935,7 +1935,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_user_number_request',
+			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
 		},
@@ -2734,7 +2734,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_user_number_request',
+			api          : 'create_user_contact_request',
 			access_type  : 'private',
 			service_name : 'user',
 		},
@@ -10483,6 +10483,11 @@ const partner = {
 		},
 		{
 			api          : 'transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'bulk_transfer_promotion_budget',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
