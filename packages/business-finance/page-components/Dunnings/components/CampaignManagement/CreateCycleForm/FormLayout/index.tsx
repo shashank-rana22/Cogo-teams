@@ -282,7 +282,6 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 						</div>
 					</div>
 				</div>
-				<div className={styles.margined_section} />
 			</div>
 		</div>
 	);

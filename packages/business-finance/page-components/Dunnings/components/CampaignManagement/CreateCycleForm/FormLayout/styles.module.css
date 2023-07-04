@@ -31,6 +31,14 @@
 .timezone_container {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_select_options_container {
+			top: auto;
+			bottom: 42px;
+			background: var(--color-primary-yellow-5);
+		}
+	}
 }
 
 .filter_container {
@@ -56,8 +64,4 @@
 
 .triggerType div {
 	padding: 8px 44px;
-}
-
-.margined_section {
-	height: 140px;
 }
