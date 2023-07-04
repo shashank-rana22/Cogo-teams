@@ -33,11 +33,9 @@ const controls = [
 		label : 'Consignment Value',
 		type  : 'number',
 		span  : 8,
+		min   : 0,
 		rules : {
-			required: {
-				message : 'Required',
-				min     : 0,
-			},
+			required: 'Consignment Value is Required',
 		},
 	},
 ];

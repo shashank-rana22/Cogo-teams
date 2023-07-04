@@ -8,27 +8,27 @@ import styles from './styles.module.css';
 const CHARGES = ['Premium', 'Platform Charges', 'Convenience Fee'];
 const DEFAULT_AMOUNT = 0;
 
-function PremiumRate({ premiumLoading = false, premiumData = {} }) {
-	const formarAmountData = (amount) => formatAmount({
-		amount,
-		currency : 'INR',
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'symbol',
-			maximumFractionDigits : 2,
-		},
-	});
+const formarAmountData = (amount) => formatAmount({
+	amount,
+	currency : 'INR',
+	options  : {
+		style                 : 'currency',
+		currencyDisplay       : 'symbol',
+		maximumFractionDigits : 2,
+	},
+});
 
-	const getPremiumLineItem = ({ amount, item, key }) => (
-		<div className={styles.premium_line_item} key={key}>
-			<div className={styles.text}>{item}</div>
-			<div className={cl`${styles.flex_row} ${styles.values}`}>
-				<div className={styles.line} />
-				{formarAmountData(amount)}
-			</div>
+const getPremiumLineItem = ({ amount, item, key }) => (
+	<div className={styles.premium_line_item} key={key}>
+		<div className={styles.text}>{item}</div>
+		<div className={cl`${styles.flex_row} ${styles.values}`}>
+			<div className={styles.line} />
+			{formarAmountData(amount)}
 		</div>
-	);
+	</div>
+);
 
+function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 	if (premiumLoading) {
 		return (
 			<div className={cl`${styles.premium_value} ${styles.loading}`}>

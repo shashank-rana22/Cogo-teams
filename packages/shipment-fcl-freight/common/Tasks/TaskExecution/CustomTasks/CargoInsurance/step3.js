@@ -34,7 +34,7 @@ function Step3({
 		handleSubmit = () => {},
 		control,
 		formState: { errors },
-		getValues,
+		watch,
 	} = formProps;
 
 	const { loading, saveData } = useSaveDraft({
@@ -61,7 +61,7 @@ function Step3({
 		task,
 	});
 
-	const formData = getValues();
+	const formData = watch();
 	const showLoading =	loading || sendCustomerEmailLoading || policyGenerationLoading;
 
 	const isDisableForCustomerConfirmation = () => (
@@ -86,11 +86,11 @@ function Step3({
 			});
 			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
 
-		if (submit) {
-			generateInsurance({ payload, payloadForUpdateShipment });
-		} else {
-			saveData({ payload });
-		}
+			if (submit) {
+				generateInsurance({ payload, payloadForUpdateShipment });
+			} else {
+				saveData({ payload });
+			}
 		})();
 	};
 

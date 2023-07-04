@@ -35,7 +35,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		},
 		onChange: (_, option) => {
 			setCountryId(option?.country?.country_id);
-			setValue('country_id', option?.country?.name);
+			setValue('country', option?.country?.name);
 			setValue('state', option?.region?.name);
 			setValue('city', option?.city?.name);
 		},
@@ -57,7 +57,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 	},
 	{
 		label       : 'Country',
-		name        : 'country_id',
+		name        : 'country',
 		type        : 'text',
 		placeholder : 'Enter Country',
 		span        : 6,
@@ -131,6 +131,7 @@ export const getModifiedControls = ({
 }) => {
 	const countryCode = getCountryDetails({ country_id: countryId });
 	const controls = getAddAddressControls({ setValue, setCountryId });
+
 	(controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
@@ -150,6 +151,7 @@ export const getModifiedControls = ({
 				},
 			};
 		}
+
 		return control;
 	});
 };

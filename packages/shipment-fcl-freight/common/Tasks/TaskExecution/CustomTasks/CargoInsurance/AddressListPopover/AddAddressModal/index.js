@@ -37,7 +37,7 @@ function AddModal({
 		watch,
 	} = useForm();
 
-	const countryID = watch('country_id');
+	const countryID = watch('country');
 
 	const addAddressControls = getModifiedControls({ checked, countryID, setValue, setCountryId, countryId });
 
@@ -59,15 +59,13 @@ function AddModal({
 		refetch         : refetchAfterApiCall,
 	});
 
-	const onSubmit = () => {
-		handleSubmit(async (data) => {
-			const updatedData = { ...data, country_id: countryId };
-			await createSellerAddres(updatedData, handleCloseModal);
-			if (billingAddressData?.data?.id) {
-				organisationAddress();
-				addressApi();
-			}
-		})();
+	const onSubmit = async (data) => {
+		const updatedData = { ...data, country_id: countryId };
+		await createSellerAddres(updatedData, handleCloseModal);
+		if (billingAddressData?.data?.id) {
+			organisationAddress();
+			addressApi();
+		}
 	};
 
 	return (
@@ -195,7 +193,7 @@ function AddModal({
 
 					<Button
 						size="md"
-						onClick={onSubmit}
+						onClick={handleSubmit(onSubmit)}
 						disabled={createAddressLoading}
 						className={styles.btn_div}
 					>

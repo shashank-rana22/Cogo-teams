@@ -45,7 +45,7 @@ function AddressListPopover({
 
 			{loading ? (
 				<div>
-					{Array(CARD_LENGTH).fill(null)?.map((i) => (
+					{[...Array(CARD_LENGTH).keys()].map((i) => (
 						<div className={styles.card} key={i}>
 							<div className={styles.section}>
 								<Placeholder />
