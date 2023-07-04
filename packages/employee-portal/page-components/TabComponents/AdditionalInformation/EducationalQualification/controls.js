@@ -15,20 +15,22 @@ const getControls = () => [{
 	controls : [
 		{
 			name        : 'education_level',
-			label       : 'Education Level',
+			label       : 'Education Level*',
 			type        : 'createselect',
 			options     : EDUCATION_LEVEL_OPTIONS,
 			placeholder : 'Degree',
+			rules       : { required: 'This is required' },
 		},
 		{
 			name        : 'school_name',
-			label       : 'School Name',
+			label       : 'School Name*',
 			type        : 'input',
 			placeholder : 'Institution Name',
+			rules       : { required: 'This is required' },
 		},
 		{
 			name                  : 'started_at',
-			label                 : 'Start Date',
+			label                 : 'Start Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
@@ -36,7 +38,7 @@ const getControls = () => [{
 		},
 		{
 			name                  : 'ended_at',
-			label                 : 'End Date',
+			label                 : 'End Date*',
 			type                  : 'date-select',
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
@@ -44,7 +46,7 @@ const getControls = () => [{
 		},
 		{
 			name        : 'score_type',
-			label       : 'CGPA/Percentage',
+			label       : 'CGPA/Percentage*',
 			type        : 'select',
 			placeholder : 'Select Mode',
 			rules       : { required: 'This is required' },
@@ -55,7 +57,7 @@ const getControls = () => [{
 		},
 		{
 			name        : 'score',
-			label       : 'Enter Score',
+			label       : 'Enter Score*',
 			type        : 'number',
 			placeholder : 'Enter your score',
 			rules       : { required: 'This is required' },
@@ -74,7 +76,7 @@ const getControls = () => [{
 		},
 		{
 			name    : 'degree_proof',
-			label   : 'Upload Degree Proof/Passing Certificate',
+			label   : 'Upload Degree Proof/Passing Certificate*',
 			type    : 'fileUpload',
 			accept  : '.pdf',
 			maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],

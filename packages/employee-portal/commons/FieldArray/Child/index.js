@@ -9,9 +9,6 @@ const REMOVE_INDEX = 1;
 
 const FIELD_TYPE_UPLOAD = 'fileUpload';
 
-const DELETE_BUTTON_HEIGHT = '26px';
-const DELETE_BUTTON_WIDTH = '26px';
-const DELETE_BUTTON_CURSOR = 'pointer';
 const DISABLE_OPTIONS = ['10th', '12th', 'Diploma'];
 const COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
@@ -83,9 +80,9 @@ function Child(props) {
 						className={`form-fieldArray-${name}-remove`}
 						onClick={() => remove(index, REMOVE_INDEX)}
 						style={{
-							height : DELETE_BUTTON_HEIGHT,
-							width  : DELETE_BUTTON_WIDTH,
-							cursor : DELETE_BUTTON_CURSOR,
+							height : 26,
+							width  : 26,
+							cursor : 'pointer',
 						}}
 					/>
 				) : null}

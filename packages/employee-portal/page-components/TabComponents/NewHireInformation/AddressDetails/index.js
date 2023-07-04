@@ -44,7 +44,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const addressEqualityCheck = JSON.stringify(permanent_address) === JSON.stringify(present_address);
 
-	const [address, setAddress] = useState(addressEqualityCheck);
+	const [isAddressChecked, setIsAddressChecked] = useState(addressEqualityCheck);
 
 	const permanentValues = watch(['permanent_city', 'permanent_state', 'permanent_country',
 		'permanent_pincode', 'permanent_address']);
@@ -82,7 +82,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	}, [ADDRESS_MAPPING, setValue]);
 
 	const handleAddressChange = () => {
-		setAddress((prev) => !prev);
+		setIsAddressChecked((prev) => !prev);
 		const getControlvalues = getValues();
 
 		const {
@@ -103,7 +103,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			permanent_address : getValuePermanentAdd,
 		};
 
-		if (address === false) {
+		if (isAddressChecked === false) {
 			Object.keys(GETVALUES_MAPPING).map((element) => (
 				setValue(element, GETVALUES_MAPPING[element])
 			));
@@ -115,7 +115,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	};
 
 	useEffect(() => {
-		setAddress(equalityCheck);
+		setIsAddressChecked(equalityCheck);
 	}, [equalityCheck]);
 
 	return (
@@ -200,7 +200,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 				<Checkbox
 					label="Current Address is same as Permanent Address"
 					onChange={handleAddressChange}
-					checked={address}
+					checked={isAddressChecked}
 				/>
 			</div>
 
