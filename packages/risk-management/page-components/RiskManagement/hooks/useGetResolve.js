@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const DATA_FIRST_INDEX = 0;
 const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsData }) => {
 	const { id, reason } = itemData || {};
 	const [{ loading, data }, trigger] = useRequest({
@@ -23,7 +23,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 			getDahboardStatsData();
 			Toast.success('Resolved Successfully');
 		} catch (e) {
-			Toast.error(e?.response?.data?.id[DATA_FIRST_INDEX]);
+			Toast.error(e?.response?.data?.id[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}), [trigger, id, reason, remarks, getDashboardData, getDahboardStatsData]);
 

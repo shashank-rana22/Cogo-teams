@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -19,8 +18,8 @@ const RISK_CATEGORIES = {
 const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#ed3726' };
 function CardItem({ itemData }) {
 	const {
-		serial_id = '', origin_port = {}, destination_port = {},
-		commodity_description = '', cargo_value_currency, cargo_value, estimated_inr_cargo_value, risk_reason = [],
+		serial_id = '', origin_port = {}, destination_port = {}, estimated_cargo_value_currency,
+		commodity_description = '', cargo_value_currency, cargo_value, estimated_cargo_value, risk_reason = [],
 		criticality = '',
 	} = itemData || {};
 
@@ -108,13 +107,13 @@ function CardItem({ itemData }) {
 
 							</div>
 						) : null}
-					{estimated_inr_cargo_value
+					{estimated_cargo_value
 						? (
 							<div className={styles.commodity_text}>
 								Estimated Cargo Value:&nbsp;
 								{formatAmount({
-									amount   : estimated_inr_cargo_value,
-									currency : GLOBAL_CONSTANTS.currency_code.INR,
+									amount   : estimated_cargo_value,
+									currency : estimated_cargo_value_currency,
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',

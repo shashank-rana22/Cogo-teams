@@ -15,25 +15,27 @@ function TimelineItem({ item = {}, isLast = '', consecutivelyCompleted = false }
 	const circleClass = `${circle} ${big} ${isCompleted ? completed : ''}`;
 	const connectingLineClass = `${connecting_line} ${isCompleted ? completed : ''}`;
 
-	const tooltipContent = (
-		<div className={tooltip_content}>
-			<div className={label}>Milestone</div>
-			<div className={value}>{milestone}</div>
+	function TooltipContent() {
+		return (
+			<div className={tooltip_content}>
+				<div className={label}>Milestone</div>
+				<div className={value}>{milestone}</div>
 
-			{completed_on ? (
-				<>
-					<div className={label}>Completed On</div>
-					<div className={value}>
-						{completed_on !== null
+				{completed_on ? (
+					<>
+						<div className={label}>Completed On</div>
+						<div className={value}>
+							{completed_on !== null
 						&& format(completed_on, 'dd MMM yyyy')}
-					</div>
-				</>
-			) : null}
-		</div>
-	);
+						</div>
+					</>
+				) : null}
+			</div>
+		);
+	}
 	return (
 		<div className={container}>
-			<Tooltip content={tooltipContent} placement="top" interactive>
+			<Tooltip content={<TooltipContent />} placement="top" interactive>
 				<div className={circleClass}>
 					{isCompleted ? <IcMTick /> : null}
 				</div>
