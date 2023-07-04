@@ -104,7 +104,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : GLOBAL_CONSTANTS.regex_patterns.email,
+				value   : geo.regex.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
