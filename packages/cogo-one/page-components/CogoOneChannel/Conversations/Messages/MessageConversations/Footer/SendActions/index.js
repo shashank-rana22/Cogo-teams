@@ -17,7 +17,7 @@ function SendActions({
 	formattedData = {},
 	viewType = '',
 }) {
-	const { channel_type = '', session_type } = formattedData;
+	const { channel_type = '', session_type = '', account_type = '' } = formattedData;
 
 	const hasNoPermissionToSend = !hasPermissionToEdit || messageLoading
 	|| (isEmpty(draftMessage?.trim()) && !finalUrl);
@@ -28,7 +28,7 @@ function SendActions({
 	} = useSendPromotionalRate({ formattedData });
 
 	const isSendPromotionalRate = (session_type === 'bot' || session_type === 'admin')
- && channel_type === 'whatsapp' && viewType !== 'supply';
+    && channel_type === 'whatsapp' && viewType !== 'supply' && account_type === 'importer_exporter';
 
 	return (
 		<div className={styles.send_messages}>
