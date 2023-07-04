@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -8,9 +9,11 @@ import styles from './styles.module.css';
 const CHARGES = ['Premium', 'Platform Charges', 'Convenience Fee'];
 const DEFAULT_AMOUNT = 0;
 
+const geo = getGeoConstants();
+
 const formarAmountData = (amount) => formatAmount({
 	amount,
-	currency : 'INR',
+	currency : geo.country.currency.code,
 	options  : {
 		style                 : 'currency',
 		currencyDisplay       : 'symbol',
