@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
 const UNIT_ELEMENT = 1;
 const TO_FIXED = 2;
@@ -12,7 +12,7 @@ export const renderValue = (label, detail) => {
 	} = detail || {};
 
 	const valueForInput = Array.isArray(packages)
-	&& packages?.length > GLOBAL_CONSTANTS.zeroth_index ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
+	&& !isEmpty(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
