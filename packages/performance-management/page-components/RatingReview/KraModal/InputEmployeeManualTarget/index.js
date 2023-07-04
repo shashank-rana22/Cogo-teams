@@ -5,13 +5,13 @@ import styles from '../styles.module.css';
 
 import useUpdateEmployeeManualTarget from './useUpdateEmployeeManualTarget';
 
-function InputEmployeeManualTarget({ item }) {
+function InputEmployeeManualTarget({ item, data, selectCycle }) {
 	const {
 		loading: updateLoading,
 		updateEmployeeManualTarget,
 		inputValue,
 		setInputValue,
-	} = useUpdateEmployeeManualTarget({ item });
+	} = useUpdateEmployeeManualTarget({ item, data, selectCycle });
 
 	return (
 		<div className={styles.input_display}>

@@ -9,18 +9,18 @@ import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
 const MIN_RATING = 0;
 
-function KraModal({ show, setShow }) {
+function KraModal({ show, setShow, selectCycle }) {
 	const {
 		data = [],
 		loading,
-	} = useEmployeeKraDetails({ show });
+	} = useEmployeeKraDetails({ show, selectCycle });
 
 	const { list = [], modification_history = [] } = data;
 
 	const {
 		loading: SubmitLoading,
 		updateEmployeeFinalRating,
-	} = useUpdateEmployeeFinalRating(data);
+	} = useUpdateEmployeeFinalRating(data, selectCycle);
 
 	const [starRating, setStarRating] = useState(MIN_RATING);
 	const [comments, setCommemts] = useState('');
@@ -71,7 +71,13 @@ function KraModal({ show, setShow }) {
 								<div className={styles.label}>
 									KRA Achieved:
 									{' '}
-									{item.rating_manual ? <InputEmployeeManualTarget item={item} />
+									{item.rating_manual ? (
+										<InputEmployeeManualTarget
+											item={item}
+											data={data}
+											selectCycle={selectCycle}
+										/>
+									)
 										: item.achieved_rating}
 								</div>
 

@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateEmployeeFinalRating = (data) => {
+const useUpdateEmployeeFinalRating = (data, selectCycle) => {
+	const { end_date, start_date } = selectCycle || {};
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_employee_final_rating',
 		method : 'POST',
@@ -16,8 +18,8 @@ const useUpdateEmployeeFinalRating = (data) => {
 					manager_id          : data?.employee_details?.manager_id,
 					kra_rating_assigned : starRating,
 					comments,
-					start_date          : '2023-06-21',
-					end_date            : '2023-07-20',
+					start_date,
+					end_date,
 				},
 			});
 

@@ -3,7 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetRatingReviewDetails = ({ selectValue, level }) => {
+const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
+	const { end_date, start_date } = selectCycle || {};
+
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_rating_review_details',
 		method : 'GET',
@@ -16,8 +18,8 @@ const useGetRatingReviewDetails = ({ selectValue, level }) => {
 					manager_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8',
 					label      : selectValue,
 					level,
-					end_date   : '2023-07-21',
-					start_date : '2023-06-21',
+					end_date,
+					start_date,
 
 				},
 			});
@@ -28,7 +30,7 @@ const useGetRatingReviewDetails = ({ selectValue, level }) => {
 				);
 			}
 		}
-	}, [level, selectValue, trigger]);
+	}, [end_date, level, selectValue, start_date, trigger]);
 
 	useEffect(() => {
 		if (selectValue) {

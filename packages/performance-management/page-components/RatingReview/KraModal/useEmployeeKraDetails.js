@@ -3,7 +3,9 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useEmployeeKraDetails({ show }) {
+function useEmployeeKraDetails({ show, selectCycle }) {
+	const { end_date, start_date } = selectCycle || {};
+
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_employee_kra_details',
 		method : 'GET',
@@ -13,9 +15,9 @@ function useEmployeeKraDetails({ show }) {
 		try {
 			trigger({
 				params: {
-					employee_id : show,
-					start_date  : '2023-06-21',
-					end_date    : '2023-07-20',
+					employee_id: show,
+					start_date,
+					end_date,
 				},
 			});
 		} catch (error) {
@@ -23,7 +25,7 @@ function useEmployeeKraDetails({ show }) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [show, trigger]);
+	}, [end_date, show, start_date, trigger]);
 
 	useEffect(() => {
 		employeeKraDetails();

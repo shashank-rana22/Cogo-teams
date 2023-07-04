@@ -22,19 +22,22 @@ function RenderTitle({ title, averageValue, level }) {
 					{averageValue || '-'}
 				</div>
 			)}
-
 		</div>
 	);
 }
 
 function RenderStyledTable({
 	employee_list,
-	identifier_key, setSelectedEmployees,
+	identifier_key,
+	setSelectedEmployees,
 	onClickCheckbox,
 	selectedEmployees,
 	onClickHeaderCheckbox,
 	level,
 	setShow,
+	selectedEmployeeList,
+	toggleVal,
+
 }) {
 	const columns = getColumns({
 		setSelectedEmployees,
@@ -45,6 +48,9 @@ function RenderStyledTable({
 		employee_list,
 		level,
 		setShow,
+		selectedEmployeeList,
+		toggleVal,
+
 	});
 
 	return (
@@ -63,8 +69,19 @@ function RenderVerticalHeadComponent({
 	selectedEmployees,
 	level,
 	setShow,
+	toggleVal,
+	setToggleVal,
+
 }) {
-	const { onClickCheckbox, onClickHeaderCheckbox } = usePerformanceRatingReview({ setSelectedEmployees, data: list });
+	const {
+		onClickCheckbox,
+		onClickHeaderCheckbox, selectedEmployeeList,
+	} = usePerformanceRatingReview({
+		setSelectedEmployees,
+		data: list,
+		toggleVal,
+		setToggleVal,
+	});
 
 	if (isEmpty(list)) {
 		return (
@@ -101,6 +118,7 @@ function RenderVerticalHeadComponent({
 						onClickHeaderCheckbox={onClickHeaderCheckbox}
 						level={level}
 						setShow={setShow}
+						selectedEmployeeList={selectedEmployeeList}
 
 					/>
 				</Accordion>

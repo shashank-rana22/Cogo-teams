@@ -1,4 +1,4 @@
-import { Checkbox } from '@cogoport/components';
+import { Checkbox, Toggle } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -11,6 +11,9 @@ const getColumns = ({
 	employee_list,
 	level,
 	setShow,
+	toggleVal,
+	setToggleVal,
+	selectedEmployeeList = () => {},
 }) => {
 	const columns = [
 		{
@@ -26,7 +29,8 @@ const getColumns = ({
 			accessor: (item) => (
 				<div>
 					<Checkbox
-						checked={(selectedEmployees[identifier_key] || []).includes(item?.employee_id)}
+						checked={(selectedEmployees[identifier_key] || [])
+							.includes(item?.employee_id)}
 						onChange={(event) => onClickCheckbox({ event, item, identifier_key })}
 					/>
 				</div>
@@ -115,10 +119,16 @@ const getColumns = ({
 			Header   : 'Surprise Gift',
 			accessor : (item) => (
 				<div>
-					{startCase(item?.surprise_gift) || '-'}
+					<Toggle
+						size="sm"
+						onLabel="Yes"
+						offLabel="No"
+						onChange={(event) => selectedEmployeeList({ item, event, toggleVal })}
+					/>
 				</div>
 			),
-		}];
+		},
+		];
 	}
 	return columns;
 };

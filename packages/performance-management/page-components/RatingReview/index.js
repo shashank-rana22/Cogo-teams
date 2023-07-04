@@ -4,7 +4,9 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+import useGetRatingCycles from './hooks/useGetRatingCycles';
 import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
+import usePublishRatings from './hooks/usePublicRatings';
 import KraModal from './KraModal';
 import RenderVerticalHeadComponent from './RenderVerticalHeadComponent';
 import styles from './styles.module.css';
@@ -21,7 +23,20 @@ function PerformanceRatingReview() {
 		level,
 	} = useGetEmployeeLevels();
 
-	const { data } = useGetRatingReviewDetails({ selectValue, level });
+	const {
+		ratingCycleOptions,
+		selectCycle,
+		setSelectCycle,
+	} = useGetRatingCycles({ });
+
+	const { data } = useGetRatingReviewDetails({ selectValue, level, selectCycle });
+
+	const {
+		loading: Publish,
+		publishRatings,
+		toggleVal,
+		setToggleVal,
+	} = usePublishRatings({ selectedEmployees, level, data, selectCycle });
 
 	const router = useRouter();
 
@@ -31,12 +46,10 @@ function PerformanceRatingReview() {
 				<div className={styles.back_arrow}>
 					<IcMArrowBack width={22} height={22} style={{ marginRight: 2 }} onClick={() => router.back()} />
 				</div>
-
 				<div className={styles.header}>
 					Performance Rating Review
 				</div>
 			</div>
-
 			<div className={styles.select_row}>
 				<div className={styles.select_container}>
 					<Select
@@ -46,10 +59,27 @@ function PerformanceRatingReview() {
 					/>
 				</div>
 
-				<Button disabled={isEmpty(selectedEmployees)}>
-					Publish
-				</Button>
+				<div className={styles.level}>
+					<div className={styles.ratings_cycles}>
+						<Select
+							value={selectCycle}
+							onChange={setSelectCycle}
+							options={ratingCycleOptions}
+							width="100px"
+						/>
+					</div>
 
+					<div className={styles.publish_button}>
+						<Button
+							disabled={isEmpty(selectedEmployees)}
+							onClick={publishRatings}
+							loading={Publish}
+						>
+							Publish
+
+						</Button>
+					</div>
+				</div>
 			</div>
 
 			<RenderVerticalHeadComponent
@@ -58,9 +88,11 @@ function PerformanceRatingReview() {
 				selectedEmployees={selectedEmployees}
 				level={level}
 				setShow={setShow}
+				toggleVal={toggleVal}
+				setToggleVal={setToggleVal}
 			/>
 
-			{show ? <KraModal show={show} setShow={setShow} /> : null}
+			{show ? <KraModal show={show} setShow={setShow} selectCycle={selectCycle} /> : null}
 		</div>
 	);
 }

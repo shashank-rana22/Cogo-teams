@@ -1,4 +1,6 @@
-const usePerformanceRatingReview = ({ setSelectedEmployees, data }) => {
+const usePerformanceRatingReview = ({
+	setSelectedEmployees, data, setToggleVal = () => {}, toggleVal,
+}) => {
 	const onClickCheckbox = ({ event, item, identifier_key }) => {
 		setSelectedEmployees((previousValue) => {
 			let newCheckedValues = {};
@@ -41,7 +43,12 @@ const usePerformanceRatingReview = ({ setSelectedEmployees, data }) => {
 		});
 	};
 
-	return { onClickCheckbox, onClickHeaderCheckbox };
+	const selectedEmployeeList = ({ item, event }) => {
+		const id = item?.employee_id;
+
+		setToggleVal({ ...toggleVal, [id]: event?.target?.checked });
+	};
+	return { onClickCheckbox, onClickHeaderCheckbox, selectedEmployeeList };
 };
 
 export default usePerformanceRatingReview;
