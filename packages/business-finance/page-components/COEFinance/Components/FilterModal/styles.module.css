@@ -125,3 +125,24 @@
 .text {
 	padding: 12px;
 }
+
+.select_currency {
+	display: flex;
+	width: 30%;
+	background: #edd7a9;
+
+	/* border: 1px solid #edd7a9; */
+	border-radius: 6px;
+}
+
+.currency_lebal {
+	margin-left: 6px;
+
+	/* background: #edd7a9; */
+}
+
+.cross_button {
+	margin-right: 10px !important;
+
+	/* background: #f2e3c3 !important; */
+}

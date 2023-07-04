@@ -1,6 +1,6 @@
 import { Modal, Button, MultiSelect, Pill } from '@cogoport/components';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
-import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
+import { IcMFilter, IcCRedCircle, IcMCross } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -53,7 +53,16 @@ function FilterModal({ filters, setFilters }: Props) {
 		setCurrencies([]);
 		setShowModal(false);
 	};
-
+	const handleRemoveCurrency = (item, index) => {
+		const currencyList = filters?.currency;
+		currencyList.splice(index, 1);
+		setFilters(() => ({
+			...filters,
+			currency: currencyList,
+		}));
+		console.log(filters, index, item, currencyList);
+	};
+	console.log(filters);
 	return (
 		<div className={styles.modal_container}>
 			<Modal
@@ -110,6 +119,8 @@ function FilterModal({ filters, setFilters }: Props) {
 
 							{/* <div className={styles.text}>Other Currencys</div> */}
 							<div className={styles.select_input}>
+								{JSON.stringify(filters?.currency)}
+								{JSON.stringify(filters)}
 								<MultiSelect
 									value={filters?.currency}
 									onChange={(val:string[]) => setFilters({ currency: val })}
@@ -119,10 +130,21 @@ function FilterModal({ filters, setFilters }: Props) {
 								/>
 							</div>
 
-							{filters?.currency?.map((item) => (
-								<div key={item} style={{ display: 'flex' }}>
-									<Pill size="md" color="blue" style={{ display: 'coloum' }}>{item}</Pill>
-								</div>
+							{filters?.currency?.map((item, index) => (
+								<span key={item} className={styles.select_currency}>
+									<span className={styles.currency_lebal}>
+										{item}
+									</span>
+									<Button
+										size="sm"
+										themeType="tertiary"
+										className={styles.cross_button}
+										onClick={() => handleRemoveCurrency(item, index)}
+									>
+										<IcMCross width={10} height={10} />
+
+									</Button>
+								</span>
 							))}
 
 						</div>
