@@ -5,11 +5,12 @@ import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import MessageBody from '../MessageBody';
+// import MessageBody from '../MessageBody';
 import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
+import UserActivityMessages from './UserActivityMessages';
 
 function ReceiveDiv({
 	eachMessage = {},
@@ -54,10 +55,11 @@ function ReceiveDiv({
 					</Tooltip>
 				)}
 				<div className={styles.message_div}>
-					<MessageBody
+					{/* <MessageBody
 						response={response}
 						message_type={message_type}
-					/>
+					/> */}
+					<UserActivityMessages />
 				</div>
 			</div>
 			{message_type === 'order' && (
