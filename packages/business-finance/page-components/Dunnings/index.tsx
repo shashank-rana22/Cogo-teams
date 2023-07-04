@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Dunnings() {
 	const { query } = useRouter();
 
-	const [activeTab, setActiveTab] = useState(query?.active_tab || 'campaign-management');
+	const [activeTab, setActiveTab] = useState(query?.active_tab || 'dashboard');
 
 	const TABS_MAPPING = {
 		'campaign-management'   : <CampaignManagement />,

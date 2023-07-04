@@ -23,17 +23,6 @@ function FinancialSummary() {
 					className={styles.single_filter}
 					isClearable
 				/>
-				<Select
-					value={filters?.paymentType}
-					onChange={(val) => setFilters({ ...filters, paymentType: val })}
-					placeholder="Payment Type"
-					options={[
-						{ label: 'CASH', value: 'CASH' },
-						{ label: 'CREDIT', value: 'CREDIT' },
-					]}
-					style={{ width: '12%' }}
-					isClearable
-				/>
 			</div>
 
 			<div className={styles.stats_container}>
