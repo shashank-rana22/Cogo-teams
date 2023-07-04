@@ -41,6 +41,7 @@ function ListHeader({ item = {} }) {
 				</span>
 			) }
 			{tags.includes('cogoverse') && <span className={styles.cogoverse}>Cogoverse</span>}
+			{tags.includes('post_facto') && <span className={styles.post_facto}>Post Facto</span>}
 		</div>
 	);
 }
