@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useState } from 'react';
 
 import getListColumnMapping from './get-list-column-mapping';
 import ListCard from './ListCard';
@@ -100,6 +101,8 @@ const list = [
 function List(props) {
 	const { setActiveMode } = props;
 
+	const [activeObjectiveId, setActiveObjectiveId] = useState(null);
+
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode });
 
 	return (
@@ -111,6 +114,8 @@ function List(props) {
 					key={listItem.id}
 					listItem={listItem}
 					LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+					activeObjectiveId={activeObjectiveId}
+					setActiveObjectiveId={setActiveObjectiveId}
 				/>
 			))}
 

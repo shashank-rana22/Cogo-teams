@@ -1,9 +1,12 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 
+import ObjectiveDetailsCard from './ObjectiveDetailsCard';
 import styles from './styles.module.css';
 
 function ListCard(props) {
-	const { listItem, LIST_COLUMN_MAPPING } = props;
+	const { listItem, LIST_COLUMN_MAPPING, activeObjectiveId, setActiveObjectiveId } = props;
+
+	const { id } = listItem;
 
 	return (
 		<div className={styles.card_container}>
@@ -21,12 +24,28 @@ function ListCard(props) {
 						</div>
 					);
 				})}
-
 			</div>
 
-			<div className={styles.view_details}>
-				View Details
-				<IcMArrowDown style={{ marginLeft: '4px' }} />
+			{activeObjectiveId === id && <ObjectiveDetailsCard activeObjectiveId={activeObjectiveId} />}
+
+			<div
+				className={styles.view_details}
+				role="presentation"
+				onClick={() => {
+					setActiveObjectiveId(id === activeObjectiveId ? null : id);
+				}}
+			>
+				{activeObjectiveId === id ? (
+					<>
+						View Less
+						<IcMArrowUp style={{ marginLeft: '4px' }} />
+					</>
+				) : (
+					<>
+						View Details
+						<IcMArrowDown style={{ marginLeft: '4px' }} />
+					</>
+				)}
 			</div>
 		</div>
 	);

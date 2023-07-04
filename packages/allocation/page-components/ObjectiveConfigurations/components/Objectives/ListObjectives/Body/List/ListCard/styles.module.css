@@ -1,13 +1,13 @@
 .card_container {
     margin: 8px 0;
     background-color: #FFF;
-    border: 1px solid #F8F2E7;
     border-radius: 4px;
 }
 
 .list_card {
     display: flex;
     padding: 12px;
+    border: 1px solid #F8F2E7;
 }
 
 .card_column {

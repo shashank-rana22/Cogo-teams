@@ -1,0 +1,41 @@
+.container {
+    padding: 16px 20px;
+    background-color: #FFF;
+    border-radius: 8px;
+    border: 1px solid #F8F8F8;
+    flex-basis: 49%;
+
+    @media (max-width: 768px) {
+        flex-basis: 100%;
+    }
+}
+
+.heading_container {
+    display: flex;
+    align-items: center;
+}
+
+.heading {
+    text-decoration: underline;
+    margin: 0;
+}
+
+.operator {
+    margin: 0 4px 0 0;
+}
+
+.label {
+    color: #828282;
+    margin-right: 4px;
+}
+
+.key_value_container {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.value_container {
+    display: flex;
+    align-items: center;
+}
