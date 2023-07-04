@@ -10,6 +10,9 @@ export const firebaseConfig = {
 
 const FIRESTORE_SHIPMENT_REMINDER_PATH = '/customer_chat/shipment_reminder/agents';
 
+const COGOONE_CONSTANTS = '/cogoone_constants';
+
 export const FIRESTORE_PATH = {
-	shipment_reminder: FIRESTORE_SHIPMENT_REMINDER_PATH,
+	shipment_reminder : FIRESTORE_SHIPMENT_REMINDER_PATH,
+	cogoone_constants : COGOONE_CONSTANTS,
 };

@@ -4,6 +4,10 @@ import OtpInput from './components/OtpInput';
 import useTimer from './hooks/useTimer';
 import styles from './styles.module.css';
 
+const TIME_TEXT_TEN_SECONDS = 10;
+const TIME_TEXT_TWENTY_SECONDS = 20;
+const TIME_VALUE_ONE_SECOND = 1;
+
 function OTPInput({
 	otpLength,
 	setOtpValue = () => {},
@@ -29,11 +33,11 @@ function OTPInput({
 	};
 	let abc = 'green_text';
 	const timerClass = () => {
-		if (timer.seconds <= 10) {
+		if (timer.seconds <= TIME_TEXT_TEN_SECONDS) {
 			abc = 'red_text';
 			return abc;
 		}
-		if (timer.seconds <= 20) {
+		if (timer.seconds <= TIME_TEXT_TWENTY_SECONDS) {
 			abc = 'yellow_text';
 			return abc;
 		}
@@ -70,7 +74,7 @@ function OTPInput({
 				) : (
 					<div className={styles.resend_otp_container}>
 
-						{timer.seconds >= 1
+						{timer.seconds >= TIME_VALUE_ONE_SECOND
 							? (
 								<div className={styles.timer_text}>
 									<div className={`${styles[color_text]}`}>

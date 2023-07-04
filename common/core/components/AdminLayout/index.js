@@ -78,6 +78,8 @@ function AdminLayout({
 
 	const isRolePresent = user_role_ids.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
 
+	const showLockScreen = showModal && isRolePresent;
+
 	return (
 		<div className={cl`
 			${styles.container} 
@@ -85,45 +87,48 @@ function AdminLayout({
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
-			{showModal && isRolePresent
-				? <LockScreen agentId={user_id} firestore={firestore} setShowModal={setShowModal} /> : (
-					<>
-						<main className={styles.children_container}>{children}</main>
-						{showTopbar ? (
-							<Topbar
-								className={topbar.className}
-								style={topbar.style}
-								logo={topbar.logo}
-								onClickMobileNav={() => setShowMobileNavbar((s) => !s)}
-								showMobileNav={showNavbar}
-								showMobileNavbar={showMobileNavbar}
-							/>
-						) : null}
-						{showNavbar ? (
-							<Navbar
-								className={navbar.className}
-								style={navbar.style}
-								nav={partner}
-								pinListLoading={pinListLoading}
-								setPinnedNavKeys={setPinnedNavKeys}
-								partner_user_id={partner_user_id}
-								pinnedNavs={pinnedNavs}
-								mobileShow={showMobileNavbar}
-								inCall={inCall}
-							/>
-						) : null}
-						<VoiceCall
-							voice_call_recipient_data={{
-								...(voice_call_recipient_data || {}),
-								loggedInAgentId: user_id,
-							}}
-							inCall={inCall}
-						/>
-						<AnnouncementModal data={announcements} />
+			<main className={styles.children_container}>{children}</main>
+			{showTopbar ? (
+				<Topbar
+					className={topbar.className}
+					style={topbar.style}
+					logo={topbar.logo}
+					onClickMobileNav={() => setShowMobileNavbar((s) => !s)}
+					showMobileNav={showNavbar}
+					showMobileNavbar={showMobileNavbar}
+				/>
+			) : null}
+			{showNavbar ? (
+				<Navbar
+					className={navbar.className}
+					style={navbar.style}
+					nav={partner}
+					pinListLoading={pinListLoading}
+					setPinnedNavKeys={setPinnedNavKeys}
+					partner_user_id={partner_user_id}
+					pinnedNavs={pinnedNavs}
+					mobileShow={showMobileNavbar}
+					inCall={inCall}
+				/>
+			) : null}
+			<VoiceCall
+				voice_call_recipient_data={{
+					...(voice_call_recipient_data || {}),
+					loggedInAgentId: user_id,
+				}}
+				inCall={inCall}
+			/>
+			<AnnouncementModal data={announcements} />
 
-						{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
-					</>
-				)}
+			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
+
+			<LockScreen
+				showLockScreen={showLockScreen}
+				agentId={user_id}
+				firestore={firestore}
+				setShowModal={setShowModal}
+			/>
+
 		</div>
 	);
 }

@@ -1,16 +1,23 @@
+.styled_modal {
+  width: 350px !important;
+}
+
 .styled_modal_body {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: var(--40, #f8f2e7);
+  justify-content: space-between;
+  border-radius: 12px;
+  background: var(--greyscale-secondary-white, #fff);
+  box-shadow: 0px 0px 44px 0px rgba(98, 127, 172, 0.2);
+  padding: 20px;
 }
 
 .styled_otp_box {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   padding: 20px 50px;
   align-items: center;
   width: 404px;
@@ -21,7 +28,7 @@
 }
 
 .styled_text {
-  margin-top: 28px;
+  margin-top: 22px;
   color: var(--black-60, #828282);
   text-align: center;
   font-size: 14px;
@@ -36,7 +43,7 @@
 
 .styled_div {
   display: flex;
-  padding: 48px 0px 0px 0px;
+  padding: 24px 0px 0px 0px;
 }
 
 .button_div {

@@ -14,13 +14,21 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-const MINUTES = 10;
-const SECONDS = 60;
-const MILISECONDS = 1000;
-const FIFTEEN_MINUTES_IN_MILLISECONDS = MINUTES * SECONDS * MILISECONDS;
 const DEFAULT_VALUE = 0;
+const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
-const DEBOUNCE_LIMIT = 100;
+const DEFAULT_INDEX = 0;
+const DEBOUNCE_LIMIT = 60000;
+
+const getTimeoutConstant = async (firestore) => {
+	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
+
+	const constantsQuery = await query(constantCollection, limit(LIMIT));
+	const cogoOneConstants = await getDocs(constantsQuery);
+	const cogoOneConstantsDocs = cogoOneConstants?.docs[DEFAULT_INDEX];
+	const { screen_lock_timeout = 0 } = cogoOneConstantsDocs.data() || {};
+	return screen_lock_timeout;
+};
 
 const createOrGetRoom = async ({ agentId, firestore }) => {
 	let roomId = '';
@@ -79,10 +87,10 @@ function useGetActivity({
 	const activitytimeoutRef = useRef(null);
 	const trackerRef = useRef(null);
 	const timeout = useRef(null);
-
 	const [showModal, setShowModal] = useState(false);
 
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
+		const timeoutValue = await getTimeoutConstant(firestore) || DEFAULT_TIMEOUT;
 		activityTrackerSnapShotRef?.current?.();
 		clearTimeout(activitytimeoutRef?.current);
 		clearTimeout(trackerRef?.current);
@@ -91,7 +99,7 @@ function useGetActivity({
 			const userDocData = await getDoc(roomDoc);
 			const lastTimestamp = userDocData?.data()?.last_activity_timestamp || Date.now();
 
-			if ((Date.now() - lastTimestamp) < FIFTEEN_MINUTES_IN_MILLISECONDS) {
+			if ((Date.now() - lastTimestamp) < timeoutValue) {
 				mountActivityTracker({ trackerRef, roomDoc });
 			}
 
@@ -100,8 +108,8 @@ function useGetActivity({
 
 				const differenceFromLastActivity = Date.now() - last_activity_timestamp;
 
-				const timer = differenceFromLastActivity > FIFTEEN_MINUTES_IN_MILLISECONDS
-					? DEFAULT_VALUE : FIFTEEN_MINUTES_IN_MILLISECONDS - differenceFromLastActivity;
+				const timer = differenceFromLastActivity > timeoutValue
+					? DEFAULT_VALUE : timeoutValue - differenceFromLastActivity;
 
 				clearTimeout(activitytimeoutRef?.current);
 				if (last_activity === 'submit_otp') {
