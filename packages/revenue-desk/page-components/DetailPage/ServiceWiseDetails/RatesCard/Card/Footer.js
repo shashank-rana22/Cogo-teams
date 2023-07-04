@@ -1,20 +1,19 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Pill, Popover, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { DECIMAL_PLACES, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
+import { DECIMAL_PLACES, DEFAULT_INDEX, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
 
 import ShowLineItems from './ShowLineItems';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, prefrence_key }) {
-	const [visible, setVisible] = useState(false);
 	const lineItems = data?.rowData?.line_items;
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
+	const [showLineItems, setShowLineItems] = useState(false);
 	const showValidity = (item) => {
 		if (item?.rowData?.is_rate_expired) {
 			return <span style={{ color: 'red' }}> (This Rate is Expired)</span>;
@@ -135,11 +134,6 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 						})}
 					</div>
 				</div>
-				{!isEmpty(lineItems) ? (
-					<Popover placement="top" trigger="mouseenter" render={<ShowLineItems lineItems={lineItems?.[0]} />}>
-						<div onClick={() => setVisible(!visible)}>view more</div>
-					</Popover>
-				) : null}
 				<div>
 					{
 							data?.rowData?.origin_locals_price
@@ -186,6 +180,24 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 								: null
 						}
 				</div>
+				{!isEmpty(lineItems) ? (
+					<Popover
+						placement="top"
+						trigger="mouseenter"
+						render={(
+							<ShowLineItems lineItems={lineItems?.[DEFAULT_INDEX]} />
+						)}
+					>
+						<div
+							onClick={() => setShowLineItems(!showLineItems)}
+							style={{ textDecoration: 'underline' }}
+							role="button"
+							tabIndex={0}
+						>
+							view more
+						</div>
+					</Popover>
+				) : null}
 			</div>
 			<div className={styles.total_price_section}>
 				<div style={{ display: 'flex' }}>

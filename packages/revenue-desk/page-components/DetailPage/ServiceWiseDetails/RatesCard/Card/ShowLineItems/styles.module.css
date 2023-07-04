@@ -1,6 +1,11 @@
 .labelText{
-    margin-right: 12px;
+    width:120px;
+    font-weight: 600;
+    padding: 6px;
+    background: #fdfbf6;
+    border-radius: 6px;
 }
 .valueText{
-    margin-right: 12px;
+    padding: 6px;
+    width:120px;
 }
