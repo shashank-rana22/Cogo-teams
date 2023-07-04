@@ -1,10 +1,25 @@
 import { Button, Pill } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function Item() {
+function Item({ isSupplierPage = false }) {
+	const { push } = useRouter();
+	const navigate = () => {
+		push(
+			'/governance-manager/[id]',
+			'/governance-manager/abcd',
+		);
+	};
 	return (
 		<div className={styles.item}>
+			{ isSupplierPage && (
+				<div>
+					<Button themeType="secondary">
+						Go Back
+					</Button>
+				</div>
+			)}
 			<div>
 				<div className={styles.key}>Supplier Name</div>
 				<div className={styles.value}>Dragon City Private Limited</div>
@@ -21,23 +36,28 @@ function Item() {
 				</div>
 			</div>
 
-			<div>
-				<div className={styles.key}>Analysys Status</div>
-				<div className={styles.value}>
-					<Pill
-						size="md"
-						color="blue"
-					>
-						2/4 Services Needed
-					</Pill>
+			{ !isSupplierPage && (
+				<>
+					<div>
+						<div className={styles.key}>Analysys Status</div>
+						<div className={styles.value}>
+							<Pill
+								size="md"
+								color="blue"
+							>
+								2/4 Services Needed
+							</Pill>
 
-				</div>
-			</div>
-			<div>
-				<Button themeType="accent">
-					View
-				</Button>
-			</div>
+						</div>
+					</div>
+					<div>
+						<Button themeType="accent" onClick={() => navigate()}>
+							View
+						</Button>
+					</div>
+
+				</>
+			)}
 
 		</div>
 	);
