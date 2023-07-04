@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { checkObjectValues } from '../utils/checkObjectValues';
 
-const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
+const useGetRatingReviewDetails = ({ level, ratingCycle, setSortedData }) => {
 	const [filters, setFilters] = useState({});
 	const { user }	 = useSelector((state) => state?.profile || {});
 
@@ -57,6 +57,10 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 			fetchRatingReviewDetails();
 		}
 	}, [fetchRatingReviewDetails, level]);
+
+	useEffect(() => {
+		setSortedData(data);
+	}, [data, setSortedData]);
 
 	return { data, loading, filters, setFilters, isReportingManager };
 };

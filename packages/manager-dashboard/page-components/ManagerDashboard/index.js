@@ -2,7 +2,7 @@ import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import StyledTable from '../../common/StyledTable';
@@ -11,6 +11,7 @@ import useGetEmployeeLevels from '../../hooks/useGetEmployeeLevel';
 import useGetRatingCycle from '../../hooks/useGetRatingCycle';
 import useGetRatingDetails from '../../hooks/useGetRatingDetails';
 import useGetRatingReviewDetails from '../../hooks/useGetReviewDetails';
+import { handleSorting } from '../../utils/handleSorting';
 import KraModal from '../KRAModal';
 
 import EmployeeList from './EmployeeList';
@@ -22,15 +23,19 @@ function ManagerDashboard() {
 	const [employeeId, setEmployeeId] = useState();
 	const [openKraModal, setOpenKraModal] = useState(false);
 	const [ratingCycle, setRatingCycle] = useState('');
+	const [sorting, setSorting] = useState({
+		sortOrder: 'asc',
+	});
+	const [sortedData, setSortedData] = useState([]);
 
 	const ratingColumns = useGetRatingColumns();
 
-	const { level } = useGetEmployeeLevels();
+	const { level, loading : levelLoading } = useGetEmployeeLevels();
 
 	const {
 		data, filters, setFilters,
 		loading, isReportingManager,
-	} = useGetRatingReviewDetails({ level, ratingCycle });
+	} = useGetRatingReviewDetails({ level, ratingCycle, setSortedData });
 
 	const { data : ratingData, loading : ratingLoading } = useGetRatingDetails(ratingCycle);
 
@@ -38,6 +43,8 @@ function ManagerDashboard() {
 		setEmployeeId,
 		level,
 		setOpenKraModal,
+		setSortData : setSorting,
+		sortData    : sorting,
 	});
 
 	const { ratingOptions } = useGetRatingCycle(setRatingCycle);
@@ -59,6 +66,16 @@ function ManagerDashboard() {
 			</div>
 		);
 	};
+
+	useEffect(() => {
+		if (sorting.sortBy) {
+			handleSorting({ sorting, setSortedData, sortedData });
+		}
+	}, [sorting, sortedData]);
+
+	useEffect(() => {
+		setSortedData(data);
+	}, [data, sortedData]);
 
 	return (
 		<div>
@@ -92,7 +109,7 @@ function ManagerDashboard() {
 			)}
 
 			<div className={styles.table_container}>
-				{!loading && isEmpty(data) ? (
+				{!loading && !levelLoading && isEmpty(data) ? (
 					<div className={styles.flexitem_1}>
 						<EmptyState />
 					</div>
@@ -104,9 +121,18 @@ function ManagerDashboard() {
 								setEmployeeId={setEmployeeId}
 								level={level}
 								setOpenKraModal={setOpenKraModal}
-								loading={loading}
+								loading={loading || levelLoading}
+								setSortData={setSorting}
+								sortData={sorting}
 							/>
-						) : <StyledTable columns={columns} data={data} loading={loading} emptyText="No Data Found" /> }
+						) : (
+							<StyledTable
+								columns={columns}
+								data={sortedData}
+								loading={loading || levelLoading}
+								emptyText="No Data Found"
+							/>
+						)}
 					</div>
 				)}
 				<div className={styles.flexitem_2}>

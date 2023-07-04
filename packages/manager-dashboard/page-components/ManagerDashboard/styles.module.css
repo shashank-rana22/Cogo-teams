@@ -102,3 +102,29 @@
 		order: 1;
 	}
 }
+
+.icon_flex {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-left: 8px;
+
+	& svg{
+		
+	}
+}
+
+.active{
+	fill : red;
+}
+
+.inactive {
+	fill : #fff;
+}
+
+.header_text{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

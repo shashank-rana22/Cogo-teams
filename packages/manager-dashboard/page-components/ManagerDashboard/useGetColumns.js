@@ -1,4 +1,4 @@
-import { IcCError } from '@cogoport/icons-react';
+import { IcCError, IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -8,11 +8,36 @@ const useGetColumns = ({
 	level = '',
 	setEmployeeId,
 	setOpenKraModal,
+	setSortData,
+	sortData,
 }) => {
 	const handleEmployeeId = (item) => {
 		setEmployeeId(item?.employee_id);
 		setOpenKraModal(true);
 	};
+
+	const { sortBy, sortOrder } = sortData || {};
+
+	const renderSortingArrows = (key) => (
+		<div className={styles.icon_flex}>
+			<IcMArrowRotateUp
+				className={sortBy === key && sortOrder === 'asc' && styles.active}
+				onClick={() => setSortData({
+					...sortData,
+					sortOrder : 'asc',
+					sortBy    : key,
+				})}
+			/>
+			<IcMArrowRotateDown
+				className={sortBy === key && sortOrder === 'desc' && styles.active}
+				onClick={() => setSortData({
+					...sortData,
+					sortOrder : 'desc',
+					sortBy    : key,
+				})}
+			/>
+		</div>
+	);
 
 	const columns = [
 		{
@@ -29,8 +54,13 @@ const useGetColumns = ({
 		},
 
 		{
-			Header   : <div className={styles.table_text}>Calculated Rating</div>,
-			accessor : (item) => (
+			Header: (
+				<div className={styles.header_text}>
+					Calculated Rating
+					{renderSortingArrows('system_rating')}
+				</div>
+			),
+			accessor: (item) => (
 				<div className={styles.table_text}>
 					{startCase(item?.system_rating) || '-'}
 				</div>
@@ -49,8 +79,13 @@ const useGetColumns = ({
 		},
 
 		{
-			Header   : <div className={styles.table_text}>Final Rating</div>,
-			accessor : (item) => (
+			Header: (
+				<div className={styles.header_text}>
+					Final Rating
+					{renderSortingArrows('final_rating')}
+				</div>
+			),
+			accessor: (item) => (
 				<div className={styles.table_text}>
 					{startCase(item?.final_rating) || '-'}
 				</div>
@@ -67,8 +102,13 @@ const useGetColumns = ({
 			id: 'average_rating',
 		},
 		{
-			Header   : <div className={styles.table_text}>Z-Score</div>,
-			accessor : (item) => (
+			Header: (
+				<div className={styles.header_text}>
+					Z-score
+					{renderSortingArrows('z_score')}
+				</div>
+			),
+			accessor: (item) => (
 				<div className={styles.table_text}>
 					{startCase(item?.z_score) || '-'}
 				</div>
