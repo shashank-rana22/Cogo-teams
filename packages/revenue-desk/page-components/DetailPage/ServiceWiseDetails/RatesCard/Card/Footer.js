@@ -1,14 +1,19 @@
-import { Pill, Tooltip } from '@cogoport/components';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import { Pill, Popover, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import { DECIMAL_PLACES, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
 
+import ShowLineItems from './ShowLineItems';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, prefrence_key }) {
+	const [visible, setVisible] = useState(false);
+	const lineItems = data?.rowData?.line_items;
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const showValidity = (item) => {
 		if (item?.rowData?.is_rate_expired) {
@@ -130,6 +135,11 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 						})}
 					</div>
 				</div>
+				{!isEmpty(lineItems) ? (
+					<Popover placement="top" trigger="mouseenter" render={<ShowLineItems lineItems={lineItems?.[0]} />}>
+						<div onClick={() => setVisible(!visible)}>view more</div>
+					</Popover>
+				) : null}
 				<div>
 					{
 							data?.rowData?.origin_locals_price

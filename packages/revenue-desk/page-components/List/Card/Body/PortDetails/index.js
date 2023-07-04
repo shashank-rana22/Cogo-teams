@@ -69,7 +69,7 @@ function PortDetails({ data }) {
 				<div className={styles.origin_location_container}>
 					{handleLocationDetails(origin, false, data?.origin_main_port)}
 				</div>
-				<div style={{ marginRight: '10px' }}>
+				<div style={{ margin: '0 20px' }}>
 					<IcMPortArrow />
 				</div>
 				<div className={styles.destination_location_container}>
