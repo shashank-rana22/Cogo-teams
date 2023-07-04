@@ -19,10 +19,13 @@ function POCDetails({ data }) {
 	return (
 		<div className={styles.poc_detail_container}>
 			<div className={styles.poc_list}>
-				<div>
-					<span>E-Booking</span>
-					:
-					<span>{eBooking === 'available' ? 'Yes' : 'No'}</span>
+				<div className={styles.basic_info}>
+					<div className={styles.basic_info_heading}>
+						E-Booking
+						<span>:</span>
+					</div>
+
+					{eBooking === 'available' ? 'Yes' : 'No'}
 				</div>
 				{/* <header className={styles.header}>
 						{fields.map((field) => (

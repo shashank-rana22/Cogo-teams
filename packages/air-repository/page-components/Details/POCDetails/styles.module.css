@@ -14,9 +14,23 @@
 	flex-direction: column;
 	background: var(--color-tertiary-blue-5);
 	border-radius: 4px;
-	border: 1px solid var(--color-tertiary-blue-4)
+	border: 1px solid var(--color-tertiary-blue-4);
+	padding: 8px 16px;
 }
 
+.basic_info {
+	display: flex;
+	border-bottom: 1px solid var(--color-tertiary-blue-4);
+}
+
+.basic_info_heading {
+	display: flex;
+	font-weight: 500;
+	color: var(--color-accent-orange-2);
+	span {
+		margin: 0 16px 0 16px;
+	}
+}
 
 .list_container {
 	display: flex;
