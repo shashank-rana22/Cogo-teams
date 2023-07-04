@@ -3,9 +3,9 @@
         "task_attributes": [
             {
                 "task": ["mark_confirmed","upload_local_house_bill_of_lading","upload_booking_note","upload_local_bill_of_lading"],
-                "state": "awaiting_service_provider_confirmation",
-                "status": "pending",
-                "assigned_stakeholder": "service_ops1"
+                "state": ["awaiting_service_provider_confirmation"],
+                "status": ["pending"],
+                "assigned_stakeholder": ["service_ops1"]
             },
             {
                 "task": "mark_confirmed",
