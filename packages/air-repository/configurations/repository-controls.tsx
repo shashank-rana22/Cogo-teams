@@ -95,45 +95,65 @@ const repositoryControls = () => ({
 	],
 	email: [
 		{
-			name        : 'poc_name',
-			type        : 'text',
-			label       : 'Airline Person(POC)',
-			placeholder : 'Enter name',
-			span        : 6,
-			rules       : {
-				required: true,
-			},
-		},
-		{
-			name        : 'poc_email',
-			type        : 'text',
-			label       : 'Airline E-mail ID',
-			placeholder : 'Enter email',
-			span        : 6,
-			rules       : {
-				required: true,
-			},
-		},
-		{
-			name    : 'rate_required',
-			type    : 'select',
-			options : [
+			name               : 'pocs_data',
+			type               : 'fieldArray',
+			span               : 12,
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			controls           : [
 				{
-					label : 'Yes',
-					value : 'yes',
+					name        : 'name',
+					type        : 'text',
+					label       : 'Airline Person(POC)',
+					placeholder : 'Enter name',
+					span        : 6,
+					rules       : {
+						required: true,
+					},
 				},
 				{
-					label : 'No',
-					value : 'no',
+					name        : 'email',
+					type        : 'text',
+					label       : 'Airline E-mail ID',
+					placeholder : 'Enter email',
+					span        : 6,
+					rules       : {
+						required: true,
+					},
+				},
+				{
+					name        : 'mobile_number',
+					type        : 'number',
+					label       : 'Enter Contact Number',
+					placeholder : 'Enter contact number',
+					span        : 6,
+					rules       : {
+						required: true,
+					},
+				},
+				{
+					name    : 'rate_required',
+					type    : 'select',
+					options : [
+						{
+							label : 'Yes',
+							value : 'yes',
+						},
+						{
+							label : 'No',
+							value : 'no',
+						},
+					],
+					value : 'yes',
+					label : 'Do we send Agreed Rate in Email for this Airline?',
+					span  : 6,
+					rules : {
+						required: true,
+					},
 				},
 			],
-			value : 'yes',
-			label : 'Do we send Agreed Rate in Email for this Airline?',
-			span  : 6,
-			rules : {
-				required: true,
-			},
 		},
+
 	],
 	platform: [
 		{

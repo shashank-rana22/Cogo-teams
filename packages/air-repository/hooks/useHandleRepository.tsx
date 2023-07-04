@@ -9,12 +9,13 @@ const useHandleRepository = (edit) => {
 		method : 'POST',
 	});
 
-	const handleRepository = async (payload, listRepository) => {
+	const handleRepository = async (payload, listRepository, setShowModal) => {
 		try {
 			await trigger({
 				data: payload,
 			});
 			listRepository();
+			setShowModal(false);
 			Toast.success(`Repository ${edit ? 'Updated' : 'Created'} Successfully`);
 		} catch (err) {
 			Toast.error(err?.response?.data?.base || err?.message || 'Failed to Upload');

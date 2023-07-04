@@ -30,11 +30,10 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 
 	const onSubmit = (values) => {
 		const payload = { ...values, id: item?.id, action_name: edit ? 'update' : undefined };
-		handleRepository(payload, listRepository).then(() => {
+		handleRepository(payload, listRepository, setShowModal).then(() => {
 			if (edit) {
 				setEdit(false);
 			}
-			setShowModal(false);
 		});
 	};
 

@@ -1,10 +1,13 @@
 .row {
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
+	max-height: 72px;
 }
 
 .fieldarray {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -24,27 +27,51 @@
 	padding: 4px;
 
 	:global {
-		.ui_select_input_placeholder {
-			font-size: 14px;
-			color: #bdbdbd;
+		.ui_input_container {
+			max-height: 32px;
+			border: 1px solid #333;
+
+			.ui_input_control {
+				font-size: 12px;
+			}
+
+			.ui_input_control::placeholder {
+				font-size: 12px;
+				color: #333;
+			}
 		}
 
-		.ui_input_control::placeholder {
-			font-size: 14px;
-			color: #bdbdbd;
+		.ui_select_container {
+			.ui_select_display_container {
+				max-height: 32px;
+				border: 1px solid #333;
+
+				.ui_select_input_control {
+					font-size: 12px;
+
+					.ui_select_input_placeholder {
+						font-size: 12px;
+						color: #333;
+					}
+				}
+			}
 		}
 	}
 }
 
 .delete_icon {
-	width: 28px;
-	max-height: 28px;
-	margin-top: 8px;
+	position: absolute;
+	bottom: 80px;
+	width: 100%;
+	height: 20px;
 	cursor: pointer;
+	left:240px;
+	fill: var(--color-primary-error-red-2);
 }
 
 .child_label {
 	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;
+	font-weight: 500;
 }

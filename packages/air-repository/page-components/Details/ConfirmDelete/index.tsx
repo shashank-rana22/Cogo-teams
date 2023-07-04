@@ -18,7 +18,7 @@ function ConfirmDelete({ item, listRepository }:Props) {
 
 	const handleDelete = () => {
 		const payload = { id: item?.id, action_name: 'delete' };
-		handleRepository(payload, listRepository);
+		handleRepository(payload, listRepository, () => {});
 	};
 
 	return (
