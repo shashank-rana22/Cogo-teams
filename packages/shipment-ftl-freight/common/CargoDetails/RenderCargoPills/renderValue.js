@@ -1,10 +1,18 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, upperCase, format } from '@cogoport/utils';
 
-export const renderValue = (label, detail) => {
-	const { packages = [] } = detail || {};
+const UNIT_ELEMENT = 1;
+const TO_FIXED = 2;
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+export const renderValue = (label, detail) => {
+	const {
+		packages = [],
+		weight = '', volume = '',
+	} = detail || {};
+
+	const valueForInput = Array.isArray(packages)
+	&& packages?.length > GLOBAL_CONSTANTS.zeroth_index ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -19,7 +27,7 @@ export const renderValue = (label, detail) => {
 	const keysForPackages = Array(packages.length).fill(null).map(() => Math.random());
 
 	const packageDetails = () => {
-		if (packages?.length > 1) {
+		if (packages?.length > UNIT_ELEMENT) {
 			return (
 				<Tooltip
 					placement="bottom"
@@ -37,7 +45,7 @@ export const renderValue = (label, detail) => {
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
+						{`Package: ${inputValue} + ${packages.length - UNIT_ELEMENT
 						} more`}
 
 					</div>
@@ -77,7 +85,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.containers_count === 1) {
+			if (detail.containers_count === UNIT_ELEMENT) {
 				return '1 Container';
 			}
 
@@ -87,7 +95,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.packages_count === 1) {
+			if (detail.packages_count === UNIT_ELEMENT) {
 				return '1 Package';
 			}
 
@@ -97,7 +105,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === UNIT_ELEMENT) {
 				return '1 Truck';
 			}
 
@@ -115,7 +123,7 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (packages?.length === GLOBAL_CONSTANTS.zeroth_index) {
 				return null;
 			}
 			return packageDetails();
@@ -167,7 +175,7 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(TO_FIXED)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
@@ -182,6 +190,11 @@ export const renderValue = (label, detail) => {
 			return format(detail?.estimated_departure, 'dd MMM yyyy');
 		case 'estimated_arrival':
 			return format(detail?.estimated_arrival, 'dd MMM yyyy');
+		case 'weight':
+			return ` ${weight} ${'Ton'}`;
+		case 'volume':
+			return ` ${volume} ${'Cbm'}`;
+
 		default:
 			return detail[label] || null;
 	}
