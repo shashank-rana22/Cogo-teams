@@ -1,6 +1,8 @@
-import { orderBy, where } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
+import getQueryFilterMapping from './getQueryFilterMapping';
 
 const BULK_ASSIGN_SEEN_MINUTES = 15;
 
@@ -20,59 +22,27 @@ function getFireStoreQuery({
 	viewType,
 	activeSubTab,
 }) {
-	let queryFilters = [];
-
-	let filterId = '';
-
-	if (appliedFilters.assigned_to === 'me') {
-		filterId = userId;
-	} else {
-		filterId = appliedFilters?.assigned_agent;
-	}
+	const filterId = appliedFilters.assigned_to === 'me'
+		? userId
+		: appliedFilters?.assigned_agent;
 
 	const currentTime = new Date();
 	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 	const epochTimestamp = currentTime.getTime();
 
-	Object.keys(appliedFilters).forEach(
-		(item) => {
-			let filtersToBeApplied = [];
+	const queryFilterMapping = getQueryFilterMapping({
+		appliedFilters,
+		isBotSession,
+		epochTimestamp,
+		filterId,
+	});
 
-			const queryFilterMapping = {
-				channels:
-					[where('channel_type', 'in', appliedFilters[item])],
-				escalation:
-					[where('chat_status', '==', appliedFilters[item])],
-				chat_tags:
-					[where('chat_tags', 'array-contains', appliedFilters?.chat_tags)],
-				mobile_no:
-					[where('mobile_no', '==', appliedFilters?.mobile_no)],
-				assigned_to:
-					isBotSession
-						? [where('spectators_ids', 'array-contains', filterId)]
-						: [where('support_agent_id', '==', filterId)],
-				status:
-					appliedFilters[item] === 'unread'
-						? [where('has_admin_unread_messages', '==', true)]
-						: [],
-				shipment_filters:
-					appliedFilters[item]?.includes('likely_to_book_shipment')
-						? [where('is_likely_to_book_shipment', '==', true)]
-						: [],
-				'15_min_filter':
-					appliedFilters[item]?.includes('seen_by_user')
-						? [
-							where('last_message_document.conversation_type', '==', 'received'),
-							where('last_message_document.message_type', '==', 'text'),
-							where('last_message_document.created_at', '<=', epochTimestamp),
-							orderBy('last_message_document.created_at', 'desc'),
-						] : [],
-			};
-
-			filtersToBeApplied = queryFilterMapping?.[item] || [];
-
-			queryFilters = [...queryFilters, ...filtersToBeApplied];
-		},
+	const queryFilters = Object.keys(appliedFilters).reduce(
+		(accumulator, currentValue) => [
+			...accumulator,
+			...(queryFilterMapping?.[currentValue] || []),
+		],
+		[],
 	);
 
 	const tabWiseQuery = (
