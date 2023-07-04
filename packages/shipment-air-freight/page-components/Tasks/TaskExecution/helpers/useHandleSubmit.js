@@ -113,14 +113,14 @@ function useHandleSubmit({
 				const mainAirFreight = services.find(
 					(service) => service?.service_type === 'air_freight_service',
 				);
-				const awb_response = await createAwbInventory(
+				const hasError = await createAwbInventory(
 					rawValues,
 					mainAirFreight?.airline_id,
 					mainAirFreight?.shipment_id,
 					mainAirFreight?.service_provider_id,
 					createAwbInventoryTrigger,
 				);
-				if (awb_response?.base) {
+				if (hasError) {
 					setIsLoading(false);
 					return;
 				}

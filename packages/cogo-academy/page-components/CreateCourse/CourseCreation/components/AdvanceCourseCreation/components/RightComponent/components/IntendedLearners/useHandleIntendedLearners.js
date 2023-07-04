@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle } from 'react';
 
@@ -6,7 +8,7 @@ import useGetAudiences from '../../../../hooks/useGetAudiences';
 import useUpdateCourse from '../../../../hooks/useUpdateCourse';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
-const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCourse, state }) => {
+const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCourse, state, eligible_users }) => {
 	const {
 		control,
 		formState: { errors = {} },
@@ -63,30 +65,41 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 			setValue('frequency', data.frequency);
 
 			if (cogo_academy_sheets && !isEmpty(cogo_academy_sheets)) {
-				setValue('upload_excel', cogo_academy_sheets[0].resulted_file_url);
+				setValue('upload_excel', cogo_academy_sheets[GLOBAL_CONSTANTS.zeroth_index].resulted_file_url);
 			}
 		}
 	}, [data, setValue, listAudienceLoading]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
-			const onSubmit = (values) => ({
-				hasError : false,
-				values   : {
-					id,
-					audiences: (values.audiences || []).map((audience_id) => ({
-						id           : audience_id,
-						is_mandatory : (values.mandatory_audiences || []).includes(audience_id),
-					})),
-					...(values?.mandatory_audiences_user === 'custom'
-						? { file_url: values.upload_excel.finalUrl }
-						: {}),
-					...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
-					generate_sheet : false,
-					frequency      : values.frequency,
-					eligible_users : values?.mandatory_audiences_user,
-				},
-			});
+			const onSubmit = (values) => {
+				if (mandatoryAudiencesUserWatch === 'custom' && eligible_users !== 'custom') {
+					Toast.error('Please click on save and generate');
+
+					return {
+						hasError : true,
+						error    : {},
+					};
+				}
+
+				return {
+					hasError : false,
+					values   : {
+						id,
+						audiences: (values.audiences || []).map((audience_id) => ({
+							id           : audience_id,
+							is_mandatory : (values.mandatory_audiences || []).includes(audience_id),
+						})),
+						...(values?.mandatory_audiences_user === 'custom'
+							? { file_url: values.upload_excel.finalUrl || values.upload_excel }
+							: {}),
+						...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
+						generate_sheet : false,
+						frequency      : values.frequency,
+						eligible_users : values?.mandatory_audiences_user,
+					},
+				};
+			};
 
 			const onError = (error) => ({ hasError: true, error });
 

@@ -14,6 +14,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>{isFclLocal && item?.trade_type === 'import' ? 'POD' : 'POL'}</div>
 					<Tooltip
 						interactive
+						maxWidth={500}
 						content={
 							isFclLocal ? item.local_service?.port?.display_name
 								: item.freight_service?.origin_port?.display_name
@@ -41,6 +42,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 						<div className={styles.left}>
 							<div className={styles.grey}>POD</div>
 							<Tooltip
+								maxWidth={500}
 								interactive
 								content={item.freight_service?.destination_port?.display_name}
 							>
