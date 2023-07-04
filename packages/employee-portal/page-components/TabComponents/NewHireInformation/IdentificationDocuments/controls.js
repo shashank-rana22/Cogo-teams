@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const controls = [
 	{
 		name        : 'aadhaar_card_number',
-		label       : 'Aadhaar Card Number',
+		label       : 'Aadhaar Card Number*',
 		type        : 'number',
 		placeholder : 'Aadhaar Card Number',
 		rules       : {
@@ -17,7 +17,7 @@ const controls = [
 	},
 	{
 		name             : 'aadhaar_card',
-		label            : 'Upload Your Aadhaar Card',
+		label            : 'Upload Your Aadhaar Card*',
 		type             : 'fileUpload',
 		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		accept           : '.pdf',
@@ -26,7 +26,7 @@ const controls = [
 	},
 	{
 		name        : 'pan_card_number',
-		label       : 'Pan Card Number',
+		label       : 'Pan Card Number*',
 		type        : 'input',
 		placeholder : 'Pan Card Number',
 		rules       : {
@@ -40,7 +40,7 @@ const controls = [
 	},
 	{
 		name             : 'pan_card',
-		label            : 'Upload Your Pan Card',
+		label            : 'Upload Your Pan Card*',
 		type             : 'fileUpload',
 		accept           : '.pdf',
 		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
