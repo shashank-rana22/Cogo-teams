@@ -12,6 +12,8 @@ export interface Props {
 	functions?: FunctionObjects;
 	loading?: boolean;
 	isMobile?: boolean;
+	Child?: ReactFragment;
+	isOpen?: string;
 }
 
 const INCLUDE_LINE_SEPARATION = ['booking_mode', 'poc_email', 'lms_password'];
@@ -22,6 +24,8 @@ function CardItem({
 	functions = {},
 	loading = false,
 	isMobile = false,
+	Child = <div />,
+	isOpen = '',
 }:Props) {
 	return (
 		<div>
@@ -71,6 +75,11 @@ function CardItem({
 					})}
 				</div>
 			</section>
+			{isOpen === singleitem.id && (
+				<Child
+					data={singleitem}
+				/>
+			)}
 		</div>
 	);
 }

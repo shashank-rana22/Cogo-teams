@@ -10,6 +10,7 @@ import { ListDataType } from '../../commons/List/Interfaces';
 import { RepositoryFields } from '../../configurations/repository-fields';
 
 import ConfirmDelete from './ConfirmDelete';
+import POCDetails from './POCDetails';
 import styles from './styles.module.css';
 
 interface DetailsProps {
@@ -119,6 +120,7 @@ function Details({
 				functions={functions}
 				page={page}
 				setPage={setPage}
+				Child={POCDetails}
 			/>
 		</div>
 	);

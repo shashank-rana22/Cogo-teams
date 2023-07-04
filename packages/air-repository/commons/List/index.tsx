@@ -1,4 +1,5 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from './EmptyState';
@@ -14,6 +15,7 @@ interface Props {
 	page?: number;
 	setPage?: Function;
 	functions?: FunctionObjects;
+	Child?: ReactFragment;
 }
 
 const PAGE_SIZE = 10;
@@ -25,9 +27,20 @@ function List({
 	page,
 	setPage,
 	functions,
+	Child = <div />,
 } :Props) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = {}, total_count:totalCount } = listData;
+	const [isOpen, setIsOpen] = useState(null);
+
+	console.log('isOpen', isOpen);
+
+	const handlePOCDetails = (itm) => {
+		console.log('itm', itm);
+
+		setIsOpen(isOpen === null ? itm.id : null);
+		setIsOpen(itm.id);
+	};
 
 	const render = () => {
 		type TypeObject = string | number | Date | null | React.FC ;
@@ -35,14 +48,49 @@ function List({
 
 		if (loading || list.length) {
 			return (showlist).map((singleitem) => (
-				<ListItem
-					key={singleitem.id}
-					singleitem={singleitem}
-					fields={fields}
-					functions={functions}
-					loading={loading}
-					isMobile={isMobile}
-				/>
+				<>
+					<ListItem
+						key={singleitem.id}
+						singleitem={singleitem}
+						fields={fields}
+						functions={functions}
+						loading={loading}
+						isMobile={isMobile}
+						Child={Child}
+						isOpen={isOpen}
+					/>
+					<div
+						style={{ '--length': isOpen ? 0 : '-6px' } as React.CSSProperties}
+						className={styles.accordian_style}
+					>
+						{isOpen === singleitem.id ? (
+							<Button
+								themeType="linkUi"
+								onClick={() => {
+									setIsOpen(null);
+								}}
+							>
+								Show Less
+								<IcMArrowDown
+									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+								/>
+							</Button>
+						) : (
+							<Button
+								size="md"
+								themeType="linkUi"
+								onClick={() => {
+									handlePOCDetails(singleitem);
+								}}
+							>
+								<span>Show More</span>
+								<IcMArrowDown
+									style={{ cursor: 'pointer' }}
+								/>
+							</Button>
+						)}
+					</div>
+				</>
 			));
 		}
 		return <EmptyState />;

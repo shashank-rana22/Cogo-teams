@@ -3,7 +3,6 @@
 	align-items: center;
 	min-height: 40px;
 	background-color: #fff;
-	border-bottom: 1px solid #f8f2e7;
 }
 
 @media screen and (max-width: 768px) {
@@ -40,6 +39,9 @@
 	padding: 8px 20px;
 	word-wrap: wrap;
 	background: #fff;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	margin: 16px 8px 0;
+	border-radius: 8px;
 }
 
 .tablelabel {
