@@ -306,8 +306,6 @@ const GLOBAL_CONSTANTS = {
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
-		mobile_number                     : /^[0-9]{10}$/,
-		gst_number                        : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 	},

@@ -1,5 +1,7 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
+
+const geo = getGeoConstants();
 
 export const billingAddressControl = ({ setValue = () => {} }) => [
 	{
@@ -11,7 +13,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : GLOBAL_CONSTANTS.regex_patterns.gst_number,
+				value   : geo.regex.GST,
 				message : 'GST Number is invalid',
 			},
 			required: 'GST Number is required',

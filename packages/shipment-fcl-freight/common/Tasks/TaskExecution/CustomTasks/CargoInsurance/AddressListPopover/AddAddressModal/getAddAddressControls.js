@@ -1,6 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
+const geo = getGeoConstants();
 export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () => {} }) => [
 	{
 		label       : 'Billing Party Name',
@@ -118,7 +120,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 				if (!v?.number || !v?.country_code) {
 					return 'Phone Number is required';
 				}
-				return GLOBAL_CONSTANTS.regex_patterns.mobile_number.test(v.number) || 'Invalid Phone Number';
+				return geo.regex.MOBILE_NUMBER.test(v.number) || 'Invalid Phone Number';
 			},
 		},
 		span: 12,
@@ -144,7 +146,7 @@ export const getModifiedControls = ({
 								.cargo_insurance.countries.includes(
 									countryCode?.country_code,
 								)
-								? GLOBAL_CONSTANTS.regex_patterns.gst_number
+								? geo.regex.GST
 								: '',
 						message: 'Invalid Tax Number',
 					},
