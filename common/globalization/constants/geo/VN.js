@@ -403,6 +403,7 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
+		education_level: {},
 	},
 	navigations: {
 		supply_dashboard: {
