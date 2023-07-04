@@ -40,24 +40,22 @@ const KEY_COMPONENT_MAPPING = {
 };
 
 function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const { offer_letter, progress_stats } = data || {};
+	const { progress_stats, signed_documents } = data || {};
 
 	const {
-		offer_letter_signed,
-		documents_signed, additional_info_added,
-		company_policies_read,
+		// offer_letter_signed,
+		documents_signed, additional_info_added = {},
 	}	= progress_stats || {};
 
-	const signDocEnableContd = offer_letter_signed?.get_offer_letter_signed
-	&& Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
+	const signDocEnableContd = Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
 
 	const MAPPING = {
 		new_hire_information   : true,
-		offer_letter           : !isEmpty(offer_letter),
-		additional_information : offer_letter_signed?.get_offer_letter_signed,
-		sign_your_docs         : signDocEnableContd,
+		// offer_letter           : !isEmpty(offer_letter),
+		additional_information : true,
+		day_1                  : signDocEnableContd,
+		sign_your_docs         : signDocEnableContd && !isEmpty(signed_documents),
 		company_policies       : signDocEnableContd && documents_signed?.documents_signed,
-		day_1                  : signDocEnableContd && company_policies_read?.company_policies_read,
 		// maps: {
 		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
@@ -87,6 +85,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>Meanwhile, get started with</div>
+
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 				{(Object.keys(MAPPING)).map((item) => (
 					<div
@@ -106,9 +105,9 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 								width="60"
 								height="60"
 							/>
-
 							<div className={styles.card_header}>{startCase(item)}</div>
 						</div>
+
 						<div className={styles.arrow_wrapper}>
 							<IcMArrowNext width={20} height={20} />
 						</div>
