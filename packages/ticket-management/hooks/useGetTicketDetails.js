@@ -29,7 +29,7 @@ const useGetTicketDetails = ({ ticketId }) => {
 	}, [trigger, performedById]);
 
 	useEffect(() => {
-		if (!(isEmpty(ticketId))) {
+		if (!isEmpty(ticketId)) {
 			getTicketDetails(ticketId);
 		}
 	}, [ticketId, getTicketDetails]);

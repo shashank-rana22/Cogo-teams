@@ -37,7 +37,7 @@ const useReassignTicket = ({
 			await trigger({ data: getPayload({ profile, ticketId, val, additionalData }) });
 
 			getTicketActivity();
-			getTicketDetails();
+			getTicketDetails(ticketId);
 			Toast.success('Assigned Successfully.');
 		} catch (error) {
 			console.error(error?.error);
