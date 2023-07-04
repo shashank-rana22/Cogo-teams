@@ -82,39 +82,44 @@ function BillingAddressDetails({
 					) : (
 						<div>
 							<div className={styles.list}>
-								{(data || []).map((item) => (
-									<div className={styles.billing_party_container} key={item.id}>
-										<Radio
-											style={{ marginTop: '3px' }}
-											checked={item.id === billingData.billingId}
-											onChange={() => setBillingData({
-												address_type   : item.address_type,
-												billingId      : item.id,
-												gstin          : item.tax_number,
-												billingAddress : item.address,
-												billingCity    : item.city,
-												billingPincode : item.pincode,
-												billingState   : item.state,
-												partyName      : item.name,
-											})}
-										/>
-										<div className={styles.details}>
-											<div className={styles.billing_party}>{startCase(item?.name)}</div>
-											<div className={cl`${styles.billing_party} ${styles.details}`}>
-												{item?.tax_number}
-											</div>
-											<div className={cl`${styles.billing_party} ${styles.details}`}>
-												{item?.address}
-												,
-												{item?.city}
-												,
-												{item?.state}
-												,
-												{item?.pincode}
+								{(data || []).map((item) => {
+									const {
+										address_type, id, tax_number, address, pincode, city, state, name,
+									} = item || {};
+									return (
+										<div className={styles.billing_party_container} key={id}>
+											<Radio
+												style={{ marginTop: '3px' }}
+												checked={id === billingData.billingId}
+												onChange={() => setBillingData({
+													address_type,
+													billingId      : id,
+													gstin          : tax_number,
+													billingAddress : address,
+													billingCity    : city,
+													billingPincode : pincode,
+													billingState   : state,
+													partyName      : name,
+												})}
+											/>
+											<div className={styles.details}>
+												<div className={styles.billing_party}>{startCase(name)}</div>
+												<div className={cl`${styles.billing_party} ${styles.details}`}>
+													{tax_number}
+												</div>
+												<div className={cl`${styles.billing_party} ${styles.details}`}>
+													{address}
+													,
+													{city}
+													,
+													{state}
+													,
+													{pincode}
+												</div>
 											</div>
 										</div>
-									</div>
-								))}
+									);
+								})}
 							</div>
 							<Layout
 								fields={billingAddressControlForSelf}

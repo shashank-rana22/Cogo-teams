@@ -15,7 +15,7 @@ const useInsuranceCheckoutAndGenerate = ({
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
-	const { apiTrigger, apiLoading } = useUpdateShipmentService({ refetch });
+	const { apiTrigger: getUpdateShipmentService, apiLoading } = useUpdateShipmentService({ refetch });
 
 	const [{ loading }, trigger] = useRequestBf({
 		auth   : 'post_saas_insurance_checkout_and_generate',
@@ -38,7 +38,7 @@ const useInsuranceCheckoutAndGenerate = ({
 					customerConfirmationDoc : uploadProof?.[GLOBAL_CONSTANTS.zeroth_index]?.name,
 				},
 			});
-			await apiTrigger({
+			await getUpdateShipmentService({
 				data: payloadForUpdateShipment,
 			});
 			Toast.success(successMessage);
