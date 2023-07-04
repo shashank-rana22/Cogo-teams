@@ -1,9 +1,15 @@
 import { getDate } from '../../../utils/getDate';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const { state, origin_port, destination_port } = primary_service || {};
+	const modifiedPrimaryService = {
+		...primary_service || {},
+		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
+		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
+	const { state, origin_port, destination_port } = modifiedPrimaryService || {};
 
 	const disabledState = state === 'vessel_arrived'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
@@ -65,7 +71,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
 
-		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = getDate(modifiedPrimaryService[name]);
 	});
 
 	return { finalControls, defaultValues: DEFAULT_VALUES };
