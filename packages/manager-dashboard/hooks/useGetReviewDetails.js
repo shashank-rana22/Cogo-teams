@@ -35,7 +35,8 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 			await trigger({
 				params: {
 					manager_id : id,
-					label      : isReportingManager ? 'reporting_manager_wise' : 'all_employee',
+					label      : isReportingManager && level === 'vertical_head'
+						? 'reporting_manager_wise' : 'all_employee',
 					level,
 					end_date   : formattedDate(lastDate),
 					start_date : formattedDate(firstDate),

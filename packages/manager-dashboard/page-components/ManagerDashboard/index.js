@@ -76,18 +76,20 @@ function ManagerDashboard() {
 				/>
 			</div>
 
-			<div className={styles.select_container}>
-				{ASYNC_SELECT_MAPPING.map((val) => (
-					<div key={val.asyncKey} className={styles.async_select}>
-						<div className={styles.label}>{val.placeholder}</div>
-						<AsyncSelect
-							value={filters[val.key]}
-							onChange={(e) => setFilters((prev) => ({ ...prev, [val.key]: e }))}
-							{...val}
-						/>
-					</div>
-				))}
-			</div>
+			{level === 'vertical_head' && (
+				<div className={styles.select_container}>
+					{ASYNC_SELECT_MAPPING.map((val) => (
+						<div key={val.asyncKey} className={styles.async_select}>
+							<div className={styles.label}>{val.placeholder}</div>
+							<AsyncSelect
+								value={filters[val.key]}
+								onChange={(e) => setFilters((prev) => ({ ...prev, [val.key]: e }))}
+								{...val}
+							/>
+						</div>
+					))}
+				</div>
+			)}
 
 			<div className={styles.table_container}>
 				{!loading && isEmpty(data) ? (
