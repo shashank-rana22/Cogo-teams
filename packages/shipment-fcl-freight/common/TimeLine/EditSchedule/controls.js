@@ -1,5 +1,5 @@
+import { getDate } from '../../../utils/getDate';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../../../utils/getDate'; 
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {

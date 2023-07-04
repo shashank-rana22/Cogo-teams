@@ -1,17 +1,17 @@
 const fileUploadRestControls = {
 	type       : 'file',
-		themeType  : 'secondary',
-		drag       : true,
-		uploadIcon : 'ic-upload',
-		height     : 80,
-		accept:
+	themeType  : 'secondary',
+	drag       : true,
+	uploadIcon : 'ic-upload',
+	height     : 80,
+	accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'
 			+ 'msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType : 'aws',
-		rules      : { required: 'Required' },
-		span       : 4,
+	uploadType : 'aws',
+	rules      : { required: 'Required' },
+	span       : 4,
 
-}
+};
 
 export const invoiceControls = [
 	{
@@ -36,19 +36,19 @@ export const invoiceControls = [
 		dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
 	},
 	{
-		label      : 'Upload GST Certificate',
-		name       : 'gstDoc',
-		...fileUploadRestControls
-		
+		label : 'Upload GST Certificate',
+		name  : 'gstDoc',
+		...fileUploadRestControls,
+
 	},
 	{
-		label      : 'Upload PAN Certificate',
-		name       : 'panDoc',
-		...fileUploadRestControls
+		label : 'Upload PAN Certificate',
+		name  : 'panDoc',
+		...fileUploadRestControls,
 	},
 	{
-		label      : 'Upload Commercial Invoice',
-		name       : 'invoiceDoc',
-		...fileUploadRestControls
+		label : 'Upload Commercial Invoice',
+		name  : 'invoiceDoc',
+		...fileUploadRestControls,
 	},
 ];
