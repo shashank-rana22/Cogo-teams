@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -149,6 +150,9 @@ export default function DocumentDesk({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="purchase_live_invoice" title="Live Invoices">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>

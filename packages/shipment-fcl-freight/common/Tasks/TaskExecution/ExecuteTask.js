@@ -27,6 +27,8 @@ const excludeServices = [
 const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 const STEPS_LENGTH = 1;
 
+const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
+
 function ExecuteTask({
 	task = {},
 	onCancel = () => {},
@@ -47,7 +49,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - STEPS_LENGTH]
+		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
 		: {};
 
 	if (loading) {
@@ -200,7 +202,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - STEPS_LENGTH}
+			isLastStep={currentStep === steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
