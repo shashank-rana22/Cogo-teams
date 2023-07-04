@@ -1,0 +1,28 @@
+.parent{
+    padding:36px;
+    background-color: white;
+    border-radius: 8px;
+}
+.parent >*{
+    width:900px;
+}
+.heading{
+    display: flex;
+    font-weight: 600;
+    font-size:16px;
+}
+.heading >:first-child{
+    width:320px;
+}
+.add_more{
+    margin-top: 12px;
+    text-align: right;
+    text-decoration: underline;
+    cursor:pointer
+}
+.flex_right{
+    widtH:100%;
+    display:flex;
+    gap:20px;
+    justify-content: right;
+}

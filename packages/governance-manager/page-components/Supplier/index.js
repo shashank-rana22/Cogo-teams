@@ -3,17 +3,18 @@ import React, { useState } from 'react';
 
 import Item from '../ListSupplier/Item';
 
+import MarketFeedback from './Steps/MarketFeedback';
 import NeedAnalysis from './Steps/NeedAnalysis';
 import styles from './styles.module.css';
 
 function Supplier() {
 	const items = [
-		{ title: 'Create a wallet', key: 'need_analysis' },
-		{ title: 'Fund your wallet', key: 'market_feedback' },
-		{ title: 'Buy a token', key: 'supplier_evaluation' },
-		{ title: 'Claim your token', key: 'due_dilligance' },
-		{ title: 'Buy a token', key: 'supplier_approval' },
-		{ title: 'Claim your token', key: 'contract_sla' },
+		{ title: 'Need analysis', key: 'need_analysis' },
+		{ title: 'Market Feedback', key: 'market_feedback' },
+		{ title: 'Supplier Evaluation', key: 'supplier_evaluation' },
+		{ title: 'Due Dilligance', key: 'due_dilligance' },
+		{ title: 'Suppliar Approval', key: 'supplier_approval' },
+		{ title: 'Contract and SLA', key: 'contract_sla' },
 
 	];
 	const [active, setActive] = useState('market_feedback');
@@ -28,7 +29,8 @@ function Supplier() {
 				shadowed
 				className={styles.stepper}
 			/>
-			<NeedAnalysis />
+			{/* <NeedAnalysis /> */}
+			<MarketFeedback />
 
 		</>
 	);

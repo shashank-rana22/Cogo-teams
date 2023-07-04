@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -1609,6 +1609,9 @@ importers:
       '@cogoport/store':
         specifier: workspace:0.1.0
         version: link:../../common/store
+      '@cogoport/supply-dashboards':
+        specifier: workspace:0.1.0
+        version: link:../supply-dashboards
       '@cogoport/utils':
         specifier: ^1.2.6
         version: 1.2.10
