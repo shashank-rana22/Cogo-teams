@@ -1,6 +1,6 @@
 import Filters from './Filters';
 import List from './List';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 function Body() {
 	return (

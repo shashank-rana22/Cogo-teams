@@ -2,7 +2,9 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+
+import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../configurations/objective-status-color-mapping';
 
 import styles from './styles.module.css';
 
@@ -14,7 +16,14 @@ const getListColumnMapping = () => {
 			key      : 'status',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>STATUS</div>,
-			accessor : ({ status }) => status || '___',
+			accessor : ({ status }) => (status ? (
+				<Pill
+					size="lg"
+					color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}
+				>
+					{startCase(status)}
+				</Pill>
+			) : '___'),
 		},
 		{
 			key  : 'objective_name',
@@ -25,10 +34,10 @@ const getListColumnMapping = () => {
 		<div className={styles.sub_heading}>Type</div>
 	</>,
 			accessor: ({ name, type }) => (
-				<div>
+				<>
 					<div>{name || '___'}</div>
-					<div>{type || '___'}</div>
-				</div>
+					<Pill size="md">{startCase(type || '___')}</Pill>
+				</>
 			),
 		},
 		{
@@ -40,13 +49,13 @@ const getListColumnMapping = () => {
 		<div className={styles.sub_heading}>Channel</div>
 	</>,
 			accessor: ({ partner, channel }) => (
-				<div>
-					<div>{partner.business_name || '___'}</div>
+				<>
+					<div>{startCase(partner.business_name || '___')}</div>
 					<div>
 						{!isEmpty(channel)
-                         && channel.map((item) => <Pill key={item} size="md" color="#F9F9F9">{item}</Pill>)}
+                         && channel.map((item) => <Pill key={item} size="md">{item}</Pill>)}
 					</div>
-				</div>
+				</>
 			),
 		},
 		{
@@ -59,15 +68,15 @@ const getListColumnMapping = () => {
 	</>,
 			accessor: ({ roles }) => (
 				!isEmpty(roles) && (
-					<div>
-						<div>
+					<>
+						<div className={styles.roles}>
 							{roles.map((role, index) => (
 								index === roles.length - INDEX_LENGTH_NORMALIZATION_VALUE
 									? role.name
 									: `${role.name}, `))}
 						</div>
-						<Pill size="md" color="#F9F9F9">{roles.length}</Pill>
-					</div>
+						<Pill size="md">{roles.length}</Pill>
+					</>
 				)
 			),
 		},
@@ -98,7 +107,7 @@ const getListColumnMapping = () => {
 			accessor : () => (
 				<Button themeType="tertiary" type="button">
 					<IcMEdit style={{ marginRight: '4px' }} />
-					Edit
+					<strong>Edit</strong>
 				</Button>
 			),
 		},
@@ -107,7 +116,9 @@ const getListColumnMapping = () => {
 			flex     : 1,
 			Header   : <div />,
 			accessor : () => (
-				<Button type="button" themeType="secondary">Set Activation</Button>
+				<Button type="button" themeType="secondary">
+					<strong>Set Activation</strong>
+				</Button>
 			),
 		},
 	];

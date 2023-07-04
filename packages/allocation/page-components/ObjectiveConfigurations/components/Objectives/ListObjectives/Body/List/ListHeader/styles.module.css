@@ -1,9 +1,10 @@
 .list_header_container {
     display: flex;
+    padding: 12px;
+    margin: 8px 0;
     background-color: #FDFBF6;
     border: 1px solid #F8F2E7;
     box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-    padding: 12px;
 }
 
 .column_container {

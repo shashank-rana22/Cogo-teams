@@ -1,0 +1,29 @@
+.card_container {
+    margin: 8px 0;
+    background-color: #FFF;
+    border: 1px solid #F8F2E7;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+}
+
+.list_card {
+    display: flex;
+    padding: 12px;
+}
+
+.card_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.view_details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDFBF6;
+    border: 1px solid #F8F2E7;
+    box-shadow: 0 0 4px rgb(0 0 0 / 10%);
+    cursor: pointer;
+}
