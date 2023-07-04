@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { DECIMAL_PLACES, DEFAULT_INDEX, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
+import { DECIMAL_PLACES, PERCENTAGE_CHECK, VALUE_ZERO } from '../../../../constants';
 
 import ShowLineItems from './ShowLineItems';
 import ShowSellRates from './ShowSellRates';
@@ -185,7 +185,7 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 						placement="top"
 						trigger="mouseenter"
 						render={(
-							<ShowLineItems lineItems={lineItems?.[DEFAULT_INDEX]} />
+							<ShowLineItems lineItems={lineItems} />
 						)}
 					>
 						<div
