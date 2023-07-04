@@ -1,13 +1,14 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const LIVE_COURSES = {
-	introduction_to_cogoport : 'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-	git_course               : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-	html_css_course          : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+	introduction_to_cogoport : GLOBAL_CONSTANTS?.drive_link?.introduction_to_cogoport_link,
+	git_course               : GLOBAL_CONSTANTS?.drive_link?.git_course_link,
+	html_css_course          : GLOBAL_CONSTANTS?.drive_link?.html_css_course_link,
 };
 
 function LiveCourseModal() {
