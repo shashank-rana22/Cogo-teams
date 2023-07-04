@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
@@ -18,8 +19,8 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 					manager_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8',
 					label      : selectValue,
 					level,
-					end_date,
-					start_date,
+					end_date   : format(end_date, 'yyyy-MM-dd'),
+					start_date : format(start_date, 'yyyy-MM-dd'),
 
 				},
 			});

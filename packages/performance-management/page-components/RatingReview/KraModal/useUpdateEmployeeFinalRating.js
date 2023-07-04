@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 
 const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 	const { end_date, start_date } = selectCycle || {};
@@ -18,8 +19,8 @@ const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 					manager_id          : data?.employee_details?.manager_id,
 					kra_rating_assigned : starRating,
 					comments,
-					start_date,
-					end_date,
+					start_date          : format(start_date, 'yyyy-MM-dd'),
+					end_date            : format(end_date, 'yyyy-MM-dd'),
 				},
 			});
 
