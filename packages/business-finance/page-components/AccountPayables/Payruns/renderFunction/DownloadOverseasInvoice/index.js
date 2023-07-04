@@ -13,7 +13,7 @@ function DownloadOverseasInvoice({ itemData, overseasData }) {
 				? (
 					<div className={styles.button}>
 						<IcMDownload
-							onClick={() => downloadPayrunHistory(itemData)}
+							onClick={() => downloadPayrunHistory(itemData?.id)}
 							height={20}
 							width={20}
 							color="#F68B21"

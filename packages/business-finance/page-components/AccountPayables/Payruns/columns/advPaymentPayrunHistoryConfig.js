@@ -1,4 +1,4 @@
-export const domesticPayrunHistoryConfig = {
+export const advPaymentPayrunHistoryConfig = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {
@@ -15,34 +15,56 @@ export const domesticPayrunHistoryConfig = {
 	},
 	fields: [
 		{
-			label : 'PayRun Name',
-			key   : 'name',
-			span  : 1.8,
+			key   : 'organizationName',
+			label : 'Name',
+			span  : 2.3,
+			// func  : 'renderAdvanceName',
 		},
 		{
-			label : 'Total Value',
-			key   : 'totalValue',
-			func  : 'renderFormatedAmount',
-			span  : 1.4,
+			key   : 'advanceDocumentNo',
+			label : 'Adv. Doc. No',
+			span  : 1.5,
 		},
-
 		{
-			label : 'No. Of Invoices',
-			key   : 'invoiceCount',
+			label  : 'SID',
+			topKey : {
+				key: 'jobNumber',
+			},
+			lowerKey: {
+				key  : 'serviceType',
+				type : 'serviceType',
+			},
+			func : 'renderFieldPair',
+			span : 1,
+		},
+		{
+			key   : 'incidentRefNo',
+			label : 'Incident Id',
 			span  : 1.2,
 		},
 		{
-			label : 'Date & Time',
-			key   : 'createdAt',
+			label : 'Payable Amount',
+			key   : 'payableAmount',
+			// func  : 'renderPayableAmount',
+			span  : 1.5,
+		},
+		{
+			key   : 'bankDetail',
+			label : 'Bank Details',
+			// func  : 'renderAdvanceBankDetails',
 			span  : 2,
 		},
 		{
-			func : 'renderViewInvoice',
-			span : 1,
+			key   : 'dueDate',
+			type  : 'text',
+			label : 'Due Date',
+			span  : 1,
 		},
 		{
-			func : 'renderRibbon',
-			span : 1,
+			key   : 'createdAt',
+			type  : 'text',
+			label : 'Created At',
+			span  : 1,
 		},
 
 	],

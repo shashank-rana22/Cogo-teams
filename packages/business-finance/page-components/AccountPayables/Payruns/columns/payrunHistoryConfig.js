@@ -1,4 +1,4 @@
-export const overseasPayrunHistoryConfig = {
+export const payrunHistoryConfig = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {
@@ -38,7 +38,7 @@ export const overseasPayrunHistoryConfig = {
 		},
 		{
 			func : 'renderViewInvoice',
-			span : 1,
+			span : 2,
 		},
 		{
 			func : 'renderDownloadOverseasInvoice',
