@@ -13,6 +13,14 @@ import ChildBlocks from './ChildBlocks';
 import ShowConditions from './ShowConditions';
 import styles from './styles.module.css';
 
+const formatDateCommon = ({ date }) => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+	formatType : 'dateTime',
+	separator  : '/',
+});
+
 function SopCard({
 	details,
 	reload,
@@ -29,18 +37,19 @@ function SopCard({
 	if (![true, false].includes(updatePermission)) {
 		updatePermission = true;
 	}
-	const initialBlocks = [];
+	const INITIAL_BLOCKS = [];
 
 	(instructions || []).forEach((obj, index) => {
 		const instructionObject = {
 			id       : `${index}_${uuid()}`,
 			mainData : JSON.parse(JSON.stringify(obj)),
 		};
-		initialBlocks.push(instructionObject);
+
+		INITIAL_BLOCKS.push(instructionObject);
 	});
 
-	const [blocks, setBlocks] = useState([...initialBlocks]);
-	const originalData = initialBlocks;
+	const [blocks, setBlocks] = useState([...INITIAL_BLOCKS]);
+	const originalData = INITIAL_BLOCKS;
 
 	const handleAddBlocks = () => {
 		const newBlock = { id: `${blocks.length}_${uuid()}`, mainData: {} };
@@ -114,13 +123,7 @@ function SopCard({
 
 					<div className={styles.edit_details}>
 						Last Edited:
-						{formatDate({
-							date       : sopData?.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : '/',
-						})}
+						{formatDateCommon({ date: sopData?.updated_at })}
 					</div>
 				</div>
 
@@ -139,13 +142,7 @@ function SopCard({
 			<div className={styles.heading}>{sopData?.heading}</div>
 			<div className={styles.heading_edit_details}>
 				Last Edited:
-				{formatDate({
-					date       : sopData?.updated_at,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-					formatType : 'dateTime',
-					separator  : '/',
-				})}
+				{formatDateCommon({ date: sopData?.updated_at })}
 			</div>
 
 			<div

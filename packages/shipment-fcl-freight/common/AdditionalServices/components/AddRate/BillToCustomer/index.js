@@ -3,21 +3,23 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const REVIEW_SERVICE_OPTIONS = [
+	{ label: 'Bill to Customer', value: 'bill' },
+	{ label: 'Don’t Bill to Customer', value: 'not_bill' },
+];
 function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
 	const { updateBillingInfo } = updateResponse || {};
-	const options = [
-		{ label: 'Bill to Customer', value: 'bill' },
-		{ label: 'Don’t Bill to Customer', value: 'not_bill' },
-	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Review Services</div>
 			<RadioGroup
-				options={options || []}
+				options={REVIEW_SERVICE_OPTIONS}
 				value={modeOfReview || ''}
 				onChange={(item) => setModeOfReview(item)}
 			/>
+
 			<div className={styles.button_container}>
 				<Button
 					onClick={onCancel}

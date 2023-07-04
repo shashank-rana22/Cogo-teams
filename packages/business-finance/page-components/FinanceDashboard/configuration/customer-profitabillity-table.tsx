@@ -1,6 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
@@ -56,10 +57,15 @@ const customerProfitabillityColumn = (sort, setSort) => [
 		id       : 'income',
 		accessor : (row) => (
 			<div className={styles.text_weight}>
-				{getFormattedPrice(
-					row?.bookedIncome,
-					'INR',
-				)}
+				{formatAmount({
+
+					amount   :	row?.bookedIncome,
+					currency :	GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 			</div>
 		),
 
@@ -69,10 +75,14 @@ const customerProfitabillityColumn = (sort, setSort) => [
 		id       : 'expense',
 		accessor : (row) => (
 			<div className={styles.text_weight}>
-				{getFormattedPrice(
-					row?.bookedExpense,
-					'INR',
-				)}
+				{formatAmount({
+					amount   :	row?.bookedExpense,
+					currency :	GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 			</div>
 		),
 

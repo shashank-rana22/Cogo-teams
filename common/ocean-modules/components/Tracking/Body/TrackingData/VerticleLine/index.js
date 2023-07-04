@@ -10,7 +10,10 @@ function VerticleLine({ checked = true, isLast = false }) {
 			<div className={cl`${styles.circle} ${checked ? styles.checked : styles.unchecked}`}>
 				{checked ? <IcCGreenCircle /> : <IcCCircle />}
 			</div>
-			{!isLast && <div className={cl`${styles.line} ${checked ? styles.checked : styles.unchecked}`} />}
+
+			{!isLast
+				? <div className={cl`${styles.line} ${checked ? styles.checked : styles.unchecked}`} />
+				: null}
 		</div>
 	);
 }

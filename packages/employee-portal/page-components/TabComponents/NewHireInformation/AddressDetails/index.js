@@ -12,6 +12,9 @@ import styles from './styles.module.css';
 const CURRENT_ADDRESS_MAPPING = [
 	'current_city', 'current_country', 'current_pincode', 'current_state', 'current_address'];
 
+const CONTROL_SELECT_TYPE_ONE = 'fileUpload';
+const CONTROL_SELECT_TYPE_TWO = 'textarea';
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -120,11 +123,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 									<div className={styles.control}>
 										<Element
-											{...(type === 'fileUpload'
+											{...(type === CONTROL_SELECT_TYPE_ONE
 												? removeTypeField(controlItem) : { ...controlItem })}
 											control={control}
 											key={controlName}
-											className={styles[`element_${controlName}`]}
+											className={type === CONTROL_SELECT_TYPE_TWO ? styles.box : null}
 										/>
 
 										{errors[controlName]?.message
@@ -155,11 +158,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 									<div className={styles.control}>
 										<Element
-											{...(type === 'fileUpload'
+											{...(type === CONTROL_SELECT_TYPE_ONE
 												? removeTypeField(controlItem) : { ...controlItem })}
 											control={control}
 											key={controlName}
-											className={styles[`element_${controlName}`]}
+											className={type === CONTROL_SELECT_TYPE_TWO ? styles.box : null}
 										/>
 
 										{errors[controlName]?.message

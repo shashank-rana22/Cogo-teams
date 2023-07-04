@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
@@ -10,6 +11,8 @@ import InvoicingPartyDetail from './InvoicingPartyDetail';
 import RequestCN from './RequestCN';
 import Status from './Status';
 import styles from './styles.module.css';
+
+const UPPER_CASE_EXCHANGE_RATE_STATE = ['eta', 'etd'];
 
 function Header({
 	children = null,
@@ -36,7 +39,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[0]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -55,9 +58,8 @@ function Header({
 
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
-						Applicable State -
-						&nbsp;
-						{startCase(invoice?.exchange_rate_state)}
+						{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
+							? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
 					</div>
 				) : null}
 			</div>
@@ -86,10 +88,7 @@ function Header({
 					role="button"
 					tabIndex={0}
 					onClick={() => setOpen(!open)}
-					style={{
-						height:
-						`${invoicePartyDetailsRef.current?.offsetHeight}px`,
-					}}
+					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</div>

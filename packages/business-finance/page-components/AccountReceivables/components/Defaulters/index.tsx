@@ -15,7 +15,6 @@ interface GlobalInterface {
 	migrated?:boolean | string,
 	pageIndex?:number,
 	pageLimit?:number,
-	cogoEntity?: string,
 	invoiceStatus?: string,
 	status?: string,
 	services?: string[],
@@ -25,7 +24,11 @@ interface GlobalInterface {
 	zone?:string,
 }
 
-function Defaulters() {
+interface Props {
+	entityCode?:number | string
+}
+
+function Defaulters({ entityCode }:Props) {
 	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
 		pageIndex : 1,
 		pageLimit : 10,
@@ -38,14 +41,14 @@ function Defaulters() {
 		invoiceListLoading,
 		refetch,
 		sendReport,
-	} = useGetDefaulters({ globalFilters, activeTab, sort });
+	} = useGetDefaulters({ globalFilters, activeTab, sort, entityCode });
 
 	useEffect(() => {
 		const {
-			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency,
+			migrated, invoiceStatus, status, services, invoiceDate, dueDate, currency,
 		} = globalFilters || {};
 
-		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0
+		const isFilterApplied = String(migrated)?.length > 0
 		|| invoiceStatus?.length > 0 || status.length > 0 || services?.length > 0
 		|| String(invoiceDate?.startDate)?.length > 0
 		|| String(invoiceDate?.endDate)?.length > 0

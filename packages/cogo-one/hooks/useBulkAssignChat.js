@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
+import { AGENT_TYPE_MAPPING } from '../constants/viewTypeConstants';
 import getActiveCardDetails from '../utils/getActiveCardDetails';
 
 function useBulkAssignChat({ setSelectedAutoAssign = () => {}, setAutoAssignChats = () => {} }) {
@@ -19,6 +20,8 @@ function useBulkAssignChat({ setSelectedAutoAssign = () => {}, setAutoAssignChat
 				mobile_no = '',
 				sender = '',
 				lead_user_id = '',
+				cogo_entity_id,
+				account_type,
 			} = getActiveCardDetails(eachChat) || {};
 			return {
 				channel                 : channel_type,
@@ -27,6 +30,8 @@ function useBulkAssignChat({ setSelectedAutoAssign = () => {}, setAutoAssignChat
 				whatsapp_number_eformat : channel_type === 'whatsapp' ? mobile_no : undefined,
 				lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
 				sender                  : channel_type === 'platform_chat' ? sender : undefined,
+				cogo_entity_id          : cogo_entity_id || undefined,
+				agent_type              : AGENT_TYPE_MAPPING[account_type],
 
 			};
 		});

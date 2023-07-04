@@ -3,8 +3,10 @@ import { getDate } from '../utils/getDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = primary_service?.state === 'vessel_arrived'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
+	const { state, origin_port, destination_port } = primary_service || {};
+
+	const disabledState = state === 'vessel_arrived'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -42,22 +44,31 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			minDate : departureDate,
 			disable : false,
 		},
+		...(origin_port?.is_icd ? [{
+			name  : 'origin_icd_departed_at',
+			label : 'Departure from ICD Port date',
+		}] : []),
+		...(destination_port?.is_icd ? [{
+			name  : 'arrived_at_destination_icd_at',
+			label : 'Arrived At ICD Port date',
+		}] : []),
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control;
+		const { name, maxDate = departureDate, disable = disabledState } = control || {};
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getDate(primary_service?.[name]);
+
+		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;

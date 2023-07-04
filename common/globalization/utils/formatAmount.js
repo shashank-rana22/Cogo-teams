@@ -5,12 +5,29 @@ import GLOBAL_CONSTANTS from '../constants/globals';
 
 const geo = getGeoConstants();
 
+const LOCALE_CURRENCY_ABBR_MAPPING = {
+	'en-IN': {
+		split_key   : '',
+		replace_key : {
+			T: 'K',
+		},
+
+	},
+	'vi-VN': {
+		split_key   : GLOBAL_CONSTANTS.regex_patterns.white_space,
+		replace_key : {
+			Tr : 'M',
+			T  : 'B',
+		},
+	},
+};
+
 const isAmountValid = ({ amount }) => !(
 	amount === null
-		|| Array.isArray(amount)
-		|| typeof amount === 'boolean'
-		// eslint-disable-next-line no-restricted-globals
-		|| isNaN(amount)
+        || Array.isArray(amount)
+        || typeof amount === 'boolean'
+        // eslint-disable-next-line no-restricted-globals
+        || isNaN(amount)
 );
 
 const getCurrencyLocale = ({ currency }) => {
@@ -34,13 +51,35 @@ const getCurrencyLocale = ({ currency }) => {
 	return GLOBAL_CONSTANTS.currency_locale[tempCurrency];
 };
 
-const format = ({ locale, amount, options, currency }) => new Intl.NumberFormat(locale, {
-	minimumFractionDigits: 0,
-	...options,
-	...('style' in options && {
-		currency: options.currency || currency,
-	}),
-}).format(Number(amount));
+const formatCurrency = ({ amount, locale, options }) => {
+	if (!(locale in LOCALE_CURRENCY_ABBR_MAPPING) || !(options?.notation === 'compact')) {
+		return amount;
+	}
+
+	let formattedAmount = amount;
+
+	const splittedAmount = formattedAmount.split(LOCALE_CURRENCY_ABBR_MAPPING[locale].split_key);
+
+	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale].replace_key).forEach(([current, newVal]) => {
+		if (splittedAmount.includes(current)) {
+			formattedAmount = amount.replace(current, newVal);
+		}
+	});
+
+	return formattedAmount;
+};
+
+const format = ({ locale, amount, options, currency }) => {
+	const formattedAmount = new Intl.NumberFormat(locale, {
+		minimumFractionDigits: 0,
+		...options,
+		...('style' in options && {
+			currency: options.currency || currency,
+		}),
+	}).format(Number(amount));
+
+	return formatCurrency({ amount: formattedAmount, locale, options });
+};
 
 /**
  *  @typedef {Object}             [arguments]

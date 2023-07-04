@@ -1,6 +1,6 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-const date_controls = [
+const DATE_CONTROLS = [
 	'schedule_departure',
 	'schedule_arrival',
 	'vgm_cutoff',
@@ -15,7 +15,7 @@ const date_controls = [
 ];
 
 const mapKeyValues = ({ keyMappings = {}, rpaData = {} }) => {
-	const mappedValues = {};
+	const MAPPED_VALUES = {};
 	const controlKeys = Object.keys(keyMappings);
 
 	controlKeys.forEach((ctrl) => {
@@ -25,30 +25,31 @@ const mapKeyValues = ({ keyMappings = {}, rpaData = {} }) => {
 			const dataValues = rpaData[ctrl] || [];
 
 			const actualData = dataValues.map((item) => {
-				const itemValues = {};
+				const ITEM_VALUES = {};
 				const innerKeys = Object.keys(name);
 
 				innerKeys.forEach((key) => {
 					const relatedCtrl = name[key];
 
-					if (date_controls.includes(key)) {
+					if (DATE_CONTROLS.includes(key)) {
 						const val = (item[relatedCtrl] || item[key] || '').replace(' ', '');
 
 						if (val) {
-							itemValues[key] = formatDate({
+							ITEM_VALUES[key] = formatDate({
 								date       : val || new Date(),
 								formatType : 'date',
 							});
 						}
 					} else {
-						itemValues[key] = item[relatedCtrl] || item[key] || '';
+						ITEM_VALUES[key] = item[relatedCtrl] || item[key] || '';
 					}
 				});
-				return itemValues;
+
+				return ITEM_VALUES;
 			});
 
-			mappedValues[ctrl] = actualData;
-		} else if (date_controls.includes(ctrl)) {
+			MAPPED_VALUES[ctrl] = actualData;
+		} else if (DATE_CONTROLS.includes(ctrl)) {
 			const val = (rpaData[name] || rpaData[ctrl] || '').replace(' ', '');
 			let dt = null;
 
@@ -58,15 +59,16 @@ const mapKeyValues = ({ keyMappings = {}, rpaData = {} }) => {
 					formatType : 'date',
 				});
 			}
+
 			if (dt) {
-				mappedValues[ctrl] = dt;
+				MAPPED_VALUES[ctrl] = dt;
 			}
 		} else {
-			mappedValues[ctrl] = rpaData[name] || rpaData[ctrl];
+			MAPPED_VALUES[ctrl] = rpaData[name] || rpaData[ctrl];
 		}
 	});
 
-	return mappedValues;
+	return MAPPED_VALUES;
 };
 
 export default mapKeyValues;

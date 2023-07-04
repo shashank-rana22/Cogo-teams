@@ -4,6 +4,10 @@ import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
+const ADDRESS_IMG_SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg';
+
+const RADIO_DISABLED_FOR_STATUS = ['rejected', 'pending'];
+
 function InvoicingPartyItem({
 	organization = {},
 	item = {},
@@ -35,7 +39,7 @@ function InvoicingPartyItem({
 					<div className={styles.address_align}>
 						<div className={styles.icon_wrapper}>
 							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg"
+								src={ADDRESS_IMG_SRC}
 								alt="address icon"
 								width="20"
 								height="20"
@@ -45,9 +49,7 @@ function InvoicingPartyItem({
 					</div>
 
 					<div className={styles.gst_number}>
-						TAX/GST Number :
-						&nbsp;
-						{tax_number || 'Not Applicable'}
+						{`TAX/GST Number : ${tax_number || 'Not Applicable'}`}
 					</div>
 				</div>
 			),
@@ -74,6 +76,7 @@ function InvoicingPartyItem({
 						<Pill size="md" className={verification_status} color="green">
 							{verification_status}
 						</Pill>
+
 						<Tooltip
 							content={(
 								<div>
@@ -105,14 +108,14 @@ function InvoicingPartyItem({
 				options={options}
 				value={value}
 				onChange={handleChange}
-				disabled={['rejected', 'pending'].includes(verification_status)}
+				disabled={RADIO_DISABLED_FOR_STATUS.includes(verification_status)}
 				optionsDisabled={optionsDisabled}
 				multiple
 			/>
 
 			<div
 				className={styles.add_address}
-				onClick={() => onClickAddAddress()}
+				onClick={onClickAddAddress}
 				role="button"
 				tabIndex={0}
 			>

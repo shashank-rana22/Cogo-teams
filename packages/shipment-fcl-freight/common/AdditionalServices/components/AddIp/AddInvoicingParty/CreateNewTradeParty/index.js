@@ -8,6 +8,11 @@ import CompanyDetails from './CompanyDetails';
 import styles from './styles.module.css';
 import formatPayload from './utils/formatPayload';
 
+const STEPPER_ITEMS = [
+	{ title: 'COMPANY DETAILS', key: 'company_details' },
+	{ title: 'BILLING ADDRESS', key: 'billing_address' },
+];
+
 function CreateNewTradeParty({
 	orgResponse = {},
 	showComponent,
@@ -19,19 +24,13 @@ function CreateNewTradeParty({
 	const [gstNumber, setGstNumber] = useState('');
 	const [currentStep, setCurrentStep] = useState('company_details');
 
-	const items = [
-		{ title: 'COMPANY DETAILS', key: 'company_details' },
-		{ title: 'BILLING ADDRESS', key: 'billing_address' },
-	];
-
 	const afterCreateTradeParty = () => {
 		setShowComponent('view_billing_addresses');
 		fetchOrganizationTradeParties();
 	};
 
 	const { apiTrigger } = useCreateOrganizationTradeParty({
-		successMessage : 'Successfully Created',
-		refech         : afterCreateTradeParty,
+		refech: afterCreateTradeParty,
 	});
 
 	const onSubmit = (values) => {
@@ -79,7 +78,7 @@ function CreateNewTradeParty({
 	return (
 		<div className={styles.container}>
 			<div className={styles.stepper_container}>
-				<Stepper active={currentStep} setActive={setCurrentStep} items={items} />
+				<Stepper active={currentStep} setActive={setCurrentStep} items={STEPPER_ITEMS} />
 			</div>
 
 			{renderCurrentStepControls}

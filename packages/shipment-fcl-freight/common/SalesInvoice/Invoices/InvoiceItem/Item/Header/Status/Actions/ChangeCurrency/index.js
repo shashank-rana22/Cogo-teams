@@ -21,9 +21,9 @@ function ChangeCurrency({
 
 	const geo = getGeoConstants();
 
-	const currencyOptionsOld =	GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
+	const currencyOptionsOld =	GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
+	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,

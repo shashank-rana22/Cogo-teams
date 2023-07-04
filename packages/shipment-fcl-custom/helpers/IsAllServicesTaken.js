@@ -1,3 +1,5 @@
+const NOT_TAKEN = [];
+
 const IsAllServicesTaken = (
 	servicesList,
 	selectedParties,
@@ -25,19 +27,18 @@ const IsAllServicesTaken = (
 	}
 
 	let isAllMainServicesTaken = true;
-	const notTaken = [];
 
 	mainServices.forEach((service) => {
 		if (!allServicesTaken.includes(service.id)) {
 			isAllMainServicesTaken = false;
-			notTaken.push(service.service_type);
+			NOT_TAKEN.push(service.service_type);
 		}
 	});
 
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-	return { isAllMainServicesTaken, notTaken };
+	return { isAllMainServicesTaken, NOT_TAKEN };
 };
 
 export default IsAllServicesTaken;

@@ -1,4 +1,4 @@
-export const tableDetailControls = {
+export default {
 	lcl_freight_service: [
 		{ name: 'marks_and_number', label: 'Marks & Number' },
 		{ name: 'package_description', label: 'Description' },

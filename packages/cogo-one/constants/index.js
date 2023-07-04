@@ -138,17 +138,11 @@ export const DEFAULT_PILLS_ITEMS = [
 		value : 'other',
 	},
 ];
-export const statusMapping = {
-	approved : 'Approved',
-	rejected : 'Rejected',
-	pending  : 'Pending',
 
-};
-
-export const statusColorMapping = {
-	approved : 'green',
-	rejected : 'red',
-	pending  : 'orange',
+export const STATUS_MAPPING = {
+	approved : { label: 'Approved', color: 'green' },
+	rejected : { label: 'Rejected', color: 'red' },
+	pending  : { label: 'Pending', color: 'orange' },
 
 };
 
@@ -298,3 +292,5 @@ export const ACCEPT_FILE_MAPPING = {
 	default : '.png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx',
 	zalo    : '.png, .pdf, .jpg, .jpeg, .csv, .svg',
 };
+
+export const MAX_WEIGHT_SLAB = 500;

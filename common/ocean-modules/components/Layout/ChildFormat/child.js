@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
@@ -6,6 +7,15 @@ import getErrorMessage from '../getErrorMessage';
 import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
+
+const DEFAULT_SPAN = 12;
+const EMPTY_SPAN = 0;
+const ELEMENTS_INCR_BY = 1;
+const INDEX_INCR_BY = 1;
+const REMOVE_UPTO_INDEX = 1;
+const PERCENT_FACTOR = 100;
+
+const ASYNC_SELECT_TYPE = ['select', 'creatable-select', 'location-select'];
 
 function Child({
 	controls = [],
@@ -20,39 +30,43 @@ function Child({
 	error = {},
 	formValues = {},
 }) {
+	const TOTAL_FIELDS = [];
+
 	let rowWiseFields = [];
-	const totalFields = [];
-	let span = 0;
+	let span = EMPTY_SPAN;
+
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
+		span += fields.span || DEFAULT_SPAN;
+		if (span === DEFAULT_SPAN) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
+			span = EMPTY_SPAN;
+		} else if (span < DEFAULT_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
+
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[0]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[0]?.url?.fileName === '') {
+	if (formValues?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += 1) {
+
+		for (let i = 0; i < elements.length; i += ELEMENTS_INCR_BY) {
 			elements[i].style.display = 'none';
 		}
 	}
@@ -61,7 +75,7 @@ function Child({
 		let newProps = { ...item };
 
 		const { type } = item;
-		const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
+		const isAsyncSelect = ASYNC_SELECT_TYPE.includes(type)
 		&& Object.keys(item).includes('optionsListKey');
 
 		if (isAsyncSelect) {
@@ -90,9 +104,9 @@ function Child({
 			<h3 className={styles.heading}>
 				{name.toUpperCase()}
 				&nbsp;
-				{index + 1}
+				{index + INDEX_INCR_BY}
 			</h3>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
@@ -107,12 +121,12 @@ function Child({
 
 						const show = 'show' in controlItem ? controlItem.show : true;
 
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						const flex = ((controlItem?.span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR;
 						if (!Element || !show) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
@@ -121,7 +135,7 @@ function Child({
 								</h4>
 								<Element
 									{...newControl}
-									{...extraProps}
+									{...EXTRA_PROPS}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}
@@ -130,18 +144,8 @@ function Child({
 									size="sm"
 									disabled={disabled || disable}
 								/>
-								<p style={{
-									fontStyle     : 'normal',
-									fontSize      : '12px',
-									lineHeight    : '16px',
-									letterSpacing : '0.02em',
-									paddingLeft   : '4px',
-									margin        : '0px',
-									color         : '#cb6464',
-								}}
-								>
+								<p className={styles.errors}>
 									{errorOriginal}
-
 								</p>
 							</div>
 						);
@@ -149,12 +153,13 @@ function Child({
 
 				</div>
 			))}
+
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.delete_icon}>
 					<hr />
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, REMOVE_UPTO_INDEX)}
 					/>
 				</div>
 			) : null}

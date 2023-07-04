@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -15,7 +15,6 @@ const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
 };
-
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 
 function Status({
@@ -30,11 +29,11 @@ function Status({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[0];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -43,7 +42,7 @@ function Status({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[0]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -60,7 +59,7 @@ function Status({
 	};
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > CONSTANTS.invoice_check_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
 
 	return (
 		<div className={styles.invoice_container}>
@@ -83,7 +82,7 @@ function Status({
 			) : null}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= CONSTANTS.invoice_check_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"

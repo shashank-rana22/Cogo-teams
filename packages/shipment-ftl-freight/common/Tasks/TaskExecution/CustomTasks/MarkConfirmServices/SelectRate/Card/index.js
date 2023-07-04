@@ -9,24 +9,27 @@ import useUpdateBookingPreferences
 
 import styles from './styles.module.css';
 
+const STEP_VALUE = 2;
+const FIRST_INDEX = 0;
+
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
-		const firstvalidty = dataObj?.validities?.[0] || {};
+		const firstvalidty = dataObj?.validities?.[FIRST_INDEX] || {};
 		const price = firstvalidty?.price || firstvalidty.min_price;
-		const currency = dataObj?.validities?.[0].currency;
+		const currency = dataObj?.validities?.[FIRST_INDEX].currency;
 
 		return `${currency} ${price}`;
 	}
 
 	if (source === 'flash_booking') {
-		const price = dataObj?.line_items?.[0]?.price;
-		const currency = dataObj?.line_items?.[0]?.currency;
+		const price = dataObj?.line_items?.[FIRST_INDEX]?.price;
+		const currency = dataObj?.line_items?.[FIRST_INDEX]?.currency;
 
 		return `${currency} ${price}`;
 	}
 
-	const price = dataObj?.charges?.line_items?.[0]?.price;
-	const currency = dataObj?.charges?.line_items?.[0]?.currency;
+	const price = dataObj?.charges?.line_items?.[FIRST_INDEX]?.price;
+	const currency = dataObj?.charges?.line_items?.[FIRST_INDEX]?.currency;
 
 	return `${currency} ${price}`;
 };
@@ -51,7 +54,7 @@ function Card({
 
 		setSelectedCard(item);
 
-		setStep(2);
+		setStep(STEP_VALUE);
 	};
 
 	return (
@@ -61,9 +64,9 @@ function Card({
 					<div className={styles.priority_text}>
 						(
 						{priority}
-						{' '}
+						&nbsp;
 						Priority)
-						{' '}
+						&nbsp;
 					</div>
 
 					<div className={styles.priority_text}>

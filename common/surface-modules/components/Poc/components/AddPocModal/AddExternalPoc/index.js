@@ -5,8 +5,8 @@ import {
 } from '@cogoport/forms';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
-import POC_PROCESS_MAPPING from '../../../../../contants/POC_PROCESS_MAPPIING';
-import POC_WORKSCOPE_MAPPING from '../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_PROCESS_MAPPING from '../../../../../constants/POC_PROCESS_MAPPIING';
+import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useCreateOrganizationPoc from '../../../../../hooks/useCreateOrganizationPoc';
 import { convertObjectMappingToArray } from '../../../../../utils/convertObjectMappingToArray';
 import validateMobileNumber from '../../../../../utils/validateMobileNumber';

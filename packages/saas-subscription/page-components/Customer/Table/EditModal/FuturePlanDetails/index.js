@@ -20,7 +20,7 @@ function FuturePlanDetails({ future = {} }) {
 							<div className={styles.date_title}>Start Date:</div>
 							<div className={styles.date_title}>
 								{formatDate({
-									data       : start_date,
+									date       : start_date,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 									formatType : 'date',
 								})}

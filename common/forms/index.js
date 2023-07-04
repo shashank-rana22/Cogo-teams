@@ -37,4 +37,5 @@ export { default as useDebounceQuery } from './hooks/useDebounceQuery';
 export { default as getApiError } from './utils/getApiError';
 export { default as handleError } from './utils/handleError';
 export { default as getFormattedPrice } from './utils/get-formatted-price';
+export { default as InputNumberController } from './page-components/Controlled/InputNumberController';
 export * from './utils/getAsyncFields';

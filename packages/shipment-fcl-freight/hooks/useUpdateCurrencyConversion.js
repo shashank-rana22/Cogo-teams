@@ -12,12 +12,12 @@ const useUpdateCurrencyConversion = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const handleFormSubmit = async (exchangeCurrencyHash) => {
+	const handleFormSubmit = async (EXCHANGE_CURRENCY_HASH) => {
 		try {
 			await trigger({
 				data: {
 					shipment_id,
-					updated_currency_conversion_rate: exchangeCurrencyHash,
+					updated_currency_conversion_rate: EXCHANGE_CURRENCY_HASH,
 				},
 			});
 			Toast.success(successMessage);

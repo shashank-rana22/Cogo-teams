@@ -16,7 +16,7 @@ function CheckboxController(props) {
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
-					value={newValue}
+					checked={!!newValue}
 					onBlur={onBlur}
 				/>
 			)}

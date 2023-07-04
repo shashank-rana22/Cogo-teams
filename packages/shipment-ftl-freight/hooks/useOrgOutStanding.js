@@ -23,9 +23,9 @@ const useOrgOutStanding = ({ org_reg_nums }) => {
 		})();
 	}, [trigger]);
 
-	const outstanding_by_reg_num = {};
+	const OUTSTANDING_BY_REG_NUM = {};
 	(proformaData?.list || []).forEach((org) => {
-		outstanding_by_reg_num[org?.registration_number] = org;
+		OUTSTANDING_BY_REG_NUM[org?.registration_number] = org;
 	});
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const useOrgOutStanding = ({ org_reg_nums }) => {
 	return {
 		handleOutstandings,
 		loading,
-		outstanding_by_reg_num,
+		OUTSTANDING_BY_REG_NUM,
 	};
 };
 

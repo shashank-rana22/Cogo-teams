@@ -1,4 +1,4 @@
-import { Button, toast } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -16,7 +16,7 @@ function AWSUploadModal({
 		if (!isEmpty(uploadProof)) {
 			hide();
 		} else {
-			toast.error(`${customText || 'document'} is required`);
+			Toast.error(`${customText || 'document'} is required`);
 		}
 	};
 

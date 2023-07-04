@@ -3,10 +3,13 @@ import { IcMFfcl, IcMFlcl, IcMFlocalCharges } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useCallback } from 'react';
 
+import CONSTANTS from '../../../configs/constants.json';
 import serviceNameMapping from '../../../configs/short-disply-names.json';
 import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
+
+const PARTNER_ID_INDEX_IN_PATH = 1;
 
 const iconMapping = {
 	fcl_freight : IcMFfcl,
@@ -19,7 +22,10 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 
 	const handleClick = useCallback(() => {
 		const path = router.asPath.split('/');
-		const newPathname = `/${path[1]}/shipments/${item.id}`;
+
+		const newPathname = `/${path[PARTNER_ID_INDEX_IN_PATH]}/shipments/${item.id}
+		?${CONSTANTS.url_navigation_params}`;
+
 		window.location.replace(newPathname);
 	}, [router.asPath, item.id]);
 
@@ -31,7 +37,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 				<div
 					className={styles.sid}
 				>
-					SID :
+					SID :&nbsp;
 					<ClickableDiv onClick={handleClick}>
 						<div className={styles.id}>
 							{' '}
@@ -40,7 +46,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 					</ClickableDiv>
 				</div>
 
-				<div className={cl`${styles.tag_container} ${styles.col}`}>
+				<div className={styles.bottom}>
 					<div>
 						{' '}
 						<Element width={24} height={24} fill="red" />

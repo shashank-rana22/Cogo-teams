@@ -1,5 +1,6 @@
 const getInstructionData = ({ data = {} }) => {
 	const { operating_instructions = [] } = data || {};
+
 	const format_data = {
 		invoice_preference           : [],
 		additional_preference        : [],

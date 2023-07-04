@@ -64,7 +64,8 @@ function Documents() {
 	const renderContent = () => {
 		if (loading) {
 			return <LoadingState />;
-		} if (!activeToggle) {
+		}
+		if (!activeToggle) {
 			return (
 				<CheckList
 					taskList={filteredTaskList}

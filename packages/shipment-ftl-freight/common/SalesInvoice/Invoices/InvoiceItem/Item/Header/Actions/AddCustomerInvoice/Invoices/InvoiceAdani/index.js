@@ -21,7 +21,8 @@ function InvoiceAdani({
 	} = getOtherData({ customData });
 	const { grand_total = '' } = getChargesData({ customData });
 	const amount = finalAmountInWords(grand_total);
-	const tradeParty = tradePartyData?.list?.[0] || {};
+
+	const [tradeParty] = tradePartyData?.list || [];
 
 	const { billing_address = {} } = invoice;
 	return (

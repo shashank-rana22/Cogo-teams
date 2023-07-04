@@ -6,7 +6,7 @@ import useGetShipmentFortigoTripDetail from '../../../../../../../../../hooks/us
 import useListOrganizationTradeParties from '../../../../../../../../../hooks/useListOrganizationTradeParties';
 import useGeneratePdf from '../hooks/useGeneratePdf';
 import useGetImageSource from '../hooks/useGetImageSource';
-import { componentMapper } from '../utils/componentMapper';
+import { getComponentMapping } from '../utils/componentMapper';
 import { getPayload } from '../utils/getPayload';
 
 import styles from './styles.module.css';
@@ -63,12 +63,12 @@ function Invoices({
 	});
 	const finalRegistrationNumber = customData?.customer_details?.customer_pan;
 
+	const Component = getComponentMapping(finalRegistrationNumber);
+
 	const generateInvoice = () => {
 		const html = `<html><body>${InvoiceRef.current.innerHTML}</body></html>`;
-		generatePdf({ html, scale: 0.7, callback: callbackGeneratePdf });
+		generatePdf({ html, scale: 0.6, callback: callbackGeneratePdf });
 	};
-
-	const Component = finalRegistrationNumber ? componentMapper[finalRegistrationNumber].component : null;
 
 	return (
 		<>

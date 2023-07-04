@@ -45,6 +45,16 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'list_saas_products',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'create_saas_custom_subscription',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [
 		{

@@ -1,6 +1,6 @@
 import { getOtherDataHelper } from '../../utils/getOtherDataHelper';
 
-const otherKeysMapping = {
+const OTHER_KEYS_MAPPING = {
 	customer_name    : 'customer_name',
 	customer_address : 'customer_address',
 	state_code       : 'customer_state_code',
@@ -14,13 +14,13 @@ const otherKeysMapping = {
 export const getOtherData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData,
-		requiredKeysMapping: otherKeysMapping,
+		requiredKeysMapping: OTHER_KEYS_MAPPING,
 	});
 
 	return finalDataObj;
 };
 
-const chargesKeysMapping = {
+const CHARGES_KEYS_MAPPING = {
 	cgst        : 'cgst',
 	sgst        : 'sgst',
 	igst        : 'total_tax',
@@ -30,7 +30,7 @@ const chargesKeysMapping = {
 export const getChargesData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData,
-		requiredKeysMapping: chargesKeysMapping,
+		requiredKeysMapping: CHARGES_KEYS_MAPPING,
 	});
 	return finalDataObj;
 };

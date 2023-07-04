@@ -1,7 +1,9 @@
 const getCreateInstructionParams = ({ formValues }) => {
-	const params = { instruction: 'additional_preference' };
-	params.sop_instructions = formValues?.additional || [];
-	return params;
+	const PARAMS = { instruction: 'additional_preference' };
+
+	PARAMS.sop_instructions = formValues?.additional || [];
+
+	return PARAMS;
 };
 
 export default getCreateInstructionParams;

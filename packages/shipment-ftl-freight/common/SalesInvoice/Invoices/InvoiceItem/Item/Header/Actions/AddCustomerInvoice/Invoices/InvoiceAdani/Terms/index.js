@@ -22,7 +22,7 @@ function Terms({
 		return acc;
 	}, []);
 
-	const bankDetailObj = bankDetailsArray?.[0] || {};
+	const [bankDetailObj] = bankDetailsArray || [];
 
 	const {
 		bank_name = '',
@@ -70,7 +70,7 @@ function Terms({
 							<li>Payment Terms: Days Receipt of Invoice.</li>
 							<li>
 								All Payments should be to the account of a
-								{' '}
+								&nbsp;
 								{billing_address?.business_name}
 								. Bank account details:
 								<p style={{ margin: '3px 0', fontSize: '12px' }}>
@@ -100,7 +100,7 @@ function Terms({
 							</li>
 							<li>
 								Payment advice should be mailed to
-								{' '}
+								&nbsp;
 								<b>collection@4tigo.com</b>
 								.
 							</li>

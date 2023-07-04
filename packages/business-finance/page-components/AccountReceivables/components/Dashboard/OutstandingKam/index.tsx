@@ -10,9 +10,10 @@ import styles from './styles.module.css';
 interface OutsatndingKamProps {
 	kamOutstandingData?: object[],
 	kamOutstandingLoading?: boolean
+	entityCode?: string
 }
 
-function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: OutsatndingKamProps) {
+function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }: OutsatndingKamProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.styled_container}>
@@ -54,7 +55,7 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading }: Outsatndi
 					<div>
 						<div className={styles.table}>
 							<Table
-								columns={OutstandingKamColumn}
+								columns={OutstandingKamColumn({ entityCode })}
 								data={kamOutstandingData || [{}]}
 								loading={kamOutstandingLoading}
 							/>

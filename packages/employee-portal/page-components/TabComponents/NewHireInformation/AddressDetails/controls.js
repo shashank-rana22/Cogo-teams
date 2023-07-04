@@ -33,10 +33,6 @@ const controls = () => ([
 		type        : 'textarea',
 		placeholder : 'Address',
 		rules       : { required: 'This is required' },
-		style       : {
-			width  : '27vw',
-			height : '10vh',
-		},
 	},
 ]);
 

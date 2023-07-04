@@ -51,7 +51,7 @@ function CustomTable(
 		setCheckedRows,
 	}: CustomInterface,
 ) {
-	const GET_STATUS = ['POSTED', 'APPROVED', 'POSTING_FAILED'];
+	const GET_STATUS = ['POSTED', 'CREATED', 'APPROVED', 'POSTING_FAILED'];
 
 	const GET_ENTITY = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).filter(
 		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key]?.feature_supported?.includes('post_to_sage'),

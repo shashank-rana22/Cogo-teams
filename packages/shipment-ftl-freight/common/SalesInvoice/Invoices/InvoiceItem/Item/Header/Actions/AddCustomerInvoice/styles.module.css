@@ -14,16 +14,6 @@
 	color: #333;
 }
 
-.button_wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	& > button {
-		margin-right: 12px;
-	}
-}
-
 .download_link {
 	color: #5936f0;
 }

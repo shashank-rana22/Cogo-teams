@@ -1,9 +1,11 @@
 import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useListCogoEntity from '../hooks/useListCogoEntity';
+import useListCogoEntities from '../../AccountPayables/Dashboard/hooks/useListCogoEntities';
 
 import Dashboard from './Dashboard';
 import Defaulters from './Defaulters';
@@ -12,56 +14,80 @@ import ManageBpr from './ManageBpr';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
+interface ItemProps {
+	business_name: string;
+	entity_code: string;
+}
+interface Profile {
+	profile?: { partner: { id: string } };
+}
+
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
-	const { loading, EntityData = [] } = useListCogoEntity();
+	const { profile }:Profile = useSelector((state) => state);
 
-	const [entityCode, setEntityCode] = useState('301');
+	const { partner } = profile || {};
 
-	const handleChange = (val:string) => {
+	const { id: partnerId } = partner || {};
+
+	const [receivables, setReceivables] = useState(
+		query.active_tab || 'dashboard',
+	);
+
+	const entity = getDefaultEntityCode(partnerId);
+
+	const [entityCode, setEntityCode] = useState(entity);
+
+	const handleChange = (val: string) => {
 		setReceivables(val);
 		push(
 			'/business-finance/account-receivables/[active_tab]',
 			`/business-finance/account-receivables/${val}`,
 		);
 	};
+	const { loading, entityData = [] } = useListCogoEntities();
 
-	const EntityOptions = EntityData.map((entityData) => ({
-		label : `${upperCase(entityData.business_name)} (${entityData.entity_code})`,
-		value : entityData.entity_code,
-	}));
+	const entityDataCount = entityData.length;
+
+	const entityOptions = (entityData || []).map((item: ItemProps) => {
+		const {
+			business_name: companyName = '',
+			entity_code: listEntityCode = '',
+		} = item || {};
+		return {
+			label : `${upperCase(companyName)} (${listEntityCode})`,
+			value : listEntityCode,
+		};
+	});
 
 	return (
 		<div>
-
 			<div className={styles.header}>
-				<div className={styles.header_style}>
-					Account Receivables
-				</div>
+				<div className={styles.header_style}>Account Receivables</div>
 
 				{loading ? (
 					<Placeholder width="200px" height="30px" />
-				)
+				) : (
+					<div className={styles.input}>
 
-					: (
-						<div className={styles.input}>
-							<Select
-								name="business_name"
-								onChange={(entityVal: string) => setEntityCode(entityVal)}
-								value={entityCode}
-								options={EntityOptions}
-								placeholder="Select Entity Code"
-								size="sm"
-							/>
-						</div>
-					)}
+						<Select
+							name="business_name"
+							onChange={(entityVal: string) => setEntityCode(entityVal)}
+							value={entityCode}
+							options={entityOptions}
+							placeholder="Select Entity Code"
+							size="sm"
+							disabled={entityDataCount <= 1}
+						/>
+
+					</div>
+				)}
 			</div>
 
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val:string) => handleChange(val)}
+					onChange={(val: string) => handleChange(val)}
 					fullWidth
 					themeType="primary"
 				>
@@ -76,7 +102,7 @@ function AccountReceivables() {
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						<Defaulters />
+						<Defaulters entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						<ManageBpr />

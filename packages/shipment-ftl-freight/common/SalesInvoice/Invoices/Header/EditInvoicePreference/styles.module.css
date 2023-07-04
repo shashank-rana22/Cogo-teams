@@ -3,12 +3,6 @@
 	padding: 12px;
 }
 
-.modal_footer {
-	button:not(:last-of-type) {
-		margin-right: 16px;
-	}
-}
-
 .full_width_btn {
 	width: 100%;
 	padding: 8px 0;

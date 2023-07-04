@@ -11,7 +11,7 @@ const useUpdateShipmentInvoiceStatus = ({
 		method : 'POST',
 	});
 
-	const updateInvoiceStatus = async ({ payload, message = '' }) => {
+	const apiTrigger = async ({ payload, message = '' }) => {
 		try {
 			await trigger({ data: payload });
 
@@ -23,7 +23,7 @@ const useUpdateShipmentInvoiceStatus = ({
 	};
 
 	return {
-		updateInvoiceStatus,
+		apiTrigger,
 		loading,
 	};
 };

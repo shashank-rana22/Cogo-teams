@@ -1,8 +1,8 @@
 import { Loader } from '@cogoport/components';
+import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import INCO_TERM_MAPPING from '../../../../configs/inco-term-mapping.json';
 import taskDisplayName from '../../../../configs/task-display-name';
 
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ function TaskContainer({
 	actions,
 	shipment_data = {},
 }) {
-	const trade_type = INCO_TERM_MAPPING[shipment_data?.inco_term] || '';
+	const trade_type = getTradeTypeByIncoTerm(shipment_data?.inco_term);
 
 	const taskName = taskDisplayName(trade_type)[pendingTask?.task]?.display_name || startCase(pendingTask?.task || '');
 

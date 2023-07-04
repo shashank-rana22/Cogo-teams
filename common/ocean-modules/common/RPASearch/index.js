@@ -6,7 +6,7 @@ import Search from './Search';
 import styles from './styles.module.css';
 
 function RPASearch({
-	children,
+	children = null,
 	onManualUpload = () => {},
 	onUpload = () => {},
 	multiple,
@@ -47,7 +47,6 @@ function RPASearch({
 					onClick={() => setShow(true)}
 				>
 					{children}
-
 				</div>
 			</Popover>
 		</div>

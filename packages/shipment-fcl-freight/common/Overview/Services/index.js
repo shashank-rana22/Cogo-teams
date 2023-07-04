@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
@@ -50,7 +51,7 @@ function Services() {
 								? heading(serviceCategory) : null}
 
 							{ isKam
-							&& showTradeHeading[`${serviceCategory.split('Services')[0]}`]
+							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
 								? heading(serviceCategory) : null}
 
 							<div className={styles.trade_services}>

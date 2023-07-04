@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -9,11 +10,13 @@ import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp'
 import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
+const USER_SPLIT_MOBILE_INDEX = 1;
+const USER_SPLIT_ID_INDEX = 0;
 const OTP_LENGTH = 4;
 
 function OTPVerification({
-	showOtpModal = false,
-	setShowOTPModal = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -25,7 +28,7 @@ function OTPVerification({
 
 	const refetchAfterVerifydOtpApiCall = () => {
 		setModalIsOpen(false);
-		setShowOTPModal(false);
+		setShow(false);
 		refetch();
 	};
 
@@ -59,12 +62,12 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[0],
+				user_id    : selectedUser?.split('_')?.[USER_SPLIT_ID_INDEX],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[USER_SPLIT_MOBILE_INDEX]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {
@@ -73,7 +76,7 @@ function OTPVerification({
 				<Loader />
 			</div>
 		);
-	} else if (userList?.length === 0 && !loading) {
+	} else if (isEmpty(userList) && !loading) {
 		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
 	} else {
 		(
@@ -89,40 +92,42 @@ function OTPVerification({
 
 	return (
 		<div>
-			{showOtpModal ? (
+			{show ? (
 				<Modal
-					show={showOtpModal}
-					onClose={() => setShowOTPModal(false)}
+					show={show}
+					onClose={() => setShow(false)}
 				>
-					<Modal.Header title="Select user to send OTP" />
+					<Modal.Header title="Select User To Send OTP" />
 
 					<Modal.Body className={styles.body}>
 						{userListInfo}
 					</Modal.Body>
 
-					<Modal.Footer className={styles.modal_footer}>
-						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => setShowOTPModal(false)}
-						>
-							Cancel
-						</Button>
+					<Modal.Footer>
+						<FooterButtonWrapper>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setShow(false)}
+							>
+								Cancel
+							</Button>
 
-						<Button
-							size="md"
-							onClick={handleClick}
-							disabled={userList?.length === 0 || isEmpty(selectedUser)}
-						>
-							Send
-						</Button>
+							<Button
+								size="md"
+								onClick={handleClick}
+								disabled={isEmpty(userList) || isEmpty(selectedUser)}
+							>
+								Send
+							</Button>
+						</FooterButtonWrapper>
 					</Modal.Footer>
 				</Modal>
 			) : null}
 
 			{modalIsOpen ? (
 				<Modal
-					show={showOtpModal}
+					show={show}
 					onClose={() => setModalIsOpen(false)}
 					className={styles.otp_modal}
 				>

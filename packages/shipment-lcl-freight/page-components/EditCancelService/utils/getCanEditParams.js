@@ -1,6 +1,6 @@
-import CONSTANTS from '../../../configs/constants.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const controlsEditableConditions = [
+const CONTROLS_EDIT_CONDITIONS = [
 	{
 		state      : ['confirmed_by_service_provider', 'cargo_carted_in', 'cargo_stuffed'],
 		trade_type : ['export'],
@@ -20,7 +20,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.email === CONSTANTS.ajeet_email) {
+	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
@@ -32,7 +32,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 
 	const showEditParamsKey = serviceData?.show_edit_params;
 
-	const isControlsEditable = controlsEditableConditions.some(
+	const isControlsEditable = CONTROLS_EDIT_CONDITIONS.some(
 		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 

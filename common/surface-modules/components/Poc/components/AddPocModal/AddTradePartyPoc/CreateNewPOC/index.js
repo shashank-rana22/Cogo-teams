@@ -1,7 +1,7 @@
 import { InputController, MobileNumberController, MultiselectController, useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
 import validateMobileNumber from '../../../../../../utils/validateMobileNumber';
 

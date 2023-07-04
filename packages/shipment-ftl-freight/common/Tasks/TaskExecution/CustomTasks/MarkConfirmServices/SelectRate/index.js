@@ -8,6 +8,8 @@ import Card from './Card';
 import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
+const STEP_VALUE = 2;
+
 function SelectRate({
 	setStep,
 	setSelectedCard,
@@ -28,7 +30,7 @@ function SelectRate({
 	useEffect(() => {
 		if (selected_priority) {
 			setSelectedCard(selected_priority);
-			setStep(2);
+			setStep(STEP_VALUE);
 		}
 	}, [selected_priority, setStep, setSelectedCard]);
 
@@ -38,7 +40,7 @@ function SelectRate({
 				{loading ? (
 					<div className={styles.loader}>
 						<Loader />
-						{' '}
+						&nbsp;
 						Loading Task...
 					</div>
 				) : null}

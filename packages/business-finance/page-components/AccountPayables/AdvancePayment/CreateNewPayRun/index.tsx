@@ -1,5 +1,5 @@
 import { Breadcrumb, Button, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
@@ -186,7 +186,14 @@ function CreateNewPayRun() {
 								<div>
 									{existingPayRunLoading
 										? <Placeholder className={styles.amount_loader} />
-										: getFormattedPrice(totalValue, currency)}
+										: formatAmount({
+											amount  : totalValue,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})}
 								</div>
 							</div>
 							<div className={styles.text}>

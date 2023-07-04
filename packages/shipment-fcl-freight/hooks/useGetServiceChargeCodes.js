@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 import useGetShipmentAdditionalServiceCodes from './useGetShipmentAdditionalServiceCodes';
 import useListRateChargeCodes from './useListRateChargeCodes';
 
-const servicesChargeCodes = {
+const SERVICES_CHARGE_CODES = {
 	fcl_freight_service       : ['fcl_freight_charges', 'fcl_freight_seasonal_charges'],
 	fcl_freight_local_service : ['fcl_freight_local_charges'],
 	ftl_freight_service       : ['ftl_freight_charges'],
@@ -25,7 +25,7 @@ const servicesChargeCodes = {
 };
 
 const useGetServiceChargeCodes = ({ service_name, shipment_id, defaultFilters }) => {
-	const serviceName = servicesChargeCodes[service_name];
+	const serviceName = SERVICES_CHARGE_CODES[service_name];
 
 	const {
 		data:rateChargeCodesData,

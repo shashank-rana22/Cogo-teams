@@ -10,6 +10,7 @@ function AddIp({
 	updateInvoicingParty = () => {},
 }) {
 	const { importer_exporter: { id, country_id, is_tax_applicable } = {} } = shipmentData;
+
 	const organizationDetails = {
 		id                : id || undefined,
 		country_id        : country_id || undefined,

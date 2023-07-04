@@ -1,0 +1,65 @@
+.container {
+	margin-bottom: 22px;
+	background-color: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 4px;
+}
+
+.total_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 12px 28px;
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-1);
+	background-color: #e5e5e5;
+	border-radius: 0 0 4px 4px;
+}
+
+.total_amount {
+	margin-left: 16px;
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	line-height: 16px;
+	color: var(--color-accent-orange-2);
+}
+
+.totals {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 8px 30px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
+	white-space: nowrap;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.total_tax {
+	min-width: 12%;
+	margin-left: 16px;
+
+	@media (max-width: 768px) {
+		margin-left: 0;
+	}
+}
+
+.billed_text {
+	padding-right: 24px;
+	margin: 0;
+	font-size: var(--font-size-lg);
+	line-height: 16px;
+	color: #cb6464;
+}
+
+.tax_info {
+	min-width: 12%;
+}

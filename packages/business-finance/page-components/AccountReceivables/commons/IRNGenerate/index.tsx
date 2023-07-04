@@ -1,14 +1,17 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
 import usePostToSage from '../../hooks/usePostToSage';
+import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
 import FinalPostModal from './FinalPostModal';
+import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
 type Itemdata = {
@@ -24,19 +27,33 @@ interface IRNGeneration {
 	refetch?: Function;
 }
 
+interface RootState {
+	profile?: {
+		partner?: {
+			id?: string;
+		};
+	};
+}
+
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
+	const { profile = {} }: RootState = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
+	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [textValue, setTextValue] = useState('');
 	const [finalPostToSageModal, setFinalPostToSageModal] = useState(false);
 	const [visible, setVisible] = useState(false);
 	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 	const { id = '' } = itemData;
+
+	const { partner = {} } = profile;
+
+	const { id: partnerId = '' } = partner;
+
 	const { financeReject, loading: loadingReject } = useFinanceReject({
 		id,
 		textValue,
@@ -54,6 +71,13 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		id,
 		refetch,
 	});
+
+	const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
+		id,
+		setUploadInvoice,
+		partnerId,
+	});
+
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
@@ -62,6 +86,10 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	};
 	const { labels } = CogoportEntity[entityCode] || {};
 	const { irn_label: IrnLabel } = labels || {};
+
+	const UPLOAD_INVOICE_PERMISSION = GLOBAL_CONSTANTS.cogoport_entities[entityCode]
+		?.feature_supported.includes('upload_invoice');
+
 	const handleFinalpost = () => {
 		setFinalPostToSageModal(true);
 		getSageInvoiceData();
@@ -73,16 +101,43 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			<div
 				className={styles.generate_container}
 			>
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION)
+					&& (
+						<div className={styles.upload_invoice}>
+							<Button
+								size="sm"
+								disabled={invoiceLoading}
+								onClick={() => setUploadInvoice(true)}
+							>
+								<div className={styles.finance_reject}>
+									Upload
+									{' '}
+									{IrnLabel}
+								</div>
+							</Button>
+						</div>
+					)}
+				{uploadInvoice
+					&& (
+						<InvoiceModal
+							uploadInvoice={uploadInvoice}
+							setUploadInvoice={setUploadInvoice}
+							uploadEInvoice={uploadEInvoice}
+							loading={invoiceLoading}
+						/>
+					)}
 				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
-					<Button
-						size="sm"
-						disabled={loading}
-						onClick={() => generateIrn()}
-					>
-						{loading ? 'Generating' : 'Generate'}
-						{' '}
-						{IrnLabel}
-					</Button>
+					<div className={styles.generate_invoice}>
+						<Button
+							size="sm"
+							disabled={loading}
+							onClick={() => generateIrn()}
+						>
+							Generate
+							{' '}
+							{IrnLabel}
+						</Button>
+					</div>
 				)}
 				{POSTED_STATUS.includes(invoiceStatus) && (
 					<div className={styles.button_container}>
@@ -134,7 +189,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						disabled={loading}
 						onClick={() => financeRejected()}
 					>
-						<div className={styles.button_style}>Finance Reject</div>
+						<div className={styles.finance_reject}>Finance Reject</div>
 					</Button>
 				</div>
 			)}
@@ -201,5 +256,4 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	);
 }
-
 export default IRNGenerate;

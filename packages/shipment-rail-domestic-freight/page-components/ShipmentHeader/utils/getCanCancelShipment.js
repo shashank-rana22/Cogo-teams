@@ -1,12 +1,12 @@
-import CONSTANTS from '../../../configs/constants.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const shipmentCancellationStates = [
+const SHIPMENT_CANCELLATION_STATES = [
 	'shipment_received',
 	'confirmed_by_importer_exporter',
 	'in_progress',
 ];
 
-const serviceCancellationStates = [
+const SERVICE_CANCELLATION_STATES = [
 	'init',
 	'awaiting_service_provider_confirmation',
 	'confirmed_by_service_provider',
@@ -17,13 +17,13 @@ const serviceCancellationStates = [
 ];
 
 export default function getCanCancelShipment({ shipment_data, primary_service, user_data, stakeholderConfig }) {
-	const isShipmentInCancellationState = shipmentCancellationStates.includes(shipment_data?.state);
+	const isShipmentInCancellationState = SHIPMENT_CANCELLATION_STATES.includes(shipment_data?.state);
 
-	const isServiceInCancellationState = serviceCancellationStates.includes(primary_service?.state);
+	const isServiceInCancellationState = SERVICE_CANCELLATION_STATES.includes(primary_service?.state);
 
 	const isStakeholderAllowed = !!stakeholderConfig?.cancel_shipment?.can_cancel;
 
-	const allowedEmail = user_data?.email === CONSTANTS.ajeet_email;
+	const allowedUser = user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
-	return isShipmentInCancellationState && isServiceInCancellationState && (isStakeholderAllowed || allowedEmail);
+	return isShipmentInCancellationState && isServiceInCancellationState && (isStakeholderAllowed || allowedUser);
 }

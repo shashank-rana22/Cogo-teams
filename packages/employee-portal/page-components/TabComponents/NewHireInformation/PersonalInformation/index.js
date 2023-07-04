@@ -11,10 +11,86 @@ import styles from './styles.module.css';
 
 const EMERGENCY_CONTACT_NUMBER_INDEX = 0;
 
+const CONTROL_SELECT_TYPE = 'fileUpload';
+const DEFAULT_MOBILE_CODE = '+91';
+
+const PERSONAL_INFO = 'personal_info';
+const MOBILE_NUMBER = 'mobile_number';
+const DATE_OF_BIRTH = 'date_of_birth';
+const DATE_OF_JOINING = 'date_of_joining';
+const EMERGENCY_CONTACT_DETAILS = 'emergency_contact_details';
+const DESIGNATION = 'designation';
+const HIRING_MANAGER = 'hiring_manager';
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
 };
+
+const PERSONAL_DETAILS_MAPPING = ['name_title', 'name', 'gender', 'date_of_birth',
+	'personal_email', 'mobile_number', 'passport_size_photo_url'];
+
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+	'cogoport_email', 'hiring_manager',
+];
+
+const ADDITIONAL_DETAILS_MAPPING = ['relation_type',
+	'relation_person_name',
+	'emergency_contact_details'];
+
+const SECTION_MAPPING = [
+	{
+		header : 'Personal Details',
+		fields : PERSONAL_DETAILS_MAPPING,
+	},
+	{
+		header : 'Additional Details',
+		fields : ADDITIONAL_DETAILS_MAPPING,
+	},
+	{
+		header : 'Employment Details',
+		fields : EMPLOYEE_DETAILS_MAPPING,
+	},
+];
+
+const RenderComponents = ({ controlsvalue, control, errors }) => SECTION_MAPPING.map((section) => (
+	<div className={styles.seperator} key={section.header}>
+		<div className={styles.form_header}>{section.header}</div>
+		<div className={styles.block}>
+			{controlsvalue?.map((controlItem) => {
+				const { type, label, name: controlName } = controlItem || {};
+				const Element = getElementController(type);
+				if (!section.fields.includes(controlName)) {
+					return null;
+				}
+
+				return (
+					<div key={controlName} className={styles.control_container}>
+						<div className={styles.label}>
+							{label}
+						</div>
+
+						<div className={styles.control}>
+							<Element
+								{...(type === CONTROL_SELECT_TYPE
+									? removeTypeField(controlItem) : { ...controlItem })}
+								control={control}
+								key={controlName}
+							/>
+
+							{errors[controlName]?.message
+								? (
+									<div className={styles.error_msg}>
+										{errors[controlName]?.message}
+									</div>
+								) : null}
+						</div>
+					</div>
+				);
+			})}
+		</div>
+	</div>
+));
 
 function PersonalInformation({ data: content, getEmployeeDetails }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
@@ -26,46 +102,46 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails({ data: values, formType: 'personal_info' });
+		updateEmployeeDetails({ data: values, formType: PERSONAL_INFO });
 	};
 
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
 				number       : content?.detail?.mobile_number,
-				country_code : content?.detail?.mobile_country_code || '+91',
+				country_code : content?.detail?.mobile_country_code || DEFAULT_MOBILE_CODE,
 			},
 			emergency_contact_details: {
 				mobile_number: {
 					number: content?.detail?.emergency_contact_details?.
 						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number,
 					country_code: content?.detail?.emergency_contact_details?.
-						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code || '+91',
+						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code || DEFAULT_MOBILE_CODE,
 				},
 			},
 		};
 
 		controlsvalue.forEach((item) => {
-			if (item?.name === 'mobile_number') {
+			if (item?.name === MOBILE_NUMBER) {
 				setValue(
 					`${item.name}`,
 					mapping[item.name]
 					|| content?.detail?.[item.name],
 				);
 			} else if (
-				(['date_of_birth', 'date_of_joining', 'updated_at', 'created_at'].includes(item?.name))
+				([DATE_OF_BIRTH, DATE_OF_JOINING].includes(item?.name))
 				&& content?.detail?.[item?.name]
 			) {
 				setValue(item.name, new Date(content?.detail?.[item?.name]));
-			} else if (item?.name === 'emergency_contact_details') {
+			} else if (item?.name === EMERGENCY_CONTACT_DETAILS) {
 				setValue(
 					`${item.name}`,
 					mapping[item.name]?.mobile_number
 					|| content?.detail?.[item.name].mobile_number,
 				);
-			} else if (item?.name === 'designation') {
+			} else if (item?.name === DESIGNATION) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
-			} else if (item?.name === 'hiring_manager') {
+			} else if (item?.name === HIRING_MANAGER) {
 				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
@@ -76,34 +152,10 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				Please update your details here !
+				<div>Please update your details here !</div>
 			</div>
 			<div className={styles.container}>
-				{controlsvalue?.map((controlItem) => {
-					const { type, label, name: controlName } = controlItem || {};
-					const Element = getElementController(type);
-
-					return (
-						<div key={controlName} className={styles.control_container}>
-							<div className={styles.label}>
-								{label}
-							</div>
-
-							<div className={styles.control}>
-								<Element
-									{...(type === 'fileUpload'
-										? removeTypeField(controlItem) : { ...controlItem })}
-									control={control}
-									key={controlName}
-									className={styles[`element_${controlName}`]}
-								/>
-
-								{errors[controlName]?.message
-									? <div className={styles.error_msg}>{errors[controlName]?.message}</div> : null}
-							</div>
-						</div>
-					);
-				})}
+				<RenderComponents controlsvalue={controlsvalue} control={control} errors={errors} />
 			</div>
 			<div className={styles.button}>
 				<Button
@@ -117,7 +169,6 @@ function PersonalInformation({ data: content, getEmployeeDetails }) {
 					Save
 				</Button>
 			</div>
-
 		</div>
 	);
 }

@@ -115,11 +115,11 @@ const useContainerDetails = ({
 	const formValues = watch();
 
 	const handleFillData = (data) => {
-		const trimmedData = data?.replace(/ +(?=\t)/g, '');
+		const trimmedData = data?.replace(GLOBAL_CONSTANTS.regex_patterns.empty_spaces_before_tab_character, '');
 
 		const valArray = (trimmedData?.split(' ') || [])?.filter(Boolean);
 
-		const containerError = [];
+		const CONTAINER_ERROR = {};
 
 		const containerDetails = (formValues?.container || []).map(
 			(item, index) => {
@@ -131,12 +131,10 @@ const useContainerDetails = ({
 
 				if (num) {
 					if (date && (invalidDate || pickup_date > new Date())) {
-						containerError[index] = {
-							picked_up_from_yard_at: getError({
-								index,
-								dateError: invalidDate ? 'Invalid Date' : 'maxDate',
-							}),
-						};
+						CONTAINER_ERROR[`container.${index}.picked_up_from_yard_at`] = getError({
+							index,
+							dateError: invalidDate ? 'Invalid Date' : 'maxDate',
+						});
 
 						return {
 							...item,
@@ -156,9 +154,9 @@ const useContainerDetails = ({
 
 		setValue('container', containerDetails);
 
-		if (containerError.length > 0) {
-			setError('container', containerError);
-		}
+		Object.entries(CONTAINER_ERROR).forEach(([key, val]) => {
+			setError(key, val);
+		});
 	};
 
 	const onSubmit = async (data) => {

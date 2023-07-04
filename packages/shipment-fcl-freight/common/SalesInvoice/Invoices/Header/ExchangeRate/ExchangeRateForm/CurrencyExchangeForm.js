@@ -6,19 +6,22 @@ import FieldArrayItem from '../FieldArrayItem';
 
 import { getCurrencyControls } from './getCurrencyControls';
 
+const INITIAL_STATE = 0;
+const EXCHANGE_CURRENCY_HASH = {};
+
 function CurrencyExchangeForm({
 	invoiceCurrency = '',
-	differentCurrenciesHash = {},
+	DIFFERENT_CURRENCIES_HASH = {},
 	setOpen = () => {},
-	availableCurrencyConversions = {},
+	AVAILABLE_CURRENCY_CONVERSION = {},
 	open = false,
 	handleFormSubmit = () => {},
 	loading = false,
 }) {
 	const { controls, defaultValues } = getCurrencyControls({
 		invoiceCurrency,
-		differentCurrenciesHash,
-		availableCurrencyConversions,
+		DIFFERENT_CURRENCIES_HASH,
+		AVAILABLE_CURRENCY_CONVERSION,
 	});
 
 	const {
@@ -28,21 +31,21 @@ function CurrencyExchangeForm({
 	} = useForm({ defaultValues });
 
 	const handleAddRate = async (value) => {
-		const exchangeCurrencyHash = {};
 		const currencyData = value;
 
 		Object.keys(value || {}).forEach((val) => {
-			const key = `${currencyData[val]?.[0]?.from_currency}_${currencyData?.[val]?.[0]?.to_currency}`;
-			if (currencyData?.[val]?.[0]?.exchange_rate) {
-				exchangeCurrencyHash[key] = Number(
-					currencyData?.[val]?.[0]?.exchange_rate,
+			const key = `${currencyData[val]?.[INITIAL_STATE]?.from_currency}`
+			+ `_${currencyData?.[val]?.[INITIAL_STATE]?.to_currency}`;
+			if (currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate) {
+				EXCHANGE_CURRENCY_HASH[key] = Number(
+					currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate,
 				);
 			}
 		});
-		if (Object.keys(exchangeCurrencyHash).length === 0) {
+		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === INITIAL_STATE) {
 			Toast.error('Please fill atleast one field !');
 		}
-		handleFormSubmit(exchangeCurrencyHash);
+		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
 	};
 
 	return (

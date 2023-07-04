@@ -1,8 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
-import { CSSProperties } from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -204,11 +203,16 @@ const completedColumn = ({
 			<div className={styles.fieldPair}>
 				<div>
 					<div>
-						{getPrice(
-							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'invoiceCurrency') as string,
-						)}
-
+						{
+						formatAmount({
+							amount   : getByKey(row, 'invoiceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 					</div>
 				</div>
 
@@ -216,7 +220,7 @@ const completedColumn = ({
 					className={styles.styled_pills}
 					style={{
 						'--color': STATUS[(getByKey(row, 'status') as string)],
-					} as CSSProperties}
+					} as any}
 				>
 
 					{startCase(getByKey(row, 'status') as string).length > 10 ? (
@@ -253,11 +257,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'ledgerAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
-					)}
-
+					{
+					formatAmount({
+						amount   : getByKey(row, 'ledgerAmount') as any,
+						currency : getByKey(row, 'ledgerCurrency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})
+					}
 				</div>
 			</div>
 		),
@@ -267,10 +276,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'invoiceCurrency') as string,
-					)}
+					{
+						formatAmount({
+							amount   : getByKey(row, 'balanceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 
 				</div>
 			</div>
@@ -344,7 +359,7 @@ const completedColumn = ({
 				className={styles.styled_pills}
 				style={{
 					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus') as string)],
-				} as CSSProperties}
+				} as any}
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>

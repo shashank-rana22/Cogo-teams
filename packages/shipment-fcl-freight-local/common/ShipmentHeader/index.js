@@ -2,7 +2,7 @@ import { Popover, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import CancelShipment from '../CancelShipment';
 import CargoDetails from '../CargoDetails';

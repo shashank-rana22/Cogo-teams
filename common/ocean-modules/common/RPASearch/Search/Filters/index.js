@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function Filters({
 	query,
-	onChange,
+	onChange = () => {},
 	placeholder = 'Search by File name, Shipping line, Email Subject and Date.',
 }) {
 	return (

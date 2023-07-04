@@ -1,4 +1,4 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from './handleServiceType';
@@ -51,7 +51,7 @@ const commonControls = (service) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 
@@ -100,19 +100,32 @@ const creditNoteControls = ({
 }) => {
 	const control = services?.map((service) => ({
 		...rawControls(service),
-		value: service?.line_items?.map((item) => ({
-			is_checked       : item?.is_checked,
-			code             : item?.code,
-			sac_code         : item?.hsn_code || 'NA',
-			currency         : item?.currency,
-			price_discounted : item?.price_discounted || 0,
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
-			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || 0,
-			name             : item?.name,
-		})),
+		value: service?.line_items?.map((item) => {
+			const {
+				price_discounted = 0, quantity = 0,
+				exchange_rate = 1, tax_percent = 0,
+				tax_total_price_discounted = 0,
+				is_checked,
+				code,
+				hsn_code = 'NA',
+				currency,
+				unit,
+				name,
+			} = item || {};
+			return ({
+				is_checked,
+				code,
+				currency,
+				unit,
+				name,
+				sac_code : hsn_code,
+				price_discounted,
+				quantity,
+				exchange_rate,
+				tax_percent,
+				total    : tax_total_price_discounted,
+			});
+		}),
 	}));
 
 	control.push(...controls);

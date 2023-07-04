@@ -4,16 +4,14 @@ import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
 import { ExtraHardCodeData } from './ExtraHardCodeData';
 import { formmatedValues } from './formmatedValues';
+import getLeftSideFields from './getLeftSideFields';
+import getTableDetails from './getTableDetails';
 import { HeaderPart } from './HeaderPart';
-import { leftDataControls } from './leftDataControl';
 import styles from './styles.module.css';
-import { tableDetailControls } from './TableDetailControls';
 
 function Frontside({ initialValues = {} }, ref) {
 	const formatValues = formmatedValues(initialValues);
-
 	const service_type = formatValues?.service_type;
-
 	const { control, handleSubmit, setValue } = useForm({ defaultValues: formatValues });
 
 	useEffect(() => {
@@ -22,118 +20,7 @@ function Frontside({ initialValues = {} }, ref) {
 		});
 	}, [formatValues, setValue]);
 
-	useImperativeHandle(ref, () => ({
-		handleSubmit,
-	}));
-
-	const leftSideFields = [];
-
-	for (let i = 0; i < leftDataControls[service_type].length;) {
-		const obj = leftDataControls[service_type][i];
-
-		if (obj.fullWidth) {
-			leftSideFields.push(
-				<div className={styles.block}>
-					<div className={styles.text}>
-						{obj.label}
-						{' '}
-						:
-					</div>
-
-					<div className={styles.text_area}>
-						<TextAreaController
-							control={control}
-							name={`${obj.name}`}
-							setValue={setValue}
-							rows={3}
-						/>
-					</div>
-				</div>,
-			);
-			i += 1;
-		} else if (i + 1 < leftDataControls[service_type].length) {
-			leftSideFields.push(
-				<div className={styles.container_flex}>
-					<div className={cl`${styles.block} ${styles.width_50}`}>
-						<div className={styles.text}>
-							{obj.label}
-							{' '}
-							:
-						</div>
-
-						<div className={styles.width_74}>
-							<TextAreaController
-								control={control}
-								name={`${obj.name}`}
-								setValue={setValue}
-								rows={3}
-							/>
-						</div>
-					</div>
-
-					<div className={cl`${styles.block} ${styles.width_50}`}>
-						<div className={styles.text}>
-							{leftDataControls[service_type][i + 1].label}
-							{' '}
-							:
-						</div>
-
-						<div className={styles.text_area}>
-							<TextAreaController
-								control={control}
-								name={`${leftDataControls[service_type][i + 1].name}`}
-								setValue={setValue}
-								rows={3}
-							/>
-						</div>
-					</div>
-				</div>,
-			);
-			i += 2;
-		} else {
-			leftSideFields.push(
-				<div className={styles.block}>
-					<div className={styles.text}>
-						{obj.label}
-						{' '}
-						:
-					</div>
-
-					<div className={styles.text_area}>
-						<TextAreaController
-							control={control}
-							name={`${obj.name}`}
-							setValue={setValue}
-							rows={3}
-						/>
-					</div>
-				</div>,
-			);
-			i += 1;
-		}
-	}
-
-	const tableDetails = [];
-	for (let i = 0; i < tableDetailControls[service_type].length; i += 1) {
-		tableDetails.push(
-			<div className={styles.last_block}>
-				<div className={styles.last_block_text}>
-					{tableDetailControls[service_type][i].label}
-					{' '}
-					:
-				</div>
-
-				<div className={styles.ref_text_area}>
-					<TextAreaController
-						control={control}
-						name={`${tableDetailControls[service_type][i].name}`}
-						setValue={setValue}
-						rows={3}
-					/>
-				</div>
-			</div>,
-		);
-	}
+	useImperativeHandle(ref, () => ({ handleSubmit }));
 
 	return (
 		<div className={styles.page}>
@@ -256,11 +143,11 @@ function Frontside({ initialValues = {} }, ref) {
 				</div>
 
 				<div className={styles.width_100}>
-					{leftSideFields.map((element) => element)}
+					{getLeftSideFields({ control, service_type, setValue })?.map((element) => element)}
 				</div>
 
 				<div className={styles.container_flex}>
-					{tableDetails.map((obj) => obj)}
+					{getTableDetails({ control, service_type, setValue })?.map((obj) => obj)}
 				</div>
 			</div>
 

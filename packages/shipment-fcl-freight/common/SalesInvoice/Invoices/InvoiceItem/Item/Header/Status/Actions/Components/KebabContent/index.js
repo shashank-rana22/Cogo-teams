@@ -19,7 +19,7 @@ function KebabContent({
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -46,7 +46,7 @@ function KebabContent({
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_singh_user_id;
+		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const content = (
 		<div className={styles.dialog_box}>
@@ -121,7 +121,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > 0)
+			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

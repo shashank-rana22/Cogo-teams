@@ -7,31 +7,27 @@ import { useCallback, useEffect, useState } from 'react';
 import toastApiError from '../../commons/toastApiError';
 
 interface GlobalInterface {
-	page?:number
-	pageLimit?:number
-	accMode?:string
-	search?:string
-	date?:{
-		startDate?:Date
-		endDate?:Date
-	}
-	paymentDocumentStatus?:string
-	docType?:string
-	sortBy?: string,
-	sortType?: string
+	page?: number;
+	pageLimit?: number;
+	accMode?: string;
+	search?: string;
+	date?: {
+		startDate?: Date;
+		endDate?: Date;
+	};
+	paymentDocumentStatus?: string;
+	docType?: string;
+	sortBy?: string;
+	sortType?: string;
 }
 
 const MAX_FILTERS_LENGTH = 3;
 
-const payloadFormatDate = (dateValue) => {
-	formatDate({
-		date       : dateValue,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
-		formatType : 'dateTime',
-		separator  : ' ',
-	});
-};
+const payloadFormatDate = (dateValue) => formatDate({
+	date       : dateValue,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
 
 const useAccountCollection = ({ entityType, currencyType }) => {
 	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
@@ -43,7 +39,14 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const {
-		search, date, paymentDocumentStatus, docType, accMode, page, sortBy, sortType,
+		search,
+		date,
+		paymentDocumentStatus,
+		docType,
+		accMode,
+		page,
+		sortBy,
+		sortType,
 	} = globalFilters;
 
 	const [{ data, loading }, listApiTrigger] = useRequestBf(
@@ -64,12 +67,12 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 					page                  : page || undefined,
 					accMode               : accMode || undefined,
 					pageLimit             : 10,
-					startDate:
-					date?.startDate
-						? payloadFormatDate(date?.startDate) : undefined,
-					endDate:
-					date?.endDate
-						? payloadFormatDate(date?.endDate) : undefined,
+					startDate             : date?.startDate
+						? payloadFormatDate(date?.startDate)
+						: undefined,
+					endDate: date?.endDate
+						? payloadFormatDate(date?.endDate)
+						: undefined,
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,
@@ -80,9 +83,20 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [accMode, listApiTrigger, currencyType, date?.endDate,
-		date?.startDate, docType, entityType, page, paymentDocumentStatus, query, sortBy,
-		sortType]);
+	}, [
+		accMode,
+		listApiTrigger,
+		currencyType,
+		date?.endDate,
+		date?.startDate,
+		docType,
+		entityType,
+		page,
+		paymentDocumentStatus,
+		query,
+		sortBy,
+		sortType,
+	]);
 	const clearFilters = () => {
 		if (Object.keys(globalFilters).length > MAX_FILTERS_LENGTH) {
 			setGlobalFilters({
@@ -97,8 +111,17 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 
 	useEffect(() => {
 		refetch();
-	}, [query, date, sortBy,
-		sortType, entityType, currencyType, paymentDocumentStatus, docType, refetch]);
+	}, [
+		query,
+		date,
+		sortBy,
+		sortType,
+		entityType,
+		currencyType,
+		paymentDocumentStatus,
+		docType,
+		refetch,
+	]);
 
 	useEffect(() => {
 		debounceQuery(search);

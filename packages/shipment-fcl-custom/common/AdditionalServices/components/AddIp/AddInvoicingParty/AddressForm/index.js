@@ -1,4 +1,5 @@
 import { Button, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -38,8 +39,8 @@ function AddressForm({
 
 	useEffect(() => {
 		setValue('name', trade_name || business_name || '');
-		setValue('pincode', (!isEmpty(addresses) && (addresses[0] || {}).pincode) || '');
-		setValue('address', (!isEmpty(addresses) && (addresses[0] || {}).address) || '');
+		setValue('pincode', (!isEmpty(addresses) && (addresses[GLOBAL_CONSTANTS.zeroth_index] || {}).pincode) || '');
+		setValue('address', (!isEmpty(addresses) && (addresses[GLOBAL_CONSTANTS.zeroth_index] || {}).address) || '');
 	}, [setValue, addresses, business_name, trade_name]);
 
 	const handleCancel = () => {
@@ -65,18 +66,19 @@ function AddressForm({
 				</div>
 			)}
 
-			{isAddressRegisteredUnderGst ? (
-				<section className={styles.section}>
-					<Form
-						control={control}
-						useFieldArray={useFieldArray}
-						register={register}
-						handleSubmit={handleSubmit}
-						errors={errors}
-						showComponent={showComponent}
-					/>
-				</section>
-			)
+			{isAddressRegisteredUnderGst
+				? (
+					<section className={styles.section}>
+						<Form
+							control={control}
+							useFieldArray={useFieldArray}
+							register={register}
+							handleSubmit={handleSubmit}
+							errors={errors}
+							showComponent={showComponent}
+						/>
+					</section>
+				)
 				: (
 					<section className={styles.section}>
 						<h3>Billing Address</h3>
@@ -97,7 +99,6 @@ function AddressForm({
 								showComponent={showComponent}
 							/>
 						) : null}
-
 					</section>
 				)}
 

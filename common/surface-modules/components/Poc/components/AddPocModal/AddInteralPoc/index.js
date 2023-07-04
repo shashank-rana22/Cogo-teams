@@ -3,7 +3,7 @@ import { SelectController, useForm, useGetAsyncOptions, asyncFieldsPartnerUsers 
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { SERVICE_LEVEL_STATKEHOLDERS, STAKEHOLDER_CAN_BE_ADDED } from '../../../../../contants/STAKEHOLDER_MAPPING';
+import { SERVICE_LEVEL_STATKEHOLDERS, STAKEHOLDER_CAN_BE_ADDED } from '../../../../../constants/STAKEHOLDER_MAPPING';
 import useUpdateShipmentStakeholders from '../../../../../hooks/useUpdateShipmentStakeholders';
 import { convertObjectMappingToArray } from '../../../../../utils/convertObjectMappingToArray';
 

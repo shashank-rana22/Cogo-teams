@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.input_item {
+	width: 60px;
+	margin-left: 16px;
+}
+
+.input {
+	align-self: center;
+	text-align: center;
+}

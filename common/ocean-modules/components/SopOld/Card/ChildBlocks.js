@@ -14,6 +14,8 @@ import Layout from '../../Layout';
 
 import styles from './styles.module.css';
 
+const FILE_NAME_LAST_INEDX_OFFSET = 1;
+
 function ChildBlocks(
 	{ id, mainData, blocks, setBlocks, updatePermission },
 	ref,
@@ -76,7 +78,7 @@ function ChildBlocks(
 		if (typeof url === 'string') {
 			const values = (url || '').split('/');
 			if (values?.length) {
-				const lastVal = values[values.length - 1];
+				const lastVal = values[values.length - FILE_NAME_LAST_INEDX_OFFSET];
 				const words = lastVal.split('%');
 				words.forEach((word) => {
 					filename += word;
@@ -101,18 +103,20 @@ function ChildBlocks(
 	const { handleSubmit, control, errors } = useForm(fileControl);
 
 	const getFileValue = async () => {
-		const fileValue = {};
-		fileValue.id = id;
+		const FILE_VALUE = {};
+
+		FILE_VALUE.id = id;
+
 		await handleSubmit(
 			(val) => {
-				fileValue.file = val;
+				FILE_VALUE.file = val;
 			},
 			(err) => {
 				Toast.error(err);
 			},
 		)();
 
-		return { fileValue };
+		return { fileValue: FILE_VALUE };
 	};
 
 	useImperativeHandle(ref, () => ({ getFileValue }));
@@ -136,10 +140,9 @@ function ChildBlocks(
 							name="instruction"
 							className={styles.text_area}
 							style={{
-								textDecoration:
-									mainData.status === 'inactive' && mainData.id
-										? 'line-through'
-										: null,
+								textDecoration: mainData.status === 'inactive' && mainData.id
+									? 'line-through'
+									: null,
 								width: showActions ? '100%' : '90%',
 							}}
 							value={mainData?.instruction}
@@ -201,7 +204,6 @@ function ChildBlocks(
 						className={styles.links}
 						key={url}
 					>
-
 						<div className={styles.file_name}>{getFileName(url)}</div>
 
 						{url ? (

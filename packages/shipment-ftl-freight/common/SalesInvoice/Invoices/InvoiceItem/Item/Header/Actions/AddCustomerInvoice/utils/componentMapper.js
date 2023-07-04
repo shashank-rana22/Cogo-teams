@@ -1,15 +1,5 @@
 import dynamic from 'next/dynamic';
 
-// import { getStylesInvoiceAdani } from '../Invoices/InvoiceAdani/styles.module.css';
-// import { getStylesInvoiceExide } from '../Invoices/InvoiceExide/styles';
-// import { getStylesInvoiceGujaratMilk } from '../Invoices/InvoiceGujaratMilk/styles';
-// import { getStylesInvoiceHIL } from '../Invoices/InvoiceHIL/styles';
-// import { getStylesInvoiceITC } from '../Invoices/InvoiceITC/styles';
-// import { getStylesInvoiceIVL } from '../Invoices/InvoiceIVL/styles';
-// import { getStylesInvoiceNerolac } from '../Invoices/InvoiceNerolac/styles';
-// import { getStylesInvoiceOrissaMetaliks } from '../Invoices/InvoiceOrissaMetaliks/styles';
-// import { getStylesInvoiceVarun } from '../Invoices/InvoiceVarun/styles';
-
 import { shipperToPanMapping } from './serviceDescriptionMappings';
 
 const InvoiceIVL = dynamic(() => import('../Invoices/InvoiceIVL'));
@@ -21,33 +11,24 @@ const InvoiceAdani = dynamic(() => import('../Invoices/InvoiceAdani'));
 const InvoiceVarun = dynamic(() => import('../Invoices/InvoiceVarun'));
 const InvoiceOrissaMetaliks = dynamic(() => import('../Invoices/InvoiceOrissaMetaliks'));
 const InvoiceNerolac = dynamic(() => import('../Invoices/InvoiceNerolac'));
+const InvoiceDefault = dynamic(() => import('../Invoices/InvoiceDefault'));
 
 export const componentMapper = {
-	[shipperToPanMapping.ivl_dhunseri]: {
-		component: InvoiceIVL,
-	},
-	[shipperToPanMapping.itc_limited]: {
-		component: InvoiceITC,
-	},
-	[shipperToPanMapping.hil_limited]: {
-		component: InvoiceHIL,
-	},
-	[shipperToPanMapping.gujarat_milk]: {
-		component: InvoiceGujaratMilk,
-	},
-	[shipperToPanMapping.exide_industries]: {
-		component: InvoiceExide,
-	},
-	[shipperToPanMapping.adani_wilmar]: {
-		component: InvoiceAdani,
-	},
-	[shipperToPanMapping.varun_beverages]: {
-		component: InvoiceVarun,
-	},
-	[shipperToPanMapping.orissa_metaliks]: {
-		component: InvoiceOrissaMetaliks,
-	},
-	[shipperToPanMapping.kansai_nerolac]: {
-		component: InvoiceNerolac,
-	},
+	[shipperToPanMapping.ivl_dhunseri]     : InvoiceIVL,
+	[shipperToPanMapping.itc_limited]      : InvoiceITC,
+	[shipperToPanMapping.hil_limited]      : InvoiceHIL,
+	[shipperToPanMapping.gujarat_milk]     : InvoiceGujaratMilk,
+	[shipperToPanMapping.exide_industries] : InvoiceExide,
+	[shipperToPanMapping.adani_wilmar]     : InvoiceAdani,
+	[shipperToPanMapping.varun_beverages]  : InvoiceVarun,
+	[shipperToPanMapping.orissa_metaliks]  : InvoiceOrissaMetaliks,
+	[shipperToPanMapping.kansai_nerolac]   : InvoiceNerolac,
+};
+
+export const getComponentMapping = (registration_number) => {
+	if (registration_number in componentMapper) {
+		return componentMapper[registration_number];
+	}
+
+	return InvoiceDefault;
 };

@@ -4,7 +4,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
-import React, { useState } from 'react';
+import { useSelector } from '@cogoport/store';
+import React, { useState, useEffect } from 'react';
 
 import getElementController from '../../../configs/getElementController';
 import BulkUpload from '../BulkUpload';
@@ -14,10 +15,17 @@ import styles from './styles.module.css';
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
-	'office_location', 'cogoport_email'];
+const EMPLOYEE_DETAILS_MAPPING = [
+	'employee_code',
+	'designation',
+	'date_of_joining',
+	'office_location',
+	'cogoport_email',
+];
 
 const HR_DETAILS_MAPPING = ['hr_id', 'hiring_manager_id', 'hrbp_id'];
+
+const CONTROL_HRBP_ID = 'hrbp_id';
 
 const SECTION_MAPPING = [
 	{
@@ -46,9 +54,7 @@ const RenderFields = ({ show, control, errors }) => (Object.keys(controls) || []
 
 	return (
 		<div key={name} className={styles.single_field}>
-			<div className={styles.label}>
-				{label}
-			</div>
+			<div className={styles.label}>{label}</div>
 
 			<div className={styles.controller_wrapper}>
 				<DynamicController
@@ -73,16 +79,30 @@ function FormComponent({ setActivePage }) {
 
 	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
 
-	const [{ loading }, trigger] = useHarbourRequest({
-		method : 'post',
-		url    : '/create_employee_detail',
-	}, { manual: true });
+	const [{ loading }, trigger] = useHarbourRequest(
+		{
+			method : 'post',
+			url    : '/create_employee_detail',
+		},
+		{ manual: true },
+	);
 
 	const onClickBackIcon = () => {
 		router.back();
 	};
 
-	const { control, handleSubmit, formState: { errors } } = useForm();
+	const { user = {} } = useSelector((state) => state.profile);
+
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+		setValue,
+	} = useForm();
+
+	useEffect(() => {
+		setValue(CONTROL_HRBP_ID, user.id);
+	}, [setValue, user.id]);
 
 	const onClickSaveDetails = async (values) => {
 		try {
@@ -90,7 +110,6 @@ function FormComponent({ setActivePage }) {
 				...values,
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
-
 			};
 			const res = await trigger({ data: payload });
 
@@ -133,7 +152,11 @@ function FormComponent({ setActivePage }) {
 					<div className={styles.seperator} key={section}>
 						<div className={styles.form_header}>{section.header}</div>
 						<div className={section.containerStyle}>
-							<RenderFields show={section?.fields} control={control} errors={errors} />
+							<RenderFields
+								show={section?.fields}
+								control={control}
+								errors={errors}
+							/>
 						</div>
 					</div>
 				))}

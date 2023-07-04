@@ -41,7 +41,7 @@ const getSopPayload = (
 			key: 'country_id',
 		},
 	};
-	const sop_instructions = [];
+	const SOP_INSTRUCTIONS = [];
 	(formValues?.instruction_items || []).forEach((element) => {
 		const addable = element?.instruction || element?.file?.length;
 		const instruction = {
@@ -57,29 +57,29 @@ const getSopPayload = (
 		}
 
 		if (addable) {
-			sop_instructions.push(instruction);
+			SOP_INSTRUCTIONS.push(instruction);
 		}
 	});
 	const payload = {
-		organization_id : shipment_data?.importer_exporter_id,
-		heading         : formValues?.heading,
-		sop_instructions,
+		organization_id  : shipment_data?.importer_exporter_id,
+		heading          : formValues?.heading,
+		sop_instructions : SOP_INSTRUCTIONS,
 	};
 
-	const sopConditions = {};
+	const SOP_CONDITIONS = {};
 	(formValues?.conditions || []).forEach((condition) => {
 		if (conditions[condition]?.data) {
-			sopConditions[conditions[condition].key] = conditions[condition]?.data;
+			SOP_CONDITIONS[conditions[condition].key] = conditions[condition]?.data;
 		}
 	});
 	const shipmentPayload = { ...payload };
 	shipmentPayload.shipment_id = shipment_data?.shipment_id;
 
-	const booking_party_payload = { ...payload, ...sopConditions };
+	const booking_party_payload = { ...payload, ...SOP_CONDITIONS };
 	return {
 		shipment_payload : shipmentPayload,
 		booking_party_payload,
-		status           : sop_instructions?.length > 0,
+		status           : !!SOP_INSTRUCTIONS?.length,
 	};
 };
 export default getSopPayload;

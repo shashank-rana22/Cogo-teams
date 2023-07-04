@@ -1,13 +1,15 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
+const INDEX_OFFSET = 1;
+
 export const lineItemsHelper = ({
 	lineItems = [],
-	lineItemsKeysMapping = {},
+	LINE_ITEMS_KEYS_MAPPING = {},
 	customData = {},
 }) => {
 	const finalLineItems = (lineItems || []).map((lineItem, index) => {
 		const lineItemObj = { id: customData?.shipment_id };
-		Object.entries(lineItemsKeysMapping).forEach(([key, value]) => {
+		Object.entries(LINE_ITEMS_KEYS_MAPPING).forEach(([key, value]) => {
 			if (key.includes('date') || key.includes('time')) {
 				lineItemObj[key] = lineItem?.[value]
 					? formatDate({ date: lineItem?.[value], formatType: 'date' })
@@ -21,7 +23,7 @@ export const lineItemsHelper = ({
 				lineItemObj[key] = lineItem?.[value] ?? '';
 			}
 		});
-		lineItemObj.si_no = index + 1;
+		lineItemObj.si_no = index + INDEX_OFFSET;
 		return lineItemObj;
 	});
 

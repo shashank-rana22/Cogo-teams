@@ -1,8 +1,8 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import CONSTANTS from '../../../configurations/constant.json';
 import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
@@ -13,6 +13,8 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
+const INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS = 1;
+
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
@@ -21,7 +23,7 @@ function Invoices({
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -33,7 +35,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += 1;
+			count += INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
@@ -42,7 +44,7 @@ function Invoices({
 	}
 
 	const showForOldShipments = invoiceData?.invoice_trigger_date
-	&& shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
@@ -72,7 +74,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-						org_outstanding={outstanding_by_reg_num[item]}
+						org_outstanding={OUTSTANDING_BY_REG_NUM[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>

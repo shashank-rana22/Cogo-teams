@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
 
 import TaskContainer from '../common/TaskContainer';
 

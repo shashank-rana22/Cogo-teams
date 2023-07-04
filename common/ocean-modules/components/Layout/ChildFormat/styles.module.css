@@ -84,3 +84,12 @@
 	height: 24px;
 	cursor: pointer;
 }
+
+.errors {
+	padding-left: 4px;
+	margin: 0;
+	font-size: var(--font-size-md);
+	line-height: 16px;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}

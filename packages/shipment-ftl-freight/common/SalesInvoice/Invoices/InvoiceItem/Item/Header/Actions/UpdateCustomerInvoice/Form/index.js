@@ -11,7 +11,12 @@ function Form({ defaultValues, finalControls }, ref) {
 		handleSubmit,
 		watch,
 		setValue,
+		reset,
 	} = useForm({ defaultValues });
+
+	useEffect(() => {
+		reset(defaultValues);
+	}, [defaultValues, reset]);
 
 	const watchCustomerName = watch('customer_name');
 

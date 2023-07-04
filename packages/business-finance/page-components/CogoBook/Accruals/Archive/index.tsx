@@ -1,5 +1,5 @@
 import { Input, Select, Toggle } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -66,17 +66,38 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 				<div>
 					Purchase :
 					{' '}
-					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
+					{formatAmount({
+						amount   :	buyQuotation,
+						currency : buyQuotationCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-'}
 				</div>
 				<div>
 					Sales :
 					{' '}
-					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
+					{formatAmount({
+						amount   :	sellQuotation,
+						currency : sellQuotationCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
 				</div>
 				<div>
 					Margin :
 					{' '}
-					{getFormattedPrice(quotationProfit, sellQuotationCurrency) || '-' }
+					{formatAmount({
+						amount   :	quotationProfit,
+						currency : sellQuotationCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
 					{' '}
 					(
 					{quotationMargin || '0'}

@@ -2,7 +2,7 @@ import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
-import TRADE_PARTY_MAPPING from '../../../../contants/TRADE_PARTY_MAPPING';
+import TRADE_PARTY_MAPPING from '../../../../constants/TRADE_PARTY_MAPPING';
 import useCreateShipmentTradePartner from '../../../../hooks/useCreateShipmentTradePartner';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
 

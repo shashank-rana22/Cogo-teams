@@ -37,6 +37,10 @@ export const requestControls = (isSettlementExecutive = false) => {
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 				label : 'Advance Container Security Deposit Refund',
 			},
+			{
+				value : 'PAYMENT_CONFIRMATION_APPROVAL',
+				label : 'Payment Confirmation Approval',
+			},
 		];
 	}
 
@@ -108,6 +112,10 @@ export const remainControls = (isSettlementExecutive = false) => {
 			{
 				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
 				label : 'Advance Container Security Deposit Refund',
+			},
+			{
+				value : 'PAYMENT_CONFIRMATION_APPROVAL',
+				label : 'Payment Confirmation Approval',
 			},
 		];
 	}

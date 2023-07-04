@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import React, { useState, useContext } from 'react';
 
 import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
@@ -93,22 +94,24 @@ function EditInvoicePreference({
 						/>
 					</Modal.Body>
 
-					<Modal.Footer className={styles.modal_footer}>
-						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => handleClose()}
-						>
-							Cancel
-						</Button>
+					<Modal.Footer>
+						<FooterButtonWrapper>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => handleClose()}
+							>
+								Cancel
+							</Button>
 
-						<Button
-							size="md"
-							onClick={handleEditPreferences}
-							disabled={rest?.loading}
-						>
-							Submit
-						</Button>
+							<Button
+								size="md"
+								onClick={handleEditPreferences}
+								disabled={rest?.loading}
+							>
+								Submit
+							</Button>
+						</FooterButtonWrapper>
 					</Modal.Footer>
 
 					{addInvoicingParty ? (

@@ -1,21 +1,24 @@
 /* eslint-disable no-nested-ternary */
 import {
 	Button,
-	Pill,
 	Tooltip,
 	Modal,
 	Textarea,
 	Checkbox,
+	ButtonIcon,
 } from '@cogoport/components';
-import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
+import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import useListShipment from '../../../../hook/useListShipment';
+import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import isDisabled from '../../../../utils/isDisabled';
 
+import HighAmountRequestModal from './HighAdvancePaymentApprovalModal';
 import LineItemCard from './lineItemCard/index';
 import styles from './styles.module.css';
 
@@ -29,6 +32,12 @@ interface ShipmentDetailsCardInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	invoiceStatus: string;
 }
+
+const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
+const VALID_ADVANCE_ATH_RANGE = 80;
+const PERCENTAGE_FACTOR = 100;
+const MAX_DECIMAL_PLACES = 2;
+const DEFAULT_GRAND_TOTAL = 1;
 
 function ShipmentDetailsCard({
 	data,
@@ -44,8 +53,9 @@ function ShipmentDetailsCard({
 	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
+	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
 	const {
-		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject, serviceProviderDetail,
 	} = data || {};
 	const {
 		entityCode = '',
@@ -54,7 +64,10 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
+	const {
+		organizationName = '', taxNumber = '', registrationNumber = '',
+		organizationId: sellerOrganizationId,
+	} = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
@@ -68,14 +81,24 @@ function ShipmentDetailsCard({
 		status = '',
 		placeOfSupply = '',
 		billType = '',
-		isProforma,
+		isProforma = false,
+		billDocumentUrl,
+		grandTotal,
 	} = bill || {};
 
 	const {
 		shipmentType = '',
 		reasonForCN = '',
 		outstandingDocument = '',
+		paymentType = '',
+		isIncidental = '',
+		serialId = '',
+		advancedAmount = '0',
+		advancedAmountCurrency = '',
+
 	} = billAdditionalObject || {};
+
+	const { organizationId: serviceProviderOrgId } = serviceProviderDetail || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
 		{
@@ -88,6 +111,11 @@ function ShipmentDetailsCard({
 	] as any);
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
+
+	const advancedATHAmountPercentage = +((+advancedAmount / (+grandTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+		.toFixed(MAX_DECIMAL_PLACES);
+	const isAdvancedATHAmountGreaterThan80Percent = !Number.isNaN(advancedATHAmountPercentage)
+														&& advancedATHAmountPercentage > VALID_ADVANCE_ATH_RANGE;
 
 	const handleClick = (id: number) => {
 		const approveData = [...showValue, id];
@@ -111,6 +139,16 @@ function ShipmentDetailsCard({
 			invoiceType = 'PURCHASE INVOICE';
 		}
 	}
+
+	const { data: shipmentData } = useListShipment(serialId);
+	const [dataList = {}] = shipmentData?.list || [];
+
+	const shipmentId = dataList?.id || '';
+
+	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
+
+	const [advancedPaymentObj = {}] = (shipmentDocData?.list
+		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -160,6 +198,25 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
+			{!!showHighAdvanceModal && (
+				<HighAmountRequestModal
+					shipmentData={shipmentData}
+					invoiceData={{
+						invoiceNumber       : billNumber,
+						serialNumber        : serialId,
+						invoiceUploadDate   : billDate,
+						invoice             : billDocumentUrl,
+						totalInvoiceValue   : grandTotal,
+						advancedAmountValue : advancedAmount,
+						advancedPaymentObj,
+						sellerOrganizationId,
+					}}
+					serviceProviderOrgId={serviceProviderOrgId}
+					modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
+					refetchShipmentDocument={refetchShipmentDocument}
+				/>
+			)}
+
 			{showLineItem ? (
 				<LineItemCard
 					lineItems={lineItems}
@@ -187,7 +244,6 @@ function ShipmentDetailsCard({
 									<IcMInfo width={15} height={15} />
 								</div>
 							</Tooltip>
-							<Pill color="blue">{invoiceType}</Pill>
 						</div>
 
 						{!isInvoiceApproved && (
@@ -629,6 +685,8 @@ function ShipmentDetailsCard({
                         }
 											>
 												{label}
+												{' '}
+												Invoice Details
 												<div
 													style={{ justifyContent: 'center', display: 'flex' }}
 												>
@@ -686,6 +744,11 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
+												Bill -
+												{' '}
+												<span>{invoiceType}</span>
+											</div>
+											<div className={styles.margin_bottom}>
 												Invoice Number -
 												{' '}
 												<span>{billNumber}</span>
@@ -707,20 +770,89 @@ function ShipmentDetailsCard({
 												{' '}
 												<span>{placeOfSupply}</span>
 											</div>
-											{shipmentType === 'ftl_freight' && outstandingDocument
+
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL' && 		isIncidental
 											&& (
-												<div className={styles.document}>
-													Outstanding Document -
+												<div className={styles.margin_bottom}>
+													Is Incidental -
 													{' '}
-													<Button
-														className={styles.button}
+													<span>{startCase(isIncidental)}</span>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL' && 	paymentType
+											&& (
+												<div className={styles.margin_bottom}>
+													Payment Type -
+													{' '}
+													<span>{startCase(paymentType)}</span>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight' && (
+												<div className={styles.document}>
+													Advance amount -
+													{' '}
+													{advancedATHAmountPercentage}
+													%
+													{' '}
+													{advancedAmountCurrency}
+													{' '}
+													(
+													{advancedAmount}
+													/
+													{grandTotal}
+													)
+
+													{!Number.isNaN(advancedATHAmountPercentage)
+														&& isAdvancedATHAmountGreaterThan80Percent
+														? !advancedPaymentObj?.remarks?.includes('accepted', 'rejected')
+															? (
+																<Tooltip
+																	placement="top"
+																	trigger="mouseenter"
+																	interactive
+																	content={<div>ATH document was rejected</div>}
+																>
+																	<Button
+																		className={styles.button}
+																		onClick={() => {
+																			setShowHighAdvancedModal(true);
+																		}}
+																		disabled={advancedPaymentObj
+																			?.remarks?.includes('rejected')}
+																	>
+																		View
+																	</Button>
+																</Tooltip>
+
+															) : (
+																<ButtonIcon
+																	size="sm"
+																	icon={<IcMDownload />}
+																	onClick={() => {
+																		viewDocument(advancedPaymentObj?.document_url);
+																	}}
+																	themeType="primary"
+																/>
+															)
+														: null}
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& outstandingDocument
+											&& (
+												<div className={styles.margin_bottom}>
+													Outstanding Proforma Approval-
+													{' '}
+													<ButtonIcon
+														size="sm"
+														icon={<IcMDownload />}
 														onClick={() => {
 															viewDocument(outstandingDocument);
 														}}
-													>
-														View
-
-													</Button>
+														themeType="primary"
+													/>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
@@ -729,9 +861,10 @@ function ShipmentDetailsCard({
 												<div className={styles.margin_bottom}>
 													Reason For CN -
 													{' '}
-													<span>{reasonForCN}</span>
+													<span>{startCase(reasonForCN)}</span>
 												</div>
 											)}
+
 										</div>
 									</div>
 								)}

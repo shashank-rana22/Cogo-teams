@@ -90,6 +90,7 @@ function Dashboard({ entityCode }) {
                             }
 						/>
 						<OutStandingKam
+							entityCode={entityCode}
 							kamOutstandingData={kamOutstandingData}
 							kamOutstandingLoading={kamOutstandingLoading}
 

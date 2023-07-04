@@ -1,0 +1,23 @@
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 4px;
+			font-size: 12px;
+		}
+	}
+}
+
+.airline_name {
+	padding: 8px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.overflow_text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

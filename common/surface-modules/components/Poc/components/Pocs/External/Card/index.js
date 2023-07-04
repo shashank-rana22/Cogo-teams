@@ -1,6 +1,6 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 
 import styles from './styles.module.css';
 

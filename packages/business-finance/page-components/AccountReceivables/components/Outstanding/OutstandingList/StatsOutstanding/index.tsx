@@ -47,7 +47,7 @@ function StatsOutstanding({ item }) {
 
 			<div className={styles.invoices_wrapper}>
 				{invoiceContainer.map((invoiceObject) => (
-					<div key={invoiceObject.name} className={styles.invoices_card}>
+					<div className={styles.invoices_card} key={invoiceObject.name}>
 						<div className={styles.left_container}>
 							<div className={styles.styled_heading}>
 								{invoiceObject.name}

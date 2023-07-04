@@ -18,6 +18,9 @@ const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
 const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
 const AddService = dynamic(() => import('./AddService'), { ssr: false });
 
+const DEFAULT_PAGE_LIMIT = 8;
+const SHOW_MORE_PAGE_LIMIT = 16;
+
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
@@ -25,7 +28,7 @@ function List({ isSeller = false }) {
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
 	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
 
@@ -77,15 +80,15 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
+			{totalCount > DEFAULT_PAGE_LIMIT
 				? (
 					<div className={styles.show_more}>
-						{pageLimit > 8
+						{pageLimit > DEFAULT_PAGE_LIMIT
 							? 	(
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(8)}
+									onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
 								>
 									Show Less
 								</Button>
@@ -93,7 +96,7 @@ function List({ isSeller = false }) {
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(16)}
+									onClick={() => setPageLimit(SHOW_MORE_PAGE_LIMIT)}
 								>
 									Show More
 								</Button>

@@ -2,20 +2,26 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
 
-const trade_mapping = {
+const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
+const INITIAL_STATE = 0;
+const LABELS = {};
+const CHARGECODES = {};
+const CUSTOM_VALUES = {};
+const FIELD_VALUE = {};
+const DEFAULT_VALUES = {};
+const PAYLOAD = [];
+
 const useEditLineItems = ({
-	invoice,
-	onClose,
-	refetch,
-	isFclFreight,
-	shipment_data,
+	invoice = {},
+	onClose = () => {},
+	refetch = () => {},
+	shipment_data = {},
 	info,
 }) => {
 	const services = invoice.services || [];
@@ -35,22 +41,19 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
-		const defaultValues = {};
-
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
-				defaultValues[control.name] = control.value.map((value) => {
-					const fieldValue = {};
+				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || 0;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
 					});
 
-					return fieldValue;
+					return FIELD_VALUE;
 				});
 			}
 		});
 
-		return defaultValues;
+		return DEFAULT_VALUES;
 	};
 
 	const handleOptionsChange = useCallback(
@@ -65,26 +68,42 @@ const useEditLineItems = ({
 			handleChange,
 			service,
 			info,
-			isFclFreight,
 			shipment_data,
 			index,
-			trade_mapping,
+			TRADE_MAPPING,
 		),
 		onOptionsChange : handleOptionsChange,
-		value           : (service?.line_items || []).map((item) => ({
-			code             : item?.code,
-			alias            : item?.alias,
-			sac_code         : item?.hsn_code || 'NA',
-			currency         : item?.currency,
-			price_discounted : item?.price_discounted || '0',
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
-			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || 0,
-			name             : item?.name,
-			id               : uuid(),
-		})),
+		value           : (service?.line_items || []).map((item) => {
+			const {
+				alias,
+				code,
+				hsn_code = 'NA',
+				currency,
+				price_discounted = 0,
+				quantity = 0,
+				exchange_rate = 1,
+				tax_percent = 0,
+				unit,
+				tax_total_price_discounted = 0,
+				name,
+				product_code,
+			} = item || {};
+
+			return {
+				alias,
+				code,
+				sac_code : hsn_code,
+				currency,
+				price_discounted,
+				quantity,
+				exchange_rate,
+				tax_percent,
+				unit,
+				total    : tax_total_price_discounted,
+				name,
+				id       : product_code,
+			};
+		}),
 	}));
 
 	const defaultValues = generateDefaultValues({ values: controls });
@@ -93,7 +112,6 @@ const useEditLineItems = ({
 
 	const formValues = watch();
 
-	const customValues = {};
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
@@ -102,7 +120,7 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || 0) * (value?.quantity || 0),
+					total    : (value?.price_discounted || INITIAL_STATE) * (value?.quantity || INITIAL_STATE),
 				}));
 			}
 		});
@@ -111,26 +129,23 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	const labels = {};
-	Object.keys(controls?.[0]).forEach((key) => {
-		customValues[key] = {
+	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
+		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
-			label      : labels[key],
+			label      : LABELS[key],
 			id         : key,
 		};
 	});
 
 	const onCreate = async (values) => {
 		try {
-			const payload = [];
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
-				const chargeCodes = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
-						chargeCodes[chgCode.code] = chgCode;
+						CHARGECODES[chgCode.code] = chgCode;
 					},
 				);
 				const service = {
@@ -139,32 +154,26 @@ const useEditLineItems = ({
 					line_items   : (values?.[key] || []).map((line_item) => ({
 						code             : line_item?.code,
 						alias            : line_item?.alias,
-						name             : chargeCodes[line_item?.code]?.name || line_item?.name,
+						name             : CHARGECODES[line_item?.code]?.name || line_item?.name,
 						currency         : line_item?.currency,
 						price_discounted : Number(line_item?.price_discounted),
 						quantity         : Number(line_item?.quantity),
 						unit             : line_item?.unit,
 					})),
 				};
-				payload.push(service);
+				PAYLOAD.push(service);
 			});
 
-			const res = await trigger({
+			await trigger({
 				data: {
-					quotations             : payload,
+					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
 			});
-			if (!res.hasError) {
-				Toast.success('Line Items updated successfully!');
-				if (refetch) {
-					refetch();
-				}
-				if (onClose) {
-					onClose();
-				}
-			}
+			Toast.success('Line Items updated successfully!');
+			refetch();
+			onClose();
 		} catch (err) {
 			Toast.error(err?.data?.invoices);
 		}
@@ -175,7 +184,7 @@ const useEditLineItems = ({
 		handleSubmit,
 		controls,
 		loading,
-		customValues,
+		customValues: CUSTOM_VALUES,
 		errors,
 		control,
 		setValue,

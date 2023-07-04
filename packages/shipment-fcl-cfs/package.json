@@ -15,6 +15,7 @@
     "@cogoport/navigation-configs": "workspace:^0.1.0",
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/ocean-modules": "workspace:^0.1.0",
+    "@cogoport/purchase-invoicing": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/shipment-chat": "workspace:^0.1.0",
     "@cogoport/shipment-mails": "workspace:^0.1.0",

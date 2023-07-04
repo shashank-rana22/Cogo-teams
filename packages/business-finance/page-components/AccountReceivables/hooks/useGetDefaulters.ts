@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useRequestBf, useTicketsRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
@@ -17,19 +17,19 @@ interface Global {
 	migrated?:boolean | string,
 	invoiceDate?:{ startDate?:Date, endDate?:Date },
 	currency?:string,
-	cogoEntity?:string,
 	pageLimit?:string | number
 }
 interface Props {
 	globalFilters?:Global
 	activeTab?: string,
 	sort?:object
+	entityCode?:number | string,
 }
 
-const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
+const useGetDefaulters = ({ globalFilters, activeTab, sort, entityCode }:Props) => {
 	const {
 		search, zone, dueDate, invoiceStatus, status, services, pageIndex, migrated,
-		invoiceDate, currency, cogoEntity, pageLimit, ...rest
+		invoiceDate, currency, pageLimit, ...rest
 	} = globalFilters || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -47,7 +47,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
 			method  : 'get',
 			authKey : 'get_sales_outstanding_invoice_list',
 		},
-		{ manual: useTicketsRequest },
+		{ manual: true, autoCancel: false },
 	);
 
 	const trigger = invoiceTrigger;
@@ -87,7 +87,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
 				params: {
 					...(JSON.parse(stringifiedRest) || {}),
 					migrated         : migrated !== '' ? migrated : undefined,
-					cogoEntity       : cogoEntity.length > 0 ? cogoEntity : undefined,
+					cogoEntity       : entityCode || undefined,
 					invoiceStatus    : invoiceStatus?.length > 0 ? invoiceStatus : undefined,
 					status           : status?.length > 0 ? status : undefined,
 					services         : services?.length > 0 ? services : undefined,
@@ -115,7 +115,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
 		} catch (e) {
 			console.log('error', e);
 		}
-	}, [cogoEntity, currency, dueDate?.endDate, dueDate?.startDate, invoiceDate?.endDate,
+	}, [entityCode, currency, dueDate?.endDate, dueDate?.startDate, invoiceDate?.endDate,
 		invoiceDate?.startDate, invoiceStatus, migrated, pageIndex, services, status,
 		stringifiedQuery, stringifiedRest, trigger,
 		pageLimit,
@@ -163,6 +163,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
 		dueDate,
 		currency,
 		refetch,
+		entityCode,
 	]);
 
 	return {

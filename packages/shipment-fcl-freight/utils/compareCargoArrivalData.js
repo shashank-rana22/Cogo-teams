@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const compareCargoArrivalData = (obj1, obj2) => {
 	let check = true;
 	Object.keys(obj1 || {}).forEach((key) => {
@@ -10,9 +12,9 @@ const compareCargoArrivalData = (obj1, obj2) => {
 			});
 		}
 		if (key === 'containers') {
-			const obj = obj1[key]?.[0];
+			const obj = obj1[key]?.[GLOBAL_CONSTANTS.zeroth_index];
 			Object.keys(obj || {}).forEach((key2) => {
-				if (obj[key2] !== obj2?.[key]?.[0]?.[key2]) {
+				if (obj[key2] !== obj2?.[key]?.[GLOBAL_CONSTANTS.zeroth_index]?.[key2]) {
 					check = false;
 				}
 			});

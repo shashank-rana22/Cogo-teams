@@ -6,7 +6,7 @@ import getValue from '../../../../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 function Item({ item, fields, loading = false }) {
-	const stylesCol = { padding: '0 4px' };
+	const STYLES_COL = { padding: '0 4px' };
 
 	return (
 		<div
@@ -14,7 +14,7 @@ function Item({ item, fields, loading = false }) {
 		>
 			{fields.map((singleItem) => (
 				<div
-					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
+					style={singleItem.hasStyle ? singleItem.styles : STYLES_COL}
 					key={singleItem?.key}
 				>
 					{loading && <Placeholder width="100%" height="20px" />}

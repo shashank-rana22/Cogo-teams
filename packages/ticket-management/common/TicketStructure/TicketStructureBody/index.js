@@ -1,14 +1,17 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { statusLabelTransformation } from '../../../configurations/key-mapping';
-import { actionButtonKeys, STATUS_MAPPING } from '../../../constants';
+import { STATUS_LABEL_MAPPING, ACTION_KEYS, STATUS_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';
 
+const DESCRIPTION_LAST_ELEMENT = 100;
+
 function TicketStructureBody({
 	data,
+	label: key,
 	updateTicketActivity = () => {},
+	setModalData = () => {},
 }) {
 	const {
 		ID: id = '',
@@ -20,16 +23,22 @@ function TicketStructureBody({
 		ActivityCount: activityCount = 0,
 	} = data;
 
-	const { color: textColor, label } =	statusLabelTransformation[STATUS_MAPPING[status]] || {};
+	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
 
 	const handleTicketClick = (e) => {
 		e.stopPropagation();
-		updateTicketActivity(actionButtonKeys[status]?.name, id);
+		updateTicketActivity(ACTION_KEYS[status]?.name, id);
 	};
 
 	return (
 		<div
+			role="presentation"
 			className={styles.ticket_container}
+			onClick={() => setModalData({
+				type     : 'ticket_details',
+				ticketId : id,
+				key,
+			})}
 		>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
@@ -43,11 +52,11 @@ function TicketStructureBody({
 						className={styles.reopen_resolve}
 						onClick={(e) => handleTicketClick(e)}
 					>
-						{actionButtonKeys[status]?.label || ''}
+						{ACTION_KEYS[status]?.label || ''}
 					</div>
 				</div>
 				<div className={styles.category_ticket_activity}>
-					{type || description.substring(0, 100)}
+					{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 				</div>
 			</div>
 			<div className={styles.subcontainer_two}>
@@ -72,7 +81,8 @@ function TicketStructureBody({
 				</div>
 				<div className={styles.ticket_reason_box}>
 					<div className={styles.description}>
-						{(ticketActivity?.description || description).substring(0, 100)}
+						{(ticketActivity?.Description
+							|| description).substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 					</div>
 					{activityCount ? (
 						<div className={styles.activity_count}>

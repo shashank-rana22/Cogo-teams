@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase, getByKey } from '@cogoport/utils';
 
 import { GenericObject } from '../commons/Interfaces';
@@ -7,7 +7,7 @@ import { GenericObject } from '../commons/Interfaces';
 import SortHeader from './SortHeader';
 import styles from './styles.module.css';
 
-const invoiceStatus = {
+const INVOICE_STATUS = {
 	UNUTILIZED       : '#fcedbf',
 	UTILIZED         : '#a1f0ae',
 	PARTIAL_UTILIZED : '#b8debe',
@@ -19,9 +19,16 @@ interface PaymentTable {
 	setOrderBy?: (p: object) => void,
 	sortStyleDesc?: string,
 	sortStyleAsc?: string
+	entityCode?: string
 }
 
-const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleDesc, sortStyleAsc }: PaymentTable) => [
+const invoicePaymentList = ({
+	paymentFilters,
+	setPaymentFilters,
+	setOrderBy,
+	sortStyleDesc,
+	sortStyleAsc,
+}: PaymentTable) => ([
 
 	{
 		Header   : 'Payment Number',
@@ -36,7 +43,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 
 	},
 	{
-		Header   : 'Sage Reference Number ',
+		Header   : 'Sage Reference Number',
 		id       : 'sageRefNumber',
 		accessor : (row) => (
 			<div style={{ marginLeft: '30px' }}>
@@ -67,10 +74,14 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'paymentAmount') as string,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'paymentAmount') as string,
+						currency :	getByKey(row, 'currency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -84,10 +95,14 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		accessor : (row) => (
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'utilizedAmount') as number,
-						getByKey(row, 'currency') as number,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'utilizedAmount') as any,
+						currency :	getByKey(row, 'currency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -124,13 +139,13 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		Header   : 'Utilized status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'utilizationStatus') as string)]}>
+				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'utilizationStatus') as string)]}>
 					{startCase(getByKey(row, 'utilizationStatus') as string)}
 				</Pill>
 			</div>
 		),
 	},
 
-];
+]);
 
-export default PaymentList;
+export default invoicePaymentList;

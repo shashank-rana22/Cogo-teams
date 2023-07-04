@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -28,7 +29,7 @@ function Edit({
 
 	const services = item?.services || [];
 
-	const servicesIDs = services?.map((_item) => _item?.id);
+	const servicesIDs = services?.map((_item) => _item?.service_id);
 
 	const controls = creditNoteControls({
 		services,
@@ -67,7 +68,7 @@ function Edit({
 			isEdit  : true,
 		});
 
-		if (submit_data?.line_items?.length === 0) {
+		if (isEmpty(submit_data?.line_items)) {
 			Toast.error('Line Items is required!');
 			return;
 		}
@@ -146,7 +147,7 @@ function Edit({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<div className={styles.button_wrapper}>
+				<FooterButtonWrapper>
 					<Button
 						themeType="secondary"
 						onClick={() => setOpen(false)}
@@ -158,7 +159,7 @@ function Edit({
 					<Button onClick={handleSubmit(onCreate)} disabled={loading}>
 						Re-Apply
 					</Button>
-				</div>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

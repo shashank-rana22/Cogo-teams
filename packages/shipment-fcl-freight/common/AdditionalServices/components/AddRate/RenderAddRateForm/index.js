@@ -29,7 +29,7 @@ function RenderAddRateForm({
 	serviceData = {},
 	source = '',
 }) {
-	const { formControl } = controls({ serviceData, source });
+	const { formControl = [] } = controls({ serviceData, source });
 
 	return (
 		<form className={styles.form_container}>

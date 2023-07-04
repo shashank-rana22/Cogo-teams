@@ -1,4 +1,5 @@
 import { Modal, Button, cl } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import React from 'react';
 
 import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
@@ -27,18 +28,20 @@ function SendInvoiceEmail({
 				<div className={styles.text}>You cannot undo this step so please do it carefully.</div>
 			</Modal.Body>
 
-			<Modal.Footer className={styles.button_div}>
-				<Button
-					themeType="secondary"
-					onClick={() => setShow(false)}
-					disabled={loading}
-				>
-					Cancel
-				</Button>
+			<Modal.Footer>
+				<FooterButtonWrapper>
+					<Button
+						themeType="secondary"
+						onClick={() => setShow(false)}
+						disabled={loading}
+					>
+						Cancel
+					</Button>
 
-				<Button onClick={() => handleSend({ id: invoice?.id })} disabled={loading}>
-					Send Email
-				</Button>
+					<Button onClick={() => handleSend({ id: invoice?.id })} disabled={loading}>
+						Send Email
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

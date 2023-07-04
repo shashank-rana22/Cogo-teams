@@ -4,14 +4,16 @@ import useKey from './useKey';
 import useOtpInputEvents from
 	'./useOtpInputEvents';
 
-const getInitialOtpValues = (otpLength) => {
-	const hash = {};
+const INCREMENT_IN_OPT_LOOP = 1;
 
-	for (let i = 0; i < otpLength; i += 1) {
-		hash[`otp-${i + 1}`] = '';
+const getInitialOtpValues = (otpLength) => {
+	const OTP_HASH = {};
+
+	for (let i = 0; i < otpLength; i += INCREMENT_IN_OPT_LOOP) {
+		OTP_HASH[`otp-${i + INCREMENT_IN_OPT_LOOP}`] = '';
 	}
 
-	return hash;
+	return OTP_HASH;
 };
 
 const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
@@ -33,13 +35,13 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		let isAllOtpInputValuePresent = true;
 		let value = '';
 
-		for (let i = 0; i < otpLength; i += 1) {
-			if (!values[`otp-${i + 1}`]) {
+		for (let i = 0; i < otpLength; i += INCREMENT_IN_OPT_LOOP) {
+			if (!values[`otp-${i + INCREMENT_IN_OPT_LOOP}`]) {
 				isAllOtpInputValuePresent = false;
 				break;
 			}
 
-			value += values[`otp-${i + 1}`];
+			value += values[`otp-${i + INCREMENT_IN_OPT_LOOP}`];
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
@@ -47,7 +49,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
-			element.setAttribute('maxlength', 1);
+			element.setAttribute('maxlength', INCREMENT_IN_OPT_LOOP);
 			element.setAttribute('inputmode', 'numeric');
 		});
 	}, [values]);
@@ -55,14 +57,14 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	const handleChange = (index) => (event) => {
 		setValues((previousState) => ({
 			...previousState,
-			[`otp-${index + 1}`]: event,
+			[`otp-${index + INCREMENT_IN_OPT_LOOP}`]: event,
 		}));
 
 		if (isBackSpacePressed) {
 			return;
 		}
 
-		const nextOtpInputElement = otpInputElementsRef.current[index + 1];
+		const nextOtpInputElement = otpInputElementsRef.current[index + INCREMENT_IN_OPT_LOOP];
 		nextOtpInputElement?.focus();
 	};
 

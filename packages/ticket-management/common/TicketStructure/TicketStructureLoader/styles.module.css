@@ -1,4 +1,47 @@
-.stats_section_container {
+.tickets_container {
+	margin-top: 20px;
+}
+
+.container {
 	display: flex;
-	margin: 15px 0;
+	flex-direction: column;
+	margin: 0 15px 20px;
+	border: 1px solid #d3d3d3;
+	border-radius: 6px;
+}
+
+.sub_container {
+	padding: 10px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.description {
+	padding: 6px 0;
+}
+
+.ticket_date_time {
+	display: flex;
+	padding: 0 10px 0 0;
+}
+
+.ticket_date {
+	padding: 0 8px 0 0;
+}
+
+.ticket_reason_box {
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 0 0;
+}
+
+.messages_nos {
+	padding: 3px 9px;
+}
+
+.skeleton {
+	border-radius: 4px;
 }

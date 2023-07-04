@@ -10,6 +10,7 @@ import ChooseService from './ChooseService';
 import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
+const FILTERS_SPLIT_FIRST = 0;
 function AddService({
 	shipmentId,
 	services,
@@ -43,7 +44,7 @@ function AddService({
 	if (filters.service_type) {
 		finalList = finalList.filter((item) => {
 			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[0];
+				return item.service_type === filters?.service_type?.split('?')?.[FILTERS_SPLIT_FIRST];
 			}
 			return item.service_type === filters?.service_type;
 		});

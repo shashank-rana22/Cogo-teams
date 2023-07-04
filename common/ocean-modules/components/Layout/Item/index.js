@@ -7,6 +7,11 @@ import getErrorMessage from '../getErrorMessage';
 import getAsyncFields from './getAsyncKeys';
 import styles from './styles.module.css';
 
+const ASYNC_SELECT = ['select', 'creatable-select', 'location-select'];
+const DEFAULT_SPAN = 12;
+const FLEX_OFFSET = 1;
+const PERCENT_FACTOR = 100;
+
 function Item(props) {
 	const {
 		type = '',
@@ -28,8 +33,7 @@ function Item(props) {
 
 	let newProps = { ...props };
 
-	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
-		&& Object.keys(props).includes('optionsListKey');
+	const isAsyncSelect = ASYNC_SELECT.includes(type) && Object.keys(props).includes('optionsListKey');
 
 	if (isAsyncSelect) {
 		const asyncKey = props?.optionsListKey;
@@ -52,7 +56,7 @@ function Item(props) {
 
 	const Element = getElementController(newProps.type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
 
 	if (formValues?.booking_reference_proof?.fileName === '') {
 		const element = document.querySelector('.ui_upload_filesuccess_container');

@@ -1,4 +1,4 @@
-import { useForm } from '@cogoport/forms';
+import { useForm, useDebounceQuery } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import Content from './Content';
@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const [activeTab, setActiveTab] = useState('approval');
+	const { query, debounceQuery } = useDebounceQuery();
 	const formProps = useForm();
 
 	const { watch, formState:{ dirtyFields } } = formProps;
@@ -18,11 +19,15 @@ function Dashboard() {
 	});
 
 	useEffect(() => {
+		debounceQuery(search);
+	}, [debounceQuery, search]);
+
+	useEffect(() => {
 		const [lowProfitability, highProfitability] = profitability || [];
 		setFilterStore((prev) => ({
 			...prev,
 			activeTab,
-			search,
+			search            : query,
 			organizationSize  : organization_size,
 			serviceType       : service_type,
 			endDate           : end_date,
@@ -30,8 +35,8 @@ function Dashboard() {
 			lowProfitability  : !dirtyFields.profitability ? undefined : lowProfitability,
 			highProfitability : !dirtyFields.profitability ? undefined : highProfitability,
 		}));
-	}, [search, organization_size, service_type, start_date, end_date,
-		activeTab, profitability, dirtyFields.profitability]);
+	}, [organization_size, service_type, start_date, end_date,
+		activeTab, profitability, dirtyFields.profitability, query]);
 
 	return (
 		<div>
