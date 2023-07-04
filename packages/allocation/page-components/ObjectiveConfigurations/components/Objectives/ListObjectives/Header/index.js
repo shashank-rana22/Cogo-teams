@@ -8,6 +8,7 @@ function Header(props) {
 	return (
 		<section className={styles.container}>
 			<Toggle
+				className={styles.toggle}
 				size="md"
 				name="active_status"
 				offLabel="Active"

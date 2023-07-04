@@ -22,4 +22,8 @@
 .pagination_container {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    background-color: #FFF;
+    padding: 8px 24px;
+    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 }

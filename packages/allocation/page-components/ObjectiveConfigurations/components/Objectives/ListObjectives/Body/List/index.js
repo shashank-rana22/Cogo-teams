@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 const list = [
 	{
+		id      : 1,
 		status  : 'verification_pending',
 		name    : 'Objective 1',
 		type    : 'comapny',
@@ -29,6 +30,7 @@ const list = [
 		activate_at : new Date(),
 	},
 	{
+		id      : 2,
 		status  : 'verified',
 		name    : 'Objective 2',
 		type    : 'team',
@@ -51,6 +53,7 @@ const list = [
 		activate_at : null,
 	},
 	{
+		id      : 3,
 		status  : 'rejected',
 		name    : 'Objective 3',
 		type    : 'team',
@@ -67,6 +70,7 @@ const list = [
 		activate_at : null,
 	},
 	{
+		id      : 4,
 		status  : 'live',
 		name    : 'Objective 4',
 		type    : 'team',
@@ -93,9 +97,11 @@ const list = [
 	},
 ];
 
-const LIST_COLUMN_MAPPING = getListColumnMapping();
+function List(props) {
+	const { setActiveMode } = props;
 
-function List() {
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode });
+
 	return (
 		<section>
 			<ListHeader LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING} />

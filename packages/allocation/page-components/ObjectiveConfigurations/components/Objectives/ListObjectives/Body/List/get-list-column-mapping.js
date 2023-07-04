@@ -10,7 +10,9 @@ import styles from './styles.module.css';
 
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
-const getListColumnMapping = () => {
+const getListColumnMapping = (props) => {
+	const { setActiveMode } = props;
+
 	const LIST_COLUMN_MAPPING = [
 		{
 			key      : 'status',
@@ -18,7 +20,7 @@ const getListColumnMapping = () => {
 			Header   : <div className={styles.top_heading}>STATUS</div>,
 			accessor : ({ status }) => (status ? (
 				<Pill
-					size="lg"
+					size="md"
 					color={OBJECTIVE_STATUS_COLOR_MAPPING[status]}
 				>
 					{startCase(status)}
@@ -117,8 +119,12 @@ const getListColumnMapping = () => {
 			key      : 'edit',
 			flex     : 0.75,
 			Header   : <div />,
-			accessor : () => (
-				<Button themeType="tertiary" type="button">
+			accessor : ({ id }) => (
+				<Button
+					themeType="tertiary"
+					type="button"
+					onClick={() => setActiveMode({ mode: 'edit', id })}
+				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					<strong>Edit</strong>
 				</Button>

@@ -8,7 +8,7 @@ function ListObjectives(props) {
 		<>
 			<Header {...rest} />
 
-			<Body />
+			<Body {...rest} />
 		</>
 	);
 }
