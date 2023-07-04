@@ -7,7 +7,6 @@ const getPersonalInfoPayload = (data) => ({
 	employee_code             : data?.employee_code || undefined,
 	cogoport_email            : data?.cogoport_email || undefined,
 	passport_size_photo_url   : data?.passport_size_photo_url?.finalUrl,
-	status                    : data?.status || 'active',
 	mobile_number             : data?.mobile_number?.number,
 	mobile_country_code       : data?.mobile_number?.country_code,
 	date_of_joining           : String(data?.date_of_joining),
