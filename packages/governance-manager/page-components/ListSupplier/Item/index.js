@@ -11,11 +11,18 @@ function Item({ isSupplierPage = false }) {
 			'/governance-manager/abcd',
 		);
 	};
+	const goBack = () => {
+		push(
+			'/governance-manager/',
+			'/governance-manager/',
+		);
+	};
+
 	return (
 		<div className={styles.item}>
 			{ isSupplierPage && (
 				<div>
-					<Button themeType="secondary">
+					<Button themeType="secondary" onClick={() => goBack()}>
 						Go Back
 					</Button>
 				</div>
