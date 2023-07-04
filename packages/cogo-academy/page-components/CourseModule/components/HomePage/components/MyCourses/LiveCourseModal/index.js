@@ -10,11 +10,11 @@ const LIVE_COURSES = {
 	html_css_course          : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
 };
 
-function LiveCourseModal() {
-	const onClickOpen = (url) => {
-		window.open(url, '_blank');
-	};
+const onClickOpen = (url) => {
+	window.open(url, '_blank');
+};
 
+function LiveCourseModal() {
 	return Object.keys(LIVE_COURSES).map((key) => (
 		<div key={key} className={styles.course_list}>
 			{startCase(key).toUpperCase()}
