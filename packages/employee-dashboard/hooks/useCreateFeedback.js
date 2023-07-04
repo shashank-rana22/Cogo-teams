@@ -1,13 +1,11 @@
-// create_employee_feedback
-
-// get_employee_dashboard_details
-
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useCreateFeedback() {
+import { formattedDate } from '../utils/formattedDate';
+
+function useCreateFeedback(ratingCycle) {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
@@ -17,34 +15,23 @@ function useCreateFeedback() {
 	}, { manual: true });
 
 	const createFeedback = (values) => {
+		const splitRatingCycle = ratingCycle?.split('_');
+		const [firstDate, lastDate] = splitRatingCycle || [];
 		try {
 			trigger({
 				data: {
 					...values,
-					start_date        : '2023-06-21',
-					end_date          : '2023-07-20',
+					start_date        : formattedDate(firstDate),
+					end_date          : formattedDate(lastDate),
 					performed_by_id   : userId,
 					performed_by_type : 'user',
 					employee_user_id  : userId,
 				},
 			});
 		} catch (error) {
-			console.log('err', error);
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
-
-	// const getEmployeeDetails = useCallback(() => {
-	// 	try {
-	// 		trigger();
-	// 	} catch (err) {
-	// 		Toast.error(getApiErrorString(err.response?.data));
-	// 	}
-	// }, [trigger]);
-
-	// useEffect(() => {
-	// 	getEmployeeDetails();
-	// }, [getEmployeeDetails]);
 
 	return {
 		loading,

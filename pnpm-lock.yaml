@@ -1092,7 +1092,6 @@ importers:
 
   packages/employee-dashboard:
     specifiers:
-      '@cogoport/charts': ^1.0.1
       '@cogoport/components': ^1.0.428
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -1104,8 +1103,8 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
       stylelint: ^14.16.1
+      uuid: ^9.0.0
     dependencies:
-      '@cogoport/charts': 1.0.3_react@18.2.0
       '@cogoport/components': 1.0.429_mzj6eebdlkz5ykvcshgnpbbfgq
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
@@ -1117,6 +1116,7 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
       stylelint: 14.16.1
+      uuid: 9.0.0
 
   packages/employee-portal:
     specifiers:

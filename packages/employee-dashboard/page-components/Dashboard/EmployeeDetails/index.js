@@ -1,4 +1,6 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { EMPLOYEE_DETAIL_MAPPING } from '../../../configurations/employeeDetailMapping';
 
@@ -6,8 +8,9 @@ import styles from './styles.module.css';
 
 const DEFAULT_GAP = 0;
 const DEFAULT_LENGTH_CHECK = 0;
+const ARRAY_LENGTH = 5;
 
-function EmployeeDetails({ data }) {
+function EmployeeDetails({ data, loading }) {
 	const { diff_in_days, name, designation } = data || {};
 
 	const { months_gap, days_gap, years_gap } = diff_in_days || {};
@@ -29,6 +32,16 @@ function EmployeeDetails({ data }) {
 
 		return TIME_PERIODS.join(', ');
 	};
+
+	if (loading) {
+		return (
+			<div className={styles.placeholder_container}>
+				<Placeholder type="circle" radius="100px" margin="0px 0px 30px 0px" />
+				{[...Array(ARRAY_LENGTH)]
+					.map(() => <Placeholder key={uuid()} height="20px" width="100%" margin="0px 0px 20px 0px" />)}
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.employee_details}>
@@ -54,7 +67,7 @@ function EmployeeDetails({ data }) {
 						:
 					</div>
 					<div className={styles.item}>
-						{val.func(data[val.key], val.startCase) || '-'}
+						{val.func(data?.[val.key || ''], val.startCase) || '-'}
 					</div>
 				</div>
 			))}

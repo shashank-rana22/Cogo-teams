@@ -1,36 +1,41 @@
-// get_employee_dashboard_details
-
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
-function useGetEmployeeDetails() {
+import { formattedDate } from '../utils/formattedDate';
+
+function useGetEmployeeDetails(ratingCycle) {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
 	const [{ loading, data = {} }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_employee_dashboard_details',
-		params : {
-			employee_user_id : '83374b2e-7cd0-4340-951a-71d5d9da258e',
-			start_date       : '2023-06-21',
-			end_date         : '2023-07-20',
-		},
 	}, { manual: false });
 
-	// const getEmployeeDetails = useCallback(() => {
-	// 	try {
-	// 		trigger();
-	// 	} catch (err) {
-	// 		Toast.error(getApiErrorString(err.response?.data));
-	// 	}
-	// }, [trigger]);
+	const getEmployeeDetails = useCallback(() => {
+		const splitRatingCycle = ratingCycle?.split('_');
+		const [firstDate, lastDate] = splitRatingCycle || [];
+		try {
+			trigger({
+				params: {
+					employee_user_id : userId,
+					start_date       : formattedDate(firstDate),
+					end_date         : formattedDate(lastDate),
+				},
+			});
+		} catch (err) {
+			Toast.error(getApiErrorString(err.response?.data));
+		}
+	}, [ratingCycle, trigger, userId]);
 
-	// useEffect(() => {
-	// 	getEmployeeDetails();
-	// }, [getEmployeeDetails]);
+	useEffect(() => {
+		if (ratingCycle) {
+			getEmployeeDetails();
+		}
+	}, [getEmployeeDetails, ratingCycle]);
 
 	return {
 		loading,

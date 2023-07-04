@@ -146,6 +146,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_rating_cycles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

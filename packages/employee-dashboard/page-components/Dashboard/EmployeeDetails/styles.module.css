@@ -51,3 +51,15 @@
 .detail_container{
     margin-top: 30px;
 }
+
+.placeholder_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 44px 0px #627FAC33;
+    border: 2px solid #979797;
+    border-radius: 4px;
+}
