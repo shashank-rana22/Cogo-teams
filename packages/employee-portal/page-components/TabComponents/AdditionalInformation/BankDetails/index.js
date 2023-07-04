@@ -9,7 +9,6 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 0;
-const INITIAL_INDEX = 1;
 const CONTROL_TYPE_FILE_UPLOAD = 'fileUpload';
 
 const BANK_DETAILS_MAPPING = [
@@ -20,7 +19,9 @@ const BANK_DETAILS_MAPPING = [
 function BankDetails({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, formState: { errors }, setValue, watch } = useForm();
 
-	const bankAccountNumber = watch(['account_number', 'account_number_confirmation']);
+	const bankAccountDetails = watch('account_number');
+
+	const reenteredBankAccountDetails = watch('account_number_confirmation');
 
 	const { bank_details = [], detail } = info || {};
 
@@ -34,7 +35,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	};
 
 	const onSubmit = (values) => {
-		if (bankAccountNumber[DEFAULT_INDEX] === bankAccountNumber[INITIAL_INDEX]) {
+		if (bankAccountDetails === reenteredBankAccountDetails) {
 			createEmployeeBankDetails({ values, id });
 		} else {
 			Toast.error('Bank Account Number in both the fields should be same');
