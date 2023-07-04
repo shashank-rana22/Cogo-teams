@@ -2,7 +2,9 @@ import { Button, Toggle } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header(props) {
+	const { setActiveMode } = props;
+
 	return (
 		<section className={styles.container}>
 			<Toggle
@@ -13,7 +15,11 @@ function Header() {
 				onChange={(item) => console.log('item :: ', item)}
 			/>
 
-			<Button type="button" themeType="primary">
+			<Button
+				type="button"
+				themeType="primary"
+				onClick={() => setActiveMode({ mode: 'create' })}
+			>
 				+ Create New Objective
 			</Button>
 		</section>

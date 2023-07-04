@@ -9,8 +9,17 @@
 }
 
 .roles {
-    max-width: 300px;
+    max-width: 250px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.business_name {
+    text-align: center;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
 }

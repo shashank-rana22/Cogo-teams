@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
@@ -50,7 +50,7 @@ const getListColumnMapping = () => {
 	</>,
 			accessor: ({ partner, channel }) => (
 				<>
-					<div>{startCase(partner.business_name || '___')}</div>
+					<div className={styles.business_name}>{startCase(partner.business_name || '___')}</div>
 					<div>
 						{!isEmpty(channel)
                          && channel.map((item) => <Pill key={item} size="md">{item}</Pill>)}
@@ -67,38 +67,51 @@ const getListColumnMapping = () => {
 		<div className={styles.sub_heading}>No. Of Users</div>
 	</>,
 			accessor: ({ roles }) => (
-				!isEmpty(roles) && (
+				!isEmpty(roles) ? (
 					<>
-						<div className={styles.roles}>
-							{roles.map((role, index) => (
-								index === roles.length - INDEX_LENGTH_NORMALIZATION_VALUE
-									? role.name
-									: `${role.name}, `))}
-						</div>
+						<Tooltip content={(
+							<div>
+								{roles.map(
+									(role, index) => (
+										<div key={role.id}>
+											{`${index + INDEX_LENGTH_NORMALIZATION_VALUE}. ${role.name}`}
+										</div>
+									),
+								)}
+							</div>
+						)}
+						>
+							<div className={styles.roles}>
+								{roles.map((role, index) => (
+									index === roles.length - INDEX_LENGTH_NORMALIZATION_VALUE
+										? role.name
+										: `${role.name}, `))}
+							</div>
+						</Tooltip>
 						<Pill size="md">{roles.length}</Pill>
 					</>
-				)
+				) : null
 			),
 		},
 		{
 			key      : 'updated_at',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>CREATION/UPDATION</div>,
-			accessor : ({ updated_at }) => updated_at && formatDate({
+			accessor : ({ updated_at }) => (updated_at ? formatDate({
 				date       : updated_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			}),
+			}) : '___'),
 		},
 		{
 			key      : 'activate_at',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>ACTIVATION</div>,
-			accessor : ({ activate_at }) => activate_at && formatDate({
+			accessor : ({ activate_at }) => (activate_at ? formatDate({
 				date       : activate_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			}),
+			}) : '___'),
 		},
 		{
 			key      : 'edit',

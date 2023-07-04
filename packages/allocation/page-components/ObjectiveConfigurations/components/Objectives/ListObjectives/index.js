@@ -1,10 +1,12 @@
 import Body from './Body';
 import Header from './Header';
 
-function ListObjectives() {
+function ListObjectives(props) {
+	const { ...rest } = props;
+
 	return (
 		<>
-			<Header />
+			<Header {...rest} />
 
 			<Body />
 		</>

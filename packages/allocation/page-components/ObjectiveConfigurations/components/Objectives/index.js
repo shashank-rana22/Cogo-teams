@@ -6,7 +6,7 @@ import ListObjectives from './ListObjectives';
 function Objectives() {
 	const [activeMode, setActiveMode] = useState({ mode: 'list' });
 
-	return activeMode.mode === 'list' ? <ListObjectives /> : <CreateAndEditObjective />;
+	return activeMode.mode === 'list' ? <ListObjectives setActiveMode={setActiveMode} /> : <CreateAndEditObjective />;
 }
 
 export default Objectives;

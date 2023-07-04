@@ -1,6 +1,9 @@
+import { Pagination } from '@cogoport/components';
+
 import getListColumnMapping from './get-list-column-mapping';
 import ListCard from './ListCard';
 import ListHeader from './ListHeader';
+import styles from './styles.module.css';
 
 const list = [
 	{
@@ -8,7 +11,7 @@ const list = [
 		name    : 'Objective 1',
 		type    : 'comapny',
 		partner : {
-			business_name: 'COGO INDIA',
+			business_name: 'COGO FREIGHT INDIA PVT. LTD. INDIA',
 		},
 		channel : ['SME', 'CP'],
 		roles   : [
@@ -104,6 +107,10 @@ function List() {
 					LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
 				/>
 			))}
+
+			<div className={styles.pagination_container}>
+				<Pagination type="table" />
+			</div>
 		</section>
 	);
 }
