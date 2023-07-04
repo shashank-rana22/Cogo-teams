@@ -1,9 +1,9 @@
 import { Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
 
-const ZERO_INDEX = 0;
 const OFFSET = 1;
 
 const TYPE_MAPPING = {
@@ -56,13 +56,14 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 				test_question_answers={test_question_answers}
 			/>
 
-			{explanation?.[ZERO_INDEX] && explanation?.[ZERO_INDEX] !== '<p><br></p>' ? (
+			{explanation?.[GLOBAL_CONSTANTS.zeroth_index]
+			&& explanation?.[GLOBAL_CONSTANTS.zeroth_index] !== '<p><br></p>' ? (
 				<div className={styles.explanation}>
 					<b>Explanation:</b>
 					{' '}
-					<div dangerouslySetInnerHTML={{ __html: explanation?.[ZERO_INDEX] }} />
+					<div dangerouslySetInnerHTML={{ __html: explanation?.[GLOBAL_CONSTANTS.zeroth_index] }} />
 				</div>
-			) : null}
+				) : null}
 
 			{primary_question_type === 'case_study' && case_index !== length - OFFSET ? (
 				<div className={styles.border} />

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../CreateModule/components/EmptyState';
@@ -7,7 +8,6 @@ import useGetTestResultQuestion from '../../hooks/useGetTestResultQuestion';
 import GetAnswerItem from './GetAnswerItem';
 import styles from './styles.module.css';
 
-const START_INDEX = 0;
 const OFFSET = 1;
 const ARRAY_LENGTH = 3;
 
@@ -17,14 +17,12 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	const { answers = [], question_data = {} } = data || {};
 	const { question = '', explanation } = question_data || {};
 
-	const explanationHtmlString = explanation?.[START_INDEX];
-
-	const keys = [...Array(ARRAY_LENGTH).keys()];
+	const explanationHtmlString = explanation?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{keys.map((key) => (
+				{[...Array(ARRAY_LENGTH).keys()].map((key) => (
 					<div
 						className={styles.placeholder_inner_container}
 						key={key}

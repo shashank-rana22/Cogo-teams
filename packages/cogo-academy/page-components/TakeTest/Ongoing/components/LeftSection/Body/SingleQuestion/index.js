@@ -1,4 +1,5 @@
 import { CheckboxGroup, RadioGroup, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
@@ -8,7 +9,6 @@ import styles from './styles.module.css';
 
 const alphabets = getAlphabets('A', 'Z');
 
-const START_INDEX = 0;
 const OFFSET = 1;
 
 function SingleQuestion({
@@ -39,7 +39,7 @@ function SingleQuestion({
 
 	useEffect(() => {
 		if (question_type !== 'multi_correct') {
-			setAnswer(correctAnswerIds?.[START_INDEX] || '');
+			setAnswer(correctAnswerIds?.[GLOBAL_CONSTANTS.zeroth_index] || '');
 		} else {
 			setAnswer(correctAnswerIds || []);
 		}

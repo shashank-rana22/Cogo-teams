@@ -9,8 +9,6 @@ import populateCaseStudyQuestion from '../../utils/populateCaseStudyQuestion';
 import populateStandAloneQuestion from '../../utils/populateStandAloneQuestion';
 import populateSubjectiveQuestion from '../../utils/populateSubjectiveQuestion';
 
-const START_INDEX = 0;
-
 let RichTextEditor;
 if (typeof window !== 'undefined') {
 	// eslint-disable-next-line global-require
@@ -194,7 +192,6 @@ const useCreateQuestion = ({
 				RichTextEditor,
 				difficulty_level,
 				setQuestionState,
-				START_INDEX,
 			});
 
 			return;
@@ -213,7 +210,6 @@ const useCreateQuestion = ({
 				RichTextEditor,
 				question_text,
 				test_question_answers,
-				START_INDEX,
 			});
 
 			return;
@@ -229,7 +225,6 @@ const useCreateQuestion = ({
 			setEditorValue,
 			setQuestionState,
 			RichTextEditor,
-			START_INDEX,
 		});
 	}, [difficulty_level, editDetails, explanation, question_text, question_type,
 		setValue, test_case_study_questions, test_question_answers,

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import getEditorValue from '../commons/SavedQuestionDetails/utils/getEditorValue';
@@ -12,7 +13,6 @@ const populateCaseStudyQuestion = ({
 	RichTextEditor,
 	difficulty_level,
 	setQuestionState,
-	START_INDEX,
 }) => {
 	setValue('question_type', question_type);
 	setCaseStudyQuestionEditorValue(isEmpty(question_text)
@@ -37,7 +37,8 @@ const populateCaseStudyQuestion = ({
 			...prev,
 			[`case_questions_${index}_explanation`]: isEmpty(indExplanation)
 				? RichTextEditor?.createEmptyValue()
-				: RichTextEditor?.createValueFromString((indExplanation?.[START_INDEX] || ''), 'html'),
+				: RichTextEditor
+					?.createValueFromString((indExplanation?.[GLOBAL_CONSTANTS.zeroth_index] || ''), 'html'),
 		}));
 
 		setQuestionState((prev) => ({

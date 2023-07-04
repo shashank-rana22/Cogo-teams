@@ -6,9 +6,9 @@ import toFixed from '../../utils/toFixed';
 
 import styles from './styles.module.css';
 
-const ZERO_LENGTH = 0;
 const DECIMAL_PLACES = 2;
 const OFFSET = 1;
+const MIN_PEERS_PERCENTAGE = 0;
 
 function QuestionCard({
 	question = '',
@@ -31,7 +31,7 @@ function QuestionCard({
 
 				<div className={styles.answer_header}>
 
-					{peers > ZERO_LENGTH ? (
+					{peers > MIN_PEERS_PERCENTAGE ? (
 						<div className={styles.percentage_bar} style={{ width: `${peers}%` }} />
 
 					) : null}

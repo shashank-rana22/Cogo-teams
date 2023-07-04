@@ -1,4 +1,5 @@
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -10,8 +11,6 @@ if (typeof window !== 'undefined') {
 	// eslint-disable-next-line global-require
 	RichTextEditor = require('react-rte').default;
 }
-
-const START_INDEX = 0;
 
 function Subjective({
 	question = {},
@@ -29,7 +28,10 @@ function Subjective({
 		allow_file_upload,
 	} = question;
 
-	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[START_INDEX] || {};
+	const {
+		subjective_answer_text = '',
+		subjective_file_url = null,
+	} = test_question_answers[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	useEffect(() => {
 		setSubjectiveAnswer(

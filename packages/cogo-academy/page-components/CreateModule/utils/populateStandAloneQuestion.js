@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const populateStandAloneQuestion = ({
@@ -10,7 +11,6 @@ const populateStandAloneQuestion = ({
 	setEditorValue,
 	setQuestionState,
 	RichTextEditor,
-	START_INDEX,
 }) => {
 	const CHILD_KEY = 'question.0';
 
@@ -22,7 +22,7 @@ const populateStandAloneQuestion = ({
 		...prev,
 		question_0_explanation: isEmpty(explanation)
 			? RichTextEditor?.createEmptyValue()
-			: RichTextEditor?.createValueFromString((explanation?.[START_INDEX] || ''), 'html'),
+			: RichTextEditor?.createValueFromString((explanation?.[GLOBAL_CONSTANTS.zeroth_index] || ''), 'html'),
 	}));
 
 	setQuestionState((prev) => ({

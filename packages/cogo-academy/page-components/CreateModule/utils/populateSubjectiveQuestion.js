@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import getEditorValue from '../commons/SavedQuestionDetails/utils/getEditorValue';
@@ -14,7 +15,6 @@ const populateSubjectiveQuestion = ({
 	RichTextEditor,
 	question_text,
 	test_question_answers,
-	START_INDEX,
 }) => {
 	setValue('question_type', question_type);
 	setValue('subjective.0.difficulty_level', difficulty_level);
@@ -32,7 +32,8 @@ const populateSubjectiveQuestion = ({
 	setSubjectiveEditorValue(isEmpty(test_question_answers)
 		? RichTextEditor.createEmptyValue()
 		: RichTextEditor
-			?.createValueFromString((test_question_answers?.[START_INDEX]?.answer_text || ''), 'html'));
+			?.createValueFromString((test_question_answers?.[GLOBAL_CONSTANTS.zeroth_index]
+				?.answer_text || ''), 'html'));
 };
 
 export default populateSubjectiveQuestion;
