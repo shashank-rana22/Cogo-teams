@@ -490,6 +490,11 @@ export default {
 			max_length : 15,
 		},
 
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Za-z]{4}\d{7}$/,
+		},
+
 		pan_number: {
 			label   : 'PAN',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,

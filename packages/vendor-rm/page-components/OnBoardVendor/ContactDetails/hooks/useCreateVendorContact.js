@@ -70,46 +70,30 @@ function useCreateVendorContact({
 		}
 	};
 
-	const getWhatsAppNumber = useCallback(() => {
-		const whatsappNumber = contact_details.whatsapp_number;
+	// useEffect(() => {
+	// 	const mapping = {
+	// 		mobile_number: {
+	// 			number: contact_details?.mobile_number?.number
+	// 							|| contact_details?.mobile_number,
+	// 			country_code: contact_details?.mobile_number?.country_code
+	// 							|| contact_details?.mobile_country_code || '+91',
+	// 		},
+	// 		whatsapp_number   : getWhatsAppNumber(),
+	// 		contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
+	// 	};
 
-		if (typeof whatsappNumber === 'string') {
-			return {
-				number       : whatsappNumber,
-				country_code : contact_details.whatsapp_country_code,
-			};
-		}
-
-		return {
-			number       : contact_details.whatsappNumber?.number,
-			country_code : contact_details.whatsappNumber?.whatsapp_country_code,
-		};
-	}, [contact_details]);
-
-	useEffect(() => {
-		const mapping = {
-			mobile_number: {
-				number: contact_details?.mobile_number?.number
-								|| contact_details?.mobile_number,
-				country_code: contact_details?.mobile_number?.country_code
-								|| contact_details?.mobile_country_code || '+91',
-			},
-			whatsapp_number   : getWhatsAppNumber(),
-			contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
-		};
-
-		controls.forEach((field) => {
-			if (field.name === 'contact_proof_url') {
-				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl || contact_details?.[field.name]);
-			} else {
-				setValue(
-					`${field.name}`,
-					mapping[field.name]
-					|| contact_details?.[field.name],
-				);
-			}
-		});
-	}, [contact_details, getWhatsAppNumber, setValue, vendorInformation]);
+	// 	controls.forEach((field) => {
+	// 		if (field.name === 'contact_proof_url') {
+	// 			setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl || contact_details?.[field.name]);
+	// 		} else {
+	// 			setValue(
+	// 				`${field.name}`,
+	// 				mapping[field.name]
+	// 				|| contact_details?.[field.name],
+	// 			);
+	// 		}
+	// 	});
+	// }, [contact_details, getWhatsAppNumber, setValue, vendorInformation]);
 
 	return {
 		fields: controls,

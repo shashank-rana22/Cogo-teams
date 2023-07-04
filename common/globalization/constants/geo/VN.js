@@ -431,6 +431,11 @@ export default {
 			max_length : 15,
 		},
 
+		banking_code: {
+			financial_system_code : 'swift',
+			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+		},
+
 		pan_number: {
 			label   : 'PAN',
 			pattern : undefined,
