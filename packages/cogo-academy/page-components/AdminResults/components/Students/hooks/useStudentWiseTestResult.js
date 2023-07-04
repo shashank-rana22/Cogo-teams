@@ -2,17 +2,13 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
-	const {
-		user: { id: user_id },
-	} = useSelector(({ profile }) => ({
-		user: profile.user,
-	}));
-
-	const { debounceQuery, query } = useDebounceQuery();
+	const [{ loading: reAttemptLoading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_test_mapping_responses',
+	}, { manual: true });
 
 	const [showReAttemptModal, setShowReAttemptModal] = useState(false);
 
@@ -25,6 +21,8 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 	const [sortFilter, setSortFilter] = useState({});
 
 	const [searchValue, setSearchValue] = useState('');
+
+	const { debounceQuery, query } = useDebounceQuery();
 
 	const { sortBy, sortType } = sortFilter || {};
 
@@ -81,11 +79,6 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 		params : { ...payload },
 	}, { manual: false });
 
-	const [{ loading: reAttemptLoading }, trigger] = useRequest({
-		method : 'post',
-		url    : '/update_test_mapping_responses',
-	}, { manual: true });
-
 	const handleReAttempt = async () => {
 		try {
 			await trigger({
@@ -94,10 +87,6 @@ const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 					test_id,
 				},
 			});
-
-			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
-			localStorage.removeItem('visibilityChangeCount');
-			localStorage.removeItem(`current_question_id_${test_id}_${user_id}`);
 
 			refetch();
 		} catch (err) {
