@@ -26,15 +26,12 @@ const useReassignTicket = ({
 	const reassignTicket = async ({ val, type = '', userData = {} }) => {
 		const { id = '', user_id = '', role_ids = [] } = userData || {};
 
-		let additionalData = {};
+		const ADDITIONAL_DATA_MAPPING = {
+			'partner-roles' : { RoleID: id },
+			'partner-users' : { RoleID: role_ids?.[GLOBAL_CONSTANTS.zeroth_index], ReviewerUserID: user_id },
+		};
 
-		if (type === 'partner-roles') {
-			additionalData = { RoleID: id };
-		} else if (type === 'partner-users') {
-			additionalData = { RoleID: role_ids?.[GLOBAL_CONSTANTS.zeroth_index], ReviewerUserID: user_id };
-		} else {
-			additionalData = { StakeholderType: type };
-		}
+		const additionalData = ADDITIONAL_DATA_MAPPING[type] || { StakeholderType: type };
 
 		try {
 			await trigger({ data: getPayload({ profile, ticketId, val, additionalData }) });
