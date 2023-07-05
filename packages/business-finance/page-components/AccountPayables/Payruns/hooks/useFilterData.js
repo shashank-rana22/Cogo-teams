@@ -48,15 +48,13 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				getAdvancePaymentInvoiceList();
+			} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
+				getPayrunListView();
 			}
-		}
-		if (activePayrunTab === 'PAID') {
+		} else if (activePayrunTab === 'PAID') {
 			getPaidList();
-		}
-		if (activePayrunTab === 'UPLOAD_HISTORY') {
+		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			getUploadHistoryList();
-		} if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
-			getPayrunListView();
 		} else {
 			getPayrunList();
 		}
