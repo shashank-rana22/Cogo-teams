@@ -2466,6 +2466,15 @@ const navigationMappingAdmin = {
 		],
 
 	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
+	},
 };
 
 export default navigationMappingAdmin;
