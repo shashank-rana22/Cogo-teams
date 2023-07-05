@@ -35,6 +35,7 @@ function TicketChat({
 	setShowReassign = () => {},
 }) {
 	const messageRef = useRef(null);
+	const [isInternal, setIsInternal] = useState(false);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
@@ -93,6 +94,7 @@ function TicketChat({
 		ticketId: modalData?.ticketId || '',
 		refreshTickets,
 		scrollToBottom,
+		isInternal,
 	});
 
 	const doesTicketsExists = !isEmpty(ticketData);
@@ -172,6 +174,7 @@ function TicketChat({
 									uploading={uploading}
 									setMessage={setMessage}
 									setUploading={setUploading}
+									setIsInternal={setIsInternal}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
