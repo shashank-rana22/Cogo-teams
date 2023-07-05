@@ -10,6 +10,7 @@ import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
+import SuggestedActions from './SuggestedActions';
 import UserActivityMessages from './UserActivityMessages';
 
 function ReceiveDiv({
@@ -62,6 +63,7 @@ function ReceiveDiv({
 					<UserActivityMessages />
 				</div>
 			</div>
+			<SuggestedActions />
 			{message_type === 'order' && (
 				<div
 					className={styles.order_container}

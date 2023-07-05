@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-// import CheckoutIncomplete from './CheckoutIncomplete';
-import LoginFailed from './LoginFailed';
+import CheckoutIncomplete from './CheckoutIncomplete';
+// import LoginFailed from './LoginFailed';
 // import EmailClicked from './EmailClicked';
 
 function UserActivityMessages() {
@@ -14,9 +14,10 @@ function UserActivityMessages() {
 				width={25}
 				height={25}
 			/>
-			<LoginFailed />
-			{/* <CheckoutIncomplete /> */}
+			{/* <LoginFailed /> */}
+			<CheckoutIncomplete />
 			{/* <EmailClicked /> */}
+
 		</div>
 	);
 }
