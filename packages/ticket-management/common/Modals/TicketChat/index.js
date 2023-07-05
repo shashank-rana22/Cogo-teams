@@ -5,9 +5,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
 import ReassignTicket from '../../ReassignTicket';
 
 import ChatBody from './ChatBody';
+import EscalateTicket from './EscalateTicket';
 import FooterChat from './FooterChat';
 import ModalHeader from './ModalHeader';
 import styles from './styles.module.css';
@@ -39,6 +41,7 @@ function TicketChat({
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [showEscalate, setShowEscalate] = useState(false);
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
@@ -84,7 +87,7 @@ function TicketChat({
 			page        : 0,
 			total_pages : 0,
 		});
-		getTicketDetails();
+		getTicketDetails(modalData?.ticketId);
 		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
 
 		setIsUpdated(true);
@@ -95,6 +98,10 @@ function TicketChat({
 		refreshTickets,
 		scrollToBottom,
 		isInternal,
+	});
+
+	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
+		refreshTickets,
 	});
 
 	const doesTicketsExists = !isEmpty(ticketData);
@@ -135,7 +142,9 @@ function TicketChat({
 						ticketData={ticketData}
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
+						setShowEscalate={setShowEscalate}
 						isClosureAuthorizer={isClosureAuthorizer}
+						updateTicketActivity={updateTicketActivity}
 					/>
 				)}
 			/>
@@ -186,6 +195,13 @@ function TicketChat({
 						<TicketSummary {...ticketData} />
 					</div>
 				)}
+
+				<EscalateTicket
+					ticketId={modalData?.ticketId}
+					showEscalate={showEscalate}
+					setShowEscalate={setShowEscalate}
+					updateTicketActivity={updateTicketActivity}
+				/>
 
 				<ReassignTicket
 					ticketId={modalData?.ticketId}
