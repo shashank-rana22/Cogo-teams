@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/uuid-check */
 import {
 	IcCCountryIndia,
 	IcCCountryNetherland,

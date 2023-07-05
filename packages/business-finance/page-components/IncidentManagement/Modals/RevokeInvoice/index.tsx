@@ -23,7 +23,6 @@ function RevokeInvoice({ id, refetch, row = {}, isEditable = true, remark = '' }
 		reqRevokeInvoiceRequest,
 		remarks,
 	});
-	console.log(remarks);
 
 	return (
 		<div>

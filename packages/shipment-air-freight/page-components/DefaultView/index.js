@@ -7,6 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback } from 'react';
 
+import DocumentHoldHeader from '../DocumentHoldHeader';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -15,10 +16,11 @@ import TimeLine from '../TimeLine';
 import styles from './styles.module.css';
 
 const TAB_MAPPING = {
-	overview : dynamic(() => import('../Overview'), { ssr: false }),
-	tasks    : dynamic(() => import('../Tasks'), { ssr: false }),
-	purchase : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
-	emails   : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	overview  : dynamic(() => import('../Overview'), { ssr: false }),
+	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
+	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
+	documents : dynamic(() => import('../Documents'), { ssr: false }),
+	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 };
 
 const UNAUTHORIZED_STATUS_CODE = 403;
@@ -100,6 +102,8 @@ function DefaultView() {
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
+
+			{!isEmpty(shipment_data?.document_delay_status) && <DocumentHoldHeader />}
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
