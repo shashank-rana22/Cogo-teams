@@ -58,6 +58,7 @@ const config = {
 		{
 			label : 'Communication History',
 			key   : 'communication',
+			func  : 'renderSendEmail',
 			span  : 1.7,
 
 		},

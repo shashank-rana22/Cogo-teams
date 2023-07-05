@@ -77,22 +77,6 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<CardColumn
-						key={singleitem.id}
-						fields={fields}
-						itemStyles={itemStyles}
-						singleitem={singleitem}
-						config={config}
-						loading={loading}
-						functions={commonFunctions(functions)}
-						isMobile={isMobile}
-						subActiveTab={subActiveTab}
-						width={width}
-						rowStyle={rowStyle}
-					/>
-				))}
-
 				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>
 						<img
@@ -101,7 +85,25 @@ function List({
 							alt="no data"
 						/>
 					</div>
-				) : null}
+				) : (
+					<div>
+						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+							<CardColumn
+								key={singleitem.id}
+								fields={fields}
+								itemStyles={itemStyles}
+								singleitem={singleitem}
+								config={config}
+								loading={loading}
+								functions={commonFunctions(functions)}
+								isMobile={isMobile}
+								subActiveTab={subActiveTab}
+								width={width}
+								rowStyle={rowStyle}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 			{showPagination && (
 				<div>

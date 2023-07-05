@@ -2,3 +2,10 @@
    display: flex;
    justify-content: end;
 }
+
+.email_cta{
+   color: var(--color-accent-orange-2);
+   text-decoration: underline;
+   background: none;
+   border: none;
+}

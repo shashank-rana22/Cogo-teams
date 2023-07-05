@@ -5,6 +5,7 @@ import React from 'react';
 
 import List from '../../../../commons/List';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
+import useSendMail from '../hooks/useSendMail';
 
 import config from './config';
 import styles from './styles.module.css';
@@ -25,9 +26,11 @@ interface Props {
 }
 
 function ListView({ filters, setFilters, data, loading }:Props) {
+	const { sendMail, mailSendLoading } = useSendMail();
+
 	const functions = {
 		renderName: ({ tradePartyDetailName }) => (
-			<div>{showOverflowingNumber(tradePartyDetailName, TEXT_LIMIT_NUM)}</div>
+			<div>{showOverflowingNumber(tradePartyDetailName || '-', TEXT_LIMIT_NUM)}</div>
 		),
 		renderOutstandingAmount: ({ outstandingAmount, ledCurrency }) => (
 			<div>
@@ -57,6 +60,15 @@ function ListView({ filters, setFilters, data, loading }:Props) {
 		),
 		renderCreditController: ({ organizationStakeholderName }) => (
 			<div>{organizationStakeholderName || '-'}</div>
+		),
+		renderSendEmail: ({ tradePartyDetailId }) => (
+			<button
+				className={styles.email_cta}
+				onClick={() => sendMail({ tradePartyDetailId })}
+				style={{ cursor: mailSendLoading ? 'not-allowed' : 'pointer' }}
+			>
+				Send To Email
+			</button>
 		),
 	};
 	return (
