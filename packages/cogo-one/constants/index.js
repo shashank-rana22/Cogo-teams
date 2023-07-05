@@ -294,5 +294,3 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
-
-export const SHOW_PROMOTIONAL_RATE_BUTTON = ['supply', 'supply_admin'];
