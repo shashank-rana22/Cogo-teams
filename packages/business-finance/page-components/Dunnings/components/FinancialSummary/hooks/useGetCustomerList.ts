@@ -1,17 +1,21 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
 interface Props {
 	filters?: {
 		search?: string;
 		pageIndex?: number;
+		service?: string[];
+		entity?: string[];
 	};
 	setFilters?: Function;
 }
 
 function useGetCustomerList({ filters, setFilters }:Props) {
-	const { search, pageIndex } = filters || {};
+	const { search, pageIndex, service, entity } = filters || {};
+
 	const [
 		{ data, loading },
 		trigger,
@@ -35,14 +39,16 @@ function useGetCustomerList({ filters, setFilters }:Props) {
 		try {
 			await trigger({
 				params: {
-					query: query || undefined,
+					serviceTypes : !isEmpty(service) ? service : undefined,
+					entityCodes  : !isEmpty(entity) ? entity : undefined,
+					query        : query || undefined,
 					pageIndex,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	}, [trigger, query, pageIndex]);
+	}, [trigger, query, pageIndex, entity, service]);
 
 	useEffect(() => {
 		getCustomerList();

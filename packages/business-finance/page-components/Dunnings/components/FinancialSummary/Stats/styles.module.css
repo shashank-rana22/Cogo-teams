@@ -26,6 +26,7 @@
  display: flex;
  justify-content: center;
  height: 300px;
+ padding: 20px;
 }
 
 .empty_state {
@@ -37,6 +38,21 @@
 
 .input_div {
 	position: relative;
-	z-index: 10;
-	width: 140px;
+	width: 180px;
+    input {
+        cursor: pointer;
+    }
+}
+
+.year_bottom_border {
+    margin-bottom: 10px;
+}
+
+.year_bottom_border :hover{
+    background: var(--color-accent-orange-5);
+    cursor: pointer;
+}
+
+.data_styles {
+    cursor: pointer;
 }

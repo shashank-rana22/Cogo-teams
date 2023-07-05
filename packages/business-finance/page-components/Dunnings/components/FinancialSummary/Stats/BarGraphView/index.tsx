@@ -28,7 +28,6 @@ function BarGraphView({ barData = [] }:Props) {
 					</div>
 				) : (
 					<Bar
-						// className="barGraph"
 						colors={['#DDEBC0', '#ACDADF']}
 						width={1600}
 						height={400}
@@ -37,6 +36,7 @@ function BarGraphView({ barData = [] }:Props) {
 						indexBy="month"
 						keys={keys}
 						padding={0.2}
+						label=""
 						labelTextColor="inherit:darker(1.4)"
 						labelSkipWidth={16}
 						labelSkipHeight={16}

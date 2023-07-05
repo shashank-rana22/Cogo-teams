@@ -9,6 +9,10 @@ import LinearGraphView from './LinearGraphView';
 import StatsLoader from './StatsLoader';
 import styles from './styles.module.css';
 
+interface Props {
+	filters?: object;
+}
+
 const MONTH_DIVISION = 3;
 const DECREMENT = 1;
 const INCREMENT = 1;
@@ -27,12 +31,13 @@ function getFinancialYear(date) {
 	} return year;
 }
 
-function Stats() {
+function Stats({ filters }:Props) {
 	const [isGraphView, setIsGraphView] = useState(true);
 	const [inputValue, setInputValue] = useState('');
+	const [showYear, setShowYear] = useState(false);
+
 	const [visible, setVisible] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
-	const [yearFilters, setYearFilters] = useState([]);
 
 	const currentYear = new Date().getFullYear();
 	const today = new Date();
@@ -51,7 +56,7 @@ function Stats() {
 		CALENDER_YEAR.push(year);
 	}
 
-	const { statsData, loading } = useGetMonthwiseStats({ statsFilter: {} });
+	const { statsData, loading } = useGetMonthwiseStats({ statsFilter: inputValue, filters });
 
 	const linearData = [
 		{
@@ -86,25 +91,27 @@ function Stats() {
 		if (type === FINANCIAL_YEARS) {
 			yearType = 'FY';
 		}
-		const years = year?.split('-');
-		setYearFilters(years);
-		setInputValue(`${yearType} - ${year}`);
+		setInputValue(`${yearType}-${year}`);
 		setVisible(false);
+		setShowYear(false);
 	};
 
 	const renderYearData = (years) => (
 		<div>
 			{years.map((year) => (
-				<div key={year} style={{ marginBottom: '10px', cursor: year === 'financialYears' && 'pointer' }}>
+				<div
+					key={year}
+					className={styles.year_bottom_border}
+					style={{ cursor: year === 'financialYears' && 'pointer' }}
+				>
 					<div
 						key={year}
 						role="presentation"
 						onClick={() => onClickFinancialYear(year, years)}
+
 					>
 						{year}
-
 					</div>
-					<div className={styles.year_bottom_border} />
 				</div>
 			))}
 		</div>
@@ -129,24 +136,36 @@ function Stats() {
 			<>
 				<div
 					className={styles.data_styles}
-					onClick={() => { setYearHandle(true); setVisible(true); }}
+					onClick={() => { setYearHandle(true); setVisible(!visible); }}
 					role="presentation"
 				>
 					Calendar Year
-
 				</div>
-				<div className={styles.borders} />
+
+				<hr />
+
 				<div
 					className={styles.data_styles}
 					onClick={() => { setYearHandle(false); setVisible(true); }}
 					role="presentation"
 				>
 					Financial Year
+				</div>
 
+				<hr />
+
+				<div
+					className={styles.data_styles}
+					onClick={() => {
+						setInputValue('TTM');
+						setShowYear(false);
+					}}
+					role="presentation"
+				>
+					Trailing 12 Months
 				</div>
 			</>
 		</Popover>
-
 	);
 
 	return (
@@ -155,13 +174,25 @@ function Stats() {
 				<div className={styles.flex_align}>
 					<div className={styles.subject}>Statistics</div>
 					<div><IcMInfo /></div>
-					<div style={{ marginTop: '10px', marginLeft: '20px' }}>
-						<Popover render={content()} caret={false} placement="bottom">
-							<div className={styles.input_div}>
+					<div style={{ marginLeft: '20px' }}>
+						<Popover
+							render={content()}
+							caret={false}
+							placement="bottom"
+							visible={showYear}
+						>
+							<div
+								className={styles.input_div}
+								onClick={() => {
+									setVisible(!setVisible);
+									setShowYear(!showYear);
+								}}
+								role="presentation"
+							>
 								<Input
-									placeholder="Select Year Mode"
+									placeholder="Select Year Mode ▼"
 									size="sm"
-									value={inputValue || `CY - ${currentYear}`}
+									value={inputValue}
 								/>
 							</div>
 						</Popover>
