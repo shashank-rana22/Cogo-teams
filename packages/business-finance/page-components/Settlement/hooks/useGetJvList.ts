@@ -8,7 +8,6 @@ const useGetJvList = ({ filters, entityCode }) => {
 			url     : '/payments/parent-jv/list',
 			authKey : 'get_payments_parent_jv_list',
 			method  : 'get',
-
 		},
 		{ manual: true },
 	);
@@ -25,13 +24,13 @@ const useGetJvList = ({ filters, entityCode }) => {
 		trigger({
 			params: {
 				page,
-				pageLimit  : 10,
-				category   : category || undefined,
-				status     : status || undefined,
-				query      : query || undefined,
-				sortBy     : sortBy || undefined,
-				sortType   : sortType || undefined,
-				entityCode : 301,
+				pageLimit : 10,
+				category  : category || undefined,
+				status    : status || undefined,
+				query     : query || undefined,
+				sortBy    : sortBy || undefined,
+				sortType  : sortType || undefined,
+				entityCode,
 			},
 		});
 	};
