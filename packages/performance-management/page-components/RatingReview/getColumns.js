@@ -118,7 +118,7 @@ const getColumns = ({
 		return [...columns, {
 			Header   : 'Surprise Gift',
 			accessor : (item) => (
-				<div>
+				<div className={styles.toggle_container}>
 					<Toggle
 						size="sm"
 						onLabel="Yes"

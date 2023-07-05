@@ -18,6 +18,17 @@
 }
 }
 
+.toggle_container{
+:global{
+	.ui_toggle_switch{
+        padding-top: 3px;
+    }
+	.ui_switch{
+		top: 3px;
+	}
+}
+}
+
 .header {
 	font-size: 20px;
 	font-weight: 700;
