@@ -1,7 +1,118 @@
 import ListCard from './ListCard';
 
+const list = [
+	{
+		id   : 1,
+		role : {
+			name              : 'IE Owner SME Demand',
+			role_sub_function : 'SME',
+		},
+		user: {
+			name: 'Mohit Nagar',
+		},
+		partner: {
+			business_name: 'COGO Freight PVT LTD',
+		},
+		objectives: [
+			{
+				id          : 1,
+				status      : 'verification_pending',
+				name        : 'Objective 1',
+				type        : 'comapny',
+				channel     : ['SME', 'CP'],
+				updated_at  : new Date(),
+				activate_at : new Date(),
+			},
+			{
+				id          : 2,
+				status      : 'verified',
+				name        : 'Objective 2',
+				type        : 'team',
+				channel     : ['CP'],
+				updated_at  : new Date(),
+				activate_at : null,
+			},
+		],
+	},
+	{
+		id   : 2,
+		role : {
+			name              : 'KAM SME Demand',
+			role_sub_function : 'SME',
+		},
+		user: {
+			name: 'Mohit Nagar',
+		},
+		partner: {
+			business_name: 'COGO Freight PVT LTD',
+		},
+		objectives: [
+			{
+				id          : 1,
+				status      : 'verification_pending',
+				name        : 'Objective 1',
+				type        : 'comapny',
+				channel     : ['SME', 'CP'],
+				updated_at  : new Date(),
+				activate_at : new Date(),
+			},
+			{
+				id          : 2,
+				status      : 'verified',
+				name        : 'Objective 2',
+				type        : 'team',
+				channel     : ['CP'],
+				updated_at  : new Date(),
+				activate_at : null,
+			},
+			{
+				id          : 4,
+				status      : 'live',
+				name        : 'Objective 4',
+				type        : 'team',
+				channel     : ['CP', 'SME'],
+				updated_at  : new Date(),
+				activate_at : new Date(),
+			},
+		],
+	},
+	{
+		id   : 2,
+		role : {
+			name              : 'KAM SME Enterprise',
+			role_sub_function : 'Enterprise',
+		},
+		user: {
+			name: 'Parth Sharma',
+		},
+		partner: {
+			business_name: 'COGO Freight PVT LTD',
+		},
+		objectives: [
+			{
+				id          : 2,
+				status      : 'verified',
+				name        : 'Objective 2',
+				type        : 'team',
+				channel     : ['CP'],
+				updated_at  : new Date(),
+				activate_at : null,
+			},
+		],
+	},
+];
+
 function ListAgents() {
-	return <ListCard />;
+	return (
+		<div>
+			{list.map((item) => (
+				<ListCard
+					key={item.id}
+					item={item}
+				/>
+			))}
+		</div>
+	);
 }
 
 export default ListAgents;
