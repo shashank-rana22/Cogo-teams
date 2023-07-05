@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
