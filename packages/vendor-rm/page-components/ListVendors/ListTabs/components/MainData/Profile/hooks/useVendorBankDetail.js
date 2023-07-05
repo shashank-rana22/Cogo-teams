@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useCallback, useState } from 'react';
 
 import getControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
@@ -25,6 +25,16 @@ function useVendorBankDetail({
 
 	const { vendor_id } = query;
 
+	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
+		url    : '/get_bank_details',
+		method : 'get',
+	}, { manual: true });
+
+	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
+		url    : '/create_vendor_bank_detail',
+		method : 'post',
+	}, { manual: true });
+
 	const formProps = useForm();
 
 	const {
@@ -38,16 +48,6 @@ function useVendorBankDetail({
 
 	const ifscCode = watch('ifsc_code');
 	const tax_number = watch('tax_number');
-
-	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
-		url    : '/get_bank_details',
-		method : 'get',
-	}, { manual: true });
-
-	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
-		url    : '/create_vendor_bank_detail',
-		method : 'post',
-	}, { manual: true });
 
 	const setIfscCode = useCallback(async () => {
 		const REGEX = GLOBAL_CONSTANTS.regex_patterns.ifsc_code;
