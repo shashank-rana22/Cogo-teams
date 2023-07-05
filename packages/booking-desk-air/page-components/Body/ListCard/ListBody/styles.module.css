@@ -1,0 +1,16 @@
+.list_body {
+	display: flex;
+	align-items: center;
+}
+
+.left_part {
+	width: 20%;
+}
+
+.middle_part {
+	width: 40%;
+}
+
+.right_part {
+	width: 40%;
+}
