@@ -20,6 +20,7 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 		search    : undefined,
 		pageIndex : 1,
 	});
+	const [apiData, setApiData] = useState({ listData: {}, dataLoading: false, listConfig: {} });
 	const { search, pageIndex } = globalFilters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
@@ -36,9 +37,9 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 		advancePaymentInvoiceList,
 		advancePaymentInvoiceLoading,
 	} = useGetAdvPaymentInvoiceList({ globalFilters, activePayrunTab });
-	let config = {};
-	let data = {};
-	let loading = false;
+	// const config = {};
+	// const data = {};
+	// const loading = false;
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -48,53 +49,84 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				getAdvancePaymentInvoiceList();
+				setApiData({
+					...apiData,
+					listData    : advancePaymentInvoiceList,
+					dataLoading : advancePaymentInvoiceLoading,
+					listConfig  : advPaymentPayrunHistoryConfig,
+				});
 			} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
 				getPayrunListView();
+				setApiData({
+					...apiData,
+					listData    : billListViewData,
+					dataLoading : billListViewLoading,
+					listConfig  : activePayrunTab === 'COMPLETED' ? payrunHistoryInvoiceConfig
+						: initiatedListViewConfig,
+				});
 			} else {
 				getPayrunList();
+				setApiData({
+					...apiData,
+					listData    : payrunData,
+					dataLoading : payrunLoading,
+					listConfig  : activePayrunTab === 'COMPLETED' ? payrunHistoryConfig : initiatedConfig,
+				});
 			}
 		} else if (activePayrunTab === 'PAID') {
 			getPaidList();
+			setApiData({
+				...apiData,
+				listData    : paidDataList,
+				dataLoading : paidDataLoading,
+				listConfig  : payrunPaidConfig,
+			});
 		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			getUploadHistoryList();
-		} else {
-			getPayrunList();
+			setApiData({
+				...apiData,
+				listData    : uploadHistoryDataList,
+				dataLoading : uploadHistoryListLoading,
+				listConfig  : uploadHistoryConfig,
+			});
 		}
-	}, [activePayrunTab, getAdvancePaymentInvoiceList,
-		getPaidList, getPayrunList, getPayrunListView, getUploadHistoryList, isInvoiceView, overseasData]);
+	}, [activePayrunTab, advancePaymentInvoiceList, advancePaymentInvoiceLoading, apiData,
+		billListViewData, billListViewLoading, getAdvancePaymentInvoiceList, getPaidList,
+		getPayrunList, getPayrunListView, getUploadHistoryList, isInvoiceView, overseasData, paidDataList,
+		paidDataLoading, payrunData, payrunLoading, uploadHistoryDataList, uploadHistoryListLoading]);
 
-	if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
-		if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
-			data = advancePaymentInvoiceList;
-			loading = advancePaymentInvoiceLoading;
-			config = advPaymentPayrunHistoryConfig;
-		}
-	}
-	if (activePayrunTab === 'PAID') {
-		data = paidDataList;
-		loading = paidDataLoading;
-		config = payrunPaidConfig;
-	} else if (activePayrunTab === 'UPLOAD_HISTORY') {
-		data = uploadHistoryDataList;
-		loading = uploadHistoryListLoading;
-		config = uploadHistoryConfig;
-	} else if (activePayrunTab === 'COMPLETED' && isInvoiceView) {
-		config = payrunHistoryInvoiceConfig;
-		loading = billListViewLoading;
-		data = billListViewData;
-	} else if (activePayrunTab === 'COMPLETED') {
-		config = payrunHistoryConfig;
-		data = payrunData;
-		loading = payrunLoading;
-	} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
-		data = billListViewData;
-		loading = billListViewLoading;
-		config = initiatedListViewConfig;
-	} else {
-		data = payrunData;
-		loading = payrunLoading;
-		config = initiatedConfig;
-	}
+	// if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
+	// 	if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
+	// 		data = advancePaymentInvoiceList;
+	// 		loading = advancePaymentInvoiceLoading;
+	// 		config = advPaymentPayrunHistoryConfig;
+	// 	}
+	// }
+	// if (activePayrunTab === 'PAID') {
+	// 	data = paidDataList;
+	// 	loading = paidDataLoading;
+	// 	config = payrunPaidConfig;
+	// } else if (activePayrunTab === 'UPLOAD_HISTORY') {
+	// 	data = uploadHistoryDataList;
+	// 	loading = uploadHistoryListLoading;
+	// 	config = uploadHistoryConfig;
+	// } else if (activePayrunTab === 'COMPLETED' && isInvoiceView) {
+	// 	config = payrunHistoryInvoiceConfig;
+	// 	loading = billListViewLoading;
+	// 	data = billListViewData;
+	// } else if (activePayrunTab === 'COMPLETED') {
+	// 	config = payrunHistoryConfig;
+	// 	data = payrunData;
+	// 	loading = payrunLoading;
+	// } else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
+	// 	data = billListViewData;
+	// 	loading = billListViewLoading;
+	// 	config = initiatedListViewConfig;
+	// } else {
+	// 	data = payrunData;
+	// 	loading = payrunLoading;
+	// 	config = initiatedConfig;
+	// }
 	useEffect(() => {
 		// setViewId('');
 		// setActiveAdvPaid('NORMAL');
@@ -102,10 +134,11 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 	}, [activePayrunTab, setOverseasData]);
 
 	return {
-		data,
-		loading,
+		data    : apiData.listData,
+		// data,
+		loading : apiData.dataLoading,
 		payrunStats,
-		config,
+		config  : apiData.listConfig,
 		globalFilters,
 		setGlobalFilters,
 	};
