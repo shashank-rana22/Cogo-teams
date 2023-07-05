@@ -143,7 +143,11 @@ const useLoginAuthenticate = () => {
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
 			const res = await triggerSession();
+
+			const { partner = {} } = res.data || {};
+
 			dispatch(setProfileState(res.data));
+			setCookie('parent_entity_id', partner.id);
 
 			if (source === 'add_account') {
 				// eslint-disable-next-line no-undef
