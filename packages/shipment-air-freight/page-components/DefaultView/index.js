@@ -7,10 +7,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback } from 'react';
 
-import DocumentHoldHeader from '../DocumentHoldHeader';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
+import ShipmentTags from '../ShipmentTags';
 import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
@@ -102,9 +102,7 @@ function DefaultView() {
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
-
-			{!isEmpty(shipment_data?.document_delay_status) && <DocumentHoldHeader />}
-
+			<ShipmentTags shipmentData={shipment_data} />
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
 				{conditionMapping.poc_sop ? <PocSop /> : null}
