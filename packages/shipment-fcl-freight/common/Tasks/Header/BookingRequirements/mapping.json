@@ -173,6 +173,10 @@
     {
       "label": "Destination Detention Free Days",
       "key": "free_days_detention_destination"
+    },
+    {
+      "label": "Remarks",
+      "key": "booking_preferences"
     }
 ]
 }

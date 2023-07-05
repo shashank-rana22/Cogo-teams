@@ -1,5 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getByKey } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -67,12 +68,15 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 							<div className={styles.heading}>Supply Side :</div>
 
 							<div className={styles.detail_container}>
-								{supplyDetails?.map((obj) => (
-									getByKey(main_service, obj.key)
+								{supplyDetails?.map((obj) => {
+									const key = obj.key === 'booking_preferences'
+										? main_service?.[obj.key]?.[GLOBAL_CONSTANTS.zeroth_index].remarks : obj.key;
+									return getByKey(main_service, key)
 										? renderDetail({
 											obj,
-											key: obj.key,
-										}) : null))}
+											key,
+										}) : null;
+								})}
 							</div>
 						</div>
 					</div>
