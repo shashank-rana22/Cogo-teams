@@ -4,12 +4,20 @@ import { useSelector } from '@cogoport/store';
 
 import { STATUS_TYPE_MAPPING } from '../constants';
 
-const getPayload = ({ profile, actionType, id }) => ({
-	UserType      : 'user',
-	PerformedByID : profile?.user?.id,
-	TicketID      : [Number(id)],
-	...(STATUS_TYPE_MAPPING[actionType]),
-});
+const getPayload = ({ profile, actionType, id, file, description }) => {
+	const escalationPayload = {
+		Description : description || undefined,
+		Data        : { Url: [file] },
+	};
+
+	return {
+		UserType      : 'user',
+		PerformedByID : profile?.user?.id,
+		TicketID      : [Number(id)],
+		...(STATUS_TYPE_MAPPING[actionType]),
+		...(actionType === 'escalate' ? escalationPayload : {}),
+	};
+};
 
 const useUpdateTicketActivity = ({
 	refreshTickets = () => {},
@@ -23,10 +31,10 @@ const useUpdateTicketActivity = ({
 		authkey : 'post_tickets_activity',
 	}, { manual: true });
 
-	const updateTicketActivity = async ({ actionType = '', id = '' }) => {
+	const updateTicketActivity = async ({ actionType = '', id = '', file = '', description = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ profile, actionType, id }),
+				data: getPayload({ profile, actionType, id, file, description }),
 			});
 
 			refreshTickets();

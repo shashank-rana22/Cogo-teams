@@ -30,6 +30,10 @@ export const STATUS_TYPE_MAPPING = {
 		Status : 'reopened',
 		Type   : 'reopened',
 	},
+	escalate: {
+		Status : 'escalated',
+		Type   : 'escalated',
+	},
 };
 
 export const TICKET_SECTION_MAPPING = {
