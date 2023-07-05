@@ -148,6 +148,7 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
@@ -348,7 +349,7 @@ export default {
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
@@ -402,6 +403,11 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
+		education_level: {
+			post_graduates_degree : [],
+			graduate_degree       : [],
+			doctorate_degree      : [],
+		},
 	},
 	navigations: {
 		supply_dashboard: {

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 const getAsyncFields = (key) => {
 	const OPTIONS = {
 		'shipping-lines': {
@@ -785,6 +786,11 @@ const getAsyncFields = (key) => {
 				page_limit : 100,
 				page       : 1,
 			},
+		},
+		insurance_commodities: {
+			valueKey : 'id',
+			lableKey : 'name',
+			asyncKey : 'insurance_commodities',
 		},
 
 	};

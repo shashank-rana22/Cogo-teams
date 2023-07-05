@@ -1,0 +1,21 @@
+.filter_header {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.filter_header::after {
+	display: block;
+	width: 10%;
+	height: 2px;
+	content: "";
+	background: #f68b21;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.reset_button {
+	margin-right: 12px;
+}

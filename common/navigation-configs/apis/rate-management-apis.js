@@ -473,6 +473,11 @@ const rms = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
+		api          : 'create_fcl_customs_rate_sheet',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
+	},
+	{
 		api          : 'create_air_freight_rate_sheet',
 		access_type  : 'private',
 		service_name : 'air_freight_rate',
@@ -488,6 +493,11 @@ const rms = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
+		api          : 'list_fcl_customs_rate_sheets',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
+	},
+	{
 		api          : 'list_air_freight_rate_sheets',
 		access_type  : 'private',
 		service_name : 'air_freight_rate',
@@ -501,6 +511,11 @@ const rms = [
 		api          : 'update_fcl_freight_rate_sheet',
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_fcl_customs_rate_sheet',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
 	},
 	{
 		api          : 'update_air_freight_rate_sheet',
