@@ -1,51 +1,53 @@
-import { Loader, Button, Modal } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-// import { HawbFields } from '../../configurations/hawb_fields';
-// import useGetHawbList from '../../hooks/useGetHawbList';
-// import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import { POCDetailsFields } from '../../../configurations/poc-details';
 
-// import HawbListItem from './HawbListItem';
+import POCDetailsItem from './POCDetailsItem';
 import styles from './styles.module.css';
 
 function POCDetails({ data }) {
-	// const { fields } = HawbFields;
+	const { fields } = POCDetailsFields;
 
-	console.log('data', data);
-
-	const { e_booking_availability: eBooking } = data || {};
+	const {
+		e_booking_availability: eBooking,
+		inventory_stock_availability: availability, pocs_data:pocsData,
+	} = data || {};
 
 	return (
 		<div className={styles.poc_detail_container}>
-			<div className={styles.poc_list}>
+			<div className={styles.poc_container}>
 				<div className={styles.basic_info}>
 					<div className={styles.basic_info_heading}>
 						E-Booking
 						<span>:</span>
 					</div>
-
 					{eBooking === 'available' ? 'Yes' : 'No'}
+					<div className={`${styles.basic_info_heading} ${styles.inventory}`}>
+						Inventory
+						<span>:</span>
+					</div>
+					{availability === 'before_booking' ? 'Before' : 'After'}
 				</div>
-				{/* <header className={styles.header}>
+				<div className={styles.poc_list}>
+					<header className={styles.header}>
 						{fields.map((field) => (
 							<div
 								className={styles.col}
 								style={{ '--span': field.span || 1 } as React.CSSProperties}
+								key={field.key}
 							>
 								{ field.label }
 							</div>
 						))}
 					</header>
-					{(hawbData?.data?.shipmentPendingTasks || []).map((item) => (
-						<HawbListItem
+					{(pocsData || []).map((item) => (
+						<POCDetailsItem
 							item={item}
 							fields={fields}
-							loading={loading}
-							functions={functions}
+							key={JSON.stringify(item)}
 						/>
-					))} */}
-
+					))}
+				</div>
 			</div>
 		</div>
 	);

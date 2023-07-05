@@ -5,6 +5,7 @@ import {
 	DatepickerController,
 	TextAreaController,
 	AsyncSelectController,
+	MobileNumberController,
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
@@ -21,6 +22,9 @@ const getElementController = (type = 'text') => {
 
 		case 'select':
 			return SelectController;
+
+		case 'mobile':
+			return MobileNumberController;
 
 		case 'file':
 			return UploadController;

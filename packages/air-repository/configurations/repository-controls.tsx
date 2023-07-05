@@ -100,6 +100,7 @@ const repositoryControls = () => ({
 			span               : 12,
 			showButtons        : true,
 			noDeleteButtonTill : 1,
+			buttonText         : 'Add POC Details',
 			controls           : [
 				{
 					name        : 'name',
@@ -123,7 +124,7 @@ const repositoryControls = () => ({
 				},
 				{
 					name        : 'mobile_number',
-					type        : 'number',
+					type        : 'mobile',
 					label       : 'Enter Contact Number',
 					placeholder : 'Enter contact number',
 					span        : 6,
@@ -131,27 +132,27 @@ const repositoryControls = () => ({
 						required: true,
 					},
 				},
+			],
+		},
+		{
+			name    : 'rate_required',
+			type    : 'select',
+			options : [
 				{
-					name    : 'rate_required',
-					type    : 'select',
-					options : [
-						{
-							label : 'Yes',
-							value : 'yes',
-						},
-						{
-							label : 'No',
-							value : 'no',
-						},
-					],
+					label : 'Yes',
 					value : 'yes',
-					label : 'Do we send Agreed Rate in Email for this Airline?',
-					span  : 6,
-					rules : {
-						required: true,
-					},
+				},
+				{
+					label : 'No',
+					value : 'no',
 				},
 			],
+			value : 'yes',
+			label : 'Do we send Agreed Rate in Email for this Airline?',
+			span  : 6,
+			rules : {
+				required: true,
+			},
 		},
 
 	],

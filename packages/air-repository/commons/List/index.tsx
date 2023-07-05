@@ -60,7 +60,6 @@ function List({
 						isOpen={isOpen}
 					/>
 					<div
-						style={{ '--length': isOpen ? 0 : '-6px' } as React.CSSProperties}
 						className={styles.accordian_style}
 					>
 						{isOpen === singleitem.id ? (
