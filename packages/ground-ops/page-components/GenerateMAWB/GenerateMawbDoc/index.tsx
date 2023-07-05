@@ -1,3 +1,7 @@
+import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails';
+import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails';
+import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails';
+import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails';
 import { Button, Checkbox, Popover } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
@@ -8,12 +12,8 @@ import { footerValues } from '../Helpers/configurations/footerValues';
 import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
 import useUpdateIndividualEditing from '../Helpers/hooks/useUpdateIndividualEditing';
 
-import ChargeDetails from './ChargeDetails';
-import ContainerDetails from './ContainerDetails';
 import getFileObject from './getFileObject';
 import SelectDocumentCopies from './SelectDocumentCopies';
-import ShipmentDetails from './ShipmentDetails';
-import ShipperConsigneeDetails from './ShipperConsigneeDetails';
 import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
