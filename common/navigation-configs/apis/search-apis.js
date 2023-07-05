@@ -475,25 +475,25 @@ const apis = [
 		feature     : 'controlled checkout',
 	},
 	{
-		api          : 'create_nominated_shipment',
+		api          : 'create_organization_nomination',
 		access_type  : 'private',
 		feature      : 'search',
 		service_name : 'organization',
 	},
 	{
-		api          : 'list_nominated_shipments',
+		api          : 'list_organization_nominations',
 		access_type  : 'private',
 		feature      : 'search',
 		service_name : 'organization',
 	},
 	{
-		api          : 'update_nominated_shipment',
+		api          : 'update_organization_nomination',
 		access_type  : 'private',
 		feature      : 'search',
 		service_name : 'organization',
 	},
 	{
-		api          : 'get_nominated_shipment',
+		api          : 'get_organization_nomination',
 		access_type  : 'private',
 		feature      : 'search',
 		service_name : 'organization',
@@ -502,7 +502,7 @@ const apis = [
 		api          : 'create_nominated_spot_search',
 		access_type  : 'private',
 		feature      : 'search',
-		service_name : 'organization',
+		service_name : 'spot_search',
 	},
 	{
 		api          : 'create_nominee_trade_party',
