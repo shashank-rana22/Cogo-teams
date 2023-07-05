@@ -1,29 +1,29 @@
 .card_container {
-    margin: 8px 0;
-    background-color: #FFF;
-    border-radius: 4px;
+	margin: 8px 0;
+	background-color: #fff;
+	border-radius: 4px;
 }
 
 .list_card {
-    display: flex;
-    padding: 12px;
-    border: 1px solid #F8F2E7;
+	display: flex;
+	padding: 12px;
+	border: 1px solid #f8f2e7;
 }
 
 .card_column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .view_details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FDFBF6;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	background-color: #fdfbf6;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 }

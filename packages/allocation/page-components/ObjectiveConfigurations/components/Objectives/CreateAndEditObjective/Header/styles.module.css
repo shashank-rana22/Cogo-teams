@@ -1,9 +1,9 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    margin: 24px 0 16px 0;
+	display: flex;
+	justify-content: space-between;
+	margin: 24px 0 16px;
 }
 
 .heading_container {
-    width: 75%
+	width: 75%;
 }

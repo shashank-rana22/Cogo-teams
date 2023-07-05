@@ -1,5 +1,7 @@
+import OrganizationDetailsCard from './OrganizationDetailsCard';
 import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
+import TransactionFunnelCard from './TransactionFunnelCard';
 import useGetObjectiveDetails from './useGetObjectiveDetails';
 
 function ObjectiveDetailsCard(props) {
@@ -9,8 +11,8 @@ function ObjectiveDetailsCard(props) {
 
 	const {
 		service_requirements: serviceRequirementsDetails,
-		// organization_details: organizationDetails,
-		// stats_details: statsDetails,
+		organization_details: organizationDetails,
+		stats_details: statsDetails,
 		service_requirement_operator,
 	} = objectiveData;
 
@@ -20,6 +22,10 @@ function ObjectiveDetailsCard(props) {
 				serviceRequirementsDetails={serviceRequirementsDetails}
 				operator={service_requirement_operator}
 			/>
+
+			<OrganizationDetailsCard organizationDetails={organizationDetails} />
+
+			<TransactionFunnelCard statsDetails={statsDetails} />
 		</section>
 	);
 }

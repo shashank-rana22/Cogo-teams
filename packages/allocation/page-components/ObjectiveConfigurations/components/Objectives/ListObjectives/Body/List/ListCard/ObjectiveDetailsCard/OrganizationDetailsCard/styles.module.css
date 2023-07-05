@@ -1,0 +1,27 @@
+.container {
+	margin-top: 24px;
+}
+
+.heading {
+	margin-bottom: 12px;
+}
+
+.card {
+    padding: 16px 20px;
+	background-color: #fff;
+	border: 1px solid #f8f8f8;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.label_value_cotainer {
+	display: flex;
+	align-items: center;
+}
+
+.label {
+	margin-right: 4px;
+	color: #828282;
+}

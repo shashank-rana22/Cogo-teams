@@ -7,7 +7,7 @@ function Filters() {
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.select_container}>
-				<Input size="sm" placeholder="Select by Objective Name" />
+				<Input size="sm" placeholder="Search by Objective Name" />
 			</div>
 
 			<Button themeType="secondary" type="button">

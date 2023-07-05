@@ -87,18 +87,44 @@ const useGetObjectiveDetails = (props) => {
 		organization_details: {
 			id           : 3,
 			objective_id : activeObjectiveId,
-			country      : {
-				name: 'India',
-			},
-			state: {
-				name: 'Rajasthan',
-			},
-			city: {
-				name: 'Jaipur',
-			},
-			pincode: {
-				name: '826004',
-			},
+			countries    : [
+				{
+					name: 'India',
+				},
+				{
+					name: 'Vietnam',
+				},
+				{
+					name: 'UAE',
+				},
+			],
+			states: [
+				{
+					name: 'Rajasthan',
+				},
+				{
+					name: 'Gujarat',
+				},
+			],
+			cities: [
+				{
+					name: 'Jaipur',
+				},
+				{
+					name: 'Surat',
+				},
+			],
+			pincodes: [
+				{
+					name: '826004',
+				},
+				{
+					name: '234211',
+				},
+				{
+					name: '345324',
+				},
+			],
 			segments: ['long_tail', 'mid_size'],
 		},
 		stats_details: {

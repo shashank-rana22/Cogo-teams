@@ -1,41 +1,41 @@
 .container {
-    padding: 16px 20px;
-    background-color: #FFF;
-    border-radius: 8px;
-    border: 1px solid #F8F8F8;
-    flex-basis: 49%;
+	flex-basis: 49%;
+	padding: 16px 20px;
+	background-color: #fff;
+	border: 1px solid #f8f8f8;
+	border-radius: 8px;
 
-    @media (max-width: 768px) {
-        flex-basis: 100%;
-    }
+	@media (max-width: 768px) {
+		flex-basis: 100%;
+	}
 }
 
 .heading_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .heading {
-    text-decoration: underline;
-    margin: 0;
+	margin: 0;
+	text-decoration: underline;
 }
 
 .operator {
-    margin: 0 4px 0 0;
+	margin: 0 4px 0 0;
 }
 
 .label {
-    color: #828282;
-    margin-right: 4px;
+	margin-right: 4px;
+	color: #828282;
 }
 
 .key_value_container {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
 }
 
 .value_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
