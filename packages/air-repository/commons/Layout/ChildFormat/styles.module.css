@@ -45,6 +45,7 @@
 
 		.ui_select_container {
 			margin-right: 4px;
+
 			.ui_select_display_container {
 				max-height: 32px;
 				border: 1px solid #333;
@@ -63,8 +64,9 @@
 		.ui_select_options_relative_container {
 			.ui_select_options_container {
 				padding: 0;
+
 				.ui_select_option_item {
-font-size: var(--font-size-md);
+					font-size: var(--font-size-md);
 				}
 			}
 		}
@@ -74,10 +76,10 @@ font-size: var(--font-size-md);
 .delete_icon {
 	position: absolute;
 	top: 136px;
+	right: 0;
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-right: 0;
 	fill: var(--color-primary-error-red-2);
 }
 
