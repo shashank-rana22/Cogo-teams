@@ -2305,6 +2305,16 @@ const navigationMappingAdmin = {
 				possible_apis : [],
 				icon          : IcMDataPipeline,
 			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
 		],
 	},
 	air_repository: {

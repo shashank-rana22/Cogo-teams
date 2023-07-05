@@ -11,6 +11,7 @@ import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
+import ihls from './config/ihls';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
@@ -65,6 +66,7 @@ const routeConfig = {
 	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
+	...ihls,
 	...myIncident,
 	...myProfile,
 	...enrichment,
