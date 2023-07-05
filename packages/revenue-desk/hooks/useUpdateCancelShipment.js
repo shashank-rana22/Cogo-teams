@@ -24,7 +24,6 @@ const useUpdateCancelShipment = ({
 			setshowCancelModal(false);
 			setShowDetailPage(null);
 		} catch (err) {
-			// console.log(err);
 			Toast.error('Something went wrong');
 			setshowCancelModal(false);
 		}
