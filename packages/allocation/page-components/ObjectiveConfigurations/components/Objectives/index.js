@@ -1,20 +1,18 @@
-import { useState } from 'react';
-
 import CreateAndEditObjective from './CreateAndEditObjective';
 import ListObjectives from './ListObjectives';
 
-function Objectives() {
-	const [activeMode, setActiveMode] = useState({ mode: 'list' });
+function Objectives(props) {
+	const { activeTabDetails, setActiveTabDetails } = props;
 
-	return activeMode.mode === 'list' ? (
+	return activeTabDetails.mode === 'list' ? (
 		<ListObjectives
-			setActiveMode={setActiveMode}
+			setActiveTabDetails={setActiveTabDetails}
 		/>
 	)
 		: (
 			<CreateAndEditObjective
-				activeMode={activeMode}
-				setActiveMode={setActiveMode}
+				activeTabDetails={activeTabDetails}
+				setActiveTabDetails={setActiveTabDetails}
 			/>
 		);
 }

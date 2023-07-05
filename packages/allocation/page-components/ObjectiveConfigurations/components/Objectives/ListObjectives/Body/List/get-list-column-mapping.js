@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const INDEX_LENGTH_NORMALIZATION_VALUE = 1;
 
 const getListColumnMapping = (props) => {
-	const { setActiveMode } = props;
+	const { setActiveTabDetails } = props;
 
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -123,7 +123,7 @@ const getListColumnMapping = (props) => {
 				<Button
 					themeType="tertiary"
 					type="button"
-					onClick={() => setActiveMode({ mode: 'edit', id })}
+					onClick={() => setActiveTabDetails((pv) => ({ ...pv, mode: 'edit', id }))}
 				>
 					<IcMEdit style={{ marginRight: '4px' }} />
 					<strong>Edit</strong>

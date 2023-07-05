@@ -1,10 +1,13 @@
 import Header from './Header';
 
 function CreateAndEditObjective(props) {
-	const { activeMode, setActiveMode } = props;
+	const { activeTabDetails, setActiveTabDetails } = props;
 
 	return (
-		<Header activeMode={activeMode} setActiveMode={setActiveMode} />
+		<Header
+			activeTabDetails={activeTabDetails}
+			setActiveTabDetails={setActiveTabDetails}
+		/>
 	);
 }
 

@@ -3,13 +3,13 @@ import List from './List';
 // import styles from './styles.module.css';
 
 function Body(props) {
-	const { setActiveMode } = props;
+	const { setActiveTabDetails } = props;
 
 	return (
 		<section>
 			<Filters />
 
-			<List setActiveMode={setActiveMode} />
+			<List setActiveTabDetails={setActiveTabDetails} />
 		</section>
 	);
 }

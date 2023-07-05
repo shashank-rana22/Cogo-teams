@@ -3,7 +3,7 @@ import { Button, Toggle } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { setActiveMode } = props;
+	const { setActiveTabDetails } = props;
 
 	return (
 		<section className={styles.container}>
@@ -19,7 +19,7 @@ function Header(props) {
 			<Button
 				type="button"
 				themeType="primary"
-				onClick={() => setActiveMode({ mode: 'create' })}
+				onClick={() => setActiveTabDetails((pv) => ({ ...pv, mode: 'create' }))}
 			>
 				+ Create New Objective
 			</Button>

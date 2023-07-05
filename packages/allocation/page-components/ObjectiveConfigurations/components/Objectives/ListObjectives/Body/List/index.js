@@ -99,11 +99,11 @@ const list = [
 ];
 
 function List(props) {
-	const { setActiveMode } = props;
+	const { setActiveTabDetails } = props;
 
 	const [activeObjectiveId, setActiveObjectiveId] = useState(null);
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveMode });
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveTabDetails });
 
 	return (
 		<section>

@@ -16,9 +16,9 @@ const HEADING_MAPPING = {
 };
 
 function Header(props) {
-	const { activeMode, setActiveMode } = props;
+	const { activeTabDetails, setActiveTabDetails } = props;
 
-	const { heading, subheading } = HEADING_MAPPING[activeMode.mode];
+	const { heading, subheading } = HEADING_MAPPING[activeTabDetails.mode];
 
 	return (
 		<section className={styles.container}>
@@ -30,7 +30,7 @@ function Header(props) {
 			<Button
 				type="button"
 				themeType="primary"
-				onClick={() => setActiveMode({ mode: 'list' })}
+				onClick={() => setActiveTabDetails((pv) => ({ ...pv, mode: 'list', id: undefined }))}
 			>
 				Existing Objectives
 			</Button>
