@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Filters() {
 	return (
 		<div className={styles.filter_container}>
-			<div className={styles.select_container}>
+			<div className={styles.search_container}>
 				<Input size="sm" placeholder="Search by Objective Name" />
 			</div>
 

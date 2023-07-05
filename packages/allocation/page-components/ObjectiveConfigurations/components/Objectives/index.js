@@ -1,20 +1,20 @@
 import CreateAndEditObjective from './CreateAndEditObjective';
 import ListObjectives from './ListObjectives';
 
-function Objectives(props) {
-	const { activeTabDetails, setActiveTabDetails } = props;
+const COMPONENT_MAPPING = {
+	list   : ListObjectives,
+	create : CreateAndEditObjective,
+	edit   : CreateAndEditObjective,
+};
 
-	return activeTabDetails.mode === 'list' ? (
-		<ListObjectives
-			setActiveTabDetails={setActiveTabDetails}
-		/>
-	)
-		: (
-			<CreateAndEditObjective
-				activeTabDetails={activeTabDetails}
-				setActiveTabDetails={setActiveTabDetails}
-			/>
-		);
+function Objectives(props) {
+	const { activeTabDetails, ...rest } = props;
+
+	const Component = COMPONENT_MAPPING[activeTabDetails.mode];
+
+	if (!Component) return null;
+
+	return <Component activeTabDetails={activeTabDetails} {...rest} />;
 }
 
 export default Objectives;

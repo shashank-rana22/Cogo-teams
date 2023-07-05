@@ -1,5 +1,15 @@
+import Header from './Header';
+import ListAgents from './ListAgents';
+import styles from './styles.module.css';
+
 function Agents() {
-	return <h1>Agents</h1>;
+	return (
+		<section className={styles.container}>
+			<Header />
+
+			<ListAgents />
+		</section>
+	);
 }
 
 export default Agents;
