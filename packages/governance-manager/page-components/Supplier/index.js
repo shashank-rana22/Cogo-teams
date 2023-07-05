@@ -5,6 +5,7 @@ import Item from '../ListSupplier/Item';
 
 import MarketFeedback from './Steps/MarketFeedback';
 import NeedAnalysis from './Steps/NeedAnalysis';
+import SupplierApproval from './Steps/SupplierApproval';
 import SupplierEvaluation from './Steps/SupplierEvaluation';
 import styles from './styles.module.css';
 
@@ -18,9 +19,9 @@ function Supplier() {
 		{ title: 'Contract and SLA', key: 'contract_sla' },
 
 	];
-	const [status, setStatus] = useState('market_feedback');
+	const [status, setStatus] = useState('need_analysis');
 	return (
-		<>
+		<div>
 			<h2>Governance Manager</h2>
 			<Item isSupplierPage />
 			<Stepper
@@ -34,9 +35,10 @@ function Supplier() {
 				need_analysis       : <NeedAnalysis setStatus={setStatus} />,
 				market_feedback     : <MarketFeedback setStatus={setStatus} />,
 				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
+				supplier_approval   : <SupplierApproval setStatus={setStatus} />,
 			}[status]}
 
-		</>
+		</div>
 	);
 }
 export default Supplier;
