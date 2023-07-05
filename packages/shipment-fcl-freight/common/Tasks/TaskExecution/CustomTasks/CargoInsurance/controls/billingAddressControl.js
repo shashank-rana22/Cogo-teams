@@ -12,7 +12,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : geo.regex.GST,
+				value   : geo?.regex.GST,
 				message : 'GST Number is invalid',
 			},
 			required: 'GST Number is required',
@@ -92,7 +92,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : geo.regex.PAN,
+				value   : geo?.regex.PAN,
 				message : 'Enter a valid PAN',
 			},
 			required: 'PAN Number is required',

@@ -104,7 +104,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : geo.regex.EMAIL,
+				value   : geo?.regex.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
@@ -120,7 +120,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 				if (!v?.number || !v?.country_code) {
 					return 'Phone Number is required';
 				}
-				return geo.regex.MOBILE_NUMBER.test(v.number) || 'Invalid Phone Number';
+				return geo?.regex.MOBILE_NUMBER.test(v.number) || 'Invalid Phone Number';
 			},
 		},
 		span: 12,
@@ -146,7 +146,7 @@ export const getModifiedControls = ({
 								.cargo_insurance.countries.includes(
 									countryCode?.country_code,
 								)
-								? geo.regex.GST
+								? geo?.regex.GST
 								: '',
 						message: 'Invalid Tax Number',
 					},
