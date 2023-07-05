@@ -1,4 +1,4 @@
-import { Input, Popover, Toggle } from '@cogoport/components';
+import { Input, Popover, Toggle, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -173,7 +173,21 @@ function Stats({ filters }:Props) {
 			<div className={styles.header}>
 				<div className={styles.flex_align}>
 					<div className={styles.subject}>Statistics</div>
-					<div><IcMInfo /></div>
+					<Tooltip
+						content={(
+							<span>
+								Total Outstanding and
+								<br />
+								Collected Amount
+								<br />
+								information based on the
+								<br />
+								selected filter
+							</span>
+						)}
+					>
+						<div><IcMInfo /></div>
+					</Tooltip>
 					<div style={{ marginLeft: '20px' }}>
 						<Popover
 							render={content()}
