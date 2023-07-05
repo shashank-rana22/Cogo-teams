@@ -11,7 +11,10 @@ import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, prefrence_key }) {
-	const lineItems = data?.rowData?.line_items;
+	const lineItems = data?.rowData?.line_items || [];
+	const originLocalsLineItems = data?.rowData?.origin_locals?.line_items || [];
+	const destinationLocalsLineItems = data?.rowData?.destination_locals?.line_items || [];
+	const isDisplayLineItems = !isEmpty([...lineItems, ...originLocalsLineItems, ...destinationLocalsLineItems]);
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const [showLineItems, setShowLineItems] = useState(false);
 	const showValidity = (item) => {
@@ -133,71 +136,68 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 							},
 						})}
 					</div>
+					{isDisplayLineItems ? (
+						<Popover
+							placement="top"
+							trigger="mouseenter"
+							render={(
+								<ShowLineItems
+									serviceType={serviceData?.service_type}
+									lineItems={lineItems}
+									originLocalLineItems={originLocalsLineItems}
+									destinationLocalLineItems={destinationLocalsLineItems}
+								/>
+							)}
+						>
+							<div
+								onClick={() => setShowLineItems(!showLineItems)}
+								style={{ textDecoration: 'underline' }}
+								role="button"
+								tabIndex={0}
+							>
+								view more
+							</div>
+						</Popover>
+					) : null}
 				</div>
 				<div>
-					{
-							data?.rowData?.origin_locals_price
-								? (
-									<div style={{ display: 'flex' }}>
-										Origin Local Price :
-										&nbsp;
-										<div className={styles.price_value}>
-											{formatAmount({
-												amount   : data?.rowData?.origin_locals_price,
-												currency : data?.rowData?.origin_locals_price_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-										</div>
-									</div>
-								)
-								: null
-						}
-					{
-							data?.rowData?.origin_locals_price
-								? (
-									<div style={{ display: 'flex' }}>
-										Destination Local Price :
-										&nbsp;
-										<div className={styles.price_value}>
-											{formatAmount({
-												amount   : data?.rowData?.destination_locals_price,
-												currency : data?.rowData?.destination_locals_price_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
-
-										</div>
-
-									</div>
-								)
-								: null
-						}
+					{data?.rowData?.origin_locals_price
+						? (
+							<div style={{ display: 'flex' }}>
+								Origin Local Price :
+								&nbsp;
+								<div className={styles.price_value}>
+									{formatAmount({
+										amount   : data?.rowData?.origin_locals_price,
+										currency : data?.rowData?.origin_locals_price_currency,
+										options  : {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 2,
+										},
+									})}
+								</div>
+							</div>
+						) : null}
+					{data?.rowData?.destinatoion_locals_price
+						? (
+							<div style={{ display: 'flex' }}>
+								Destination Local Price :
+								&nbsp;
+								<div className={styles.price_value}>
+									{formatAmount({
+										amount   : data?.rowData?.destination_locals_price,
+										currency : data?.rowData?.destination_locals_price_currency,
+										options  : {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 2,
+										},
+									})}
+								</div>
+							</div>
+						) : null}
 				</div>
-				{!isEmpty(lineItems) ? (
-					<Popover
-						placement="top"
-						trigger="mouseenter"
-						render={(
-							<ShowLineItems lineItems={lineItems} />
-						)}
-					>
-						<div
-							onClick={() => setShowLineItems(!showLineItems)}
-							style={{ textDecoration: 'underline' }}
-							role="button"
-							tabIndex={0}
-						>
-							view more
-						</div>
-					</Popover>
-				) : null}
 			</div>
 			<div className={styles.total_price_section}>
 				<div style={{ display: 'flex' }}>

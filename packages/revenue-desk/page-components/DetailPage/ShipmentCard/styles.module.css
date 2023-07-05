@@ -19,7 +19,7 @@
 }
 
 .first_section {
-	width: 30vw;
+	width: 32vw;
 	padding: 10px 12px;
 	border-right: 1px dashed #bdbdbd;
 }
@@ -30,6 +30,7 @@
 	justify-content: center;
 	padding: 20px 40px;
 	border-right: 1px dashed #bdbdbd;
+	width: 30vw;
 }
 
 .last_section {
@@ -40,6 +41,7 @@
 	font-size: 16px;
 	font-weight: 500;
 	color: #4f4f4f;
+	width: 32vw;
 }
 
 .text {

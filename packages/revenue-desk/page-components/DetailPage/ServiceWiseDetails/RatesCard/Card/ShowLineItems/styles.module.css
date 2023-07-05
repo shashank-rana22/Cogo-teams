@@ -9,3 +9,13 @@
     padding: 6px;
     width:120px;
 }
+.heading_text{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.table{
+    display: 'flex';
+    flex-direction: 'column';
+    margin-bottom: 8px;
+}

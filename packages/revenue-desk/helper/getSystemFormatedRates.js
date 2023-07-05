@@ -31,14 +31,17 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			profit_percentage                 : validities?.profit_percentage,
 			validity_id                       : validities?.id,
 			validity_end                      : element?.validity_end || validities?.validity_end,
+			origin_locals                     : element?.origin_locals || {},
 			origin_locals_price               : element?.origin_locals?.total_price,
 			origin_locals_currency            : element?.origin_locals?.total_price_currency,
+			destination_locals                : element?.destination_locals || {},
 			destination_locals_price          : element?.destination_locals?.total_price,
 			destination_locals_currency       : element?.destination_locals?.total_price_currency,
 			updated_at                        : element?.updated_at,
 			mode                              : element?.mode,
 			via_route                         : element?.destination_main_port?.name,
-			total_price_currency              : validities.currency,
+			total_price_currency              : validities?.currency,
+			line_items                        : validities?.line_items,
 			shipping_line                     :	element?.shipping_line?.business_name
 												|| element?.shipping_line?.short_name,
 			destination_main_port_id: element?.destination_main_port_id
@@ -46,7 +49,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 				? element?.destination_main_port_id : null,
 			origin_main_port_id: element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 				? element?.origin_main_port_id : null,
-
 		};
 		row.rowData = rowData;
 		ROWS.push(row);
