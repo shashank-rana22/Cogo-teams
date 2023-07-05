@@ -8106,6 +8106,12 @@ const partner = {
 			module      : 'Expenses',
 			feature     : 'Expenses',
 		},
+		{
+			api          : 'create_vendor',
+			access_type  : 'private',
+			module       : 'Expenses',
+			service_name : 'vendor',
+		},
 	],
 	my_incident: [
 		{
