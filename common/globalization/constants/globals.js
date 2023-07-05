@@ -7,6 +7,9 @@ const GLOBAL_CONSTANTS = {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
+	country_ids: {
+		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
+	},
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code   : CURRENCY_CODE,
@@ -221,10 +224,19 @@ const GLOBAL_CONSTANTS = {
 		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		cargo_insurance_loader:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+		seller_address_svg: 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+	},
+	drive_link: {
+		introduction_to_cogoport_link:
+		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
+		git_course_link      : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
+		html_css_course_link : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
 	},
 
 	options: {
@@ -241,37 +253,49 @@ const GLOBAL_CONSTANTS = {
 		},
 		inco_term: {
 			cif: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIF - Cost, Insurance and Freight',
 			},
 			cfr: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CFR - Cost and Freight',
 			},
 			cpt: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CPT - Carriage Paid To',
 			},
 			cip: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIP - Carriage and Insurance Paid to',
 			},
 			dat: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAT - Delivered At Terminal',
 			},
 			dap: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAP - Delivered At Place',
 			},
 			ddp: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DDP - Delivered Duty Paid',
 			},
 			fob: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FOB - Free On Board',
 			},
 			exw: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'EXW - Ex Works',
 			},
 			fca: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FCA - Free Carrier',
 			},
 			fas: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FAS - Free Alongside Ship',
+
 			},
 		},
 		role_options: [
@@ -316,6 +340,13 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
+	service_supported_countries: {
+		feature_supported_service: {
+			cargo_insurance: {
+				countries: ['IN'],
+			},
+		},
+	},
 	services: {
 		fcl_freight: {
 			unit: {

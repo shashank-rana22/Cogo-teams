@@ -24,6 +24,7 @@ const ELEMENT_MAPPING = {
 	textarea          : TextAreaController,
 	'multi-select'    : MultiselectController,
 	number            : InputController,
+	password          : InputController,
 	'date-select'     : DatepickerController,
 	fileUpload        : UploadController,
 	email             : InputController,
