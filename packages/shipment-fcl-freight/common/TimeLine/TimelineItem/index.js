@@ -1,8 +1,9 @@
-import { Tooltip } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
+import isMileStoneCompleted from '../helpers/isMilestoneCompleted';
 import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
@@ -11,31 +12,8 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
-export default function TimelineItem({
-	item, isLast = false,
-	consecutivelyCompleted = false, icd_milestones_to_show_completed = [],
-}) {
-	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
-
-	const { primary_service } = useContext(ShipmentDetailContext) || {};
-
-	const milestoneToDisplayDate = {
-		'Vessel Departed From Origin (ETD)'   : getDepartureArrivalDate(primary_service, 'departure'),
-		'Vessel Arrived At Destination (ETA)' : getDepartureArrivalDate(primary_service, 'arrival'),
-	};
-
-	const displayCompletedDate = milestoneToDisplayDate[item?.milestone] || completed_on;
-
-	let isCompleted = (!!completed_on
-		|| (icd_milestones_to_show_completed || []).includes(milestone))
-		&& consecutivelyCompleted;
-
-	isCompleted = isLast ? !!completed_on : isCompleted;
-
-	const circleClass = `${circle} ${is_sub ? small : big} ${isCompleted ? completed : ''}`;
-	const connectingLineClass = `${connecting_line} ${isCompleted ? completed : ''}`;
-
-	const tooltipContent = (
+function TooltipContent({ milestone = '', displayCompletedDate = '', actual_completed_on = '', isCompleted = false }) {
+	return (
 		<div className={tooltip_content}>
 			<div className={label}>Milestone</div>
 			<div className={value}>{milestone}</div>
@@ -51,7 +29,7 @@ export default function TimelineItem({
 
 			{actual_completed_on ? (
 				<>
-					<div className={`${label} ${deviated}`}>Actual Completed On</div>
+					<div className={cl`${label} ${deviated}`}>Actual Completed On</div>
 					<div className={value}>
 						{getDisplayDate({ date: actual_completed_on, formatType: 'dateTime' })}
 					</div>
@@ -59,10 +37,45 @@ export default function TimelineItem({
 			) : null}
 		</div>
 	);
+}
+
+export default function TimelineItem({ item = {}, isLast = false, consecutivelyCompleted = false }) {
+	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
+
+	const { primary_service } = useContext(ShipmentDetailContext) || {};
+
+	const milestoneToDisplayDate = {
+		'Vessel Departed From Origin (ETD)'   : getDepartureArrivalDate(primary_service, 'departure'),
+		'Vessel Arrived At Destination (ETA)' : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
+
+	const displayCompletedDate = milestoneToDisplayDate[item?.milestone] || completed_on;
+
+	const isCompleted = isMileStoneCompleted({
+		timelineItem: {
+			completed_on: displayCompletedDate,
+			milestone,
+		},
+		consecutivelyCompleted,
+	})?.isCompleted && consecutivelyCompleted;
+
+	const circleClass = `${circle} ${is_sub ? small : big} ${isCompleted ? completed : ''}`;
+	const connectingLineClass = `${connecting_line} ${isCompleted ? completed : ''}`;
 
 	return (
 		<div className={container}>
-			<Tooltip content={tooltipContent} placement="bottom" interactive>
+			<Tooltip
+				content={(
+					<TooltipContent
+						milestone={milestone}
+						displayCompletedDate={displayCompletedDate}
+						actual_completed_on={actual_completed_on}
+						isCompleted={isCompleted}
+					/>
+				)}
+				placement="bottom"
+				interactive
+			>
 				<div className={circleClass}>
 					{isCompleted && !is_sub ? <IcMTick /> : null}
 				</div>
