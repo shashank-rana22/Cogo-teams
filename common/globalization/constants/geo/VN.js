@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
 		id   : '177fcbad-8ef7-4324-871c-6c31745f4411',
@@ -403,6 +404,11 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
+		education_level: {
+			post_graduates_degree : [],
+			graduate_degree       : [],
+			doctorate_degree      : [],
+		},
 	},
 	navigations: {
 		supply_dashboard: {

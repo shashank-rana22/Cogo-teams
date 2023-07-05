@@ -26,3 +26,42 @@
 	padding: 12px 0 0;
 	font-weight: 500;
 }
+
+.signed_document_container {
+	display: flex;
+}
+
+.refresh_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.refresh_icon {
+	cursor: pointer;
+	transition: 0.2s all;
+	transform: scale(0.9);
+
+	&:hover {
+		transform: scale(1);
+	}
+}
+
+.animate {
+	transform: scale(0.9);
+	animation: spin-anim 1.2s linear infinite;
+
+	&:hover {
+		transform: scale(1);
+	}
+
+	@keyframes spin-anim {
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(-360deg);
+		}
+	}
+}
