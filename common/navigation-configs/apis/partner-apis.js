@@ -8106,6 +8106,12 @@ const partner = {
 			module      : 'Expenses',
 			feature     : 'Expenses',
 		},
+		{
+			api          : 'create_vendor',
+			access_type  : 'private',
+			module       : 'Expenses',
+			service_name : 'vendor',
+		},
 	],
 	my_incident: [
 		{
@@ -12772,6 +12778,38 @@ const partner = {
 		{
 			api         : 'get_payments_dunning_delete_master_exception',
 			access_type : 'private',
+		},
+	],
+	ftl_admin: [
+		{
+			api          : 'update_shipment_backdate_validation_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_pending_task_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_invoice_preference',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_invoice_combination_edit_reason',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };
