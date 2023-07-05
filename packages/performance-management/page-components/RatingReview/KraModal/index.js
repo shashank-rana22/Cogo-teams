@@ -1,13 +1,11 @@
 import { Button, Modal, RatingComponent, Textarea, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import InputEmployeeManualTarget from './InputEmployeeManualTarget';
 import styles from './styles.module.css';
 import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
-
-const MIN_RATING = 0;
 
 function KraModal({ show, setShow, selectCycle }) {
 	const {
@@ -20,10 +18,8 @@ function KraModal({ show, setShow, selectCycle }) {
 	const {
 		loading: SubmitLoading,
 		updateEmployeeFinalRating,
+		starRating, setStarRating, comments, setCommemts,
 	} = useUpdateEmployeeFinalRating(data, selectCycle);
-
-	const [starRating, setStarRating] = useState(MIN_RATING);
-	const [comments, setCommemts] = useState('');
 
 	if (loading) return <Placeholder height="20px" width="100%" />;
 
@@ -98,6 +94,7 @@ function KraModal({ show, setShow, selectCycle }) {
 									{' '}
 									{data?.average_overall_rating}
 								</div>
+
 								<div className={styles.rating_obtained}>
 									Rating:
 									{' '}
@@ -185,10 +182,7 @@ function KraModal({ show, setShow, selectCycle }) {
 					<Button
 						themeType="accent"
 						loading={SubmitLoading}
-						onClick={() => updateEmployeeFinalRating({
-							starRating,
-							comments,
-						})}
+						onClick={updateEmployeeFinalRating}
 					>
 						Submit
 					</Button>

@@ -1,8 +1,9 @@
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 
-import getRatingInfoColumn from './getRatingInfoColumn';
+import ratingInfoColumn from './getRatingInfoColumn';
 import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
@@ -10,31 +11,31 @@ const TABLE_EMPTY_TEXT = 'No data to show';
 function RatingInfo({ ratingInfo, loading }) {
 	const { kra_name, kra_description, kra_ratings, value_type } = ratingInfo || {};
 
-	const columns = getRatingInfoColumn({ });
+	const KRA_MAPPING = {
+		kra_name,
+		kra_description,
+		rating_schema: value_type === 'flat' ? 'Absolute Value' : 'Percentage (%)',
+	};
 
 	return (
 		<div>
 			<div className={styles.kra_description}>
-				<div>
-					<strong>KRA Name : </strong>
-					{kra_name || 'N/A'}
-				</div>
+				{Object.keys(KRA_MAPPING).map((element) => (
+					<div key={element}>
+						<strong>
+							{startCase(element)}
+							:
+							{' '}
+						</strong>
 
-				<div>
-					<strong>KRA Description : </strong>
-					{kra_description || 'N/A'}
-				</div>
-
-				<div>
-					<strong>Rating Schema : </strong>
-					{value_type === 'flat' ? 'Absolute Value' : 'Percentage (%)'}
-				</div>
-
+						{KRA_MAPPING[element] || 'N/A'}
+					</div>
+				))}
 			</div>
 
 			<div className={styles.table_style}>
 				<StyledTable
-					columns={columns}
+					columns={ratingInfoColumn}
 					data={kra_ratings || []}
 					emptyText={TABLE_EMPTY_TEXT}
 					loading={loading}

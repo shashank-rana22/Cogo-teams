@@ -2,16 +2,22 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { format } from '@cogoport/utils';
+import { useState } from 'react';
+
+const MIN_RATING = 0;
 
 const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 	const { end_date, start_date } = selectCycle || {};
+
+	const [starRating, setStarRating] = useState(MIN_RATING);
+	const [comments, setCommemts] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_employee_final_rating',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateEmployeeFinalRating = async ({ starRating, comments }) => {
+	const updateEmployeeFinalRating = async () => {
 		try {
 			await trigger({
 				data: {
@@ -33,6 +39,10 @@ const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 	return {
 		updateEmployeeFinalRating,
 		loading,
+		starRating,
+		setStarRating,
+		comments,
+		setCommemts,
 	};
 };
 
