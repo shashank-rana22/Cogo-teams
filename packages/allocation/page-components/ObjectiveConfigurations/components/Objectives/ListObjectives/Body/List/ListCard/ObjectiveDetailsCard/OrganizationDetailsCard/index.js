@@ -3,62 +3,27 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const CARD_DATA_MAPPING = [
+	{
+		key   : 'countries',
+		label : 'Country',
+	},
+	{
+		key   : 'states',
+		label : 'State',
+	},
+	{
+		key   : 'cities',
+		label : 'City',
+	},
+	{
+		key   : 'pincodes',
+		label : 'Pincode',
+	},
+];
+
 function OrganizationDetailsCard(props) {
 	const { organizationDetails } = props;
-	const { countries, states, cities, pincodes } = organizationDetails;
-
-	const CARD_DATA_MAPPING = [
-		{
-			key   : 'countries',
-			label : 'Country',
-			value : (
-				// eslint-disable-next-line react/jsx-no-useless-fragment
-				<>
-					{!isEmpty(countries) && countries.map((country) => (
-						<Pill key={country.id}>
-							{country.name}
-						</Pill>
-					))}
-				</>
-			),
-		},
-		{
-			key   : 'states',
-			label : 'State',
-			value : (
-				// eslint-disable-next-line react/jsx-no-useless-fragment
-				<>
-					{!isEmpty(states) && states.map((state) => (
-						<Pill key={state.id}>{state.name}</Pill>
-					))}
-				</>
-			),
-		},
-		{
-			key   : 'cities',
-			label : 'City',
-			value : (
-				// eslint-disable-next-line react/jsx-no-useless-fragment
-				<>
-					{!isEmpty(cities) && cities.map((city) => (
-						<Pill key={city.id}>{city.name}</Pill>
-					))}
-				</>
-			),
-		},
-		{
-			key   : 'pincodes',
-			label : 'Pincode',
-			value : (
-				// eslint-disable-next-line react/jsx-no-useless-fragment
-				<>
-					{!isEmpty(pincodes) && pincodes.map((pincode) => (
-						<Pill key={pincode.id}>{pincode.name}</Pill>
-					))}
-				</>
-			),
-		},
-	];
 
 	return (
 		<div className={styles.container}>
@@ -66,9 +31,11 @@ function OrganizationDetailsCard(props) {
 
 			<div className={styles.card}>
 				{CARD_DATA_MAPPING.map((item) => {
-					const { key, label, value } = item;
+					const { key, label } = item;
 
-					if (isEmpty(organizationDetails[key])) return null;
+					const locationItem = organizationDetails[key];
+
+					if (isEmpty(locationItem)) return null;
 
 					return (
 						<div key={key} className={styles.label_value_cotainer}>
@@ -76,7 +43,17 @@ function OrganizationDetailsCard(props) {
 								{label}
 								:
 							</div>
-							<div>{value}</div>
+
+							<div className={styles.pills}>
+								{locationItem.map((location) => (
+									<Pill
+										size="md"
+										key={location.id}
+									>
+										{location.name}
+									</Pill>
+								))}
+							</div>
 						</div>
 					);
 				})}

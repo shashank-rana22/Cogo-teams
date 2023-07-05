@@ -134,6 +134,7 @@ const useGetObjectiveDetails = (props) => {
 			end_date        : new Date(),
 			qoutation_count : 10,
 			search_count    : 30,
+			shipment_count  : 10,
 		},
 	};
 
