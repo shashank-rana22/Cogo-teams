@@ -29,7 +29,18 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 	const mode = watch('booking_mode');
 
 	const onSubmit = (values) => {
-		const payload = { ...values, id: item?.id, action_name: edit ? 'update' : undefined };
+		const POC_DATA = [];
+
+		(values.pocs_data || []).forEach((poc) => {
+			POC_DATA.push({
+				name                : poc?.name,
+				email               : poc?.email,
+				mobile_country_code : poc?.mobile?.country_code,
+				mobile_number       : poc?.mobile?.number,
+			});
+		});
+
+		const payload = { ...values, pocs_data: POC_DATA, id: item?.id, action_name: edit ? 'update' : undefined };
 		handleRepository(payload, listRepository, setShowModal).then(() => {
 			if (edit) {
 				setEdit(false);

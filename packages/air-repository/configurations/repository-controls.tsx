@@ -123,7 +123,7 @@ const repositoryControls = () => ({
 					},
 				},
 				{
-					name        : 'mobile_number',
+					name        : 'mobile',
 					type        : 'mobile',
 					label       : 'Enter Contact Number',
 					placeholder : 'Enter contact number',
