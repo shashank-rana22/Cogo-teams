@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ScoreModal from './ScoreModal/index.js';
 import styles from './styles.module.css';
 
-function SupplierEvaluation() {
+function SupplierEvaluation({ setStatus }) {
 	const [show, setShow] = useState(false);
 	const columns = [
 		{
@@ -108,8 +108,14 @@ function SupplierEvaluation() {
 				{show && <ScoreModal show={show} setShow={setShow} />}
 			</div>
 			<div className={styles.flex_right}>
-				<Button themeType="secondary">Save & Do it Later</Button>
-				<Button>Submit & Next</Button>
+				<Button
+					themeType="secondary"
+					onClick={() => setStatus('supplier_approval')}
+				>
+					Save & Do it Later
+
+				</Button>
+				<Button onClick={() => setStatus('supplier_approval')}>Submit & Next</Button>
 			</div>
 		</>
 	);

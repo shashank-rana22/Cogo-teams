@@ -18,21 +18,23 @@ function Supplier() {
 		{ title: 'Contract and SLA', key: 'contract_sla' },
 
 	];
-	const [active, setActive] = useState('market_feedback');
+	const [status, setStatus] = useState('market_feedback');
 	return (
 		<>
 			<h2>Governance Manager</h2>
 			<Item isSupplierPage />
 			<Stepper
-				active={active}
-				setActive={setActive}
+				active={status}
+				setActive={setStatus}
 				items={items}
 				shadowed
 				className={styles.stepper}
 			/>
-			{/* <NeedAnalysis /> */}
-			{/* <MarketFeedback /> */}
-			<SupplierEvaluation />
+			{{
+				need_analysis       : <NeedAnalysis setStatus={setStatus} />,
+				market_feedback     : <MarketFeedback setStatus={setStatus} />,
+				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
+			}[status]}
 
 		</>
 	);
