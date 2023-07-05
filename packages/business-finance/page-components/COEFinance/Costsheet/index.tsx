@@ -289,10 +289,10 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{sellData?.totalQuotational
+								{(sellData?.totalQuotational && sellData?.currencyQuotational)
 									? formatAmount({
 										amount   : sellData?.totalQuotational,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										currency : sellData?.currencyQuotational,
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',
@@ -343,10 +343,10 @@ function CostSheet() {
 						<div className={styles.credit}>
 							Quotation Total :
 							<div className={styles.value_text}>
-								{buyData?.totalQuotational
+								{(buyData?.totalQuotational && buyData?.currencyQuotational)
 									? formatAmount({
 										amount   : buyData?.totalQuotational,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										currency : buyData?.currencyQuotational,
 										options  : {
 											style           : 'currency',
 											currencyDisplay : 'code',
