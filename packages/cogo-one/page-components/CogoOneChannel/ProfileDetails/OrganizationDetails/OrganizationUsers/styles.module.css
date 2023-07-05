@@ -20,31 +20,31 @@
 			transform: none;
 		}
 	}
+}
 
-	.content {
-		display: flex;
-		width: 100%;
-		margin-top: 5px;
-	}
+.content {
+	display: flex;
+	width: 100%;
+	margin-top: 5px;
+}
 
-	.agent_type {
-		font-size: 12px;
-		font-weight: 600;
-		color: #221f20;
-	}
+.agent_type {
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
 
-	.name {
-		padding-left: 4px;
-		font-size: 12px;
-		font-weight: 500;
-		color: #221f20;
-	}
+.name {
+	padding-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
 
-	.type {
-		font-size: 12px;
-		font-weight: 500;
-		color: #221f20;
-	}
+.type {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .disable_call_icon {

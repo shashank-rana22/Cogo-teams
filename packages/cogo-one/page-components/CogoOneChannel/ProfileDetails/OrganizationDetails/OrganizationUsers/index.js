@@ -21,22 +21,24 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const showMoreList = (work_scopes || []).length > MAX_SHOW_LENGTH;
 
 	const handleCall = () => {
-		if (mobile_number && hasVoiceCallAccess) {
-			dispatch(
-				setProfileState({
-					is_in_voice_call          : true,
-					voice_call_recipient_data : {
-						startTime    : new Date(),
-						orgId        : organization_id,
-						userId       : user_id,
-						mobile_number,
-						mobile_country_code,
-						userName     : name,
-						isUnkownUser : !user_id,
-					},
-				}),
-			);
+		if (!mobile_number || !hasVoiceCallAccess) {
+			return;
 		}
+
+		dispatch(
+			setProfileState({
+				is_in_voice_call          : true,
+				voice_call_recipient_data : {
+					startTime    : new Date(),
+					orgId        : organization_id,
+					userId       : user_id,
+					mobile_number,
+					mobile_country_code,
+					userName     : name,
+					isUnkownUser : !user_id,
+				},
+			}),
+		);
 	};
 
 	return (

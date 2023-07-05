@@ -185,7 +185,7 @@ function OrganizationDetails({
 				<>
 					<div className={styles.agent_title}>Agent Details</div>
 					<div>
-						<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
+						<OrgAgentDetails agent={agent} />
 					</div>
 				</>
 

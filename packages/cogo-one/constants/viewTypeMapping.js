@@ -109,7 +109,6 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			show_organization_users     : true,
-
 		},
 	},
 	support: {
