@@ -1,8 +1,8 @@
-import getGeoConstants from "@cogoport/globalization/constants/geo";
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const geo = getGeoConstants();
 
-const fieldsInPaymentDetails = () =>{
+const fieldsInPaymentDetails = () => {
     const FIELDS_TO_SHOW = {
         account_holder_name : 'Account Holder’s Name',
         account_number      : 'Account No.',
@@ -17,6 +17,6 @@ const fieldsInPaymentDetails = () =>{
         tax_document_url    : `${geo.others.registration_number.label} Proof`,
     };
     return FIELDS_TO_SHOW;
-}
+};
 
 export default fieldsInPaymentDetails;

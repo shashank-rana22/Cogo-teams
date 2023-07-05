@@ -4,6 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useCallback, useState } from 'react';
 
 import getControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
@@ -49,9 +50,9 @@ function useVendorBankDetail({
 	}, { manual: true });
 
 	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
+		const REGEX = GLOBAL_CONSTANTS.regex_patterns.ifsc_code;
 
-		if (ifscCode?.match(regex)) {
+		if (ifscCode?.match(REGEX)) {
 			try {
 				const sessionData = await triggerGetBankDetails({
 					params: { ifsc_code: ifscCode },

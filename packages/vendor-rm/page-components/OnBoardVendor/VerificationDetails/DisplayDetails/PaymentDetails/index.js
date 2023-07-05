@@ -1,6 +1,6 @@
-
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
 import fieldsInPaymentDetails from '../../../../utils/fieldsInPaymentDetails';
 import getShortFileName from '../../../../utils/getShortFileName';
 
