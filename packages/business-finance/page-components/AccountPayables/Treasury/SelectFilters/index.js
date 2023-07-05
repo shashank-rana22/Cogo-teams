@@ -1,7 +1,7 @@
 import { Input, SingleDateRange } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
-import SegmentedControl from '../../../commons/SegmentedControl';
+import SegmentedControl from '../../../commons/SegmentedControl/index.tsx';
 import {
 	ALL_INR_USD,
 	ALL_REQUEST,

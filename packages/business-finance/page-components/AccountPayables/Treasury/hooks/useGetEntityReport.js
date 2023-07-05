@@ -1,7 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { parseInt } from 'lodash';
 import { useCallback, useEffect } from 'react';
+
+const CHECK_LEAP_YEAR = 4;
+const CHECK_DIVISIBLE = 0;
+const LEAP_YEAR_HUNDRED = 100;
+const LEAP_YEAR_FOUR = 400;
 
 const useGetEntityReport = ({
 	showDetails,
@@ -18,11 +22,11 @@ const useGetEntityReport = ({
 		formatedToDate = `${year}-01-31 05:30:00`;
 	} else if (month === '2') {
 		formatedFromDate = `${year}-02-01 05:30:00`;
-		const formatedYear = parseInt(year);
+		const formatedYear = parseInt(year, 10);
 		if (
-			formatedYear / 4 === 0
-			&& formatedYear / 100 === 0
-			&& formatedYear / 400 === 0
+			formatedYear / CHECK_LEAP_YEAR === CHECK_DIVISIBLE
+			&& formatedYear / LEAP_YEAR_HUNDRED === CHECK_DIVISIBLE
+			&& formatedYear / LEAP_YEAR_FOUR === CHECK_DIVISIBLE
 		) {
 			formatedToDate = `${year}-02-29 05:30:00`;
 		} else formatedToDate = `${year}-02-28 05:30:00`;

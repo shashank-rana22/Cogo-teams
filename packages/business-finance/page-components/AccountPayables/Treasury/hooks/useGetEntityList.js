@@ -5,6 +5,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+const CHECK_LIST_EMPTY = 0;
+
 const useGetEntityList = () => {
 	const [entityFilters, setEntityFilters] = useState({
 		activeEntity   : '301',
@@ -99,7 +101,7 @@ const useGetEntityList = () => {
 	const filtervalue = Object.values(entityFilters);
 
 	const filterClear = filtervalue.filter((item) => {
-		if (Array.isArray(item) && item.length === 0) {
+		if (Array.isArray(item) && item.length === CHECK_LIST_EMPTY) {
 			return false;
 		}
 		return item !== undefined && item !== '';

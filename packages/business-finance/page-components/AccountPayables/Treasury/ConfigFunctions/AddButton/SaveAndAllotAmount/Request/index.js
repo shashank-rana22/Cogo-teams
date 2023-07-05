@@ -12,6 +12,9 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
+const REQUEST_INDEX = 1;
+const CHECK_AMOUNT = 0;
+
 function Request({ item, index, currency, refetch }) {
 	const { onApprove, onReject, loadingOnReject, loadingOnApprove } =		useApproveRejectFund({ item, refetch });
 
@@ -35,7 +38,7 @@ function Request({ item, index, currency, refetch }) {
 						{' '}
 						Request
 						{' '}
-						{index + 1}
+						{index + REQUEST_INDEX}
 					</div>
 					<div className={styles.created}>
 						{formatDate({
@@ -70,7 +73,7 @@ function Request({ item, index, currency, refetch }) {
 				<div className={styles.column2}>
 					<Button
 						size="sm"
-						disabled={editAmount < 0 || loadingOnApprove}
+						disabled={editAmount < CHECK_AMOUNT || loadingOnApprove}
 						onClick={handleSubmit(onApprove)}
 						style={{ marginRight: '12px' }}
 					>

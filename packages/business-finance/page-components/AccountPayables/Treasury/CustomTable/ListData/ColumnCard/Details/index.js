@@ -2,13 +2,19 @@ import { Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-import SegmentedControl from '../../../../../../commons/SegmentedControl';
+import SegmentedControl from '../../../../../../commons/SegmentedControl/index.tsx';
 import { ENTITY_LIST } from '../../../../Constants';
 import Loader from '../../../../Loader';
 
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 import ViewDetailsModal from './ViewDetailsModal';
+
+const LAST_INDEX = 1;
+
+const MAX_BANK_NAME_LENGTH = 20;
+const MAX_BANK_ACCOUNT_LENGTH = 25;
+const MIN_LENGTH = 0;
 
 function Details({
 	item, data, loading, setActiveEntityCode, activeEntityCode, filters,
@@ -46,7 +52,7 @@ function Details({
 				<LineItemsHeader />
 				{list.map((singleitem, index) => (
 					<div
-						className={`${styles.col} ${listTotal - 1 === index ? styles.islast : ''}`}
+						className={`${styles.col} ${listTotal - LAST_INDEX === index ? styles.islast : ''}`}
 						key={singleitem?.id}
 					>
 						<div className={styles.account_number}>
@@ -69,9 +75,12 @@ function Details({
 								placement="top"
 							>
 
-								<div className={styles.value}>{`${singleitem?.bankName.substring(0, 20)}...`}</div>
-								<div className={styles.text}>{`${singleitem?.accountNumber.substring(0, 25)}`}</div>
-
+								<div className={styles.value}>
+									{`${singleitem?.bankName.substring(MIN_LENGTH, MAX_BANK_NAME_LENGTH)}...`}
+								</div>
+								<div className={styles.text}>
+									{`${singleitem?.accountNumber.substring(MIN_LENGTH, MAX_BANK_ACCOUNT_LENGTH)}`}
+								</div>
 							</Popover>
 						</div>
 						<div className={styles.currency}>{singleitem?.currency || '-'}</div>

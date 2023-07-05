@@ -3,10 +3,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 4;
+
 function Loader() {
 	return (
 		<div>
-			{[...Array(4)].map((item) => (<Placeholder height="46px" key={item} className={styles.margin} />))}
+			{[...Array(ARRAY_LENGTH)].map((item) => (
+				<Placeholder height="46px" key={item} className={styles.margin} />))}
 		</div>
 	);
 }

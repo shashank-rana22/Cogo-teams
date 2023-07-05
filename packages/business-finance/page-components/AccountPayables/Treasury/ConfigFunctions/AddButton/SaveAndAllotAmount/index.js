@@ -5,6 +5,8 @@ import EnterAmountBox from './EnterAmountBox';
 import Request from './Request';
 import styles from './styles.module.css';
 
+const CHECK_PENDING_REQUEST = 0;
+
 function SaveAndAllotAmount({ itemData, setShowModal, refetch, showModel }) {
 	const {
 		allocatedAmount,
@@ -40,7 +42,7 @@ function SaveAndAllotAmount({ itemData, setShowModal, refetch, showModel }) {
 			<div className={styles.container}>
 
 				<div className={styles.sub_container}>
-					{pendingRequestsCount > 0 ? (
+					{pendingRequestsCount > CHECK_PENDING_REQUEST ? (
 						<div className={styles.bank}>
 							<div className={styles.label_text}>Bank A/C</div>
 							<div className={styles.value_text}>
@@ -53,51 +55,44 @@ function SaveAndAllotAmount({ itemData, setShowModal, refetch, showModel }) {
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Allocated Funds</div>
 						<div className={styles.value_text}>
-							{
-                        formatAmount({
-                        	amount: allocatedAmount,
-                        	currency,
-                        	options:
-							{
-								style           : 'currency',
-                        		currencyDisplay : 'code',
-                        	},
-                        })
-}
+							{formatAmount({
+								amount  : allocatedAmount,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Utilized</div>
 						<div className={styles.value_text}>
-							{
-                        formatAmount({
-                        	amount  : utilizedAmount,
-                        	currency,
-                        	options : {
-                        		style           : 'currency',
-                        		currencyDisplay : 'code',
-                        	},
-                        })
-                    }
+							{formatAmount({
+								amount  : utilizedAmount,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Balance</div>
 						<div className={styles.value_text}>
-							{
-                        formatAmount({
-                        	amount  : utilizedAmount,
-                        	balance,
-                        	options : {
-                        		style           : 'currency',
-                        		currencyDisplay : 'code',
-                        	},
-                        })
-                    }
+							{formatAmount({
+								amount  : utilizedAmount,
+								balance,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					</div>
 				</div>
-				{pendingRequestsCount > 0 ? (
+				{pendingRequestsCount > CHECK_PENDING_REQUEST ? (
 					<div>
 						{(fundRequests || []).map((item, index) => (
 							<Request

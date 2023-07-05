@@ -1,6 +1,6 @@
 import React from 'react';
 
-import StyledTable from '../../commons/StyledTable';
+import StyledTable from '../../commons/StyledTable/index.tsx';
 
 import EntityConfig from './Configuration/EntityConfig';
 import CustomTable from './CustomTable';
