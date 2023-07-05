@@ -586,6 +586,17 @@ function asyncListPromotions() {
 	};
 }
 
+function asyncInsuranceCommoditiesList() {
+	return {
+		labelKey     : 'commodity',
+		valueKey     : 'id',
+		endpoint     : 'saas/insurance/list-commodities',
+		initialCall  : true,
+		authkey      : 'get_saas_insurance_list_commodities',
+		microService : 'business_finance',
+	};
+}
+
 function asyncListDunningTemplates() {
 	return {
 		labelKey    : 'name',
@@ -688,6 +699,7 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 	asyncListShipmentPendingTasks,
