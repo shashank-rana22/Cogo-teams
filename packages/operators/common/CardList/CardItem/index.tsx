@@ -43,7 +43,7 @@ function CardItem({
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
-				{fields.map((field) => {
+				{(fields || []).map((field) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div

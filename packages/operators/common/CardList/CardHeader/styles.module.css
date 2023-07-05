@@ -5,10 +5,10 @@
 	padding: 8px 20px;
 	margin-top: 20px;
 	margin-bottom: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #fff;
-	background: #333;
+	color: var(--color-secondary-5);
+	background: var(--color-secondary-greyscale-2);
 	border-radius: 8px;
 }
 
@@ -16,5 +16,5 @@
 	display: flex;
 	flex: var(--span);
 	padding: 4px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }

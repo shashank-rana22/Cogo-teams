@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmptyState({ heading = 'results', placement = 'center' }) {
+function EmptyState({ heading = 'operators', placement = 'center' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>

@@ -11,7 +11,7 @@
 
 .heading {
 	max-height: 22px;
-	font-size: 13px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #221f20;
 }
@@ -19,7 +19,7 @@
 .label {
 	max-height: 16px;
 	margin-bottom: 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .item {
