@@ -22,12 +22,12 @@ function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters, stats
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
 	const { dashboardData = [{}], loading } = useGetDashboardData(filters);
-	const { LOCKED = 0, FINANCE_ACCEPTED = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
+	const { LOCKED = 0, ALL_APPROVED_BILLS = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
 	const { PAYRUN_BILL_APPROVED = 0	} = statsCOEApprovedData || {};
 
 	const Status = [
 		{ id: 1, label: 'Pending', value: LOCKED },
-		{ id: 2, label: 'COE Approved', value: FINANCE_ACCEPTED },
+		{ id: 2, label: 'COE Approved', value: ALL_APPROVED_BILLS },
 		{ id: 3, label: 'COE Rejected', value: COE_REJECTED },
 		{ id: 2, label: 'Finance Approved', value: PAYRUN_BILL_APPROVED },
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED },
