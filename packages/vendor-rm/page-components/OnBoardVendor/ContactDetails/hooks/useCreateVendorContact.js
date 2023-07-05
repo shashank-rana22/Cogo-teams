@@ -4,7 +4,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
@@ -25,7 +24,6 @@ function useCreateVendorContact({
 		formState: { errors },
 		handleSubmit,
 		getValues,
-		setValue,
 	} = useForm();
 
 	const isUpdateAction = !isEmpty(contact_details);
@@ -69,31 +67,6 @@ function useCreateVendorContact({
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
-
-	// useEffect(() => {
-	// 	const mapping = {
-	// 		mobile_number: {
-	// 			number: contact_details?.mobile_number?.number
-	// 							|| contact_details?.mobile_number,
-	// 			country_code: contact_details?.mobile_number?.country_code
-	// 							|| contact_details?.mobile_country_code || '+91',
-	// 		},
-	// 		whatsapp_number   : getWhatsAppNumber(),
-	// 		contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
-	// 	};
-
-	// 	controls.forEach((field) => {
-	// 		if (field.name === 'contact_proof_url') {
-	// 			setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl || contact_details?.[field.name]);
-	// 		} else {
-	// 			setValue(
-	// 				`${field.name}`,
-	// 				mapping[field.name]
-	// 				|| contact_details?.[field.name],
-	// 			);
-	// 		}
-	// 	});
-	// }, [contact_details, getWhatsAppNumber, setValue, vendorInformation]);
 
 	return {
 		fields: controls,
