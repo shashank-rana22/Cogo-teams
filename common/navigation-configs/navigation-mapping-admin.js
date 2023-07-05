@@ -1417,7 +1417,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
