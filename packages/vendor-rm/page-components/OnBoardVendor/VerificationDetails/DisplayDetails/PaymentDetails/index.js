@@ -6,6 +6,8 @@ import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
+const geo = getGeoConstants();
+
 const FIELDS_TO_SHOW = {
 	account_holder_name : 'Account Holder’s Name',
 	account_number      : 'Account No.',
@@ -16,11 +18,9 @@ const FIELDS_TO_SHOW = {
 	branch_name         : 'Branch Name',
 	bank_document_url   : 'Cancelled Cheque/Passbook',
 	address             : 'Billing Address',
-	tax_number          : 'GST Number',
-	tax_document_url    : 'GST Proof',
+	tax_number          : `${geo.others.registration_number.label} Number`,
+	tax_document_url    : `${geo.others.registration_number.label} Proof`,
 };
-
-const geo = getGeoConstants();
 
 const PAYMENT_DETAILS_CONSTANT = 0;
 
@@ -29,7 +29,6 @@ const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 function PaymentDetails({
 	detail,
 }) {
-	const REGISTRATION_TYPES = geo.others.navigations.onboard_vendor.registration_types;
 	const getDisplayValue = ({ fieldName }) => {
 		const val = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName] || '';
 
@@ -71,15 +70,8 @@ function PaymentDetails({
 			<div className={styles.body}>
 				<div className={styles.single_record}>
 					{Object.keys(FIELDS_TO_SHOW).map((fieldName) => {
-						const fieldValue = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName];
-						let label = FIELDS_TO_SHOW[fieldName];
-						if (fieldValue) {
-							if (REGISTRATION_TYPES && label === 'GST Number') {
-								label = 'VAT Number';
-							} else if (REGISTRATION_TYPES && label === 'GST Proof') {
-								label = 'VAT Proof';
-							}
-						}
+						const label = FIELDS_TO_SHOW[fieldName];
+
 						return (
 							<div
 								key={fieldName}

@@ -104,7 +104,7 @@ function useVendorBankDetail({
 		initialCall: false, params: { filters: { type: ['pincode'] } },
 	}));
 
-	const controls = getControls({ country_id });
+	const { controls } = getControls({ country_id });
 
 	const newControls = (controls || []).map((controlItem) => {
 		const { name } = controlItem;
