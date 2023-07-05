@@ -1,6 +1,6 @@
 import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactFragment } from 'react';
 
 import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
@@ -33,11 +33,7 @@ function List({
 	const { list = {}, total_count:totalCount } = listData;
 	const [isOpen, setIsOpen] = useState(null);
 
-	console.log('isOpen', isOpen);
-
 	const handlePOCDetails = (itm) => {
-		console.log('itm', itm);
-
 		setIsOpen(isOpen === null ? itm.id : null);
 		setIsOpen(itm.id);
 	};

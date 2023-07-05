@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactFragment } from 'react';
 
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
 
