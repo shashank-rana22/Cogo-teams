@@ -2,7 +2,15 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useGetCustomerList({ filters, setFilters }) {
+interface Props {
+	filters?: {
+		search?: string;
+		pageIndex?: number;
+	};
+	setFilters?: Function;
+}
+
+function useGetCustomerList({ filters, setFilters }:Props) {
 	const { search, pageIndex } = filters || {};
 	const [
 		{ data, loading },

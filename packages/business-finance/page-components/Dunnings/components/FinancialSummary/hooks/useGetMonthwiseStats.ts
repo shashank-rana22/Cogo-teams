@@ -1,7 +1,14 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useGetMonthwiseStats({ statsFilter }) {
+interface Props {
+	statsFilter?: {
+		year?: string | number;
+		viewType?: string;
+	}
+}
+
+function useGetMonthwiseStats({ statsFilter }:Props) {
 	const { year, viewType } = statsFilter || {};
 	const [
 		{ data, loading },

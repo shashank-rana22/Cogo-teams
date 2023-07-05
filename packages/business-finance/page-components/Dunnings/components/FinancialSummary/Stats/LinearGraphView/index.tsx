@@ -7,7 +7,15 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function LinearGraphView({ linearData }) {
+interface ObjInterface {
+	data?: object[],
+}
+
+interface Props {
+	linearData?: ObjInterface[];
+}
+
+function LinearGraphView({ linearData }:Props) {
 	const [totalOutstanding] = linearData || [];
 	const { data } = totalOutstanding || {};
 	const geo = getGeoConstants();

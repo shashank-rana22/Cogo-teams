@@ -3,8 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
-import List from '../../../../commons/List/index.tsx';
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
+import List from '../../../../commons/List';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 
 import config from './config';
 import styles from './styles.module.css';
@@ -12,7 +12,19 @@ import styles from './styles.module.css';
 const TEXT_LIMIT_NUM = 20;
 const DEFAULT_PAGE_INDEX = 1;
 
-function ListView({ filters, setFilters, data, loading }) {
+interface Props {
+	filters?: {
+		search?: string;
+		pageIndex?: number;
+	};
+	setFilters?: Function;
+	data?: {
+		list: object[];
+	};
+	loading?: boolean;
+}
+
+function ListView({ filters, setFilters, data, loading }:Props) {
 	const functions = {
 		renderName: ({ tradePartyDetailName }) => (
 			<div>{showOverflowingNumber(tradePartyDetailName, TEXT_LIMIT_NUM)}</div>
@@ -74,7 +86,7 @@ function ListView({ filters, setFilters, data, loading }) {
 					loading={loading}
 					page={filters.pageIndex || DEFAULT_PAGE_INDEX}
 					handlePageChange={(pageValue) => {
-						setFilters((p) => ({
+						setFilters((p:object) => ({
 							...p,
 							pageIndex: pageValue,
 						}));

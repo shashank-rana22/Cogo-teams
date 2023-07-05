@@ -1,4 +1,4 @@
-import { Bar } from '@cogoport/charts/bar';
+import { Bar, BarDatum } from '@cogoport/charts/bar';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -7,7 +7,11 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function BarGraphView({ barData = [] }) {
+interface Props {
+	barData?: BarDatum[];
+}
+
+function BarGraphView({ barData = [] }:Props) {
 	const keys = ['Collected Amount', 'Outstanding Amount'];
 	const geo = getGeoConstants();
 	const currency = geo.country.currency.code;
@@ -24,7 +28,7 @@ function BarGraphView({ barData = [] }) {
 					</div>
 				) : (
 					<Bar
-						className="barGraph"
+						// className="barGraph"
 						colors={['#DDEBC0', '#ACDADF']}
 						width={1600}
 						height={400}
@@ -37,7 +41,7 @@ function BarGraphView({ barData = [] }) {
 						labelSkipWidth={16}
 						labelSkipHeight={16}
 						layout="vertical"
-						groupMode="stack"
+						groupMode="stacked"
 						enableGridY={false}
 						enableGridX
 						axisLeft={{
@@ -68,6 +72,7 @@ function BarGraphView({ barData = [] }) {
 						}}
 						legends={[
 							{
+								dataFrom          : null,
 								anchor            : 'top-right',
 								direction         : 'column',
 								justify           : false,
