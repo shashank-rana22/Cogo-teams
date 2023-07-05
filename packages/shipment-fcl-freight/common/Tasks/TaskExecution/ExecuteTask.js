@@ -17,6 +17,7 @@ import {
 	UploadSI,
 	UploadComplianceDocs,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -196,6 +197,10 @@ function ExecuteTask({
 				taskListRefetch={taskListRefetch}
 			/>
 		);
+	}
+
+	if (task?.task === 'generate_cargo_insurance') {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
 	return (

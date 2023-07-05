@@ -1,5 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image, useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -44,7 +45,16 @@ function CategoriesCard({ data = {}, setCurrentCategory }) {
 			<div className={styles.title}>{startCase(display_name)}</div>
 
 			<div className={styles.details}>
-				<div className={styles.image_box} />
+				<div className={styles.image_box}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
+						alt="cogoport_icon"
+						width={40}
+						height={40}
+					/>
+
+					<div>Academy</div>
+				</div>
 
 				<div>
 					<div className={styles.pill_box}>

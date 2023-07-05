@@ -37,7 +37,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 				<div
 					className={styles.sid}
 				>
-					SID :
+					SID :&nbsp;
 					<ClickableDiv onClick={handleClick}>
 						<div className={styles.id}>
 							{' '}
@@ -46,7 +46,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 					</ClickableDiv>
 				</div>
 
-				<div className={cl`${styles.tag_container} ${styles.col}`}>
+				<div className={styles.bottom}>
 					<div>
 						{' '}
 						<Element width={24} height={24} fill="red" />

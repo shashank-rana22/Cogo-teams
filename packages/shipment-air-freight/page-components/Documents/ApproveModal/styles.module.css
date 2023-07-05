@@ -1,0 +1,30 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 16px;
+	border: 1px solid var(--color-primary-error-red-4);
+	border: none;
+	border-radius: 4px;
+
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 2px 10px var(--color-primary-error-red-4);
+	}
+}
+
+.footer_container {
+	width: 100%;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.buttons_container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
