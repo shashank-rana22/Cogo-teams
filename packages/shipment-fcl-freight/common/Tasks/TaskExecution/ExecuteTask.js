@@ -15,14 +15,17 @@ import {
 	UploadDraftBL,
 	AmendDraftBl,
 	UploadSI,
+	UploadComplianceDocs,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const excludeServices = [
+const EXCLUDE_SERVICES = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
+
+const REDUCE_LEGTH_BY = 1;
 
 function ExecuteTask({
 	task = {},
@@ -44,7 +47,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - REDUCE_LEGTH_BY]
 		: {};
 
 	if (loading) {
@@ -54,7 +57,7 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task.service_type))
+		&& (!EXCLUDE_SERVICES.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -184,13 +187,24 @@ function ExecuteTask({
 		);
 	}
 
+	if (task.task === 'upload_compliace_documents') {
+		return (
+			<UploadComplianceDocs
+				pendingTask={task}
+				onCancel={onCancel}
+				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - REDUCE_LEGTH_BY}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

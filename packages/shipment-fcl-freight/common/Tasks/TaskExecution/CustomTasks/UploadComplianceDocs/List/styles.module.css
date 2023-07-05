@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	align-items: center;
+	padding: 10px 24px;
+	margin-bottom: 12px;
+	background: #fff;
+	border: 1px solid var(--balck-40-disabled, #bdbdbd);
+	border-radius: 4px;
+}
+
+.doc_name {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+}
+
+.doc_name_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
