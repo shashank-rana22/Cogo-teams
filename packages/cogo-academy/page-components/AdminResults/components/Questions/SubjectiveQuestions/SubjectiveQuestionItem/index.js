@@ -31,7 +31,10 @@ function SubjectiveQuestionItem({ test_id = '', question_id = '' }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.question_text}>{`Q ${question}`}</div>
+			<div
+				className={styles.question_text}
+				dangerouslySetInnerHTML={{ __html: question }}
+			/>
 
 			<div className={styles.answer_text}>
 				<strong>Answer:</strong>
