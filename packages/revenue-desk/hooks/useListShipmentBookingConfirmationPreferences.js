@@ -14,8 +14,7 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 		try {
 			await trigger({
 				params: {
-					rd_showed_rates : true,
-					filters         : { service_id: serviceId, shipment_id: shipmentId },
+					filters: { service_id: serviceId, shipment_id: shipmentId },
 				},
 			});
 		} catch (err) {
