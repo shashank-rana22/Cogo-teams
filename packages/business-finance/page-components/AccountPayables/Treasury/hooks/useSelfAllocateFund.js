@@ -49,7 +49,8 @@ const useSelfAllocateFund = ({ itemData, refetch }) => {
 	};
 	return {
 		onSubmit,
-		loading: allocateFundApi.loading,
+		loading,
+		data,
 	};
 };
 export default useSelfAllocateFund;

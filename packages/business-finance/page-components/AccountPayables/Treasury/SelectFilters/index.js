@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, SingleDateRange } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
@@ -15,7 +15,7 @@ function SelectFilters({
 	filters,
 	setFilters,
 }) {
-	const { search = '' } = filters || {};
+	const { search = '', date = '' } = filters || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -27,6 +27,8 @@ function SelectFilters({
 							activeTab={filters?.reportTime}
 							setActiveTab={(val) => (
 								setFilters({ ...filters, reportTime: val }))}
+							background="#FDEBE9"
+							color="#ED3726"
 						/>
 						<div className={styles.currency_toggle}>
 							<SegmentedControl
@@ -34,6 +36,8 @@ function SelectFilters({
 								activeTab={filters?.reportCurrency}
 								setActiveTab={(val) => (
 									setFilters({ ...filters, reportCurrency: val }))}
+								background="#FDEBE9"
+								color="#ED3726"
 							/>
 						</div>
 					</div>
@@ -44,6 +48,8 @@ function SelectFilters({
 							activeTab={filters?.entityRequest}
 							setActiveTab={(val) => (
 								setFilters({ ...filters, entityRequest: val }))}
+							background="#FDEBE9"
+							color="#ED3726"
 						/>
 						<div className={styles.currency_toggle}>
 							<SegmentedControl
@@ -51,6 +57,8 @@ function SelectFilters({
 								activeTab={filters?.entityCurrency}
 								setActiveTab={(val) => (
 									setFilters({ ...filters, entityCurrency: val }))}
+								background="#FDEBE9"
+								color="#ED3726"
 
 							/>
 						</div>
@@ -59,7 +67,7 @@ function SelectFilters({
 			</div>
 			<div className={styles.filter_container}>
 				<div className={styles.search_container}>
-					{ filters?.activeEntity === 'reports'
+					{ filters?.activeEntity !== 'reports'
 						? (
 							<Input
 								value={search || ''}
@@ -67,7 +75,7 @@ function SelectFilters({
 									...filters,
 									search: value || undefined,
 								})}
-								placeholder="Search by Shipment ID/Incident No."
+								placeholder="Search by account Number"
 								size="sm"
 								style={{ width: '340px' }}
 								suffix={(
@@ -79,7 +87,20 @@ function SelectFilters({
 									/>
 								)}
 							/>
-						) : null}
+						) : (
+							<SingleDateRange
+								placeholder="Enter Date Range"
+								name="date"
+								onChange={(value) => setFilters({
+									...filters,
+									date: value || undefined,
+								})}
+								value={date}
+								maxDate={new Date()}
+								isPreviousDaysAllowed
+								style={{ width: '300px' }}
+							/>
+						)}
 				</div>
 			</div>
 		</div>

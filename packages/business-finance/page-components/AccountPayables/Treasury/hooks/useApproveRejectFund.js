@@ -22,7 +22,6 @@ const useApproveRejectFund = ({ item, refetch }) => {
 		{ manual: true },
 	);
 	const onApprove = async (values) => {
-		console.log('values', values);
 		try {
 			const payload = {
 				fundRequestId   : id,
@@ -66,8 +65,10 @@ const useApproveRejectFund = ({ item, refetch }) => {
 	return {
 		onApprove,
 		onReject,
-		loadingOnReject  : rejectFundAPI.loading,
-		loadingOnApprove : allocateFundApi.loading,
+		allocateFundData,
+		rejectFundData,
+		loadingOnReject  : rejectFundLoading,
+		loadingOnApprove : allocateFundLoading,
 	};
 };
 export default useApproveRejectFund;

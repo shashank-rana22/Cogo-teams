@@ -18,11 +18,11 @@ function Entity({ entityCode }) {
 
 	return (
 		<div className={styles.container}>
-			{ICON_MAPPING[entityCode]}
 			<div className={styles.text}>
 				Entity
 				{entityCode}
 			</div>
+			{ICON_MAPPING[entityCode]}
 		</div>
 	);
 }

@@ -17,7 +17,11 @@ function IconPopover({ itemData }) {
 			)}
 		>
 			<div>
-				<IcMProvision height={20} width={20} style={{ cursor: 'pointer' }} />
+				<IcMProvision
+					height={20}
+					width={20}
+					style={{ cursor: 'pointer', color: '#F68B21' }}
+				/>
 			</div>
 		</Popover>
 	);

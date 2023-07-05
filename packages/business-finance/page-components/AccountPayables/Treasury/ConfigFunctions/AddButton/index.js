@@ -1,35 +1,32 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import SaveAndAllotAmount from './SaveAndAllotAmount';
 
 function AddButton({ itemData, refetch }) {
 	const [showModel, setShowModal] = useState(false);
+
+	const buttonName = itemData?.pendingRequestsCount ? 'View' : 'Add';
+
 	return (
 		<>
 			<Button
 				onClick={() => {
 					setShowModal(true);
 				}}
-				className="secondary sm"
 			>
-				Add
+				{buttonName}
 			</Button>
-			<Modal
-				show={showModel}
-				onClose={() => {
-					setShowModal(false);
-				}}
-				width={800}
-			>
-				{showModel && (
-					<SaveAndAllotAmount
-						itemData={itemData}
-						setShowModal={setShowModal}
-						refetch={refetch}
-					/>
-				)}
-			</Modal>
+
+			{showModel && (
+				<SaveAndAllotAmount
+					showModel={showModel}
+					itemData={itemData}
+					setShowModal={setShowModal}
+					refetch={refetch}
+				/>
+			)}
+
 		</>
 	);
 }

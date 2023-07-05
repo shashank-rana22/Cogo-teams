@@ -3,7 +3,6 @@
 }
 
 .header_text {
-	padding-bottom: 25px;
 	font-size: 18px;
 	font-weight: 500;
 	color: #393f70;
@@ -14,8 +13,8 @@
 	gap: 16px;
 	justify-content: space-around;
 	padding: 8px;
-	background: #fff;
-	border: 1px solid #cbd1f8;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
 	border-radius: 8px;
 
 	@media (max-width: 768px) {
@@ -35,7 +34,6 @@
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #5936f0;
 }
 
 .amount_container {

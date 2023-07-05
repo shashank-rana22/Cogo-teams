@@ -1,13 +1,12 @@
-import { Pagination } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import StyledTable from '../../commons/StyledTable';
 
 import EntityConfig from './Configuration/EntityConfig';
+import CustomTable from './CustomTable';
 import Header from './Header';
 import useGetEntityList from './hooks/useGetEntityList';
 import SelectFilters from './SelectFilters';
-import styles from './styles.module.css';
 
 function Treasury() {
 	const {
@@ -20,38 +19,37 @@ function Treasury() {
 		setEntityFilters,
 	} = useGetEntityList();
 
-	const { list = [], pageNo = 1, totalRecords = 0 } = entityListData || {};
+	const { list = [] } = entityListData || {};
 
-	console.log('entityListData', entityListData);
-
-	console.log('reportsListData', reportsListData);
-
-	// const onPageChange = (val) => {
-	// 	setEntityFilters({ ...entityFilters, page: val });
-	// };
+	const onPageChange = (val) => {
+		setEntityFilters({ ...entityFilters, pageIndex: val });
+	};
 
 	return (
 		<>
-			<div className={styles.hr} />
 			<Header filters={entityFilters} setFilters={setEntityFilters} />
 			<SelectFilters
 				filters={entityFilters}
 				setFilters={setEntityFilters}
 			/>
-			<StyledTable
-				data={list}
-				columns={EntityConfig({ refetch })}
-				loading={entityListLoading}
-				imageFind="FinanceDashboard"
-			/>
-			{/* <Pagination
-				className={styles.pagination}
-				type="number"
-				currentPage={pageNo}
-				totalItems={totalRecords}
-				pageSize={10}
-				onPageChange={onPageChange}
-			/> */}
+
+			{entityFilters?.activeEntity === 'reports'
+				? (
+					<CustomTable
+						data={reportsListData}
+						onPageChange={onPageChange}
+						loading={reportsListLoading}
+						filters={entityFilters}
+						setFilters={setEntityFilters}
+					/>
+				) : (
+					<StyledTable
+						data={list}
+						columns={EntityConfig({ refetch })}
+						loading={entityListLoading}
+						imageFind="FinanceDashboard"
+					/>
+				)}
 		</>
 	);
 }

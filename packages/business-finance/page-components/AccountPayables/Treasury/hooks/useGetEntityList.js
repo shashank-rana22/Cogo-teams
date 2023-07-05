@@ -1,10 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
-
-import { formatDate } from '../../../commons/utils/formatDate';
 
 const useGetEntityList = () => {
 	const [entityFilters, setEntityFilters] = useState({
@@ -57,21 +56,22 @@ const useGetEntityList = () => {
 	const api = entityFilters?.activeEntity === 'reports' ? reportsListApi : entityListApi;
 
 	const selectFromDate =		date?.startDate
-		&& formatDate(
-			date.startDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			'dateTime',
-			' ',
-		);
+		&& formatDate({
+			date       : date.startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
+
 	const selectToDate =		date?.endDate
-		&& formatDate(
-			date.endDate,
-			GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-			'dateTime',
-			' ',
-		);
+		&& formatDate({
+			date       : date.endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
 	const view = entityFilters?.activeEntity === 'reports' ? entityFilters?.reportTime : undefined;
 
 	const refetch = useCallback(async () => {

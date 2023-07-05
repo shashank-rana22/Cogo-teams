@@ -69,13 +69,15 @@ function Request({ item, index, currency, refetch }) {
 				</div>
 				<div className={styles.column2}>
 					<Button
+						size="sm"
 						disabled={editAmount < 0 || loadingOnApprove}
 						onClick={handleSubmit(onApprove)}
-
+						style={{ marginRight: '12px' }}
 					>
 						Approve
 					</Button>
 					<Button
+						size="sm"
 						disabled={loadingOnReject}
 						onClick={handleSubmit(onReject)}
 

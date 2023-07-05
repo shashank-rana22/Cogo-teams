@@ -1,5 +1,4 @@
 import { Tooltip } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -8,10 +7,9 @@ import React from 'react';
 
 import AddButton from '../ConfigFunctions/AddButton';
 import IconPopover from '../ConfigFunctions/IconPopover';
+import PendingRequest from '../ConfigFunctions/PendingRequest';
 
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 const EntityConfig = ({ refetch }) => [
 
@@ -151,6 +149,13 @@ const EntityConfig = ({ refetch }) => [
 				</div>
 			</div>
 		),
+	},
+	{
+		Header   : '',
+		accessor : (row) => (
+			<PendingRequest itemData={row} />
+		),
+		id: 'count',
 	},
 	{
 		Header   : '',

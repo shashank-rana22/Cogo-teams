@@ -6,7 +6,7 @@
 		padding: 0 30px 30px;
 		font-size: 12px;
 		list-style: none;
-		border-left: 1px solid #5936f0;
+		border-left: 1px solid #f68b21;
 	}
 
 	.history_tl_container ul.tl li:last-child {
@@ -17,8 +17,8 @@
 		position: absolute;
 		left: -8px;
 		content: " ";
-		background: #5936f0;
-		border: 8px solid #5936f0;
+		background: #f68b21;
+		border: 8px solid #f68b21;
 		border-radius: 500%;
 	}
 }
@@ -44,5 +44,4 @@
 	width: 100px;
 	font-size: 12px;
 	font-weight: 500;
-	color: #393f70;
 }

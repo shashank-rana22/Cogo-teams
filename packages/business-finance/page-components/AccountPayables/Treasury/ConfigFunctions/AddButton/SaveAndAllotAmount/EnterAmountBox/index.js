@@ -20,8 +20,11 @@ function EnterAmountBox({ itemData, refetch }) {
 				name="allotAmount"
 				type="number"
 				placeholder="Please Enter Amount"
-				rules={{ required: 'Amount is Required' }}
+				rules={{ required: 'Amount is Required *' }}
 			/>
+			<div className={styles.error_message}>
+				{errors?.allotAmount?.message}
+			</div>
 			<div className={styles.button_conatiner}>
 				<Button disabled={loading} type="submit">
 					Save & Allot
