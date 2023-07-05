@@ -10,7 +10,6 @@ const useUpdateRatesPreferences = ({
 	reason,
 	othertext,
 	sellRateDetails = {},
-	rateOptions,
 	setShowDetailPage,
 	shipmentData,
 }) => {
