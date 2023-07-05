@@ -39,7 +39,7 @@ const useGetDocumentTypeControls = ({
 			onChange    : () => resetField('list_shipment_pending_tasks'),
 			renderLabel : (item) => (account_type === 'service_provider'
 				? `${item?.shipment_serial_id}, ${startCase(item?.service_type)}` : `${item?.serial_id}`),
-			...(paramsMapping?.[account_type] || paramsMapping?.importer_exporter),
+			...(paramsMapping?.[account_type || 'importer_exporter']),
 		},
 		{
 			name        : 'list_shipment_pending_tasks',

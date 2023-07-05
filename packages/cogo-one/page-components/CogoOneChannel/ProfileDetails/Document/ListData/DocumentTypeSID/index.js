@@ -41,33 +41,35 @@ function DocumentTypeSID({
 		postDocumentTag({ payload, setDocumentTagUrl });
 	};
 
-	return (
-		documentTagUrl ? (
-			<div className={styles.main_container}>
-				<div className={styles.title}>
-					<div>Document Tag</div>
-					<IcMCross className={styles.cross} onClick={() => setDocumentTagUrl('')} />
-				</div>
-				{controls.map((eachControl = {}) => {
-					const { label = '', name = '' } = eachControl || {};
+	if (!documentTagUrl) {
+		return null;
+	}
 
-					return (
-						<div className={styles.styled_element} key={name}>
-							<div>{label}</div>
-							<AsyncSelectController control={control} {...eachControl} />
-							<div className={styles.error_text}>
-								{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
-							</div>
-						</div>
-					);
-				})}
-				<div className={styles.button_styles}>
-					<Button size="sm" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
-						OK
-					</Button>
-				</div>
+	return (
+		<div className={styles.main_container}>
+			<div className={styles.title}>
+				<div>Document Tag</div>
+				<IcMCross className={styles.cross} onClick={() => setDocumentTagUrl('')} />
 			</div>
-		) : null
+			{controls.map((eachControl = {}) => {
+				const { label = '', name = '' } = eachControl || {};
+
+				return (
+					<div className={styles.styled_element} key={name}>
+						<div>{label}</div>
+						<AsyncSelectController control={control} {...eachControl} />
+						<div className={styles.error_text}>
+							{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
+						</div>
+					</div>
+				);
+			})}
+			<div className={styles.button_styles}>
+				<Button size="sm" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
+					OK
+				</Button>
+			</div>
+		</div>
 	);
 }
 
