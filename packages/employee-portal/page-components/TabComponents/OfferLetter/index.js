@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import PreviewDocumet from '../../../commons/PreviewDocument';
 import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
@@ -11,6 +12,8 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 	const { id, document_url, status, signed_document_url: detail_signed_document_url } = data?.offer_letter || {};
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails, setInformationPage });
+
+	const [showModal, setShowModal] = useState(false);
 
 	const { onClickSignDocument, data: docData, loading } = useGetDocumentSigningUrl(
 		{ getEmployeeDetails, document_type: 'offer_letter' },
@@ -37,7 +40,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 						<Button
 							themeType="secondary"
 							size="md"
-							onClick={() => updateData({ status: 'rejected_by_user' })}
+							onClick={() => setShowModal(true)}
 							loading={getEmployeeDetailsLoading || loading}
 						>
 							Reject
@@ -54,6 +57,40 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployee
 					</Button>
 				</div>
 			) : null}
+
+			<Modal
+				size="sm"
+				show={showModal}
+				onClose={() => setShowModal(false)}
+				placement="center"
+				showCloseIcon={false}
+			>
+				<Modal.Header title="Are you sure you want to reject this Offer Letter?" />
+
+				<Modal.Body>
+					<div className={styles.btn_container}>
+						<Button
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowModal(false)}
+							className={styles.btn_container}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							type="button"
+							style={{ marginLeft: '8px' }}
+							onClick={() => {
+								updateData({ status: 'rejected_by_user' });
+								setShowModal(false);
+							}}
+						>
+							Reject
+						</Button>
+					</div>
+				</Modal.Body>
+			</Modal>
 
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<PreviewDocumet
