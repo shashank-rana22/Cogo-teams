@@ -1,6 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
+import { useEffect } from 'react';
+
+import useListShipmentBookingConfirmationPreferences from '../../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
 
 import styles from './styles.module.css';
 
@@ -8,14 +11,38 @@ const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
 const STEP_ON_BACK = 2;
 
-function Step3({ data, setStep = () => {}, shipment_id }) {
+function Step3({ data, setStep = () => {}, shipment_id, task }) {
+	const { service_type } = task || {};
+
+	const { data: preferences } = useListShipmentBookingConfirmationPreferences({
+		shipment_id,
+		defaultFilters: {
+			service_type,
+		},
+	});
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
+	const selected_priority = (preferences?.list || []).find((item) => item?.selected_priority === item?.priority);
+	const line_items = selected_priority?.data?.[0]?.validities?.[0]?.line_items || [];
+	if (line_items?.length) {
+		defaultValues[selected_priority?.service_id] = line_items?.map((line_item) => ({
+			code     : line_item?.code,
+			currency : line_item?.currency,
+			price    : line_item?.price,
+			quantity : line_item?.quantity,
+			unit     : line_item?.unit,
+			total    : line_item?.total,
+		}));
+	}
 
 	const formProps = useForm({ defaultValues });
 
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
-
 	const formValues = watch();
+
+	// useEffect(() => {
+	// 	setValue(`${selected_priority?.service_id}`, defaultValues);
+	// }, [defaultValues, setValue, selected_priority?.service_id]);
+
 
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };

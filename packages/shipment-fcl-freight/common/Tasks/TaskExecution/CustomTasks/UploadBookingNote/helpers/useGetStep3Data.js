@@ -2,8 +2,6 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useListShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
 import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
@@ -20,7 +18,7 @@ const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
 	taskListRefetch = () => {},
 }) => {
-	const { service_id, service_type } = task || {};
+	const { service_type } = task || {};
 	const service_ids = [];
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
@@ -37,13 +35,7 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-	const { data } = useListShipmentBookingConfirmationPreferences({
-		shipment_id    : shipment_data?.id,
-		defaultFilters : {
-			service_id,
-			service_type,
-		},
-	});
+
 	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
 
 	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
@@ -86,7 +78,7 @@ const useGetStep3Data = ({
 	const defaultValues = {};
 
 	service_charges.forEach((service_charge) => {
-		defaultValues[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
+		defaultValues[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
 			code     : line_item?.code,
 			currency : line_item?.currency,
 			price    : line_item?.price,

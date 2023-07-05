@@ -1,9 +1,8 @@
 import { Button, cl } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
-
-import getPreferenceBuyPrice from '../../../helpers/getPreferenceBuyPrice';
 
 import styles from './styles.module.css';
 
@@ -13,7 +12,7 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 	const { updateBookingPreference = () => {}, updatePreferenceLoading, setSelectedServiceProvider } = step0_data;
 
 	const dataArray = Array.isArray(data) ? data : [data];
-	const { remarks, supplier_contract_no } = dataArray?.[0] || {};
+	const { remarks, supplier_contract_no } = dataArray?.[0]?.validities?.[0] || dataArray?.[0] || {};
 
 	const handleProceed = () => {
 		setSelectedServiceProvider(item);
@@ -28,15 +27,18 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 		{
 			label : 'Shipping Line',
 			value : obj?.reverted_shipping_line?.business_name || obj?.operator?.business_name
-				|| obj?.shipping_line.business_name,
+				|| obj?.shipping_line?.business_name,
 		},
 		{
 			label : 'Source of Rate',
-			value :	startCase(source),
+			value : obj?.source,
 		},
 		{
 			label : 'Buy Rate',
-			value : getPreferenceBuyPrice(obj, source),
+			value : getFormattedPrice(
+				obj?.validities[0]?.total_price,
+				obj?.validities[0]?.currency,
+			),
 		},
 		{
 			label : 'Sailing Date',

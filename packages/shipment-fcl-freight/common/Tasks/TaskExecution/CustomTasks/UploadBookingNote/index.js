@@ -26,7 +26,7 @@ function UploadBookingNote({
 		skipStep0 = true;
 	}
 
-	// if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
+	if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
 
 	const [step, setStep] = useState(initialStep);
 	const [fileUrl, setFileUrl] = useState();
