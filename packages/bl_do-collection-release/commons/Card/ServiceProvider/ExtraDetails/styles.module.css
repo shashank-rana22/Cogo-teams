@@ -1,4 +1,8 @@
 .text {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+
 	&.thin {
 		font-weight: 300;
 		opacity: 0.58;
@@ -18,7 +22,9 @@
 }
 
 .status {
-	padding: 4px 6px;
+	width: fit-content;
+	padding: 0 4px;
+	margin-bottom: 16px;
 	font-weight: 500;
 	border-radius: 4px;
 
@@ -37,4 +43,30 @@
 	align-items: center;
 	color: #393f70;
 	text-decoration: none;
+}
+
+.delivery_mode {
+	display: flex;
+	width: 100%;
+	margin-left: 8px;
+}
+
+.left {
+	width: 54%;
+}
+
+.right {
+	width: 46%;
+}
+
+.collection {
+	display: flex;
+	width: 100%;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	margin-left: 8px;
+}
+
+.collection_box {
+	width: 33%;
 }

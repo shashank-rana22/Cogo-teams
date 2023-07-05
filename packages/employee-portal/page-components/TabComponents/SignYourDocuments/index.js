@@ -1,5 +1,5 @@
-import { Button, Loader } from '@cogoport/components';
-import { IcCFtick, IcMArrowBack } from '@cogoport/icons-react';
+import { Button, Loader, Tooltip } from '@cogoport/components';
+import { IcCFtick, IcMArrowBack, IcMRefresh } from '@cogoport/icons-react';
 
 import PreviewDocument from '../../../commons/PreviewDocument';
 import useGetCompanyDocument from '../../../hooks/useGetCompanyDocument';
@@ -27,6 +27,19 @@ function SignYourDocuments({ setInformationPage, data }) {
 					onClick={() => setInformationPage('')}
 				/>
 				<div className={styles.title}>SIGN YOUR DOCUMENTS</div>
+
+				<div style={{ marginLeft: 20 }}>
+					<Tooltip content="Refresh to check status of signed documents" placement="top">
+						<div className={styles.refresh_container}>
+							<IcMRefresh
+								className={loading ? styles.animate : styles.refresh_icon}
+								onClick={getDocRefetch}
+								width={20}
+								height={20}
+							/>
+						</div>
+					</Tooltip>
+				</div>
 			</div>
 
 			{loading ? (
@@ -38,8 +51,7 @@ function SignYourDocuments({ setInformationPage, data }) {
 					/>
 				</div>
 			) : (
-				<div style={{ display: 'flex', marginTop: '20px', flexWrap: 'wrap' }}>
-
+				<div className={styles.signed_document_container}>
 					{(companyDoc || []).map((item) => (
 						<div key={item?.id} style={{ padding: '0 12px', flexWrap: 'wrap' }}>
 

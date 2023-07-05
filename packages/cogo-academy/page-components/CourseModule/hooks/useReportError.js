@@ -24,7 +24,7 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 				service_id    : id,
 				variables     : {
 					description,
-					image_url         : finalUrl,
+					image_url         : finalUrl || error_screenshot_url,
 					status_code       : 1,
 					session_data      : '',
 					requested_payload : '',

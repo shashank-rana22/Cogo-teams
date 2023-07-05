@@ -1,0 +1,10 @@
+.body_container {
+	padding: 4px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

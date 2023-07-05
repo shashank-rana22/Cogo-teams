@@ -30,15 +30,6 @@ const payloadMapping = {
 			pending_tasks : {
 				task: 'upload_service_provider_proof_of_delivery',
 			},
-
-		},
-		physical_pod_customer: {
-			shipment_type : 'ftl_freight',
-			pending_tasks : {
-				task: 'pod_sent_to_shipper',
-
-			},
-
 		},
 		purchase_invoice: {
 			shipment_type : 'ftl_freight',
