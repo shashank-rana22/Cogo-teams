@@ -1,13 +1,12 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
 import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
-
-const DEFAULT_INDEX = 0;
 
 const KEY_CONTENT_MAPPING = {
 	employment_history: {
@@ -28,12 +27,12 @@ const KEY_CONTENT_MAPPING = {
 	},
 };
 
-function RenderPills({ isCompleted, key, bankDetails }) {
+function RenderPills({ isCompleted, bankDetails }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
 
-	if (bankDetails?.[DEFAULT_INDEX]?.status === 'active' && key === 'bank_details') {
+	if (!isCompleted && !isEmpty(bankDetails)) {
 		return <Pill color="orange">Waiting for approval</Pill>;
 	}
 
@@ -99,7 +98,10 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 								title={(
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{title}</div>
-										<RenderPills isCompleted={isCompleted} key={key} bankDetails={bankDetails} />
+										<RenderPills
+											isCompleted={isCompleted}
+											bankDetails={bankDetails}
+										/>
 									</div>
 								)}
 								animate
