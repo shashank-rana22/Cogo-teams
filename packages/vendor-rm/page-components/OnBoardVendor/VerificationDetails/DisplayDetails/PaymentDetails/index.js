@@ -1,26 +1,10 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import { startCase } from '@cogoport/utils';
 import React from 'react';
-
+import fieldsInPaymentDetails from '../../../../utils/fieldsInPaymentDetails';
 import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
-
-const FIELDS_TO_SHOW = {
-	account_holder_name : 'Account Holder’s Name',
-	account_number      : 'Account No.',
-	account_type        : 'Account Type',
-	ifsc_code           : 'IFSC Code',
-	swift_code          : 'SWIFT Code',
-	bank_name           : 'Bank Name',
-	branch_name         : 'Branch Name',
-	bank_document_url   : 'Cancelled Cheque/Passbook',
-	address             : 'Billing Address',
-	tax_number          : `${geo.others.registration_number.label} Number`,
-	tax_document_url    : `${geo.others.registration_number.label} Proof`,
-};
 
 const PAYMENT_DETAILS_CONSTANT = 0;
 
@@ -29,6 +13,7 @@ const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 function PaymentDetails({
 	detail,
 }) {
+	const FIELDS_TO_SHOW = fieldsInPaymentDetails();
 	const getDisplayValue = ({ fieldName }) => {
 		const val = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName] || '';
 
@@ -37,6 +22,8 @@ function PaymentDetails({
 		}
 
 		if (['bank_document_url', 'tax_document_url'].includes(fieldName)) {
+			console.log(val, 'val');
+			console.log(fieldName, 'fieldName');
 			const shortName = getShortFileName({ url: val });
 
 			return (
@@ -58,6 +45,8 @@ function PaymentDetails({
 
 		return startCase(val);
 	};
+
+	console.log(detail, 'detail');
 
 	return (
 		<div
