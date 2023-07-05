@@ -1,8 +1,6 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoCoin } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -15,11 +13,13 @@ import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
 
 import ConvertToCpModal from './ConvertToCpModal';
+import ListPromos from './listPromos';
 import OrgAgentDetails from './OrgAgentDetails';
 import OrganizationUsers from './OrganizationUsers';
-import PromocodeThumbnail from './PromocodeThumbnail';
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function OrganizationDetails({
 	activeTab = '',
@@ -30,7 +30,7 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 	viewType = '',
 }) {
-	const geo = getGeoConstants();
+	const [showConvertModal, setShowConvertModal] = useState(false);
 	const { organization_id: messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id: voiceOrgId = '' } = activeVoiceCard || {};
 
@@ -45,9 +45,8 @@ function OrganizationDetails({
 		organizationUsersLoading,
 	} = useGetListOrganizationUsers({ organizationId, isOrgUsersVisible });
 	const { list: organizationUserList = [] } = organizationUsersData || {};
-	const showOrgUsers = isOrgUsersVisible && !organizationUsersLoading && !isEmpty(organizationUserList);
 
-	const [showConvertModal, setShowConvertModal] = useState(false);
+	const showOrgUsers = isOrgUsersVisible && !organizationUsersLoading && !isEmpty(organizationUserList);
 
 	const {
 		pointData = {},
@@ -61,37 +60,16 @@ function OrganizationDetails({
 
 	const { total_redeemable } = pointData || {};
 
+	const refetchOrgDetails = () => {
+		fetchOrganization();
+		getOrgDetails();
+	};
+
 	if (isEmpty(organizationId)) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.title}>Organization Details</div>
 				<EmptyState type="organization" />
-			</div>
-		);
-	}
-
-	const refetchOrgDetails = () => {
-		fetchOrganization();
-		getOrgDetails();
-	};
-	function ListPromos() {
-		return isEmpty(list) ? (
-			<div className={styles.promotion_cards_empty_state}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.empty_promocode}
-					alt="promocode"
-					width={200}
-					height={200}
-				/>
-			</div>
-		) : (
-			<div className={styles.promotion_cards}>
-				<div className={styles.wrapper}>
-					<h3>
-						Coming Soon...
-					</h3>
-				</div>
-				<PromocodeThumbnail list={list} />
 			</div>
 		);
 	}
@@ -207,7 +185,6 @@ function OrganizationDetails({
 						))}
 					</div>
 				</>
-
 			)}
 
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
@@ -218,18 +195,23 @@ function OrganizationDetails({
 
 				<div className={styles.cogopoints}>Cogopoints : </div>
 				{pointLoading ? (
-					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
+					<Placeholder
+						height="18px"
+						width="35px"
+						margin="0px 0px 0px 8px"
+					/>
 				) : (
 					<div className={styles.value}>{total_redeemable || '0'}</div>
 				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
+
 			{promoLoading ? (
 				<div className={styles.loader_div}>
 					<Loader themeType="primary" />
 				</div>
 			) : (
-				<ListPromos />
+				<ListPromos list={list} />
 			)}
 
 			<QuotationDetails organizationId={organizationId} />
