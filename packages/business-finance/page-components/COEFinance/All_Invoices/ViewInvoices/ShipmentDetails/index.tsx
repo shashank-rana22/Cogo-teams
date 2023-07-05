@@ -93,7 +93,6 @@ export interface DataInterface {
 
 interface ShipmentDetailsInterface {
 	data: DataInterface;
-	orgId: string;
 	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
@@ -105,7 +104,6 @@ interface ShipmentDetailsInterface {
 }
 function ShipmentDetails({
 	data,
-	orgId,
 	remarksVal,
 	setRemarksVal,
 	lineItemsRemarks,
@@ -223,7 +221,6 @@ function ShipmentDetails({
 						<div className={styles.details}>
 							{showDetails && (
 								<Details
-									orgId={orgId}
 									dataList={dataList}
 									shipmentId={shipmentId}
 								/>

@@ -24,7 +24,7 @@ import styles from './styles.module.css';
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId, jobNumber, orgId, IsJobClose } = query || {};
+	const { shipmentId, jobNumber, IsJobClose } = query || {};
 	const getStatus = () => {
 		if (IsJobClose === 'OPEN') {
 			return false;
@@ -220,7 +220,6 @@ function CostSheet() {
 				}}
 			>
 				<Details
-					orgId={orgId}
 					dataList={shipmentData?.list?.[0]}
 					shipmentId={shipmentId}
 				/>

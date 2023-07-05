@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -10,13 +11,16 @@ import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
 
 interface DetailsInterface {
-	orgId: string;
 	dataList: DetailInterface;
 	shipmentId: string;
 }
-function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
+const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
+
+function Details({ dataList, shipmentId }: DetailsInterface) {
 	const { importer_exporter: importerExporter } = dataList || {};
 	const Router = useRouter();
+
+	const { shipment_type:shipmentType } = dataList || {};
 
 	return (
 		<div>
@@ -45,7 +49,7 @@ function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
 				</div>
 				<div
 					className={styles.flex_div}
-					onClick={() => Router.push(`/shipments/${orgId}`)}
+					onClick={() => Router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[shipmentType]}/${shipmentId}`)}
 					role="presentation"
 				>
 					Go to SID →

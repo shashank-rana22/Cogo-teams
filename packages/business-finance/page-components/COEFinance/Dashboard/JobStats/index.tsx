@@ -71,7 +71,7 @@ function JobStats({ jobData }) {
 						<div className={styles.border} />
 
 						<div className={styles.value}>
-							{profit.toFixed(2)}
+							{(profit || 0).toFixed(2)}
 
 							%
 						</div>
