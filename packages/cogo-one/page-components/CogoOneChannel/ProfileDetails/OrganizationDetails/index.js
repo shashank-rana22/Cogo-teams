@@ -1,5 +1,8 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcCCogoCoin } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -74,11 +77,11 @@ function OrganizationDetails({
 	function ListPromos() {
 		return isEmpty(list) ? (
 			<div className={styles.promotion_cards_empty_state}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_promocode}
 					alt="promocode"
-					width="200px"
-					height="200px"
+					width={200}
+					height={200}
 				/>
 			</div>
 		) : (
@@ -210,11 +213,7 @@ function OrganizationDetails({
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
 				<div className={styles.cogo_icon}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
-						alt="coin"
-						className={styles.cogocoins_icon}
-					/>
+					<IcCCogoCoin className={styles.cogocoins_icon} />
 				</div>
 
 				<div className={styles.cogopoints}>Cogopoints : </div>
