@@ -1,9 +1,11 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { ORGANIZATION_USERS_VIEW, ACCOUNT_TYPE } from '../../../../constants';
+import { ACCOUNT_TYPE } from '../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -23,16 +25,17 @@ function OrganizationDetails({
 	openNewTab = () => {},
 	hideCpButton = false,
 	getOrgDetails = () => {},
-	hasVoiceCallAccess = false,
 	viewType = '',
 }) {
+	const geo = getGeoConstants();
 	const { organization_id: messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id: voiceOrgId = '' } = activeVoiceCard || {};
 
+	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
-	const isOrgUsersVisible = ORGANIZATION_USERS_VIEW.includes(viewType);
+	const isOrgUsersVisible = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_organization_users;
 
 	const {
 		organizationUsersData,

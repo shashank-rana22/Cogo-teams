@@ -294,5 +294,3 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
-
-export const ORGANIZATION_USERS_VIEW = ['supply', 'supply_admin', 'sales', 'sales_admin'];
