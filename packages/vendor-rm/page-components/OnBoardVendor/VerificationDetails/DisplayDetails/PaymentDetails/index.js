@@ -22,8 +22,6 @@ function PaymentDetails({
 		}
 
 		if (['bank_document_url', 'tax_document_url'].includes(fieldName)) {
-			console.log(val, 'val');
-			console.log(fieldName, 'fieldName');
 			const shortName = getShortFileName({ url: val });
 
 			return (
@@ -45,8 +43,6 @@ function PaymentDetails({
 
 		return startCase(val);
 	};
-
-	console.log(detail, 'detail');
 
 	return (
 		<div
