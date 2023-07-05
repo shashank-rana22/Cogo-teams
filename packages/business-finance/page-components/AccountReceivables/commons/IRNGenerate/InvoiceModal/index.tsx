@@ -5,10 +5,10 @@ import React from 'react';
 import styles from './styles.module.css';
 
 interface InvoiceModalParams {
-	uploadInvoice?: boolean,
-	setUploadInvoice?: (p: boolean) => void,
-	uploadEInvoice?: Function,
-	loading?: boolean
+	uploadInvoice?: boolean;
+	setUploadInvoice?: (p: boolean) => void;
+	uploadEInvoice?: Function;
+	loading?: boolean;
 }
 
 function InvoiceModal({
@@ -67,7 +67,6 @@ function InvoiceModal({
 								/>
 								{E_INVOICE_DATE && (
 									<span className={styles.errors}>
-										{' '}
 										{E_INVOICE_DATE_MESSAGE.toString()}
 									</span>
 								)}
@@ -102,7 +101,6 @@ function InvoiceModal({
 								/>
 								{E_INVOICE_NUMBER && (
 									<span className={styles.errors}>
-										{' '}
 										{E_INVOICE_NUMBER_MESSAGE.toString()}
 									</span>
 								)}
@@ -123,7 +121,6 @@ function InvoiceModal({
 								/>
 								{E_INVOICE_PDF_FILE && (
 									<span className={styles.errors}>
-										{' '}
 										{E_INVOICE_PDF_FILE_MESSAGE.toString()}
 									</span>
 								)}
@@ -139,7 +136,6 @@ function InvoiceModal({
 								/>
 								{E_INVOICE_XML_FILE && (
 									<span className={styles.errors}>
-										{' '}
 										{E_INVOICE_XML_FILE_MESSAGE.toString()}
 									</span>
 								)}

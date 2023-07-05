@@ -7,6 +7,8 @@ import Card from '../Card';
 import Detail from './Detail';
 import styles from './styles.module.css';
 
+const MIN_SERVICE_PROVIDERS_LENGTH = 1;
+
 function ServiceProvider({
 	tradePartnersData = {},
 	setAddPoc = () => {},
@@ -22,7 +24,11 @@ function ServiceProvider({
 
 	return (
 		Object.keys(serviceProviders).map((sp_key, index) => (
-			<Card title={`Service Provider ${serviceProvidersLength <= 1 ? '' : index + 1}`}>
+			<Card
+				title={`Service Provider ${serviceProvidersLength <= MIN_SERVICE_PROVIDERS_LENGTH
+					? '' : index + MIN_SERVICE_PROVIDERS_LENGTH}`}
+				key={sp_key}
+			>
 				<div className={styles.header}>
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>
@@ -52,8 +58,7 @@ function ServiceProvider({
 					</div>
 				</div>
 
-				{show[sp_key] && (<Detail data={poc_data} sp_key={sp_key} />)}
-
+				{show[sp_key] ? (<Detail data={poc_data} sp_key={sp_key} />) : null}
 			</Card>
 		))
 	);

@@ -1,7 +1,7 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
 
-import tabsConfig from '../../../configs/TAB_CONFIG.json';
+import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 import styles from './styles.module.css';
@@ -26,7 +26,7 @@ function DeskTabs() {
 				activeTab={activeTab}
 				onChange={onChangeTab}
 			>
-				{tabs?.map((tab) => <TabPanel title={tab.label} name={tab.value} />)}
+				{tabs?.map((tab) => <TabPanel key={tab.value} title={tab.label} name={tab.value} />)}
 			</Tabs>
 		</div>
 	);

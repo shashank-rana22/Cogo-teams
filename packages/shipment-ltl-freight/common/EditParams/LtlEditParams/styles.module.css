@@ -1,0 +1,13 @@
+.container {
+	:global {
+		.ui_button_container.ui_ps_themeType_tertiary {
+			border: 1px solid black;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: right;
+	margin-top: 24px;
+}

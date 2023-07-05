@@ -1,0 +1,106 @@
+.title {
+	margin: 20px 0 4px;
+	font-weight: 700;
+	color: #393f70;
+}
+
+.billing_party_container {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	min-width: 355px;
+	height: 130px;
+	padding: 10px;
+	cursor: pointer;
+	border: 1px solid #fffef9;
+	border-radius: 10px;
+	box-shadow: rgb(71 111 211 / 20%) 0 2px 12px;
+}
+
+.list {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	padding: 10px;
+	overflow: auto;
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.billing_party {
+	font-size: 15px;
+	font-weight: 500;
+
+	&.details {
+		font-size: 12px;
+		font-weight: 400;
+	}
+}
+
+.align_div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 15px;
+
+	.changeAddress {
+		margin-left: 15px;
+	}
+
+	.marginRight {
+		margin-right: 2px;
+	}
+
+	&.buyingInsurance {
+		justify-content: flex-start;
+	}
+
+	&.marginLeft {
+		margin-left: 10px;
+
+		.marginLeft {
+			margin-left: 2px;
+		}
+	}
+
+	&.addAddress {
+		justify-content: flex-start;
+		width: 30%;
+		margin: 50px 0 10px;
+		text-decoration: underline;
+	}
+}
+
+.section2 {
+	max-width: 30%;
+	margin: 10px;
+	background: #fffef9;
+	border: 1px solid #d6483a;
+	border-radius: 10px;
+	box-shadow: 0 2px 12px rgb(71 111 211 / 20%);
+
+	.selected {
+		padding: 10px;
+	}
+}
+
+.card_txt {
+	margin: 3px 0;
+	font-size: 12px;
+
+	&.orgName {
+		font-size: var(--font-size-lg);
+		font-weight: 500;
+	}
+}
+
+.popover {
+	& > [role="button"] {
+		width: fit-content;
+		text-decoration: underline;
+	}
+}

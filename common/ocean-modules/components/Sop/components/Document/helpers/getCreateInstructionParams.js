@@ -1,6 +1,8 @@
 const getCreateInstructionParams = ({ formValues }) => {
-	const params = { instruction: 'document_handling_preference' };
-	params.sop_instructions = [formValues];
-	return params;
+	const PARAMS = { instruction: 'document_handling_preference' };
+
+	PARAMS.sop_instructions = [formValues];
+
+	return PARAMS;
 };
 export default getCreateInstructionParams;

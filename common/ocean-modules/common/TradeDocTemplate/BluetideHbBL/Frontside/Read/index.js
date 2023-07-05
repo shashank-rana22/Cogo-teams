@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import Watermark from '../../../commons/Watermark';
 
 import styles from './styles.module.css';
@@ -39,6 +41,14 @@ function Read({
 		);
 	}
 
+	const {
+		container_number = '',
+		marks_and_number = '',
+		package_description = '',
+		gross_weight = '',
+		measurement = '',
+	} = defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	return (
 		<main className={styles.main}>
 			<Watermark text="draft" />
@@ -60,10 +70,12 @@ function Read({
 								FMC NO: 028985
 							</p>
 						</div>
+
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b> BL0423003182</b>
+							<b>BL0423003182</b>
 						</div>
+
 						<div className={styles['section_one_child_2-details']}>
 							<img
 								// eslint-disable-next-line max-len
@@ -72,28 +84,23 @@ function Read({
 							/>
 							<span className={styles.details_text_lg}>
 								BLUETIDE ESERVICES PVT. LTD.
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Complex, Old Delhi Gurgaon Road, Gurgaon
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Building No. 1, Shop No 7, Natraj
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Haryana - 122001
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Tel No: 43708987 Fax No: 43708988
-
 							</span>
 							<span className={styles.details_text_md}>
 								Rge No:MTO/DGS/2274/DEC/2023
-
 							</span>
+
 							<p>
 								Taken in Charge in apparently good condition,herein at the place of receipt,
 								for transport anddelivery as mentioned above, unless otherwisestated.The MTO,
@@ -107,6 +114,7 @@ function Read({
 
 							</p>
 						</div>
+
 						<div className={styles['section_one_child_2-goods_delivery_contact']}>
 							<p>For delivery of goods please apply to:</p>
 							<p>{defaultValues?.goods_delivery_contact || ''}</p>
@@ -127,13 +135,14 @@ function Read({
 								<th>Measurement</th>
 							</tr>
 						</thead>
+
 						<tbody>
 							<tr>
-								<td>{defaultValues?.containers?.[0]?.container_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.marks_and_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.package_description || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.gross_weight || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.measurement || ''}</td>
+								<td>{container_number}</td>
+								<td>{marks_and_number}</td>
+								<td>{package_description}</td>
+								<td>{gross_weight}</td>
+								<td>{measurement}</td>
 							</tr>
 						</tbody>
 					</table>

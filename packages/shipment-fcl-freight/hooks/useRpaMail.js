@@ -28,20 +28,20 @@ const useRpaMail = ({ mailId = '', entity_type = '', format_data = true }) => {
 
 	const formatterFunction = formatters[entity_type];
 
-	const newMailData = [];
+	const NEW_EMAIL_DATA = [];
 
-	if (mailDataRequest?.data) newMailData.push(mailDataRequest?.data);
+	if (mailDataRequest?.data) NEW_EMAIL_DATA.push(mailDataRequest?.data);
 
 	const newMailId = [mailId];
 
 	const newMailSelected = {
 		mail_ids : newMailId || [],
-		mailData : newMailData || [],
+		mailData : NEW_EMAIL_DATA || [],
 	};
 
 	let formattedData = [];
 
-	if (newMailData?.length && format_data) {
+	if (NEW_EMAIL_DATA?.length && format_data) {
 		formattedData = formatterFunction(newMailSelected);
 	}
 

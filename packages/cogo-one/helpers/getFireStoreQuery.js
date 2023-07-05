@@ -1,25 +1,39 @@
 import { orderBy, where } from 'firebase/firestore';
 
-const getMainQuery = (userId, type, isObserver) => {
-	switch (type) {
-		case 'admin_view':
-			return [];
-		case 'shipment_view':
-			return [where('booking_agent_ids', 'array-contains', userId)];
-		default:
-			return [
-				!isObserver
-					? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
-			];
-	}
+const BULK_ASSIGN_SEEN_MINUTES = 15;
+
+const HIDE_MAIN_QUERY_FOR_SUB_TABS = ['groups', 'contacts'];
+
+const getMainQuery = ({ userId, type, isObserver }) => {
+	const VIEW_MAPPING = {
+		admin_view    : [],
+		shipment_view : [where('booking_agent_ids', 'array-contains', userId)],
+	};
+
+	const defaultFilter = [
+		isObserver
+			? where('spectators_ids', 'array-contains', userId)
+			: where('support_agent_id', '==', userId),
+	];
+
+	return VIEW_MAPPING?.[type] || defaultFilter;
 };
 
-const getSessionQuery = (viewType, showBotMessages) => {
-	if (viewType === 'shipment_view') {
+const getSessionQuery = ({ viewType, showBotMessages, tab }) => {
+	if (viewType === 'shipment_view' || tab === 'contacts') {
 		return where('session_type', 'in', ['bot', 'admin']);
 	}
 	return showBotMessages
 		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+};
+
+const getTabQuery = ({ tab, userId }) => {
+	const TABS_QUERY_MAPPING = {
+		groups   : [where('group_members', 'array-contains', userId)],
+		contacts : [where('user_details.account_type', '==', 'service_provider')],
+	};
+
+	return TABS_QUERY_MAPPING?.[tab] || [];
 };
 
 function getFireStoreQuery({
@@ -28,14 +42,16 @@ function getFireStoreQuery({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	viewType,
+	activeSubTab,
 }) {
 	let queryFilters = [];
 
 	const isObserver = ['adminSession', 'botSession'].includes(appliedFilters?.observer) || false;
 
-	const mainQuery = getMainQuery(userId, viewType, isObserver);
+	const mainQuery = HIDE_MAIN_QUERY_FOR_SUB_TABS.includes(activeSubTab)
+		? [] : getMainQuery({ userId, type: viewType, isObserver });
 
-	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages);
+	const sessionTypeQuery = getSessionQuery({ viewType, showBotMessages, tab: activeSubTab });
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'channels') {
@@ -51,7 +67,7 @@ function getFireStoreQuery({
 				];
 			} else if (appliedFilters[item] === 'seen_by_user') {
 				const currentTime = new Date();
-				currentTime.setMinutes(currentTime.getMinutes() - 15);
+				currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 				const epochTimestamp = currentTime.getTime();
 
 				queryFilters = [
@@ -103,7 +119,15 @@ function getFireStoreQuery({
 		}
 	});
 
-	const firestoreQuery = [...queryFilters, ...mainQuery, sessionTypeQuery, orderBy('new_message_sent_at', 'desc')];
+	const tabQuery = getTabQuery({ tab: activeSubTab, userId });
+
+	const firestoreQuery = [
+		...queryFilters,
+		...mainQuery,
+		sessionTypeQuery,
+		...tabQuery,
+		orderBy('new_message_sent_at', 'desc'),
+	];
 
 	return firestoreQuery;
 }

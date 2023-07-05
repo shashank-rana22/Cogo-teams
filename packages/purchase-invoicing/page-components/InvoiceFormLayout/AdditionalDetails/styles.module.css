@@ -1,0 +1,51 @@
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.label {
+	width: 210px;
+	padding-left: 16px;
+	margin-top: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.inputcontainer {
+	display: flex;
+	margin: 10px 0;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: var(--font-size-md);
+		}
+
+		.ui_input_container {
+			width: 180px;
+		}
+	}
+}
+
+.selectcontainer {
+	display: flex;
+	margin: 10px 0;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: var(--font-size-md);
+		}
+
+		.ui_select_container {
+			width: 180px;
+		}
+	}
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
+}

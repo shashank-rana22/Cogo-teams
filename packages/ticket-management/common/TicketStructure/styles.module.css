@@ -1,0 +1,9 @@
+.ticket_box {
+	height: calc(100% - 47px);
+	padding-bottom: 8px;
+	overflow-y: auto;
+}
+
+.ticket_box::-webkit-scrollbar {
+	display: none;
+}

@@ -5,7 +5,7 @@ const checkIfServiceAlreadyPresent = (servicesObj, service) => {
 	return true;
 };
 
-const tradeTypeBasedServiceType = {
+const TRADE_TYPE_BASED_SERVICE_TYPE_MAPPING = {
 	import : 'fcl_freight_local_service_import',
 	export : 'fcl_freight_local_service_export',
 };
@@ -66,9 +66,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 						}
 					}
 				} else {
-					const serviceType = trade_type in tradeTypeBasedServiceType
-						? tradeTypeBasedServiceType[trade_type]
-						: service_type;
+					const serviceType = TRADE_TYPE_BASED_SERVICE_TYPE_MAPPING[trade_type] || service_type;
 
 					const canPushService = checkIfServiceAlreadyPresent(
 						serviceObj.mainServices,

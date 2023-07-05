@@ -1,0 +1,11 @@
+.accordianContainer {
+	width: 95%;
+	padding-bottom: 14px;
+	margin: 14px 26px;
+}
+
+.fullwidth {
+	width: 100%;
+	padding-bottom: 14px;
+	margin-top: 26px;
+}

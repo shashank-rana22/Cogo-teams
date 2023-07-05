@@ -17,7 +17,7 @@ const controls = [
 		rules       : { required: 'Partner is Required' },
 	},
 	{
-		name           : 'agent',
+		name           : 'agent_id',
 		label          : 'Agent',
 		type           : 'asyncSelect',
 		asyncKey       : 'partner_users',

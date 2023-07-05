@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.input_box {
+	width: 70%;
+	margin-right: 12px;
+}
+
+.flex_box {
+	display: flex;
+	justify-content: space-between;
+	width: 30%;
+}

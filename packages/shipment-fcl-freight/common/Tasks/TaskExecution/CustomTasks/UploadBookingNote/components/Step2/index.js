@@ -1,7 +1,7 @@
 import { Button, TabPanel, Tabs } from '@cogoport/components';
-import { useState } from 'react';
+import { Layout } from '@cogoport/ocean-modules';
+import { useState, useMemo } from 'react';
 
-import Layout from '../../../../helpers/Layout';
 import { mainControls, bookingNoteNumberControls, movementDetailsControls } from '../../helpers/getStep2Controls';
 
 import styles from './styles.module.css';
@@ -14,6 +14,10 @@ function Step2({ data, setStep, step1_data }) {
 	const { control, formState:{ errors = {} } = {}, handleSubmit } = formProps || {};
 
 	const step1Files = step1Watch('url');
+	const keysForRows = useMemo(
+		() => Array(step1Files.length).fill(null).map(() => Math.random()),
+		[step1Files.length],
+	);
 
 	return (
 		<div>
@@ -37,7 +41,11 @@ function Step2({ data, setStep, step1_data }) {
 							}
 
 							return (
-								<TabPanel name={`${index}`} title={`Booking Note ${index + 1}`}>
+								<TabPanel
+									name={`${index}`}
+									title={`Booking Note ${index + 1}`}
+									key={keysForRows[index]}
+								>
 									<div>
 										<object
 											title="Booking Note"

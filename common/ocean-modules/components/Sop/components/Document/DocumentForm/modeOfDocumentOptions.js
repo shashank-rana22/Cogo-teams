@@ -1,4 +1,4 @@
-const modeOfDocumentOptions = [{
+export default [{
 	label : 'Courier',
 	value : 'courier',
 },
@@ -10,5 +10,3 @@ const modeOfDocumentOptions = [{
 	label : 'Telex',
 	value : 'telex',
 }];
-
-export default modeOfDocumentOptions;

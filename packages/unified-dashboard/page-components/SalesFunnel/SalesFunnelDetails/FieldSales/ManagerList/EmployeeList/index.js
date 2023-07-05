@@ -8,8 +8,8 @@ function EmployeeList({ data = {}, currency, filters }) {
 			{data.user_name?.toLowerCase() !== 'others' && (
 				<Employee
 					val={{
-						user_name  : 'Self',
-						manager_id : data.manager_id,
+						user_name : 'Self',
+						agent_id  : data.agent_id,
 						...data.self,
 					}}
 					currency={currency}

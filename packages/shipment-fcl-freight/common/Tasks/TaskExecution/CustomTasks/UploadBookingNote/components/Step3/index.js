@@ -1,17 +1,20 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-
-import Layout from '../../../../helpers/Layout';
+import { Layout } from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
 
-function Step3({ data, setStep }) {
+const DEFAULT_PRICE_VALUE = 0;
+const DEFAULT_QUANTITY_VALUE = 0;
+const STEP_ON_BACK = 2;
+
+function Step3({ data, setStep = () => {}, shipment_id }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
+
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
 
-	const customValues = {};
 	const formValues = watch();
 
 	const prepareFormValues = () => {
@@ -20,7 +23,7 @@ function Step3({ data, setStep }) {
 			if (key && formValues[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
-					total    : (value.price || 0) * (value.quantity || 0),
+					total    : (value.price || DEFAULT_PRICE_VALUE) * (value.quantity || DEFAULT_QUANTITY_VALUE),
 					currency : 'INR',
 				}));
 			}
@@ -30,9 +33,10 @@ function Step3({ data, setStep }) {
 	};
 
 	const newFormValues = prepareFormValues();
+	const CUSTOM_FORM_VALUES = {};
 
 	Object.keys(formValues).forEach((key) => {
-		customValues[key] = {
+		CUSTOM_FORM_VALUES[key] = {
 			formValues : newFormValues[key],
 			id         : key,
 		};
@@ -44,11 +48,12 @@ function Step3({ data, setStep }) {
 				control={control}
 				fields={finalControls}
 				errors={errors}
-				customValues={customValues}
+				customValues={CUSTOM_FORM_VALUES}
+				shipment_id={shipment_id}
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(2)}>Back</Button>
+				<Button themeType="secondary" onClick={() => setStep(STEP_ON_BACK)}>Back</Button>
 
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>

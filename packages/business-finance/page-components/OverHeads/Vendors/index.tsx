@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
@@ -69,6 +69,7 @@ function VenderComponent() {
                         	const { options = [], placeholder = '', value = '' } = Controls[key];
                         	return (
 	<Select
+		key={key}
 		value={filters?.[key]}
 		onChange={(e:any) => handleChange(e, value)}
 		placeholder={placeholder}
@@ -163,10 +164,24 @@ function VenderComponent() {
 
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{getFormattedPrice(totalPaidAmount, currency)}
+				{formatAmount({
+					amount  :	totalPaidAmount,
+				 currency,
+				 options : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 				{' '}
 				<Tooltip
-					content={`Current Month: ${getFormattedPrice(currentMonthPaidAmount, currency)}`}
+					content={`Current Month: ${formatAmount({
+						amount  :	currentMonthPaidAmount,
+					 currency,
+					 options : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}`}
 					placement="top"
 				>
 					<IcMInfo />
@@ -179,7 +194,14 @@ function VenderComponent() {
 		const { openInvoices = 0, openInvoiceAmount = 0, currency = '' } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{getFormattedPrice(openInvoiceAmount, currency)}
+				{formatAmount({
+					amount  :	openInvoiceAmount,
+				 currency,
+				 options : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 				<div>
 					(
 					{openInvoices}

@@ -33,7 +33,7 @@ function NominationTask({
 	const subject = `Nomination//SID:${shipmentData.serial_id}//${primaryService?.origin_port?.display_name}-
 					${primaryService?.destination_port?.display_name}//${primaryService?.cargo_weight_per_container}`;
 
-	const { apiTrigger, loading, data } = useSendNominationNotification({ });
+	const { apiTrigger, loading, response } = useSendNominationNotification({ });
 
 	const { control, formState: { errors }, handleSubmit, getValues } = useForm();
 
@@ -99,7 +99,7 @@ function NominationTask({
 	return (
 		<div>
 			<PreviewAndSubmit
-				data={data}
+				data={response}
 				show={show}
 				setShow={setShow}
 				getTaskConfigApi={taskConfigData}
@@ -111,7 +111,7 @@ function NominationTask({
 			{subject}
 
 			<div className={styles.form_container}>
-				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+				{controls.map((item) => <FormElement key={item?.name} control={control} errors={errors} {...item} />)}
 			</div>
 
 			<div className={styles.button_container}>

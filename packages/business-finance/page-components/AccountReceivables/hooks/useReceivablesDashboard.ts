@@ -23,7 +23,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/outstanding-by-age',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_outstanding_by_age',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -47,7 +47,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/quarterly-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_quarterly_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -71,7 +71,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/kam-wise-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_kam_wise_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -83,7 +83,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/daily-sales-outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_daily_sales_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -107,7 +107,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/sales-funnel',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_sales_funnel',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -131,7 +131,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 			url     : '/payments/dashboard/outstanding',
 			method  : 'get',
 			authKey : 'get_payments_dashboard_outstanding',
-		},
+		} as any,
 		{ manual: true },
 	);
 
@@ -150,8 +150,12 @@ const useReceivablesDashboard = (entityCode: string) => {
 	}, [ageingBucketData, dailySalesOutstandingApi, quaterlyDataApi]);
 
 	useEffect(() => {
-		kamOutstandingTrigger();
-	}, [kamOutstandingTrigger]);
+		kamOutstandingTrigger({
+			params: {
+				entityCode: entityCode || undefined,
+			},
+		});
+	}, [kamOutstandingTrigger, entityCode]);
 
 	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 

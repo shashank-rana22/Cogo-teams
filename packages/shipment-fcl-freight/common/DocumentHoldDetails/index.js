@@ -6,24 +6,24 @@ import { useContext } from 'react';
 
 import styles from './styles.module.css';
 
-const docStatusMapping = {
+const DOC_STATUS_MAPPING = {
 	hold: 'On Hold',
 };
-const colorMapping = {
+const STATUS_COLOR_MAPPING = {
 	eligible  : 'green',
 	requested : 'yellow',
 };
 
 export default function DocumentHoldDetails() {
-	const { document_delay_status = '', documents = [], tradeType } = useContext(ShipmentDetailContext);
+	const { document_delay_status = '', documents = [], primary_service = {} } = useContext(ShipmentDetailContext);
 
 	if (!document_delay_status) {
 		return null;
 	}
 
-	const status = docStatusMapping[document_delay_status] || startCase(document_delay_status);
+	const status = DOC_STATUS_MAPPING[document_delay_status] || startCase(document_delay_status);
 
-	const remarksAccessKey = tradeType === 'export' ? 'bl_remarks' : 'remarks';
+	const remarksAccessKey = primary_service?.trade_type === 'export' ? 'bl_remarks' : 'remarks';
 
 	const holdReasons = (documents || []).flatMap((doc) => doc?.[remarksAccessKey] || []);
 
@@ -33,12 +33,12 @@ export default function DocumentHoldDetails() {
 	);
 
 	return (
-		<div className={cl`${styles.container} ${styles[colorMapping[document_delay_status]]}`}>
+		<div className={cl`${styles.container} ${styles[STATUS_COLOR_MAPPING[document_delay_status]]}`}>
 			<IcMError className={styles.error_icon} />
 
 			<div>
 				<h2 className={styles.heading}>
-					{`Your ${tradeType === 'export' ? 'BL' : 'DO'} Document is ${status}`}
+					{`Your ${primary_service?.trade_type === 'export' ? 'BL' : 'DO'} Document is ${status}`}
 				</h2>
 
 				<h4>

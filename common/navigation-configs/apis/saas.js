@@ -224,6 +224,11 @@ const saas = {
 			api         : 'get_saas_hs_code_six_digit_list',
 			access_type : 'private',
 		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_tracking: [
 		{
@@ -1480,6 +1485,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'update_subscription_payment_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
@@ -2350,6 +2360,17 @@ const saas = {
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_import_export_controls: [
 		{
@@ -2479,6 +2500,36 @@ const saas = {
 			access_type : 'private',
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
+		},
+	],
+	app_saas_live_vessel_tracking: [
+		{
+			api         : 'get_saas_vessel_tracking',
+			access_type : 'private',
+			module      : 'live-vessel-tracking',
+			feature     : 'live-vessel-tracking',
+		},
+	],
+	app_saas_air_ocean_tracking: [
+		{
+			api          : 'update_external_reference_number',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'export_tracking_data',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_container_subscriptions_summary',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_air_subscriptions_summary',
+			access_type  : 'private',
+			service_name : 'air_tracking',
 		},
 	],
 

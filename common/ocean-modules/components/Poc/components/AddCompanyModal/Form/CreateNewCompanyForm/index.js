@@ -7,32 +7,35 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import formValuePatterns from '../../../../../../utils/formValuePatterns';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
 
+const DEFAULT_ORG_TRADE_PARTIES_PARAMS = {
+	billing_addresses_data_required : true,
+	other_addresses_data_required   : true,
+	poc_data_required               : true,
+};
+
+function Error(key, errors) {
+	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
+}
+
 function CreateNewCompanyForm({ tradePartyType }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
-		defaultParams: {
-			billing_addresses_data_required : true,
-			other_addresses_data_required   : true,
-			poc_data_required               : true,
-		},
-		defaultFilters: {
-			organization_status: 'active',
-		},
+		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
+		defaultFilters : { organization_status: 'active' },
 	});
 
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
-
 	const [pocNameOptions, setPocNameOptions] = useState([]);
 
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
@@ -43,10 +46,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 	}, [resetField]);
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
-
-	function Error(key) {
-		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
-	}
 
 	useEffect(() => {
 		if (formValues?.registration_number) {
@@ -71,7 +70,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			const { pocNameOptions:nameOptions, pincode, business_name } = getAddressRespectivePincodeAndPoc({
 				data    : addressData,
 				address : formValues?.address,
-
 			});
 
 			setPocNameOptions(nameOptions);
@@ -87,7 +85,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			const selectedName = pocNameOptions?.find((item) => item?.value === formValues?.name);
 			setValue('work_scopes', selectedName?.work_scopes || []);
 			setValue('email', selectedName?.email || '');
-
 			setValue('mobile_number', {
 				country_code : selectedName?.mobile_country_code,
 				number       : selectedName?.mobile_number,
@@ -96,6 +93,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 	}, [formValues?.name, pocNameOptions, setValue, resetMultipleFields]);
 
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
+
+	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
 
 	return (
 		<div>
@@ -111,8 +110,9 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							optionValueKey="id"
 							rules={{ required: 'Country of Registration is required' }}
 						/>
-						{Error('country')}
+						{Error('country', errors)}
 					</div>
+
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
 							{`PAN Number / Registration Number ${
@@ -125,13 +125,10 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							placeholder="Enter Registration Number"
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								pattern  : {
-									value   : formValuePatterns.PAN_NUMBER,
-									message : 'Pan Number is invalid',
-								},
+								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
 							}}
 						/>
-						{Error('registration_number')}
+						{Error('registration_number', errors)}
 					</div>
 				</div>
 
@@ -144,9 +141,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						placeholder="Enter Address"
 						options={addressOptions}
 						rules={{ required: 'Address is required' }}
-
 					/>
-					{Error('address')}
+					{Error('address', errors)}
 				</div>
 
 				<div className={styles.form_item_container}>
@@ -158,7 +154,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						rules={{ required: 'Company Name is required' }}
 						placeholder="Enter Company Name"
 					/>
-					{Error('business_name')}
+					{Error('business_name', errors)}
 				</div>
 
 				<div className={styles.row}>
@@ -171,7 +167,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							name="pincode"
 							rules={{ required: 'Pincode is required' }}
 						/>
-						{Error('pincode')}
+						{Error('pincode', errors)}
 					</div>
 
 					<div className={styles.form_item_container}>
@@ -206,14 +202,11 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							size="sm"
 							rules={{
-								pattern: {
-									value   : formValuePatterns.EMAIL,
-									message : 'Enter valid email',
-								},
+								pattern: { value: countryValidation?.regex?.EMAIL, message: 'Enter valid email' },
 							}}
 							placeholder="Enter Email Address"
 						/>
-						{Error('email')}
+						{Error('email', errors)}
 					</div>
 
 				</div>
@@ -226,14 +219,13 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							name="mobile_number"
 						/>
-						{Error('mobile_number')}
+						{Error('mobile_number', errors)}
 					</div>
 
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
 						<MobileNumberController size="sm" control={control} name="alternate_mobile_number" />
 					</div>
-
 				</div>
 
 				<div className={styles.checkbox}>
@@ -249,19 +241,14 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							name="tax_number"
 							control={control}
 							rules={{
-								required: {
-									value   : !formValues.not_reg_under_gst,
-									message : 'GST Number is required',
-								},
-								pattern: {
-									value   : formValuePatterns.GST_NUMBER,
-									message : 'GST Number is invalid',
-								},
+								required : { value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
+								pattern  : { value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
 							}}
 							disabled={formValues.not_reg_under_gst}
 						/>
-						{Error('tax_number')}
+						{Error('tax_number', errors)}
 					</div>
+
 					<div className={styles.upload_container}>
 						<label className={styles.form_label}>GST Proof</label>
 						<UploadController
@@ -270,16 +257,12 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							disabled={formValues.not_reg_under_gst}
 							control={control}
 							rules={{
-								required: {
-									value   : !formValues.not_reg_under_gst,
-									message : 'GST Proof is required',
-								},
+								required: { value: !formValues.not_reg_under_gst, message: 'GST Proof is required' },
 							}}
 						/>
-						{Error('tax_number_document_url')}
+						{Error('tax_number_document_url', errors)}
 					</div>
 				</div>
-
 			</form>
 		</div>
 	);

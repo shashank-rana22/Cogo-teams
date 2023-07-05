@@ -1,16 +1,17 @@
 import styles from './styles.module.css';
 
-const classNames = {
-	FCL         : 'fcl',
-	'FCL Local' : 'fcl_local',
-	LCL         : 'lcl',
-	'FCL CFS'   : 'fcl_cfs',
+const CLASS_NAMES = {
+	FCL          : 'red',
+	'FCL Local'  : 'red',
+	'FCL CFS'    : 'red',
+	'FCL Custom' : 'red_faded',
+	LCL          : 'red_faded',
 };
 
 export default function ServiceIcon({ Icon, text }) {
 	return (
-		<div className={`${styles.icon_container} ${styles[classNames[text]]}`}>
-			<Icon />
+		<div className={`${styles.icon_container} ${styles[CLASS_NAMES[text]]}`}>
+			{Icon ? <Icon /> : null}
 
 			<div className={styles.icon_text}>
 				{text}

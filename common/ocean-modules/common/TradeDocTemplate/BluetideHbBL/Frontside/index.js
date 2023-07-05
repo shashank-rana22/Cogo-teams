@@ -3,14 +3,17 @@ import React from 'react';
 import Read from './Read';
 import Write from './Write';
 
+const MODE_READ = 'read';
+
 function Frontside({
-	mode = 'read',
+	mode = MODE_READ,
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	control,
 	initialValues = {},
+	watermark = null,
 }) {
-	const isReadonly = mode === 'read';
+	const isReadonly = mode === MODE_READ;
 
 	return isReadonly ? (
 		<Read defaultValues={initialValues} />
@@ -20,7 +23,7 @@ function Frontside({
 			control={control}
 			setaddAnnexure={setaddAnnexure}
 			addAnnexure={addAnnexure}
-			initialValues={initialValues}
+			watermark={watermark}
 		/>
 	);
 }

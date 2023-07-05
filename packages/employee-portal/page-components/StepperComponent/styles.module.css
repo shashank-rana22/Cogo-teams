@@ -1,0 +1,40 @@
+.header {
+	margin-bottom: 16px;
+	font-weight: 800;
+}
+
+.single_card {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 200px;
+	padding: 20px 20px 20px 30px;
+	margin: 0 20px 20px 0;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.icon_wrapper {
+	padding-right: 14px;
+}
+
+.tick_icon {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+}
+
+.text_wrapper {
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.container {
+	margin-bottom: 38px;
+}
+
+.flex_wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}

@@ -13,7 +13,10 @@ import {
 	GenerateFreightCertificate,
 	ChooseServiceProvider,
 	UploadDraftBL,
+	AmendDraftBl,
+	UploadSI,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -21,6 +24,9 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
+const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
+
+const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
 function ExecuteTask({
 	task = {},
@@ -42,7 +48,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
 		: {};
 
 	if (loading) {
@@ -120,7 +126,16 @@ function ExecuteTask({
 	}
 
 	if (task?.task === 'amend_draft_house_bill_of_lading') {
-		return <div>Amend draft bl flow</div>;
+		return (
+			<AmendDraftBl
+				task={task}
+				shipmentData={shipment_data}
+				primaryService={primary_service}
+				selectedMail={selectedMail}
+				clearTask={onCancel}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
 	}
 
 	if (task.task === 'choose_service_provider') {
@@ -159,13 +174,34 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task.task === 'upload_si'
+		&& primary_service?.trade_type === 'export'
+	) {
+		return (
+			<UploadSI
+				pendingTask={task}
+				onCancel={onCancel}
+				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (
+		task?.task === 'generate_cargo_insurance'
+		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
+	) {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

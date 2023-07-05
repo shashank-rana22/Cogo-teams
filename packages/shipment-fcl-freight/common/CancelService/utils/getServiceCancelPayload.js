@@ -1,4 +1,4 @@
-const completeOrCancel = ['complete', 'cancelled'];
+const NOT_CANCEL_ID_STATUS = ['complete', 'cancelled'];
 
 export default function getServiceCancelPayload({
 	controls = {}, servicesList = [], service_type = '', trade_type = '', formData = {}, shipment_data = {},
@@ -22,11 +22,11 @@ export default function getServiceCancelPayload({
 	}
 
 	const cancelIds = cancellation_services
-		.filter((service) => !completeOrCancel.includes(service.status))
+		.filter((service) => !NOT_CANCEL_ID_STATUS.includes(service.status))
 		.map((service) => service?.id);
 
-	const formValues = {};
-	controls.forEach((ctrl) => { formValues[ctrl.name] = formData[ctrl.name]; });
+	const FORM_VALUES = {};
+	controls.forEach((ctrl) => { FORM_VALUES[ctrl.name] = formData[ctrl.name]; });
 
 	const payload = {
 		ids                 : cancelIds,
@@ -34,7 +34,7 @@ export default function getServiceCancelPayload({
 		service_type,
 		data                : {
 			state: 'cancelled',
-			...formValues,
+			...FORM_VALUES,
 		},
 	};
 

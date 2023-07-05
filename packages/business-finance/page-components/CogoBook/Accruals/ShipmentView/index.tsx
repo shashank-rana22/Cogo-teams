@@ -1,11 +1,11 @@
-import { Input, Select } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Input, Select, Tooltip } from '@cogoport/components';
+import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
-import { MILESTONE_OPTIONS } from '../constant';
+import { CHANNEL_OPTIONS, MILESTONE_OPTIONS } from '../constant';
 
 import Card from './Card';
 import { accrualColumn } from './constant';
@@ -37,6 +37,7 @@ function ShipmentView() {
 		page               : 1,
 		pageLimit          : 10,
 		milestone          : null,
+		channel            : '',
 	});
 
 	const { bulkAction } = bulkSection;
@@ -121,15 +122,51 @@ function ShipmentView() {
 
 			<div className={styles.table_data}>
 				<div className={styles.input_data_container}>
-					<Select
-						value={filters?.milestone}
-						onChange={(val) => setFilters({ ...filters, milestone: val })}
-						options={MILESTONE_OPTIONS}
-						isClearable
-						placeholder="Select Milestone"
-						className={styles.milestone}
-						size="sm"
-					/>
+					<div className={styles.select_container}>
+						<Select
+							value={filters?.milestone}
+							onChange={(val) => setFilters({ ...filters, milestone: val })}
+							options={MILESTONE_OPTIONS}
+							isClearable
+							placeholder="Select Milestone"
+							className={styles.milestone}
+							size="sm"
+						/>
+
+						<div className={styles.channel_info}>
+							<Select
+								value={filters?.channel}
+								onChange={(val) => setFilters({ ...filters, channel: val })}
+								options={CHANNEL_OPTIONS}
+								isClearable
+								placeholder="Channel"
+								className={styles.milestone}
+								size="sm"
+							/>
+
+							<Tooltip
+								maxWidth={500}
+								placement="top"
+								content={(
+									<div className={styles.content_tooltip}>
+										<div>
+											<span className={styles.heading_bold}>Review Channel: </span>
+											Shipment IDs having expected profitability
+										</div>
+
+										<div>
+											<span className={styles.heading_bold}>Audit Channel: </span>
+											{' '}
+											Shipment IDs to be investigated
+										</div>
+									</div>
+								)}
+							>
+								<IcMInfo />
+							</Tooltip>
+						</div>
+
+					</div>
 
 					<div className={styles.input_container}>
 						<Input

@@ -1,0 +1,64 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 24px 0;
+}
+
+.select_container {
+	display: flex;
+	justify-content: space-between;
+	width: 38%;
+}
+
+.async_select {
+	:global {
+		.ui_select_display_container {
+			width: 200px;
+			height: 32px !important;
+		}
+	}
+}
+
+.legends {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6px 24px;
+	background: var(--color-secondary-5);
+	border-radius: 8px;
+}
+
+.small_hr {
+	display: flex;
+	width: 2px;
+	height: 22px;
+	margin: 0 16px;
+	background: var(--color-secondary-greyscale-5);
+	border-radius: 28px;
+}
+
+.booked_circle {
+	width: 15px;
+	height: 15px;
+	margin: 0 8px;
+	background: #adcd6b;
+	border-radius: 50%;
+}
+
+.acc_circle {
+	width: 15px;
+	height: 15px;
+	margin: 0 8px;
+	background: #58c6d2;
+	border-radius: 50%;
+}
+
+.flex_data {
+	display: flex;
+	align-items: center;
+}
+
+.legend {
+	font-weight: 600;
+}

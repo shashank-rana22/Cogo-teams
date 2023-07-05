@@ -1,7 +1,7 @@
 import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
-const controls = ({ country_id }) => {
+const getControls = ({ country_id }) => {
 	const taxLabel = getCountrySpecificData({
 		country_id,
 		accessorType  : 'registration_number',
@@ -135,4 +135,5 @@ const controls = ({ country_id }) => {
 		},
 	];
 };
-export default controls;
+
+export default getControls;

@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import getServiceValues from '../helpers/get-service-values';
@@ -27,7 +28,7 @@ function useServiceUpsellControls({
 }) {
 	const newServices = services.map((item) => ({
 		...item,
-		service_type: item?.service_type?.split('_service')?.[0],
+		service_type: item?.service_type?.split('_service')?.[GLOBAL_CONSTANTS.zeroth_index],
 	}));
 	const { serviceWiseControls = {} } = useGetControls({ truckTypeToggle });
 
@@ -48,7 +49,7 @@ function useServiceUpsellControls({
 		defaultValues[control?.name] = service?.[control?.name] || prefilledValues?.[control?.name] || control?.value;
 	});
 
-	const { handleSubmit, watch, control, formState : { errors } } = useForm({ defaultValues });
+	const { handleSubmit, watch, control, formState : { errors }, trigger } = useForm({ defaultValues });
 
 	const formValues = watch();
 	const { truck_body_type } = formValues;
@@ -62,6 +63,7 @@ function useServiceUpsellControls({
 		handleSubmit,
 		control,
 		errors,
+		trigger,
 	};
 
 	return {

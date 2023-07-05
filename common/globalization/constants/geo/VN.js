@@ -29,10 +29,11 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : '',
-		GST           : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		PAN              : '',
+		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -55,6 +56,7 @@ export default {
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
 		sales_role_ids            : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
@@ -74,10 +76,13 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
+
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
+		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -99,6 +104,7 @@ export default {
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
+		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
 		shipping_line_supply_agents      : [
 			'1e3ee025-88a2-43ea-abd5-08017f61f2d2',
 			'4248e4d4-59cf-441e-a4a8-83bb29c86bcf',
@@ -142,11 +148,14 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'582391da-3d9b-423f-a5af-df1da84b1c5a',
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -197,10 +206,22 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_shipment_agent_ids: [
+		cogo_one_admin_user_ids     : [], // todo
+		cogo_one_shipment_agent_ids : [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
-		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		cogo_one_kam_agent_ids: [
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
+		],
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -328,7 +349,7 @@ export default {
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
@@ -357,6 +378,36 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label: '501 Cogoport Vietnam', value: '501',
+			},
+		],
+		migration_status : [],
+		timezone         : [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
+		education_level: {
+			post_graduates_degree : [],
+			graduate_degree       : [],
+			doctorate_degree      : [],
+		},
 	},
 	navigations: {
 		supply_dashboard: {
@@ -369,6 +420,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: false,
+				},
 			},
 		},
 	},
@@ -391,6 +449,11 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: false,
+			},
+			cogo_one: {
+				has_voice_call_access     : false,
+				default_country_code      : 'IN',
+				template_default_language : 'vietnamese',
 			},
 		},
 	},

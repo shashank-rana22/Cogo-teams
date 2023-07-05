@@ -1,4 +1,4 @@
-export const leftDataControls = {
+export default {
 	lcl_freight_service: [
 		{ name: 'po_no', fullWidth: false, label: 'PO Number' },
 		{ name: 'hbl_no', fullWidth: false, label: 'HBL Number' },

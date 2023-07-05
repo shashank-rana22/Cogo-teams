@@ -2,24 +2,29 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useStudentWiseTestResult = ({ test_id = '' }) => {
-	const [{ loading: reAttemptLoading }, trigger] = useRequest({
-		method : 'post',
-		url    : '/update_test_mapping_responses',
-	}, { manual: true });
+const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
+	const {
+		user: { id: user_id },
+	} = useSelector(({ profile }) => ({
+		user: profile.user,
+	}));
+
+	const { debounceQuery, query } = useDebounceQuery();
 
 	const [showReAttemptModal, setShowReAttemptModal] = useState(false);
 
 	const [activeTab, setActiveTab] = useState('appeared');
 
 	const [params, setParams] = useState({});
-	const [filter, setFilter] = useState('');
-	const [sortFilter, setSortFilter] = useState({});
-	const [searchValue, setSearchValue] = useState('');
 
-	const { debounceQuery, query } = useDebounceQuery();
+	const [filter, setFilter] = useState('');
+
+	const [sortFilter, setSortFilter] = useState({});
+
+	const [searchValue, setSearchValue] = useState('');
 
 	const { sortBy, sortType } = sortFilter || {};
 
@@ -28,7 +33,13 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query, result_status: filter, is_appeared: true, status: 'active' },
+				filters   : {
+					test_id,
+					q             : query,
+					result_status : filter,
+					is_appeared   : true,
+					status        : activeAttempt === 'attempt1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Appeared',
@@ -37,14 +48,25 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query, result_status: filter, state: 'ongoing' },
+				filters   : {
+					test_id,
+					q             : query,
+					result_status : filter,
+					state         : 'ongoing',
+					status        : activeAttempt === 'attempt1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Ongoing',
 		},
 		not_appeared: {
 			payload: {
-				filters: { test_id, q: query, is_appeared: false, status: 'active' },
+				filters: {
+					test_id,
+					q           : query,
+					is_appeared : false,
+					status      : activeAttempt === 'attempt1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Not Appeared',
@@ -59,6 +81,11 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 		params : { ...payload },
 	}, { manual: false });
 
+	const [{ loading: reAttemptLoading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_test_mapping_responses',
+	}, { manual: true });
+
 	const handleReAttempt = async () => {
 		try {
 			await trigger({
@@ -67,6 +94,10 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 					test_id,
 				},
 			});
+
+			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
+			localStorage.removeItem('visibilityChangeCount');
+			localStorage.removeItem(`current_question_id_${test_id}_${user_id}`);
 
 			refetch();
 		} catch (err) {

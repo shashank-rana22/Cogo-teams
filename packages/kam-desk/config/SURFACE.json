@@ -80,6 +80,10 @@
         "value": "upload_commercial_invoice"
       },
       {
+        "label": "E-Way Bill Extension",
+        "value": "eway_bill_extension"
+      },
+      {
         "label": "Invoice Pending",
         "value": "invoice_pending"
       },

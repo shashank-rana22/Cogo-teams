@@ -19,6 +19,7 @@ const controls = [
 		type     : 'select',
 		options  : [
 			{ label: 'Active', value: 'active_test' },
+			{ label: 'Re-test', value: 'retest' },
 			{ label: 'Draft', value: 'draft' },
 			{ label: 'Published', value: 'published' },
 			{ label: 'Expired', value: 'expired' },

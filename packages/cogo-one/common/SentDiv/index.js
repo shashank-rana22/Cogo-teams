@@ -1,11 +1,12 @@
 import { cl } from '@cogoport/components';
-import { IcMCross, IcMListView, IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
 
 import { LOGO_URL } from '../../constants';
 import MessageBody from '../MessageBody';
 
+import FooterItems from './FooterItems';
 import styles from './styles.module.css';
 
 function SentDiv({
@@ -21,20 +22,23 @@ function SentDiv({
 		message_status = '',
 	} = eachMessage;
 
-	const { btns = [], list = [] } = response || {};
-	const [showList, setShowList] = useState(false);
-
-	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = created_at && formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
 	return (
 		<div className={styles.container}>
 			<div className={styles.message_div}>
 				<div className={styles.name}>
 					Replied by
-					{' '}
+					&nbsp;
 					{send_by || (session_type === 'admin' ? 'kam' : 'bot')}
 					,
-					<span className={styles.time_stamp}>{date}</span>
+					<span className={styles.time_stamp}>{date || ''}</span>
 				</div>
 
 				<div className={styles.styled_div}>
@@ -54,45 +58,7 @@ function SentDiv({
 						</div>
 
 					</div>
-
-					{!isEmpty(btns) && (
-						<div className={styles.btns_container}>
-							{(btns || []).map((eachbtn) => <div key={eachbtn} className={styles.btn}>{eachbtn}</div>)}
-						</div>
-					) }
-					{!isEmpty(list) && (
-						<button
-							className={styles.list_button}
-							onClick={() => setShowList(!showList)}
-						>
-							{
-								showList ? (
-									<span className={styles.btn_container}>
-										<IcMCross className={styles.btn_icon} />
-										Hide
-									</span>
-								) : (
-									<span className={styles.btn_container}>
-										<IcMListView className={styles.btn_icon} />
-										List
-									</span>
-								)
-							}
-						</button>
-					) }
-					{!isEmpty(list) && showList && (
-						<div className={styles.list_container}>
-							{(list || []).map((listItem) => {
-								const { id, title, description } = listItem;
-								return (
-									<div key={`msg-list-item-${id}`} className={styles.list_item}>
-										<div className={styles.list_item_title}>{title}</div>
-										<div className={styles.list_item_description}>{description}</div>
-									</div>
-								);
-							})}
-						</div>
-					) }
+					<FooterItems response={response} />
 				</div>
 			</div>
 			<img

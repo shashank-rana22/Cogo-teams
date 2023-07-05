@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateLeft,
 	IcMArrowRotateDown,
@@ -11,11 +11,18 @@ import React, { useState } from 'react';
 
 import useInvoiceDetails from '../../hooks/useGetinvoiceTimeline';
 
+import CancellationAgreement from './CancellationAgreement';
 import Poc from './POC';
 import styles from './styles.module.css';
 import Timeline from './Timeline';
 import UtrNumber from './UTRNumber';
 
+const INVOICE_DATA_MAPPING = [
+	{ id: '1', label: 'POC' },
+	{ id: '2', label: 'Timeline' },
+	{ id: '3', label: 'UTR Number' },
+	{ id: '4', label: 'Cancellation Agreement' },
+];
 function InvoiceDetails({ item }) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
@@ -23,7 +30,7 @@ function InvoiceDetails({ item }) {
 
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 
-	const [dropDownData, setDropDownData] = useState<object>({});
+	const [dropDownData, setDropDownData] = useState({});
 
 	const handleShow = () => {
 		setShowDetailsCard(true);
@@ -38,12 +45,6 @@ function InvoiceDetails({ item }) {
 		}));
 	};
 
-	const INVOICE_DATA_MAPPING = [
-		{ id: '1', label: 'POC' },
-		{ id: '2', label: 'Timeline' },
-		{ id: '3', label: 'UTR Number' },
-	];
-
 	return (
 		<>
 			<div
@@ -52,11 +53,9 @@ function InvoiceDetails({ item }) {
 				onClick={handleShow}
 				role="presentation"
 			>
-
 				<div>
 					<IcMOverview width={24} height={24} />
 				</div>
-
 			</div>
 			{showDetailsCard && (
 				<>
@@ -110,43 +109,49 @@ function InvoiceDetails({ item }) {
 											<div className={styles.supplier_data_body}>
 												Invoice Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice(
-														data?.summary?.grandTotal,
-														'INR',
-														{
-															style                 : 'currency',
-															currencyDisplay       : 'code',
-															maximumFractionDigits : 0,
-														},
-													)}
+													{
+														formatAmount({
+															amount   : data?.summary?.grandTotal,
+															currency : data?.summary?.currency,
+															options  : {
+																currencyDisplay       : 'code',
+																maximumFractionDigits : 0,
+																style                 : 'currency',
+															},
+														})
+													}
 												</span>
 											</div>
 											<div className={styles.supplier_data_body}>
 												Ledger Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice(
-														data?.summary?.ledgerTotal,
-														'INR',
-														{
-															style                 : 'currency',
-															currencyDisplay       : 'code',
-															maximumFractionDigits : 0,
-														},
-													)}
+													{
+														formatAmount({
+															amount   : data?.summary?.ledgerTotal,
+															currency : data?.summary?.ledgerCurrency,
+															options  : {
+																currencyDisplay       : 'code',
+																maximumFractionDigits : 0,
+																style                 : 'currency',
+															},
+														})
+}
 												</span>
 											</div>
 											<div className={styles.supplier_data_body}>
 												Balance Amount -
 												<span style={{ marginLeft: '4px' }}>
-													{getFormattedPrice(
-														data?.summary?.balanceAmount,
-														'INR',
-														{
-															style                 : 'currency',
-															currencyDisplay       : 'code',
-															maximumFractionDigits : 0,
-														},
-													)}
+													{
+														formatAmount({
+															amount   : data?.summary?.balanceAmount,
+															currency : data?.summary?.currency,
+															options  : {
+																currencyDisplay       : 'code',
+																maximumFractionDigits : 0,
+																style                 : 'currency',
+															},
+														})
+}
 												</span>
 											</div>
 										</div>
@@ -197,6 +202,9 @@ function InvoiceDetails({ item }) {
 															)}
 															{label === 'UTR Number' && (
 																<UtrNumber eventData={data} />
+															)}
+															{label === 'Cancellation Agreement' && (
+																<CancellationAgreement data={data} />
 															)}
 														</div>
 													</div>

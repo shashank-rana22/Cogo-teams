@@ -250,7 +250,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'create_test_user_mapping',
+			api          : 'update_test_user_mapping',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -431,6 +431,203 @@ const faq = {
 			api          : 'update_test_mapping_responses',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
+		},
+		{
+			api          : 're_allow_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_duplicate_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	list_courses: [
+		{
+			api          : 'list_cogo_academy_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_user_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	create_course: [
+		{
+			api          : 'create_course_category',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_categories',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_faq_topic',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_faq_tag',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_sub_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_sub_module_chapter',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_course_details',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_sub_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_sub_module_chapter',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_course_sub_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_cogo_academy_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_user_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_module_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_sub_module_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_chapter_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_tests',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
+	course_module: [
+		{
+			api          : 'list_user_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_categories',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_course_details',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_course_sub_module',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_user_course_progress',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_categories',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_user_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 };

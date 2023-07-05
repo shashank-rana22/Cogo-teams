@@ -39,7 +39,7 @@ function PieChart({
 			sub_type   : val.id,
 			label      : val.label,
 			indexValue : selectedBarData.indexValue,
-			barId      : selectedBarData.id,
+			category   : selectedBarData.id,
 		};
 
 		setSelectedPieData(dataObj);

@@ -96,12 +96,24 @@
 }
 
 .list_container {
-	height: calc(100% - 150px);
 	overflow-x: hidden;
 	overflow-y: auto;
+	transition: height 0.5s ease;
+}
+
+.list_container_height {
+	height: calc(100% - 300px);
+}
+
+.list_container_empty_flash {
+	height: calc(100% - 200px);
 }
 
 .bot_list_container {
+	height: calc(100% - 310px);
+}
+
+.bot_list_container_empty_flash {
 	height: calc(100% - 200px);
 }
 
@@ -110,7 +122,8 @@
 }
 
 .tabs {
-	margin: 0 -10px 15px;
+	padding-top: 10px;
+	margin: 0 0 15px;
 }
 
 .user_activity {

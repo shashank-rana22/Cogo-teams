@@ -32,7 +32,13 @@ function Details({
 			{isEmpty(sop_detail) ? <div className={styles.no_data}>No Data Available</div>
 				: (
 					<div>
-						{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+						{Object.keys(mapping).map((key) => (
+							<LabelValue
+								label={key}
+								value={mapping[key]}
+								KEY={key}
+							/>
+						))}
 					</div>
 				)}
 
@@ -43,7 +49,6 @@ function Details({
 					onClick={() => setShowForm(isAddOrEdit)}
 				>
 					{startCase(isAddOrEdit)}
-
 				</Button>
 			</div>
 		</div>

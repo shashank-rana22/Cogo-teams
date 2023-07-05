@@ -109,6 +109,7 @@ function HBLCreate({
 						mode={mode}
 						initialValues={templateInitialValues}
 						ref={ref}
+						watermark="draft"
 					/>
 				</Modal.Body>
 			</Modal>

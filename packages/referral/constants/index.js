@@ -29,7 +29,7 @@ export const ACTIVITY_STATUS = {
 
 export const FIRST_LEVEL_DATA = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7'];
 
-export const SECOUND_LEVEL_DATA = ['L1', 'L3', 'L6', 'L9', 'L12', 'L15', 'L17', 'L19'];
+export const SECOND_LEVEL_DATA = ['L1', 'L3', 'L6', 'L9', 'L12', 'L15', 'L17', 'L19'];
 
 export const THIRD_LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
 
@@ -48,12 +48,90 @@ export const REFERRAL_TYPES = [
 	},
 ];
 
-export const LIST_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
+export const TABS_OPTIONS = [
+	{
+		label : 'Invited',
+		name  : 'invited',
+	},
+	{
+		label : 'Signed Up',
+		name  : 'signed_up',
+	},
+	{
+		label : 'Have KYC Registered Orgs',
+		name  : 'kyc_verified',
+	},
+	{
+		label : 'Affiliates',
+		name  : 'affiliate',
+	},
 
-export const COGOPOINT_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
+];
 
-export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';
+export const BUSINESS_TAB_OPTIONS = [
+	{
+		label : 'Total',
+		name  : 'total',
+	},
+	{
+		label : 'KYC Verified',
+		name  : 'kyc_verified',
+	},
+	{
+		label : 'Shipment',
+		name  : 'shipment',
+	},
+	{
+		label : 'Subscription',
+		name  : 'subscription',
+	},
+];
 
-export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif';
+export const BUSINESS_REWARDS_OPTIONS = [
+	{
+		label : 'Total',
+		name  : 'total',
+	},
+	{
+		label : 'KYC',
+		name  : 'kyc_verified',
+	},
+	{
+		label : 'Shipment',
+		name  : 'shipment',
+	},
+	{
+		label : 'Subscription',
+		name  : 'subscription',
+	},
+];
 
-export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
+export const MAX_LEVEL = 30;
+export const REVENUE_START_PRICE = 5000;
+export const REVENUE_END_PRICE = 200000;
+
+export const SUB_TITLE_OPTIONS = [
+	{
+		title : 'Pending',
+		name  : 'pending',
+	},
+	{
+		title : 'Accepted',
+		name  : 'accepted',
+	},
+	{
+		title : 'Rejected',
+		name  : 'rejected',
+	},
+];
+
+export const SIGN_UP_TITLE_OPTIONS = [
+	{
+		title : 'Users',
+		name  : 'active_user_count',
+	},
+	{
+		title : 'Affiliates',
+		name  : 'affiliate_count',
+	},
+];

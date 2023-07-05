@@ -1,20 +1,27 @@
 import { TabPanel, Tabs as TabContainer, Toggle } from '@cogoport/components';
+import { useContext } from 'react';
+
+import BookingDeskContext from '../../context/BookingDeskContext';
 
 import styles from './styles.module.css';
 
-export default function Tabs({ stateProps = {}, tabs = [] }) {
-	const { activeTab, setActiveTab, filters, setFilters } = stateProps;
+export default function Tabs({ tabs = [] }) {
+	const { tabState: { activeTab } = {}, setTabState, filters, setFilters } = useContext(BookingDeskContext) || {};
 	const { isCriticalOn, ...rest } = filters;
 
 	const couldBeCardsCritical = !!tabs.find(
-		(tab) => tab.name === stateProps.activeTab,
+		(tab) => tab.name === activeTab,
 	)?.isCriticalVisible;
 
 	const handleActiveTabChange = (val) => {
+		if (val === activeTab) {
+			return;
+		}
+
 		const is_critical_visible = !!tabs.find((tab) => tab.name === val)
 			.isCriticalVisible;
 
-		setActiveTab(val);
+		setTabState((p) => ({ ...p, activeTab: val }));
 		setFilters({
 			...rest,
 			...(is_critical_visible && { isCriticalOn }),
@@ -25,7 +32,7 @@ export default function Tabs({ stateProps = {}, tabs = [] }) {
 	return (
 		<div className={styles.container}>
 			<TabContainer
-				themeType="primary"
+				themeType="secondary"
 				activeTab={activeTab}
 				onChange={handleActiveTabChange}
 			>

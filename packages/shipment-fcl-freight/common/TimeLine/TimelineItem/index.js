@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 import {
@@ -10,26 +11,25 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
-export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
+export default function TimelineItem({
+	item, isLast = false,
+	consecutivelyCompleted = false, icd_milestones_to_show_completed = [],
+}) {
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
 
 	const { primary_service } = useContext(ShipmentDetailContext) || {};
-	const {
-		schedule_departure,
-		schedule_arrival,
-		selected_schedule_departure,
-		selected_schedule_arrival,
-		cargo_arrived_at,
-	} = primary_service || {};
 
 	const milestoneToDisplayDate = {
-		'Vessel Departed From Origin (ETD)'   : schedule_departure || selected_schedule_departure,
-		'Vessel Arrived At Destination (ETA)' : cargo_arrived_at || schedule_arrival || selected_schedule_arrival,
+		'Vessel Departed From Origin (ETD)'   : getDepartureArrivalDate(primary_service, 'departure'),
+		'Vessel Arrived At Destination (ETA)' : getDepartureArrivalDate(primary_service, 'arrival'),
 	};
 
-	const displayCompletedDate = completed_on || milestoneToDisplayDate[item?.milestone];
+	const displayCompletedDate = milestoneToDisplayDate[item?.milestone] || completed_on;
 
-	let isCompleted = !!completed_on && consecutivelyCompleted;
+	let isCompleted = (!!completed_on
+		|| (icd_milestones_to_show_completed || []).includes(milestone))
+		&& consecutivelyCompleted;
+
 	isCompleted = isLast ? !!completed_on : isCompleted;
 
 	const circleClass = `${circle} ${is_sub ? small : big} ${isCompleted ? completed : ''}`;
@@ -42,7 +42,7 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 
 			{displayCompletedDate ? (
 				<>
-					<div className={label}>Completed On</div>
+					<div className={label}>{isCompleted ? 'Completed On' : 'Expected'}</div>
 					<div className={value}>
 						{getDisplayDate({ date: displayCompletedDate, formatType: 'dateTime' })}
 					</div>

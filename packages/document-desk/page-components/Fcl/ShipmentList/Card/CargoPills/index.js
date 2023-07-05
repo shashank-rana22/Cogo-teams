@@ -27,7 +27,7 @@ function CargoPills({ item = {} }) {
 
 	return (
 		<div className={styles.container}>
-			{getPillsFormat(initialPills)?.map((pill) => <Pill>{pill}</Pill>)}
+			{getPillsFormat(initialPills)?.map((pill) => <Pill key={pill}>{pill}</Pill>)}
 
 			{cargo_details?.length > 1 ? (
 				<div className={styles.popover_container}>

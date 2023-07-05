@@ -2,7 +2,7 @@
 	align-items: center;
 	margin-bottom: 12px;
 	background-color: #fef3e9;
-	border: 1px solid #f68b21;
+	border: 1px solid var(--color-accent-orange-2);
 	border-radius: 4px;
 }
 
@@ -33,11 +33,11 @@
 
 .service_details {
 	width: 25%;
-	border-right: 2px solid #f68b21;
+	border-right: 2px solid var(--color-accent-orange-2);
 }
 
 .cancelled.service_details {
-	border-right: 2px solid #828282;
+	border-right: 2px solid var(--color-secondary-greyscale-3);
 }
 
 .completed.service_details {
@@ -53,20 +53,20 @@
 }
 
 .service_name {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .service_provider {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .state {
 	padding: 2px 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	background-color: #cdf7d4;
 	border-radius: 4px;
 }
@@ -82,10 +82,10 @@
 .details_cta {
 	padding: 6px 12px;
 	margin-right: 24px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	cursor: pointer;
 	background-color: #fff;
-	border: 1px solid #e0e0e0;
+	border: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 6px;
 }
 

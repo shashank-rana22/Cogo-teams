@@ -69,7 +69,9 @@ function FilterBy({
 
 				<div className={styles.type_container}>
 					{['eta', 'etd'].map((type) => (
-						<div className={cl`${date_type === type ? styles.active : styles.inactive} 
+						<div
+							key={type}
+							className={cl`${date_type === type ? styles.active : styles.inactive} 
 							${styles.filter_by_buttons}`}
 						>
 							<Button
@@ -94,7 +96,9 @@ function FilterBy({
 
 					<div className={styles.date_range_container}>
 						{Object.keys(DATE_RANGE_MAPPING).map((dateKey) => (
-							<div className={cl`${dateRange === dateKey ? styles.active : styles.inactive} 
+							<div
+								key={dateKey}
+								className={cl`${dateRange === dateKey ? styles.active : styles.inactive} 
 							${styles.filter_by_buttons}`}
 							>
 								<Button

@@ -7,17 +7,22 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import formValuePatterns from '../../../../../../utils/formValuePatterns';
 import getCompanyAddressOptions from '../../../../helpers/getCompanyAddressOptions';
 import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
 import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
+
+const PINCODE_IN_ADDRESS_INDEX = 1;
 
 function SelfAndTradePartyForm({
 	companyType = '',
@@ -44,7 +49,7 @@ function SelfAndTradePartyForm({
 
 	const { trade_party_id, address } = watch() || {};
 
-	const firstTradeParty = list?.[0]?.id;
+	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -61,7 +66,7 @@ function SelfAndTradePartyForm({
 	}, [trade_party_id, list, setValue, resetField]);
 
 	useEffect(() => {
-		setValue('pincode', address?.split('::')?.[1]);
+		setValue('pincode', address?.split('::')?.[PINCODE_IN_ADDRESS_INDEX]);
 	}, [address, setValue]);
 
 	const company_options = getCompanyNameOptions(list);
@@ -92,7 +97,6 @@ function SelfAndTradePartyForm({
 										disabled={companyType === 'self'}
 										rules={{ required: { value: true, message: 'Company is required' } }}
 									/>
-
 									{Error('trade_party_id')}
 								</div>
 
@@ -118,7 +122,7 @@ function SelfAndTradePartyForm({
 										name="address"
 										placeholder="Select Address"
 										control={control}
-										options={address_options[trade_party_id]}
+										options={address_options[trade_party_id] || []}
 										rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
 									{Error('address')}
@@ -167,10 +171,7 @@ function SelfAndTradePartyForm({
 										control={control}
 										size="sm"
 										rules={{
-											pattern: {
-												value   : formValuePatterns.EMAIL,
-												message : 'Enter valid email',
-											},
+											pattern: { value: geo.regex.EMAIL, message: 'Enter valid email' },
 										}}
 										placeholder="Enter Email Address"
 									/>
@@ -198,9 +199,7 @@ function SelfAndTradePartyForm({
 									/>
 								</div>
 							</div>
-
 						</>
-
 					)}
 			</form>
 		</div>

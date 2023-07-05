@@ -1,0 +1,142 @@
+.module_accordion {
+	margin-bottom: 10px;
+
+	:global {
+		.ui_accordion_header {
+			padding-right: 12px;
+			padding-left: 12px;
+
+			.ui_accordion_title {
+				width: 80%;
+			}
+		}
+
+		.ui_accordion_content {
+			padding: 0;
+
+			.ui_accordion_header {
+				padding-left: 44px;
+			}
+		}
+	}
+}
+
+.container {
+	width: 30%;
+	overflow: auto;
+
+	:global {
+		.ui_accordion_container {
+			width: 100%;
+			border-radius: 0;
+			box-shadow: -1px 0 1px rgb(0 0 0 / 12%);
+
+			.ui_accordion_header {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.submodule_accordion {
+	:global {
+		.ui_accordion_content {
+			padding-left: 64px;
+			background-color: #fff;
+		}
+	}
+}
+
+.number {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
+	color: #4f4f4f;
+	background: #fef199;
+	border-radius: 50%;
+}
+
+.index {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.duration {
+	padding: 8px 20px;
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #849e4c;
+	background: #f7faef;
+	border-radius: 6px;
+
+	:global {
+		.ui_pill_container {
+			margin: 0;
+			margin-top: 8px;
+			font-weight: 600;
+			color: #221f20;
+		}
+	}
+}
+
+.course_name {
+	margin-left: 20px;
+	color: #4f4f4f;
+}
+
+.indexes {
+	margin-right: 4px;
+	margin-left: 8px;
+}
+
+.icon {
+	margin-left: -4px;
+}
+
+.box_active {
+	display: flex;
+	align-items: center;
+	padding: 12px 24px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border: 2px solid #f9f9f9;
+	border-radius: 6px;
+}
+
+.box_selected {
+	background: #fffce6;
+}
+
+.box_notselected {
+	background: #fff;
+}
+
+.box_deactive {
+	display: flex;
+	align-items: center;
+	padding: 12px 24px;
+	margin-bottom: 10px;
+	cursor: not-allowed;
+	background: #f9f9f9;
+	border: 2px solid #f9f9f9;
+	border-radius: 6px;
+}
+
+.text {
+	margin-left: 30px;
+}

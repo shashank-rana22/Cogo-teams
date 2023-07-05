@@ -1,41 +1,58 @@
-import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
-import TABS_CONFIG from '../config/TABS_CONFIG.json';
+import TABS_CONFIG from '../config/TABS_CONFIG';
+
+const SHIPMENT_TYPES = Object.keys(TABS_CONFIG);
+
+const DEFAULT_PAGE_NUMBER = 1;
 
 export default function getValidatedStoredValues() {
 	const storedValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
-	const bookingDeskVersion = localStorage.getItem('booking_desk_version');
 
-	let { shipment_type, trade_type, page } = storedValues?.filters || {};
-	const { isCriticalOn, q } = storedValues?.filters || {};
-	let activeTab = storedValues?.activeTab;
+	let { page, q, isCriticalOn } = storedValues?.filters || {};
 
-	if (!CONTROLS_CONFIG.shipment_types.some((shipment_type_obj) => shipment_type_obj.value === shipment_type)) {
-		shipment_type = 'fcl_freight';
+	let { stepperTab, segmentedTab, activeTab } = storedValues?.tabState || {};
+
+	if (!SHIPMENT_TYPES.includes(stepperTab)) {
+		stepperTab = 'fcl_freight';
 	}
 
-	if (trade_type && !CONTROLS_CONFIG.trade_types.some((trade_type_obj) => trade_type_obj.value === trade_type)) {
-		trade_type = undefined;
+	const segmentedTabs = Object.keys(TABS_CONFIG[stepperTab].segmented_tabs);
+
+	if (!segmentedTabs.includes(segmentedTab)) {
+		[segmentedTab] = segmentedTabs;
 	}
+
+	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[segmentedTab];
+	const [defaultActiveTab] = tabs;
+
+	const { name: defaultTab, isCriticalVisible } = (tabs || []).find(
+		(tab) => tab.name === activeTab,
+	) || defaultActiveTab;
+
+	activeTab = defaultTab;
 
 	if (typeof page !== 'number') {
-		page = 1;
+		page = DEFAULT_PAGE_NUMBER;
 	}
 
-	const tabs = TABS_CONFIG[shipment_type];
-	const { name: defaultActiveTab, isCriticalVisible } = tabs.find((tab) => tab.name === activeTab) || tabs[0];
+	if (typeof q !== 'string') {
+		q = '';
+	}
 
-	activeTab = defaultActiveTab;
+	if (typeof isCriticalOn !== 'boolean') {
+		isCriticalOn = false;
+	}
 
 	return {
 		filters: {
-			shipment_type,
-			...(trade_type && { trade_type }),
 			...(isCriticalVisible && { isCriticalOn: !!isCriticalOn }),
 			...(q && { q }),
 			page,
 		},
-		activeTab,
+		tabState: {
+			stepperTab,
+			segmentedTab,
+			activeTab,
+		},
 		scopeFilters: storedValues?.scopeFilters || {},
-		bookingDeskVersion,
 	};
 }

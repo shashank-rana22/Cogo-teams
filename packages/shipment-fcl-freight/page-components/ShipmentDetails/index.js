@@ -16,7 +16,12 @@ const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { 
 const DocumentDesk = dynamic(() => import('./StakeholdersView/DocumentDesk'), { ssr: false });
 const So1So2Ops = dynamic(() => import('./StakeholdersView/So1So2Ops'), { ssr: false });
 
-const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents', 'end_to_end_shipment'];
+const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
+	'documents',
+	'end_to_end_shipment',
+	'containers',
+	'rollover_shipments',
+];
 
 function ShipmentDetails() {
 	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
@@ -56,6 +61,7 @@ function ShipmentDetails() {
 		case 'superadmin':
 		case 'credit_control':
 		case 'prod_process_owner':
+		case 'tech_super_admin':
 			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
 		default:
 			return (

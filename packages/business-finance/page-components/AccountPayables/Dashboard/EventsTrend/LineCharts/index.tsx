@@ -1,10 +1,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
 import { dateDay } from '../../Constants';
-import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -73,67 +72,77 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		},
 	];
 
-	const data1 = [];
-	const data1Obj = {};
+	const DATA1 = [];
+	const DATA1OBJ = {};
 
 	dateDay.forEach((date) => {
 		sales.forEach((sale) => {
 			if (sale?.date.toString().slice(8, 10) === date) {
-				data1Obj[date] = isCountView ? sale?.count : sale?.amount;
+				DATA1OBJ[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
-		data1.push({
+		DATA1.push({
 			x : date,
-			y : data1Obj?.[date] || 0,
+			y : DATA1OBJ?.[date] || 0,
 		});
 	});
 
-	const last2 = [];
-	const data2Obj = {};
+	const LAST2 = [];
+	const DATA2OBJ = {};
 
 	dateDay.forEach((date) => {
 		sales1.forEach((sale) => {
 			if (sale?.date.toString().slice(8, 10) === date) {
-				data2Obj[date] = isCountView ? sale?.count : sale?.amount;
+				DATA2OBJ[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
-		last2.push({
+		LAST2.push({
 			x : date,
-			y : data2Obj?.[date] || 0,
+			y : DATA2OBJ?.[date] || 0,
 		});
 	});
 
-	const last3 = [];
-	const data3Obj = {};
+	const LAST3 = [];
+	const DATA3OBJ = {};
 
 	dateDay.forEach((date) => {
 		sales2.forEach((sale) => {
 			if (sale?.date.toString().slice(8, 10) === date) {
-				data3Obj[date] = isCountView ? sale?.count : sale?.amount;
+				DATA3OBJ[date] = isCountView ? sale?.count : sale?.amount;
 			}
 		});
-		last3.push({
+		LAST3.push({
 			x : date,
-			y : data3Obj?.[date] || 0,
+			y : DATA3OBJ?.[date] || 0,
 		});
 	});
 
 	const lastThreeData = [
 		{
 			id   : format(sales[0]?.date, 'MMM yyyy'),
-			data : data1,
+			data : DATA1,
 		},
 		{
 			id   : format(sales1[0]?.date, 'MMM yyyy'),
-			data : last2,
+			data : LAST2,
 		},
 		{
 			id   : format(sales2[0]?.date, 'MMM yyyy'),
-			data : last3,
+			data : LAST3,
 		},
 	];
 	const formatPrice = (value) => {
-		const formattedValue = getAmountInLakhCrK(value);
+		const formattedValue = formatAmount({
+			amount  : value,
+			currency,
+			options : {
+				style           : 'currency',
+				compactDisplay  : 'short',
+				currencyDisplay : 'code',
+				notation        : 'compact',
+			},
+
+		});
 		if (isCountView) {
 			return null;
 		}
@@ -155,7 +164,14 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 					min  : 0,
 					max  : 'auto',
 				}}
-				yFormat={isCountView ? ' >-.2f' : (value) => getFormattedPrice(value, currency)}
+				yFormat={isCountView ? ' >-.2f' : (value) => formatAmount({
+					amount  : value as any,
+					currency,
+					options : {
+						currencyDisplay : 'code',
+						style           : 'currency',
+					},
+				})}
 				axisTop={null}
 				axisRight={null}
 				axisBottom={{

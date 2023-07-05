@@ -5,16 +5,16 @@ import { format } from '@cogoport/utils';
 import CardHeader from '../../../commons/Card/CardHeader';
 import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
+import CONSTANTS from '../../../config/constants.json';
 import isCardCritical from '../../../helpers/isCardCritical';
-
-import CargoDetails from './CargoDetails';
-import { card, card_body, card_footer, separator, critical_card } from './styles.module.css';
+import CargoDetails from '../Export-Import/Card/CargoDetails';
+import { card, card_body, card_footer, separator, critical_card } from '../styles.module.css';
 
 export default function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}?${CONSTANTS.url_navigation_params}`);
 	};
 
 	return (

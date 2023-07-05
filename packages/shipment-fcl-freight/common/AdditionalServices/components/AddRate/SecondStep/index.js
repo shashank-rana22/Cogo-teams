@@ -6,18 +6,15 @@ import styles from './styles.module.css';
 
 function SecondStep({ item = {}, setSecondStep = () => {}, updateResponse = {} }) {
 	const {
-		handleShipperRevision,
-		remarks,
-		setRemarks,
+		handleShipperRevision = () => {},
+		remarks = '',
+		setRemarks = () => {},
 	} = updateResponse;
 
 	return (
 		<div>
 			<div className={styles.container_header}>
-				{item.name}
-				(
-				{startCase(item.service_type)}
-				)
+				{`${item.name} (${startCase(item.service_type)})`}
 			</div>
 
 			<div className={styles.warning}>* Please tell us the reason for this change.</div>
@@ -36,9 +33,7 @@ function SecondStep({ item = {}, setSecondStep = () => {}, updateResponse = {} }
 					GO BACK
 				</Button>
 
-				<Button
-					onClick={handleShipperRevision}
-				>
+				<Button onClick={handleShipperRevision}>
 					REQUEST CHANGES
 				</Button>
 			</div>

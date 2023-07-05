@@ -1,7 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
-
-import getFormattedPrice from '../../../utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -92,18 +92,27 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 									<div className={styles.flex}>{name}</div>
 
 									<div className={styles.custom_flex}>
-										{getFormattedPrice(
-											taxTotalPriceDiscounted
-                                                || taxTotalPrice,
-											currency || 'INR',
+										{formatAmount(
+											{
+												amount   :	(taxTotalPriceDiscounted || taxTotalPrice) as any,
+												currency :	currency || GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											},
 										)}
 									</div>
 
 									<div className={styles.custom_flex}>
-										{getFormattedPrice(
-											actualPrice,
-											actualPriceCurrency || 'INR',
-										)}
+										{formatAmount({
+											amount   :	actualPrice as any,
+											currency :	actualPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
 									</div>
 								</div>
 							);
@@ -120,19 +129,27 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 
 				<div className={styles.show_price_container}>
 					<div>
-						{getFormattedPrice(
-							netTotalPriceDiscounted,
-							netTotalPriceCurrency || 'INR',
-						)}
+						{formatAmount({
+							amount   :	netTotalPriceDiscounted as any,
+							currency :	netTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				</div>
 
 				<div className={styles.show_price_container}>
 					<div>
-						{getFormattedPrice(
-							actualTotalPrice,
-							actualTotalPriceCurrency || 'INR',
-						)}
+						{formatAmount({
+							amount   : actualTotalPrice as any,
+							currency :	actualTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				</div>
 			</div>

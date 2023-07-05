@@ -1,5 +1,7 @@
 import { Tooltip, Popover } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCall, IcMOverflowDot } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -7,10 +9,23 @@ import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
+const geo = getGeoConstants();
+
 function UpdateAction({ task = {}, hideThreeDots }) {
+	const { partner } = useSelector(({ profile }) => ({
+		partner: (profile || {}).partner || {},
+	}));
+
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
+
+	const canReassignTask = partner?.user_role_ids?.some((ele) => [
+		geo.uuid.super_admin_id,
+		geo.uuid.prod_process_owner,
+		geo.uuid.admin_id,
+		geo.uuid.tech_super_admin_id,
+	].includes(ele));
 
 	return (
 		<div className={styles.container}>
@@ -59,18 +74,19 @@ function UpdateAction({ task = {}, hideThreeDots }) {
 							Unable to do Task
 						</div>
 
-						<div
-							className={styles.task_action}
-							onClick={() => {
-								setShowAction(false);
-								setShowAdmin(true);
-							}}
-							role="button"
-							tabIndex={0}
-						>
-							Change Owner
-						</div>
-
+						{canReassignTask ? (
+							<div
+								className={styles.task_action}
+								onClick={() => {
+									setShowAction(false);
+									setShowAdmin(true);
+								}}
+								role="button"
+								tabIndex={0}
+							>
+								Change Owner
+							</div>
+						) : null}
 					</>
 				)}
 			>

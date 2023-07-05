@@ -2,9 +2,12 @@ import { cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const DEFAULT_HEIGHT = 125;
+const DEFAULT_WIDTH = 225;
+
 function EmptyState({
-	height = 125,
-	width = 225,
+	height = DEFAULT_HEIGHT,
+	width = DEFAULT_WIDTH,
 	emptyText = 'Data not found',
 	subEmptyText = '',
 	flexDirection = 'row',

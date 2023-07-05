@@ -2,8 +2,11 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
+import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
@@ -12,6 +15,9 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import RolloveDetails from '../../../common/RolloverDetails';
+import RolloverRequestedModal from '../../../common/RolloverModal/RequestedModal';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -21,6 +27,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
+const UNAUTHORIZED_STATUS_CODE = 403;
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
@@ -28,13 +35,21 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		const navigation = getNavigationFromUrl();
+
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}
+		${navigation ? `?navigation=${navigation}` : ''}`;
+
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
+
+	const rollover_containers = (container_details || []).filter(
+		(container) => container?.rollover_status === 'requested',
+	);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -64,7 +79,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -84,7 +99,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
@@ -100,6 +115,8 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
+
+					<RolloveDetails />
 
 					<div className={styles.toggle_chat}>
 						<Toggle
@@ -139,6 +156,14 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
+							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -156,6 +181,10 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 					</Tabs>
 				</div>
+
+				{!isEmpty(rollover_containers) ? (
+					<RolloverRequestedModal rollover_containers={rollover_containers} />
+				) : null}
 			</div>
 		</ShipmentDetailContext.Provider>
 	);

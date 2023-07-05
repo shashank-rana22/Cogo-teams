@@ -5,14 +5,11 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { addDoc, updateDoc } from 'firebase/firestore';
 
+import { API_MAPPING } from '../constants';
+
 const geo = getGeoConstants();
 
 const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
-	const API_MAPPING = {
-		whatsapp      : '/create_communication',
-		platform_chat : '/create_communication_platform_chat',
-		telegram      : '/create_communication',
-	};
 	const {
 		user:{ id },
 

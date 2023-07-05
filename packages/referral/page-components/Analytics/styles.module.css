@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.header_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 12px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.label {
+	margin: 6px 0 4px;
+	color: #221f20;
+}
+
+.stats_div {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 22px;
+}

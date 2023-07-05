@@ -10,7 +10,7 @@ export default function getCancelControls({
 
 	const reasonObject = cancelReasons.find((reason) => reason.value === selectedReason);
 
-	const { subreasons, free_text } = reasonObject || {};
+	const { subreasons = [], free_text } = reasonObject || {};
 
 	const controls = [{
 		name    : 'cancellation_reason',
@@ -20,7 +20,7 @@ export default function getCancelControls({
 		rules   : { required: 'cancellation reason is required' },
 	}];
 
-	if (subreasons?.length > 0) {
+	if (subreasons?.length) {
 		controls.push({
 			name    : 'cancellation_subreason',
 			label   : 'Select sub reason',

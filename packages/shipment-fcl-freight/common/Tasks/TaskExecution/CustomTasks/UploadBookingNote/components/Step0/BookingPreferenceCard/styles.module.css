@@ -14,7 +14,7 @@
 }
 
 .heading_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
@@ -27,12 +27,12 @@
 }
 
 .label {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 
 .value {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 }
 

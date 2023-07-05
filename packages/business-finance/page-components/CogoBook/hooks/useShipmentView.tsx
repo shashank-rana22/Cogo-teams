@@ -34,7 +34,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '', milestone,
+		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
 
 	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
@@ -95,6 +95,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
 					sortType             : sortType || undefined,
+					channel              : channel || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
@@ -142,6 +143,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		entity,
 		entityId,
 		milestone,
+		channel,
 	]);
 
 	useEffect(() => {

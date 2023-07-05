@@ -229,6 +229,11 @@ const common_apis = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
+			api          : 'create_fcl_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+		},
+		{
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -596,6 +601,11 @@ const common_apis = {
 		},
 		{
 			api          : 'get_ef_invoice_funding_summary',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_agreement',
 			access_type  : 'private',
 			service_name : 'credit',
 		},

@@ -1,0 +1,50 @@
+{
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks","purchase", "documents", "emails"],  
+    "shipment_info":{},
+    "timeline": {
+        "can_edit": true
+    },
+    "default_tab":"tasks",
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks",
+        "show_booking_req":true,
+        "checked_show_my_tasks":false,
+        "is_task_assigned":false
+    },
+    "purchase":{
+        "tab_title":"Purchase Invoice"
+    },
+    "documents":{
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents",
+        "allow_update":true
+    },
+    "emails":{
+        "tab_title":"Emails"
+    },
+    "cancel_shipment": {
+        "can_cancel": true,
+        "list_reasons": {
+            "stakeholder_type": ["superadmin"]
+        },
+        "role": "sales"
+    },
+    "edit_supplier": true,
+    "cancel_service": true,
+    "edit_params": {
+        "can_edit": true
+    },
+    "additional_services": {
+        "action_buttons": {
+            "reallocate": false,
+            "review_comments": false
+        },
+        "add_rate": {
+            "status::amendment_requested_by_importer_exporter": false,
+            "status::cancelled_by_supplier": false
+        }
+    }
+}

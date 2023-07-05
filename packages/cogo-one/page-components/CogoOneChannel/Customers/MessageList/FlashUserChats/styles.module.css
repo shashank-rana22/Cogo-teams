@@ -1,0 +1,37 @@
+.flash_messages_div {
+	width: 100%;
+	height: var(--height);
+	margin-bottom: 10px;
+	overflow: hidden;
+	background: linear-gradient(-45deg, #ee3425, #f8aea8, #fde74d);
+	border-radius: 6px;
+	transition: height 0.5s ease;
+}
+
+.carousel_styled {
+	height: 100%;
+
+	svg {
+		fill: #f9f9f9;
+	}
+
+	:global {
+		.ui_carousel_prev,
+		.ui_carousel_next {
+			padding: 12px 0;
+		}
+	}
+}
+
+.flash_message_wrapper {
+	height: 83%;
+	margin: 10px 15px;
+	overflow: hidden;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+
+	@media (max-width: 1280px) {
+		height: 70%;
+	}
+}

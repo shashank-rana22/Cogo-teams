@@ -6,14 +6,19 @@ import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
-import controls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
+import getControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
+	data: vendorData,
 }) {
 	const {
 		general : { query = {} },
 	} = useSelector((state) => state);
+
+	const { vendor_details	} = vendorData || {};
+
+	const { country_id } = vendor_details || {};
 
 	const [showAddbankModal, setShowAddbankModal] = useState(false);
 
@@ -98,6 +103,8 @@ function useVendorBankDetail({
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		initialCall: false, params: { filters: { type: ['pincode'] } },
 	}));
+
+	const controls = getControls({ country_id });
 
 	const newControls = (controls || []).map((controlItem) => {
 		const { name } = controlItem;

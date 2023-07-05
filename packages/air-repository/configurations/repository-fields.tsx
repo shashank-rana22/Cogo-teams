@@ -11,6 +11,12 @@ export const RepositoryFields = {
 			func  : 'handleAirline',
 		},
 		{
+			key   : 'airport_id',
+			label : 'Airport',
+			span  : 0.5,
+			func  : 'handleAirport',
+		},
+		{
 			key   : 'booking_mode',
 			label : 'Mode',
 			span  : 0.7,

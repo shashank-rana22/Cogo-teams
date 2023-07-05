@@ -272,6 +272,24 @@ function asyncKamExpertiseRuleOptions() {
 	};
 }
 
+function asyncOrganizationTradeParties() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'registration_number',
+		endpoint    : '/list_organization_trade_parties',
+		initialCall : true,
+	};
+}
+
+function asyncSearchProducts() {
+	return {
+		labelKey    : 'item_name',
+		valueKey    : 'code',
+		endpoint    : '/search_products_v2',
+		initialCall : true,
+	};
+}
+
 function asyncKamExpertiseGroupOptions() {
 	return {
 		labelKey     : 'name',
@@ -315,6 +333,16 @@ function asyncAccountEngagementScoringEvents() {
 		authkey      : 'get_allocation_engagement_scoring_event_names',
 		microService : 'allocation',
 		initialCall  : true,
+	};
+}
+
+function asyncShipmentContainerDetails() {
+	return {
+		valueKey      : 'container_number',
+		finalLabelKey : 'container_number',
+		endpoint      : 'list_shipment_container_details',
+		initialCall   : true,
+		defaultParams : {},
 	};
 }
 
@@ -370,6 +398,223 @@ function asyncListServetelAgents() {
 	};
 }
 
+function asyncJvList() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'payments/parent-jv/jv-category',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_jv_category',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncJournalCode() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'number',
+		endpoint     : 'payments/parent-jv/journal-code',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_journal_code',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncAccMode() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'label',
+		endpoint     : 'payments/parent-jv/acc-mode',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncCodeMaster() {
+	return {
+		labelKey     : 'accountCode',
+		valueKey     : 'accountCode',
+		endpoint     : 'payments/parent-jv/gl-code-master',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_gl_code_master',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncListOrgTradeParties() {
+	return {
+		labelKey    : 'legal_business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_trade_party_details',
+		initialCall : true,
+		params      : {
+			sage_organization_id_required : true,
+			filters                       : {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
+
+function asyncFortigoLocations() {
+	return {
+		labelKey    : 'location_name',
+		valueKey    : 'id',
+		endpoint    : 'list_shipment_fortigo_trip_locations',
+		initialCall : true,
+	};
+}
+
+function asyncOrganizationBranches() {
+	return {
+		valueKey      : 'id',
+		labelKey      : 'branch_name',
+		endpoint      : 'list_organization_branches',
+		initialCall   : true,
+		defaultParams : {
+			filters    : { status: 'active' },
+			page_limit : 10,
+		},
+	};
+}
+
+function asyncListFAQTopics() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_topics',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListFAQTags() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_tags',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListCourseCategories() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_course_categories',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTests() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_tests',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
+function asyncInsuranceCommoditiesList() {
+	return {
+		labelKey     : 'commodity',
+		valueKey     : 'id',
+		endpoint     : 'saas/insurance/list-commodities',
+		initialCall  : true,
+		authkey      : 'get_saas_insurance_list_commodities',
+		microService : 'business_finance',
+	};
+}
+
+function asyncListDunningTemplates() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_dunning_templates',
+		initialCall : true,
+	};
+}
+
+function asyncListOrganizationStakeholders() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/organization-stakeholders',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -396,8 +641,29 @@ export {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncJvList,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
+	asyncShipmentContainerDetails,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncListPromotions,
+	asyncPlanPricingList,
+	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
+	asyncFortigoLocations,
+	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
 };

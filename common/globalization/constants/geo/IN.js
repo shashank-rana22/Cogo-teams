@@ -15,7 +15,7 @@ export default {
 		amount: {
 			scope: {
 				admin: {
-					locale: 'en-US',
+					locale: 'en-IN',
 				},
 			},
 			options: {},
@@ -29,11 +29,12 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
 		// eslint-disable-next-line max-len
-		GST           : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1})+$/g,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -56,6 +57,7 @@ export default {
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
 		sales_role_ids            : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
@@ -75,6 +77,8 @@ export default {
 			'd9c490f9-afcc-467e-a86d-2a02edf81959',
 			'568c5939-3721-4444-a0ff-4c0298bc948d',
 		],
+		supply_relation_manager_role_id: '568c5939-3721-4444-a0ff-4c0298bc948d',
+
 		cogo_freight_supplier      : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		prod_process_owner         : 'ae80297f-e30d-45fb-845c-61c302523476',
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
@@ -98,6 +102,7 @@ export default {
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
+		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
 		shipping_line_supply_agents      : [
 			'1e3ee025-88a2-43ea-abd5-08017f61f2d2',
 			'4248e4d4-59cf-441e-a4a8-83bb29c86bcf',
@@ -119,10 +124,12 @@ export default {
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
+		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
 		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
@@ -145,6 +152,7 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -195,11 +203,22 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_shipment_agent_ids: [
+		cogo_one_admin_user_ids     : [], // todo
+		cogo_one_shipment_agent_ids : [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
-		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
-
+		cogo_one_kam_agent_ids: [
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
+		],
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -396,6 +415,129 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label : '101 COGO FREIGHT PVT LTD',
+				value : '101',
+			},
+			{
+				label : '201 Cogoport Netherlands',
+				value : '201',
+			},
+			{
+				label : '301 COGOPORT PRIVATE LIMITED',
+				value : '301',
+			},
+			{
+				label : '401 Cogo Universe Pte. Ltd',
+				value : '401',
+			},
+			{
+				label : '501 Cogoport Vietnam',
+				value : '501',
+			},
+		],
+		migration_status: [
+			{ label: 'True', value: true },
+			{ label: 'False', value: false },
+		],
+		timezone: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
+		education_level: {
+			post_graduates_degree: [
+				{
+					label : 'Master of Business Administration (M.B.A)',
+					value : 'master_of_business_administration_(M.B.A)',
+				},
+				{ label: 'Master of Technology (M.Tech)', value: 'master_of_technology_(M.Tech)' },
+				{ label: 'Master of Commerce (M.Com)', value: 'master_of_commerce_(M.Com)' },
+				{ label: 'Master of Arts (M.A)', value: 'master_of_arts_(M.A)' },
+				{ label: 'Master of Science (M.Sc)', value: 'master_of_science_(M.Sc)' },
+				{ label: 'Master of Architecture (M.Arch)', value: 'master_of_architecture_(M.Arch)' },
+				{ label: 'Master of Law (LL.M)', value: 'master_of_law_(LL.M)' },
+				{ label: 'Master of Computer Applications (M.C.A)', value: 'master_of_computer_applications_(M.C.A)' },
+				{ label: 'Master of Business Management (M.B.M)', value: 'master_of_business_management_(M.B.M)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Masters in Design (M.Des)', value: 'masters_in_design_(M.Des)' },
+				{
+					label : 'Masters Programme in International Business (M.P.I.B)',
+					value : 'masters_rogramme_in_international_business_(M.P.I.B)',
+				},
+				{ label: 'Master of Business Laws (M.B.L)', value: 'master_of_business_laws_(M.B.L)' },
+				{ label: 'Master of Philosophy (M.Phil)', value: 'master_of_philosophy_(M.Phil)' },
+				{ label: 'Master of Management Program (M.M.P)', value: 'master_of_management_program_(M.M.P)' },
+				{ label: 'Master of Journalism (M.J)', value: 'master_of_journalism_(M.J)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Others', value: 'others' },
+			],
+			graduate_degree: [
+				{
+					label : 'Bachelor of Engineering/Tech (BE/B.Tech)',
+					value : 'bachelor_of_engineering/tech_(BE/B.Tech)',
+				},
+				{ label: 'Bachelor of Science', value: 'bachelor_of_science' },
+				{ label: 'Bachelor of Arts', value: 'bachelor_of_arts' },
+				{ label: 'Bachelor of Law (B.L)', value: 'bachelor_of_law_(B.L)' },
+				{ label: 'Bachelor of Commerce', value: 'bachelor_of_commerce' },
+				{ label: 'Bachelor of Design (B.Des)', value: 'bachelor_of_design_(B.Des)' },
+				{ label: 'Bachelor of Visual Arts (B.V.A)', value: 'bachelor_of_visual_arts_(B.V.A)' },
+				{ label: 'Bachelor of Architecture (B.Arch)', value: 'bachelor_of_architecture_(B.Arch)' },
+				{ label: 'Bachelor of Applied Sciences (B.A.S)', value: 'bachelor_of_applied_sciences_(B.A.S)' },
+				{
+					label : 'Bachelor of Computer Applications (B.C.A)',
+					value : 'bachelor_of_computer_applications_(B.C.A)',
+				},
+				{ label: 'BMS/BBA/BBS', value: 'BMS/BBA/BBS' },
+				{ label: 'Bachelor of Business Studies (B.B.S)', value: 'bachelor_of_business_studies_(B.B.S)' },
+				{ label: 'Bachelor of Business Management (B.B.M)', value: 'bachelor_of_business_management_(B.B.M)' },
+				{
+					label : 'Bachelor of Business Administration (B.B.A)',
+					value : 'bachelor_of_business_administration_(B.B.A)',
+				},
+				{
+					label : 'Bachelor of Fashion Technology (B.F.Tech)',
+					value : 'bachelor_of_fashion_technology_(B.F.Tech)',
+				},
+				{
+					label : 'Bachelor of Medicine Bachelor of Surgery (M.B.B.S)',
+					value : 'bachelor_of_medicine_bachelor_of_surgery_(M.B.B.S)',
+				},
+				{ label: 'Bachelor of Pharmacy (B.Pharma)', value: 'bachelor_of_pharmacy_(B.Pharma)' },
+				{ label: 'IIM 5-year Integrated Mgmt. Program', value: 'iim_5_year_integrated_mgmt._program' },
+				{ label: 'Others', value: 'others' },
+			],
+			doctorate_degree: [
+				{ label: 'Doctor of Medicine (M.D.)', value: 'doctor_of_medicine_(M.D.)' },
+				{ label: 'Doctor of Philosophy (Ph.D)', value: 'doctor_of_philosophy_(Ph.D)' },
+				{ label: 'Master of Dental Surgery (M.D.S)', value: 'master_of_dental_surgery_(M.D.S)' },
+				{ label: 'Phd in management', value: 'phd_in_management' },
+				{ label: 'Others', value: 'others' },
+			],
+		},
+		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -411,13 +553,19 @@ export default {
 				],
 			},
 		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: true,
+				},
+			},
+		},
 	},
 	others: {
 		registration_number: {
-			label: 'GST',
-			pattern:
-					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
-			max_length: 15,
+			label      : 'GST',
+			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length : 15,
 		},
 
 		pan_number: {
@@ -432,6 +580,11 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: true,
+			},
+			cogo_one: {
+				has_voice_call_access     : true,
+				default_country_code      : 'IN',
+				template_default_language : 'english',
 			},
 		},
 	},

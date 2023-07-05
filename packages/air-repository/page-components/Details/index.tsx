@@ -32,6 +32,9 @@ function Details({
 		handleAirline: (singleItem) => (
 			singleItem?.airline?.business_name
 		),
+		handleAirport: (singleItem) => (
+			singleItem?.airport?.display_name
+		),
 		handleMode: (singleItem) => (
 			<Badge
 				size="md"

@@ -1,6 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import useGetTest from '../../hooks/useGetTest';
 import useGetTestPerformace from '../Questions/hooks/useGetTestPerformance';
 
 import BasicDetails from './BasicDetails';
@@ -9,16 +10,22 @@ import Header from './Header';
 import PercentagePassed from './PercentagePassed';
 import styles from './styles.module.css';
 
-function TestResults({ test_id = '' }) {
-	const { loading, stats_data, basic_info_data, toggleState, header_data } = useGetTestPerformace({ test_id });
+function TestResults({ test_id = '', activeAttempt }) {
+	const {
+		loading,
+		stats_data,
+		basic_info_data,
+		toggleState,
+		header_data,
+	} =		useGetTestPerformace({ test_id, activeAttempt });
+
+	const { questions, retest } = useGetTest({ id: test_id });
 
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{Array(3).fill('').map(() => (
-					<div
-						className={styles.placeholder_inner_container}
-					>
+				{[...Array(5).keys()].map((key) => (
+					<div key={key} className={styles.placeholder_inner_container}>
 						<Placeholder height="24px" />
 					</div>
 				))}
@@ -35,11 +42,16 @@ function TestResults({ test_id = '' }) {
 			<Header header_data={header_data} loading={loading} />
 
 			<div className={styles.info_row}>
-				<BasicDetails basic_info_data={basic_info_data} />
+				<BasicDetails basic_info_data={basic_info_data} questions={questions} stats_data={stats_data} />
 
 				<PercentagePassed stats_data={stats_data} />
 
-				<DifficultyAndTopicDistribution data={stats_data} toggleState={toggleState} />
+				<DifficultyAndTopicDistribution
+					data={stats_data}
+					toggleState={toggleState}
+					header_data={header_data}
+					retest={retest}
+				/>
 			</div>
 		</div>
 	);

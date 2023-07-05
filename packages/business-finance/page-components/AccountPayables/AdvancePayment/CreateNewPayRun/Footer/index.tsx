@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React, { useState } from 'react';
 
 import SavePayRunModal from './SavePayRunModal';
@@ -73,8 +73,14 @@ function Footer({
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
-							{viewSelectedInvoice ? getFormattedPrice(totalValue, selectedCurrency)
-								: getFormattedPrice(totalInvoiceAmount, selectedCurrency)}
+							{ formatAmount({
+								amount   : viewSelectedInvoice ? totalValue as any : totalInvoiceAmount as any,
+								currency : selectedCurrency,
+								options  : {
+									currencyDisplay : 'code',
+									style           : 'currency',
+								},
+							})}
 						</div>
 					</div>
 					<div className={styles.sid_count}>

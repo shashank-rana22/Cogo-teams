@@ -9,9 +9,20 @@ const businessFinance = {
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/[view]': {
 		navigation: 'business_finance-coe_finance',
 	},
-
 	'/[partner_id]/business-finance/coe-finance/cost-sheet': {
 		navigation: 'business_finance-coe_finance',
+	},
+	'/[partner_id]/business-finance/compliance/[active_tab]': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/compliance/[sub_active_tab]': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/compliance/view': {
+		navigation : 'business_finance-compliance',
+		isMainNav  : true,
 	},
 	'/[partner_id]/business-finance/account-receivables/[active_tab]': {
 		navigation : 'business_finance-account_receivables',
@@ -68,6 +79,14 @@ const businessFinance = {
 	},
 	'/[partner_id]/business-finance/overheads/[active_tab]/Expenses/Response': {
 		navigation: 'business_finance-overheads',
+	},
+	'/[partner_id]/business-finance/settlement/[active_tab]': {
+		navigation : 'business_finance-settlement',
+		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/dunnings/[active_tab]': {
+		navigation : 'business_finance-dunnings',
+		isMainNav  : true,
 	},
 };
 

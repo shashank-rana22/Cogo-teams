@@ -1,4 +1,4 @@
-import { Input, Popover, cl } from '@cogoport/components';
+import { Input, Popover, cl, Tabs, TabPanel } from '@cogoport/components';
 import {
 	IcMFilter,
 	IcMSearchlight,
@@ -8,14 +8,19 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import TABS_MAPPING from '../../../../constants/messgesTabsMapping';
 import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import AutoAssignComponent from './AutoAssignComponent';
+import FlashUserChats from './FlashUserChats';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
+
+const GROUP_TABS_VIEW_ACCESS = ['admin_view', 'supply_view'];
+const FLASH_MESSAGES_VIEW_ACCESS = ['admin_view', 'kam_view'];
 
 function MessageList(messageProps) {
 	const {
@@ -40,11 +45,16 @@ function MessageList(messageProps) {
 		sortedPinnedChatList = [],
 		firestore,
 		viewType = '',
+		flashMessagesList = [],
+		flashMessagesLoading = false,
+		activeTab = 'all',
+		setActiveTab,
 	} = messageProps;
+
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
-
+	const [showCarousel, setShowCarousel] = useState(false);
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
 			setSelectedAutoAssign((p) => {
@@ -56,6 +66,30 @@ function MessageList(messageProps) {
 			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
 		}
 	};
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
+
+	const canShowCarousel = FLASH_MESSAGES_VIEW_ACCESS.includes(viewType) && showCarousel
+	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
+
+	const getListHeightStyles = () => {
+		if (showBotMessages && isomniChannelAdmin && !canShowCarousel) {
+			return 'bot_list_container_empty_flash';
+		}
+		if (showBotMessages && isomniChannelAdmin) {
+			return 'bot_list_container';
+		}
+		if (!canShowCarousel) {
+			return 'list_container_empty_flash';
+		}
+		return 'list_container_height';
+	};
+
+	useEffect(() => {
+		if (!isFlashMessagesEmpty) {
+			setShowCarousel((p) => (p !== 'in_timeout' || p));
+		}
+	}, [isFlashMessagesEmpty]);
 
 	const {
 		bulkAssignChat = () => {},
@@ -72,9 +106,39 @@ function MessageList(messageProps) {
 	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+
 	return (
 		<>
+			{GROUP_TABS_VIEW_ACCESS.includes(viewType)
+			&& (
+				<div className={styles.tabs}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						{TABS_MAPPING.map((eachTab) => (
+							<TabPanel
+								key={eachTab.name}
+								name={eachTab.name}
+								title={eachTab.title}
+							/>
+						))}
+					</Tabs>
+				</div>
+			)}
+
+			<FlashUserChats
+				flashMessagesList={flashMessagesList}
+				activeCardId={activeCardId}
+				userId={userId}
+				setActiveMessage={setActiveMessage}
+				firestore={firestore}
+				showCarousel={showCarousel}
+				setShowCarousel={setShowCarousel}
+				canShowCarousel={canShowCarousel}
+			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
 					<Input
@@ -138,7 +202,7 @@ function MessageList(messageProps) {
 					)}
 					<div
 						className={cl`${styles.list_container} 
-						${(showBotMessages && isomniChannelAdmin) ? styles.bot_list_container : ''}`}
+						${styles[getListHeightStyles()]}`}
 						onScroll={handleScroll}
 					>
 						{!isPinnedChatEmpty && (

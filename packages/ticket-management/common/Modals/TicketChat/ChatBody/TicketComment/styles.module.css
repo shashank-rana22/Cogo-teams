@@ -1,0 +1,47 @@
+.user_message_flex {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 0 15px 10px 0;
+}
+
+.agent_message_flex {
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.message_div {
+	margin-bottom: 10px;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+}
+
+.name_div {
+	align-items: center;
+	font-size: 12px;
+	text-transform: capitalize;
+}
+
+.time {
+	margin-left: 4px;
+	font-size: 11px;
+	color: #4f4f4f;
+	white-space: nowrap;
+}
+
+.message_container {
+	width: fit-content;
+	max-width: 70%;
+	padding: 5px 8px;
+	margin: 5px 0;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.agent_profile_pic {
+	margin-right: 5px;
+}

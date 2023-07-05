@@ -1,4 +1,23 @@
 .container {
 	display: flex;
 	justify-content: space-between;
+
+	:global {
+		.ui_tabs_container {
+			padding-bottom: 10px;
+		}
+	}
+}
+
+.critical_container {
+	:global {
+		.ui_toggle_container {
+			align-items: center;
+			padding-top: 0;
+		}
+
+		.ui_toggle_container .ui_toggle_offlabel {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
 }

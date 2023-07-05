@@ -1,0 +1,9 @@
+.container {
+	padding: 10px 0;
+	overflow: "scroll";
+}
+
+.loader {
+	display: flex;
+	justify-content: center;
+}

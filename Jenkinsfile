@@ -13,6 +13,12 @@ pipeline {
     }
 
     stages {
+        stage ('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
+        
         stage ('Checkout') {
             steps {
                 echo "Branch name: ${BRANCH_NAME}"

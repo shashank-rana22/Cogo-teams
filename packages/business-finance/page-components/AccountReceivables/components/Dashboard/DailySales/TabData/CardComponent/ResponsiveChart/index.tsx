@@ -1,10 +1,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
@@ -25,15 +24,15 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
-	const AmountData = [];
-	const CountData = [];
+	const AMOUNT_DATA = [];
+	const COUNT_DATA = [];
 
 	(data || []).forEach((item) => {
-		AmountData.push({
+		AMOUNT_DATA.push({
 			x : item.date,
 			y : item.Amount,
 		});
-		CountData.push({
+		COUNT_DATA.push({
 			x : item.date,
 			y : item.Count,
 		});
@@ -42,18 +41,18 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 	const finalData = [
 		{
 			id   : 'Amount',
-			data : AmountData,
+			data : AMOUNT_DATA,
 		},
 		{
 			id   : 'Count',
-			data : CountData,
+			data : COUNT_DATA,
 		},
 	];
 
 	const formatdata = showCount ? finalData : [
 		{
 			id   : 'Amount',
-			data : AmountData,
+			data : AMOUNT_DATA,
 		},
 	];
 
@@ -71,7 +70,15 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					colors={['#88CAD1', '#F68B21']}
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
-					yFormat={(value) => getFormattedPrice(value, currency)}
+					yFormat={(value) => formatAmount({
+						amount  : value as any,
+						currency,
+						options : {
+							currencyDisplay : 'code',
+							style           : 'currency',
+
+						},
+					})}
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{
@@ -89,7 +96,16 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						legend         : 'Amount',
 						legendOffset   : -84,
 						legendPosition : 'middle',
-						format         : (value) => getAmountInLakhCrK(value),
+						format         : (value) => formatAmount({
+							amount  :	value as any,
+							currency,
+							options : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+								notation        : 'compact',
+								compactDisplay  : 'short',
+							},
+						}),
 					}}
 					pointSize={5}
 					pointBorderWidth={2}

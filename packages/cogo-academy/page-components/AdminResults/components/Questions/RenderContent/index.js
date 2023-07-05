@@ -9,7 +9,7 @@ const COMPONENT_MAPPING = {
 	subjective            : SubjectiveQuestions,
 };
 
-function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
+function RenderContent({ questionsList = [], test_id = '', activeTab = '', activeAttempt = '' }) {
 	return (
 		<>
 			{activeTab !== 'case_study_based' ? <ListHeader type={activeTab} /> : null}
@@ -23,6 +23,7 @@ function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
 						question_item={question_item}
 						index={index}
 						test_id={test_id}
+						activeAttempt={activeAttempt}
 					/>
 				);
 			})}

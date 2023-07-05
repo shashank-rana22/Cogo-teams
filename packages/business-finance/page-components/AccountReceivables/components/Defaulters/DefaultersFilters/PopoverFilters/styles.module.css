@@ -1,0 +1,20 @@
+.filter_popover {
+	width: 103%;
+}
+
+.filter_section {
+	display: flex;
+	justify-content: space-between;
+	margin: 8px;
+}
+
+.close_popover {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.icon {
+	padding-top: 2px;
+	padding-left: 5px;
+	color: var(--color-primary-error-red-2);
+}

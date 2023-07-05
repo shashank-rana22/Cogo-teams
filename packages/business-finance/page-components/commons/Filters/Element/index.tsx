@@ -9,6 +9,9 @@ import {
 	Tooltip,
 	Datepicker,
 	SingleDateRange,
+	RadioGroup,
+	Checkbox,
+	Timepicker,
 } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
@@ -17,7 +20,7 @@ import React, { CSSProperties, useState } from 'react';
 
 import freightMapping from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
-import { Options } from '../../Interfaces';
+import { Options, RadioOptions } from '../../Interfaces';
 import SegmentedControl from '../../SegmentedControl';
 
 import styles from './styles.module.css';
@@ -35,6 +38,7 @@ interface ElementProps {
 	key?: string;
 	name?: string;
 	onChange?: (val: any) => void;
+	radioOptions?: RadioOptions[];
 	options?: Options[];
 	setFilters: (p: object) => void;
 	filters: object;
@@ -55,6 +59,8 @@ function Element({
 	href = '#',
 	name,
 	filters,
+	checkboxLabel = '',
+	radioOptions,
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
@@ -74,7 +80,12 @@ function Element({
 				return (
 					<div className={styles.flex} style={style as CSSProperties}>
 						{rest?.options?.map((val) => (
-							<div role="presentation" style={{ margin: '5px' }} onClick={() => tagClick(val)}>
+							<div
+								role="presentation"
+								key={val.value}
+								style={{ margin: '5px' }}
+								onClick={() => tagClick(val)}
+							>
 								<div
 									className={val.value === filters[name as keyof typeof filters]
 										? styles.active
@@ -136,8 +147,9 @@ function Element({
 								color="yellow"
 								className={className}
 								style={style as CSSProperties}
+								key={val?.label}
 							>
-								{val.label}
+								{val?.label || ''}
 							</Pill>
 						))}
 						;
@@ -271,6 +283,37 @@ function Element({
 						className={className}
 						value={value}
 						style={style as CSSProperties}
+						{...rest}
+					/>
+				);
+			case 'radioGroup':
+				return (
+					<RadioGroup
+						className={className}
+						style={style as CSSProperties}
+						value={value}
+						options={radioOptions}
+						id={String(rest?.id)}
+						onChange={rest?.onChange}
+
+					/>
+				);
+			case 'checkbox':
+				return (
+					<Checkbox
+						className={className}
+						style={style as CSSProperties}
+						value={value}
+						label={String(checkboxLabel)}
+						{...rest}
+					/>
+				);
+			case 'timepicker':
+				return (
+					<Timepicker
+						className={className}
+						style={style as CSSProperties}
+						value={value}
 						{...rest}
 					/>
 				);

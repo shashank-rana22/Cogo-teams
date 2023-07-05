@@ -1,0 +1,74 @@
+.container {
+	background-color: var(--color-secondary-5);
+}
+
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button {
+	margin-left: 16px;
+}
+
+.inputcontainer {
+	width: 46%;
+
+	:global(.ui_input_container) {
+		width: 100%;
+		max-height: 40px;
+	}
+
+	:global {
+		.ui_input_control {
+			font-size: var(--font-size-md);
+		}
+	}
+}
+
+.selectcontainer {
+	display: flex;
+	flex-direction: column;
+	width: 46%;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: var(--font-size-md);
+		}
+
+		.ui_select_container {
+			width: 100%;
+		}
+	}
+}
+
+.label {
+	margin-top: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.layout {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.marginleft {
+	margin-left: 26px;
+}
+
+.upload_container {
+	width: 96%;
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
+}
+
+.loader {
+	padding-right: 10px;
+	font-weight: 600;
+}

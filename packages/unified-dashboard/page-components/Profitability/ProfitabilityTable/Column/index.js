@@ -51,7 +51,7 @@ function columns() {
 		{
 			Header   : <div className={styles.head}>Customer Name</div>,
 			accessor : (item) => (
-				<Tooltip animation="shift-toward" content={item.customer_name}>
+				<Tooltip placement="bottom" content={item.customer_name}>
 					<div className={styles.container}>
 						<div className={styles.data}>{item.customer_name}</div>
 						<Tags

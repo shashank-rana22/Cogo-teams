@@ -4,6 +4,8 @@ import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
+import UPLOAD_VALIDATION_MAPPING from '../../constants/UPLOAD_VALIDATION_MAPPING';
+
 import styles from './styles.module.css';
 
 function CustomFileUploader(props, ref) {
@@ -15,6 +17,7 @@ function CustomFileUploader(props, ref) {
 		docName,
 		uploadIcon = null,
 		handleProgress,
+		channel = '',
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null);
@@ -96,6 +99,16 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
+		let channelTemp = 'default';
+		if (channel in UPLOAD_VALIDATION_MAPPING) {
+			channelTemp = channel;
+		}
+		const isValid = UPLOAD_VALIDATION_MAPPING[channelTemp]?.({ values });
+
+		if (!isValid) {
+			return;
+		}
+
 		try {
 			setLoading(true);
 
@@ -155,7 +168,7 @@ function CustomFileUploader(props, ref) {
 			/>
 
 			{showProgress && loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>

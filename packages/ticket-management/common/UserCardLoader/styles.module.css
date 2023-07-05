@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 6px;
+	margin-bottom: 4px;
+	border: 1px solid #d3d3d3;
+	border-radius: 4px;
+}
+
+.subcontainer_header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.description {
+	padding-top: 4px;
+}
+
+.loading_skeleton {
+	border-radius: 4px;
+}

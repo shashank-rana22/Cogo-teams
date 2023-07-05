@@ -1,9 +1,8 @@
 import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
-
-import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
 

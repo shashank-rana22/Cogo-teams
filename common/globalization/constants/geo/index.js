@@ -18,12 +18,18 @@ const COUNTRY_ID_MAPPING = {
 	VN,
 };
 
-export const getCountryConstants = ({ country_id }) => {
-	const countryData = getCountryDetails({ country_id });
+export const getCountryConstants = ({ country_id, country_code, isDefaultData = true }) => {
+	const countryData = getCountryDetails({ country_id, country_code });
 
 	const { country_code: countryCode } = countryData || {};
 
-	return COUNTRY_ID_MAPPING[countryCode in COUNTRY_ID_MAPPING ? countryCode : 'IN'];
+	const isCountryCodeValid = countryCode in COUNTRY_ID_MAPPING;
+
+	if (isDefaultData) {
+		return COUNTRY_ID_MAPPING[isCountryCodeValid ? countryCode : 'IN'];
+	}
+
+	return isCountryCodeValid ? COUNTRY_ID_MAPPING[countryCode] : {};
 };
 
 const getGeoConstants = () => {

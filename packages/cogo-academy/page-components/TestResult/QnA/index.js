@@ -10,7 +10,7 @@ import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
-function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status }) {
+function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status, activeAttempt }) {
 	const ref = useRef();
 
 	const [animation, setAnimation] = useState(false);
@@ -26,7 +26,9 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 		method : 'GET',
 		url    : '/get_questions_analysis',
 		params : {
-			user_id, test_id,
+			user_id,
+			test_id,
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 
@@ -64,6 +66,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 				{!isEmpty(case_study_questions) ? (
 					case_study_questions.map((item, index) => (
 						<CaseStudy
+							key={item?.questions_description?.id}
 							case_study={item}
 							index={index}
 							user_name={user_name}
@@ -81,6 +84,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 							count_till_now={stand_alone_questions.length + case_study_questions.length}
 							view={view}
 							status={status}
+							activeAttempt={activeAttempt}
 						/>
 					</div>
 				) : null}

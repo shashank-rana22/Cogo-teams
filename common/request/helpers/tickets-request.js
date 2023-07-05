@@ -17,8 +17,10 @@ const ticketsRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_TICKET_RE
 ticketsRequest.interceptors.request.use((oldConfig) => {
 	const { authkey = '', ...axiosConfig } = oldConfig;
 
+	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
+
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
-	if (process.env.NODE_ENV === 'production') {
+	if (!isDevMode) {
 		axiosConfig.baseURL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/tickets`;
 	}
 	const token = getCookie(auth, oldConfig.ctx);

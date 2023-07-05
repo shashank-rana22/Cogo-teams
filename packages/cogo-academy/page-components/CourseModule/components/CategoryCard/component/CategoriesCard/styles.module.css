@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 140px;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.title {
+	font-weight: 600;
+}
+
+.details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.image_box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	width: 72px;
+	height: 72px;
+	padding: 8px;
+	margin-right: 20px;
+	font-size: 12px;
+	color: #f68b21;
+	background: #fdebe9;
+	border-radius: 6px;
+}
+
+.pill_box {
+	display: flex;
+	flex-wrap: wrap;
+	width: 180px;
+}
+
+.courses {
+	margin: 2px 10px;
+}
