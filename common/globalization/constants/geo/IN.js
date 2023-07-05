@@ -506,7 +506,8 @@ export default {
 
 		navigations: {
 			onboard_vendor: {
-				validate_registration: true,
+				validate_registration : true,
+				registration_types    : false,
 			},
 			cogo_one: {
 				has_voice_call_access     : true,

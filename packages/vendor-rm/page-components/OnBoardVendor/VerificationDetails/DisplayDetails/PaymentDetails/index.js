@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -5,11 +6,12 @@ import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
-const fieldsToShow = {
+const FIELDS_TO_SHOW = {
 	account_holder_name : 'Account Holder’s Name',
 	account_number      : 'Account No.',
 	account_type        : 'Account Type',
 	ifsc_code           : 'IFSC Code',
+	swift_code          : 'SWIFT Code',
 	bank_name           : 'Bank Name',
 	branch_name         : 'Branch Name',
 	bank_document_url   : 'Cancelled Cheque/Passbook',
@@ -18,13 +20,18 @@ const fieldsToShow = {
 	tax_document_url    : 'GST Proof',
 };
 
+const geo = getGeoConstants();
+
+const PAYMENT_DETAILS_CONSTANT = 0;
+
 const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
 function PaymentDetails({
 	detail,
 }) {
+	const REGISTRATION_TYPES = geo.others.navigations.onboard_vendor.registration_types;
 	const getDisplayValue = ({ fieldName }) => {
-		const val = detail?.[0]?.[fieldName] || '';
+		const val = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName] || '';
 
 		if (!val) {
 			return '-';
@@ -63,23 +70,40 @@ function PaymentDetails({
 
 			<div className={styles.body}>
 				<div className={styles.single_record}>
-					{Object.keys(fieldsToShow).map((fieldName) => (
-						<div
-							key={fieldName}
-							className={styles.fields_to_show}
-							style={{
-								flexBasis: `${fieldName === 'address' ? '40%' : '20%'}`,
-							}}
-						>
-							<div className={styles.label}>
-								{fieldsToShow[fieldName]}
-							</div>
+					{Object.keys(FIELDS_TO_SHOW).map((fieldName) => {
+						const fieldValue = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName];
+						let label = FIELDS_TO_SHOW[fieldName];
+						if (fieldValue) {
+							if (REGISTRATION_TYPES && label === 'GST Number') {
+								label = 'VAT Number';
+							} else if (REGISTRATION_TYPES && label === 'GST Proof') {
+								label = 'VAT Proof';
+							}
+						}
+						return (
+							<div
+								key={fieldName}
+								className={styles.fields_to_show}
+								style={{
+									flexBasis: detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+										? `${fieldName === 'address' ? '40%' : '20%'}` : 'none',
+								}}
+							>
+								{detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+						&& (
+							<div>
+								<div className={styles.label}>
+									{label}
+								</div>
 
-							<div className={styles.value}>
-								{getDisplayValue({ fieldName })}
+								<div className={styles.value}>
+									{getDisplayValue({ fieldName })}
+								</div>
 							</div>
-						</div>
-					))}
+						)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>
