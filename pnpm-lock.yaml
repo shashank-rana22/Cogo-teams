@@ -335,9 +335,11 @@ importers:
 
   common/navigation-configs:
     specifiers:
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.58
       react: 18.2.0
     dependencies:
+      '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
 

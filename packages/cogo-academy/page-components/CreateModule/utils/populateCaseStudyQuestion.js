@@ -3,6 +3,40 @@ import { isEmpty } from '@cogoport/utils';
 
 import getEditorValue from '../commons/SavedQuestionDetails/utils/getEditorValue';
 
+const updateExplanationState = ({ prev, test_case_study_questions, RichTextEditor }) => {
+	const updatedObj = { ...prev };
+
+	test_case_study_questions.forEach((caseStudyQuestion, index) => {
+		const {
+			explanation:indExplanation = [],
+		} = caseStudyQuestion || {};
+
+		updatedObj[`case_questions_${index}_explanation`] = isEmpty(indExplanation)
+			? RichTextEditor?.createEmptyValue()
+			: RichTextEditor
+				?.createValueFromString((indExplanation?.[GLOBAL_CONSTANTS.zeroth_index] || ''), 'html');
+	});
+
+	return updatedObj;
+};
+
+const updateQuestionState = ({ prev, test_case_study_questions, RichTextEditor }) => {
+	const updatedObj = { ...prev };
+
+	test_case_study_questions.forEach((caseStudyQuestion, index) => {
+		const {
+			question_text: indQuestionText,
+		} = caseStudyQuestion || {};
+
+		updatedObj[`case_questions_${index}`] = getEditorValue({
+			question_text: indQuestionText,
+			RichTextEditor,
+		});
+	});
+
+	return updatedObj;
+};
+
 const populateCaseStudyQuestion = ({
 	question_type,
 	question_text,
@@ -25,29 +59,12 @@ const populateCaseStudyQuestion = ({
 			test_question_answers:indTestQuestionAnswers,
 			question_type: indQuestionType,
 			question_text: indQuestionText,
-			explanation:indExplanation = [],
 		} = caseStudyQuestion || {};
 
 		const childKey = `case_questions.${index}`;
 
 		setValue(`${childKey}.question_type`, indQuestionType);
 		setValue(`${childKey}.question_text`, indQuestionText);
-
-		setEditorValue((prev) => ({
-			...prev,
-			[`case_questions_${index}_explanation`]: isEmpty(indExplanation)
-				? RichTextEditor?.createEmptyValue()
-				: RichTextEditor
-					?.createValueFromString((indExplanation?.[GLOBAL_CONSTANTS.zeroth_index] || ''), 'html'),
-		}));
-
-		setQuestionState((prev) => ({
-			...prev,
-			editorValue: {
-				...prev.editorValue,
-				[`case_questions_${index}`]: getEditorValue({ question_text: indQuestionText, RichTextEditor }),
-			},
-		}));
 
 		indTestQuestionAnswers.forEach((answer, answerIndex) => {
 			const { answer_text, is_correct } = answer || {};
@@ -58,6 +75,17 @@ const populateCaseStudyQuestion = ({
 			setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');
 		});
 	});
+
+	setEditorValue((prev) => ({
+		...updateExplanationState({ prev, test_case_study_questions, RichTextEditor }),
+	}));
+
+	setQuestionState((prev) => ({
+		...prev,
+		editorValue: {
+			...updateQuestionState({ prev: { ...prev.editorValue }, test_case_study_questions, RichTextEditor }),
+		},
+	}));
 };
 
 export default populateCaseStudyQuestion;
