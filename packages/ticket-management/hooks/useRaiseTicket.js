@@ -8,6 +8,7 @@ const getPayload = ({
 	notify_customer, additionalData,
 }) => ({
 	UserID         : id,
+	PerformedByID  : id,
 	Source         : 'admin',
 	Category       : '',
 	Subcategory    : '',
