@@ -30,7 +30,7 @@ function ShipmentCard({ itemData, priceData }) {
 						{format(itemData?.confirmed_by_importer_exporter_at, 'mm')}
 						{' '}
 						mins
-
+						{' '}
 						left
 					</div>
 				</div>

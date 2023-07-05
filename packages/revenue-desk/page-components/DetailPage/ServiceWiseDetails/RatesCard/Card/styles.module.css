@@ -123,6 +123,7 @@
 .price_value{
 	font-weight: 600;
 	color: #221f20;
+	margin-right: 16px;
 }
 .service_provider_heading {
 	margin-right: 38px;
