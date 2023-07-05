@@ -36,6 +36,8 @@ function TicketChat({
 	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
 	setShowReassign = () => {},
 }) {
+	const { ticketId = '' } = modalData || {};
+
 	const messageRef = useRef(null);
 	const [isInternal, setIsInternal] = useState(false);
 	const [file, setFile] = useState('');
@@ -61,7 +63,7 @@ function TicketChat({
 		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
 	const {
@@ -77,7 +79,7 @@ function TicketChat({
 		getTicketActivity = () => {},
 		setListData = () => {},
 	} = useGetTicketActivity({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
 	const isEmptyChat = isEmpty(listData?.items);
@@ -88,14 +90,14 @@ function TicketChat({
 			page        : 0,
 			total_pages : 0,
 		});
-		getTicketDetails(modalData?.ticketId);
+		getTicketDetails(ticketId);
 		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
 
 		setIsUpdated(true);
 	};
 
 	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 		refreshTickets,
 		scrollToBottom,
 		isInternal,
@@ -198,14 +200,14 @@ function TicketChat({
 				)}
 
 				<EscalateTicket
-					ticketId={modalData?.ticketId}
+					ticketId={ticketId}
 					showEscalate={showEscalate}
 					setShowEscalate={setShowEscalate}
 					updateTicketActivity={updateTicketActivity}
 				/>
 
 				<ReassignTicket
-					ticketId={modalData?.ticketId}
+					ticketId={ticketId}
 					showReassign={showReassign}
 					setShowReassign={setShowReassign}
 					getTicketActivity={getTicketActivity}
