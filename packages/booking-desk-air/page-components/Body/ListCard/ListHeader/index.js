@@ -5,6 +5,7 @@ import INCO_TERM_MAPING from '../../../../constants/inco-term-mapping';
 
 import styles from './styles.module.css';
 
+const TAGS = ['cogoverse', 'post_facto'];
 function ListHeader({ item = {} }) {
 	const {
 		source = '',
@@ -40,8 +41,7 @@ function ListHeader({ item = {} }) {
 						: startCase(source)}
 				</span>
 			) }
-			{tags.includes('cogoverse') && <span className={styles.cogoverse}>Cogoverse</span>}
-			{tags.includes('post_facto') && <span className={styles.post_facto}>Post Facto</span>}
+			{tags.map((tag) => TAGS.includes(tag) && <span key={tag} className={styles[tag]}>{tag}</span>)}
 		</div>
 	);
 }
