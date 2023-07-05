@@ -43,14 +43,6 @@
 	font-weight: 500;
 	color: var(--color-secondary);
 	letter-spacing: 0.04em;
-
-	.tippy-box {
-		max-width: fit-content !important;
-	}
-
-	.core-ui-tooltip-root {
-		text-align: start;
-	}
 }
 
 .heading {
@@ -65,7 +57,7 @@
 
 .tooltip {
 	width: fit-content;
-	max-width: 500px;
+	max-width: 240px;
 	overflow: hidden;
 	font-size: 10px;
 	font-weight: 500;
