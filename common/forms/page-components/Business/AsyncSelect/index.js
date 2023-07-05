@@ -43,6 +43,7 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 } from '../../../utils/getAsyncFields';
@@ -106,6 +107,7 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 };
