@@ -25,7 +25,6 @@ function ExecuteTask({
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-	const SERVICES_FOR_INSURANCE = ['lcl_freight_service'];
 	const STEPS_LENGTH = 1;
 
 	const {
@@ -85,9 +84,7 @@ function ExecuteTask({
 	}
 
 	if (
-		task?.task === 'generate_cargo_insurance'
-		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
-	) {
+		task?.task === 'generate_cargo_insurance') {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 

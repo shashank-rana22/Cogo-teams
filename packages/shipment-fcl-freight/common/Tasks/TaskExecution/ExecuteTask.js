@@ -24,7 +24,6 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
-const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 
 const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
@@ -189,9 +188,7 @@ function ExecuteTask({
 	}
 
 	if (
-		task?.task === 'generate_cargo_insurance'
-		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
-	) {
+		task?.task === 'generate_cargo_insurance') {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
