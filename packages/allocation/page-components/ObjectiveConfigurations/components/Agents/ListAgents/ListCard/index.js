@@ -1,11 +1,14 @@
 import { Accordion, Button, Pill } from '@cogoport/components';
 
 import ObjectiveDetailsCard from '../../../../common/ObjectiveDetailsCard';
+import TAB_PANNEL_KEYS from '../../../../constants/tab-pannel-keys-mapping';
 
 import styles from './styles.module.css';
 
 function ListCard(props) {
-	const { item } = props;
+	const { item, setActiveTabDetails } = props;
+
+	const { OBJECTIVES } = TAB_PANNEL_KEYS;
 
 	const { role, user, partner, objectives } = item;
 
@@ -47,7 +50,17 @@ function ListCard(props) {
 				</Accordion>
 			))}
 
-			<div className={styles.create_new} role="presentation">+ Create New Objective For Agent</div>
+			<div
+				className={styles.create_new}
+				role="presentation"
+				onClick={() => setActiveTabDetails((pv) => ({
+					...pv,
+					tab  : OBJECTIVES,
+					mode : 'create',
+				}))}
+			>
+				+ Create New Objective For Agent
+			</div>
 		</div>
 	);
 }

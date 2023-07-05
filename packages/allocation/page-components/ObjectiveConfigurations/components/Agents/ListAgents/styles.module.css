@@ -1,0 +1,9 @@
+.pagination_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 8px 24px;
+	margin-top: 12px;
+	background-color: #fff;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}

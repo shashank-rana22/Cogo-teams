@@ -1,4 +1,7 @@
+import { Pagination } from '@cogoport/components';
+
 import ListCard from './ListCard';
+import styles from './styles.module.css';
 
 const list = [
 	{
@@ -102,16 +105,25 @@ const list = [
 	},
 ];
 
-function ListAgents() {
+function ListAgents(props) {
+	const { setActiveTabDetails } = props;
+
 	return (
-		<div>
-			{list.map((item) => (
-				<ListCard
-					key={item.id}
-					item={item}
-				/>
-			))}
-		</div>
+		<>
+			<div>
+				{list.map((item) => (
+					<ListCard
+						key={item.id}
+						item={item}
+						setActiveTabDetails={setActiveTabDetails}
+					/>
+				))}
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination type="table" />
+			</div>
+		</>
 	);
 }
 
