@@ -27,7 +27,7 @@ const controls = [
 		type           : 'select',
 		span           : 4,
 		optionsListKey : 'currencies',
-		value          : `${geo?.country.currency.code}`,
+		value          : `${geo.country.currency.code}`,
 		validations    : [{ type: 'required', message: 'Currency is required' }],
 	},
 	{

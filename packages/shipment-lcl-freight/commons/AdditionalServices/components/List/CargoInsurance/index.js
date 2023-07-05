@@ -29,6 +29,8 @@ function CargoInsurance({
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
+	const { trade_type, origin_port, destination_port } = primary_service || {};
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const { user } = useSelector((state) => state?.profile);
@@ -44,8 +46,7 @@ function CargoInsurance({
 		premiumRate,
 	} = useGetInsuranceRate();
 
-	const cargoInsuranceCountryId =	primary_service?.trade_type === 'export'
-		? primary_service?.destination_port?.country_id : primary_service?.origin_port?.country_id;
+	const cargoInsuranceCountryId =	trade_type === 'export' ? destination_port?.country_id : origin_port?.country_id;
 
 	const { isEligible, loading: apiLoading } =	useGetInsuranceCountrySupported({
 		country_id: cargoInsuranceCountryId,
@@ -56,9 +57,9 @@ function CargoInsurance({
 		rateData               : premiumData,
 		commodity,
 		transitMode            : 'SEA',
-		origin_country_id      : primary_service?.origin_port?.country_id,
-		destination_country_id : primary_service?.destination_port?.country_id,
-		trade_type             : primary_service?.trade_type,
+		origin_country_id      : origin_port?.country_id,
+		destination_country_id : destination_port?.country_id,
+		trade_type,
 		refetch                : refetchAfterApiCall,
 	});
 
@@ -81,14 +82,14 @@ function CargoInsurance({
 				policyCommodityId  : formValues?.cargo_insurance_commodity,
 				invoiceValue       : formValues?.cargo_value,
 				policyCurrency     : formValues?.cargo_value_currency,
-				policyType         : POLICY_TYPE_MAPPING[primary_service?.trade_type] || 'INLAND',
+				policyType         : POLICY_TYPE_MAPPING[trade_type] || 'INLAND',
 				policyCountryId    : cargoInsuranceCountryId,
 				performedBy        : userId,
 			});
 		}
 	}, [cargoInsuranceCountryId,
 		formValues?.cargo_insurance_commodity, formValues?.cargo_insurance_commodity_description,
-		formValues?.cargo_value, formValues?.cargo_value_currency, primary_service?.trade_type, userId]);
+		formValues?.cargo_value, formValues?.cargo_value_currency, trade_type, userId]);
 
 	useEffect(() => {
 		debounceQuery(currentCargoInsurance);
@@ -116,9 +117,7 @@ function CargoInsurance({
 	}
 
 	if (
-		![primary_service?.destination_port?.country_id, primary_service?.origin_port?.country_id].includes(
-			geo.country.id,
-		)
+		![destination_port?.country_id, origin_port?.country_id].includes(geo.country.id)
 	) {
 		return <EmptyState reason="non_indian_search" />;
 	}
