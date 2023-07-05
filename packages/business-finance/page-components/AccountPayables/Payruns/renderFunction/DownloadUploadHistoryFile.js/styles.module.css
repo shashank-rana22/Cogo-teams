@@ -1,7 +1,8 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 }
-.button{
-    margin-left: 12px;
-    cursor: pointer;
+
+.button {
+	margin-left: 12px;
+	cursor: pointer;
 }

@@ -10,10 +10,10 @@
 
 .box {
 	padding: 28px 10px 0;
+	margin-right: 2px;
+	margin-left: 2px;
 	background: #fff;
 	border-radius: 8px;
-	margin-left: 2px;
-	margin-right: 2px;
 }
 
 .label_text {

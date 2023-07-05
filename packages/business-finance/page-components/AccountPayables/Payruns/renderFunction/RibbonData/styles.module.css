@@ -1,7 +1,9 @@
-.container{
+.container {
 	display: flex;
+
 	/* position: relative; */
 }
+
 .ribbons {
 	font-size: 10px;
 

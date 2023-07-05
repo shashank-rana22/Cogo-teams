@@ -1,11 +1,13 @@
-.container{
-    height:50px ;
+.container {
+	height: 50px;
 }
-.filter_container{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 16px;
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
 }
-.search_icon{
-    margin-right: 8px;
+
+.search_icon {
+	margin-right: 8px;
 }

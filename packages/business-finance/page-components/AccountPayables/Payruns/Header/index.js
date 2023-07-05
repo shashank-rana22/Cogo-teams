@@ -71,12 +71,15 @@ function Header({
 			</div>
 			<div className={styles.filter_container}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
-						<TabPanel title="Domestic" name="NORMAL" />
-						<TabPanel title="Overseas" name="OVERSEAS" />
-						<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
-					</Tabs>
-
+					{(['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab))
+						? (
+							<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
+								<TabPanel title="Domestic" name="NORMAL" />
+								<TabPanel title="Overseas" name="OVERSEAS" />
+								<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
+							</Tabs>
+						)
+						: null}
 					<Toggle
 						name="isInvoiceView"
 						value={isInvoiceView}

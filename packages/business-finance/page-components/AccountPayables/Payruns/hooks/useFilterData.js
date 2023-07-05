@@ -15,7 +15,7 @@ import useGetPayrun from './useGetPayrun';
 import useGetPayrunBillListView from './useGetPayrunBillListView';
 import useGetUploadHistoryList from './useGetUploadHistoryList';
 
-const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
+const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverseasData }) => {
 	const [globalFilters, setGlobalFilters] = useState({
 		search    : undefined,
 		pageIndex : 1,
@@ -50,6 +50,8 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 				getAdvancePaymentInvoiceList();
 			} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
 				getPayrunListView();
+			} else {
+				getPayrunList();
 			}
 		} else if (activePayrunTab === 'PAID') {
 			getPaidList();
@@ -93,6 +95,11 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData }) => {
 		loading = payrunLoading;
 		config = initiatedConfig;
 	}
+	useEffect(() => {
+		// setViewId('');
+		// setActiveAdvPaid('NORMAL');
+		setOverseasData('NORMAL');
+	}, [activePayrunTab, setOverseasData]);
 
 	return {
 		data,

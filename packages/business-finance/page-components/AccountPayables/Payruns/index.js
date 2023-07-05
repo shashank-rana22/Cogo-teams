@@ -18,7 +18,7 @@ function Payruns() {
 		config,
 		globalFilters,
 		setGlobalFilters,
-	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData });
+	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData, setOverseasData });
 
 	const { functions } = RenderFunctions(overseasData);
 
