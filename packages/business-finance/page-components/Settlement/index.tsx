@@ -1,5 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import History from './page-components/History';
@@ -8,8 +10,18 @@ import OnAccountCollection from './page-components/OnAccountCollection';
 import TdsSettlement from './page-components/TdsSettlement';
 import styles from './styles.module.css';
 
+interface Profile {
+	profile?: { partner: { id: string } };
+}
 function Settlement() {
 	const { query, push } = useRouter();
+	const { profile }:Profile = useSelector((state) => state);
+
+	const { partner } = profile || {};
+
+	const { id: partnerId } = partner || {};
+
+	const entityCode = getEntityCode(partnerId);
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
@@ -48,7 +60,7 @@ function Settlement() {
 					<OnAccountCollection />
 				</TabPanel>
 				<TabPanel name="JournalVoucher" title="Journal Voucher">
-					<JournalVoucher />
+					<JournalVoucher entityCode={entityCode} />
 				</TabPanel>
 			</Tabs>
 		</div>

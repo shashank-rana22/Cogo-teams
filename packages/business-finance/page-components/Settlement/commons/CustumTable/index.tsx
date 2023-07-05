@@ -41,14 +41,17 @@ function CustumTable({ data = {}, onPageChange, loading, refetch, setFilters, fi
 		<div className={styles.table}>
 			<Header setFilters={setFilters} filters={filters} />
 			{loading ? <Loader /> : <List list={list} refetch={refetch} /> }
-			<Pagination
-				className={styles.pagination}
-				type="number"
-				currentPage={pageNo}
-				totalItems={totalRecords}
-				pageSize={10}
-				onPageChange={onPageChange}
-			/>
+			{ list.length > 0 && (
+				<Pagination
+					className={styles.pagination}
+					type="number"
+					currentPage={pageNo}
+					totalItems={totalRecords}
+					pageSize={10}
+					onPageChange={onPageChange}
+				/>
+			)}
+
 		</div>
 	);
 }
