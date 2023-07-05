@@ -15,15 +15,15 @@ function IndividualKraAssignment({ data, loading }) {
 		loading: submitLoading,
 		createIndividualKra,
 		individualKRAValues,
-		setIndividualKRAValues,
 		ratingInfo,
 		setRatingInfo,
+		handleTargetChange,
 	} = useCreateIndividualKra({ data });
 
 	const columns = getIndividualColumn({
 		loading,
 		individualKRAValues,
-		setIndividualKRAValues,
+		handleTargetChange,
 	});
 
 	return (

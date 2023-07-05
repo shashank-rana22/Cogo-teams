@@ -4,8 +4,8 @@ import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 function useGetUnassignedEmployee() {
-	const [filters, setFilters] = useState();
-	const [filtersFields, setFiltersFields] = useState();
+	const [filters, setFilters] = useState({});
+	const [filtersFields, setFiltersFields] = useState({});
 	const [showKRACalculationTable, setShowKRACalculationTable] = useState(false);
 
 	const [{ data, loading }, trigger] = useRequest({

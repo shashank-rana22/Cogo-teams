@@ -9,12 +9,10 @@ function Header({ data }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.top}>
-				<div className={styles.title1}>
-					Hello,
-					{' '}
-					{startCase(userName)}
-				</div>
+			<div className={styles.title1}>
+				Hello,
+				{' '}
+				{startCase(userName)}
 			</div>
 
 			<div className={styles.target_remains_ctn}>
