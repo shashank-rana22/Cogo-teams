@@ -3,32 +3,32 @@
 }
 
 .heading_container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
 }
 
 .heading {
-	margin: 0px;
+	margin: 0;
 }
 
 .card {
-    padding: 16px 20px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 16px 20px;
 	background-color: #fff;
 	border: 1px solid #f8f8f8;
 	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-    box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+	box-shadow: 0 0 4px rgb(0 0 0 / 5%);
 }
 
 .label_value_cotainer {
 	display: flex;
+	flex-basis: 33%;
 	align-items: center;
-    flex-basis: 33%;
 
-    @media(max-width: 768px) {
+	@media (max-width: 768px) {
 		flex-basis: 50%;
 	}
 }

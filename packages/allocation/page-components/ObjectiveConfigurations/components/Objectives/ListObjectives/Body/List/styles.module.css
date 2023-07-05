@@ -26,13 +26,10 @@
 		}
 
 		.ui_collapse_footer {
-			padding: 0;
-			border-radius: 8px;
-		}
-
-		.ui_collapse_footer {
 			display: flex;
 			flex-direction: column;
+			padding: 0;
+			border-radius: 8px;
 		}
 
 		.ui_collapse_footer_title {
@@ -51,7 +48,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	padding: 8px 24px;
+	margin-top: 12px;
 	background-color: #fff;
 	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-	margin-top: 12px;
 }
