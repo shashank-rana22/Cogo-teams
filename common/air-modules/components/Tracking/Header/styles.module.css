@@ -16,11 +16,10 @@
 	display: flex;
 	align-items: center;
 	margin-left: 40px;
-	font-size: 16px;
-	font-weight: 400;
+	font-size: var(--font-size-xl);
 
 	&.heading {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
@@ -46,7 +45,7 @@
 
 .label {
 	margin-bottom: 5px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	color: #221f20;
 }
 
@@ -60,7 +59,7 @@
 }
 
 .error_text {
-	font-size: 11px;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 	color: #d22b2b;
 }
@@ -68,14 +67,13 @@
 .airway_bill_no_head {
 	display: flex;
 	align-items: center;
-	font-size: 12px;
-	font-weight: 400;
+	font-size: var(--font-size-md);
 }
 
 .airway_bill_no {
 	display: flex;
 	align-items: center;
 	margin-left: 5px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 }

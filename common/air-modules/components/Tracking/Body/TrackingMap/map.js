@@ -13,8 +13,8 @@ const LAYER = [
 	},
 ];
 
-const LINE_OPTIONS = { color: 'green' };
-const REMAINING_ROUTE_LINE_OPTIONS = { color: 'blue' };
+const LINE_OPTIONS = { color: '#008000' };
+const REMAINING_ROUTE_LINE_OPTIONS = { color: '#0000ff' };
 const CENTER = { lat: '28.679079', lng: '77.069710' };
 const CORNER_1_LAT = -90;
 const CORNER_1_LNG = -200;

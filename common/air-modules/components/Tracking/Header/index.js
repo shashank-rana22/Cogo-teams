@@ -22,7 +22,7 @@ function Header({
 		reset,
 		formState: { errors },
 		handleSubmit,
-	} = useForm({});
+	} = useForm();
 
 	const handleRaisedQuery = () => {
 		setShowModal(true);
@@ -49,9 +49,9 @@ function Header({
 				}}
 			/>
 
-			{errors?.query_type ? (
+			{errors?.query_type && (
 				<div className={styles.error_text}>Query type is required</div>
-			) : null}
+			)}
 
 			<div className={styles.text_area_container}>
 				<div className={styles.label}>Remarks</div>
@@ -65,9 +65,8 @@ function Header({
 					}}
 					rows={4}
 				/>
-				{errors?.remarks ? (
-					<div className={styles.error_text}>Remarks is required</div>
-				) : null}
+				{errors?.remarks
+					&& <div className={styles.error_text}>Remarks is required</div>}
 			</div>
 
 			<div className={styles.button_div}>

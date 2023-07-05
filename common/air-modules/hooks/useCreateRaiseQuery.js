@@ -7,8 +7,6 @@ import toastApiError from '../utils/toastApiError';
 function useCreateRaiseQuery({
 	handleRaisedQuery = () => {},
 	shipmentId = '',
-	queryType = '',
-	remarks = '',
 }) {
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.id,
@@ -19,28 +17,27 @@ function useCreateRaiseQuery({
 		method : 'POST',
 	}, { manual: true });
 
-	const handleFormSubmit = useCallback(() => {
+	const handleFormSubmit = useCallback((values) => {
+		const { query_type, remarks } = values || {};
 		(async () => {
 			const payload = {
-				query_type      : queryType,
+				query_type,
 				remarks,
 				performed_by_id : userId,
 				service         : 'shipment',
 				service_id      : shipmentId,
 			};
 			try {
-				const res = await trigger({
+				await trigger({
 					data: payload,
 				});
 
-				if (!res.hasError) {
-					handleRaisedQuery();
-				}
+				handleRaisedQuery();
 			} catch (e) {
 				toastApiError(e);
 			}
 		})();
-	}, [queryType, remarks, userId, shipmentId, trigger, handleRaisedQuery]);
+	}, [userId, shipmentId, trigger, handleRaisedQuery]);
 
 	return {
 		loading,

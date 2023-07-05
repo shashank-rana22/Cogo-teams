@@ -1,31 +1,22 @@
 .main {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 16px;
-	color: var(--color-secondary);
-	letter-spacing: 0.04em;
+	justify-content: space-evenly;
+	height: 100%;
 }
 
 .gap {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 }
 
 .heading {
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 18px;
-	color: var(--color-secondary);
+	font-size: var(--font-size-lg);
 }
 
 .single_item {
 	position: relative;
 	display: flex;
-	gap: 10px;
 	align-items: center;
 	height: 100px;
 	padding-bottom: 10px;

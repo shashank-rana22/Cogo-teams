@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function RaiseQuery({ setShowModal = () => {} }) {
 	return (
 		<div className={styles.container}>
-			<IcCFtick style={{ height: '60px', width: '60px' }} />
+			<IcCFtick height="60px" width="60px" />
 			<div className={styles.text}>Your query has been sent successfully!</div>
 			<div className={cl`${styles.text} ${styles.msg}`}>
 				Thanks for your feedback. We are working on the resolution of your

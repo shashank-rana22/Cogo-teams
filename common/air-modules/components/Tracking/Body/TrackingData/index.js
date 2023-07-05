@@ -1,4 +1,4 @@
-import { cl, Tooltip, Tags } from '@cogoport/components';
+import { Tooltip, Tags } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
@@ -46,7 +46,7 @@ function TrackingData({ data = [] }) {
 								/>
 							)}
 							{item?.flight_number && (
-								<div>
+								<div className={styles.info}>
 									{item?.piece ? (
 										<span className="piece">
 											{item?.piece}
@@ -69,7 +69,7 @@ function TrackingData({ data = [] }) {
 									) : null}
 								</div>
 							)}
-							<div className={cl`${styles.info} ${styles.date}`}>
+							<div className={styles.date}>
 								{item?.event_date || item?.actual_date
 									? formatDate({
 										date       : item?.event_date || item?.actual_date,
