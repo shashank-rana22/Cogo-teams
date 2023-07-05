@@ -10,7 +10,10 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
-export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
+export default function TimelineItem({
+	item, isLast = false,
+	consecutivelyCompleted = false, icd_milestones_to_show_completed = [],
+}) {
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
 
 	const { primary_service } = useContext(ShipmentDetailContext) || {};
@@ -29,7 +32,10 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 
 	const displayCompletedDate = completed_on || milestoneToDisplayDate[item?.milestone];
 
-	let isCompleted = !!completed_on && consecutivelyCompleted;
+	let isCompleted = (!!completed_on
+		|| (icd_milestones_to_show_completed || []).includes(milestone))
+		&& consecutivelyCompleted;
+
 	isCompleted = isLast ? !!completed_on : isCompleted;
 
 	const circleClass = `${circle} ${is_sub ? small : big} ${isCompleted ? completed : ''}`;

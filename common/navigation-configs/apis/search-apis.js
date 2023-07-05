@@ -510,6 +510,10 @@ const apis = [
 		feature      : 'search',
 		service_name : 'organization',
 	},
-
+	{
+		api          : 'get_spot_search_location_recommendations',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;

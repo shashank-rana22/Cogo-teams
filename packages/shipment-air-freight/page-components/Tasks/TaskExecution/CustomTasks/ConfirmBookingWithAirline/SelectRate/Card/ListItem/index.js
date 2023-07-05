@@ -107,7 +107,8 @@ function ListItem({
 						<div className={styles.heading}>Rate Proof</div>
 						<div className={styles.sub_heading}>
 							<Button
-								themeType="link"
+								themeType="linkUi"
+								size="md"
 								onClick={() => window.open(
 									data?.data?.rate_procurement_proof_url,
 									'_blank',
