@@ -4,6 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useCreateOrganizationAddress from '../../../../../../../hooks/useCreateOrganizationAddress';
 import useCreateOrganizationBillingAddress from '../../../../../../../hooks/useCreateOrganizationBillingAddress';
 
 import FormElement from './FormElement';
@@ -53,15 +54,22 @@ function AddModal({
 		createSellerAddres, createAddressLoading,
 		data: billingAddressData,
 	} =	useCreateOrganizationBillingAddress({
-		checked,
-		addressType,
 		organization_id : shipmentData?.importer_exporter?.id,
 		refetch         : refetchAfterApiCall,
 	});
 
+	const {
+		apiTrigger: createOrganizationAddress,
+		loading,
+	} =	useCreateOrganizationAddress({
+		refetch: refetchAfterApiCall,
+	});
+
 	const onSubmit = async (data) => {
 		const updatedData = { ...data, country_id: countryId };
-		await createSellerAddres(updatedData, handleCloseModal);
+		const apiTrigger = checked
+			? createSellerAddres(updatedData, handleCloseModal) : createOrganizationAddress(updatedData);
+		await apiTrigger();
 		if (billingAddressData?.data?.id) {
 			organisationAddress();
 			addressApi();
@@ -186,7 +194,7 @@ function AddModal({
 						size="md"
 						themeType="secondary"
 						onClick={handleCloseModal}
-						disabled={createAddressLoading}
+						disabled={createAddressLoading || loading}
 					>
 						Cancel
 					</Button>
@@ -194,10 +202,10 @@ function AddModal({
 					<Button
 						size="md"
 						onClick={handleSubmit(onSubmit)}
-						disabled={createAddressLoading}
+						disabled={createAddressLoading || loading}
 						className={styles.btn_div}
 					>
-						{createAddressLoading ? (
+						{createAddressLoading || loading ? (
 							<img
 								src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading}
 								width="40px"
