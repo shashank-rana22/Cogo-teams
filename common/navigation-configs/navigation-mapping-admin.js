@@ -859,6 +859,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.overheads,
 			},
 			{
+				key           : 'business_finance-compliance',
+				title         : 'Compliance',
+				href          : '/v2/business-finance/compliance/[active_tab]',
+				as            : '/v2/business-finance/compliance/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.compliance,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -1147,7 +1156,8 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
+					...apis.sales_invoice, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-shipment_air',

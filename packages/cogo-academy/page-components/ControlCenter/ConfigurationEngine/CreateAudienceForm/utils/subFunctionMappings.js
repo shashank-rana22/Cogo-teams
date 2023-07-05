@@ -106,10 +106,9 @@ const SUB_FUNCTION_MAPPING = {
 			label : 'Training General',
 			value : 'training_general',
 		},
-		{
-			label : 'All',
-			value : 'all',
-		},
+		{ label: 'Tech', value: 'tech' },
+		{ label: 'Product', value: 'product' },
+		{ label: 'All', value: 'all' },
 	],
 	hr: [
 		{
