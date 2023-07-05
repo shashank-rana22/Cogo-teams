@@ -125,8 +125,8 @@ importers:
       '@cogoport/vendor-rm': workspace:0.1.0
       '@cogoport/welcome': workspace:0.1.0
       '@next/bundle-analyzer': ^13.2.3
-      '@types/node': ^18.14.5
-      '@types/react': ^18.0.28
+      '@types/node': ^18.16.18
+      '@types/react': ^18.2.12
       next: 13.1.6
       react: 18.2.0
       react-dom: 18.2.0
@@ -151,7 +151,7 @@ importers:
       '@cogoport/cogo-academy': link:../packages/cogo-academy
       '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
-      '@cogoport/components': 1.0.427_4hpwt3xjfbus5pvesg2at6445e
+      '@cogoport/components': 1.0.427_yxzcqxti2prv6cnmywwm54f2cq
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/controlled-booking': link:../packages/controlled-booking
       '@cogoport/core': link:../common/core
@@ -207,13 +207,14 @@ importers:
       '@cogoport/vendor-rm': link:../packages/vendor-rm
       '@cogoport/welcome': link:../packages/welcome
       '@next/bundle-analyzer': 13.4.5
-      '@types/node': 18.16.18
-      '@types/react': 18.2.12
       next: 13.1.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.1.0_ahpghwkyyxs7a7vinwifjyd45i
       typescript: 4.9.5
+    devDependencies:
+      '@types/node': 18.16.18
+      '@types/react': 18.2.12
 
   common/air-modules:
     specifiers:
@@ -1577,6 +1578,7 @@ importers:
       '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
+      file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
       '@cogoport/air-modules': link:../../common/air-modules
@@ -1593,6 +1595,7 @@ importers:
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
+      file-saver: 2.0.5
       react: 18.2.0
 
   packages/shipment-air-freight-local:
@@ -3680,6 +3683,40 @@ packages:
       tippy.js: 6.3.7
     optionalDependencies:
       next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.427_yxzcqxti2prv6cnmywwm54f2cq:
+    resolution: {integrity: sha512-nzborICh9UTKYL/8q1cPG2Mras9m7FMRqr2LJ6tKZ8ay3DW5rXSIbTuXYVyVd6ttEI1VbejdpWSPSZslEVRA0g==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
+      '@tippyjs/react': 4.2.6_biqbaboplfbrettd7655fr4n2y
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.44.3_react@18.2.0
+      react-quill: 2.0.0_biqbaboplfbrettd7655fr4n2y
+      react-rte: 0.16.5_biqbaboplfbrettd7655fr4n2y
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -6638,7 +6675,7 @@ packages:
 
   /@types/node/18.16.18:
     resolution: {integrity: sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw==}
-    dev: false
+    dev: true
 
   /@types/node/20.3.1:
     resolution: {integrity: sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==}

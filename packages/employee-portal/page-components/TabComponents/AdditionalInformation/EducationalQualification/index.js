@@ -5,14 +5,17 @@ import { useEffect } from 'react';
 import FieldArray from '../../../../commons/FieldArray';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
-import controls from './controls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
 const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
 const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
 
 function EducationalQualification({ getEmployeeDetails, data }) {
-	const { handleSubmit, control, setValue } = useForm();
+	const { handleSubmit, control, setValue, watch } = useForm();
+	const watchValues = watch();
+
+	const controls = getControls();
 
 	const { detail } = data || {};
 
@@ -27,8 +30,9 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	useEffect(() => {
 		setValue(FORM_TYPE_EDUCATIONAL_QUALIFICATION, employee_education_details?.map((item) => ({
 			...item,
-			started_at : new Date(item?.started_at),
-			ended_at   : new Date(item?.ended_at),
+			degree_proof : item?.degree_proof?.finalUrl,
+			started_at   : new Date(item?.started_at),
+			ended_at     : new Date(item?.ended_at),
 		})));
 	}, [employee_education_details, setValue]);
 
@@ -47,11 +51,11 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 						return (
 							<FieldArray
 								{...controlItem}
-								Array
 								name={FORM_TYPE_EDUCATIONAL_QUALIFICATION}
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
+								watch={watchValues?.educational_qualification}
 							/>
 
 						);
