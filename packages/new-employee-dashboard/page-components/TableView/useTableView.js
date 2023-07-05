@@ -37,8 +37,8 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data) {
-				Toast.error(getApiErrorString(error.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
 	}, [activeTab, search, trigger, page, filters]);

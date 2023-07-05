@@ -34,7 +34,7 @@ const useDay1Download = () => {
 					},
 				});
 			} catch (error) {
-				if (error?.response?.data) {
+				if (error?.response) {
 					Toast.error(getApiErrorString(error?.response?.data));
 				}
 			}

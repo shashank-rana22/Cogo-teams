@@ -48,6 +48,7 @@ import {
 	asyncListTribes,
 	asyncListChapter,
 	asyncListRoles,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 } from '../../../utils/getAsyncFields';
@@ -116,6 +117,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
 	list_roles                           : asyncListRoles,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 };
