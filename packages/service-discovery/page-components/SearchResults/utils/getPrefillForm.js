@@ -4,6 +4,21 @@ import getLoadArray from './getLoadArray';
 
 const FCL_KEYS = ['containers_count', 'container_size', 'container_type', 'commodity', 'cargo_weight_per_container'];
 const LCL_KEYS = ['packages_count', 'weight', 'volume', 'commodity'];
+const TRAILER_KEYS = [
+	'containers_count',
+	'container_size',
+	'container_type',
+	'commodity',
+	'cargo_weight_per_container',
+	'trip_type',
+];
+const HAULAGE_KEYS = [
+	'containers_count',
+	'container_size',
+	'container_type',
+	'commodity',
+	'cargo_weight_per_container',
+];
 
 const EXTRA_FILTERS_DEFAULT_VALUES = {
 	operator       : { operator_type: 'all' },
@@ -76,32 +91,8 @@ const formattedTruckCategory = (truck_type) => {
 	return truckTypeCategory;
 };
 
-const setValueForTrailerAndHaulage = (load, setValue) => {
-	setValue(
-		'container',
-		load.map((containerItem) => {
-			const {
-				cargo_weight_per_container = '',
-				commodity = '',
-				container_size = '',
-				container_type = '',
-				containers_count = '',
-			} = containerItem || {};
-
-			return {
-				containers_count           : containers_count?.toString(),
-				container_size,
-				container_type,
-				commodity                  : commodity === null ? 'all_commodity' : commodity,
-				cargo_weight_per_container : cargo_weight_per_container?.toString(),
-			};
-		}),
-	);
-};
-
 const getPrefillForm = (values, service_key, extraFilters = []) => {
 	const { service_details = {} } = values || {};
-
 	const service_type = values[service_key];
 
 	const load = getLoadArray(service_type, service_details);
@@ -119,6 +110,22 @@ const getPrefillForm = (values, service_key, extraFilters = []) => {
 	if (service_type === 'lcl_freight') {
 		loadData = {
 			...LCL_KEYS.reduce((obj, key) => ({ ...obj, [key]: load[0]?.[key] }), {}),
+		};
+	}
+
+	if (service_type === 'trailer_freight') {
+		loadData = {
+			container: load.map((containerItem) => (
+				TRAILER_KEYS.reduce((obj, key) => ({ ...obj, [key]: containerItem[key] || 'all_commodity' }), {})
+			)),
+		};
+	}
+
+	if (service_type === 'haulage_freight') {
+		loadData = {
+			container: load.map((containerItem) => (
+				HAULAGE_KEYS.reduce((obj, key) => ({ ...obj, [key]: containerItem[key] || 'all_commodity' }), {})
+			)),
 		};
 	}
 
@@ -274,20 +281,5 @@ const getPrefillForm = (values, service_key, extraFilters = []) => {
 	// 		});
 	// 		break;
 	// 	}
-
-	// 	case 'trailer_freight': {
-	// 		setValue('round_trip', load[0]?.trip_type !== 'one_way');
-	// 		setValueForTrailerAndHaulage(load, setValue);
-	// 		break;
-	// 	}
-
-	// 	case 'haulage_freight': {
-	// 		setValueForTrailerAndHaulage(load, setValue);
-	// 		break;
-	// 	}
-
-	// 	default:
-	// 		break;
-	// }
 };
 export default getPrefillForm;

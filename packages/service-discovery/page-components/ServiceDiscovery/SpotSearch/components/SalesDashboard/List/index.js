@@ -4,7 +4,6 @@ import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
 import CC from '../../../utils/condition-constants';
 
 import Header from './Header';
-// import Loading from './loading';
 import Statistics from './Statistics';
 import styles from './styles.module.css';
 import Table from './Table';

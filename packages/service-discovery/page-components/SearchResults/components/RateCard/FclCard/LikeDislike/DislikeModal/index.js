@@ -13,10 +13,11 @@ function DislikeModal({
 	show = false,
 	onClose = () => {},
 	setLikeState = () => {},
+	likeState = {},
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
-	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState });
+	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState, likeState });
 
 	const formValues = watch();
 
@@ -64,7 +65,7 @@ function DislikeModal({
 			<Modal.Footer>
 				<div className={styles.buttons_container}>
 
-					{renderButton({ btnText: 'Cancel', themeType: 'secondary', isFirstBtn: true, onClick: onClose })}
+					{renderButton({ btnText: 'Cancel', onClick: onClose, isFirstBtn: true, themeType: 'secondary' })}
 
 					{renderButton({ btnText: 'Submit', onClick: handleSubmit(onSubmit), isSubmitBtn: true })}
 				</div>

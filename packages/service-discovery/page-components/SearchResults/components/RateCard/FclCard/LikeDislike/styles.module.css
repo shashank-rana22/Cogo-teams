@@ -1,38 +1,34 @@
 .container {
-	cursor: pointer;
-	position: relative;
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.like{
+	transition: color 0.5s ease;
 	color: #fff;
-	margin-right: 28px;
 }
 
-.container.active {
-	color: #4f4f4f;
-}
-
-.container.dislike {
+.dislike {
+	transition: color 0.5s ease;
+	color: #fff;
 	transform: rotate(180deg);
 }
 
-.count {
-	position: absolute;
-	top: -8px;
-	left: 14px;
-	background: #9befa8;
-	border-radius: 4px;
-	padding: 2px 4px;
-	font-weight: 500;
-	font-size: 10px;
-	text-align: center;
-	color: #000000;
-	/* z-index: 1; */
+.active {
+	color: #4f4f4f;
 }
 
-.mainContainer {
-	display: flex;
+.count {
+	font-weight: 500;
+	font-size: 12px;
+	text-align: center;
+	color: #000000;
+	margin-left: 4px;
 }
 
 @media (max-width: 768px) {
-	.mainContainer {
+	.container {
 		padding-right: 0;
 	}
 }

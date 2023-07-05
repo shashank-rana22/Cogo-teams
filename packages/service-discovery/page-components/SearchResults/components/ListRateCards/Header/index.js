@@ -24,6 +24,7 @@ function Header({
 				<Currency
 					filters={filters}
 					setFilters={setFilters}
+					filterKey="currency"
 				/>
 
 				<DetentionDemurrage />

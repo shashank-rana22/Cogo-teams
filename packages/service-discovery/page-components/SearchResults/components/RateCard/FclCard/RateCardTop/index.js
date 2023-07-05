@@ -60,7 +60,7 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 
 			</div>
 
-			<div style={{ display: 'flex', marginRight: 20 }}>
+			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
 
 				{LIKE_DISLIKE_ALLOWED.includes(detail?.search_type) ? (
 					<LikeDislike rateCardData={rateCardData} detail={detail} />

@@ -30,10 +30,7 @@ const getCommodityList = (type, container_type) => {
 		case 'lcl_freight':
 			return getCommoditiesDetails(LCL_FRIEGHT_COMMODITIES);
 		case 'local':
-			return getCommoditiesDetails(
-				LOCAL_CONTAINER_COMMODITY_MAPPINGS[containerType],
-				false,
-			);
+			return getCommoditiesDetails(LOCAL_CONTAINER_COMMODITY_MAPPINGS[containerType]);
 		default: return [];
 	}
 };

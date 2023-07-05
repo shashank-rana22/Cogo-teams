@@ -1,9 +1,10 @@
-import { Tooltip, Placeholder } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
 
+import Loading from './loading-state';
 import styles from './styles.module.css';
 
 function LocationDetails({
@@ -44,7 +45,8 @@ function LocationDetails({
 		return (
 			<div className={styledTheme.location}>
 				<span className={styledTheme.location_country_text}>
-					{`${port_code}, ${country?.pop()}`}
+					{port_code ? `${port_code}, ` : null}
+					{country?.pop()}
 				</span>
 
 				<Tooltip
@@ -65,21 +67,7 @@ function LocationDetails({
 
 	if (loading) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.location}>
-					<Placeholder height="25px" width="200px" margin="0px 0px 8px 0px" />
-					<Placeholder height="25px" width="150px" />
-				</div>
-
-				<div className={styledTheme.icon}>
-					<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} />
-				</div>
-				<div className={styles.location}>
-					<Placeholder height="25px" width="200px" margin="0px 0px 8px 0px" />
-					<Placeholder height="25px" width="150px" />
-				</div>
-
-			</div>
+			<Loading />
 		);
 	}
 

@@ -4,10 +4,35 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const URL = '/create_spot_search_rate_feedback';
+const KEYS_TO_SEND = {
+	fcl_freight     : 'preferred_freight_rate',
+	ftl_freight     : 'preferred_freight_rate',
+	air_freight     : 'preferred_freight_rate',
+	ltl_freight     : 'preferred_freight_rate',
+	lcl_freight     : 'preferred_freight_rate',
+	fcl_customs     : 'preferred_customs_rate',
+	lcl_customs     : 'preferred_customs_rate',
+	air_customs     : 'preferred_customs_rate',
+	haulage_freight : 'preferred_freight_rate',
+	trailer_freight : 'preferred_freight_rate',
+};
+const KEYS_TO_SEND_CURR = {
+	fcl_freight     : 'preferred_freight_rate_currency',
+	ftl_freight     : 'preferred_freight_rate_currency',
+	air_freight     : 'preferred_freight_rate_currency',
+	ltl_freight     : 'preferred_freight_rate_currency',
+	lcl_freight     : 'preferred_freight_rate_currency',
+	fcl_customs     : 'preferred_customs_rate_currency',
+	lcl_customs     : 'preferred_customs_rate_currency',
+	air_customs     : 'preferred_customs_rate_currency',
+	haulage_freight : 'preferred_freight_rate_currency',
+	trailer_freight : 'preferred_freight_rate_currency',
+};
 
 const useDislikeFeedback = ({
 	details = {},
 	rate = {},
+	likeState = {},
 	setLikeState = () => {},
 	onClose = () => {},
 }) => {
@@ -18,31 +43,6 @@ const useDislikeFeedback = ({
 	const { spot_search_id = '' } = query;
 
 	const freight = rate.service_type;
-
-	const KEYS_TO_SEND = {
-		fcl_freight     : 'preferred_freight_rate',
-		ftl_freight     : 'preferred_freight_rate',
-		air_freight     : 'preferred_freight_rate',
-		ltl_freight     : 'preferred_freight_rate',
-		lcl_freight     : 'preferred_freight_rate',
-		fcl_customs     : 'preferred_customs_rate',
-		lcl_customs     : 'preferred_customs_rate',
-		air_customs     : 'preferred_customs_rate',
-		haulage_freight : 'preferred_freight_rate',
-		trailer_freight : 'preferred_freight_rate',
-	};
-	const KEYS_TO_SEND_CURR = {
-		fcl_freight     : 'preferred_freight_rate_currency',
-		ftl_freight     : 'preferred_freight_rate_currency',
-		air_freight     : 'preferred_freight_rate_currency',
-		ltl_freight     : 'preferred_freight_rate_currency',
-		lcl_freight     : 'preferred_freight_rate_currency',
-		fcl_customs     : 'preferred_customs_rate_currency',
-		lcl_customs     : 'preferred_customs_rate_currency',
-		air_customs     : 'preferred_customs_rate_currency',
-		haulage_freight : 'preferred_freight_rate_currency',
-		trailer_freight : 'preferred_freight_rate_currency',
-	};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : URL,
@@ -58,7 +58,7 @@ const useDislikeFeedback = ({
 			file_upload,
 			...rest
 		} = values;
-		const attachment_file_urls = (file_upload || []).map((item) => item.url);
+		const attachment_file_urls = (file_upload || []).map((item) => item.finalUrl);
 
 		try {
 			if (preferred_freight_rate && !preferred_freight_rate_currency) {
@@ -81,13 +81,11 @@ const useDislikeFeedback = ({
 					attachment_file_urls,
 					commodity_description : values.commodity_description || undefined,
 				};
-				await trigger({
-					data: body,
-				});
+				await trigger({ data: body });
 
 				setLikeState({
 					is_liked    : false,
-					likes_count : rate.is_liked ? rate.likes_count - 1 : rate.likes_count,
+					likes_count : likeState.is_liked ? likeState.likes_count - 1 : likeState.likes_count,
 					is_disliked : true,
 				});
 

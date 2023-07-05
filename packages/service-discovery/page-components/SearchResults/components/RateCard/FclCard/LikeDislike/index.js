@@ -1,83 +1,73 @@
-import { Tooltip } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcCLike } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-// import DislikeFeedback from './DislikeFeedback';
+import useLikeFeedback from '../../../../hooks/useLikeFeedback';
+
 import DislikeModal from './DislikeModal';
 import styles from './styles.module.css';
-import updateLikeRate from './updateLikeRate';
 
 function LikeDislike({ rateCardData, detail }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
 	const { is_liked = false, likes_count = 0, is_disliked = false } = rateCardData;
 
-	const [likeState, setLikeState] = useState({
-		is_liked,
-		likes_count,
-		is_disliked,
-	});
+	const [likeState, setLikeState] = useState({ is_liked, likes_count, is_disliked });
 
-	const { handleLikeRateCard } = updateLikeRate({
-		rate: rateCardData, detail, setLikeState,
-	});
+	const { handleLikeRateCard, loading } = useLikeFeedback({ rate: rateCardData, detail, setLikeState, likeState });
 
-	const onClickLike = () => {
-		if (likeState.is_liked) {
-			return;
-		}
+	const handleLikeAction = () => {
+		if (likeState.is_liked) { return; }
+
 		handleLikeRateCard();
 	};
 
-	const onClickDislike = () => {
-		if (likeState.is_disliked) {
-			return;
-		}
+	const handleDislikeAction = () => {
+		if (likeState.is_disliked) { return; }
+
 		setShowFeedbackModal(true);
 	};
 
-	return (
-		<div className={styles.mainContainer}>
-			<Tooltip
-				placement="top"
-				theme="light"
-				content={likeState.is_liked ? 'Liked' : 'Like'}
-			>
-				<div
-					role="presentation"
-					className={`${styles.container} ${likeState.is_liked ? styles.active : ''}`}
-					onClick={onClickLike}
-				>
-					<div className={styles.count}>{likeState.likes_count}</div>
-					<IcCLike width="20px" height="16px" />
-				</div>
-			</Tooltip>
+	const onCloseFeedbackModal = () => { setShowFeedbackModal(false); };
 
-			<Tooltip
-				placement="top"
-				theme="light"
-				content={likeState.is_disliked ? 'Disliked' : 'Dislike'}
+	return (
+		<div className={styles.container}>
+			<Button
+				size="sm"
+				themeType="tertiary"
+				onClick={handleLikeAction}
+				disabled={loading}
 			>
-				<div
-					role="presentation"
-					className={`${styles.container} ${styles.dislike} ${
-						likeState.is_disliked ? styles.active : ''
-					}`}
-					onClick={onClickDislike}
-				>
-					<IcCLike width="20px" height="16px" />
-				</div>
-			</Tooltip>
+				<IcCLike
+					width="20px"
+					height="16px"
+					className={`${styles.like} ${likeState.is_liked ? styles.active : ''}`}
+				/>
+				<span className={styles.count}>{likeState.likes_count}</span>
+			</Button>
+
+			<Button
+				size="sm"
+				themeType="tertiary"
+				onClick={handleDislikeAction}
+				disabled={loading}
+			>
+				<IcCLike
+					width="20px"
+					height="16px"
+					className={`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
+				/>
+				{/* <span className={styles.count}>{rateCardData.dislikes_count}</span> */}
+			</Button>
 
 			{showFeedbackModal ? (
 				<DislikeModal
 					details={detail}
 					rate={rateCardData}
 					show={showFeedbackModal}
-					onClose={() => {
-						setShowFeedbackModal(false);
-					}}
+					likeState={likeState}
 					setLikeState={setLikeState}
+					onClose={onCloseFeedbackModal}
 				/>
 			) : null}
 		</div>

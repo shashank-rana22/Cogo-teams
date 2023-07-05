@@ -20,7 +20,6 @@ const SUB_HEADER_COMPONENT_MAPPING = {
 function Header({
 	data = {},
 	showAdditionalHeader = false,
-	setShowAdditionalHeader = () => {},
 	setHeaderProps = () => {},
 	headerProps = {},
 	service_key = 'search_type',
@@ -32,14 +31,11 @@ function Header({
 	const router = useRouter();
 
 	const { importer_exporter = {}, user = {} } = data || {};
-
 	const { business_name = '' } = importer_exporter || {};
-
 	const { name: user_name = '' } = user || {};
 
 	const handleEdit = () => {
-		setHeaderProps({ key: 'edit_details', data, setShow: setShowAdditionalHeader });
-		setShowAdditionalHeader((prev) => !prev);
+		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps });
 	};
 
 	const styledTheme = {
@@ -54,10 +50,14 @@ function Header({
 	const isAllowedToEdit = rest.activePage === 'search_results';
 
 	return (
-		<div className={styledTheme.container}>
+		<div
+			className={`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}
+			style={{ boxShadow: showAdditionalHeader ? 'none' : '0px 8px 8px 0 #EBEBF0' }}
+		>
 			<div className={styledTheme.header_wrapper}>
 				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 					<div className={styledTheme.back_button}>
+
 						<IcMArrowBack
 							height={20}
 							width={20}
@@ -66,6 +66,7 @@ function Header({
 						/>
 						<span>{rest.headerHeading || 'Back'}</span>
 					</div>
+
 					<div style={{ marginRight: 8 }}>
 						<ToggleSwitch />
 					</div>
@@ -91,7 +92,7 @@ function Header({
 					{isAllowedToEdit ? (
 						<div className={styles.edit_details}>
 							{showAdditionalHeader ? (
-								<IcMCross height={16} width={16} onClick={() => setShowAdditionalHeader(false)} />
+								<IcMCross height={16} width={16} onClick={() => setHeaderProps({})} />
 							) : (
 								<IcMEdit height={16} width={16} onClick={handleEdit} />
 							)}
@@ -103,10 +104,12 @@ function Header({
 			</div>
 
 			{showAdditionalHeader ? (
-				<SubHeaderComponent {...headerProps} />
+				<div className={styles.additional_header}>
+					<SubHeaderComponent {...headerProps} />
+				</div>
 			) : null}
 
-			{headerProps.key === 'additional_services_details' ? <SubHeaderComponent {...headerProps} /> : null}
+			{/* {headerProps.key === 'additional_services_details' ? <SubHeaderComponent {...headerProps} /> : null} */}
 
 		</div>
 

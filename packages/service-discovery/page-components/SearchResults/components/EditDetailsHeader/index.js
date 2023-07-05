@@ -73,7 +73,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
-			setShow(false);
+			setShow({});
 
 			router.push(
 				'/book/[spot_search_id]/[importer_exporter_id]',

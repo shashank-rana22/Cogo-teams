@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 const SERVICE_TYPE_MAPPING = {
 	ftl_freight : 'ftl_freight_services',
 	ltl_freight : 'ltl_freight_services',
@@ -54,48 +56,44 @@ function RenderTruckShipments({
 			theme="light"
 			placement="top"
 			content={(
-				<span>
-					<div>
-						<div>
-							Commodity :
-							{startCase(finalCommodity)}
-						</div>
-
-						<div>
-							Trade Type :
-							{startCase(tradeType)}
-						</div>
-
-						{commodityDetails.truckType && (
-							<div>
-								Truck Type :
-								{startCase(truckType)}
-							</div>
-						)}
-					</div>
-				</span>
-			)}
-		>
-			<span>
 				<div>
-					<div>
+					<span>
 						Commodity :
 						{startCase(finalCommodity)}
-					</div>
+					</span>
 
-					<div>
+					<span>
 						Trade Type :
 						{startCase(tradeType)}
-					</div>
+					</span>
 
-					{truckType && (
-						<div>
+					{commodityDetails.truckType && (
+						<span>
 							Truck Type :
 							{startCase(truckType)}
-						</div>
+						</span>
 					)}
 				</div>
-			</span>
+			)}
+		>
+			<div className={styles.container}>
+				<span>
+					Commodity :
+					{startCase(finalCommodity)}
+				</span>
+
+				<span>
+					Trade Type :
+					{startCase(tradeType)}
+				</span>
+
+				{truckType && (
+					<span>
+						Truck Type :
+						{startCase(truckType)}
+					</span>
+				)}
+			</div>
 		</Tooltip>
 	);
 }

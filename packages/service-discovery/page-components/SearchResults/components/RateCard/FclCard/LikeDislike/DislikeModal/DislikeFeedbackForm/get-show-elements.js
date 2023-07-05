@@ -1,4 +1,6 @@
 const getShowElements = (controls, formValues) => {
+	const feedbackValue = formValues.feedbacks || [];
+
 	const showElements = controls.reduce((previousControls, currentControls) => {
 		const { name = '' } = currentControls;
 
@@ -6,28 +8,28 @@ const getShowElements = (controls, formValues) => {
 
 		if (
 			['preferred_freight_rate_currency', 'preferred_freight_rate'].includes(name)
-			&& !(formValues.feedbacks || []).includes('unsatisfactory_rate')
+			&& !(feedbackValue).includes('unsatisfactory_rate')
 		) {
 			showElement = false;
 		}
 
 		if (
 			name === 'preferred_airline_ids'
-			&& !(formValues.feedbacks || []).includes('unpreferred_airlines')
+			&& !(feedbackValue).includes('unpreferred_airlines')
 		) {
 			showElement = false;
 		}
 
 		if (
 			name === 'preferred_shipping_line_ids'
-			&& !(formValues.feedbacks || []).includes('unpreferred_shipping_lines')
+			&& !(feedbackValue).includes('unpreferred_shipping_lines')
 		) {
 			showElement = false;
 		}
 
 		if (
 			name === 'preferred_detention_free_days'
-			&& !(formValues.feedbacks || []).includes(
+			&& !(feedbackValue).includes(
 				'unsatisfactory_destination_detention',
 			)
 		) {

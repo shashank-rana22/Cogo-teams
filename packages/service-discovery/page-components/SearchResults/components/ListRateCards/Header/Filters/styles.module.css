@@ -1,10 +1,11 @@
 .modal{
-    max-width: 420px;
-    
+   max-width: 440px;
+
     :global{
+       
         .ui_modal_body_container{
             padding: 0px;
-            min-height: 100vh !important;
+            min-height: 90vh !important;
         }
         .ui_accordion_title{
             font-weight: 600;
@@ -12,4 +13,10 @@
             color: #000000;
         }
     }
+}
+.button{
+    width: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
