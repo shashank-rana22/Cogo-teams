@@ -232,6 +232,7 @@ const GLOBAL_CONSTANTS = {
 		cargo_insurance_loader:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
+		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 	},
