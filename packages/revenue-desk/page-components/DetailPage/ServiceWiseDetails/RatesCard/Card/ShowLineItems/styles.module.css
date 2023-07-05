@@ -1,0 +1,11 @@
+.labelText{
+    width:120px;
+    font-weight: 600;
+    padding: 6px;
+    background: #fdfbf6;
+    border-radius: 6px;
+}
+.valueText{
+    padding: 6px;
+    width:120px;
+}

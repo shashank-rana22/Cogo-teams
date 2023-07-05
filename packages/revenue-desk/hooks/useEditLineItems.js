@@ -5,6 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import rawControls from '../helper/sell_quotations_controls';
+import { VALUE_ONE, VALUE_ZERO } from '../page-components/constants';
 
 const getDefaultValues = (oldfields) => {
 	const DEFAULT_VALUES = {};
@@ -17,7 +18,7 @@ const getDefaultValues = (oldfields) => {
 		}
 		return rest;
 	});
-	return { DEFAULT_VALUES, fields: newfields };
+	return { defaultValues: DEFAULT_VALUES, fields: newfields };
 };
 
 const useEditLineItems = ({
@@ -74,22 +75,22 @@ const useEditLineItems = ({
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
 			price_discounted : item?.price_discounted || '0',
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
+			quantity         : item?.quantity || VALUE_ZERO,
+			exchange_rate    : item?.exchange_rate || VALUE_ONE,
+			tax_percent      : item?.tax_percent || VALUE_ZERO,
 			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || '0',
 			name             : item?.name,
 		})),
 	}));
 
-	const { DEFAULT_VALUES, fields } = getDefaultValues(controls);
+	const { defaultValues:DEFAULT_VALUES, fields } = getDefaultValues(controls);
 	const {
 		watch,
 		handleSubmit,
 		control,
 		formState: { isDirty },
-	} = useForm({ DEFAULT_VALUES });
+	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const formValues = watch();
 

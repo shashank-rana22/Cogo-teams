@@ -33,23 +33,6 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 			allocation_ratio = Number(element?.allocated_amount) / Number(element?.allocation_amount);
 		}
 		rowData.allocation_ratio = allocation_ratio || DEFAULT_VALUE;
-		// row.id = element?.rate_id;
-		// rowData.service_provider = element?.service_provider;
-		// rowData.air_line = data?.airline?.business_name;
-		// rowData.shipping_line =	data?.shipping_line?.business_name;
-		// rowData.total_price = validities?.total_price || DEFAULT_VALUE;
-		// rowData.currency = validities?.currency || '';
-		// rowData.fulfillment_ratio_2 = element?.fulfillment_data?.fulfillment_ratio_2;
-		// rowData.fulfillment_ratio_7 = element?.fulfillment_data?.fulfillment_ratio_7;
-		// rowData.fulfillment_ratio_30 = element?.fulfillment_data?.fulfillment_ratio_30;
-		// rowData.sell_price_per_container = Number(validities?.total_price)
-		// / Number(container_count);
-		// rowData.sell_price_currency = validities?.currency;
-		// rowData.active_booking = element?.data?.active_bookings || DEFAULT_VALUE;
-		// rowData.profit = validities?.profit || DEFAULT_VALUE;
-		// rowData.profit_percentage = validities?.profit_percentage || DEFAULT_VALUE;
-		// rowData.source = element?.source || undefined;
-		// rowData.api = 'showed_rates';
 		row.rowData = rowData;
 		ROWS.push(row);
 	});
