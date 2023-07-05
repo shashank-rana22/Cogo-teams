@@ -22,6 +22,7 @@ const useGetColumns = ({
 		<div className={styles.icon_flex}>
 			<IcMArrowRotateUp
 				className={sortBy === key && sortOrder === 'asc' && styles.active}
+				cursor="pointer"
 				onClick={() => setSortData({
 					...sortData,
 					sortOrder : 'asc',
@@ -30,6 +31,7 @@ const useGetColumns = ({
 			/>
 			<IcMArrowRotateDown
 				className={sortBy === key && sortOrder === 'desc' && styles.active}
+				cursor="pointer"
 				onClick={() => setSortData({
 					...sortData,
 					sortOrder : 'desc',
