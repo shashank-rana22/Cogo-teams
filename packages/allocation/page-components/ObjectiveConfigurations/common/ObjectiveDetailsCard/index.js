@@ -2,7 +2,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import OrganizationDetailsCard from './OrganizationDetailsCard';
 import ServiceRequirements from './ServiceRequirements';
-import styles from './styles.module.css';
 import TransactionFunnelCard from './TransactionFunnelCard';
 import useGetObjectiveDetails from './useGetObjectiveDetails';
 
@@ -19,7 +18,7 @@ function ObjectiveDetailsCard(props) {
 	} = objectiveData;
 
 	return (
-		<section className={styles.container}>
+		<>
 			<ServiceRequirements
 				serviceRequirementsDetails={serviceRequirementsDetails}
 				operator={service_requirement_operator}
@@ -28,7 +27,7 @@ function ObjectiveDetailsCard(props) {
 			{!isEmpty(organizationDetails) && <OrganizationDetailsCard organizationDetails={organizationDetails} />}
 
 			{!isEmpty(statsDetails) && <TransactionFunnelCard statsDetails={statsDetails} />}
-		</section>
+		</>
 	);
 }
 

@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../configurations/objective-status-color-mapping';
+import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../../../configurations/objective-status-color-mapping';
 
 import styles from './styles.module.css';
 

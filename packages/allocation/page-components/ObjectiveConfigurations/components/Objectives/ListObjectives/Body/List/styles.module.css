@@ -19,6 +19,33 @@
 	text-align: center;
 }
 
+.collapse {
+	:global {
+		.ui_collapse_container {
+			border-radius: 8px;
+		}
+
+		.ui_collapse_footer {
+			padding: 0;
+			border-radius: 8px;
+		}
+
+		.ui_collapse_footer {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.ui_collapse_footer_title {
+			width: 100%;
+			text-decoration: none;
+		}
+
+		.ui_collapse_footer_icon {
+			padding: 4px;
+		}
+	}
+}
+
 .pagination_container {
 	display: flex;
 	align-items: center;
@@ -26,4 +53,5 @@
 	padding: 8px 24px;
 	background-color: #fff;
 	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+	margin-top: 12px;
 }

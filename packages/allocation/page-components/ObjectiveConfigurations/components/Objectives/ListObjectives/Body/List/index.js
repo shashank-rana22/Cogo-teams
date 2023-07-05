@@ -1,8 +1,10 @@
-import { Pagination } from '@cogoport/components';
-import { useState } from 'react';
+import { Collapse, Pagination } from '@cogoport/components';
+import { useState, useMemo } from 'react';
 
-import getListColumnMapping from './get-list-column-mapping';
+import ObjectiveDetailsCard from '../../../../../common/ObjectiveDetailsCard';
+
 import ListCard from './ListCard';
+import getListColumnMapping from './ListCard/get-list-column-mapping';
 import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 
@@ -105,19 +107,26 @@ function List(props) {
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ setActiveTabDetails });
 
+	const objectiveList = useMemo(() => list.map((item) => ({
+		key      : item.id,
+		children : <ObjectiveDetailsCard activeObjectiveId={item.id} />,
+		title    : <ListCard
+			listItem={item}
+			LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
+		/>,
+	})), [LIST_COLUMN_MAPPING]);
+
 	return (
 		<section>
 			<ListHeader LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING} />
 
-			{list.map((listItem) => (
-				<ListCard
-					key={listItem.id}
-					listItem={listItem}
-					LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
-					activeObjectiveId={activeObjectiveId}
-					setActiveObjectiveId={setActiveObjectiveId}
-				/>
-			))}
+			<Collapse
+				className={styles.collapse}
+				panels={objectiveList}
+				type="card"
+				activeKey={activeObjectiveId}
+				setActive={setActiveObjectiveId}
+			/>
 
 			<div className={styles.pagination_container}>
 				<Pagination type="table" />
