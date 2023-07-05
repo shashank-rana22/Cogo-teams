@@ -66,6 +66,7 @@ function TicketChat({
 
 	const {
 		Ticket: ticket = {}, IsClosureAuthorizer: isClosureAuthorizer = false,
+		IsCurrentReviewer: isCurrentReviewer = false,
 	} = ticketData || {};
 
 	const { Status: status = '' } = ticket || {};
@@ -172,7 +173,7 @@ function TicketChat({
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{doesTicketsExists && (
+				{(doesTicketsExists && isCurrentReviewer) && (
 					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
 						{!['closed', 'rejected'].includes(status)
 							&& (
