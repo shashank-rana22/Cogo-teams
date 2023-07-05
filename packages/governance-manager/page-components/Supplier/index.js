@@ -5,6 +5,7 @@ import Item from '../ListSupplier/Item';
 
 import MarketFeedback from './Steps/MarketFeedback';
 import NeedAnalysis from './Steps/NeedAnalysis';
+import SupplierEvaluation from './Steps/SupplierEvaluation';
 import styles from './styles.module.css';
 
 function Supplier() {
@@ -20,7 +21,7 @@ function Supplier() {
 	const [active, setActive] = useState('market_feedback');
 	return (
 		<>
-			<h2>Governance Mangager</h2>
+			<h2>Governance Manager</h2>
 			<Item isSupplierPage />
 			<Stepper
 				active={active}
@@ -30,7 +31,8 @@ function Supplier() {
 				className={styles.stepper}
 			/>
 			{/* <NeedAnalysis /> */}
-			<MarketFeedback />
+			{/* <MarketFeedback /> */}
+			<SupplierEvaluation />
 
 		</>
 	);
