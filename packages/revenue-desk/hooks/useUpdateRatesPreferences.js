@@ -69,12 +69,10 @@ const useUpdateRatesPreferences = ({
 		});
 
 		const final_payload = {
-			is_confirmation_set_by_rd : true,
 			service_providers         : SERVICE_PROVIDERS,
 			booking_confirmation_docs : BOOKING_CONFIRMATION_DOCS,
 			service_id                : service_id || undefined,
 			service_type              : service_type || undefined,
-			available_rates_for_rd    : rateOptions?.[service_id],
 			sell_rate_preferences:
 					service_type && service_type === 'fcl_freight_service' && sellRateDetails?.[service_id]
 						? sellRateDetails?.[service_id]
