@@ -3,7 +3,12 @@
 	font-weight: 600;
 	color: #4f4f4f;
 }
+.button_container{
+	display: flex;
+	justify-content: flex-end;
+	margin: 16px;
 
+}
 .table_container {
 	margin: 16px 0;
 }

@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import DeallocateModal from '../DeallocateModal';
 import ScoreTrendModal from '../ScoreTrendModal';
 
 import getLeaderBoardColumns from './LeaderboardListColumns';
@@ -28,6 +29,10 @@ function Leaderboard(props) {
 	} = props;
 
 	const [scoreTrendIds, setScoreTrendIds] = useState({});
+	const [showDeallocateModal, setShowDeallocateModal] = useState(false);
+	const [modalDetailsArray, setModalDetailsArray] = useState([]);
+
+	console.log('modalDetailsObject', modalDetailsArray);
 
 	const columns = getLeaderBoardColumns({
 		setScoreTrendIds,
@@ -38,6 +43,8 @@ function Leaderboard(props) {
 		setIsAllChecked,
 		selectAllHelper,
 		bulkDeallocateFilter,
+		modalDetailsArray,
+		setModalDetailsArray,
 	});
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
@@ -78,7 +85,13 @@ function Leaderboard(props) {
 				/>
 
 				<div>
-					<Button disabled={bulkDeallocateFilter && isEmpty(checkedRowsId)}>De-allocate</Button>
+					<Button
+						disabled={(!bulkDeallocateFilter) || (bulkDeallocateFilter && isEmpty(checkedRowsId))}
+						onClick={() => setShowDeallocateModal(true)}
+					>
+						De-allocate
+
+					</Button>
 				</div>
 
 			</div>
@@ -106,6 +119,15 @@ function Leaderboard(props) {
 				<ScoreTrendModal
 					scoreTrendIds={scoreTrendIds}
 					setScoreTrendIds={setScoreTrendIds}
+				/>
+			)}
+
+			{showDeallocateModal && (
+				<DeallocateModal
+					setShowDeallocateModal={setShowDeallocateModal}
+					showDeallocateModal={showDeallocateModal}
+					checkedRowsId={checkedRowsId}
+					modalDetailsArray={modalDetailsArray}
 				/>
 			)}
 		</>

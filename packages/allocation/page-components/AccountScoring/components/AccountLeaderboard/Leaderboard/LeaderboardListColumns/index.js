@@ -11,6 +11,7 @@ const CONSTANTS = {
 	MIN_STAKEHOLDERS                  : 0,
 	FIRST_INDEX                       : 0,
 	MIN_STAKEHOLDER_TO_RENDER_TOOLTIP : 1,
+	DEFAULT_SINGLE_CHECKED_ACCOUNT    : 1,
 };
 
 const getLeaderBoardColumns = ({
@@ -22,8 +23,10 @@ const getLeaderBoardColumns = ({
 	isAllChecked = false,
 	selectAllHelper = () => {},
 	bulkDeallocateFilter = () => {},
+	setModalDetailsArray,
+	// modalDetailsArray = [],
 }) => {
-	const onChangeBodyCheckbox = ({ event, user_id }) => {
+	const onChangeBodyCheckbox = ({ event, user_id, item }) => {
 		setCheckedRowsId((previousIds) => {
 			let newCheckedIds = [];
 
@@ -32,6 +35,18 @@ const getLeaderBoardColumns = ({
 			} else {
 				newCheckedIds = previousIds.filter((selectedId) => selectedId !== user_id);
 			}
+
+			setModalDetailsArray((previousData) => {
+				let details = [];
+
+				if (event.target.checked) {
+					details = [...previousData, item];
+				} else {
+					details = previousData.filter((data) => newCheckedIds.includes(data.user_id));
+				}
+
+				return details;
+			});
 
 			selectAllHelper(newCheckedIds);
 
@@ -59,14 +74,17 @@ const getLeaderBoardColumns = ({
 		{
 			id       : 'check',
 			Header   : <Checkbox onChange={(event) => onChangeTableHeadCheckbox(event)} checked={isAllChecked} />,
-			accessor : ({ user_id = '' }) => (
-				<Checkbox
-					checked={checkedRowsId.includes(user_id)}
-					onChange={(event) => onChangeBodyCheckbox({ event, user_id })}
-					disabled={!bulkDeallocateFilter}
-				/>
+			accessor : (item) => {
+				const { user_id } = item;
+				return (
+					<Checkbox
+						checked={checkedRowsId.includes(user_id)}
+						onChange={(event) => onChangeBodyCheckbox({ event, user_id, item })}
+						disabled={!bulkDeallocateFilter}
+					/>
 
-			),
+				);
+			},
 
 		},
 		{
