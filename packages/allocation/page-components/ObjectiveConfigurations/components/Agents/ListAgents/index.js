@@ -25,6 +25,7 @@ const list = [
 				channel     : ['SME', 'CP'],
 				updated_at  : new Date(),
 				activate_at : new Date(),
+				weightage   : 50,
 			},
 			{
 				id          : 2,
@@ -34,6 +35,7 @@ const list = [
 				channel     : ['CP'],
 				updated_at  : new Date(),
 				activate_at : null,
+				weightage   : 50,
 			},
 		],
 	},
@@ -58,6 +60,7 @@ const list = [
 				channel     : ['SME', 'CP'],
 				updated_at  : new Date(),
 				activate_at : new Date(),
+				weightage   : 40,
 			},
 			{
 				id          : 2,
@@ -67,6 +70,7 @@ const list = [
 				channel     : ['CP'],
 				updated_at  : new Date(),
 				activate_at : null,
+				weightage   : 20,
 			},
 			{
 				id          : 4,
@@ -76,6 +80,7 @@ const list = [
 				channel     : ['CP', 'SME'],
 				updated_at  : new Date(),
 				activate_at : new Date(),
+				weightage   : 40,
 			},
 		],
 	},
@@ -100,6 +105,7 @@ const list = [
 				channel     : ['CP'],
 				updated_at  : new Date(),
 				activate_at : null,
+				weightage   : 100,
 			},
 		],
 	},

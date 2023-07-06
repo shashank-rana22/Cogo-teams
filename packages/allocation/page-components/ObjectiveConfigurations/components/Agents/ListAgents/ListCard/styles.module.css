@@ -26,6 +26,12 @@
 	margin: 12px 0;
 }
 
+.accordian_title {
+	display: flex;
+	align-items: center;
+	gap: 4px
+}
+
 .create_new {
 	padding: 16px;
 	font-size: 12px;

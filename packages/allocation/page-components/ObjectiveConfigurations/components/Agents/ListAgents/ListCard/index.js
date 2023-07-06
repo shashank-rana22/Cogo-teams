@@ -1,6 +1,8 @@
 import { Accordion, Button, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import ObjectiveDetailsCard from '../../../../common/ObjectiveDetailsCard';
+import OBJECTIVE_STATUS_COLOR_MAPPING from '../../../../configurations/objective-status-color-mapping';
 import TAB_PANNEL_KEYS from '../../../../constants/tab-pannel-keys-mapping';
 
 import styles from './styles.module.css';
@@ -44,7 +46,17 @@ function ListCard(props) {
 					key={item.id}
 					className={styles.accordian}
 					type="text"
-					title="Text Accordion"
+					title={(
+						<div className={styles.accordian_title}>
+							<div>{objective.name}</div>
+							<Pill>{startCase(objective.type)}</Pill>
+							<Pill
+								color={OBJECTIVE_STATUS_COLOR_MAPPING[objective.status]}
+							>
+								{startCase(objective.status)}
+							</Pill>
+						</div>
+					)}
 				>
 					<ObjectiveDetailsCard activeObjectiveId={objective.id} />
 				</Accordion>
