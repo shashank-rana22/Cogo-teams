@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import RenderTooltip from '../../../../common/RenderTooltip';
+import RenderTooltip from '../../../../common/RenderTooltip/index';
 
 import styles from './styles.module.css';
 
