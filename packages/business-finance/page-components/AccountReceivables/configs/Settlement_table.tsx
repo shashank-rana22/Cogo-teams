@@ -24,18 +24,18 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 		Header   : 'Reference Number',
 		id       : 'name',
 		accessor : (row) => {
-			const { sourceDocumentValue } = row;
+			const { sourceDocumentValue, sourceIrnNumber } = row;
 			return (
 				<div style={{ display: 'flex' }}>
 					<div style={{ marginRight: '10px' }}>
 						{showOverflowingNumber(sourceDocumentValue, DEFAULT_LENGTH)}
 					</div>
-					{row?.sourceIrnNumber ? (
+					{sourceIrnNumber ? (
 						<div>
 							<Tooltip
 								content={(
 									<div>
-										{row?.sourceIrnNumber}
+										{sourceIrnNumber}
 									</div>
 								)}
 								placement="top"
