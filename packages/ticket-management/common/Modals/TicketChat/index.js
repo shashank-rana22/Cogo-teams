@@ -182,6 +182,7 @@ function TicketChat({
 									setMessage={setMessage}
 									setUploading={setUploading}
 									setIsInternal={setIsInternal}
+									isInternal={isInternal}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
