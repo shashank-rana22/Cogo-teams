@@ -34,20 +34,20 @@ export interface Props {
 }
 
 function List({
-	config,
-	sort,
-	setSort,
-	itemData,
-	renderHeaderCheckbox,
+	config = { fields: [] },
+	sort = {},
+	setSort = () => {},
+	itemData = { list: [] },
+	renderHeaderCheckbox = () => '',
 	functions = {},
 	loading = false,
 	page = 1,
 	handlePageChange = () => {},
 	pageSize = 10,
 	showPagination = true,
-	subActiveTab,
-	width,
-	rowStyle,
+	subActiveTab = undefined,
+	width = null,
+	rowStyle = null,
 	paginationType = 'table',
 }: Props) {
 	const {

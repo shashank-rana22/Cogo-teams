@@ -25,7 +25,7 @@ interface Props {
 	loading?: boolean;
 }
 
-function ListView({ filters, setFilters, data, loading }:Props) {
+function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, loading = false }:Props) {
 	const { sendMail, mailSendLoading } = useSendMail();
 
 	const functions = {
