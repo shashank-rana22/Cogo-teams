@@ -1,13 +1,16 @@
-.table{
-    background-color: white;
+.table {
+	background-color: white;
 }
-.th{
-    padding:12px 0;
+
+.th {
+	padding: 12px 0;
 }
-.td{
-    padding:26px 0;
+
+.td {
+	padding: 26px 0;
 }
-.submit_btn{
-    display: flex;
-    justify-content: right;
+
+.submit_btn {
+	display: flex;
+	justify-content: right;
 }

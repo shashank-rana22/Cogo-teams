@@ -36,6 +36,7 @@
     "@cogoport/employee-portal": "workspace:0.1.0",
     "@cogoport/enrichment": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
+    "@cogoport/governance-manager": "workspace:0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",

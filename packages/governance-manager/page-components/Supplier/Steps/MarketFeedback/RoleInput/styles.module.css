@@ -1,6 +1,6 @@
-.role_input{
-    display:flex;
-    justify-content: left;
-    margin-top:10px;
-    gap:20px;
+.role_input {
+	display: flex;
+	gap: 20px;
+	justify-content: left;
+	margin-top: 10px;
 }

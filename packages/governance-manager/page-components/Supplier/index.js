@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 
 import Item from '../ListSupplier/Item';
 
-import MarketFeedback from './Steps/MarketFeedback';
-import NeedAnalysis from './Steps/NeedAnalysis';
+// import MarketFeedback from './Steps/MarketFeedback';
+// import NeedAnalysis from './Steps/NeedAnalysis';
+import ContractSla from './Steps/Contracts&SLA';
 import styles from './styles.module.css';
 
 function Supplier() {
@@ -30,7 +31,8 @@ function Supplier() {
 				className={styles.stepper}
 			/>
 			{/* <NeedAnalysis /> */}
-			<MarketFeedback />
+			{/* <MarketFeedback /> */}
+			<ContractSla />
 
 		</>
 	);
