@@ -15,12 +15,12 @@ import UploadDetailsModal from './UploadDetailsModal';
 const INIT_CNT = 0;
 
 function Documents({
-	activeMessageCard,
-	activeVoiceCard,
-	activeTab,
-	customerId,
-	documents_count,
-	formattedMessageData,
+	activeMessageCard = {},
+	activeVoiceCard = {},
+	activeTab = 'message',
+	customerId = '',
+	documents_count = 0,
+	formattedMessageData = {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
