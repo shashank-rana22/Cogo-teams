@@ -10,7 +10,7 @@ function Upload({ refetch, show, setShow }) {
 	};
 	const {
 		bulkUpload,
-		BulkFileLoading,
+		bulkFileLoading,
 		control,
 		errors,
 		handleSubmit,
@@ -28,7 +28,7 @@ function Upload({ refetch, show, setShow }) {
 							control={control}
 							errors={errors}
 							name="upload_question"
-							accept=".csv, .xlsx, .pdf"
+							accept=".csv, .xlsx"
 							rules={{ required: 'File is required.' }}
 						/>
 
@@ -39,16 +39,6 @@ function Upload({ refetch, show, setShow }) {
 						)}
 					</div>
 				</div>
-				{/* <div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>
-                            <p>Multiple Drag and drop</p>
-                            <FileSelect
-                                multiple
-                                value={multiFileValue}
-                                loading={loading}
-                                onChange={setMultiFileValue}
-                                onClick={setMultiFileValue}
-                                accept=".png,.pkg,.jpg" />
-                        </div> */}
 			</Modal.Body>
 			<Modal.Footer className={styles.footer}>
 				<div className={styles.btn_row}>
@@ -56,7 +46,7 @@ function Upload({ refetch, show, setShow }) {
 						size="md"
 						themeType="primary"
 						style={{ marginLeft: 10 }}
-						loading={BulkFileLoading}
+						loading={bulkFileLoading}
 						onClick={handleSubmit(bulkUpload)}
 					>
 						Submit

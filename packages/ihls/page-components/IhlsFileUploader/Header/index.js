@@ -1,6 +1,5 @@
-import { Button, Modal, RadioGroup, Select, FileSelect } from '@cogoport/components';
-import { IcMAppDocumentUpload, IcMCloudUpload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Button } from '@cogoport/components';
+import { IcMCloudUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Upload from '../Upload';
@@ -8,7 +7,6 @@ import Upload from '../Upload';
 import styles from './styles.module.css';
 
 function Header({ refetch }) {
-	const router = useRouter();
 	const [show, setShow] = useState(false);
 
 	return (

@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 
 function StyledTable({ columns = [], data = [], loading = false }) {
 	return (
-		<section className={styles.container}>
+		<div className={styles.container}>
 			<Table columns={columns} data={data} loading={loading} />
-		</section>
+		</div>
 	);
 }
 

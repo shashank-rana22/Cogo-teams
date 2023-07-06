@@ -16,14 +16,15 @@ const FILE_STATS_MAPPING = {
 	not_processed_records_count    : 'Not Processed Records',
 };
 
-function FileData({ id = '' }) {
+function FileData({ id = null }) {
 	const { profile = {} } = useSelector((state) => (state));
+
 	const [{ data = [], loading = false }] = useRequest({
 		url    : '/feedback_requests',
 		method : 'get',
 		params : {
 			id,
-			user_id: profile?.user?.id,
+			user_id: profile?.user?.id || null,
 		},
 	}, { manual: false });
 
@@ -36,16 +37,9 @@ function FileData({ id = '' }) {
 	};
 	const DATA2 = [];
 
-	console.log(DATA1);
-
 	Object.keys(DATA1).forEach((key) => {
-		// console.log(key, obj[key]);
 		DATA2.push({ title: FILE_STATS_MAPPING[key], count: DATA1[key] });
 	});
-
-	// Object.entries(DATA1).map(([key, values]) => {
-	// 	DATA2.push({ title: key, value: values });
-	// });
 
 	const columns = [
 		{ Header: '#', accessor: 'title' },
@@ -56,8 +50,8 @@ function FileData({ id = '' }) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
-					height={280}
-					width={440}
+					height={200}
+					width={360}
 					emptyText="No records found"
 					textSize="24px"
 					flexDirection="column"
@@ -65,8 +59,8 @@ function FileData({ id = '' }) {
 			</div>
 		);
 	}
-	return (
 
+	return (
 		<Table columns={columns} data={DATA2} />
 	);
 }

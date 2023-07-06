@@ -1,7 +1,7 @@
 import { Button, Pagination, Modal, Pill, Tooltip } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
 import StyledTable from '../../../commons/StyledTable';
@@ -23,6 +23,10 @@ const STATUS_PILL_MAPPING = {
 		label : 'Wrong Upload',
 		color : 'red',
 	},
+	WRONG_DOING: {
+		label : 'Wrong Doing',
+		color : 'red',
+	},
 	success: {
 		label : 'Processed',
 		color : 'green',
@@ -35,37 +39,35 @@ function FileList({
 	data,
 	loading,
 }) {
-	const [show, setShow] = useState(false);
-	const onClose = () => {
-		setShow(!show);
-	};
+	const [fileId, setFileId] = useState(null);
+	const [fileName, setFileName] = useState(null);
 
-	const [fileId, setFileId] = useState();
-	const [fileName, setFileName] = useState();
+	const onClose = () => {
+		setFileId(null);
+	};
 
 	const columns = [
 		{
 			id       : 1,
 			Header   : 'File Id',
-			accessor : ({ id }) => id || '',
+			accessor : ({ id = '' }) => id,
 		},
 		{
 			id       : 2,
 			Header   : 'File Name',
-			accessor : ({ file_name }) => file_name || '',
+			accessor : ({ file_name = '' }) => file_name,
 		},
 		{
 			id       : 3,
 			Header   : 'File Url',
-			accessor : ({ file_url }) => file_url || '',
+			accessor : ({ file_url = '' }) => file_url,
 		},
 		{
 			id       : 4,
 			Header   : 'Status',
-			accessor : ({ status }) => (
+			accessor : ({ status = '' }) => (
 				<Pill
 					key={STATUS_PILL_MAPPING[status]?.label}
-					// prefix={item.prefixIcon}
 					size="md"
 					color={STATUS_PILL_MAPPING[status]?.color}
 				>
@@ -93,43 +95,29 @@ function FileList({
 						)}
 				</div>
 			),
-			accessor: ({ created_at }) => created_at || '',
+			accessor: ({ created_at = '' }) => created_at,
 		},
 		{
 			id       : 6,
 			Header   : 'View stats',
-			accessor : ({ file_id, file_name, status }) => {
-				if (status === 'success') {
-					return (
-						<Button
-							onClick={() => { setShow(true); setFileId(file_id); setFileName(file_name); }}
-							size="sm"
-							themeType="primary"
-							className={styles.btn_stats}
-							disabled={!(status === 'success')}
-						>
-							Stats
-						</Button>
-					);
-				}
-
-				return (
-					<Button
-						onClick={() => { setShow(true); setFileId(file_id); setFileName(file_name); }}
-						size="sm"
-						themeType="primary"
-						className={styles.btn_stats}
-						disabled={!(status === 'success')}
-					>
-						{status === 'success' ? 'Stats'
-							: (
-								<Tooltip content="File is not processed." placement="bottom">
-									Stats
-								</Tooltip>
-							)}
-					</Button>
-				);
-			},
+			accessor : ({ file_id, file_name = '', status = '' }) => (
+				<Button
+					onClick={() => {
+						setFileId(file_id); setFileName(file_name);
+					}}
+					size="sm"
+					themeType="primary"
+					className={styles.btn_stats}
+					disabled={!(status === 'success')}
+				>
+					{status === 'success' ? 'Stats'
+						: (
+							<Tooltip content="File is not processed." placement="bottom">
+								Stats
+							</Tooltip>
+						)}
+				</Button>
+			),
 		},
 	];
 	const data1 = [
@@ -139,6 +127,7 @@ function FileList({
 			status     : 'uploaded',
 			created_at : '',
 			id         : 2,
+			file_id    : 12,
 		},
 		{
 			file_name  : 'sagar',
@@ -146,6 +135,7 @@ function FileList({
 			status     : 'processing',
 			created_at : '',
 			id         : 3,
+			file_id    : 13,
 		},
 		{
 			file_name  : 'Bhargav',
@@ -153,6 +143,7 @@ function FileList({
 			status     : 'success',
 			created_at : '',
 			id         : 4,
+			file_id    : 14,
 		},
 	];
 
@@ -166,7 +157,7 @@ function FileList({
 				<EmptyState
 					height={280}
 					width={440}
-					emptyText="No records found"
+					emptyText="No files found"
 					textSize="24px"
 					flexDirection="column"
 				/>
@@ -189,10 +180,12 @@ function FileList({
 				/>
 				{/* ) : null} */}
 			</div>
-			<Modal size="md" show={show} onClose={onClose} placement="top">
-				<Modal.Header title={fileName} />
-				<FileData id={fileId} />
-			</Modal>
+			{fileId && (
+				<Modal id={fileId} size="md" show={fileId} onClose={onClose} placement="top">
+					<Modal.Header title={fileName} />
+					<Modal.Body><FileData id={fileId} /></Modal.Body>
+				</Modal>
+			)}
 		</>
 	);
 }

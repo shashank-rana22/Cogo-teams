@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 function EmptyState({
 	height = 125,
 	width = 225,
-	emptyText = 'Data not found',
+	emptyText = 'No Records Found',
 	flexDirection = 'row',
 	textSize = '16px',
 }) {
@@ -13,7 +13,7 @@ function EmptyState({
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 				width={width}
 				height={height}
-				alt="Empty-state"
+				alt="Empty-state-img"
 				style={{ margin: '10px' }}
 			/>
 

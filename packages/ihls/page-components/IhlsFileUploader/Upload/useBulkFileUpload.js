@@ -7,11 +7,11 @@ import { useSelector } from '@cogoport/store';
 const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
 
-	const [{ loading: BulkFileLoading = false }, trigger] = useRequest({
+	const [{ loading: bulkFileLoading = false }, trigger] = useRequest({
 		url    : 'bulk_create_question_answer_set',
 		method : 'POST',
 	}, { manual: true });
-	// const [{ loading: BulkFileLoading = false}, trigger] = useAthenaRequest({
+	// const [{ loading: bulkFileLoading = false}, trigger] = useAthenaRequest({
 	// 	url    : 'shipments_by_hscode',
 	// 	method : 'post',
 	// }, { manual: true });
@@ -42,7 +42,7 @@ const useBulkFileUpload = ({ refetch, setShow }) => {
 
 	return {
 		bulkUpload,
-		BulkFileLoading,
+		bulkFileLoading,
 		control,
 		errors,
 		handleSubmit,

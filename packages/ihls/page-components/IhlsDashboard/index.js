@@ -1,9 +1,9 @@
-import React from  'react';
+import React from 'react';
 
-const IhlsDashboard = () => {
-    return (
-        <div>Ihls</div>
-    )
+function IhlsDashboard() {
+	return (
+		<div>Ihls</div>
+	);
 }
 
-export default IhlsDashboard
+export default IhlsDashboard;
