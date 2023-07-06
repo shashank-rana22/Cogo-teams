@@ -15,10 +15,10 @@ const useGetResolve = ({ remarks, getDashboardData, getDahboardStatsData, select
 		status          : 'inactive',
 	}), [remarks, selectRiskReason]);
 
-	const onResolveMark = useCallback((() => {
+	const onResolveMark = useCallback((async () => {
 		const paramsData = getParams();
 		try {
-			trigger({
+			await trigger({
 				params: paramsData,
 			});
 			getDashboardData();
