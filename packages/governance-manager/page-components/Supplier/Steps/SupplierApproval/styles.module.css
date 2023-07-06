@@ -1,0 +1,29 @@
+.parent{
+    padding:24px;
+    background-color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.heading{
+    margin-bottom: 12px;
+}
+
+.container >:first-child{
+    border-top:1px solid #BDBDBD;
+    border-radius: 8px 8px 0 0;
+}
+.container >:last-child{
+    border-radius: 0 0 8px 8px;
+}
+.flex_right{
+    margin-top:24px;
+    widtH:100%;
+    display:flex;
+    gap:20px;
+    justify-content:space-between;
+}
+.right_submit_btn{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
