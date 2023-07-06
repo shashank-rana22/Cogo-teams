@@ -51,7 +51,6 @@ import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
-import techops_dashboard from './techops_dashboard';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
 
@@ -118,7 +117,6 @@ const apis = {
 	kyc,
 	pms,
 	app_settings,
-	techops_dashboard,
 	cogolens: cogoLens,
 	shipment_cancellation_policies,
 	kam_payments_dashboard,

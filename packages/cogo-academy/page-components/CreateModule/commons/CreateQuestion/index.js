@@ -7,6 +7,8 @@ import QuestionForm from './components/QuestionForm';
 import styles from './styles.module.css';
 import useCreateQuestion from './useCreateQuestion';
 
+const OFFSET = 1;
+
 function CreateQuestion({
 	index,
 	questionSetId,
@@ -37,6 +39,10 @@ function CreateQuestion({
 		register,
 		editorValue,
 		setEditorValue,
+		questionState,
+		setQuestionState,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue = () => {},
@@ -56,7 +62,7 @@ function CreateQuestion({
 
 	return (
 		<form ref={ref} key={questionTypeWatch} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
-			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
+			<div className={styles.question_label}>{`Question ${index + OFFSET}`}</div>
 
 			<div className={styles.form_component}>
 				<BasicDetails
@@ -74,6 +80,8 @@ function CreateQuestion({
 					listSetQuestions={listSetQuestions}
 					questionSetId={questionSetId}
 					mode={mode}
+					caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+					setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 				/>
 
 				<div key={questionTypeWatch} className={styles.question_form}>
@@ -94,10 +102,14 @@ function CreateQuestion({
 						listSetQuestions={listSetQuestions}
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}
+						questionState={questionState}
+						setQuestionState={setQuestionState}
 						subjectiveEditorValue={subjectiveEditorValue}
 						setSubjectiveEditorValue={setSubjectiveEditorValue}
 						uploadable={uploadable}
 						setUploadable={setUploadable}
+						caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+						setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 					/>
 				</div>
 

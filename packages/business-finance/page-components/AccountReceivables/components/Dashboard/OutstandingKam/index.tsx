@@ -21,17 +21,12 @@ function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode 
 					className={styles.overall_outstanding_container}
 				>
 					<div
-						className={styles.outstanding_container}
+						className={styles.styled_text}
 					>
-						<div
-							className={styles.styled_text}
-						>
-							Outstanding
-						</div>
-
+						Outstanding By KAM
 					</div>
+
 					<div className={styles.styled_kam_text}>
-						By KAM
 						<Tooltip
 							content={(
 								<div>

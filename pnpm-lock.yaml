@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.0
+      '@cogoport/eslint-config': 2.0.1
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_ob7c7ogpcitikph4afkm5ompve
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.0_eslint@8.42.0
+      '@cogoport/eslint-config': 2.0.1_eslint@8.42.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.42.0
@@ -78,6 +78,7 @@ importers:
       '@cogoport/employee-portal': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/ftl-admin': workspace:1.0.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
@@ -160,6 +161,7 @@ importers:
       '@cogoport/employee-portal': link:../packages/employee-portal
       '@cogoport/enrichment': link:../packages/enrichment
       '@cogoport/forms': link:../common/forms
+      '@cogoport/ftl-admin': link:../packages/ftl-admin
       '@cogoport/globalization': link:../common/globalization
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
@@ -335,9 +337,11 @@ importers:
 
   common/navigation-configs:
     specifiers:
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.58
       react: 18.2.0
     dependencies:
+      '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
 
@@ -1160,6 +1164,30 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
+
+  packages/ftl-admin:
+    specifiers:
+      '@cogoport/components': ^1.0.322
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.51
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+      uuid: ^9.0.0
+    dependencies:
+      '@cogoport/components': 1.0.427_pagrdvehvg3r3gqfmj53x3jpru
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.81_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+      uuid: 9.0.0
 
   packages/ground-ops:
     specifiers:
@@ -3714,8 +3742,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.0_eslint@8.42.0:
-    resolution: {integrity: sha512-VCEJqrA6MYAGhHTwlH8W/w+cNkOQ3yIdmBxv5/4VhxY75RISUW+wa8TQlE674cGtG0nWOVFu1bLMVzreOJ3/lw==}
+  /@cogoport/eslint-config/2.0.1_eslint@8.42.0:
+    resolution: {integrity: sha512-cHaF/dgCUrH8ov7h6Hsc1pNEd26QV3vXQBGX6BS9juF+Bk1v6jdn+ApvedGVxAIzJXOl/PU5xCjkehPo79W3qA==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
