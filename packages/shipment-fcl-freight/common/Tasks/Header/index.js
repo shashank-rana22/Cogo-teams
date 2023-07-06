@@ -6,6 +6,9 @@ import { useContext, useState } from 'react';
 import BookingRequirements from './BookingRequirements';
 import styles from './styles.module.css';
 
+const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
+const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
+
 function Header({
 	count = 0,
 	completedTaskCount = 0,
@@ -14,24 +17,23 @@ function Header({
 	showMyTasks = true,
 	setShowMyTasks = () => {},
 }) {
+	const contextValues = useContext(ShipmentDetailContext);
+
 	const [showBookingReq, setShowBookingReq] = useState(false);
 	const [visible, setVisible] = useState(false);
 
-	const contextValues = useContext(ShipmentDetailContext);
 	const { activeStakeholder, shipment_data, primary_service } = contextValues || {};
 
-	const showBookingRequirementsCondition = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops']
+	const showBookingRequirementsCondition = BOOKING_REQUIREMENTS_ROLES
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
-	const showSupplyRemarks = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager']
-		.includes(activeStakeholder);
+	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
 				<div className={styles.left_content}>
 					{`${completedTaskCount} / ${count} Tasks Completed`}
-					&nbsp;
 				</div>
 
 				<div className={styles.right_content}>
