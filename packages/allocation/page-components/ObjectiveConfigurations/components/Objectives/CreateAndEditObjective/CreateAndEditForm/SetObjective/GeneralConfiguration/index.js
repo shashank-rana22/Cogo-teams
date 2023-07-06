@@ -27,7 +27,7 @@ function GeneralConfiguration() {
 		<div className={styles.container}>
 			<h3 className={styles.heading}>General Configuration</h3>
 
-			<div className={styles.form_container}>
+			<form className={styles.form_container}>
 				<div className={styles.upper_form}>
 					{controls.map((formElement) => {
 						const { name, label, type, ...rest } = formElement;
@@ -70,14 +70,14 @@ function GeneralConfiguration() {
 					/>
 
 					<Button
-						type="button"
+						type="submit"
 						themeType="secondary"
 						size="md"
 					>
 						Save
 					</Button>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 }
