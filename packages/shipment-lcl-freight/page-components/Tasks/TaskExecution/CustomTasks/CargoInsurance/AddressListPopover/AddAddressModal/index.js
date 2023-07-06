@@ -54,20 +54,22 @@ function AddModal({
 		data: billingAddressData,
 	} =	useCreateOrganizationBillingAddress({
 		checked,
-		addressType,
 		organization_id : shipmentData?.importer_exporter?.id,
 		refetch         : refetchAfterApiCall,
 	});
 
-	const onSubmit = () => {
-		handleSubmit(async (data) => {
-			const updatedData = { ...data, country_id: countryId };
-			await createSellerAddres(updatedData, handleCloseModal);
-			if (billingAddressData?.data?.id) {
-				organisationAddress();
-				addressApi();
-			}
-		})();
+	const onSubmit = async (data) => {
+		const updatedData = {
+			...data,
+			address_type    : checked ? '' : addressType,
+			country_id      : countryId,
+			organization_id : shipmentData?.importer_exporter?.id,
+		};
+		await createSellerAddres(updatedData, handleCloseModal);
+		if (billingAddressData?.data?.id) {
+			organisationAddress();
+			addressApi();
+		}
 	};
 
 	return (
@@ -195,7 +197,7 @@ function AddModal({
 
 					<Button
 						size="md"
-						onClick={onSubmit}
+						onClick={handleSubmit(onSubmit)}
 						disabled={createAddressLoading}
 						className={styles.btn_div}
 					>

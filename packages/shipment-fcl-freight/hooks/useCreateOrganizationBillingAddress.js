@@ -3,7 +3,6 @@ import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationBillingAddress = ({
-	organization_id = '',
 	successMessage = 'Successfully Added Address',
 	refetch = () => {},
 }) => {
@@ -29,7 +28,6 @@ const useCreateOrganizationBillingAddress = ({
 								},
 							]
 							: [],
-					organization_id,
 				},
 			});
 			Toast.success(successMessage);

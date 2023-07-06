@@ -155,4 +155,5 @@ export const getModifiedControls = ({
 		}
 		return control;
 	});
+	return controls;
 };

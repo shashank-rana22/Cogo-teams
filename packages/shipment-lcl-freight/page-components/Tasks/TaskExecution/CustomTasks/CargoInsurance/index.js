@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 
 import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDraftDetails';
 
@@ -50,7 +50,9 @@ function CargoInsurance({
 		partyName,
 	});
 
-	const defaultValues = getDefaultValues({ insuranceDetails, shipment_data, policyDetails });
+	const defaultValues = useMemo(() => getDefaultValues({
+		insuranceDetails, shipment_data, policyDetails,
+	}), [insuranceDetails, shipment_data, policyDetails]);
 
 	const formProps = useForm({ values: defaultValues });
 

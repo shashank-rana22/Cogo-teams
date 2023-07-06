@@ -4,7 +4,6 @@ import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationBillingAddress = ({
 	checked,
-	addressType,
 	organization_id = '',
 	successMessage = 'Successfully Added Address',
 	refetch = () => {},
@@ -33,7 +32,6 @@ const useCreateOrganizationBillingAddress = ({
 								},
 							]
 							: [],
-					address_type: checked ? '' : addressType,
 					organization_id,
 				},
 			});

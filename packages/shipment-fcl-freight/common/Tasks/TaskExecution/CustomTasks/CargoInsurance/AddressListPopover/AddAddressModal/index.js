@@ -54,8 +54,7 @@ function AddModal({
 		createSellerAddres, createAddressLoading,
 		data: billingAddressData,
 	} =	useCreateOrganizationBillingAddress({
-		organization_id : shipmentData?.importer_exporter?.id,
-		refetch         : refetchAfterApiCall,
+		refetch: refetchAfterApiCall,
 	});
 
 	const {
@@ -66,10 +65,17 @@ function AddModal({
 	});
 
 	const onSubmit = async (data) => {
-		const updatedData = { ...data, country_id: countryId };
-		const apiTrigger = checked
-			? createSellerAddres(updatedData, handleCloseModal) : createOrganizationAddress(updatedData);
-		await apiTrigger();
+		const updatedData = {
+			...data,
+			address_type    : checked ? '' : addressType,
+			country_id      : countryId,
+			organization_id : shipmentData?.importer_exporter?.id,
+		};
+		if (checked) {
+			await createSellerAddres(updatedData, handleCloseModal);
+		} else {
+			await createOrganizationAddress(updatedData);
+		}
 		if (billingAddressData?.data?.id) {
 			organisationAddress();
 			addressApi();
@@ -139,6 +145,7 @@ function AddModal({
 									{!showPoc && (
 										<Button
 											onClick={() => setShowPoc(!showPoc)}
+											type="button"
 											size="md"
 											themeType="accent"
 											className={styles.btn_div}
@@ -178,6 +185,8 @@ function AddModal({
 											<Button
 												onClick={() => setAddressType(item.value)}
 												size="xs"
+												type="button"
+
 											>
 												{item.label}
 											</Button>
@@ -201,6 +210,7 @@ function AddModal({
 
 					<Button
 						size="md"
+						type="button"
 						onClick={handleSubmit(onSubmit)}
 						disabled={createAddressLoading || loading}
 						className={styles.btn_div}

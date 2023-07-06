@@ -69,7 +69,10 @@ export const personalDetailsControl = [
 		placeholder : 'Enter your mobile number',
 		rules       : {
 			required : 'Mobile Number is required',
-			validate : (v) => geo.regex.MOBILE_NUMBER.test(v) || 'Invalid Mobile Number',
+			pattern  : {
+				value   : geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE,
+				message : 'Invalid Mobile Number',
+			},
 		},
 	},
 ];
