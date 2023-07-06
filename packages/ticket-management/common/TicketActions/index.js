@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Button, Popover, cl } from '@cogoport/components';
+import { IcMCenterAlign } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -33,6 +34,28 @@ function getActionType({ status, isClosureAuthorizer }) {
 	return [];
 }
 
+function RenderContent({ filteredActions, isModal, handleAction, IsCurrentReviewer }) {
+	return (
+		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
+			{filteredActions.map((item) => {
+				if (!IsCurrentReviewer && item === 'escalate') { return null; }
+
+				return (
+					<Button
+						key={item}
+						size="sm"
+						themeType={isModal ? 'primary' : 'linkUi'}
+						className={cl`${styles.action_button} ${isModal ? styles.modal_button : ''}`}
+						onClick={(e) => handleAction(e, item)}
+					>
+						{startCase(item)}
+					</Button>
+				);
+			})}
+		</div>
+	);
+}
+
 function TicketActions({
 	status,
 	isModal,
@@ -40,6 +63,7 @@ function TicketActions({
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
 	isClosureAuthorizer,
+	IsCurrentReviewer,
 }) {
 	const actionMappings = getActionType({ status, isClosureAuthorizer });
 
@@ -56,19 +80,30 @@ function TicketActions({
 		return action ? action(props) : handleTicket(e, { actionType: item });
 	};
 
+	const buttonComponent = (
+		<RenderContent
+			isModal={isModal}
+			handleAction={handleAction}
+			filteredActions={filteredActions}
+			IsCurrentReviewer={IsCurrentReviewer}
+		/>
+	);
+
+	if (isEmpty(filteredActions)) { return null; }
+
 	return (
 		<div className={styles.pending_actions}>
-			{filteredActions.map((item) => (
-				<Button
-					key={item}
-					size="sm"
-					themeType={isModal ? 'primary' : 'linkUi'}
-					className={styles.reopen_resolve}
-					onClick={(e) => handleAction(e, item)}
+			{isModal ? (
+				<Popover
+					placement="bottom"
+					caret={false}
+					render={buttonComponent}
 				>
-					{startCase(item)}
-				</Button>
-			))}
+					<div><IcMCenterAlign className={styles.hamburger} /></div>
+				</Popover>
+			)
+				: buttonComponent}
+
 		</div>
 	);
 }
