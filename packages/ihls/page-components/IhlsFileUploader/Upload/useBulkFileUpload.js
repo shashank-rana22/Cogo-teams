@@ -1,32 +1,24 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRouter } from '@cogoport/next';
 import { useRequest, useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useBulkCreateQuestionAnswerSet = ({ refetch }) => {
-	// const { general:{ query : { type } } } = useSelector((state) => (state));
+const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
 
-	const [{ loading: BulkCreateQuestionloading = false }, trigger] = useRequest({
+	const [{ loading: BulkFileLoading = false }, trigger] = useRequest({
 		url    : 'bulk_create_question_answer_set',
 		method : 'POST',
 	}, { manual: true });
-	// const [{ loading: BulkCreateQuestionloading = false}, trigger] = useAthenaRequest({
+	// const [{ loading: BulkFileLoading = false}, trigger] = useAthenaRequest({
 	// 	url    : 'shipments_by_hscode',
 	// 	method : 'post',
 	// }, { manual: true });
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
-	const router = useRouter();
-
-	const onClickBackButton = () => {
-		router.back();
-	};
-
-	const bulkCreateQuestionAnswerSet = async (val) => {
+	const bulkUpload = async (val) => {
 		try {
 			const payload = {
 				user_id : profile?.user?.id || null,
@@ -35,25 +27,26 @@ const useBulkCreateQuestionAnswerSet = ({ refetch }) => {
 
 			await trigger({ data: payload });
 
-			Toast('Question uploaded Successfully');
+			Toast('File uploaded Successfully');
 			refetch();
+			setShow(false);
 			// router.back();
 		} catch (error) {
 			if (error?.message || error?.error?.message) {
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
-			refetch();
+			// refetch();
+			// setShow(false);
 		}
 	};
 
 	return {
-		bulkCreateQuestionAnswerSet,
-		BulkCreateQuestionloading,
-		onClickBackButton,
+		bulkUpload,
+		BulkFileLoading,
 		control,
 		errors,
 		handleSubmit,
 	};
 };
 
-export default useBulkCreateQuestionAnswerSet;
+export default useBulkFileUpload;

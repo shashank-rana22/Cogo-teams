@@ -1,6 +1,5 @@
 import { Button, Pagination, Modal, Pill, Tooltip } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { useRequest, useAthenaRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -9,7 +8,6 @@ import StyledTable from '../../../commons/StyledTable';
 import FileData from '../FileData';
 
 import styles from './style.module.css';
-import tableProps from './tableProps';
 
 const STATUS_PILL_MAPPING = {
 	uploaded: {
@@ -123,7 +121,7 @@ function FileList({
 						className={styles.btn_stats}
 						disabled={!(status === 'success')}
 					>
-						{status === 'success' ? <>Stats</>
+						{status === 'success' ? 'Stats'
 							: (
 								<Tooltip content="File is not processed." placement="bottom">
 									Stats
@@ -161,6 +159,7 @@ function FileList({
 	const getNextPage = (newPage) => {
 		setParams({ ...params, page: newPage });
 	};
+
 	if (isEmpty(data1) && !loading) {
 		return (
 			<div className={styles.empty_container}>
@@ -174,6 +173,7 @@ function FileList({
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<StyledTable columns={columns} data={data1} loading={loading} />

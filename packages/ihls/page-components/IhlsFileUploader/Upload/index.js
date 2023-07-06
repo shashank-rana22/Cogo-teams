@@ -1,24 +1,20 @@
-import { Button, Modal, RadioGroup, Select, FileSelect } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
-import { IcMAppDocumentUpload, IcMArrowBack } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 
 import styles from './style.module.css';
-import useBulkCreateQuestionAnswerSet from './useBulkCreateQuestionAnswerSet';
+import useBulkFileUpload from './useBulkFileUpload';
 
 function Upload({ refetch, show, setShow }) {
-	const {
-		bulkCreateQuestionAnswerSet,
-		BulkCreateQuestionloading,
-		onClickBackButton,
-		control,
-		errors,
-		handleSubmit,
-	} = useBulkCreateQuestionAnswerSet({ refetch });
-
 	const onClose = () => {
 		setShow(!show);
 	};
+	const {
+		bulkUpload,
+		BulkFileLoading,
+		control,
+		errors,
+		handleSubmit,
+	} = useBulkFileUpload({ refetch, setShow });
 
 	return (
 		<Modal size="md" show={show} onClose={onClose} placement="top">
@@ -60,8 +56,8 @@ function Upload({ refetch, show, setShow }) {
 						size="md"
 						themeType="primary"
 						style={{ marginLeft: 10 }}
-						loading={BulkCreateQuestionloading}
-						onClick={handleSubmit(bulkCreateQuestionAnswerSet)}
+						loading={BulkFileLoading}
+						onClick={handleSubmit(bulkUpload)}
 					>
 						Submit
 					</Button>
