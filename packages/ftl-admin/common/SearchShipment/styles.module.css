@@ -1,0 +1,20 @@
+.search_shipment {
+	padding-block: 1rem;
+
+	> .search_sids {
+		max-width: fit-content;
+		margin-left: auto;
+
+		:global {
+			.ui_input_container {
+				min-width: 20rem;
+				max-width: 21rem;
+			}
+		}
+
+		> .lowerLabel {
+			font-size: 12px;
+			color: #f00;
+		}
+	}
+}

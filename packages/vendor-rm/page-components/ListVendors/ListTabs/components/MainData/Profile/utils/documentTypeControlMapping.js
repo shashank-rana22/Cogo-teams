@@ -9,7 +9,7 @@ const registrationControl = controls.find((item) => item.name === 'registration_
 const contactControl = contactControls.find((item) => item.name === 'contact_proof_url');
 
 const getDocumentControlsTypeMapping = ({ country_id }) => {
-	const paymentControls = getPaymentControls({ country_id });
+	const { controls: paymentControls } = getPaymentControls({ country_id });
 
 	const taxDocumentControl = paymentControls.find((item) => item.name === 'tax_document_url');
 
