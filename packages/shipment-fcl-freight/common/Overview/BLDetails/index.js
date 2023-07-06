@@ -83,12 +83,14 @@ function BLDetails() {
 
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!list?.length ? (
-					<EmptyState
-						showContent={EMPTY_STATE_CONTENT}
-						textSize="20px"
-						emptyText="No BL Details Found!"
-						subEmptyText="Currently BL is not uploaded from the respective stakeholder."
-					/>
+					<div className={styles.empty_state}>
+						<EmptyState
+							showContent={EMPTY_STATE_CONTENT}
+							textSize="20px"
+							emptyText="No BL Details Found!"
+							subEmptyText="Currently BL is not uploaded from the respective stakeholder."
+						/>
+					</div>
 				) : (
 					<div className={styles.manage_services_div}>
 						{(list || []).map((item) => (
