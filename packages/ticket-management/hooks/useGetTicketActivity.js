@@ -44,7 +44,7 @@ const useGetTicketActivity = ({ ticketId }) => {
 				last,
 			}));
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [trigger, ticketId, id]);
 

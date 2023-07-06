@@ -18,12 +18,13 @@ import TicketSummary from './TicketSummary';
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 const DEFAULT_TICKET_ACTIVITY = 0;
+const RESOLVED_CHECK = ['closed', 'overdue'];
 
 const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 	if (!doesTicketsExists) {
 		return '100%';
 	}
-	if (['closed', 'rejected'].includes(status)) {
+	if (RESOLVED_CHECK.includes(status)) {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
@@ -170,9 +171,8 @@ function TicketChat({
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{(doesTicketsExists && isCurrentReviewer) && (
-					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
-						{!['closed', 'rejected'].includes(status)
+
+				{(doesTicketsExists && isCurrentReviewer) && !RESOLVED_CHECK.includes(status)
 							&& (
 								<FooterChat
 									file={file}
@@ -187,8 +187,6 @@ function TicketChat({
 									handleSendComment={handleSendComment}
 								/>
 							)}
-					</div>
-				)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
 						<TicketSummary {...ticketData} />

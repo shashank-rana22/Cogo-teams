@@ -12,10 +12,10 @@ function ModalHeader({
 	updateTicketActivity = () => {},
 }) {
 	const {
-		Ticket = {},
+		Ticket: ticket = {},
 		IsClosureAuthorizer: isClosureAuthorizer = false, IsCurrentReviewer: isCurrentReviewer = '',
 	} = ticketData || {};
-	const { ID: id = '', Status: status = '' } = Ticket || {};
+	const { ID: id = '', Status: status = '' } = ticket || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();

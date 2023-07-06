@@ -71,13 +71,13 @@ function TicketActions({
 
 	const handleAction = (e, item) => {
 		const HANDLE_ACTION_MAPPING = {
-			reassign : { action: setShowReassign, props: true },
-			escalate : { action: setShowEscalate, props: true },
+			reassign : { action: setShowReassign, args: true },
+			escalate : { action: setShowEscalate, args: true },
 		};
 
-		const { action, props } = HANDLE_ACTION_MAPPING[item] || {};
+		const { action, args } = HANDLE_ACTION_MAPPING[item] || {};
 
-		return action ? action(props) : handleTicket(e, { actionType: item });
+		return action ? action(args) : handleTicket(e, { actionType: item });
 	};
 
 	if (isEmpty(filteredActions)) { return null; }
