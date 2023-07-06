@@ -10,19 +10,7 @@
 	width: 100%;
 	height: 100%;
 	padding: 20px;
-	background: var(--greyscale-secondary-white, #fff);
-	border-radius: 12px;
-	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
-}
-
-.styled_otp_box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 404px;
-	height: 463px;
-	padding: 20px 50px;
-	background: var(--greyscale-secondary-white, #fff);
+	background: --greyscale-secondary-white, #fff;
 	border-radius: 12px;
 	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
 }
@@ -31,7 +19,7 @@
 	margin-top: 22px;
 	font-size: 14px;
 	line-height: 150%;
-	color: var(--black-60, #828282);
+	color: --black-60, #828282;
 	text-align: center;
 }
 

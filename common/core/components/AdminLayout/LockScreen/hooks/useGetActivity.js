@@ -26,8 +26,8 @@ const getTimeoutConstant = async (firestore) => {
 	const constantsQuery = await query(constantCollection, limit(LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[DEFAULT_INDEX];
-	const { screen_lock_timeout = 0 } = cogoOneConstantsDocs.data() || {};
-	return screen_lock_timeout;
+	const { screen_lock_timeout = DEFAULT_TIMEOUT, is_locked_screen = true } = cogoOneConstantsDocs.data() || {};
+	return { timeoutValue: screen_lock_timeout, isLockedBool: is_locked_screen };
 };
 
 const createOrGetRoom = async ({ agentId, firestore }) => {
@@ -88,9 +88,11 @@ function useGetActivity({
 	const trackerRef = useRef(null);
 	const timeout = useRef(null);
 	const [showModal, setShowModal] = useState(false);
+	const [isLockedEnabled, setIsLockedEnabled] = useState(false);
 
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
-		const timeoutValue = await getTimeoutConstant(firestore) || DEFAULT_TIMEOUT;
+		const { timeoutValue, isLockedBool } = await getTimeoutConstant(firestore);
+		setIsLockedEnabled(isLockedBool);
 		activityTrackerSnapShotRef?.current?.();
 		clearTimeout(activitytimeoutRef?.current);
 		clearTimeout(trackerRef?.current);
@@ -140,7 +142,7 @@ function useGetActivity({
 		timeout.current = setTimeout(mountActivityTrackerSnapShotRef, DEFAULT_VALUE);
 	}, [mountActivityTrackerSnapShotRef]);
 
-	return { showModal, setShowModal };
+	return { showModal, setShowModal, isLockedEnabled };
 }
 
 export default useGetActivity;

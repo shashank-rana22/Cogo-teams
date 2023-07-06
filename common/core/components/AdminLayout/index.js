@@ -62,7 +62,7 @@ function AdminLayout({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const { showModal, setShowModal } = useGetActivity({
+	const { showModal, setShowModal, isLockedEnabled } = useGetActivity({
 		firestore,
 		agentId: user_id,
 	});
@@ -78,7 +78,7 @@ function AdminLayout({
 
 	const isRolePresent = user_role_ids.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
 
-	const showLockScreen = showModal && isRolePresent;
+	const showLockScreen = showModal && isRolePresent && isLockedEnabled;
 
 	return (
 		<div className={cl`
