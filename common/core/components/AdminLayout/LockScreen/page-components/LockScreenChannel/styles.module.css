@@ -1,64 +1,63 @@
 .styled_modal {
-  width: 350px !important;
+	width: 350px !important;
 }
 
 .styled_modal_body {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 12px;
-  background: var(--greyscale-secondary-white, #fff);
-  box-shadow: 0px 0px 44px 0px rgba(98, 127, 172, 0.2);
-  padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	background: var(--greyscale-secondary-white, #fff);
+	border-radius: 12px;
+	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
 }
 
 .styled_otp_box {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 50px;
-  align-items: center;
-  width: 404px;
-  height: 463px;
-  border-radius: 12px;
-  background: var(--greyscale-secondary-white, #fff);
-  box-shadow: 0px 0px 44px 0px rgba(98, 127, 172, 0.2);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 404px;
+	height: 463px;
+	padding: 20px 50px;
+	background: var(--greyscale-secondary-white, #fff);
+	border-radius: 12px;
+	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
 }
 
 .styled_text {
-  margin-top: 22px;
-  color: var(--black-60, #828282);
-  text-align: center;
-  font-size: 14px;
-  font-family: Poppins;
-  line-height: 150%;
+	margin-top: 22px;
+	font-size: 14px;
+	line-height: 150%;
+	color: var(--black-60, #828282);
+	text-align: center;
 }
 
 .styled_view {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .styled_div {
-  display: flex;
-  padding: 24px 0px 0px 0px;
+	display: flex;
+	padding: 24px 0 0;
 }
 
 .button_div {
-  padding-top: 54px;
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
+	padding-top: 54px;
 
-  :global {
-    .ui_button_container {
-      min-width: 0 !important;
-      height: 36px !important;
-      padding: 8px 22px !important;
-      font-size: 16px !important;
-      width: 100%;
-      box-shadow: 0px 4px 8px 0px rgba(98, 127, 172, 0.2);
-    }
-  }
+	:global {
+		.ui_button_container {
+			width: 100%;
+			min-width: 0 !important;
+			height: 36px !important;
+			padding: 8px 22px !important;
+			font-size: 16px !important;
+			box-shadow: 0 4px 8px 0 rgb(98 127 172 / 20%);
+		}
+	}
 }
