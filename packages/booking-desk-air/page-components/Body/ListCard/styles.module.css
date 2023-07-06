@@ -1,0 +1,8 @@
+.list_card {
+	min-height: 100px;
+	margin: 16px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px #00000040;
+}
