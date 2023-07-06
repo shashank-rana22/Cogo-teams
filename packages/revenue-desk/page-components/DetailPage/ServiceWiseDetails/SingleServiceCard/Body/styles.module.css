@@ -12,15 +12,16 @@
 }
 
 .text1 {
-	font-size: 14px;
-	font-weight: 600;
-	color: #333;
+	padding: 20px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .text2 {
-	font-size: 14px;
-	font-weight: 500;
-	color: #828282;
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
 }
 
 .left_section {
