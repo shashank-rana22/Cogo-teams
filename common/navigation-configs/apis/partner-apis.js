@@ -9646,6 +9646,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
 	],
 	segmentation: [
 		{
