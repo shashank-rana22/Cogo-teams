@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTick } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import {
 	container, connecting_line, circle, big,
@@ -26,7 +28,13 @@ function TimelineItem({ item = {}, isLast = '', consecutivelyCompleted = false }
 						<div className={label}>Completed On</div>
 						<div className={value}>
 							{completed_on !== null
-						&& format(completed_on, 'dd MMM yyyy')}
+				&& formatDate({
+					date       : completed_on,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+					formatType : 'dateTime',
+					separator  : ' | ',
+				})}
 						</div>
 					</>
 				) : null}
@@ -46,7 +54,14 @@ function TimelineItem({ item = {}, isLast = '', consecutivelyCompleted = false }
 			<div className={display_milestone}>
 				<div className={ellipsis}>{milestone}</div>
 				{isEmpty(completed_on) ? null
-					: <div className={ellipsis}>{format(completed_on, 'dd MMM yyyy')}</div>}
+					: (
+						<div className={ellipsis}>
+							{formatDate({
+								date       : completed_on,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							})}
+						</div>
+					)}
 			</div>
 		</div>
 	);

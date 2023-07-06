@@ -3,21 +3,23 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsData }) => {
-	const { id, risk_reason } = itemData || {};
+const useGetResolve = ({ remarks, getDashboardData, getDahboardStatsData, selectRiskReason }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'update_shipment_risk_assessment',
+		url    : 'update_shipment_fault_alarm',
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const onResolveMark = useCallback((async () => {
+	const getParams = useCallback(() => ({
+		id              : selectRiskReason,
+		resolved_remark : remarks,
+		status          : 'inactive',
+	}), [remarks, selectRiskReason]);
+
+	const onResolveMark = useCallback((() => {
+		const paramsData = getParams();
 		try {
-			await trigger({
-				params: {
-					shipment_id      : id,
-					risk_sub_reasons : risk_reason,
-					resolved_remark  : remarks,
-				},
+			trigger({
+				params: paramsData,
 			});
 			getDashboardData();
 			getDahboardStatsData();
@@ -25,7 +27,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 		} catch (e) {
 			Toast.error(e?.response?.data?.id[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	}), [trigger, id, risk_reason, remarks, getDashboardData, getDahboardStatsData]);
+	}), [trigger, getDashboardData, getDahboardStatsData, getParams]);
 
 	return {
 

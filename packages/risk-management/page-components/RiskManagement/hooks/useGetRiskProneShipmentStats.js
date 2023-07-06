@@ -9,15 +9,13 @@ const useGetRiskProneStats = () => {
 	}, { manual: true, autoCancel: false });
 
 	const getDahboardStatsData = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {},
-				});
-			} catch (err) {
-				Toast.error(err.message);
-			}
-		})();
+		try {
+			trigger({
+				params: {},
+			});
+		} catch (err) {
+			Toast.error(err.message);
+		}
 	}, [trigger]);
 
 	useEffect(() => {

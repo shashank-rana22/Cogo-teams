@@ -3,12 +3,14 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import renderTooltip from '../../../../common/renderTooltip';
+import RenderTooltip from '../../../../common/RenderTooltip';
 
 import styles from './styles.module.css';
 
 const SHOW_TOOLTIP_MAX_LENGTH = 16;
 const COMMODITY_VALUE_LENGTH = 36;
+let MAX_CRITICLITY = 0;
+const MAX_CRITICLITY_VALUE = 0;
 const RISK_CATEGORIES = {
 	1 : 'LOW',
 	2 : 'MODERATE',
@@ -18,12 +20,17 @@ const RISK_CATEGORIES = {
 const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#ed3726' };
 function CardItem({ itemData }) {
 	const {
-		serial_id = '', origin_port = {}, destination_port = {}, estimated_cargo_value_currency,
-		commodity_description = '', cargo_value_currency, cargo_value, estimated_cargo_value, risk_reason = [],
-		criticality = '',
+		serial_id = '', origin_port = {}, destination_port = {}, estimated_cargo_value_currency, alarms = [],
+		commodity_description = '', cargo_value_currency, cargo_value, estimated_cargo_value,
 	} = itemData || {};
 
-	const risk_category = RISK_CATEGORIES[criticality];
+	alarms.forEach((item) => {
+		if (item.criticality > MAX_CRITICLITY) {
+			MAX_CRITICLITY = item.criticality;
+		}
+	});
+
+	const risk_category = RISK_CATEGORIES[MAX_CRITICLITY];
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
 		port_code:destination_port_code, display_name:destination_port_display_name,
@@ -46,7 +53,7 @@ function CardItem({ itemData }) {
 							{port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							{renderTooltip(display_name, SHOW_TOOLTIP_MAX_LENGTH)}
+							<RenderTooltip content={display_name} maxLength={SHOW_TOOLTIP_MAX_LENGTH} />
 						</div>
 					</div>
 				</div>
@@ -59,7 +66,10 @@ function CardItem({ itemData }) {
 							{destination_port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							{renderTooltip(destination_port_display_name, SHOW_TOOLTIP_MAX_LENGTH)}
+							<RenderTooltip
+								content={destination_port_display_name}
+								maxLength={SHOW_TOOLTIP_MAX_LENGTH}
+							/>
 						</div>
 					</div>
 				</div>
@@ -69,10 +79,10 @@ function CardItem({ itemData }) {
 			</div>
 			<div className={styles.column2}>
 				<h5>Risk Reason</h5>
-				{risk_reason.map((item) => (
+				{alarms.map((item) => (
 					<div className={styles.container_pickup} key={item}>
 						<div className={styles.not_picked}>
-							{startCase(item)}
+							{startCase(item?.risk_sub_reason)}
 						</div>
 					</div>
 				))}
@@ -87,7 +97,7 @@ function CardItem({ itemData }) {
 							<div className={styles.commodity_text}>
 								Commodity :
 								{' '}
-								{renderTooltip(commodity_description || '-', COMMODITY_VALUE_LENGTH)}
+								<RenderTooltip content={commodity_description} maxLength={COMMODITY_VALUE_LENGTH} />
 							</div>
 						)
 						: null}
@@ -124,11 +134,11 @@ function CardItem({ itemData }) {
 						)
 						: null}
 				</div>
-				{criticality ? (
+				{MAX_CRITICLITY > MAX_CRITICLITY_VALUE ? (
 					<div className={styles.ribbons}>
 						<div
 							className={styles.ribbon}
-							style={{ background: RISK_CATEGORIES_COLOR[criticality] }}
+							style={{ background: RISK_CATEGORIES_COLOR[MAX_CRITICLITY] }}
 						>
 							{risk_category}
 

@@ -1,4 +1,5 @@
-import { Modal, Button, Textarea } from '@cogoport/components';
+import { Modal, Button, Select, Textarea } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetResolve from '../../../../hooks/useGetResolve';
@@ -9,18 +10,38 @@ function ResolveModal({
 	showResolveModal = false, setShowResolveModal = () => {}, itemData = {}, getDashboardData = () => {},
 	getDahboardStatsData = () => {},
 }) {
+	const { alarms = [] } = itemData || {};
 	const [remarks, setRemarks] = useState('');
-
+	const [selectRiskReason, setSelectRiskReason] = useState('');
 	const {
 		onResolveMark,
 		resolveLoading,
-	} = useGetResolve({ itemData, remarks, getDashboardData, getDahboardStatsData });
+	} = useGetResolve({ itemData, remarks, getDashboardData, getDahboardStatsData, selectRiskReason });
 
+	const riskReasonOptions = (alarms || []).map((item) => {
+		const { risk_sub_reason = '', id = '' } = item || {};
+		return {
+			label : `${startCase(risk_sub_reason)}`,
+			value : id,
+		};
+	});
+	const disabledResolve = remarks === '' || resolveLoading || isEmpty(selectRiskReason);
 	return (
 		<div className={styles.container}>
 			<Modal size="md" show={showResolveModal} onClose={() => { setShowResolveModal(false); }} placement="top">
 				<Modal.Header title="Mark Resolve" />
 				<Modal.Body>
+					<div style={{ marginBottom: '12px' }}>
+						<Select
+							name="selectRiskReason"
+							value={selectRiskReason}
+							onChange={(val) => setSelectRiskReason(val)}
+							placeholder="Select Risk Reason"
+							options={riskReasonOptions}
+							size="sm"
+							style={{ width: '284px' }}
+						/>
+					</div>
 					<div>
 						Remarks -
 					</div>
@@ -42,7 +63,7 @@ function ResolveModal({
 						Cancel
 					</Button>
 					<Button
-						disabled={remarks === '' || resolveLoading}
+						disabled={disabledResolve}
 						onClick={() => { onResolveMark(); }}
 					>
 						Resolve

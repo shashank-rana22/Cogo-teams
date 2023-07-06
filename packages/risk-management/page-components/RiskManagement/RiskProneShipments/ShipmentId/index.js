@@ -1,16 +1,11 @@
 import { Input, Pagination } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import LoadingState from '../../common/LoadingState';
-
-import CardList from './CardList';
+import HandleShipmentView from './HandleShipmentView';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
-
-const ARRAY_LENGTH_FOR_LOADER = 5;
 
 function ShipmentId({
 	data = {}, loading = false, filters = '', setFilters = () => {}, activeTab = '',
@@ -31,37 +26,6 @@ function ShipmentId({
 			/>
 		</div>
 	);
-	const handleShipmentView = () => {
-		if (loading) {
-			return (
-				<div style={{ marginTop: '10px' }}>
-					{[...Array(ARRAY_LENGTH_FOR_LOADER).keys()].map((item) => (
-						<div key={item}>
-							<LoadingState />
-						</div>
-					))}
-				</div>
-			);
-		}
-		if (isEmpty(list)) {
-			return (
-				<div className={styles.no_data}>
-					<img
-						src={GLOBAL_CONSTANTS.image_url.empty_list}
-						alt="empty_data"
-					/>
-				</div>
-			);
-		}
-		return list?.map((item) => (
-			<CardList
-				itemData={item}
-				key={item?.serial_id}
-				getDashboardData={getDashboardData}
-				getDahboardStatsData={getDahboardStatsData}
-			/>
-		));
-	};
 
 	return (
 		<div className={styles.container}>
@@ -84,7 +48,12 @@ function ShipmentId({
 				<SelectFilter filters={filters} setFilters={setFilters} activeTab={activeTab} />
 			</div>
 			<div>
-				{handleShipmentView()}
+				<HandleShipmentView
+					loading={loading}
+					list={list}
+					getDashboardData={getDashboardData}
+					getDahboardStatsData={getDahboardStatsData}
+				/>
 			</div>
 			{!isEmpty(list) ? (
 				<div className={styles.pagination}>

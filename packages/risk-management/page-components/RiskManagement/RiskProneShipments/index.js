@@ -15,6 +15,13 @@ function RiskProneShipments({
 		container_movement_count = '',
 		bl_do_release_count = '', both_count = '',
 	} = stats || {};
+
+	const tabMappings = [
+		{ name: 'container_movement', title: 'Container Movement', badge: container_movement_count },
+		{ name: 'bl_do', title: 'BL/DO Release', badge: bl_do_release_count },
+		{ name: 'both', title: 'Both', badge: both_count },
+	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
@@ -29,11 +36,14 @@ function RiskProneShipments({
 					themeType="tertiary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="container_movement" title="Container Movement" badge={container_movement_count} />
-
-					<TabPanel name="bl_do" title="BL/DO Release" badge={bl_do_release_count} />
-
-					<TabPanel name="both" title="Both" badge={both_count} />
+					{tabMappings.map((tab) => (
+						<TabPanel
+							key={tab.name}
+							name={tab.name}
+							title={tab.title}
+							badge={tab.badge}
+						/>
+					))}
 				</Tabs>
 			</div>
 			{activeTab !== 'both'

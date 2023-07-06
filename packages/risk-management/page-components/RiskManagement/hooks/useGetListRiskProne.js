@@ -24,31 +24,32 @@ const useGetListRiskProne = ({ activeTab }) => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
+	const getListParams = useCallback(() => ({
+		filters: {
+			origin_port_id      : originValue || undefined,
+			destination_port_id : destinationValue || undefined,
+			risk_sub_reason     : reason,
+			q                   : query || undefined,
+			hs_code             : hsCode,
+			risk_type           : activeTab === 'both' ? ['container_movement', 'bl_do'] : activeTab,
+		},
+		sort_by            : 'created_at',
+		sort_type          : 'desc',
+		additional_methods : ['pagination'],
+		page_limit         : DEFAULT_PAGE_LIMIT,
+		page               : pageIndex,
+	}), [activeTab, destinationValue, hsCode, originValue, pageIndex, query, reason]);
+
 	const getDashboardData = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						filters: {
-							origin_port_id      : originValue || undefined,
-							destination_port_id : destinationValue || undefined,
-							risk_sub_reason     : reason,
-							q                   : query || undefined,
-							hs_code             : hsCode,
-							risk_type           : activeTab === 'both' ? ['container_movement', 'bl_do'] : activeTab,
-						},
-						sort_by            : 'created_at',
-						sort_type          : 'desc',
-						additional_methods : ['pagination'],
-						page_limit         : DEFAULT_PAGE_LIMIT,
-						page               : pageIndex,
-					},
-				});
-			} catch (err) {
-				Toast.error(err.message);
-			}
-		})();
-	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex, hsCode]);
+		const paramsData = getListParams();
+		try {
+			trigger({
+				params: paramsData,
+			});
+		} catch (err) {
+			Toast.error(err.message);
+		}
+	}, [trigger, getListParams]);
 
 	useEffect(() => {
 		getDashboardData();

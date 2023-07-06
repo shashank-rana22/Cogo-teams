@@ -10,17 +10,20 @@ function useGetShipmentTimeLine({ itemData }) {
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
-	const getShipmentTimeline = useCallback((async () => {
+	const getParams = useCallback(() => ({
+		shipment_id: id,
+	}), [id]);
+
+	const getShipmentTimeline = useCallback((() => {
+		const paramsData = getParams();
 		try {
-			await trigger({
-				params: {
-					shipment_id: id,
-				},
+			trigger({
+				params: paramsData,
 			});
 		} catch (e) {
 			Toast.error(e.message);
 		}
-	}), [id, trigger]);
+	}), [trigger, getParams]);
 
 	return {
 

@@ -52,7 +52,7 @@ export const BL_DO_REASON_OPTIONS = [
 ];
 export const BOTH_REASON_OPTIONS = CONTAINER_REASON_OPTIONS.concat(BL_DO_REASON_OPTIONS);
 
-export const optionsMap = {
+export const OPTIONS_MAP = {
 	container_movement : CONTAINER_REASON_OPTIONS,
 	bl_do              : BL_DO_REASON_OPTIONS,
 	both               : BOTH_REASON_OPTIONS,
