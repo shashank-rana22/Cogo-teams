@@ -40,14 +40,14 @@ const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
 
 function ShipmentDetailsCard({
-	data,
-	remarksVal,
-	setRemarksVal,
-	lineItemsRemarks,
-	setLineItemsRemarks,
-	setItemCheck,
-	setLineItem,
-	invoiceStatus,
+	data = {},
+	remarksVal = {},
+	setRemarksVal = () => {},
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
+	setItemCheck = () => {},
+	setLineItem = () => {},
+	invoiceStatus = '',
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);

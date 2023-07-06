@@ -16,7 +16,7 @@ interface DetailsInterface {
 }
 const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
 
-function Details({ dataList, shipmentId }: DetailsInterface) {
+function Details({ dataList, shipmentId = '' }: DetailsInterface) {
 	const { importer_exporter: importerExporter } = dataList || {};
 	const Router = useRouter();
 

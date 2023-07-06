@@ -80,13 +80,13 @@ interface BillAdditionalObjectInterface {
 }
 export interface DataInterface {
 	job?: JobInterface;
-	lineItems: Array<object>;
+	lineItems?: Array<object>;
 	billAdditionalObject?: BillAdditionalObjectInterface;
 	buyerDetail?: BuyerDetailInterface;
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
-	bill: BillInterface;
-	consolidatedShipmentIds:Array<string>;
+	bill?: BillInterface;
+	consolidatedShipmentIds?:Array<string>;
 	organizationId?: string;
 	serviceProviderDetail?: any
 }
