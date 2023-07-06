@@ -7,10 +7,18 @@ import FilterTicketsSection from '../../common/FilterTicketsSection';
 import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
+const NO_OF_DAYS_WEEK = 7;
+
 function SuperAdmin() {
 	const [activeTab, setActiveTab] = useState('dashboard');
+	const [refreshList, setRefreshList] = useState({
+		Open      : false,
+		Pending   : false,
+		Escalated : false,
+		Closed    : false,
+	});
 	const [date, setDate] = useState({
-		startDate : subtractDays(new Date(), 7),
+		startDate : subtractDays(new Date(), NO_OF_DAYS_WEEK),
 		endate    : new Date(),
 	});
 
@@ -32,7 +40,7 @@ function SuperAdmin() {
 					name="all_tickets"
 					title="All Tickets"
 				>
-					<FilterTicketsSection type="admin" />
+					<FilterTicketsSection type="admin" refreshList={refreshList} setRefreshList={setRefreshList} />
 				</TabPanel>
 			</Tabs>
 
