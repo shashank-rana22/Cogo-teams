@@ -17,8 +17,9 @@ function FclCard({
 	setScreen = () => {},
 	setComparisonCheckbox = () => {},
 	comparisonCheckbox = {},
+	refetchSearch = () => {},
 }) {
-	const { service_rates, arrival = '', departure = '' } = rateCardData;
+	const { service_rates = {}, arrival = '', departure = '' } = rateCardData;
 	const primaryService = detail?.search_type;
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
@@ -83,6 +84,7 @@ function FclCard({
 							container_type={primaryServiceRates?.[0]?.container_type}
 							price={rateCardData?.total_price_discounted}
 							price_current={rateCardData?.total_price_currency}
+							totalPrice
 						/>
 					</div>
 
@@ -91,13 +93,14 @@ function FclCard({
 						setSelectedCard={setSelectedCard}
 						isSelectedCard={isSelectedCard}
 						setScreen={setScreen}
+						detail={detail}
 					/>
 				</div>
 			</div>
 
 			{!isSelectedCard && (
 				<div className={styles.bottom}>
-					<DetailFooter rateCardData={rateCardData} detail={detail} />
+					<DetailFooter rateCardData={rateCardData} detail={detail} refetchSearch={refetchSearch} />
 				</div>
 			)}
 		</div>
@@ -105,3 +108,9 @@ function FclCard({
 }
 
 export default FclCard;
+
+/*
+
+  main index -> service wise mapping -> template wise mapping
+
+*/

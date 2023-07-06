@@ -1,22 +1,30 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
+import React, { useState } from 'react';
+
+import CreateContract from '../../../../common/CreateContract';
 
 import styles from './styles.module.css';
 
-function QuotationDetails({ rateCardData, setSelectedCard = () => {}, isSelectedCard = false, setScreen = () => {} }) {
+function QuotationDetails({
+	rateCardData,
+	setSelectedCard = () => {},
+	isSelectedCard = false,
+	detail = {},
+	setScreen = () => {},
+}) {
 	const { total_price_discounted, total_price_currency } = rateCardData;
+
+	const [showContract, setShowContract] = useState(false);
 
 	return (
 		<div className={styles.container}>
 			<Button
-				onClick={() => {
-
-				}}
 				size="md"
 				themeType={isSelectedCard ? 'tertiary' : 'secondary'}
 				className={styles.secondaryBotton}
 				disabled={isSelectedCard}
+				onClick={() => setShowContract(!showContract)}
 			>
 				{isSelectedCard ? ('Currrently Selected') : 'Lock Frieght Price'}
 			</Button>
@@ -48,6 +56,16 @@ function QuotationDetails({ rateCardData, setSelectedCard = () => {}, isSelected
 				)}
 
 			</Button>
+
+			{showContract ? (
+				<CreateContract
+					data={rateCardData}
+					details={detail}
+					setShowContract={setShowContract}
+					showContract={showContract}
+				/>
+			) : null}
+
 		</div>
 	);
 }

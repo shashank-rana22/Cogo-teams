@@ -13,7 +13,7 @@ const RateCardMapping = {
 	air_freight: {
 		RateCard: FclCard,
 	},
-	others: {
+	trailer_freight: {
 		RateCard: FclCard,
 	},
 };
@@ -28,6 +28,8 @@ function ListRateCards({
 	comparisonCheckbox = {},
 	filters = {},
 	setFilters = () => {},
+	refetchSearch = () => {},
+
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -63,6 +65,7 @@ function ListRateCards({
 					setScreen={setScreen}
 					setComparisonCheckbox={setComparisonCheckbox}
 					comparisonCheckbox={comparisonCheckbox}
+					refetchSearch={refetchSearch}
 				/>
 			))}
 		</div>

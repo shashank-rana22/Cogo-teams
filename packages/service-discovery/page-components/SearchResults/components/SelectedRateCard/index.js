@@ -16,7 +16,7 @@ const RateCardMapping = {
 	air_freight: {
 		RateCard: FclCard,
 	},
-	others: {
+	trailer_freight: {
 		RateCard: FclCard,
 	},
 };
@@ -27,10 +27,9 @@ function SelectedRateCard({
 	setSelectedCard = () => {},
 	setScreen = () => {},
 	setHeaderProps = () => {},
+	refetchSearch = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
-
-	console.log('rateCardData', rateCardData);
 
 	const { total_price_discounted, total_price_currency } = rateCardData;
 
@@ -72,6 +71,7 @@ function SelectedRateCard({
 							rateCardData={rateCardData}
 							detail={detail}
 							setHeaderProps={setHeaderProps}
+							refetchSearch={refetchSearch}
 						/>
 
 						<div className={styles.proceedContainer}>
@@ -96,6 +96,7 @@ function SelectedRateCard({
 								}}
 								size="md"
 								themeType="accent"
+								style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
 								className={styles.proceedBotton}
 							>
 								Proceed

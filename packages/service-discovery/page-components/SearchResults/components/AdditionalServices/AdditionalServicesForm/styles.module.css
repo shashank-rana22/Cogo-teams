@@ -1,6 +1,6 @@
 .container{
     padding: 20px;
-    border-bottom: 1px solid #EBEBF0;
+    border-top: 1px solid #EBEBF0;
     background: #FFF;
 }
 
@@ -8,11 +8,16 @@
     color: #000;
     font-size: 16px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .control_container{
+    width: 90%;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 }
 
 .control_style{

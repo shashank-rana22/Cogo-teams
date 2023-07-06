@@ -1,6 +1,6 @@
 const getPayload = ({
 	rateCardData = {},
-	additionalServiceDetails = {},
+	additionalFormInfo = {},
 	detail = {},
 	service_name = '',
 	source = 'spot_search',
@@ -8,13 +8,16 @@ const getPayload = ({
 	const {
 		origin_warehouse_id = '',
 		destination_warehouse_id = '',
-		destuffing_type = '',
-		stuffing_type = '',
+		destination_cargo_handling_type = '',
+		origin_cargo_handling_type = '',
 		cargo_value_currency = '',
 		cargo_value = '',
-	} = additionalServiceDetails;
+		truck_type = '',
+		trucks_count = '',
+		haulage_type = '',
+	} = additionalFormInfo;
 
-	console.log('service_name', service_name);
+	console.log('detail', detail);
 
 	const { spot_search_id, bls_count = '', service_details = {} } = detail;
 	const { service_type } = rateCardData;
@@ -22,44 +25,20 @@ const getPayload = ({
 
 	const primaryServicesObj = Object.values(service_details).filter((item) => item.service_type === primaryService);
 
-	console.log('detail', detail);
-
-	// let origin_location_id = '';
-	// let destination_location_id = '';
-	// let port_id = '';
-	// let trade_type = '';
-	// let cargo_handling_type = '';
-
-	// if (service_name.includes('export')) {
-	// 	destination_location_id = detail?.origin_port_id;
-	// 	origin_location_id = origin_warehouse_id;
-	// 	port_id = detail?.origin_port_id;
-	// 	trade_type = 'export';
-	// 	cargo_handling_type = stuffing_type;
-	// }
-
-	// if (service_name.includes('import')) {
-	// 	destination_location_id = destination_warehouse_id;
-	// 	origin_location_id = detail?.destination_port_id;
-	// 	port_id = detail?.destination_port_id;
-	// 	trade_type = 'import';
-	// 	cargo_handling_type = destuffing_type;
-	// }
-
 	const mapping = {
 		export: {
 			destination_location_id : detail?.origin_port_id,
 			origin_location_id      : origin_warehouse_id,
 			port_id                 : detail?.origin_port_id,
 			trade_type              : 'export',
-			cargo_handling_type     : stuffing_type,
+			cargo_handling_type     : origin_cargo_handling_type,
 		},
 		import: {
 			destination_location_id : destination_warehouse_id,
 			origin_location_id      : detail?.destination_port_id,
 			port_id                 : detail?.destination_port_id,
 			trade_type              : 'import',
-			cargo_handling_type     : destuffing_type,
+			cargo_handling_type     : destination_cargo_handling_type,
 		},
 	};
 
@@ -73,9 +52,9 @@ const getPayload = ({
 
 	if (service_name === 'export_transportation') {
 		const payload = {
-			id           : spot_search_id,
-			service_name : stuffing_type === 'factor_stuffing' ? 'trailer_freight' : 'ftl_freight',
-			...stuffing_type === 'factor_stuffing' ? {
+			id      : spot_search_id,
+			service : origin_cargo_handling_type === 'stuffing_at_factory' ? 'trailer_freight' : 'ftl_freight',
+			...origin_cargo_handling_type === 'stuffing_at_factory' ? {
 				trailer_freight_services: primaryServicesObj.map((item) => ({
 					origin_location_id,
 					destination_location_id,
@@ -97,8 +76,8 @@ const getPayload = ({
 					containers_count : item.containers_count,
 					status           : 'active',
 					trade_type,
-					trucks_count     : '',
-					truck_type       : '',
+					trucks_count,
+					truck_type,
 					volume           : 1,
 					weight           : 1,
 					trip_type        : 'one_Way',
@@ -112,8 +91,8 @@ const getPayload = ({
 	if (service_name === 'import_transportation') {
 		const payload = {
 			id      : spot_search_id,
-			service : destuffing_type === 'factory_stuffing' ? 'trailer_freight' : 'ftl_freight',
-			...stuffing_type === 'factory_stuffing' ? {
+			service : destination_cargo_handling_type !== 'destuffing_at_dock' ? 'trailer_freight' : 'ftl_freight',
+			...destination_cargo_handling_type !== 'destuffing_at_dock' ? {
 				trailer_freight_services: primaryServicesObj.map((item) => ({
 					origin_location_id,
 					destination_location_id,
@@ -135,8 +114,8 @@ const getPayload = ({
 					containers_count : item.containers_count,
 					status           : 'active',
 					trade_type,
-					trucks_count     : '',
-					truck_type       : '',
+					trucks_count,
+					truck_type,
 					volume           : 1,
 					weight           : 1,
 					trip_type        : 'one_Way',
@@ -147,7 +126,7 @@ const getPayload = ({
 		return payload;
 	}
 
-	if (service_name === 'fcl_freight_local') {
+	if (service_name.includes('fcl_freight_local')) {
 		const payload = {
 			id                         : spot_search_id,
 			service                    : 'fcl_freight_local',
@@ -161,7 +140,7 @@ const getPayload = ({
 				cargo_weight_per_container : item.cargo_weight_per_container,
 				status                     : 'active',
 				trade_type,
-				cargo_handling_type,
+				// cargo_handling_type,
 			})),
 
 		};
@@ -169,18 +148,20 @@ const getPayload = ({
 		return payload;
 	}
 
-	if (service_name === 'haulage_freight') {
+	if (service_name.includes('haulage_freight')) {
 		const payload = {
 			id                       : spot_search_id,
 			service                  : 'haulage_freight',
 			haulage_freight_services : primaryServicesObj.map((item) => ({
-				origin_location_id,
+				...trade_type === 'export'
+					? { origin_location_id: detail?.origin_port_id }
+					: { destination_location_id: detail?.destination_port_id },
 				container_size             : item.container_size,
 				container_type             : item.container_type,
 				commodity                  : item.commodity,
 				containers_count           : item.containers_count,
 				cargo_weight_per_container : item.cargo_weight_per_container,
-				haulage_type               : 'merchant',
+				haulage_type,
 				status                     : 'active',
 				trade_type,
 				transport_mode             : 'rail',
@@ -229,8 +210,6 @@ const getPayload = ({
 				cargo_handling_type,
 			})),
 		};
-
-		console.log('primaryServicesObj', primaryServicesObj);
 
 		return payload;
 	}

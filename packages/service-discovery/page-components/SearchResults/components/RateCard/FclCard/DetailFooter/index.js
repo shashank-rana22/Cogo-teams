@@ -1,11 +1,17 @@
+import { Popover } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import Detention from '../../../../common/Detention';
+import useUpdateDestinationDemurrageDays from '../../../../hooks/useUpdateDestinationDemurrageDays';
 
 import PriceBreakup from './PriceBreakUp';
 import RateCardDetails from './RateCardDetails';
 import styles from './styles.module.css';
 
 const detailsMapping = ['terms_and_condition', 'price_break_up', 'dnd_details', 'other_details'];
+
+const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
 
 const detailsComponentMapping = {
 	terms_and_condition: {
@@ -30,19 +36,67 @@ const detailsComponentMapping = {
 	},
 };
 
-function DetailFooter({ rateCardData, detail }) {
+function DetailFooter({ rateCardData, detail, refetchSearch }) {
 	const [showDetails, setShowDetails] = useState('');
+
+	const { onSubmit = () => {} } = useUpdateDestinationDemurrageDays({
+		service_rates  : rateCardData?.service_rates,
+		spot_search_id : detail?.spot_search_id,
+		refetchSearch,
+	});
+
+	let addDaysValue = {};
+
+	ADDITIONAL_DAYS_KEYS.forEach((item) => {
+		addDaysValue = {
+			...addDaysValue,
+			[item]: (rateCardData[item]?.free_limit || 0 + rateCardData[item]?.additional_days || 0) || 0,
+		};
+	});
+
+	const onAddAdditionaldays = (values) => {
+		onSubmit(values);
+	};
 
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={styles.dndDetails}>
 					<span className={styles.tag}>Origin</span>
-					DET. 7 days, Demurrage 3 days
+					DET.
+					{' '}
+					{rateCardData?.origin_detention?.free_limit || 0}
+					{' '}
+					days, Demurrage
+					{rateCardData?.origin_demurrage?.free_limit || 0}
+					{' '}
+					days
 					<span className={styles.tag}>Destination</span>
-					DET. 7 days, Demurrage 3 days
+					DET.
+					{' '}
+					{rateCardData?.destination_detention?.free_limit || 0}
+					{' '}
+					days, Demurrage
+					{' '}
+					{rateCardData?.destination_demurrage?.free_limit || 0}
+					{' '}
+					days
 
-					<IcMPlusInCircle className={styles.plusIcon} />
+					<Popover
+						placement="bottom"
+						render={(
+							<Detention
+								heading="Update No. of Free Days"
+								buttonTitle="udpate"
+								values={addDaysValue}
+								handleClick={onAddAdditionaldays}
+							/>
+						)}
+						caret={false}
+					>
+						<IcMPlusInCircle className={styles.plusIcon} />
+					</Popover>
+
 				</div>
 
 				<div className={styles.otherDetails}>

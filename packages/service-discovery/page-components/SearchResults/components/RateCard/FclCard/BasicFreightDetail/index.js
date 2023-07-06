@@ -6,8 +6,9 @@ import styles from './styles.module.css';
 function FreightPriceDetail({
 	container_size = '',
 	container_type = '',
-	price,
-	price_currency,
+	price = '',
+	price_currency = '',
+	totalPrice = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -30,9 +31,11 @@ function FreightPriceDetail({
 						maximumFractionDigits : 0,
 					},
 				})}`}
-				<div className={styles.containerDetails}>
-					Per ctr.
-				</div>
+				{!totalPrice ? (
+					<div className={styles.containerDetails}>
+						Per ctr.
+					</div>
+				) : null}
 			</div>
 
 		</div>

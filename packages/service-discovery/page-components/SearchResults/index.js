@@ -19,29 +19,25 @@ const SCREEN_MAPPING = {
 	bookCheckout : BookCheckout,
 };
 
+// Listratecards ki mapping krdo not card
+
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
 
-	const [screen, setScreen] = useState('listRateCard');
-	const [selectedCard, setSelectedCard] = useState({});
 	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
 	const {
-		refetchSearch = () => {},
-		loading,
-		actualLoading,
-		details:detail = {},
-		rates = [],
-		headerData,
-		filters = {},
-		setFilters = () => {},
+		refetchSearch = () => {}, loading, data,	filters,
+		setFilters,
+		screen,
+		setScreen,
+		setSelectedCard,
+		selectedCard,
 	} = useGetSpotSearch();
 
-	// useEffect(() => {
-	// 	refetchSearch({ spot_search_id, importer_exporter_id });
-	// }, [importer_exporter_id, refetchSearch, spot_search_id]);
+	const { detail = {}, rates = [] } = data || {};
 
-	if (loading || actualLoading) {
+	if (loading) {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>
@@ -53,8 +49,6 @@ function SearchResults() {
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
 	const showComparison = rateCardsForComparison.length >= 2;
-
-	const RateCardsComponent = SCREEN_MAPPING[screen];
 
 	const SCREEN_PROPS_MAPPING = {
 		listRateCard: {
@@ -74,10 +68,10 @@ function SearchResults() {
 			rateCardData: selectedCard,
 			detail,
 			setSelectedCard,
-			selectedCard,
 			setScreen,
 			setHeaderProps,
 			refetchSearch,
+			screen,
 		},
 		comparison: {
 			setScreen,
@@ -90,8 +84,9 @@ function SearchResults() {
 			setScreen,
 		},
 	};
-
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
+
+	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
 
 	const handleRatesList = () => {
 		if (!loading && isEmpty(rates)) {
@@ -109,17 +104,15 @@ function SearchResults() {
 	};
 
 	return (
-		<div className={`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
-			<div className={styles.header}>
-				<Header
-					data={headerData || {}}
-					showAdditionalHeader={showAdditionalHeader}
-					setHeaderProps={setHeaderProps}
-					headerProps={headerProps}
-					loading={loading}
-					activePage="search_results"
-				/>
-			</div>
+		<div className={styles.container}>
+			<Header
+				data={detail}
+				showAdditionalHeader={showAdditionalHeader}
+				setHeaderProps={setHeaderProps}
+				headerProps={headerProps}
+				loading={loading}
+				activePage="search_results"
+			/>
 
 			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>
 				{handleRatesList()}

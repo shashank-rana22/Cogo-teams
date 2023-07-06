@@ -1,0 +1,45 @@
+.PortArrow {
+	height: 30px;
+	width: 40px;
+	margin: 0px 30px;
+  }
+  
+  .PortName {
+	font-weight: 700;
+	font-size: 12px;
+	width: 200px;
+  }
+  
+  .TopSection {
+	display: flex;
+  }
+  
+  .Tag {
+	background: #dfe1ef;
+	font-size: 12px;
+	padding: 4px 6px;
+	border-radius: 4px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+  }
+  
+  .Card {
+	width: 450px;
+	padding: 10px 10px 10px 0px;
+	border-radius: 4px;
+	margin-right: 20px;
+  }
+  
+  .CardRow {
+	width: 510px;
+	display: flex;
+	flex-direction: row;
+	overflow-x: scroll;
+	margin: 20px 30px 10px 30px;
+  }
+  
+  .BottomSection {
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
