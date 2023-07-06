@@ -1,15 +1,15 @@
-.filters{
-    margin-top: 16px;
-    display: flex;
+.filters {
+	display: flex;
+	margin-top: 16px;
 }
 
-.single_filter{
-    margin-right: 8px;
-    width: 12%;
+.single_filter {
+	width: 12%;
+	margin-right: 8px;
 }
 
-.stats_container{
-    background: white;
-    margin: 20px 0px;
-    border-radius: 8px;
+.stats_container {
+	margin: 20px 0;
+	background: white;
+	border-radius: 8px;
 }

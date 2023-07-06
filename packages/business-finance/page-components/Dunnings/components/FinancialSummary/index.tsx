@@ -7,8 +7,15 @@ import ListView from './ListView';
 import Stats from './Stats';
 import styles from './styles.module.css';
 
+interface FilterInterface {
+	service?: string[];
+	entity?: string[];
+	search?: string;
+	pageIndex?: number;
+}
+
 function FinancialSummary() {
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState<FilterInterface>({});
 	const serviceOptions = GLOBAL_CONSTANTS.shipment_types;
 	const entityOptions = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => (
 		{ label: String(entity), value: String(entity) }
@@ -25,16 +32,16 @@ function FinancialSummary() {
 					placeholder="Service"
 					options={serviceOptions}
 					className={styles.single_filter}
-					prefix={() => {}}
+					prefix={null}
 					isClearable
 				/>
 				<MultiSelect
 					value={filters?.entity}
-					onChange={(val:string) => setFilters({ ...filters, entity: val })}
+					onChange={(val) => setFilters({ ...filters, entity: val })}
 					placeholder="Entity"
 					options={entityOptions}
 					className={styles.single_filter}
-					prefix={() => {}}
+					prefix={null}
 					isClearable
 				/>
 			</div>

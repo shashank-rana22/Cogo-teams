@@ -1,4 +1,4 @@
-import { ResponsiveLine } from '@cogoport/charts/line';
+import { ResponsiveLine, LineSvgProps } from '@cogoport/charts/line';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -7,16 +7,12 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-interface ObjInterface {
-	data?: object[],
-}
-
 interface Props {
-	linearData?: ObjInterface[];
+	linearData?: LineSvgProps['data'];
 }
 
-function LinearGraphView({ linearData }:Props) {
-	const [totalOutstanding] = linearData || [];
+function LinearGraphView({ linearData = [] }: Props) {
+	const [totalOutstanding] = linearData;
 	const { data } = totalOutstanding || {};
 	const geo = getGeoConstants();
 	const currency = geo.country.currency.code;
