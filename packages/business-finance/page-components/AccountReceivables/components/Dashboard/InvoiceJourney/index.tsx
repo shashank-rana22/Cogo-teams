@@ -89,9 +89,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_journey_loader}>
 
-							{	[1, 2, 3, 4].map(() => (
+							{	[1, 2, 3, 4].map((val) => (
 
-								<Placeholder className={styles.invoice_loader} />
+								<Placeholder key={val} className={styles.invoice_loader} />
 
 							))}
 
@@ -103,7 +103,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 						<div className={styles.sub_container}>
 
 							{ getCircleData.map((item) => (
-								<div className={styles.column_flex}>
+								<div key={item.number} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
 									</div>
@@ -143,9 +143,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_tat_loader}>
 
-							{	[1, 2, 3].map(() => (
+							{	[1, 2, 3].map((val) => (
 
-								<Placeholder className={styles.invoice_tat_placeholder} />
+								<Placeholder key={val} className={styles.invoice_tat_placeholder} />
 
 							))}
 
@@ -156,7 +156,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_tat_container}>
 							{getTatData.map((item) => (
-								<div className={styles.tat_data}>
+								<div key={item.Count} className={styles.tat_data}>
 									<div className={styles.text_padding}>{item?.label}</div>
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />
