@@ -3,17 +3,17 @@ export const POCDetailsFields = {
 		{
 			key   : 'name',
 			label : 'POC Name',
-			span  : 0.5,
+			span  : 4,
 		},
 		{
 			key   : 'email',
 			label : 'Email ID',
-			span  : 0.5,
+			span  : 4,
 		},
 		{
 			key   : 'contact',
 			label : 'Contact No.',
-			span  : 0.7,
+			span  : 4,
 			func  : 'handleContact',
 		},
 	],

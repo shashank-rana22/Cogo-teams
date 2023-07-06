@@ -31,10 +31,9 @@ function List({
 } :Props) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = {}, total_count:totalCount } = listData;
-	const [isOpen, setIsOpen] = useState(null);
+	const [isOpen, setIsOpen] = useState('');
 
 	const handlePOCDetails = (itm) => {
-		setIsOpen(isOpen === null ? itm.id : null);
 		setIsOpen(itm.id);
 	};
 
@@ -62,7 +61,7 @@ function List({
 							<Button
 								themeType="linkUi"
 								onClick={() => {
-									setIsOpen(null);
+									setIsOpen('');
 								}}
 							>
 								Show Less

@@ -1,19 +1,17 @@
 import { cl } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
+import { NestedObj, FieldType, FunctionObjects } from '../../../../commons/List/Interfaces';
 import getValue from '../../../../commons/List/ListItem/getValue';
 import styles from '../styles.module.css';
 
-interface FieldType {
-	key?: string;
-	label?: string | ReactNode;
-	span: number;
-	className?: string;
-	func?: string;
-	render?: Function;
+export interface Props {
+	fields: FieldType[];
+	item?: NestedObj;
+	functions?: FunctionObjects;
 }
 
-function POCDetailsItem({ fields, item, functions }) {
+function POCDetailsItem({ fields = [], item = {}, functions = {} }:Props) {
 	return (
 		<section className={styles.list_container}>
 			<div
