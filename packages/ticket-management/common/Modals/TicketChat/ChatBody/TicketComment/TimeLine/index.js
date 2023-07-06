@@ -6,8 +6,18 @@ import getRenderHeader from '../../../../../../utils/renderHeader';
 
 import styles from './styles.module.css';
 
+function Rating({ rating }) {
+	return (
+		<div>
+			with a customer rating of
+			{' '}
+			{[...Array(rating).keys()].map((key) => (<span key={key}>&#11088;</span>))}
+		</div>
+	);
+}
+
 function TimeLine({
-	createdAt, type, description, ticketType, name, userType, oldReviewerName, reviewerName,
+	createdAt, type, description, ticketType, name, userType, oldReviewerName, reviewerName, rating = 0,
 }) {
 	const timelineText = getRenderHeader({
 		type,
@@ -35,7 +45,10 @@ function TimeLine({
 						separator  : ' ',
 					})}
 				</div>
-				<div className={styles.timeline_container}>{timelineText}</div>
+				<div className={styles.timeline_container}>
+					{timelineText}
+					{rating && type === 'mark_as_resolved' ? <Rating rating={rating} /> : null}
+				</div>
 			</div>
 			<div className={styles.break_the_chat} />
 		</div>

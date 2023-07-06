@@ -19,6 +19,7 @@ function TicketComment({
 	oldReviewerName = '',
 	reviewerName = '',
 	restData = {},
+	rating = 0,
 	activityUserId,
 	currentAgentName = '',
 }) {
@@ -73,6 +74,7 @@ function TicketComment({
 		<TimeLine
 			type={type}
 			name={name}
+			rating={rating}
 			userType={userType}
 			oldReviewerName={oldReviewerName}
 			reviewerName={reviewerName}
