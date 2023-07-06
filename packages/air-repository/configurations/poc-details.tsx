@@ -14,6 +14,7 @@ export const POCDetailsFields = {
 			key   : 'contact',
 			label : 'Contact No.',
 			span  : 0.7,
+			func  : 'handleContact',
 		},
 	],
 };

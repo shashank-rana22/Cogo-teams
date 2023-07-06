@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
 import getValue from '../../../../commons/List/ListItem/getValue';
@@ -12,7 +13,7 @@ interface FieldType {
 	render?: Function;
 }
 
-function POCDetailsItem({ fields, item }) {
+function POCDetailsItem({ fields, item, functions }) {
 	return (
 		<section className={styles.list_container}>
 			<div
@@ -20,7 +21,7 @@ function POCDetailsItem({ fields, item }) {
 			>
 				{fields.map((field:FieldType) => (
 					<div
-						className={`${styles.col} ${field.className || ''}`}
+						className={cl`${styles.col} ${field.className || ''}`}
 						style={{
 							'--span': (field.span || 1),
 						} as React.CSSProperties}
@@ -30,7 +31,7 @@ function POCDetailsItem({ fields, item }) {
 							{getValue(
 								item,
 								field,
-								() => {},
+								functions,
 								'-',
 							) as ReactNode }
 						</div>

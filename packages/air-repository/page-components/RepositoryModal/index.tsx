@@ -8,8 +8,9 @@ import useHandleRepository from '../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
+type TypeObject = string | Array<object> | object[] | React.FC ;
 interface NestedObj {
-	[key: string]: string;
+	[key: string]: TypeObject;
 }
 
 interface ModalProps {
@@ -29,18 +30,17 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 	const mode = watch('booking_mode');
 
 	const onSubmit = (values) => {
-		const POC_DATA = [];
-
-		(values.pocs_data || []).forEach((poc) => {
-			POC_DATA.push({
+		const pocData = (values.pocs_data || []).map((poc) => {
+			const pocDataItem = ({
 				name                : poc?.name,
 				email               : poc?.email,
 				mobile_country_code : poc?.mobile?.country_code,
 				mobile_number       : poc?.mobile?.number,
 			});
+			return pocDataItem;
 		});
 
-		const payload = { ...values, pocs_data: POC_DATA, id: item?.id, action_name: edit ? 'update' : undefined };
+		const payload = { ...values, pocs_data: pocData, id: item?.id, action_name: edit ? 'update' : undefined };
 		handleRepository(payload, listRepository, setShowModal).then(() => {
 			if (edit) {
 				setEdit(false);
@@ -59,6 +59,16 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 			finalFields.forEach((c) => {
 				setValue(c.name, item[c.name]);
 			});
+
+			const pocData = (item.pocs_data || []).map((poc) => {
+				const pocDataItem = ({
+					name   : poc?.name,
+					email  : poc?.email,
+					mobile : { country_code: poc?.mobile_country_code, number: poc?.mobile_number },
+				});
+				return pocDataItem;
+			});
+			setValue('pocs_data', pocData);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
