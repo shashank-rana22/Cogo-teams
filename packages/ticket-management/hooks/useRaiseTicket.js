@@ -70,7 +70,13 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) 
 				}),
 			});
 			Toast.success('Successfully Created');
-			setRefreshList();
+			setRefreshList((prev) => ({
+				...prev,
+				Open      : false,
+				Pending   : false,
+				Escalated : false,
+				Closed    : false,
+			}));
 			setShowRaiseTicket(false);
 		} catch (error) {
 			console.error(error?.response?.data);
