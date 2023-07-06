@@ -1,7 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
+
+import { getFormatDate } from '../utils/getFormatDate';
 
 interface FilterInterface {
 	serviceType?:string
@@ -24,14 +25,15 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 		{ autoCancel: false },
 	);
 	const { serviceType = '', dateRange, timePeriod } = filters || {};
+	const { startDate, endDate } = dateRange || {};
 
 	const billDatesStart = (dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
-		? null : format(dateRange?.startDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(startDate);
 
 	const billDatesEnd = (dateRange?.startDate === undefined
             || dateRange?.startDate === null)
-		? null : format(dateRange?.endDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(endDate);
 
 	useEffect(() => {
 		const getData = async () => {

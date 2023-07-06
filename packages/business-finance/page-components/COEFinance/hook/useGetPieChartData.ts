@@ -1,8 +1,8 @@
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
+import { getFormatDate } from '../utils/getFormatDate';
 
 interface FilterInterface {
 	serviceType?:string
@@ -27,14 +27,15 @@ const useGetPieChartData = (filters :FilterInterface) => {
 	);
 
 	const { serviceType = '', dateRange, timePeriod } = filters || {};
+	const { startDate, endDate } = dateRange || {};
 
 	const billDatesStart = (dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
-		? null : format(dateRange?.startDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(startDate);
 
 	const billDatesEnd = (dateRange?.startDate === undefined
             || dateRange?.startDate === null)
-		? null : format(dateRange?.endDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
+		? null : getFormatDate(endDate);
 
 	useEffect(() => {
 		const getData = async () => {
