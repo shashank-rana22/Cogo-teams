@@ -8,7 +8,7 @@ import FilterType from './FilterType';
 import styles from './styles.module.css';
 import TicketsSection from './TicketsSection';
 
-function FilterTicketsSection({ type = '' }) {
+function FilterTicketsSection({ type = '', setRefreshList =	() => {}, refreshList = {} }) {
 	const { query: { ticket_id } } = useRouter();
 
 	const [showReassign, setShowReassign] = useState(false);
@@ -27,6 +27,8 @@ function FilterTicketsSection({ type = '' }) {
 				setModalData={setModalData}
 				isUpdated={isUpdated}
 				setIsUpdated={setIsUpdated}
+				setRefreshList={setRefreshList}
+				refreshList={refreshList}
 			/>
 			<Modals
 				modalData={modalData}
