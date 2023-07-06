@@ -1,6 +1,7 @@
 import { Tooltip, Button } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import { DEFAULT_INDEX } from '../../../../../../../constants';
 import getBuyPrice from '../../../utils/getBuyPrice';
 
 import styles from './styles.module.css';
@@ -34,74 +35,91 @@ function ListItem({
 					<div className={styles.sub_heading}>
 						{item?.source === 'system_rate'
 							? data?.airline?.business_name || '-'
-							: data?.reverted_airline?.business_name || '-'}
+							: data?.reverted_airline?.business_name || data?.airline?.business_name || '-'}
 					</div>
 				</div>
 
 				<div>
 					<div className={styles.heading}>No of Pkts</div>
-					<div className={styles.sub_heading}>{data?.service?.packages_count || '-'}</div>
+					<div className={styles.sub_heading}>
+						{data?.validities?.[DEFAULT_INDEX]?.serivce?.packages_count
+					|| data?.service?.packages_count || '-'}
+					</div>
 				</div>
 
 				<div>
 					<div className={styles.heading}>Vol. Weight</div>
 					<div className={styles.sub_heading}>
-						{((data?.service?.volume
+						{((data?.validities?.[DEFAULT_INDEX]?.serivce?.volume || data?.service?.volume
 							|| DEFAULT_VALUE_FOR_NULL_HANDLING) * VOLUMETRIC_WEIGHT).toFixed(DECIMAL_PLACE)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Gross Weight</div>
-					<div className={styles.sub_heading}>{data?.service?.weight || '-'}</div>
+					<div className={styles.sub_heading}>
+						{data?.validities?.[DEFAULT_INDEX]?.serivce?.weight
+					|| data?.service?.weight || '-'}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
+					<div className={styles.sub_heading}>
+						{data?.validities?.[DEFAULT_INDEX]?.serivce?.commodity
+					|| data?.service?.commodity || '-'}
+					</div>
 				</div>
-				{data?.service?.commodity_description && (
+				{(data?.validities?.[DEFAULT_INDEX]?.serivce?.commodity_description
+				|| data?.service?.commodity_description) && (
 					<div>
 						<div className={styles.heading}>Commodity Description</div>
 						<Tooltip
-							content={data?.service?.commodity_description}
+							content={data?.validities?.[DEFAULT_INDEX]?.serivce?.commodity_description
+								|| data?.service?.commodity_description}
 							placement="top"
 						>
 							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.commodity_description}
+								{data?.validities?.[DEFAULT_INDEX]?.serivce?.commodity_description
+								|| data?.service?.commodity_description}
 							</div>
 						</Tooltip>
 					</div>
 				)}
-				{data?.service?.hs_code &&	(
+				{(data?.validities?.[DEFAULT_INDEX]?.serivce?.hs_code || data?.service?.hs_code) &&	(
 					<div>
 						<div className={styles.heading}>HS Code</div>
 						<Tooltip
-							content={data?.service?.hs_code}
+							content={data?.validities?.[DEFAULT_INDEX]?.serivce?.hs_code || data?.service?.hs_code}
 							placement="top"
 						>
 							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.hs_code}
+								{data?.validities?.[DEFAULT_INDEX]?.serivce?.hs_code || data?.service?.hs_code}
 							</div>
 						</Tooltip>
 					</div>
 				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
-					<div className={styles.sub_heading}>{startCase(data?.service?.price_type) || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(data?.validities?.[DEFAULT_INDEX]?.serivce?.price_type)
+					|| data?.service?.price_type || '-'}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Buy Price</div>
 					<div className={styles.sub_heading}>{getBuyPrice(data, item.source) || '-'}</div>
 				</div>
-				{item?.source === 'flash_booking' && (
+				{(item?.source === 'flash_boooking' || data?.source === 'flashed') && (
 					<div>
 						<div className={styles.heading}>Min. Price</div>
 						<div className={styles.sub_heading}>
-							{data?.service?.is_minimum_price_shipment ? 'Yes' : 'No'}
+							{(data?.validities?.[DEFAULT_INDEX]?.serivce?.is_minimum_price_shipment
+								|| data?.service?.is_minimum_price_shipment) ? 'Yes' : 'No'}
 						</div>
 					</div>
 				)}
-				{data?.data?.rate_procurement_proof_url
-				&& item?.source === 'flash_booking'
+				{(data?.data?.rate_procurement_proof_url
+				|| data?.validities?.[DEFAULT_INDEX]?.rate_procurement_proof_url)
+				&& (item?.source === 'flash_booking' || data?.source === 'flashed')
 				&& (
 					<div>
 						<div className={styles.heading}>Rate Proof</div>
@@ -110,7 +128,8 @@ function ListItem({
 								themeType="linkUi"
 								size="md"
 								onClick={() => window.open(
-									data?.data?.rate_procurement_proof_url,
+									data?.data?.rate_procurement_proof_url
+									|| data?.validities?.[DEFAULT_INDEX]?.rate_procurement_proof_url,
 									'_blank',
 								)}
 							>
