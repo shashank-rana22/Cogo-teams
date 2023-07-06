@@ -14,14 +14,13 @@ function Header({ refetch }) {
 			<div className={styles.header}>File Uploader</div>
 
 			<div className={styles.button_container}>
-				<Button onClick={() => { setShow(true); }}>
+				<Button type="button" onClick={() => { setShow(true); }}>
 					<IcMCloudUpload fill="#fff" height={16} width={16} style={{ marginRight: '4px' }} />
 					Upload File
 				</Button>
+
 				<Upload show={show} setShow={setShow} refetch={refetch} />
-
 			</div>
-
 		</div>
 	);
 }

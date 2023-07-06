@@ -8,7 +8,7 @@ const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
 
 	const [{ loading: bulkFileLoading = false }, trigger] = useRequest({
-		url    : 'bulk_create_question_answer_set',
+		url    : '/bulk_create_question_answer_set',
 		method : 'POST',
 	}, { manual: true });
 	// const [{ loading: bulkFileLoading = false}, trigger] = useAthenaRequest({
@@ -21,20 +21,18 @@ const useBulkFileUpload = ({ refetch, setShow }) => {
 	const bulkUpload = async (val) => {
 		try {
 			const payload = {
-				user_id : profile?.user?.id || null,
-				files   : val?.upload_question || {},
+				user_id : profile.user.id,
+				files   : val?.upload_question,
 			};
 
 			await trigger({ data: payload });
 
-			Toast('File uploaded Successfully');
+			Toast.success('File uploaded Successfully');
 			refetch();
 			setShow(false);
-			// router.back();
 		} catch (error) {
-			if (error?.message || error?.error?.message) {
-				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
-			}
+			Toast.error(getApiErrorString(error.response?.data));
+
 			// refetch();
 			// setShow(false);
 		}

@@ -15,10 +15,6 @@
 .header {
 	margin-left: 2px;
 	font-weight: 600;
-	background: #111 -webkit-linear-gradient(left, #111, #ff2431) no-repeat 0 0 / 40px;
-	background-clip: text;
-	animation: sweep 2.5s ease-in infinite;
-	-webkit-text-fill-color: rgb(0 0 0 / 20%);
 }
 
 @keyframes sweep {

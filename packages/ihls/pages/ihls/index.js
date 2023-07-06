@@ -1,1 +1,0 @@
-export { default } from '@cogoport/ihls/page-components/IhlsDashboard';

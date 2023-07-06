@@ -5,33 +5,10 @@ import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
 import StyledTable from '../../../commons/StyledTable';
+import getConstants from '../../../config/getConstants';
 import FileData from '../FileData';
 
 import styles from './style.module.css';
-
-const STATUS_PILL_MAPPING = {
-	uploaded: {
-		label : 'Uploaded',
-		color : 'yellow',
-	},
-
-	processing: {
-		label : 'Processing',
-		color : 'blue',
-	},
-	WRONG_UPLOAD: {
-		label : 'Wrong Upload',
-		color : 'red',
-	},
-	WRONG_DOING: {
-		label : 'Wrong Doing',
-		color : 'red',
-	},
-	success: {
-		label : 'Processed',
-		color : 'green',
-	},
-};
 
 function FileList({
 	params,
@@ -39,12 +16,13 @@ function FileList({
 	data,
 	loading,
 }) {
-	const [fileId, setFileId] = useState(null);
-	const [fileName, setFileName] = useState(null);
+	const [fileInfo, setFileInfo] = useState({
+		fileId   : null,
+		fileName : null,
+	});
 
-	const onClose = () => {
-		setFileId(null);
-	};
+	const { STATUS_PILL_MAPPING, ICON_MAPPING } = getConstants();
+	const { setSort, Component } = ICON_MAPPING[params?.sort_type];
 
 	const columns = [
 		{
@@ -79,33 +57,26 @@ function FileList({
 			id     : 5,
 			Header : (
 				<div className={styles.created_container}>
-					<div>Created at</div>
-					{params?.sort_type === 'asc'
-						? (
-							<IcMArrowRotateDown
-								onClick={() => setParams({ ...params, sort_type: 'desc' })}
-								style={{ cursor: 'pointer', marginLeft: '4px' }}
-							/>
-						)
-						: (
-							<IcMArrowRotateUp
-								onClick={() => setParams({ ...params, sort_type: 'asc' })}
-								style={{ cursor: 'pointer', marginLeft: '4px' }}
-							/>
-						)}
+					Created at
+
+					<Component
+						onClick={() => setParams({ ...params, sort_type: setSort })}
+						style={{ cursor: 'pointer', marginLeft: '4px' }}
+					/>
 				</div>
 			),
 			accessor: ({ created_at = '' }) => created_at,
 		},
 		{
 			id       : 6,
-			Header   : 'View stats',
-			accessor : ({ file_id, file_name = '', status = '' }) => (
+			Header   : 'View Stats',
+			accessor : ({ file_id, file_name, status = '' }) => (
 				<Button
 					onClick={() => {
-						setFileId(file_id); setFileName(file_name);
+						setFileInfo({ fileName: file_name, fileId: file_id });
 					}}
 					size="sm"
+					type="button"
 					themeType="primary"
 					className={styles.btn_stats}
 					disabled={!(status === 'success')}
@@ -138,6 +109,14 @@ function FileList({
 			file_id    : 13,
 		},
 		{
+			file_name  : 'sagar',
+			file_url   : 'asas',
+			status     : 'WRONG_UPLOAD',
+			created_at : '',
+			id         : 3,
+			file_id    : 13,
+		},
+		{
 			file_name  : 'Bhargav',
 			file_url   : 'linssdsfdsfley',
 			status     : 'success',
@@ -149,6 +128,10 @@ function FileList({
 
 	const getNextPage = (newPage) => {
 		setParams({ ...params, page: newPage });
+	};
+
+	const onClose = () => {
+		setFileInfo({ fileName: null, fileId: null });
 	};
 
 	if (isEmpty(data1) && !loading) {
@@ -168,6 +151,7 @@ function FileList({
 	return (
 		<>
 			<StyledTable columns={columns} data={data1} loading={loading} />
+
 			<div className={styles.paginationDiv}>
 				{/* {data?.total_count > 10
 					? ( */}
@@ -180,10 +164,14 @@ function FileList({
 				/>
 				{/* ) : null} */}
 			</div>
-			{fileId && (
-				<Modal id={fileId} size="md" show={fileId} onClose={onClose} placement="top">
-					<Modal.Header title={fileName} />
-					<Modal.Body><FileData id={fileId} /></Modal.Body>
+
+			{fileInfo.fileId && (
+				<Modal id={fileInfo.fileId} size="md" show={fileInfo.fileId} onClose={onClose} placement="top">
+					<Modal.Header title={fileInfo.fileName} />
+
+					<Modal.Body>
+						<FileData id={fileInfo.fileId} />
+					</Modal.Body>
 				</Modal>
 			)}
 		</>

@@ -1667,15 +1667,9 @@ importers:
 
   packages/ihls:
     dependencies:
-      '@cogoport/charts':
-        specifier: ^1.0.2
-        version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
         version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/core':
-        specifier: workspace:*
-        version: link:../../common/core
       '@cogoport/forms':
         specifier: workspace:*
         version: link:../../common/forms
@@ -1706,9 +1700,6 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
-      react-rte:
-        specifier: ^0.16.5
-        version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
 
   packages/ingestion:
     dependencies:

@@ -5,26 +5,25 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
+import getConstants from '../../../config/getConstants';
 
 import styles from './style.module.css';
 
-const FILE_STATS_MAPPING = {
-	unique_leads_created_count     : 'Unique Leads Created',
-	leads_updated_count            : 'Leads Updated',
-	shipment_records_created_count : 'Shipment Records Created',
-	processed_records_count        : 'Processed Records',
-	not_processed_records_count    : 'Not Processed Records',
-};
+const columns = [
+	{ Header: '#', accessor: 'title' },
+	{ Header: 'Count', accessor: 'count' },
+];
 
 function FileData({ id = null }) {
 	const { profile = {} } = useSelector((state) => (state));
+	const { FILE_STATS_MAPPING } = getConstants();
 
-	const [{ data = [], loading = false }] = useRequest({
+	const [{ data = {}, loading = false }] = useRequest({
 		url    : '/feedback_requests',
 		method : 'get',
 		params : {
 			id,
-			user_id: profile?.user?.id || null,
+			user_id: profile.user.id,
 		},
 	}, { manual: false });
 
@@ -40,11 +39,6 @@ function FileData({ id = null }) {
 	Object.keys(DATA1).forEach((key) => {
 		DATA2.push({ title: FILE_STATS_MAPPING[key], count: DATA1[key] });
 	});
-
-	const columns = [
-		{ Header: '#', accessor: 'title' },
-		{ Header: 'Count', accessor: 'count' },
-	];
 
 	if (isEmpty(DATA1) && !loading) {
 		return (

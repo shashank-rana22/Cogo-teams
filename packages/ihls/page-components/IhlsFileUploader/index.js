@@ -7,12 +7,13 @@ import Header from './Header';
 
 function IhlsFileUploader() {
 	const { profile = {} } = useSelector((state) => (state));
+
 	const [params, setParams] = useState({
 		page      : 1,
 		per_page  : 10,
 		sort_by   : 'created_at',
 		sort_type : 'asc',
-		user_id   : profile?.user?.id || null,
+		user_id   : profile.user.id,
 	});
 
 	const [{ data = [], loading = false }, refetch] = useRequest({
@@ -20,9 +21,11 @@ function IhlsFileUploader() {
 		method : 'get',
 		params,
 	}, { manual: false });
+
 	return (
 		<div>
 			<Header refetch={refetch} />
+
 			<FileList params={params} setParams={setParams} data={data} loading={loading} />
 		</div>
 	);
