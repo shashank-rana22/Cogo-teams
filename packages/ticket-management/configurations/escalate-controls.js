@@ -6,10 +6,4 @@ export const escalateTicketsControls = [
 		placeholder    : 'Enter here...',
 		rules          : { required: true },
 	},
-	{
-		label          : 'Upload supporting document',
-		name           : 'file_url',
-		controllerType : 'uploader',
-		showOptional   : false,
-	},
 ];
