@@ -179,7 +179,7 @@ function useListChats({
 			messagesList      : sortedUnpinnedList || [],
 			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
-			flashMessagesList : filterAndSortFlashMessages(flashMessagesData) || [],
+			flashMessagesList : filterAndSortFlashMessages({ flashMessagesData }) || [],
 		},
 		setActiveMessage,
 		setAppliedFilters,
