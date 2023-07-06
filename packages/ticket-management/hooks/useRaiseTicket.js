@@ -21,7 +21,7 @@ const getPayload = ({
 	...additionalData,
 });
 
-const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
+const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -70,6 +70,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 				}),
 			});
 			Toast.success('Successfully Created');
+			setRefreshList();
 			setShowRaiseTicket(false);
 		} catch (error) {
 			console.error(error?.response?.data);
