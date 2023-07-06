@@ -12417,6 +12417,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_shipment_pending_tasks',
 			access_type  : 'private',
 			service_name : 'shipment',
