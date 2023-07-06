@@ -25,7 +25,9 @@
 
 .question_text {
 	max-width: 90%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+
+	img {
+		max-width: 100%;
+		height: 100%;
+	}
 }
