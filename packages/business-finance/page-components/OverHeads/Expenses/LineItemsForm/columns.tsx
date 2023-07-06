@@ -1,6 +1,8 @@
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 
+import styles from './styles.module.css';
+
 const lineItemColumns = ({
 	remove, control, taxOptions, formData,
 }) => {
@@ -42,7 +44,7 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '90px' }}>
+				<div style={{ width: '90px' }} className={styles.select}>
 					<SelectController
 						key={row?.id}
 						control={control}

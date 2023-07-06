@@ -32,7 +32,7 @@ interface Props {
 }
 
 const getMontOptions = (minMonth) => {
-	const date = new Date(minMonth);
+	const date = minMonth ? new Date(minMonth) : new Date();
 	const options = MONTH_OPTIONS.filter(
 		(option) => option.key > date.getMonth(),
 	);
@@ -42,8 +42,6 @@ const getMontOptions = (minMonth) => {
 export const nonRecurringExpenseDetails = ({
 	formData,
 	setFormData,
-	categoryOptions,
-	subCategoryOptions,
 	branchOptions,
 	entityList,
 	entityOptions,
@@ -88,7 +86,7 @@ export const nonRecurringExpenseDetails = ({
 				},
 				{
 					name                  : 'transactionDate',
-					label                 : 'Transaction Date',
+					label                 : 'Accounting Date',
 					type                  : 'datepicker',
 					isPreviousDaysAllowed : false,
 					span                  : 2.2,
@@ -139,15 +137,15 @@ export const nonRecurringExpenseDetails = ({
 					span        : 2.2,
 				},
 				{
-					name           : 'expenseCategory',
-					label          : 'Expense Category',
-					type           : 'select',
-					multiple       : false,
-					defaultOptions : false,
-					placeholder    : 'Category',
-					span           : 2.2,
-					className      : styles.select,
-					options        : categoryOptions,
+					name        : 'expenseCategory',
+					label       : 'Expense Category',
+					type        : 'asyncSelect',
+					asyncKey    : 'list_expense_category',
+					initialCall : true,
+					placeholder : 'Select a Category',
+					valueKey    : 'id',
+					span        : 2.2,
+					className   : styles.select,
 				},
 				{
 					name           : 'branch',

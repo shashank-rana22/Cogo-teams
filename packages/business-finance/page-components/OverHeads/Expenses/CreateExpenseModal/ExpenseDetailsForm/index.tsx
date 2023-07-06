@@ -129,7 +129,6 @@ function ExpenseDetailsForm({
 			&& entityObject
 			&& registrationNumber
 			&& expenseCategory
-			&& expenseSubCategory
 			&& branch
 			&& paymentMode;
 			if (nonRecurringValidated) {
@@ -142,7 +141,6 @@ function ExpenseDetailsForm({
 			const recurringValidated = vendorName
 			&& registrationNumber
 			&& expenseCategory
-			&& expenseSubCategory
 			&& entityObject
 			&& payableAmount
 			&& currency

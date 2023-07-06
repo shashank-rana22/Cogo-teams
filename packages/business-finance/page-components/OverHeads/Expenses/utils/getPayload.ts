@@ -45,7 +45,6 @@ const getPayload = ({
 	vendorCountryId,
 	vendorRegistrationNumber,
 	expenseCategory,
-	expenseSubCategory,
 	stakeholderEmail,
 	stakeholderId,
 	stakeholderName,
@@ -190,8 +189,7 @@ const getPayload = ({
 			createdBy           : profile?.user?.id,
 			performedByUserType : 'AGENT',
 		},
-		category       : expenseCategory?.toUpperCase(),
-		subCategory    : expenseSubCategory?.toUpperCase(),
+		category       : expenseCategory,
 		approvedByUser : {
 			userEmail : stakeholderEmail,
 			userId    : stakeholderId,

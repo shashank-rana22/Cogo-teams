@@ -109,3 +109,11 @@
 	max-height: 315px;
 	overflow: scroll;
 }
+
+.select {
+	:global {
+		.ui_select_options_container {
+			width: 220px;
+		}
+	}
+}

@@ -98,13 +98,6 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : '-',
 		},
 		{
-			title : 'Expense Sub-Category',
-			value : expenseSubCategory ? showOverflowingNumber(
-				startCase(expenseSubCategory.replaceAll('_', ' ')),
-				18,
-			) : '-',
-		},
-		{
 			title : 'Entity',
 			value : entityObject?.entity_code || '-',
 		},

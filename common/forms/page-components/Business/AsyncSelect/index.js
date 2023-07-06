@@ -44,6 +44,7 @@ import {
 	asyncListTests,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncListExpenseCategories,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -106,6 +107,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_tests                           : asyncListTests,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_expense_category                : asyncListExpenseCategories,
 };
 
 function AsyncSelect(props) {

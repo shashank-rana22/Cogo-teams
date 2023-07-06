@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useEffect, useState } from 'react';
 
+import { MONTH_OPTIONS } from '../../constants/MONTH_OPTIONS';
 import Timeline from '../Timeline';
 
 import CreateExpenseForm from './CreateExpenseForm';
@@ -16,6 +17,14 @@ interface Props {
 	setShowWarning?:(p:any)=>void,
 }
 
+const getMontOptions = (minMonth) => {
+	const date = minMonth ? new Date(minMonth) : new Date();
+	const options = MONTH_OPTIONS.filter(
+		(option) => option.key > date.getMonth(),
+	);
+	return options;
+};
+
 function CreateExpenseModal({
 	setShowModal,
 	showModal = false,
@@ -29,7 +38,10 @@ function CreateExpenseModal({
 		repeatEvery: 'week',
 	});
 	const [timeline, setTimeline] = useState(['Expense Details', 'Upload Invoice', 'Final Confirmation']);
-	const [nonRecurringData, setNonRecurringData] = useState({});
+	const [nonRecurringData, setNonRecurringData] = useState({
+		transactionDate     : new Date(),
+		periodOfTransaction : getMontOptions(new Date())?.[0]?.value,
+	});
 	const [active, setActive] = useState('Expense Details');
 	const [isFormValidated, setIsFormValidated] = useState(false);
 

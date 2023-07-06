@@ -1,5 +1,4 @@
 import officeLocations from '../../../../utils/office-locations.json';
-import categoryOptions from '../../../utils/category-options';
 
 const controls = [
 	{
@@ -13,9 +12,11 @@ const controls = [
 			{
 				name        : 'category',
 				label       : 'Select Category',
-				type        : 'select',
+				type        : 'asyncSelect',
+				asyncKey    : 'list_expense_category',
+				initialCall : true,
 				placeholder : 'Select a Category',
-				options     : categoryOptions,
+				valueKey    : 'categoryName',
 				style       : { flexBasis: '30%' },
 				rules       : { required: 'Category is required' },
 			},
