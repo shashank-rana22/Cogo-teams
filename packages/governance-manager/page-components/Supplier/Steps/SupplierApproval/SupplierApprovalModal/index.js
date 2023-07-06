@@ -1,14 +1,16 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Textarea } from '@cogoport/components';
 
-function SupplierApprovalModal({ open, setOpen, verify, setVerify, index }) {
+import styles from './styles.module.css';
+
+function SupplierApprovalModal({ open, setOpen, setVerify }) {
 	const onClose = () => {
-		setOpen(false);
+		setOpen(0);
 	};
 	const handleVerify = () => {
 		setVerify((verify) => {
 			const newVerify = [...verify];
 
-			newVerify[index] = true;
+			newVerify[open - 1] = true;
 			return newVerify;
 		});
 		onClose();
@@ -17,7 +19,7 @@ function SupplierApprovalModal({ open, setOpen, verify, setVerify, index }) {
 		setVerify((verify) => {
 			const newVerify = [...verify];
 
-			newVerify[index] = false;
+			newVerify[open - 1] = false;
 			return newVerify;
 		});
 		onClose();
@@ -26,12 +28,21 @@ function SupplierApprovalModal({ open, setOpen, verify, setVerify, index }) {
 		<div style={{ padding: '20px' }}>
 
 			<Modal size="md" show={open} onClose={() => { onClose(); }} placement="centre">
-				<Modal.Header title="Are you sure?" />
-				<Modal.Body>
-					e
+				<Modal.Header title="Supplier Approval" className={styles.header} />
+				<div className={styles.header} />
+				<Modal.Body className={styles.body}>
+					<div className={styles.text_middle}>Need Analysis Report</div>
+					<Textarea
+						name="a4"
+						size="md"
+						defaultValue=""
+						placeholder=""
+						rows={4}
+						style={{ height: '75%', marginBottom: '34px' }}
+					/>
 				</Modal.Body>
-				<Modal.Footer style={{ gap: '10px' }}>
-					<Button onClick={handleVerify}>Verify</Button>
+				<Modal.Footer style={{ gap: '15px' }}>
+					<Button onClick={handleVerify} style={{ backgroundColor: '#ABCD62' }}>Verify</Button>
 					<Button onClick={handleReject}>Reject</Button>
 				</Modal.Footer>
 			</Modal>
