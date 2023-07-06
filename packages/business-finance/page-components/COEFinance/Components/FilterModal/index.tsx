@@ -50,9 +50,9 @@ function FilterModal({ filters, setFilters }: Props) {
 	};
 	const handleRemoveCurrency = (item) =>	{
 		const currencyList = [...(filters?.currency || [])];
-		currencyList.splice(item, 1);
+		const newList = currencyList?.filter((currency) => currency !== item);
 		setFilters(() => ({
-			currency: currencyList,
+			currency: newList,
 		}));
 	};
 
