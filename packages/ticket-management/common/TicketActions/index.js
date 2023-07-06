@@ -34,11 +34,11 @@ function getActionType({ status, isClosureAuthorizer }) {
 	return [];
 }
 
-function RenderContent({ filteredActions, isModal, handleAction, IsCurrentReviewer }) {
+function RenderContent({ filteredActions, isModal, handleAction, isCurrentReviewer }) {
 	return (
 		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
 			{filteredActions.map((item) => {
-				if (!IsCurrentReviewer && item === 'escalate') { return null; }
+				if (!isCurrentReviewer && item === 'escalate') { return null; }
 
 				return (
 					<Button
@@ -63,7 +63,7 @@ function TicketActions({
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
 	isClosureAuthorizer,
-	IsCurrentReviewer,
+	isCurrentReviewer,
 }) {
 	const actionMappings = getActionType({ status, isClosureAuthorizer });
 
@@ -80,15 +80,6 @@ function TicketActions({
 		return action ? action(props) : handleTicket(e, { actionType: item });
 	};
 
-	const buttonComponent = (
-		<RenderContent
-			isModal={isModal}
-			handleAction={handleAction}
-			filteredActions={filteredActions}
-			IsCurrentReviewer={IsCurrentReviewer}
-		/>
-	);
-
 	if (isEmpty(filteredActions)) { return null; }
 
 	return (
@@ -97,12 +88,26 @@ function TicketActions({
 				<Popover
 					placement="bottom"
 					caret={false}
-					render={buttonComponent}
+					render={(
+						<RenderContent
+							isModal={isModal}
+							handleAction={handleAction}
+							filteredActions={filteredActions}
+							isCurrentReviewer={isCurrentReviewer}
+						/>
+					)}
 				>
 					<div><IcMCenterAlign className={styles.hamburger} /></div>
 				</Popover>
 			)
-				: buttonComponent}
+				: (
+					<RenderContent
+						isModal={isModal}
+						handleAction={handleAction}
+						filteredActions={filteredActions}
+						isCurrentReviewer={isCurrentReviewer}
+					/>
+				)}
 
 		</div>
 	);

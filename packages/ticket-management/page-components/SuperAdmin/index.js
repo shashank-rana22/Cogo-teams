@@ -7,7 +7,7 @@ import FilterTicketsSection from '../../common/FilterTicketsSection';
 import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
-const NO_OF_DAYS_WEEK = 7;
+const SUBTRACT_DAYS = 7;
 
 function SuperAdmin() {
 	const [activeTab, setActiveTab] = useState('dashboard');
@@ -18,7 +18,7 @@ function SuperAdmin() {
 		Closed    : false,
 	});
 	const [date, setDate] = useState({
-		startDate : subtractDays(new Date(), NO_OF_DAYS_WEEK),
+		startDate : subtractDays(new Date(), SUBTRACT_DAYS),
 		endate    : new Date(),
 	});
 

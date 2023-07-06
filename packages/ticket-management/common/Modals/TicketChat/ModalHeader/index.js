@@ -11,7 +11,7 @@ function ModalHeader({
 	setShowEscalate = () => {},
 	updateTicketActivity = () => {},
 }) {
-	const { Ticket = {}, isClosureAuthorizer = '', IsCurrentReviewer = '' } = ticketData || {};
+	const { Ticket = {}, isClosureAuthorizer = '', IsCurrentReviewer: isCurrentReviewer = '' } = ticketData || {};
 	const { ID: id = '', Status: status = '' } = Ticket || {};
 
 	const handleTicket = (e, { actionType }) => {
@@ -31,7 +31,7 @@ function ModalHeader({
 				handleTicket={handleTicket}
 				setShowReassign={setShowReassign}
 				setShowEscalate={setShowEscalate}
-				IsCurrentReviewer={IsCurrentReviewer}
+				isCurrentReviewer={isCurrentReviewer}
 				isClosureAuthorizer={isClosureAuthorizer}
 			/>
 		</div>
