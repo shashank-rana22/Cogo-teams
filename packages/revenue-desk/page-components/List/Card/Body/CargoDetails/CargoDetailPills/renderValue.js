@@ -10,8 +10,6 @@ import {
 	VALUE_ZERO,
 } from '../../../../../constants';
 
-import styles from './styles.module.css';
-
 const KEY_MAP = {
 	revert_count                            : 'revertCount',
 	container_size                          : 'containerSize',
@@ -71,6 +69,7 @@ const KEY_MAP = {
 	hs_code                                 : 'hsCode',
 	delivery_date                           : 'deliveryDate',
 	container_load_type                     : 'containerLoadType',
+	trip_type                               : 'tripType',
 };
 
 const details = {
@@ -130,7 +129,8 @@ const details = {
 							</div>
 						)}
 					>
-						<div className={styles.CountOfTruckTypes}>
+						{/* <div className={styles.CountOfTruckTypes}> */}
+						<div>
 							{`+ ${
 								(detail?.truck_types?.length || VALUE_ONE) - DECREMENT_BY_ONE
 							} more`}
@@ -156,7 +156,8 @@ const details = {
 					placement="bottom"
 					theme="light"
 					content={(
-						<div className={styles.CommodityContainer}>
+						// <div className={styles.CommodityContainer}>
+						<div>
 							{(commodityDataDetails?.commodity_type
 								|| detail?.commodity_type) && (
 									<div>
@@ -447,6 +448,9 @@ const details = {
 
 	containerLoadType({ detail }) {
 		return startCase(detail?.container_load_type);
+	},
+	tripType({ detail }) {
+		return startCase(detail?.trip_type);
 	},
 };
 

@@ -1,81 +1,85 @@
-.header{
-    display: flex;
-    background-color: #fff;
-    padding: 5px 12px;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: fit-content;
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: fit-content;
+	padding: 5px 12px;
+	background-color: #fff;
 }
 
-.subheader_section{
-    display: flex;
-    border-right: 1px solid #E0E0E0;
-    align-items: center;
-    padding: 12px;
-    border-left:1px solid #E0E0E0 ;
+.subheader_section {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	border-right: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
 }
 
-.wallet_container{
-    display: flex;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    padding: 5px 12px;
-    border: 1px solid #C4DC91;
-    border-radius: 4px;
-    background-color: #F7FAEF;
-    align-items: center;
-    margin-right: 12px;
+.wallet_container {
+	display: flex;
+	align-items: center;
+	padding: 5px 12px;
+	margin-right: 12px;
+	background-color: #f7faef;
+	border: 1px solid #c4dc91;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-
-.Detail_page{
-    margin: -24px -20px;
-}
-.subheader_container{
-    display: flex;
-    justify-content: space-around;
-}
-.port_pair_container{
-    display: flex;
-    align-items: center;
-    padding:0 30px;
-    gap:10px;
-    width:700px
+.Detail_page {
+	margin: -24px -20px;
 }
 
-.text{
-    font-weight: 600;
-    font-size: 14px;
-    color: #4F4F4F;
-    margin-left: 7px;
+.subheader_container {
+	display: flex;
+	justify-content: space-around;
 }
 
-.origin_location_container,.destination_location_container{
-    font-weight: 600;
-    font-size: 16px;
-    color: #221F20;
+.port_pair_container {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	width: 700px;
+	padding: 0 30px;
 }
 
-.price_text{
-    font-weight: 700;
-    font-size: 14px;
-    color: #4F4F4F;
+.text {
+	margin-left: 7px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
-.wallet_text{
-    font-weight: 500;
-    font-size: 12px;
-    color: #434343;
+.origin_location_container,
+.destination_location_container {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
 }
 
-.text_container{
-    margin-left: 15px;
+.price_text {
+	font-size: 14px;
+	font-weight: 700;
+	color: #4f4f4f;
 }
 
-.card{
-    margin: 22px;
+.wallet_text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #434343;
 }
+
+.text_container {
+	margin-left: 15px;
+}
+
+.card {
+	margin: 22px;
+}
+
 .heading {
+	position: relative;
 	display: flex;
 	align-items: center;
 	margin: 16px 20px 16px 10px;
@@ -84,7 +88,6 @@
 	font-weight: 500;
 	line-height: 23px;
 	color: #221f20;
-    position: relative;
 
 	&:hover {
 		font-style: normal;
@@ -97,38 +100,38 @@
 	}
 }
 
-.tabs_container{
-    background-color: #fff;
-    margin:16px;
-    padding: 24px 24px 0;
+.tabs_container {
+	padding: 24px 24px 0;
+	margin: 16px;
+	background-color: #fff;
 }
 
-.show_detail_tab{
-    background: #FDFBF6;
-    border-radius: 0px 0px 4px 4px;
-    display: flex;
-    justify-content: center;
-    margin:0 16px;
-    padding: 5px 0;
-    font-weight: 600;
-    font-size: 12px;
-    align-items: center;
-    color: #221F20;
-    cursor: pointer;
-    margin:10px -24px 0;
+.show_detail_tab {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 0;
+	margin: 0 16px;
+	margin: 10px -24px 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
+	background: #fdfbf6;
+	border-radius: 0 0 4px 4px;
 }
 
-.header_container{
-    font-weight: bold;
+.header_container {
+	font-weight: bold;
 }
 
-.custom_pill{
-    display: flex;
-    align-items: center;
-    background:#e3f1c5;
-    border-radius: 4px;
-    width: fit-content;
-    padding: 4px 8px;
-    cursor: pointer;
-    margin: 12px 0px -12px 0px;
+.custom_pill {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 4px 8px;
+	margin: 12px 0 -12px;
+	cursor: pointer;
+	background: #e3f1c5;
+	border-radius: 4px;
 }

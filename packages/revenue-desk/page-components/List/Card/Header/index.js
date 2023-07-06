@@ -31,13 +31,13 @@ function Header({ data }) {
 					</Pill>
 				</div>
 				<div className={styles.pills_container}>
-					<Pill size="md" color="#F2F3FA">
-						<div style={{ color: '#7278AD' }}>
-							{startCase(data?.trade_type)
-							|| startCase(incoTermMapping[data?.inco_term])}
-
-						</div>
-					</Pill>
+					{data?.trade_type && (
+						<Pill size="md" color="#F2F3FA">
+							<div style={{ color: '#7278AD' }}>
+								{startCase(data?.trade_type) || startCase(incoTermMapping[data?.inco_term])}
+							</div>
+						</Pill>
+					)}
 					<Pill size="md" color="#F7FAEF">
 						<div style={{ color: '#849E4C' }}>
 							{data?.source === 'direct'

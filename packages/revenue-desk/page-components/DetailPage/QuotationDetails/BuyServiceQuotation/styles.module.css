@@ -1,58 +1,59 @@
-.table_container{
-    font-size: 20px;
-    width:40vw;
+.table_container {
+	width: 40vw;
+	font-size: 20px;
 
-    :global{
-        .ui_table_head_cell{
-            font-weight: 600;
-            font-size: 14px;
-            color: #4F4F4F;
-            padding: 10px 14px;
-        }
-        .ui_table_body_cell{
-            font-size: 14px !important;
-            font-weight: 500;
-            padding: 16px 14px;
-        }
+	:global {
+		.ui_table_head_cell {
+			padding: 10px 14px;
+			font-size: 14px;
+			font-weight: 600;
+			color: #4f4f4f;
+		}
 
-        .ui_table_container{
-            padding: 0 !important;
-        }
-    }
+		.ui_table_body_cell {
+			padding: 16px 14px;
+			font-size: 14px !important;
+			font-weight: 500;
+		}
+
+		.ui_table_container {
+			padding: 0 !important;
+		}
+	}
 }
 
-.text2{
-    font-weight: 600;
-    font-size: 16px;
-    color: #EE3425;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.container{
-    display: flex;
-    justify-content: space-between;
+.text2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #ee3425;
 }
 
-
-.postive_container{
-    font-weight: 600;
-    font-size: 16px;
-    color: #849E4C;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container {
+	display: flex;
+	justify-content: space-between;
 }
 
-.negative_container{
-    font-weight: 600;
-    font-size: 16px;
-    color: #EE3425;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;  
+.postive_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.negative_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #ee3425;
 }

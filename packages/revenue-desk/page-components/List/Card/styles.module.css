@@ -1,9 +1,9 @@
-.container{
-    background-color: #fff;
-    border-radius: 8px;
-    margin: 6px 4px 6px 24px;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    cursor: pointer;
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	margin: 6px 4px 6px 24px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 8px;
 }

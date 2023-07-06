@@ -1,80 +1,85 @@
-.container{
-    box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.15);
-    border-radius: 4px;
-    background: #FFFFFF;
-    margin-top: 40px;
-    margin-bottom: 10px;
+.container {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(51 51 51 / 15%);
 }
 
-.header_section{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
+.header_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 18px 20px;
 }
 
-.header_right_section{
-    display: flex;
-    align-items: center;
-}
-.loading_right_section{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.loading_section{
-    display: flex;
-    align-items: center;
-}
-.header_left_section{
-    display: flex;
-    align-items: center;
+.header_right_section {
+	display: flex;
+	align-items: center;
 }
 
-.sid_section{
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-.body_section{
-    border-top: 1px dashed #BDBDBD;;
-    display: flex;
-    align-items: center;
-    border-bottom:  1px dashed #E0E0E0;
+.loading_right_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.body_left_section{
-    padding: 18px 20px;
-    flex:1;
-    border-right: 1px dashed #E0E0E0;
+.loading_section {
+	display: flex;
+	align-items: center;
 }
 
-.body_right_section{
-    width:40vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 18px 20px;
-    font-weight: 400;
-    font-size: 14px;
-    color: #4F4F4F;
+.header_left_section {
+	display: flex;
+	align-items: center;
 }
 
-.text{
-    font-weight: 600;
-    font-size: 14px;
-    color: #4F4F4F;
-    margin-left: 5px;
-    margin-right: 8px;
-}
-.date_text{
-    font-weight: 500;
-    font-size: 12px;
-    color: #828282;
+.sid_section {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
 }
 
-.service_provider_text{
-    font-weight: 600;
-    font-size: 18px;
-    color: #221F20;
+.body_section {
+	display: flex;
+	align-items: center;
+	border-top: 1px dashed #bdbdbd;
+	border-bottom: 1px dashed #e0e0e0;
+}
+
+.body_left_section {
+	flex: 1;
+	padding: 18px 20px;
+	border-right: 1px dashed #e0e0e0;
+}
+
+.body_right_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 40vw;
+	padding: 18px 20px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.text {
+	margin-right: 8px;
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.date_text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.service_provider_text {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
 }

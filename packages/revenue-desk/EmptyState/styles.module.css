@@ -7,7 +7,7 @@
 	margin: auto;
 }
 
-.small_container{
+.small_container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -16,10 +16,10 @@
 	margin: auto;
 }
 
-.heading{
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 20px;
 	font-weight: 500;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }

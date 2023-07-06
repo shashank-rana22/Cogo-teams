@@ -18,9 +18,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			active_booking                    : element?.ongoing_shipment,
 			allocation_ratio                  : undefined,
 			price                             : Number(validities?.total_price) / Number(container_count),
-			fulfillment_ratio_2               : element?.fulfillment_ratio_2,
-			fulfillment_ratio_7               : element?.fulfillment_ratio_7,
-			fulfillment_ratio_15              : element?.fulfillment_ratio_15,
 			agent                             : element?.procured_by?.name,
 			total_price                       : validities?.total_price || DEFAULT_VALUE,
 			currency                          : validities?.currency,
@@ -49,6 +46,14 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 				? element?.destination_main_port_id : null,
 			origin_main_port_id: element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 				? element?.origin_main_port_id : null,
+			fulfillment_ratio_2: data?.fulfillment_data?.fulfillment_ratio_2
+										|| data?.fulfillment_ratio_2,
+			fulfillment_ratio_7: data?.fulfillment_data?.fulfillment_ratio_7
+													|| data?.fulfillment_ratio_7,
+			fulfillment_ratio_15: data?.fulfillment_data?.fulfillment_ratio_15
+													|| data?.fulfillment_ratio_15,
+			fulfillment_ratio_30: data?.fulfillment_data?.fulfillment_ratio_30
+													|| data?.fulfillment_ratio_30,
 		};
 		row.rowData = rowData;
 		ROWS.push(row);

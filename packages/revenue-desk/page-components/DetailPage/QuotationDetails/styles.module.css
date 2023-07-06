@@ -1,6 +1,6 @@
-.container{
-    display: flex;
-    background-color: #fff;
-    justify-content: space-between;
-    padding: 16px 10px 0;
+.container {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 10px 0;
+	background-color: #fff;
 }
