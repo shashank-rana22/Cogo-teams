@@ -26,27 +26,27 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	} = journeyData || {};
 
 	const getCircleData = [
-		{
-			number : draftInvoicesCount || 0,
-			label  : 'Draft',
-		},
-		{ number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
-		{ number: irnGeneratedInvoicesCount || 0, label: 'IRN Generated' },
-		{ number: settledInvoicesCount || 0, label: 'Settled' },
+		{ id: 1, number: draftInvoicesCount || 0, label: 'Draft' },
+		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: 'Finance Accepted' },
+		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: 'IRN Generated' },
+		{ id: 4, number: settledInvoicesCount || 0, label: 'Settled' },
 	];
 
 	const getTatData = [
 		{
+			id    : 1,
 			label : 'Draft - Finance Accepted',
 			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} Hours `,
 			Count : financeAcceptedInvoiceEventCount || 0,
 		},
 		{
+			id    : 2,
 			label : 'Finance Accepted - IRN Generated',
 			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} Hours `,
 			Count : irnGeneratedInvoiceEventCount || 0,
 		},
 		{
+			id    : 3,
 			label : 'IRN Generated - Settled ',
 			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} Hours `,
 			Count : settledInvoiceEventCount || 0,
@@ -89,9 +89,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_journey_loader}>
 
-							{	[1, 2, 3, 4].map((val) => (
+							{	[1, 2, 3, 4].map((item) => (
 
-								<Placeholder key={val} className={styles.invoice_loader} />
+								<Placeholder key={item} className={styles.invoice_loader} />
 
 							))}
 
@@ -103,7 +103,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 						<div className={styles.sub_container}>
 
 							{ getCircleData.map((item) => (
-								<div key={item.number} className={styles.column_flex}>
+								<div key={item.id} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
 									</div>
@@ -143,9 +143,9 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_tat_loader}>
 
-							{	[1, 2, 3].map((val) => (
+							{	[1, 2, 3].map((item) => (
 
-								<Placeholder key={val} className={styles.invoice_tat_placeholder} />
+								<Placeholder key={item} className={styles.invoice_tat_placeholder} />
 
 							))}
 
@@ -156,7 +156,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_tat_container}>
 							{getTatData.map((item) => (
-								<div key={item.Count} className={styles.tat_data}>
+								<div key={item.id} className={styles.tat_data}>
 									<div className={styles.text_padding}>{item?.label}</div>
 									<div className={styles.tat_flex}>
 										<div className={styles.border_tat} />
