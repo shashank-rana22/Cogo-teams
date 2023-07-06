@@ -1,5 +1,5 @@
 module.exports = {
-	extends : ['@cogoport/eslint-config/custom-rules'],
+	extends : ['@cogoport/eslint-config/custom-eslint-rules'],
 	rules   : {
 		'react/no-danger' : 'off',
 		'react/jsx-key'   : 'error',

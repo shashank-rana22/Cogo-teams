@@ -14,8 +14,7 @@ function Dashboard() {
 		company_policy_data_required: true,
 	});
 
-	const { detail } = data || {};
-	const { name } = detail || {};
+	const { name } = data?.detail || {};
 
 	return (
 		<div className={styles.container}>
