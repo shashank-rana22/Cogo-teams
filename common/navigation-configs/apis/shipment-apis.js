@@ -1584,7 +1584,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_min_max_validity_dates',
+		api          : 'get_ftl_freight_rate_min_max_validity_dates',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
