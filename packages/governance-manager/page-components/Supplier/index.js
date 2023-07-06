@@ -1,6 +1,8 @@
 import { Stepper } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import useGetOrganizationService from '../hooks/useGetOrganizationService';
 import Item from '../ListSupplier/Item';
 
 import MarketFeedback from './Steps/MarketFeedback';
@@ -20,10 +22,15 @@ function Supplier() {
 
 	];
 	const [status, setStatus] = useState('need_analysis');
+
+	const { query } = useRouter();
+	const { id } = query;
+	const { data: supplierData, loading } = useGetOrganizationService({ id });
+
 	return (
 		<div>
 			<h2>Governance Manager</h2>
-			<Item isSupplierPage />
+			<Item isSupplierPage item={supplierData} />
 			<Stepper
 				active={status}
 				setActive={setStatus}
@@ -32,7 +39,11 @@ function Supplier() {
 				className={styles.stepper}
 			/>
 			{{
-				need_analysis       : <NeedAnalysis setStatus={setStatus} />,
+				need_analysis: <NeedAnalysis
+					setStatus={setStatus}
+					organization_id={supplierData?.organization_id}
+					id={id}
+				/>,
 				market_feedback     : <MarketFeedback setStatus={setStatus} />,
 				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
 				supplier_approval   : <SupplierApproval setStatus={setStatus} />,

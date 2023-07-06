@@ -8,7 +8,7 @@ function Item({ isSupplierPage = false, item }) {
 	const navigate = () => {
 		push(
 			'/governance-manager/[id]',
-			'/governance-manager/abcd',
+			`/governance-manager/${item?.id}`,
 		);
 	};
 	const goBack = () => {

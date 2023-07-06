@@ -1,10 +1,17 @@
 import { Button, Pill, Table } from '@cogoport/components';
 import { useState } from 'react';
 
+import useGetOrganizationServiceExpertises from '../../../hooks/useGetOrganizationServiceExpertises';
+
 import EvaluateModal from './EvaluateModal';
 import styles from './styles.module.css';
 
-function NeedAnalysis({ setStatus }) {
+function NeedAnalysis({ setStatus, organization_id, id }) {
+	const {
+		data:serviceExpertiseData,
+		loading:loadingSE,
+	} = useGetOrganizationServiceExpertises({ organization_id, service_id: id });
+
 	const [show, setShow] = useState(false);
 
 	const columns = [
@@ -61,7 +68,10 @@ function NeedAnalysis({ setStatus }) {
 
 	return (
 		<>
-			<Table columns={columns} data={data} className={styles.table} />
+			{
+			!loadingSE
+			&& <Table columns={columns} data={data} className={styles.table} />
+		}
 			<div className={styles.submit_btn}>
 				<Button onClick={() => setStatus('market_feedback')}>
 					Submit & Next

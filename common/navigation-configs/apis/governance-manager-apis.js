@@ -4,5 +4,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'list_organization_service_expertises',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 export default apis;
