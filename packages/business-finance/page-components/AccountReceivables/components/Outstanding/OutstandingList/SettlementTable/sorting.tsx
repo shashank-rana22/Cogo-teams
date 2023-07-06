@@ -14,11 +14,11 @@ interface Props {
 	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
 }
 function GetSortingData({
-	settlementFilters,
-	setSettlementFilters,
-	setSort,
-	type,
-	sort,
+	settlementFilters = {},
+	setSettlementFilters = () => {},
+	setSort = () => {},
+	type = '',
+	sort = {},
 }:Props) {
 	const { sortType = '', sortBy = '' } = sort || {};
 

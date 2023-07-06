@@ -16,7 +16,7 @@ interface Props {
 	entityCode?: string
 }
 
-function SettlementTable({ organizationId, entityCode }: Props) {
+function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 	const {
 		singleData,
 		singleListLoading,
