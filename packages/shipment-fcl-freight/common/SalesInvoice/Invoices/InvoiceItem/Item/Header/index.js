@@ -57,7 +57,7 @@ function Header({
 
 					{invoice?.exchange_rate_state ? (
 						<div className={styles.invoice_rate}>
-							{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
+							{`Applied At State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
 								? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
 						</div>
 					) : null}
