@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsData }) => {
-	const { id, reason } = itemData || {};
+	const { id, risk_reason } = itemData || {};
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'update_shipment_risk_assessment',
 		method : 'post',
@@ -15,7 +15,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 			await trigger({
 				params: {
 					shipment_id      : id,
-					risk_sub_reasons : reason,
+					risk_sub_reasons : risk_reason,
 					resolved_remark  : remarks,
 				},
 			});
@@ -25,7 +25,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 		} catch (e) {
 			Toast.error(e?.response?.data?.id[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	}), [trigger, id, reason, remarks, getDashboardData, getDahboardStatsData]);
+	}), [trigger, id, risk_reason, remarks, getDashboardData, getDahboardStatsData]);
 
 	return {
 
