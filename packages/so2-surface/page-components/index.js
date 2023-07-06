@@ -5,6 +5,10 @@ import DashboardContext from '../context/DashboardContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
 import FTL from './FTL';
+import Filters from './FTL/Filters';
+import StepperTabs from './FTL/StepperTabs';
+import RAIL from './RAIL';
+import styles from './styles.module.css';
 
 export default function SO2Surface() {
 	const defaultValues = getLocalStorageVal();
@@ -32,9 +36,24 @@ export default function SO2Surface() {
 		setStepperTab,
 	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange, stepperTab, setStepperTab]);
 
+	const getTabComponent = () => {
+		switch (stepperTab) {
+			case 'ftl_freight': return <FTL key={stepperTab} />;
+			case 'rail_domestic_freight': return <RAIL key={stepperTab} />;
+			default: return <FTL />;
+		}
+	};
+
 	return (
 		<DashboardContext.Provider value={contextValues}>
-			{activeTab ? <FTL stepperTab={stepperTab} /> : null}
+			<div>
+				<div className={styles.header}>
+					<h1>SO2 Dashboard - Surface</h1>
+					<Filters />
+				</div>
+				<StepperTabs />
+				{getTabComponent()}
+			</div>
 		</DashboardContext.Provider>
 	);
 }

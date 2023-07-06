@@ -13,7 +13,7 @@ function EstimatedDates({ data = {} }) {
 		estimated_departure = '',
 		pickup_date = '',
 		delivery_date = '',
-	} =	 data.ftl_freight_services[GLOBAL_CONSTANTS.zeroth_index] || {};
+	} =	 data.ftl_freight_services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return (
 		<div>
 			<div className={styles.container}>

@@ -76,7 +76,7 @@ export default function Card({
 
 			</div>
 			{!INVOICE_TYPES.includes(activeTab)
-				? (item?.pending_tasks.map((task) => (
+				? (item?.pending_tasks?.map((task) => (
 					<PendingDocs item={task} key={task.id} clickCard={clickCard} />
 				))) : null}
 		</div>

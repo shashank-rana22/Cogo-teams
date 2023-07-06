@@ -4,6 +4,9 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const MAX_ROWS = 2;
+const DEFAULT_BANK_DETAIL_INDEX = 0;
+
 const PURCHASE_TYPE_LIST = [
 	{
 		label : 'Purchase',
@@ -51,15 +54,7 @@ function List({ data, limit }) {
 					</div>
 				))}
 			>
-				<div
-					style={{
-						marginRight  : '10px',
-						textOverflow : 'ellipsis',
-						whiteSpace   : 'nowrap',
-						overflow     : 'hidden',
-						width        : '220px',
-					}}
-				>
+				<div className={styles.service_types}>
 					{(servicesKeys || []).map((item) => (
 						<span key={item}>
 							{startCase(item)}
@@ -69,21 +64,15 @@ function List({ data, limit }) {
 						</span>
 					))}
 				</div>
-
 			</Tooltip>
 		);
 	};
 
 	const purchaseType = (item) => {
-		let displayType = 'Purchase';
-		PURCHASE_TYPE_LIST.forEach((val) => {
-			if (val?.value === item?.invoice_type) {
-				displayType = val?.label;
-			}
-		});
+		const label = PURCHASE_TYPE_LIST.find((val) => val?.value === item?.invoice_type)?.label;
+		const displayType = label || 'Purchase';
 
 		if (item?.status === 'init') return `${displayType} Uploaded`;
-
 		if (item?.status === 'coe_approved' && item?.utr_nos?.length) { return `${displayType} Payment Processed`; }
 		if (item?.status === 'coe_approved') { return `${displayType} Pending For Payment`; }
 
@@ -92,7 +81,7 @@ function List({ data, limit }) {
 	return (
 		<div className={styles.table}>
 			{(data || []).map((item, index) => {
-				if (limit && index > 2) {
+				if (limit && index > MAX_ROWS) {
 					return null;
 				}
 
@@ -101,11 +90,9 @@ function List({ data, limit }) {
 						<div
 							className={styles.column}
 							style={{
-								width: '20%',
+								width: '15%',
 							}}
 						>
-							Invoice Uploaded: &nbsp;
-
 							<Tooltip
 								content={item?.invoice_no}
 							>
@@ -113,16 +100,7 @@ function List({ data, limit }) {
 									href={item?.invoice_url}
 									target="_blank"
 									rel="noreferrer"
-									style={{
-										cursor         : 'pointer',
-										color          : '#0000EE',
-										textDecoration : 'underline',
-										textOverflow   : 'ellipsis',
-										whiteSpace     : 'nowrap',
-										overflow       : 'hidden',
-										width          : '80px',
-										display        : 'block',
-									}}
+									className={styles.invoice_url}
 								>
 									{item?.invoice_no}
 								</a>
@@ -131,26 +109,22 @@ function List({ data, limit }) {
 						<div className={styles.column} style={{ width: '20%' }}>
 							{handleLineItemsMapping(item)}
 						</div>
-						<div className={styles.column} style={{ width: '25%' }}>
+						<div className={styles.column} style={{ width: '20%' }}>
 							<Tooltip
 								content={(
 									<div>
-										<span>{item?.bank_details?.[0]?.bank_name}</span>
+										<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_name}</span>
 										{' - A/C '}
-										<span>{item?.bank_details?.[0]?.bank_account_number}</span>
+										<span>
+											{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_account_number}
+										</span>
 									</div>
 								)}
 							>
-								<div style={{
-									textOverflow : 'ellipsis',
-									whiteSpace   : 'nowrap',
-									overflow     : 'hidden',
-									width        : '290px',
-								}}
-								>
-									<span>{item?.bank_details?.[0]?.bank_name}</span>
+								<div className={styles.bank_details}>
+									<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_name}</span>
 									{' - A/C '}
-									<span>{item?.bank_details?.[0]?.bank_account_number}</span>
+									<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_account_number}</span>
 								</div>
 							</Tooltip>
 						</div>
@@ -158,7 +132,8 @@ function List({ data, limit }) {
 							<Tooltip
 								content={(
 									<div>
-										Invoice Total:
+										Invoice Total :
+										{' '}
 										{formatAmount({
 											amount   : item?.invoice_total,
 											currency : item?.invoice_currency,
@@ -173,7 +148,8 @@ function List({ data, limit }) {
 								)}
 							>
 								<div>
-									Invoice Total:
+									Invoice Total :
+									{' '}
 									{formatAmount({
 										amount   : item?.invoice_total,
 										currency : item?.invoice_currency,
@@ -191,7 +167,7 @@ function List({ data, limit }) {
 						<div className={styles.column} style={{ width: '10%' }}>
 							<Button themeType="linkUi">View Detail</Button>
 						</div>
-						<div className={styles.column} style={{ width: '10%' }}>
+						<div className={styles.column} style={{ width: '20%' }}>
 							{item?.status === 'coe_rejected' ? (
 								<Tooltip
 									content={<p>{(item.remarks || []).join(' , ')}</p>}

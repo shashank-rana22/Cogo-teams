@@ -17,6 +17,8 @@
 .dropdown_inner{
 	display: flex;
 	align-items: center;
+	font-size: 12px;
+	padding-block: 2px;
 
 	& > div {
 		margin-right: 10px;

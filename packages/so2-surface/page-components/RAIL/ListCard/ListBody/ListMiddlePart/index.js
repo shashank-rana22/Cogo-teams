@@ -24,7 +24,7 @@ function ListMiddlePart({ item = {} }) {
 				>
 					<div>{item?.origin_location?.display_name || '-'}</div>
 				</Tooltip>
-				<div>
+				<div className={styles.arrow}>
 					<IcMPortArrow />
 				</div>
 				<Tooltip

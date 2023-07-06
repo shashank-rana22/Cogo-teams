@@ -1,25 +1,28 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import Loader from '../../common/Loader';
+import DashboardContext from '../../context/DashboardContext';
+import useListDocumentDesk from '../../hooks/useListDocumentDesk';
+import DeskTabs from '../FTL/DeskTabs';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-const INITIAL_PAGE = 1;
-const TOTAL_COUNT_FOR_PAGINATION = 0;
-const SIZE_FOR_SHIPMENT_PAGE = 10;
+function RAIL() {
+	const { setFilters = () => {} } = useContext(DashboardContext);
+	const { data, loading } = useListDocumentDesk();
+	const tabData = data?.pending_tasks_stats;
+	const { list = [], total_count = 0, page = 0, page_limit = 0 } = data;
+	const handlePageChange = (pageVal) => {
+		setFilters((prev) => ({ ...prev, page: pageVal }));
+	};
 
-function RAIL({ data = {}, loading }) {
-	const { list = [], total_count = 0, page = 0 } = data;
-
-	// const handlePageChange = (pageVal) => {
-	// 	setPage(pageVal);
-	// };
 	return (
-
 		<div>
+			<DeskTabs tabData={tabData} />
 			{loading ? <Loader />
 				: (
 					<div>
@@ -34,13 +37,12 @@ function RAIL({ data = {}, loading }) {
 								<div className={styles.pagination_container}>
 									<Pagination
 										type="number"
-										totalItems={total_count || TOTAL_COUNT_FOR_PAGINATION}
-										currentPage={page || INITIAL_PAGE}
-										pageSize={SIZE_FOR_SHIPMENT_PAGE}
-										// onPageChange={(pageVal) => handlePageChange(pageVal)}
+										totalItems={total_count}
+										currentPage={page}
+										pageSize={page_limit}
+										onPageChange={(pageVal) => handlePageChange(pageVal)}
 									/>
 								</div>
-
 							</div>
 						)}
 

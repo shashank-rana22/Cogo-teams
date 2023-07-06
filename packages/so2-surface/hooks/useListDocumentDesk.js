@@ -18,24 +18,22 @@ const useListDocumentDesk = () => {
 	const [{ loading }, trigger] = useRequest({
 
 		url    : '/list_surface_so2_dashboard_shipments',
-		// url    : '/list_shipments',
 		params : {
 			filters: {
 				from_created_at,
 				to_created_at,
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
-				shipment_type: 'ftl_freight',
 			},
-			sort_by                  : filters?.sortValue,
-			sort_type                : filters?.order,
-			task_stats_required      : true,
-			pagination_data_required : true,
+			sort_by                           : filters?.sortValue,
+			sort_type                         : filters?.order,
+			task_stats_required               : true,
+			pagination_data_required          : true,
+			data_required                     : true,
+			is_collection_party_data_required : true,
+			pending_task_required             : true,
+			service_details_required          : true,
 			page,
-
-			// shipment_type: 'rail_domestic_freight',
-			// filters: {			shipment_type: 'rail_domestic_freight' },
-
 		},
 	});
 

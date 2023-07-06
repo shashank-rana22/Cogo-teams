@@ -5,3 +5,8 @@
 	background: #fff;
 	border-radius: 8px;
 }
+
+.pagination_container{
+	justify-content: end;
+	display: flex;
+}

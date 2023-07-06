@@ -1,20 +1,23 @@
 .list_invoice_part {
 	display: flex;
 	justify-content: space-between;
-	width: 40%;
+	width: 20%;
 	padding: 8px;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	width: 85%;
-	padding: 8px 16px;
+	justify-content: center;
 }
 
 .agent_name {
-	font-size: 14px;
-	color: #bdbdbd;
+	font-size: 12px;
+	color: #828282;
+	margin: 4px;
+	&> span{
+		color: black
+	}
 }
 
 .line {
