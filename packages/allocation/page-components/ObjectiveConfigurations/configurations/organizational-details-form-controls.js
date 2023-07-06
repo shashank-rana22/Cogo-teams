@@ -1,0 +1,97 @@
+const controls = [
+	{
+		name        : 'coutry_ids',
+		label       : 'Select Country',
+		placeholder : 'Country',
+		type        : 'asyncSelect',
+		multiple    : true,
+		asyncKey    : 'list_locations',
+		initialCall : false,
+		params      : {
+			filters    : { type: 'country', status: 'active' },
+			page_limit : 10,
+			sort_by    : 'name',
+			sort_type  : 'asc',
+			includes   : { country: null, default_params_required: true },
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'state_ids',
+		label       : 'Select State',
+		placeholder : 'State',
+		type        : 'asyncSelect',
+		multiple    : true,
+		asyncKey    : 'list_locations',
+		initialCall : false,
+		params      : {
+			filters    : { type: 'state', status: 'active' },
+			page_limit : 10,
+			sort_by    : 'name',
+			sort_type  : 'asc',
+			includes   : { country: null, default_params_required: true },
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'city_ids',
+		label       : 'Select City',
+		placeholder : 'City',
+		type        : 'asyncSelect',
+		multiple    : true,
+		asyncKey    : 'list_locations',
+		initialCall : false,
+		params      : {
+			filters    : { type: 'city', status: 'active' },
+			page_limit : 10,
+			sort_by    : 'name',
+			sort_type  : 'asc',
+			includes   : { country: null, default_params_required: true },
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'pincode_ids',
+		label       : 'Select Pincode',
+		placeholder : 'Pincode',
+		type        : 'asyncSelect',
+		multiple    : true,
+		asyncKey    : 'list_locations',
+		initialCall : false,
+		params      : {
+			filters    : { type: 'pincode', status: 'active' },
+			page_limit : 10,
+			sort_by    : 'name',
+			sort_type  : 'asc',
+			includes   : { country: null, default_params_required: true },
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'segments',
+		label       : 'Select Segment',
+		placeholder : 'Segment',
+		type        : 'multiSelect',
+		options     : [
+			{
+				label : 'Long Tail',
+				value : 'long_tail',
+			},
+			{
+				label : 'Mid Size',
+				value : 'mid_size',
+			},
+			{
+				label : 'Enterprise',
+				value : 'enterprise',
+			},
+			{
+				label : 'Channel Partner',
+				value : 'cp',
+			},
+		],
+		isClearable: true,
+	},
+];
+
+export default controls;

@@ -24,7 +24,6 @@ const controls = [
 		rules: {
 			required: 'Objective Type is required',
 		},
-		flex: '1 1 30%',
 	},
 	{
 		name  : 'name',
@@ -39,14 +38,14 @@ const controls = [
 		rules       : {
 			required: 'Objective Name is required',
 		},
-		flex: '1 1 30%',
 	},
 	{
-		name     : 'partner_id',
-		label    : 'Cogo Entity',
-		type     : 'asyncSelect',
-		asyncKey : 'partners',
-		params   : {
+		name        : 'partner_id',
+		label       : 'Select Cogo Entity',
+		type        : 'asyncSelect',
+		placeholder : 'Cogo Entity',
+		asyncKey    : 'partners',
+		params      : {
 			filters: {
 				status : 'active',
 				id     : Object.values(GLOBAL_CONSTANTS.country_entity_ids),
@@ -54,13 +53,13 @@ const controls = [
 		},
 		initialCall : false,
 		isClearable : true,
-		flex        : '1 1 30%',
 	},
 	{
-		name    : 'channel',
-		label   : 'Select Channel',
-		type    : 'select',
-		options : [
+		name        : 'channel',
+		label       : 'Select Channel',
+		type        : 'multiSelect',
+		placeholder : 'Channel',
+		options     : [
 			{
 				label : 'SME',
 				value : 'sme',
@@ -74,8 +73,7 @@ const controls = [
 				value : 'cp',
 			},
 		],
-		isClearable : true,
-		flex        : '1 1 30%',
+		isClearable: true,
 	},
 	{
 		name        : 'role_ids',
@@ -91,11 +89,7 @@ const controls = [
 				partner_entity_types: ['cogoport'],
 			},
 		},
-		rules: {
-			required: 'Roles is required',
-		},
-		isClearable : true,
-		flex        : '1 1 30%',
+		isClearable: true,
 	},
 ];
 

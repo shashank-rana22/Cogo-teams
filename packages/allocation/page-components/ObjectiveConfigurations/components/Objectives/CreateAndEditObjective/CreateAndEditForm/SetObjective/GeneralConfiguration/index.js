@@ -7,12 +7,25 @@ import controls from '../../../../../../configurations/general-configuration-for
 
 import styles from './styles.module.css';
 
+const LIFECYCLE_STAGE_OPTIONS = [
+	{
+		label : 'Create Objective for Transacting Users Only',
+		name  : 'transacting',
+		value : 'transacting',
+	},
+	{
+		label : 'Create Objective for Organic Leads Only',
+		name  : 'organic_leads',
+		value : 'organic_leads',
+	},
+];
+
 function GeneralConfiguration() {
 	const { control } = useForm();
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.heading}>General Configuration</h4>
+			<h3 className={styles.heading}>General Configuration</h3>
 
 			<div className={styles.form_container}>
 				<div className={styles.upper_form}>
@@ -38,7 +51,11 @@ function GeneralConfiguration() {
 					})}
 
 					<div className={`${styles.element_container} ${styles.button_container}`}>
-						<Button className={styles.button} size="lg" themeType="secondary">
+						<Button
+							className={styles.button}
+							size="lg"
+							themeType="secondary"
+						>
 							<IcMEdit style={{ marginRight: '4px' }} />
 							Edit Applicable Agents
 						</Button>
@@ -49,21 +66,16 @@ function GeneralConfiguration() {
 					<RadioGroupController
 						control={control}
 						name="lifecycle_stage"
-						options={[
-							{
-								label : 'Create Objective for Transacting Users Only',
-								name  : 'transacting',
-								value : 'transacting',
-							},
-							{
-								label : 'Create Objective for Organic Leads Only',
-								name  : 'organic_leads',
-								value : 'organic_leads',
-							},
-						]}
+						options={LIFECYCLE_STAGE_OPTIONS}
 					/>
 
-					<Button type="button" themeType="secondary" size="md">Save</Button>
+					<Button
+						type="button"
+						themeType="secondary"
+						size="md"
+					>
+						Save
+					</Button>
 				</div>
 			</div>
 		</div>

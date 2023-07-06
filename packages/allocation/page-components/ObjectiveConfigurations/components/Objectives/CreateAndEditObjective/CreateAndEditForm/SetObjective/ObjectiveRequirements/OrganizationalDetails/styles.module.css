@@ -1,0 +1,23 @@
+.container {
+    padding: 24px;
+}
+
+.form_container {
+    margin: 24px 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 36px;
+
+    @media(max-width: 768px) {
+        gap: 24px
+    }
+}
+
+.element_container {
+    flex: 0 1 31%;
+
+    @media(max-width: 768px) {
+        flex-basis: 100%;
+    }
+}
