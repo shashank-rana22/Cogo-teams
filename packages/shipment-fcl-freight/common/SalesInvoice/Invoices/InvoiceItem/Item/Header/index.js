@@ -17,12 +17,12 @@ const UPPER_CASE_EXCHANGE_RATE_STATE = ['eta', 'etd'];
 function Header({
 	children = null,
 	invoice = {},
-	bfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => { },
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
-	salesInvoicesRefetch = () => {},
-	refetchCN = () => {},
+	salesInvoicesRefetch = () => { },
+	refetchCN = () => { },
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -34,7 +34,7 @@ function Header({
 		salesInvoicesRefetch();
 	};
 
-	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
+	const { updateInvoiceStatus = () => { } } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
@@ -64,14 +64,15 @@ function Header({
 				</div>
 
 				<div className={styles.exchange_rate}>
-
-					{invoice?.source === 'pass_through' ? (
-						<div className={styles.invoice_source}>
-							Source -
-							&nbsp;
-							{startCase(invoice?.source)}
-						</div>
-				 	) : null}
+					{invoice?.source === 'pass_through'
+						? (
+							<div className={styles.invoice_source}>
+								Source -
+								{' '}
+								{startCase(invoice?.source)}
+							</div>
+						)
+						: null}
 				</div>
 			</div>
 
@@ -96,8 +97,7 @@ function Header({
 
 				<div
 					className={styles.icon_wrapper}
-					role="button"
-					tabIndex={0}
+					role="presentation"
 					onClick={() => setOpen(!open)}
 					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
