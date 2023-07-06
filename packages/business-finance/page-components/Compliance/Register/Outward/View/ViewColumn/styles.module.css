@@ -1,44 +1,45 @@
 .combine_values {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 86%;
-  margin-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 86%;
+	margin-top: 12px;
 }
 
 .combine_tax {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .invoice_number {
-  color: var(--color-accent-orange-2);
-  text-decoration: underline;
-  cursor: pointer;
+	color: var(--color-accent-orange-2);
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .invoice_number_val {
-  color: var(--color-accent-orange-2);
+	color: var(--color-accent-orange-2);
 }
 
 .value_data {
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
 }
 
 .trade_party {
-  width: 80px;
+	width: 80px;
 }
 
 .invoice_value {
-  margin-left: 16px;
+	margin-left: 16px;
 }
 
 .tax_value {
-  text-decoration: underline;
+	text-decoration: underline;
 }
+
 .delete_invoice {
-  cursor: pointer;
-  color: var(--color-primary-error-red-2);
+	color: var(--color-primary-error-red-2);
+	cursor: pointer;
 }
