@@ -16,14 +16,20 @@ function Content() {
 			<Stats />
 			<StatusBar />
 			<ListSupplier currentPage={currentPage} supplierList={supplierList} loading={loading} />
-			<Pagination
-				className={styles.pagination}
-				type="number"
-				currentPage={currentPage}
-				totalItems={totalCount}
-				pageSize={10}
-				onPageChange={setCurrentPage}
-			/>
+			{
+				!loading
+				&& (
+					<Pagination
+						className={styles.pagination}
+						type="number"
+						currentPage={currentPage}
+						totalItems={totalCount}
+						pageSize={10}
+						onPageChange={setCurrentPage}
+					/>
+				)
+
+			}
 		</>
 	);
 }
