@@ -5,7 +5,7 @@ import { useEffect, useCallback } from 'react';
 
 const FIRST_VAL = 0;
 
-const useGetSaasComplianceDocs = ({ primary_service }) => {
+const useGetSaasComplianceDocs = ({ primary_service = {} }) => {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
