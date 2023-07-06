@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMSend, IcMQuickreply } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import { SEND_PROMOTIONAL_RATE_VIEW } from '../../../../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
 
@@ -28,7 +29,7 @@ function SendActions({
 		loading = false,
 	} = useSendPromotionalRate({ formattedData });
 
-	const isSendPromotionalRate = (session_type === 'bot' || session_type === 'admin')
+	const isSendPromotionalRate = SEND_PROMOTIONAL_RATE_VIEW.includes(session_type)
     && channel_type === 'whatsapp' && VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.send_promotional_rate
 	&& account_type === 'importer_exporter';
 
