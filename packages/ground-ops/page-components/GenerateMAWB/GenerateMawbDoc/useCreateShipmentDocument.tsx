@@ -35,26 +35,19 @@ const useCreateShipmentDocument = ({
 	handleClick = () => {},
 	activeHawb = {},
 }:Props) => {
-	let api = 'create-shipment-document';
+	let url = '/air-coe/documents/create-shipment-document';
 	let authKey = 'post_air_coe_documents_create_shipment_document';
-	if (activeCategory === 'hawb') {
-		if (activeHawb.isNew === false) {
-			api = 'update-shipment-document';
-			authKey = 'post_air_coe_documents_update_shipment_document';
-		} else {
-			api = 'create-shipment-document';
-			authKey = 'post_air_coe_documents_create_shipment_document';
-		}
-	} else if (edit && activeCategory === 'mawb') {
-		api = 'update-shipment-document';
+
+	if ((activeCategory === 'hawb' && activeHawb.isNew === false) || (edit && activeCategory === 'mawb')) {
+		url = '/air-coe/documents/update-shipment-document';
 		authKey = 'post_air_coe_documents_update_shipment_document';
 	}
 
 	const [success, setSuccess] = useState(false);
 
 	const [{ loading }, trigger] = useRequestAir({
-		url    : `/air-coe/documents/${api}`,
-		method : 'POST',
+		url,
+		method: 'POST',
 		authKey,
 	});
 

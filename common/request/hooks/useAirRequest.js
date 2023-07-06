@@ -10,9 +10,9 @@ const commonConfig = {
 	},
 };
 
-const usePublicRequest = makeUseAxios({
+const useRequestAir = makeUseAxios({
 	axios: airRequest,
 	...commonConfig,
 });
 
-export default usePublicRequest;
+export default useRequestAir;
