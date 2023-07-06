@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -16,8 +17,10 @@ import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function BreakdownDetails({
-	rateDetails = {},
+	rateDetails = [],
 	setRateDetails = () => {},
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
@@ -46,14 +49,56 @@ function BreakdownDetails({
 	const { primary_service = '' } = detail || {};
 
 	useEffect(() => {
-		setConvenienceDetails({
-			convenience_rate: {
-				price    : convenience_line_item?.price,
-				currency : convenience_line_item?.currency,
-				unit     : convenience_line_item?.unit,
-			},
-		});
-	}, [convenience_line_item, setConvenienceDetails]);
+		setRateDetails(Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
+			const { line_items = [] } = serviceData;
+
+			const updateLineItems = line_items.map((lineItem) => {
+				const filteredMargins = (lineItem?.margins || []).filter(
+					(m) => m.margin_type === 'demand',
+				);
+
+				if (filteredMargins?.length) {
+					const [margin] = filteredMargins;
+					let type = margin?.type;
+					let value = margin?.value || DEFAULT_VALUE;
+
+					if (type === 'percentage') {
+						type = 'absolute_total';
+						value = margin?.total_margin_value;
+					}
+					const prefillValues = {
+						type,
+						value,
+						currency : margin?.currency || lineItem?.currency,
+						code     : margin?.code,
+					};
+
+					return {
+						filteredMargins: prefillValues,
+						...lineItem,
+					};
+				}
+
+				const prefillValues = {
+					type     : 'absolute_unit',
+					value    : 0,
+					currency : lineItem?.currency,
+					code     : lineItem?.code,
+				};
+
+				return {
+					filteredMargins: prefillValues,
+					...lineItem,
+				};
+			});
+
+			return {
+				...rate?.services[key],
+				id         : key,
+				line_items : updateLineItems,
+			};
+		}));
+	}, [rate?.services, setRateDetails]);
 
 	if (getCheckoutLoading && isEmpty(rateDetails)) {
 		return <QuoteLoader />;

@@ -66,7 +66,7 @@ function ContactDetails({
 
 	return (
 		<div className={styles.no_whatsapp}>
-			User Does't have Whatsapp Number
+			User Does`t have Whatsapp Number
 			{' '}
 			<Button
 				themeType="accent"
