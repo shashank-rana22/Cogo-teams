@@ -1,6 +1,5 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getByKey } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -10,7 +9,7 @@ import serviceMapping from './mapping.json';
 import styles from './styles.module.css';
 
 function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {} }) {
-	const { servicesList = [] } = useContext(ShipmentDetailContext);
+	const { servicesList = [], primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const main_service = servicesList?.find((s) => s?.main_service_id === null);
 
@@ -19,7 +18,10 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 	const supplyDetails = serviceMapping?.supply_details;
 
 	const renderDetail = ({ obj, key }) => {
-		const value = renderValue(key, main_service);
+		let value = renderValue(key, main_service);
+		if (key === 'booking_preferences') {
+			value = renderValue(key, main_service, primary_service);
+		}
 
 		return (
 			<div className={styles.render_container}>
@@ -69,12 +71,18 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 
 							<div className={styles.detail_container}>
 								{supplyDetails?.map((obj) => {
-									const key = obj.key === 'booking_preferences'
-										? main_service?.[obj.key]?.[GLOBAL_CONSTANTS.zeroth_index].remarks : obj.key;
-									return getByKey(main_service, key)
+									if (obj.key === 'booking_preferences') {
+										return getByKey(primary_service, obj.key)
+											? renderDetail({
+												obj,
+												key: obj.key,
+											}) : null;
+									}
+
+									return getByKey(main_service, obj.key)
 										? renderDetail({
 											obj,
-											key,
+											key: obj.key,
 										}) : null;
 								})}
 							</div>

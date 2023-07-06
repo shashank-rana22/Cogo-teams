@@ -12,7 +12,7 @@ const MORE_THAN_ONE_PACKAGE_CHECK = 1;
 const ROUND_VALUE = 2;
 const SHOW_MORE_CHECK = 1;
 
-export const renderValue = (label, detail) => {
+export const renderValue = (label, detail, primary_service) => {
 	const { packages = [] } = detail || {};
 
 	const valueForInput = Array.isArray(packages) && isEmpty(packages)
@@ -236,6 +236,9 @@ export const renderValue = (label, detail) => {
 			return detail?.hs_code?.hs_code_name;
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
+		case 'booking_preferences':
+			return primary_service?.[label]?.
+				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
 		default:
 			return detail[label] || null;
 	}
