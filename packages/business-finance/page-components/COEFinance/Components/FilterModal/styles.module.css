@@ -132,7 +132,7 @@
 	width: 100%;
 	padding: 4px;
 	margin-bottom: 8px;
-	font-size: 14px;
+	font-size: var(--font-size-md);
 	background: #edd7a9;
 	border-radius: 6px 0 0 6px;
 }
@@ -140,7 +140,6 @@
 .selected_items_container {
 	display: flex;
 	flex-flow: row wrap;
-	transition: 2s;
 }
 
 .items {

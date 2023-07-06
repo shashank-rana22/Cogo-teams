@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback, useMemo } from 'react';
+
+import { getFormatDate } from '../utils/getFormatDate';
 
 const usePurchaseViewStats = ({ filters }) => {
 	const [{ loading: statsLoading, data: statsData }, statsTrigger] = useRequestBf(
@@ -19,27 +19,15 @@ const usePurchaseViewStats = ({ filters }) => {
 			method  : 'get',
 			authKey : 'get_purchase_bills_bill_accept_by_finance_stats',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	const { serviceType, dateRange, timePeriod } = filters || {};
 	const { startDate, endDate } = dateRange || {};
 
-	const billDatesStart = 			formatDate({
-		date       : startDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : 'T',
-	});
+	const billDatesStart = 	getFormatDate(startDate);
+	const billDatesEnd = 	getFormatDate(endDate);
 
-	const billDatesEnd = 	formatDate({
-		date       : endDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : 'T',
-	});
 	const Payload = useMemo(
 		() => ({
 			jobTypeShipment : 'true',

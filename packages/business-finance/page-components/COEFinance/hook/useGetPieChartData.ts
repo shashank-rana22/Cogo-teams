@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
+
+import toastApiError from '../../commons/toastApiError';
 
 interface FilterInterface {
 	serviceType?:string
@@ -47,7 +48,7 @@ const useGetPieChartData = (filters :FilterInterface) => {
 					},
 				});
 			} catch (err) {
-				Toast.error(err?.response?.data?.message);
+				toastApiError(err);
 			}
 		};
 		getData();

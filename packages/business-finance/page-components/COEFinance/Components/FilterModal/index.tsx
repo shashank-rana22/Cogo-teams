@@ -48,11 +48,10 @@ function FilterModal({ filters, setFilters }: Props) {
 		setCurrencies([]);
 		setShowModal(false);
 	};
-	const handleRemoveCurrency = (index) => {
+	const handleRemoveCurrency = (item) =>	{
 		const currencyList = [...(filters?.currency || [])];
-		currencyList.splice(index, 1);
+		currencyList.splice(item, 1);
 		setFilters(() => ({
-			...filters,
 			currency: currencyList,
 		}));
 	};
@@ -89,21 +88,21 @@ function FilterModal({ filters, setFilters }: Props) {
 							<div className={styles.select_input}>
 								<MultiSelect
 									value={filters?.currency}
-									onChange={(val:string[]) => setFilters({ currency: val })}
-									placeholder="select currency"
+									onChange={(val:string[]) => setFilters((prev) => ({ ...prev, currency: val }))}
+									placeholder="Select Currency"
 									options={getCurrencyOptions()}
 									size="md"
 								/>
 							</div>
 
 							<li className={styles.selected_items_container}>
-								{filters?.currency?.map((item, index) => (
+								{filters?.currency?.map((item) => (
 									<div key={item?.label} className={styles.items}>
 										<div className={styles.selected_options}>{item}</div>
 										<div
 											className={styles.cross}
 											onClick={() => {
-												handleRemoveCurrency(index);
+												handleRemoveCurrency(item);
 											}}
 											role="presentation"
 										>

@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
+
+import { getFormatDate } from '../utils/getFormatDate';
 
 interface FilterInterface {
 	serviceType?:string
@@ -27,21 +27,8 @@ const useJobStats = (filters :FilterInterface) => {
 	const { serviceType, dateRange, timePeriod } = filters || {};
 	const { startDate, endDate } = dateRange || {};
 
-	const billDatesStart = 			formatDate({
-		date       : startDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : 'T',
-	});
-
-	const billDatesEnd = 	formatDate({
-		date       : endDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-		formatType : 'dateTime',
-		separator  : 'T',
-	});
+	const billDatesStart = 	getFormatDate(startDate);
+	const billDatesEnd = 	getFormatDate(endDate);
 
 	useEffect(() => {
 		const getData = async () => {
