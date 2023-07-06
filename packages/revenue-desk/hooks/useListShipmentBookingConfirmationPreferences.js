@@ -7,6 +7,7 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 		url    : '/list_shipment_booking_confirmation_preferences',
 	}, { manual: true });
 
+	const serviceType = singleServiceData?.service_type;
 	const serviceId = singleServiceData?.id;
 	const shipmentId = shipmentData?.id;
 
@@ -14,13 +15,13 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 		try {
 			await trigger({
 				params: {
-					filters: { service_id: serviceId, shipment_id: shipmentId },
+					filters: { service_id: serviceId, shipment_id: shipmentId, service_type: serviceType },
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [trigger, serviceId, shipmentId]);
+	}, [trigger, serviceId, shipmentId, serviceType]);
 	useEffect(() => {
 		getList();
 	}, [singleServiceData, getList]);

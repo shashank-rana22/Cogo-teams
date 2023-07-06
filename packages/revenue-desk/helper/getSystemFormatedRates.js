@@ -39,6 +39,10 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			via_route                         : element?.destination_main_port?.name,
 			total_price_currency              : validities?.currency,
 			line_items                        : validities?.line_items,
+			fulfillment_ratio_2               : data?.fulfillment_data?.day_2 || data?.fulfillment_ratio_2,
+			fulfillment_ratio_7               : data?.fulfillment_data?.day_7 || data?.fulfillment_ratio_7,
+			fulfillment_ratio_15              : data?.fulfillment_data?.day_15 || data?.fulfillment_ratio_15,
+			fulfillment_ratio_30              : data?.fulfillment_data?.day_30 || data?.fulfillment_ratio_30,
 			shipping_line                     :	element?.shipping_line?.business_name
 												|| element?.shipping_line?.short_name,
 			destination_main_port_id: element?.destination_main_port_id
@@ -46,14 +50,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 				? element?.destination_main_port_id : null,
 			origin_main_port_id: element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 				? element?.origin_main_port_id : null,
-			fulfillment_ratio_2: data?.fulfillment_data?.fulfillment_ratio_2
-										|| data?.fulfillment_ratio_2,
-			fulfillment_ratio_7: data?.fulfillment_data?.fulfillment_ratio_7
-													|| data?.fulfillment_ratio_7,
-			fulfillment_ratio_15: data?.fulfillment_data?.fulfillment_ratio_15
-													|| data?.fulfillment_ratio_15,
-			fulfillment_ratio_30: data?.fulfillment_data?.fulfillment_ratio_30
-													|| data?.fulfillment_ratio_30,
 		};
 		row.rowData = rowData;
 		ROWS.push(row);
