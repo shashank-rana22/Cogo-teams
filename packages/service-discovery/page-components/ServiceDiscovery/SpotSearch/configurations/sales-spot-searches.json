@@ -10,11 +10,6 @@
 			"func": "renderSerialId"
 		},
 		{
-			"label": "Service",
-			"key": "search_type",
-			"func": "renderSearchType"
-		},
-		{
 			"label": "Shipper",
 			"key": "importer_exporter.business_name",
 			"topKey": {
@@ -29,7 +24,7 @@
 		},
 		{
 			"label": "Port pair",
-			"key": "",
+			"key": "search_type",
 			"pair_type": "search_type",
 			"func": "renderPortPair"
 		},

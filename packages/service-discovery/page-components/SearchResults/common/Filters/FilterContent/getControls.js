@@ -1,7 +1,7 @@
-import fclControls from '../../../../../configurations/fcl/form-controls';
-import haulageControls from '../../../../../configurations/haulage-freight/form-controls';
-import lclControls from '../../../../../configurations/lcl/form-controls';
-import trailerControls from '../../../../../configurations/trailer/form-controls';
+import fclControls from '../../../configurations/fcl/form-controls';
+import haulageControls from '../../../configurations/haulage-freight/form-controls';
+import lclControls from '../../../configurations/lcl/form-controls';
+import trailerControls from '../../../configurations/trailer/form-controls';
 
 import EXTRA_FILTERS from './extra-filter-controls';
 

@@ -55,11 +55,9 @@ const renderShipment = (itemData, field) => {
 								|| data.container_size
 								|| data.containers_count) && <br />}
 
-				{data?.commodity ? (
-					<Pill size="md" color="#F9F9F9">
-						{startCase(data.commodity)}
-					</Pill>
-				) : null}
+				<Pill size="md" color="#F9F9F9">
+					{startCase(data.commodity) || 'All Commodities'}
+				</Pill>
 
 				{itemData?.inco_term ? (
 					<Pill size="md" color="#FDEBE9">

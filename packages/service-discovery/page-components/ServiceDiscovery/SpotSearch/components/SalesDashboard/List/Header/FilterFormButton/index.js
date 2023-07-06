@@ -17,26 +17,21 @@ const isObjEmpty = (obj) => {
 };
 
 function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
-	const [filterApplied, setFilterApplied] = useState(false);
 	const [filtersCount, setFiltersCount] = useState(0);
 	const [visible, setVisible] = useState(false);
 
-	const { control, watch, setValue, handleSubmit } = useForm();
+	const { control, watch, handleSubmit, reset } = useForm();
 
 	const formValues = watch();
 
 	const onClickOutside = () => {
 		setVisible(false);
-
-		if (filterApplied) return;
-
-		controls.forEach((controlItem) => {
-			setValue(controlItem.name, undefined);
-		});
+		if (filtersCount) return;
+		reset();
 	};
 
 	const handleReset = () => {
-		if (filterApplied) {
+		if (filtersCount) {
 			const FILTEROBJ = {};
 
 			Object.keys(formValues).forEach((key) => {
@@ -46,10 +41,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 			setFilters(FILTEROBJ);
 		}
 
-		controls.forEach((controlItem) => {
-			setValue(controlItem.name, undefined);
-		});
-		setFilterApplied(false);
+		reset();
 		setFiltersCount(0);
 		setVisible(false);
 	};
@@ -60,7 +52,6 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		}
 		setFilters(formValues);
 		setVisible(false);
-		setFilterApplied(true);
 
 		let count = 0;
 
@@ -138,7 +129,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 					className={styles.button}
 					onClick={() => (visible ? onClickOutside() : setVisible(true))}
 				>
-					{filterApplied ? (
+					{filtersCount ? (
 						<div className={styles.red_dot}>
 							<div style={{ color: '#fff', fontSize: 9, fontWeight: 700 }}>{filtersCount}</div>
 						</div>

@@ -16,12 +16,12 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 	}
 	const service_type = getValue(item, field);
 
-	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING[service_type];
+	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING[service_type] || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.icon_container}>
-				<Icon height={18} width={18} fill={color} />
+				<Icon height={16} width={16} fill={color} />
 			</div>
 
 			<div className={styles.label} style={{ color }}>

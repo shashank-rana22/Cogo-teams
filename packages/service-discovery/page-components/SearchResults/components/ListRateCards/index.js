@@ -28,8 +28,6 @@ function ListRateCards({
 	comparisonCheckbox = {},
 	filters = {},
 	setFilters = () => {},
-	showFilterModal = {},
-	setShowFilterModal = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
 
@@ -47,8 +45,6 @@ function ListRateCards({
 					details={detail}
 					filters={filters}
 					setFilters={setFilters}
-					showFilterModal={showFilterModal}
-					setShowFilterModal={setShowFilterModal}
 				/>
 				{showComparison ? (
 					<ComparisonHeader

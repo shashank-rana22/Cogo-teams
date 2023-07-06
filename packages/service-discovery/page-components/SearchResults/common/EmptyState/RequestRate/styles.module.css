@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    border: 1px solid #FEF199;
+    padding: 20px 22px;
+}
+
+.left_section {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.text {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.button_text {
+    font-size: 12px;
+    font-weight: 500;
+}

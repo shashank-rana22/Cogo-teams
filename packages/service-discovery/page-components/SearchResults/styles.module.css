@@ -2,6 +2,7 @@
     margin: -24px -20px;
     background-color: #FFFFFF;
     position: relative;
+    min-height: 100vh;
 }
 .header{
     position: sticky;

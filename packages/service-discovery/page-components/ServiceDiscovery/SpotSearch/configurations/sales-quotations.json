@@ -16,11 +16,6 @@
 			"func": "renderSerialId"
 		},
 		{
-			"label": "Service",
-			"key": "primary_service",
-			"func": "renderSearchType"
-		},
-		{
 			"label": "Shipper",
 			"key": "importer_exporter.business_name",
 			"topKey": {
@@ -35,7 +30,7 @@
 		},
 		{
 			"label": "Port pair",
-			"key": "",
+			"key": "primary_service",
 			"pair_type": "primary_service",
 			"func": "renderPortPair"
 		},
@@ -59,7 +54,8 @@
 			"key": "quotations",
 			"label": "",
 			"btnLabel":"Show Rates",
-			"func": "renderButton"
+			"func": "renderButton",
+			"showPrice": true
 		}
 	],
 	"filterProps": {

@@ -1,9 +1,9 @@
-import { Button } from '@cogoport/components';
 import React from 'react';
 
-import Currency from './CurrencyFilter';
+import Currency from '../../../common/CurrencyFilter';
+import Filters from '../../../common/Filters';
+
 import DetentionDemurrage from './D&D';
-import Filters from './Filters';
 import styles from './styles.module.css';
 
 function Header({
@@ -11,8 +11,6 @@ function Header({
 	details = {},
 	filters = {},
 	setFilters = () => {},
-	showFilterModal = {},
-	setShowFilterModal = () => {},
 }) {
 	const ratesCount = ratesData?.length || 0;
 
@@ -29,33 +27,13 @@ function Header({
 
 				<DetentionDemurrage />
 
-				<Button
-					type="button"
-					size="lg"
-					themeType="link"
-					onClick={() => setShowFilterModal(true)}
-					className={styles.filter_button}
-				>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg"
-						alt="filter-icon"
-						width={20}
-						height={20}
-						style={{ marginRight: 12 }}
-					/>
-					Filters
-				</Button>
-			</div>
-
-			{showFilterModal ? (
 				<Filters
 					data={details}
-					show={showFilterModal}
-					setShow={setShowFilterModal}
 					filters={filters}
 					setFilters={setFilters}
 				/>
-			) : null}
+
+			</div>
 
 		</div>
 

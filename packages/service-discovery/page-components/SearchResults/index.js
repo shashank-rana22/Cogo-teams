@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Header from '../../common/Header';
 
+import EmptyState from './common/EmptyState';
 import BookCheckout from './components/BookToCheckout';
 import Comparison from './components/Comparison';
 import ListRateCards from './components/ListRateCards';
@@ -19,7 +20,6 @@ const SCREEN_MAPPING = {
 };
 
 function SearchResults() {
-	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
 
 	const [screen, setScreen] = useState('listRateCard');
@@ -69,8 +69,6 @@ function SearchResults() {
 			comparisonCheckbox,
 			filters,
 			setFilters,
-			showFilterModal,
-			setShowFilterModal,
 		},
 		selectedCard: {
 			rateCardData: selectedCard,
@@ -95,6 +93,21 @@ function SearchResults() {
 
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
 
+	const handleRatesList = () => {
+		if (!loading && isEmpty(rates)) {
+			return (
+				<EmptyState
+					data={detail}
+					filters={filters}
+					setFilters={setFilters}
+				/>
+			);
+		}
+		return (
+			<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
+		);
+	};
+
 	return (
 		<div className={`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
 			<div className={styles.header}>
@@ -109,7 +122,7 @@ function SearchResults() {
 			</div>
 
 			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>
-				<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
+				{handleRatesList()}
 			</div>
 		</div>
 	);

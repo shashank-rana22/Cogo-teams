@@ -1,10 +1,10 @@
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import React from 'react';
 
-import getElementController from '../../../../../../../../configs/getElementController';
-import getErrorMessage from '../../../../../../../../configs/getErrorMessage';
-import Detention from '../../../../../../common/Detention';
-import getOptions from '../../../../../../utils/getOptions';
+import getElementController from '../../../../../../configs/getElementController';
+import getErrorMessage from '../../../../../../configs/getErrorMessage';
+import getOptions from '../../../../utils/getOptions';
+import Detention from '../../../Detention';
 
 import FieldArray from './FieldArray';
 import styles from './styles.module.css';

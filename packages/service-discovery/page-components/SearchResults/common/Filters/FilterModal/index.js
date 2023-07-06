@@ -4,13 +4,13 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useCreateSearch from '../../../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
-import getPrefillForm from '../../../../utils/getPrefillForm';
-import getLocationInfo from '../../../../utils/locations-search';
+import useCreateSearch from '../../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
+import getPrefillForm from '../../../utils/getPrefillForm';
+import getLocationInfo from '../../../utils/locations-search';
+import FilterContent from '../FilterContent';
+import EXTRA_FILTERS from '../FilterContent/extra-filter-controls';
+import getFilterControls, { MAIN_CONTROLS_MAPPING } from '../FilterContent/getControls';
 
-import FilterContent from './FilterContent';
-import EXTRA_FILTERS from './FilterContent/extra-filter-controls';
-import getFilterControls, { MAIN_CONTROLS_MAPPING } from './FilterContent/getControls';
 import styles from './styles.module.css';
 
 const SERVICE_KEY = 'search_type';
@@ -35,7 +35,7 @@ const getSeperateObjects = (mainObj, extraArray) => {
 	return { loadObj, filterObj };
 };
 
-function Filters({ data, show, setShow, filters, setFilters }) {
+function FilterModal({ data, show, setShow, filters, setFilters }) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();
@@ -139,4 +139,4 @@ function Filters({ data, show, setShow, filters, setFilters }) {
 	);
 }
 
-export default Filters;
+export default FilterModal;

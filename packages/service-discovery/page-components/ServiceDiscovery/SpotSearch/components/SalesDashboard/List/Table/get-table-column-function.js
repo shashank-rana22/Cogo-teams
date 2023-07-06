@@ -56,11 +56,16 @@ const getTableColumnFunction = (key) => {
 				</span>
 			</Tooltip>
 		),
-		renderSource: ({ source = '-' }) => (
-			<Pill size="md" color="#F7FAEF">
-				{source === 'direct' ? 'Sell Without Buy' : startCase(source)}
-			</Pill>
-		),
+		renderSource: (itemData) => {
+			const { source = '-' } = itemData || {};
+			console.log(itemData);
+
+			return (
+				<Pill size="md" color="#F7FAEF">
+					{source === 'direct' ? 'Sell Without Buy' : startCase(source)}
+				</Pill>
+			);
+		},
 		renderValidityEnd: ({ shipment_id, validity_end }) => {
 			if (shipment_id) {
 				return <span>NA</span>;
