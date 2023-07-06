@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase, upperCase, isEmpty } from '@cogoport/utils';
 
 const UNIT_ELEMENT = 1;
-const TO_FIXED = 2;
+const DECIMAL_UPTO_SECOND_PLACE = 2;
 
 export const renderValue = (label, detail) => {
 	const {
@@ -123,7 +124,7 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === GLOBAL_CONSTANTS.zeroth_index) {
+			if (isEmpty(packages)) {
 				return null;
 			}
 			return packageDetails();
@@ -175,11 +176,15 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(TO_FIXED)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(DECIMAL_UPTO_SECOND_PLACE)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format(detail?.delivery_date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
+			return formatDate({
+				date       : detail?.delivery_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'container_load_type':
 			return startCase(detail?.container_load_type);
 		case 'truck_number':
@@ -187,9 +192,17 @@ export const renderValue = (label, detail) => {
 		case 'driver_details':
 			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
 		case 'estimated_departure':
-			return format(detail?.estimated_departure, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
+			return formatDate({
+				date       : detail?.estimated_departure,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'estimated_arrival':
-			return format(detail?.estimated_arrival, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
+			return formatDate({
+				date       : detail?.estimated_arrival,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'weight':
 			return ` ${weight} ${'Ton'}`;
 		case 'volume':
