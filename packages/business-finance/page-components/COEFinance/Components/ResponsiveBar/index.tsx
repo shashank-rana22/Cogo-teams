@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MyResponsiveBar({ data }) {
+function MyResponsiveBar({ data = [] }) {
 	return (
 		<>
 			<div className={styles.invoice}>

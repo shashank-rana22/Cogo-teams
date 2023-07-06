@@ -9,7 +9,7 @@ const MAPPING_STATE = {
 	CLOSED     : 'FINANCIALLY CLOSED',
 };
 
-function JobStats({ jobData }) {
+function JobStats({ jobData = [] }) {
 	return (
 		<div className={styles.flex}>
 			{(jobData || [{}]).map((item) => {

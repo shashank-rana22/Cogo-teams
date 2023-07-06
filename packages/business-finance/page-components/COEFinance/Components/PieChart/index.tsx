@@ -4,7 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function MyResponsivePie({ data }) {
+function MyResponsivePie({ data = [] }) {
 	return (
 		<>
 			<div className={styles.invoice}>

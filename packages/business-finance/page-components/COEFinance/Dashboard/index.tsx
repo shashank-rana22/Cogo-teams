@@ -17,7 +17,27 @@ import { filterControls, reportControls } from './controls';
 import JobStats from './JobStats';
 import styles from './styles.module.css';
 
-function Dashboard({ statsData, statsCOEApprovedData, filters, setFilters, statsLoading }) {
+interface StatsDataInterface {
+	LOCKED?: number,
+	ALL_APPROVED_BILLS?: number,
+	COE_REJECTED?: number,
+	FINANCE_REJECTED?: number,
+}
+interface Props {
+	statsData?: StatsDataInterface;
+	statsCOEApprovedData?: { PAYRUN_BILL_APPROVED?:number }
+	filters?: object;
+	setFilters?:React.Dispatch<React.SetStateAction<object>>;
+	statsLoading?: boolean;
+}
+
+function Dashboard({
+	statsData = {},
+	statsCOEApprovedData = {},
+	filters = {},
+	setFilters = () => {},
+	statsLoading = false,
+}:Props) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
