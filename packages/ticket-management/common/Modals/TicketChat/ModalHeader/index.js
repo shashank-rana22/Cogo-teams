@@ -9,10 +9,10 @@ function ModalHeader({
 	refreshTickets = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
-	isClosureAuthorizer,
 	updateTicketActivity = () => {},
 }) {
-	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
+	const { Ticket = {}, isClosureAuthorizer = '', IsCurrentReviewer = '' } = ticketData || {};
+	const { ID: id = '', Status: status = '' } = Ticket || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
@@ -31,6 +31,7 @@ function ModalHeader({
 				handleTicket={handleTicket}
 				setShowReassign={setShowReassign}
 				setShowEscalate={setShowEscalate}
+				IsCurrentReviewer={IsCurrentReviewer}
 				isClosureAuthorizer={isClosureAuthorizer}
 			/>
 		</div>
