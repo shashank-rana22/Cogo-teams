@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Tracking } from '@cogoport/ocean-modules';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -24,12 +24,11 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const UNAUTHORIZED_STATUS_CODE = 403;
-function LastMileDesk({ get = {}, activeStakeholder = '' }) {
-	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('overview');
+function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
+	const router = useRouter();
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
@@ -37,9 +36,11 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 		(container) => container?.rollover_status === 'requested',
 	);
 
+	const [activeTab, setActiveTab] = useState('overview');
+
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICES_ADDITIONAL_METHODS,
+		additional_methods: SERVICE_ADDITIONAL_METHODS,
 		activeStakeholder,
 	});
 
@@ -108,6 +109,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 					<div className={styles.toggle_chat}>
 						<ShipmentChat />
 					</div>
+
 				</div>
 
 				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
@@ -137,6 +139,10 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="purchase_live_invoice" title="Live Invoices">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -148,11 +154,6 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
-
 					</Tabs>
 				</div>
 
@@ -164,4 +165,4 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default LastMileDesk;
+export default BookingDeskManager;
