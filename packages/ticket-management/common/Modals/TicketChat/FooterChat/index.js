@@ -78,7 +78,7 @@ function FooterChat({
 				</div>
 			)}
 			<Checkbox
-				label="Send to internal only"
+				label="Send to internal user only"
 				checked={isInternal}
 				onChange={() => setIsInternal((prev) => !prev)}
 			/>

@@ -16,11 +16,10 @@ function EscalateTicket({ ticketId, showEscalate, setShowEscalate, updateTicketA
 	};
 
 	const handleEscalateTicket = async (val) => {
-		const { comment, file_url } = val || {};
+		const { comment } = val || {};
 		await updateTicketActivity({
 			actionType  : 'escalate',
 			id          : ticketId,
-			file        : file_url?.finalUrl,
 			description : comment,
 		});
 		handleClose();

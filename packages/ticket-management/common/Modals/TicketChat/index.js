@@ -66,11 +66,7 @@ function TicketChat({
 		ticketId: ticketId || '',
 	});
 
-	const {
-		Ticket: ticket = {}, IsClosureAuthorizer: isClosureAuthorizer = false,
-		IsCurrentReviewer: isCurrentReviewer = false,
-	} = ticketData || {};
-
+	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
 	const { Status: status = '' } = ticket || {};
 
 	const {
@@ -146,7 +142,6 @@ function TicketChat({
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
 						setShowEscalate={setShowEscalate}
-						isClosureAuthorizer={isClosureAuthorizer}
 						updateTicketActivity={updateTicketActivity}
 					/>
 				)}
