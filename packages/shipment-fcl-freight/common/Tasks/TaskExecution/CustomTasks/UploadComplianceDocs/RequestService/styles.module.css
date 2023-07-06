@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	align-items: center;
+	padding: 10px 24px;
+	margin-bottom: 12px;
+	background: #fff;
+	border: 1px solid var(--balck-40-disabled, #bdbdbd);
+	border-radius: 4px;
+}
+
+.label {
+	margin-right: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+	white-space: nowrap;
+}
+
+.input {
+	display: flex;
+	align-items: center;
+	width: 60%;
+}

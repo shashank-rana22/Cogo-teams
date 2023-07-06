@@ -1,0 +1,18 @@
+[
+    {
+		"doc_code": "001000",
+		"doc_name": "Certificate of analysis",
+		"doc_desc":	"Certificate providing the values of an analysis."
+	},
+	{
+		"doc_code": "0010DC",
+		"doc_name": "Certificate of analysis - Drug",
+		"doc_desc":	"Certificate attesting to the quality or purity of the goods."
+	},
+	{
+		"doc_code": "0010FS",
+		"doc_name": "Certificate of Analysis - Food & Supplement",
+		"doc_desc":	"Certificate by an accredited by a laboratory recognized in the Country of Origin providing the parameters and values of an analysis of a food product."
+	}
+]
+

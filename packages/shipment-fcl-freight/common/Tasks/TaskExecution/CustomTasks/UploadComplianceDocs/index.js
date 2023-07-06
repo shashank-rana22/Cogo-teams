@@ -7,6 +7,7 @@ import useGetSaasComplianceDocs from '../../../../../hooks/useGetSaasComplianceD
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 import List from './List';
+import RequestService from './RequestService';
 import styles from './styles.module.css';
 import excludeDocs from './utils/excludeDocsList';
 
@@ -73,6 +74,8 @@ function UploadComplianceDocs({
 					allUploadedDocs={allUploadedDocs?.list}
 				/>
 			))}
+
+			{task.task === 'approve_compliance_documents' ? <RequestService /> : null}
 
 			<div className={styles.submit}>
 				<Button
