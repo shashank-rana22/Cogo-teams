@@ -1,6 +1,7 @@
 import { Modal, Button, MultiSelect } from '@cogoport/components';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -15,7 +16,7 @@ interface Props {
 	setFilters: (p: object) => void;
 }
 
-function FilterModal({ filters, setFilters }: Props) {
+function FilterModal({ filters = {}, setFilters = () => {} }: Props) {
 	const [showModal, setShowModal] = useState(false);
 
 	const isFilterApplied = () => {
@@ -23,9 +24,9 @@ function FilterModal({ filters, setFilters }: Props) {
 			filters?.billDate
       || filters?.billType
       || filters?.dueDate
-      || filters?.serviceType?.length > 0
+      || isEmpty(filters?.serviceType)
       || filters?.updatedDate
-      || filters?.currency?.length > 0
+      || isEmpty(filters?.currency)
 		) {
 			return true;
 		}
