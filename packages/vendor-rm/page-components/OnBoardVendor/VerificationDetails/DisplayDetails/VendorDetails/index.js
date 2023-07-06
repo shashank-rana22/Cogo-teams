@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -5,11 +6,13 @@ import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
+const geo = getGeoConstants();
+
 const fieldsToShow = {
 	country_id             : 'Country of Registration',
 	business_name          : 'Organisation Name',
-	registration_number    : 'PAN Number',
-	registration_proof_url : 'PAN Document',
+	registration_number    : `${geo.others.pan_number.label} Number`,
+	registration_proof_url : `${geo.others.pan_number.label} Document`,
 	company_type           : 'Type of Company',
 	city_id                : 'Company Branch',
 };

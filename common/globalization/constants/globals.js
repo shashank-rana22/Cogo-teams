@@ -204,6 +204,7 @@ const GLOBAL_CONSTANTS = {
 		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
 		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		download_icon_svg  	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg',
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
