@@ -35,7 +35,7 @@ function FileList({
 			id       : 2,
 			Header   : 'File Name',
 			accessor : ({ file_name = '', url }) => (
-				<Tooltip interactive content={url} placement="bottom">
+				<Tooltip interactive content={file_name} placement="bottom">
 					<div
 						onClick={() => window.open(url, '_blank')}
 						className={styles.text_wrap}
