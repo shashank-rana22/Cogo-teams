@@ -12,5 +12,5 @@
 
 .text {
 	font-size: var(--font-size-md);
-	color: white;
+	color: var(--color-secondary-5);
 }

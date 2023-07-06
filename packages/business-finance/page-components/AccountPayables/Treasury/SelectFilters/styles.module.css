@@ -48,9 +48,7 @@
 
 .label {
 	align-items: center;
-	margin-top: 10px;
-	margin-right: 4px;
-	color: #333;
+	margin: 10px 12px 0 0;
 }
 
 .filter_container {

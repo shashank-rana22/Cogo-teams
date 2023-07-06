@@ -1,8 +1,8 @@
 .value_text {
 	padding: 8px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .div_style {

@@ -8,11 +8,10 @@
 .date_time {
 	font-size: var(--font-size-sm);
 	font-weight: 500;
-	color: #a5a5a5;
+	color: var(--color-tertiary-success-green-3);
 }
 
 .amount_text {
 	font-size: var(--font-size-lg);
 	font-weight: 500;
-	color: #393f70;
 }

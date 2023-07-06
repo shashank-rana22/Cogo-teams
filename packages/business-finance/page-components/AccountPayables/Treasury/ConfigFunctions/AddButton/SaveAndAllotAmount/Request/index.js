@@ -75,7 +75,14 @@ function Request({ item, index, currency, refetch }) {
 						size="sm"
 						disabled={editAmount < CHECK_AMOUNT || loadingOnApprove}
 						onClick={handleSubmit(onApprove)}
-						style={{ marginRight: '12px' }}
+						style={{
+							fontSize       : '12px',
+							fontWeight     : 500,
+							color          : 'black',
+							textDecoration : 'underline',
+							background     : 'none',
+							border         : 'none',
+						}}
 					>
 						Approve
 					</Button>
@@ -83,6 +90,14 @@ function Request({ item, index, currency, refetch }) {
 						size="sm"
 						disabled={loadingOnReject}
 						onClick={handleSubmit(onReject)}
+						style={{
+							fontSize       : '12px',
+							fontWeight     : 500,
+							color          : '#ed3726',
+							textDecoration : 'underline',
+							background     : 'none',
+							border         : 'none',
+						}}
 
 					>
 						Reject

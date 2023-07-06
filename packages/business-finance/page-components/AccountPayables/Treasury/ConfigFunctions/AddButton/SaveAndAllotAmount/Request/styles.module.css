@@ -26,9 +26,8 @@
 
 .request_text {
 	padding: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-	color: #333;
 }
 
 .requested_by {
@@ -36,7 +35,7 @@
 	margin-left: 8px;
 	font-size: 11px;
 	font-weight: 400;
-	color: #a5a5a5;
+	color: var(--color-secondary-greyscale-3);
 	border-right: 1px solid #333;
 }
 
@@ -45,33 +44,7 @@
 	margin-left: 8px;
 	font-size: 11px;
 	font-weight: 400;
-	color: #a5a5a5;
-}
-
-.approve_button {
-	font-size: 12px;
-	font-weight: 400;
-	color: #393f70;
-	text-decoration: underline;
-	background: none;
-	border: none;
-
-	&:hover {
-		box-shadow: none;
-	}
-}
-
-.reject_button {
-	font-size: 12px;
-	font-weight: 400;
-	color: #ed3726;
-	text-decoration: underline;
-	background: none;
-	border: none;
-
-	&:hover {
-		box-shadow: none;
-	}
+	color: var(--color-secondary-greyscale-3);
 }
 
 .remarks_div {

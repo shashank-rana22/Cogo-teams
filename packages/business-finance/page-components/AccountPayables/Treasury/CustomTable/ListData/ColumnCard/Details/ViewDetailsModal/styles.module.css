@@ -1,6 +1,6 @@
 .value_text {
 	margin-left: 2px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 400;
 	line-height: 25px;
 }

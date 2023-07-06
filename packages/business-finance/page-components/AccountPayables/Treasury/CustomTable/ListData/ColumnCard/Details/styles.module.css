@@ -72,9 +72,9 @@
 }
 
 .text_button {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -91,18 +91,18 @@
 
 .text {
 	display: flex;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .lable {
 	display: flex;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .value {
 	margin-left: 1px;
-	font-size: 12px;
-	color: #f68b21;
+	font-size: var(--font-size-md);
+	color: var(--color-accent-orange-2);
 }
 
 .container_tooltip {
