@@ -43,8 +43,6 @@ function PaymentDetails({
 		return startCase(val);
 	};
 
-	console.log(data.bank_details, 'bankdetail');
-
 	return (
 		(data.bank_details || []).map((bankDetail, index) => (
 			<div
