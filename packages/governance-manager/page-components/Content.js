@@ -9,12 +9,14 @@ import styles from './styles.module.css';
 
 function Content() {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data:supplierList, loading, totalCount } = useListOrganizationServices({ currentPage });
+	const [activeTab, setActiveTab] = useState('need_analysis');
+	const { data:supplierList, loading, totalCount } = useListOrganizationServices({ currentPage, activeTab });
+
 	return (
 		<>
 			<h2>Governance Manager</h2>
 			<Stats />
-			<StatusBar />
+			<StatusBar activeTab={activeTab} setActiveTab={setActiveTab} />
 			<ListSupplier currentPage={currentPage} supplierList={supplierList} loading={loading} />
 			<Pagination
 				className={styles.pagination}
