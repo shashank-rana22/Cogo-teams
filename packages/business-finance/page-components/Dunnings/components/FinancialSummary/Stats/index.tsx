@@ -1,4 +1,5 @@
 import { Input, Popover, Toggle, Tooltip } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -31,13 +32,16 @@ function getFinancialYear(date) {
 	} return year;
 }
 
-function Stats({ filters }:Props) {
+function Stats({ filters = {} }:Props) {
 	const [isGraphView, setIsGraphView] = useState(true);
 	const [inputValue, setInputValue] = useState('');
 	const [showYear, setShowYear] = useState(false);
 
 	const [visible, setVisible] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
+
+	const geo = getGeoConstants();
+	const currency = geo.country.currency.code;
 
 	const currentYear = new Date().getFullYear();
 	const today = new Date();
@@ -228,12 +232,14 @@ function Stats({ filters }:Props) {
 					{isGraphView ? (
 						<BarGraphView
 							barData={barData}
+							currency={currency}
 						/>
 					)
 						: (
 							<div className={styles.linear_graph_container}>
 								<LinearGraphView
 									linearData={linearData}
+									currency={currency}
 								/>
 							</div>
 						)}

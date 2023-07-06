@@ -1,5 +1,4 @@
 import { Bar, BarDatum } from '@cogoport/charts/bar';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -9,12 +8,11 @@ import styles from '../styles.module.css';
 
 interface Props {
 	barData?: BarDatum[];
+	currency?: string;
 }
 
-function BarGraphView({ barData = [] }:Props) {
+function BarGraphView({ barData = [], currency = '' }:Props) {
 	const keys = ['Collected Amount', 'Outstanding Amount'];
-	const geo = getGeoConstants();
-	const currency = geo.country.currency.code;
 
 	return (
 		<div>
