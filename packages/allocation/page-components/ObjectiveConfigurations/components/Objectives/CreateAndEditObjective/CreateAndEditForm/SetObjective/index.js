@@ -1,5 +1,11 @@
+import GeneralConfiguration from './GeneralConfiguration';
+
 function SetObjective() {
-	return <h5>SetObjective</h5>;
+	return (
+		<section>
+			<GeneralConfiguration />
+		</section>
+	);
 }
 
 export default SetObjective;
