@@ -12,3 +12,12 @@
 	justify-content: flex-end;
 	margin-top: 12px;
 }
+
+.icon_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 15px;
+	margin-left: 8px;
+	cursor: pointer;
+}

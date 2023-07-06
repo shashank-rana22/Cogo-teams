@@ -152,10 +152,12 @@ const useReceivablesDashboard = (entityCode: string) => {
 	useEffect(() => {
 		kamOutstandingTrigger({
 			params: {
-				entityCode: entityCode || undefined,
+				entityCode  : entityCode || undefined,
+				serviceType : serviceType || undefined,
+				companyType : companyType !== 'All' ? companyType : undefined,
 			},
 		});
-	}, [kamOutstandingTrigger, entityCode]);
+	}, [kamOutstandingTrigger, entityCode, companyType, serviceType]);
 
 	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 

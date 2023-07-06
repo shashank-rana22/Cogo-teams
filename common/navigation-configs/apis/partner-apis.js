@@ -8491,9 +8491,14 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
 		{
 			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -12413,6 +12418,11 @@ const partner = {
 		},
 		{
 			api          : 'escalate_supplier_to_rm',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_promotional_rate_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

@@ -23,7 +23,7 @@ const EMPLOYEE_DETAILS_MAPPING = [
 	'cogoport_email',
 ];
 
-const HR_DETAILS_MAPPING = ['hr_id', 'hiring_manager_id', 'hrbp_id'];
+const HR_DETAILS_MAPPING = ['hr_id', 'reporting_manager_id', 'hiring_manager_id', 'hrbp_id'];
 
 const CONTROL_HRBP_ID = 'hrbp_id';
 
