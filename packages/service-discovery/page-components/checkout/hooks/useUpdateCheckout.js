@@ -8,14 +8,14 @@ const useUpdateCheckout = ({ getCheckout }) => {
 		url    : '/update_checkout',
 	}, { manual: true });
 
-	const updateCheckout = async ({ values, closeFunction }) => {
+	const updateCheckout = async ({ values, closeFunction, stateValue = false }) => {
 		try {
 			await trigger({ data: values });
 
 			await getCheckout();
 
 			if (closeFunction) {
-				closeFunction(false);
+				closeFunction(stateValue);
 			}
 		} catch (error) {
 			if (error?.response) {

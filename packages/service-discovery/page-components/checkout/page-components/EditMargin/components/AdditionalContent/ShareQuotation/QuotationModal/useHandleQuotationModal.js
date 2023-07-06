@@ -19,6 +19,8 @@ const useHandleQuotationModal = ({
 	widths,
 	selectedModes,
 	setShowShareQuotationModal,
+	updateCheckout = () => {},
+	updateLoading,
 }) => {
 	const { query, agent_id } = useSelector(({ general, profile }) => ({
 		query    : general.query,
@@ -148,8 +150,10 @@ const useHandleQuotationModal = ({
 					},
 				});
 				setShowShareQuotationModal(false);
+
 				Toast.success('Email sent');
-				// await updateSpotSearch({ is_locked: true });
+
+				updateCheckout({ values: { id: checkout_id, is_locked: true } });
 			} catch (err) {
 				if (err?.response) {
 					getApiErrorString(err.response?.data);
@@ -237,19 +241,21 @@ const useHandleQuotationModal = ({
 					key       : 'next',
 					label     : 'Next (Set Recipient)',
 					onClick   : handleNext,
+					disabled  : loading || updateLoading,
 					themeType : 'link',
 				},
 				{
 					key       : 'cancel',
 					label     : 'Cancel & Close Preview',
 					themeType : 'secondary',
+					disabled  : loading || updateLoading,
 					onClick   : () => setShowShareQuotationModal(false),
 					style     : { marginLeft: '16px' },
 				},
 				{
 					key       : 'send_quotation',
 					label     : 'Send Quotation',
-					loading,
+					loading   : loading || updateLoading,
 					onClick   : handleClick,
 					themeType : 'accent',
 					style     : { marginLeft: '16px' },
@@ -274,6 +280,7 @@ const useHandleQuotationModal = ({
 					key       : 'back',
 					label     : 'Back',
 					themeType : 'link',
+					disabled  : loading || updateLoading,
 					onClick   : () => setActiveState('customize'),
 				},
 				{
@@ -281,6 +288,7 @@ const useHandleQuotationModal = ({
 					label     : 'Cancel & Close Preview',
 					themeType : 'secondary',
 					onClick   : () => setShowShareQuotationModal(false),
+					disabled  : loading || updateLoading,
 					style     : { marginLeft: '16px' },
 				},
 				{
@@ -288,7 +296,7 @@ const useHandleQuotationModal = ({
 					label     : 'Send Quotation',
 					themeType : 'accent',
 					onClick   : handleClick,
-					loading,
+					loading   : loading || updateLoading,
 					style     : { marginLeft: '16px' },
 				},
 			],

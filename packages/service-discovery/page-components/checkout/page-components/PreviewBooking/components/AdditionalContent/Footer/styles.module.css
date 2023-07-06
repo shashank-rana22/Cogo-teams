@@ -1,0 +1,33 @@
+.container {
+    border-radius: 8px;
+    background-color: #FFFCE6;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding: 20px;
+}
+
+.validity_time {
+	text-align: center;
+    display: flex;
+    align-items: center;
+	white-space: nowrap;
+
+	.hidden {
+		display: none;
+	}
+
+    .visible {
+        font-weight: 600;
+        margin-left: 6px;
+    }
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.button_container {
+    display: flex;
+}

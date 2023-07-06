@@ -16,6 +16,7 @@ function PreviewBooking({ data = {}, primaryService = {} }) {
 	const [showBreakup, setShowBreakup] = useState(false);
 	const [additionalRemark, setAdditionalRemark] = useState('');
 	const [cargoDetails, setCargoDetails] = useState({ cargo_readiness_date: null, cargo_value: null, hs_code: null });
+	const [agreeTandC, setAgreeTandC] = useState(false);
 
 	useEffect(() => {
 		setAdditionalRemark(margin_approval_request_remarks[FIRST_INDEX] || '');
@@ -34,6 +35,8 @@ function PreviewBooking({ data = {}, primaryService = {} }) {
 				onChange={setAdditionalRemark}
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
+				agreeTandC={agreeTandC}
+				setAgreeTandC={setAgreeTandC}
 			/>
 		</div>
 	);

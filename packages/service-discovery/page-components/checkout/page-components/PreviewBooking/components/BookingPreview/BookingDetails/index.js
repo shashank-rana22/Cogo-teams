@@ -3,11 +3,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMLock } from '@cogoport/icons-react';
 import { useContext, useRef, useEffect } from 'react';
 
+import ContainerDetails from '../../../../../../../common/ContainerDetails';
 import LocationDetails from '../../../../../../../common/LocationDetails';
 import { CheckoutContext } from '../../../../../context';
 import handleTimer from '../../../../../utils/handleTimer';
 
-import ContainerDetails from './ContainerDetails';
 import ShippingLineDetails from './ShippingLineDetails';
 import styles from './styles.module.css';
 

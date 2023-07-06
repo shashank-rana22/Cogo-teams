@@ -6,9 +6,11 @@ import { CheckoutContext } from '../context';
 import bookingConfirmationType from '../helpers/bookingConfirmationType';
 import useGetCheckout from '../hooks/useGetCheckout';
 import useGetOrganization from '../hooks/useGetOrganization';
+import useUpdateCheckout from '../hooks/useUpdateCheckout';
 
 import EditMargin from './EditMargin';
 import PreviewBooking from './PreviewBooking';
+import ShipmentExecution from './ShipmentExecution';
 
 function Checkout() {
 	const {
@@ -24,13 +26,18 @@ function Checkout() {
 	const { checkout_id = '', checkoutType = '', rfq_id = '' } = query;
 
 	const [bookingConfirmationMode, setBookingConfirmationMode] = useState('');
-	const [checkoutState, setCheckoutState] = useState('add_or_edit_margin');
+	const [checkoutState, setCheckoutState] = useState('shipment_execution');
 
 	const {
 		data = {},
 		loading,
 		getCheckout,
 	} = useGetCheckout({ checkout_id });
+
+	const {
+		updateCheckout,
+		updateLoading,
+	} = useUpdateCheckout({ getCheckout });
 
 	const { detail = {}, rate, currency_conversions: conversions, invoice } = data;
 
@@ -110,27 +117,11 @@ function Checkout() {
 			shouldEditMargin,
 			setCheckoutState,
 			invoice,
+			updateCheckout,
+			updateLoading,
 		}),
-		[
-			checkout_id,
-			conversions,
-			detail,
-			getCheckout,
-			isOrgCP,
-			loading,
-			orgData,
-			orgLoading,
-			primaryService,
-			rate,
-			services,
-			organization_settings,
-			checkoutMethod,
-			excludeWhatsapp,
-			bookingConfirmationMode,
-			isChannelPartner,
-			shouldEditMargin,
-			invoice,
-		],
+		// eslint-disable-next-line max-len
+		[primaryService, detail, services, rate, conversions, orgLoading, checkout_id, loading, orgData, getCheckout, isOrgCP, organization_settings, checkoutMethod, excludeWhatsapp, bookingConfirmationMode, isChannelPartner, shouldEditMargin, invoice, updateCheckout, updateLoading],
 	);
 
 	const COMPONENT_MAPPING = {
@@ -148,6 +139,9 @@ function Checkout() {
 				data,
 				primaryService,
 			},
+		},
+		shipment_execution: {
+			Component: ShipmentExecution,
 		},
 	};
 

@@ -32,6 +32,8 @@ function ShareQuotation({
 	setCheckoutState = () => {},
 	invoice,
 	orgData,
+	updateCheckout = () => {},
+	updateLoading,
 }) {
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
 
@@ -76,7 +78,19 @@ function ShareQuotation({
 		},
 	];
 
+	const { quotation_email_sent_at = '' } = detail || {};
+
 	const updateQuote = async () => {
+		if (quotation_email_sent_at) {
+			updateCheckout({
+				values        : { state: 'preview_booking', id: checkout_id },
+				closeFunction : setCheckoutState,
+				stateValue    : 'preview_booking',
+			});
+
+			return;
+		}
+
 		const marginValues = rateDetails.reduce((acc, curr) => {
 			const { id = '', line_items = [] } = curr;
 
@@ -174,7 +188,8 @@ function ShareQuotation({
 						showWhatsappVerificationModal={showWhatsappVerificationModal}
 						setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
 						isChannelPartner={isChannelPartner}
-						getCheckout={getCheckout}
+						updateCheckout={updateCheckout}
+						updateLoading={updateLoading}
 					/>
 
 					<CheckboxGroup
@@ -197,6 +212,8 @@ function ShareQuotation({
 					detail={detail}
 					organization={orgData}
 					widths={widths}
+					updateCheckout={updateCheckout}
+					updateLoading={updateLoading}
 				/>
 			) : null}
 

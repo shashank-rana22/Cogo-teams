@@ -11,7 +11,7 @@ const useGetCheckout = ({ checkout_id }) => {
 
 	const getCheckout = async () => {
 		try {
-			trigger({ params: { id: checkout_id } });
+			await trigger({ params: { id: checkout_id } });
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

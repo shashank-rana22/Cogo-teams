@@ -4,13 +4,22 @@ import { useContext } from 'react';
 import Cancellation from '../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../commons/ConfirmationTexts';
 import DefaultQuotationInfo from '../../../../commons/DefaultQuotationInfo';
+import ServiceTerms from '../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../context';
 
 import BookingContent from './BookingContent';
 import CargoDetails from './CargoDetails';
+import Footer from './Footer';
 import styles from './styles.module.css';
 
-function AdditionalContent({ value, onChange, cargoDetails = {}, setCargoDetails = () => {} }) {
+function AdditionalContent({
+	value,
+	onChange,
+	cargoDetails = {},
+	setCargoDetails = () => {},
+	agreeTandC,
+	setAgreeTandC,
+}) {
 	const {
 		rate,
 		detail,
@@ -49,7 +58,11 @@ function AdditionalContent({ value, onChange, cargoDetails = {}, setCargoDetails
 			<div className={styles.sub_heading}>Cancellation Policy</div>
 
 			<div className={styles.cancellation_container}>
-				<Cancellation detail={detail} serviceType={primary_service} source="preview_booking" />
+				<Cancellation
+					detail={detail}
+					serviceType={primary_service}
+					source="preview_booking"
+				/>
 
 				<div className={styles.confirmation_texts}>
 					<ConfirmationTexts
@@ -63,6 +76,14 @@ function AdditionalContent({ value, onChange, cargoDetails = {}, setCargoDetails
 
 				<DefaultQuotationInfo />
 			</div>
+
+			<ServiceTerms
+				detail={detail}
+				agreeTandC={agreeTandC}
+				setAgreeTandC={setAgreeTandC}
+			/>
+
+			<Footer detail={detail} />
 		</div>
 	);
 }

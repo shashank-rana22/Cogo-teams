@@ -5,7 +5,6 @@ import { useState } from 'react';
 import ChangeOpsExecutive from '../../../../../../commons/ChangeOpsExecutive';
 import ContactDetails from '../../../../../../commons/ContactDetails';
 import WhatsappNoVerificationModal from '../../../../../../commons/WhatsappNoVerificationModal';
-import useUpdateCheckout from '../../../../../../hooks/useUpdateCheckout';
 
 import styles from './styles.module.css';
 
@@ -15,7 +14,8 @@ function PocDetails({
 	showWhatsappVerificationModal,
 	setShowWhatsappVerificationModal,
 	isChannelPartner,
-	getCheckout,
+	updateCheckout = () => {},
+	updateLoading,
 }) {
 	const [showEditContact, setShowEditContact] = useState(false);
 
@@ -26,11 +26,6 @@ function PocDetails({
 		importer_exporter_branch_id = '',
 		importer_exporter_id = '',
 	} = detail || {};
-
-	const {
-		updateCheckout,
-		updateLoading,
-	} = useUpdateCheckout({ getCheckout });
 
 	const onEditorAddContact = (values) => {
 		updateCheckout({ values: { ...values, id } });
