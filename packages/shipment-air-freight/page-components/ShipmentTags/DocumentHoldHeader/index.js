@@ -36,7 +36,7 @@ function DocumentHoldHeader() {
 	const { inco_term } = primary_service || {};
 	const { document_delay_status } = shipment_data || {};
 
-	const tradeType = GLOBAL_CONSTANTS.options.inco_term[inco_term].trade_type;
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term[inco_term]?.trade_type;
 
 	const status = STATUS_MAPPING[document_delay_status];
 

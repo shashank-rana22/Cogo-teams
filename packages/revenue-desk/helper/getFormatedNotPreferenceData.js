@@ -24,6 +24,9 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 			active_booking           : element?.data?.active_bookings || DEFAULT_VALUE,
 			profit                   : validities?.profit || DEFAULT_VALUE,
 			profit_percentage        : validities?.profit_percentage || DEFAULT_VALUE,
+			line_items               : validities?.line_items,
+			origin_locals            : element?.origin_locals,
+			destination_locals       : element?.destination_locals,
 			source                   : element?.source || undefined,
 			api                      : 'showed_rates',
 		};
