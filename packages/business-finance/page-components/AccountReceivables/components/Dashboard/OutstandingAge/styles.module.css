@@ -28,10 +28,11 @@
 
 .outstanding {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 }
 
 .styled_text {
+	margin-right: 10px;
 	font-size: 16px;
 	font-weight: 600;
 }

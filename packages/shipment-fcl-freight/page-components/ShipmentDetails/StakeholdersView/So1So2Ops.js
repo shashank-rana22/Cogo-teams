@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
@@ -35,8 +36,13 @@ function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
 
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		const navigation = getNavigationFromUrl();
+
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/
+		${shipment_data?.id}${navigation ? `?navigation=${navigation}` : ''}`;
+
 		window.location.replace(newHref);
+
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
 

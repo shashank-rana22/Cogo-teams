@@ -1,0 +1,121 @@
+.single_item {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	font-weight: 500;
+
+	& > div {
+		margin: 0 8px 0 12px;
+	}
+}
+
+.upload_info {
+	height: fit-content;
+	padding: 4px 12px;
+	margin-right: 10px;
+	font-size: var(--font-size-sm);
+	white-space: nowrap;
+	background: var(--color-secondary-4);
+	border-radius: 12px;
+}
+
+.document_status {
+	height: fit-content;
+	padding: 4px 12px;
+	margin-right: 10px;
+	font-size: var(--font-size-sm);
+	background: var(--color-secondary-4);
+	border-radius: 12px;
+
+	&.accepted {
+		color: var(--color-tertiary-success-green-1);
+		background: var(--color-tertiary-success-green-5);
+	}
+
+	&.pending {
+		color: var(--color-primary-error-red-2);
+		background: var(--color-primary-error-red-5);
+	}
+}
+
+.gap {
+	display: flex;
+
+	.ui_pill_container {
+		background: var(--color-secondary-4);
+		background-color: var(--color-secondary-4);
+		border-radius: 16px;
+	}
+}
+
+.heading {
+	width: 20%;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-2);
+}
+
+.dots {
+	top: 14px;
+	right: 12px;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	width: 10px;
+}
+
+.action_container {
+	display: flex;
+	align-items: center;
+}
+
+.single_item_child {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 16px;
+	margin-bottom: 16px;
+	border: 1px solid var(--color-secondary-4);
+	border-radius: 4px;
+}
+
+.upload_item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 16px;
+	margin-bottom: 16px;
+	border: 1px solid var(--color-secondary-4);
+	border-radius: 4px;
+}
+
+.message_text {
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
+}
+
+.hold_document {
+	color: var(--color-primary-error-red-2);
+}
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 2px;
+			font-size: var(--font-size-md);
+			font-weight: 600;
+		}
+	}
+}
