@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListOrganizationServices({ currentPage }) {
+function useListOrganizationServices({ currentPage, activeTab }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -13,7 +13,7 @@ function useListOrganizationServices({ currentPage }) {
 				params: {
 					filters: {
 						service_expertise_required : true,
-						stage_of_approval          : 'need_analysis',
+						stage_of_approval          : activeTab,
 					},
 					page: currentPage,
 				},
@@ -24,7 +24,7 @@ function useListOrganizationServices({ currentPage }) {
 	};
 	useEffect(() => {
 		listOrganizationServices();
-	}, [currentPage]);
+	}, [currentPage, activeTab]);
 	return {
 		data       : data?.list,
 		loading,

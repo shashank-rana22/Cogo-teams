@@ -1,11 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function StatusBar() {
-	const [activeTab, setActiveTab] = useState('need_analysis');
-
+function StatusBar({ activeTab, setActiveTab }) {
 	return (
 		<div className={styles.parent}>
 			<Tabs

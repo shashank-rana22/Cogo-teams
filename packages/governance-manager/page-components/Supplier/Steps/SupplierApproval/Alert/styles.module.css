@@ -1,0 +1,12 @@
+.parent{
+    font-weight: 400;
+    font-size:14px;
+    margin:6px;
+ 
+}
+.header{
+    text-decoration: underline;
+}
+.list{
+    margin-left:0px;
+}

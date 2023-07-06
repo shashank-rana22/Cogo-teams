@@ -1,27 +1,23 @@
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
-import { useState } from 'react';
-
-import SupplierApprovalModal from '../SupplierApprovalModal';
 
 import styles from './styles.module.css';
 
-function Item({ title, verify, setVerify, index }) {
-	const [open, setOpen] = useState(false);
+function Item({ title, verify, index, setOpen }) {
 	return (
 		<div className={styles.row}>
 			<div className={styles.title}>{title}</div>
 			<div className={styles.status_button}>
-				{verify ? (
+				{verify[index] ? (
 					<div className={styles.status_text}>
 
-						<IcCFtick width={20} height={20} />
-						<span style={{ marginLeft: '8px' }}> Verified</span>
+						<IcCFtick width={20} height={20} fill="#5CAF3F" />
+						<span style={{ marginLeft: '8px', color: '#5CAF3F' }}> Verified</span>
 					</div>
 				) : (
 					<div className={styles.status_text}>
-						<IcCFcrossInCircle width={20} height={20} />
-						<span style={{ marginLeft: '8px' }}> Rejected</span>
+						<IcCFcrossInCircle width={20} height={20} fill="#EE3425" />
+						<span style={{ marginLeft: '8px', color: '#EE3425' }}> Rejected</span>
 					</div>
 				)}
 				<Button
@@ -29,14 +25,14 @@ function Item({ title, verify, setVerify, index }) {
 					size="md"
 					themeType="accent"
 					onClick={() => {
-						setOpen(true);
+						setOpen(index + 1);
 					}}
 				>
 					Open
 
 				</Button>
 			</div>
-			{open && <SupplierApprovalModal open={open} setOpen={setOpen} verify={verify} setVerify={setVerify} index={index} />}
+
 		</div>
 	);
 }
