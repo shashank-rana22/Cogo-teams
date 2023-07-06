@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
@@ -27,7 +28,7 @@ import styles from './styles.module.css';
 
 const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
 const UNAUTHORIZED_STATUS_CODE = 403;
-function LastMileDesk({ get = {}, activeStakeholder = '' }) {
+function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('overview');
@@ -154,6 +155,10 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="purchase_live_invoice" title="Live Invoices">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -181,4 +186,4 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default LastMileDesk;
+export default LastMileDeskManager;

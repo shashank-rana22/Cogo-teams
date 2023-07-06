@@ -1,13 +1,12 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Tracking } from '@cogoport/ocean-modules';
-import getNavigationFromUrl from '@cogoport/request/helpers/getNavigationFromUrl';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -25,32 +24,23 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDITIONAL_METHODS = ['stakeholder', 'service_objects'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const UNAUTHORIZED_STATUS_CODE = 403;
-function LastMileDesk({ get = {}, activeStakeholder = '' }) {
+
+function BookingDeskManager({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('overview');
-
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
-
-	const handleVersionChange = useCallback(() => {
-		const navigation = getNavigationFromUrl();
-
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}
-		${navigation ? `?navigation=${navigation}` : ''}`;
-
-		window.location.replace(newHref);
-		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const rollover_containers = (container_details || []).filter(
 		(container) => container?.rollover_status === 'requested',
 	);
 
+	const [activeTab, setActiveTab] = useState('overview');
+
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICES_ADDITIONAL_METHODS,
+		additional_methods: SERVICE_ADDITIONAL_METHODS,
 		activeStakeholder,
 	});
 
@@ -117,14 +107,9 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 					<RolloveDetails />
 
 					<div className={styles.toggle_chat}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
 						<ShipmentChat />
 					</div>
+
 				</div>
 
 				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
@@ -154,6 +139,10 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="purchase_live_invoice" title="Live Invoices">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -165,11 +154,6 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
-
 					</Tabs>
 				</div>
 
@@ -181,4 +165,4 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default LastMileDesk;
+export default BookingDeskManager;
