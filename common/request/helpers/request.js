@@ -7,7 +7,7 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -72,19 +72,12 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 
-	let ins = false;
-	if (newConfig.url === '/list_address_for_insurance') {
-		ins = true;
-		newConfig.baseURL = process.env.NEXT_PUBLIC_REST_BASE_API_URL2;
-	}
-
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope   : !ins ? 'partner' : 'micro_service',
-			authorization        : `Bearer: ${!ins ? token : '0c320283-6f34-42d0-ac1d-e3390049fe65'}`,
-			authorizationparameters,
-			authorizationscopeid : ins ? ' 0c320283-6f34-42d0-ac1d-e3390049fe65' : undefined,
+			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
 		},
 	};
 });
+
+export { request };
