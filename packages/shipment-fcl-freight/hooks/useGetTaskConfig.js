@@ -25,7 +25,7 @@ function useGetTaskConfig({ task = {} }) {
 	}, [trigger, task.id]);
 
 	useEffect(() => {
-		if (task?.task !== 'upload_compliace_documents') {
+		if (task?.task !== 'upload_compliance_documents') {
 			getTaskConfigTrigger();
 		}
 	}, [getTaskConfigTrigger, task?.task]);

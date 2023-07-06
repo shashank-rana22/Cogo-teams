@@ -150,9 +150,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_nomination_details'
-	) {
+	if (task.task === 'update_nomination_details') {
 		return (
 			<NominationTask
 				primaryService={primary_service}
@@ -174,10 +172,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'upload_si'
-		&& primary_service?.trade_type === 'export'
-	) {
+	if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
 		return (
 			<UploadSI
 				pendingTask={task}
@@ -188,12 +183,11 @@ function ExecuteTask({
 		);
 	}
 
-	if (task.task === 'upload_compliace_documents') {
+	if (task.task === 'upload_compliance_documents') {
 		return (
 			<UploadComplianceDocs
-				pendingTask={task}
+				task={task}
 				onCancel={onCancel}
-				services={servicesList}
 				taskListRefetch={taskListRefetch}
 			/>
 		);

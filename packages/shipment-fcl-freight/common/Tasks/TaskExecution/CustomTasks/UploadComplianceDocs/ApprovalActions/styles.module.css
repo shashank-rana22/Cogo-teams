@@ -1,0 +1,40 @@
+.text {
+	padding: 2px 4px;
+	font-size: 10px;
+	line-height: 150%;
+	color: var(--black, #221f20);
+	border-radius: 4px;
+}
+
+.amend {
+	background-color: #fef199;
+}
+
+.approve {
+	background-color: #c4dc91;
+}
+
+.reject {
+	background-color: #f8aea8;
+}
+
+.action_div {
+	display: flex;
+
+	:global {
+		.ui_VZAaD {
+			min-height: fit-content;
+			padding: 0;
+		}
+	}
+}
+
+.remarks {
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #ee3425;
+	text-decoration-line: underline;
+	cursor: pointer;
+}

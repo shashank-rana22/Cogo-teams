@@ -8,14 +8,60 @@
 	border-radius: 4px;
 }
 
-.doc_name {
+.doc_name_div {
 	display: flex;
 	flex-direction: column;
 	width: 40%;
+	margin-left: 24px;
+	line-height: 140%;
+}
+
+.doc_label {
+	margin-bottom: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.doc_name {
+	margin-right: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
 }
 
 .doc_name_info {
 	display: flex;
+}
+
+.info_icon {
+	cursor: pointer;
+}
+
+.sample_file {
+	margin-left: 40px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+	color: var(--link-blue, #034afd);
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.actions {
+	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
+	width: 40%;
+}
+
+.approval_actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 30%;
+}
+
+.tooltip_content {
+	font-size: 10px;
 }

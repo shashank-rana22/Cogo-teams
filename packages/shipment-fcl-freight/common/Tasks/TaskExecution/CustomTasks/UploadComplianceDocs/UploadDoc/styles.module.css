@@ -1,0 +1,4 @@
+.errors {
+	font-size: var(--font-size-md);
+	color: red;
+}

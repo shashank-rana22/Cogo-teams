@@ -1,4 +1,7 @@
 export default function getNavigationFromUrl() {
-	const navigation = new URLSearchParams(window?.location?.search)?.get('navigation');
-	return navigation || undefined;
+	if (typeof window === 'object') {
+		const navigation = new URLSearchParams(window?.location?.search)?.get('navigation');
+		return navigation || undefined;
+	}
+	return undefined;
 }

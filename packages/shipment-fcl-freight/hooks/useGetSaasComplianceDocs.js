@@ -1,17 +1,23 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useGetSaasComplianceDocs = () => {
+const FIRST_VAL = 0;
+
+const useGetSaasComplianceDocs = ({ primary_service }) => {
+	const { user } = useSelector((state) => state?.profile);
+	const { id: userId } = user || {};
+
 	const [{ loading, data }, trigger] = useRequestBf({
 		auth   : 'get_saas_trade_engine_documents',
 		url    : 'saas/trade-engine/documents',
 		method : 'GET',
 		params : {
-			hsCode            : '29024400',
-			originPortId      : 'eb187b38-51b2-4a5e-9f3c-978033ca1ddf',
-			destinationPortId : '33470eb3-0a63-4427-bf7e-b68d043364dc',
-			performedBy       : '2e6dbab1-5658-4c95-a242-04b22f11272c',
+			hsCode            : primary_service?.hs_code?.hs_code_name?.split(' ')?.[FIRST_VAL],
+			originPortId      : primary_service?.origin_port?.country_id,
+			destinationPortId : primary_service?.destination_port?.country_id,
+			performedBy       : userId,
 		},
 	}, { manual: true });
 
