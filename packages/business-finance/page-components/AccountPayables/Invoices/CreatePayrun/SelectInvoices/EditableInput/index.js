@@ -6,6 +6,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const MIN_AMOUNT = 0;
+const HUNDERED_PERCENT = 100;
+const TEN_PERCENT = 10;
+
 const getFormattedAmount = ({ amount, currency }) => (
 	formatAmount({
 		amount,
@@ -30,9 +34,9 @@ function EditableTdsInput({ itemData, field, setEditedValue }) {
 		tdsDeducted = 0,
 	} = newItem;
 
-	const checkAmount = (+invoiceAmount * 10) / 100;
+	const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 	const maxValueCrossed = +value + +tdsDeducted > +checkAmount;
-	const lessValueCrossed = Number.parseInt(value, 10) < 0;
+	const lessValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 	const isError = lessValueCrossed || maxValueCrossed;
 
 	let errorMessege = '';

@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const MIN_AMOUNT = 0;
+
 const getFormattedAmount = ({ amount, currency }) => (
 	formatAmount({
 		amount,
@@ -29,7 +31,7 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 	} = newItem;
 
 	const maxValueCrossed = +value > +payableValue;
-	const lessValueCrossed = Number.parseInt(value, 10) <= 0;
+	const lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
 
 	const isError = lessValueCrossed || maxValueCrossed;
 

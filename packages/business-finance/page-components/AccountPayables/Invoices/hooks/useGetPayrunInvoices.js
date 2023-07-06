@@ -12,6 +12,10 @@ import styles from './styles.module.css';
 
 const ELEMENT_NOT_FOUND = -1;
 
+const MIN_AMOUNT = 0;
+const HUNDERED_PERCENT = 100;
+const TEN_PERCENT = 10;
+
 function formatToTimeStamp(dateString) {
 	const date = new Date(dateString);
 	const formatedDate = formatDate({
@@ -140,10 +144,10 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 					tdsAmount,
 				} = item;
 				const maxValueCrossed = +payableAmount > +payableValue;
-				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
-				const checkAmount = (+invoiceAmount * 10) / 100;
+				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+				const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 				const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
 				return ({
 					...item,
@@ -186,10 +190,10 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 					tdsAmount,
 				} = newList[index];
 				const maxValueCrossed = +payableAmount > +payableValue;
-				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
-				const checkAmount = (+invoiceAmount * 10) / 100;
+				const lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
+				const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 				const maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				const lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
 				newList[index] = {
 					...newList[index],
