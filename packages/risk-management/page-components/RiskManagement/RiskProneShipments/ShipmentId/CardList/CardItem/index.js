@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import RenderTooltip from '../../../../common/RenderTooltip';
+import RenderTooltipComponent from '../../../../common/RenderTooltipComponent';
 
 import styles from './styles.module.css';
 
@@ -53,7 +53,7 @@ function CardItem({ itemData }) {
 							{port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							<RenderTooltip content={display_name} maxLength={SHOW_TOOLTIP_MAX_LENGTH} />
+							<RenderTooltipComponent content={display_name} maxLength={SHOW_TOOLTIP_MAX_LENGTH} />
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@ function CardItem({ itemData }) {
 							{destination_port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							<RenderTooltip
+							<RenderTooltipComponent
 								content={destination_port_display_name}
 								maxLength={SHOW_TOOLTIP_MAX_LENGTH}
 							/>
@@ -97,7 +97,10 @@ function CardItem({ itemData }) {
 							<div className={styles.commodity_text}>
 								Commodity :
 								{' '}
-								<RenderTooltip content={commodity_description} maxLength={COMMODITY_VALUE_LENGTH} />
+								<RenderTooltipComponent
+									content={commodity_description}
+									maxLength={COMMODITY_VALUE_LENGTH}
+								/>
 							</div>
 						)
 						: null}
