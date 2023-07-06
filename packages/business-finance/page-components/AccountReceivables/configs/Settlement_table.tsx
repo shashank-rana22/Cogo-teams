@@ -3,11 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
-import { getByKey } from '@cogoport/utils';
 
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import GetSortingData from '../components/Outstanding/OutstandingList/SettlementTable/sorting';
-
-import styles from './styles.module.css';
 
 interface Sort {
 	sortType?: string;
@@ -25,49 +23,32 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 	{
 		Header   : 'Reference Number',
 		id       : 'name',
-		accessor : (row) => (
-			<div style={{ display: 'flex' }}>
-				<div style={{ marginRight: '10px' }}>
-					{row?.sourceDocumentValue?.length >= DEFAULT_LENGTH ? (
-						<Tooltip
-							content={(
-								<div className={styles.tooltip_text}>
-									{getByKey(row, 'sourceDocumentValue') as string}
-								</div>
-							)}
-							interactive
-						>
-							<div>
-								{(row?.sourceDocumentValue as string).substring(0, DEFAULT_LENGTH)}
-								...
-							</div>
-						</Tooltip>
-					) : (
+		accessor : (row) => {
+			const { sourceDocumentValue } = row;
+			return (
+				<div style={{ display: 'flex' }}>
+					<div style={{ marginRight: '10px' }}>
+						{showOverflowingNumber(sourceDocumentValue, DEFAULT_LENGTH)}
+					</div>
+					{row?.sourceIrnNumber ? (
 						<div>
-							{row?.sourceDocumentValue }
+							<Tooltip
+								content={(
+									<div>
+										{row?.sourceIrnNumber}
+									</div>
+								)}
+								placement="top"
+								interactive
+							>
+								<div><IcMInfo height="12px" width="12px" /></div>
+							</Tooltip>
 
 						</div>
-					)}
+					) : ''}
 				</div>
-				{row?.sourceIrnNumber ? (
-					<div>
-						<Tooltip
-							content={(
-								<div>
-									{row?.sourceIrnNumber}
-								</div>
-							)}
-							placement="top"
-							interactive
-						>
-							<div><IcMInfo height="12px" width="12px" /></div>
-						</Tooltip>
-
-					</div>
-				) : ''}
-			</div>
-		),
-
+			);
+		},
 	},
 	{
 		Header   : 'Invoice Number',
@@ -75,25 +56,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ marginRight: '10px' }}>
-					{row?.destinationDocumentValue?.length >= DEFAULT_LENGTH ? (
-						<Tooltip
-							content={(
-								<div className={styles.tooltip_text}>
-									{getByKey(row, 'destinationDocumentValue') as string}
-								</div>
-							)}
-							interactive
-						>
-							<div>
-								{(row?.destinationDocumentValue as string).substring(0, DEFAULT_LENGTH)}
-								...
-							</div>
-						</Tooltip>
-					) : (
-						<div>
-							{row?.destinationDocumentValue }
-						</div>
-					)}
+					{showOverflowingNumber(row?.destinationDocumentValue, DEFAULT_LENGTH)}
 				</div>
 				{row?.destinationIrnNumber ? (
 					<div>
@@ -118,6 +81,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 		Header: (
 			<div style={{ display: 'flex' }}>
 				<span style={{ marginRight: '8px' }}>Invoice Amt</span>
+
 				<GetSortingData
 					setSort={setSort}
 					sort={sort}

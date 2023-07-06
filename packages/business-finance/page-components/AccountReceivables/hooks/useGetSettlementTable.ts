@@ -12,8 +12,8 @@ function useGetSettlementTable(organizationId:string, entityCode?: string) {
 		accountType : 'All',
 	});
 	const [sort, setSort] = useState({
-		sortType : '',
-		sortBy   : '',
+		sortType : 'Desc',
+		sortBy   : 'settlementDate',
 	});
 	const { query, accountType, pageLimit, page, orgId } = settlementFilters || {};
 
