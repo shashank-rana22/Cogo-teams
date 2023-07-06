@@ -9,6 +9,7 @@ import DownloadOverseasInvoice from './DownloadOverseasInvoice';
 import DownloadUploadHistoryStatusFile from './DownloadUplaodHistoryStatusFile.js';
 import DownloadUploadHistoryFile from './DownloadUploadHistoryFile.js';
 import FormatAmountCurrency from './FormatAmountCurrency';
+import PaidDropDown from './PaidDropDown';
 import RibbonData from './RibbonData';
 import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
@@ -54,6 +55,9 @@ const RenderFunctions = (overseasData) => {
 		),
 		renderDownloadOverseasInvoice: (itemData) => (
 			<DownloadOverseasInvoice itemData={itemData} overseasData={overseasData} />
+		),
+		renderDropDownData: (itemData) => (
+			<PaidDropDown itemData={itemData} />
 		),
 	};
 	return {

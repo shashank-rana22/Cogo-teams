@@ -22,7 +22,7 @@ export const payrunPaidConfig = {
 			},
 
 			lowerKey: {
-				key  : 'billType',
+				key  : 'billStatus',
 				type : 'tag',
 			},
 			func : 'renderFieldPair',
@@ -76,14 +76,15 @@ export const payrunPaidConfig = {
 			span        : 1,
 		},
 		{
-			key   : 'billPaymentStatus',
-			label : 'Status ',
-			span  : 0.8,
+			key   : 'paymentStatus',
+			label : 'Payment Status ',
+			span  : 1,
 			// func  : 'renderStatus',
 		},
 		{
 			func : 'renderDropDownData',
 			span : 0.7,
+
 		},
 		{
 			key  : 'invoiceDetails',

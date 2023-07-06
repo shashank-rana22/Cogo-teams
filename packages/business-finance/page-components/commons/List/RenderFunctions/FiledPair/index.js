@@ -19,7 +19,7 @@ function FieldPair({ itemData, field }) {
 		} if (type === 'tag') {
 			return (
 				<text className={styled.lower_keys}>
-					{getByKey(itemData, key)}
+					{startCase(getByKey(itemData, key))}
 				</text>
 			);
 		} if (type === 'serviceType') {
