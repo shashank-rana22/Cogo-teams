@@ -8,6 +8,10 @@ import getFeedbackConfig from '../../../../../../configurations/getFeedBackConfi
 import getShowElements from './get-show-elements';
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const FLEX_HUNDRED = 100;
+const FLEX_ONE = 1;
+
 function DislikeFeedbackForm({
 	rate = {},
 	control,
@@ -17,16 +21,6 @@ function DislikeFeedbackForm({
 	watch = () => {},
 }) {
 	const controls = getFeedbackConfig(rate?.service_type);
-
-	// if (rate?.service_type === 'air_freight') {
-	// 	controls = controls.map((control) => {
-	// 		const item = { ...control };
-	// 		if (item.name === 'preferred_airline_ids') {
-	// 			item.defaultOptions = airlineOptions;
-	// 		}
-	// 		return item;
-	// 	});
-	// }
 
 	const showElements = getShowElements(controls, formValues);
 
@@ -71,7 +65,7 @@ function DislikeFeedbackForm({
 					label : controlItem?.label,
 				});
 
-				const flex = (span || 12) / 12 * 100;
+				const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 
 				const show = !(controlItem.name in showElements) || showElements[controlItem.name];
 

@@ -17,20 +17,22 @@ const KYC_ICON_MAPPING = {
 };
 
 function Organization(props) {
-	const { data } = props;
+	const { data, option } = props;
+
+	const { account_type, tags, business_name, trade_name, kyc_status } = data || option || {};
 
 	const getAccountType = () => {
-		if (data.account_type === 'service_provider') return 'LSP';
-		if ((data.tags || []).includes('partner')) return 'CP';
+		if (account_type === 'service_provider') return 'LSP';
+		if ((tags || []).includes('partner')) return 'CP';
 		return 'IE';
 	};
 
 	return (
 		<div className={styles.option_container}>
 			<div className={styles.option_name_container}>
-				<div className={styles.business_name}>{data.business_name}</div>
+				<div className={styles.business_name}>{business_name}</div>
 
-				<div className={styles.trade_name}>{data.trade_name}</div>
+				<div className={styles.trade_name}>{trade_name}</div>
 			</div>
 
 			<div className={styles.icn_container}>
@@ -39,7 +41,7 @@ function Organization(props) {
 				</div>
 
 				<div className={styles.icon}>
-					{KYC_ICON_MAPPING[data.kyc_status]}
+					{KYC_ICON_MAPPING[kyc_status]}
 				</div>
 			</div>
 		</div>

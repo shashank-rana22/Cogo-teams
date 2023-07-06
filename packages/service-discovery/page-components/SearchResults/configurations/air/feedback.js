@@ -1,5 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import CustomSelectOption from '../../../../common/CustomSelectOption';
+
+const renderLabel = (option) => CustomSelectOption({ option, key: 'airlines' });
+
 const airFeedBackControls = [
 	{
 		name    : 'feedbacks',
@@ -38,20 +42,19 @@ const airFeedBackControls = [
 		name  : 'preferred_freight_rate',
 		label : 'Indicative Rate',
 		type  : 'number',
-		span  : 9,
+		span  : 10,
 	},
-	// {
-	// 	name           : 'preferred_airline_ids',
-	// 	type           : 'select',
-	// 	optionsListKey : 'air-lines',
-	// 	defaultOptions : true,
-	// 	caret          : true,
-	// 	label          : 'Preferred Air lines',
-	// 	multiple       : true,
-	// 	autoCloseMenu  : false,
-	// 	placeholder:
-	// 		"Enter preferred airline line only if customer won't accept any other line",
-	// },
+	{
+		name        : 'preferred_airline_ids',
+		label       : 'Preferred Air lines',
+		type        : 'async-select',
+		asyncKey    : 'list_operators',
+		initialCall : true,
+		renderLabel,
+		multiple    : true,
+		placeholder:
+			"Enter preferred airline line only if customer won't accept any other line",
+	},
 	{
 		name  : 'remarks',
 		type  : 'textarea',

@@ -35,8 +35,8 @@
         .ui_chip_container.ui_ps_themeType_primary{
             background-color: #FFFFFF;
             border: 1px solid #ECECEC;
-            border-radius: 24px;
-            padding: 20px 8px;
+            border-radius: 28px;
+            padding: 18px 4px;
             
             &:hover{
                 background-color: #FFFFFF;
@@ -46,8 +46,8 @@
         .ui_chip_container.ui_ps_themeType_secondary{
             background-color: #FCDC00;
             border: 1px solid #FCDC00;
-            border-radius: 24px;
-            padding: 20px 5px;
+            border-radius: 28px;
+            padding: 18px 4px;
 
             &:hover{
                 background-color: #FCDC00;

@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
@@ -40,10 +40,10 @@ function FieldArray({
 		append(childEmptyValues);
 	}
 
-	useEffect(() => {
-		if (!rest.defaultValue) return;
-		setValue(name, rest.defaultValue);
-	}, []);
+	// useEffect(() => {
+	// 	if (!rest.defaultValue) return;
+	// 	setValue(name, rest.defaultValue);
+	// }, []);
 
 	return (
 		<div className={styles.container}>
@@ -67,7 +67,6 @@ function FieldArray({
 							setValue={setValue}
 						/>
 					</div>
-
 				))}
 			</div>
 			{showButtons && !disabled ? (

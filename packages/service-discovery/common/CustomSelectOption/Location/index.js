@@ -40,7 +40,9 @@ function Location(props) {
 
 	return (
 		<div className={styles.label_container}>
-			<div className={styles.label_icon}><IconElemennt fill="#333333" /></div>
+			<div className={styles.label_icon}>
+				<IconElemennt fill="#333333" />
+			</div>
 
 			<div className={styles.name_container}>
 				<div className={styles.name_sub_container}>

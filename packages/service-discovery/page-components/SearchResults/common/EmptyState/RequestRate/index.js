@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FeedBackModal from './FeedBackModal';
@@ -63,6 +64,7 @@ function RequestRate({ data = {} }) {
 					onClick={() => setShowFeedBackModal(true)}
 				>
 					<span className={styles.button_text}>Send Feedback</span>
+					<IcMArrowRight fontSize={15} />
 				</Button>
 			</div>
 

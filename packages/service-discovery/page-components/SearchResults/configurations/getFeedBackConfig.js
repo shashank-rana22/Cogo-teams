@@ -14,10 +14,6 @@ export const FEEBACK_CONTROLS_MAPPING = {
 	ltl_freight     : ltlFeedBackControls,
 	haulage_freight : haulageFreightFeedBackControls,
 	trailer_freight : trailerFreightFeedBackControls,
-	// fcl_customs     : fclFeedBackControls,
-	// lcl_customs     : fclFeedBackControls,
-	// air_customs     : fclFeedBackControls,
-
 };
 
 const getFeedbackConfig = (service = 'fcl_freight') => FEEBACK_CONTROLS_MAPPING[service] || [];
