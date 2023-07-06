@@ -2,7 +2,6 @@ import { Button, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../common/EmptyState';
 import countTrueValues from '../config/countTrueValues';
 
 import AccordianDisplay from './components/AccordianDisplay';
@@ -19,7 +18,6 @@ const DISPLAY_ADD_KRA_BUTTON = 1;
 const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
 const TABLE_TYPE_LOW_WEIGHTAGE = 'LowWeightage';
-const EMPTY_KRA_TEXT = 'No KRAs to Show';
 
 function Dashboard() {
 	const {
@@ -92,14 +90,6 @@ function Dashboard() {
 				<div>
 					<Placeholder height="40px" width="100%" margin="5px" />
 					<Placeholder height="40px" width="100%" margin="5px" />
-				</div>
-			);
-		}
-
-		if (isEmpty(krasAssignedData?.list) && !loadingKrasAssigned) {
-			return (
-				<div style={{ paddingTop: 6, paddingLeft: 6 }}>
-					<EmptyState emptyText={EMPTY_KRA_TEXT} />
 				</div>
 			);
 		}
@@ -181,33 +171,43 @@ function Dashboard() {
 						/>
 					</div>
 
-					<div className={styles.table_display}>
-						<div className={styles.filter}>
-							All Low Weightage KRA Employee List :
-							{' '}
-						</div>
+					{
+						!isEmpty(lowWeightageEmployeeList)
+						&& (
+							<div className={styles.table_display}>
+								<div className={styles.filter}>
+									All Low Weightage KRA Employee List :
+									{' '}
+								</div>
 
-						<TableDisplay
-							data={lowWeightageEmployeeList}
-							loading={loadingLowWeightageEmployee}
-							OBJECT_OF_IDS={OBJECT_OF_LOW_WEIGHTAGE_IDS}
-							selectObject={selectLowWeightEmployeeObject}
-							setSelectObject={setSelectLowWeightEmployeeObject}
-							type={TABLE_TYPE_LOW_WEIGHTAGE}
-							resetObjects={resetObjects}
-							setDataFrom={setDataFrom}
-							dataFrom={dataFrom}
-						/>
-					</div>
+								<TableDisplay
+									data={lowWeightageEmployeeList}
+									loading={loadingLowWeightageEmployee}
+									OBJECT_OF_IDS={OBJECT_OF_LOW_WEIGHTAGE_IDS}
+									selectObject={selectLowWeightEmployeeObject}
+									setSelectObject={setSelectLowWeightEmployeeObject}
+									type={TABLE_TYPE_LOW_WEIGHTAGE}
+									resetObjects={resetObjects}
+									setDataFrom={setDataFrom}
+									dataFrom={dataFrom}
+								/>
+							</div>
+						)
+					}
 
-					<div>
-						<h4>All KRA List : </h4>
-						{!isEmpty(filters) ? (
-							renderAccordians()
-						) : (
-							<div>Select/Apply Filters to Display List of KRAs</div>
-						)}
-					</div>
+					{
+						!isEmpty(krasAssignedData?.list) && (
+							<div>
+								<h4>All KRA List : </h4>
+								{!isEmpty(filters) ? (
+									renderAccordians()
+								) : (
+									<div>Select/Apply Filters to Display List of KRAs</div>
+								)}
+							</div>
+						)
+					}
+
 				</div>
 
 				{showKRACalculationTable && (

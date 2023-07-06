@@ -16,7 +16,8 @@ function KRATable({
 	dataFrom,
 	resetObjects,
 }) {
-	const fieldsFilterLastElement = filtersFields?.single_item[filtersFields.single_item.length - ARRAY_LENGTH]
+	const fieldsFilterLastElement = filtersFields?.single_item?.
+		[(filtersFields.single_item || []).length - ARRAY_LENGTH]
 	|| [];
 
 	const filters = isEmpty(filtersFields) ? appliedFilters : fieldsFilterLastElement;
