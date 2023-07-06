@@ -32,7 +32,7 @@ export interface Props {
 	rowStyle?: string;
 	idKey?: string;
 	showId?: string;
-	renderAccordianData: Function;
+	renderAccordianData?: Function;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 

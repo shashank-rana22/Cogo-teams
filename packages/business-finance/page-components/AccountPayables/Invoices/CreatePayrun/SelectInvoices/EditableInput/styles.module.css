@@ -9,10 +9,11 @@
 .inputcontainer {
 	display: flex;
 	align-items: center;
+
 	:global {
 		.ui_input_container {
-			height: 32px;
 			width: 64px;
+			height: 32px;
 		}
 
 		.ui_input_control {
@@ -27,6 +28,7 @@
 
 .error {
 	color: red;
+
 	:global {
 		.ui_input_container {
 			border: 1px solid red;
@@ -40,8 +42,8 @@
 }
 
 .text {
-	font-size: 12px;
 	padding-right: 4px;
+	font-size: 12px;
 }
 
 .message {

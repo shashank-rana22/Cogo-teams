@@ -33,11 +33,11 @@
 .text {
 	display: flex;
 	align-items: center;
+	padding-left: 12px;
 	font-size: 22px;
 	font-weight: 500;
 	color: #333;
 	text-align: center;
-	padding-left: 12px;
 }
 
 .amount_container {

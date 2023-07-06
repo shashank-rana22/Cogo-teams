@@ -1,8 +1,8 @@
 .select {
 	:global {
 		.ui_select_container {
-			height: 32px;
 			width: 120px;
+			height: 32px;
 		}
 
 		.ui_select_display_container {
