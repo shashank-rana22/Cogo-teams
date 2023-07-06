@@ -1,18 +1,25 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { IcCCogoCoin } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
+import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
 
 import ConvertToCpModal from './ConvertToCpModal';
+import ListPromos from './listPromos';
 import OrgAgentDetails from './OrgAgentDetails';
-import PromocodeThumbnail from './PromocodeThumbnail';
+import OrganizationUsers from './OrganizationUsers';
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function OrganizationDetails({
 	activeTab = '',
@@ -21,15 +28,25 @@ function OrganizationDetails({
 	openNewTab = () => {},
 	hideCpButton = false,
 	getOrgDetails = () => {},
+	viewType = '',
 }) {
-	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
-	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
+	const [showConvertModal, setShowConvertModal] = useState(false);
+	const { organization_id: messageOrgId = '' } = formattedMessageData || {};
+	const { organization_id: voiceOrgId = '' } = activeVoiceCard || {};
 
+	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
+	const isOrgUsersVisible = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_organization_users;
 
-	const [showConvertModal, setShowConvertModal] = useState(false);
+	const {
+		organizationUsersData,
+		organizationUsersLoading,
+	} = useGetListOrganizationUsers({ organizationId, isOrgUsersVisible });
+	const { list: organizationUserList = [] } = organizationUsersData || {};
+
+	const showOrgUsers = isOrgUsersVisible && !organizationUsersLoading && !isEmpty(organizationUserList);
 
 	const {
 		pointData = {},
@@ -43,6 +60,11 @@ function OrganizationDetails({
 
 	const { total_redeemable } = pointData || {};
 
+	const refetchOrgDetails = () => {
+		fetchOrganization();
+		getOrgDetails();
+	};
+
 	if (isEmpty(organizationId)) {
 		return (
 			<div className={styles.container}>
@@ -52,36 +74,10 @@ function OrganizationDetails({
 		);
 	}
 
-	const refetchOrgDetails = () => {
-		fetchOrganization();
-		getOrgDetails();
-	};
-	function ListPromos() {
-		return isEmpty(list) ? (
-			<div className={styles.promotion_cards_empty_state}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
-					alt="promocode"
-					width="200px"
-					height="200px"
-				/>
-			</div>
-		) : (
-			<div className={styles.promotion_cards}>
-				<div className={styles.wrapper}>
-					<h3>
-						Coming Soon...
-					</h3>
-				</div>
-				<PromocodeThumbnail list={list} />
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Organization Details</div>
-			{orgLoading ? (
+			{orgLoading || organizationUsersLoading ? (
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
@@ -166,41 +162,58 @@ function OrganizationDetails({
 				/>
 			) }
 
-			{!isEmpty(agent) && (
+			{!orgLoading && !isEmpty(agent) && (
 				<>
 					<div className={styles.agent_title}>Agent Details</div>
 					<div>
-						<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
+						<OrgAgentDetails agent={agent} />
 					</div>
 				</>
 
 			)}
 
+			{showOrgUsers && (
+				<>
+					<div className={styles.agent_title}>Organization Users</div>
+					<div className={styles.organization_users}>
+						{(organizationUserList || []).map((item) => (
+							<OrganizationUsers
+								user={item}
+								key={item.id}
+								hasVoiceCallAccess={hasVoiceCallAccess}
+							/>
+						))}
+					</div>
+				</>
+			)}
+
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
 				<div className={styles.cogo_icon}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
-						alt="coin"
-						className={styles.cogocoins_icon}
-					/>
+					<IcCCogoCoin className={styles.cogocoins_icon} />
 				</div>
 
 				<div className={styles.cogopoints}>Cogopoints : </div>
 				{pointLoading ? (
-					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
+					<Placeholder
+						height="18px"
+						width="35px"
+						margin="0px 0px 0px 8px"
+					/>
 				) : (
 					<div className={styles.value}>{total_redeemable || '0'}</div>
 				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
+
 			{promoLoading ? (
 				<div className={styles.loader_div}>
 					<Loader themeType="primary" />
 				</div>
 			) : (
-				<ListPromos />
+				<ListPromos list={list} />
 			)}
+
 			<QuotationDetails organizationId={organizationId} />
 		</div>
 	);

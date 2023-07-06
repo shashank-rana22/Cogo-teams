@@ -4,16 +4,10 @@ import { useHarbourRequest } from '@cogoport/request';
 
 const getPersonalInfoPayload = (data) => ({
 	...data,
-	employee_code             : data?.employee_code || undefined,
-	cogoport_email            : data?.cogoport_email || undefined,
 	passport_size_photo_url   : data?.passport_size_photo_url?.finalUrl,
-	status                    : data?.status || 'active',
 	mobile_number             : data?.mobile_number?.number,
 	mobile_country_code       : data?.mobile_number?.country_code,
-	date_of_joining           : String(data?.date_of_joining),
 	date_of_birth             : String(data?.date_of_birth),
-	updated_at                : String(data?.updated_at),
-	created_at                : String(data?.created_at),
 	emergency_contact_details : [
 		{
 			mobile_number       : data?.emergency_contact_details?.number,
@@ -23,7 +17,7 @@ const getPersonalInfoPayload = (data) => ({
 });
 
 const getEducationalQualificationsPayload = (data) => ({
-	employee_education_details: (data?.education_qualifications || []).map(
+	employee_education_details: (data?.educational_qualification || []).map(
 		(item) => ({
 			...item,
 			started_at : String(item.started_at),
