@@ -1,10 +1,13 @@
 import Item from './Item';
 
-function ListSupplier() {
+function ListSupplier({ supplierList, loading }) {
 	return (
 		<>
 			{
-                [0, 0, 0, 0, 0, 0].map((item) => (<Item />))
+                !loading
+				&& supplierList?.map((item) => (
+					<Item item={item} />
+				))
             }
 		</>
 	);
