@@ -12,6 +12,8 @@ import ListData from './ListData';
 import styles from './styles.module.css';
 import UploadDetailsModal from './UploadDetailsModal';
 
+const INIT_CNT = 0;
+
 function Documents({
 	activeMessageCard,
 	activeVoiceCard,
@@ -51,7 +53,7 @@ function Documents({
 
 	useEffect(() => {
 		const listIds = list.map((i) => i.id);
-		if (!isEmpty(listIds) && documents_count > 0) {
+		if (!isEmpty(listIds) && documents_count > INIT_CNT) {
 			documentCountUpdates({ listIds });
 		}
 	}, [documentCountUpdates, documents_count, list]);
