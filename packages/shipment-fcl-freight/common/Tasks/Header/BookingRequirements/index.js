@@ -18,11 +18,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 	const supplyDetails = serviceMapping?.supply_details;
 
 	const renderDetail = ({ obj, key }) => {
-		let value = renderValue(key, main_service);
-		if (key === 'remarks') {
-			value = renderValue(key, main_service, primary_service);
-		}
-
+		const value = renderValue(key, main_service, primary_service);
 		return (
 			<div className={styles.render_container}>
 				<div className={styles.label}>{obj.label}</div>
@@ -72,7 +68,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 							<div className={styles.detail_container}>
 								{supplyDetails?.map((obj) => {
 									if (obj.key === 'remarks') {
-										return getByKey(primary_service, obj.key)
+										return getByKey(primary_service, 'booking_preferences')
 											? renderDetail({
 												obj,
 												key: obj.key,
