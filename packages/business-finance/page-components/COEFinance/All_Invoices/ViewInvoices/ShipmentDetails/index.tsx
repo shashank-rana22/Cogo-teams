@@ -1,4 +1,5 @@
 import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -122,7 +123,7 @@ function ShipmentDetails({
 	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
-	const dataList = shipmentData?.list[0] || {};
+	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
@@ -132,7 +133,7 @@ function ShipmentDetails({
 		agent_role_data: agentRoleData,
 		amount,
 		amount_currency: amountCurrency,
-	} = dataWallet?.list?.[0] || {};
+	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const getPills = () => {
 		if (loadingShipment) {
@@ -184,12 +185,12 @@ function ShipmentDetails({
 								<div className={styles.tags_container}>
 									{getPills()}
 								</div>
-								{dataWallet?.list?.[0] && (
+								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
 									<div className={styles.data}>
 										<div className={styles.kam_data}>KAM -</div>
 										<div>
 											{agentData?.name}
-                  &nbsp;(
+											(
 											{agentRoleData?.name}
 											)
 										</div>
