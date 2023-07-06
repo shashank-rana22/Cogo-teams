@@ -6,7 +6,7 @@ import BankSelect from '..';
 
 import styles from './styles.module.css';
 
-function BankDetails({ itemData, payrun_type }) {
+function BankDetails({ itemData }) {
 	const newItem = itemData;
 	const [bankEdit, setBankEdit] = useState(false);
 	const [rollback, showRollback] = useState(true);
@@ -51,35 +51,21 @@ function BankDetails({ itemData, payrun_type }) {
 		const IFSCode = ifscCode || ifsc_number;
 		renderComponent = (
 			<div className={styles.flex}>
-				{payrun_type === 'normal_payrun' ? (
-					<div className={styles.font}>
-						<span className={styles.bold}>{bankName || bank_name}</span>
-						<span>{`A/C No: ${accountNo || bank_account_number}`}</span>
-						<span style={{ display: 'flex' }}>
-							{`IFSC: ${ifscCode || ifsc_number}`}
-							{' '}
-							<div role="presentation" onClick={() => viewDocument(imageUrl)}>
-								<IcMEyeopen className={styles.iconeye} />
-							</div>
-						</span>
+				<div className={styles.font}>
+					<div className={styles.bold}>{BankName}</div>
+					<div className={styles.flex}>
+						A/C No.
+						{AccountNumber}
 					</div>
-				) : (
-					<div className={styles.font}>
-						<div className={styles.bold}>{BankName}</div>
-						<div className={styles.flex}>
-							A/C No.
-							{AccountNumber}
-						</div>
 
-						<div style={{ display: 'flex' }}>
-							<div>{IFSCode}</div>
+					<div style={{ display: 'flex' }}>
+						<div>{IFSCode}</div>
 
-							<div role="presentation" className={styles.icon} onClick={() => viewDocument(imageUrl)}>
-								<IcMEyeopen className={styles.eye} />
-							</div>
+						<div role="presentation" className={styles.icon} onClick={() => viewDocument(imageUrl)}>
+							<IcMEyeopen className={styles.eye} />
 						</div>
 					</div>
-				)}
+				</div>
 				{
 					tradePartyMappingId && (
 						<div className={styles.edit}>

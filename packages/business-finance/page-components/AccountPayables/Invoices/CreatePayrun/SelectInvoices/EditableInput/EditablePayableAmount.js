@@ -92,15 +92,17 @@ function EditablePayableAmount({ itemData, field, setEditedValue }) {
 				currency : getByKey(newItem, field?.currencyKey),
 			})}
 			<span className={styles.edit}>
-				<IcMEdit
-					height={12}
-					width={12}
-					className={styles.pointer}
-					onClick={() => {
-						setEditedValue(newItem, true, 'checked', true);
-						setEdit(true);
-					}}
-				/>
+				{newItem?.invoiceType === 'CREDIT NOTE' ? null : (
+					<IcMEdit
+						height={12}
+						width={12}
+						className={styles.pointer}
+						onClick={() => {
+							setEditedValue(newItem, true, 'checked', true);
+							setEdit(true);
+						}}
+					/>
+				)}
 			</span>
 		</div>
 	));

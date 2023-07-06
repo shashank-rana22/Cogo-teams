@@ -21,7 +21,13 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
+const MIN_AMOUNT = 0;
+
 const ELEMENT_NOT_FOUND = -1;
+
+const HUNDERED_PERCENT = 100;
+
+const TEN_PERCENT = 10;
 
 function SelectInvoices({ apiData, setApiData }, ref) {
 	const {
@@ -48,7 +54,7 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 				payableAmount,
 				tdsAmount,
 			} = newValue.list[index];
-			const checkAmount = (+invoiceAmount * 10) / 100;
+			const checkAmount = (+invoiceAmount * TEN_PERCENT) / HUNDERED_PERCENT;
 
 			let maxValueCrossed = false;
 			let lessValueCrossed = false;
@@ -57,19 +63,19 @@ function SelectInvoices({ apiData, setApiData }, ref) {
 
 			if (key === 'payableAmount') {
 				maxValueCrossed = +value > +payableValue;
-				lessValueCrossed = Number.parseInt(value, 10) <= 0;
+				lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
 				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 			} else if (key === 'tdsAmount') {
 				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 				maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(value, 10) < 0;
+				lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 			} else {
 				maxValueCrossed = +payableAmount > +payableValue;
-				lessValueCrossed = Number.parseInt(payableAmount, 10) <= 0;
+				lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 				maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
-				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < 0;
+				lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 			}
 
 			const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;

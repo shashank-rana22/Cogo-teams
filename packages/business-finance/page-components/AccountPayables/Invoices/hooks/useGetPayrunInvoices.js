@@ -147,7 +147,7 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 				const isError = lessTdsValueCrossed || maxTdsValueCrossed || lessValueCrossed || maxValueCrossed;
 				return ({
 					...item,
-					checked  : event.target.checked,
+					checked  : item?.invoiceType === 'CREDIT NOTE' ? false : event.target.checked,
 					hasError : isError,
 				});
 			});
@@ -159,7 +159,8 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 		const { list = [] } = apiData || {};
 		const { list: dataList = [] } = data || {};
 		const isCheckedLength = list.filter((value) => value?.checked).length;
-		const isAllRowsChecked = isCheckedLength === dataList.length;
+		const invoicesLength = dataList?.filter((val) => (val.invoiceType !== 'CREDIT NOTE'))?.length;
+		const isAllRowsChecked = isCheckedLength === invoicesLength;
 		return (
 			<Checkbox
 				checked={isAllRowsChecked && !loading}
@@ -212,10 +213,12 @@ const useGetPayrunInvoices = ({ apiData, setApiData }) => {
 
 		return (
 			<div className={styles.checkbox_style}>
-				<Checkbox
-					checked={isChecked}
-					onChange={() => onChangeTableBodyCheckbox(itemData)}
-				/>
+				{itemData?.invoiceType === 'CREDIT NOTE' ? null : (
+					<Checkbox
+						checked={isChecked}
+						onChange={() => onChangeTableBodyCheckbox(itemData)}
+					/>
+				)}
 			</div>
 		);
 	};

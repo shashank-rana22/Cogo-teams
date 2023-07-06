@@ -1,14 +1,16 @@
-import { useRequestBf } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useGetBankDetails = ({ tradePartyMappingId, serviceProviderId }) => {
 	const [bankDetails, setBankDetails] = useState([]);
 
-	const [{ data, loading }] = useRequestBf(
+	const [{ data, loading }] = useRequest(
 		{
 			url    : '/list_organization_documents',
 			method : 'get',
 			params : {
+				page                        : 1,
+				page_limit                  : 20,
 				organization_trade_party_id : tradePartyMappingId,
 				organization_id             : serviceProviderId,
 				status                      : 'active',
