@@ -79,7 +79,8 @@ function ShipmentDetails() {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;Refresh
+						{' '}
+						Refresh
 					</Button>
 				</div>
 			</div>

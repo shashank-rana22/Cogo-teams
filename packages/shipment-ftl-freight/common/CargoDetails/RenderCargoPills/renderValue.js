@@ -179,7 +179,7 @@ export const renderValue = (label, detail) => {
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return format(detail?.delivery_date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
 		case 'container_load_type':
 			return startCase(detail?.container_load_type);
 		case 'truck_number':
@@ -187,9 +187,9 @@ export const renderValue = (label, detail) => {
 		case 'driver_details':
 			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
 		case 'estimated_departure':
-			return format(detail?.estimated_departure, 'dd MMM yyyy');
+			return format(detail?.estimated_departure, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
 		case 'estimated_arrival':
-			return format(detail?.estimated_arrival, 'dd MMM yyyy');
+			return format(detail?.estimated_arrival, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']);
 		case 'weight':
 			return ` ${weight} ${'Ton'}`;
 		case 'volume':
