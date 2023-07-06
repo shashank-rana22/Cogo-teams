@@ -1,4 +1,4 @@
-import { Button, Pagination, Modal, Pill, Tooltip } from '@cogoport/components';
+import { Button, Pagination, Modal, Pill, Tooltip, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
@@ -25,6 +25,14 @@ function FileList({
 	const { STATUS_PILL_MAPPING, ICON_MAPPING } = getConstants();
 	const { setSort, Component } = ICON_MAPPING[params?.sort_type];
 
+	const onClickName = (url) => {
+		if (url) {
+			window.open(url, '_blank');
+		} else {
+			Toast.info("File can't be downloaded.");
+		}
+	};
+
 	const columns = [
 		{
 			id       : 1,
@@ -34,10 +42,10 @@ function FileList({
 		{
 			id       : 2,
 			Header   : 'File Name',
-			accessor : ({ file_name = '', url }) => (
+			accessor : ({ file_name = '', url = null }) => (
 				<Tooltip interactive content={file_name} placement="bottom">
 					<div
-						onClick={() => window.open(url, '_blank')}
+						onClick={() => onClickName(url)}
 						className={styles.text_wrap}
 						role="presentation"
 					>

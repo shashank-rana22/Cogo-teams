@@ -5,7 +5,6 @@ const STATUS_PILL_MAPPING = {
 		label : 'Uploaded',
 		color : '#fef199',
 	},
-
 	processing: {
 		label : 'Processing',
 		color : '#cfeaed',
