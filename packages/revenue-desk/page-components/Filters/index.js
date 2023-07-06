@@ -127,7 +127,7 @@ function Filters({ filters, setFilters }) {
 						</div>
 					</div>
 				) : null}
-			{!['ftl_freight', 'ltl_freight'].includes(filters?.service)
+			{!['ftl_freight', 'ltl_freight', 'haulage_freight'].includes(filters?.service)
 				? (
 					<div className={styles.sub_section}>
 						<div className={styles.sub_heading}>
