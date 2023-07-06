@@ -45,7 +45,6 @@
     height: 60px;
     display: flex;
     align-items: center;
-   
     &.active{
         border: 1px solid #EAF2F3;
         background: #F3FAFA;

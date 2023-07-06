@@ -1,70 +1,78 @@
-{
-	"cif": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs","export_fcl_freight_local", "fcl_freight" ],
-	"cfr": ["export_transportation", "export_haulage_freight", "export_fcl_customs", "export_fcl_cfs","export_fcl_freight_local", "fcl_freight" ],
-	"cpt": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight"
-		
-	],
-	"cip": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight"
-	],
-	"dat": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight"
-	],
-	"dap": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight",
-		"import_fcl_freight_local",
-		"import_haulage_freight",
-		"import_transportation"
-	],
-	"ddp": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight",
-		"import_fcl_freight_local",
-		"import_fcl_customs",
-		"import_haulage_freight",
-		"import_transportation",
-		"import_fcl_cfs"
-	],
-	"fob": ["export_fcl_freight_local","fcl_freight","import_fcl_freight_local", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
-	"exw": [
-		"export_transportation",
-		"export_haulage_freight",
-		"export_fcl_customs",
-		"export_fcl_cfs",
-		"export_fcl_freight_local",
-		"fcl_freight",
-		"import_fcl_freight_local",
-		"import_fcl_customs",
-		"import_haulage_freight",
-		"import_transportation",
-		"import_fcl_cfs",
-		"export_fcl_freight_local"
-	],
-	"fca": ["export_transportation","export_haulage_freight","export_fcl_freight_local","fcl_freight","import_fcl_freight_local", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs"],
-	"fas": ["export_fcl_freight_local","fcl_freight", "import_fcl_customs", "import_haulage_freight", "import_transportation", "import_fcl_cfs","import_fcl_freight_local"]
-}
+[
+	{
+		"name": "export_transportation",
+		"title": "Origin Transportation",
+		"service_type": "transportation",
+		"trade_type": "export",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca"]
+	},
+	{
+		"name": "export_haulage_freight",
+		"title": "ICD to Port Haulage",
+		"service_type": "haulage_freight",
+		"trade_type": "export",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca"]
+	},
+	{
+		"name": "export_fcl_customs",
+		"title": "Origin Customs Clearance",
+		"service_type": "fcl_customs",
+		"trade_type": "export",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw"]
+	},
+	{
+		"name": "export_fcl_cfs",
+		"title": "Origin CFS Clearance",
+		"service_type": "fcl_cfs",
+		"trade_type": "export",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw"]
+	},
+	{
+		"name": "export_fcl_freight_local",
+		"title": "Origin Local charges",
+		"service_type": "fcl_freight_local",
+		"trade_type": "export",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca", "fas"]
+	},
+	{
+		"name": "fcl_freight",
+		"title": "FCL Freight",
+		"service_type": "fcl_freight",
+		"inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca", "fob", "fas"]
+	},
+	{
+		"name": "import_fcl_freight_local",
+		"title": "Destination Local charges",
+		"service_type": "fcl_freight_local",
+		"trade_type": "import",
+		"inco_terms": ["ddp", "exw", "fca", "fob", "fas", "cpt", "cip", "dat", "dap"]
+	},
+	{
+		"name": "import_fcl_cfs",
+		"title": "Destination CFS Clearance",
+		"service_type": "fcl_cfs",
+		"trade_type": "import",
+		"inco_terms": ["ddp", "exw", "fca", "fob", "fas"]
+	},
+	{
+		"name": "import_fcl_customs",
+		"title": "Destination Customs Clearance",
+		"service_type": "fcl_customs",
+		"trade_type": "import",
+		"inco_terms": ["ddp", "exw", "fca", "fob", "fas"]
+	},
+	{
+		"name": "import_haulage_freight",
+		"title": "Port to ICD Haulage",
+		"service_type": "haulage_freight",
+		"trade_type": "import",
+		"inco_terms": ["dap", "ddp", "exw", "fca", "fob", "fas"]
+	},
+	{
+		"name": "import_transportation",
+		"title": "Destination Transportation",
+		"service_type": "transportation",
+		"trade_type": "import",
+		"inco_terms": ["dap", "ddp", "exw", "fca", "fob", "fas"]
+	}
+]

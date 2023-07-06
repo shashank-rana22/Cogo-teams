@@ -12,6 +12,10 @@ import styles from './styles.module.css';
 
 const SERVICE_KEY = 'search_type';
 
+function removeItemFromLocalStorage() {
+	localStorage.removeItem('additionalFormInfo');
+}
+
 function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 	const { createSearch, loading } = useCreateSearch();
 
@@ -74,6 +78,8 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
 			setShow({});
+
+			removeItemFromLocalStorage();
 
 			router.push(
 				'/book/[spot_search_id]/[importer_exporter_id]',

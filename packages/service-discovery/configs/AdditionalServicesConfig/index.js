@@ -17,7 +17,6 @@
 
 import fclIncotermsMapping from './FCL/fclIncotermsMapping.json';
 import fclAdditionalServiceControls from './FCL/serviceControls';
-import SERVICE_LABEL_MAPPING from './FCL/serviceLabelMapping';
 
 function Police() {
 	return (
@@ -99,42 +98,70 @@ export const nonRemovableServicesAir = [
 	'terminal_outbound',
 ];
 
-export const serviceMappings = {
-	fcl_freight: {
-		services     : fclIncotermsMapping,
-		serviceLabel : SERVICE_LABEL_MAPPING,
-		controls     : fclAdditionalServiceControls(),
-	},
+export const serviceMappings = ({ service:primaryService, origin_country_id = '', destination_country_id = '' }) => {
+	const serviceMap = {
+		fcl_freight: {
+			services : fclIncotermsMapping,
+			controls : fclAdditionalServiceControls({ origin_country_id, destination_country_id }),
+		},
 	// lcl_freight: {
-	// 	services : lclIncotermsMapping,
-	// 	detail   : lclServiceDetails,
+	// 	services : lclServices,
+	// 	controls : lclServicesControls,
 	// },
 	// air_freight: {
-	// 	services : airIncotermsMapping,
-	// 	detail   : airServiceDetails,
+	// 	services : airServices,
+	// 	controls : airServicesControls,
 	// },
-	// fcl_customs: {
-	// 	services : fclCustomsMapping,
-	// 	detail   : fclCustomsDetails,
+	// ftl_freight: {
+	// 	services : ftlServices,
+	// 	controls : ftlServicesControls,
 	// },
-	// lcl_customs: {
-	// 	services : lclCustomsMapping,
-	// 	detail   : lclCustomsDetails,
+	// ltl_freight: {
+	// 	services : ltlServices,
+	// 	controls : ltlServicesControls,
 	// },
-	// air_customs: {
-	// 	services : airCustomsMapping,
-	// 	detail   : airCustomsDetails,
+	// trailer_freight: {
+	// 	services : trailerServices,
+	// 	controls : trailerServicesControls,
 	// },
 	// fcl_freight_local: {
-	// 	services : fclLocalsMapping,
-	// 	detail   : fclLocalsDetails,
+	// 	services : ftlLocalServices,
+	// 	controls : ftlLocalServicesControls,
 	// },
-	// lcl_freight_local: {
-	// 	services : lclLocalsMapping,
-	// 	detail   : lclLocalsDetails,
-	// },
-	// air_freight_local: {
-	// 	services : airLocalsMapping,
-	// 	detail   : airLocalsDetails,
-	// },
+	};
+
+	const configureService = (type) => {
+		const { services, controls } = serviceMap[type];
+
+		return services.map((service) => {
+			const serviceUpdated = { ...service };
+			serviceUpdated.controls = [];
+
+			controls.forEach((control) => {
+				if (control.condition?.services?.find((s) => s === service.name)) {
+					serviceUpdated.controls.push(control);
+				}
+			});
+
+			return serviceUpdated;
+		});
+	};
+	switch (primaryService) {
+		case 'fcl_freight':
+			return configureService('fcl_freight');
+		case 'lcl_freight':
+			return configureService('lcl_freight');
+		case 'air_freight':
+			return configureService('air_freight');
+		case 'ftl_freight':
+			return configureService('ftl_freight');
+		case 'ltl_freight':
+			return configureService('ltl_freight');
+		case 'trailer_freight':
+			return configureService('trailer_freight');
+		case 'fcl_freight_local':
+			return configureService('fcl_freight_local');
+		default:
+			return [];
+	}
 };

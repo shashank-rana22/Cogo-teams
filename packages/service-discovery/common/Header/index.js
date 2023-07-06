@@ -17,6 +17,16 @@ const SUB_HEADER_COMPONENT_MAPPING = {
 	default                     : null,
 };
 
+const backScreen = (currentScreen) => {
+	const MAPPING = {
+		listRateCard : 'back',
+		selectedCard : 'listRateCard',
+		comparison   : 'selectedCard',
+		bookCheckout : 'selectedCard',
+	};
+	return MAPPING[currentScreen] || 'back';
+};
+
 function Header({
 	data = {},
 	showAdditionalHeader = false,
@@ -49,6 +59,17 @@ function Header({
 
 	const isAllowedToEdit = rest.activePage === 'search_results';
 
+	const onBack = () => {
+		const { currentScreen = '', setCurrentScreen = () => {} } = rest;
+		const backscreen = backScreen(currentScreen);
+
+		if (backscreen !== 'back') {
+			setCurrentScreen(() => backscreen);
+		} else {
+			router.back();
+		}
+	};
+
 	return (
 		<div
 			className={`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}
@@ -62,7 +83,7 @@ function Header({
 							height={20}
 							width={20}
 							style={{ cursor: 'pointer' }}
-							onClick={() => router.back()}
+							onClick={onBack}
 						/>
 						<span>{rest.headerHeading || 'Back'}</span>
 					</div>

@@ -1,26 +1,28 @@
 import { Button } from '@cogoport/components';
 import { CheckboxController, InputNumberController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
 
+const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
+
 const renderFormItem = ({ name, control }) => (
 	<div className={styles.form_subgroup}>
-		<div className={styles.label}>{`Free ${startCase(name)} Days Required`}</div>
+		<div className={styles.label}>{` Total ${startCase(name)} Days `}</div>
 
 		<div className={styles.form_item_wrapper}>
 			<div className={styles.form_item}>
 				<div className={styles.label}>At Origin</div>
 
 				<InputNumberController
-					name={`${name}_origin`}
+					name={`origin_${name}`}
 					control={control}
-					value={5}
 					suffix={suffix}
 					arrow={false}
+					max="21"
 				/>
 			</div>
 
@@ -28,23 +30,31 @@ const renderFormItem = ({ name, control }) => (
 				<div className={styles.label}>At Destination</div>
 
 				<InputNumberController
-					name={`${name}_destination`}
+					name={`destination_${name}`}
 					control={control}
-					value={5}
 					suffix={suffix}
 					arrow={false}
+					max="21"
 				/>
 			</div>
 		</div>
 	</div>
 );
 
-function Detention({ values = {}, setValues = () => {}, ...rest }) {
-	const { control, handleSubmit } = useForm();
+function Detention({ values = {}, handleClick = () => {}, ...rest }) {
+	const { control, handleSubmit, setValue } = useForm();
+
+	console.log('values', values);
 
 	const onClickSave = (val) => {
-		setValues(val);
+		handleClick(val);
 	};
+
+	useEffect(() => {
+		ADDITIONAL_DAYS_KEYS.forEach((item) => {
+			setValue(item, values[item]);
+		});
+	}, [setValue, values]);
 
 	return (
 		<div className={styles.container}>
@@ -66,14 +76,14 @@ function Detention({ values = {}, setValues = () => {}, ...rest }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button
+				{/* <Button
 					type="button"
 					size="md"
 					themeType="secondary"
 					className={styles.button}
 				>
 					Reset
-				</Button>
+				</Button> */}
 
 				<Button
 					type="button"
@@ -81,7 +91,7 @@ function Detention({ values = {}, setValues = () => {}, ...rest }) {
 					themeType="accent"
 					onClick={handleSubmit(onClickSave)}
 				>
-					Save
+					{rest.buttonTitle || 'Save'}
 				</Button>
 			</div>
 		</div>

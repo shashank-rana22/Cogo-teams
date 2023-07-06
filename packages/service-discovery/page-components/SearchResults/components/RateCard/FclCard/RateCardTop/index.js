@@ -2,6 +2,7 @@ import { Checkbox } from '@cogoport/components';
 import { IcMShare } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
+import ShareToUsers from '../../../../common/ShareToUsers';
 import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
@@ -25,6 +26,7 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 	const { shipping_line = {}, card } = rateCardData;
 
 	const [isChecked, setIsChecked] = useState(false);
+	const [showShareModal, setShowShareModal] = useState(false);
 
 	useEffect(() => {
 		if (isChecked) {
@@ -66,8 +68,19 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 					<LikeDislike rateCardData={rateCardData} detail={detail} />
 				) : null}
 
-				<IcMShare width="20px" height="16px" />
+				<IcMShare width="20px" height="16px" onClick={() => setShowShareModal(!showShareModal)} />
 			</div>
+
+			{showShareModal ? (
+				<ShareToUsers
+					rate={rateCardData}
+					show={showShareModal}
+					onClose={setShowShareModal}
+					source="spot_search"
+					org_id={detail?.importer_exporter_id}
+				/>
+			) : null}
+
 		</div>
 	);
 }
