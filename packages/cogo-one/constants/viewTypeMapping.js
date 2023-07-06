@@ -81,6 +81,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : false,
 			show_organization_users     : true,
+			send_promotional_rate       : true,
 		},
 	},
 	sales_admin: {
@@ -109,6 +110,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			show_organization_users     : true,
+			send_promotional_rate       : true,
 		},
 	},
 	support: {
@@ -139,6 +141,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : false,
 			show_organization_users     : false,
+			send_promotional_rate       : true,
 		},
 	},
 	support_admin: {
@@ -167,6 +170,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
+			send_promotional_rate       : true,
 		},
 	},
 	supply: {
@@ -198,6 +202,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : false,
 			show_organization_users     : true,
+			send_promotional_rate       : false,
 		},
 	},
 	supply_admin: {
@@ -228,6 +233,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			show_organization_users     : true,
+			send_promotional_rate       : false,
 		},
 	},
 	shipment_specialist: {
@@ -253,6 +259,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : true,
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
+			send_promotional_rate       : true,
 		},
 	},
 	cogoone_admin: {
@@ -281,6 +288,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			can_message_on_bot_session  : false,
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
+			send_promotional_rate       : true,
 		},
 	},
 };
