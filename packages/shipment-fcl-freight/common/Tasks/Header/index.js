@@ -42,10 +42,18 @@ function Header({
 							placement="bottom"
 							trigger="mouseenter"
 							caret={false}
+							visible={visible}
 							render={`Supply Remarks: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index].remarks}`}
+								[GLOBAL_CONSTANTS.zeroth_index]?.remarks}`}
 						>
-							<Button size="md" themeType="link" onClick={() => setVisible(!visible)}>Remarks</Button>
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setVisible((pev) => !pev)}
+							>
+								Remarks
+
+							</Button>
 						</Popover>
 					) : null }
 					<div className={styles.toggle_container}>

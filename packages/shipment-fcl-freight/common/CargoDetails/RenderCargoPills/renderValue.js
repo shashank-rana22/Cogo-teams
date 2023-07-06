@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
 import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
@@ -157,42 +158,54 @@ export const renderValue = (label, detail, primary_service) => {
 			return detail.destination_location?.display_name || '';
 		case 'schedule_departure':
 			return format(detail?.schedule_departure
-				|| detail?.selected_schedule_departure, GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']);
+				|| detail?.selected_schedule_departure, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'schedule_arrival':
 			return format(detail?.schedule_arrival
-				|| detail?.selected_schedule_arrival, GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']);
+				|| detail?.selected_schedule_arrival, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'bn_expiry':
-			return format(detail?.bn_expiry, GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']);
+			return format(detail?.bn_expiry, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'booking_note_deadline':
-			return format(
-				detail?.booking_note_deadline,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.booking_note_deadline,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'si_cutoff':
-			return format(
-				detail?.si_cutoff,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.si_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'vgm_cutoff':
-			return format(
-				detail?.vgm_cutoff,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.vgm_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'gate_in_cutoff':
-			return format(
-				detail?.gate_in_cutoff,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.gate_in_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'document_cutoff':
-			return format(
-				detail?.document_cutoff,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.document_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'tr_cutoff':
-			return format(
-				detail?.tr_cutoff,
-				`${GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']} - ${GLOBAL_CONSTANTS.formats.date?.['hh:mm aaa']}`,
-			);
+			return formatDate({
+				date       : detail?.tr_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
 		case 'msds_certificates':
@@ -202,7 +215,7 @@ export const renderValue = (label, detail, primary_service) => {
 		case 'bl_type':
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']);
+			return format(detail?.cargo_readiness_date, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -214,7 +227,7 @@ export const renderValue = (label, detail, primary_service) => {
 		case 'hs_code':
 			return detail?.hs_code?.hs_code_name;
 		case 'delivery_date':
-			return format(detail?.delivery_date, GLOBAL_CONSTANTS.formats.date?.['dd/MM/yyyy']);
+			return format(detail?.delivery_date, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'remarks':
 			return primary_service?.booking_preferences?.
 				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
