@@ -7,7 +7,7 @@ import BulkUploadContent from './BulkUploadContent';
 import styles from './styles.module.css';
 import useBulkUpload from './useBulkUpload';
 
-const MAPPING = ['create', 'update'];
+const TABS_MAPPING = ['create', 'update'];
 
 function BulkUpload({ setBulkUploadComponent = () => {} }) {
 	const props = useBulkUpload();
@@ -35,7 +35,7 @@ function BulkUpload({ setBulkUploadComponent = () => {} }) {
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{MAPPING.map((element) => (
+					{TABS_MAPPING.map((element) => (
 						<TabPanel key={element} name={element} title={startCase(element)}>
 							<BulkUploadContent
 								{...props}
