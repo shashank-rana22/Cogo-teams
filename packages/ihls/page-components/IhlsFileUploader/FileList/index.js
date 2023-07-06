@@ -1,7 +1,8 @@
 import { Button, Pagination, Modal, Pill, Tooltip } from '@cogoport/components';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
 import StyledTable from '../../../commons/StyledTable';
@@ -13,8 +14,8 @@ import styles from './style.module.css';
 function FileList({
 	params,
 	setParams,
-	data,
-	loading,
+	fileListData,
+	fileListLoading,
 }) {
 	const [fileInfo, setFileInfo] = useState({
 		fileId   : null,
@@ -33,12 +34,17 @@ function FileList({
 		{
 			id       : 2,
 			Header   : 'File Name',
-			accessor : ({ file_name = '' }) => file_name,
-		},
-		{
-			id       : 3,
-			Header   : 'File Url',
-			accessor : ({ file_url = '' }) => file_url,
+			accessor : ({ file_name = '', url }) => (
+				<Tooltip interactive content={url} placement="bottom">
+					<div
+						onClick={() => window.open(url, '_blank')}
+						className={styles.text_wrap}
+						role="presentation"
+					>
+						{file_name}
+					</div>
+				</Tooltip>
+			),
 		},
 		{
 			id       : 4,
@@ -60,20 +66,41 @@ function FileList({
 					Created at
 
 					<Component
-						onClick={() => setParams({ ...params, sort_type: setSort })}
+						onClick={() => setParams({ ...params, page: 1, sort_type: setSort })}
 						style={{ cursor: 'pointer', marginLeft: '4px' }}
 					/>
 				</div>
 			),
-			accessor: ({ created_at = '' }) => created_at,
+			// format(created_at, 'HH:mm, dd-MM-YY'),
+			accessor: ({ created_at = '' }) => (
+				<div>
+					{created_at ? (
+						<div className={styles.created_date}>
+							{formatDate({
+								date       : created_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
+							::
+							<div className={styles.created_time}>
+								{formatDate({
+									date       : created_at,
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+									formatType : 'time',
+								}) || '___'}
+							</div>
+						</div>
+					) : '___'}
+				</div>
+			),
 		},
 		{
 			id       : 6,
 			Header   : 'View Stats',
-			accessor : ({ file_id, file_name, status = '' }) => (
+			accessor : ({ id, file_name, status = '' }) => (
 				<Button
 					onClick={() => {
-						setFileInfo({ fileName: file_name, fileId: file_id });
+						setFileInfo({ fileName: file_name, fileId: id });
 					}}
 					size="sm"
 					type="button"
@@ -91,40 +118,6 @@ function FileList({
 			),
 		},
 	];
-	const data1 = [
-		{
-			file_name  : 'tanner',
-			file_url   : 'linsley',
-			status     : 'uploaded',
-			created_at : '',
-			id         : 2,
-			file_id    : 12,
-		},
-		{
-			file_name  : 'sagar',
-			file_url   : 'asas',
-			status     : 'processing',
-			created_at : '',
-			id         : 3,
-			file_id    : 13,
-		},
-		{
-			file_name  : 'sagar',
-			file_url   : 'asas',
-			status     : 'WRONG_UPLOAD',
-			created_at : '',
-			id         : 3,
-			file_id    : 13,
-		},
-		{
-			file_name  : 'Bhargav',
-			file_url   : 'linssdsfdsfley',
-			status     : 'success',
-			created_at : '',
-			id         : 4,
-			file_id    : 14,
-		},
-	];
 
 	const getNextPage = (newPage) => {
 		setParams({ ...params, page: newPage });
@@ -134,7 +127,7 @@ function FileList({
 		setFileInfo({ fileName: null, fileId: null });
 	};
 
-	if (isEmpty(data1) && !loading) {
+	if (isEmpty(fileListData?.data) && !fileListLoading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -150,24 +143,25 @@ function FileList({
 
 	return (
 		<>
-			<StyledTable columns={columns} data={data1} loading={loading} />
+			<StyledTable columns={columns} data={fileListData?.data} loading={fileListLoading} />
 
 			<div className={styles.paginationDiv}>
-				{/* {data?.total_count > 10
-					? ( */}
-				<Pagination
-					type="table"
-					currentPage={params?.page}
-					totalItems={20}
-					pageSize={params?.per_page}
-					onPageChange={getNextPage}
-				/>
-				{/* ) : null} */}
+				{fileListData?.count > params?.per_page
+					? (
+						<Pagination
+							// type="table"
+							type="number"
+							currentPage={params?.page}
+							totalItems={fileListData?.count}
+							pageSize={params?.per_page}
+							onPageChange={getNextPage}
+						/>
+					) : null}
 			</div>
 
 			{fileInfo.fileId && (
 				<Modal id={fileInfo.fileId} size="md" show={fileInfo.fileId} onClose={onClose} placement="top">
-					<Modal.Header title={fileInfo.fileName} />
+					<Modal.Header title={(<div className={styles.file_name}>{fileInfo.fileName}</div>)} />
 
 					<Modal.Body>
 						<FileData id={fileInfo.fileId} />

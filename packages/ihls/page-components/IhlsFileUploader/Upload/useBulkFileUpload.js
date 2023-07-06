@@ -1,20 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest, useAthenaRequest } from '@cogoport/request';
+import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
 
-	const [{ loading: bulkFileLoading = false }, trigger] = useRequest({
-		url    : '/bulk_create_question_answer_set',
-		method : 'POST',
+	const [{ loading: bulkFileLoading = false }, trigger] = useAthenaRequest({
+		url    : '/athena/save_file_url',
+		method : 'post',
 	}, { manual: true });
-	// const [{ loading: bulkFileLoading = false}, trigger] = useAthenaRequest({
-	// 	url    : 'shipments_by_hscode',
-	// 	method : 'post',
-	// }, { manual: true });
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
@@ -31,10 +27,7 @@ const useBulkFileUpload = ({ refetch, setShow }) => {
 			refetch();
 			setShow(false);
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
-
-			// refetch();
-			// setShow(false);
+			Toast.error(getApiErrorString(error));
 		}
 	};
 

@@ -1,5 +1,5 @@
 import { Table } from '@cogoport/components';
-import { useRequest, useAthenaRequest } from '@cogoport/request';
+import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -18,29 +18,22 @@ function FileData({ id = null }) {
 	const { profile = {} } = useSelector((state) => (state));
 	const { FILE_STATS_MAPPING } = getConstants();
 
-	const [{ data = {}, loading = false }] = useRequest({
-		url    : '/feedback_requests',
+	const [{ data = {}, loading = false }] = useAthenaRequest({
+		url    : '/athena/get_file_analytics',
 		method : 'get',
 		params : {
-			id,
-			user_id: profile.user.id,
+			file_id : id,
+			user_id : profile.user.id,
 		},
 	}, { manual: false });
 
-	const DATA1 = {
-		unique_leads_created_count     : 12,
-		leads_updated_count            : 11,
-		shipment_records_created_count : 10,
-		processed_records_count        : 12,
-		not_processed_records_count    : 12,
-	};
-	const DATA2 = [];
+	const FILE_DATA = [];
 
-	Object.keys(DATA1).forEach((key) => {
-		DATA2.push({ title: FILE_STATS_MAPPING[key], count: DATA1[key] });
+	Object.keys(data).forEach((key) => {
+		FILE_DATA.push({ title: FILE_STATS_MAPPING[key], count: data[key] });
 	});
 
-	if (isEmpty(DATA1) && !loading) {
+	if (isEmpty(FILE_DATA) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -55,7 +48,7 @@ function FileData({ id = null }) {
 	}
 
 	return (
-		<Table columns={columns} data={DATA2} />
+		<Table columns={columns} data={FILE_DATA} loading={loading} />
 	);
 }
 

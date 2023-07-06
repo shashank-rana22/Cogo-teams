@@ -1,4 +1,4 @@
-import { useRequest, useAthenaRequest } from '@cogoport/request';
+import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -16,8 +16,8 @@ function IhlsFileUploader() {
 		user_id   : profile.user.id,
 	});
 
-	const [{ data = [], loading = false }, refetch] = useRequest({
-		url    : '/feedback_requests',
+	const [{ data: fileListData = [], loading: fileListLoading = false }, refetch] = useAthenaRequest({
+		url    : '/athena/get_file_details',
 		method : 'get',
 		params,
 	}, { manual: false });
@@ -26,7 +26,12 @@ function IhlsFileUploader() {
 		<div>
 			<Header refetch={refetch} />
 
-			<FileList params={params} setParams={setParams} data={data} loading={loading} />
+			<FileList
+				params={params}
+				setParams={setParams}
+				fileListData={fileListData}
+				fileListLoading={fileListLoading}
+			/>
 		</div>
 	);
 }
