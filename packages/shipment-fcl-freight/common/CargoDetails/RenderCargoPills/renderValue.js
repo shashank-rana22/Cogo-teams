@@ -236,8 +236,8 @@ export const renderValue = (label, detail, primary_service) => {
 			return detail?.hs_code?.hs_code_name;
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
-		case 'booking_preferences':
-			return primary_service?.[label]?.
+		case 'remarks':
+			return primary_service?.booking_preferences?.
 				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
 		default:
 			return detail[label] || null;
