@@ -1,4 +1,6 @@
 .main_heading {
+	display: flex;
+	justify-content: space-between;
 	margin-top: 32px;
 	margin-bottom: 20px;
 	font-size: 20px;
