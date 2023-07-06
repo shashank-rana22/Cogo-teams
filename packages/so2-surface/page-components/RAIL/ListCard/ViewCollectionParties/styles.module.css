@@ -1,0 +1,22 @@
+.main{
+  margin: 24px;
+}
+
+.line {
+  margin: 12px 4px;
+  border: 1px solid #f2f2f2;
+}
+
+.placeholder {
+  width: 200px;
+  height: 40px;
+  border-radius: 2px;
+  margin: 20px;
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

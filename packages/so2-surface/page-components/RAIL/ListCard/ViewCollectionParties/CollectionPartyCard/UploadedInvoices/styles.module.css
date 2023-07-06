@@ -1,0 +1,74 @@
+.line{
+  margin: 0px 24px;
+  border: 0.5px solid #88CAD1;
+}
+
+.main{
+  margin: 12px 24px;
+  border: 1px solid #88CAD1;
+  border-radius: 4px;
+}
+
+.modal{
+  border: 1px solid #88CAD1;
+  border-radius: 4px;
+}
+
+.table{
+  max-height: 300px;
+  overflow: auto;
+  font-size: 12px;
+  & > div:not(:last-child){
+    border-bottom: 1px solid #E9E9E9;
+  }
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  padding: 4px 0px;
+
+  &:hover{
+    background-color: #E9E9E9;
+  }
+}
+
+.column{
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.modal_button{
+  margin-left: auto;
+  margin-right: 20px;
+  & > span{
+    color: #ff0000;
+  }
+}
+
+.invoice_url{
+  cursor: pointer;
+  color: #0000EE;
+  text-decoration: underline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 150px;
+  display: block;
+}
+
+.bank_details{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 225px;
+}
+
+.service_types{
+  margin-right: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 220px;
+}

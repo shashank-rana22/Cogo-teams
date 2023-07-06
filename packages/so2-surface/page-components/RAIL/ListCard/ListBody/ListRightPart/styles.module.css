@@ -1,0 +1,6 @@
+.list_right_part {
+	width: 15%;
+	display: flex;
+	align-items: center;
+	padding: 4px;
+}
