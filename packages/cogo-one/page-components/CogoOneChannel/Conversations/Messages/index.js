@@ -235,6 +235,7 @@ function Messages({
 						setRaiseTicketModal={setRaiseTicketModal}
 						canMessageOnBotSession={canMessageOnBotSession}
 						changeSessionAndMessage={changeSessionAndMessage}
+						viewType={viewType}
 					/>
 				</div>
 			</div>
