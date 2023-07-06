@@ -6,7 +6,6 @@ import toastApiError from '../../commons/toastApiError';
 interface FilterInterface {
 	serviceType?:string
 	timePeriod?:string
-	rest?:any
 }
 const useGetDashboardData = (filters :FilterInterface) => {
 	const { serviceType = '', timePeriod } = filters || {};

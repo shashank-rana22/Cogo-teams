@@ -128,7 +128,6 @@
 
 .selected_options {
 	display: flex;
-	flex-direction: row;
 	width: 100%;
 	padding: 4px;
 	margin-bottom: 8px;
@@ -139,12 +138,10 @@
 
 .selected_items_container {
 	display: flex;
-	flex-flow: row wrap;
 }
 
 .items {
 	display: flex;
-	flex-direction: row;
 	width: fit-content;
 	margin-right: 8px;
 }
