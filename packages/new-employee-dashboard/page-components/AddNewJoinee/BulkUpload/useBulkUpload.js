@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const onClickViewSampleFile = () => {
 	window.open(GLOBAL_CONSTANTS.sample_document_url.new_hire_bulk_upload_url, '_blank', 'noreferrer');
@@ -17,7 +17,7 @@ const useBulkUpload = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const { formState: { errors }, control, handleSubmit } = useForm();
+	const { formState: { errors }, control, handleSubmit, setValue } = useForm();
 
 	const bulkUploadNewHire = async (val) => {
 		try {
@@ -37,6 +37,10 @@ const useBulkUpload = () => {
 			}
 		}
 	};
+
+	useEffect(() => {
+		setValue('upload_new_hire_info', '');
+	}, [activeTab, setValue]);
 
 	return {
 		bulkUploadNewHire,
