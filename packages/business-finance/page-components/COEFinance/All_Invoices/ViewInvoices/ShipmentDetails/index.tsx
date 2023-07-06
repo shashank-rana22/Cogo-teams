@@ -103,15 +103,15 @@ interface ShipmentDetailsInterface {
 	jobType?:string;
 }
 function ShipmentDetails({
-	data,
-	remarksVal,
-	setRemarksVal,
-	lineItemsRemarks,
-	setLineItemsRemarks,
-	setLineItem,
-	lineItem,
-	status,
-	jobType,
+	data = {},
+	remarksVal = {},
+	setRemarksVal = () => {},
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
+	setLineItem = () => {},
+	lineItem = false,
+	status = '',
+	jobType = '',
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(true);
