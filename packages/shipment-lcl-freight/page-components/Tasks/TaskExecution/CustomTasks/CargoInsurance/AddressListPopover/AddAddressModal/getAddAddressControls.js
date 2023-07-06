@@ -134,7 +134,7 @@ export const getModifiedControls = ({
 }) => {
 	const countryCode = getCountryDetails({ country_id: countryId });
 	const controls = getAddAddressControls({ setValue, setCountryId });
-	(controls || []).map((control) => {
+	const updatedControls = (controls || []).map((control) => {
 		if (control.name === 'tax_number') {
 			return {
 				...control,
@@ -155,5 +155,5 @@ export const getModifiedControls = ({
 		}
 		return control;
 	});
-	return controls;
+	return updatedControls;
 };
