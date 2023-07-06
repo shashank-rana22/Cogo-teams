@@ -69,6 +69,7 @@ function ListCard(props) {
 					...pv,
 					tab  : OBJECTIVES,
 					mode : 'create',
+					id   : undefined,
 				}))}
 			>
 				+ Create New Objective For Agent

@@ -1,0 +1,16 @@
+.container {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.stepper_container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F8F2E7;
+}
+
+.stepper {
+    margin: 0;
+}
