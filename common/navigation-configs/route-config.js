@@ -11,7 +11,6 @@ import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
-import ihls from './config/ihls';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
@@ -20,7 +19,9 @@ import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
@@ -115,6 +116,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...ftlAdmin,
 };
 
 export default routeConfig;

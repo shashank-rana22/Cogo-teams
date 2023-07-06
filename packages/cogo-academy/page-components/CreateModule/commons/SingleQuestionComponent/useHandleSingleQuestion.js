@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
 
 import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
+import updateStates from '../../utils/updateStates';
 
 import getControls from './controls';
+
+const OFFSET = 1;
 
 function useHandleSingleQuestion({
 	getValues,
@@ -20,17 +23,19 @@ function useHandleSingleQuestion({
 	questionTypeWatch,
 	editorValue,
 	setEditorValue,
+	questionState = {},
+	setQuestionState = () => {},
+	caseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
-		const hash = {};
-
+		const HASH = {};
 		const controls = getControls({ mode });
 
 		controls.forEach((item) => {
-			hash[item?.name] = item;
+			HASH[item?.name] = item;
 		});
 
-		return hash;
+		return HASH;
 	}, [mode]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
@@ -43,13 +48,20 @@ function useHandleSingleQuestion({
 		editDetails,
 		index,
 		editorValue,
+		questionState,
+		setQuestionState,
+		caseStudyQuestionEditorValue,
 	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
-			remove(index, 1);
-
-			setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+			remove(index, OFFSET);
+			updateStates({
+				setQuestionState,
+				setEditorValue,
+				index: questionState?.editorValue?.question_0 ? (index + OFFSET) : index,
+				OFFSET,
+			});
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
@@ -78,6 +90,20 @@ function useHandleSingleQuestion({
 		}
 	};
 
+	const handleChangeQuestionEditor = (value) => {
+		if (questionTypeWatch === 'case_study') {
+			setQuestionState((prev) => ({
+				editorValue : { ...prev.editorValue, [`case_questions_${index}`]: value },
+				error       : { ...prev.error, [`case_questions_${index}`]: false },
+			}));
+		} else {
+			setQuestionState({
+				editorValue : { question_0: value },
+				error       : { question_0: false },
+			});
+		}
+	};
+
 	return {
 		handleUpdateCaseStudyQuestion,
 		handleDelete,
@@ -86,6 +112,7 @@ function useHandleSingleQuestion({
 		editorValue,
 		setEditorValue,
 		handleChangeEditorValue,
+		handleChangeQuestionEditor,
 	};
 }
 
