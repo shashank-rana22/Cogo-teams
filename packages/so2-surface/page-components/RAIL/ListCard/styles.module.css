@@ -1,24 +1,24 @@
 .list_card {
 	min-height: 100px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 	margin: 16px 0;
 	background: #fff;
 	border-radius: 8px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 25%);
 }
 
-.dropdown{
-	background-color: #F2F2F2;
+.dropdown {
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	align-items: center;
 	cursor: pointer;
+	background-color: #f2f2f2;
 }
 
-.dropdown_inner{
+.dropdown_inner {
 	display: flex;
 	align-items: center;
-	font-size: 12px;
 	padding-block: 2px;
+	font-size: 12px;
 
 	& > div {
 		margin-right: 10px;
