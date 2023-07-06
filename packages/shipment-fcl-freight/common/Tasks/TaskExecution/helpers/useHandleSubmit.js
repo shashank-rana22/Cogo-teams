@@ -18,6 +18,8 @@ const SHIPMENT_REFETCH_TASKS = [
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
 	'update_airway_bill_number',
+	'mark_vessel_departed',
+	'mark_vessel_arrived',
 	...ROLLOVER_TASKS,
 ];
 
@@ -89,6 +91,7 @@ function useHandleSubmit({
 			finalPayload = extraApiPayload(
 				rawValues,
 				finalConfig?.end_point,
+				task,
 			);
 
 			finalPayload = {
