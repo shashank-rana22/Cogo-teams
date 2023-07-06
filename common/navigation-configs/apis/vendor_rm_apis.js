@@ -36,6 +36,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'get_organization_swift_code_details',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'organization',
+	},
+	{
 		api          : 'create_vendor_bank_detail',
 		access_type  : 'private',
 		feature      : 'vendor',

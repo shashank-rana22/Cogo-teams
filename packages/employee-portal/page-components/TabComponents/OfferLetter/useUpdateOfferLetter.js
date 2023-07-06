@@ -24,6 +24,7 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInforma
 			setInformationPage('');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			getEmployeeDetails();
 		}
 	};
 
