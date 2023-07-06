@@ -16,6 +16,10 @@
 	}
 }
 
+.flex {
+	display: flex;
+}
+
 .gst {
 	display: flex;
 	align-items: center;
@@ -227,11 +231,25 @@
 .invoice_source {
 	width: fit-content;
 	padding: 2px 16px;
-	margin-right: 6px;
 	font-size: var(--font-size-sm);
 	color: #393f70;
 	background-color: #fef6df;
+	font-weight: 600;
 	border-radius: 0 0 4px;
+}
+.invoice_rate {
+	width: fit-content;
+	padding: 2px 16px;
+	margin-right: 6px; 
+	font-size: var(--font-size-sm);
+	color: #393f70;
+	border-left: 1px solid var(--color-accent-orange-2);
+	background-color: #fef6df;
+	border-radius: 0 0 4px;
+}
+
+.exchange_rate {
+	display: flex;
 }
 
 .payment_mode_status {

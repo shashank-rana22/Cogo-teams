@@ -47,21 +47,32 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			<div>
-				{invoice?.source === 'pass_through' ? (
-					<div className={styles.invoice_source}>
-						Source -
-						&nbsp;
-						{startCase(invoice?.source)}
-					</div>
-				) : null}
+			<div className={styles.flex}>
+				<div className={styles.exchange_rate}>
+					{invoice?.exchange_rate_source ? (
+						<div className={styles.invoice_source}>
+							{startCase(invoice?.exchange_rate_source)}
+						</div>
+					) : null}
 
-				{invoice?.exchange_rate_state ? (
-					<div className={styles.invoice_source}>
-						{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
-							? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
-					</div>
-				) : null}
+					{invoice?.exchange_rate_state ? (
+						<div className={styles.invoice_rate}>
+							{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
+								? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
+						</div>
+					) : null}
+				</div>
+
+				<div className={styles.exchange_rate}>
+
+					{invoice?.source === 'pass_through' ? (
+						<div className={styles.invoice_source}>
+							Source -
+							&nbsp;
+							{startCase(invoice?.source)}
+						</div>
+				 	) : null}
+				</div>
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>

@@ -13,8 +13,10 @@ function ReviewServices({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const changeApplicableState = invoice?.exchange_rate_state === 'liners_exchange_rate'
-		&& invoice?.is_liners_exchange_rate_state;
+	const changeApplicableState = 	(invoice?.exchange_rate_state === 'liners_exchange_rate'
+			&& invoice?.is_liners_exchange_rate_state)
+		|| (['eta', 'etd'].includes(invoice?.exchange_rate_state)
+			&& !invoice?.is_fx_locked);
 
 	const [value, setValue] = useState(false);
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
@@ -30,6 +32,14 @@ function ReviewServices({
 		apiTrigger({
 			id     : invoice?.id,
 			status : value ? 'reviewed' : undefined,
+			liners_ex_applied:
+						changeApplicableState
+						&& invoice?.exchange_rate_state === 'liners_exchange_rate'
+							? false
+							: undefined,
+			is_fx_locked: ['eta', 'etd'].includes(invoice?.exchange_rate_state)
+				? true
+				: undefined,
 		});
 	};
 

@@ -78,7 +78,7 @@ function Actions({
 								size="sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
-								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed}
 							>
 								Mark as Reviewed
 							</Button>

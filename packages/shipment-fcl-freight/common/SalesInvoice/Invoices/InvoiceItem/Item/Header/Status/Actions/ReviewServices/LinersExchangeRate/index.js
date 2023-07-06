@@ -5,6 +5,12 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
+const STATES = {
+	liners_exchange_rate : 'Liners Exchange Rates are',
+	eta                  : 'Schedule arrival Date is',
+	etd                  : 'Scchedule departure date is',
+};
+
 function LinersExchangeRateConfirm({
 	invoice = {},
 	setShowExchangeRateConfirmation = () => {},
@@ -19,8 +25,9 @@ function LinersExchangeRateConfirm({
 					<div className={styles.message}>
 						<IcMError width={30} height={30} fill="#ffe6a7" />
 						<div className={styles.confirm_label}>
-							Liners Exchange Rates are not available yet. Do you want to
-							proceed with system exchange rates?
+							{STATES[invoice?.exchange_rate_state]}
+							not available yet. Do you
+							want to proceed with system exchange rates?
 						</div>
 					</div>
 
