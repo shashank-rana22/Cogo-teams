@@ -17,7 +17,7 @@ interface Props {
 	settlementFilters?: object;
 	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
 }
-const DEFAULT_LENGTH = 12;
+const MAX_LEN_FOR_TEXT = 12;
 
 const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }:Props) => [
 	{
@@ -28,7 +28,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 			return (
 				<div style={{ display: 'flex' }}>
 					<div style={{ marginRight: '10px' }}>
-						{showOverflowingNumber(sourceDocumentValue, DEFAULT_LENGTH)}
+						{showOverflowingNumber(sourceDocumentValue, MAX_LEN_FOR_TEXT)}
 					</div>
 					{sourceIrnNumber ? (
 						<div>
@@ -56,7 +56,7 @@ const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters
 
 			<div style={{ display: 'flex' }}>
 				<div style={{ marginRight: '10px' }}>
-					{showOverflowingNumber(row?.destinationDocumentValue, DEFAULT_LENGTH)}
+					{showOverflowingNumber(row?.destinationDocumentValue, MAX_LEN_FOR_TEXT)}
 				</div>
 				{row?.destinationIrnNumber ? (
 					<div>
