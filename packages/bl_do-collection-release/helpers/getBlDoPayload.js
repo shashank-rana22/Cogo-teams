@@ -8,9 +8,12 @@ export default function getBlDoPayload({ stateProps = {} }) {
 	} else if (stateProps.activeTab === 'do') {
 		payloadConfig = doPayloadConfig;
 	}
-	const { trade_type, page, q, ready_to_collect, ready_to_release } = stateProps;
+	const {
+		trade_type, page, q, ready_to_collect, ready_to_release,
+		inner_tab = '', document_status = '', activeTab = '',
+	} = stateProps || {};
 
-	const payload = payloadConfig[stateProps.inner_tab];
+	const payload = payloadConfig[inner_tab];
 
 	const {
 		filters: commonFilters,
@@ -24,6 +27,8 @@ export default function getBlDoPayload({ stateProps = {} }) {
 	const filters = {
 		...commonFilters,
 		...shipmentTypeFilters,
+		[`${activeTab}_status`]: ['released', 'surrendered'].includes(inner_tab) && document_status
+			? [document_status] : commonFilters[`${activeTab}_status`],
 		...(ready_to_collect ? ready_to_collect_filters : {}),
 		...(ready_to_release ? ready_to_release_filter : all_status_filter),
 		trade_type : trade_type.length ? trade_type : undefined,

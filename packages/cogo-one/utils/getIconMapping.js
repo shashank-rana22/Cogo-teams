@@ -3,12 +3,17 @@ import {
 	IcMDocument, IcMShip, IcMDefault,
 } from '@cogoport/icons-react';
 
-const HIDE_NAVIGATION_MAPPING = {
-	admin_view    : ['quick_actions', 'reminder'],
-	kam_view      : ['quick_actions', 'reminder', 'flash_shipment_bookings'],
-	shipment_view : ['quick_actions', 'reminder', 'flash_shipment_bookings'],
-	supply_view   : ['quick_actions', 'reminder'],
-};
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
+const COMMON_ACCESIBLE_NAVIGATIONS = [
+	'profile',
+	'organization',
+	'user_activity',
+	'tickets',
+	'documents',
+	'help_desk',
+	'customer_insights',
+];
 
 const ICON_MAPPING = [
 	{
@@ -105,7 +110,10 @@ const ICON_MAPPING = [
 ];
 
 const getIconMapping = (viewType) => ICON_MAPPING.filter(
-	(eachIcon) => !HIDE_NAVIGATION_MAPPING[viewType || 'kam_view']?.includes(eachIcon?.name),
+	(eachIcon) => [
+		...COMMON_ACCESIBLE_NAVIGATIONS,
+		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
+	].includes(eachIcon.name),
 );
 
 export default getIconMapping;

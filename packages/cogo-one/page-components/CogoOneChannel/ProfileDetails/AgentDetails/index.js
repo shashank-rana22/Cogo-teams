@@ -1,10 +1,11 @@
 import { Pill, Placeholder, Toast } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { getHasAccessToEditGroup } from '../../../../helpers/agentDetailsHelpers';
+import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
@@ -20,23 +21,28 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const LINK_BEFORE_QUERY_PARAMS = 0;
+
+const handleClick = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
+	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
+	Toast.success('Copied!!!');
+};
+
 function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
 	activeVoiceCard = {},
 	formattedMessageData = {},
 	customerId = '',
-	updateLeaduser = () => {},
 	setModalType = () => {},
-	setActiveMessage = () => {},
 	activeRoomLoading,
 	activeSelect,
 	setActiveSelect = () => {},
 	setShowMore = () => {},
-	hasVoiceCallAccess = false,
 	firestore,
 	userId: agentId,
 	viewType,
+	setActiveTab,
 }) {
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -45,6 +51,8 @@ function AgentDetails({
 		number       : '',
 	});
 	const [showError, setShowError] = useState(false);
+
+	const geo = getGeoConstants();
 
 	const {
 		user_id,
@@ -55,9 +63,8 @@ function AgentDetails({
 		organization_id,
 		sender,
 		channel_type = '',
-		user_type, id = '',
-		session_type = '',
-		account_type,
+		user_type,
+		id = '',
 	} = formattedMessageData || {};
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
@@ -70,9 +77,7 @@ function AgentDetails({
 	} = useGroupChat({ activeMessageCard, firestore });
 
 	const hasAccessToEditGroup = getHasAccessToEditGroup({
-		sessionType : session_type,
-		accountType : account_type,
-		activeMessageCard,
+		formattedMessageData,
 		agentId,
 		viewType,
 	});
@@ -104,7 +109,12 @@ function AgentDetails({
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError, sender });
+	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
+		setShowError,
+		sender,
+		formattedMessageData,
+		firestore,
+	});
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
@@ -134,15 +144,13 @@ function AgentDetails({
 		}
 	};
 
-	const handleClick = () => {
-		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
-		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
-		Toast.success('Copied!!!');
-	};
-
 	const handleSummary = () => {
 		setShowMore(true);
 		setActiveSelect('user_activity');
+	};
+
+	const setActiveMessage = (val) => {
+		switchUserChats({ val, firestore, setActiveTab });
 	};
 
 	if (!userId && !leadUserId && !mobile_no) {
@@ -173,7 +181,7 @@ function AgentDetails({
 					<div
 						role="presentation"
 						className={styles.copy_link}
-						onClick={handleClick}
+						onClick={() => handleClick({ id, channel_type })}
 					>
 						Share
 					</div>
@@ -223,7 +231,7 @@ function AgentDetails({
 					userName={name}
 					activeTab={activeTab}
 					setModalType={setModalType}
-					hasVoiceCallAccess={hasVoiceCallAccess}
+					hasVoiceCallAccess={geo.others.navigations.cogo_one.has_voice_call_access}
 				/>
 			)}
 			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }

@@ -44,8 +44,10 @@ import {
 	asyncListCourseCategories,
 	asyncListTests,
 	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncFieldsListAgents,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -107,8 +109,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
 	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_chat_agents                     : asyncFieldsListAgents,
 };
 
 const MICRO_SERVICE_HOOKS_MAPPING = {
