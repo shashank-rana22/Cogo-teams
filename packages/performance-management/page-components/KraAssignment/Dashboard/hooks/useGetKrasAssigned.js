@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 function useGetkrasAssigned({ filters }) {
-	const [selectAccordian, setSelectAccordian] = useState();
+	const [selectAccordian, setSelectAccordian] = useState([]);
 	const [selectAccordianObject, setSelectAccordianObject] = useState({});
 
 	const [{ data, loading }, trigger] = useRequest(

@@ -1,6 +1,7 @@
 .form {
 	padding: 8px;
 	overflow: scroll;
+	width: 100%;
 }
 
 .content {
@@ -28,4 +29,9 @@
 .error_message {
 	font-size: 10px;
 	color: #cb6464;
+}
+
+
+.controller{
+	width:100%;
 }

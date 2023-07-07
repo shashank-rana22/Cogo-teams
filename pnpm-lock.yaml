@@ -25,8 +25,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@cogoport/eslint-config':
-        specifier: 1.1.0-beta.9
-        version: 1.1.0-beta.9(eslint@8.42.0)
+        specifier: 2.0.0
+        version: 2.0.0(eslint@8.42.0)
       '@cogoport/stylelint-config':
         specifier: ^1.0.3
         version: 1.0.3(stylelint@14.16.1)
@@ -36,9 +36,9 @@ importers:
       eslint:
         specifier: ^8.42.0
         version: 8.42.0
-      eslint-plugin-custom-rules:
-        specifier: link:node_modules/@cogoport/eslint-config/packages/eslint
-        version: link:node_modules/@cogoport/eslint-config/packages/eslint
+      eslint-plugin-custom-eslint:
+        specifier: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
+        version: link:node_modules/@cogoport/eslint-config/packages/custom-eslint
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
@@ -156,6 +156,9 @@ importers:
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../common/forms
+      '@cogoport/ftl-admin':
+        specifier: workspace:1.0.0
+        version: link:../packages/ftl-admin
       '@cogoport/globalization':
         specifier: workspace:^0.0.1
         version: link:../common/globalization
@@ -477,6 +480,9 @@ importers:
 
   common/navigation-configs:
     dependencies:
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
         version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
@@ -1616,6 +1622,39 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+
+  packages/ftl-admin:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.322
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.51
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.2
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/ground-ops:
     dependencies:
@@ -4487,8 +4526,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config@1.1.0-beta.9(eslint@8.42.0):
-    resolution: {integrity: sha512-3s/vokp3CLBp1dT5y2p6ypTkqkHeHhPQuJZ2GWyRQvKeFP59kd8+Nsr3bg32SdPO2feZoyaYBxkFg8P0ADVVYg==}
+  /@cogoport/eslint-config@2.0.0(eslint@8.42.0):
+    resolution: {integrity: sha512-VCEJqrA6MYAGhHTwlH8W/w+cNkOQ3yIdmBxv5/4VhxY75RISUW+wa8TQlE674cGtG0nWOVFu1bLMVzreOJ3/lw==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:

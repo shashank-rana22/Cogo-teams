@@ -33,7 +33,7 @@ const useAssignKRAs = ({
 	};
 
 	const onClickDeleteIcon = (id) => {
-		const updatedKRAs = inputValue.filter((item) => item.kra_assigned !== id);
+		const updatedKRAs = inputValue.filter((item) => item?.kra_assigned !== id);
 		setInputValue(updatedKRAs);
 	};
 

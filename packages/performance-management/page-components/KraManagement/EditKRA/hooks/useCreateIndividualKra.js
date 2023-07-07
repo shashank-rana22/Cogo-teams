@@ -46,6 +46,28 @@ function useCreateIndividualKra({ data: createKraData }) {
 		setRatingInfo();
 	}, [createKraData]);
 
+	const handleTargetChange = (val, item, name) => {
+		const newData = individualKRAValues?.map((element) => {
+			if (element.employee_id === item.employee_id) {
+				if (name === 'target_value') {
+					return {
+						...element,
+						[name]: val,
+					};
+				}
+				return {
+					...element,
+					[name]: val === 'yes' ? 'percentage' : 'flat',
+				};
+			}
+			return element;
+		});
+
+		if (newData?.length) {
+			setIndividualKRAValues(newData);
+		}
+	};
+
 	return {
 		data,
 		loading,
@@ -54,6 +76,7 @@ function useCreateIndividualKra({ data: createKraData }) {
 		setIndividualKRAValues,
 		ratingInfo,
 		setRatingInfo,
+		handleTargetChange,
 	};
 }
 

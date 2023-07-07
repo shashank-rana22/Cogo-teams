@@ -34,13 +34,15 @@ function Child(props) {
 					<div className={styles.list} key={controlItem.name}>
 						<div className={styles.label}>{controlItem.label}</div>
 
-						<Element
-							key={`${name}.${index}.${controlItem.name}`}
-							control={control}
-							id={`create_form_${controlItem.name}_field`}
-							{...controlItem}
-							name={`${name}.${index}.${controlItem.name}`}
-						/>
+						<div className={styles.controller}>
+							<Element
+								key={`${name}.${index}.${controlItem.name}`}
+								control={control}
+								id={`create_form_${controlItem.name}_field`}
+								{...controlItem}
+								name={`${name}.${index}.${controlItem.name}`}
+							/>
+						</div>
 
 						<div className={styles.error_message}>
 							{error?.[controlItem?.name]?.message}
