@@ -19,8 +19,8 @@ function ListData({
 	orgId = '',
 	setShowModal = () => {},
 	setSingleItem = () => {},
-	isGstUploaded,
-	isPanUploaded,
+	isGstUploaded = false,
+	isPanUploaded = false,
 	formattedMessageData = {},
 }) {
 	const [documentTagUrl, setDocumentTagUrl] = useState('');
