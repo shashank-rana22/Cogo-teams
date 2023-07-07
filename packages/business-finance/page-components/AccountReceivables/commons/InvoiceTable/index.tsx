@@ -1,4 +1,5 @@
 import { Button, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
@@ -24,6 +25,8 @@ const GREY = '#BDBDBD';
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
+	const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
+	const { labels: { irn_label: IrnLabel } } = CogoportEntity[entityCode] || {};
 
 	const {
 		listData,
@@ -108,11 +111,13 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 
 					{checkedRows?.length > 0 ? (
 						<Button
-							style={{ marginRight: '20px' }}
+							style={{ marginRight: '10px' }}
 							onClick={bulkIrnGenerate}
 							loading={bulkIrnLoading}
 						>
-							Bulk IRN Generate
+							Bulk Generate
+							{' '}
+							{IrnLabel}
 						</Button>
 					) : null}
 					<div
