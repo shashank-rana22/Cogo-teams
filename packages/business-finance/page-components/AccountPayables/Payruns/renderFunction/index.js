@@ -10,6 +10,7 @@ import DownloadUploadHistoryStatusFile from './DownloadUplaodHistoryStatusFile.j
 import DownloadUploadHistoryFile from './DownloadUploadHistoryFile.js';
 import FormatAmountCurrency from './FormatAmountCurrency';
 import PaidDropDown from './PaidDropDown';
+import PaidPaymentStatus from './PaidPaymentStatus';
 import RibbonData from './RibbonData';
 import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
@@ -58,6 +59,9 @@ const RenderFunctions = (overseasData) => {
 		),
 		renderDropDownData: (itemData) => (
 			<PaidDropDown itemData={itemData} />
+		),
+		renderPaidPaymentStatus: (itemData) => (
+			<PaidPaymentStatus itemData={itemData} />
 		),
 	};
 	return {
