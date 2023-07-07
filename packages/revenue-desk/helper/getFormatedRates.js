@@ -43,14 +43,10 @@ const getFormatedRates = (type, data, singleServiceData) => {
 				total_price_currency              : validities.currency,
 				validity_id                       : validities?.id,
 				line_items                        : validities?.line_items || [],
-				fulfillment_ratio_2               : data?.fulfillment_data?.day_2
-													|| data?.fulfillment_ratio_2,
-				fulfillment_ratio_7: data?.fulfillment_data?.day_7
-													|| data?.fulfillment_ratio_7,
-				fulfillment_ratio_15: data?.fulfillment_data?.day_15
-													|| data?.fulfillment_ratio_15,
-				fulfillment_ratio_30: data?.fulfillment_data?.day_30
-													|| data?.fulfillment_ratio_30,
+				fulfillment_ratio_2               : element?.fulfillment_data?.day_2 || element?.day_2,
+				fulfillment_ratio_7               : element?.fulfillment_data?.day_7 || element?.day_7,
+				fulfillment_ratio_15              : element?.fulfillment_data?.day_15 || element?.day_15,
+				fulfillment_ratio_30              : element?.fulfillment_data?.day_30 || element?.day_30,
 			};
 			row.rowData = rowData;
 			ROWS.push(row);
