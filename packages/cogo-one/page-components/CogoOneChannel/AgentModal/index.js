@@ -1,4 +1,5 @@
 import { Modal, Input, Pagination, Toggle } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { collection, query, limit, getDocs, updateDoc, doc } from 'firebase/firestore';
@@ -11,7 +12,6 @@ import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
 import AgentDetail from './AgentDetail';
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
 const LIMIT = 1;
 const ARRAY_LENGTH = 8;
 
@@ -20,8 +20,8 @@ const getIsActive = async (firestore) => {
 
 	const constantsQuery = await query(constantCollection, limit(LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
-	const cogoOneConstantsDocs = cogoOneConstants?.docs[DEFAULT_INDEX];
-	const { is_locked_screen = false } = cogoOneConstantsDocs.data() || {};
+	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
+	const { is_locked_screen = false } = cogoOneConstantsDocs?.data() || {};
 	return is_locked_screen;
 };
 
@@ -30,7 +30,7 @@ const updateRoom = async ({ firestore, value }) => {
 
 	const roomsQuery = await query(constantRoom, limit(LIMIT));
 	const docs = await getDocs(roomsQuery);
-	const roomId = docs?.docs?.[DEFAULT_INDEX]?.id;
+	const roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const docRef = doc(
 		firestore,
@@ -41,7 +41,7 @@ const updateRoom = async ({ firestore, value }) => {
 };
 
 function AgentModal({
-	agentDetails,
+	agentDetails = false,
 	setAgentDetails = () => { },
 	firestore,
 }) {
@@ -83,7 +83,7 @@ function AgentModal({
 		>
 			<Modal.Header title="Agent Status" />
 			<Modal.Body className={styles.modal_body}>
-				<div className={styles.search_switch_space}>
+				<div className={styles.search_switch_toggle_space}>
 					<Input
 						size="sm"
 						placeholder="Search here"
@@ -91,7 +91,7 @@ function AgentModal({
 						prefix={<IcMSearchlight />}
 						onChange={setSearch}
 					/>
-					<div className={styles.lock_screen_toggle}>
+					<div className={styles.search_switch_toggle_space}>
 
 						Screen Lock
 						<Toggle
