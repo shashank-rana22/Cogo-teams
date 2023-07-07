@@ -8491,9 +8491,14 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
 		{
 			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -12557,6 +12562,11 @@ const partner = {
 		},
 		{
 			api          : 'put_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_dashboard',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
