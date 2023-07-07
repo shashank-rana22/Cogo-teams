@@ -58,6 +58,10 @@ function ApprovalActions({
 		);
 	};
 
+	if (item?.state === 'document_requested') {
+		return null;
+	}
+
 	return (
 		<div>
 			<div className={styles.actions_wrap}>

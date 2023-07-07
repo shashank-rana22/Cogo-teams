@@ -15,8 +15,11 @@ function UploadComplianceDocs({
 	task = {},
 	onCancel = () => {},
 	taskListRefetch = () => {},
+	// services = [],
 }) {
 	const { primary_service } = useContext(ShipmentDetailContext);
+	// console.log(task, 'task');
+	// console.log(services, 'services');
 
 	const { docs, loading } = useGetSaasComplianceDocs({ primary_service });
 
@@ -36,6 +39,7 @@ function UploadComplianceDocs({
 
 	const EXCULDE_DOCS_LIST = excludeDocs.export?.map((item) => item.doc_code);
 
+	// change export hardcoding
 	const REQUIRED_DOCS = docs?.filter((doc) => !EXCULDE_DOCS_LIST.includes(doc?.docCode)
 	&& doc?.tradeType === 'EXPORT');
 
@@ -50,6 +54,8 @@ function UploadComplianceDocs({
 	const disableSubmit = !(task.task === 'approve_compliance_documents'
 		? DISABLE_SUBMIT_TILL_ALL_APPROVED : DISABLE_SUBMIT_TILL_ALL_UPLOADED);
 
+	const requestDocs = allUploadedDocs?.list?.filter((doc) => doc.state === 'document_requested');
+
 	const handleSubmit = async () => {
 		const payload = {
 			id: task?.id,
@@ -58,18 +64,19 @@ function UploadComplianceDocs({
 		await apiTrigger(payload);
 	};
 
+	const totalDocsList = [...(REQUIRED_DOCS || []), ...(requestDocs || [])];
+
 	return loading || docLoading ? (
 		<Loader />
 	) : (
 		<div>
-			{REQUIRED_DOCS?.map((item) => (
+			{totalDocsList?.map((item) => (
 				<List
 					key={item?.docCode}
 					item={item}
 					onCancel={onCancel}
 					taskListRefetch={taskListRefetch}
 					task={task}
-					uploadedDocs={uploadedDocs?.list}
 					uploadedDocsRefetch={getDocs}
 					allUploadedDocs={allUploadedDocs?.list}
 				/>

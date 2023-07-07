@@ -29,7 +29,7 @@ function RequestService() {
 		return DOCS_LIST;
 	});
 
-	return (
+	const requestNewDoc = () => (
 		<div className={styles.container}>
 			<div className={styles.input}>
 				<div className={styles.label}>Choose the document you want to request</div>
@@ -46,6 +46,18 @@ function RequestService() {
 			</div>
 
 			<Button themeType="secondary">Submit</Button>
+		</div>
+	);
+
+	return (
+		<div>
+			{requestNewDoc()}
+
+			<div className={styles.new_doc_request}>
+				<Button themeType="secondary">
+					+ Request New Document
+				</Button>
+			</div>
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	align-items: center;
+	width: 100%;
 	padding: 10px 24px;
 	margin-bottom: 12px;
 	background: #fff;
@@ -8,34 +9,14 @@
 	border-radius: 4px;
 }
 
-.doc_name_div {
+.info {
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.doc_info {
 	width: 40%;
-	margin-left: 24px;
-	line-height: 140%;
-}
-
-.doc_label {
-	margin-bottom: 4px;
-	font-size: 12px;
-	font-weight: 500;
-	color: #828282;
-}
-
-.doc_name {
-	margin-right: 10px;
-	font-size: 12px;
-	font-weight: 500;
-	color: #000;
-}
-
-.doc_name_info {
-	display: flex;
-}
-
-.info_icon {
-	cursor: pointer;
 }
 
 .sample_file {
@@ -60,8 +41,4 @@
 	align-items: center;
 	justify-content: flex-end;
 	width: 30%;
-}
-
-.tooltip_content {
-	font-size: 10px;
 }

@@ -189,6 +189,7 @@ function ExecuteTask({
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
+				services={servicesList}
 			/>
 		);
 	}

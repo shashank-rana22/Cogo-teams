@@ -8,19 +8,25 @@ import UploadDoc from '../UploadDoc';
 import styles from './styles.module.css';
 
 const DELETE_ICON_DIM = 20;
+const FIRST_DOC = 0;
 
 function Actions({
-	item = {}, task = {}, uploadedDocs = {}, uploadedDocsRefetch = () => {},
+	item = {}, task = {}, allDocs = [], uploadedDocsRefetch = () => {},
 }) {
 	const [open, setOpen] = useState(false);
 	const [updateOpen, setUpdateOpen] = useState(false);
 
+	const docData = allDocs?.filter((doc) => doc?.file_name === item?.docName)?.[FIRST_DOC];
+	console.log(docData, 'docData');
+	console.log(allDocs, 'allDocs');
+	console.log(item, 'item');
+
 	return (
 		<div>
-			{!isEmpty(uploadedDocs) ? (
+			{!isEmpty(docData) ? (
 				<div className={styles.actions_wrap}>
 					<a
-						href={uploadedDocs?.document_url}
+						href={docData?.document_url}
 						target="_blank"
 						className={styles.uploaded_doc}
 						rel="noreferrer"
@@ -30,7 +36,7 @@ function Actions({
 
 					<div className={styles.uploaded}>Uploaded</div>
 
-					{uploadedDocs?.state !== 'document_accepted' ? (
+					{docData?.state !== 'document_accepted' ? (
 						<Button themeType="link" onClick={() => setUpdateOpen(true)}>
 							<IcMDelete
 								height={DELETE_ICON_DIM}
@@ -40,7 +46,9 @@ function Actions({
 						</Button>
 					) : null}
 				</div>
-			) : (
+			) : null}
+
+			{['document_uploaded', 'document_request'].includes(docData?.state) && isEmpty(docData) ? (
 				<div className={styles.actions_wrap}>
 					<div className={styles.not_uploaded}>Yet To Receive</div>
 
@@ -52,8 +60,7 @@ function Actions({
 						Upload
 					</Button>
 				</div>
-
-			)}
+			) : null}
 
 			{open ? (
 				<UploadDoc
@@ -73,7 +80,7 @@ function Actions({
 					task={task}
 					uploadedDocsRefetch={uploadedDocsRefetch}
 					type="update"
-					existingDoc={uploadedDocs}
+					existingDoc={allDocs}
 				/>
 			) : null}
 		</div>
