@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { ReactNode } from 'react';
@@ -81,7 +82,7 @@ function List({
 					<div className={styles.no_data}>
 						<img
 							style={{ width: '24%', margin: '8%' }}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
+							src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
 							alt="no data"
 						/>
 					</div>
