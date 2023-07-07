@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListOrganizationServices({ currentPage, activeTab }) {
+function useListOrganizationServices({ currentPage, activeTab, setApprovalStats }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -18,6 +18,7 @@ function useListOrganizationServices({ currentPage, activeTab }) {
 					page: currentPage,
 				},
 			});
+			setApprovalStats(data?.approvals_stats);
 		} catch (err) {
 			console.log(err);
 		}

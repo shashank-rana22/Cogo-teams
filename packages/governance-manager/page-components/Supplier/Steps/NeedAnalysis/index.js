@@ -2,18 +2,27 @@ import { Button, Pill, Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import useGetOrganizationServiceExpertises from '../../../hooks/useGetOrganizationServiceExpertises';
+import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
 
 import EvaluateModal from './EvaluateModal';
 import styles from './styles.module.css';
 
-function NeedAnalysis({ setStatus, organization_id, id }) {
+function NeedAnalysis({ organization_id, id, service, getOrganizationService }) {
 	const {
-		data:serviceExpertiseData,
+		data: serviceExpertiseData,
 		loading:loadingSE,
 	} = useGetOrganizationServiceExpertises({ organization_id, service_id: id });
 
-	const [show, setShow] = useState(false);
+	const { UpdateOrganizationService } = useUpdateOrganizationService({
+		organization_id, stage_of_approval: 'market_feedback', service, getOrganizationService,
+	});
 
+	const [show, setShow] = useState('');
+
+	const handleSubmit = () => {
+		UpdateOrganizationService();
+		// setStatus('market_feedback');
+	};
 	const columns = [
 		{ Header: 'Origin Country', accessor: 'origin_country' },
 		{ Header: 'Destination Trade Lane', accessor: 'destination_trade_lane' },
@@ -34,46 +43,49 @@ function NeedAnalysis({ setStatus, organization_id, id }) {
 		},
 		{
 			Header   : ' ',
-			accessor : () => (
-				<Button themeType="accent" onClick={() => setShow(true)}>
+			accessor : (row) => (
+				<Button themeType="accent" onClick={() => setShow(row?.id)}>
 					Evaluate
 				</Button>
 			),
 		},
 	];
-	const data = [
-		{
-			origin_country         : 'India',
-			destination_trade_lane : 'West Coast',
-			current_supplier       : '8 Suppliers',
-			volume_served          : '2000 Containers',
-			status                 : 'completed',
-		},
-		{
-			origin_country         : 'India',
-			destination_trade_lane : 'West Coast',
-			current_supplier       : '8 Suppliers',
-			volume_served          : '2000 Containers',
-			status                 : 'completed',
-		},
-		{
-			origin_country         : 'India',
-			destination_trade_lane : 'West Coast',
-			current_supplier       : '8 Suppliers',
-			volume_served          : '2000 Containers',
-			status                 : 'completed',
-		},
+	// const data = [
+	// 	{
+	// 		id                     : 'aaeb3615-1a56-4edd-bd57-b90e53e6a8da',
+	// 		origin_country         : 'India',
+	// 		destination_trade_lane : 'West Coast',
+	// 		current_supplier       : '8 Suppliers',
+	// 		volume_served          : '2000 Containers',
+	// 		status                 : 'completed',
+	// 	},
+	// 	{
+	// 		id                     : '2341',
+	// 		origin_country         : 'India',
+	// 		destination_trade_lane : 'West Coast',
+	// 		current_supplier       : '8 Suppliers',
+	// 		volume_served          : '2000 Containers',
+	// 		status                 : 'completed',
+	// 	},
+	// 	{
+	// 		id                     : '3214',
+	// 		origin_country         : 'India',
+	// 		destination_trade_lane : 'West Coast',
+	// 		current_supplier       : '8 Suppliers',
+	// 		volume_served          : '2000 Containers',
+	// 		status                 : 'completed',
+	// 	},
 
-	];
+	// ];
 
 	return (
 		<>
 			{
-			!loadingSE
-			&& <Table columns={columns} data={data} className={styles.table} />
+			!loadingSE && serviceExpertiseData
+			&& <Table columns={columns} data={serviceExpertiseData} className={styles.table} />
 		}
 			<div className={styles.submit_btn}>
-				<Button onClick={() => setStatus('market_feedback')}>
+				<Button onClick={handleSubmit}>
 					Submit & Next
 				</Button>
 			</div>

@@ -25,7 +25,7 @@ function Supplier() {
 
 	const { query } = useRouter();
 	const { id } = query;
-	const { data: supplierData, loading } = useGetOrganizationService({ id });
+	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });
 
 	return (
 		<div>
@@ -40,9 +40,10 @@ function Supplier() {
 			/>
 			{{
 				need_analysis: <NeedAnalysis
-					setStatus={setStatus}
 					organization_id={supplierData?.organization_id}
 					id={id}
+					service={supplierData?.service}
+					getOrganizationService={getOrganizationService}
 				/>,
 				market_feedback     : <MarketFeedback setStatus={setStatus} />,
 				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,

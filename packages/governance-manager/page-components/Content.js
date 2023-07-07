@@ -10,13 +10,25 @@ import styles from './styles.module.css';
 function Content() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeTab, setActiveTab] = useState('need_analysis');
-	const { data:supplierList, loading, totalCount } = useListOrganizationServices({ currentPage, activeTab });
+	const [approvalStats, setApprovalStats] = useState({});
+	const {
+		data:supplierList,
+		loading, totalCount,
+	}	= 	useListOrganizationServices({
+		currentPage,
+		activeTab,
+		setApprovalStats,
+	});
 
 	return (
 		<>
 			<h2>Governance Manager</h2>
 			<Stats />
-			<StatusBar activeTab={activeTab} setActiveTab={setActiveTab} />
+			<StatusBar
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				approvalStats={approvalStats}
+			/>
 			<ListSupplier currentPage={currentPage} supplierList={supplierList} loading={loading} />
 			{
 				!loading

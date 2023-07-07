@@ -1,8 +1,20 @@
 import { Button, Modal, Table, Radio, Textarea } from '@cogoport/components';
+import { useState } from 'react';
+
+import useUpdateOrganizationServiceExpertiseFeedback from
+	'../../../../hooks/useUpdateOrganizationServiceExpertiseFeedback';
 
 import styles from './styles.module.css';
 
 function EvaluateModal({ show, setShow }) {
+	const [feedback, setFeedback] = useState('');
+	const [checkbox, setCheckbox] = useState('');
+	const { UpdateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({
+		feedback,
+		service_requirement : checkbox,
+		id                  : show,
+		setShow,
+	});
 	const columns = [
 		{ Header: 'Name of Current Supplier', accessor: 'current_supplier' },
 		{ Header: 'Volume Served', accessor: 'volume_served' },
@@ -16,7 +28,6 @@ function EvaluateModal({ show, setShow }) {
 		{
 			firstName : 'tandy',
 			lastName  : 'miller',
-
 		},
 		{
 			firstName : 'joe',
@@ -24,13 +35,17 @@ function EvaluateModal({ show, setShow }) {
 
 		},
 	];
+	const handleSubmit = () => {
+		UpdateOrganizationServiceExpertiseFeedback();
+	};
+
 	return (
 		<div>
 			<Modal
 				size="xl"
-				show={show}
+				show={show?.length > 0}
 				placement="centre"
-				onClose={() => setShow(false)}
+				onClose={() => setShow('')}
 				maxHeight={100}
 				scroll={false}
 			>
@@ -42,22 +57,43 @@ function EvaluateModal({ show, setShow }) {
 						</div>
 						<div className={styles.right}>
 							<div className={styles.right_upper}>
-								<Radio name="a1" label="Needed" disabled={false} style={{ marginRight: '30px' }} />
-								<Radio name="a1" label="Not Needed" disabled={false} />
+								<Radio
+									name="a1"
+									label="Needed"
+									value="yes"
+									style={{ marginRight: '30px' }}
+									onChange={(e) => setCheckbox(e.target.value)}
+								/>
+								<Radio
+									name="a1"
+									value="no"
+									label="Not Needed"
+									onChange={(e) => setCheckbox(e.target.value)}
+								/>
 							</div>
 							<h4>Feedback</h4>
 							<Textarea
 								className={styles.feedback_box}
-								name="a4"
 								size="md"
 								defaultValue="Rishi"
-								placeholder="A4"
+								placeholder="Minimum 50 characters"
+								value={feedback}
+								onChange={(val) => setFeedback(val)}
 							/>
 						</div>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button>Submit</Button>
+					<Button
+						onClick={handleSubmit}
+						disabled={
+						feedback?.length < 50
+						|| checkbox === ''
+					}
+					>
+						Submit
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

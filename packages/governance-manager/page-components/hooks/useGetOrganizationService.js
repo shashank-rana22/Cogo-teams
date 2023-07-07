@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetOrganizationService({ id }) {
+function useGetOrganizationService({ id, setStatus }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -25,10 +25,15 @@ function useGetOrganizationService({ id }) {
 	useEffect(() => {
 		if (id) { getOrganizationService(); }
 	}, []);
+
+	useEffect(() => {
+		if (data) { setStatus(data?.list[0]?.stage_of_approval); }
+	}, [data]);
 	return {
 		data       : data?.list[0],
 		loading,
 		totalCount : data?.total_count,
+		getOrganizationService,
 	};
 }
 export default useGetOrganizationService;
