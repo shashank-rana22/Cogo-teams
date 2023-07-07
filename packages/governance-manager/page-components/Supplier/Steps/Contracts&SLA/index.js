@@ -1,13 +1,13 @@
 /* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
-// import { useState } from 'react';
 import { InputController, useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function ContractSla() {
-	// const [totalInput, setTotalInput] = useState(2);
+	const [step, setStep] = useState(1);
 	const {
 		control,
 	} = useForm();
@@ -16,7 +16,12 @@ function ContractSla() {
 		<div className={styles.parent}>
 			<div className={styles.heading}>
 				Contract & SLA -
-				<div className={styles.headingsteps}>Step 1/2</div>
+				<div className={styles.headingsteps}>
+					Step
+					{' '}
+					{step}
+					/2
+				</div>
 			</div>
 			{[1, 2, 3].map((x) => (
 				<div key={x}>
@@ -35,34 +40,107 @@ function ContractSla() {
 							versions of Lorem Ipsum
 						</div>
 						<div className={styles.update}>
-							<IcMInfo height={25} width={25} />
-							<InputController
-								size="sm"
-								control={control}
-								name="update"
-								rules={{ required: { value: true, message: 'POC Name is required' } }}
-								style={{ marginLeft: '12px', height: '20px', width: '140px' }}
-								placeholder=" "
-							/>
-							<Button
-								size="sm"
-								themeType="secondary"
-								className={styles.update_button}
-								style={{ height: '28px' }}
-							>
-								Update
+							{step === 1 ? (
+								<>
+									<div className={styles.icon}><IcMInfo height={26} width={26} /></div>
+									<InputController
+										size="sm"
+										control={control}
+										name="update"
+										rules={{ required: { value: true, message: 'POC Name is required' } }}
+										style={{ marginLeft: '12px', height: '20px', width: '140px' }}
+										placeholder=" "
+									/>
+									<Button
+										size="sm"
+										themeType="secondary"
+										className={styles.update_button}
+										style={{ height: '28px' }}
+									>
+										Update
 
-							</Button>
+									</Button>
+								</>
+							) : (
+								<>
+									<span className={styles.icon}>Original Value</span>
+									<InputController
+										size="sm"
+										control={control}
+										name="original_value"
+										rules={{ required: { value: true, message: 'Value is required' } }}
+										style={{
+											marginLeft  : '12px',
+											height      : '20px',
+											width       : '90px',
+											marginRight : '24px',
+										}}
+										placeholder=" "
+									/>
+									<span className={styles.icon}>Updated Value</span>
+									<InputController
+										size="sm"
+										control={control}
+										name="updated_value"
+										rules={{ required: { value: true, message: 'Value is required' } }}
+										style={{ marginLeft: '12px', height: '20px', width: '90px' }}
+										placeholder=" "
+									/>
+									<Button
+										size="sm"
+										themeType="secondary"
+										className={styles.update_button}
+										style={{ height: '28px' }}
+									>
+										Confirm
+
+									</Button>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
 			))}
-			<div className={styles.footer}>
-				{' '}
-				<Button style={{ fontWeight: 600 }}>Save & Next</Button>
-				{' '}
-				<Button themeType="secondary" style={{ fontWeight: 600 }}>Save & Do It Later</Button>
-			</div>
+			{step === 1 ? (
+				<div className={styles.footer}>
+					{' '}
+					<Button style={{ fontWeight: 600 }} onClick={() => { setStep(2); }}>Save & Next</Button>
+					{' '}
+					<Button
+						themeType="secondary"
+						style={{ fontWeight: 600 }}
+						onClick={() => { setStep(1); }}
+					>
+						Save & Do It Later
+
+					</Button>
+				</div>
+			) : (
+				<div className={styles.step_two_footer}>
+					{' '}
+					<Button
+						themeType="secondary"
+						style={{ fontWeight: 600 }}
+						onClick={() => { setStep(1); }}
+					>
+						Save & Do It Later
+
+					</Button>
+					<div className={styles.side_line_buttons}>
+						<Button style={{ fontWeight: 600 }} onClick={() => { setStep(2); }}>Approve</Button>
+						{' '}
+						<Button
+							themeType="secondary"
+							style={{ fontWeight: 600 }}
+							onClick={() => { setStep(1); }}
+						>
+							Reject
+
+						</Button>
+
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

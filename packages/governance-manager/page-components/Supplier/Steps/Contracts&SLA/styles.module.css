@@ -39,6 +39,11 @@
 	border-bottom: 1px solid var(--balck-40-disabled, #bdbdbd);
 }
 
+.icon {
+	display: flex;
+	align-items: center;
+}
+
 .term_content {
 	padding-top: 12px;
 	padding-left: 24px;
@@ -70,5 +75,17 @@
 	display: flex;
 	flex-direction: row-reverse;
 	gap: 12px;
-	margin-top: 30px;
+	margin-top: 26px;
+}
+
+.step_two_footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 26px;
+}
+
+.side_line_buttons {
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 12px;
 }
