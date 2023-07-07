@@ -8,6 +8,13 @@ import getOptions from '../../../../../utils/getOptions';
 
 import styles from './styles.module.css';
 
+const DEFAULT_SPAN = 12;
+const PERCENTAGE_FACTOR = 100;
+const FLEX_OFFSET = 1;
+const ZEROTH_INDEX = 0;
+const FIRST_INDEX = 1;
+const TWO_VALUE = 2;
+
 function Child({
 	controls,
 	control,
@@ -19,12 +26,11 @@ function Child({
 	lowerlabel = '',
 	error = {},
 	length = 0,
-	watch,
 	setValue,
+	isSubControl = false,
+	fieldArrayValues = {},
 }) {
-	const fieldArrayValues = watch(name) || [];
-
-	const CHANGE_MAPPING = {
+	const ON_CHANGE_MAPPING = {
 		container_type: {
 			onChange: () => {
 				setValue(`container[${index}].commodity`, '');
@@ -45,8 +51,37 @@ function Child({
 						commodityType = '',
 						span,
 						subLabel = '',
-						controls: innerControls,
+						controls: subControls,
 					} = newControl;
+
+					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
+
+					if (subControls) {
+						return (
+							<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
+								{newControl?.showTopLabelOnly ? (
+									<div className={styles.heading}>{newControl.label || lowerlabel}</div>
+								) : null}
+
+								<Child
+									key={name}
+									index={index}
+									control={control}
+									controls={subControls}
+									name={name}
+									lowerlabel={lowerlabel}
+									remove={remove}
+									error={error}
+									fieldArrayValues={fieldArrayValues}
+									disabled={disabled}
+									length={length}
+									showLabelOnce={showLabelOnce}
+									setValue={setValue}
+									isSubControl
+								/>
+							</div>
+						);
+					}
 
 					if (optionsListKey) {
 						const finalOptions = getOptions(optionsListKey, type);
@@ -64,73 +99,10 @@ function Child({
 						newControl = { ...newControl, options: finalOptions };
 					}
 
-					const flex = (span || 12) / 12 * 100;
-
-					if (innerControls) {
-						return (
-							<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
-								<div className={styles.heading}>{newControl.label || lowerlabel}</div>
-
-								<div className={styles.content}>
-									{innerControls.map((innerControlItem) => {
-										const {
-											type: innerType,
-											name: innerControlName,
-											span: innerSpan,
-										} = innerControlItem;
-
-										const innerFlex = (innerSpan || 12) / 12 * 100;
-
-										const Element = getElementController(innerType);
-
-										const innerErrorMessage = getErrorMessage({
-											error : error?.[innerControlItem.name],
-											rules : innerControlItem?.rules,
-											label : innerControlItem?.label,
-										});
-
-										return (
-											<div
-												className={styles.form_item}
-												style={{ width: `${innerFlex}%`, marginBottom: 0 }}
-												key={`${innerControlName}_${index}`}
-											>
-												{(showLabelOnce && index === 0 && innerControlItem.label)
-											|| (!showLabelOnce && innerControlItem.label) ? (
-												<div className={styles.heading}>
-													{innerControlItem.label || lowerlabel}
-													{innerControlItem?.rules?.required ? (
-														<div className={styles.required_mark}>*</div>
-													) : null}
-												</div>
-													) : null}
-
-												<Element
-													width="100%"
-													key={`create_form_${innerControlItem.name}_${index}`}
-													itemKey={`create_form_${innerControlItem.name}_${index}`}
-													control={control}
-													id={`create_form_${innerControlItem.name}_${index}`}
-													{...innerControlItem}
-													disabled={disabled}
-													name={`${name}[${index}].${innerControlItem.name}`}
-												/>
-
-												<div className={styles.error_message}>
-													{innerErrorMessage}
-												</div>
-											</div>
-										);
-									})}
-								</div>
-							</div>
-						);
-					}
-
 					const Element = getElementController(type);
 
 					const errorOriginal = getErrorMessage({
-						error : error?.[controlItem.name],
+						error : error?.[controlName],
 						rules : controlItem?.rules,
 						label : controlItem?.label,
 					});
@@ -141,8 +113,8 @@ function Child({
 							style={{ width: `${flex}%` }}
 							key={`create_form_${newControl.name}_${index}`}
 						>
-							{(showLabelOnce && index === 0 && newControl.label)
-							|| (!showLabelOnce && newControl.label) ? (
+							{(showLabelOnce && index === ZEROTH_INDEX && newControl.label && !isSubControl)
+							|| (!showLabelOnce && newControl.label && !isSubControl) ? (
 								<div className={styles.heading}>
 									{newControl.label || lowerlabel}
 									{newControl?.rules?.required ? (
@@ -158,7 +130,7 @@ function Child({
 								control={control}
 								id={`create_form_${newControl.name}_${index}`}
 								{...newControl}
-								{...CHANGE_MAPPING[controlName] || {}}
+								{...ON_CHANGE_MAPPING[controlName] || {}}
 								disabled={disabled}
 								name={`${name}[${index}].${newControl.name}`}
 							/>
@@ -174,10 +146,10 @@ function Child({
 
 			</div>
 
-			{length >= 2 && !disabled ? (
+			{length >= TWO_VALUE && !disabled && !isSubControl ? (
 				<IcMDelete
 					className={styles.remove_icon}
-					onClick={() => remove(index, 1)}
+					onClick={() => remove(index, FIRST_INDEX)}
 				/>
 			) : null}
 		</div>

@@ -23,12 +23,14 @@ const SCREEN_MAPPING = {
 
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
-
 	const [comparisonCheckbox, setComparisonCheckbox] = useState({});
 
 	const {
-		refetchSearch = () => {}, loading, data,	filters,
-		setFilters,
+		refetchSearch = () => {},
+		loading = false,
+		data = {},
+		filters = {},
+		setFilters = () => {},
 		screen,
 		setScreen,
 		setSelectedCard,
@@ -36,15 +38,6 @@ function SearchResults() {
 	} = useGetSpotSearch();
 
 	const { detail = {}, rates = [] } = data || {};
-
-	if (loading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Looking for Rates</span>
-				<Loader themeType="primary" className={styles.loader} background="#000" />
-			</div>
-		);
-	}
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -103,8 +96,17 @@ function SearchResults() {
 		);
 	};
 
+	if (loading) {
+		return (
+			<div className={styles.loading}>
+				<span className={styles.loading_text}>Looking for Rates</span>
+				<Loader themeType="primary" className={styles.loader} background="#000" />
+			</div>
+		);
+	}
+
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${showAdditionalHeader ? styles.backdrop : {}}`}>
 			<Header
 				data={detail}
 				showAdditionalHeader={showAdditionalHeader}
@@ -112,6 +114,8 @@ function SearchResults() {
 				headerProps={headerProps}
 				loading={loading}
 				activePage="search_results"
+				currentScreen={screen}
+				setCurrentScreen={setScreen}
 			/>
 
 			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>

@@ -44,8 +44,6 @@ const renderFormItem = ({ name, control }) => (
 function Detention({ values = {}, handleClick = () => {}, ...rest }) {
 	const { control, handleSubmit, setValue } = useForm();
 
-	console.log('values', values);
-
 	const onClickSave = (val) => {
 		handleClick(val);
 	};

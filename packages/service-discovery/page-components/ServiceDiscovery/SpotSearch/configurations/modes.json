@@ -36,16 +36,16 @@
 	},
 	{ 
 		"value": "trailer_freight", 
-		"label": "Haulage", 
+		"label": "Trailer", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/6970ea8f7ac4c17f155d50322a692a48.png",
-		"is_available": true,
+		"is_available": false,
 		"type": ["seaport", "airport", "pincode"]  
 	},
 	{ 
 		"value": "haulage_freight", 
-		"label": "Rail", 
+		"label": "Haulage", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/73ff6e9002fbfb3fdd5d6ee82ec76cfa.png",
-		"is_available": true,
+		"is_available": false,
 		"type": ["seaport"]   
 	}
 ]

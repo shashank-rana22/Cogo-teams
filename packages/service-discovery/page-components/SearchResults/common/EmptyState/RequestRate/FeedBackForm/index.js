@@ -5,9 +5,9 @@ import getErrorMessage from '../../../../../../configs/getErrorMessage';
 
 import styles from './styles.module.css';
 
-const TOTAL_SPAN = 12;
-const FLEX_HUNDRED = 100;
-const FLEX_ONE = 1;
+const DEFAULT_SPAN = 12;
+const PERCENTAGE_FACTOR = 100;
+const FLEX_OFFSET = 1;
 
 function FeedBackForm({ controls, control, errors }) {
 	return (
@@ -24,7 +24,7 @@ function FeedBackForm({ controls, control, errors }) {
 					label : controlItem?.label,
 				});
 
-				const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
+				const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>

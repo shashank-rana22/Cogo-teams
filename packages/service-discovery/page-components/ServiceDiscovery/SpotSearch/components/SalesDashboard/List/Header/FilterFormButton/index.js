@@ -8,6 +8,13 @@ import getElementController from '../../../../../../../../configs/getElementCont
 
 import styles from './styles.module.css';
 
+const ZERO_VALUE = 0;
+const ONE_VALUE = 0;
+const MARGIN_VALUE = 20;
+const DEFAULT_SPAN = 12;
+const PERCENT_FACTOR = 100;
+const FLEX_OFFSET = 1;
+
 const isObjEmpty = (obj) => {
 	let objIsEmpty = true;
 	Object.keys(obj).forEach((key) => {
@@ -17,7 +24,7 @@ const isObjEmpty = (obj) => {
 };
 
 function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
-	const [filtersCount, setFiltersCount] = useState(0);
+	const [filtersCount, setFiltersCount] = useState(ZERO_VALUE);
 	const [visible, setVisible] = useState(false);
 
 	const { control, watch, handleSubmit, reset } = useForm();
@@ -42,7 +49,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		}
 
 		reset();
-		setFiltersCount(0);
+		setFiltersCount(ZERO_VALUE);
 		setVisible(false);
 	};
 
@@ -56,7 +63,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		let count = 0;
 
 		Object.keys(formValues).forEach((key) => {
-			if (formValues[key] && !isEmpty(formValues[key])) count += 1;
+			if (formValues[key] && !isEmpty(formValues[key])) count += ONE_VALUE;
 		});
 
 		setFiltersCount(count);
@@ -82,7 +89,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 				{controls.map((controlItem, index) => {
 					const { label, type, name, span } = controlItem;
 
-					const flex = ((span || 12) / 12) * 100;
+					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
 
 					const Element = getElementController(type);
 
@@ -90,7 +97,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 						<div
 							key={`${name}_${label}`}
 							className={styles.form_item}
-							style={{ width: `${flex}%`, marginTop: index === 0 ? 0 : 20 }}
+							style={{ width: `${flex}%`, marginTop: index === ZERO_VALUE ? ZERO_VALUE : MARGIN_VALUE }}
 						>
 							<div className={styles.label}>
 								{label || ''}

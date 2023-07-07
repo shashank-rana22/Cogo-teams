@@ -1,7 +1,6 @@
 {
 	"heading": "Most Booked",
 	"api": "list_spot_searches",
-	"placement": "center",
 	"type": "most_booked",
 	"fields": [
 		{

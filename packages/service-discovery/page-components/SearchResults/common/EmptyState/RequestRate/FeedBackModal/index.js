@@ -7,11 +7,11 @@ import FeedBackForm from '../FeedBackForm';
 
 import styles from './styles.module.css';
 import useRequestForRate from './useRequestForRate';
-// import useGetPriorityAirlineOptions from './useGetPriorityAirlineOptions';
+
+const MARGIN_FIRST_BUTTON = 12;
+const ZERO_MARGIN = 0;
 
 function FeedBackModal({ data = {}, show, onClose = () => {}, proceeedWithFeedback }) {
-	// const { priorityAirlineOptions, airlineOptions } = useGetPriorityAirlineOptions();
-
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
 	const controls = getControls(data?.service_type);
@@ -39,7 +39,7 @@ function FeedBackModal({ data = {}, show, onClose = () => {}, proceeedWithFeedba
 			size={size || 'md'}
 			themeType={themeType || 'primary'}
 			onClick={onClick}
-			style={{ marginRight: isFirstBtn ? 12 : 0 }}
+			style={{ marginRight: isFirstBtn ? MARGIN_FIRST_BUTTON : ZERO_MARGIN }}
 			disabled={loading}
 			loading={isSubmitBtn && loading}
 		>

@@ -35,7 +35,7 @@ const trailerFreightFeedBackControls = [
 		name  : 'preferred_freight_rate',
 		label : 'Indicative Rate',
 		type  : 'number',
-		span  : 9,
+		span  : 10,
 	},
 	{
 		name  : 'remarks',

@@ -9,9 +9,19 @@ import Detention from '../../../Detention';
 import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
-function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }) {
-	const formValues = watch();
+const DEFAULT_SPAN = 12;
+const PERCENTAGE_FACTOR = 100;
+const FLEX_OFFSET = 1;
 
+function FilterItem({
+	controls = {},
+	control,
+	watch,
+	errors = {},
+	handleSubmit = () => {},
+	setValue = () => {},
+	isSubControl = false,
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
@@ -19,14 +29,13 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 				const { label, type, name, controls: innerControls, span, ...rest } = newControl;
 
-				const flex = (span || 12) / 12 * 100;
+				const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
 
 				if (type === 'field-array') {
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
 							<FieldArray
 								{...newControl}
-								formValues={formValues}
 								control={control}
 								watch={watch}
 								handleSubmit={handleSubmit}
@@ -47,63 +56,25 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 				if (innerControls) {
 					return (
-						<div key={name} className={styles.form_item} style={{ width: `${flex}%` }}>
-							<div
-								className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}
-							>
-								{newControl.label}
+						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
+							<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+								{newControl?.boldLabel || label || ''}
+								{' '}
+								{newControl?.rules?.required ? (
+									<div className={styles.required_mark}>*</div>
+								) : null}
 							</div>
 
-							<div className={styles.content}>
-								{innerControls.map((innerControlItem) => {
-									const {
-										type: innerType,
-										name: innerControlName,
-										span: innerSpan,
-									} = innerControlItem;
-
-									const innerFlex = (innerSpan || 12) / 12 * 100;
-
-									const Element = getElementController(innerType);
-
-									const innerErrorMessage = getErrorMessage({
-										error : errors?.[innerControlItem.name],
-										rules : innerControlItem?.rules,
-										label : innerControlItem?.label,
-									});
-
-									return (
-										<div
-											className={styles.form_item}
-											style={{ width: `${innerFlex}%`, marginBottom: 0 }}
-											key={`${innerControlName}`}
-										>
-											{innerControlItem.label ? (
-												<div className={styles.label}>
-													{innerControlItem.label}
-													{innerControlItem?.rules?.required ? (
-														<div className={styles.required_mark}>*</div>
-													) : null}
-												</div>
-											) : null}
-
-											<Element
-												width="100%"
-												key={`create_form_${innerControlItem.name}`}
-												itemKey={`create_form_${innerControlItem.name}`}
-												control={control}
-												id={`create_form_${innerControlItem.name}`}
-												{...innerControlItem}
-												name={`${name}${innerControlItem.name}`}
-											/>
-
-											<div className={styles.error_message}>
-												{innerErrorMessage}
-											</div>
-										</div>
-									);
-								})}
-							</div>
+							<FilterItem
+								key={`${name}_${label}`}
+								controls={innerControls}
+								control={control}
+								watch={watch}
+								errors={errors}
+								handleSubmit={handleSubmit}
+								setValue={setValue}
+								isSubControl
+							/>
 						</div>
 					);
 				}
@@ -115,7 +86,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 				}
 
 				if (rest.commodityType) {
-					const containerType = formValues?.container_type;
+					const containerType = watch('container_type');
 
 					const keyOptions = getCommodityList(rest.commodityType, containerType || null);
 
@@ -126,7 +97,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 				const Element = getElementController(type);
 
-				const errorOriginal = getErrorMessage({
+				const errorMessage = getErrorMessage({
 					error : errors?.[newControl.name],
 					rules : newControl?.rules,
 					label : newControl?.label,
@@ -134,13 +105,15 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
-						<div className={styles.label}>
-							{label || ''}
-							{' '}
-							{newControl?.rules?.required ? (
-								<div className={styles.required_mark}>*</div>
-							) : null}
-						</div>
+						{isSubControl ? null : (
+							<div className={`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+								{newControl?.boldLabel || label || ''}
+								{' '}
+								{newControl?.rules?.required ? (
+									<div className={styles.required_mark}>*</div>
+								) : null}
+							</div>
+						)}
 
 						<Element
 							{...newControl}
@@ -151,7 +124,7 @@ function FilterItem({ controls, control, watch, errors, handleSubmit, setValue }
 
 						{errors[name] && (
 							<div className={styles.error_message}>
-								{errorOriginal}
+								{errorMessage}
 							</div>
 						)}
 

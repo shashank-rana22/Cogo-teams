@@ -49,7 +49,7 @@ const fclFeedBackControls = [
 		name  : 'preferred_freight_rate',
 		label : 'Indicative Rate',
 		type  : 'number',
-		span  : 9,
+		span  : 10,
 	},
 	{
 		name           : 'preferred_shipping_line_ids',

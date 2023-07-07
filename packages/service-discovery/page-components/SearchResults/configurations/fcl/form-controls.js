@@ -37,11 +37,12 @@ const fclControls = () => {
 					rules          : { required: 'Commodity is required' },
 				},
 				{
-					name     : 'total_weight',
-					label    : 'Total Weight per Ctr.',
-					subLabel : 'Max Weight = 26 MT. Overweight charges applicable after 20 MT.',
-					span     : 6,
-					controls : [
+					name             : 'total_weight',
+					label            : 'Total Weight per Ctr.',
+					subLabel         : 'Max Weight = 26 MT. Overweight charges applicable after 20 MT.',
+					showTopLabelOnly : true,
+					span             : 6,
+					controls         : [
 						{
 							name  : 'cargo_weight_per_container',
 							type  : 'input',
@@ -54,20 +55,20 @@ const fclControls = () => {
 								min      : 0.1,
 							},
 						},
-						// {
-						// 	name        : 'weight_unit',
-						// 	type        : 'select',
-						// 	placeholder : 'Select Unit',
-						// 	span        : 5,
-						// 	value       : 'mt',
-						// 	options     : [
-						// 		{
-						// 			label : 'MT',
-						// 			value : 'mt',
-						// 		},
-						// 	],
-						// 	rules: { required: 'Weight is required' },
-						// },
+						{
+							name        : 'weight_unit',
+							type        : 'select',
+							placeholder : 'Select Unit',
+							span        : 6,
+							value       : 'mt',
+							options     : [
+								{
+									label : 'MT',
+									value : 'mt',
+								},
+							],
+							rules: { required: 'Unit is required' },
+						},
 					],
 				},
 				{
@@ -75,7 +76,7 @@ const fclControls = () => {
 					label       : 'Count',
 					type        : 'input',
 					placeholder : 'Enter Count',
-					span        : 5,
+					span        : 4,
 					value       : 1,
 					rules       : {
 						required : 'Count is required',

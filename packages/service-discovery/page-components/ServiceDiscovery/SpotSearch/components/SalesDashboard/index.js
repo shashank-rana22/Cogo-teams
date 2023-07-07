@@ -6,10 +6,12 @@ import { salesDashboard as configurations } from '../../configurations/sales-das
 import List from './List';
 import styles from './styles.module.css';
 
-function SalesDashboard({ importer_exporter_id = '' }) {
-	const centerLists = configurations.filter((list) => list.placement === 'center');
+const ZEROTH_INDEX = 0;
 
-	const [activeTab, setActiveTab] = useState(centerLists[0].type);
+function SalesDashboard({ importer_exporter_id = '' }) {
+	const lists = configurations;
+
+	const [activeTab, setActiveTab] = useState(lists[ZEROTH_INDEX].type);
 
 	return (
 		<div className={styles.container}>
@@ -19,7 +21,7 @@ function SalesDashboard({ importer_exporter_id = '' }) {
 				activeTab={activeTab}
 				onChange={setActiveTab}
 			>
-				{centerLists.map((list) => {
+				{lists.map((list) => {
 					const newList = { ...list };
 
 					if (newList.api === 'list_shipments') {

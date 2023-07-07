@@ -65,9 +65,7 @@ function AdditionalServicesForm({
 			service_name       : service.name,
 		});
 		await addService(payload);
-		setHeaderProps({
-			key: 'default',
-		});
+		setHeaderProps({});
 	};
 
 	return (

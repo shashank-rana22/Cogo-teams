@@ -6,13 +6,15 @@ import Filters from '../../../common/Filters';
 import DetentionDemurrage from './D&D';
 import styles from './styles.module.css';
 
+const ZERO_VALUE = 0;
+
 function Header({
 	ratesData = [],
 	details = {},
 	filters = {},
 	setFilters = () => {},
 }) {
-	const ratesCount = ratesData?.length || 0;
+	const ratesCount = ratesData?.length || ZERO_VALUE;
 
 	return (
 		<div className={styles.container}>

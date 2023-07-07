@@ -2,7 +2,6 @@
 	"heading": "Quotations",
 	"api": "list_checkouts",
 	"type": "quotations",
-	"placement": "center",
 	"href": "/quotation-approval",
 	"as": "/quotation-approval",
 	"extraParams": {

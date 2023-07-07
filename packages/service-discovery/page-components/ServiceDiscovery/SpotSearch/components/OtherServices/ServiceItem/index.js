@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const SET_TIMEOUT_DURATION = 1500;
+const MEDIUM_FONT_WEIGHT = 500;
+const SEMIBOLD_FONT_WEIGHT = 600;
+
 function ServiceItem({ data = {}, selectedService, setSelectedService, setSelectedMode }) {
 	const [bouncing, setBouncing] = useState(false);
 
@@ -15,7 +19,7 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 
 			setTimeout(() => {
 				setBouncing(false);
-			}, 1500);
+			}, SET_TIMEOUT_DURATION);
 			return;
 		}
 		if (selectedService?.mode_value === value) setSelectedService(null);
@@ -46,7 +50,10 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 			</div>
 			<div
 				className={styles.label}
-				style={{ fontWeight: selectedService?.mode_value === value ? 600 : 500 }}
+				style={{
+					fontWeight: selectedService?.mode_value === value
+						? SEMIBOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT,
+				}}
 			>
 				{label}
 			</div>

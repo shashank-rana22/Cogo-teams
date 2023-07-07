@@ -1,6 +1,5 @@
 import { Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-// import { useEffect } from 'react';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
@@ -20,15 +19,6 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 	const serviceType = mode;
 
 	const controls = getFormControls(serviceType);
-
-	// useEffect(() => {
-	// 	controls.forEach((item) => {
-	// 		setFormValues((prev) => ({
-	// 			...prev,
-	// 			[item.name]: '',
-	// 		}));
-	// 	});
-	// }, []);
 
 	if (singleLocationServices.includes(serviceType)) {
 		const [locationControls, typeControls, serviceControls] = controls;
@@ -82,8 +72,6 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 
 			</div>
 		);
-
-		return null;
 	}
 
 	const [originControls, destinationControls] = controls;

@@ -3,6 +3,8 @@ import React from 'react';
 import StatItem from './StatItem';
 import styles from './styles.module.css';
 
+const ZERO_VALUE = 0;
+
 function Statistics({
 	statsArray = [],
 	statsData = {},
@@ -24,7 +26,7 @@ function Statistics({
 						count={
 							key !== 'total_count'
 								? keyValue
-								: keyValue - (statsData?.not_sent || 0)
+								: keyValue - (statsData?.not_sent || ZERO_VALUE)
 						}
 						isActive={activeStat?.key === stat?.key}
 						onClick={() => {

@@ -1,7 +1,6 @@
 {
 	"heading": "Spot Search",
 	"api": "list_spot_searches",
-	"placement": "center",
 	"type": "spot_searches",
 	"fields": [
 		{

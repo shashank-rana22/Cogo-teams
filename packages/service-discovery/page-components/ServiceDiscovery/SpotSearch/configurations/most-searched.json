@@ -1,7 +1,6 @@
 {
 	"heading": "Most Searched",
 	"api": "list_spot_searches",
-	"placement": "center",
 	"type": "most_searched",
 	"fields": [
 		{

@@ -1,6 +1,7 @@
 import { Select, Toast } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
@@ -62,7 +63,7 @@ function OrganisationForm({
 
 		setOrganization({
 			organization_id        : id,
-			organization_branch_id : organization_branch_ids?.[0],
+			organization_branch_id : organization_branch_ids?.[GLOBAL_CONSTANTS.zeroth_index],
 			business_name,
 			user_id                : undefined,
 		});
@@ -96,7 +97,7 @@ function OrganisationForm({
 	useEffect(() => {
 		setOrganization((prev) => ({
 			...prev,
-			user_id: userOptions?.[0]?.value,
+			user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 		}));
 	}, [setOrganization, userOptions]);
 

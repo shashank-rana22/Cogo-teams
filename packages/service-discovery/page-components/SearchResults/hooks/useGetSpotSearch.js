@@ -79,13 +79,14 @@ const useGetSpotSearch = () => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', importer_exporter_id = '' } = query;
 
-	const [{ loading:actualLoading = false, data }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_spot_search',
 	}, { manual: true });
 
 	const [screen, setScreen] = useState('listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
+	const [filters, setFilters] = useState({});
 
 	const getSearch = useCallback(async ({ firstScreen = 'listRateCard' }) => {
 		try {
@@ -107,7 +108,7 @@ const useGetSpotSearch = () => {
 
 	useEffect(() => {
 		getSearch({ firstScreen: 'listRateCard' });
-	}, []);
+	}, [getSearch]);
 
 	const refetch = async ({ screenObj = {} }) => {
 		const res = await trigger({
@@ -127,12 +128,14 @@ const useGetSpotSearch = () => {
 
 	return {
 		refetchSearch: refetch,
-		actualLoading,
+		loading,
 		data,
 		setScreen,
 		screen,
 		setSelectedCard,
 		selectedCard,
+		filters,
+		setFilters,
 	};
 };
 export default useGetSpotSearch;
