@@ -1,6 +1,7 @@
 import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -14,7 +15,11 @@ const COLOR_MAPPING = {
 	inactive         : '#f1ee8e',
 };
 
-const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch }) => [
+const getColumns = ({
+	onClickNewJoinerColumn,
+	btnloading, updateEmployeeStatus, fetch, downloadDocuments = () => {},
+	documentLoading,
+}) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -81,6 +86,24 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 				<Pill size="md" color={COLOR_MAPPING[item?.status]}>
 					{startCase(item?.status)}
 				</Pill>
+			</div>
+		),
+	},
+	{
+		Header   : 'DOWNLOAD',
+		accessor : (item) => (
+			<div>
+				<Button
+					themeType="secondary"
+					onClick={() => downloadDocuments(item?.id)}
+					loading={documentLoading}
+				>
+					<IcMDownload width={13} height={13} />
+					{' '}
+					<span style={{ paddingLeft: 4 }}>
+						Download
+					</span>
+				</Button>
 			</div>
 		),
 	},
