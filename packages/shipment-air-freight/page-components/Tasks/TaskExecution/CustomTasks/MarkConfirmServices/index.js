@@ -16,6 +16,7 @@ function MarkServiceConfirmed({
 	timeLineRefetch = () => {},
 	refetch = () => {},
 	localService = '',
+	getShipment = () => {},
 }) {
 	const initialStep = ['air_freight_service'].includes(task.service_type)
 		? LIST_PREFERENCE_RATE_STEP : CONFIRM_PREFERENCE_RATE_STEP;
@@ -51,6 +52,7 @@ function MarkServiceConfirmed({
 				localService={localService}
 				formattedRate={formattedRate}
 				selectedCard={selectedCard}
+				getShipment={getShipment}
 			/>
 		</div>
 	);

@@ -22,6 +22,7 @@ const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},
 	selectedCard = {},
+	getShipment = () => {},
 }) => {
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const SERVICE_IDS = [];
@@ -56,6 +57,7 @@ const useEditQuotations = ({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
+			getShipment();
 		},
 	});
 	const service_charges = servicesQuotation?.service_charges || [];
