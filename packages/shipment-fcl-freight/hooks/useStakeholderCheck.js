@@ -33,6 +33,7 @@ export const useStakeholderCheck = () => {
 				geo.uuid.prod_settlement_executive],
 			stakeholder: 'credit_control',
 		},
+		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },
 	];
 
 	const matchingStakeholders = stakeholderMap

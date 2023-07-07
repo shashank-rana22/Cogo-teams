@@ -16,6 +16,12 @@ export default function getCancelShipmentPayload(formValues, id) {
 			=== 'i_have_received_a_better_quotation/offer'
 		) {
 			formData.cancellation_detail[key] = value;
+		} else if (
+			['truck_type_changed', 'cargo_weight_changed']?.includes(
+				formData.cancellation_reason,
+			)
+		) {
+			formData.mapped_sid = { serial_id: value };
 		} else {
 			formData.cancellation_subreason = value;
 		}

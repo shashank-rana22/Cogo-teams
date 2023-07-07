@@ -83,14 +83,8 @@
 	font-weight: 600;
 }
 
-.outstanding_container {
-	display: flex;
-	align-items: center;
-}
-
 .overall_outstanding_container {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 }
 

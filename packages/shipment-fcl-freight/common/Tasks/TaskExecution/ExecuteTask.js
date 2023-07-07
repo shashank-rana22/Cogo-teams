@@ -16,6 +16,7 @@ import {
 	AmendDraftBl,
 	UploadSI,
 } from './CustomTasks';
+import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -23,6 +24,7 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
+const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 
 const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
@@ -184,6 +186,13 @@ function ExecuteTask({
 				taskListRefetch={taskListRefetch}
 			/>
 		);
+	}
+
+	if (
+		task?.task === 'generate_cargo_insurance'
+		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
+	) {
+		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
 	return (

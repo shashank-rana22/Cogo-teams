@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../CreateModule/components/EmptyState';
@@ -7,20 +8,24 @@ import useGetTestResultQuestion from '../../hooks/useGetTestResultQuestion';
 import GetAnswerItem from './GetAnswerItem';
 import styles from './styles.module.css';
 
+const OFFSET = 1;
+const ARRAY_LENGTH = 3;
+
 function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	const { data = {}, loading } = useGetTestResultQuestion({ test_id, question_id });
 
 	const { answers = [], question_data = {} } = data || {};
 	const { question = '', explanation } = question_data || {};
 
-	const explanationHtmlString = explanation?.[0];
+	const explanationHtmlString = explanation?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{Array(3).fill('').map(() => (
+				{[...Array(ARRAY_LENGTH).keys()].map((key) => (
 					<div
 						className={styles.placeholder_inner_container}
+						key={key}
 					>
 						<Placeholder height="24px" />
 					</div>
@@ -40,11 +45,14 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 					<div className={styles.question_heading}>
 						<div className={styles.question_number}>
 							Q
-							{index + 1}
+							{index + OFFSET}
 						</div>
 
 						<div className={styles.display_question}>
-							<div className={styles.question_text}>{question}</div>
+							<div
+								className={styles.question_text}
+								dangerouslySetInnerHTML={{ __html: question }}
+							/>
 						</div>
 					</div>
 				</div>
