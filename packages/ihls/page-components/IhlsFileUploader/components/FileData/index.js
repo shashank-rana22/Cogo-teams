@@ -29,5 +29,4 @@ function FileData({ id = null }) {
 		<Table columns={columns} data={data} loading={loading} />
 	);
 }
-
 export default FileData;

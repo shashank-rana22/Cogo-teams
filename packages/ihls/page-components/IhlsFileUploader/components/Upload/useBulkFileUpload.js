@@ -4,9 +4,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const getPayload = ({ profile, val }) => ({
+	user_id : profile.user.id,
+	files   : val?.upload_question,
+});
+
 const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
-
 	const [{ loading: bulkFileLoading }, trigger] = useAthenaRequest({
 		url    : '/athena/save_file_url',
 		method : 'post',
@@ -16,12 +20,7 @@ const useBulkFileUpload = ({ refetch, setShow }) => {
 
 	const bulkUpload = async (val) => {
 		try {
-			const payload = {
-				user_id : profile.user.id,
-				files   : val?.upload_question,
-			};
-
-			await trigger({ data: payload });
+			await trigger({ data: getPayload({ profile, val }) });
 
 			Toast.success('File uploaded Successfully');
 			refetch();
