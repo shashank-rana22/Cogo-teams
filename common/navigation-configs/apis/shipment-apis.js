@@ -1589,10 +1589,10 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api			 : 'list_shipment_consolidated_purchase_invoices',
+		api        	 : 'list_shipment_consolidated_purchase_invoices',
 		access_type  : 'private',
 		service_name : 'shipment',
-	}
+	},
 ];
 
 export default apis;
