@@ -1,4 +1,4 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip, Button, cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getBuyPrice from '../../../utils/getBuyPrice';
@@ -69,7 +69,7 @@ function ListItem({
 							content={data?.service?.commodity_description}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 								{data?.service?.commodity_description}
 							</div>
 						</Tooltip>
@@ -82,7 +82,7 @@ function ListItem({
 							content={data?.service?.hs_code}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 								{data?.service?.hs_code}
 							</div>
 						</Tooltip>

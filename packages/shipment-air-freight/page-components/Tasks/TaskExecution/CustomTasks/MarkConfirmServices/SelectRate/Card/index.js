@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
@@ -8,11 +8,12 @@ import useUpdateBookingPreferences
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
+const PRIORITY_DEFAULT = 1;
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
 		const firstValidty = (dataObj?.validities || dataObj?.line_items)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-		const price = firstValidty?.price || firstValidty?.min_price;
-		const currency = firstValidty?.currency;
+		const price = firstValidty?.price || firstValidty?.min_price || '--';
+		const currency = firstValidty?.currency || '--';
 
 		return `${currency} ${price}`;
 	}
@@ -32,7 +33,7 @@ const getBuyPrice = (dataObj, source) => {
 
 function Card({
 	item = {},
-	priority,
+	priority = PRIORITY_DEFAULT,
 	setStep = () => {},
 	setSelectedCard = () => {},
 	serviceProvidersData = [],
@@ -91,7 +92,7 @@ function Card({
 									content={dataObj?.service_provider?.business_name}
 									placement="top"
 								>
-									<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+									<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 										{dataObj?.service_provider?.business_name}
 									</div>
 								</Tooltip>
@@ -123,7 +124,7 @@ function Card({
 												content={commodity_description}
 												placement="top"
 											>
-												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 													{commodity_description}
 												</div>
 											</Tooltip>
@@ -136,7 +137,7 @@ function Card({
 												content={hs_code}
 												placement="top"
 											>
-												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 													{hs_code}
 												</div>
 											</Tooltip>
