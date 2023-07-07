@@ -4,7 +4,6 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentBuyQuotations = ({
 	refetch = () => {},
-	getShipmentRefetch = () => {},
 	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -17,7 +16,6 @@ const useUpdateShipmentBuyQuotations = ({
 			const res = await trigger({ data: val });
 			Toast.success(successMessage);
 			refetch();
-			getShipmentRefetch();
 			return res;
 		} catch (err) {
 			toastApiError(err);

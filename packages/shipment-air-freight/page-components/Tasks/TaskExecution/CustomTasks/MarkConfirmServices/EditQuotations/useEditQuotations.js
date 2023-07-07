@@ -25,7 +25,7 @@ const useEditQuotations = ({
 	selectedCard = {},
 }) => {
 	const {
-		refetch: getShipmentRefetch,
+		refetch:getShipmentRefetch,
 	} = useContext(ShipmentDetailContext);
 
 	const [allChargeCodes, setAllChargeCodes] = useState({});
@@ -55,12 +55,13 @@ const useEditQuotations = ({
 		service_detail_required : true,
 
 	});
-	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({ getShipmentRefetch });
+	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({ });
 
 	const { loading:updateTaskLoading, apiTrigger:updateTask } = useUpdateTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
+			getShipmentRefetch();
 		},
 	});
 	const service_charges = servicesQuotation?.service_charges || [];
