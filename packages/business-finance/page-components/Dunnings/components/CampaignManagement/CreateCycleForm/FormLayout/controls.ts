@@ -88,9 +88,9 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			disabled      : isEditMode,
 			onChange      : (e:{ target?:{ checked?:boolean } }) => {
 				if (e?.target?.checked) {
-					setFormData({ ...formData, isAllCreditControllers: true });
+					setFormData((prev) => ({ ...prev, isAllCreditControllers: true }));
 				} else {
-					setFormData({ ...formData, isAllCreditControllers: false });
+					setFormData((prev) => ({ ...prev, isAllCreditControllers: false }));
 				}
 			},
 			span: 12,
@@ -166,10 +166,10 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					onChange    : (e:string) => {
 						const unformattedNumber = unformatNumber(e);
 						if (!Number.isNaN(unformattedNumber)) {
-							setFormData({
-								...formData,
+							setFormData((prev) => ({
+								...prev,
 								totalDueOutstanding: unformattedNumber,
-							});
+							}));
 						}
 					},
 					value    : totalDueOutstanding ? Number(totalDueOutstanding)?.toLocaleString() : undefined,
@@ -185,7 +185,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
 			onChange : (value:string) => {
-				setFormData({ ...formData, triggerType: value });
+				setFormData((prev) => ({ ...prev, triggerType: value }));
 			},
 			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },

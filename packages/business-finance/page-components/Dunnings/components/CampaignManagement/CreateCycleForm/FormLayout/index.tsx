@@ -205,10 +205,10 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 											size="md"
 											items={WEEK_OPTIONS}
 											selectedItems={weekDay}
-											onItemChange={(val?: string) => setFormData({
-												...formData,
+											onItemChange={(val?: string) => setFormData((prev) => ({
+												...prev,
 												weekDay: val,
-											})}
+											}))}
 										/>
 
 									</div>
@@ -217,7 +217,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								<TabPanel name="MONTHLY" title="Monthly">
 									<Select
 										value={monthDay}
-										onChange={(day) => setFormData({ ...formData, monthDay: day })}
+										onChange={(day) => setFormData((prev) => ({ ...prev, monthDay: day }))}
 										placeholder="Select Day"
 										options={MONTH_DAYS}
 										className={styles.date}
@@ -233,7 +233,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								placeholder="Enter Date"
 								dateFormat="dd/MM/yyyy"
 								name="oneTimeDate"
-								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
+								onChange={(date) => setFormData((prev) => ({ ...prev, oneTimeDate: date }))}
 								value={oneTimeDate}
 							/>
 
@@ -247,7 +247,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								<h5>Timezone</h5>
 								<Select
 									value={timezone}
-									onChange={(e) => setFormData({ ...formData, timezone: e })}
+									onChange={(e) => setFormData((prev) => ({ ...prev, timezone: e }))}
 									placeholder="Timezone"
 									options={timezoneOptions}
 									className={styles.timezone}
@@ -259,7 +259,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								<div style={{ display: 'flex' }}>
 									<Select
 										value={scheduledHour}
-										onChange={(e) => setFormData({ ...formData, scheduledHour: e })}
+										onChange={(e) => setFormData((prev) => ({ ...prev, scheduledHour: e }))}
 										placeholder="Hour"
 										options={HOURS}
 										className={styles.timezone}
@@ -272,7 +272,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								<div style={{ display: 'flex' }}>
 									<Select
 										value={scheduledMinute}
-										onChange={(e) => setFormData({ ...formData, scheduledMinute: e })}
+										onChange={(e) => setFormData((prev) => ({ ...prev, scheduledMinute: e }))}
 										placeholder="Hour"
 										options={MINUTES}
 										className={styles.timezone}
