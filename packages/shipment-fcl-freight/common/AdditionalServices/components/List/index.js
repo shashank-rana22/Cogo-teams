@@ -30,7 +30,8 @@ function List({ isSeller = false }) {
 		ShipmentDetailContext,
 	);
 
-	const canAddAdditionalService = ALLOWED_STAKEHOLDERS.includes(activeStakeholder);
+	const canAddAdditionalService = primary_service?.trade_type === 'import'
+		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
