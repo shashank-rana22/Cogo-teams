@@ -26,6 +26,9 @@ function List({ isSeller = false }) {
 		ShipmentDetailContext,
 	);
 
+	const canAddAdditionalService = ['booking_agent', 'consignee_shipper_booking_agent',
+		'superadmin', 'admin'].includes(activeStakeholder);
+
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
@@ -115,15 +118,18 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Services
-				</Button>
-			</div>
+			{canAddAdditionalService
+				? (
+					<div className={styles.not_added}>
+						<Button
+							onClick={() => setShowModal('charge_code')}
+							disabled={shipment_data?.is_job_closed}
+						>
+							<div className={styles.add_icon}>+</div>
+							Add Additional Services
+						</Button>
+					</div>
+				) : null}
 
 			{showModal === 'add_sell_price'
 				? (
