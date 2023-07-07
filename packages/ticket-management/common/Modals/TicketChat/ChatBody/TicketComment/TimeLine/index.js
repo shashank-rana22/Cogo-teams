@@ -6,7 +6,7 @@ import getRenderHeader from '../../../../../../utils/renderHeader';
 
 import styles from './styles.module.css';
 
-function Rating({ rating }) {
+function Rating({ rating = 0 }) {
 	return (
 		<div>
 			with a customer rating of
@@ -17,7 +17,8 @@ function Rating({ rating }) {
 }
 
 function TimeLine({
-	createdAt, type, description, ticketType, name, userType, oldReviewerName, reviewerName, rating = 0,
+	createdAt = '', type = '', description = '', ticketType = '', name = '',
+	userType = '', oldReviewerName = '', reviewerName = '', rating = 0,
 }) {
 	const timelineText = getRenderHeader({
 		type,

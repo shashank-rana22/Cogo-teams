@@ -20,7 +20,7 @@ function TicketComment({
 	reviewerName = '',
 	restData = {},
 	rating = 0,
-	activityUserId,
+	activityUserId = '',
 	currentAgentName = '',
 }) {
 	const isCurrentUser = activityUserId === userId;
