@@ -122,6 +122,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api      			: 'get_purchase_bills_bill_accept_by_finance_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'put_purchase_bills_by_id_urgeny_tag',
 			access_type : 'private',
 			feature     : 'coeFinance',
