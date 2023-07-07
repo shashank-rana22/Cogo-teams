@@ -32,3 +32,18 @@
 		}
 	}
 }
+
+.input_container {
+	float: right;
+
+	:global {
+		.ui_input_container {
+			min-width: 240px;
+			padding-right: 6px;
+		}
+	}
+}
+
+.form_container {
+	margin-top: 38px;
+}

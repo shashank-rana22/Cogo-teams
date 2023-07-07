@@ -1,4 +1,6 @@
-import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
+import { Button, Modal, RadioGroup, Select, Input } from '@cogoport/components';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
@@ -11,17 +13,19 @@ import getCreateTradePartnerParams from './helpers/getCreateTradePartnerParams';
 import styles from './styles.module.css';
 import tradePartyTypeMapping from './tradePartyTypeMapping';
 
+const HISTORICAL = 'historical';
+const SHIPPER = 'shipper';
 function AddCompanyModal({
 	tradePartnersData = {},
 	addCompany = {},
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
-	shipment_id,
-	importer_exporter_id,
+	shipment_id = '',
+	importer_exporter_id = '',
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
-
+	const { query = '', debounceQuery } = useDebounceQuery();
 	const [role, setRole] = useState(trade_party_type);
 	const [companyType, setCompanyType] = useState('trade_partner');
 
@@ -56,9 +60,8 @@ function AddCompanyModal({
 		});
 		createTrigger(params);
 	};
-
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
-
+	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL;
 	return (
 		<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
 			<Modal.Header title="Add Company" />
@@ -83,16 +86,30 @@ function AddCompanyModal({
 							value={companyType}
 						/>
 					</div>
+					<div className={styles.input_container}>
+						{isShipperHistorical && (
+							<Input
+								placeholder="Pincode, PAN, GSTIN, Name"
+								type="search"
+								size="sm"
+								suffix={<IcMSearchlight />}
+								onChange={(e) => debounceQuery(e)}
+							/>
+						)}
+					</div>
+					<div className={styles.form_container}>
 
-					<Form
-						companyType={companyType}
-						tradePartyType={role}
-						tradePartnersData={tradePartnersData}
-						ref={formRef}
-						importer_exporter_id={importer_exporter_id}
-						shipment_id={shipment_id}
-						organization_id={organization_id}
-					/>
+						<Form
+							companyType={companyType}
+							tradePartyType={role}
+							tradePartnersData={tradePartnersData}
+							ref={formRef}
+							importer_exporter_id={importer_exporter_id}
+							shipment_id={shipment_id}
+							organization_id={organization_id}
+							query={query}
+						/>
+					</div>
 				</div>
 
 			</Modal.Body>
