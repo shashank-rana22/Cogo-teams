@@ -48,6 +48,7 @@ function ExecuteStep({
 		services,
 		onCancel,
 		refetch,
+		tradeType,
 	});
 
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
