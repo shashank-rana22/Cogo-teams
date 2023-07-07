@@ -31,7 +31,6 @@ function ShipmentId({
 }) {
 	const { search = '' } = filters || {};
 	const { list = [], total_count, page_limit } = data;
-	const suffixComponent = GetIcon({ filters, setFilters });
 
 	return (
 		<div className={styles.container}>
@@ -45,7 +44,7 @@ function ShipmentId({
 						placeholder="Search By Serial Id"
 						value={search}
 						onChange={(e) => setFilters((prev) => ({ ...prev, search: e || undefined }))}
-						suffix={suffixComponent}
+						suffix={GetIcon({ filters, setFilters })}
 					/>
 				</div>
 			</div>
