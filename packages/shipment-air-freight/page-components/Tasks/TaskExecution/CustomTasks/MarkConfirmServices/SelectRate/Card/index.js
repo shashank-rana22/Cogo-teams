@@ -81,6 +81,7 @@ function Card({
 					const {
 						hs_code,
 						commodity_description,
+						chargeable_weight,
 						is_minimum_price_shipment,
 					} = dataObj?.service || {};
 					return (
@@ -112,6 +113,7 @@ function Card({
 											{`${
 												dataChargeableWeight
 													|| data?.[GLOBAL_CONSTANTS.zeroth_index]?.chargeable_weight
+													|| chargeable_weight
 														|| '--'
 											} Kg`}
 										</div>
