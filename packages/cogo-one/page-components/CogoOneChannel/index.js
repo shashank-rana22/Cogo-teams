@@ -103,7 +103,7 @@ function CogoOne() {
 		<>
 			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
 				<div className={styles.settings}>
-					<AgentStatusToggle />
+					<AgentStatusToggle firestore={firestore} />
 				</div>
 			)}
 			<div className={styles.layout_container}>
