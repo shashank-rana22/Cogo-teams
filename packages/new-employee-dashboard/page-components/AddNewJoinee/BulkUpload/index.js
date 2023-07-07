@@ -1,20 +1,18 @@
-import { Button } from '@cogoport/components';
-import { UploadController } from '@cogoport/forms';
+import { TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import BulkUploadContent from './BulkUploadContent';
 import styles from './styles.module.css';
 import useBulkUpload from './useBulkUpload';
 
-function BulkUpload({ setBulkUploadComponent }) {
-	const {
-		bulkUploadNewHire,
-		loading,
-		control,
-		errors,
-		onClickViewSampleFile,
-		handleSubmit,
-	} = useBulkUpload();
+const TABS_MAPPING = ['create', 'update'];
+
+function BulkUpload({ setBulkUploadComponent = () => {} }) {
+	const props = useBulkUpload();
+
+	const { setActiveTab, activeTab } = props || {};
 
 	return (
 		<div className={styles.container}>
@@ -31,55 +29,25 @@ function BulkUpload({ setBulkUploadComponent }) {
 
 			<div className={styles.title}>Upload New Hire In Bulk</div>
 
-			<div className={styles.container2}>
-				<div className={styles.upload_new_hire}>Upload New Hire Sheet</div>
+			<div className={styles.tabs_wrapper}>
+				<Tabs
+					themeType="primary"
+					activeTab={activeTab}
+					onChange={setActiveTab}
+				>
+					{TABS_MAPPING.map((element) => (
+						<TabPanel key={element} name={element} title={startCase(element)}>
+							<BulkUploadContent
+								{...props}
+								setBulkUploadComponent={setBulkUploadComponent}
+								source={element}
+							/>
+						</TabPanel>
+					))}
 
-				<div className={styles.uploader}>
-					<UploadController
-						control={control}
-						errors={errors}
-						name="upload_new_hire_info"
-						accept=".csv"
-						rules={{ required: 'File is required.' }}
-
-					/>
-
-					{errors.upload_new_hire_info && (
-						<div className={styles.error_msg}>
-							{errors.upload_new_hire_info.message}
-						</div>
-					)}
-				</div>
-
-				<div className={styles.btn_row}>
-					<Button
-						size="md"
-						themeType="tertiary"
-						onClick={() => setBulkUploadComponent(false)}
-					>
-						Cancel
-					</Button>
-
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginLeft: 10 }}
-						onClick={onClickViewSampleFile}
-					>
-						View Sample Bulk Upload File
-					</Button>
-
-					<Button
-						size="md"
-						themeType="primary"
-						style={{ marginLeft: 10 }}
-						loading={loading}
-						onClick={handleSubmit(bulkUploadNewHire)}
-					>
-						Upload File
-					</Button>
-				</div>
+				</Tabs>
 			</div>
+
 		</div>
 	);
 }
