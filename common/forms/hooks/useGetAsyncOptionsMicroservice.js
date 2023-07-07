@@ -20,13 +20,15 @@ function useGetAsyncOptionsMicroservice({
 	authkey = '',
 	microService = '',
 	searchByq,
+	qFilterKey = 'q',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
 
 	const useRequestMicroservice = REQUEST_HOOK_MAPPING[microService] || useRequest;
 
-	const filterQuery = searchByq ? { q: query || undefined } : { filters: { q: query || undefined } };
+	const filterQuery = searchByq
+		? { [qFilterKey]: query || undefined } : { filters: { [qFilterKey]: query || undefined } };
 
 	const [{ data, loading }] = useRequestMicroservice({
 		url    : endpoint,
@@ -34,7 +36,7 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || data || [];
+	const options = data?.list || data?.items || data || [];
 
 	const optionValues = options.map((item) => item[valueKey]);
 
