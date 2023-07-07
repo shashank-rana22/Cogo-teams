@@ -23,7 +23,7 @@ function ExecuteStep({
 	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	services = [],
-	tradeType,
+	tradeType = '',
 }) {
 	const [showEditParamsModal, setShowEditParamsModal] = useState(false);
 	const [updateModal, setUpdateModal] = useState(true);

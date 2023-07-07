@@ -57,7 +57,6 @@ function EditRate({
 	formattedRate = {},
 	localService = '',
 	selectedCard = {},
-	getShipment = () => {},
 }) {
 	const [errors, setError] = useState({});
 
@@ -134,7 +133,6 @@ function EditRate({
 		formattedRate,
 		trade_type,
 		selectedCard,
-		getShipment,
 	});
 
 	return (

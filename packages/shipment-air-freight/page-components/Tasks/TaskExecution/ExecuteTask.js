@@ -72,7 +72,6 @@ function ExecuteTask({
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={[...requiredService, ...requiredLocalService]}
-				getShipment={getShipment}
 			/>
 		);
 	}
