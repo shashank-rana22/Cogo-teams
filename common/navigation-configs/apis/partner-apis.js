@@ -12566,6 +12566,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'get_tickets_dashboard',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -12782,6 +12787,18 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_month_wise_statistics_of_account_utilization',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
 			access_type : 'private',
 		},
 	],

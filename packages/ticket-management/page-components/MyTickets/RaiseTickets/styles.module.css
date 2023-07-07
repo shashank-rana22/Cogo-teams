@@ -11,6 +11,12 @@
 	&:last-child {
 		border-bottom: 0;
 	}
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
 }
 
 .error {
