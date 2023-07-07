@@ -27,7 +27,7 @@ function useAgentWorkPrefernce() {
 
 	const [viewType, setViewType] = useState('');
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_agent_work_preference',
 		method : 'get',
 	}, { manual: true });
@@ -54,6 +54,8 @@ function useAgentWorkPrefernce() {
 	return {
 		viewType,
 		loading,
+		fetchworkPrefernce,
+		agentStatus: data,
 	};
 }
 export default useAgentWorkPrefernce;
