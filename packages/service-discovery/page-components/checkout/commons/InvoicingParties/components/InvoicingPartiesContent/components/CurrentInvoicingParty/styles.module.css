@@ -1,0 +1,90 @@
+.container {
+    border: 1px solid #F7F7FD;
+    padding: 20px;
+    background-color: #FBFBFF;
+    margin: 8px 0px 20px 0px
+}
+
+.invoice_content {
+    display: flex;
+}
+
+.left_content {
+    flex-basis: 54%;
+}
+
+.right_content {
+    flex-basis: 56%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 12px;
+    color: #000;
+}
+
+.flex {
+    display: flex;
+}
+
+.gst {
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.org_name {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 4px;
+
+}
+
+.payment_modes {
+    display: flex;
+    margin-top: 32px;
+
+    :global {
+        .ui_chips_container {
+            flex-wrap: wrap;
+        }
+
+        .ui_chip_container svg{
+            display: none;
+        }
+
+        .ui_chip_container.ui_ps_themeType_primary{
+            background-color: #FFFFFF;
+            border: 1px solid #ECECEC;
+            border-radius: 28px;
+            padding: 16px;
+
+            &:hover{
+                background-color: #FFFFFF;
+                border: 1px solid #ECECEC;
+            }
+        }
+        .ui_chip_container.ui_ps_themeType_secondary{
+            background-color: #FCDC00;
+            border: 1px solid #FCDC00;
+            border-radius: 28px;
+            padding: 16px;
+
+            &:hover{
+                background-color: #FCDC00;
+                border: 1px solid #FCDC00;
+            }
+        }
+    }
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 8px;
+    margin-left: 4px;
+
+}

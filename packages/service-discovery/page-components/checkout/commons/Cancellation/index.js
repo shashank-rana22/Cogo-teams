@@ -52,14 +52,10 @@ function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 									<div className={styles.milestone}>Booking Procurement</div>
 								) : null}
 
-								{!isEmpty(conditions) ? (
+								{isEmpty(conditions) ? (
 									<div className={styles.condition}>
-										`$
-										{days}
-										{' '}
-										$
-										{CANCELLATION_MAPPINGS[conditionality]}
-										`
+										{`${days} 
+										${CANCELLATION_MAPPINGS[conditionality]}`}
 									</div>
 								) : null}
 							</div>

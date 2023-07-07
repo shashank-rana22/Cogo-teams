@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 16px;
+	background: #fff;
+    border-radius: 8px;
+    border: 1px solid #F7F7FD;
+    background-color: #FBFBFF;
+	padding-bottom: 60px;
+}
+
+.bottom_text {
+	font-size: 16px;
+	color: #bdbdbd;
+}

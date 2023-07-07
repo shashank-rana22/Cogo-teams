@@ -3,13 +3,13 @@ import { useContext } from 'react';
 
 import BookingContent from '../../../../../../commons/BookingContent';
 import Cancellation from '../../../../../../commons/Cancellation';
+import CargoDetails from '../../../../../../commons/CargoDetails';
 import ConfirmationTexts from '../../../../../../commons/ConfirmationTexts';
 import DefaultQuotationInfo from '../../../../../../commons/DefaultQuotationInfo';
+import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../../../context';
 
-import CargoDetails from './CargoDetails';
-import Footer from './Footer';
 import styles from './styles.module.css';
 
 function AdditionalContent({
@@ -81,7 +81,7 @@ function AdditionalContent({
 				setAgreeTandC={setAgreeTandC}
 			/>
 
-			<Footer detail={detail} />
+			<PreviewBookingFooter detail={detail} />
 		</div>
 	);
 }

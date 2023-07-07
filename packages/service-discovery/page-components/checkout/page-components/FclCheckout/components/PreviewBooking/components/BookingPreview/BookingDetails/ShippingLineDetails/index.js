@@ -7,12 +7,14 @@ function ShippingLineDetails({ shipping_line = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<Image
-				src={logo_url}
-				alt="shipping line"
-				width={60}
-				height={60}
-			/>
+			{logo_url ? (
+				<Image
+					src={logo_url}
+					alt="shipping line"
+					width={60}
+					height={60}
+				/>
+			) : null}
 
 			<div className={styles.name}>{short_name}</div>
 		</div>

@@ -1,4 +1,5 @@
-import InvoicingParties from './components/InvoicingParties';
+import InvoicingParties from '../../../../commons/InvoicingParties';
+
 import ShipmentDetails from './components/ShipmentDetails';
 import styles from './styles.module.css';
 

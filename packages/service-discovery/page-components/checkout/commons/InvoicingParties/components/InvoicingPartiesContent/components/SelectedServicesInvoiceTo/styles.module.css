@@ -1,0 +1,18 @@
+.container {
+	margin: -4px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.item {
+	padding: 4px;
+}
+
+.content {
+	background: #f4fafa;
+	border-radius: 4px;
+    border: 1px solid #A9EAF1;
+	font-size: 12px;
+	font-weight: 400;
+	padding: 4px 16px;
+}

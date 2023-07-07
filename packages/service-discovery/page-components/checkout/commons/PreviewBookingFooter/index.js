@@ -2,13 +2,13 @@ import { Button } from '@cogoport/components';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { useRef, useEffect } from 'react';
 
-import handleTimer from '../../../../../../../utils/handleTimer';
+import handleTimer from '../../utils/handleTimer';
 
 import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function Footer({ detail }) {
+function PreviewBookingFooter({ detail }) {
 	const timerRef = useRef(null);
 
 	const { validity_end, quotation_email_sent_at = '' } = detail;
@@ -95,4 +95,4 @@ function Footer({ detail }) {
 	);
 }
 
-export default Footer;
+export default PreviewBookingFooter;
