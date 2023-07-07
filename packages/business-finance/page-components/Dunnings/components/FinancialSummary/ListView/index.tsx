@@ -1,16 +1,14 @@
 import { Input } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import List from '../../../../commons/List';
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useSendMail from '../hooks/useSendMail';
 
 import config from './config';
+import listFunctions from './listFunctions';
 import styles from './styles.module.css';
 
-const TEXT_LIMIT_NUM = 20;
 const DEFAULT_PAGE_INDEX = 1;
 
 interface Props {
@@ -28,43 +26,6 @@ interface Props {
 function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, loading = false }:Props) {
 	const { sendMail, mailSendLoading } = useSendMail();
 
-	const showFormattedAmount = (amount, currency) => formatAmount({
-		amount,
-		currency,
-		options: {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			minimumFractionDigits : 2,
-		},
-	});
-
-	const functions = {
-		renderName: ({ tradePartyDetailName }) => (
-			<div>{showOverflowingNumber(tradePartyDetailName || '-', TEXT_LIMIT_NUM)}</div>
-		),
-		renderOutstandingAmount: ({ outstandingAmount, ledCurrency }) => (
-			<div>
-				{showFormattedAmount(outstandingAmount, ledCurrency)}
-			</div>
-		),
-		renderOnAccount: ({ onAccountAmount, ledCurrency }) => (
-			<div>
-				{showFormattedAmount(onAccountAmount, ledCurrency)}
-			</div>
-		),
-		renderCreditController: ({ organizationStakeholderName }) => (
-			<div>{organizationStakeholderName || '-'}</div>
-		),
-		renderSendEmail: ({ tradePartyDetailId }) => (
-			<button
-				className={styles.email_cta}
-				onClick={() => sendMail({ tradePartyDetailId })}
-				style={{ cursor: mailSendLoading ? 'not-allowed' : 'pointer' }}
-			>
-				Send To Email
-			</button>
-		),
-	};
 	return (
 		<div>
 			<div className={styles.search_container}>
@@ -73,7 +34,7 @@ function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, lo
 						name="q"
 						size="sm"
 						value={filters?.search}
-						onChange={(e) => setFilters({ ...filters, search: e })}
+						onChange={(e) => setFilters((prev) => ({ ...prev, search: e }))}
 						placeholder="Search By Customer Name"
 						suffix={(
 							<div style={{ margin: '4px', display: 'flex' }}>
@@ -88,7 +49,7 @@ function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, lo
 				<List
 					config={config}
 					itemData={data}
-					functions={functions}
+					functions={listFunctions({ sendMail, mailSendLoading })}
 					loading={loading}
 					page={filters.pageIndex || DEFAULT_PAGE_INDEX}
 					handlePageChange={(pageValue) => {

@@ -6,29 +6,15 @@ import React, { useState } from 'react';
 import useGetMonthwiseStats from '../hooks/useGetMonthwiseStats';
 
 import BarGraphView from './BarGraphView';
+import { getBarData, getLinearData } from './getGraphData';
+import { CALENDER_YEAR, FINANCIAL_YEARS } from './getYears';
 import LinearGraphView from './LinearGraphView';
 import StatsLoader from './StatsLoader';
 import styles from './styles.module.css';
+import YearData from './YearData';
 
 interface Props {
 	filters?: object;
-}
-
-const MONTH_DIVISION = 3;
-const DECREMENT = 1;
-const PREV_YEAR_LIMIT = 5;
-const START_MONTH_INDEX = 3;
-const START_DAY_INDEX = 1;
-const END_MONTH_INDEX = 2;
-const END_DAY_INDEX = 31;
-const YEAR_END_INCREMENT = 2;
-
-function getFinancialYear(date) {
-	const year = date.getFullYear();
-	const month = date.getMonth();
-	if (month < MONTH_DIVISION) {
-		return year - DECREMENT;
-	} return year;
 }
 
 function Stats({ filters = {} }:Props) {
@@ -39,51 +25,11 @@ function Stats({ filters = {} }:Props) {
 	const [yearHandle, setYearHandle] = useState(false);
 	const geo = getGeoConstants();
 	const currency = geo.country.currency.code;
-	const currentYear = new Date().getFullYear();
-	const today = new Date();
 
-	// setting last 5 financial years
-	const FINANCIAL_YEARS = Array(PREV_YEAR_LIMIT).fill(null);
-	FINANCIAL_YEARS.forEach((item, index) => {
-		const yearStart = new Date(today.getFullYear() - index, START_MONTH_INDEX, START_DAY_INDEX);
-		const yearEnd = new Date(today.getFullYear() - index + YEAR_END_INCREMENT, END_MONTH_INDEX, END_DAY_INDEX);
-		const financialYear = `${getFinancialYear(yearStart)}-${getFinancialYear(yearEnd)}`;
-		FINANCIAL_YEARS[index] = financialYear;
-	});
-
-	// setting last 5 calender years
-	const CALENDER_YEAR = Array(PREV_YEAR_LIMIT).fill(null);
-	CALENDER_YEAR.forEach((item, index) => {
-		const year = `${currentYear - index}`;
-		CALENDER_YEAR[index] = year;
-	});
 	const { statsData, loading } = useGetMonthwiseStats({ statsFilter: inputValue, filters });
-	const linearData = [
-		{
-			id   : 'Total Outstanding',
-			data : (statsData || []).map((item) => ({
-				x : `${item?.month} (${item?.year})`,
-				y : item?.outstandingAmount,
-			})),
-		},
-		{
-			id   : 'Collected',
-			data : (statsData || []).map((item) => ({
-				x : `${item?.month} (${item?.year})`,
-				y : item?.collectedAmount,
-			})),
-		},
-	];
-	const barData = (statsData || []).map((item) => {
-		const { month, collectedAmount, outstandingAmount, year } = item || {};
-		return (
-			{
-				month                : `${month} (${year})`,
-				'Collected Amount'   : collectedAmount,
-				'Outstanding Amount' : outstandingAmount,
-			}
-		);
-	});
+
+	const linearData = getLinearData({ statsData });
+	const barData = getBarData({ statsData });
 
 	const onClickFinancialYear = (year, type) => {
 		let yearType = 'CY';
@@ -95,32 +41,13 @@ function Stats({ filters = {} }:Props) {
 		setShowYear(false);
 	};
 
-	const renderYearData = (years) => (
-		<div>
-			{(years || []).map((year) => (
-				<div
-					key={year}
-					className={styles.year_bottom_border}
-					style={{ cursor: year === 'financialYears' && 'pointer' }}
-				>
-					<div
-						key={year}
-						role="presentation"
-						onClick={() => onClickFinancialYear(year, years)}
-					>
-						{year}
-					</div>
-				</div>
-			))}
-		</div>
+	const yearHandleChange = () => (
+		<YearData
+			years={yearHandle
+				? CALENDER_YEAR : FINANCIAL_YEARS}
+			onClickFinancialYear={onClickFinancialYear}
+		/>
 	);
-
-	const yearHandleChange = () => {
-		if (yearHandle) {
-			return renderYearData(CALENDER_YEAR);
-		}
-		return renderYearData(FINANCIAL_YEARS);
-	};
 
 	const content = () => (
 		<Popover

@@ -1,6 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
+
+import { getStatsParams } from '../utils/getStatsParams';
 
 interface Props {
 	statsFilter?:string;
@@ -24,19 +25,10 @@ function useGetMonthwiseStats({ statsFilter, filters }:Props) {
 		{ manual: true },
 	);
 
-	const getStats = useCallback(async () => {
-		const filtersSeperated = statsFilter?.split('-');
-		const viewType = (filtersSeperated)?.shift(); // selecting the first element for year
-		const year = filtersSeperated?.shift(); // selecting first year for both calender & financial year
-
+	const getStats = useCallback(() => {
 		try {
-			await trigger({
-				params: {
-					year,
-					viewType,
-					serviceTypes : !isEmpty(service) ? service : undefined,
-					entityCodes  : !isEmpty(entity) ? entity : undefined,
-				},
+			trigger({
+				params: getStatsParams({ statsFilter, service, entity }),
 			});
 		} catch (err) {
 			console.error('err-', err);

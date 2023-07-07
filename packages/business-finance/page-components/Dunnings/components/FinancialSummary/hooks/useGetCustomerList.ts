@@ -30,9 +30,9 @@ function useGetCustomerList({ filters, setFilters }:Props) {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const getCustomerList = useCallback(async () => {
+	const getCustomerList = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					serviceTypes : !isEmpty(service) ? service : undefined,
 					entityCodes  : !isEmpty(entity) ? entity : undefined,
