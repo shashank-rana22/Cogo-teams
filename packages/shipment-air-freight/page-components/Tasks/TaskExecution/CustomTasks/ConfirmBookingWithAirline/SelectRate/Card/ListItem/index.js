@@ -17,6 +17,7 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 }) {
+	const { service, volume, weight, commodity, price_type, is_minimum_price_system_rate } = data;
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -40,23 +41,25 @@ function ListItem({
 
 				<div>
 					<div className={styles.heading}>No of Pkts</div>
-					<div className={styles.sub_heading}>{data?.service?.packages_count || '-'}</div>
+					<div className={styles.sub_heading}>{service?.packages_count || '-'}</div>
 				</div>
 
 				<div>
 					<div className={styles.heading}>Vol. Weight</div>
 					<div className={styles.sub_heading}>
-						{((data?.service?.volume
+						{((service?.volume || volume
 							|| DEFAULT_VALUE_FOR_NULL_HANDLING) * VOLUMETRIC_WEIGHT).toFixed(DECIMAL_PLACE)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Gross Weight</div>
-					<div className={styles.sub_heading}>{data?.service?.weight || '-'}</div>
+					<div className={styles.sub_heading}>{service?.weight || weight || '-'}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(service?.commodity || commodity || '-')}
+					</div>
 				</div>
 				{data?.service?.commodity_description && (
 					<div>
@@ -86,20 +89,20 @@ function ListItem({
 				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
-					<div className={styles.sub_heading}>{startCase(data?.service?.price_type) || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(service?.price_type || price_type || '-')}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Buy Price</div>
 					<div className={styles.sub_heading}>{getBuyPrice(data, item.source) || '-'}</div>
 				</div>
-				{item?.source === 'flash_booking' && (
-					<div>
-						<div className={styles.heading}>Min. Price</div>
-						<div className={styles.sub_heading}>
-							{data?.service?.is_minimum_price_shipment ? 'Yes' : 'No'}
-						</div>
+				<div>
+					<div className={styles.heading}>Min. Price</div>
+					<div className={styles.sub_heading}>
+						{ is_minimum_price_system_rate || service?.is_minimum_price_shipment ? 'Yes' : 'No'}
 					</div>
-				)}
+				</div>
 				{data?.data?.rate_procurement_proof_url
 				&& item?.source === 'flash_booking'
 				&& (

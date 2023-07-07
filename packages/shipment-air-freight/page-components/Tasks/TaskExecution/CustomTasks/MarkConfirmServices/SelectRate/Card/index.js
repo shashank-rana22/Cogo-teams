@@ -10,9 +10,9 @@ import styles from './styles.module.css';
 const CONFIRM_RATE_STEP = 2;
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
-		const firstvalidty = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-		const price = firstvalidty?.price || firstvalidty?.min_price;
-		const currency = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
+		const firstValidty = (dataObj?.validities || dataObj?.line_items)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+		const price = firstValidty?.price || firstValidty?.min_price;
+		const currency = firstValidty?.currency;
 
 		return `${currency} ${price}`;
 	}
@@ -76,7 +76,7 @@ function Card({
 						chargeable_weight: dataChargeableWeight,
 						price_type,
 						rate_procurement_proof_url,
-					} = dataObj?.data || {};
+					} = dataObj?.data || dataObj || {};
 					const {
 						hs_code,
 						commodity_description,
@@ -104,7 +104,7 @@ function Card({
 										: dataObj?.reverted_airline?.business_name || '-'}
 								</div>
 							</div>
-							{source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+							{task?.service_type === 'air_freight_service' && (
 								<>
 									<div>
 										<div className={styles.heading}>Chargeable Wt.</div>
@@ -112,7 +112,7 @@ function Card({
 											{`${
 												dataChargeableWeight
 													|| chargeable_weight
-													|| '--'
+														|| '--'
 											} Kg`}
 										</div>
 									</div>
@@ -151,7 +151,8 @@ function Card({
 									<div>
 										<div className={styles.heading}>Min. Price</div>
 										<div className={styles.sub_heading}>
-											{is_minimum_price_shipment
+											{data?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_system_rate
+											|| is_minimum_price_shipment
 												? 'Yes'
 												: 'No'}
 										</div>
