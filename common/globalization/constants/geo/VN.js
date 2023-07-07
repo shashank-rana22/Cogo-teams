@@ -41,7 +41,7 @@ export default {
 	uuid: {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
@@ -151,6 +151,7 @@ export default {
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'0285645b-0d06-42a2-9968-67d544626300',
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
