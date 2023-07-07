@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
@@ -1041,6 +1046,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
@@ -1906,6 +1916,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'get_bank_details',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -2698,6 +2713,11 @@ const partner = {
 			api          : 'get_bank_details',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 		{
 			api          : 'get_organization_swift_code_details',
@@ -8086,6 +8106,12 @@ const partner = {
 			module      : 'Expenses',
 			feature     : 'Expenses',
 		},
+		{
+			api          : 'create_vendor',
+			access_type  : 'private',
+			module       : 'Expenses',
+			service_name : 'vendor',
+		},
 	],
 	my_incident: [
 		{
@@ -8465,9 +8491,14 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
 		{
 			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -10442,6 +10473,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
+		{
+			api          : 'bulk_transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
 	],
 	cogo_assured: [
 		{
@@ -12385,6 +12421,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12521,6 +12562,11 @@ const partner = {
 		},
 		{
 			api          : 'put_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_dashboard',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
@@ -12742,6 +12788,38 @@ const partner = {
 		{
 			api         : 'get_payments_dunning_delete_master_exception',
 			access_type : 'private',
+		},
+	],
+	ftl_admin: [
+		{
+			api          : 'update_shipment_backdate_validation_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_pending_task_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_invoice_preference',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_invoice_combination_edit_reason',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };

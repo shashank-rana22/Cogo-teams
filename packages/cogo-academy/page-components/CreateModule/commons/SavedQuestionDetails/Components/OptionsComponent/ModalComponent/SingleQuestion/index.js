@@ -1,7 +1,10 @@
 import { Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
+
+const OFFSET = 1;
 
 const TYPE_MAPPING = {
 	single_correct : 'Single answer Choice',
@@ -26,7 +29,18 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.question_text}>{`Q. ${question_text}`}</div>
+			<div className={styles.question_text}>
+
+				<div>
+					Q.
+					{' '}
+				</div>
+
+				<div
+					dangerouslySetInnerHTML={{ __html: question_text }}
+				/>
+
+			</div>
 
 			<div className={styles.question_container}>
 				<div className={styles.question_type}>
@@ -42,15 +56,16 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 				test_question_answers={test_question_answers}
 			/>
 
-			{explanation?.[0] && explanation?.[0] !== '<p><br></p>' ? (
+			{explanation?.[GLOBAL_CONSTANTS.zeroth_index]
+			&& explanation?.[GLOBAL_CONSTANTS.zeroth_index] !== '<p><br></p>' ? (
 				<div className={styles.explanation}>
 					<b>Explanation:</b>
 					{' '}
-					<div dangerouslySetInnerHTML={{ __html: explanation?.[0] }} />
+					<div dangerouslySetInnerHTML={{ __html: explanation?.[GLOBAL_CONSTANTS.zeroth_index] }} />
 				</div>
-			) : null}
+				) : null}
 
-			{primary_question_type === 'case_study' && case_index !== length - 1 ? (
+			{primary_question_type === 'case_study' && case_index !== length - OFFSET ? (
 				<div className={styles.border} />
 			) : null}
 		</div>

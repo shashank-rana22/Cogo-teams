@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
@@ -24,6 +25,16 @@ function useVendorBankDetail({
 
 	const { vendor_id } = query;
 
+	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
+		url    : '/get_bank_details',
+		method : 'get',
+	}, { manual: true });
+
+	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
+		url    : '/create_vendor_bank_detail',
+		method : 'post',
+	}, { manual: true });
+
 	const formProps = useForm();
 
 	const {
@@ -38,20 +49,10 @@ function useVendorBankDetail({
 	const ifscCode = watch('ifsc_code');
 	const tax_number = watch('tax_number');
 
-	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
-		url    : '/get_bank_details',
-		method : 'get',
-	}, { manual: true });
-
-	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
-		url    : '/create_vendor_bank_detail',
-		method : 'post',
-	}, { manual: true });
-
 	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
+		const REGEX = GLOBAL_CONSTANTS.regex_patterns.ifsc_code;
 
-		if (ifscCode?.match(regex)) {
+		if (ifscCode?.match(REGEX)) {
 			try {
 				const sessionData = await triggerGetBankDetails({
 					params: { ifsc_code: ifscCode },
@@ -104,7 +105,7 @@ function useVendorBankDetail({
 		initialCall: false, params: { filters: { type: ['pincode'] } },
 	}));
 
-	const controls = getControls({ country_id });
+	const { controls } = getControls({ country_id });
 
 	const newControls = (controls || []).map((controlItem) => {
 		const { name } = controlItem;
