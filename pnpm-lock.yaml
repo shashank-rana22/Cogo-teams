@@ -1963,8 +1963,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
-        specifier: ^1.0.359
-        version: 1.0.429(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.430
+        version: 1.0.430(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -4495,6 +4495,41 @@ packages:
 
   /@cogoport/components@1.0.429(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-NtmaSP2Ok0RJShXvVrRr+eWqn0gOf8e56ZMavYBbX2sRibkplV8dD+I4kKBxAgtB30orFd6fSco1e3+Vqc+SQA==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.80(react-dom@18.2.0)(react@18.2.0)
+      '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0(axios@1.4.0)(react@18.2.0)
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+      react-hook-form: 7.45.1(react@18.2.0)
+      react-quill: 2.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-rte: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+      react-table: 7.8.0(react@18.2.0)
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1(@babel/core@7.22.8)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components@1.0.430(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DAQqJHBOG1ho+QiRvg7oluYmFJzDp7Z01yiM9dN3dhic31Mq2LkpQRHrBZWivivz+d34Rh/MA78NLCLCIkc0qQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
