@@ -92,8 +92,8 @@ function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, lo
 					loading={loading}
 					page={filters.pageIndex || DEFAULT_PAGE_INDEX}
 					handlePageChange={(pageValue) => {
-						setFilters((p:object) => ({
-							...p,
+						setFilters((prev:object) => ({
+							...prev,
 							pageIndex: pageValue,
 						}));
 					}}

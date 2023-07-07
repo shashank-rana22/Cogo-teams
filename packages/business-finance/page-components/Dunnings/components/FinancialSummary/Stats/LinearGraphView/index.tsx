@@ -43,8 +43,6 @@ function LinearGraphView({ linearData = [], currency = '' }: Props) {
 
 							},
 						})}
-						axisTop={null}
-						axisRight={null}
 						axisBottom={{
 							tickSize       : 5,
 							tickPadding    : 10,

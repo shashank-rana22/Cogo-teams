@@ -16,8 +16,7 @@ interface Props {
 
 const MONTH_DIVISION = 3;
 const DECREMENT = 1;
-const INCREMENT = 1;
-const PREV_LIMIT = 5;
+const PREV_YEAR_LIMIT = 5;
 const START_MONTH_INDEX = 3;
 const START_DAY_INDEX = 1;
 const END_MONTH_INDEX = 2;
@@ -36,32 +35,29 @@ function Stats({ filters = {} }:Props) {
 	const [isGraphView, setIsGraphView] = useState(true);
 	const [inputValue, setInputValue] = useState('');
 	const [showYear, setShowYear] = useState(false);
-
 	const [visible, setVisible] = useState(false);
 	const [yearHandle, setYearHandle] = useState(false);
-
 	const geo = getGeoConstants();
 	const currency = geo.country.currency.code;
-
 	const currentYear = new Date().getFullYear();
 	const today = new Date();
 
-	const FINANCIAL_YEARS = [];
-	for (let i = 1; i <= PREV_LIMIT; i += INCREMENT) {
-		const yearStart = new Date(today.getFullYear() - i, START_MONTH_INDEX, START_DAY_INDEX);
-		const yearEnd = new Date(today.getFullYear() - i + YEAR_END_INCREMENT, END_MONTH_INDEX, END_DAY_INDEX);
+	// setting last 5 financial years
+	const FINANCIAL_YEARS = Array(PREV_YEAR_LIMIT).fill(null);
+	FINANCIAL_YEARS.forEach((item, index) => {
+		const yearStart = new Date(today.getFullYear() - index, START_MONTH_INDEX, START_DAY_INDEX);
+		const yearEnd = new Date(today.getFullYear() - index + YEAR_END_INCREMENT, END_MONTH_INDEX, END_DAY_INDEX);
 		const financialYear = `${getFinancialYear(yearStart)}-${getFinancialYear(yearEnd)}`;
-		FINANCIAL_YEARS.push(financialYear);
-	}
+		FINANCIAL_YEARS[index] = financialYear;
+	});
 
-	const CALENDER_YEAR = [];
-	for (let i = 0; i < PREV_LIMIT; i += INCREMENT) {
-		const year = `${currentYear - i}`;
-		CALENDER_YEAR.push(year);
-	}
-
+	// setting last 5 calender years
+	const CALENDER_YEAR = Array(PREV_YEAR_LIMIT).fill(null);
+	CALENDER_YEAR.forEach((item, index) => {
+		const year = `${currentYear - index}`;
+		CALENDER_YEAR[index] = year;
+	});
 	const { statsData, loading } = useGetMonthwiseStats({ statsFilter: inputValue, filters });
-
 	const linearData = [
 		{
 			id   : 'Total Outstanding',
@@ -78,7 +74,6 @@ function Stats({ filters = {} }:Props) {
 			})),
 		},
 	];
-
 	const barData = (statsData || []).map((item) => {
 		const { month, collectedAmount, outstandingAmount, year } = item || {};
 		return (
@@ -102,7 +97,7 @@ function Stats({ filters = {} }:Props) {
 
 	const renderYearData = (years) => (
 		<div>
-			{years.map((year) => (
+			{(years || []).map((year) => (
 				<div
 					key={year}
 					className={styles.year_bottom_border}
@@ -112,7 +107,6 @@ function Stats({ filters = {} }:Props) {
 						key={year}
 						role="presentation"
 						onClick={() => onClickFinancialYear(year, years)}
-
 					>
 						{year}
 					</div>
@@ -129,7 +123,6 @@ function Stats({ filters = {} }:Props) {
 	};
 
 	const content = () => (
-
 		<Popover
 			placement="right"
 			caret={false}
@@ -140,24 +133,20 @@ function Stats({ filters = {} }:Props) {
 			<>
 				<div
 					className={styles.data_styles}
-					onClick={() => { setYearHandle(true); setVisible(!visible); }}
+					onClick={() => { setYearHandle(true); setVisible((prev) => !prev); }}
 					role="presentation"
 				>
 					Calendar Year
 				</div>
-
 				<hr />
-
 				<div
 					className={styles.data_styles}
-					onClick={() => { setYearHandle(false); setVisible(true); }}
 					role="presentation"
+					onClick={() => { setYearHandle(false); setVisible(true); }}
 				>
 					Financial Year
 				</div>
-
 				<hr />
-
 				<div
 					className={styles.data_styles}
 					onClick={() => {
@@ -202,8 +191,8 @@ function Stats({ filters = {} }:Props) {
 							<div
 								className={styles.input_div}
 								onClick={() => {
-									setVisible(!setVisible);
-									setShowYear(!showYear);
+									setVisible((prev) => !prev);
+									setShowYear((prev) => !prev);
 								}}
 								role="presentation"
 							>
@@ -223,7 +212,7 @@ function Stats({ filters = {} }:Props) {
 						disabled={false}
 						onLabel="Linear View"
 						offLabel="Graph View"
-						onChange={() => setIsGraphView(!isGraphView)}
+						onChange={() => setIsGraphView((prev) => !prev)}
 					/>
 				</div>
 			</div>
@@ -254,5 +243,4 @@ function Stats({ filters = {} }:Props) {
 		</div>
 	);
 }
-
 export default Stats;

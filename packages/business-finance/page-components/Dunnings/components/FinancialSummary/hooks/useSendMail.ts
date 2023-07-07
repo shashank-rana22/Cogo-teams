@@ -43,9 +43,11 @@ function useSendMail() {
 				},
 			});
 
-			Toast.success(response?.data?.data);
+			const responseMessage = response?.data?.data;
+			if (responseMessage) {
+				Toast.success(responseMessage);
+			}
 		} catch (err) {
-			console.log('err-', err);
 			Toast.error(err?.error?.message || 'Something went wrong');
 		}
 	};

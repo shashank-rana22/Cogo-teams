@@ -78,17 +78,17 @@ function BarGraphView({ barData = [], currency = '' }:Props) {
 								translateY        : 0,
 								itemsSpacing      : 0,
 								itemDirection     : 'left-to-right',
-								itemWidth         : 100,
+								itemWidth         : 120,
 								itemHeight        : 20,
 								itemOpacity       : 0.75,
 								symbolSize        : 12,
 								symbolShape       : 'circle',
-								symbolBorderColor : 'rgba(0, 0, 0, .5)',
+								symbolBorderColor : '#00000080',
 								effects           : [
 									{
 										on    : 'hover',
 										style : {
-											itemBackground : 'rgba(0, 0, 0, .03)',
+											itemBackground : '#00000008',
 											itemOpacity    : 1,
 										},
 									},

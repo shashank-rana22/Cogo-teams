@@ -30,11 +30,6 @@ function useGetCustomerList({ filters, setFilters }:Props) {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	useEffect(() => {
-		debounceQuery(search);
-		setFilters((prev) => ({ ...prev, pageIndex: 1 }));
-	}, [search, debounceQuery, setFilters]);
-
 	const getCustomerList = useCallback(async () => {
 		try {
 			await trigger({
@@ -46,9 +41,14 @@ function useGetCustomerList({ filters, setFilters }:Props) {
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error('err-', err);
 		}
 	}, [trigger, query, pageIndex, entity, service]);
+
+	useEffect(() => {
+		debounceQuery(search);
+		setFilters((prev) => ({ ...prev, pageIndex: 1 }));
+	}, [search, debounceQuery, setFilters]);
 
 	useEffect(() => {
 		getCustomerList();

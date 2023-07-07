@@ -39,7 +39,7 @@ function useGetMonthwiseStats({ statsFilter, filters }:Props) {
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error('err-', err);
 		}
 	}, [statsFilter, trigger, entity, service]);
 

@@ -28,7 +28,7 @@ function FinancialSummary() {
 			<div className={styles.filters}>
 				<MultiSelect
 					value={filters?.service}
-					onChange={(val) => setFilters({ ...filters, service: val })}
+					onChange={(val) => setFilters((prev) => ({ ...prev, service: val }))}
 					placeholder="Service"
 					options={serviceOptions}
 					className={styles.single_filter}
@@ -37,7 +37,7 @@ function FinancialSummary() {
 				/>
 				<MultiSelect
 					value={filters?.entity}
-					onChange={(val) => setFilters({ ...filters, entity: val })}
+					onChange={(val) => setFilters((prev) => ({ ...prev, entity: val }))}
 					placeholder="Entity"
 					options={entityOptions}
 					className={styles.single_filter}
