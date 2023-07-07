@@ -20,24 +20,25 @@ function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAddition
 		<div>
 			{controls.map((controlItem) => {
 				const elementItem = { ...controlItem };
-				const Element = getFieldController(elementItem.controllerType);
+				const { name, label, controllerType } = elementItem || {};
+				const Element = getFieldController(controllerType);
 
 				if (!Element) { return null; }
 
-				if (elementItem.name === 'user_id' && isEmpty(watchOrgId)) { return null; }
+				if (name === 'user_id' && isEmpty(watchOrgId)) { return null; }
 
 				return (
 					<div
 						key={controlItem.name}
 						className={styles.field}
 					>
-						{elementItem.label && <div className={styles.label}>{elementItem.label}</div>}
+						{(label && controllerType !== 'checkbox') && <div className={styles.label}>{label}</div>}
 						<Element
 							{...elementItem}
 							size="sm"
-							key={elementItem.name}
+							key={name}
 							control={control}
-							id={`${elementItem.name}_input`}
+							id={`${name}_input`}
 						/>
 						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
 					</div>

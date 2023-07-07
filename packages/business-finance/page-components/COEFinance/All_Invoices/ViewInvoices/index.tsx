@@ -58,7 +58,6 @@ function ViewInvoices() {
 			<InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
 			<ShipmentDetails
 				data={fullResponse}
-				orgId={query?.orgId || ''}
 				remarksVal={remarksVal}
 				setRemarksVal={setRemarksVal}
 				lineItemsRemarks={lineItemsRemarks}
