@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 
 const SHOW_TOOLTIP_MAX_LENGTH = 16;
 const COMMODITY_VALUE_LENGTH = 36;
-let maxCriticlity = 0;
 const MAX_CRITICLITY_VALUE = 0;
 const RISK_CATEGORIES = {
 	1 : 'LOW',
@@ -23,7 +22,7 @@ function CardItem({ itemData = {} }) {
 		serial_id = '', origin_port = {}, destination_port = {}, estimated_cargo_value_currency, alarms = [],
 		commodity_description = '', cargo_value_currency, cargo_value, estimated_cargo_value,
 	} = itemData;
-
+	let maxCriticlity = MAX_CRITICLITY_VALUE;
 	alarms.forEach((item) => {
 		if (item.criticality > maxCriticlity) {
 			maxCriticlity = item.criticality;
@@ -33,7 +32,7 @@ function CardItem({ itemData = {} }) {
 	const risk_category = RISK_CATEGORIES[maxCriticlity];
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
-		port_code:destination_port_code, display_name:destination_port_display_name,
+		port_code : destination_port_code, display_name:destination_port_display_name,
 	} = destination_port || {};
 
 	return (

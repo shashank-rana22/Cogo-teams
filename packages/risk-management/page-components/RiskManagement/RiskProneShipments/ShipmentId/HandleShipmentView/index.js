@@ -9,7 +9,10 @@ import styles from './styles.module.css';
 
 const ARRAY_LENGTH_FOR_LOADER = 5;
 
-function HandleShipmentView({ loading, list, getDashboardData, getDahboardStatsData }) {
+function HandleShipmentView({
+	loading = false, list = [], getDashboardData = () => {},
+	getDahboardStatsData = () => {},
+}) {
 	if (loading) {
 		return (
 			<div style={{ marginTop: '10px' }}>
@@ -31,7 +34,7 @@ function HandleShipmentView({ loading, list, getDashboardData, getDahboardStatsD
 			</div>
 		);
 	}
-	return list?.map((item) => (
+	return list.map((item) => (
 		<CardList
 			itemData={item}
 			key={item?.serial_id}

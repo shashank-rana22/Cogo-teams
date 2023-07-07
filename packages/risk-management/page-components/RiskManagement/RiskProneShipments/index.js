@@ -5,22 +5,27 @@ import PieChart from './PieChart';
 import ShipmentId from './ShipmentId';
 import styles from './styles.module.css';
 
+const getTabsMapping = (stats = {}) => {
+	const {
+		container_movement_count = '',
+		bl_do_release_count = '', both_count = '',
+	} = stats;
+
+	return [
+		{ name: 'container_movement', title: 'Container Movement', badge: container_movement_count },
+		{ name: 'bl_do', title: 'BL/DO Release', badge: bl_do_release_count },
+		{ name: 'both', title: 'Both', badge: both_count },
+	];
+};
+
 function RiskProneShipments({
 	data = {}, statsData = {}, statsLoading = false, loading = false, activeTab = '',
 	setActiveTab = () => {}, filters = {}, setFilters = () => {},
 	getDashboardData = () => {}, getDahboardStatsData = () => {},
 }) {
 	const { stats } = statsData;
-	const {
-		container_movement_count = '',
-		bl_do_release_count = '', both_count = '',
-	} = stats || {};
 
-	const tabMappings = [
-		{ name: 'container_movement', title: 'Container Movement', badge: container_movement_count },
-		{ name: 'bl_do', title: 'BL/DO Release', badge: bl_do_release_count },
-		{ name: 'both', title: 'Both', badge: both_count },
-	];
+	const tabMappings = getTabsMapping(stats);
 
 	return (
 		<div className={styles.container}>

@@ -8,7 +8,7 @@ const CARGO_DETAILS_LENGTH_GREATER_THAN_ONE = 1;
 const LABELS = ['container_size', 'container_type', 'commodity',
 	'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
 
-const renderCargoPills = (cargo_detail) => (
+const RenderCargoPills = ({ cargo_detail }) => (
 	LABELS.map((label) => (cargo_detail[label]
 		? (
 			<Pill size="sm" key={label}>
@@ -23,7 +23,7 @@ export default function CargoDetails({ cargo_details = [] }) {
 
 	return (
 		<div className={styles.cargo_details_container}>
-			{firstCargoDetails ? renderCargoPills(firstCargoDetails) : null}
+			{firstCargoDetails ? <RenderCargoPills cargo_detail={firstCargoDetails} /> : null}
 
 			{!isEmpty(restCargoDetails) ? (
 				<Tooltip
@@ -32,7 +32,7 @@ export default function CargoDetails({ cargo_details = [] }) {
 							{restCargoDetails.map((cargo_detail) => (
 								<div key={cargo_detail.commodity}>
 
-									{renderCargoPills(cargo_detail)}
+									<RenderCargoPills cargo_detail={cargo_detail} />
 								</div>
 							))}
 						</div>

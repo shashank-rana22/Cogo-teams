@@ -4,9 +4,10 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 const DEFAULT_PAGE_LIMIT = 10;
+const DEFAULT_PAGE_INDEX = 1;
 const useGetListRiskProne = ({ activeTab }) => {
 	const [filters, setFilters] = useState({
-		pageIndex        : 1,
+		pageIndex        : DEFAULT_PAGE_INDEX,
 		search           : undefined,
 		originValue      : undefined,
 		destinationValue : undefined,

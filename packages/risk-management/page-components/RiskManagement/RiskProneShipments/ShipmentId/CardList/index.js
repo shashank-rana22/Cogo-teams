@@ -85,7 +85,7 @@ function CardList({ itemData = {}, getDashboardData = () => {}, getDahboardStats
 			<div className={styles.footer}>
 				<div
 					className={styles.footer_text}
-					onClick={() => { setIsAccordionActive(!isAccordionActive); }}
+					onClick={() => { setIsAccordionActive((prev) => !prev); }}
 					role="presentation"
 				>
 					{isAccordionActive ?	'Show Less' : 'Show more' }
