@@ -1,129 +1,128 @@
-.positive_profit_container{
-    background-color: #F3FAFA;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 4px;
-    margin: 24px 0;
-    display: flex;
-    align-items: center;
-    padding: 8px 0 ;
-    border: 1px solid #88CAD1;
+.positive_profit_container {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+	margin: 24px 0;
+	background-color: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.negative_profit_container{
-    background-color: #F9F9F9;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 4px;
-    margin: 24px 0;
-    display: flex;
-    align-items: center;
-    padding: 8px 0 ;
-    border: 1px solid #BDBDBD;
+.negative_profit_container {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+	margin: 24px 0;
+	background-color: #f9f9f9;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.left_section_container{
-    width:30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.left_section_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
 }
 
-.right_section_container{
-    flex:1;
-    border-left: 1px solid #E0E0E0;
+.right_section_container {
+	flex: 1;
+	border-left: 1px solid #e0e0e0;
 }
 
-.upper_section{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed #BDBDBD;
-    padding: 0 24px 8px;
-    align-items: center;
+.upper_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 24px 8px;
+	border-bottom: 1px dashed #bdbdbd;
 }
 
-
-.upper_left_section{
-    display: flex;
-    align-items: center;   
+.upper_left_section {
+	display: flex;
+	align-items: center;
 }
 
-.upper_right_section{
-    display: flex;
+.upper_right_section {
+	display: flex;
 }
 
-.agent_container{
-    display: flex;
-    align-items: center;
-    margin-left: 17px;
+.agent_container {
+	display: flex;
+	align-items: center;
+	margin-left: 17px;
 }
 
-.tag{
-    font-weight: 500;
-    font-size: 14px;
-    color: #6FA5AB;
+.tag {
+	font-size: 14px;
+	font-weight: 500;
+	color: #6fa5ab;
 }
 
-.lower_section{
-    font-weight: 500;
-    font-size: 14px;
-    color: #828282;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.lower_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
 }
 
-.lower_left_section{
-    width:50%;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
+.lower_left_section {
+	display: flex;
+	align-items: center;
+	width: 50%;
+	padding: 20px 24px;
 }
 
-.lower_right_section{
-    display: flex;
-    align-items: center;
-    flex:1;
-    justify-content: space-between;
-    padding: 20px;
-    margin-bottom: -8px;
+.lower_right_section {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	margin-bottom: -8px;
 }
 
-.price{
-    font-weight: 500;
-    font-size: 16px;
-    color: #EE3425;
-    margin-left: 4px;
+.price {
+	margin-left: 4px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #ee3425;
 }
 
-.label{
-    align-items: center;
-    display: flex;
-    font-weight: 500;
-    font-size: 14px;
-    color: #828282;
-    gap:5px;
+.label {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
 }
 
-.service_provider_heading{
-    margin-right: 10px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #221F20;
-}
-
-
-.positive_profit{
+.service_provider_heading {
+	margin-right: 10px;
+	font-size: 14px;
 	font-weight: 600;
-	font-size: 18px;	
-	color:#849E4C
+	color: #221f20;
 }
 
-.negative_profit{
+.positive_profit {
+	font-size: 18px;
 	font-weight: 600;
-    font-size: 18px;	
-	color:#EE3425
+	color: #849e4c;
 }
-.total_price_text{
-    font-weight: 700;
-    font-size: 20px;
-    color: #221F20;
+
+.negative_profit {
+	font-size: 18px;
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.total_price_text {
+	font-size: 20px;
+	font-weight: 700;
+	color: #221f20;
 }

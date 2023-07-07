@@ -1,21 +1,24 @@
-.labelText{
-    width:120px;
-    font-weight: 600;
-    padding: 6px;
-    background: #fdfbf6;
-    border-radius: 6px;
+.labelText {
+	width: 120px;
+	padding: 6px;
+	font-weight: 600;
+	background: #fdfbf6;
+	border-radius: 6px;
 }
-.valueText{
-    padding: 6px;
-    width:120px;
+
+.valueText {
+	width: 120px;
+	padding: 6px;
 }
-.heading_text{
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 12px;
+
+.heading_text {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 600;
 }
-.table{
-    display: 'flex';
-    flex-direction: 'column';
-    margin-bottom: 8px;
+
+.table {
+	display: "flex";
+	flex-direction: "column";
+	margin-bottom: 8px;
 }

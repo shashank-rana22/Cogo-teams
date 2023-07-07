@@ -3,7 +3,9 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 import { useEffect } from 'react';
 
-import useListShipmentBookingConfirmationPreferences from '../../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useListShipmentBookingConfirmationPreferences from
+	'../../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import { DEFAULT_INDEX } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -22,27 +24,32 @@ function Step3({ data, setStep = () => {}, shipment_id, task }) {
 	});
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const selected_priority = (preferences?.list || []).find((item) => item?.selected_priority === item?.priority);
-	const line_items = selected_priority?.data?.[0]?.validities?.[0]?.line_items || [];
-	if (line_items?.length) {
-		defaultValues[selected_priority?.service_id] = line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
-	}
+	const line_items = selected_priority?.data?.[DEFAULT_INDEX]?.line_items;
+
+	const origin_locals = selected_priority?.data?.[DEFAULT_INDEX]?.origin_locals;
+	const destination_locals = selected_priority?.data?.[DEFAULT_INDEX]?.destination_locals;
+
+	const origin_locals_line_items = origin_locals?.line_items;
+	const destination_locals_line_items = destination_locals?.line_items;
 
 	const formProps = useForm({ defaultValues });
 
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
+	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, setValue } = formProps || {};
 	const formValues = watch();
 
-	// useEffect(() => {
-	// 	setValue(`${selected_priority?.service_id}`, defaultValues);
-	// }, [defaultValues, setValue, selected_priority?.service_id]);
-
+	useEffect(() => {
+		if ((line_items || []).length) {
+			setValue(`${selected_priority?.service_id}`, line_items);
+		}
+		if (origin_locals?.service_id) {
+			setValue(`${origin_locals?.service_id}`, origin_locals_line_items);
+		}
+		if (destination_locals?.service_id) {
+			setValue(`${destination_locals?.service_id}`, destination_locals_line_items);
+		}
+	}, [setValue, selected_priority?.service_id, line_items, origin_locals, origin_locals_line_items,
+		destination_locals,
+		destination_locals_line_items]);
 
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };

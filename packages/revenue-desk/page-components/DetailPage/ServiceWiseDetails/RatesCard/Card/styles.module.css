@@ -3,10 +3,10 @@
 	align-items: center;
 	padding: 5px 5px 0;
 	margin: 14px 0;
+	cursor: pointer;
 	background-color: #f9f9f9;
 	border-radius: 4px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
-	cursor: pointer;
 }
 
 .selected_rate_card_container {
@@ -44,9 +44,9 @@
 }
 
 .left_section_container {
-	width: 25px;
 	display: flex;
 	justify-content: center;
+	width: 25px;
 }
 
 .right_section_container {
@@ -55,50 +55,51 @@
 }
 
 .text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .text1 {
-	font-weight: 500;
 	font-size: 12px;
-	color: #6FA5AB;
+	font-weight: 500;
+	color: #6fa5ab;
 }
 
 .text2 {
-	font-weight: 500;
 	font-size: 12px;
-	color: #F37166;
+	font-weight: 500;
+	color: #f37166;
 }
 
 .progress_bar_section {
 	display: flex;
-	border-left: 1px dashed #bdbdbd;
-	padding:10px 16px;
+	gap: 10px;
 	align-items: center;
 	justify-content: center;
-	gap:10px;
+	padding: 10px 16px;
+	border-left: 1px dashed #bdbdbd;
 }
 
 .price_text_section {
-	font-size: 14px;
-	font-weight: 500;
-	color: #828282;
+	gap: 10px;
 	align-items: center;
-	gap:10px;
-}
-.total_price_section{
-	padding: 0px 16px;
 	font-size: 14px;
 	font-weight: 500;
 	color: #828282;
+}
+
+.total_price_section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding: 0 16px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
 	border-left: 1px dashed #bdbdbd;
 }
 
@@ -111,91 +112,99 @@
 }
 
 .price_section {
-	padding: 8px 20px;
 	display: flex;
 	flex-direction: column;
-	font-weight: 500;
-	font-size: 12px;
-	color: #828282;
 	justify-content: center;
+	padding: 8px 20px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
 	border-left: 1px dashed #bdbdbd;
 }
-.price_value{
+
+.price_value {
+	margin-right: 16px;
 	font-weight: 600;
 	color: #221f20;
-	margin-right: 16px;
 }
+
 .service_provider_heading {
 	margin-right: 38px;
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
-	
 }
 
-.edit_price_section{
+.edit_price_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 12%;
 	padding: 20px;
 	border-left: 1px dashed #bdbdbd;
-	display: flex;
-	justify-content: center;
-	max-width:12%;
-	flex-direction: column;
 }
 
-.progress_bar_container{
-	:global{
-		.ui_progressbar_container{
-			width:140px;
-			
-			.ui_progressbar_filename{
-				position:absolute;
+.progress_bar_container {
+	:global {
+		.ui_progressbar_container {
+			width: 140px;
+
+			.ui_progressbar_filename {
+				position: absolute;
 				padding-left: 52px;
 				font-size: 12px;
 			}
 		}
-		.ui_progressbar_bar{
-			height:20px;
+
+		.ui_progressbar_bar {
+			height: 20px;
 		}
-		.ui_progressbar_progress{
-			height:20px;
-			background-color: #DDEBC0;
+
+		.ui_progressbar_progress {
+			height: 20px;
+			background-color: #ddebc0;
 		}
 	}
 }
-.edit_price_heading{
-	font-size: 12px;
-	margin-left: 4px;
+
+.edit_price_heading {
 	padding-bottom: 4px;
-
-}
-.positive_profit{
-	font-weight: 600;
-	font-size: 14px;	
-	color:#849E4C
+	margin-left: 4px;
+	font-size: 12px;
 }
 
-.negative_profit{
+.positive_profit {
+	font-size: 14px;
 	font-weight: 600;
-	font-size: 14px;	
-	color:#EE3425
+	color: #849e4c;
 }
-.total_price_text{
-	font-weight: 700;
+
+.negative_profit {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.total_price_text {
 	font-size: 16px;
-	color: #221F20;
+	font-weight: 700;
+	color: #221f20;
 }
-.updated_at{
-	font-size:10px;
+
+.updated_at {
+	margin-left: 10px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
-	margin-left: 10px;
 }
-.source{
-	font-size:12px;
+
+.source {
+	margin-left: 10px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #454545;
-	margin-left: 10px;
 }
-.infoicon{
+
+.infoicon {
 	margin-left: 3px;
 }

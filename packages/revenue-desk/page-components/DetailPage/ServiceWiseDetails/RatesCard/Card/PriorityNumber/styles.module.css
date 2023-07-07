@@ -1,13 +1,13 @@
-.container{
-    border-radius: 50px/50px;
-	border: solid 0.5px #a8acce;
+.container {
 	width: 16px;
 	height: 16px;
+	border: solid 0.5px #a8acce;
+	border-radius: 50px/50px;
 }
 
-.text{
-    text-align: center;
-	color: #fff;
+.text {
 	align-self: center;
 	font-size: 10px;
+	color: #fff;
+	text-align: center;
 }

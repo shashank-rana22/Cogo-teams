@@ -23,7 +23,7 @@ function Footer({ data }) {
 		},
 		{
 			key   : 'Shipment Source',
-			value : data?.source,
+			value : startCase(data?.source),
 		},
 		{
 			key   : 'Preferred Shipping Line',

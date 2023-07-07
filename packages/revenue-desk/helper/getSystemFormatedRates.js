@@ -18,9 +18,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			active_booking                    : element?.ongoing_shipment,
 			allocation_ratio                  : undefined,
 			price                             : Number(validities?.total_price) / Number(container_count),
-			fulfillment_ratio_2               : element?.fulfillment_ratio_2,
-			fulfillment_ratio_7               : element?.fulfillment_ratio_7,
-			fulfillment_ratio_15              : element?.fulfillment_ratio_15,
 			agent                             : element?.procured_by?.name,
 			total_price                       : validities?.total_price || DEFAULT_VALUE,
 			currency                          : validities?.currency,
@@ -42,6 +39,10 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			via_route                         : element?.destination_main_port?.name,
 			total_price_currency              : validities?.currency,
 			line_items                        : validities?.line_items,
+			fulfillment_ratio_2               : data?.fulfillment_data?.day_2 || data?.fulfillment_ratio_2,
+			fulfillment_ratio_7               : data?.fulfillment_data?.day_7 || data?.fulfillment_ratio_7,
+			fulfillment_ratio_15              : data?.fulfillment_data?.day_15 || data?.fulfillment_ratio_15,
+			fulfillment_ratio_30              : data?.fulfillment_data?.day_30 || data?.fulfillment_ratio_30,
 			shipping_line                     :	element?.shipping_line?.business_name
 												|| element?.shipping_line?.short_name,
 			destination_main_port_id: element?.destination_main_port_id

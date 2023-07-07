@@ -1,84 +1,86 @@
-.filter_location{
-    border-bottom: 1px solid #E0E0E0;;
-}
-.sub_section{
-    padding: 16px 0 0;
-    border-bottom: 1px solid #E0E0E0;;
+.filter_location {
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.sub_heading{
-    padding: 0 16px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #4F4F4F;
+.sub_section {
+	padding: 16px 0 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.radiogrp{
-    display: flex;
-    flex-direction: column;
-
-    :global{
-        .ui_radio_container{
-            padding: 5px 10px !important;
-        }
-    }
+.sub_heading {
+	padding: 0 16px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
-.chip_container{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px 16px;
+.radiogrp {
+	display: flex;
+	flex-direction: column;
 
-    :global{
-        .ui_chips_container{
-            display: flex;
-        flex-wrap: wrap;
-        }
-    }
+	:global {
+		.ui_radio_container {
+			padding: 5px 10px !important;
+		}
+	}
 }
 
-.date_text{
-    font-weight: 400;
-    font-size: 14px;
-    color: #4F4F4F;
+.chip_container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10px 16px;
+
+	:global {
+		.ui_chips_container {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
 }
 
-.last_section{
-    padding: 16px 0;
+.date_text {
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
-.date_subsection{
-    padding: 10px 16px;
+.last_section {
+	padding: 16px 0;
 }
 
-.trade_sub_section{
-    :global{
-        .ui_radiogroup_container{
-            padding: 5px 10px !important;
-        }
-    }
-    
-}
-.tag_outer_container{
-    font-weight: 700;
-    font-size: 16px;
-    color: #221F20;
-    padding: 0 12px 5px;
-    border-bottom:1px solid #F2E3C3;
-    display: flex;
-    flex-wrap: wrap;
-}
-.tag_container{
-    margin: 5px 3px 0;
+.date_subsection {
+	padding: 10px 16px;
 }
 
-.date_tag_container{
-    margin: 5px 3px 0;
+.trade_sub_section {
+	:global {
+		.ui_radiogroup_container {
+			padding: 5px 10px !important;
+		}
+	}
+}
 
-    :global{
-        .ui_tag_container{
-            max-width: 276px !important;
-            padding-left: 0!important;
-        }
-    }
+.tag_outer_container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 12px 5px;
+	font-size: 16px;
+	font-weight: 700;
+	color: #221f20;
+	border-bottom: 1px solid #f2e3c3;
+}
+
+.tag_container {
+	margin: 5px 3px 0;
+}
+
+.date_tag_container {
+	margin: 5px 3px 0;
+
+	:global {
+		.ui_tag_container {
+			max-width: 276px !important;
+			padding-left: 0 !important;
+		}
+	}
 }

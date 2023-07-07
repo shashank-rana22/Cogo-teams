@@ -10,6 +10,9 @@ const useGetRDShipmentList = () => {
 		state    : 'active',
 		rd_state : 'active',
 	});
+
+	const [shipmentList, setShipmentList] = useState([]);
+
 	const API_MAPPING = {
 		fcl_freight     : 'fcl_freight/list_revenue_desk_shipments',
 		fcl_customs     : 'fcl_customs/list_revenue_desk_shipments',
@@ -20,10 +23,10 @@ const useGetRDShipmentList = () => {
 		ltl_freight     : './list_revenue_desk_ltl_freight_shipments',
 	};
 	const api = API_MAPPING[filters?.service];
-	const [{ data:shipmentList, loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		method : 'get',
 		url    : api,
-	}, { manual: true });
+	}, { manual: true, autoCancel: true });
 
 	const fetchShipments = useCallback(async () => {
 		const shipmentStatusMapping = {
@@ -57,7 +60,7 @@ const useGetRDShipmentList = () => {
 			cargo_readiness_less_than    : filters?.cargo_readiness_date?.endDate || undefined,
 		};
 		try {
-			await trigger({
+			const resp = await trigger({
 				params: {
 					filters: {
 						...requiredFilterChange,
@@ -71,8 +74,11 @@ const useGetRDShipmentList = () => {
 					additional_methods : ['pagination'],
 				},
 			});
+			if (!resp.hasError) {
+				setShipmentList(resp?.data);
+			} else { setShipmentList([]); }
 		} catch (err) {
-			// console.log(err);
+			setShipmentList([]);
 		}
 	}, [trigger, filters]);
 

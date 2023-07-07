@@ -12,7 +12,7 @@ import List from './List';
 import styles from './styles.module.css';
 
 function RevenueDesk() {
-	const [showDetailPage, setShowDetailPage] = useState();
+	const [showDetailPage, setShowDetailPage] = useState(null);
 	const {
 		loading,
 		shipmentList,
@@ -26,7 +26,7 @@ function RevenueDesk() {
 					setShowDetailPage={setShowDetailPage}
 					showDetailPage={showDetailPage}
 				/>
-			) : 	(
+			) : (
 				<div>
 					<div className={styles.heading}>Revenue Desk</div>
 					<div className={styles.sub_section}>

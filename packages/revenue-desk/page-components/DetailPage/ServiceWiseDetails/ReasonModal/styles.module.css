@@ -1,11 +1,11 @@
-.modal_text{
-    font-weight: 600;
-    font-size: 16px;
-    color: #EE3425;
+.modal_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #ee3425;
 }
 
-.btn_container{
-    width:150px;
-    display: flex;
-    justify-content: space-between;
+.btn_container {
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
 }

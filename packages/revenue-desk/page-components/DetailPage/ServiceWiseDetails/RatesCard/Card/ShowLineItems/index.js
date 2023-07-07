@@ -36,7 +36,7 @@ function ShowLineItems({
 							{
 								columns.map((col) => (
 									<p key={col} className={styles.valueText}>
-										{startCase(lineItem[col])}
+										{(col === 'price') ? lineItem?.[col] : startCase(lineItem?.[col])}
 									</p>
 								))
 							}

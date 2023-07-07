@@ -171,6 +171,7 @@ function EditRate({
 				<EditQuotations
 					data={editQuote}
 					shipment_id={task?.shipment_id}
+					service_type={task?.service_type}
 					onCancel={onCancel}
 					airServiceFormValues={airServiceFormValues}
 					airLocalServiceFormValues={airLocalServiceFormValues}

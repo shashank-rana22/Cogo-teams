@@ -2,8 +2,18 @@ import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import { STATUS_TYPE_MAPPING } from '../constants';
+
+const getPayload = ({ profile, actionType, id }) => ({
+	UserType      : 'user',
+	PerformedByID : profile?.user?.id,
+	TicketID      : [Number(id)],
+	...(STATUS_TYPE_MAPPING[actionType]),
+});
+
 const useUpdateTicketActivity = ({
 	refreshTickets = () => {},
+	fetchTickets = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
 
@@ -11,23 +21,17 @@ const useUpdateTicketActivity = ({
 		url     : '/activity',
 		method  : 'post',
 		authkey : 'post_tickets_activity',
-	}, { manual: false });
+	}, { manual: true });
 
-	const updateTicketActivity = async (status = '', id = '') => {
+	const updateTicketActivity = async ({ actionType = '', id = '' }) => {
 		try {
-			const isReslove = status?.toLowerCase() === 'resolve';
-
-			const res = await trigger({
-				data: {
-					UserType      : 'ticket_user',
-					PerformedByID : profile?.user?.id,
-					Type          : isReslove ? 'mark_as_resolved' : 'reopened',
-					TicketID      : [Number(id)],
-					Status        : isReslove ? 'resolved' : 'reopened',
-				},
+			await trigger({
+				data: getPayload({ profile, actionType, id }),
 			});
-			Toast.success(res?.data || 'Ticket Status Updated Successfully!');
+
 			refreshTickets();
+			fetchTickets();
+			Toast.success('Ticket Status Updated Successfully!');
 		} catch (e) {
 			Toast.error(e?.response?.data || 'something went wrong');
 		}

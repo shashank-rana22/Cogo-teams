@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 const INDEX_ONE = 1;
 
 function ShipmentCard({ itemData, priceData }) {
+	const { haulage_type:haulageType = '' } = itemData;
+	const { inco_term:incoTerm = '' } = itemData;
 	return (
 		<div className={styles.container}>
 			<div className={styles.upper_section}>
@@ -40,29 +42,39 @@ function ShipmentCard({ itemData, priceData }) {
 					<PortDetails data={itemData} />
 				</div>
 				<div className={styles.second_section}>
-					<Pill size="md" color="#F2F3FA">
-						<div style={{ color: '#7278AD' }}>
-							Inco:
-							{startCase([itemData?.inco_term])}
-						</div>
-
-					</Pill>
-					<Pill size="md" color="#F2F3FA">
-						<div style={{ color: '#7278AD' }}>
-							{startCase(itemData?.state)
-							|| startCase(itemData?.state)}
-
-						</div>
-
-					</Pill>
-					<Pill size="md" color="#F2F3FA">
-						<div style={{ color: '#7278AD' }}>
-							{startCase(itemData?.trade_type)
-							|| startCase(incoTermMapping[itemData?.inco_term])}
-
-						</div>
-
-					</Pill>
+					{incoTerm
+					&& (
+						<Pill size="md" color="#F2F3FA">
+							<div style={{ color: '#7278AD' }}>
+								Inco:
+								{startCase(incoTerm)}
+							</div>
+						</Pill>
+					)}
+					{haulageType && (
+						<Pill size="md" color="#F2F3FA">
+							<div style={{ color: '#7278AD' }}>
+								{startCase(haulageType)}
+							</div>
+						</Pill>
+					)}
+					{itemData?.state
+					&& (
+						<Pill size="md" color="#F2F3FA">
+							<div style={{ color: '#7278AD' }}>
+								{startCase(itemData?.state)}
+							</div>
+						</Pill>
+					)}
+					{(itemData?.trade_type || incoTerm)
+					&& (
+						<Pill size="md" color="#F2F3FA">
+							<div style={{ color: '#7278AD' }}>
+								{startCase(itemData?.trade_type)
+							|| startCase(incoTermMapping[incoTerm])}
+							</div>
+						</Pill>
+					)}
 					<Pill size="md" color="#F7FAEF">
 						<div style={{ color: '#849E4C' }}>
 							{itemData?.source === 'direct'

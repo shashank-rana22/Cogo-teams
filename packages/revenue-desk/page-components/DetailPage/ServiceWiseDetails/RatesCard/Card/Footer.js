@@ -110,9 +110,9 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					<div className={styles.text}>
 						30 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_15 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_15 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_15 : '--' }
+						{(data?.rowData?.fulfillment_ratio_30 === VALUE_ZERO
+                             || data?.rowData?.fulfillment_ratio_30 > VALUE_ZERO)
+							? data?.rowData?.fulfillment_ratio_30 : '--' }
 					</div>
 				</div>
 

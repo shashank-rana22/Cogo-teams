@@ -5,9 +5,10 @@ import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
 import useUpdateShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+import { VALUE_ONE, VALUE_TWO } from '../../../../../constants';
 
 const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], setStep = () => {} }) => {
-	const { service_id, service_type } = task || {};
+	const { service_type } = task || {};
 	const { id:shipment_id } = shipment_data || {};
 	const [selectedServiceProvider, setSelectedServiceProvider] = useState({});
 
@@ -15,9 +16,9 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 		const { source = '' } = selectedServiceProvider;
 
 		if (source === 'bn_salvage') {
-			setStep(2);
+			setStep(VALUE_TWO);
 		} else {
-			setStep(1);
+			setStep(VALUE_ONE);
 		}
 	};
 
@@ -28,7 +29,6 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 	const { data, loading } = useListShipmentBookingConfirmationPreferences({
 		shipment_id,
 		defaultFilters: {
-			service_id,
 			service_type,
 		},
 	});
