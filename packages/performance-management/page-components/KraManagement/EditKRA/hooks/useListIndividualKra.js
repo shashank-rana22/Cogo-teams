@@ -22,8 +22,8 @@ function useListIndividualKra() {
 
 	}, { manual: false });
 
-	const handleCreateKRA = () => {
-		router.push('/performance-management/kra-management/create-kra');
+	const handleManageKRA = () => {
+		router.push('/performance-management/kra-management/manage-kra');
 	};
 
 	return {
@@ -31,7 +31,7 @@ function useListIndividualKra() {
 		loading,
 		setActiveTab,
 		activeTab,
-		handleCreateKRA,
+		handleManageKRA,
 	};
 }
 

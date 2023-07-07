@@ -263,6 +263,16 @@ const hrms = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'edit_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'hrms',
