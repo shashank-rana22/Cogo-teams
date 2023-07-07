@@ -17,7 +17,7 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 }) {
-	const { service, volume, weight, commodity, price_type, is_minimum_price_system_rate } = data;
+	const { service, volume, weight, commodity, price_type, is_minimum_price_system_rate } = data || {};
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -38,11 +38,12 @@ function ListItem({
 							: data?.reverted_airline?.business_name || '-'}
 					</div>
 				</div>
-
-				<div>
-					<div className={styles.heading}>No of Pkts</div>
-					<div className={styles.sub_heading}>{service?.packages_count || '-'}</div>
-				</div>
+				{item?.source === 'flash_booking' && (
+					<div>
+						<div className={styles.heading}>No of Pkts</div>
+						<div className={styles.sub_heading}>{service?.packages_count || '-'}</div>
+					</div>
+				)}
 
 				<div>
 					<div className={styles.heading}>Vol. Weight</div>
