@@ -4,8 +4,12 @@ import { useState } from 'react';
 
 import RoleInput from './RoleInput';
 import styles from './styles.module.css';
+import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
 
-function MarketFeedback({ setStatus }) {
+function MarketFeedback({ organization_id,service, getOrganizationService}) {
+	const { UpdateOrganizationService } = useUpdateOrganizationService({
+		organization_id, stage_of_approval: 'supplier_evaluation', service, getOrganizationService,
+	});
 	const [totalInput, setTotalInput] = useState(2);
 	return (
 		<div className={styles.parent}>
@@ -28,12 +32,12 @@ function MarketFeedback({ setStatus }) {
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
-					onClick={() => setStatus('supplier_evaluation')}
+					onClick={() =>UpdateOrganizationService()}
 				>
 					Save & Do it Later
 
 				</Button>
-				<Button onClick={() => setStatus('supplier_evaluation')}>Submit & Next</Button>
+				<Button onClick={() =>UpdateOrganizationService()}>Submit & Next</Button>
 
 			</div>
 		</div>

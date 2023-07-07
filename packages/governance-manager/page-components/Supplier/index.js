@@ -46,7 +46,10 @@ function Supplier() {
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
 				/>,
-				market_feedback     : <MarketFeedback setStatus={setStatus} />,
+				market_feedback     : <MarketFeedback 	organization_id={supplierData?.organization_id}
+				id={id}
+				service={supplierData?.service}
+				getOrganizationService={getOrganizationService} />,
 				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
 				supplier_approval   : <SupplierApproval setStatus={setStatus} />,
 				contract_sla        : <ContractSla setStatus={setStatus} />,
