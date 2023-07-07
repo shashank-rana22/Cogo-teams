@@ -13,6 +13,7 @@ const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
 function EditQuotations({
 	data,
 	shipment_id,
+	service_type,
 	onCancel,
 	airServiceFormValues,
 	airLocalServiceFormValues,
@@ -33,7 +34,7 @@ function EditQuotations({
 
 	const { data: preferences } = useListBookingPreferences({
 		shipment_id,
-		service_type: 'air_freight_service',
+		defaultFilters: { service_type },
 	});
 
 	const selected_priority = (preferences?.list || []).find((item) => item?.selected_priority === item?.priority);
@@ -44,7 +45,7 @@ function EditQuotations({
 
 	useEffect(() => {
 		const freight_line_items = (
-			selected_priority?.data?.[DEFAULT_INDEX]?.validities?.[DEFAULT_INDEX]?.line_items || []
+			selected_priority?.data?.[DEFAULT_INDEX]?.line_items || []
 		);
 		if (freight_line_items.length) {
 			setValue(`${selected_priority?.service_id}`, freight_line_items);

@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
 
+import { DEFAULT_INDEX } from '../../../../../../../constants';
+
 import styles from './styles.module.css';
 
 function BookingPreferenceCard({ item, step0_data = {} }) {
@@ -12,7 +14,8 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 	const { updateBookingPreference = () => {}, updatePreferenceLoading, setSelectedServiceProvider } = step0_data;
 
 	const dataArray = Array.isArray(data) ? data : [data];
-	const { remarks, supplier_contract_no } = dataArray?.[0]?.validities?.[0] || dataArray?.[0] || {};
+	const { remarks, supplier_contract_no } = dataArray?.[DEFAULT_INDEX]?.validities?.[DEFAULT_INDEX]
+	|| dataArray?.[DEFAULT_INDEX] || {};
 
 	const handleProceed = () => {
 		setSelectedServiceProvider(item);
@@ -36,8 +39,8 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 		{
 			label : 'Buy Rate',
 			value : getFormattedPrice(
-				obj?.validities[0]?.total_price,
-				obj?.validities[0]?.currency,
+				obj?.price,
+				obj?.currency,
 			),
 		},
 		{

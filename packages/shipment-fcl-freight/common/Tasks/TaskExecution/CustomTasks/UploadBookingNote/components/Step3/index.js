@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import { DEFAULT_INDEX } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -23,10 +24,10 @@ function Step3({ data, setStep = () => {}, shipment_id, task }) {
 	});
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const selected_priority = (preferences?.list || []).find((item) => item?.selected_priority === item?.priority);
-	const line_items = selected_priority?.data?.[0]?.validities?.[0]?.line_items;
+	const line_items = selected_priority?.data?.[DEFAULT_INDEX]?.line_items;
 
-	const origin_locals = selected_priority?.data?.[0]?.origin_locals;
-	const destination_locals = selected_priority?.data?.[0]?.destination_locals;
+	const origin_locals = selected_priority?.data?.[DEFAULT_INDEX]?.origin_locals;
+	const destination_locals = selected_priority?.data?.[DEFAULT_INDEX]?.destination_locals;
 
 	const origin_locals_line_items = origin_locals?.line_items;
 	const destination_locals_line_items = destination_locals?.line_items;
