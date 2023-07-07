@@ -28,8 +28,8 @@
 
 .accordian_title {
 	display: flex;
+	gap: 4px;
 	align-items: center;
-	gap: 4px
 }
 
 .create_new {

@@ -1,26 +1,26 @@
 .container {
-    padding: 24px;
+	padding: 24px;
 }
 
 .form_container {
-    margin: 24px 0;
+	margin: 24px 0;
 }
 
 .input_fields {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 36px;
-    margin-top: 36px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 36px;
+	margin-top: 36px;
 
-    @media(max-width: 768px) {
-        gap: 24px
-    }
+	@media (max-width: 768px) {
+		gap: 24px;
+	}
 }
 
 .form_element {
-    flex: 1 1 30%;
+	flex: 1 1 30%;
 
-    @media(max-width: 768px) {
-        flex-basis: 100%;
-    }
+	@media (max-width: 768px) {
+		flex-basis: 100%;
+	}
 }
