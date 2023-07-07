@@ -20,15 +20,17 @@ const AddService = dynamic(() => import('./AddService'), { ssr: false });
 const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false });
 
 const DEFAULT_PAGE_LIMIT = 8;
-const SHOW_MORE_PAGE_LIMIT = 16;
+const SHOW_MORE_PAGE_LIMIT = 16; 
+
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+'superadmin', 'admin']
 
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
-	const canAddAdditionalService = ['booking_agent', 'consignee_shipper_booking_agent',
-		'superadmin', 'admin'].includes(activeStakeholder);
+	const canAddAdditionalService = ALLOWED_STAKEHOLDERS.includes(activeStakeholder);
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
