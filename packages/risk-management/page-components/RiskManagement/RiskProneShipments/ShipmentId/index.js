@@ -44,7 +44,7 @@ function ShipmentId({
 						placeholder="Search By Serial Id"
 						value={search}
 						onChange={(e) => setFilters((prev) => ({ ...prev, search: e || undefined }))}
-						suffix={GetIcon({ filters, setFilters })}
+						suffix={<GetIcon filters={filters} setFilters={setFilters} />}
 					/>
 				</div>
 			</div>
