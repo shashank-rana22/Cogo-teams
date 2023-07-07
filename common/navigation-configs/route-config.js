@@ -1,6 +1,5 @@
 import airRepository from './config/air-repository';
 import allocations from './config/allocations';
-import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
@@ -95,7 +94,6 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...referral,
-	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
 	...documentDesk,

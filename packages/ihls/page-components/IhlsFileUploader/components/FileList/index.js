@@ -4,25 +4,25 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyState from '../../../commons/EmptyState';
-import StyledTable from '../../../commons/StyledTable';
-import getConstants from '../../../config/getConstants';
+import EmptyState from '../../../../commons/EmptyState';
+import StyledTable from '../../../../commons/StyledTable';
+import ICON_MAPPING from '../../constants/getIconMapping';
+import STATUS_PILL_MAPPING from '../../constants/getStatusPillMapping';
 import FileData from '../FileData';
 
 import styles from './style.module.css';
 
 function FileList({
-	params,
-	setParams,
-	fileListData,
-	fileListLoading,
+	params = {},
+	setParams = () => {},
+	fileListData = {},
+	fileListLoading = false,
 }) {
 	const [fileInfo, setFileInfo] = useState({
 		fileId   : null,
 		fileName : null,
 	});
 
-	const { STATUS_PILL_MAPPING, ICON_MAPPING } = getConstants();
 	const { setSort, Component } = ICON_MAPPING[params?.sort_type];
 
 	const onClickName = (url) => {
@@ -57,15 +57,18 @@ function FileList({
 		{
 			id       : 4,
 			Header   : 'Status',
-			accessor : ({ status = '' }) => (
-				<Pill
-					key={STATUS_PILL_MAPPING[status]?.label}
-					size="md"
-					color={STATUS_PILL_MAPPING[status]?.color}
-				>
-					{STATUS_PILL_MAPPING[status]?.label}
-				</Pill>
-			),
+			accessor : ({ status = '' }) => {
+				const { label = '', color = '' } = STATUS_PILL_MAPPING[status] || {};
+				return (
+					<Pill
+						key={label}
+						size="md"
+						color={color}
+					>
+						{label}
+					</Pill>
+				);
+			},
 		},
 		{
 			id     : 5,

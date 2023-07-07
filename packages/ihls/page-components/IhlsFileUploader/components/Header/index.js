@@ -6,7 +6,7 @@ import Upload from '../Upload';
 
 import styles from './styles.module.css';
 
-function Header({ refetch }) {
+function Header({ refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 
 	return (
@@ -14,7 +14,7 @@ function Header({ refetch }) {
 			<div className={styles.header}>File Uploader</div>
 
 			<div className={styles.button_container}>
-				<Button type="button" onClick={() => { setShow(true); }}>
+				<Button type="button" onClick={() => setShow(true)}>
 					<IcMCloudUpload fill="#fff" height={16} width={16} style={{ marginRight: '4px' }} />
 					Upload File
 				</Button>

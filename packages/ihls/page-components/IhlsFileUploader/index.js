@@ -2,8 +2,8 @@ import { useAthenaRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import FileList from './FileList';
-import Header from './Header';
+import FileList from './components/FileList';
+import Header from './components/Header';
 
 function IhlsFileUploader() {
 	const { profile = {} } = useSelector((state) => (state));

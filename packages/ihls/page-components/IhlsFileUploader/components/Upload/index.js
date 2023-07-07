@@ -4,7 +4,7 @@ import { UploadController } from '@cogoport/forms';
 import styles from './style.module.css';
 import useBulkFileUpload from './useBulkFileUpload';
 
-function Upload({ refetch, show, setShow }) {
+function Upload({ refetch = () => {}, show = false, setShow = () => {} }) {
 	const {
 		bulkUpload,
 		bulkFileLoading,
@@ -42,10 +42,9 @@ function Upload({ refetch, show, setShow }) {
 
 			<Modal.Footer>
 				<Button
-					type="submit"
+					type="button"
 					size="md"
 					themeType="primary"
-					style={{ marginLeft: 10 }}
 					loading={bulkFileLoading}
 					onClick={handleSubmit(bulkUpload)}
 				>

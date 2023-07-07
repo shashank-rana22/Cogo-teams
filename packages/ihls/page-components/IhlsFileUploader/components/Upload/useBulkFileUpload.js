@@ -7,7 +7,7 @@ import { useSelector } from '@cogoport/store';
 const useBulkFileUpload = ({ refetch, setShow }) => {
 	const { profile = {} } = useSelector((state) => (state));
 
-	const [{ loading: bulkFileLoading = false }, trigger] = useAthenaRequest({
+	const [{ loading: bulkFileLoading }, trigger] = useAthenaRequest({
 		url    : '/athena/save_file_url',
 		method : 'post',
 	}, { manual: true });

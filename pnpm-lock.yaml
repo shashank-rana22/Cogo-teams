@@ -436,8 +436,8 @@ importers:
   common/forms:
     dependencies:
       '@cogoport/components':
-        specifier: ^1.0.429
-        version: 1.0.429(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.430
+        version: 1.0.430(@babel/core@7.22.8)(@cogoport/icons-react@1.0.80)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/globalization':
         specifier: workspace:*
         version: link:../globalization
