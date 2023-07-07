@@ -4,7 +4,7 @@ import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { OPTIONS_MAP } from './constants';
 import styles from './styles.module.css';
 
-function SelectFilter({ filters, setFilters, activeTab }) {
+function SelectFilter({ filters = '', setFilters = () => {}, activeTab = '' }) {
 	const OPTION = OPTIONS_MAP[activeTab] || [];
 	const { originValue, destinationValue, reason, hsCode } = filters || {};
 

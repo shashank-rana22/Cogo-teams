@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 
 const STARTING_SUBSTRING_LENGTH = 0;
-function RenderTooltipComponent({ content, maxLength }) {
+function RenderTooltipComponent({ content = '', maxLength = 0 }) {
 	if (content.length <= maxLength) {
 		return <div>{content}</div>;
 	}

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import TimelineItem from './TimeLineItem';
 
 const NEXT_INDEX_TIMELINE_DATA = 1;
-function ShipmentTimeline({ itemData, isAccordionActive }) {
+function ShipmentTimeline({ itemData = {}, isAccordionActive = false }) {
 	const {
 		shipmentTimelineData = [],
 		shipmentTimelineLoading,

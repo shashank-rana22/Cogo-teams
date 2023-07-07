@@ -5,10 +5,6 @@ import { useEffect, useCallback, useState } from 'react';
 
 const DEFAULT_PAGE_LIMIT = 10;
 const useGetListRiskProne = ({ activeTab }) => {
-	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_risk_prone_shipments',
-		method : 'get',
-	}, { manual: true, autoCancel: false });
 	const [filters, setFilters] = useState({
 		pageIndex        : 1,
 		search           : undefined,
@@ -17,6 +13,12 @@ const useGetListRiskProne = ({ activeTab }) => {
 		reason           : undefined,
 		hsCode           : undefined,
 	});
+
+	const [{ loading, data }, trigger] = useRequest({
+		url    : 'fcl_freight/list_risk_prone_shipments',
+		method : 'get',
+	}, { manual: true, autoCancel: false });
+
 	const { pageIndex, search, originValue, destinationValue, reason, hsCode } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
