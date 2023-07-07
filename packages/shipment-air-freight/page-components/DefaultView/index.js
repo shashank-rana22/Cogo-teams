@@ -5,7 +5,7 @@ import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
-import { useContext, useState, useCallback } from 'react';
+import { useContext, useState, useCallback, useEffect } from 'react';
 
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
@@ -29,6 +29,7 @@ function DefaultView() {
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		servicesList = [], getShipmentStatusCode,
+		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
@@ -67,6 +68,13 @@ function DefaultView() {
 			servicesData : servicesList,
 		},
 	};
+
+	useEffect(() => {
+		if (activeTab) {
+			refetchServices();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeTab]);
 
 	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
