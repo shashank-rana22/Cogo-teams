@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { Modal, Button, Textarea } from '@cogoport/components';
 
 import styles from './styles.module.css';

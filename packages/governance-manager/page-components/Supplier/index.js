@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useGetOrganizationService from '../hooks/useGetOrganizationService';
 import Item from '../ListSupplier/Item';
 
+import ContractSla from './Steps/Contracts&SLA';
 import MarketFeedback from './Steps/MarketFeedback';
 import NeedAnalysis from './Steps/NeedAnalysis';
 import SupplierApproval from './Steps/SupplierApproval';
@@ -48,6 +49,7 @@ function Supplier() {
 				market_feedback     : <MarketFeedback setStatus={setStatus} />,
 				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
 				supplier_approval   : <SupplierApproval setStatus={setStatus} />,
+				contract_sla        : <ContractSla setStatus={setStatus} />,
 			}[status]}
 
 		</div>

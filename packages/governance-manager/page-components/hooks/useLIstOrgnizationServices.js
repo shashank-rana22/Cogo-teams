@@ -25,6 +25,7 @@ function useListOrganizationServices({ currentPage, activeTab, setApprovalStats 
 	};
 	useEffect(() => {
 		listOrganizationServices();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage, activeTab]);
 	return {
 		data       : data?.list,

@@ -61,7 +61,7 @@ function Item({ isSupplierPage = false, item }) {
 			{ !isSupplierPage && (
 				<>
 					<div>
-						<div className={styles.key}>Analysys Status</div>
+						<div className={styles.key}>Analysis Status</div>
 						<div className={styles.value}>
 							<Pill
 								size="md"

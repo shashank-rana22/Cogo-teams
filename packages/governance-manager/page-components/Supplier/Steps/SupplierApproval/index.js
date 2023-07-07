@@ -46,7 +46,7 @@ function SupplierApproval({ setStatus }) {
 				<div className={styles.flex_right}>
 					<Button
 						themeType="secondary"
-						onClick={() => setStatus()}
+						onClick={() => setStatus('contract_sla')}
 					>
 						Save & Do it Later
 
@@ -58,7 +58,7 @@ function SupplierApproval({ setStatus }) {
 							</Tooltip>
 
 						</div>
-						<Button onClick={() => setStatus()}>Submit</Button>
+						<Button onClick={() => setStatus('contract_sla')}>Submit</Button>
 					</div>
 
 				</div>

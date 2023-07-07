@@ -1,16 +1,17 @@
+/* eslint-disable no-magic-numbers */
 import { Placeholder } from '@cogoport/components';
 
 import Item from './Item';
 
 function ListSupplier({ supplierList, loading }) {
 	return (
-		<>
+		<div>
 			{
                 !loading
-				&& supplierList?.map((item, index) => (
+				&& supplierList?.map((item) => (
 					<Item
 						item={item}
-						key={index}
+						key={item}
 					/>
 				))
             }
@@ -24,7 +25,7 @@ function ListSupplier({ supplierList, loading }) {
 					/>
 				))
 			}
-		</>
+		</div>
 	);
 }
 

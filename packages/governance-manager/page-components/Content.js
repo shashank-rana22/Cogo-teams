@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { Pagination } from '@cogoport/components';
 import { useState } from 'react';
 

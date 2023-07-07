@@ -1,0 +1,95 @@
+.wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 16px;
+}
+
+.org_doc {
+	display: flex;
+	flex-direction: column;
+}
+
+.single_doc {
+	position: relative;
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	min-width: 40%;
+	max-width: 48.4%;
+	padding: 16px;
+	margin: 8px;
+	border: 1px solid var(--color-tertiary-lavendar-4);
+	border-radius: 8px;
+
+	:global(.tippy-content) {
+		padding: 0;
+	}
+
+	& > svg {
+		color: var(--color-tertiary-lavendar-1);
+	}
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	font-weight: 500;
+	color: var(--color-tertiary-lavendar-1);
+}
+
+.upload_info {
+	padding-top: 5px;
+	color: var(--color-secondary-greyscale-2);
+}
+
+.button_wrapper {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			color: var(--color-accent-orange-2);
+		}
+	}
+
+	.initial {
+		margin-right: 6px;
+	}
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-2);
+}
+
+.action {
+	padding: 12px 24px;
+	font-size: var(--font-size-sm);
+	color: var(--color-secondary-greyscale-1);
+
+	&:hover {
+		cursor: pointer;
+		background: var(--color-secondary-4);
+	}
+}
+
+.dots {
+	margin-left: auto;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.header {
+	.segmented-control {
+		max-width: 282px;
+		margin: 6px;
+	}
+}
+
+.doc_icon {
+	font-size: 32px;
+	color: var(--color-secondary-greyscale-2);
+}

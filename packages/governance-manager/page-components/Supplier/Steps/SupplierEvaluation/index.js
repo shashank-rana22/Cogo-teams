@@ -1,8 +1,9 @@
+/* eslint-disable no-magic-numbers */
 import { Table, Toggle, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import ScoreModal from './ScoreModal/index.js';
+import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
 
 function SupplierEvaluation({ setStatus }) {
@@ -24,14 +25,12 @@ function SupplierEvaluation({ setStatus }) {
 			accessor : (row) => (
 				<div className={styles.td}>
 					{
-                        row?.score_received === 0
-                        	? (
+                        row?.score_received === 0 ? (
 	<Button themeType="accent" size="sm" onClick={() => { setShow(true); }}>
 		Score
 	</Button>
 
-                        	)
-                        	: row?.score_received
+                        ) : row?.score_received
                     }
 				</div>
 			),
