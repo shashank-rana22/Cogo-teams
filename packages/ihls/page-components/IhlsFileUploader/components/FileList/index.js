@@ -25,6 +25,8 @@ function FileList({
 
 	const { setSort, Component } = ICON_MAPPING[params?.sort_type];
 
+	const { data = {}, count = 0 } = fileListData;
+
 	const onClickName = (url) => {
 		if (url) {
 			window.open(url, '_blank');
@@ -137,7 +139,7 @@ function FileList({
 		setFileInfo({ fileName: null, fileId: null });
 	};
 
-	if (isEmpty(fileListData?.data) && !fileListLoading) {
+	if (isEmpty(data) && !fileListLoading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -153,16 +155,15 @@ function FileList({
 
 	return (
 		<>
-			<StyledTable columns={columns} data={fileListData?.data} loading={fileListLoading} />
+			<StyledTable columns={columns} data={data} loading={fileListLoading} />
 
 			<div className={styles.paginationDiv}>
-				{fileListData?.count > params?.per_page
+				{count > params?.per_page
 					? (
 						<Pagination
-							// type="table"
 							type="number"
 							currentPage={params?.page}
-							totalItems={fileListData?.count}
+							totalItems={count}
 							pageSize={params?.per_page}
 							onPageChange={getNextPage}
 						/>
@@ -170,7 +171,7 @@ function FileList({
 			</div>
 
 			{fileInfo.fileId && (
-				<Modal id={fileInfo.fileId} size="md" show={fileInfo.fileId} onClose={onClose} placement="top">
+				<Modal size="md" show={fileInfo.fileId} onClose={onClose} placement="top">
 					<Modal.Header title={(<div className={styles.file_name}>{fileInfo.fileName}</div>)} />
 
 					<Modal.Body>

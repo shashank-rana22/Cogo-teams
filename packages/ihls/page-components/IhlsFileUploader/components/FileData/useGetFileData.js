@@ -14,11 +14,7 @@ function useGetFileData({ file_id }) {
 		},
 	}, { manual: false });
 
-	const FILE_DATA = [];
-
-	Object.keys(data).forEach((key) => {
-		FILE_DATA.push({ title: FILE_STATS_MAPPING[key], count: data[key] });
-	});
+	const FILE_DATA = Object.entries(data).map(([key, value]) => ({ title: FILE_STATS_MAPPING[key], count: value }));
 
 	return {
 		data: FILE_DATA,
