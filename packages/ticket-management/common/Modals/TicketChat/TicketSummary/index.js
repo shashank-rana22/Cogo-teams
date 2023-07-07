@@ -9,8 +9,9 @@ import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../..
 import styles from './styles.module.css';
 
 function TicketSummary({
-	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers, TicketUser: ticketUser, TicketReviewer: ticketReviewer,
-	TicketStatus: ticketStatus,
+	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
+	TicketReviewer: ticketReviewer = {},
+	TicketStatus: ticketStatus = '',
 }) {
 	const {
 		ID: id = '',

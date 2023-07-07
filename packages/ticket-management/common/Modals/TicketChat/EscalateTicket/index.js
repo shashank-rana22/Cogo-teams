@@ -7,7 +7,10 @@ import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function EscalateTicket({ ticketId, showEscalate, setShowEscalate, updateTicketActivity }) {
+function EscalateTicket({
+	ticketId = '', showEscalate = false, setShowEscalate = () => {},
+	updateTicketActivity = () => {},
+}) {
 	const { control, handleSubmit, formState: { errors }, reset } = useForm();
 
 	const handleClose = () => {
