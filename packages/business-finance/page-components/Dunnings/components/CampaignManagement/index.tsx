@@ -38,7 +38,7 @@ function CampaignManagement() {
 		rowData : null,
 	});
 	const [sort, setSort] = useState({});
-	const [dropdown, setDropdown] = useState([]);
+	const [dropdown, setDropdown] = useState();
 
 	const {
 		cycleData,
