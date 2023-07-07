@@ -28,34 +28,28 @@ interface Props {
 function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, loading = false }:Props) {
 	const { sendMail, mailSendLoading } = useSendMail();
 
+	const showFormattedAmount = (amount, currency) => formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			minimumFractionDigits : 2,
+		},
+	});
+
 	const functions = {
 		renderName: ({ tradePartyDetailName }) => (
 			<div>{showOverflowingNumber(tradePartyDetailName || '-', TEXT_LIMIT_NUM)}</div>
 		),
 		renderOutstandingAmount: ({ outstandingAmount, ledCurrency }) => (
 			<div>
-				{formatAmount({
-					amount   : outstandingAmount,
-					currency : ledCurrency,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'code',
-						minimumFractionDigits : 2,
-					},
-				})}
+				{showFormattedAmount(outstandingAmount, ledCurrency)}
 			</div>
 		),
 		renderOnAccount: ({ onAccountAmount, ledCurrency }) => (
 			<div>
-				{formatAmount({
-					amount   : onAccountAmount,
-					currency : ledCurrency,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'code',
-						minimumFractionDigits : 2,
-					},
-				})}
+				{showFormattedAmount(onAccountAmount, ledCurrency)}
 			</div>
 		),
 		renderCreditController: ({ organizationStakeholderName }) => (
