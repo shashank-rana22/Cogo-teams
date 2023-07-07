@@ -31,6 +31,7 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 			source                   : element?.source || undefined,
 			selected_priority        : element?.selected_priority,
 			api                      : 'booking_preference',
+			shipment_type            : element?.shipment_type,
 		};
 
 		let allocation_ratio = null;

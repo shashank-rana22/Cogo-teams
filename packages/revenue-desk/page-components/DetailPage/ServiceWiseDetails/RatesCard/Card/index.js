@@ -10,6 +10,7 @@ function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
 	sellRates, prefrence_key, fromkey, priority_no, shipmentData,
 }) {
+	console.log(data, ';data');
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
 		if (foundItem) {
@@ -87,6 +88,15 @@ function Card({
 							data?.rowData?.mode ? (
 								<div>
 									<Pill size="md" color="#FEF3E9">{data?.rowData?.mode}</Pill>
+								</div>
+							) : null
+							}
+						</div>
+						<div className={styles.source}>
+							{
+							data?.rowData?.shipment_type ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">{data?.rowData?.shipment_type}</Pill>
 								</div>
 							) : null
 							}
