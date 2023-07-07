@@ -15,7 +15,9 @@ const useCreateShipmentDocument = ({ refetch = () => {} }) => {
 			if (!res.hasError) {
 				Toast.success('Document Created Successfully!!');
 
-				refetch();
+				if (refetch) {
+					refetch();
+				}
 			}
 		} catch (err) {
 			toastApiError(err);
