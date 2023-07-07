@@ -30,7 +30,7 @@ function List({ isSeller = false }) {
 		ShipmentDetailContext,
 	);
 
-	const canAddAdditionalService = primary_service?.trade_type === 'import'
+	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
 
 	const [item, setItem] = useState({});
@@ -126,7 +126,7 @@ function List({ isSeller = false }) {
 
 			<div className={styles.not_added}>
 
-				{canAddAdditionalService
+				{isAdditionalServiceAllowed
 					? (
 						<Button
 							onClick={() => setShowModal('charge_code')}
