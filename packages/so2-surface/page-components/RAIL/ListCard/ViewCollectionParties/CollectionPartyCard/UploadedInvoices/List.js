@@ -1,11 +1,11 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 const MAX_ROWS = 2;
-const DEFAULT_BANK_DETAIL_INDEX = 0;
 
 const PURCHASE_TYPE_LIST = [
 	{
@@ -26,7 +26,7 @@ const PURCHASE_TYPE_LIST = [
 	},
 ];
 
-function List({ data, limit }) {
+function List({ data = [], limit = false }) {
 	const handleLineItemsMapping = (services) => {
 		const SERVICE_LINE_ITEM_MAPPING = {};
 		(services?.mappings || []).forEach((item) => {
@@ -34,7 +34,7 @@ function List({ data, limit }) {
 				SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] = !isEmpty(
 					SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type],
 				)
-					? [...SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type], lineItem?.code]
+					? [...(SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] || []), lineItem?.code]
 					: [lineItem?.code];
 			});
 		});
@@ -78,6 +78,7 @@ function List({ data, limit }) {
 
 		return `${displayType} ${startCase(item?.status)}`;
 	};
+
 	return (
 		<div className={styles.table}>
 			{(data || []).map((item, index) => {
@@ -113,18 +114,20 @@ function List({ data, limit }) {
 							<Tooltip
 								content={(
 									<div>
-										<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_name}</span>
+										<span>{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_name}</span>
 										{' - A/C '}
 										<span>
-											{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_account_number}
+											{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_account_number}
 										</span>
 									</div>
 								)}
 							>
 								<div className={styles.bank_details}>
-									<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_name}</span>
+									<span>{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_name}</span>
 									{' - A/C '}
-									<span>{item?.bank_details?.[DEFAULT_BANK_DETAIL_INDEX]?.bank_account_number}</span>
+									<span>
+										{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_account_number}
+									</span>
 								</div>
 							</Tooltip>
 						</div>
@@ -170,7 +173,7 @@ function List({ data, limit }) {
 						<div className={styles.column} style={{ width: '20%' }}>
 							{item?.status === 'coe_rejected' ? (
 								<Tooltip
-									content={<p>{(item.remarks || []).join(' , ')}</p>}
+									content={<p>{(item?.remarks || []).join(' , ')}</p>}
 								>
 									<Pill>{purchaseType(item)}</Pill>
 								</Tooltip>

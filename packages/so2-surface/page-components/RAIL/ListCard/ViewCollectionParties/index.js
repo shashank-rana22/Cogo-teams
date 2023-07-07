@@ -39,14 +39,14 @@ function ViewCollectionParties({ shipmentId }) {
 	);
 
 	return (
-		<div>
+		<section>
 			<div className={styles.line} />
 			<div className={styles.main}>
 				{loading
 					? getLoader()
 					: getCollectionPartyCard()}
 			</div>
-		</div>
+		</section>
 	);
 }
 

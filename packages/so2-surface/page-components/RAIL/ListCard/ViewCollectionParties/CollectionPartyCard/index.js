@@ -24,9 +24,7 @@ function CollectionPartyCard({ data }) {
 
 	return (
 		<main className={styles.main}>
-			<section
-				role="button"
-				tabIndex={0}
+			<button
 				onClick={() => (isCollectionPartyAvailable ? setShowInvoices(!showInvoices) : null)}
 				style={isCollectionPartyAvailable ? { cursor: 'pointer' } : null}
 				className={styles.section}
@@ -91,7 +89,7 @@ function CollectionPartyCard({ data }) {
 				<div className={styles.arrow}>
 					{getArrow()}
 				</div>
-			</section>
+			</button>
 			{showInvoices ? <UploadedInvoices invoices={data?.collection_parties} /> : null}
 		</main>
 	);

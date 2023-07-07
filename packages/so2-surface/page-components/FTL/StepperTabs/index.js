@@ -11,7 +11,7 @@ function StepperTabs() {
 	const tabsConfig = TabContainer();
 
 	const onStepperTabChange = (val) => {
-		const firstTab = tabsConfig[val]?.[0];
+		const [firstTab] = tabsConfig[val] || [];
 
 		const tempFilters = filters;
 		tempFilters.page = 1;

@@ -14,9 +14,7 @@ function ListCard({ item = {} }) {
 			<ListHeader item={item} />
 			<ListBody item={item} />
 			{dropDown ? <ViewCollectionParties shipmentId={item?.id} /> : null}
-			<div
-				role="button"
-				tabIndex={0}
+			<button
 				onClick={() => setDropDown(!dropDown)}
 				className={styles.dropdown}
 			>
@@ -31,7 +29,7 @@ function ListCard({ item = {} }) {
 						<IcMArrowDown />
 					</div>
 				) }
-			</div>
+			</button>
 		</div>
 	);
 }
