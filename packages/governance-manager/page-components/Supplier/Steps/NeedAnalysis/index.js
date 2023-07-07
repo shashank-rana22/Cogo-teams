@@ -4,7 +4,7 @@ import { useState } from 'react';
 import EvaluateModal from './EvaluateModal';
 import styles from './styles.module.css';
 
-function NeedAnalysis() {
+function NeedAnalysis({ setStatus }) {
 	const [show, setShow] = useState(false);
 
 	const columns = [
@@ -63,7 +63,7 @@ function NeedAnalysis() {
 		<>
 			<Table columns={columns} data={data} className={styles.table} />
 			<div className={styles.submit_btn}>
-				<Button>
+				<Button onClick={() => setStatus('market_feedback')}>
 					Submit & Next
 				</Button>
 			</div>

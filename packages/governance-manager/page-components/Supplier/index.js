@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 
 import Item from '../ListSupplier/Item';
 
-// import MarketFeedback from './Steps/MarketFeedback';
-// import NeedAnalysis from './Steps/NeedAnalysis';
 import ContractSla from './Steps/Contracts&SLA';
+import MarketFeedback from './Steps/MarketFeedback';
+import NeedAnalysis from './Steps/NeedAnalysis';
+import SupplierApproval from './Steps/SupplierApproval';
+import SupplierEvaluation from './Steps/SupplierEvaluation';
 import styles from './styles.module.css';
 
 function Supplier() {
@@ -18,23 +20,27 @@ function Supplier() {
 		{ title: 'Contract and SLA', key: 'contract_sla' },
 
 	];
-	const [active, setActive] = useState('market_feedback');
+	const [status, setStatus] = useState('need_analysis');
 	return (
-		<>
-			<h2>Governance Mangager</h2>
+		<div>
+			<h2>Governance Manager</h2>
 			<Item isSupplierPage />
 			<Stepper
-				active={active}
-				setActive={setActive}
+				active={status}
+				setActive={setStatus}
 				items={items}
 				shadowed
 				className={styles.stepper}
 			/>
-			{/* <NeedAnalysis /> */}
-			{/* <MarketFeedback /> */}
-			<ContractSla />
+			{{
+				need_analysis       : <NeedAnalysis setStatus={setStatus} />,
+				market_feedback     : <MarketFeedback setStatus={setStatus} />,
+				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
+				supplier_approval   : <SupplierApproval setStatus={setStatus} />,
+				contract_sla        : <ContractSla setStatus={setStatus} />,
+			}[status]}
 
-		</>
+		</div>
 	);
 }
 export default Supplier;

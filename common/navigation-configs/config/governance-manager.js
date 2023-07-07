@@ -1,10 +1,10 @@
 const governanceManager = {
-	'/[partner_id]/governance_manager': {
+	'/[partner_id]/governance-manager': {
 		layoutType : 'no_header',
 		navigation : 'governance_manager',
 		isMainNav  : true,
 	},
-	'/[partner_id]/governance_manager/[id]': {
+	'/[partner_id]/governance-manager/[id]': {
 		layoutType : 'no_header',
 		navigation : 'governance_manager',
 		isMainNav  : true,

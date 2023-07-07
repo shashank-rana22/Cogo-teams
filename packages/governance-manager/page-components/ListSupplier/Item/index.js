@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function Item({ isSupplierPage = false }) {
+function Item({ isSupplierPage = false, item }) {
 	const { push } = useRouter();
 	const navigate = () => {
 		push(
@@ -17,6 +17,22 @@ function Item({ isSupplierPage = false }) {
 			'/governance-manager/',
 		);
 	};
+	const SERVICE_NAME_MAPPING = {
+		fcl_freight             : 'FCL Freight',
+		lcl_freight             : 'LCL Freight',
+		ftl_freight             : 'FTL Freight',
+		ltl_freight             : 'LTL Freight',
+		air_freight             : 'AIR Freight',
+		trailer_freight         : 'Trailer Freight',
+		haulage_freight         : 'Haulage Freight',
+		rail_domestic_freight   : 'Rail Domestic Freight',
+		fcl_freight_local_agent : 'FCL Freight Local Agent',
+		air_customs             : 'AIR Customs',
+		air_freight_local       : 'AIR Freight Local',
+		fcl_customs             : 'FCL Customs',
+		lcl_customs             : 'LCL Customs',
+		fcl_cfs                 : 'FCL CFS',
+	};
 
 	return (
 		<div className={styles.item}>
@@ -29,7 +45,7 @@ function Item({ isSupplierPage = false }) {
 			)}
 			<div>
 				<div className={styles.key}>Supplier Name</div>
-				<div className={styles.value}>Dragon City Private Limited</div>
+				<div className={styles.value}>{item?.organization?.business_name}</div>
 			</div>
 			<div>
 				<div className={styles.key}>Home Country</div>
@@ -38,8 +54,7 @@ function Item({ isSupplierPage = false }) {
 			<div>
 				<div className={styles.key}>Service Provided</div>
 				<div className={styles.value}>
-					FCL | LCL | Trucking &nbsp;
-					<span className={styles.more}>+1 more</span>
+					{SERVICE_NAME_MAPPING[item?.service]}
 				</div>
 			</div>
 

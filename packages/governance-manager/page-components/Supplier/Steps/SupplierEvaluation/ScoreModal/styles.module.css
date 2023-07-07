@@ -1,0 +1,38 @@
+.parent {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.header {
+	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.maximum_score {
+	margin-bottom: 12px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.input_score {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.reason {
+	height: 79px;
+	margin-top: 2px;
+}
+
+.reason_main {
+	margin-top: 20px;
+	font-size: 12px;
+	font-weight: 500;
+}

@@ -238,6 +238,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMCrm,
 		possible_apis : [
+			...apis.governance_manager,
 		],
 		main_apis   : [],
 		module_type : 'crm',
