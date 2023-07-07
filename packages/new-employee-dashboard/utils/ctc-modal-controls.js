@@ -183,7 +183,9 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 			heading     : 'Incentives [E]',
 			yearlyValue : Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
 						+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-						+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO),
+						+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
+						+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
+						+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO),
 			monthlyValue:
 						Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
 						+ Number(data?.monthlyPerformance || CONSTANT_ZERO)
@@ -199,7 +201,10 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 			yearlyValue:
 					Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
 					+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO) + sum + statutorySum(basicYearlyValue)
+					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
+					+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
+					+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO)
+					+ sum + statutorySum(basicYearlyValue)
 					+ Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
 					+ CONSTANT_TWENTY_FOUR_HUNDRED + flexible_benefit_sum,
@@ -217,7 +222,10 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 			yearlyValue:
 					ctcInput * variable_split + Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
 					+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO) + sum + statutorySum(basicYearlyValue)
+					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
+					+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
+					+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO)
+					+ sum + statutorySum(basicYearlyValue)
 					+ Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
 					+ CONSTANT_TWENTY_FOUR_HUNDRED + flexible_benefit_sum,
