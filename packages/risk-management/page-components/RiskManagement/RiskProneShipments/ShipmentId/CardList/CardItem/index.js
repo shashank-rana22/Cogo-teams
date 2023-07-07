@@ -79,7 +79,7 @@ function CardItem({ itemData = {} }) {
 			<div className={styles.column2}>
 				<h5>Risk Reason</h5>
 				{alarms.map((item) => (
-					<div className={styles.container_pickup} key={item}>
+					<div className={styles.container_pickup} key={item?.id}>
 						<div className={styles.not_picked}>
 							{startCase(item?.risk_sub_reason)}
 						</div>
