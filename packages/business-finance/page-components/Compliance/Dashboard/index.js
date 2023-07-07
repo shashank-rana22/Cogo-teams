@@ -7,33 +7,36 @@ import { lastThreeFinancialYears } from '../Register/Outward/helper';
 
 import styles from './styles.module.css';
 
+const GET_ZERO_INDEX = 0;
+
 function Dashboard() {
 	const [year, setYear] = useState('');
-	const { data, loading } = useDashboard(year);
+	const { data, loading } = useDashboard(year, lastThreeFinancialYears);
 	const {
 		totalUploaded,
 		fullMatchTotal,
 		erroredOutTotal,
 	} = data || {};
+
 	const getInvoiceData = [
 		{
 			label : 'Total Invoices Uploaded',
-			value : totalUploaded || '-',
+			value : totalUploaded || '0',
 			icon  : <IcMFileUploader height="25px" width="25px" />,
 		},
 		{
 			label : 'Total Errored Out Uploaded',
-			value : erroredOutTotal || '-',
+			value : erroredOutTotal || '0',
 			icon  : <IcMInvoiceTriggers height="25px" width="25px" />,
 		},
-		{ label: 'Full Match', value: fullMatchTotal || '-', icon: <IcMActivePlans height="25px" width="25px" /> },
+		{ label: 'Full Match', value: fullMatchTotal || '0', icon: <IcMActivePlans height="25px" width="25px" /> },
 	];
 
 	return (
 		<div>
 			<div className={styles.select_container}>
 				<Select
-					value={year}
+					value={year || lastThreeFinancialYears?.[GET_ZERO_INDEX]?.value}
 					onChange={(val) => { setYear(val); }}
 					placeholder="Financial Year"
 					options={lastThreeFinancialYears}

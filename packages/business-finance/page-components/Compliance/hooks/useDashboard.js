@@ -3,7 +3,8 @@ import { useCallback, useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useDashboard = (year) => {
+const GET_ZERO_INDEX = 0;
+const useDashboard = (year, lastThreeFinancialYears) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/ey-authentication-stats',
@@ -16,13 +17,13 @@ const useDashboard = (year) => {
 		try {
 			await trigger({
 				params: {
-					startYear: year || undefined,
+					startYear: year || lastThreeFinancialYears?.[GET_ZERO_INDEX]?.value || undefined,
 				},
 			});
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, year]);
+	}, [lastThreeFinancialYears, trigger, year]);
 
 	useEffect(() => { refetch(); }, [refetch]);
 
