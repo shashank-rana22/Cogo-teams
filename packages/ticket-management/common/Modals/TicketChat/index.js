@@ -1,11 +1,11 @@
 import { Modal } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import ReassignTicket from '../../ReassignTicket';
 
 import ChatBody from './ChatBody';
 import FooterChat from './FooterChat';
@@ -15,9 +15,10 @@ import TicketSummary from './TicketSummary';
 
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
+const DEFAULT_TICKET_ACTIVITY = 0;
 
-const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
-	if (!ticketExists) {
+const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
+	if (!doesTicketsExists) {
 		return '100%';
 	}
 	if (['closed', 'rejected'].includes(status)) {
@@ -29,7 +30,10 @@ const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
 	return 'calc(100% - 75px)';
 };
 
-function TicketChat({ modalData = {}, setModalData = () => {} }) {
+function TicketChat({
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
+	setShowReassign = () => {},
+}) {
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
@@ -50,15 +54,16 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 
 	const {
 		getTicketDetails = () => {},
-		ticketData = '',
+		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } = ticketData || {};
+	const {
+		Ticket: ticket = {}, IsClosureAuthorizer: isClosureAuthorizer = false,
+	} = ticketData || {};
 
-	const { Rating: rating = 0 } = ticketFeedback || {};
 	const { Status: status = '' } = ticket || {};
 
 	const {
@@ -70,23 +75,29 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const refetchTicket = () => {
+	const isEmptyChat = isEmpty(listData?.items);
+
+	const refreshTickets = () => {
 		setListData({
 			items       : [],
 			page        : 0,
 			total_pages : 0,
 		});
 		getTicketDetails();
-		getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
+		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
+
+		setIsUpdated(true);
 	};
 
-	const isEmptyChat = isEmpty(listData?.items || {});
-
-	const { createTicketActivity = () => {}, createLoading = false } =		useCreateTicketActivity({
+	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({
 		ticketId: modalData?.ticketId || '',
-		refetchTicket,
+		refreshTickets,
 		scrollToBottom,
 	});
+
+	const doesTicketsExists = !isEmpty(ticketData);
+
+	const loading = chatLoading || createLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -107,10 +118,6 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		}
 	};
 
-	const ticketExists = typeof ticketData === 'object' || false;
-
-	const loading = chatLoading || createLoading;
-
 	useEffect(() => {
 		if (!isEmptyChat) {
 			scrollToBottom();
@@ -124,8 +131,9 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
-						refetchTicket={refetchTicket}
-						ticketExists={ticketExists}
+						refreshTickets={refreshTickets}
+						setShowReassign={setShowReassign}
+						isClosureAuthorizer={isClosureAuthorizer}
 					/>
 				)}
 			/>
@@ -133,13 +141,12 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 				<div
 					className={styles.container}
 					style={{
-						height: chatBodyHeight(
-							rating,
-							ticketExists,
+						height: getChatBodyHeight({
+							doesTicketsExists,
 							status,
 							file,
 							uploading,
-						),
+						}),
 					}}
 				>
 					<ChatBody
@@ -149,12 +156,12 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 						messageRef={messageRef}
 						getTicketActivity={getTicketActivity}
 						ticketData={ticketData}
-						ticketExists={ticketExists}
+						doesTicketsExists={doesTicketsExists}
 						setModalData={setModalData}
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{ticketExists && (
+				{doesTicketsExists && (
 					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
 						{!['closed', 'rejected'].includes(status)
 							&& (
@@ -171,11 +178,19 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 							)}
 					</div>
 				)}
-				{ticketExists && (
+				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} ticketExists={ticketExists} />
+						<TicketSummary {...ticketData} />
 					</div>
 				)}
+
+				<ReassignTicket
+					ticketId={modalData?.ticketId}
+					showReassign={showReassign}
+					setShowReassign={setShowReassign}
+					getTicketActivity={getTicketActivity}
+					getTicketDetails={getTicketDetails}
+				/>
 			</Modal.Body>
 		</>
 	);
