@@ -163,11 +163,11 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 			id       : 'irn',
 			accessor : ({ failureCount, successCount, status }) => {
 				const total = failureCount + successCount;
-				const successPer = isEmpty(total) ? (successCount / total) * PERCENTAGE_FACTOR : null;
-				const failurePer = isEmpty(total) ? (failureCount / total) * PERCENTAGE_FACTOR : null;
+				const successPer = !isEmpty(total) ? (successCount / total) * PERCENTAGE_FACTOR : null;
+				const failurePer = !isEmpty(total) ? (failureCount / total) * PERCENTAGE_FACTOR : null;
 
 				return (
-					isEmpty(total) ? (
+					!isEmpty(total) ? (
 						<div className={styles.main_summary}>
 							<div
 								className={styles.success}
