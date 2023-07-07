@@ -64,6 +64,33 @@ const TAB_CONFIG = {
 				invoice_type  : 'purchase_invoice',
 			},
 		},
+		{
+			label   : 'Eway Bill Validity',
+			value   : 'eway_bill_validity',
+			stats   : 'eway_bill_validity_counts',
+			payload : {
+				shipment_type : 'ftl_freight',
+				e_way_bill    : true,
+			},
+		},
+		{
+			label   : 'Completed Shipment',
+			value   : 'completed_shipment',
+			stats   : 'completed_shipments_counts',
+			payload : {
+				shipment_type : 'ftl_freight',
+				invoice_type  : 'purchase_invoice',
+			},
+		},
+		{
+			label   : 'Cancelled Shipment',
+			value   : 'cancelled_shipment',
+			stats   : 'cancelled_shipments_counts',
+			payload : {
+				shipment_type : 'ftl_freight',
+				invoice_type  : 'purchase_invoice',
+			},
+		},
 	],
 };
 const TabContainer = () => TAB_CONFIG;

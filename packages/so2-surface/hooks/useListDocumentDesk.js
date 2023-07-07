@@ -9,6 +9,7 @@ import DashboardContext from '../context/DashboardContext';
 
 const PAGE_SIZE = 20;
 const MIN_PAGE_VALUE = 1;
+const CANCELED_ERROR = 'canceled';
 
 const useListDocumentDesk = () => {
 	const dashboardContextValues = useContext(DashboardContext);
@@ -29,7 +30,8 @@ const useListDocumentDesk = () => {
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
 			},
-			pending_task_required    : true,
+			pending_task_required: !['eway_bill_validity',
+				'cancelled_shipment', 'completed_shipment'].includes(activeTab),
 			service_details_required : true,
 			sort_by                  : filters?.sortValue,
 			sort_type                : filters?.order,
@@ -49,7 +51,7 @@ const useListDocumentDesk = () => {
 			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
-
+			if (err?.message === CANCELED_ERROR) { return; }
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 		}
 	}, [trigger, setFilters, page, filters]);

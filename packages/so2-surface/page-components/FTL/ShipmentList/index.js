@@ -11,6 +11,8 @@ import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
+const isSelectable = (activeTab) => !['completed_shipment', 'cancelled_shipment'].includes(activeTab);
+
 function ShipmentList({ loading, data = {} }) {
 	const { activeTab, setFilters, filters } = useContext(DashboardContext);
 	const { apiTrigger, loading: reallocateLoading } = useBulkUpdateSO2();
@@ -42,6 +44,8 @@ function ShipmentList({ loading, data = {} }) {
 		setCheckedRows(new Set());
 	}, [activeTab, setCheckedRows]);
 
+	const isCardSelectable = !!isSelectable(activeTab);
+
 	return (
 		<div>
 			{!loading && isEmpty(list)
@@ -49,16 +53,18 @@ function ShipmentList({ loading, data = {} }) {
 				: (
 					<>
 						<div className={styles.list_controller}>
-							<div>
-								<Checkbox
-									label="Select All"
-									checked={!isEmpty(list)
+							{isCardSelectable ? (
+								<div>
+									<Checkbox
+										label="Select All"
+										checked={!isEmpty(list)
 								&& checkedRows?.size === list?.length}
-									onChange={(e) => (e?.target?.checked ? setCheckedRows(
-										new Set(list?.map((item) => item?.id)),
-									) : setCheckedRows(new Set()))}
-								/>
-							</div>
+										onChange={(e) => (e?.target?.checked ? setCheckedRows(
+											new Set(list?.map((item) => item?.id)),
+										) : setCheckedRows(new Set()))}
+									/>
+								</div>
+							) : <div />}
 							<Pagination />
 						</div>
 
@@ -69,24 +75,29 @@ function ShipmentList({ loading, data = {} }) {
 								setCheckedRows={setCheckedRows}
 								key={item.id}
 								activeTab={activeTab}
+								isSelectable={isCardSelectable}
 							/>
 						))}
-						<div className={styles.action_buttons}>
-							<Button
-								size="lg"
-								onClick={() => { setCheckedRows(new Set()); }}
-								themeType="tertiary"
-							>
-								<div className={styles.action_text}>Clear</div>
-							</Button>
+						{
+						isCardSelectable && 	(
+							<div className={styles.action_buttons}>
+								<Button
+									size="lg"
+									onClick={() => { setCheckedRows(new Set()); }}
+									themeType="tertiary"
+								>
+									<div className={styles.action_text}>Clear</div>
+								</Button>
 
-							<Button
-								size="lg"
-								onClick={() => { setShow(true); }}
-							>
-								<div className={styles.action_text}>Reallocate</div>
-							</Button>
-						</div>
+								<Button
+									size="lg"
+									onClick={() => { setShow(true); }}
+								>
+									<div className={styles.action_text}>Reallocate</div>
+								</Button>
+							</div>
+						)
+						}
 
 						<Pagination />
 						{show
