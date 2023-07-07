@@ -1,5 +1,6 @@
 import { Input } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
@@ -101,6 +102,7 @@ function DefaultForm({
 								</div>
 							)}
 							{!isEmpty(formValues?.address) && isShipper
+							&& !isEmpty(pan_options[formValues.trade_party_id][GLOBAL_CONSTANTS.zeroth_index].value)
 								&&	 (
 									<div className={styles.form_item_container}>
 										<label className={styles.form_label}>Select PAN</label>
@@ -117,6 +119,7 @@ function DefaultForm({
 									</div>
 								)}
 							{!isEmpty(formValues?.address) && isShipper
+							&& !isEmpty(gstin_options[formValues.trade_party_id][GLOBAL_CONSTANTS.zeroth_index].value)
 								&& (
 									<div className={styles.form_item_container}>
 										<label className={styles.form_label}>Select GSTIN</label>
