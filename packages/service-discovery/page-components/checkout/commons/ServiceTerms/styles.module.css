@@ -1,64 +1,62 @@
 .container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    :global {
-        .ui_checkbox_container {
-            padding: unset;
-            margin-top: 12px;
-        }
+	:global {
+		.ui_checkbox_container {
+			padding: unset;
+			margin-top: 12px;
+		}
 
-        .ui_checkbox_style {
-            margin-left: 0px;
-        }
-    }
+		.ui_checkbox_style {
+			margin-left: 0;
+		}
+	}
 }
 
 .show_container {
-    display: flex;
+	display: flex;
 	flex-direction: column;
-	background: #ffffff;
-	border-radius: 4px;
 	padding: 16px;
+	background: #fff;
+	border-radius: 4px;
 }
 
 .text {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 .accordion {
-    margin-top: 32px;
+	margin-top: 32px;
 
-    :global {
-        .ui_accordion_content {
-            padding: unset !important;
-            margin: 0px 12px;
-        }
+	:global {
+		.ui_accordion_content {
+			padding: unset !important;
+			margin: 0 12px;
+		}
 
-
-        .ui_accordion_header {
-            background: #F0F0F0 !important;
-        }
-    }
+		.ui_accordion_header {
+			background: #f0f0f0 !important;
+		}
+	}
 }
 
-
 .bold_700 {
-    font-weight: 700;
+	font-weight: 700;
 }
 
 .bold_600 {
-    font-weight: 600;
-    margin-left: 8px;
+	margin-left: 8px;
+	font-weight: 600;
 }
 
 .flex {
-    display: flex;
+	display: flex;
 }
 
 .button {
-    display: inline;
-    padding: 4px !important;
-    color: #F68B21 !important;
-    font-weight: 600;
+	display: inline;
+	padding: 4px !important;
+	font-weight: 600;
+	color: #f68b21 !important;
 }

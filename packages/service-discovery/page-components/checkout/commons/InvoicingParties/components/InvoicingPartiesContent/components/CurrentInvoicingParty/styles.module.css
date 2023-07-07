@@ -1,90 +1,89 @@
 .container {
-    border: 1px solid #F7F7FD;
-    padding: 20px;
-    background-color: #FBFBFF;
-    margin: 8px 0px 20px 0px
+	padding: 20px;
+	margin: 8px 0 20px;
+	background-color: #fbfbff;
+	border: 1px solid #f7f7fd;
 }
 
 .invoice_content {
-    display: flex;
+	display: flex;
 }
 
 .left_content {
-    flex-basis: 54%;
+	flex-basis: 54%;
 }
 
 .right_content {
-    flex-basis: 56%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-basis: 56%;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .text {
-    font-size: 12px;
-    color: #000;
+	font-size: 12px;
+	color: #000;
 }
 
 .flex {
-    display: flex;
+	display: flex;
 }
 
 .gst {
-    font-weight: 600;
-    margin-top: 12px;
+	margin-top: 12px;
+	font-weight: 600;
 }
 
 .org_name {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: left;
-    margin-top: 4px;
-
+	margin-top: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: left;
 }
 
 .payment_modes {
-    display: flex;
-    margin-top: 32px;
+	display: flex;
+	margin-top: 32px;
 
-    :global {
-        .ui_chips_container {
-            flex-wrap: wrap;
-        }
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
 
-        .ui_chip_container svg{
-            display: none;
-        }
+		.ui_chip_container svg {
+			display: none;
+		}
 
-        .ui_chip_container.ui_ps_themeType_primary{
-            background-color: #FFFFFF;
-            border: 1px solid #ECECEC;
-            border-radius: 28px;
-            padding: 16px;
+		.ui_chip_container.ui_ps_themeType_primary {
+			padding: 16px;
+			background-color: #fff;
+			border: 1px solid #ececec;
+			border-radius: 28px;
 
-            &:hover{
-                background-color: #FFFFFF;
-                border: 1px solid #ECECEC;
-            }
-        }
-        .ui_chip_container.ui_ps_themeType_secondary{
-            background-color: #FCDC00;
-            border: 1px solid #FCDC00;
-            border-radius: 28px;
-            padding: 16px;
+			&:hover {
+				background-color: #fff;
+				border: 1px solid #ececec;
+			}
+		}
 
-            &:hover{
-                background-color: #FCDC00;
-                border: 1px solid #FCDC00;
-            }
-        }
-    }
+		.ui_chip_container.ui_ps_themeType_secondary {
+			padding: 16px;
+			background-color: #fcdc00;
+			border: 1px solid #fcdc00;
+			border-radius: 28px;
+
+			&:hover {
+				background-color: #fcdc00;
+				border: 1px solid #fcdc00;
+			}
+		}
+	}
 }
 
 .label {
-    font-size: 12px;
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: 8px;
-    margin-left: 4px;
-
+	margin-bottom: 8px;
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: left;
 }

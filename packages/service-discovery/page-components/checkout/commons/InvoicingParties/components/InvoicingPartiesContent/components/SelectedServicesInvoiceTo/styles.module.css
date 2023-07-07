@@ -1,7 +1,7 @@
 .container {
-	margin: -4px;
 	display: flex;
 	flex-wrap: wrap;
+	margin: -4px;
 }
 
 .item {
@@ -9,10 +9,10 @@
 }
 
 .content {
-	background: #f4fafa;
-	border-radius: 4px;
-    border: 1px solid #A9EAF1;
+	padding: 4px 16px;
 	font-size: 12px;
 	font-weight: 400;
-	padding: 4px 16px;
+	background: #f4fafa;
+	border: 1px solid #a9eaf1;
+	border-radius: 4px;
 }

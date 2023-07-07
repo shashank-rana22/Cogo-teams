@@ -1,6 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
+
+const MAX_PERCENT_VALUE = 100;
+
+const DELTA_VALUE = 1;
 
 function getInvoicingPartyPrice({
 	serviceRates,
@@ -44,10 +49,10 @@ function getTax(
 	primaryServiceDetails,
 	lineItemCurrency,
 ) {
-	let tax = price * ((taxPercent / 100) + 1);
+	let tax = price * (taxPercent / MAX_PERCENT_VALUE + DELTA_VALUE);
 
 	if (primaryServiceDetails.tax_total_price_currency !== lineItemCurrency) {
-		tax *= currencyConversionDelta + 1;
+		tax *= currencyConversionDelta + DELTA_VALUE;
 	}
 
 	return tax;
@@ -65,19 +70,23 @@ function getExtraCharges({
 	(Object.keys(booking_charges) || []).forEach((charge) => {
 		const lineItem = booking_charges[charge].line_items;
 		let price = 0;
-		if (invoicingPartyCurrency === lineItem[0].currency) {
-			price = lineItem[0].total_price_discounted;
+		if (
+			invoicingPartyCurrency
+			=== lineItem[GLOBAL_CONSTANTS.zeroth_index].currency
+		) {
+			price = lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted;
 		} else {
-			const toBaseCurrency =				lineItem[0].total_price_discounted * currencies[lineItem?.[0].currency];
+			const toBaseCurrency =				lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted
+				* currencies[lineItem?.[GLOBAL_CONSTANTS.zeroth_index].currency];
 
 			price = toBaseCurrency / currencies[invoicingPartyCurrency];
 		}
 		const tax = getTax(
 			price,
-			lineItem[0].tax_percent,
+			lineItem[GLOBAL_CONSTANTS.zeroth_index].tax_percent,
 			currency_conversion_delta,
 			primaryServiceDetails,
-			lineItem[0].currency,
+			lineItem[GLOBAL_CONSTANTS.zeroth_index].currency,
 		);
 
 		extraCharges += tax;
@@ -86,7 +95,12 @@ function getExtraCharges({
 	return extraCharges;
 }
 
-function TotalCost({ rate = {}, conversions = {}, invoicingParty = {}, detail = {} }) {
+function TotalCost({
+	rate = {},
+	conversions = {},
+	invoicingParty = {},
+	detail = {},
+}) {
 	const {
 		cogofx_currencies = {},
 		currencies = {},
@@ -99,11 +113,9 @@ function TotalCost({ rate = {}, conversions = {}, invoicingParty = {}, detail = 
 
 	const { primary_service = '' } = detail;
 
-	const { invoice_currency:invoicingPartyCurrency, services = [] } = invoicingParty;
+	const { invoice_currency: invoicingPartyCurrency, services = [] } = invoicingParty;
 
-	const invoiceServices = (services || []).map(
-		(item) => item.service_id,
-	);
+	const invoiceServices = (services || []).map((item) => item.service_id);
 
 	invoicingPartyPrice = getInvoicingPartyPrice({
 		serviceRates,
@@ -155,9 +167,7 @@ function TotalCost({ rate = {}, conversions = {}, invoicingParty = {}, detail = 
 		<div className={styles.container}>
 			<div className={styles.text}>Total</div>
 
-			<div className={styles.total_price}>
-				{totalDisplayString}
-			</div>
+			<div className={styles.total_price}>{totalDisplayString}</div>
 		</div>
 	);
 }
