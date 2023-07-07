@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
 import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
+import useGetAsyncTicketOptions from '../../../hooks/useGetAsyncTicketOptions';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -42,8 +43,11 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
+	asyncFieldsListAgents,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -104,8 +108,15 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_chat_agents                     : asyncFieldsListAgents,
+};
+
+const MICRO_SERVICE_HOOKS_MAPPING = {
+	tickets: useGetAsyncTicketOptions,
 };
 
 function AsyncSelect(props) {
@@ -118,16 +129,21 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
+		service,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = (microService || defaultParams.microService)
-		? useGetAsyncOptionsMicroservice
+	const mircoService = (microService || defaultParams.microService);
+	const microservicHook = mircoService ? MICRO_SERVICE_HOOKS_MAPPING[microService]
+	|| useGetAsyncOptionsMicroservice : null;
+
+	const microServiceAsyncOptionsHook = microService
+		? microservicHook
 		: useGetAsyncOptions;
 
-	const getAsyncOptionsProps = asyncOptionsHook({
+	const getAsyncOptionsProps = microServiceAsyncOptionsHook({
 		...defaultParams,
 		initialCall,
 		onOptionsChange,

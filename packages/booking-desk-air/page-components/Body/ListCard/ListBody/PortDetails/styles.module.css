@@ -1,0 +1,69 @@
+.port_details_container {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	padding: 4px;
+	font-size: 12px;
+}
+
+.service_icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 24px;
+	color: #ed3726;
+
+	svg {
+		width: 24px;
+		height: 24px;
+		fill: #ed3726;
+	}
+}
+
+.single_service_origin {
+	display: flex;
+	flex-direction: column;
+	width: 45%;
+}
+
+.port_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	svg {
+		width: 24px;
+		height: 16px;
+	}
+}
+
+.port_details_description {
+	align-items: center;
+	width: 45%;
+}
+
+.line {
+	border-right: 1px solid #e0e0e0;
+}
+
+.single_service_port {
+	display: flex;
+}
+
+.port_container {
+	padding: 12px;
+}
+
+.service_name {
+	text-align: center;
+}
+
+.port_code {
+	font-size: 14px;
+	color: #828282;
+}
+
+.display_name {
+	font-size: 12px;
+	font-weight: 600;
+}

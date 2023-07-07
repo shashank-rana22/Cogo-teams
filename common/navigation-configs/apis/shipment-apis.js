@@ -1584,10 +1584,15 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_shipment_consolidated_purchase_invoices',
+		api          : 'get_ftl_freight_rate_min_max_validity_dates',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api:'list_shipment_consolidated_purchase_invoices',
+		access_type  : 'private',
+		service_name : 'shipment',
+	}
 ];
 
 export default apis;

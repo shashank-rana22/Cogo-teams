@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	onSnapshot,
 	query,
@@ -8,9 +9,14 @@ import {
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
 import useListCogooneTimeline from './useListCogooneTimeline';
 
-const useGetMessages = ({ activeChatCollection, id }) => {
+const PAGE_LIMIT = 10;
+const LAST_INDEX_FROM_END = 1;
+
+const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 	const [messagesState, setMessagesState] = useState({});
 
 	const firstMessages = useRef(null);
@@ -37,14 +43,16 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 		if (activeChatCollection) {
 			const chatCollectionQuery = query(
 				activeChatCollection,
+				...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
 				orderBy('created_at', 'desc'),
-				limit(10),
+				limit(PAGE_LIMIT),
 			);
 			firstMessages.current = onSnapshot(
 				chatCollectionQuery,
 				(querySnapshot) => {
-					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
-					const islastPage = querySnapshot.docs.length < 10;
+					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length
+						- LAST_INDEX_FROM_END]?.data()?.created_at;
+					const islastPage = querySnapshot.docs.length < PAGE_LIMIT;
 					let prevMessageData = {};
 					querySnapshot.forEach((mes) => {
 						const timeStamp = mes.data()?.created_at;
@@ -69,20 +77,22 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 		const chatCollectionQuery = query(
 			activeChatCollection,
+			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
 			where(
 				'created_at',
 				'<',
 				prevTimeStamp,
 			),
 			orderBy('created_at', 'desc'),
-			limit(10),
+			limit(PAGE_LIMIT),
 		);
 
 		setLoadingPrevMessages(true);
 		const prevMessagesPromise = await getDocs(chatCollectionQuery);
-		const prevMessages = prevMessagesPromise?.docs;
-		const lastDocumentTimeStamp = prevMessages[(prevMessages?.length || 0) - 1]?.data()?.created_at;
-		const islastPage = prevMessages?.length < 10;
+		const prevMessages = prevMessagesPromise?.docs || [];
+		const lastDocumentTimeStamp = prevMessages[(prevMessages.length
+			|| GLOBAL_CONSTANTS.zeroth_index) - LAST_INDEX_FROM_END]?.data()?.created_at;
+		const islastPage = prevMessages?.length < PAGE_LIMIT;
 		let prevMessageData = {};
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;

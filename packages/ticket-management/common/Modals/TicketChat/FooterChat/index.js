@@ -1,4 +1,4 @@
-import { Textarea } from '@cogoport/components';
+import { Checkbox, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSend,
@@ -20,10 +20,12 @@ function FooterChat({
 	setMessage = () => {},
 	message = '',
 	handleKeyPress = () => {},
-	file,
+	file = '',
 	setFile = () => {},
 	uploading = false,
+	isInternal = false,
 	setUploading = () => {},
+	setIsInternal = () => {},
 	handleSendComment = () => {},
 }) {
 	let fileName = '';
@@ -75,6 +77,11 @@ function FooterChat({
 					)}
 				</div>
 			)}
+			<Checkbox
+				label="Send to internal user only"
+				checked={isInternal}
+				onChange={() => setIsInternal((prev) => !prev)}
+			/>
 			<div className={styles.bot_footer}>
 				<CustomFileUploader
 					handleProgress={handleProgress}
