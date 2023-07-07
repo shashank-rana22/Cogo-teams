@@ -1,12 +1,13 @@
-.parent{
-    font-weight: 400;
-    font-size:14px;
-    margin:6px;
- 
+.parent {
+	margin: 6px;
+	font-size: 14px;
+	font-weight: 400;
 }
-.header{
-    text-decoration: underline;
+
+.header {
+	text-decoration: underline;
 }
-.list{
-    margin-left:0px;
+
+.list {
+	margin-left: 0;
 }

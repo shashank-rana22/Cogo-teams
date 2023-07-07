@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const shipping_line = {
 	name           : 'shipping_line_id',
 	label          : 'Shipping Line',
@@ -38,7 +40,7 @@ const getControls = ({
 	};
 
 	const getIds = () => {
-		const ids = {
+		const IDS = {
 			fcl_shipping_line_id     : '',
 			haulage_shipping_line_id : '',
 		};
@@ -48,13 +50,13 @@ const getControls = ({
 				service?.service_type === 'haulage_freight_service'
 				&& service?.haulage_type === 'carrier'
 			) {
-				ids.haulage_shipping_line_id = service?.shipping_line_id || '';
+				IDS.haulage_shipping_line_id = service?.shipping_line_id || '';
 			}
 			if (service?.service_type === 'fcl_freight_service') {
-				ids.fcl_shipping_line_id = service.shipping_line_id || '';
+				IDS.fcl_shipping_line_id = service.shipping_line_id || '';
 			}
 		});
-		return ids;
+		return IDS;
 	};
 
 	const service_rendered = (servicesList || []).filter(
@@ -69,25 +71,27 @@ const getControls = ({
 		);
 	}
 
-	service_provider.value =		subsidiary_service_rendered?.service_provider?.id
-		|| service_rendered?.[0]?.service_provider_id
+	service_provider.value = subsidiary_service_rendered?.service_provider?.id
+		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id
+		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider?.id
 		|| '';
 
-	const controls = [];
+	const CONTROLS = [];
+
 	const data = getIds();
 
 	if (['fcl_freight', 'fcl_freight_service'].includes(service_type)) {
 		shipping_line.value = data.fcl_shipping_line_id;
-		controls.push(shipping_line);
+		CONTROLS.push(shipping_line);
 	}
 
 	if (iscarrierHaulage() && service_type === 'haulage_freight_service') {
 		shipping_line.value = data.haulage_shipping_line_id;
-		controls.push(shipping_line);
+		CONTROLS.push(shipping_line);
 	}
 
-	controls.push(service_provider);
+	CONTROLS.push(service_provider);
 
-	return controls;
+	return CONTROLS;
 };
 export default getControls;

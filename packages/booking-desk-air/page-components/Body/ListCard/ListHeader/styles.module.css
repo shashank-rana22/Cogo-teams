@@ -1,0 +1,36 @@
+.header_pills {
+	display: flex;
+}
+
+.trade_type {
+	background: #fcedbf;
+	border-radius: 4px 0 !important;
+}
+
+.importer_exporter_tags {
+	background: #e0e4ff;
+}
+
+.source {
+	background: #cfeaed;
+}
+
+.cogoverse {
+	background: #ffd3d3;
+}
+
+.cogoport_assured {
+	background: #d8fade;
+}
+
+.trade_type,
+.importer_exporter_tags,
+.source,
+.cogoverse,
+.cogoport_assured {
+	width: max-content;
+	padding: 2px 20px;
+	margin-right: 8px;
+	font-size: 10px;
+	border-radius: 0 0 4px 4px;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 
