@@ -82,7 +82,7 @@ function UploadComplianceDocs({
 				/>
 			))}
 
-			{task.task === 'approve_compliance_documents' ? <RequestService /> : null}
+			{task.task === 'approve_compliance_documents' ? <RequestService task={task} /> : null}
 
 			<div className={styles.submit}>
 				<Button
