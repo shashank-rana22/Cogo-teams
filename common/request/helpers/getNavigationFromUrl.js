@@ -4,5 +4,5 @@ export default function getNavigationFromUrl() {
 		navigation = new URLSearchParams(window?.location?.search)?.get('navigation');
 	}
 
-	return navigation;
+	return navigation || undefined;
 }
