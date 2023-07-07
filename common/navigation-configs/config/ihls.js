@@ -4,8 +4,8 @@ const ihls = {
 		isMainNav  : true,
 	},
 	'/[partner_id]/ihls/file-upload': {
-		navigation: 'ihls-file_upload',
-        isMainNav  : true,
+		navigation : 'ihls-file_upload',
+		isMainNav  : true,
 	},
 };
 

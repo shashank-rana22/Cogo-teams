@@ -79,7 +79,6 @@ function FileList({
 					/>
 				</div>
 			),
-			// format(created_at, 'HH:mm, dd-MM-YY'),
 			accessor: ({ created_at = '' }) => (
 				<div>
 					{created_at ? (
