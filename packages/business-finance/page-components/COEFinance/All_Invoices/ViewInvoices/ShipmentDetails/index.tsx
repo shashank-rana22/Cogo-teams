@@ -1,4 +1,5 @@
 import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -80,20 +81,19 @@ interface BillAdditionalObjectInterface {
 }
 export interface DataInterface {
 	job?: JobInterface;
-	lineItems: Array<object>;
+	lineItems?: Array<object>;
 	billAdditionalObject?: BillAdditionalObjectInterface;
 	buyerDetail?: BuyerDetailInterface;
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
-	bill: BillInterface;
-	consolidatedShipmentIds:Array<string>;
+	bill?: BillInterface;
+	consolidatedShipmentIds?:Array<string>;
 	organizationId?: string;
 	serviceProviderDetail?: any
 }
 
 interface ShipmentDetailsInterface {
 	data: DataInterface;
-	orgId: string;
 	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
@@ -104,19 +104,18 @@ interface ShipmentDetailsInterface {
 	jobType?:string;
 }
 function ShipmentDetails({
-	data,
-	orgId,
-	remarksVal,
-	setRemarksVal,
-	lineItemsRemarks,
-	setLineItemsRemarks,
-	setLineItem,
-	lineItem,
-	status,
-	jobType,
+	data = {},
+	remarksVal = {},
+	setRemarksVal = () => {},
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
+	setLineItem = () => {},
+	lineItem = false,
+	status = '',
+	jobType = '',
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(false);
+	const [showDocuments, setShowDocuments] = useState(true);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -124,7 +123,7 @@ function ShipmentDetails({
 	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
-	const dataList = shipmentData?.list[0] || {};
+	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
@@ -134,7 +133,7 @@ function ShipmentDetails({
 		agent_role_data: agentRoleData,
 		amount,
 		amount_currency: amountCurrency,
-	} = dataWallet?.list?.[0] || {};
+	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const getPills = () => {
 		if (loadingShipment) {
@@ -186,12 +185,12 @@ function ShipmentDetails({
 								<div className={styles.tags_container}>
 									{getPills()}
 								</div>
-								{dataWallet?.list?.[0] && (
+								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
 									<div className={styles.data}>
 										<div className={styles.kam_data}>KAM -</div>
 										<div>
 											{agentData?.name}
-                  &nbsp;(
+											(
 											{agentRoleData?.name}
 											)
 										</div>
@@ -223,7 +222,6 @@ function ShipmentDetails({
 						<div className={styles.details}>
 							{showDetails && (
 								<Details
-									orgId={orgId}
 									dataList={dataList}
 									shipmentId={shipmentId}
 								/>
