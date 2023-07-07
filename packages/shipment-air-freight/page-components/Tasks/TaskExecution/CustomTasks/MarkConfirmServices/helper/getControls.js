@@ -28,7 +28,6 @@ const service_provider = {
 			account_type : 'service_provider',
 			status       : 'active',
 			kyc_status   : 'verified',
-			service_type : 'air_freight_service',
 		},
 	},
 	rules: {
