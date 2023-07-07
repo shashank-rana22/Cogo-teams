@@ -1,4 +1,4 @@
-import { Pill, Popover } from '@cogoport/components';
+import { Pill, Popover, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload, IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
@@ -82,9 +82,12 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 			id       : 'fileName',
 			accessor : ({ fileName }) => (
 				fileName &&	(
-					<div className={styles.fileName}>
-						{`${fileName}.XLSX`}
-					</div>
+					<Tooltip placement="top" content={`${fileName}.XLSX`} maxWidth={500}>
+						<div className={styles.fileName}>
+							{`${fileName}.XLSX`}
+						</div>
+					</Tooltip>
+
 				)
 			),
 		},
