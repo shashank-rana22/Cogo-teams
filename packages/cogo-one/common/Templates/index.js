@@ -20,6 +20,7 @@ function Templates({
 	dialNumber = '',
 	setDialNumber = () => {},
 }) {
+	const [customizableData, setCustomizableData] = useState({});
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
@@ -27,7 +28,11 @@ function Templates({
 
 	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
 
-	const { name, html_template } = activeCard?.data || {};
+	const { name, html_template, variables = [] } = activeCard?.data || {};
+
+	const isAllKeysAndValuesPresent = variables.every(
+		(key) => Object.prototype.hasOwnProperty.call(customizableData, key) && customizableData[key],
+	);
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
 	const maskMobileNumber = type === 'voice_call_component';
@@ -51,6 +56,7 @@ function Templates({
 			template_name : name,
 			type          : 'whatsapp',
 			tags          : ['update_time'],
+			variables     : customizableData,
 		});
 	};
 
@@ -63,7 +69,7 @@ function Templates({
 		if (val?.third_party_template_status !== 'approved' || openCreateReply) {
 			return;
 		}
-
+		setCustomizableData({});
 		setActiveCard({ show: true, data: val });
 	};
 
@@ -163,7 +169,12 @@ function Templates({
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									<Preview previewData={html_template} />
+									<Preview
+										previewData={html_template}
+										variables={variables}
+										customizableData={customizableData}
+										setCustomizableData={setCustomizableData}
+									/>
 								</div>
 							</div>
 						</div>
@@ -186,7 +197,7 @@ function Templates({
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							disabled={!name}
+							disabled={!name || !isAllKeysAndValuesPresent}
 							loading={communicationLoading}
 						>
 							Send

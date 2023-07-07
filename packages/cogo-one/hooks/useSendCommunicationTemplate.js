@@ -1,8 +1,10 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 function useSendCommunicationTemplate({
 	formattedData = {},
@@ -37,6 +39,12 @@ function useSendCommunicationTemplate({
 			...restArgs
 		},
 	) => {
+		const GET_VARIABLE = {
+			email    : variables,
+			whatsapp : !isEmpty(variables) ? variables
+				: { user_first_name: user_name?.split(' ')[GLOBAL_CONSTANTS.zeroth_index] || 'User' },
+		};
+
 		let service = 'user';
 		let service_id = geo.uuid.cogoverse_user_id;
 		if (user_id) {
@@ -49,18 +57,17 @@ function useSendCommunicationTemplate({
 		try {
 			await trigger({
 				data: {
-					type          : type === 'email' ? 'email' : 'whatsapp',
-					provider_name : type === 'email' ? 'aws' : 'meta',
+					type           : type === 'email' ? 'email' : 'whatsapp',
+					provider_name  : type === 'email' ? 'aws' : 'meta',
 					service,
 					user_id,
 					lead_user_id,
 					service_id,
 					template_name,
-					recipient     : isOtherChannels ? otherChannelRecipient : mobile_no,
-					source        : 'CogoOne:AdminPlatform',
-					variables:
-					type === 'email' ? variables : { user_first_name: user_name?.split(' ')[0] || 'User' },
-					sender_user_id: id,
+					recipient      : isOtherChannels ? otherChannelRecipient : mobile_no,
+					source         : 'CogoOne:AdminPlatform',
+					variables      : GET_VARIABLE[type],
+					sender_user_id : id,
 					...(restArgs || {}),
 
 				},
