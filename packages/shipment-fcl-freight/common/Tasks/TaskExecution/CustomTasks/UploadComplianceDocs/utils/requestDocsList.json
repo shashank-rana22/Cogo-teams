@@ -475,11 +475,6 @@
     "doc_desc": "NA"
   },
   {
-    "doc_code": "911001",
-    "doc_name": "FSSAI Import License",
-    "doc_desc": "NA"
-  },
-  {
     "doc_code": "911BN2",
     "doc_name": "Import Certificate for import of Narcotic Drugs",
     "doc_desc": "NA"
@@ -522,66 +517,6 @@
   {
     "doc_code": "101LM1",
     "doc_name": "Certificate of Registration of Importer of Weights and Measures",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "XXX001",
-    "doc_name": "Narcotics Certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "6570FS",
-    "doc_name": "Food grade certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "0010DC",
-    "doc_name": "Certificate of analysis - Drug",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "0010FS",
-    "doc_name": "Certificate of Analysis - Food & Supplement",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "1003",
-    "doc_name": "Blood Analysis Report",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "2000",
-    "doc_name": "Certificate of conformity",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "3000",
-    "doc_name": "Certificate of quality",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "626000",
-    "doc_name": "CITES Certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "629000",
-    "doc_name": "Veterinary quarantine certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "6360AQ",
-    "doc_name": "Health certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "8520PQ",
-    "doc_name": "Phytosanitory Import permit by DPPQS",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "8520AQ",
-    "doc_name": "Sanitary Import Permit",
     "doc_desc": "NA"
   },
   {
@@ -630,16 +565,6 @@
     "doc_desc": "NA"
   },
   {
-    "doc_code": "0030DC",
-    "doc_name": "Batch Release Certificate",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "0110FS",
-    "doc_name": "Specimen Copy of Label",
-    "doc_desc": "NA"
-  },
-  {
     "doc_code": "0110DC",
     "doc_name": "Label of Consignment under Drugs and Cosmetics Act",
     "doc_desc": "NA"
@@ -657,11 +582,6 @@
   {
     "doc_code": "CBN",
     "doc_name": "Import Certificate for import of Narcotic Drugs issued by CBN",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "CDRUG",
-    "doc_name": "Registration Certificate (Drugs) issued by CDSCO",
     "doc_desc": "NA"
   },
   {
@@ -690,21 +610,6 @@
     "doc_desc": "NA"
   },
   {
-    "doc_code": "WCCB",
-    "doc_name": "A certificate used in the trade of endangered species in accordance with the CITES convention.",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "PESO",
-    "doc_name": "Licence Form LE -8 (Licence to Import explosives) issued by PESO",
-    "doc_desc": "NA"
-  },
-  {
-    "doc_code": "PESO",
-    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5) issued by PESO",
-    "doc_desc": "NA"
-  },
-  {
     "doc_code": "PQ",
     "doc_name": "Import Permit issued by PQIS",
     "doc_desc": "NA"
@@ -720,11 +625,6 @@
     "doc_desc": "NA"
   },
   {
-    "doc_code": "WCCB",
-    "doc_name": "Captive Bred/ artificially propagated Certificate issued by WCCB for species which fall under appendix 1 of CITES",
-    "doc_desc": "NA"
-  },
-  {
     "doc_code": "RNI",
     "doc_name": "Certificate of Registration issued by RNI for registering the publisher/Owner.",
     "doc_desc": "NA"
@@ -732,6 +632,41 @@
   {
     "doc_code": "AERB",
     "doc_name": "No Objection Certificate for Procurement of Radiation Source issued by AERB",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "CDRUG1",
+    "doc_name": "Registration Certificate (Drugs) issued by CDSCO",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "CDRUG2",
+    "doc_name": "Registration Certificate (Cosmetics) issued by CDSCO",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "CDRUG3",
+    "doc_name": "Import Licence issued by CDSCO for Drugs",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "PESO1",
+    "doc_name": "Licence Form LE -8 (Licence to Import explosives) issued by PESO",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "PESO2",
+    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5) issued by PESO",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "WCCB1",
+    "doc_name": "A certificate used in the trade of endangered species in accordance with the CITES convention.",
+    "doc_desc": "NA"
+  },
+  {
+    "doc_code": "WCCB2",
+    "doc_name": "Captive Bred/ artificially propagated Certificate issued by WCCB for species which fall under appendix 1 of CITES",
     "doc_desc": "NA"
   }
 ]
