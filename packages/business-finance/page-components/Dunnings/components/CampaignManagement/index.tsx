@@ -7,13 +7,13 @@ import CustomList from '../../../commons/CustomList';
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 
 import ActionModal from './ActionModal';
+import { CYCLE_LIST_CONFIG } from './config/cycleListConfig';
 import CreateCycleForm from './CreateCycleForm';
 import FilterHeaders from './FilterHeaders';
-import useListDunningCycle from './hooks/useListDunningCycle';
-import { LIST_CONFIG } from './listConfig';
+import useListDunningCycles from './hooks/useListDunningCycles';
 import RenderActions from './RenderActions';
 import RenderViewMore from './RenderViewMore';
-import ShowMore from './ShowMore';
+import ShowExecutions from './ShowExecutions';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE_INDEX = 1;
@@ -31,7 +31,6 @@ function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({
 		page: DEFAULT_PAGE_INDEX,
 	});
-	const [dropdown, setDropdown] = useState([]);
 	const [showCreateForm, setShowCreateForm] = useState(false);
 	const [actionModal, setActionModal] = useState({
 		visible : false,
@@ -39,12 +38,15 @@ function CampaignManagement() {
 		rowData : null,
 	});
 	const [sort, setSort] = useState({});
+	const [dropdown, setDropdown] = useState([]);
 
-	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters, sort });
+	const {
+		cycleData,
+		cycleLoading,
+		getDunningCycle,
+	} = useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdown });
 
-	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
-
-	const functions = () => ({
+	const functions = {
 		renderName: ({ name }) => (
 			<div>{showOverflowingNumber(name, 20)}</div>
 		),
@@ -61,21 +63,7 @@ function CampaignManagement() {
 					</span>
 					<div className={styles.date_time}>
 						(
-						{oneTimeDate
-							? (
-								<>
-									<span className={styles.frequency_value}>
-										{formatDate({
-											date       : oneTimeDate,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-											formatType : 'date',
-										})}
-									</span>
-									<span className={styles.border} />
-
-								</>
-							)
-							: ''}
+						{oneTimeDate}
 						{dayOfMonth
 							? (
 								<span>
@@ -124,10 +112,10 @@ function CampaignManagement() {
 			<RenderActions
 				setActionModal={setActionModal}
 				rowData={rowData}
-				getDunningList={getDunningList}
+				getDunningList={getDunningCycle}
 			/>
 		),
-		viewMore: ({ id }) => (
+		viewExecutions: ({ id }) => (
 			<RenderViewMore
 				id={id}
 				dropdown={dropdown}
@@ -143,10 +131,21 @@ function CampaignManagement() {
 
 			</div>
 		),
-		renderType: ({ dunningCycleType }) => (
+		renderType: ({ cycleType }) => (
+			<div>{(cycleType || '').replaceAll('_', ' ')}</div>
+		),
+		renderCycleType: ({ dunningCycleType }) => (
 			<div>{(dunningCycleType || '').replaceAll('_', ' ')}</div>
 		),
-	});
+	};
+
+	const showExecutions = (cycleRow) => (
+		<ShowExecutions
+			rowId={cycleRow?.id}
+			functions={functions}
+			dropdown={dropdown}
+		/>
+	);
 
 	return (
 		<div>
@@ -160,10 +159,10 @@ function CampaignManagement() {
 
 			<div className={styles.custom_list}>
 				<CustomList
-					config={LIST_CONFIG}
-					itemData={data}
-					loading={loading}
-					functions={functions()}
+					config={CYCLE_LIST_CONFIG}
+					itemData={cycleData}
+					loading={cycleLoading}
+					functions={functions}
 					sort={sort}
 					setSort={setSort}
 					page={globalFilters.page || 1}
@@ -171,7 +170,7 @@ function CampaignManagement() {
 					handlePageChange={(pageValue:number) => {
 						setGlobalFilters((p) => ({ ...p, page: pageValue }));
 					}}
-					renderDropdown={showDropDown}
+					renderDropdown={showExecutions}
 				/>
 			</div>
 
@@ -179,7 +178,7 @@ function CampaignManagement() {
 				<CreateCycleForm
 					showCreateForm={showCreateForm}
 					setShowCreateForm={setShowCreateForm}
-					getDunningList={getDunningList}
+					getDunningList={getDunningCycle}
 				/>
 			)}
 
@@ -187,7 +186,7 @@ function CampaignManagement() {
 				<ActionModal
 					actionModal={actionModal}
 					setActionModal={setActionModal}
-					getDunningList={getDunningList}
+					getDunningList={getDunningCycle}
 				/>
 			)}
 

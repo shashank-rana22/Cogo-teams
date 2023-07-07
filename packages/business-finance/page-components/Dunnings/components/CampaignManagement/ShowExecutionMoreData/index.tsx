@@ -7,7 +7,7 @@ interface Props {
 	setDropdown?: Function;
 }
 
-function RenderViewMore({ id, dropdown, setDropdown }:Props) {
+function ShowExecutionMoreData({ id, dropdown, setDropdown }:Props) {
 	const handleViewExecutions = () => {
 		setDropdown(id);
 	};
@@ -18,7 +18,7 @@ function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 					themeType="secondary"
 					onClick={handleViewExecutions}
 				>
-					View Executions
+					View More
 					{' '}
 					<IcMArrowDown style={{ margin: '0px 4px' }} />
 				</Button>
@@ -39,4 +39,4 @@ function RenderViewMore({ id, dropdown, setDropdown }:Props) {
 	);
 }
 
-export default RenderViewMore;
+export default ShowExecutionMoreData;

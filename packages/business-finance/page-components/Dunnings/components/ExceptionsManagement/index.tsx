@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
-import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-table';
+import CycleWiseExceptionTable from '../../configurations/cycle-wise-exception-table';
 import masterExceptionColumn from '../../configurations/master-exception-table';
 import useMasterException from '../../hooks/useMasterException';
 
@@ -45,7 +45,7 @@ function ExceptionsManagement() {
 
 	const [masterListId, setMasterListId] = useState();
 
-	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({
+	const CYCLE_WISE_COLUMN = CycleWiseExceptionTable({
 		sort,
 		setSort,
 		exceptionFilter,

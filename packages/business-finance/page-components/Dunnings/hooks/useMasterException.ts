@@ -22,7 +22,10 @@ interface Profile {
 	profile?: { user: { id: string } }
 }
 
-const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmationModal, setExceptionFilter }:Props) => {
+const useMasterException = ({
+	exceptionFilter, subTabsValue = '',
+	setShowConfirmationModal, setExceptionFilter,
+}:Props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
 	const profile: Profile = useSelector((state) => state);

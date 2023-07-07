@@ -27,29 +27,7 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 		},
 		{
 			id      : 'campaign-management',
-			content : (
-				<div className={styles.campaign_card}>
-					<div style={{ textAlign: 'left' }}>
-						<h3>Campaign</h3>
-						<h3 className={styles.heading_text}>Management</h3>
-					</div>
-					<div className={styles.vertical_border} />
-					<div className={styles.campaign_card_data}>
-						<div style={{ display: 'flex' }}>
-							<span>Ongoing Campaigns:&nbsp;</span>
-							<span>
-								-
-							</span>
-						</div>
-						<div className={styles.collection_rate}>
-							<span>Collection Rate:&nbsp;</span>
-							<span>
-								-
-							</span>
-						</div>
-					</div>
-				</div>
-			),
+			content : <h3 className={styles.heading_text}>Campaign Management</h3>,
 		},
 		{
 			id      : 'exceptions-management',

@@ -2,13 +2,13 @@ import PieData from './PieData';
 import styles from './styles.module.css';
 
 interface Props {
-	dropdown?: string[];
+	dropdown?: string;
 	rowId?: string;
 	data?: object[];
 }
 
 function ShowMore({ dropdown, rowId, data = null }:Props) {
-	if (dropdown.includes(rowId)) {
+	if (dropdown === rowId) {
 		return (
 			<div className={styles.dropdown_container_visible}>
 				{data ? (

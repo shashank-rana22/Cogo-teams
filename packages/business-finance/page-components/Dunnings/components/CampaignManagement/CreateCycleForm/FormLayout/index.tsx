@@ -31,7 +31,7 @@ interface FormData {
 		oneTimeDate?: string;
 	};
 	name?: string;
-	dunningCycleType?: string;
+	cycleType?: string;
 	cogoEntityId?: string;
 	filters?: {
 		dueOutstandingCurrency?: string;
@@ -59,7 +59,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		isAllCreditControllers, oneTimeDate, scheduleRule,
 		filters,
 		name,
-		dunningCycleType,
+		cycleType,
 		cogoEntityId,
 	} = formData || {};
 
@@ -143,7 +143,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				creditController       : organizationStakeholderIds || undefined,
 				serviceType            : serviceTypes || undefined,
 				cycleName              : name || undefined,
-				cycleType              : dunningCycleType || undefined,
+				cycleType              : cycleType || undefined,
 				cogoEntityId           : cogoEntityIdFromData || undefined,
 				ageingBucket,
 				totalDueOutstanding,
@@ -157,7 +157,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		oneTimeDateSchedule,
 		ageingBucket,
 		cogoEntityIdFromData,
-		dunningCycleType,
+		cycleType,
 		name,
 		totalDueOutstanding,
 	]);

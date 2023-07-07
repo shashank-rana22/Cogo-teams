@@ -13,9 +13,10 @@ interface Props {
 	globalFilters?: GlobalFilters;
 	setGlobalFilters?: Function;
 	sort?: object;
+	setDropdown?: Function;
 }
 
-function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
+function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdown }:Props) {
 	const { search, page, cycleStatus, dunningCycleType, frequency } = globalFilters || {};
 	const [sortBy] = Object.keys(sort);
 	const [sortType] = Object.values(sort);
@@ -25,9 +26,9 @@ function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/dunning/list-dunning-cycle-execution',
+			url     : '/payments/dunning/list-dunning',
 			method  : 'get',
-			authKey : 'get_payments_dunning_list_dunning_cycle_execution',
+			authKey : 'get_payments_dunning_list_dunning',
 		},
 		{ manual: true },
 	);
@@ -39,17 +40,17 @@ function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 		setGlobalFilters((prev) => ({ ...prev, page: 1 }));
 	}, [search, debounceQuery, setGlobalFilters]);
 
-	const getDunningList = useCallback((async () => {
+	const getDunningCycle = useCallback((async () => {
 		try {
 			await trigger({
 				params: {
 					query            : query || undefined,
+					pageIndex        : page,
 					cycleStatus      : cycleStatus || undefined,
-					dunningCycleType : dunningCycleType || undefined,
-					frequency        : frequency || undefined,
 					sortBy,
 					sortType,
-					pageIndex        : page,
+					dunningCycleType : dunningCycleType || undefined,
+					frequency        : frequency || undefined,
 				},
 			});
 		} catch (err) {
@@ -58,17 +59,18 @@ function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency, sortBy, sortType]);
 
 	useEffect(() => {
-		getDunningList();
+		getDunningCycle();
+		setDropdown(null);
 	}, [query, page, cycleStatus,
-		dunningCycleType, getDunningList,
-		sortType, sortBy,
+		dunningCycleType, getDunningCycle,
+		sortType, sortBy, setDropdown,
 	]);
 
 	return {
-		data,
-		loading,
-		getDunningList,
+		cycleData    : data,
+		cycleLoading : loading,
+		getDunningCycle,
 	};
 }
 
-export default useListDunningCycle;
+export default useListDunningCycles;
