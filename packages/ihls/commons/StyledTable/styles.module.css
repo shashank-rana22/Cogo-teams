@@ -4,21 +4,22 @@
 	:global {
 		table {
 			padding: 0;
-			border-spacing: 0 10px;
+			border-spacing: 0 8px;
 		}
 
 		background-color: transparent;
-		border-radius: 10px;
+		border-radius: 12px;
 
 		.ui_table_head_cell {
-			padding: 10px;
+			padding: 12px;
 			color: white;
 			background-color: #6d6d6d;
 		}
 
 		.ui_table_body_cell {
 			flex-wrap: wrap;
-			width: 250px;
+			min-width: 250px;
+			padding: 8px;
 			background: #fff;
 			background-color: #fff;
 		}
@@ -28,19 +29,19 @@
 		}
 
 		.ui_table_body_cell:first-child {
-			border-radius: 6px 0 0 6px;
+			border-radius: 4px 0 0 4px;
 		}
 
 		.ui_table_body_cell:last-child {
-			border-radius: 0 6px 6px 0;
+			border-radius: 0 4px 4px 0;
 		}
 
 		.ui_table_head_cell:first-child {
-			border-radius: 6px 0 0 6px;
+			border-radius: 4px 0 0 4px;
 		}
 
 		.ui_table_head_cell:last-child {
-			border-radius: 0 6px 6px 0;
+			border-radius: 0 4px 4px 0;
 		}
 	}
 

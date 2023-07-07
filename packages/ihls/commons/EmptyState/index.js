@@ -17,7 +17,7 @@ function EmptyState({
 				width={width}
 				height={height}
 				alt="Empty-state-img"
-				style={{ margin: '10px' }}
+				style={{ margin: '12px' }}
 			/>
 
 			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
