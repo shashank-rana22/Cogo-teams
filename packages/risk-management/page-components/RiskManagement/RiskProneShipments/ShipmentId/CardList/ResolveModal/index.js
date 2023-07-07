@@ -39,7 +39,6 @@ function ResolveModal({
 							placeholder="Select Risk Reason"
 							options={riskReasonOptions}
 							size="sm"
-							style={{ width: '284px' }}
 						/>
 					</div>
 					<div>

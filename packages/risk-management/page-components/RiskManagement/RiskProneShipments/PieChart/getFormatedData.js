@@ -70,7 +70,7 @@ const getFormatedData = (stats) => {
 		},
 	];
 
-	const bl_do_data = [
+	const BL_DO_DATA = [
 		{
 			id    : 'Late Collection',
 			label : 'Late Collection',
@@ -84,9 +84,9 @@ const getFormatedData = (stats) => {
 
 		},
 	];
-	const tabData = {
+	const TAB_DATA = {
 		container_movement : CONTAINER_MOVEMENT_MAPPING,
-		bl_do              : bl_do_data,
+		bl_do              : BL_DO_DATA,
 		both               : CONTAINER_MOVEMENT_MAPPING,
 	};
 
@@ -94,7 +94,7 @@ const getFormatedData = (stats) => {
 		COLORS,
 		CONTAINER_MOVEMENT_MAPPING,
 		LATE_COLLECTION_MAPPING,
-		tabData,
+		TAB_DATA,
 	};
 };
 

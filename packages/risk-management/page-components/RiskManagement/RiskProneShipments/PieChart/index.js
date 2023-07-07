@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function PieChart({ activeTab = '', chartData = {}, loading = false }) {
 	const { stats } = chartData;
-	const { CONTAINER_MOVEMENT_MAPPING, tabData, COLORS } = getFormatedData(stats);
+	const { CONTAINER_MOVEMENT_MAPPING, TAB_DATA, COLORS } = getFormatedData(stats);
 	const { container_movement_count = '', bl_do_release_count = '', both_count = '' } = stats || {};
 	const tabCounts = {
 		container_movement : container_movement_count,
@@ -19,9 +19,9 @@ function PieChart({ activeTab = '', chartData = {}, loading = false }) {
 		both               : both_count,
 	};
 	const centroidValue = tabCounts[activeTab] || '';
-	const data = tabData[activeTab] || [];
+	const data = TAB_DATA[activeTab] || [];
 
-	function CenteredMetric({ centerX, centerY }) {
+	function CenteredMetric({ centerX = 0, centerY = 0 }) {
 		return (
 			<text
 				x={centerX}

@@ -14,8 +14,8 @@ const COMMODITY_CATEGORIES_VALUE = {
 	perishable : '#ed3736',
 	pharma     : '#FBD1A6',
 };
-function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
-	const { trade_type, cargo_details = [], importer_exporter, commodity_category } = itemData || {};
+function CardList({ itemData = {}, getDashboardData = () => {}, getDahboardStatsData = () => {} }) {
+	const { trade_type, cargo_details = [], importer_exporter, commodity_category } = itemData;
 	const { business_name } = importer_exporter || {};
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [showResolveModal, setShowResolveModal] = useState(false);
