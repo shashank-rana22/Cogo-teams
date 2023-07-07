@@ -5,7 +5,7 @@ import useSelfAllocateFund from '../../../../hooks/useSelfAllocateFund';
 
 import styles from './styles.module.css';
 
-function EnterAmountBox({ itemData, refetch }) {
+function EnterAmountBox({ itemData = {}, refetch = () => {} }) {
 	const { onSubmit, loading } = useSelfAllocateFund({ itemData, refetch });
 	const {
 		control,

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const CHECK_PENDING_REQUEST = 0;
 
-function SaveAndAllotAmount({ itemData, setShowModal, refetch, showModel }) {
+function SaveAndAllotAmount({ itemData = {}, setShowModal = () => {}, refetch = () => {}, showModel = false }) {
 	const {
 		allocatedAmount,
 		balance,
@@ -82,8 +82,8 @@ function SaveAndAllotAmount({ itemData, setShowModal, refetch, showModel }) {
 						<div className={styles.label_text}>Balance</div>
 						<div className={styles.value_text}>
 							{formatAmount({
-								amount  : utilizedAmount,
-								balance,
+								amount  : balance,
+								currency,
 								options : {
 									style           : 'currency',
 									currencyDisplay : 'code',

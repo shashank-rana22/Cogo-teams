@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
-function UpdatedAmount({ fundRequests, currency }) {
+function UpdatedAmount({ fundRequests = [], currency = '' }) {
 	return (
 		<>
 			{(fundRequests || []).map(({ createdAt = '', requestedAmount = '', id = '' }) => (

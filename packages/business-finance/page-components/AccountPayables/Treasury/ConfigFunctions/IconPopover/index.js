@@ -3,8 +3,8 @@ import { IcMProvision } from '@cogoport/icons-react';
 
 import UpdatedByAmount from './UpdatedByAmount';
 
-function IconPopover({ itemData }) {
-	const { fundAllotmentTimeline, currency } = itemData || {};
+function IconPopover({ itemData = {} }) {
+	const { fundAllotmentTimeline, currency } = itemData;
 	return (
 		<Popover
 			placement="bottom-start"

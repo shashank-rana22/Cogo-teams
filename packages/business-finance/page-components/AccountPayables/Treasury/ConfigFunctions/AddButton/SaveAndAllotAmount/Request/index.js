@@ -15,10 +15,10 @@ const geo = getGeoConstants();
 const REQUEST_INDEX = 1;
 const CHECK_AMOUNT = 0;
 
-function Request({ item, index, currency, refetch }) {
+function Request({ item = {}, index = 0, currency = '', refetch = () => {} }) {
 	const { onApprove, onReject, loadingOnReject, loadingOnApprove } =		useApproveRejectFund({ item, refetch });
 
-	const { requestedBy, createdAt, remark } = item || {};
+	const { requestedBy, createdAt, remark } = item;
 
 	const {
 		control,
@@ -28,6 +28,7 @@ function Request({ item, index, currency, refetch }) {
 		watch,
 		setValue,
 	} = useForm();
+
 	const editAmount = watch('requestedAmount');
 
 	return (

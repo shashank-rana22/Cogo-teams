@@ -5,8 +5,8 @@ import UpdatedAmount from './UpdatedAmount';
 
 const CHECK_PENDING_COUNT = 0;
 
-function PendingRequest({ itemData }) {
-	const { pendingRequestsCount, fundRequests, currency } = itemData || {};
+function PendingRequest({ itemData = {} }) {
+	const { pendingRequestsCount, fundRequests, currency } = itemData;
 
 	return (
 		<div>

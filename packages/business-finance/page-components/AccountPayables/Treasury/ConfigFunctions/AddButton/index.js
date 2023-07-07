@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import SaveAndAllotAmount from './SaveAndAllotAmount';
 
-function AddButton({ itemData, refetch }) {
+function AddButton({ itemData = {}, refetch = () => {} }) {
 	const [showModel, setShowModal] = useState(false);
 
 	const buttonName = itemData?.pendingRequestsCount ? 'View' : 'Add';

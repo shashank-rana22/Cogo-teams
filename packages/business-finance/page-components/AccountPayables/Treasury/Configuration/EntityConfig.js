@@ -16,8 +16,6 @@ const MAX_BANK_NAME_LENGTH = 20;
 const MAX_BANK_ACCOUNT = 25;
 const MIN_LENGTH = 0;
 
-const FIRST_INDEX = 0;
-
 const EntityConfig = ({ refetch }) => [
 
 	{
@@ -47,10 +45,10 @@ const EntityConfig = ({ refetch }) => [
 					>
 						<div className={styles.container}>
 							<div className={styles.value}>
-								{`${row?.bankname.substring(MIN_LENGTH, MAX_BANK_NAME_LENGTH)}...`}
+								{`${row?.bankname?.substring(MIN_LENGTH, MAX_BANK_NAME_LENGTH)}...`}
 							</div>
 							<div className={styles.text}>
-								{`${row?.bankAccountNo.substring(MIN_LENGTH, MAX_BANK_ACCOUNT)}...`}
+								{`${row?.bankAccountNo?.substring(MIN_LENGTH, MAX_BANK_ACCOUNT)}...`}
 							</div>
 						</div>
 					</Tooltip>
@@ -94,7 +92,8 @@ const EntityConfig = ({ refetch }) => [
 						<div className={styles.container}>
 							<div className={styles.details_text}>
 								{formatDate({
-									date       : getByKey(row, 'fundAllotmentTimeline')[FIRST_INDEX].updatedAt,
+									date:
+									getByKey(row, 'fundAllotmentTimeline')[GLOBAL_CONSTANTS.zeroth_index].updatedAt,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
 									formatType : 'dateTime',
@@ -102,7 +101,7 @@ const EntityConfig = ({ refetch }) => [
 							</div>
 							<div className={styles.details_text}>
 								Updated By :
-								{getByKey(row, 'fundAllotmentTimeline')[FIRST_INDEX].allocatedBy}
+								{getByKey(row, 'fundAllotmentTimeline')[GLOBAL_CONSTANTS.zeroth_index].allocatedBy}
 							</div>
 						</div>
 

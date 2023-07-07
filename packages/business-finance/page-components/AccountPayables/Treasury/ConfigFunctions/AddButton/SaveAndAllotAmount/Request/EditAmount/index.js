@@ -6,13 +6,13 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function EditAmount({
-	itemData,
-	currency,
-	setValue,
-	control,
+	itemData = {},
+	currency = '',
+	setValue = () => {},
+	control = {},
 }) {
 	const [editAmount, setEditAmount] = useState(true);
-	const { requestedAmount } = itemData || {};
+	const { requestedAmount } = itemData;
 
 	return (
 		<div>

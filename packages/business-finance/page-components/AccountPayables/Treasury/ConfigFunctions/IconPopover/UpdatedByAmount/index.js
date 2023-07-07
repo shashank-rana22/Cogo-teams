@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
-function RemarkContent({ fundAllotmentTimeline, currency }) {
+function RemarkContent({ fundAllotmentTimeline = [], currency = '' }) {
 	return (
 		<div>
 			{fundAllotmentTimeline ? (
