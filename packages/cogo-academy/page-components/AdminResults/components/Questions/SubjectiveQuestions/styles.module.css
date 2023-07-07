@@ -16,6 +16,10 @@
 		.ui_accordion_title {
 			width: 100%;
 		}
+
+		.ui_accordion_icon {
+			align-self: flex-start;
+		}
 	}
 }
 

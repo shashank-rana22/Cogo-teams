@@ -19,7 +19,9 @@ const useGetDocumentSigningUrl = ({ getEmployeeDetails, document_type }) => {
 
 			if (res?.data?.status === 'not_signed') {
 				window.open(res?.data?.signing_url, '_blank');
-			} else getEmployeeDetails();
+			} else {
+				getEmployeeDetails();
+			}
 		} catch (err) {
 			Toast.error((err?.response?.data?.message) || 'Something went wrong');
 		}

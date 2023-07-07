@@ -5,18 +5,19 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	ADDITIONAL_DATA,
+	notify_customer, additionalData,
 }) => ({
-	UserID      : id,
-	Source      : 'admin',
-	Category    : '',
-	Subcategory : '',
-	Priority    : priority,
-	Usertype    : 'ticket_user',
-	Data        : { Attachment: [finalUrl] || [], ...selectedServices },
-	Type        : issue_type,
-	Description : additional_information,
-	...ADDITIONAL_DATA,
+	UserID         : id,
+	Source         : 'admin',
+	Category       : '',
+	Subcategory    : '',
+	Priority       : priority,
+	Usertype       : 'ticket_user',
+	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
+	Type           : issue_type,
+	Description    : additional_information,
+	NotifyCustomer : notify_customer,
+	...additionalData,
 });
 
 const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
@@ -35,37 +36,42 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			organization_id,
 			user_id,
 			priority,
-			file_url: { finalUrl },
+			file_url,
+			notify_customer,
 			...rest
 		} = val || {};
+		const { finalUrl = '' } = file_url || {};
 
-		const ADDITIONAL_DATA = {};
+		let additionalData = {};
 
 		const selectedServices = Object.fromEntries(
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
 
 		if (!isEmpty(organization_id)) {
-			ADDITIONAL_DATA.OrganizationID = organization_id;
-			ADDITIONAL_DATA.UserID = user_id;
+			additionalData = {
+				OrganizationID : organization_id,
+				UserID         : user_id,
+			};
 		}
 
 		try {
 			await trigger({
 				data: getPayload({
-					id: profile?.id,
+					id: profile?.user?.id,
 					priority,
 					finalUrl,
 					selectedServices,
 					issue_type,
 					additional_information,
-					ADDITIONAL_DATA,
+					notify_customer,
+					additionalData,
 				}),
 			});
 			Toast.success('Successfully Created');
 			setShowRaiseTicket(false);
 		} catch (error) {
-			Toast.error(error?.response?.data);
+			console.error(error?.response?.data);
 		}
 	};
 
