@@ -16,6 +16,8 @@ function AccountTransactionFunnel(props) {
 					<DateRangePickerController
 						name="date_range"
 						control={control}
+						maxDate={new Date()}
+						isPreviousDaysAllowed
 					/>
 				</div>
 
