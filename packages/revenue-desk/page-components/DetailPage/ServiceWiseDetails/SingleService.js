@@ -128,7 +128,7 @@ function SingleService({
 				price={priceData?.[singleServiceData?.id]}
 				shipmentData={shipmentData}
 			/>
-			{isPreferenceSet ? (
+			{(isPreferenceSet || ['cancelled', 'completed'].includes(shipmentData?.state)) ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
 					shipmentData={shipmentData}

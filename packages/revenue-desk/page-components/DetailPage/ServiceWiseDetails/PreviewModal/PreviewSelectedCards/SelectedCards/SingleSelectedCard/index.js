@@ -82,19 +82,53 @@ function SingleSelectedCard({ data, shipmentType, priority, fromKey }) {
 								})}
 							</div>
 						</div>
-						<div className={styles.label}>
-							Total Buy Price :
-							<div className={styles.total_price_text}>
-								{formatAmount({
-									amount   : data?.rowData?.price,
-									currency : data?.rowData?.currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
+						<div style={{ display: 'flex', flexDirection: 'column' }}>
+							<div className={styles.label}>
+								Total Buy Price :
+								<div className={styles.total_price_text}>
+									{formatAmount({
+										amount   : data?.rowData?.price,
+										currency : data?.rowData?.currency,
+										options  : {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 2,
+										},
+									})}
+								</div>
 							</div>
+							{ data?.rowData?.origin_locals_price && (
+								<div className={styles.label}>
+									Total Origin Locals Buy Price :
+									<div className={styles.total_price_text}>
+										{formatAmount({
+											amount   : data?.rowData?.origin_locals_price,
+											currency : data?.rowData?.origin_locals_currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+									</div>
+								</div>
+							)}
+							{data?.rowData?.destination_locals_price && (
+								<div className={styles.label}>
+									Total Destination Locals Buy Price :
+									<div className={styles.total_price_text}>
+										{formatAmount({
+											amount   : data?.rowData?.destination_locals_price,
+											currency : data?.rowData?.destination_locals_currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
