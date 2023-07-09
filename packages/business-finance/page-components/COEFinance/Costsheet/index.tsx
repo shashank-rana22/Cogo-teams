@@ -24,7 +24,7 @@ import styles from './styles.module.css';
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId, jobNumber, orgId, IsJobClose } = query || {};
+	const { shipmentId, jobNumber, IsJobClose } = query || {};
 	const getStatus = () => {
 		if (IsJobClose === 'OPEN') {
 			return false;
@@ -48,14 +48,14 @@ function CostSheet() {
 	} = useGetShipmentCostSheet({ query });
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const { data: shipmentData, loading: loadingShipment } = useListShipment(jobNumber);
-	const dataList = shipmentData?.list[0] || {};
+	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { source, tradeType } = dataList;
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
 		agent_data: agentData, agent_role_data: agentRoleData,
 		amount, amount_currency: amountCurrency,
-	} = dataWallet?.list?.[0] || {};
+	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
 	const { getData, getFinalData, FinalLoading, loading } = useUpdateJob({
@@ -147,13 +147,13 @@ function CostSheet() {
 			<DiscountRect
 				heading="Discount Applied"
 				statvalue={
-					dataWallet?.list?.[0]
+					dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index]
 						? (
 							<div className={styles.discount_data}>
 								<div className={styles.kam_data}>KAM -</div>
 								<div>
 									{agentData?.name}
-									&nbsp;(
+									(
 									{agentRoleData?.name}
 									)
 								</div>
@@ -220,8 +220,7 @@ function CostSheet() {
 				}}
 			>
 				<Details
-					orgId={orgId}
-					dataList={shipmentData?.list?.[0]}
+					dataList={shipmentData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
 					shipmentId={shipmentId}
 				/>
 
