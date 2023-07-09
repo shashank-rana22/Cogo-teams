@@ -78,10 +78,10 @@
 }
 
 .activity_count {
-	padding: 3px 9px;
+	padding: 2px 8px;
 	font-size: 10px;
 	font-weight: 600;
-	color: #fff;
-	background: #f8aea8;
-	border-radius: 5px;
+	color: #0d2818;
+	background: #25d366;
+	border-radius: 50px;
 }
