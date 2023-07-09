@@ -53,7 +53,8 @@
 }
 
 .error_message {
-	font-size: 10px;
+	padding-top: 4px;
+	font-size: 13px;
 	color: #cb6464;
 }
 

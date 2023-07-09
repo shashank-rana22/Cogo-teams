@@ -99,9 +99,9 @@ const getColumns = ({
 					onClick={() => downloadDocuments(item?.id)}
 					loading={documentLoading}
 				>
-					<IcMDownload width={13} height={13} />
+					<IcMDownload width={14} height={14} />
 					{' '}
-					<span style={{ paddingLeft: 4 }}>
+					<span style={{ paddingLeft: 6 }}>
 						Download
 					</span>
 				</Button>
