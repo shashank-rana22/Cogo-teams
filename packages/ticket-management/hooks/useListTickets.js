@@ -24,6 +24,7 @@ const useListTickets = ({
 	isUpdated,
 	setIsUpdated,
 }) => {
+	const { agent, category, spectatorType } = searchParams || {};
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
@@ -42,12 +43,13 @@ const useListTickets = ({
 			PerformedByID : profile?.user?.id,
 			size          : 10,
 			page          : pageIndex - PAGE_DECREMENT,
-			AgentID       : searchParams.agent || undefined,
+			AgentID       : agent || undefined,
 			QFilter       : searchQuery || undefined,
-			Type          : searchParams.category,
+			Type          : category || undefined,
+			SpectatorType : spectatorType || undefined,
 		};
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
+	}, [profile?.user?.id, category, searchQuery, agent, status, spectatorType]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {

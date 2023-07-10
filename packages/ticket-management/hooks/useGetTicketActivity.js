@@ -1,8 +1,17 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
+const getParams = ({ ticketId, pagination, id }) => ({
+	TicketID : Number(ticketId),
+	page     : pagination,
+	UserID   : id,
+});
+
 const useGetTicketActivity = ({ ticketId }) => {
+	const { user: { id = '' } } = useSelector(({ profile }) => profile);
+
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/activities',
 		method  : 'get',
@@ -18,11 +27,7 @@ const useGetTicketActivity = ({ ticketId }) => {
 	const getTicketActivity = useCallback(async (pagination) => {
 		try {
 			const res = await trigger({
-				params: {
-					TicketID : Number(ticketId),
-					page     : pagination,
-
-				},
+				params: getParams({ ticketId, pagination, id }),
 			});
 
 			const {
@@ -39,9 +44,9 @@ const useGetTicketActivity = ({ ticketId }) => {
 				last,
 			}));
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
-	}, [trigger, ticketId]);
+	}, [trigger, ticketId, id]);
 
 	useEffect(() => {
 		if (ticketId) {
