@@ -22,11 +22,13 @@ function OTPInput({
 
 	const timer = useTimer({ durationInSeconds: resendOtpTimerDuration });
 
-	useEffect(
-		() => timer.start(),
+	useEffect(() => {
+		if (manualOtpRequest) {
+			return;
+		}
+		timer.start();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[],
-	);
+	}, []);
 
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');

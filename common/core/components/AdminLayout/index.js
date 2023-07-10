@@ -9,8 +9,6 @@ import React, { useState } from 'react';
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import { LockScreen } from './LockScreen';
 import { firebaseConfig } from './LockScreen/configurations/firebase-config';
-import getViewTypeMapping from './LockScreen/constants';
-import useGetActivity from './LockScreen/hooks/useGetActivity';
 import Navbar from './Navbar';
 import TnC from './newTnC';
 import styles from './styles.module.css';
@@ -53,19 +51,12 @@ function AdminLayout({
 		user_role_ids = [],
 	} = partnerData || {};
 
-	const { ROLE_IDS_CHECK } = getViewTypeMapping();
-
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
-
-	const { showModal, setShowModal, isLockedEnabled } = useGetActivity({
-		firestore,
-		agentId: user_id,
-	});
 
 	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
 
@@ -75,10 +66,6 @@ function AdminLayout({
 
 	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
 									&& is_joining_tnc_accepted === false;
-
-	const isRolePresent = user_role_ids.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
-
-	const showLockScreen = showModal && isRolePresent && isLockedEnabled;
 
 	return (
 		<div className={cl`
@@ -123,10 +110,9 @@ function AdminLayout({
 			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
 
 			<LockScreen
-				showLockScreen={showLockScreen}
 				agentId={user_id}
+				userRoleIds={user_role_ids}
 				firestore={firestore}
-				setShowModal={setShowModal}
 			/>
 
 		</div>

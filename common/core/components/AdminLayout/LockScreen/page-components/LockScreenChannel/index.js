@@ -4,18 +4,29 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
+import getViewTypeMapping from '../../constants/index';
+import useGetActivity from '../../hooks/useGetActivity';
 import useGetGenerateOtp from '../../hooks/useGetGenerateOtp';
 import useGetSubmitOtp from '../../hooks/useGetSubmitOtp';
 
 import styles from './styles.module.css';
 
-const MAX_LIMIT = 10;
+const MAX_LIMIT = 600;
 const OTP_LENGTH = 6;
-function LockScreen({ agentId, firestore, setShowModal, showLockScreen }) {
+function LockScreen({ agentId, userRoleIds, firestore }) {
+	const { ROLE_IDS_CHECK } = getViewTypeMapping();
 	const [manualOtp, setManualOtp] = useState(true);
+
+	const { showModal, setShowModal, isLockedEnabled } = useGetActivity({
+		firestore,
+		agentId,
+	});
 	const { apiTrigger, loading, otpNumber, setOtpNumber } = useGetSubmitOtp({ agentId, firestore, setShowModal });
 	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal, setManualOtp });
 
+	const isRolePresent = userRoleIds.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
+
+	const showLockScreen = showModal && isRolePresent && isLockedEnabled;
 	return (
 		<Modal
 			scroll={false}
