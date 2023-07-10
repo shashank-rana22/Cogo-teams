@@ -30,6 +30,10 @@ export const STATUS_TYPE_MAPPING = {
 		Status : 'reopened',
 		Type   : 'reopened',
 	},
+	escalate: {
+		Status : 'escalated',
+		Type   : 'escalated',
+	},
 };
 
 export const TICKET_SECTION_MAPPING = {
@@ -92,3 +96,9 @@ export const PRIORITY_MAPPING = {
 };
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
+
+export const SPECTATOR_TYPE_OPTIONS = [
+	{ label: 'Tickets raised by me', value: 'agent' },
+	{ label: 'Tickets assigned to me', value: 'reviewer' },
+	{ label: 'Closure Authorizer', value: 'closure_authorizer' },
+];

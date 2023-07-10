@@ -2,9 +2,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
-		const firstValidity = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+		const firstValidity = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index]
+			|| dataObj?.line_items?.[GLOBAL_CONSTANTS.zeroth_index]
+			|| {};
 		const price = firstValidity?.price || firstValidity?.min_price || '-';
-		const currency = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index]?.currency || '-';
+		const currency = firstValidity?.currency || '-';
 		return `${currency} ${price}`;
 	}
 

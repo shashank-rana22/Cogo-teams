@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
 import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
-import useGetAsyncTicketOptions from '../../../hooks/useGetAsyncTicketOptions';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -121,10 +120,6 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
-const MICRO_SERVICE_HOOKS_MAPPING = {
-	tickets: useGetAsyncTicketOptions,
-};
-
 function AsyncSelect(props) {
 	const {
 		params,
@@ -135,21 +130,16 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
-		service,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const mircoService = (microService || defaultParams.microService);
-	const microservicHook = mircoService ? MICRO_SERVICE_HOOKS_MAPPING[microService]
-	|| useGetAsyncOptionsMicroservice : null;
-
-	const microServiceAsyncOptionsHook = microService
-		? microservicHook
+	const asyncOptionsHook = (microService || defaultParams.microService)
+		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
 
-	const getAsyncOptionsProps = microServiceAsyncOptionsHook({
+	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
 		onOptionsChange,
