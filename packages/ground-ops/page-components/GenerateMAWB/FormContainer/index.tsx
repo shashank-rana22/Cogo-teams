@@ -22,7 +22,7 @@ const options = [
 ];
 
 interface NestedObj {
-	[key: string]: any;
+	[key: string]: ReactFragment ;
 }
 interface Props {
 	back: boolean;

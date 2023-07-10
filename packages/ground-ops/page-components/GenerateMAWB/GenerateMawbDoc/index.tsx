@@ -34,7 +34,7 @@ interface Props {
 	chargeableWeight?:number;
 	setGenerate?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	activeHawb?: NestedObj;
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
@@ -60,17 +60,17 @@ function GenerateMawb({
 	formData = {},
 	setBack = () => {},
 	back = false,
-	edit,
+	edit = false,
 	setEdit = () => {},
 	viewDoc = false,
-	chargeableWeight,
+	chargeableWeight = 0,
 	setGenerate = () => {},
 	activeCategory = 'mawb',
 	hawbDetails = [],
 	setHawbDetails = () => {},
 	activeHawb = {},
-	setActiveHawb,
-	setActiveKey,
+	setActiveHawb = () => {},
+	setActiveKey = () => {},
 	pendingTaskId = '',
 	category = 'mawb',
 	setViewDoc = () => {},
