@@ -5,11 +5,17 @@ on:
     secrets:
       NPM_TOKEN:
         required: true
+    inputs:
+      platform:
+        description: 'Platform'
+        default: 'ubuntu-latest'
+        required: false
+        type: string
 
 jobs:
   test-build:
     name: Test Build
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.platform }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

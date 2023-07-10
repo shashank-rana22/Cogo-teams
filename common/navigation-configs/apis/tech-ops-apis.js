@@ -280,6 +280,24 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_draft_fcl_freight_rate_locals',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_fcl_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_draft_fcl_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
 ];
 
 export default apis;
