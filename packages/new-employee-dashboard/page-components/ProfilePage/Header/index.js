@@ -27,7 +27,7 @@ function Header({
 	// const { personal_information, identification_documents, address_details } = personalDetails || {};
 
 	const onClickGoBack = () => {
-		router.push('/new-employee-dashboard', '/new-employee-dashboard');
+		router.back();
 	};
 
 	const isLoading = loading || isEmpty(detail || {}) || false;

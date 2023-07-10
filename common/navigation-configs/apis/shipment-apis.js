@@ -1564,6 +1564,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_shipment_sales_utr',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'list_platform_config_constants',
 		access_type  : 'private',
 		service_name : 'platform_config',
