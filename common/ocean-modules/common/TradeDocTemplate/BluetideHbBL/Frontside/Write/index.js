@@ -7,11 +7,12 @@ import styles from './styles.module.css';
 import { sectionThreeFields, containersDetails } from './templateConfig';
 
 function Write({
-	control,
+	control = () => {},
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	isReadonly = false,
 	watermark = null,
+	bl_number = '',
 }) {
 	return (
 		<main className={styles.main}>
@@ -106,7 +107,7 @@ function Write({
 						</div>
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b> BL0423003182</b>
+							<b>{bl_number}</b>
 						</div>
 						<div className={styles['section_one_child_2-details']}>
 							<img
