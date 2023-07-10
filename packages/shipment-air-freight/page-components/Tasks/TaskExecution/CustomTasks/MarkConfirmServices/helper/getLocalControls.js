@@ -22,7 +22,6 @@ const getLocalControls = (service_type, formattedRate) => {
 			{
 				name        : 'origin_service_provider_id',
 				type        : 'async-select',
-				subType     : 'select',
 				asyncKey	   : 'organizations',
 				span        : 5,
 				label       : 'Service Provider (Air Local Origin)',
@@ -57,7 +56,6 @@ const getLocalControls = (service_type, formattedRate) => {
 			{
 				name        : 'destination_service_provider_id',
 				type        : 'async-select',
-				subType     : 'select',
 				asyncKey    : 'organizations',
 				span        : 5,
 				label       : 'Service Provider (Air Local Destination)',
