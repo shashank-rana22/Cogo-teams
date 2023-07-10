@@ -15,7 +15,7 @@ import CreateVendorModal from './CreateVendorModal';
 import useListVendors from './hooks/useListVendors';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
-import { VENDOR_CONFIG } from './utils/config';
+import configs from './utils/config';
 import Controls from './utils/controls';
 
 interface ItemProps {
@@ -35,6 +35,8 @@ interface ItemProps {
 function VenderComponent() {
 	const router = useRouter();
 	const geo = getGeoConstants();
+
+	const { VENDOR_CONFIG } = configs();
 
 	const [filters, setFilters] = useState({
 		KYC_STATUS  : '',

@@ -22,116 +22,124 @@ const BODY_STYLES = {
 	fontStyle  : 'normal',
 };
 
-const geo = getGeoConstants();
+const configs = () => {
+	const geo = getGeoConstants();
 
-export const VENDOR_CONFIG = {
-	showHeader   : true,
-	headerStyles : HEADER_STYLE,
-	bodyStyles   : BODY_STYLES,
-	fields       : [
-		{
-			label : 'Vendor ID',
-			key   : 'vendorSerialId',
-			span  : 1,
-		},
-		{
-			label : 'Kyc Status',
-			span  : 1,
-			func  : 'renderKYCStatus',
-		},
-		{
-			label : 'Name',
-			span  : 1,
-			func  : 'renderName',
-		},
-		{
-			label : geo.others.pan_number.label.toUpperCase(),
-			key   : geo.others.pan_number.label,
-			span  : 1,
+	const VENDOR_CONFIG = {
+		showHeader   : true,
+		headerStyles : HEADER_STYLE,
+		bodyStyles   : BODY_STYLES,
+		fields       : [
+			{
+				label : 'Vendor ID',
+				key   : 'vendorSerialId',
+				span  : 1,
+			},
+			{
+				label : 'Kyc Status',
+				span  : 1,
+				func  : 'renderKYCStatus',
+			},
+			{
+				label : 'Name',
+				span  : 1,
+				func  : 'renderName',
+			},
+			{
+				label : geo.others.pan_number.label.toUpperCase(),
+				key   : geo.others.pan_number.label,
+				span  : 1,
 
-		},
-		{
-			label : 'Category',
-			span  : 1,
-			func  : 'renderCategory',
-		},
-		{
-			label   : 'Payments',
-			span    : 1,
-			func    : 'renderPayments',
-			sorting : { name: 'paymentSortType' },
-		},
-		{
-			label   : 'Open Invoices',
-			key     : 'openInvoices',
-			span    : 1,
-			sorting : { name: 'openInvoiceSortType' },
-			func    : 'renderInvoice',
-		},
-		{
-			label   : 'Created At',
-			span    : 1,
-			func    : 'rendeDate',
-			sorting : { name: 'createdAtSortType' },
-		},
-		// {
-		// 	label : '',
-		// 	key   : 'viewMoreButton',
-		// 	span  : 1,
-		// 	func  : 'renderViewMoreButton',
-		// },
-	],
+			},
+			{
+				label : 'Category',
+				span  : 1,
+				func  : 'renderCategory',
+			},
+			{
+				label   : 'Payments',
+				span    : 1,
+				func    : 'renderPayments',
+				sorting : { name: 'paymentSortType' },
+			},
+			{
+				label   : 'Open Invoices',
+				key     : 'openInvoices',
+				span    : 1,
+				sorting : { name: 'openInvoiceSortType' },
+				func    : 'renderInvoice',
+			},
+			{
+				label   : 'Created At',
+				span    : 1,
+				func    : 'rendeDate',
+				sorting : { name: 'createdAtSortType' },
+			},
+			// {
+			// 	label : '',
+			// 	key   : 'viewMoreButton',
+			// 	span  : 1,
+			// 	func  : 'renderViewMoreButton',
+			// },
+		],
+	};
+
+	const EXPENSE_CONFIG = {
+		showHeader   : true,
+		headerStyles : HEADER_STYLE,
+		bodyStyles   : BODY_STYLES,
+		fields       : [
+			{
+				label : 'Name',
+				key   : 'sellerDetails.organizationName',
+				span  : 1.5,
+			},
+			{
+				label : 'Invoice Number',
+				func  : 'getInvoiceNumber',
+				span  : 1.5,
+			},
+			{
+				label : 'Category',
+				span  : 1.3,
+				func  : 'renderCategory',
+			},
+			{
+				label : 'Invoice Amount',
+				func  : 'renderInvoiceAmount',
+				span  : 1.5,
+			},
+			{
+				label : 'TDS',
+				func  : 'renderTds',
+				span  : 0.8,
+			},
+			{
+				label : 'Payable',
+				span  : 1.2,
+				func  : 'getPayable',
+			},
+			{
+				label : 'Paid',
+				func  : 'renderPaid',
+				span  : 1.2,
+			},
+			{
+				label : 'Invoice Dates',
+				func  : 'getInvoiceDates',
+				span  : 1.7,
+			},
+			{
+				label : 'Approved By',
+				func  : 'getApprovedByRecurring',
+				span  : 1.25,
+			},
+		],
+	};
+	return {
+		VENDOR_CONFIG,
+		EXPENSE_CONFIG,
+	};
 };
 
-export const expenseConfig = () => ({
-	showHeader   : true,
-	headerStyles : HEADER_STYLE,
-	bodyStyles   : BODY_STYLES,
-	fields       : [
-		{
-			label : 'Name',
-			key   : 'sellerDetails.organizationName',
-			span  : 1.5,
-		},
-		{
-			label : 'Invoice Number',
-			func  : 'getInvoiceNumber',
-			span  : 1.5,
-		},
-		{
-			label : 'Category',
-			span  : 1.3,
-			func  : 'renderCategory',
-		},
-		{
-			label : 'Invoice Amount',
-			func  : 'renderInvoiceAmount',
-			span  : 1.5,
-		},
-		{
-			label : 'TDS',
-			func  : 'renderTds',
-			span  : 0.8,
-		},
-		{
-			label : 'Payable',
-			span  : 1.2,
-			func  : 'getPayable',
-		},
-		{
-			label : 'Paid',
-			func  : 'renderPaid',
-			span  : 1.2,
-		},
-		{
-			label : 'Invoice Dates',
-			func  : 'getInvoiceDates',
-			span  : 1.7,
-		},
-		{
-			label : 'Approved By',
-			func  : 'getApprovedByRecurring',
-			span  : 1.25,
-		},
-	],
-});
+export default configs;
