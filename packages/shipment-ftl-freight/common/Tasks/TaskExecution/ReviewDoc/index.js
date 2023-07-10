@@ -10,7 +10,7 @@ import useUpdateDocuments from '../../../../hooks/useUpdateDocuments';
 import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
-const ZERO_INDEX = 0;
+const { zeroth_index } = GLOBAL_CONSTANTS;
 
 function ReviewDoc({
 	task = {},
@@ -37,7 +37,7 @@ function ReviewDoc({
 	let params = {};
 
 	if (!loading && list.list?.length) {
-		docData = list.list[ZERO_INDEX] || {};
+		docData = list?.list?.[zeroth_index] || {};
 		params = {
 			id                  : docData.id,
 			pending_task_id     : task.id,
