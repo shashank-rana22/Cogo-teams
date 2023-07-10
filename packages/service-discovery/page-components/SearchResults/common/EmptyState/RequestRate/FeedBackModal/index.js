@@ -52,7 +52,7 @@ function FeedBackModal({ data = {}, show, onClose = () => {}, proceeedWithFeedba
 			size="md"
 			show={show}
 			onClose={onClose}
-			placement="center"
+			placement="top"
 		>
 			{proceeedWithFeedback ? (
 				<>

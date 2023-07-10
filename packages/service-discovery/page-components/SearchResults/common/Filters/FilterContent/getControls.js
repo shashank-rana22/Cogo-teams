@@ -43,17 +43,27 @@ export const MAIN_CONTROLS_MAPPING = {
 	},
 };
 
-const getFilterControls = (data, service_key = 'primary_service') => {
+const getFilterControls = (
+	data,
+	service_key = 'primary_service',
+	showLoadControlsOnly = false,
+	showFiltersOnly = false,
+) => {
 	const service_type = data[service_key];
 
 	const { label, mainControls, extraControls } = MAIN_CONTROLS_MAPPING[service_type];
 
+	const ifShowMainControlsOnly = (y, n) => (showLoadControlsOnly ? y : n);
+	const ifShowFiltersOnly = (y, n) => (showFiltersOnly ? y : n);
+
 	const finalControls = [
-		{
-			label,
-			controls: mainControls(),
-		},
-		...extraControls.map((item) => EXTRA_FILTERS[item]),
+		...ifShowFiltersOnly([], [
+			{
+				label,
+				controls: mainControls(),
+			},
+		]),
+		...ifShowMainControlsOnly([], extraControls.map((item) => EXTRA_FILTERS[item])),
 	];
 	return finalControls;
 };

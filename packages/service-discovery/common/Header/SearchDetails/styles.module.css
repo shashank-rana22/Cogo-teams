@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    align-items: center;
+    /* max-width: 50%; */
+}
+
+.edit_details{
+    margin-left: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFCE6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+
+    &:hover{
+        transform: scale(1.1)
+    }
+}

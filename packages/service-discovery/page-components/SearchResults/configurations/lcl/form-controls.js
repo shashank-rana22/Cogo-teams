@@ -20,7 +20,7 @@ const lclControls = () => {
 			label       : 'Weight (kgs)',
 			type        : 'input',
 			placeholder : 'Enter weight',
-			span        : 5,
+			span        : 6,
 			rules       : {
 				required : true,
 				validate : (val) => validate(val),

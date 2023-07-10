@@ -35,14 +35,22 @@ const getSeperateObjects = (mainObj, extraArray) => {
 	return { loadObj, filterObj };
 };
 
-function FilterModal({ data, show, setShow, filters, setFilters }) {
+function FilterModal({
+	data = {},
+	show = false,
+	setShow = () => {},
+	filters = {},
+	setFilters = () => {},
+	showLoadControlsOnly = false,
+	showFiltersOnly = false,
+}) {
 	const { createSearch, loading } = useCreateSearch();
 
 	const router = useRouter();
 
 	const service_type = data[SERVICE_KEY];
 
-	const controls = getFilterControls(data, SERVICE_KEY);
+	const controls = getFilterControls(data, SERVICE_KEY, showLoadControlsOnly, showFiltersOnly);
 
 	const extraFiltersKeysArray = MAIN_CONTROLS_MAPPING[service_type].extraControls;
 

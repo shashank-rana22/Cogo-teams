@@ -1,0 +1,18 @@
+.container{
+    margin: 0 8px 0 20px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.heading{
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.6;
+    color: #000;
+}
+
+.amount_value{
+    font-size: 14px;
+    font-weight: 600;
+}

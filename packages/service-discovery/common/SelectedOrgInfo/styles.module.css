@@ -1,11 +1,12 @@
 .container{
     height: 100%;
-    max-width: max-content;
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
     margin-right: 24px;
     margin-left: -24px;
+    max-width: 30%;
+    
     &.light{
         background: #FFFAFA ;
     }
@@ -22,6 +23,10 @@
     text-transform: capitalize;
     opacity: 0.6;
     margin-bottom: 6px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
     &.light{
         color: #000000;
     }
@@ -47,4 +52,11 @@
 }
 .icon{
     cursor: pointer;
+}
+.tooltip{
+    width: max-content;
+}
+.tooltip_content{
+    text-align: left;
+	word-break: keep-all;
 }

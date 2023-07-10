@@ -38,15 +38,13 @@ function LocationDetails({
 	};
 
 	const renderLocationItem = (location) => {
-		const country = location?.display_name?.split(', ');
-
-		const { name, port_code } = location || {};
+		const { name, port_code, country_code } = location || {};
 
 		return (
 			<div className={styledTheme.location}>
 				<span className={styledTheme.location_country_text}>
 					{port_code ? `${port_code}, ` : null}
-					{country?.pop()}
+					{country_code}
 				</span>
 
 				<Tooltip
@@ -73,13 +71,11 @@ function LocationDetails({
 			{renderLocationItem(origin)}
 
 			{destination ? (
-				<>
-					<div className={styledTheme.icon}>
-						<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} />
-					</div>
+				<div className={styles.container}>
+					<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} className={styles.icon} />
 
 					{renderLocationItem(destination)}
-				</>
+				</div>
 			) : null}
 
 		</div>

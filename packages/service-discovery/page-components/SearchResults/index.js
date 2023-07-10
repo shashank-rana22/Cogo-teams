@@ -118,7 +118,7 @@ function SearchResults() {
 				setCurrentScreen={setScreen}
 			/>
 
-			<div style={showAdditionalHeader ? { opacity: 0.5, pointerEvents: 'none' } : null}>
+			<div style={showAdditionalHeader ? { opacity: 0.6, pointerEvents: 'none' } : null}>
 				{handleRatesList()}
 			</div>
 		</div>

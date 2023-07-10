@@ -31,6 +31,6 @@ const CONTROLLER_MAPPING = {
 
 };
 
-const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type];
+const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type] || InputController;
 
 export default getElementController;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useScrollDirection from '../../../../common/Header/useScrollDirection';
 import FclCard from '../RateCard/FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
@@ -31,17 +32,19 @@ function ListRateCards({
 	refetchSearch = () => {},
 
 }) {
+	const { scrollDirection } = useScrollDirection();
+
 	const PrimaryService = detail?.search_type;
 
 	if (PrimaryService === undefined) {
 		return null;
 	}
 
-	const { RateCard } = RateCardMapping[PrimaryService];
+	const { RateCard = FclCard } = RateCardMapping[PrimaryService] || {};
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
+			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 120 : 80 }}>
 				<Header
 					ratesData={rates}
 					details={detail}
