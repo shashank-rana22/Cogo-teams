@@ -47,6 +47,8 @@ const getFormatedRates = (type, data, singleServiceData) => {
 				fulfillment_ratio_7               : element?.fulfillment_data?.day_7 || element?.day_7,
 				fulfillment_ratio_15              : element?.fulfillment_data?.day_15 || element?.day_15,
 				fulfillment_ratio_30              : element?.fulfillment_data?.day_30 || element?.day_30,
+				shipment_type                     : element?.shipment_type,
+
 			};
 			row.rowData = rowData;
 			ROWS.push(row);

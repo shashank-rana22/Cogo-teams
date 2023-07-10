@@ -35,6 +35,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			destination_locals_price          : element?.destination_locals?.total_price,
 			destination_locals_currency       : element?.destination_locals?.total_price_currency,
 			updated_at                        : element?.updated_at,
+			shipment_type                     : element?.shipment_type,
 			mode                              : element?.mode,
 			via_route                         : element?.destination_main_port?.name,
 			total_price_currency              : validities?.currency,
