@@ -59,6 +59,7 @@
 
 .header_footer_filter_part {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 
 	:global {
@@ -76,10 +77,22 @@
 }
 
 .icon_wrapper {
+	position: relative;
 	margin: 4px;
 	font-size: 20px;
 }
 
 .scope_select_wrapper {
 	margin-right: 8px;
+}
+
+.filter_div {
+	position: absolute;
+	top: 6px;
+	right: 25px;
+	width: 7px;
+	height: 7px;
+	cursor: pointer;
+	background-color: #f68b21;
+	border-radius: 50%;
 }
