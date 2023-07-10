@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { getByKey } from '@cogoport/utils';
+import { getByKey, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AddButton from '../ConfigFunctions/AddButton';
@@ -88,7 +88,7 @@ const EntityConfig = ({ refetch }) => [
 				</div>
 
 				<div>
-					{getByKey(row, 'fundAllotmentTimeline')?.length && (
+					{!isEmpty(getByKey(row, 'fundAllotmentTimeline')) && (
 						<div className={styles.container}>
 							<div className={styles.details_text}>
 								{formatDate({

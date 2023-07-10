@@ -1,21 +1,39 @@
 import { Input, SingleDateRange } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo/index';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
 import SegmentedControl from '../../../commons/SegmentedControl/index.tsx';
 import {
-	ALL_INR_USD,
 	ALL_REQUEST,
-	CURRENCY,
 	VIEW_BY,
 } from '../Constants';
 
 import styles from './styles.module.css';
 
+const geo = getGeoConstants();
+
+const CURRENCY_OPTIONS = geo?.navigations.business_finance
+	.account_payables.treasury.allowed_currency.map((currency) => (
+		{
+			label : currency,
+			value : currency,
+		}
+	));
+
+const ENTITY_OPTION_CURRENCY = geo?.navigations.business_finance
+	.account_payables.treasury.entity_option_currency.map((currency) => (
+		{
+			label : currency,
+			value : currency.toLowerCase(),
+		}
+	));
+
 function SelectFilters({
-	filters,
-	setFilters,
+	filters = {},
+	setFilters = () => {},
 }) {
 	const { search = '', date = '' } = filters || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -26,16 +44,16 @@ function SelectFilters({
 							options={VIEW_BY}
 							activeTab={filters?.reportTime}
 							setActiveTab={(val) => (
-								setFilters({ ...filters, reportTime: val }))}
+								setFilters((prev) => ({ ...prev, reportTime: val })))}
 							background="#FDEBE9"
 							color="#ED3726"
 						/>
 						<div className={styles.currency_toggle}>
 							<SegmentedControl
-								options={CURRENCY}
+								options={CURRENCY_OPTIONS}
 								activeTab={filters?.reportCurrency}
 								setActiveTab={(val) => (
-									setFilters({ ...filters, reportCurrency: val }))}
+									setFilters((prev) => ({ ...prev, reportCurrency: val })))}
 								background="#FDEBE9"
 								color="#ED3726"
 							/>
@@ -47,16 +65,16 @@ function SelectFilters({
 							options={ALL_REQUEST}
 							activeTab={filters?.entityRequest}
 							setActiveTab={(val) => (
-								setFilters({ ...filters, entityRequest: val }))}
+								setFilters((prev) => ({ ...prev, entityRequest: val })))}
 							background="#FDEBE9"
 							color="#ED3726"
 						/>
 						<div className={styles.currency_toggle}>
 							<SegmentedControl
-								options={ALL_INR_USD}
+								options={ENTITY_OPTION_CURRENCY}
 								activeTab={filters?.entityCurrency}
 								setActiveTab={(val) => (
-									setFilters({ ...filters, entityCurrency: val }))}
+									setFilters((prev) => ({ ...prev, entityCurrency: val })))}
 								background="#FDEBE9"
 								color="#ED3726"
 
@@ -71,11 +89,11 @@ function SelectFilters({
 						? (
 							<Input
 								value={search || ''}
-								onChange={(value) => setFilters({
-									...filters,
+								onChange={(value) => setFilters((prev) => ({
+									...prev,
 									search: value || undefined,
-								})}
-								placeholder="Search by account Number"
+								}))}
+								placeholder="Search by Account Number"
 								size="sm"
 								style={{ width: '340px' }}
 								suffix={(
@@ -91,10 +109,10 @@ function SelectFilters({
 							<SingleDateRange
 								placeholder="Enter Date Range"
 								name="date"
-								onChange={(value) => setFilters({
-									...filters,
+								onChange={(value) => setFilters((prev) => ({
+									...prev,
 									date: value || undefined,
-								})}
+								}))}
 								value={date}
 								maxDate={new Date()}
 								isPreviousDaysAllowed

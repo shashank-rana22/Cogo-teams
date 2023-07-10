@@ -561,6 +561,15 @@ export default {
 				},
 			},
 		},
+		business_finance: {
+			account_payables: {
+				treasury: {
+					allowed_currency       : ['INR', 'USD', 'EUR', 'SDG', 'GBP'],
+					allowed_entity         : ['101', '201', '301', '401'],
+					entity_option_currency : ['ALL', 'INR', 'USD', 'VND'],
+				},
+			},
+		},
 	},
 	others: {
 		registration_number: {
@@ -593,6 +602,7 @@ export default {
 				default_country_code      : 'IN',
 				template_default_language : 'english',
 			},
+
 		},
 	},
 };

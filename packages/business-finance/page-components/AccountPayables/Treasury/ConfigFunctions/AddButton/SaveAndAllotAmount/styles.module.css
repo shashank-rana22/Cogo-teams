@@ -3,7 +3,7 @@
 }
 
 .header_text {
-	font-size: 18px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 }
 

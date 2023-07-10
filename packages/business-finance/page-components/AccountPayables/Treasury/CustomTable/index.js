@@ -10,9 +10,9 @@ import ListData from './ListData';
 import styles from './styles.module.css';
 
 function CustomTable({
-	data = {}, onPageChange, loading,
-	filters,
-	setFilters,
+	data = {}, onPageChange = () => {}, loading = false,
+	filters = {},
+	setFilters = () => {},
 }) {
 	const { list = [], pageIndex = 1, totalRecords = 0 } = (data || {});
 
@@ -33,17 +33,14 @@ function CustomTable({
 					setFilters={setFilters}
 				/>
 			) }
-			{!isEmpty(list)
-				? (
-					<Pagination
-						className={styles.pagination}
-						type="number"
-						currentPage={pageIndex}
-						totalItems={totalRecords}
-						pageSize={10}
-						onPageChange={onPageChange}
-					/>
-				) : null}
+			<Pagination
+				className={styles.pagination}
+				type="number"
+				currentPage={pageIndex}
+				totalItems={totalRecords}
+				pageSize={10}
+				onPageChange={onPageChange}
+			/>
 		</div>
 	);
 }

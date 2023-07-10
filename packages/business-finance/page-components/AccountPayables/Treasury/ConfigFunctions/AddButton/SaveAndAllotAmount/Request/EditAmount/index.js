@@ -31,7 +31,7 @@ function EditAmount({
 						</div>
 						<IcMEdit
 							cursor="pointer"
-							style={{ marginLeft: '5px' }}
+							style={{ marginLeft: '4px' }}
 							onClick={() => {
 								setValue('requestedAmount', requestedAmount);
 								setEditAmount((prev) => !prev);
@@ -53,7 +53,7 @@ function EditAmount({
 							height={20}
 							width={20}
 							cursor="pointer"
-							style={{ marginLeft: '5px' }}
+							style={{ marginLeft: '4px' }}
 							onClick={() => {
 								setValue('requestedAmount', requestedAmount);
 								setEditAmount((prev) => !prev);

@@ -4,6 +4,6 @@
 
 .text {
 	padding: 4px;
-	font-size: 13px;
+	font-size: var(--font-size-lg);
 	font-weight: 400;
 }

@@ -27,7 +27,7 @@ function Treasury() {
 	const { list = [] } = entityListData || {};
 
 	const onPageChange = (val) => {
-		setEntityFilters({ ...entityFilters, pageIndex: val });
+		setEntityFilters((prev) => ({ ...prev, pageIndex: val }));
 	};
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/treasury-chest`;

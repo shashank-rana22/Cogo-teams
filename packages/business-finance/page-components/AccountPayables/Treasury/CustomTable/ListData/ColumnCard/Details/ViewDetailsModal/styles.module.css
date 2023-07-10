@@ -6,7 +6,7 @@
 }
 
 .header_text {
-	font-size: 18px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 }
 
@@ -18,7 +18,7 @@
 .card_list {
 	width: 500px;
 	margin: 12px 10px 23px;
-	border: 1px solid #f68b21;
+	border: 1px solid var(--color-accent-orange-2);
 }
 
 .style_header {

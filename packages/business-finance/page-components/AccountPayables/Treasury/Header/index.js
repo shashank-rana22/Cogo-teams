@@ -1,13 +1,17 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import Entity from './Entity';
 import Reports from './Reports';
 import styles from './styles.module.css';
 
-function Header({ filters, setFilters }) {
+const ENTITY_TAB = Object.keys(GLOBAL_CONSTANTS.cogoport_entities);
+
+function Header({ filters = {}, setFilters = () => {} }) {
 	const onEntityChange = (val) => {
-		setFilters({ ...filters, activeEntity: val });
+		setFilters((prev) => ({ ...prev, activeEntity: val }));
 	};
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -15,11 +19,16 @@ function Header({ filters, setFilters }) {
 				activeTab={filters?.activeEntity}
 				onChange={onEntityChange}
 			>
-				<TabPanel id="101" name="101" title={<Entity entityCode="101" />} />
-				<TabPanel id="202" name="201" title={<Entity entityCode="201" />} />
-				<TabPanel id="301" name="301" title={<Entity entityCode="301" />} />
-				<TabPanel id="401" name="401" title={<Entity entityCode="401" />} />
-				<TabPanel id="501" name="501" title={<Entity entityCode="501" />} />
+				{ENTITY_TAB.map(
+					(entity) => (
+						<TabPanel
+							key={entity}
+							id={entity}
+							name={entity}
+							title={<Entity entityCode={entity} />}
+						/>
+					),
+				)}
 				<TabPanel id="reports" name="reports" title={<Reports />} />
 			</Tabs>
 		</div>

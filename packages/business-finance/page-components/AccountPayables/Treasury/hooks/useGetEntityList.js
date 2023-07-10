@@ -20,6 +20,8 @@ const useGetEntityList = () => {
 		pageSize       : 10,
 	});
 
+	const isReportActiveEntity = entityFilters?.activeEntity === 'reports';
+
 	const {
 		pageIndex, pageSize, search, date, activeEntity,
 		entityRequest, entityCurrency, reportTime, reportCurrency,
@@ -55,7 +57,7 @@ const useGetEntityList = () => {
 		{ manual: true },
 	);
 
-	const api = entityFilters?.activeEntity === 'reports' ? reportsListApi : entityListApi;
+	const api = isReportActiveEntity ? reportsListApi : entityListApi;
 
 	const selectFromDate =		date?.startDate
 		&& formatDate({
@@ -74,30 +76,30 @@ const useGetEntityList = () => {
 			formatType : 'dateTime',
 			separator  : ' ',
 		});
-	const view = entityFilters?.activeEntity === 'reports' ? entityFilters?.reportTime : undefined;
+	const view = isReportActiveEntity ? entityFilters?.reportTime : undefined;
 
 	const refetch = useCallback(async () => {
 		try {
 			await api({
 				params: {
 					accNo      : query || undefined,
-					entityCode : entityFilters?.activeEntity === 'reports' ? undefined : entityFilters?.activeEntity,
-					request    : entityFilters?.activeEntity === 'reports' ? undefined : entityFilters?.entityRequest,
-					currency   : entityFilters?.activeEntity === 'reports'
+					entityCode : isReportActiveEntity ? undefined : entityFilters?.activeEntity,
+					request    : isReportActiveEntity ? undefined : entityFilters?.entityRequest,
+					currency   : isReportActiveEntity
 						? entityFilters?.reportCurrency : entityFilters?.entityCurrency,
 					viewBy    : selectFromDate && selectToDate ? 'date_Range' : view,
-					fromDate  : entityFilters?.activeEntity === 'reports' ? selectFromDate : undefined,
-					toDate    : entityFilters?.activeEntity === 'reports' ? selectToDate : undefined,
-					pageIndex : entityFilters?.activeEntity === 'reports' ? pageIndex : undefined,
-					pageSize  : entityFilters?.activeEntity === 'reports' ? pageSize : undefined,
+					fromDate  : isReportActiveEntity ? selectFromDate : undefined,
+					toDate    : isReportActiveEntity ? selectToDate : undefined,
+					pageIndex : isReportActiveEntity ? pageIndex : undefined,
+					pageSize  : isReportActiveEntity ? pageSize : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.data?.message);
 		}
 	}, [api, entityFilters?.activeEntity, entityFilters?.entityCurrency,
-		entityFilters?.entityRequest, entityFilters?.reportCurrency, pageIndex,
-		pageSize, query, selectFromDate, selectToDate, view]);
+		entityFilters?.entityRequest, entityFilters?.reportCurrency, isReportActiveEntity,
+		pageIndex, pageSize, query, selectFromDate, selectToDate, view]);
 	const filtervalue = Object.values(entityFilters);
 
 	const filterClear = filtervalue.filter((item) => {

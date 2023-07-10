@@ -6,6 +6,26 @@ const CHECK_LEAP_YEAR = 4;
 const CHECK_DIVISIBLE = 0;
 const LEAP_YEAR_HUNDRED = 100;
 const LEAP_YEAR_FOUR = 400;
+const START_MONTH_DATE = 1;
+const END_ODD_MONTH_DATE = 31;
+const END_EVEN_MONTH_DATE = 30;
+const LEAP_YEAR_ODD_DATE = 29;
+const LEAP_YEAR_EVEN_DATE = 28;
+const LEAD_DATE_CHECK = 10;
+
+const THIRTY_DAY_MONTH = ['11', '9', '6', '4'];
+const THIRTY_ONE_DAY_MONTH = ['1', '3', '5', '7', '8', '10', '12'];
+const LEAP_YEAR_MONTH = ['2'];
+
+const CREATE_TIME = '05:30:00';
+
+function addLeadingZero(value) {
+	return value < LEAD_DATE_CHECK ? `0${value}` : value;
+}
+
+function createDate(year, month, day) {
+	return `${year}-${addLeadingZero(month)}-${addLeadingZero(day)} ${CREATE_TIME}`;
+}
 
 const useGetEntityReport = ({
 	showDetails,
@@ -17,49 +37,23 @@ const useGetEntityReport = ({
 }) => {
 	let formatedFromDate = '';
 	let formatedToDate = '';
-	if (month === '1') {
-		formatedFromDate = `${year}-01-01 05:30:00`;
-		formatedToDate = `${year}-01-31 05:30:00`;
-	} else if (month === '2') {
-		formatedFromDate = `${year}-02-01 05:30:00`;
+
+	if (THIRTY_DAY_MONTH.includes(month)) {
+		formatedFromDate = createDate(year, month, START_MONTH_DATE);
+		formatedToDate = createDate(year, month, END_EVEN_MONTH_DATE);
+	} else if (THIRTY_ONE_DAY_MONTH.includes(month)) {
+		formatedFromDate = createDate(year, month, START_MONTH_DATE);
+		formatedToDate = createDate(year, month, END_ODD_MONTH_DATE);
+	} else if (LEAP_YEAR_MONTH.includes(month)) {
+		formatedFromDate = createDate(year, month, START_MONTH_DATE);
 		const formatedYear = parseInt(year, 10);
 		if (
 			formatedYear / CHECK_LEAP_YEAR === CHECK_DIVISIBLE
 			&& formatedYear / LEAP_YEAR_HUNDRED === CHECK_DIVISIBLE
 			&& formatedYear / LEAP_YEAR_FOUR === CHECK_DIVISIBLE
 		) {
-			formatedToDate = `${year}-02-29 05:30:00`;
-		} else formatedToDate = `${year}-02-28 05:30:00`;
-	} else if (month === '3') {
-		formatedFromDate = `${year}-03-01 05:30:00`;
-		formatedToDate = `${year}-03-31 05:30:00`;
-	} else if (month === '4') {
-		formatedFromDate = `${year}-04-01 05:30:00`;
-		formatedToDate = `${year}-04-30 05:30:00`;
-	} else if (month === '5') {
-		formatedFromDate = `${year}-05-01 05:30:00`;
-		formatedToDate = `${year}-05-31 05:30:00`;
-	} else if (month === '6') {
-		formatedFromDate = `${year}-06-01 05:30:00`;
-		formatedToDate = `${year}-06-30 05:30:00`;
-	} else if (month === '7') {
-		formatedFromDate = `${year}-07-01 05:30:00`;
-		formatedToDate = `${year}-07-31 05:30:00`;
-	} else if (month === '8') {
-		formatedFromDate = `${year}-08-01 05:30:00`;
-		formatedToDate = `${year}-08-31 05:30:00`;
-	} else if (month === '9') {
-		formatedFromDate = `${year}-09-01 05:30:00`;
-		formatedToDate = `${year}-09-30 05:30:00`;
-	} else if (month === '10') {
-		formatedFromDate = `${year}-10-01 05:30:00`;
-		formatedToDate = `${year}-10-31 05:30:00`;
-	} else if (month === '11') {
-		formatedFromDate = `${year}-11-01 05:30:00`;
-		formatedToDate = `${year}-11-30 05:30:00`;
-	} else if (month === '12') {
-		formatedFromDate = `${year}-12-01 05:30:00`;
-		formatedToDate = `${year}-12-31 05:30:00`;
+			formatedToDate = createDate(year, month, LEAP_YEAR_ODD_DATE);
+		} else formatedToDate = createDate(year, month, LEAP_YEAR_EVEN_DATE);
 	}
 
 	const [
