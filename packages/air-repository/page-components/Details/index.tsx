@@ -25,9 +25,40 @@ interface DetailsProps {
 }
 
 function Details({
-	data, loading, setShowModal, setItem, setEdit, listRepository, page, setPage,
+	data = {},
+	loading = false,
+	setShowModal = () => {},
+	setItem = () => {},
+	setEdit = () => {},
+	listRepository = () => {},
+	page = 1,
+	setPage = () => {},
 }:DetailsProps) {
 	const { fields } = RepositoryFields;
+
+	const editDetail = (singleItem) => {
+		const { last_edited_by:lastEditedBy, updated_at:updatedAt } = singleItem || {};
+		return (
+			<div className={styles.edit_detail}>
+				Last Edited :
+				<span>
+					BY:
+					{' '}
+					{lastEditedBy}
+					{' '}
+					-
+					{' '}
+					{formatDate({
+						date       : updatedAt,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ' ',
+					})}
+				</span>
+			</div>
+		);
+	};
 
 	const functions = {
 		handleAirline: (singleItem) => (
@@ -77,39 +108,17 @@ function Details({
 				</Popover>
 			</div>
 		),
-		handleEditDetail: (singleItem) => {
-			const editDetail = (
-				<div className={styles.edit_detail}>
-					Last Edited :
-					<span>
-						BY:
-						{' '}
-						{singleItem.last_edited_by}
-						{' '}
-						-
-						{' '}
-						{formatDate({
-							date       : singleItem.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						})}
-					</span>
-				</div>
-			);
-			return (
-				<div className={styles.tooltip_container}>
-					<Tooltip
-						content={editDetail}
-						placement="top"
-						interactive
-					>
-						<div className={styles.overflow_text}>{editDetail}</div>
-					</Tooltip>
-				</div>
-			);
-		},
+		handleEditDetail: (singleItem) => (
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					content={editDetail(singleItem)}
+					placement="top"
+					interactive
+				>
+					<div className={styles.overflow_text}>{editDetail(singleItem)}</div>
+				</Tooltip>
+			</div>
+		),
 	};
 	return (
 		<div className={styles.details_list}>
