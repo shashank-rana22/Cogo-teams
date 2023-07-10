@@ -96,23 +96,17 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					<div className={styles.text}>
 						2 Days :
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_2 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_2 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_2 : '--'}
+						{data?.rowData?.fulfillment_ratio_2 || '--'}
 					</div>
 					<div className={styles.text}>
 						7 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_7 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_7 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_7 : '--' }
+						{data?.rowData?.fulfillment_ratio_7 || '--'}
 					</div>
 					<div className={styles.text}>
 						30 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_30 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_30 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_30 : '--' }
+						{data?.rowData?.fulfillment_ratio_30 || '--'}
 					</div>
 				</div>
 

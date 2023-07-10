@@ -4,7 +4,6 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 	const ROWS = [];
 	(allPreferenceCardsData || []).forEach((element) => {
 		const data = element?.data?.[DEFAULT_INDEX];
-		const validities = data?.validities?.[DEFAULT_INDEX];
 
 		const row = {
 			id: element?.buy_rate_preferences?.rate_id || element?.rate_id,
@@ -13,8 +12,8 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 			service_provider         : data?.service_provider,
 			air_line                 : data?.airline?.business_name,
 			shipping_line            : data?.shipping_line?.business_name,
-			total_price              : validities?.total_price || data?.total_price || DEFAULT_VALUE,
-			currency                 : data?.currency || validities?.currency || '',
+			total_price              : data?.total_price || DEFAULT_VALUE,
+			currency                 : data?.currency || '',
 			fulfillment_ratio_2      : data?.fulfillment_data?.day_2 || data?.day_2,
 			fulfillment_ratio_7      : data?.fulfillment_data?.day_7 || data?.day_7,
 			fulfillment_ratio_15     : data?.fulfillment_data?.day_15 || data?.day_15,
@@ -23,9 +22,9 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 			priority                 : element?.priority,
 			sell_price_per_container : element?.sell_rate_preferences?.basic_freight_rate || DEFAULT_VALUE,
 			sell_price_currency      : element?.sell_rate_preferences?.currency,
-			profit                   : validities?.profit || data?.profit || DEFAULT_VALUE,
-			profit_percentage        : validities?.profit_percentage || data?.profit_percentage || DEFAULT_VALUE,
-			line_items               : validities?.line_items || data?.line_items || [],
+			profit                   : data?.profit || DEFAULT_VALUE,
+			profit_percentage        : data?.profit_percentage || DEFAULT_VALUE,
+			line_items               : data?.line_items || [],
 			origin_locals            : element?.origin_locals,
 			destination_locals       : element?.destination_locals,
 			source                   : data?.source || undefined,
