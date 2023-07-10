@@ -52,9 +52,15 @@ function Supplier() {
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
 				/>,
-				organization_evaluation : <SupplierEvaluation setStatus={setStatus} />,
-				supplier_approval       : <SupplierApproval setStatus={setStatus} />,
-				contract_sla            : <ContractSla setStatus={setStatus} />,
+				organization_evaluation: <SupplierEvaluation
+					id={id}
+					service={supplierData?.service}
+					organization_id={supplierData?.organization_id}
+					setStatus={setStatus}
+					getOrganizationService={getOrganizationService}
+				/>,
+				supplier_approval : <SupplierApproval setStatus={setStatus} />,
+				contract_sla      : <ContractSla setStatus={setStatus} />,
 			}[status]}
 
 		</div>

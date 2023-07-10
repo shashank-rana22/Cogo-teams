@@ -3,11 +3,27 @@ import { Table, Toggle, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useGetOrganizationEvaluationDetails from '../../../hooks/useGetOrganizationEvaluationDetails';
+import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
+
 import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
 
-function SupplierEvaluation({ setStatus }) {
+function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationService, service }) {
 	const [show, setShow] = useState(false);
+	const [feedback, setFeedback] = useState('');
+	const {
+		data: organizationEvaluationDetails,
+	} = useGetOrganizationEvaluationDetails({ organization_id, id, setStatus, getOrganizationService });
+	console.log(organizationEvaluationDetails);
+	const { UpdateOrganizationService } = useUpdateOrganizationService({
+		organization_id, stage_of_approval: 'due_dilligance', service, getOrganizationService,
+	});
+
+	const handleSubmit = () => {
+		UpdateOrganizationService();
+	};
+
 	const columns = [
 		{
 			id       : 'parameters',
@@ -95,12 +111,14 @@ function SupplierEvaluation({ setStatus }) {
 					</div>
 					<div className={styles.lower_right}>
 						Feedback
+						{feedback}
 						<Textarea
 							className={styles.lower_right_feedback}
 							name="a4"
 							size="lg"
 							defaultValue="Rishi"
 							placeholder="A4"
+							onChange={setFeedback}
 						/>
 					</div>
 				</div>
@@ -109,12 +127,12 @@ function SupplierEvaluation({ setStatus }) {
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
-					onClick={() => setStatus('supplier_approval')}
+					onClick={handleSubmit}
 				>
 					Save & Do it Later
 
 				</Button>
-				<Button onClick={() => setStatus('supplier_approval')}>Submit & Next</Button>
+				<Button onClick={handleSubmit}>Submit & Next</Button>
 			</div>
 		</>
 	);

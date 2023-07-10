@@ -24,6 +24,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
-
+	{
+		api          : 'get_organization_evaluation_details',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 export default apis;
