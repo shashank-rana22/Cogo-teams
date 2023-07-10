@@ -71,15 +71,9 @@ function ListData({
 									<div className={styles.durations}>
 										{formatDate({
 											date       : created_at,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd'],
-											formatType : 'date',
-										})}
-										,
-										{' '}
-										{formatDate({
-											date       : created_at,
-											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
-											formatType : 'time',
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
 										})}
 									</div>
 								</div>
