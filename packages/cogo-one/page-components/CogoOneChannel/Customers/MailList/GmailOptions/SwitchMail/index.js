@@ -11,6 +11,7 @@ function SwitchMail({
 	userEmailAddress = '',
 	activeMailAddress = '',
 	setActiveMailAddress = () => {},
+	setShowPopover = () => {},
 }) {
 	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
@@ -21,7 +22,10 @@ function SwitchMail({
 					<div
 						key={itm}
 						role="presentation"
-						onClick={() => setActiveMailAddress(itm)}
+						onClick={() => {
+							setActiveMailAddress(itm);
+							setShowPopover(false);
+						}}
 						className={cl`${styles.mail_container} ${itm === activeMailAddress
 							? styles.active_mail
 							: ''}`}

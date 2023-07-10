@@ -37,6 +37,7 @@ function GmailOption({
 						viewType={viewType}
 						userEmailAddress={userEmailAddress}
 						activeMailAddress={activeMailAddress}
+						setShowPopover={setShowPopover}
 						setActiveMailAddress={setActiveMailAddress}
 					/>
 				)}
