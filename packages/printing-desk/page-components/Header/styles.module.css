@@ -1,0 +1,13 @@
+.heading {
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.heading::after {
+	display: block;
+	width: 100px;
+	height: 4px;
+	content: "";
+	background: var(--color-primary-error-red-2);
+	border-radius: 8px;
+}

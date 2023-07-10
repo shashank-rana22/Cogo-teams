@@ -1,5 +1,12 @@
+import Header from './Header';
+
 function PrintingDesk() {
-	return <h1>Printing Desk</h1>;
+	return (
+		<div>
+			<Header />
+
+		</div>
+	);
 }
 
 export default PrintingDesk;
