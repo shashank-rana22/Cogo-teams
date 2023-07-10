@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 const { zeroth_index } = GLOBAL_CONSTANTS;
 const MINIMUM_LENGTH = 1;
+const MINIMUM_VALUE = 0;
 const INCREMENT_CONSTANT = 1;
 const MINIMUM_REMOVEABLE_NUMBER = 1;
 const TOTAL_SPAN = 12;
@@ -29,7 +30,7 @@ function Child({
 	error = {},
 	formValues = {},
 	id = '',
-	length = 1,
+	length = MINIMUM_VALUE,
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
