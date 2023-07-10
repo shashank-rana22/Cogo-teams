@@ -1,6 +1,6 @@
 import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactFragment } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
