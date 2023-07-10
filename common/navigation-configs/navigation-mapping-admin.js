@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAnnouncement,
 	IcMSettings,
@@ -6,7 +7,6 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
-	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -871,6 +871,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.overheads,
 			},
 			{
+				key           : 'business_finance-compliance',
+				title         : 'Compliance',
+				href          : '/v2/business-finance/compliance/[active_tab]',
+				as            : '/v2/business-finance/compliance/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.compliance,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -892,7 +901,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-dunnings',
 				title         : 'Dunnings',
 				href          : '/v2/business-finance/dunnings/[active_tab]',
-				as            : '/v2/business-finance/dunnings/campaign-management',
+				as            : '/v2/business-finance/dunnings/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.business_finance_dunnings,
@@ -1159,7 +1168,8 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
+					...apis.sales_invoice, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-shipment_air',
@@ -1207,6 +1217,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
+			},
+			{
+				key           : 'coe-cost_booking',
+				title         : 'FF Cost Booking',
+				href          : '/cost-booking',
+				as            : '/cost-booking',
+				type          : 'link',
+				main_apis     : ['list_shipment_air_csr_sheets'],
+				possible_apis : apis.ff_cost_booking,
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',
@@ -1347,11 +1366,13 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key   : 'coe-communication',
-				title : 'Communcation',
-				href  : '/communication',
-				as    : '/communication',
-				type  : 'link',
+				key           : 'coe-communication',
+				title         : 'Communcation',
+				href          : '/communication',
+				as            : '/communication',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.shipment,
 			},
 			{
 				key           : 'coe-ltl_run_sheets',
@@ -1408,7 +1429,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1555,6 +1576,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				possible_apis : apis.omni_channel,
 				main_apis     : [],
+			},
+			{
+				key           : 'marketing-utm_parameters',
+				title         : 'UTM Parameters',
+				href          : '/marketing/utm_parameters',
+				as            : '/marketing/utm_parameters',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.utm_parameters,
 			},
 		],
 		module_type: 'dashboards',
@@ -1879,8 +1909,8 @@ const navigationMappingAdmin = {
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
-		href          : '/awb-inventory',
-		as            : '/awb-inventory',
+		href          : '/v2/awb-inventory',
+		as            : '/v2/awb-inventory',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
@@ -1928,17 +1958,6 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
-	cost_booking: {
-		key           : 'cost_booking',
-		title         : 'FF Cost Booking',
-		href          : '/cost-booking',
-		as            : '/cost-booking',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : apis.cost_booking,
-		icon          : IcMBooking,
-		module_type   : 'dashboards',
-	},
 	platform_configuration: {
 		key       : 'platform_configuration',
 		title     : 'Platform configuration',
@@ -1962,7 +1981,7 @@ const navigationMappingAdmin = {
 		title : 'CogoVerse',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
 				alt="cogo-verse"
 				width="22px"
 				height="22px"
@@ -2046,7 +2065,7 @@ const navigationMappingAdmin = {
 		title : 'Cogo One',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
 				width="22px"
 				height="22px"
@@ -2225,44 +2244,44 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
-	performance_management: {
-		key         : 'performance_management',
-		title       : 'Performance Management',
-		isSubNavs   : true,
-		module_type : 'dashboards',
-		main_apis   : ['list_user_feedbacks'],
-		icon        : IcMPartnersCogoport,
-		options     : [
-			{
-				key           : 'performance_management-employee_directory',
-				title         : 'Employee Directory',
-				href          : '/v2/performance-management/employee-directory',
-				as            : '/v2/performance-management/employee-directory',
-				possible_apis : apis.employee_directory,
-			},
-			{
-				key           : 'performance_management-user_dashboard',
-				title         : 'User Dashboard',
-				href          : '/v2/performance-management/user-dashboard',
-				as            : '/v2/performance-management/user-dashboard',
-				possible_apis : apis.user_dashboard,
-			},
-			{
-				key           : 'performance_management-manager_dashboard',
-				title         : 'Manager Dashboard',
-				href          : '/v2/performance-management/manager-dashboard',
-				as            : '/v2/performance-management/manager-dashboard',
-				possible_apis : apis.manager_dashboard,
-			},
-			{
-				key           : 'performance_management-hr_dashboard',
-				title         : 'HR Dashboard',
-				href          : '/v2/performance-management/hr-dashboard',
-				as            : '/v2/performance-management/hr-dashboard',
-				possible_apis : apis.hr_dashboard,
-			},
-		],
-	},
+	// performance_management: {
+	// 	key         : 'performance_management',
+	// 	title       : 'Performance Management',
+	// 	isSubNavs   : true,
+	// 	module_type : 'dashboards',
+	// 	main_apis   : ['list_user_feedbacks'],
+	// 	icon        : IcMPartnersCogoport,
+	// 	options     : [
+	// 		{
+	// 			key           : 'performance_management-employee_directory',
+	// 			title         : 'Employee Directory',
+	// 			href          : '/v2/performance-management/employee-directory',
+	// 			as            : '/v2/performance-management/employee-directory',
+	// 			possible_apis : apis.employee_directory,
+	// 		},
+	// 		{
+	// 			key           : 'performance_management-user_dashboard',
+	// 			title         : 'User Dashboard',
+	// 			href          : '/v2/performance-management/user-dashboard',
+	// 			as            : '/v2/performance-management/user-dashboard',
+	// 			possible_apis : apis.user_dashboard,
+	// 		},
+	// 		{
+	// 			key           : 'performance_management-manager_dashboard',
+	// 			title         : 'Manager Dashboard',
+	// 			href          : '/v2/performance-management/manager-dashboard',
+	// 			as            : '/v2/performance-management/manager-dashboard',
+	// 			possible_apis : apis.manager_dashboard,
+	// 		},
+	// 		{
+	// 			key           : 'performance_management-hr_dashboard',
+	// 			title         : 'HR Dashboard',
+	// 			href          : '/v2/performance-management/hr-dashboard',
+	// 			as            : '/v2/performance-management/hr-dashboard',
+	// 			possible_apis : apis.hr_dashboard,
+	// 		},
+	// 	],
+	// },
 	ihls: {
 		key         : 'ihls',
 		title       : 'IHLS',
@@ -2448,8 +2467,24 @@ const navigationMappingAdmin = {
 				as            : '/v2/pricing/trends',
 				possible_apis : apis.pricing_trends,
 			},
+			{
+				key           : 'chakravyuh-feedback',
+				title         : 'Feedback Dashboard',
+				href          : '/v2/chakravyuh/feedback-dashboard',
+				as            : '/v2/chakravyuh/feedback-dashboard',
+				possible_apis : apis.pricing_trends,
+			},
 		],
 
+	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
 	},
 };
 

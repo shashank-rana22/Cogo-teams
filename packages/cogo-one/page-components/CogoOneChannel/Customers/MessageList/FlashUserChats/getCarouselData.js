@@ -4,12 +4,13 @@ import styles from './styles.module.css';
 
 const getCarouselData = ({
 	flashMessagesList = [],
-	activeCardId,
+	activeTab,
 	userId,
 	setActiveMessage,
 	firestore,
 	claimChat,
 	claimLoading,
+	viewType,
 }) => (
 	flashMessagesList.map(
 		(eachRoom) => ({
@@ -18,7 +19,7 @@ const getCarouselData = ({
 				<div className={styles.flash_message_wrapper}>
 					<MessageCardData
 						item={eachRoom}
-						activeCardId={activeCardId}
+						activeTab={activeTab}
 						userId={userId}
 						setActiveMessage={setActiveMessage}
 						firestore={firestore}
@@ -26,10 +27,12 @@ const getCarouselData = ({
 						claimChat={claimChat}
 						claimLoading={claimLoading}
 						source="flash_messages"
+						viewType={viewType}
 					/>
 				</div>
 			),
 		}),
 	)
 );
+
 export default getCarouselData;

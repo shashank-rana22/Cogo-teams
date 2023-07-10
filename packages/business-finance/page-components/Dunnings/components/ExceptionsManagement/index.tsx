@@ -1,5 +1,5 @@
 import { Pagination } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-table';
 import masterExceptionColumn from '../../configurations/master-exception-table';
@@ -26,6 +26,9 @@ function ExceptionsManagement() {
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
 	const [cycleListId, setCycleListId] = useState();
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+	const [masterCount, setMasterCount] = useState(0);
+	const [cyclewiseCount, setCyclewiseCount] = useState(0);
+
 	const {
 		data,
 		masterExceptionLoading,
@@ -70,6 +73,11 @@ function ExceptionsManagement() {
 	const finalTotalRecords = totalRecords > 0 ? totalRecords : list.length;
 	const finalCycleTotalRecords = cycleTotalRecords > 0 ? cycleTotalRecords : cycleList.length;
 
+	useEffect(() => {
+		setMasterCount(totalRecords);
+		setCyclewiseCount(cycleTotalRecords);
+	}, [cycleTotalRecords, totalRecords]);
+
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -83,6 +91,20 @@ function ExceptionsManagement() {
 					>
 						<div className={item.key === subTabsValue ? styles.sub_container_click : styles.sub_container}>
 							{item?.label}
+							{' '}
+							{item.key === 'masterExceptionList' ? (
+								<span>
+									(
+									{masterCount || 0}
+									)
+								</span>
+							) : (
+								<span>
+									(
+									{cyclewiseCount || 0}
+									)
+								</span>
+							)}
 						</div>
 					</div>
 				))}

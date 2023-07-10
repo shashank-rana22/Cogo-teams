@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const actionButtonMapping = {
+const ACTION_BUTTON_MAPPING = {
 	knockoff_pending   : 'Knock Off',
 	collection_pending : 'Collect Document',
 	under_collection   : 'Mark Collected',
@@ -21,10 +21,11 @@ const conditionMapping = {
 const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) => {
 	let showAccordion = true;
 	let showInvoiceAndTask = false;
+	let showTask = false;
 	let showDeliveryOrderTask = false;
 	const actionButton = {
 		show     : activeTab !== 'knockoff_pending',
-		text     : actionButtonMapping[activeTab],
+		text     : ACTION_BUTTON_MAPPING[activeTab],
 		disabled : false,
 	};
 
@@ -102,6 +103,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				actionButton.disabled = false;
 				actionButton.text = 'Release';
 				actionButton.class = 'release';
+				showTask = true;
 			}
 
 			break;
@@ -114,6 +116,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				showAccordion = false;
 				actionButton.show = false;
 			}
+			showTask = true;
 			break;
 		}
 		case 'surrendered': {
@@ -123,6 +126,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				actionButton.text = 'BL SURRENDERED';
 				actionButton.class = 'surrendered';
 			}
+			showTask = true;
 			break;
 		}
 		case 'on_hold': {
@@ -140,6 +144,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 		actionButton,
 		showInvoiceAndTask,
 		showDeliveryOrderTask,
+		showTask,
 	};
 };
 

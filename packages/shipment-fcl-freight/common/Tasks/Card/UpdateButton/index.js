@@ -59,6 +59,22 @@ function UpdateButton({
 		);
 	}
 
+	if (task.task === 'update_pre_alert_shared_with_igm_at' && task.status === 'pending') {
+		disableTask = (tasksList || []).some(
+			(item) => item.service_type === 'fcl_freight_service'
+				&& item.status === 'pending'
+				&& item.task === 'upload_bill_of_lading',
+		);
+	}
+
+	if (task.task === 'upload_draft_bill_of_lading' && task.status === 'pending') {
+		disableTask = (tasksList || []).some(
+			(item) => item.service_type === 'fcl_freight_service'
+				&& item.status === 'pending'
+				&& item.task === 'upload_draft_bill_of_lading',
+		);
+	}
+
 	if (
 		RPA_SUPPORTED_TASKS.includes(task.task)
 		&& (task.task !== 'upload_si')
@@ -71,7 +87,7 @@ function UpdateButton({
 					entity_type={task?.task}
 					onUpload={handleChange}
 				>
-					<Button className={styles.upload_button}>
+					<Button className={styles.upload_button} disabled={disableTask}>
 						{!show ? buttonText : 'Close'}
 					</Button>
 				</RPASearch>

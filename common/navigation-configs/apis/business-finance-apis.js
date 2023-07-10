@@ -122,6 +122,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api      			: 'get_purchase_bills_bill_accept_by_finance_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'put_purchase_bills_by_id_urgeny_tag',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -232,6 +237,18 @@ const business_finance = {
 			api          : 'get_shipment_invoice_preference',
 			access_type  : 'private',
 			feature      : 'coeFinance',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_document',
+			access_type  : 'private',
+			feature      : 'coe_finance',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			feature      : 'coe_finance',
 			service_name : 'shipment',
 		},
 	],

@@ -1,5 +1,7 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, MultiSelect } from '@cogoport/components';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -13,13 +15,8 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 }
-interface Ite {
-	id?: string;
-	icon?: JSX.Element;
-	text?: string;
-}
 
-function FilterModal({ filters, setFilters }: Props) {
+function FilterModal({ filters = {}, setFilters = () => {} }: Props) {
 	const [showModal, setShowModal] = useState(false);
 
 	const isFilterApplied = () => {
@@ -27,9 +24,9 @@ function FilterModal({ filters, setFilters }: Props) {
 			filters?.billDate
       || filters?.billType
       || filters?.dueDate
-      || filters?.serviceType?.length > 0
+      || isEmpty(filters?.serviceType)
       || filters?.updatedDate
-      || filters?.currency?.length > 0
+      || isEmpty(filters?.currency)
 		) {
 			return true;
 		}
@@ -51,6 +48,13 @@ function FilterModal({ filters, setFilters }: Props) {
 		setFilters({});
 		setCurrencies([]);
 		setShowModal(false);
+	};
+	const handleRemoveCurrency = (item) =>	{
+		const currencyList = [...(filters?.currency || [])];
+		const newList = currencyList?.filter((currency) => currency !== item);
+		setFilters(() => ({
+			currency: newList,
+		}));
 	};
 
 	return (
@@ -81,29 +85,35 @@ function FilterModal({ filters, setFilters }: Props) {
 							marginLeft   : '26px',
 						}}
 					>
-						{CURRENCY_DATA.map((item: Ite) => {
-							const { id = '', icon, text } = item;
-							return (
-								<div
-									className={`${styles.currency_values}
-											${
-                        currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected
-									}`}
-									onClick={() => {
-										if (currencies?.includes(id)) {
-											const value = currencies.filter((it) => it !== item?.id);
-											setCurrencies(value);
-										} else {
-											setCurrencies([...currencies, id]);
-										}
-									}}
-									role="presentation"
-								>
-									<div className="iconShow">{icon}</div>
-									<div className="textShow">{text}</div>
-								</div>
-							);
-						})}
+						<div>
+							<div className={styles.select_input}>
+								<MultiSelect
+									value={filters?.currency}
+									onChange={(val:string[]) => setFilters((prev) => ({ ...prev, currency: val }))}
+									placeholder="Select Currency"
+									options={getCurrencyOptions()}
+									size="md"
+								/>
+							</div>
+
+							<li className={styles.selected_items_container}>
+								{filters?.currency?.map((item) => (
+									<div key={item?.label} className={styles.items}>
+										<div className={styles.selected_options}>{item}</div>
+										<div
+											className={styles.cross}
+											onClick={() => {
+												handleRemoveCurrency(item);
+											}}
+											role="presentation"
+										>
+											&#10005;
+										</div>
+									</div>
+								))}
+							</li>
+
+						</div>
 					</div>
 
 					<div className={styles.container_filter}>

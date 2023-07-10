@@ -42,6 +42,11 @@ import {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
+	asyncFieldsListAgents,
 	asyncListSaasHsCodes,
 } from '../../../utils/getAsyncFields';
 
@@ -103,6 +108,11 @@ const keyAsyncFieldsParamsMapping = {
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	list_dunning_templates               : asyncListDunningTemplates,
+	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_chat_agents                     : asyncFieldsListAgents,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 };
 
@@ -147,7 +157,9 @@ function AsyncSelect(props) {
 			selectedValue = rest.value;
 		}
 
-		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+		const selectedOption = getAsyncOptionsProps.options.filter(
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}

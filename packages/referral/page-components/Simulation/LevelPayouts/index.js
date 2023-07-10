@@ -1,12 +1,15 @@
 import { cl, Placeholder } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import { NETWORK_EMPTY_STATE } from '../../../constants';
 import useGetSimulation from '../../../hooks/useGetSimulation';
 import styles from '../styles.module.css';
+
+const PLACEHOLDER_COUNT = 14;
+const MAX_DECIMAL_VALUE = 2;
 
 function LevelPayouts({ singleData = {}, activeTab = '' }) {
 	const geo = getGeoConstants();
@@ -22,13 +25,13 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 
 	const totalPayouts = singleData?.cell?.label;
 
-	const checkLevelEmptyState = isEmpty(levelData);
+	const hasLevelEmptyState = isEmpty(levelData);
 
 	if (loading) {
 		return (
 			<div>
 				<div className={styles.networks_chart}>
-					{[...Array(14).keys()].map((itm) => (
+					{[...Array(PLACEHOLDER_COUNT).keys()].map((itm) => (
 						<Placeholder className={styles.networks_skeleton} key={itm} />
 					))}
 				</div>
@@ -36,11 +39,11 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		);
 	}
 
-	if (checkLevelEmptyState) {
+	if (hasLevelEmptyState) {
 		return (
 			<div className={cl`${styles.empty_state} `}>
 				<Image
-					src={NETWORK_EMPTY_STATE}
+					src={GLOBAL_CONSTANTS.image_url.empty_image}
 					alt="empty-state"
 					width={150}
 					height={150}
@@ -48,6 +51,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.user_lavel_payouts}>
@@ -57,13 +61,13 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 							{key}
 						</div>
 						<div className={`${styles.single_payouts} ${styles.payouts_level}`}>
-							{value.toFixed(2)}
+							{value.toFixed(MAX_DECIMAL_VALUE)}
 						</div>
 					</div>
 				))}
 			</div>
 
-			{!checkLevelEmptyState && (
+			{!hasLevelEmptyState && (
 				<div className={styles.total_payouts}>
 					Total Payout:
 					<div className={styles.amount}>
