@@ -80,6 +80,7 @@ const getColumns = ({ onClickViewDocument, setShowUploaderModal }) => [
 					<Button
 						size="sm"
 						onClick={() => downloadFileAtUrl({ url: item?.document_url })}
+						themeType="accent"
 					>
 						DOWNLOAD
 					</Button>
