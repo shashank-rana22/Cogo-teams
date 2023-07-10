@@ -69,8 +69,8 @@ const extraApiPayload = (values, end_point, task) => {
 						}
 					});
 				} else if (key === 'cargo_dimension') {
-					const cargo_dimensions = values[key][zeroth_index];
-					const { length, breadth, height, unit } = cargo_dimensions;
+					const cargo_dimensions = values?.[key]?.[zeroth_index];
+					const { length, breadth, height, unit } = cargo_dimensions || {};
 					DATA[key] = {
 						length,
 						breadth,
