@@ -24,7 +24,6 @@ const getLeaderBoardColumns = ({
 	selectAllHelper = () => {},
 	bulkDeallocateFilter = () => {},
 	setModalDetailsArray,
-	// modalDetailsArray = [],
 }) => {
 	const onChangeBodyCheckbox = ({ event, user_id, item }) => {
 		setCheckedRowsId((previousIds) => {
@@ -72,9 +71,13 @@ const getLeaderBoardColumns = ({
 
 	const columns = [
 		{
-			id       : 'check',
-			Header   : <Checkbox onChange={(event) => onChangeTableHeadCheckbox(event)} checked={isAllChecked} />,
-			accessor : (item) => {
+			id     : 'check',
+			Header : <Checkbox
+				onChange={(event) => onChangeTableHeadCheckbox(event)}
+				checked={isAllChecked}
+				disabled={!bulkDeallocateFilter}
+			/>,
+			accessor: (item) => {
 				const { user_id } = item;
 				return (
 					<Checkbox
@@ -162,28 +165,15 @@ const getLeaderBoardColumns = ({
 		},
 		{
 			Header   : 'ALLOCATED KAM',
-			accessor : ({ stakeholder_name = [] }) => {
-				const totalStakeholders = stakeholder_name?.length;
-				if (totalStakeholders === CONSTANTS.MIN_STAKEHOLDERS) {
-					return '-';
-				}
-
-				const renderToolTip = stakeholder_name?.map((stakeholder) => `${startCase(stakeholder)}
-			${totalStakeholders > CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP ? ', ' : ''}`);
+			accessor : ({ stakeholder_name = '' }) => {
+				const renderToolTip = () => `${startCase(stakeholder_name)}`;
 
 				return (
 					<Tooltip content={renderToolTip} placement="bottom">
 						<div>
-							{stakeholder_name?.[CONSTANTS.FIRST_INDEX] || '-'}
+							{startCase(stakeholder_name) || '-'}
 						</div>
-						{totalStakeholders > CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP && (
-							<strong>
-								(+
-								{' '}
-								{totalStakeholders - CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP}
-								)
-							</strong>
-						)}
+
 					</Tooltip>
 				);
 			},

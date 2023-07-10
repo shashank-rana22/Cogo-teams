@@ -32,8 +32,6 @@ function Leaderboard(props) {
 	const [showDeallocateModal, setShowDeallocateModal] = useState(false);
 	const [modalDetailsArray, setModalDetailsArray] = useState([]);
 
-	console.log('modalDetailsObject', modalDetailsArray);
-
 	const columns = getLeaderBoardColumns({
 		setScoreTrendIds,
 		checkedRowsId,
@@ -69,7 +67,11 @@ function Leaderboard(props) {
 		});
 		if (event?.target?.checked) {
 			setValue('warmth', ['ice_cold', 'cold']);
-		} else { setValue('warmth', undefined); setCheckedRowsId([]); }
+		} else {
+			setValue('warmth', undefined);
+			setCheckedRowsId([]);
+			setModalDetailsArray([]);
+		}
 	};
 
 	return (

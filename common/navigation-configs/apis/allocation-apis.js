@@ -466,6 +466,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'post_allocation_engagement_scoring_account_bulk_deallocation',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 };
 

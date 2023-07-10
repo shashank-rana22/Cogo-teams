@@ -1,6 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
+import useBulkDeallocation from '../../../hooks/useBulkDeallocation';
+
 import MultipleCheckedAccounts from './MultipleCheckedAccounts';
 import SingleCheckedAccount from './SingleCheckedAccount';
 
@@ -10,19 +12,27 @@ function DeallocateModal({
 	setShowDeallocateModal = () => {},
 	showDeallocateModal = false, modalDetailsArray,
 }) {
+	const isSingleSelected = modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT;
+
+	const { onDeallocate } = useBulkDeallocation({ modalDetailsArray, setShowDeallocateModal });
+
 	return (
-		<Modal show={showDeallocateModal} onClose={() => setShowDeallocateModal(false)}>
+		<Modal
+			show={showDeallocateModal}
+			onClose={() => setShowDeallocateModal(false)}
+			size={isSingleSelected ? 'lg' : 'md'}
+		>
 			<Modal.Header title="De - Allocate" />
 
 			<Modal.Body>
-				{modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT
+				{isSingleSelected
 					? <SingleCheckedAccount modalDetailsArray={modalDetailsArray} />
 					: <MultipleCheckedAccounts modalDetailsArray={modalDetailsArray} />}
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary">Cancel</Button>
-				<Button style={{ marginLeft: '8px' }}>De-Allocate</Button>
+				<Button themeType="secondary" onClick={() => setShowDeallocateModal(false)}>Cancel</Button>
+				<Button style={{ marginLeft: '8px' }} onClick={() => onDeallocate()}>De-Allocate</Button>
 			</Modal.Footer>
 		</Modal>
 	);
