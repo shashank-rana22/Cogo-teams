@@ -29,7 +29,7 @@ function List({ fields, data, loading }) {
 	return (
 		<div className={styles.container}>
 			<Header fields={fields} />
-			<div className={styles.card_list}>
+			<div className={styles.card_list} key={`data-length-${data?.length}`}>
 				{data.length ? (
 					(data || []).map((item) => (
 						<CardItem
