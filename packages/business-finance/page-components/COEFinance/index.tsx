@@ -10,7 +10,8 @@ import styles from './styles.module.css';
 
 function CoeFinance() {
 	const { query, push } = useRouter();
-	const { statsData } = usePurchaseViewStats();
+	const [filters, setFilters] = useState({ timePeriod: 'day' });
+	const { statsData, statsCOEApprovedData, statsLoading } = usePurchaseViewStats({ filters });
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
@@ -40,7 +41,13 @@ function CoeFinance() {
 						name="dashboard"
 						title="Dashboard"
 					>
-						<Dashboard statsData={statsData} />
+						<Dashboard
+							statsData={statsData}
+							statsCOEApprovedData={statsCOEApprovedData}
+							filters={filters}
+							setFilters={setFilters}
+							statsLoading={statsLoading}
+						/>
 					</TabPanel>
 					<TabPanel name="all_invoices" title="All Invoices">
 						<AllInvoices statsData={statsData} />
