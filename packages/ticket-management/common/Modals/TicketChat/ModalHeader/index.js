@@ -12,7 +12,7 @@ function ModalHeader({
 	updateTicketActivity = () => {},
 }) {
 	const {
-		Ticket: ticket = {}, TicketStatus : ticketStatus = false,
+		Ticket: ticket = {}, TicketStatus : ticketStatus = '',
 		IsClosureAuthorizer: isClosureAuthorizer = false, IsCurrentReviewer: isCurrentReviewer = '',
 	} = ticketData || {};
 	const { ID: id = '' } = ticket || {};

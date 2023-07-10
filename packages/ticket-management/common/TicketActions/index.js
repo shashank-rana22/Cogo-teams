@@ -57,7 +57,7 @@ function RenderContent({ filteredActions = [], isModal = false, handleAction = (
 }
 
 function TicketActions({
-	ticketStatus = false,
+	ticketStatus = '',
 	isModal = false,
 	handleTicket = () => {},
 	setShowReassign = () => {},
