@@ -22,10 +22,16 @@ const CargoInsurance = dynamic(() => import('./CargoInsurance'), { ssr: false })
 const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
 
+const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent',
+	'superadmin', 'admin'];
+
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
+
+	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
+		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -119,13 +125,18 @@ function List({ isSeller = false }) {
 			) : null}
 
 			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Services
-				</Button>
+
+				{isAdditionalServiceAllowed
+					? (
+						<Button
+							onClick={() => setShowModal('charge_code')}
+							disabled={shipment_data?.is_job_closed}
+						>
+							<div className={styles.add_icon}>+</div>
+							Add Additional Services
+						</Button>
+					)
+					: null }
 
 				<Button
 					onClick={() => setShowModal('cargo_insurance_service')}

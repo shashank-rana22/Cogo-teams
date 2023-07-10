@@ -41,7 +41,7 @@ export default {
 	uuid: {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
