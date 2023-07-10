@@ -7,15 +7,15 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ConfirmModal({
-	confirmModal,
-	setConfirmModal,
-	airServiceFormValues,
-	airLocalServiceFormValues,
-	handleSubmit,
-	onCreate,
+	confirmModal = false,
+	setConfirmModal = () => {},
+	airServiceFormValues = {},
+	airLocalServiceFormValues = {},
+	handleSubmit = () => {},
+	onCreate = () => {},
 	reallocationFunc = () => {},
-	confirmLoading,
-	watchServiceProvider,
+	confirmLoading = false,
+	watchServiceProvider = {},
 }) {
 	const geo = getGeoConstants();
 	const isCogoXpress =		watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id

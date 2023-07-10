@@ -26,6 +26,8 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 
 function DefaultView() {
+	const router = useRouter();
+
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		servicesList = [], getShipmentStatusCode,
@@ -34,8 +36,6 @@ function DefaultView() {
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
-
-	const router = useRouter();
 
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
@@ -80,16 +80,14 @@ function DefaultView() {
 		return (
 			<div className={styles.shipment_not_found}>
 				<h2 className={styles.error_heading}>Something Went Wrong!</h2>
-
 				<div className={styles.error_subheading}>We are looking into it.</div>
-
 				<Button
 					onClick={() => router.push(`${window.location.origin}
 					/${router?.query?.partner_id}/shipment-management`)}
 					className={styles.refresh}
 				>
 					<IcMArrowBack />
-					&nbsp;
+					{' '}
 					Back to Bookings
 				</Button>
 			</div>
