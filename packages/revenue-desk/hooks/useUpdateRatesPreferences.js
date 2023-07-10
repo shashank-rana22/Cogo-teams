@@ -5,7 +5,7 @@ import { DEFAULT_INDEX, INCREMENT_BY_ONE } from '../page-components/constants';
 
 const useUpdateRatesPreferences = ({
 	supplierPayload,
-	inventory,
+	// inventory,
 	serviceData,
 	reason,
 	othertext,
@@ -19,69 +19,42 @@ const useUpdateRatesPreferences = ({
 		method: 'POST', url: API_TO_CALL,
 	}, { manual: true, autoCancel: false });
 	const REVENUE_DESK_DECISION = [];
-	(serviceData || []).forEach((data) => {
-		const service_id = data?.id;
-		const service_type = data?.service_type;
-		const SINGLE_BOOKING_DOCS = [];
-		const SPLITABLE_BOOKING_DOCS = [];
-		const MERGEABLE_BOOKING_DOCS = [];
 
+	const preference_set_ids = Object.keys(supplierPayload || {});
+
+	preference_set_ids.forEach((service_id) => {
+		const service = serviceData.find((serviceItem) => serviceItem.id === service_id);
+		let similarServices = [];
+		if (service.service_type === 'ftl_freight_service') {
+			similarServices = serviceData.filter(
+				(serviceItem) => serviceItem.id !== service_id && serviceItem.truck_type === service.truck_type,
+			).map((serviceItem) => serviceItem.id);
+		}
+		const selectedRates = supplierPayload?.[service_id] || [];
 		const SERVICE_PROVIDERS = [];
-		(supplierPayload?.[service_id] || []).forEach((provider, index) => {
+		(selectedRates).forEach((provider, index) => {
 			SERVICE_PROVIDERS.push({
 				priority                    : index + INCREMENT_BY_ONE,
 				rate_id                     : provider?.rate_id,
 				id                          : provider?.id,
 				validity_id                 : provider?.validity_id,
-				booking_confirmation_status : data?.service_type === 'air_freight_service' ? 'pending' : undefined,
+				booking_confirmation_status : service?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
 		});
-		(inventory?.[service_id] || []).forEach((docs) => {
-			const DOC_OBJECT = {};
-
-			DOC_OBJECT.ids = docs?.allid?.[DEFAULT_INDEX].includes(':')
-				? docs?.allid?.[DEFAULT_INDEX].split(':')
-				: docs.allid;
-
-			DOC_OBJECT.priority = docs?.priority;
-			DOC_OBJECT.type = docs?.type?.split('_booking')[DEFAULT_INDEX];
-			if (docs?.type === 'single_booking_notes') {
-				SINGLE_BOOKING_DOCS.push(DOC_OBJECT);
-			}
-			if (docs?.type === 'splitable_booking_notes') {
-				SPLITABLE_BOOKING_DOCS.push(DOC_OBJECT);
-			}
-			if (docs?.type === 'mergeable_booking_notes') {
-				MERGEABLE_BOOKING_DOCS.push(DOC_OBJECT);
-			}
-		});
-		const BOOKING_CONFIRMATION_DOCS = [];
-		const confirmationDocs = [
-			...SINGLE_BOOKING_DOCS,
-			...MERGEABLE_BOOKING_DOCS,
-			...SPLITABLE_BOOKING_DOCS,
-		];
-		(confirmationDocs || []).forEach((docs, index) => {
-			const DOC_OBJECT = docs;
-			DOC_OBJECT.priority = index + INCREMENT_BY_ONE;
-			BOOKING_CONFIRMATION_DOCS.push(DOC_OBJECT);
-		});
-
+		const { service_type } = service;
 		const final_payload = {
-			service_providers         : SERVICE_PROVIDERS,
-			booking_confirmation_docs : BOOKING_CONFIRMATION_DOCS,
-			service_id                : service_id || undefined,
-			service_type              : service_type || undefined,
+			service_providers               : SERVICE_PROVIDERS,
+			booking_confirmation_docs       : [],
+			service_id                      : service_id || undefined,
+			service_type                    : service.service_type || undefined,
+			set_similar_services_preference : similarServices.length > DEFAULT_INDEX,
+			similar_service_ids             : similarServices,
 			sell_rate_preferences:
 					service_type && service_type === 'fcl_freight_service' && sellRateDetails?.[service_id]
 						? sellRateDetails?.[service_id]
 						: [],
 		};
-		const hasData =	supplierPayload?.[service_id]?.length || BOOKING_CONFIRMATION_DOCS?.length;
-
-		if (hasData) {
-			REVENUE_DESK_DECISION.push(final_payload);
-		}
+		REVENUE_DESK_DECISION.push(final_payload);
 	});
 
 	const updateTrigger = async () => {

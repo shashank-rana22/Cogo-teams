@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const INITIAL_CARD_COUNT = 2;
 
 function RatesCard({
-	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
+	ratesData = [], setPrefrences, prefrences, type, singleServiceData, setSellRates,
 	sellRates, loading, shipmentData,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
@@ -35,7 +35,7 @@ function RatesCard({
 								key={item}
 								prefrences={prefrences}
 								setPrefrences={setPrefrences}
-								serviceData={serviceData}
+								singleServiceData={singleServiceData}
 								setSellRates={setSellRates}
 								sellRates={sellRates}
 								prefrence_key={type}

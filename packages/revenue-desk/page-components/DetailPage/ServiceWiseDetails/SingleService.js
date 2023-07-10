@@ -5,12 +5,13 @@ import getAvailableRatesDetails from '../../../helper/getAvailableRatesDetails';
 import getFormatedRates from '../../../helper/getFormatedRates';
 import getSellRateDetailPayload from '../../../helper/getSellRateDetailPayload';
 import getSystemFormatedRates from '../../../helper/getSystemFormatedRates';
-import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
+import groupSimilarServices from '../../../helper/groupSimilarServices';
+// import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import { DEFAULT_INDEX, VALUE_ONE } from '../../constants';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
-import ExistingInventory from './ExistingInventory';
+// import ExistingInventory from './ExistingInventory';
 import PreferenceSetServiceData from './PreferenceSetServiceData';
 import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
@@ -40,11 +41,11 @@ const labels = [
 ];
 
 function SingleService({
-	groupedServicesData,
+	groupedServicesData: servicesData,
 	supplierPayload,
 	setSupplierPayload,
-	inventory,
-	setInventory,
+	// inventory,
+	// setInventory,
 	priceData,
 	setSellRateDetails,
 	sellRateDetails,
@@ -55,28 +56,32 @@ function SingleService({
 	setEmailModal,
 	revenueDeskDecisionsData,
 }) {
+	const serviceIds = (servicesData || []).map((item) => item.id);
+	const groupedServicesData = groupSimilarServices(servicesData);
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const [sellRates, setSellRates] = useState({});
-	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[DEFAULT_INDEX]);
+	const [selectedService, setSingleServiceData] = useState(groupedServicesData[DEFAULT_INDEX]?.id);
+	const singleServiceData = groupedServicesData.find((service) => service.id === selectedService);
 	const isPreferenceSet = servicesWithPreferenceSet.includes(singleServiceData?.id);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({
 		singleServiceData,
 		shipmentData,
 		isPreferenceSet,
 	});
-	const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
-		shipmentData,
-		singleServiceData,
-	});
+	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
+	// 	shipmentData,
+	// 	singleServiceData,
+	// });
 
 	const OPTIONS = [];
 	(groupedServicesData || []).forEach((data) => {
-		OPTIONS.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
+		OPTIONS.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data?.id });
 	});
 
 	useEffect(() => {
-		setSingleServiceData(groupedServicesData[DEFAULT_INDEX]);
-	}, [groupedServicesData]);
+		setSingleServiceData(groupedServicesData[DEFAULT_INDEX]?.id);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(serviceIds)]);
 
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
 	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
@@ -117,7 +122,7 @@ function SingleService({
 				{OPTIONS.length > VALUE_ONE && (
 					<Select
 						options={OPTIONS}
-						value={singleServiceData}
+						value={selectedService}
 						onChange={(e) => { setSingleServiceData(e); }}
 					/>
 				)}
@@ -151,13 +156,13 @@ function SingleService({
 								shipmentData={shipmentData}
 							/>
 						) : null}
-					<ExistingInventory
+					{/* <ExistingInventory
 						docs={existingData?.docs}
 						loading={existingDataLoading}
 						prefrences={inventory}
 						setPrefrences={setInventory}
 						serviceId={singleServiceData?.id}
-					/>
+					/> */}
 					{(rateCardObj || [])?.map((item) => (
 						<RatesCard
 							type={item?.type}
@@ -165,7 +170,7 @@ function SingleService({
 							key={item}
 							prefrences={supplierPayload}
 							setPrefrences={setSupplierPayload}
-							serviceData={singleServiceData}
+							singleServiceData={singleServiceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
 							prefrence_key={item?.prefrence_key}
