@@ -11,7 +11,7 @@ function ApprovalActions({
 }) {
 	const [open, setOpen] = useState(false);
 
-	const uploadedDocData = uploadedDocs?.filter((doc) => doc?.file_name === item?.docName)?.[FIRST_DOC];
+	const uploadedDocData = uploadedDocs?.filter((doc) => doc?.id === item?.id)?.[FIRST_DOC];
 
 	const handleActions = () => {
 		if (uploadedDocData?.state === 'document_amendment_requested') {

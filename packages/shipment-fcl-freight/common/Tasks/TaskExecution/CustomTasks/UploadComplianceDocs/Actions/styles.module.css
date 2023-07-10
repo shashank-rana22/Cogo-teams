@@ -15,18 +15,6 @@
 	border-radius: 4px;
 }
 
-.uploaded {
-	height: fit-content;
-	padding: 2px 8px;
-	margin-right: 16px;
-	font-size: 10px;
-	font-weight: 400;
-	line-height: 150%;
-	color: var(--black, #221f20);
-	background-color: #c4dc91;
-	border-radius: 4px;
-}
-
 .uploaded_doc {
 	margin-right: 16px;
 	font-size: 12px;
@@ -34,5 +22,33 @@
 	line-height: 150%;
 	color: var(--black, #221f20);
 	text-decoration-line: underline;
+	white-space: nowrap;
 	cursor: pointer;
+}
+
+.text {
+	height: fit-content;
+	padding: 2px 4px;
+	margin-right: 16px;
+	font-size: 10px;
+	line-height: 150%;
+	color: var(--black, #221f20);
+	white-space: nowrap;
+	border-radius: 4px;
+}
+
+.amendment_requested {
+	background-color: #fef199;
+}
+
+.approved {
+	background-color: #c4dc91;
+}
+
+.rejected {
+	background-color: #f8aea8;
+}
+
+.uploaded {
+	background-color: #c4dc91;
 }

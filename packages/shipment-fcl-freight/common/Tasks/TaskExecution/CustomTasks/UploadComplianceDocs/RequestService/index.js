@@ -11,11 +11,15 @@ import styles from './styles.module.css';
 
 const FILTER_DOC_ARRAY_INIT_KEY = 0;
 
-function RequestService({ task = {} }) {
+function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 	const [newDoc, setNewDoc] = useState('');
+
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
-	const { apiTrigger, docLoading } = useCreateShipmentDocument({});
+
+	const { apiTrigger, docLoading } = useCreateShipmentDocument({
+		refetch: uploadedDocsRefetch,
+	});
 
 	const DOCS_LIST = [];
 	requestedDocsList?.map((resultItem) => {
@@ -28,16 +32,16 @@ function RequestService({ task = {} }) {
 	});
 
 	const onReviewSubmit = async () => {
-		const FilterDocList = requestedDocsList.filter((obj) => obj.doc_code === newDoc)?.[FILTER_DOC_ARRAY_INIT_KEY];
+		const filterDocList = requestedDocsList?.filter((obj) => obj?.doc_code === newDoc)?.[FILTER_DOC_ARRAY_INIT_KEY];
 
 		const DATA = {
 			documents: [{
-				file_name: FilterDocList?.doc_name || undefined,
+				file_name : filterDocList?.doc_name || undefined,
+				data      : {
+					doc_code        : newDoc,
+					doc_description : filterDocList?.doc_desc || undefined,
+				},
 			}],
-			data: {
-				doc_code        : newDoc,
-				doc_description : FilterDocList?.doc_desc || undefined,
-			},
 			shipment_id         : task?.shipment_id,
 			document_type       : 'compliance_document',
 			service_id          : task?.service_id,
@@ -58,10 +62,12 @@ function RequestService({ task = {} }) {
 		setNewDoc(val);
 	};
 
-	const requestNewDoc = () => (
+	return (
 		<div className={styles.container}>
 			<div className={styles.input}>
-				<div className={styles.label}>Choose the document you want to request</div>
+				<div className={styles.label}>
+					Choose the document you want to request
+				</div>
 
 				<Select
 					className={styles.search_input}
@@ -80,20 +86,7 @@ function RequestService({ task = {} }) {
 				onClick={onReviewSubmit}
 			>
 				Submit
-
 			</Button>
-		</div>
-	);
-
-	return (
-		<div>
-			{requestNewDoc()}
-
-			<div className={styles.new_doc_request}>
-				<Button themeType="secondary">
-					+ Request New Document
-				</Button>
-			</div>
 		</div>
 	);
 }

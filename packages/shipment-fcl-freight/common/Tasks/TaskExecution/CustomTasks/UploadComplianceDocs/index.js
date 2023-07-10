@@ -11,15 +11,21 @@ import RequestService from './RequestService';
 import styles from './styles.module.css';
 import excludeDocs from './utils/excludeDocsList';
 
+const FIRST_SERVICE = 0;
+const LENGTH_CHECK = 1;
+const FIRST_ELEM = 0;
+
+const TRADETYPE_MAPPING = {
+	export : 'EXPORT',
+	import : 'IMPORT',
+};
+
 function UploadComplianceDocs({
 	task = {},
 	onCancel = () => {},
 	taskListRefetch = () => {},
-	// services = [],
 }) {
-	const { primary_service } = useContext(ShipmentDetailContext);
-	// console.log(task, 'task');
-	// console.log(services, 'services');
+	const { primary_service, servicesList } = useContext(ShipmentDetailContext);
 
 	const { docs, loading } = useGetSaasComplianceDocs({ primary_service });
 
@@ -27,6 +33,9 @@ function UploadComplianceDocs({
 		params: {
 			shipment_id   : task?.shipment_id,
 			document_type : 'compliance_document',
+		},
+		defaultParams: {
+			page_limit: 50,
 		},
 	});
 
@@ -37,25 +46,6 @@ function UploadComplianceDocs({
 		},
 	});
 
-	const EXCULDE_DOCS_LIST = excludeDocs.export?.map((item) => item.doc_code);
-
-	// change export hardcoding
-	const REQUIRED_DOCS = docs?.filter((doc) => !EXCULDE_DOCS_LIST.includes(doc?.docCode)
-	&& doc?.tradeType === 'EXPORT');
-
-	const uploadedDocs = allUploadedDocs?.list?.filter((item) => item.state === 'document_uploaded');
-
-	const approvedDocs = allUploadedDocs?.list?.filter((item) => item.state === 'document_accepted');
-
-	const DISABLE_SUBMIT_TILL_ALL_UPLOADED = REQUIRED_DOCS?.length === uploadedDocs?.length;
-
-	const DISABLE_SUBMIT_TILL_ALL_APPROVED = REQUIRED_DOCS?.length === approvedDocs?.length;
-
-	const disableSubmit = !(task.task === 'approve_compliance_documents'
-		? DISABLE_SUBMIT_TILL_ALL_APPROVED : DISABLE_SUBMIT_TILL_ALL_UPLOADED);
-
-	const requestDocs = allUploadedDocs?.list?.filter((doc) => doc.state === 'document_requested');
-
 	const handleSubmit = async () => {
 		const payload = {
 			id: task?.id,
@@ -64,7 +54,32 @@ function UploadComplianceDocs({
 		await apiTrigger(payload);
 	};
 
-	const totalDocsList = [...(REQUIRED_DOCS || []), ...(requestDocs || [])];
+	const serviceTradeType = servicesList?.filter((service) => service?.id === task?.service_id)
+		?.[FIRST_SERVICE]?.trade_type;
+
+	const EXCULDE_DOCS_LIST = excludeDocs?.[serviceTradeType || '']?.map((item) => item.doc_code);
+
+	const REQUIRED_DOCS = docs?.filter((doc) => !EXCULDE_DOCS_LIST?.includes(doc?.docCode)
+	&& doc?.tradeType === TRADETYPE_MAPPING[serviceTradeType]);
+
+	const uploadedDocs = allUploadedDocs?.list?.filter((item) => item.state === 'document_uploaded');
+
+	let totalDocsList = [];
+	if (task.task === 'upload_compliance_documents') {
+		totalDocsList = REQUIRED_DOCS;
+	} else if (['approve_compliance_documents', 'amend_compliance_documents'].includes(task.task)) {
+		totalDocsList = allUploadedDocs?.list;
+	}
+
+	const uniq_doc_state = [...new Set(totalDocsList?.map((doc) => doc.state))];
+
+	const disableSubmitForKam = uploadedDocs?.length === totalDocsList?.length;
+
+	const disableSubmitForSO = uniq_doc_state?.length === LENGTH_CHECK
+	&& uniq_doc_state?.[FIRST_ELEM] === 'document_accepted';
+
+	const disableSubmit = !(task.task === 'upload_compliance_documents'
+		? disableSubmitForKam : disableSubmitForSO);
 
 	return loading || docLoading ? (
 		<Loader />
@@ -82,7 +97,12 @@ function UploadComplianceDocs({
 				/>
 			))}
 
-			{task.task === 'approve_compliance_documents' ? <RequestService task={task} /> : null}
+			{task.task === 'approve_compliance_documents' ? (
+				<RequestService
+					task={task}
+					uploadedDocsRefetch={getDocs}
+				/>
+			) : null}
 
 			<div className={styles.submit}>
 				<Button

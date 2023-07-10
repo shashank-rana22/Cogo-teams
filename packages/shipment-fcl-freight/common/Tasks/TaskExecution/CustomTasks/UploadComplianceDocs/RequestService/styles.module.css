@@ -22,8 +22,3 @@
 	align-items: center;
 	width: 60%;
 }
-
-.new_doc_request {
-	display: flex;
-	justify-content: flex-end;
-}

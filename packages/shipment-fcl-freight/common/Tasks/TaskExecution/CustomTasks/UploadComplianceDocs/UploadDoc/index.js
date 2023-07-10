@@ -32,7 +32,7 @@ function UploadDoc({
 	const { updateDocument, taskUpdateLoading } = useUpdateShipmentDocuments({ refetch: afterCreateRefetch });
 
 	const onSubmit = async (values) => {
-		if (type === 'update') {
+		if (type === 'update' || task.task === 'amend_compliance_documents') {
 			const UPDATE_DATA = {
 				id                  : existingDoc?.id,
 				document_url        : values?.upload_doc?.finalUrl,
@@ -45,11 +45,11 @@ function UploadDoc({
 				documents: [{
 					document_url : values?.upload_doc?.finalUrl,
 					file_name    : item?.docName || values?.upload_doc?.fileName,
+					data         : {
+						doc_code        : item?.docCode,
+						doc_description : item?.docExpNotes,
+					},
 				}],
-				data: {
-					doc_code        : item?.docCode,
-					doc_description : item?.docExpNotes,
-				},
 				shipment_id         : task?.shipment_id,
 				document_type       : 'compliance_document',
 				service_id          : task?.service_id,

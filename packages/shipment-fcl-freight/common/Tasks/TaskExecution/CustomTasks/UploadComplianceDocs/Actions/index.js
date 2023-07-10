@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import UploadDoc from '../UploadDoc';
@@ -16,14 +16,20 @@ function Actions({
 	const [open, setOpen] = useState(false);
 	const [updateOpen, setUpdateOpen] = useState(false);
 
-	const docData = allDocs?.filter((doc) => doc?.file_name === item?.docName)?.[FIRST_DOC];
-	console.log(docData, 'docData');
-	console.log(allDocs, 'allDocs');
-	console.log(item, 'item');
+	const docData = allDocs?.filter((doc) => [item?.file_name || item?.docName].includes(doc?.file_name))?.[FIRST_DOC];
+
+	let state = 'uploaded';
+	if (docData?.state === 'document_rejected') {
+		state = 'rejected';
+	} else if (docData?.state === 'document_accepted') {
+		state = 'approved';
+	} else if (docData?.state === 'document_amendment_requested') {
+		state = 'amendment_requested';
+	}
 
 	return (
 		<div>
-			{!isEmpty(docData) ? (
+			{!isEmpty(docData) && docData?.state !== 'document_requested' ? (
 				<div className={styles.actions_wrap}>
 					<a
 						href={docData?.document_url}
@@ -34,7 +40,9 @@ function Actions({
 						View Uploaded Document
 					</a>
 
-					<div className={styles.uploaded}>Uploaded</div>
+					<div className={cl`${styles.text} ${styles[state]}`}>
+						{startCase(state)}
+					</div>
 
 					{docData?.state !== 'document_accepted' ? (
 						<Button themeType="link" onClick={() => setUpdateOpen(true)}>
@@ -46,9 +54,7 @@ function Actions({
 						</Button>
 					) : null}
 				</div>
-			) : null}
-
-			{['document_uploaded', 'document_request'].includes(docData?.state) && isEmpty(docData) ? (
+			) : (
 				<div className={styles.actions_wrap}>
 					<div className={styles.not_uploaded}>Yet To Receive</div>
 
@@ -60,7 +66,7 @@ function Actions({
 						Upload
 					</Button>
 				</div>
-			) : null}
+			)}
 
 			{open ? (
 				<UploadDoc
@@ -69,6 +75,7 @@ function Actions({
 					setOpen={setOpen}
 					task={task}
 					uploadedDocsRefetch={uploadedDocsRefetch}
+					existingDoc={docData}
 				/>
 			) : null}
 
@@ -80,7 +87,7 @@ function Actions({
 					task={task}
 					uploadedDocsRefetch={uploadedDocsRefetch}
 					type="update"
-					existingDoc={allDocs}
+					existingDoc={docData}
 				/>
 			) : null}
 		</div>

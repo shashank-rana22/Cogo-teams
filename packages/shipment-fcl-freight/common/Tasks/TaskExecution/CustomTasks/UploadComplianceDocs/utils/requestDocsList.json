@@ -15,132 +15,132 @@
     "doc_desc": "Certificate by an accredited by a laboratory recognized in the Country of Origin providing the parameters and values of an analysis of a food product."
   },
   {
-    "Doc_Code": "001002",
+    "doc_code": "001002",
     "doc_name": "Lab analysis Report",
     "doc_desc": "Certificate providing the values of an analysis of a sample by a laboratory."
   },
   {
-    "Doc_Code": "001003",
+    "doc_code": "001003",
     "doc_name": "Blood Analysis Report",
     "doc_desc": "Certificate providing the values of an analysis of a sample of blood."
   },
   {
-    "Doc_Code": "002000",
+    "doc_code": "002000",
     "doc_name": "Certificate of conformity",
     "doc_desc": "Certificate certifying the conformity to predefined definitions."
   },
   {
-    "Doc_Code": "003000",
+    "doc_code": "003000",
     "doc_name": "Certificate of quality",
     "doc_desc": "Certificate certifying the quality of goods, services etc."
   },
   {
-    "Doc_Code": "003001",
+    "doc_code": "003001",
     "doc_name": "Product Approval",
     "doc_desc": "A Certificate signifying the quality approval of a food product."
   },
   {
-    "Doc_Code": "0030DC",
+    "doc_code": "0030DC",
     "doc_name": "Batch Release Certificate",
     "doc_desc": "A Certificate confirming the release of a production batch after due testing and quality controls."
   },
   {
-    "Doc_Code": "004000",
+    "doc_code": "004000",
     "doc_name": "Test report",
     "doc_desc": "Report providing the results of a test session."
   },
   {
-    "Doc_Code": "004001",
+    "doc_code": "004001",
     "doc_name": "Test Certificate",
     "doc_desc": "A Certificate providing the results of a test session."
   },
   {
-    "Doc_Code": "005000",
+    "doc_code": "005000",
     "doc_name": "Price/sales catalogue",
     "doc_desc": "A document/message to enable the transmission of information regarding pricing and catalogue details for goods and services offered by a seller to a buyer."
   },
   {
-    "Doc_Code": "006000",
+    "doc_code": "006000",
     "doc_name": "Product specification report",
     "doc_desc": "Report providing specification values of products."
   },
   {
-    "Doc_Code": "006001",
+    "doc_code": "006001",
     "doc_name": "Technical Writeup/ Literature",
     "doc_desc": "A report providing technical specifications of products"
   },
   {
-    "Doc_Code": "011000",
+    "doc_code": "011000",
     "doc_name": "Federal label approval",
     "doc_desc": "A pre-approved document relating to federal label approval requirements"
   },
   {
-    "Doc_Code": "0110FS",
+    "doc_code": "0110FS",
     "doc_name": "Specimen Copy of Label",
     "doc_desc": "A copy of a label of packaged food product intended to be imported, whether approved or under approval of FSSAI"
   },
   {
-    "Doc_Code": "0380AQ",
+    "doc_code": "0380AQ",
     "doc_name": "Vaccination certificate",
     "doc_desc": "Official document proving immunisation against certain diseases."
   },
   {
-    "Doc_Code": "0530HZ",
+    "doc_code": "0530HZ",
     "doc_name": "Safety and hazard data sheet",
     "doc_desc": "Document or message to supply advice on a dangerous or hazardous material to industrial customers so as to enable them to take measures to protect their employees and the environment from any potential harmful effects from these material."
   },
   {
-    "Doc_Code": "101000",
+    "doc_code": "101000",
     "doc_name": "Registration Document",
     "doc_desc": "An official document providing registration details."
   },
   {
-    "Doc_Code": "101001",
+    "doc_code": "101001",
     "doc_name": "Importer Exporter Certificate",
     "doc_desc": "The Certificate of registration issued by DGFT to an Importer or an Exporter"
   },
   {
-    "Doc_Code": "1010DC",
+    "doc_code": "1010DC",
     "doc_name": "Registration Certificate",
     "doc_desc": "The Certificate issued by the Drug Controller General for the Drug Manufacturer"
   },
   {
-    "Doc_Code": "101002",
+    "doc_code": "101002",
     "doc_name": "RCMC",
     "doc_desc": "Registration Cum Membership Certificate issued by an Export Promotion Council"
   },
   {
-    "Doc_Code": "105000",
+    "doc_code": "105000",
     "doc_name": "Purchase order",
     "doc_desc": "Document/message issued within an enterprise to initiate the purchase of articles, materials or services required for the production or manufacture of goods to be offered for sale or otherwise supplied to customers."
   },
   {
-    "Doc_Code": "165000",
+    "doc_code": "165000",
     "doc_name": "Bond",
     "doc_desc": "A document indicating a bond that guarantees the payment of duties etc or a performance."
   },
   {
-    "Doc_Code": "250000",
+    "doc_code": "250000",
     "doc_name": "Crew list declaration",
     "doc_desc": "Declaration regarding crew members aboard the conveyance."
   },
   {
-    "Doc_Code": "2670PQ",
+    "doc_code": "2670PQ",
     "doc_name": "Fumigation certificate",
     "doc_desc": "Certificate attesting that fumigation has been performed."
   },
   {
-    "Doc_Code": "271000",
+    "doc_code": "271000",
     "doc_name": "Packing list",
     "doc_desc": "Document/message specifying the distribution of goods in individual packages (in trade environment the despatch advice message is used for the packing list)."
   },
   {
-    "Doc_Code": "293000",
+    "doc_code": "293000",
     "doc_name": "Inspection report",
     "doc_desc": "A message informing a party of the results of an inspection."
   },
   {
-    "Doc_Code": "298000",
+    "doc_code": "298000",
     "doc_name": "Dangerous goods list",
     "doc_desc": "Listing of all details of dangerous goods carried."
   },
@@ -411,8 +411,7 @@
   },
   {
     "doc_code": "911001",
-    "doc_name": "FSSAI Import License",
-    "doc_desc": ""
+    "doc_name": "FSSAI Import License"
   },
   {
     "doc_code": "934000",
@@ -441,8 +440,7 @@
   },
   {
     "doc_code": "XXX002",
-    "doc_name": "Stuffing List",
-    "doc_desc": "NA"
+    "doc_name": "Stuffing List"
   },
   {
     "doc_code": "XXX003",
@@ -466,272 +464,218 @@
   },
   {
     "doc_code": "911TB1",
-    "doc_name": "CC for Tea Import by Tea Board",
-    "doc_desc": "NA"
+    "doc_name": "CC for Tea Import by Tea Board"
   },
   {
     "doc_code": "002KP0",
-    "doc_name": "Kimberley Process Certificate",
-    "doc_desc": "NA"
+    "doc_name": "Kimberley Process Certificate"
   },
   {
     "doc_code": "911001",
-    "doc_name": "FSSAI Import License",
-    "doc_desc": "NA"
+    "doc_name": "FSSAI Import License"
   },
   {
     "doc_code": "911BN2",
-    "doc_name": "Import Certificate for import of Narcotic Drugs",
-    "doc_desc": "NA"
+    "doc_name": "Import Certificate for import of Narcotic Drugs"
   },
   {
     "doc_code": "101DC1",
-    "doc_name": "Registration Certificate (Drugs)",
-    "doc_desc": "NA"
+    "doc_name": "Registration Certificate (Drugs)"
   },
   {
     "doc_code": "101DC2",
-    "doc_name": "Registration Certificate (Cosmetics)",
-    "doc_desc": "NA"
+    "doc_name": "Registration Certificate (Cosmetics)"
   },
   {
     "doc_code": "911CI3",
-    "doc_name": "Import Permit for Non-Insecticidal use",
-    "doc_desc": "NA"
+    "doc_name": "Import Permit for Non-Insecticidal use"
   },
   {
     "doc_code": "101CP1",
-    "doc_name": "Registration Certificate",
-    "doc_desc": "NA"
+    "doc_name": "Registration Certificate"
   },
   {
     "doc_code": "911DF1",
-    "doc_name": "Permit for Import of Livestock Products",
-    "doc_desc": "NA"
+    "doc_name": "Permit for Import of Livestock Products"
   },
   {
     "doc_code": "911DA3",
-    "doc_name": "NOC for Import of Aircraft for Operating Air Transport Services",
-    "doc_desc": "NA"
+    "doc_name": "NOC for Import of Aircraft for Operating Air Transport Services"
   },
   {
     "doc_code": "9111DC",
-    "doc_name": "Import Licence for Drugs",
-    "doc_desc": "NA"
+    "doc_name": "Import Licence for Drugs"
   },
   {
     "doc_code": "101LM1",
-    "doc_name": "Certificate of Registration of Importer of Weights and Measures",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of Registration of Importer of Weights and Measures"
   },
   {
     "doc_code": "XXX001",
-    "doc_name": "Narcotics Certificate",
-    "doc_desc": "NA"
+    "doc_name": "Narcotics Certificate"
   },
   {
     "doc_code": "6570FS",
-    "doc_name": "Food grade certificate",
-    "doc_desc": "NA"
+    "doc_name": "Food grade certificate"
   },
   {
     "doc_code": "0010DC",
-    "doc_name": "Certificate of analysis - Drug",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of analysis - Drug"
   },
   {
     "doc_code": "0010FS",
-    "doc_name": "Certificate of Analysis - Food & Supplement",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of Analysis - Food & Supplement"
   },
   {
     "doc_code": "1003",
-    "doc_name": "Blood Analysis Report",
-    "doc_desc": "NA"
+    "doc_name": "Blood Analysis Report"
   },
   {
     "doc_code": "2000",
-    "doc_name": "Certificate of conformity",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of conformity"
   },
   {
     "doc_code": "3000",
-    "doc_name": "Certificate of quality",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of quality"
   },
   {
     "doc_code": "626000",
-    "doc_name": "CITES Certificate",
-    "doc_desc": "NA"
+    "doc_name": "CITES Certificate"
   },
   {
     "doc_code": "629000",
-    "doc_name": "Veterinary quarantine certificate",
-    "doc_desc": "NA"
+    "doc_name": "Veterinary quarantine certificate"
   },
   {
     "doc_code": "6360AQ",
-    "doc_name": "Health certificate",
-    "doc_desc": "NA"
+    "doc_name": "Health certificate"
   },
   {
     "doc_code": "8520PQ",
-    "doc_name": "Phytosanitory Import permit by DPPQS",
-    "doc_desc": "NA"
+    "doc_name": "Phytosanitory Import permit by DPPQS"
   },
   {
     "doc_code": "8520AQ",
-    "doc_name": "Sanitary Import Permit",
-    "doc_desc": "NA"
+    "doc_name": "Sanitary Import Permit"
   },
   {
     "doc_code": "911PE1",
-    "doc_name": "Licence Form LE -8( Licence to Import explsovies)",
-    "doc_desc": "NA"
+    "doc_name": "Licence Form LE -8( Licence to Import explsovies)"
   },
   {
     "doc_code": "911PE2",
-    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5)",
-    "doc_desc": "NA"
+    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5)"
   },
   {
     "doc_code": "851000",
-    "doc_name": "Phyto Sanitary Certificates (PSCs) from NPPOs of origin country",
-    "doc_desc": "NA"
+    "doc_name": "Phyto Sanitary Certificates (PSCs) from NPPOs of origin country"
   },
   {
     "doc_code": "911PQ1",
-    "doc_name": "Import Permit issued by PQIS",
-    "doc_desc": "NA"
+    "doc_name": "Import Permit issued by PQIS"
   },
   {
     "doc_code": "911RB1",
-    "doc_name": "No Objection Certificate (NOC) for import of Natural Rubber",
-    "doc_desc": "NA"
+    "doc_name": "No Objection Certificate (NOC) for import of Natural Rubber"
   },
   {
     "doc_code": "101TO2",
-    "doc_name": "Registration-Cum-Membership Certificate [RCMC]",
-    "doc_desc": "NA"
+    "doc_name": "Registration-Cum-Membership Certificate [RCMC]"
   },
   {
     "doc_code": "626WC3",
-    "doc_name": "Capitive Bred/ artifically propogated Certificate",
-    "doc_desc": "NA"
+    "doc_name": "Capitive Bred/ artifically propogated Certificate"
   },
   {
     "doc_code": "101RN1",
-    "doc_name": "Certificate of Registration",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of Registration"
   },
   {
     "doc_code": "911AB1",
-    "doc_name": "No objection Certificate for Procurement of Radiation Source",
-    "doc_desc": "NA"
+    "doc_name": "No objection Certificate for Procurement of Radiation Source"
   },
   {
     "doc_code": "0030DC",
-    "doc_name": "Batch Release Certificate",
-    "doc_desc": "NA"
+    "doc_name": "Batch Release Certificate"
   },
   {
     "doc_code": "0110FS",
-    "doc_name": "Specimen Copy of Label",
-    "doc_desc": "NA"
+    "doc_name": "Specimen Copy of Label"
   },
   {
     "doc_code": "0110DC",
-    "doc_name": "Label of Consignment under Drugs and Cosmetics Act",
-    "doc_desc": "NA"
+    "doc_name": "Label of Consignment under Drugs and Cosmetics Act"
   },
   {
     "doc_code": "TBDI",
-    "doc_name": "CC for Tea Import by TB issued by Tea Board",
-    "doc_desc": "NA"
+    "doc_name": "CC for Tea Import by TB issued by Tea Board"
   },
   {
     "doc_code": "GJEPC",
-    "doc_name": "Kimberley Process Certificate issued by GJEPC",
-    "doc_desc": "NA"
+    "doc_name": "Kimberley Process Certificate issued by GJEPC"
   },
   {
     "doc_code": "CBN",
-    "doc_name": "Import Certificate for import of Narcotic Drugs issued by CBN",
-    "doc_desc": "NA"
+    "doc_name": "Import Certificate for import of Narcotic Drugs issued by CBN"
   },
   {
     "doc_code": "CDRUG",
-    "doc_name": "Registration Certificate (Drugs) issued by CDSCO",
-    "doc_desc": "NA"
+    "doc_name": "Registration Certificate (Drugs) issued by CDSCO"
   },
   {
     "doc_code": "CIB",
-    "doc_name": "Import Permit for Non-Insecticidal use issued by CIB&RC",
-    "doc_desc": "NA"
+    "doc_name": "Import Permit for Non-Insecticidal use issued by CIB&RC"
   },
   {
     "doc_code": "CPCB",
-    "doc_name": "Registration Certificate issued by CPCB",
-    "doc_desc": "NA"
+    "doc_name": "Registration Certificate issued by CPCB"
   },
   {
     "doc_code": "DADF",
-    "doc_name": "Permit for Import of Livestock Products issued by DADF",
-    "doc_desc": "NA"
+    "doc_name": "Permit for Import of Livestock Products issued by DADF"
   },
   {
     "doc_code": "DGCA",
-    "doc_name": "NOC for Import/Procurement of Aircraft for Operating Air Transport Services issued by DGCA",
-    "doc_desc": "NA"
+    "doc_name": "NOC for Import/Procurement of Aircraft for Operating Air Transport Services issued by DGCA"
   },
   {
     "doc_code": "LGMET",
-    "doc_name": "Certificate of Registration of Importer of Weights and Measures issued by Legal Metrology Division, DoCA",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of Registration of Importer of Weights and Measures issued by Legal Metrology Division, DoCA"
   },
   {
     "doc_code": "WCCB",
-    "doc_name": "A certificate used in the trade of endangered species in accordance with the CITES convention.",
-    "doc_desc": "NA"
+    "doc_name": "A certificate used in the trade of endangered species in accordance with the CITES convention."
   },
   {
     "doc_code": "PESO",
-    "doc_name": "Licence Form LE -8 (Licence to Import explosives) issued by PESO",
-    "doc_desc": "NA"
+    "doc_name": "Licence Form LE -8 (Licence to Import explosives) issued by PESO"
   },
   {
     "doc_code": "PESO",
-    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5) issued by PESO",
-    "doc_desc": "NA"
+    "doc_name": "License to Import Ammonium Nitrate (licence Form P-5) issued by PESO"
   },
   {
     "doc_code": "PQ",
-    "doc_name": "Import Permit issued by PQIS",
-    "doc_desc": "NA"
+    "doc_name": "Import Permit issued by PQIS"
   },
   {
     "doc_code": "RBBD",
-    "doc_name": "No Objection Certificate (NOC) for import of Natural Rubber issued by Rubber Board",
-    "doc_desc": "NA"
+    "doc_name": "No Objection Certificate (NOC) for import of Natural Rubber issued by Rubber Board"
   },
   {
     "doc_code": "TOBBD",
-    "doc_name": "Registration-Cum-Membership Certificate [RCMC] issued by Tobacco Board",
-    "doc_desc": "NA"
+    "doc_name": "Registration-Cum-Membership Certificate [RCMC] issued by Tobacco Board"
   },
   {
     "doc_code": "WCCB",
-    "doc_name": "Captive Bred/ artificially propagated Certificate issued by WCCB for species which fall under appendix 1 of CITES",
-    "doc_desc": "NA"
+    "doc_name": "Captive Bred/ artificially propagated Certificate issued by WCCB for species which fall under appendix 1 of CITES"
   },
   {
     "doc_code": "RNI",
-    "doc_name": "Certificate of Registration issued by RNI for registering the publisher/Owner.",
-    "doc_desc": "NA"
+    "doc_name": "Certificate of Registration issued by RNI for registering the publisher/Owner."
   },
   {
     "doc_code": "AERB",
-    "doc_name": "No Objection Certificate for Procurement of Radiation Source issued by AERB",
-    "doc_desc": "NA"
+    "doc_name": "No Objection Certificate for Procurement of Radiation Source issued by AERB"
   }
 ]

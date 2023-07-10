@@ -9,8 +9,7 @@ const FIRST_DOC = 0;
 function List({
 	item = {}, task = {}, uploadedDocsRefetch = () => {}, allUploadedDocs = [],
 }) {
-	const uploadedDocs = allUploadedDocs?.filter((doc) => doc.state === 'document_uploaded'
-	&& doc?.file_name === item?.docName);
+	const uploadedDocs = allUploadedDocs?.filter((doc) => doc?.file_name === item?.docName);
 
 	return (
 		<div className={styles.container}>

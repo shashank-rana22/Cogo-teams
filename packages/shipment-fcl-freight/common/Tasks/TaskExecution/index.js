@@ -11,7 +11,8 @@ function TaskExecution({
 	selectedMail = [],
 	setSelectedMail = () => {},
 }) {
-	if (task?.task_type === 'approve_document' && task.task === 'approve_compliance_documents') {
+	if (['approve_document', 'amend_document'].includes(task?.task_type)
+	&& ['approve_compliance_documents', 'amend_compliance_documents'].includes(task.task)) {
 		return (
 			<UploadComplianceDocs
 				task={task}

@@ -21,7 +21,6 @@ function ReviewModal({
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			// To handle different url format from backend
 			const match = url.match(REGEX);
 			return match[GET_FINAL_URL];
 		}
@@ -78,6 +77,7 @@ function ReviewModal({
 						{' '}
 						<sup>*</sup>
 					</div>
+
 					<Textarea
 						className="remark_text"
 						value={remarkValue}
