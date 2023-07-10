@@ -36,7 +36,7 @@ function ReviewModal({
 	const { updateDocument, taskUpdateLoading } = useUpdateShipmentDocuments({ refetch: afterCreateRefetch });
 
 	const onSubmit = async (value) => {
-		if (['document_amendment_requested', 'document_rejected'].includes(value) && isEmpty(remarkValue)) {
+		if (['document_amendment_requested'].includes(value) && isEmpty(remarkValue)) {
 			Toast.error('Remarks are required!');
 			return;
 		}
@@ -93,7 +93,7 @@ function ReviewModal({
 					onClick={() => onSubmit('document_amendment_requested')}
 					disabled={taskUpdateLoading}
 				>
-					Amend
+					Reject
 				</Button>
 
 				<Button
@@ -102,14 +102,6 @@ function ReviewModal({
 					disabled={taskUpdateLoading}
 				>
 					Accept
-				</Button>
-
-				<Button
-					style={{ color: '#fff', backgroundColor: '#000', padding: '6px 12px' }}
-					onClick={() => onSubmit('document_rejected')}
-					disabled={taskUpdateLoading}
-				>
-					Reject
 				</Button>
 			</Modal.Footer>
 		</Modal>

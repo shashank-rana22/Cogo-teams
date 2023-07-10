@@ -1,4 +1,5 @@
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,7 +9,6 @@ import UploadDoc from '../UploadDoc';
 import styles from './styles.module.css';
 
 const DELETE_ICON_DIM = 20;
-const FIRST_DOC = 0;
 
 function Actions({
 	item = {}, task = {}, allDocs = [], uploadedDocsRefetch = () => {},
@@ -16,15 +16,14 @@ function Actions({
 	const [open, setOpen] = useState(false);
 	const [updateOpen, setUpdateOpen] = useState(false);
 
-	const docData = allDocs?.filter((doc) => [item?.file_name || item?.docName].includes(doc?.file_name))?.[FIRST_DOC];
+	const docData = allDocs?.filter((doc) => [item?.file_name || item?.docName].includes(doc?.file_name))
+		?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	let state = 'uploaded';
-	if (docData?.state === 'document_rejected') {
-		state = 'rejected';
-	} else if (docData?.state === 'document_accepted') {
+	if (docData?.state === 'document_accepted') {
 		state = 'approved';
 	} else if (docData?.state === 'document_amendment_requested') {
-		state = 'amendment_requested';
+		state = 'Rejected';
 	}
 
 	return (

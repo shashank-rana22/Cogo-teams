@@ -1,5 +1,6 @@
 import { Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext } from 'react';
 
 import useGetListShipmentDocuments from '../../../../../hooks/useGetListShipmentDocuments';
@@ -11,9 +12,7 @@ import RequestService from './RequestService';
 import styles from './styles.module.css';
 import excludeDocs from './utils/excludeDocsList';
 
-const FIRST_SERVICE = 0;
 const LENGTH_CHECK = 1;
-const FIRST_ELEM = 0;
 
 const TRADETYPE_MAPPING = {
 	export : 'EXPORT',
@@ -55,7 +54,7 @@ function UploadComplianceDocs({
 	};
 
 	const serviceTradeType = servicesList?.filter((service) => service?.id === task?.service_id)
-		?.[FIRST_SERVICE]?.trade_type;
+		?.[GLOBAL_CONSTANTS.zeroth_index]?.trade_type;
 
 	const EXCULDE_DOCS_LIST = excludeDocs?.[serviceTradeType || '']?.map((item) => item.doc_code);
 
@@ -76,7 +75,7 @@ function UploadComplianceDocs({
 	const disableSubmitForKam = uploadedDocs?.length === totalDocsList?.length;
 
 	const disableSubmitForSO = uniq_doc_state?.length === LENGTH_CHECK
-	&& uniq_doc_state?.[FIRST_ELEM] === 'document_accepted';
+	&& uniq_doc_state?.[GLOBAL_CONSTANTS.zeroth_index] === 'document_accepted';
 
 	const disableSubmit = !(task.task === 'upload_compliance_documents'
 		? disableSubmitForKam : disableSubmitForSO);

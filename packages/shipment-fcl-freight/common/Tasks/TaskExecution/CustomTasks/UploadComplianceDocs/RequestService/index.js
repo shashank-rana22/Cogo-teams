@@ -1,4 +1,5 @@
 import { Select, Button, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -9,13 +10,11 @@ import requestedDocsList from '../utils/requestDocsList.json';
 
 import styles from './styles.module.css';
 
-const FILTER_DOC_ARRAY_INIT_KEY = 0;
-
 function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
-	const [newDoc, setNewDoc] = useState('');
-
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
+
+	const [newDoc, setNewDoc] = useState('');
 
 	const { apiTrigger, docLoading } = useCreateShipmentDocument({
 		refetch: uploadedDocsRefetch,
@@ -32,7 +31,8 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 	});
 
 	const onReviewSubmit = async () => {
-		const filterDocList = requestedDocsList?.filter((obj) => obj?.doc_code === newDoc)?.[FILTER_DOC_ARRAY_INIT_KEY];
+		const filterDocList = requestedDocsList?.filter((obj) => obj?.doc_code === newDoc)
+			?.[GLOBAL_CONSTANTS.zeroth_index];
 
 		const DATA = {
 			documents: [{

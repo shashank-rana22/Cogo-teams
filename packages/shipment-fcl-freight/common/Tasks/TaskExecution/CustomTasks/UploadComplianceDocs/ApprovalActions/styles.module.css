@@ -1,13 +1,10 @@
 .text {
+	height: fit-content;
 	padding: 2px 4px;
 	font-size: 10px;
 	line-height: 150%;
 	color: var(--black, #221f20);
 	border-radius: 4px;
-}
-
-.amend {
-	background-color: #fef199;
 }
 
 .approve {
@@ -20,6 +17,7 @@
 
 .action_div {
 	display: flex;
+	align-items: center;
 
 	:global {
 		.ui_VZAaD {

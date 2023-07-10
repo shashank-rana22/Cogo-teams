@@ -1,10 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import Actions from '../Actions';
 import ApprovalActions from '../ApprovalActions';
 import DocumentInfo from '../DocumentInfo';
 
 import styles from './styles.module.css';
-
-const FIRST_DOC = 0;
 
 function List({
 	item = {}, task = {}, uploadedDocsRefetch = () => {}, allUploadedDocs = [],
@@ -29,16 +29,17 @@ function List({
 					</a>
 				) : null}
 
-				{task.task === 'approve_compliance_documents' && uploadedDocs?.[FIRST_DOC]?.document_url ? (
+				{task.task === 'approve_compliance_documents'
+				&& uploadedDocs?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url ? (
 					<a
-						href={uploadedDocs?.[FIRST_DOC]?.document_url}
+						href={uploadedDocs?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url}
 						target="_blank"
 						className={styles.sample_file}
 						rel="noreferrer"
 					>
 						View Document
 					</a>
-				) : null}
+					) : null}
 			</div>
 
 			{task.task === 'approve_compliance_documents' ? (
