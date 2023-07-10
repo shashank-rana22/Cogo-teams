@@ -28,13 +28,14 @@ const getListColumnMapping = (props) => {
 			) : '___'),
 		},
 		{
-			key  : 'objective_name',
-			flex : 1,
-			Header:
-	<>
-		<div className={styles.top_heading}>OBJECTIVE NAME</div>
-		<div className={styles.sub_heading}>Type</div>
-	</>,
+			key    : 'objective_name',
+			flex   : 1,
+			Header : (
+				<>
+					<div className={styles.top_heading}>OBJECTIVE NAME</div>
+					<div className={styles.sub_heading}>Type</div>
+				</>
+			),
 			accessor: ({ name, type }) => (
 				<>
 					<div>{name || '___'}</div>
@@ -43,13 +44,14 @@ const getListColumnMapping = (props) => {
 			),
 		},
 		{
-			key  : 'entity',
-			flex : 1,
-			Header:
-	<>
-		<div className={styles.top_heading}>ENTITY</div>
-		<div className={styles.sub_heading}>Channel</div>
-	</>,
+			key    : 'entity',
+			flex   : 1,
+			Header : (
+				<>
+					<div className={styles.top_heading}>ENTITY</div>
+					<div className={styles.sub_heading}>Channel</div>
+				</>
+			),
 			accessor: ({ partner, channel }) => (
 				<>
 					<div className={styles.business_name}>{startCase(partner.business_name || '___')}</div>
@@ -61,13 +63,14 @@ const getListColumnMapping = (props) => {
 			),
 		},
 		{
-			key  : 'agent_roles',
-			flex : 2,
-			Header:
-	<>
-		<div className={styles.top_heading}>AGENT ROLES</div>
-		<div className={styles.sub_heading}>No. Of Users</div>
-	</>,
+			key    : 'agent_roles',
+			flex   : 2,
+			Header : (
+				<>
+					<div className={styles.top_heading}>AGENT ROLES</div>
+					<div className={styles.sub_heading}>No. Of Users</div>
+				</>
+			),
 			accessor: ({ roles }) => (
 				!isEmpty(roles) ? (
 					<>
