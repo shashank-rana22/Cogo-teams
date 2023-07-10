@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen } from '@cogoport/icons-react';
@@ -5,7 +6,20 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ onClickViewDocument }) => [
+const downloadFileAtUrl = ({ url }) => {
+	fetch(url).then((response) => response.blob()).then((blob) => {
+		const blobURL = URL.createObjectURL(new Blob([blob]));
+		const fileName = url?.split('/').pop();
+		const aTag = document.createElement('a');
+		aTag.href = blobURL;
+		aTag.setAttribute('download', fileName);
+		document.body.appendChild(aTag);
+		aTag.click();
+		aTag.remove();
+	});
+};
+
+const getColumns = ({ onClickViewDocument, setShowUploaderModal }) => [
 	{
 		Header   : 'DOCUMENT NAME',
 		accessor : (item) => <div className={styles.name}>{startCase(item?.name)}</div>,
@@ -47,6 +61,31 @@ const getColumns = ({ onClickViewDocument }) => [
 		Header   : 'STATUS',
 		accessor : (item) => (
 			<div>{startCase(item?.status)}</div>
+		),
+	},
+	{
+		Header   : 'ACTION',
+		accessor : (item) => (
+			<div className={styles.button_container}>
+				<div className={styles.button}>
+					<Button
+						size="sm"
+						onClick={() => setShowUploaderModal(item?.id)}
+					>
+						UPLOAD
+					</Button>
+				</div>
+
+				<div className={styles.button}>
+					<Button
+						size="sm"
+						onClick={() => downloadFileAtUrl({ url: item?.document_url })}
+					>
+						DOWNLOAD
+					</Button>
+				</div>
+			</div>
+
 		),
 	},
 ];
