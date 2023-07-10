@@ -54,36 +54,38 @@ function List({
 						Child={Child}
 						open={open}
 					/>
-					<div
-						className={styles.accordian_style}
-					>
-						{open === singleitem.id ? (
-							<Button
-								themeType="linkUi"
-								onClick={() => {
-									setOpen('');
-								}}
-							>
-								Show Less
-								<IcMArrowDown
-									style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
-								/>
-							</Button>
-						) : (
-							<Button
-								size="md"
-								themeType="linkUi"
-								onClick={() => {
-									handlePOCDetails(singleitem);
-								}}
-							>
-								<span>Show More</span>
-								<IcMArrowDown
-									style={{ cursor: 'pointer' }}
-								/>
-							</Button>
-						)}
-					</div>
+					{singleitem?.booking_mode !== 'platform' && (
+						<div
+							className={styles.accordian_style}
+						>
+							{open === singleitem.id ? (
+								<Button
+									themeType="linkUi"
+									onClick={() => {
+										setOpen('');
+									}}
+								>
+									Show Less
+									<IcMArrowDown
+										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									/>
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="linkUi"
+									onClick={() => {
+										handlePOCDetails(singleitem);
+									}}
+								>
+									<span>Show More</span>
+									<IcMArrowDown
+										style={{ cursor: 'pointer' }}
+									/>
+								</Button>
+							)}
+						</div>
+					)}
 				</>
 			));
 		}
