@@ -29,11 +29,11 @@ function CardList({
 	fields = [],
 	data = {},
 	loading = false,
-	page,
-	setPage,
+	page = 1,
+	setPage = () => {},
 	finalList = [],
-	setFinalList,
-	functions,
+	setFinalList = () => {},
+	functions = {},
 } :Props) {
 	const { list = [], total_count:totalCount } = data;
 

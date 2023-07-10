@@ -3,8 +3,7 @@
 	align-items: center;
 	max-height: 40px;
 	padding: 8px 20px;
-	margin-top: 20px;
-	margin-bottom: 8px;
+	margin: 20px 0 8px;
 	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: var(--color-secondary-5);

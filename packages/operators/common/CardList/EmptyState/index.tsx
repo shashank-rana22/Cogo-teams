@@ -3,17 +3,16 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmptyState({ heading = 'operators', placement = 'center' }) {
+function EmptyState({ heading = 'operators' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
-				{placement === 'center' ? (
-					<div className={styles.ic_container}>
-						<IcMSearchlight width={80} height={80} fill="#ee3425" />
-					</div>
-				) : null}
+				<div className={styles.ic_container}>
+					<IcMSearchlight width={80} height={80} fill="#ee3425" />
+				</div>
 				<div className={styles.heading}>
 					Sorry! no
+					{' '}
 					{heading}
 					{' '}
 					found :(

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
+import { IcMEdit, IcMAirport, IcMShip, IcMTransport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
 import CardList from '../common/CardList';
@@ -13,6 +13,12 @@ import styles from './styles.module.css';
 interface NestedObj {
 	[key: string]: string;
 }
+
+const DEFAULT_LOGO_MAPPING = {
+	airline       : <IcMAirport width={40} height={40} fill="#ee3425" />,
+	shipping_line : <IcMShip width={40} height={40} fill="#ee3425" />,
+	others        : <IcMTransport width={40} height={40} fill="#ee3425" />,
+};
 
 function Operators() {
 	const [show, setShow] = useState(false);
@@ -38,7 +44,7 @@ function Operators() {
 				{singleItem?.logo_url ? (
 					<img className={styles.image} alt="logo" src={singleItem.logo_url} />
 				) : (
-					<IcMAirport width={40} height={40} fill="#393F70" />
+					DEFAULT_LOGO_MAPPING[activeTab]
 				)}
 			</div>
 		),

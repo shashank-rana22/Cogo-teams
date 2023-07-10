@@ -2,7 +2,37 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 20px;
+	margin: 20px 0 8px;
+
+	:global {
+		.ui_tabs_container {
+			.ui_tab_list_container {
+				background-color: transparent;
+				box-shadow: none;
+
+				.ui_tab_container {
+					padding: 12px 20px;
+					margin: 4px 20px 4px 4px;
+					background: #fff;
+					border-radius: 6px;
+					box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+					.ui_tabs_list_title {
+						font-size: 12px;
+						font-weight: 600;
+					}
+				}
+
+				.ui_tab_container::after {
+					border: none;
+				}
+
+				.ui_tab_container.ui_tab_active {
+					background: #fdebe9;
+				}
+			}
+		}
+	}
 }
 
 .heading {
@@ -33,7 +63,9 @@
 }
 
 .input_search {
+	width: 260px;
 	height: 32px !important;
+	margin-inline: 10px;
 
 	:global(.ui_input_control) {
 		font-size: var(--font-size-md) !important;

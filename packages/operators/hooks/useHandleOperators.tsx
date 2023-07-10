@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
 
 import CONSTANTS from '../constants/constants';
 
@@ -46,12 +46,7 @@ const useHandleOperators = ({
 				setPage(CONSTANTS.START_PAGE);
 			}
 		} catch (error) {
-			const message = error?.response?.data;
-			const messageinToast = Object.keys(message || {})
-				.map((_) => `${startCase(_)} ${message[_]}`)
-				.join(', ');
-
-			Toast.error(messageinToast);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

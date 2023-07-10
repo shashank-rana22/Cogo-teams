@@ -40,7 +40,7 @@ const useGetListData = (activeTab) => {
 
 	useEffect(() => {
 		if (searchValue) {
-			setPage(1);
+			setPage(CONSTANTS.START_PAGE);
 		}
 		debounceQuery(searchValue);
 	}, [debounceQuery, searchValue]);
@@ -52,7 +52,6 @@ const useGetListData = (activeTab) => {
 	useEffect(() => {
 		setFinalList([]);
 		setPage(CONSTANTS.START_PAGE);
-		setSearchValue('');
 	}, [activeTab]);
 
 	useEffect(() => {

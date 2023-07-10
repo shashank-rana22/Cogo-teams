@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React, { useState, useEffect, ReactNode } from 'react';
 
 import CONSTANTS from '../../../constants/constants';
@@ -13,8 +14,8 @@ export interface Props {
 }
 
 function CardItem({
-	fields,
-	singleitem,
+	fields = [],
+	singleitem = {},
 	functions = {},
 }:Props) {
 	const [isMobile, setIsMobile] = useState(false);
@@ -39,7 +40,7 @@ function CardItem({
 	return (
 		<section className={styles.list_container}>
 			<div
-				className={`${styles.row} ${
+				className={cl`${styles.row} ${
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
@@ -47,7 +48,7 @@ function CardItem({
 					const itemStyle = field.styles || {};
 					return (
 						<div
-							className={`${styles.col} ${field.className || ''} ${
+							className={cl`${styles.col} ${field.className} ${
 								isMobile ? styles.is_mobile : ''
 							}`}
 							style={{
@@ -57,7 +58,7 @@ function CardItem({
 							key={field.key}
 						>
 							{isMobile && (
-								<div className={styles.tablelabel}>{field.label}</div>
+								<div className={styles.table_label}>{field.label}</div>
 							)}
 
 							<div className={styles.flex}>

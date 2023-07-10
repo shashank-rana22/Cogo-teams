@@ -8,18 +8,35 @@ import useHandleOperators from '../../hooks/useHandleOperators';
 
 import styles from './styles.module.css';
 
+interface NestedObj {
+	[key: string]: string;
+}
+
+interface ModalProps {
+	item?: NestedObj;
+	setItem?: (p:object)=>void,
+	show?: boolean;
+	setShow?: (p:boolean)=>void,
+	edit?: boolean,
+	setEdit?: (p:boolean)=>void,
+	refetch?: Function
+	page?: number,
+	setPage?: Function,
+	setFinalList?: Function,
+}
+
 function OperatorsModal({
-	item,
-	setItem,
-	show,
-	setShow,
-	edit,
-	setEdit,
-	refetch,
-	setPage,
-	setFinalList,
-	page,
-}) {
+	item = {},
+	setItem = () => {},
+	show = false,
+	setShow = () => {},
+	edit = false,
+	setEdit = () => {},
+	refetch = () => {},
+	setPage = () => {},
+	setFinalList = () => {},
+	page = 1,
+}:ModalProps) {
 	const { control, watch, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	const operatorType = watch('operator_type');

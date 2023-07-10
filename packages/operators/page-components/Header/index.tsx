@@ -1,4 +1,4 @@
-import { Button, Input } from '@cogoport/components';
+import { Button, Input, Tabs, TabPanel } from '@cogoport/components';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
 import React, { useCallback } from 'react';
 
@@ -7,19 +7,33 @@ import styles from './styles.module.css';
 const TABS = [
 	{
 		key   : 'airline',
-		label : 'AIRLINE',
+		label : 'Airline',
 	},
 	{
 		key   : 'shipping_line',
-		label : 'SHIPPING LINE',
+		label : 'Shipping Line',
 	},
 	{
 		key   : 'others',
-		label : 'OTHERS',
+		label : 'Others',
 	},
 ];
 
-function Header({ setShow, searchValue, setSearchValue, activeTab, setActiveTab }) {
+interface HeaderProps {
+	setShow?: (p:boolean)=>void,
+	searchValue?: string;
+	setSearchValue?: (p:string)=>void,
+	activeTab?: string;
+	setActiveTab?: (p:string)=>void,
+}
+
+function Header({
+	setShow = () => {},
+	searchValue = '',
+	setSearchValue = () => {},
+	activeTab = '',
+	setActiveTab = () => {},
+}:HeaderProps) {
 	const setSearchFunc = useCallback(
 		(value) => {
 			setSearchValue(value);
@@ -30,25 +44,22 @@ function Header({ setShow, searchValue, setSearchValue, activeTab, setActiveTab 
 		<header>
 			<div className={styles.heading}>Operators</div>
 			<div className={styles.container}>
-				<div className={styles.flex}>
-					{TABS.map((tab) => (
-						<div
-							key={tab.key}
-							onClick={() => {
-								setActiveTab(tab.key);
-							}}
-							role="presentation"
-						>
-							<div
-								className={`${styles.container_click} 
-								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
-							>
-								{tab.label}
-							</div>
-
-						</div>
-					))}
-				</div>
+				<Tabs
+					themeType="tertiary"
+					activeTab={activeTab}
+					onChange={setActiveTab}
+				>
+					{TABS.map((item) => {
+						const { key = '', label = '' } = item;
+						return (
+							<TabPanel
+								key={key}
+								name={key}
+								title={label}
+							/>
+						);
+					})}
+				</Tabs>
 				<div className={styles.right}>
 					<Input
 						suffix={(
@@ -63,7 +74,6 @@ function Header({ setShow, searchValue, setSearchValue, activeTab, setActiveTab 
 							)
 						)}
 						className={styles.input_search}
-						style={{ width: '260px', marginInline: '10px', height: '26px' }}
 						onChange={setSearchFunc}
 						value={searchValue}
 						placeholder="Search"
