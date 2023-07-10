@@ -49,6 +49,10 @@ const GLOBAL_CONSTANTS = {
 			mm          : 'mm',
 			a           : 'a',
 		},
+		datetime: {
+			'EEEE, HH:mm a dd MMM yyy' : 'EEEE, HH:mm a dd MMM yyy',
+			'HH:mm, dd/MM/yyy'         : 'HH:mm, dd/MM/yyy',
+		},
 	},
 	payment_url: {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',

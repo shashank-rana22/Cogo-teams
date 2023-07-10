@@ -1,14 +1,17 @@
 import { cl, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, format } from '@cogoport/utils';
 
 import useGetMail from '../../../../hooks/useGetMail';
 
-import Emailbody from './Emailbody';
+import EmailBodyStructure from './EmailBodyStructure';
 import Header from './Header';
 import MailAttachments from './MailAttachment';
 import styles from './styles.module.css';
 
-function MailConversation({ mailProps }) {
+const MAIL_LOADING_SKELETON_LENGTH = 5;
+
+function MailConversation({ mailProps = {} }) {
 	const {
 		activeMail,
 		setButtonType = () => {},
@@ -29,6 +32,7 @@ function MailConversation({ mailProps }) {
 		ccRecipients = [],
 		hasAttachments,
 	} = data || {};
+
 	const { content = '' } = body || {};
 
 	const senderAddress = sender?.emailAddress?.address;
@@ -54,7 +58,8 @@ function MailConversation({ mailProps }) {
 				loading={loading}
 				handlClick={handlClick}
 			/>
-			<Emailbody
+
+			<EmailBodyStructure
 				sender={sender}
 				recipientData={recipientData}
 				ccData={ccData}
@@ -69,24 +74,31 @@ function MailConversation({ mailProps }) {
 							<Placeholder width="80px" height="10px" />
 						</div>
 						<div className={styles.receive_message_container}>
-							{[...Array(5)].map(() => (
-								<Placeholder width="500px" height="20px" margin="0px 0px 10px 0px" />
+							{[...Array(MAIL_LOADING_SKELETON_LENGTH).keys()].map((itm) => (
+								<Placeholder
+									key={itm}
+									width="500px"
+									height="20px"
+									margin="0px 0px 10px 0px"
+								/>
 							))}
 						</div>
 					</>
 				) : (
 					<>
 						<div className={styles.time_stamp}>
-							{format(sentDateTime, 'EEEE, HH:mm a dd MMM yyy')}
+							{format(sentDateTime, GLOBAL_CONSTANTS.formats.datetime['EEEE, HH:mm a dd MMM yyy'])}
 						</div>
 						<div
-							role="presentation"
-							className={cl` ${styles.receive_message_container}
-							${hasAttachments ? styles.receive_preview_div : ''} 
-								`}
+							className={cl`${styles.receive_message_container}
+										${hasAttachments ? styles.receive_preview_div : ''}
+										`}
 							dangerouslySetInnerHTML={{ __html: content }}
 						/>
-						<MailAttachments activeMail={activeMail} emailAddress={emailAddress} />
+						<MailAttachments
+							activeMail={activeMail}
+							emailAddress={emailAddress}
+						/>
 					</>
 				)}
 			</div>
