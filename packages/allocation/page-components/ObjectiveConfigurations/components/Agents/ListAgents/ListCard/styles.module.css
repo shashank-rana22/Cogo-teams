@@ -6,32 +6,6 @@
 	box-shadow: 0 0 4px rgb(0 0 0 / 10%);
 }
 
-.card_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.agent_detail {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-.agent {
-	margin: 0 8px 0 0;
-}
-
-.accordian {
-	margin: 12px 0;
-}
-
-.accordian_title {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-}
-
 .create_new {
 	padding: 16px;
 	font-size: 12px;

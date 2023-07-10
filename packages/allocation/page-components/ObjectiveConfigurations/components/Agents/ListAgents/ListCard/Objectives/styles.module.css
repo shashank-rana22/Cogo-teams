@@ -1,0 +1,9 @@
+.accordian {
+	margin: 12px 0;
+}
+
+.accordian_title {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}

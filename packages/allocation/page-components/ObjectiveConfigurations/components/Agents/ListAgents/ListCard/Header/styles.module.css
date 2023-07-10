@@ -1,0 +1,15 @@
+.card_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.agent_detail {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.agent {
+	margin: 0 8px 0 0;
+}
