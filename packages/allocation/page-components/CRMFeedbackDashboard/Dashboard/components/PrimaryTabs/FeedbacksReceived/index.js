@@ -36,7 +36,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		<div className={styles.container}>
 			<Filters pageFilters={filters} onChangeFilters={onChangeFilters} activeTab={activeTab} />
 
-			<Statistics activeTab={activeTab} />
+			<Statistics activeTab={activeTab} filters={filters} />
 
 			<EnrichmentRequest
 				checkedRowsId={checkedRowsId}

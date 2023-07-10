@@ -6,18 +6,28 @@ import GLOBAL_CONSTANTS from '../constants/globals';
 const geo = getGeoConstants();
 
 const LOCALE_CURRENCY_ABBR_MAPPING = {
+	'en-IN': {
+		split_key   : '',
+		replace_key : {
+			T: 'K',
+		},
+
+	},
 	'vi-VN': {
-		Tr : 'M',
-		T  : 'B',
+		split_key   : GLOBAL_CONSTANTS.regex_patterns.white_space,
+		replace_key : {
+			Tr : 'M',
+			T  : 'B',
+		},
 	},
 };
 
 const isAmountValid = ({ amount }) => !(
 	amount === null
-		|| Array.isArray(amount)
-		|| typeof amount === 'boolean'
-		// eslint-disable-next-line no-restricted-globals
-		|| isNaN(amount)
+        || Array.isArray(amount)
+        || typeof amount === 'boolean'
+        // eslint-disable-next-line no-restricted-globals
+        || isNaN(amount)
 );
 
 const getCurrencyLocale = ({ currency }) => {
@@ -48,9 +58,9 @@ const formatCurrency = ({ amount, locale, options }) => {
 
 	let formattedAmount = amount;
 
-	const splittedAmount = formattedAmount.split(GLOBAL_CONSTANTS.regex_patterns.white_space);
+	const splittedAmount = formattedAmount.split(LOCALE_CURRENCY_ABBR_MAPPING[locale].split_key);
 
-	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale]).forEach(([current, newVal]) => {
+	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale].replace_key).forEach(([current, newVal]) => {
 		if (splittedAmount.includes(current)) {
 			formattedAmount = amount.replace(current, newVal);
 		}

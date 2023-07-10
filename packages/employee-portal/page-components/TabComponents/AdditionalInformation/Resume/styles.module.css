@@ -6,10 +6,6 @@
 	border-radius: 6px;
 }
 
-.sup {
-	color: #cb6464;
-}
-
 .control_container {
 	display: flex;
 	flex: 33.33%;

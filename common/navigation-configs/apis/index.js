@@ -21,6 +21,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
+import ff_cost_booking from './ff-cost-booking-apis';
 import hrms from './hrms-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
@@ -49,7 +50,6 @@ import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
-import techops_dashboard from './techops_dashboard';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
 
@@ -116,7 +116,6 @@ const apis = {
 	kyc,
 	pms,
 	app_settings,
-	techops_dashboard,
 	cogolens: cogoLens,
 	shipment_cancellation_policies,
 	kam_payments_dashboard,
@@ -146,6 +145,7 @@ const apis = {
 	...hrms,
 	...athena_dashboard,
 	chro,
+	ff_cost_booking,
 	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,

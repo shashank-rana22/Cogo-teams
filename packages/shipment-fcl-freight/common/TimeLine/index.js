@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
@@ -33,8 +33,8 @@ function Timeline() {
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 
-	const keysForTimlineItems = Array(filteredTimelineData.length)
-		.fill(null).map(() => Math.random(), [filteredTimelineData.length]);
+	const keysForTimlineItems = useMemo(() => Array(filteredTimelineData.length)
+		.fill(null).map(() => Math.random()), [filteredTimelineData.length]);
 
 	const totalItems = (timelineData || []).length;
 	let consecutivelyCompleted = true;
