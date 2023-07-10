@@ -28,6 +28,7 @@ function AccountTransactionFunnel(props) {
 						<InputController
 							name="shipment_count"
 							control={control}
+							placeholder="Shipment Count"
 						/>
 					</div>
 
@@ -37,6 +38,7 @@ function AccountTransactionFunnel(props) {
 						<InputController
 							name="quotation_count"
 							control={control}
+							placeholder="Quotation Count"
 						/>
 					</div>
 
@@ -46,6 +48,7 @@ function AccountTransactionFunnel(props) {
 						<InputController
 							name="search_count"
 							control={control}
+							placeholder="Search Count"
 						/>
 					</div>
 				</div>

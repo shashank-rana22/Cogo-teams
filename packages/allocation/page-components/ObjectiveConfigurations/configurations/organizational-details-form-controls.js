@@ -25,7 +25,7 @@ const controls = [
 		asyncKey    : 'list_locations',
 		initialCall : false,
 		params      : {
-			filters    : { type: 'state', status: 'active' },
+			filters    : { type: 'region', status: 'active' },
 			page_limit : 10,
 			sort_by    : 'name',
 			sort_type  : 'asc',

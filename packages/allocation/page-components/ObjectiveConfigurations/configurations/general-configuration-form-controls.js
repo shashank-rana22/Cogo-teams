@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getEntityOptions from '../helpers/get-entity-options';
 
 const controls = [
 	{
@@ -42,16 +42,9 @@ const controls = [
 	{
 		name        : 'partner_id',
 		label       : 'Select Cogo Entity',
-		type        : 'asyncSelect',
 		placeholder : 'Cogo Entity',
-		asyncKey    : 'partners',
-		params      : {
-			filters: {
-				status : 'active',
-				id     : Object.values(GLOBAL_CONSTANTS.country_entity_ids),
-			},
-		},
-		initialCall : false,
+		type        : 'select',
+		options     : getEntityOptions(),
 		isClearable : true,
 	},
 	{
