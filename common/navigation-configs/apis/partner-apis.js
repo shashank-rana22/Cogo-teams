@@ -720,6 +720,21 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'onboard_credit_application',
 			access_type  : 'private',
 			feature      : 'credit',
@@ -5562,6 +5577,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	notifications: [
 		{
@@ -8515,9 +8545,14 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
 		{
 			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -9670,6 +9705,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'get_previous_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
 	],
 	segmentation: [
 		{
@@ -10010,6 +10050,11 @@ const partner = {
 		},
 		{
 			api          : 'get_cogopoint_user_dashboard',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_organization_cogopoint_dashboard',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -12019,7 +12064,31 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
-
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_org_wise_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_org_bulk_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	contracts: [
 		{
@@ -12585,6 +12654,11 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
+			api          : 'get_tickets_dashboard',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
@@ -12801,6 +12875,18 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_month_wise_statistics_of_account_utilization',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
 			access_type : 'private',
 		},
 	],

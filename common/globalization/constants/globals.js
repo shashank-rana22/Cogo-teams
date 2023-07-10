@@ -420,6 +420,20 @@ const GLOBAL_CONSTANTS = {
 			},
 		},
 	},
+	SHIPMENT_ROUTE_MAPPING: {
+		fcl_freight           : 'fcl',
+		air_freight           : 'air-freight',
+		lcl_freight           : 'lcl',
+		ltl_freight           : 'ltl',
+		ftl_freight           : 'ftl',
+		haulage_freight       : 'haulage',
+		air_customs           : 'air-customs',
+		fcl_customs           : 'fcl-custom',
+		air_freight_local     : 'air-freight-local',
+		fcl_freight_local     : 'fcl-local',
+		domestic_air_freight  : 'domestic-air-freight',
+		rail_domestic_freight : 'rail-domestic',
+	},
 };
 
 export default GLOBAL_CONSTANTS;
