@@ -15,26 +15,26 @@ const CLOSED_TICKETS_VALUES = ['reopen'];
 
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
-function getActionType({ status, isClosureAuthorizer }) {
-	if (OPEN_TICKETS_CHECK.includes(status)) {
+function getActionType({ ticketStatus, isClosureAuthorizer }) {
+	if (OPEN_TICKETS_CHECK.includes(ticketStatus)) {
 		if (isClosureAuthorizer) {
 			return OPEN_TICKETS_VALUES;
 		}
 		return AUTHORISER_TICKETS_VALUES;
 	}
 
-	if ((PENDING_TICKETS_CHECK.includes(status) && isClosureAuthorizer)) {
+	if ((PENDING_TICKETS_CHECK.includes(ticketStatus) && isClosureAuthorizer)) {
 		return PENDING_TICKETS_VALUES;
 	}
 
-	if (status === 'closed') {
+	if (ticketStatus === 'closed') {
 		return	CLOSED_TICKETS_VALUES;
 	}
 
 	return [];
 }
 
-function RenderContent({ filteredActions, isModal, handleAction, isCurrentReviewer }) {
+function RenderContent({ filteredActions = [], isModal = false, handleAction = () => {}, isCurrentReviewer = false }) {
 	return (
 		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
 			{filteredActions.map((item) => {
@@ -57,15 +57,15 @@ function RenderContent({ filteredActions, isModal, handleAction, isCurrentReview
 }
 
 function TicketActions({
-	status,
-	isModal,
-	handleTicket,
+	ticketStatus = '',
+	isModal = false,
+	handleTicket = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
-	isClosureAuthorizer,
-	isCurrentReviewer,
+	isClosureAuthorizer = false,
+	isCurrentReviewer = false,
 }) {
-	const actionMappings = getActionType({ status, isClosureAuthorizer });
+	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
 
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
 
