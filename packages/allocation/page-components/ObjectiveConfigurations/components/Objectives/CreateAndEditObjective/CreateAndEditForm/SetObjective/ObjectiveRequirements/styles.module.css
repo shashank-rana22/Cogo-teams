@@ -5,3 +5,8 @@
 .heading_container {
 	margin: 24px 0;
 }
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}

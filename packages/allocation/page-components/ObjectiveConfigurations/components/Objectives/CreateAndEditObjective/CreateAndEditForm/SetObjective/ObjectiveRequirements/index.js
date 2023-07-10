@@ -1,11 +1,17 @@
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import AccountTransactionFunnel from './AccountTransactionFunnel';
 import OrganizationalDetails from './OrganizationalDetails';
+import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
 
 function ObjectiveRequirements() {
-	const { control } = useForm();
+	const { control } = useForm({
+		defaultValues: {
+			service_requirements: [{}],
+		},
+	});
 
 	return (
 		<div className={styles.container}>
@@ -15,9 +21,21 @@ function ObjectiveRequirements() {
 			</div>
 
 			<form>
+				<ServiceRequirements control={control} />
+
 				<OrganizationalDetails control={control} />
 
 				<AccountTransactionFunnel control={control} />
+
+				<div className={styles.button_container}>
+					<Button
+						type="submit"
+						themeType="primary"
+						size="md"
+					>
+						Proceed & Review
+					</Button>
+				</div>
 			</form>
 		</div>
 	);
