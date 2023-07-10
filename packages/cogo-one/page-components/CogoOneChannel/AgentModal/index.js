@@ -82,7 +82,7 @@ function AgentModal({
 			placement="center"
 		>
 			<Modal.Header title="Agent Status" />
-			<Modal.Body className={styles.modal_body}>
+			<Modal.Body className={styles.modal_body} key={loading}>
 				<div className={styles.search_switch_toggle_space}>
 					<Input
 						size="sm"
@@ -92,7 +92,6 @@ function AgentModal({
 						onChange={setSearch}
 					/>
 					<div className={styles.search_switch_toggle_space}>
-
 						Screen Lock
 						<Toggle
 							onChange={onToggle}
@@ -110,7 +109,6 @@ function AgentModal({
 						status={status}
 						agent_id={agent_id}
 					/>
-
 				)) : <div className={styles.empty_state}>No data found</div>}
 			</Modal.Body>
 			<Modal.Footer>
