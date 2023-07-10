@@ -26,6 +26,9 @@
 }
 
 .td {
+	display: flex;
+	gap: 10px;
+	align-items: center;
 	padding: 7px 0;
 	font-size: 12px;
 	font-weight: 500;

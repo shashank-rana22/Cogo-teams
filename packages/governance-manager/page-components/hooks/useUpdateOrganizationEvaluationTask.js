@@ -1,6 +1,9 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOrganizationEvaluationTask({ id, reason, yourScore, setShow }) {
+function useUpdateOrganizationEvaluationTask({
+	id, reason, yourScore, setShow,
+	getOrganizationEvaluationDetails,
+}) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_evaluation_task',
@@ -17,6 +20,7 @@ function useUpdateOrganizationEvaluationTask({ id, reason, yourScore, setShow })
 				},
 			});
 			setShow(null);
+			getOrganizationEvaluationDetails();
 		} catch (err) {
 			console.log(err);
 		}

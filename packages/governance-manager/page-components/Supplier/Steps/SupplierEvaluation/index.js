@@ -9,6 +9,7 @@ import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationSe
 
 import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
+import { columns, filterData } from './utils/supplier-evaluation-utils';
 
 function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationService, service }) {
 	const [show, setShow] = useState('');
@@ -18,6 +19,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 
 	const {
 		data: organizationEvaluationDetails,
+		getOrganizationEvaluationDetails,
 	} = useGetOrganizationEvaluationDetails({ organization_id, id, setStatus, getOrganizationService });
 
 	const { UpdateOrganizationService } = useUpdateOrganizationService({
@@ -39,33 +41,6 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 		createOrganizationEvaluation();
 	};
 
-	const columns = [
-		{
-			id       : 'parameters',
-			Header   : () => (<div className={styles.th}>Parameters</div>),
-			accessor : (row) => (<div className={styles.td}>{row.label}</div>),
-		},
-		{
-			id       : 'total_score',
-			Header   : () => (<div className={styles.th}>Total Score</div>),
-			accessor : (row) => (<div className={styles.td}>{row.total_score}</div>),
-		},
-		{
-			id       : 'score_received',
-			Header   : () => (<div className={styles.th}>Score Received</div>),
-			accessor : (row) => (
-				<div className={styles.td}>
-					{
-                        row?.score_received && row?.task !== 'total_score' ? (
-	<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
-		Score
-	</Button>
-                        ) : row?.score_received
-                    }
-				</div>
-			),
-		},
-	];
 	return (
 		<>
 			<div className={styles.parent}>
@@ -74,7 +49,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 					<div className={styles.upper_left}>Supplier Evaluation</div>
 					<div className={styles.middle_left}>
 						{organizationEvaluationDetails
-						&& <Table columns={columns} data={organizationEvaluationDetails} />}
+						&& <Table columns={columns({ setShow })} data={filterData(organizationEvaluationDetails)} />}
 					</div>
 					<div className={styles.lower_left}>
 						<div className={styles.lower_left_data}>
@@ -124,7 +99,11 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 						/>
 					</div>
 				</div>
-				<ScoreModal show={show} setShow={setShow} />
+				<ScoreModal
+					show={show}
+					setShow={setShow}
+					getOrganizationEvaluationDetails={getOrganizationEvaluationDetails}
+				/>
 			</div>
 			<div className={styles.flex_right}>
 				<Button

@@ -27,6 +27,7 @@ function useGetOrganizationEvaluationDetails({ id }) {
 	return {
 		data: data?.organization_evaluation_tasks,
 		loading,
+		getOrganizationEvaluationDetails,
 	};
 }
 export default useGetOrganizationEvaluationDetails;

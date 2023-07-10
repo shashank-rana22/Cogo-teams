@@ -5,14 +5,20 @@ import useUpdateOrganizationEvaluationTask from '../../../../hooks/useUpdateOrga
 
 import styles from './styles.module.css';
 
-function ScoreModal({ show = null, setShow }) {
+function ScoreModal({ show = null, setShow, getOrganizationEvaluationDetails }) {
 	const ZERO = 0;
 	const [yourScore, setYourScore] = useState(ZERO);
 	const [reason, setReason] = useState('');
 
 	const {
 		updateOrganizationEvaluationTask,
-	} = useUpdateOrganizationEvaluationTask({ id: show?.id, yourScore, setShow, reason });
+	} = useUpdateOrganizationEvaluationTask({
+		id: show?.id,
+		yourScore,
+		setShow,
+		reason,
+		getOrganizationEvaluationDetails,
+	});
 
 	const onClose = () => {
 		setShow(null);
