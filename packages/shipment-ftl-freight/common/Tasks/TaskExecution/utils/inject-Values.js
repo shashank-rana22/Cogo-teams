@@ -6,6 +6,7 @@ const TRUCK_NUM_TASKS = [
 	'upload_lorry_receipt',
 	'upload_ftl_commercial_invoice',
 	'upload_commercial_invoice',
+	'upload_weight_note',
 ];
 
 const { zeroth_index } = GLOBAL_CONSTANTS;
