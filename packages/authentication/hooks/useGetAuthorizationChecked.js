@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { setCookie } from '@cogoport/utils';
+import { isEmpty, setCookie } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import redirections from '../utils/redirections';
@@ -18,18 +19,26 @@ const UNAUTHENTICATED_PATHS = [
 	'/verify-auto-sign-up-email/[id]',
 ];
 
+const REDIRECT_PATHS = [
+	'/[partner_id]/ticket-management/my-tickets',
+];
+
+const SECOND_QUERY_ELEMENT = 1;
+
 const useGetAuthorizationChecked = ({ firestoreToken }) => {
-	const [sessionInitialized, setSessionInitialized] = useState(false);
-	const dispatch = useDispatch();
-
-	const { pathname, query, locale, locales, route, push } = useRouter();
-
-	const { source = '' } = query || {};
+	const {
+		pathname, query, locale, locales, route, push, asPath,
+	} = useRouter();
 
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
+	const dispatch = useDispatch();
+	const [sessionInitialized, setSessionInitialized] = useState(false);
+
+	const { source = '' } = query || {};
+
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
-	const isProfilePresent = Object.keys(profile).length !== 0;
+	const isProfilePresent = !isEmpty(Object.keys(profile));
 
 	dispatch(setGeneralState({ pathname, query, locale, locales, firestoreToken }));
 
@@ -41,13 +50,22 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 
 					const { partner = {} } = res.data || {};
 					setCookie('parent_entity_id', partner.id);
+
+					if (REDIRECT_PATHS.includes(pathname)) {
+						const newPath = pathname.replace(GLOBAL_CONSTANTS.regex_patterns.dynamic_bracket, '');
+						const queryPath = asPath.split('?')?.[SECOND_QUERY_ELEMENT];
+						const redirectPath = `${newPath}?${queryPath}`;
+
+						setCookie('redirect_path', redirectPath);
+					}
+
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
-					console.log(err);
+					console.error(err);
 				}
 			}
 		})();
-	}, [_initialized, dispatch]);
+	}, [_initialized, asPath, dispatch, pathname]);
 
 	useEffect(() => {
 		(async () => {
