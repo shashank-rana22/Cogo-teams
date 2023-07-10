@@ -8,7 +8,7 @@ const dataExtractionFunc = (obj, index, arr) => {
 		if (obj === undefined) {
 			return undefined;
 		}
-		const returnValue = obj?.[arr?.[index]] ? new Date(obj?.[arr?.[index]]) : null;
+		const returnValue = obj?.[arr?.[index]] ? new Date(obj?.[arr?.[index]]) : undefined;
 		return returnValue;
 	}
 
