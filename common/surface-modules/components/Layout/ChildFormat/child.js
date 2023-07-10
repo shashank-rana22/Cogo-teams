@@ -29,7 +29,7 @@ function Child({
 	error = {},
 	formValues = {},
 	id = '',
-	length = 0,
+	length = 1,
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
