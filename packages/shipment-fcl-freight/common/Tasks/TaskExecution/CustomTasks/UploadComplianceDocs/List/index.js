@@ -18,9 +18,9 @@ function List({
 					<DocumentInfo item={item} />
 				</div>
 
-				{item?.docLink ? (
+				{item?.docLink || item?.sample_doc ? (
 					<a
-						href={item?.docLink}
+						href={item?.docLink || item?.sample_doc}
 						target="_blank"
 						className={styles.sample_file}
 						rel="noreferrer"

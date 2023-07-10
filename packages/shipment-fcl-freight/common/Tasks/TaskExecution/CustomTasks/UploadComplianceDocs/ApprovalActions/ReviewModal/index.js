@@ -89,7 +89,7 @@ function ReviewModal({
 
 			<Modal.Footer>
 				<Button
-					style={{ color: '#fff', backgroundColor: '#000', padding: '6px 12px', marginRight: '16px' }}
+					style={{ padding: '6px 12px', marginRight: '16px' }}
 					onClick={() => onSubmit('document_amendment_requested')}
 					disabled={taskUpdateLoading}
 				>

@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -38,6 +38,17 @@ function Actions({
 					>
 						View Uploaded Document
 					</a>
+
+					{docData?.remarks?.[GLOBAL_CONSTANTS.zeroth_index] ? (
+						<Tooltip
+							theme="light"
+							placement="bottom"
+							interactive
+							content={docData?.remarks?.[GLOBAL_CONSTANTS.zeroth_index]}
+						>
+							<div className={styles.remarks}>View Remark</div>
+						</Tooltip>
+					) : null}
 
 					<div className={cl`${styles.text} ${styles[state]}`}>
 						{startCase(state)}

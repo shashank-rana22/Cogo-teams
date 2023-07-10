@@ -48,6 +48,7 @@ function UploadDoc({
 					data         : {
 						doc_code        : item?.docCode,
 						doc_description : item?.docExpNotes,
+						sample_doc      : item?.docLink,
 					},
 				}],
 				shipment_id         : task?.shipment_id,

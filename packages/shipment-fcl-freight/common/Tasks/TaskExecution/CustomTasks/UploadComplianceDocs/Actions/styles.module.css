@@ -48,3 +48,14 @@
 .uploaded {
 	background-color: #c4dc91;
 }
+
+.remarks {
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #ee3425;
+	text-decoration-line: underline;
+	white-space: nowrap;
+	cursor: pointer;
+}
