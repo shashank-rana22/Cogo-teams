@@ -69,7 +69,6 @@ const useInvoicingParties = ({ detail = {}, invoice }) => {
 	}));
 
 	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
-	console.log('savedInvoicingParty?.services', invoiceParties);
 
 	const [invoicingParties, setInvoicingParties] = useState(() => invoiceParties.map((savedInvoicingParty) => ({
 		...savedInvoicingParty,
@@ -119,8 +118,6 @@ const useInvoicingParties = ({ detail = {}, invoice }) => {
 
 	return {
 		invoicingParties,
-		paymentModes,
-		setPaymentModes,
 		showAddInvoicingPartyModal,
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,

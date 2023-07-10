@@ -223,6 +223,8 @@ const GLOBAL_CONSTANTS = {
 		bi_amendment_s2c_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/bi_amendment-s2c',
 		no_of_bi_s2c_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_of_bi-s2c',
 		ip_empty_state_s2c_png       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ip_empty_icon_s2c',
+		kyc_pending_png:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

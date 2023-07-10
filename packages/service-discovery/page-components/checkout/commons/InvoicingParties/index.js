@@ -23,6 +23,7 @@ function InvoicingParties() {
 		showAddInvoicingPartyModal,
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
+		loading,
 	} = useInvoicingParties({ detail, invoice });
 
 	return (

@@ -1,4 +1,5 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import { CheckoutContext } from '../context';
@@ -16,7 +17,7 @@ const MAPPING = {
 	air_freight : AirCheckout,
 };
 
-function Checkout() {
+function Checkout({ checkout_type = '' }) {
 	const { query, entity_types } = useSelector(({ general, profile }) => ({
 		query        : general?.query,
 		entity_types : profile?.partner?.entity_types,
@@ -41,7 +42,20 @@ function Checkout() {
 		importer_exporter_id = '',
 		importer_exporter = {},
 		checkout_type: checkoutMethod = '',
+		credit_details = {},
+		margin_approval_status = '',
+		quotation_email_sent_at = '',
+		credit_terms_amd_condition = {},
+		terms_and_conditions = [],
 	} = detail || {};
+
+	const {
+		credit_applicable = false,
+		credit_source = '',
+		is_any_invoice_on_credit = false,
+	} = credit_details || {};
+
+	const { is_tnc_accepted = false } = credit_terms_amd_condition || {};
 
 	const {
 		data: orgData = {},
@@ -60,9 +74,29 @@ function Checkout() {
 		(service) => service?.service_type === primary_service || !service?.trade_type,
 	);
 
-	const shouldEditMargin =		!isChannelPartner
-		&& !detail?.margin_approval_status
-		&& !detail?.quotation_email_sent_at;
+	const shouldEditMargin = !isChannelPartner
+		&& !margin_approval_status
+		&& !quotation_email_sent_at;
+
+	const showSendTncEmail = is_any_invoice_on_credit
+		&& !is_tnc_accepted
+		&& credit_source === 'pre_approved_clean_credit';
+
+	const showOverallCreditRisk = credit_applicable
+		&& credit_source === 'pre_approved_clean_credit'
+		&& is_any_invoice_on_credit;
+
+	const tncPresent =	Array.isArray(detail?.terms_and_conditions)
+	&& !isEmpty(terms_and_conditions);
+
+	const isSkippable =	!!detail?.importer_exporter?.skippable_checks
+	&& detail?.importer_exporter?.skippable_checks?.includes('kyc');
+
+	const kycShowCondition = importer_exporter_id
+	&& !orgLoading
+	&& detail?.importer_exporter?.kyc_status !== 'verified'
+	&& !isSkippable
+	&& checkout_type !== 'rfq';
 
 	const checkoutData = useMemo(
 		() => ({
@@ -84,6 +118,10 @@ function Checkout() {
 			invoice,
 			updateCheckout,
 			updateLoading,
+			showSendTncEmail,
+			showOverallCreditRisk,
+			kycShowCondition,
+			tncPresent,
 		}),
 		[
 			primaryService,
@@ -104,6 +142,10 @@ function Checkout() {
 			invoice,
 			updateCheckout,
 			updateLoading,
+			showSendTncEmail,
+			showOverallCreditRisk,
+			kycShowCondition,
+			tncPresent,
 		],
 	);
 
@@ -112,6 +154,10 @@ function Checkout() {
 	}
 
 	const ActiveComponent = MAPPING[primary_service];
+
+	if (!ActiveComponent) {
+		return null;
+	}
 
 	return (
 		<CheckoutContext.Provider value={checkoutData}>

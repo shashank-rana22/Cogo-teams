@@ -24,6 +24,7 @@ function PreviewBooking() {
 	);
 	const [cargoDetails, setCargoDetails] = useState(() => ({ hs_code, cargo_readiness_date, cargo_value }));
 	const [agreeTandC, setAgreeTandC] = useState(false);
+	const [isVeryRisky, setIsVeryRisky] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -38,6 +39,7 @@ function PreviewBooking() {
 				setCargoDetails={setCargoDetails}
 				agreeTandC={agreeTandC}
 				setAgreeTandC={setAgreeTandC}
+				setIsVeryRisky={setIsVeryRisky}
 			/>
 		</div>
 	);

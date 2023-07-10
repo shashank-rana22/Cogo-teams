@@ -48,6 +48,7 @@ function InvoicingPartiesContent({
 			<AddInvoicingParty
 				setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 				showAddInvoicingPartyModal={showAddInvoicingPartyModal}
+				invoicingParties={invoicingParties}
 			/>
 		</div>
 	);
