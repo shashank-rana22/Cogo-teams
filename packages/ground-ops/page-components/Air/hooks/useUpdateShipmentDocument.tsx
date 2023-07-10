@@ -6,7 +6,7 @@ const useUpdateShipmentDocument = () => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/documents/update-shipment-document',
-			method  : 'POST',
+			method  : 'PUT',
 			authKey : 'put_air_coe_documents',
 		},
 	);

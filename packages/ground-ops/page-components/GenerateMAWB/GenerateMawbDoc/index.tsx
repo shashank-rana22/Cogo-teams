@@ -1,4 +1,5 @@
 import { Button, Checkbox, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -210,15 +211,16 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
 				(docCopies || copiesValue || []).forEach((item, i) => {
-					pdf.addImage(Object.values(item)[1] === 'updated' ? `${Object.values(item)[0]}`
+					pdf.addImage(Object.values(item)[1] === 'updated'
+						? `${Object.values(item)[GLOBAL_CONSTANTS.zeroth_index]}`
 						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[Object.keys(item)[0]]
+						pdf.addImage(footerImages[Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index]]
 							|| footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
 
 					if (download24) {
-						if (includeTnC.includes(Object.keys(item)[0] || item)) {
+						if (includeTnC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
 							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 						} else {

@@ -38,17 +38,19 @@ const useCreateShipmentDocument = ({
 }:Props) => {
 	let url = '/air-coe/documents/create-shipment-document';
 	let authKey = 'post_air_coe_documents';
+	let method = 'POST';
 
 	if ((activeCategory === 'hawb' && activeHawb.isNew === false) || (edit && activeCategory === 'mawb')) {
 		url = '/air-coe/documents/update-shipment-document';
 		authKey = 'put_air_coe_documents';
+		method = 'PUT';
 	}
 
 	const [success, setSuccess] = useState(false);
 
 	const [{ loading }, trigger] = useRequestAir({
 		url,
-		method: 'POST',
+		method,
 		authKey,
 	});
 

@@ -1,5 +1,6 @@
 import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, ReactFragment } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -191,7 +192,7 @@ function FormContainer({
 								setHawbDetails((prev) => ([...prev, {
 									id: uuid(),
 									documentNo:
-									cogoSeriesNumber.length >= 1
+									isEmpty(cogoSeriesNumber.length)
 										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
 										: `COGO-${taskItem.serialId}${
 											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
