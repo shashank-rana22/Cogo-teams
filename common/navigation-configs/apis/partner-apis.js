@@ -734,6 +734,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1131,6 +1137,19 @@ const partner = {
 			feature      : 'demand_crm',
 			service_name : 'contract',
 		},
+		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_organization_payment_modes',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+
 		{
 			api          : 'get_domestic_contract',
 			access_type  : 'private',
@@ -3605,6 +3624,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogo_assured_rate',
 			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'update_checkout_risk_category',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 	okam_dashboard: [
