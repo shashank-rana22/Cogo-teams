@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import {
@@ -16,7 +17,7 @@ import { useState } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 const LIMIT_VALUE = 1;
-const DEFAULT_VALUE = 0;
+// const DEFAULT_VALUE = 0;
 
 const updateRoom = async ({ agentId, firestore }) => {
 	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
@@ -27,7 +28,7 @@ const updateRoom = async ({ agentId, firestore }) => {
 		limit(LIMIT_VALUE),
 	);
 	const docs = await getDocs(roomsQuery);
-	const roomId = docs?.docs?.[DEFAULT_VALUE]?.id;
+	const roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const docRef = doc(
 		firestore,
@@ -42,9 +43,7 @@ const updateRoom = async ({ agentId, firestore }) => {
 
 const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 	const [otpNumber, setOtpNumber] = useState('');
-	const { agent_id } = useSelector(({ profile }) => ({
-		agent_id: profile.user.id,
-	}));
+	const { agent_id } = useSelector(({ profile }) => ({ agent_id: profile.user.id }));
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_omnichannel_lock_screen_otp',
@@ -53,11 +52,9 @@ const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 
 	const apiTrigger = async () => {
 		try {
-			// await trigger({ data: { otp: otpNumber, agent_id } });
-			if (otpNumber === '000000') {
-				await updateRoom({ agentId, firestore });
-				await setShowModal(false);
-			}
+			await trigger({ data: { otp: otpNumber, agent_id } });
+			await updateRoom({ agentId, firestore });
+			await setShowModal(false);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	collection,
 	updateDoc,
@@ -17,7 +18,7 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 const DEFAULT_VALUE = 0;
 const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
-const DEFAULT_INDEX = 0;
+
 const DEBOUNCE_LIMIT = 60000;
 
 const getTimeoutConstant = async (firestore) => {
@@ -25,7 +26,7 @@ const getTimeoutConstant = async (firestore) => {
 
 	const constantsQuery = await query(constantCollection, limit(LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
-	const cogoOneConstantsDocs = cogoOneConstants?.docs[DEFAULT_INDEX];
+	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
 	const { screen_lock_timeout = DEFAULT_TIMEOUT, is_locked_screen = true } = cogoOneConstantsDocs.data() || {};
 	return { timeoutValue: screen_lock_timeout, isLockedBool: is_locked_screen };
 };
@@ -50,7 +51,7 @@ const createOrGetRoom = async ({ agentId, firestore }) => {
 		const roomid = await addDoc(shipmentReminderRoom, newRoom);
 		roomId = roomid?.id;
 	} else {
-		roomId = docs?.docs?.[DEFAULT_VALUE]?.id;
+		roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 	}
 	return doc(
 		firestore,

@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -26,7 +27,7 @@ function LockScreen({ agentId, firestore, setShowModal, showLockScreen }) {
 		>
 			<Modal.Body className={styles.styled_modal_body}>
 				<Image
-					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg"
+					src={GLOBAL_CONSTANTS.image_url.cogoport_admin_logo}
 					alt="Logo Cogoport"
 					width={160}
 					height={100}
