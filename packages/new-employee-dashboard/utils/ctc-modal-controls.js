@@ -14,7 +14,7 @@ const CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE = 0.0833;
 const CONSTANT_TWENTY_ONE_THOUSAND = 21000;
 const CONSTANT_NINE_THOUSAND_FIFTY_SIX = 9056;
 const CONSTANT_SEVEN_FIFTY_FOUR = 754;
-const CONSTANT_ZERO = 0;
+const DEFAULT_VALUE = 0;
 const CONSTANT_ZERO_POINT_ONE_THREE_ZERO_ONE = 0.1301;
 const CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE = 0.0483;
 const CONSTANT_TWENTY_FOUR_HUNDRED = 2400;
@@ -46,7 +46,7 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 
 	const statutorySum = (inputVal) => {
 		if (inputVal / CONSTANT_TWELVE > CONSTANT_TWENTY_ONE_THOUSAND) {
-			return CONSTANT_ZERO;
+			return DEFAULT_VALUE;
 		}
 		if (
 			inputVal / CONSTANT_TWELVE < CONSTANT_TWENTY_ONE_THOUSAND
@@ -63,7 +63,7 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 		+ CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE * basicYearlyValue
         + CONSTANT_FIFTEEN_THOUSAND + Math.round(calculateValue(basicYearlyValue))
 		+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
-        + statutorySum(basicYearlyValue)) > CONSTANT_ZERO
+        + statutorySum(basicYearlyValue)) > DEFAULT_VALUE
 	) {
 		result = ctcInput - (basicYearlyValue + hraYearlyValue + conveyanceYearlyValue + foodAllowanceYearlyValue
 				+ fuelAllowanceYearlyValue + telephoneAllowanceYearlyValue + flexible_benefit_sum
@@ -71,7 +71,7 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 				+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
 				+ CONSTANT_TWENTY_FOUR_HUNDRED + statutorySum(basicYearlyValue));
 	} else {
-		result = CONSTANT_ZERO;
+		result = DEFAULT_VALUE;
 	}
 
 	const specialAllowanceYearlyValue = result;
@@ -181,15 +181,15 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 		},
 		incentives: {
 			heading     : 'Incentives [E]',
-			yearlyValue : Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
-						+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-						+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
-						+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
-						+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO),
+			yearlyValue : Number(data?.yearlyJoiningBonus || DEFAULT_VALUE)
+						+ Number(data?.yearlyPerformance || DEFAULT_VALUE)
+						+ Number(data?.yearlyRetentionBonus || DEFAULT_VALUE)
+						+ Number(data?.twiceYearlyRetentionBonus || DEFAULT_VALUE)
+						+ Number(data?.thriceYearlyRetentionBonus || DEFAULT_VALUE),
 			monthlyValue:
-						Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
-						+ Number(data?.monthlyPerformance || CONSTANT_ZERO)
-						+ Number(data?.monthlyRetentionBonus || CONSTANT_ZERO),
+						Number(data?.monthlyJoiningBonus || DEFAULT_VALUE)
+						+ Number(data?.monthlyPerformance || DEFAULT_VALUE)
+						+ Number(data?.monthlyRetentionBonus || DEFAULT_VALUE),
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
@@ -199,19 +199,19 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 		total_targeted_compensation_no_retention: {
 			heading: 'Total Targeted Compensation without retention [A+B+C+D+E]',
 			yearlyValue:
-					Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
-					+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
-					+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
-					+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO)
+					Number(data?.yearlyJoiningBonus || DEFAULT_VALUE)
+					+ Number(data?.yearlyPerformance || DEFAULT_VALUE)
+					+ Number(data?.yearlyRetentionBonus || DEFAULT_VALUE)
+					+ Number(data?.twiceYearlyRetentionBonus || DEFAULT_VALUE)
+					+ Number(data?.thriceYearlyRetentionBonus || DEFAULT_VALUE)
 					+ sum + statutorySum(basicYearlyValue)
 					+ Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
 					+ CONSTANT_TWENTY_FOUR_HUNDRED + flexible_benefit_sum,
 			monthlyValue:
-					Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
-					+ Number(data?.monthlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.monthlyRetentionBonus || CONSTANT_ZERO) + (sum
+					Number(data?.monthlyJoiningBonus || DEFAULT_VALUE)
+					+ Number(data?.monthlyPerformance || DEFAULT_VALUE)
+					+ Number(data?.monthlyRetentionBonus || DEFAULT_VALUE) + (sum
 					+ statutorySum(basicYearlyValue)
 					+ Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
@@ -220,19 +220,19 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 		total_targeted_compensation: {
 			heading: 'Total Targeted Compensation [A+B+C+D+E+V]',
 			yearlyValue:
-					ctcInput * variable_split + Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
-					+ Number(data?.yearlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.yearlyRetentionBonus || CONSTANT_ZERO)
-					+ Number(data?.twiceYearlyRetentionBonus || CONSTANT_ZERO)
-					+ Number(data?.thriceYearlyRetentionBonus || CONSTANT_ZERO)
+					ctcInput * variable_split + Number(data?.yearlyJoiningBonus || DEFAULT_VALUE)
+					+ Number(data?.yearlyPerformance || DEFAULT_VALUE)
+					+ Number(data?.yearlyRetentionBonus || DEFAULT_VALUE)
+					+ Number(data?.twiceYearlyRetentionBonus || DEFAULT_VALUE)
+					+ Number(data?.thriceYearlyRetentionBonus || DEFAULT_VALUE)
 					+ sum + statutorySum(basicYearlyValue)
 					+ Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
 					+ CONSTANT_TWENTY_FOUR_HUNDRED + flexible_benefit_sum,
 			monthlyValue:
-					(ctcInput * variable_split) / CONSTANT_TWELVE + Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
-					+ Number(data?.monthlyPerformance || CONSTANT_ZERO)
-					+ Number(data?.monthlyRetentionBonus || CONSTANT_ZERO) + (sum
+					(ctcInput * variable_split) / CONSTANT_TWELVE + Number(data?.monthlyJoiningBonus || DEFAULT_VALUE)
+					+ Number(data?.monthlyPerformance || DEFAULT_VALUE)
+					+ Number(data?.monthlyRetentionBonus || DEFAULT_VALUE) + (sum
 					+ statutorySum(basicYearlyValue) + Math.round(calculateValue(basicYearlyValue))
 					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED
 					+ flexible_benefit_sum) / CONSTANT_TWELVE,
@@ -245,7 +245,7 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 					+ CONSTANT_TWENTY_FOUR_HUNDRED + flexible_benefit_sum) / CONSTANT_TWELVE
 					- Math.round(calculateValue(basicYearlyValue)) / CONSTANT_TWELVE
 					- (CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue) / CONSTANT_TWELVE
-					- CONSTANT_TWO_HUNDRED - Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
+					- CONSTANT_TWO_HUNDRED - Number(data?.monthlyJoiningBonus || DEFAULT_VALUE)
 					- CONSTANT_EIGHTEEN_HUNDRED - CONSTANT_TWO_HUNDRED,
 		},
 	};
