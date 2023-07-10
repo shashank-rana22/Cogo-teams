@@ -1,11 +1,14 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMSend } from '@cogoport/icons-react';
 
-export const gmailoptions = [
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
+export const GMAIL_OPTIONS_CONFIG = [
 	{
 		label : 'Inbox',
 		value : 'inbox',
 		icon  : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/draft.svg"
+			src={GLOBAL_CONSTANTS.image_url.inbox_icon}
 			alt="inbox"
 		/>,
 	},
@@ -23,8 +26,17 @@ export const gmailoptions = [
 		label : 'Spam',
 		value : 'spam',
 		icon  : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam.svg"
+			src={GLOBAL_CONSTANTS.image_url.email_spam_icon}
 			alt="spam"
 		/>,
 	},
 ];
+
+export const getUserActiveMails = ({ userEmailAddress, viewType }) => {
+	const mailsToBeShown = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.mails_to_be_shown;
+
+	return [
+		userEmailAddress,
+		...mailsToBeShown,
+	];
+};

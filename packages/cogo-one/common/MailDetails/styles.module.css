@@ -10,11 +10,12 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin-bottom: 8px;
+	margin: 8px 0;
 }
 
 .left_div {
 	display: flex;
+	align-items: center;
 	justify-content: flex-start;
 	cursor: pointer;
 }

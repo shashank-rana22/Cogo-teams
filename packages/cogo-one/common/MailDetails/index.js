@@ -13,7 +13,7 @@ function MailDetails({
 	setActiveSelect = () => {},
 	setActiveMail = () => {},
 	activeMail = {},
-	senderMail = '',
+	activeMailAddress = '',
 }) {
 	const {
 		listData = {},
@@ -21,7 +21,7 @@ function MailDetails({
 		handleScroll = () => {},
 		handleRefresh = () => {},
 		pagination,
-	} = useListMail({ activeSelect, senderMail });
+	} = useListMail({ activeSelect, activeMailAddress });
 
 	const {
 		value: list = [],

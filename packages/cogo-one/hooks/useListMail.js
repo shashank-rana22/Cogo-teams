@@ -9,16 +9,16 @@ const DEFAULT_NO_OF_MAILS = 0;
 const DEFAULT_PAGE_NUMBER = 1;
 const MIN_HEIGHT_FOR_API_CALL = 50;
 
-const getParams = ({ senderMail = '', activeSelect = '', page = '' }) => ({
+const getParams = ({ activeMailAddress = '', activeSelect = '', page = '' }) => ({
 	page,
-	email_address : senderMail,
+	email_address : activeMailAddress,
 	page_limit    : PAGE_LIMIT,
 	foldername    : MAIL_FOLDER_OPTIONS[activeSelect],
 });
 
 function useListMail({
 	activeSelect = '',
-	senderMail = '',
+	activeMailAddress = '',
 }) {
 	const [listData, setListData] = useState({ value: [], isLastPage: false });
 	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
@@ -31,7 +31,7 @@ function useListMail({
 	const getEmails = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
-				params: getParams({ senderMail, activeSelect, page }),
+				params: getParams({ activeMailAddress, activeSelect, page }),
 			});
 
 			setPagination(page);
@@ -48,7 +48,7 @@ function useListMail({
 		} catch (err) {
 			console.error(err);
 		}
-	}, [activeSelect, trigger, senderMail]);
+	}, [activeSelect, trigger, activeMailAddress]);
 
 	const handleScroll = (e) => {
 		const { clientHeight, scrollTop, scrollHeight } = e.target;

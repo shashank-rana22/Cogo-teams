@@ -32,10 +32,10 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, emailAddress } = useSelector(({ profile, general }) => ({
-		userId       : profile?.user?.id,
-		token        : general.firestoreToken,
-		emailAddress : profile?.user?.email,
+	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+		userId           : profile?.user?.id,
+		token            : general.firestoreToken,
+		userEmailAddress : profile?.user?.email,
 	}));
 
 	const [activeTab, setActiveTab] = useState({
@@ -52,6 +52,7 @@ function CogoOne() {
 	const [recipientArray, setRecipientArray] = useState([]);
 	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
+	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
@@ -82,7 +83,9 @@ function CogoOne() {
 		setButtonType,
 		emailState,
 		setEmailState,
-		emailAddress,
+		userEmailAddress,
+		activeMailAddress,
+		setActiveMailAddress,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
@@ -172,8 +175,7 @@ function CogoOne() {
 
 				<div className={styles.download_apk}>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.download_div}
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>

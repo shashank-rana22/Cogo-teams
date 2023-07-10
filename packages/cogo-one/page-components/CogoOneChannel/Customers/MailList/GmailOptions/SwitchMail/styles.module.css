@@ -1,0 +1,42 @@
+.container {
+	width: 300px;
+}
+
+.mail_address_container {
+	width: calc(100% - 55px);
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
+}
+
+.user_name {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.mail_container {
+	display: flex;
+	align-items: center;
+	padding: 3px 5px;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+
+	&:hover {
+		background-color: #fefce6;
+	}
+}
+
+.mail_address {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.active_mail {
+	background-color: #fefce6;
+}

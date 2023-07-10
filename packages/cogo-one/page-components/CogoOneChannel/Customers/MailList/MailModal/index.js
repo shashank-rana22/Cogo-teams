@@ -21,7 +21,7 @@ function MailModal({
 }) {
 	const {
 		buttonType,
-		emailAddress,
+		activeMailAddress,
 		recipientArray,
 		emailState,
 		bccArray,
@@ -63,7 +63,7 @@ function MailModal({
 			return;
 		}
 		const payload = {
-			sender       : emailAddress,
+			sender       : activeMailAddress,
 			toUserEmail  : recipientArray,
 			ccrecipients : bccArray,
 			subject      : emailState?.subject,
@@ -118,7 +118,7 @@ function MailModal({
 				</div>
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
-						Cc/Bcc, From:
+						Cc/Bcc:
 					</div>
 					<MailRecipientType
 						emailRecipientType={bccArray}
@@ -136,7 +136,6 @@ function MailModal({
 				<div className={styles.type_to}>
 					<div className={styles.sub_text}>
 						Sub:
-						{' '}
 					</div>
 					<Input
 						value={emailState?.subject}
