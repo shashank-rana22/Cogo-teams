@@ -8491,9 +8491,14 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
 		{
 			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_list',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -12416,6 +12421,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -12552,6 +12562,11 @@ const partner = {
 		},
 		{
 			api          : 'put_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_dashboard',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
@@ -12772,6 +12787,18 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_month_wise_statistics_of_account_utilization',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
 			access_type : 'private',
 		},
 	],

@@ -9,7 +9,7 @@ import serviceMapping from './mapping.json';
 import styles from './styles.module.css';
 
 function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {} }) {
-	const { servicesList = [] } = useContext(ShipmentDetailContext);
+	const { servicesList = [], primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const main_service = servicesList?.find((s) => s?.main_service_id === null);
 
@@ -18,8 +18,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 	const supplyDetails = serviceMapping?.supply_details;
 
 	const renderDetail = ({ obj, key }) => {
-		const value = renderValue(key, main_service);
-
+		const value = renderValue(key, main_service, primary_service);
 		return (
 			<div className={styles.render_container}>
 				<div className={styles.label}>{obj.label}</div>
@@ -67,12 +66,21 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 							<div className={styles.heading}>Supply Side :</div>
 
 							<div className={styles.detail_container}>
-								{supplyDetails?.map((obj) => (
-									getByKey(main_service, obj.key)
+								{supplyDetails?.map((obj) => {
+									if (obj.key === 'remarks') {
+										return getByKey(primary_service, 'booking_preferences')
+											? renderDetail({
+												obj,
+												key: obj.key,
+											}) : null;
+									}
+
+									return getByKey(main_service, obj.key)
 										? renderDetail({
 											obj,
 											key: obj.key,
-										}) : null))}
+										}) : null;
+								})}
 							</div>
 						</div>
 					</div>

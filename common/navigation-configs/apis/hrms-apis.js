@@ -76,6 +76,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'download_employee_documents_zip',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{

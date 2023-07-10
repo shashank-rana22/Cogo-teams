@@ -6,27 +6,29 @@
 .select_container {
 	width: 40%;
 }
-.ratings_cycles{
-	padding-left: 0px;
+
+.ratings_cycles {
+	width: 200px;
+	padding-left: 0;
 	margin-left: 10px;
-	width:200px;
 
-:global{
-	.ui_select_container{
-		width:200px
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
 	}
 }
-}
 
-.toggle_container{
-:global{
-	.ui_toggle_switch{
-        padding-top: 3px;
-    }
-	.ui_switch{
-		top: 3px;
+.toggle_container {
+	:global {
+		.ui_toggle_switch {
+			padding-top: 3px;
+		}
+
+		.ui_switch {
+			top: 3px;
+		}
 	}
-}
 }
 
 .header {
@@ -58,14 +60,13 @@
 	padding: 4px 0 16px;
 }
 
-
 .level {
 	display: flex;
-	padding: 8px;
 	flex-direction: row;
+	padding: 8px;
 }
 
-.publish_button{
-	padding:3px;
+.publish_button {
+	padding: 3px;
 	margin-left: 180%;
 }

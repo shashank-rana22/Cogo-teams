@@ -1,7 +1,7 @@
 .form {
+	width: 100%;
 	padding: 8px;
 	overflow: scroll;
-	width: 100%;
 }
 
 .content {
@@ -31,7 +31,6 @@
 	color: #cb6464;
 }
 
-
-.controller{
-	width:100%;
+.controller {
+	width: 100%;
 }

@@ -93,6 +93,27 @@ const getAppearedColumns = ({
 	{
 		Header: (
 			<div className={styles.container}>
+				<div className={styles.item}>PERCENTAGE</div>
+
+				<SortComponent
+					value="final_score"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
+		id       : 'percentage',
+		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
+			<section className={styles.section}>
+				{showResult(is_evaluated, activeAttempt, status, retest)
+					? `${toFixed(final_score / test.total_marks, ROUND_OFF_DIGITS)}`
+					: <IsEvaluated is_evaluated={is_evaluated} />}
+			</section>
+		),
+	},
+	{
+		Header: (
+			<div className={styles.container}>
 				<div className={styles.item}>PERCENTILE</div>
 
 				<SortComponent
