@@ -26,7 +26,7 @@ function Frontside({
 			setaddAnnexure={setaddAnnexure}
 			addAnnexure={addAnnexure}
 			watermark={watermark}
-			bl_number={bl_number}
+			blNumber={bl_number}
 		/>
 	);
 }
