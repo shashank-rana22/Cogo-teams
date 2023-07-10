@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetOrganizationEvaluationDetails({ organization_id, id }) {
+function useGetOrganizationEvaluationDetails({ id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_organization_evaluation_details',
@@ -11,8 +11,8 @@ function useGetOrganizationEvaluationDetails({ organization_id, id }) {
 		try {
 			await trigger({
 				params: {
-					organization_id,
-					organization_service_id: id,
+					organization_id         : '4c2dfeba-c715-4614-8a93-e051a270981d',
+					organization_service_id : '0070b707-c404-4ee5-ac5c-fd7ae8ca0f61',
 				},
 			});
 		} catch (err) {
@@ -25,7 +25,7 @@ function useGetOrganizationEvaluationDetails({ organization_id, id }) {
 	}, []);
 
 	return {
-		data: data?.list,
+		data: data?.organization_evaluation_tasks,
 		loading,
 	};
 }

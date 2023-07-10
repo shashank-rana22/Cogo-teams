@@ -22,7 +22,7 @@ function Supplier() {
 		{ title: 'Contract and SLA', key: 'contract_sla' },
 
 	];
-	const [status, setStatus] = useState('need_analysis');
+	const [status, setStatus] = useState();
 
 	const { query } = useRouter();
 	const { id } = query;

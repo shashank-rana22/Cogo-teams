@@ -3,6 +3,7 @@ import { Table, Toggle, Textarea, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useCreateOrganizationEvaluation from '../../../hooks/useCreateOrganizationEvaluation';
 import useGetOrganizationEvaluationDetails from '../../../hooks/useGetOrganizationEvaluationDetails';
 import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
 
@@ -10,25 +11,39 @@ import ScoreModal from './ScoreModal';
 import styles from './styles.module.css';
 
 function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationService, service }) {
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState('');
 	const [feedback, setFeedback] = useState('');
+	const [provideBl, setProvideBl] = useState(false);
+	const [basisConsignee, setBasisConsignee] = useState(false);
+
 	const {
 		data: organizationEvaluationDetails,
 	} = useGetOrganizationEvaluationDetails({ organization_id, id, setStatus, getOrganizationService });
-	console.log(organizationEvaluationDetails);
+
 	const { UpdateOrganizationService } = useUpdateOrganizationService({
 		organization_id, stage_of_approval: 'due_dilligance', service, getOrganizationService,
 	});
 
+	const {
+		createOrganizationEvaluation,
+	} = useCreateOrganizationEvaluation({
+		organization_id,
+		id,
+		feedback,
+		provideBl,
+		basisConsignee,
+		UpdateOrganizationService,
+	});
+
 	const handleSubmit = () => {
-		UpdateOrganizationService();
+		createOrganizationEvaluation();
 	};
 
 	const columns = [
 		{
 			id       : 'parameters',
 			Header   : () => (<div className={styles.th}>Parameters</div>),
-			accessor : (row) => (<div className={styles.td}>{row.parameters}</div>),
+			accessor : (row) => (<div className={styles.td}>{row.label}</div>),
 		},
 		{
 			id       : 'total_score',
@@ -41,37 +56,14 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 			accessor : (row) => (
 				<div className={styles.td}>
 					{
-                        row?.score_received === 0 ? (
-	<Button themeType="accent" size="sm" onClick={() => { setShow(true); }}>
+                        row?.score_received && row?.task !== 'total_score' ? (
+	<Button themeType="accent" size="sm" onClick={() => setShow(row)}>
 		Score
 	</Button>
-
                         ) : row?.score_received
                     }
 				</div>
 			),
-		},
-	];
-	const data = [
-		{
-			parameters     : 'Payment Terms',
-			total_score    : 20,
-			score_received : 20,
-		},
-		{
-			parameters     : 'Market Feedback',
-			total_score    : 20,
-			score_received : 0,
-		},
-		{
-			parameters     : 'Strength with SL/Principals',
-			total_score    : '20',
-			score_received : 20,
-		},
-		{
-			parameters     : 'Willingness to adopt a platform',
-			total_score    : '20',
-			score_received : 20,
 		},
 	];
 	return (
@@ -81,16 +73,27 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 
 					<div className={styles.upper_left}>Supplier Evaluation</div>
 					<div className={styles.middle_left}>
-						<Table columns={columns} data={data} />
+						{organizationEvaluationDetails
+						&& <Table columns={columns} data={organizationEvaluationDetails} />}
 					</div>
 					<div className={styles.lower_left}>
 						<div className={styles.lower_left_data}>
 							Will They provide BL delivery via Courier or Runner ?
-							<Toggle name="a2" size="md" disabled={false} />
+							<Toggle
+								onChange={() => { setProvideBl(!provideBl); }}
+								name="a2"
+								size="md"
+								disabled={false}
+							/>
 						</div>
 						<div className={styles.lower_left_data}>
 							Agress to Act Basic Consignee MBL with Us?
-							<Toggle name="a2" size="md" disabled={false} />
+							<Toggle
+								onChange={() => { setBasisConsignee(!basisConsignee); }}
+								name="a2"
+								size="md"
+								disabled={false}
+							/>
 						</div>
 
 					</div>
@@ -111,7 +114,6 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 					</div>
 					<div className={styles.lower_right}>
 						Feedback
-						{feedback}
 						<Textarea
 							className={styles.lower_right_feedback}
 							name="a4"
@@ -122,7 +124,7 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 						/>
 					</div>
 				</div>
-				{show && <ScoreModal show={show} setShow={setShow} />}
+				<ScoreModal show={show} setShow={setShow} />
 			</div>
 			<div className={styles.flex_right}>
 				<Button

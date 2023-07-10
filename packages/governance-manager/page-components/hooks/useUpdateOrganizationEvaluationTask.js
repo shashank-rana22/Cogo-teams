@@ -1,22 +1,22 @@
 import { useRequest } from '@cogoport/request';
 
-function useUpdateOrganizationEvaluationTask({ id, feedback, service_requirement, setShow }) {
+function useUpdateOrganizationEvaluationTask({ id, reason, yourScore, setShow }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_organization_evaluation_task',
 	}, { manual: true });
 
-	const UpdateOrganizationEvaluationTask = async () => {
+	const updateOrganizationEvaluationTask = async () => {
 		try {
 			await trigger({
 				params: {
-					feedback,
+					score_received : yourScore,
 					id,
-					service_requirement,
-					status: 'active',
+					feedback       : reason,
+					status         : 'active',
 				},
 			});
-			setShow('');
+			setShow(null);
 		} catch (err) {
 			console.log(err);
 		}
@@ -24,7 +24,7 @@ function useUpdateOrganizationEvaluationTask({ id, feedback, service_requirement
 	return {
 		data,
 		loading,
-		UpdateOrganizationEvaluationTask,
+		updateOrganizationEvaluationTask,
 	};
 }
 export default useUpdateOrganizationEvaluationTask;
