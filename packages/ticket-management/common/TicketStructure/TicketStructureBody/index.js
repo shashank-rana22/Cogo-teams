@@ -9,13 +9,12 @@ import styles from './styles.module.css';
 const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
-	data,
+	data = {},
 	updateTicketActivity = () => {},
 	setModalData = () => {},
 }) {
 	const {
 		ID: id = '',
-		Status: status = '',
 		Description: description = '',
 		CreatedAt: createdAt = '',
 		TicketActivity: ticketActivity = {},
@@ -46,7 +45,7 @@ function TicketStructureBody({
 					</div>
 					<TicketActions
 						isModal={false}
-						status={status}
+						ticketStatus={ticketStatus}
 						handleTicket={handleTicket}
 						isClosureAuthorizer={isClosureAuthorizer}
 					/>
