@@ -29,11 +29,6 @@ const injectValues = (
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
 					? controls[index]?.value : [{ url: selectedMail?.formatted?.[zeroth_index]?.url }];
-				control.controls.forEach((value, controlIndex) => {
-					if (value.name === 'truck_number') {
-						controls[index].controls[controlIndex].value = servicesList?.[index]?.truck_number;
-					}
-				});
 			}
 		});
 	}
@@ -183,17 +178,18 @@ const injectValues = (
 			}
 		});
 	}
-	if (task.task === 'pod_sent_to_shipper' && task.shipment_type === 'ftl_freight') {
-		controls.forEach((control, index) => {
+
+	if (['pod_sent_to_shipper', 'upload_service_provider_proof_of_delivery'].includes(task?.task)
+	&& task.shipment_type === 'ftl_freight') {
+		controls.forEach((control) => {
 			if (control?.type === 'fieldArray') {
-				(control?.controls || []).forEach((value, controlIndex) => {
-					if (value?.name === 'truck_number') {
-						controls[index].controls[controlIndex].value = servicesList?.[index]?.truck_number;
+				const tempControl = control;
+				tempControl.value = servicesList?.reduce((acc, item) => {
+					if (item.service_type !== 'subsidiary_service') {
+						acc.push({ service_id: item?.id, truck_number: item?.truck_number });
 					}
-				});
-			}
-			if (control?.name === 'truck_name') {
-				controls[index].value = servicesList?.[zeroth_index]?.truck_number;
+					return acc;
+				}, []);
 			}
 		});
 	}
