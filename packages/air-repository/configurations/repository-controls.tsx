@@ -125,7 +125,7 @@ const repositoryControls = () => ({
 				{
 					name        : 'mobile',
 					type        : 'mobile',
-					label       : 'Enter Contact Number',
+					label       : 'Contact Number',
 					placeholder : 'Enter contact number',
 					span        : 6,
 					rules       : {

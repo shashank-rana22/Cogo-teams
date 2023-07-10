@@ -21,7 +21,7 @@
 .font_style {
 	padding-left: 4px;
 	margin: 0;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: #cb6464;
 }
 
@@ -34,11 +34,11 @@
 			border: 1px solid #333;
 
 			.ui_input_control {
-				font-size: 12px;
+				font-size: var(--font-size-md);
 			}
 
 			.ui_input_control::placeholder {
-				font-size: 12px;
+				font-size: var(--font-size-md);
 				color: #333;
 			}
 		}
@@ -51,10 +51,10 @@
 				border: 1px solid #333;
 
 				.ui_select_input_control {
-					font-size: 12px;
+					font-size: var(--font-size-md);
 
 					.ui_select_input_placeholder {
-						font-size: 12px;
+						font-size: var(--font-size-md);
 						color: #333;
 					}
 				}
@@ -86,6 +86,6 @@
 .child_label {
 	max-height: 16px;
 	margin-bottom: 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 }

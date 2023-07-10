@@ -15,7 +15,7 @@ interface POCDetailsProps {
 	data: NestedObj;
 }
 
-function POCDetails({ data }:POCDetailsProps) {
+function POCDetails({ data = {} }:POCDetailsProps) {
 	const { fields } = POCDetailsFields;
 
 	const {

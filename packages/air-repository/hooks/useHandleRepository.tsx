@@ -1,6 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+interface Props {
+	payload?: object,
+	listRepository?: Function,
+	setShowModal?: (p:boolean)=> void,
+}
+
 const useHandleRepository = (edit) => {
 	const api = edit ? '/update_shipment_service_ops_repository' : '/create_shipment_service_ops_repository';
 
@@ -9,7 +15,7 @@ const useHandleRepository = (edit) => {
 		method : 'POST',
 	});
 
-	const handleRepository = async (payload, listRepository, setShowModal) => {
+	const handleRepository = async ({ payload, listRepository, setShowModal = () => {} }:Props) => {
 		try {
 			await trigger({
 				data: payload,

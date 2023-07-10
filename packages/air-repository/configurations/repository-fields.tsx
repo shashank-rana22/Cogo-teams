@@ -13,7 +13,7 @@ export const RepositoryFields = {
 		{
 			key   : 'airport_id',
 			label : 'Airport',
-			span  : 3,
+			span  : 2.5,
 			func  : 'handleAirport',
 		},
 		{
@@ -63,7 +63,7 @@ export const RepositoryFields = {
 		{
 			key   : 'edit_detail',
 			label : '',
-			span  : 1.7,
+			span  : 2.2,
 			func  : 'handleEditDetail',
 		},
 	],

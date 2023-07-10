@@ -22,7 +22,14 @@ interface ModalProps {
 	setEdit:React.FC;
 }
 
-function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, setEdit }:ModalProps) {
+function RepositoryModal({
+	showModal = false,
+	setShowModal = () => {},
+	listRepository = () => {},
+	item = {},
+	edit = false,
+	setEdit = () => {},
+}:ModalProps) {
 	const { handleRepository, loading } = useHandleRepository(edit);
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
@@ -41,7 +48,7 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 		});
 
 		const payload = { ...values, pocs_data: pocData, id: item?.id, action_name: edit ? 'update' : undefined };
-		handleRepository(payload, listRepository, setShowModal).then(() => {
+		handleRepository({ payload, listRepository, setShowModal }).then(() => {
 			if (edit) {
 				setEdit(false);
 			}

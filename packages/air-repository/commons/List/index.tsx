@@ -24,17 +24,17 @@ function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
+	page = 1,
+	setPage = () => {},
+	functions = {},
 	Child = <div />,
 } :Props) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = {}, total_count:totalCount } = listData;
-	const [isOpen, setIsOpen] = useState('');
+	const [open, setOpen] = useState('');
 
 	const handlePOCDetails = (itm) => {
-		setIsOpen(itm.id);
+		setOpen(itm.id);
 	};
 
 	const render = () => {
@@ -52,16 +52,16 @@ function List({
 						loading={loading}
 						isMobile={isMobile}
 						Child={Child}
-						isOpen={isOpen}
+						open={open}
 					/>
 					<div
 						className={styles.accordian_style}
 					>
-						{isOpen === singleitem.id ? (
+						{open === singleitem.id ? (
 							<Button
 								themeType="linkUi"
 								onClick={() => {
-									setIsOpen('');
+									setOpen('');
 								}}
 							>
 								Show Less
