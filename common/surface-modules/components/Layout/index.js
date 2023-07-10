@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useMemo } from 'react';
 
 import EditServiceCharges from '../EditServiceCharges';
@@ -8,7 +9,8 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
-const ZERO_INDEX = 0;
+
+const { zeroth_index } = GLOBAL_CONSTANTS;
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {}, shipment_id = '',
@@ -22,14 +24,14 @@ function Layout({
 		if (showItem) {
 			span += field?.span || TOTAL_SPAN;
 			if (span === TOTAL_SPAN) {
-				span = ZERO_INDEX;
+				span = zeroth_index;
 
 				rowWiseFields.push(field);
 				TOTAL_FIELDS.push(rowWiseFields);
 
 				rowWiseFields = [];
 			} else if (span > TOTAL_SPAN) {
-				span = ZERO_INDEX;
+				span = zeroth_index;
 
 				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
