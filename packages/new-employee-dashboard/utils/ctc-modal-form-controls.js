@@ -6,7 +6,7 @@ const controls = [
 			name        : 'joining_bonus_yearly',
 			label       : 'Joining Bonus',
 			type        : 'number',
-			placeholder : 'Add Joining Bonus after 1 year',
+			placeholder : 'Add Joining Bonus',
 
 		},
 
