@@ -25,15 +25,15 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field = {},
-	disabled,
+	disabled = false,
 	error = {},
 	formValues = {},
 	id = '',
-	length,
+	length = 0,
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
-	let span = 0;
+	let span = zeroth_index;
 	controls.forEach((fields) => {
 		span += fields.span || TOTAL_SPAN;
 		if (span === TOTAL_SPAN) {

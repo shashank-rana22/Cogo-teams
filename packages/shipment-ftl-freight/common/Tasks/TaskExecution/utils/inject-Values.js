@@ -7,6 +7,7 @@ const TRUCK_NUM_TASKS = [
 	'upload_ftl_commercial_invoice',
 	'upload_commercial_invoice',
 	'upload_weight_note',
+	'upload_load_truck_image',
 ];
 
 const { zeroth_index } = GLOBAL_CONSTANTS;
@@ -182,7 +183,7 @@ const injectValues = (
 			}
 		});
 	}
-	if (task.task === 'pod_sent_to_shipper') {
+	if (task.task === 'pod_sent_to_shipper' && task.shipment_type === 'ftl_freight') {
 		controls.forEach((control, index) => {
 			if (control?.type === 'fieldArray') {
 				(control?.controls || []).forEach((value, controlIndex) => {
