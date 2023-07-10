@@ -1,6 +1,8 @@
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
-import { format, startCase, isEmpty } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -67,8 +69,18 @@ function ListData({
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
-										{format(created_at, 'hh:mm a,')}
-										{format(created_at, ' MMM dd')}
+										{formatDate({
+											date       : created_at,
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+											formatType : 'time',
+										})}
+										,
+										{' '}
+										{formatDate({
+											date       : created_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd'],
+											formatType : 'date',
+										})}
 									</div>
 								</div>
 								<div className={styles.main_card}>
