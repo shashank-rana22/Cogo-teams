@@ -19,13 +19,6 @@ import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
-const excludedServices = [
-	'fcl_freight_local_service',
-	'lcl_freight_local_service',
-	'air_freight_local_service',
-	'subsidiary_service',
-];
-
 const IMAGE_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png';
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [isPillSelected, setIsPillSelected] = useState(false);
@@ -34,16 +27,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [priceData, setPriceData] = useState(null);
 	const { data:revenueDeskDecisionsData } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
-	const groupedShowServicesData = servicesData?.list?.reduce((acc, item) => {
-		const { service_type } = item;
-		if (!excludedServices.includes(service_type)) {
-			if (!acc[service_type]) {
-				acc[service_type] = [];
-			}
-			acc[service_type].push(item);
-		}
-		return acc;
-	}, {});
+	const shipment_services = servicesData?.list || [];
 	const handlePillSelected = () => {
 		setIsPillSelected((prev) => !prev);
 	};
@@ -262,8 +246,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					: (
 						<ServiceWiseDetails
 							shipmentData={itemData}
-							groupedShowServicesData={groupedShowServicesData}
-							serviceData={servicesData?.list}
+							serviceData={shipment_services}
 							priceData={priceData}
 							setShowDetailPage={setShowDetailPage}
 							revenueDeskDecisionsData={revenueDeskDecisionsData?.[DEFAULT_INDEX] || []}
