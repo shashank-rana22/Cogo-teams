@@ -21,11 +21,62 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+interface NestedObj {
+	[key: string]: any;
+}
+interface Props {
+	back: boolean;
+	setBack?:Function;
+	setEdit?:Function;
+	edit?: boolean | string;
+	activeCategory?: string;
+	hawbDetails?: Array<NestedObj>;
+	setHawbDetails?: Function;
+	setActiveHawb?: Function;
+	setActiveKey?: (key: string) => void;
+	activeHawb?: NestedObj;
+	packingData?:NestedObj;
+	fields?:NestedObj;
+	control?:Function;
+	errors?:NestedObj;
+	setValue?:Function;
+	item?: NestedObj;
+	setGenerate?:Function;
+	handleSubmit?: Function;
+	category?: string;
+	activeKey?: string;
+	taskItem?: NestedObj;
+	formValues?: NestedObj;
+	setCustomHawbNumber?: Function;
+	cogoSeriesNumber?: Array<number>
+}
+
 function FormContainer({
-	back, setBack, edit, setEdit, packingData, fields, control, errors, setValue, item,
-	setGenerate, handleSubmit, category, activeCategory, hawbDetails, setHawbDetails, activeHawb,
-	setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber, cogoSeriesNumber,
-}) {
+	back = false,
+	setBack = () => {},
+	edit = false,
+	setEdit = () => {},
+	packingData = {},
+	fields = {},
+	control = () => {},
+	errors = {},
+	setValue = () => {},
+	item = {},
+	setGenerate = () => {},
+	handleSubmit = () => {},
+	category = '',
+	activeCategory = '',
+	hawbDetails = [],
+	setHawbDetails = () => {},
+	activeHawb = {},
+	setActiveHawb = () => {},
+	activeKey = '',
+	setActiveKey = () => {},
+	taskItem = {},
+	formValues = {},
+	setCustomHawbNumber = () => {},
+	cogoSeriesNumber = [],
+}:Props) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -98,9 +149,9 @@ function FormContainer({
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = Number((formValues.chargeableWeight * charge.chargeUnit).toFixed(2));
+				price = Number((charge.chargeUnit * Number(formValues.chargeableWeight)).toFixed(2));
 			} else if (charge.chargeType === 'gross_wt') {
-				price = Number((formValues.weight * charge.chargeUnit).toFixed(2));
+				price = Number((Number(formValues.weight) * charge.chargeUnit).toFixed(2));
 			}
 			return { ...charge, price };
 		});

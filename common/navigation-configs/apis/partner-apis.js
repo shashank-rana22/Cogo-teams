@@ -12083,11 +12083,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'post_air_coe_documents_create_shipment_document',
+			api         : 'post_air_coe_documents',
 			access_type : 'private',
 		},
 		{
-			api         : 'post_air_coe_documents_update_shipment_document',
+			api         : 'put_air_coe_documents',
 			access_type : 'private',
 		},
 		{

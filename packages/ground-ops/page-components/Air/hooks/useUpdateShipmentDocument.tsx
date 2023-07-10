@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestAir } from '@cogoport/request';
 
 const useUpdateShipmentDocument = () => {
@@ -6,7 +7,7 @@ const useUpdateShipmentDocument = () => {
 		{
 			url     : '/air-coe/documents/update-shipment-document',
 			method  : 'POST',
-			authKey : 'post_air_coe_documents_update_shipment_document',
+			authKey : 'put_air_coe_documents',
 		},
 	);
 
@@ -18,7 +19,7 @@ const useUpdateShipmentDocument = () => {
 			listAPI({});
 			Toast.success('Document Approved Successfully');
 		} catch (err) {
-			Toast.error(err?.response?.data?.base?.[0] || 'Something went wrong');
+			Toast.error(err?.response?.data?.base?.[GLOBAL_CONSTANTS.zeroth_index] || 'Something went wrong');
 		}
 	};
 

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -14,7 +15,7 @@ interface Props {
 	setGenerate?:Function;
 	setEdit?:Function;
 	activeCategory?: string;
-	hawbDetails?: Array<string>;
+	hawbDetails?: Array<NestedObj>;
 	setHawbDetails?: Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
@@ -36,11 +37,11 @@ const useCreateShipmentDocument = ({
 	activeHawb = {},
 }:Props) => {
 	let url = '/air-coe/documents/create-shipment-document';
-	let authKey = 'post_air_coe_documents_create_shipment_document';
+	let authKey = 'post_air_coe_documents';
 
 	if ((activeCategory === 'hawb' && activeHawb.isNew === false) || (edit && activeCategory === 'mawb')) {
 		url = '/air-coe/documents/update-shipment-document';
-		authKey = 'post_air_coe_documents_update_shipment_document';
+		authKey = 'put_air_coe_documents';
 	}
 
 	const [success, setSuccess] = useState(false);
@@ -94,7 +95,7 @@ const useCreateShipmentDocument = ({
 				setEdit(false);
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
-				getHawb(!activeHawb.isNew ? res?.data?.id : res?.data?.ids?.[0]);
+				getHawb(!activeHawb.isNew ? res?.data?.id : res?.data?.ids?.[GLOBAL_CONSTANTS.zeroth_index]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');

@@ -6,7 +6,7 @@ const useCreateShipmentDocument = () => {
 		{
 			url     : '/air-coe/documents/create-shipment-document',
 			method  : 'POST',
-			authKey : 'post_air_coe_documents_create_shipment_document',
+			authKey : 'post_air_coe_documents',
 		},
 	);
 
