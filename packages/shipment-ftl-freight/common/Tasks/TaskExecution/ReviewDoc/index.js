@@ -9,6 +9,9 @@ import useUpdateDocuments from '../../../../hooks/useUpdateDocuments';
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+const ZERO_INDEX = 0;
+
 function ReviewDoc({
 	task = {},
 	refetch = () => {},
@@ -34,7 +37,7 @@ function ReviewDoc({
 	let params = {};
 
 	if (!loading && list.list?.length) {
-		docData = list.list[0] || {};
+		docData = list.list[ZERO_INDEX] || {};
 		params = {
 			id                  : docData.id,
 			pending_task_id     : task.id,
@@ -90,10 +93,10 @@ function ReviewDoc({
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			const regex = /:finalUrl=>"([^"]*)"/;
-			const match = url.match(regex);
+			const REGEX = /:finalUrl=>"([^"]*)"/;
+			const match = url.match(REGEX);
 
-			return match[1];
+			return match?.[FIRST_INDEX];
 		}
 
 		return url;

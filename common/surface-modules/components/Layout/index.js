@@ -7,28 +7,31 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const ZERO_INDEX = 0;
+
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {}, shipment_id = '',
 }) {
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let rowWiseFields = [];
 	let span = 0;
 
 	(fields || []).forEach((field) => {
 		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field?.span || 12;
-			if (span === 12) {
-				span = 0;
+			span += field?.span || TOTAL_SPAN;
+			if (span === TOTAL_SPAN) {
+				span = ZERO_INDEX;
 
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 
 				rowWiseFields = [];
-			} else if (span > 12) {
-				span = 0;
+			} else if (span > TOTAL_SPAN) {
+				span = ZERO_INDEX;
 
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 
 				rowWiseFields.push(field);
@@ -39,17 +42,17 @@ function Layout({
 	});
 
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
 						const { type, heading = '' } = field || {};

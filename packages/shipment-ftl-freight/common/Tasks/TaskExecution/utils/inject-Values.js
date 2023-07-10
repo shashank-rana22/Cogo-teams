@@ -6,6 +6,9 @@ const TRUCK_NUM_TASKS = [
 	'upload_commercial_invoice',
 ];
 
+const INITIAL_TRUCK_INDEX = 0;
+const TRUCK_EXCEED_NUMBER = -1;
+
 const injectValues = (
 	selectedMail,
 	populatedControls,
@@ -21,7 +24,12 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[INITIAL_TRUCK_INDEX]?.url }];
+				control.controls.forEach((value, controlIndex) => {
+					if (value.name === 'truck_number') {
+						controls[index].controls[controlIndex].value = servicesList?.[index]?.truck_number;
+					}
+				});
 			}
 		});
 	}
@@ -48,22 +56,22 @@ const injectValues = (
 			}
 
 			if (control.name === 'truck_details_count') {
-				const truck_details_count = [];
+				const TRUCK_DETAILS_COUNT = [];
 				(servicesList || []).forEach((item) => {
-					const ind = truck_details_count.findIndex(
+					const ind = TRUCK_DETAILS_COUNT.findIndex(
 						(i) => i.truck_type === item.truck_type,
 					);
 
-					if (ind !== -1) {
-						truck_details_count[ind].truck_numbers += 1;
+					if (ind !== TRUCK_EXCEED_NUMBER) {
+						TRUCK_DETAILS_COUNT[ind].truck_numbers += 1;
 					} else {
-						truck_details_count.push({
+						TRUCK_DETAILS_COUNT.push({
 							truck_type    : item.truck_type,
 							truck_numbers : 1,
 						});
 					}
 				});
-				controls[index].value = [...truck_details_count];
+				controls[index].value = [...TRUCK_DETAILS_COUNT];
 			}
 		});
 	}
@@ -121,7 +129,6 @@ const injectValues = (
 			}
 		});
 	}
-
 	if (task.task === 'upload_proof_of_delivery') {
 		controls.forEach((control, index) => {
 			if (control.name === 'documents') {
@@ -169,6 +176,20 @@ const injectValues = (
 						newFieldItem.options = truckNumberOptions;
 					}
 				});
+			}
+		});
+	}
+	if (task.task === 'pod_sent_to_shipper') {
+		controls.forEach((control, index) => {
+			if (control.type === 'fieldArray') {
+				control.controls.forEach((value, controlIndex) => {
+					if (value.name === 'truck_number') {
+						controls[index].controls[controlIndex].value = servicesList?.[index].truck_number;
+					}
+				});
+			}
+			if (control.name === 'truck_name') {
+				controls[index].value = servicesList?.[INITIAL_TRUCK_INDEX].truck_number;
 			}
 		});
 	}

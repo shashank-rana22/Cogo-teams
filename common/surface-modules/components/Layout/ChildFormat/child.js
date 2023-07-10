@@ -8,6 +8,11 @@ import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
+const ZERO_INDEX = 0;
+const FIRST_INDEX = 1;
+const TOTAL_SPAN = 12;
+const SPAN_CONVERTIABLE_FACTOR = 100;
+
 function Child({
 	controls = [],
 	control = {},
@@ -20,40 +25,42 @@ function Child({
 	disabled,
 	error = {},
 	formValues = {},
+	id = '',
+	length,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
+		span += fields.span || TOTAL_SPAN;
+		if (span === TOTAL_SPAN) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
+			span = ZERO_INDEX;
+		} else if (span < TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[0]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[0]?.url?.fileName === '') {
+	if (formValues?.documents?.[ZERO_INDEX]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[ZERO_INDEX]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[ZERO_INDEX]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += 1) {
+		for (let i = 0; i < elements.length; i += FIRST_INDEX) {
 			elements[i].style.display = 'none';
 		}
 	}
@@ -91,9 +98,9 @@ function Child({
 			<h3 className={styles.heading}>
 				{startCase(name || 'document')}
 				&nbsp;
-				{index + 1}
+				{index + FIRST_INDEX}
 			</h3>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
@@ -110,14 +117,16 @@ function Child({
 
 						const show = 'show' in controlItem ? controlItem.show : true;
 
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						const flex = ((controlItem?.span || TOTAL_SPAN) / TOTAL_SPAN) * SPAN_CONVERTIABLE_FACTOR;
+
 						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
+
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>
@@ -128,7 +137,7 @@ function Child({
 									? 								 (
 										<Element
 											{...newControl}
-											{...extraProps}
+											{...EXTRA_PROPS}
 											style={{ minWidth: '0px' }}
 											key={`${name}.${index}.${controlItem.name}`}
 											name={`${name}.${index}.${controlItem.name}`}
@@ -136,6 +145,7 @@ function Child({
 											control={control}
 											size="sm"
 											disabled={newControl?.disabled ?? (disabled || disable)}
+											id={id}
 										/>
 									)
 									: null}
@@ -159,11 +169,11 @@ function Child({
 
 				</div>
 			))}
-			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+			{showDeleteButton && index >= noDeleteButtonTill && !disabled && length > FIRST_INDEX ? (
 				<div className={styles.delete_icon}>
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, FIRST_INDEX)}
 					/>
 				</div>
 			) : null}
