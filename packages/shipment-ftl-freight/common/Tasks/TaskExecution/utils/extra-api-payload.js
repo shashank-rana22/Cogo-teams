@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
@@ -13,7 +14,7 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 	'container_details_count',
 ];
 const FIRST_INDEX = 1;
-const ZERO_INDEX = 0;
+const { zeroth_index } = GLOBAL_CONSTANTS;
 
 const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'create_shipment_document') {
@@ -68,7 +69,7 @@ const extraApiPayload = (values, end_point, task) => {
 						}
 					});
 				} else if (key === 'cargo_dimension') {
-					const cargo_dimensions = values[key][ZERO_INDEX];
+					const cargo_dimensions = values[key][zeroth_index];
 					const { length, breadth, height, unit } = cargo_dimensions;
 					DATA[key] = {
 						length,
