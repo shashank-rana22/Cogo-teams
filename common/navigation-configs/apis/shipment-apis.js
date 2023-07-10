@@ -1598,6 +1598,14 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api         : 'get_saas_hs_code_list_commodities',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+	},
 ];
 
 export default apis;

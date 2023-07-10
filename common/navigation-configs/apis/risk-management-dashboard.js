@@ -23,6 +23,16 @@ const apis = [
 		feature      : 'risk_management',
 		service_name : 'shipment',
 	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+		feature     : 'risk_management',
+	},
+	{
+		api         : 'list_locations',
+		access_type : 'private',
+		feature     : 'risk_management',
+	},
 ];
 
 export default apis;
