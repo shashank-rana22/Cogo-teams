@@ -59,7 +59,9 @@ const useGetTableColumns = ({
 					}}
 				>
 					{item?.question_type !== 'case_study'
-						? item?.question_text
+						? (
+							<div className={styles.question_text}>click to see details</div>
+						)
 						: (
 							<CaseQuestion
 								item={item}

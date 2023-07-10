@@ -110,6 +110,22 @@ const controls = [
 	},
 
 	{
+		name        : 'reporting_manager_id',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
+		label       : 'Reporting Manager',
+		placeholder : 'Reporting Manager',
+		params      : {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+
+			},
+			page_limit: 100,
+		},
+	},
+
+	{
 		name        : 'hr_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
