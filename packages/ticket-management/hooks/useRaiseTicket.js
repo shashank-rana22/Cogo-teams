@@ -8,6 +8,7 @@ const getPayload = ({
 	notify_customer, additionalData,
 }) => ({
 	UserID         : id,
+	PerformedByID  : id,
 	Source         : 'admin',
 	Category       : '',
 	Subcategory    : '',
@@ -20,7 +21,7 @@ const getPayload = ({
 	...additionalData,
 });
 
-const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
+const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo, setRefreshList }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -69,6 +70,13 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 				}),
 			});
 			Toast.success('Successfully Created');
+			setRefreshList((prev) => ({
+				...prev,
+				Open      : false,
+				Pending   : false,
+				Escalated : false,
+				Closed    : false,
+			}));
 			setShowRaiseTicket(false);
 		} catch (error) {
 			console.error(error?.response?.data);

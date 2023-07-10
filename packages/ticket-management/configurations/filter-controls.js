@@ -31,6 +31,7 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			name           : 'additional_information',
 			controllerType : 'textarea',
 			placeholder    : 'Enter Comments',
+			rules          : { required: true },
 		},
 		{
 			...(organizationOptions || {}),
