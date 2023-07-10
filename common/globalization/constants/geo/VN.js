@@ -444,7 +444,7 @@ export default {
 		},
 
 		pan_number: {
-			label   : 'TAX',
+			label   : 'tax',
 			pattern : undefined,
 		},
 

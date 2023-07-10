@@ -575,7 +575,7 @@ export default {
 		},
 
 		pan_number: {
-			label   : 'PAN',
+			label   : 'pan',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		},
 

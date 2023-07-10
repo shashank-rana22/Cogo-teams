@@ -1,4 +1,6 @@
-const headerStyle = {
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const HEADER_STYLE = {
 	marginBottom : '16px',
 	paddingLeft  : '10px',
 	borderRadius : '8px 8px 0px 0px',
@@ -11,7 +13,7 @@ const headerStyle = {
 	fontFamily   : 'Poppins',
 };
 
-const bodyStyles = {
+const BODY_STYLES = {
 	color      : ' #333333',
 	fontWeight : '400',
 	fontSize   : '14px',
@@ -20,10 +22,12 @@ const bodyStyles = {
 	fontStyle  : 'normal',
 };
 
+const geo = getGeoConstants();
+
 export const VENDOR_CONFIG = {
 	showHeader   : true,
-	headerStyles : headerStyle,
-	bodyStyles,
+	headerStyles : HEADER_STYLE,
+	bodyStyles   : BODY_STYLES,
 	fields       : [
 		{
 			label : 'Vendor ID',
@@ -41,8 +45,8 @@ export const VENDOR_CONFIG = {
 			func  : 'renderName',
 		},
 		{
-			label : 'PAN',
-			key   : 'pan',
+			label : geo.others.pan_number.label.toUpperCase(),
+			key   : geo.others.pan_number.label,
 			span  : 1,
 
 		},
@@ -81,8 +85,8 @@ export const VENDOR_CONFIG = {
 
 export const expenseConfig = () => ({
 	showHeader   : true,
-	headerStyles : headerStyle,
-	bodyStyles,
+	headerStyles : HEADER_STYLE,
+	bodyStyles   : BODY_STYLES,
 	fields       : [
 		{
 			label : 'Name',
