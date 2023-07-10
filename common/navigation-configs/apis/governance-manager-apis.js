@@ -19,5 +19,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'get_service_provider_lifecycle_stats',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+
 ];
 export default apis;

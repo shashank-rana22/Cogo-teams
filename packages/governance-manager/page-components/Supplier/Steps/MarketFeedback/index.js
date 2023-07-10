@@ -2,15 +2,16 @@
 import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
-import RoleInput from './RoleInput';
-import styles from './styles.module.css';
 import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
 
-function MarketFeedback({ organization_id,service, getOrganizationService}) {
+import RoleInput from './RoleInput';
+import styles from './styles.module.css';
+
+function MarketFeedback({ organization_id, service, getOrganizationService }) {
 	const { UpdateOrganizationService } = useUpdateOrganizationService({
 		organization_id, stage_of_approval: 'supplier_evaluation', service, getOrganizationService,
 	});
-	const [totalInput, setTotalInput] = useState(2);
+	const [totalInput, setTotalInput] = useState(1);
 	return (
 		<div className={styles.parent}>
 			<div className={styles.heading}>
@@ -32,12 +33,12 @@ function MarketFeedback({ organization_id,service, getOrganizationService}) {
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
-					onClick={() =>UpdateOrganizationService()}
+					onClick={() => UpdateOrganizationService()}
 				>
 					Save & Do it Later
 
 				</Button>
-				<Button onClick={() =>UpdateOrganizationService()}>Submit & Next</Button>
+				<Button onClick={() => UpdateOrganizationService()}>Submit & Next</Button>
 
 			</div>
 		</div>

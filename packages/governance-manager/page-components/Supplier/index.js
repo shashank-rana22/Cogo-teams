@@ -16,7 +16,7 @@ function Supplier() {
 	const items = [
 		{ title: 'Need analysis', key: 'need_analysis' },
 		{ title: 'Market Feedback', key: 'market_feedback' },
-		{ title: 'Supplier Evaluation', key: 'supplier_evaluation' },
+		{ title: 'Supplier Evaluation', key: 'organization_evaluation' },
 		{ title: 'Due Dilligance', key: 'due_dilligance' },
 		{ title: 'Suppliar Approval', key: 'supplier_approval' },
 		{ title: 'Contract and SLA', key: 'contract_sla' },
@@ -46,13 +46,15 @@ function Supplier() {
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
 				/>,
-				market_feedback     : <MarketFeedback 	organization_id={supplierData?.organization_id}
-				id={id}
-				service={supplierData?.service}
-				getOrganizationService={getOrganizationService} />,
-				supplier_evaluation : <SupplierEvaluation setStatus={setStatus} />,
-				supplier_approval   : <SupplierApproval setStatus={setStatus} />,
-				contract_sla        : <ContractSla setStatus={setStatus} />,
+				market_feedback: <MarketFeedback
+					organization_id={supplierData?.organization_id}
+					id={id}
+					service={supplierData?.service}
+					getOrganizationService={getOrganizationService}
+				/>,
+				organization_evaluation : <SupplierEvaluation setStatus={setStatus} />,
+				supplier_approval       : <SupplierApproval setStatus={setStatus} />,
+				contract_sla            : <ContractSla setStatus={setStatus} />,
 			}[status]}
 
 		</div>

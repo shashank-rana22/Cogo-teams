@@ -3,7 +3,6 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function StatusBar({ activeTab, setActiveTab, approvalStats }) {
-	console.log(approvalStats);
 	const status_objects = [{
 		name  : 'need_analysis',
 		title : 'Need Analysis',
@@ -12,12 +11,12 @@ function StatusBar({ activeTab, setActiveTab, approvalStats }) {
 	{
 		name  : 'market_feedback',
 		title : 'Market Feedback',
-    	badge : approvalStats?.total_market_feedback,
+		badge : approvalStats?.total_market_feedback,
 	},
 	{
-		name  : 'supplier_evaluation',
+		name  : 'organization_evaluation',
 		title : 'Supplier Evaluation',
-		badge : approvalStats?.total_supplier_evaluation,
+		badge : approvalStats?.total_organization_evaluation,
 	},
 	{
 		name  : 'due_dilligance',
@@ -27,7 +26,7 @@ function StatusBar({ activeTab, setActiveTab, approvalStats }) {
 	{
 		name  : 'supplier_approval',
 		title : 'Supplier Approval',
-	 	badge : approvalStats?.total_supplier_approval,
+		badge : approvalStats?.total_supplier_approval,
 	},
 	{
 		name  : 'contract_sla',
@@ -44,9 +43,9 @@ function StatusBar({ activeTab, setActiveTab, approvalStats }) {
 				fullWidth
 			>
 				{
-				status_objects.map((object, index) => (
+				status_objects.map((object) => (
 					<TabPanel
-						key={index}
+						key={object?.name}
 						name={object.name}
 						title={object.title}
 						badge={object.badge}
