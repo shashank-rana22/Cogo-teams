@@ -10025,6 +10025,11 @@ const partner = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'get_organization_cogopoint_dashboard',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'get_organization_cogopoint_profile',
 			access_type  : 'private',
 			service_name : 'cogopoint',
