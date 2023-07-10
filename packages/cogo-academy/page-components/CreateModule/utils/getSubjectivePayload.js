@@ -1,9 +1,15 @@
+import { isEmpty } from '@cogoport/utils';
+
+const START_INDEX = 0;
+
 const getSubjectivePayload = ({
 	action = '',
 	values,
 	questionSetId,
 	testQuestionId = '',
 	editDetails = {},
+	questionState,
+	setQuestionState,
 	subjectiveEditorValue = {},
 	uploadable = false,
 }) => {
@@ -13,12 +19,19 @@ const getSubjectivePayload = ({
 
 	const {
 		difficulty_level,
-		question_text,
 		character_limit,
-	} = subjective?.[0] || {};
+	} = subjective?.[START_INDEX] || {};
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
+	}
+
+	if (!questionState?.editorValue?.question_0?.getEditorState()?.getCurrentContent()?.hasText()) {
+		setQuestionState((prev) => ({
+			...prev,
+			error: { question_0: true },
+		}));
+		return { hasError: ['Question is required'] };
 	}
 
 	return {
@@ -27,10 +40,11 @@ const getSubjectivePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		question_text,
+		...(!isEmpty(questionState?.editorValue)
+			? { question_text: questionState?.editorValue?.question_0?.toString('html') } : {}),
 		character_limit,
-		answers              : [{
-			test_question_answer_id : test_question_answers?.[0]?.id,
+		answers: [{
+			test_question_answer_id : test_question_answers?.[START_INDEX]?.id,
 			answer_text             : subjectiveEditorValue.toString('html'),
 			is_correct              : true,
 			sequence_number         : 0,
