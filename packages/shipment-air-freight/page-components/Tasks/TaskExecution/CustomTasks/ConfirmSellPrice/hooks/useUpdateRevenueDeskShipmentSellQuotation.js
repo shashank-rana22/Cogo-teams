@@ -4,8 +4,9 @@ import { useRequest } from '@cogoport/request';
 
 const LINE_ITEMS_CODE = ['BAS', 'BASNO'];
 const useUpdateRevenueDeskShipmentSellQuotation = ({
-	sellData,
-	updateShipmentPendingTask,
+	sellData = {},
+	updateShipmentPendingTask = () => {},
+	task = {},
 }) => {
 	const newLineItems = sellData?.sell_line_items;
 
@@ -15,7 +16,7 @@ const useUpdateRevenueDeskShipmentSellQuotation = ({
 	};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_revenue_desk_shipment_sell_quotations',
+		url    : '/update_shipment_sell_quotations',
 		method : 'POST',
 	}, { manual: true });
 
@@ -36,6 +37,7 @@ const useUpdateRevenueDeskShipmentSellQuotation = ({
 							line_items: newLineItems,
 						},
 					],
+					pending_task_id: task?.id,
 				},
 			});
 			Toast.success('Sell price Successfully updated !');
