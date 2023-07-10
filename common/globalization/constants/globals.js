@@ -224,9 +224,17 @@ const GLOBAL_CONSTANTS = {
 		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		cogo_one_logo        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
+		call_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg',
+		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
+		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
 		cargo_insurance_loader:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
-		seller_address_svg: 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
+		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
+		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
+		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
+		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
+		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -237,6 +245,10 @@ const GLOBAL_CONSTANTS = {
 		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
 		git_course_link      : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
 		html_css_course_link : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+	},
+
+	urls: {
+		list_emojis: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
 	},
 
 	options: {
@@ -403,6 +415,20 @@ const GLOBAL_CONSTANTS = {
 				name: 'per truck', short_name: '/Truck',
 			},
 		},
+	},
+	SHIPMENT_ROUTE_MAPPING: {
+		fcl_freight           : 'fcl',
+		air_freight           : 'air-freight',
+		lcl_freight           : 'lcl',
+		ltl_freight           : 'ltl',
+		ftl_freight           : 'ftl',
+		haulage_freight       : 'haulage',
+		air_customs           : 'air-customs',
+		fcl_customs           : 'fcl-custom',
+		air_freight_local     : 'air-freight-local',
+		fcl_freight_local     : 'fcl-local',
+		domestic_air_freight  : 'domestic-air-freight',
+		rail_domestic_freight : 'rail-domestic',
 	},
 };
 
