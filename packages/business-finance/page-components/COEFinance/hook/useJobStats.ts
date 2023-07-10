@@ -1,12 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { getFormatDate } from '../utils/getFormatDate';
+
 interface FilterInterface {
-	zone?:string
 	serviceType?:string
-	days?:string
+	timePeriod?:string
 	dateRange?:DateInterface
 	rest?:any
 }
@@ -24,24 +24,21 @@ const useJobStats = (filters :FilterInterface) => {
 		},
 		{ autoCancel: false },
 	);
-	const { serviceType, dateRange } = filters || {};
+	const { serviceType, dateRange, timePeriod } = filters || {};
+	const { startDate, endDate } = dateRange || {};
 
-	const billDatesStart = 	(dateRange?.startDate === undefined
-		|| dateRange?.startDate === null)
-		? null : format(dateRange?.startDate, "yyyy-MM-dd'T'HH:mm:ss", {}, false);
-
-	const billDatesEnd = 	(dateRange?.startDate === undefined
-            || dateRange?.startDate === null)
-		? null : format(dateRange?.endDate, "yyyy-MM-dd'T'HH:mm:ss", {}, false);
+	const billDatesStart = 	getFormatDate(startDate);
+	const billDatesEnd = 	getFormatDate(endDate);
 
 	useEffect(() => {
 		const getData = async () => {
 			try {
 				await trigger({
 					params: {
-						service  : serviceType || undefined,
-						fromDate : billDatesStart || undefined,
-						toDate   : billDatesEnd || undefined,
+						service    : serviceType || undefined,
+						fromDate   : billDatesStart || undefined,
+						toDate     : billDatesEnd || undefined,
+						timePeriod : timePeriod || undefined,
 					},
 				});
 			} catch (err) {
@@ -49,8 +46,7 @@ const useJobStats = (filters :FilterInterface) => {
 			}
 		};
 		getData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, filters]);
+	}, [trigger, billDatesEnd, billDatesStart, serviceType, timePeriod]);
 
 	return { jobStatsData, loading };
 };

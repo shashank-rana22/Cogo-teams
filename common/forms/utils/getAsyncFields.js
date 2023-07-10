@@ -356,6 +356,7 @@ function asyncFieldsTicketTypes() {
 		initialCall  : true,
 		qFilterKey   : 'QFilter',
 		listKey      : 'items',
+		searchByq    : true,
 	};
 }
 
