@@ -17,7 +17,6 @@ import { useState } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 const LIMIT_VALUE = 1;
-// const DEFAULT_VALUE = 0;
 
 const updateRoom = async ({ agentId, firestore }) => {
 	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);

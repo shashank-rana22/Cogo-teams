@@ -15,11 +15,12 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-const DEFAULT_VALUE = 0;
 const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
-
-const DEBOUNCE_LIMIT = 60000;
+const EVENTS = ['onmousemove', 'onmousedown', 'ontouchstart', 'ontouchmove', 'onclick', 'onkeydown', 'scroll'];
+const DEFAULT_TIMEOUT_VALUE = 0;
+const SET_DEFAULT_TIMEOUT = 1;
+const DEBOUNCE_LIMIT = 6000;
 
 const getTimeoutConstant = async (firestore) => {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
@@ -27,7 +28,7 @@ const getTimeoutConstant = async (firestore) => {
 	const constantsQuery = await query(constantCollection, limit(LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
-	const { screen_lock_timeout = DEFAULT_TIMEOUT, is_locked_screen = true } = cogoOneConstantsDocs.data() || {};
+	const { screen_lock_timeout = DEFAULT_TIMEOUT, is_locked_screen = true } = cogoOneConstantsDocs?.data() || {};
 	return { timeoutValue: screen_lock_timeout, isLockedBool: is_locked_screen };
 };
 
@@ -71,13 +72,13 @@ function activityTracker({ trackerRef, roomDoc, activity }) {
 }
 
 export function mountActivityTracker({ trackerRef, roomDoc }) {
-	window.onmousemove = () => activityTracker({ trackerRef, roomDoc, activity: 'mouse_move' });
-	window.onmousedown = () => activityTracker({ trackerRef, roomDoc, activity: 'mouse_move' });
-	window.ontouchstart = () => activityTracker({ trackerRef, roomDoc, activity: 'trackpad' });
-	window.ontouchmove = () => activityTracker({ trackerRef, roomDoc, activity: 'trackpad' });
-	window.onclick = () => activityTracker({ trackerRef, roomDoc, activity: 'click' });
-	window.onkeydown = () => activityTracker({ trackerRef, roomDoc, activity: 'keydown' });
-	window.addEventListener('scroll', () => activityTracker({ trackerRef, roomDoc, activity: 'scroll' }), true);
+	EVENTS.forEach((name) => {
+		window.addEventListener(
+			name,
+			() => activityTracker({ trackerRef, roomDoc, activity: name }),
+			true,
+		);
+	});
 }
 
 function useGetActivity({
@@ -112,7 +113,7 @@ function useGetActivity({
 				const differenceFromLastActivity = Date.now() - last_activity_timestamp;
 
 				const timer = differenceFromLastActivity > timeoutValue
-					? DEFAULT_VALUE : timeoutValue - differenceFromLastActivity;
+					? DEFAULT_TIMEOUT_VALUE : timeoutValue - differenceFromLastActivity;
 
 				clearTimeout(activitytimeoutRef?.current);
 				if (last_activity === 'submit_otp') {
@@ -120,17 +121,10 @@ function useGetActivity({
 				}
 				activitytimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
-					window.onmousemove = null;
-					window.onmousedown = null;
-					window.ontouchstart = null;
-					window.ontouchmove = null;
-					window.onclick = null;
-					window.onkeydown = null;
-					window.removeEventListener('scroll', () => activityTracker({
-						trackerRef,
-						roomDoc,
-						activity: 'scroll',
-					}), true);
+
+					EVENTS.forEach((name) => {
+						window[name] = null;
+					});
 				}, timer);
 			});
 		} catch (e) {
@@ -140,7 +134,7 @@ function useGetActivity({
 
 	useEffect(() => {
 		clearTimeout(timeout?.current);
-		timeout.current = setTimeout(mountActivityTrackerSnapShotRef, DEFAULT_VALUE);
+		timeout.current = setTimeout(mountActivityTrackerSnapShotRef, SET_DEFAULT_TIMEOUT);
 	}, [mountActivityTrackerSnapShotRef]);
 
 	return { showModal, setShowModal, isLockedEnabled };
