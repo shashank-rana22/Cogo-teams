@@ -10,6 +10,8 @@ import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
 
+const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
 function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
@@ -41,7 +43,7 @@ function EnrichmentRequest({
 
 		const selectedOption = options.filter((option) => option.id === id);
 
-		const { user_id, partner_id } = selectedOption[0] || {};
+		const { user_id, partner_id } = selectedOption[ZEROTH_INDEX] || {};
 
 		setThirdPartyPayload(
 			[{ user_id, partner_id }],

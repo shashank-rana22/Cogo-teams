@@ -8,6 +8,10 @@
 	margin-top: 12px;
 }
 
+.header {
+	display: flex;
+}
+
 .table_cell {
 	min-width: 120px;
 }

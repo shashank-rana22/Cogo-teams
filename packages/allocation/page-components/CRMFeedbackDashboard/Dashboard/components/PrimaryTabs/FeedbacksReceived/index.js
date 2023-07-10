@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 
 import CrmTable from '../../../../common/CrmTable';
 import EnrichmentRequest from '../../../../common/EnrichmentRequest';
+import GetLeadFeedbacks from '../../../../common/GetLeadFeedbacks';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
@@ -37,12 +38,14 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 			<Filters pageFilters={filters} onChangeFilters={onChangeFilters} activeTab={activeTab} />
 
 			<Statistics activeTab={activeTab} filters={filters} />
+			<div className={styles.header}>
+				<GetLeadFeedbacks />
 
-			<EnrichmentRequest
-				checkedRowsId={checkedRowsId}
-				setActiveTab={setActiveTab}
-			/>
-
+				<EnrichmentRequest
+					checkedRowsId={checkedRowsId}
+					setActiveTab={setActiveTab}
+				/>
+			</div>
 			<CrmTable columns={columns} data={data} loading={loading} />
 
 			<div className={styles.pagination_container}>
