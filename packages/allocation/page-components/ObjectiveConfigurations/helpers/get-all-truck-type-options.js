@@ -4,8 +4,6 @@ import { startCase } from '@cogoport/utils';
 const getAllTruckTypeOptions = () => {
 	const geo = getGeoConstants();
 
-	console.log('geo :: ', geo);
-
 	return [...geo.options.open_truck, ...geo.options.closed_truck].map(
 		(truck_type) => ({ ...truck_type, label: startCase(truck_type.value) }),
 	);
