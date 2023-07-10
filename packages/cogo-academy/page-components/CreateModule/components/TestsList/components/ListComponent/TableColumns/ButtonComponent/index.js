@@ -135,9 +135,7 @@ export function TestSetButtons({
 									themeType="secondary"
 									className={styles.btn}
 									type="button"
-									onClick={() => {
-										setShowDuplicateModal(true);
-									}}
+									onClick={() => setShowDuplicateModal(true)}
 								>
 									<IcMCopy />
 									<div>Duplicate</div>
@@ -151,9 +149,7 @@ export function TestSetButtons({
 										themeType="secondary"
 										className={styles.btn}
 										type="button"
-										onClick={() => {
-											setShowExtendValidityModal(true);
-										}}
+										onClick={() => setShowExtendValidityModal(true)}
 									>
 										<IcMEdit />
 										<div>Extend Validity</div>
