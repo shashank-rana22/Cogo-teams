@@ -31,7 +31,7 @@ function SendActions({
 
 	const isSendPromotionalRate = SEND_PROMOTIONAL_RATE_VIEW.includes(session_type)
     && channel_type === 'whatsapp' && VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.send_promotional_rate
-	&& account_type === 'importer_exporter';
+	&& (account_type === 'importer_exporter' || !account_type);
 
 	return (
 		<div className={styles.send_messages}>

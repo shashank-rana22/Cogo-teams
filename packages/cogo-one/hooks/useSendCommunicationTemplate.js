@@ -6,13 +6,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-function useSendCommunicationTemplate({
-	formattedData = {},
-	isOtherChannels = false,
-	callbackfunc = () => {},
-}) {
-	const geo = getGeoConstants();
+const geo = getGeoConstants();
 
+const getPayload = ({
+	otherChannelRecipient, id, variables, formattedData,
+	isOtherChannels, type, template_name, ...restArgs
+}) => {
 	const {
 		mobile_no = '',
 		user_name = 'user',
@@ -20,6 +19,42 @@ function useSendCommunicationTemplate({
 		lead_user_id = null,
 	} = formattedData || {};
 
+	const GET_VARIABLE = {
+		email    : variables,
+		whatsapp : !isEmpty(variables) ? variables
+			: { user_first_name: user_name?.split(' ')[GLOBAL_CONSTANTS.zeroth_index] || 'User' },
+	};
+
+	let service = 'user';
+	let service_id = geo.uuid.cogoverse_user_id;
+	if (user_id) {
+		service_id = user_id;
+	} else if (!user_id && lead_user_id) {
+		service = 'lead_user';
+		service_id = lead_user_id;
+	}
+
+	return {
+		type           : type === 'email' ? 'email' : 'whatsapp',
+		provider_name  : type === 'email' ? 'aws' : 'meta',
+		service,
+		user_id,
+		lead_user_id,
+		service_id,
+		template_name,
+		recipient      : isOtherChannels ? otherChannelRecipient : mobile_no,
+		source         : 'CogoOne:AdminPlatform',
+		variables      : GET_VARIABLE[type],
+		sender_user_id : id,
+		...(restArgs || {}),
+	};
+};
+
+function useSendCommunicationTemplate({
+	formattedData = {},
+	isOtherChannels = false,
+	callbackfunc = () => { },
+}) {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_communication',
@@ -27,9 +62,11 @@ function useSendCommunicationTemplate({
 		},
 		{ manual: true },
 	);
+
 	const {
 		user: { id },
 	} = useSelector(({ profile }) => profile);
+
 	const sendCommunicationTemplate = async (
 		{
 			template_name,
@@ -39,45 +76,27 @@ function useSendCommunicationTemplate({
 			...restArgs
 		},
 	) => {
-		const GET_VARIABLE = {
-			email    : variables,
-			whatsapp : !isEmpty(variables) ? variables
-				: { user_first_name: user_name?.split(' ')[GLOBAL_CONSTANTS.zeroth_index] || 'User' },
-		};
-
-		let service = 'user';
-		let service_id = geo.uuid.cogoverse_user_id;
-		if (user_id) {
-			service_id = user_id;
-		} else if (!user_id && lead_user_id) {
-			service = 'lead_user';
-			service_id = lead_user_id;
-		}
-
 		try {
 			await trigger({
-				data: {
-					type           : type === 'email' ? 'email' : 'whatsapp',
-					provider_name  : type === 'email' ? 'aws' : 'meta',
-					service,
-					user_id,
-					lead_user_id,
-					service_id,
+				data: getPayload({
+					otherChannelRecipient,
+					id,
+					variables,
+					formattedData,
+					isOtherChannels,
+					type,
 					template_name,
-					recipient      : isOtherChannels ? otherChannelRecipient : mobile_no,
-					source         : 'CogoOne:AdminPlatform',
-					variables      : GET_VARIABLE[type],
-					sender_user_id : id,
 					...(restArgs || {}),
-
-				},
+				}),
 			});
+
 			callbackfunc();
 			Toast.success(`${type === 'email' ? 'Email Sent Sucessfully' : 'Message Sent Sucessfully'}`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
+
 	return {
 		sendCommunicationTemplate,
 		loading,

@@ -8,7 +8,8 @@ const LAST_BRACKETS = -2;
 
 const getPayload = ({ data }) => {
 	const { content = '', title = '', language = '' } = data || {};
-	const variables = content.match(/\{\{([^{}]+)\}\}/g)?.map((match) => match.slice(FIRST_BRACKETS, LAST_BRACKETS));
+	const variables = 	content.match(GLOBAL_CONSTANTS.regex_patterns
+		.double_curly_braces_pattern)?.map((match) => match.slice(FIRST_BRACKETS, LAST_BRACKETS));
 	const snakeCaseName = title.split(' ').join('_').toLowerCase();
 	const selectedLangCode = GLOBAL_CONSTANTS.languages.find((eachLanguage) => eachLanguage.value === language)?.code;
 

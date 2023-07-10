@@ -69,6 +69,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		extra_side_bar_navs_access   : ['spot_search'],
 		get_accesible_assign_buttons : getKamButtons,
 		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
+		show_relevant_templates      : ['quick_reply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -98,6 +99,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
 		extra_side_bar_navs_access   : ['spot_search'],
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		show_relevant_templates      : ['quick_reply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -129,6 +131,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['support', 'bot'])],
 		extra_side_bar_navs_access   : ['spot_search'],
 		get_accesible_assign_buttons : getKamButtons,
+		show_relevant_templates      : ['quick_reply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -158,6 +161,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['support', 'bot'])],
 		extra_side_bar_navs_access   : ['spot_search'],
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
+		show_relevant_templates      : ['quick_reply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -190,6 +194,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
 		get_accesible_assign_buttons : getSupplyAgentButtons,
 		default_side_nav             : 'flash_shipment_bookings',
+		show_relevant_templates      : ['supply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -221,6 +226,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav             : 'flash_shipment_bookings',
+		show_relevant_templates      : ['supply'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -247,6 +253,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			userId,
 		}) => (supportAgentId === userId ? ['assign_modal'] : []),
 		accesible_agent_types_query : [where('agent_type', 'in', ['shipment', 'bot'])],
+		show_relevant_templates     : ['quick_reply'],
 		permissions                 : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -276,6 +283,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [],
 		get_accesible_assign_buttons : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 		default_side_nav             : 'profile',
+		show_relevant_templates      : ['quick_reply', 'supply'],
 		permissions                  : {
 			auto_assign                 : true,
 			bot_message_toggle          : true,

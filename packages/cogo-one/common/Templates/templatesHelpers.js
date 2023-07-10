@@ -36,16 +36,14 @@ export function Preview({
 			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
 			<div className={styles.user_work_scope}>
 				{(variables || []).map((item) => (
-					<div key={item}>
-						<div className={styles.scope_name} key={item}>
-							{startCase(item)}
-							<Input
-								className={styles.value_field}
-								size="xs"
-								placeholder="value"
-								onChange={(val) => handleInputChange(item, val)}
-							/>
-						</div>
+					<div className={styles.scope_name} key={item}>
+						{startCase(item)}
+						<Input
+							className={styles.value_field}
+							size="xs"
+							placeholder="value"
+							onChange={(val) => handleInputChange(item, val)}
+						/>
 					</div>
 				))}
 			</div>

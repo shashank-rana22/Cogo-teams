@@ -19,6 +19,7 @@ function Templates({
 	type = '',
 	dialNumber = '',
 	setDialNumber = () => {},
+	viewType = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
 	const {
@@ -47,7 +48,7 @@ function Templates({
 		infiniteList: { list = [] },
 		loading,
 		refetch,
-	} = useListTemplate();
+	} = useListTemplate({ viewType });
 
 	const { createTemplate, loading: createLoading } = useCreateCommunicationTemplate();
 
@@ -69,6 +70,7 @@ function Templates({
 		if (val?.third_party_template_status !== 'approved' || openCreateReply) {
 			return;
 		}
+
 		setCustomizableData({});
 		setActiveCard({ show: true, data: val });
 	};
