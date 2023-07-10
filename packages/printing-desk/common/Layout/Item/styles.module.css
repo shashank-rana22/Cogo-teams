@@ -1,0 +1,113 @@
+.date {
+	width: 100% !important;
+	max-height: 44px;
+}
+
+.item {
+	height: 100%;
+}
+
+.item_flex {
+	display: flex;
+	align-items: center;
+}
+
+.element {
+	:global {
+		.ui_input_container {
+			max-height: 32px;
+			border: 1px solid var(--color-secondary-greyscale-2);
+
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+
+			.ui_input_control::placeholder {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-2);
+			}
+		}
+
+		.ui_upload_droparea_container {
+			align-items: center;
+			min-height: 40px;
+			margin-bottom: 0;
+			border: 1px solid var(--color-secondary-greyscale-2);
+			border-radius: 4px;
+		}
+
+		.ui_upload_droparea_icon {
+			svg {
+				max-height: 22px;
+				margin-top: 8px;
+			}
+		}
+
+		.ui_select_container {
+			.ui_select_display_container {
+				max-height: 32px;
+				border: 1px solid var(--color-secondary-greyscale-2);
+
+				.ui_select_input_control {
+					font-size: var(--font-size-md);
+
+					.ui_select_input_placeholder {
+						font-size: var(--font-size-md);
+						color: var(--color-secondary-greyscale-2);
+					}
+				}
+			}
+		}
+
+		.ui_multiselect_container {
+			.ui_multiselect_display_container {
+				max-height: 32px;
+				border: 1px solid var(--color-secondary-greyscale-2);
+			}
+
+			.ui_multiselect_input_control {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-2);
+
+				div {
+					font-size: var(--font-size-md);
+					color: var(--color-secondary-greyscale-2) !important;
+				}
+			}
+		}
+
+		.react-datepicker__input-container {
+			input {
+				max-height: 32px;
+				font-size: var(--font-size-md);
+				border: 1px solid var(--color-secondary-greyscale-2);
+			}
+
+			input::placeholder {
+				font-size: var(--font-size-md);
+				color: var(--color-secondary-greyscale-2);
+			}
+		}
+	}
+}
+
+.item_heading {
+	min-height: 16px;
+	margin-bottom: 6px;
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+}
+
+.item_label {
+	max-height: 16px;
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.error {
+	padding-left: 4px;
+	margin: 0;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}

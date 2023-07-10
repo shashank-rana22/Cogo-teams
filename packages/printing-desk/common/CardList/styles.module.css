@@ -1,0 +1,18 @@
+.loading_style {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.end_message {
+	margin-top: 20px;
+	font-size: 16px;
+	color: var(--color-secondary-greyscale-1);
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.scroll {
+	max-height: 600px;
+	overflow: auto;
+}
