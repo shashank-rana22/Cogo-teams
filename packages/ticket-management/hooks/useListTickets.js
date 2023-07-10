@@ -21,7 +21,10 @@ const useListTickets = ({
 	label,
 	refreshList,
 	setRefreshList,
+	isUpdated,
+	setIsUpdated,
 }) => {
+	const { agent, category, spectatorType } = searchParams || {};
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
@@ -40,12 +43,13 @@ const useListTickets = ({
 			PerformedByID : profile?.user?.id,
 			size          : 10,
 			page          : pageIndex - PAGE_DECREMENT,
-			AgentID       : searchParams.agent || undefined,
+			AgentID       : agent || undefined,
 			QFilter       : searchQuery || undefined,
-			Type          : searchParams.category,
+			Type          : category || undefined,
+			SpectatorType : spectatorType || undefined,
 		};
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
+	}, [profile?.user?.id, category, searchQuery, agent, status, spectatorType]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
@@ -62,7 +66,7 @@ const useListTickets = ({
 			}
 			setPagination(pageIndex + PAGE_INCREMENT);
 		} catch (error) {
-			console.log('error:', error);
+			console.error('error:', error);
 		}
 	}, [getPayload, trigger]);
 
@@ -73,6 +77,17 @@ const useListTickets = ({
 			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
 	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList]);
+
+	useEffect(() => {
+		if (isUpdated) {
+			setTickets({ list: [], total: 0 });
+			fetchTickets(MIN_TICKET_COUNT);
+			if (refreshList?.[label]) {
+				setRefreshList((prev) => ({ ...prev, [label]: false }));
+			}
+			setIsUpdated(false);
+		}
+	}, [fetchTickets, isUpdated, label, refreshList, setRefreshList, setIsUpdated]);
 
 	useEffect(() => {
 		debounceQuery(searchParams?.text);

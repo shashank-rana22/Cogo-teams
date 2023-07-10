@@ -1,39 +1,158 @@
-import { Button } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { format, getByKey } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMInfo } from '@cogoport/icons-react';
 
-interface SettlementProps {
-	setActive?: (p: boolean)=> void,
-	getHistoryChild?: Function
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
+import GetSortingData from '../components/Outstanding/OutstandingList/SettlementTable/sorting';
+
+interface Sort {
+	sortType?: string;
+	sortBy?: string;
 }
+interface Props {
+	sort?: Sort;
+	setSort?: React.Dispatch<React.SetStateAction<object>>;
+	settlementFilters?: object;
+	setSettlementFilters?: React.Dispatch<React.SetStateAction<object>>;
+}
+const MAX_LEN_FOR_TEXT = 12;
 
-const SettlementList = ({
-	setActive,
-	getHistoryChild,
-}: SettlementProps) => [
+const SettlementList = ({ sort, setSort, settlementFilters, setSettlementFilters }:Props) => [
 	{
 		Header   : 'Reference Number',
 		id       : 'name',
+		accessor : (row) => {
+			const { sourceDocumentValue, sourceIrnNumber } = row;
+			return (
+				<div style={{ display: 'flex' }}>
+					<div style={{ marginRight: '10px' }}>
+						{showOverflowingNumber(sourceDocumentValue, MAX_LEN_FOR_TEXT)}
+					</div>
+					{sourceIrnNumber ? (
+						<div>
+							<Tooltip
+								content={(
+									<div>
+										{sourceIrnNumber}
+									</div>
+								)}
+								placement="top"
+								interactive
+							>
+								<div><IcMInfo height="12px" width="12px" /></div>
+							</Tooltip>
+
+						</div>
+					) : ''}
+				</div>
+			);
+		},
+	},
+	{
+		Header   : 'Invoice Number',
 		accessor : (row) => (
-			<div>
-				{getByKey(row, 'documentValue') as string}
+
+			<div style={{ display: 'flex' }}>
+				<div style={{ marginRight: '10px' }}>
+					{showOverflowingNumber(row?.destinationDocumentValue, MAX_LEN_FOR_TEXT)}
+				</div>
+				{row?.destinationIrnNumber ? (
+					<div>
+						<Tooltip
+							content={(
+								<div>
+									{row?.destinationIrnNumber}
+								</div>
+							)}
+							placement="top"
+							interactive
+						>
+							<div><IcMInfo height="12px" width="12px" /></div>
+						</Tooltip>
+					</div>
+				) : ''}
+			</div>
+
+		),
+	},
+	{
+		Header: (
+			<div style={{ display: 'flex' }}>
+				<span style={{ marginRight: '8px' }}>Invoice Amt</span>
+
+				<GetSortingData
+					setSort={setSort}
+					sort={sort}
+					type="destinationInvoiceAmount"
+					settlementFilters={settlementFilters}
+					setSettlementFilters={setSettlementFilters}
+				/>
 			</div>
 		),
+		id       : 'destinationInvoiceAmount',
+		accessor : (row) => (
+			<div>
+				{formatAmount({
+					amount   : row?.destinationInvoiceAmount,
+					currency : row?.ledCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
 
+					},
+				})}
+			</div>
+		),
 	},
 
 	{
 		Header   : 'Amount',
+		id       : 'amount',
 		accessor : (row) => (
 
 			<div>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'documentAmount') as any,
-						currency :	getByKey(row, 'currency'),
+						amount   : row?.amount,
+						currency : row?.currency,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
+
+						},
+					})}
+				</div>
+			</div>
+
+		),
+	},
+	{
+		Header: (
+			<div style={{ display: 'flex' }}>
+				<span style={{ marginRight: '8px' }}>LedAmount</span>
+				<GetSortingData
+					setSort={setSort}
+					sort={sort}
+					type="ledAmount"
+					settlementFilters={settlementFilters}
+					setSettlementFilters={setSettlementFilters}
+				/>
+			</div>
+		),
+		id       : 'ledAmount',
+		accessor : (row) => (
+
+			<div>
+				<div>
+					{formatAmount({
+						amount   : row?.ledAmount,
+						currency : row?.ledCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+
 						},
 					})}
 
@@ -42,84 +161,59 @@ const SettlementList = ({
 
 		),
 	},
+
 	{
-		Header   : 'Utilized',
-		accessor : (row) => (
-
-			<div>
-				<div>
-					{formatAmount({
-						amount   :	getByKey(row, 'settledAmount') as any,
-						currency :	getByKey(row, 'currency'),
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})}
-
-				</div>
+		Header: (
+			<div style={{ display: 'flex' }}>
+				<span style={{ marginRight: '8px' }}>Settlement Date</span>
+				<GetSortingData
+					setSort={setSort}
+					sort={sort}
+					type="settlementDate"
+					settlementFilters={settlementFilters}
+					setSettlementFilters={setSettlementFilters}
+				/>
 			</div>
-
 		),
-	},
-	{
-		Header   : 'Balance',
-		accessor : (row) => (
-
-			<div>
-				<div>
-					{formatAmount({
-						amount   : getByKey(row, 'balanceAmount') as any,
-						currency : getByKey(row, 'currency'),
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})}
-
-				</div>
-			</div>
-
-		),
-	},
-
-	{
-		Header   : 'Transaction Date',
+		id       : 'settlementDate',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'transactionDate') as Date, 'dd MMM yy', {}, false)}</div>
+				{formatDate({
+					date       : row?.settlementDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+					formatType : 'date',
+				})}
 			</div>
 		),
 	},
 	{
-		Header   : 'Last Edited On',
+		Header: (
+			<div style={{ display: 'flex' }}>
+				<span style={{ marginRight: '8px' }}>Open Invoice Amt</span>
+				<GetSortingData
+					setSort={setSort}
+					sort={sort}
+					type="destinationOpenInvoiceAmount"
+					settlementFilters={settlementFilters}
+					setSettlementFilters={setSettlementFilters}
+				/>
+			</div>
+		),
+		id       : 'destinationOpenInvoiceAmount',
 		accessor : (row) => (
 			<div>
-				<div>{format(getByKey(row, 'lastEditedDate') as Date, 'dd MMM yy', {}, false)}</div>
+				{formatAmount({
+					amount   : row?.destinationOpenInvoiceAmount,
+					currency : row?.ledCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+
+					},
+				})}
 			</div>
 		),
 	},
-	{
-		Header   : 'Knocked Off Documents',
-		accessor : (row) => (
-			<div>
-				<Button
-					size="sm"
-					themeType="primary"
-					onClick={() => {
-						setActive(true);
-						getHistoryChild(row);
-					}}
-				>
-					View More
-				</Button>
-
-			</div>
-		),
-		id: 'more_document',
-
-	},
-
 ];
 
 export default SettlementList;

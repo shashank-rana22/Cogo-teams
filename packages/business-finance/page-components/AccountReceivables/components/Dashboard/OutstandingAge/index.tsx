@@ -12,22 +12,30 @@ interface OutsatndingProps {
 	data?: object[],
 	loading?: boolean
 }
+
+const MARGIN = {
+	top    : 10,
+	right  : 0,
+	bottom : 30,
+	left   : 0,
+};
+
 function OutstandingAge({ data, loading }: OutsatndingProps) {
 	const outstandingData = Object.keys(data).map((key) => data[key]);
 
 	const { dashboardCurrency = '' } = outstandingData[0] || {};
-	const collectiveAmount = [];
+	const COLLECTIVE_AMOUNT = [];
 	let durationRange = null;
 
 	(outstandingData || [{}]).forEach(({ ageingDuration, amount = 0 }) => {
 		if (durationRange === ageingDuration) {
-			const totalAmount =	collectiveAmount[collectiveAmount.length - 1].value + amount;
-			collectiveAmount[collectiveAmount.length - 1] = {
+			const totalAmount =	COLLECTIVE_AMOUNT[COLLECTIVE_AMOUNT.length - 1].value + amount;
+			COLLECTIVE_AMOUNT[COLLECTIVE_AMOUNT.length - 1] = {
 				id    : ageingDuration,
 				value : totalAmount,
 			};
 		} else {
-			collectiveAmount.push({
+			COLLECTIVE_AMOUNT.push({
 				id    : ageingDuration,
 				value : amount,
 			});
@@ -35,14 +43,7 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 		}
 	});
 
-	const margin = {
-		top    : 10,
-		right  : 0,
-		bottom : 30,
-		left   : 0,
-	};
-
-	const properData = collectiveAmount;
+	const properData = COLLECTIVE_AMOUNT;
 
 	const isEmpty = (properData || []).every((x) => x.value === 0);
 
@@ -59,7 +60,7 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 				<div className={styles.vertical_bar_graph}>
 					<BarChart
 						currencyType={dashboardCurrency}
-						margin={margin}
+						margin={MARGIN}
 						data={properData || []}
 					/>
 				</div>
@@ -76,15 +77,9 @@ function OutstandingAge({ data, loading }: OutsatndingProps) {
 					<div
 						className={styles.styled_text}
 					>
-						Outstanding
+						Outstanding By Age
 					</div>
 					<div className={styles.styled_flex_age}>
-						<div
-							className={styles.styled_text_age}
-						>
-							By Age
-
-						</div>
 						<Tooltip
 							content={(
 								<div>
