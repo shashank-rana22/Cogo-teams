@@ -13,3 +13,8 @@
 .agent {
 	margin: 0 8px 0 0;
 }
+
+.button_container {
+	display: flex;
+	gap: 12px;
+}

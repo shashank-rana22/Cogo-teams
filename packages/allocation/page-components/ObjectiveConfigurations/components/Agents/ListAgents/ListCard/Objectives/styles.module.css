@@ -1,9 +1,32 @@
 .accordian {
 	margin: 12px 0;
+
+	:global {
+		.ui_accordion_title {
+			width: 100%;
+		}
+	}
 }
 
 .accordian_title {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 32px;
+}
+
+.title_left_container {
+	display: flex;
 	gap: 4px;
 	align-items: center;
+}
+
+.title_right_container {
+	display: flex;
+	align-items: center;
+}
+
+.set_weightage {
+	width: 100%;
+	margin: 0;
 }

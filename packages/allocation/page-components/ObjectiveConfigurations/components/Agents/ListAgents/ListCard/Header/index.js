@@ -1,10 +1,48 @@
 import { Button, Pill } from '@cogoport/components';
+import { IcMTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { role, user, partner } = props;
-	return 			(
+	const { role, user, partner, mode, setMode, handleSubmit } = props;
+
+	const onSaveChanges = (values) => {
+		console.log('values :: ', values);
+	};
+
+	const BUTTON_MAPPING_BASIS_MODE = {
+		view: (
+			<Button
+				type="button"
+				themeType="secondary"
+				onClick={() => setMode('edit')}
+			>
+				Edit Distribution
+			</Button>
+		),
+		edit: (
+			<>
+				<Button type="button" themeType="link">
+					Distribute Equally
+				</Button>
+
+				<Button
+					type="button"
+					themeType="secondary"
+					onClick={() => setMode('view')}
+				>
+					Discard Changes
+				</Button>
+
+				<Button type="button" themeType="accent" onClick={handleSubmit(onSaveChanges)}>
+					<IcMTick style={{ marginRight: '4px' }} />
+					Save Changes
+				</Button>
+			</>
+		),
+	};
+
+	return (
 		<div className={styles.card_header}>
 			<div className={styles.agent_detail}>
 				<h4 className={styles.agent}>
@@ -27,7 +65,7 @@ function Header(props) {
 				</Pill>
 			</div>
 
-			<Button type="button" themeType="secondary">Edit Distribution</Button>
+			<div className={styles.button_container}>{BUTTON_MAPPING_BASIS_MODE[mode]}</div>
 		</div>
 	);
 }
