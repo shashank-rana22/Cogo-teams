@@ -56,7 +56,7 @@
 	width: 19%;
 	padding: 16px;
 	margin-top: 16px;
-	overflow: scroll;
+	overflow-x: auto;
 	background: #fff;
 	border-radius: 8px;
 }
