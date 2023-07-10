@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
@@ -8,8 +9,10 @@ import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
-const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
+const { zeroth_index } = GLOBAL_CONSTANTS;
+const MINIMUM_LENGTH = 1;
+const INCREMENT_CONSTANT = 1;
+const MINIMUM_REMOVEABLE_NUMBER = 1;
 const TOTAL_SPAN = 12;
 const SPAN_CONVERTIABLE_FACTOR = 100;
 
@@ -37,7 +40,7 @@ function Child({
 			rowWiseFields.push(fields);
 			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = ZERO_INDEX;
+			span = zeroth_index;
 		} else if (span < TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
@@ -56,11 +59,11 @@ function Child({
 		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[ZERO_INDEX]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[ZERO_INDEX]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[ZERO_INDEX]?.url?.fileName === '') {
+	if (formValues?.documents?.[zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += FIRST_INDEX) {
+		for (let i = 0; i < elements.length; i += INCREMENT_CONSTANT) {
 			elements[i].style.display = 'none';
 		}
 	}
@@ -98,7 +101,7 @@ function Child({
 			<h3 className={styles.heading}>
 				{startCase(name || 'document')}
 				&nbsp;
-				{index + FIRST_INDEX}
+				{index + INCREMENT_CONSTANT}
 			</h3>
 			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
@@ -169,11 +172,11 @@ function Child({
 
 				</div>
 			))}
-			{showDeleteButton && index >= noDeleteButtonTill && !disabled && length > FIRST_INDEX ? (
+			{showDeleteButton && index >= noDeleteButtonTill && !disabled && length > MINIMUM_LENGTH ? (
 				<div className={styles.delete_icon}>
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, FIRST_INDEX)}
+						onClick={() => remove(index, MINIMUM_REMOVEABLE_NUMBER)}
 					/>
 				</div>
 			) : null}

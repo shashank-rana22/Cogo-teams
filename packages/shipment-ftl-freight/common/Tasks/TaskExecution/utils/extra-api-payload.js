@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const NOT_INCLUDE_FIELD_IN_FTL = [
@@ -15,9 +17,9 @@ const ZERO_INDEX = 0;
 
 const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'create_shipment_document') {
-		let documentArr = [{ ...values?.documents }];
+		let documentArr = [{ ...(values?.documents || {}) }];
 
-		if (!documentArr) documentArr = [values];
+		if (isEmpty(documentArr)) documentArr = [values];
 
 		const formatValues = (documentArr || []).map((obj) => {
 			const newObj = JSON.parse(JSON.stringify(obj || {}));

@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
 const TRUCK_NUM_TASKS = [
@@ -6,7 +8,7 @@ const TRUCK_NUM_TASKS = [
 	'upload_commercial_invoice',
 ];
 
-const INITIAL_TRUCK_INDEX = 0;
+const { zeroth_index } = GLOBAL_CONSTANTS;
 const TRUCK_EXCEED_NUMBER = -1;
 
 const injectValues = (
@@ -24,7 +26,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[INITIAL_TRUCK_INDEX]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[zeroth_index]?.url }];
 				control.controls.forEach((value, controlIndex) => {
 					if (value.name === 'truck_number') {
 						controls[index].controls[controlIndex].value = servicesList?.[index]?.truck_number;
@@ -181,15 +183,15 @@ const injectValues = (
 	}
 	if (task.task === 'pod_sent_to_shipper') {
 		controls.forEach((control, index) => {
-			if (control.type === 'fieldArray') {
-				control.controls.forEach((value, controlIndex) => {
-					if (value.name === 'truck_number') {
-						controls[index].controls[controlIndex].value = servicesList?.[index].truck_number;
+			if (control?.type === 'fieldArray') {
+				(control?.controls || []).forEach((value, controlIndex) => {
+					if (value?.name === 'truck_number') {
+						controls[index].controls[controlIndex].value = servicesList?.[index]?.truck_number;
 					}
 				});
 			}
-			if (control.name === 'truck_name') {
-				controls[index].value = servicesList?.[INITIAL_TRUCK_INDEX].truck_number;
+			if (control?.name === 'truck_name') {
+				controls[index].value = servicesList?.[zeroth_index]?.truck_number;
 			}
 		});
 	}
