@@ -11,16 +11,27 @@ function Payruns() {
 	const [activePayrunTab, setActivePayrunTab] = useState('INITIATED');
 	const [isInvoiceView, setIsInvoiceView] = useState(false);
 	const [overseasData, setOverseasData] = useState('NORMAL');
+	const [viewId, setViewId] = useState(null);
+	const [dropDownData, setDropDownData] = useState([]);
+	const [loadingDropDown, setLoadingDropDown] = useState(false);
+	const [activeAdvPaid, setActiveAdvPaid] = useState('NORMAL');
 	const {
 		data,
 		loading,
 		payrunStats,
 		config,
 		globalFilters,
-		setGlobalFilters,
-	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData, setOverseasData });
+		setGlobalFilters, sort, setSort,
+	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData, setOverseasData, setViewId, setActiveAdvPaid });
 
-	const { functions } = RenderFunctions(overseasData);
+	const { functions } = RenderFunctions(
+		overseasData,
+		viewId,
+		setViewId,
+		activeAdvPaid,
+		setDropDownData,
+		setLoadingDropDown,
+	);
 
 	return (
 
@@ -36,7 +47,6 @@ function Payruns() {
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
 			/>
-
 			<List
 				itemData={data}
 				config={config}
@@ -44,11 +54,17 @@ function Payruns() {
 				functions={functions}
 				page={globalFilters.pageIndex}
 				pageSize={10}
+				sort={sort}
+				setSort={setSort}
 				handlePageChange={(val) => setGlobalFilters({
 					...globalFilters,
 					pageIndex: val,
 				})}
 				showPagination
+				viewId={viewId}
+				dropDownData={dropDownData}
+				loadingDropDown={loadingDropDown}
+				activePayrunTab={activePayrunTab}
 			/>
 		</div>
 	);

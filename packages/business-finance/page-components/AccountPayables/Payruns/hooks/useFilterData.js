@@ -1,6 +1,7 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useEffect, useState } from 'react';
 
+import { advencePayrunPaidConfig } from '../columns/advancePaidPayrunConfig';
 import { advPaymentPayrunHistoryConfig } from '../columns/advPaymentPayrunHistoryConfig';
 import { initiatedConfig } from '../columns/initiatedConfig';
 import { initiatedListViewConfig } from '../columns/initiatedListViewConfig';
@@ -10,22 +11,31 @@ import { payrunPaidConfig } from '../columns/payrunPaidConfig';
 import { uploadHistoryConfig } from '../columns/uploadHistoryConfig';
 
 import useGetAdvPaymentInvoiceList from './useGetAdvPaymentInvoiceList';
+import useGetPaidAdvanceList from './useGetPaidAdvanceList';
 import useGetPaidList from './useGetPaidList';
 import useGetPayrun from './useGetPayrun';
 import useGetPayrunBillListView from './useGetPayrunBillListView';
 import useGetUploadHistoryList from './useGetUploadHistoryList';
 
-const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverseasData }) => {
+const useFilterData = ({
+	isInvoiceView, activePayrunTab, overseasData,
+	setOverseasData, setViewId, setActiveAdvPaid,
+}) => {
 	const [globalFilters, setGlobalFilters] = useState({
 		search    : undefined,
 		pageIndex : 1,
+		pageSize  : 10,
 	});
+
+	const [sort, setSort] = useState({});
 	const [apiData, setApiData] = useState({
 		listData    : {},
 		dataLoading : false,
 		listConfig  : initiatedConfig,
 	});
-	const { search, pageIndex } = globalFilters || {};
+	// const [payrunId, setPayrunId] = useState(null);
+
+	const { search, pageIndex, createdAt } = globalFilters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
 		activePayrunTab,
@@ -33,15 +43,26 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 		query,
 		pageIndex,
 	});
-	const { getPayrunListView, billListViewData, billListViewLoading } = useGetPayrunBillListView({ activePayrunTab });
-	const { getUploadHistoryList, uploadHistoryListLoading, uploadHistoryDataList } = useGetUploadHistoryList();
-	const { paidDataList, paidDataLoading, getPaidList } = useGetPaidList({ activePayrunTab });
+
+	const {
+		getPayrunListView, billListViewData,
+		billListViewLoading,
+	} = useGetPayrunBillListView({ activePayrunTab, sort, query, globalFilters });
+	const {
+		getUploadHistoryList, uploadHistoryListLoading,
+		uploadHistoryDataList,
+	} = useGetUploadHistoryList({ sort, query, globalFilters });
+	const { paidDataList, paidDataLoading, getPaidList } = useGetPaidList({ activePayrunTab, query, globalFilters });
 	const {
 		getAdvancePaymentInvoiceList,
 		advancePaymentInvoiceList,
 		advancePaymentInvoiceLoading,
 	} = useGetAdvPaymentInvoiceList({ globalFilters, activePayrunTab });
-
+	const {
+		getAdvancePaidData,
+		paidAdvanceListData,
+		paidAdvanceListLoading,
+	} = useGetPaidAdvanceList({ activePayrunTab, query });
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
@@ -56,12 +77,17 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 				getPayrunList();
 			}
 		} else if (activePayrunTab === 'PAID') {
-			getPaidList();
+			if (overseasData === 'NORMAL') {
+				getPaidList();
+			} else if (overseasData === 'ADVANCE_PAYMENT') {
+				getAdvancePaidData();
+			}
 		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			getUploadHistoryList();
 		}
-	}, [activePayrunTab, overseasData, isInvoiceView, getAdvancePaymentInvoiceList, getPayrunListView,
-		getPayrunList, getPaidList, getUploadHistoryList]);
+	}, [activePayrunTab, overseasData, isInvoiceView,
+		getAdvancePaymentInvoiceList, getPayrunListView, getPayrunList, getPaidList,
+		getUploadHistoryList, createdAt, getAdvancePaidData]);
 
 	useEffect(() => {
 		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
@@ -86,11 +112,19 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 				});
 			}
 		} else if (activePayrunTab === 'PAID') {
-			setApiData({
-				listData    : paidDataList,
-				dataLoading : paidDataLoading,
-				listConfig  : payrunPaidConfig,
-			});
+			if (overseasData === 'NORMAL') {
+				setApiData({
+					listData    : paidDataList,
+					dataLoading : paidDataLoading,
+					listConfig  : payrunPaidConfig,
+				});
+			} else if (overseasData === 'ADVANCE_PAYMENT') {
+				setApiData({
+					listData    : paidAdvanceListData,
+					dataLoading : paidAdvanceListLoading,
+					listConfig  : advencePayrunPaidConfig,
+				});
+			}
 		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			setApiData({
 				listData    : uploadHistoryDataList,
@@ -98,14 +132,16 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 				listConfig  : uploadHistoryConfig,
 			});
 		}
-	}, [activePayrunTab, advancePaymentInvoiceList,
-		advancePaymentInvoiceLoading, billListViewData,
-		billListViewLoading, payrunData, payrunLoading,
-		paidDataList, paidDataLoading, uploadHistoryDataList, uploadHistoryListLoading, isInvoiceView, overseasData]);
+	}, [activePayrunTab, advancePaymentInvoiceList, advancePaymentInvoiceLoading,
+		billListViewData, billListViewLoading, payrunData, payrunLoading, paidDataList,
+		paidDataLoading, uploadHistoryDataList, uploadHistoryListLoading, isInvoiceView, overseasData,
+		paidAdvanceListData, paidAdvanceListLoading]);
 
 	useEffect(() => {
 		setOverseasData('NORMAL');
-	}, [activePayrunTab, setOverseasData]);
+		setViewId('');
+		setActiveAdvPaid('');
+	}, [activePayrunTab, setActiveAdvPaid, setOverseasData, setViewId]);
 
 	return {
 		data    : apiData.listData,
@@ -114,6 +150,8 @@ const useFilterData = ({ isInvoiceView, activePayrunTab, overseasData, setOverse
 		config  : apiData.listConfig,
 		globalFilters,
 		setGlobalFilters,
+		sort,
+		setSort,
 	};
 };
 

@@ -13,6 +13,7 @@ import {
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import commonFunctions from './commonFunctions';
+import DropDownItem from './DropDownItem';
 import styles from './styles.module.css';
 
 export interface Props {
@@ -49,6 +50,10 @@ function List({
 	width,
 	rowStyle,
 	paginationType = 'table',
+	viewId,
+	dropDownData,
+	loadingDropDown,
+	activePayrunTab,
 }: Props) {
 	const {
 		showHeader = true,
@@ -78,19 +83,29 @@ function List({
 			)}
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<CardColumn
-						key={singleitem.id}
-						fields={fields}
-						itemStyles={itemStyles}
-						singleitem={singleitem}
-						config={config}
-						loading={loading}
-						functions={commonFunctions(functions)}
-						isMobile={isMobile}
-						subActiveTab={subActiveTab}
-						width={width}
-						rowStyle={rowStyle}
-					/>
+					<>
+						<CardColumn
+							key={singleitem.id}
+							fields={fields}
+							itemStyles={itemStyles}
+							singleitem={singleitem}
+							config={config}
+							loading={loading}
+							functions={commonFunctions(functions)}
+							isMobile={isMobile}
+							subActiveTab={subActiveTab}
+							width={width}
+							rowStyle={rowStyle}
+						/>
+						{activePayrunTab === 'PAID' && viewId === singleitem?.objectId && (
+							<div>
+								<DropDownItem
+									data={dropDownData}
+									loadingDropDown={loadingDropDown}
+								/>
+							</div>
+						)}
+					</>
 				))}
 
 				{isEmpty(list) && !loading ? (

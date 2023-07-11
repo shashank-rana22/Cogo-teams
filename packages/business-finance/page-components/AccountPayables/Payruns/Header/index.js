@@ -1,7 +1,7 @@
-import { TabPanel, Tabs, Button, Input, Toggle } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { TabPanel, Tabs } from '@cogoport/components';
 import React from 'react';
 
+import SelectFilters from './SelectFilter';
 import styles from './styles.module.css';
 
 function Header({
@@ -19,9 +19,8 @@ function Header({
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
 		UPLOAD_HISTORY = 0, COMPLETED = 0,
 	} = payrunStats || {};
-	const { search } = globalFilters || {};
 	return (
-		<div>
+		<div className={styles.container}>
 			<div>
 				<Tabs
 					activeTab={activePayrunTab}
@@ -69,54 +68,18 @@ function Header({
 					/>
 				</Tabs>
 			</div>
-			<div className={styles.filter_container}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					{(['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab))
-						? (
-							<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
-								<TabPanel title="Domestic" name="NORMAL" />
-								<TabPanel title="Overseas" name="OVERSEAS" />
-								<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
-							</Tabs>
-						)
-						: null}
-					<Toggle
-						name="isInvoiceView"
-						value={isInvoiceView}
-						onChange={() => setIsInvoiceView(!isInvoiceView)}
-						showOnOff
-						size="md"
-						disabled={false}
-						onLabel="Invoices"
-						offLabel="Payrun"
-					/>
-				</div>
-				<div style={{ display: 'flex' }}>
-					<div>
-						<Input
-							value={search || ''}
-							onChange={(value) => setGlobalFilters({
-								...globalFilters,
-								search: value || undefined,
-							})}
-							style={{ width: '300px', marginRight: '8px' }}
-							placeholder="Search by PayRun Name"
-							size="sm"
-							suffix={(
-								<IcMSearchlight
-									height={20}
-									width={20}
-									color="#CACACA"
-									className={styles.search_icon}
-								/>
-							)}
-						/>
-					</div>
-					<Button>
-						Go To Audit
-					</Button>
-				</div>
+			<div>
+				<SelectFilters
+					globalFilters={globalFilters}
+					setGlobalFilters={setGlobalFilters}
+					isInvoiceView={isInvoiceView}
+					activePayrunTab={activePayrunTab}
+					setIsInvoiceView={setIsInvoiceView}
+					overseasData={overseasData}
+					setOverseasData={setOverseasData}
+				/>
 			</div>
+
 		</div>
 	);
 }

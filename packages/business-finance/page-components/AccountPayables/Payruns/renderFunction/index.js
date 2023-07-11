@@ -16,7 +16,7 @@ import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
-const RenderFunctions = (overseasData) => {
+const RenderFunctions = (overseasData, viewId, setViewId, activeAdvPaid, setDropDownData, setLoadingDropDown) => {
 	const functions = {
 		renderFormatedAmount: (itemData) => (
 			<FormatAmountCurrency itemData={itemData} />
@@ -57,9 +57,19 @@ const RenderFunctions = (overseasData) => {
 		renderDownloadOverseasInvoice: (itemData) => (
 			<DownloadOverseasInvoice itemData={itemData} overseasData={overseasData} />
 		),
-		renderDropDownData: (itemData) => (
-			<PaidDropDown itemData={itemData} />
-		),
+		renderDropDownData: (itemData) => {
+			const { objectId = '' } = itemData || {};
+			return (
+				<PaidDropDown
+					setViewId={setViewId}
+					showAccordian={viewId === objectId}
+					itemData={itemData}
+					setDropDownData={setDropDownData}
+					setLoadingDropDown={setLoadingDropDown}
+					activeAdvPaid={activeAdvPaid}
+				/>
+			);
+		},
 		renderPaidPaymentStatus: (itemData) => (
 			<PaidPaymentStatus itemData={itemData} />
 		),

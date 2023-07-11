@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
+import styles from './styles.module.css';
+
 const COLOR_MAPPING = {
 	FULL     : '#CDF7D4',
 	PARTIAL  : '#FBE39F',
@@ -16,7 +18,6 @@ function PaidPaymentStatus({ itemData }) {
 
 	return (
 		<div>
-			{itemData?.paymentStatus}
 			{paymentStatus === 'OVERPAID' ? (
 				<Tooltip
 					content={`Extra Payment:- ${extraPayment} ${billCurrency}`}
@@ -24,13 +25,13 @@ function PaidPaymentStatus({ itemData }) {
 					theme="light"
 				>
 					<div style={{ width: '100px' }}>
-						<div style={{ color: COLOR_MAPPING[paymentStatus] }}>
+						<div style={{ background: COLOR_MAPPING[paymentStatus] }}>
 							{paymentStatus}
 						</div>
 					</div>
 				</Tooltip>
 			) : (
-				<div className="sm" style={{ color: COLOR_MAPPING[paymentStatus] }}>
+				<div className={styles.container} style={{ background: COLOR_MAPPING[paymentStatus] }}>
 					{paymentStatus === 'FULL' ? 'Paid' : paymentStatus}
 				</div>
 			)}

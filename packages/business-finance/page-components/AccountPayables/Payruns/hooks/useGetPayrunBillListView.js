@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetPayrunBillListView = ({ activePayrunTab }) => {
+const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters }) => {
+	const { pageIndex, pageSize, createdAt } = globalFilters || {};
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun/bill-list-view',
@@ -11,15 +14,34 @@ const useGetPayrunBillListView = ({ activePayrunTab }) => {
 		},
 		{ manual: true, autoCancel: false },
 	);
-
+	const selectFromDate =		createdAt
+		&& formatDate({
+			date       : createdAt.startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
+	const selectToDate =		createdAt
+		&& formatDate({
+			date       : createdAt.endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
+			separator  : ' ',
+		});
 	const getPayrunListView = useCallback(() => {
 		(async () => {
 			try {
 				await trigger({
 					params: {
-						pageIndex : 1,
-						pageSize  : 10,
+						pageIndex,
+						pageSize,
 						state     : activePayrunTab,
+						q         : query !== '' ? query : undefined,
+						startDate : selectFromDate || undefined,
+						endDate   : selectToDate || undefined,
+						...sort,
 					},
 				});
 			} catch (err) {
@@ -28,7 +50,7 @@ const useGetPayrunBillListView = ({ activePayrunTab }) => {
 		}
 
 		)();
-	}, [activePayrunTab, trigger]);
+	}, [trigger, pageIndex, pageSize, activePayrunTab, query, selectFromDate, selectToDate, sort]);
 
 	return {
 		getPayrunListView,

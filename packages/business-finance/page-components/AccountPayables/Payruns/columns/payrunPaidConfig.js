@@ -79,12 +79,11 @@ export const payrunPaidConfig = {
 			key   : 'paymentStatus',
 			label : 'Payment Status ',
 			span  : 1,
-			// func  : 'renderStatus',
+			func  : 'renderPaidPaymentStatus',
 		},
 		{
 			func : 'renderDropDownData',
 			span : 0.7,
-
 		},
 		{
 			key  : 'invoiceDetails',
