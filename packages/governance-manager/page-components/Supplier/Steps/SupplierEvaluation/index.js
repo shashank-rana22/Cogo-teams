@@ -45,7 +45,6 @@ function SupplierEvaluation({ organization_id, id, setStatus, getOrganizationSer
 		<>
 			<div className={styles.parent}>
 				<div className={styles.left}>
-
 					<div className={styles.upper_left}>Supplier Evaluation</div>
 					<div className={styles.middle_left}>
 						{organizationEvaluationDetails
