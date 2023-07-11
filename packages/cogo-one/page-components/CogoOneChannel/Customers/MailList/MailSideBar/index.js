@@ -14,7 +14,13 @@ function MailSideBar({
 	return (
 		<div className={styles.sidebar_container}>
 			{GMAIL_OPTIONS_CONFIG.map(
-				({ label = '', Icon = null, value = '', image = '', hoverImage = '' }) => (
+				({
+					label = '',
+					Icon = null,
+					value = '',
+					image = '',
+					hoverImage = '',
+				}) => (
 					<div
 						role="presentation"
 						key={value}

@@ -15,8 +15,6 @@ function MailConversation({ mailProps = {} }) {
 	const {
 		activeMail,
 		setButtonType = () => {},
-		setBccArray = () => {},
-		setRecipientArray = () => {},
 		setEmailState = () => {},
 		activeMailAddress = '',
 	} = mailProps;
@@ -30,6 +28,7 @@ function MailConversation({ mailProps = {} }) {
 		toRecipients = [],
 		body = {},
 		ccRecipients = [],
+		bccRecipients = [],
 		hasAttachments,
 	} = data || {};
 
@@ -38,17 +37,20 @@ function MailConversation({ mailProps = {} }) {
 	const senderAddress = sender?.emailAddress?.address;
 	const recipientData = (toRecipients || []).map((item) => item?.emailAddress?.address);
 	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
+	const bccData = (bccRecipients || []).map((item) => item?.emailAddress?.address);
 
 	const emptyCcRecipient = isEmpty(ccRecipients || []);
 
 	const handlClick = (val) => {
 		setButtonType(val);
-		setBccArray(val !== 'forward' ? ccData : []);
-		setRecipientArray(val !== 'forward' ? [senderAddress] : []);
-		setEmailState({
+		setEmailState((prev) => ({
+			...prev,
 			subject,
-			body: '',
-		});
+			body          : '',
+			toUserEmail   : val !== 'forward' ? [senderAddress] : [],
+			ccrecipients  : val !== 'forward' ? ccData : [],
+			bccrecipients : val !== 'forward' ? bccData : [],
+		}));
 	};
 
 	return (

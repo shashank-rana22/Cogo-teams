@@ -1,0 +1,16 @@
+.container {
+	width: 100%;
+}
+
+.type_to {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.sub_text {
+	font-size: 14px;
+	color: #828282;
+}

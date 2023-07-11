@@ -1,15 +1,18 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import { DEFAULT_EMAIL_STATE } from '../constants/MAIL_CONSTANT';
+
 import getFileAttributes from './getFileAttributes';
+
+const LAST_INDEX = 1;
 
 function mailFunction({
 	setErrorValue = () => {},
-	recipientArray = [],
-	bccArray = [],
-	setRecipientArray = () => {},
+	emailState = {},
 	value = '',
 	setValue = () => {},
 	setShowControl = () => {},
 	showControl,
-	setBccArray = () => {},
 	setAttachments = () => {},
 	setEmailState = () => {},
 	setButtonType = () => {},
@@ -19,32 +22,29 @@ function mailFunction({
 	const isInList = (email, data) => data?.includes(email);
 
 	const validateEmail = (emailInput) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.valid_email_regex;
 		return emailRegex.test(emailInput);
 	};
 
 	const handleKeyPress = ({ e, type }) => {
 		if (e.key === 'Enter') {
 			e.preventDefault();
-			if ((type === 'recipient' && !validateEmail(value))
-			|| (type === 'cc_bcc' && !validateEmail(value))) {
+			if (!validateEmail(value)) {
 				setErrorValue('Enter valid id');
 				return;
 			}
-			if ((type === 'recipient' && isInList(value, recipientArray))
-			|| (type === 'cc_bcc' && isInList(value, bccArray))) {
+
+			if (isInList(value, emailState?.[type] || [])) {
 				setErrorValue('Email already present');
 				return;
 			}
 
 			setErrorValue(null);
-			if (type === 'recipient') {
-				setRecipientArray((prev) => [...prev, value]);
-				setShowControl(null);
-			} else {
-				setBccArray((prev) => [...prev, value]);
-				setShowControl(null);
-			}
+			setEmailState((prev) => ({
+				...prev,
+				[type]: [...(prev?.[type] || []), value],
+			}));
+			setShowControl(null);
 		}
 	};
 
@@ -61,11 +61,12 @@ function mailFunction({
 	};
 
 	const handleDelete = ({ val, emailType }) => {
-		if (emailType === 'recipient') {
-			setRecipientArray((p) => p.filter((data) => data !== val));
-		} else {
-			setBccArray((p) => p.filter((data) => data !== val));
-		}
+		setEmailState((prev) => ({
+			...prev,
+			[emailType]: prev?.[emailType]?.filter(
+				(data) => data !== val,
+			),
+		}));
 	};
 
 	const handleError = (type) => {
@@ -77,12 +78,7 @@ function mailFunction({
 
 	const handleClose = () => {
 		setAttachments([]);
-		setBccArray([]);
-		setEmailState({
-			body    : '',
-			subject : '',
-		});
-		setRecipientArray([]);
+		setEmailState(DEFAULT_EMAIL_STATE);
 		setValue('');
 		setButtonType('');
 	};
@@ -95,9 +91,8 @@ function mailFunction({
 
 	const decode = (data = '') => {
 		const val = decodeURI(data).split('/');
-		const fileName = val[val.length - 1];
-		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-		return { uploadedFileName, fileIcon };
+		const fileName = val[val.length - LAST_INDEX];
+		return getFileAttributes({ fileName, finalUrl: data });
 	};
 
 	return {

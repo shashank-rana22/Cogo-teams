@@ -19,3 +19,12 @@ export const EMAIL_TAGS_COLOR = {
 		crossDiv : '#CFEAED',
 	},
 };
+
+export const DEFAULT_EMAIL_STATE = {
+	subject       : '',
+	body          : '',
+	from_mail     : '',
+	toUserEmail   : [],
+	ccrecipients  : [],
+	bccrecipients : [],
+};
