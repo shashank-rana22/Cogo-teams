@@ -19,17 +19,17 @@ function useShipmentReminder({
 	firestore,
 	setReminderModal = () => {},
 	agentId = '',
-	getAssignedChats,
 }) {
 	const shipmentReminderSnapShotRef = useRef(null);
 	const remindertimeoutRef = useRef(null);
 	const {
 		shipmentData,
 		getAgentShipmentsCount = () => {},
-	} = useListCheckouts({ setReminderModal, agentId, getAssignedChats });
+	} = useListCheckouts({ setReminderModal, agentId });
 
 	const mountReminderSnapShot = useCallback(async () => {
 		shipmentReminderSnapShotRef?.current?.();
+
 		try {
 			const roomDoc = doc(
 				firestore,
@@ -46,7 +46,7 @@ function useShipmentReminder({
 				clearTimeout(remindertimeoutRef?.current);
 
 				remindertimeoutRef.current = setTimeout(() => {
-					getAgentShipmentsCount({ roomDoc, type: 'update' });
+					getAgentShipmentsCount({ roomDoc, type: 'update', firestore });
 				}, timer);
 			});
 		} catch (e) {

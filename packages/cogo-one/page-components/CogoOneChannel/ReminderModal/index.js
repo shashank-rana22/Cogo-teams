@@ -2,7 +2,6 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
-import { getAssignedChats } from '../../../helpers/reminderModalHelpers';
 import useShipmentReminder from '../../../hooks/useShipmentReminder';
 import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
@@ -23,9 +22,6 @@ function ReminderModal({ firestore = {}, agentId = '' }) {
 		setReminderModal,
 		firestore,
 		agentId,
-		getAssignedChats: () => {
-			getAssignedChats({ firestore, userId: agentId });
-		},
 	});
 
 	const statsMapping = getShipmentReminderStats(shipmentData);
