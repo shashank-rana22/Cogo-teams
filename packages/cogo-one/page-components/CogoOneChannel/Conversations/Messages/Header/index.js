@@ -161,8 +161,7 @@ function Header({
 
 						{channel_type === 'whatsapp' && (
 							<div
-								role="button"
-								tabIndex="0"
+								role="presentation"
 								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
 								onClick={handleUpdateUser}
 							>
