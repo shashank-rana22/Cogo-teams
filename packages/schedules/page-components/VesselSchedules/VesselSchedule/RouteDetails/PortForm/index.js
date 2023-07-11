@@ -4,18 +4,18 @@ import { IcMPlusInCircle, IcMOverflowDot, IcMDelete } from '@cogoport/icons-reac
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Layout from '../../../Layout';
+// import Layout from '../../../Layout';
 
-import controls from './controls';
+// import controls from './controls';
 import styles from './styles.module.css';
 
 function PortForm({
 	isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 }) {
 	const [date, setDate] = useState(new Date());
-	const new_controls = controls();
-	const { handleSubmit, control, formState: { errors }, watch } = useForm();
-	const formValues = watch();
+	// const new_controls = controls();
+	// const { handleSubmit, control, formState: { errors }, watch } = useForm();
+	// const formValues = watch();
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -55,7 +55,7 @@ function PortForm({
 			<div className={styles.right}>
 				<div className={styles.port_name_form}>
 
-					<Layout fields={new_controls.port} control={control} errors={errors} />
+					<Select placeholder="Port Name" />
 
 				</div>
 				<IcMDelete style={{ cursor: 'pointer' }} height="20px" width="20px" margin="2px" onClick={() => { onClickDelete(index); }} />
