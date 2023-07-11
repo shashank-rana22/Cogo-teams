@@ -1,9 +1,11 @@
-import { Button, Input, TabPanel, Tabs, Toggle } from '@cogoport/components';
+import { Input, TabPanel, Tabs, Toggle } from '@cogoport/components';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
+import useGetEntityBanks from '../../hooks/useGetEntityBank';
+import PayrunButtons from '../PayrunButtons/index';
 
 import { INVOICE_VIEW_FILTERS } from './invoiceViewFilterControl';
 import { PAYRUNS_BANK_DATE_FILTERS } from './payrunPaidFilterControls';
@@ -36,9 +38,11 @@ function SelectFilters({
 	setIsInvoiceView,
 	overseasData,
 	setOverseasData,
+	selectedPayrun,
+	setSelectedPayrun,
 }) {
 	const { search } = globalFilters || {};
-
+	const { entityBank = [] } = useGetEntityBanks({});
 	let searchType;
 
 	if (activePayrunTab === 'PAID') {
@@ -50,10 +54,19 @@ function SelectFilters({
 	} else {
 		searchType = 'Search by PayRun Name';
 	}
-	// const flatBankDetails = [];
+	const powerControls = (banks = []) => (banks || []).map((control) => (control || []).map(
+		({ id = '', beneficiary_name = '', account_number = '' }) => ({
+			value : id,
+			label : `${beneficiary_name} (${account_number})`,
+		}),
+	));
+	const banks = (entityBank || []).map((control) => control.bank_details);
+
+	const bankDetails = powerControls(banks);
+	const flatBankDetails = (bankDetails || []).flat();
 	const getchooseFilters = () => {
 		if (activePayrunTab === 'PAID') {
-			return PAYRUNS_BANK_DATE_FILTERS(overseasData);
+			return PAYRUNS_BANK_DATE_FILTERS(flatBankDetails, overseasData);
 		}
 		if (activePayrunTab === 'UPLOAD_HISTORY') {
 			return UPLOAD_HISTORY_FILTERS;
@@ -68,25 +81,29 @@ function SelectFilters({
 	return (
 
 		<div className={styles.filter_container}>
-			<div className={activePayrunTab === 'PAID' ? styles.sub_container : styles.right_filter}>
-				<Filter
-					filters={globalFilters}
-					setFilters={setGlobalFilters}
-					controls={chooseFilters}
-				/>
-				{(['AUDITED', 'PAYMENT_INITIATED',
-					'COMPLETED', 'PAID'].includes(activePayrunTab) && !isInvoiceView)
-					? (
-						<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
-							<TabPanel title="Domestic" name="NORMAL" />
-							{activePayrunTab !== 'PAID'
-								? <TabPanel title="Overseas" name="OVERSEAS" /> : null}
-							<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
-						</Tabs>
-					)
-					: null}
+			{isEmpty(selectedPayrun)
+				? (
+					<div className={activePayrunTab === 'PAID' ? styles.sub_container : styles.right_filter}>
+						<Filter
+							filters={globalFilters}
+							setFilters={setGlobalFilters}
+							controls={chooseFilters}
+						/>
+						{(['AUDITED', 'PAYMENT_INITIATED',
+							'COMPLETED', 'PAID'].includes(activePayrunTab) && !isInvoiceView)
+							? (
+								<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
+									<TabPanel title="Domestic" name="NORMAL" />
+									{activePayrunTab !== 'PAID'
+										? <TabPanel title="Overseas" name="OVERSEAS" /> : null}
+									<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
+								</Tabs>
+							)
+							: null}
 
-			</div>
+					</div>
+				)
+				: null}
 			<div className={styles.right_filter}>
 				<div>
 					<Input
@@ -103,43 +120,32 @@ function SelectFilters({
 				{(['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED', 'INITIATED'].includes(activePayrunTab))
 					? (
 						<div>
-							<Toggle
-								name="isInvoiceView"
-								value={isInvoiceView}
-								onChange={() => setIsInvoiceView(!isInvoiceView)}
-								showOnOff
-								size="md"
-								disabled={false}
-								onLabel="Invoices"
-								offLabel="Payrun"
-							/>
+							{isEmpty(selectedPayrun)
+								? (
+									<Toggle
+										name="isInvoiceView"
+										value={isInvoiceView}
+										onChange={() => setIsInvoiceView(!isInvoiceView)}
+										showOnOff
+										size="md"
+										disabled={false}
+										onLabel="Invoices"
+										offLabel="Payrun"
+									/>
+								)
+								: null}
 						</div>
 					)
 					: null}
-				{activePayrunTab === 'INITIATED' && !isInvoiceView
-				&& (
-					<Button>
-						Go To Audit
-					</Button>
-				)}
-				{activePayrunTab === 'AUDITED' && !isInvoiceView
-				&& (
-					<Button>
-						ALLOT BANK
-					</Button>
-				)}
-				{activePayrunTab === 'UPLOAD_HISTORY'
-				&& (
-					<Button disabled>
-						UPLOAD BULK UTR
-					</Button>
-				)}
-				{activePayrunTab === 'PAID' && overseasData !== 'ADVANCE_PAYMRNT'
-				&& (
-					<Button themeType="secondary">
-						SEND REPORT
-					</Button>
-				)}
+				<div>
+					<PayrunButtons
+						activePayrunTab={activePayrunTab}
+						isInvoiceView={isInvoiceView}
+						overseasData={overseasData}
+						selectedPayrun={selectedPayrun}
+						setSelectedPayrun={setSelectedPayrun}
+					/>
+				</div>
 			</div>
 		</div>
 

@@ -1,4 +1,4 @@
-export const initiatedConfig = {
+export const PAYMENT_INITIATED_PAYRUN = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {
@@ -17,7 +17,12 @@ export const initiatedConfig = {
 		{
 			label : 'PayRun Name',
 			key   : 'name',
-			span  : 1.8,
+			span  : 2,
+		},
+		{
+			key   : 'bankName',
+			label : 'Bank Name',
+			span  : 2,
 		},
 		{
 			label : 'Total Value',
@@ -35,15 +40,19 @@ export const initiatedConfig = {
 		{
 			label : 'Date & Time',
 			key   : 'createdAt',
-			span  : 2,
+			span  : 1.4,
 		},
 		{
 			func : 'renderViewInvoice',
-			span : 1,
+			span : 1.4,
+		},
+		{
+			func : 'renderPaymentInitiatedPayrunDownload',
+			span : 0.5,
 		},
 		{
 			func : 'renderTrashInvoice',
-			span : 1,
+			span : 0.5,
 		},
 		{
 			func : 'renderRibbon',

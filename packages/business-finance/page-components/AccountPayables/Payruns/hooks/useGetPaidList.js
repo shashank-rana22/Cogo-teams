@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
-	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate } = globalFilters || {};
+	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
 	const [{ data:paidDataList, loading:paidDataLoading }, paidTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-bill',
 		method  : 'get',
@@ -39,13 +39,14 @@ const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 					paymentStatusList : paymentStatusList || undefined,
 					startDate         : selectFromDate || undefined,
 					endDate           : selectToDate || undefined,
+					cogoBankId        : cogoBankId || undefined,
 				},
 			});
 		} catch (error) {
 			Toast.error(error.message || 'Somthing went wrong');
 		}
 	}, [activePayrunTab, billStatus, pageIndex, pageSize, paidTrigger,
-		paymentStatusList, query, selectFromDate, selectToDate]);
+		paymentStatusList, query, selectFromDate, selectToDate, cogoBankId]);
 
 	return {
 		paidDataList,

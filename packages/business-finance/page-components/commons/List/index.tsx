@@ -32,6 +32,10 @@ export interface Props {
 	width?: string;
 	rowStyle?: string;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
+	viewId:null;
+	dropDownData:[];
+	loadingDropDown:Boolean;
+	activePayrunTab:string;
 }
 
 function List({

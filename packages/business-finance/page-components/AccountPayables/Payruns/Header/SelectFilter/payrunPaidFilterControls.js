@@ -4,7 +4,9 @@ export const PAYRUNS_BANK_DATE_FILTERS = (bankOptions = [], overseasData = '') =
 			{
 				name        : 'cogoBankId',
 				type        : 'select',
+				isClearable : true,
 				placeholder : 'Bank',
+				style       : { width: '200px ' },
 				options     : bankOptions,
 				span        : 2.5,
 			},
@@ -25,6 +27,8 @@ export const PAYRUNS_BANK_DATE_FILTERS = (bankOptions = [], overseasData = '') =
 			name        : 'cogoBankId',
 			type        : 'select',
 			placeholder : 'Bank',
+			isClearable : true,
+			style       : { width: '200px ' },
 			options     : bankOptions,
 			span        : 2.5,
 		},

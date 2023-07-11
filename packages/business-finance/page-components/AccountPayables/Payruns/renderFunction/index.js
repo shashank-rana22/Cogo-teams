@@ -11,12 +11,22 @@ import DownloadUploadHistoryFile from './DownloadUploadHistoryFile.js';
 import FormatAmountCurrency from './FormatAmountCurrency';
 import PaidDropDown from './PaidDropDown';
 import PaidPaymentStatus from './PaidPaymentStatus';
+import PaymentInitiatedPayrunDownload from './PaymentInitiatedPayrunDownload.js';
 import RibbonData from './RibbonData';
 import ShowAction from './ShowAction';
 import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
-const RenderFunctions = (overseasData, viewId, setViewId, activeAdvPaid, setDropDownData, setLoadingDropDown) => {
+const RenderFunctions = (
+	overseasData,
+	viewId,
+	setViewId,
+	activeAdvPaid,
+	setDropDownData,
+	setLoadingDropDown,
+	selectedPayrun,
+	setSelectedPayrun = () => {},
+) => {
 	const functions = {
 		renderFormatedAmount: (itemData) => (
 			<FormatAmountCurrency itemData={itemData} />
@@ -25,7 +35,7 @@ const RenderFunctions = (overseasData, viewId, setViewId, activeAdvPaid, setDrop
 			<DeletePayrun />
 		),
 		renderViewInvoice: (itemData) => (
-			<ViewInvoices itemData={itemData} />
+			<ViewInvoices itemData={itemData} selectedPayrun={selectedPayrun} setSelectedPayrun={setSelectedPayrun} />
 		),
 		renderRibbon: (itemData) => (
 			<RibbonData itemData={itemData} />
@@ -72,6 +82,9 @@ const RenderFunctions = (overseasData, viewId, setViewId, activeAdvPaid, setDrop
 		},
 		renderPaidPaymentStatus: (itemData) => (
 			<PaidPaymentStatus itemData={itemData} />
+		),
+		renderPaymentInitiatedPayrunDownload: (itemData) => (
+			<PaymentInitiatedPayrunDownload itemData={itemData} />
 		),
 	};
 	return {

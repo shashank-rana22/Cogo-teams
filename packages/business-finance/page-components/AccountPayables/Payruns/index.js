@@ -4,6 +4,7 @@ import List from '../../commons/List/index.tsx';
 
 import Header from './Header';
 import useFilterData from './hooks/useFilterData';
+import InvoiceCard from './InvoiceCard/index';
 import RenderFunctions from './renderFunction/index';
 import styles from './styles.module.css';
 
@@ -19,7 +20,7 @@ function Payruns() {
 		data,
 		loading,
 		payrunStats,
-		config,
+		config, setSelectedPayrun, selectedPayrun,
 		globalFilters,
 		setGlobalFilters, sort, setSort,
 	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData, setOverseasData, setViewId, setActiveAdvPaid });
@@ -31,6 +32,8 @@ function Payruns() {
 		activeAdvPaid,
 		setDropDownData,
 		setLoadingDropDown,
+		selectedPayrun,
+		setSelectedPayrun,
 	);
 
 	return (
@@ -46,7 +49,10 @@ function Payruns() {
 				setOverseasData={setOverseasData}
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
+				selectedPayrun={selectedPayrun}
+				setSelectedPayrun={setSelectedPayrun}
 			/>
+			{selectedPayrun ? <InvoiceCard setSelectedPayrun={setSelectedPayrun} itemData={data} /> : null}
 			<List
 				itemData={data}
 				config={config}

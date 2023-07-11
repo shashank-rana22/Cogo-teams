@@ -14,6 +14,8 @@ function Header({
 	setOverseasData,
 	globalFilters,
 	setGlobalFilters,
+	selectedPayrun,
+	setSelectedPayrun,
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
@@ -77,6 +79,8 @@ function Header({
 					setIsInvoiceView={setIsInvoiceView}
 					overseasData={overseasData}
 					setOverseasData={setOverseasData}
+					selectedPayrun={selectedPayrun}
+					setSelectedPayrun={setSelectedPayrun}
 				/>
 			</div>
 
