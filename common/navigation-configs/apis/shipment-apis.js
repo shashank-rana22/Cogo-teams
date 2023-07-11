@@ -1564,9 +1564,9 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'create_document',
+		api          : 'create_shipment_sales_utr',
 		access_type  : 'private',
-		service_name : 'bookings',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'list_platform_config_constants',
@@ -1597,6 +1597,14 @@ const apis = [
 		api          : 'list_shipment_consolidated_purchase_invoices',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api         : 'get_saas_hs_code_list_commodities',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
 	},
 ];
 
