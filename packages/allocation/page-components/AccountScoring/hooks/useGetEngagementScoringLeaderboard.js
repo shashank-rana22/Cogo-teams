@@ -4,7 +4,7 @@ import { useState } from 'react';
 function useGetEngagementScoringLeaderboard() {
 	const [params, setParams] = useState({});
 
-	const [{ loading, data }] = useAllocationRequest({
+	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : 'engagement_scoring_leaderboard',
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_leaderboard',
@@ -31,6 +31,7 @@ function useGetEngagementScoringLeaderboard() {
 		setLeaderboardParams : setParams,
 		paginationData,
 		getNextPage,
+		refetch,
 	};
 }
 

@@ -25,6 +25,7 @@ function AccountLeaderboard() {
 		setValue = () => {},
 		bulkDeallocateFilter,
 		setBulkDeallocateFilter = () => {},
+		refetch,
 	} = useGetAccountLeaderboardData();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -60,6 +61,7 @@ function AccountLeaderboard() {
 				setValue={setValue}
 				bulkDeallocateFilter={bulkDeallocateFilter}
 				setBulkDeallocateFilter={setBulkDeallocateFilter}
+				refetch={refetch}
 			/>
 		</section>
 	);

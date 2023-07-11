@@ -26,6 +26,7 @@ function Leaderboard(props) {
 		setValue = () => {},
 		setBulkDeallocateFilter = () => {},
 		bulkDeallocateFilter,
+		refetch = () => {},
 	} = props;
 
 	const [scoreTrendIds, setScoreTrendIds] = useState({});
@@ -128,8 +129,11 @@ function Leaderboard(props) {
 				<DeallocateModal
 					setShowDeallocateModal={setShowDeallocateModal}
 					showDeallocateModal={showDeallocateModal}
+					setCheckedRowsId={setCheckedRowsId}
 					checkedRowsId={checkedRowsId}
 					modalDetailsArray={modalDetailsArray}
+					setModalDetailsArray={setModalDetailsArray}
+					refetch={refetch}
 				/>
 			)}
 		</>

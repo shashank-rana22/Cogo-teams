@@ -10,11 +10,21 @@ const DEFAULT_CHECKED_ACCOUNT = 1;
 
 function DeallocateModal({
 	setShowDeallocateModal = () => {},
-	showDeallocateModal = false, modalDetailsArray,
+	showDeallocateModal = false,
+	modalDetailsArray,
+	setCheckedRowsId = () => {},
+	setModalDetailsArray = () => {},
+	refetch = () => {},
 }) {
 	const isSingleSelected = modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT;
 
-	const { onDeallocate } = useBulkDeallocation({ modalDetailsArray, setShowDeallocateModal });
+	const { onDeallocate } = useBulkDeallocation({
+		modalDetailsArray,
+		setShowDeallocateModal,
+		setCheckedRowsId,
+		setModalDetailsArray,
+		refetch,
+	});
 
 	return (
 		<Modal

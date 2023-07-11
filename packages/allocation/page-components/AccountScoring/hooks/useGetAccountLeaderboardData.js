@@ -7,6 +7,8 @@ import controls from '../configurations/get-leaderboard-filters-controls';
 import useGetAccountDistributionGraph from './useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from './useGetEngagementScoringLeaderboard';
 
+const MILISECONDS_IN_ONE_DAY = 86400000;
+
 const useGetAccountLeaderboardData = () => {
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [isAllChecked, setIsAllChecked] = useState(false);
@@ -20,19 +22,20 @@ const useGetAccountLeaderboardData = () => {
 
 	const {
 		leaderboardLoading,
-		leaderboardList,
+		leaderboardList = [],
 		setLeaderboardParams,
 		paginationData,
 		getNextPage,
+		refetch,
 	} = useGetEngagementScoringLeaderboard();
 
 	const { control, watch, resetField, setValue } = useForm({
 		defaultValues: {
-			date: new Date(),
+			duration: 7,
 		},
 	});
 
-	const { organization, user_id: userId, date, service, warmth: accountWarmth, segment } = watch();
+	const { organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration } = watch();
 
 	const mutatedControls = controls.map((singleControl) => {
 		let newControl = { ...singleControl };
@@ -47,7 +50,14 @@ const useGetAccountLeaderboardData = () => {
 		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
 			newControl = {
 				...newControl,
-				disabled: true,
+				disable: true,
+			};
+		}
+
+		if (newControl.name === 'date_range' && duration === 'custom') {
+			newControl = {
+				...newControl,
+				disable: false,
 			};
 		}
 
@@ -55,11 +65,21 @@ const useGetAccountLeaderboardData = () => {
 	});
 
 	useEffect(() => {
+		if (duration !== 'custom') {
+			setValue('date_range', {
+				startDate : new Date(Date.now() - (duration * MILISECONDS_IN_ONE_DAY)),
+				endDate   : new Date(),
+			});
+		}
+	}, [duration, setValue]);
+
+	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
-			created_at : date || undefined,
-			service    : service || undefined,
-			filters    : {
+			from_date : date_range?.startDate || new Date(),
+			to_date   : date_range?.endDate || new Date(),
+			service   : service || undefined,
+			filters   : {
 				service_id : organization || undefined,
 				user_id    : userId || undefined,
 				warmth     : accountWarmth || undefined,
@@ -69,18 +89,19 @@ const useGetAccountLeaderboardData = () => {
 
 		setLeaderboardParams((pv) => ({
 			...pv,
-			created_at : date || undefined,
-			service    : service || undefined,
-			filters    : {
+			from_date : date_range?.startDate || new Date(),
+			to_date   : date_range?.endDate || new Date(),
+			service   : service || undefined,
+			filters   : {
 				service_id : organization || undefined,
 				user_id    : userId || undefined,
 				warmth     : accountWarmth || undefined,
 				segment    : segment || undefined,
 			},
 		}));
-	}, [organization, userId, date, service, accountWarmth, segment, setGraphParams, setLeaderboardParams]);
+	}, [organization, userId, service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range]);
 
-	const currentPageListIds = useMemo(() => leaderboardList.map(({ user_id }) => user_id), [leaderboardList]);
+	const currentPageListIds = useMemo(() => leaderboardList?.map(({ user_id }) => user_id), [leaderboardList]);
 
 	const selectAllHelper = useCallback((listArgument = []) => {
 		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
@@ -121,6 +142,7 @@ const useGetAccountLeaderboardData = () => {
 		setValue,
 		bulkDeallocateFilter,
 		setBulkDeallocateFilter,
+		refetch,
 	};
 };
 

@@ -94,13 +94,5 @@ const controls = [
 		maxDate               : new Date(),
 		disable               : true,
 	},
-	{
-		name                  : 'date',
-		label                 : 'Select Date',
-		type                  : 'datePicker',
-		dateFormat            : 'dd-MMMM-yyyy',
-		isPreviousDaysAllowed : true,
-		isClearable           : true,
-	},
 ];
 export default controls;

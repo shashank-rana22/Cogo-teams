@@ -4,7 +4,13 @@ import { useAllocationRequest } from '@cogoport/request';
 const DEFAULT_CHECKED_ACCOUNT = 1;
 const DEFAULT_FIRST_ELEMENT = 0;
 
-const useBulkDeallocation = ({ modalDetailsArray, setShowDeallocateModal }) => {
+const useBulkDeallocation = ({
+	modalDetailsArray,
+	setShowDeallocateModal,
+	setCheckedRowsId = () => {},
+	setModalDetailsArray = () => {},
+	refetch = () => {},
+}) => {
 	const isSingleSelected = modalDetailsArray.length === DEFAULT_CHECKED_ACCOUNT;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -20,6 +26,9 @@ const useBulkDeallocation = ({ modalDetailsArray, setShowDeallocateModal }) => {
 			await trigger({ data: payload });
 
 			setShowDeallocateModal(false);
+			setCheckedRowsId([]);
+			setModalDetailsArray([]);
+			refetch();
 
 			Toast.success(isSingleSelected
 				? `${modalDetailsArray[DEFAULT_FIRST_ELEMENT].business_name} was successfully de-allocated`
