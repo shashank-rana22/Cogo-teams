@@ -14,8 +14,6 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
-const SERVICE_IDS = [];
-const DEFAULT_VALUES = {};
 const HTTP_SUCCESS_CODE = 200;
 
 const useGetStep3Data = ({
@@ -29,6 +27,7 @@ const useGetStep3Data = ({
 	const { trade_type } = primary_service || {};
 
 	let notMainService = false;
+	const SERVICE_IDS = [];
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
@@ -92,6 +91,8 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
+
+	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
 		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({

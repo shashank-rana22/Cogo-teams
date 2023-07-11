@@ -1,12 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 
-const MESSAGE = [];
-
 const checkLineItemsSum = (value) => {
 	let check = true;
 	let lineItemCheck = false;
 	let sumCheck = false;
 
+	const MESSAGE = [];
 	let line_item_sum = 0;
 	(value?.line_items || []).forEach((line_item) => {
 		const { price = 0, quantity = 0 } = line_item;
