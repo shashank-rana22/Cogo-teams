@@ -26,10 +26,18 @@
 
 .element_container {
 	flex: 1 1 30%;
+	max-width: 30%;
 
 	@media (max-width: 768px) {
 		flex-basis: 100%;
+		max-width: 100%;
 	}
+}
+
+.error_message {
+	margin: 4px 0 0 4px;
+	font-size: 10px;
+	color: #cb6464;
 }
 
 .button_container {
@@ -40,6 +48,10 @@
 
 .button {
 	width: 100%;
+}
+
+.space_below {
+	height: 20px;
 }
 
 .lower_form {

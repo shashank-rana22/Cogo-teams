@@ -1,6 +1,8 @@
 import { Button, cl } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
@@ -8,19 +10,36 @@ import LIFECYCLE_STAGE_OPTIONS from '../../../../../../configurations/lifecycle-
 
 import styles from './styles.module.css';
 
-function GeneralConfiguration() {
-	const { control, watch } = useForm();
+function GeneralConfiguration(props) {
+	const { setFormValues } = props;
+
+	const [roles, setRoles] = useState([]);
+
+	const { control, watch, handleSubmit, formState: { errors } } = useForm();
 
 	const watchPartner = watch('partner');
 	const watchChannel = watch('channel');
 
-	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel });
+	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setRoles });
+
+	const onSave = (values, event) => {
+		event.preventDefault();
+
+		setFormValues((previousValues) => ({
+			...previousValues,
+			generalConfiguration: {
+				...values,
+				roles,
+			},
+			objectiveRequirements: {},
+		}));
+	};
 
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.heading}>General Configuration</h3>
 
-			<form className={styles.form_container}>
+			<form className={styles.form_container} onSubmit={handleSubmit(onSave)}>
 				<div className={styles.upper_form}>
 					{controls.map((formElement) => {
 						const { name, label, type, ...rest } = formElement;
@@ -40,6 +59,12 @@ function GeneralConfiguration() {
 									name={name}
 									{...rest}
 								/>
+
+								{!isEmpty(errors) ? (
+									<div className={styles.error_message}>
+										{errors[name]?.message}
+									</div>
+								) : null}
 							</div>
 						);
 					})}

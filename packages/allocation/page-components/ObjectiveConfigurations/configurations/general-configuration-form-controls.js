@@ -4,7 +4,7 @@ import getChannelWiseRolesFilters from '../helpers/get-channel-wise-roles-filter
 import getEntityOptions from '../helpers/get-entity-options';
 
 const getGeneralConfiguratioFormControls = (props) => {
-	const { watchPartner, watchChannel } = props;
+	const { watchPartner, watchChannel, setRoles } = props;
 
 	const controls = [
 		{
@@ -91,7 +91,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			},
 		},
 		{
-			name  : 'role',
+			name  : 'roles',
 			label : (
 				<>
 					Select Cogoport Agent Roles
@@ -109,12 +109,16 @@ const getGeneralConfiguratioFormControls = (props) => {
 					partner_entity_types : ['cogoport'],
 					stakeholder_id       : watchPartner
 						? watchPartner.split('_')[GLOBAL_CONSTANTS.zeroth_index] : undefined,
-					role_sub_functions: getChannelWiseRolesFilters({ channels: watchChannel }),
+					role_sub_functions : getChannelWiseRolesFilters({ channels: watchChannel }),
+					status             : 'active',
 				},
 			},
 			isClearable : true,
 			rules       : {
 				required: 'Roles is required',
+			},
+			onChange: (_, selectedRoles) => {
+				setRoles(selectedRoles?.map((role) => ({ id: role.id, name: role.name })));
 			},
 		},
 	];

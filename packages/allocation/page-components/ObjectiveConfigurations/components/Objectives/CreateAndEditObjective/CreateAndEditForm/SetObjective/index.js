@@ -1,13 +1,15 @@
 import GeneralConfiguration from './GeneralConfiguration';
 import ObjectiveRequirements from './ObjectiveRequirements';
 
-function SetObjective() {
+function SetObjective(props) {
+	const { setFormValues } = props;
+
 	return (
-		<section>
-			<GeneralConfiguration />
+		<>
+			<GeneralConfiguration setFormValues={setFormValues} />
 
 			<ObjectiveRequirements />
-		</section>
+		</>
 	);
 }
 

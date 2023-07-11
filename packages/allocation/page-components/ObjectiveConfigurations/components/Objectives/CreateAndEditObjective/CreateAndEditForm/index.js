@@ -1,5 +1,5 @@
 import { Stepper } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../constants/create-form-stepper-keys-mapping';
 
@@ -25,14 +25,19 @@ const STEPPER_MAPPING = [
 	},
 ];
 
-const STEPPER_COMPONENT_MAPPING = {
-	[SET_OBJECTIVE]           : <SetObjective />,
-	[REVIEW_OBJECTIVE]        : <ReviewObjective />,
-	[SET_OBJECTIVE_WEIGHTAGE] : <SetObjectiveWeightage />,
-};
-
 function CreateAndEditForm() {
 	const [activeStep, setActiveStep] = useState(SET_OBJECTIVE);
+	const [formValues, setFormValues] = useState({ generalConfiguration: {}, objectiveRequirements: {} });
+
+	const STEPPER_COMPONENT_MAPPING = {
+		[SET_OBJECTIVE]           : <SetObjective setFormValues={setFormValues} />,
+		[REVIEW_OBJECTIVE]        : <ReviewObjective formValues={formValues} />,
+		[SET_OBJECTIVE_WEIGHTAGE] : <SetObjectiveWeightage />,
+	};
+
+	useEffect(() => {
+		console.log('formValues :: ', formValues);
+	}, [formValues]);
 
 	return (
 		<section className={styles.container}>
