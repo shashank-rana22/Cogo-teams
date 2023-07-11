@@ -1,10 +1,13 @@
 import { startCase } from '@cogoport/utils';
 
+const MINIMUM_COUNT_FOR_PLURAL = 1;
+
 export const renderValue = (label, detail) => {
 	switch (label) 	{
 		case 'truck_type':
 			return [startCase(detail.truck_type || '')].map((word) => {
-				const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
+				const [firstChar, ...remainingChars] = word;
+				const capitalized = `${firstChar?.toUpperCase()}${remainingChars?.join('')}`;
 				return capitalized.replace(/(\d+)([a-z]+)/i, '$1 $2');
 			}).join(' ');
 
@@ -13,7 +16,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === MINIMUM_COUNT_FOR_PLURAL) {
 				return '1 Truck';
 			}
 

@@ -17,9 +17,9 @@
 }
 
 .list_controller {
-	display: flex; 
-	align-items: center; 
-	justify-content: space-between; 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-block: 0.5rem;
 	margin-left: 7px;
-	padding-block: 0.5rem
 }

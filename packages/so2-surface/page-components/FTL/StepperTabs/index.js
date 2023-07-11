@@ -10,11 +10,11 @@ function StepperTabs() {
 	const { stepperTab, filters, setFilters, setActiveTab, setStepperTab } = useContext(DashboardContext);
 	const tabsConfig = TabContainer();
 	const onStepperTabChange = (val) => {
-		const firstTab = tabsConfig[val]?.[0];
+		const [firstTab] = tabsConfig[val] || [];
 
 		const tempFilters = filters;
 		tempFilters.page = 1;
-		setActiveTab(firstTab.value);
+		setActiveTab(firstTab?.value);
 		setFilters(tempFilters);
 		setStepperTab(val);
 	};

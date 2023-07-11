@@ -18,8 +18,9 @@ const payloadMapping = {
 		},
 		proforma_invoice: {
 			shipment_type : 'ftl_freight',
-			state         : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
-			invoice_type  : 'proforma_invoice',
+			state         : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress',
+				'completed', 'in_progress'],
+			invoice_type: 'proforma_invoice',
 		},
 		e_pod: {
 			shipment_type : 'ftl_freight',

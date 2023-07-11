@@ -7,14 +7,15 @@
 }
 
 .heading {
-	font-weight: 600;
 	margin-right: 1rem;
+	font-weight: 600;
 }
 
 .date_detail {
 	display: flex;
 	align-items: center;
 	width: 42%;
+
 	.eta_etd {
 		color: #828282;
 	}

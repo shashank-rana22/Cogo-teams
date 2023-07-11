@@ -1,5 +1,7 @@
 import { Button, Modal, Checkbox } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/geo/IN';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext, useEffect } from 'react';
 
@@ -12,8 +14,10 @@ import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
 const isSelectable = (activeTab) => !['completed_shipment', 'cancelled_shipment'].includes(activeTab);
+const REALLOCATE_ELIGIBLE_PERSONS = [GLOBAL_CONSTANTS.uuid.super_admin_id, GLOBAL_CONSTANTS.uuid.prod_process_owner];
 
-function ShipmentList({ loading, data = {} }) {
+function ShipmentList({ loading = false, data = {} }) {
+	const role_id = useSelector((state) => state?.profile?.auth_role_data?.id);
 	const { activeTab, setFilters, filters } = useContext(DashboardContext);
 	const { apiTrigger, loading: reallocateLoading } = useBulkUpdateSO2();
 
@@ -79,7 +83,7 @@ function ShipmentList({ loading, data = {} }) {
 							/>
 						))}
 						{
-						isCardSelectable && 	(
+						REALLOCATE_ELIGIBLE_PERSONS.includes(role_id) && isCardSelectable && 	(
 							<div className={styles.action_buttons}>
 								<Button
 									size="lg"

@@ -48,7 +48,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-block: 0.5rem;
-	
+
 	:global {
 		.service-info-icon-container {
 			svg > path {

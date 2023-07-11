@@ -1,10 +1,48 @@
-import { Button, DateRangepicker } from '@cogoport/components';
+import { Button, DateRangepicker, MultiSelect } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
+
+const SHIPMENT_STATES = [
+	{
+		label : 'Awaiting Service Provider Confirmation',
+		value : 'Awaiting Service Provider Confirmation',
+	},
+
+	{
+		label : 'Confirmed by Service Provider',
+		value : 'Confirmed by Service Provider',
+	},
+
+	{
+		label : 'Cargo Picked Up',
+		value : 'Cargo Picked Up',
+	},
+
+	{
+		label : 'Cargo dropped',
+		value : 'Cargo dropped',
+	},
+
+	{
+		label : 'Completed',
+		value : 'Completed',
+	},
+
+	{
+		label : 'Aborted',
+		value : 'Aborted',
+	},
+
+	{
+		label : 'Cancelled',
+		value : 'Cancelled',
+	},
+];
 
 function FilterBy({
 	setPopoverFilter = () => {},
@@ -118,6 +156,21 @@ function FilterBy({
 					}}
 
 				/>
+			</div>
+			<div className={styles.filter_container}>
+				<MultiSelect
+					placeholder="Select Shipment states"
+					options={SHIPMENT_STATES}
+					onChange={(e) => setFormValue((prev) => ({
+						...prev,
+						ftl_freight_services: { state: isEmpty(e) ? undefined : e },
+					}))}
+					value={formValue?.ftl_freight_services?.state}
+					isClearable
+					size="sm"
+					prefix={<div />}
+				/>
+
 			</div>
 			<div className={styles.filter_container}>
 				<DateRangepicker
