@@ -178,8 +178,7 @@ const injectValues = (
 		});
 	}
 
-	if (['pod_sent_to_shipper', 'upload_service_provider_proof_of_delivery'].includes(task?.task)
-	&& task.shipment_type === 'ftl_freight') {
+	if (['pod_sent_to_shipper', 'upload_service_provider_proof_of_delivery'].includes(task?.task)) {
 		controls.forEach((control) => {
 			if (control?.type === 'fieldArray') {
 				const tempControl = control;

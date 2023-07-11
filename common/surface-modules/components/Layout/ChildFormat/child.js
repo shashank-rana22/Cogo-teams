@@ -33,14 +33,14 @@ function Child({
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
-	let span = GLOBAL_CONSTANTS.zeroth_index;
+	let span = MINIMUM_VALUE;
 	controls.forEach((fields) => {
 		span += fields.span || TOTAL_SPAN;
 		if (span === TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = GLOBAL_CONSTANTS.zeroth_index;
+			span = MINIMUM_VALUE;
 		} else if (span < TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
@@ -100,7 +100,7 @@ function Child({
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
 				{startCase(name || 'document')}
-				&nbsp;
+				{' '}
 				{index + INCREMENT_CONSTANT}
 			</h3>
 			{TOTAL_FIELDS.map((rowFields, i) => (
