@@ -6,9 +6,15 @@ import getViewType from '../helpers/getViewType';
 
 const PERSONA_KEYS_MAPPING = ['sales', 'supply', 'support', 'shipment_specialist'];
 
+const DEFAULT_VIEW_TYPE = 'support';
+
 const getViewTypeFromWorkPreferences = ({ viewTypeFromRoleIds, agentType }) => {
 	if (viewTypeFromRoleIds === 'cogoone_admin') {
 		return viewTypeFromRoleIds;
+	}
+
+	if (!agentType) {
+		return DEFAULT_VIEW_TYPE;
 	}
 
 	if (agentType.includes('admin')) {
@@ -35,15 +41,16 @@ function useAgentWorkPrefernce() {
 	const viewTypeFromRoleIds = getViewType({ userRoleIds, userId, authRoleData });
 
 	const fetchworkPrefernce = useCallback(async () => {
+		let res;
 		try {
-			const res = await trigger();
-
+			res = await trigger();
+		} catch (error) {
+			console.error(error);
+		} finally {
 			const viewTypeValue = getViewTypeFromWorkPreferences(
 				{ viewTypeFromRoleIds, agentType: res?.data?.agent_type },
 			);
 			setViewType(viewTypeValue);
-		} catch (error) {
-			console.error(error);
 		}
 	}, [trigger, viewTypeFromRoleIds]);
 

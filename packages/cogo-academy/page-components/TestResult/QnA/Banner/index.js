@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Banner({ scrollToSubjective = () => {}, setAnimation = () => {} }) {
+function Banner({ scrollToSubjective = () => {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
@@ -17,7 +17,7 @@ function Banner({ scrollToSubjective = () => {}, setAnimation = () => {} }) {
 					type="button"
 					size="md"
 					themeType="accent"
-					onClick={() => { scrollToSubjective(); setAnimation(true); }}
+					onClick={() => { scrollToSubjective(); }}
 				>
 					Redirect to Subjective Answers
 				</Button>
