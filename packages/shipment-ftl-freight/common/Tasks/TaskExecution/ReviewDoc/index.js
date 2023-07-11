@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateDocuments from '../../../../hooks/useUpdateDocuments';
+import getfileUrl from '../utils/getfileUrl';
 
 import styles from './styles.module.css';
 
@@ -90,17 +91,6 @@ function ReviewDoc({
 		);
 	}
 
-	const getfileUrl = (url) => {
-		if (url?.includes('finalUrl')) {
-			const REGEX = /:finalUrl=>"([^"]*)"/;
-			const match = url.match(REGEX);
-
-			return match?.[FIRST_INDEX];
-		}
-
-		return url;
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_details}>
@@ -139,7 +129,7 @@ function ReviewDoc({
 				<div className={styles.file_view}>
 					<object
 						title="review_file"
-						data={getfileUrl(docData?.document_url)}
+						data={getfileUrl({ url: docData?.document_url, FIRST_INDEX })}
 						width="100%"
 						type="application/pdf"
 					/>
