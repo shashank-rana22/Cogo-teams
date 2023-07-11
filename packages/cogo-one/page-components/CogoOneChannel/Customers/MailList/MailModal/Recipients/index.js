@@ -1,8 +1,25 @@
-import React from 'react';
+import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import MailRecipientType from '../../../../../../common/MailRecipientType';
 
 import styles from './styles.module.css';
+
+const EMAIL_RECIPIENTS = [
+	{
+		label : 'To',
+		value : 'toUserEmail',
+	},
+	{
+		label : 'Cc',
+		value : 'ccrecipients',
+	},
+	{
+		label : 'Bcc',
+		value : 'bccrecipients',
+	},
+];
 
 function Recipients({
 	emailState = {},
@@ -15,42 +32,88 @@ function Recipients({
 	value = '',
 	errorValue = '',
 }) {
+	const [enabledRecipients, setEnabledRecipients] = useState({
+		ccrecipients  : !isEmpty(emailState?.ccrecipients),
+		bccrecipients : !isEmpty(emailState?.bccrecipients),
+	});
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.type_to}>
-				<div className={styles.sub_text}>
-					To:
-				</div>
-				<MailRecipientType
-					emailRecipientType={emailState?.toUserEmail}
-					handleDelete={handleDelete}
-					showControl={showControl}
-					type="toUserEmail"
-					value={value}
-					errorValue={errorValue}
-					handleChange={handleChange}
-					handleKeyPress={handleKeyPress}
-					handleError={handleError}
-					handleEdit={handleEdit}
-				/>
-			</div>
-			<div className={styles.type_to}>
-				<div className={styles.sub_text}>
-					Cc:
-				</div>
-				<MailRecipientType
-					emailRecipientType={emailState?.ccrecipients}
-					handleDelete={handleDelete}
-					showControl={showControl}
-					type="ccrecipients"
-					value={value}
-					errorValue={errorValue}
-					handleChange={handleChange}
-					handleKeyPress={handleKeyPress}
-					handleError={handleError}
-					handleEdit={handleEdit}
-				/>
-			</div>
+			{EMAIL_RECIPIENTS.map((itm) => {
+				if (itm.value !== 'toUserEmail' && !enabledRecipients?.[itm.value]) {
+					return null;
+				}
+
+				return (
+					<div
+						className={styles.type_to}
+						key={itm.value}
+					>
+						<div className={styles.mail_recipient_container}>
+							<div className={styles.sub_text}>
+								{itm.label}
+								:
+							</div>
+							<MailRecipientType
+								emailRecipientType={emailState?.[itm.value]}
+								handleDelete={handleDelete}
+								showControl={showControl}
+								type={itm.value}
+								value={value}
+								errorValue={errorValue}
+								handleChange={handleChange}
+								handleKeyPress={handleKeyPress}
+								handleError={handleError}
+								handleEdit={handleEdit}
+							/>
+						</div>
+						<div className={styles.button_styles}>
+							{itm.value === 'toUserEmail' ? (
+								<>
+									{!enabledRecipients?.ccrecipients && (
+										<Button
+											size="md"
+											themeType="linkUi"
+											onClick={() => setEnabledRecipients(
+												(prev) => (
+													{ ...prev, ccrecipients: true }
+												),
+											)}
+										>
+											Cc
+										</Button>
+									)}
+									{!enabledRecipients?.bccrecipients && (
+										<Button
+											size="md"
+											themeType="linkUi"
+											onClick={() => setEnabledRecipients(
+												(prev) => (
+													{ ...prev, bccrecipients: true }
+												),
+											)}
+										>
+											Bcc
+										</Button>
+									)}
+								</>
+							) : (
+								<Button
+									size="md"
+									themeType="linkUi"
+									onClick={() => setEnabledRecipients(
+										(prev) => (
+											{ ...prev, [itm.value]: false }
+										),
+									)}
+								>
+									Remove
+								</Button>
+							)}
+						</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 }

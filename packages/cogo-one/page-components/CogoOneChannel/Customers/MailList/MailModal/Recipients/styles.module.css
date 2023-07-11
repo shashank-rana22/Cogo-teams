@@ -4,13 +4,24 @@
 
 .type_to {
 	display: flex;
-	align-items: center;
+	justify-content: space-between;
 	width: 100%;
-	padding: 10px 0;
+	padding: 15px 0 0;
 	border-bottom: 1px solid #e0e0e0;
 }
 
 .sub_text {
 	font-size: 14px;
 	color: #828282;
+}
+
+.mail_recipient_container {
+	display: flex;
+	align-items: flex-start;
+}
+
+.button_styles {
+	display: flex;
+	align-items: flex-end;
+	height: 32px;
 }

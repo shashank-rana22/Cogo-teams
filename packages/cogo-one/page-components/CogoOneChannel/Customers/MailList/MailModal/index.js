@@ -71,14 +71,11 @@ function MailModal({
 			return;
 		}
 		const payload = {
-			sender       : emailState?.from_mail || activeMailAddress,
-			toUserEmail  : emailState?.toUserEmail,
-			ccrecipients : emailState?.ccrecipients,
-			subject      : emailState?.subject,
-			content      : emailState?.body,
+			...emailState,
+			sender : emailState?.from_mail || activeMailAddress,
 			attachments,
 			userId,
-			msgId        : buttonType !== 'send_mail' ? activeMail?.id : undefined,
+			msgId  : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 
 		};
 		replyMailApi(payload);

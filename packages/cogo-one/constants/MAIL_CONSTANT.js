@@ -8,12 +8,17 @@ export const MAIL_FOLDER_OPTIONS = {
 export const DEFAULT_LIST_MAILS_TIMEOUT = 300000;
 
 export const EMAIL_TAGS_COLOR = {
-	recipient: {
+	toUserEmail: {
 		bgColor  : '#FEF199',
 		subDiv   : '#FFFCE6',
 		crossDiv : '#FEF199',
 	},
-	cc_bcc: {
+	ccrecipients: {
+		bgColor  : '#CFEAED',
+		subDiv   : '#F3FAFA',
+		crossDiv : '#CFEAED',
+	},
+	bccrecipients: {
 		bgColor  : '#CFEAED',
 		subDiv   : '#F3FAFA',
 		crossDiv : '#CFEAED',
