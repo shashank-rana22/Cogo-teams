@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController, DatepickerController, UploadController,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
@@ -124,6 +125,7 @@ function EmployeeDashboard() {
 							size="md"
 							type="number"
 							placeholder="Invoice Amount or 0"
+							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
 							rules={{ required: true }}
 						/>
 						{errors.invoice_amount && (
@@ -138,6 +140,7 @@ function EmployeeDashboard() {
 							size="md"
 							type="number"
 							placeholder="GST Amount or 0"
+							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
 							rules={{ required: true }}
 						/>
 						{errors.tax_amount && (
@@ -152,6 +155,7 @@ function EmployeeDashboard() {
 							size="md"
 							type="number"
 							placeholder="Warranty Amount or 0"
+							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
 							rules={{ required: true }}
 						/>
 						{errors.warranty_amount && (
