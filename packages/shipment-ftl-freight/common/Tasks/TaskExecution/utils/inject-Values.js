@@ -10,7 +10,6 @@ const TRUCK_NUM_TASKS = [
 	'upload_load_truck_image',
 ];
 
-const { zeroth_index } = GLOBAL_CONSTANTS;
 const TRUCK_EXCEED_NUMBER = -1;
 
 const injectValues = (
@@ -28,7 +27,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[zeroth_index]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	}

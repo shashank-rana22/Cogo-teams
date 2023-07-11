@@ -9,7 +9,6 @@ import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
-const { zeroth_index } = GLOBAL_CONSTANTS;
 const MINIMUM_LENGTH = 1;
 const MINIMUM_VALUE = 0;
 const INCREMENT_CONSTANT = 1;
@@ -34,14 +33,14 @@ function Child({
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
-	let span = zeroth_index;
+	let span = GLOBAL_CONSTANTS.zeroth_index;
 	controls.forEach((fields) => {
 		span += fields.span || TOTAL_SPAN;
 		if (span === TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = zeroth_index;
+			span = GLOBAL_CONSTANTS.zeroth_index;
 		} else if (span < TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
@@ -60,9 +59,9 @@ function Child({
 		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[zeroth_index]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[zeroth_index]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[zeroth_index]?.url?.fileName === '') {
+	if (formValues?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
 		for (let i = 0; i < elements.length; i += INCREMENT_CONSTANT) {
 			elements[i].style.display = 'none';

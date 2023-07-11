@@ -14,7 +14,6 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 	'container_details_count',
 ];
 const FIRST_INDEX = 1;
-const { zeroth_index } = GLOBAL_CONSTANTS;
 
 const extraApiPayload = (values, end_point, task) => {
 	if (end_point === 'create_shipment_document') {
@@ -69,7 +68,7 @@ const extraApiPayload = (values, end_point, task) => {
 						}
 					});
 				} else if (key === 'cargo_dimension') {
-					const cargo_dimensions = values?.[key]?.[zeroth_index];
+					const cargo_dimensions = values?.[key]?.[GLOBAL_CONSTANTS.zeroth_index];
 					const { length, breadth, height, unit } = cargo_dimensions || {};
 					DATA[key] = {
 						length,
