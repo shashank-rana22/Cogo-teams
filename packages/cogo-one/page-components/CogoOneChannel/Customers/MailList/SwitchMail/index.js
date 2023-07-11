@@ -10,14 +10,31 @@ function SwitchMail({
 	viewType = '',
 	userEmailAddress = '',
 	activeMailAddress = '',
-	setActiveMailAddress = () => {},
+	setActiveMail = () => {},
 	setShowPopover = () => {},
+	setActiveMailAddress = () => {},
 }) {
 	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
+	const filteredMails = userActiveMails.filter((itm) => (itm !== activeMailAddress));
+
 	return (
 		<div className={styles.container}>
-			{userActiveMails.map(
+			<div className={styles.active_mail}>
+				<Avatar
+					size="50px"
+					personName={activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ')}
+				/>
+				<div className={cl`${styles.mail_address_container} ${styles.align_the_elements_center}`}>
+					<div className={styles.user_name}>
+						{activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ')}
+					</div>
+					<div className={styles.mail_address}>
+						{activeMailAddress}
+					</div>
+				</div>
+			</div>
+			{filteredMails.map(
 				(itm) => (
 					<div
 						key={itm}
@@ -25,10 +42,9 @@ function SwitchMail({
 						onClick={() => {
 							setActiveMailAddress(itm);
 							setShowPopover(false);
+							setActiveMail({});
 						}}
-						className={cl`${styles.mail_container} ${itm === activeMailAddress
-							? styles.active_mail
-							: ''}`}
+						className={styles.mail_container}
 					>
 						<Avatar
 							size="45px"

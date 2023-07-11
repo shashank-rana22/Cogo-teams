@@ -18,10 +18,10 @@ function MailConversation({ mailProps = {} }) {
 		setBccArray = () => {},
 		setRecipientArray = () => {},
 		setEmailState = () => {},
-		userEmailAddress = '',
+		activeMailAddress = '',
 	} = mailProps;
 
-	const { data = {}, loading } = useGetMail({ activeMail, emailAddress: userEmailAddress });
+	const { data = {}, loading } = useGetMail({ activeMail, emailAddress: activeMailAddress });
 
 	const {
 		sentDateTime = '',
@@ -97,7 +97,7 @@ function MailConversation({ mailProps = {} }) {
 						/>
 						<MailAttachments
 							activeMail={activeMail}
-							emailAddress={userEmailAddress}
+							emailAddress={activeMailAddress}
 						/>
 					</>
 				)}

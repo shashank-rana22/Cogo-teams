@@ -12,7 +12,7 @@ import SwitchMail from './SwitchMail';
 function MailList(mailprops) {
 	const {
 		setActiveMail = () => {},
-		activeMail,
+		activeMail = {},
 		activeMailAddress = '',
 		viewType = '',
 		userEmailAddress = '',
@@ -36,9 +36,10 @@ function MailList(mailprops) {
 				content={(
 					<SwitchMail
 						viewType={viewType}
+						setActiveMail={setActiveMail}
+						setShowPopover={setShowPopover}
 						userEmailAddress={userEmailAddress}
 						activeMailAddress={activeMailAddress}
-						setShowPopover={setShowPopover}
 						setActiveMailAddress={setActiveMailAddress}
 					/>
 				)}
@@ -74,7 +75,6 @@ function MailList(mailprops) {
 				/>
 			</div>
 		</div>
-
 	);
 }
 

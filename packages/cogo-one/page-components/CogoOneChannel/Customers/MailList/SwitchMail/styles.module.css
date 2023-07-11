@@ -26,7 +26,6 @@
 	border-bottom: 1px solid #e0e0e0;
 
 	&:hover {
-		padding: 5px;
 		background-color: #fefce6;
 	}
 
@@ -44,5 +43,14 @@
 }
 
 .active_mail {
-	background-color: #fefce6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.align_the_elements_center {
+	text-align: center;
 }

@@ -128,10 +128,7 @@ function CogoOne() {
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage
-								displayMessage={activeTab?.tab === 'message'
-									? 'chat' : 'call log'}
-							/>
+							<EmptyChatPage activeTab={activeTab} />
 						</div>
 					) : (
 						<>

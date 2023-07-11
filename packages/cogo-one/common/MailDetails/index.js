@@ -22,9 +22,7 @@ function MailDetails({
 		pagination,
 	} = useListMail({ activeSelect, activeMailAddress });
 
-	const {
-		value: list = [],
-	} = listData || {};
+	const { value: list = [] } = listData || {};
 
 	useEffect(() => {
 		let interval = '';
@@ -41,14 +39,8 @@ function MailDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div
-					role="presentation"
-					className={styles.left_div}
-
-				>
-					<div className={styles.title}>
-						{startCase(activeSelect)}
-					</div>
+				<div className={styles.title}>
+					{startCase(activeSelect)}
 				</div>
 
 				<IcMRefresh
@@ -59,7 +51,7 @@ function MailDetails({
 
 			{isEmpty(list || []) && !loading ? (
 				<div className={styles.empty_div}>
-					No Data Found...
+					No Mails Found...
 				</div>
 			) : (
 				<ListMails

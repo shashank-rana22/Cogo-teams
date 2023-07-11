@@ -10,7 +10,8 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin: 8px 0;
+	padding: 8px 10px;
+	box-shadow: 0 6px 15px -5px #cdcaca;
 }
 
 .left_div {
@@ -29,16 +30,15 @@
 
 .title {
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
+	color: #6f6f6f;
 }
 
 .filter_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	width: 17px;
 	height: 17px;
 	cursor: pointer;
+	fill: #6f6f6f;
 }
 
 .empty_div {

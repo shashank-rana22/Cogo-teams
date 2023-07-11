@@ -4,8 +4,7 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import MailLoading from '../MailLoading';
-
+import MailLoading from './MailLoading';
 import styles from './styles.module.css';
 
 function ListMails({
@@ -58,6 +57,7 @@ function ListMails({
 									<div className={styles.subject_container}>
 										{subject}
 									</div>
+
 									<div
 										className={styles.message_content}
 										dangerouslySetInnerHTML={{ __html: bodyPreview }}
