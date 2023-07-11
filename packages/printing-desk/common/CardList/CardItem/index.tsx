@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import React, { useState, useEffect, ReactNode } from 'react';
 
 import CONSTANTS from '../../../constants/constants';
@@ -11,12 +11,14 @@ export interface Props {
 	fields: FieldType[];
 	singleitem?: NestedObj;
 	functions?: FunctionObjects;
+	loading?: boolean;
 }
 
 function CardItem({
 	fields = [],
 	singleitem = {},
 	functions = {},
+	loading = false,
 }:Props) {
 	const [isMobile, setIsMobile] = useState(false);
 
@@ -60,15 +62,16 @@ function CardItem({
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
 							)}
-
-							<div className={styles.flex}>
-								{getValue(
-									singleitem,
-									field,
-									functions,
-									'-',
-								) as ReactNode}
-							</div>
+							{loading ? <Placeholder /> : (
+								<div className={styles.flex}>
+									{getValue(
+										singleitem,
+										field,
+										functions,
+										'-',
+									) as ReactNode}
+								</div>
+							)}
 
 						</div>
 					);

@@ -24,16 +24,17 @@ function CardList({
 	setPage = () => {},
 	functions = {},
 } :Props) {
-	const { list = [], total_count:totalCount } = data;
+	const { shipmentPendingTasks = [], totalRecords } = data;
 
 	const handleRender = () => {
-		if (loading || list.length) {
-			return (list || []).map((singleitem:GenericObject) => (
+		if (loading || shipmentPendingTasks.length) {
+			return (shipmentPendingTasks || []).map((singleitem:GenericObject) => (
 				<CardItem
 					key={singleitem.id}
 					singleitem={singleitem}
 					fields={fields}
 					functions={functions}
+					loading={loading}
 				/>
 			));
 		}
@@ -45,11 +46,11 @@ function CardList({
 			<Header fields={fields} />
 			<div className={styles.scroll}>
 				{handleRender()}
-				{!loading && Number(list.length) > 0 ? (
+				{!loading && Number(shipmentPendingTasks.length) > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}
-							totalItems={Number(totalCount)}
+							totalItems={Number(totalRecords)}
 							pageSize={10}
 							type="table"
 							onPageChange={(val) => { setPage(val); }}

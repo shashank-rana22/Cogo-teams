@@ -59,7 +59,6 @@ import {
 	IcMAirSchedules,
 	IcMFsoppoc,
 	IcMBookingDesk,
-	IcAPrint,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1912,7 +1911,7 @@ const navigationMappingAdmin = {
 		href          : '/v2/ground-ops',
 		as            : '/v2/ground-ops',
 		main_apis     : [],
-		icon          : IcAPrint,
+		icon          : IcMDocument,
 		possible_apis : apis.ground_ops,
 		module_type   : 'dashboards',
 	},

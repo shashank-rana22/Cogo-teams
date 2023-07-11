@@ -16,3 +16,8 @@
 	max-height: 600px;
 	overflow: auto;
 }
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
