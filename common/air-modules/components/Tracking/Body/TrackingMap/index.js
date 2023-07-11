@@ -82,47 +82,44 @@ function TrackingMap({
 	};
 
 	useEffect(() => {
-		if (points?.length) {
-			resetPointAndMarkers();
-			console.log('aa points', points);
-			const res = points?.every((point, idx) => {
-				if (point?.arrival_lat
-					&& point?.arrival_long
-					&& point?.departure_lat
-					&& point?.departure_long
-				) {
-					const isCurrentMilestonePastOrPresent = isPastOrPresentDay(
-						point?.actual_arrival_time,
-					);
-					const source = {
-						lat : point?.departure_lat,
-						lng : point?.departure_long,
-					};
-					const destination = {
-						lat : point?.arrival_lat,
-						lng : point?.arrival_long,
-					};
-					if (isCurrentMilestonePastOrPresent) {
-						setCurrentMilestone(destination);
-					}
-					createBezier(
-						{ source, destination },
-						STEPS,
-						isCurrentMilestonePastOrPresent,
-						idx,
-					);
-					return true;
-				}
+		if (!points?.length) {
+			setLoading(false);
+			return;
+		}
+		resetPointAndMarkers();
+		const res = points?.every((point, idx) => {
+			if (!point?.arrival_lat
+					|| !point?.arrival_long
+					|| !point?.departure_lat
+					|| !point?.departure_long
+			) return false;
 
-				return false;
-			});
-			if (res) {
-				setLoading(false);
+			const isCurrentMilestonePastOrPresent = isPastOrPresentDay(
+				point?.actual_arrival_time,
+			);
+			const source = {
+				lat : point?.departure_lat,
+				lng : point?.departure_long,
+			};
+			const destination = {
+				lat : point?.arrival_lat,
+				lng : point?.arrival_long,
+			};
+			if (isCurrentMilestonePastOrPresent) {
+				setCurrentMilestone(destination);
 			}
-		} else {
+			createBezier(
+				{ source, destination },
+				STEPS,
+				isCurrentMilestonePastOrPresent,
+				idx,
+			);
+			return true;
+		});
+		if (res) {
 			setLoading(false);
 		}
-	}, [points, points?.length]);
+	}, [points]);
 
 	if (isLoading) {
 		return <div className={styles.loading}>Loading...</div>;
