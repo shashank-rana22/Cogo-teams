@@ -37,32 +37,34 @@ function TrackingMap({
 	};
 
 	const createBezier = (inputPoints, step, isCurrentMilestonePastOrPresent) => {
-		let t = 0;
+		let tangentParameter = 0;
 		const BEZIER_POINTS = [];
-		while (t <= LOOP_CONDITION_CHECK) {
+		while (tangentParameter <= LOOP_CONDITION_CHECK) {
 			try {
 				const xAxis_1 = parseFloat(inputPoints.source.lat);
 				const xAxis_3 = parseFloat(inputPoints.destination.lat);
 				const xAxis_2 = Math.max(xAxis_1, xAxis_3) + LAT_X_CALCULATING_FACTOR;
-				const lat_x =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * xAxis_1 + t * xAxis_2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * xAxis_2 + t * xAxis_3);
+				const lat_x =				(BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter)
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter) * xAxis_1 + tangentParameter * xAxis_2)
+				+ tangentParameter
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter) * xAxis_2 + tangentParameter * xAxis_3);
 
 				const yAxis_1 = parseFloat(inputPoints.source.lng);
 				const yAxis_3 = parseFloat(inputPoints.destination.lng);
 				const yAxis_2 = (yAxis_1 + yAxis_3) / LNG_Y_CALCULATING_FACTOR;
-				const lng_y =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * yAxis_1 + t * yAxis_2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * yAxis_2 + t * yAxis_3);
+				const lng_y =				(BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter)
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter) * yAxis_1 + tangentParameter * yAxis_2)
+				+ tangentParameter
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - tangentParameter) * yAxis_2 + tangentParameter * yAxis_3);
 
 				BEZIER_POINTS.push({
 					lat : lat_x,
 					lng : lng_y,
 				});
 			} catch (err) {
-				t = BEZIER_POINTS_CALCULATING_FACTOR;
+				tangentParameter = BEZIER_POINTS_CALCULATING_FACTOR;
 			}
-			t += step;
+			tangentParameter += step;
 		}
 
 		setCurvePoints((prevCurvePoints) => [...prevCurvePoints, ...BEZIER_POINTS]);
