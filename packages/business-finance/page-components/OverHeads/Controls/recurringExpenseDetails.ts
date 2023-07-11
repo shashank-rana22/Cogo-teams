@@ -29,17 +29,17 @@ interface Props {
 	entityOptions: object[],
 	setEntityOptions: (obj:any)=>void,
 	handleVendorChange:(obj:any)=>void,
+	handleCategoryChange:(obj:any, val:object)=>void,
 }
 
 export const recurringExpenseDetails = ({
 	formData,
 	setFormData,
-	categoryOptions,
-	subCategoryOptions,
 	branchOptions,
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
+	handleCategoryChange = () => {},
 }:Props) => {
 	const handleEntityChange = (e:string | number) => {
 		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
@@ -89,6 +89,7 @@ export const recurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					value          : formData?.expenseCategory,
+					onChange       : (e, obj) => handleCategoryChange(e, obj),
 					span           : 2.2,
 					className      : styles.select,
 					style          : { width: '164px' },

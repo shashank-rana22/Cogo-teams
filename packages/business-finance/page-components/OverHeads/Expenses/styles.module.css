@@ -13,12 +13,12 @@
 	display: flex;
 	gap: 8px;
 
-	:global{
-		.ui_select_display_container{
+	:global {
+		.ui_select_display_container {
 			height: 32px !important;
 		}
 
-		.ui_select_input_placeholder{
+		.ui_select_input_placeholder {
 			font-size: 12px;
 		}
 	}

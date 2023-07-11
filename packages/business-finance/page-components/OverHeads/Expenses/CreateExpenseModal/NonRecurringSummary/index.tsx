@@ -12,35 +12,36 @@ import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 import styles from './styles.module.css';
 
 interface Entity {
-	entity_code?: number | string,
+	entity_code?: number | string;
+	id?: string;
 }
 
 interface Summary {
-	title?: string,
-	value?: any,
+	title?: string;
+	value?: any;
 }
 
 interface Data {
-	vendorName?: string,
-	transactionDate?: Date,
-	paymentMode?: string,
-	uploadedInvoice?: string,
-	periodOfTransaction?: string,
-	expenseCategory?: string,
-	expenseSubCategory?: string,
-	branch?: string,
-	entityObject?: Entity,
-	invoiceDate?: Date,
-	totalPayable?: number | string,
-	stakeholderName?: string,
-	invoiceCurrency?: string,
-	vendorID?: number | string,
-	payableAmount?: number,
+	vendorName?: string;
+	transactionDate?: Date;
+	paymentMode?: string;
+	uploadedInvoice?: string;
+	periodOfTransaction?: string;
+	expenseCategory?: string;
+	expenseSubCategory?: string;
+	branch?: string;
+	entityObject?: Entity;
+	invoiceDate?: Date;
+	totalPayable?: number | string;
+	stakeholderName?: string;
+	invoiceCurrency?: string;
+	vendorID?: number | string;
+	payableAmount?: number;
 }
 
 interface Props {
-	nonRecurringData?: Data,
-	setNonRecurringData?: (obj) => void,
+	nonRecurringData?: Data;
+	setNonRecurringData?: (obj) => void;
 }
 
 function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
@@ -48,7 +49,6 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 		periodOfTransaction,
 		vendorName,
 		expenseCategory,
-		expenseSubCategory,
 		branch,
 		paymentMode,
 		entityObject,
@@ -61,7 +61,11 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders(expenseCategory);
+	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
+		currency : nonRecurringData?.invoiceCurrency,
+		expenseCategory,
+		entity   : entityObject?.id,
+	});
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -95,7 +99,9 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 		},
 		{
 			title : 'Expense Category',
-			value : expenseCategory ? (showOverflowingNumber(startCase(expenseCategory), 18)) : '-',
+			value : expenseCategory
+				? showOverflowingNumber(startCase(expenseCategory), 18)
+				: '-',
 		},
 		{
 			title : 'Entity',
@@ -103,44 +109,55 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 		},
 		{
 			title : 'Branch ',
-			value : branch ? showOverflowingNumber(JSON.parse(branch)?.name, 18) : '-',
+			value : branch
+				? showOverflowingNumber(JSON.parse(branch)?.name, 18)
+				: '-',
 		},
 	];
 	const summaryDataSecond = [
 		{
 			title : 'Payable Amount',
-			value : <div>
-				{formatAmount({
-					amount   : payableAmount as any,
-					currency : invoiceCurrency,
-					options  : {
-						style           : 'currency',
-						currencyDisplay : 'code',
-					},
-				}) || '-'}
-           </div>,
+			value : (
+				<div>
+					{formatAmount({
+						amount   : payableAmount as any,
+						currency : invoiceCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-'}
+				</div>
+			),
 		},
 		{
 			title : 'Expense Date',
-			value : <div>
-				{invoiceDate
-					? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
-           </div>,
+			value : (
+				<div>
+					{invoiceDate
+						? formatDate(invoiceDate, 'dd/MMM/yy', {}, false)
+						: '-'}
+				</div>
+			),
 		},
 		{
 			title : 'Transaction Date',
-			value : <div>
-				{transactionDate
-					? formatDate(transactionDate, 'dd/MMM/yy', {}, false) : '-'}
-
-           </div>,
+			value : (
+				<div>
+					{transactionDate
+						? formatDate(transactionDate, 'dd/MMM/yy', {}, false)
+						: '-'}
+				</div>
+			),
 		},
 		{
 			title : 'Period',
-			value : <div>
-				{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
-				{' '}
-           </div>,
+			value : (
+				<div>
+					{periodOfTransaction ? startCase(periodOfTransaction) : '-'}
+{' '}
+				</div>
+			),
 		},
 		{
 			title : 'Payment Mode ',
@@ -149,28 +166,64 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 	];
 	const summaryDataThird = [
 		{
-			title : 'To be Approved by',
-			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
-				: startCase(stakeholderName || '') || '-',
-		},
-		{
 			title : 'Uploaded Documents',
-			value : <div>
-				{uploadedInvoice
-					? (
+			value : (
+				<div>
+					{uploadedInvoice ? (
 						<a
 							href={uploadedInvoice}
-							style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
+							style={{
+								color          : 'blue',
+								textDecoration : 'underline',
+								fontSize       : '16px',
+							}}
 							target="_blank"
 							rel="noreferrer"
 						>
 							{showOverflowingNumber(filename, 20)}
 						</a>
-					)
-					: '-'}
-           </div>,
+					) : (
+						'-'
+					)}
+				</div>
+			),
 		},
 	];
+
+	const uploadedData = [
+		{
+			title : 'To be Approved by',
+			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
+				: startCase(stakeholderName || '') || '-',
+		},
+	];
+
+	// const stakeHolderTimeLine = [
+	// 	{
+	// 		title : 'To be Approved by1',
+	// 		value : stakeholderLoading ? (
+	// 			<Placeholder height="20px" width="150px" />
+	// 		) : (
+	// 			startCase(stakeholderName || '') || '-'
+	// 		),
+	// 	},
+	// 	{
+	// 		title : 'To be Approved by2',
+	// 		value : stakeholderLoading ? (
+	// 			<Placeholder height="20px" width="150px" />
+	// 		) : (
+	// 			startCase(stakeholderName || '') || '-'
+	// 		),
+	// 	},
+	// 	{
+	// 		title : 'To be Approved by3',
+	// 		value : stakeholderLoading ? (
+	// 			<Placeholder height="20px" width="150px" />
+	// 		) : (
+	// 			startCase(stakeholderName || '') || '-'
+	// 		),
+	// 	},
+	// ];
 
 	const renderSummaryData = (summary: Summary[]) => (
 		<div style={{ display: 'flex' }}>
@@ -190,6 +243,19 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 			{renderSummaryData(summaryDataFirst)}
 			{renderSummaryData(summaryDataSecond)}
 			{renderSummaryData(summaryDataThird)}
+			{renderSummaryData(uploadedData)}
+			{/* <div className={styles.flexwrap}>
+				{stakeHolderTimeLine?.map((item: Summary, index) => (
+					<div key={item.title} className={styles.name}>
+						<div className={styles.title}>
+							{item.title}
+							<span className={styles.label}>{`(Level - ${index + 1})`}</span>
+						</div>
+						<div className={styles.value}>{item.value}</div>
+					</div>
+				))}
+			</div> */}
+			{/* <Stepper active="To be Approved by3" items={stakeHolderTimeLine} /> */}
 		</div>
 	);
 }

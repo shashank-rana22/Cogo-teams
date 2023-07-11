@@ -189,7 +189,7 @@ const getPayload = ({
 			createdBy           : profile?.user?.id,
 			performedByUserType : 'AGENT',
 		},
-		category       : expenseCategory,
+		categoryId     : expenseCategory,
 		approvedByUser : {
 			userEmail : stakeholderEmail,
 			userId    : stakeholderId,

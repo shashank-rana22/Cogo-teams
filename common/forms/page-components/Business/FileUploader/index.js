@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 
@@ -47,16 +47,18 @@ function FileUploader(props) {
 			setUrlStore(urls);
 		}
 		setLoading(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [!isEmpty(defaultValues)]);
+
+	const onChangeRef = useRef(onChange);
 
 	useEffect(() => {
 		if (multiple) {
-			onChange(urlStore);
+			onChangeRef.current(urlStore);
 		} else {
-			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
+			onChangeRef.current(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	}, [multiple, urlStore, onChange]);
+	}, [multiple, urlStore, onChangeRef]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({

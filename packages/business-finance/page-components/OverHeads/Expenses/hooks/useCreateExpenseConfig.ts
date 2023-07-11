@@ -7,7 +7,6 @@ import { formatDate } from '../../../commons/utils/formatDate';
 const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) => {
 	const {
 		expenseCategory,
-		expenseSubCategory,
 		stakeholderId,
 		branch,
 		vendorName,
@@ -47,8 +46,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		try {
 			await trigger({
 				data: {
-					category             : (expenseCategory || '').toUpperCase(),
-					subCategory          : (expenseSubCategory || '').toUpperCase(),
+					categoryId           : expenseCategory,
 					approvedBy           : stakeholderId,
 					branchId,
 					businessName         : vendorName,

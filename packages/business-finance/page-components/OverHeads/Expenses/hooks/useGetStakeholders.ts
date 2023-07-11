@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetStakeholders = (expenseCategory:string) => {
+const useGetStakeholders = ({ expenseCategory, entity, currency }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense/stakeholder',
@@ -16,8 +16,10 @@ const useGetStakeholders = (expenseCategory:string) => {
 			try {
 				await trigger({
 					params: {
-						category : (expenseCategory || '').toUpperCase() || undefined,
-						level    : 1,
+						entityCode : entity,
+						currency,
+						category   : expenseCategory || undefined,
+						level      : 1,
 					},
 				});
 			} catch (err) {
@@ -25,7 +27,7 @@ const useGetStakeholders = (expenseCategory:string) => {
 			}
 		};
 		api();
-	}, [trigger, expenseCategory]);
+	}, [trigger, entity, expenseCategory, currency]);
 
 	return {
 		stakeholdersData: data?.data,

@@ -21,3 +21,18 @@
 .title {
 	font-size: 14px;
 }
+
+.flexwrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.name {
+	min-width: 240px;
+	margin: 10px 20px 10px 0;
+}
+
+.label {
+	padding-left: 4px;
+	font-weight: 600;
+}

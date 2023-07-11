@@ -19,6 +19,7 @@ interface SummaryElemet {
 }
 interface Entity {
 	entity_code?: number | string,
+	id?: number,
 }
 
 interface Data {
@@ -55,7 +56,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { name: branchName } = branch || {};
 
 	const {
-		category, subCategory: expenseSubCategory, startDate, endDate,
+		categoryName, startDate, endDate,
 		repeatFrequency, businessName, agreementNumber, branchId,
 	} = rowData || {};
 
@@ -67,7 +68,11 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		invoiceCurrency: currency,
 	} = expenseData || {};
 
-	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders(category);
+	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
+		expenseCategory : categoryName,
+		entity          : entityObject?.id,
+		currency,
+	});
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -111,14 +116,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'Expense Category',
-			value : category ? (showOverflowingNumber(startCase(category), 18)) : '-',
-		},
-		{
-			title : 'Expense Sub-Category',
-			value : expenseSubCategory ? showOverflowingNumber(
-				startCase(expenseSubCategory.replaceAll('_', ' ')),
-				18,
-			) : '-',
+			value : categoryName,
 		},
 		{
 			title : 'Entity',

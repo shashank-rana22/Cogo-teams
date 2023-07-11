@@ -25,7 +25,7 @@ interface Props {
 
 function MailTemplate({ expenseData, setShowModal, getList, rowData }:Props) {
 	const { uploadedInvoice, vendorData, stakeholderEmail } = expenseData || {};
-	const { category } = rowData || {};
+	const { categoryName } = rowData || {};
 	const { business_name:vendorName } = vendorData || {};
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -52,7 +52,7 @@ function MailTemplate({ expenseData, setShowModal, getList, rowData }:Props) {
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
-				<Details text={`${vendorName || '-'} | ${startCase(category || '')} | Expense Approval Request`} />
+				<Details text={`${vendorName || '-'} | ${startCase(categoryName || '')} | Expense Approval Request`} />
 			</div>
 
 			<div className={styles.heading_body}>Email body</div>
@@ -61,7 +61,7 @@ function MailTemplate({ expenseData, setShowModal, getList, rowData }:Props) {
 					isBody
 					mailData={expenseData}
 					vendorName={vendorName}
-					category={category}
+					category={categoryName}
 				/>
 			</div>
 
