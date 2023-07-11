@@ -1,0 +1,18 @@
+.call_comming_body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 10px;
+}
+
+.call_comming_text {
+	padding: 5px;
+	text-transform: capitalize;
+}
+
+.call_comming_btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 5px;
+}

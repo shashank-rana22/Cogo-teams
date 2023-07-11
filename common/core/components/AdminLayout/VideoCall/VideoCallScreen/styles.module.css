@@ -1,0 +1,56 @@
+.screen_div {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0 0 0);
+	border-radius: 5px;
+}
+
+.my_screen {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 40%;
+	height: 40%;
+	overflow: hidden;
+	background-color: rgb(0 0 0);
+	border: 1px solid white;
+	border-radius: 5px;
+}
+
+.my_screen video {
+	width: 100%;
+	border-radius: 5px;
+}
+
+.peer_screen {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0 0 0);
+	border: 2px solid white;
+	border-radius: 5px;
+}
+
+.peer_screen video {
+	width: 100%;
+	border-radius: 5px;
+}
+
+.video_call_option {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 60%;
+	padding: 2px;
+}
+
+.video_call_option svg {
+	width: 17px;
+	height: 17px;
+	padding: 2px;
+	background-color: white;
+	border-radius: 2px;
+	fill: black;
+}

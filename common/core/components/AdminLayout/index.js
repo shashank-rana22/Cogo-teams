@@ -9,6 +9,7 @@ import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
 
 const WHITE_BACKGROUND_MAPPING = [
@@ -92,6 +93,7 @@ function AdminLayout({
 				}}
 				inCall={inCall}
 			/>
+			<VideoCall />
 			<AnnouncementModal data={announcements} />
 
 			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
