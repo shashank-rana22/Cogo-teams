@@ -10,10 +10,9 @@ import FillContainer from './FillContainer';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-const SNAPSHOT_TIMEOUT = 100;
 const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
 
-function ReminderModal({ firestore, agentId }) {
+function ReminderModal({ firestore = {}, agentId = '' }) {
 	const [reminderModal, setReminderModal] = useState(false);
 
 	const {
@@ -32,17 +31,8 @@ function ReminderModal({ firestore, agentId }) {
 	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	useEffect(() => {
-		let addSnapShotAfterfewSeconds = '';
-		clearTimeout(addSnapShotAfterfewSeconds);
-		addSnapShotAfterfewSeconds = setTimeout(
-			mountReminderSnapShot,
-			SNAPSHOT_TIMEOUT,
-		);
-
-		return () => {
-			cleanUpTimeout();
-			clearTimeout(addSnapShotAfterfewSeconds);
-		};
+		mountReminderSnapShot();
+		return cleanUpTimeout;
 	}, [cleanUpTimeout, mountReminderSnapShot]);
 
 	return (
