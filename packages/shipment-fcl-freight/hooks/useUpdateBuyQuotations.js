@@ -2,12 +2,12 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentBuyQuotations = ({
+const useUpdateBuyQuotations = ({
 	refetch = () => {},
 	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_buy_quotations',
+		url    : 'fcl_freight/update_buy_quotations',
 		method : 'POST',
 	});
 
@@ -31,4 +31,4 @@ const useUpdateShipmentBuyQuotations = ({
 	};
 };
 
-export default useUpdateShipmentBuyQuotations;
+export default useUpdateBuyQuotations;
