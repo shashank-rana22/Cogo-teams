@@ -13,7 +13,7 @@ const useUpdateRatesPreferences = ({
 	setShowDetailPage,
 	shipmentData,
 }) => {
-	const API_TO_CALL = '/bulk_update_shipment_booking_confirmation_preferences';
+	const API_TO_CALL = '/bulk_create_shipment_booking_confirmation_preferences';
 
 	const [{ loading }, trigger] = useRequest({
 		method: 'POST', url: API_TO_CALL,
