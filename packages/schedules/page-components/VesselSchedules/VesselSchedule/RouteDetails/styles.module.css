@@ -1,6 +1,7 @@
 .route_details {
   background-color: white;
   border-radius: 8px 8px 0 0;
+  width: 1000px;
 }
 
 .heading {
@@ -12,9 +13,19 @@
   font-weight: 500;
   color: #221f20;
   border-bottom: 1px solid #bdbdbd;
+  min-width: max-content;
 }
 
 .route_points {
   max-height: 650px;
   overflow: scroll;
+}
+
+.save {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.button_style {
+    margin: 2px;
 }

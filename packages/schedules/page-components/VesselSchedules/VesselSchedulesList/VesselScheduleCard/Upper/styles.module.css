@@ -39,3 +39,9 @@
 	font-weight: 400;
 	color: #4f4f4f;
 }
+
+.logo_url {
+	max-width: 50px;
+	max-height: 50px;
+	padding-right: 3px;
+}
