@@ -9,7 +9,7 @@ function useGetFileList() {
 		page      : 1,
 		per_page  : 10,
 		sort_by   : 'created_at',
-		sort_type : 'asc',
+		sort_type : 'desc',
 		user_id   : profile.user.id,
 	});
 
