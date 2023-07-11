@@ -65,15 +65,6 @@ const TAB_CONFIG = {
 			},
 		},
 		{
-			label   : 'Eway Bill Validity',
-			value   : 'eway_bill_validity',
-			stats   : 'eway_bill_validity_counts',
-			payload : {
-				shipment_type : 'ftl_freight',
-				e_way_bill    : true,
-			},
-		},
-		{
 			label   : 'Completed Shipment',
 			value   : 'completed_shipment',
 			stats   : 'completed_shipments_counts',
