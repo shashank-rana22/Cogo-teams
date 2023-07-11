@@ -89,9 +89,9 @@ function TrackingMap({
 		resetPointAndMarkers();
 		const res = points?.every((point, idx) => {
 			if (!point?.arrival_lat
-					|| !point?.arrival_long
-					|| !point?.departure_lat
-					|| !point?.departure_long
+				|| !point?.arrival_long
+				|| !point?.departure_lat
+				|| !point?.departure_long
 			) return false;
 
 			const isCurrentMilestonePastOrPresent = isPastOrPresentDay(
