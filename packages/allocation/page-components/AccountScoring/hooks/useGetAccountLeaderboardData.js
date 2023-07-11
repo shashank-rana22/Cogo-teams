@@ -50,7 +50,7 @@ const useGetAccountLeaderboardData = () => {
 		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
 			newControl = {
 				...newControl,
-				disable: true,
+				disabled: true,
 			};
 		}
 
@@ -101,7 +101,8 @@ const useGetAccountLeaderboardData = () => {
 		}));
 	}, [organization, userId, service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range]);
 
-	const currentPageListIds = useMemo(() => leaderboardList?.map(({ user_id }) => user_id), [leaderboardList]);
+	const currentPageListIds = useMemo(() => leaderboardList
+		?.map(({ service_user_id }) => service_user_id), [leaderboardList]);
 
 	const selectAllHelper = useCallback((listArgument = []) => {
 		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));

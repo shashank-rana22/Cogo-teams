@@ -44,6 +44,7 @@ function Leaderboard(props) {
 		bulkDeallocateFilter,
 		modalDetailsArray,
 		setModalDetailsArray,
+		leaderboardList,
 	});
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
@@ -103,7 +104,7 @@ function Leaderboard(props) {
 				<Table
 					className={styles.table}
 					columns={columns}
-					data={leaderboardList}
+					data={leaderboardList || []}
 					loading={leaderboardLoading}
 				/>
 			</div>

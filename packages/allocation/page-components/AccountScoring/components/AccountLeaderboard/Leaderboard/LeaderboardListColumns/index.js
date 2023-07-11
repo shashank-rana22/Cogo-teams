@@ -24,15 +24,16 @@ const getLeaderBoardColumns = ({
 	selectAllHelper = () => {},
 	bulkDeallocateFilter = () => {},
 	setModalDetailsArray,
+	leaderboardList,
 }) => {
-	const onChangeBodyCheckbox = ({ event, user_id, item }) => {
+	const onChangeBodyCheckbox = ({ event, service_user_id, item }) => {
 		setCheckedRowsId((previousIds) => {
 			let newCheckedIds = [];
 
 			if (event.target.checked) {
-				newCheckedIds = [...previousIds, user_id];
+				newCheckedIds = [...previousIds, service_user_id];
 			} else {
-				newCheckedIds = previousIds.filter((selectedId) => selectedId !== user_id);
+				newCheckedIds = previousIds.filter((selectedId) => selectedId !== service_user_id);
 			}
 
 			setModalDetailsArray((previousData) => {
@@ -41,7 +42,7 @@ const getLeaderBoardColumns = ({
 				if (event.target.checked) {
 					details = [...previousData, item];
 				} else {
-					details = previousData.filter((data) => newCheckedIds.includes(data.user_id));
+					details = previousData.filter((data) => newCheckedIds.includes(data.service_user_id));
 				}
 
 				return details;
@@ -63,6 +64,18 @@ const getLeaderBoardColumns = ({
 				newCheckedRowsIds = previousIds.filter((id) => !currentPageListIds.includes(id));
 			}
 
+			setModalDetailsArray((previousData) => {
+				let details = [];
+
+				if (event.target.checked) {
+					details = [...previousData, ...leaderboardList];
+				} else {
+					details = previousData.filter((data) => newCheckedRowsIds.includes(data.service_user_id));
+				}
+
+				return details;
+			});
+
 			setIsAllChecked(event.target.checked);
 
 			return [...new Set(newCheckedRowsIds)];
@@ -78,11 +91,11 @@ const getLeaderBoardColumns = ({
 				disabled={!bulkDeallocateFilter}
 			/>,
 			accessor: (item) => {
-				const { user_id } = item;
+				const { service_user_id } = item;
 				return (
 					<Checkbox
-						checked={checkedRowsId.includes(user_id)}
-						onChange={(event) => onChangeBodyCheckbox({ event, user_id, item })}
+						checked={checkedRowsId.includes(service_user_id)}
+						onChange={(event) => onChangeBodyCheckbox({ event, service_user_id, item })}
 						disabled={!bulkDeallocateFilter}
 					/>
 
