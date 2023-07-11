@@ -18,3 +18,15 @@
 	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-2);
 }
+
+.field_container {
+	width: 48%;
+
+	.ui_input_control {
+		width: 70%;
+	}
+
+	.ui_input_suffix {
+		padding-right: 8%;
+	}
+}
