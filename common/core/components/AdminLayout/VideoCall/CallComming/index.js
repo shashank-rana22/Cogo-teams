@@ -1,16 +1,14 @@
-import { Button } from '@cogoport/components';
+import { IcMCall, IcMVideoCall } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function CallComming({ setInACall = () => {}, setCallComming = () => {}, setStreams = () => {}, localStream = null }) {
+function CallComming({ setInACall = () => {}, setCallComming = () => {}, setStreams = () => {} }) {
 	const answerOfCall = () => {
 		setInACall(true);
 		setCallComming(false);
 		navigator.mediaDevices
 			.getUserMedia({ video: true, audio: true }).then((userStream) => {
-				const tempLocalStream = localStream;
 				setStreams((prev) => ({ ...prev, user_stream: userStream }));
-				tempLocalStream.current = userStream;
 			}).catch((error) => {
 				console.log('user stream is not working', error);
 			});
@@ -24,7 +22,6 @@ function CallComming({ setInACall = () => {}, setCallComming = () => {}, setStre
 		<div className={styles.call_comming_body}>
 			<div>
 				<img
-					style={{ width: '10px' }}
 					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp"
 					alt="avatar-placeholder"
 				/>
@@ -33,8 +30,12 @@ function CallComming({ setInACall = () => {}, setCallComming = () => {}, setStre
 				call Comming ..
 			</div>
 			<div className={styles.call_comming_btn}>
-				<Button size="md" themeType="accent" onClick={answerOfCall}>Answer</Button>
-				<Button onClick={rejectOfCall}>Reject</Button>
+				<div role="presentation" onClick={rejectOfCall} className={styles.reject}>
+					<IcMCall />
+				</div>
+				<div role="presentation" onClick={answerOfCall} className={styles.accept}>
+					<IcMVideoCall />
+				</div>
 			</div>
 		</div>
 	);

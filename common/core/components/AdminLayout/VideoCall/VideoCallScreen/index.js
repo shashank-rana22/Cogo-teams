@@ -4,11 +4,14 @@ import styles from './styles.module.css';
 import VideoCallOptions from './VideoCallOptions';
 
 function VideoCallScreen({
-	setInACall = () => {}, localStream = null, setStreams = () => {},
+	setInACall = () => {}, setStreams = () => {}, streams = null,
 }, ref) {
 	const tempRef = ref;
-	const stopStream = (stream) => {
-		const tracks = stream?.current?.getTracks();
+
+	const stopStream = (stream_type) => {
+		if (!streams[stream_type]) return;
+
+		const tracks = streams[stream_type].getTracks();
 		tracks.forEach((track) => {
 			track.stop();
 		});
@@ -16,17 +19,15 @@ function VideoCallScreen({
 
 	const CallEnd = () => {
 		setInACall(false);
-		stopStream(localStream);
+		stopStream('screen_stream');
+		stopStream('user_stream');
 	};
 
 	const shareScreen = () => {
 		navigator.mediaDevices
 			.getDisplayMedia({ cursor: true })
 			.then((screenStream) => {
-				stopStream(localStream);
-				const tempLocalStream = localStream;
-				setStreams((prev) => ({ ...prev, user_stream: screenStream }));
-				tempLocalStream.current = screenStream;
+				setStreams((prev) => ({ ...prev, screen_stream: screenStream }));
 			})
 			.catch((error) => {
 				console.log('Failed to share screen', error);

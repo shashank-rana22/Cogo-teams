@@ -19,12 +19,12 @@
 .call_comming {
 	position: fixed;
 	top: 1rem;
-	left: 45%;
+	left: 43%;
 	z-index: 1000;
 	z-index: 100;
-	min-width: 250px;
-	max-width: 300px;
+	width: 340px;
+	height: 78px;
+	background: radial-gradient(84.36% 69.15% at 50% 50%, #f2f3fa 27.08%, #ced1ed 100%);
 	background-color: white;
 	border-radius: 5px;
-	box-shadow: 2px 3px 2px rgb(0 0 0 / 100%);
 }

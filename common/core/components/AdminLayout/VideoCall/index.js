@@ -5,24 +5,24 @@ import styles from './styles.module.css';
 import VideoCallScreen from './VideoCallScreen';
 
 function VideoCall() {
-	const [show, setShow] = useState(false);
 	const [callComming, setCallComming] = useState(true);
 	const [inACall, setInACall] = useState(false);
 
 	const [streams, setStreams] = useState(
 		{
-			user_stream : null,
-			peer_stream : null,
+			user_stream   : null,
+			peer_stream   : null,
+			screen_stream : null,
 		},
 	);
 
 	const streamRef = useRef({ user: null, peer: null });
 	const componentsRef = useRef({ call_comming: null, call_screen: null });
 
-	const localStream = useRef(null);
-
 	useEffect(() => {
-		if (streams.user_stream) {
+		if (streams.screen_stream) {
+			streamRef.current.user.srcObject = streams.screen_stream;
+		} else if (streams.user_stream) {
 			streamRef.current.user.srcObject = streams.user_stream;
 		}
 		if (streams.peer_stream) {
@@ -54,7 +54,6 @@ function VideoCall() {
 						setCallComming={setCallComming}
 						setInACall={setInACall}
 						setStreams={setStreams}
-						localStream={localStream}
 					/>
 				</div>
 			) : null}
@@ -66,13 +65,12 @@ function VideoCall() {
 						draggable="true"
 						onDrag={(ev) => onDragHandler(ev, 'call_screen')}
 						ref={(e) => { componentsRef.call_screen = e; }}
-						onClick={() => { setShow(!show); }}
 						onDragOver={(e) => e.preventDefault()}
 					>
 						{streams && (
 							<VideoCallScreen
 								setInACall={setInACall}
-								localStream={localStream}
+								streams={streams}
 								setStreams={setStreams}
 								ref={streamRef}
 							/>
