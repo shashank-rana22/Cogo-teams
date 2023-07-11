@@ -36,6 +36,7 @@ import {
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
@@ -47,6 +48,9 @@ import {
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -101,6 +105,7 @@ const keyAsyncFieldsParamsMapping = {
 	allocation_rejection_type            : asyncAllocationRequestRejectionType,
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
 	faq_topics                           : asyncListFAQTopics,
@@ -112,6 +117,9 @@ const keyAsyncFieldsParamsMapping = {
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_chat_agents                     : asyncFieldsListAgents,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {

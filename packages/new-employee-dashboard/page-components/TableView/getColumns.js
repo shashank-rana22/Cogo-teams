@@ -91,7 +91,7 @@ const getColumns = ({
 		),
 	},
 	{
-		Header   : 'DOWNLOAD',
+		Header   : 'DOWNLOAD ZIP FILE',
 		accessor : (item) => (
 			<div>
 				<Button

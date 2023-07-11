@@ -34,7 +34,7 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 						joining_before : filters?.joining_date?.endDate || undefined,
 						designation    : filters?.roles || undefined,
 					},
-					page,
+					page: search ? INITIAL_PAGE : page,
 				},
 			});
 		} catch (error) {

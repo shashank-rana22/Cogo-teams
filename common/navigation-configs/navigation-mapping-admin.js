@@ -1430,6 +1430,15 @@ const navigationMappingAdmin = {
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
+				key           : 'coe-risk-management',
+				title         : 'Risk Management',
+				href          : '/v2/risk-management',
+				as            : '/v2/risk-management',
+				type          : 'link',
+				main_apis     : ['list_risk_prone_shipments'],
+				possible_apis : [...apis.risk_management],
+			},
+			{
 				key           : 'coe-so2_surface',
 				title         : 'SO2 Dashboard',
 				href          : '/v2/so2-surface',
@@ -2302,6 +2311,16 @@ const navigationMappingAdmin = {
 				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
 				type          : 'link',
 				possible_apis : [],
 				icon          : IcMDataPipeline,
