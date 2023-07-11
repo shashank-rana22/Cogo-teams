@@ -12,13 +12,13 @@ import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
 import AgentDetail from './AgentDetail';
 import styles from './styles.module.css';
 
-const LIMIT = 1;
+const FIREBASE_QUERY_LIMIT = 1;
 const ARRAY_LENGTH = 8;
 
 const getIsActive = async (firestore) => {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
 
-	const constantsQuery = await query(constantCollection, limit(LIMIT));
+	const constantsQuery = await query(constantCollection, limit(FIREBASE_QUERY_LIMIT));
 	const cogoOneConstants = await getDocs(constantsQuery);
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
 	const { is_locked_screen = false } = cogoOneConstantsDocs?.data() || {};
@@ -28,7 +28,7 @@ const getIsActive = async (firestore) => {
 const updateRoom = async ({ firestore, value }) => {
 	const constantRoom = collection(firestore, FIRESTORE_PATH.cogoone_constants);
 
-	const roomsQuery = await query(constantRoom, limit(LIMIT));
+	const roomsQuery = await query(constantRoom, limit(FIREBASE_QUERY_LIMIT));
 	const docs = await getDocs(roomsQuery);
 	const roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
@@ -67,7 +67,7 @@ function AgentModal({
 		page,
 	} = listAgentStatus;
 
-	const modifiedList = loading ? [...Array(ARRAY_LENGTH).fill({})] : list || [];
+	const modifiedList = loading ? [...Array(ARRAY_LENGTH).keys()] : list || [];
 
 	const onToggle = (e) => {
 		setIsLockedToggle(e?.target?.checked);
@@ -99,7 +99,7 @@ function AgentModal({
 						/>
 					</div>
 				</div>
-				{!isEmpty(modifiedList) ? modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
+				{!isEmpty(modifiedList) ? (modifiedList || []).map(({ name = '', status = '', agent_id = '' }) => (
 					<AgentDetail
 						key={agent_id}
 						createLoading={createLoading}
