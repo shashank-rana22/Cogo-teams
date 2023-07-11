@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    margin-bottom: 16px;
+    background-color: white;
+    padding: 16px;
+    gap: 6px;
+}
+
+.upper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+.upper_left,
+.upper_right {
+	display: flex;
+	gap: 28px;
+	align-items: center;
+}
+
+.shipping_line {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.updated_status {
+	padding: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+	background-color: #f2f3fa;
+	border-radius: 6px;
+}
+
+.lower_left {
+	display: flex;
+	gap: 35px;
+	align-items: center;
+	padding: 17px 12px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	background-color: #fdfbf6;
+	border-radius: 8px;
+}
+
+.feature_name {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+	opacity: 0.6;
+}
+
+.feature_value {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
