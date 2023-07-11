@@ -17,26 +17,25 @@ function useCreateRaiseQuery({
 		method : 'POST',
 	}, { manual: true });
 
-	const handleFormSubmit = useCallback((values) => {
+	const handleFormSubmit = useCallback(async (values) => {
 		const { query_type, remarks } = values || {};
-		(async () => {
-			const payload = {
-				query_type,
-				remarks,
-				performed_by_id : userId,
-				service         : 'shipment',
-				service_id      : shipmentId,
-			};
-			try {
-				await trigger({
-					data: payload,
-				});
+		const payload = {
+			query_type,
+			remarks,
+			performed_by_id : userId,
+			service         : 'shipment',
+			service_id      : shipmentId,
+		};
 
-				handleRaisedQuery();
-			} catch (e) {
-				toastApiError(e);
-			}
-		})();
+		try {
+			await trigger({
+				data: payload,
+			});
+
+			handleRaisedQuery();
+		} catch (e) {
+			toastApiError(e);
+		}
 	}, [userId, shipmentId, trigger, handleRaisedQuery]);
 
 	return {

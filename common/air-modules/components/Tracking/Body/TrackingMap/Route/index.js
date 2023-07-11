@@ -1,14 +1,14 @@
 import { Polyline } from '@cogoport/maps';
+import { isEmpty } from '@cogoport/utils';
 
-function Route({ positions, map, pathOptions }) {
+function Route({ positions = [], map = {}, pathOptions = {} }) {
 	return (
 		<Polyline
-			key={JSON.stringify(positions)}
 			positions={positions}
 			pathOptions={pathOptions}
 			eventHandlers={{
 				add: (e) => {
-					if (map) map?.fitBounds(e.target?.getBounds());
+					if (!isEmpty(map)) map?.fitBounds(e.target?.getBounds());
 				},
 			}}
 		/>

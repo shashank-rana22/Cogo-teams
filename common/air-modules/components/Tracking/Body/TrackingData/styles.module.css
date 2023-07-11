@@ -77,7 +77,6 @@
 	font-size: var(--font-size-sm);
 	line-height: 15px;
 	color: var(--color-secondary-greyscale-3);
-	letter-spacing: 0.02em;
 }
 
 .info {

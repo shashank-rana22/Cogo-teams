@@ -8,10 +8,8 @@ const CogoMaps = dynamic(() => import('./map'), { ssr: false });
 
 const STEPS = 0.001;
 const LOOP_CONDITION_CHECK = 1;
-const SOURCE_INDEX = 0;
-const DESTINATION_INDEX = 1;
 const LAT_X_CALCULATING_FACTOR = 20;
-const LNG_X_CALCULATING_FACTOR = 2;
+const LNG_Y_CALCULATING_FACTOR = 2;
 const BEZIER_POINTS_CALCULATING_FACTOR = 1;
 
 function TrackingMap({
@@ -36,27 +34,23 @@ function TrackingMap({
 		const BEZIER_POINTS = [];
 		while (t <= LOOP_CONDITION_CHECK) {
 			try {
-				let x1;
-				let x2;
-				let x3;
-
-				x1 = parseFloat(inputPoints[SOURCE_INDEX].lat);
-				x3 = parseFloat(inputPoints[DESTINATION_INDEX].lat);
-				x2 = Math.max(x1, x3) + LAT_X_CALCULATING_FACTOR;
+				const x_1 = parseFloat(inputPoints.source.lat);
+				const x_3 = parseFloat(inputPoints.destination.lat);
+				const x_2 = Math.max(x_1, x_3) + LAT_X_CALCULATING_FACTOR;
 				const lat_x =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x1 + t * x2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x2 + t * x3);
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x_1 + t * x_2)
+				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x_2 + t * x_3);
 
-				x1 = parseFloat(inputPoints[SOURCE_INDEX].lng);
-				x3 = parseFloat(inputPoints[DESTINATION_INDEX].lng);
-				x2 = (x1 + x3) / LNG_X_CALCULATING_FACTOR;
-				const lng_x =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x1 + t * x2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x2 + t * x3);
+				const y_1 = parseFloat(inputPoints.source.lng);
+				const y_3 = parseFloat(inputPoints.destination.lng);
+				const y_2 = (y_1 + y_3) / LNG_Y_CALCULATING_FACTOR;
+				const lng_y =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * y_1 + t * y_2)
+				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * y_2 + t * y_3);
 
 				BEZIER_POINTS.push({
 					lat : lat_x,
-					lng : lng_x,
+					lng : lng_y,
 				});
 			} catch (err) {
 				t = BEZIER_POINTS_CALCULATING_FACTOR;
@@ -88,7 +82,7 @@ function TrackingMap({
 	useEffect(() => {
 		if (points?.length) {
 			resetPointAndMarkers();
-			const res = points?.map((p, idx) => {
+			const res = points?.every((p, idx) => {
 				if (
 					![
 						p?.arrival_lat,
@@ -110,15 +104,15 @@ function TrackingMap({
 						lat : p?.departure_lat,
 						lng : p?.departure_long,
 					};
-					const dest = {
+					const destination = {
 						lat : p?.arrival_lat,
 						lng : p?.arrival_long,
 					};
 					if (isCurrentMilestonePastOrPresent) {
-						setCurrentMilestone(dest);
+						setCurrentMilestone(destination);
 					}
 					createBezier(
-						[source, dest],
+						{ source, destination },
 						STEPS,
 						isCurrentMilestonePastOrPresent,
 						idx,
@@ -128,7 +122,7 @@ function TrackingMap({
 
 				return false;
 			});
-			if (!res.includes(false)) {
+			if (res) {
 				setLoading(false);
 			}
 		} else {

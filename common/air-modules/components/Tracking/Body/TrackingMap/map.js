@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CogoMaps, L } from '@cogoport/maps';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import Pointer from './Pointer';
@@ -24,12 +25,12 @@ const MAP_TIMEOUT_DELAY = 200;
 const CURVE_POINT_LAST_INDEX_CALCULATOR = -1;
 
 function MapComp({
-	completedPoints,
-	remainingPoints,
-	curvePoints,
-	currentMilestone,
+	completedPoints = [],
+	remainingPoints = [],
+	curvePoints = [],
+	currentMilestone = {},
 }) {
-	const [map, setMap] = useState();
+	const [map, setMap] = useState({});
 	const corner1 = L.latLng(CORNER_1_LAT, CORNER_1_LNG);
 	const corner2 = L.latLng(CORNER_2_LAT, CORNER_2_LNG);
 	const bounds = L.latLngBounds(corner1, corner2);
@@ -37,7 +38,7 @@ function MapComp({
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			if (map) map.invalidateSize(true);
+			if (!isEmpty(map)) map.invalidateSize(true);
 		}, MAP_TIMEOUT_DELAY);
 		return () => {
 			clearTimeout(timeout);
@@ -45,7 +46,7 @@ function MapComp({
 	}, [map]);
 
 	useEffect(() => {
-		if (map) {
+		if (!isEmpty(map)) {
 			map.setMaxBounds(bounds);
 			map?.attributionControl?.setPrefix(
 				'<a href="https://www.cogoport.com/en/terms-and-conditions/" target="_blank">&copy; Cogoport T&C</a>|'
@@ -57,7 +58,6 @@ function MapComp({
 
 	return (
 		<CogoMaps
-			key={JSON.stringify(curvePoints)}
 			style={{ height: '700px', width: '100%' }}
 			baseLayer={LAYER}
 			zoom={2.9}

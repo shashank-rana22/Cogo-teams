@@ -12,17 +12,15 @@ const useGetSaasAirSubscription = ({
 	}, { manual: true });
 
 	const getSaasAirSubscription = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						shipment_id: shipmentId,
-					},
-				});
-			} catch (error) {
-				toastApiError(error);
-			}
-		})();
+		try {
+			trigger({
+				params: {
+					shipment_id: shipmentId,
+				},
+			});
+		} catch (error) {
+			toastApiError(error);
+		}
 	}, [shipmentId, trigger]);
 
 	useEffect(() => {
