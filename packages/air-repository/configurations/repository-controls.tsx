@@ -1,3 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+import validateMobileNumber from '../utils/validateMobileNumber';
+
 const repositoryControls = () => ({
 	basic: [
 		{
@@ -12,8 +16,9 @@ const repositoryControls = () => ({
 				sort_by    : 'short_name',
 				sort_type  : 'asc',
 			},
-			span  : 6,
-			rules : {
+			initialCall : true,
+			span        : 6,
+			rules       : {
 				required: true,
 			},
 		},
@@ -30,6 +35,7 @@ const repositoryControls = () => ({
 				sort_type  : 'asc',
 				includes   : { default_params_required: true },
 			},
+			initialCall : true,
 			label       : 'Select Airport',
 			placeholder : 'Select Airport...',
 			span        : 6,
@@ -75,7 +81,7 @@ const repositoryControls = () => ({
 		{
 			name        : 'inventory_stock_availability',
 			type        : 'select',
-			placeholder : 'Select...',
+			placeholder : 'Select Before/After Booking',
 			options     : [
 				{
 					label : 'Before Booking',
@@ -119,17 +125,22 @@ const repositoryControls = () => ({
 					placeholder : 'Enter email',
 					span        : 6,
 					rules       : {
-						required: true,
+						required : true,
+						pattern  : {
+							value   : GLOBAL_CONSTANTS.regex_patterns.email,
+							message : 'Email is invalid',
+						},
 					},
 				},
 				{
 					name        : 'mobile',
 					type        : 'mobile',
+					inputType   : 'number',
 					label       : 'Contact Number',
 					placeholder : 'Enter contact number',
-					span        : 6,
+					span        : 8,
 					rules       : {
-						required: true,
+						validate: validateMobileNumber,
 					},
 				},
 			],
@@ -164,7 +175,11 @@ const repositoryControls = () => ({
 			placeholder : 'Enter URL',
 			span        : 6,
 			rules       : {
-				required: true,
+				required : true,
+				pattern  : {
+					value   : GLOBAL_CONSTANTS.regex_patterns.url_match,
+					message : 'URL is invalid',
+				},
 			},
 		},
 		{

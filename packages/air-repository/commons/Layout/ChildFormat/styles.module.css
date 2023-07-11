@@ -39,7 +39,7 @@
 
 			.ui_input_control::placeholder {
 				font-size: var(--font-size-md);
-				color: #333;
+				color: var(--color-secondary-greyscale-3);
 			}
 		}
 
@@ -55,7 +55,7 @@
 
 					.ui_select_input_placeholder {
 						font-size: var(--font-size-md);
-						color: #333;
+						color: var(--color-secondary-greyscale-3);
 					}
 				}
 			}
