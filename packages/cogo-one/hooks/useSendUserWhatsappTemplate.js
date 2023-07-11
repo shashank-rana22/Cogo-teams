@@ -4,6 +4,18 @@ import { useRequest } from '@cogoport/request';
 
 const SUPPLY_SENDER_NUMBER = '918069195980';
 
+const getPayload = ({
+	whatsapp_number,
+	country_code,
+	template_name,
+	viewType,
+}) => ({
+	whatsapp_number,
+	country_code,
+	template_name,
+	sender: viewType?.includes('supply') ? SUPPLY_SENDER_NUMBER : undefined,
+});
+
 function useSendUserWhatsappTemplate({
 	callbackfunc = () => {},
 	viewType = '',
@@ -25,13 +37,14 @@ function useSendUserWhatsappTemplate({
 	) => {
 		try {
 			await trigger({
-				data: {
+				data: getPayload({
 					whatsapp_number,
 					country_code,
 					template_name,
-					sender: viewType?.includes('supply') ? SUPPLY_SENDER_NUMBER : undefined,
-				},
+					viewType,
+				}),
 			});
+
 			callbackfunc();
 			Toast.success('Message Sent Sucessfully');
 		} catch (error) {
