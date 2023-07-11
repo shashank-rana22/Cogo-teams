@@ -11,9 +11,9 @@ const useGetSaasAirSubscription = ({
 		method : 'GET',
 	}, { manual: true });
 
-	const getSaasAirSubscription = useCallback(() => {
+	const getSaasAirSubscription = useCallback(async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					shipment_id: shipmentId,
 				},
