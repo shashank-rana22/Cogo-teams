@@ -3,12 +3,15 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
@@ -33,7 +36,7 @@ function EnrichmentRequest({
 		params      : {
 			filters: {
 				status   : 'active',
-				role_ids : GLOBAL_CONSTANTS.uuid.third_party_enrichment_agencies_role_ids,
+				role_ids : geo.uuid.third_party_enrichment_agencies_role_ids,
 			},
 		},
 	});

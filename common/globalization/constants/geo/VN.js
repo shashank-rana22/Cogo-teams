@@ -5,7 +5,7 @@ export default {
 		name : 'Vietnam',
 		code : 'VN',
 		flag_icon_url:
-			'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Vietnam_24.png',
+      'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Vietnam_24.png',
 		currency: {
 			code   : 'VND',
 			symbol : '₫',
@@ -56,6 +56,10 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
+		third_party_enrichment_agencies_role_ids: [
+			'5ba22edd-9048-4449-8a24-311797d609bd',
+			'79bdc116-2d11-4a8b-9600-64a5c48a7e43',
+		],
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
 		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
@@ -66,7 +70,7 @@ export default {
 		],
 		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		cogo_demo_account_shipper_user_branch:
-			'2c72817c-c663-48ea-b8ef-cd92397842a1',
+      '2c72817c-c663-48ea-b8ef-cd92397842a1',
 		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
 		supply_role_ids    : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
@@ -140,10 +144,10 @@ export default {
 		],
 		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
 		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
-		prod_kam_cp         				: 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
-		prod_es_sales        			: 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
-		entity_manager_id     		: '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
-		service_ops1_role_ids  	: [
+		prod_kam_cp             : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
+		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
+		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		service_ops1_role_ids   : [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
@@ -381,19 +385,23 @@ export default {
 		],
 		entities: [
 			{
-				label: '501 Cogoport Vietnam', value: '501',
+				label : '501 Cogoport Vietnam',
+				value : '501',
 			},
 		],
 		migration_status : [],
 		timezone         : [
 			{
-				label: 'IST', value: 'IST',
+				label : 'IST',
+				value : 'IST',
 			},
 			{
-				label: 'GMT', value: 'GMT',
+				label : 'GMT',
+				value : 'GMT',
 			},
 			{
-				label: 'VNM', value: 'VNM',
+				label : 'VNM',
+				value : 'VNM',
 			},
 		],
 		services: [

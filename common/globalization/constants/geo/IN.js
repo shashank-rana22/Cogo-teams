@@ -57,10 +57,11 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
-		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
-		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
-		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
-		sales_role_ids            : [
+		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		cogoxpress_id                            : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id                   : '30798ff1-992c-48f0-aabd-eb92e98df747',
+		customer_service_role_ids                : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
+		sales_role_ids                           : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
 			'95113dbb-43bf-4434-958c-3fe8063657e7',
 			'0461c31b-4761-40b6-ac2a-59a4e9d4e23f',
