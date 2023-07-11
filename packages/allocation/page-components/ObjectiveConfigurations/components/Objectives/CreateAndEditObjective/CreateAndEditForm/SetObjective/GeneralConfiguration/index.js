@@ -3,25 +3,18 @@ import { RadioGroupController, useForm } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import controls from '../../../../../../configurations/general-configuration-form-controls';
+import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
+import LIFECYCLE_STAGE_OPTIONS from '../../../../../../configurations/lifecycle-stage-options';
 
 import styles from './styles.module.css';
 
-const LIFECYCLE_STAGE_OPTIONS = [
-	{
-		label : 'Create Objective for Transacting Users Only',
-		name  : 'transacting',
-		value : 'transacting',
-	},
-	{
-		label : 'Create Objective for Organic Leads Only',
-		name  : 'organic_leads',
-		value : 'organic_leads',
-	},
-];
-
 function GeneralConfiguration() {
-	const { control } = useForm();
+	const { control, watch } = useForm();
+
+	const watchPartner = watch('partner');
+	const watchChannel = watch('channel');
+
+	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel });
 
 	return (
 		<div className={styles.container}>

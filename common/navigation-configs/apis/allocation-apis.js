@@ -458,7 +458,13 @@ const allocation = {
 		},
 
 	],
-	objective_configurations: [],
+	objective_configurations: [
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+	],
 };
 
 export default allocation;
