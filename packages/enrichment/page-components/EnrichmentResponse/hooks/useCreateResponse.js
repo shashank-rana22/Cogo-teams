@@ -1,8 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 import getUserControls from '../../../configurations/get-controls';
 
@@ -18,11 +20,31 @@ function useCreateResponse(props) {
 
 	const { query = {} } = router;
 
-	const controls = getUserControls({ activeTab });
-
 	const formProps = useForm();
 
-	const { control, handleSubmit, formState: { errors } } = formProps;
+	const { control, handleSubmit, formState: { errors }, watch, setValue, resetField } = formProps;
+
+	const watchForm = watch();
+
+	const { country:country_id = '', city:city_id = '' } = watchForm;
+
+	const taxLabel = getCountrySpecificData({
+		country_id,
+		accessorType  : 'registration_number',
+		accessor      : 'label',
+		isDefaultData : false,
+	}) || 'GST';
+
+	const taxPattern = getCountrySpecificData({
+		country_id,
+		accessorType  : 'registration_number',
+		accessor      : 'pattern',
+		isDefaultData : false,
+	});
+
+	const controls = getUserControls({
+		activeTab, country_id, city_id, taxLabel, taxPattern,
+	});
 
 	const [{ loading }, trigger] = useAllocationRequest({
 
@@ -65,6 +87,14 @@ function useCreateResponse(props) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
+
+	const resetMultipleFields = useCallback((fields = []) => {
+		fields?.map((field) => resetField(field));
+	}, [resetField]);
+
+	useEffect(() => {
+		resetMultipleFields(['state', 'pincode', 'city']);
+	}, [country_id, setValue, resetMultipleFields]);
 
 	return {
 		controls,

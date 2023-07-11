@@ -1,4 +1,10 @@
-const getUserControls = ({ activeTab = '' }) => {
+const getUserControls = ({
+	activeTab = '',
+	country_id = '',
+	taxLabel = '',
+	taxPattern = '',
+	city_id = '',
+}) => {
 	const controls = {
 		user: [
 			{
@@ -99,53 +105,76 @@ const getUserControls = ({ activeTab = '' }) => {
 				},
 			},
 			{
-				name        : 'city',
-				label       : 'City',
-				placeholder : 'Type here...',
-				type        : 'text',
+				name     : 'country',
+				label    : 'Country',
+				type     : 'asyncSelect',
+				asyncKey : 'list_locations',
+				params   : {
+					filters: { type: ['country'] },
+				},
+				placeholder : 'Select Country',
+				rules       : { required: { value: true, message: 'Country is required' } },
+			},
+			{
+				name        : 'state',
+				label       : 'State',
+				placeholder : 'Select State...',
+				type        : 'asyncSelect',
+				params      : { filters: { type: ['region'], country_id } },
+				asyncKey    : 'list_locations',
+				isClearable : true,
+				rules       : {
+					required: { value: true, message: 'State is required' },
+				},
+			},
+
+			{
+				name     : 'city',
+				label    : 'City',
+				type     : 'asyncSelect',
+				asyncKey : 'list_locations',
+				params   : {
+					filters: {
+						type: ['city'], country_id,
+					},
+				},
+				multiple    : false,
 				isClearable : true,
 				rules       : {
 					required: 'City is required',
 				},
 			},
+
 			{
-				name        : 'state',
-				label       : 'State',
-				placeholder : 'Type here...',
-				type        : 'text',
-				isClearable : true,
-				rules       : {
-					required: 'State is required',
-				},
-			},
-			{
-				name        : 'country',
-				label       : 'Country',
-				placeholder : 'Type here...',
-				type        : 'text',
-				isClearable : true,
-				rules       : {
-					required: 'Country is required',
-				},
-			},
-			{
+				type        : 'asyncSelect',
 				name        : 'pincode',
 				label       : 'Pincode',
-				placeholder : 'Type here...',
-				type        : 'text',
-				isClearable : true,
+				labelKey    : 'postal_code',
+				valueKey    : 'postal_code',
+				asyncKey    : 'list_locations',
+				initialCall : false,
+				placeholder : 'Select Pincode',
+				params      : { filters: { type: ['pincode'], city_id, country_id } },
 				rules       : {
-					required: 'PinCode is required',
+					required: { value: true, message: 'Pincode is required' },
 				},
+				show: true,
 			},
+
 			{
 				name        : 'tax_number',
-				label       : 'GSTIN',
+				label       : taxLabel,
 				type        : 'text',
-				placeholder : 'Type here...',
+				placeholder : `Enter ${taxLabel}`,
 				isClearable : true,
-				rules       : { required: 'GST Number is required' },
+				rules       : {
+					pattern: {
+						value   : taxPattern,
+						message : `Please enter a valid ${taxLabel}`,
+					},
+				},
 			},
+
 		],
 	};
 
