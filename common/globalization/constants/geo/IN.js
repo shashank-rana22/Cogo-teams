@@ -592,6 +592,7 @@ export default {
 				has_voice_call_access     : true,
 				default_country_code      : 'IN',
 				template_default_language : 'english',
+				supply_sender_number      : '918069195980',
 			},
 		},
 	},

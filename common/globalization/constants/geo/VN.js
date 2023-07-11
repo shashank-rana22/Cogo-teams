@@ -461,6 +461,7 @@ export default {
 				has_voice_call_access     : false,
 				default_country_code      : 'IN',
 				template_default_language : 'vietnamese',
+				supply_sender_number      : '918069195980',
 			},
 		},
 	},
