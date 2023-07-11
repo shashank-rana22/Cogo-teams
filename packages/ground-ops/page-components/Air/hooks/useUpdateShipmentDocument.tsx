@@ -5,7 +5,7 @@ import { useRequestAir } from '@cogoport/request';
 const useUpdateShipmentDocument = () => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/documents/update-shipment-document',
+			url     : '/air-coe/documents',
 			method  : 'PUT',
 			authKey : 'put_air_coe_documents',
 		},

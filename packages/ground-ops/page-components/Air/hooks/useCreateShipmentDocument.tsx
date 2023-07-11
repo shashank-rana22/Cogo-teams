@@ -4,7 +4,7 @@ import { useRequestAir } from '@cogoport/request';
 const useCreateShipmentDocument = () => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/documents/create-shipment-document',
+			url     : '/air-coe/documents',
 			method  : 'POST',
 			authKey : 'post_air_coe_documents',
 		},
