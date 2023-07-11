@@ -86,9 +86,8 @@
 	margin-right: 8px;
 }
 
-.filter_div {
+.active_filter_icon {
 	position: absolute;
 	top: 4px;
 	right: 23px;
-	cursor: pointer;
 }

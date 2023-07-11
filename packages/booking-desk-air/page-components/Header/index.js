@@ -110,7 +110,7 @@ function Header({
 							>
 								<IcMFilter width={20} height={20} />
 								{!isEmpty(filters) ? (
-									<IcCRedCircle width={8} height={8} className={styles.filter_div} />
+									<IcCRedCircle width={8} height={8} className={styles.active_filter_icon} />
 								) : null}
 							</Button>
 						</Popover>
