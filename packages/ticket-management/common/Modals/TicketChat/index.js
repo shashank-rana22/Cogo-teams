@@ -40,7 +40,7 @@ function TicketChat({
 	const { ticketId = '' } = modalData || {};
 
 	const messageRef = useRef(null);
-	const [isInternal, setIsInternal] = useState(false);
+	const [isInternal, setIsInternal] = useState(true);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
