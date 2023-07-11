@@ -48,6 +48,9 @@ import {
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -114,6 +117,9 @@ const keyAsyncFieldsParamsMapping = {
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_chat_agents                     : asyncFieldsListAgents,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {
