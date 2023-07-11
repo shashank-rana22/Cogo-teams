@@ -84,11 +84,7 @@ function OperatorsModal({
 			onClose={() => { setShow(false); setEdit(false); setItem({}); }}
 			className={styles.modal_container}
 		>
-			<div className={styles.modal_header}>
-				{edit ? 'Edit' : 'Create'}
-				{' '}
-				Operator
-			</div>
+			<Modal.Header title={`${edit ? 'Edit' : 'Create'} Operator`} />
 			<Layout
 				fields={fields}
 				control={control}

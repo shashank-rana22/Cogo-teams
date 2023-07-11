@@ -3,9 +3,8 @@
 	flex-direction: column;
 	padding: 8px 20px;
 	margin: 16px 0;
-	word-wrap: wrap;
 	background: var(--color-secondary-5);
-	filter: drop-shadow(0 0 5.9029px #00000026);
+	filter: drop-shadow(0 0 5px #00000026);
 	border-radius: 4px;
 	transition: 0.3s;
 }

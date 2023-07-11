@@ -1,17 +1,19 @@
 .modal_container {
 	padding: 20px;
-}
 
-.modal_header {
-	font-weight: 500;
-}
+	:global {
+		.ui_modal_header_container {
+			padding: 0;
 
-.modal_header::after {
-	display: block;
-	width: 10%;
-	height: 2px;
-	content: "";
-	background: #f68b21;
+			.ui_modal_header_title::after {
+				display: block;
+				width: 10%;
+				height: 2px;
+				content: "";
+				background: #f68b21;
+			}
+		}
+	}
 }
 
 .modal_footer {
