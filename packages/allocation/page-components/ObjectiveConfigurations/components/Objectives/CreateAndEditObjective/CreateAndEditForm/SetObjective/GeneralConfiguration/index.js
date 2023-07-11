@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 
@@ -39,6 +39,7 @@ function GeneralConfiguration() {
 						return (
 							<div key={name} className={styles.element_container}>
 								<p>{label}</p>
+
 								<Element
 									size="md"
 									key={name}
@@ -50,7 +51,7 @@ function GeneralConfiguration() {
 						);
 					})}
 
-					<div className={`${styles.element_container} ${styles.button_container}`}>
+					<div className={cl`${styles.element_container} ${styles.button_container}`}>
 						<Button
 							className={styles.button}
 							size="lg"

@@ -1,3 +1,6 @@
+const MIN = 0;
+const MAX = 90;
+
 const controls = (item) => {
 	const { id = '', lower_limit = 0, upper_limit = 0 } = item || {};
 
@@ -10,9 +13,11 @@ const controls = (item) => {
 			value       : `${lower_limit}`,
 			rules       : {
 				required : 'Required',
-				validate : (value) => ((value < 0 || value > 10) ? 'invalid' : true),
+				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 90,
 		},
 		{
 			name        : `${id}_range_to`,
@@ -22,9 +27,11 @@ const controls = (item) => {
 			value       : `${upper_limit}`,
 			rules       : {
 				required : 'Required',
-				validate : (value) => ((value < 0 || value > 10) ? 'invalid' : true),
+				validate : (value) => ((value < MIN || value > MAX) ? 'invalid' : true),
 			},
-			isClearable: true,
+			isClearable : true,
+			min         : 0,
+			max         : 90,
 		},
 	]);
 };

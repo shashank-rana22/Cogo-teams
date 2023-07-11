@@ -4,10 +4,10 @@ const controls = [
 	{
 		name  : 'type',
 		label : (
-			<div>
+			<>
 				Select Objective Type
 				<sup style={{ color: 'red' }}>*</sup>
-			</div>
+			</>
 		),
 		type        : 'select',
 		placeholder : 'Objective Type',
@@ -28,10 +28,10 @@ const controls = [
 	{
 		name  : 'name',
 		label : (
-			<div>
+			<>
 				Objective Name
 				<sup style={{ color: 'red' }}>*</sup>
-			</div>
+			</>
 		),
 		type        : 'text',
 		placeholder : 'Objective Name',
@@ -40,16 +40,26 @@ const controls = [
 		},
 	},
 	{
-		name        : 'partner_id',
-		label       : 'Select Cogo Entity',
+		name  : 'partner',
+		label : (
+			<>
+				Select Cogo Entity
+				<sup style={{ color: 'red' }}>*</sup>
+			</>
+		),
 		placeholder : 'Cogo Entity',
 		type        : 'select',
 		options     : getEntityOptions(),
 		isClearable : true,
 	},
 	{
-		name        : 'channel',
-		label       : 'Select Channel',
+		name  : 'channel',
+		label : (
+			<>
+				Select Channel
+				<sup style={{ color: 'red' }}>*</sup>
+			</>
+		),
 		type        : 'multiSelect',
 		placeholder : 'Channel',
 		options     : [
@@ -69,8 +79,13 @@ const controls = [
 		isClearable: true,
 	},
 	{
-		name        : 'role_ids',
-		label       : 'Select Cogoport Agent Roles',
+		name  : 'role',
+		label : (
+			<>
+				Select Cogoport Agent Roles
+				<sup style={{ color: 'red' }}>*</sup>
+			</>
+		),
 		placeholder : 'Agent Roles',
 		type        : 'asyncSelect',
 		multiple    : true,

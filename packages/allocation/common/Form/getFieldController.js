@@ -12,11 +12,12 @@ import {
 	UploadController,
 	TextAreaController,
 	CheckboxController,
+	InputNumberController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
 	text               : InputController,
-	number             : InputController,
+	number             : InputNumberController,
 	select             : SelectController,
 	multiSelect        : MultiselectController,
 	radioGroup         : RadioGroupController,
