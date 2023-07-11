@@ -1,6 +1,5 @@
 import airRepository from './config/air-repository';
 import allocations from './config/allocations';
-import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
@@ -21,6 +20,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
@@ -67,6 +67,7 @@ const routeConfig = {
 	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
+	...ihls,
 	...myIncident,
 	...myProfile,
 	...enrichment,
@@ -94,7 +95,6 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...referral,
-	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
 	...documentDesk,
