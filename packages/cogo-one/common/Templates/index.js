@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 
 function Templates({
-	openCreateReply,
+	openCreateReply = false,
 	setOpenCreateReply = () => {},
 	data = {},
 	type = '',

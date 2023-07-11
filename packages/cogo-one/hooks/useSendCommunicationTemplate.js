@@ -55,6 +55,10 @@ function useSendCommunicationTemplate({
 	isOtherChannels = false,
 	callbackfunc = () => { },
 }) {
+	const {
+		user: { id },
+	} = useSelector(({ profile }) => profile);
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_communication',
@@ -62,10 +66,6 @@ function useSendCommunicationTemplate({
 		},
 		{ manual: true },
 	);
-
-	const {
-		user: { id },
-	} = useSelector(({ profile }) => profile);
 
 	const sendCommunicationTemplate = async (
 		{

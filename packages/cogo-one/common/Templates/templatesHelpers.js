@@ -1,4 +1,5 @@
 import { Placeholder, Pill, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { STATUS_MAPPING } from '../../constants';
@@ -6,8 +7,8 @@ import { STATUS_MAPPING } from '../../constants';
 import styles from './styles.module.css';
 
 const PREVIEW_REPLACE_MAPPING = [
-	{ find: /<p>\s+(<[/]p>)/g, replace: '<br>' },
-	{ find: /<p>(<[/]p>)/g, replace: '<br>' },
+	{ find: GLOBAL_CONSTANTS.regex_patterns.occurrences_of_paragraphs_tag, replace: '<br>' },
+	{ find: GLOBAL_CONSTANTS.regex_patterns.enclosed_within_forward_slashes, replace: '<br>' },
 	{ find: '<p', replace: '<div' },
 	{ find: '<p>', replace: '<div>' },
 	{ find: '</p>', replace: '&nbsp;</div>' },
@@ -16,7 +17,8 @@ const PREVIEW_REPLACE_MAPPING = [
 const LOADER_COUNT = 6;
 
 export function Preview({
-	previewData, variables,
+	previewData = '',
+	variables = [],
 	setCustomizableData = () => {},
 }) {
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
@@ -60,7 +62,7 @@ export function Loader() {
 	));
 }
 
-export function ListItem({ item, activeCard, handleTemplateSelect, openCreateReply }) {
+export function ListItem({ item = {}, activeCard = {}, handleTemplateSelect = () => {}, openCreateReply = false }) {
 	const {
 		content: { name: messageTitle = '' } = {},
 		description: messageContent = '',

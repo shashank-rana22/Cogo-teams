@@ -335,6 +335,8 @@ const GLOBAL_CONSTANTS = {
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
+		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

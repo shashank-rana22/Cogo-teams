@@ -9,13 +9,13 @@ import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotiona
 import styles from './styles.module.css';
 
 function SendActions({
-	hasPermissionToEdit,
+	hasPermissionToEdit = false,
 	openInstantMessages = () => {},
 	sendChatMessage = () => {},
-	messageLoading,
+	messageLoading = false,
 	scrollToBottom = () => {},
 	finalUrl = '',
-	draftMessage,
+	draftMessage = '',
 	formattedData = {},
 	viewType = '',
 }) {
