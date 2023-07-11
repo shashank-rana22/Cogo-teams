@@ -464,6 +464,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 

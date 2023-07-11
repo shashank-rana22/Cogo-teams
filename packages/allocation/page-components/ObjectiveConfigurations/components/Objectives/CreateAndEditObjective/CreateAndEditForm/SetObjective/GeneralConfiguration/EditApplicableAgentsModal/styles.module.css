@@ -1,0 +1,12 @@
+.title {
+	margin: 0;
+}
+
+.description {
+	margin-bottom: 20px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

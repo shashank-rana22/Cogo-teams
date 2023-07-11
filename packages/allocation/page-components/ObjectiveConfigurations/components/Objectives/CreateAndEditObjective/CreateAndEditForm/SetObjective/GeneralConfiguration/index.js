@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Toast, cl } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -8,12 +8,14 @@ import { getFieldController } from '../../../../../../../../common/Form/getField
 import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
 import LIFECYCLE_STAGE_OPTIONS from '../../../../../../configurations/lifecycle-stage-options';
 
+import EditApplicableAgentsModal from './EditApplicableAgentsModal';
 import styles from './styles.module.css';
 
 function GeneralConfiguration(props) {
 	const { setFormValues } = props;
 
 	const [roles, setRoles] = useState([]);
+	const [showEditAgents, setShowEditAgents] = useState(false);
 
 	const { control, watch, handleSubmit, formState: { errors } } = useForm();
 
@@ -71,9 +73,15 @@ function GeneralConfiguration(props) {
 
 					<div className={cl`${styles.element_container} ${styles.button_container}`}>
 						<Button
-							className={styles.button}
+							className={styles.edit_button}
 							size="lg"
 							themeType="secondary"
+							onClick={() => {
+								if (isEmpty(roles)) {
+									return Toast.error('Please Select a role first');
+								}
+								return setShowEditAgents(true);
+							}}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />
 							Edit Applicable Agents
@@ -97,6 +105,14 @@ function GeneralConfiguration(props) {
 					</Button>
 				</div>
 			</form>
+
+			{showEditAgents && (
+				<EditApplicableAgentsModal
+					showEditAgents={showEditAgents}
+					setShowEditAgents={setShowEditAgents}
+					roles={roles}
+				/>
+			)}
 		</div>
 	);
 }
