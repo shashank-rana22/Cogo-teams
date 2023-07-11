@@ -1,9 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 import getUserControls from '../../../configurations/get-controls';
@@ -17,6 +19,8 @@ function useCreateResponse(props) {
 	} = props;
 
 	const router = useRouter();
+
+	const partnerId = useSelector((state) => (state.profile?.partner?.id));
 
 	const { query = {} } = router;
 
@@ -67,9 +71,10 @@ function useCreateResponse(props) {
 					whatsapp_country_code         : values?.whatsapp_number?.country_code,
 					whatsapp_number               : values?.whatsapp_number?.number,
 				}),
-				response_type       : activeTab,
-				source              : 'manual',
-				feedback_request_id : query?.id,
+				response_type : activeTab,
+				source        : GLOBAL_CONSTANTS.country_entity_ids.VN === partnerId
+					? 'manual_enriched' : 'manual',
+				feedback_request_id: query?.id,
 			};
 
 			await trigger({
