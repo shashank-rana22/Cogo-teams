@@ -1,0 +1,52 @@
+.date {
+	width: 100% !important;
+	max-height: 44px;
+}
+
+.item {
+	height: 100%;
+}
+
+.element {
+	padding: 4px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	:global {
+		.ui_select_input_placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+	}
+}
+
+.item_heading {
+	min-height: 16px;
+	margin-bottom: 6px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.item_label {
+	max-height: 16px;
+	margin-bottom: 6px;
+	font-size: 14px;
+	font-weight: 500;
+	padding: -3px;
+}
+
+.error {
+	padding-left: 4px;
+	margin: 0;
+	font-size: 12px;
+	line-height: 16px;
+	color: #cb6464;
+}
+
+.each {
+	padding: 8px;
+}

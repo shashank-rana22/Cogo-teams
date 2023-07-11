@@ -1,6 +1,6 @@
 .route_port {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     justify-content: center;
 }
 
@@ -8,8 +8,9 @@
 .right {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 40%;
     height: 120px;
     padding: 8px;
 }
@@ -18,9 +19,7 @@
     justify-content: right;
 }
 
-.right {
-    justify-content: left;
-}
+
 
 .middle {
     position: relative;
@@ -49,6 +48,7 @@
 .hr_line_up {
     top: 0;
 }
+
 
 .eta_etd {
     display: flex;
@@ -85,4 +85,30 @@
     font-size: 14px;
     font-weight: 400;
     color: #828282;
+}
+
+
+.vertical_dots{
+    margin-left: 10px;
+}
+
+.popover_content {
+    :global {
+        .tippy-content {
+            padding: 0 !important;
+        }
+    }
+}
+.port_input{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    margin-top: 30px;
+    margin: 20px;
+    margin-left: -40px;
+    cursor: pointer;
+}
+.days{
+    width: 70px;
+    margin-left: -190px;
 }

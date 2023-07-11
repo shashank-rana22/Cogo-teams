@@ -47,24 +47,18 @@
     padding-top: 12px;
     padding-right: 20px;
 }
-
-/* .route_details {
-  background-color: white;
-  border-radius: 8px 8px 0 0;
+.save {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+  }
+.button_style {
+    margin: 2px;
 }
 
-.heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #221f20;
-  border-bottom: 1px solid #bdbdbd;
-}
 
 .route_points {
-  max-height: 650px;
+  max-height: 550px;
   overflow: scroll;
-} */
+}

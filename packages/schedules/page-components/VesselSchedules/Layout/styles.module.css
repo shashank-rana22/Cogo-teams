@@ -1,0 +1,29 @@
+.layout {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.heading {
+	max-height: 22px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.label {
+	max-height: 16px;
+	margin-bottom: 6px;
+	font-size: 12px;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}

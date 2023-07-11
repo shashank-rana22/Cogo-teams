@@ -8,10 +8,9 @@
 .flex {
   display: flex;
   gap: 24px;
-  margin: 10px;
+  margin: 20px;
 }
-
-.flex > * {
-  width: 50%;
-  height: 100px;
+.halfWidth {
+  width: 40%;
+  box-sizing: border-box;
 }

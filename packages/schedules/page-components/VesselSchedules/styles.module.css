@@ -4,3 +4,13 @@
 	font-weight: 600;
 	color: #221f20;
 }
+.tabPanelWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.tabPanelWrapper button {
+	margin-left: auto;
+	margin-top: -40px;
+	margin-right: 20px;
+}
