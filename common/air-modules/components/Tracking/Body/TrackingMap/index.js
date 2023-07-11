@@ -84,31 +84,23 @@ function TrackingMap({
 	useEffect(() => {
 		if (points?.length) {
 			resetPointAndMarkers();
-			const res = points?.every((p, idx) => {
-				if (
-					![
-						p?.arrival_lat,
-						p?.arrival_long,
-						p?.departure_lat,
-						p?.departure_long,
-					].includes(null)
-						&& ![
-							p.arrival_lat,
-							p.arrival_long,
-							p.departure_lat,
-							p.departure_long,
-						].includes(undefined)
+			console.log('aa points', points);
+			const res = points?.every((point, idx) => {
+				if (point?.arrival_lat
+					&& point?.arrival_long
+					&& point?.departure_lat
+					&& point?.departure_long
 				) {
 					const isCurrentMilestonePastOrPresent = isPastOrPresentDay(
-						p?.actual_arrival_time,
+						point?.actual_arrival_time,
 					);
 					const source = {
-						lat : p?.departure_lat,
-						lng : p?.departure_long,
+						lat : point?.departure_lat,
+						lng : point?.departure_long,
 					};
 					const destination = {
-						lat : p?.arrival_lat,
-						lng : p?.arrival_long,
+						lat : point?.arrival_lat,
+						lng : point?.arrival_long,
 					};
 					if (isCurrentMilestonePastOrPresent) {
 						setCurrentMilestone(destination);
