@@ -34,10 +34,10 @@ const getTimeoutConstant = async (firestore) => {
 
 const createOrGetRoom = async ({ agentId, firestore }) => {
 	let roomId = '';
-	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
+	const userActivityRoom = collection(firestore, FIRESTORE_PATH.users_path);
 
 	const roomsQuery = query(
-		shipmentReminderRoom,
+		userActivityRoom,
 		where('agent_id', '==', agentId),
 		limit(LIMIT),
 	);
@@ -49,14 +49,14 @@ const createOrGetRoom = async ({ agentId, firestore }) => {
 			last_activity_timestamp : Date.now(),
 			last_activity           : 'create_room',
 		};
-		const roomid = await addDoc(shipmentReminderRoom, newRoom);
+		const roomid = await addDoc(userActivityRoom, newRoom);
 		roomId = roomid?.id;
 	} else {
 		roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 	}
 	return doc(
 		firestore,
-		`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
+		`${FIRESTORE_PATH.users_path}/${roomId}`,
 	);
 };
 

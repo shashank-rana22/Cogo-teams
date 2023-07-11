@@ -19,10 +19,10 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 const LIMIT_VALUE = 1;
 
 const updateRoom = async ({ agentId, firestore }) => {
-	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
+	const userActivityRoom = collection(firestore, FIRESTORE_PATH.users_path);
 
 	const roomsQuery = query(
-		shipmentReminderRoom,
+		userActivityRoom,
 		where('agent_id', '==', agentId),
 		limit(LIMIT_VALUE),
 	);
@@ -31,7 +31,7 @@ const updateRoom = async ({ agentId, firestore }) => {
 
 	const docRef = doc(
 		firestore,
-		`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
+		`${FIRESTORE_PATH.users_path}/${roomId}`,
 	);
 
 	updateDoc(docRef, {

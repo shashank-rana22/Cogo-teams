@@ -8,11 +8,11 @@ export const firebaseConfig = {
 	appId             : process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const FIRESTORE_SHIPMENT_REMINDER_PATH = '/customer_chat/shipment_reminder/agents';
+const FIRESTORE_USER_PATH = '/users/block';
 
 const COGOONE_CONSTANTS = '/cogoone_constants';
 
 export const FIRESTORE_PATH = {
-	shipment_reminder : FIRESTORE_SHIPMENT_REMINDER_PATH,
+	users_path        : FIRESTORE_USER_PATH,
 	cogoone_constants : COGOONE_CONSTANTS,
 };
