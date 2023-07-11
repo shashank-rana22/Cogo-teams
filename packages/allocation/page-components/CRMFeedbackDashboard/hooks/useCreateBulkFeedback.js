@@ -27,7 +27,7 @@ const useCreateBulkFeedback = ({ refetch = () => {} }) => {
 				data: payload,
 			});
 
-			Toast.success('Accounts added successfully');
+			Toast.success('Accounts added successfully. Please wait for the changes to be reflected');
 
 			setShowModal(false);
 			refetch();
