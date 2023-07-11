@@ -22,11 +22,13 @@
 .field_container {
 	width: 48%;
 
-	.ui_input_control {
-		width: 70%;
-	}
+	:global {
+		.ui_input_control {
+			width: 100%;
+		}
 
-	.ui_input_suffix {
-		padding-right: 8%;
+		.ui_input_suffix {
+			padding-right: 3%;
+		}
 	}
 }

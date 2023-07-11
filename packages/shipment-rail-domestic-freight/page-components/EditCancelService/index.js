@@ -1,5 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
@@ -18,6 +19,8 @@ const actionButtons = [
 	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
 
 function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
@@ -35,9 +38,14 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	actionButtons[2].show = getCanCancelService({ state, stakeholderConfig });
+	actionButtons[GLOBAL_CONSTANTS.zeroth_index].show = getCanEditSupplier({
+		shipment_data,
+		user_data,
+		state,
+		stakeholderConfig,
+	});
+	actionButtons[FIRST_INDEX].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
+	actionButtons[SECOND_INDEX].show = getCanCancelService({ state, stakeholderConfig });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
