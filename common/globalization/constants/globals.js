@@ -343,6 +343,7 @@ const GLOBAL_CONSTANTS = {
 		valid_email_regex                 : /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
