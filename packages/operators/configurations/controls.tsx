@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
 const fields = [
@@ -78,6 +79,13 @@ const fields = [
 		span        : 12,
 		placeholder : 'Enter Web URL',
 		label       : 'Web URL',
+		rules       : {
+			required : true,
+			pattern  : {
+				value   : GLOBAL_CONSTANTS.regex_patterns.url_match,
+				message : 'URL is invalid',
+			},
+		},
 	},
 	{
 		name        : 'status',

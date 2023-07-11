@@ -10,6 +10,7 @@
 	  "@cogoport/request": "workspace:0.1.0",
 	  "@cogoport/store": "workspace:0.1.0",
 	  "@cogoport/utils": "^1.2.2",
+	  "@cogoport/globalization": "^0.0.1",
    	  "react-infinite-scroller": "^1.2.4",
 	  "react": "18.2.0"
 	}

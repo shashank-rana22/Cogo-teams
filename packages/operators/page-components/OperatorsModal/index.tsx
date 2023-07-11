@@ -97,7 +97,7 @@ function OperatorsModal({
 					themeType="secondary"
 					disabled={loading}
 					style={{ marginRight: 12 }}
-					onClick={() => { setShow(false); }}
+					onClick={() => { setShow(false); setEdit(false); setItem({}); }}
 				>
 					Cancel
 				</Button>
