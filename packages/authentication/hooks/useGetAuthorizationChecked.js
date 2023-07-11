@@ -50,7 +50,7 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 				}
 			}
 		})();
-	}, [_initialized, asPath, dispatch, pathname]);
+	}, [_initialized, dispatch]);
 
 	useEffect(() => {
 		(async () => {
