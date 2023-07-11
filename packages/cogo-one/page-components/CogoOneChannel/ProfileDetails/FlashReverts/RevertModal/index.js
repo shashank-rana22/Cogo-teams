@@ -28,7 +28,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 	const {
 		loading,
 		handleRevertPrice,
-	} = useRevertPrice({ item: data, setModalState, shipmentFlashBookingRates, chargeableWeight });
+	} = useRevertPrice({ item: data, setModalState, shipmentFlashBookingRates, chargeableWeight, userId });
 
 	const controls = getRevertFormControls({
 		data,

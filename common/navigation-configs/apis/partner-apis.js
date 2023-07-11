@@ -12490,6 +12490,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'send_flash_rate_revert_notification_on_email',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	analytics_dashboard: [
 		{

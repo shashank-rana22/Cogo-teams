@@ -3,7 +3,9 @@ import { IcMCall } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import ReasonModal from './ReasonModal';
 import styles from './styles.module.css';
 
 const MAX_SHOW_LENGTH = 2;
@@ -11,6 +13,8 @@ const MIN_SHOW_LENGTH = 0;
 
 function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const dispatch = useDispatch();
+
+	const [reasonModal, setReasonModal] = useState(false);
 	const {
 		user_id = '', email = '', mobile_country_code = '', mobile_number = '', name = '',
 		organization_id = '', work_scopes = [],
@@ -42,53 +46,68 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.dialer_icon_div} role="presentation" onClick={handleCall}>
-				<IcMCall
-					className={cl`${styles.call_icon} ${
-						(!hasVoiceCallAccess)
-							? styles.disable_call_icon : ''}`}
-				/>
-			</div>
+		<>
+			<div className={styles.container}>
+				<div className={styles.dialer_icon_div} role="presentation" onClick={handleCall}>
+					<IcMCall
+						className={cl`${styles.call_icon} ${
+							(!hasVoiceCallAccess)
+								? styles.disable_call_icon : ''}`}
+					/>
+				</div>
 
-			<div className={styles.content}>
-				<div className={styles.agent_type}>Name : </div>
-				<div className={styles.name}>{name || 'NA'}</div>
-			</div>
-			<div className={styles.content}>
-				<div className={styles.type}>Email : </div>
-				<div className={styles.name}>{email || '-'}</div>
-			</div>
-			<div className={styles.content}>
-				<div className={styles.type}>Mobile No : </div>
-				<div className={styles.name}>
-					{mobile_country_code}
-					{mobile_number || '-'}
+				<div className={styles.content}>
+					<div className={styles.agent_type}>Name : </div>
+					<div className={styles.name}>{name || 'NA'}</div>
+				</div>
+				<div className={styles.content}>
+					<div className={styles.type}>Email : </div>
+					<div className={styles.name}>{email || '-'}</div>
+				</div>
+				<div className={styles.content}>
+					<div className={styles.type}>Mobile No : </div>
+					<div className={styles.name}>
+						{mobile_country_code}
+						{mobile_number || '-'}
+					</div>
+					<div
+						role="presentation"
+						onClick={() => setReasonModal(true)}
+						className={styles.show_number}
+					>
+						SHOW NUMBER
+					</div>
+				</div>
+
+				<div className={styles.user_work_scope}>
+					{(lessList || []).map((item) => (
+						<div className={styles.scope_name} key={item}>
+							{startCase(item)}
+						</div>
+					))}
+					{showMoreList && (
+						<Tooltip
+							content={(
+								<div>
+									{(moreList || []).map((item) => (
+										<div className={styles.scope_name} key={item}>{startCase(item)}</div>
+									))}
+								</div>
+							)}
+							theme="light"
+							placement="bottom"
+						>
+							<div className={styles.more_tags}>
+								{moreList?.length}
+								+
+							</div>
+						</Tooltip>
+					)}
 				</div>
 			</div>
 
-			<div className={styles.user_work_scope}>
-				{(lessList || []).map((item) => <div className={styles.scope_name} key={item}>{startCase(item)}</div>)}
-				{showMoreList && (
-					<Tooltip
-						content={(
-							<div>
-								{(moreList || []).map((item) => (
-									<div className={styles.scope_name} key={item}>{startCase(item)}</div>
-								))}
-							</div>
-						)}
-						theme="light"
-						placement="bottom"
-					>
-						<div className={styles.more_tags}>
-							{moreList?.length}
-							+
-						</div>
-					</Tooltip>
-				)}
-			</div>
-		</div>
+			<ReasonModal reasonModal={reasonModal} setReasonModal={setReasonModal} user={user} />
+		</>
 	);
 }
 

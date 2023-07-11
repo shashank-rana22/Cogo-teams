@@ -7,23 +7,11 @@
 	background: #fff;
 	border-radius: 12px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
-	animation: org-user 0.4s  both;
-
-	@keyframes org-user {
-		0% {
-			opacity: 0;
-			transform: translate3d(-100px, 0, 0);
-		}
-
-		100% {
-			opacity: 1;
-			transform: none;
-		}
-	}
 }
 
 .content {
 	display: flex;
+	align-items: center;
 	width: 100%;
 	margin-top: 5px;
 }
@@ -58,12 +46,13 @@
 }
 
 .dialer_icon_div {
-	position: absolute;
+	/* position: absolute;
 	top: 5px;
-	right: 5px;
+	right: 5px; */
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: flex-end;
+	width: fit-content;
 	padding: 2px 4px;
 	cursor: pointer;
 	background: #abcd62;
@@ -87,4 +76,12 @@
 .more_tags {
 	margin: 0 2px;
 	font-size: 10px;
+}
+
+.show_number {
+	margin-left: 10px;
+	font-size: 9px;
+	font-weight: 600;
+	color: rgb(89 54 240);
+	cursor: pointer;
 }

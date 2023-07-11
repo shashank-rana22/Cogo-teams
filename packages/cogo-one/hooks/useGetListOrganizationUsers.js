@@ -1,30 +1,53 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-const getPayload = ({ organizationId = '' }) => ({
+const FIRST_PAGE = 1;
+const SCROLL_HEIGHT = 0;
+
+const getPayload = ({ organizationId = '', pagination }) => ({
 	filters: {
 		organization_id: organizationId,
 	},
-	page_limit: 100,
+	page: pagination,
 });
 
 const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = false }) => {
+	const [pagination, setPagination] = useState(FIRST_PAGE);
+	const [listData, setListData] = useState({
+		list  : [],
+		total : 0,
+	});
+
 	const [
-		{ data, loading }, trigger,
+		{ loading }, trigger,
 	] = useRequest({
 		url    : '/list_organization_users',
 		method : 'get',
 	}, { manual: true });
 
-	const listOrganizationsUsers = useCallback(() => {
+	const listOrganizationsUsers = useCallback(async () => {
 		try {
-			trigger({
-				params: getPayload({ organizationId }),
+			const res = await trigger({
+				params: getPayload({ organizationId, pagination }),
 			});
+
+			if (res?.data) {
+				const { list = [], ...paginationData } = res?.data || {};
+				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			}
 		} catch (error) {
 			console.error(error);
 		}
-	}, [organizationId, trigger]);
+	}, [organizationId, pagination, trigger]);
+
+	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= SCROLL_HEIGHT;
+		const hasMoreData = pagination < listData?.total;
+
+		if (reachBottom && hasMoreData && !loading) {
+			setPagination((page) => page + FIRST_PAGE);
+		}
+	};
 
 	useEffect(() => {
 		if (isOrgUsersVisible) {
@@ -33,8 +56,9 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 	}, [isOrgUsersVisible, listOrganizationsUsers]);
 
 	return {
-		organizationUsersData    : data,
+		organizationUsersData    : listData,
 		organizationUsersLoading : loading,
+		handleScroll,
 	};
 };
 

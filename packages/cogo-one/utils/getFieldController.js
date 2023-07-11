@@ -22,6 +22,7 @@ const CONTROLLER_MAPPING = {
 	fieldArray    : FieldArrayController,
 	radio         : RadioGroupController,
 	checkboxGroup : CheckboxGroupController,
+	textArea      : TextAreaController,
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
