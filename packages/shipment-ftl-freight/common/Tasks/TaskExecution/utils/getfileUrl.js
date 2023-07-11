@@ -1,4 +1,5 @@
-const getfileUrl = ({ url, FIRST_INDEX }) => {
+const FIRST_INDEX = 1;
+const getfileUrl = ({ url }) => {
 	if (url?.includes('finalUrl')) {
 		const REGEX = /:finalUrl=>"([^"]*)"/;
 		const match = url.match(REGEX);

@@ -10,8 +10,6 @@ import getfileUrl from '../utils/getfileUrl';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
-
 function ReviewDoc({
 	task = {},
 	refetch = () => {},
@@ -129,7 +127,7 @@ function ReviewDoc({
 				<div className={styles.file_view}>
 					<object
 						title="review_file"
-						data={getfileUrl({ url: docData?.document_url, FIRST_INDEX })}
+						data={getfileUrl({ url: docData?.document_url })}
 						width="100%"
 						type="application/pdf"
 					/>
