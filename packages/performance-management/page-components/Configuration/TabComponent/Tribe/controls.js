@@ -27,11 +27,14 @@ const controls = [
 		asyncKey    : 'list_squads',
 		label       : 'Squads',
 		placeholder : 'Squads',
-		multiple    : true,
-		rules       : {
+		params      : {
+			exclude_squads_assigned: true,
+			...params,
+		},
+		multiple : true,
+		rules    : {
 			required: 'Squads are required',
 		},
-		params,
 	},
 
 ];

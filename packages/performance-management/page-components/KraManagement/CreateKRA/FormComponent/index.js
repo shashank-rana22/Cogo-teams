@@ -41,7 +41,7 @@ function FormComponent({ data }) {
 		setValue('kra_name', kra_name);
 		setValue('kra_description', kra_description);
 		setValue('operation_type', operation_key);
-		setValue('can_assign_targets_individually', is_rating_individual ? 'yes' : 'no');
+		setValue('is_rating_individual', is_rating_individual ? 'yes' : 'no');
 		setValue('is_target_achieved_manually', operation_key === 'manual' ? 'yes' : 'no');
 		setValue(
 			'is_rating_schema_in_percentage',

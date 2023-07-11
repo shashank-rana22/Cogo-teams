@@ -156,7 +156,7 @@ const getControls = ({ setShowSelectedValue = () => {} }) => ([
 			},
 
 			{
-				name    : 'can_assign_targets_individually',
+				name    : 'is_rating_individual',
 				type    : 'radioGroup',
 				label   : 'Can assign Targets Individually',
 				options : OPTIONS,
