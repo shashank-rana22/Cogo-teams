@@ -5,44 +5,8 @@ import { useContext, useState } from 'react';
 
 import DashboardContext from '../../../../context/DashboardContext';
 
+import { SHIPMENT_STATES } from './shipmentStates';
 import styles from './styles.module.css';
-
-const SHIPMENT_STATES = [
-	{
-		label : 'Awaiting Service Provider Confirmation',
-		value : 'Awaiting Service Provider Confirmation',
-	},
-
-	{
-		label : 'Confirmed by Service Provider',
-		value : 'Confirmed by Service Provider',
-	},
-
-	{
-		label : 'Cargo Picked Up',
-		value : 'Cargo Picked Up',
-	},
-
-	{
-		label : 'Cargo dropped',
-		value : 'Cargo dropped',
-	},
-
-	{
-		label : 'Completed',
-		value : 'Completed',
-	},
-
-	{
-		label : 'Aborted',
-		value : 'Aborted',
-	},
-
-	{
-		label : 'Cancelled',
-		value : 'Cancelled',
-	},
-];
 
 function FilterBy({
 	setPopoverFilter = () => {},

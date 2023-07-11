@@ -10,8 +10,7 @@ const getDisplayDate = (date) => (date ? formatDate({
 	date,
 	dateFormat:
 			GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-	formatType : 'date',
-	separator  : ' ',
+	formatType: 'date',
 }) : null);
 
 const getDisplayDateTime = (date) => (date ? formatDate({
@@ -29,7 +28,7 @@ function EstimatedDates({ data = {} }) {
 		estimated_departure = '',
 		pickup_date = '',
 		delivery_date = '',
-	} =	 data.ftl_freight_services?.[GLOBAL_CONSTANTS?.zeroth_index] || {};
+	} =	 data.ftl_freight_services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return (
 		<div>
 			<div className={styles.container}>
