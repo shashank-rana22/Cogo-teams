@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkFeedback = () => {
+const useCreateBulkFeedback = ({ refetch = () => {} }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedCount, setSelectedCount] = useState({});
 
@@ -28,6 +28,9 @@ const useCreateBulkFeedback = () => {
 			});
 
 			Toast.success('Accounts added successfully');
+
+			setShowModal(false);
+			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

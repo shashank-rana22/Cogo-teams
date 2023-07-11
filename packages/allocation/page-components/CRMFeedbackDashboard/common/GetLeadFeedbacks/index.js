@@ -6,7 +6,7 @@ import useCreateBulkFeedback from '../../hooks/useCreateBulkFeedback';
 
 import styles from './styles.module.css';
 
-function GetLeadFeedbacks() {
+function GetLeadFeedbacks({ refetch = () => {} }) {
 	const {
 		onCreateFeedback,
 		showModal,
@@ -15,7 +15,8 @@ function GetLeadFeedbacks() {
 		selectedCount,
 		onCloseModal,
 		setSelectedCount,
-	} = useCreateBulkFeedback();
+
+	} = useCreateBulkFeedback(refetch);
 
 	return (
 		<>

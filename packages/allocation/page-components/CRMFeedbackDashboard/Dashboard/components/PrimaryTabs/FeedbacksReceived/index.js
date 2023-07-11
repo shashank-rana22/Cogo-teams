@@ -22,6 +22,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
+		refetch = () => {},
 	} = useFeedbackTableData({});
 
 	const { page, page_limit, total_count } = paginationData;
@@ -39,7 +40,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 
 			<Statistics activeTab={activeTab} filters={filters} />
 			<div className={styles.header}>
-				<GetLeadFeedbacks />
+				<GetLeadFeedbacks refetch={refetch} />
 
 				<EnrichmentRequest
 					checkedRowsId={checkedRowsId}
