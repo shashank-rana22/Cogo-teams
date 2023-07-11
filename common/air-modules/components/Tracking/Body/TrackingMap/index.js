@@ -12,6 +12,13 @@ const LAT_X_CALCULATING_FACTOR = 20;
 const LNG_Y_CALCULATING_FACTOR = 2;
 const BEZIER_POINTS_CALCULATING_FACTOR = 1;
 
+const isPastOrPresentDay = (inputDate) => {
+	const isCurrentDay = isSameDay(inputDate, new Date());
+	if (isCurrentDay) return true;
+	if (new Date() > new Date(inputDate)) return true;
+	return false;
+};
+
 function TrackingMap({
 	points = [],
 }) {
@@ -34,19 +41,19 @@ function TrackingMap({
 		const BEZIER_POINTS = [];
 		while (t <= LOOP_CONDITION_CHECK) {
 			try {
-				const x_1 = parseFloat(inputPoints.source.lat);
-				const x_3 = parseFloat(inputPoints.destination.lat);
-				const x_2 = Math.max(x_1, x_3) + LAT_X_CALCULATING_FACTOR;
+				const xAxis_1 = parseFloat(inputPoints.source.lat);
+				const xAxis_3 = parseFloat(inputPoints.destination.lat);
+				const xAxis_2 = Math.max(xAxis_1, xAxis_3) + LAT_X_CALCULATING_FACTOR;
 				const lat_x =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x_1 + t * x_2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * x_2 + t * x_3);
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * xAxis_1 + t * xAxis_2)
+				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * xAxis_2 + t * xAxis_3);
 
-				const y_1 = parseFloat(inputPoints.source.lng);
-				const y_3 = parseFloat(inputPoints.destination.lng);
-				const y_2 = (y_1 + y_3) / LNG_Y_CALCULATING_FACTOR;
+				const yAxis_1 = parseFloat(inputPoints.source.lng);
+				const yAxis_3 = parseFloat(inputPoints.destination.lng);
+				const yAxis_2 = (yAxis_1 + yAxis_3) / LNG_Y_CALCULATING_FACTOR;
 				const lng_y =				(BEZIER_POINTS_CALCULATING_FACTOR - t)
-				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * y_1 + t * y_2)
-				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * y_2 + t * y_3);
+				* ((BEZIER_POINTS_CALCULATING_FACTOR - t) * yAxis_1 + t * yAxis_2)
+				+ t * ((BEZIER_POINTS_CALCULATING_FACTOR - t) * yAxis_2 + t * yAxis_3);
 
 				BEZIER_POINTS.push({
 					lat : lat_x,
@@ -70,13 +77,6 @@ function TrackingMap({
 				...BEZIER_POINTS,
 			]);
 		}
-	};
-
-	const isPastOrPresentDay = (inputDate) => {
-		const isCurrentDay = isSameDay(inputDate, new Date());
-		if (isCurrentDay) return true;
-		if (new Date() > new Date(inputDate)) return true;
-		return false;
 	};
 
 	useEffect(() => {
