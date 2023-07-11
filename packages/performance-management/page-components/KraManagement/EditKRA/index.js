@@ -1,6 +1,4 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import Header from './Header';
@@ -11,20 +9,10 @@ import styles from './styles.module.css';
 function EditKRA() {
 	const { data, loading, setActiveTab, activeTab, handleManageKRA } = useListIndividualKra();
 
-	const router = useRouter();
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.top}>
 				<div className={styles.back_arrow}>
-					<div>
-						<IcMArrowBack
-							width={22}
-							height={22}
-							style={{ marginRight: 2 }}
-							onClick={() => router.back()}
-						/>
-					</div>
 
 					<div className={styles.title}>
 						<h2>Edit KRA Request</h2>

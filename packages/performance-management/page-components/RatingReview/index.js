@@ -1,6 +1,4 @@
 import { Button, Select } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
@@ -38,14 +36,9 @@ function PerformanceRatingReview() {
 		setToggleVal,
 	} = usePublishRatings({ selectedEmployees, level, data, selectCycle });
 
-	const router = useRouter();
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
-				<div className={styles.back_arrow}>
-					<IcMArrowBack width={22} height={22} style={{ marginRight: 2 }} onClick={() => router.back()} />
-				</div>
 				<div className={styles.header}>
 					Performance Rating Review
 				</div>
