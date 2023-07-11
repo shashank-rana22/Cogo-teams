@@ -1,0 +1,45 @@
+.sidebar_container {
+	border-right: 1px solid #e0e0e0;
+}
+
+.active_content {
+	color: #4f4f4f;
+
+	:global {
+		svg {
+			fill: #4f4f4f;
+		}
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 8px;
+	color: #8f8f8f;
+	cursor: pointer;
+
+	&:hover {
+		color: #4f4f4f;
+		background-color: #fefce6;
+
+		svg {
+			fill: #4f4f4f;
+		}
+	}
+}
+
+.icon_styles {
+	width: 18px;
+	height: 18px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.folder_name {
+	margin-top: 3px;
+	font-size: 10px;
+	font-weight: 600;
+}

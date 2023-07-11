@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRight, IcMReply } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -37,41 +37,34 @@ function ListMails({
 							key={id}
 							role="presentation"
 							onClick={() => setActiveMail(itm)}
-							className={cl`${activeMail?.id === id ? styles.active_content : ''} ${styles.content}`}
+							className={cl`${styles.content} ${activeMail?.id === id ? styles.active_content : ''}`}
 						>
-							<div className={styles.recipient_div}>
-								<div className={styles.recipient_left}>
-									<IcMReply className={styles.reply_back} />
-
-									<div className={styles.recipient_name}>
-										{name}
+							<div className={styles.mail_view}>
+								<div className={styles.recipient_div}>
+									<div className={styles.recipient_left}>
+										<div className={styles.recipient_name}>
+											{name}
+										</div>
+										<div className={styles.time}>
+											{format(
+												sentDateTime,
+												GLOBAL_CONSTANTS.formats.datetime['HH:mm, dd/MM/yyy'],
+											)}
+										</div>
 									</div>
 								</div>
 
-								<div className={styles.recipient_right}>
-									<div className={styles.time}>
-										{format(
-											sentDateTime,
-											GLOBAL_CONSTANTS.formats.datetime['HH:mm, dd/MM/yyy'],
-										)}
+								<div className={styles.message_div}>
+									<div className={styles.subject_container}>
+										{subject}
 									</div>
-
-									<div className={styles.right_arrow}>
-										<IcMArrowRight fill="#BDBDBD" />
-									</div>
+									<div
+										className={styles.message_content}
+										dangerouslySetInnerHTML={{ __html: bodyPreview }}
+									/>
 								</div>
 							</div>
-
-							<div className={styles.message_div}>
-								<div className={styles.subject_container}>
-									{subject}
-								</div>
-
-								<div
-									className={styles.message_content}
-									dangerouslySetInnerHTML={{ __html: bodyPreview }}
-								/>
-							</div>
+							<IcMArrowRight className={styles.arrow_styles} />
 						</div>
 					);
 				},

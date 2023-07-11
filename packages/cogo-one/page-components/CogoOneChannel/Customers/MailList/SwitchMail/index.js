@@ -2,7 +2,7 @@ import { Avatar, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
+import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
 
 import styles from './styles.module.css';
 
@@ -39,7 +39,6 @@ function SwitchMail({
 								{itm.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ')}
 							</div>
 							<div className={styles.mail_address}>
-								{itm}
 								{itm}
 							</div>
 						</div>

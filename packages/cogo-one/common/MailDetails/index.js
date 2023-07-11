@@ -1,4 +1,4 @@
-import { IcMArrowLeft, IcMRefresh } from '@cogoport/icons-react';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 
 function MailDetails({
 	activeSelect = '',
-	setActiveSelect = () => {},
 	setActiveMail = () => {},
 	activeMail = {},
 	activeMailAddress = '',
@@ -26,11 +25,6 @@ function MailDetails({
 	const {
 		value: list = [],
 	} = listData || {};
-
-	const handleClick = () => {
-		setActiveSelect(null);
-		setActiveMail({});
-	};
 
 	useEffect(() => {
 		let interval = '';
@@ -50,10 +44,8 @@ function MailDetails({
 				<div
 					role="presentation"
 					className={styles.left_div}
-					onClick={handleClick}
-				>
-					<IcMArrowLeft className={styles.arrow_left} />
 
+				>
 					<div className={styles.title}>
 						{startCase(activeSelect)}
 					</div>
