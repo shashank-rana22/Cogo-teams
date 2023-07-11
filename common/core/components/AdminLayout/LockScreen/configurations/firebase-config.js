@@ -8,7 +8,7 @@ export const firebaseConfig = {
 	appId             : process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const FIRESTORE_USER_PATH = '/users/block';
+const FIRESTORE_USER_PATH = '/users';
 
 const COGOONE_CONSTANTS = '/cogoone_constants';
 
