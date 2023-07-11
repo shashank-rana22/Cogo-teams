@@ -1,43 +1,42 @@
-import { Button } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import { ACTION_KEYS } from '../../../../constants';
-import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
+import TicketActions from '../../../TicketActions';
 
 import styles from './styles.module.css';
 
 function ModalHeader({
 	ticketData = {},
-	refetchTicket = () => {},
-	ticketExists = false,
-	modalData,
+	refreshTickets = () => {},
+	setShowReassign = () => {},
+	setShowEscalate = () => {},
+	updateTicketActivity = () => {},
 }) {
-	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
+	const {
+		Ticket: ticket = {}, TicketStatus : ticketStatus = '',
+		IsClosureAuthorizer: isClosureAuthorizer = false, IsCurrentReviewer: isCurrentReviewer = '',
+	} = ticketData || {};
+	const { ID: id = '' } = ticket || {};
 
-	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
-		refetchTicket,
-	});
-
-	const showResolve = ['Open', 'Closed'].includes(modalData?.key);
+	const handleTicket = (e, { actionType }) => {
+		e.stopPropagation();
+		updateTicketActivity({ actionType, id });
+	};
 
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.tickets_header}>
 				<div className={styles.tickets_header_text}>Chat</div>
-				<IcMRefresh className={styles.refresh_icon} onClick={refetchTicket} />
+				<IcMRefresh className={styles.refresh_icon} onClick={refreshTickets} />
 			</div>
-			{showResolve && (
-				<div className={styles.header_buttons}>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={() => updateTicketActivity(ACTION_KEYS[status]?.name, id)}
-						disabled={!ticketExists || status === 'rejected'}
-					>
-						{ACTION_KEYS[status]?.label || 'Resolve'}
-					</Button>
-				</div>
-			)}
+			<TicketActions
+				isModal
+				ticketStatus={ticketStatus}
+				handleTicket={handleTicket}
+				setShowReassign={setShowReassign}
+				setShowEscalate={setShowEscalate}
+				isCurrentReviewer={isCurrentReviewer}
+				isClosureAuthorizer={isClosureAuthorizer}
+			/>
 		</div>
 	);
 }
