@@ -1,10 +1,11 @@
-import { Input, Tabs, TabPanel } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Input, Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useListShipmentPendingTasks from '../hooks/useListShipmentPendingTasks';
 
 import ApprovedAWB from './ApprovedAWB';
+import Filters from './Filters';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -29,17 +30,15 @@ const TABS_COMPONENT_MAPPING = {
 
 function PrintingDesk() {
 	const [activeTab, setActiveTab] = useState('approved_awb');
-
+	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
-
-	console.log('setRelevantToMe', setRelevantToMe);
 
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 
 	const {
 		data, loading, page,
 		setPage, listAPI, searchValue, setSearchValue,
-	} = useListShipmentPendingTasks({ activeTab, relevantToMe });
+	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	return (
 		<div>
@@ -63,7 +62,17 @@ function PrintingDesk() {
 				</Tabs>
 				<Input
 					value={searchValue}
-					suffix={<IcMSearchlight className="search_icon" />}
+					suffix={(
+						searchValue ? (
+							<IcMCross
+								className="cross_icon"
+								onClick={() => setSearchValue('')}
+								style={{ cursor: 'pointer' }}
+							/>
+						) : (
+							<IcMSearchlight className="search_icon" />
+						)
+					)}
 					className={styles.input_search}
 					placeholder="Search by SID or AWB Number"
 					type="text"
@@ -71,6 +80,19 @@ function PrintingDesk() {
 						setSearchValue(val);
 					}}
 				/>
+			</div>
+			<div className={styles.filters_container}>
+				<div className={styles.flex}>
+					<Toggle
+						name="stakeholder_id"
+						size="sm"
+						disabled={false}
+						onLabel="Relevent to me"
+						offLabel="All"
+						onChange={() => setRelevantToMe((p) => !p)}
+					/>
+					<Filters setFilters={setFilters} filters={filters} />
+				</div>
 			</div>
 
 			{ActiveTabComponent && (

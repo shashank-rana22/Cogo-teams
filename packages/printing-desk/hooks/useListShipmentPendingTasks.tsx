@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -83,11 +84,10 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		})();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, page, query, relevantToMe, trigger, userData.user.id]);
+	}, [activeTab, filter, page, query, relevantToMe, trigger, userData.user.id]);
 
 	useEffect(() => {
 		if (searchValue) {

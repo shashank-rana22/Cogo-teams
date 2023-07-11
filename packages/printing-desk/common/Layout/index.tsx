@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Layout({
-	control = () => {}, fields = [], showElements = {}, errors = {},
+	control = {}, fields = [], showElements = {}, errors = {},
 }) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
