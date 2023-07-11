@@ -74,6 +74,7 @@ function ListData({
 											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 											formatType : 'dateTime',
+											separator  : '|',
 										})}
 									</div>
 								</div>
