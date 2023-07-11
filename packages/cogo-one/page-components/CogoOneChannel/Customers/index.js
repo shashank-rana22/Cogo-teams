@@ -28,7 +28,7 @@ function Customers({
 	modalType = {},
 	tagOptions = [],
 	mailProps = {},
-	firestore = '',
+	firestore = {},
 	viewType = '',
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);

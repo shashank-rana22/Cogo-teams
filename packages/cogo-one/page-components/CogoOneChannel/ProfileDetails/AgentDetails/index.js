@@ -38,7 +38,7 @@ function AgentDetails({
 	activeSelect = '',
 	setActiveSelect = () => {},
 	setShowMore = () => {},
-	firestore = '',
+	firestore = {},
 	userId: agentId = '',
 	viewType = '',
 	setActiveTab = () => {},
