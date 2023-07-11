@@ -1,7 +1,8 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import useGetServicesQuotation from '../../../../../../hooks/useGetServicesQuotation';
 import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
@@ -23,6 +24,10 @@ const useEditQuotations = ({
 	taskListRefetch = () => {},
 	selectedCard = {},
 }) => {
+	const {
+		refetch:getShipmentRefetch,
+	} = useContext(ShipmentDetailContext);
+
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const SERVICE_IDS = [];
 	let notMainService = false;
@@ -50,12 +55,13 @@ const useEditQuotations = ({
 		service_detail_required : true,
 
 	});
-	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({ });
 
 	const { loading:updateTaskLoading, apiTrigger:updateTask } = useUpdateTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
+			getShipmentRefetch();
 		},
 	});
 	const service_charges = servicesQuotation?.service_charges || [];
