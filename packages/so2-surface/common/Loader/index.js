@@ -30,5 +30,5 @@ function Card() {
 }
 
 export default function Loader() {
-	return Array(PLACEHOLDER_COUNT).fill(null).map((item) => <Card key={item} />);
+	return [...Array(PLACEHOLDER_COUNT).keys()].map((item) => <Card key={item} />);
 }
