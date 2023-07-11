@@ -12,7 +12,13 @@ const performanceManagement = {
 	'/[partner_id]/performance-management/kra-management': {
 		navigation: 'performance_management-kra_management',
 	},
-	'/[partner_id]/performance-management/kra-management/create-kra': {
+	'/[partner_id]/performance-management/kra-management/manage-kra': {
+		navigation: 'performance_management-kra_management',
+	},
+	'/[partner_id]/performance-management/kra-management/manage-kra/create-kra': {
+		navigation: 'performance_management-kra_management',
+	},
+	'/[partner_id]/performance-management/kra-management/manage-kra/update-kra/[kra_id]': {
 		navigation: 'performance_management-kra_management',
 	},
 };

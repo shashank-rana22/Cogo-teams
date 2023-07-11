@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAnnouncement,
 	IcMSettings,
@@ -890,7 +891,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-dunnings',
 				title         : 'Dunnings',
 				href          : '/v2/business-finance/dunnings/[active_tab]',
-				as            : '/v2/business-finance/dunnings/campaign-management',
+				as            : '/v2/business-finance/dunnings/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.business_finance_dunnings,
@@ -1418,7 +1419,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1970,7 +1971,7 @@ const navigationMappingAdmin = {
 		title : 'CogoVerse',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
 				alt="cogo-verse"
 				width="22px"
 				height="22px"
@@ -2054,7 +2055,7 @@ const navigationMappingAdmin = {
 		title : 'Cogo One',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
 				width="22px"
 				height="22px"
@@ -2469,6 +2470,15 @@ const navigationMappingAdmin = {
 			},
 		],
 
+	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
 	},
 };
 

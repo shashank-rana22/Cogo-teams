@@ -1,24 +1,67 @@
 import { Button } from '@cogoport/components';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
+import useCreateKRA from '../hooks/useCreateKRA';
 
 import controls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
-import useCreateKRA from './useCreateKRA';
 
-function FormComponent() {
+const DEFAULT_INDEX = 0;
+const OFFSET = 1;
+
+function FormComponent({ data }) {
 	const {
 		control,
 		errors,
 		handleSubmit,
 		onClickSubmitButton,
 		watch,
+		setValue,
 		showSelectedValue,
 		setShowSelectedValue,
 		loading,
 	} = useCreateKRA();
+
+	const {
+		chapter_details,
+		kra_details,
+		kra_ratings,
+		squad_details,
+		sub_chapter_details,
+		tribe_details,
+		role_details,
+	} = data || {};
+
+	const { kra_name, kra_description, operation_key, is_rating_individual } = kra_details || {};
+
+	useEffect(() => {
+		setValue('kra_name', kra_name);
+		setValue('kra_description', kra_description);
+		setValue('operation_type', operation_key);
+		setValue('can_assign_targets_individually', is_rating_individual ? 'yes' : 'no');
+		setValue('is_target_achieved_manually', operation_key === 'manual' ? 'yes' : 'no');
+		setValue(
+			'is_rating_schema_in_percentage',
+			kra_ratings?.[DEFAULT_INDEX]?.value_type === 'percentage' ? 'yes' : 'no',
+		);
+		setValue(
+			'target_value',
+			kra_ratings?.[DEFAULT_INDEX]?.target_value,
+		);
+		setValue('squad_ids', squad_details?.map(({ id }) => (id)));
+		setValue('tribe_ids', tribe_details?.map(({ id }) => (id)));
+		setValue('chapter_ids', chapter_details?.map(({ id }) => (id)));
+		setValue('sub_chapter_ids', sub_chapter_details?.map(({ id }) => (id)));
+		setValue('role_ids', role_details?.map(({ id }) => (id)));
+		kra_ratings?.forEach((kra_rating, index) => {
+			setValue(`rating_${index + OFFSET}`, kra_rating.value);
+		});
+	}, [chapter_details, is_rating_individual, kra_description, kra_ratings, kra_name,
+		operation_key, role_details, setShowSelectedValue, setValue, squad_details,
+		sub_chapter_details, tribe_details]);
 
 	return (
 		<div className={styles.container}>
@@ -75,6 +118,7 @@ function FormComponent() {
 					errors={errors}
 					setShowSelectedValue={setShowSelectedValue}
 					showSelectedValue={showSelectedValue}
+					data={data}
 				/>
 			</div>
 

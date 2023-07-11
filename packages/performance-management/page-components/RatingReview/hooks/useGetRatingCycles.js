@@ -1,5 +1,6 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 const useGetRatingCycles = () => {
@@ -23,8 +24,11 @@ const useGetRatingCycles = () => {
 	});
 
 	useEffect(() => {
-		setSelectCycle(ratingCycleOptions?.[0]?.value);
-	}, [ratingCycleOptions]);
+		console.log('ratingCycleOptions');
+		if (!loading && !isEmpty(ratingCycleOptions)) {
+			setSelectCycle(ratingCycleOptions?.[0]?.value);
+		}
+	}, [loading, ratingCycleOptions]);
 
 	return {
 		ratingCycleOptions,

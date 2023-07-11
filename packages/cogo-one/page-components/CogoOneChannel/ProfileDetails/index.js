@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
@@ -9,32 +10,24 @@ import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
-const DEFAULT_OPEN_NAV_MAPPING = {
-	shipment_view : 'user_activity',
-	supply_view   : 'flash_shipment_bookings',
-	default       : 'profile',
-};
-
 function ProfileDetails({
 	activeMessageCard,
 	activeTab,
 	activeVoiceCard,
-	updateLeaduser,
 	activeCardId,
 	setModalType = () => {},
-	setActiveMessage = () => {},
 	activeRoomLoading,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
 	viewType = '',
-	hasVoiceCallAccess,
 	firestore,
 	userId = '',
+	setActiveTab,
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
 	const [activeSelect, setActiveSelect] = useState(
-		DEFAULT_OPEN_NAV_MAPPING[viewType] || DEFAULT_OPEN_NAV_MAPPING.default,
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
@@ -84,14 +77,12 @@ function ProfileDetails({
 						loading={loading}
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}
-						updateLeaduser={updateLeaduser}
 						orgId={orgId}
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
 						setModalType={setModalType}
 						hideCpButton={hideCpButton}
 						getOrgDetails={getOrgDetails}
-						setActiveMessage={setActiveMessage}
 						activeRoomLoading={activeRoomLoading}
 						setActiveSelect={setActiveSelect}
 						showMore={showMore}
@@ -100,9 +91,9 @@ function ProfileDetails({
 						zippedTicketsData={zippedTicketsData}
 						quotationSentData={quotationEmailSentAt}
 						viewType={viewType}
-						hasVoiceCallAccess={hasVoiceCallAccess}
 						firestore={firestore}
 						userId={userId}
+						setActiveTab={setActiveTab}
 					/>
 				)}
 			</div>

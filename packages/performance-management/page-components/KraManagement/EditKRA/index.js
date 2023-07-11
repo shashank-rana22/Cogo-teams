@@ -9,7 +9,7 @@ import IndividualKraAssignment from './IndividualKraAssignment';
 import styles from './styles.module.css';
 
 function EditKRA() {
-	const { data, loading, setActiveTab, activeTab, handleCreateKRA } = useListIndividualKra();
+	const { data, loading, setActiveTab, activeTab, handleManageKRA } = useListIndividualKra();
 
 	const router = useRouter();
 
@@ -31,7 +31,7 @@ function EditKRA() {
 					</div>
 				</div>
 
-				<Button onClick={handleCreateKRA}>Create KRA</Button>
+				<Button onClick={handleManageKRA}>Manage KRA</Button>
 			</div>
 
 			<Header data={data} />

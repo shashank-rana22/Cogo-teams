@@ -76,6 +76,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'download_employee_documents_zip',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{
@@ -259,6 +264,16 @@ const hrms = {
 		},
 		{
 			api          : 'create_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'edit_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_kra',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

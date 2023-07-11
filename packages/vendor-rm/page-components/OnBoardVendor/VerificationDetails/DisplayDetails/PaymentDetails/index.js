@@ -1,30 +1,21 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import fieldsInPaymentDetails from '../../../../utils/fieldsInPaymentDetails';
 import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
-const fieldsToShow = {
-	account_holder_name : 'Account Holder’s Name',
-	account_number      : 'Account No.',
-	account_type        : 'Account Type',
-	ifsc_code           : 'IFSC Code',
-	bank_name           : 'Bank Name',
-	branch_name         : 'Branch Name',
-	bank_document_url   : 'Cancelled Cheque/Passbook',
-	address             : 'Billing Address',
-	tax_number          : 'GST Number',
-	tax_document_url    : 'GST Proof',
-};
+const PAYMENT_DETAILS_CONSTANT = 0;
 
 const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
 function PaymentDetails({
 	detail,
 }) {
+	const FIELDS_TO_SHOW = fieldsInPaymentDetails();
 	const getDisplayValue = ({ fieldName }) => {
-		const val = detail?.[0]?.[fieldName] || '';
+		const val = detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName] || '';
 
 		if (!val) {
 			return '-';
@@ -63,23 +54,33 @@ function PaymentDetails({
 
 			<div className={styles.body}>
 				<div className={styles.single_record}>
-					{Object.keys(fieldsToShow).map((fieldName) => (
-						<div
-							key={fieldName}
-							className={styles.fields_to_show}
-							style={{
-								flexBasis: `${fieldName === 'address' ? '40%' : '20%'}`,
-							}}
-						>
-							<div className={styles.label}>
-								{fieldsToShow[fieldName]}
-							</div>
+					{Object.keys(FIELDS_TO_SHOW).map((fieldName) => {
+						const label = FIELDS_TO_SHOW[fieldName];
 
-							<div className={styles.value}>
-								{getDisplayValue({ fieldName })}
+						return (
+							<div
+								key={fieldName}
+								className={styles.fields_to_show}
+								style={{
+									flexBasis: detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+										? `${fieldName === 'address' ? '40%' : '20%'}` : 'none',
+								}}
+							>
+								{detail?.[PAYMENT_DETAILS_CONSTANT]?.[fieldName]
+						&& (
+							<div>
+								<div className={styles.label}>
+									{label}
+								</div>
+
+								<div className={styles.value}>
+									{getDisplayValue({ fieldName })}
+								</div>
 							</div>
-						</div>
-					))}
+						)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>
