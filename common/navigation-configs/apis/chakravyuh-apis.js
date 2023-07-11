@@ -25,6 +25,9 @@ const chakravyuh = {
 			service_name : 'fcl_freight_rate',
 		},
 	],
+	pricing_accuracy_dashboard: [
+
+	],
 };
 
 export default chakravyuh;

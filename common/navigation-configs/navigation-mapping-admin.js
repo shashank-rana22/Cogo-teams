@@ -2472,6 +2472,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/chakravyuh/feedback-dashboard',
 				possible_apis : apis.pricing_trends,
 			},
+			{
+				key           : 'chakravyuh-accuracy',
+				title         : 'Pricing Accuracy Dashboard',
+				href          : '/v2/chakravyuh/accuracy-dashboard',
+				as            : '/v2/chakravyuh/accuracy-dashboard',
+				possible_apis : apis.pricing_accuracy_dashboard,
+			},
 		],
 
 	},
