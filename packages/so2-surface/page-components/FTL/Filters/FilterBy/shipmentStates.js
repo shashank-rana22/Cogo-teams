@@ -1,4 +1,4 @@
-export const SHIPMENT_STATES = [
+const SHIPMENT_STATES = [
 	{
 		label : 'Awaiting Service Provider Confirmation',
 		value : 'Awaiting Service Provider Confirmation',
@@ -34,3 +34,5 @@ export const SHIPMENT_STATES = [
 		value : 'Cancelled',
 	},
 ];
+
+export default SHIPMENT_STATES;

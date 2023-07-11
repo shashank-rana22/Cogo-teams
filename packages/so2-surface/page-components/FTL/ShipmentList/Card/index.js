@@ -16,7 +16,7 @@ const ICON_MAPPING = {
 const INVOICE_TYPES = ['purchase_invoice', 'proforma_invoice'];
 export default function Card({
 	item = {}, checkedRows = {}, setCheckedRows = () => {},
-	activeTab,
+	activeTab = '',
 	isSelectable = false,
 }) {
 	const router = useRouter();
@@ -32,8 +32,6 @@ export default function Card({
 
 	return (
 		<div
-			role="button"
-			tabIndex={0}
 			className={`${INVOICE_TYPES.includes(activeTab)
 				? styles.shipment_card : styles.card}`}
 		>

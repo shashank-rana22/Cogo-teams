@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 const MINIMUM_COUNT_FOR_PLURAL = 1;
@@ -8,7 +9,7 @@ export const renderValue = (label, detail) => {
 			return [startCase(detail.truck_type || '')].map((word) => {
 				const [firstChar, ...remainingChars] = word || '';
 				const capitalized = `${firstChar?.toUpperCase()}${remainingChars?.join('')}`;
-				return capitalized.replace(/(\d+)([a-z]+)/i, '$1 $2');
+				return capitalized.replace(GLOBAL_CONSTANTS.regex_patterns.words_prefixed_by_digits, '$1 $2');
 			}).join(' ');
 
 		case 'trucks_count':

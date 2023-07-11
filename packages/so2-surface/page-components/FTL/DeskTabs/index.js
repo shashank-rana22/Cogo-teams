@@ -1,6 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import TabContainer from '../../../configs/TAB_CONFIG';
 import DashboardContext from '../../../context/DashboardContext';
@@ -32,7 +31,7 @@ function DeskTabs({ tabData = {} }) {
 						title={tab.label}
 						name={tab.value}
 						badge={tabData[tab.stats] || DEFAULT_BADGE_VALUE}
-						key={uuidv4()}
+						key={tab.value}
 					/>
 				))}
 			</Tabs>

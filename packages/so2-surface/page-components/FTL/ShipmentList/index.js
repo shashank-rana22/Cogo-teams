@@ -23,7 +23,7 @@ function ShipmentList({ loading = false, data = {} }) {
 
 	const { list = [] } = data || {};
 	const [checkedRows, setCheckedRows] = useState(new Set());
-	const [allocatedSo2, setAllocatedSo2] = useState();
+	const [allocatedSo2, setAllocatedSo2] = useState('');
 	const [show, setShow] = useState(false);
 
 	const handAllocate = async () => {

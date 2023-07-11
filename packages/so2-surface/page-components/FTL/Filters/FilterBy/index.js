@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 
 import DashboardContext from '../../../../context/DashboardContext';
 
-import { SHIPMENT_STATES } from './shipmentStates';
+import SHIPMENT_STATES from './shipmentStates';
 import styles from './styles.module.css';
 
 function FilterBy({

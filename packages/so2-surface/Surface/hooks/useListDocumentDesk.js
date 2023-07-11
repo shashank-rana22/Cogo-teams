@@ -10,10 +10,10 @@ import DashboardContext from '../../context/DashboardContext';
 const MIN_PAGE_VALUE = 1;
 
 const useListDocumentDesk = () => {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const { page = 1, ...restFilters } = filters || {};
 
 	const { startDate:from_created_at, endDate:to_created_at } = filters || {};

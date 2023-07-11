@@ -18,8 +18,8 @@ function SortBy({
 	popoverFilter = {},
 	setShowPopover = () => {},
 }) {
-	const [order, setOrder] = useState('desc');
 	const { filters = {}, setFilters } = useContext(DashboardContext);
+	const [order, setOrder] = useState('desc');
 
 	const [sortValue, setSortValue] = useState('created_at');
 	const handleReset = () => {
