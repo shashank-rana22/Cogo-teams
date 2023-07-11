@@ -17,6 +17,8 @@ import {
 } from '../helpers/snapshotHelpers';
 import sortChats from '../helpers/sortChats';
 
+import useListOrganizations from './useListOrganizations';
+
 const MAX_DISTANCE_FROM_BOTTOM = 150;
 
 function useListChats({
@@ -45,6 +47,8 @@ function useListChats({
 		lastMessageTimeStamp : Date.now(),
 		isLastPage           : false,
 		pinnedMessagesData   : {},
+		kamContacts          : [],
+		kamContactsPage      : 0,
 	});
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();
@@ -52,6 +56,8 @@ function useListChats({
 	const { observer = '', chat_tags = '' } = appliedFilters || {};
 
 	const canShowPinnedChats = !(observer || chat_tags);
+
+	const { getOrganizations } = useListOrganizations({ searchQuery });
 
 	const omniChannelCollection = useMemo(
 		() => collectionGroup(firestore, 'rooms'),
@@ -101,21 +107,31 @@ function useListChats({
 		});
 	}, []);
 
+	const SUB_TAB_WISE_FUNC_MAPPING = useMemo(() => ({
+		all         : getPrevChats,
+		kamContacts : getOrganizations,
+		default     : getPrevChats,
+	}), [getOrganizations]);
+
 	const handleScroll = useCallback((e) => {
 		const reachBottom = e.target.scrollHeight - (e.target.clientHeight
 			+ e.target.scrollTop) <= MAX_DISTANCE_FROM_BOTTOM;
 
 		if (reachBottom && !listData?.isLastPage && !loadingState?.chatsLoading) {
-			getPrevChats({
+			console.log('reachBottom', reachBottom);
+			const onScrollFunc = SUB_TAB_WISE_FUNC_MAPPING[activeSubTab] || SUB_TAB_WISE_FUNC_MAPPING.default;
+			onScrollFunc?.({
 				omniChannelCollection,
 				omniChannelQuery,
 				listData,
 				setLoadingState,
 				setListData,
 				updateLoadingState,
+				currentPage: listData?.kamContactsPage,
 			});
 		}
-	}, [listData, omniChannelCollection, omniChannelQuery, loadingState?.chatsLoading, updateLoadingState]);
+	}, [listData, omniChannelCollection, omniChannelQuery,
+		loadingState?.chatsLoading, updateLoadingState, SUB_TAB_WISE_FUNC_MAPPING, activeSubTab]);
 
 	const { sortedPinnedChatList, sortedUnpinnedList } = sortChats(listData, userId);
 
@@ -153,11 +169,12 @@ function useListChats({
 			queryForSearch,
 			omniChannelQuery,
 			updateLoadingState,
+			activeSubTab,
 		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState, activeSubTab]);
 
 	useEffect(() => {
 		mountFlashChats({
@@ -174,12 +191,20 @@ function useListChats({
 		};
 	}, [omniChannelCollection, viewType, setCarouselState, updateLoadingState]);
 
+	useEffect(() => {
+		if (activeSubTab === 'kamContacts') {
+			setListData((prev) => ({ ...prev, kamContacts: [] }));
+			getOrganizations({ setListData, setLoadingState });
+		}
+	}, [activeSubTab, getOrganizations]);
+
 	return {
 		chatsData: {
 			messagesList      : sortedUnpinnedList || [],
 			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
 			flashMessagesList : filterAndSortFlashMessages({ flashMessagesData }) || [],
+			kamContacts       : listData.kamContacts || [],
 		},
 		setActiveMessage,
 		setAppliedFilters,

@@ -21,14 +21,14 @@ const COMPONENT_MAPPING = {
 };
 
 function Customers({
-	setActiveTab,
-	activeTab,
+	setActiveTab = () => {},
+	activeTab = '',
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
 	tagOptions = [],
 	mailProps = {},
-	firestore,
+	firestore = {},
 	viewType = '',
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);

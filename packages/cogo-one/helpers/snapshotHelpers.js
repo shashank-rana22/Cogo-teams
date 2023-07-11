@@ -12,6 +12,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
+const FIREBASE_MESSAGES_NOT_REQUIRED_TABS = ['kam_contacts'];
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -156,11 +157,16 @@ export function mountUnreadCountSnapShot({
 
 export function mountSnapShot({
 	setLoadingState, setListData, snapshotListener, omniChannelCollection,
-	queryForSearch, omniChannelQuery, updateLoadingState,
+	queryForSearch, omniChannelQuery, updateLoadingState, activeSubTab,
 }) {
 	const snapshotRef = snapshotListener;
 	setListData((prev) => ({ ...prev, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
+
+	if (FIREBASE_MESSAGES_NOT_REQUIRED_TABS.includes(activeSubTab)) {
+		return;
+	}
+
 	setLoadingState((prev) => ({ ...prev, chatsLoading: true }));
 
 	const newChatsQuery = query(

@@ -60,7 +60,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access      : ['all', 'observer', 'teams'],
+		chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
 		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
@@ -89,7 +89,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access   : ['all', 'teams'],
+		chat_sub_tabs_access   : ['all', 'teams', 'kamContacts'],
 		default_side_nav       : 'profile',
 		accesible_filters      : {
 			observer : ['closed_session'],
