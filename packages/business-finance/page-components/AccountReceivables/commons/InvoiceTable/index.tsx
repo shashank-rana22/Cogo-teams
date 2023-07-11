@@ -22,7 +22,7 @@ interface Props {
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-function InvoiceTable({ organizationId, entityCode, showName }: Props) {
+function InvoiceTable({ organizationId = '', entityCode = '', showName = false }: Props) {
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 

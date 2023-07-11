@@ -40,7 +40,7 @@ const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
+function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { profile = {} }: RootState = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
 	const [uploadInvoice, setUploadInvoice] = useState(false);
