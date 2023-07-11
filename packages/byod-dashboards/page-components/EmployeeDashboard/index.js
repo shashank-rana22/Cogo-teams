@@ -7,8 +7,10 @@ import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
 import DeviceDetails from '../../common/DeviceDetails';
+import EmployeeData from '../../common/EmployeeData';
 import Spinner from '../../common/Spinner';
 import useCreateInvoice from '../../hooks/useCreateDeviceDetail';
+import useGetEmployeeData from '../../hooks/useGetEmployeeData';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
 import {
 	DEVICE_OPTIONS, WARRANTY, getVendorNameOptions,
@@ -25,6 +27,7 @@ function EmployeeDashboard() {
 
 	const { data, loading : dataLoading, refetch } = useGetEmployeeDetails(user_id, true);
 	const { createDeviceDetail, loading } = useCreateInvoice(refetch);
+	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeData();
 
 	const { employee_device_detail } = data || {};
 
@@ -53,7 +56,7 @@ function EmployeeDashboard() {
 		setValue('other_vendor_name', '');
 	}, [device_type, setValue]);
 
-	if (dataLoading) {
+	if (dataLoading || employeeDataLoading) {
 		return (
 			<div className={styles.spinner_container}>
 				<Spinner />
@@ -65,7 +68,8 @@ function EmployeeDashboard() {
 		return (
 			<>
 				<div className={styles.title}>Employee BYOD Form</div>
-				<DeviceDetails deviceData={employee_device_detail} />
+				<EmployeeData data={employeeData} />
+				<DeviceDetails deviceData={employee_device_detail} className="device_details" />
 			</>
 		);
 	}
@@ -73,8 +77,9 @@ function EmployeeDashboard() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.title}>Employee BYOD Form</div>
+			<EmployeeData data={employeeData} />
 			<form onSubmit={handleSubmit(handleForm)}>
-				<div className={styles.heading}>Apply for Device</div>
+				<div className={styles.heading}>Apply for Device :</div>
 				<div className={styles.container}>
 					<div className={styles.controller}>
 						<div className={styles.label}>Device type</div>

@@ -23,7 +23,7 @@ export const EMPLOYEE_DETAILS = [
 	},
 	{
 		label : 'Designation',
-		key   : 'employee_id',
+		key   : 'designation',
 	},
 ];
 
@@ -49,19 +49,56 @@ export const EMPLOYEE_DEVICE_DETAILS = [
 		key   : 'device_type',
 	},
 	{
-		label : 'Invoice Amount',
-		key   : 'invoice_amount',
+		label  : 'Invoice Amount (Amount in Rupees)',
+		key    : 'invoice_amount',
+		prefix : '₹',
+		type   : 'amount',
 	},
 	{
-		label : 'GST Amount',
-		key   : 'tax_amount',
+		label  : 'GST Amount (Amount in Rupees)',
+		key    : 'tax_amount',
+		prefix : '₹',
+		type   : 'amount',
 	},
 	{
 		label : 'Warranty',
 		key   : 'warranty',
 	},
 	{
-		label : 'Warranty Amount',
-		key   : 'warranty_amount',
+		label  : 'Warranty Amount (Amount in Rupees)',
+		key    : 'warranty_amount',
+		prefix : '₹',
+		type   : 'amount',
+	},
+];
+
+export const EMPLOYEE_DATA = [
+	{
+		label : 'Employee Name',
+		key   : 'name',
+	},
+	{
+		label : 'Employee Id',
+		key   : 'employee_code',
+	},
+	{
+		label : 'Employee Id',
+		key   : 'employee_code',
+	},
+	{
+		label : 'Designation',
+		key   : 'designation',
+	},
+	{
+		label : 'Department',
+		key   : 'department',
+	},
+	{
+		label : 'Location',
+		key   : 'office_location',
+	},
+	{
+		label : 'HRBP',
+		key   : 'hrbp',
 	},
 ];
