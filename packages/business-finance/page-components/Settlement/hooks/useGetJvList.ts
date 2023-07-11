@@ -2,7 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetJvList = ({ filters }) => {
+const useGetJvList = ({ filters, entityCode }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/parent-jv/list',
@@ -30,6 +30,7 @@ const useGetJvList = ({ filters }) => {
 				query     : query || undefined,
 				sortBy    : sortBy || undefined,
 				sortType  : sortType || undefined,
+				entityCode,
 			},
 		});
 	};
@@ -44,9 +45,10 @@ const useGetJvList = ({ filters }) => {
 				query     : query || undefined,
 				sortBy    : sortBy || undefined,
 				sortType  : sortType || undefined,
+				entityCode,
 			},
 		});
-	}, [trigger, status, category, query, page, sortType, sortBy]);
+	}, [trigger, status, category, query, page, sortType, sortBy, entityCode]);
 
 	return {
 		data,

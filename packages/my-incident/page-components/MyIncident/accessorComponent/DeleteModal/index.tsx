@@ -6,18 +6,21 @@ import useDeleteAccept from '../../hooks/useDeleteAccept';
 
 import styles from './styles.module.css';
 
+const VALID_STATUS = ['CLOSED', 'RAISED_AGAIN', 'DELETED'];
 function DeleteModal({ itemData, refetch }) {
-	const { id, userIncidentStatus, status } = itemData || {};
+	const { id, userIncidentStatus, status, type } = itemData || {};
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [remarks, setRemarks] = useState(null);
 	const { onDeleteAccept, loadingOndelete } = useDeleteAccept({ id, userIncidentStatus, remarks, refetch });
+
+	const disabledButtonCondition = VALID_STATUS.includes(userIncidentStatus)
+	|| type === 'PAYMENT_CONFIRMATION_APPROVAL';
 	return (
 		<div>
 			<div className={styles.button_style}>
 				{status === 'REJECTED' || status === 'DELETED' ? (
 					<Button
-						disabled={userIncidentStatus === 'CLOSED' || userIncidentStatus === 'RAISED_AGAIN'
-						|| userIncidentStatus === 'DELETED'}
+						disabled={disabledButtonCondition}
 						themeType="tertiary"
 						size="sm"
 						onClick={() => { setShowDeleteModal(true); }}

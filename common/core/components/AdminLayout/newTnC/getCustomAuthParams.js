@@ -1,4 +1,4 @@
-const NAVIGATION = 'employee_portal';
+const NAVIGATION = 'welcome';
 
 const API_INDEX = 0;
 const FIRST_INDEX = 1;

@@ -1,7 +1,7 @@
 const getStep0Controls = [
 	{
 		name           : 'shipping_line_id_fcl_main',
-		label          : 'Shipping Line Fcl Freight',
+		label          : 'Shipping Line FCL Freight',
 		type           : 'select',
 		optionsListKey : 'shipping-lines',
 		placeholder    : 'Select Shipping Line',
@@ -14,7 +14,7 @@ const getStep0Controls = [
 	{
 		name           : 'service_provider_id_fcl_main',
 		type           : 'select',
-		label          : 'Service Provider Fcl Freight',
+		label          : 'Service Provider FCL Freight',
 		optionsListKey : 'verified-service-providers',
 		placeholder    : 'Select Service Provider',
 		multiple       : false,
@@ -26,7 +26,7 @@ const getStep0Controls = [
 	},
 	{
 		name           : 'shipping_line_id_fcl_local',
-		label          : 'Shipping Line Fcl Local',
+		label          : 'Shipping Line FCL Local',
 		type           : 'select',
 		optionsListKey : 'shipping-lines',
 		placeholder    : 'Select Shipping Line',
@@ -41,7 +41,7 @@ const getStep0Controls = [
 	{
 		name           : 'service_provider_id_fcl_local',
 		type           : 'select',
-		label          : 'Service Provider Fcl Local',
+		label          : 'Service Provider FCL Local',
 		optionsListKey : 'verified-service-providers',
 		placeholder    : 'Select Service Provider',
 		multiple       : false,

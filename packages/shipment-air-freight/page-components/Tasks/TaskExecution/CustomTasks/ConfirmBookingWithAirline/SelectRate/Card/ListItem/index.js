@@ -1,4 +1,4 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip, Button, cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getBuyPrice from '../../../utils/getBuyPrice';
@@ -17,6 +17,15 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 }) {
+	const { service, volume, weight, commodity, price_type, is_minimum_price_system_rate } = data || {};
+	const {
+		weight: service_weight,
+		volume: service_volume,
+		commodity: service_commodity,
+		price_type: service_price_type,
+		packages_count: service_packages_count,
+		is_minimum_price_shipment: service_is_minimum_price_shipment,
+	} = service || {};
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -37,26 +46,29 @@ function ListItem({
 							: data?.reverted_airline?.business_name || '-'}
 					</div>
 				</div>
-
-				<div>
-					<div className={styles.heading}>No of Pkts</div>
-					<div className={styles.sub_heading}>{data?.service?.packages_count || '-'}</div>
-				</div>
+				{item?.source === 'flash_booking' && (
+					<div>
+						<div className={styles.heading}>No of Pkts</div>
+						<div className={styles.sub_heading}>{service_packages_count || '-'}</div>
+					</div>
+				)}
 
 				<div>
 					<div className={styles.heading}>Vol. Weight</div>
 					<div className={styles.sub_heading}>
-						{((data?.service?.volume
+						{((service_volume || volume
 							|| DEFAULT_VALUE_FOR_NULL_HANDLING) * VOLUMETRIC_WEIGHT).toFixed(DECIMAL_PLACE)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Gross Weight</div>
-					<div className={styles.sub_heading}>{data?.service?.weight || '-'}</div>
+					<div className={styles.sub_heading}>{service_weight || weight || '-'}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(service_commodity || commodity || '-')}
+					</div>
 				</div>
 				{data?.service?.commodity_description && (
 					<div>
@@ -65,7 +77,7 @@ function ListItem({
 							content={data?.service?.commodity_description}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 								{data?.service?.commodity_description}
 							</div>
 						</Tooltip>
@@ -78,7 +90,7 @@ function ListItem({
 							content={data?.service?.hs_code}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 								{data?.service?.hs_code}
 							</div>
 						</Tooltip>
@@ -86,20 +98,20 @@ function ListItem({
 				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
-					<div className={styles.sub_heading}>{startCase(data?.service?.price_type) || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(service_price_type || price_type || '-')}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Buy Price</div>
 					<div className={styles.sub_heading}>{getBuyPrice(data, item.source) || '-'}</div>
 				</div>
-				{item?.source === 'flash_booking' && (
-					<div>
-						<div className={styles.heading}>Min. Price</div>
-						<div className={styles.sub_heading}>
-							{data?.service?.is_minimum_price_shipment ? 'Yes' : 'No'}
-						</div>
+				<div>
+					<div className={styles.heading}>Min. Price</div>
+					<div className={styles.sub_heading}>
+						{ is_minimum_price_system_rate || service_is_minimum_price_shipment ? 'Yes' : 'No'}
 					</div>
-				)}
+				</div>
 				{data?.data?.rate_procurement_proof_url
 				&& item?.source === 'flash_booking'
 				&& (
@@ -107,7 +119,8 @@ function ListItem({
 						<div className={styles.heading}>Rate Proof</div>
 						<div className={styles.sub_heading}>
 							<Button
-								themeType="link"
+								themeType="linkUi"
+								size="md"
 								onClick={() => window.open(
 									data?.data?.rate_procurement_proof_url,
 									'_blank',

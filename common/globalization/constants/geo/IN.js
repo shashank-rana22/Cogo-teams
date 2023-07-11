@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
 		id   : '541d1232-58ce-4d64-83d6-556a42209eb7',
@@ -203,8 +204,12 @@ export default {
 			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
-		cogo_one_shipment_agent_ids: [
+		cogo_one_admin_user_ids     : [], // todo
+		cogo_one_shipment_agent_ids : [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		cogo_one_kam_agent_ids: [
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
 		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
 		fortigo_network_ids : [
@@ -437,6 +442,103 @@ export default {
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
 		],
+		timezone: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
+		services: [
+			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+			{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
+		],
+		education_level: {
+			post_graduates_degree: [
+				{
+					label : 'Master of Business Administration (M.B.A)',
+					value : 'master_of_business_administration_(M.B.A)',
+				},
+				{ label: 'Master of Technology (M.Tech)', value: 'master_of_technology_(M.Tech)' },
+				{ label: 'Master of Commerce (M.Com)', value: 'master_of_commerce_(M.Com)' },
+				{ label: 'Master of Arts (M.A)', value: 'master_of_arts_(M.A)' },
+				{ label: 'Master of Science (M.Sc)', value: 'master_of_science_(M.Sc)' },
+				{ label: 'Master of Architecture (M.Arch)', value: 'master_of_architecture_(M.Arch)' },
+				{ label: 'Master of Law (LL.M)', value: 'master_of_law_(LL.M)' },
+				{ label: 'Master of Computer Applications (M.C.A)', value: 'master_of_computer_applications_(M.C.A)' },
+				{ label: 'Master of Business Management (M.B.M)', value: 'master_of_business_management_(M.B.M)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Masters in Design (M.Des)', value: 'masters_in_design_(M.Des)' },
+				{
+					label : 'Masters Programme in International Business (M.P.I.B)',
+					value : 'masters_rogramme_in_international_business_(M.P.I.B)',
+				},
+				{ label: 'Master of Business Laws (M.B.L)', value: 'master_of_business_laws_(M.B.L)' },
+				{ label: 'Master of Philosophy (M.Phil)', value: 'master_of_philosophy_(M.Phil)' },
+				{ label: 'Master of Management Program (M.M.P)', value: 'master_of_management_program_(M.M.P)' },
+				{ label: 'Master of Journalism (M.J)', value: 'master_of_journalism_(M.J)' },
+				{
+					label : 'Master of International Business (M.I.B)',
+					value : 'master_of_international_business_(M.I.B)',
+				},
+				{ label: 'Others', value: 'others' },
+			],
+			graduate_degree: [
+				{
+					label : 'Bachelor of Engineering/Tech (BE/B.Tech)',
+					value : 'bachelor_of_engineering/tech_(BE/B.Tech)',
+				},
+				{ label: 'Bachelor of Science', value: 'bachelor_of_science' },
+				{ label: 'Bachelor of Arts', value: 'bachelor_of_arts' },
+				{ label: 'Bachelor of Law (B.L)', value: 'bachelor_of_law_(B.L)' },
+				{ label: 'Bachelor of Commerce', value: 'bachelor_of_commerce' },
+				{ label: 'Bachelor of Design (B.Des)', value: 'bachelor_of_design_(B.Des)' },
+				{ label: 'Bachelor of Visual Arts (B.V.A)', value: 'bachelor_of_visual_arts_(B.V.A)' },
+				{ label: 'Bachelor of Architecture (B.Arch)', value: 'bachelor_of_architecture_(B.Arch)' },
+				{ label: 'Bachelor of Applied Sciences (B.A.S)', value: 'bachelor_of_applied_sciences_(B.A.S)' },
+				{
+					label : 'Bachelor of Computer Applications (B.C.A)',
+					value : 'bachelor_of_computer_applications_(B.C.A)',
+				},
+				{ label: 'BMS/BBA/BBS', value: 'BMS/BBA/BBS' },
+				{ label: 'Bachelor of Business Studies (B.B.S)', value: 'bachelor_of_business_studies_(B.B.S)' },
+				{ label: 'Bachelor of Business Management (B.B.M)', value: 'bachelor_of_business_management_(B.B.M)' },
+				{
+					label : 'Bachelor of Business Administration (B.B.A)',
+					value : 'bachelor_of_business_administration_(B.B.A)',
+				},
+				{
+					label : 'Bachelor of Fashion Technology (B.F.Tech)',
+					value : 'bachelor_of_fashion_technology_(B.F.Tech)',
+				},
+				{
+					label : 'Bachelor of Medicine Bachelor of Surgery (M.B.B.S)',
+					value : 'bachelor_of_medicine_bachelor_of_surgery_(M.B.B.S)',
+				},
+				{ label: 'Bachelor of Pharmacy (B.Pharma)', value: 'bachelor_of_pharmacy_(B.Pharma)' },
+				{ label: 'IIM 5-year Integrated Mgmt. Program', value: 'iim_5_year_integrated_mgmt._program' },
+				{ label: 'Others', value: 'others' },
+			],
+			doctorate_degree: [
+				{ label: 'Doctor of Medicine (M.D.)', value: 'doctor_of_medicine_(M.D.)' },
+				{ label: 'Doctor of Philosophy (Ph.D)', value: 'doctor_of_philosophy_(Ph.D)' },
+				{ label: 'Master of Dental Surgery (M.D.S)', value: 'master_of_dental_surgery_(M.D.S)' },
+				{ label: 'Phd in management', value: 'phd_in_management' },
+				{ label: 'Others', value: 'others' },
+			],
+		},
+		disable_options: ['10th', '12th', 'Diploma'],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -467,6 +569,11 @@ export default {
 			max_length : 15,
 		},
 
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Za-z]{4}\d{7}$/,
+		},
+
 		pan_number: {
 			label   : 'PAN',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
@@ -478,11 +585,13 @@ export default {
 
 		navigations: {
 			onboard_vendor: {
-				validate_registration: true,
+				validate_registration : true,
+				registration_types    : false,
 			},
 			cogo_one: {
-				has_voice_call_access : true,
-				default_country_code  : 'IN',
+				has_voice_call_access     : true,
+				default_country_code      : 'IN',
+				template_default_language : 'english',
 			},
 		},
 	},

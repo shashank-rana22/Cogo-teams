@@ -1,20 +1,15 @@
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMessages = false, viewType = '' }) => {
-	const listAgentsOptions = useGetAsyncOptions(
-		asyncFieldsListAgents(),
-	);
-	const HIDE_CONTROLS_MAPPING = {
-		admin_view    : ['observer'],
-		kam           : ['assigned_to', 'assigned_agent'],
-		shipment_view : ['assigned_to', 'assigned_agent', 'observer'],
-	};
-	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
-		label : 'Seen By User',
-		value : 'seen_by_user',
-	}] : [];
+const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
+	all      : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	groups   : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	message  : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	teams    : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	contacts : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+	observer : ['status', 'channels', 'escalation', 'mobile_no', 'shipment_filters'],
+};
 
+const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 	const controls = [
 		{
 			label          : '',
@@ -31,13 +26,12 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 					label : 'All',
 					value : 'all',
 				},
-				...extraStatusOptions,
 			],
 		},
 		{
 			label          : 'Channels',
 			name           : 'channels',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			multiple       : true,
 			value          : [],
@@ -87,67 +81,70 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		{
 			label          : '',
 			name           : 'assigned_agent',
-			controllerType : 'select',
+			controllerType : 'asyncSelect',
+			asyncKey       : 'list_chat_agents',
+			initialCall    : true,
 			value          : '',
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Agent',
 			rules          : {
 				required: 'This is Requied',
 			},
-			...(listAgentsOptions || {}),
 		},
 		{
-			label          : 'Other Filters',
-			name           : 'observer',
-			controllerType : 'radio',
-			value          : '',
-			multiple       : false,
-			className      : 'escalation_field_controller',
-			options        : [
-				{
-					label : 'Observer',
-					value : 'adminSession',
-				},
-				{
-					label : 'Closed',
-					value : 'botSession',
-				},
-				{
-					label : 'Chat Tags',
-					value : 'chat_tags',
-				},
-			],
-		},
-		{
-			label          : isomniChannelAdmin ? 'Tags' : '',
+			label          : 'Tags',
 			name           : 'chat_tags',
 			controllerType : 'select',
 			value          : '',
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Tags',
 			isClearable    : true,
-			rules          : {
-				required: !isomniChannelAdmin ? 'This is Required' : false,
-			},
-			options: tagOptions,
+			options        : tagOptions,
 		},
 		{
 			label          : 'Shipments',
 			name           : 'shipment_filters',
-			controllerType : 'checkboxgroup',
+			controllerType : 'checkboxGroup',
 			className      : 'channels_field_controller',
 			options        : [
-				{ label: 'Is likely To Book Shipment', value: 'likely_to_book_shipment' },
+				{
+					label : 'Is likely To Book Shipment',
+					value : 'likely_to_book_shipment',
+				},
 			],
 		},
 		{
-			label:
-		(
-			<p>
-				Mobile No.
-				<br />
-				(along with country code)
-			</p>),
+			label          : 'Seen By User',
+			name           : '15_min_filter',
+			controllerType : 'checkboxGroup',
+			className      : 'channels_field_controller',
+			options        : [
+				{
+					label : 'Seen By User',
+					value : 'seen_by_user',
+				},
+			],
+		},
+		{
+			label          : 'Closed',
+			name           : 'closed_session',
+			controllerType : 'checkboxGroup',
+			className      : 'channels_field_controller',
+			options        : [
+				{
+					label : 'Closed',
+					value : 'closed',
+				},
+			],
+		},
+		{
+			label: (
+				<p>
+					Mobile No.
+					<br />
+					(along with country code)
+				</p>
+			),
 			name           : 'mobile_no',
 			controllerType : 'input',
 			placeholder    : 'enter here',
@@ -156,9 +153,12 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		},
 	];
 
-	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[viewType || 'kam'])
-		.includes(item?.name));
-	return newControls;
+	const ACCESIBLE_FILTERS = [
+		...(COMMON_CONTROL_KEYS_TAB_WISE_MAPPING[activeSubTab] || []),
+		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_filters?.[activeSubTab] || []),
+	];
+
+	return controls.filter((item) => ACCESIBLE_FILTERS.includes(item.name)) || [];
 };
 
 export default useGetControls;

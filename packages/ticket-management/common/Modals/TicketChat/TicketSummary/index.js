@@ -4,13 +4,14 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING } from '../../../../constants';
-import getTicketStatus from '../../../../utils/getTicketStatus';
+import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
 
 import styles from './styles.module.css';
 
 function TicketSummary({
-	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers, TicketUser: ticketUser, TicketReviewer: ticketReviewer,
+	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
+	TicketReviewer: ticketReviewer = {},
+	TicketStatus: ticketStatus = '',
 }) {
 	const {
 		ID: id = '',
@@ -23,7 +24,7 @@ function TicketSummary({
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
-	const { label = '' } = STATUS_LABEL_MAPPING[getTicketStatus(status)] || {};
+	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
 
 	return (
 		<div className={styles.container}>
@@ -42,7 +43,13 @@ function TicketSummary({
 					<div className={styles.description}>{type}</div>
 				</div>
 				<div className={styles.ticket_status}>
-					<div>{label || status}</div>
+					<div style={{
+						color: textColor || '#000',
+					}}
+					>
+						{label || status}
+
+					</div>
 					<div className={styles.updated_at}>
 						{formatDate({
 							date       : updatedAt,

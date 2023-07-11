@@ -1,5 +1,6 @@
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState, useMemo } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
@@ -21,9 +22,7 @@ const removeTypeField = (controlItem) => {
 };
 
 function AddressDetails({ data:content, getEmployeeDetails }) {
-	const [address, setAddress] = useState(false);
-
-	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, getValues, watch } = useForm();
 
 	const { permanent_address, present_address, id } = content?.detail || {};
 
@@ -42,6 +41,19 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	const permanentcontrols = permanent_controls({ content });
 
 	const { updateEmployeeDetails, loading } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+
+	const addressEqualityCheck = JSON.stringify(permanent_address) === JSON.stringify(present_address);
+
+	const [isAddressChecked, setIsAddressChecked] = useState(addressEqualityCheck);
+
+	const permanentValues = watch(['permanent_city', 'permanent_state', 'permanent_country',
+		'permanent_pincode', 'permanent_address']);
+
+	const presentValues = watch(['current_city', 'current_state', 'current_country',
+		'current_pincode', 'current_address']);
+
+	const equalityCheck = JSON.stringify(permanentValues) === JSON.stringify(presentValues)
+		&& permanentValues?.[GLOBAL_CONSTANTS?.zeroth_index] !== undefined;
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
@@ -70,7 +82,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	}, [ADDRESS_MAPPING, setValue]);
 
 	const handleAddressChange = () => {
-		setAddress((prev) => !prev);
+		setIsAddressChecked((prev) => !prev);
 		const getControlvalues = getValues();
 
 		const {
@@ -91,16 +103,20 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			permanent_address : getValuePermanentAdd,
 		};
 
-		if (address === false) {
+		if (isAddressChecked === false) {
 			Object.keys(GETVALUES_MAPPING).map((element) => (
 				setValue(element, GETVALUES_MAPPING[element])
 			));
 		} else {
 			CURRENT_ADDRESS_MAPPING.map((element) => (
-				setValue(element, ADDRESS_MAPPING[element])
+				setValue(element, '')
 			));
 		}
 	};
+
+	useEffect(() => {
+		setIsAddressChecked(equalityCheck);
+	}, [equalityCheck]);
 
 	return (
 		<div className={styles.whole_container}>
@@ -181,8 +197,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			</div>
 
 			<div className={styles.check}>
-				<Checkbox onChange={handleAddressChange} />
-				Current Address is same as Permanent Address
+				<Checkbox
+					label="Current Address is same as Permanent Address"
+					onChange={handleAddressChange}
+					checked={isAddressChecked}
+				/>
 			</div>
 
 			<div className={styles.button}>

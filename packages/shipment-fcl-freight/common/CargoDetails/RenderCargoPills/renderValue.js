@@ -1,56 +1,22 @@
-import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
+import getPackageDetails from './getPackageDetails';
 import styles from './styles.module.css';
 
-export const renderValue = (label, detail) => {
+const CHARGABLE_WEIGHT_FACTOR_TO_CONVERT_VOLUME = 166.67;
+const KEY_INCREMENTOR = 1;
+const ONLY_ONE_ITEM = 1;
+const ROUND_VALUE = 2;
+
+export const renderValue = (label, detail, primary_service) => {
 	const { packages = [] } = detail || {};
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
-
-	const chargableWeight = Math.max(detail.volume * 166.67, detail?.weight);
-
-	const dimension = valueForInput?.length
-		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
-		: '';
-
-	const inputValue = valueForInput
-		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
-			valueForInput?.packing_type,
-		)}`
-		: '';
+	const chargableWeight = Math.max(detail.volume * CHARGABLE_WEIGHT_FACTOR_TO_CONVERT_VOLUME, detail?.weight);
 
 	const volume = ` ${detail.volume} cbm`;
-
-	const packageDetails = () => {
-		if (packages?.length > 1) {
-			return (
-				<Tooltip
-					placement="bottom"
-					theme="light"
-					content={(
-						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
-								const values = item
-									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
-									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
-									: '';
-								return <div>{values}</div>;
-							})}
-						</div>
-					)}
-				>
-					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
-						} more`}
-
-					</div>
-				</Tooltip>
-			);
-		}
-		return `Package: ${inputValue}`;
-	};
 
 	const formatPocData = (pocDetails) => (
 		<div>
@@ -74,11 +40,13 @@ export const renderValue = (label, detail) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
-					Click to view certificate
-					&nbsp;
-					{key + 1}
-					&nbsp;
+				<a href={item} target="_blank" rel="noreferrer" key={`${key + KEY_INCREMENTOR}`}>
+					`Click to view certificate
+					{' '}
+					$
+					{key + KEY_INCREMENTOR}
+					{' '}
+					`
 					<IcMOpenlink />
 					<br />
 				</a>
@@ -97,7 +65,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.containers_count === 1) {
+			if (detail.containers_count === ONLY_ONE_ITEM) {
 				return '1 Container';
 			}
 
@@ -107,7 +75,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.packages_count === 1) {
+			if (detail.packages_count === ONLY_ONE_ITEM) {
 				return '1 Package';
 			}
 
@@ -117,7 +85,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === ONLY_ONE_ITEM) {
 				return '1 Truck';
 			}
 
@@ -135,16 +103,16 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (isEmpty(packages)) {
 				return null;
 			}
-			return packageDetails();
+			return getPackageDetails(packages);
 
 		case 'volume':
 			return ` ${volume} ${detail.service_type === 'ftl_freight_service'
 				|| detail.service_type === 'haulage_freight_service'
 				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
+				: `, Chargeable Weight: ${chargableWeight.toFixed(ROUND_VALUE)} kg`
 			}`;
 		case 'weight':
 			return ` ${detail.weight} kgs`;
@@ -189,23 +157,55 @@ export const renderValue = (label, detail) => {
 		case 'destination_location.display_name':
 			return detail.destination_location?.display_name || '';
 		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+			return format(detail?.schedule_departure
+				|| detail?.selected_schedule_departure, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
+			return format(detail?.schedule_arrival
+				|| detail?.selected_schedule_arrival, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'bn_expiry':
-			return format(detail?.bn_expiry, 'dd MMM yyyy');
+			return format(detail?.bn_expiry, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'booking_note_deadline':
-			return format(detail?.booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.booking_note_deadline,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'si_cutoff':
-			return format(detail?.si_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.si_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'vgm_cutoff':
-			return format(detail?.vgm_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.vgm_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'gate_in_cutoff':
-			return format(detail?.gate_in_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.gate_in_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'document_cutoff':
-			return format(detail?.document_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.document_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'tr_cutoff':
-			return format(detail?.tr_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.tr_cutoff,
+				formatType : 'dateTime',
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+			});
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
 		case 'msds_certificates':
@@ -215,7 +215,7 @@ export const renderValue = (label, detail) => {
 		case 'bl_type':
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
+			return format(detail?.cargo_readiness_date, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -223,11 +223,14 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(ROUND_VALUE)} USD`;
 		case 'hs_code':
-			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
+			return detail?.hs_code?.hs_code_name;
 		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return format(detail?.delivery_date, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']);
+		case 'remarks':
+			return primary_service?.booking_preferences?.
+				[GLOBAL_CONSTANTS.zeroth_index].remarks || 'NA';
 		default:
 			return detail[label] || null;
 	}

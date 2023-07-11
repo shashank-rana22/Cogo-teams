@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm run eslint && pnpm run stylelint && pnpm git-precommit-checks
+npx lint-staged && pnpm run stylelint && pnpm git-precommit-checks
+

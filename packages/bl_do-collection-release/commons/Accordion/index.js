@@ -16,6 +16,7 @@ export default function Accordion({
 	getShipmentPendingTask = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask = false,
+	showTask = false,
 }) {
 	return (
 		<div className={styles.main_container}>
@@ -36,6 +37,7 @@ export default function Accordion({
 					handleAccordionOpen={handleAccordionOpen}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
+					showTask={showTask}
 				/>
 			)}
 			{accordionOpen && stateProps.inner_tab !== 'knockoff_pending' ? (
@@ -50,6 +52,7 @@ export default function Accordion({
 					refetch={refetch}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
+					showTask={showTask}
 				/>
 			) : null}
 		</div>

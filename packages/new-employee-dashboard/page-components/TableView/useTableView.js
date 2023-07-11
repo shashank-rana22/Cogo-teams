@@ -5,6 +5,7 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
+import useGetZipFile from './useGetZipFile';
 
 const INITIAL_PAGE = 1;
 
@@ -37,7 +38,9 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	}, [activeTab, search, trigger, page, filters]);
 
@@ -52,11 +55,15 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		);
 	};
 
+	const { downloadDocuments, loading:documentLoading } = useGetZipFile();
+
 	let columns = getColumns({
 		onClickNewJoinerColumn,
 		btnloading,
 		updateEmployeeStatus,
 		fetch,
+		downloadDocuments,
+		documentLoading,
 	});
 
 	if (activeTab !== 'rejected_by_user') {

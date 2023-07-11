@@ -1,0 +1,307 @@
+{
+    "knockoff_awaiting":{
+        "common": {
+          "filters": {
+            "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"]
+          },
+          "additional_methods": ["pagination", "seller"]
+        },
+        "fcl_freight": {
+          "export": {
+            "filters": {
+            "service_state": ["containers_gated_in", "vessel_departed", "vessel_arrived", "containers_gated_out"]
+            }
+          },
+          "import": {
+            "filters": {
+              "service_state": ["vessel_departed", "vessel_arrived", "containers_gated_out"],
+              "task_attributes": [{"task": "upload_igm_document", "status": "completed"},
+               {"task": "knockoff_invoices", "status": "pending"}]
+              }
+          }
+        },
+        "lcl_freight": {
+          "export": {
+            "filters": {
+            "service_state": ["containers_gated_in", "vessel_departed", "vessel_arrived", "containers_gated_out"]
+            }
+          },
+          "import": {
+            "filters": {
+              "service_state": ["vessel_departed", "vessel_arrived", "containers_gated_out"],
+              "task_attributes": [ {"task": "knockoff_invoices", "status": "pending"}]
+              }
+          }
+        },
+        "fcl_local": {
+          "export": {
+            "filters": {
+            "service_state": ["containers_gated_in", "vessel_departed", "vessel_arrived", "containers_gated_out"]
+            }
+          },
+          "import": {
+            "filters": {
+              "service_state": ["vessel_departed", "vessel_arrived", "containers_gated_out"],
+              "task_attributes": [{"task": "upload_igm_document", "status": "completed"},
+              {"task": "knockoff_invoices", "status": "pending"}]
+              }
+          }
+        }
+    },
+    "knockoff_pending": {
+      "common": {
+        "filters": {
+          "knockoff_pending": true,
+          "is_knocked_off": false,
+          "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"]
+        },
+        "additional_methods": ["pagination", "seller"]
+      },
+     "fcl_freight": {
+        "export": {
+            "filters": {
+              "task_attributes": [{"task": "knockoff_invoices", "status": "pending"}]
+            }
+          },
+          "import": {
+            "filters": {
+              "task_attributes": [{"task": "knockoff_bl_invoices", "status": "pending"}]
+            }
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {
+              "task_attributes": [{"task": "knockoff_invoices", "status": "pending"}]
+            }
+          },
+          "import": {
+            "filters": {
+              "task_attributes": [{"task": "knockoff_invoices", "status": "pending"}]
+            }
+          }
+      }, 
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {
+            }
+          }
+      }
+    },
+    "collection_pending":{
+      "common": {
+        "filters": {
+          "collection_pending": true,
+          "is_knocked_off": true,
+          "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"]
+        },
+        "additional_methods": ["pagination", "seller"]
+      },
+      "fcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      }
+    },
+    "under_collection":{
+      "common": {
+        "filters": {
+          "under_collection": true,
+          "is_knocked_off": true,
+          "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"]
+        },
+        "ready_to_collect_filters": {
+          "under_collection": true,
+          "is_knocked_off": true,
+          "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
+          "task_attributes": [{"task": ["upload_bill_of_lading", "upload_endorsed_bill_of_lading","upload_delivery_order"], "status": "pending"}]
+        },
+        "additional_methods": ["pagination", "seller"]
+      },
+      "fcl_freight": {
+        "export": {
+          "filters": {}
+        },
+        "import": {
+          "filters": {
+            "task_attributes": [{"task": "upload_delivery_order", "status": "pending"}]
+          }
+        }
+      },
+      "lcl_freight": {
+        "export": {
+          "filters": {}
+        },
+        "import": {
+          "filters": {
+            "task_attributes": [{"task": "upload_delivery_order", "status": "pending"}]
+          }
+        }
+      },
+      "fcl_local": {
+        "export": {
+          "filters": {}
+        },
+        "import": {
+          "filters": {
+            "task_attributes": [{"task": "upload_delivery_order", "status": "pending"}]
+          }
+        }
+      }
+    },
+    "collected": {
+      "common": {
+        "filters": {
+          "collected": true,
+          "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
+          "task_attributes": [{"task": ["upload_bill_of_lading", "generate_do_noc_certificate"], "status": "completed"}]
+        },
+        "all_status_filter":{"bl_status": ["uploaded", "approved", "eligible", "ineligible", "requested", "release_pending"]},
+        "ready_to_release_filter":{"bl_status": ["release_pending"]},
+        "additional_methods": ["pagination", "seller"]
+      },
+      "fcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      }
+    },
+    "released": {
+      "common":{
+        "filters": {
+          "bl_status": ["released", "delivered"]
+        },
+        "additional_methods": ["pagination", "buyer"]
+      },
+      "fcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      }
+    },
+    "surrendered": {
+      "common":{
+        "filters": {
+          "bl_status": ["surrendered", "surrender_pending"]
+        },
+        "additional_methods": ["pagination", "seller"]
+      },
+      "fcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      }
+    },
+    "on_hold": {
+      "common":{
+        "filters": {
+          "bl_status": ["hold"]
+        },
+        "additional_methods": ["pagination", "seller"]
+      },
+      "fcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "lcl_freight": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      },
+      "fcl_local": {
+        "export": {
+            "filters": {}
+          },
+          "import": {
+            "filters": {}
+          }
+      }
+    }
+  }
+  
