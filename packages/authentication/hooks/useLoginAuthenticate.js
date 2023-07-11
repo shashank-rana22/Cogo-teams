@@ -18,7 +18,7 @@ const useLoginAuthenticate = () => {
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const dispatch = useDispatch();
-	const { source = '' } = router.query || {};
+	const { source = '', redirect_path = '' } = router.query || {};
 
 	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 
@@ -67,11 +67,10 @@ const useLoginAuthenticate = () => {
 
 	const redirectFunction = async () => {
 		const configs = redirections(profile);
-		const redirectPath = getCookie('redirect_path');
+		const redirectPath = decodeURIComponent(redirect_path);
 
 		if (redirectPath) {
-			await router.push(redirectPath);
-			setCookie('redirect_path', 'expired', COOKIE_EXPIRY);
+			await router.push(`${redirectPath}`);
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');

@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
@@ -18,12 +17,6 @@ const UNAUTHENTICATED_PATHS = [
 	'/accept-invite/[id]',
 	'/verify-auto-sign-up-email/[id]',
 ];
-
-const REDIRECT_PATHS = [
-	'/[partner_id]/ticket-management/my-tickets',
-];
-
-const SECOND_QUERY_ELEMENT = 1;
 
 const useGetAuthorizationChecked = ({ firestoreToken }) => {
 	const {
@@ -51,14 +44,6 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 					const { partner = {} } = res.data || {};
 					setCookie('parent_entity_id', partner.id);
 
-					if (REDIRECT_PATHS.includes(pathname)) {
-						const newPath = pathname.replace(GLOBAL_CONSTANTS.regex_patterns.dynamic_bracket, '');
-						const queryPath = asPath.split('?')?.[SECOND_QUERY_ELEMENT];
-						const redirectPath = `${newPath}?${queryPath}`;
-
-						setCookie('redirect_path', redirectPath);
-					}
-
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
 					console.error(err);
@@ -85,7 +70,18 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
-					await push('/login');
+					let redirectPath = '';
+					if (pathname.includes('/[partner_id]')) {
+						redirectPath = pathname.replace('/[partner_id]', '');
+
+						const [, redirectPathQuery] = asPath.split('?');
+
+						const additionalQuery = redirectPathQuery ? `?${redirectPathQuery}` : '';
+
+						redirectPath = `?redirect_path=${encodeURIComponent(`${redirectPath}${additionalQuery}`)}`;
+					}
+
+					await push(`/login${redirectPath}`);
 				}
 				setSessionInitialized(true);
 			}

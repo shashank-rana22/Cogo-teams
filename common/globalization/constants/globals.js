@@ -330,7 +330,6 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
-		dynamic_bracket                   : /\/\[[^\]]+\]/,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
