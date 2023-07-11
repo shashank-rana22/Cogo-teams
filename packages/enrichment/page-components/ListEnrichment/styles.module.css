@@ -21,8 +21,7 @@
 }
 
 .svg_container {
-	display: flex;
-	align-items: center;
+	text-align: center;
 	cursor: pointer;
 }
 
