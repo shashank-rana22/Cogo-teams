@@ -3,7 +3,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
+import useUpdateRatesPreferences from '../../../hooks/useCreateRatesPreferences';
 import { DEFAULT_INDEX, VALUE_ONE, VALUE_TWO, VALUE_ZERO } from '../../constants';
 
 import CancellationModal from './CancellationModal';
@@ -12,8 +12,14 @@ import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
+const excludedServices = [
+	'fcl_freight_local_service',
+	'lcl_freight_local_service',
+	'air_freight_local_service',
+	'subsidiary_service',
+];
+
 function ServiceWiseDetails({
-	groupedShowServicesData,
 	serviceData,
 	shipmentData,
 	priceData,
@@ -21,7 +27,16 @@ function ServiceWiseDetails({
 	revenueDeskDecisionsData = [],
 }) {
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
-	const tabKeys = Object?.keys(groupedShowServicesData || {});
+	const GROUPED_SERVICES = {};
+	serviceData.forEach((service) => {
+		if (!excludedServices.includes(service.service_type)) {
+			GROUPED_SERVICES[service.service_type] = [
+				...(GROUPED_SERVICES[service.service_type] || []),
+				service,
+			];
+		}
+	});
+	const tabKeys = Object?.keys(GROUPED_SERVICES || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [rateOptions, setRateOptions] = useState({});
 	const [showCancelModal, setshowCancelModal] = useState(false);
@@ -92,10 +107,10 @@ function ServiceWiseDetails({
 						name={singleTab}
 						title={startCase(singleTab.replace('_service', ''))}
 						key={singleTab}
-						icon={check(groupedShowServicesData?.[singleTab]) ? <IcCFtick /> : null}
+						icon={check(GROUPED_SERVICES?.[singleTab]) ? <IcCFtick /> : null}
 					>
 						<SingleService
-							groupedServicesData={groupedShowServicesData[activeTab]}
+							groupedServicesData={GROUPED_SERVICES[activeTab]}
 							supplierPayload={supplierPayload}
 							setSupplierPayload={setSupplierPayload}
 							inventory={inventory}
@@ -127,7 +142,7 @@ function ServiceWiseDetails({
 					<PreviewModal
 						modalStep={modalStep}
 						setModalStep={setModalStep}
-						groupedShowServicesData={groupedShowServicesData}
+						groupedShowServicesData={GROUPED_SERVICES}
 						supplierPayload={supplierPayload}
 						shipmentData={shipmentData}
 						updateTrigger={updateTrigger}

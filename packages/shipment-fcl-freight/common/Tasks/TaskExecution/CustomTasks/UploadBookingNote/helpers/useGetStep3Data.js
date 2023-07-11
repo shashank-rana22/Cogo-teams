@@ -18,20 +18,20 @@ const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
 	taskListRefetch = () => {},
 }) => {
-	const { service_type } = task || {};
-	const service_ids = [];
+	const SUCCESS_CODE = 200;
+	const SERVICE_IDS = [];
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
 			|| (serviceObj.service_type === 'fcl_freight_local_service')
 		) {
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			service_ids,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -75,10 +75,10 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		defaultValues[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
 			code     : line_item?.code,
 			currency : line_item?.currency,
 			price    : line_item?.price,
@@ -89,16 +89,16 @@ const useGetStep3Data = ({
 	});
 
 	const onSubmit = async (values) => {
-		const quotations = [];
+		const QUOTATIONS = [];
 
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 
 			const newQuote = {
-				id         : key,
-				service_id : (service_charges || []).find((charge) => charge?.id === key)
-					?.service_id,
-				line_items: items.map((line_item) => ({
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
+				service_id : key,
+				line_items : items.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',
@@ -108,18 +108,18 @@ const useGetStep3Data = ({
 				})),
 			};
 
-			quotations.push(newQuote);
+			QUOTATIONS.push(newQuote);
 		});
 
-		const checkSum = checkLineItemsSum(quotations);
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === 200) {
+				if (res?.status === SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
@@ -134,7 +134,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues,
+		defaultValues: DEFAULT_VALUES,
 	};
 };
 

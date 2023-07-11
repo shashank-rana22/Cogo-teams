@@ -10,12 +10,12 @@ import ShowLineItems from './ShowLineItems';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
-function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, prefrence_key }) {
+function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates, prefrence_key }) {
 	const lineItems = data?.rowData?.line_items || [];
 	const originLocalsLineItems = data?.rowData?.origin_locals?.line_items || [];
 	const destinationLocalsLineItems = data?.rowData?.destination_locals?.line_items || [];
 	const isDisplayLineItems = !isEmpty([...lineItems, ...originLocalsLineItems, ...destinationLocalsLineItems]);
-	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
+	const isShowSellRate = singleServiceData?.service_type === 'fcl_freight_service';
 	const [showLineItems, setShowLineItems] = useState(false);
 	const showValidity = (item) => {
 		if (item?.rowData?.is_rate_expired) {
@@ -96,23 +96,17 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 					<div className={styles.text}>
 						2 Days :
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_2 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_2 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_2 : '--'}
+						{data?.rowData?.fulfillment_ratio_2 || '--'}
 					</div>
 					<div className={styles.text}>
 						7 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_7 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_7 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_7 : '--' }
+						{data?.rowData?.fulfillment_ratio_7 || '--'}
 					</div>
 					<div className={styles.text}>
 						30 Days:
 						{' '}
-						{(data?.rowData?.fulfillment_ratio_30 === VALUE_ZERO
-                             || data?.rowData?.fulfillment_ratio_30 > VALUE_ZERO)
-							? data?.rowData?.fulfillment_ratio_30 : '--' }
+						{data?.rowData?.fulfillment_ratio_30 || '--'}
 					</div>
 				</div>
 
@@ -120,7 +114,7 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 			<div className={styles.price_section}>
 				<div style={{ display: 'flex' }}>
 					<div>
-						{startCase(serviceData?.service_type)}
+						{startCase(singleServiceData?.service_type)}
 						{' '}
 						:
 						&nbsp;
@@ -142,7 +136,7 @@ function Footer({ data, shipmentData, serviceData, setSellRates, sellRates, pref
 							trigger="mouseenter"
 							render={(
 								<ShowLineItems
-									serviceType={serviceData?.service_type}
+									serviceType={singleServiceData?.service_type}
 									lineItems={lineItems}
 									originLocalLineItems={originLocalsLineItems}
 									destinationLocalLineItems={destinationLocalsLineItems}

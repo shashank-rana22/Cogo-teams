@@ -7,23 +7,22 @@ import PriorityNumber from './PriorityNumber';
 import styles from './styles.module.css';
 
 function Card({
-	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
+	data, setPrefrences, prefrences, rate_key, singleServiceData, setSellRates,
 	sellRates, prefrence_key, fromkey, priority_no, shipmentData,
 }) {
-	console.log(data, ';data');
 	const handlePrefrence = (rate) => {
-		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
+		const foundItem = (prefrences?.[singleServiceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
 		if (foundItem) {
-			const oldItems = prefrences?.[serviceData?.id];
+			const oldItems = prefrences?.[singleServiceData?.id];
 			const newRows = oldItems.filter((val) => val?.rate_id !== rate?.id);
 
 			if (newRows?.length) {
-				setPrefrences({ ...prefrences, [serviceData?.id]: [...newRows] });
+				setPrefrences({ ...prefrences, [singleServiceData?.id]: [...newRows] });
 			} else {
-				setPrefrences({ ...prefrences, [serviceData?.id]: [] });
+				setPrefrences({ ...prefrences, [singleServiceData?.id]: [] });
 			}
 		} else {
-			const newList = prefrences?.[serviceData?.id] || [];
+			const newList = prefrences?.[singleServiceData?.id] || [];
 			newList.push({
 				rate_id     : rate?.id,
 				id          : rate?.rowData?.service_provider_id,
@@ -31,7 +30,7 @@ function Card({
 				data        : rate,
 				validity_id : rate?.rowData?.validity_id,
 			});
-			setPrefrences({ ...prefrences, [serviceData?.id]: [...newList] });
+			setPrefrences({ ...prefrences, [singleServiceData?.id]: [...newList] });
 		}
 	};
 	const showData = (val) => val || '';
@@ -47,7 +46,7 @@ function Card({
 		}
 		return (
 			<PriorityNumber
-				data={prefrences?.[serviceData?.id]}
+				data={prefrences?.[singleServiceData?.id]}
 				id={data?.id}
 				showPriority
 			/>
@@ -71,7 +70,7 @@ function Card({
 							{showData(data?.rowData?.service_provider?.business_name)}
 						</div>
 						<div>
-							{serviceData?.service_type === 'air_freight_service'
+							{singleServiceData?.service_type === 'air_freight_service'
 								? showData(data?.rowData?.air_line)
 								: showData(data?.rowData?.shipping_line)}
 						</div>
@@ -144,7 +143,7 @@ function Card({
 					<Footer
 						data={data}
 						shipmentData={shipmentData}
-						serviceData={serviceData}
+						singleServiceData={singleServiceData}
 						setSellRates={setSellRates}
 						sellRates={sellRates}
 						prefrence_key={prefrence_key}

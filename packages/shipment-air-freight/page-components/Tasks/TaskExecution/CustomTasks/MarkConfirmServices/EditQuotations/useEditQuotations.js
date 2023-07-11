@@ -119,13 +119,13 @@ const useEditQuotations = ({
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 			const SERVICE = (service_charges || []).find(
-				(charge) => charge?.id === key,
+				(charge) => charge?.service_id === key,
 			);
 			const newQuote = {
-				id         : key,
-				service_id : (service_charges || []).find((charge) => charge?.id === key)
-					?.service_id,
-				service_type: SERVICE?.service_type,
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
+				service_id   : key,
+				service_type : SERVICE?.service_type,
 				is_minimum_price_shipment:
 				SERVICE?.service_detail?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_shipment,
 				min_price  : BASIC_LINE_ITEM.min_price,
