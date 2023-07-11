@@ -51,17 +51,16 @@ function List({
 						uploadedDocs={allUploadedDocs}
 					/>
 				</div>
-			)
-				: (
-					<div className={styles.actions}>
-						<Actions
-							item={item}
-							task={task}
-							uploadedDocsRefetch={uploadedDocsRefetch}
-							allDocs={allUploadedDocs}
-						/>
-					</div>
-				)}
+			) : (
+				<div className={styles.actions}>
+					<Actions
+						item={item}
+						task={task}
+						uploadedDocsRefetch={uploadedDocsRefetch}
+						allDocs={allUploadedDocs}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
