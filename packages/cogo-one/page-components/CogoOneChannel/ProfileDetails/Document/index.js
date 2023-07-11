@@ -12,12 +12,15 @@ import ListData from './ListData';
 import styles from './styles.module.css';
 import UploadDetailsModal from './UploadDetailsModal';
 
+const INIT_CNT = 0;
+
 function Documents({
-	activeMessageCard,
-	activeVoiceCard,
-	activeTab,
-	customerId,
-	documents_count,
+	activeMessageCard = {},
+	activeVoiceCard = {},
+	activeTab = 'message',
+	customerId = '',
+	documents_count = 0,
+	formattedMessageData = {},
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
@@ -50,7 +53,7 @@ function Documents({
 
 	useEffect(() => {
 		const listIds = list.map((i) => i.id);
-		if (!isEmpty(listIds) && documents_count > 0) {
+		if (!isEmpty(listIds) && documents_count > INIT_CNT) {
 			documentCountUpdates({ listIds });
 		}
 	}, [documentCountUpdates, documents_count, list]);
@@ -107,6 +110,7 @@ function Documents({
 					userId={userId}
 					userMobile={userMobile}
 					leadUserId={leadUserId}
+					formattedMessageData={formattedMessageData}
 				/>
 
 			)}
