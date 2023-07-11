@@ -14,7 +14,7 @@ function Upload({ refetch = () => {}, show = false, setShow = () => {} }) {
 	} = useBulkFileUpload({ refetch, setShow });
 
 	const onClose = () => {
-		setShow(!show);
+		setShow(false);
 	};
 
 	return (

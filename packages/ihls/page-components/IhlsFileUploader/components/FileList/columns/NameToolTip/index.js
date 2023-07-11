@@ -3,18 +3,19 @@ import React from 'react';
 
 import styles from './style.module.css';
 
+const onClickName = ({ url }) => {
+	if (url) {
+		window.open(url, '_blank');
+	} else {
+		Toast.info("File can't be downloaded.");
+	}
+};
+
 function NameToolTip({ file_name = '', url = '' }) {
-	const onClickName = () => {
-		if (url) {
-			window.open(url, '_blank');
-		} else {
-			Toast.info("File can't be downloaded.");
-		}
-	};
 	return (
 		<Tooltip interactive content={file_name} placement="bottom">
 			<div
-				onClick={() => onClickName()}
+				onClick={() => onClickName({ url })}
 				className={styles.text_wrap}
 				role="presentation"
 			>
