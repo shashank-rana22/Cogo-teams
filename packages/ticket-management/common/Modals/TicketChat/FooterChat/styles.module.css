@@ -3,8 +3,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 5px 5px 0;
-	border-radius: 6px;
+	padding-inline: 8px;
 
 	:global {
 		.file_uploader {
@@ -52,6 +51,7 @@
 
 .chat_input textarea {
 	caret-color: red;
+	line-height: 25px;
 }
 
 .no_upload {
@@ -115,4 +115,9 @@
 
 .footer {
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.loader {
+	width: 25px;
+	height: 25px;
 }

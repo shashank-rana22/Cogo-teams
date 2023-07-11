@@ -7,6 +7,7 @@ import {
 	IcMImage,
 	IcMPdf,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useRef } from 'react';
 
@@ -24,6 +25,7 @@ function FooterChat({
 	setFile = () => {},
 	uploading = false,
 	isInternal = false,
+	createLoading = false,
 	setUploading = () => {},
 	setIsInternal = () => {},
 	handleSendComment = () => {},
@@ -104,12 +106,24 @@ function FooterChat({
 					onKeyDown={(e) => handleKeyPress(e)}
 					value={message}
 				/>
-				<IcMSend
-					className={styles.send_icon}
-					onClick={handleSendComment}
-					cursor="pointer"
-					fill="#EE3425"
-				/>
+				<div className={styles.loader}>
+					{createLoading ? (
+						<Image
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg"
+							alt="load"
+							width={25}
+							height={25}
+						/>
+					)
+						: (
+							<IcMSend
+								className={styles.send_icon}
+								onClick={handleSendComment}
+								cursor="pointer"
+								fill="#EE3425"
+							/>
+						)}
+				</div>
 			</div>
 		</>
 	);
