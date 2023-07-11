@@ -9718,6 +9718,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
 	],
 	segmentation: [
 		{
@@ -12519,6 +12524,26 @@ const partner = {
 		},
 		{
 			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_services',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
