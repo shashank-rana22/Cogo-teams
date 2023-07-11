@@ -6,7 +6,7 @@ export const renderValue = (label, detail) => {
 	switch (label) 	{
 		case 'truck_type':
 			return [startCase(detail.truck_type || '')].map((word) => {
-				const [firstChar, ...remainingChars] = word;
+				const [firstChar, ...remainingChars] = word || '';
 				const capitalized = `${firstChar?.toUpperCase()}${remainingChars?.join('')}`;
 				return capitalized.replace(/(\d+)([a-z]+)/i, '$1 $2');
 			}).join(' ');
