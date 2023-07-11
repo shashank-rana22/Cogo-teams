@@ -1,10 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
+	const { user = {} }	 = useSelector((state) => state?.profile || {});
+
 	const { end_date, start_date } = selectCycle || {};
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
@@ -16,7 +19,7 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 		try {
 			trigger({
 				params: {
-					manager_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8',
+					manager_id : user?.id,
 					label      : selectValue,
 					level,
 					end_date   : format(end_date, 'yyyy-MM-dd'),
@@ -31,7 +34,7 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 				);
 			}
 		}
-	}, [end_date, level, selectValue, start_date, trigger]);
+	}, [end_date, level, selectValue, start_date, trigger, user?.id]);
 
 	useEffect(() => {
 		if (selectValue) {

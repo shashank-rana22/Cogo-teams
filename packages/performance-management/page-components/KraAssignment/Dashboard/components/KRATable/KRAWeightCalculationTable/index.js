@@ -1,5 +1,6 @@
 import { Button, Input } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import useAssignKRAs from './useAssignKRAs';
@@ -27,6 +28,8 @@ function KRAWeightCalculationTable({
 	getUnassignedEmployee,
 	resetObjects,
 }) {
+	const [deletedKraArray, setDeletedKraArray] = useState([]);
+
 	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
 		inputValue,
 		selectArray,
@@ -34,6 +37,8 @@ function KRAWeightCalculationTable({
 		getUnassignedEmployee,
 		setInputValue,
 		resetObjects,
+		deletedKraArray,
+		setDeletedKraArray,
 	});
 
 	const updatedValue = [...inputValue];

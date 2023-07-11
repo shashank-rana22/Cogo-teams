@@ -17,7 +17,7 @@ function useListIndividualKra() {
 		url    : '/list_individual_kra',
 		method : 'GET',
 		params : {
-			manager_user_id: '2fac2a22-dd10-49db-8a5e-ca6188d63cf8' || user_id,
+			manager_user_id: user_id,
 		},
 
 	}, { manual: false });

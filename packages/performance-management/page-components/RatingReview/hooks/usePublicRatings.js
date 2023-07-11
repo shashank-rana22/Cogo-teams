@@ -42,7 +42,7 @@ const usePublishRatings = ({ selectedEmployees, level, selectCycle }) => {
 			await trigger({
 				data: {
 					employee_data,
-					manager_user_id : '2fac2a22-dd10-49db-8a5e-ca6188d63cf8' || user?.id,
+					manager_user_id : user?.id,
 					start_date      : format(start_date, 'YYYY-MM-dd'),
 					end_date        : format(end_date, 'YYYY-MM-dd'),
 				},
