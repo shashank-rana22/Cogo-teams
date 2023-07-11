@@ -65,7 +65,7 @@ function Checkout({ checkout_type = '' }) {
 
 	const { organization_settings = [], tags = [] } = importer_exporter || {};
 
-	const isChannelPartner =		entity_types?.includes('channel_partner')
+	const isChannelPartner = entity_types?.includes('channel_partner')
 		&& !entity_types?.includes('cogoport');
 
 	const isOrgCP = (tags || []).includes('partner');
@@ -149,7 +149,7 @@ function Checkout({ checkout_type = '' }) {
 		],
 	);
 
-	if (loading) {
+	if (loading && isEmpty(data)) {
 		return null;
 	}
 

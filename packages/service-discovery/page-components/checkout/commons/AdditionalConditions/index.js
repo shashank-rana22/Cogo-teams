@@ -1,4 +1,5 @@
 import AdditionalTnc from './components/AdditionalTnc';
+import CreditApprovalCard from './components/CreditApprovalCard';
 import KycMessage from './components/KycMessage';
 import OverallRisk from './components/OverallRisk';
 import styles from './styles.module.css';
@@ -14,6 +15,7 @@ function AdditionalConditions({
 	setIsVeryRisky,
 	orgData,
 	getCheckout,
+	loading,
 }) {
 	const { importer_exporter_id } = detail;
 
@@ -49,6 +51,19 @@ function AdditionalConditions({
 				getCheckout,
 			},
 		},
+		{
+			key       : 'credit_approval',
+			component : CreditApprovalCard,
+			condition : showSendTncEmail,
+			style     : { flexBasis: '100%' },
+			props     : {
+				detail,
+				updateLoading,
+				updateCheckout,
+				loading,
+				getCheckout,
+			},
+		},
 	];
 
 	return (
@@ -59,6 +74,7 @@ function AdditionalConditions({
 					component: ActiveComponent,
 					props: activeComponentProps,
 					condition,
+					style = {},
 				} = item;
 
 				if (!condition) {
@@ -66,7 +82,7 @@ function AdditionalConditions({
 				}
 
 				return (
-					<div key={key} className={styles.ind_container}>
+					<div key={key} style={style} className={styles.ind_container}>
 						<ActiveComponent {...activeComponentProps} />
 					</div>
 				);

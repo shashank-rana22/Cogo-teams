@@ -588,12 +588,13 @@ function asyncListPromotions() {
 
 function asyncListSaasHsCodes() {
 	return {
-		finalValueKey  : 'id',
-		finalLabelKey  : 'description',
+		valueKey       : 'id',
+		labelKey       : 'description',
 		authkey        : 'get_saas_hs_code_list',
 		endpoint       : 'saas/hs-code/list',
 		defaultOptions : true,
 		searchByq      : true,
+		searchByKey    : 'query',
 		microService   : 'business_finance',
 		defaultParams  : {},
 	};

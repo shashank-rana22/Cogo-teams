@@ -8,10 +8,15 @@ import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function PreviewBookingFooter({ detail }) {
+function PreviewBookingFooter({
+	detail = {},
+	updateCheckout = () => {},
+	updateLoading = false,
+	isVeryRisky = false,
+}) {
 	const timerRef = useRef(null);
 
-	const { validity_end, quotation_email_sent_at = '' } = detail;
+	const { validity_end } = detail;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -43,9 +48,11 @@ function PreviewBookingFooter({ detail }) {
 			key       : 'save_for_later',
 		},
 		{
-			label     : quotation_email_sent_at ? 'Place Booking' : 'Share Link',
+			label     : 'Place Booking',
 			themeType : 'primary',
 			size      : 'lg',
+			loading   : updateLoading,
+			disabled  : isVeryRisky,
 			style     : { marginLeft: '16px' },
 			key       : 'place_booking',
 		},

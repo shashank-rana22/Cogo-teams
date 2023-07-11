@@ -17,7 +17,7 @@ const redirectUrl = (type) => {
 
 function AccordionTitle({
 	agreeTandC,
-	setAgreeTandC,
+	setDisableButtonConditions,
 }) {
 	return (
 		<div className={styles.container}>
@@ -60,7 +60,7 @@ function AccordionTitle({
 					</span>
 				)}
 				checked={agreeTandC}
-				onChange={() => setAgreeTandC((prev) => !prev)}
+				onChange={() => setDisableButtonConditions((prev) => ({ ...prev, agreeTandC: !prev?.agreeTandC }))}
 			/>
 		</div>
 	);
@@ -68,8 +68,8 @@ function AccordionTitle({
 
 function ServiceTerms({
 	detail,
-	agreeTandC,
-	setAgreeTandC,
+	disableButtonConditions,
+	setDisableButtonConditions,
 }) {
 	const { terms_and_conditions: tncList, primary_service } = detail;
 
@@ -84,8 +84,8 @@ function ServiceTerms({
 			type="text"
 			title={(
 				<AccordionTitle
-					agreeTandC={agreeTandC}
-					setAgreeTandC={setAgreeTandC}
+					agreeTandC={disableButtonConditions?.agreeTandC}
+					setDisableButtonConditions={setDisableButtonConditions}
 				/>
 			)}
 			className={styles.accordion}

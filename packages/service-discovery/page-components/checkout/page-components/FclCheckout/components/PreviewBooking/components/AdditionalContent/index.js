@@ -2,11 +2,11 @@ import { Input } from '@cogoport/components';
 import { useContext } from 'react';
 
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
-import AdditionalTnc from '../../../../../../commons/AdditionalConditions/components/AdditionalTnc';
 import BookingContent from '../../../../../../commons/BookingContent';
 import Cancellation from '../../../../../../commons/Cancellation';
 import CargoDetails from '../../../../../../commons/CargoDetails';
 import ConfirmationTexts from '../../../../../../commons/ConfirmationTexts';
+import ControlledBooking from '../../../../../../commons/ControlledBooking';
 import DefaultQuotationInfo from '../../../../../../commons/DefaultQuotationInfo';
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
@@ -19,9 +19,10 @@ function AdditionalContent({
 	onChange,
 	cargoDetails = {},
 	setCargoDetails = () => {},
-	agreeTandC,
-	setAgreeTandC,
 	setIsVeryRisky = () => {},
+	disableButtonConditions,
+	setDisableButtonConditions,
+	isVeryRisky,
 }) {
 	const {
 		rate,
@@ -36,7 +37,11 @@ function AdditionalContent({
 		updateCheckout,
 		updateLoading,
 		orgData,
+		loading,
+		checkoutMethod,
 	} = useContext(CheckoutContext);
+
+	console.log('checkoutMethod', checkoutMethod);
 
 	const { primary_service = '', services = {}, trade_type = '' } = detail || {};
 
@@ -46,6 +51,13 @@ function AdditionalContent({
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
 			/>
+
+			{checkoutMethod === 'controlled_checkout' ? (
+				<ControlledBooking
+					detail={detail}
+					getCheckout={getCheckout}
+				/>
+			) : null}
 
 			<BookingContent
 				detail={detail}
@@ -64,6 +76,7 @@ function AdditionalContent({
 				setIsVeryRisky={setIsVeryRisky}
 				orgData={orgData}
 				getCheckout={getCheckout}
+				loading={loading}
 			/>
 
 			<div className={styles.additional_remark}>
@@ -100,11 +113,16 @@ function AdditionalContent({
 
 			<ServiceTerms
 				detail={detail}
-				agreeTandC={agreeTandC}
-				setAgreeTandC={setAgreeTandC}
+				disableButtonConditions={disableButtonConditions}
+				setDisableButtonConditions={setDisableButtonConditions}
 			/>
 
-			<PreviewBookingFooter detail={detail} />
+			<PreviewBookingFooter
+				detail={detail}
+				updateCheckout={updateCheckout}
+				updateLoading={updateLoading}
+				isVeryRisky={isVeryRisky}
+			/>
 		</div>
 	);
 }
