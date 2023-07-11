@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails"],  
     "shipment_info":{},
     "timeline": {
         "can_edit": true
@@ -27,6 +27,9 @@
             "stakeholder_type": ["admin"]
         },
         "role": "sales"
+    },
+    "purchase":{
+        "tab_title": "Purchase Invoice"
     },
     "edit_supplier": false,
     "cancel_service": false,

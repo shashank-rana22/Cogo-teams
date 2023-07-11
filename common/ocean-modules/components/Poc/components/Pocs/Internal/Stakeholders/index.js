@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const ICONS_DIMENSIONS = 15;
 
-function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {} }) {
+function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {}, shipment_type = '' }) {
 	const editInternalPoc = rolesPermission?.edit_internal_poc || [];
 	return (
 		<div>
@@ -47,6 +47,7 @@ function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {} })
 										service_type,
 										service_id,
 										stakeholder_id,
+										...(!service_type && { shipment_type }),
 									})}
 									size="sm"
 								>

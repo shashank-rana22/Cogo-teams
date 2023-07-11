@@ -8,15 +8,13 @@ import TicketChat from './TicketChat';
 function Modals(props) {
 	const { modalData, setModalData } = props;
 
-	const { type = '' } = modalData || {};
-
 	return (
 		<Modal
 			size="sm"
 			show={!isEmpty(modalData)}
 			placement="right"
 			scroll={false}
-			showCloseIcon={type !== 'ticket_details'}
+			showCloseIcon={false}
 			onClose={() => setModalData(null)}
 			className={styles.modal_container}
 		>

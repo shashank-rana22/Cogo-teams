@@ -11,63 +11,6 @@
 	font-weight: 600;
 }
 
-.filters_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 10px;
-
-	:global {
-		.ui_toggle_container.ui_ps_size_md .ui_switch {
-			right: 51px;
-		}
-
-		.ui_toggle_container.ui_toggle_inside .ui_inner::before {
-			display: flex;
-			align-items: center;
-			font-size: 12px;
-			content: "Active";
-			background-color: #ee3425;
-		}
-
-		.ui_toggle_container.ui_toggle_inside .ui_inner::after {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			float: right;
-			font-size: 12px;
-			color: #fff;
-			content: "Inactive";
-			background-color: #f8aea8;
-		}
-
-		.ui_toggle_container.ui_ps_size_md .ui_toggle_switch {
-			width: 75px;
-		}
-
-		input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
-			right: 0;
-		}
-	}
-}
-
-.filter_dot {
-	position: absolute;
-	top: 2px;
-	right: 20px;
-	width: 8px;
-	height: 8px;
-	background: rgb(3 74 253);
-	border: 1px solid #fff;
-	border-radius: 100%;
-}
-
-.source_types {
-	display: flex;
-	align-items: center;
-	width: calc(100% - 44px);
-}
-
 .empty_state {
 	display: flex;
 	align-items: center;
@@ -101,28 +44,13 @@
 	transition: height 0.5s ease;
 }
 
-.list_container_height {
-	height: calc(100% - 260px);
-}
-
-.list_container_empty_flash {
-	height: calc(100% - 150px);
-}
-
-.bot_list_container {
-	height: calc(100% - 310px);
-}
-
-.bot_list_container_empty_flash {
-	height: calc(100% - 200px);
-}
-
 .list_container::-webkit-scrollbar {
 	display: none;
 }
 
 .tabs {
-	margin: 0 -10px 15px;
+	padding-top: 10px;
+	margin: 0 0 15px;
 }
 
 .user_activity {
@@ -140,12 +68,6 @@
 
 .tags_conatiner {
 	height: 20px;
-}
-
-.filter_icon {
-	width: 25px;
-	height: 25px;
-	cursor: pointer;
 }
 
 .filters_applied {
@@ -224,20 +146,4 @@
 	font-weight: 600;
 	color: #828282;
 	user-select: none;
-}
-
-.styled_popover {
-	padding: 0;
-
-	:global {
-		.tippy-content {
-			width: 260px;
-			height: 500px;
-			padding: 0;
-
-			>div {
-				height: 100%;
-			}
-		}
-	}
 }
