@@ -88,11 +88,7 @@
 
 .filter_div {
 	position: absolute;
-	top: 6px;
-	right: 25px;
-	width: 7px;
-	height: 7px;
+	top: 4px;
+	right: 23px;
 	cursor: pointer;
-	background-color: #f68b21;
-	border-radius: 50%;
 }

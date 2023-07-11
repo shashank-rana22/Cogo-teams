@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Input, Popover, ButtonIcon, Button } from '@cogoport/components';
-import { IcMAppSearch, IcMFilter, IcMCross } from '@cogoport/icons-react';
+import { IcMAppSearch, IcMFilter, IcMCross, IcCRedCircle } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -109,9 +109,11 @@ function Header({
 								onClick={() => setFilterPopover((prev) => !prev)}
 							>
 								<IcMFilter width={20} height={20} />
+								{!isEmpty(filters) ? (
+									<IcCRedCircle width={8} height={8} className={styles.filter_div} />
+								) : null}
 							</Button>
 						</Popover>
-						{!isEmpty(filters) ? <div className={styles.filter_div} /> : null}
 					</div>
 
 				</div>
