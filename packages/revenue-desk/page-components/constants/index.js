@@ -14,3 +14,4 @@ export const VALUE_TWO = 2;
 export const VALUE_THREE = 3;
 export const VALUE_FOUR = 4;
 export const CBM_TO_KILOS = 166.67;
+export const NEGATIVE_ONE = -1;
