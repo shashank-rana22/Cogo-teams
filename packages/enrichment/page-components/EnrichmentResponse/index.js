@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 
 import { RESPONSE_TABS_MAPPING } from '../../constants/tab-panel-mapping';
 
+import BackButton from './components/Backbutton';
 import Header from './components/Header';
 import List from './components/List';
 import useEnrichmentResponse from './hooks/useEnrichmentResponse';
@@ -21,6 +22,9 @@ function EnrichmentResponse() {
 	return (
 
 		<section>
+
+			<BackButton />
+
 			<Header />
 
 			<div className={styles.tabs_container}>

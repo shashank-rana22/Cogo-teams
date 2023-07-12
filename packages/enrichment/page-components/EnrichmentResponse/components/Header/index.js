@@ -1,68 +1,104 @@
-import { Breadcrumb, Placeholder } from '@cogoport/components';
-import { useRouter, Link } from '@cogoport/next';
-import { startCase, format, isEmpty } from '@cogoport/utils';
+import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React from 'react';
 
 import useHeaderStats from '../../hooks/useHeaderStats';
 
 import styles from './styles.module.css';
 
-const CARD_LABEL_MAPPING = {
-	business_name: 'Organization Name',
-	// registration_number : 'Registration Number',
+const keysToDisplay = [
+	'request_id',
+	'request_type',
+	'serial_id',
+	'created_on',
+
+];
+
+const getOrganizationData = ({ lead_organization = {}, organization = {} }) => {
+	if (isEmpty(lead_organization)) {
+		return organization;
+	}
+	return lead_organization;
 };
 
 function Header() {
-	const { query = {} } = useRouter();
+	const { data = {}, loading } = useHeaderStats();
 
-	const { requestData = {}, loading } = useHeaderStats();
+	const {
+		organization = {},
+		lead_organization = {},
+		created_at = '',
+		request_type = '',
+		serial_id: request_id,
+	} = data;
 
-	const { organization = {}, lead_organization = {}, created_at = '' } = requestData;
+	const sourceOrganization = getOrganizationData({ lead_organization, organization });
+
+	const { serial_id, business_name } = sourceOrganization || {};
+
+	const valuesToDisplay = {
+		request_id: {
+			label : 'Request ID',
+			value : (
+				<div>
+					#
+					{request_id || '__'}
+				</div>),
+		},
+
+		request_type: {
+			label : 'Request Type',
+			value : <div>{startCase(request_type) || '__'}</div>,
+		},
+
+		serial_id: {
+			label : 'Serial ID',
+			value : (
+				<div>
+					#
+					{serial_id}
+				</div>
+			),
+		},
+
+		created_on: {
+			label : 'Created on',
+			value : formatDate({
+				date       : created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			}),
+
+		},
+
+	};
 
 	if (loading) {
-		return <Placeholder height="60px" width="100%" />;
+		return <Placeholder className={styles.loading} height="120px" width="100%" />;
 	}
 
 	return (
-		<section>
-			<Breadcrumb>
-				<Breadcrumb.Item
-					label={(
-						<Link href={`/enrichment?tab=${query.tab}`}>
-							Enrichment
-						</Link>
-					)}
-				/>
-				<Breadcrumb.Item label="Organization Details" />
-			</Breadcrumb>
+		<div className={styles.main_container}>
+			<div className={styles.heading}>
+				{business_name}
+			</div>
 
-			<div className={styles.header}>
-				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
-					<div key={key} className={styles.info}>
-						<div className={styles.info_label}>
-							{CARD_LABEL_MAPPING[key]}
-							{' '}
-							-
+			<div className={styles.content}>
+				{keysToDisplay.map((item) => (
+					<div key={item} className={styles.item}>
+						<div className={styles.label}>
+							{valuesToDisplay[item].label}
 						</div>
 
 						<div className={styles.value}>
-							{isEmpty(lead_organization) ? (
-								startCase(organization?.[key] || '-')
-							) : (
-								startCase(lead_organization?.[key] || '-')
-							)}
+							{valuesToDisplay[item].value}
 						</div>
 					</div>
 				))}
-
-				<div className={styles.info}>
-					<div className={styles.info_label}>Enrichment Request Created At -</div>
-
-					<div className={styles.value}>
-						{created_at ? format(created_at, 'dd MMM yyyy') : '-'}
-					</div>
-				</div>
 			</div>
-		</section>
+		</div>
 	);
 }
 
