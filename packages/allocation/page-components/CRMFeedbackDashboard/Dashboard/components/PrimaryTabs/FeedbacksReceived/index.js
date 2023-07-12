@@ -32,13 +32,13 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 
 	const { profile } = useSelector((state) => state);
 
-	const userid = profile?.id;
+	const authRoleId = profile?.auth_role_data?.id;
 	const partnerId = profile?.partner_id;
 
 	const third_party_enrichment_allowed_role_ids = geo.uuid.third_party_enrichment_agencies_role_ids;
 
 	const isAllowedToGetMoreLeads = partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN
-	&& third_party_enrichment_allowed_role_ids.includes(userid);
+	&& third_party_enrichment_allowed_role_ids.includes(authRoleId);
 
 	const { page, page_limit, total_count } = paginationData;
 
