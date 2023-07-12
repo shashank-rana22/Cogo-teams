@@ -10,12 +10,21 @@ function Card({
 	data, setPrefrences, prefrences, rate_key, singleServiceData, setSellRates,
 	sellRates, prefrence_key, fromkey, priority_no, shipmentData,
 }) {
-	console.log(data, ';data');
 	const handlePrefrence = (rate) => {
-		const foundItem = (prefrences?.[singleServiceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
+		const foundItem = (prefrences?.[singleServiceData?.id] || []).find(
+			(obj) => obj?.validity_id === rate?.rowData?.validity_id
+			&& obj?.rate_id === rate?.id,
+		);
 		if (foundItem) {
 			const oldItems = prefrences?.[singleServiceData?.id];
-			const newRows = oldItems.filter((val) => val?.rate_id !== rate?.id);
+			const newRows = oldItems.filter((val) => {
+				if (rate?.rowData?.validity_id) {
+					return val?.validity_id !== rate?.rowData?.validity_id
+					&& val?.rate_id !== rate?.id;
+				}
+
+				return val?.rate_id !== rate?.id;
+			});
 
 			if (newRows?.length) {
 				setPrefrences({ ...prefrences, [singleServiceData?.id]: [...newRows] });
@@ -50,6 +59,7 @@ function Card({
 				data={prefrences?.[singleServiceData?.id]}
 				id={data?.id}
 				showPriority
+				validity_id={data?.rowData?.validity_id}
 			/>
 		);
 	};

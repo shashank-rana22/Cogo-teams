@@ -3,7 +3,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
+import useUpdateRatesPreferences from '../../../hooks/useCreateRatesPreferences';
 import { DEFAULT_INDEX, VALUE_ONE, VALUE_TWO, VALUE_ZERO } from '../../constants';
 
 import CancellationModal from './CancellationModal';

@@ -14,11 +14,6 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 }) {
-	const { service, price_type, is_minimum_price_system_rate } = data || {};
-	const {
-		price_type: service_price_type,
-		is_minimum_price_shipment: service_is_minimum_price_shipment,
-	} = service || {};
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -46,43 +41,13 @@ function ListItem({
 				<div>
 					<div className={styles.heading}>Price Type</div>
 					<div className={styles.sub_heading}>
-						{data?.source || '-'}
+						{startCase(data?.price_type) || '-'}
 					</div>
 				</div>
 				<div>
-					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
-				</div>
-				{data?.service?.commodity_description && (
-					<div>
-						<div className={styles.heading}>Commodity Description</div>
-						<Tooltip
-							content={data?.service?.commodity_description}
-							placement="top"
-						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.commodity_description}
-							</div>
-						</Tooltip>
-					</div>
-				)}
-				{data?.service?.hs_code &&	(
-					<div>
-						<div className={styles.heading}>HS Code</div>
-						<Tooltip
-							content={data?.service?.hs_code}
-							placement="top"
-						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.hs_code}
-							</div>
-						</Tooltip>
-					</div>
-				)}
-				<div>
-					<div className={styles.heading}>Price Type</div>
+					<div className={styles.heading}>Operation Type</div>
 					<div className={styles.sub_heading}>
-						{startCase(service_price_type || price_type || '-')}
+						{startCase(data?.operation_type) || '-'}
 					</div>
 				</div>
 				<div>
@@ -92,11 +57,11 @@ function ListItem({
 				<div>
 					<div className={styles.heading}>Min. Price</div>
 					<div className={styles.sub_heading}>
-						{ is_minimum_price_system_rate || service_is_minimum_price_shipment ? 'Yes' : 'No'}
+						{(data?.service?.is_minimum_price_rate) ? 'Yes' : 'No'}
 					</div>
 				</div>
-				{data?.data?.rate_procurement_proof_url
-				&& item?.source === 'flash_booking'
+				{(data?.rate_procurement_proof_url)
+				&& (data?.source === 'flashed')
 				&& (
 					<div>
 						<div className={styles.heading}>Rate Proof</div>

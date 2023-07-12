@@ -4,7 +4,6 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
 import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
-import { VALUE_STATUS } from '../../../../../constants';
 
 import checkLineItemsSum from './checkLineItemSum';
 import getStep3Controls from './getStep3Controls';
@@ -19,6 +18,7 @@ const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
 	taskListRefetch = () => {},
 }) => {
+	const SUCCESS_CODE = 200;
 	const SERVICE_IDS = [];
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
@@ -31,7 +31,7 @@ const useGetStep3Data = ({
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			SERVICE_IDS,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -75,10 +75,10 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-	const DEFAULTVALUES = {};
+	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULTVALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
 			code     : line_item?.code,
 			currency : line_item?.currency,
 			price    : line_item?.price,
@@ -95,7 +95,8 @@ const useGetStep3Data = ({
 			const items = values[key];
 
 			const newQuote = {
-				id         : (service_charges || []).find((charge) => charge?.service_id === key)?.id,
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
 				service_id : key,
 				line_items : items.map((line_item) => ({
 					code     : line_item.code,
@@ -116,9 +117,9 @@ const useGetStep3Data = ({
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ QUOTATIONS });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === VALUE_STATUS) {
+				if (res?.status === SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
@@ -133,7 +134,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		DEFAULTVALUES,
+		defaultValues: DEFAULT_VALUES,
 	};
 };
 
