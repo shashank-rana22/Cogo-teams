@@ -30,6 +30,7 @@ const useCreateBulkFeedback = ({ refetch = () => {} }) => {
 			Toast.success('Accounts added successfully. Please wait for the changes to be reflected');
 
 			setShowModal(false);
+
 			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

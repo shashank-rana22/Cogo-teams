@@ -16,7 +16,7 @@ function GetLeadFeedbacks({ refetch = () => {} }) {
 		onCloseModal,
 		setSelectedCount,
 
-	} = useCreateBulkFeedback(refetch);
+	} = useCreateBulkFeedback({ refetch });
 
 	return (
 		<>
