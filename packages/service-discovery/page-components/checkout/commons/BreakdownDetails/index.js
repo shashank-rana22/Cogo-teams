@@ -175,7 +175,6 @@ function BreakdownDetails({
 							</div>
 						)}
 					>
-
 						{!fclLocalEmpty ? <Header /> : null}
 
 						<ServiceBreakup

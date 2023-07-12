@@ -41,8 +41,6 @@ function AdditionalContent({
 		checkoutMethod,
 	} = useContext(CheckoutContext);
 
-	console.log('checkoutMethod', checkoutMethod);
-
 	const { primary_service = '', services = {}, trade_type = '' } = detail || {};
 
 	return (
@@ -56,6 +54,7 @@ function AdditionalContent({
 				<ControlledBooking
 					detail={detail}
 					getCheckout={getCheckout}
+					setDisableButtonConditions={setDisableButtonConditions}
 				/>
 			) : null}
 

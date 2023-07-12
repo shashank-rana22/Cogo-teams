@@ -1,21 +1,29 @@
+import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
+import useUpdateControlledCheckoutService from '../../hooks/useUpdateControlledCheckoutService';
+
+import ContainerForm from './components/ContainerForm';
 import ControlledBookingDetails from './components/ControlledBookingDetails';
 import styles from './styles.module.css';
 
 function ControlledBooking({
 	detail,
 	getCheckout,
+	setDisableButtonConditions,
 }) {
+	const ref = useRef({});
+
 	const { services, checkout_approvals = [] } = detail;
 
 	const {
 		booking_status: bookingStatus,
 		explanation = '',
 		explanation_checks = '',
-	} = checkout_approvals[0] || {};
+	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showForm, setShowForm] = useState(false);
 
@@ -25,6 +33,17 @@ function ControlledBooking({
 				&& service.container_type === 'refer'
 		),
 	);
+
+	const { onSubmit, loading } = useUpdateControlledCheckoutService({
+		getCheckout,
+		servicesApplicable,
+		setShowForm,
+		setDisableButtonConditions,
+	});
+
+	const handleSubmitForm = () => {
+		ref.current.handleSubmit();
+	};
 
 	return (
 		<div className={styles.container}>
@@ -50,7 +69,7 @@ function ControlledBooking({
 					setShowForm={setShowForm}
 					showForm={showForm}
 					refetchCheckout={getCheckout}
-					servicesControlledBooking={servicesApplicable}
+					servicesApplicable={servicesApplicable}
 				/>
 			) : null}
 
@@ -83,6 +102,35 @@ function ControlledBooking({
 					the shipments page after this booking is accepted.
 				</i>
 			</div>
+
+			{showForm ? (
+				<Modal
+					show={showForm}
+					onClose={() => setShowForm(false)}
+					size="lg"
+				>
+					<Modal.Header title="Upload Details" />
+
+					<Modal.Body>
+						<ContainerForm
+							checkout_approvals={checkout_approvals}
+							servicesApplicable={servicesApplicable}
+							onSubmit={onSubmit}
+							ref={ref}
+						/>
+					</Modal.Body>
+
+					<Modal.Footer>
+						<Button
+							themeType="accent"
+							onClick={() => handleSubmitForm()}
+							disabled={loading}
+						>
+							Save
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

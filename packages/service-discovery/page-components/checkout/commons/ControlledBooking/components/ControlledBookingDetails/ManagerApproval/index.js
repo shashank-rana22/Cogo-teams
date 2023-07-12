@@ -51,7 +51,11 @@ function ManagerApproval({
 				maxSize="10485760"
 				uploadType="aws"
 				uploadIcon="ic-upload"
-				onChange={handleBookingProof}
+				onChange={(val) => {
+					if (val) {
+						handleBookingProof(val);
+					}
+				}}
 				disabled={loading}
 				style={{ width: '50%' }}
 			/>
