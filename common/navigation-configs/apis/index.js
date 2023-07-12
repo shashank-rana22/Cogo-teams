@@ -41,6 +41,7 @@ import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
 import rfq_dashboard from './rfq-dashboard-apis';
+import risk_management from './risk-management-dashboard';
 import saas from './saas';
 import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
@@ -50,7 +51,6 @@ import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
-import techops_dashboard from './techops_dashboard';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
 
@@ -117,7 +117,6 @@ const apis = {
 	kyc,
 	pms,
 	app_settings,
-	techops_dashboard,
 	cogolens: cogoLens,
 	shipment_cancellation_policies,
 	kam_payments_dashboard,
@@ -151,6 +150,7 @@ const apis = {
 	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,
+	risk_management,
 };
 
 export default apis;

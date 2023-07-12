@@ -13,11 +13,28 @@ import styles from './styles.module.css';
 import SuggestedActions from './SuggestedActions';
 import UserActivityMessages from './UserActivityMessages';
 
+function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
+	const triggerModal = () => {
+		setRaiseTicketModal((p) => {
+			if (p?.state) {
+				return { state: false, data: {}, source: null };
+			}
+			return { state: true, data: { messageData: data, formattedData }, source: 'message' };
+		});
+	};
+	return (
+		<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+			Raise a ticket
+		</div>
+	);
+}
+
 function ReceiveDiv({
 	eachMessage = {},
 	canRaiseTicket = true,
-	ticketPopoverContent = () => {},
 	user_name = '',
+	setRaiseTicketModal = () => {},
+	formattedData = {},
 }) {
 	const [showOrder, setShowOrder] = useState(false);
 	const {
@@ -49,7 +66,17 @@ function ReceiveDiv({
 					<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />
 				)}
 				{canRaiseTicket && (
-					<Tooltip placement="right" content={ticketPopoverContent(eachMessage)} interactive>
+					<Tooltip
+						placement="right"
+						content={(
+							<TicketPopoverContent
+								setRaiseTicketModal={setRaiseTicketModal}
+								data={eachMessage}
+								formattedData={formattedData}
+							/>
+						)}
+						interactive
+					>
 						<div className={styles.flex_div}>
 							<IcMOverflowDot className={styles.hamburger_styles} />
 						</div>
