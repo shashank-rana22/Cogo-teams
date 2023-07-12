@@ -7,11 +7,12 @@ import { useContext, useState, useEffect, useCallback } from 'react';
 import payloadMapping from '../configs/payloadMapping';
 import DashboardContext from '../context/DashboardContext';
 
+const PAGE_SIZE = 20;
 const DEFAULT_PAGE = 1;
+const CANCELED_ERROR = 'canceled';
 
 const useListDocumentDesk = () => {
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
-
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
@@ -29,15 +30,16 @@ const useListDocumentDesk = () => {
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
 			},
+			pending_task_required: !['eway_bill_validity',
+				'cancelled_shipment', 'completed_shipment'].includes(activeTab),
+			service_details_required          : true,
 			sort_by                           : filters?.sortValue,
 			sort_type                         : filters?.order,
 			task_stats_required               : true,
 			pagination_data_required          : true,
-			data_required                     : true,
 			is_collection_party_data_required : true,
-			pending_task_required             : true,
-			service_details_required          : true,
 			page,
+			page_limit                        : PAGE_SIZE,
 		},
 	});
 
@@ -51,7 +53,7 @@ const useListDocumentDesk = () => {
 		} catch (err) {
 			if (err?.message === 'canceled') return;
 			setApiData({});
-
+			if (err?.message === CANCELED_ERROR) { return; }
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 		}
 	}, [trigger, setFilters, page, filters]);

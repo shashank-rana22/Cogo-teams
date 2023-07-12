@@ -15,7 +15,7 @@ function StepperTabs() {
 
 		const tempFilters = filters;
 		tempFilters.page = 1;
-		setActiveTab(firstTab.value);
+		setActiveTab(firstTab?.value);
 		setFilters(tempFilters);
 		setStepperTab(val);
 	};

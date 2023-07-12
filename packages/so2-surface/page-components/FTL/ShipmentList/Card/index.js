@@ -16,7 +16,8 @@ const ICON_MAPPING = {
 const INVOICE_TYPES = ['purchase_invoice', 'proforma_invoice'];
 export default function Card({
 	item = {}, checkedRows = {}, setCheckedRows = () => {},
-	activeTab,
+	activeTab = '',
+	isSelectable = false,
 }) {
 	const router = useRouter();
 
@@ -31,25 +32,25 @@ export default function Card({
 
 	return (
 		<div
-			role="button"
-			tabIndex={0}
 			className={`${INVOICE_TYPES.includes(activeTab)
 				? styles.shipment_card : styles.card}`}
 		>
 
 			{INVOICE_TYPES.includes(activeTab) ? <CardHeader item={item} /> : null}
 			<div className={styles.card_body}>
-				<Checkbox
-					label=""
-					checked={checkedRows.has(item.id)}
-					onChange={() => {
-						const tempCheckRows = new Set(checkedRows);
-						if (tempCheckRows.has(item?.id)) {
-							tempCheckRows.delete(item?.id);
-						} else { tempCheckRows.add(item?.id); }
-						setCheckedRows(tempCheckRows);
-					}}
-				/>
+				{isSelectable && (
+					<Checkbox
+						label=""
+						checked={checkedRows.has(item.id)}
+						onChange={() => {
+							const tempCheckRows = new Set(checkedRows);
+							if (tempCheckRows.has(item?.id)) {
+								tempCheckRows.delete(item?.id);
+							} else { tempCheckRows.add(item?.id); }
+							setCheckedRows(tempCheckRows);
+						}}
+					/>
+				)}
 				<div className={styles.shipment_info}>
 					<ShipmentInfo item={item} clickCard={clickCard} />
 				</div>
@@ -75,7 +76,7 @@ export default function Card({
 				</div>
 
 			</div>
-			{!INVOICE_TYPES.includes(activeTab)
+			{!!isSelectable && !INVOICE_TYPES.includes(activeTab)
 				? (item?.pending_tasks?.map((task) => (
 					<PendingDocs item={task} key={task.id} clickCard={clickCard} />
 				))) : null}
