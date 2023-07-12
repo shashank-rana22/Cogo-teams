@@ -10,30 +10,55 @@ import RoutePort from './RoutePort';
 import RoutePortForm from './RoutePortForm';
 import styles from './styles.module.css';
 
-function RouteDetails({ route, dayOfWeek }) {
+function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 	const totalTransit = route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
 	const [edit, setEdit] = useState(false);
+	const [portEdit, setPortEdit] = useState(false);
+	const [form, setForm] = useState(null);
 	const [add, setAdd] = useState(null);
-	const [addNew, setAddNew] = useState(null);
+	const [deletePort, setDeletePort] = useState(null);
+	const tempRoute = Array.isArray(route) ? [...route] : [];
+
+	let modifiedRoute = [];
 	const handleClick = (input) => {
 		if (input === 'edit') {
+			setFinalRoute(route);
 		  setEdit(true);
 		} else {
 		  setEdit(false);
 		}
-	};
+		setPortEdit(false);
+		setForm(null);
+		setAdd(null);
+		setDeletePort(null);
+	  };
+	const objectToInsert = { display_name: '', location_id: '', order: null, port_code: '' };
+
 	const onClickAdd = (index) => {
+		setForm(index);
+		modifiedRoute = [...tempRoute?.slice(0, index), objectToInsert, ...tempRoute?.slice(index, tempRoute.length)];
+		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
+		setFinalRoute(order);
 		setAdd(index);
-		setAddNew(index);
 	};
 	const onClickEdit = (index) => {
-		setAdd(index);
-		setAddNew(null);
-	};
-	const onClickDelete = () => {
+		setForm(index);
 		setAdd(null);
-		setAddNew(null);
 	};
+	const onClickDelete = (index) => {
+		if (add) {
+			setAdd(null);
+		} else if (!portEdit) {
+			setForm(null);
+			setDeletePort((prevDeletePort) => (prevDeletePort ? [...prevDeletePort, index] : [index]));
+			modifiedRoute = [...finalRoute.slice(0, index), ...finalRoute.slice(index + 1, finalRoute.length)];
+			const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
+			setFinalRoute(order);
+		}
+		setForm(null);
+		setPortEdit(false);
+	};
+
 	return (
 		<div className={styles.box}>
 			<div className={styles.header}>
@@ -112,26 +137,27 @@ function RouteDetails({ route, dayOfWeek }) {
 
 				<div className={styles.route_points}>
 					{route?.map((port, index) => {
-						if (index === add) {
+						if (index === form && !deletePort?.includes(index)) {
 							return (
 								<>
 									<PortForm
+										isFirst={index === 0}
 										isLast={index === route.length - 1}
 										port={port}
-										isFirst={index === 0}
-										onClickAdd={onClickAdd}
 										index={index}
 										onClickDelete={onClickDelete}
 									/>
-									{addNew ? (
+									{add ? (
 										<RoutePortForm
 											isFirst={index === 0}
+											isLast={index === route.length - 1}
 											port={port}
 											diffInDays={route?.[index + 1]?.eta_day_count - route?.[index]?.etd_day_count}
 											onClickAdd={onClickAdd}
-											add={add}
-											index={index}
 											onClickEdit={onClickEdit}
+											setPortEdit={setPortEdit}
+											onClickDelete={onClickDelete}
+											index={index}
 										/>
 									) : null}
 
@@ -139,19 +165,22 @@ function RouteDetails({ route, dayOfWeek }) {
 
 							);
 						}
-                	if (index === route.length - 1) { return <RoutePortForm isLast port={port} onClickAdd={onClickAdd} index={index} onClickEdit={onClickEdit} />; }
-                	return (
-	<RoutePortForm
-		isFirst={index === 0}
-		port={port}
-		diffInDays={route?.[index + 1]?.eta_day_count - route?.[index]?.etd_day_count}
-		onClickAdd={onClickAdd}
-		add={add}
-		index={index}
-		onClickEdit={onClickEdit}
-	/>
+                	if (!deletePort?.includes(index)) {
+							return (
+								<RoutePortForm
+									isFirst={index === 0}
+									isLast={index === route.length - 1}
+									port={port}
+									diffInDays={route?.[index + 1]?.eta_day_count - route?.[index]?.etd_day_count}
+									onClickAdd={onClickAdd}
+									index={index}
+									onClickEdit={onClickEdit}
+									setPortEdit={setPortEdit}
+									onClickDelete={onClickDelete}
+								/>
 
-);
+							);
+						}
 					})}
 
 				</div>

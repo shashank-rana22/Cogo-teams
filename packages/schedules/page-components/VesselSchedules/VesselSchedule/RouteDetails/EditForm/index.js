@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 function RoutePortForm({
-	isFirst, isLast, port, diffInDays, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete,
+	isFirst, isLast, port, diffInDays, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete, add,
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 	return (
@@ -26,7 +26,7 @@ function RoutePortForm({
 					</div>
 				</div>
 			</div>
-			{!isFirst ? <div><IcMPlusInCircle style={{ cursor: 'pointer' }} onClick={() => { onClickAdd(index); }} /></div> : <div style={{ margin: '7px' }} />}
+			{(!isFirst) ? <div><IcMPlusInCircle style={{ cursor: 'pointer' }} onClick={() => { onClickAdd(index); }} /></div> : <div style={{ margin: '7px' }} />}
 			<div className={styles.middle}>
 				{!isFirst && <div className={styles.hr_line_up} />}
 				<div className={styles.circle} />

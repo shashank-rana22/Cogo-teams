@@ -13,14 +13,14 @@ function VesselScheduele() {
 	const { query } = useRouter();
 	const vesselId = query?.id;
 	const { data } = useGetVesselScheduleById({ vesselId });
-	const [new_array_aa, setNew_array_aa] = useState(null);
+	const [finalRoute, setFinalRoute] = useState(null);
 	return (
 		<>
 			<BackButton />
 			<div className={styles.back_button} />
 			<Card vessel={data} />
 			<div className={styles.flex}>
-				<RouteDetails route={data?.vessel_schedule_link} new_array_aa={new_array_aa} setNew_array_aa={setNew_array_aa} />
+				<RouteDetails route={data?.vessel_schedule_link} finalRoute={finalRoute} setFinalRoute={setFinalRoute} />
 				<VesselScheduleMap data={data} />
 			</div>
 		</>
