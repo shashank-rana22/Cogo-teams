@@ -22,7 +22,7 @@ function TermsAndConditions({ shipmentData = {} }) {
 		);
 	}
 	return (
-		<Accordion title={renderTitle} style={{ width: '100%' }}>
+		<Accordion title={renderTitle} style={{ width: '100%' }} isOpen>
 			<TncItem list={shipmentData?.terms_and_conditions} />
 		</Accordion>
 	);

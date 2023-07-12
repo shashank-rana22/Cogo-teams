@@ -63,7 +63,7 @@ function Child({
 	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
 	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += INCREMENT_CONSTANT) {
+		for (let i = GLOBAL_CONSTANTS.zeroth_index; i < elements.length; i += INCREMENT_CONSTANT) {
 			elements[i].style.display = 'none';
 		}
 	}
