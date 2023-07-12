@@ -6,6 +6,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
+import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -117,6 +118,7 @@ const routeConfig = {
 	...liabilityDashboard,
 	...rfqDashboard,
 	...ftlAdmin,
+	...bookingDeskSurface,
 };
 
 export default routeConfig;

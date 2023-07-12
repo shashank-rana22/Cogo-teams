@@ -1447,6 +1447,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
+			{
+				key           : 'coe-shipment_surface',
+				title         : 'Surface Booking Desk',
+				href          : '/v2/booking-desk/surface',
+				as            : '/v2/booking-desk/surface',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : [...apis.shipment],
+			},
 		],
 	},
 	terms_and_conditions: {
