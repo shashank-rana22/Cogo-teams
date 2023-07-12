@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
+import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
@@ -14,16 +14,29 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
+const HTTP_SUCCESS_CODE = 200;
+
 const useGetStep3Data = ({
-	servicesList = [], shipment_data, onCancel, task,
+	servicesList = [],
+	shipment_data = {},
+	onCancel = () => {},
+	task = {},
 	taskListRefetch = () => {},
 }) => {
-	const SUCCESS_CODE = 200;
+	let notMainService = false;
 	const SERVICE_IDS = [];
+
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
 			|| (serviceObj.service_type === 'fcl_freight_local_service')
 		) {
+			notMainService = true;
+			SERVICE_IDS.push(serviceObj.id);
+		}
+	});
+
+	(servicesList || []).forEach((serviceObj) => {
+		if (!notMainService) {
 			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
@@ -35,8 +48,7 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
 
 	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
 		refetch: () => {
@@ -119,7 +131,7 @@ const useGetStep3Data = ({
 			try {
 				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === SUCCESS_CODE) {
+				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
