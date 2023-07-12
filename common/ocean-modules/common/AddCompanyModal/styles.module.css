@@ -31,10 +31,10 @@
 			font-weight: 600;
 		}
 	}
-} 
+}
 
-.footer{
-	display: flex; 
-	justify-content: flex-end; 
+.footer {
+	display: flex;
+	justify-content: flex-end;
 	margin-top: 32px;
 }

@@ -7,28 +7,34 @@ import styles from './styles.module.css';
 
 function FlashUserChats({
 	flashMessagesList,
-	activeCardId,
+	activeTab,
 	userId,
 	setActiveMessage,
 	firestore,
-	showCarousel,
-	setShowCarousel,
-	canShowCarousel,
+	carouselState,
+	setCarouselState,
+	viewType,
 }) {
-	const { claimChat, claimLoading = false } = useClaimChat({ userId, setShowCarousel, firestore });
+	const { claimChat, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
 
-	const carouselData = showCarousel ? getCarouselData({
+	const canShowCarousel = carouselState === 'show';
+
+	const carouselData = canShowCarousel ? getCarouselData({
 		flashMessagesList,
-		activeCardId,
+		activeTab,
 		userId,
 		setActiveMessage,
 		firestore,
 		claimChat,
 		claimLoading,
+		viewType,
 	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ '--height': !canShowCarousel ? '0' : '16%' }}>
+		<div
+			className={styles.flash_messages_div}
+			style={{ height: canShowCarousel ? '16%' : '0' }}
+		>
 			{canShowCarousel && (
 				<Carousel
 					id="flash_messages"

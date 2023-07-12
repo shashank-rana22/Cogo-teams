@@ -5,6 +5,8 @@ import toFixed from '../../../../../CreateModule/utils/toFixed';
 
 import styles from './styles.module.css';
 
+const DECIMAL_PLACES = 2;
+
 function AccordianTitleComponent({ data = {} }) {
 	const {
 		topic = '',
@@ -25,15 +27,13 @@ function AccordianTitleComponent({ data = {} }) {
 			</div>
 
 			<div className={styles.section}>
-				<Tooltip content={question_text} placement="top">
-					<div className={styles.question_text}>{question_text}</div>
-				</Tooltip>
+				<div className={styles.question_text} dangerouslySetInnerHTML={{ __html: question_text }} />
 			</div>
 
 			<div className={styles.small_section}>{startCase(difficulty_level)}</div>
 
 			<div className={styles.small_section}>
-				{`${user_appeared_count} ( ${toFixed(user_appeared_percent, 2)}% )`}
+				{`${user_appeared_count} ( ${toFixed(user_appeared_percent, DECIMAL_PLACES)}% )`}
 			</div>
 		</div>
 	);
