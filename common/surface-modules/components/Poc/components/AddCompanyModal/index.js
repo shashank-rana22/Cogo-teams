@@ -63,7 +63,7 @@ function AddCompanyModal({
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL;
 	return (
-		<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
+		<Modal show={!isEmpty(addCompany)} placement="top" size="xl" onClose={onClose}>
 			<Modal.Header title="Add Company" />
 
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>

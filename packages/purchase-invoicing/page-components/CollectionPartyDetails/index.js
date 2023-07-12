@@ -40,18 +40,20 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking manager',
 ];
 
-function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {} }) {
-	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
-	const [openComparision, setOpenComparision] = useState(false);
-	const [open, setOpen] = useState(false);
-	const [step, setStep] = useState(DEFAULT_STEP);
-
+function CollectionPartyDetails({
+	collectionParty = {}, refetch = () => {}, servicesData = {},
+	fullwidth = false,
+}) {
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const geo = getGeoConstants();
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
+	const [openComparision, setOpenComparision] = useState(false);
+	const [open, setOpen] = useState(false);
+	const [step, setStep] = useState(DEFAULT_STEP);
+	const geo = getGeoConstants();
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
 		(item) => STATE.includes(item?.detail?.state),
@@ -120,7 +122,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	const isJobClosed = shipment_data?.is_job_closed;
 
-	const titleCard = (
+	const titleCard = () => (
 		<div className={styles.container_title}>
 			<div className={styles.customer}>
 				<div className={styles.heading}>
@@ -184,7 +186,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	return (
 		<div className={styles.container}>
-			<AccordianView title={titleCard}>
+			<AccordianView fullwidth={fullwidth} title={titleCard()}>
 				<InvoicesUploaded
 					invoicesdata={collectionParty?.existing_collection_parties}
 					collectionParty={collectionParty}
@@ -195,19 +197,23 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<div className={styles.buttoncontailner}>
 					{(showUpload || user?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id)
 					&& !airServiceProviderConfirmation ? (
-						<Button
-							size="md"
-							themeType="secondary"
-							className={styles.marginright}
-							onClick={() => { setOpen(true); }}
-						>
-							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
-						</Button>
+						<div className={styles.uploadbuttonwrapper}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.marginright}
+								disabled={disableInvoice}
+								onClick={() => { setOpen(true); }}
+							>
+								{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
+							</Button>
+							{disableInvoice ? (
+								<div className={styles.uploadtooltip}>{errorMsg}</div>
+							) : null}
+						</div>
 						) : null}
-					{disableInvoice ? (
-						<div className="upload-tooltip">{errorMsg}</div>
-					) : null}
 				</div>
+
 				<ServiceTables service_charges={collectionParty?.service_charges} />
 				<div className={styles.totalamount}>
 					Total With TAX
