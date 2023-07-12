@@ -3,11 +3,15 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useEditApplicableAgents = (props) => {
-	const { roles } = props;
+	const { roles, formValues, setFormValues, setShowEditAgentsModal } = props;
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
+
+	const [selectMode, setSelectMode] = useState(formValues.generalConfiguration?.selectMode || 'select_all');
+
+	const [selectedAgentIds, setSelectedAgentIds] = useState(formValues.generalConfiguration?.user_ids || []);
 
 	const [params, setParams] = useState({
 		page       : 1,
@@ -27,6 +31,30 @@ const useEditApplicableAgents = (props) => {
 
 	const { list = [], ...paginationData } = data || {};
 
+	const onApplyChanges = () => {
+		if (selectMode === 'select_all') {
+			setFormValues((previousValues) => ({
+				...previousValues,
+				generalConfiguration: {
+					...(previousValues.generalConfiguration || {}),
+					selectMode,
+					user_ids: undefined,
+				},
+			}));
+		} else {
+			setFormValues((previousValues) => ({
+				...previousValues,
+				generalConfiguration: {
+					...(previousValues.generalConfiguration || {}),
+					selectMode,
+					user_ids: selectedAgentIds,
+				},
+			}));
+		}
+
+		setShowEditAgentsModal(false);
+	};
+
 	const getNextPage = (nextPage) => {
 		setParams((previousParams) => ({
 			...previousParams,
@@ -35,8 +63,6 @@ const useEditApplicableAgents = (props) => {
 	};
 
 	useEffect(() => {
-		if (!searchQuery) return;
-
 		setParams((previousParams) => ({
 			...previousParams,
 			page    : 1,
@@ -55,6 +81,11 @@ const useEditApplicableAgents = (props) => {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		selectMode,
+		setSelectMode,
+		selectedAgentIds,
+		setSelectedAgentIds,
+		onApplyChanges,
 	};
 };
 

@@ -1,13 +1,15 @@
-import { Button, Modal, Pagination, Table } from '@cogoport/components';
+import { Button, Modal, Pagination, RadioGroup, Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import SearchInput from '../../../../../../../../../common/SearchInput';
+import EDIT_AGENTS_RADIO_OPTIONS from '../../../../../../../configurations/edit-agent-select-type-radio-options';
 
 import getListColumns from './get-list-columns';
 import styles from './styles.module.css';
 import useEditApplicableAgents from './useEditApplicableAgents';
 
 function EditApplicableAgentsModal(props) {
-	const { showEditAgents, setShowEditAgents, roles } = props;
+	const { showEditAgentsModal, setShowEditAgentsModal, roles, formValues, setFormValues } = props;
 
 	const {
 		list,
@@ -17,17 +19,22 @@ function EditApplicableAgentsModal(props) {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-	} = useEditApplicableAgents({ roles });
+		selectMode,
+		setSelectMode,
+		selectedAgentIds,
+		setSelectedAgentIds,
+		onApplyChanges,
+	} = useEditApplicableAgents({ roles, formValues, setFormValues, setShowEditAgentsModal });
 
-	const { LIST_COLUMNS } = getListColumns();
+	const { LIST_COLUMNS } = getListColumns({ selectMode, selectedAgentIds, setSelectedAgentIds });
 
 	const { page = 1, total_count = 0, page_limit = 10 } = paginationData || {};
 
 	return (
 		<Modal
-			size="md"
-			show={showEditAgents}
-			onClose={() => setShowEditAgents(false)}
+			size="lg"
+			show={showEditAgentsModal}
+			onClose={() => setShowEditAgentsModal(false)}
 			showCloseIcon
 			animate
 		>
@@ -39,6 +46,13 @@ function EditApplicableAgentsModal(props) {
 					By default All agents in the Selected Role will be selected. You may edit it from here.
 				</p>
 
+				<RadioGroup
+					className={styles.radio_group}
+					options={EDIT_AGENTS_RADIO_OPTIONS}
+					value={selectMode}
+					onChange={setSelectMode}
+				/>
+
 				<SearchInput
 					size="md"
 					placeholder="Search by Agent"
@@ -47,7 +61,12 @@ function EditApplicableAgentsModal(props) {
 					debounceQuery={debounceQuery}
 				/>
 
-				<Table columns={LIST_COLUMNS} data={list} loading={loading} />
+				<Table
+					className={styles.table}
+					columns={LIST_COLUMNS}
+					data={list}
+					loading={loading}
+				/>
 
 				<div className={styles.pagination_container}>
 					<Pagination
@@ -65,7 +84,7 @@ function EditApplicableAgentsModal(props) {
 					type="button"
 					themeType="tertiary"
 					style={{ marginRight: '8px' }}
-					onClick={() => setShowEditAgents(false)}
+					onClick={() => setShowEditAgentsModal(false)}
 				>
 					Cancel
 				</Button>
@@ -73,6 +92,8 @@ function EditApplicableAgentsModal(props) {
 				<Button
 					type="button"
 					themeType="accent"
+					onClick={onApplyChanges}
+					disabled={loading || (selectMode === 'custom' && isEmpty(selectedAgentIds))}
 				>
 					Apply Changes
 				</Button>

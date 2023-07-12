@@ -12,10 +12,10 @@ import EditApplicableAgentsModal from './EditApplicableAgentsModal';
 import styles from './styles.module.css';
 
 function GeneralConfiguration(props) {
-	const { setFormValues } = props;
+	const { formValues, setFormValues } = props;
 
 	const [roles, setRoles] = useState([]);
-	const [showEditAgents, setShowEditAgents] = useState(false);
+	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
 
 	const { control, watch, handleSubmit, formState: { errors } } = useForm();
 
@@ -80,7 +80,7 @@ function GeneralConfiguration(props) {
 								if (isEmpty(roles)) {
 									return Toast.error('Please Select a role first');
 								}
-								return setShowEditAgents(true);
+								return setShowEditAgentsModal(true);
 							}}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />
@@ -106,11 +106,13 @@ function GeneralConfiguration(props) {
 				</div>
 			</form>
 
-			{showEditAgents && (
+			{showEditAgentsModal && (
 				<EditApplicableAgentsModal
-					showEditAgents={showEditAgents}
-					setShowEditAgents={setShowEditAgents}
+					showEditAgentsModal={showEditAgentsModal}
+					setShowEditAgentsModal={setShowEditAgentsModal}
 					roles={roles}
+					formValues={formValues}
+					setFormValues={setFormValues}
 				/>
 			)}
 		</div>

@@ -30,7 +30,7 @@ function CreateAndEditForm() {
 	const [formValues, setFormValues] = useState({ generalConfiguration: {}, objectiveRequirements: {} });
 
 	const STEPPER_COMPONENT_MAPPING = {
-		[SET_OBJECTIVE]           : <SetObjective setFormValues={setFormValues} />,
+		[SET_OBJECTIVE]           : <SetObjective formValues={formValues} setFormValues={setFormValues} />,
 		[REVIEW_OBJECTIVE]        : <ReviewObjective formValues={formValues} />,
 		[SET_OBJECTIVE_WEIGHTAGE] : <SetObjectiveWeightage />,
 	};

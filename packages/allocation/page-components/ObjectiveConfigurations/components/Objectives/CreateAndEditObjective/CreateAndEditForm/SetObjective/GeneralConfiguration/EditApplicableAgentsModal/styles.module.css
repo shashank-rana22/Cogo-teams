@@ -6,6 +6,20 @@
 	margin-bottom: 20px;
 }
 
+.radio_group {
+	padding: 0;
+	margin: 20px 0;
+}
+
+.table {
+	margin: 16px 0;
+	border: none;
+
+	> thead {
+		display: none;
+	}
+}
+
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;

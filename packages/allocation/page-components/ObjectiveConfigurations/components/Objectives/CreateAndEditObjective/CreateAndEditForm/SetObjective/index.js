@@ -2,11 +2,14 @@ import GeneralConfiguration from './GeneralConfiguration';
 import ObjectiveRequirements from './ObjectiveRequirements';
 
 function SetObjective(props) {
-	const { setFormValues } = props;
+	const { formValues, setFormValues } = props;
 
 	return (
 		<>
-			<GeneralConfiguration setFormValues={setFormValues} />
+			<GeneralConfiguration
+				formValues={formValues}
+				setFormValues={setFormValues}
+			/>
 
 			<ObjectiveRequirements />
 		</>
