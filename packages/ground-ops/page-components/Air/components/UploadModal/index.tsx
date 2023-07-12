@@ -71,7 +71,7 @@ function UploadModal({
 			pending_task_id     : edit === 'edit' ? undefined : (showUpload?.id || showUpload?.taskId),
 			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
-			air_document_data   : {
+			data                : {
 
 				status          : 'uploaded',
 				document_number : showUpload?.awbNumber,
