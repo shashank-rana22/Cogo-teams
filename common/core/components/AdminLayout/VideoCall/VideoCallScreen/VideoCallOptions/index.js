@@ -1,24 +1,34 @@
-import { IcMCall, IcMFitView, IcMMicrophone, IcMScreenShare, IcMVideoCall } from '@cogoport/icons-react';
+import {
+	IcMCall, IcMZoomIn, IcMMicrophone, IcMScreenShare,
+	IcMVideoCall, IcMStopShare, IcMVideoCallMute, IcMMicrophoneMute,
+	IcMZoomOut,
+} from '@cogoport/icons-react';
 
-function VideoCallOptions({ CallEnd = () => {}, shareScreen = () => {} }) {
+function VideoCallOptions({
+	callEnd = () => {}, shareScreen = () => {}, options = null, setOptions = () => {},
+	micOn = () => {}, videoOn = () => {},
+}) {
+	const maximizeScreen = () => {
+		setOptions((prev) => ({ ...prev, isMaximize: !prev.isMaximize }));
+	};
+
 	return (
 		<>
-			<div>
-				<IcMFitView />
+			<div role="presentation" onClick={maximizeScreen}>
+				{options?.isMaximize ? <IcMZoomOut /> : <IcMZoomIn />}
 			</div>
 			<div role="presentation" onClick={shareScreen}>
-				<IcMScreenShare />
+				{options?.isScreenShareActive ? <IcMStopShare /> : <IcMScreenShare />}
 			</div>
-			<div role="presentation" onClick={CallEnd}>
+			<div role="presentation" onClick={callEnd}>
 				<IcMCall />
 			</div>
-			<div>
-				<IcMMicrophone />
+			<div role="presentation" onClick={micOn}>
+				{options?.isMicActive ? <IcMMicrophone /> : <IcMMicrophoneMute />}
 			</div>
-			<div>
-				<IcMVideoCall />
+			<div role="presentation" onClick={videoOn}>
+				{options?.isVideoActive ? <IcMVideoCall /> : <IcMVideoCallMute />}
 			</div>
-
 		</>
 	);
 }

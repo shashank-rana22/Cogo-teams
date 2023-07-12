@@ -32,10 +32,10 @@
 	}
 
 	.reject svg {
-		background-color: red;
+		background-color: #bf291e;
 	}
 
 	.accept svg {
-		background-color: green;
+		background-color: #849e4c;
 	}
 }

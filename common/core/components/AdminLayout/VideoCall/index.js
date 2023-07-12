@@ -16,6 +16,15 @@ function VideoCall() {
 		},
 	);
 
+	const [options, setOptions] = useState(
+		{
+			isMicActive         : true,
+			isVideoActive       : false,
+			isScreenShareActive : false,
+			isMaximize          : false,
+		},
+	);
+
 	const streamRef = useRef({ user: null, peer: null });
 	const componentsRef = useRef({ call_comming: null, call_screen: null });
 
@@ -73,6 +82,8 @@ function VideoCall() {
 								streams={streams}
 								setStreams={setStreams}
 								ref={streamRef}
+								setOptions={setOptions}
+								options={options}
 							/>
 						)}
 					</div>
