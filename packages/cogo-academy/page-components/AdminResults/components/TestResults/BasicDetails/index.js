@@ -1,8 +1,14 @@
 import { IcMTimer, IcMActivePlans } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+
+import toFixed from '../../../../CreateModule/utils/toFixed';
 
 import styles from './styles.module.css';
 
-function BasicDetails({ basic_info_data, questions, stats_data }) {
+const ROUND_OFF_DIGITS = 2;
+const DEFAULT_TEST_VALUE = 0;
+
+function BasicDetails({ basic_info_data = {}, questions = 0, stats_data = {} }) {
 	function createContentMappingLeft() {
 		return {
 			topics_covered: {
@@ -10,7 +16,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 				icon       : <IcMActivePlans />,
 				renderData : (
 					<div className={styles.topic}>
-						{basic_info_data.topics_covered?.length > 0 ? (
+						{!isEmpty(basic_info_data.topics_covered) ? (
 							<div>{basic_info_data.topics_covered.join(', ')}</div>
 						) : ('-')}
 					</div>
@@ -36,7 +42,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 				renderData : (
 					<div className={styles.values}>
 						<div className={styles.current}>
-							{stats_data.current_pass_percentage || 0}
+							{ toFixed(stats_data.current_pass_percentage, ROUND_OFF_DIGITS) || DEFAULT_TEST_VALUE}
 						</div>
 
 						<div style={{
@@ -59,7 +65,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 				label      : 'Students Appeared',
 				renderData : (
 					<div>
-						{basic_info_data.total_students_appeared || 0}
+						{basic_info_data.total_students_appeared || DEFAULT_TEST_VALUE}
 					</div>
 				),
 			},
@@ -67,7 +73,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 				label      : 'Passed',
 				renderData : (
 					<div>
-						{basic_info_data.failed_and_passed.total_passed || 0}
+						{basic_info_data.failed_and_passed.total_passed || DEFAULT_TEST_VALUE}
 					</div>
 				),
 			},
@@ -75,7 +81,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 				label      : 'Failed',
 				renderData : (
 					<div>
-						{basic_info_data.failed_and_passed.total_failed || 0}
+						{basic_info_data.failed_and_passed.total_failed || DEFAULT_TEST_VALUE}
 					</div>
 				),
 			},

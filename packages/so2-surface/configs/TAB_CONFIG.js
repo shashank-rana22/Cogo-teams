@@ -1,26 +1,24 @@
 const TAB_CONFIG = {
 	ftl_freight: [
 		{
-			label   : 'Mandatory Docs Upload',
+			label   : 'Mandatory Tasks',
 			value   : 'mandatory_docs_upload',
 			stats   : 'mandatory_documents',
 			payload : {
 				shipment_type : 'ftl_freight',
 				pending_task  : {
-					task_type : 'upload_document',
-					mandatory : true,
+					mandatory: true,
 				},
 			},
 		},
 		{
-			label   : 'Optional Docs Upload',
+			label   : 'Optional Tasks',
 			value   : 'optional_docs_upload',
 			stats   : 'non_mandatory_documents',
 			payload : {
 				shipment_type : 'ftl_freight',
 				pending_task  : {
-					task_type : 'upload_document',
-					mandatory : false,
+					mandatory: false,
 				},
 			},
 		},
@@ -58,22 +56,27 @@ const TAB_CONFIG = {
 			},
 		},
 		{
-			label   : 'Physical PoD to Customer',
-			value   : 'physical_pod_customer',
-			stats   : 'physical_to_pod_customer',
-			payload : {
-				shipment_type : 'ftl_freight',
-				pending_task  : {
-					task_type : 'upload_document',
-					task      : 'pod_sent_to_shipper',
-				},
-			},
-
-		},
-		{
 			label   : 'Purchase Invoice',
 			value   : 'purchase_invoice',
 			stats   : 'un_uploaded_purchase_invoice',
+			payload : {
+				shipment_type : 'ftl_freight',
+				invoice_type  : 'purchase_invoice',
+			},
+		},
+		{
+			label   : 'Completed Shipment',
+			value   : 'completed_shipment',
+			stats   : 'completed_shipments_counts',
+			payload : {
+				shipment_type : 'ftl_freight',
+				invoice_type  : 'purchase_invoice',
+			},
+		},
+		{
+			label   : 'Cancelled Shipment',
+			value   : 'cancelled_shipment',
+			stats   : 'cancelled_shipments_counts',
 			payload : {
 				shipment_type : 'ftl_freight',
 				invoice_type  : 'purchase_invoice',

@@ -186,9 +186,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 											className={styles.sub_ocean_container}
 											key={item.label}
 										>
-
-											<IcMShip className={styles.icon_container} />
-
+											{item.icon}
 											<div className={styles.ocean_text}>
 												{item.label}
 											</div>

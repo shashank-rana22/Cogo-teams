@@ -292,3 +292,7 @@ export const ACCEPT_FILE_MAPPING = {
 	default : '.png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx',
 	zalo    : '.png, .pdf, .jpg, .jpeg, .csv, .svg',
 };
+
+export const MAX_WEIGHT_SLAB = 500;
+
+export const SEND_PROMOTIONAL_RATE_VIEW = ['admin', 'bot'];

@@ -15,6 +15,8 @@ function ViewCtcBreakupContent({ metadata }) {
 		performance_linked_variable_yearly,
 		performance_linked_variable_monthly,
 		retention_bonus_yearly,
+		retention_bonus_twice_yearly,
+		retention_bonus_thrice_yearly,
 		retention_bonus_monthly,
 		sign_on_bonus_monthly,
 		sign_on_bonus_yearly,
@@ -32,9 +34,17 @@ function ViewCtcBreakupContent({ metadata }) {
 			monthlyValue : performance_linked_variable_monthly,
 		},
 		retention_bonus_monthly: {
-			heading      : 'Retention Bonus',
+			heading      : 'Retention Bonus after 1 year',
 			yearlyValue  : retention_bonus_yearly,
 			monthlyValue : retention_bonus_monthly,
+		},
+		retention_bonus_twiceyearly: {
+			heading     : 'Retention Bonus after 2 years',
+			yearlyValue : retention_bonus_twice_yearly,
+		},
+		retention_bonus_thriceyearly: {
+			heading     : 'Retention Bonus after 3 years',
+			yearlyValue : retention_bonus_thrice_yearly,
 		},
 		sign_on_bonus_monthly: {
 			heading      : 'Sign On Bonus',
