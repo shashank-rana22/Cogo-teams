@@ -2,22 +2,9 @@ import { IcMCall, IcMVideoCall } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function CallComming({ setInACall = () => {}, setCallComming = () => {}, setStreams = () => {} }) {
-	const answerOfCall = () => {
-		setInACall(true);
-		setCallComming(false);
-		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true }).then((userStream) => {
-				setStreams((prev) => ({ ...prev, user_stream: userStream }));
-			}).catch((error) => {
-				console.log('user stream is not working', error);
-			});
-	};
-
-	const rejectOfCall = () => {
-		setCallComming(false);
-	};
-
+function CallComming({
+	rejectOfCall = () => {}, answerOfCall = () => {},
+}) {
 	return (
 		<div className={styles.call_comming_body}>
 			<div>

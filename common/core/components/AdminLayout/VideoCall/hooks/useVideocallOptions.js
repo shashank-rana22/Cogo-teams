@@ -15,6 +15,7 @@ function useVideocallOptions({
 	};
 
 	const callEnd = () => {
+		console.log('call ended triggered');
 		setInACall(false);
 		stopStream('screen_stream');
 		stopStream('user_stream');
@@ -47,11 +48,14 @@ function useVideocallOptions({
 	};
 
 	const videoOn = () => {
-		if (options.isVideoActive) {
-			setOptions((prev) => ({ ...prev, isVideoActive: false }));
-		} else {
-			setOptions((prev) => ({ ...prev, isVideoActive: true }));
-		}
+		stopStream('user_stream');
+		navigator.mediaDevices
+			.getUserMedia({ video: !options.isVideoActive, audio: true }).then((userStream) => {
+				setStreams((prev) => ({ ...prev, user_stream: userStream }));
+			}).catch((error) => {
+				console.log('user stream is not working', error);
+			});
+		setOptions((prev) => ({ ...prev, isVideoActive: !options.isVideoActive }));
 	};
 
 	return { videoOn, micOn, shareScreen, callEnd };
