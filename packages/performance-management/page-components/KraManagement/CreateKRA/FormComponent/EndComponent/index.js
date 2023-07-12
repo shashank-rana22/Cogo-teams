@@ -40,10 +40,6 @@ function RenderFields({ control, errors, watch, setValue }) {
 								return null;
 							}
 
-							// if (watchOperationType === 'manual') {
-							// 	setValue('is_rating_schema_in_percentage', 'yes');
-							// }
-
 							return (
 								<div key={name} className={styles.form_container}>
 									<div key={name} className={styles.single_field}>
