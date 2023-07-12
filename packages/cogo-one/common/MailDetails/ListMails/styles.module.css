@@ -51,8 +51,8 @@
 
 .recipient_div {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	justify-content: flex-start;
 	width: 100%;
 }
 
@@ -88,12 +88,6 @@
 	}
 }
 
-.recipient_left {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-}
-
 .recipient_right {
 	display: flex;
 	align-items: center;
@@ -122,7 +116,6 @@
 	max-height: 40px;
 	overflow: hidden;
 	font-size: 12px;
-	font-weight: 500;
 	color: #828282;
 	text-overflow: ellipsis;
 }

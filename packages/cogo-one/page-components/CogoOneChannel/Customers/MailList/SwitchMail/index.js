@@ -25,7 +25,9 @@ function SwitchMail({
 					size="50px"
 					personName={activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ')}
 				/>
-				<div className={cl`${styles.mail_address_container} ${styles.align_the_elements_center}`}>
+				<div className={cl`${styles.mail_address_container} 
+						${styles.align_the_elements_center}`}
+				>
 					<div className={styles.user_name}>
 						{activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ')}
 					</div>
@@ -34,6 +36,7 @@ function SwitchMail({
 					</div>
 				</div>
 			</div>
+
 			{filteredMails.map(
 				(itm) => (
 					<div

@@ -37,12 +37,12 @@ function MailRecipientType({
 							placeholder="Enter recipient"
 							type="text"
 							value={value}
-							id="input_id"
 							onChange={(e) => handleChange({ e, type })}
 							onKeyPress={(e) => handleKeyPress({ e, type })}
 							className={cl`${errorValue
 								? styles.error_input_container
 								: styles.input_container}`}
+							id="input_id"
 						/>
 						<div className={styles.cross_icon}>
 							<IcMCross onClick={() => handleError(type)} />

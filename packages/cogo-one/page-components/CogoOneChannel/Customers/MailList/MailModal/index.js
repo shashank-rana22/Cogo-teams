@@ -29,12 +29,12 @@ function MailModal({
 		userEmailAddress,
 	} = mailProps;
 
+	const uploaderRef = useRef(null);
+
 	const [showControl, setShowControl] = useState(null);
 	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
-
-	const uploaderRef = useRef(null);
 
 	const {
 		handleKeyPress = () => {},
@@ -71,11 +71,15 @@ function MailModal({
 			return;
 		}
 		const payload = {
-			...emailState,
-			sender : emailState?.from_mail || activeMailAddress,
+			sender        : emailState?.from_mail || activeMailAddress,
+			toUserEmail   : emailState?.toUserEmail,
+			ccrecipients  : emailState?.ccrecipients,
+			bccrecipients : emailState?.bccrecipients,
+			subject       : emailState?.subject,
+			content       : emailState?.body,
+			msgId         : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
-			msgId  : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 
 		};
 		replyMailApi(payload);
@@ -127,6 +131,7 @@ function MailModal({
 					showControl={showControl}
 					value={value}
 					errorValue={errorValue}
+					setEmailState={setEmailState}
 				/>
 
 				<div className={styles.type_to}>
@@ -159,7 +164,10 @@ function MailModal({
 
 						{(attachments || []).map(
 							(data) => {
-								const { fileIcon = {}, uploadedFileName = '' } = decode(data) || {};
+								const {
+									fileIcon = {},
+									uploadedFileName = '',
+								} = decode(data) || {};
 
 								return (
 									<div

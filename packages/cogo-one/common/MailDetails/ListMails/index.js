@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import React from 'react';
 
 import MailLoading from './MailLoading';
@@ -40,16 +40,17 @@ function ListMails({
 						>
 							<div className={styles.mail_view}>
 								<div className={styles.recipient_div}>
-									<div className={styles.recipient_left}>
-										<div className={styles.recipient_name}>
-											{name}
-										</div>
-										<div className={styles.time}>
-											{format(
-												sentDateTime,
-												GLOBAL_CONSTANTS.formats.datetime['HH:mm, dd/MM/yyy'],
-											)}
-										</div>
+									<div className={styles.recipient_name}>
+										{name}
+									</div>
+									<div className={styles.time}>
+										{formatDate({
+											date       : sentDateTime,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyy'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+											formatType : 'dateTime',
+											separator  : ', ',
+										})}
 									</div>
 								</div>
 

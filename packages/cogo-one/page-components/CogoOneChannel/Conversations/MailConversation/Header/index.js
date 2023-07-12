@@ -13,7 +13,9 @@ function Header({
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.header_subject}>
-				{loading ? <Placeholder width="300px" height="24px" /> : subject}
+				{loading
+					? <Placeholder width="300px" height="24px" />
+					: subject}
 			</div>
 			<div className={styles.header_actions}>
 				{MAIL_REPLY_TYPE.map(

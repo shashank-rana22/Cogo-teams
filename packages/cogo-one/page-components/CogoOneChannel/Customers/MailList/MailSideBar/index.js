@@ -9,7 +9,7 @@ function MailSideBar({
 	activeSelect = '',
 	setActiveSelect = () => {},
 }) {
-	const [hover, setHover] = useState('spam');
+	const [hover, setHover] = useState('');
 
 	return (
 		<div className={styles.sidebar_container}>

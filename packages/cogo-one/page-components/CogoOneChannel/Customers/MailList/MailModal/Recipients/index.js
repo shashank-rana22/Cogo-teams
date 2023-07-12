@@ -28,6 +28,7 @@ function Recipients({
 	handleKeyPress = () => {},
 	handleError = () => {},
 	handleEdit = () => {},
+	setEmailState = () => {},
 	showControl = '',
 	value = '',
 	errorValue = '',
@@ -36,6 +37,13 @@ function Recipients({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
 		bccrecipients : !isEmpty(emailState?.bccrecipients),
 	});
+
+	const handleRemove = (itm) => {
+		setEnabledRecipients((prev) => (
+			{ ...prev, [itm.value]: false }
+		));
+		setEmailState((prev) => ({ ...prev, [itm.value]: [] }));
+	};
 
 	return (
 		<div className={styles.container}>
@@ -74,11 +82,9 @@ function Recipients({
 										<Button
 											size="md"
 											themeType="linkUi"
-											onClick={() => setEnabledRecipients(
-												(prev) => (
-													{ ...prev, ccrecipients: true }
-												),
-											)}
+											onClick={() => setEnabledRecipients((prev) => (
+												{ ...prev, ccrecipients: true }
+											))}
 										>
 											Cc
 										</Button>
@@ -87,11 +93,9 @@ function Recipients({
 										<Button
 											size="md"
 											themeType="linkUi"
-											onClick={() => setEnabledRecipients(
-												(prev) => (
-													{ ...prev, bccrecipients: true }
-												),
-											)}
+											onClick={() => setEnabledRecipients((prev) => (
+												{ ...prev, bccrecipients: true }
+											))}
 										>
 											Bcc
 										</Button>
@@ -101,11 +105,7 @@ function Recipients({
 								<Button
 									size="md"
 									themeType="linkUi"
-									onClick={() => setEnabledRecipients(
-										(prev) => (
-											{ ...prev, [itm.value]: false }
-										),
-									)}
+									onClick={() => handleRemove(itm)}
 								>
 									Remove
 								</Button>

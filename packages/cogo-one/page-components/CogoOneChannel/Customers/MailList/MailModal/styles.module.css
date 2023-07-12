@@ -110,5 +110,9 @@
 		.ui_select_container {
 			width: 100%;
 		}
+
+		.ui_select_options_container {
+			z-index: 9999;
+		}
 	}
 }

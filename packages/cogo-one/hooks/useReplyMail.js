@@ -31,10 +31,9 @@ function useReplyMail(mailProps) {
 			});
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
+			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
-		} finally {
-			setButtonType('');
 		}
 	};
 

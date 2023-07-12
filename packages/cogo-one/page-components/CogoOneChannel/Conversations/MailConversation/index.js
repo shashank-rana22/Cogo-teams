@@ -1,6 +1,6 @@
 import { cl, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty, format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import useGetMail from '../../../../hooks/useGetMail';
 
@@ -39,8 +39,6 @@ function MailConversation({ mailProps = {} }) {
 	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
 	const bccData = (bccRecipients || []).map((item) => item?.emailAddress?.address);
 
-	const emptyCcRecipient = isEmpty(ccRecipients || []);
-
 	const handlClick = (val) => {
 		setButtonType(val);
 		setEmailState((prev) => ({
@@ -65,7 +63,7 @@ function MailConversation({ mailProps = {} }) {
 				sender={sender}
 				recipientData={recipientData}
 				ccData={ccData}
-				emptyCcRecipient={emptyCcRecipient}
+				bccData={bccData}
 				loading={loading}
 			/>
 
@@ -76,20 +74,28 @@ function MailConversation({ mailProps = {} }) {
 							<Placeholder width="80px" height="10px" />
 						</div>
 						<div className={styles.receive_message_container}>
-							{[...Array(MAIL_LOADING_SKELETON_LENGTH).keys()].map((itm) => (
-								<Placeholder
-									key={itm}
-									width="500px"
-									height="20px"
-									margin="0px 0px 10px 0px"
-								/>
-							))}
+							{[...Array(MAIL_LOADING_SKELETON_LENGTH).keys()].map(
+								(itm) => (
+									<Placeholder
+										key={itm}
+										width="500px"
+										height="20px"
+										margin="0px 0px 10px 0px"
+									/>
+								),
+							)}
 						</div>
 					</>
 				) : (
 					<>
 						<div className={styles.time_stamp}>
-							{format(sentDateTime, GLOBAL_CONSTANTS.formats.datetime['EEEE, HH:mm a dd MMM yyy'])}
+							{formatDate({
+								date       : sentDateTime,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : ' ',
+							})}
 						</div>
 						<div
 							className={cl`${styles.receive_message_container}
