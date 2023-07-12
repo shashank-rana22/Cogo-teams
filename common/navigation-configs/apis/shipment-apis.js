@@ -1269,6 +1269,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'update_buy_quotations',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'raise_query',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
