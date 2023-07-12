@@ -449,7 +449,7 @@ export default {
 	},
 	others: {
 		registration_number: {
-			label      : 'VAT',
+			label      : 'TAX Number',
 			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 			max_length : 15,
 		},

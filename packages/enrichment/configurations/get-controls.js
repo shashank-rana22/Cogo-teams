@@ -133,13 +133,14 @@ const getUserControls = ({
 			},
 
 			{
-				name     : 'city',
-				label    : 'City',
-				type     : 'asyncSelect',
-				labelKey : 'display_name',
-				valueKey : 'name',
-				asyncKey : 'list_locations',
-				params   : {
+				name        : 'city',
+				label       : 'City',
+				type        : 'asyncSelect',
+				labelKey    : 'display_name',
+				valueKey    : 'name',
+				asyncKey    : 'list_locations',
+				placeholder : 'Select City',
+				params      : {
 					filters: {
 						type: ['city'], country_id, region_id,
 					},
