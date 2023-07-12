@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function Filters() {
 	const { filters = {}, setFilters = () => {} } = useContext(DashboardContext);
-	const { q = '' } = filters || {};
+	const { serial_ids = '' } = filters || {};
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
 	const [showSortPopover, setShowSortPopover] = useState(false);
@@ -21,12 +21,24 @@ function Filters() {
 
 			<div className={styles.input_container}>
 				<Input
-					placeholder="Search Shipments"
+					placeholder="Ex. 123456, 234567"
 					type="search"
 					size="sm"
 					suffix={<IcMSearchlight />}
-					value={q}
-					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+					value={serial_ids}
+					onChange={(val) => {
+						const serilaIdArray = val.split(',').reduce((acc, item) => {
+							const tempItem = item.trim();
+							acc.push(tempItem);
+							return acc;
+						}, []);
+
+						setFilters({
+							...filters,
+							serial_ids : serilaIdArray,
+							page       : 1,
+						});
+					}}
 				/>
 			</div>
 

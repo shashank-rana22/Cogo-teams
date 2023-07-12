@@ -33,6 +33,7 @@ interface LineItemCardInterface {
 		billCurrency: string;
 		grandTotal: any;
 		subTotal: string | number;
+		tdsAmount: any;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
@@ -40,8 +41,15 @@ interface LineItemCardInterface {
 	invoiceType?: string;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
+	shipmentType: string;
+	tdsRate: any;
+	paidTds: any;
+	subTotal: any;
 }
 
+const PERCENTAGE_FACTOR = 100;
+const MAX_DECIMAL_PLACES = 2;
+const DEFAULT_GRAND_TOTAL = 1;
 function LineItemCard({
 	lineItems,
 	bill,
@@ -51,6 +59,10 @@ function LineItemCard({
 	invoiceType = '',
 	setLineItem,
 	isInvoiceApproved,
+	shipmentType = '',
+	tdsRate,
+	paidTds,
+	subTotal,
 }: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
@@ -178,6 +190,9 @@ function LineItemCard({
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
 	};
 
+	const paidTdsPercentage = +((+paidTds / (subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+		.toFixed(MAX_DECIMAL_PLACES);
+
 	return (
 		<div>
 			<div className={styles.main_header}>
@@ -248,6 +263,33 @@ function LineItemCard({
 										currencyDisplay : 'code',
 									},
 								})}
+								{shipmentType === 'ftl_freight'
+								&& (
+									<div>
+										<div className={styles.tds_amount}>
+											(Applicable  TDS
+											{' '}
+											{tdsRate}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{startCase(bill?.tdsAmount)}
+											)
+										</div>
+										<div className={styles.tds_amount}>
+											(Ded. TDS
+											{' '}
+											{paidTdsPercentage}
+											% -
+											{' '}
+											{startCase(bill?.billCurrency)}
+											{' '}
+											{startCase(paidTds) || 0}
+											)
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
