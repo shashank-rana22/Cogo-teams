@@ -33,7 +33,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 	const { profile } = useSelector((state) => state);
 
 	const authRoleId = profile?.auth_role_data?.id;
-	const partnerId = profile?.partner_id;
+	const partnerId = profile?.partner?.id;
 
 	const third_party_enrichment_allowed_role_ids = geo.uuid.third_party_enrichment_agencies_role_ids;
 
