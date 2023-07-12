@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
-const actionNameMapping = {
+const ACTION_NAME_MAPPING = {
 	delete : 'deleted',
 	update : 'updated',
 	create : 'added',
@@ -21,6 +21,9 @@ function useUpdateCaseStudyQuestion({
 	editDetails,
 	index,
 	editorValue = {},
+	questionState = {},
+	setQuestionState = () => {},
+	caseStudyQuestionEditorValue,
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -55,6 +58,9 @@ function useUpdateCaseStudyQuestion({
 			editDetails,
 			index,
 			editorValue,
+			questionState,
+			setQuestionState,
+			caseStudyQuestionEditorValue,
 		});
 
 		if (!isEmpty(hasError)) {
@@ -71,7 +77,7 @@ function useUpdateCaseStudyQuestion({
 				data: payload,
 			});
 
-			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
+			Toast.success(`Case study question ${ACTION_NAME_MAPPING[action]} successfully`);
 
 			listSetQuestions({ questionSetId, questionToShow: testQuestionId });
 			getTestQuestionTest({ questionSetId });

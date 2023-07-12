@@ -1,44 +1,41 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { STATUS_LABEL_MAPPING, ACTION_KEYS, STATUS_MAPPING } from '../../../constants';
+import { STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../constants';
+import TicketActions from '../../TicketActions';
 
 import styles from './styles.module.css';
 
 const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
-	data,
-	label: key,
+	data = {},
 	updateTicketActivity = () => {},
 	setModalData = () => {},
 }) {
 	const {
 		ID: id = '',
-		Status: status = '',
 		Description: description = '',
 		CreatedAt: createdAt = '',
 		TicketActivity: ticketActivity = {},
 		Type: type = '',
 		ActivityCount: activityCount = 0,
+		IsClosureAuthorizer: isClosureAuthorizer = false,
+		TicketStatus: ticketStatus = '',
 	} = data;
 
-	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
+	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
 
-	const handleTicketClick = (e) => {
+	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
-		updateTicketActivity(ACTION_KEYS[status]?.name, id);
+		updateTicketActivity({ actionType, id });
 	};
 
 	return (
 		<div
 			role="presentation"
 			className={styles.ticket_container}
-			onClick={() => setModalData({
-				type     : 'ticket_details',
-				ticketId : id,
-				key,
-			})}
+			onClick={() => setModalData({ ticketId: id })}
 		>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
@@ -46,14 +43,12 @@ function TicketStructureBody({
 						#
 						{id}
 					</div>
-
-					<div
-						role="presentation"
-						className={styles.reopen_resolve}
-						onClick={(e) => handleTicketClick(e)}
-					>
-						{ACTION_KEYS[status]?.label || ''}
-					</div>
+					<TicketActions
+						isModal={false}
+						ticketStatus={ticketStatus}
+						handleTicket={handleTicket}
+						isClosureAuthorizer={isClosureAuthorizer}
+					/>
 				</div>
 				<div className={styles.category_ticket_activity}>
 					{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
