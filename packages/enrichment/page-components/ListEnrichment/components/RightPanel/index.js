@@ -6,10 +6,6 @@ import useRightPanel from '../../hooks/useRightPanel';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
-const ENRICHMENT_TABS_MAPPING = geo.navigations.enrichment.request_sent;
-
 function RightPanel(props) {
 	const {
 		list,
@@ -26,6 +22,10 @@ function RightPanel(props) {
 		setParams = () => {},
 		partnerId = '',
 	} = props;
+
+	const geo = getGeoConstants();
+
+	const ENRICHMENT_TABS_MAPPING = geo.navigations.enrichment.request_sent;
 
 	const {
 		secondaryTab, setSecondaryTab, filteredColumns,
