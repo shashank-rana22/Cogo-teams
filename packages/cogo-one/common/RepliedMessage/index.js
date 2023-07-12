@@ -1,6 +1,9 @@
-import { startCase } from '@cogoport/utils';
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import MessageBody from '../MessageBody';
+import MessageTags from '../MessageTags';
 
 import styles from './styles.module.css';
 
@@ -11,9 +14,11 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 		media_url = '',
 		send_by = '',
 		message = '',
+		tags = [],
 	} = reply_metadata;
 
-	const displayMessage = typeof message === 'object' ? message?.text : message;
+	const displayMessage = typeof message === 'object' ? (message?.text
+		|| message?.components?.[GLOBAL_CONSTANTS.zeroth_index]?.text) : message;
 	const { session_type = '' } = typeof message === 'object' ? message : {};
 
 	let backgroundColor = '#fff';
@@ -26,11 +31,15 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 			repliedTo = send_by;
 		}
 	}
+
+	const hasTags = !isEmpty(tags);
+
 	return (
 		<div
-			className={styles.container}
-			style={{ '--background-color': backgroundColor }}
+			className={cl`${styles.container} ${hasTags ? styles.tags_container : ''}`}
+			style={{ backgroundColor }}
 		>
+			{hasTags && <div className={styles.tags}><MessageTags tags={tags} /></div>}
 			<div className={styles.name}>{startCase(repliedTo?.toLowerCase() || '')}</div>
 			<MessageBody
 				response={{
