@@ -1,4 +1,6 @@
 import { Checkbox, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -12,6 +14,7 @@ const CONSTANTS = {
 	FIRST_INDEX                       : 0,
 	MIN_STAKEHOLDER_TO_RENDER_TOOLTIP : 1,
 	DEFAULT_SINGLE_CHECKED_ACCOUNT    : 1,
+	MILISECONDS_IN_ONE_DAY            : 86400000,
 };
 
 const getLeaderBoardColumns = ({
@@ -177,20 +180,60 @@ const getLeaderBoardColumns = ({
 			),
 		},
 		{
+			Header   : 'USER NAME',
+			accessor : ({ user_name }) => (
+				<div>
+					{startCase(user_name) || '-'}
+				</div>
+			),
+		},
+		{
+			Header   : 'LAST TRANSACTION',
+			accessor : ({ last_booking_date }) => (
+				<div>
+					{last_booking_date ? formatDate({
+						date       : last_booking_date,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					}) : '-'}
+				</div>
+			),
+		},
+		{
 			Header   : 'ALLOCATED KAM',
-			accessor : ({ stakeholder_name = '' }) => {
-				const renderToolTip = () => `${startCase(stakeholder_name)}`;
+			accessor : ({ stakeholder_name = '', role_name = '' }) => {
+				const renderToolTip = () => (`${startCase(stakeholder_name)}`);
 
 				return (
-					<Tooltip content={renderToolTip} placement="bottom">
-						<div>
-							{startCase(stakeholder_name) || '-'}
+					<Tooltip content={renderToolTip()} placement="bottom">
+						<div className={styles.stakeholder_name_container}>
+							<div className={styles.stakeholder_name}>{startCase(stakeholder_name) || '-'}</div>
+							<div className={styles.lower_label}>{role_name || ''}</div>
 						</div>
 
 					</Tooltip>
 				);
 			},
 
+		},
+		{
+			Header   : 'ALLOCATED AT',
+			accessor : ({ allocated_at }) => {
+				const daysSinceAllocated = Math.floor((Date.now() - new Date(allocated_at))
+				/ CONSTANTS.MILISECONDS_IN_ONE_DAY);
+
+				return (
+					<div>
+						{allocated_at ? formatDate({
+							date       : allocated_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) : '-'}
+						<div className={styles.lower_label}>{`${daysSinceAllocated} days`}</div>
+					</div>
+
+				);
+			},
 		},
 
 	];

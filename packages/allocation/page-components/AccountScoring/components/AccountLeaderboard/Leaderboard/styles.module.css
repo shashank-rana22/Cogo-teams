@@ -42,3 +42,8 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.bulk_deallocate_toggle{
+	display: flex;
+	align-items: center;
+}

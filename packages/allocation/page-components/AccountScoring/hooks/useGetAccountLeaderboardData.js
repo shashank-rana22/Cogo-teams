@@ -35,7 +35,9 @@ const useGetAccountLeaderboardData = () => {
 		},
 	});
 
-	const { organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration } = watch();
+	const {
+		organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration, role,
+	} = watch();
 
 	const mutatedControls = controls.map((singleControl) => {
 		let newControl = { ...singleControl };
@@ -84,6 +86,7 @@ const useGetAccountLeaderboardData = () => {
 				user_id    : userId || undefined,
 				warmth     : accountWarmth || undefined,
 				segment    : segment || undefined,
+				role       : role || undefined,
 			},
 		}));
 
@@ -97,9 +100,10 @@ const useGetAccountLeaderboardData = () => {
 				user_id    : userId || undefined,
 				warmth     : accountWarmth || undefined,
 				segment    : segment || undefined,
+				role       : role || undefined,
 			},
 		}));
-	}, [organization, userId, service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range]);
+	}, [organization, userId, service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range, role]);
 
 	const currentPageListIds = useMemo(() => leaderboardList
 		?.map(({ service_user_id }) => service_user_id), [leaderboardList]);

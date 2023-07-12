@@ -32,6 +32,10 @@
 
 .input_group {
 	width: 100%;
+
+	:global(.react-datepicker__aria-live) {
+		display: none;
+	}
 }
 
 .error_message {

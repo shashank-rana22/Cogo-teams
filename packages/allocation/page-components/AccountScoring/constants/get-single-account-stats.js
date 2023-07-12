@@ -19,7 +19,7 @@ const SINGLE_ACCOUNT_STATS = [
 				flex  : 1.5,
 			},
 			{
-				key   : 'last_booking',
+				key   : 'last_booking_day',
 				label : 'Last Transaction',
 				flex  : 1,
 			},

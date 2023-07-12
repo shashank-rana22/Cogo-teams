@@ -47,20 +47,6 @@ function Leaderboard(props) {
 		leaderboardList,
 	});
 
-	if (isEmpty(leaderboardList) && !leaderboardLoading) {
-		return (
-			<div className={styles.empty_container}>
-				<EmptyState
-					height={220}
-					width={380}
-					flexDirection="column"
-					emptyText="Leaderboard Data not found"
-					textSize={20}
-				/>
-			</div>
-		);
-	}
-
 	const onChangeBulkToggle = (event) => {
 		setBulkDeallocateFilter(() => {
 			if (event.target?.checked) {
@@ -80,13 +66,18 @@ function Leaderboard(props) {
 		<>
 			<div className={styles.header_text}>Leaderboard List</div>
 			<div className={styles.bulk_container}>
-				<Toggle
-					name="bulk_deallocate"
-					size="md"
-					offLabel="off"
-					onLabel="on"
-					onChange={(event) => onChangeBulkToggle(event)}
-				/>
+
+				<div className={styles.bulk_deallocate_toggle}>
+					Bulk De-allocate:
+					<Toggle
+						name="bulk_deallocate"
+						size="md"
+						offLabel="off"
+						onLabel="on"
+						onChange={(event) => onChangeBulkToggle(event)}
+					/>
+
+				</div>
 
 				<div>
 					<Button
@@ -100,43 +91,58 @@ function Leaderboard(props) {
 
 			</div>
 
-			<div className={styles.table_container}>
-				<Table
-					className={styles.table}
-					columns={columns}
-					data={leaderboardList || []}
-					loading={leaderboardLoading}
-				/>
-			</div>
+			{isEmpty(leaderboardList) && !leaderboardLoading ? (
+				<div className={styles.empty_container}>
+					<EmptyState
+						height={220}
+						width={380}
+						flexDirection="column"
+						emptyText="Leaderboard Data not found"
+						textSize={20}
+					/>
+				</div>
+			) : (
+				<>
+					<div className={styles.table_container}>
+						<Table
+							className={styles.table}
+							columns={columns}
+							data={leaderboardList || []}
+							loading={leaderboardLoading}
+						/>
+					</div>
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={getNextPage}
-				/>
-			</div>
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={total_count}
+							pageSize={page_limit}
+							onPageChange={getNextPage}
+						/>
+					</div>
 
-			{!isEmpty(scoreTrendIds) && (
-				<ScoreTrendModal
-					scoreTrendIds={scoreTrendIds}
-					setScoreTrendIds={setScoreTrendIds}
-				/>
+					{!isEmpty(scoreTrendIds) && (
+						<ScoreTrendModal
+							scoreTrendIds={scoreTrendIds}
+							setScoreTrendIds={setScoreTrendIds}
+						/>
+					)}
+
+					{showDeallocateModal && (
+						<DeallocateModal
+							setShowDeallocateModal={setShowDeallocateModal}
+							showDeallocateModal={showDeallocateModal}
+							setCheckedRowsId={setCheckedRowsId}
+							checkedRowsId={checkedRowsId}
+							modalDetailsArray={modalDetailsArray}
+							setModalDetailsArray={setModalDetailsArray}
+							refetch={refetch}
+						/>
+					)}
+				</>
 			)}
 
-			{showDeallocateModal && (
-				<DeallocateModal
-					setShowDeallocateModal={setShowDeallocateModal}
-					showDeallocateModal={showDeallocateModal}
-					setCheckedRowsId={setCheckedRowsId}
-					checkedRowsId={checkedRowsId}
-					modalDetailsArray={modalDetailsArray}
-					setModalDetailsArray={setModalDetailsArray}
-					refetch={refetch}
-				/>
-			)}
 		</>
 	);
 }
