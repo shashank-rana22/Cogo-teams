@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import useEditApplicableAgents from './useEditApplicableAgents';
 
 function EditApplicableAgentsModal(props) {
-	const { showEditAgentsModal, setShowEditAgentsModal, roles, formValues, setFormValues } = props;
+	const { showEditAgentsModal, setShowEditAgentsModal, selectedRoles, formValues, setFormValues } = props;
 
 	const {
 		list,
@@ -24,7 +24,7 @@ function EditApplicableAgentsModal(props) {
 		selectedAgentIds,
 		setSelectedAgentIds,
 		onApplyChanges,
-	} = useEditApplicableAgents({ roles, formValues, setFormValues, setShowEditAgentsModal });
+	} = useEditApplicableAgents({ selectedRoles, formValues, setFormValues, setShowEditAgentsModal });
 
 	const { LIST_COLUMNS } = getListColumns({ selectMode, selectedAgentIds, setSelectedAgentIds });
 
@@ -70,7 +70,7 @@ function EditApplicableAgentsModal(props) {
 
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="compact"
+						type="table"
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={page_limit}

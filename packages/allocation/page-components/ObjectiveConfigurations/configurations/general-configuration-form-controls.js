@@ -1,10 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import getChannelWiseRolesFilters from '../helpers/get-channel-wise-roles-filters';
 import getEntityOptions from '../helpers/get-entity-options';
 
 const getGeneralConfiguratioFormControls = (props) => {
-	const { watchPartner, watchChannel, setRoles } = props;
+	const { watchPartner, watchChannel, setSelectedRoles } = props;
 
 	const controls = [
 		{
@@ -56,7 +57,6 @@ const getGeneralConfiguratioFormControls = (props) => {
 			placeholder : 'Cogo Entity',
 			type        : 'select',
 			options     : getEntityOptions(),
-			isClearable : true,
 			rules       : {
 				required: 'Cogo Entity is required',
 			},
@@ -85,8 +85,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 					value : 'cp',
 				},
 			],
-			isClearable : true,
-			rules       : {
+			rules: {
 				required: 'Channel is required',
 			},
 		},
@@ -107,18 +106,17 @@ const getGeneralConfiguratioFormControls = (props) => {
 				permissions_data_required : false,
 				filters                   : {
 					partner_entity_types : ['cogoport'],
-					stakeholder_id       : watchPartner
+					stakeholder_id       : !isEmpty(watchPartner)
 						? watchPartner.split('_')[GLOBAL_CONSTANTS.zeroth_index] : undefined,
 					role_sub_functions : getChannelWiseRolesFilters({ channels: watchChannel }),
 					status             : 'active',
 				},
 			},
-			isClearable : true,
-			rules       : {
+			rules: {
 				required: 'Roles is required',
 			},
 			onChange: (_, selectedRoles) => {
-				setRoles(selectedRoles?.map((role) => ({ id: role.id, name: role.name })));
+				setSelectedRoles(selectedRoles?.map((role) => ({ id: role.id, name: role.name })));
 			},
 		},
 	];

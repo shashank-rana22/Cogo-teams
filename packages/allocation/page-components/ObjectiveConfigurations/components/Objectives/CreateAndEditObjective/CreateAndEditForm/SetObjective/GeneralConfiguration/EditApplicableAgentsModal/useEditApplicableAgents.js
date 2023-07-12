@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useEditApplicableAgents = (props) => {
-	const { roles, formValues, setFormValues, setShowEditAgentsModal } = props;
+	const { selectedRoles, formValues, setFormValues, setShowEditAgentsModal } = props;
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -17,7 +17,7 @@ const useEditApplicableAgents = (props) => {
 		page       : 1,
 		page_limit : 10,
 		filters    : {
-			role_ids : roles.map((role) => role.id),
+			role_ids : selectedRoles.map((role) => role.id),
 			status   : 'active',
 			q        : searchQuery || undefined,
 		},

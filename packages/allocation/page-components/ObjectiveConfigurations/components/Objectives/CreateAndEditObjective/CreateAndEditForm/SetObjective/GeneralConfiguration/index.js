@@ -1,41 +1,28 @@
 import { Button, Toast, cl } from '@cogoport/components';
-import { RadioGroupController, useForm } from '@cogoport/forms';
+import { RadioGroupController } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
 import LIFECYCLE_STAGE_OPTIONS from '../../../../../../configurations/lifecycle-stage-options';
 
 import EditApplicableAgentsModal from './EditApplicableAgentsModal';
 import styles from './styles.module.css';
+import useSetGeneralConfiguration from './useSetGeneralConfigurations';
 
 function GeneralConfiguration(props) {
 	const { formValues, setFormValues } = props;
 
-	const [roles, setRoles] = useState([]);
-	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
-
-	const { control, watch, handleSubmit, formState: { errors } } = useForm();
-
-	const watchPartner = watch('partner');
-	const watchChannel = watch('channel');
-
-	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setRoles });
-
-	const onSave = (values, event) => {
-		event.preventDefault();
-
-		setFormValues((previousValues) => ({
-			...previousValues,
-			generalConfiguration: {
-				...values,
-				roles,
-			},
-			objectiveRequirements: {},
-		}));
-	};
+	const {
+		selectedRoles,
+		showEditAgentsModal,
+		setShowEditAgentsModal,
+		control,
+		errors,
+		handleSubmit,
+		controls,
+		onSave,
+	} = useSetGeneralConfiguration({ setFormValues });
 
 	return (
 		<div className={styles.container}>
@@ -77,7 +64,7 @@ function GeneralConfiguration(props) {
 							size="lg"
 							themeType="secondary"
 							onClick={() => {
-								if (isEmpty(roles)) {
+								if (isEmpty(selectedRoles)) {
 									return Toast.error('Please Select a role first');
 								}
 								return setShowEditAgentsModal(true);
@@ -110,7 +97,7 @@ function GeneralConfiguration(props) {
 				<EditApplicableAgentsModal
 					showEditAgentsModal={showEditAgentsModal}
 					setShowEditAgentsModal={setShowEditAgentsModal}
-					roles={roles}
+					selectedRoles={selectedRoles}
 					formValues={formValues}
 					setFormValues={setFormValues}
 				/>

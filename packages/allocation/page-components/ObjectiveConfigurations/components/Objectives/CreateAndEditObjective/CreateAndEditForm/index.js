@@ -13,7 +13,12 @@ const { SET_OBJECTIVE, REVIEW_OBJECTIVE, SET_OBJECTIVE_WEIGHTAGE } = CREATE_FORM
 
 function CreateAndEditForm() {
 	const [activeStep, setActiveStep] = useState(SET_OBJECTIVE);
-	const [formValues, setFormValues] = useState({ generalConfiguration: {}, objectiveRequirements: {} });
+	const [formValues, setFormValues] = useState(
+		{
+			generalConfiguration  : { selectMode: 'select_all', user_ids: [] },
+			objectiveRequirements : {},
+		},
+	);
 
 	const STEPPER_COMPONENT_MAPPING = {
 		[SET_OBJECTIVE]           : <SetObjective formValues={formValues} setFormValues={setFormValues} />,
