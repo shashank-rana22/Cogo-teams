@@ -51,18 +51,24 @@ const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
 function LineItemCard({
-	lineItems,
-	bill,
+	lineItems = [],
+	bill = {
+		taxTotal     : 0,
+		billCurrency : '',
+		grandTotal   : 0,
+		subTotal     : '' || 0,
+		tdsAmount    : 0,
+	},
 	setShowLineItem = () => {},
-	lineItemsRemarks,
-	setLineItemsRemarks,
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
 	invoiceType = '',
-	setLineItem,
-	isInvoiceApproved,
+	setLineItem = () => {},
+	isInvoiceApproved = false,
 	shipmentType = '',
-	tdsRate,
-	paidTds,
-	subTotal,
+	tdsRate = 0,
+	paidTds = 0,
+	subTotal = 0,
 }: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
