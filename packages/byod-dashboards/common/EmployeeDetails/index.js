@@ -19,17 +19,18 @@ const geo = getGeoConstants();
 const DEFAULT_FIXED_VALUE = 2;
 
 function EmployeeDetails() {
-	const [rejectModal, setRejectModal] = useState(false);
-	const [rejectionReason, setRejectionReason] = useState('');
+	const router = useRouter();
 
 	const profile = useSelector((state) => state.profile || {});
+
+	const [rejectModal, setRejectModal] = useState(false);
+	const [rejectionReason, setRejectionReason] = useState('');
 
 	const { auth_role_data } = profile || {};
 
 	const { id : adminId } = auth_role_data;
 
 	const isAdmin = adminId === geo.uuid.hrbp_admin_role_id;
-	const router = useRouter();
 	const id = router.query;
 	const { id : employee_id } = id || {};
 	const { data, loading, refetch } = useGetEmployeeDetails(employee_id);
@@ -83,20 +84,22 @@ function EmployeeDetails() {
 			<div className={styles.btn_container}>
 				<Button
 					disabled={detailLoading}
-					className={styles.reject_btn}
 					onClick={() => setRejectModal(true)}
 					size="lg"
+					themeType="secondary"
 				>
 					Reject
 				</Button>
+
 				<Button
+					themeType="primary"
 					disabled={detailLoading}
 					onClick={() => updateDetail({
 						status : isAdmin ? 'approved' : 'verified',
 						id     : employeeDeviceData.id,
 					})}
 					size="lg"
-					className={styles.verify_btn}
+					style={{ marginLeft: 12 }}
 				>
 					{isAdmin ? 'Approve' : 'Verify'}
 				</Button>

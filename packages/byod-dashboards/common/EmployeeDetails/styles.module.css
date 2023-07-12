@@ -86,18 +86,6 @@
 	justify-content: flex-end;
 	margin-right: 120px;
 
-	.reject_btn {
-		margin-right: 12px;
-	}
-
-	.verify_btn {
-		background-color: #2da042;
-	}
-
-	.verify_btn:hover {
-		background-color: #2da042;
-	}
-
 	@media (max-width: 768px) {
 		margin-top: 12px;
 	}
