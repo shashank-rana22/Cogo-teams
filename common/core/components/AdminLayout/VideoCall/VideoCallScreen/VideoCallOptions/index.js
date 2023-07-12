@@ -1,12 +1,22 @@
 import {
-	IcMCall, IcMZoomIn, IcMMicrophone, IcMScreenShare,
-	IcMVideoCall, IcMStopShare, IcMVideoCallMute, IcMMicrophoneMute,
+	IcMCall,
+	IcMZoomIn,
+	IcMMicrophone,
+	IcMScreenShare,
+	IcMVideoCall,
+	IcMStopShare,
+	IcMVideoCallMute,
+	IcMMicrophoneMute,
 	IcMZoomOut,
 } from '@cogoport/icons-react';
 
 function VideoCallOptions({
-	callEnd = () => {}, shareScreen = () => {}, options = null, setOptions = () => {},
-	micOn = () => {}, videoOn = () => {},
+	callEnd = () => {},
+	shareScreen = () => {},
+	options = null,
+	setOptions = () => {},
+	micOn = () => {},
+	videoOn = () => {},
 }) {
 	const maximizeScreen = () => {
 		setOptions((prev) => ({ ...prev, isMaximize: !prev.isMaximize }));

@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
@@ -13,6 +14,7 @@ import VideoCallScreen from './VideoCallScreen';
 function VideoCall() {
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
+	const peerRef = useRef(null);
 
 	const [callComming, setCallComming] = useState(false);
 	const [inACall, setInACall] = useState(false);
@@ -20,6 +22,7 @@ function VideoCall() {
 		my_details      : null,
 		peer_details    : null,
 		calling_details : null,
+		calling_room_id : null,
 	});
 	const [streams, setStreams] = useState({
 		user_stream   : null,
@@ -42,10 +45,25 @@ function VideoCall() {
 		call_screen  : null,
 	});
 
-	const {
+	const { callingTo, callUpdate, callEnd, stopStream } = useVideoCallFirebase({
+		firestore,
+		setCallComming,
+		callComming,
+		setInACall,
+		inACall,
+		setCallDetails,
+		callDetails,
+		setStreams,
+		streams,
+		peerRef,
+	});
+	const { rejectOfCall, answerOfCall } = useCommingCall({
+		setInACall,
+		setCallComming,
 		callUpdate,
-	} = useVideoCallFirebase({ firestore, setCallComming, setInACall, setCallDetails, callDetails });
-	const { rejectOfCall, answerOfCall } = useCommingCall({ setInACall, setCallComming, callUpdate, setStreams });
+		setStreams,
+		peerRef,
+	});
 
 	useEffect(() => {
 		if (streams.screen_stream && streamRef.current.user) {
@@ -64,18 +82,25 @@ function VideoCall() {
 		const SHIFT = 50;
 
 		if (shiftX && shiftY) {
-			componentsRef[moving_ref].style = `top: ${shiftY - SHIFT}px;left: ${shiftX - SHIFT}px;`;
+			componentsRef[moving_ref].style = `top: ${shiftY - SHIFT}px;left: ${
+				shiftX - SHIFT
+			}px;`;
 		}
 	};
 
 	return (
 		<div>
+			<div className={styles.call_comming}>
+				<Button onClick={callingTo}>Call</Button>
+			</div>
 			{callComming ? (
 				<div
 					className={styles.call_comming}
 					draggable="true"
 					onDrag={(ev) => onDragHandler(ev, 'call_comming')}
-					ref={(e) => { componentsRef.call_comming = e; }}
+					ref={(e) => {
+						componentsRef.call_comming = e;
+					}}
 					onDragOver={(e) => e.preventDefault()}
 				>
 					<CallComming
@@ -91,7 +116,9 @@ function VideoCall() {
 						role="presentation"
 						draggable="true"
 						onDrag={(ev) => onDragHandler(ev, 'call_screen')}
-						ref={(e) => { componentsRef.call_screen = e; }}
+						ref={(e) => {
+							componentsRef.call_screen = e;
+						}}
 						onDragOver={(e) => e.preventDefault()}
 					>
 						{streams && (
@@ -102,12 +129,13 @@ function VideoCall() {
 								ref={streamRef}
 								setOptions={setOptions}
 								options={options}
+								callEnd={callEnd}
+								stopStream={stopStream}
 							/>
 						)}
 					</div>
 				</div>
 			) : null}
-
 		</div>
 	);
 }
