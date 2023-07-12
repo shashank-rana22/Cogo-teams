@@ -207,6 +207,8 @@ export const renderValue = (label, detail) => {
 			return ` ${weight} ${'Ton'}`;
 		case 'volume':
 			return ` ${volume} ${'Cbm'}`;
+		case 'trip_type':
+			return detail?.trip_type ? startCase(detail?.trip_type) : null;
 
 		default:
 			return detail[label] || null;
