@@ -23,7 +23,35 @@ function MainHeader({ activeTab = '', setActiveTab = () => {} }:Props) {
 	const cardsData = [
 		{
 			id      : 'dashboard',
-			content : <h3 className={styles.heading_text}>Dashboard</h3>,
+			content : (
+				<div className={styles.campaign_card}>
+					<div style={{ textAlign: 'left' }}>
+						<h3>Financial</h3>
+						<h3>Summary</h3>
+					</div>
+					<div className={styles.vertical_border} />
+					<div className={styles.campaign_card_data}>
+						<div style={{ display: 'flex' }}>
+							<span>
+								Total Due:
+								{' '}
+							</span>
+							<span>
+								-
+							</span>
+						</div>
+						<div className={styles.collection_rate}>
+							<span>
+								Customers:
+								{' '}
+							</span>
+							<span>
+								-
+							</span>
+						</div>
+					</div>
+				</div>
+			),
 		},
 		{
 			id      : 'campaign-management',
@@ -35,23 +63,18 @@ function MainHeader({ activeTab = '', setActiveTab = () => {} }:Props) {
 					</div>
 					<div className={styles.vertical_border} />
 					<div className={styles.campaign_card_data}>
-						<div style={{ display: 'flex' }}>
+						<div>
+							<div>
+								<span>
+									Ongoing Campaigns:
+									{' '}
+								</span>
+
+							</div>
 							<span>
-								Ongoing Campaigns:
-								{' '}
+								- - -
 							</span>
-							<span>
-								-
-							</span>
-						</div>
-						<div className={styles.collection_rate}>
-							<span>
-								Collection Rate:
-								{' '}
-							</span>
-							<span>
-								-
-							</span>
+
 						</div>
 					</div>
 				</div>

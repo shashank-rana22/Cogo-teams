@@ -4,15 +4,9 @@ import { useCallback } from 'react';
 interface Props {
 	rowId?: string;
 	sort?: object;
-	page?: number;
 }
 
-const DEFAULT_PAGE_SIZE = 5;
-
-function useListDunningExecution({ sort, rowId, page }:Props) {
-	const [sortBy] = Object.keys(sort);
-	const [sortType] = Object.values(sort);
-
+function useListDunningExecution({ rowId }:Props) {
 	const [
 		{ data, loading },
 		trigger,
@@ -29,17 +23,13 @@ function useListDunningExecution({ sort, rowId, page }:Props) {
 		try {
 			await trigger({
 				params: {
-					id        : rowId,
-					sortBy,
-					sortType,
-					pageIndex : page,
-					pageSize  : DEFAULT_PAGE_SIZE,
+					dunningCycleId: rowId,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	}, [page, rowId, sortBy, sortType, trigger]);
+	}, [rowId, trigger]);
 
 	return {
 		data,

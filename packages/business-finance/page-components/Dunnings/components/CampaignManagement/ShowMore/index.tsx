@@ -1,17 +1,23 @@
+import { isEmpty } from '@cogoport/utils';
+
+import NoData from './NoData';
 import PieData from './PieData';
 import styles from './styles.module.css';
 
 interface Props {
-	dropdown?: string;
-	rowId?: string;
-	data?: object[];
+	data?: { status?: string };
+	selectedExecution?: number;
 }
 
-function ShowMore({ dropdown, rowId, data = null }:Props) {
-	if (dropdown === rowId) {
+function ShowMore({ data = {}, selectedExecution = 0 }:Props) {
+	const { status = '' } = data;
+	if (selectedExecution === 0 && status !== 'COMPLETED') {
+		return <NoData />;
+	}
+	if (status === 'COMPLETED') {
 		return (
 			<div className={styles.dropdown_container_visible}>
-				{data ? (
+				{!isEmpty(data) ? (
 					<div className={styles.data_container}>
 						<div>
 							<div>
@@ -29,16 +35,7 @@ function ShowMore({ dropdown, rowId, data = null }:Props) {
 						</div>
 					</div>
 				)
-					: (
-						<div className={styles.empty_container}>
-							<div>
-								<h1 className={styles.no_data_text}>
-									No data to show
-								</h1>
-
-							</div>
-						</div>
-					)}
+					: <NoData />}
 			</div>
 		);
 	}

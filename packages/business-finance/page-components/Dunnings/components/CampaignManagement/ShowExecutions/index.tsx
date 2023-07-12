@@ -1,65 +1,111 @@
+import { Carousel, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useEffect } from 'react';
 
-import CustomList from '../../../../commons/CustomList';
-import { LIST_CONFIG } from '../config/listConfig';
 import useListDunningExecution from '../hooks/useListDunningExecution';
-import ShowExecutionMoreData from '../ShowExecutionMoreData';
 import ShowMore from '../ShowMore';
 
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE_SIZE = 5;
-const DEFAULT_PAGE_INDEX = 1;
+function ShowExecutions({ rowId, dropdown }) {
+	const [selectedExecution, setSelectedExecution] = useState(0);
 
-function ShowExecutions({ rowId, functions, dropdown }) {
-	const [executionSort, setExecutionSort] = useState({});
-	const [executionId, setExecutionId] = useState();
-	const [page, setPage] = useState(DEFAULT_PAGE_INDEX);
 	const {
-		data:executionData, loading,
+		data:executionListData, loading,
 		getDunningExecutions,
-	} = useListDunningExecution({ sort: executionSort, rowId, page });
+	} = useListDunningExecution({ rowId });
 
-	const newFunctions = {
-		...functions,
-		viewMore: ({ id }) => (
-			<ShowExecutionMoreData
-				id={id}
-				dropdown={executionId}
-				setDropdown={setExecutionId}
-			/>
+	const { totalRecords = 0, list = [] } = executionListData || {};
+
+	let totalSlides = Math.floor(totalRecords / 10);
+	if (totalRecords % 10 > 0) {
+		totalSlides += 1;
+	}
+
+	const CAROUSELDATA = Array(totalSlides).fill('').map((item, index) => ({
+		key    : index,
+		render : () => (
+			<div className={styles.carousel_element}>
+				{Array(10).fill('').map((i, position) => {
+					const elementPosition = (index * 10) + position;
+					const { scheduleRule, status } = list?.[elementPosition] || {};
+					const { scheduleTime, scheduleTimeZone } = scheduleRule || {};
+					const dateText = list?.[elementPosition]
+						?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
+					const timeText = `${scheduleTime} ${scheduleTimeZone}`;
+
+					return (
+						<div
+							key={list?.[elementPosition]?.id || position}
+							style={{
+								borderBottom: elementPosition === selectedExecution
+									? '4px solid red' : '1px solid #a8a8a8',
+							}}
+							className={styles.execution_tabs}
+						>
+							{ list?.[elementPosition]
+								? (
+									<button
+										onClick={() => setSelectedExecution(elementPosition)}
+										style={{
+											color: elementPosition === selectedExecution ? 'red' : null,
+										}}
+										className={styles.tabs_btn}
+										disabled={status !== 'COMPLETED'}
+									>
+										<div>
+											{dateText || ''}
+										</div>
+										<div style={{ fontSize: '10px' }}>
+											{`weekDay | ${timeText}`}
+										</div>
+									</button>
+								) : null}
+						</div>
+					);
+				})}
+			</div>
 		),
-	};
-	const showDropDown = (e) => <ShowMore dropdown={executionId} rowId={e?.id} />;
+	}));
 
 	useEffect(() => {
-		if (dropdown !== rowId) {
-			setExecutionId(null);
-		} else {
+		if (dropdown === rowId) {
 			getDunningExecutions();
 		}
-	}, [dropdown, page, rowId, getDunningExecutions]);
+	}, [dropdown, rowId, getDunningExecutions]);
 
 	if (dropdown === rowId) {
 		return (
 			<div className={styles.dropdown_container_visible}>
 				<div className={styles.data_container}>
-					<div className={styles.custom_list}>
-						<CustomList
-							config={LIST_CONFIG}
-							itemData={executionData}
-							loading={loading}
-							functions={newFunctions}
-							sort={executionSort}
-							setSort={setExecutionSort}
-							page={page || 1}
-							pageSize={DEFAULT_PAGE_SIZE}
-							handlePageChange={(pageValue:number) => {
-								setPage(pageValue);
-							}}
-							renderDropdown={showDropDown}
-						/>
-					</div>
+					{!loading ? (
+						<div style={{ width: '96%' }}>
+							<Carousel size="sm" slides={CAROUSELDATA} showDots={false} showArrow />
+							<div>
+								<ShowMore
+									data={list?.[selectedExecution]}
+									selectedExecution={selectedExecution}
+								/>
+							</div>
+
+						</div>
+					) : (
+						<div>
+							<div style={{ display: 'flex' }}>
+								{Array(10).fill('').map(() => (
+									<Placeholder
+										key="key"
+										height="32px"
+										width="120px"
+										style={{ margin: '0px 20px' }}
+									/>
+								))}
+							</div>
+							<div>
+								<Placeholder key="key" height="90px" width="100%" style={{ margin: '20px 0px' }} />
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 		);

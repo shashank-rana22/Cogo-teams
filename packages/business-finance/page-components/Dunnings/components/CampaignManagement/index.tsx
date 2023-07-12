@@ -77,7 +77,7 @@ function CampaignManagement() {
 								{week.slice(0, 3)}
 							</span>
 						) : ''}
-					&nbsp;|&nbsp;
+						{'  '}
 						<span style={{ marginLeft: '4px' }}>
 							{scheduleTime}
 							{' '}
@@ -142,7 +142,6 @@ function CampaignManagement() {
 	const showExecutions = (cycleRow) => (
 		<ShowExecutions
 			rowId={cycleRow?.id}
-			functions={functions}
 			dropdown={dropdown}
 		/>
 	);
