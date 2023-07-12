@@ -2,10 +2,13 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
 import getIncotermOptionsByTradeType from '../helpers/get-incoterm-options-by-trade-type';
+import getServiceTypeOptions from '../helpers/get-service-type-options';
 
-const geo = getGeoConstants();
+const getServiceRequirementControls = (props) => {
+	const { shipmentMode } = props;
 
-const getServiceRequirementControls = () => {
+	const geo = getGeoConstants();
+
 	const controls = [
 		{
 			name        : 'shipment_mode',
@@ -41,45 +44,8 @@ const getServiceRequirementControls = () => {
 			label       : 'Service Type',
 			placeholder : 'Select Type',
 			type        : 'select',
-			options     : [
-				{
-					label : 'FCL',
-					value : 'fcl',
-				},
-				{
-					label : 'LCL',
-					value : 'lcl',
-				},
-				{
-					label : 'International',
-					value : 'international',
-				},
-				{
-					label : 'Domestic',
-					value : 'domestic',
-				},
-				{
-					label : 'FTL',
-					value : 'ftl',
-				},
-				{
-					label : 'LTL',
-					value : 'ltl',
-				},
-				{
-					label : 'Trailer',
-					value : 'trailer',
-				},
-				{
-					label : 'Rail',
-					value : 'rail',
-				},
-				{
-					label : 'Barge',
-					value : 'barge',
-				},
-			],
-			isClearable: true,
+			options     : getServiceTypeOptions({ shipmentMode }),
+			isClearable : true,
 		},
 		{
 			name        : 'trade_type',

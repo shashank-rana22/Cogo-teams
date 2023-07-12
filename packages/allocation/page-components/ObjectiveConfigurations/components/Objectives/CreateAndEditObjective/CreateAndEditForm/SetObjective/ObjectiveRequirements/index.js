@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function ObjectiveRequirements(props) {
 	const { formRef } = props;
 
-	const { control } = useForm({
+	const { control, watch } = useForm({
 		defaultValues: {
 			service_requirements: [{}],
 		},
@@ -23,7 +23,7 @@ function ObjectiveRequirements(props) {
 			</div>
 
 			<form>
-				<ServiceRequirements name="service_requirements" control={control} />
+				<ServiceRequirements name="service_requirements" control={control} watch={watch} />
 
 				<OrganizationalDetails control={control} />
 

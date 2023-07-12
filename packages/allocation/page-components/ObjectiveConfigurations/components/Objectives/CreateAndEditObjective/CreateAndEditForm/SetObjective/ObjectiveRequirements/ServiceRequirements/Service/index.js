@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../../../../common/Form/getFieldController';
+import getServiceRequirementControls from '../../../../../../../../configurations/service-requirements-form-controls';
 
 import styles from './styles.module.css';
 
@@ -9,12 +10,16 @@ const FIRST_INDEX_NORMALIZATION = 1;
 
 function Service(props) {
 	const {
-		controls,
 		control,
 		index,
 		name,
 		remove,
+		watch,
 	} = props;
+
+	const shipmentMode = watch(`${name}.${index}.shipment_mode`);
+
+	const controls = getServiceRequirementControls({ shipmentMode });
 
 	return (
 		<div className={styles.container}>
