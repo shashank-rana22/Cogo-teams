@@ -22,7 +22,9 @@ function VideoCallScreen({
 			<div className={styles.peer_screen}>
 				<video muted ref={(e) => { tempRef.current.peer = e; }} autoPlay />
 			</div>
-			<div className={`${options.isVideoActive ? styles.my_screen : styles.my_screen_avoter}`}>
+			<div className={`${options?.isVideoActive || options?.isScreenShareActive
+				? styles.my_screen : styles.my_screen_avoter}`}
+			>
 				<div className={styles.avoter}><Avatar personName={USERNAME} /></div>
 				<video muted ref={(e) => { tempRef.current.user = e; }} autoPlay />
 			</div>

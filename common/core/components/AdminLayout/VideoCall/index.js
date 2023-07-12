@@ -48,9 +48,9 @@ function VideoCall() {
 	const { rejectOfCall, answerOfCall } = useCommingCall({ setInACall, setCallComming, callUpdate, setStreams });
 
 	useEffect(() => {
-		if (streams.screen_stream && streamRef.current.user.srcObject) {
+		if (streams.screen_stream && streamRef.current.user) {
 			streamRef.current.user.srcObject = streams.screen_stream;
-		} else if (streams.user_stream && streamRef.current.user.srcObject) {
+		} else if (streams.user_stream && streamRef.current.user) {
 			streamRef.current.user.srcObject = streams.user_stream;
 		}
 		if (streams.peer_stream) {

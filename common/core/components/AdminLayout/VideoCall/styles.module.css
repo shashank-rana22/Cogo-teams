@@ -2,7 +2,7 @@
 	position: fixed;
 	right: 3rem;
 	bottom: 2rem;
-	z-index: 100;
+	z-index: 1000;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -21,7 +21,6 @@
 	top: 1rem;
 	left: 43%;
 	z-index: 1000;
-	z-index: 100;
 	width: 340px;
 	height: 78px;
 	background: radial-gradient(84.36% 69.15% at 50% 50%, #f2f3fa 27.08%, #e6e8f7 100%);
