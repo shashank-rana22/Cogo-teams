@@ -6,7 +6,9 @@ import OrganizationalDetails from './OrganizationalDetails';
 import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
 
-function ObjectiveRequirements() {
+function ObjectiveRequirements(props) {
+	const { formRef } = props;
+
 	const { control } = useForm({
 		defaultValues: {
 			service_requirements: [{}],
@@ -14,7 +16,7 @@ function ObjectiveRequirements() {
 	});
 
 	return (
-		<div className={styles.container}>
+		<div ref={formRef} className={styles.container}>
 			<div className={styles.heading_container}>
 				<h3>Set Objective For Lead Scoring</h3>
 				<p>If no field is selected, it will automatically mean for all the inputs in that field</p>
