@@ -2,7 +2,7 @@ import { getFieldController } from '../../../../../../../utils/getFieldControlle
 
 import styles from './styles.module.css';
 
-function Form({ control, controls, showElements }) {
+function Form({ control = {}, controls = [], showElements = {} }) {
 	return (
 		<div className={styles.container}>
 			{controls.map((eachControl) => {

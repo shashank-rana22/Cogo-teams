@@ -5,6 +5,9 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useCreateUserContactRequest from '../../../../../hooks/useCreateUserContactRequest';
+import getMaskedNumber from '../../../../../utils/getMaskedNumber';
+
 import ReasonModal from './ReasonModal';
 import styles from './styles.module.css';
 
@@ -14,7 +17,15 @@ const MIN_SHOW_LENGTH = 0;
 function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const dispatch = useDispatch();
 
-	const [reasonModal, setReasonModal] = useState(false);
+	const [maskConfig, setMaskConfig] = useState({
+		showNumber      : false,
+		showReasonModal : false,
+	});
+
+	const { loading = false, createUserContactRequest = () => {} } = useCreateUserContactRequest({ setMaskConfig });
+
+	const { showNumber, showReasonModal } = maskConfig || {};
+
 	const {
 		user_id = '', email = '', mobile_country_code = '', mobile_number = '', name = '',
 		organization_id = '', work_scopes = [],
@@ -23,6 +34,19 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const lessList = (work_scopes || []).slice(MIN_SHOW_LENGTH, MAX_SHOW_LENGTH);
 	const moreList = (work_scopes || []).slice(MAX_SHOW_LENGTH);
 	const showMoreList = (work_scopes || []).length > MAX_SHOW_LENGTH;
+
+	const onClose = ({ reset }) => {
+		setMaskConfig((pv) => ({ ...pv, showReasonModal: false }));
+		reset();
+	};
+
+	const handleViewNumber = () => {
+		if (showNumber) {
+			setMaskConfig((pv) => ({ ...pv, showNumber: false }));
+		} else {
+			setMaskConfig((pv) => ({ ...pv, showReasonModal: true }));
+		}
+	};
 
 	const handleCall = () => {
 		if (!mobile_number || !hasVoiceCallAccess) {
@@ -58,7 +82,9 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 
 				<div className={styles.content}>
 					<div className={styles.agent_type}>Name : </div>
-					<div className={styles.name}>{name || 'NA'}</div>
+					<div className={styles.name}>
+						{name || 'NA'}
+					</div>
 				</div>
 				<div className={styles.content}>
 					<div className={styles.type}>Email : </div>
@@ -67,15 +93,28 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 				<div className={styles.content}>
 					<div className={styles.type}>Mobile No : </div>
 					<div className={styles.name}>
-						{mobile_country_code}
-						{mobile_number || '-'}
+						{showNumber ? (
+							<span>
+								{`${mobile_country_code || ''} ${
+									mobile_number
+								}`}
+
+							</span>
+						) : (
+							<span>
+								{`${
+									mobile_country_code || ''
+								} ${getMaskedNumber(mobile_number)}`}
+
+							</span>
+						)}
 					</div>
 					<div
 						role="presentation"
-						onClick={() => setReasonModal(true)}
+						onClick={handleViewNumber}
 						className={styles.show_number}
 					>
-						SHOW NUMBER
+						{showNumber ? 'Hide number' : 'Show number'}
 					</div>
 				</div>
 
@@ -106,7 +145,14 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 				</div>
 			</div>
 
-			<ReasonModal reasonModal={reasonModal} setReasonModal={setReasonModal} user={user} />
+			<ReasonModal
+				showReasonModal={showReasonModal}
+				user={user}
+				onClose={onClose}
+				loading={loading}
+				createUserContactRequest={createUserContactRequest}
+
+			/>
 		</>
 	);
 }

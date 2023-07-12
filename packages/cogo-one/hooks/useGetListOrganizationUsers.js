@@ -4,11 +4,11 @@ import { useEffect, useCallback, useState } from 'react';
 const FIRST_PAGE = 1;
 const SCROLL_HEIGHT = 0;
 
-const getPayload = ({ organizationId = '', pagination }) => ({
+const getPayload = ({ orgId = '', page }) => ({
 	filters: {
-		organization_id: organizationId,
+		organization_id: orgId,
 	},
-	page: pagination,
+	page,
 });
 
 const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = false }) => {
@@ -25,11 +25,13 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 		method : 'get',
 	}, { manual: true });
 
-	const listOrganizationsUsers = useCallback(async () => {
+	const listOrganizationsUsers = useCallback(async ({ orgId, page }) => {
 		try {
 			const res = await trigger({
-				params: getPayload({ organizationId, pagination }),
+				params: getPayload({ orgId, page }),
 			});
+
+			setPagination(page);
 
 			if (res?.data) {
 				const { list = [], ...paginationData } = res?.data || {};
@@ -38,22 +40,23 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 		} catch (error) {
 			console.error(error);
 		}
-	}, [organizationId, pagination, trigger]);
+	}, [trigger]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= SCROLL_HEIGHT;
 		const hasMoreData = pagination < listData?.total;
 
 		if (reachBottom && hasMoreData && !loading) {
-			setPagination((page) => page + FIRST_PAGE);
+			listOrganizationsUsers({ orgId: organizationId, page: pagination + FIRST_PAGE });
 		}
 	};
 
 	useEffect(() => {
 		if (isOrgUsersVisible) {
-			listOrganizationsUsers();
+			setListData((p) => ({ ...p, list: [] }));
+			listOrganizationsUsers({ orgId: organizationId, page: FIRST_PAGE });
 		}
-	}, [isOrgUsersVisible, listOrganizationsUsers]);
+	}, [isOrgUsersVisible, listOrganizationsUsers, organizationId]);
 
 	return {
 		organizationUsersData    : listData,
