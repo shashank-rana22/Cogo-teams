@@ -6,9 +6,11 @@ import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpe
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import getUserControls from '../../../configurations/get-controls';
+
+const regionControls = ['country', 'state'];
 
 function useCreateResponse(props) {
 	const {
@@ -22,15 +24,15 @@ function useCreateResponse(props) {
 
 	const partnerId = useSelector((state) => (state.profile?.partner?.id));
 
+	const [addressData, setAddressData] = useState({});
+
 	const { query = {} } = router;
+
+	const { country_id, region_id } = addressData;
 
 	const formProps = useForm();
 
-	const { control, handleSubmit, formState: { errors }, watch, setValue, resetField } = formProps;
-
-	const watchForm = watch();
-
-	const { country:country_id = '', city:city_id = '' } = watchForm;
+	const { control, handleSubmit, formState: { errors }, setValue, resetField } = formProps;
 
 	const taxLabel = getCountrySpecificData({
 		country_id,
@@ -47,7 +49,25 @@ function useCreateResponse(props) {
 	});
 
 	const controls = getUserControls({
-		activeTab, country_id, city_id, taxLabel, taxPattern,
+		activeTab, country_id, region_id, taxLabel, taxPattern,
+	});
+
+	const mutatedControls = controls.map((mutatedControl) => {
+		let newControl = { ...mutatedControl };
+
+		if (regionControls.includes(newControl.name)) {
+			newControl = {
+				...newControl,
+				onChange: (val, obj) => {
+					setAddressData((prev) => ({
+						...prev,
+						[newControl.name === 'country' ? 'country_id' : 'region_id']: obj?.id,
+					}));
+				},
+			};
+		}
+
+		return newControl;
 	});
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -102,7 +122,7 @@ function useCreateResponse(props) {
 	}, [country_id, setValue, resetMultipleFields]);
 
 	return {
-		controls,
+		controls: mutatedControls,
 		control,
 		errors,
 		onSave,

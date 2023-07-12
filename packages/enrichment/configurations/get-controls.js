@@ -1,9 +1,9 @@
 const getUserControls = ({
 	activeTab = '',
-	country_id = '',
 	taxLabel = '',
 	taxPattern = '',
-	city_id = '',
+	country_id,
+	region_id,
 }) => {
 	const controls = {
 		user: [
@@ -108,7 +108,7 @@ const getUserControls = ({
 				name     : 'country',
 				label    : 'Country',
 				type     : 'asyncSelect',
-				valueKey : 'display_name',
+				valueKey : 'name',
 				asyncKey : 'list_locations',
 				params   : {
 					filters: { type: ['country'] },
@@ -119,13 +119,14 @@ const getUserControls = ({
 			{
 				name        : 'state',
 				label       : 'State',
+				valueKey    : 'name',
 				placeholder : 'Select State...',
 				type        : 'asyncSelect',
 				params      : { filters: { type: ['region'], country_id } },
 				asyncKey    : 'list_locations',
 				isClearable : true,
 				rules       : {
-					required: { value: true, message: 'State is required' },
+					required: false,
 				},
 			},
 
@@ -133,10 +134,11 @@ const getUserControls = ({
 				name     : 'city',
 				label    : 'City',
 				type     : 'asyncSelect',
+				valueKey : 'name',
 				asyncKey : 'list_locations',
 				params   : {
 					filters: {
-						type: ['city'], country_id,
+						type: ['city'], country_id, region_id,
 					},
 				},
 				multiple    : false,
@@ -155,7 +157,7 @@ const getUserControls = ({
 				asyncKey    : 'list_locations',
 				initialCall : false,
 				placeholder : 'Select Pincode',
-				params      : { filters: { type: ['pincode'], city_id, country_id } },
+				params      : { filters: { type: ['pincode'], country_id, region_id } },
 				rules       : {
 					required: { value: true, message: 'Pincode is required' },
 				},
