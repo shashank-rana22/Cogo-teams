@@ -13,6 +13,22 @@ const useDashboard = (year, lastThreeFinancialYears) => {
 		},
 		{ manual: true },
 	);
+	const [{ data:Gstr1Data, loading:LoadingGstr1 }, triggerGstr1] = useRequestBf(
+		{
+			url     : '/sales/outward/gstr1-stats',
+			method  : 'get',
+			authKey : 'get_sales_outward_gstr1_stats',
+		},
+		{ manual: true },
+	);
+	const gstr1Refetch = useCallback(async () => {
+		try {
+			await triggerGstr1({});
+		} catch (error) {
+			toastApiError(error);
+		}
+	}, [triggerGstr1]);
+
 	const refetch = useCallback(async () => {
 		try {
 			await trigger({
@@ -25,11 +41,13 @@ const useDashboard = (year, lastThreeFinancialYears) => {
 		}
 	}, [lastThreeFinancialYears, trigger, year]);
 
-	useEffect(() => { refetch(); }, [refetch]);
+	useEffect(() => { refetch(); gstr1Refetch(); }, [gstr1Refetch, refetch]);
 
 	return {
 		data,
 		loading,
+		Gstr1Data,
+		LoadingGstr1,
 	};
 };
 export default useDashboard;

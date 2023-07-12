@@ -1,14 +1,10 @@
-import { Button, Select, Toast } from '@cogoport/components';
-import { useEffect } from 'react';
+import { Button, Select } from '@cogoport/components';
 
 import { optionEntity, optionsGSTIN, optionsMonth, optionsYear } from '../helper';
 
 import styles from './styles.module.css';
 
 function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
-	useEffect(() => {
-		Toast.info('Prior Selection Of Entity Is Required In Order To Obtain The GSTIN.');
-	}, []);
 	return (
 		<div className={styles.header_container}>
 			<div>
@@ -59,13 +55,21 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 					placeholder="Year"
 					options={optionsYear}
 					isClearable
-					style={{ width: '100px' }}
+					style={{ width: '120px' }}
 					size="sm"
 				/>
 			</div>
 
 			<div className={styles.margin_select}>
-				<Button loading={loading} onClick={exportTrigger}>Export </Button>
+				<Button
+					loading={loading}
+					disabled={!(filters?.year && filters?.gstIn && filters?.month && filters?.entity)}
+					onClick={exportTrigger}
+				>
+					Export
+					{' '}
+
+				</Button>
 			</div>
 		</div>
 	);

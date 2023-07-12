@@ -1,7 +1,4 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
 	padding: 24px;
 	margin: 16px 0 24px;
 	background: var(--color-secondary-5);
@@ -12,7 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 30%;
+	width: 33%;
 	padding: 24px 16px;
 	background: var(--color-secondary-5);
 	border: 1px solid var(--color-secondary-greyscale-5);
@@ -36,5 +33,67 @@
 
 .select_container {
 	display: flex;
+	justify-content: flex-end;
 	margin-top: 24px;
+}
+
+.return_label {
+	width: 5%;
+	border-bottom: 1px solid var(--color-primary-error-red-2);
+}
+
+.container_return {
+	padding: 24px;
+	margin: 16px 0 24px;
+	background: var(--color-secondary-5);
+	border-radius: 8px;
+}
+
+.card_return {
+	width: 20%;
+	margin: 12px 12px 8px 0;
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 8px;
+}
+
+.gstr1_label {
+	padding: 8px;
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.date_data {
+	padding: 8px;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.pie_chart_value {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.date_label {
+	color: var(--color-secondary-greyscale-1);
+}
+
+.date_show {
+	margin-left: 8px;
+	font-weight: 600;
+}
+
+.date_due_show {
+	margin-left: 8px;
+	color: var(--color-primary-error-red-2);
+}
+
+.data_show {
+	display: flex;
+	align-items: center;
+}
+
+.invoice_show_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 12px;
 }

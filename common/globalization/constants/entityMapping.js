@@ -43,7 +43,7 @@ const ENTITY_MAPPING = {
 		labels              : {
 			irn_label: 'IRN',
 		},
-		GSTIN: ['06AAICC8838P1ZV', '07AAACF2136K1ZT', '27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
+		GSTIN: ['06AAICC8838P1ZV', '27AAICC8838P1ZR'],
 	},
 	401: {
 		country_code        : 'SG',
