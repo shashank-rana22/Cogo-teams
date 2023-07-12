@@ -1,6 +1,7 @@
 import getFormattedAmount from '../../../common/helpers/formatAmount';
 import ToolTipWrapper from '../../../common/ToolTipWrapper';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 const SERVICE_WRAPPER_LAST_INDEX = 2;
 const SERVICE_WRAPPER_START_INDEX = 0;
@@ -49,7 +50,7 @@ function TitleCard({
 						)}
 						maxlength={MAX_LEN_FOR_TOOLTIP}
 					/>
-					<span className={styles.paddingleft}>
+					<span className={styles.party_count}>
 						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}
 					</span>
 				</div>
