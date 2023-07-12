@@ -19,18 +19,15 @@ const decodedCustomSerializer = (params) => {
 const bfRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL });
 
 bfRequest.interceptors.request.use((oldConfig) => {
-	const { authKey = '', authkey = '', scope, ...axiosConfig } = oldConfig;
+	const { authKey = '', authkey = '', ...axiosConfig } = oldConfig;
 
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
-
-	const baseURL = scope !== 'stage' ? process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL : process.env.NEXT_PUBLIC_BUSINESS_FINANCE_STAGE_URL;
 
 	const token = getCookie(auth, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, (authKey || authkey));
 
 	return {
 		...axiosConfig,
-		baseURL,
 		paramsSerializer : { serialize: decodedCustomSerializer },
 		headers          : {
 			authorizationscope : 'partner',
