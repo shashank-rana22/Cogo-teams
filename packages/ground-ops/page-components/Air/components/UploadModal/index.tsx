@@ -1,13 +1,25 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMUpload } from '@cogoport/icons-react';
-import React from 'react';
+import React, { ReactFragment } from 'react';
 
 import Layout from '../../commons/Layout';
 import useCreateShipmentDocument from '../../hooks/useCreateShipmentDocument';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import styles from './styles.module.css';
+
+interface NestedObj {
+	[key: string]: ReactFragment ;
+}
+
+interface Props {
+	setEdit?:Function;
+	edit?: boolean | string;
+	showUpload?: NestedObj ;
+	setShowUpload?: Function;
+	listAPI?: Function;
+}
 
 const controls = [
 	{
@@ -36,7 +48,13 @@ const controls = [
 		rules      : { required: true },
 	},
 ];
-function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
+function UploadModal({
+	showUpload = {},
+	setShowUpload = () => {},
+	listAPI = () => {},
+	edit = false,
+	setEdit = () => {},
+}:Props) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
@@ -53,7 +71,7 @@ function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
 			pending_task_id     : edit === 'edit' ? undefined : (showUpload?.id || showUpload?.taskId),
 			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
-			data                : {
+			air_document_data   : {
 
 				status          : 'uploaded',
 				document_number : showUpload?.awbNumber,
@@ -90,7 +108,7 @@ function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
 		<div>
 			{showUpload && (
 				<Modal
-					show={showUpload}
+					show={!!showUpload}
 					onClose={() => { setShowUpload(null); }}
 					scroll={false}
 					size="md"
