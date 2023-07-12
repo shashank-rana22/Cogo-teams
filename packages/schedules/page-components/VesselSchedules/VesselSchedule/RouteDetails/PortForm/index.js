@@ -1,21 +1,23 @@
-import { Datepicker, Select, Popover, Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import { IcMPlusInCircle, IcMOverflowDot, IcMDelete } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { Datepicker, Select } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { IcMDelete } from '@cogoport/icons-react';
+import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import Layout from '../../../Layout';
-
-// import controls from './controls';
 import styles from './styles.module.css';
 
 function PortForm({
 	isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 }) {
-	const [date, setDate] = useState(new Date());
-	// const new_controls = controls();
-	// const { handleSubmit, control, formState: { errors }, watch } = useForm();
-	// const formValues = watch();
+	const [arrival_date, setArrivalDate] = useState('');
+	const [departure_date, setDepartureDate] = useState('');
+	const [port_name, setPortName] = useState('');
+
+	const options = useGetAsyncOptions(
+		merge(asyncFieldsLocations()),
+	);
+	const submit = { port_name, arrival_date, departure_date };
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -27,8 +29,8 @@ function PortForm({
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={setDate}
-								value={date}
+								onChange={setArrivalDate}
+								value={arrival_date}
 							/>
 						</div>
 					</div>
@@ -39,12 +41,11 @@ function PortForm({
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={setDate}
-								value={date}
+								onChange={setDepartureDate}
+								value={departure_date}
 							/>
 						</div>
 					</div>
-					{!isLast ? <div style={{ 'margin-left': '160px' }}><IcMPlusInCircle /></div> : <div style={{ 'margin-left': '175px' }} />}
 				</div>
 			</div>
 			<div className={styles.middle}>
@@ -54,9 +55,13 @@ function PortForm({
 			</div>
 			<div className={styles.right}>
 				<div className={styles.port_name_form}>
+					<Select
+						placeholder="Port Name"
+						{...options}
+						onChange={(value) => (setPortName(value))}
+						value={port_name}
 
-					<Select placeholder="Port Name" />
-
+					/>
 				</div>
 				<IcMDelete style={{ cursor: 'pointer' }} height="20px" width="20px" margin="2px" onClick={() => { onClickDelete(index); }} />
 

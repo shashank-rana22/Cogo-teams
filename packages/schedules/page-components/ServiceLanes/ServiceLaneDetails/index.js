@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
 
 import BackButton from '../../common/BackButtom';
 import useListServiceLanes from '../ServiceLanesList/hooks/useListServiceLanes';
@@ -13,6 +14,7 @@ function ServiceLaneDetails() {
 	const routeId = query?.id;
 	const { data, loading } = useListServiceLanes({ routeId });
 
+	const [finalRoute, setFinalRoute] = useState(null);
 	return (
 		<>
 			<BackButton key="service-lanes" title="Back To Service Lane" />
@@ -21,6 +23,8 @@ function ServiceLaneDetails() {
 				<RouteDetails
 					route={data?.[0]?.service_lane_links}
 					dayOfWeek={data?.[0]?.day_of_week || 10}
+					finalRoute={finalRoute}
+					setFinalRoute={setFinalRoute}
 				/>
 				<ServiceLanesMap data={data} />
 			</div>

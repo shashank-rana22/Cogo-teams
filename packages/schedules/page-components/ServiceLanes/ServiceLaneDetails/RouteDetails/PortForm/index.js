@@ -1,17 +1,24 @@
-import {  Input } from '@cogoport/components';
-import {IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
-
+import { Input, Select } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
+import { merge } from '@cogoport/utils';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PortForm({ isFirst, isLast, port, diffInDays, onClickDelete }) {
-
+function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete }) {
+	const [port_name, setPortName] = useState('');
+	const [days, setDays] = useState('');
+	const options = useGetAsyncOptions(
+		merge(asyncFieldsLocations()),
+	);
+	const submit = { port_name, days };
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
 				<div>
-					<div className={styles.eta_etd}>
-					</div>
+					<div className={styles.eta_etd} />
 
 				</div>
 
@@ -24,13 +31,16 @@ function PortForm({ isFirst, isLast, port, diffInDays, onClickDelete }) {
 			</div>
 			<div className={styles.right}>
 				<div className={styles.port_input}>
-					<Input
-						placeholder="Type here .."
+					<Select
+						placeholder="Port Name"
+						{...options}
+						onChange={(value) => (setPortName(value))}
+						value={port_name}
 					/>
-					<IcMDelete height="20px" width="20px" margin="40px" onClick={() => { onClickDelete(); }} />
+					<IcMDelete height="20px" width="20px" margin="40px" onClick={() => { onClickDelete(index); }} />
 				</div>
 				<div className={styles.days}>
-					<Input placeholder="Days" />
+					<Input placeholder="Days" value={days} onChange={(value) => (setDays(value))} />
 				</div>
 
 				

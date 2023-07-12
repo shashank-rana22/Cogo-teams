@@ -1,11 +1,11 @@
 import { Popover, Button } from '@cogoport/components';
-import {  IcMPlusInCircle, IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMOverflowDot } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function RoutePortForm({
-	isFirst, isLast, port, diffInDay, onClickAdd, add, index, onClickEdit,
+	isFirst, isLast, port, diffInDay, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete,
 }) {
 
 	const [showPopover, setShowPopover] = useState(false);
@@ -78,13 +78,14 @@ function RoutePortForm({
 								<Button
 									themeType="tertiary"
 									size="md"
-									onClick={() => { onClickEdit(index); }}
+									onClick={() => { onClickEdit(index); setPortEdit(true); }}
 								>
 									Edit
 								</Button>
 								<Button
 									themeType="tertiary"
 									size="md"
+									onClick={() => { onClickDelete(index); }}
 								>
 									Delete
 								</Button>
