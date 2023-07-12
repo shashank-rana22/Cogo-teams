@@ -1,4 +1,4 @@
-import { collection, doc, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
+import { and, collection, doc, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 import { useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -32,8 +32,10 @@ function useVideoCallFirebase({ firestore, setCallComming, setInACall, setCallDe
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
 		const videoCallCommingQuery = query(
 			videoCallRef,
-			where('call_status', '==', 'calling'),
-			where('calling_by', '!=', 'admin'),
+			and(
+				where('call_status', '==', 'calling'),
+				where('calling_by', '==', 'user'),
+			),
 		);
 
 		onSnapshot(videoCallCommingQuery, (querySnapshot) => {
