@@ -10,7 +10,7 @@ function EmailView({
 	activeMail,
 	onAction,
 }) {
-	const { source } = activeMail || [];
+	const { source } = activeMail || {};
 	const message_id = activeMail?.message_id || activeMail?.id;
 
 	const mailPayload = { email_address: source, message_id, mail_id: activeMail?.id };
