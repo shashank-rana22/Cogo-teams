@@ -19,7 +19,7 @@ const getLocalStorageVal = () => {
 	const stepperConfig = TABS_CONFIG[stepperTab];
 
 	if (!stepperConfig.some((tab) => tab.value === activeTab)) {
-		const tabConfig = stepperConfig?.[0];
+		const [tabConfig] = stepperConfig || [];
 		activeTab = tabConfig?.value || '';
 	}
 
