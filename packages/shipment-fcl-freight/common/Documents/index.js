@@ -73,6 +73,7 @@ function Documents() {
 					completedDocs={completedDocs?.list}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					ShipmentDocumentRefetch={refetch}
 				/>
 			);
 		}

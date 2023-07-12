@@ -15,6 +15,7 @@ const Card = ({
 	primary_service,
 	setShowDoc,
 	setShowApproved,
+	ShipmentDocumentRefetch = () => {},
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -59,6 +60,7 @@ const Card = ({
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					ShipmentDocumentRefetch={ShipmentDocumentRefetch}
 				/>
 			);
 		});

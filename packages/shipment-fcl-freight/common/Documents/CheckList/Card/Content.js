@@ -1,10 +1,17 @@
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
 
+import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
+
+const INCREAMNET_BY_ONE = 1;
+const LABEL_SPILIT_LOWER_INDEX = -1;
+const STARTING_POINT = 1;
 
 function Content({
 	uploadedItem,
@@ -21,7 +28,10 @@ function Content({
 	setShowDoc,
 	setShowApproved,
 	docType,
+	ShipmentDocumentRefetch = () => {},
 }) {
+	const [siReviewState, setSiReviewState] = useState(false);
+
 	const isBlReleased = [
 		'approved',
 		'released',
@@ -30,6 +40,8 @@ function Content({
 	].includes(uploadedItem?.bl_detail_status);
 
 	const tradeType = primary_service?.trade_type;
+
+	const { document_type, state } = uploadedItem;
 
 	const getUploadButton = () => {
 		if (showUploadText.length) {
@@ -59,16 +71,20 @@ function Content({
 		return null;
 	};
 
+	const SI_REVIEW_CONDITION =		document_type === 'si' && state === 'document_uploaded';
+
 	return (
 		<div className={styles.single_item}>
 			<VerticleLine
 				checked={isChecked}
-				isLast={taskList.length === idx + 1}
+				isLast={taskList.length === idx + INCREAMNET_BY_ONE}
 			/>
 			<div className={isChecked ? styles.single_item_child : styles.upload_item}>
 
 				<div className={styles.main}>
-					<div className={styles.heading}>{item?.label.split('Upload').slice(-1)[0]}</div>
+					<div className={styles.heading}>
+						{item?.label.split('Upload').slice(LABEL_SPILIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
+					</div>
 					{isChecked ? (
 						<div className={styles.gap}>
 							<div className={styles.upload_info}>
@@ -86,7 +102,7 @@ function Content({
 							 ${['document_amendment_requested', 'document_rejected'].includes(uploadedItem?.state)
 								? styles.pending : styles.accepted}`}
 							>
-								{startCase(uploadedItem?.state?.split('_')?.[1])}
+								{startCase(uploadedItem?.state?.split('_')?.[STARTING_POINT])}
 							</div>
 						</div>
 					) : (
@@ -108,6 +124,15 @@ function Content({
 						</div>
 					)}
 				</div>
+
+				{SI_REVIEW_CONDITION ? (
+					<Button
+						themeType="link"
+						onClick={() => setSiReviewState(true)}
+					>
+						review
+					</Button>
+				) : null}
 
 				{isChecked ? (
 					<div className={styles.action_container}>
@@ -139,6 +164,15 @@ function Content({
 				) : getUploadButton()}
 
 			</div>
+
+			{siReviewState ? (
+				<ReviewSiDocument
+					siReviewState={siReviewState}
+					setSiReviewState={setSiReviewState}
+					uploadedItem={uploadedItem}
+					ShipmentDocumentRefetch={ShipmentDocumentRefetch}
+				/>
+			) : null}
 
 		</div>
 	);
