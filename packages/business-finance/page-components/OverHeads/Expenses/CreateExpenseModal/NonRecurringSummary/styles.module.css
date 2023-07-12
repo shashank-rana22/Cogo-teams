@@ -36,3 +36,11 @@
 	padding-left: 4px;
 	font-weight: 600;
 }
+
+.textarea {
+	:global {
+		.ui_text_area_container {
+			height: 100px;
+		}
+	}
+}

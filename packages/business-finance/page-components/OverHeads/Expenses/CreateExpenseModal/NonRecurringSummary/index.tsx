@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-indent */
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Textarea } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -37,6 +37,7 @@ interface Data {
 	invoiceCurrency?: string;
 	vendorID?: number | string;
 	payableAmount?: number;
+	remarks?: string;
 }
 
 interface Props {
@@ -193,8 +194,11 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 	const uploadedData = [
 		{
 			title : 'To be Approved by',
-			value : stakeholderLoading ? <Placeholder height="20px" width="150px" />
-				: startCase(stakeholderName || '') || '-',
+			value : stakeholderLoading ? (
+				<Placeholder height="20px" width="150px" />
+			) : (
+				startCase(stakeholderName || '') || '-'
+			),
 		},
 	];
 
@@ -244,6 +248,14 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 			{renderSummaryData(summaryDataSecond)}
 			{renderSummaryData(summaryDataThird)}
 			{renderSummaryData(uploadedData)}
+			<div className={styles.textarea}>
+				<Textarea
+					value={nonRecurringData?.remarks}
+					onChange={(e) => setNonRecurringData({ ...nonRecurringData, remarks: e })}
+					size="lg"
+					placeholder="Reason..."
+				/>
+			</div>
 			{/* <div className={styles.flexwrap}>
 				{stakeHolderTimeLine?.map((item: Summary, index) => (
 					<div key={item.title} className={styles.name}>

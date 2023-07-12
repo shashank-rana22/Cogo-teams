@@ -41,6 +41,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		branch,
 		lineItemsList,
 		tradeParty,
+		remarks,
 	} = expenseData || {};
 
 	const {
@@ -177,6 +178,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		lineItemsList,
 		expenseType     : 'RECURRING',
 		expenseConfigurationId,
+		remarks,
 	});
 
 	const submitData = async () => {

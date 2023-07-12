@@ -25,6 +25,7 @@ function getPropsByType(type, data) {
 		PAYMENT_CONFIRMATION_APPROVAL          : { paymentConfirmationRequest },
 		ADVANCE_SECURITY_DEPOSIT               : { advanceSecurityDeposit },
 		CONSOLIDATED_CREDIT_NOTE               : {},
+		OVERHEAD_APPROVAL                      : {},
 	};
 
 	return typeMappings[type] || {};

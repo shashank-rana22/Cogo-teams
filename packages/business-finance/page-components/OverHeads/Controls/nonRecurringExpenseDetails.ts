@@ -88,7 +88,7 @@ export const nonRecurringExpenseDetails = ({
 					name                  : 'transactionDate',
 					label                 : 'Accounting Date',
 					type                  : 'datepicker',
-					isPreviousDaysAllowed : false,
+					isPreviousDaysAllowed : true,
 					span                  : 2.2,
 					className             : styles.input_width,
 				},

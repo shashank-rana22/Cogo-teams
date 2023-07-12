@@ -307,7 +307,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{remark.length > 40 ? (
+							{remark?.length > 40 ? (
 								<Tooltip
 									className={styles.tooltip}
 									interactive

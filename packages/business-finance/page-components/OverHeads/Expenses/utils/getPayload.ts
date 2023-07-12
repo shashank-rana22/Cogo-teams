@@ -52,6 +52,7 @@ const getPayload = ({
 	lineItemsList,
 	expenseType,
 	expenseConfigurationId,
+	remarks,
 }) => {
 	const lineItemsData = (lineItemsList || []).map((lineItem:any) => {
 		if (lineItem?.tax) {
@@ -199,6 +200,8 @@ const getPayload = ({
 		branchId  : addressData?.branchId,
 		kycStatus : kycStatus?.toUpperCase(),
 		pan       : vendorRegistrationNumber,
+		remarks,
+		documents : uploadedInvoice,
 		createdBy : profile?.user?.id,
 	};
 };

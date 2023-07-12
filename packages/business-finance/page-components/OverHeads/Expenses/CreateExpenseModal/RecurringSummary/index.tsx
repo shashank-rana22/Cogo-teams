@@ -66,7 +66,7 @@ function RecurringSummary({ recurringData, setRecurringData }: Props) {
 		categoryName,
 	} = recurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
+	const { stakeholdersData, loading: stakeholderLoading } =	useGetStakeholders({
 		expenseCategory,
 		entity: entityObject?.id,
 		currency,
@@ -200,22 +200,6 @@ function RecurringSummary({ recurringData, setRecurringData }: Props) {
 				startCase(stakeholderName || '') || '-'
 			),
 		},
-		{
-			title : 'To be Approved by',
-			value : stakeholderLoading ? (
-				<Placeholder height="20px" width="150px" />
-			) : (
-				startCase(stakeholderName || '') || '-'
-			),
-		},
-		{
-			title : 'To be Approved by',
-			value : stakeholderLoading ? (
-				<Placeholder height="20px" width="150px" />
-			) : (
-				startCase(stakeholderName || '') || '-'
-			),
-		},
 	];
 
 	const renderSummaryData = (summary: Summary[]) => (
@@ -242,10 +226,8 @@ function RecurringSummary({ recurringData, setRecurringData }: Props) {
 						<div className={styles.title}>
 							{item.title}
 							<span className={styles.label}>
-{`(Level - ${
-	index + 1
-})`}
-       </span>
+								{`(Level - ${index + 1})`}
+							</span>
 						</div>
 						<div className={styles.value}>{item.value}</div>
 					</div>
