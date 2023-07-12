@@ -34,7 +34,7 @@ function ServiceTables({
 
 		const parentServiceName = shipment_data?.shipment_type === 'air_freight'
 					&& singlecharge?.service_type === 'subsidiary_service'
-					&& singlecharge?.detail?.service_type
+					&& singlecharge?.detail?.primary_service_type
 			? `(${startCase(singlecharge?.detail?.primary_service_type)})`
 			: '';
 
