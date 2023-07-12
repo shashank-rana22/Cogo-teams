@@ -60,7 +60,7 @@ function SearchFilter({
 						themeType="secondary"
 						onClick={() => setShowRecordedSession(true)}
 					>
-						View Recorded Sessions
+						Manage Recorded Sessions
 					</Button>
 
 					<Button
@@ -109,7 +109,7 @@ function SearchFilter({
 				show={showRecordedSession}
 				onClose={() => setShowRecordedSession(false)}
 			>
-				<Modal.Header title="Recorded Sessions View" />
+				<Modal.Header title="Manage Recorded Sessions" />
 				<Modal.Body>
 					<RecordedSessions showRecordedSession={showRecordedSession} />
 				</Modal.Body>
