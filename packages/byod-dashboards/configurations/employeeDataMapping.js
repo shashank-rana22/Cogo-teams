@@ -82,10 +82,6 @@ export const EMPLOYEE_DATA = [
 		key   : 'employee_code',
 	},
 	{
-		label : 'Employee Id',
-		key   : 'employee_code',
-	},
-	{
 		label : 'Designation',
 		key   : 'designation',
 	},

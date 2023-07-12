@@ -18,7 +18,10 @@ function EmployeeData({ data }) {
 							{' '}
 							:
 						</div>
-						<div className={styles.employee_detail}>{startCase(detail?.[val.key]) || '-'}</div>
+						<div className={styles.employee_detail}>
+							{val.key === 'hrbp'
+								? detail[val.key]?.userEmail : startCase(detail?.[val.key]) || '-'}
+						</div>
 					</div>
 				))}
 			</div>
