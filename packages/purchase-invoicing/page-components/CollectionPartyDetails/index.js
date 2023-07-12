@@ -208,7 +208,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						<div className="upload-tooltip">{errorMsg}</div>
 					) : null}
 				</div>
-				<ServiceTables service_charges={collectionParty?.service_charges} />
+				<ServiceTables service_charges={collectionParty?.service_charges} shipment_data={shipment_data} />
 				<div className={styles.totalamount}>
 					Total With TAX
 					<span className={styles.amount}>
