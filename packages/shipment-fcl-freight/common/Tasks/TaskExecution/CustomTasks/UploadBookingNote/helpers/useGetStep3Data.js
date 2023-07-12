@@ -48,7 +48,7 @@ const useGetStep3Data = ({
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			SERVICE_IDS,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -148,7 +148,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		DEFAULT_VALUES,
+		defaultValues: DEFAULT_VALUES,
 	};
 };
 
