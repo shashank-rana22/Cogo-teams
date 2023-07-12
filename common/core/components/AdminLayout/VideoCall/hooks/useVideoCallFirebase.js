@@ -30,7 +30,11 @@ function useVideoCallFirebase({ firestore, setCallComming, setInACall, setCallDe
 
 	useEffect(() => {
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
-		const videoCallCommingQuery = query(videoCallRef, where('call_status', '==', 'calling'));
+		const videoCallCommingQuery = query(
+			videoCallRef,
+			where('call_status', '==', 'calling'),
+			where('calling_by', '!=', 'admin'),
+		);
 
 		onSnapshot(videoCallCommingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {

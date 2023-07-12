@@ -15,7 +15,6 @@ function useVideocallOptions({
 	};
 
 	const callEnd = () => {
-		console.log('call ended triggered');
 		setInACall(false);
 		stopStream('screen_stream');
 		stopStream('user_stream');
