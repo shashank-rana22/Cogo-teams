@@ -459,6 +459,21 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'delete_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	create_course: [
 		{
