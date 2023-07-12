@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const PAGELIMIT = 10;
+const PAGE_LIMIT = 10;
 const useListOrganizationTradeParties = ({
 	defaultFilters = {},
 	organization_id = '',
@@ -25,7 +25,7 @@ const useListOrganizationTradeParties = ({
 				address_query: query,
 			},
 			page,
-			page_limit: PAGELIMIT,
+			page_limit: PAGE_LIMIT,
 			...defaultParams,
 		},
 

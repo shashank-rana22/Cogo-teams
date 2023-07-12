@@ -40,7 +40,9 @@
 }
 
 .input_container {
-	float: right;
+	max-width: 200px;
+	margin-right: 40px;
+	margin-left: auto;
 
 	:global {
 		.ui_input_container {
