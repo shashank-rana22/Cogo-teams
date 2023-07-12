@@ -107,7 +107,7 @@ function DefaultForm({
 									<div className={styles.form_item_container}>
 										<label className={styles.form_label}>Select PAN</label>
 										<SelectController
-											style={{ maxWidth: '200px', minWidth: '150px' }}
+											style={{ maxWidth: '250px', minWidth: '200px' }}
 											size="sm"
 											name="registration_number"
 											placeholder="Select PAN"
@@ -119,7 +119,7 @@ function DefaultForm({
 									</div>
 								)}
 							{!isEmpty(formValues?.address) && isShipper
-							&& !isEmpty(gstin_options[formValues.trade_party_id][GLOBAL_CONSTANTS.zeroth_index].value)
+							&& !isEmpty(gstin_options[formValues.trade_party_id])
 								&& (
 									<div className={styles.form_item_container}>
 										<label className={styles.form_label}>Select GSTIN</label>

@@ -66,7 +66,9 @@ function AddCompanyModal({
 		<Modal show={!isEmpty(addCompany)} placement="top" size="xl" onClose={onClose}>
 			<Modal.Header title="Add Company" />
 
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Body
+				className={styles.modal_head_container}
+			>
 				<div className={styles.modal_body_container}>
 					<div className={styles.role_container}>
 						<label>Role</label>
