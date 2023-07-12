@@ -110,11 +110,10 @@ export const PLATFORM_MAPPING = {
 	public_app     : 'App Platform',
 };
 
-// eslint-disable-next-line max-len
-export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+export const URL_MATCH_REGEX = GLOBAL_CONSTANTS.regex_patterns.url_match_regex;
 
-export const ENDS_WITH_STAR_SPACE = /\* /;
-export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
+export const ENDS_WITH_STAR_SPACE = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_space;
+export const ENDS_WITH_STAR_CHAR = GLOBAL_CONSTANTS.regex_patterns.ends_with_star_char;
 
 export const DEFAULT_PILLS_ITEMS = [
 	{
@@ -279,7 +278,7 @@ export const ICON_MAPPING = {
 	missed   : GLOBAL_CONSTANTS.image_url.missed_call_red_svg,
 };
 
-export const STRING_TO_ARRAY_REGEX = /'/g;
+export const STRING_TO_ARRAY_REGEX = GLOBAL_CONSTANTS.regex_patterns.string_to_array;
 
 export const API_MAPPING = {
 	whatsapp      : '/create_communication',

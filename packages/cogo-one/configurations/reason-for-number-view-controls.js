@@ -9,7 +9,6 @@ const controls = [
 	{
 		name        : 'custome_reason',
 		controlType : 'textArea',
-		options     : VIEW_NUMBER_REASONS,
 		placeholder : 'Enter your reason',
 	},
 

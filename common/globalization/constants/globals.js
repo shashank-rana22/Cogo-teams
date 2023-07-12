@@ -334,7 +334,12 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
-		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		url_match_regex:
+		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
+		ends_with_star_space     : /\* /,
+		ends_with_star_char      : /\*[^0-9a-zA-Z]/,
+		string_to_array          : /'/g,
+		words_prefixed_by_digits : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

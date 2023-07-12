@@ -50,7 +50,6 @@ const useCreateUserContactRequest = ({ setMaskConfig }) => {
 			reset();
 			navigator.clipboard.writeText(mobileNumber);
 			Toast.success('Successfully copied to clipboard');
-
 			setMaskConfig({
 				showNumber      : true,
 				showReasonModal : false,

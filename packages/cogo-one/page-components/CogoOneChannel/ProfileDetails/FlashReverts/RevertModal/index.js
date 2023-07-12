@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 const MIN_CHARGEABLE_WEIGHT = 45;
 
-function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRates }) {
+function RevertModal({ modalState = {}, setModalState = () => {}, userId = '', shipmentFlashBookingRates = () => {} }) {
 	const { data } = modalState || {};
 
 	const {
