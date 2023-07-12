@@ -1,13 +1,13 @@
 import { Button } from '@cogoport/components';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
-import { getFieldController } from '../../../../../../../../../../../common/Form/getFieldController';
+import { getFieldController } from '../../../../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
 const FIRST_INDEX_NORMALIZATION = 1;
 
-function Child(props) {
+function Service(props) {
 	const {
 		controls,
 		control,
@@ -58,4 +58,4 @@ function Child(props) {
 	);
 }
 
-export default Child;
+export default Service;

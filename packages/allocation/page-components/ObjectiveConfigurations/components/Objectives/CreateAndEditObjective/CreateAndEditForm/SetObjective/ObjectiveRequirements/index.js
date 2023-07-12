@@ -23,7 +23,7 @@ function ObjectiveRequirements(props) {
 			</div>
 
 			<form>
-				<ServiceRequirements control={control} />
+				<ServiceRequirements name="service_requirements" control={control} />
 
 				<OrganizationalDetails control={control} />
 
