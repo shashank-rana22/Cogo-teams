@@ -14,22 +14,27 @@ const EMPTY_STATE_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/origi
 const PAGE_INDEX = 1;
 const TOTAL_RECORDS = 0;
 const PAGE_SIZE = 10;
-function Outward({	filters, setFilters }) {
-	const { exportTrigger, loading, listData, listLoading, page, setPage, refetch } = useOutwardFileList({
+function Outward({ filters, setFilters }) {
+	const {
+		exportTrigger,
+		loading,
+		listData,
+		listLoading,
+		page,
+		setPage,
+		refetch,
+	} = useOutwardFileList({
 		entity : filters?.entity,
 		gstIn  : filters?.gstIn,
 		month  : filters?.month,
 		year   : filters?.year,
 	});
 
-	const { refresh, refreshLoading } = useRefreshData();
+	const { refresh, refreshLoading } = useRefreshData({ refetch });
 
-	const {
-		deleteId, deleteIdLoading, uploadId,
-		uploadIdLoading,
-	} = useUploadAndDelete({ refetch });
+	const { deleteId, deleteIdLoading, uploadId, uploadIdLoading } = useUploadAndDelete({ refetch });
 
-	const {	statusId, statusIdLoading } = useGetStatus({ refetch });
+	const { statusId, statusIdLoading } = useGetStatus({ refetch });
 	const { list, totalRecord } = listData || {};
 
 	return (
@@ -46,7 +51,13 @@ function Outward({	filters, setFilters }) {
 					data={list}
 					columns={Column(refresh, deleteId, statusId, uploadId)}
 					imageFind={EMPTY_STATE_IMG}
-					loading={listLoading || refreshLoading || deleteIdLoading || statusIdLoading || uploadIdLoading}
+					loading={
+            listLoading
+            || refreshLoading
+            || deleteIdLoading
+            || statusIdLoading
+            || uploadIdLoading
+          }
 				/>
 			</div>
 
@@ -59,7 +70,6 @@ function Outward({	filters, setFilters }) {
 					onPageChange={setPage}
 				/>
 			</div>
-
 		</div>
 	);
 }
