@@ -24,6 +24,7 @@ interface Props {
 
 const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 10;
+const INFINITE_SCROLL_THRESHOLD = 600;
 
 function CardList({
 	fields = [],
@@ -45,22 +46,9 @@ function CardList({
 		}, TIMEOUT_TIME);
 	}, [loading, setPage]);
 
-	const handleRender = () => (finalList || []).map((singleitem:GenericObject) => (
-		<CardItem
-			key={singleitem.id}
-			singleitem={singleitem}
-			fields={fields}
-			functions={functions}
-		/>
-	));
-
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			if (page === 1) {
-				setFinalList([...list]);
-			} else {
-				setFinalList(finalList.concat(list));
-			}
+			setFinalList(page === 1 ? [...list] : finalList.concat(list));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
@@ -80,9 +68,18 @@ function CardList({
 						</div>
 					) : null}
 					useWindow={false}
-					threshold={600}
+					threshold={INFINITE_SCROLL_THRESHOLD}
 				>
-					<div>{handleRender()}</div>
+					<div>
+						{(finalList || []).map((singleitem:GenericObject) => (
+							<CardItem
+								key={singleitem.id}
+								singleitem={singleitem}
+								fields={fields}
+								functions={functions}
+							/>
+						))}
+					</div>
 				</InfiniteScroll>
 				{isEmpty(finalList) && !loading ? <EmptyState /> : null}
 				{loading && (

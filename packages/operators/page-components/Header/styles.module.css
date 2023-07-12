@@ -64,12 +64,7 @@
 
 .input_search {
 	width: 260px;
-	height: 32px !important;
 	margin-inline: 10px;
-
-	:global(.ui_input_control) {
-		font-size: var(--font-size-md) !important;
-	}
 }
 
 .flex {

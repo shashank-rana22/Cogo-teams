@@ -20,9 +20,9 @@ const useGetListData = (activeTab) => {
 	const [{ data = {}, loading }, trigger] = useRequest('/list_operators', { manual: true });
 
 	const getLocationData = useCallback(() => {
-		(async () => {
+		(() => {
 			try {
-				await trigger({
+				trigger({
 					params: {
 						filters: {
 							q             : query,

@@ -25,6 +25,13 @@ interface ModalProps {
 	setFinalList?: Function,
 }
 
+const showElements = (type) => ({
+	iata_code          : type === 'airline',
+	icao_code          : type === 'airline',
+	airway_bill_prefix : type === 'airline',
+	is_nvocc           : type === 'shipping_line',
+});
+
 function OperatorsModal({
 	item = {},
 	setItem = () => {},
@@ -40,14 +47,6 @@ function OperatorsModal({
 	const { control, watch, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	const operatorType = watch('operator_type');
-
-	const showElements = {
-		iata_code          : operatorType === 'airline',
-		icao_code          : operatorType === 'airline',
-		airway_bill_prefix : operatorType === 'airline',
-		status             : edit,
-		is_nvocc           : operatorType === 'shipping_line',
-	};
 
 	const {
 		handleOperators,
@@ -89,7 +88,7 @@ function OperatorsModal({
 				fields={fields}
 				control={control}
 				errors={errors}
-				showElements={showElements}
+				showElements={{ ...showElements(operatorType), status: edit }}
 			/>
 			<div className={styles.modal_footer}>
 				<Button

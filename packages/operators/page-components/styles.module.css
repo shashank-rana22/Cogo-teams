@@ -13,10 +13,3 @@
 	text-transform: capitalize;
 	border-radius: 4px;
 }
-
-.edit {
-	font-size: var(--font-size-xl);
-	color: var(--color-accent-orange-2) !important;
-	background: none !important;
-	border: none;
-}

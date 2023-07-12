@@ -78,6 +78,7 @@ function Header({
 						value={searchValue}
 						placeholder="Search"
 						type="text"
+						size="sm"
 					/>
 					<Button themeType="accent" onClick={() => setShow(true)}>+ Create</Button>
 				</div>

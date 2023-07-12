@@ -21,19 +21,22 @@ const useHandleOperators = ({
 		method : 'POST',
 	});
 
-	const handleOperators = async (value) => {
+	const payload = (value) => {
 		let isNvocc;
-		if (value.is_nvocc) {
+		if (value?.is_nvocc) {
 			isNvocc = value.is_nvocc === 'true';
 		}
-		const data = {
+		return ({
 			id       : item?.id,
 			...value,
 			logo_url : value?.logo_url?.finalUrl,
 			is_nvocc : isNvocc,
 			status   : edit ? value?.status : 'active',
-		};
+		});
+	};
 
+	const handleOperators = async (value) => {
+		const data = payload(value);
 		try {
 			await trigger({ data });
 			Toast.success(`Operators ${edit ? 'Updated' : 'Added'} Successfully`);

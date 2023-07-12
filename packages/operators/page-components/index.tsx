@@ -20,6 +20,42 @@ const DEFAULT_LOGO_MAPPING = {
 	others        : <IcMTransport width={40} height={40} fill="#ee3425" />,
 };
 
+const functions = (activeTab, setShow, setEdit, setItem) => ({
+	handleLogo: (singleItem:NestedObj) => (
+		<div className={styles.title_black}>
+			{singleItem?.logo_url ? (
+				<img className={styles.image} alt="logo" src={singleItem.logo_url} />
+			) : (
+				DEFAULT_LOGO_MAPPING[activeTab]
+			)}
+		</div>
+	),
+	handleStatus: (singleItem:NestedObj) => (
+		<div className={styles.title_black}>
+			{singleItem?.status === 'active' ? (
+				<div className={styles.event} style={{ backgroundColor: '#b4f3be' }}>{singleItem?.status}</div>
+			) : (
+				<div className={styles.event} style={{ backgroundColor: '#ffd0d0' }}>
+					{singleItem?.status}
+				</div>
+			)}
+		</div>
+	),
+	handleEdit: (singleItem:NestedObj) => (
+		<Button
+			size="lg"
+			themeType="tertiary"
+			onClick={() => {
+				setShow(true);
+				setEdit(true);
+				setItem(singleItem);
+			}}
+		>
+			<IcMEdit fill="var(--color-accent-orange-2)" />
+		</Button>
+	),
+});
+
 function Operators() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -37,42 +73,6 @@ function Operators() {
 		finalList,
 		getLocationData,
 	} = useGetListData(activeTab);
-
-	const functions = {
-		handleLogo: (singleItem:NestedObj) => (
-			<div className={styles.title_black}>
-				{singleItem?.logo_url ? (
-					<img className={styles.image} alt="logo" src={singleItem.logo_url} />
-				) : (
-					DEFAULT_LOGO_MAPPING[activeTab]
-				)}
-			</div>
-		),
-		handleStatus: (singleItem:NestedObj) => (
-			<div className={styles.title_black}>
-				{singleItem?.status === 'active' ? (
-					<div className={styles.event} style={{ backgroundColor: '#b4f3be' }}>{singleItem?.status}</div>
-				) : (
-					<div className={styles.event} style={{ backgroundColor: '#ffd0d0' }}>
-						{singleItem?.status}
-					</div>
-				)}
-			</div>
-		),
-		handleEdit: (singleItem:NestedObj) => (
-			<Button
-				size="lg"
-				className={styles.edit}
-				onClick={() => {
-					setShow(true);
-					setEdit(true);
-					setItem(singleItem);
-				}}
-			>
-				<IcMEdit />
-			</Button>
-		),
-	};
 
 	const airlineFields = [...OPERATORS.common_first, ...OPERATORS.airline, ...OPERATORS.common_second];
 	const shippingLineFields = [...OPERATORS.common_first, ...OPERATORS.common_second];
@@ -116,7 +116,7 @@ function Operators() {
 				setPage={setPage}
 				finalList={finalList}
 				setFinalList={setFinalList}
-				functions={functions}
+				functions={functions(activeTab, setShow, setEdit, setItem)}
 			/>
 		</div>
 	);
