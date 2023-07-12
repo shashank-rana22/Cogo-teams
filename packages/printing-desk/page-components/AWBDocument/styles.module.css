@@ -37,7 +37,6 @@
 .modal_container {
 	width: 900px !important;
 	height: 92vh;
-	padding: 16px;
 	overflow-x: auto;
 }
 

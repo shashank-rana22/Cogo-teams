@@ -1,5 +1,4 @@
 const filterControls = [
-
 	{
 		name    : 'blCategory',
 		type    : 'select',
@@ -15,7 +14,6 @@ const filterControls = [
 		name        : 'airlineId',
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
-		initialCall : true,
 		label       : 'Carrier',
 		placeholder : 'Select Airline',
 		span        : 6,
@@ -24,7 +22,6 @@ const filterControls = [
 		name        : 'originAirportId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
-		initialCall : true,
 		params      : { filters: { type: ['airport'] } },
 		label       : 'Origin Airport',
 		placeholder : 'Select Origin Airport',
@@ -34,7 +31,6 @@ const filterControls = [
 		name        : 'destinationAirportId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
-		initialCall : true,
 		params      : { filters: { type: ['airport'] } },
 		label       : 'Destination Airport',
 		placeholder : 'Select Destination Airport',

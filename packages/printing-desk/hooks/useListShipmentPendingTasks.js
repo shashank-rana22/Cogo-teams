@@ -4,6 +4,8 @@ import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
+import CONSTANTS from '../constants/constants';
+
 const URL_MAPPING = {
 	approved_awb : 'list',
 	amendment    : 'amend/list',
@@ -22,7 +24,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 	}));
 
 	const [searchValue, setSearchValue] = useState('');
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(CONSTANTS.START_PAGE);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
@@ -91,13 +93,13 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 
 	useEffect(() => {
 		if (searchValue) {
-			setPage(1);
+			setPage(CONSTANTS.START_PAGE);
 		}
 		debounceQuery(searchValue);
 	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
-		setPage(1);
+		setPage(CONSTANTS.START_PAGE);
 	}, [activeTab]);
 
 	useEffect(() => {

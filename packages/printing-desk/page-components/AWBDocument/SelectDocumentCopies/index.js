@@ -6,6 +6,8 @@ import useGetMultipleCopiesList from '../../../hooks/useGetMultipleCopiesList';
 import multipleCopies from './multipleCopies';
 import styles from './styles.module.css';
 
+const TOTAL_AWB_COPIES = 12;
+
 function SelectDocumentCopies({
 	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
 	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
@@ -46,7 +48,7 @@ function SelectDocumentCopies({
 	}, [copiesValue]);
 
 	const getSelectAllCheckbox = () => {
-		const isAllRowsChecked = (copiesValue || []).length === 12;
+		const isAllRowsChecked = (copiesValue || []).length === TOTAL_AWB_COPIES;
 
 		return (
 			<Checkbox

@@ -12898,6 +12898,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'put_air_coe_documents',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_air_coe_documents',
 			access_type : 'private',
 		},

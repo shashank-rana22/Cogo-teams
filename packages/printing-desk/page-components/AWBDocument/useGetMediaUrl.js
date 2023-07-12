@@ -1,6 +1,9 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const READY_STATE_RESPONSE = 4;
+const SUCCESS_RESPONSE_CODE = 200;
+
 const useGetMediaUrl = () => {
 	const uploadDocument = (file, documentData) => new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
@@ -8,8 +11,8 @@ const useGetMediaUrl = () => {
 		if (url) {
 			xhr.open('PUT', url);
 			xhr.onreadystatechange = () => {
-				if (xhr.readyState === 4) {
-					if (xhr.status === 200) {
+				if (xhr.readyState === READY_STATE_RESPONSE) {
+					if (xhr.status === SUCCESS_RESPONSE_CODE) {
 						resolve(documentData);
 					} else {
 						reject(
@@ -29,8 +32,8 @@ const useGetMediaUrl = () => {
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', `${url}?file_name=${params.file_name}`, true);
 		xhr.onreadystatechange = () => {
-			if (xhr.readyState === 4) {
-				if (xhr.status === 200) {
+			if (xhr.readyState === READY_STATE_RESPONSE) {
+				if (xhr.status === SUCCESS_RESPONSE_CODE) {
 					resolve(xhr.responseText);
 				} else {
 					reject(
@@ -46,7 +49,7 @@ const useGetMediaUrl = () => {
 		const SIGNATURE_URL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/get_media_upload_url`;
 
 		try {
-			const response:any = getRequest(SIGNATURE_URL, params);
+			const response = getRequest(SIGNATURE_URL, params);
 			return response.success ? response.data : response;
 		} catch (error) {
 			return error;

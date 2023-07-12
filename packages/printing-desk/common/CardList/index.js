@@ -1,20 +1,11 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, DataType, GenericObject } from './Interfaces';
 import styles from './styles.module.css';
-
-interface Props {
-	fields: FieldType[];
-	data: DataType;
-	loading?: boolean;
-	page?: number;
-	setPage?: React.FC;
-	functions?: FunctionObjects;
-}
 
 function CardList({
 	fields = [],
@@ -23,12 +14,12 @@ function CardList({
 	page = 1,
 	setPage = () => {},
 	functions = {},
-} :Props) {
+}) {
 	const { shipmentPendingTasks = [], totalRecords } = data;
 
 	const handleRender = () => {
 		if (loading || shipmentPendingTasks.length) {
-			return (shipmentPendingTasks || []).map((singleitem:GenericObject) => (
+			return (shipmentPendingTasks || []).map((singleitem) => (
 				<CardItem
 					key={singleitem.id}
 					singleitem={singleitem}
@@ -46,7 +37,7 @@ function CardList({
 			<Header fields={fields} />
 			<div className={styles.scroll}>
 				{handleRender()}
-				{!loading && Number(shipmentPendingTasks.length) > 0 ? (
+				{!loading && !isEmpty(shipmentPendingTasks.length) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

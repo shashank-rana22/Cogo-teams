@@ -10,17 +10,6 @@ import { ApprovedAWBFields } from '../../configurations/approved_awb';
 
 import styles from './styles.module.css';
 
-interface ApprovedProps {
-	data?: object,
-	loading?: boolean,
-	page?:number,
-	setPage?: (p:number) => void,
-	setGenerate?: (p:boolean) => void;
-	setItem?: (p:object) => void;
-	setViewDoc?: (p:boolean) => void;
-	setEdit?: (p:boolean | string) => void;
-}
-
 function ApprovedAWB({
 	data = {},
 	loading = false,
@@ -30,12 +19,11 @@ function ApprovedAWB({
 	setItem = () => {},
 	setViewDoc = () => {},
 	setEdit = () => {},
-}:ApprovedProps) {
-	const [showUpload, setShowUpload] = useState(null);
+}) {
 	const [triggerManifest, setTriggerManifest] = useState(null);
 	const { fields } = ApprovedAWBFields;
 
-	console.log('showUpload', showUpload, triggerManifest);
+	console.log('showUpload', triggerManifest);
 
 	const handleDownloadMAWB = (singleItem) => {
 		setViewDoc(true);
@@ -94,15 +82,15 @@ function ApprovedAWB({
 		),
 
 		handleEdit: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); setEdit('edit'); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
-			>
-				<IcMEdit fill="var(--color-accent-orange-2)" />
-			</Button>
+			singleItem?.documentData?.status !== 'uploaded' && (
+				<Button
+					themeType="linkUi"
+					style={{ fontSize: 12 }}
+					onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
+				>
+					<IcMEdit fill="var(--color-accent-orange-2)" />
+				</Button>
+			)
 		),
 
 	};

@@ -1,25 +1,17 @@
 import { cl, Placeholder } from '@cogoport/components';
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import CONSTANTS from '../../../constants/constants';
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
-
-export interface Props {
-	fields: FieldType[];
-	singleitem?: NestedObj;
-	functions?: FunctionObjects;
-	loading?: boolean;
-}
 
 function CardItem({
 	fields = [],
 	singleitem = {},
 	functions = {},
 	loading = false,
-}:Props) {
+}) {
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
@@ -56,7 +48,7 @@ function CardItem({
 							style={{
 								'--span': (field.span || CONSTANTS.DEFAULT_SPAN),
 								...itemStyle,
-							} as React.CSSProperties}
+							}}
 							key={field.key}
 						>
 							{isMobile && (
@@ -69,7 +61,7 @@ function CardItem({
 										field,
 										functions,
 										'-',
-									) as ReactNode}
+									)}
 								</div>
 							)}
 

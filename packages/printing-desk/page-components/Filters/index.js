@@ -1,24 +1,19 @@
+import { Layout } from '@cogoport/air-modules';
 import { cl, Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import Layout from '../../common/Layout';
 import filterControls from '../../configurations/filter-controls';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setFilters: Function;
-	filters: object;
-}
-
-function Filters({ setFilters = () => {}, filters = {} }:Props) {
+function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
-	const onSubmit = (formValues: object) => {
+	const onSubmit = (formValues) => {
 		const FINAL_VALUES = {};
 		Object.keys(formValues).forEach((key) => {
 			if (formValues[key] === '') {
@@ -27,7 +22,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 				FINAL_VALUES[key] = formValues[key];
 			}
 		});
-		setFilters((prev?:object) => ({ ...prev, ...FINAL_VALUES }));
+		setFilters((prev) => ({ ...prev, ...FINAL_VALUES }));
 		setVisible(false);
 	};
 	const handleClear = () => {
@@ -63,7 +58,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 					themeType="secondary"
 					size="md"
 					className={styles.filter_svg}
-					onClick={() => setVisible((prev: boolean) => !prev)}
+					onClick={() => setVisible((prev) => !prev)}
 				>
 					Filters
 					{' '}

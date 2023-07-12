@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import useListShipmentPendingTasks from '../hooks/useListShipmentPendingTasks';
 
 import ApprovedAWB from './ApprovedAWB';
-// import AWBDocument from './AWBDocument';
+import AWBDocument from './AWBDocument';
+import EditAWB from './EditAWB';
 import Filters from './Filters';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -37,8 +38,6 @@ function PrintingDesk() {
 	const [item, setItem] = useState({});
 	const [viewDoc, setViewDoc] = useState(false);
 	const [edit, setEdit] = useState(false);
-
-	console.log('generate', generate, item, viewDoc);
 
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 
@@ -119,7 +118,7 @@ function PrintingDesk() {
 				/>
 			)}
 
-			{/* {(generate || viewDoc) && (
+			{(generate || viewDoc) && (
 				<AWBDocument
 					viewDoc={viewDoc}
 					setViewDoc={setViewDoc}
@@ -129,8 +128,15 @@ function PrintingDesk() {
 					setItem={setItem}
 					setGenerate={setGenerate}
 				/>
-			)} */}
+			)}
 
+			{edit && (
+				<EditAWB
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+				/>
+			)}
 		</div>
 	);
 }
