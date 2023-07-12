@@ -13,6 +13,9 @@ const useGetOrganizationCogopoints = ({ organizationId = '', userID = '' }) => {
 	}, { manual: true });
 
 	const fetchOrganizationCogopoint = useCallback(() => {
+		if (!organizationId && !userID) {
+			return;
+		}
 		try {
 			trigger({
 				params: getParams({ organizationId, userID }),
@@ -23,10 +26,8 @@ const useGetOrganizationCogopoints = ({ organizationId = '', userID = '' }) => {
 	}, [trigger, organizationId, userID]);
 
 	useEffect(() => {
-		if (organizationId || userID) {
-			fetchOrganizationCogopoint();
-		}
-	}, [fetchOrganizationCogopoint, organizationId, userID]);
+		fetchOrganizationCogopoint();
+	}, [fetchOrganizationCogopoint]);
 
 	return {
 		pointData    : data,
