@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import { LockScreen } from './LockScreen';
-import { firebaseConfig } from './LockScreen/configurations/firebase-config';
+import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
 import Navbar from './Navbar';
 import TnC from './newTnC';
 import styles from './styles.module.css';
@@ -55,7 +55,7 @@ function AdminLayout({
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
-	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
+	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
 	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });

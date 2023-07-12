@@ -1,26 +1,23 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	collection,
-	updateDoc,
-	addDoc,
+	setDoc,
 	query,
-	where,
 	limit,
 	getDocs,
 	doc,
 	onSnapshot,
 	getDoc,
 } from 'firebase/firestore';
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect, useMemo } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
-const EVENTS = ['onmousemove', 'onmousedown', 'ontouchstart', 'ontouchmove', 'onclick', 'onkeydown', 'scroll'];
+const EVENTS = ['mousemove', 'mousedown', 'touchstart', 'touchmove', 'click', 'keypress', 'scroll', 'pointermove'];
 const DEFAULT_TIMEOUT_VALUE = 0;
-const SET_DEFAULT_TIMEOUT = 1;
-const DEBOUNCE_LIMIT = 6000;
+const DEBOUNCE_LIMIT = 60;
 
 const getTimeoutConstant = async (firestore) => {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
@@ -32,50 +29,33 @@ const getTimeoutConstant = async (firestore) => {
 	return { timeoutValue: screen_lock_timeout, isLockedBool: is_locked_screen };
 };
 
-const createOrGetRoom = async ({ agentId, firestore }) => {
-	let roomId = '';
-	const userActivityRoom = collection(firestore, FIRESTORE_PATH.users_path);
-
-	const roomsQuery = query(
-		userActivityRoom,
-		where('agent_id', '==', agentId),
-		limit(LIMIT),
-	);
-	const docs = await getDocs(roomsQuery);
-	if (!docs.size) {
-		const newRoom = {
-			agent_id                : agentId,
-			last_reminder           : Date.now(),
-			last_activity_timestamp : Date.now(),
-			last_activity           : 'create_room',
-		};
-		const roomid = await addDoc(userActivityRoom, newRoom);
-		roomId = roomid?.id;
-	} else {
-		roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
-	}
-	return doc(
-		firestore,
-		`${FIRESTORE_PATH.users_path}/${roomId}`,
-	);
-};
-
 function activityTracker({ trackerRef, roomDoc, activity }) {
 	clearTimeout(trackerRef.current);
 	const refForTracker = trackerRef;
+
 	refForTracker.current = setTimeout(() => {
-		updateDoc(roomDoc, {
+		setDoc(roomDoc, {
 			last_activity_timestamp : Date.now(),
 			last_activity           : activity,
-		});
+		}, { merge: true });
 	}, DEBOUNCE_LIMIT);
 }
 
-export function mountActivityTracker({ trackerRef, roomDoc }) {
+export function mountActivityTracker({ FUNC_MAPPING }) {
 	EVENTS.forEach((name) => {
 		window.addEventListener(
 			name,
-			() => activityTracker({ trackerRef, roomDoc, activity: name }),
+			FUNC_MAPPING[name],
+			true,
+		);
+	});
+}
+
+export function unMountActivityTracker({ FUNC_MAPPING }) {
+	EVENTS.forEach((name) => {
+		window.removeEventListener(
+			name,
+			FUNC_MAPPING[name],
 			true,
 		);
 	});
@@ -88,23 +68,39 @@ function useGetActivity({
 	const activityTrackerSnapShotRef = useRef(null);
 	const activitytimeoutRef = useRef(null);
 	const trackerRef = useRef(null);
-	const timeout = useRef(null);
 	const [showModal, setShowModal] = useState(false);
-	const [isLockedEnabled, setIsLockedEnabled] = useState(false);
+
+	const FUNC_MAPPING = useMemo(() => {
+		const roomDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH.users_path}/${agentId}`,
+		);
+		return EVENTS.reduce((
+			acc,
+			eachEvent,
+		) => ({ ...acc, [eachEvent]: () => activityTracker({ trackerRef, roomDoc, activity: eachEvent }) }), {});
+	}, [agentId, firestore]);
 
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
 		const { timeoutValue, isLockedBool } = await getTimeoutConstant(firestore);
-		setIsLockedEnabled(isLockedBool);
+
+		if (!isLockedBool) {
+			return;
+		}
+
 		activityTrackerSnapShotRef?.current?.();
 		clearTimeout(activitytimeoutRef?.current);
 		clearTimeout(trackerRef?.current);
+		const roomDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH.users_path}/${agentId}`,
+		);
 		try {
-			const roomDoc = await createOrGetRoom({ agentId, firestore });
 			const userDocData = await getDoc(roomDoc);
 			const lastTimestamp = userDocData?.data()?.last_activity_timestamp || Date.now();
 
 			if ((Date.now() - lastTimestamp) < timeoutValue) {
-				mountActivityTracker({ trackerRef, roomDoc });
+				mountActivityTracker({ FUNC_MAPPING });
 			}
 
 			activityTrackerSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
@@ -117,27 +113,24 @@ function useGetActivity({
 
 				clearTimeout(activitytimeoutRef?.current);
 				if (last_activity === 'submit_otp') {
-					mountActivityTracker({ trackerRef, roomDoc });
+					mountActivityTracker({ FUNC_MAPPING });
 				}
 				activitytimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
-
-					EVENTS.forEach((name) => {
-						window[name] = null;
-					});
+					unMountActivityTracker({ FUNC_MAPPING });
 				}, timer);
 			});
 		} catch (e) {
-			console.log('e:', e);
+			console.error('error:', e);
 		}
-	}, [agentId, firestore]);
+	}, [agentId, firestore, FUNC_MAPPING]);
 
 	useEffect(() => {
-		clearTimeout(timeout?.current);
-		timeout.current = setTimeout(mountActivityTrackerSnapShotRef, SET_DEFAULT_TIMEOUT);
-	}, [mountActivityTrackerSnapShotRef]);
+		mountActivityTrackerSnapShotRef();
+		return () => unMountActivityTracker({ FUNC_MAPPING });
+	}, [mountActivityTrackerSnapShotRef, agentId, firestore, FUNC_MAPPING]);
 
-	return { showModal, setShowModal, isLockedEnabled };
+	return { showModal, setShowModal };
 }
 
 export default useGetActivity;

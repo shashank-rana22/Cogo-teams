@@ -2,7 +2,6 @@ import { Modal, Button } from '@cogoport/components';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { useState } from 'react';
 
 import getViewTypeMapping from '../../constants/index';
 import useGetActivity from '../../hooks/useGetActivity';
@@ -13,20 +12,21 @@ import styles from './styles.module.css';
 
 const MAX_LIMIT = 600;
 const OTP_LENGTH = 6;
+const MANUAL_OTP_BOOL = true;
+
 function LockScreen({ agentId, userRoleIds, firestore }) {
 	const { ROLE_IDS_CHECK } = getViewTypeMapping();
-	const [manualOtp, setManualOtp] = useState(true);
 
-	const { showModal, setShowModal, isLockedEnabled } = useGetActivity({
+	const { showModal, setShowModal } = useGetActivity({
 		firestore,
 		agentId,
 	});
 	const { apiTrigger, loading, otpNumber, setOtpNumber } = useGetSubmitOtp({ agentId, firestore, setShowModal });
-	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal, setManualOtp });
+	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
 
 	const isRolePresent = userRoleIds.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
 
-	const showLockScreen = showModal && isRolePresent && isLockedEnabled;
+	const showLockScreen = showModal && isRolePresent;
 	return (
 		<Modal
 			scroll={false}
@@ -55,7 +55,7 @@ function LockScreen({ agentId, userRoleIds, firestore }) {
 							resendOtpTimerDuration={MAX_LIMIT}
 							sendOtp={(obj) => generateOtp({ ...obj })}
 							placeholder=""
-							manualOtpRequest={manualOtp}
+							manualOtpRequest={MANUAL_OTP_BOOL}
 						/>
 					</div>
 					<div className={styles.button_div}>
