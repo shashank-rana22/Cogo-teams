@@ -1,7 +1,6 @@
 .ticket_container {
 	margin: 12px;
 	overflow: hidden;
-	cursor: pointer;
 	background: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
@@ -21,6 +20,15 @@
 .subcontainer_one {
 	padding: 10px;
 	background: #f9f9f9;
+}
+
+.ticket_type {
+	padding-inline: 10px;
+	background: #f9f9f9;
+}
+
+.ticket_view {
+	cursor: pointer;
 }
 
 .reopen_resolve {
