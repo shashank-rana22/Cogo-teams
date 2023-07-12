@@ -1,34 +1,21 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-magic-numbers */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable max-lines-per-function */
 import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails';
 import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails';
 import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails';
 import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails';
-import { Button, Checkbox, Popover, Modal } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { cl, Button, Modal } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
-import html2canvas from 'html2canvas';
-import { jsPDF as JsPDF } from 'jspdf';
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 
 import { FOOTER_VALUES } from '../../constants/footer-values';
-import { BACK_PAGE, FOOTER_IMAGES } from '../../constants/image-copies';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import getFileObject from './getFileObject';
-import SelectDocumentCopies from './SelectDocumentCopies';
 import styles from './styles.module.css';
+import TopButtonContainer from './TopButtonContainer';
 import useGetMediaUrl from './useGetMediaUrl';
-
-const DOWNLOAD_BUTTON = {
-	document_accepted            : 'Download 12 Copies',
-	document_uploaded            : 'Download',
-	document_amendment_requested : 'Download',
-};
-
-const INCLUDE_TNC = ['original_3', 'original_2', 'original_1'];
 
 function AWBDocument({
 	item = {},
@@ -43,10 +30,10 @@ function AWBDocument({
 	back = false,
 	setBack = () => {},
 }) {
-	const [docCopies, setDocCopies] = useState(null);
-	const [copiesValue, copiesOnChange] = useState([]);
 	const [whiteout, setWhiteout] = useState(false);
 	const [saveDocument, setSaveDocument] = useState(false);
+
+	const ref = createRef(null);
 
 	const { documentData } = item || {};
 
@@ -57,8 +44,8 @@ function AWBDocument({
 	};
 
 	const {
-		id, serialId = '', documentId, documentType = 'mawb', awbNumber, state, documentState, blDetailId,
-		document_number: documentNumber, serviceId, shipment_id: pendingShipmentId, shipmentId, serviceProviderId,
+		id, serialId = '', documentId, documentType = 'mawb', state, documentState, blDetailId,
+		serviceId, shipment_id: pendingShipmentId, shipmentId, serviceProviderId,
 	} = taskItem;
 
 	const { handleUpload } = useGetMediaUrl();
@@ -77,6 +64,7 @@ function AWBDocument({
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
+		console.log('newImage', newImage);
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
@@ -113,49 +101,6 @@ function AWBDocument({
 		setSaveDocument(false);
 	};
 
-	const handleView = (download24) => {
-		if (documentState === 'document_accepted') {
-			html2canvas(document.getElementById('mawb')).then((canvas) => {
-				const imgData = canvas.toDataURL('image/jpeg');
-				const pdf = new JsPDF();
-				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = pdf.internal.pageSize.getHeight();
-
-				(docCopies || copiesValue || []).forEach((itm, i) => {
-					pdf.addImage(Object.values(itm)[1] === 'updated'
-						? `${Object.values(itm)[GLOBAL_CONSTANTS.zeroth_index]}`
-						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
-					if (!whiteout) {
-						pdf.addImage(FOOTER_IMAGES[Object.keys(itm)[GLOBAL_CONSTANTS.zeroth_index]]
-							|| FOOTER_IMAGES[itm], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
-					}
-
-					if (download24) {
-						if (INCLUDE_TNC.includes(Object.keys(itm)[GLOBAL_CONSTANTS.zeroth_index] || itm)) {
-							pdf.addPage();
-							pdf.addImage(BACK_PAGE, 'jpeg', 0, 0, pdfWidth, pdfHeight);
-						} else {
-							pdf.addPage();
-						}
-					}
-					if (i < copiesValue.length - 1) {
-						pdf.addPage();
-					}
-				});
-				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
-			});
-		} else {
-			html2canvas(document.getElementById('mawb')).then((canvas) => {
-				const imgData = canvas.toDataURL('image/jpeg');
-				const pdf = new JsPDF();
-				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = pdf.internal.pageSize.getHeight();
-				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
-				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
-			});
-		}
-		setSaveDocument(false);
-	};
 	return (
 		<div className={styles.file_container}>
 			<Modal
@@ -168,106 +113,26 @@ function AWBDocument({
 			>
 				<Modal.Body style={{ minHeight: '90vh' }}>
 					<div className={styles.flex_col}>
-						{viewDoc
-		&& (
-			<div
-				className={styles.download_button_div}
-			>
-				<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
-					{documentState === 'document_accepted' && (
-						<div className={styles.flex} style={{ alignItems: 'center', margin: '0 8px' }}>
-							<Checkbox
-								label="Whiteout"
-								value={whiteout}
-								onChange={() => setWhiteout((p) => !p)}
+						{viewDoc && (
+							<TopButtonContainer
+								whiteout={whiteout}
+								setWhiteout={setWhiteout}
+								saveDocument={saveDocument}
+								setSaveDocument={setSaveDocument}
+								setEdit={setEdit}
+								category={category}
+								taskItem={taskItem}
+								setGenerate={setGenerate}
+								setViewDoc={setViewDoc}
+								setItem={setItem}
+								setEditCopies={setEditCopies}
 							/>
-							<Popover
-								placement="bottom"
-								trigger="click"
-								render={(
-									<SelectDocumentCopies
-										copiesValue={copiesValue}
-										copiesOnChange={copiesOnChange}
-										setSaveDocument={setSaveDocument}
-										handleView={handleView}
-										setGenerate={setGenerate}
-										setViewDoc={setViewDoc}
-										setEdit={setEdit}
-										setItem={setItem}
-										setDocCopies={setDocCopies}
-										setEditCopies={setEditCopies}
-										taskItem={taskItem}
-										download24
-									/>
-								)}
-							>
-								<Button
-									className="primary md"
-									disabled={saveDocument || whiteout}
-								>
-									Download 12 Copies with T&C
-								</Button>
-							</Popover>
-						</div>
-					)}
-					{documentState === 'document_accepted'
-						? (
-							<Popover
-								placement="bottom"
-								trigger="click"
-								render={(
-									<SelectDocumentCopies
-										copiesValue={copiesValue}
-										copiesOnChange={copiesOnChange}
-										setSaveDocument={setSaveDocument}
-										handleView={handleView}
-										setGenerate={setGenerate}
-										setViewDoc={setViewDoc}
-										setEdit={setEdit}
-										download24={false}
-										setItem={setItem}
-										setDocCopies={setDocCopies}
-										setEditCopies={setEditCopies}
-										taskItem={taskItem}
-									/>
-								)}
-							>
-								<Button
-									className="primary md"
-									disabled={saveDocument}
-								>
-									Download 12 Copies
-								</Button>
-							</Popover>
-						)
-
-						: (
-							<Button
-								className="primary md"
-								onClick={() => {
-									setSaveDocument(true);
-									handleView(false);
-								}}
-								disabled={saveDocument}
-							>
-								{saveDocument ? 'Downloading...' : DOWNLOAD_BUTTON[documentState]}
-							</Button>
 						)}
-				</div>
-			</div>
-		)}
 
 						<div
-							className={styles.flex_col}
+							className={cl`${styles.flex_col} ${styles.document}`}
 							id="mawb"
-							style={{
-								flex       : '1',
-								width      : '100%',
-								height     : '100%',
-								padding    : '40px 10px',
-								opacity    : 1,
-								background : '#fff',
-							}}
+							ref={ref}
 						>
 							{/* {((viewDoc && documentState !== 'document_accepted')
 							 || (!viewDoc && editCopies === null))
@@ -304,39 +169,38 @@ function AWBDocument({
 							</div>
 						</div>
 
-						{!viewDoc
-		&& (
-			<div
-				className={styles.button_div}
-			>
-				{edit || back ? (
-					<div style={{ marginRight: '20px' }}>
-						<Button
-							themeType="secondary"
-							onClick={() => {
-								if (back) {
-									setBack(!back);
-								}
-							}}
-							disabled={loading || saveDocument}
-						>
-							Edit
-						</Button>
-					</div>
-				) : null}
-				<div style={{ marginRight: '36px' }}>
-					<Button
-						onClick={() => {
-							setSaveDocument(true);
-							handleSave();
-						}}
-						disabled={loading || saveDocument}
-					>
-						{loading || saveDocument ? 'Saving...' : 'Save'}
-					</Button>
-				</div>
-			</div>
-		)}
+						{!viewDoc && (
+							<div
+								className={styles.button_div}
+							>
+								{edit || back ? (
+									<div style={{ marginRight: '20px' }}>
+										<Button
+											themeType="secondary"
+											onClick={() => {
+												if (back) {
+													setBack(!back);
+												}
+											}}
+											disabled={loading || saveDocument}
+										>
+											Edit
+										</Button>
+									</div>
+								) : null}
+								<div style={{ marginRight: '36px' }}>
+									<Button
+										onClick={() => {
+											setSaveDocument(true);
+											handleSave();
+										}}
+										disabled={loading || saveDocument}
+									>
+										{loading || saveDocument ? 'Saving...' : 'Save'}
+									</Button>
+								</div>
+							</div>
+						)}
 					</div>
 				</Modal.Body>
 			</Modal>

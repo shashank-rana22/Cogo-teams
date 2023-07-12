@@ -7,6 +7,8 @@ const SINGLE_DECREMENT = 1;
 
 function getFileObject(dataurl, filename) {
 	const data = dataurl?.split(',');
+
+	console.log('data', data);
 	const mime = data[GLOBAL_CONSTANTS.zeroth_index].match(GLOBAL_CONSTANTS.regex_patterns.mime)[MIME_INDEX_IN_IMAGE];
 	const bstr = atob(data[BINARY_STRING_INDEX]);
 	let n = bstr.length;
