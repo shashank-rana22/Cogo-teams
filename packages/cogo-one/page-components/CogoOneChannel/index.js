@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
@@ -39,8 +40,9 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab  : 'message',
-		data : assigned_chat ? {
+		tab    : 'message',
+		subTab : 'all',
+		data   : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
@@ -65,7 +67,8 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType } = useAgentWorkPrefernce();
+	const { viewType, loading:workPrefernceLoading = false } = useAgentWorkPrefernce();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -88,6 +91,7 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
+	const { subTab } = activeTab || {};
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -119,6 +123,7 @@ function CogoOne() {
 						mailProps={mailProps}
 						firestore={firestore}
 						suggestions={suggestions}
+						workPrefernceLoading={workPrefernceLoading}
 					/>
 				</div>
 
@@ -150,7 +155,9 @@ function CogoOne() {
 							</div>
 
 							{activeTab?.tab !== 'mail' && (
-								<div className={styles.user_profile_layout}>
+								<div className={cl`${styles.user_profile_layout} 
+								${subTab === 'kamContacts' ? styles.disable_user_profile : ''}`}
+								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
 										activeTab={activeTab?.tab}
@@ -165,6 +172,7 @@ function CogoOne() {
 										userId={userId}
 										setActiveTab={setActiveTab}
 									/>
+									{subTab === 'kamContacts' && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -172,8 +180,7 @@ function CogoOne() {
 
 				<div className={styles.download_apk}>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.download_div}
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>

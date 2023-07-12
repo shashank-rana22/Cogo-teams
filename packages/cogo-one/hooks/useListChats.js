@@ -30,6 +30,7 @@ function useListChats({
 	activeSubTab,
 	setActiveTab,
 	setCarouselState,
+	workPrefernceLoading = false,
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -118,8 +119,8 @@ function useListChats({
 			+ e.target.scrollTop) <= MAX_DISTANCE_FROM_BOTTOM;
 
 		if (reachBottom && !listData?.isLastPage && !loadingState?.chatsLoading) {
-			console.log('reachBottom', reachBottom);
 			const onScrollFunc = SUB_TAB_WISE_FUNC_MAPPING[activeSubTab] || SUB_TAB_WISE_FUNC_MAPPING.default;
+
 			onScrollFunc?.({
 				omniChannelCollection,
 				omniChannelQuery,
@@ -152,13 +153,14 @@ function useListChats({
 			viewType,
 			activeSubTab,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
 	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab,
-		updateLoadingState]);
+		updateLoadingState, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountSnapShot({
@@ -170,11 +172,13 @@ function useListChats({
 			omniChannelQuery,
 			updateLoadingState,
 			activeSubTab,
+			workPrefernceLoading,
 		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState, activeSubTab]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState,
+		activeSubTab, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountFlashChats({

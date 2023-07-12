@@ -93,14 +93,14 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState,
+	activeSubTab, updateLoadingState, workPrefernceLoading,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats) {
+	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats || workPrefernceLoading) {
 		return;
 	}
 
@@ -157,13 +157,13 @@ export function mountUnreadCountSnapShot({
 
 export function mountSnapShot({
 	setLoadingState, setListData, snapshotListener, omniChannelCollection,
-	queryForSearch, omniChannelQuery, updateLoadingState, activeSubTab,
+	queryForSearch, omniChannelQuery, updateLoadingState, activeSubTab, workPrefernceLoading,
 }) {
 	const snapshotRef = snapshotListener;
 	setListData((prev) => ({ ...prev, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
 
-	if (FIREBASE_MESSAGES_NOT_REQUIRED_TABS.includes(activeSubTab)) {
+	if (FIREBASE_MESSAGES_NOT_REQUIRED_TABS.includes(activeSubTab) || workPrefernceLoading) {
 		return;
 	}
 

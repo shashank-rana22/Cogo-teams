@@ -43,6 +43,7 @@ function MessageList(messageProps) {
 		viewType = '',
 		isBotSession,
 		setIsBotSession,
+		workPrefernceLoading = false,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -50,7 +51,8 @@ function MessageList(messageProps) {
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [carouselState, setCarouselState] = useState('hide');
 	const [searchValue, setSearchValue] = useState('');
-	const [activeSubTab, setActiveSubTab] = useState('all');
+
+	const { subTab } = activeTab || {};
 
 	const {
 		chatsData,
@@ -66,8 +68,9 @@ function MessageList(messageProps) {
 		searchValue,
 		viewType,
 		setActiveTab,
-		activeSubTab,
+		activeSubTab: subTab,
 		setCarouselState,
+		workPrefernceLoading,
 	});
 
 	const {
@@ -79,6 +82,10 @@ function MessageList(messageProps) {
 	});
 
 	const orgUserProps = useListOrganizationUsers();
+
+	const setActiveSubTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
+	};
 
 	const {
 		messagesList,
@@ -111,7 +118,7 @@ function MessageList(messageProps) {
 		dataKey = '',
 		component:Component,
 	} = SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING[
-		activeSubTab] || SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING.default;
+		subTab] || SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING.default;
 
 	const SUB_TAB_PROPS_MAPPING = {
 		all: {
@@ -154,7 +161,7 @@ function MessageList(messageProps) {
 			/>
 
 			<Header
-				activeSubTab={activeSubTab}
+				activeSubTab={subTab}
 				setActiveSubTab={setActiveSubTab}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -238,7 +245,7 @@ function MessageList(messageProps) {
 									<Component
 										key={item?.id}
 										item={item}
-										{...(SUB_TAB_PROPS_MAPPING[activeSubTab] || SUB_TAB_PROPS_MAPPING.default)}
+										{...(SUB_TAB_PROPS_MAPPING[subTab] || SUB_TAB_PROPS_MAPPING.default)}
 									/>
 								),
 							)}

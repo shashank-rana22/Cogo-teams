@@ -30,6 +30,7 @@ function Customers({
 	mailProps = {},
 	firestore = {},
 	viewType = '',
+	workPrefernceLoading = false,
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -48,6 +49,7 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			workPrefernceLoading,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -105,7 +107,7 @@ function Customers({
 					fullWidth
 					themeType="secondary"
 					onChange={(val) => {
-						setActiveTab({ tab: val, data: {} });
+						setActiveTab({ tab: val, data: {}, subTab: 'all' });
 					}}
 				>
 					{tabMappings.map((eachTab) => {
