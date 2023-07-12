@@ -9,11 +9,11 @@ import useHeaderStats from '../../hooks/useHeaderStats';
 import styles from './styles.module.css';
 
 const keysToDisplay = [
+	'serial_id',
+	'business_name',
 	'request_id',
 	'request_type',
-	'serial_id',
 	'created_on',
-
 ];
 
 const getOrganizationData = ({ lead_organization = {}, organization = {} }) => {
@@ -63,6 +63,11 @@ function Header() {
 			),
 		},
 
+		business_name: {
+			label : 'Business Name',
+			value : <div>{startCase(business_name) || '__'}</div>,
+		},
+
 		created_on: {
 			label : 'Created on',
 			value : formatDate({
@@ -81,10 +86,6 @@ function Header() {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.heading}>
-				{business_name}
-			</div>
-
 			<div className={styles.content}>
 				{keysToDisplay.map((item) => (
 					<div key={item} className={styles.item}>
