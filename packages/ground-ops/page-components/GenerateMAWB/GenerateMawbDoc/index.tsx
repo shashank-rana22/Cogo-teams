@@ -47,7 +47,7 @@ interface Props {
 	editCopies?: string;
 	setEditCopies?: Function;
 }
-
+const ADD_IMAGE_INDEX = 1;
 const DOWNLOAD_BUTTON = {
 	document_accepted            : 'Download 12 Copies',
 	document_uploaded            : 'Download',
@@ -211,7 +211,7 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
 				(docCopies || copiesValue || []).forEach((item, i) => {
-					pdf.addImage(Object.values(item)[1] === 'updated'
+					pdf.addImage(Object.values(item)[ADD_IMAGE_INDEX] === 'updated'
 						? `${Object.values(item)[GLOBAL_CONSTANTS.zeroth_index]}`
 						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {

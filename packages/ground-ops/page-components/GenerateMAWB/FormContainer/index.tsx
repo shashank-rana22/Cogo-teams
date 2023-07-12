@@ -22,6 +22,7 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const DECIMAL_PLACE = 2;
 interface NestedObj {
 	[key: string]: ReactFragment ;
 }
@@ -150,9 +151,9 @@ function FormContainer({
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = Number((charge.chargeUnit * Number(formValues.chargeableWeight)).toFixed(2));
+				price = Number((charge.chargeUnit * Number(formValues.chargeableWeight)).toFixed(DECIMAL_PLACE));
 			} else if (charge.chargeType === 'gross_wt') {
-				price = Number((Number(formValues.weight) * charge.chargeUnit).toFixed(2));
+				price = Number((Number(formValues.weight) * charge.chargeUnit).toFixed(DECIMAL_PLACE));
 			}
 			return { ...charge, price };
 		});
@@ -192,7 +193,7 @@ function FormContainer({
 								setHawbDetails((prev) => ([...prev, {
 									id: uuid(),
 									documentNo:
-									isEmpty(cogoSeriesNumber.length)
+									isEmpty(cogoSeriesNumber)
 										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
 										: `COGO-${taskItem.serialId}${
 											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
