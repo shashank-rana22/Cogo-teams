@@ -1,30 +1,32 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const useGetOrganizationCogopoints = ({ organizationId = '' }) => {
+const getParams = ({ organizationId, userID }) => ({
+	organization_id : organizationId,
+	user_id         : userID,
+});
+
+const useGetOrganizationCogopoints = ({ organizationId = '', userID = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization_cogopoint_profile',
 		method : 'get',
 	}, { manual: true });
 
-	const fetchOrganizationCogopoint = async () => {
+	const fetchOrganizationCogopoint = useCallback(() => {
 		try {
-			await trigger({
-				params: {
-					organization_id: organizationId,
-				},
+			trigger({
+				params: getParams({ organizationId, userID }),
 			});
 		} catch (error) {
-			// console.log(error);
+			console.error('error', error);
 		}
-	};
+	}, [trigger, organizationId, userID]);
 
 	useEffect(() => {
-		if (organizationId) {
+		if (organizationId || userID) {
 			fetchOrganizationCogopoint();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [organizationId]);
+	}, [fetchOrganizationCogopoint, organizationId, userID]);
 
 	return {
 		pointData    : data,

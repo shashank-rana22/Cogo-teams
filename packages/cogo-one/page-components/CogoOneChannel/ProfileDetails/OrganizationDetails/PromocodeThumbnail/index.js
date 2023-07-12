@@ -28,7 +28,7 @@ function PromocodeThumbnail({ list = [] }) {
 
 				return (
 					<div
-						key={promotion_discounts[index].id}
+						key={promotion_discounts[index]?.id}
 						className={styles.container}
 						style={{ backgroundColor: getCardColor(index) }}
 					>
