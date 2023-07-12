@@ -38,10 +38,9 @@
 	display: flex;
 	font-size: var(--font-size-md);
 	font-weight: 600;
-	color: #303b67;
+	color: var(--color-primary-error-red-2);
 }
 
 .flex {
 	display: flex;
-	width: var(--span) px;
 }
