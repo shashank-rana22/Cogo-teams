@@ -1,4 +1,4 @@
-export const POCDetailsFields = {
+export const pocDetailsFields = {
 	fields: [
 		{
 			key   : 'name',

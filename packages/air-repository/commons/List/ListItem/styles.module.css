@@ -41,7 +41,7 @@
 	word-wrap: wrap;
 	background: #fff;
 	border-radius: 8px;
-	box-shadow: #63636333 0 2px 8px 0;
+	box-shadow: 0 2px 8px 0 #63636333;
 }
 
 .tablelabel {

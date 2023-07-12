@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import { POCDetailsFields } from '../../../configurations/poc-details';
+import { pocDetailsFields } from '../../../configurations/poc-details';
 
 import POCDetailsItem from './POCDetailsItem';
 import styles from './styles.module.css';
@@ -15,23 +15,23 @@ interface POCDetailsProps {
 	data: NestedObj;
 }
 
+const FUNCTIONS = {
+	handleContact: (singleItem) => (
+		<div>
+			{singleItem.mobile_country_code}
+			{' '}
+			{singleItem.mobile_number}
+		</div>
+	),
+};
+
 function POCDetails({ data = {} }:POCDetailsProps) {
-	const { fields } = POCDetailsFields;
+	const { fields } = pocDetailsFields;
 
 	const {
 		e_booking_availability: eBooking,
 		inventory_stock_availability: availability, pocs_data:pocsData,
 	} = data || {};
-
-	const functions = {
-		handleContact: (singleItem) => (
-			<div>
-				{singleItem.mobile_country_code}
-				{' '}
-				{singleItem.mobile_number}
-			</div>
-		),
-	};
 
 	return (
 		<div className={styles.poc_detail_container}>
@@ -64,7 +64,7 @@ function POCDetails({ data = {} }:POCDetailsProps) {
 						<POCDetailsItem
 							item={item}
 							fields={fields}
-							functions={functions}
+							functions={FUNCTIONS}
 							key={JSON.stringify(item)}
 						/>
 					))}

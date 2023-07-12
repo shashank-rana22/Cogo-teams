@@ -36,16 +36,15 @@ function RepositoryModal({
 	const fields = repositoryControls();
 	const mode = watch('booking_mode');
 
+	const dataPayload = (poc) => ({
+		name                : poc?.name,
+		email               : poc?.email,
+		mobile_country_code : poc?.mobile?.country_code,
+		mobile_number       : poc?.mobile?.number,
+	});
+
 	const onSubmit = (values) => {
-		const pocData = (values.pocs_data || []).map((poc) => {
-			const pocDataItem = ({
-				name                : poc?.name,
-				email               : poc?.email,
-				mobile_country_code : poc?.mobile?.country_code,
-				mobile_number       : poc?.mobile?.number,
-			});
-			return pocDataItem;
-		});
+		const pocData = (values.pocs_data || []).map((poc) => dataPayload(poc));
 
 		const payload = { ...values, pocs_data: pocData, id: item?.id, action_name: edit ? 'update' : undefined };
 		handleRepository({ payload, listRepository, setShowModal }).then(() => {
