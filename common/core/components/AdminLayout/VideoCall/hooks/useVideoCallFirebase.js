@@ -105,11 +105,15 @@ function useVideoCallFirebase({
 			setInACall(false);
 			stopStream('screen_stream');
 			stopStream('user_stream');
+			setCallDetails((prev) => ({
+				...prev,
+				calling_room_id: null,
+			}));
 		}
 		if (callComming) {
 			setCallComming(false);
 		}
-	}, [inACall, callComming, setInACall, stopStream, setCallComming]);
+	}, [inACall, callComming, setInACall, stopStream, setCallDetails, setCallComming]);
 
 	const callingTo = () => {
 		navigator.mediaDevices
@@ -175,7 +179,10 @@ function useVideoCallFirebase({
 			);
 			onSnapshot(videoCallDocRef, (dop) => {
 				const room_data = dop.data();
-				console.log(room_data?.call_status);
+				setCallDetails((prev) => ({
+					...prev,
+					calling_details: room_data,
+				}));
 				const endCallStatus = ['rejected', 'end_call'];
 				if (
 					room_data?.call_status
@@ -185,7 +192,7 @@ function useVideoCallFirebase({
 				}
 			});
 		}
-	}, [callDetails?.calling_room_id, callEnd, firestore]);
+	}, [callDetails?.calling_room_id, callEnd, firestore, setCallDetails]);
 
 	return {
 		callingTo,
