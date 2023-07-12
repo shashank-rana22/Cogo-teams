@@ -15,10 +15,15 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const [containerNo, setContainerNo] = useState('');
 
 	const TRUCK_OPTIONS = [];
-	const ftlServices = (shipment_data?.all_services || []).filter((item) => TRUCK_OPTIONS.push({
-		label : item?.truck_number,
-		value : item?.truck_number,
-	}));
+	const ftlServices = (shipment_data?.all_services || []).filter((item) => {
+		if (item?.service_type === 'ftl_freight_service') {
+			TRUCK_OPTIONS.push({
+				label : item?.truck_number,
+				value : item?.truck_number,
+			});
+		}
+		return item?.service_type === 'ftl_freight_service';
+	});
 
 	const {
 		loading,
@@ -32,7 +37,7 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const containerOptions = Array.isArray(list)
 		? (list || [])
 			.filter((e) => e?.type === 'CONTAINER_NO')
-			?.map((e) => ({ label: e?.input, value: e?.input }))
+			.map((e) => ({ label: e?.input, value: e?.input }))
 		: [];
 
 	useEffect(() => {
@@ -51,9 +56,7 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 							|| TRUCK_OPTIONS?.[DEFAULT_INDEX]?.value
 						}
 				truckOptions={TRUCK_OPTIONS}
-				shipmentId={shipment_data?.id}
 				serialId={serialId}
-				airwayBillNo={list?.airway_bill_no}
 				data={list}
 				listShipments={listShipments}
 				refetch={refetch}

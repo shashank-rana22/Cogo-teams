@@ -9,7 +9,7 @@ const STATUS_CODE = 200;
 const useUpdateFtlFreightServiceTracking = () => {
 	const [data, setData] = useState([]);
 
-	const [loading, trigger] = useLensRequest({
+	const [{ loading }, trigger] = useLensRequest({
 		url    : 'create_saas_surface_shipment_detail',
 		method : 'POST',
 	}, { manual: true });

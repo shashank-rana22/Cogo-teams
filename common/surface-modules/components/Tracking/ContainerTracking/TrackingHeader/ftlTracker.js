@@ -12,6 +12,51 @@ import styles from './styles.module.css';
 const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
 const CONSENT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
+function Content({
+	control,
+	errors,
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	setStartTruckTracker = () => {},
+	reset = () => {},
+	loading = false,
+}) {
+	return (
+		<div className={styles.Content}>
+			<InputController
+				control={control}
+				errors={errors}
+				name="mobile_number"
+				label="Enter Mobile Number for Tracking"
+				placeholder="Enter Mobile Number"
+				disabled
+				themeType="admin"
+			/>
+			<div className={styles.ButtonDiv}>
+				<Button
+					onClick={() => {
+						setStartTruckTracker(false);
+						reset();
+					}}
+					className="secondary md"
+					style={{ marginRight: 10 }}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+
+				<Button
+					disabled={loading}
+					onClick={handleSubmit(onSubmit)}
+					className="primary md"
+				>
+					Submit
+				</Button>
+			</div>
+		</div>
+	);
+}
+
 function FtlTracker({
 	trackingLoading,
 	serialId,
@@ -34,7 +79,7 @@ function FtlTracker({
 		setValue,
 	} = useForm();
 
-	const { consentLoading, getTrackingConsent, consentData } =		useGetTrackingConsent({ mobileNumber });
+	const { consentLoading, getTrackingConsent, consentData } =	useGetTrackingConsent({ mobileNumber });
 
 	const { loading, updateService } = useUpdateFtlFreightServiceTracking();
 
@@ -69,39 +114,7 @@ function FtlTracker({
 		}
 	}, [startTruckTracker, servicesData, mobileNumber, setValue]);
 
-	const content = (
-		<div className={styles.Content}>
-			<InputController
-				control={control}
-				errors={errors}
-				name="mobile_number"
-				label="Enter Mobile Number for Tracking"
-				placeholder="Enter Mobile Number"
-				themeType="admin"
-			/>
-			<div className={styles.ButtonDiv}>
-				<Button
-					onClick={() => {
-						setStartTruckTracker(false);
-						reset();
-					}}
-					className="secondary md"
-					style={{ marginRight: 10 }}
-					disabled={loading}
-				>
-					Cancel
-				</Button>
-
-				<Button
-					disabled={loading}
-					onClick={handleSubmit(onSubmit)}
-					className="primary md"
-				>
-					Submit
-				</Button>
-			</div>
-		</div>
-	);
+	const content = Content({ control, errors, handleSubmit, onSubmit, setStartTruckTracker, reset, loading });
 
 	return (
 		<>
