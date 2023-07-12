@@ -1,15 +1,17 @@
 import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
-import Templates from '../../../../../common/Templates';
-import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
-import useSendUserWhatsappTemplate from '../../../../../hooks/useSendUserWhatsappTemplate';
+import useSendCommunicationTemplate from '../../hooks/useSendCommunicationTemplate';
+import useSendUserWhatsappTemplate from '../../hooks/useSendUserWhatsappTemplate';
+import ComposeEmail from '../ComposeEmail';
+import Templates from '../Templates';
 
-import ComposeEmail from './ComposeEmail';
 import styles from './styles.module.css';
 
+const TAKE_COUNTRY_CODE_TILL = 1;
+
 function CommunicationModal({
-	setModalType = () => {},
+	closeModal = () => {},
 	userData = {},
 	modalType = '',
 	activeCardData = {},
@@ -27,10 +29,6 @@ function CommunicationModal({
 	const {
 		whatsapp_country_code = '', whatsapp_number = '',
 	} = userData || {};
-
-	const closeModal = () => {
-		setModalType(null);
-	};
 
 	const {
 		sendUserWhatsappTemplate,
@@ -68,7 +66,7 @@ function CommunicationModal({
 		sendCommunicationTemplate: (args) => sendUserWhatsappTemplate(
 			{
 				...args,
-				country_code: whatsapp_country_code?.slice(1) || '91',
+				country_code: whatsapp_country_code?.slice(TAKE_COUNTRY_CODE_TILL) || '91',
 				whatsapp_number,
 			},
 		),

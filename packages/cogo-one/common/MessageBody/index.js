@@ -7,6 +7,7 @@ import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 import CustomFileDiv from './CustomFileDiv';
 import Order from './Order';
 import styles from './styles.module.css';
+import UserActivityMessages from './UserActivityMessages';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
@@ -116,6 +117,10 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 				</div>
 			</div>
 		);
+	}
+
+	if (message_type === 'event') {
+		return <UserActivityMessages />;
 	}
 
 	if (message_type === 'order') {

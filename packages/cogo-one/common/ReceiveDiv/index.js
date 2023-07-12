@@ -5,13 +5,12 @@ import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import MessageBody from '../MessageBody';
+import MessageBody from '../MessageBody';
 import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 import SuggestedActions from './SuggestedActions';
-import UserActivityMessages from './UserActivityMessages';
 
 function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
 	const triggerModal = () => {
@@ -83,14 +82,17 @@ function ReceiveDiv({
 					</Tooltip>
 				)}
 				<div className={styles.message_div}>
-					{/* <MessageBody
+					<MessageBody
 						response={response}
 						message_type={message_type}
-					/> */}
-					<UserActivityMessages />
+					/>
 				</div>
 			</div>
-			<SuggestedActions />
+
+			{message_type !== 'event' && (
+				<SuggestedActions formattedData={formattedData} />
+			)}
+
 			{message_type === 'order' && (
 				<div
 					className={styles.order_container}

@@ -2,19 +2,21 @@ import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import CommunicationModal from '../../../../../common/CommunicationModal';
 import OtherChannelsConfig from '../../../../../configurations/other-channels-config';
 import hideDetails from '../../../../../utils/hideDetails';
-import CommunicationModal from '../CommunicationModal';
 
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH_FOR_LOADER = 2;
+
 function ConversationContainer({
-	userData,
+	userData = {},
 	loading = false,
 	noData = false,
 	activeCardData = {},
 	activeMessageCard = {},
-	setActiveMessage,
+	setActiveMessage = () => {},
 	activeRoomLoading = false,
 }) {
 	const [modalType, setModalType] = useState(null);
@@ -22,8 +24,8 @@ function ConversationContainer({
 	const { business_name = '' } = user_details || {};
 	const showLoader = loading || activeRoomLoading;
 	if (showLoader) {
-		return ([...Array(2)].map(() => (
-			<div className={styles.container}>
+		return ([...Array(ARRAY_LENGTH_FOR_LOADER).keys()].map((item) => (
+			<div className={styles.container} key={item}>
 				<div className={styles.icon_type}>
 					<Placeholder type="circle" radius="30px" />
 				</div>
@@ -85,8 +87,7 @@ function ConversationContainer({
 							show && (
 								<div
 									key={name}
-									tabIndex={0}
-									role="button"
+									role="presentation"
 									className={styles.contacts_container}
 									onClick={() => onCardClick({ other_channel_type, id_name, has_existing_room })}
 								>

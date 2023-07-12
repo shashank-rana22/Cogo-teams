@@ -11,4 +11,10 @@
 .actions_button {
 	margin-right: 5px;
 	border-radius: 20px;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease;
+		transform: scale(0.9);
+	}
 }
