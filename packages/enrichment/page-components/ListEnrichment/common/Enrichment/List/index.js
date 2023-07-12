@@ -5,7 +5,7 @@ import EmptyState from '../../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function List({ columns, list, loading }) {
+function List({ columns = [], list = [], loading = false }) {
 	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.table_container}>

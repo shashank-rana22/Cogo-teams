@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
 import useDownloadEnrichmentCsv from '../../../hooks/useDownloadEnrichmentCsv';
@@ -15,9 +16,12 @@ function Header(props) {
 		searchValue,
 		setSearchValue,
 		setShowUpload,
+		partnerId = '',
 	} = props;
 
 	const { loading, onDownload } = useDownloadEnrichmentCsv();
+
+	const allowedToSeeButtons = partnerId !== GLOBAL_CONSTANTS.country_entity_ids.VN;
 
 	return (
 		<div className={styles.header}>
@@ -29,7 +33,7 @@ function Header(props) {
 				onChangeFilters={onChangeFilters}
 			/>
 
-			{activeTab === 'enrichment_requests' && (
+			{activeTab === 'enrichment_requests' && allowedToSeeButtons && (
 				<div className={styles.actions}>
 					<Button
 						size="lg"

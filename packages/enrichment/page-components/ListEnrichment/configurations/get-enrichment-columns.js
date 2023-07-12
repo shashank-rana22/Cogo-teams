@@ -12,6 +12,8 @@ const getEnrichmentColumns = ({
 	handleUploadClick = () => {},
 	setSelectedRowId = () => {},
 	selectedRowId = '',
+	onEnrichmentClick = () => {},
+	refetch = () => {},
 }) => [
 	{
 		id       : 'id',
@@ -161,6 +163,8 @@ const getEnrichmentColumns = ({
 			const onClickCta = (workflow) => {
 				if (workflow === 'view') {
 					handleUploadClick(id);
+				} else {
+					onEnrichmentClick({ id, workflow, refetch });
 				}
 			};
 

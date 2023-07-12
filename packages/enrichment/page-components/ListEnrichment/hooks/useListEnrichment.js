@@ -7,10 +7,14 @@ import { useState, useEffect } from 'react';
 import AUTH_KEY_MAPPING from '../../../constants/auth-key-mapping';
 import getEnrichmentColumns from '../configurations/get-enrichment-columns';
 
+import useMarkEnrichmentComplete from './useMarkEnrichmentComplete';
+
 const useListEnrichment = () => {
 	const router = useRouter();
 
 	const { profile, general } = useSelector((state) => state || {});
+
+	const { onEnrichmentClick = () => {} } = useMarkEnrichmentComplete();
 
 	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
 
@@ -92,11 +96,17 @@ const useListEnrichment = () => {
 		router.push(`/enrichment/[id]?tab=${activeTab}`, `/enrichment/${feedback_request_id}?tab=${activeTab}`);
 	};
 
-	const columns = getEnrichmentColumns({ handleUploadClick, selectedRowId, setSelectedRowId });
+	const columns = getEnrichmentColumns({
+		handleUploadClick,
+		selectedRowId,
+		setSelectedRowId,
+		onEnrichmentClick,
+		refetch,
+	});
 
 	return {
 		columns,
-		listRefetch:	refetch,
+		listRefetch :	refetch,
 		locale,
 		list,
 		paginationData,
@@ -112,7 +122,7 @@ const useListEnrichment = () => {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-		partner_id,
+		partnerId   : partner_id,
 		setApiName,
 	};
 };

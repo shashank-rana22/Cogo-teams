@@ -1,10 +1,14 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-import { ENRICHMENT_TABS_MAPPING } from '../../../../constants/tab-panel-mapping';
 import Enrichment from '../../common/Enrichment';
 import useRightPanel from '../../hooks/useRightPanel';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
+
+const ENRICHMENT_TABS_MAPPING = geo.navigations.enrichment.request_sent;
 
 function RightPanel(props) {
 	const {
@@ -20,6 +24,7 @@ function RightPanel(props) {
 		setSearchValue,
 		setApiName,
 		setParams = () => {},
+		partnerId = '',
 	} = props;
 
 	const {
@@ -49,6 +54,7 @@ function RightPanel(props) {
 							searchValue={searchValue}
 							setSearchValue={setSearchValue}
 							showStatistics={false}
+							partnerId={partnerId}
 						/>
 					</TabPanel>
 				))}

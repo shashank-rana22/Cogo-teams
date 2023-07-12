@@ -17,6 +17,7 @@ function ListEnrichment() {
 		activeTab,
 		setActiveTab,
 		globalFilters,
+		partnerId,
 		setGlobalFilters,
 		debounceQuery,
 		searchValue,
@@ -57,6 +58,7 @@ function ListEnrichment() {
 							setSearchValue={setSearchValue}
 							paginationData={paginationData}
 							setGlobalFilters={setGlobalFilters}
+							partnerId={partnerId}
 						/>
 					</TabPanel>
 
@@ -76,6 +78,7 @@ function ListEnrichment() {
 							setSearchValue={setSearchValue}
 							paginationData={paginationData}
 							setGlobalFilters={setGlobalFilters}
+							partnerId={partnerId}
 						/>
 					</TabPanel>
 				</Tabs>

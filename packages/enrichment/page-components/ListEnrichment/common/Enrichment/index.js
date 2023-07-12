@@ -22,6 +22,7 @@ function Enrichment(props) {
 		searchValue,
 		setSearchValue,
 		listRefetch = () => {},
+		partnerId = '',
 	} = props;
 
 	const { page = 1, total_count = 1, page_limit = 10 } = paginationData;
@@ -38,6 +39,7 @@ function Enrichment(props) {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				setShowUpload={setShowUpload}
+				partnerId={partnerId}
 			/>
 
 			{showStatistics && <Statistics />}
