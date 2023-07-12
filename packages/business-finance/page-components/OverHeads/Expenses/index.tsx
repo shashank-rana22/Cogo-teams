@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
@@ -68,6 +70,8 @@ function ExpenseComponent() {
 		createdDateSortBy     : null,
 		amountSortBy          : null,
 	});
+
+	const geo = getGeoConstants();
 
 	const { getList, listData, listLoading } = useListExpense({ expenseFilters, sort });
 	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
@@ -142,7 +146,7 @@ function ExpenseComponent() {
 			<div className={styles.right_container}>
 				<Input
 					size="md"
-					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
+					placeholder={`Search by Vendor Name/${startCase(geo.others.pan_number.label)}/Organization ID/Sage ID`}
 					suffix={<IcMSearchlight />}
 					value={expenseFilters.searchValue}
 					onChange={(e:any) => handleChange(e)}

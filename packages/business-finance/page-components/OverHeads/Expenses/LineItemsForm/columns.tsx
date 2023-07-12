@@ -11,7 +11,7 @@ const lineItemColumns = ({
 			Header   : 'Item',
 			id       : 'itemName',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '76px' }}>
+				<div style={{ width: '100px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -26,7 +26,7 @@ const lineItemColumns = ({
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '76px' }}>
+				<div style={{ width: '100px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -42,7 +42,7 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '90px' }}>
+				<div style={{ width: '100px' }}>
 					<SelectController
 						key={row?.id}
 						control={control}
@@ -58,7 +58,7 @@ const lineItemColumns = ({
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+				<div style={{ width: '100px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -68,14 +68,13 @@ const lineItemColumns = ({
 						value={lineItemsList[index]?.amount_after_tax}
 					/>
 				</div>
-			)
-			,
+			),
 		},
 		{
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '50px' }}>
+				<div style={{ width: '100px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -91,7 +90,7 @@ const lineItemColumns = ({
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+				<div style={{ width: '100px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"

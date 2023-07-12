@@ -1,4 +1,5 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import React, { useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
@@ -29,19 +30,20 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	});
 
 	useEffect(() => {
-		const taxList = [];
+		const TAX_LIST = [];
 		if (lineItemsList?.length > 0) {
 			lineItemsList.forEach((item) => {
-				taxList.push({
+				TAX_LIST.push({
 					label : `${item?.taxPercent}%-${item?.itemName}`,
 					value : JSON.stringify(item),
 				});
 			});
-			setTaxOptions([...taxList]);
+			setTaxOptions([...TAX_LIST]);
 		}
 	}, [lineItemsList, setTaxOptions]);
 
 	const watchFieldArray = watch('line_items');
+	const geo = getGeoConstants();
 	const controlledFields = fields.map((field:any, index:number) => ({
 		...field,
 		...watchFieldArray[index],
@@ -66,11 +68,15 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / 100));
 					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
 					const tds = +watch(`line_items.${index}.tds`);
-					if (tds >= 0) { setValue(`line_items.${index}.payable_amount`, +amountAfterTax - tds); }
+					if (geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds) {
+						setValue(`line_items.${index}.payable_amount`, +amountAfterTax);
+					} else if (!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds && tds >= 0) {
+						setValue(`line_items.${index}.payable_amount`, +amountAfterTax - tds);
+					}
 				}
 			}
 		});
-	}, [setFormData, setValue, watchFieldArray, watch, controlledFields?.length, stringifiedControlledFields]);
+	}, [setFormData, setValue, watchFieldArray, watch, controlledFields?.length, stringifiedControlledFields, geo]);
 
 	const getSum = (columnName:string) => {
 		const sum = watchFieldArray?.reduce((acc, curr) => {
@@ -106,19 +112,35 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 		}
 	}, [payableAmount, setFormData]);
 
+	const modifiedColumns = lineItemColumns({
+		remove,
+		control,
+		taxOptions,
+		formData,
+	}).map((column) => {
+		if (column.id === 'tds') {
+			return {
+				...column,
+				accessor: (row, index) => {
+					if (geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds) {
+						return null;
+					}
+					return column.accessor(row, index);
+				},
+			};
+		}
+		return column;
+	}).filter((column) => column.Header !== 'TDS');
+
 	return (
 		<div className={styles.section}>
 			<form className={styles.container}>
 				<StyledTable
-					columns={lineItemColumns({
-						remove, control, taxOptions, formData,
-					})}
+					columns={modifiedColumns}
 					data={controlledFields}
-					style={{ margin: '0px' }}
 					imageFind=""
 					{...rest}
 				/>
-
 				<TotalColumn
 					append={append}
 					totalAmountBeforeTax={totalAmountBeforeTax}

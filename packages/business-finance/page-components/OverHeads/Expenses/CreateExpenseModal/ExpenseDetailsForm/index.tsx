@@ -107,15 +107,16 @@ function ExpenseDetailsForm({
 	useEffect(() => {
 		// calling list_cogo_entities and setting entity options
 		if (entityList?.length > 0) {
-			const entities = [];
+			const ENTITIES = [];
 			(entityList || []).forEach((entity) => {
 				const { id, entity_code:entityCode, business_name:name } = entity || {};
-				entities.push({
+				ENTITIES.push({
+					...entity,
 					label : `${entityCode}-${name}`,
 					value : id,
 				});
 			});
-			setEntityOptions([...entities]);
+			setEntityOptions([...ENTITIES]);
 		}
 	}, [entityList, setEntityOptions]);
 
@@ -202,16 +203,16 @@ function ExpenseDetailsForm({
 		const branchIds = (obj?.services || []).map((service) => service?.cogoport_office_id);
 
 		if (branchIds?.length > 0) {
-			const branches = [];
+			const BRANCHES = [];
 
 			branchIds.forEach((id) => {
 				(officeLocations || []).forEach((location) => {
 					if (id === JSON.parse(location.value)?.branchId) {
-						branches.push(location);
+						BRANCHES.push(location);
 					}
 				});
 			});
-			setBranchOptions([...branches]);
+			setBranchOptions([...BRANCHES]);
 		}
 
 		setFormData((prev:object) => ({

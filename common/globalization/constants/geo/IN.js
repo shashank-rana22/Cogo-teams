@@ -561,6 +561,10 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : false,
+			expense_non_recurring_upload_invoice_tds : false,
+		},
 	},
 	others: {
 		registration_number: {
