@@ -8,8 +8,39 @@ import styles from './styles.module.css';
 function Header({
 	subject = '',
 	loading = false,
-	handlClick = () => {},
+	setButtonType = () => {},
+	setEmailState = () => {},
+	senderAddress = '',
+	recipientData = [],
+	ccData = [],
+	bccData = [],
 }) {
+	const handlClick = (val) => {
+		setButtonType(val);
+		let toUserEmail = [];
+		let ccrecipients = [];
+		let bccrecipients = [];
+
+		if (val === 'reply') {
+			toUserEmail = [senderAddress];
+		} else if (val === 'reply_all') {
+			toUserEmail = [senderAddress];
+			ccrecipients = [...recipientData, ...ccData];
+			bccrecipients = bccData;
+		}
+
+		setEmailState(
+			(prev) => ({
+				...prev,
+				subject,
+				body: '',
+				toUserEmail,
+				ccrecipients,
+				bccrecipients,
+			}),
+		);
+	};
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.header_subject}>

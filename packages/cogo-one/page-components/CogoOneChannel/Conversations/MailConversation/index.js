@@ -55,24 +55,17 @@ function MailConversation({ mailProps = {} }) {
 	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
 	const bccData = (bccRecipients || []).map((item) => item?.emailAddress?.address);
 
-	const handlClick = (val) => {
-		setButtonType(val);
-		setEmailState((prev) => ({
-			...prev,
-			subject,
-			body          : '',
-			toUserEmail   : val !== 'forward' ? [senderAddress] : [],
-			ccrecipients  : val !== 'forward' ? ccData : [],
-			bccrecipients : val !== 'forward' ? bccData : [],
-		}));
-	};
-
 	return (
 		<div className={styles.container}>
 			<Header
 				subject={subject}
 				loading={loading || attachmentLoading}
-				handlClick={handlClick}
+				setButtonType={setButtonType}
+				setEmailState={setEmailState}
+				senderAddress={senderAddress}
+				recipientData={recipientData}
+				ccData={ccData}
+				bccData={bccData}
 			/>
 
 			<EmailBodyStructure
