@@ -243,6 +243,7 @@ const GLOBAL_CONSTANTS = {
 		email_spam_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
 		spam_flag_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
 		email_inbox_icon   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
+		colored_loading    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

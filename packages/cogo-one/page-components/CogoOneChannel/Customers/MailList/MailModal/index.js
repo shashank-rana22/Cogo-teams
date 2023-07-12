@@ -1,5 +1,6 @@
 import { Toast, Modal, RTE, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
@@ -65,10 +66,21 @@ function MailModal({
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 
+		if (uploading) {
+			Toast.error('Files are uploading...');
+			return;
+		}
+
+		if (isEmpty(emailState?.toUserEmail)) {
+			Toast.error('To Mail is Required');
+			return;
+		}
+
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Requied');
 			return;
 		}
+
 		const payload = {
 			sender        : emailState?.from_mail || activeMailAddress,
 			toUserEmail   : emailState?.toUserEmail,

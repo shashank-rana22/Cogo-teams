@@ -62,6 +62,11 @@ function CustomFileUploader(props, ref) {
 		}
 	}, [multiple, urlStore, onChange]);
 
+	useEffect(() => {
+		handleProgress(loading);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
+
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({
 			...previousProgress,
