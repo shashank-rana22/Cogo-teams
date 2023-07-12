@@ -8,27 +8,25 @@ import VideoCallOptions from './VideoCallOptions';
 
 function VideoCallScreen(
 	{
-		setInACall = () => {},
 		setStreams = () => {},
 		stopStream = () => {},
 		callEnd = () => {},
 		setOptions = () => {},
 		options = {},
-		streams = {},
+		callUpdate = () => {},
 	},
 	ref,
 ) {
 	const tempRef = ref;
 	const USERNAME = 'Abhijit';
 
-	const { videoOn, micOn, shareScreen } = useVideocallOptions({
-		streams,
-		setInACall,
+	const { videoOn, micOn, shareScreen, stopCall } = useVideocallOptions({
 		options,
 		setOptions,
 		setStreams,
 		callEnd,
 		stopStream,
+		callUpdate,
 	});
 
 	return (
@@ -62,7 +60,7 @@ function VideoCallScreen(
 			</div>
 			<div className={styles.video_call_option}>
 				<VideoCallOptions
-					callEnd={callEnd}
+					stopCall={stopCall}
 					shareScreen={shareScreen}
 					options={options}
 					setOptions={setOptions}

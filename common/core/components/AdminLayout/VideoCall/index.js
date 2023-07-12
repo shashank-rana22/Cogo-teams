@@ -88,6 +88,8 @@ function VideoCall() {
 		}
 	};
 
+	console.log(inACall, 'inACall');
+
 	return (
 		<div>
 			<div className={styles.call_comming}>
@@ -123,14 +125,13 @@ function VideoCall() {
 					>
 						{streams && (
 							<VideoCallScreen
-								setInACall={setInACall}
-								streams={streams}
 								setStreams={setStreams}
 								ref={streamRef}
 								setOptions={setOptions}
 								options={options}
 								callEnd={callEnd}
 								stopStream={stopStream}
+								callUpdate={callUpdate}
 							/>
 						)}
 					</div>

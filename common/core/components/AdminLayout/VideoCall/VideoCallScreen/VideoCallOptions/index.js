@@ -11,7 +11,7 @@ import {
 } from '@cogoport/icons-react';
 
 function VideoCallOptions({
-	callEnd = () => {},
+	stopCall = () => {},
 	shareScreen = () => {},
 	options = null,
 	setOptions = () => {},
@@ -30,7 +30,7 @@ function VideoCallOptions({
 			<div role="presentation" onClick={shareScreen}>
 				{options?.isScreenShareActive ? <IcMStopShare /> : <IcMScreenShare />}
 			</div>
-			<div role="presentation" onClick={callEnd}>
+			<div role="presentation" onClick={stopCall}>
 				<IcMCall />
 			</div>
 			<div role="presentation" onClick={micOn}>

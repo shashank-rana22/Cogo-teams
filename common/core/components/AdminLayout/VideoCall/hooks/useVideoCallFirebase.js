@@ -116,6 +116,8 @@ function useVideoCallFirebase({
 	}, [inACall, callComming, setInACall, stopStream, setCallDetails, setCallComming]);
 
 	const callingTo = () => {
+		if (inACall) return;
+
 		navigator.mediaDevices
 			.getUserMedia({ video: false, audio: true })
 			.then((myStream) => {
@@ -159,16 +161,18 @@ function useVideoCallFirebase({
 
 		onSnapshot(videoCallCommingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
-				setCallDetails((prev) => ({
-					...prev,
-					peer_details    : val.data().peer_detils,
-					calling_details : val.data(),
-					calling_room_id : val.id,
-				}));
-				setCallComming(true);
+				if (!inACall) {
+					setCallDetails((prev) => ({
+						...prev,
+						peer_details    : val.data().peer_detils,
+						calling_details : val.data(),
+						calling_room_id : val.id,
+					}));
+					setCallComming(true);
+				}
 			});
 		});
-	}, [firestore, setCallComming, setCallDetails]);
+	}, [firestore, inACall, setCallComming, setCallDetails]);
 
 	useEffect(() => {
 		if (callDetails?.calling_room_id) {
@@ -187,6 +191,7 @@ function useVideoCallFirebase({
 				if (
 					room_data?.call_status
 					&& endCallStatus.includes(room_data?.call_status)
+					&& callDetails?.calling_room_id
 				) {
 					callEnd();
 				}

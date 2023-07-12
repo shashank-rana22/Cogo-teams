@@ -1,25 +1,11 @@
 function useVideocallOptions({
-	streams = {},
-	setInACall = () => {},
 	options = {},
 	setOptions = () => {},
 	setStreams = () => {},
+	callEnd = () => {},
+	stopStream = () => {},
+	callUpdate = () => {},
 }) {
-	const stopStream = (stream_type) => {
-		if (!streams[stream_type]) return;
-
-		const tracks = streams[stream_type].getTracks();
-		tracks.forEach((track) => {
-			track.stop();
-		});
-	};
-
-	const callEnd = () => {
-		setInACall(false);
-		stopStream('screen_stream');
-		stopStream('user_stream');
-	};
-
 	const shareScreen = () => {
 		if (options.isScreenShareActive) {
 			setOptions((prev) => ({ ...prev, isScreenShareActive: false }));
@@ -56,8 +42,12 @@ function useVideocallOptions({
 			});
 		setOptions((prev) => ({ ...prev, isVideoActive: !options.isVideoActive }));
 	};
+	const stopCall = () => {
+		callEnd();
+		callUpdate({ call_status: 'end_call' });
+	};
 
-	return { videoOn, micOn, shareScreen, callEnd };
+	return { videoOn, micOn, shareScreen, callEnd, stopCall };
 }
 
 export default useVideocallOptions;
