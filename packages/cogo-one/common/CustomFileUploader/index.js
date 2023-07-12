@@ -1,4 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
@@ -7,6 +8,9 @@ import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'rea
 import UPLOAD_VALIDATION_MAPPING from '../../constants/UPLOAD_VALIDATION_MAPPING';
 
 import styles from './styles.module.css';
+
+const FILE_NAME_IN_URL_SLICE_INDEX = -1;
+const PERCENT_FACTOR = 100;
 
 function CustomFileUploader(props, ref) {
 	const {
@@ -28,43 +32,42 @@ function CustomFileUploader(props, ref) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(-1).join(''),
+				fileName : defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
-			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+			const names = defaultValues.map((url) => ({
+				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+			}));
+			const urls = defaultValues.map((url) => ({
+				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				finalUrl : url,
+			}));
 
 			setFileName(names);
 			setUrlStore(urls);
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > 0]);
+	}, [!isEmpty(defaultValues)]);
 
 	useEffect(() => {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [urlStore]);
-
-	useEffect(() => {
-		handleProgress(loading);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [multiple, urlStore, onChange]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * 100) / total);
+				const percentCompleted = Math.floor((loaded * PERCENT_FACTOR) / total);
 
 				return percentCompleted;
 			})(),
@@ -93,7 +96,7 @@ function CustomFileUploader(props, ref) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[0];
+		const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
 		return finalUrl;
 	};
@@ -112,7 +115,7 @@ function CustomFileUploader(props, ref) {
 		try {
 			setLoading(true);
 
-			if (values.length > 0) {
+			if (values?.length) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
@@ -125,8 +128,12 @@ function CustomFileUploader(props, ref) {
 						return [...prev, ...allUrls];
 					});
 					setFileName((prev) => {
-						if (prev === null) return values;
-						return [...prev, ...values];
+						if (prev === null) { return values; }
+						let prevValue = [];
+
+						if (typeof prev !== 'object' || !Array.isArray(prev)) { prevValue = prev?.target?.value || []; }
+
+						return [...prevValue, ...values];
 					});
 				} else {
 					setUrlStore(allUrls);
@@ -142,7 +149,7 @@ function CustomFileUploader(props, ref) {
 
 	const handleDelete = (values) => {
 		setFileName(values);
-		const files = values.map((item) => item.name);
+		const files = Array.isArray(values) ? values?.map((item) => item.name) : [];
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};

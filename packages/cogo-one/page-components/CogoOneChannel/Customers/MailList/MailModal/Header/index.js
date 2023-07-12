@@ -8,11 +8,12 @@ import styles from './styles.module.css';
 function RenderHeader({
 	replyLoading = false,
 	handleSend = () => {},
-	uploading,
+	uploading = false,
 	setUploading = () => {},
 	setAttachments = () => {},
 	handleClose = () => {},
-	uploaderRef,
+	uploaderRef = {},
+	attachments = [],
 }) {
 	return (
 		<>
@@ -36,9 +37,8 @@ function RenderHeader({
 								}}
 							/>
 						)}
-						onChange={(val) => {
-							setAttachments(val);
-						}}
+						value={attachments}
+						onChange={setAttachments}
 						showProgress={false}
 						ref={uploaderRef}
 					/>

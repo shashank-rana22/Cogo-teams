@@ -14,8 +14,6 @@ import styles from './styles.module.css';
 function MailModal({
 	mailProps = {},
 	userId = '',
-	attachments = [],
-	setAttachments = () => {},
 	activeMail = {},
 	replyMailApi = () => {},
 	replyLoading = false,
@@ -35,6 +33,7 @@ function MailModal({
 	const [value, setValue] = useState('');
 	const [errorValue, setErrorValue] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [attachments, setAttachments] = useState([]);
 
 	const {
 		handleKeyPress = () => {},
@@ -101,6 +100,7 @@ function MailModal({
 					handleSend={handleSend}
 					setUploading={setUploading}
 					uploading={uploading}
+					attachments={attachments}
 					setAttachments={setAttachments}
 					handleClose={handleClose}
 					uploaderRef={uploaderRef}
