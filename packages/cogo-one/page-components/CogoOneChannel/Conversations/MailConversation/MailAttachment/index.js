@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useGetMailAttachment from '../../../../../hooks/useGetMailAttachment';
 import saveByteArray from '../../../../../utils/mailAttachment';
 import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 
@@ -45,12 +44,10 @@ function RenderTitle({ item = '', handleDownload = () => {} }) {
 }
 
 function MailAttachments({
-	activeMail = {},
-	emailAddress = '',
+	attachmentData = {},
+	loading = false,
 }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState(null);
-
-	const { attachmentData = {}, attachmentLoading } = useGetMailAttachment({ activeMail, emailAddress });
 
 	const allAttachements = attachmentData?.value || [];
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
@@ -62,7 +59,7 @@ function MailAttachments({
 
 	return (
 		<div className={styles.container}>
-			{attachmentLoading ? (
+			{loading ? (
 				<div className={styles.content}>
 					<Placeholder width="220px" height="18px" />
 				</div>

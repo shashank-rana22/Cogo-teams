@@ -104,6 +104,7 @@ function MailModal({
 					setAttachments={setAttachments}
 					handleClose={handleClose}
 					uploaderRef={uploaderRef}
+					buttonType={buttonType}
 				/>
 			)}
 			/>

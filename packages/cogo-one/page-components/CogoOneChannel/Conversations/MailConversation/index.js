@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import useGetMail from '../../../../hooks/useGetMail';
+import useGetMailAttachment from '../../../../hooks/useGetMailAttachment';
 
 import EmailBodyStructure from './EmailBodyStructure';
 import Header from './Header';
@@ -19,7 +20,15 @@ function MailConversation({ mailProps = {} }) {
 		activeMailAddress = '',
 	} = mailProps;
 
-	const { data = {}, loading } = useGetMail({ activeMail, emailAddress: activeMailAddress });
+	const {
+		data = {},
+		loading,
+	} = useGetMail({ activeMail, emailAddress: activeMailAddress });
+
+	const {
+		attachmentData = {},
+		attachmentLoading,
+	} = useGetMailAttachment({ activeMail, emailAddress: activeMailAddress });
 
 	const {
 		sentDateTime = '',
@@ -33,6 +42,13 @@ function MailConversation({ mailProps = {} }) {
 	} = data || {};
 
 	const { content = '' } = body || {};
+
+	const allAttachements = attachmentData?.value || [];
+
+	const newContent = allAttachements.reduce((prevCOntent, attachment) => prevCOntent.replaceAll(
+		`cid:${attachment.contentId}`,
+		`data:${attachment.contentType};base64,${attachment.contentBytes}`,
+	), content);
 
 	const senderAddress = sender?.emailAddress?.address;
 	const recipientData = (toRecipients || []).map((item) => item?.emailAddress?.address);
@@ -55,7 +71,7 @@ function MailConversation({ mailProps = {} }) {
 		<div className={styles.container}>
 			<Header
 				subject={subject}
-				loading={loading}
+				loading={loading || attachmentLoading}
 				handlClick={handlClick}
 			/>
 
@@ -64,11 +80,11 @@ function MailConversation({ mailProps = {} }) {
 				recipientData={recipientData}
 				ccData={ccData}
 				bccData={bccData}
-				loading={loading}
+				loading={loading || attachmentLoading}
 			/>
 
 			<div className={styles.message_div}>
-				{loading ? (
+				{(loading || attachmentLoading) ? (
 					<>
 						<div className={styles.time_stamp}>
 							<Placeholder width="80px" height="10px" />
@@ -101,11 +117,11 @@ function MailConversation({ mailProps = {} }) {
 							className={cl`${styles.receive_message_container}
 										${hasAttachments ? styles.receive_preview_div : ''}
 										`}
-							dangerouslySetInnerHTML={{ __html: content }}
+							dangerouslySetInnerHTML={{ __html: newContent }}
 						/>
 						<MailAttachments
-							activeMail={activeMail}
-							emailAddress={activeMailAddress}
+							attachmentData={attachmentData}
+							loading={loading || attachmentLoading}
 						/>
 					</>
 				)}
