@@ -123,7 +123,7 @@ function FormComponent({ data }) {
 			</div>
 
 			<div>
-				<EndComponent control={control} errors={errors} watch={watch} />
+				<EndComponent control={control} errors={errors} watch={watch} setValue={setValue} />
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>

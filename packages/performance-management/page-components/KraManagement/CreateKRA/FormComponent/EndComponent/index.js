@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import getElementController from '../../../../../configs/getElementController';
 import getControls from '../controls';
 
@@ -8,10 +10,15 @@ const removeTypeField = (element) => {
 	return rest;
 };
 
-function RenderFields({ control, errors, watch }) {
+function RenderFields({ control, errors, watch, setValue }) {
 	const controls = getControls({});
-
 	const watchOperationType = watch('operation_type');
+
+	useEffect(() => {
+		if (watchOperationType === 'manual') {
+			setValue('is_rating_schema_in_percentage', 'yes');
+		}
+	}, [setValue, watchOperationType]);
 
 	return (
 		<div className={styles.form}>
@@ -32,6 +39,10 @@ function RenderFields({ control, errors, watch }) {
 							if (name === 'is_target_achieved_manually' && watchOperationType !== 'manual') {
 								return null;
 							}
+
+							// if (watchOperationType === 'manual') {
+							// 	setValue('is_rating_schema_in_percentage', 'yes');
+							// }
 
 							return (
 								<div key={name} className={styles.form_container}>
@@ -69,10 +80,10 @@ function RenderFields({ control, errors, watch }) {
 	);
 }
 
-function EndComponent({ control, errors, watch }) {
+function EndComponent({ control, errors, watch, setValue }) {
 	return (
 		<div className={styles.render_form}>
-			<RenderFields control={control} errors={errors} watch={watch} />
+			<RenderFields control={control} errors={errors} watch={watch} setValue={setValue} />
 		</div>
 
 	);
