@@ -39,17 +39,27 @@ function ListItem({
 					</div>
 				</div>
 				<div>
+					<div className={styles.heading}>Price Type</div>
+					<div className={styles.sub_heading}>
+						{startCase(data?.price_type) || '-'}
+					</div>
+				</div>
+				<div>
+					<div className={styles.heading}>Operation Type</div>
+					<div className={styles.sub_heading}>
+						{startCase(data?.operation_type) || '-'}
+					</div>
+				</div>
+				<div>
 					<div className={styles.heading}>Buy Price</div>
 					<div className={styles.sub_heading}>{getBuyPrice(data) || '-'}</div>
 				</div>
-				{data?.source === 'flashed' && (
-					<div>
-						<div className={styles.heading}>Min. Price</div>
-						<div className={styles.sub_heading}>
-							{(data?.service?.is_minimum_price_shipment) ? 'Yes' : 'No'}
-						</div>
+				<div>
+					<div className={styles.heading}>Min. Price</div>
+					<div className={styles.sub_heading}>
+						{(data?.service?.is_minimum_price_rate) ? 'Yes' : 'No'}
 					</div>
-				)}
+				</div>
 				{(data?.rate_procurement_proof_url)
 				&& (data?.source === 'flashed')
 				&& (

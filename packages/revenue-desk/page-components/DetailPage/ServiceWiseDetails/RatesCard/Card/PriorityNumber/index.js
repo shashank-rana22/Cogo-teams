@@ -2,8 +2,8 @@ import { INCREMENT_BY_ONE, VALUE_ZERO } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-function PriorityNumber({ data, id, showPriority }) {
-	const searchObject = (data || []).find((obj) => obj?.rate_id === id);
+function PriorityNumber({ data, id, showPriority, validity_id }) {
+	const searchObject = (data || []).find((obj) => obj?.rate_id === id && obj?.validity_id === validity_id);
 
 	let priority;
 	if (searchObject) {
