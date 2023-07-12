@@ -32,6 +32,7 @@ const useListOrganizationUsers = () => {
 		getOrganizationUsers,
 		formattedOrgUsersList: formatOrganizationUsers({ data }),
 		openOrgAccordian,
+		setOpenOrgAccordian,
 	};
 };
 export default useListOrganizationUsers;

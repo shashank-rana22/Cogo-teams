@@ -78,11 +78,7 @@ function MessageList(messageProps) {
 		setAutoAssignChats,
 	});
 
-	const {
-		getOrganizationUsers,
-		formattedOrgUsersList,
-		openOrgAccordian,
-	} = useListOrganizationUsers();
+	const orgUserProps = useListOrganizationUsers();
 
 	const {
 		messagesList,
@@ -128,9 +124,7 @@ function MessageList(messageProps) {
 			viewType,
 		},
 		kamContacts: {
-			getOrganizationUsers,
-			formattedOrgUsersList,
-			openOrgAccordian,
+			...orgUserProps,
 		},
 		default: {
 			userId,

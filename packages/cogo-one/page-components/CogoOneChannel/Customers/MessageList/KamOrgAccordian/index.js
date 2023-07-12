@@ -1,23 +1,18 @@
 import KamUserContactCard from '../KamUserContactCard';
 
-function KamOrgAccordian({
-	getOrganizationUsers,
-	formattedOrgUsersList,
-	openOrgAccordian,
-	item,
-}) {
-	console.log(
-		'item',
-		item,
-		getOrganizationUsers,
-		formattedOrgUsersList,
-		openOrgAccordian,
-	);
+import styles from './styles.module.css';
+
+function KamOrgAccordian() {
 	return (
-		<div>
+		<div className={styles.container}>
 			<KamUserContactCard />
 		</div>
 	);
 }
-
+// 	{
+// 	getOrganizationUsers = () => {},
+// 	formattedOrgUsersList = [],
+// 	openOrgAccordian = false,
+// 	item = {},
+// }
 export default KamOrgAccordian;
