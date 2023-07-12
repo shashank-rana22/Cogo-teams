@@ -9406,7 +9406,11 @@ const partner = {
 		},
 	],
 	utm_parameters: [
-
+		{
+			api          : 'create_utm_link',
+			access_type  : 'private',
+			service_name : 'attribution',
+		},
 		{
 			api          : 'create_utm',
 			access_type  : 'private',
