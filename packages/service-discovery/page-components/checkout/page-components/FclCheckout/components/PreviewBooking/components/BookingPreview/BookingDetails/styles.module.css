@@ -1,0 +1,74 @@
+.container {
+	position: relative;
+	top: 0;
+	width: 100%;
+	margin-top: 12px;
+	background: #fbffff;
+	border: 1px solid #d7eaea;
+	border-radius: 8px;
+}
+
+.main_content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px 32px 40px;
+}
+
+.bottom_container {
+	position: absolute;
+	bottom: -20px;
+	width: 100%;
+}
+
+.bottom_content {
+	display: flex;
+	justify-content: space-between;
+	width: 96%;
+	padding: 10px 24px;
+	margin: auto;
+	background: #f5ffff;
+	border: 1px solid #d7eaea;
+	border-radius: 8px;
+}
+
+.quotation_expiry {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+}
+
+.validity_time {
+	margin-left: 12px;
+	font-weight: 600;
+	color: #ee3425;
+	text-align: center;
+	white-space: nowrap;
+
+	.hidden {
+		display: none;
+	}
+}
+
+.total_price {
+	display: flex;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+
+	svg {
+		fill: #ee3425;
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_button_container {
+			height: unset;
+			padding: unset !important;
+		}
+	}
+}

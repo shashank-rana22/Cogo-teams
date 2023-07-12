@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -10,13 +11,16 @@ import { QuoteLoader } from '../LoadingState';
 import AddLineItemModal from './components/AddLineItemModal';
 import ContainerDetails from './components/ContainerDetails';
 import ConvenienceDetails from './components/ConvenienceDetails';
+import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function BreakdownDetails({
-	rateDetails = {},
+	rateDetails = [],
 	setRateDetails = () => {},
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
@@ -32,29 +36,73 @@ function BreakdownDetails({
 		loading:getCheckoutLoading,
 		getCheckout,
 		shouldEditMargin,
+		checkout_id,
 	} = useContext(CheckoutContext);
 
 	const [addLineItemData, setAddLineItemData] = useState({});
-
-	useEffect(() => {
-		setConvenienceDetails({
-			convenience_rate: {
-				price    : convenience_line_item?.price,
-				currency : convenience_line_item?.currency,
-				unit     : convenience_line_item?.unit,
-			},
-		});
-	}, [convenience_line_item, setConvenienceDetails]);
-
-	if (getCheckoutLoading && isEmpty(rateDetails)) {
-		return <QuoteLoader />;
-	}
+	const [editLineItemData, setEditLineItemData] = useState({});
 
 	let total = 0;
 
 	const disableForm = source === 'preview_booking';
 
 	const { primary_service = '' } = detail || {};
+
+	useEffect(() => {
+		setRateDetails(Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
+			const { line_items = [] } = serviceData;
+
+			const updateLineItems = line_items.map((lineItem) => {
+				const filteredMargins = (lineItem?.margins || []).filter(
+					(m) => m.margin_type === 'demand',
+				);
+
+				if (filteredMargins?.length) {
+					const [margin] = filteredMargins;
+					let type = margin?.type;
+					let value = margin?.value || DEFAULT_VALUE;
+
+					if (type === 'percentage') {
+						type = 'absolute_total';
+						value = margin?.total_margin_value;
+					}
+					const prefillValues = {
+						type,
+						value,
+						currency : margin?.currency || lineItem?.currency,
+						code     : margin?.code,
+					};
+
+					return {
+						filteredMargins: prefillValues,
+						...lineItem,
+					};
+				}
+
+				const prefillValues = {
+					type     : 'absolute_unit',
+					value    : 0,
+					currency : lineItem?.currency,
+					code     : lineItem?.code,
+				};
+
+				return {
+					filteredMargins: prefillValues,
+					...lineItem,
+				};
+			});
+
+			return {
+				...rate?.services[key],
+				id         : key,
+				line_items : updateLineItems,
+			};
+		}));
+	}, [rate?.services, setRateDetails]);
+
+	if (getCheckoutLoading && isEmpty(rateDetails)) {
+		return <QuoteLoader />;
+	}
 
 	return (
 		<div>
@@ -146,21 +194,40 @@ function BreakdownDetails({
 						/>
 
 						{!disableForm ? (
-							<Button
-								size="md"
-								themeType="tertiary"
-								className={styles.add_line_item}
-								onClick={() => {
-									setShouldResetMargins(false);
-									setAddLineItemData({
-										index,
-										service_type : item?.service_type,
-										service_id   : item?.id,
-									});
-								}}
-							>
-								+ Add Line Item
-							</Button>
+							<div className={styles.button_container}>
+								<Button
+									size="md"
+									themeType="tertiary"
+									className={styles.add_line_item}
+									onClick={() => {
+										setShouldResetMargins(false);
+										setAddLineItemData({
+											index,
+											service_type : item?.service_type,
+											service_id   : item?.id,
+										});
+									}}
+								>
+									+ Add Line Item
+								</Button>
+
+								<Button
+									size="md"
+									themeType="tertiary"
+									className={styles.add_line_item}
+									onClick={() => {
+										setShouldResetMargins(false);
+										setEditLineItemData({
+											index,
+											service_type : item?.service_type,
+											service_id   : item?.id,
+										});
+									}}
+								>
+									Edit Line Item
+								</Button>
+							</div>
+
 						) : null}
 					</Accordion>
 				);
@@ -171,9 +238,20 @@ function BreakdownDetails({
 					<AddLineItemModal
 						addLineItemData={addLineItemData}
 						setAddLineItemData={setAddLineItemData}
-						getCheckout={getCheckout}
 						setRateDetails={setRateDetails}
-						rate={rate}
+						checkout_id={checkout_id}
+					/>
+				) : null}
+
+			{!isEmpty(editLineItemData)
+				? (
+					<EditLineItemModal
+						editLineItemData={editLineItemData}
+						setEditLineItemData={setEditLineItemData}
+						setRateDetails={setRateDetails}
+						checkout_id={checkout_id}
+						rateDetails={rateDetails}
+						detail={detail}
 					/>
 				) : null}
 

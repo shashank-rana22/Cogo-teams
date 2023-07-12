@@ -1,5 +1,4 @@
 import { useForm } from '@cogoport/forms';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
@@ -8,11 +7,7 @@ import getElementController from '../../../../forms/getElementController';
 import { getlineItemControls } from './getlineItemControls';
 import styles from './styles.module.css';
 
-function AddLineItem({ CHARGE_CODE_DATA, service_id }, ref) {
-	const { checkout_id } = useSelector(({ general }) => ({
-		checkout_id: general?.query?.checkout_id,
-	}));
-
+function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
 	const [unitOptions, setUnitOptions] = useState([]);
 
 	const { control, watch, handleSubmit, formState:{ errors } } = useForm();

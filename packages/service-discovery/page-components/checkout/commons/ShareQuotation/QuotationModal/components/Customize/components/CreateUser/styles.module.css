@@ -1,0 +1,47 @@
+.container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button_div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 32px;
+}
+
+.input_group {
+	margin-top: 4px;
+
+	:global {
+		.mobile_number {
+			margin-left: 10px;
+		}
+
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 14px !important;
+			font-weight: 500 !important;
+			color: #bfbfbf;
+		}
+	}
+}
+
+.form_group {
+	margin-bottom: 16px;
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 700;
+	color: #000;
+}

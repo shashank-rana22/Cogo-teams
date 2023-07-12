@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 60px;
+
+	:global {
+		.ui_select_input_control,
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+	}
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.input_group {
+	margin-top: 4px;
+}
+
+.form_group {
+	width: 50%;
+	padding: 12px;
+}
