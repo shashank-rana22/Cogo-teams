@@ -14,7 +14,7 @@ import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
 const isSelectable = (activeTab) => !['completed_shipment', 'cancelled_shipment'].includes(activeTab);
-const REALLOCATE_ELIGIBLE_PERSONS = [GLOBAL_CONSTANTS.uuid.super_admin_id, 
+const REALLOCATE_ELIGIBLE_PERSONS = [GLOBAL_CONSTANTS.uuid.super_admin_id,
 	GLOBAL_CONSTANTS.uuid.corporate_owner_id, GLOBAL_CONSTANTS.uuid.prod_process_owner];
 
 function ShipmentList({ loading = false, data = {} }) {
