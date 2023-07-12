@@ -6,6 +6,12 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+	transition: 0.2s;
+
+	&:hover {
+		scale: 1.02;
+		transition: 0.2s;
+	}
 }
 
 .ticket_container:nth-child(1) {

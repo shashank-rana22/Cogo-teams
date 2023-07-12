@@ -66,6 +66,16 @@
 	width: 25px;
 	height: 25px;
 	margin-bottom: 13px;
+	fill: #ee3425;
+	scale: 1.1;
+	transition: 0.2s;
+}
+
+.disabled_icon {
+	cursor: not-allowed;
+	fill: #ffa5ab;
+	transition: 0.1s;
+	scale: 0.85;
 }
 
 .emoji {
@@ -120,4 +130,21 @@
 .loader {
 	width: 25px;
 	height: 25px;
+
+	:global {
+		.ui_loader {
+			margin: 0;
+		}
+	}
+}
+
+.is_internal {
+	display: flex;
+	align-items: center;
+}
+
+.is_internal_info {
+	width: 16px;
+	height: 16px;
+	margin-bottom: -4px;
 }

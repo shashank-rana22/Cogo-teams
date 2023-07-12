@@ -1,13 +1,13 @@
-import { Checkbox, Textarea } from '@cogoport/components';
+import { Checkbox, Textarea, Tooltip, Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
+	IcMInfo,
 	IcMSend,
 	IcMAttach,
 	IcMCross,
 	IcMImage,
 	IcMPdf,
 } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useRef } from 'react';
 
@@ -24,14 +24,17 @@ function FooterChat({
 	file = '',
 	setFile = () => {},
 	uploading = false,
-	isInternal = false,
+	isInternal = true,
 	createLoading = false,
+	notifyCustomer = false,
 	setUploading = () => {},
 	setIsInternal = () => {},
 	handleSendComment = () => {},
 }) {
 	let fileName = '';
 	const chatRef = useRef(null);
+
+	const isMessageEmpty = isEmpty(message);
 
 	const handleProgress = (obj) => {
 		if (obj) {
@@ -79,11 +82,21 @@ function FooterChat({
 					)}
 				</div>
 			)}
-			<Checkbox
-				label="Send to internal user only"
-				checked={isInternal}
-				onChange={() => setIsInternal((prev) => !prev)}
-			/>
+			<div className={styles.is_internal}>
+				<Checkbox
+					label="Internal Activity"
+					checked={isInternal}
+					disabled={!notifyCustomer}
+					onChange={() => setIsInternal((prev) => !prev)}
+				/>
+				<Tooltip
+					content="This activity is for internal users only
+					and will not be visible on the chat screen of customer"
+					placement="top"
+				>
+					<IcMInfo className={styles.is_internal_info} />
+				</Tooltip>
+			</div>
 			<div className={styles.bot_footer}>
 				<CustomFileUploader
 					handleProgress={handleProgress}
@@ -107,20 +120,13 @@ function FooterChat({
 					value={message}
 				/>
 				<div className={styles.loader}>
-					{createLoading ? (
-						<Image
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg"
-							alt="load"
-							width={25}
-							height={25}
-						/>
-					)
+					{createLoading ? (<Loader themeType="primary" />)
 						: (
 							<IcMSend
-								className={styles.send_icon}
+								className={cl`${styles.send_icon} ${isMessageEmpty && styles.disabled_icon}`}
 								onClick={handleSendComment}
 								cursor="pointer"
-								fill="#EE3425"
+
 							/>
 						)}
 				</div>
