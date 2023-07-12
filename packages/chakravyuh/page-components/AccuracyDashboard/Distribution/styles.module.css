@@ -1,6 +1,91 @@
 .container {
 	height: 314px;
 	padding: 16px;
+	font-weight: 600;
 	background-color: #fff;
 	border-radius: 8px;
+}
+
+.pie_chart_container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+}
+
+.pie_chart_left_container {
+	width: 230px;
+	height: 230px;
+}
+
+.pie_chart_middle_container {
+	position: absolute;
+	top: 95px;
+	left: 85px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #828282;
+
+	.pie_center_text {
+		font-size: 12px;
+		font-weight: 400;
+	}
+
+	.pie_center_count {
+		font-size: 18px;
+		font-weight: 500;
+		color: #221f20;
+	}
+}
+
+.pie_chart_right_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 240px;
+	padding: 20px 0 20px 12px;
+	font-size: 12px;
+	color: #828282;
+	cursor: default;
+}
+
+.legend_row {
+	display: flex;
+	align-items: flex-end;
+	margin: 0 0 2px;
+}
+
+.legend_symbol {
+	width: 15px;
+	height: 15px;
+	background-color: #221f20;
+	border-radius: 50%;
+
+	&.supply_rates {
+		background-color: #63bec8;
+	}
+
+	&.predicted_rates {
+		background-color: #f9ae64;
+	}
+
+	&.supply_pred_rates {
+		background-color: #9ba0cb;
+	}
+}
+
+.legend_name {
+	margin: 0 0 0 4px;
+}
+
+.legend_rate {
+	margin: 0 0 0 4px;
+	color: #221f20;
+}
+
+.legend_percentage {
+	margin: 0 0 0 19px;
+	color: #f37166;
 }
