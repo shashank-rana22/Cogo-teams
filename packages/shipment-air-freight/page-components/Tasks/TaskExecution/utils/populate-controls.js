@@ -9,8 +9,9 @@ const populateControls = ({
 	controls,
 	getApisData,
 	task,
-	shipment_data,
+	primary_service,
 	mainAirFreight,
+	tradeType,
 }) => {
 	const finalControls = controls;
 
@@ -27,18 +28,18 @@ const populateControls = ({
 					finalControls[index].disabled =	!getApisData
 						?.list_platform_config_constants?.[GLOBAL_CONSTANTS.zeroth_index]
 						?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[
-							shipment_data?.airline_id
+							primary_service?.airline_id
 						];
 				}
-
 				finalControls[index].rules.validate = (value) => checkAWBValidation(value);
 			}
 		});
 		return finalControls;
 	}
+
 	if (
 		task.task === 'update_flight_details'
-		&& shipment_data?.trade_type === 'export'
+		&& tradeType === 'export'
 		&& getApisData?.get_shipment_air_movement_details?.list
 	) {
 		const values = (
@@ -73,7 +74,7 @@ const populateControls = ({
 				control.type === 'fieldArray'
 				&& control.document_type !== 'manifest_copy'
 			) {
-				finalControls[index].noDeleteButtonTill = shipment_data.bls_count || DEFAULT_BL_COUNT_VALUE;
+				finalControls[index].noDeleteButtonTill = primary_service?.bls_count || DEFAULT_BL_COUNT_VALUE;
 				finalControls[index].value = (
 					getApisData?.list_shipment_bl_details || []
 				)

@@ -8,23 +8,24 @@ export const firebaseConfig = {
 	appId             : process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const firestoreChatbotPath = '/customer_chat/platform_chat/rooms';
+const PLATFORM_CHAT = '/customer_chat/platform_chat/rooms';
 
-const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
+const WHATSAPP = '/customer_chat/whatsapp/rooms';
 
-const firestoreTelegramPath = '/customer_chat/telegram/rooms';
+const TELEGRAM = '/customer_chat/telegram/rooms';
 
-const firestoreZaloPath = '/customer_chat/zalo/rooms';
+const ZALO = '/customer_chat/zalo/rooms';
 
-const fireStoreShipmentReminderPath = '/customer_chat/shipment_reminder/agents';
+const AGENT_DATA = '/users';
 
-const cogoOneConstants = '/cogoone_constants';
+const COGOONE_CONSTANTS = '/cogoone_constants';
+
 export const FIRESTORE_PATH = {
-	whatsapp          : firestoreWhatsappPath,
-	platform_chat     : firestoreChatbotPath,
-	telegram          : firestoreTelegramPath,
-	zalo              : firestoreZaloPath,
-	shipment_reminder : fireStoreShipmentReminderPath,
-	cogoone_constants : cogoOneConstants,
+	whatsapp          : WHATSAPP,
+	platform_chat     : PLATFORM_CHAT,
+	telegram          : TELEGRAM,
+	zalo              : ZALO,
+	agent_data        : AGENT_DATA,
+	cogoone_constants : COGOONE_CONSTANTS,
 
 };

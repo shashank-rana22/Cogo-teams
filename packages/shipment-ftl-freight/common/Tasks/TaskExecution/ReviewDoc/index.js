@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateDocuments from '../../../../hooks/useUpdateDocuments';
+import getfileUrl from '../utils/getfileUrl';
 
 import styles from './styles.module.css';
 
@@ -34,7 +35,7 @@ function ReviewDoc({
 	let params = {};
 
 	if (!loading && list.list?.length) {
-		docData = list.list[0] || {};
+		docData = list?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 		params = {
 			id                  : docData.id,
 			pending_task_id     : task.id,
@@ -88,17 +89,6 @@ function ReviewDoc({
 		);
 	}
 
-	const getfileUrl = (url) => {
-		if (url?.includes('finalUrl')) {
-			const regex = /:finalUrl=>"([^"]*)"/;
-			const match = url.match(regex);
-
-			return match[1];
-		}
-
-		return url;
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_details}>
@@ -137,7 +127,7 @@ function ReviewDoc({
 				<div className={styles.file_view}>
 					<object
 						title="review_file"
-						data={getfileUrl(docData?.document_url)}
+						data={getfileUrl({ url: docData?.document_url })}
 						width="100%"
 						type="application/pdf"
 					/>
