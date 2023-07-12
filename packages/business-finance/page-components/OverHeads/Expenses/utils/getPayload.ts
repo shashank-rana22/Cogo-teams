@@ -53,12 +53,13 @@ const getPayload = ({
 	expenseType,
 	expenseConfigurationId,
 	remarks,
+	categoryName,
 }) => {
-	const lineItemsData = (lineItemsList || []).map((lineItem:any) => {
+	const lineItemsData = (lineItemsList || []).map((lineItem: any) => {
 		if (lineItem?.tax) {
-			const { code, serviceName, productCode } = JSON.parse(lineItem?.tax) || {};
+			const { code, serviceName, productCode } =				JSON.parse(lineItem?.tax) || {};
 
-			return ({
+			return {
 				unit                : '',
 				price               : lineItem?.amount_before_tax,
 				name                : lineItem?.itemName,
@@ -77,7 +78,7 @@ const getPayload = ({
 					tdsAmount  : lineItem?.tds,
 				},
 				createdBy: profile?.user?.id,
-			});
+			};
 		}
 		return null;
 	});
@@ -103,7 +104,12 @@ const getPayload = ({
 				serviceProviderType : 'vendor',
 				createdBy           : profile?.user?.id,
 				bill                : {
-					billDate           : formatDate(invoiceDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+					billDate: formatDate(
+						invoiceDate,
+						'yyyy-MM-dd hh:mm:ss',
+						{},
+						false,
+					),
 					remarks            : '',
 					ledgerExchangeRate : null,
 					billType           : 'EXPENSE',
@@ -118,27 +124,35 @@ const getPayload = ({
 					billDocumentUrl    : uploadedInvoice,
 					billNumber         : invoiceNumber,
 				},
-				sellerDetail: { // tradeParty
+				sellerDetail: {
+					// tradeParty
 					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode           : entityCodeTradeParty,
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
 					organizationSerialId : sidTradeParty,
-					isTaxApplicable      : isTaxApplicable === null ? true : isTaxApplicable,
-					isSez                : false,
-					organizationName     : nameTradeParty,
+					isTaxApplicable:
+						isTaxApplicable === null ? true : isTaxApplicable,
+					isSez            : false,
+					organizationName : nameTradeParty,
 					pincode,
-					address              : cityName,
+					address          : cityName,
 					cityName,
-					supplyAgent          : nameTradeParty,
-					zone                 : 'EAST',
-					countryName          : countryNameTradeParty,
-					countryCode          : countryCodeTradeParty,
-					countryId            : countryIdTradeParty,
-					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
-					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
-					tdsRate              : tdsTradeParty || 1,
-					bankDetail           : {
+					supplyAgent      : nameTradeParty,
+					zone             : 'EAST',
+					countryName      : countryNameTradeParty,
+					countryCode      : countryCodeTradeParty,
+					countryId        : countryIdTradeParty,
+					registrationNumber:
+						registrationType === 'pan'
+							? registrationNumberTradeParty
+							: null,
+					taxNumber:
+						registrationType === 'tax'
+							? registrationNumberTradeParty
+							: null,
+					tdsRate    : tdsTradeParty || 1,
+					bankDetail : {
 						bankName,
 						beneficiaryName: bankName,
 						ifscCode,
@@ -147,7 +161,8 @@ const getPayload = ({
 						collectionPartyId,
 					},
 				},
-				buyerDetails: { // cogo entity
+				buyerDetails: {
+					// cogo entity
 					entityCode,
 					organizationId          : id,
 					organizationSerialId    : serialId,
@@ -166,7 +181,8 @@ const getPayload = ({
 					corporateIdentityNumber : cin,
 					tdsRate                 : 0,
 				},
-				serviceProviderDetail: { // vendor
+				serviceProviderDetail: {
+					// vendor
 					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
@@ -197,6 +213,8 @@ const getPayload = ({
 			userName  : stakeholderName,
 		},
 		expenseType,
+		branchName,
+		categoryName,
 		branchId  : addressData?.branchId,
 		kycStatus : kycStatus?.toUpperCase(),
 		pan       : vendorRegistrationNumber,

@@ -29,6 +29,7 @@ interface Props {
 	entityOptions: object[];
 	setEntityOptions: (obj: any) => void;
 	handleVendorChange?: (obj: any) => void;
+	handleCategoryChange?: (obj: any, val: object) => void;
 }
 
 const getMontOptions = (minMonth) => {
@@ -46,6 +47,7 @@ export const nonRecurringExpenseDetails = ({
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
+	handleCategoryChange = () => {},
 }: Props) => {
 	const handleEntityChange = (e: number | string) => {
 		const entityData = entityList?.filter(
@@ -146,6 +148,7 @@ export const nonRecurringExpenseDetails = ({
 					valueKey    : 'id',
 					span        : 2.2,
 					className   : styles.select,
+					onChange    : (e, obj) => handleCategoryChange(e, obj),
 				},
 				{
 					name           : 'branch',

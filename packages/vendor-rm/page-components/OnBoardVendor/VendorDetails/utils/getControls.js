@@ -66,4 +66,16 @@ export const getControls = ({ country_id = '' }) => [
 		condition   : { type: ['city'] },
 		rules       : { required: 'City is Required' },
 	},
+	{
+		label       : 'Entity',
+		name        : 'cogo_entity_id',
+		type        : 'asyncSelect',
+		placeholder : 'Entity',
+		isClearable : true,
+		style       : { flexBasis: '30%' },
+		asyncKey    : 'list_cogo_entity',
+		valueKey    : 'id',
+		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
+		initialCall : true,
+	},
 ];
