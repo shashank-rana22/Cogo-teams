@@ -1,48 +1,51 @@
-.container{
-    display: flex;
-    flex-direction: column;
+.container {
+	display: flex;
+	flex-direction: column;
 
-    :global{
-        .ui_input_number_container{
-            max-width: 160px;
-        }
-        .ui_input_number_control{
-            width: 70%
-        }
-    }
+	:global {
+		.ui_input_number_container {
+			max-width: 160px;
+		}
+
+		.ui_input_number_control {
+			width: 70%;
+		}
+	}
 }
-.form_subgroup{
-    margin-bottom: 24px;
+
+.form_subgroup {
+	margin-bottom: 24px;
 }
-.heading{
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 12px;
+
+.heading {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: 600;
 }
-.label{
-    font-size: 14px;
-    font-weight: 600;
-    margin: 8px 0;
+
+.form_item_wrapper {
+	display: flex;
+	width: 100%;
 }
-.form_item_wrapper{
-    width: 100%;
-    display: flex;
+
+.form_item {
+	width: 40%;
+	margin-right: 32px;
 }
-.form_item{
-    width: 40%;
-    margin-right: 32px;
+
+.label {
+	margin-bottom: 8px;
+	font-size: 14px;
+	opacity: 0.6;
 }
-.label{
-    font-size: 14px;
-    opacity: 0.6;
-    margin-bottom: 8px;
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 12px;
 }
-.button_container{
-    margin-top: 12px;
-    display: flex;
-    align-item: center;
-    justify-content: flex-end;
-}
-.button{
-    margin-right: 20px;
+
+.button {
+	margin-right: 20px;
 }

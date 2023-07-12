@@ -1,12 +1,10 @@
-.container{
-   
-}
-.content{
+.content {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
 }
-.tooltip{
+
+.tooltip {
 	/* text-align: left;
 	word-break: keep-all; */
 }

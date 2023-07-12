@@ -1,13 +1,13 @@
 .container {
-    display: flex;
+	display: flex;
 	align-items: center;
-	margin: 12px 0px;
 	padding: 24px 40px;
+	margin: 12px 0;
 	border-radius: 4px;
 
 	&.edit_margin {
+		background: #fffbf8;
 		border: 1px solid #d0cddb;
-		background: #FFFBF8;
 	}
 
 	&.fcl {
@@ -17,39 +17,41 @@
 }
 
 .horizontal_line {
+	margin: 12px 20px 12px 0;
 	border: 0.5px solid #d0cddb;
-	margin: 12px 20px 12px 0px;
 }
 
 .header {
-    display: flex;
-	justify-content: space-between;
+	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	min-width: 16%;
 	margin-right: 12px;
-    min-width: 16%;
 }
 
 .timeline {
-    display: flex;
-	align-items: center;
 	position: relative;
-	margin-left: 4px;
+	display: flex;
+	align-items: center;
 	width: 100%;
+	margin-left: 4px;
 }
 
 .text {
-    font-size: 10px;
 	position: absolute;
-	white-space: nowrap;
 	margin-top: 36px;
+	font-size: 10px;
+	white-space: nowrap;
 
 	&.middle_ware {
-		margin-top: 0px;
+		margin-top: 0;
 	}
+
 	&.first_index {
 		margin-top: 44px;
 		margin-left: -12px;
 	}
+
 	&.last_index {
 		margin-top: 32px;
 		margin-left: -68px;
@@ -57,37 +59,38 @@
 }
 
 .vertical_line {
-    opacity: 0.4;
-	border-right: 1px solid #000000;
 	height: 32px;
+	border-right: 1px solid #000;
+	opacity: 0.4;
 }
 
 .line {
-    background: linear-gradient(
-		90deg,
-		#78c276 0%,
-		#88dc86 26.04%,
-		#e8eb48 51.04%,
-		#f8992a 75%,
-		#ff0000 100%
-	);
-	margin-top: 8px;
-	border-radius: 4px;
 	width: 100%;
 	height: 4px;
+	margin-top: 8px;
+	background:
+		linear-gradient(
+			90deg,
+			#78c276 0%,
+			#88dc86 26.04%,
+			#e8eb48 51.04%,
+			#f8992a 75%,
+			#f00 100%
+		);
+	border-radius: 4px;
 }
 
 .vertical_line_array {
-    display: flex;
 	position: absolute;
 	left: 0;
+	display: flex;
 	width: 100%;
 
 	.content {
 		flex: 1;
-		text-align: center;
 		height: 32px;
-		border-right: 1px solid rgb(0, 0, 0, 0.4);
+		text-align: center;
+		border-right: 1px solid rgb(0 0 0 / 40%);
 
 		@media (max-width: 768px) {
 			flex-direction: column;
@@ -95,14 +98,14 @@
 	}
 
 	.milestone {
+		margin-top: 8px;
+		margin-right: -24px;
 		font-size: 10px;
 		text-align: none;
 		text-align: end;
-		margin-right: -24px;
-		margin-top: 8px;
 	}
 }
 
 .condition {
-    font-size: 10px;
+	font-size: 10px;
 }

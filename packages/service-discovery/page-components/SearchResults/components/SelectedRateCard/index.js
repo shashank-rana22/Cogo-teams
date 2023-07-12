@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import React from 'react';
 
 import AdditionalServices from '../AdditionalServices';
@@ -8,6 +9,10 @@ import FclCard from '../RateCard/FclCard';
 import ServiceBundling from '../ServiceBundling';
 
 import styles from './styles.module.css';
+
+const ZERO_VALUE = 0;
+
+const CargoInsuranceContainer = dynamic(() => import('../CargoInsuranceContainer'), { ssr: false });
 
 const RateCardMapping = {
 	fcl_freight: {
@@ -66,6 +71,7 @@ function SelectedRateCard({
 					<div className={styles.service_bundling}>
 						<ServiceBundling />
 					</div>
+
 					<div className={styles.additionalServices}>
 						<AdditionalServices
 							rateCardData={rateCardData}
@@ -74,12 +80,19 @@ function SelectedRateCard({
 							refetchSearch={refetchSearch}
 						/>
 
+						<CargoInsuranceContainer
+							data={detail}
+							refetch={refetchSearch}
+							primary_service={PrimaryService}
+							card_id={rateCardData?.card}
+						/>
+
 						<div className={styles.proceedContainer}>
 							<div>
 								Total landed Cost:
 								<span style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
 									{formatAmount({
-										amount   : total_price_discounted || 0,
+										amount   : total_price_discounted || ZERO_VALUE,
 										currency : total_price_currency,
 										options  : {
 											style                 : 'currency',

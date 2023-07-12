@@ -1,11 +1,11 @@
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.back_button{
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.back_button {
+	display: flex;
+	gap: 20px;
+	align-items: center;
 }

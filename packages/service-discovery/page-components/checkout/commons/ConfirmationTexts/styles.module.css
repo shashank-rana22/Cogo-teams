@@ -1,8 +1,8 @@
 .container {
-    display: flex;
+	display: flex;
 	justify-content: space-between;
 	padding: 12px;
-    margin-top: 20px;
+	margin-top: 20px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -11,18 +11,18 @@
 }
 
 .text_div {
-    display: flex;
+	display: flex;
 }
 
 .tick_icon {
-    width: 20px;
+	width: 20px;
 	height: 20px;
 	margin-right: 4px;
 }
 
 .text {
-    font-weight: 600;
 	font-size: 12px;
+	font-weight: 600;
 	color: #2c3e50;
 
 	&.detention_demurrage {
@@ -32,56 +32,56 @@
 }
 
 .inner_text {
-    display: flex;
+	display: flex;
 	align-items: center;
-	font-weight: 400;
 	font-size: 12px;
+	font-weight: 400;
 	color: #2c3e50;
 	opacity: 0.8;
 }
 
 .progress_div {
-    display: flex;
+	display: flex;
 	align-items: center;
 }
 
 .progress_percent {
-    display: flex;
+	display: flex;
 	align-items: center;
-	font-weight: 500;
+	margin-right: 4px;
 	font-size: 12px;
+	font-weight: 500;
 	line-height: 14px;
 	color: #67c676;
-	margin-right: 4px;
 }
 
 .info_icon {
-    margin-left: 4px;
+	margin-left: 4px;
 }
 
 .progress_bar {
-    border-radius: 10px;
-	background-color: #e4e1e8;
-	width: 100px;
 	position: relative;
+	width: 100px;
 	height: 8px;
+	background-color: #e4e1e8;
+	border-radius: 10px;
 
 	span {
 		position: absolute;
-		border-radius: 10px;
 		top: 0;
 		left: 0;
-		background-color: #67c676;
 		height: 8px;
+		background-color: #67c676;
+		border-radius: 10px;
 	}
 }
 
 .info {
-    font-size: 12px;
 	margin: 8px 40px;
+	font-size: 12px;
 }
 
 .bold_text {
-    font-weight: 700;
-    font-size: 14px;
+	font-size: 14px;
+	font-weight: 700;
 }

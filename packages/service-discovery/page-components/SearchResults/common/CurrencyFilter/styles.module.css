@@ -1,15 +1,15 @@
-.container{
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+.container {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
 
-    :global {
-        .ui_select_container {
-            width: 90px;
-        }
+	:global {
+		.ui_select_container {
+			width: 90px;
+		}
 
-        .ui_input_container {
-            width: 90px;
-        }
-    }
+		.ui_input_container {
+			width: 90px;
+		}
+	}
 }

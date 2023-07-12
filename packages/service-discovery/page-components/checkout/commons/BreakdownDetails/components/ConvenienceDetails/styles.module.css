@@ -1,45 +1,45 @@
 .item_container {
-    display: flex;
-    justify-content: flex-end;
-    margin: 8px 0px;
+	display: flex;
+	justify-content: flex-end;
+	margin: 8px 0;
 }
 
 .convenience_container {
-    width: 36%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 36%;
 }
 
 .amount {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 .text {
-    color: #000;
-    font-weight: 400;
+	font-weight: 400;
+	color: #000;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid #E2E2E2;
-    border-bottom: 1px solid #E2E2E2;
-    margin: 28px 20px;
-    padding: 28px 40px;
+	display: flex;
+	flex-direction: column;
+	padding: 28px 40px;
+	margin: 28px 20px;
+	border-top: 1px solid #e2e2e2;
+	border-bottom: 1px solid #e2e2e2;
 }
 
 .select_container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    :global {
-        .ui_select_container {
-            width: 92px;
-        }
+	:global {
+		.ui_select_container {
+			width: 92px;
+		}
 
-        .ui_input_container {
-            width: 92px;
-        }
-    }
+		.ui_input_container {
+			width: 92px;
+		}
+	}
 }

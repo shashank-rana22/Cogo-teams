@@ -1,25 +1,27 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  border-bottom: 1px solid #f7f7f0;
-  background: #fefefb;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px;
+	background: #fefefb;
+	border-bottom: 1px solid #f7f7f0;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
+
 .count {
-  font-size: 24px;
-  color: #000;
+	font-size: 24px;
+	color: #000;
 }
-.filters_container {
-  display: flex;
-  align-items: center;
 
-  @media (max-width: 768px) {
-    margin-top: 12px;
-  }
+.filters_container {
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 768px) {
+		margin-top: 12px;
+	}
 }

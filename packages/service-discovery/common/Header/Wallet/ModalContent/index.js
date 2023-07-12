@@ -11,7 +11,7 @@ const ZERO_VALUE = 0;
 function ModalContent({
 	data = {},
 	organization_id = '',
-	service,
+	service = '',
 	onClose = () => {},
 	formProps = {},
 }) {

@@ -1,33 +1,34 @@
-.container{
-    padding: 20px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	background: white;
 }
 
-.line_div{
-    display: flex;
+.line_div {
+	display: flex;
 }
 
-.pills{
-    border-radius: 24px;
-    border: 1px solid #ECECEC;
-    background: #F2F3FA;
-    height: 30px;
-    padding: 6px;
-    margin-right: 8px;
+.pills {
+	height: 30px;
+	padding: 6px;
+	margin-right: 8px;
+	background: #f2f3fa;
+	border: 1px solid #ececec;
+	border-radius: 24px;
 }
 
-.traders_line{
-    margin-left: 20px;
+.traders_line {
+	margin-left: 20px;
 }
 
-.button_wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
-.button{
-    margin-right: 12px;
+
+.button {
+	margin-right: 12px;
 }

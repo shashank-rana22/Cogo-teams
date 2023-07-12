@@ -10,7 +10,14 @@ const DEFAULT_SPAN = 12;
 const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 
-function Form({ controls, control, errors, watch, handleSubmit, setValue }) {
+function Form({
+	controls = [],
+	control,
+	errors = {},
+	watch = () => {},
+	handleSubmit = () => {},
+	setValue = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
@@ -63,7 +70,7 @@ function Form({ controls, control, errors, watch, handleSubmit, setValue }) {
 
 						{errors[name] && (
 							<div className={styles.error_message}>
-								{errorMessage}
+								{errorMessage || 'This is required'}
 							</div>
 						)}
 					</div>

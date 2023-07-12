@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
@@ -110,7 +111,7 @@ const useGetSpotSearch = () => {
 		getSearch({ firstScreen: 'listRateCard' });
 	}, [getSearch]);
 
-	const refetch = async ({ screenObj = {} }) => {
+	const refetch = async ({ screenObj = {} } = {}) => {
 		const res = await trigger({
 			params: {
 				id     : spot_search_id,
@@ -119,10 +120,12 @@ const useGetSpotSearch = () => {
 			},
 		});
 
-		setScreen(screenObj.screen || 'listRateCard');
+		setScreen(screenObj?.screen || 'listRateCard');
 
-		if (screenObj.screen === 'selectedCard') {
-			setSelectedCard(res.data.rates.filter((item) => item.card === screenObj?.card_id)?.[0]);
+		if (screenObj?.screen === 'selectedCard') {
+			setSelectedCard(res.data.rates.filter(
+				(item) => item.card === screenObj?.card_id,
+			)?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	};
 

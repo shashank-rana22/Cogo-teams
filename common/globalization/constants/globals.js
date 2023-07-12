@@ -30,6 +30,9 @@ const GLOBAL_CONSTANTS = {
 		SGD : '$',
 
 	},
+	cargo_insurance: {
+		IN: ['fcl_freight', 'air_freight', 'lcl_freight'],
+	},
 	formats: {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',

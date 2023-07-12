@@ -1,11 +1,11 @@
 .container {
-    display: flex;
-	justify-content: center;
+	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
 .input_item {
-    & input {
+	& input {
 		text-align: center;
 	}
 }

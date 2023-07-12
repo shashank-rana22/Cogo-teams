@@ -1,10 +1,10 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 12px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 12px;
 }
 
 .per_container_value {
-    font-size: 10px;
+	font-size: 10px;
 	color: #ee3425;
 }

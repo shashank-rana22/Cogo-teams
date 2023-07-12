@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
+// eslint-disable-next-line max-len
 import AdditionalServicesForm from '../../page-components/SearchResults/components/AdditionalServices/AdditionalServicesForm';
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
 
@@ -14,7 +15,7 @@ import Wallet from './Wallet';
 const SUB_HEADER_COMPONENT_MAPPING = {
 	edit_details                : EditDetailsHeader,
 	additional_services_details : AdditionalServicesForm,
-	default                     : null,
+	default                     : {},
 };
 
 function Header({

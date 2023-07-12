@@ -1,0 +1,14 @@
+.row_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.currency_code {
+	width: 40%;
+}
+
+.price_number {
+	width: 59%;
+}

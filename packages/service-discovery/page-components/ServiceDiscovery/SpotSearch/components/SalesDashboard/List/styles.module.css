@@ -1,16 +1,19 @@
-.container{
-    display: flex;
-    flex-direction: column;
+.container {
+	display: flex;
+	flex-direction: column;
 }
-.header_wrapper{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+.header_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
-.stats_container{
-    display: flex;
+
+.stats_container {
+	display: flex;
 }
-.table{
-    margin-top: 30px;
+
+.table {
+	margin-top: 30px;
 }

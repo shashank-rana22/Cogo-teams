@@ -1,51 +1,54 @@
-.container{
-    :global{
-        .ui_popover_container{
-            min-width: 250px;
+.container {
+	:global {
+		.ui_popover_container {
+			min-width: 250px;
 
-            .ui_select_toggle_button{
-                min-width: 250px;
-            }
-        }
-        
-    }
+			.ui_select_toggle_button {
+				min-width: 250px;
+			}
+		}
+	}
 }
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid #000;
-    margin-bottom: 16px
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 0;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #000;
 }
-.heading{
-    font-size: 18px;
-    font-weight: 600;
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
 }
-.button_container{
-    display: flex;
-    align-items: center;
+
+.button_container {
+	display: flex;
+	align-items: center;
 }
-.form{
-    
+
+.button {
+	position: relative;
+	gap: 8px;
 }
-.button{
-    position: relative;
-    gap: 8px
+
+.form_item {
+	display: flex;
+	flex-direction: column;
 }
-.form_item{
-    display: flex;
-    flex-direction: column;
+
+.label {
+	margin-bottom: 12px;
 }
-.label{
-    margin-bottom: 12px;
-}
-.red_dot{
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background: #ee3425;
-    position: absolute;
-    right: 56%;
-    top: 12%;
+
+.red_dot {
+	position: absolute;
+	top: 12%;
+	right: 56%;
+	width: 12px;
+	height: 12px;
+	background: #ee3425;
+	border-radius: 50%;
 }

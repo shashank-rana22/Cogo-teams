@@ -8,7 +8,7 @@ import useCreateContract from '../../hooks/useCreateContract';
 import createContracts from './controls';
 import CreateContractModal from './CreateContractModal';
 import PortSelect from './CreateContractModal/PortSelect';
-import styles from './styles.module.css'; // Import CSS module
+import styles from './styles.module.css';
 
 function CreateContract({
 	data = {},
@@ -51,12 +51,19 @@ function CreateContract({
 			className={`${styles.modalWrapper} ${showContract ? 'show' : ''}`}
 
 		>
-			<Modal show={showContract} onClose={setShowContract} placement="top" size="lg">
+			<Modal
+				show={showContract}
+				onClose={() => setShowContract(false)}
+				placement="top"
+				size="lg"
+				className={styles.modal}
+			>
 				<Modal.Header title={(
-					<div>
-						Request Contract
-						<div>Note: Rate will be locked for basic freights only.</div>
-						<PortSelect portDetail={details} />
+					<div className={styles.header_container}>
+						<div className={styles.heading}>Request Contract</div>
+						<div className={styles.sub_heading}>Note: Rate will be locked for basic freights only.</div>
+						<PortSelect portDetail={details} contractData={contractData} />
+
 					</div>
 				)}
 				>

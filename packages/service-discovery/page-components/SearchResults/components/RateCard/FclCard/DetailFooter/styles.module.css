@@ -1,72 +1,71 @@
-
-.container{
-    display: flex;
-    padding: 8px;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #F2F3FA;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+	background-color: #f2f3fa;
 }
 
-.containerDetails{
-    padding: 16px 0px 8px 24px;
-  
-    :global {
+.containerDetails {
+	padding: 16px 0 8px 24px;
+
+	:global {
 		.ui_tab_container {
-			 padding: 0px 4px 8px 4px ;
-             font-size: 12px;
+			padding: 0 4px 8px;
+			font-size: 12px;
 		}
 
 		.ui_tab_active.ui_ps_themeType_main_tabs {
 			margin: 0;
 			background-color: #fdebe9;
-			border-bottom: 3px solid #EE3425;
+			border-bottom: 3px solid #ee3425;
 			transition: all 0.1s;
 		}
 	}
 }
 
-.dndDetails{
-    font-size: 10px;
-    display: flex;
-    align-items: center;
+.dndDetails {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
 }
 
-.tag{
-    border-radius: 4px;
-    background: #CFEAED;
-    padding: 2px 4px 2px 4px;
-    margin-left: 20px;
-    margin-right: 8px;
+.tag {
+	padding: 2px 4px;
+	margin-right: 8px;
+	margin-left: 20px;
+	background: #cfeaed;
+	border-radius: 4px;
 }
 
-.plusIcon{
-    height: 20px;
-    width: 20px;
-    margin-left: 8px;
+.plusIcon {
+	width: 20px;
+	height: 20px;
+	margin-left: 8px;
 }
 
-.otherDetails{
-    width: 40%;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.wrapper{
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.otherDetails {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 40%;
+	font-size: 10px;
 }
 
-.otherDetailsTag{
-    color: #E47200;
-    font-size: 11px;
-    font-weight: 500;
-    cursor: pointer;
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 60%;
 }
 
-.tabs_style{
-    padding-bottom: 8px;
+.otherDetailsTag {
+	font-size: 11px;
+	font-weight: 500;
+	color: #e47200;
+	cursor: pointer;
 }
 
+.tabs_style {
+	padding-bottom: 8px;
+}

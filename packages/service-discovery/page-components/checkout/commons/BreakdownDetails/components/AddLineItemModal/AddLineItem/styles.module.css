@@ -1,10 +1,11 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 60px;
 
 	:global {
-		.ui_select_input_control,.ui_input_control {
+		.ui_select_input_control,
+		.ui_input_control {
 			font-size: 14px !important;
 		}
 	}
@@ -17,9 +18,9 @@
 }
 
 .label {
+	font-size: 12px;
 	font-weight: 400;
 	color: #4f4f4f;
-	font-size: 12px;
 }
 
 .input_group {
@@ -27,6 +28,6 @@
 }
 
 .form_group {
-    width: 50%;
-    padding: 12px;
+	width: 50%;
+	padding: 12px;
 }

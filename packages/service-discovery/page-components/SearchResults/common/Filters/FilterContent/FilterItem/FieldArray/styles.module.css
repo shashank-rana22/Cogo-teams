@@ -36,17 +36,17 @@
 }
 
 .add_button {
-	margin-bottom: 12px;
 	display: flex;
 	align-items: center;
+	margin-bottom: 12px;
 }
 
 .remove_icon {
 	width: 20px;
 	height: 20px;
+	margin-bottom: 20px;
 	margin-left: 4px;
 	cursor: pointer;
-	margin-bottom: 20px;
 }
 
 .flex_container {
@@ -62,6 +62,7 @@
 .form_item {
 	display: flex;
 	flex-direction: column;
+
 	/* width: 100%; */
 	margin-bottom: 24px;
 
@@ -78,7 +79,7 @@
 			border-radius: 4px;
 		}
 
-		.ui_chips_container{
+		.ui_chips_container {
 			flex-wrap: wrap;
 		}
 	}
@@ -87,11 +88,13 @@
 .content {
 	display: flex;
 	flex-wrap: wrap;
+
 	/* align-items: last baseline;
 	justify-content: last baseline; */
 	justify-content: space-between;
 }
-.sub_label{
+
+.sub_label {
 	margin-top: 12px;
 	font-size: 12px;
 	font-weight: 600;
@@ -100,8 +103,8 @@
 }
 
 .error_message {
-	font-size: 12px;
 	margin-top: 8px;
+	font-size: 12px;
 	color: #e42525;
 }
 
@@ -111,13 +114,15 @@
 	align-items: flex-end;
 	width: 100%; */
 }
-.add_icon{
+
+.add_icon {
 	margin-right: 12px;
-	border-radius: 50%;
 	background: #fff;
-	border: 1px solid #221F20;
+	border: 1px solid #221f20;
+	border-radius: 50%;
 }
-.required_mark{
-	color: #e74c3c;
+
+.required_mark {
 	margin-left: 4px;
+	color: #e74c3c;
 }

@@ -11,6 +11,7 @@ import {
 	MultiselectController,
 	InputNumberController,
 	CheckboxGroupController,
+	PriceSelectController,
 } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
@@ -28,7 +29,7 @@ const CONTROLLER_MAPPING = {
 	text             : InputController,
 	number           : InputNumberController,
 	pills            : ChipsController,
-
+	'price-select'   : PriceSelectController,
 };
 
 const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type] || InputController;

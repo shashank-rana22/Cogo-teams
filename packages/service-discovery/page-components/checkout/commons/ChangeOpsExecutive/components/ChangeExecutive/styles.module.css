@@ -1,93 +1,93 @@
 .main_container {
-    display: flex;
+	display: flex;
 	flex-direction: column;
 	width: 100%;
+	padding: 0 20px;
 	margin-bottom: 24px;
-	padding: 0 20px 0;
 }
 
 .container {
-    background: #f9f9f9;
-	border-radius: 4px;
-	padding: 8px 16px;
 	display: flex;
 	flex-direction: column;
-	margin: 24px 0 8px 0;
 	width: 100%;
+	padding: 8px 16px;
+	margin: 24px 0 8px;
+	background: #f9f9f9;
+	border-radius: 4px;
 }
 
 .header {
-    font-weight: 500;
-	color: #828282;
 	margin-bottom: 8px;
+	font-weight: 500;
+	color: #828282;
 }
 
 .content {
-    display: flex;
+	display: flex;
 	flex-wrap: wrap;
 }
 
 .sub_container {
-    display: flex;
+	display: flex;
 	width: 50%;
 	margin-bottom: 4px;
 }
 
 .label_text {
-	font-weight: 600;
 	font-size: 10px;
-	color: #333333;
+	font-weight: 600;
+	color: #333;
 }
 
 .value_text {
-	font-size: 10px;
-	color: #333333;
 	margin: 0 8px;
+	font-size: 10px;
+	color: #333;
 }
 
 .layout_container {
-    display: flex;
+	display: flex;
 	align-items: flex-end;
 	width: 100%;
 
-    :global {
-        .ui_radiogroup_container {
-            flex-direction: column;
-            font-size: 12px;
-            color: #2d3d4f;
-            width: 100%;
-            padding: unset;
-        }
+	:global {
+		.ui_radiogroup_container {
+			flex-direction: column;
+			width: 100%;
+			padding: unset;
+			font-size: 12px;
+			color: #2d3d4f;
+		}
 
-        .ui_radio_container {
-            border-bottom: 1px solid #e0e0e0;
-            padding: 12px;
-            background: #f6f5fe;
-        }
-    }
+		.ui_radio_container {
+			padding: 12px;
+			background: #f6f5fe;
+			border-bottom: 1px solid #e0e0e0;
+		}
+	}
 }
 
 .heading {
-    font-weight: 500;
+	margin: 16px 0 4px;
 	font-size: 12px;
+	font-weight: 500;
 	color: #4f4f4f;
-	margin: 16px 0 4px 0;
 }
 
 .footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
 	padding: 14px 0 0 14px;
 	margin-top: 24px;
 	border-top: 1px solid #cddbff;
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
-	align-items: center;
 }
 
 .actions_container {
-	margin-bottom: 16px;
 	display: flex;
 	width: 100%;
+	margin-bottom: 16px;
 }
 
 .search_by_name_email_input_container {
@@ -98,7 +98,6 @@
 .add_new_user_button_container {
 	flex: 0 0 auto;
 }
-
 
 .spinner_container {
 	display: flex;

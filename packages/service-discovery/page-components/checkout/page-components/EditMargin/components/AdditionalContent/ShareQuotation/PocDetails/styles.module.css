@@ -1,15 +1,15 @@
 .container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .poc_details {
-    display: flex;
+	display: flex;
 }
 
 .edit_button {
-    padding: 0 !important;
-    margin-left: 32px;
-    color: #F68B21 !important;
-    font-weight: 700;
+	padding: 0 !important;
+	margin-left: 32px;
+	font-weight: 700;
+	color: #f68b21 !important;
 }

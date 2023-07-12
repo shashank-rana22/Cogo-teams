@@ -1,21 +1,20 @@
-.amount{
-    color: #000;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 150%;
-    display: flex;
-    align-items:baseline;
-   
+.amount {
+	display: flex;
+	align-items: baseline;
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #000;
 }
 
-.containerDetails{
-    color: #000;
-    font-size: 10px;
-    line-height: 150%;
-    opacity: 0.5;
-    padding-left: 4px;
+.containerDetails {
+	padding-left: 4px;
+	font-size: 10px;
+	line-height: 150%;
+	color: #000;
+	opacity: 0.5;
 }
 
-.container{
-   margin-right: 32px;
+.container {
+	margin-right: 32px;
 }

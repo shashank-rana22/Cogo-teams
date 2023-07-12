@@ -4,14 +4,14 @@
 	margin-right: 20px;
 }
 
-.like{
-	transition: color 0.5s ease;
+.like {
 	color: #fff;
+	transition: color 0.5s ease;
 }
 
 .dislike {
-	transition: color 0.5s ease;
 	color: #fff;
+	transition: color 0.5s ease;
 	transform: rotate(180deg);
 }
 
@@ -20,11 +20,11 @@
 }
 
 .count {
-	font-weight: 500;
-	font-size: 12px;
-	text-align: center;
-	color: #000000;
 	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+	text-align: center;
 }
 
 @media (max-width: 768px) {

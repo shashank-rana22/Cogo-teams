@@ -1,40 +1,39 @@
-.container{
-    height: 364px;
-    flex-shrink: 0;
-    border-top: 1px solid #EBEBF4;
-    background: #F7FAEF;
+.container {
+	flex-shrink: 0;
+	height: 364px;
+	background: #f7faef;
+	border-top: 1px solid #ebebf4;
 }
 
-.congrats_text{
-    display: flex;
-    align-items: center;
-    color: #000;
-    font-size: 29px;
-    line-height: 150%;
-  
+.congrats_text {
+	display: flex;
+	align-items: center;
+	font-size: 29px;
+	line-height: 150%;
+	color: #000;
 }
 
-.button_wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 60px;
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 60px;
 }
 
-.primary_button{
-    margin-left: 16px;
-    display: inline-flex;
-    padding: 12px 20px;
-    align-items: center;
+.primary_button {
+	display: inline-flex;
+	align-items: center;
+	padding: 12px 20px;
+	margin-left: 16px;
 }
 
-.secondary_button{
-    display: inline-flex;
-    height: 48px;
-    padding: 12px 20px;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 6px;
-    border: 1px solid var(--black-20, #E0E0E0);
-    background: var(--white, #FFF);
+.secondary_button {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	height: 48px;
+	padding: 12px 20px;
+	background: var(--white, #fff);
+	border: 1px solid var(--black-20, #e0e0e0);
+	border-radius: 6px;
 }

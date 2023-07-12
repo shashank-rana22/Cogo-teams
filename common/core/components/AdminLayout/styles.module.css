@@ -6,8 +6,6 @@
 	min-height: 100vh;
 	background: #f9f5ec;
 
-	
-
 	@media (max-height: 600px) {
 		min-height: 600px;
 	}
@@ -24,11 +22,11 @@
 		background-color: #fff;
 	}
 
-	&.dark{
+	&.dark {
 		background: #828282;
 	}
 
-	&.light{
+	&.light {
 		background: #f9f5ec;
 	}
 }

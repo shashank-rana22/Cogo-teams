@@ -33,6 +33,7 @@ function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 					setShow={setShowFilterModal}
 					filters={filters}
 					setFilters={setFilters}
+					showFiltersOnly
 				/>
 			) : null}
 		</>

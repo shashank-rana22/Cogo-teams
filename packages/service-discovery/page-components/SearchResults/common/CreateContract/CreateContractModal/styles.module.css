@@ -1,20 +1,21 @@
-.control_container{
+.control_container {
 	display: flex;
-	width: 100%;
 	flex-wrap: wrap;
-	border: 1px solid #EAEBF4;
+	width: 100%;
 	padding: 16px;
-	background: #FBFBFF;
+	background: #fbfbff;
+	border: 1px solid #eaebf4;
+
 	:global(.ui_modal_body_container) {
-		padding:  0;
+		padding: 0;
 	}
 }
 
-.control_div{
+.control_div {
 	margin-right: 12px;
 	margin-bottom: 20px;
 }
 
-.label{
+.label {
 	margin-bottom: 12px;
 }

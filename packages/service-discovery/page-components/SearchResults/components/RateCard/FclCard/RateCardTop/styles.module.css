@@ -1,13 +1,10 @@
-.container{
-  padding-left: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 8px;
 }
 
-.image{
-  max-height: 40px;
+.image {
+	max-height: 40px;
 }
-
-
-
