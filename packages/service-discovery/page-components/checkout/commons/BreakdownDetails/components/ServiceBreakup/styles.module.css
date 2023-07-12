@@ -1,11 +1,16 @@
 .service_line {
-    display: flex;
+	display: flex;
 	justify-content: space-between;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 16px;
+}
+
+.locals_rate {
+	margin: 12px 36px;
+	color: #ee3425;
 }

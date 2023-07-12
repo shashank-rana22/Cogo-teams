@@ -1,29 +1,31 @@
-.container{
+.container {
 	display: flex;
 	align-items: center;
 }
-.service_select{
-	:global{
-		.ui_select_toggle_button{
+
+.service_select {
+	:global {
+		.ui_select_toggle_button {
 			min-width: 180px;
 		}
 	}
 }
-.date_filter_wrap{
-    border: 1px solid #e0e0e0;
-	border-radius: 10px;
-	background: #ffffff;
-	white-space: nowrap;
-	padding-left: 9px;
-	font-size: 10px;
+
+.date_filter_wrap {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	cursor: pointer;
+	justify-content: space-between;
 	width: 260px;
 	padding: 6px 4px;
+	padding-left: 9px;
+	font-size: 10px;
+	white-space: nowrap;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
 
 	&:hover {
-		box-shadow: 0px 2px 45px rgba(56, 59, 68, 0.1);
+		box-shadow: 0 2px 45px rgb(56 59 68 / 10%);
 	}
 }

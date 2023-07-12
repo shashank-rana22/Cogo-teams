@@ -30,12 +30,14 @@
         }
     }
 }
-.loading_text{
-    font-size: 48px;
-    color: #221F20;
-    margin-right: 20px;
+
+.loading_text {
+	margin-right: 20px;
+	font-size: 48px;
+	color: #221f20;
 }
-.loader{
-    width: 40px;
+
+.loader {
+	width: 40px;
 }
 

@@ -20,7 +20,7 @@ function ContactDetails({
 		email = '',
 	} = importer_exporter_poc;
 
-	if (bookingConfirmationMode !== 'whatsapp') {
+	if (!bookingConfirmationMode.includes('whatsapp')) {
 		return (
 			<div className={styles.contact_details}>
 				<div className={styles.user_name}>{name}</div>
@@ -66,7 +66,7 @@ function ContactDetails({
 
 	return (
 		<div className={styles.no_whatsapp}>
-			User Does't have Whatsapp Number
+			User Does`t have Whatsapp Number
 			{' '}
 			<Button
 				themeType="accent"

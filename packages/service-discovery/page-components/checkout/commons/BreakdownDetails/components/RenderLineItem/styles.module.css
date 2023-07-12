@@ -1,41 +1,41 @@
 .container {
-    display: flex;
-    border-radius: 4px;
-    padding: 6px 40px;
-    padding-right: 24px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	padding: 6px 40px;
+	padding-right: 24px;
+	border-radius: 4px;
 }
 
 .service_name {
-    flex-basis: 36%;
-    font-weight: 600;
+	flex-basis: 36%;
+	font-weight: 600;
 }
 
 .currency {
-    flex-basis: 10%;
-    max-width: 10%;
+	flex-basis: 10%;
+	max-width: 10%;
 }
 
 .buy_price {
-    flex-basis: 9%;
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
+	display: flex;
+	flex-basis: 9%;
+	flex-direction: column;
+	padding: 8px;
+	margin-top: 16px;
 }
 
 .unit {
-    flex-basis: 11%;
-    padding: 8px;
+	flex-basis: 11%;
+	padding: 8px;
 }
 
 .quantity {
-    flex-basis: 6%;
-    margin-left: 4px;
-    padding: 8px;
+	flex-basis: 6%;
+	padding: 8px;
+	margin-left: 4px;
 }
 
 .per_container_value {
-    font-size: 10px;
+	font-size: 10px;
 	color: #ee3425;
 }

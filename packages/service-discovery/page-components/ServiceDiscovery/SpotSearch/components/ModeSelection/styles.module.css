@@ -1,15 +1,17 @@
 .container{
-    
+
 }
-.heading{
-    font-weight: 600;
-    font-size: 16px;
-    color: #221F20;
-    margin-bottom: 16px;
+
+.heading {
+	margin-bottom: 16px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
 }
-.modes_container{
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 20px;
+
+.modes_container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: 100%;
 }

@@ -1,33 +1,33 @@
-.label_container{
-    display: flex;
-    align-items: center;
-    width: 100%;
+.label_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
-.label_icon{
-    margin-right: 10px;
-    font-size: 18px;
+.label_icon {
+	margin-right: 10px;
+	font-size: 18px;
 }
 
-.name_container{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.name_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
 
-.name_sub_container{
-    display: flex;
-    flex-direction: column;
-    max-width: 90%;
+.name_sub_container {
+	display: flex;
+	flex-direction: column;
+	max-width: 90%;
 }
 
-.label_name{
-    margin-bottom: 4px;
+.label_name {
+	margin-bottom: 4px;
 }
 
-.city_country_name{
-    font-size: 12px;
-    color: rgb(130, 130, 130);
+.city_country_name {
+	font-size: 12px;
+	color: rgb(130 130 130);
 }
 
 .sub_label{

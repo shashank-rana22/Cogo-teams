@@ -5,7 +5,6 @@ import React from 'react';
 
 import AdditionalServices from '../AdditionalServices';
 import FclCard from '../RateCard/FclCard';
-import ServiceBundling from '../ServiceBundling';
 
 import styles from './styles.module.css';
 
@@ -63,9 +62,7 @@ function SelectedRateCard({
 					setScreen={setScreen}
 				/>
 				<div className={styles.services}>
-					<div className={styles.service_bundling}>
-						<ServiceBundling />
-					</div>
+
 					<div className={styles.additionalServices}>
 						<AdditionalServices
 							rateCardData={rateCardData}

@@ -1,22 +1,25 @@
-.container{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
 }
-.heading{
-    font-weight: 600;
-    font-size: 18px;
-    color: #000000;
-}
-.route_form{
-    width: 70%;
-}
-.search_button{
-    margin-right: 20px;
 
-    :global{
-        .ui_button_container{
-            width: 200px;
-        }
-    }
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
+}
+
+.route_form {
+	width: 70%;
+}
+
+.search_button {
+	margin-right: 20px;
+
+	:global {
+		.ui_button_container {
+			width: 200px;
+		}
+	}
 }

@@ -67,9 +67,10 @@ const getDetails = ({ item, primary_service }) => {
 			`weight: ${weight} kgs`,
 			`Count: ${packages_count}`,
 		],
+		cargo_insurance: [commodity],
 	};
 
-	return MAPPING[primary_service] || MAPPING.fcl_freight;
+	return MAPPING[item.service_type] || MAPPING[primary_service] || MAPPING.fcl_freight;
 };
 
 export default getDetails;

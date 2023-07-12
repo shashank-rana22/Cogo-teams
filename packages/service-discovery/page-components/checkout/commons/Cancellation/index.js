@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
@@ -25,7 +26,7 @@ function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 				<div className={styles.vertical_line_array}>
 					{cancellation_charges?.map((item, idx) => {
 						const { charge_type, value, currency, milestone, conditions } = item;
-						const { schedule_departure = '' } = conditions?.[0] || {};
+						const { schedule_departure = '' } = conditions?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 						const [conditionality, days] = schedule_departure?.split(' ') || [];
 
 						return (
@@ -51,14 +52,10 @@ function Cancellation({ detail, serviceType, source = 'edit_margin' }) {
 									<div className={styles.milestone}>Booking Procurement</div>
 								) : null}
 
-								{!isEmpty(conditions) ? (
+								{isEmpty(conditions) ? (
 									<div className={styles.condition}>
-										`$
-										{days}
-										{' '}
-										$
-										{CANCELLATION_MAPPINGS[conditionality]}
-										`
+										{`${days} 
+										${CANCELLATION_MAPPINGS[conditionality]}`}
 									</div>
 								) : null}
 							</div>

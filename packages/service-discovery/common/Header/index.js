@@ -14,7 +14,7 @@ import Wallet from './Wallet';
 const SUB_HEADER_COMPONENT_MAPPING = {
 	edit_details                : EditDetailsHeader,
 	additional_services_details : AdditionalServicesForm,
-	default                     : null,
+	default                     : {},
 };
 
 function Header({

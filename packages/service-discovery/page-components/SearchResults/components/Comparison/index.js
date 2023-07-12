@@ -5,6 +5,7 @@ import ComparisonTable from './ComparisonTable';
 import styles from './styles.module.css';
 
 function Comparison({ setScreen = () => {}, rateCardsForComparison = () => {} }) {
+	console.log('rateCardsForComparison', rateCardsForComparison);
 	return (
 		<>
 			<div className={styles.container}>

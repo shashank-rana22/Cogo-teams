@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 112px;
+	padding: 20px;
+	margin-top: 6px;
+	background-color: #f3fafa;
+	border-radius: 8px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.sub_heading {
+	font-weight: 600;
+}
+
+.content {
+	max-width: 80%;
+	margin: 0 20px;
+}
+
+.text {
+	margin-top: 4px;
+	font-size: 12px;
+}

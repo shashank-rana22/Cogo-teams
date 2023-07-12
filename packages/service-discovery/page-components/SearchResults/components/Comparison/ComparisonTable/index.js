@@ -52,8 +52,6 @@ function ComparisonTable({ rateCardsForComparison = [] }) {
 		};
 	});
 
-	console.log(rateCardsForComparison[1]);
-
 	allLineItems.forEach((obj) => {
 		Object.values(obj).forEach((arr) => {
 			arr.forEach((item) => {
