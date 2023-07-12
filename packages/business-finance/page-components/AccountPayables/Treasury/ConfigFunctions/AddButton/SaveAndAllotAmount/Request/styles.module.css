@@ -33,8 +33,7 @@
 .requested_by {
 	padding: 8px;
 	margin-left: 8px;
-	font-size: 11px;
-	font-weight: 400;
+	font-size: var(--font-size-md);
 	color: var(--color-secondary-greyscale-3);
 	border-right: 1px solid #333;
 }
@@ -42,8 +41,7 @@
 .created {
 	padding: 8px;
 	margin-left: 8px;
-	font-size: 11px;
-	font-weight: 400;
+	font-size: var(--font-size-md);
 	color: var(--color-secondary-greyscale-3);
 }
 

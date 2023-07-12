@@ -37,15 +37,13 @@ const useGetEntityReport = ({
 }) => {
 	let formatedFromDate = '';
 	let formatedToDate = '';
+	formatedFromDate = createDate(year, month, START_MONTH_DATE);
 
 	if (THIRTY_DAY_MONTH.includes(month)) {
-		formatedFromDate = createDate(year, month, START_MONTH_DATE);
 		formatedToDate = createDate(year, month, END_EVEN_MONTH_DATE);
 	} else if (THIRTY_ONE_DAY_MONTH.includes(month)) {
-		formatedFromDate = createDate(year, month, START_MONTH_DATE);
 		formatedToDate = createDate(year, month, END_ODD_MONTH_DATE);
 	} else if (LEAP_YEAR_MONTH.includes(month)) {
-		formatedFromDate = createDate(year, month, START_MONTH_DATE);
 		const formatedYear = parseInt(year, 10);
 		if (
 			formatedYear / CHECK_LEAP_YEAR === CHECK_DIVISIBLE

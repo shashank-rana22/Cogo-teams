@@ -7,6 +7,15 @@ import styles from './styles.module.css';
 
 const CHECK_PENDING_REQUEST = 0;
 
+const commonFormatAmount = (amount, currency) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style           : 'currency',
+		currencyDisplay : 'code',
+	},
+});
+
 function SaveAndAllotAmount({ itemData = {}, setShowModal = () => {}, refetch = () => {}, showModel = false }) {
 	const {
 		allocatedAmount,
@@ -55,40 +64,19 @@ function SaveAndAllotAmount({ itemData = {}, setShowModal = () => {}, refetch = 
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Allocated Funds</div>
 						<div className={styles.value_text}>
-							{formatAmount({
-								amount  : allocatedAmount,
-								currency,
-								options : {
-									style           : 'currency',
-									currencyDisplay : 'code',
-								},
-							})}
+							{commonFormatAmount(allocatedAmount, currency)}
 						</div>
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Utilized</div>
 						<div className={styles.value_text}>
-							{formatAmount({
-								amount  : utilizedAmount,
-								currency,
-								options : {
-									style           : 'currency',
-									currencyDisplay : 'code',
-								},
-							})}
+							{commonFormatAmount(utilizedAmount, currency)}
 						</div>
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.label_text}>Balance</div>
 						<div className={styles.value_text}>
-							{formatAmount({
-								amount  : balance,
-								currency,
-								options : {
-									style           : 'currency',
-									currencyDisplay : 'code',
-								},
-							})}
+							{commonFormatAmount(balance, currency)}
 						</div>
 					</div>
 				</div>

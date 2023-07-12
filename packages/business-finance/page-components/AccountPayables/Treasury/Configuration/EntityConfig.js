@@ -16,6 +16,15 @@ const MAX_BANK_NAME_LENGTH = 20;
 const MAX_BANK_ACCOUNT = 25;
 const MIN_LENGTH = 0;
 
+const commonFormatAmount = (amount, currency) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style           : 'currency',
+		currencyDisplay : 'code',
+	},
+});
+
 const EntityConfig = ({ refetch }) => [
 
 	{
@@ -76,15 +85,7 @@ const EntityConfig = ({ refetch }) => [
 		accessor : (row) => (
 			<div className={styles.flex_column}>
 				<div>
-					{ formatAmount({
-						amount   : getByKey(row, 'allocatedAmount'),
-						currency : getByKey(row, 'currency'),
-						options  : {
-							currencyDisplay : 'code',
-							style           : 'currency',
-						},
-					})}
-
+					{commonFormatAmount(getByKey(row, 'allocatedAmount'), getByKey(row, 'currency'))}
 				</div>
 
 				<div>
@@ -125,16 +126,7 @@ const EntityConfig = ({ refetch }) => [
 		accessor : (row) => (
 			<div>
 				<div>
-					{
-					formatAmount({
-						amount   : getByKey(row, 'utilizedAmount'),
-						currency : getByKey(row, 'currency'),
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})
-					}
+					{commonFormatAmount(getByKey(row, 'utilizedAmount'), getByKey(row, 'currency'))}
 				</div>
 			</div>
 		),
@@ -146,16 +138,7 @@ const EntityConfig = ({ refetch }) => [
 		accessor : (row) => (
 			<div>
 				<div>
-					{
-					formatAmount({
-						amount   : getByKey(row, 'balance'),
-						currency : getByKey(row, 'currency'),
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})
-					}
+					{commonFormatAmount(getByKey(row, 'balance'), getByKey(row, 'currency'))}
 				</div>
 			</div>
 		),

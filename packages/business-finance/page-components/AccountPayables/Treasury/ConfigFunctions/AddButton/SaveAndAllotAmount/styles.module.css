@@ -24,13 +24,11 @@
 .label_text {
 	margin-bottom: 6px;
 	font-size: var(--font-size-md);
-	font-weight: 400;
 	line-height: 14px;
 }
 
 .value_text {
 	font-size: var(--font-size-lg);
-	font-weight: 500;
 	line-height: 16px;
 }
 
@@ -47,7 +45,6 @@
 .text {
 	padding-bottom: 8px;
 	font-size: var(--font-size-lg);
-	font-weight: 400;
 	line-height: 16px;
 }
 

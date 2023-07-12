@@ -76,17 +76,17 @@ const useGetEntityList = () => {
 			formatType : 'dateTime',
 			separator  : ' ',
 		});
-	const view = isReportActiveEntity ? entityFilters?.reportTime : undefined;
+	const view = isReportActiveEntity ? reportTime : undefined;
 
 	const refetch = useCallback(async () => {
 		try {
 			await api({
 				params: {
 					accNo      : query || undefined,
-					entityCode : isReportActiveEntity ? undefined : entityFilters?.activeEntity,
-					request    : isReportActiveEntity ? undefined : entityFilters?.entityRequest,
+					entityCode : isReportActiveEntity ? undefined : activeEntity,
+					request    : isReportActiveEntity ? undefined : entityRequest,
 					currency   : isReportActiveEntity
-						? entityFilters?.reportCurrency : entityFilters?.entityCurrency,
+						? reportCurrency : entityCurrency,
 					viewBy    : selectFromDate && selectToDate ? 'date_Range' : view,
 					fromDate  : isReportActiveEntity ? selectFromDate : undefined,
 					toDate    : isReportActiveEntity ? selectToDate : undefined,
@@ -97,9 +97,8 @@ const useGetEntityList = () => {
 		} catch (e) {
 			Toast.error(e?.data?.message);
 		}
-	}, [api, entityFilters?.activeEntity, entityFilters?.entityCurrency,
-		entityFilters?.entityRequest, entityFilters?.reportCurrency, isReportActiveEntity,
-		pageIndex, pageSize, query, selectFromDate, selectToDate, view]);
+	}, [activeEntity, api, entityCurrency, entityRequest,
+		isReportActiveEntity, pageIndex, pageSize, query, reportCurrency, selectFromDate, selectToDate, view]);
 	const filtervalue = Object.values(entityFilters);
 
 	const filterClear = filtervalue.filter((item) => {
