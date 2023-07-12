@@ -120,17 +120,22 @@ function EditCancelService({ serviceData = {} }) {
 	const isTruckPresent =	!isEmpty(truckList || [])
 		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
 
-	const content = Object.values(ACTION_BUTTON).map(({ label, value, show }) => (show ? (
-		<div
-			key={value}
-			role="button"
-			tabIndex={DEFAULT_INDEX}
-			className={styles.action_button}
-			onClick={() => openModal(value)}
-		>
-			{label}
-		</div>
-	) : null));
+	const content = Object.values(ACTION_BUTTON).map((action) => {
+		const { label, value, show } = action || {};
+		return (
+			show ? (
+				<div
+					key={value}
+					role="button"
+					tabIndex={DEFAULT_INDEX}
+					className={styles.action_button}
+					onClick={() => openModal(value)}
+				>
+					{label}
+				</div>
+			) : null
+		);
+	});
 
 	return (
 		<div className={styles.container}>
