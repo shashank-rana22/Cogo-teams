@@ -1,10 +1,9 @@
-
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
+import Layout from '../../common/Layout/index.tsx';
 import useCreateVesselSchedules from '../hooks/useCreateVesselSchedule';
-import Layout from '../Layout';
 
 import controls from './controls';
 import styles from './styles.module.css';

@@ -27,7 +27,9 @@ function Filter({ filters, setFilters }) {
 		setFilters((prev) => ({ ...prev, [location_type]: value, page: 1 }));
 	};
 	const sortByOptions = [
-		{ label: 'abc', value: 'abc' },
+		{ label: 'Departure', value: 'departure' },
+		{ label: 'Arrival', value: 'arrival' },
+		{ label: 'Transit Time', value: 'transit_time' },
 	];
 
 	return (
@@ -37,24 +39,24 @@ function Filter({ filters, setFilters }) {
 					className={styles.filter_select}
 					{...originPortOptions}
 					placeholder="Origin Port"
-					value={filters?.origin_port}
-					onChange={(value) => handleFilter(value, 'origin_port')}
+					value={filters?.origin_port_id}
+					onChange={(value) => handleFilter(value, 'origin_port_id')}
 				/>
 				<Select
 					className={styles.filter_select}
 					{...destinationPortOptions}
 					placeholder="Destination Port"
-					value={filters?.destination_port}
-					onChange={(value) => handleFilter(value, 'destination_port')}
+					value={filters?.destination_port_id}
+					onChange={(value) => handleFilter(value, 'destination_port_id')}
 				/>
 				<Datepicker
 					className={styles.input}
 					placeholder="Departure Date"
 					showTimeSelect
 					dateFormat="MM/dd/yyyy HH:mm"
-					name="date"
-					onChange={(value) => setFilters({ ...filters, date: value })}
-					value={filters?.date}
+					name="departure_date"
+					onChange={(value) => handleFilter(value, 'departure_date')}
+					value={filters?.departure_date}
 					size="md"
 				/>
 			</div>
@@ -62,14 +64,16 @@ function Filter({ filters, setFilters }) {
 				<Select
 					className={styles.filter_select}
 					placeholder="Shipping Line"
-					onChange={(value) => setFilters({ ...filters, shipping_line: value })}
+					value={filters?.shipping_line_id}
+					onChange={(value) => handleFilter(value, 'shipping_line_id')}
 					{...shippingLineOptions}
 				/>
 				<Select
 					className={styles.filter_select}
 					options={sortByOptions}
 					placeholder="Sort By"
-					onChange={(value) => setFilters({ ...filters, sort_by: value })}
+					value={filters?.sort_by}
+					onChange={(value) => handleFilter(value, 'sort_by')}
 				/>
 			</div>
 		</div>

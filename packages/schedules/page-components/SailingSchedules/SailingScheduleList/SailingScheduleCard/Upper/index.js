@@ -1,31 +1,41 @@
-import { format } from '@cogoport/utils';
+import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Upper({ sailingSchedule }) {
+function Upper({ sailingSchedule, loading }) {
 	return (
 		<div className={styles.upper}>
 			<div className={styles.upper_left}>
 				<div className={styles.shipping_line}>
-					<div>
-						{/* <img src={vessel?.operator?.logo_url} /> */}
-					</div>
-					<div>
-						{/* {sailingSchedule?.operator?.short_name} */}
-						{' '}
-						Shipping
-					</div>
+					{!loading ? (
+						<div>
+							<img alt="shipping_line_logo" src={sailingSchedule?.shipping_line?.logo_url} />
+						</div>
+					) : <Placeholder width="60px" />}
+					{!loading ? (
+						<div>
+							{sailingSchedule?.shipping_line?.short_name}
+							{' '}
+							Shipping
+						</div>
+					) : <Placeholder width="40px" />}
 				</div>
 
 			</div>
 			<div className={styles.upper_right}>
 				<div>
-					<div className={styles.updated_status}>days</div>
+					{!loading ? (
+						<div className={styles.tag}>
+							{sailingSchedule.transit_time}
+							{' '}
+							{sailingSchedule?.transit_time > 1 ? 'days' : 'day'}
+						</div>
+					) : <Placeholder width="40px" />}
 				</div>
-				<div className={styles.updated_on}>
-					schedule type
-					{' '}
-					{/* {format(vessel?.updated_at, 'dd MMM yyyy')} */}
+				<div>
+					{!loading
+						? <div className={styles.tag}>{sailingSchedule.schedule_type || 'unspecified'}</div>
+						: <Placeholder width="40px" />}
 				</div>
 			</div>
 		</div>

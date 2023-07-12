@@ -1,7 +1,7 @@
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import BackButton from '../BackButtom';
+import BackButton from '../../common/BackButtom';
 import useGetVesselScheduleById from '../hooks/useGetVesselScheduleById';
 
 import Card from './Card';
@@ -16,7 +16,7 @@ function VesselScheduele() {
 	const [new_array_aa, setNew_array_aa] = useState(null);
 	return (
 		<>
-			<BackButton />
+			<BackButton title="Back To Vessel Schedule" key="vessel-schedules" />
 			<div className={styles.back_button} />
 			<Card vessel={data} />
 			<div className={styles.flex}>

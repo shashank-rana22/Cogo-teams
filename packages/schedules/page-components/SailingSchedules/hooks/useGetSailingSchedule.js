@@ -16,6 +16,7 @@ const useGetSailingSchedule = ({ id }) => {
 				filters: {
 					id,
 				},
+				sailing_route_required   : true,
 				page_limit               : 10,
 				page                     : 1,
 				pagination_data_required : true,

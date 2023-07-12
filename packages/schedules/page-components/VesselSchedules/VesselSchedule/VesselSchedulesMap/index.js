@@ -2,7 +2,7 @@ import ScheduleMap from '../../../common/ScheduleMaps';
 
 function VesselScheduleMap({ data }) {
 	return (
-		<div styles={{ borderRadius: '8px' }}>
+		<div style={{ borderRadius: '8px' }}>
 			<ScheduleMap data={data} />
 		</div>
 	);

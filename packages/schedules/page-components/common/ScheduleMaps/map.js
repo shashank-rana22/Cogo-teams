@@ -1,5 +1,5 @@
 import Point from '@cogoport/map-components/ui/Point';
-import { CogoMaps, L, Marker, Popup } from '@cogoport/maps';
+import { CogoMaps, L, Marker, Polyline, Popup } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useContext } from 'react';
 
@@ -25,7 +25,7 @@ const baseLayer = [
 function MapComp({ path, points, bounds, setBounds, displayNameArray, data }) {
 	const [map, setMap] = useState();
 	const coordinates = data?.[0]?.route?.coordinates || data?.route?.coordinates || [];
-	const curvePointLength = path?.length;
+	// const curvePointLength = path?.length;
 
 	useEffect(() => {
 		if (!isEmpty(bounds) && map && bounds instanceof L.LatLngBounds) {
@@ -59,7 +59,8 @@ function MapComp({ path, points, bounds, setBounds, displayNameArray, data }) {
 					size={[13, 13]}
 				/>
 			))} */}
-			<Route positions={path} map={map} pathOptions={lineOptions} />
+			{(path || []).length ? <Route positions={path} map={map} pathOptions={lineOptions} /> : null}
+			{/* <Polyline positions={} /> */}
 		</CogoMaps>
 	);
 }

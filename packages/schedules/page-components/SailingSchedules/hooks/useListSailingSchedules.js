@@ -9,14 +9,16 @@ const useListSailingSchedules = ({ filters }) => {
 		},
 		{ manual: true },
 	);
-	const { page, ...restFilters } = filters;
+	const { page, departure_date = undefined, ...restFilters } = filters;
 
 	const listSailingSchedules = async () => {
 		try {
 			const payload = {
 				filters                  : restFilters,
+				sailing_route_required   : true,
 				page_limit               : 10,
 				page,
+				departure_start          : departure_date,
 				pagination_data_required : true,
 				sort_by                  : 'updated_at',
 				sort_type                : 'desc',
@@ -35,6 +37,7 @@ const useListSailingSchedules = ({ filters }) => {
 		data       : data?.list,
 		loading,
 		totalItems : data?.total_count,
+		listSailingSchedules,
 	};
 };
 export default useListSailingSchedules;

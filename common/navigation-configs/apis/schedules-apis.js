@@ -5,11 +5,6 @@ const schedules_apis = {
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
-		{
-			api          : 'list_sailing_schedule_port_pairs',
-			access_type  : 'private',
-			service_name : 'sailing_schedule',
-		},
 	],
 	vessel_schedules: [
 		{
@@ -37,9 +32,14 @@ const schedules_apis = {
 	],
 	sailing_schedule: [
 		{
-			api          : 'list_sailing_schedule_subscriptions',
+			api          : 'list_sailing_schedules',
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
+		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'private',
+			service_name : 'location',
 		},
 	],
 };
