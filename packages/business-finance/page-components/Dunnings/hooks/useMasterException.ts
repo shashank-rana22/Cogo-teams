@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 interface ExceptionFiltersInterface {
@@ -10,6 +10,7 @@ interface ExceptionFiltersInterface {
 	creditDays?: string ;
 	cycleStatus?: string;
 	pageIndex?: number;
+	entities?: string[];
 }
 interface Props {
 	exceptionFilter?: ExceptionFiltersInterface;
@@ -27,7 +28,7 @@ const useMasterException = ({
 	setShowConfirmationModal, setExceptionFilter,
 }:Props) => {
 	const [searchValue, setSearchValue] = useState('');
-	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
+	const { category = '', creditDays = 0, cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
 	const profile: Profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const PROFILE_ID = user?.id;
@@ -79,13 +80,14 @@ const useMasterException = ({
 						pageIndex,
 						sortBy       : sort?.sortBy || undefined,
 						sortType     : sort?.sortType || undefined,
+						entities     : !isEmpty(entities) ? entities : undefined,
 					},
 				});
 			} catch (error) {
 				console.log(error);
 			}
 		})();
-	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger]);
+	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger, entities]);
 
 	const getCycleWiseList = useCallback(() => {
 		(async () => {

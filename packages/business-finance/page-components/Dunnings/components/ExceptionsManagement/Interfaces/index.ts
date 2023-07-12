@@ -42,6 +42,8 @@ export interface AddCustomerInterface {
 	handleSubmit?: Function;
 	uploadListLoading?: boolean;
 	getUploadList?: Function;
+	reset?: Function;
+	showEntityFilter?: boolean;
 }
 export interface ManageExceptionInterface {
 	setShow?: Function;
@@ -53,4 +55,5 @@ export interface ManageExceptionInterface {
 	uncheckedRows?: Array<string>;
 	setUncheckedRows?: React.Dispatch<React.SetStateAction<Array<string>>>;
 	getUploadList?: Function;
+	setShowEntityFilter?: Function;
 }

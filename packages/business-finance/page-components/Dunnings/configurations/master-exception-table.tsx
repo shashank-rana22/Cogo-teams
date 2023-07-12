@@ -146,6 +146,15 @@ const masterExceptionColumn = ({
 			),
 		},
 		{
+			Header   : 'Entity Code',
+			id       : 'entityCode',
+			accessor : (row) => (
+				<div className={styles.text}>
+					{row?.entityCode || '-'}
+				</div>
+			),
+		},
+		{
 			Header   : '',
 			id       : 'toggle',
 			accessor : (row) => (

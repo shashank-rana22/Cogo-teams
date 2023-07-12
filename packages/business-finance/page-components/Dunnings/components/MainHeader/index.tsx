@@ -7,7 +7,7 @@ interface Props {
 	setActiveTab?:Function,
 }
 
-function MainHeader({ activeTab, setActiveTab }:Props) {
+function MainHeader({ activeTab = '', setActiveTab = () => {} }:Props) {
 	const { push } = useRouter();
 
 	const handleTabChange = (tab:string) => {
@@ -27,7 +27,35 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 		},
 		{
 			id      : 'campaign-management',
-			content : <h3 className={styles.heading_text}>Campaign Management</h3>,
+			content : (
+				<div className={styles.campaign_card}>
+					<div style={{ textAlign: 'left' }}>
+						<h3>Campaign</h3>
+						<h3>Management</h3>
+					</div>
+					<div className={styles.vertical_border} />
+					<div className={styles.campaign_card_data}>
+						<div style={{ display: 'flex' }}>
+							<span>
+								Ongoing Campaigns:
+								{' '}
+							</span>
+							<span>
+								-
+							</span>
+						</div>
+						<div className={styles.collection_rate}>
+							<span>
+								Collection Rate:
+								{' '}
+							</span>
+							<span>
+								-
+							</span>
+						</div>
+					</div>
+				</div>
+			),
 		},
 		{
 			id      : 'exceptions-management',

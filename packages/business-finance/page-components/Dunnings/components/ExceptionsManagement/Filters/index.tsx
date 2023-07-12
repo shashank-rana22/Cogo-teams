@@ -25,6 +25,7 @@ function Filters({
 }:FilterProps) {
 	const [show, setShow] = useState(false);
 	const [uncheckedRows, setUncheckedRows] = useState([]);
+	const [showEntityFilter, setShowEntityFilter] = useState(true);
 
 	const { control, handleSubmit, watch, reset } = useForm();
 
@@ -75,7 +76,10 @@ function Filters({
 						<Button
 							size="md"
 							themeType="primary"
-							onClick={() => { setShow(true); }}
+							onClick={() => {
+								setShow(true);
+								setShowEntityFilter(true);
+							}}
 							style={{ width: '30%' }}
 						>
 							Add To list
@@ -91,6 +95,8 @@ function Filters({
 						handleSubmit={handleSubmit}
 						getUploadList={getUploadList}
 						uploadListLoading={uploadListLoading}
+						reset={reset}
+						showEntityFilter={showEntityFilter}
 					/>
 				)}
 
@@ -105,6 +111,7 @@ function Filters({
 						cycleListId={cycleListId}
 						uncheckedRows={uncheckedRows}
 						setUncheckedRows={setUncheckedRows}
+						setShowEntityFilter={setShowEntityFilter}
 					/>
 				)}
 			</div>

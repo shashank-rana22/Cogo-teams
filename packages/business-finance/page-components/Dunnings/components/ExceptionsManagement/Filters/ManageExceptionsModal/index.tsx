@@ -20,6 +20,7 @@ function ManageExceptionsModal({
 	cycleListId,
 	uncheckedRows,
 	setUncheckedRows,
+	setShowEntityFilter = () => {},
 }:ManageExceptionInterface) {
 	const [manageExceptionFilter, setManageExceptionFilter] = useState({});
 	const {
@@ -34,6 +35,11 @@ function ManageExceptionsModal({
 		getUploadList(data);
 	};
 	const showAddCustomerModal = !isEmpty(uncheckedRows);
+
+	const handleClick = () => {
+		setShow(true);
+		setShowEntityFilter(false);
+	};
 
 	useEffect(() => {
 		getManageExceptionList();
@@ -53,7 +59,7 @@ function ManageExceptionsModal({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => setShow(true)}
+						onClick={handleClick}
 						disabled={showAddCustomerModal}
 					>
 						+ Add New Customer

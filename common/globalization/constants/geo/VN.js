@@ -432,7 +432,7 @@ export default {
 		},
 		dunnings: {
 			campaign_management: {
-				eligible_entites: [],
+				eligible_entites: ['501'],
 			},
 		},
 	},

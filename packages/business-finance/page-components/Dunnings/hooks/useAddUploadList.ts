@@ -40,7 +40,7 @@ const useAddUploadList = ({
 	const PROFILE_ID = user?.id;
 	const UN_CHECKED_DATA = !isEmpty(uncheckedRows);
 	const exceptionType = SUB_TABS_VALUES ? 'in master exceptions' : 'in this cycle exception';
-	const getUploadList = useCallback((data, fileValue) => {
+	const getUploadList = useCallback(({ data, fileValue, entity }) => {
 		(async () => {
 			try {
 				const res = await trigger({
@@ -52,6 +52,7 @@ const useAddUploadList = ({
 						actionType    : UN_CHECKED_DATA ? 'DELETE' : 'UPLOAD',
 						createdBy     : PROFILE_ID,
 						cycleId       : SUB_TABS_VALUES ? undefined : cycleListId || undefined,
+						entityCode    : entity,
 					},
 				});
 				if (!isEmpty(res?.data)) {

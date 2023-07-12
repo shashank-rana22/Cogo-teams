@@ -1,8 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
-import { AsyncSelectController } from '@cogoport/forms';
+import { AsyncSelectController, SelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { AddCustomerInterface } from '../../Interfaces';
@@ -23,20 +24,55 @@ function AddCustomerModal({
 	handleSubmit,
 	getUploadList,
 	uploadListLoading,
+	reset = () => {},
+	showEntityFilter = true,
 }:AddCustomerInterface) {
 	const [fileValue, setFileValue] = useState('');
 
-	const selectCustomerName = watch();
+	const entityOptions = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entityValue) => (
+		{
+			label : String(entityValue),
+			value : String(entityValue),
+		}
+	));
+
+	const excludedNums = watch('excludedRegistrationNos');
+	const entity = watch('entity');
 
 	const onSubmit = (data) => {
-		getUploadList(data, fileValue);
+		getUploadList({ data, fileValue, entity });
 	};
 
+	const handleClose = () => {
+		setShow(false);
+		reset();
+	};
+
+	const isSubmitDisable = showEntityFilter
+		? (isEmpty(excludedNums) || !fileValue || isEmpty(entity) || uploadListLoading)
+		: (isEmpty(excludedNums) || !fileValue || uploadListLoading);
+
 	return (
-		<Modal size="md" show={show} onClose={() => setShow(false)}>
+		<Modal
+			size="md"
+			show={show}
+			onClose={handleClose}
+		>
 			<Modal.Header title="Add To List - Upload List" />
 			<Modal.Body>
 				<div className={styles.body_container}>
+					{showEntityFilter && (
+						<div>
+							<h5>Entity</h5>
+							<SelectController
+								name="entity"
+								control={control}
+								placeholder="Entity"
+								options={entityOptions}
+								className={styles.select}
+							/>
+						</div>
+					)}
 					<div className={styles.upload}>
 						<FileUploader
 							value={fileValue}
@@ -78,7 +114,7 @@ function AddCustomerModal({
 				<div style={{ margin: '6px 20px' }}>Current Data is subjected to change upon submission.</div>
 				<Button
 					onClick={handleSubmit(onSubmit)}
-					disabled={(!selectCustomerName?.excludedRegistrationNos?.length && !fileValue) || uploadListLoading}
+					disabled={isSubmitDisable}
 				>
 					Submit
 
