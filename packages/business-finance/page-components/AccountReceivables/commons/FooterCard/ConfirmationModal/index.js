@@ -18,7 +18,7 @@ function ConfirmationModal(
 			placement="top"
 			closeOnOuterClick={false}
 			onClose={() => {
-				setConfirmation(false);
+				setConfirmation((prev) => !prev);
 			}}
 		>
 
