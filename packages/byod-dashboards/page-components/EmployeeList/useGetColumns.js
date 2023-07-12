@@ -71,7 +71,6 @@ const useGetColumns = (isAdmin) => {
 				<Button className={styles.cursor_auto}>
 					Rejected by Admin
 				</Button>
-
 			);
 		}
 
