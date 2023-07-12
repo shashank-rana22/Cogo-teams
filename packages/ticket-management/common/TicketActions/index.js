@@ -1,6 +1,7 @@
 import { Button, Popover, cl } from '@cogoport/components';
 import { IcMCenterAlign } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -15,26 +16,29 @@ const CLOSED_TICKETS_VALUES = ['reopen'];
 
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
-function getActionType({ status, isClosureAuthorizer }) {
-	if (OPEN_TICKETS_CHECK.includes(status)) {
+function getActionType({ ticketStatus, isClosureAuthorizer }) {
+	if (OPEN_TICKETS_CHECK.includes(ticketStatus)) {
 		if (isClosureAuthorizer) {
 			return OPEN_TICKETS_VALUES;
 		}
 		return AUTHORISER_TICKETS_VALUES;
 	}
 
-	if ((PENDING_TICKETS_CHECK.includes(status) && isClosureAuthorizer)) {
+	if ((PENDING_TICKETS_CHECK.includes(ticketStatus) && isClosureAuthorizer)) {
 		return PENDING_TICKETS_VALUES;
 	}
 
-	if (status === 'closed') {
+	if (ticketStatus === 'closed') {
 		return	CLOSED_TICKETS_VALUES;
 	}
 
 	return [];
 }
 
-function RenderContent({ filteredActions, isModal, handleAction, isCurrentReviewer }) {
+function RenderContent({
+	filteredActions = [], isModal = false, handleAction = () => {}, isCurrentReviewer = false,
+	updateLoading = false, actionLoading = '', setActionLoading = () => {},
+}) {
 	return (
 		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
 			{filteredActions.map((item) => {
@@ -46,7 +50,12 @@ function RenderContent({ filteredActions, isModal, handleAction, isCurrentReview
 						size="sm"
 						themeType={isModal ? 'primary' : 'linkUi'}
 						className={cl`${styles.action_button} ${isModal ? styles.modal_button : ''}`}
-						onClick={(e) => handleAction(e, item)}
+						onClick={(e) => {
+							setActionLoading(item);
+							handleAction(e, item);
+						}}
+						loading={updateLoading && actionLoading === item}
+						disabled={updateLoading && actionLoading !== item}
 					>
 						{startCase(item)}
 					</Button>
@@ -57,15 +66,17 @@ function RenderContent({ filteredActions, isModal, handleAction, isCurrentReview
 }
 
 function TicketActions({
-	status,
-	isModal,
-	handleTicket,
+	ticketStatus = '',
+	isModal = false,
+	updateLoading = false,
+	handleTicket = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
-	isClosureAuthorizer,
-	isCurrentReviewer,
+	isClosureAuthorizer = false,
+	isCurrentReviewer = false,
 }) {
-	const actionMappings = getActionType({ status, isClosureAuthorizer });
+	const [actionLoading, setActionLoading] = useState('');
+	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
 
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
 
@@ -92,7 +103,10 @@ function TicketActions({
 						<RenderContent
 							isModal={isModal}
 							handleAction={handleAction}
+							updateLoading={updateLoading}
+							actionLoading={actionLoading}
 							filteredActions={filteredActions}
+							setActionLoading={setActionLoading}
 							isCurrentReviewer={isCurrentReviewer}
 						/>
 					)}
@@ -104,7 +118,10 @@ function TicketActions({
 					<RenderContent
 						isModal={isModal}
 						handleAction={handleAction}
+						updateLoading={updateLoading}
+						actionLoading={actionLoading}
 						filteredActions={filteredActions}
+						setActionLoading={setActionLoading}
 						isCurrentReviewer={isCurrentReviewer}
 					/>
 				)}

@@ -1,5 +1,5 @@
-import { Tabs, TabPanel, Input, Popover, ButtonIcon } from '@cogoport/components';
-import { IcMAppSearch, IcMFilter, IcMCross } from '@cogoport/icons-react';
+import { Tabs, TabPanel, Input, Popover, ButtonIcon, Button } from '@cogoport/components';
+import { IcMAppSearch, IcMFilter, IcMCross, IcCRedCircle } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -11,13 +11,13 @@ import Filter from './Filter';
 import styles from './styles.module.css';
 
 function Header({
-	serviceActiveTab,
-	setServiceActiveTab,
-	shipmentStateTab,
-	setShipmentStateTab,
-	debounceQuery,
-	setFilters,
-	filters,
+	serviceActiveTab = 'air_freight',
+	setServiceActiveTab = () => {},
+	shipmentStateTab = 'ongoing',
+	setShipmentStateTab = () => {},
+	debounceQuery = () => {},
+	setFilters = () => {},
+	filters = {},
 }) {
 	const [filterPopover, setFilterPopover] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
@@ -73,7 +73,7 @@ function Header({
 					<Input
 						size="sm"
 						prefix={<IcMAppSearch />}
-						placeholder="Search via Customer/SID/AWB No"
+						placeholder="Search via SID/AWB No"
 						style={{ marginRight: '8px', width: 350 }}
 						onChange={(e) => setSearchValue(e)}
 						value={searchValue}
@@ -103,9 +103,17 @@ function Header({
 							shipmentType={serviceActiveTab}
 							onClickOutside={() => setFilterPopover(false)}
 						>
-							<IcMFilter onClick={() => setFilterPopover((pev) => !pev)} />
+							<Button
+								type="button"
+								themeType="secondary"
+								onClick={() => setFilterPopover((prev) => !prev)}
+							>
+								<IcMFilter width={20} height={20} />
+								{!isEmpty(filters) ? (
+									<IcCRedCircle width={8} height={8} className={styles.active_filter_icon} />
+								) : null}
+							</Button>
 						</Popover>
-
 					</div>
 
 				</div>

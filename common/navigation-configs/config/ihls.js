@@ -1,4 +1,8 @@
-const athenaDashboard = {
+const ihls = {
+	'/[partner_id]/ihls/file-upload': {
+		navigation : 'ihls-file_upload',
+		isMainNav  : true,
+	},
 	'/[partner_id]/ihls/athena-dashboard': {
 		layoutType : 'no_header',
 		navigation : 'ihls-athena_dashboard',
@@ -7,7 +11,8 @@ const athenaDashboard = {
 	'/[partner_id]/ihls/athena-dashboard/report': {
 		layoutType : 'no_header',
 		navigation : 'ihls-athena_dashboard',
+		isMainNav  : false,
 	},
 };
 
-export default athenaDashboard;
+module.exports = ihls;
