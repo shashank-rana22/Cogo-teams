@@ -1,6 +1,8 @@
 import { Button, Pill, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils/';
+import { startCase } from '@cogoport/utils/';
 
 import UPLOAD_DOCUMENT_STATUS_MAPPING from '../../../constants/upload-document-status-mapping';
 import ActionContent from '../common/Enrichment/ActionContent';
@@ -52,7 +54,14 @@ const getEnrichmentColumns = ({
 		accessor : ({ created_at = '' }) => (
 			<section>
 				{created_at ? (
-					<div>{format(created_at, 'dd MMM yyyy') || '-'}</div>
+					<div>
+						{formatDate({
+							date       : created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) || '-'}
+
+					</div>
 				) : (
 					'___'
 				)}
@@ -86,7 +95,15 @@ const getEnrichmentColumns = ({
 		id       : 'upload_date',
 		Header   : 'UPLOAD DATE',
 		accessor : ({ created_at }) => (
-			<section>{created_at ? format(created_at, 'dd MMM yyyy') : '-'}</section>
+			<section>
+				{created_at
+					? formatDate({
+						date       : created_at,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					}) : '-'}
+
+			</section>
 		),
 	},
 	{

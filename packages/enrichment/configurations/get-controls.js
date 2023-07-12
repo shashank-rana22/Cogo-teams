@@ -108,6 +108,7 @@ const getUserControls = ({
 				name     : 'country',
 				label    : 'Country',
 				type     : 'asyncSelect',
+				valueKey : 'display_name',
 				asyncKey : 'list_locations',
 				params   : {
 					filters: { type: ['country'] },

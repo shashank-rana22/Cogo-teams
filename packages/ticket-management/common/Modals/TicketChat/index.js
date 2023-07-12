@@ -34,7 +34,7 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 };
 
 function TicketChat({
-	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
 	setShowReassign = () => {},
 }) {
 	const { ticketId = '' } = modalData || {};
@@ -100,7 +100,7 @@ function TicketChat({
 		isInternal,
 	});
 
-	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
+	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
 		refreshTickets,
 	});
 
@@ -140,6 +140,7 @@ function TicketChat({
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
+						updateLoading={updateLoading}
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
 						setShowEscalate={setShowEscalate}
@@ -196,6 +197,7 @@ function TicketChat({
 				<EscalateTicket
 					ticketId={ticketId}
 					showEscalate={showEscalate}
+					updateLoading={updateLoading}
 					setShowEscalate={setShowEscalate}
 					updateTicketActivity={updateTicketActivity}
 				/>
