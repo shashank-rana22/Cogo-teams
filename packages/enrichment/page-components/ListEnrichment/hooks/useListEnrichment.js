@@ -14,7 +14,7 @@ const useListEnrichment = () => {
 
 	const { profile, general } = useSelector((state) => state || {});
 
-	const { onEnrichmentClick = () => {} } = useMarkEnrichmentComplete();
+	const { onEnrichmentClick } = useMarkEnrichmentComplete();
 
 	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
 
@@ -102,6 +102,7 @@ const useListEnrichment = () => {
 		setSelectedRowId,
 		onEnrichmentClick,
 		refetch,
+		activeTab,
 	});
 
 	return {

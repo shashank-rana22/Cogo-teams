@@ -107,6 +107,7 @@ const getUserControls = ({
 			{
 				name     : 'country',
 				label    : 'Country',
+				labelKey : 'display_name',
 				type     : 'asyncSelect',
 				valueKey : 'name',
 				asyncKey : 'list_locations',
@@ -119,6 +120,7 @@ const getUserControls = ({
 			{
 				name        : 'state',
 				label       : 'State',
+				labelKey    : 'display_name',
 				valueKey    : 'name',
 				placeholder : 'Select State...',
 				type        : 'asyncSelect',
@@ -134,6 +136,7 @@ const getUserControls = ({
 				name     : 'city',
 				label    : 'City',
 				type     : 'asyncSelect',
+				labelKey : 'display_name',
 				valueKey : 'name',
 				asyncKey : 'list_locations',
 				params   : {
@@ -152,7 +155,7 @@ const getUserControls = ({
 				type        : 'asyncSelect',
 				name        : 'pincode',
 				label       : 'Pincode',
-				labelKey    : 'postal_code',
+				labelKey    : 'display_name',
 				valueKey    : 'postal_code',
 				asyncKey    : 'list_locations',
 				initialCall : false,

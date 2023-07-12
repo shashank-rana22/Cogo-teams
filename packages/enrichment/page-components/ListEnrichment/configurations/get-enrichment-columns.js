@@ -14,6 +14,7 @@ const getEnrichmentColumns = ({
 	selectedRowId = '',
 	onEnrichmentClick = () => {},
 	refetch = () => {},
+	activeTab = '',
 }) => [
 	{
 		id       : 'id',
@@ -155,13 +156,13 @@ const getEnrichmentColumns = ({
 		),
 	},
 	{
-		id       : 'edit',
+		id       : 'action',
 		Header   : <div className={styles.action_header}>Action</div>,
 		accessor : (item) => {
 			const { id } = item;
 
 			const onClickCta = (workflow) => {
-				if (workflow === 'view') {
+				if (['add', 'edit'].includes(workflow)) {
 					handleUploadClick(id);
 				} else {
 					onEnrichmentClick({ id, workflow, refetch });
@@ -176,6 +177,7 @@ const getEnrichmentColumns = ({
 					render={(
 						<ActionContent
 							onClickCta={onClickCta}
+							activeTab={activeTab}
 						/>
 					)}
 					onClickOutside={() => setSelectedRowId(null)}
@@ -193,23 +195,6 @@ const getEnrichmentColumns = ({
 				</Popover>
 			);
 		},
-	},
-	{
-		id       : 'action',
-		Header   : <div className={styles.action_header}>Action</div>,
-		accessor : ({ id }) => (
-			<section className={styles.content_container}>
-				<Button
-					themeType="secondary"
-					type="button"
-					size="sm"
-					className={styles.edit_cta}
-					onClick={() => handleUploadClick(id)}
-				>
-					Add Details
-				</Button>
-			</section>
-		),
 	},
 	{
 		id       : 'status',

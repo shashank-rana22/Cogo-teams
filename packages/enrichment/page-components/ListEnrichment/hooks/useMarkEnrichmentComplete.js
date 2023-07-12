@@ -4,23 +4,23 @@ import { useAllocationRequest } from '@cogoport/request';
 
 const useMarkEnrichmentComplete = () => {
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'feedback_request_status',
+		url     : 'feedback_enrichment_response',
 		method  : 'POST',
-		authkey : 'post_allocation_feedback_request_status',
+		authkey : 'post_allocation_feedback_enrichment_response',
 	}, { manual: true });
 
 	const onEnrichmentClick = async ({ id, workflow, refetch = () => {} }) => {
 		try {
 			const payload = {
-				id,
-				status: workflow,
+				feedback_request_id : id,
+				status              : workflow,
 			};
 
 			await trigger({
 				data: payload,
 			});
 
-			Toast.success('Request Submitted Successfully');
+			Toast.success('Enrichment Completed Successfully');
 
 			refetch();
 		} catch (error) {
