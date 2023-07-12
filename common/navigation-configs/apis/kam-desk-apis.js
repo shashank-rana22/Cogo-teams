@@ -381,7 +381,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -667,6 +667,14 @@ const apis = [
 		api          : 'get_pending_task_authorization',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api         : 'get_saas_hs_code_list_commodities',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
 	},
 
 ];

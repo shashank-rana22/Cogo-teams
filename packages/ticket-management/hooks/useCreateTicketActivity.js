@@ -1,10 +1,21 @@
-import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+const getPayload = ({ profile, message, ticketId, file, isInternal }) => ({
+	UserType      : 'user',
+	PerformedByID : profile?.user?.id,
+	Description   : message,
+	Type          : 'respond',
+	TicketID      : [Number(ticketId)],
+	IsInternal    : isInternal,
+	Status        : 'activity',
+	Data          : { Url: [file] || [] },
+});
+
 const useCreateTicketActivity = ({
 	ticketId,
-	refetchTicket,
+	isInternal,
+	refreshTickets,
 	scrollToBottom,
 }) => {
 	const { profile } = useSelector((state) => state);
@@ -16,27 +27,15 @@ const useCreateTicketActivity = ({
 	}, { manual: true });
 
 	const createTicketActivity = async ({ file, message }) => {
-		const payload = {
-			Description : message,
-			Type        : 'respond',
-			TicketID    : [Number(ticketId)],
-			Status      : 'activity',
-			Data        : { Url: [file] || [] },
-		};
-
 		try {
 			await trigger({
-				data: {
-					...payload,
-					UserType      : 'ticket_user',
-					PerformedByID : profile?.user?.id,
-				},
+				data: getPayload({ profile, message, ticketId, file, isInternal }),
 			});
 
-			refetchTicket();
+			refreshTickets();
 			scrollToBottom();
 		} catch (error) {
-			Toast.error(error?.error);
+			console.error(error?.error);
 		}
 	};
 

@@ -12,6 +12,7 @@ const STATUS_MAPPING = ['approved', 'active', 'accepted'];
 
 function Header({
 	detail,
+	personalDetails,
 	loading,
 	setShowCtcBreakupModal,
 	getEmployeeDetails,
@@ -23,8 +24,10 @@ function Header({
 
 	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
 
+	const { personal_information, identification_documents, address_details } = personalDetails || {};
+
 	const onClickGoBack = () => {
-		router.push('/new-employee-dashboard', '/new-employee-dashboard');
+		router.back();
 	};
 
 	const isLoading = loading || isEmpty(detail || {}) || false;
@@ -92,6 +95,7 @@ function Header({
 						themeType="secondary"
 						style={{ marginLeft: 12 }}
 						loading={isLoading || btnloading || offerLetterApiLoading}
+						disabled={!personal_information && !identification_documents && !address_details}
 					>
 						Add CTC Breakup
 					</Button>

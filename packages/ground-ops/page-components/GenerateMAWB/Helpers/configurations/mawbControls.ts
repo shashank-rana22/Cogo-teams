@@ -1,6 +1,6 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass, editHawbNumberCondition) => ({
+const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
@@ -243,6 +243,7 @@ const mawbControls = (disableClass, editHawbNumberCondition) => ({
 						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
+					value: unitDefaultValue,
 				},
 
 			],

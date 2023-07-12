@@ -356,6 +356,7 @@ function asyncFieldsTicketTypes() {
 		initialCall  : true,
 		qFilterKey   : 'QFilter',
 		listKey      : 'items',
+		searchByq    : true,
 	};
 }
 
@@ -493,6 +494,17 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncCommoditiesList() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'id',
+		endpoint     : 'saas/hs-code/list',
+		initialCall  : true,
+		authkey      : 'get_saas_hs_code_list',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
 function asyncFortigoLocations() {
 	return {
 		labelKey    : 'location_name',
@@ -586,6 +598,71 @@ function asyncListPromotions() {
 	};
 }
 
+function asyncInsuranceCommoditiesList() {
+	return {
+		labelKey     : 'commodity',
+		valueKey     : 'id',
+		endpoint     : 'saas/insurance/list-commodities',
+		initialCall  : true,
+		authkey      : 'get_saas_insurance_list_commodities',
+		microService : 'business_finance',
+	};
+}
+
+function asyncListDunningTemplates() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_dunning_templates',
+		initialCall : true,
+	};
+}
+
+function asyncListOrganizationStakeholders() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/organization-stakeholders',
+		initialCall : true,
+	};
+}
+
+function asyncListShipmentPendingTasks() {
+	return {
+		labelKey    : 'document_type',
+		valueKey    : 'document_type',
+		endpoint    : 'list_shipment_pending_tasks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_shipments',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipmentServices() {
+	return {
+		labelKey    : 'shipment_serial_id',
+		valueKey    : 'shipment_id',
+		endpoint    : 'list_shipment_services',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
 function asyncListSaasHsCodes() {
 	return {
 		valueKey       : 'id',
@@ -594,7 +671,7 @@ function asyncListSaasHsCodes() {
 		endpoint       : 'saas/hs-code/list',
 		defaultOptions : true,
 		searchByq      : true,
-		searchByKey    : 'query',
+		qFilterKey    : 'query',
 		microService   : 'business_finance',
 		defaultParams  : {},
 	};
@@ -642,11 +719,18 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
+	asyncListShipmentPendingTasks,
+	asyncListShipments,
+	asyncListShipmentServices,
 	asyncListSaasHsCodes,
 };

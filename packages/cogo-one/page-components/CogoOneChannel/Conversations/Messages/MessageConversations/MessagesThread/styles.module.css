@@ -1,0 +1,18 @@
+.raise_ticket {
+	cursor: pointer;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.load_prev_messages {
+	display: flex;
+	justify-content: center;
+}
+
+.refresh_icon {
+	cursor: pointer;
+}

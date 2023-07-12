@@ -20,3 +20,8 @@
 	align-items: center;
 	cursor: pointer;
 }
+
+.tooltip_text {
+	word-break: break-word;
+	word-wrap: break-word;
+}

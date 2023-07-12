@@ -2,6 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
+import { getAssignedChats } from '../../../helpers/reminderModalHelpers';
 import useShipmentReminder from '../../../hooks/useShipmentReminder';
 import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
@@ -9,27 +10,40 @@ import FillContainer from './FillContainer';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-function ReminderModal({ firestore, agentId, getAssignedChats }) {
+const SNAPSHOT_TIMEOUT = 100;
+const DEFAULT_NO_OF_CHATS_ASSIGNED = 0;
+
+function ReminderModal({ firestore, agentId }) {
 	const [reminderModal, setReminderModal] = useState(false);
 
-	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
-		{ setReminderModal, firestore, agentId, getAssignedChats },
-	);
+	const {
+		mountReminderSnapShot,
+		cleanUpTimeout,
+		shipmentData,
+	} = useShipmentReminder({
+		setReminderModal,
+		firestore,
+		agentId,
+		getAssignedChats: () => {
+			getAssignedChats({ firestore, userId: agentId });
+		},
+	});
+
+	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	useEffect(() => {
 		let addSnapShotAfterfewSeconds = '';
 		clearTimeout(addSnapShotAfterfewSeconds);
 		addSnapShotAfterfewSeconds = setTimeout(
 			mountReminderSnapShot,
-			100,
+			SNAPSHOT_TIMEOUT,
 		);
+
 		return () => {
 			cleanUpTimeout();
 			clearTimeout(addSnapShotAfterfewSeconds);
 		};
 	}, [cleanUpTimeout, mountReminderSnapShot]);
-
-	const statsMapping = getShipmentReminderStats(shipmentData);
 
 	return (
 		<Modal
@@ -44,7 +58,7 @@ function ReminderModal({ firestore, agentId, getAssignedChats }) {
 			<Modal.Body>
 				<div className={styles.header}>
 					No. of Chats Assigned
-					<span>{shipmentData.assignedChatsCount || 0}</span>
+					<span>{shipmentData.assignedChatsCount || DEFAULT_NO_OF_CHATS_ASSIGNED}</span>
 				</div>
 				<div className={styles.header}>
 					Shipments Booked

@@ -11,11 +11,16 @@ import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
-const shipmentRefetchTasks = [
+const ROLLOVER_TASKS = ['mark_container_gated_in', 'mark_vessel_departed'];
+
+const SHIPMENT_REFETCH_TASKS = [
 	'confirm_booking',
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
 	'update_airway_bill_number',
+	'mark_vessel_departed',
+	'mark_vessel_arrived',
+	...ROLLOVER_TASKS,
 ];
 
 function useHandleSubmit({
@@ -33,7 +38,7 @@ function useHandleSubmit({
 	const {
 		shipment_data,
 		primary_service,
-		getShipment,
+		refetch: getShipment,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
@@ -76,6 +81,7 @@ function useHandleSubmit({
 			task,
 			dataToSend,
 			serviceIdMapping,
+			ROLLOVER_TASKS,
 			primary_service,
 		);
 
@@ -85,6 +91,7 @@ function useHandleSubmit({
 			finalPayload = extraApiPayload(
 				rawValues,
 				finalConfig?.end_point,
+				task,
 			);
 
 			finalPayload = {
@@ -134,12 +141,11 @@ function useHandleSubmit({
 				}
 				// feedbacks to cogolens ends
 
-				refetch();
-
-				getShipmentTimeline();
-
-				if (shipmentRefetchTasks.includes(task?.task)) {
+				if (SHIPMENT_REFETCH_TASKS.includes(task?.task)) {
 					getShipment();
+				} else {
+					refetch();
+					getShipmentTimeline();
 				}
 			} else {
 				Toast.error('Something went wrong');
@@ -161,6 +167,7 @@ function useHandleSubmit({
 	return {
 		onSubmit,
 		loading: loading || loadingTask || isLoading,
+		setIsLoading,
 	};
 }
 export default useHandleSubmit;

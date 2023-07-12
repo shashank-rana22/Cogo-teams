@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const controls = [
 	{
 		name      : 'resume',
-		label     : 'Upload Resume',
+		label     : 'Upload Resume*',
 		type      : 'fileUpload',
 		accept    : '.pdf',
 		multiple  : false,

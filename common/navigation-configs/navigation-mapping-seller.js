@@ -116,6 +116,15 @@ const navigationMappingSeller = {
 				main_apis     : [],
 				possible_apis : app_apis.saas_order_history,
 			},
+			{
+				key           : 'saas_premium_services-cogo_insurance',
+				title         : 'Cargo Insurance',
+				href          : '/saas/insurance/list',
+				as            : '/saas/insurance/list',
+				icon          : 'nav-insurance',
+				main_apis     : [],
+				possible_apis : app_apis.saas_insurance,
+			},
 		],
 	},
 	app_bookings: {
@@ -201,6 +210,17 @@ const navigationMappingSeller = {
 				icon          : 'nav-ocean-schedules',
 				main_apis     : [],
 				possible_apis : app_apis.saas_schedules,
+			},
+			{
+				key           : 'saas_tools-air_ocean_tracking_v2',
+				title         : 'Track & Trace',
+				href          : '/saas/tools/air-ocean-tracking',
+				as            : '/saas/tools/air-ocean-tracking',
+				type          : 'link',
+				icon          : 'nav-ocean-schedules',
+				main_apis     : [],
+				possible_apis : [...app_apis.saas_tracking,
+					...app_apis.saas_air_tracking, ...app_apis.saas_air_ocean_tracking],
 			},
 			{
 				key       : 'saas_tools-freight_rate_trend',
