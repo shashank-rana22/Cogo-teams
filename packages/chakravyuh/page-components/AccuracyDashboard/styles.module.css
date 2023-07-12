@@ -1,0 +1,18 @@
+.heading {
+	padding: 0 8px;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.main_container {
+	display: flex;
+	gap: 16px;
+}
+
+.graph_container {
+	flex-grow: 1;
+}
+
+.side_container {
+	width: 475px;
+}
