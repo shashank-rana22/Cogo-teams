@@ -20,10 +20,7 @@ import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const excludeServices = [
-	'fcl_freight_service',
-	'haulage_freight_service',
-];
+const excludeServices = ['fcl_freight_service'];
 const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 
 const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
