@@ -1,18 +1,20 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const getPayload = ({ profile, message, ticketId, file }) => ({
+const getPayload = ({ profile, message, ticketId, file, isInternal }) => ({
 	UserType      : 'user',
 	PerformedByID : profile?.user?.id,
 	Description   : message,
 	Type          : 'respond',
 	TicketID      : [Number(ticketId)],
+	IsInternal    : isInternal,
 	Status        : 'activity',
 	Data          : { Url: [file] || [] },
 });
 
 const useCreateTicketActivity = ({
 	ticketId,
+	isInternal,
 	refreshTickets,
 	scrollToBottom,
 }) => {
@@ -27,7 +29,7 @@ const useCreateTicketActivity = ({
 	const createTicketActivity = async ({ file, message }) => {
 		try {
 			await trigger({
-				data: getPayload({ profile, message, ticketId, file }),
+				data: getPayload({ profile, message, ticketId, file, isInternal }),
 			});
 
 			refreshTickets();
