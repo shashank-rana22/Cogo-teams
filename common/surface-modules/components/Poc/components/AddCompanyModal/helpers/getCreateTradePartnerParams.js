@@ -15,7 +15,7 @@ const getCreateTradePartnerParams = (values) => {
 	} = values || {};
 
 	const [addressValue, pincode] = (address || '').split('::');
-	console.log(values, 'Vauee');
+
 	const params = {
 		address: addressValue,
 		...(!isEmpty(mobile_number) && {
