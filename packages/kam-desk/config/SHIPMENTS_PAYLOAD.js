@@ -1,9 +1,11 @@
 import { addDays, subtractDays } from '@cogoport/utils';
 
 const TODAY = new Date();
-const scheduleDepartureInThreeDays = { schedule_departure_less_than: addDays(TODAY, 3) };
-const scheduleDepartureYesterday = { schedule_departure_less_than: subtractDays(TODAY, 1) };
-const scheduleDepartureTomorrow = { schedule_departure_less_than: addDays(TODAY, 1) };
+const THREE = 3;
+const ONE = 1;
+const scheduleDepartureInThreeDays = { schedule_departure_less_than: addDays(TODAY, THREE) };
+const scheduleDepartureYesterday = { schedule_departure_less_than: subtractDays(TODAY, ONE) };
+const scheduleDepartureTomorrow = { schedule_departure_less_than: addDays(TODAY, ONE) };
 const scheduleArrivalToday = { schedule_arrival_less_than: TODAY };
 
 export const CRITICAL_TABS = {
@@ -326,16 +328,14 @@ const tabPayload = {
 					'in_progress',
 				],
 			},
-			completed : { state: 'completed' },
-			cancelled : { state: 'cancelled' },
-		},
-		domestic_air_freight: {
-			ongoing: {
+			triggered_pending_invoices: {
 				state: [
 					'shipment_received',
 					'confirmed_by_importer_exporter',
 					'in_progress',
+					'completed',
 				],
+				triggered_pending_invoices: true,
 			},
 			completed : { state: 'completed' },
 			cancelled : { state: 'cancelled' },
@@ -348,6 +348,15 @@ const tabPayload = {
 					'in_progress',
 				],
 			},
+			triggered_pending_invoices: {
+				state: [
+					'shipment_received',
+					'confirmed_by_importer_exporter',
+					'in_progress',
+					'completed',
+				],
+				triggered_pending_invoices: true,
+			},
 			completed : { state: 'completed' },
 			cancelled : { state: 'cancelled' },
 		},
@@ -359,6 +368,35 @@ const tabPayload = {
 					'in_progress',
 				],
 
+			},
+			triggered_pending_invoices: {
+				state: [
+					'shipment_received',
+					'confirmed_by_importer_exporter',
+					'in_progress',
+					'completed',
+				],
+				triggered_pending_invoices: true,
+			},
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
+		},
+		domestic_air_freight: {
+			ongoing: {
+				state: [
+					'shipment_received',
+					'confirmed_by_importer_exporter',
+					'in_progress',
+				],
+			},
+			triggered_pending_invoices: {
+				state: [
+					'shipment_received',
+					'confirmed_by_importer_exporter',
+					'in_progress',
+					'completed',
+				],
+				triggered_pending_invoices: true,
 			},
 			completed : { state: 'completed' },
 			cancelled : { state: 'cancelled' },
