@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useListShipmentPendingTasks from '../hooks/useListShipmentPendingTasks';
 
 import ApprovedAWB from './ApprovedAWB';
+// import AWBDocument from './AWBDocument';
 import Filters from './Filters';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -32,6 +33,12 @@ function PrintingDesk() {
 	const [activeTab, setActiveTab] = useState('approved_awb');
 	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
+	const [generate, setGenerate] = useState(false);
+	const [item, setItem] = useState({});
+	const [viewDoc, setViewDoc] = useState(false);
+	const [edit, setEdit] = useState(false);
+
+	console.log('generate', generate, item, viewDoc);
 
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 
@@ -49,8 +56,8 @@ function PrintingDesk() {
 					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
-					{TABS.map((item) => {
-						const { key = '', label = '' } = item;
+					{TABS.map((tab) => {
+						const { key = '', label = '' } = tab;
 						return (
 							<TabPanel
 								key={key}
@@ -100,17 +107,29 @@ function PrintingDesk() {
 					key={activeTab}
 					data={data}
 					loading={loading}
-					// setGenerate={setGenerate}
-					// setItem={setItem}
-					// setViewDoc={setViewDoc}
-					// edit={edit}
-					// setEdit={setEdit}
+					setGenerate={setGenerate}
+					setItem={setItem}
+					setViewDoc={setViewDoc}
+					edit={edit}
+					setEdit={setEdit}
 					page={page}
 					setPage={setPage}
 					listAPI={listAPI}
 					activeTab={activeTab}
 				/>
 			)}
+
+			{/* {(generate || viewDoc) && (
+				<AWBDocument
+					viewDoc={viewDoc}
+					setViewDoc={setViewDoc}
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+					setItem={setItem}
+					setGenerate={setGenerate}
+				/>
+			)} */}
 
 		</div>
 	);

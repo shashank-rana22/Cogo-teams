@@ -45,5 +45,4 @@
 
 .flex {
 	display: flex;
-	width: var(--span) px;
 }

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const useGetMediaUrl = () => {
 	const uploadDocument = (file, documentData) => new Promise((resolve, reject) => {
@@ -55,7 +56,7 @@ const useGetMediaUrl = () => {
 		const res = await getSignature({ file_name: name }).then((response) => uploadDocument(file, response));
 		const resObj = JSON.parse(res);
 
-		return resObj.url.split('?')[0];
+		return resObj.url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 	};
 
 	return { handleUpload };
