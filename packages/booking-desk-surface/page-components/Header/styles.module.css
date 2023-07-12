@@ -37,7 +37,7 @@
 					margin: 4px 20px 4px 4px;
 					background: #fff;
 					border-radius: 6px;
-					box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+					box-shadow: 0 0 8px #2c3e5033;
 
 					.ui_tabs_list_title {
 						font-size: 12px;
