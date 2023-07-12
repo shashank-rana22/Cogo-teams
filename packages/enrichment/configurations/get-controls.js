@@ -155,7 +155,7 @@ const getUserControls = ({
 				type        : 'asyncSelect',
 				name        : 'pincode',
 				label       : 'Pincode',
-				labelKey    : 'display_name',
+				labelKey    : 'postal_code',
 				valueKey    : 'postal_code',
 				asyncKey    : 'list_locations',
 				initialCall : false,
