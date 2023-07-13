@@ -15,7 +15,7 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/list_course_video',
+		url    : '/list_course_videos',
 	}, { manual: true });
 
 	const [{ deleteLoading = false }, deleteApiTrigger] = useRequest({
