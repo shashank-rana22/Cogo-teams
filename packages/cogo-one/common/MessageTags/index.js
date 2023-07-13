@@ -11,7 +11,7 @@ function MessageTags({ tags = [] }) {
 					eachTag={eachTag?.value}
 					key={eachTag}
 					size="md"
-					color="#fcfcc5"
+					color="#fef199"
 					className={styles.each_tag}
 				>
 					{`${startCase(eachTag?.name)}- ${eachTag?.value}`}
