@@ -33,31 +33,6 @@ const getControls = ({ country_id }) => {
 
 	const controls = [
 		{
-			name        : 'ifsc_code',
-			label       : 'IFSC Code',
-			type        : 'text',
-			style       : { flexBasis: '30%' },
-			maxLength   : 11,
-			placeholder : 'Select Organization Type',
-			rules       : { required: 'Organization Type is required' },
-		},
-		{
-			name        : 'bank_name',
-			label       : 'Bank Name',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Name of the Bank',
-			rules       : { required: 'Bank Name is required' },
-
-		},
-		{
-			name        : 'branch_name',
-			label       : 'Branch Name',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Type here to search',
-			rules       : { required: 'Branch Name is required' },
-
-		},
-		{
 			name        : 'account_holder_name',
 			label       : 'Account Holder Name',
 			type        : 'text',
