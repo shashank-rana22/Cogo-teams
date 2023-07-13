@@ -1,14 +1,16 @@
-import { IcMPort, IcMLocation, IcMAirport } from '@cogoport/icons-react';
+import { IcMPort, IcMLocation, IcMAirport, IcAWarehouse, IcMWater, IcMHaulage } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 const ICON_MAPPING = {
-	seaport   : <IcMPort />,
-	airport   : <IcMAirport />,
-	country   : <IcMLocation />,
-	city      : <IcMLocation />,
-	warehouse : <IcMLocation />,
-	pincode   : <IcMLocation />,
+	seaport          : <IcMPort />,
+	airport          : <IcMAirport />,
+	country          : <IcMLocation />,
+	city             : <IcMLocation />,
+	warehouse        : <IcAWarehouse />,
+	pincode          : <IcMLocation />,
+	riverport        : <IcMWater />,
+	railway_terminal : <IcMHaulage />,
 };
 
 function RenderListLocationOption({ item = {} }) {

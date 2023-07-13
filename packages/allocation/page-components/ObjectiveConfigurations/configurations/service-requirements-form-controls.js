@@ -1,6 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-import RenderListLocationOption from '../common/RenderListLocationOption';
+import RenderListLocationOption from '../../../common/RenderListLocationOption';
 import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
 import getIncotermOptionsByTradeType from '../helpers/get-incoterm-options-by-trade-type';
 import getListLocationParams from '../helpers/get-list-location-params';
@@ -35,8 +35,8 @@ const getServiceRequirementControls = (props) => {
 					value : 'haulage',
 				},
 				{
-					label : 'Rail',
-					value : 'rail',
+					label : 'Rail Domestic',
+					value : 'rail_domestic',
 				},
 			],
 			isClearable: true,
@@ -136,9 +136,10 @@ const getServiceRequirementControls = (props) => {
 		},
 		{
 			name        : 'cargo_weight',
-			label       : 'Cargo Weight',
+			label       : 'Cargo Weight (in Kg)',
 			placeholder : 'Weight',
-			type        : 'text',
+			type        : 'number',
+			min         : 0,
 			isClearable : true,
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight'],
