@@ -1,12 +1,13 @@
 import { ResponsiveBump } from '@cogoport/charts/bump';
 import { ResponsiveMarimekko } from '@cogoport/charts/marimekko';
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import {
 	DUMMY_DATA, TOTAL_DEVIATION,
 	DARKEN_AMOUNT,
 } from '../../../../constants/histogram_config';
-import { section_header } from '../styles.module.css';
+import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
@@ -17,7 +18,7 @@ const LINE_DATA = [{
 
 function Deviation() {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Deviation</h3>
 			<div className={styles.graph_container}>
 				<ResponsiveMarimekko

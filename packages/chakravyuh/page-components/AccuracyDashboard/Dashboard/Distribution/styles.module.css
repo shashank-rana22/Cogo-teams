@@ -1,9 +1,6 @@
 .container {
 	height: 314px;
-	padding: 16px;
 	font-weight: 600;
-	background-color: #fff;
-	border-radius: 8px;
 }
 
 .pie_chart_container {

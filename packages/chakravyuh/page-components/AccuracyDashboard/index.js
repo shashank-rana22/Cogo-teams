@@ -1,16 +1,41 @@
-import React from 'react';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import DashboardView from './Dashboard';
+import DrillDownView from './DrillDown';
 import Filters from './Filters';
 import SupplyRates from './RatesList';
 import styles from './styles.module.css';
 
+const VIEW_MAPPING = {
+	dashboard: {
+		Component : DashboardView,
+		heading   : 'Price Accuracy Dashboard',
+	},
+	drilldown: {
+		Component : DrillDownView,
+		heading   : 'Rates DrillDown',
+		backView  : 'dashboard',
+	},
+};
+
 function AccuracyDashboard() {
+	const [view, setView] = useState('dashboard');
+
+	const { Component, heading, backView } = VIEW_MAPPING[view];
+
 	return (
 		<div className={styles.container}>
-			<h1 className={styles.heading}>Price Accuracy Dashboard</h1>
+			<div className={styles.heading_container}>
+				{backView && (
+					<IcMArrowBack
+						onClick={() => setView(backView)}
+					/>
+				)}
+				<h1 className={styles.heading}>{heading}</h1>
+			</div>
 			<Filters />
-			<DashboardView />
+			<Component setView={setView} />
 			<SupplyRates />
 		</div>
 	);

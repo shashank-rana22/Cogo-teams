@@ -6,16 +6,15 @@ import Distribution from './Distribution';
 import styles from './styles.module.css';
 import Views from './Views';
 
-function DashboardView() {
+function DashboardView({ setView = () => {} }) {
 	return (
-
 		<div className={styles.main_container}>
 			<div className={styles.graph_container}>
 				<Accuracy />
 				<Deviation />
 			</div>
 			<div className={styles.side_container}>
-				<Views />
+				<Views setView={setView} />
 				<Distribution />
 			</div>
 		</div>
