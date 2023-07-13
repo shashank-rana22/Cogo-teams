@@ -1,4 +1,4 @@
-const controls = (no_of_ports) => ({
+const controls = (no_of_ports, locationOptions, shippingLineOptions) => ({
 	basic: [
 		{
 			name           : 'shipping_line_id',
@@ -8,6 +8,7 @@ const controls = (no_of_ports) => ({
 			placeholder    : 'Select Shipping Line',
 			span           : 4,
 			size           : 'md',
+			...shippingLineOptions,
 			// rules          : { required: 'Required' },
 		},
 		{
@@ -83,12 +84,13 @@ const controls = (no_of_ports) => ({
 				placeholder : 'Type here...',
 				span        : 4,
 				size        : 'md',
+				...locationOptions,
 				// rules       : { required: 'Required' },
 			},
 			{
 				label     		: 'ETA',
 				name        : 'eta',
-				type        : 'select',
+				type        : 'date_picker',
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
@@ -97,7 +99,7 @@ const controls = (no_of_ports) => ({
 			{
 				label       : 'ETD',
 				name        : 'etd',
-				type        : 'select',
+				type        : 'date_picker',
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',

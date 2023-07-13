@@ -1,5 +1,11 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import {
+	asyncFieldsOperators, asyncFieldsLocations,
+}
+	from '@cogoport/forms/utils/getAsyncFields';
+import { merge } from '@cogoport/utils';
 import React from 'react';
 
 import Layout from '../../common/Layout/index.tsx';
@@ -15,10 +21,19 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 	const { handleSubmit, control, formState: { errors }, watch } = useForm();
 	const formValues = watch();
 	const no_of_ports = watch('port_number');
-	const fields = controls(no_of_ports);
 	const createRefetch = () => {
 		makeRequest();
 	};
+	const shippingLineOptions = useGetAsyncOptions(merge(
+		asyncFieldsOperators(),
+		{ params: { filters: { operator_type: 'shipping_line' } } },
+	));
+	const locationOptions = useGetAsyncOptions(merge(
+		asyncFieldsLocations(),
+		{ params: { filters: { type: 'seaport' } } },
+	));
+
+	const fields = controls(no_of_ports, locationOptions, shippingLineOptions);
 	const { createSchedule } = useCreateVesselSchedules({ refetch: createRefetch });
 	return (
 		<Modal
