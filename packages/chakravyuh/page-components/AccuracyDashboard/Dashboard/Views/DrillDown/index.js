@@ -2,8 +2,8 @@
 import anime from 'animejs/lib/anime.es';
 import React, { useRef, useEffect } from 'react';
 
-import IcBranch from '../../../../assets/ic-tree.svg';
-import { D_NEXT, D_TOP, PATH_STYLE } from '../../../../constants/svg_constants';
+import IcBranch from '../../../../../assets/ic-tree.svg';
+import { D_NEXT, D_TOP, PATH_STYLE } from '../../../../../constants/svg_constants';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,7 @@ function DrillDown() {
 					strokeDashoffset : 0,
 					easing           : 'linear',
 					duration         : 2000,
-					delay            : 0, // Delay each animation by 500 milliseconds
+					delay            : 0,
 					loop             : true,
 				});
 			});
