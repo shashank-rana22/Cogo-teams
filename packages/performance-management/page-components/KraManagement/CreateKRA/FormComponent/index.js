@@ -1,15 +1,15 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateKRA from '../hooks/useCreateKRA';
 
-import controls from './DescriptionControls';
+import DescriptionControls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
 const OFFSET = 1;
 
 function FormComponent({ data }) {
@@ -37,6 +37,8 @@ function FormComponent({ data }) {
 
 	const { kra_name, kra_description, operation_key, is_rating_individual } = kra_details || {};
 
+	const controls = DescriptionControls(kra_name);
+
 	useEffect(() => {
 		setValue('kra_name', kra_name);
 		setValue('kra_description', kra_description);
@@ -45,11 +47,11 @@ function FormComponent({ data }) {
 		setValue('is_target_achieved_manually', operation_key === 'manual' ? 'yes' : 'no');
 		setValue(
 			'is_rating_schema_in_percentage',
-			kra_ratings?.[DEFAULT_INDEX]?.value_type === 'percentage' ? 'yes' : 'no',
+			kra_ratings?.[GLOBAL_CONSTANTS?.zeroth_index]?.value_type === 'percentage' ? 'yes' : 'no',
 		);
 		setValue(
 			'target_value',
-			kra_ratings?.[DEFAULT_INDEX]?.target_value,
+			kra_ratings?.[GLOBAL_CONSTANTS?.zeroth_index]?.target_value,
 		);
 		setValue('squad_ids', squad_details?.map(({ id }) => (id)));
 		setValue('tribe_ids', tribe_details?.map(({ id }) => (id)));

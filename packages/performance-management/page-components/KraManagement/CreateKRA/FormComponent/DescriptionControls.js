@@ -1,8 +1,9 @@
-const DescriptionControls = [
+const DescriptionControls = (kra_name) => [
 	{
 		name        : 'kra_name',
 		type        : 'text',
 		label       : 'Enter an appropriate name for the KRA',
+		disabled    : kra_name,
 		placeholder : 'Name for the KRA',
 		rules       : {
 			required: 'name is required',
