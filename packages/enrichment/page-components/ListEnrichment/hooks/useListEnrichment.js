@@ -18,6 +18,8 @@ const useListEnrichment = () => {
 
 	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
 
+	const authRoleId = profile?.auth_role_data?.id;
+
 	const { query: { tab = '' }, locale = '' } = general;
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -124,6 +126,7 @@ const useListEnrichment = () => {
 		searchValue,
 		setSearchValue,
 		partnerId   : partner_id,
+		authRoleId,
 		setApiName,
 	};
 };

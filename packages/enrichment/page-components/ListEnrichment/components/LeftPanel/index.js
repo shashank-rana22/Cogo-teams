@@ -16,6 +16,7 @@ function LeftPanel(props) {
 		setSearchValue,
 		listRefetch,
 		partnerId,
+		authRoleId,
 	} = props;
 
 	const filteredColumns = columns.filter(
@@ -38,6 +39,7 @@ function LeftPanel(props) {
 			showStatistics
 			listRefetch={listRefetch}
 			partnerId={partnerId}
+			authRoleId={authRoleId}
 		/>
 	);
 }

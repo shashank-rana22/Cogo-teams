@@ -1,8 +1,8 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import { OPTIONS } from '../../Dashboard/constants/bulk-create-feedback-options';
-import useCreateBulkFeedback from '../../hooks/useCreateBulkFeedback';
+import { OPTIONS } from '../../configurations/bulk-create-feedback-options';
+import useCreateBulkEnrichmentRequests from '../../hooks/useCreateBulkEnrichmentRequests';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,7 @@ function GetLeadFeedbacks({ refetch = () => {} }) {
 		onCloseModal,
 		setSelectedCount,
 
-	} = useCreateBulkFeedback({ refetch });
+	} = useCreateBulkEnrichmentRequests({ refetch });
 
 	return (
 		<>

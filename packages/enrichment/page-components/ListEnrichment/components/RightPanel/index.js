@@ -21,6 +21,7 @@ function RightPanel(props) {
 		setApiName,
 		setParams = () => {},
 		partnerId = '',
+		authRoleId,
 	} = props;
 
 	const geo = getGeoConstants();
@@ -55,6 +56,7 @@ function RightPanel(props) {
 							setSearchValue={setSearchValue}
 							showStatistics={false}
 							partnerId={partnerId}
+							authRoleId={authRoleId}
 						/>
 					</TabPanel>
 				))}

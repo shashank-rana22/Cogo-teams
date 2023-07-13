@@ -1,19 +1,13 @@
 import { Pagination } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useSelector } from '@cogoport/store';
 
 import CrmTable from '../../../../common/CrmTable';
 import EnrichmentRequest from '../../../../common/EnrichmentRequest';
-import GetLeadFeedbacks from '../../../../common/GetLeadFeedbacks';
 import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
 import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 	const {
@@ -27,18 +21,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
-		refetch = () => {},
 	} = useFeedbackTableData({});
-
-	const { profile } = useSelector((state) => state);
-
-	const authRoleId = profile?.auth_role_data?.id;
-	const partnerId = profile?.partner?.id;
-
-	const third_party_enrichment_allowed_role_ids = geo.uuid.third_party_enrichment_agencies_role_ids;
-
-	const isAllowedToGetMoreLeads = partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN
-	&& third_party_enrichment_allowed_role_ids.includes(authRoleId);
 
 	const { page, page_limit, total_count } = paginationData;
 
@@ -55,7 +38,6 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 
 			<Statistics activeTab={activeTab} filters={filters} />
 			<div className={styles.header}>
-				{isAllowedToGetMoreLeads && <GetLeadFeedbacks refetch={refetch} />}
 
 				<EnrichmentRequest
 					checkedRowsId={checkedRowsId}

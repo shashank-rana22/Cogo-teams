@@ -12,6 +12,12 @@ const enrichment = [
 		service_name : 'allocation',
 	},
 	{
+		api          : 'bulk_create_lead_organization_feedback_request',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'allocation',
+	},
+	{
 		api          : 'get_allocation_feedback_response_sheets',
 		access_type  : 'private',
 		feature      : 'enrichment',

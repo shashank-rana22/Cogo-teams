@@ -1,15 +1,22 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useCreateBulkFeedback = ({ refetch = () => {} }) => {
+const useCreateBulkEnrichmentRequests = ({ refetch = () => {} }) => {
+	const { profile = {} } = useSelector((store) => store);
+
 	const [showModal, setShowModal] = useState(false);
 	const [selectedCount, setSelectedCount] = useState({});
 
-	const [{ loading }, trigger] = useRequest({
-		url    : 'bulk_create_lead_organization_feedback',
-		method : 'POST',
+	const { user = {}, partner = {} } = profile;
+
+	const [{ loading }, trigger] = useAllocationRequest({
+		url     : 'bulk_create_lead_organization_feedback_request',
+		method  : 'POST',
+		authkey : 'bulk_create_lead_organization_feedback_request',
+
 	}, { manual: true });
 
 	const onCloseModal = () => {
@@ -20,7 +27,9 @@ const useCreateBulkFeedback = ({ refetch = () => {} }) => {
 	const onCreateFeedback = async () => {
 		try {
 			const payload = {
-				page_limit: selectedCount,
+				page_limit : selectedCount,
+				user_id    : user.id,
+				partner_id : partner.id,
 			};
 
 			await trigger({
@@ -49,4 +58,4 @@ const useCreateBulkFeedback = ({ refetch = () => {} }) => {
 	};
 };
 
-export default useCreateBulkFeedback;
+export default useCreateBulkEnrichmentRequests;

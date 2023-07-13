@@ -346,11 +346,6 @@ const allocation = {
 			service_name : 'lead',
 		},
 		{
-			api          : 'bulk_create_lead_organization_feedback',
-			access_type  : 'private',
-			service_name : 'lead',
-		},
-		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
