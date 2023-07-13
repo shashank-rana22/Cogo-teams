@@ -9,16 +9,16 @@ export const DEFAULT_LIST_MAILS_TIMEOUT = 300000;
 
 export const EMAIL_TAGS_COLOR = {
 	toUserEmail: {
-		bgColor : '#FEF199',
-		subDiv  : '#FFFCE6',
+		bgColor       : '#FEF199',
+		subDivBgColor : '#FFFCE6',
 	},
 	ccrecipients: {
-		bgColor : '#CFEAED',
-		subDiv  : '#F3FAFA',
+		bgColor       : '#CFEAED',
+		subDivBgColor : '#F3FAFA',
 	},
 	bccrecipients: {
-		bgColor : '#FBD1A6',
-		subDiv  : '#FEF3E9',
+		bgColor       : '#FBD1A6',
+		subDivBgColor : '#FEF3E9',
 	},
 };
 

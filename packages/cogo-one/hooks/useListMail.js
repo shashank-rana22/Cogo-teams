@@ -1,7 +1,7 @@
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import { MAIL_FOLDER_OPTIONS } from '../constants/MAIL_CONSTANT';
+import { MAIL_FOLDER_OPTIONS } from '../constants/mailConstants';
 
 const PAGE_LIMIT = 10;
 const NEXT_PAGE_COUNT = 1;
@@ -28,7 +28,7 @@ function useListMail({
 		method : 'get',
 	}, { manual: true });
 
-	const getEmails = useCallback(async ({ page, restartList }) => {
+	const getEmails = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
 				params: getParams({ activeMailAddress, activeSelect, page }),
@@ -40,13 +40,6 @@ function useListMail({
 				const { value = [] } = res.data || {};
 				const isLastPage = (value.length || DEFAULT_NO_OF_MAILS) < PAGE_LIMIT;
 
-				if (restartList) {
-					setListData({
-						value: value || [],
-						isLastPage,
-					});
-					return;
-				}
 				setListData((prev) => ({
 					value: [...(prev?.value || []), ...(value || [])],
 					isLastPage,
@@ -63,13 +56,13 @@ function useListMail({
 		const reachBottom = scrollTop + clientHeight + MIN_HEIGHT_FOR_API_CALL >= scrollHeight;
 
 		if (reachBottom && !loading && !listData?.isLastPage) {
-			getEmails({ page: pagination + NEXT_PAGE_COUNT, restartList: false });
+			getEmails({ page: pagination + NEXT_PAGE_COUNT });
 		}
 	};
 
 	const handleRefresh = useCallback(() => {
 		setListData({ value: [], isLastPage: false });
-		getEmails({ page: DEFAULT_PAGE_NUMBER, restartList: true });
+		getEmails({ page: DEFAULT_PAGE_NUMBER });
 	}, [getEmails]);
 
 	useEffect(() => {

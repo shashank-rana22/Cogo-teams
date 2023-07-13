@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 
 import EmailCustomTag from './EmailCustomTag';
@@ -36,13 +35,13 @@ function MailRecipientType({
 							size="sm"
 							placeholder="Enter recipient"
 							type="text"
+							id="input_id"
 							value={value}
 							onChange={(e) => handleChange({ e, type })}
 							onKeyPress={(e) => handleKeyPress({ e, type })}
-							className={cl`${errorValue
+							className={errorValue
 								? styles.error_input_container
-								: styles.input_container}`}
-							id="input_id"
+								: styles.input_container}
 						/>
 						<div className={styles.cross_icon}>
 							<IcMCross onClick={() => handleError(type)} />

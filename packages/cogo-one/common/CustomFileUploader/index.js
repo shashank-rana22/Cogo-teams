@@ -60,11 +60,12 @@ function CustomFileUploader(props, ref) {
 		} else {
 			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
-	}, [multiple, urlStore, onChange]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [multiple, urlStore]);
 
 	useEffect(() => {
 		handleProgress(loading);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
 	const onUploadProgress = (index) => (file) => {
@@ -120,7 +121,7 @@ function CustomFileUploader(props, ref) {
 		try {
 			setLoading(true);
 
-			if (values?.length) {
+			if (!isEmpty(values)) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));

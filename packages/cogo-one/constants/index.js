@@ -57,6 +57,8 @@ export const USER_ACTIVITY_MAPPING = {
 	summary       : 'Summary',
 };
 
+export const emptyChat = GLOBAL_CONSTANTS.image_url.empty_chat_jpg;
+
 export const SERVICE = {
 	fcl_freight     : 'FCL',
 	lcl_freight     : 'LCL',

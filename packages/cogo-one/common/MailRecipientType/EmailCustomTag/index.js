@@ -1,6 +1,6 @@
 import { IcMCross } from '@cogoport/icons-react';
 
-import { EMAIL_TAGS_COLOR } from '../../../constants/MAIL_CONSTANT';
+import { EMAIL_TAGS_COLOR } from '../../../constants/mailConstants';
 
 import styles from './styles.module.css';
 
@@ -10,9 +10,9 @@ function EmailCustomTag({
 	type = '',
 }) {
 	const {
-		bgColor,
-		subDiv,
-	} = EMAIL_TAGS_COLOR[type];
+		bgColor = '#FEF199',
+		subDivBgColor = '#FFFCE6',
+	} = EMAIL_TAGS_COLOR?.[type] || {};
 
 	return (
 		<div className={styles.email_tag_container}>
@@ -24,7 +24,7 @@ function EmailCustomTag({
 			</div>
 			<div
 				className={styles.cross_icon}
-				style={{ background: subDiv }}
+				style={{ background: subDivBgColor }}
 			>
 				<IcMCross
 					onClick={() => handleDelete({ val: email, emailType: type })}

@@ -43,6 +43,11 @@ function RenderTitle({ item = '', handleDownload = () => {} }) {
 	);
 }
 
+const handleDownload = (data) => {
+	const sampleArr = base64ToArrayBuffer(data?.contentBytes);
+	saveByteArray(data, sampleArr);
+};
+
 function MailAttachments({
 	attachmentData = {},
 	loading = false,
@@ -51,11 +56,6 @@ function MailAttachments({
 
 	const allAttachements = attachmentData?.value || [];
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
-
-	const handleDownload = (data) => {
-		const sampleArr = base64ToArrayBuffer(data?.contentBytes);
-		saveByteArray(data, sampleArr);
-	};
 
 	return (
 		<div className={styles.container}>

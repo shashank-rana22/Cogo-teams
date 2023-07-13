@@ -195,7 +195,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
 		get_accesible_assign_buttons : getSupplyAgentButtons,
 		default_side_nav             : 'flash_shipment_bookings',
-		mails_to_be_shown            : [GLOBAL_CONSTANTS?.emails?.import_rates, GLOBAL_CONSTANTS?.emails?.export_rates],
+		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,

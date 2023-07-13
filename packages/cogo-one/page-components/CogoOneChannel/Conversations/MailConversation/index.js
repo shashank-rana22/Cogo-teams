@@ -45,7 +45,7 @@ function MailConversation({ mailProps = {} }) {
 
 	const allAttachements = attachmentData?.value || [];
 
-	const newContent = allAttachements.reduce((prevCOntent, attachment) => prevCOntent.replaceAll(
+	const newContent = allAttachements.reduce((prevContent, attachment) => prevContent.replaceAll(
 		`cid:${attachment.contentId}`,
 		`data:${attachment.contentType};base64,${attachment.contentBytes}`,
 	), content);

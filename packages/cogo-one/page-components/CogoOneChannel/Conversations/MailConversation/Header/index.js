@@ -2,9 +2,9 @@ import { Placeholder, Tooltip } from '@cogoport/components';
 import React from 'react';
 
 import { MAIL_REPLY_TYPE } from '../../../../../constants';
+import getRecipientData from '../../../../../helpers/getRecipientData';
 
 import styles from './styles.module.css';
-import useHandleReplyMail from './useHandleReplyMail';
 
 function Header({
 	subject = '',
@@ -17,7 +17,7 @@ function Header({
 	bccData = [],
 	activeMailAddress = '',
 }) {
-	const { handleClick = () => {} } = useHandleReplyMail({
+	const { handleClick = () => {} } = getRecipientData({
 		setButtonType,
 		setEmailState,
 		senderAddress,

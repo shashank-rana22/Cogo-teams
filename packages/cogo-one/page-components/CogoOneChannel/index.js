@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
-import { DEFAULT_EMAIL_STATE } from '../../constants/MAIL_CONSTANT';
+import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';

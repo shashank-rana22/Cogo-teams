@@ -35,17 +35,19 @@ const getReplyAllMails = ({
 	filteredBccData = [],
 }) => {
 	let toUserEmail = filteredRecipientData;
-	const bccrecipients = filteredBccData;
-	const ccrecipients = filteredCcData;
 
 	if (senderAddress.toLowerCase() !== activeMailAddress.toLowerCase()) {
 		toUserEmail = [senderAddress, ...toUserEmail];
 	}
 
-	return { toUserEmail, ccrecipients, bccrecipients };
+	return {
+		toUserEmail,
+		ccrecipients  : filteredCcData,
+		bccrecipients : filteredBccData,
+	};
 };
 
-const useHandleReplyMail = ({
+const getRecipientData = ({
 	setButtonType = () => {},
 	setEmailState = () => {},
 	senderAddress = '',
@@ -92,7 +94,7 @@ const useHandleReplyMail = ({
 		);
 	};
 
-	return { handleClick };
+	return { handleClick, filteredCcData, filteredBccData, filteredRecipientData };
 };
 
-export default useHandleReplyMail;
+export default getRecipientData;

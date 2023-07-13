@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { DEFAULT_EMAIL_STATE } from '../constants/MAIL_CONSTANT';
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 import getFileAttributes from './getFileAttributes';
 
@@ -22,7 +22,7 @@ function mailFunction({
 	const isInList = (email, data) => data?.includes(email);
 
 	const validateEmail = (emailInput) => {
-		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.valid_email_regex;
+		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.email;
 		return emailRegex.test(emailInput);
 	};
 

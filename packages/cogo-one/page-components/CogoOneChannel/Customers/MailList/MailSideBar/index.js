@@ -16,7 +16,7 @@ function MailSideBar({
 			{GMAIL_OPTIONS_CONFIG.map(
 				({
 					label = '',
-					Icon = null,
+					icon = null,
 					value = '',
 					image = '',
 					hoverImage = '',
@@ -39,7 +39,7 @@ function MailSideBar({
 									}}
 								/>
 							)
-							: <Icon />}
+							: icon}
 						<span className={styles.folder_name}>
 							{label}
 						</span>

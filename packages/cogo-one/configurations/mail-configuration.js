@@ -13,24 +13,20 @@ export const GMAIL_OPTIONS_CONFIG = [
 	{
 		label : 'Draft',
 		value : 'draft',
-		Icon  : () => (
-			<IcMDocument
-				fill="#BDBDBD"
-				height={24}
-				width={24}
-			/>
-		),
+		icon  : <IcMDocument
+			fill="#BDBDBD"
+			height={24}
+			width={24}
+		/>,
 	},
 	{
 		label : 'Sent',
 		value : 'sent',
-		Icon  : () => (
-			<IcMSend
-				fill="#BDBDBD"
-				height={24}
-				width={24}
-			/>
-		),
+		icon  : <IcMSend
+			fill="#BDBDBD"
+			height={24}
+			width={24}
+		/>,
 	},
 	{
 		label      : 'Spam',

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useLensRequest } from '@cogoport/request';
 
-import { DEFAULT_EMAIL_STATE } from '../constants/MAIL_CONSTANT';
+import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 const API_MAPPING = {
 	reply     : 'reply_mail',

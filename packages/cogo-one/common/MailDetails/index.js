@@ -1,8 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/MAIL_CONSTANT';
+import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
 import useListMail from '../../hooks/useListMail';
 
 import ListMails from './ListMails';
@@ -43,10 +45,20 @@ function MailDetails({
 					{startCase(activeSelect)}
 				</div>
 
-				<IcMRefresh
-					className={styles.filter_icon}
-					onClick={handleRefresh}
-				/>
+				{loading
+					? (
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.colored_loading}
+							width={20}
+							height={20}
+							alt="uploading"
+						/>
+					) : (
+						<IcMRefresh
+							className={styles.filter_icon}
+							onClick={handleRefresh}
+						/>
+					)}
 			</div>
 
 			{isEmpty(list || []) && !loading ? (

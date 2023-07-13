@@ -11,7 +11,12 @@ import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
-function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
+function CommunicationModals({
+	mailProps = {},
+	setModalType = () => {},
+	modalType = {},
+	userId = '',
+}) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
 

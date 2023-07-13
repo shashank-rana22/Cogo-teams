@@ -338,7 +338,6 @@ const GLOBAL_CONSTANTS = {
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
-		valid_email_regex                 : /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,

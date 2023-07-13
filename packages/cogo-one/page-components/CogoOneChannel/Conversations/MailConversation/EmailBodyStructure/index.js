@@ -46,6 +46,8 @@ function EmailBodyStructure({
 		{ label: 'Bcc', value: bccData },
 	];
 
+	const filterRecipientData = RECIPIENT_MAPPING.filter((itm) => !isEmpty(itm.value));
+
 	if (loading) {
 		return (
 			<div className={styles.email_body}>
@@ -74,8 +76,8 @@ function EmailBodyStructure({
 						</span>
 					</div>
 
-					{RECIPIENT_MAPPING.map(
-						(itm) => !isEmpty(itm.value) && (
+					{filterRecipientData.map(
+						(itm) => (
 							<div
 								className={styles.header_to_cc}
 								key={itm.label}
