@@ -10,7 +10,7 @@ function CheckList({
 	completedDocs,
 	setShowDoc,
 	setShowApproved,
-	ShipmentDocumentRefetch = () => {},
+	shipmentDocumentRefetch = () => {},
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
@@ -24,7 +24,7 @@ function CheckList({
 				primary_service={primary_service}
 				setShowDoc={setShowDoc}
 				setShowApproved={setShowApproved}
-				ShipmentDocumentRefetch={ShipmentDocumentRefetch}
+				shipmentDocumentRefetch={shipmentDocumentRefetch}
 			/>
 		</div>
 	);

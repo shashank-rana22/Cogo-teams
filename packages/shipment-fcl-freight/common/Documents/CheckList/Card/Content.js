@@ -28,7 +28,7 @@ function Content({
 	setShowDoc,
 	setShowApproved,
 	docType,
-	ShipmentDocumentRefetch = () => {},
+	shipmentDocumentRefetch = () => {},
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 
@@ -71,7 +71,7 @@ function Content({
 		return null;
 	};
 
-	const SI_REVIEW_CONDITION =		document_type === 'si' && state === 'document_uploaded';
+	const SI_REVIEW_CONDITION =		document_type === 'si' && state === 'document_accepted';
 
 	return (
 		<div className={styles.single_item}>
@@ -130,7 +130,7 @@ function Content({
 						themeType="link"
 						onClick={() => setSiReviewState(true)}
 					>
-						review
+						reject
 					</Button>
 				) : null}
 
@@ -170,7 +170,7 @@ function Content({
 					siReviewState={siReviewState}
 					setSiReviewState={setSiReviewState}
 					uploadedItem={uploadedItem}
-					ShipmentDocumentRefetch={ShipmentDocumentRefetch}
+					shipmentDocumentRefetch={shipmentDocumentRefetch}
 				/>
 			) : null}
 
