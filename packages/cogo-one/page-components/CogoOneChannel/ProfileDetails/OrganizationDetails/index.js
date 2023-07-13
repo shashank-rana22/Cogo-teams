@@ -36,7 +36,7 @@ function OrganizationDetails({
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
-	const userID = activeTab === 'message' ? messageUserId : voiceUserId;
+	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
 	const isOrgUsersVisible = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_organization_users;
@@ -52,7 +52,7 @@ function OrganizationDetails({
 	const {
 		pointData = {},
 		pointLoading,
-	} = useGetOrganizationCogopoints({ organizationId, userID });
+	} = useGetOrganizationCogopoints({ organizationId, userId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
