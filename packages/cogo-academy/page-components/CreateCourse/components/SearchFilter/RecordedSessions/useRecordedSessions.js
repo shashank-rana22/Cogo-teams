@@ -19,7 +19,7 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 	}, { manual: true });
 
 	const [{ deleteLoading = false }, deleteApiTrigger] = useRequest({
-		url    : '/delete_course_video',
+		url    : '/update_course_video',
 		method : 'POST',
 	}, { manual: true });
 
@@ -32,7 +32,9 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 		try {
 			await trigger({
 				params: {
-					filters: {},
+					filters: {
+						status: 'active',
+					},
 					page,
 				},
 			});
@@ -49,9 +51,18 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 
 	const { list, ...paginationData } = data || {};
 
-	const onClickDelete = async (id) => {
+	const onClickDelete = async (item) => {
 		try {
-			await deleteApiTrigger({ data: { video_id: id } });
+			await deleteApiTrigger(
+				{
+					data: {
+						id         : item?.id,
+						video_link : item?.video_link,
+						video_name : item?.video_name,
+						status     : 'inactive',
+					},
+				},
+			);
 
 			Toast.success('Recorded session deleted');
 			fetch();

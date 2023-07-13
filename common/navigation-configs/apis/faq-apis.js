@@ -470,7 +470,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'delete_course_video',
+			api          : 'update_course_video',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

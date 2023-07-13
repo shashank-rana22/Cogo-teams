@@ -14,7 +14,15 @@ function useListCourseVideos() {
 
 	const fetchList = useCallback(async () => {
 		try {
-			await trigger({ params: { page } });
+			await trigger({
+				params: {
+					filters: {
+						status: 'active',
+					},
+					page,
+				},
+
+			});
 		} catch (error) {
 			Toast.error(error.message);
 		}

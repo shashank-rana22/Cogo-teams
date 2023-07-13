@@ -14,7 +14,7 @@ function RenderPopover({ item = {}, onClickDelete = () => {}, deleteLoading = fa
 				size="sm"
 				themeType="primary"
 				onClick={() => {
-					if (!deleteLoading) onClickDelete(item?.id);
+					if (!deleteLoading) onClickDelete(item);
 				}}
 				style={{ marginLeft: 12 }}
 			>
