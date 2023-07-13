@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/email-check */
 /* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
@@ -440,6 +441,11 @@ const GLOBAL_CONSTANTS = {
 		fcl_freight_local     : 'fcl-local',
 		domestic_air_freight  : 'domestic-air-freight',
 		rail_domestic_freight : 'rail-domestic',
+	},
+
+	emails: {
+		import_rates : 'import.rates@cogoport.com',
+		export_rates : 'export.rates@cogoport.com',
 	},
 };
 

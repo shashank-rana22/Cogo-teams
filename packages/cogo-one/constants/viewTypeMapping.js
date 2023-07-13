@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { where } from 'firebase/firestore';
 
 const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
@@ -131,7 +132,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['support', 'bot'])],
 		extra_side_bar_navs_access   : ['spot_search'],
 		get_accesible_assign_buttons : getKamButtons,
-		mails_to_be_shown            : ['sandeep.nalabolu@cogoport.com', 'dasari.charan@cogoport.com'],
+		mails_to_be_shown            : [],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -194,7 +195,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		accesible_agent_types_query  : [where('agent_type', 'in', ['supply', 'bot'])],
 		get_accesible_assign_buttons : getSupplyAgentButtons,
 		default_side_nav             : 'flash_shipment_bookings',
-		mails_to_be_shown            : [],
+		mails_to_be_shown            : [GLOBAL_CONSTANTS?.emails?.import_rates, GLOBAL_CONSTANTS?.emails?.export_rates],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,

@@ -66,6 +66,7 @@ function MailConversation({ mailProps = {} }) {
 				recipientData={recipientData}
 				ccData={ccData}
 				bccData={bccData}
+				activeMailAddress={activeMailAddress}
 			/>
 
 			<EmailBodyStructure

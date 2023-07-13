@@ -4,6 +4,7 @@ import React from 'react';
 import { MAIL_REPLY_TYPE } from '../../../../../constants';
 
 import styles from './styles.module.css';
+import useHandleReplyMail from './useHandleReplyMail';
 
 function Header({
 	subject = '',
@@ -14,32 +15,17 @@ function Header({
 	recipientData = [],
 	ccData = [],
 	bccData = [],
+	activeMailAddress = '',
 }) {
-	const handlClick = (val) => {
-		setButtonType(val);
-		let toUserEmail = [];
-		let ccrecipients = [];
-		let bccrecipients = [];
-
-		if (val === 'reply') {
-			toUserEmail = [senderAddress];
-		} else if (val === 'reply_all') {
-			toUserEmail = [senderAddress];
-			ccrecipients = [...recipientData, ...ccData];
-			bccrecipients = bccData;
-		}
-
-		setEmailState(
-			(prev) => ({
-				...prev,
-				subject,
-				body: '',
-				toUserEmail,
-				ccrecipients,
-				bccrecipients,
-			}),
-		);
-	};
+	const { handleClick = () => {} } = useHandleReplyMail({
+		setButtonType,
+		setEmailState,
+		senderAddress,
+		recipientData,
+		ccData,
+		bccData,
+		activeMailAddress,
+	});
 
 	return (
 		<div className={styles.header_container}>
@@ -60,7 +46,7 @@ function Header({
 							<div
 								role="presentation"
 								className={styles.header_actions_reply}
-								onClick={() => handlClick(value)}
+								onClick={() => handleClick(value)}
 							>
 								{icon}
 							</div>
