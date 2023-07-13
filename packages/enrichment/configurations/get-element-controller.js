@@ -2,20 +2,23 @@ import {
 	InputController,
 	SelectController,
 	MultiselectController,
-	UploadController,
 	MobileNumberController,
 	CountrywiseTaxNumberSelectController,
 	AsyncSelectController,
+	DatepickerController,
 } from '@cogoport/forms';
 
 const elementControllers = {
 	text                     : InputController,
+	number                   : InputController,
 	select                   : SelectController,
 	multiSelect              : MultiselectController,
-	file                     : UploadController,
+	asyncSelect              : AsyncSelectController,
+	datePicker               : DatepickerController,
+	mobileNumber             : MobileNumberController,
 	'mobile-number-select'   : MobileNumberController,
 	'countrywise-tax-select' : CountrywiseTaxNumberSelectController,
-	asyncSelect              : AsyncSelectController,
+
 };
 
 export const getElementController = (type = 'text') => elementControllers[type] || null;

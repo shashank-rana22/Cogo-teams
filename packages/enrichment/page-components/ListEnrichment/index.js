@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import ScopeSelect from '@cogoport/scope-select/components';
 
 import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
@@ -37,7 +38,10 @@ function ListEnrichment() {
 
 	return (
 		<section>
-			<div className={styles.title}>Enrichment Data</div>
+			<div className={styles.title_container}>
+				<div className={styles.title}>Enrichment Data</div>
+				<ScopeSelect size="md" showChooseAgent={false} />
+			</div>
 
 			<div>
 				<Tabs

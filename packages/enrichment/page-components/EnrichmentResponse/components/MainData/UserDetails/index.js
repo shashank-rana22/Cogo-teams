@@ -29,16 +29,6 @@ function UserDetails({
 		);
 	}
 
-	if (isEmpty(data)) {
-		return (
-			<div className={styles.padd}>
-				<div className={styles.main}>
-					<EmptyState />
-				</div>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.padd}>
 
@@ -48,15 +38,21 @@ function UserDetails({
 					setShowForm={setShowForm}
 				/>
 
+				{isEmpty(data) ? (
+					<div className={styles.padd}>
+						<div className={styles.main}>
+							<EmptyState />
+						</div>
+					</div>
+				) : (
+					<ShowPocList
+						data={data}
+					/>
+				)}
+
 				<ShowPocForm
 					showForm={showForm}
 					setShowForm={setShowForm}
-					refetchResponses={refetchResponses}
-				/>
-
-				<ShowPocList
-					data={data}
-					loadingResponses={loadingResponses}
 					refetchResponses={refetchResponses}
 				/>
 

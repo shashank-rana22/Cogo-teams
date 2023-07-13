@@ -29,16 +29,6 @@ function AddressDetails({
 		);
 	}
 
-	if (isEmpty(data)) {
-		return (
-			<div className={styles.padd}>
-				<div className={styles.main}>
-					<EmptyState />
-				</div>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.padd}>
 
@@ -48,14 +38,22 @@ function AddressDetails({
 					setShowForm={setShowForm}
 				/>
 
+				{isEmpty(data) ? (
+					<div className={styles.padd}>
+						<div className={styles.main}>
+							<EmptyState />
+						</div>
+					</div>
+				) : (
+					<ShowAddressList
+						data={data}
+					/>
+				)}
+
 				<ShowAddressForm
 					showForm={showForm}
 					setShowForm={setShowForm}
 					refetchResponses={refetchResponses}
-				/>
-
-				<ShowAddressList
-					data={data}
 				/>
 
 			</div>

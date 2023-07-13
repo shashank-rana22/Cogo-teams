@@ -46,7 +46,7 @@ function ShowAddressList({
 								</div>
 
 								<div className={styles.bottom}>
-									{poc?.[pocKey] }
+									{poc?.[pocKey] || '__'}
 								</div>
 							</div>
 
