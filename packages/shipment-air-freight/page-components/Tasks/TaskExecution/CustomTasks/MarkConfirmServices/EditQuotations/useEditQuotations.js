@@ -23,6 +23,7 @@ const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},
 	selectedCard = {},
+	formattedRate = {},
 }) => {
 	const {
 		refetch:getShipmentRefetch,
@@ -103,14 +104,26 @@ const useEditQuotations = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (formattedRate?.primary_service?.id === service_charge?.service_id) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {

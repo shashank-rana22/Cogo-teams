@@ -27,7 +27,8 @@ const useUpdateRatesPreferences = ({
 		let similarServices = [];
 		if (service.service_type === 'ftl_freight_service') {
 			similarServices = serviceData.filter(
-				(serviceItem) => serviceItem.id !== service_id && serviceItem.truck_type === service.truck_type,
+				(serviceItem) => serviceItem.id !== service_id
+				&& serviceItem.truck_type === service.truck_type && serviceItem.trade_type === service.trade_type,
 			).map((serviceItem) => serviceItem.id);
 		}
 		const selectedRates = supplierPayload?.[service_id] || [];

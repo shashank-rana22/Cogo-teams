@@ -7,9 +7,9 @@ const groupSimilarServices = (servicesData) => {
 		const TAKEN_TRUCKS = {};
 
 		(servicesData || []).forEach((service) => {
-			if (!TAKEN_TRUCKS[service.truck_type]) {
+			if (!TAKEN_TRUCKS[`${service.truck_type}_${service.trade_type}`]) {
 				NEW_GROUPED.push(service);
-				TAKEN_TRUCKS[service.truck_type] = true;
+				TAKEN_TRUCKS[`${service.truck_type}_${service.trade_type}`] = true;
 			}
 		});
 		return NEW_GROUPED;
