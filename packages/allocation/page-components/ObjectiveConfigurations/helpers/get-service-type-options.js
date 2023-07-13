@@ -2,50 +2,50 @@ const SERVICE_TYPE_OPTIONS_MAPPING = {
 	ocean: [
 		{
 			label : 'FCL',
-			value : 'fcl',
+			value : 'fcl_freight',
 		},
 		{
 			label : 'LCL',
-			value : 'lcl',
+			value : 'lcl_freight',
 		},
 	],
 	air: [
 		{
 			label : 'International',
-			value : 'international',
+			value : 'air_international',
 		},
 		{
 			label : 'Domestic',
-			value : 'domestic',
+			value : 'air_domestic',
 		},
 	],
 	surface: [
 		{
 			label : 'FTL',
-			value : 'ftl',
+			value : 'ftl_freight',
 		},
 		{
 			label : 'LTL',
-			value : 'ltl',
+			value : 'ltl_freight',
 		},
 	],
 	haulage: [
 		{
 			label : 'Trailer',
-			value : 'trailer',
+			value : 'trailer_freight',
 		},
 		{
 			label : 'Rail',
-			value : 'rail',
+			value : 'haulage_freight',
 		},
 		{
 			label : 'Barge',
-			value : 'barge',
+			value : 'barge_freight',
 		},
 	],
-	rail_domestic: [],
+	rail: [],
 };
 
-const getServiceTypeOptions = ({ shipmentMode }) => SERVICE_TYPE_OPTIONS_MAPPING[shipmentMode] || [];
+const getServiceTypeOptions = ({ watchShipmentMode }) => SERVICE_TYPE_OPTIONS_MAPPING[watchShipmentMode] || [];
 
 export default getServiceTypeOptions;

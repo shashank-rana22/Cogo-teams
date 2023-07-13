@@ -1,11 +1,13 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
+import RenderListLocationOption from '../common/RenderListLocationOption';
 import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
 import getIncotermOptionsByTradeType from '../helpers/get-incoterm-options-by-trade-type';
+import getListLocationParams from '../helpers/get-list-location-params';
 import getServiceTypeOptions from '../helpers/get-service-type-options';
 
 const getServiceRequirementControls = (props) => {
-	const { shipmentMode } = props;
+	const { watchShipmentMode, watchServiceType } = props;
 
 	const geo = getGeoConstants();
 
@@ -33,8 +35,8 @@ const getServiceRequirementControls = (props) => {
 					value : 'haulage',
 				},
 				{
-					label : 'Rail Domestic',
-					value : 'rail_domestic',
+					label : 'Rail',
+					value : 'rail',
 				},
 			],
 			isClearable: true,
@@ -44,8 +46,11 @@ const getServiceRequirementControls = (props) => {
 			label       : 'Service Type',
 			placeholder : 'Select Type',
 			type        : 'select',
-			options     : getServiceTypeOptions({ shipmentMode }),
+			options     : getServiceTypeOptions({ watchShipmentMode }),
 			isClearable : true,
+			showElement : {
+				shipmentMode: ['ocean', 'air', 'surface', 'haulage'],
+			},
 		},
 		{
 			name        : 'trade_type',
@@ -62,7 +67,10 @@ const getServiceRequirementControls = (props) => {
 					value : 'export',
 				},
 			],
-			isClearable: true,
+			isClearable : true,
+			showElement : {
+				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
+			},
 		},
 		{
 			name        : 'origin_location_id',
@@ -72,13 +80,11 @@ const getServiceRequirementControls = (props) => {
 			asyncKey    : 'list_locations',
 			initialCall : false,
 			params      : {
-				filters    : { type: ['country', 'seaport', 'city'], status: 'active' },
-				page_limit : 10,
-				sort_by    : 'name',
-				sort_type  : 'asc',
-				includes   : { country: null, default_params_required: true },
+				page_limit: 20,
+				...getListLocationParams({ watchShipmentMode, watchServiceType }),
 			},
-			isClearable: true,
+			isClearable : true,
+			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
 			name        : 'destination_location_id',
@@ -88,13 +94,11 @@ const getServiceRequirementControls = (props) => {
 			asyncKey    : 'list_locations',
 			initialCall : false,
 			params      : {
-				filters    : { type: ['country', 'seaport', 'city'], status: 'active' },
-				page_limit : 10,
-				sort_by    : 'name',
-				sort_type  : 'asc',
-				includes   : { country: null, default_params_required: true },
+				page_limit: 20,
+				...getListLocationParams({ watchShipmentMode, watchServiceType }),
 			},
-			isClearable: true,
+			isClearable : true,
+			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
 			name        : 'inco_term',
@@ -103,6 +107,9 @@ const getServiceRequirementControls = (props) => {
 			type        : 'select',
 			options     : getIncotermOptionsByTradeType({ trade_type: 'export' }),
 			isClearable : true,
+			showElement : {
+				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
+			},
 		},
 		{
 			name        : 'hs_codes',
@@ -112,13 +119,20 @@ const getServiceRequirementControls = (props) => {
 			asyncKey    : 'list_hs_codes',
 			valueKey    : 'name',
 			isClearable : true,
+			showElement : {
+				serviceType: ['fcl_fright', 'lcl_freight', 'air_domestic', 'air_international'],
+			},
 		},
 		{
 			name        : 'container_count',
 			label       : 'Container Count',
 			placeholder : 'Count',
-			type        : 'text',
+			type        : 'number',
+			min         : 0,
 			isClearable : true,
+			showElement : {
+				serviceType: ['fcl_freight'],
+			},
 		},
 		{
 			name        : 'cargo_weight',
@@ -126,6 +140,9 @@ const getServiceRequirementControls = (props) => {
 			placeholder : 'Weight',
 			type        : 'text',
 			isClearable : true,
+			showElement : {
+				serviceType: ['fcl_freight', 'lcl_freight'],
+			},
 		},
 		{
 			name        : 'volume',
@@ -133,6 +150,9 @@ const getServiceRequirementControls = (props) => {
 			placeholder : 'Volume',
 			type        : 'text',
 			isClearable : true,
+			showElement : {
+				serviceType: ['lcl_freight', 'air_domestic', 'air_international'],
+			},
 		},
 		{
 			name        : 'container_size',
@@ -157,7 +177,11 @@ const getServiceRequirementControls = (props) => {
 					value : '45ft HC',
 				},
 			],
-			isClearable: true,
+			isClearable : true,
+			showElement : {
+				shipmentMode : ['rail_domestic'],
+				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
+			},
 		},
 		{
 			name        : 'container_type',
@@ -166,6 +190,10 @@ const getServiceRequirementControls = (props) => {
 			type        : 'select',
 			options     : geo.options.freight_container_types,
 			isClearable : true,
+			showElement : {
+				shipmentMode : ['rail_domestic'],
+				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
+			},
 		},
 		{
 			name        : 'truck_type',
@@ -174,6 +202,9 @@ const getServiceRequirementControls = (props) => {
 			type        : 'select',
 			options     : getAllTruckTypeOptions(),
 			isClearable : true,
+			showElement : {
+				serviceType: ['ftl_freight'],
+			},
 		},
 	];
 

@@ -16,7 +16,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 36px;
-	justify-content: space-between;
+	justify-content: flex-start;
 
 	@media (max-width: 768px) {
 		gap: 24px;
@@ -24,9 +24,11 @@
 }
 
 .element_container {
-	flex: 0 1 31%;
+	flex: 0 1 30%;
+	max-width: 30%;
 
 	@media (max-width: 768px) {
 		flex-basis: 100%;
+		max-width: 100%;
 	}
 }
