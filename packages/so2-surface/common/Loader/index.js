@@ -1,7 +1,8 @@
 import { Placeholder } from '@cogoport/components';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
+
+const PLACEHOLDER_COUNT = 4;
 
 function Card() {
 	return (
@@ -29,5 +30,5 @@ function Card() {
 }
 
 export default function Loader() {
-	return Array(4).fill(null).map(() => <Card key={uuidv4()} />);
+	return [...Array(PLACEHOLDER_COUNT).keys()].map((item) => <Card key={item} />);
 }
