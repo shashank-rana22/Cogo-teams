@@ -12,8 +12,9 @@ const getColumns = ({
 	level,
 	setShow,
 	toggleVal,
-	setToggleVal,
+	// setToggleVal,
 	selectedEmployeeList = () => {},
+	activeTab,
 }) => {
 	const columns = [
 		{
@@ -43,7 +44,8 @@ const getColumns = ({
 				<div
 					className={styles.employee_name}
 					role="presentation"
-					onClick={() => setShow(item?.employee_id)}
+					onClick={level === 'functional_manager' || activeTab !== 'vertical_head'
+						? () => setShow(item?.employee_id) : null}
 				>
 					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
 				</div>
@@ -114,7 +116,7 @@ const getColumns = ({
 		},
 	];
 
-	if (level === 'vertical_head') {
+	if (level === 'vertical_head' && activeTab === 'vertical_head') {
 		return [...columns, {
 			Header   : 'Surprise Gift',
 			accessor : (item) => (

@@ -37,6 +37,7 @@ function RenderStyledTable({
 	setShow,
 	selectedEmployeeList,
 	toggleVal,
+	activeTab,
 
 }) {
 	const columns = getColumns({
@@ -50,6 +51,7 @@ function RenderStyledTable({
 		setShow,
 		selectedEmployeeList,
 		toggleVal,
+		activeTab,
 
 	});
 
@@ -71,6 +73,7 @@ function RenderVerticalHeadComponent({
 	setShow,
 	toggleVal,
 	setToggleVal,
+	activeTab,
 
 }) {
 	const {
@@ -119,6 +122,7 @@ function RenderVerticalHeadComponent({
 						level={level}
 						setShow={setShow}
 						selectedEmployeeList={selectedEmployeeList}
+						activeTab={activeTab}
 
 					/>
 				</Accordion>

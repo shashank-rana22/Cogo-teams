@@ -10,6 +10,7 @@ const useGetEmployeeLevels = () => {
 	const [selectValue, setSelectValue] = useState('');
 	const [selectedEmployees, setSelectedEmployees] = useState({});
 	const [show, setShow] = useState(false);
+	const [activeTab, setActiveTab] = useState('vertical_head');
 
 	const [{ data, loading }] = useHarbourRequest({
 		url    : '/get_employee_level',
@@ -44,6 +45,8 @@ const useGetEmployeeLevels = () => {
 		show,
 		setShow,
 		level,
+		activeTab,
+		setActiveTab,
 	};
 };
 
