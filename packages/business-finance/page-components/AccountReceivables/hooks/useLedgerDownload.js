@@ -35,7 +35,7 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 					entityCodes : entities,
 				},
 			});
-			const { data:downloadUrl } = response || {};
+			const { data: downloadUrl } = response || {};
 			window.open(downloadUrl);
 			setShowLedgerModal(false);
 		} catch (err) {

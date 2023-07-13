@@ -13,7 +13,7 @@ const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((enti
 	value : String(entity),
 }));
 
-function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal = () => {}, item = {} }) {
+function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item = {} }) {
 	const [date, setDate] = useState(null);
 	const [entities, setEntites] = useState([]);
 
