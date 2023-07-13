@@ -23,6 +23,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		id: expenseConfigurationId,
 		categoryId,
 		category: expenseCategory,
+		categoryName,
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
@@ -42,7 +43,6 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		lineItemsList,
 		tradeParty,
 		remarks,
-		categoryName,
 	} = expenseData || {};
 
 	const {
