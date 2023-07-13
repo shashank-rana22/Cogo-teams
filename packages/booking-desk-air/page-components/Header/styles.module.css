@@ -1,0 +1,93 @@
+.header_container {
+	:global {
+		.ui_tabs_container {
+			.ui_tab_list_container {
+				border-radius: 6px 6px 0 0;
+
+				.ui_tab_container::after {
+					position: absolute;
+					top: 25%;
+					left: 0;
+					height: 60%;
+					content: "";
+					border-left: 1px solid #e0e0e0;
+				}
+
+				.ui_tab_container.ui_tab_active {
+					background: #fff;
+				}
+			}
+		}
+	}
+}
+
+.header_footer_part {
+	display: flex;
+	justify-content: space-between;
+	margin: 48px 0 24px;
+
+	:global {
+		.ui_tabs_container {
+			.ui_tab_list_container {
+				background-color: transparent;
+				box-shadow: none;
+
+				.ui_tab_container {
+					padding: 12px 20px;
+					margin: 4px 20px 4px 4px;
+					background: #fff;
+					border-radius: 6px;
+					box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+					.ui_tabs_list_title {
+						font-size: 12px;
+						font-weight: 600;
+					}
+				}
+
+				.ui_tab_container::after {
+					border: none;
+				}
+
+				.ui_tab_container.ui_tab_active {
+					background: #fdebe9;
+				}
+			}
+		}
+	}
+}
+
+.header_footer_filter_part {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	:global {
+		.ui_button_container {
+			margin-right: 8px;
+		}
+
+		.ui_input_container {
+			.ui_input_control::placeholder {
+				font-size: 12px;
+				color: #e0e0e0;
+			}
+		}
+	}
+}
+
+.icon_wrapper {
+	position: relative;
+	margin: 4px;
+	font-size: 20px;
+}
+
+.scope_select_wrapper {
+	margin-right: 8px;
+}
+
+.active_filter_icon {
+	position: absolute;
+	top: 4px;
+	right: 23px;
+}

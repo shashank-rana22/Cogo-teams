@@ -4,9 +4,14 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import getControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
+
+const API_MAPPING = {
+	ifsc  : { api: '/get_bank_details', code_name: 'ifsc_code' },
+	swift : { api: '/get_organization_swift_code_details', code_name: 'swift_code' },
+};
 
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
@@ -16,13 +21,7 @@ function useVendorBankDetail({
 		general : { query = {} },
 	} = useSelector((state) => state);
 
-	const { vendor_details	} = vendorData || {};
-
-	const { country_id } = vendor_details || {};
-
 	const [showAddbankModal, setShowAddbankModal] = useState(false);
-
-	const { vendor_id } = query;
 
 	const formProps = useForm();
 
@@ -35,11 +34,22 @@ function useVendorBankDetail({
 		getValues,
 	} = formProps;
 
-	const ifscCode = watch('ifsc_code');
 	const tax_number = watch('tax_number');
 
+	const { vendor_details	} = vendorData || {};
+
+	const { country_id } = vendor_details || {};
+
+	const { bankingCode, controls } = getControls({ country_id });
+
+	const { vendor_id } = query;
+
+	const codeType = watch(`${bankingCode}_code`);
+
+	const { api, code_name } = API_MAPPING[bankingCode];
+
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
-		url    : '/get_bank_details',
+		url    : api,
 		method : 'get',
 	}, { manual: true });
 
@@ -48,33 +58,25 @@ function useVendorBankDetail({
 		method : 'post',
 	}, { manual: true });
 
-	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
-
-		if (ifscCode?.match(regex)) {
+	useEffect(() => {
+		const fetch_data = async () => {
 			try {
 				const sessionData = await triggerGetBankDetails({
-					params: { ifsc_code: ifscCode },
+					params: { [code_name]: codeType },
 				});
-
 				const { data = {} } = sessionData || {};
-				const { branch = '', bank = '' } = data || {};
-
-				setValue('branch_name', branch);
-				setValue('bank_name', bank);
+				setValue('branch_name', data.branch || data.branch_name || '');
+				setValue('bank_name', data.bank || data.bank_name || '');
 			} catch (error) {
 				setValue('branch_name', '');
 				setValue('bank_name', '');
 			}
-		} else {
-			setValue('branch_name', '');
-			setValue('bank_name', '');
-		}
-	}, [ifscCode, setValue, triggerGetBankDetails]);
+		};
 
-	useEffect(() => {
-		setIfscCode();
-	}, [ifscCode, setIfscCode]);
+		if (codeType) {
+			fetch_data();
+		}
+	}, [codeType, triggerGetBankDetails, setValue, code_name]);
 
 	const onSubmit = async () => {
 		const values = getValues();
@@ -82,7 +84,8 @@ function useVendorBankDetail({
 		try {
 			const payload = {
 				...values,
-				bank_document_url: values.bank_document_url.finalUrl,
+				bank_document_url : values.bank_document_url.finalUrl,
+				tax_document_url  : values.bank_document_url.finalUrl,
 				vendor_id,
 			};
 
@@ -103,8 +106,6 @@ function useVendorBankDetail({
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		initialCall: false, params: { filters: { type: ['pincode'] } },
 	}));
-
-	const controls = getControls({ country_id });
 
 	const newControls = (controls || []).map((controlItem) => {
 		const { name } = controlItem;

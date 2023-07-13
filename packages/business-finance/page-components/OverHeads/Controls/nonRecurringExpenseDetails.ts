@@ -1,3 +1,5 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 
 import styles from './styles.module.css';
@@ -38,6 +40,9 @@ const getMontOptions = (minMonth) => {
 	);
 	return options;
 };
+interface Item {
+	country_id: string,
+}
 
 export const nonRecurringExpenseDetails = ({
 	formData,
@@ -46,16 +51,23 @@ export const nonRecurringExpenseDetails = ({
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
-}: Props) => {
-	const handleEntityChange = (e: number | string) => {
-		const entityData = entityList?.filter(
-			(entityItem) => entityItem.id === e,
-		)?.[0];
+}:Props) => {
+	const geo = getGeoConstants();
+	const LIST_ENTITIES_OPTIONS = geo.navigations.over_heads.region_specific_cogo_entities;
+	const handleEntityChange = (e:number | string) => {
+		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
 			...formData,
 			entityObject: entityData,
 		});
 	};
+
+	const filterOptions = entityOptions.filter((item: Item) => {
+		const { country_id: COUNTRY_ID } = item;
+		return (
+			LIST_ENTITIES_OPTIONS ? geo.country.id === COUNTRY_ID : true
+		);
+	});
 
 	return [
 		{
@@ -116,7 +128,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Entity',
 					span           : 2.2,
-					options        : entityOptions,
+					options        : filterOptions,
 					value          : formData?.entityObject?.id,
 					onChange       : (e: any) => handleEntityChange(e),
 					className      : styles.input_width,
@@ -128,12 +140,11 @@ export const nonRecurringExpenseDetails = ({
 			groupBy : [
 				{
 					name        : 'registrationNumber',
-					label       : 'PAN',
-					type        : 'input',
+					label       : `${geo.others.pan_number.label.toUpperCase()}`,
+					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
 					className   : styles.pan,
-					placeholder : 'Autofilled PAN',
-					prefix      : null,
+					placeholder : `Autofilled ${geo.others.pan_number.label}`,
 					span        : 2.2,
 				},
 				{

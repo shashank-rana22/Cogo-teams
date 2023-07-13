@@ -1,8 +1,6 @@
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 
-import styles from './styles.module.css';
-
 const lineItemColumns = ({
 	remove, control, taxOptions, formData,
 }) => {
@@ -13,10 +11,11 @@ const lineItemColumns = ({
 			Header   : 'Item',
 			id       : 'itemName',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '76px' }}>
+				<div style={{ width: '80px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
+						theme="admin"
 						control={control}
 						value={lineItemsList[index]?.itemName}
 						name={`line_items.${index}.itemName`}
@@ -28,11 +27,12 @@ const lineItemColumns = ({
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '76px' }}>
+				<div style={{ width: '80px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
 						type="number"
+						theme="admin"
 						control={control}
 						name={`line_items.${index}.amount_before_tax`}
 						value={lineItemsList[index]?.amount_before_tax}
@@ -44,10 +44,11 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '90px' }} className={styles.select}>
+				<div style={{ width: '80px' }}>
 					<SelectController
 						key={row?.id}
 						control={control}
+						theme="admin"
 						options={taxOptions}
 						name={`line_items.${index}.tax`}
 						size="xs"
@@ -70,14 +71,13 @@ const lineItemColumns = ({
 						value={lineItemsList[index]?.amount_after_tax}
 					/>
 				</div>
-			)
-			,
+			),
 		},
 		{
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '50px' }}>
+				<div style={{ width: '80px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"

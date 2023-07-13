@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
 		id   : '177fcbad-8ef7-4324-871c-6c31745f4411',
@@ -40,7 +41,7 @@ export default {
 	uuid: {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
 		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
@@ -148,6 +149,7 @@ export default {
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
+			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
@@ -402,6 +404,11 @@ export default {
 			{ label: 'Air Freight', value: 'AIR_FREIGHT' },
 			{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 		],
+		education_level: {
+			post_graduates_degree : [],
+			graduate_degree       : [],
+			doctorate_degree      : [],
+		},
 	},
 	navigations: {
 		supply_dashboard: {
@@ -423,6 +430,10 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : true,
+			expense_non_recurring_upload_invoice_tds : true,
+		},
 	},
 	others: {
 		registration_number: {
@@ -431,8 +442,13 @@ export default {
 			max_length : 15,
 		},
 
+		banking_code: {
+			financial_system_code : 'swift',
+			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+		},
+
 		pan_number: {
-			label   : 'PAN',
+			label   : 'tax',
 			pattern : undefined,
 		},
 
@@ -442,7 +458,8 @@ export default {
 
 		navigations: {
 			onboard_vendor: {
-				validate_registration: false,
+				validate_registration : false,
+				registration_types    : true,
 			},
 			cogo_one: {
 				has_voice_call_access     : false,

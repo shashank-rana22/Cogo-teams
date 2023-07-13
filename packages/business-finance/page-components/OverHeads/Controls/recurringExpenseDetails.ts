@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
 import styles from './styles.module.css';
@@ -32,6 +33,10 @@ interface Props {
 	handleCategoryChange:(obj:any, val:object)=>void,
 }
 
+interface Item {
+	country_id: string,
+}
+
 export const recurringExpenseDetails = ({
 	formData,
 	setFormData,
@@ -41,6 +46,8 @@ export const recurringExpenseDetails = ({
 	handleVendorChange = () => {},
 	handleCategoryChange = () => {},
 }:Props) => {
+	const geo = getGeoConstants();
+	const LIST_ENTITIES_OPTIONS = geo.navigations.over_heads.region_specific_cogo_entities;
 	const handleEntityChange = (e:string | number) => {
 		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
@@ -48,6 +55,13 @@ export const recurringExpenseDetails = ({
 			entityObject: entityData,
 		});
 	};
+
+	const filterdOptions = entityOptions.filter((item: Item) => {
+		const { country_id: COUNTRY_ID } = item;
+		return (
+			LIST_ENTITIES_OPTIONS ? geo.country.id === COUNTRY_ID : true
+		);
+	});
 
 	return [
 		{
@@ -70,8 +84,8 @@ export const recurringExpenseDetails = ({
 				},
 				{
 					name        : 'registrationNumber',
-					label       : 'PAN',
-					type        : 'input',
+					label       : `${geo.others.pan_number.label.toUpperCase()}`,
+					type        : 'textarea',
 					value       : formData.registrationNumber || null,
 					className   : styles.pan_area,
 					placeholder : 'Autofilled PAN',
@@ -102,7 +116,7 @@ export const recurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Entity',
 					span           : 2.2,
-					options        : entityOptions,
+					options        : filterdOptions,
 					value          : formData?.entityObject?.id,
 					onChange       : (e:any) => handleEntityChange(e),
 					style          : { width: '164px' },

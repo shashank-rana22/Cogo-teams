@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
 import controls from '../utils/controls';
@@ -70,46 +70,38 @@ function useCreateVendorContact({
 		}
 	};
 
-	const getWhatsAppNumber = useCallback(() => {
-		const whatsappNumber = contact_details.whatsapp_number;
-
-		if (typeof whatsappNumber === 'string') {
-			return {
-				number       : whatsappNumber,
-				country_code : contact_details.whatsapp_country_code,
-			};
-		}
-
-		return {
-			number       : contact_details.whatsappNumber?.number,
-			country_code : contact_details.whatsappNumber?.whatsapp_country_code,
-		};
-	}, [contact_details]);
-
 	useEffect(() => {
+		const {
+			contact_details: contactDetails = {},
+		} = vendorInformation;
+
 		const mapping = {
 			mobile_number: {
-				number: contact_details?.mobile_number?.number
-								|| contact_details?.mobile_number,
-				country_code: contact_details?.mobile_number?.country_code
-								|| contact_details?.mobile_country_code || '+91',
+				number: contactDetails?.mobile_number?.number
+								|| contactDetails?.mobile_number || undefined,
+				country_code: contactDetails?.mobile_number?.country_code
+								|| contactDetails?.mobile_country_code || undefined,
 			},
-			whatsapp_number   : getWhatsAppNumber(),
-			contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
+			whatsapp_number: {
+				number: contactDetails?.whatsapp_number?.number
+								|| contactDetails?.whatsapp_number || undefined,
+				country_code: contactDetails?.whatsapp_number?.country_code
+								|| contactDetails.whatsapp_country_code || undefined,
+			},
+			email    : contactDetails?.email || undefined,
+			name     : contactDetails?.name || undefined,
+			poc_role : contactDetails?.poc_role || undefined,
 		};
 
 		controls.forEach((field) => {
 			if (field.name === 'contact_proof_url') {
-				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl || contact_details?.[field.name]);
+				setValue(`${field.name}`, contactDetails?.[field.name]?.finalUrl
+						|| contact_details?.[field.name] || undefined);
 			} else {
-				setValue(
-					`${field.name}`,
-					mapping[field.name]
-					|| contact_details?.[field.name],
-				);
+				setValue(`${field.name}`, mapping[field.name]);
 			}
 		});
-	}, [contact_details, getWhatsAppNumber, setValue, vendorInformation]);
+	}, [setValue, contact_details, vendorInformation]);
 
 	return {
 		fields: controls,

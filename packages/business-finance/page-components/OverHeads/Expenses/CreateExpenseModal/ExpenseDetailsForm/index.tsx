@@ -111,6 +111,7 @@ function ExpenseDetailsForm({
 			(entityList || []).forEach((entity) => {
 				const { id, entity_code:entityCode, business_name:name } = entity || {};
 				ENTITIES.push({
+					...entity,
 					label : `${entityCode}-${name}`,
 					value : id,
 				});
@@ -205,9 +206,7 @@ function ExpenseDetailsForm({
 			branchIds.forEach((id) => {
 				(officeLocations || []).forEach((location) => {
 					if (id === JSON.parse(location.value)?.branchId) {
-						if (!BRANCHES.includes(location)) {
-							BRANCHES.push(location);
-						}
+						BRANCHES.push(location);
 					}
 				});
 			});

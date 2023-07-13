@@ -1,11 +1,11 @@
 import airRepository from './config/air-repository';
 import allocations from './config/allocations';
-import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
+import bookingDeskAir from './config/booking-desk-air';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -18,7 +18,9 @@ import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
@@ -31,10 +33,10 @@ import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
+import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
-import shipmentAir from './config/shipment-air';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -65,6 +67,7 @@ const routeConfig = {
 	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
+	...ihls,
 	...myIncident,
 	...myProfile,
 	...enrichment,
@@ -78,7 +81,7 @@ const routeConfig = {
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
-	...shipmentAir,
+	...bookingDeskAir,
 	...shipmentAirFreight,
 	...shipmentAirFreightLocal,
 	...shipmentAirCustoms,
@@ -92,7 +95,6 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...referral,
-	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
 	...documentDesk,
@@ -105,6 +107,7 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...riskManagement,
 	...awbInventory,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
@@ -113,6 +116,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...ftlAdmin,
 };
 
 export default routeConfig;
