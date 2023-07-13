@@ -6,10 +6,8 @@
 .active_content {
 	color: #4f4f4f;
 
-	:global {
-		svg {
-			fill: #4f4f4f;
-		}
+	svg {
+		fill: #4f4f4f;
 	}
 }
 

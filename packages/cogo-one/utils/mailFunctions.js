@@ -89,7 +89,7 @@ function mailFunction({
 		uploaderRef?.current?.externalHandleDelete(filteredAttachments);
 	};
 
-	const decode = (data = '') => {
+	const getDecodedData = (data = '') => {
 		const val = decodeURI(data).split('/');
 		const fileName = val[val.length - LAST_INDEX];
 		return getFileAttributes({ fileName, finalUrl: data });
@@ -103,7 +103,7 @@ function mailFunction({
 		handleError,
 		handleClose,
 		handleAttachmentDelete,
-		decode,
+		getDecodedData,
 	};
 }
 

@@ -1,4 +1,5 @@
-import { isEmpty } from '@cogoport/utils';
+import { Toast } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
 
@@ -56,12 +57,17 @@ const getRecipientData = ({
 	bccData = [],
 	activeMailAddress = '',
 	subject = '',
+	isDraft = false,
 }) => {
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress.toLowerCase());
 
 	const handleClick = (val) => {
+		if (isDraft) {
+			Toast.error(`you cant ${startCase(val)} the draft mail`);
+			return;
+		}
 		setButtonType(val);
 
 		let mailData = {};

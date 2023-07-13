@@ -16,6 +16,7 @@ function Header({
 	ccData = [],
 	bccData = [],
 	activeMailAddress = '',
+	isDraft = false,
 }) {
 	const { handleClick = () => {} } = getRecipientData({
 		setButtonType,
@@ -25,6 +26,7 @@ function Header({
 		ccData,
 		bccData,
 		activeMailAddress,
+		isDraft,
 	});
 
 	return (

@@ -39,6 +39,7 @@ function MailConversation({ mailProps = {} }) {
 		ccRecipients = [],
 		bccRecipients = [],
 		hasAttachments,
+		isDraft = false,
 	} = data || {};
 
 	const { content = '' } = body || {};
@@ -67,6 +68,7 @@ function MailConversation({ mailProps = {} }) {
 				ccData={ccData}
 				bccData={bccData}
 				activeMailAddress={activeMailAddress}
+				isDraft={isDraft}
 			/>
 
 			<EmailBodyStructure

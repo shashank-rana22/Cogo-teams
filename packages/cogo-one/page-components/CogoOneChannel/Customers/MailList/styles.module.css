@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: auto;
 	height: calc(100% - 100px);
-	margin: 5px -10px;
+	margin: 6px -10px;
 }
 
 .title {
@@ -11,23 +11,6 @@
 	font-size: 18px;
 	font-weight: 600;
 	color: #828282;
-}
-
-.content {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	padding: 9px 0;
-	cursor: pointer;
-	border-bottom: 1px solid #e0e0e0;
-
-	&:last-child {
-		border-bottom: none;
-	}
-
-	&:hover {
-		background-color: #fdfbf6;
-	}
 }
 
 .left_div {
@@ -74,7 +57,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 5px 10px 5px 5px;
+	padding: 4px 10px 4px 4px;
 	cursor: pointer;
 	background: #fefce6;
 	border-radius: 4px;

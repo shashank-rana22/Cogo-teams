@@ -51,7 +51,7 @@ function RenderHeader({
 			</Button>
 
 			<div className={styles.title}>
-				{HEADER_MAPPING?.[buttonType] || 'New Message'}
+				{HEADER_MAPPING[buttonType] || 'New Message'}
 			</div>
 
 			<div className={styles.right_top_header}>

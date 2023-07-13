@@ -11,7 +11,7 @@ const MESSAGE_MAPPING = {
 };
 
 function EmptyChatPage({ activeTab = {} }) {
-	const displayMessage = MESSAGE_MAPPING?.[activeTab?.tab] || activeTab?.tab;
+	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
 	return (
 		<div className={styles.container}>

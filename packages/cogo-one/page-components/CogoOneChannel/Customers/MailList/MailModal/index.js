@@ -44,7 +44,7 @@ function MailModal({
 		handleError = () => {},
 		handleClose = () => {},
 		handleAttachmentDelete = () => {},
-		decode = () => {},
+		getDecodedData = () => {},
 	} = mailFunction({
 		...mailProps,
 		setErrorValue,
@@ -57,10 +57,8 @@ function MailModal({
 		uploaderRef,
 	});
 
-	const userActiveMails = getUserActiveMails({ userEmailAddress, viewType }).reduce(
-		(prev, curr) => (
-			[...prev, { label: curr, value: curr }]),
-		[],
+	const userActiveMails = getUserActiveMails({ userEmailAddress, viewType }).map(
+		(curr) => ({ label: curr, value: curr }),
 	);
 
 	const handleSend = () => {
@@ -180,7 +178,7 @@ function MailModal({
 								const {
 									fileIcon = {},
 									uploadedFileName = '',
-								} = decode(data) || {};
+								} = getDecodedData(data) || {};
 
 								return (
 									<div

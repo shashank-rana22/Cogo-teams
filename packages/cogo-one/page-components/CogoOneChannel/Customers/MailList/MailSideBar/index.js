@@ -40,7 +40,10 @@ function MailSideBar({
 								/>
 							)
 							: icon}
-						<span className={styles.folder_name}>
+						<span
+							className={cl`${styles.folder_name} 
+								${activeSelect === value ? styles.active_content : ''}`}
+						>
 							{label}
 						</span>
 					</div>
