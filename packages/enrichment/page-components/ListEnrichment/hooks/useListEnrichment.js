@@ -13,6 +13,7 @@ const useListEnrichment = () => {
 	const router = useRouter();
 
 	const { profile, general } = useSelector((state) => state || {});
+	const { authParams, selected_agent_id } = profile || {};
 
 	const { onEnrichmentClick } = useMarkEnrichmentComplete();
 
@@ -74,10 +75,11 @@ const useListEnrichment = () => {
 			...previousParams,
 			filters: {
 				...previousParams.filters,
-				q: searchQuery || undefined,
+				q       : searchQuery || undefined,
+				user_id : selected_agent_id,
 			},
 		}));
-	}, [searchQuery]);
+	}, [searchQuery, authParams, refetch, selected_agent_id]);
 
 	useEffect(() => {
 		if (activeTab === 'enrichment_requests') {

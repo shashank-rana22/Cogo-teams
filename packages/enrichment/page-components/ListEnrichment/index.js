@@ -40,7 +40,7 @@ function ListEnrichment() {
 		<section>
 			<div className={styles.title_container}>
 				<div className={styles.title}>Enrichment Data</div>
-				<ScopeSelect size="md" showChooseAgent={false} />
+				<ScopeSelect size="md" />
 			</div>
 
 			<div>
