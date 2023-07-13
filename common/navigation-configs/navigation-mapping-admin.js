@@ -1941,7 +1941,7 @@ const navigationMappingAdmin = {
 		title         : 'Enrichment',
 		href          : '/v2/enrichment',
 		as            : '/v2/enrichment',
-		main_apis     : ['/get_allocation_feedback_requests'],
+		main_apis     : ['get_allocation_feedback_requests'],
 		possible_apis : apis.enrichment,
 		module_type   : 'dashboards',
 	},

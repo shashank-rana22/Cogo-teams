@@ -16,7 +16,7 @@ const useListEnrichment = () => {
 
 	const { onEnrichmentClick } = useMarkEnrichmentComplete();
 
-	const { partner: { id: partner_id }, user: { id: user_id } } = profile;
+	const { partner: { id: partner_id } } = profile;
 
 	const authRoleId = profile?.auth_role_data?.id;
 
@@ -42,7 +42,7 @@ const useListEnrichment = () => {
 		filters    : {
 			q: searchQuery || undefined,
 			partner_id,
-			user_id,
+			// user_id,
 		},
 	});
 
