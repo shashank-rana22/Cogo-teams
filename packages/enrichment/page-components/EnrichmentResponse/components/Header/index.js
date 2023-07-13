@@ -81,7 +81,7 @@ function Header() {
 	};
 
 	if (loading) {
-		return <Placeholder className={styles.loading} height="120px" width="100%" />;
+		return <Placeholder className={styles.loading} height="80px" width="100%" />;
 	}
 
 	return (

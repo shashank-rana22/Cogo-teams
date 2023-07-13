@@ -2,14 +2,10 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useEnrichmentResponse = () => {
+const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 	const router = useRouter();
 
 	const { query = {} } = router;
-
-	const [activeTab, setActiveTab] = useState('user');
-
-	const [showAddPoc, setShowAddPoc] = useState(false);
 
 	const [params, setParams] = useState({
 		sort_type : 'asc',
@@ -32,10 +28,6 @@ const useEnrichmentResponse = () => {
 	const { list = [] } = data || {};
 
 	useEffect(() => {
-		if (showAddPoc) {
-			setShowAddPoc(false);
-		}
-
 		setParams((prev) => ({
 			...prev,
 			filters: {
@@ -47,13 +39,10 @@ const useEnrichmentResponse = () => {
 	}, [activeTab]);
 
 	return {
-		list,
-		refetch,
-		loading,
-		activeTab,
-		setActiveTab,
-		showAddPoc,
-		setShowAddPoc,
+		data             : list,
+		refetchResponses : refetch,
+		loadingResponses : loading,
+		setParams,
 	};
 };
 

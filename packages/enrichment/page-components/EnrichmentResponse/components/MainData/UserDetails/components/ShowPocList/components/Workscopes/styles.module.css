@@ -1,11 +1,11 @@
 .overflow_flex {
 	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+	font-weight: 600;
 }
 
 .item_value {
 	margin-top: 4px;
+	margin-right: 4px;
 	font-weight: 600;
 
 	@media (max-width: 768px) {
