@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -12,9 +13,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-props-mapping';
-import { getControls } from '../utils/getControls';
+import getControls from '../utils/getControls';
 import isRegistrationNumberValid from '../utils/isRegistrationNumberValid';
 
+import useListCogoEntities from './useListCogoEntities';
 import useOnBlurTaxPanGstinControl from './useOnBlurTaxPanGstinControl';
 
 const SUPPORTED_COUNTRY_CODES = GLOBAL_CONSTANTS.platform_supported_country_codes;
@@ -57,9 +59,22 @@ function useOnBoardVendor({
 	const { validate_registration: isValidateRegistration = false } = countrySpecificData || {};
 	const countryData = getCountryDetails({ country_id });
 	const { country_code: countryCode } = countryData || {};
+
+	const { entityList } = useListCogoEntities({});
+
+	console.log(entityList, 'entityList');
+
+	const entityOptions = (entityList || []).map((item) => ({
+		...item,
+		label : `${item?.entity_code}-${item?.business_name}`,
+		value : item?.id,
+	}));
+
 	const fields = useMemo(() => getControls({
 		country_id,
-	}), [country_id]);
+		entityOptions,
+	}), [country_id, entityOptions]);
+
 	const {
 		onBlurTaxPanGstinControl,
 	} = useOnBlurTaxPanGstinControl({
@@ -88,7 +103,9 @@ function useOnBoardVendor({
 		});
 		return () => subscription.unsubscribe();
 	}, [clearErrors, trigger, watch, watchForm, isValidateRegistration]);
+
 	const NEW_FIELDS = [];
+
 	fields.forEach((field) => {
 		let newField = field;
 		if (field.name === 'registration_number') {
