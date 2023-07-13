@@ -297,13 +297,12 @@ function ExpenseComponent() {
 			);
 		},
 		getApprovedByRecurring: (itemData:ItemDataInterface) => {
-			const { updatedAt, approvedByUser, status } = itemData || {};
-			const { name = '' } = approvedByUser || {};
+			const { updatedAt, status, approvedByName } = itemData || {};
 			return (
 				<div>
 					{status !== 'LOCKED' ? (
 						<div style={{ fontSize: '12px' }}>
-							<div>{name}</div>
+							<div>{approvedByName}</div>
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
 						</div>
 					) : (
