@@ -4,6 +4,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
+import incoTermArray from '../../../constants/inco-terms.json';
 import useTask from '../../../hooks/useTask';
 import Card from '../Card';
 import Header from '../Header';
@@ -16,7 +17,7 @@ const DISABLE_TASK = [
 	'upload_mawb_freight_certificate',
 	'upload_hawb_freight_certificate',
 ];
-const LENGTH_VALUE_CHECK = 0;
+
 function TaskView() {
 	const {
 		shipment_data,
@@ -26,6 +27,10 @@ function TaskView() {
 		getShipmentTimeline = () => {},
 		isGettingShipment,
 	} = useContext(ShipmentDetailContext);
+
+	const incoTerm = shipment_data?.inco_term;
+	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
+		|| primary_service.trade_type;
 
 	const {
 		count = 0,
@@ -66,7 +71,7 @@ function TaskView() {
 			}
 			if (
 				element?.task === 'cargo_handover_at_origin_terminal'
-					&& shipment_data?.main_service_trade_type === 'export'
+					&& tradeType === 'export'
 			) {
 				element.disabled = (tasksList || []).some(
 					(task) => DISABLE_TASK.includes(task?.task)
@@ -76,7 +81,7 @@ function TaskView() {
 			}
 			if (
 				element?.task === 'mark_confirmed'
-					&& shipment_data?.main_service_trade_type === 'export'
+				&& tradeType === 'export'
 			) {
 				element.disabled = (tasksList || []).some(
 					(task) => task?.task === 'confirm_service_provider'
@@ -104,9 +109,9 @@ function TaskView() {
 			/>
 			{loading ? <LoadingState /> : null}
 
-			{tasksList?.length === LENGTH_VALUE_CHECK && !loading ? <EmptyState /> : null}
+			{tasksList?.isEmpty && !loading ? <EmptyState /> : null}
 
-			{tasksList?.length > LENGTH_VALUE_CHECK && !loading ? (
+			{!tasksList?.isEmpty && !loading ? (
 				<>
 					{selectedTaskId ? (
 						<Button
