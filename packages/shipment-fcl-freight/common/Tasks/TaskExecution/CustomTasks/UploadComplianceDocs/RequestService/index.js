@@ -83,7 +83,7 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 			<Button
 				disable={docLoading}
 				themeType="secondary"
-				onClick={onReviewSubmit}
+				onClick={isEmpty(newDoc) ? null : onReviewSubmit}
 			>
 				Submit
 			</Button>

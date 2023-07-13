@@ -10,6 +10,7 @@ function TaskExecution({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	tasksList = [],
 }) {
 	if (['approve_document', 'amend_document'].includes(task?.task_type)
 	&& ['approve_compliance_documents', 'amend_compliance_documents'].includes(task.task)) {
@@ -18,6 +19,7 @@ function TaskExecution({
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
 			/>
 		);
 	}
@@ -65,6 +67,7 @@ function TaskExecution({
 			taskListRefetch={taskListRefetch}
 			selectedMail={selectedMail}
 			setSelectedMail={setSelectedMail}
+			tasksList={tasksList}
 		/>
 	);
 }

@@ -23,7 +23,7 @@ function Actions({
 	if (docData?.state === 'document_accepted') {
 		state = 'approved';
 	} else if (docData?.state === 'document_amendment_requested') {
-		state = 'Rejected';
+		state = 'rejected';
 	}
 
 	return (

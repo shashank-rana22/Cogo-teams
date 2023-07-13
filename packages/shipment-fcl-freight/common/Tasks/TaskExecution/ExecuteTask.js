@@ -34,6 +34,7 @@ function ExecuteTask({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	tasksList = [],
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
@@ -189,6 +190,7 @@ function ExecuteTask({
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
 			/>
 		);
 	}

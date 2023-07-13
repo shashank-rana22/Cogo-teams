@@ -20,7 +20,7 @@ function List({ item = {} }) {
 						{item?.docName || item?.file_name}
 					</div>
 
-					{item?.docExpNotes || item?.data?.doc_description ? (
+					{item?.docExpNotes || JSON.parse(item?.data)?.doc_description ? (
 						<Tooltip
 							theme="light"
 							placement="bottom"
@@ -28,7 +28,7 @@ function List({ item = {} }) {
 							maxWidth={TOOLTIP_WIDTH}
 							content={(
 								<div className={styles.tooltip_content}>
-									{item?.docExpNotes || item?.data?.doc_description}
+									{item?.docExpNotes || JSON.parse(item?.data)?.doc_description}
 								</div>
 							)}
 						>
