@@ -1,10 +1,12 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import styles from './styles.module.css';
 
 function EmptyState() {
 	return (
 		<div className={styles.container}>
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
+				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				alt="exmpty-state"
 				width={240}
 				height={180}

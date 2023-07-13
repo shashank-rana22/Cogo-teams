@@ -69,7 +69,7 @@ function GetLeadFeedbacks({ refetch = () => {} }) {
 				show={showModal}
 				size="md"
 				closeOnOuterClick={false}
-				onClose={() => onCloseModal()}
+				onClose={onCloseModal}
 				placement="top"
 			>
 				<Modal.Header title="Assign Accounts" />

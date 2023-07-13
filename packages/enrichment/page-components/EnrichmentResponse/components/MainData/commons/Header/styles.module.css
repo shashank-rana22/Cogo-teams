@@ -1,6 +1,5 @@
 .top {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	font-size: 16px;
 	font-weight: 600;

@@ -19,7 +19,7 @@ function Header({
 					themeType="accent"
 					role="presentation"
 					style={{ marginLeft: '8px' }}
-					onClick={() => { setShowForm(true); }}
+					onClick={() => setShowForm(true)}
 				>
 					Add
 					{' '}

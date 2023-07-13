@@ -5,8 +5,8 @@ const getControls = ({ country_id, region_id }) => {
 		country_id,
 		accessorType  : 'registration_number',
 		accessor      : 'label',
-		isDefaultData : false,
-	}) || 'GST';
+		isDefaultData : true,
+	});
 
 	const taxPattern = getCountrySpecificData({
 		country_id,

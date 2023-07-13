@@ -143,7 +143,6 @@ const getEnrichmentColumns = ({
 					size="md"
 					type="button"
 					disabled={sheet_url === null}
-          // eslint-disable-next-line no-undef
 					onClick={() => window.open(sheet_url, '_blank')}
 				>
 					Download

@@ -11,6 +11,7 @@ const GLOBAL_CONSTANTS = {
 	country_ids: {
 		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
 	},
+
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code   : CURRENCY_CODE,

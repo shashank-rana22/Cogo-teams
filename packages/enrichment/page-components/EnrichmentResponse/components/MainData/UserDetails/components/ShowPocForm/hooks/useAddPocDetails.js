@@ -4,11 +4,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 
 import controls from '../utils/controls';
 
 const geo = getGeoConstants();
+
+const getByKey = (obj, key) => (obj && obj[key]) || undefined;
 
 const useAddPocDetails = ({
 	setShowForm = () => {},
@@ -38,25 +39,16 @@ const useAddPocDetails = ({
 
 		try {
 			const payload = {
-
 				...values,
-
-				mobile_country_code : values?.mobile_number?.country_code,
-				mobile_number       : values?.mobile_number?.number,
-
-				alternate_mobile_country_code: !isEmpty(values?.alternate_mobile_number?.country_code)
-					? values?.alternate_mobile_number?.country_code : undefined,
-
-				alternate_mobile_number: values?.alternate_mobile_number?.number,
-
-				whatsapp_country_code: !isEmpty(values?.whatsapp_number?.country_code)
-					? values?.whatsapp_number?.country_code : undefined,
-
-				whatsapp_number: values?.whatsapp_number?.number,
-
-				response_type       : 'user',
-				source              : geo.navigations.enrichment.enrichment_response_source,
-				feedback_request_id : query?.id,
+				mobile_country_code           : getByKey(values, 'mobile_number.country_code'),
+				mobile_number                 : getByKey(values, 'mobile_number.number'),
+				alternate_mobile_country_code : getByKey(values, 'alternate_mobile_number.country_code'),
+				alternate_mobile_number       : getByKey(values, 'alternate_mobile_number.number'),
+				whatsapp_country_code         : getByKey(values, 'whatsapp_number.country_code'),
+				whatsapp_number               : getByKey(values, 'whatsapp_number.number'),
+				response_type                 : 'user',
+				source                        : geo.navigations.enrichment.enrichment_response_source,
+				feedback_request_id           : getByKey(query, 'id'),
 			};
 
 			await trigger({
