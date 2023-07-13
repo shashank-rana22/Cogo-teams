@@ -70,7 +70,7 @@ const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }}>
+				<div style={{ width: '70px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -86,7 +86,7 @@ const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }} className={styles.select}>
+				<div style={{ width: '75px' }} className={styles.select}>
 					<SelectController
 						key={row?.id}
 						control={control}
@@ -103,7 +103,7 @@ const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
 			accessor : (row: any, index: number) => (
-				<div style={{ width: '80px' }}>
+				<div style={{ width: '70px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
