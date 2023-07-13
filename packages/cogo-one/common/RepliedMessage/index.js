@@ -38,7 +38,7 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 
 	return (
 		<div
-			className={cl`${styles.container} ${hasTags ? styles.tags_container : ''}`}
+			className={cl`${styles.container} ${!isEmpty(displayTags) ? styles.tags_container : ''}`}
 			style={{ backgroundColor }}
 		>
 			<div className={styles.tags}><MessageTags tags={displayTags} /></div>
