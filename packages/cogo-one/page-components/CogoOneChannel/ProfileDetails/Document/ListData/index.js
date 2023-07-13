@@ -1,20 +1,32 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf } from '@cogoport/icons-react';
-import { format, startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { startCase, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
 import ActionsStatus from './ActionsStatus';
+import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
-	userId = '', userMobile = '', leadUserId = '',
-	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
-	isGstUploaded, isPanUploaded,
+	userId = '',
+	userMobile = '',
+	leadUserId = '',
+	list = [],
+	orgId = '',
+	setShowModal = () => {},
+	setSingleItem = () => {},
+	isGstUploaded = false,
+	isPanUploaded = false,
+	formattedMessageData = {},
 }) {
+	const [documentTagUrl, setDocumentTagUrl] = useState('');
+
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
@@ -43,6 +55,7 @@ function ListData({
 				<div className={styles.list_container}>
 					{ (list || []).map((item) => {
 						const {
+							id = '',
 							created_at = '',
 							document_type = '',
 							document_url = '',
@@ -56,8 +69,13 @@ function ListData({
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
-										{format(created_at, 'hh:mm a,')}
-										{format(created_at, ' MMM dd')}
+										{formatDate({
+											date       : created_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+											timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+											formatType : 'dateTime',
+											separator  : '|',
+										})}
 									</div>
 								</div>
 								<div className={styles.main_card}>
@@ -103,8 +121,27 @@ function ListData({
 											isGstUploaded={isGstUploaded}
 										/>
 
+										{orgId && (
+											<Button
+												key={document_url}
+												className={styles.tag_button}
+												onClick={() => setDocumentTagUrl(document_url)}
+											>
+												Tag
+											</Button>
+										)}
 									</div>
 								</div>
+								{(documentTagUrl === document_url && orgId) && (
+									<DocumentTypeSID
+										key={document_url}
+										id={id}
+										orgId={orgId}
+										formattedMessageData={formattedMessageData}
+										documentTagUrl={documentTagUrl}
+										setDocumentTagUrl={setDocumentTagUrl}
+									/>
+								)}
 							</>
 						);
 					})}

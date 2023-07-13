@@ -1,4 +1,5 @@
 import { Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect } from 'react';
 
 import FtlTracker from './ftlTracker';
@@ -44,7 +45,7 @@ function TrackingHeader({
 						trackingLoading={trackingLoading}
 						serialId={serialId}
 						data={data}
-						servicesData={servicesData?.[0] || {}}
+						servicesData={servicesData?.[GLOBAL_CONSTANTS.zeroth_index] || {}}
 						listShipments={listShipments}
 						refetch={refetch}
 					/>

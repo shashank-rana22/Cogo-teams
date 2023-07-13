@@ -2,6 +2,7 @@ import { Modal, Button, Popover } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ModalComponent from '../ModalComponent';
+import usePostCreateEmployeeOfferLetter from '../usePostCreateEmployeeOfferLetter';
 
 import styles from './styles.module.css';
 import SubmitSection from './SubmitSection';
@@ -19,6 +20,11 @@ export default function CtcBreakupModal({
 	setError,
 }) {
 	const [visible, setVisible] = useState(false);
+
+	const {
+		loading,
+		onFinalSubmit,
+	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
 
 	const {
 		handleSubmit,
@@ -70,14 +76,14 @@ export default function CtcBreakupModal({
 								setVisible={setVisible}
 								handleSubmit={handleSubmit}
 								reset={reset}
-								setShowCtcBreakupModal={setShowCtcBreakupModal}
 								setInitialQuestion={setInitialQuestion}
-								offerLetterApiRefetch={offerLetterApiRefetch}
 								setError={setError}
+								loading={loading}
+								onFinalSubmit={onFinalSubmit}
 							/>
 						)}
 					>
-						<Button onClick={onCheck}>Submit</Button>
+						<Button onClick={onCheck} loading={loading}>Submit</Button>
 					</Popover>
 				</div>
 			</Modal.Footer>

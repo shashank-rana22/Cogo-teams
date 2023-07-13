@@ -5,26 +5,27 @@ import AccordianView from '../../../common/Accordianview';
 import { PAYMENT_MODE_OPTIONS } from '../../../constants';
 import getLocationConfig from '../../../utils/getPortConfig';
 
+import FtlAdditionalDetails from './FtlAdditionalDetails';
 import styles from './styles.module.css';
 
 function AdditionalDetails({
-	control,
+	control = {},
 	errors = {},
 	errMszs = {},
 	open = false,
 	purchaseInvoiceValues = {},
 	shipment_data = {},
-	primary_service,
+	primary_service = {},
 	serviceProvider = {},
 	formValues = {},
 }) {
 	const { origin, destination } = getLocationConfig(primary_service);
 
-	const uploadedInvoices = [];
+	const UPLOADED_INVOICES = [];
 	(serviceProvider?.collection_parties || [])
 		.filter((party) => ['purchase_invoice'].includes(party?.invoice_type))
 		.forEach((party) => {
-			uploadedInvoices.push({
+			UPLOADED_INVOICES.push({
 				label : party?.invoice_no,
 				value : party?.finance_job_number,
 			});
@@ -75,7 +76,7 @@ function AdditionalDetails({
 								control={control}
 								name="ref_invoice_no"
 								placeholder="Ref Invoice Number"
-								options={uploadedInvoices}
+								options={UPLOADED_INVOICES}
 								rules={{ required: true }}
 								value={purchaseInvoiceValues?.ref_invoice_no}
 							/>
@@ -212,6 +213,16 @@ function AdditionalDetails({
 						</div>
 					</>
 				) : null}
+
+				{shipment_data?.shipment_type === 'ftl_freight'
+					&& (
+						<FtlAdditionalDetails
+							control={control}
+							shipment_data={shipment_data}
+							formValues={formValues}
+						/>
+					)}
+
 			</div>
 		</AccordianView>
 	);
