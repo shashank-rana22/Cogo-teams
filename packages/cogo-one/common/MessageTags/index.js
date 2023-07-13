@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function MessageTags({ tags = [] }) {
 	return (
 		<div className={styles.tags_flex}>
-			{tags.map((eachTag) => (
+			{tags?.map((eachTag) => (
 				<Pill
 					eachTag={eachTag?.value}
 					key={eachTag}
