@@ -1,11 +1,33 @@
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../../configs/getElementController';
 import getControls from '../controls';
 
 import styles from './styles.module.css';
 
-function RenderSelectedFields({ selectedValues, name }) {
+const KEYS_MAPPING = {
+	role_ids        : 'role_name',
+	squad_ids       : 'squad_name',
+	tribe_ids       : 'tribe_name',
+	chapter_ids     : 'chapter_name',
+	sub_chapter_ids : 'sub_chapter_name',
+};
+
+function RenderSelectedFields({ selectedValues, showSelectedValue, name, data, setShowSelectedValue }) {
+	useEffect(() => {
+		if (!isEmpty(data)) {
+			setShowSelectedValue((pv) => ({
+				...pv,
+				role_ids        : (data?.role_details || []).map((ele) => (ele?.role_name)),
+				tribe_ids       : (data?.tribe_details || []).map((ele) => (ele?.tribe_name)),
+				squad_ids       : (data?.squad_details || []).map((ele) => (ele?.squad_name)),
+				chapter_ids     : (data?.chapter_details || []).map((ele) => (ele?.chapter_name)),
+				sub_chapter_ids : (data?.sub_chapter_details || []).map((ele) => (ele?.sub_chapter_name)),
+			}));
+		}
+	}, [data, setShowSelectedValue]);
+
 	if (isEmpty(selectedValues)) {
 		return (
 			<div>
@@ -14,26 +36,22 @@ function RenderSelectedFields({ selectedValues, name }) {
 		);
 	}
 
-	return (selectedValues || []).map((value) => {
-		const { squad_name, tribe_name, chapter_name, sub_chapter_name, role_name } = value || {};
-
-		const KEYS_MAPPING = {
-			role_ids        : role_name,
-			squad_ids       : squad_name,
-			tribe_ids       : tribe_name,
-			chapter_ids     : chapter_name,
-			sub_chapter_ids : sub_chapter_name,
-		};
-
-		return (
-			<div key={value} className={styles.value_container}>
-				{startCase([KEYS_MAPPING?.[name]])}
+	if (!isEmpty(data)) {
+		return (showSelectedValue[name] || []).map((element) => (
+			<div key={element} className={styles.value_container}>
+				{element?.[KEYS_MAPPING?.[name]] ? element?.[KEYS_MAPPING?.[name]] : startCase(element) }
 			</div>
-		);
-	});
+		));
+	}
+
+	return (selectedValues || []).map((value) => (
+		<div key={value} className={styles.value_container}>
+			{startCase(value?.[KEYS_MAPPING?.[name]])}
+		</div>
+	));
 }
 
-function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue }) {
+function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue, data }) {
 	const controls = getControls({ setShowSelectedValue });
 
 	return (
@@ -81,6 +99,9 @@ function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue
 								<RenderSelectedFields
 									selectedValues={showSelectedValue[name]}
 									name={name}
+									showSelectedValue={showSelectedValue}
+									data={data}
+									setShowSelectedValue={setShowSelectedValue}
 								/>
 							</div>
 
@@ -94,7 +115,7 @@ function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue
 	);
 }
 
-function DropDownComponent({ control, errors, watch, setShowSelectedValue, showSelectedValue }) {
+function DropDownComponent({ control, errors, watch, setShowSelectedValue, showSelectedValue, data }) {
 	return (
 		<div>
 			<div style={{ paddingTop: 8, width: '85%' }}>
@@ -110,6 +131,7 @@ function DropDownComponent({ control, errors, watch, setShowSelectedValue, showS
 					watch={watch}
 					setShowSelectedValue={setShowSelectedValue}
 					showSelectedValue={showSelectedValue}
+					data={data}
 				/>
 			</div>
 

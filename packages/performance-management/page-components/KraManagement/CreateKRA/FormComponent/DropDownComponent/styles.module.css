@@ -32,3 +32,8 @@
 	border: 1px solid #fff;
 	border-radius: 5px;
 }
+
+.error_message {
+	padding-top: 3px;
+	color: #ee3426;
+}
