@@ -3,8 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import Header from '../commons/Header';
 
-import Header from './components/Header';
 import ShowAddressForm from './components/ShowAddressForm';
 import ShowAddressList from './components/ShowAddressList';
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ function AddressDetails({
 	refetchResponses = () => {},
 	loadingResponses = false,
 }) {
-	const [showForm, setShowForm] = useState('');
+	const [showForm, setShowForm] = useState(false);
 
 	if (loadingResponses) {
 		return (
@@ -34,8 +34,8 @@ function AddressDetails({
 
 			<div className={styles.main}>
 				<Header
-					showForm={showForm}
 					setShowForm={setShowForm}
+					title="Address"
 				/>
 
 				{isEmpty(data) ? (

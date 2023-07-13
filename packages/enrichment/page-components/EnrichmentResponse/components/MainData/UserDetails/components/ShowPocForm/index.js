@@ -6,7 +6,7 @@ import useAddPocDetails from './hooks/useAddPocDetails';
 import styles from './styles.module.css';
 
 function ShowPocForm({
-	showForm = '',
+	showForm = false,
 	setShowForm = () => {},
 	refetchResponses = () => {},
 }) {
@@ -24,7 +24,7 @@ function ShowPocForm({
 		<Modal
 			size="lg"
 			show={showForm}
-			onClose={() => setShowForm('')}
+			onClose={() => setShowForm(false)}
 			placement="center"
 		>
 			<Modal.Header title="POC Details" />
@@ -45,7 +45,7 @@ function ShowPocForm({
 						themeType="tertiary"
 						disabled={loading}
 						style={{ marginRight: 12 }}
-						onClick={() => setShowForm('')}
+						onClick={() => setShowForm(false)}
 					>
 						Cancel
 					</Button>

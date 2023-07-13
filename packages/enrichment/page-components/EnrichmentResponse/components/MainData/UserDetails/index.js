@@ -3,8 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import Header from '../commons/Header';
 
-import Header from './components/Header';
 import ShowPocForm from './components/ShowPocForm';
 import ShowPocList from './components/ShowPocList';
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ function UserDetails({
 	refetchResponses = () => {},
 	loadingResponses = false,
 }) {
-	const [showForm, setShowForm] = useState('');
+	const [showForm, setShowForm] = useState(false);
 
 	if (loadingResponses) {
 		return (
@@ -36,6 +36,7 @@ function UserDetails({
 				<Header
 					showForm={showForm}
 					setShowForm={setShowForm}
+					title="POC"
 				/>
 
 				{isEmpty(data) ? (

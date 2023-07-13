@@ -8,10 +8,9 @@ function FormLayout({
 	fields = [],
 	control = {},
 	errors = {},
-	customStyle = {},
 }) {
 	return (
-		<div className={styles.form_container} style={customStyle?.formContainer || {}}>
+		<div className={styles.form_container}>
 			{fields.map((controlItem) => {
 				const element = { ...controlItem };
 
@@ -20,7 +19,7 @@ function FormLayout({
 				if (!Element) return null;
 
 				return (
-					<div key={controlItem.name} className={styles.form_group} style={customStyle || element?.style}>
+					<div key={controlItem.name} className={styles.form_group} style={element?.style}>
 						<div className={styles.form_label}>
 							{element.label}
 							{isEmpty(controlItem?.rules)

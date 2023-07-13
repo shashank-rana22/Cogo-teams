@@ -82,7 +82,7 @@ const useAddAddressDetails = ({
 
 			Toast.success('Address Added Successfully');
 
-			setShowForm('');
+			setShowForm(false);
 
 			refetchResponses();
 		} catch (err) {

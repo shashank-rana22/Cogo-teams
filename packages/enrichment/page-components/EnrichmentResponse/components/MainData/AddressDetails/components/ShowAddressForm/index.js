@@ -6,7 +6,7 @@ import useAddAddressDetails from './hooks/useAddAddressDetails';
 import styles from './styles.module.css';
 
 function ShowAddressForm({
-	showForm = '',
+	showForm = false,
 	setShowForm = () => {},
 	refetchResponses = () => {},
 }) {
@@ -24,7 +24,7 @@ function ShowAddressForm({
 		<Modal
 			size="lg"
 			show={showForm}
-			onClose={() => setShowForm('')}
+			onClose={() => setShowForm(false)}
 			placement="center"
 		>
 			<Modal.Header title="Address Details" />
@@ -45,7 +45,7 @@ function ShowAddressForm({
 						themeType="tertiary"
 						disabled={loading}
 						style={{ marginRight: 12 }}
-						onClick={() => setShowForm('')}
+						onClick={() => setShowForm(false)}
 					>
 						Cancel
 					</Button>

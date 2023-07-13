@@ -21,7 +21,7 @@ const getControls = ({ country_id, region_id }) => {
 			label       : 'Full Address',
 			placeholder : 'Type here...',
 			type        : 'text',
-			style       : { flexBasis: '86%' },
+			style       : { flexBasis: '42%' },
 			isClearable : true,
 			rules       : {
 				required: 'Full Address is required',

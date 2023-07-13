@@ -66,7 +66,7 @@ const useAddPocDetails = ({
 
 			Toast.success('POC Added Successfully');
 
-			setShowForm('');
+			setShowForm(false);
 
 			refetchResponses();
 		} catch (err) {
