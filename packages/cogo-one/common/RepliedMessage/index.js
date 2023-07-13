@@ -19,7 +19,7 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 
 	const displayMessage = typeof message === 'object' ? (message?.text
 		|| message?.components?.[GLOBAL_CONSTANTS.zeroth_index]?.text) : message;
-	const { session_type = '' } = typeof message === 'object' ? message : {};
+	const { session_type = '', tags:messageTags = [] } = typeof message === 'object' ? message : {};
 
 	let backgroundColor = '#fff';
 	let repliedTo = user_name;
@@ -34,12 +34,14 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 
 	const hasTags = !isEmpty(tags);
 
+	const displayTags = hasTags ? tags : messageTags;
+
 	return (
 		<div
 			className={cl`${styles.container} ${hasTags ? styles.tags_container : ''}`}
 			style={{ backgroundColor }}
 		>
-			{hasTags && <div className={styles.tags}><MessageTags tags={tags} /></div>}
+			<div className={styles.tags}><MessageTags tags={displayTags} /></div>
 			<div className={styles.name}>{startCase(repliedTo?.toLowerCase() || '')}</div>
 			<MessageBody
 				response={{
