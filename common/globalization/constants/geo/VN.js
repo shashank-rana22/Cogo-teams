@@ -430,6 +430,10 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : true,
+			expense_non_recurring_upload_invoice_tds : true,
+		},
 	},
 	others: {
 		registration_number: {
@@ -444,7 +448,7 @@ export default {
 		},
 
 		pan_number: {
-			label   : 'PAN',
+			label   : 'tax',
 			pattern : undefined,
 		},
 

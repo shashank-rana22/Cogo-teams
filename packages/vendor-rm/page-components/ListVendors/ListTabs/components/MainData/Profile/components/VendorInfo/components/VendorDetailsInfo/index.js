@@ -1,7 +1,11 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function VendorDetailsInfo({
 	data = {},
@@ -21,7 +25,7 @@ function VendorDetailsInfo({
 		{ label: 'Country of Registration', value: country?.name },
 		{ label: 'Registration No.', value: registration_number },
 		{ label: 'Organisation Name', value: business_name },
-		{ label: 'PAN Document', value: registration_proof_url },
+		{ label: `${geo.others.registration_number.label} Document`, value: registration_proof_url },
 		{ label: 'Type of Company', value: startCase(company_type) },
 		{ label: 'Company Branch', value: name },
 	];
@@ -35,7 +39,7 @@ function VendorDetailsInfo({
 					</div>
 
 					<div className={styles.bottom}>
-						{item.label === 'PAN Document'
+						{item.label === `${geo.others.registration_number.label} Document`
 							? (
 								<div className={styles.download}>
 									<a
@@ -49,8 +53,7 @@ function VendorDetailsInfo({
 
 									<div>
 										<img
-											src={`https://cdn.cogoport.io/cms-prod/cogo_admin/vault/
-											original/download-icon.svg`}
+											src={GLOBAL_CONSTANTS.image_url.download_icon_svg}
 											alt="icon"
 										/>
 									</div>

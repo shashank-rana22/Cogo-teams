@@ -9,7 +9,7 @@ import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
 import List from '../../commons/List';
 import useListExpense from '../hooks/useListExpense';
-import { expenseConfig } from '../utils/config';
+import configs from '../utils/config';
 
 import styles from './styles.module.css';
 
@@ -23,6 +23,8 @@ function ShowMore({ vendorId }:Props) {
 	const [expenseType, setExpenseType] = useState('RECURRING');
 
 	const { getList, listData, listLoading } = useListExpense();
+
+	const { EXPENSE_CONFIG } = configs();
 
 	const handlePageChange = (pageValue:number) => {
 		setPageIndex(pageValue);
@@ -234,7 +236,7 @@ function ShowMore({ vendorId }:Props) {
 							</div>
 							{(listData && listData?.list?.length > 0) ? (
 								<List
-									config={expenseConfig()}
+									config={EXPENSE_CONFIG}
 									itemData={listData}
 									loading={listLoading}
 									functions={functions}

@@ -561,6 +561,10 @@ export default {
 				},
 			},
 		},
+		over_heads: {
+			region_specific_cogo_entities            : false,
+			expense_non_recurring_upload_invoice_tds : false,
+		},
 	},
 	others: {
 		registration_number: {
@@ -575,7 +579,7 @@ export default {
 		},
 
 		pan_number: {
-			label   : 'PAN',
+			label   : 'pan',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		},
 
