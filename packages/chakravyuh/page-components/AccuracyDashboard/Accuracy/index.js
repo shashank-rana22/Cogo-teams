@@ -12,6 +12,16 @@ const CONSTANT_FIFTY = 50;
 const CONSTANT_SEVENTY_FIVE = 75;
 const CONSTANT_HUNDRED = 100;
 
+function CustomTooltip({ point = { data: {} } }) {
+	console.log(point);
+	return (
+		<div className={styles.tooltip_container}>
+			<p className={styles.tooltip_date}>{point?.data?.x}</p>
+			<p className={styles.tooltip_accuracy}>{`${point?.data?.y}% Accuracy`}</p>
+		</div>
+	);
+}
+
 function Accuracy() {
 	return (
 		<div className={styles.container}>
@@ -91,6 +101,7 @@ function Accuracy() {
 							],
 						},
 					]}
+					tooltip={CustomTooltip}
 				/>
 			</div>
 		</div>

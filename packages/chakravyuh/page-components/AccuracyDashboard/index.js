@@ -5,6 +5,7 @@ import Deviation from './Deviation';
 import Distribution from './Distribution';
 import Filters from './Filters';
 import styles from './styles.module.css';
+import SupplyRates from './SupplyRates';
 import Views from './Views';
 
 function AccuracyDashboard() {
@@ -22,6 +23,7 @@ function AccuracyDashboard() {
 					<Distribution />
 				</div>
 			</div>
+			<SupplyRates />
 		</div>
 	);
 }

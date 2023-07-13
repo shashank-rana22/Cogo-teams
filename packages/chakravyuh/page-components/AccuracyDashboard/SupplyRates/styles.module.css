@@ -1,0 +1,136 @@
+.main_container {
+	.main_title {
+		padding: 12px 0;
+		font-size: 16px;
+		font-weight: 600;
+		color: #221f20;
+	}
+}
+
+.table_container {
+	padding: unset !important;
+	margin: 0;
+
+	:global {
+		.ui_table_head_row {
+			background-color: #fdfbf6;
+
+			.ui_table_head_cell {
+				padding: 16px;
+				font-size: 14px;
+				color: black;
+			}
+		}
+
+		.ui_table_body_container {
+			background-color: #fff;
+
+			.ui_table_body_row {
+				cursor: default;
+
+				.ui_table_body_cell {
+					padding: 0;
+					font-size: 12px;
+					font-weight: 500;
+
+					/* padding-block: 20px; */
+					color: #4f4f4f;
+
+					/* border-bottom: 20px solid var(--color-tertiary-beige-4); */
+				}
+			}
+		}
+	}
+}
+
+.row_port_cell {
+	padding: 16px;
+	font-size: 16px;
+
+	.row_port_code {
+		color: #f68b21;
+	}
+}
+
+.row_default_cell {
+	padding: 16px;
+	font-size: 12px;
+
+	.row_cell_subtitle {
+		color: #828282;
+	}
+}
+
+.row_shipping_cell {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	font-size: 14px;
+	font-weight: 500;
+
+	.ship_icon {
+		width: 16px;
+		height: 16px;
+		margin-right: 8px;
+	}
+}
+
+.row_commodity_cell {
+	padding: 16px;
+	font-size: 14px;
+
+	.chip {
+		width: fit-content;
+		padding: 4px;
+		color: #221f20;
+		background-color: #f3fafa;
+		border-radius: 6px;
+	}
+
+	.percent {
+		font-size: 20px;
+		font-weight: 600;
+		color: #ee3425;
+	}
+
+	.trigger_button {
+		/* padding: 8px 12px; */
+		font-size: 12px;
+		font-weight: 500;
+		color: #221f20;
+		cursor: pointer;
+		background: transparent;
+		border: 1px solid transparent;
+
+		p {
+			margin: 0;
+		}
+
+		.arrow_right {
+			width: 20px;
+			padding-left: 4px;
+			transition: all 0.3s ease-in-out;
+		}
+
+		&:hover .arrow_right {
+			padding-left: 12px;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: 44px;
+	padding-right: 8px;
+	margin: 0;
+	background-color: #fff;
+	border: 1px solid #f8f5ec;
+	border-top: none;
+
+	@media (max-width: 768px) {
+		position: absolute;
+		right: 0;
+	}
+}
