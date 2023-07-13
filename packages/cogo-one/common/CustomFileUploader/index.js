@@ -155,7 +155,7 @@ function CustomFileUploader(props, ref) {
 
 	const handleDelete = (values) => {
 		setFileName(values);
-		const files = Array.isArray(values) ? values?.map((item) => item.name) : [];
+		const files = Array.isArray(values) ? values.map((item) => item.name) : [];
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};

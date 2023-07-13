@@ -12,7 +12,7 @@ function EmailCustomTag({
 	const {
 		bgColor = '#FEF199',
 		subDivBgColor = '#FFFCE6',
-	} = EMAIL_TAGS_COLOR?.[type] || {};
+	} = EMAIL_TAGS_COLOR[type] || {};
 
 	return (
 		<div className={styles.email_tag_container}>
