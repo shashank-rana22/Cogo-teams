@@ -19,12 +19,6 @@ export const hawbFields = {
 			func  : 'startCase',
 		},
 		{
-			key   : 'status',
-			label : 'Status',
-			span  : 2,
-			func  : 'handleStatus',
-		},
-		{
 			key   : 'download',
 			label : '',
 			span  : 1,

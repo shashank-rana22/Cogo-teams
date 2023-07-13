@@ -32,6 +32,9 @@ const commonFunctions = ({
 				{singleItem.serialId}
 			</div>
 		),
+		handleDocumentNumber: (singleItem) => (
+			<p>{singleItem?.documentData?.document_number}</p>
+		),
 		handleBlCategory: (singleItem) => (
 			<div style={{ textTransform: 'uppercase' }}>
 				{singleItem.blCategory}

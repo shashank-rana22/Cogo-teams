@@ -1,7 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .container {
 	display: flex;
-	gap: 16px;
 
 	:global {
 		.tippy-box {
@@ -13,30 +12,8 @@
 			}
 		}
 
-		.ui_select_options_container {
-			width: 150%;
-		}
-
 		.heading {
 			display: none;
-		}
-	}
-}
-
-.select {
-	:global(.ui_select_display_container) {
-		height: 32px;
-		border: 1px solid #333;
-		border-radius: 4px;
-	}
-}
-
-.date {
-	:global(.react-datepicker__input-container) {
-		input {
-			height: 32px;
-			border: 1px solid #333;
-			border-radius: 4px;
 		}
 	}
 }
@@ -53,12 +30,8 @@
 	margin-top: 10px;
 }
 
-.popover_container {
-	width: 500px !important;
-}
-
 .filter_dot {
 	position: absolute;
-	top: 154px;
-	right: 42px;
+	top: 144px;
+	right: 32px;
 }

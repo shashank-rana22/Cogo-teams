@@ -8,28 +8,39 @@ import styles from './styles.module.css';
 
 const TOTAL_AWB_COPIES = 12;
 
+const DOCUMENT_COPIES = ['original_3',
+	'original_2',
+	'original_1',
+	'copy_9',
+	'copy_4',
+	'copy_5',
+	'copy_6',
+	'copy_7',
+	'copy_8',
+	'copy_10',
+	'copy_11',
+	'copy_12',
+];
+
 function SelectDocumentCopies({
-	copiesValue, copiesOnChange, setSaveDocument, handleView,
-	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
+	copiesValue = [],
+	copiesOnChange = () => {},
+	setSaveDocument = () => {},
+	handleView = () => {},
+	setViewDoc = () => {},
+	download24 = false,
+	setEdit = () => {},
+	setItem = () => {},
+	setDocCopies = () => {},
+	setEditCopies = () => {},
+	taskItem = {},
 }) {
 	const { data } = useGetMultipleCopiesList(taskItem);
 
 	const options = multipleCopies({ data, setEditCopies, setViewDoc, setEdit, setItem });
 
 	const onChangeTableHeaderCheckbox = (event) => {
-		copiesOnChange(event.currentTarget.checked ? [
-			'original_3',
-			'original_2',
-			'original_1',
-			'copy_9',
-			'copy_4',
-			'copy_5',
-			'copy_6',
-			'copy_7',
-			'copy_8',
-			'copy_10',
-			'copy_11',
-			'copy_12'] : []);
+		copiesOnChange(event.currentTarget.checked ? DOCUMENT_COPIES : []);
 	};
 
 	useEffect(() => {

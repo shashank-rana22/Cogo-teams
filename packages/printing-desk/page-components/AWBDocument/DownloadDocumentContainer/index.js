@@ -23,7 +23,7 @@ const PDF_HEIGHT_ADJUST_VALUE = 14;
 const PDF_SCALE = 4.5;
 const TWELEVE_COPIES_LAST_INDEX = 1;
 
-function TopButtonContainer({
+function DownloadDocumentContainer({
 	whiteout = false,
 	setWhiteout = () => {},
 	saveDocument = false,
@@ -176,4 +176,4 @@ function TopButtonContainer({
 	);
 }
 
-export default TopButtonContainer;
+export default DownloadDocumentContainer;
