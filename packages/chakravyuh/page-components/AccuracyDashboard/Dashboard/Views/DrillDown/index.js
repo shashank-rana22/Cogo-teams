@@ -2,8 +2,8 @@
 import anime from 'animejs/lib/anime.es';
 import React, { useRef, useEffect } from 'react';
 
-import IcBranch from '../../../../assets/ic-tree.svg';
-import { D_NEXT, D_TOP, PATH_STYLE } from '../../../../constants/svg_constants';
+// import IcBranch from '../../../../..';
+import { D_NEXT, D_TOP, PATH_STYLE } from '../../../../../constants/svg_constants';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,7 @@ function DrillDown() {
 					strokeDashoffset : 0,
 					easing           : 'linear',
 					duration         : 2000,
-					delay            : 0, // Delay each animation by 500 milliseconds
+					delay            : 0,
 					loop             : true,
 				});
 			});
@@ -34,7 +34,7 @@ function DrillDown() {
 		<div className={styles.container}>
 			<div className={styles.header}>Rate DrillDown</div>
 			<div className={styles.main_container}>
-				<IcBranch />
+				{/* <IcBranch /> */}
 				<svg
 					ref={svgRef}
 					xmlns="http://www.w3.org/2000/svg"

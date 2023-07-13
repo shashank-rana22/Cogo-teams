@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMShip } from '@cogoport/icons-react';
 
-import styles from '../page-components/AccuracyDashboard/SupplyRates/styles.module.css';
+import styles from '../page-components/AccuracyDashboard/RatesList/styles.module.css';
 
 function useSupplyRatesListTable() {
 	const CLASS_TYPE = 'sea';

@@ -1,7 +1,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import React from 'react';
 
-import { CUSTOM_DATA, CUSTOM_THEME } from '../../../constants/line_chart_config';
+import { CUSTOM_DATA, CUSTOM_THEME } from '../../../../constants/line_chart_config';
+import { section_header } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
@@ -13,7 +14,6 @@ const CONSTANT_SEVENTY_FIVE = 75;
 const CONSTANT_HUNDRED = 100;
 
 function CustomTooltip({ point = { data: {} } }) {
-	console.log(point);
 	return (
 		<div className={styles.tooltip_container}>
 			<p className={styles.tooltip_date}>{point?.data?.x}</p>
@@ -25,7 +25,7 @@ function CustomTooltip({ point = { data: {} } }) {
 function Accuracy() {
 	return (
 		<div className={styles.container}>
-			<h4>Rate Accuracy with Time</h4>
+			<h3 className={section_header}>Rate Accuracy with Time</h3>
 			<div className={styles.line_chart_container}>
 				<ResponsiveLine
 					data={CUSTOM_DATA}
