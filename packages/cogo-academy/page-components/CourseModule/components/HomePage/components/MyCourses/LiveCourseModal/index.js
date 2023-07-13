@@ -1,8 +1,9 @@
-import { Button, Pagination } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import StyledTable from '../../../../../../../commons/StyledTable';
+
+import getColumns from './getColumns';
 import useListCourseVideos from './useListCourseVideos';
 
 const onClickOpen = (url) => {
@@ -11,8 +12,8 @@ const onClickOpen = (url) => {
 
 function LiveCourseModal() {
 	const {
-		data,
 		loading,
+		list,
 		page,
 		setPage,
 		paginationData,
@@ -20,21 +21,12 @@ function LiveCourseModal() {
 
 	const { total_count, page_limit } = paginationData || {};
 
+	const columns = getColumns({ onClickOpen });
+
 	return (
 		<div>
-			{data?.list?.map((item) => (
-				<div key={item} className={styles.course_list}>
-					{startCase(item?.video_name)}
-					<Button
-						size="sm"
-						onClick={() => onClickOpen(item?.video_link)}
-						loading={loading}
-					>
-						OPEN
-					</Button>
 
-				</div>
-			))}
+			<StyledTable columns={columns} data={list} loading={loading} />
 
 			{total_count > page_limit ? (
 				<Pagination

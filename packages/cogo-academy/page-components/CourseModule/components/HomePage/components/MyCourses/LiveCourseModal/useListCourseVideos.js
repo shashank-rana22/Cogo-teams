@@ -27,9 +27,9 @@ function useListCourseVideos() {
 	const { list, ...paginationData } = data || {};
 
 	return {
-		data,
 		loading,
 		fetchList,
+		list,
 		page,
 		setPage,
 		paginationData,
