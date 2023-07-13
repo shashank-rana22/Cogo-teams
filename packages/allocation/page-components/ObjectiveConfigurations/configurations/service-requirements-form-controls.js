@@ -104,7 +104,7 @@ const getServiceRequirementControls = (props) => {
 			name        : 'inco_term',
 			label       : 'Incoterm',
 			placeholder : 'Select Incoterm',
-			type        : 'select',
+			type        : 'multiSelect',
 			options     : getIncotermOptionsByTradeType({ trade_type: 'export' }),
 			isClearable : true,
 			showElement : {
@@ -116,12 +116,14 @@ const getServiceRequirementControls = (props) => {
 			label       : 'Commodity Details (HS Code)',
 			placeholder : 'Select HS Code',
 			type        : 'asyncSelect',
+			multiple    : true,
 			asyncKey    : 'list_hs_codes',
 			valueKey    : 'name',
 			isClearable : true,
 			showElement : {
-				serviceType: ['fcl_fright', 'lcl_freight', 'air_domestic', 'air_international'],
+				serviceType: ['fcl_freight', 'lcl_freight', 'air_domestic', 'air_international'],
 			},
+			renderLabel: ({ name = '', hs_code = '' }) => `${name} (${hs_code})`,
 		},
 		{
 			name        : 'container_count',
@@ -159,7 +161,7 @@ const getServiceRequirementControls = (props) => {
 			name        : 'container_size',
 			label       : 'Container Size',
 			placeholder : 'Size',
-			type        : 'select',
+			type        : 'multiSelect',
 			options     : [
 				{
 					label : '20ft',
@@ -188,7 +190,7 @@ const getServiceRequirementControls = (props) => {
 			name        : 'container_type',
 			label       : 'Container Type',
 			placeholder : 'Type',
-			type        : 'select',
+			type        : 'multiSelect',
 			options     : geo.options.freight_container_types,
 			isClearable : true,
 			showElement : {
@@ -200,7 +202,7 @@ const getServiceRequirementControls = (props) => {
 			name        : 'truck_type',
 			label       : 'Truck Type',
 			placeholder : 'Truck Type',
-			type        : 'select',
+			type        : 'multiSelect',
 			options     : getAllTruckTypeOptions(),
 			isClearable : true,
 			showElement : {

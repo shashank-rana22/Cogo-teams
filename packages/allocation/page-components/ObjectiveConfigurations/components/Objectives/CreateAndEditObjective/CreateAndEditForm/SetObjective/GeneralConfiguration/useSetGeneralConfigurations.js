@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
 
 const useSetGeneralConfiguration = (props) => {
-	const { formRef, setFormValues } = props;
+	const { setFormValues, onSaveCallback } = props;
 
 	const [selectedRoles, setSelectedRoles] = useState([]);
 	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
@@ -33,7 +33,7 @@ const useSetGeneralConfiguration = (props) => {
 			objectiveRequirements: {},
 		}));
 
-		formRef.current?.scrollIntoView({ behavior: 'smooth' });
+		if (typeof onSaveCallback === 'function') onSaveCallback();
 	};
 
 	useEffect(() => {

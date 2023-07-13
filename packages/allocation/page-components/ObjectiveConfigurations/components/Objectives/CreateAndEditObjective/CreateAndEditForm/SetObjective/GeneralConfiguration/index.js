@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 import useSetGeneralConfiguration from './useSetGeneralConfigurations';
 
 function GeneralConfiguration(props) {
-	const { formRef, formValues, setFormValues } = props;
+	const { formValues, setFormValues, onSaveCallback } = props;
 
 	const {
 		selectedRoles,
@@ -22,7 +22,7 @@ function GeneralConfiguration(props) {
 		handleSubmit,
 		controls,
 		onSave,
-	} = useSetGeneralConfiguration({ formRef, setFormValues });
+	} = useSetGeneralConfiguration({ setFormValues, onSaveCallback });
 
 	return (
 		<div className={styles.container}>

@@ -6,17 +6,22 @@ import ObjectiveRequirements from './ObjectiveRequirements';
 function SetObjective(props) {
 	const { formValues, setFormValues } = props;
 
-	const formRef = useRef({});
+	const objReqRef = useRef({});
+
+	const onSaveGeneralConfig = () => {
+		objReqRef.current?.resetObjectiveRequirementForm();
+		objReqRef.current?.container?.scrollIntoView({ behavior: 'smooth' });
+	};
 
 	return (
 		<>
 			<GeneralConfiguration
-				formRef={formRef}
 				formValues={formValues}
 				setFormValues={setFormValues}
+				onSaveCallback={onSaveGeneralConfig}
 			/>
 
-			<ObjectiveRequirements formRef={formRef} />
+			<ObjectiveRequirements ref={objReqRef} />
 		</>
 	);
 }
