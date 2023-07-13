@@ -77,5 +77,6 @@ export const getControls = ({ country_id = '' }) => [
 		valueKey    : 'id',
 		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
 		initialCall : true,
+		rules       : { required: 'Entity is Required' },
 	},
 ];
