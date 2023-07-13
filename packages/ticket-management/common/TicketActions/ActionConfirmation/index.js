@@ -12,7 +12,7 @@ function ActionConfirmation({
 		<Modal size="sm" show={show} onClose={onClose} placement="center">
 			<Modal.Body>
 				<div className={styles.modal_body}>
-					{`Are your sure want to ${actionType} Ticket #${id}?`}
+					{`Are you sure want to ${actionType} Ticket #${id}?`}
 				</div>
 			</Modal.Body>
 
