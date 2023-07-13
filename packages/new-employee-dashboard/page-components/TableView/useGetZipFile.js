@@ -21,9 +21,7 @@ const useGetZipFile = () => {
 
 			const url = res?.data?.zip_file_url;
 
-			if (url) {
-				onClickViewSampleFile(url);
-			}
+			if (url) onClickViewSampleFile(url);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
