@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { startCase } from '@cogoport/utils';
 
 import Enrichment from '../../common/Enrichment';
 import useRightPanel from '../../hooks/useRightPanel';
@@ -26,7 +27,7 @@ function RightPanel(props) {
 
 	const geo = getGeoConstants();
 
-	const ENRICHMENT_TABS_MAPPING = geo.navigations.enrichment.request_sent;
+	const ENRICHMENT_TABS = geo.navigations.enrichment.request_sent.tabs;
 
 	const {
 		secondaryTab, setSecondaryTab, filteredColumns,
@@ -40,8 +41,8 @@ function RightPanel(props) {
 				themeType="secondary"
 				onChange={setSecondaryTab}
 			>
-				{Object.values(ENRICHMENT_TABS_MAPPING).map((item) => (
-					<TabPanel key={item.name} name={item.name} title={item.title}>
+				{Object.values(ENRICHMENT_TABS).map((item) => (
+					<TabPanel key={item} name={item} title={startCase(item)}>
 						<Enrichment
 							list={list}
 							loading={loading}

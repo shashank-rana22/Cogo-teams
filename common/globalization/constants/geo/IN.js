@@ -557,14 +557,10 @@ export default {
 		},
 		enrichment: {
 			request_sent: {
-				submitted_requests: {
-					name  : 'submitted_requests',
-					title : 'Submitted Requests',
-				},
-				uploaded_files: {
-					name  : 'uploaded_files',
-					title : 'Uploaded Files',
-				},
+				tabs: [
+					'submitted_requests',
+					'uploaded_files',
+				],
 			},
 		},
 		account_receivables: {

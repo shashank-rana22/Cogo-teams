@@ -433,10 +433,10 @@ export default {
 		},
 		enrichment: {
 			request_sent: {
-				submitted_requests: {
-					name  : 'submitted_requests',
-					title : 'Submitted Requests',
-				},
+				tabs: [
+					'submitted_requests',
+
+				],
 			},
 		},
 		account_receivables: {
