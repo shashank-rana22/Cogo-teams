@@ -69,6 +69,11 @@ function ConversationContainer({
 			setModalType(other_channel_type);
 		}
 	};
+
+	const closeModal = () => {
+		setModalType(null);
+	};
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -120,7 +125,7 @@ function ConversationContainer({
 			{modalType && (
 				<CommunicationModal
 					modalType={modalType}
-					setModalType={setModalType}
+					closeModal={closeModal}
 					userData={userData}
 					activeCardData={activeCardData}
 				/>
