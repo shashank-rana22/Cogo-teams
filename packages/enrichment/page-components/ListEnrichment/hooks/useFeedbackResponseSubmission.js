@@ -2,11 +2,11 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useMarkEnrichmentComplete = () => {
+const useFeedbackResponseSubmission = () => {
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'feedback_enrichment_response',
-		method  : 'POST',
-		authkey : 'post_allocation_feedback_enrichment_response',
+		url     : '/feedback_response_submission',
+		method  : 'post',
+		authkey : 'post_allocation_feedback_response_submission',
 	}, { manual: true });
 
 	const onEnrichmentClick = async ({ id, workflow, refetch = () => {} }) => {
@@ -34,4 +34,4 @@ const useMarkEnrichmentComplete = () => {
 	};
 };
 
-export default useMarkEnrichmentComplete;
+export default useFeedbackResponseSubmission;

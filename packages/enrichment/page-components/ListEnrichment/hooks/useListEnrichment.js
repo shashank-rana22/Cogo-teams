@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import AUTH_KEY_MAPPING from '../../../constants/auth-key-mapping';
 import getEnrichmentColumns from '../configurations/get-enrichment-columns';
 
-import useMarkEnrichmentComplete from './useMarkEnrichmentComplete';
+import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
 
 const useListEnrichment = () => {
 	const router = useRouter();
@@ -15,7 +15,7 @@ const useListEnrichment = () => {
 	const { profile, general } = useSelector((state) => state || {});
 	const { authParams, selected_agent_id } = profile || {};
 
-	const { onEnrichmentClick } = useMarkEnrichmentComplete();
+	const { onEnrichmentClick } = useFeedbackResponseSubmission();
 
 	const { partner: { id: partner_id } } = profile;
 
