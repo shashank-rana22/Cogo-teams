@@ -8,13 +8,13 @@ import Content from './Content';
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
 
 const Card = ({
-	taskList,
-	completedDocs,
-	emailDocs,
-	shipment_data,
-	primary_service,
-	setShowDoc,
-	setShowApproved,
+	taskList = [],
+	completedDocs = [],
+	emailDocs = [],
+	shipment_data = {},
+	primary_service = {},
+	setShowDoc = () => {},
+	setShowApproved = () => {},
 	shipmentDocumentRefetch = () => {},
 }) => {
 	const handleView = (url) => {

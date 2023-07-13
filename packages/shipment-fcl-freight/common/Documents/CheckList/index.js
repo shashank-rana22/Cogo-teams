@@ -5,11 +5,11 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 function CheckList({
-	taskList,
-	emailDocs,
-	completedDocs,
-	setShowDoc,
-	setShowApproved,
+	taskList = [],
+	emailDocs = [],
+	completedDocs = [],
+	setShowDoc = () => {},
+	setShowApproved = () => {},
 	shipmentDocumentRefetch = () => {},
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
