@@ -113,7 +113,7 @@
 .select {
 	:global {
 		.ui_select_options_container {
-			width: 220px;
+			width: 200px;
 		}
 	}
 }

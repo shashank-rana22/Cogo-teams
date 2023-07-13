@@ -70,7 +70,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 			value : branchName || '-',
 		},
 		{
-			title: 'maxPayoutAllowed',
+			title: 'Maximum Payout Allowed',
 			value:
 				currency && maxPayoutAllowed ? (
 					<div>
@@ -87,6 +87,12 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 					'-'
 				),
 		},
+		{
+			title : 'Agreement Number',
+			value : agreementNumber || '-',
+		},
+	];
+	const summaryDataThird = [
 		{
 			title : 'Start Date',
 			value : (
@@ -105,8 +111,6 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 				</div>
 			),
 		},
-	];
-	const summaryDataThird = [
 		{
 			title : 'End Date',
 			value : (
@@ -126,20 +130,12 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 			),
 		},
 		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
-		},
-		{
-			title : 'Duration',
+			title : 'Repeat Frequency',
 			value : DURATION_MAPPING[repeatFrequency] || '-',
 		},
 	];
 
 	const summaryDataFourth = [
-		{
-			title : 'remarks',
-			value : remarkData || '-',
-		},
 		{
 			title : 'Uploaded Documents',
 			value : (
@@ -200,6 +196,10 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 						{renderSummary(summaryDataSecond)}
 						{renderSummary(summaryDataThird)}
 						{renderSummary(summaryDataFourth)}
+						<div>
+							<div className={styles.title}>Remarks:</div>
+							<div className={styles.remarkval}>{remarkData}</div>
+						</div>
 						<>
 							<div className={styles.remarks}>Remarks*</div>
 							<Textarea
