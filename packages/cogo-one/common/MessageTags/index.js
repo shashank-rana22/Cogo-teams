@@ -9,7 +9,7 @@ function MessageTags({ tags = [] }) {
 			{tags?.map((eachTag) => (
 				<Pill
 					eachTag={eachTag?.value}
-					key={eachTag}
+					key={eachTag?.value}
 					size="md"
 					color="#fef199"
 					className={styles.each_tag}
