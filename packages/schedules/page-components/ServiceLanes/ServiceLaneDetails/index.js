@@ -26,6 +26,7 @@ function ServiceLaneDetails() {
 					finalRoute={finalRoute}
 					setFinalRoute={setFinalRoute}
 					loading={loading}
+					data={data}
 				/>
 				<ServiceLanesMap data={data} />
 			</div>

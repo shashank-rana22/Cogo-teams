@@ -21,6 +21,7 @@ function VesselScheduele() {
 			<Card vessel={data} loading={loading} />
 			<div className={styles.flex}>
 				<RouteDetails
+					data={data}
 					route={data?.vessel_schedule_link}
 					finalRoute={finalRoute}
 					setFinalRoute={setFinalRoute}

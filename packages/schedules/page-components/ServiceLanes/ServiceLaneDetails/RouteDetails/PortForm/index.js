@@ -7,13 +7,12 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete }) {
+function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete, setSubmit }) {
 	const [port_name, setPortName] = useState('');
 	const [days, setDays] = useState('');
 	const options = useGetAsyncOptions(
 		merge(asyncFieldsLocations()),
 	);
-	const submit = { port_name, days };
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -34,16 +33,15 @@ function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete }) {
 					<Select
 						placeholder="Port Name"
 						{...options}
-						onChange={(value) => (setPortName(value))}
+						onChange={(value) => { setPortName(value); setSubmit((prev) => ({ ...prev, port_name: value })); }}
 						value={port_name}
 					/>
 					<IcMDelete height="20px" width="20px" margin="40px" onClick={() => { onClickDelete(index); }} />
 				</div>
 				<div className={styles.days}>
-					<Input placeholder="Days" value={days} onChange={(value) => (setDays(value))} />
+					<Input placeholder="Days" value={days} onChange={(value) => { setDays(value); setSubmit((prev) => ({ ...prev, days: value })); }} />
 				</div>
 
-				
 			</div>
 		</div>
 	);

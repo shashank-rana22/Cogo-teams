@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import getPayload from '../../helpers/update_payload';
 import WeekCalendar from '../../ServiceLanesList/WeekCalendar';
 import WeekFrequency from '../../ServiceLanesList/WeekFrequency';
 
@@ -10,13 +11,14 @@ import RoutePort from './RoutePort';
 import RoutePortForm from './RoutePortForm';
 import styles from './styles.module.css';
 
-function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) {
+function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, data }) {
 	const totalTransit = route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
 	const [form, setForm] = useState(null);
 	const [add, setAdd] = useState(null);
 	const [deletePort, setDeletePort] = useState(null);
+	const [submit, setSubmit] = useState(null);
 	const tempRoute = Array.isArray(route) ? [...route] : [];
 
 	let modifiedRoute = [];
@@ -37,6 +39,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) 
 	const onClickAdd = (index) => {
 		setForm(index);
 		modifiedRoute = [...(tempRoute?.slice(0, index) || []),
+			{ ...submit },
 			OBJECT_TO_INSERT, ...(tempRoute?.slice(index, tempRoute.length) || [])];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 		setFinalRoute(order);
@@ -58,8 +61,10 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) 
 		}
 		setForm(null);
 		setPortEdit(false);
+		setSubmit(null);
 	};
-
+	const payload = getPayload({ finalRoute, data });
+	console.log(payload);
 	return (
 		<div className={styles.box}>
 			<div className={styles.header}>
@@ -164,6 +169,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) 
 										port={port}
 										index={index}
 										onClickDelete={onClickDelete}
+										setSubmit={setSubmit}
 									/>
 									{add ? (
 										<RoutePortForm
@@ -178,6 +184,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) 
 											setPortEdit={setPortEdit}
 											onClickDelete={onClickDelete}
 											index={index}
+
 										/>
 									) : null}
 
