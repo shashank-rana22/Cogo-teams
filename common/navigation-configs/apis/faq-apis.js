@@ -460,7 +460,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'list_course_video',
+			api          : 'list_course_videos',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
