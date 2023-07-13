@@ -82,12 +82,6 @@ function useCreateVendorContact({
 				country_code: contactDetails?.mobile_number?.country_code
 								|| contactDetails?.mobile_country_code || undefined,
 			},
-			whatsapp_number: {
-				number: contactDetails?.whatsapp_number?.number
-								|| contactDetails?.whatsapp_number || undefined,
-				country_code: contactDetails?.whatsapp_number?.country_code
-								|| contactDetails.whatsapp_country_code || undefined,
-			},
 			email    : contactDetails?.email || undefined,
 			name     : contactDetails?.name || undefined,
 			poc_role : contactDetails?.poc_role || undefined,
