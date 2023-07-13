@@ -1,6 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+
+import toastApiError from '../../commons/toastApiError.ts';
 
 const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 	const { profile } = useSelector((state) => state || {});
@@ -38,7 +39,7 @@ const useLedgerDownload = ({ date, entities, item, setShowLedgerModal }) => {
 			window.open(downloadUrl);
 			setShowLedgerModal(false);
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Something went wrong');
+			toastApiError(err);
 		}
 	};
 
