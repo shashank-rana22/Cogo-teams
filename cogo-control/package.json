@@ -39,6 +39,7 @@
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/ground-ops": "workspace:0.1.0",
+    "@cogoport/operators": "workspace:1.0.0",
     "@cogoport/icons-react": "^1.0.58",
     "@cogoport/ingestion": "workspace:0.1.0",
     "@cogoport/kam-desk": "workspace:0.1.0",
