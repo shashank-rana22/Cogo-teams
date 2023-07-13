@@ -3,6 +3,11 @@
 	cursor: pointer;
 }
 
+.control {
+	margin-bottom: 20px;
+	font-weight: 600px;
+}
+
 .modal_body {
 	min-height: 240px;
 	padding: 48px 24px;
@@ -10,7 +15,7 @@
 
 .modal_select {
 	width: inherit;
-	margin-top: 20px;
+	margin-top: 8px;
 
 	:global(.ui_select_options_container) {
 		overflow: visible;

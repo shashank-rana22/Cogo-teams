@@ -18,6 +18,11 @@ const enrichment = [
 		service_name : 'lead',
 	},
 	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
+	{
 		api          : 'get_allocation_feedback_response_sheets',
 		access_type  : 'private',
 		feature      : 'enrichment',

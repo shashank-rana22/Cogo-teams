@@ -4,9 +4,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
 import useDownloadEnrichmentCsv from '../../../hooks/useDownloadEnrichmentCsv';
-import GetLeadFeedbacks from '../../GetLeadFeedbacks';
 
-import Filters from './Filters';
+import Filters from './components/Filters';
+import GetLeadFeedbacks from './components/GetLeadFeedbacks';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();

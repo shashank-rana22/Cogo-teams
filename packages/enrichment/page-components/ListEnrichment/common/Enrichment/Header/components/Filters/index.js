@@ -1,4 +1,4 @@
-import SearchInput from '../../../../../../common/SearchInput';
+import SearchInput from '../../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
