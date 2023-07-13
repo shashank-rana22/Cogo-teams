@@ -1,7 +1,8 @@
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
@@ -12,6 +13,12 @@ import styles from './styles.module.css';
 const INCREAMNET_BY_ONE = 1;
 const LABEL_SPILIT_LOWER_INDEX = -1;
 const STARTING_POINT = 1;
+
+const SUPPLIER_STAKEHOLDERS = [
+	'booking_desk',
+	'booking_desk_manager',
+	'superadmin',
+];
 
 function Content({
 	uploadedItem = {},
@@ -29,6 +36,7 @@ function Content({
 	setShowApproved = () => {},
 	docType = '',
 	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 
@@ -88,15 +96,21 @@ function Content({
 					{isChecked ? (
 						<div className={styles.gap}>
 							<div className={styles.upload_info}>
-								Uploaded By:&nbsp;
+								Uploaded By:
+								{' '}
 								{ uploadedItem?.uploaded_by_user?.name
 									|| uploadedItem?.uploaded_by_org?.business_name}
 
 							</div>
 							<div className={styles.upload_info}>
-								Uploaded On:&nbsp;
-								{format(uploadedItem?.created_at, 'dd MMM yyyy')}
-
+								Uploaded On:
+								{' '}
+								{formatDate({
+									date       : uploadedItem?.uploaded_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+								})}
 							</div>
 							<div className={cl`${styles.document_status}
 							 ${['document_amendment_requested', 'document_rejected'].includes(uploadedItem?.state)
@@ -109,8 +123,14 @@ function Content({
 						<div className={styles.gap}>
 							{item?.pendingItem ? (
 								<div className={styles.upload_info}>
-									Due On:&nbsp;
-									{format(item?.pendingItem?.deadline, 'dd MMM yyyy')}
+									Due On:
+									{' '}
+									{formatDate({
+										date       : item?.pendingItem?.deadline,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+										formatType : 'dateTime',
+									})}
 								</div>
 							) : null}
 
@@ -125,12 +145,12 @@ function Content({
 					)}
 				</div>
 
-				{SI_REVIEW_CONDITION ? (
+				{SI_REVIEW_CONDITION && SUPPLIER_STAKEHOLDERS.includes(activeStakeholder) ? (
 					<Button
 						themeType="link"
 						onClick={() => setSiReviewState(true)}
 					>
-						reject
+						Reject
 					</Button>
 				) : null}
 

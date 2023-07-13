@@ -11,6 +11,7 @@ function CheckList({
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
@@ -25,6 +26,7 @@ function CheckList({
 				setShowDoc={setShowDoc}
 				setShowApproved={setShowApproved}
 				shipmentDocumentRefetch={shipmentDocumentRefetch}
+				activeStakeholder={activeStakeholder}
 			/>
 		</div>
 	);
