@@ -26,6 +26,14 @@ const DECIMAL_PLACE = 2;
 interface NestedObj {
 	[key: string]: string | number ;
 }
+
+interface FieldType {
+	basic?: Array<object>;
+	handling?: Array<object>;
+	hawb_controls?: Array<object>;
+	package?: Array<object>;
+}
+
 interface Props {
 	back: boolean;
 	setBack?:Function;
@@ -38,9 +46,9 @@ interface Props {
 	setActiveKey?: (key: string) => void;
 	activeHawb?: { [key: string]: boolean | string };
 	packingData?:{ [key: string]: Array<string> | Array<URL> };
-	fields?:NestedObj;
-	control?:Function;
-	errors?:NestedObj;
+	fields?:FieldType;
+	control?:object;
+	errors?:object;
 	setValue?:Function;
 	item?: NestedObj;
 	setGenerate?:Function;
@@ -60,7 +68,7 @@ function FormContainer({
 	setEdit = () => {},
 	packingData = {},
 	fields = {},
-	control = () => {},
+	control = {},
 	errors = {},
 	setValue = () => {},
 	item = {},
