@@ -35,7 +35,7 @@ function CargoPills({ data = {} }) {
 				<Pill key={pill}>{pill}</Pill>
 			))}
 
-			{isEmpty(restPills) ? (
+			{!isEmpty(restPills) ? (
 				<div className={styles.popover_container}>
 					<Popover
 						render={<PopoverContent list={restPills} />}
