@@ -33,33 +33,6 @@ const getControls = ({ country_id }) => {
 
 	const controls = [
 		{
-			name        : 'account_holder_name',
-			label       : 'Account Holder Name',
-			type        : 'text',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Enter Account Holder Name',
-			rules       : { required: 'Account Holder Name is required' },
-		},
-		{
-			name        : 'account_number',
-			label       : 'Account Number',
-			type        : 'number',
-			style       : { flexBasis: '30%' },
-			placeholder : 'Enter Account Number',
-			rules       : { required: 'Account Number is Required' },
-		},
-		{
-			name    : 'account_type',
-			label   : 'Account Type',
-			type    : 'select',
-			style   : { flexBasis: '30%' },
-			options : [
-				{ label: 'Savings', value: 'savings' },
-				{ label: 'Current', value: 'current' }],
-			placeholder : 'Select Account Type',
-			rules       : { required: 'Account Type is required' },
-		},
-		{
 			name        : `${bankingCode}_code`,
 			label       : `${startCase(bankingCode)} Code`,
 			type        : 'text',
@@ -88,6 +61,33 @@ const getControls = ({ country_id }) => {
 			placeholder : 'Type here to search',
 			rules       : { required: 'Branch Name is required' },
 
+		},
+		{
+			name        : 'account_holder_name',
+			label       : 'Account Holder Name',
+			type        : 'text',
+			style       : { flexBasis: '30%' },
+			placeholder : 'Enter Account Holder Name',
+			rules       : { required: 'Account Holder Name is required' },
+		},
+		{
+			name        : 'account_number',
+			label       : 'Account Number',
+			type        : 'text',
+			style       : { flexBasis: '30%' },
+			placeholder : 'Enter Account Number',
+			rules       : { required: 'Account Number is Required' },
+		},
+		{
+			name    : 'account_type',
+			label   : 'Account Type',
+			type    : 'select',
+			style   : { flexBasis: '30%' },
+			options : [
+				{ label: 'Savings', value: 'savings' },
+				{ label: 'Current', value: 'current' }],
+			placeholder : 'Select Account Type',
+			rules       : { required: 'Account Type is required' },
 		},
 		{
 			name            : 'bank_document_url',
