@@ -6,6 +6,8 @@ import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTe
 
 import styles from './styles.module.css';
 
+const COUNTRY_CODE = 1;
+
 function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
@@ -44,9 +46,15 @@ function NewWhatsappMessage({
 			return;
 		}
 
-		const { template_name } = args;
-		sendUserWhatsappTemplate({ country_code: country_code.slice(1), whatsapp_number: number, template_name });
+		const { template_name, variables } = args;
+		sendUserWhatsappTemplate({
+			country_code    : country_code.slice(COUNTRY_CODE),
+			whatsapp_number : number,
+			template_name,
+			variables,
+		});
 	};
+
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
 		communicationLoading      : loading,
