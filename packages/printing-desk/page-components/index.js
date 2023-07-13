@@ -34,7 +34,6 @@ function PrintingDesk() {
 	const [activeTab, setActiveTab] = useState('approved_awb');
 	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
-	const [generate, setGenerate] = useState(false);
 	const [item, setItem] = useState({});
 	const [viewDoc, setViewDoc] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -106,7 +105,6 @@ function PrintingDesk() {
 					key={activeTab}
 					data={data}
 					loading={loading}
-					setGenerate={setGenerate}
 					setItem={setItem}
 					setViewDoc={setViewDoc}
 					edit={edit}
@@ -118,7 +116,7 @@ function PrintingDesk() {
 				/>
 			)}
 
-			{(generate || viewDoc) && (
+			{(viewDoc) && (
 				<AWBDocument
 					viewDoc={viewDoc}
 					setViewDoc={setViewDoc}
@@ -126,7 +124,6 @@ function PrintingDesk() {
 					edit={edit}
 					setEdit={setEdit}
 					setItem={setItem}
-					setGenerate={setGenerate}
 				/>
 			)}
 

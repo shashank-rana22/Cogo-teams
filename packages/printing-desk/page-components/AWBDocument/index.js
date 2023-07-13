@@ -20,7 +20,6 @@ function AWBDocument({
 	item = {},
 	viewDoc = false,
 	formData = {},
-	setGenerate = () => {},
 	setViewDoc = () => {},
 	edit = false,
 	setEdit = () => {},
@@ -116,7 +115,6 @@ function AWBDocument({
 								setEdit={setEdit}
 								category={category}
 								taskItem={taskItem}
-								setGenerate={setGenerate}
 								setViewDoc={setViewDoc}
 								setItem={setItem}
 								setEditCopies={setEditCopies}

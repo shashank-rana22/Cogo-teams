@@ -31,7 +31,6 @@ function TopButtonContainer({
 	setEdit = () => {},
 	category = 'mawb',
 	taskItem = {},
-	setGenerate = () => {},
 	setViewDoc = () => {},
 	setItem = () => {},
 	setEditCopies = () => {},
@@ -111,7 +110,6 @@ function TopButtonContainer({
 									copiesOnChange={copiesOnChange}
 									setSaveDocument={setSaveDocument}
 									handleView={handleView}
-									setGenerate={setGenerate}
 									setViewDoc={setViewDoc}
 									setEdit={setEdit}
 									setItem={setItem}
@@ -142,7 +140,6 @@ function TopButtonContainer({
 									copiesOnChange={copiesOnChange}
 									setSaveDocument={setSaveDocument}
 									handleView={handleView}
-									setGenerate={setGenerate}
 									setViewDoc={setViewDoc}
 									setEdit={setEdit}
 									download24={false}

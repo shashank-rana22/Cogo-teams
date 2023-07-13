@@ -21,3 +21,22 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.accordian_style {
+	position: relative;
+	bottom: 20px;
+	min-height: 20px;
+	text-align: center;
+	background: #fffaeb;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0 5px 10px #0000000d;
+
+	:global {
+		.ui_button_container {
+			min-width: 100px;
+			max-height: 16px;
+			margin: auto;
+			color: var(--color-accent-orange-2);
+		}
+	}
+}

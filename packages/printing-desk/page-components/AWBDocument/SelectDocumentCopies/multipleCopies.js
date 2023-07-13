@@ -3,14 +3,13 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const multipleCopies = ({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem }) => {
+const multipleCopies = ({ data, setEditCopies, setViewDoc, setEdit, setItem }) => {
 	const handleClick = (key) => {
 		(data || []).forEach((item) => {
 			if (item?.copyType === key) {
 				setItem(item);
 				setEdit(true);
 				setEditCopies(key);
-				setGenerate(true);
 				setViewDoc(false);
 			}
 		});

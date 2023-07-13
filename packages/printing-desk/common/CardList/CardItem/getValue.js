@@ -16,7 +16,7 @@ const getValue = (itemData, itemField, functions, emptyState) => {
 			val = '-';
 		}
 	}
-	return val || '-';
+	return val || '';
 };
 
 export default getValue;

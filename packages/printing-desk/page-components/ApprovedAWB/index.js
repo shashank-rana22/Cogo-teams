@@ -1,96 +1,49 @@
 import { Button, Modal } from '@cogoport/components';
-import { IcMEyeopen, IcMEdit, IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
-import { ApprovedAWBFields } from '../../configurations/approved_awb';
+import { approvedAWBFields } from '../../configurations/approved-awb';
+import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
-// import HAWBList from '../HawbList';
-
-import styles from './styles.module.css';
+import HAWBList from '../HawbList';
 
 function ApprovedAWB({
 	data = {},
 	loading = false,
 	page = 1,
 	setPage = () => {},
-	setGenerate = () => {},
 	setItem = () => {},
 	setViewDoc = () => {},
 	setEdit = () => {},
 }) {
 	const [triggerManifest, setTriggerManifest] = useState(null);
-	const { fields } = ApprovedAWBFields;
+	const { fields } = approvedAWBFields;
 
-	const handleDownloadMAWB = (singleItem) => {
-		setViewDoc(true);
-		setItem(singleItem);
-	};
-
-	const handleEditMAWB = (singleItem, action) => {
-		setEdit(action || true);
-		setGenerate(true);
-		setItem(singleItem);
-	};
-
-	const handleClickOnDownload = (documentUrl) => {
-		if (typeof window !== 'undefined') {
-			window.open(documentUrl, '_blank');
-		}
-	};
+	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument();
 
 	const functions = {
-		handleSerialId: (singleItem) => (
-			<div>
-				#
-				{singleItem.serialId}
-			</div>
-		),
-		handleBlCategory: (singleItem) => (
-			<div style={{ textTransform: 'uppercase' }}>
-				{singleItem.blCategory}
-			</div>
-		),
-		handleDownload: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { handleClickOnDownload(singleItem.documentUrl); }
-					: () => { handleDownloadMAWB(singleItem); }}
-			>
-				<IcMEyeopen fill="var(--color-accent-orange-2)" />
-
-			</Button>
-		),
-		handleDownloadManifest: (singleItem) => (
-			singleItem.blCategory === 'hawb' && (
+		handleHandover: (singleItem) => {
+			const { documentId, shipmentId, serviceId } = singleItem || {};
+			const payload = {
+				id            : documentId,
+				shipment_id   : shipmentId,
+				document_type : 'draft_airway_bill',
+				serviceId,
+			};
+			return (
 				<Button
-					themeType="linkUi"
-					style={{ fontSize: 12 }}
-					onClick={() => { setTriggerManifest(singleItem.shipmentId); }}
-					className={styles.manifest_download_button}
+					themeType="secondary"
+					onClick={() => { updateShipment({ payload }); }}
+					disabled={updateLoading}
 				>
-					<IcMDownload />
-					{' '}
-					Manifest
+					Handover
 				</Button>
-			)
-		),
-
-		handleEdit: (singleItem) => (
-			singleItem?.documentData?.status !== 'uploaded' && (
-				<Button
-					themeType="linkUi"
-					style={{ fontSize: 12 }}
-					onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
-				>
-					<IcMEdit fill="var(--color-accent-orange-2)" />
-				</Button>
-			)
-		),
-
+			);
+		},
 	};
+
+	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit }), ...functions };
 
 	return (
 		<>
@@ -100,11 +53,11 @@ function ApprovedAWB({
 				page={page}
 				setPage={setPage}
 				loading={loading}
-				functions={functions}
-				// activeTab={activeTab}
-				// Child={HAWBList}
-				// setViewDoc={setViewDoc}
-				// setItem={setItem}
+				functions={allFunctions}
+				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
+				setEdit={setEdit}
 			/>
 			{triggerManifest && (
 				<Modal

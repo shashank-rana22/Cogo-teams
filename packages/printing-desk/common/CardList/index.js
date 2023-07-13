@@ -1,6 +1,7 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 
 import Header from './CardHeader';
 import CardItem from './CardItem';
@@ -14,19 +15,63 @@ function CardList({
 	page = 1,
 	setPage = () => {},
 	functions = {},
+	Child = <div />,
+	setViewDoc = () => {},
+	setItem = () => {},
+	setEdit = () => {},
 }) {
+	const [open, setOpen] = useState('');
+
 	const { shipmentPendingTasks = [], totalRecords } = data;
 
 	const handleRender = () => {
 		if (loading || shipmentPendingTasks.length) {
 			return (shipmentPendingTasks || []).map((singleitem) => (
-				<CardItem
-					key={singleitem.id}
-					singleitem={singleitem}
-					fields={fields}
-					functions={functions}
-					loading={loading}
-				/>
+				<Fragment key={singleitem.id}>
+					<CardItem
+						singleitem={singleitem}
+						fields={fields}
+						functions={functions}
+						loading={loading}
+						Child={Child}
+						open={open}
+						setViewDoc={setViewDoc}
+						setItem={setItem}
+						setEdit={setEdit}
+					/>
+					{singleitem.blCategory === 'hawb' && (
+						<div
+							className={styles.accordian_style}
+						>
+							{open === singleitem.id ? (
+								<Button
+									themeType="linkUi"
+									onClick={() => {
+										setOpen('');
+									}}
+								>
+									Show Less
+									<IcMArrowDown
+										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									/>
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="linkUi"
+									onClick={() => {
+										setOpen(singleitem?.id);
+									}}
+								>
+									<span>Show More</span>
+									<IcMArrowDown
+										style={{ cursor: 'pointer' }}
+									/>
+								</Button>
+							)}
+						</div>
+					)}
+				</Fragment>
 			));
 		}
 		return <EmptyState />;

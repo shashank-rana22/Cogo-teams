@@ -9,12 +9,12 @@ import styles from './styles.module.css';
 const TOTAL_AWB_COPIES = 12;
 
 function SelectDocumentCopies({
-	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
+	copiesValue, copiesOnChange, setSaveDocument, handleView,
 	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
 }) {
 	const { data } = useGetMultipleCopiesList(taskItem);
 
-	const options = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
+	const options = multipleCopies({ data, setEditCopies, setViewDoc, setEdit, setItem });
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		copiesOnChange(event.currentTarget.checked ? [

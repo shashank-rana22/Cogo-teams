@@ -1,4 +1,4 @@
-export const ApprovedAWBFields = {
+export const approvedAWBFields = {
 	fields: [
 		{
 			key   : 'serialId',
@@ -20,20 +20,26 @@ export const ApprovedAWBFields = {
 		{
 			key   : 'downloadManifest',
 			label : '',
-			span  : 2,
+			span  : 1.5,
 			func  : 'handleDownloadManifest',
 		},
 		{
 			key   : 'download',
 			label : '',
-			span  : 1,
+			span  : 0.5,
 			func  : 'handleDownload',
 		},
 		{
 			key   : 'edit',
 			label : '',
-			span  : 1,
+			span  : 0.5,
 			func  : 'handleEdit',
+		},
+		{
+			key   : 'handover',
+			label : '',
+			span  : 2,
+			func  : 'handleHandover',
 		},
 	],
 };
