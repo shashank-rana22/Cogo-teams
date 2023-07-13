@@ -48,7 +48,7 @@ const getControls = ({ watchTriveId, check }) => {
 			placeholder : 'Select',
 			initialCall : true,
 
-			disabled    : !watchTriveId || check,
+			disabled    : check,
 			isClearable : true,
 			params      : {
 				filters: {

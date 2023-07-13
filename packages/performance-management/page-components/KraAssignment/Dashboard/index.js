@@ -45,6 +45,7 @@ function Dashboard() {
 		setSelectAccordian,
 		selectAccordianObject = {},
 		setSelectAccordianObject,
+		getkrasAssigned,
 	} = useGetkrasAssigned({ filters });
 
 	const { list: unassignedList = [] } = unassignedData;
@@ -217,6 +218,7 @@ function Dashboard() {
 							appliedFilters={filters}
 							getUnassignedEmployee={getUnassignedEmployee}
 							getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
+							getkrasAssigned={getkrasAssigned}
 							selectAccordian={selectAccordian}
 							filtersFields={filtersFields}
 							dataFrom={dataFrom}
