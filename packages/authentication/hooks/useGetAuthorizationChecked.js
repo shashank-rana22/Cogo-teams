@@ -3,7 +3,7 @@ import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { setCookie } from '@cogoport/utils';
+import { isEmpty, setCookie } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import redirections from '../utils/redirections';
@@ -19,17 +19,19 @@ const UNAUTHENTICATED_PATHS = [
 ];
 
 const useGetAuthorizationChecked = ({ firestoreToken }) => {
-	const [sessionInitialized, setSessionInitialized] = useState(false);
-	const dispatch = useDispatch();
-
-	const { pathname, query, locale, locales, route, push } = useRouter();
-
-	const { source = '' } = query || {};
+	const {
+		pathname, query, locale, locales, route, push, asPath,
+	} = useRouter();
 
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
+	const dispatch = useDispatch();
+	const [sessionInitialized, setSessionInitialized] = useState(false);
+
+	const { source = '' } = query || {};
+
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
-	const isProfilePresent = Object.keys(profile).length !== 0;
+	const isProfilePresent = !isEmpty(Object.keys(profile));
 
 	dispatch(setGeneralState({ pathname, query, locale, locales, firestoreToken }));
 
@@ -41,9 +43,10 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 
 					const { partner = {} } = res.data || {};
 					setCookie('parent_entity_id', partner.id);
+
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
-					console.log(err);
+					console.error(err);
 				}
 			}
 		})();
@@ -67,7 +70,18 @@ const useGetAuthorizationChecked = ({ firestoreToken }) => {
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
-					await push('/login');
+					let redirectPath = '';
+					if (pathname.includes('/[partner_id]')) {
+						redirectPath = pathname.replace('/[partner_id]', '');
+
+						const [, redirectPathQuery] = asPath.split('?');
+
+						const additionalQuery = redirectPathQuery ? `?${redirectPathQuery}` : '';
+
+						redirectPath = `?redirect_path=${encodeURIComponent(`${redirectPath}${additionalQuery}`)}`;
+					}
+
+					await push(`/login${redirectPath}`);
 				}
 				setSessionInitialized(true);
 			}

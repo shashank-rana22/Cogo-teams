@@ -81,6 +81,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'update_employee_signed_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{
