@@ -7,6 +7,24 @@ import MessageTags from '../MessageTags';
 
 import styles from './styles.module.css';
 
+const getBgColorAndRepliedTo = ({ userName, conversationType, sessionType, sendBy }) => {
+	let backgroundColor = '#fff';
+	let repliedTo = userName;
+
+	if (conversationType === 'received') {
+		backgroundColor = '#F3FAFA';
+		repliedTo = 'bot';
+		if (sessionType === 'admin') {
+			backgroundColor = '#fffce6';
+			repliedTo = sendBy;
+		}
+	}
+
+	return {
+		backgroundColor, repliedTo,
+	};
+};
+
 function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 	const {
 		conversation_type = '',
@@ -21,16 +39,12 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 		|| message?.components?.[GLOBAL_CONSTANTS.zeroth_index]?.text) : message;
 	const { session_type = '', tags:messageTags = [] } = typeof message === 'object' ? message : {};
 
-	let backgroundColor = '#fff';
-	let repliedTo = user_name;
-	if (conversation_type === 'received') {
-		backgroundColor = '#F3FAFA';
-		repliedTo = 'bot';
-		if (session_type === 'admin') {
-			backgroundColor = '#fffce6';
-			repliedTo = send_by;
-		}
-	}
+	const { backgroundColor, repliedTo } = getBgColorAndRepliedTo({
+		userName         : user_name,
+		conversationType : conversation_type,
+		sessionType      : session_type,
+		sendBy           : send_by,
+	});
 
 	const hasTags = !isEmpty(tags);
 
