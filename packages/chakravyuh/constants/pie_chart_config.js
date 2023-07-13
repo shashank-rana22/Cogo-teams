@@ -16,9 +16,9 @@ export const CUMSTOM_DATA = [
 		cancellation : 70,
 	},
 	{
-		key          : 'supply_pred_rates',
-		id           : 'Supply Pred Rates',
-		label        : 'Supply Pred Rates',
+		key          : 'supply_transformed_rates',
+		id           : 'Supply Transformed Rates',
+		label        : 'Supply Transformed Rates',
 		value        : 1312,
 		color        : '#9BA0CB',
 		cancellation : 65,

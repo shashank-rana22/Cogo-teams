@@ -69,7 +69,7 @@ function Accuracy() {
 					gridYValues={[CONSTANT_ZERO]}
 					gridXValues={[CONSTANT_ZERO]}
 					theme={CUSTOM_THEME}
-					colors={['#FEF199', '#CFEAED', '#FBD1A6']}
+					colors={['#9BA0CB', '#e8a838', '#61cdbb']}
 					pointSize={6}
 					pointColor={{ from: 'color', modifiers: [['brighter', CONSTANT_POINT_TWO]] }}
 					pointBorderWidth={2}
@@ -87,7 +87,7 @@ function Accuracy() {
 							itemDirection     : 'left-to-right',
 							itemWidth         : 140,
 							itemHeight        : 20,
-							itemOpacity       : 0.95,
+							itemOpacity       : 1,
 							symbolSize        : 12,
 							symbolShape       : 'circle',
 							symbolBorderColor : 'rgba(0, 0, 0, .5)',
