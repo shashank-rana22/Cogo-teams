@@ -28,6 +28,7 @@ import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
+import locations from './config/location';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
@@ -60,6 +61,7 @@ import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...locations,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
