@@ -9,10 +9,7 @@ const LENGTH_OF_ARRAY = 5;
 const INCREMENTAL_ELEMENT = 1;
 
 const getPayload = (values, kra_id) => {
-	const {
-		is_rating_schema_in_percentage, is_target_achieved_manually, is_target_entered_manually,
-		is_rating_individual,
-	} = values;
+	const { is_rating_schema_in_percentage, is_target_entered_manually, is_rating_individual } = values;
 
 	const ratings = [...Array(LENGTH_OF_ARRAY).keys()].map((key) => ({
 		rating_scale : key + INCREMENTAL_ELEMENT,
@@ -22,7 +19,6 @@ const getPayload = (values, kra_id) => {
 	return {
 		...values,
 		is_rating_schema_in_percentage : is_rating_schema_in_percentage === 'yes',
-		is_target_achieved_manually    : is_target_achieved_manually === 'yes',
 		is_target_entered_manually     : is_target_entered_manually === 'yes',
 		is_rating_individual           : is_rating_individual === 'yes',
 		ratings,

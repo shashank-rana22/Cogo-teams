@@ -11,8 +11,8 @@ const removeTypeField = (element) => {
 };
 
 function RenderFields({ control, errors, watch, setValue }) {
-	const controls = getControls({});
 	const watchOperationType = watch('operation_type');
+	const controls = getControls({ watchOperationType });
 
 	useEffect(() => {
 		if (watchOperationType === 'manual') {

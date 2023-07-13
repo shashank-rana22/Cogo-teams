@@ -8,25 +8,17 @@ const OPTIONS = [
 	{
 		value : 'no',
 		label : 'No',
+
 	},
 ];
 
 const OPERATION_TYPE_OPTIONS = [
-	{
-		value : 'manual',
-		label : 'MANUAL',
-	},
-	{
-		value : 'jira',
-		label : 'JIRA',
-	},
-	{
-		value : 'sql',
-		label : 'SQL',
-	},
+	{ value: 'manual', label: 'MANUAL' },
+	{ value: 'jira', label: 'JIRA' },
+	{ value: 'sql', label: 'SQL' },
 ];
 
-const getControls = ({ setShowSelectedValue = () => {} }) => ([
+const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) => ([
 	{
 		group       : 'mid_controls',
 		subControls : [
@@ -128,13 +120,6 @@ const getControls = ({ setShowSelectedValue = () => {} }) => ([
 			},
 
 			{
-				name    : 'is_target_achieved_manually',
-				type    : 'radioGroup',
-				label   : 'Is achieved entered manually',
-				options : OPTIONS,
-			},
-
-			{
 				label : 'Anything else?',
 				name  : 'description',
 				type  : 'textarea',
@@ -152,7 +137,11 @@ const getControls = ({ setShowSelectedValue = () => {} }) => ([
 				name    : 'is_rating_schema_in_percentage',
 				type    : 'radioGroup',
 				label   : 'Is rating schema in %',
-				options : OPTIONS,
+				options : [{ value: 'yes', label: 'Yes' }, {
+					value    : 'no',
+					label    : 'No',
+					disabled : watchOperationType === 'manual',
+				}],
 			},
 
 			{
