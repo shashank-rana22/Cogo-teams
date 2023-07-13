@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useAllocationRequest } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -12,10 +12,9 @@ const useCreateBulkEnrichmentRequests = ({ refetch = () => {} }) => {
 
 	const { user = {}, partner = {} } = profile;
 
-	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'bulk_create_lead_organization_feedback_request',
-		method  : 'POST',
-		authkey : 'bulk_create_lead_organization_feedback_request',
+	const [{ loading }, trigger] = useRequest({
+		url    : 'bulk_create_lead_organization_feedback_request',
+		method : 'POST',
 
 	}, { manual: true });
 
