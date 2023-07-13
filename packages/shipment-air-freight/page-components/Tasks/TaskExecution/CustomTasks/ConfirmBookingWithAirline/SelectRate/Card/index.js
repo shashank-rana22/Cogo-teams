@@ -27,6 +27,7 @@ function Card({
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showEmailPreview, setShowEmailPreview] = useState(false);
+	const [checkboxValue, setCheckboxValue] = useState([]);
 
 	const data = Array.isArray(item?.data) ? item?.data[GLOBAL_CONSTANTS.zeroth_index] : item?.data;
 
@@ -94,6 +95,9 @@ function Card({
 				loading={loading}
 				onCloseModal={setShowEmailPreview}
 				onConfirm={handleProceedWithEmail}
+				data={data}
+				checkboxValue={checkboxValue}
+				setCheckboxValue={setCheckboxValue}
 			/>
 
 			<Modal

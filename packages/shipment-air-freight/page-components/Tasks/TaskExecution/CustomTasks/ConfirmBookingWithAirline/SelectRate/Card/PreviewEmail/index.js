@@ -1,32 +1,51 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, CheckboxGroup } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
 function PreviewEmail({
-	emailData,
-	show,
-	loading,
-	onCloseModal,
-	onConfirm,
+	emailData = {},
+	show = false,
+	loading = false,
+	onCloseModal = () => {},
+	onConfirm = () => {},
+	data = {},
+	setCheckboxValue = () => {},
+	checkboxValue = [],
 }) {
+	console.log(data, 'data');
+	const options = [
+		{ name: 'R1', value: 'R1', label: 'checkbox1' }, { name: 'R2', value: 'R2', label: 'checkbox2' },
+		{ name: 'R3', value: 'R3', label: 'checkbox3' }, { name: 'R4', value: 'R4', label: 'checkbox4' },
+	];
+
 	return (
+
 		<Modal
-			className="primary lg"
+			size="lg"
 			show={show}
 			onClose={() => onCloseModal(false)}
+			style={{ height: '700px' }}
 		>
-			<div className={styles.header}>{emailData?.subject}</div>
-			<div>
-				<div dangerouslySetInnerHTML={{ __html: emailData?.template }} />
+			<Modal.Header title={emailData?.subject} />
+			<div className={styles.modal_body}>
+				<Modal.Body style={{ maxHeight: '570px' }}>
+					<CheckboxGroup value={checkboxValue} onChange={setCheckboxValue} options={options} />
+
+					<div>
+						<div dangerouslySetInnerHTML={{ __html: emailData?.template }} />
+					</div>
+				</Modal.Body>
 			</div>
-			<div className={styles.footer}>
-				<Button
-					className="secondary md"
-					disabled={loading}
-					onClick={() => onCloseModal(false)}
-				>
-					Cancel
-				</Button>
+			<Modal.Footer>
+				<div className={styles.button_container}>
+					<Button
+						className="secondary md"
+						disabled={loading}
+						onClick={() => onCloseModal(false)}
+					>
+						Cancel
+					</Button>
+				</div>
 				<Button
 					className="primary md"
 					disabled={loading}
@@ -34,8 +53,9 @@ function PreviewEmail({
 				>
 					Send Mail
 				</Button>
-			</div>
+			</Modal.Footer>
 		</Modal>
+
 	);
 }
 
