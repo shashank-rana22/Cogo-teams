@@ -123,7 +123,7 @@ function FooterChat({
 					{createLoading ? (<Loader themeType="primary" />)
 						: (
 							<IcMSend
-								className={cl`${styles.send_icon} ${isMessageEmpty && styles.disabled_icon}`}
+								className={cl`${styles.send_icon} ${isMessageEmpty ? styles.disabled_icon : ''}`}
 								onClick={handleSendComment}
 								cursor="pointer"
 
