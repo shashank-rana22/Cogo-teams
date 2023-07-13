@@ -2,11 +2,27 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-// import { startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
+
+import getShipmentActivityDetails from '../../../../helpers/getShipmentActivityDetails';
 
 import styles from './styles.module.css';
 
-function CheckoutIncomplete() {
+const GET_LAST_ITEM = -1;
+
+function Shipments({ serviceData = {}, eventType = '' }) {
+	console.log('serviceData:', serviceData);
+
+	const configarableData = getShipmentActivityDetails({ serviceData, eventType });
+	console.log('configarableData:', configarableData);
+	const {
+		shippingLineUrl = '',
+		shippingLineName = '',
+		destinationPort = {},
+		originPort = {},
+	} = configarableData || {};
+
+	console.log('destinationPort:', destinationPort);
 	const CHECKOUT_DETAILS = {
 		a : '2 Ctr',
 		b : '2 Ctr',
@@ -14,7 +30,7 @@ function CheckoutIncomplete() {
 		d : '2 Ctr',
 		e : '2 Ctr',
 	};
-
+	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
 	return (
 		<>
 			<div className={styles.title}>Didn’t complete checkout</div>
@@ -24,18 +40,18 @@ function CheckoutIncomplete() {
 			<div className={styles.banner}>
 				<div className={styles.company_details}>
 					<Image
-						src={GLOBAL_CONSTANTS.image_url.login_failed}
+						src={shippingLineUrl}
 						alt="status-icon"
-						width={25}
-						height={25}
+						width={30}
+						height={30}
 					/>
 
 					<Tooltip
-						content="hello"
+						content={shippingLineName}
 						placement="bottom"
 					>
 						<div className={styles.company_name}>
-							Cosco Shipping Cosco Shipping Cosco Shipping Cosco Shipping
+							{shippingLineName}
 						</div>
 					</Tooltip>
 
@@ -45,62 +61,41 @@ function CheckoutIncomplete() {
 					<div className={styles.port}>
 						<div className={styles.port_details}>
 
-							{/* <Tooltip content={startCase(origin_port?.name)} placement="bottom">
+							<Tooltip content={startCase(originPort?.name)} placement="bottom">
 								<div className={styles.port_name}>
-									{startCase(origin_port?.name)}
-								</div>
-							</Tooltip> */}
-							<Tooltip content="jk" placement="bottom">
-								<div className={styles.port_name}>
-									nkdmmckcmkmkemc ecnekmkemkemke keekmkemde jnekm
+									{startCase(originPort?.name)}
 								</div>
 							</Tooltip>
 
 							<div className={styles.port_codes}>
-								{/* {!isEmpty(origin_port?.port_code) && (
-										<> */}
 								(
-								{/* {origin_port?.port_code} */}
-								INDIA
+								{originPort?.port_code}
 								)
-								{/* </>
-									 )} */}
-
 							</div>
 						</div>
+
 						<div className={styles.country}>
-							{/* {startCase(countryName(origin_port?.display_name))} */}
-							INDIA
+							{startCase(originPort?.country || countryName(originPort?.name))}
 						</div>
+
 					</div>
 					<IcMPortArrow width={22} height={22} />
 					<div className={styles.port}>
 						<div className={styles.port_details}>
-							{/* <Tooltip content={startCase(destination_port?.name)} placement="bottom">
+							<Tooltip content={startCase(destinationPort?.name)} placement="bottom">
 								<div className={styles.port_name}>
-									{startCase(destination_port?.name)}
-								</div>
-							</Tooltip> */}
-							<Tooltip content="hello" placement="bottom">
-								<div className={styles.port_name}>
-									{/* {startCase(destination_port?.name)} */}
-									bdehbdebdbdjeebhecbhebeb
+									{startCase(destinationPort?.name)}
 								</div>
 							</Tooltip>
+
 							<div className={styles.port_codes}>
-								{/* {!isEmpty(destination_port?.port_code) && (
-									<> */}
 								(
-								{/* {destination_port?.port_code} */}
-								HUYJG
+								{destinationPort?.port_code}
 								)
-								{/* </>
-								)} */}
 							</div>
 						</div>
 						<div className={styles.country}>
-							{/* {startCase(countryName(origin_port?.display_name))} */}
-							INDINATIA
+							{startCase(destinationPort?.country || countryName(destinationPort?.name))}
 						</div>
 					</div>
 				</div>
@@ -129,4 +124,4 @@ function CheckoutIncomplete() {
 	);
 }
 
-export default CheckoutIncomplete;
+export default Shipments;

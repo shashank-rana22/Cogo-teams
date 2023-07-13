@@ -9,7 +9,12 @@ import Order from './Order';
 import styles from './styles.module.css';
 import UserActivityMessages from './UserActivityMessages';
 
-function MessageBody({ response = {}, message_type = 'text' }) {
+function MessageBody({
+	response = {},
+	message_type = 'text',
+	serviceData = {},
+	service = '',
+}) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
 	const hasProfanity = profanity_check === 'nudity';
 	const fileExtension = media_url?.split('.').pop();
@@ -120,7 +125,12 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	}
 
 	if (message_type === 'event') {
-		return <UserActivityMessages />;
+		return (
+			<UserActivityMessages
+				serviceData={serviceData}
+				service={service}
+			/>
+		);
 	}
 
 	if (message_type === 'order') {

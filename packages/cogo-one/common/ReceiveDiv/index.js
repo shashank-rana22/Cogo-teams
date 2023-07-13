@@ -40,6 +40,8 @@ function ReceiveDiv({
 		message_type = 'text',
 		created_at = '',
 		response = {},
+		service_data = {},
+		service = '',
 	} = eachMessage;
 	const { reply_metadata = {}, message = '' } = response || {};
 
@@ -85,11 +87,13 @@ function ReceiveDiv({
 					<MessageBody
 						response={response}
 						message_type={message_type}
+						serviceData={service_data}
+						service={service}
 					/>
 				</div>
 			</div>
 
-			{message_type !== 'event' && (
+			{message_type === 'event' && (
 				<SuggestedActions formattedData={formattedData} />
 			)}
 
