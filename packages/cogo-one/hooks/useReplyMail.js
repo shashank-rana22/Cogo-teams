@@ -33,7 +33,7 @@ function useReplyMail(mailProps) {
 			setEmailState(DEFAULT_EMAIL_STATE);
 			setButtonType('');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
