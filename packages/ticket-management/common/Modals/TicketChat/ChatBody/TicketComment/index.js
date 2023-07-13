@@ -30,8 +30,8 @@ function TicketComment({
 	if (type === 'respond') {
 		return (
 			<div
-				className={cl`${styles.default_message} ${!isCurrentUser && styles.agent_message_flex} 
-				${isInternal && styles.internal_message}`}
+				className={cl`${styles.default_message} ${!isCurrentUser ? styles.agent_message_flex : ''} 
+				${isInternal ? styles.internal_message : ''}`}
 			>
 				{!isCurrentUser && (
 					<Image
@@ -42,7 +42,7 @@ function TicketComment({
 						className={styles.agent_profile_pic}
 					/>
 				)}
-				<div className={cl`${isCurrentUser && styles.user_message_flex}`}>
+				<div className={cl`${isCurrentUser ? styles.user_message_flex : ''}`}>
 					<div className={styles.header_flex}>
 						<div className={styles.name_div}>
 							{isCurrentUser ? currentAgentName : name}
