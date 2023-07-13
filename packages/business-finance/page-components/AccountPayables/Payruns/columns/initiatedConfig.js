@@ -15,6 +15,10 @@ export const initiatedConfig = {
 	},
 	fields: [
 		{
+			func : 'renderRadioToSelectPayrun',
+			span : 0.4,
+		},
+		{
 			label : 'PayRun Name',
 			key   : 'name',
 			span  : 1.8,
@@ -42,7 +46,7 @@ export const initiatedConfig = {
 			span : 1,
 		},
 		{
-			func : 'renderTrashInvoice',
+			func : 'renderTrashPayrun',
 			span : 1,
 		},
 		{

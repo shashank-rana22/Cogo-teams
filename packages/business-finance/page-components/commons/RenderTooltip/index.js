@@ -1,14 +1,18 @@
 import { Tooltip } from '@cogoport/components';
 
 const STARTING_SUBSTRING_LENGTH = 0;
-function RenderTooltip({ content, maxLength }) {
-	if (content?.length > maxLength) {
+function RenderTooltip({ content = '', maxLength = 0 }) {
+	if (content?.length <= maxLength) {
 		return (
-			<Tooltip maxWidth={500} interactive placement="top" content={content}>
-				<div>{`${content.substring(STARTING_SUBSTRING_LENGTH, maxLength)}...`}</div>
-			</Tooltip>
+			<div>
+				{content}
+			</div>
 		);
 	}
-	return content;
+	return (
+		<Tooltip maxWidth={500} interactive placement="top" content={content}>
+			<div>{`${content.substring(STARTING_SUBSTRING_LENGTH, maxLength)}...`}</div>
+		</Tooltip>
+	);
 }
 export default RenderTooltip;

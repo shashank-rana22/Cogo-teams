@@ -1,35 +1,58 @@
 import { Button, Modal } from '@cogoport/components';
-import React from 'react';
+import React, { useState } from 'react';
 
 import List from '../../../../../commons/List/index.tsx';
-import useGetAllotEntityBank from '../../../hooks/useGetAllotEntityBank';
+import useInitiatePaymentAllotBank from '../../../hooks/useInitiatePaymentAllotBank';
 
 import { ALLOT_BANK_CONFIG } from './allotBankConfig';
+import RenderFunction from './renderFunction/index';
 
 function AllotBankList({
-	selectedPayrun, showAllotBank, setShowAllotBank,
+	selectedPayrun = null, showAllotBank = false, setShowAllotBank = () => {}, checkedRow = null,
+	setCheckedRow = () => {}, allotEntityBank = {}, allotEntityLoading = false, setActivePayrunTab = () => {},
 }) {
-	const { totalValue, entityCode } = selectedPayrun || {};
-	const { allotEntityBank, allotEntityLoading } = useGetAllotEntityBank({
-		selectedPayrun,
+	const { entityCode } = selectedPayrun || checkedRow || {};
+	const { selectBank, loading } = useInitiatePaymentAllotBank({
+		checkedRow,
+		setCheckedRow,
+		setShowAllotBank,
+		setActivePayrunTab,
 	});
-
+	const [selectedBankId, setSelectedBankId] = useState(null);
+	const { functions } = RenderFunction(
+		{
+			selectedPayrun,
+			selectedBankId,
+			setSelectedBankId,
+			checkedRow,
+			setCheckedRow,
+		},
+	);
+	const initiatePaymentClick = async () => {
+		await selectBank(selectedBankId, selectedPayrun, checkedRow);
+	};
 	return (
 		<div>
 			<Modal size="xl" show={showAllotBank} onClose={() => setShowAllotBank(false)} placement="top">
 				<Modal.Header title={`ALLOT BANK - ENTITY - ${entityCode}`} />
 				<Modal.Body>
-					{totalValue}
-					<List config={ALLOT_BANK_CONFIG} itemData={allotEntityBank} loading={allotEntityLoading} />
+					<List
+						config={ALLOT_BANK_CONFIG}
+						itemData={allotEntityBank}
+						loading={allotEntityLoading}
+						functions={functions}
+					/>
 				</Modal.Body>
 				<Modal.Footer>
 
 					<Button
-						style={{ marginRight: '10px' }}
+						disabled={loading}
+						style={{ marginRight: '12px' }}
+						onClick={() => setShowAllotBank(false)}
 					>
 						Cancel
 					</Button>
-					<Button>
+					<Button disabled={!selectedBankId || loading} onClick={initiatePaymentClick}>
 						Initiate Payment
 					</Button>
 

@@ -51,7 +51,7 @@ export const PAYMENT_INITIATED_PAYRUN = {
 			span : 0.5,
 		},
 		{
-			func : 'renderTrashInvoice',
+			func : 'renderTrashPayrun',
 			span : 0.5,
 		},
 		{

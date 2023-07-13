@@ -51,14 +51,13 @@ export const ALLOT_BANK_CONFIG = {
 		{
 			label : 'Balance',
 			key   : 'balance',
-			func  : 'renderAmount',
+			func  : 'renderBalanceAmount',
 			span  : 1.3,
 		},
 		{
-			label: '',
-
-			span : 0.7,
-			func : 'renderRequestButton',
+			label : '',
+			span  : 0.7,
+			func  : 'renderRequestButton',
 		},
 	],
 };

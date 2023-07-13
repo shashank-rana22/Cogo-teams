@@ -3,8 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 function ViewInvoices({
-	itemData, setSelectedPayrun = () => {},
-	selectedPayrun,
+	itemData = {}, setSelectedPayrun = () => {},
+	selectedPayrun = {},
 }) {
 	const handleClick = () => {
 		if (isEmpty(selectedPayrun)) {

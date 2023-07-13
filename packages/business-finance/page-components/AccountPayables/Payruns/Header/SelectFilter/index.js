@@ -31,15 +31,18 @@ function GetIcon({ globalFilters = {}, setGlobalFilters = () => {} }) {
 }
 
 function SelectFilters({
-	globalFilters,
-	setGlobalFilters,
-	isInvoiceView,
-	activePayrunTab,
-	setIsInvoiceView,
-	overseasData,
-	setOverseasData,
-	selectedPayrun,
-	setSelectedPayrun,
+	globalFilters = {},
+	setGlobalFilters = () => {},
+	isInvoiceView = false,
+	activePayrunTab = '',
+	setActivePayrunTab = () => {},
+	setIsInvoiceView = () => {},
+	overseasData = '',
+	setOverseasData = () => {},
+	selectedPayrun = null,
+	setSelectedPayrun = () => {},
+	checkedRow = null,
+	setCheckedRow = () => {},
 }) {
 	const { search } = globalFilters || {};
 	const { entityBank = [] } = useGetEntityBanks({});
@@ -140,10 +143,13 @@ function SelectFilters({
 				<div>
 					<PayrunButtons
 						activePayrunTab={activePayrunTab}
+						setActivePayrunTab={setActivePayrunTab}
 						isInvoiceView={isInvoiceView}
 						overseasData={overseasData}
 						selectedPayrun={selectedPayrun}
 						setSelectedPayrun={setSelectedPayrun}
+						checkedRow={checkedRow}
+						setCheckedRow={setCheckedRow}
 					/>
 				</div>
 			</div>

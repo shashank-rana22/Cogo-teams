@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+}
+
+.amount_container {
+	min-width: 100px;
+}
+
+.details_text {
+	margin-top: 1px;
+	margin-left: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #a5a5a5;
+}
+
+.text {
+	color: #bdbdbd;
+}

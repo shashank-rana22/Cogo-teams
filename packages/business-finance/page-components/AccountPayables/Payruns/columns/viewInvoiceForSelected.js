@@ -44,24 +44,23 @@ export const VIEW_INVOICE_NORMAL_CONFIG = {
 		{
 			label : 'Amount',
 			key   : 'invoiceAmount',
-			// func  : 'renderAmount',
+			func  : 'renderAmount',
 			span  : 1.7,
 		},
 		{
 			key   : 'tdsAmount',
-			// func  : 'renderAmount',
+			func  : 'renderAmount',
 			label : 'TDS',
 			span  : 1.7,
 		},
 		{
 			key   : 'payableAmount',
-			// func  : 'renderAmount',
+			func  : 'renderAmount',
 			label : 'Payable',
 			span  : 1.5,
 		},
 		{
 			key   : 'dueDate',
-			// type  : 'text',
 			label : 'Payment Due Date',
 			span  : 1.5,
 		},
@@ -74,11 +73,11 @@ export const VIEW_INVOICE_NORMAL_CONFIG = {
 		{
 			key  : 'delete',
 			span : 0.5,
-			// func : 'renderTrashInvoice',
+			func : 'renderTrashInvoice',
 		},
 		{
 			key  : 'invoiceDetails',
-			// func : 'renderInvoiceDetails',
+			func : 'renderInvoiceTimeLine',
 			span : 0.5,
 		},
 	],

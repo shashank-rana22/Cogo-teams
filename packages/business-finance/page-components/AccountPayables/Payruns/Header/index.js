@@ -5,22 +5,25 @@ import SelectFilters from './SelectFilter';
 import styles from './styles.module.css';
 
 function Header({
-	activePayrunTab,
-	setActivePayrunTab,
-	payrunStats,
-	isInvoiceView,
-	setIsInvoiceView,
-	overseasData,
-	setOverseasData,
-	globalFilters,
-	setGlobalFilters,
-	selectedPayrun,
-	setSelectedPayrun,
+	activePayrunTab = '',
+	setActivePayrunTab = () => {},
+	payrunStats = {},
+	isInvoiceView = false,
+	setIsInvoiceView = () => {},
+	overseasData = '',
+	setOverseasData = () => {},
+	globalFilters = {},
+	setGlobalFilters = () => {},
+	selectedPayrun = null,
+	setSelectedPayrun = () => {},
+	checkedRow = null,
+	setCheckedRow = () => {},
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
 		UPLOAD_HISTORY = 0, COMPLETED = 0,
-	} = payrunStats || {};
+	} = payrunStats;
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -28,7 +31,7 @@ function Header({
 					activeTab={activePayrunTab}
 					themeType="secondary"
 					onChange={setActivePayrunTab}
-					fullWidth
+					// fullWidth
 				>
 					<TabPanel
 						id="INITIATED"
@@ -76,11 +79,14 @@ function Header({
 					setGlobalFilters={setGlobalFilters}
 					isInvoiceView={isInvoiceView}
 					activePayrunTab={activePayrunTab}
+					setActivePayrunTab={setActivePayrunTab}
 					setIsInvoiceView={setIsInvoiceView}
 					overseasData={overseasData}
 					setOverseasData={setOverseasData}
 					selectedPayrun={selectedPayrun}
 					setSelectedPayrun={setSelectedPayrun}
+					checkedRow={checkedRow}
+					setCheckedRow={setCheckedRow}
 				/>
 			</div>
 

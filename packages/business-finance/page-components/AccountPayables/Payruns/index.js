@@ -16,14 +16,23 @@ function Payruns() {
 	const [dropDownData, setDropDownData] = useState([]);
 	const [loadingDropDown, setLoadingDropDown] = useState(false);
 	const [activeAdvPaid, setActiveAdvPaid] = useState('NORMAL');
+	const [checkedRow, setCheckedRow] = useState(null);
 	const {
 		data,
 		loading,
 		payrunStats,
-		config, setSelectedPayrun, selectedPayrun,
+		config, setSelectedPayrun = () => {}, selectedPayrun = null,
 		globalFilters,
 		setGlobalFilters, sort, setSort,
-	} = useFilterData({ isInvoiceView, activePayrunTab, overseasData, setOverseasData, setViewId, setActiveAdvPaid });
+	} = useFilterData({
+		isInvoiceView,
+		activePayrunTab,
+		overseasData,
+		setOverseasData,
+		setViewId,
+		setCheckedRow,
+		setActiveAdvPaid,
+	});
 
 	const { functions } = RenderFunctions(
 		overseasData,
@@ -34,6 +43,8 @@ function Payruns() {
 		setLoadingDropDown,
 		selectedPayrun,
 		setSelectedPayrun,
+		checkedRow,
+		setCheckedRow,
 	);
 
 	return (
@@ -51,6 +62,8 @@ function Payruns() {
 				setGlobalFilters={setGlobalFilters}
 				selectedPayrun={selectedPayrun}
 				setSelectedPayrun={setSelectedPayrun}
+				checkedRow={checkedRow}
+				setCheckedRow={setCheckedRow}
 			/>
 			{selectedPayrun ? <InvoiceCard setSelectedPayrun={setSelectedPayrun} itemData={data} /> : null}
 			<List

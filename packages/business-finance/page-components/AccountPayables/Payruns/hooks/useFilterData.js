@@ -25,7 +25,7 @@ import useGetViewInvoices from './useGetViewInvoices';
 
 const useFilterData = ({
 	isInvoiceView, activePayrunTab, overseasData,
-	setOverseasData, setViewId, setActiveAdvPaid,
+	setOverseasData, setViewId, setActiveAdvPaid, setCheckedRow,
 }) => {
 	const [globalFilters, setGlobalFilters] = useState({
 		search    : undefined,
@@ -182,7 +182,8 @@ const useFilterData = ({
 		setViewId('');
 		setActiveAdvPaid('');
 		setSelectedPayrun(null);
-	}, [activePayrunTab, setActiveAdvPaid, setOverseasData, setViewId]);
+		setCheckedRow(null);
+	}, [activePayrunTab, setActiveAdvPaid, setCheckedRow, setOverseasData, setViewId]);
 
 	return {
 		data    : apiData.listData,

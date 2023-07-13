@@ -33,10 +33,10 @@ export interface Props {
 	width?: string;
 	rowStyle?: string;
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
-	viewId:null;
-	dropDownData:[];
-	loadingDropDown:Boolean;
-	activePayrunTab:string;
+	viewId?:null;
+	dropDownData?:[];
+	loadingDropDown?:Boolean;
+	activePayrunTab?:string;
 }
 
 function List({
@@ -55,10 +55,10 @@ function List({
 	width = null,
 	rowStyle = null,
 	paginationType = 'table',
-	viewId,
-	dropDownData,
-	loadingDropDown,
-	activePayrunTab,
+	viewId = null,
+	dropDownData = [],
+	loadingDropDown = false,
+	activePayrunTab = '',
 }: Props) {
 	const {
 		showHeader = true,
@@ -87,7 +87,7 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+				{/* {(list || [1, 2, 3, 4, 5]).map((singleitem) => (
 					<>
 						<CardColumn
 							key={singleitem.id}
@@ -111,7 +111,7 @@ function List({
 							</div>
 						)}
 					</>
-				))}
+				))} */}
 
 				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>
@@ -124,19 +124,29 @@ function List({
 				) : (
 					<div>
 						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-							<CardColumn
-								key={singleitem.id}
-								fields={fields}
-								itemStyles={itemStyles}
-								singleitem={singleitem}
-								config={config}
-								loading={loading}
-								functions={commonFunctions(functions)}
-								isMobile={isMobile}
-								subActiveTab={subActiveTab}
-								width={width}
-								rowStyle={rowStyle}
-							/>
+							<>
+								<CardColumn
+									key={singleitem.id}
+									fields={fields}
+									itemStyles={itemStyles}
+									singleitem={singleitem}
+									config={config}
+									loading={loading}
+									functions={commonFunctions(functions)}
+									isMobile={isMobile}
+									subActiveTab={subActiveTab}
+									width={width}
+									rowStyle={rowStyle}
+								/>
+								{activePayrunTab === 'PAID' && viewId === singleitem?.objectId && (
+									<div>
+										<DropDownItem
+											data={dropDownData}
+											loadingDropDown={loadingDropDown}
+										/>
+									</div>
+								)}
+							</>
 						))}
 					</div>
 				)}
