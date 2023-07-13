@@ -6,11 +6,12 @@ import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTe
 
 import styles from './styles.module.css';
 
-const COUNTRY_CODE = 1;
+const COUNTRY_CODE_INDEX = 1;
 
 function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
+	viewType = '',
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -37,8 +38,10 @@ function NewWhatsappMessage({
 	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
 			callbackfunc: closeModal,
+			viewType,
 		},
 	);
+
 	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
 		if (!number) {
@@ -48,7 +51,7 @@ function NewWhatsappMessage({
 
 		const { template_name, variables } = args;
 		sendUserWhatsappTemplate({
-			country_code    : country_code.slice(COUNTRY_CODE),
+			country_code    : country_code.slice(COUNTRY_CODE_INDEX),
 			whatsapp_number : number,
 			template_name,
 			variables,
@@ -82,6 +85,7 @@ function NewWhatsappMessage({
 				type={type}
 				setDialNumber={setDialNumber}
 				dialNumber={dialNumber}
+				key={type}
 			/>
 		</Modal>
 	);

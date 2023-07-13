@@ -21,6 +21,7 @@ const TAB_MAPPING = {
 	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	tracking  : dynamic(() => import('@cogoport/air-modules/components/Tracking'), { ssr: false }),
 };
 
 const UNAUTHORIZED_STATUS_CODE = 403;
@@ -66,6 +67,9 @@ function DefaultView() {
 		purchase: {
 			shipmentData : shipment_data,
 			servicesData : servicesList,
+		},
+		tracking: {
+			shipmentData: shipment_data,
 		},
 	};
 

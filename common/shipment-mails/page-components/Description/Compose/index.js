@@ -13,6 +13,10 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
+const DEFAULT_ZERO_VALUE = 0;
+const ENTER_KEY_CODE = 13;
+const SPACE_KEY_CODE = 32;
+
 const getFormattedValues = (
 	emailData,
 	action,
@@ -31,7 +35,7 @@ const getFormattedValues = (
 			subject      : emailData.subject || undefined,
 		};
 	}
-	if (action === 'reply' && userEmailArray?.length === 0 && !deleteEmail) {
+	if (action === 'reply' && userEmailArray?.length === DEFAULT_ZERO_VALUE && !deleteEmail) {
 		setUserEmailArray([
 			sender,
 		]);
@@ -48,7 +52,7 @@ const getFormattedValues = (
 	const to = (emailData?.toRecipients || [])
 		.map((item) => item?.emailAddress?.address);
 
-	if (userEmailArray?.length === 0 && ccEmailArray?.length === 0 && !deleteEmail) {
+	if (userEmailArray?.length === DEFAULT_ZERO_VALUE && ccEmailArray?.length === DEFAULT_ZERO_VALUE && !deleteEmail) {
 		setUserEmailArray([...to, sender]);
 		setCcEmailArray(cc);
 	}
@@ -74,7 +78,10 @@ function Compose({
 	const [bccEmailArray, setBccEmailArray] = useState([]);
 	const [deleteEmail, setDeleteEmail] = useState(false);
 	const [editorState, setEditorState] = useState('');
-
+	const source_options = (COMPOSE_EMAIL || []).map((email) => ({
+		label : email,
+		value : email,
+	}));
 	const { getEntityStakeholderApi } = useGetEntityStakeholderMappings();
 	const options = (getEntityStakeholderApi.data || []).map((item) => ({
 		label : item.description,
@@ -106,7 +113,7 @@ function Compose({
 	const userEmail = watch('toUserEmail');
 	const ccEmail = watch('ccrecipients');
 	const bccEmail = watch('bccrecipients');
-
+	const sender_email = watch('composeEmail');
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
 	} else {
@@ -129,7 +136,7 @@ function Compose({
 		</div>
 	);
 	const handleClick = (e) => {
-		if ((e.keyCode === 13 || e.keyCode === 32) && userEmail) {
+		if ((e.keyCode === ENTER_KEY_CODE || e.keyCode === SPACE_KEY_CODE) && userEmail) {
 			if (!geo.regex.EMAIL.test(userEmail)) {
 				Toast.error('Please Enter Valid Email Address');
 			} else {
@@ -140,7 +147,7 @@ function Compose({
 				setValue('toUserEmail', '');
 			}
 		}
-		if ((e.keyCode === 13 || e.keyCode === 32) && ccEmail) {
+		if ((e.keyCode === ENTER_KEY_CODE || e.keyCode === SPACE_KEY_CODE) && ccEmail) {
 			if (!geo.regex.EMAIL.test(ccEmail)) {
 				Toast.error('Please Enter Valid Email Address');
 			} else {
@@ -151,7 +158,7 @@ function Compose({
 				setValue('ccrecipients', '');
 			}
 		}
-		if ((e.keyCode === 13 || e.keyCode === 32) && bccEmail) {
+		if ((e.keyCode === ENTER_KEY_CODE || e.keyCode === SPACE_KEY_CODE) && bccEmail) {
 			if (!geo.regex.EMAIL.test(bccEmail)) {
 				Toast.error('Please Enter Valid Email Address');
 			} else {
@@ -174,9 +181,19 @@ function Compose({
 				/>
 				New Email
 			</div>
-
 			<div className={styles.compose_container}>
-
+				<div>
+					<SelectParam
+						prefix="Composing From :"
+						name="composeEmail"
+						emailValue={sender_email}
+						setEmailValue={setComposingEmail}
+						control={control}
+						options={source_options}
+						placeholder="Select Composing Email..."
+						rules={{ required: 'Email is required' }}
+					/>
+				</div>
 				<div className={styles.user_email}>
 					<InputParam
 						prefix="To :"
@@ -198,7 +215,6 @@ function Compose({
 						</div>
 					) : null}
 				</div>
-
 				<div>
 					<InputParam
 						prefix="Cc :"
@@ -285,7 +301,7 @@ function Compose({
 				<Footer
 					content={editorState}
 					subject="Testing the flow wait"
-					COMPOSE_EMAIL={COMPOSE_EMAIL}
+					COMPOSE_EMAIL={sender_email}
 					handleSubmit={handleSubmit}
 					action={action}
 					composingEmail={composingEmail}
