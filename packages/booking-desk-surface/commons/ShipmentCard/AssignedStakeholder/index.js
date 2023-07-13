@@ -20,7 +20,8 @@ function AssignedStakeholder({ data = {} }) {
 
 				<div className={styles.stakeholder}>
 					{KAM_MAPPING?.[firstBookingAgent?.stakeholder_type]}
-					:&nbsp;
+					:
+					{' '}
 					{firstBookingAgent?.name}
 				</div>
 
@@ -30,7 +31,8 @@ function AssignedStakeholder({ data = {} }) {
 						content={(
 							<div className={styles.stakeholder}>
 								{KAM_MAPPING?.[secondBookingAgent?.stakeholder_type]}
-								:&nbsp;
+								:
+								{' '}
 								{secondBookingAgent?.name}
 							</div>
 						)}

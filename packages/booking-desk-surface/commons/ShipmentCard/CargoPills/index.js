@@ -13,9 +13,9 @@ const KEY_FROM_ITEM = ['trade_type', 'free_days_detention_destination', 'contain
 const MINIMUM_COUNT_FOR_PLURAL = 1;
 
 function CargoPills({ data = {} }) {
-	const { cargo_details = [] } = data || {};
+	const { cargo_details } = data || {};
 
-	const [initialPills = {}, ...restPills] = cargo_details;
+	const [initialPills = {}, ...restPills] = cargo_details || [];
 
 	KEY_FROM_ITEM.forEach((itemKey) => {
 		if (data?.[itemKey]) {
@@ -35,7 +35,7 @@ function CargoPills({ data = {} }) {
 				<Pill key={pill}>{pill}</Pill>
 			))}
 
-			{!isEmpty(restPills) ? (
+			{isEmpty(restPills) ? (
 				<div className={styles.popover_container}>
 					<Popover
 						render={<PopoverContent list={restPills} />}
@@ -44,7 +44,7 @@ function CargoPills({ data = {} }) {
 					>
 						<div className={styles.popover_button_content}>
 							{`+${restPills?.length} 
-							Detail${cargo_details.length > MINIMUM_COUNT_FOR_PLURAL ? 's' : ''}`}
+							Detail${cargo_details?.length > MINIMUM_COUNT_FOR_PLURAL ? 's' : ''}`}
 						</div>
 					</Popover>
 				</div>
