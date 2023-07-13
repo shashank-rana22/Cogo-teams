@@ -22,9 +22,10 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		uploadedInvoice,
 		agreementNumber,
 		tradeParty,
+		categoryName,
 	} = mailData || {};
 
-	const { branchId } = JSON.parse(branch || '{}');
+	const { branchId, name:branchName } = JSON.parse(branch || '{}');
 	const { registration_number:registrationNumber } = vendorData || {};
 	const { id:cogoEntityId } = entityObject || {};
 	const { organization_trade_party_detail_id:tradePartyDetailId } = tradeParty || {};
@@ -64,6 +65,8 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 					updatedBy            : profile?.user?.id,
 					agreementNumber,
 					tradePartyDetailId,
+					categoryName,
+					branchName,
 				},
 			});
 		} catch (err) {
