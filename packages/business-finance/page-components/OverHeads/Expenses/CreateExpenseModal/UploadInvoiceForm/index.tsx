@@ -80,11 +80,13 @@ function UploadInvoiceForm({
 					{!isUploadConfirm ? (
 						<div>
 							{!uploadUrl ? (
-								<Filter
-									controls={recurringUploadInvoice()}
-									filters={formData}
-									setFilters={setFormData}
-								/>
+								<div className={styles.invoice_container}>
+									<Filter
+										controls={recurringUploadInvoice()}
+										filters={formData}
+										setFilters={setFormData}
+									/>
+								</div>
 							) : (
 								<div style={{ margin: '8px' }}>
 									<object
@@ -104,7 +106,6 @@ function UploadInvoiceForm({
 											themeType="secondary"
 										>
 											Reset
-											&nbsp;
 											<IcMRefresh />
 										</Button>
 										<Button

@@ -112,25 +112,14 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 		}
 	}, [payableAmount, setFormData]);
 
+	const hideTdsColumn = geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds;
+
 	const modifiedColumns = lineItemColumns({
 		remove,
 		control,
 		taxOptions,
 		formData,
-	}).map((column) => {
-		if (column.id === 'tds') {
-			return {
-				...column,
-				accessor: (row, index) => {
-					if (geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds) {
-						return null;
-					}
-					return column.accessor(row, index);
-				},
-			};
-		}
-		return column;
-	}).filter((column) => column.Header !== 'TDS');
+	}).filter((column) => column.id !== 'tds' || !hideTdsColumn);
 
 	return (
 		<div className={styles.section}>

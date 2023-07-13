@@ -92,8 +92,9 @@ function VenderComponent() {
 			<div className={styles.right_container}>
 				<Input
 					size="sm"
-					placeholder={`Search by Vendor Name/
-						${startCase(geo.others.pan_number.label)}/Organization ID/Sage ID`}
+					placeholder={
+						`Search by Vendor Name/${startCase(geo.others.pan_number.label)}/Organization ID/Sage ID`
+					}
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}
 					onChange={(e:any) => handleChange(e, 'searchValue')}
