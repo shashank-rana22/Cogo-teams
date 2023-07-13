@@ -4,9 +4,9 @@ import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect } from 'react';
 
-import CallComming from './CallComming';
+import CallComing from './CallComing';
 import { firebaseConfig } from './configurations/firebase-config';
-import useCommingCall from './hooks/useCommingCall';
+import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import styles from './styles.module.css';
 import VideoCallScreen from './VideoCallScreen';
@@ -16,7 +16,7 @@ function VideoCall() {
 	const firestore = getFirestore(app);
 	const peerRef = useRef(null);
 
-	const [callComming, setCallComming] = useState(false);
+	const [callComing, setCallComing] = useState(false);
 	const [inACall, setInACall] = useState(false);
 	const [callDetails, setCallDetails] = useState({
 		my_details      : null,
@@ -48,8 +48,8 @@ function VideoCall() {
 
 	const { callingTo, callUpdate, callEnd, stopStream, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
-		setCallComming,
-		callComming,
+		setCallComing,
+		callComing,
 		setInACall,
 		inACall,
 		setCallDetails,
@@ -58,12 +58,12 @@ function VideoCall() {
 		streams,
 		peerRef,
 	});
-	const { rejectOfCall, answerOfCall } = useCommingCall({
+	const { rejectOfCall, answerOfCall } = useComingCall({
 		firestore,
 		setCallDetails,
 		callDetails,
 		setInACall,
-		setCallComming,
+		setCallComing,
 		callUpdate,
 		setStreams,
 		peerRef,
@@ -100,7 +100,7 @@ function VideoCall() {
 			<div className={styles.call_comming}>
 				<Button onClick={callingTo}>Call</Button>
 			</div>
-			{callComming ? (
+			{callComing ? (
 				<div
 					className={styles.call_comming}
 					draggable="true"
@@ -110,7 +110,7 @@ function VideoCall() {
 					}}
 					onDragOver={(e) => e.preventDefault()}
 				>
-					<CallComming
+					<CallComing
 						rejectOfCall={rejectOfCall}
 						answerOfCall={answerOfCall}
 					/>

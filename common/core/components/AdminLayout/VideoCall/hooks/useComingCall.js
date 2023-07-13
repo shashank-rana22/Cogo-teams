@@ -4,12 +4,12 @@ import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-function useCommingCall({
+function useComingCall({
 	firestore,
 	// setCallDetails,
 	callDetails,
 	setInACall,
-	setCallComming,
+	setCallComing,
 	callUpdate,
 	setStreams,
 	peerRef,
@@ -91,7 +91,7 @@ function useCommingCall({
 	const answerOfCall = () => {
 		getWebrtcToken().then(() => {
 			setInACall(true);
-			setCallComming(false);
+			setCallComing(false);
 			callUpdate({
 				call_status: 'accepted',
 			});
@@ -103,7 +103,7 @@ function useCommingCall({
 		callUpdate({
 			call_status: 'rejected',
 		});
-		setCallComming(false);
+		setCallComing(false);
 	};
 	return {
 		answerOfCall,
@@ -111,4 +111,4 @@ function useCommingCall({
 	};
 }
 
-export default useCommingCall;
+export default useComingCall;

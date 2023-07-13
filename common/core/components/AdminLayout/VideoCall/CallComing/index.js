@@ -2,7 +2,7 @@ import { IcMCall, IcMVideoCall } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function CallComming({
+function CallComing({
 	rejectOfCall = () => {}, answerOfCall = () => {},
 }) {
 	return (
@@ -14,7 +14,7 @@ function CallComming({
 				/>
 			</div>
 			<div className={styles.call_comming_text}>
-				call Comming ..
+				call Coming ..
 			</div>
 			<div className={styles.call_comming_btn}>
 				<div role="presentation" onClick={rejectOfCall} className={styles.reject}>
@@ -28,4 +28,4 @@ function CallComming({
 	);
 }
 
-export default CallComming;
+export default CallComing;

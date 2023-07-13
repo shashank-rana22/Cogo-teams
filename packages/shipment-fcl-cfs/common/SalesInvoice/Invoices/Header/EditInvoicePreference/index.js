@@ -123,7 +123,7 @@ function EditInvoicePreference({
 
 							<Modal.Body>
 								<div className={styles.form}>
-									<div>Adding Invoicing Party Comming Soon....</div>
+									<div>Adding Invoicing Party Coming Soon....</div>
 									<AddInvoicingParty
 										shipmentData={shipment_data}
 										organizationDetails={organizationDetails}

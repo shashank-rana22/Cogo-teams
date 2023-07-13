@@ -17,14 +17,14 @@ import { ICESERVER } from '../constants';
 
 function useVideoCallFirebase({
 	firestore,
-	setCallComming,
+	setCallComing,
 	setInACall,
 	setCallDetails,
 	callDetails,
 	setStreams,
 	streams,
 	peerRef,
-	callComming,
+	callComing,
 	inACall,
 }) {
 	const { user_data } = useSelector((state) => ({
@@ -116,10 +116,10 @@ function useVideoCallFirebase({
 				calling_room_id: null,
 			}));
 		}
-		if (callComming) {
-			setCallComming(false);
+		if (callComing) {
+			setCallComing(false);
 		}
-	}, [inACall, callComming, setInACall, stopStream, setCallDetails, setCallComming]);
+	}, [inACall, callComing, setInACall, stopStream, setCallDetails, setCallComing]);
 
 	const callingTo = () => {
 		if (inACall) return;
@@ -160,13 +160,13 @@ function useVideoCallFirebase({
 
 	useEffect(() => {
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
-		const videoCallCommingQuery = query(
+		const videoCallComingQuery = query(
 			videoCallRef,
 			where('call_status', '==', 'calling'),
 			where('calling_by', '==', 'user'),
 		);
 
-		onSnapshot(videoCallCommingQuery, (querySnapshot) => {
+		onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
 				if (!inACall) {
 					setCallDetails((prev) => ({
@@ -175,11 +175,11 @@ function useVideoCallFirebase({
 						calling_details : val.data(),
 						calling_room_id : val.id,
 					}));
-					setCallComming(true);
+					setCallComing(true);
 				}
 			});
 		});
-	}, [firestore, inACall, setCallComming, setCallDetails]);
+	}, [firestore, inACall, setCallComing, setCallDetails]);
 
 	useEffect(() => {
 		if (callDetails?.calling_room_id) {
