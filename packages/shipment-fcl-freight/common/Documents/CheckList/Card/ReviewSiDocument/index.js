@@ -1,17 +1,19 @@
 import { Button, Modal } from '@cogoport/components';
-import { TextAreaController, useForm } from '@cogoport/forms';
+import { TextAreaController, handleError, useForm } from '@cogoport/forms';
 
 import useUpdateShipmentDocuments from '../../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
 
+const MIN_CONTENT_LENGTH = 20;
+
 function ReviewSiDocument({
-	siReviewState,
+	siReviewState = false,
 	setSiReviewState = () => {},
 	uploadedItem = {},
 	shipmentDocumentRefetch = () => {},
 }) {
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, formState : { errors } } = useForm();
 
 	const { updateDocument, loading } = useUpdateShipmentDocuments({
 		refetch: () => {
@@ -32,6 +34,9 @@ function ReviewSiDocument({
 		updateDocument(payload);
 	};
 
+	const minContentLength = (value) => value.length >= MIN_CONTENT_LENGTH
+        || 'remark must be at least 20 characters long';
+
 	return (
 		<Modal
 			show={siReviewState}
@@ -47,7 +52,13 @@ function ReviewSiDocument({
 						placeholder="Type here..."
 						control={control}
 						style={{ height: '100px' }}
+						rules={{ validate: minContentLength }}
 					/>
+					{ errors?.remark ? (
+						<div className={styles.error}>
+							{handleError({ error: errors?.remark })}
+						</div>
+					) : null}
 				</div>
 			</Modal.Body>
 

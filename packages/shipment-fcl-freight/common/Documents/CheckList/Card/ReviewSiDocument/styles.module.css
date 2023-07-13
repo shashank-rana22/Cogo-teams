@@ -5,3 +5,8 @@
 		padding: 6px;
 	}
 }
+
+.error {
+	font-size: 12px;
+	color: #cb6464;
+}
