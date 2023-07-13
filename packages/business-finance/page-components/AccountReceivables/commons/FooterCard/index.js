@@ -1,12 +1,16 @@
 import { Button } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils'; import React, { useState } from 'react';
 
 import ConfirmationModal from './ConfirmationModal';
 import styles from './styles.module.css';
 
-function FooterCard({ bulkIrnGenerate = () => {}, bulkIrnLoading = false, checkedRows = [] }) {
+function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoading = false, checkedRows = [] }) {
 	const [confirmation, setConfirmation] = useState(false);
+
+	const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
+	const { labels } = CogoportEntity[entityCode] || {};
+	const { irn_label: IrnLabel } = labels || {};
 
 	return (
 		<div className={styles.footer_div}>
@@ -20,10 +24,15 @@ function FooterCard({ bulkIrnGenerate = () => {}, bulkIrnLoading = false, checke
 					disabled={bulkIrnLoading || isEmpty(checkedRows)}
 					onClick={() => { setConfirmation(!confirmation); }}
 				>
-					Bulk IRN Generate
+					Bulk
+					{' '}
+					{IrnLabel}
+					{' '}
+					Generate
 				</Button>
 			</div>
 			<ConfirmationModal
+				IrnLabel={IrnLabel}
 				checkedRows={checkedRows}
 				bulkIrnGenerate={bulkIrnGenerate}
 				bulkIrnLoading={bulkIrnLoading}

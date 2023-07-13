@@ -7,7 +7,7 @@ import ViewButton from '../../common/ViewButton';
 
 import styles from './style.module.css';
 
-function RevokeInvoice({ id, refetch, row = {}, isEditable = true, remark = '' }) {
+function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
 	const { data = {} } = row || {};
