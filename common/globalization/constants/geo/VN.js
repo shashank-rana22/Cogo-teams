@@ -432,7 +432,10 @@ export default {
 			},
 		},
 		enrichment: {
-			request_sent: {
+			enrichment_response_source            : 'manual_enriched',
+			manual_enrichment                     : false,
+			allowed_to_create_enrichment_requests : true,
+			request_sent                          : {
 				tabs: [
 					'submitted_requests',
 

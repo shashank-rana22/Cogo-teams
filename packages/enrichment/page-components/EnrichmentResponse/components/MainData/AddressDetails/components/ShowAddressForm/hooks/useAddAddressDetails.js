@@ -1,23 +1,22 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
 import getControls from '../utils/controls';
 
 const regionControls = ['country', 'state'];
 
+const geo = getGeoConstants();
+
 const useAddAddressDetails = ({
 	setShowForm = () => {},
 	refetchResponses = () => {},
 }) => {
 	const router = useRouter();
-
-	const partnerId = useSelector((state) => (state.profile?.partner?.id));
 
 	const [addressData, setAddressData] = useState({});
 
@@ -70,10 +69,9 @@ const useAddAddressDetails = ({
 		try {
 			const payload = {
 				...values,
-				response_type : 'address',
-				source        : GLOBAL_CONSTANTS.country_entity_ids.VN === partnerId
-					? 'manual_enriched' : 'manual',
-				feedback_request_id: query?.id,
+				response_type       : 'address',
+				source              : geo.navigations.enrichment.enrichment_response_source,
+				feedback_request_id : query?.id,
 			};
 
 			await trigger({

@@ -1,20 +1,20 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import controls from '../utils/controls';
+
+const geo = getGeoConstants();
 
 const useAddPocDetails = ({
 	setShowForm = () => {},
 	refetchResponses = () => {},
 }) => {
 	const router = useRouter();
-	const partnerId = useSelector((state) => (state.profile?.partner?.id));
 
 	const {
 		control,
@@ -54,10 +54,9 @@ const useAddPocDetails = ({
 
 				whatsapp_number: values?.whatsapp_number?.number,
 
-				response_type : 'user',
-				source        : GLOBAL_CONSTANTS.country_entity_ids.VN === partnerId
-					? 'manual_enriched' : 'manual',
-				feedback_request_id: query?.id,
+				response_type       : 'user',
+				source              : geo.navigations.enrichment.enrichment_response_source,
+				feedback_request_id : query?.id,
 			};
 
 			await trigger({

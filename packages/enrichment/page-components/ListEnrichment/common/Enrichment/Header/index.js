@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
 import useDownloadEnrichmentCsv from '../../../hooks/useDownloadEnrichmentCsv';
@@ -19,18 +18,18 @@ function Header(props) {
 		searchValue,
 		setSearchValue = () => {},
 		setShowUpload = () => {},
-		partnerId = '',
 		listRefetch = () => {},
 		authRoleId,
 	} = props;
 
 	const { loading, onDownload } = useDownloadEnrichmentCsv();
 
-	const allowedToSeeButtons = partnerId !== GLOBAL_CONSTANTS.country_entity_ids.VN;
+	const allowedToSeeButtons = geo.navigations.enrichment.manual_enrichment;
+	const allowedToCreateEnrichmentRequests = geo.navigations.enrichment.allowed_to_create_enrichment_requests;
 
 	const third_party_enrichment_allowed_role_ids = geo.uuid.third_party_enrichment_agencies_role_ids;
 
-	const isAllowedToGetMoreLeads = partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN
+	const isAllowedToGetMoreLeads = allowedToCreateEnrichmentRequests
 	&& third_party_enrichment_allowed_role_ids.includes(authRoleId);
 
 	return (

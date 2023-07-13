@@ -556,7 +556,10 @@ export default {
 			},
 		},
 		enrichment: {
-			request_sent: {
+			enrichment_response_source            : 'manual',
+			manual_enrichment                     : true,
+			allowed_to_create_enrichment_requests : false,
+			request_sent                          : {
 				tabs: [
 					'submitted_requests',
 					'uploaded_files',

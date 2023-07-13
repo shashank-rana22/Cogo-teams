@@ -43,7 +43,7 @@ const useListEnrichment = () => {
 		filters    : {
 			q: searchQuery || undefined,
 			partner_id,
-			// user_id,
+
 		},
 	});
 
@@ -76,10 +76,14 @@ const useListEnrichment = () => {
 			filters: {
 				...previousParams.filters,
 				q       : searchQuery || undefined,
-				user_id : selected_agent_id,
+				user_id : selected_agent_id || undefined,
 			},
 		}));
-	}, [searchQuery, authParams, refetch, selected_agent_id]);
+	}, [searchQuery, selected_agent_id]);
+
+	useEffect(() => {
+		refetch();
+	}, [authParams, refetch]);
 
 	useEffect(() => {
 		if (activeTab === 'enrichment_requests') {

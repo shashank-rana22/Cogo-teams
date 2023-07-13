@@ -15,7 +15,6 @@ function LeftPanel(props) {
 		searchValue,
 		setSearchValue,
 		listRefetch,
-		partnerId,
 		authRoleId,
 	} = props;
 
@@ -38,7 +37,6 @@ function LeftPanel(props) {
 			setSearchValue={setSearchValue}
 			showStatistics
 			listRefetch={listRefetch}
-			partnerId={partnerId}
 			authRoleId={authRoleId}
 		/>
 	);

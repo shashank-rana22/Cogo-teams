@@ -22,7 +22,6 @@ function Enrichment(props) {
 		searchValue,
 		setSearchValue,
 		listRefetch = () => {},
-		partnerId = '',
 		authRoleId,
 	} = props;
 
@@ -40,7 +39,6 @@ function Enrichment(props) {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				setShowUpload={setShowUpload}
-				partnerId={partnerId}
 				listRefetch={listRefetch}
 				authRoleId={authRoleId}
 			/>

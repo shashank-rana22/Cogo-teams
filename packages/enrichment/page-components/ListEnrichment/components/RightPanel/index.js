@@ -41,7 +41,7 @@ function RightPanel(props) {
 				themeType="secondary"
 				onChange={setSecondaryTab}
 			>
-				{Object.values(ENRICHMENT_TABS).map((item) => (
+				{(ENRICHMENT_TABS || []).map((item) => (
 					<TabPanel key={item} name={item} title={startCase(item)}>
 						<Enrichment
 							list={list}
