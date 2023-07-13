@@ -1,47 +1,62 @@
-import styles from "./styles.module.css";
-import WeekFrequency from "../../WeekFrequency";
-import WeekCalendar from "../../WeekCalendar";
+import { Placeholder } from '@cogoport/components';
 
-function TimeTable({ item }) {
-    const tripType =
-        item?.service_lane_links?.[item?.service_lane_links?.length - 1]
-            ?.location_id === item?.service_lane_links?.[0]?.location_id
-            ? "Round Trip"
-            : "One Way";
+import WeekCalendar from '../../WeekCalendar';
+import WeekFrequency from '../../WeekFrequency';
 
-    const totalTransit =
-        item?.service_lane_links?.[item?.service_lane_links?.length - 1]
-            ?.eta_day_count - item?.service_lane_links?.[0]?.etd_day_count;
+import styles from './styles.module.css';
 
-    return (
-        <div className={styles.container}>
-            <div className={styles.frequency}>
-                Frequency :
-                <div className={styles.data}>
-                    <WeekFrequency
-                        dayOfWeek={item?.day_of_week || 12}
-                        startingDay={
-                            item?.service_lane_links?.[0]?.eta_day - 1 || 20
+const ZERO = 0;
+const ONE = 1;
+const TWELVE = 12;
+function TimeTable({ item, loading }) {
+	const tripType = item?.service_lane_links?.[Number(item?.service_lane_links?.length) - ONE]
+		?.location_id === item?.service_lane_links?.[ZERO]?.location_id
+		? 'Round Trip'
+		: 'One Way';
+
+	const totalTransit = Number(item?.service_lane_links?.[Number(item?.service_lane_links?.length)
+         - ONE]?.eta_day_count)
+     - Number(item?.service_lane_links?.[ZERO]?.etd_day_count);
+
+	return (
+		<div className={styles.container}>
+			<div className={styles.frequency}>
+				Frequency :
+				<div className={styles.data}>
+					{loading ? <Placeholder width="200px" height="30px" /> : (
+						<WeekFrequency
+							dayOfWeek={item?.day_of_week || TWELVE}
+							startingDay={
+                            Number(item?.service_lane_links?.[ZERO]?.eta_day) - ONE
                         }
-                    />
-                    <WeekCalendar
-                        dayOfWeek={item?.day_of_week || 12}
-                        startingDay={
-                            item?.service_lane_links?.[0]?.eta_day - 1 || 4
+						/>
+					)}
+					{loading ? <Placeholder width="200px" height="30px" /> : (
+						<WeekCalendar
+							dayOfWeek={item?.day_of_week || TWELVE}
+							startingDay={
+                            Number(item?.service_lane_links?.[ZERO]?.eta_day) - ONE
                         }
-                    />
-                </div>
-            </div>
+						/>
+					)}
+				</div>
+			</div>
 
-            <div className={styles.transit}>
-                Total Transit :
-                <div className={styles.data}>
-                    <div className={styles.days}>{totalTransit} Days</div>
-                    <div className={styles.trip}>{tripType || "---"}</div>
-                </div>
-            </div>
-        </div>
-    );
+			<div className={styles.transit}>
+				Total Transit :
+				<div className={styles.data}>
+					{loading ? <Placeholder width="200px" /> : (
+						<div className={styles.days}>
+							{totalTransit}
+							{' '}
+							Days
+						</div>
+					)}
+					<div className={styles.trip}>{tripType || '---'}</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default TimeTable;

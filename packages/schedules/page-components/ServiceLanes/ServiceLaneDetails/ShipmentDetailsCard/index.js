@@ -1,5 +1,6 @@
+import { Placeholder } from '@cogoport/components';
+
 import PortPair from '../../../common/PortPair';
-import LoadingState from '../../LoadingState';
 
 import ShippingDetails from './ShippingDetails';
 import styles from './styles.module.css';
@@ -7,19 +8,15 @@ import UpdatedOn from './UpdatedOn';
 
 function ShipmentDetailsCard({ data, loading }) {
 	return (
-		<>
-			{!loading ? (
-				<div className={styles.container}>
-					<ShippingDetails data={data} />
-					<div className={styles.details}>
-						<PortPair data={data} />
-						<UpdatedOn data={data} />
-					</div>
+		<div>
+			<div className={styles.container}>
+				{loading ? <Placeholder width="1000px" height="30px" /> : <ShippingDetails data={data} />}
+				<div className={styles.details}>
+					{loading ? <Placeholder width="600px" /> : <PortPair data={data} />}
+					{loading ? <Placeholder width="200px" /> : <UpdatedOn data={data} />}
 				</div>
-			) : (
-				<LoadingState />
-			)}
-		</>
+			</div>
+		</div>
 	);
 }
 

@@ -13,6 +13,7 @@
 
 .total_transit {
     display: flex;
+    gap: 16px;
     padding-top: 20px;
     padding-left: 24px;
     color: var(--black-80, #4f4f4f);

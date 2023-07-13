@@ -1,23 +1,24 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetVesselScheduleById = ({ vesselId }) => {
+const useListServiceLanes = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url    : '/list_vessel_schedules',
+			url    : '/list_service_lanes',
 			method : 'GET',
 		},
 		{ manual: true },
 	);
 
-	const makeRequest = async () => {
+	const { page = 1 } = filters;
+	const listServiceLanes = async () => {
 		try {
 			const payload = {
 				filters: {
-					id: vesselId,
+					...filters,
 				},
 				page_limit               : 10,
-				page                     : 1,
+				page,
 				pagination_data_required : true,
 				sort_by                  : 'updated_at',
 				sort_type                : 'desc',
@@ -25,15 +26,22 @@ const useGetVesselScheduleById = ({ vesselId }) => {
 			await trigger({
 				params: payload,
 			});
-		} catch (err) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	useEffect(() => {
-		if (vesselId) makeRequest();
-	}, [vesselId]);
+		listServiceLanes();
+	}, [JSON.stringify(filters)]);
+
 	return {
-		data: data?.list?.[0],
+		data        : data?.list,
 		loading,
+		totalItems  : data?.total_count,
+		currentPage : page,
+		listServiceLanes,
 	};
 };
-export default useGetVesselScheduleById;
+
+export default useListServiceLanes;

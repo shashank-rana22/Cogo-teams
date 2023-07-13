@@ -1,17 +1,29 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 import VesselSchedulesList from './VesselSchedulesList';
 
 function VesselSchedule() {
-	const [activeTab, setActiveTab] = useState('vessel_schedules');
+	const ACTIVE_TAB = 'vessel_schedules';
 	const [showModal, setShowModal] = useState(false);
+	const partnerId = useSelector((state) => state?.profile?.partner?.id);
+	const handleTabChange = (tab) => {
+		if (tab !== 'vessel_schedules') {
+			const route = tab.replace(/_/g, '-');
+			// eslint-disable-next-line no-undef
+			window.location.href = `/v2/${partnerId}/schedules/${route}`;
+		}
+	};
 
 	return (
 		<>
 			<div className={styles.tilte}>Sailing Schedules Manangement</div>
-			<Tabs activeTab={activeTab} themeType="secondary" onChange={setActiveTab}>
+			<Tabs activeTab={ACTIVE_TAB} themeType="secondary" onChange={(val) => { handleTabChange(val); }}>
+				<TabPanel name="ocean_schedule_coverage" title="Ocean Schedule Coverage">
+					<div>Ocean Schedule Coverage</div>
+				</TabPanel>
 				<TabPanel name="sailing_schedules" title="Sailing Schedules">
 					<div>Sailing Schedules</div>
 				</TabPanel>

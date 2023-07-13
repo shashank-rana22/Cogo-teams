@@ -1,0 +1,49 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 16px;
+    min-height: 300px
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.heading{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.hr_line{
+    border-top: 0.5px solid black;
+    width:90%;
+}
+
+.label{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4F4F4F;
+}
+
+.filter_select {
+    width: 260px;
+}
+
+.port_pair{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.pairs{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}

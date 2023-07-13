@@ -3,6 +3,8 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations, asyncFieldsOperators } from '@cogoport/forms/utils/getAsyncFields';
 import { merge } from '@cogoport/utils';
 
+import { sortByOptions } from '../../../common/utils/sortByOptions';
+
 import styles from './styles.module.css';
 
 function Filter({ filters, setFilters }) {
@@ -23,14 +25,9 @@ function Filter({ filters, setFilters }) {
 		{ params: { filters: { operator_type: 'shipping_line' } } },
 	));
 
-	const handleFilter = (value, location_type) => {
-		setFilters((prev) => ({ ...prev, [location_type]: value, page: 1 }));
+	const handleFilter = (value, type) => {
+		setFilters((prev) => ({ ...prev, [type]: value, page: 1 }));
 	};
-	const sortByOptions = [
-		{ label: 'Departure', value: 'departure' },
-		{ label: 'Arrival', value: 'arrival' },
-		{ label: 'Transit Time', value: 'transit_time' },
-	];
 
 	return (
 		<div className={styles.filter}>

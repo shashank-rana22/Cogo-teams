@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetVesselSchedules = ({ filter }) => {
+const useGetVesselSchedules = ({ filters }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/list_vessel_schedules',
@@ -10,28 +10,41 @@ const useGetVesselSchedules = ({ filter }) => {
 		{ manual: true },
 	);
 
+	const {
+		started_at = '',
+		q = '',
+		shipping_line_id = '',
+		sort_by = '',
+		page,
+	}	 = filters;
 	const makeRequest = async () => {
 		try {
 			const payload = {
-				filter,
+				filters: {
+					q                : q || undefined,
+					started_at       : started_at || undefined,
+					shipping_line_id : shipping_line_id || undefined,
+					sort_by          : sort_by || undefined,
+				},
 				page_limit               : 10,
-				page                     : 1,
+				page,
 				pagination_data_required : true,
 				sort_by                  : 'updated_at',
 				sort_type                : 'desc',
 			};
 			await trigger({
-				data: payload,
+				params: payload,
 			});
 		} catch (err) {}
 	};
 
 	useEffect(() => {
 		makeRequest();
-	}, []);
+	}, [filters]);
 	return {
-		data: data?.list,
+		data       : data?.list,
 		loading,
+		totalItems : data?.total_count,
 		makeRequest,
 	};
 };

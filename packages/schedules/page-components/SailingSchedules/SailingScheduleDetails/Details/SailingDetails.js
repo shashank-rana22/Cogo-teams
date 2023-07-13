@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Tooltip } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -20,9 +20,16 @@ function SailingDetails({ data, loading }) {
 				<div className={styles.port}>
 					<div>
 						{loading ? <Placeholder width="100px" /> : (
-							<div className={styles.port_name}>
-								{data?.origin_location?.name}
-							</div>
+							<Tooltip
+								theme="light"
+								placement="top"
+								interactive
+								content={data?.origin_location?.name}
+							>
+								<div className={styles.port_name}>
+									{data?.origin_location?.name}
+								</div>
+							</Tooltip>
 						)}
 						{loading ? <Placeholder width="60px" /> : (
 							<div className={styles.date}>
@@ -61,14 +68,22 @@ function SailingDetails({ data, loading }) {
 				<div className={styles.port}>
 					<div>
 						{loading ? <Placeholder width="100px" /> : (
-							<div className={styles.port_name}>
-								{data?.destination_location?.name}
-							</div>
+							<Tooltip
+								theme="light"
+								placement="top"
+								interactive
+								content={data?.destination_location?.name}
+							>
+								<div className={styles.port_name}>
+									{data?.destination_location?.name}
+								</div>
+							</Tooltip>
 						) }
 						{loading ? <Placeholder width="60px" /> : (
 							<div className={styles.date}>
 								{format(data?.arival, 'dd MMM yyyy hh:mm')}
 							</div>
+
 						)}
 					</div>
 					<div className={styles.details_card}>

@@ -10,7 +10,7 @@ import RoutePort from './RoutePort';
 import RoutePortForm from './RoutePortForm';
 import styles from './styles.module.css';
 
-function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
+function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading }) {
 	const totalTransit = route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
@@ -23,20 +23,21 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 	const handleClick = (input) => {
 		if (input === 'edit') {
 			setFinalRoute(route);
-		  setEdit(true);
+			setEdit(true);
 		} else {
-		  setEdit(false);
+			setEdit(false);
 		}
 		setPortEdit(false);
 		setForm(null);
 		setAdd(null);
 		setDeletePort(null);
-	  };
-	const objectToInsert = { display_name: '', location_id: '', order: null, port_code: '' };
+	};
+	const OBJECT_TO_INSERT = { display_name: '', location_id: '', order: null, port_code: '' };
 
 	const onClickAdd = (index) => {
 		setForm(index);
-		modifiedRoute = [...tempRoute?.slice(0, index), objectToInsert, ...tempRoute?.slice(index, tempRoute.length)];
+		modifiedRoute = [...(tempRoute?.slice(0, index) || []),
+			OBJECT_TO_INSERT, ...(tempRoute?.slice(index, tempRoute.length) || [])];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 		setFinalRoute(order);
 		setAdd(index);
@@ -79,13 +80,13 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
                             !edit ? (
 	<div className={styles.frequency_data}>
 		<WeekFrequency
-			dayOfWeek={dayOfWeek || 10}
-			startingDay={route?.[0]?.eta_day - 1}
+			dayOfWeek={dayOfWeek || '-'}
+			startingDay={Number(route?.[0]?.eta_day) - 1}
 		/>
                             &ensp;
 		<WeekCalendar
-			dayOfWeek={dayOfWeek || 10}
-			startingDay={route?.[0]?.eta_day - 1}
+			dayOfWeek={dayOfWeek || '-'}
+			startingDay={Number(route?.[0]?.eta_day) - 1}
 		/>
 	</div>
                             ) : null
@@ -109,8 +110,23 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 						</div>
 					) : (
 						<div className={styles.save}>
-							<Button themeType="secondary" size="md" className={styles.button_style} onClick={() => handleClick('save')}>Cancel</Button>
-							<Button size="md" className={styles.button_style} onClick={() => handleClick('save')}>Save Changes</Button>
+							<Button
+								themeType="secondary"
+								size="md"
+								className={styles.button_style}
+								onClick={() => handleClick('save')}
+							>
+								Cancel
+
+							</Button>
+							<Button
+								size="md"
+								className={styles.button_style}
+								onClick={() => handleClick('save')}
+							>
+								Save Changes
+
+							</Button>
 						</div>
 
 					)
@@ -119,17 +135,19 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 			{!edit ? (
 				<div className={styles.route_points}>
 					{route?.map((port, index) => {
-                	if (index === route.length - 1) { return <RoutePort isLast port={port} />; }
-                	return (
-	<RoutePort
-		isFirst={index === 0}
-		port={port}
-		diffInDays={
-													route?.[index + 1]?.eta_day_count
-													- route?.[index]?.etd_day_count
+						if (index === route.length - 1) { return <RoutePort isLast port={port} key={port?.id} />; }
+						return (
+							<RoutePort
+								isFirst={index === 0}
+								port={port}
+								key={port?.id}
+								diffInDays={
+													Number(route?.[index + 1]?.eta_day_count)
+													- Number(route?.[index]?.etd_day_count)
 												}
-		handleClick={handleClick}
-	/>
+								handleClick={handleClick}
+								loading={loading}
+							/>
 						);
 					})}
 				</div>
@@ -149,10 +167,12 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 									/>
 									{add ? (
 										<RoutePortForm
+											key={port?.id}
 											isFirst={index === 0}
 											isLast={index === route.length - 1}
 											port={port}
-											diffInDays={route?.[index + 1]?.eta_day_count - route?.[index]?.etd_day_count}
+											diffInDays={Number(route?.[index + 1]?.eta_day_count)
+												- Number(route?.[index]?.etd_day_count)}
 											onClickAdd={onClickAdd}
 											onClickEdit={onClickEdit}
 											setPortEdit={setPortEdit}
@@ -165,13 +185,15 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute }) {
 
 							);
 						}
-                	if (!deletePort?.includes(index)) {
+						if (!deletePort?.includes(index)) {
 							return (
 								<RoutePortForm
+									key={port?.id}
 									isFirst={index === 0}
 									isLast={index === route.length - 1}
 									port={port}
-									diffInDays={route?.[index + 1]?.eta_day_count - route?.[index]?.etd_day_count}
+									diffInDays={Number(route?.[index + 1]?.eta_day_count)
+										- Number(route?.[index]?.etd_day_count)}
 									onClickAdd={onClickAdd}
 									index={index}
 									onClickEdit={onClickEdit}

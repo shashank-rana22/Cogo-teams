@@ -12,15 +12,19 @@ import VesselScheduleMap from './VesselSchedulesMap';
 function VesselScheduele() {
 	const { query } = useRouter();
 	const vesselId = query?.id;
-	const { data } = useGetVesselScheduleById({ vesselId });
+	const { data, loading } = useGetVesselScheduleById({ vesselId });
 	const [finalRoute, setFinalRoute] = useState(null);
 	return (
 		<>
-			<BackButton title="Back To Vessel Schedule" key="vessel-schedules" />
+			<BackButton title="Back To Vessel Schedule" toPush="vessel-schedules" />
 			<div className={styles.back_button} />
-			<Card vessel={data} />
+			<Card vessel={data} loading={loading} />
 			<div className={styles.flex}>
-				<RouteDetails route={data?.vessel_schedule_link} finalRoute={finalRoute} setFinalRoute={setFinalRoute} />
+				<RouteDetails
+					route={data?.vessel_schedule_link}
+					finalRoute={finalRoute}
+					setFinalRoute={setFinalRoute}
+				/>
 				<VesselScheduleMap data={data} />
 			</div>
 		</>

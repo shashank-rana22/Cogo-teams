@@ -3,10 +3,10 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function BackButton({ title, key }) {
+function BackButton({ title, toPush }) {
 	const { push } = useRouter();
 	const onClickHandle = () => {
-		push(`/schedules/${key}/`);
+		push(`/schedules/${toPush}/`);
 	};
 
 	return (

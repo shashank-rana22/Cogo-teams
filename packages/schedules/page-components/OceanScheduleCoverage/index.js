@@ -1,78 +1,44 @@
-import { Pagination, Table } from "@cogoport/components";
-import { useState } from "react";
+import { TabPanel, Tabs } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 
-import Filter from "./Filter";
-import { getColumns } from "./helpers/column";
-import useListSailingSchedulePortPairs from "./hooks/useListSailingSchedulePortPairs";
-import OSCPortToPort from "./OSCPortToPort";
-import styles from "./styles.module.css";
-import EmptyState from "../common/EmptyState";
+import Content from './content';
+import styles from './styles.module.css';
 
 function OceanScheduleCoverage() {
-    const [filters, setFilters] = useState({});
-    const [currentPage, setCurrentPage] = useState(1);
+	const ACTIVE_TAB = 'ocean_schedule_coverage';
+	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 
-    const onPageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-    const [show, setShow] = useState(null);
-    const { data, loading, totalCount } = useListSailingSchedulePortPairs({
-        filters,
-        currentPage,
-    });
-    const [isPortToPort, setIsPortToPort] = useState(false);
-    const [originPort, setOriginPort] = useState(null);
-    const [destinationPort, setDestinationPort] = useState(null);
-    const { columns, columnsForPattern, columnsForPortToPort } = getColumns({
-        setOriginPort,
-        setDestinationPort,
-        setIsPortToPort,
-        setShow,
-    });
+	const handleTabChange = (tab) => {
+		if (tab !== 'ocean_schedule_coverage') {
+			const route = tab.replace(/_/g, '-');
+			// eslint-disable-next-line no-undef
+			window.location.href = `/v2/${partnerId}/schedules/${route}`;
+		}
+	};
+	return (
+		<div className={styles.outer_box}>
+			<Tabs
+				activeTab={ACTIVE_TAB}
+				themeType="secondary"
+				onChange={(tab) => { handleTabChange(tab); }}
+			>
+				<TabPanel name="ocean_schedule_coverage" title="Ocean Schedule Coverage">
+					<Content />
+				</TabPanel>
+				<TabPanel name="sailing_schedules" title="Sailing Schedules">
+					<div>Sailing Schedules</div>
+				</TabPanel>
 
-    return (
-        <>
-            {!isPortToPort && (
-                <>
-                    <Filter filters={filters} setFilters={setFilters} setCurrentPage={setCurrentPage} />
-                    <div style={{ padding: "8px" }} />
-                    <div className={styles.styled_table}>
-                        {(data || []).length || loading ? (
-                            <Table
-                                columns={columns}
-                                data={data || []}
-                                className={styles.table}
-                                loading={loading}
-                                loadingRowsCount={15}
-                            />
-                        ) : (
-                            <EmptyState height={300} />
-                        )}
-                    </div>
-                    <div className={styles.pagination}>
-                        <Pagination
-                            type="table"
-                            currentPage={currentPage}
-                            totalItems={totalCount}
-                            pageSize={15}
-                            onPageChange={onPageChange}
-                        />
-                    </div>
-                </>
-            )}
-            {isPortToPort && (
-                <OSCPortToPort
-                    originPort={originPort}
-                    destinationPort={destinationPort}
-                    setIsPortToPort={setIsPortToPort}
-                    columnsForPortToPort={columnsForPortToPort}
-                    columnsForPattern={columnsForPattern}
-                    show={show}
-                    setShow={setShow}
-                    portPairData={data}
-                />
-            )}
-        </>
-    );
+				<TabPanel name="vessel_schedules" title="Vessel Schedules">
+					<div>Vessel Schedule</div>
+				</TabPanel>
+
+				<TabPanel name="service_lanes" title="Service Lanes">
+					<div>Service Lanes</div>
+				</TabPanel>
+			</Tabs>
+		</div>
+	);
 }
+
 export default OceanScheduleCoverage;

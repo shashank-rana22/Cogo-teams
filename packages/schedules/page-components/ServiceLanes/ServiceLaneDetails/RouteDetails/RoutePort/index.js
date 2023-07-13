@@ -1,8 +1,13 @@
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function RoutePort({ isFirst, isLast, port, diffInDays }) {
+const ZERO = 0;
+const ONE = 1;
+const THOUSAND = 1000;
+
+function RoutePort({ isFirst, isLast, port, diffInDays, loading }) {
 	const dayChoices = [
 		'Sunday',
 		'Monday',
@@ -15,35 +20,39 @@ function RoutePort({ isFirst, isLast, port, diffInDays }) {
 
 	const getPortName = (name) => {
 		const splitIndex = name?.indexOf(',')
-            < (name?.indexOf('(') < 0 ? 10000 : name?.indexOf('('))
-            	? name?.indexOf(',')
-            	: name?.indexOf('(');
+            < (name?.indexOf('(') < ZERO ? THOUSAND : name?.indexOf('('))
+			? name?.indexOf(',')
+			: name?.indexOf('(');
 
-		return name?.substring(0, splitIndex - 1);
+		return name?.substring(ZERO, splitIndex - ONE);
 	};
 
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
 				<div className={styles.eta_etd}>
-					<div className={styles.eta}>
-						ETA :
-						{' '}
-						{dayChoices[port?.eta_day - 1]}
-						{' '}
-						( Day &nbsp;
-						{port?.eta_day_count}
-						)
-					</div>
-					<div className={styles.etd}>
-						ETD :
-						{' '}
-						{dayChoices[port?.etd_day - 1]}
-						{' '}
-						( Day &nbsp;
-						{port?.etd_day_count}
-						)
-					</div>
+					{loading ? <Placeholder width="200px" /> : (
+						<div className={styles.eta}>
+							ETA :
+							{' '}
+							{dayChoices[Number(port?.eta_day) - ONE]}
+							{' '}
+							( Day &nbsp;
+							{port?.eta_day_count}
+							)
+						</div>
+					)}
+					{loading ? <Placeholder width="200px" /> : (
+						<div className={styles.etd}>
+							ETD :
+							{' '}
+							{dayChoices[Number(port?.etd_day) - ONE]}
+							{' '}
+							( Day &nbsp;
+							{port?.etd_day_count}
+							)
+						</div>
+					)}
 				</div>
 			</div>
 			<div style={{ margin: '7px' }} />

@@ -43,6 +43,10 @@
     font-weight: 500;
     line-height: 21px;
     text-align: left;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .date{

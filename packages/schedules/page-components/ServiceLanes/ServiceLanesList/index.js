@@ -1,53 +1,43 @@
-import { useState } from "react";
-import SailingSchedulesManagement from "../../SailingSchedulesManagement";
-import { Button } from "@cogoport/components";
-import styles from "./styles.module.css";
-import Filters from "./Filters";
-import Cards from "./Cards";
-import useListServiceLanes from "./hooks/useListServiceLanes";
-import LoadingState from "../LoadingState";
-import { Pagination } from "@cogoport/components";
+import { Pagination } from '@cogoport/components';
+import { useState } from 'react';
 
-function ServiceLanesList({ mapTab, setMapTab }) {
-    const [activeTab, setActiveTab] = useState("service_lanes");
-    const filters = null;
+import CreateModal from '../CreateServiceLane';
+import useListServiceLanes from '../hooks/useListServiceLanes';
 
-    const { data, loading, totalItems, currentPage, setPage } =
-        useListServiceLanes({
-            filters,
-        });
+import Cards from './Cards';
+import Filters from './Filters';
 
-    return (
-        <>
-            <div className={styles.button}>
-                <SailingSchedulesManagement
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                />
+const SIX = 6;
+function ServiceLanesList({ showModal, setShowModal }) {
+	const [filters, setFilters] = useState({
+		page: 1,
+	});
 
-                <Button size="md" themeType="primary">
-                    + Create
-                </Button>
-            </div>
-            <Filters />
-            {!loading ? (
-                data?.map((item) => (
-                    <Cards item={item} mapTab={mapTab} setMapTab={setMapTab} />
-                ))
-            ) : (
-                <LoadingState />
-            )}
-            <div>
-                <Pagination
-                    className="md"
-                    type="table"
-                    currentPage={currentPage || 1}
-                    totalItems={totalItems || 0}
-                    pageSize={10}
-                    onPageChange={setPage}
-                />
-            </div>
-        </>
-    );
+	const { data, loading, totalItems, currentPage, setPage, listServiceLanes } = useListServiceLanes({
+		filters,
+	});
+
+	return (
+		<>
+			<Filters filters={filters} setFilters={setFilters} />
+			{
+				(data || [...Array(SIX)])?.map((item) => (
+					<Cards item={item} key={item?.id} loading={loading} />
+				))
+			}
+			<div>
+				<Pagination
+					className="md"
+					type="table"
+					currentPage={currentPage}
+					totalItems={totalItems}
+					pageSize={10}
+					onPageChange={setPage}
+				/>
+			</div>
+			{ showModal
+				? <CreateModal showModal={showModal} setShowModal={setShowModal} refetch={listServiceLanes} /> : null }
+		</>
+	);
 }
 export default ServiceLanesList;

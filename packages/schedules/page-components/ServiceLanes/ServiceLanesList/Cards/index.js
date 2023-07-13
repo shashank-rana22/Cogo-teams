@@ -1,27 +1,28 @@
-import styles from "./styles.module.css";
-import ShippingLineDetails from "./ShippingLineDetails";
-import PortPair from "./PortPairs";
-import TimeTable from "./TimeTable";
-import { useRouter } from "@cogoport/next";
+import { useRouter } from '@cogoport/next';
 
-function Cards({ item }) {
-    const { push } = useRouter();
-    const onClickHandle = () => {
-        push(
-            "/schedules/service-lanes/[id]",
-            `/schedules/service-lanes/${item?.id}`
-        );
-    };
+import PortPair from './PortPairs';
+import ShippingLineDetails from './ShippingLineDetails';
+import styles from './styles.module.css';
+import TimeTable from './TimeTable';
 
-    return (
-        <div className={styles.container} onClick={() => onClickHandle()}>
-            <ShippingLineDetails item={item} />
-            <div className={styles.details}>
-                <PortPair item={item} />
-                <TimeTable item={item} />
-            </div>
-        </div>
-    );
+function Cards({ item, loading }) {
+	const { push } = useRouter();
+	const onClickHandle = () => {
+		push(
+			'/schedules/service-lanes/[id]',
+			`/schedules/service-lanes/${item?.id}`,
+		);
+	};
+
+	return (
+		<div role="presentation" className={styles.container} onClick={() => onClickHandle()}>
+			<ShippingLineDetails item={item} loading={loading} />
+			<div className={styles.details}>
+				<PortPair item={item} loading={loading} />
+				<TimeTable item={item} loadin={loading} />
+			</div>
+		</div>
+	);
 }
 
 export default Cards;
