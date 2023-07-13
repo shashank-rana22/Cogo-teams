@@ -692,8 +692,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Operators',
-				href  : '/operators',
-				as    : '/operators',
+				href  : '/v2/operators',
+				as    : '/v2/operators',
 				type  : 'link',
 			},
 		],
