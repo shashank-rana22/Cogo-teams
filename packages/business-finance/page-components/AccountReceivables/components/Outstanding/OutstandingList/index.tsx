@@ -1,10 +1,11 @@
-import { TabPanel, Tabs, Tooltip } from '@cogoport/components';
+import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../constants/index';
 import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
+import DownloadLedgerModal from './DownloadLedgerModal';
 import PopoverTags from './PopoverTags';
 import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
@@ -41,6 +42,7 @@ interface OutstandingListProps {
 
 function OutstandingList({ item, entityCode }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('');
+	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
@@ -217,6 +219,14 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 								</div>
 							);
 						})}
+						<Button
+							size="sm"
+							style={{ marginLeft: '20px' }}
+							onClick={() => setShowLedgerModal(true)}
+						>
+							Download Ledger
+
+						</Button>
 					</div>
 				</div>
 
@@ -237,6 +247,14 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 					))}
 				</Tabs>
 			</div>
+
+			{showLedgerModal ? (
+				<DownloadLedgerModal
+					showLedgerModal={showLedgerModal}
+					setShowLedgerModal={setShowLedgerModal}
+					item={item}
+				/>
+			) : null}
 
 		</div>
 	);
