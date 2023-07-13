@@ -10,14 +10,11 @@ import {
 	DualLocation,
 	Header,
 } from '../../../commons/ShipmentCard';
-// import { SIDBeforeDepartureContext } from '../context';
 
 import styles from './styles.module.css';
 
 function Card({ data = {} }) {
 	const router = useRouter();
-
-	// const { selectedShipments, setSelectedShipments } = useContext(SIDBeforeDepartureContext);
 
 	const handleCardClick = (e) => {
 		if (e.target?.type === 'checkbox') { return; }
@@ -72,7 +69,7 @@ function Card({ data = {} }) {
 								<IcMInfo
 									width={15}
 									height={15}
-									style={{ marginBottom: '2px', color: 'red' }}
+									style={{ marginBottom: '2px', color: '#f00' }}
 								/>
 							</div>
 						</Tooltip>

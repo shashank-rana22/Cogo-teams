@@ -6,8 +6,8 @@ import getPillsFormat from '../../../helpers/getPillsFormat';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-const KEY_FROM_ITEM = ['trade_type', 'free_days_detention_destination', 'container_size', 'container_type',
-	'commodity', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type',
+const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'free_days_detention_destination', 'container_size', 'container_type',
+	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type',
 	'truck_type', 'trucks_count'];
 
 const MINIMUM_COUNT_FOR_PLURAL = 1;

@@ -1,4 +1,6 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -31,13 +33,26 @@ const handleLocationDetails = (location = {}) => (
 	</>
 );
 
+const getDisplayDate = (date) => (date ? formatDate({
+	date,
+	formatType : 'dateTime',
+	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+}) : null);
+
 function PortDetails({ data = {} }) {
+	const { schedule_arrival, schedule_departure } = data;
 	const { origin, destination } = getLocation({ data });
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
 			<div className={styles.port_detail}>
 				{handleLocationDetails(origin)}
+
+				{schedule_departure ? (
+					<div className={styles.eta_etd}>
+						{`ETD ${getDisplayDate(schedule_departure)}`}
+					</div>
+				) : 'TBD'}
 			</div>
 
 			<div className={styles.icon_wrapper}>
@@ -46,6 +61,11 @@ function PortDetails({ data = {} }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(destination)}
+				{schedule_arrival ? (
+					<div className={styles.eta_etd}>
+						{`ETA ${getDisplayDate(schedule_arrival)}`}
+					</div>
+				) : 'TBD'}
 			</div>
 		</div>
 	);
