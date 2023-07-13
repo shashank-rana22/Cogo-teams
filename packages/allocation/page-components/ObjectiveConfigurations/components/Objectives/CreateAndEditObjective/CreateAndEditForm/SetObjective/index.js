@@ -21,7 +21,10 @@ function SetObjective(props) {
 				onSaveCallback={onSaveGeneralConfig}
 			/>
 
-			<ObjectiveRequirements ref={objReqRef} />
+			<ObjectiveRequirements
+				ref={objReqRef}
+				setFormValues={setFormValues}
+			/>
 		</>
 	);
 }

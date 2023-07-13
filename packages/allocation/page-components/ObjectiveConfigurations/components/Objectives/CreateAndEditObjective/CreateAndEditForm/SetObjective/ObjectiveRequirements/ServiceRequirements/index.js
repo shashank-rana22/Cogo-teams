@@ -10,6 +10,7 @@ function ServiceRequirements(props) {
 		name,
 		control,
 		watch,
+		resetField,
 	} = props;
 
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -24,6 +25,7 @@ function ServiceRequirements(props) {
 					name={name}
 					remove={remove}
 					watch={watch}
+					resetField={resetField}
 				/>
 			))}
 

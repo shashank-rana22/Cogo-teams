@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const ObjectiveRequirements = forwardRef((props, ref) => {
 	const divRef = useRef({});
 
-	const { control, watch, reset } = useForm({
+	const { control, watch, reset, resetField } = useForm({
 		defaultValues: {
 			service_requirements: [{}],
 		},
@@ -29,7 +29,12 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 			</div>
 
 			<form>
-				<ServiceRequirements name="service_requirements" control={control} watch={watch} />
+				<ServiceRequirements
+					name="service_requirements"
+					control={control}
+					watch={watch}
+					resetField={resetField}
+				/>
 
 				<OrganizationalDetails control={control} />
 

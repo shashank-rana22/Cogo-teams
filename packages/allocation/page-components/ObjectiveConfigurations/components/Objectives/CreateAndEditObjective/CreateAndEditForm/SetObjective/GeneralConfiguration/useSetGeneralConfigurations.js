@@ -9,7 +9,7 @@ const useSetGeneralConfiguration = (props) => {
 	const [selectedRoles, setSelectedRoles] = useState([]);
 	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
 
-	const { control, watch, handleSubmit, setValue, formState: { errors } } = useForm({
+	const { control, watch, handleSubmit, resetField, formState: { errors } } = useForm({
 		defaultValues: {
 			roles: [],
 		},
@@ -37,7 +37,7 @@ const useSetGeneralConfiguration = (props) => {
 	};
 
 	useEffect(() => {
-		setValue('roles', []);
+		resetField('roles');
 
 		setSelectedRoles([]);
 
@@ -50,7 +50,7 @@ const useSetGeneralConfiguration = (props) => {
 				user_ids   : [],
 			},
 		}));
-	}, [watchPartner, watchChannel, setValue, setFormValues]);
+	}, [watchPartner, watchChannel, resetField, setFormValues]);
 
 	return {
 		selectedRoles,

@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../../common/Form/getFieldController';
 import getServiceRequirementControls from '../../../../../../../../configurations/service-requirements-form-controls';
@@ -16,12 +17,37 @@ function Service(props) {
 		name,
 		remove,
 		watch,
+		resetField,
 	} = props;
 
 	const watchShipmentMode = watch(`${name}.${index}.shipment_mode`);
 	const watchServiceType = watch(`${name}.${index}.service_type`);
 
 	const controls = getServiceRequirementControls({ watchShipmentMode, watchServiceType });
+
+	useEffect(() => {
+		const subscription = watch((value, { name: controlName }) => {
+			if (controlName === `${name}.${index}.service_type`) {
+				resetField(`${name}.${index}.trade_type`);
+				resetField(`${name}.${index}.origin_location_id`);
+				resetField(`${name}.${index}.destination_location_id`);
+				resetField(`${name}.${index}.inco_term`);
+				resetField(`${name}.${index}.hs_codes`);
+				resetField(`${name}.${index}.container_count`);
+				resetField(`${name}.${index}.cargo_weight`);
+				resetField(`${name}.${index}.volume`);
+				resetField(`${name}.${index}.container_size`);
+				resetField(`${name}.${index}.container_type`);
+				resetField(`${name}.${index}.truck_type`);
+			}
+
+			if (controlName === `${name}.${index}.shipment_mode`) {
+				resetField(`${name}.${index}.service_type`);
+			}
+		});
+
+		return () => subscription.unsubscribe();
+	}, [watch, index, name, resetField]);
 
 	return (
 		<div className={styles.container}>
