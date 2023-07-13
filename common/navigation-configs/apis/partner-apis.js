@@ -9431,6 +9431,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'get_segment_verification_stats',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
