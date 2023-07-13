@@ -1,0 +1,29 @@
+.container {
+	position: relative;
+	width: 228px;
+	height: 100px;
+	padding: 12px 8px;
+	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+}
+
+.flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.indicator {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 3px;
+
+	&.checkout {
+		color: green;
+	}
+}
+
+.rate_amount {
+	font-size: 16px;
+	font-weight: 600;
+}

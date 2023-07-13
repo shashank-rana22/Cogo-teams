@@ -3,9 +3,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 314px;
-	padding: 16px;
-	background-color: #fff;
-	border-radius: 8px;
 }
 
 .graph_container {

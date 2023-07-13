@@ -1,8 +1,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import { CUSTOM_DATA, CUSTOM_THEME } from '../../../../constants/line_chart_config';
-import { section_header } from '../styles.module.css';
+import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
@@ -15,7 +16,7 @@ const CONSTANT_HUNDRED = 100;
 
 function Accuracy() {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Accuracy with Time</h3>
 			<div className={styles.line_chart_container}>
 				<ResponsiveLine

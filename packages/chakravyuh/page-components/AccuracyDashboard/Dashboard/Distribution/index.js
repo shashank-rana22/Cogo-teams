@@ -3,7 +3,7 @@ import { cl } from '@cogoport/components';
 import React from 'react';
 
 import { CUMSTOM_DATA, CUSTOM_THEME } from '../../../../constants/pie_chart_config';
-import { section_header } from '../styles.module.css';
+import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ const CONSTANT_ZERO = 0;
 
 function Distribution() {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Distribution</h3>
 			<div className={styles.pie_chart_container}>
 				<div className={styles.pie_chart_left_container}>
