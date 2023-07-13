@@ -3,12 +3,16 @@ import { subtractDays } from '@cogoport/utils';
 
 const INDEX_VALUE = 1;
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
+const FIELD_TYPE_MAPPING = {};
 const dataExtractionFunc = (obj, index, arr) => {
 	if (index === (arr?.length || DEFAULT_VALUE_FOR_NULL_HANDLING) - INDEX_VALUE) {
 		if (obj === undefined) {
 			return undefined;
 		}
-		const returnValue = obj?.[arr?.[index]] ? new Date(obj?.[arr?.[index]]) : undefined;
+		let returnValue = obj?.[arr?.[index]];
+		if (returnValue && FIELD_TYPE_MAPPING[arr?.[index]] === 'datepicker') {
+			returnValue = new Date(obj?.[arr?.[index]]);
+		}
 		return returnValue;
 	}
 
@@ -106,6 +110,7 @@ const evaluateExpression = (operator, lhs, rhs) => {
 
 const evaluateObject = (control, task, shipment_data) => {
 	const finalControl = control;
+	FIELD_TYPE_MAPPING[control.name] = control.type;
 
 	if (control.conditions) {
 		(control.conditions || []).forEach((obj) => {
