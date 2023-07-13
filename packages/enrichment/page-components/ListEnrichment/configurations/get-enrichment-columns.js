@@ -115,6 +115,20 @@ const getEnrichmentColumns = ({
 		accessor : ({ organizations }) => <section>{organizations || '-'}</section>,
 	},
 	{
+		id       : 'requested_agent',
+		Header   : 'Agent',
+		accessor : ({ assigned_user = {} }) => (
+			<section
+				className={styles.value_container}
+			>
+				{startCase(assigned_user?.name || '___')}
+				<div className={styles.email_id}>{assigned_user?.email || '___'}</div>
+
+			</section>
+		),
+
+	},
+	{
 		id       : 'num_pocs',
 		Header   : 'POCS COUNT',
 		accessor : ({ num_pocs }) => <section>{num_pocs || '-'}</section>,

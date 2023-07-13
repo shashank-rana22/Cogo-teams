@@ -58,6 +58,7 @@ export default {
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
 		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		third_party_enrichment_agencies_rm_ids   : [],
 		cogoxpress_id                            : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
 		any_carrier_airline_id                   : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids                : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
@@ -555,15 +556,26 @@ export default {
 				],
 			},
 		},
+
 		enrichment: {
+			show_agent_data                       : false,
 			enrichment_response_source            : 'manual',
 			manual_enrichment                     : true,
 			allowed_to_create_enrichment_requests : false,
-			request_sent                          : {
-				tabs: [
-					'submitted_requests',
-					'uploaded_files',
-				],
+
+			enrichment_requests: {
+				columns: ['id', 'business_name', 'created_at', 'registration_number', 'action'],
+			},
+
+			request_sent: {
+				tabs               : ['submitted_requests', 'uploaded_files'],
+				submitted_requests : {
+					columns:	['id', 'business_name', 'created_at', 'registration_number', 'action'],
+				},
+				uploaded_files: {
+					columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
+				},
+
 			},
 		},
 		account_receivables: {

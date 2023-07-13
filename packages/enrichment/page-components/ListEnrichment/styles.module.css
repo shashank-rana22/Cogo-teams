@@ -20,6 +20,14 @@
 	text-overflow: ellipsis;
 }
 
+.value_container {
+	min-width: 200px;
+}
+
+.email_id {
+	color: #888fd1;
+}
+
 .link_text {
 	margin-left: 20px;
 	text-decoration: underline;

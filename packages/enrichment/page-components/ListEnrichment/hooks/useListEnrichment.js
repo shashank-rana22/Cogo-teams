@@ -1,4 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -8,6 +9,8 @@ import AUTH_KEY_MAPPING from '../../../constants/auth-key-mapping';
 import getEnrichmentColumns from '../configurations/get-enrichment-columns';
 
 import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
+
+const geo = getGeoConstants();
 
 const useListEnrichment = () => {
 	const router = useRouter();
@@ -35,6 +38,8 @@ const useListEnrichment = () => {
 
 	const [showUpload, setShowUpload] = useState(false);
 
+	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
+
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',
@@ -43,6 +48,7 @@ const useListEnrichment = () => {
 		filters    : {
 			q: searchQuery || undefined,
 			partner_id,
+			...(allowedToSeeAgentsData && { user_data_required: true }),
 
 		},
 	});

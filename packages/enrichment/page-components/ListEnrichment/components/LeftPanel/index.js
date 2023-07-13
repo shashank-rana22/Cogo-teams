@@ -1,5 +1,8 @@
-import { LIST_PRIMARY_COLUMNS_MAPPING } from '../../../../constants/table-columns-mapping';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import Enrichment from '../../common/Enrichment';
+
+const geo = getGeoConstants();
 
 function LeftPanel(props) {
 	const {
@@ -18,9 +21,9 @@ function LeftPanel(props) {
 		authRoleId,
 	} = props;
 
-	const filteredColumns = columns.filter(
-		(listItem) => LIST_PRIMARY_COLUMNS_MAPPING[activeTab]?.includes(listItem.id),
-	);
+	const allowedColumns = geo.navigations.enrichment.enrichment_requests.columns;
+
+	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 	return (
 		<Enrichment

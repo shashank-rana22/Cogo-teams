@@ -1,15 +1,20 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useState, useEffect } from 'react';
 
-import { LIST_SECONDARY_COLUMNS_MAPPING } from '../../../constants/table-columns-mapping';
+const geo = getGeoConstants();
 
 function useRightPanel({ activeTab, columns, setParams, setApiName }) {
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
 
 	let filteredColumns = [];
 
+	const allowedColumnsMapping = geo.navigations.enrichment.request_sent;
+
+	const allowedColumns = allowedColumnsMapping?.[secondaryTab]?.columns;
+
 	if (activeTab === 'requests_sent') {
 		// eslint-disable-next-line max-len
-		filteredColumns = columns.filter((listItem) => LIST_SECONDARY_COLUMNS_MAPPING[secondaryTab]?.includes(listItem.id));
+		filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 	}
 
 	useEffect(() => {
