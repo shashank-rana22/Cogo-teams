@@ -61,7 +61,7 @@ function CustomFileUploader(props, ref) {
 			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [multiple, urlStore]);
+	}, [urlStore]);
 
 	useEffect(() => {
 		handleProgress(loading);
