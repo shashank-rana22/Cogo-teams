@@ -10,6 +10,8 @@ export default function toastApiError(err) {
 			message = data.base;
 		} else if (data?.message) {
 			message = data.message;
+		} else if (data?.error) {
+			message = data.error;
 		}
 	} else if (msg) {
 		message = msg;
