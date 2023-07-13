@@ -85,7 +85,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	sales_admin: {
-		all_chats_base_query   : () => [where('agent_type', 'in', ['sales', 'bot'])],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['sales'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
@@ -206,7 +206,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	supply_admin: {
-		all_chats_base_query   : () => [where('agent_type', 'in', ['supply', 'bot'])],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['supply'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
