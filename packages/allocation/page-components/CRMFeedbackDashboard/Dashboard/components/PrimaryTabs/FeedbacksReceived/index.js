@@ -37,13 +37,12 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 			<Filters pageFilters={filters} onChangeFilters={onChangeFilters} activeTab={activeTab} />
 
 			<Statistics activeTab={activeTab} filters={filters} />
-			<div className={styles.header}>
 
-				<EnrichmentRequest
-					checkedRowsId={checkedRowsId}
-					setActiveTab={setActiveTab}
-				/>
-			</div>
+			<EnrichmentRequest
+				checkedRowsId={checkedRowsId}
+				setActiveTab={setActiveTab}
+			/>
+
 			<CrmTable columns={columns} data={data} loading={loading} />
 
 			<div className={styles.pagination_container}>
