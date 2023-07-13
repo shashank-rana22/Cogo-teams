@@ -59,3 +59,23 @@
 		rgb(0 0 0 / 25%) 0 0.125em 0.5em,
 		rgb(255 255 255 / 10%) 0 0 0 1px inset;
 }
+
+.watermark_flex {
+	position: relative;
+	top: 500px;
+	left: calc(50% - 100px);
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 100px;
+	margin-top: -92px;
+}
+
+.watermark_text {
+	align-items: center;
+	font-size: 80px;
+	font-weight: bold;
+	color: rgb(0 0 0 / 10%);
+	text-transform: uppercase;
+	letter-spacing: 4px;
+}

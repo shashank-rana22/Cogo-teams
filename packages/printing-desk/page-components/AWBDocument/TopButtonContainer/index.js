@@ -43,7 +43,7 @@ function TopButtonContainer({
 
 	const handleView = (download24) => {
 		if (documentState === 'document_accepted') {
-			html2canvas(document.getElementById('mawb')).then((canvas) => {
+			html2canvas(document.getElementById('awb')).then((canvas) => {
 				const imgData = canvas.toDataURL('image/jpeg');
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -80,7 +80,7 @@ function TopButtonContainer({
 				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		} else {
-			html2canvas(document.getElementById('mawb')).then((canvas) => {
+			html2canvas(document.getElementById('awb')).then((canvas) => {
 				const imgData = canvas.toDataURL('image/jpeg');
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();

@@ -3,7 +3,7 @@ import { useRequestAir } from '@cogoport/request';
 
 const useUpdateShipmentDocument = () => {
 	const [{ loading }, trigger] = useRequestAir({
-		url     : '/air-coe/documents',
+		url     : '/air-coe/documents/weight-amend',
 		method  : 'PUT',
 		authKey : 'put_air_coe_documents',
 	});

@@ -1,14 +1,12 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-magic-numbers */
-/* eslint-disable import/no-unresolved */
-import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails';
-import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails';
-import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails';
-import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails';
-import { cl, Button, Modal } from '@cogoport/components';
+import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails/index.tsx';
+import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails/index.tsx';
+import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails/index.tsx';
+import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails/index.tsx';
+import { cl, Button } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import React, { createRef, useState } from 'react';
 
+import Modal from '../../common/Modal';
 import { FOOTER_VALUES } from '../../constants/footer-values';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
@@ -16,6 +14,7 @@ import getFileObject from './getFileObject';
 import styles from './styles.module.css';
 import TopButtonContainer from './TopButtonContainer';
 import useGetMediaUrl from './useGetMediaUrl';
+import Watermark from './watermark';
 
 function AWBDocument({
 	item = {},
@@ -26,12 +25,12 @@ function AWBDocument({
 	edit = false,
 	setEdit = () => {},
 	setItem = () => {},
-	setEditCopies = () => {},
 	back = false,
 	setBack = () => {},
 }) {
 	const [whiteout, setWhiteout] = useState(false);
 	const [saveDocument, setSaveDocument] = useState(false);
+	const [editCopies, setEditCopies] = useState('');
 
 	const ref = createRef(null);
 
@@ -44,8 +43,8 @@ function AWBDocument({
 	};
 
 	const {
-		id, serialId = '', documentId, documentType = 'mawb', state, documentState, blDetailId,
-		serviceId, shipment_id: pendingShipmentId, shipmentId, serviceProviderId,
+		documentId, documentType = 'mawb', documentState,
+		serviceId, shipment_id: pendingShipmentId, shipmentId,
 	} = taskItem;
 
 	const { handleUpload } = useGetMediaUrl();
@@ -60,11 +59,10 @@ function AWBDocument({
 		return dataURI;
 	};
 
-	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
+	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('awb'));
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
-		console.log('newImage', newImage);
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
@@ -72,15 +70,15 @@ function AWBDocument({
 			shipment_id   : shipmentId || pendingShipmentId,
 			...formData,
 			document_type : category === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			service_id    : serviceId,
-			document_url  : res || undefined,
+			serviceId,
+			documentUrl   : res || undefined,
 		};
 
 		// const individualCopyPayload = {
 		// 	id,
 		// 	documentId   : docId,
 		// 	documentType : documentType === 'draft_airway_bill'
-		// 		? 'draft_airway_bill' : 'draft_house_airway_bill',
+		// 		? 'draftairway_bill' : 'draft_house_airway_bill',
 		// 	documentNumber,
 		// 	data: {
 		// 		...formData,
@@ -103,15 +101,11 @@ function AWBDocument({
 
 	return (
 		<div className={styles.file_container}>
-			<Modal
-				onClose={() => { setBack(false); setViewDoc(false); }}
-				show={back || viewDoc}
-				animate={false}
-				className={styles.modal_container}
-				scroll
-				placement="center"
-			>
-				<Modal.Body style={{ minHeight: '90vh' }}>
+			{(back || viewDoc) && (
+				<Modal
+					onClose={() => { setBack(false); setViewDoc(false); }}
+					style={{ width: '900px', height: '92vh' }}
+				>
 					<div className={styles.flex_col}>
 						{viewDoc && (
 							<TopButtonContainer
@@ -128,15 +122,13 @@ function AWBDocument({
 								setEditCopies={setEditCopies}
 							/>
 						)}
-
 						<div
 							className={cl`${styles.flex_col} ${styles.document}`}
-							id="mawb"
+							id="awb"
 							ref={ref}
 						>
-							{/* {((viewDoc && documentState !== 'document_accepted')
-							 || (!viewDoc && editCopies === null))
-			&& <Watermark text="draft" rotateAngle="315deg" />} */}
+							{((viewDoc && documentState !== 'document_accepted') || (!viewDoc && editCopies === ''))
+									&& <Watermark text="draft" rotateAngle="315deg" />}
 
 							<div style={{ position: 'relative' }}>
 								<ShipperConsigneeDetails
@@ -180,6 +172,7 @@ function AWBDocument({
 											onClick={() => {
 												if (back) {
 													setBack(!back);
+													setEdit(true);
 												}
 											}}
 											disabled={loading || saveDocument}
@@ -202,8 +195,8 @@ function AWBDocument({
 							</div>
 						)}
 					</div>
-				</Modal.Body>
-			</Modal>
+				</Modal>
+			)}
 		</div>
 	);
 }

@@ -82,7 +82,6 @@ function SelectDocumentCopies({
 					style={{ marginLeft: 'auto' }}
 				>
 					Download
-
 				</Button>
 			</div>
 		</div>

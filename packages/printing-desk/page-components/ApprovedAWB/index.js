@@ -1,12 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMEyeopen, IcMEdit, IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
 import { ApprovedAWBFields } from '../../configurations/approved_awb';
-// import GenerateManifestDoc from '../GenerateManifestDoc';
+import GenerateManifestDoc from '../GenerateManifestDoc';
 // import HAWBList from '../HawbList';
-// import UploadModal from '../UploadModal';
 
 import styles from './styles.module.css';
 
@@ -22,8 +21,6 @@ function ApprovedAWB({
 }) {
 	const [triggerManifest, setTriggerManifest] = useState(null);
 	const { fields } = ApprovedAWBFields;
-
-	console.log('showUpload', triggerManifest);
 
 	const handleDownloadMAWB = (singleItem) => {
 		setViewDoc(true);
@@ -109,14 +106,7 @@ function ApprovedAWB({
 				// setViewDoc={setViewDoc}
 				// setItem={setItem}
 			/>
-			{/* <UploadModal
-				showUpload={showUpload}
-				setShowUpload={setShowUpload}
-				listAPI={listAPI}
-				edit={edit}
-				setEdit={setEdit}
-			/> */}
-			{/* {triggerManifest && (
+			{triggerManifest && (
 				<Modal
 					show={triggerManifest}
 					onClose={() => { setTriggerManifest(false); }}
@@ -130,7 +120,7 @@ function ApprovedAWB({
 					</Modal.Body>
 
 				</Modal>
-			)} */}
+			)}
 		</>
 	);
 }

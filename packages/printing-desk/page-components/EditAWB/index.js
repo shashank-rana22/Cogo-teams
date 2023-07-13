@@ -16,6 +16,7 @@ function EditAWB({ item = {}, edit = false, setEdit = () => {} }) {
 	const onSubmit = (value) => {
 		setFormData(value);
 		setPreview(true);
+		setEdit(false);
 	};
 
 	useEffect(() => {
@@ -57,6 +58,7 @@ function EditAWB({ item = {}, edit = false, setEdit = () => {} }) {
 					formData={formData}
 					back={preview}
 					setBack={setPreview}
+					setEdit={setEdit}
 				/>
 			)}
 		</>

@@ -130,13 +130,11 @@ function PrintingDesk() {
 				/>
 			)}
 
-			{edit && (
-				<EditAWB
-					item={item}
-					edit={edit}
-					setEdit={setEdit}
-				/>
-			)}
+			<EditAWB
+				item={item}
+				edit={edit}
+				setEdit={setEdit}
+			/>
 		</div>
 	);
 }
