@@ -18,7 +18,7 @@ function ActionConfirmation({
 
 			<Modal.Footer>
 				<Button className={styles.cancel_button} themeType="secondary" onClick={onClose}>Cancel</Button>
-				<Button onClick={(e) => onSubmit(e)}>Submit</Button>
+				<Button onClick={onSubmit}>Submit</Button>
 			</Modal.Footer>
 		</Modal>
 	);
