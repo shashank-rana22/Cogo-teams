@@ -590,7 +590,6 @@ export default {
 			},
 			cogo_one: {
 				has_voice_call_access       : true,
-				default_country_code        : 'IN',
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
