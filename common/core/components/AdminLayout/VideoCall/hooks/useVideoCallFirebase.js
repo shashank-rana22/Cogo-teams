@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import {
 	addDoc,
 	collection,
@@ -26,6 +27,11 @@ function useVideoCallFirebase({
 	callComming,
 	inACall,
 }) {
+	const { user_data } = useSelector((state) => ({
+		user_data: state.profile.user,
+	}));
+	const { id: userId, name: userName } = user_data || {};
+
 	const saveWebrtcToken = async (data, path_id) => {
 		const WebrtcTokenRoomDoc = doc(
 			firestore,
@@ -136,15 +142,16 @@ function useVideoCallFirebase({
 				localPeerRef.current = peer;
 
 				peer.on('signal', (data) => {
-					saveWebrtcToken(data, '12345');
+					saveWebrtcToken({ user_token: data }, userId);
 					saveCallingData({
 						call_status : 'calling',
 						calling_by  : 'admin',
 						peer_detils : {
-							name      : 'Abhijit',
-							user_id   : 'yueriow2345789302',
-							user_type : 'partner',
+							name      : userName,
+							user_id   : userId,
+							user_type : 'admin',
 						},
+						webrtc_token_room_id: userId,
 					});
 					console.log(data, 'peer_data');
 				});

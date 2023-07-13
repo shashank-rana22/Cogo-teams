@@ -23,6 +23,7 @@ function VideoCall() {
 		peer_details    : null,
 		calling_details : null,
 		calling_room_id : null,
+		token_room_id   : null,
 	});
 	const [streams, setStreams] = useState({
 		user_stream   : null,
@@ -45,7 +46,7 @@ function VideoCall() {
 		call_screen  : null,
 	});
 
-	const { callingTo, callUpdate, callEnd, stopStream } = useVideoCallFirebase({
+	const { callingTo, callUpdate, callEnd, stopStream, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComming,
 		callComming,
@@ -58,11 +59,15 @@ function VideoCall() {
 		peerRef,
 	});
 	const { rejectOfCall, answerOfCall } = useCommingCall({
+		firestore,
+		setCallDetails,
+		callDetails,
 		setInACall,
 		setCallComming,
 		callUpdate,
 		setStreams,
 		peerRef,
+		saveWebrtcToken,
 	});
 
 	useEffect(() => {
