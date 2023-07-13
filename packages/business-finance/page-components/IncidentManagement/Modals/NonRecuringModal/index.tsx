@@ -12,7 +12,7 @@ import { toTitleCase } from '../../utils/titleCase';
 import { overheadsConfig } from './overheadsConfig';
 import styles from './style.module.css';
 
-function OverheadsModal({ id, refetch, row, isEditable = true }) {
+function NonRecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const [remarks, setRemarks] = useState('');
@@ -28,6 +28,8 @@ function OverheadsModal({ id, refetch, row, isEditable = true }) {
 		remarks: remarkData,
 		billCurrency: currency,
 		documents,
+		branchName,
+		categoryName,
 	} = overheadConfirmationRequest || {};
 
 	const { useOnAction: OnAction, loading } = usePostExpense({
@@ -83,6 +85,22 @@ function OverheadsModal({ id, refetch, row, isEditable = true }) {
 									>
 										{invoiceNumber || '-'}
 									</a>
+								</div>
+							</div>
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									Branch Name
+								</div>
+								<div className={styles.date_value}>
+									{branchName || '-'}
+								</div>
+							</div>
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									Category Name
+								</div>
+								<div className={styles.date_value}>
+									{categoryName || '-'}
 								</div>
 							</div>
 
@@ -238,4 +256,4 @@ function OverheadsModal({ id, refetch, row, isEditable = true }) {
 		</div>
 	);
 }
-export default OverheadsModal;
+export default NonRecuringModal;

@@ -4,8 +4,9 @@ import BankDetails from '../../Modals/BankDetails';
 import ConcorModal from '../../Modals/ConcorModal';
 import ICJVModal from '../../Modals/ICJV_Modal';
 import JvModal from '../../Modals/JvModal';
-import OverheadsModal from '../../Modals/OverheadsModal';
+import NonRecuringModal from '../../Modals/NonRecuringModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
+import RecuringModal from '../../Modals/RecuringModal';
 import RequestCN from '../../Modals/RequestCN';
 import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
@@ -26,7 +27,8 @@ const TYPE_COMPONENT_MAPPING = {
 	SEZ_APPROVAL                           : SezApproval,
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
-	OVERHEAD_APPROVAL                      : OverheadsModal,
+	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
+	OVERHEAD_APPROVAL                      : NonRecuringModal,
 };
 
 function AccessorComponent({ row, getIncidentData }) {
