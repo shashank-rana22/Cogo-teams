@@ -1,7 +1,7 @@
 import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect, ReactFragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
@@ -24,7 +24,7 @@ const options = [
 
 const DECIMAL_PLACE = 2;
 interface NestedObj {
-	[key: string]: ReactFragment ;
+	[key: string]: string | number ;
 }
 interface Props {
 	back: boolean;
@@ -36,8 +36,8 @@ interface Props {
 	setHawbDetails?: Function;
 	setActiveHawb?: Function;
 	setActiveKey?: (key: string) => void;
-	activeHawb?: NestedObj;
-	packingData?:NestedObj;
+	activeHawb?: { [key: string]: boolean | string };
+	packingData?:{ [key: string]: Array<string> | Array<URL> };
 	fields?:NestedObj;
 	control?:Function;
 	errors?:NestedObj;
@@ -48,7 +48,7 @@ interface Props {
 	category?: string;
 	activeKey?: string;
 	taskItem?: NestedObj;
-	formValues?: NestedObj;
+	formValues?: { [key: string]: Array<NestedObj> };
 	setCustomHawbNumber?: Function;
 	cogoSeriesNumber?: Array<number>
 }
@@ -151,9 +151,12 @@ function FormContainer({
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = Number((charge.chargeUnit * Number(formValues.chargeableWeight)).toFixed(DECIMAL_PLACE));
+				price = Number(
+					(Number(charge.chargeUnit) * Number(formValues.chargeableWeight))
+						.toFixed(DECIMAL_PLACE),
+				);
 			} else if (charge.chargeType === 'gross_wt') {
-				price = Number((Number(formValues.weight) * charge.chargeUnit).toFixed(DECIMAL_PLACE));
+				price = Number((Number(formValues.weight) * Number(charge.chargeUnit)).toFixed(DECIMAL_PLACE));
 			}
 			return { ...charge, price };
 		});

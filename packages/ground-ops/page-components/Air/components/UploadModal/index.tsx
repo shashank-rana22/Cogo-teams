@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMUpload } from '@cogoport/icons-react';
-import React, { ReactFragment } from 'react';
+import React from 'react';
 
 import Layout from '../../commons/Layout';
 import useCreateShipmentDocument from '../../hooks/useCreateShipmentDocument';
@@ -10,7 +10,7 @@ import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 import styles from './styles.module.css';
 
 interface NestedObj {
-	[key: string]: ReactFragment ;
+	[key: string]: string;
 }
 
 interface Props {
