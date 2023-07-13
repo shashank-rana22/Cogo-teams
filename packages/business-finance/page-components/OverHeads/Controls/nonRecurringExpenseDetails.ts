@@ -31,6 +31,7 @@ interface Props {
 	entityOptions: object[];
 	setEntityOptions: (obj: any) => void;
 	handleVendorChange?: (obj: any) => void;
+	handleCategoryChange?: (obj: any, val: object) => void;
 }
 
 const getMontOptions = (minMonth) => {
@@ -51,6 +52,7 @@ export const nonRecurringExpenseDetails = ({
 	entityList,
 	entityOptions,
 	handleVendorChange = () => {},
+	handleCategoryChange = () => {},
 }:Props) => {
 	const geo = getGeoConstants();
 	const LIST_ENTITIES_OPTIONS = geo.navigations.over_heads.region_specific_cogo_entities;
@@ -157,6 +159,7 @@ export const nonRecurringExpenseDetails = ({
 					valueKey    : 'id',
 					span        : 2.2,
 					className   : styles.select,
+					onChange    : (e, obj) => handleCategoryChange(e, obj),
 				},
 				{
 					name           : 'branch',

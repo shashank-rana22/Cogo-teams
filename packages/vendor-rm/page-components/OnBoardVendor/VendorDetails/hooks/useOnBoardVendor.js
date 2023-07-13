@@ -19,26 +19,23 @@ import useOnBlurTaxPanGstinControl from './useOnBlurTaxPanGstinControl';
 
 const SUPPORTED_COUNTRY_CODES = GLOBAL_CONSTANTS.platform_supported_country_codes;
 
+const GSTNUM_REG_LEN = 15;
+const OTHERS_REG_LEN = 10;
+
 function useOnBoardVendor({
-	setActiveStepper = () => {},
+	setActiveStepper = () => { },
 	vendorInformation = {},
-	setVendorInformation = () => {},
+	setVendorInformation = () => { },
 }) {
 	const { general: { query } } = useSelector((state) => state);
-
-	const { vendor_id, partner_id = '' } = query;
-
+	const { vendor_id } = query;
 	const router = useRouter();
-
 	const { vendor_details } = vendorInformation;
-
 	const isUpdateAction = !isEmpty(vendor_details);
-
 	const [{ loading }, triggerApi] = useRequest({
 		url    : isUpdateAction ? '/update_vendor' : '/create_vendor',
 		method : 'post',
 	}, { manual: true });
-
 	const {
 		control,
 		formState: { errors },
@@ -49,50 +46,38 @@ function useOnBoardVendor({
 		watch,
 		trigger,
 	} = useForm();
-
 	const watchForm = watch();
-
 	const { country_id, registration_number = {} } = watchForm;
-
 	const countrySpecificData = getCountrySpecificData({
 		country_id,
 		accessorType  : 'navigations',
 		accessor      : 'onboard_vendor',
 		isDefaultData : false,
 	});
-
 	const { validate_registration: isValidateRegistration = false } = countrySpecificData || {};
-
 	const countryData = getCountryDetails({ country_id });
-
 	const { country_code: countryCode } = countryData || {};
-
 	const fields = useMemo(() => getControls({
 		country_id,
 	}), [country_id]);
-
 	const {
 		onBlurTaxPanGstinControl,
 	} = useOnBlurTaxPanGstinControl({
 		setValue,
 		isValidateRegistration,
 	});
-
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
 			if (name === 'registration_number' && isValidateRegistration) {
 				const registrationDetails = value[name];
-
 				if (isEmpty(registrationDetails)) {
 					clearErrors('registration_number');
 				} else {
 					const { registrationType = '', registrationNumber = '' } = registrationDetails;
-
 					const is_valid = isRegistrationNumberValid({
 						registrationNumber: registrationNumber.toUpperCase(),
 						registrationType,
 					});
-
 					if (is_valid) {
 						clearErrors('registration_number');
 					} else {
@@ -101,15 +86,11 @@ function useOnBoardVendor({
 				}
 			}
 		});
-
 		return () => subscription.unsubscribe();
 	}, [clearErrors, trigger, watch, watchForm, isValidateRegistration]);
-
-	const newFields = [];
-
+	const NEW_FIELDS = [];
 	fields.forEach((field) => {
 		let newField = field;
-
 		if (field.name === 'registration_number') {
 			newField = {
 				...newField,
@@ -120,49 +101,42 @@ function useOnBoardVendor({
 					required : true,
 					validate : (value) => {
 						const { registrationType = '', registrationNumber = '' } = value || {};
-
 						if (!registrationNumber) {
 							return 'Registration Number is required';
 						}
-
 						if (SUPPORTED_COUNTRY_CODES.includes(countryCode)) {
 							if (!registrationType) {
 								return 'Registration Type is required';
 							}
-
 							if (
 								registrationType
-									&& registrationNumber
-									&& !isRegistrationNumberValid({
-										registrationType,
-										registrationNumber,
-									})
+								&& registrationNumber
+								&& !isRegistrationNumberValid({
+									registrationType,
+									registrationNumber,
+								})
 							) {
 								return `${registrationType?.toUpperCase()} is Invalid`;
 							}
 						}
-
 						return undefined;
 					},
 				},
 			};
-
 			if (isValidateRegistration) {
 				const {
 					registrationType: watchRegistartionType = '',
 					registrationNumber: watchRegistrationNumber = '',
 				} = watchForm.registration_number || {};
-
 				newField = {
 					...newField,
 					onBlur: () => onBlurTaxPanGstinControl({
 						registrationNumber : (watchRegistrationNumber || '').toUpperCase(),
 						registrationType   : watchRegistartionType || '',
 					}),
-					maxLength: watchRegistartionType === 'gstin' ? 15 : 10,
+					maxLength: watchRegistartionType === 'gstin' ? GSTNUM_REG_LEN : OTHERS_REG_LEN,
 				};
 			}
-
 			if (!isValidateRegistration) {
 				newField = {
 					...newField,
@@ -170,10 +144,8 @@ function useOnBoardVendor({
 				};
 			}
 		}
-
 		if (field.name === 'registration_proof_url') {
 			const { registrationType = '' } = registration_number;
-
 			if (registrationType) {
 				newField = {
 					...newField,
@@ -181,17 +153,14 @@ function useOnBoardVendor({
 				};
 			}
 		}
-
 		if (field.name === 'company_type') {
 			const companyTypeOptions = getCountryConstants({ country_id });
-
 			newField = {
 				...newField,
 				options: companyTypeOptions.options.registration_types,
 			};
 		}
-
-		newFields.push(newField);
+		NEW_FIELDS.push(newField);
 	});
 
 	const createVendor = async ({ data, step }) => {
@@ -207,17 +176,16 @@ function useOnBoardVendor({
 			registration_proof_url : registration_proof_url?.finalUrl,
 			registration_number    : registrationNo?.registrationNumber,
 			registration_type      : registrationNo?.registrationType,
-			cogo_entity_id         : partner_id,
 		};
 
 		try {
 			const res = await triggerApi({ data: { id: vendor_id, ...payload } });
 
 			if (!isUpdateAction) {
-				const href = '/onboard-vendor/[vendor_id]';
-				const as = `/onboard-vendor/${res.data.id}`;
+				const HREF = '/onboard-vendor/[vendor_id]';
+				const AS = `/onboard-vendor/${res.data.id}`;
 
-				router.push(href, as);
+				router.push(HREF, AS);
 			}
 			setVendorInformation((pv) => {
 				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
@@ -230,7 +198,6 @@ function useOnBoardVendor({
 					},
 				};
 			});
-
 			Toast.success(`Vendor ${isUpdateAction ? 'updated' : 'created'} successfully`);
 
 			setActiveStepper('contact_details');
@@ -248,23 +215,23 @@ function useOnBoardVendor({
 			if (field.name === 'registration_number') {
 				setValue(`${field.name}`, {
 					registrationNumber:
-					vendorDetails?.registration_number?.registrationNumber
-					|| vendorDetails?.registration_number,
+						vendorDetails?.registration_number?.registrationNumber
+						|| vendorDetails?.registration_number,
 					registrationType: vendorDetails?.registration_number?.registrationType
-					|| vendorDetails?.registration_type,
+						|| vendorDetails?.registration_type,
 				});
 			} else if (field.name === 'registration_proof_url') {
 				setValue(`${field.name}`, vendorDetails?.[field.name]
-				|| vendorDetails?.[field.name]?.finalUrl);
+					|| vendorDetails?.[field.name]?.finalUrl);
 			} else {
 				setValue(`${field.name}`, vendorDetails?.[field.name]);
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [setValue, vendorInformation]);
 
 	return {
-		fields: newFields,
+		fields: NEW_FIELDS,
 		control,
 		errors,
 		handleSubmit,

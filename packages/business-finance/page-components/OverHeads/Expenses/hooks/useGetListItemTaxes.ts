@@ -9,7 +9,6 @@ const useGetListItemTaxes = ({ formData }) => {
 			url     : '/common/tax/list-item-taxes',
 			method  : 'post',
 			authKey : 'post_common_tax_list_item_taxes',
-			scope   : 'stage',
 		},
 		{ manual: true },
 	);

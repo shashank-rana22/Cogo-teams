@@ -12,6 +12,12 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'list_cogo_entities',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'update_vendor',
 		access_type  : 'private',
 		feature      : 'vendor',

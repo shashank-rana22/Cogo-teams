@@ -38,6 +38,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		lineItemsList,
 		tradeParty,
 		remarks,
+		categoryName,
 	} = formData || {};
 
 	const {
@@ -176,6 +177,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		expenseType            : 'NON_RECURRING',
 		expenseConfigurationId : null,
 		remarks,
+		categoryName,
 	});
 
 	const submitData = async () => {
