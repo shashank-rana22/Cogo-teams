@@ -21,6 +21,7 @@ function AddCompanyModal({
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
 	shipment_id = '',
+	shipment_type = '',
 	importer_exporter_id = '',
 }) {
 	const formRef = useRef(null);
@@ -61,9 +62,15 @@ function AddCompanyModal({
 		createTrigger(params);
 	};
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
-	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL;
+	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL
+		&& shipment_type === 'ftl_freight';
 	return (
-		<Modal show={!isEmpty(addCompany)} placement="top" size="xl" onClose={onClose}>
+		<Modal
+			show={!isEmpty(addCompany)}
+			placement="top"
+			size={shipment_type === 'ftl_freight' ? 'xl' : 'lg'}
+			onClose={onClose}
+		>
 			<Modal.Header title="Add Company" />
 
 			<Modal.Body
@@ -108,6 +115,7 @@ function AddCompanyModal({
 							ref={formRef}
 							importer_exporter_id={importer_exporter_id}
 							shipment_id={shipment_id}
+							shipment_type={shipment_type}
 							organization_id={organization_id}
 							query={query}
 						/>

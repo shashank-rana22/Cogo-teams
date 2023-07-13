@@ -20,6 +20,7 @@ function DefaultForm({
 	importer_exporter_id = '',
 	organization_id = '',
 	query = '',
+	shipment_type = '',
 }, ref) {
 	const {
 		data:{ list = [] } = {},
@@ -30,7 +31,7 @@ function DefaultForm({
 		organization_id: organization_id || importer_exporter_id,
 		query,
 	});
-	const isShipper = tradePartyType === SHIPPER;
+	const isShipperFTL = tradePartyType === SHIPPER && shipment_type === 'ftl_freight';
 
 	const {
 		control,
@@ -99,7 +100,7 @@ function DefaultForm({
 									{Error('address')}
 								</div>
 							)}
-							{!isEmpty(formValues?.address) && isShipper
+							{!isEmpty(formValues?.address) && isShipperFTL
 							&& !isEmpty(pan_options[formValues.trade_party_id])
 								&&	 (
 									<div className={styles.form_item_container}>
@@ -116,7 +117,7 @@ function DefaultForm({
 										{Error('registration_number')}
 									</div>
 								)}
-							{!isEmpty(formValues?.address) && isShipper
+							{!isEmpty(formValues?.address) && isShipperFTL
 							&& !isEmpty(gstin_options[formValues.trade_party_id])
 								&& (
 									<div className={styles.form_item_container}>
