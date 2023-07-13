@@ -20,7 +20,7 @@ function VesselScheduele() {
 			<div className={styles.back_button} />
 			<Card vessel={data} />
 			<div className={styles.flex}>
-				<RouteDetails route={data?.vessel_schedule_link} finalRoute={finalRoute} setFinalRoute={setFinalRoute} />
+				<RouteDetails data={data} route={data?.vessel_schedule_link} finalRoute={finalRoute} setFinalRoute={setFinalRoute} />
 				<VesselScheduleMap data={data} />
 			</div>
 		</>

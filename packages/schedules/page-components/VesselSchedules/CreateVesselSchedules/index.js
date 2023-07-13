@@ -32,8 +32,11 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 		asyncFieldsLocations(),
 		{ params: { filters: { type: 'seaport' } } },
 	));
-
-	const fields = controls(no_of_ports, locationOptions, shippingLineOptions);
+	const terminalOptions = useGetAsyncOptions(merge(
+		asyncFieldsLocations(),
+		{ params: { filters: { type: 'seaport_terminal' } } },
+	));
+	const fields = controls(no_of_ports, locationOptions, shippingLineOptions, terminalOptions);
 	const { createSchedule } = useCreateVesselSchedules({ refetch: createRefetch });
 	return (
 		<Modal

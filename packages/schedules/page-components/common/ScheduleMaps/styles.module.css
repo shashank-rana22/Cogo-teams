@@ -1,6 +1,6 @@
 .map {
     z-index: 90 !important;
-    width: 1000px;
+    width: 700px;
     @media (max-width: 1465px) {
         width: 600px;
     }

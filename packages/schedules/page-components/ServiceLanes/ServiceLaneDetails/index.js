@@ -25,6 +25,7 @@ function ServiceLaneDetails() {
 					dayOfWeek={data?.[0]?.day_of_week || 10}
 					finalRoute={finalRoute}
 					setFinalRoute={setFinalRoute}
+					data={data}
 				/>
 				<ServiceLanesMap data={data} />
 			</div>

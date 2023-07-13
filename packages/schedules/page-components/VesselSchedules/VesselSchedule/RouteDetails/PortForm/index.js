@@ -7,17 +7,15 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PortForm({
-	isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
-}) {
-	const [arrival_date, setArrivalDate] = useState('');
-	const [departure_date, setDepartureDate] = useState('');
+function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete, setSubmit }) {
+	const [arrival_date, setArrivalDate] = useState(null);
+	const [departure_date, setDepartureDate] = useState(null);
 	const [port_name, setPortName] = useState('');
 
 	const options = useGetAsyncOptions(
 		merge(asyncFieldsLocations()),
 	);
-	const submit = { port_name, arrival_date, departure_date };
+
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -29,7 +27,7 @@ function PortForm({
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={setArrivalDate}
+								onChange={(value) => { setArrivalDate(value); setSubmit((prev) => ({ ...prev, eta: value })); }}
 								value={arrival_date}
 							/>
 						</div>
@@ -41,7 +39,7 @@ function PortForm({
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={setDepartureDate}
+								onChange={(value) => { setDepartureDate(value); setSubmit((prev) => ({ ...prev, etd: value })); }}
 								value={departure_date}
 							/>
 						</div>
@@ -58,7 +56,7 @@ function PortForm({
 					<Select
 						placeholder="Port Name"
 						{...options}
-						onChange={(value) => (setPortName(value))}
+						onChange={(value) => { setPortName(value); setSubmit((prev) => ({ ...prev, location_id: value })); }}
 						value={port_name}
 
 					/>
