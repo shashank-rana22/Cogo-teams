@@ -43,7 +43,7 @@ function useSendUserWhatsappTemplate({
 					country_code,
 					template_name,
 					viewType,
-					supplySenderNumber: geoConstants.others.navigations.cogo_one.supply_sender_number,
+					supplySenderNumber: geoConstants.others.navigations.cogo_one.supply_sender_mobile_number,
 				}),
 			});
 

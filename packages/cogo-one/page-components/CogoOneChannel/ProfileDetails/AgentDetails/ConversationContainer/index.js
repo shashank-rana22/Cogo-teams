@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import OtherChannelsConfig from '../../../../../configurations/other-channels-config';
+import otherChannelsConfig from '../../../../../configurations/other-channels-config';
 import hideDetails from '../../../../../utils/hideDetails';
 import CommunicationModal from '../CommunicationModal';
 
@@ -25,7 +25,7 @@ function ConversationContainer({
 	const { business_name = '' } = user_details || {};
 	const showLoader = loading || activeRoomLoading;
 
-	const modifiedOtherChannelsConfig = OtherChannelsConfig.map((eachRoomConfig) => {
+	const modifiedOtherChannelsConfig = otherChannelsConfig.map((eachRoomConfig) => {
 		const { id_name = '' } = eachRoomConfig || {};
 		return {
 			...eachRoomConfig, has_existing_room: id_name && (id_name in user_channel_ids),

@@ -22,7 +22,7 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const handleClick = ({ id, channel_type }) => {
-	const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 	Toast.success('Copied!!!');
 };
