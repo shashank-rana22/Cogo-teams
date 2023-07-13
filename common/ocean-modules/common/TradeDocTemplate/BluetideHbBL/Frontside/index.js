@@ -15,6 +15,8 @@ function Frontside({
 }) {
 	const isReadonly = mode === MODE_READ;
 
+	const { bl_number } = initialValues;
+
 	return isReadonly ? (
 		<Read defaultValues={initialValues} />
 	) : (
@@ -24,6 +26,7 @@ function Frontside({
 			setaddAnnexure={setaddAnnexure}
 			addAnnexure={addAnnexure}
 			watermark={watermark}
+			blNumber={bl_number}
 		/>
 	);
 }
