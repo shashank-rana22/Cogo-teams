@@ -22,12 +22,12 @@ function Templates({
 	viewType = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
+	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
 	} = data || {};
-
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
 
 	const { name, html_template, variables = [] } = activeCard?.data || {};
 

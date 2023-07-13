@@ -6,12 +6,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-const geo = getGeoConstants();
-
 const getPayload = ({
 	otherChannelRecipient, id, variables, formattedData,
 	isOtherChannels, type, template_name, ...restArgs
 }) => {
+	const geo = getGeoConstants();
+
 	const {
 		mobile_no = '',
 		user_name = 'user',
