@@ -38,11 +38,10 @@ function PerformanceRatingReview() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header_container}>
-				<div className={styles.header}>
-					Performance Rating Review
-				</div>
+			<div className={styles.header}>
+				Performance Rating Review
 			</div>
+
 			<div className={styles.select_row}>
 				<div className={styles.select_container}>
 					<Select

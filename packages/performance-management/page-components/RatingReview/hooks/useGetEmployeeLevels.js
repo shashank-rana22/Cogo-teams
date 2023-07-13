@@ -1,7 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useGetEmployeeLevels = () => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
@@ -24,6 +25,14 @@ const useGetEmployeeLevels = () => {
 		value : element,
 		label : startCase(element),
 	}));
+
+	const defaultOption = selectOptions?.[GLOBAL_CONSTANTS?.zeroth_index]?.value;
+
+	useEffect(() => {
+		if (!loading) {
+			setSelectValue(defaultOption);
+		}
+	}, [defaultOption, loading]);
 
 	return {
 		selectOptions,

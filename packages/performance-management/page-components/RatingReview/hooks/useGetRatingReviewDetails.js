@@ -37,10 +37,10 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 	}, [end_date, level, selectValue, start_date, trigger, user?.id]);
 
 	useEffect(() => {
-		if (selectValue) {
+		if (selectValue && selectCycle) {
 			fetchRatingReviewDetails();
 		}
-	}, [fetchRatingReviewDetails, selectValue]);
+	}, [fetchRatingReviewDetails, selectCycle, selectValue]);
 
 	return { data, loading };
 };

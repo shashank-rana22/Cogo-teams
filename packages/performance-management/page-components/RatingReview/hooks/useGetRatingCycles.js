@@ -1,11 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 const useGetRatingCycles = () => {
-	const [selectCycle, setSelectCycle] = useState('');
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
+	const [selectCycle, setSelectCycle] = useState('');
 
 	const [{ data, loading }] = useHarbourRequest({
 		url    : '/get_rating_cycles',
@@ -23,12 +23,13 @@ const useGetRatingCycles = () => {
 		};
 	});
 
+	const defaultOption = ratingCycleOptions?.[GLOBAL_CONSTANTS?.zeroth_index]?.value;
+
 	useEffect(() => {
-		console.log('ratingCycleOptions');
-		if (!loading && !isEmpty(ratingCycleOptions)) {
-			setSelectCycle(ratingCycleOptions?.[0]?.value);
+		if (!loading) {
+			setSelectCycle(defaultOption);
 		}
-	}, [loading, ratingCycleOptions]);
+	}, [defaultOption, loading]);
 
 	return {
 		ratingCycleOptions,
