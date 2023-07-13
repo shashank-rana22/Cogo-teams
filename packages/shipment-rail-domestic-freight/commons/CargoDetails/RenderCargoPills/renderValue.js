@@ -8,7 +8,7 @@ const ROUNDING_OFF_CONSTANT = 2;
 const VOLUMN_CONVERSION_CONSTANT = 166.67;
 const INCREMENT_CONSTANT = 1;
 
-export const renderValue = (label, detail) => {
+export const renderValue = (label, detail, overview) => {
 	const chargableWeight = Math.max(detail.volume * VOLUMN_CONVERSION_CONSTANT, detail?.weight);
 
 	const volume = ` ${detail.volume} cbm`;
@@ -56,12 +56,15 @@ export const renderValue = (label, detail) => {
 			if (!detail.containers_count) {
 				return null;
 			}
-
-			if (detail.containers_count === SINGULAR_CONSTANT) {
-				return '1';
+			if (overview) {
+				return detail.containers_count;
 			}
 
-			return `${detail.containers_count}`;
+			if (detail.containers_count === SINGULAR_CONSTANT) {
+				return '1 Container';
+			}
+
+			return `${detail.containers_count} Container`;
 		case 'packages_count':
 			if (!detail.packages_count) {
 				return null;

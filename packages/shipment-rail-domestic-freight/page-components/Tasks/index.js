@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 
@@ -26,6 +27,8 @@ function Tasks() {
 		setShowMyTasks = () => {},
 		selectedMail = [],
 		setSelectedMail = () => {},
+		show = false,
+		setShow = () => {},
 	} = useTask();
 
 	return (
@@ -41,9 +44,9 @@ function Tasks() {
 
 			{loading ? <LoadingState /> : null}
 
-			{tasksList?.length === 0 && !loading ? <EmptyState /> : null}
+			{tasksList?.length === GLOBAL_CONSTANTS.zeroth_index && !loading ? <EmptyState /> : null}
 
-			{tasksList?.length > 0 && !loading ? (
+			{tasksList?.length > GLOBAL_CONSTANTS.zeroth_index && !loading ? (
 				<>
 					{selectedTaskId ? (
 						<Button
@@ -62,6 +65,8 @@ function Tasks() {
 							task={task}
 							handleClick={handleClick}
 							refetch={taskListRefetch}
+							show={show}
+							setShow={setShow}
 						/>
 					)) }
 

@@ -18,6 +18,7 @@ const useTask = () => {
 	const [showMyTasks, setShowMyTasks] = useState(!!tasks.checked_show_my_tasks);
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters, setFilters] = useState({});
+	const [show, setShow] = useState(false);
 
 	const { data, loading, apiTrigger:taskListRefetch } = useListShipmentPendingTasks({
 		defaultFilters : { shipment_id: shipment_data.id },
@@ -36,6 +37,10 @@ const useTask = () => {
 		: (data?.list || []);
 
 	const handleClick = (task, newMails) => {
+		if (task.status === 'completed') {
+			setShow(true);
+			return;
+		}
 		if (newMails) {
 			setSelectedMail(newMails);
 		} else {
@@ -70,6 +75,8 @@ const useTask = () => {
 		tasksList,
 		completedTaskCount,
 		taskListRefetch,
+		show,
+		setShow,
 	};
 };
 
