@@ -10,7 +10,7 @@ const getCreateTradePartnerParams = (values) => {
 		importer_exporter_id,
 		organization_id,
 		companyType,
-		tax_number_document_url,
+		tax_number_document_url = '',
 		...restValues
 	} = values || {};
 
