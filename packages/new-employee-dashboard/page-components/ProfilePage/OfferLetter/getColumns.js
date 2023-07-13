@@ -7,9 +7,10 @@ import styles from './styles.module.css';
 import ViewCtcBreakup from './ViewCtcBreakup';
 
 const COLOR_MAPPING = {
-	accepted : '#82d682',
-	active   : '#F0EE8E',
+	accepted : '#CFEAEC',
+	active   : '#C4DB91',
 	approved : '#FAD1A5',
+	inactive : '#FFF2A9',
 };
 
 const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
@@ -48,7 +49,7 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 						view
 					</div>
 
-					{ viewCtcBreakupModal && (
+					{ item?.id === viewCtcBreakupModal?.id && (
 						<ViewCtcBreakup
 							viewCtcBreakupModal={viewCtcBreakupModal}
 							setViewCtcBreakupModal={setViewCtcBreakupModal}
@@ -64,7 +65,7 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 					{item?.status === 'rejected'
 						? (
 							<div style={{ display: 'flex' }}>
-								<div className={styles.status} style={{ backgroundColor: '#FFCBD0' }}>Rejected</div>
+								<div className={styles.status} style={{ backgroundColor: '#F8AEA8' }}>Rejected</div>
 								{' '}
 								-
 
