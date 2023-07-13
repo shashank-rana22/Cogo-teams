@@ -16,6 +16,7 @@ function CommunicationModals({
 	setModalType = () => {},
 	modalType = {},
 	userId = '',
+	viewType = '',
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -88,6 +89,7 @@ function CommunicationModals({
 			<NewWhatsappMessage
 				setModalType={setModalType}
 				modalType={modalType}
+				viewType={viewType}
 			/>
 
 			{!!buttonType && (
