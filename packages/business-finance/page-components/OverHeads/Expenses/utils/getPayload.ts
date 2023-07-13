@@ -74,8 +74,8 @@ const getPayload = ({
 				currencyCode        : invoiceCurrency,
 				lineItemAdditional  : {
 					taxPercent : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-					totalPrice : '',
-					tdsAmount  : lineItem?.tds,
+					tdsAmount  : lineItem?.tdsAmount,
+					tdsPercent : lineItem?.tds,
 				},
 				createdBy: profile?.user?.id,
 			};

@@ -12,10 +12,10 @@ import styles from './styles.module.css';
 import UploadInvoice from './UploadInvoice';
 
 interface Props {
-	showExpenseModal?:boolean,
-	setShowExpenseModal?:(p:any)=>void,
-	setShowWarning?:(p:any)=>void,
-	rowData?:SummaryInterface,
+	showExpenseModal?: boolean;
+	setShowExpenseModal?: (p: any) => void;
+	setShowWarning?: (p: any) => void;
+	rowData?: SummaryInterface;
 }
 
 function AddExpenseModal({
@@ -23,7 +23,7 @@ function AddExpenseModal({
 	setShowExpenseModal,
 	rowData,
 	setShowWarning = () => {},
-}:Props) {
+}: Props) {
 	const [mailModal, setMailModal] = useState(false);
 	const [expenseData, setExpenseData] = useState({});
 	const [modalView, setModalView] = useState('upload');
@@ -51,7 +51,7 @@ function AddExpenseModal({
 		if (tradePartyData?.length > 0) {
 			setExpenseData((p) => ({ ...p, tradeParty: tradePartyData[0] }));
 		}
-	}, [entityList, expenseData, tradePartyData]);
+	}, [entityList, tradePartyData]);
 
 	const handleClick = () => {
 		if (modalView === 'upload') {
@@ -90,24 +90,26 @@ function AddExpenseModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				{
-					modalView !== 'upload' && (
-						<Button
-							onClick={() => setModalView('upload')}
-							style={{ marginRight: '8px' }}
-						>
-							Go Back
-						</Button>
-					)
-				}
+				{modalView !== 'upload' && (
+					<Button
+						onClick={() => setModalView('upload')}
+						style={{ marginRight: '8px' }}
+					>
+						Go Back
+					</Button>
+				)}
 				<Button onClick={handleClick} disabled={!isFormValidated}>
 					{modalView === 'upload' ? 'Save & Next' : 'Request Email'}
 				</Button>
-
 			</Modal.Footer>
 
-			{mailModal 	&& (
-				<Modal size="lg" show={mailModal} onClose={() => setMailModal(false)} placement="top">
+			{mailModal && (
+				<Modal
+					size="lg"
+					show={mailModal}
+					onClose={() => setMailModal(false)}
+					placement="top"
+				>
 					<Modal.Header title="Request Email Preview" />
 					<Modal.Body className={styles.modal_body}>
 						<MailTemplate
