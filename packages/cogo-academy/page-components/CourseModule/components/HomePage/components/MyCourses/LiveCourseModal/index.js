@@ -20,14 +20,11 @@ function LiveCourseModal() {
 	} = useListCourseVideos();
 
 	const { total_count, page_limit } = paginationData || {};
-
 	const columns = getColumns({ onClickOpen });
 
 	return (
 		<div>
-
 			<StyledTable columns={columns} data={list} loading={loading} />
-
 			{total_count > page_limit ? (
 				<Pagination
 					type="table"
@@ -37,7 +34,6 @@ function LiveCourseModal() {
 					onPageChange={setPage}
 				/>
 			) : null}
-
 		</div>
 	);
 }

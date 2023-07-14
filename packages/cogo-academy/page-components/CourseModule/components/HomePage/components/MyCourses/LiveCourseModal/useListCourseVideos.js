@@ -16,12 +16,9 @@ function useListCourseVideos() {
 		try {
 			await trigger({
 				params: {
-					filters: {
-						status: 'active',
-					},
+					filters: { status: 'active' },
 					page,
 				},
-
 			});
 		} catch (error) {
 			Toast.error(error.message);

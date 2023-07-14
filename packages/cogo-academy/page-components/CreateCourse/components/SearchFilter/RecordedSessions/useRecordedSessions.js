@@ -49,8 +49,6 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 		if (showRecordedSession) fetch();
 	}, [fetch, showRecordedSession, page]);
 
-	const { list, ...paginationData } = data || {};
-
 	const onClickDelete = async (item) => {
 		try {
 			await deleteApiTrigger(
@@ -93,6 +91,8 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
 	};
+
+	const { list, ...paginationData } = data || {};
 
 	return {
 		list,
