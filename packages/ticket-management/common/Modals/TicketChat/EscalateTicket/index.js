@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function EscalateTicket({
 	ticketId = '', showEscalate = false, setShowEscalate = () => {},
-	updateTicketActivity = () => {},
+	updateTicketActivity = () => {}, updateLoading = false,
 }) {
 	const { control, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -67,7 +67,7 @@ function EscalateTicket({
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button size="md" type="submit">
+					<Button size="md" type="submit" loading={updateLoading}>
 						Submit
 					</Button>
 				</Modal.Footer>
