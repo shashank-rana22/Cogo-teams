@@ -34,10 +34,10 @@ function EmailClicked({ serviceData = {}, name = '', formattedData = {} }) {
 					{subject}
 				</div>
 
-				<div className={styles.subject_content}>
+				{/* <div className={styles.subject_content}>
 					I want to get rates for Nhava Sheva to Jebel Ali.
 					Can I get them asap?
-				</div>
+				</div> */}
 				<Button size="md" themeType="secondary" onClick={() => setPreviewModal(true)}>
 					<IcMEyeopen className={styles.eye_icon} />
 					Preview

@@ -5,7 +5,7 @@ const getShipmentActivityDetails = ({ serviceData = '', eventType = '' }) => {
 	const {
 		primary_service,
 		services,
-	} = serviceData || {};
+	} = serviceData?.detail || {};
 
 	const primaryService = Object.values(services || {}).find(
 		(service) => service?.service_type === primary_service || !service?.trade_type,

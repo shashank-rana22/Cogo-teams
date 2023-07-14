@@ -43,15 +43,11 @@ function Shipments({ serviceData = {}, eventType = '', name = '' }) {
 						height={30}
 					/>
 
-					<Tooltip
-						content={shippingLineName}
-						placement="bottom"
-					>
+					<Tooltip content={shippingLineName} placement="bottom">
 						<div className={styles.company_name}>
 							{shippingLineName}
 						</div>
 					</Tooltip>
-
 				</div>
 
 				<div className={styles.port_pair}>

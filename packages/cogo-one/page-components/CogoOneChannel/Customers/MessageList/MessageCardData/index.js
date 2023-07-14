@@ -30,6 +30,7 @@ function MessageCardData({
 	claimLoading = false,
 	viewType,
 }) {
+	console.log('item:', item);
 	const formattedData = getActiveCardDetails(item) || {};
 
 	const {

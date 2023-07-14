@@ -20,7 +20,6 @@ const ICON_MAPPING = {
 };
 
 function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
-	console.log('formattedData:', formattedData);
 	const {
 		name = '',
 		service_details: serviceData = {},
