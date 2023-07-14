@@ -1,4 +1,4 @@
-import { Button, cl, DateRangepicker, Select } from '@cogoport/components';
+import { Button, Checkbox, cl, DateRangepicker, Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { startCase, upperCase } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -110,6 +110,19 @@ function FilterBy({
 						size="sm"
 						isClearable
 					/>
+				</div>
+			) : null}
+
+			{possibleFilters?.includes('triggered_pending_invoices') ? (
+				<div className={styles.pending_invoice}>
+					<Checkbox
+						checked={popoverFilter?.triggered_pending_invoices}
+						onChange={() => setPopoverFilter({
+							...popoverFilter,
+							triggered_pending_invoices: !popoverFilter.triggered_pending_invoices,
+						})}
+					/>
+					<div className={styles.filter_heading}>Pending Invoices</div>
 				</div>
 			) : null}
 
