@@ -1,7 +1,9 @@
 import { Popover, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
@@ -20,15 +22,20 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 import getEditServiceDetails from './utils/getEditServiceDetails';
 
-const actionButtons = [
-	{ label: 'Edit Supplier', value: 'supplier_reallocation' },
-	{ label: 'Edit Truck Number', value: 'edit_truck_number' },
-	{ label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
-	{ label: 'Edit Driver Details', value: 'edit_driver_details' },
-	{ label: 'Verify Truck', value: 'verify_truck' },
-	{ label: 'Verify Driver', value: 'verify_driver' },
-	{ label: 'Cancel', value: 'cancel' },
-];
+const ACTION_BUTTON = {
+	supplier_reallocation:
+	{ label: 'Edit Supplier', value: 'supplier_reallocation', visibilityFunction: getCanEditSupplier },
+	edit_truck_number:
+	{ label: 'Edit Truck Number', value: 'edit_truck_number', visibilityFunction: getEditServiceDetails },
+	edit_eta_etd: { label: 'Edit ETA/ETD', value: 'edit_eta_etd', visibilityFunction: getEditServiceDetails },
+	edit_driver_details:
+	{ label: 'Edit Driver Details', value: 'edit_driver_details', visibilityFunction: getEditServiceDetails },
+	verify_truck  : { label: 'Verify Truck', value: 'verify_truck', visibilityFunction: getEditServiceDetails },
+	verify_driver : { label: 'Verify Driver', value: 'verify_driver', visibilityFunction: getEditServiceDetails },
+	cancel        : { label: 'Cancel', value: 'cancel', visibilityFunction: getCanCancelService },
+};
+
+const DEFAULT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
 export const getTrucklistWithId = (all_services) => {
 	const servicesList = (all_services || []).filter(
@@ -88,7 +95,7 @@ function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { state, trade_type, service_type } = serviceData?.[0] || {};
+	const { state, trade_type, service_type } = serviceData?.[DEFAULT_INDEX] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
@@ -100,29 +107,35 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[2].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[3].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[4].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[5].show = getEditServiceDetails({ state, activeStakeholder });
-	actionButtons[6].show = getCanCancelService({ state, activeStakeholder });
+	Object.entries(ACTION_BUTTON).forEach(([btnKey, butObj]) => {
+		ACTION_BUTTON[btnKey].show = butObj.visibilityFunction({ shipment_data, user_data, state, activeStakeholder });
+	});
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!Object.values(ACTION_BUTTON).some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<div
-			key={value}
-			role="button"
-			tabIndex={0}
-			className={styles.action_button}
-			onClick={() => openModal(value)}
-		>
-			{label}
-		</div>
-	) : null));
+	const truckList = getTrucklistWithId(serviceData);
+
+	const isTruckPresent =	!isEmpty(truckList || [])
+		&& !['cargo_dropped', 'completed'].includes(truckList?.[DEFAULT_INDEX]?.state);
+
+	const content = Object.values(ACTION_BUTTON).map((action) => {
+		const { label, value, show } = action || {};
+		return (
+			show ? (
+				<div
+					key={value}
+					role="button"
+					tabIndex={DEFAULT_INDEX}
+					className={styles.action_button}
+					onClick={() => openModal(value)}
+				>
+					{label}
+				</div>
+			) : null
+		);
+	});
 
 	return (
 		<div className={styles.container}>
@@ -133,7 +146,9 @@ function EditCancelService({ serviceData = {} }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
+				{!isTruckPresent
+					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
+					: null}
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
@@ -143,7 +158,7 @@ function EditCancelService({ serviceData = {} }) {
 			&& (
 				<VerifyTruck
 					setShow={setShowModal}
-					truckList={getTrucklistWithId(serviceData)}
+					truckList={truckList}
 				/>
 			)}
 
@@ -175,7 +190,7 @@ function EditCancelService({ serviceData = {} }) {
 							controls={EditTruckNumberControls}
 							heading="EDIT TRUCK NUMBER"
 							type="truck_number"
-							truckList={getTrucklistWithId(serviceData)}
+							truckList={truckList}
 							refetchServices={refetchServices}
 						/>
 					</Modal.Body>

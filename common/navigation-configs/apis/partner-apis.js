@@ -8596,6 +8596,12 @@ const partner = {
 			module      : 'invoices',
 			feature     : 'invoices',
 		},
+		{
+			api         : 'get_payments_report_ar_ledger',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 	],
 	compliance: [
 		{
@@ -9440,6 +9446,11 @@ const partner = {
 	],
 
 	campaign_dashboard: [
+		{
+			api          : 'get_segment_verification_stats',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
 		{
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
