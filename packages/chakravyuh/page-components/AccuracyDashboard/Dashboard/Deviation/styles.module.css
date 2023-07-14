@@ -1,4 +1,7 @@
 .container {
+	--positive-stroke-color: #cfbc93;
+	--negative-stroke-color: #888fd1;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -21,11 +24,44 @@
 		pointer-events: all;
 
 		rect[fill="url(#positive)"] {
-			stroke: #f2e3c3;
+			stroke: var(--positive-stroke-color);
 		}
 
 		rect[fill="url(#negative)"] {
-			stroke: #a4abf3;
+			stroke: var(--negative-stroke-color);
 		}
+	}
+}
+
+.legend {
+	display: flex;
+	gap: 12px;
+	padding: 4px 8px;
+	color: #828282;
+}
+
+.legend_item {
+	display: flex;
+	align-items: center;
+
+	p {
+		margin: 0;
+	}
+}
+
+.circle {
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	border-radius: 50%;
+
+	&.positive {
+		background: #fdfbf6;
+		border: 1px solid var(--positive-stroke-color);
+	}
+
+	&.negative {
+		background: #f2f3fa;
+		border: 1px solid var(--negative-stroke-color);
 	}
 }

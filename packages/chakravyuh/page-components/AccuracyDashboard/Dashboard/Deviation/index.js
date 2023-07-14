@@ -4,7 +4,7 @@ import { cl } from '@cogoport/components';
 import React from 'react';
 
 import CustomTooltip from '../../../../common/CustomTooltip';
-import { DUMMY_DATA, TOTAL_DEVIATION } from '../../../../constants/histogram_config';
+import { DUMMY_DATA, TOTAL_DEVIATION, DIMENSIONS } from '../../../../constants/histogram_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
@@ -21,21 +21,21 @@ function Deviation() {
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Deviation</h3>
+			<div className={styles.legend}>
+				{DIMENSIONS.map(({ id }) => (
+					<div className={styles.legend_item} key={id}>
+						<div className={cl`${styles.circle} ${styles[id]}`} />
+						<p>{`${id === 'negative' ? '-' : '+'}ve Deviated Rates`}</p>
+					</div>
+				))}
+
+			</div>
 			<div className={styles.graph_container}>
 				<ResponsiveMarimekko
 					data={DUMMY_DATA}
 					id="deviation"
 					value="participation"
-					dimensions={[
-						{
-							id    : 'negative',
-							value : 'countOfNegative',
-						},
-						{
-							id    : 'positive',
-							value : 'countOfPositive',
-						},
-					]}
+					dimensions={DIMENSIONS}
 					innerPadding={0}
 					outerPadding={-0.75}
 					axisTop={null}
@@ -50,7 +50,7 @@ function Deviation() {
 					borderWidth={0.5}
 					enableGridY={false}
 					enableGridX={false}
-					colors={['#F2F3FA', '#FDFBF6']}
+					colors={['#f2f3fa', '#FDFBF6']}
 					defs={[
 						{
 							id         : 'positive',

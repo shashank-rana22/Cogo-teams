@@ -1,12 +1,17 @@
 .container {
 	position: relative;
-	width: 228px;
+	display: flex;
+	flex-direction: column;
+	width: 180px;
 	height: 100px;
 	padding: 12px 8px;
-	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+	margin-left: 46px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(8 23 39 / 7.4%);
 }
 
-.flex-between {
+.flex_between {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
