@@ -62,8 +62,6 @@ function useOnBoardVendor({
 
 	const { entityList } = useListCogoEntities({});
 
-	console.log(entityList, 'entityList');
-
 	const entityOptions = (entityList || []).map((item) => ({
 		...item,
 		label : `${item?.entity_code}-${item?.business_name}`,

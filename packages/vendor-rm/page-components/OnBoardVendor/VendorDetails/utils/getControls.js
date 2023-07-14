@@ -74,7 +74,7 @@ const getControls = ({ country_id = '', entityOptions = '' }) => {
 			rules       : { required: 'City is Required' },
 		},
 		{
-			name           : 'cogoEntity',
+			name           : 'cogo_entity_id',
 			label          : 'Cogo Entity',
 			type           : 'select',
 			multiple       : false,

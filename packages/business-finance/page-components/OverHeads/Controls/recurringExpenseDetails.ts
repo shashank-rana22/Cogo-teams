@@ -33,10 +33,6 @@ interface Props {
 	handleCategoryChange:(obj:any, val:object)=>void,
 }
 
-interface Item {
-	country_id: string,
-}
-
 export const recurringExpenseDetails = ({
 	formData,
 	setFormData,
@@ -47,7 +43,6 @@ export const recurringExpenseDetails = ({
 	handleCategoryChange = () => {},
 }:Props) => {
 	const geo = getGeoConstants();
-	const LIST_ENTITIES_OPTIONS = geo.navigations.over_heads.region_specific_cogo_entities;
 	const handleEntityChange = (e:string | number) => {
 		const entityData = (entityList || []).filter((entityItem) => entityItem.id === e)?.[0];
 		setFormData({
@@ -55,13 +50,6 @@ export const recurringExpenseDetails = ({
 			entityObject: entityData,
 		});
 	};
-
-	const filterdOptions = entityOptions.filter((item: Item) => {
-		const { country_id: COUNTRY_ID } = item;
-		return (
-			LIST_ENTITIES_OPTIONS ? geo.country.id === COUNTRY_ID : true
-		);
-	});
 
 	return [
 		{
@@ -116,7 +104,7 @@ export const recurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Entity',
 					span           : 2.2,
-					options        : filterdOptions,
+					options        : entityOptions,
 					value          : formData?.entityObject?.id,
 					onChange       : (e:any) => handleEntityChange(e),
 					style          : { width: '164px' },
