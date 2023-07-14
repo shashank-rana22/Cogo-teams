@@ -10,8 +10,6 @@ import getEnrichmentColumns from '../configurations/get-enrichment-columns';
 
 import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
 
-const geo = getGeoConstants();
-
 const useEnrichmentDashboard = ({
 	primaryTab = 'manual_enrichment',
 	secondaryTab = 'active',
@@ -21,6 +19,8 @@ const useEnrichmentDashboard = ({
 	const { profile } = useSelector((state) => state || {});
 
 	const { onEnrichmentClick = () => {}, loadingComplete = false } = useFeedbackResponseSubmission();
+
+	const geo = getGeoConstants();
 
 	const {
 		partner: { id: partner_id },

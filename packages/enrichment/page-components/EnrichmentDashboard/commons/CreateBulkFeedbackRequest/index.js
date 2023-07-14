@@ -12,8 +12,6 @@ import useCreateBulkEnrichmentRequests from '../../hooks/useCreateBulkEnrichment
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {} }) {
 	const {
 		onCreateFeedback,
@@ -27,6 +25,8 @@ function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {}
 		setThirdParty,
 		setThirdPartyPayload = () => {},
 	} = useCreateBulkEnrichmentRequests({ refetch, refetchStats });
+
+	const geo = getGeoConstants();
 
 	const thirdPartyOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),

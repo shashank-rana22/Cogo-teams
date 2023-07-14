@@ -24,7 +24,7 @@ function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComple
 		<div className={styles.action_container}>
 
 			{Object.keys(CTA_MAPPING || {}).map((key) => {
-				const Icon = ICON_MAPPING[key];
+				const Icon = key ? ICON_MAPPING[key] : null;
 
 				return (
 					<Button

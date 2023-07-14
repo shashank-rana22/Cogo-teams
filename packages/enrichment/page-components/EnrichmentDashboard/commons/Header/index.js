@@ -8,8 +8,6 @@ import Filters from '../Filters';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function Header(props) {
 	const {
 		refetch = () => {},
@@ -23,6 +21,8 @@ function Header(props) {
 	} = props;
 
 	const { loading, onDownload } = useDownloadEnrichmentCsv();
+
+	const geo = getGeoConstants();
 
 	const allowedToCreateBulkRequest = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
 

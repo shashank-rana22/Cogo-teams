@@ -8,12 +8,12 @@ import useEnrichmentDashboard from './hooks/useEnrichmentDashboard';
 import styles from './styles.module.css';
 import PRIMARY_TABS_MAPPING from './utils/primary-tabs-mapping';
 
-const geo = getGeoConstants();
-
 function EnrichmentDashboard() {
 	const [primaryTab, setPrimaryTab] = useState('manual_enrichment');
 
 	const [secondaryTab, setSecondaryTab] = useState('active');
+
+	const geo = getGeoConstants();
 
 	const allowedTabs = geo.navigations.enrichment.tabs;
 	const tabOptions = Object.values(PRIMARY_TABS_MAPPING);

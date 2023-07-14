@@ -7,10 +7,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import getControls from '../utils/controls';
-
-const regionControls = ['country', 'state'];
-
-const geo = getGeoConstants();
+import getMutatedControls from '../utils/get-mutated-address-controls';
 
 const useAddAddressDetails = ({
 	setShowForm = () => {},
@@ -19,6 +16,8 @@ const useAddAddressDetails = ({
 	const router = useRouter();
 
 	const [addressData, setAddressData] = useState({});
+
+	const geo = getGeoConstants();
 
 	const {
 		control,
@@ -45,23 +44,7 @@ const useAddAddressDetails = ({
 		country_id, region_id,
 	});
 
-	const mutatedControls = controls.map((mutatedControl) => {
-		let newControl = { ...mutatedControl };
-
-		if (regionControls.includes(newControl.name)) {
-			newControl = {
-				...newControl,
-				onChange: (val, obj) => {
-					setAddressData((prev) => ({
-						...prev,
-						[newControl.name === 'country' ? 'country_id' : 'region_id']: obj?.id,
-					}));
-				},
-			};
-		}
-
-		return newControl;
-	});
+	const mutatedControls = getMutatedControls({ controls, setAddressData });
 
 	const onSubmit = async () => {
 		const values = getValues();

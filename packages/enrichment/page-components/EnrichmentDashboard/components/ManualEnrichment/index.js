@@ -9,8 +9,6 @@ import { getSecondaryTabOptions } from '../../utils/secondary-tabs-mapping';
 
 import EnrichmentStats from './components/EnrichmentStats';
 
-const geo = getGeoConstants();
-
 function ManualEnrichment(props) {
 	const {
 		refetch = () => {},
@@ -28,6 +26,8 @@ function ManualEnrichment(props) {
 		setSecondaryTab = () => {},
 		authRoleId = '',
 	} = props;
+
+	const geo = getGeoConstants();
 
 	const { stats = {}, loading: loadingStats = false, refetchStats = () => {} } = useEnrichmentStats();
 

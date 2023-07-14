@@ -3,9 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import workScopes from '../../../../../../utils/work-scopes.json';
 
-const geo = getGeoConstants();
-
 const getControls = () => {
+	const geo = getGeoConstants();
+
 	const controls = [
 		{
 			name        : 'name',
@@ -66,9 +66,7 @@ const getControls = () => {
 			style       : { flexBasis: '42%' },
 			rules       : { required: false },
 			options     : workScopes,
-
 		},
-
 	];
 
 	return controls;

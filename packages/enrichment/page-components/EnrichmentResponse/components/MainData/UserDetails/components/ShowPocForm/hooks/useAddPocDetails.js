@@ -7,8 +7,6 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import getControls from '../utils/controls';
 
-const geo = getGeoConstants();
-
 const getByKey = (obj, key) => (obj && obj[key]) || undefined;
 
 const useAddPocDetails = ({
@@ -23,6 +21,8 @@ const useAddPocDetails = ({
 		handleSubmit,
 		getValues,
 	} = useForm();
+
+	const geo = getGeoConstants();
 
 	const controls = getControls();
 
