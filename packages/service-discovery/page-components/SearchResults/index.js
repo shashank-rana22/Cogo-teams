@@ -37,7 +37,7 @@ function SearchResults() {
 		selectedCard,
 	} = useGetSpotSearch();
 
-	const { detail = {}, rates = [] } = data || {};
+	const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -65,6 +65,7 @@ function SearchResults() {
 			setHeaderProps,
 			refetchSearch,
 			screen,
+			possible_subsidiary_services,
 		},
 		comparison: {
 			setScreen,
@@ -96,7 +97,7 @@ function SearchResults() {
 		);
 	};
 
-	if (loading) {
+	if (loading && isEmpty(data)) {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>

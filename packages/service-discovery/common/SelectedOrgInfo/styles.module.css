@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	max-width: 30%;
-	height: 100%;
 	padding: 16px 24px;
 	margin-right: 24px;
 	margin-left: -24px;
@@ -40,7 +39,9 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: #000;
+	text-overflow: ellipsis;
 	text-transform: capitalize;
+	white-space: nowrap;
 
 	&.light {
 		color: #000;

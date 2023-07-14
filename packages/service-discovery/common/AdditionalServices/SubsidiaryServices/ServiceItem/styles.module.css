@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	align-items: center;
+	max-width: fit-content;
+	padding: 8px 12px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #ebebeb;
+	border-radius: 44px;
+
+	:global {
+		.ui_loader {
+			margin: 0 0 0 12px;
+		}
+	}
+}
+
+.tooltip_content {
+	word-break: keep-all;
+}
+
+.text {
+	width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.selected_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.add_icon {
+	margin-left: 12px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #221f20;
+	border-radius: 50%;
+}
+
+.tick_icon {
+	margin-left: 12px;
+	color: #ee3425;
+	cursor: pointer;
+}
+
+.disabled {
+	pointer-events: none;
+	cursor: not-allowed;
+}

@@ -6,9 +6,7 @@ const useGetKamPromotionStats = () => {
 		url    : '/get_kam_promotion_stats',
 	}, { manual: false });
 
-	const getPromoStats = async () => {
-		await trigger();
-	};
+	const getPromoStats = () => { trigger(); };
 
 	return {
 		loading,

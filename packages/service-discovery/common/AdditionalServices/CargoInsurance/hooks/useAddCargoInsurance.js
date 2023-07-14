@@ -60,8 +60,10 @@ const useAddCargoInsurance = ({
 			setDone(true);
 			setAddCargoInsurance(false);
 			refetch();
-		} catch (err) {
-			Toast.error(getApiErrorString(err.data));
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 

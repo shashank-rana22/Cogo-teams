@@ -1,4 +1,5 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 // eslint-disable-next-line max-len
@@ -53,7 +54,7 @@ function Header({
 						<SearchDetails
 							data={data}
 							service_key={service_key}
-							loading={loading}
+							loading={loading && isEmpty(data)}
 							setHeaderProps={setHeaderProps}
 							platformTheme={platformTheme}
 							showAdditionalHeader={showAdditionalHeader}
@@ -66,7 +67,7 @@ function Header({
 						<LoadOverview
 							data={data}
 							service_key={service_key}
-							loading={loading}
+							loading={loading && isEmpty(data)}
 							activePage={rest.activePage}
 							isEditable={isAllowedToEdit}
 						/>

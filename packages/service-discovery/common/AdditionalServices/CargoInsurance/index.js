@@ -40,7 +40,7 @@ function CargoInsurance({
 
 	const cargoInsuranceCountryId = trade_type === 'export' ? destination_country_id : origin_country_id;
 
-	const { isEligible, loading: apiLoading } = useGetInsuranceCountrySupported(cargoInsuranceCountryId);
+	const { isEligible, loading: countrySupportedLoading } = useGetInsuranceCountrySupported(cargoInsuranceCountryId);
 
 	const { list = [] } = useGetInsuranceListCommodities();
 
@@ -157,10 +157,15 @@ function CargoInsurance({
 
 	const getComponent = () => {
 		let key = 'allowed';
-		if (apiLoading) key = 'loading';
-		if (!isEligible) key = 'not_eligible';
-		if (!is_applicable) key = 'not_applicable';
-		if (!allowCargoInsurance) key = 'not_allowed';
+		if (countrySupportedLoading) {
+			key = 'loading';
+		} else if (!isEligible) {
+			key = 'not_eligible';
+		} else if (!is_applicable) {
+			key = 'not_applicable';
+		} else if (!allowCargoInsurance) {
+			key = 'not_allowed';
+		}
 		return key;
 	};
 
@@ -204,6 +209,7 @@ function CargoInsurance({
 					</Button>
 				</Modal.Footer>
 			) : null}
+
 		</Modal>
 	);
 }

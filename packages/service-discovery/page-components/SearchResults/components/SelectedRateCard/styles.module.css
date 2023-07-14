@@ -25,28 +25,37 @@
 	justify-content: space-between;
 }
 
-.additionalServices {
+.additional_services {
 	width: 80%;
-
-	/* border: 1px solid #000; */
 	margin-right: 20px;
 	margin-left: 33px;
+}
+
+.subsidiary_services {
+	padding: 36px 0;
+	margin: 36px 0;
+	border-top: 1px dashed #dcdde5;
+}
+
+.subsidiary_heading {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
 }
 
 .service_bundling {
 	width: 30%;
 	margin-right: 33px;
-
-	/* border: 1px solid #000; */
 	margin-left: 20px;
 }
 
-.proceedContainer {
+.proceed_container {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 20px;
 }
 
-.proceedBotton {
+.proceed_button {
 	width: 200px;
 }

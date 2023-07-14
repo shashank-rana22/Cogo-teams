@@ -112,20 +112,26 @@ const useGetSpotSearch = () => {
 	}, [getSearch]);
 
 	const refetch = async ({ screenObj = {} } = {}) => {
-		const res = await trigger({
-			params: {
-				id     : spot_search_id,
-				intent : 'discovery',
-				importer_exporter_id,
-			},
-		});
+		try {
+			const res = await trigger({
+				params: {
+					id     : spot_search_id,
+					intent : 'discovery',
+					importer_exporter_id,
+				},
+			});
 
-		setScreen(screenObj?.screen || 'listRateCard');
+			setScreen(screenObj?.screen || 'listRateCard');
 
-		if (screenObj?.screen === 'selectedCard') {
-			setSelectedCard(res.data.rates.filter(
-				(item) => item.card === screenObj?.card_id,
-			)?.[GLOBAL_CONSTANTS.zeroth_index]);
+			if (screenObj?.screen === 'selectedCard') {
+				setSelectedCard(res.data.rates.filter(
+					(item) => item.card === screenObj?.card_id,
+				)?.[GLOBAL_CONSTANTS.zeroth_index]);
+			}
+		} catch (error) {
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 

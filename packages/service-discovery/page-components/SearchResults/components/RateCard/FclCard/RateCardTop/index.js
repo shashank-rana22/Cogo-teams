@@ -22,7 +22,7 @@ const LIKE_DISLIKE_ALLOWED = [
 	'trailer_freight',
 ];
 
-function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {} }) {
+function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {}, isSelectedCard }) {
 	const { shipping_line = {}, card } = rateCardData;
 
 	const [isChecked, setIsChecked] = useState(false);
@@ -47,12 +47,14 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 		<div className={styles.container}>
 			<div className={styles.container}>
 
-				<Checkbox
-					checked={isChecked}
-					onChange={() => {
-						setIsChecked(!isChecked);
-					}}
-				/>
+				{isSelectedCard ? null : (
+					<Checkbox
+						checked={isChecked}
+						onChange={() => {
+							setIsChecked(!isChecked);
+						}}
+					/>
+				)}
 
 				<img
 					src={shipping_line?.logo_url}

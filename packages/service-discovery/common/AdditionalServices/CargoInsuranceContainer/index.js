@@ -1,9 +1,10 @@
-import { IcCFtick, IcMPlus } from '@cogoport/icons-react';
+import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import CargoInsurance from '../../common/CargoInsurance';
+import CargoInsurance from '../CargoInsurance';
+import useDeleteCargoInsurance from '../CargoInsurance/hooks/useDeleteCargoInsurance';
+import DeleteServiceModal from '../DeleteServiceModal';
 
-import DeleteModal from './DeleteModal';
 import styles from './styles.module.css';
 
 const isCargoInsurancePresent = (services) => {
@@ -13,11 +14,16 @@ const isCargoInsurancePresent = (services) => {
 	return isAlreadyPresent;
 };
 
-function CargoInsuranceContainer({ data = {}, refetch = () => {}, card_id = '' }) {
+function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
+	const [showModal, setShowModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
+
 	const primary_service = data?.search_type || data?.primary_service;
 
 	const {
 		spot_search_id = '',
+		checkout_id = '',
 		service_details = {},
 		importer_exporter_id = '',
 		trade_type = '',
@@ -25,11 +31,17 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, card_id = '' }
 		user_id = '',
 	} = data || {};
 
+	const { loading, handleDelete } = useDeleteCargoInsurance({
+		service_details,
+		checkout_id,
+		spot_search_id,
+		setShow: setShowDeleteModal,
+		refetch,
+	});
+
 	const isCargoInsuranceAlreadyTaken = isCargoInsurancePresent(service_details);
 
 	const [isSelected, setIsSelected] = useState(isCargoInsuranceAlreadyTaken);
-	const [showModal, setShowModal] = useState(false);
-	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const primaryServiceDetails = Object.values(service_details || {}).find(
 		(item) => item.service_type === primary_service,
@@ -39,16 +51,13 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, card_id = '' }
 
 	const { destination_country_id = '', origin_country_id = '' } = primaryServiceDetails || {};
 
-	const refetchSearch = () => refetch({
-		screenObj: {
-			screen: 'selectedCard',
-			card_id,
-		},
-	});
+	const onClickDelete = async () => { await handleDelete(); };
 
-	const handleDelete = () => {
-		setShowDeleteModal(true);
-	};
+	const handleMouseEnter = () => { setIsHovered(true); };
+
+	const handleMouseLeave = () => { setIsHovered(false); };
+
+	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
 	return (
 		<div className={styles.container}>
@@ -70,12 +79,18 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, card_id = '' }
 					<div className={styles.starting_at_price}>Starting at $0.25/km</div>
 
 					{isSelected ? (
-						<IcCFtick
-							height={25}
-							width={25}
-							className={styles.tick_icon}
-							onClick={handleDelete}
-						/>
+						<div
+							className={styles.selected_icon}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
+						>
+							<SelectedIcon
+								height={25}
+								width={25}
+								className={styles.tick_icon}
+								onClick={() => setShowDeleteModal(true)}
+							/>
+						</div>
 					) : (
 						<IcMPlus
 							height={22}
@@ -97,19 +112,22 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, card_id = '' }
 					user_id={user_id}
 					service_type={service_type}
 					spot_search_id={spot_search_id}
-					refetch={refetchSearch}
+					refetch={refetch}
 					importer_exporter={importer_exporter}
 					addCargoInsurance={showModal}
 					setAddCargoInsurance={setShowModal}
 					setDone={setIsSelected}
+					service_details={service_details}
 				/>
 			)}
 
 			{showDeleteModal ? (
-				<DeleteModal
+				<DeleteServiceModal
 					show={showDeleteModal}
 					setShow={setShowDeleteModal}
-					service={{}}
+					service_name="cargo_insurance"
+					onClick={onClickDelete}
+					loading={loading}
 				/>
 			) : null}
 		</div>

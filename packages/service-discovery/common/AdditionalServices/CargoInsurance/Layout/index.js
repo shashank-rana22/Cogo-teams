@@ -1,7 +1,7 @@
 import React from 'react';
 
-import getElementController from '../../../../../configs/getElementController';
-import getErrorMessage from '../../../../../configs/getErrorMessage';
+import getElementController from '../../../../configs/getElementController';
+import getErrorMessage from '../../../../configs/getErrorMessage';
 
 import styles from './styles.module.css';
 
@@ -18,37 +18,6 @@ function Layout({ controls = [], control, errors = {} }) {
 				const { label, type, name, span } = newControl;
 
 				const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
-
-				// if (type === 'field-array') {
-				// 	return (
-				// 		<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
-				// 			<FieldArray
-				// 				{...newControl}
-				// 				control={control}
-				// 				watch={watch}
-				// 				handleSubmit={handleSubmit}
-				// 				error={errors?.[name]}
-				// 				setValue={setValue}
-				// 			/>
-				// 		</div>
-				// 	);
-				// }
-
-				// if (rest.optionsListKey) {
-				// 	const finalOptions = getOptions(rest.optionsListKey, type);
-
-				// 	newControl = { ...newControl, options: finalOptions };
-				// }
-
-				// if (rest.commodityType) {
-				// 	const containerType = watch('container_type');
-
-				// 	const keyOptions = getCommodityList(rest.commodityType, containerType || null);
-
-				// 	const finalOptions = keyOptions;
-
-				// 	newControl = { ...newControl, options: finalOptions };
-				// }
 
 				const Element = getElementController(type);
 

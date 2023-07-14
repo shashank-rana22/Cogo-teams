@@ -55,6 +55,7 @@ function FclCard({
 					detail={detail}
 					setComparisonCheckbox={setComparisonCheckbox}
 					comparisonCheckbox={comparisonCheckbox}
+					isSelectedCard={isSelectedCard}
 				/>
 			</div>
 

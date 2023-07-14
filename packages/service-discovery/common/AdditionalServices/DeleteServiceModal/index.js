@@ -2,7 +2,14 @@ import { Modal, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-function DeleteModal({ show = false, setShow = () => {}, service = {}, ...rest }) {
+function DeleteServiceModal({
+	show = false,
+	setShow = () => {},
+	service = {},
+	loading = false,
+	onClick = () => {},
+	...rest
+}) {
 	return (
 		<Modal
 			size={rest.size || 'sm'}
@@ -10,13 +17,16 @@ function DeleteModal({ show = false, setShow = () => {}, service = {}, ...rest }
 			onClose={() => setShow(false)}
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title={`Are you sure you want to delete ${startCase(rest.service_name || service.name)}`} />
+			<Modal.Header title={`Are you sure you want to delete 
+			${startCase(rest.service_name || service.label || service.name)}`}
+			/>
 
 			<Modal.Footer>
 				<Button
 					type="button"
 					themeType="primary"
 					onClick={() => setShow(false)}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
@@ -25,6 +35,9 @@ function DeleteModal({ show = false, setShow = () => {}, service = {}, ...rest }
 					type="button"
 					style={{ marginLeft: 12 }}
 					themeType="secondary"
+					disabled={loading}
+					loading={loading}
+					onClick={onClick}
 				>
 					Delete
 				</Button>
@@ -33,4 +46,4 @@ function DeleteModal({ show = false, setShow = () => {}, service = {}, ...rest }
 	);
 }
 
-export default DeleteModal;
+export default DeleteServiceModal;

@@ -1,4 +1,3 @@
-/* eslint-disable custom-rules/custom-rules-matching */
 import { Select } from '@cogoport/components';
 import { IcCFtick, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -159,8 +158,6 @@ function AdditionalServices({
 			shipperSideServices.push(item);
 		}
 	});
-
-	console.log('refctch hua kya', rateCardData);
 
 	return (
 		<>
