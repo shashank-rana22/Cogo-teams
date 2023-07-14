@@ -17,6 +17,7 @@ function DatepickerController(props) {
 			render={({ field: { onChange, onBlur, value:newValue } }) => (
 				<Datepicker
 					disable={rest?.disabled || false}
+					showTimeSelect={rest?.withTimePicker || false}
 					{...rest}
 					dateFormat={rest?.dateFormat}
 					key={name}
@@ -25,7 +26,6 @@ function DatepickerController(props) {
 					value={newValue}
 					onBlur={onBlur}
 					data-test-value={value}
-					showTimeSelect={rest?.withTimePicker || false}
 				/>
 			)}
 		/>

@@ -59,8 +59,8 @@ function UploadIndent({
 			if (typeof documentItem?.url === 'object') {
 				return {
 					document_type : 'indent',
-					document_url  : documentItem?.url?.fileUrl,
-					file_name     : documentItem?.url?.finalName,
+					document_url  : documentItem?.url?.finalUrl,
+					file_name     : documentItem?.url?.fileName,
 					data          : {
 						url         : documentItem?.url?.finalUrl,
 						description : documentItem?.description,
