@@ -92,6 +92,7 @@ function useHandleSubmit({
 				rawValues,
 				finalConfig?.end_point,
 				task,
+				getApisData,
 			);
 
 			finalPayload = {
