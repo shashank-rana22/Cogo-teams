@@ -72,7 +72,7 @@ const useDraftBLHelper = ({
 				uploaded_by_org_id : pendingTask?.organization_id,
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
-				service_type       : pendingTask.service_type,
+				service_type       : pendingTask?.service_type,
 				pending_task_id    : pendingTask?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
@@ -91,9 +91,9 @@ const useDraftBLHelper = ({
 
 			try {
 				const rpaMappings = {
-					cogo_shipment_id        : pendingTask.shipment_id,
+					cogo_shipment_id        : pendingTask?.shipment_id,
 					cogo_shipment_serial_no : shipment_data?.serial_id,
-					bill_of_lading          : body.documents[GLOBAL_CONSTANTS.zeroth_index].data.document_number,
+					bill_of_lading          : body?.documents[GLOBAL_CONSTANTS.zeroth_index]?.data?.document_number,
 				};
 
 				await submitShipmentMapping(rpaMappings);
