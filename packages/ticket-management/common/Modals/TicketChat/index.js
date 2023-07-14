@@ -5,9 +5,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
 import ReassignTicket from '../../ReassignTicket';
 
 import ChatBody from './ChatBody';
+import EscalateTicket from './EscalateTicket';
 import FooterChat from './FooterChat';
 import ModalHeader from './ModalHeader';
 import styles from './styles.module.css';
@@ -16,28 +18,32 @@ import TicketSummary from './TicketSummary';
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 const DEFAULT_TICKET_ACTIVITY = 0;
+const RESOLVED_CHECK = ['closed', 'overdue'];
 
 const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 	if (!doesTicketsExists) {
 		return '100%';
 	}
-	if (['closed', 'rejected'].includes(status)) {
+	if (RESOLVED_CHECK.includes(status)) {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 55px)';
+		return 'calc(100% - 82px)';
 	}
 	return 'calc(100% - 75px)';
 };
 
 function TicketChat({
-	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
-	setShowReassign = () => {},
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
 }) {
+	const { ticketId = '' } = modalData || {};
+
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [showEscalate, setShowEscalate] = useState(false);
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
@@ -57,14 +63,11 @@ function TicketChat({
 		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
-	const {
-		Ticket: ticket = {}, IsClosureAuthorizer: isClosureAuthorizer = false,
-	} = ticketData || {};
-
-	const { Status: status = '' } = ticket || {};
+	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
 
 	const {
 		listData = {},
@@ -72,7 +75,7 @@ function TicketChat({
 		getTicketActivity = () => {},
 		setListData = () => {},
 	} = useGetTicketActivity({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
 	const isEmptyChat = isEmpty(listData?.items);
@@ -83,16 +86,21 @@ function TicketChat({
 			page        : 0,
 			total_pages : 0,
 		});
-		getTicketDetails();
+		getTicketDetails(ticketId);
 		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
 
 		setIsUpdated(true);
 	};
 
 	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 		refreshTickets,
 		scrollToBottom,
+		isInternal,
+	});
+
+	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
+		refreshTickets,
 	});
 
 	const doesTicketsExists = !isEmpty(ticketData);
@@ -131,9 +139,11 @@ function TicketChat({
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
+						updateLoading={updateLoading}
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
-						isClosureAuthorizer={isClosureAuthorizer}
+						setShowEscalate={setShowEscalate}
+						updateTicketActivity={updateTicketActivity}
 					/>
 				)}
 			/>
@@ -161,9 +171,8 @@ function TicketChat({
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{doesTicketsExists && (
-					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
-						{!['closed', 'rejected'].includes(status)
+
+				{(doesTicketsExists && isCurrentReviewer) && !RESOLVED_CHECK.includes(status)
 							&& (
 								<FooterChat
 									file={file}
@@ -172,24 +181,35 @@ function TicketChat({
 									uploading={uploading}
 									setMessage={setMessage}
 									setUploading={setUploading}
+									setIsInternal={setIsInternal}
+									createLoading={createLoading}
+									isInternal={isInternal}
+									notifyCustomer={notifyCustomer}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
 							)}
-					</div>
-				)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
 						<TicketSummary {...ticketData} />
 					</div>
 				)}
 
+				<EscalateTicket
+					ticketId={ticketId}
+					showEscalate={showEscalate}
+					updateLoading={updateLoading}
+					setShowEscalate={setShowEscalate}
+					updateTicketActivity={updateTicketActivity}
+				/>
+
 				<ReassignTicket
-					ticketId={modalData?.ticketId}
+					ticketId={ticketId}
 					showReassign={showReassign}
 					setShowReassign={setShowReassign}
 					getTicketActivity={getTicketActivity}
 					getTicketDetails={getTicketDetails}
+					setListData={setListData}
 				/>
 			</Modal.Body>
 		</>

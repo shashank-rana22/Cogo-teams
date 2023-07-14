@@ -1,21 +1,22 @@
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 import TicketActions from '../../../TicketActions';
 
 import styles from './styles.module.css';
 
 function ModalHeader({
 	ticketData = {},
+	updateLoading = false,
 	refreshTickets = () => {},
 	setShowReassign = () => {},
-	isClosureAuthorizer,
+	setShowEscalate = () => {},
+	updateTicketActivity = () => {},
 }) {
-	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
-
-	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
-		refreshTickets,
-	});
+	const {
+		Ticket: ticket = {}, TicketStatus : ticketStatus = '',
+		IsClosureAuthorizer: isClosureAuthorizer = false, IsCurrentReviewer: isCurrentReviewer = '',
+	} = ticketData || {};
+	const { ID: id = '' } = ticket || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
@@ -30,9 +31,13 @@ function ModalHeader({
 			</div>
 			<TicketActions
 				isModal
-				status={status}
+				id={id}
+				updateLoading={updateLoading}
+				ticketStatus={ticketStatus}
 				handleTicket={handleTicket}
 				setShowReassign={setShowReassign}
+				setShowEscalate={setShowEscalate}
+				isCurrentReviewer={isCurrentReviewer}
 				isClosureAuthorizer={isClosureAuthorizer}
 			/>
 		</div>

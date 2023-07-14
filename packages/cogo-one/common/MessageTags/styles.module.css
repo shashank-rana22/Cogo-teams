@@ -1,0 +1,9 @@
+.tags_flex {
+	display: flex;
+}
+
+.each_tag {
+	padding: 4px;
+	margin-right: 4px;
+	font-weight: 600;
+}
