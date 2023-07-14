@@ -1,8 +1,8 @@
-import { Button, Pill, Popover } from '@cogoport/components';
+import { Button, ButtonIcon, Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils/';
+import { isEmpty, startCase } from '@cogoport/utils/';
 
 import UPLOAD_DOCUMENT_STATUS_MAPPING from '../../../constants/upload-document-status-mapping';
 import ActionContent from '../components/ManualEnrichment/components/ActionContent';
@@ -16,6 +16,7 @@ const getEnrichmentColumns = ({
 	refetch = () => {},
 	loadingComplete = false,
 	secondaryTab = 'active',
+	user_id = '',
 }) => [
 	{
 		id       : 'id',
@@ -52,26 +53,7 @@ const getEnrichmentColumns = ({
 			</section>
 		),
 	},
-	{
-		id       : 'created_at',
-		Header   : 'REQUESTED AT',
-		accessor : ({ created_at = '' }) => (
-			<section>
-				{created_at ? (
-					<div>
-						{formatDate({
-							date       : created_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						}) || '-'}
 
-					</div>
-				) : (
-					'___'
-				)}
-			</section>
-		),
-	},
 	{
 		id       : 'registration_number',
 		Header   : 'TAX Number',
@@ -168,11 +150,33 @@ const getEnrichmentColumns = ({
 			</section>
 		),
 	},
+
+	{
+		id       : 'created_at',
+		Header   : 'REQUESTED AT',
+		accessor : ({ created_at = '' }) => (
+			<section>
+				{created_at ? (
+					<div>
+						{formatDate({
+							date       : created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'dateTime',
+						}) || '-'}
+
+					</div>
+				) : (
+					'___'
+				)}
+			</section>
+		),
+	},
+
 	{
 		id       : 'action',
 		Header   : <div className={styles.action_header}>Action</div>,
 		accessor : (item) => {
-			const { id } = item;
+			const { id, assigned_user = {} } = item;
 
 			const onClickCta = (workflow) => {
 				if (['add', 'edit'].includes(workflow)) {
@@ -197,15 +201,22 @@ const getEnrichmentColumns = ({
 					onClickOutside={() => setSelectedRowId(null)}
 				>
 
-					<div
-						className={styles.svg_container}
-					>
-						<IcMOverflowDot
-							height={16}
-							width={16}
+					<div className={styles.action_cta}>
+						<ButtonIcon
+							size="md"
+							themeType="primary"
+							type="button"
+							disabled={assigned_user && !isEmpty(assigned_user) && assigned_user.id !== user_id}
+							icon={(
+								<IcMOverflowDot
+									height={16}
+									width={16}
+								/>
+							)}
 							onClick={() => setSelectedRowId(() => (selectedRowId === id ? null : id))}
 						/>
 					</div>
+
 				</Popover>
 			);
 		},

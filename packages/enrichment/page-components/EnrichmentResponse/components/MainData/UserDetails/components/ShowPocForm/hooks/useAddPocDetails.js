@@ -5,7 +5,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
-import controls from '../utils/controls';
+import getControls from '../utils/controls';
 
 const geo = getGeoConstants();
 
@@ -23,6 +23,8 @@ const useAddPocDetails = ({
 		handleSubmit,
 		getValues,
 	} = useForm();
+
+	const controls = getControls();
 
 	const { query = {} } = router;
 

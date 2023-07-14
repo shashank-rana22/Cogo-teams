@@ -437,15 +437,19 @@ export default {
 		},
 		enrichment: {
 			enrichment_response_source            : 'manual_enriched',
+			whatsapp_number_label                 : 'Zalo Number',
 			allowed_to_create_enrichment_requests : true,
 			tabs                                  : ['manual_enrichment'],
 			manual_enrichment                     : {
-				possible_columns: ['id',
+				possible_columns: [
+					'id',
 					'business_name',
 					'registration_number',
 					'requested_agent',
 					'created_at',
-					'action', 'status'],
+					'action',
+					'status',
+				],
 				columns: {
 					relationship_manager_view: {
 						active: [

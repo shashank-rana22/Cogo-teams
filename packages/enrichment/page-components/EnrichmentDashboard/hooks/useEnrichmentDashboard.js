@@ -139,6 +139,7 @@ const useEnrichmentDashboard = ({
 		refetch: refetchList,
 		loadingComplete,
 		secondaryTab,
+		user_id,
 	});
 
 	const allowedColumns = geo.navigations.enrichment[primaryTab].possible_columns;

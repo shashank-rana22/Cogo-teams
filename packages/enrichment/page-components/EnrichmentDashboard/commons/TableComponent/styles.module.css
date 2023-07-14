@@ -1,7 +1,6 @@
 .table_container {
 	margin-top: 16px;
 	overflow-x: scroll;
-	box-shadow: 0 0 16px rgb(44 62 80 / 5%);
 }
 
 .table {

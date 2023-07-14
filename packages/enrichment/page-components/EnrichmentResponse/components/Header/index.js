@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Pill, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -42,10 +42,12 @@ function Header() {
 		request_id: {
 			label : 'Request ID',
 			value : (
-				<div>
+				<Pill size="md" color="#efefef">
 					#
 					{request_id || '__'}
-				</div>),
+				</Pill>
+
+			),
 		},
 
 		request_type: {
@@ -56,10 +58,10 @@ function Header() {
 		serial_id: {
 			label : 'Serial ID',
 			value : (
-				<div>
+				<Pill size="md" color="#efefef">
 					#
-					{serial_id}
-				</div>
+					{serial_id || '__'}
+				</Pill>
 			),
 		},
 
