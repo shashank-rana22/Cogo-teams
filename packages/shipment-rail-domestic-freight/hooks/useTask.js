@@ -37,7 +37,7 @@ const useTask = () => {
 		: (data?.list || []);
 
 	const handleClick = (task, newMails) => {
-		if (task.status === 'completed') {
+		if (task?.status === 'completed') {
 			setShow(true);
 			return;
 		}
@@ -48,7 +48,7 @@ const useTask = () => {
 		}
 
 		if ('id' in task) {
-			setSelectedTaskId(task.id);
+			setSelectedTaskId(task?.id);
 		}
 	};
 

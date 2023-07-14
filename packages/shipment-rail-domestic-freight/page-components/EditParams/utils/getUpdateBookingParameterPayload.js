@@ -10,6 +10,7 @@ export default function getUpdateBookingParameterPaylaod({ formValues, shipment_
 		shipment_id : shipment_data?.id,
 		services    : [],
 	};
+
 	(formValues || []).forEach((formData) => {
 		const { service_id, service_type, ...booking_params } = formData || {};
 

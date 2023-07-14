@@ -74,7 +74,7 @@ function Card({
 				<Modal.Body>
 					<div className={styles.flex}>
 						{
-						controls.map((fieldControls) => (
+						(controls || []).map((fieldControls) => (
 							<div key={fieldControls.name} className={styles.field}>
 								<div className={styles.label}>{fieldControls.label}</div>
 								<InputController

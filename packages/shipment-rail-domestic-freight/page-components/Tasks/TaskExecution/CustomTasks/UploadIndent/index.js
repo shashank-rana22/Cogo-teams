@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
@@ -39,7 +39,7 @@ function UploadIndent({
 	});
 
 	useEffect(() => {
-		if (indentURL?.length > GLOBAL_CONSTANTS.zeroth_index) {
+		if (!isEmpty(indentURL)) {
 			setValue('documents.0.url', {
 				fileName : `indent_note_${Date.now()}.pdf`,
 				finalUrl : indentURL,
@@ -55,7 +55,7 @@ function UploadIndent({
 			data : {},
 		};
 
-		const documents = (values.documents || []).map((documentItem) => {
+		const documents = (values?.documents || []).map((documentItem) => {
 			if (typeof documentItem?.url === 'object') {
 				return {
 					document_type : 'indent',

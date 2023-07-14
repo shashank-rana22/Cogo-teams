@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ const VOLUME_CONVERSION_CONSTANT = 166.67;
 const INCREMENT_CONSTANT = 1;
 const DEFAULT_VOLUME = 0;
 
-export const renderValue = (label, overview, detail = {}) => {
+export const renderValue = (label, detail = {}) => {
 	const chargableWeight = Math.max((detail?.volume || DEFAULT_VOLUME) * VOLUME_CONVERSION_CONSTANT, detail?.weight);
 
 	const volume = ` ${detail.volume} cbm`;
@@ -59,10 +59,6 @@ export const renderValue = (label, overview, detail = {}) => {
 			if (!detail.containers_count) {
 				return null;
 			}
-			if (overview) {
-				return detail.containers_count;
-			}
-
 			if (detail.containers_count === SINGULAR_CONSTANT) {
 				return '1 Container';
 			}
@@ -187,7 +183,7 @@ export const renderValue = (label, overview, detail = {}) => {
 				separator  : '-',
 			});
 		case 'document_cutoff':
-			return format({
+			return formatDate({
 				date       : detail?.document_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
@@ -195,7 +191,7 @@ export const renderValue = (label, overview, detail = {}) => {
 				separator  : '-',
 			});
 		case 'tr_cutoff':
-			return format({
+			return formatDate({
 				date       : detail?.tr_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
@@ -211,7 +207,7 @@ export const renderValue = (label, overview, detail = {}) => {
 		case 'bl_type':
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
-			return format({
+			return formatDate({
 				date       : detail?.cargo_readiness_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
@@ -227,7 +223,7 @@ export const renderValue = (label, overview, detail = {}) => {
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format({
+			return formatDate({
 				date       : detail?.delivery_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/surface-modules/common/EmptyState';
+import { isEmpty } from '@cogoport/utils';
 
 import useTask from '../../hooks/useTask';
 
@@ -44,9 +44,9 @@ function Tasks() {
 
 			{loading ? <LoadingState /> : null}
 
-			{tasksList?.length === GLOBAL_CONSTANTS.zeroth_index && !loading ? <EmptyState /> : null}
+			{isEmpty(tasksList) && !loading ? <EmptyState /> : null}
 
-			{tasksList?.length > GLOBAL_CONSTANTS.zeroth_index && !loading ? (
+			{!isEmpty(tasksList) && !loading ? (
 				<>
 					{selectedTaskId ? (
 						<Button

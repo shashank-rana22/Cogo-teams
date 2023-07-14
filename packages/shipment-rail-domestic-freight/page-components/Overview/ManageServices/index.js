@@ -11,7 +11,7 @@ function ManageServices() {
 			type="text"
 			title={<div className={styles.title}>Manage Services</div>}
 			isOpen
-			className={styles.accoridan}
+			className={styles.accoridon}
 		>
 			<Services />
 

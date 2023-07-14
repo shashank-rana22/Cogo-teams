@@ -5,9 +5,8 @@ import { renderValue } from '../../../../../../commons/CargoDetails/RenderCargoP
 
 import styles from './styles.module.css';
 
-const OVERVIEW = true;
 function Item({ label, detail }) {
-	const valueFormatted = renderValue(label?.key, detail, OVERVIEW);
+	const valueFormatted = renderValue(label?.key, detail);
 
 	return valueFormatted
 		? (
