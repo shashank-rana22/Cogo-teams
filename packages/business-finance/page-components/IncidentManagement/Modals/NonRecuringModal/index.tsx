@@ -1,6 +1,7 @@
 import { Tooltip, Textarea, Modal, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import usePostExpense from '../../apisModal/usePostExpense';
@@ -24,12 +25,14 @@ function NonRecuringModal({ id, refetch, row, isEditable = true }) {
 		taxTotalAmount,
 		grandTotalAmount,
 		lineItems,
-		invoiceId,
+		ledgerGrandTotal,
+		ledgerCurrency,
 		remarks: remarkData,
 		billCurrency: currency,
 		documents,
 		branchName,
 		categoryName,
+		expenseType,
 	} = overheadConfirmationRequest || {};
 
 	const { useOnAction: OnAction, loading } = usePostExpense({
@@ -42,6 +45,59 @@ function NonRecuringModal({ id, refetch, row, isEditable = true }) {
 	const { businessName } = organization || {};
 
 	const { referenceId = '' } = row || {};
+
+	const incidentMappings = [
+		{
+			key   : 'Invoice number',
+			value : invoiceNumber,
+		},
+		{ key: 'Category Name', value: categoryName },
+		{ key: 'Branch Name', value: branchName },
+		{
+			key   : 'SubTotal',
+			value : formatAmount({
+				amount  : subTotalAmount,
+				currency,
+				options : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
+		},
+		{
+			key   : 'TaxAmount',
+			value : formatAmount({
+				amount  : taxTotalAmount,
+				currency,
+				options : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
+		},
+		{
+			key   : 'GrandTotal',
+			value : formatAmount({
+				amount  : grandTotalAmount,
+				currency,
+				options : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
+		},
+		{
+			key   : 'Ledger GrandTotal',
+			value : formatAmount({
+				amount   : ledgerGrandTotal,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
+		},
+	];
 
 	return (
 		<div>
@@ -57,100 +113,27 @@ function NonRecuringModal({ id, refetch, row, isEditable = true }) {
 					<Modal.Header
 						title={`Expense Approval - ${toTitleCase(
 							businessName,
-						)}`}
+						)} (${toTitleCase(
+							startCase(expenseType),
+						)}) ${referenceId}`}
 					/>
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 
 						<div className={styles.flex}>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Incident ID
+							{incidentMappings?.map((item) => (
+								<div
+									className={styles.value_data}
+									key={item.key}
+								>
+									<div className={styles.label_value}>
+										{item?.key || '-'}
+									</div>
+									<div className={styles.date_value}>
+										{item?.value || '-'}
+									</div>
 								</div>
-								<div className={styles.date_value}>
-									{referenceId || '-'}
-								</div>
-							</div>
-
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Invoice number
-								</div>
-								<div className={styles.date_value}>
-									<a
-										href={`${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}/sales/invoice/final/
-										${invoiceId}/download/`}
-										target="_blank"
-										rel="noreferrer"
-									>
-										{invoiceNumber || '-'}
-									</a>
-								</div>
-							</div>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Branch Name
-								</div>
-								<div className={styles.date_value}>
-									{branchName || '-'}
-								</div>
-							</div>
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									Category Name
-								</div>
-								<div className={styles.date_value}>
-									{categoryName || '-'}
-								</div>
-							</div>
-
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									SubTotal
-								</div>
-								<div className={styles.date_value}>
-									{formatAmount({
-										amount  : subTotalAmount,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									}) || '-'}
-								</div>
-							</div>
-
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									TaxAmount
-								</div>
-								<div className={styles.date_value}>
-									{formatAmount({
-										amount  : taxTotalAmount,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									}) || '-'}
-								</div>
-							</div>
-
-							<div className={styles.value_data}>
-								<div className={styles.label_value}>
-									GrandTotal
-								</div>
-								<div className={styles.date_value}>
-									{formatAmount({
-										amount  : grandTotalAmount,
-										currency,
-										options : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									}) || '-'}
-								</div>
-							</div>
+							))}
 						</div>
 
 						<div className={styles.document_flex}>
@@ -190,7 +173,7 @@ function NonRecuringModal({ id, refetch, row, isEditable = true }) {
 								<div key={url}> No document available</div>
 							)))}
 						</div>
-						{lineItems?.length > 0 ? (
+						{!isEmpty(lineItems) ? (
 							<div className={styles.list_container}>
 								<StyledTable
 									columns={overheadsConfig}

@@ -71,7 +71,8 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 					if (geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds) {
 						setValue(`line_items.${index}.payable_amount`, +amountAfterTax);
 					} else if (!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds && tds >= 0) {
-						setValue(`line_items.${index}.payable_amount`, +amountAfterTax - tds);
+						setValue(`line_items.${index}.payable_amount`, +amountAfterTax - (beforeTax * tds) / 100);
+						setValue(`line_items.${index}.tdsAmount`, (beforeTax * tds) / 100);
 					}
 				}
 			}

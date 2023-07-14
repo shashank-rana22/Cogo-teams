@@ -12,7 +12,10 @@ import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
-import { nonRecurringFilters, recurringFilters } from '../Controls/nonRecurringFilters';
+import {
+	nonRecurringFilters,
+	recurringFilters,
+} from '../Controls/nonRecurringFilters';
 
 import AddExpenseModal from './AddExpenseModal';
 import CreateExpenseModal from './CreateExpenseModal';
@@ -21,31 +24,35 @@ import useListExpenseConfig from './hooks/useListExpenseConfig';
 import useSendEmail from './hooks/useSendEmail';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
-import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
+import {
+	expenseRecurringConfig,
+	expenseNonRecurringConfig,
+} from './utils/config';
 import WarningModal from './WarningModal';
 
 interface ItemDataInterface {
-	expensePeriod?:string,
-	recurringAmount?:number | string,
-	grandTotal?:number,
-	paidAmount?:number,
-	dueDate?: Date,
-	billDate?: Date,
-	createdDate?:Date,
-	status?: string,
-	approvedByUser?:{ id?:string | number, name?:string },
-	billNumber?:string | number,
-	billDocumentUrl?:string,
-	startDate?:Date,
-	endDate?:Date,
-	maxPayoutAllowed?:number,
-	currency?:string,
-	updatedAt?:Date,
-	proofDocuments?:string[],
-	createdAt?:Date,
-	category?:string,
-	billCurrency?:string,
-	payableTds?:number,
+	expensePeriod?: string;
+	recurringAmount?: number | string;
+	grandTotal?: number;
+	paidAmount?: number;
+	dueDate?: Date;
+	billDate?: Date;
+	createdDate?: Date;
+	status?: string;
+	approvedByUser?: { id?: string | number; name?: string };
+	billNumber?: string | number;
+	billDocumentUrl?: string;
+	startDate?: Date;
+	endDate?: Date;
+	maxPayoutAllowed?: number;
+	currency?: string;
+	updatedAt?: Date;
+	proofDocuments?: string[];
+	createdAt?: Date;
+	category?: string;
+	billCurrency?: string;
+	approvedByName?: string;
+	payableTds?: number;
 }
 
 function ExpenseComponent() {
@@ -73,9 +80,12 @@ function ExpenseComponent() {
 
 	const geo = getGeoConstants();
 
-	const { getList, listData, listLoading } = useListExpense({ expenseFilters, sort });
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
-	const { sendMail, loading:mailLoading } = useSendEmail();
+	const { getList, listData, listLoading } = useListExpense({
+		expenseFilters,
+		sort,
+	});
+	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
+	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') {
@@ -108,14 +118,14 @@ function ExpenseComponent() {
 		},
 	];
 
-	const handleChange = (e:string) => {
+	const handleChange = (e: string) => {
 		setExpenseFilters((previousState) => ({
 			...previousState,
 			searchValue: e,
 		}));
 	};
 
-	const handleAddExpense = (itemData:object) => {
+	const handleAddExpense = (itemData: object) => {
 		setShowExpenseModal(true);
 		setRowData(itemData);
 	};
@@ -128,14 +138,14 @@ function ExpenseComponent() {
 	const renderHeaders = () => (
 		<div className={styles.header_container}>
 			<div className={styles.left_container}>
-				{recurringState === 'nonRecurring' &&	(
+				{recurringState === 'nonRecurring' && (
 					<Filter
 						controls={nonRecurringFilters}
 						filters={expenseFilters}
 						setFilters={setExpenseFilters}
 					/>
 				)}
-				{recurringState === 'recurring' &&	(
+				{recurringState === 'recurring' && (
 					<Filter
 						controls={recurringFilters}
 						filters={expenseFilters}
@@ -146,10 +156,12 @@ function ExpenseComponent() {
 			<div className={styles.right_container}>
 				<Input
 					size="md"
-					placeholder={`Search by Vendor Name/${startCase(geo.others.pan_number.label)}/Organization ID/Sage ID`}
+					placeholder={`Search by Vendor Name/${startCase(
+						geo.others.pan_number.label,
+					)}/Organization ID/Sage ID`}
 					suffix={<IcMSearchlight />}
 					value={expenseFilters.searchValue}
-					onChange={(e:any) => handleChange(e)}
+					onChange={(e: any) => handleChange(e)}
 					className={styles.search}
 				/>
 				<Button
@@ -168,7 +180,7 @@ function ExpenseComponent() {
 	);
 
 	const functions = {
-		addExpense: (itemData:ItemDataInterface) => (
+		addExpense: (itemData: ItemDataInterface) => (
 			<Button
 				themeType="secondary"
 				disabled={itemData?.status !== 'ACCEPTED'}
@@ -179,7 +191,7 @@ function ExpenseComponent() {
 				Add Expense
 			</Button>
 		),
-		renderCategory: (itemData:ItemDataInterface) => {
+		renderCategory: (itemData: ItemDataInterface) => {
 			const { category = '' } = itemData || {};
 			return (
 				<div style={{ fontSize: '14px' }}>
@@ -187,9 +199,9 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		renderExpensePeriod: (itemData:ItemDataInterface) => {
+		renderExpensePeriod: (itemData: ItemDataInterface) => {
 			const { startDate, endDate } = itemData || {};
-			let difference:string = '';
+			let difference: string = '';
 			if (startDate && endDate) {
 				const date1 = new Date(startDate);
 				const date2 = new Date(endDate);
@@ -208,18 +220,28 @@ function ExpenseComponent() {
 					<div className={styles.data_container}>
 						<div>
 							<div>
-								{formatDate(startDate, 'dd MMM yyyy', {}, false)}
+								{formatDate(
+									startDate,
+									'dd MMM yyyy',
+									{},
+									false,
+								)}
 								{' '}
 								-
-
 							</div>
 							<div style={{ display: 'flex' }}>
 								<div>
-									{formatDate(endDate, 'dd MMM yyyy', {}, false)}
-
+									{formatDate(
+										endDate,
+										'dd MMM yyyy',
+										{},
+										false,
+									)}
 								</div>
 								<Tooltip content={`Duration: ${difference} `}>
-									<div style={{ margin: '0px 4px' }}><IcMInfo /></div>
+									<div style={{ margin: '0px 4px' }}>
+										<IcMInfo />
+									</div>
 								</Tooltip>
 							</div>
 						</div>
@@ -228,7 +250,7 @@ function ExpenseComponent() {
 			}
 			return <div>-</div>;
 		},
-		renderRecurringAmount: (itemData:ItemDataInterface) => {
+		renderRecurringAmount: (itemData: ItemDataInterface) => {
 			const { maxPayoutAllowed, currency = '' } = itemData || {};
 			return (
 				<div className={styles.data_container}>
@@ -250,12 +272,16 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getPayable: (itemData:ItemDataInterface) => {
-			const { grandTotal, paidAmount, billCurrency = '' } = itemData || {};
+		getPayable: (itemData: ItemDataInterface) => {
+			const {
+				grandTotal,
+				paidAmount,
+				billCurrency = '',
+			} = itemData || {};
 			const value = grandTotal - paidAmount;
 
 			const amount = formatAmount({
-				amount   :	value as any,
+				amount   : value as any,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -263,12 +289,10 @@ function ExpenseComponent() {
 				},
 			});
 			return (
-				<div>
-					{(grandTotal >= 0 && paidAmount >= 0) ? amount : '-'}
-				</div>
+				<div>{grandTotal >= 0 && paidAmount >= 0 ? amount : '-'}</div>
 			);
 		},
-		getInvoiceDates: (itemData:ItemDataInterface) => {
+		getInvoiceDates: (itemData: ItemDataInterface) => {
 			const { dueDate, billDate, createdDate } = itemData || {};
 			return (
 				<div style={{ fontSize: '10px' }}>
@@ -277,48 +301,66 @@ function ExpenseComponent() {
 							<div>
 								Due Date:
 								{' '}
-								{formatDate(dueDate, 'dd MMM yyyy', {}, false) }
+								{formatDate(dueDate, 'dd MMM yyyy', {}, false)}
 							</div>
 							<div>
 								Invoice Date:
 								{' '}
-								{ formatDate(billDate, 'dd MMM yyyy', {}, false) }
+								{formatDate(billDate, 'dd MMM yyyy', {}, false)}
 							</div>
 							<div>
 								Upload Date:
 								{' '}
-								{formatDate(createdDate, 'dd MMM yyyy', {}, false) }
+								{formatDate(
+									createdDate,
+									'dd MMM yyyy',
+									{},
+									false,
+								)}
 							</div>
-
 						</div>
 					)}
 				</div>
-
 			);
 		},
-		getApprovedByRecurring: (itemData:ItemDataInterface) => {
-			const { updatedAt, approvedByUser, status } = itemData || {};
-			const { name = '' } = approvedByUser || {};
+		getApprovedByRecurring: (itemData: ItemDataInterface) => {
+			const { updatedAt, status, approvedByName } = itemData || {};
 			return (
 				<div>
 					{status !== 'LOCKED' ? (
 						<div style={{ fontSize: '12px' }}>
-							<div>{name}</div>
-							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
+							<div>{approvedByName}</div>
+							<div>
+								{formatDate(
+									updatedAt,
+									'dd MMM yyyy',
+									{},
+									false,
+								) || '-'}
+							</div>
 						</div>
 					) : (
 						<>
-							<div className={styles.pending_approval}>Pending Approval</div>
+							<div className={styles.pending_approval}>
+								Pending Approval
+							</div>
 							<div className={styles.link}>
 								<Button
 									style={{
 										background : 'none',
-										color      : mailLoading ? '#b0b0b0' : '#F68B21',
-										fontSize   : '11px',
-										padding    : '0px 4px',
+										color      : mailLoading
+											? '#b0b0b0'
+											: '#F68B21',
+										fontSize : '11px',
+										padding  : '0px 4px',
 									}}
 									disabled={mailLoading}
-									onClick={() => { sendMail({ rowData: itemData, recurringState }); }}
+									onClick={() => {
+										sendMail({
+											rowData: itemData,
+											recurringState,
+										});
+									}}
 								>
 									Re-send Email
 								</Button>
@@ -328,7 +370,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		showAgreement: (itemData:ItemDataInterface) => {
+		showAgreement: (itemData: ItemDataInterface) => {
 			const { proofDocuments = [] } = itemData || {};
 			const proofCount = proofDocuments.length;
 			if (proofCount === 1) {
@@ -340,13 +382,12 @@ function ExpenseComponent() {
 						rel="noreferrer"
 					>
 						1 Document
-
 					</a>
 				);
 			}
 			const showDocuments = () => (
 				<div>
-					{proofDocuments.map((proof:string) => (
+					{proofDocuments.map((proof: string) => (
 						<div key={proof}>
 							{proof && (
 								<a
@@ -366,32 +407,31 @@ function ExpenseComponent() {
 				<div>
 					<div>
 						<Popover placement="top" render={showDocuments()}>
-							<div
-								className={styles.multiple_proof}
-							>
+							<div className={styles.multiple_proof}>
 								{proofCount}
 								{' '}
 								Documents
-
 							</div>
 						</Popover>
 					</div>
 				</div>
 			);
 		},
-		getCreatedOn: (itemData:ItemDataInterface) => {
+		getCreatedOn: (itemData: ItemDataInterface) => {
 			const { createdAt } = itemData || {};
 			return (
 				<div>
-					{ createdAt ? formatDate(createdAt, 'dd MMM yyyy', {}, false) : '-' }
+					{createdAt
+						? formatDate(createdAt, 'dd MMM yyyy', {}, false)
+						: '-'}
 				</div>
 			);
 		},
-		getInvoiceNumber: (itemData:ItemDataInterface) => {
+		getInvoiceNumber: (itemData: ItemDataInterface) => {
 			const { billNumber, billDocumentUrl = '' } = itemData || {};
 			return (
 				<div>
-					{ billNumber ? (
+					{billNumber ? (
 						<div className={styles.link}>
 							<a
 								href={billDocumentUrl}
@@ -400,30 +440,27 @@ function ExpenseComponent() {
 								style={{ color: '#F68B21' }}
 							>
 								{showOverflowingNumber(billNumber, 12)}
-
 							</a>
 						</div>
-					) : '-' }
+					) : (
+						'-'
+					)}
 				</div>
 			);
 		},
-		renderInvoiceAmount: (itemData:ItemDataInterface) => {
+		renderInvoiceAmount: (itemData: ItemDataInterface) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   :	grandTotal as any,
+				amount   : grandTotal as any,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
 					currencyDisplay : 'code',
 				},
 			});
-			return (
-				<div>
-					{showOverflowingNumber(amount || '', 12)}
-				</div>
-			);
+			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderTds: (itemData:ItemDataInterface) => {
+		renderTds: (itemData: ItemDataInterface) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
 				amount   : payableTds as any,
@@ -433,13 +470,9 @@ function ExpenseComponent() {
 					currencyDisplay : 'code',
 				},
 			});
-			return (
-				<div>
-					{showOverflowingNumber(amount || '', 12)}
-				</div>
-			);
+			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderPaid: (itemData:ItemDataInterface) => {
+		renderPaid: (itemData: ItemDataInterface) => {
 			const { paidAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
 				amount   : paidAmount as any,
@@ -449,15 +482,11 @@ function ExpenseComponent() {
 					currencyDisplay : 'code',
 				},
 			});
-			return (
-				<div>
-					{showOverflowingNumber(amount || '', 12)}
-				</div>
-			);
+			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 	};
 
-	const showDropDown = (singleItem:{ id?:string }) => {
+	const showDropDown = (singleItem: { id?: string }) => {
 		const { id } = singleItem || {};
 
 		if (recurringState === 'recurring') {
@@ -472,9 +501,9 @@ function ExpenseComponent() {
 		return null;
 	};
 
-	let listConfig:any;
-	let listItemData:ListDataProps;
-	let loading:boolean;
+	let listConfig: any;
+	let listItemData: ListDataProps;
+	let loading: boolean;
 
 	if (recurringState === 'recurring') {
 		listConfig = expenseRecurringConfig;
@@ -508,13 +537,15 @@ function ExpenseComponent() {
 					setSort={setSort}
 					page={expenseFilters.pageIndex || 1}
 					pageSize={expenseFilters.pageSize}
-					handlePageChange={(pageValue:number) => {
-						setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
+					handlePageChange={(pageValue: number) => {
+						setExpenseFilters((p) => ({
+							...p,
+							pageIndex: pageValue,
+						}));
 					}}
 					showPagination
 					renderDropdown={showDropDown}
 				/>
-
 			</div>
 
 			{showModal && (
@@ -528,14 +559,14 @@ function ExpenseComponent() {
 				/>
 			)}
 
-			{ showExpenseModal && (
+			{showExpenseModal && (
 				<AddExpenseModal
 					showExpenseModal={showExpenseModal}
 					setShowExpenseModal={setShowExpenseModal}
 					rowData={rowData}
 					setShowWarning={setShowWarning}
 				/>
-			) }
+			)}
 
 			{showWarning && (
 				<WarningModal
@@ -545,7 +576,6 @@ function ExpenseComponent() {
 					setShowWarning={setShowWarning}
 				/>
 			)}
-
 		</div>
 	);
 }

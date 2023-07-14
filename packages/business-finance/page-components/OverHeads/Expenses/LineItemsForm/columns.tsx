@@ -1,16 +1,25 @@
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 
-const lineItemColumns = ({
-	remove, control, taxOptions, formData,
-}) => {
+import styles from './styles.module.css';
+
+const TDS_OPTIONS = [
+	{ label: '0 %', value: '0' },
+	{ label: '1 %', value: '1' },
+	{ label: '2 %', value: '2' },
+	{ label: '5 %', value: '5' },
+	{ label: '10 %', value: '10' },
+	{ label: '20 %', value: '20' },
+];
+
+const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
 	const { lineItemsList = [] } = formData || {};
 
 	return [
 		{
 			Header   : 'Item',
 			id       : 'itemName',
-			accessor : (row:any, index:number) => (
+			accessor : (row: any, index: number) => (
 				<div style={{ width: '80px' }}>
 					<InputController
 						key={row?.id}
@@ -26,7 +35,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
-			accessor : (row:any, index:number) => (
+			accessor : (row: any, index: number) => (
 				<div style={{ width: '80px' }}>
 					<InputController
 						key={row?.id}
@@ -43,8 +52,8 @@ const lineItemColumns = ({
 		{
 			Header   : 'Tax',
 			id       : 'tax',
-			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+			accessor : (row: any, index: number) => (
+				<div style={{ width: '80px' }} className={styles.select}>
 					<SelectController
 						key={row?.id}
 						control={control}
@@ -60,8 +69,8 @@ const lineItemColumns = ({
 		{
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
-			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+			accessor : (row: any, index: number) => (
+				<div style={{ width: '70px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -76,14 +85,15 @@ const lineItemColumns = ({
 		{
 			Header   : 'TDS',
 			id       : 'tds',
-			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
-					<InputController
+			accessor : (row: any, index: number) => (
+				<div style={{ width: '75px' }} className={styles.select}>
+					<SelectController
 						key={row?.id}
-						size="xs"
-						type="number"
 						control={control}
+						theme="admin"
+						options={TDS_OPTIONS}
 						name={`line_items.${index}.tds`}
+						size="xs"
 						value={lineItemsList[index]?.tds}
 					/>
 				</div>
@@ -92,8 +102,8 @@ const lineItemColumns = ({
 		{
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
-			accessor : (row:any, index:number) => (
-				<div style={{ width: '80px' }}>
+			accessor : (row: any, index: number) => (
+				<div style={{ width: '70px' }}>
 					<InputController
 						key={row?.id}
 						size="xs"
@@ -108,7 +118,7 @@ const lineItemColumns = ({
 		{
 			Header   : '',
 			id       : 'delete',
-			accessor : (row:any, index:number) => (
+			accessor : (row: any, index: number) => (
 				<div>
 					{index !== 0 && (
 						<IcMDelete
