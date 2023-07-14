@@ -1,4 +1,4 @@
-import { Pill, Popover, Tooltip } from '@cogoport/components';
+import { Pill, Popover, Toast, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload, IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
@@ -13,6 +13,13 @@ const PERCENTAGE_FACTOR = 100;
 const DECIMAL_UPTO_SECOND_PLACE = 2;
 const Column = (refresh, deleteId, statusId, uploadId) => {
 	const { push } = useRouter();
+
+	const handleErrorReport = (errorReportFile) => {
+		if (errorReportFile === 'ERROR') {
+			Toast.error('Error In File Upload');
+		}
+		window.open(errorReportFile, '_blank');
+	};
 
 	const contentData = (row) => {
 		const { fileStatus, status, fileUrl, id, errorReportFile } = row || {};
@@ -32,7 +39,7 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 
 				</div>
 
-				{status === 'DISABLE' ? (
+				{status === 'DISABLE' || fileStatus === 'ERROR_IN_EXPORT' ? (
 					<div
 						className={styles.card_data}
 						onClick={() => { deleteId(id); }}
@@ -63,7 +70,9 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 					&& (
 						<div
 							className={styles.card_data}
-							onClick={() => { window.open(errorReportFile, '_blank'); }}
+							onClick={() => {
+								handleErrorReport(errorReportFile);
+							}}
 							role="presentation"
 						>
 							Error Report
@@ -155,6 +164,16 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 						formatType : 'dateTime',
 						separator  : ' ',
 					})}
+				</div>
+			),
+		},
+		{
+			Header   : <div>Export Month Year</div>,
+			id       : 'monthYear',
+			accessor : ({ month, year }) => (
+				<div>
+					{month}
+					<span style={{ marginLeft: '4px' }}>{year}</span>
 				</div>
 			),
 		},

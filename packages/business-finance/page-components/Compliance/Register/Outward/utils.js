@@ -4,6 +4,7 @@ export const MAPPING_FILE_STATUS_COLOR = {
 	UPLOAD_IN_PROGRESS : '#FBD1A6',
 	PROCESSING         : '#FEF199',
 	ERROR              : '#F8AEA8',
+	ERROR_IN_EXPORT    : '#F8AEA8',
 };
 export const MAPPING_FILE_STATUS = {
 	READY              : 'READY TO UPLOAD ',
@@ -11,6 +12,7 @@ export const MAPPING_FILE_STATUS = {
 	UPLOAD_IN_PROGRESS : 'UPLOAD IN PROGRESS',
 	PROCESSING         : 'EXPORT IN PROGRESS',
 	ERROR              : 'ERROR',
+	ERROR_IN_EXPORT    : 'ERROR IN EXPORT',
 };
 
 export const MAPPING_ENABLE_STATUS = {
