@@ -7,18 +7,15 @@
 	} */
 	width: 100%;
 	padding: 12px;
-	background-color: rgb(240 248 255);
-	border-bottom: 1px solid #828282;
-
-	/* background-color: #FDEBE9; */
+	background-color: #f3fafa;
+	border-bottom: 1px solid #f68b21;
 	border-radius: 4px;
 }
 
 .hr {
+	width: 100%;
 	height: 1px;
-	margin-top: 10px;
-	margin-bottom: 16px;
-	background: #bdbdbd;
+	background: #f68b21;
 }
 
 .sub_container {

@@ -7,10 +7,11 @@ import RenderTooltip from '../../RenderTooltip';
 
 import styles from './styles.module.css';
 
-function DropDownItem({ data, loadingDropDown }) {
+function DropDownItem({ data = [], loadingDropDown = false }) {
 	return (
 		<div>
-			{(data || []).map((item) => {
+			<div className={styles.hr} />
+			{(data).map((item) => {
 				const {
 					objectNumber = '', cogoBankName = '', transactionRef = '', payrunName = '',	paidTdsAmount = '',
 					paidAmount = '', paymentDate = '', transactionType = '', objectCurrency = '',
@@ -21,7 +22,7 @@ function DropDownItem({ data, loadingDropDown }) {
 							<Loader />
 						) : (
 							<div className={styles.container}>
-								<div className={styles.hr} />
+
 								<div className={styles.sub_container}>
 									<div className={styles.div_container} style={{ width: '400px' }}>
 										<div className={styles.label}>COGO Bank</div>

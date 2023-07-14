@@ -35,7 +35,7 @@ export interface Props {
 	paginationType?: 'number' | 'table' | 'page' | 'compact';
 	viewId?:null;
 	dropDownData?:[];
-	loadingDropDown?:Boolean;
+	loadingDropDown?: boolean;
 	activePayrunTab?:string;
 }
 
@@ -87,32 +87,6 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{/* {(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<>
-						<CardColumn
-							key={singleitem.id}
-							fields={fields}
-							itemStyles={itemStyles}
-							singleitem={singleitem}
-							config={config}
-							loading={loading}
-							functions={commonFunctions(functions)}
-							isMobile={isMobile}
-							subActiveTab={subActiveTab}
-							width={width}
-							rowStyle={rowStyle}
-						/>
-						{activePayrunTab === 'PAID' && viewId === singleitem?.objectId && (
-							<div>
-								<DropDownItem
-									data={dropDownData}
-									loadingDropDown={loadingDropDown}
-								/>
-							</div>
-						)}
-					</>
-				))} */}
-
 				{isEmpty(list) && !loading ? (
 					<div className={styles.no_data}>
 						<img
@@ -137,15 +111,14 @@ function List({
 									subActiveTab={subActiveTab}
 									width={width}
 									rowStyle={rowStyle}
+									viewId={viewId}
 								/>
-								{activePayrunTab === 'PAID' && viewId === singleitem?.objectId && (
-									<div>
-										<DropDownItem
-											data={dropDownData}
-											loadingDropDown={loadingDropDown}
-										/>
-									</div>
-								)}
+								{(activePayrunTab === 'PAID' && viewId === singleitem?.objectId) ? (
+									<DropDownItem
+										data={dropDownData}
+										loadingDropDown={loadingDropDown}
+									/>
+								) : null}
 							</>
 						))}
 					</div>
