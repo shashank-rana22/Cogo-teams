@@ -34,7 +34,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 	&& !loading;
 
 	useEffect(() => {
-		// functionality to select the combination of 101 & 301 only
+		// functionality to select the entity combination of same country only
 		if (entities?.length === CHECK_SINGLE_VALUE) {
 			const allowedEntites = ALL_ENTITIES
 				.filter((singleEntity) => {
