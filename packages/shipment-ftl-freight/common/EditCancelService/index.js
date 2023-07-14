@@ -1,4 +1,4 @@
-import { Popover, Modal } from '@cogoport/components';
+import { Popover, Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -92,13 +92,13 @@ export const getEtaEtdList = (all_services) => {
 };
 
 function EditCancelService({ serviceData = {} }) {
-	const [showModal, setShowModal] = useState(false);
-	const [showPopover, setShowPopover] = useState(false);
-
 	const { state, trade_type, service_type } = serviceData?.[DEFAULT_INDEX] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
+
+	const [showModal, setShowModal] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -124,15 +124,15 @@ function EditCancelService({ serviceData = {} }) {
 		const { label, value, show } = action || {};
 		return (
 			show ? (
-				<div
+				<Button
 					key={value}
-					role="button"
-					tabIndex={DEFAULT_INDEX}
 					className={styles.action_button}
+					tabIndex={DEFAULT_INDEX}
+					themeType="secondary"
 					onClick={() => openModal(value)}
 				>
 					{label}
-				</div>
+				</Button>
 			) : null
 		);
 	});
