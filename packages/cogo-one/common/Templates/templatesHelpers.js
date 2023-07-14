@@ -26,7 +26,7 @@ export function Preview({
 		previewData,
 	);
 
-	const handleInputChange = (variable, value) => {
+	const handleInputChange = ({ variable, value }) => {
 		setCustomizableData((prevData) => ({
 			...prevData,
 			[variable]: value,
@@ -44,7 +44,7 @@ export function Preview({
 							className={styles.value_field}
 							size="xs"
 							placeholder="value"
-							onChange={(val) => handleInputChange(item, val)}
+							onChange={(val) => handleInputChange({ variable: item, value: val })}
 						/>
 					</div>
 				))}

@@ -32,7 +32,7 @@ function Templates({
 	const { name, html_template, variables = [] } = activeCard?.data || {};
 
 	const isAllKeysAndValuesPresent = variables.every(
-		(key) => Object.prototype.hasOwnProperty.call(customizableData, key) && customizableData[key],
+		(key) => (key in customizableData) && customizableData[key],
 	);
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
