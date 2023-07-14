@@ -28,8 +28,7 @@ const getControl = ({ services }) => {
 						required: {
 							value: true,
 							message:
-								// eslint-disable-next-line max-len
-								"Truck Number is required, if there aren't any options please add truck numbers to this shipment",
+								'Truck Number is required, please add truck numbers to this shipment',
 						},
 					},
 				},
@@ -51,7 +50,6 @@ const getControl = ({ services }) => {
 					type       : 'datepicker',
 					label      : 'EWB Generation Date',
 					width      : 3,
-					usePortal  : true,
 					conditions : [
 						{
 							value      : 'data.pickup_date',
@@ -59,8 +57,7 @@ const getControl = ({ services }) => {
 							key_to_add : 'value',
 						},
 					],
-					placeholder    : 'Select',
-					withTimePicker : true,
+					placeholder: 'Select',
 				},
 				{
 					name       : 'ewb_validity',
@@ -68,7 +65,6 @@ const getControl = ({ services }) => {
 					type       : 'datepicker',
 					label      : 'Eway bill validity',
 					width      : 3,
-					usePortal  : true,
 					conditions : [
 						{
 							value      : 'data.pickup_date',
@@ -76,8 +72,7 @@ const getControl = ({ services }) => {
 							key_to_add : 'value',
 						},
 					],
-					placeholder    : 'Select',
-					withTimePicker : true,
+					placeholder: 'Select',
 				},
 				{
 					name  : 'description',
@@ -87,7 +82,6 @@ const getControl = ({ services }) => {
 					label : 'Remarks',
 				},
 				{
-					drag  : true,
 					name  : 'url',
 					span  : 3,
 					type  : 'file',
@@ -98,15 +92,6 @@ const getControl = ({ services }) => {
 							message : 'This is required',
 						},
 					},
-					accept:
-						// eslint-disable-next-line max-len
-						'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-					showLabel     : false,
-					themeType     : 'secondary',
-					isShipment    : true,
-					uploadIcon    : 'ic-upload',
-					uploadType    : 'aws',
-					document_type : 'checklist',
 				},
 			],
 			showButtons      : true,
