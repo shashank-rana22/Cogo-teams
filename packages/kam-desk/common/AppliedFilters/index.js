@@ -52,12 +52,12 @@ function AppliedFilters() {
 							{`${upperCase(date_type)} : 
 							${dateRange === 'custom' ? ` ${formatDate({
 								date       : startDate,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yy'],
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType : 'date',
 							})}  -
 							${formatDate({
 								date       : endDate,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yy'],
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType : 'date',
 							})}` : startCase(dateRange)}`}
 						</div>
