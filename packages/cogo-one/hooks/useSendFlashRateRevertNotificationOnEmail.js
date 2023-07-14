@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ userId, response = {} }) => ({
-	user_id               : userId,
+	source_user_id        : userId,
 	flash_booking_rate_id : response?.data?.id,
 });
 
