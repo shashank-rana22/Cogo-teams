@@ -87,7 +87,7 @@ function useGetAsyncOptions({
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
-		if (checkOptionsExist.length > GLOBAL_CONSTANTS.zeroth_index) return checkOptionsExist[GLOBAL_CONSTANTS.zero];
+		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index];
 
 		try {
 			const res = await triggerSingle({
