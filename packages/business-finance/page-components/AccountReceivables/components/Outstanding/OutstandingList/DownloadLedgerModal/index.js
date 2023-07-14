@@ -1,32 +1,24 @@
-import { Button, Modal, Select, SingleDateRange } from '@cogoport/components';
+import { Button, Modal, MultiSelect, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useLedgerDownload from '../../../../hooks/useLedgerDownload';
 
 import styles from './styles.module.css';
 
-const FIRST_ENTITY = GLOBAL_CONSTANTS.zeroth_index;
-const SECOND_ENTITY = 1;
+const CHECK_SINGLE_VALUE = 1;
 
-const INDIAN_ENTITES = GLOBAL_CONSTANTS.indian_entities;
-
-const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => ({
+const ALL_ENTITIES = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => ({
 	label : `(${entity})${GLOBAL_CONSTANTS.cogoport_entities[entity].name}`,
 	value : String(entity),
 }));
 
-// adding a custom option for entities
-ENTITY_OPTIONS.unshift({
-	label : `(${INDIAN_ENTITES[FIRST_ENTITY]},${INDIAN_ENTITES[SECOND_ENTITY]}) Indian Entites`,
-	value : INDIAN_ENTITES,
-});
-
 function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item = {} }) {
 	const [date, setDate] = useState(null);
 	const [entities, setEntites] = useState([]);
+	const [entityOptions, setEntityOptions] = useState(ALL_ENTITIES);
 
 	const { downloadLedger, loading } = useLedgerDownload({
 		date,
@@ -40,6 +32,23 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 	};
 	const isEnabled = date?.startDate && date?.endDate && !isEmpty(entities)
 	&& !loading;
+
+	useEffect(() => {
+		// functionality to select the combination of 101 & 301 only
+		if (entities?.length === CHECK_SINGLE_VALUE) {
+			const allowedEntites = ALL_ENTITIES
+				.filter((singleEntity) => {
+					const selectedCountryCode = GLOBAL_CONSTANTS.cogoport_entities[entities].country_code;
+					const singleEntityValue = singleEntity?.value;
+					const singleCountryCode = GLOBAL_CONSTANTS.cogoport_entities[+singleEntityValue].country_code;
+					return singleCountryCode === selectedCountryCode;
+				});
+			setEntityOptions([...allowedEntites]);
+		}
+		if (isEmpty(entities)) {
+			setEntityOptions([...ALL_ENTITIES]);
+		}
+	}, [entities]);
 
 	return (
 		<div>
@@ -62,12 +71,14 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 						</div>
 						<div>
 							<h5>Entity*</h5>
-							<Select
+							<MultiSelect
 								value={entities}
 								onChange={setEntites}
 								placeholder="Select Entity"
-								options={ENTITY_OPTIONS}
+								options={entityOptions}
+								isClearable
 								style={{ width: '250px' }}
+								prefix={() => {}}
 							/>
 
 						</div>

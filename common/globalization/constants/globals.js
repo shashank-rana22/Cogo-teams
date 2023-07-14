@@ -456,7 +456,6 @@ const GLOBAL_CONSTANTS = {
 		domestic_air_freight  : 'domestic-air-freight',
 		rail_domestic_freight : 'rail-domestic',
 	},
-	indian_entities: ['101', '301'],
 };
 
 export default GLOBAL_CONSTANTS;
