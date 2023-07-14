@@ -19,5 +19,13 @@
 
 	> div:nth-child(1) {
 		pointer-events: all;
+
+		rect[fill="url(#positive)"] {
+			stroke: #f2e3c3;
+		}
+
+		rect[fill="url(#negative)"] {
+			stroke: #a4abf3;
+		}
 	}
 }

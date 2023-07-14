@@ -1,0 +1,18 @@
+.tooltip_container {
+	padding: 8px 16px;
+	font-size: 12px;
+	font-weight: 400;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px 0 #7c8db53c;
+
+	p {
+		margin-bottom: 12px;
+		font-size: 12px;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 16px;
+	}
+}

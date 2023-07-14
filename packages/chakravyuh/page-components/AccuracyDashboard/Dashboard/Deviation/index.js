@@ -3,17 +3,18 @@ import { ResponsiveMarimekko } from '@cogoport/charts/marimekko';
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import {
-	DUMMY_DATA, TOTAL_DEVIATION,
-	DARKEN_AMOUNT,
-} from '../../../../constants/histogram_config';
+import CustomTooltip from '../../../../common/CustomTooltip';
+import { DUMMY_DATA, TOTAL_DEVIATION } from '../../../../constants/histogram_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
 const LINE_DATA = [{
 	id   : 'line',
-	data : DUMMY_DATA.map(({ countOfRates }, idx) => ({ x: idx, y: -countOfRates })),
+	data : DUMMY_DATA.map(({ countOfNegative, countOfPositive }, idx) => ({
+		x : idx,
+		y : -(countOfNegative + countOfPositive),
+	})),
 }];
 
 function Deviation() {
@@ -27,8 +28,12 @@ function Deviation() {
 					value="participation"
 					dimensions={[
 						{
-							id    : 'Deviation\n',
-							value : 'countOfRates',
+							id    : 'negative',
+							value : 'countOfNegative',
+						},
+						{
+							id    : 'positive',
+							value : 'countOfPositive',
 						},
 					]}
 					innerPadding={0}
@@ -45,7 +50,7 @@ function Deviation() {
 					borderWidth={0.5}
 					enableGridY={false}
 					enableGridX={false}
-					colors={{ scheme: 'nivo' }}
+					colors={['#F2F3FA', '#FDFBF6']}
 					defs={[
 						{
 							id         : 'positive',
@@ -56,33 +61,42 @@ function Deviation() {
 							padding    : 1,
 							stagger    : true,
 						},
+						{
+							id         : 'negative',
+							type       : 'patternDots',
+							background : '#CED1ED',
+							color      : '#CED1ED',
+							size       : 4,
+							padding    : 1,
+							stagger    : true,
+						},
 					]}
 					fill={[
 						{
-							match : '*',
+							match : { id: 'negative' },
+							id    : 'negative',
+						},
+						{
+							match : { id: 'positive' },
 							id    : 'positive',
 						},
 					]}
 					borderColor={{
-						from      : 'color',
-						modifiers : [
-							[
-								'darker',
-								DARKEN_AMOUNT,
-							],
-						],
+						from: 'colors',
+
 					}}
+					tooltip={CustomTooltip}
 				/>
 				<ResponsiveBump
 					data={LINE_DATA}
 					margin={{ top: 10, right: 20, bottom: 25, left: 20 }}
 					axisTop={null}
 					axisRight={null}
+					axisLeft={null}
 					axisBottom={null}
 					endLabel={false}
 					colors={['#CFBC93']}
 					colorBy="index"
-					axisLeft={null}
 					enableGridX={false}
 					enableGridY={false}
 					pointSize={0}

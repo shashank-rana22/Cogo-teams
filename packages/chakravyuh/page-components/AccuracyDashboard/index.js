@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import DashboardView from './Dashboard';
 import DrillDownView from './DrillDown';
 import Filters from './Filters';
-import SupplyRates from './RatesList';
 import styles from './styles.module.css';
 
 const VIEW_MAPPING = {
@@ -21,6 +20,7 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
+	const [filters, setFilters] = useState({});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 
@@ -35,8 +35,7 @@ function AccuracyDashboard() {
 				<h1 className={styles.heading}>{heading}</h1>
 			</div>
 			<Filters />
-			<Component setView={setView} />
-			<SupplyRates />
+			<Component setView={setView} filters={filters} setFilters={setFilters} />
 		</div>
 	);
 }
