@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 function ModalHeader({
 	ticketData = {},
+	updateLoading = false,
 	refreshTickets = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
@@ -30,6 +31,8 @@ function ModalHeader({
 			</div>
 			<TicketActions
 				isModal
+				id={id}
+				updateLoading={updateLoading}
 				ticketStatus={ticketStatus}
 				handleTicket={handleTicket}
 				setShowReassign={setShowReassign}

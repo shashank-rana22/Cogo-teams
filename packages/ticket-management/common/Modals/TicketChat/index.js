@@ -28,19 +28,18 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 55px)';
+		return 'calc(100% - 82px)';
 	}
 	return 'calc(100% - 75px)';
 };
 
 function TicketChat({
-	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign,
-	setShowReassign = () => {},
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
 }) {
 	const { ticketId = '' } = modalData || {};
 
 	const messageRef = useRef(null);
-	const [isInternal, setIsInternal] = useState(false);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
@@ -68,7 +67,7 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '' } = ticket || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
 
 	const {
 		listData = {},
@@ -100,7 +99,7 @@ function TicketChat({
 		isInternal,
 	});
 
-	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
+	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
 		refreshTickets,
 	});
 
@@ -140,6 +139,7 @@ function TicketChat({
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
+						updateLoading={updateLoading}
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
 						setShowEscalate={setShowEscalate}
@@ -182,7 +182,9 @@ function TicketChat({
 									setMessage={setMessage}
 									setUploading={setUploading}
 									setIsInternal={setIsInternal}
+									createLoading={createLoading}
 									isInternal={isInternal}
+									notifyCustomer={notifyCustomer}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
@@ -196,6 +198,7 @@ function TicketChat({
 				<EscalateTicket
 					ticketId={ticketId}
 					showEscalate={showEscalate}
+					updateLoading={updateLoading}
 					setShowEscalate={setShowEscalate}
 					updateTicketActivity={updateTicketActivity}
 				/>
