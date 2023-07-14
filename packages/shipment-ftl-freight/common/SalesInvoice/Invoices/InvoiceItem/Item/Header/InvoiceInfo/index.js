@@ -181,7 +181,7 @@ function InvoiceInfo({
 						</Button>
 					) : null}
 
-				{showRequestCN ? (
+				{showRequestCN && isAuthorized ? (
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
