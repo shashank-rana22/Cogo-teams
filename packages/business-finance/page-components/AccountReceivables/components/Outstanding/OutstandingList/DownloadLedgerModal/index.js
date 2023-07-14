@@ -52,7 +52,12 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 
 	return (
 		<div>
-			<Modal size="md" show={showLedgerModal} onClose={() => setShowLedgerModal(false)}>
+			<Modal
+				size="md"
+				show={showLedgerModal}
+				onClose={() => setShowLedgerModal(false)}
+				className={styles.modal}
+			>
 				<Modal.Header title="Download Ledger" />
 				<Modal.Body>
 					<div className={styles.container}>
