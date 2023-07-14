@@ -3,13 +3,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
-const FIRST_BRACKETS = 2;
-const LAST_BRACKETS = -2;
+const BEGIN_OFFSET = 2;
+const END_OFFSET = -2;
 
 const getPayload = ({ data }) => {
 	const { content = '', title = '', language = '' } = data || {};
 	const variables = 	content.match(GLOBAL_CONSTANTS.regex_patterns
-		.double_curly_braces_pattern)?.map((match) => match.slice(FIRST_BRACKETS, LAST_BRACKETS));
+		.double_curly_braces_pattern)?.map((match) => match.slice(BEGIN_OFFSET, END_OFFSET));
 	const snakeCaseName = title.split(' ').join('_').toLowerCase();
 	const selectedLangCode = GLOBAL_CONSTANTS.languages.find((eachLanguage) => eachLanguage.value === language)?.code;
 

@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const FIRST_PAGE = 1;
+const DEFAULT_PAGE = 1;
 const SCROLL_HEIGHT = 50;
 
 const getParams = ({ pagination, qfilter, viewType, userId, isomniChannelAdmin }) => ({
@@ -26,13 +26,14 @@ function useListTemplate({ viewType }) {
 	}));
 
 	const [qfilter, setQfilter] = useState('');
-	const [pagination, setPagination] = useState(FIRST_PAGE);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [infiniteList, setInfiniteList] = useState({
 		list  : [],
 		total : 0,
 	});
 
 	const geo = getGeoConstants();
+
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => geo.uuid.cogo_one_admin_ids.includes(eachRole)) || false;
 
 	const [{ loading }, trigger] = useRequest({
@@ -60,7 +61,7 @@ function useListTemplate({ viewType }) {
 
 	useEffect(() => {
 		setInfiniteList((previous) => ({ ...previous, list: [] }));
-		setPagination(FIRST_PAGE);
+		setPagination(DEFAULT_PAGE);
 	}, [qfilter]);
 
 	useEffect(() => {
@@ -71,15 +72,15 @@ function useListTemplate({ viewType }) {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= SCROLL_HEIGHT;
 		const hasMoreData = pagination < infiniteList?.total;
 		if (reachBottom && hasMoreData && !loading) {
-			setPagination((previous) => previous + FIRST_PAGE);
+			setPagination((previous) => previous + DEFAULT_PAGE);
 		}
 	};
 	const refetch = () => {
 		setInfiniteList((previous) => ({ ...previous, list: [] }));
-		if (pagination === FIRST_PAGE) {
+		if (pagination === DEFAULT_PAGE) {
 			fetchListTemplate();
 		} else {
-			setPagination(FIRST_PAGE);
+			setPagination(DEFAULT_PAGE);
 		}
 	};
 
