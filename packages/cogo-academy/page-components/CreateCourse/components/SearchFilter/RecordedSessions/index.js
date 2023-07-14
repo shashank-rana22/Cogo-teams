@@ -26,28 +26,33 @@ function CreateRecordedSessions({
 				Create New Recorded Session
 			</div>
 
-			<div className={styles.input_container}>
-				<Input
-					value={input.video_name}
-					onChange={(e) => setInput((pv) => ({
-						...pv,
-						video_name: e,
-					}))}
-					placeholder="Enter Video Name"
-					rules={{ required: 'Video Name is required' }}
-				/>
-			</div>
+			<div style={{ display: 'flex' }}>
+				<div className={styles.input_container}>
+					<Input
+						value={input.video_name}
+						onChange={(e) => setInput((pv) => ({
+							...pv,
+							video_name: e,
+						}))}
+						placeholder="Enter Video Name"
+					/>
+				</div>
 
-			<div className={styles.input_container}>
-				<Input
-					value={input.video_link}
-					onChange={(e) => setInput((pv) => ({
-						...pv,
-						video_link: e,
-					}))}
-					placeholder="Enter Video Link"
-					rules={{ required: 'Video Link is required' }}
-				/>
+				<div style={{ color: 'red', padding: '5px' }}>*</div>
+			</div>
+			<div style={{ display: 'flex' }}>
+				<div className={styles.input_container}>
+					<Input
+						value={input.video_link}
+						onChange={(e) => setInput((pv) => ({
+							...pv,
+							video_link: e,
+						}))}
+						placeholder="Enter Video Link"
+					/>
+				</div>
+
+				<div style={{ color: 'red', padding: '5px' }}>*</div>
 			</div>
 
 			<Button

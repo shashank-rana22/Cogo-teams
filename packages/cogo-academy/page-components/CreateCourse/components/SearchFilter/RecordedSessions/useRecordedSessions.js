@@ -72,6 +72,11 @@ const useRecordedSessions = ({ showRecordedSession = false }) => {
 	};
 
 	const onClickCreate = async () => {
+		if (!input?.video_link || !input?.video_name) {
+			Toast.error('Please fill mandatory fields');
+			return;
+		}
+
 		try {
 			await createApiTrigger({
 				data: {
