@@ -78,13 +78,18 @@ const getServiceRequirementControls = (props) => {
 			placeholder : 'Select Origin',
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
+			multiple    : true,
 			initialCall : false,
 			params      : {
 				page_limit: 20,
 				...getListLocationParams({ watchShipmentMode, watchServiceType }),
 			},
-			isClearable : true,
-			renderLabel : (item) => <RenderListLocationOption item={item} />,
+			isClearable        : true,
+			renderLabel        : (item) => <RenderListLocationOption item={item} />,
+			getModifiedOptions : ({ options }) => options.map(
+				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
+			),
 		},
 		{
 			name        : 'destination_location_id',
