@@ -569,6 +569,11 @@ export default {
 			max_length : 15,
 		},
 
+		banking_code: {
+			financial_system_code : 'ifsc',
+			pattern               : /^[A-Za-z]{4}\d{7}$/,
+		},
+
 		pan_number: {
 			label   : 'PAN',
 			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
@@ -580,12 +585,13 @@ export default {
 
 		navigations: {
 			onboard_vendor: {
-				validate_registration: true,
+				validate_registration : true,
+				registration_types    : false,
 			},
 			cogo_one: {
-				has_voice_call_access     : true,
-				default_country_code      : 'IN',
-				template_default_language : 'english',
+				has_voice_call_access       : true,
+				template_default_language   : 'english',
+				supply_sender_mobile_number : '918069195980',
 			},
 		},
 	},

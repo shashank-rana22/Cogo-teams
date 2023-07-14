@@ -1,6 +1,5 @@
 import airRepository from './config/air-repository';
 import allocations from './config/allocations';
-import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
 import blDoCollectionRelease from './config/bl_do-collection-release';
@@ -19,19 +18,23 @@ import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
+import locations from './config/location';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
+import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
@@ -57,6 +60,7 @@ import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...locations,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
@@ -65,6 +69,7 @@ const routeConfig = {
 	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
+	...ihls,
 	...myIncident,
 	...myProfile,
 	...enrichment,
@@ -92,7 +97,6 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...referral,
-	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
 	...documentDesk,
@@ -105,6 +109,7 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...riskManagement,
 	...awbInventory,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
@@ -113,6 +118,7 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...ftlAdmin,
 };
 
 export default routeConfig;

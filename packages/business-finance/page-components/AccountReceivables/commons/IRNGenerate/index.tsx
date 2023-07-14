@@ -40,7 +40,7 @@ const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
+function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { profile = {} }: RootState = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
 	const [uploadInvoice, setUploadInvoice] = useState(false);
@@ -103,13 +103,13 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			>
 				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION)
 					&& (
-						<div className={styles.upload_invoice}>
+						<div className={styles.button_container}>
 							<Button
 								size="sm"
 								disabled={invoiceLoading}
 								onClick={() => setUploadInvoice(true)}
 							>
-								<div className={styles.finance_reject}>
+								<div className={styles.lable_width}>
 									Upload
 									{' '}
 									{IrnLabel}
@@ -127,15 +127,17 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						/>
 					)}
 				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
-					<div className={styles.generate_invoice}>
+					<div className={styles.button_container}>
 						<Button
 							size="sm"
 							disabled={loading}
 							onClick={() => generateIrn()}
 						>
-							Generate
-							{' '}
-							{IrnLabel}
+							<span className={styles.lable_width}>
+								Generate
+								{' '}
+								{IrnLabel}
+							</span>
 						</Button>
 					</div>
 				)}
@@ -146,9 +148,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							disabled={finalPostLoading}
 							onClick={() => handleFinalpost()}
 						>
-							<div className={styles.button_style}>
+							<span className={styles.lable_width}>
 								{isFinalPosted ? 'Information' : 'Final Post'}
-							</div>
+							</span>
 						</Button>
 					</div>
 				)}
@@ -159,7 +161,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							disabled={loadingOnRefresh}
 							onClick={refresh}
 						>
-							<div className={styles.button_style}>Refresh</div>
+							<span className={styles.lable_width}>
+								Refresh
+							</span>
 						</Button>
 					</div>
 				)}
@@ -189,7 +193,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						disabled={loading}
 						onClick={() => financeRejected()}
 					>
-						<div className={styles.finance_reject}>Finance Reject</div>
+						<div className={styles.lable_width}>Finance Reject</div>
 					</Button>
 				</div>
 			)}

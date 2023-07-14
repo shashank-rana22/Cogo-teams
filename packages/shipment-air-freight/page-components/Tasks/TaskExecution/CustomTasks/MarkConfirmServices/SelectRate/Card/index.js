@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
@@ -8,11 +8,12 @@ import useUpdateBookingPreferences
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
+const PRIORITY_DEFAULT = 1;
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
-		const firstvalidty = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-		const price = firstvalidty?.price || firstvalidty?.min_price;
-		const currency = dataObj?.validities?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
+		const firstValidty = (dataObj?.validities || dataObj?.line_items)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+		const price = firstValidty?.price || firstValidty?.min_price || '--';
+		const currency = firstValidty?.currency || '--';
 
 		return `${currency} ${price}`;
 	}
@@ -32,7 +33,7 @@ const getBuyPrice = (dataObj, source) => {
 
 function Card({
 	item = {},
-	priority,
+	priority = PRIORITY_DEFAULT,
 	setStep = () => {},
 	setSelectedCard = () => {},
 	serviceProvidersData = [],
@@ -76,7 +77,7 @@ function Card({
 						chargeable_weight: dataChargeableWeight,
 						price_type,
 						rate_procurement_proof_url,
-					} = dataObj?.data || {};
+					} = dataObj?.data || dataObj || {};
 					const {
 						hs_code,
 						commodity_description,
@@ -91,7 +92,7 @@ function Card({
 									content={dataObj?.service_provider?.business_name}
 									placement="top"
 								>
-									<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+									<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 										{dataObj?.service_provider?.business_name}
 									</div>
 								</Tooltip>
@@ -104,15 +105,16 @@ function Card({
 										: dataObj?.reverted_airline?.business_name || '-'}
 								</div>
 							</div>
-							{source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+							{task?.service_type === 'air_freight_service' && (
 								<>
 									<div>
 										<div className={styles.heading}>Chargeable Wt.</div>
 										<div className={styles.sub_heading}>
 											{`${
 												dataChargeableWeight
+													|| data?.[GLOBAL_CONSTANTS.zeroth_index]?.chargeable_weight
 													|| chargeable_weight
-													|| '--'
+														|| '--'
 											} Kg`}
 										</div>
 									</div>
@@ -123,7 +125,7 @@ function Card({
 												content={commodity_description}
 												placement="top"
 											>
-												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 													{commodity_description}
 												</div>
 											</Tooltip>
@@ -136,7 +138,7 @@ function Card({
 												content={hs_code}
 												placement="top"
 											>
-												<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
 													{hs_code}
 												</div>
 											</Tooltip>
@@ -151,7 +153,8 @@ function Card({
 									<div>
 										<div className={styles.heading}>Min. Price</div>
 										<div className={styles.sub_heading}>
-											{is_minimum_price_shipment
+											{data?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_system_rate
+											|| is_minimum_price_shipment
 												? 'Yes'
 												: 'No'}
 										</div>
