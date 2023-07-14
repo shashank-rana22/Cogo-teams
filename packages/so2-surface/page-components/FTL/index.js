@@ -1,3 +1,4 @@
+import Loader from '../../common/Loader';
 import useListDocumentDesk from '../../hooks/useListDocumentDesk';
 
 import DeskTabs from './DeskTabs';
@@ -10,10 +11,12 @@ function FTL() {
 	return (
 		<div>
 			<DeskTabs tabData={tabData} />
-			<ShipmentList
-				loading={loading}
-				data={data}
-			/>
+			{loading ? <Loader /> : (
+				<ShipmentList
+					loading={loading}
+					data={data}
+				/>
+			)}
 		</div>
 
 	);
