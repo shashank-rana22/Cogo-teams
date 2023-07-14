@@ -137,7 +137,7 @@ function useVideoCallFirebase({
 			});
 			setOptions({
 				isMicActive         : true,
-				isVideoActive       : false,
+				isVideoActive       : true,
 				isScreenShareActive : false,
 				isMaximize          : false,
 			});
@@ -166,7 +166,7 @@ function useVideoCallFirebase({
 				user_type : 'admin',
 			},
 			webrtc_token_room_id : userId,
-			calling_type         : 'calling',
+			calling_type         : 'outgoing',
 		}));
 
 		navigator.mediaDevices
@@ -225,7 +225,7 @@ function useVideoCallFirebase({
 						peer_details         : room_data.peer_details,
 						calling_details      : room_data,
 						calling_room_id      : val.id,
-						calling_type         : 'coming',
+						calling_type         : 'incoming',
 						webrtc_token_room_id : room_data.webrtc_token_room_id,
 					}));
 					setCallComing(true);
@@ -248,7 +248,7 @@ function useVideoCallFirebase({
 					calling_details      : room_data,
 					webrtc_token_room_id : room_data.webrtc_token_room_id,
 				}));
-				const endCallStatus = ['rejected', 'end_call'];
+				const endCallStatus = ['rejected', 'end_call', 'technical_error'];
 				if (
 					room_data?.call_status
 					&& endCallStatus.includes(room_data?.call_status)
