@@ -27,7 +27,7 @@ function ReasonModal({
 	};
 
 	const showElements = {
-		custome_reason: selectedReasonType === 'other',
+		custom_reason: selectedReasonType === 'other',
 	};
 
 	return (

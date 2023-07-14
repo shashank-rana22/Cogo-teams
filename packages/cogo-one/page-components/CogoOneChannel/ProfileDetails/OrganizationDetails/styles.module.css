@@ -160,7 +160,7 @@
 
 .organization_users {
 	max-height: 40vh;
-	padding: 2px 5px;
+	padding: 2px 4px;
 	margin-top: 3px;
 	overflow-y: scroll;
 	box-shadow: rgb(0 0 0 / 6%) 0 2px 4px 0 inset;

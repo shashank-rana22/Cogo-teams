@@ -1,4 +1,34 @@
-import { VIEW_NUMBER_REASONS } from '../constants';
+const VIEW_NUMBER_REASONS = [
+	{
+		label : 'Account Assistance',
+		value : 'Account Assistance',
+	},
+	{
+		label : 'Account Verification',
+		value : 'Account Verification',
+	},
+	{
+		label : 'Order Conversion',
+		value : 'Order Conversion',
+	},
+	{
+		label : 'Order Fulfilment',
+		value : 'Order Fulfilment',
+	},
+	{
+		label : 'Payment',
+		value : 'Payment',
+	},
+	{
+		label : 'Collections',
+		value : 'Collections',
+	},
+	{
+		label : 'Technical Support',
+		value : 'Technical Support',
+	},
+	{ label: 'Other', value: 'other' },
+];
 
 const controls = [
 	{
@@ -7,7 +37,7 @@ const controls = [
 		options     : VIEW_NUMBER_REASONS,
 	},
 	{
-		name        : 'custome_reason',
+		name        : 'custom_reason',
 		controlType : 'textArea',
 		placeholder : 'Enter your reason',
 	},

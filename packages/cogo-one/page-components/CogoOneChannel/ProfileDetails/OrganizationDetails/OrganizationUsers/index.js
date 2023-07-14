@@ -36,15 +36,15 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const showMoreList = (work_scopes || []).length > MAX_SHOW_LENGTH;
 
 	const onClose = ({ reset }) => {
-		setMaskConfig((pv) => ({ ...pv, showReasonModal: false }));
+		setMaskConfig((prev) => ({ ...prev, showReasonModal: false }));
 		reset();
 	};
 
 	const handleViewNumber = () => {
 		if (showNumber) {
-			setMaskConfig((pv) => ({ ...pv, showNumber: false }));
+			setMaskConfig((prev) => ({ ...prev, showNumber: false }));
 		} else {
-			setMaskConfig((pv) => ({ ...pv, showReasonModal: true }));
+			setMaskConfig((prev) => ({ ...prev, showReasonModal: true }));
 		}
 	};
 

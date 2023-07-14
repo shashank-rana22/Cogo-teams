@@ -2,13 +2,13 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({ user_id, values, mobileNumber }) => {
-	const { custome_reason = '', reason = '' } = values || {};
+	const { custom_reason = '', reason = '' } = values || {};
 
 	return {
 		user_id,
 		contact      : mobileNumber,
 		contact_type : 'mobile_number',
-		reason       : reason === 'other' ? custome_reason : reason,
+		reason       : reason === 'other' ? custom_reason : reason,
 	};
 };
 
@@ -19,7 +19,7 @@ const useCreateUserContactRequest = ({ setMaskConfig }) => {
 	}, { manual: true });
 
 	const createUserContactRequest = async ({ values, user = {}, reset = () => {} }) => {
-		const { custome_reason = '', reason = '' } = values || {};
+		const { custom_reason = '', reason = '' } = values || {};
 
 		const {
 			mobile_country_code = '',
@@ -38,7 +38,7 @@ const useCreateUserContactRequest = ({ setMaskConfig }) => {
 			return;
 		}
 
-		if (reason === 'other' && !custome_reason) {
+		if (reason === 'other' && !custom_reason) {
 			Toast.error('Please Enter Other Reason');
 			return;
 		}
