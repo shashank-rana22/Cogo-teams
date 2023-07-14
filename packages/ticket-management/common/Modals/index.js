@@ -1,12 +1,14 @@
 import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import TicketChat from './TicketChat';
 
 function Modals(props) {
 	const { modalData, setModalData } = props;
+
+	const [isInternal, setIsInternal] = useState(true);
 
 	return (
 		<Modal
@@ -15,10 +17,10 @@ function Modals(props) {
 			placement="right"
 			scroll={false}
 			showCloseIcon={false}
-			onClose={() => setModalData(null)}
+			onClose={() => { setModalData(null); setIsInternal(true); }}
 			className={styles.modal_container}
 		>
-			<TicketChat {...props} />
+			<TicketChat {...props} isInternal={isInternal} setIsInternal={setIsInternal} />
 		</Modal>
 	);
 }

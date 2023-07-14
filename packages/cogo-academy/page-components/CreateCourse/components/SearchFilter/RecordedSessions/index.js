@@ -34,6 +34,7 @@ function CreateRecordedSessions({
 						video_name: e,
 					}))}
 					placeholder="Enter Video Name"
+					mandatory
 				/>
 			</div>
 
@@ -45,6 +46,7 @@ function CreateRecordedSessions({
 						video_link: e,
 					}))}
 					placeholder="Enter Video Link"
+					mandatory
 				/>
 			</div>
 
