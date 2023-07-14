@@ -1,11 +1,16 @@
 .ticket_container {
 	margin: 12px;
 	overflow: hidden;
-	cursor: pointer;
 	background: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+	transition: 0.2s;
+
+	&:hover {
+		scale: 1.02;
+		transition: 0.2s;
+	}
 }
 
 .ticket_container:nth-child(1) {
@@ -15,6 +20,15 @@
 .subcontainer_one {
 	padding: 10px;
 	background: #f9f9f9;
+}
+
+.ticket_type {
+	padding-inline: 10px;
+	background: #f9f9f9;
+}
+
+.ticket_view {
+	cursor: pointer;
 }
 
 .reopen_resolve {

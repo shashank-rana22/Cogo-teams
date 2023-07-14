@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	justify-content: space-around;
+	height: 100px;
+}
+
+.download {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.download_icon {
+	margin-left: 4px;
+	color: #fff;
+}
