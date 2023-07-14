@@ -12,6 +12,7 @@ import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
 import FieldExecutive from '../../common/FieldExecutive';
 import Overview from '../../common/Overview';
+import OverviewManageServices from '../../common/Overview/OverviewManageServices';
 import PocSop from '../../common/PocSop';
 import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
@@ -150,7 +151,15 @@ function ShipmentDetails() {
 						</TabPanel>
 
 						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+							<main className={styles.purchasecontainer}>
+								<OverviewManageServices isOpen isPurchaseTab />
+							</main>
+							<main className={styles.accordian}>
+								<PurchaseInvoicing
+									shipmentData={shipment_data}
+									servicesData={servicesGet?.servicesList}
+								/>
+							</main>
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
