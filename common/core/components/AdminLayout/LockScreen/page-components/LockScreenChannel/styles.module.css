@@ -35,15 +35,13 @@
 	display: flex;
 	width: 100%;
 	padding-top: 54px;
+}
 
-	:global {
-		.ui_button_container {
-			width: 100%;
-			min-width: 0 !important;
-			height: 36px !important;
-			padding: 8px 22px !important;
-			font-size: 16px !important;
-			box-shadow: 0 4px 8px 0 rgb(98 127 172 / 20%);
-		}
-	}
+.styled_button {
+	width: 100%;
+	min-width: unset;
+	height: 36px !important;
+	padding: 8px 22px;
+	font-size: 16px !important;
+	box-shadow: 0 4px 8px 0 rgb(98 127 172 / 20%);
 }

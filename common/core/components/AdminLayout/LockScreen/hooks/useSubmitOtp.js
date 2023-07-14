@@ -16,11 +16,12 @@ const updateRoom = async ({ agentId, firestore }) => {
 	setDoc(docRef, {
 		last_activity_timestamp : Date.now(),
 		last_activity           : 'submit_otp',
-	});
+	}, { merge: true });
 };
 
-const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
+const useSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 	const { agent_id } = useSelector(({ profile }) => ({ agent_id: profile.user.id }));
+
 	const [otpNumber, setOtpNumber] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
@@ -47,4 +48,4 @@ const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
 	};
 };
 
-export default useGetSubmitOtp;
+export default useSubmitOtp;
