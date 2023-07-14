@@ -1,11 +1,9 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 import ENRICHMENT_API_MAPPING from '../../../constants/enrichment-api-mapping';
 import getEnrichmentColumns from '../configurations/get-enrichment-columns';
@@ -44,13 +42,15 @@ const useEnrichmentDashboard = ({
 	const filtersMapping = useMemo(
 		() => ({
 			manual_enrichment: {
-				status: secondaryTab,
+				status  : secondaryTab,
+				user_id : selected_agent_id || undefined,
 			},
 			file_management: {
 				user_id,
+
 			},
 		}),
-		[secondaryTab, user_id],
+		[secondaryTab, selected_agent_id, user_id],
 	);
 
 	const [params, setParams] = useState({
@@ -70,7 +70,7 @@ const useEnrichmentDashboard = ({
 
 	const { api: apiName, authkey } = ENRICHMENT_API_MAPPING[primaryTab];
 
-	const [{ loading, data }, trigger] = useAllocationRequest(
+	const [{ loading, data }, refetch] = useAllocationRequest(
 		{
 			url    : `/${apiName}`,
 			method : 'get',
@@ -79,25 +79,6 @@ const useEnrichmentDashboard = ({
 		},
 		{ manual: false },
 	);
-
-	const refetchList = useCallback(async () => {
-		try {
-			setParams((previousParams) => ({
-				...previousParams,
-				filters: {
-					...previousParams.filters,
-					q       : searchQuery || undefined,
-					user_id : selected_agent_id || undefined,
-				},
-			}));
-
-			await trigger();
-		} catch (error) {
-			if (error?.response) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
-			}
-		}
-	}, [searchQuery, selected_agent_id, trigger]);
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -109,23 +90,21 @@ const useEnrichmentDashboard = ({
 	};
 
 	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			...(allowedToSeeAgentsData && {
-				user_data_required: true,
-			}),
-			filters: {
-				...filtersMapping[primaryTab],
-				partner_id,
-				user_id : selected_agent_id || undefined,
-				status  : [secondaryTab],
-			},
-		}));
-	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab, secondaryTab, selected_agent_id]);
+		refetch();
+	}, [authParams, refetch]);
 
 	useEffect(() => {
-		refetchList();
-	}, [authParams, refetchList, selected_agent_id]);
+		setParams((previousParams) => ({
+			...previousParams,
+			user_data_required : allowedToSeeAgentsData ? true : undefined,
+			filters            : {
+				...filtersMapping[primaryTab],
+				q: searchQuery || undefined,
+				partner_id,
+
+			},
+		}));
+	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab, searchQuery, selected_agent_id, user_id]);
 
 	const handleEditDetails = (feedback_request_id) => {
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
@@ -136,7 +115,7 @@ const useEnrichmentDashboard = ({
 		selectedRowId,
 		setSelectedRowId,
 		onEnrichmentClick,
-		refetch: refetchList,
+		refetch,
 		loadingComplete,
 		secondaryTab,
 		user_id,
@@ -147,8 +126,8 @@ const useEnrichmentDashboard = ({
 	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 	return {
-		refetch : refetchList,
-		columns : filteredColumns,
+		refetch,
+		columns: filteredColumns,
 		list,
 		paginationData,
 		loading,
