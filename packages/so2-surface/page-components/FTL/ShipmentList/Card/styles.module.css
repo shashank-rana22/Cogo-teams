@@ -47,6 +47,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding-block: 0.5rem;
 
 	:global {
 		.service-info-icon-container {
@@ -59,7 +60,6 @@
 
 .shipment_info {
 	width: 25%;
-	margin-bottom: 20px;
 }
 
 .eta_etd_container {

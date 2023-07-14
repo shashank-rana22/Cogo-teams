@@ -141,6 +141,7 @@ function Customers({
 				setModalType={setModalType}
 				modalType={modalType}
 				userId={userId}
+				viewType={viewType}
 			/>
 		</div>
 	);
