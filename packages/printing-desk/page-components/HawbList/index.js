@@ -9,9 +9,20 @@ import commonFunctions from '../../utils/commonFunctions';
 import HawbListItem from './HawbListItem';
 import styles from './styles.module.css';
 
+const EDIT_HAWB = {
+	key   : 'edit',
+	label : '',
+	span  : 1,
+	func  : 'handleEdit',
+};
+
 function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdit = () => {} }) {
 	const { fields } = hawbFields;
-	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(data.shipmentId);
+	const { shipmentId, documentData = {} } = data || {};
+
+	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(shipmentId);
+
+	const finalHawbFields = [...fields, documentData?.handedOverForTd && EDIT_HAWB];
 
 	useEffect(() => {
 		listAPI();
@@ -22,7 +33,7 @@ function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdi
 			{loading ? <Loader /> : (
 				<div className={styles.hawb_list}>
 					<header className={styles.header}>
-						{fields.map((field) => (
+						{finalHawbFields.map((field) => (
 							<div
 								className={styles.col}
 								style={{ '--span': field.span || CONSTANTS.DEFAULT_SPAN }}
@@ -36,7 +47,7 @@ function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdi
 						<HawbListItem
 							key={item.id}
 							item={item}
-							fields={fields}
+							fields={finalHawbFields}
 							loading={loading}
 							functions={commonFunctions({ setViewDoc, setItem, setEdit })}
 						/>

@@ -17,11 +17,12 @@ function ApprovedAWB({
 	setItem = () => {},
 	setViewDoc = () => {},
 	setEdit = () => {},
+	listAPI = () => {},
 }) {
 	const [triggerManifest, setTriggerManifest] = useState('');
 	const { fields } = approvedAWBFields;
 
-	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument();
+	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument({ listAPI });
 
 	const functions = {
 		handleHandover: (singleItem) => {

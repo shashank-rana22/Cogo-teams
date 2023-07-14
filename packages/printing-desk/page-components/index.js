@@ -71,6 +71,7 @@ function PrintingDesk() {
 				item={item}
 				edit={edit}
 				setEdit={setEdit}
+				listAPI={listAPI}
 			/>
 		</div>
 	);

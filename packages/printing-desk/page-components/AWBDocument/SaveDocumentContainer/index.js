@@ -14,19 +14,21 @@ function SaveDocumentContainer({
 	edit = false,
 	setEdit = () => {},
 	setBack = () => {},
+	setViewDoc = () => {},
 	saveDocument = false,
 	setSaveDocument = () => {},
 	category = 'mawb',
 	taskItem = {},
 	formData = {},
 	editCopies = '',
+	listAPI = () => {},
 }) {
 	const {
 		id, documentId, documentType = 'mawb',
 		serviceId, shipment_id: pendingShipmentId, shipmentId, documentNumber,
 	} = taskItem;
 
-	const { updateShipment, loading } = useUpdateShipmentDocument();
+	const { updateShipment, loading } = useUpdateShipmentDocument({ listAPI });
 
 	const { updateIndividualEditing } = useUpdateIndividualEditing({ setEdit });
 
@@ -71,7 +73,10 @@ function SaveDocumentContainer({
 		if (editCopies) {
 			updateIndividualEditing(individualCopyPayload);
 		} else {
-			updateShipment({ payload });
+			updateShipment({ payload }).then(() => {
+				setViewDoc(false);
+				setBack(false);
+			});
 		}
 
 		setSaveDocument(false);

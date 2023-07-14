@@ -8,10 +8,11 @@ import AWBDocument from '../AWBDocument';
 
 import styles from './styles.module.css';
 
-function EditAWB({ item = {}, edit = false, setEdit = () => {} }) {
-	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
+function EditAWB({ item = {}, edit = false, setEdit = () => {}, listAPI = () => {} }) {
 	const [preview, setPreview] = useState(false);
 	const [formData, setFormData] = useState({});
+
+	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	const onSubmit = (value) => {
 		setFormData(value);
@@ -59,6 +60,7 @@ function EditAWB({ item = {}, edit = false, setEdit = () => {} }) {
 					back={preview}
 					setBack={setPreview}
 					setEdit={setEdit}
+					listAPI={listAPI}
 				/>
 			)}
 		</>

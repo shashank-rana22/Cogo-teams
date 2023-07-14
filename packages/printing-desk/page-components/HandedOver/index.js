@@ -1,10 +1,9 @@
-import { Button, Modal } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import List from '../../common/CardList';
-import { approvedAWBFields } from '../../configurations/approved-awb';
-import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import { handedOverFields } from '../../configurations/handed-over';
 import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
@@ -19,34 +18,9 @@ function HandedOver({
 	setEdit = () => {},
 }) {
 	const [triggerManifest, setTriggerManifest] = useState('');
-	const { fields } = approvedAWBFields;
+	const { fields } = handedOverFields;
 
-	const { loading: updateLoading, updateShipment } = useUpdateShipmentDocument();
-
-	const functions = {
-		handleHandover: (singleItem) => {
-			const { documentId, shipmentId, serviceId, documentUrl } = singleItem || {};
-			const payload = {
-				id              : documentId,
-				shipment_id     : shipmentId,
-				document_type   : 'draft_airway_bill',
-				handedOverForTd : true,
-				serviceId,
-				documentUrl,
-			};
-			return (
-				<Button
-					themeType="secondary"
-					onClick={() => { updateShipment({ payload }); }}
-					disabled={updateLoading}
-				>
-					Handover
-				</Button>
-			);
-		},
-	};
-
-	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit }), ...functions };
+	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit }) };
 
 	return (
 		<>

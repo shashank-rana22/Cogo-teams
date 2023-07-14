@@ -21,6 +21,7 @@ function AWBDocument({
 	edit = false,
 	setEdit = () => {},
 	setItem = () => {},
+	listAPI = () => {},
 	back = false,
 	setBack = () => {},
 }) {
@@ -109,12 +110,14 @@ function AWBDocument({
 								edit={edit}
 								setEdit={setEdit}
 								setBack={setBack}
+								setViewDoc={setViewDoc}
 								saveDocument={saveDocument}
 								setSaveDocument={setSaveDocument}
 								category={category}
 								taskItem={taskItem}
 								formData={formData}
 								editCopies={editCopies}
+								listAPI={listAPI}
 							/>
 						)}
 					</div>

@@ -15,6 +15,7 @@
 .col {
 	display: flex;
 	flex: var(--span);
+	justify-content: center;
 	padding: 4px;
 	font-size: var(--font-size-md);
 	font-weight: 500;

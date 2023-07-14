@@ -39,21 +39,24 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 	const listAPI = useCallback(() => {
 		const payload = {
 			approved_awb: {
+				assignedStakeholder  : 'service_ops2_docs',
+				status               : 'completed',
+				task                 : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
+				documentType         : ['draft_airway_bill'],
+				documentState        : 'document_accepted',
+				handedOverAtOriginAt : new Date().toISOString(),
+				isDocDataRequired    : true,
+				handedOverForTd      : false,
+
+			},
+			handed_over: {
 				assignedStakeholder : 'service_ops2_docs',
 				status              : 'completed',
 				task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
 				documentType        : ['draft_airway_bill'],
 				documentState       : 'document_accepted',
 				isDocDataRequired   : true,
-			},
-			handed_over: {
-				assignedStakeholder  : 'service_ops2_docs',
-				status               : 'completed',
-				task                 : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
-				documentType         : ['draft_airway_bill'],
-				documentState        : 'document_accepted',
-				isDocDataRequired    : true,
-				handedOverAtOriginAt : new Date().toISOString(),
+				handedOverForTd     : true,
 			},
 		};
 

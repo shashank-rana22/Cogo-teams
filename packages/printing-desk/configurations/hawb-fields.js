@@ -24,11 +24,5 @@ export const hawbFields = {
 			span  : 1,
 			func  : 'handleDownload',
 		},
-		{
-			key   : 'edit',
-			label : '',
-			span  : 1,
-			func  : 'handleEdit',
-		},
 	],
 };

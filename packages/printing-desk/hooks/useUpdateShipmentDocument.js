@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
-const useUpdateShipmentDocument = () => {
+const useUpdateShipmentDocument = ({ listAPI = () => {} }) => {
 	const [{ loading }, trigger] = useRequestAir({
 		url     : '/air-coe/documents/weight-amend',
 		method  : 'PUT',
@@ -14,6 +14,7 @@ const useUpdateShipmentDocument = () => {
 				data: payload,
 			});
 			Toast.success('Document saved successfully');
+			listAPI();
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');
 		}
