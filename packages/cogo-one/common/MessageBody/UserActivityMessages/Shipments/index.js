@@ -10,11 +10,9 @@ import styles from './styles.module.css';
 
 const GET_LAST_ITEM = -1;
 
-function Shipments({ serviceData = {}, eventType = '' }) {
-	console.log('serviceData:', serviceData);
-
+function Shipments({ serviceData = {}, eventType = '', name = '' }) {
 	const configarableData = getShipmentActivityDetails({ serviceData, eventType });
-	console.log('configarableData:', configarableData);
+
 	const {
 		shippingLineUrl = '',
 		shippingLineName = '',
@@ -22,7 +20,6 @@ function Shipments({ serviceData = {}, eventType = '' }) {
 		originPort = {},
 	} = configarableData || {};
 
-	console.log('destinationPort:', destinationPort);
 	const CHECKOUT_DETAILS = {
 		a : '2 Ctr',
 		b : '2 Ctr',
@@ -33,7 +30,7 @@ function Shipments({ serviceData = {}, eventType = '' }) {
 	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
 	return (
 		<>
-			<div className={styles.title}>Didn’t complete checkout</div>
+			<div className={styles.title}>{startCase(name)}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned checkout -
 			</div>

@@ -12,8 +12,8 @@ import UserActivityMessages from './UserActivityMessages';
 function MessageBody({
 	response = {},
 	message_type = 'text',
-	serviceData = {},
-	service = '',
+	eachMessage = {},
+	formattedData = {},
 }) {
 	const { message = '', media_url = '', profanity_check = '' } = response;
 	const hasProfanity = profanity_check === 'nudity';
@@ -127,8 +127,8 @@ function MessageBody({
 	if (message_type === 'event') {
 		return (
 			<UserActivityMessages
-				serviceData={serviceData}
-				service={service}
+				eachMessage={eachMessage}
+				formattedData={formattedData}
 			/>
 		);
 	}

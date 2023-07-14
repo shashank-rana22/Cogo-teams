@@ -35,13 +35,12 @@ function ReceiveDiv({
 	setRaiseTicketModal = () => {},
 	formattedData = {},
 }) {
+	console.log('eachMessage:', eachMessage);
 	const [showOrder, setShowOrder] = useState(false);
 	const {
 		message_type = 'text',
 		created_at = '',
 		response = {},
-		service_data = {},
-		service = '',
 	} = eachMessage;
 	const { reply_metadata = {}, message = '' } = response || {};
 
@@ -87,8 +86,8 @@ function ReceiveDiv({
 					<MessageBody
 						response={response}
 						message_type={message_type}
-						serviceData={service_data}
-						service={service}
+						eachMessage={eachMessage}
+						formattedData={formattedData}
 					/>
 				</div>
 			</div>

@@ -1,29 +1,37 @@
 import { Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import PreviewModal from './PreviewModal';
 import styles from './styles.module.css';
 
-function EmailClicked() {
+function EmailClicked({ serviceData = {}, name = '', formattedData = {} }) {
+	const { email = '', user_name = '' } = formattedData;
+	const { content = {} } = serviceData || {};
+	const { subject = '', body } = content;
 	const [previewModal, setPreviewModal] = useState(false);
 
 	return (
 		<>
-			<div className={styles.title}>Clicked Email</div>
+			<div className={styles.title}>{startCase(name)}</div>
 			<div className={styles.message}>
 				Following is a preview of the mail -
 			</div>
 			<div className={styles.banner}>
 				<div className={styles.user_name}>
-					Rahul George
+					{user_name}
 				</div>
 				<div className={styles.sender_email}>
-					To: aveera.juss2cogoport.com
+					To:
+					{' '}
+					{email}
 				</div>
 
 				<div className={styles.subject_name}>
-					Re: Subject line here
+					Re:
+					{' '}
+					{subject}
 				</div>
 
 				<div className={styles.subject_content}>
@@ -36,7 +44,13 @@ function EmailClicked() {
 				</Button>
 			</div>
 
-			<PreviewModal previewModal={previewModal} setPreviewModal={setPreviewModal} />
+			<PreviewModal
+				previewModal={previewModal}
+				subject={subject}
+				setPreviewModal={setPreviewModal}
+				body={body}
+				name={name}
+			/>
 		</>
 	);
 }

@@ -1,11 +1,13 @@
+import { startCase } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
-function LoginFailed() {
+function LoginFailed({ name = '', data = {} }) {
 	return (
 		<>
-			<div className={styles.title}>Login Attempt Failed.</div>
+			<div className={styles.title}>{startCase(name)}</div>
 			<div className={styles.message}>
-				Entered incorrect password for email “worxxxxxtpa@gmail.com”
+				{startCase(data?.error)}
 			</div>
 		</>
 	);

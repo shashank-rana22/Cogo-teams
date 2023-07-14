@@ -1,5 +1,16 @@
 .container {
+	height: 400px;
 	margin: 0 15px 15px;
+}
+
+.styled_ui_modal_dialog {
+	border: none !important;
+
+	:global {
+		.ui_modal_body_container {
+			border-bottom: none !important;
+		}
+	}
 }
 
 .title {
@@ -13,13 +24,8 @@
 }
 
 .subject_name {
-	margin-top: 5%;
-	font-size: 16px;
+	margin: 2%;
+	font-size: 12px;
 	font-weight: 600;
 	color: #000;
-}
-
-.subject_content {
-	margin-top: 8%;
-	font-size: 12px;
 }

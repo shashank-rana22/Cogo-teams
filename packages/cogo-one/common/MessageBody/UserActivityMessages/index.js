@@ -6,23 +6,30 @@ import LoginFailed from './LoginFailed';
 import Shipments from './Shipments';
 
 const COMPONENT_MAPPING = {
-	checkout : Shipments,
-	login    : LoginFailed,
-	email    : EmailClicked,
+	checkout      : Shipments,
+	shipment      : Shipments,
+	user          : LoginFailed,
+	communication : EmailClicked,
 };
 
 const ICON_MAPPING = {
-	checkout : GLOBAL_CONSTANTS.image_url.checkout_failed,
-	login    : GLOBAL_CONSTANTS.image_url.login_failed,
-	email    : GLOBAL_CONSTANTS.image_url.email_clicked,
+	checkout      : GLOBAL_CONSTANTS.image_url.checkout_failed,
+	shipment      : GLOBAL_CONSTANTS.image_url.checkout_failed,
+	user          : GLOBAL_CONSTANTS.image_url.login_failed,
+	communication : GLOBAL_CONSTANTS.image_url.email_clicked,
 };
 
-function UserActivityMessages({
-	serviceData = {},
-	service = '',
-}) {
-	const ActiveModalComp = COMPONENT_MAPPING[service] || null;
-	const userActivityIcon = ICON_MAPPING[service] || '';
+function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
+	console.log('formattedData:', formattedData);
+	const {
+		name = '',
+		service_details: serviceData = {},
+		source = '',
+		data = {},
+	} = eachMessage;
+
+	const ActiveModalComp = COMPONENT_MAPPING[source] || null;
+	const userActivityIcon = ICON_MAPPING[source] || '';
 
 	return (
 		<div>
@@ -36,7 +43,10 @@ function UserActivityMessages({
 			{ActiveModalComp && (
 				<ActiveModalComp
 					serviceData={serviceData}
-					eventType={service}
+					eventType={source}
+					name={name}
+					formattedData={formattedData}
+					data={data}
 				/>
 			)}
 
