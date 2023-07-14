@@ -1,7 +1,7 @@
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
 const getControls = ({ country_id = '', entityOptions = [] }) => {
-	const filterdOptions = (entityOptions || []).filter((item) => {
+	const filteredOptions = (entityOptions || []).filter((item) => {
 		const { country_id: COUNTRY_ID } = item;
 		return (
 			country_id === COUNTRY_ID
@@ -81,7 +81,7 @@ const getControls = ({ country_id = '', entityOptions = [] }) => {
 			defaultOptions : false,
 			placeholder    : 'Entity',
 			style          : { flexBasis: '30%' },
-			options        : filterdOptions,
+			options        : filteredOptions,
 			rules          : { required: 'City is Required' },
 		},
 	]);

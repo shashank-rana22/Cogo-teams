@@ -13,7 +13,7 @@ const useListCogoEntities = ({ cogoEntityId }) => {
 	useEffect(() => {
 		const api = async () => {
 			try {
-				await trigger({
+				trigger({
 					params: {
 						filters: { id: cogoEntityId || undefined },
 					},
