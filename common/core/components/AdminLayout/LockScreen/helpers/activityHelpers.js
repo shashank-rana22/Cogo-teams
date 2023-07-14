@@ -14,7 +14,7 @@ const DEFAULT_TIMEOUT = 900000;
 const LIMIT = 1;
 const EVENTS = ['click', 'keypress', 'scroll', 'pointermove'];
 
-const DEBOUNCE_LIMIT = 6000;
+const DEBOUNCE_LIMIT = 60000;
 
 export const getTimeoutConstant = async (firestore) => {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);

@@ -49,7 +49,8 @@ function LockScreen({
 					height={100}
 				/>
 				<div className={styles.styled_text}>
-					Session logged out. Please provide the OTP sent to your registered mail.
+					Session logged out. Due to inactivity on the plaform. Please request
+					and submit the OTP.
 				</div>
 				<div className={styles.styled_view}>
 					<div className={styles.styled_div}>
