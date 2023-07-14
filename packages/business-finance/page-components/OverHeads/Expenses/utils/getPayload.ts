@@ -133,20 +133,17 @@ const getPayload = ({
 					organizationSerialId : sidTradeParty,
 					isTaxApplicable:
 						isTaxApplicable === null ? true : isTaxApplicable,
-					isSez            : false,
-					organizationName : nameTradeParty,
+					isSez              : false,
+					organizationName   : nameTradeParty,
 					pincode,
-					address          : cityName,
+					address            : cityName,
 					cityName,
-					supplyAgent      : nameTradeParty,
-					zone             : 'EAST',
-					countryName      : countryNameTradeParty,
-					countryCode      : countryCodeTradeParty,
-					countryId        : countryIdTradeParty,
-					registrationNumber:
-						registrationType === 'pan'
-							? registrationNumberTradeParty
-							: null,
+					supplyAgent        : nameTradeParty,
+					zone               : 'EAST',
+					countryName        : countryNameTradeParty,
+					countryCode        : countryCodeTradeParty,
+					countryId          : countryIdTradeParty,
+					registrationNumber : registrationNumberTradeParty,
 					taxNumber:
 						registrationType === 'tax'
 							? registrationNumberTradeParty

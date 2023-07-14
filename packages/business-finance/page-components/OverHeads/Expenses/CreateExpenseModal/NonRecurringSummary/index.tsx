@@ -62,7 +62,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
+	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders({
 		currency : nonRecurringData?.invoiceCurrency,
 		expenseCategory,
 		entity   : entityObject?.id,
