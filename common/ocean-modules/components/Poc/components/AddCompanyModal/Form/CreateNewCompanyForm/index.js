@@ -10,9 +10,9 @@ import MultiSelectController from '@cogoport/forms/page-components/Controlled/Mu
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
-import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
-import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
+import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
+import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 

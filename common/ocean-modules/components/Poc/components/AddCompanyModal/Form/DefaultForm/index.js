@@ -3,10 +3,10 @@ import { SelectController, useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import getCompanyAddressOptions from '../../../../components/Poc/helpers/getCompanyAddressOptions';
-import getCompanyNameOptions from '../../../../components/Poc/helpers/getCompanyNameOptions';
-import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/getTradePartiesDefaultParams';
-import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
+import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
+import getCompanyAddressOptions from '../../../../helpers/getCompanyAddressOptions';
+import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
+import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
 
 import styles from './styles.module.css';
 

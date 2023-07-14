@@ -17,16 +17,8 @@ import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
 import styles from './styles.module.css';
 
-const SHIPMENT_TYPE = {
-	fcl_freight: 'fcl',
-};
-
-const STEPPER_TAB = ['import', 'export'];
-
 function Card({ data = {} }) {
 	const router = useRouter();
-
-	const { partner_id = '' } = router.query;
 
 	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
@@ -37,10 +29,8 @@ function Card({ data = {} }) {
 	const isShipmentCritical = !!getCriticalShipment({ shipment: data, shipmentType, activeTab, stepperTab });
 
 	const handleCardClick = () => {
-		const newUrl = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && STEPPER_TAB.includes(stepperTab)
-			? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/${data?.id}
-			?${CONSTANTS.url_navigation_params}`
-			: `${window.location.origin}/${partner_id}/shipments/${data?.id}?${CONSTANTS.url_navigation_params}`;
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;

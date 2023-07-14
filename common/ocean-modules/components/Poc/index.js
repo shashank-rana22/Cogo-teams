@@ -2,10 +2,10 @@ import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import AddCompanyModal from '../../common/AddCompanyModal';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
+import AddCompanyModal from './components/AddCompanyModal';
 import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
