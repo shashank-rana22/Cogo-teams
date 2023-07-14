@@ -84,7 +84,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	sales_admin: {
-		all_chats_base_query   : () => [where('agent_type', 'in', ['sales', 'bot'])],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['sales'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
@@ -174,10 +174,11 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		contacts_base_query       : () => [where('user_details.account_type', '==', 'service_provider')],
-		session_type_query        : getSupplySessionQuery,
-		chat_sub_tabs_access      : ['all', 'groups', 'teams', 'observer', 'contacts'],
-		accesible_filters         : {
+		contacts_base_query       : () => [where('agent_type', 'in', ['supply', 'bot']),
+			where('user_details.account_type', '==', 'service_provider')],
+		session_type_query   : getSupplySessionQuery,
+		chat_sub_tabs_access : ['all', 'groups', 'teams', 'observer', 'contacts'],
+		accesible_filters    : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],
@@ -201,13 +202,14 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		},
 	},
 	supply_admin: {
-		all_chats_base_query   : () => [where('agent_type', 'in', ['supply', 'bot'])],
+		all_chats_base_query   : () => [where('agent_type', 'in', ['supply'])],
 		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-		contacts_base_query    : () => [where('user_details.account_type', '==', 'service_provider')],
-		session_type_query     : getSupplySessionQuery,
-		chat_sub_tabs_access   : ['all', 'groups', 'teams', 'contacts'],
-		accesible_filters      : {
+		contacts_base_query    : () => [where('agent_type', 'in', ['supply', 'bot']),
+			where('user_details.account_type', '==', 'service_provider')],
+		session_type_query   : getSupplySessionQuery,
+		chat_sub_tabs_access : ['all', 'groups', 'teams', 'contacts'],
+		accesible_filters    : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 			contacts : ['chat_tags'],

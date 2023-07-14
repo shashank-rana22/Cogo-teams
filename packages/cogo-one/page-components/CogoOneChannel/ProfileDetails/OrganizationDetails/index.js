@@ -31,11 +31,12 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 }) {
 	const [showConvertModal, setShowConvertModal] = useState(false);
-	const { organization_id: messageOrgId = '' } = formattedMessageData || {};
-	const { organization_id: voiceOrgId = '' } = activeVoiceCard || {};
+	const { organization_id: messageOrgId = '', user_id: messageUserId = '' } = formattedMessageData || {};
+	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
+	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
@@ -53,7 +54,7 @@ function OrganizationDetails({
 	const {
 		pointData = {},
 		pointLoading,
-	} = useGetOrganizationCogopoints({ organizationId });
+	} = useGetOrganizationCogopoints({ organizationId, userId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
@@ -202,7 +203,7 @@ function OrganizationDetails({
 				</>
 			)}
 
-			<div className={styles.agent_title}>Reedemable Cogopoints</div>
+			<div className={styles.agent_title}>User Reedemable Cogopoints</div>
 			<div className={styles.points}>
 				<div className={styles.cogo_icon}>
 					<IcCCogoCoin className={styles.cogocoins_icon} />

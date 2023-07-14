@@ -8596,6 +8596,12 @@ const partner = {
 			module      : 'invoices',
 			feature     : 'invoices',
 		},
+		{
+			api         : 'get_payments_report_ar_ledger',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 	],
 	compliance: [
 		{

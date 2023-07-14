@@ -6,9 +6,13 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const LIVE_COURSES = {
-	introduction_to_cogoport : GLOBAL_CONSTANTS.drive_link.introduction_to_cogoport_link,
-	git_course               : GLOBAL_CONSTANTS.drive_link.git_course_link,
-	html_css_course          : GLOBAL_CONSTANTS.drive_link.html_css_course_link,
+	introduction_to_cogoport           : GLOBAL_CONSTANTS.drive_link.introduction_to_cogoport_link,
+	git_course                         : GLOBAL_CONSTANTS.drive_link.git_course_link,
+	html_css_course                    : GLOBAL_CONSTANTS.drive_link.html_css_course_link,
+	html_css_assessment                : GLOBAL_CONSTANTS.drive_link.html_css_assessment,
+	responsive_web_design              : GLOBAL_CONSTANTS.drive_link.responsive_web_design,
+	responsive_web_design_assessment   : GLOBAL_CONSTANTS.drive_link.responsive_web_design_assessment,
+	javascript_basics_game_development : GLOBAL_CONSTANTS.drive_link.javascript_basics_game_development,
 };
 
 const onClickOpen = (url) => {
