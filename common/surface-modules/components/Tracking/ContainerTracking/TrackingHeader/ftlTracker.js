@@ -1,5 +1,6 @@
 import { Button, Tooltip, Popover, cl } from '@cogoport/components';
 import { InputController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -9,6 +10,52 @@ import useUpdateFtlFreightServiceTracking from '../../../../hooks/useUpdateFtlFr
 import styles from './styles.module.css';
 
 const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
+const CONSENT_INDEX = GLOBAL_CONSTANTS.zeroth_index;
+
+function Content({
+	control,
+	errors,
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	setStartTruckTracker = () => {},
+	reset = () => {},
+	loading = false,
+}) {
+	return (
+		<div className={styles.Content}>
+			<InputController
+				control={control}
+				errors={errors}
+				name="mobile_number"
+				label="Enter Mobile Number for Tracking"
+				placeholder="Enter Mobile Number"
+				disabled
+				themeType="admin"
+			/>
+			<div className={styles.ButtonDiv}>
+				<Button
+					onClick={() => {
+						setStartTruckTracker(false);
+						reset();
+					}}
+					className="secondary md"
+					style={{ marginRight: 10 }}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+
+				<Button
+					disabled={loading}
+					onClick={handleSubmit(onSubmit)}
+					className="primary md"
+				>
+					Submit
+				</Button>
+			</div>
+		</div>
+	);
+}
 
 function FtlTracker({
 	trackingLoading,
@@ -32,7 +79,7 @@ function FtlTracker({
 		setValue,
 	} = useForm();
 
-	const { consentLoading, getTrackingConsent, consentData } =		useGetTrackingConsent({ mobileNumber });
+	const { consentLoading, getTrackingConsent, consentData } =	useGetTrackingConsent({ mobileNumber });
 
 	const { loading, updateService } = useUpdateFtlFreightServiceTracking();
 
@@ -59,42 +106,15 @@ function FtlTracker({
 	const disabledButton = DISABLED_STATE.includes(servicesData.state);
 
 	useEffect(() => {
-		if (startTruckTracker) setValue('mobile_number', mobileNumber);
+		if (startTruckTracker) {
+			setValue(
+				'mobile_number',
+				mobileNumber ? Number(mobileNumber) : undefined,
+			);
+		}
 	}, [startTruckTracker, servicesData, mobileNumber, setValue]);
 
-	const content = (
-		<div className={styles.Content}>
-			<InputController
-				control={control}
-				errors={errors}
-				name="mobile_number"
-				label="Enter Mobile Number for Tracking"
-				placeholder="Enter Mobile Number"
-				themeType="admin"
-			/>
-			<div className={styles.ButtonDiv}>
-				<Button
-					onClick={() => {
-						setStartTruckTracker(false);
-						reset();
-					}}
-					className="secondary md"
-					style={{ marginRight: 10 }}
-					disabled={loading}
-				>
-					Cancel
-				</Button>
-
-				<Button
-					disabled={loading}
-					onClick={handleSubmit(onSubmit)}
-					className="primary md"
-				>
-					Submit
-				</Button>
-			</div>
-		</div>
-	);
+	const content = Content({ control, errors, handleSubmit, onSubmit, setStartTruckTracker, reset, loading });
 
 	return (
 		<>
@@ -131,19 +151,19 @@ function FtlTracker({
 				content={
 					(!consentLoading && (
 						<div>
-							{consentData?.[0]?.result?.consent && (
+							{consentData?.[CONSENT_INDEX]?.result?.consent && (
 								<div className={cl`${styles.Text} ${styles.status}`}>
 									Status:
 									{' '}
-									{consentData?.[0].result?.consent}
+									{consentData?.[CONSENT_INDEX].result?.consent}
 								</div>
 							)}
-							{consentData?.[0]?.result?.consent_suggestion && (
+							{consentData?.[CONSENT_INDEX]?.result?.consent_suggestion && (
 								<div className={styles.SuggestionBox}>
 									<div className={cl`${styles.Text} ${styles.status}`}>
 										Suggestion :
 										{' '}
-										{consentData?.[0]?.result?.consent_suggestion}
+										{consentData?.[CONSENT_INDEX]?.result?.consent_suggestion}
 									</div>
 								</div>
 							)}

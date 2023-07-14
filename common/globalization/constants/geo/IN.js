@@ -444,17 +444,6 @@ export default {
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
 		],
-		timezone: [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
-		],
 		services: [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
 			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
@@ -664,9 +653,9 @@ export default {
 				registration_types    : false,
 			},
 			cogo_one: {
-				has_voice_call_access     : true,
-				default_country_code      : 'IN',
-				template_default_language : 'english',
+				has_voice_call_access       : true,
+				template_default_language   : 'english',
+				supply_sender_mobile_number : '918069195980',
 			},
 		},
 	},

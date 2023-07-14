@@ -1,6 +1,8 @@
 import { Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { isEmpty } from '@cogoport/utils';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../hooks/useListShipmentBookingConfirmationPreferences';
@@ -10,56 +12,56 @@ import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentServ
 import Card from './Card';
 import styles from './styles.module.css';
 
+const SUCCESS_HTTP_CODE = 200;
 function ChooseServiceProvider({
 	task = {},
 	refetch = () => {},
 	onCancel = () => {},
 	services = [],
 }) {
-	const service_ids = [];
+	const SERVICE_IDS = [];
 
-	(services || []).map((serviceObj) => {
+	(services || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service') {
-			service_ids.push(serviceObj?.id);
+			SERVICE_IDS.push(serviceObj?.id);
 		}
-		return service_ids;
 	});
 
 	const { data = {}, loading = true } = useListShipmentBookingConfirmationPreferences({
 		defaultFilters: {
-			service_id   : service_ids,
+			service_id   : SERVICE_IDS,
 			service_type : task.service_type,
 		},
-		shipment_id: services[0]?.shipment_id,
+		shipment_id: services[GLOBAL_CONSTANTS.zeroth_index]?.shipment_id,
 	});
 
-	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({ });
+	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({});
 
-	const { apiTrigger: updateService } = useUpdateShipmentService({ });
+	const { apiTrigger: updateService } = useUpdateShipmentService({});
 
 	const handleUpdateTask = async (item, serviceProvider) => {
 		const mainService = (services || []).filter(
 			(service) => service.service_type === 'fcl_freight_service',
-		)?.[0];
+		)?.[GLOBAL_CONSTANTS.zeroth_index];
 
-		const localServiceIds = [];
-		const fclServiceIds = [];
+		const LOCAL_SERVICE_IDS = [];
+		const FCL_SERVICE_IDS = [];
 		(services || []).forEach((serviceObj) => {
 			if (serviceObj?.service_type?.includes('fcl_freight_local_service')) {
-				localServiceIds.push(serviceObj?.id);
+				LOCAL_SERVICE_IDS.push(serviceObj?.id);
 			} else if (serviceObj?.service_type?.includes('fcl_freight_service')) {
-				fclServiceIds.push(serviceObj?.id);
+				FCL_SERVICE_IDS.push(serviceObj?.id);
 			}
 		});
 		const performed_by_org_id = mainService?.service_provider?.id;
-		const ids = [...fclServiceIds];
+		const ids = [...FCL_SERVICE_IDS];
 
 		try {
-			await updateService({
+			const res_fcl = await updateService({
 				ids,
 				data: {
-					service_provider_id : item?.data?.[0]?.service_provider_id,
-					shipping_line_id    : item?.data?.[0]?.shipping_line_id,
+					service_provider_id : item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
+					shipping_line_id    : item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 				},
 				performed_by_org_id,
 				service_type:
@@ -67,22 +69,28 @@ function ChooseServiceProvider({
 				shipment_id: mainService?.shipment_id,
 			});
 
-			if (localServiceIds > 0) {
-				await updateService({
+			if (!isEmpty(LOCAL_SERVICE_IDS) && res_fcl?.status === SUCCESS_HTTP_CODE) {
+				const res_local = await updateService({
 					data: {
 						service_provider_id : serviceProvider,
-						shipping_line_id    : item?.data?.[0]?.shipping_line_id,
+						shipping_line_id    : item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					},
-					ids                 : localServiceIds,
+					ids                 : LOCAL_SERVICE_IDS,
 					service_type        : 'fcl_freight_local_service',
 					shipment_id         : task?.shipment_id,
 					performed_by_org_id : serviceProvider,
 				});
-			}
 
-			await updateTask({ id: task?.id });
-			onCancel();
-			refetch();
+				if (res_local?.status === SUCCESS_HTTP_CODE) {
+					await updateTask({ id: task?.id });
+					onCancel();
+					refetch();
+				}
+			} else if (isEmpty(LOCAL_SERVICE_IDS)) {
+				await updateTask({ id: task?.id });
+				onCancel();
+				refetch();
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -97,7 +105,7 @@ function ChooseServiceProvider({
 	}
 
 	return (
-		data?.list?.length > 0
+		!isEmpty(data?.list)
 			? data?.list.map((item) => (
 				<Card
 					key={item?.id}
