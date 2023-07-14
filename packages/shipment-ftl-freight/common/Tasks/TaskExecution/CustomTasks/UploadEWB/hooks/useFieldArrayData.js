@@ -20,7 +20,7 @@ Object.values(GLOBAL_CONSTANTS.cogoport_entities).map((value) => (
 		&& ENTITY_CODE.push(value.id)
 ));
 
-export const useFieldArrayData = ({ services, shipment_data }) => {
+export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 	const [ewayBillData, setewayBillData] = useState({});
 	const [finalDoc, setFinalDoc] = useState([]);
 
@@ -29,7 +29,7 @@ export const useFieldArrayData = ({ services, shipment_data }) => {
 
 	const { updateEwayBillNumber } = useValidateEwayBillNumber();
 
-	const checkDateTime = ({ limitDateTime, shipment_data_obj }) => {
+	const checkDateTime = ({ limitDateTime, shipment_data_obj = {} }) => {
 		const shipmentCreatedAtDateTime = new Date(
 			shipment_data_obj?.created_at,
 		).getTime();
@@ -57,8 +57,8 @@ export const useFieldArrayData = ({ services, shipment_data }) => {
 				const { documents } = value;
 				setFinalDoc(documents);
 				const object = documents[index];
-				ewayBillData[`${index}`] = { ...ewayBillData[`${index}`] };
-				ewayBillData[`${index}`][`${subcontrols}`] = object[subcontrols];
+				ewayBillData[index] = { ...ewayBillData[index] };
+				ewayBillData[index][subcontrols] = object[subcontrols];
 				setewayBillData(ewayBillData);
 			}
 			if (

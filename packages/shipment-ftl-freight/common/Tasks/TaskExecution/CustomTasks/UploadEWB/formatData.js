@@ -11,7 +11,7 @@ export const formatBulkUpdateData = ({ val = {}, shipment_data = {} }) => {
 
 	all_services.forEach((item) => {
 		const eachTruckPayload = {
-			service_id : item.id,
+			service_id : item?.id,
 			data       : {
 				eway_bill_details: [],
 			},
