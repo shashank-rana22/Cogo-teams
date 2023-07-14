@@ -7,7 +7,7 @@ import {
 	IcMFftl,
 	IcMFltl, IcCTelegram, IcCZalo,
 } from '@cogoport/icons-react';
-// import { Image } from '@cogoport/next';
+import { Image } from '@cogoport/next';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
@@ -33,24 +33,24 @@ export const SOURCE_ICON_MAPPING = {
 		width="30px"
 		height="30px"
 	/>,
-	// whatsapp: <Image
-	// 	src={GLOBAL_CONSTANTS.image_url.login_failed}
-	// 	alt="status-icon"
-	// 	width={15}
-	// 	height={15}
-	// />,
-	// whatsapp: <Image
-	// 	src={GLOBAL_CONSTANTS.image_url.checkout_failed}
-	// 	alt="status-icon"
-	// 	width={15}
-	// 	height={15}
-	// />,
-	// whatsapp: <Image
-	// 	src={GLOBAL_CONSTANTS.image_url.email_clicked}
-	// 	alt="status-icon"
-	// 	width={15}
-	// 	height={15}
-	// />,
+	login: <Image
+		src={GLOBAL_CONSTANTS.image_url.login_failed}
+		alt="status-icon"
+		width={15}
+		height={15}
+	/>,
+	checkout: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={15}
+		height={15}
+	/>,
+	email_clicked: <Image
+		src={GLOBAL_CONSTANTS.image_url.email_clicked}
+		alt="status-icon"
+		width={15}
+		height={15}
+	/>,
 
 };
 

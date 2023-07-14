@@ -1,0 +1,25 @@
+.container {
+	margin: 0 15px 15px;
+}
+
+.title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.message {
+	font-size: 11px;
+}
+
+.subject_name {
+	margin-top: 5%;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+}
+
+.subject_content {
+	margin-top: 8%;
+	font-size: 12px;
+}

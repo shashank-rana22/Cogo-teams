@@ -1,9 +1,13 @@
 import { Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
+import { useState } from 'react';
 
+import PreviewModal from './PreviewModal';
 import styles from './styles.module.css';
 
 function EmailClicked() {
+	const [previewModal, setPreviewModal] = useState(false);
+
 	return (
 		<>
 			<div className={styles.title}>Clicked Email</div>
@@ -26,12 +30,13 @@ function EmailClicked() {
 					I want to get rates for Nhava Sheva to Jebel Ali.
 					Can I get them asap?
 				</div>
-				<Button size="md" themeType="secondary">
+				<Button size="md" themeType="secondary" onClick={() => setPreviewModal(true)}>
 					<IcMEyeopen className={styles.eye_icon} />
 					Preview
 				</Button>
 			</div>
 
+			<PreviewModal previewModal={previewModal} setPreviewModal={setPreviewModal} />
 		</>
 	);
 }
