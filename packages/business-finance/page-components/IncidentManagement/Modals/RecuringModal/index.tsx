@@ -20,6 +20,8 @@ export const DURATION_MAPPING = {
 	YEAR      : 'Yearly',
 };
 
+const FIRST_INDEX = 1;
+
 function RecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -41,7 +43,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		endDate,
 	} = reccuringExpenseApproval || {};
 
-	const { useOnAction: OnAction, loading } = usePostExpense({
+	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setShowModal,
 		id,
@@ -122,8 +124,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 									GLOBAL_CONSTANTS.formats.date[
 										'dd MMM yyyy'
 									],
-							formatType : 'date',
-							separator  : ' | ',
+							formatType: 'date',
 						})
 						: '-'}
 				</div>
@@ -151,7 +152,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 								<div className={styles.view}>
 									View Document
 									{' '}
-									{index + 1}
+									{index + FIRST_INDEX}
 								</div>
 							</div>
 						</a>
@@ -179,74 +180,72 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 			<div>
 				<ViewButton state={setShowModal} />
 			</div>
-			{showModal && (
-				<Modal
-					size="lg"
-					show={showModal}
-					onClose={() => setShowModal(false)}
-				>
-					<Modal.Header
-						title={`Expense Approval - ${toTitleCase(
-							businessName,
-						)} (${toTitleCase(expenseType)})`}
-					/>
-					<Modal.Body>
-						{!isEditable && <ApproveAndReject row={row} />}
-						{renderSummary(summaryDataFirst)}
-						{renderSummary(summaryDataSecond)}
-						{renderSummary(summaryDataThird)}
-						{renderSummary(summaryDataFourth)}
-						<div>
-							<div className={styles.title}>Remarks:</div>
-							<div className={styles.remarkval}>{remarkData}</div>
-						</div>
-						<>
-							<div className={styles.remarks}>Remarks*</div>
-							<Textarea
-								name="remark"
+			<Modal
+				size="lg"
+				show={showModal}
+				onClose={() => setShowModal(false)}
+			>
+				<Modal.Header
+					title={`Expense Approval - ${toTitleCase(
+						businessName,
+					)} (${toTitleCase(expenseType)})`}
+				/>
+				<Modal.Body>
+					{!isEditable && <ApproveAndReject row={row} />}
+					{renderSummary(summaryDataFirst)}
+					{renderSummary(summaryDataSecond)}
+					{renderSummary(summaryDataThird)}
+					{renderSummary(summaryDataFourth)}
+					<div>
+						<div className={styles.title}>Remarks:</div>
+						<div className={styles.remarkval}>{remarkData}</div>
+					</div>
+					<>
+						<div className={styles.remarks}>Remarks*</div>
+						<Textarea
+							name="remark"
+							size="md"
+							placeholder="Enter Remark Here..."
+							onChange={(value: string) => setRemarks(value)}
+							style={{
+								width        : '700',
+								height       : '100px',
+								marginBottom : '12px',
+							}}
+						/>
+					</>
+				</Modal.Body>
+				{isEditable && (
+					<Modal.Footer>
+						<div className={styles.button}>
+							<Button
 								size="md"
-								placeholder="Enter Remark Here..."
-								onChange={(value: string) => setRemarks(value)}
-								style={{
-									width        : '700',
-									height       : '100px',
-									marginBottom : '12px',
+								themeType="secondary"
+								style={{ marginRight: '8px' }}
+								disabled={!remarks.length || loading}
+								loading={loading}
+								onClick={() => {
+									onAction('REJECTED');
 								}}
-							/>
-						</>
-					</Modal.Body>
-					{isEditable && (
-						<Modal.Footer>
-							<div className={styles.button}>
-								<Button
-									size="md"
-									themeType="secondary"
-									style={{ marginRight: '8px' }}
-									disabled={!remarks.length || loading}
-									loading={loading}
-									onClick={() => {
-										OnAction('REJECTED');
-									}}
-								>
-									Reject
-								</Button>
+							>
+								Reject
+							</Button>
 
-								<Button
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={!remarks.length || loading}
-									loading={loading}
-									onClick={() => {
-										OnAction('APPROVED');
-									}}
-								>
-									Approve
-								</Button>
-							</div>
-						</Modal.Footer>
-					)}
-				</Modal>
-			)}
+							<Button
+								size="md"
+								style={{ marginRight: '8px' }}
+								disabled={!remarks.length || loading}
+								loading={loading}
+								onClick={() => {
+									onAction('APPROVED');
+								}}
+							>
+								Approve
+							</Button>
+						</div>
+					</Modal.Footer>
+				)}
+			</Modal>
 		</div>
 	);
 }

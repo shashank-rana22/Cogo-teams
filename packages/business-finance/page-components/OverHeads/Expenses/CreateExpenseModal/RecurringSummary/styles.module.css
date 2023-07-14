@@ -36,3 +36,9 @@
 	padding-left: 4px;
 	font-weight: 600;
 }
+
+.upload_invoice {
+	font-size: 16px;
+	color: blue;
+	text-decoration: underline;
+}

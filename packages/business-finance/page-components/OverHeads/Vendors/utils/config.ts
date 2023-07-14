@@ -75,12 +75,6 @@ const configs = () => {
 				func    : 'rendeDate',
 				sorting : { name: 'createdAtSortType' },
 			},
-			// {
-			// 	label : '',
-			// 	key   : 'viewMoreButton',
-			// 	span  : 1,
-			// 	func  : 'renderViewMoreButton',
-			// },
 		],
 	};
 

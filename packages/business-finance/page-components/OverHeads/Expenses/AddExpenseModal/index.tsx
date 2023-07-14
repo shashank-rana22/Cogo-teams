@@ -103,24 +103,22 @@ function AddExpenseModal({
 				</Button>
 			</Modal.Footer>
 
-			{mailModal && (
-				<Modal
-					size="lg"
-					show={mailModal}
-					onClose={() => setMailModal(false)}
-					placement="top"
-				>
-					<Modal.Header title="Request Email Preview" />
-					<Modal.Body className={styles.modal_body}>
-						<MailTemplate
-							expenseData={expenseData}
-							setShowModal={setShowExpenseModal}
-							getList={() => {}}
-							rowData={rowData}
-						/>
-					</Modal.Body>
-				</Modal>
-			)}
+			<Modal
+				size="lg"
+				show={mailModal}
+				onClose={() => setMailModal(false)}
+				placement="top"
+			>
+				<Modal.Header title="Request Email Preview" />
+				<Modal.Body className={styles.modal_body}>
+					<MailTemplate
+						expenseData={expenseData}
+						setShowModal={setShowExpenseModal}
+						getList={() => {}}
+						rowData={rowData}
+					/>
+				</Modal.Body>
+			</Modal>
 		</Modal>
 	);
 }

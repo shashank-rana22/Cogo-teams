@@ -34,7 +34,7 @@ interface Props {
 	handleCategoryChange?: (obj: any, val: object) => void;
 }
 
-const getMontOptions = (minMonth) => {
+const getMonthOptions = (minMonth) => {
 	const date = minMonth ? new Date(minMonth) : new Date();
 	const options = MONTH_OPTIONS.filter(
 		(option) => option.key > date.getMonth(),
@@ -108,7 +108,7 @@ export const nonRecurringExpenseDetails = ({
 						...formData,
 						periodOfTransaction: month,
 					}),
-					options   : getMontOptions(formData.transactionDate),
+					options   : getMonthOptions(formData.transactionDate),
 					className : styles.input_width,
 				},
 				{

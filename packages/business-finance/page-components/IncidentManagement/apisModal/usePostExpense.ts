@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -34,14 +34,14 @@ const usePostExpense = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
+				toastApiError('Request Updated Sucessfully');
 				setShowModal(false);
 				refetch();
 			} else {
-				Toast.error(message);
+				toastApiError(message);
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.message);
+			toastApiError(e?.response?.data?.message);
 		}
 	};
 

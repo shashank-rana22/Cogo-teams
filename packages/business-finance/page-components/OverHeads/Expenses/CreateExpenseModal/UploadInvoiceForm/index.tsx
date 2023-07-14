@@ -1,4 +1,5 @@
 import { Input, Select, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
@@ -37,7 +38,7 @@ function UploadInvoiceForm({
 }:Props) {
 	const { invoiceCurrency, invoiceNumber, uploadedInvoice:uploadUrl, lineItemsList } = formData || {};
 
-	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;
+	const isLineItemPresent = lineItemsList?.[GLOBAL_CONSTANTS.zeroth_index]?.payable_amount;
 
 	useEffect(() => {
 		// Validation to ensure that all data is filled before moving to next page
@@ -106,6 +107,7 @@ function UploadInvoiceForm({
 											themeType="secondary"
 										>
 											Reset
+											{' '}
 											<IcMRefresh />
 										</Button>
 										<Button

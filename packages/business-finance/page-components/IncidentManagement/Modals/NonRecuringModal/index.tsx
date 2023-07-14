@@ -59,7 +59,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 		expenseType,
 	} = overheadConfirmationRequest || {};
 
-	const { useOnAction: OnAction, loading } = usePostExpense({
+	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setShowModal,
 		id,
@@ -236,7 +236,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 								disabled={!remarks.length || loading}
 								loading={loading}
 								onClick={() => {
-									OnAction('REJECTED');
+									onAction('REJECTED');
 								}}
 							>
 								Reject
@@ -248,7 +248,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 								disabled={!remarks.length || loading}
 								loading={loading}
 								onClick={() => {
-									OnAction('APPROVED');
+									onAction('APPROVED');
 								}}
 							>
 								Approve

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -48,7 +49,7 @@ interface Props {
 	setRecurringData?: (p: any) => void;
 }
 
-function RecurringSummary({ recurringData, setRecurringData }: Props) {
+function RecurringSummary({ recurringData = {}, setRecurringData = () => {} }: Props) {
 	const {
 		vendorName,
 		expenseCategory,
@@ -92,7 +93,7 @@ function RecurringSummary({ recurringData, setRecurringData }: Props) {
 		if (tradePartyData?.length > 0) {
 			setRecurringData((prev: object) => ({
 				...prev,
-				tradeParty: tradePartyData?.[0],
+				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
 			}));
 		}
 	}, [tradePartyData, setRecurringData]);
@@ -178,6 +179,7 @@ function RecurringSummary({ recurringData, setRecurringData }: Props) {
 								textDecoration : 'underline',
 								fontSize       : '16px',
 							}}
+							className={styles.upload_invoice}
 							target="_blank"
 							rel="noreferrer"
 						>
