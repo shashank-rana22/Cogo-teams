@@ -49,18 +49,16 @@
 	position: relative;
 	top: 500px;
 	left: calc(50% - 100px);
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-	height: 100px;
+	max-width: 200px;
+	max-height: 100px;
 	margin-top: -92px;
 }
 
 .watermark_text {
 	align-items: center;
 	font-size: 80px;
-	font-weight: bold;
-	color: rgb(0 0 0 / 10%);
+	font-weight: 800;
+	color: #0000001a;
 	text-transform: uppercase;
 	letter-spacing: 4px;
 }

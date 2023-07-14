@@ -48,7 +48,7 @@ function CardItem({
 						const itemStyle = field.styles || {};
 						return (
 							<div
-								className={cl`${styles.col} ${field.className || ''} ${
+								className={cl`${styles.col} ${field.className} ${
 									isMobile ? styles.is_mobile : ''
 								}`}
 								style={{

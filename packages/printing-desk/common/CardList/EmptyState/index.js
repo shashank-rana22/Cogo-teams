@@ -15,7 +15,7 @@ function EmptyState({
 				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				width={width}
 				height={height}
-				alt="Empty-state"
+				alt="empty state"
 				className={styles.image}
 			/>
 			<div>

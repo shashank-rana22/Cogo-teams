@@ -6,7 +6,7 @@
 
 .end_message {
 	margin-top: 20px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	color: var(--color-secondary-greyscale-1);
 	text-align: center;
 	text-transform: uppercase;

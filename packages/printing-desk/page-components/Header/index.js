@@ -15,10 +15,6 @@ const TABS = [
 		key   : 'handed_over',
 		label : 'Handed Over',
 	},
-	{
-		key   : 'amendment',
-		label : 'Amended',
-	},
 ];
 
 function Header({
@@ -51,6 +47,7 @@ function Header({
 					})}
 				</Tabs>
 				<Input
+					size="sm"
 					value={searchValue}
 					suffix={(
 						searchValue ? (

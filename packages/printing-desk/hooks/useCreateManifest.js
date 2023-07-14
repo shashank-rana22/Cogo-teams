@@ -26,7 +26,7 @@ const useCreateManifest = () => {
 					uploadedByUserType : AGENT_CONDITION.includes(userData?.session_type) ? 'agent' : 'user',
 				},
 			});
-			setTriggerManifest(null);
+			setTriggerManifest('');
 		} catch (err) {
 			Toast.error(err?.message || 'Failed to Create');
 		}

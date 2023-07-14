@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 
 function HawbListItem({ fields = [], item = {}, loading = false, functions = {} }) {
 	return (
-		<section className={styles.list_container}>
+		<section className={styles.hawb_list_container}>
 			<div
 				className={styles.row}
 			>
@@ -15,7 +15,7 @@ function HawbListItem({ fields = [], item = {}, loading = false, functions = {} 
 					const itemStyle = field.styles || {};
 					return (
 						<div
-							className={cl`${styles.col} ${field.className || ''}`}
+							className={cl`${styles.col} ${field.className}`}
 							style={{
 								'--span': (field.span || CONSTANTS.DEFAULT_SPAN),
 								...itemStyle,

@@ -1,5 +1,5 @@
 import { Button, Pagination } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowUp, IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { Fragment, useState } from 'react';
 
@@ -25,54 +25,52 @@ function CardList({
 	const { shipmentPendingTasks = [], totalRecords } = data;
 
 	const handleRender = () => {
-		if (loading || shipmentPendingTasks.length) {
-			return (shipmentPendingTasks || []).map((singleitem) => (
-				<Fragment key={singleitem.id}>
-					<CardItem
-						singleitem={singleitem}
-						fields={fields}
-						functions={functions}
-						loading={loading}
-						Child={Child}
-						open={open}
-						setViewDoc={setViewDoc}
-						setItem={setItem}
-						setEdit={setEdit}
-					/>
-					{singleitem.blCategory === 'hawb' && (
-						<div
-							className={styles.accordian_style}
-						>
-							{open === singleitem.id ? (
-								<Button
-									themeType="linkUi"
-									onClick={() => {
-										setOpen('');
-									}}
-								>
-									Show Less
-									<IcMArrowDown
-										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
-									/>
-								</Button>
-							) : (
-								<Button
-									size="md"
-									themeType="linkUi"
-									onClick={() => {
-										setOpen(singleitem?.id);
-									}}
-								>
-									<span>Show More</span>
-									<IcMArrowDown
-										style={{ cursor: 'pointer' }}
-									/>
-								</Button>
-							)}
-						</div>
-					)}
-				</Fragment>
-			));
+		if (loading || !isEmpty(shipmentPendingTasks)) {
+			return (shipmentPendingTasks || []).map((singleitem) => {
+				const { id, blCategory } = singleitem || {};
+				return (
+					<Fragment key={id}>
+						<CardItem
+							singleitem={singleitem}
+							fields={fields}
+							functions={functions}
+							loading={loading}
+							Child={Child}
+							open={open}
+							setViewDoc={setViewDoc}
+							setItem={setItem}
+							setEdit={setEdit}
+						/>
+						{blCategory === 'hawb' && (
+							<div className={styles.accordian_style}>
+								{open === id ? (
+									<Button
+										themeType="linkUi"
+										onClick={() => {
+											setOpen('');
+										}}
+									>
+										Show Less
+										{' '}
+										<IcMArrowUp />
+									</Button>
+								) : (
+									<Button
+										themeType="linkUi"
+										onClick={() => {
+											setOpen(id);
+										}}
+									>
+										Show More
+										{' '}
+										<IcMArrowDown />
+									</Button>
+								)}
+							</div>
+						)}
+					</Fragment>
+				);
+			});
 		}
 		return <EmptyState />;
 	};
@@ -82,7 +80,7 @@ function CardList({
 			<Header fields={fields} />
 			<div className={styles.scroll}>
 				{handleRender()}
-				{!loading && !isEmpty(shipmentPendingTasks.length) ? (
+				{!loading && !isEmpty(shipmentPendingTasks) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

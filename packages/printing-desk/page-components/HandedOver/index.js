@@ -9,7 +9,7 @@ import commonFunctions from '../../utils/commonFunctions';
 import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
 
-function ApprovedAWB({
+function HandedOver({
 	data = {},
 	loading = false,
 	page = 1,
@@ -81,4 +81,4 @@ function ApprovedAWB({
 	);
 }
 
-export default ApprovedAWB;
+export default HandedOver;
