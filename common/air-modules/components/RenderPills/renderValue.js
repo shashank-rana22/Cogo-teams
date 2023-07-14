@@ -1,7 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
-import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
+import { startCase, upperCase, isEmpty } from '@cogoport/utils';
 
 import copyToClipboard from '../../utils/copyToClipboard';
 
@@ -118,7 +119,11 @@ export const renderValue = (label, detail = {}) => {
 				? 'Sell Without Buy'
 				: startCase(source || '');
 		case 'cargo_readiness_date':
-			return format(cargo_readiness_date, 'dd MMM yyyy');
+			return formatDate({
+				date       : cargo_readiness_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'is_minimum_price_shipment':
 			return 'Min. Price';
 		case 'master_airway_bill_number':
@@ -141,11 +146,23 @@ export const renderValue = (label, detail = {}) => {
 		case 'house_airway_bill_number':
 			return `HAWB Number: ${house_airway_bill_number || ''}`;
 		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.schedule_departure || detail?.selected_schedule_departure,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.schedule_arrival || detail?.selected_schedule_arrival,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'awb_execution_date':
-			return `AWB Exe. Date: ${format(awb_execution_date || awb_execution_date, 'dd MMM yyyy')}`;
+			return `AWB Exe. Date: ${formatDate({
+				date       : awb_execution_date || awb_execution_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			})}`;
 		default:
 			return detail[label] || null;
 	}
