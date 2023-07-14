@@ -1,4 +1,4 @@
-import { Button, Modal, MultiSelect, SingleDateRange } from '@cogoport/components';
+import { Button, Modal, Select, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -8,10 +8,21 @@ import useLedgerDownload from '../../../../hooks/useLedgerDownload';
 
 import styles from './styles.module.css';
 
+const FIRST_ENTITY = GLOBAL_CONSTANTS.zeroth_index;
+const SECOND_ENTITY = 1;
+
+const INDIAN_ENTITES = GLOBAL_CONSTANTS.indian_entities;
+
 const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => ({
-	label : entity,
+	label : `(${entity})${GLOBAL_CONSTANTS.cogoport_entities[entity].name}`,
 	value : String(entity),
 }));
+
+// adding a custom option for entities
+ENTITY_OPTIONS.unshift({
+	label : `(${INDIAN_ENTITES[FIRST_ENTITY]},${INDIAN_ENTITES[SECOND_ENTITY]}) Indian Entites`,
+	value : INDIAN_ENTITES,
+});
 
 function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item = {} }) {
 	const [date, setDate] = useState(null);
@@ -51,14 +62,12 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 						</div>
 						<div>
 							<h5>Entity*</h5>
-							<MultiSelect
+							<Select
 								value={entities}
 								onChange={setEntites}
 								placeholder="Select Entity"
 								options={ENTITY_OPTIONS}
-								isClearable
 								style={{ width: '250px' }}
-								prefix={() => {}}
 							/>
 
 						</div>
