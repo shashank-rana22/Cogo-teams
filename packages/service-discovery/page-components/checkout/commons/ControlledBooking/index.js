@@ -11,9 +11,9 @@ import ControlledBookingDetails from './components/ControlledBookingDetails';
 import styles from './styles.module.css';
 
 function ControlledBooking({
-	detail,
-	getCheckout,
-	setDisableButtonConditions,
+	detail = {},
+	getCheckout = () => {},
+	setIsControlBookingDetailsFilled = () => {},
 }) {
 	const ref = useRef({});
 
@@ -38,7 +38,7 @@ function ControlledBooking({
 		getCheckout,
 		servicesApplicable,
 		setShowForm,
-		setDisableButtonConditions,
+		setIsControlBookingDetailsFilled,
 	});
 
 	const handleSubmitForm = () => {

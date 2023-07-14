@@ -30,10 +30,11 @@ const CHIPS_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
 );
 
 function AddInvoicingPartyModal({
-	disabledInvoicingParties,
+	disabledInvoicingParties = [],
 	isInvoicingPartiesSaved,
 	setShowAddInvoicingPartyModal,
 	showAddInvoicingPartyModal,
+	source = '',
 }) {
 	const {
 		orgData = {},
@@ -45,32 +46,47 @@ function AddInvoicingPartyModal({
 	} = useContext(CheckoutContext);
 
 	const [activeComponentKey, setActiveComponentKey] = useState(
-		() => CHIPS_OPTIONS[0].value,
+		() => CHIPS_OPTIONS[0].key,
 	);
+	const [currentView, setCurrentView] = useState('select_address');
+	const [activeState, setActiveState] = useState('view_billing_addresses');
+	const [selectedAddress, setSelectedAddress] = useState({});
 
 	const componentProps = {
 		invoice_to_self: {
-			organization    : orgData?.data,
+			organization : orgData?.data,
 			primary_service,
-			disabledParties : disabledInvoicingParties,
+			disabledInvoicingParties,
 			// updateInvoicingParty,
-			bookingType     : 'self',
+			bookingType  : 'self',
 			// onClose,
 			// isIE,
 			// setIgstValues,
-			// source,
 			// isOrgCountryInvoicesRequired,
+			currentView,
+			activeState,
+			setActiveState,
+			setCurrentView,
+			selectedAddress,
+			setSelectedAddress,
+			source,
 		},
 		invoice_to_trade_partner: {
-			organization    : orgData?.data,
+			organization : orgData?.data,
 			primary_service,
-			disabledParties : disabledInvoicingParties,
+			disabledInvoicingParties,
 			// updateInvoicingParty,
-			bookingType     : 'paying_party',
+			bookingType  : 'paying_party',
 			// onClose,
 			// setIgstValues,
-			// source,
 			// isOrgCountryInvoicesRequired,
+			currentView,
+			activeState,
+			setActiveState,
+			setCurrentView,
+			selectedAddress,
+			setSelectedAddress,
+			source,
 		},
 	};
 
@@ -86,18 +102,21 @@ function AddInvoicingPartyModal({
 		>
 			<Modal.Header title="Add Invoicing Party" />
 
-			<Modal.Body>
+			<Modal.Body style={{ maxHeight: '620px' }}>
 				<div className={styles.flex}>
 					<div className={styles.label}>Invoice To:</div>
 
 					<Chips
 						items={CHIPS_OPTIONS}
 						selectedItems={activeComponentKey}
-						onItemChange={setActiveComponentKey}
+						onItemChange={(value) => {
+							setActiveComponentKey(value);
+							setSelectedAddress({});
+						}}
 					/>
-
-					<ActiveComponent key={activeComponentKey} {...activeComponentProps} />
 				</div>
+
+				<ActiveComponent key={activeComponentKey} {...activeComponentProps} />
 			</Modal.Body>
 		</Modal>
 	);

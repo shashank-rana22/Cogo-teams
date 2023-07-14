@@ -348,6 +348,7 @@ const GLOBAL_CONSTANTS = {
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		gst_number                        : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

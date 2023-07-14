@@ -15,30 +15,43 @@ function PreviewBooking() {
 		checkoutMethod,
 	} = useContext(CheckoutContext);
 
-	const { margin_approval_request_remarks = [], checkout_approvals = [] } = detail;
+	const { margin_approval_request_remarks = [], checkout_approvals = [] } =		detail;
 
-	const { hs_code, cargo_readiness_date, cargo_value	} = primaryService;
+	const { hs_code, cargo_readiness_date, cargo_value } = primaryService;
 
-	const { booking_status = '', manager_approval_proof } =		checkout_approvals[0] || {};
+	const { booking_status = '', manager_approval_proof } = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showBreakup, setShowBreakup] = useState(false);
 	const [additionalRemark, setAdditionalRemark] = useState(
 		() => margin_approval_request_remarks[GLOBAL_CONSTANTS.zeroth_index] || '',
 	);
-	const [cargoDetails, setCargoDetails] = useState(() => ({ hs_code, cargo_readiness_date, cargo_value }));
-	const [isVeryRisky, setIsVeryRisky] = useState(false);
-	const [disableButtonConditions, setDisableButtonConditions] = useState(() => ({
-		agreeTandC        : true,
-		controlledBooking : checkoutMethod === 'controlled_checkout'
-			? ['pending_approval', 'rejected'].includes(booking_status) || !manager_approval_proof
-			: false,
+	const [cargoDetails, setCargoDetails] = useState(() => ({
+		hs_code,
+		cargo_readiness_date: new Date(cargo_readiness_date),
+		cargo_value,
 	}));
+
+	const [isVeryRisky, setIsVeryRisky] = useState(false);
+	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(false);
+	const [disableButtonConditions, setDisableButtonConditions] = useState(
+		() => ({
+			notAgreeTandC: false,
+			controlledBooking:
+				checkoutMethod === 'controlled_checkout'
+					? ['pending_approval', 'rejected'].includes(booking_status) || !manager_approval_proof
+					: false,
+		}),
+	);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Preview Booking</div>
 
-			<BookingPreview rate={rate} setShowBreakup={setShowBreakup} showBreakup={showBreakup} />
+			<BookingPreview
+				rate={rate}
+				setShowBreakup={setShowBreakup}
+				showBreakup={showBreakup}
+			/>
 
 			<AdditionalContent
 				value={additionalRemark}
@@ -49,6 +62,8 @@ function PreviewBooking() {
 				isVeryRisky={isVeryRisky}
 				disableButtonConditions={disableButtonConditions}
 				setDisableButtonConditions={setDisableButtonConditions}
+				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
+				setIsControlBookingDetailsFilled={setIsControlBookingDetailsFilled}
 			/>
 		</div>
 	);

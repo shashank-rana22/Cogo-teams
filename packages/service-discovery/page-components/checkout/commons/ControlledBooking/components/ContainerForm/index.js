@@ -14,9 +14,9 @@ const removeTypeField = (controlItem) => {
 };
 
 function ContainerForm({
-	checkout_approvals,
-	servicesApplicable,
-	onSubmit,
+	checkout_approvals = [],
+	servicesApplicable = [],
+	onSubmit = () => {},
 }, ref) {
 	const controls = [
 		getControls({
@@ -46,7 +46,7 @@ function ContainerForm({
 	useEffect(() => {
 		setValue(
 			'cargo_readiness_date',
-			servicesApplicable?.[GLOBAL_CONSTANTS.zeroth_index]?.cargo_readiness_date,
+			new Date(servicesApplicable?.[GLOBAL_CONSTANTS.zeroth_index]?.cargo_readiness_date),
 		);
 	}, [servicesApplicable, setValue]);
 

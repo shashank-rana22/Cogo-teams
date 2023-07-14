@@ -9,7 +9,7 @@ const COMPONENT_MAPPING = {
 
 };
 
-function FclCheckout({ checkoutState = 'preview_booking' }) {
+function FclCheckout({ checkoutState = 'shipment_execution' }) {
 	const ActiveComponent = COMPONENT_MAPPING[checkoutState];
 
 	return (

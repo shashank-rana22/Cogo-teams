@@ -1,0 +1,43 @@
+.add_container {
+    border: 1px dotted #F9AE64;
+    padding: 16px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create_container {
+    border: 1px solid #E8FDFF;
+    background-color: #F3FAFA;
+    padding:12px  24px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.bold_text {
+    font-weight: 700;
+    font-size: 42px;
+}
+
+.large_text {
+    font-size: 42px;
+    font-weight: 400;
+    margin-left: 12px;
+    color: #000;
+}
+
+.text {
+    font-size: 16px;
+}
+
+.terms_text {
+    font-size: 10px;
+    font-weight: 500;
+    margin-left: 12px;
+}

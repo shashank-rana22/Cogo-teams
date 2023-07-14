@@ -15,9 +15,7 @@ const getPayload = ({ values, servicesApplicable }) => {
 			(childItem) => `${childItem.container_size}_${childItem.commodity}` === item,
 		);
 
-		const commercial_invoice_url =			values[item]?.[GLOBAL_CONSTANTS.zeroth_index]?.commercial_invoice[
-			GLOBAL_CONSTANTS.zeroth_index
-		];
+		const commercial_invoice_url = values[item]?.[GLOBAL_CONSTANTS.zeroth_index]?.commercial_invoice;
 
 		FINAL_PAYLOAD.push({
 			service                : data?.service_type,
@@ -37,7 +35,7 @@ const useUpdateControlledCheckoutService = ({
 	getCheckout = () => {},
 	servicesApplicable,
 	setShowForm,
-	setDisableButtonConditions = () => {},
+	setIsControlBookingDetailsFilled = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -57,7 +55,8 @@ const useUpdateControlledCheckoutService = ({
 			Toast.success('updated successfully');
 			getCheckout();
 			setShowForm(false);
-			setDisableButtonConditions(true);
+
+			setIsControlBookingDetailsFilled(true);
 		} catch (err) {
 			if (err?.response) {
 				Toast.error(getApiErrorString(err?.response?.data));

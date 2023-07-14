@@ -3,6 +3,7 @@
 	margin: 8px 0 20px;
 	background-color: #fbfbff;
 	border: 1px solid #f7f7fd;
+	position: relative;
 }
 
 .invoice_content {
@@ -86,4 +87,12 @@
 	font-size: 12px;
 	font-weight: 600;
 	text-align: left;
+}
+
+
+.edit_icon {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	cursor: pointer;
 }

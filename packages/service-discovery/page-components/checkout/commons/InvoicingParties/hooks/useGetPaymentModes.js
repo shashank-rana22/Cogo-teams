@@ -142,7 +142,7 @@ const useGetPaymentModes = ({
 
 	const [{ data = {}, loading }] = useRequest(
 		{
-			url    : 'get_organization_trade_party_payment_modes',
+			url    : '/get_organization_trade_party_payment_modes',
 			method : 'GET',
 			params,
 		},

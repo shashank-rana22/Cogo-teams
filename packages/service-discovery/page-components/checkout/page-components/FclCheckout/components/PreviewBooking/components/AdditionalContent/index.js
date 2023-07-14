@@ -15,14 +15,16 @@ import { CheckoutContext } from '../../../../../../context';
 import styles from './styles.module.css';
 
 function AdditionalContent({
-	value,
-	onChange,
+	value = '',
+	onChange = () => {},
 	cargoDetails = {},
 	setCargoDetails = () => {},
 	setIsVeryRisky = () => {},
-	disableButtonConditions,
-	setDisableButtonConditions,
-	isVeryRisky,
+	disableButtonConditions = {},
+	setDisableButtonConditions = () => {},
+	isVeryRisky = false,
+	setIsControlBookingDetailsFilled = () => {},
+	isControlBookingDetailsFilled = false,
 }) {
 	const {
 		rate,
@@ -54,7 +56,7 @@ function AdditionalContent({
 				<ControlledBooking
 					detail={detail}
 					getCheckout={getCheckout}
-					setDisableButtonConditions={setDisableButtonConditions}
+					setIsControlBookingDetailsFilled={setIsControlBookingDetailsFilled}
 				/>
 			) : null}
 
@@ -121,6 +123,9 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				isVeryRisky={isVeryRisky}
+				checkoutMethod={checkoutMethod}
+				disableButtonConditions={disableButtonConditions}
+				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
 			/>
 		</div>
 	);

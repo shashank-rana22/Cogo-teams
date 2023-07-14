@@ -1,9 +1,8 @@
-import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useGetPaymentModes from './hooks/useGetPaymentModes';
-
-const DEFAULT_VALUE = 0;
 
 const formatSavedServicesInvoiceTo = ({ services }) => {
 	const TRADE_TYPE_MAPPING = {
@@ -49,8 +48,24 @@ const formatServices = ({ savedServicesInvoiceTo, invoicingPartyServices }) => {
 	});
 };
 
-const useInvoicingParties = ({ detail = {}, invoice }) => {
-	const { billing_addresses = [] } = invoice;
+const useInvoicingParties = ({ detail = {} }) => {
+	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
+
+	const [invoicingParties, setInvoicingParties] = useState([]);
+	const [editInvoice, setEditInvoice] = useState([]);
+
+	const [paymentModes, setPaymentModes] = useState({});
+
+	const [{ data = {} }] = useRequest(
+		{
+			url    : '/list_checkout_invoices',
+			method : 'GET',
+			params : { filters: { checkout_id: detail.id, status: 'active' } },
+		},
+		{ manual: false },
+	);
+
+	const { list = [] } = data;
 
 	const { services = {} } = detail;
 
@@ -58,56 +73,24 @@ const useInvoicingParties = ({ detail = {}, invoice }) => {
 		services: Object.values(services),
 	});
 
-	const savedServicesInvoiceToHash = savedServicesInvoiceTo.reduce(
-		(acc, curr) => ({ ...acc, [curr.service_id]: curr }),
-		{},
-	);
+	useEffect(() => {
+		setInvoicingParties(list.map((savedInvoicingParty) => ({
+			...savedInvoicingParty,
+			services: formatServices({
+				savedServicesInvoiceTo,
+				invoicingPartyServices: savedInvoicingParty?.services || [],
+			}),
 
-	const invoiceParties = billing_addresses.map((parties) => ({
-		...parties,
-		poc: isEmpty(parties?.poc) ? null : parties.poc,
-	}));
+			state: {
+				isSaved           : true,
+				toDelete          : false,
+				showHiddenContent : false,
+			},
+		})));
 
-	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
-
-	const [invoicingParties, setInvoicingParties] = useState(() => invoiceParties.map((savedInvoicingParty) => ({
-		...savedInvoicingParty,
-		services: formatServices({
-			savedServicesInvoiceTo,
-			invoicingPartyServices: savedInvoicingParty?.services || [],
-		}),
-
-		state: {
-			isSaved           : true,
-			toDelete          : false,
-			showHiddenContent : false,
-		},
-	})));
-
-	const [paymentModes, setPaymentModes] = useState(() => {
-		let mode = {};
-		billing_addresses.forEach((savedInvoicingParty) => {
-			const {
-				payment_mode = '',
-				payment_term = '',
-				payment_method = '',
-			} = savedInvoicingParty?.payment_mode_details || {};
-
-			const { credit_option = {} } = savedInvoicingParty;
-
-			mode = {
-				...mode,
-				[savedInvoicingParty?.organization_trade_party_id || savedInvoicingParty.length]: {
-					credit_days    : credit_option?.selected_credit_days || DEFAULT_VALUE,
-					interest       : credit_option?.interest_percent || DEFAULT_VALUE,
-					paymentMode    : payment_mode || 'cash',
-					paymentTerms   : payment_term,
-					paymentMethods : payment_method,
-				},
-			};
-		});
-		return mode;
-	});
+		setEditInvoice(list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties,
@@ -121,7 +104,9 @@ const useInvoicingParties = ({ detail = {}, invoice }) => {
 		showAddInvoicingPartyModal,
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
+		editInvoice,
 		loading,
+		setEditInvoice,
 	};
 };
 

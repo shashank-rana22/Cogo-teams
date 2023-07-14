@@ -1,42 +1,51 @@
 import { Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function ManagerApproval({
 	refetchCheckout = () => {},
-	manager_approval_proof,
-	checkout_approvals,
+	manager_approval_proof = '',
+	checkout_approvals = [],
 }) {
-	const [file, setFile] = useState(manager_approval_proof);
+	const [file, setFile] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_checkout_for_approval',
 		method : 'POST',
 	}, { manual: true });
 
-	const handleBookingProof = async (val) => {
-		setFile(val);
+	const handleBookingProof = useCallback(async (val) => {
 		try {
 			const payload = {
-				id                     : checkout_approvals?.[0]?.id,
+				id                     : checkout_approvals?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 				booking_status         : 'pending',
-				manager_approval_proof : val?.url || '',
+				manager_approval_proof : val,
 			};
 
 			await trigger({
 				data: payload,
 			});
-			refetchCheckout();
+
+			await refetchCheckout();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
-	};
+	}, [checkout_approvals, refetchCheckout, trigger]);
+
+	useEffect(() => {
+		if (typeof file === 'object' ? !isEmpty(file?.finalUrl) : file) {
+			handleBookingProof(file?.finalUrl || file);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [file]);
 
 	return (
 		<>
@@ -45,17 +54,8 @@ function ManagerApproval({
 			<FileUploader
 				name="manager_approval_proof"
 				value={file}
-				drag
-				height={50}
-				accept="image/*,.pdf,.eml,.doc,.docx,"
-				maxSize="10485760"
-				uploadType="aws"
-				uploadIcon="ic-upload"
-				onChange={(val) => {
-					if (val) {
-						handleBookingProof(val);
-					}
-				}}
+				defaultValues={manager_approval_proof}
+				onChange={(value) => setFile(value?.finalUrl || value)}
 				disabled={loading}
 				style={{ width: '50%' }}
 			/>

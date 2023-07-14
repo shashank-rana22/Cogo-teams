@@ -5,7 +5,7 @@ import FileUploader from '../Business/FileUploader';
 
 function UploadController(props) {
 	const {
-		name, control, rules, ...rest
+		name, control, rules, value, ...rest
 	} = props;
 
 	return (
@@ -14,16 +14,16 @@ function UploadController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value } }) => (
+			render={({ field: { onChange, onBlur, value :newValue } }) => (
 				<FileUploader
 					{...rest}
 					key={rest.id}
 					id={name}
 					defaultValues={value}
 					onChange={onChange}
-					value={value}
+					value={newValue}
 					onBlur={onBlur}
-					data-test-value={value}
+					data-test-value={newValue}
 				/>
 			)}
 		/>

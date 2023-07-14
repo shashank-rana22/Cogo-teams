@@ -671,7 +671,7 @@ function asyncListSaasHsCodes() {
 		endpoint       : 'saas/hs-code/list',
 		defaultOptions : true,
 		searchByq      : true,
-		qFilterKey    : 'query',
+		qFilterKey     : 'query',
 		microService   : 'business_finance',
 		defaultParams  : {},
 	};

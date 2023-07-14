@@ -1,0 +1,20 @@
+.container {
+    /* border: 1px dotted #F9AE64;
+    background-color: #FFFBF8; */
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.stepper_container {
+    display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	.core-ui-stepper-container {
+		@media (max-width: 768px) {
+			min-width: unset;
+			max-width: 148px;
+			padding: 4px 12px;
+		}
+	}
+}

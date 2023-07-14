@@ -10,6 +10,8 @@ function InvoicingPartiesContent({
 	setShowAddInvoicingPartyModal = () => {},
 	showAddInvoicingPartyModal,
 	PAYMENT_MODES = {},
+	editInvoice = {},
+	setEditInvoice = () => {},
 }) {
 	if (isEmpty(invoicingParties)) {
 		return (
@@ -23,6 +25,7 @@ function InvoicingPartiesContent({
 				<AddInvoicingParty
 					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 					showAddInvoicingPartyModal={showAddInvoicingPartyModal}
+					source="checkout"
 				/>
 			</div>
 		);
@@ -41,6 +44,8 @@ function InvoicingPartiesContent({
 						paymentModes={paymentModes}
 						invoiceParty={invoiceParty}
 						lastItem={invoicingParties.length - 1 === index}
+						editInvoice={editInvoice}
+						setEditInvoice={setEditInvoice}
 					/>
 				);
 			})}
@@ -49,6 +54,7 @@ function InvoicingPartiesContent({
 				setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 				showAddInvoicingPartyModal={showAddInvoicingPartyModal}
 				invoicingParties={invoicingParties}
+				source="checkout"
 			/>
 		</div>
 	);

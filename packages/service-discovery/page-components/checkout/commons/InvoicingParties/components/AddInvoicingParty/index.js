@@ -4,8 +4,8 @@ import AddInvoicingPartyModal from '../AddInvoicingPartyModal';
 
 import styles from './styles.module.css';
 
-function AddInvoicingParty({ setShowAddInvoicingPartyModal, showAddInvoicingPartyModal, invoicingParties = [] }) {
-	const disabledInvoicingParties = invoicingParties.map((invoicingParty) => invoicingParty.tax_number);
+function AddInvoicingParty({ setShowAddInvoicingPartyModal, showAddInvoicingPartyModal, invoicingParties = [], source = '' }) {
+	const disabledInvoicingParties = invoicingParties.map((invoicingParty) => invoicingParty?.billing_address?.tax_number);
 
 	const isInvoicingPartiesSaved = invoicingParties.every((invoicingParty) => invoicingParty.state.isSaved);
 
@@ -22,12 +22,15 @@ function AddInvoicingParty({ setShowAddInvoicingPartyModal, showAddInvoicingPart
 				+ Add Invoicing Party
 			</Button>
 
-			<AddInvoicingPartyModal
-				disabledInvoicingParties={disabledInvoicingParties}
-				showAddInvoicingPartyModal={showAddInvoicingPartyModal}
-				isInvoicingPartiesSaved={isInvoicingPartiesSaved}
-				setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
-			/>
+			{showAddInvoicingPartyModal ? (
+				<AddInvoicingPartyModal
+					disabledInvoicingParties={disabledInvoicingParties}
+					showAddInvoicingPartyModal={showAddInvoicingPartyModal}
+					isInvoicingPartiesSaved={isInvoicingPartiesSaved}
+					source={source}
+					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
+				/>
+			) : null}
 		</div>
 	);
 }

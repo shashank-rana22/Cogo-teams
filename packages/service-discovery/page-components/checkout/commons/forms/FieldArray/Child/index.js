@@ -24,7 +24,7 @@ function Child(props) {
 		field,
 	} = props;
 
-	console.log('field', field);
+	console.log('ield[controlItem.name]', field);
 
 	return (
 		<div className={styles.content}>

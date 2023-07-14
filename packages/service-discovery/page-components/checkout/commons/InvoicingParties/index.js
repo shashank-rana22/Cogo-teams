@@ -24,7 +24,11 @@ function InvoicingParties() {
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
 		loading,
+		editInvoice,
+		setEditInvoice,
 	} = useInvoicingParties({ detail, invoice });
+
+	console.log('editInvoice', editInvoice);
 
 	return (
 		<div className={styles.container}>
@@ -35,6 +39,8 @@ function InvoicingParties() {
 				showAddInvoicingPartyModal={showAddInvoicingPartyModal}
 				setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 				PAYMENT_MODES={PAYMENT_MODES}
+				editInvoice={editInvoice}
+				setEditInvoice={setEditInvoice}
 			/>
 		</div>
 	);
