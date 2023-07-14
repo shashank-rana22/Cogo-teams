@@ -1,43 +1,19 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import {
-	asyncFieldsOperators, asyncFieldsLocations,
-}
-	from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
-import React from 'react';
 
 import Layout from '../../common/Layout/index.tsx';
 import useCreateVesselSchedules from '../hooks/useCreateVesselSchedule';
 
-import controls from './controls';
 import styles from './styles.module.css';
 
 function CreateModal({ showModal, setShowModal, makeRequest }) {
 	const handleClose = () => {
 		setShowModal(false);
 	};
-	const { handleSubmit, control, formState: { errors }, watch } = useForm();
+	const { handleSubmit, control, watch } = useForm();
 	const formValues = watch();
-	const no_of_ports = watch('port_number');
-	const createRefetch = () => {
-		makeRequest();
-	};
-	const shippingLineOptions = useGetAsyncOptions(merge(
-		asyncFieldsOperators(),
-		{ params: { filters: { operator_type: 'shipping_line' } } },
-	));
-	const locationOptions = useGetAsyncOptions(merge(
-		asyncFieldsLocations(),
-		{ params: { filters: { type: 'seaport' } } },
-	));
-	const terminalOptions = useGetAsyncOptions(merge(
-		asyncFieldsLocations(),
-		{ params: { filters: { type: 'seaport_terminal' } } },
-	));
-	const fields = controls(no_of_ports, locationOptions, shippingLineOptions, terminalOptions);
-	const { createSchedule } = useCreateVesselSchedules({ refetch: createRefetch });
+
+	const { createSchedule, fields, onError, errors } = useCreateVesselSchedules({ makeRequest, formValues, watch });
 	return (
 		<Modal
 			size="lg"
@@ -79,10 +55,7 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 				</div>
 				<div>
 					<Button
-						onClick={() => {
-							handleSubmit(createSchedule(formValues));
-							handleClose();
-						}}
+						onClick={handleSubmit(createSchedule, onError)}
 					>
 						Create Vessel Schedule
 					</Button>

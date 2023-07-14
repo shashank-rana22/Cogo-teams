@@ -10,11 +10,6 @@ const getPayload = ({ finalRoute, data }) => {
 		name             : data?.name,
 		shipping_line_id : data?.shipping_line_id,
 		waypoint_locations,
-		frequency        : null,
-		interval         : null,
-		day_of_week      : null,
-		week_of_month    : null,
-		month_of_year    : null,
 		status           : data?.status,
 	};
 

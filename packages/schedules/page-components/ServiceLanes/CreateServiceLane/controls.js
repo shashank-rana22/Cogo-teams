@@ -30,7 +30,7 @@ const MONTH_OF_YEAR_OPTIONS = [
 	{ label: 'December', value: 12 },
 ];
 
-const controls = (no_of_ports) => ({
+const controls = (no_of_ports, shippingLineOptions, locationOptions) => ({
 	basic: [
 		{
 			name           : 'shipping_line_id',
@@ -40,7 +40,8 @@ const controls = (no_of_ports) => ({
 			placeholder    : 'Select Shipping Line',
 			span           : 4,
 			size           : 'md',
-			// rules          : { required: 'Required' },
+			rules          : { required: 'Required' },
+			...shippingLineOptions,
 		},
 		{
 			name        : 'name',
@@ -49,7 +50,7 @@ const controls = (no_of_ports) => ({
 			placeholder : 'Type here...',
 			span        : 4,
 			size        : 'md',
-			// rules       : { required: 'Required' },
+			rules       : { required: 'Required' },
 		},
 		{
 			name        : 'frequency',
@@ -58,7 +59,6 @@ const controls = (no_of_ports) => ({
 			placeholder : 'Type here...',
 			span        : 4,
 			size        : 'md',
-			// rules       : { required: 'Required' },
 		},
 		{
 			name        : 'day_of_week',
@@ -68,7 +68,6 @@ const controls = (no_of_ports) => ({
 			placeholder : 'Type here...',
 			span        : 4,
 			size        : 'md',
-			// rules       : { required: 'Required' },
 		},
 		{
 			name        : 'week_of_month',
@@ -96,7 +95,8 @@ const controls = (no_of_ports) => ({
 		section : 'two',
 		span    : 5,
 		size    : 'md',
-		min     : 0,
+		min     : 2,
+		rules   : { required: 'Required' },
 	},
 	],
 
@@ -115,6 +115,8 @@ const controls = (no_of_ports) => ({
 				placeholder : 'Type here...',
 				span        : 4,
 				size        : 'md',
+				rules       : { required: 'Required' },
+				...locationOptions,
 			},
 			{
 				label     		: 'ETA Day Count',
@@ -123,6 +125,7 @@ const controls = (no_of_ports) => ({
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
+				rules       : { required: 'Required' },
 			},
 			{
 				label       : 'ETD Day Count',
@@ -131,22 +134,30 @@ const controls = (no_of_ports) => ({
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
+				rules       : { required: 'Required' },
+
 			},
 			{
 				label       : 'ETA Day',
-				name        : 'etd_day',
+				name        : 'eta_day',
 				type        : 'select',
 				span        : 4,
 				placeholder : 'Type here...',
+				options     : DAY_OF_WEEK_OPTIONS,
 				size        : 'md',
+				rules       : { required: 'Required' },
+
 			},
 			{
 				label       : 'ETD Day',
 				name        : 'etd_day',
 				type        : 'select',
+				options     : DAY_OF_WEEK_OPTIONS,
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
+				rules       : { required: 'Required' },
+
 			},
 		],
 	}],

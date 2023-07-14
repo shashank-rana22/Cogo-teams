@@ -1,8 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState } from 'react';
 
-import getPayload from '../../helpers/update_payload';
+import useUpdateServiceLane from '../../hooks/useUpdateServiceLane';
 import WeekCalendar from '../../ServiceLanesList/WeekCalendar';
 import WeekFrequency from '../../ServiceLanesList/WeekFrequency';
 
@@ -12,59 +11,20 @@ import RoutePortForm from './RoutePortForm';
 import styles from './styles.module.css';
 
 function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, data }) {
-	const totalTransit = route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
-	const [edit, setEdit] = useState(false);
-	const [portEdit, setPortEdit] = useState(false);
-	const [form, setForm] = useState(null);
-	const [add, setAdd] = useState(null);
-	const [deletePort, setDeletePort] = useState(null);
-	const [submit, setSubmit] = useState(null);
-	const tempRoute = Array.isArray(route) ? [...route] : [];
-
-	let modifiedRoute = [];
-	const handleClick = (input) => {
-		if (input === 'edit') {
-			setFinalRoute(route);
-			setEdit(true);
-		} else {
-			setEdit(false);
-		}
-		setPortEdit(false);
-		setForm(null);
-		setAdd(null);
-		setDeletePort(null);
-	};
-	const OBJECT_TO_INSERT = { display_name: '', location_id: '', order: null, port_code: '' };
-
-	const onClickAdd = (index) => {
-		setForm(index);
-		modifiedRoute = [...(tempRoute?.slice(0, index) || []),
-			{ ...submit },
-			OBJECT_TO_INSERT, ...(tempRoute?.slice(index, tempRoute.length) || [])];
-		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
-		setFinalRoute(order);
-		setAdd(index);
-	};
-	const onClickEdit = (index) => {
-		setForm(index);
-		setAdd(null);
-	};
-	const onClickDelete = (index) => {
-		if (add) {
-			setAdd(null);
-		} else if (!portEdit) {
-			setForm(null);
-			setDeletePort((prevDeletePort) => (prevDeletePort ? [...prevDeletePort, index] : [index]));
-			modifiedRoute = [...finalRoute.slice(0, index), ...finalRoute.slice(index + 1, finalRoute.length)];
-			const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
-			setFinalRoute(order);
-		}
-		setForm(null);
-		setPortEdit(false);
-		setSubmit(null);
-	};
-	const payload = getPayload({ finalRoute, data });
-	console.log(payload);
+	const {
+		updateServiceLane,
+		totalTransit,
+		handleClick,
+		onClickAdd,
+		onClickEdit,
+		onClickDelete,
+		setSubmit,
+		setPortEdit,
+		edit,
+		deletePort,
+		form,
+		add,
+	} = useUpdateServiceLane({ route, finalRoute, setFinalRoute, data });
 	return (
 		<div className={styles.box}>
 			<div className={styles.header}>
@@ -119,7 +79,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 								themeType="secondary"
 								size="md"
 								className={styles.button_style}
-								onClick={() => handleClick('save')}
+								onClick={() => handleClick('cancel')}
 							>
 								Cancel
 
@@ -127,7 +87,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 							<Button
 								size="md"
 								className={styles.button_style}
-								onClick={() => handleClick('save')}
+								onClick={updateServiceLane}
 							>
 								Save Changes
 

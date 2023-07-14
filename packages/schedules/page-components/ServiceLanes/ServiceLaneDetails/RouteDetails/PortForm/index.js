@@ -1,4 +1,4 @@
-import { Input, Select } from '@cogoport/components';
+import { InputNumber, Select } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
@@ -39,7 +39,7 @@ function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete, set
 					<IcMDelete height="20px" width="20px" margin="40px" onClick={() => { onClickDelete(index); }} />
 				</div>
 				<div className={styles.days}>
-					<Input placeholder="Days" value={days} onChange={(value) => { setDays(value); setSubmit((prev) => ({ ...prev, days: value })); }} />
+					<InputNumber placeholder="Days" value={days} onChange={(value) => { setDays(value); setSubmit((prev) => ({ ...prev, days: value })); }} />
 				</div>
 
 			</div>

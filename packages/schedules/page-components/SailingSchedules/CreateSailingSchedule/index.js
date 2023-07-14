@@ -46,7 +46,7 @@ function CreateModal({ showModal, setShowModal, refetch }) {
 		}
 		return { ...newControl };
 	});
-	const { createSchedule } = useCreateSailingSchedule({ refetch });
+	const { createSchedule } = useCreateSailingSchedule({ refetch, formValues });
 	return (
 		<Modal
 			size="lg"
@@ -83,10 +83,7 @@ function CreateModal({ showModal, setShowModal, refetch }) {
 				</div>
 				<div>
 					<Button
-						onClick={() => {
-							handleSubmit(createSchedule(formValues));
-							handleClose();
-						}}
+						onClick={handleSubmit(createSchedule)}
 					>
 						Create Sailing Schedule
 					</Button>

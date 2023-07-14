@@ -5,6 +5,7 @@ import {
 	DatepickerController,
 	TextAreaController,
 	AsyncSelectController,
+	MultiselectController,
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
@@ -33,6 +34,9 @@ const getElementController = (type = 'text') => {
 
 		case 'async-select':
 			return AsyncSelectController;
+
+		case 'multi-select':
+			return MultiselectController;
 
 		default:
 			return null;

@@ -7,7 +7,7 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 			placeholder : 'Type here...',
 			span        : 6,
 			size        : 'md',
-			// rules       : { required: 'Required' },
+			rules       : { required: 'Required' },
 		},
 		{
 			name        : 'service_lane_id',
@@ -16,7 +16,6 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 			placeholder : 'Type here...',
 			span        : 6,
 			size        : 'md',
-			// rules       : { required: 'Required' },
 		},
 		{
 			name           : 'shipping_line_id',
@@ -27,19 +26,17 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 			span           : 6,
 			size           : 'md',
 			...shippingLineOptions,
-			// rules          : { required: 'Required' },
+			rules          : { required: 'Required' },
 		},
 		{
 			name           : 'chartered_operators',
 			label          : 'Chartered Operators',
-			type           : 'select',
+			type           : 'multi-select',
 			optionsListKey : 'shipping-lines',
 			placeholder    : 'Select Shipping Line',
 			span           : 6,
 			size           : 'md',
 			...shippingLineOptions,
-			multiple       : true,
-			// rules          : { required: 'Required' },
 		},
 	],
 	port: [{
@@ -49,8 +46,8 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 		section : 'two',
 		span    : 5,
 		size    : 'md',
-		// rules   : { required: 'Required' },
-		min     : 0,
+		rules   : { required: 'Required' },
+		min     : 3,
 	},
 	],
 
@@ -70,7 +67,7 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				span        : 4,
 				size        : 'md',
 				...locationOptions,
-				// rules       : { required: 'Required' },
+				rules       : { required: 'Required' },
 			},
 			{
 				label     		: 'ETA',
@@ -79,7 +76,7 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
-				// rules       : { required: 'Required' },
+				rules       : { required: 'Required' },
 			},
 			{
 				label       : 'ETD',
@@ -88,6 +85,7 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
+				rules       : { required: 'Required' },
 			},
 			{
 				label       : 'Terminal',
@@ -97,7 +95,6 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				span        : 4,
 				size        : 'md',
 				...terminalOptions,
-				// rules       : { required: 'Required' },
 			},
 			{
 				label       : 'Arrival voyage number',
@@ -106,7 +103,6 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				placeholder : 'Type here...',
 				span        : 4,
 				size        : 'md',
-				// rules       : { required: 'Required' },
 			},
 			{
 				label       : 'Departure voyage number',
@@ -115,7 +111,6 @@ const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOpt
 				type        : 'text',
 				placeholder : 'Type here...',
 				size        : 'md',
-				// rules       : { required: 'Required' },
 			},
 		],
 	}],
