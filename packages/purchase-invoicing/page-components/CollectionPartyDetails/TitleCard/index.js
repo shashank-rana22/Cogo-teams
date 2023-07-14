@@ -14,13 +14,13 @@ const LAST_INDEX = 1;
 function Serviceswrapper({ allservices = [], toolTipContent = false }) {
 	return (
 		<>
-			{toolTipContent
+			{!toolTipContent
 			&& (allservices || []).map((service, i) => (
 				<span key={service}>
 					{`${startCase(service)} ${allservices.length - LAST_INDEX === i ? '' : ', '}`}
 				</span>
 			))}
-			{!toolTipContent && (allservices || []).map((service) => (
+			{toolTipContent && (allservices || []).map((service) => (
 				<div key={service}>
 					{startCase(service)}
 				</div>
@@ -49,7 +49,7 @@ function TitleCard({
 						maxlength={SERVICE_WRAPPER_LAST_INDEX}
 						render
 						content={(
-							<Serviceswrapper allservices={services} />
+							<Serviceswrapper allservices={services} toolTipContent />
 						)}
 					>
 						<Serviceswrapper
@@ -57,7 +57,6 @@ function TitleCard({
 								SERVICE_WRAPPER_START_INDEX,
 								SERVICE_WRAPPER_LAST_INDEX,
 							) || []}
-							toolTipContent="true"
 						/>
 						{services?.length > SERVICE_WRAPPER_LAST_INDEX ? '...' : ''}
 					</ToolTipWrapper>
