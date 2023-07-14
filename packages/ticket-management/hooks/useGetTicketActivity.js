@@ -4,9 +4,10 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 const getParams = ({ ticketId, pagination, id }) => ({
-	TicketID : Number(ticketId),
-	page     : pagination,
-	UserID   : id,
+	TicketID           : Number(ticketId),
+	page               : pagination,
+	UserID             : id,
+	IsInternalRequired : true,
 });
 
 const useGetTicketActivity = ({ ticketId }) => {
