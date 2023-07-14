@@ -34,6 +34,7 @@ function SelectDocumentCopies({
 	setDocCopies = () => {},
 	setEditCopies = () => {},
 	taskItem = {},
+	loading = false,
 }) {
 	const { data } = useGetMultipleCopiesList(taskItem);
 
@@ -91,6 +92,7 @@ function SelectDocumentCopies({
 						handleView(download24);
 					}}
 					style={{ marginLeft: 'auto' }}
+					disabled={loading}
 				>
 					Download
 				</Button>

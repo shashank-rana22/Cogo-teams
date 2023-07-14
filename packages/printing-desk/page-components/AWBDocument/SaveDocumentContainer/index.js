@@ -43,7 +43,7 @@ function SaveDocumentContainer({
 
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
-		const { file } = getFileObject(newImage, 'mawb.pdf');
+		const { file } = getFileObject(newImage, 'awb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
 			id            : documentId,

@@ -1,10 +1,14 @@
 import { Button, Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { useState } from 'react';
 
 import { BACK_PAGE, FOOTER_IMAGES } from '../../../constants/image-copies';
+import useUpdateIndividualEditing from '../../../hooks/useUpdateIndividualEditing';
+import getFileObject from '../../../utils/getFileObject';
+import useGetMediaUrl from '../../../utils/useGetMediaUrl';
 import SelectDocumentCopies from '../SelectDocumentCopies';
 
 import styles from './styles.module.css';
@@ -38,7 +42,37 @@ function DownloadDocumentContainer({
 	const [docCopies, setDocCopies] = useState(null);
 	const [copiesValue, copiesOnChange] = useState([]);
 
-	const { document_number: documentNumber, awbNumber, documentState } = taskItem || {};
+	const {
+		document_number: documentNumber, awbNumber, documentType, id,
+		documentState, documentId,
+	} = taskItem || {};
+
+	const { handleUpload } = useGetMediaUrl();
+
+	const { updateIndividualEditing, loading } = useUpdateIndividualEditing({});
+
+	const takeImageScreenShot = async (node) => {
+		const dataURI = await htmlToImage.toJpeg(node);
+		return dataURI;
+	};
+
+	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('awb'));
+
+	const handleSave = async () => {
+		const newImage = await downloadScreenshot();
+		const { file } = getFileObject(newImage, 'awb.pdf');
+		const res = await handleUpload('awb.pdf', file);
+		const payload = {
+			id,
+			documentId,
+			documentType: documentType === 'draft_airway_bill'
+				? 'draft_airway_bill' : 'draft_house_airway_bill',
+			documentNumber,
+			documentUrl: res || undefined,
+		};
+		updateIndividualEditing(payload);
+		setSaveDocument(false);
+	};
 
 	const handleView = (download24) => {
 		if (documentState === 'document_accepted') {
@@ -88,7 +122,7 @@ function DownloadDocumentContainer({
 				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		}
-		setSaveDocument(false);
+		handleSave();
 	};
 
 	return (
@@ -116,13 +150,14 @@ function DownloadDocumentContainer({
 									setDocCopies={setDocCopies}
 									setEditCopies={setEditCopies}
 									taskItem={taskItem}
+									loading={loading}
 									download24
 								/>
 							)}
 						>
 							<Button
 								className="primary md"
-								disabled={saveDocument || whiteout}
+								disabled={saveDocument || loading || whiteout}
 							>
 								Download 12 Copies with T&C
 							</Button>
@@ -147,12 +182,13 @@ function DownloadDocumentContainer({
 									setDocCopies={setDocCopies}
 									setEditCopies={setEditCopies}
 									taskItem={taskItem}
+									loading={loading}
 								/>
 							)}
 						>
 							<Button
 								className="primary md"
-								disabled={saveDocument}
+								disabled={saveDocument || loading}
 							>
 								Download 12 Copies
 							</Button>
