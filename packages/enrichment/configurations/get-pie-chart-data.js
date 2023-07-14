@@ -5,12 +5,12 @@ function getPieChartData({ stats = {} }) {
 			colors : ['#c2e4e7', '#70bfc8', '#37878f', '#276066'],
 			data   : [
 				{
-					id    : 'requested',
-					label : 'Requested',
+					id    : 'active',
+					label : 'Active',
 					value : stats.requested_feedback_request_count,
 				},
 				{
-					id    : 'responded',
+					id    : 'ongoing',
 					label : 'Ongoing',
 					value : stats.total_ongoing_request_count,
 				},

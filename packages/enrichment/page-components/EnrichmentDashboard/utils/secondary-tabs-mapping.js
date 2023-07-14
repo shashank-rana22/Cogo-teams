@@ -10,7 +10,7 @@ export const getSecondaryTabOptions = () => ({
 	},
 	responded: {
 		key     : 'responded',
-		title   : 'processing',
+		title   : 'Ongoing',
 		actions : {
 			edit    : 'Edit Details',
 			success : 'Mark as Completed',

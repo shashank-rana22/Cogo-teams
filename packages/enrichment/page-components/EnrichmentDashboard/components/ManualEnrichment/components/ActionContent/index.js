@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import {
 	IcMCross,
 	IcMEdit,
@@ -16,34 +17,31 @@ const ICON_MAPPING = {
 	failed  : IcMCross,
 };
 
-const COUNT = 1;
-
-function ActionContent({ onClickCta = () => {}, secondaryTab = '' }) {
+function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComplete = false }) {
 	const CTA_MAPPING = getActionConfigurations({ secondaryTab });
 
 	return (
 		<div className={styles.action_container}>
 
-			{Object.keys(CTA_MAPPING || {}).map((key, index) => {
+			{Object.keys(CTA_MAPPING || {}).map((key) => {
 				const Icon = ICON_MAPPING[key];
 
-				const numberOfActions = Object.keys(CTA_MAPPING || {}).length;
-
 				return (
-					<div
+					<Button
 						key={key}
-						className={index + COUNT === numberOfActions
-							? styles.workflow_cta_last : styles.workflow_cta}
-						role="presentation"
+						type="button"
+						themeType="tertiary"
+						className={styles.cta_text}
+						disabled={loadingComplete}
 						onClick={() => onClickCta(key)}
 					>
-						<div className={styles.cta_text}>
 
-							<Icon width={16} height={16} style={{ marginRight: '10px' }} />
+						<Icon width={16} height={16} style={{ marginRight: '10px' }} />
 
-							{CTA_MAPPING[key]}
-						</div>
-					</div>
+						<div>{CTA_MAPPING[key]}</div>
+
+					</Button>
+
 				);
 			})}
 		</div>

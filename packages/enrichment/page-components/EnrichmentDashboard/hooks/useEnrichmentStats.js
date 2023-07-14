@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useEnrichmentStats = () => {
 	const {
@@ -9,26 +11,37 @@ const useEnrichmentStats = () => {
 
 	const { authParams, selected_agent_id } = profile || {};
 
-	const [{ loading, data }, refetch] = useAllocationRequest({
+	const [{ loading, data }, trigger] = useAllocationRequest({
 		url     : '/feedback_request_stats',
 		method  : 'get',
 		authkey : 'get_allocation_feedback_request_stats',
-		params  : {
-			filters: {
-				partner_id : profile.partner?.id,
-				user_id    : selected_agent_id || undefined,
-			},
-		},
 	}, { manual: false });
 
+	const refetchStats = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					filters: {
+						partner_id : profile.partner?.id,
+						user_id    : selected_agent_id || undefined,
+					},
+				},
+			});
+		} catch (error) {
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
+		}
+	}, [profile.partner?.id, selected_agent_id, trigger]);
+
 	useEffect(() => {
-		refetch();
-	}, [authParams, refetch, selected_agent_id]);
+		refetchStats();
+	}, [authParams, refetchStats, selected_agent_id]);
 
 	return {
 		loading,
-		stats        : data,
-		refetchStats : refetch,
+		stats: data,
+		refetchStats,
 	};
 };
 

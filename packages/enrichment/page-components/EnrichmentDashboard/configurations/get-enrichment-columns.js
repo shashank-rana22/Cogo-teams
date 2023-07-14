@@ -14,6 +14,7 @@ const getEnrichmentColumns = ({
 	selectedRowId = '',
 	onEnrichmentClick = () => {},
 	refetch = () => {},
+	loadingComplete = false,
 	secondaryTab = 'active',
 }) => [
 	{
@@ -160,7 +161,6 @@ const getEnrichmentColumns = ({
 					size="md"
 					type="button"
 					disabled={!error_sheet_url}
-          // eslint-disable-next-line no-undef
 					onClick={() => window.open(error_sheet_url, '_blank')}
 				>
 					Download
@@ -191,6 +191,7 @@ const getEnrichmentColumns = ({
 						<ActionContent
 							onClickCta={onClickCta}
 							secondaryTab={secondaryTab}
+							loadingComplete={loadingComplete}
 						/>
 					)}
 					onClickOutside={() => setSelectedRowId(null)}

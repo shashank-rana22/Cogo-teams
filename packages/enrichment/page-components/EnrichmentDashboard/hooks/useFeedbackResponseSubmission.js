@@ -30,7 +30,7 @@ const useFeedbackResponseSubmission = () => {
 
 	return {
 		onEnrichmentClick,
-		loading,
+		loadingComplete: loading,
 	};
 };
 

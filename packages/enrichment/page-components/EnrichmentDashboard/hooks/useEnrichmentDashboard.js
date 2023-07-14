@@ -1,9 +1,11 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 import ENRICHMENT_API_MAPPING from '../../../constants/enrichment-api-mapping';
 import getEnrichmentColumns from '../configurations/get-enrichment-columns';
@@ -12,18 +14,22 @@ import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
 
 const geo = getGeoConstants();
 
-const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab = 'active' }) => {
+const useEnrichmentDashboard = ({
+	primaryTab = 'manual_enrichment',
+	secondaryTab = 'active',
+}) => {
 	const router = useRouter();
 
 	const { profile } = useSelector((state) => state || {});
 
-	const { onEnrichmentClick } = useFeedbackResponseSubmission();
+	const { onEnrichmentClick = () => {}, loadingComplete = false } = useFeedbackResponseSubmission();
 
 	const {
 		partner: { id: partner_id },
 		user: { id: user_id },
-		auth_role_data: { id:authRoleId },
-		selected_agent_id, authParams,
+		auth_role_data: { id: authRoleId },
+		selected_agent_id,
+		authParams,
 	} = profile;
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -33,16 +39,19 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 	const [selectedRowId, setSelectedRowId] = useState('');
 
 	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId)
-	&& primaryTab === 'manual_enrichment';
+    && primaryTab === 'manual_enrichment';
 
-	const filtersMapping = useMemo(() => ({
-		manual_enrichment: {
-			status: secondaryTab,
-		},
-		file_management: {
-			user_id,
-		},
-	}), [secondaryTab, user_id]);
+	const filtersMapping = useMemo(
+		() => ({
+			manual_enrichment: {
+				status: secondaryTab,
+			},
+			file_management: {
+				user_id,
+			},
+		}),
+		[secondaryTab, user_id],
+	);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
@@ -56,18 +65,39 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 			...filtersMapping[primaryTab],
 			q: searchQuery || undefined,
 			partner_id,
-
 		},
 	});
 
 	const { api: apiName, authkey } = ENRICHMENT_API_MAPPING[primaryTab];
 
-	const [{ loading, data }, refetch] = useAllocationRequest({
-		url    : `/${apiName}`,
-		method : 'get',
-		authkey,
-		params,
-	}, { manual: false });
+	const [{ loading, data }, trigger] = useAllocationRequest(
+		{
+			url    : `/${apiName}`,
+			method : 'get',
+			authkey,
+			params,
+		},
+		{ manual: false },
+	);
+
+	const refetchList = useCallback(async () => {
+		try {
+			setParams((previousParams) => ({
+				...previousParams,
+				filters: {
+					...previousParams.filters,
+					q       : searchQuery || undefined,
+					user_id : selected_agent_id || undefined,
+				},
+			}));
+
+			await trigger();
+		} catch (error) {
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
+		}
+	}, [searchQuery, selected_agent_id, trigger]);
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -81,45 +111,21 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
-			filters: {
-				...previousParams.filters,
-				q       : searchQuery || undefined,
-				user_id : selected_agent_id || undefined,
-			},
-		}));
-	}, [searchQuery, selected_agent_id]);
-
-	useEffect(() => {
-		refetch();
-	}, [authParams, refetch]);
-
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
 			...(allowedToSeeAgentsData && {
 				user_data_required: true,
 			}),
 			filters: {
 				...filtersMapping[primaryTab],
 				partner_id,
-			},
-
-		}));
-	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab]);
-
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			...(allowedToSeeAgentsData && {
-				user_data_required: true,
-			}),
-			filters: {
-				...previousParams?.filters,
 				user_id : selected_agent_id || undefined,
 				status  : [secondaryTab],
 			},
 		}));
-	}, [allowedToSeeAgentsData, secondaryTab, selected_agent_id]);
+	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab, secondaryTab, selected_agent_id]);
+
+	useEffect(() => {
+		refetchList();
+	}, [authParams, refetchList, selected_agent_id]);
 
 	const handleEditDetails = (feedback_request_id) => {
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
@@ -130,7 +136,8 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 		selectedRowId,
 		setSelectedRowId,
 		onEnrichmentClick,
-		refetch,
+		refetch: refetchList,
+		loadingComplete,
 		secondaryTab,
 	});
 
@@ -139,8 +146,8 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 	return {
-		refetch,
-		columns: filteredColumns,
+		refetch : refetchList,
+		columns : filteredColumns,
 		list,
 		paginationData,
 		loading,
