@@ -14,7 +14,6 @@ import useGetkrasAssigned from './hooks/useGetKrasAssigned';
 import useGetUnassignedEmployee from './hooks/useGetUnassignedEmployees';
 import styles from './styles.module.css';
 
-const DISPLAY_ADD_KRA_BUTTON = 1;
 const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
 const TABLE_TYPE_LOW_WEIGHTAGE = 'LowWeightage';
@@ -75,8 +74,7 @@ function Dashboard() {
       + countTrueValues(selectAccordianObject)
       + countTrueValues(selectLowWeightEmployeeObject);
 
-	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters)
-	&& (CHECK_IF_ONE_EMPLOYEE_SELECTED === DISPLAY_ADD_KRA_BUTTON);
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = !isEmpty(filters);
 
 	const EMPLOYEE_OBJECT_MAPPING = {
 		Unassigned    : selectUnassignedEmployeeObject,
