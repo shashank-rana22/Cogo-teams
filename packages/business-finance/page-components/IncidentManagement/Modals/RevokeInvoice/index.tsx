@@ -13,6 +13,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 	const { data = {} } = row || {};
 	const { revokeInvoiceRequest = {} } = data;
 	const { agreementNumber, documentUrls, agreementDate, invoiceNumber } = revokeInvoiceRequest;
+	const agreementDocument = (documentUrls || [])[0];
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
 
 	const { useOnAction:OnAction, loading } = useGetRevokeInvoiceData({
@@ -69,8 +70,8 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 							<div className={styles.document}>
 								Document -
 							</div>
-							{documentUrls[0] !== '' ? (
-								<a href={documentUrls[0]} target="_blank" rel="noreferrer" key={documentUrls[0]}>
+							{agreementDocument !== '' ? (
+								<a href={agreementDocument} target="_blank" rel="noreferrer" key={agreementDocument}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>View Agreement</div>
 										<IcMEyeopen />
@@ -78,7 +79,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 
 								</a>
 							) : (
-								<div key={documentUrls[0]}> No document available</div>
+								<div key={agreementDocument}> No document available</div>
 							)}
 						</div>
 

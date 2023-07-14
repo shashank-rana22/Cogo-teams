@@ -50,35 +50,37 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed);
 
-	const content = () => (
-		<div className={styles.container}>
-			{ cancelApproved ? (
-				<Button
-					size="sm"
-					type="button"
-					onClick={() => {
-						setShowCancellationModal(true);
-						setShow(false);
-					}}
-					style={{ marginBottom: '8px' }}
-				>
-					Cancel
-					{' '}
-					{IRNLabel}
-				</Button>
-			) : null}
-			{(statusPresent && sageAllowed) ? (
-				<Button
-					disabled={loading}
-					size="sm"
-					type="button"
-					onClick={postToSage}
-				>
-					Post to Sage
-				</Button>
-			) : null}
-		</div>
-	);
+	function Content() {
+		return (
+			<div className={styles.container}>
+				{ cancelApproved ? (
+					<Button
+						size="sm"
+						type="button"
+						onClick={() => {
+							setShowCancellationModal(true);
+							setShow(false);
+						}}
+						style={{ marginBottom: '8px' }}
+					>
+						Cancel
+						{' '}
+						{IRNLabel}
+					</Button>
+				) : null}
+				{(statusPresent && sageAllowed) ? (
+					<Button
+						disabled={loading}
+						size="sm"
+						type="button"
+						onClick={postToSage}
+					>
+						Post to Sage
+					</Button>
+				) : null}
+			</div>
+		);
+	}
 
 	const rest = {
 		onClickOutside: () => setShow(!show),
@@ -94,7 +96,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 						<Popover
 							placement="left"
 							visible={show}
-							render={content()}
+							render={<Content />}
 							{...rest}
 						>
 							<div>
