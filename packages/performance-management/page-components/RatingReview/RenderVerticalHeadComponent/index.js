@@ -10,18 +10,18 @@ import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data found';
 
-function RenderTitle({ title, averageValue, level, activeTab }) {
+function RenderTitle({ title }) {
 	return (
 		<div className={styles.title}>
 			<div>{startCase(title)}</div>
 
-			{level === 'vertical_head' && activeTab === 'vertical_head' && (
+			{/* {level === 'vertical_head' && activeTab === 'vertical_head' && (
 				<div className={styles.average_value}>
 					Average Rating :
 					{' '}
 					{averageValue || 'N/A'}
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }

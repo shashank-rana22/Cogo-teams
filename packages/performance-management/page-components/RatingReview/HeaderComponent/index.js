@@ -1,4 +1,4 @@
-import { Button, Select } from '@cogoport/components';
+import { Button, Select, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetRatingCycles from '../hooks/useGetRatingCycles';
@@ -23,7 +23,7 @@ function HeaderComponent({ props = {} }) {
 		setSelectCycle,
 	} = useGetRatingCycles({ });
 
-	const { data, fetchRatingReviewDetails } = useGetRatingReviewDetails(
+	const { data, fetchRatingReviewDetails, loading } = useGetRatingReviewDetails(
 		{ selectValue, level, selectCycle, activeTab },
 	);
 
@@ -33,6 +33,15 @@ function HeaderComponent({ props = {} }) {
 		toggleVal,
 		setToggleVal,
 	} = usePublishRatings({ selectedEmployees, level, data, selectCycle, activeTab, fetchRatingReviewDetails });
+
+	if (loading) {
+		return (
+			<div className={styles.loader}>
+				<Loader style={{ height: '60px', width: '60px' }} />
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			<div className={styles.select_row}>
@@ -76,9 +85,17 @@ function HeaderComponent({ props = {} }) {
 				toggleVal={toggleVal}
 				setToggleVal={setToggleVal}
 				activeTab={activeTab}
+
 			/>
 
-			{show ? <KraModal show={show} setShow={setShow} selectCycle={selectCycle} /> : null}
+			{show ? (
+				<KraModal
+					show={show}
+					setShow={setShow}
+					selectCycle={selectCycle}
+					fetchRatingReviewDetails={fetchRatingReviewDetails}
+				/>
+			) : null}
 		</div>
 	);
 }

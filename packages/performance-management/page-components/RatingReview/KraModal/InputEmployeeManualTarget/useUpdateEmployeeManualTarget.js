@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const MIN_RATING = 0;
 
-const useUpdateEmployeeManualTarget = ({ item, data, selectCycle }) => {
+const useUpdateEmployeeManualTarget = ({ item, data, selectCycle, employeeKraDetails }) => {
 	const { end_date, start_date } = selectCycle || {};
 
 	const [inputValue, setInputValue] = useState(MIN_RATING);
@@ -29,6 +29,7 @@ const useUpdateEmployeeManualTarget = ({ item, data, selectCycle }) => {
 				},
 			});
 
+			employeeKraDetails();
 			Toast.success('Rating has been updated successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

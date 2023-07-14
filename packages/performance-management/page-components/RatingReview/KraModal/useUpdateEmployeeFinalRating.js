@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const MIN_RATING = 0;
 
-const useUpdateEmployeeFinalRating = (data, selectCycle) => {
+const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingReviewDetails }) => {
 	const { end_date, start_date } = selectCycle || {};
 
 	const [starRating, setStarRating] = useState(MIN_RATING);
@@ -18,6 +18,15 @@ const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 	}, { manual: true });
 
 	const updateEmployeeFinalRating = async () => {
+		if (starRating === MIN_RATING) {
+			Toast.error('Rating is required');
+			return;
+		}
+		if (!comments) {
+			Toast.error('Comments is required');
+			return;
+		}
+
 		try {
 			await trigger({
 				data: {
@@ -29,8 +38,9 @@ const useUpdateEmployeeFinalRating = (data, selectCycle) => {
 					end_date            : format(end_date, 'yyyy-MM-dd'),
 				},
 			});
-
 			Toast.success('Sucessfully Update Rating');
+			setShow(false);
+			fetchRatingReviewDetails();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
