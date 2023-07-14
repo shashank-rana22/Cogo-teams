@@ -1,5 +1,5 @@
 const extraApiPayload = (values, end_point) => {
-	if (end_point === 'create_document') {
+	if (end_point === 'create_shipment_document') {
 		let documentArr = values?.documents;
 
 		if (!documentArr) documentArr = [values];

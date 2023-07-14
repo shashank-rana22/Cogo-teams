@@ -15,7 +15,7 @@ function UploadHbl(props) {
 	const [urls, setUrls] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/create_document',
+		url    : '/create_shipment_document',
 		method : 'POST',
 	}, { manual: true });
 
@@ -41,6 +41,8 @@ function UploadHbl(props) {
 			uploaded_by_org_id : task?.organization_id,
 			service_id         : task?.service_id,
 			service_type       : task.service_type,
+			pending_task_id:
+			task?.service_type === 'lcl_freight_service' ? task?.id : undefined,
 			document_type: 'draft_house_bill_of_lading',
 			documents,
 		};

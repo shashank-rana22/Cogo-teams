@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useCreateShipmentDocument = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_shipment_document',
+		url    : '/create_shipment_document',
 		method : 'POST',
 	}, { manual: true });
 

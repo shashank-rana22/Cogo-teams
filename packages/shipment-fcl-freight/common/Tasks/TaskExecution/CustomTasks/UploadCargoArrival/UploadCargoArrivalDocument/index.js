@@ -33,7 +33,7 @@ function UploadCargoArrivalDocument({
 			document_type      : 'container_arrival_notice',
 			service_id         : pendingTask?.service_id,
 			service_type       : pendingTask?.service_type,
-			pending_task_id	   : pendingTask?.id,
+			pending_task_id    : pendingTask?.id,
 			documents          : [
 				{
 					file_name    : values?.cargo_arrival_notice?.fileName,
@@ -78,7 +78,7 @@ function UploadCargoArrivalDocument({
 				<div className={styles.footer}>
 					<Button
 						onClick={handleSubmit(onSubmit)}
-						disabled={docLoading || pendingTaskLoading}
+						disabled={docLoading}
 					>
 						Submit
 					</Button>

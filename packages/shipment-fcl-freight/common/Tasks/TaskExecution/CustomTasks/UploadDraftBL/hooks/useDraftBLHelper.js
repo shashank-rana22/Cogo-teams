@@ -4,7 +4,6 @@ import { useRequest, request } from '@cogoport/request';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
-import useUpdatePendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
@@ -19,11 +18,9 @@ const useDraftBLHelper = ({
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/create_document',
+		url    : '/create_shipment_document',
 		method : 'POST',
 	}, { manual: true });
-
-	const { apiTrigger : updatePendingTaskTrigger, loading : updatePendingTaskLoading } = useUpdatePendingTask({});
 
 	const createHBL = async ({ hblData }) => {
 		setCreateTradeDocLoading(true);
@@ -73,7 +70,7 @@ const useDraftBLHelper = ({
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
 				service_type       : pendingTask.service_type,
-				task_id        	   : pendingTask?.id,
+				pending_task_id    : pendingTask?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
 					document_url : value?.url?.finalUrl,
@@ -87,15 +84,7 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			const res = 	await trigger({ data: body });
-
-			if (!res?.hasError) {
-				const val = {
-					id     : pendingTask?.id,
-					status : 'completed',
-				};
-				await updatePendingTaskTrigger(val);
-			}
+			await trigger({ data: body });
 
 			try {
 				const rpaMappings = {
@@ -115,7 +104,7 @@ const useDraftBLHelper = ({
 	return {
 		createHBL,
 		submitMBL,
-		loading: loading || updatePendingTaskLoading,
+		loading,
 		createTradeDocLoading,
 	};
 };
