@@ -20,6 +20,8 @@ function useVideoCallFirebase({
 	setCallComing,
 	setInACall,
 	setCallDetails,
+	setWebrtcToken,
+	setOptions,
 	callDetails,
 	setStreams,
 	streams,
@@ -115,16 +117,37 @@ function useVideoCallFirebase({
 			setInACall(false);
 			stopStream('screen_stream');
 			stopStream('user_stream');
-			setCallDetails((prev) => ({
-				...prev,
+			const localPeerRef = peerRef;
+			localPeerRef.current = null;
+			setCallDetails({
+				my_details           : null,
+				peer_details         : null,
+				calling_details      : null,
 				calling_room_id      : null,
 				webrtc_token_room_id : null,
-			}));
+				calling_type         : null,
+			});
+			setWebrtcToken({
+				user_token : null,
+				peer_token : null,
+			});
+			setOptions({
+				isMicActive         : true,
+				isVideoActive       : false,
+				isScreenShareActive : false,
+				isMaximize          : false,
+			});
+			setStreams({
+				user_stream   : null,
+				peer_stream   : null,
+				screen_stream : null,
+			});
 		}
 		if (callComing) {
 			setCallComing(false);
 		}
-	}, [inACall, callComing, setInACall, stopStream, setCallDetails, setCallComing]);
+	}, [inACall, callComing, setInACall, stopStream, peerRef, setCallDetails,
+		setWebrtcToken, setOptions, setStreams, setCallComing]);
 
 	const callingTo = () => {
 		if (inACall) return;
@@ -143,7 +166,7 @@ function useVideoCallFirebase({
 		}));
 
 		navigator.mediaDevices
-			.getUserMedia({ video: false, audio: true })
+			.getUserMedia({ video: true, audio: true })
 			.then((myStream) => {
 				setInACall(true);
 				setStreams((prev) => ({ ...prev, user_stream: myStream }));
