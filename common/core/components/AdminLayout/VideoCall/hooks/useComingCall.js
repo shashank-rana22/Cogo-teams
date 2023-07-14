@@ -1,5 +1,5 @@
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -14,17 +14,14 @@ function useComingCall({
 	setStreams,
 	peerRef,
 	saveWebrtcToken,
+	webrtcToken,
+	setWebrtcToken,
 }) {
-	const [webrtcToken, setWebrtcToken] = useState({
-		user_token : null,
-		peer_token : null,
-	});
-
 	const getWebrtcToken = async () => {
-		if (callDetails.webrtc_token_room_id) {
+		if (callDetails.webrtc_token_room_id && callDetails.calling_room_id) {
 			const tokenDocRef = doc(
 				firestore,
-				FIRESTORE_PATH.webrtc_token,
+				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
 				callDetails.webrtc_token_room_id,
 			);
 			const docSnap = await getDoc(tokenDocRef);
@@ -38,10 +35,10 @@ function useComingCall({
 	};
 
 	useEffect(() => {
-		if (callDetails?.webrtc_token_room_id) {
+		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
 			const tokenDocRef = doc(
 				firestore,
-				FIRESTORE_PATH.webrtc_token,
+				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
 				callDetails.webrtc_token_room_id,
 			);
 			onSnapshot(tokenDocRef, (dop) => {
@@ -53,7 +50,7 @@ function useComingCall({
 				}));
 			});
 		}
-	}, [callDetails.webrtc_token_room_id, firestore]);
+	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
 
 	const accepteCallMedia = () => {
 		navigator.mediaDevices
@@ -69,16 +66,15 @@ function useComingCall({
 				localPeerRef.current = peer;
 
 				if (webrtcToken.user_token) {
-					console.log('getting token');
 					peer.signal(webrtcToken.user_token);
 				}
 
 				// console.log('calling peer.signal');
 
 				peer.on('signal', (data) => {
-					console.log(data, 'answer_peer');
 					saveWebrtcToken(
 						{ peer_token: data },
+						callDetails.calling_room_id,
 						callDetails.webrtc_token_room_id,
 					);
 				});

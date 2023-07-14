@@ -32,23 +32,25 @@ function useVideoCallFirebase({
 	}));
 	const { id: userId, name: userName } = user_data || {};
 
-	const saveWebrtcToken = async (data, path_id) => {
-		const WebrtcTokenRoomDoc = doc(
-			firestore,
-			`${FIRESTORE_PATH.webrtc_token}/${path_id}`,
-		);
-
-		try {
-			await setDoc(
-				WebrtcTokenRoomDoc,
-				{
-					updated_at: Date.now(),
-					...data,
-				},
-				{ merge: true },
+	const saveWebrtcToken = async (data, calling_room_id, path) => {
+		if (calling_room_id) {
+			const WebrtcTokenRoomDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH.video_calls}/${calling_room_id}/${FIRESTORE_PATH.webrtc_token}/${path}`,
 			);
-		} catch (error) {
-			console.error(error);
+
+			try {
+				await setDoc(
+					WebrtcTokenRoomDoc,
+					{
+						updated_at: Date.now(),
+						...data,
+					},
+					{ merge: true },
+				);
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	};
 
@@ -72,8 +74,10 @@ function useVideoCallFirebase({
 				},
 				calling_room_id: doc_data.id,
 			}));
+			return doc_data.id;
 		} catch (error) {
 			console.error(error);
+			return null;
 		}
 	};
 
@@ -113,7 +117,8 @@ function useVideoCallFirebase({
 			stopStream('user_stream');
 			setCallDetails((prev) => ({
 				...prev,
-				calling_room_id: null,
+				calling_room_id      : null,
+				webrtc_token_room_id : null,
 			}));
 		}
 		if (callComing) {
@@ -123,6 +128,19 @@ function useVideoCallFirebase({
 
 	const callingTo = () => {
 		if (inACall) return;
+
+		setCallDetails((prev) => ({
+			...prev,
+			call_status  : 'calling',
+			calling_by   : 'admin',
+			peer_details : {
+				name      : userName,
+				user_id   : userId,
+				user_type : 'admin',
+			},
+			webrtc_token_room_id : userId,
+			calling_type         : 'calling',
+		}));
 
 		navigator.mediaDevices
 			.getUserMedia({ video: false, audio: true })
@@ -142,18 +160,18 @@ function useVideoCallFirebase({
 				localPeerRef.current = peer;
 
 				peer.on('signal', (data) => {
-					saveWebrtcToken({ user_token: data }, userId);
 					saveCallingData({
-						call_status : 'calling',
-						calling_by  : 'admin',
-						peer_detils : {
+						call_status  : 'calling',
+						calling_by   : 'admin',
+						peer_details : {
 							name      : userName,
 							user_id   : userId,
 							user_type : 'admin',
 						},
 						webrtc_token_room_id: userId,
+					}).then((calling_room_id) => {
+						saveWebrtcToken({ user_token: data }, calling_room_id, userId);
 					});
-					console.log(data, 'peer_data');
 				});
 			});
 	};
@@ -171,9 +189,11 @@ function useVideoCallFirebase({
 				if (!inACall) {
 					setCallDetails((prev) => ({
 						...prev,
-						peer_details    : val.data().peer_detils,
-						calling_details : val.data(),
-						calling_room_id : val.id,
+						peer_details         : val.data().peer_details,
+						calling_details      : val.data(),
+						calling_room_id      : val.id,
+						calling_type         : 'coming',
+						webrtc_token_room_id : val.data().webrtc_token_room_id,
 					}));
 					setCallComing(true);
 				}
@@ -211,6 +231,7 @@ function useVideoCallFirebase({
 		callUpdate,
 		callEnd,
 		stopStream,
+		saveWebrtcToken,
 	};
 }
 

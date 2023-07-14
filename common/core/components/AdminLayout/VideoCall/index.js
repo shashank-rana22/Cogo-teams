@@ -18,12 +18,17 @@ function VideoCall() {
 
 	const [callComing, setCallComing] = useState(false);
 	const [inACall, setInACall] = useState(false);
+	const [webrtcToken, setWebrtcToken] = useState({
+		user_token : null,
+		peer_token : null,
+	});
 	const [callDetails, setCallDetails] = useState({
-		my_details      : null,
-		peer_details    : null,
-		calling_details : null,
-		calling_room_id : null,
-		token_room_id   : null,
+		my_details           : null,
+		peer_details         : null,
+		calling_details      : null,
+		calling_room_id      : null,
+		webrtc_token_room_id : null,
+		calling_type         : null,
 	});
 	const [streams, setStreams] = useState({
 		user_stream   : null,
@@ -68,6 +73,8 @@ function VideoCall() {
 		setStreams,
 		peerRef,
 		saveWebrtcToken,
+		setWebrtcToken,
+		webrtcToken,
 	});
 
 	useEffect(() => {
@@ -81,20 +88,26 @@ function VideoCall() {
 		}
 	}, [streams]);
 
+	useEffect(() => {
+		if (webrtcToken?.peer_token && callDetails?.calling_type === 'calling') {
+			if (peerRef.current) {
+				console.log('working connection');
+				peerRef.current.signal(webrtcToken?.peer_token);
+			}
+		}
+	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
+
 	const onDragHandler = (ev, moving_ref) => {
 		const shiftX = ev.clientX;
 		const shiftY = ev.clientY;
 		const SHIFT = 50;
 
 		if (shiftX && shiftY) {
-			componentsRef[moving_ref].style = `top: ${shiftY - SHIFT}px;left: ${
-				shiftX - SHIFT
-			}px;`;
+			componentsRef[moving_ref].style = `top: ${shiftY - SHIFT}px;
+			left: ${shiftX - SHIFT}px;`;
 		}
 	};
-
-	console.log(inACall, 'inACall');
-
+	console.log('webrtcToken', webrtcToken);
 	return (
 		<div>
 			<div className={styles.call_comming}>
