@@ -434,29 +434,26 @@ export default {
 			},
 		},
 		enrichment: {
-			show_agent_data                       : true,
 			enrichment_response_source            : 'manual_enriched',
-			manual_enrichment                     : false,
 			allowed_to_create_enrichment_requests : true,
 
-			enrichment_requests: {
-				columns: ['id', 'business_name', 'created_at', 'registration_number', 'requested_agent', 'action'],
-			},
-
-			request_sent: {
-				tabs               : ['submitted_requests'],
-				submitted_requests : {
-					columns:	[
-						'id',
-						'business_name',
-						'created_at',
-						'registration_number',
-						'requested_agent',
-						'action',
-					],
+			manual_enrichment: {
+				columns: [
+					'id', 'business_name', 'created_at', 'registration_number', 'requested_agent', 'action',
+				],
+				hide_columns: {
+					active    : [],
+					responded : [],
+					success   : ['action'],
 				},
 			},
+
+			file_management: {
+				columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
+			},
+
 		},
+
 		account_receivables: {
 			defaulters: {
 				migration_status: {
