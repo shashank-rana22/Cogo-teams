@@ -21,7 +21,7 @@ function Filters() {
 
 			<div className={styles.input_container}>
 				<Input
-					placeholder="Ex. 456789,987867 or Invocie1, invoice2"
+					placeholder="Ex. 456789,987867 or Invoice1, invoice2"
 					type="search"
 					size="sm"
 					suffix={<IcMSearchlight />}
