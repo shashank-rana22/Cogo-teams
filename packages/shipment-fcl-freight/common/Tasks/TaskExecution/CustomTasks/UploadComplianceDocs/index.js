@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 import excludeDocs from './utils/excludeDocsList';
 
 const LENGTH_CHECK = 1;
+const SUCCESS_HTTP_CODE = 200;
 
 const TRADETYPE_MAPPING = {
 	export : 'EXPORT',
@@ -28,7 +29,7 @@ function UploadComplianceDocs({
 }) {
 	const { primary_service, servicesList } = useContext(ShipmentDetailContext);
 
-	const { docs, loading } = useGetSaasComplianceDocs({ primary_service });
+	const { docs, loading } = useGetSaasComplianceDocs({ primary_service, task });
 
 	const { uploadedDocs: allUploadedDocs, docLoading, getDocs } = useGetListShipmentDocuments({
 		params: {
@@ -53,9 +54,8 @@ function UploadComplianceDocs({
 		};
 
 		const res = await apiTrigger(payload);
-		console.log(res, 'res');
 
-		if (!res.hasError && task.task === 'approve_compliance_documents') {
+		if (res.status === SUCCESS_HTTP_CODE && task.task === 'approve_compliance_documents') {
 			const amendmentTask = tasksList?.filter((t) => t.task === 'amend_compliance_documents'
 			&& t?.status === 'pending');
 
@@ -82,9 +82,10 @@ function UploadComplianceDocs({
 		totalDocsList = allUploadedDocs?.list;
 	}
 
+	const uniq_doc_code = [...new Set(totalDocsList?.map((doc) => doc.docCode))];
 	const uniq_doc_state = [...new Set(totalDocsList?.map((doc) => doc.state))];
 
-	const disableSubmitForKam = uploadedDocs?.length === totalDocsList?.length;
+	const disableSubmitForKam = uniq_doc_code?.length === uploadedDocs?.length;
 
 	const disableSubmitForSO = uniq_doc_state?.length === LENGTH_CHECK
 	&& uniq_doc_state?.[GLOBAL_CONSTANTS.zeroth_index] === 'document_accepted';
