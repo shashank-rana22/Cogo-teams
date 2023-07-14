@@ -28,14 +28,8 @@
 	align-items: center;
 }
 
-.name {
-	display: flex;
-	align-items: center;
-	margin: 0 4px;
-	font-size: 12px;
-	text-align: center;
-}
-
 .name_div {
 	display: flex;
+	margin-left: 4px;
+	font-size: 12px;
 }
