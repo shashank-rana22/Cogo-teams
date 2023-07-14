@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -33,8 +34,8 @@ function useGetVendor() {
 
 			setVendorInformation({
 				...res.data,
-				contact_details : res.data?.pocs[0],
-				payment_details : res.data?.bank_details[0],
+				contact_details : res.data?.pocs[GLOBAL_CONSTANTS.zeroth_index],
+				payment_details : res.data?.bank_details[GLOBAL_CONSTANTS.zeroth_index],
 				vendor_services : res.data?.services,
 			});
 
