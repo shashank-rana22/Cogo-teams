@@ -1,5 +1,6 @@
 import { Input } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
+import { CountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
@@ -20,6 +21,7 @@ function DefaultForm({
 	importer_exporter_id = '',
 	organization_id = '',
 	query = '',
+	country_id = '',
 	shipment_type = '',
 }, ref) {
 	const {
@@ -33,6 +35,19 @@ function DefaultForm({
 	});
 	const isShipperFTL = tradePartyType === SHIPPER && shipment_type === 'ftl_freight';
 
+	function TaxNumber({ prefix = '', postfix = '' }) {
+		return (
+			<>
+				{prefix}
+				<CountrySpecificData
+					country_id={country_id}
+					accessorType="registration_number"
+					accessor="label"
+				/>
+				{postfix}
+			</>
+		);
+	}
 	const {
 		control,
 		watch,
@@ -121,15 +136,22 @@ function DefaultForm({
 							&& !isEmpty(gstin_options[formValues.trade_party_id])
 								&& (
 									<div className={styles.form_item_container}>
-										<label className={styles.form_label}>Select GSTIN</label>
+										<label className={styles.form_label}>
+											<TaxNumber prefix="Select " />
+										</label>
 										<SelectController
 											style={{ maxWidth: '250px', minWidth: '200px' }}
 											size="sm"
 											name="tax_number"
-											placeholder="Select GSTIN"
+											placeholder={<TaxNumber prefix="Select " />}
 											control={control}
 											options={gstin_options[formValues.trade_party_id]}
-											rules={{ required: { value: true, message: 'GST is required' } }}
+											rules={{
+												required: {
+													value   : true,
+													message : <TaxNumber postfix=" is required" />,
+												},
+											}}
 										/>
 										{Error('tax_number')}
 									</div>

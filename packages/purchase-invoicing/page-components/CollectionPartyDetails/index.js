@@ -40,6 +40,75 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking manager',
 ];
 
+function Serviceswrapper({ allservices = [] }) {
+	return (
+		<>
+			{(allservices || []).map((service, i) => (
+				<span key={service}>
+					{`${startCase(service)} ${allservices.length - LAST_INDEX === i ? '' : ', '}`}
+				</span>
+			))}
+		</>
+	);
+}
+
+function TitleCard({ collectionParty = {}, services = [] }) {
+	return (
+		<div className={styles.container_title}>
+			<div className={styles.customer}>
+				<div className={styles.heading}>
+					<ToolTipWrapper
+						text={collectionParty?.service_provider?.business_name}
+						maxlength={MAX_LEN_FOR_TOOLTIP}
+					/>
+				</div>
+				<div className={styles.servicename}>
+					<span className={styles.spankey}>Services :</span>
+					<ToolTipWrapper
+						text={services}
+						maxlength={SERVICE_WRAPPER_LAST_INDEX}
+						render
+						content={(
+							<Serviceswrapper allservices={services} />
+						)}
+					>
+						<Serviceswrapper allservices={services?.slice(
+							SERVICE_WRAPPER_START_INDEX,
+							SERVICE_WRAPPER_LAST_INDEX,
+						) || []}
+						/>
+						{services?.length > SERVICE_WRAPPER_LAST_INDEX ? '...' : ''}
+					</ToolTipWrapper>
+				</div>
+			</div>
+			<div className={styles.invoices}>
+				<div>Total Invoice Value -</div>
+				<div className={styles.value}>
+					<ToolTipWrapper
+						text={getFormattedAmount(
+							collectionParty.invoice_total,
+							collectionParty.invoice_currency,
+						)}
+						maxlength={MAX_LEN_FOR_TOOLTIP}
+					/>
+					<span className={styles.paddingleft}>
+						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}
+					</span>
+				</div>
+			</div>
+			<div className={styles.lineitems}>
+				<div>
+					{`No. Of Line Items 
+				- ${collectionParty?.total_line_items} | Locked - ${collectionParty?.locked_line_items}`}
+				</div>
+			</div>
+			<div className={styles.mode}>
+				Cash
+			</div>
+		</div>
+	);
+}
+
 function CollectionPartyDetails({
 	collectionParty = {}, refetch = () => {}, servicesData = {},
 	fullwidth = false,
@@ -71,16 +140,6 @@ function CollectionPartyDetails({
 		].some((ele) => user?.partner.user_role_ids?.includes(ele));
 
 	const showUpload = uploadInvoiceAllowed || shipment_data?.source === 'spot_line_booking';
-
-	const serviceswrapper = (allservices) => (
-		<>
-			{(allservices || []).map((ser, i) => (
-				<span key={ser}>
-					{`${startCase(ser)} ${(services).length - LAST_INDEX === i ? '' : ', '}`}
-				</span>
-			))}
-		</>
-	);
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
@@ -122,59 +181,6 @@ function CollectionPartyDetails({
 
 	const isJobClosed = shipment_data?.is_job_closed;
 
-	const titleCard = () => (
-		<div className={styles.container_title}>
-			<div className={styles.customer}>
-				<div className={styles.heading}>
-					<ToolTipWrapper text={collectionParty?.service_provider?.business_name} maxlength={25} />
-				</div>
-				<div className={styles.servicename}>
-					<span className={styles.spankey}>Services :</span>
-					<ToolTipWrapper
-						text={services}
-						maxlength={SERVICE_WRAPPER_LAST_INDEX}
-						render
-						content={(
-							<>
-								{serviceswrapper(services)}
-							</>
-						)}
-					>
-						{serviceswrapper(services?.slice(
-							SERVICE_WRAPPER_START_INDEX,
-							SERVICE_WRAPPER_LAST_INDEX,
-						) || [])}
-						{services.length > SERVICE_WRAPPER_LAST_INDEX ? '...' : ''}
-					</ToolTipWrapper>
-				</div>
-			</div>
-			<div className={styles.invoices}>
-				<div>Total Invoice Value -</div>
-				<div className={styles.value}>
-					<ToolTipWrapper
-						text={getFormattedAmount(
-							collectionParty.invoice_total,
-							collectionParty.invoice_currency,
-						)}
-						maxlength={MAX_LEN_FOR_TOOLTIP}
-					/>
-					<span className={styles.paddingleft}>
-						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}
-					</span>
-				</div>
-			</div>
-			<div className={styles.lineitems}>
-				<div>
-					{`No. Of Line Items 
-					- ${collectionParty?.total_line_items} | Locked - ${collectionParty?.locked_line_items}`}
-				</div>
-			</div>
-			<div className={styles.mode}>
-				Cash
-			</div>
-		</div>
-	);
-
 	const onConfirm = () => {
 		if (!isEmpty(uploadInvoiceUrl)) {
 			setOpenComparision({});
@@ -186,7 +192,15 @@ function CollectionPartyDetails({
 
 	return (
 		<div className={styles.container}>
-			<AccordianView fullwidth={fullwidth} title={titleCard()}>
+			<AccordianView
+				fullwidth={fullwidth}
+				title={(
+					<TitleCard
+						collectionParty={collectionParty}
+						services={services}
+					/>
+				)}
+			>
 				<InvoicesUploaded
 					invoicesdata={collectionParty?.existing_collection_parties}
 					collectionParty={collectionParty}

@@ -7,24 +7,27 @@ import Services from '../Services';
 
 import styles from './styles.module.css';
 
+function Title() {
+	return <div className={styles.title}>Manage Services</div>;
+}
+
+const getItems = (reviewed_invoices, invoicing_parties = []) => [
+	{
+		key      : '1',
+		disabled : false,
+		children : `${reviewed_invoices} / ${invoicing_parties.length} Sales Invoices Reviewed`,
+		color    : '#EE3425',
+		tooltip  : false,
+	},
+];
+
 function OverviewManageServices({ isOpen = true, isPurchaseTab = false }) {
 	const { data: invoiceData, loading } = useGetShipmentInvoice();
 	const { invoicing_parties = [], reviewed_invoices } = invoiceData || {};
-	const items = [
-		{
-			key      : '1',
-			disabled : false,
-			children : `${reviewed_invoices} / ${invoicing_parties.length} Sales Invoices Reviewed`,
-			color    : '#EE3425',
-			tooltip  : false,
-		},
-	];
-	const getTitle = () => (
-		<div className={styles.title}>Manage Services</div>
-	);
+	const items = getItems(reviewed_invoices, invoicing_parties);
 
 	return (
-		<Accordion title={getTitle()} isOpen={isOpen}>
+		<Accordion title={<Title />} isOpen={isOpen}>
 			{!isPurchaseTab && <Services />}
 
 			<AdditionalServiceList />

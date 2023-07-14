@@ -23,10 +23,13 @@ function AddCompanyModal({
 	shipment_id = '',
 	shipment_type = '',
 	importer_exporter_id = '',
+	country_id = '',
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
+
 	const { query = '', debounceQuery } = useDebounceQuery();
+
 	const [role, setRole] = useState(trade_party_type);
 	const [companyType, setCompanyType] = useState('trade_partner');
 
@@ -61,6 +64,7 @@ function AddCompanyModal({
 		});
 		createTrigger(params);
 	};
+
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL
 		&& shipment_type === 'ftl_freight';
@@ -98,7 +102,7 @@ function AddCompanyModal({
 					<div className={styles.input_container}>
 						{isShipperHistorical && (
 							<Input
-								placeholder="Pincode, PAN, GSTIN, Name"
+								placeholder="Pincode, PAN, Name, TAX Number"
 								type="search"
 								size="sm"
 								suffix={<IcMSearchlight />}
@@ -116,6 +120,7 @@ function AddCompanyModal({
 							importer_exporter_id={importer_exporter_id}
 							shipment_id={shipment_id}
 							shipment_type={shipment_type}
+							country_id={country_id}
 							organization_id={organization_id}
 							query={query}
 						/>
