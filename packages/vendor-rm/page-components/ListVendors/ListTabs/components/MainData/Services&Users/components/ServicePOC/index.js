@@ -45,8 +45,6 @@ function ServicePOC({
 		return null;
 	}
 
-	console.log(allServicesAndPocs, 'all');
-
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>Service POC </span>

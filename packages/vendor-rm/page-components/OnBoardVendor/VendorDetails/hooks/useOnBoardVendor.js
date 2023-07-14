@@ -68,8 +68,6 @@ function useOnBoardVendor({
 		value : item?.id,
 	}));
 
-	console.log(entityOptions, 'entityOptions');
-
 	const fields = useMemo(() => getControls({
 		country_id,
 		entityOptions,
