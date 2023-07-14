@@ -2,7 +2,6 @@ const TIME_BASED_TASK = ['mark_containers_departed',
 	'mark_containers_arrived',
 	'upload_proof_of_delivery',
 	'mark_containers_handed_over'];
-const TIME_BASED_TASK_CONTROL_NAMES = ['delivery_date', 'containers_arrived_date', 'containers_handed_over_date'];
 
 const mutateControls = (
 	controls,
@@ -96,7 +95,7 @@ const mutateControls = (
 		}
 
 		if (TIME_BASED_TASK.includes(task.task)
-			&& TIME_BASED_TASK_CONTROL_NAMES.includes(control.name)) {
+			&& control.type === 'datepicker') {
 			newControl.value = '';
 		}
 		if (task.task === 'confirm_booking_with_customer') {

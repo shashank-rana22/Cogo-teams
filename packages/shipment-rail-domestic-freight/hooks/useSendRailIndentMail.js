@@ -13,7 +13,7 @@ const useSendRailIndentEMail = () => {
 			});
 			Toast.success('Mail is Sent Successfully');
 		} catch (e) {
-			Toast.error(e.message);
+			Toast.error(e?.message);
 		}
 	};
 	return {

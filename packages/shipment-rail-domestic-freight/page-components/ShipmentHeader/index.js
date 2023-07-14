@@ -67,7 +67,9 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails primary_service={primary_service} />
+			<div className={styles.tags}>
+				<CargoDetails primary_service={primary_service} />
+			</div>
 
 			{showCancelShipmentIcon
 				? (

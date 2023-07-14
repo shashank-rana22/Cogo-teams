@@ -76,3 +76,7 @@
 	font-size: var(--font-size-md);
 	cursor: pointer;
 }
+
+.tags {
+	width: 25%;
+}

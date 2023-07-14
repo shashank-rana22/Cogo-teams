@@ -7,9 +7,10 @@ const SINGULAR_CONSTANT = 1;
 const ROUNDING_OFF_CONSTANT = 2;
 const VOLUMN_CONVERSION_CONSTANT = 166.67;
 const INCREMENT_CONSTANT = 1;
+const DEFAULT_VOLUMN = 0;
 
-export const renderValue = (label, detail, overview) => {
-	const chargableWeight = Math.max(detail.volume * VOLUMN_CONVERSION_CONSTANT, detail?.weight);
+export const renderValue = (label, overview, detail = {}) => {
+	const chargableWeight = Math.max((detail?.volume || DEFAULT_VOLUMN) * VOLUMN_CONVERSION_CONSTANT, detail?.weight);
 
 	const volume = ` ${detail.volume} cbm`;
 
@@ -110,7 +111,7 @@ export const renderValue = (label, detail, overview) => {
 		case 'transport_mode':
 			return startCase(detail.transport_mode || '');
 		case 'cargo_weight_per_container':
-			return `${detail.cargo_weight_per_container} MT`;
+			return detail?.cargo_weight_per_container ? `${detail.cargo_weight_per_container} MT` : null;
 		case 'destination_cargo_handling_type':
 			return startCase(detail.destination_cargo_handling_type || '');
 		case 'origin_cargo_handling_type':

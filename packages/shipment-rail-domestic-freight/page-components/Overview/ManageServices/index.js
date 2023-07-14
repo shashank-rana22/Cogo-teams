@@ -7,7 +7,12 @@ import styles from './styles.module.css';
 
 function ManageServices() {
 	return (
-		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen>
+		<Accordion
+			type="text"
+			title={<div className={styles.title}>Manage Services</div>}
+			isOpen
+			className={styles.accoridan}
+		>
 			<Services />
 
 			<AdditionalServiceList />

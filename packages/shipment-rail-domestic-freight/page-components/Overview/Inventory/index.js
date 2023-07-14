@@ -1,6 +1,7 @@
 import { Accordion, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ShipmentInventoryContext from '@cogoport/context/page-components/ShipmentInventoryContext';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { EmptyState } from '@cogoport/surface-modules';
 import { useContext, useState, useMemo } from 'react';
 
@@ -14,6 +15,8 @@ import getUpdateContainerDetailPayload from './helpers/getUpdateContainerDetailP
 import useParseContainerData from './helpers/useParseContainerData';
 import RoutePlan from './RoutePlan';
 import styles from './styles.module.css';
+
+const MINIMUM_VALUE = 1;
 
 function Inventory() {
 	const [globalRouteState, setGlobalRouteState] = useState({
@@ -41,7 +44,7 @@ function Inventory() {
 	} = useUpdateRailShipmentContainerDetails({});
 
 	const onSubmit = () => {
-		if (globalRouteState?.routeList?.size > 1) {
+		if (globalRouteState?.routeList?.size > MINIMUM_VALUE) {
 			setShowModal(true);
 			return;
 		}
@@ -57,11 +60,16 @@ function Inventory() {
 		[routeList, globalRouteState, routeInformation, setRouteList],
 	);
 
-	const routesExist = routeList?.[0]?.route?.length > 0;
+	const routesExist = routeList?.[GLOBAL_CONSTANTS.zeroth_index]?.route?.length > GLOBAL_CONSTANTS.zeroth_index;
 
 	return (
 		<ShipmentInventoryContext.Provider value={providerValue}>
-			<Accordion title={<div className={styles.title}>Inventory</div>} isOpen>
+			<Accordion
+				title={<div className={styles.title}>Inventory</div>}
+				isOpen
+				type="text"
+				className={styles.accordian}
+			>
 				{!isGettingShipment ? (
 					<div>
 						<div>Overview</div>
@@ -77,7 +85,7 @@ function Inventory() {
 								<>
 									<RoutePlan
 										list={{
-											route     : routeList?.[0]?.route || [],
+											route     : routeList?.[GLOBAL_CONSTANTS.zeroth_index]?.route || [],
 											isChecked : false,
 										}}
 										type="summary"
@@ -107,13 +115,13 @@ function Inventory() {
 												<div>
 													<Button
 														disabled={updateLoading}
-														themeType={`${globalRouteState?.routeList?.size > 1
+														themeType={`${globalRouteState?.routeList?.size > MINIMUM_VALUE
 															? 'secondary' : 'primary'}`}
 														size="md"
 														style={{ marginLeft: '15px' }}
 														onClick={onSubmit}
 													>
-														{globalRouteState?.routeList?.size > 1
+														{globalRouteState?.routeList?.size > MINIMUM_VALUE
 															? 'Update Containers' : 'Submit'}
 													</Button>
 												</div>
