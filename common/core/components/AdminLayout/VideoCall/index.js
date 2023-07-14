@@ -37,7 +37,7 @@ function VideoCall() {
 	});
 	const [options, setOptions] = useState({
 		isMicActive         : true,
-		isVideoActive       : false,
+		isVideoActive       : true,
 		isScreenShareActive : false,
 		isMaximize          : false,
 	});
@@ -93,7 +93,6 @@ function VideoCall() {
 	useEffect(() => {
 		if (webrtcToken?.peer_token && callDetails?.calling_type === 'calling') {
 			if (peerRef.current) {
-				console.log('working connection');
 				peerRef.current.signal(webrtcToken?.peer_token);
 			}
 		}
@@ -109,7 +108,7 @@ function VideoCall() {
 			left: ${shiftX - SHIFT}px;`;
 		}
 	};
-	console.log('webrtcToken', webrtcToken);
+
 	return (
 		<div>
 			<div className={styles.call_comming}>

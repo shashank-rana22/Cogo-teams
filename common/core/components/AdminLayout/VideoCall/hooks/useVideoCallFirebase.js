@@ -15,6 +15,7 @@ import Peer from 'simple-peer';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { ICESERVER } from '../constants';
 
+// eslint-disable-next-line max-lines-per-function
 function useVideoCallFirebase({
 	firestore,
 	setCallComing,
@@ -118,6 +119,9 @@ function useVideoCallFirebase({
 			stopStream('screen_stream');
 			stopStream('user_stream');
 			const localPeerRef = peerRef;
+			if (localPeerRef.current) {
+				localPeerRef.current.destroy();
+			}
 			localPeerRef.current = null;
 			setCallDetails({
 				my_details           : null,
@@ -196,6 +200,11 @@ function useVideoCallFirebase({
 						saveWebrtcToken({ user_token: data }, calling_room_id, userId);
 					});
 				});
+
+				peer.on('stream', (peerStream) => {
+					console.log('stream connected');
+					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
+				});
 			});
 	};
 
@@ -210,13 +219,14 @@ function useVideoCallFirebase({
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
 				if (!inACall) {
+					const room_data = val.data();
 					setCallDetails((prev) => ({
 						...prev,
-						peer_details         : val.data().peer_details,
-						calling_details      : val.data(),
+						peer_details         : room_data.peer_details,
+						calling_details      : room_data,
 						calling_room_id      : val.id,
 						calling_type         : 'coming',
-						webrtc_token_room_id : val.data().webrtc_token_room_id,
+						webrtc_token_room_id : room_data.webrtc_token_room_id,
 					}));
 					setCallComing(true);
 				}
@@ -235,7 +245,8 @@ function useVideoCallFirebase({
 				const room_data = dop.data();
 				setCallDetails((prev) => ({
 					...prev,
-					calling_details: room_data,
+					calling_details      : room_data,
+					webrtc_token_room_id : room_data.webrtc_token_room_id,
 				}));
 				const endCallStatus = ['rejected', 'end_call'];
 				if (

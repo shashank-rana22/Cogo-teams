@@ -78,6 +78,11 @@ function useComingCall({
 						callDetails.webrtc_token_room_id,
 					);
 				});
+
+				peer.on('stream', (peerStream) => {
+					console.log('stream connected');
+					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
+				});
 			})
 			.catch((error) => {
 				console.log('user stream is not working', error);
