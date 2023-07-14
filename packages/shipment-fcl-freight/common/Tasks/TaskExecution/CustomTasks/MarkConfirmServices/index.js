@@ -25,7 +25,7 @@ function MarkServiceConfirmed({
 	localService = '',
 }) {
 	const initialStep = REVENUE_DESK_SERVICES.includes(task.service_type) ? SELECT_RATE_STEP : EDIT_RATE_STEP;
-	const [selectedCard, setSelectedCard] = useState(null);
+	const [selectedCard, setSelectedCard] = useState([]);
 	const [step, setStep] = useState(initialStep);
 
 	if (step === SELECT_RATE_STEP) {
@@ -33,14 +33,17 @@ function MarkServiceConfirmed({
 			<SelectRate
 				setStep={setStep}
 				setSelectedCard={setSelectedCard}
+				selectedCard={selectedCard}
 				task={task}
+				servicesList={servicesList}
+				step={step}
 			/>
 		);
 	}
+	console.log(selectedCard, 'values');
 
 	const formattedRate = formatRate(
 		selectedCard,
-		shipment_data,
 		task.service_type,
 		primaryService,
 		servicesList,

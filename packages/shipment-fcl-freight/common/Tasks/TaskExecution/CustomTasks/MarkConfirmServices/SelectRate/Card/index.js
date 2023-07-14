@@ -1,52 +1,56 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useUpdateShipmentBookingConfirmationPreferences
 	from '../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 
 import styles from './styles.module.css';
 
-const getBuyPrice = (dataObj, source) => {
-	if (source === 'system_rate') {
-		const firstvalidty = dataObj?.validities?.[0] || {};
-		const price = firstvalidty?.price || firstvalidty.min_price;
-		const currency = dataObj?.validities?.[0].currency;
+const getBuyPrice = (dataObj) => {
+	const price = dataObj?.price;
+	const currency = dataObj?.currency;
 
-		return `${currency} ${price}`;
-	}
-
-	if (source === 'flash_booking') {
-		const price = dataObj?.line_items?.[0]?.price;
-		const currency = dataObj?.line_items?.[0]?.currency;
-
-		return `${currency} ${price}`;
-	}
-
-	const price = dataObj?.charges?.line_items?.[0]?.price;
-	const currency = dataObj?.charges?.line_items?.[0]?.currency;
-
-	return `${currency} ${price}`;
+	return formatAmount({
+		amount  : price,
+		currency,
+		options : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	});
 };
 
 function Card({
 	item = {},
-	priority,
+	priority = 1,
 	setStep = () => {},
 	setSelectedCard = () => {},
+	similarServiceIds = [],
+	selectedCard = [],
+	step = 1,
 }) {
+	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({});
+	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({ setStep });
 
 	const handleProceed = async () => {
-		await apiTrigger(item);
-
-		setSelectedCard(item);
-
-		setStep(2);
+		setSelectedCard([...selectedCard, item]);
 	};
+	const payload = JSON.stringify(selectedCard);
+
+	const SIMILAR_LENGTH = similarServiceIds.length;
+
+	useEffect(() => {
+		if (selectedCard.length === SIMILAR_LENGTH && step === ONE) {
+			apiTrigger(selectedCard);
+		}
+	}, [payload, selectedCard, SIMILAR_LENGTH, step, setStep, apiTrigger]);
 
 	return (
 		<div className={styles.container}>
@@ -61,7 +65,7 @@ function Card({
 					</div>
 
 					<div className={styles.priority_text}>
-						{`${startCase(item.source)} Booking Note`}
+						{`${startCase(dataArr?.[GLOBAL_CONSTANTS.zeroth_index]?.source)} Booking Note`}
 					</div>
 				</div>
 			</div>
@@ -77,26 +81,18 @@ function Card({
 							</div>
 						</div>
 
-						{dataObj?.airline?.business_name ? (
-							<div>
-								<div className={styles.heading}>Carrier</div>
-
-								<div className={styles.sub_heading}>
-									{dataObj?.operator?.business_name || dataObj?.airline?.business_name}
-								</div>
-							</div>
-						) : null}
-
 						<div>
 							<div className={styles.heading}>Source of Rate</div>
 
-							<div className={styles.sub_heading}>{startCase(item?.source)}</div>
+							<div className={styles.sub_heading}>
+								{startCase(dataArr?.[GLOBAL_CONSTANTS.zeroth_index]?.source)}
+							</div>
 						</div>
 
 						<div>
 							<div className={styles.heading}>Buy Rate</div>
 
-							<div className={styles.sub_heading}>{getBuyPrice(dataObj, item.source)}</div>
+							<div className={styles.sub_heading}>{getBuyPrice(dataObj)}</div>
 						</div>
 
 						<div>
@@ -116,9 +112,11 @@ function Card({
 				<div className={styles.button_wrap}>
 					<Button
 						onClick={() => handleProceed()}
-						disabled={loading}
+						disabled={loading
+							|| (selectedCard || []).find((service) => item.service_id === service.service_id)}
 					>
-						Proceed
+						{selectedCard.length
+						=== (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
 					</Button>
 				</div>
 			</div>

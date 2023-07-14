@@ -22,21 +22,26 @@ const useGetStep3Data = ({
 	onCancel = () => {},
 	task = {},
 	taskListRefetch = () => {},
+	formattedRate = {},
 }) => {
 	let notMainService = false;
 	const SERVICE_IDS = [];
+	let trade_type;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service')
-		) {
+		if ((serviceObj.service_type === 'fcl_freight_service'
+			|| serviceObj.service_type === 'fcl_freight_local_service')
+			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
 			SERVICE_IDS.push(serviceObj.id);
+		}
+		if (serviceObj.id === task.service_id) {
+			trade_type = serviceObj?.trade_type;
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (!notMainService) {
+		if (!notMainService && task.service_type === serviceObj.service_type && trade_type === serviceObj?.trade_type) {
 			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
@@ -90,14 +95,26 @@ const useGetStep3Data = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {

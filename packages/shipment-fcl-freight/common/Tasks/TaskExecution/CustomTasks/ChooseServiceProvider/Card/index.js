@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -12,7 +13,7 @@ import styles from './styles.module.css';
 function Card({ item, priority, handleUpdateTask }) {
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 	const [serviceProvider, setServiceProvider] = useState(
-		item?.data?.[0]?.service_provider_id,
+		item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
 	);
 
 	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({});
@@ -37,12 +38,12 @@ function Card({ item, priority, handleUpdateTask }) {
 					&nbsp;
 				</div>
 				<div>
-					{`${startCase(item?.source)} Booking Note`}
+					{`${startCase(dataArr?.[GLOBAL_CONSTANTS.zeroth_index]?.source)} Booking Note`}
 				</div>
 			</div>
 			<div className={styles.space_between}>
 				{(dataArr || []).map((dataObj) => cardValues(dataObj, item)?.map((eachItem) => (
-					<div className={styles.item}>
+					<div className={styles.item} key={eachItem?.id}>
 						<div className={styles.heading}>{eachItem?.label}</div>
 						<div className={styles.sub_heading}>{eachItem?.value}</div>
 					</div>

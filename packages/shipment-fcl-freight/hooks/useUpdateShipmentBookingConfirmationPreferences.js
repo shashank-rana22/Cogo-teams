@@ -1,28 +1,40 @@
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdateShipmentBookingConfirmationPreferences = ({
-	refetch = () => {},
 	successMessage = 'Updated Successfully!',
+	setStep = () => {},
 }) => {
+	const ONE = 1;
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_booking_confirmation_preference',
+		url    : '/bulk_update_shipment_booking_confirmation_preferences',
 		method : 'POST',
-	});
+	}, { manual: true });
 
-	const apiTrigger = async (val) => {
-		try {
-			await trigger({ data: val });
+	const apiTrigger = useCallback(
+		async (item) => {
+			const SELECTED_PRIORITY = [];
+			console.log(new Date(), 'hit_time_0');
+			item.forEach((priority) => (SELECTED_PRIORITY.push({
+				id                : priority.preference_id,
+				selected_priority : priority.priority,
+			})));
+			try {
+				const res = await trigger({ data: { selected_priorities: SELECTED_PRIORITY } });
 
-			Toast.success(successMessage);
-
-			refetch();
-		} catch (err) {
-			toastApiError(err);
-		}
-	};
-
+				if (!res.hasError) {
+					Toast.success(successMessage);
+					console.log(new Date(), 'hit_time_1');
+					setStep((prev) => prev + ONE);
+				}
+			} catch (err) {
+				toastApiError(err);
+			}
+		},
+		[setStep, trigger, successMessage],
+	);
 	return {
 		loading,
 		apiTrigger,

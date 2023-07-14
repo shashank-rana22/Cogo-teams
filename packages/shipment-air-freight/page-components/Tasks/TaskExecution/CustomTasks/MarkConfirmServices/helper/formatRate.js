@@ -75,17 +75,14 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 		};
 	}
 
-	if (
-		service_type === 'air_customs_service'
-	) {
-		const { data } = selectedRate || {};
-		const rate = data[GLOBAL_CONSTANTS.zeroth_index] || {};
-		return {
-			primary_service,
-			id                   : selectedRate.id,
-			[primary_service.id] : {
-				service_provider_id: rate.service_provider_id,
-				line_items:
+	const { data } = selectedRate || {};
+	const rate = data[GLOBAL_CONSTANTS.zeroth_index] || {};
+	return {
+		primary_service,
+		id                   : selectedRate.id,
+		[primary_service.id] : {
+			service_provider_id: rate.service_provider_id,
+			line_items:
 					rate && rate.line_items
 						? rate.line_items.map((item) => ({
 							code     : item.code,
@@ -96,10 +93,8 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 							quantity : item.quantity,
 						}))
 						: undefined,
-			},
-		};
-	}
-	return {};
+		},
+	};
 };
 
 export default formatRates;
