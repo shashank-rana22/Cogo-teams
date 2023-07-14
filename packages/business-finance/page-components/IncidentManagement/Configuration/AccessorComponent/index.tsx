@@ -14,6 +14,17 @@ import TDSModal from '../../Modals/TDSModal';
 
 import getPropsByType from './getPropsByType';
 
+interface Row {
+	type: string;
+	id: string;
+	data: {
+		organization: string;
+	};
+	remark: string;
+	status: string;
+	getIncidentData: Function;
+}
+
 const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDetails,
 	TDS_APPROVAL                           : TDSModal,
@@ -31,7 +42,7 @@ const TYPE_COMPONENT_MAPPING = {
 	OVERHEAD_APPROVAL                      : NonRecuringModal,
 };
 
-function AccessorComponent({ row, getIncidentData }) {
+function AccessorComponent({ row = {} as Row, getIncidentData = () => {} }: { row?: Row; getIncidentData?: Function }) {
 	const { type = '', id = '', data, remark = '', status = '' } = row || {};
 	const { organization } = data || {};
 
