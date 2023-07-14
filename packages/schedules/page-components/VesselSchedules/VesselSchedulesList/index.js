@@ -1,6 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
+import EmptyState from '../../common/EmptyState';
 import CreateModal from '../CreateVesselSchedules';
 import useGetVesselSchedules from '../hooks/useGetVesselSchedules';
 
@@ -11,14 +12,19 @@ import VesselScheduleCard from './VesselScheduleCard';
 function VesselSchedulesList({ showModal, setShowModal }) {
 	const [filters, setFilters] = useState({});
 	const { data, makeRequest, loading, totalItems } = useGetVesselSchedules({ filters });
+
+	let content = (data || [[...Array(4)]])?.map((vessel) => (
+		<VesselScheduleCard key={vessel?.id} vessel={vessel} loading={loading} />
+	));
+
+	if (!loading && !(data || []).length) {
+		content = <EmptyState />;
+	}
 	return (
 		<>
 			<div>
 				<Filter filter={filters} setFilter={setFilters} />
-				{data
-            && data?.map((vessel) => (
-	<VesselScheduleCard key={vessel?.id} vessel={vessel} loading={loading} />
-            ))}
+				{content}
 			</div>
 			<div className={styles.pagination}>
 				<Pagination

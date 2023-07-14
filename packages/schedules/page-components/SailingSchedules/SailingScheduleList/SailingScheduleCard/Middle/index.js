@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Tooltip } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -8,9 +8,16 @@ function Middle({ sailingSchedule, loading }) {
 		<div className={styles.middle}>
 			<div className={styles.port}>
 				{!loading ? (
-					<div className={styles.port_name}>
-						{sailingSchedule?.origin_location?.name}
-					</div>
+					<Tooltip
+						theme="light"
+						placement="top"
+						interactive
+						content={sailingSchedule?.origin_location?.name}
+					>
+						<div className={styles.port_name}>
+							{sailingSchedule?.origin_location?.name}
+						</div>
+					</Tooltip>
 				) : <Placeholder width="100px" />}
 				{!loading ? (
 					<div className={styles.date}>
@@ -28,9 +35,16 @@ function Middle({ sailingSchedule, loading }) {
 			</div>
 			<div className={styles.port}>
 				{!loading ? (
-					<div className={styles.port_name}>
-						{sailingSchedule?.destination_location?.name}
-					</div>
+					<Tooltip
+						theme="light"
+						placement="top"
+						interactive
+						content={sailingSchedule?.destination_location?.name}
+					>
+						<div className={styles.port_name}>
+							{sailingSchedule?.destination_location?.name}
+						</div>
+					</Tooltip>
 				) : <Placeholder width="100px" />}
 				{!loading ? (
 					<div className={styles.date}>
