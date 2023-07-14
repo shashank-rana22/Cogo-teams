@@ -2,7 +2,6 @@
 	display: flex;
 	justify-content: space-between;
 	margin-left: 16px;
-	cursor: pointer;
 }
 
 .stepper_container {
