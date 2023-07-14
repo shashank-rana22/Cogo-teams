@@ -1,7 +1,7 @@
 import { IcMCloudUpload } from '@cogoport/icons-react';
 
-const getControls = ({ country_id = '', entityOptions = '' }) => {
-	const filterdOptions = entityOptions.filter((item) => {
+const getControls = ({ country_id = '', entityOptions = [] }) => {
+	const filterdOptions = (entityOptions || []).filter((item) => {
 		const { country_id: COUNTRY_ID } = item;
 		return (
 			country_id === COUNTRY_ID

@@ -8,7 +8,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
 
-import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
+import getControls from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 import getDocumentControlsTypeMapping from '../utils/documentTypeControlMapping';
 import VENDOR_FIELDS_MAPPING from '../utils/vendorFieldMapping';
 
