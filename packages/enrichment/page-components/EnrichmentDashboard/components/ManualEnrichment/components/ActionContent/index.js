@@ -35,7 +35,6 @@ function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComple
 						disabled={loadingComplete}
 						onClick={() => onClickCta(key)}
 					>
-
 						<Icon width={16} height={16} style={{ marginRight: '10px' }} />
 
 						<div>{CTA_MAPPING[key]}</div>

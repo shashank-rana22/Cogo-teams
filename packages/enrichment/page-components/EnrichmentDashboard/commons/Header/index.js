@@ -31,6 +31,7 @@ function Header(props) {
 			<>
 				<Button
 					size="lg"
+					type="button"
 					themeType="secondary"
 					style={{ marginLeft: '12px' }}
 					disabled={loading}
@@ -41,6 +42,7 @@ function Header(props) {
 				</Button>
 				<Button
 					size="lg"
+					type="button"
 					themeType="primary"
 					onClick={() => setShowUpload(true)}
 					style={{ marginLeft: '12px' }}
@@ -50,6 +52,7 @@ function Header(props) {
 				</Button>
 			</>
 		),
+
 		manual_enrichment: (
 			allowedToCreateBulkRequest ? (
 				<CreateBulkFeedbackRequest

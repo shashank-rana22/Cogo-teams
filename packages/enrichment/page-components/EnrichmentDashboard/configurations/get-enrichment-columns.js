@@ -26,6 +26,7 @@ const getEnrichmentColumns = ({
 				<Pill>
 					#
 					{lead_organization?.serial_id || organization?.serial_id}
+					{' '}
 				</Pill>
 			</section>
 		),
@@ -150,7 +151,6 @@ const getEnrichmentColumns = ({
 			</section>
 		),
 	},
-
 	{
 		id       : 'created_at',
 		Header   : 'REQUESTED AT',
@@ -171,7 +171,6 @@ const getEnrichmentColumns = ({
 			</section>
 		),
 	},
-
 	{
 		id       : 'action',
 		Header   : <div className={styles.action_header}>Action</div>,

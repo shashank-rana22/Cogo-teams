@@ -12,8 +12,6 @@ import useCreateBulkEnrichmentRequests from '../../hooks/useCreateBulkEnrichment
 
 import styles from './styles.module.css';
 
-const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
-
 const geo = getGeoConstants();
 
 function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {} }) {
@@ -46,7 +44,7 @@ function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {}
 
 		const selectedOption = options.filter((option) => option.id === id);
 
-		const { user_id, partner_id } = selectedOption[ZEROTH_INDEX] || {};
+		const { user_id, partner_id } = selectedOption[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		setThirdPartyPayload({ user_id, partner_id });
 
@@ -122,7 +120,6 @@ function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {}
 						className={styles.submit_button}
 						disabled={isEmpty(selectedCount) || loading}
 						onClick={onCreateFeedback}
-						loading={loading}
 					>
 						Assign
 					</Button>
