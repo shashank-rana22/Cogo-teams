@@ -75,6 +75,7 @@ function ChatBody({
 					UserID : activityUserId = '',
 					UserType : userType,
 					TicketFeedback: ticketFeedback = {},
+					IsInternal: isInternal,
 				} = itm || {};
 
 				const { Url: mediaUrls = [], TicketType: ticketType = '', User: reviewer = {} } = data || {};
@@ -99,6 +100,7 @@ function ChatBody({
 						reviewerName={reviewerName}
 						systemUserID={systemUserID}
 						ticketType={ticketType}
+						isInternal={isInternal}
 					/>
 				);
 			})}

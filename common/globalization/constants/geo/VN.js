@@ -459,9 +459,9 @@ export default {
 				registration_types    : true,
 			},
 			cogo_one: {
-				has_voice_call_access     : false,
-				default_country_code      : 'IN',
-				template_default_language : 'vietnamese',
+				has_voice_call_access       : false,
+				template_default_language   : 'vietnamese',
+				supply_sender_mobile_number : '918069195980',
 			},
 		},
 	},
