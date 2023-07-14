@@ -1,9 +1,13 @@
 .footer_stats {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 	padding-top: 8px;
 	background: #f9f5ec;
+}
+
+.the_stat {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px 0 10px 60px;
 }
 
 .avg_response_time {
@@ -87,12 +91,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-}
-
-.the_stat {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 .stat_circle {

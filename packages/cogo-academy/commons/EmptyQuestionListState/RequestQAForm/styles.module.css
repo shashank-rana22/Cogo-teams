@@ -1,0 +1,53 @@
+.container {
+	padding-top: 16px;
+	padding-left: 4px;
+}
+
+.header {
+	font-size: 20px;
+	font-weight: 550;
+	font-weight: 600;
+}
+
+.input_label {
+	padding-top: 20px;
+	padding-bottom: 12px;
+	font-size: 14px;
+	font-weight: 600;
+
+	.span {
+		font-size: 14px;
+		font-weight: 400;
+		color: #000;
+		opacity: 0.6;
+	}
+}
+
+.answer_container {
+	:global {
+		.ui_text_area_control {
+			height: 250px;
+			padding: 12px;
+			font-size: 14px;
+		}
+
+		.ui_text_area_container {
+			width: 70%;
+			background: #fff;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-start;
+	padding-top: 20px;
+}
+
+.input_container {
+	:global {
+		.ui_input_container {
+			width: 70%;
+		}
+	}
+}

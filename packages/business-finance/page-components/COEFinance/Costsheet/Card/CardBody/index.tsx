@@ -1,4 +1,6 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowNext,
 	IcMArrowRotateDown,
@@ -8,7 +10,6 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../../commons/Interfaces';
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -23,7 +24,7 @@ export function CardBody({ charge, type }: Props) {
 	};
 	const { serviceType, lineItems = [] } = charge || {};
 	const hidden = lineItems.length < 2 ? styles.hidden : '';
-	const borderColor = '#6CC077';
+	const BORDER_COLOR = '#6CC077';
 	function ToolTipContent(quotation, actual) {
 		return (
 			<div className={styles.content}>
@@ -46,7 +47,7 @@ export function CardBody({ charge, type }: Props) {
 			className={`${showFullDetails ? styles.card : styles.custompadding} ${
 				lineItems.length < 2 ? styles.padding : ''
 			}`}
-			style={{ '--bordercolor': borderColor } as React.CSSProperties}
+			style={{ '--bordercolor': BORDER_COLOR } as React.CSSProperties}
 		>
 			<div className={styles.layout}>
 				<div
@@ -86,7 +87,7 @@ export function CardBody({ charge, type }: Props) {
 					iconClassName = styles.profiticon;
 				}
 				return (
-					<div className={styles.values}>
+					<div key={lineItem?.id} className={styles.values}>
 						<div
 							className={`${styles.coloredlabel} ${
 								lineItem?.sameCurrencyDataPresent && className
@@ -110,19 +111,27 @@ export function CardBody({ charge, type }: Props) {
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{getFormattedPrice(
-								lineItem?.priceQuotation,
-								lineItem?.currencyQuotation,
-							) || '-'}
+							{(lineItem?.priceQuotation && lineItem?.currencyQuotation) ? formatAmount({
+								amount   : lineItem?.priceQuotation,
+								currency :	lineItem?.currencyQuotation,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) : '-'}
 						</div>
 						<div
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{getFormattedPrice(
-								lineItem?.priceActual,
-								lineItem?.currencyActual,
-							) || '-'}
+							{(lineItem?.priceActual && lineItem?.currencyActual) ? formatAmount({
+								amount   :	lineItem?.priceActual,
+								currency :	lineItem?.currencyActual,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) : '-'}
 							{lineItem?.sameCurrencyDataPresent && (
 								<span className={iconClassName}>
 									<IcMArrowNext height={15} width={15} />
@@ -143,7 +152,14 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalQuotational
-							? getFormattedPrice(charge?.serviceTotalQuotational, 'INR')
+							? formatAmount({
+								amount   :	charge?.serviceTotalQuotational,
+								currency : charge?.serviceCurrencyQuotational,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
 							: '-'}
 					</div>
 					<div
@@ -151,7 +167,14 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalActual
-							? getFormattedPrice(charge?.serviceTotalActual, 'INR')
+							? formatAmount({
+								amount   :	charge?.serviceTotalActual,
+								currency : GLOBAL_CONSTANTS.currency_code.INR,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
 							: '-'}
 					</div>
 				</div>

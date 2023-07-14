@@ -5,7 +5,7 @@ import {
 	getCountFromServer,
 	collectionGroup, getFirestore, orderBy,
 } from 'firebase/firestore';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import { firebaseConfig } from '../configurations/firebase-configs';
 
@@ -16,7 +16,7 @@ function useGetUsersStats() {
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const getUserSats = async () => {
+	const getUserSats = useCallback(async () => {
 		setFirebaseLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
 		const countKamChats = query(
@@ -36,7 +36,7 @@ function useGetUsersStats() {
 			kam_chats : ActiveKamChats.data().count,
 		});
 		setFirebaseLoading(false);
-	};
+	}, [firestore]);
 
 	return {
 		getUserSats,

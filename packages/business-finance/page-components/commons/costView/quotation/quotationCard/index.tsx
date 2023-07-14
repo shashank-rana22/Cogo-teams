@@ -1,6 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
-
-import getFormattedPrice from '../../../utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -28,18 +29,19 @@ interface Quotation {
 	net_total_price_currency?: string;
 }
 
-function QuotationCard(quotation: any, isBuyQuotation: boolean) {
+interface QuotationCardParams {
+	quotation?: Quotation,
+	isBuyQuotation?: boolean
+}
+
+function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 	const {
 		actual_total_price: actualTotalPrice = 0,
 		actual_total_price_currency: actualTotalPriceCurrency = '',
 		net_total_price_discounted: netTotalPriceDiscounted = 0,
-		net_total_price_currency: netTotalPriceCurrency = '',
+		net_total_price_currency: netTotalPriceCurrency = 0,
 		service_charges: serviceCharge = [],
-	}: Quotation = quotation || {};
-
-	const showPrice = (price: number, currency: string) => getFormattedPrice(price, currency, {
-		currencyDisplay: 'symbol',
-	});
+	} = quotation || {};
 
 	return (
 		<div className={styles.container}>
@@ -59,12 +61,11 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 						<div className={styles.main_container}>
 							<div className={styles.flex}>
 								<b
-									style={{
-										color    : '#333333',
-										fontSize : '20px',
-									}}
+									className={styles.service_name}
 								>
-									{service_type}
+									{startCase(
+										service_type,
+									)}
 								</b>
 							</div>
 						</div>
@@ -91,18 +92,27 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 									<div className={styles.flex}>{name}</div>
 
 									<div className={styles.custom_flex}>
-										{showPrice(
-											taxTotalPriceDiscounted
-                                                || taxTotalPrice,
-											currency || 'INR',
+										{formatAmount(
+											{
+												amount   :	(taxTotalPriceDiscounted || taxTotalPrice) as any,
+												currency :	currency || GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											},
 										)}
 									</div>
 
 									<div className={styles.custom_flex}>
-										{showPrice(
-											actualPrice,
-											actualPriceCurrency || 'INR',
-										)}
+										{formatAmount({
+											amount   :	actualPrice as any,
+											currency :	actualPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
 									</div>
 								</div>
 							);
@@ -112,30 +122,34 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 			)}
 			<div className={styles.br} />
 
-			<div>
+			<div className={styles.flex}>
 				<div className={styles.flex}>
-					<div style={{ color: '#333333' }}>TOTAL COST</div>
+					<div className={styles.service_name}>TOTAL COST</div>
 				</div>
 
 				<div className={styles.show_price_container}>
-					<div
-						style={{
-							marginRight: '5px',
-						}}
-					>
-						{showPrice(
-							netTotalPriceDiscounted,
-							netTotalPriceCurrency || 'INR',
-						)}
+					<div>
+						{formatAmount({
+							amount   :	netTotalPriceDiscounted as any,
+							currency :	netTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				</div>
 
 				<div className={styles.show_price_container}>
 					<div>
-						{showPrice(
-							actualTotalPrice,
-							actualTotalPriceCurrency || 'INR',
-						)}
+						{formatAmount({
+							amount   : actualTotalPrice as any,
+							currency :	actualTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				</div>
 			</div>

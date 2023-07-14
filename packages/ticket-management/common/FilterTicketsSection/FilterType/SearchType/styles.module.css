@@ -1,0 +1,20 @@
+.search_container {
+	display: flex;
+	align-items: center;
+	width: 36%;
+
+	:global {
+		.ui_input_container {
+			width: 50%;
+			margin-right: 8px;
+		}
+
+		.ui_select_container {
+			width: 50%;
+		}
+	}
+}
+
+.search_icon {
+	margin-top: 3px;
+}

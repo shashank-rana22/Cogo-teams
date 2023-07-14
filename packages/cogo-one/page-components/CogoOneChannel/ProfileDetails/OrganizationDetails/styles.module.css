@@ -152,3 +152,19 @@
 	border-radius: 2px;
 	backdrop-filter: blur(3px);
 }
+
+.convert_to_cp {
+	display: flex;
+	justify-content: space-between;
+}
+
+.organization_users {
+	max-height: 40vh;
+	padding: 2px;
+	margin-top: 3px;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

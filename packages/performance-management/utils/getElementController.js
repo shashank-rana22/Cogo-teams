@@ -1,5 +1,7 @@
-import { InputController, MultiselectController, SelectController } from '@cogoport/forms';
-import CreatableMultiSelectController from '@cogoport/forms/page-components/Controlled/CreatableMultiSelectController';
+import {
+	CreatableMultiSelectController, InputController, MultiselectController,
+	SelectController,
+} from '@cogoport/forms';
 import TextAreaController from '@cogoport/forms/page-components/Controlled/TextAreaController';
 
 export const getElementController = (type = 'text') => {

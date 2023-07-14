@@ -5,12 +5,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function MyResponsiveBar({ data }) {
+function MyResponsiveBar({ data = [] }) {
 	return (
 		<>
 			<div className={styles.invoice}>
 				Daily Invoices Trend
-				<Tooltip content="Daily approval and rejection statistics " placement="top">
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							Invoices uploaded, approved and rejected
+						</div>
+					)}
+					placement="top"
+				>
 					<div className={styles.icon}>
 						<IcMInfo />
 					</div>
@@ -21,14 +28,14 @@ function MyResponsiveBar({ data }) {
 
 			<ResponsiveBar
 				data={data}
-				keys={['Approved', 'Rejected']}
+				keys={['Uploaded', 'Approved', 'Rejected']}
 				indexBy="date"
-				margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
-				padding={0.4}
+				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
+				padding={0.1}
 				enableGridY
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={['#ACDADF', '#F37166']}
+				colors={['#ACDADF', '#C4DC91', '#F8AEA8']}
 				layout="vertical"
 				groupMode="grouped"
 				borderColor={{
@@ -45,9 +52,20 @@ function MyResponsiveBar({ data }) {
 				axisRight={null}
 				minValue={0}
 				axisBottom={{
-					tickSize     : 0,
-					tickPadding  : 10,
-					tickRotation : 0,
+					tickSize    : 0,
+					tickPadding : 10,
+					renderTick  : (tick) => (
+						<g transform={`translate(${tick.x - 30},${tick.y + 20})`}>
+							<text
+								style={{
+									fontSize    : 9,
+									marginRight : 10,
+								}}
+							>
+								{tick.value}
+							</text>
+						</g>
+					),
 				}}
 				axisLeft={{
 					tickSize     : 0,
@@ -72,7 +90,7 @@ function MyResponsiveBar({ data }) {
 						direction     : 'row',
 						justify       : false,
 						translateX    : 20,
-						translateY    : -280,
+						translateY    : -300,
 						itemsSpacing  : 50,
 						itemWidth     : 100,
 						itemHeight    : 20,

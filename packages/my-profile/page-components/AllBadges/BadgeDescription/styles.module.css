@@ -1,0 +1,153 @@
+.container {
+	max-width: 652px;
+	padding: 20px;
+	margin: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: bold;
+	color: #6fa5ab;
+}
+
+.display_flex {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 8px 8px 0;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
+}
+
+.main_badge {
+	width: 100%;
+	height: auto;
+	margin-top: 16px;
+	border-radius: 8px;
+}
+
+.star {
+	display: flex;
+	width: 40px;
+}
+
+.badge_container {
+	display: flex;
+	flex-basis: 30%;
+	flex-direction: column;
+	align-items: center;
+}
+
+.stars {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 16px;
+}
+
+.details {
+	display: flex;
+	flex-basis: 64%;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.details_header {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
+}
+
+.label_value {
+	margin: 8px 8px 0 0;
+
+	@media (max-width: 576px) {
+		margin: 16px 8px 0 0;
+	}
+}
+
+.small_badge {
+	width: 40px;
+	margin-right: 8px;
+}
+
+.next_badge {
+	display: flex;
+	align-items: center;
+}
+
+.next_unlock {
+	margin: 8px 20px 0 0;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.value {
+	font-size: 12px;
+	font-weight: bold;
+	color: #221f20;
+}
+
+.description_container {
+	margin-top: 12px;
+}
+
+.mastery_unlock {
+	margin: 16px 0;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin-top: 16px;
+}
+
+.mastery_badge_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.smallstar {
+	width: 20px;
+	margin-top: 4px;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.progressbar_container {
+	display: flex;
+	margin-top: 12px;
+
+	:global(.ui_progressbar_container) {
+		width: 100%;
+	}
+
+	:global(.ui_progressbar_filename) {
+		font-weight: 400;
+	}
+
+	:global(.ui_progressbar_bar) {
+		width: 100%;
+		max-width: 192px;
+	}
+}
+
+.empty_state_container {
+	padding: 20px 0;
+	background: #fff;
+	border-radius: 8px;
+}

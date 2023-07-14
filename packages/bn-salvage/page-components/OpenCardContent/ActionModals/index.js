@@ -1,0 +1,74 @@
+import { cl, Button, Modal } from '@cogoport/components';
+import { useContext } from 'react';
+
+import FilePreview from '../../../commons/FilePreview';
+import { BNSalvageContext } from '../../../context/BNSalvageContext';
+import useUpdateBookingNote from '../../../hooks/useUpdateBookingNote';
+
+import ExtendExpiryModal from './ExtendExpiryModal';
+import styles from './styles.module.css';
+
+const modalHeader = {
+	view_document   : 'Booking Note',
+	move_to_expired : 'Move To Expired',
+};
+
+export default function ActionModals({ modalKey, item }) {
+	const { refetchList, closeModal } = useContext(BNSalvageContext);
+
+	const successRefetch = () => {
+		refetchList(); closeModal();
+	};
+
+	const { loading, updateBookingNote } = useUpdateBookingNote({
+		refetch        : successRefetch,
+		successMessage : 'Booking Note has been moved to expired',
+	});
+
+	const modalBodyContent = {
+		view_document   : <FilePreview url={item?.url} containerClass={styles.file_preview} />,
+		move_to_expired : <h2>Are you sure, you want to move this to Expired ?</h2>,
+	};
+
+	const buttonsContainer = {
+		view_document   : <Button onClick={closeModal}>Close</Button>,
+		move_to_expired : (
+			<>
+				<Button disabled={loading} themeType="secondary" onClick={closeModal}>No</Button>
+				<Button
+					disabled={loading}
+					onClick={() => updateBookingNote({
+						id     : item?.id,
+						status : 'inactive',
+					})}
+				>
+					Yes
+				</Button>
+			</>
+		),
+	};
+
+	return (modalKey === 'extend_expiry'
+		? <ExtendExpiryModal item={item} successRefetch={successRefetch} />
+		: (
+			<Modal
+				show
+				onClose={closeModal}
+				closeOnOuterClick={false}
+				size="lg"
+				className={cl`${styles.customized_modal} ${styles[modalKey]}`}
+				showCloseIcon={!loading}
+			>
+				<Modal.Header title={modalHeader[modalKey]} />
+
+				<Modal.Body className={styles.modal_body}>
+					{modalBodyContent[modalKey]}
+				</Modal.Body>
+
+				<Modal.Footer className={styles.modal_footer}>
+					{buttonsContainer[modalKey]}
+				</Modal.Footer>
+			</Modal>
+		)
+	);
+}

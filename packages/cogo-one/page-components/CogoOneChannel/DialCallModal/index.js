@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import { useDispatch, useSelector } from '@cogoport/store';
+import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
@@ -10,9 +10,7 @@ import styles from './styles.module.css';
 
 function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
 	const dispatch = useDispatch();
-	const { profileData } = useSelector(({ profile }) => ({
-		profileData: profile,
-	}));
+
 	const [dialNumber, setDialNumber] = useState({
 		number       : '',
 		country_code : '+91',
@@ -35,18 +33,12 @@ function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
 	const handleClick = () => {
 		dispatch(
 			setProfileState({
-				...profileData,
-				voice_call: {
-					...profileData.voice_call,
-					dialCall            : true,
-					showCallModal       : true,
-					inCall              : true,
+				is_in_voice_call          : true,
+				voice_call_recipient_data : {
 					startTime           : new Date(),
-					endCall             : false,
-					showFeedbackModal   : false,
-					agentId             : profileData?.user?.id,
 					mobile_number       : dialNumber?.number,
 					mobile_country_code : dialNumber?.country_code,
+					isUnkownUser        : true,
 				},
 			}),
 		);

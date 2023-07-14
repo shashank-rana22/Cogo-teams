@@ -1,0 +1,89 @@
+.modal_title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.test_name {
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.modal_body span {
+	font-size: 14px;
+}
+
+.modal_body h5 {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.duration {
+	font-weight: 500;
+}
+
+.attempts {
+	font-weight: 500;
+}
+
+.validity {
+	font-weight: 500;
+}
+
+.cutoff {
+	font-weight: 500;
+}
+
+.names {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.entity {
+	margin-right: 20px;
+	font-weight: 400;
+}
+
+.questions_cases {
+	font-weight: 500;
+}
+
+.test_details {
+	padding: 0 20px;
+	margin-top: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.test_details h5 {
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.test_details p {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.test_details > div {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+
+.q_topic {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.attempts_pass {
+	display: flex;
+}
+
+.attempt_details {
+	margin-right: 16px;
+}

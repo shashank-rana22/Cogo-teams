@@ -1,0 +1,44 @@
+.input_component {
+	margin: 20px;
+}
+
+.input_heading {
+	margin-top: 20px;
+	margin-bottom: 8px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.button_row {
+	display: flex;
+	justify-content: right;
+	margin-top: 8px;
+}
+
+.header {
+	font-size: 20px;
+	font-weight: 550;
+	line-height: 36px;
+}
+
+.submit_btn {
+	margin-left: 8px;
+}
+
+.answer_container {
+	:global {
+		.ui_text_area_control {
+			height: 200px;
+			padding: 12px;
+			font-size: 14px;
+		}
+
+		.ui_text_area_container {
+			background: #fff;
+		}
+	}
+}
+
+.span {
+	color: #ffb200;
+}

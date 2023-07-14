@@ -1,0 +1,10 @@
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.submit {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}

@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import TopicList from './TopicList';
 
 function PopularTags({ tabTitle = '', searchState = '' }) {
-	const { profile } = useSelector((state) => state);
+	const profile = useSelector((state) => state?.profile);
 
 	const { ids = [] } = profile?.faq || {};
 

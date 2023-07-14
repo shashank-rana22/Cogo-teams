@@ -1,15 +1,7 @@
-import { format } from '@cogoport/utils';
-
-import useGetDashboardData from '../../hook/useGetDashboardData';
-
-const BarData = () => {
-	const { dashboardData = [{}] } = useGetDashboardData();
-	return dashboardData.map((item) => (
-		{
-			date     : format(item?.date, 'dd MMM ', {}, false),
-			Approved : item?.approvedCount,
-			Rejected : item?.rejectedCount,
-		}));
-};
-
+const BarData = ({ dashboardData }) => dashboardData.map((item) => ({
+	date     : item?.date,
+	Uploaded : item?.uploadedCount,
+	Approved : item?.approvedCount,
+	Rejected : item?.rejectedCount,
+}));
 export default BarData;

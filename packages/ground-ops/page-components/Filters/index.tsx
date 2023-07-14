@@ -19,7 +19,15 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
 	const onSubmit = (formValues: object) => {
-		setFilters((prev?:object) => ({ ...prev, ...formValues }));
+		const finalValues = {};
+		Object.keys(formValues).forEach((key) => {
+			if (formValues[key] === '') {
+				finalValues[key] = undefined;
+			} else {
+				finalValues[key] = formValues[key];
+			}
+		});
+		setFilters((prev?:object) => ({ ...prev, ...finalValues }));
 		setVisible(false);
 	};
 	const handleClear = () => {

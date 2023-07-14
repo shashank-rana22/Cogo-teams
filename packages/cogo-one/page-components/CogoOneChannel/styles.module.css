@@ -1,14 +1,49 @@
+.settings {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	display: flex;
+	justify-content: flex-end;
+}
+
 .layout_container {
 	position: relative;
 	display: flex;
-	width: calc(100% - 14px);
-	height: 92vh;
-	margin-top: 10px;
+	width: 99%;
+	height: 90vh;
+	margin-top: 8px;
 }
 
-.chat_details_continer {
-	display: flex;
-	width: calc(76% - 10px);
+.customers_layout {
+	width: 25%;
+	margin-right: 10px;
+}
+
+.chats_layout {
+	width: 47%;
+	height: 100%;
+	margin-right: 10px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.mail_layout {
+	width: 75%;
+	height: 100%;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.user_profile_layout {
+	width: 28%;
+	height: 100%;
+	overflow-x: hidden;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.empty_page {
+	width: 75%;
 	height: 100%;
 }
 
@@ -19,7 +54,6 @@
 	z-index: 10;
 	width: 75px;
 	height: 75px;
-	margin-right: -33px;
 	cursor: pointer;
 	background: #fcdc00;
 	border-radius: 100% 0 0;
@@ -34,7 +68,6 @@
 }
 
 .bot_icon_styles {
-	width: 15px;
 	margin: 20px 10px 0 0;
 }
 
@@ -54,4 +87,5 @@
 .download_icon {
 	height: 15px;
 	margin-right: 5px;
+	fill: "#EE3425";
 }

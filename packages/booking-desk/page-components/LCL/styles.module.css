@@ -1,0 +1,10 @@
+.flex_row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 22px;
+}
+
+.stepper_container {
+	margin-left: 16px;
+}

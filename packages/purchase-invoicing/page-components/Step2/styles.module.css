@@ -1,0 +1,49 @@
+.back {
+	padding-top: 4px;
+	padding-right: 16px;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.align {
+	align-items: center;
+}
+
+.purchaselineitems {
+	flex: 1;
+	height: calc(100vh - 178px);
+	padding: 12px;
+	overflow: scroll;
+	background-color: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 6px;
+}
+
+.maplineitems {
+	flex: 1;
+	height: calc(100vh - 178px);
+	padding: 12px;
+	margin-left: 12px;
+	overflow: scroll;
+	background-color: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 6px;
+}
+
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.marginleft {
+	margin-left: 16px;
+}
+
+.headingmodal {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	color: #ed3726;
+}

@@ -1,23 +1,18 @@
-/* eslint-disable max-len */
-import { cl, Popover } from '@cogoport/components';
-import {
-	IcMHappy,
-	IcMAttach,
-	IcMSend,
-	IcMDelete,
-	IcMRefresh,
-} from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
-import CustomFileUploader from '../../../../../common/CustomFileUploader';
-import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
-import EmojisBody from './EmojisBody';
-import ReceiveDiv from './ReceiveDiv';
-import SentDiv from './SentDiv';
+import Footer from './Footer';
+import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
+
+const SET_TIME_OUT = 200;
+const DISTANCE_FROM_TOP = 0;
+const LAST_VALUE = 1;
 
 function MessageConversations({
 	messagesData = [],
@@ -39,20 +34,17 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
-
+	messageLoading = false,
+	formattedData = {},
+	setRaiseTicketModal = () => {},
+	canMessageOnBotSession,
+	viewType = '',
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
 
-	const {
-		emojisList = {},
-		setOnClicked = () => {},
-		onClicked = false,
-		emojiListFetch = () => {},
-	} = useGetEmojiList({ activeMessageCard });
-
 	const urlArray = decodeURI(finalUrl)?.split('/');
-	const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+	const fileName = urlArray?.[(urlArray.length || GLOBAL_CONSTANTS.zeroth_index) - LAST_VALUE] || '';
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
@@ -62,19 +54,7 @@ function MessageConversations({
 				top   	  : messageRef.current.scrollHeight,
 				behavior : 'smooth',
 			});
-		}, 200);
-	};
-
-	useEffect(() => {
-		scrollToBottom();
-	}, [firstLoadingMessages, id]);
-
-	const handleKeyPress = (event) => {
-		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
-			event.preventDefault();
-			sendChatMessage();
-			scrollToBottom();
-		}
+		}, SET_TIME_OUT);
 	};
 
 	const handleProgress = (val) => {
@@ -82,18 +62,11 @@ function MessageConversations({
 	};
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === 0;
+		const bottom = e.target.scrollTop === DISTANCE_FROM_TOP;
 		if (bottom && !lastPage && !loadingPrevMessages) {
 			getNextData();
 		}
 	};
-
-	useEffect(() => {
-		if (id) {
-			emojiListFetch();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const openInstantMessages = () => {
 		setOpenModal({
@@ -126,59 +99,10 @@ function MessageConversations({
 		return 'no_suggestions';
 	};
 
-	const loader = (
-		<div className={styles.loader}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
-				alt="load"
-			/>
-		</div>
-	);
+	useEffect(() => {
+		scrollToBottom();
+	}, [firstLoadingMessages, id]);
 
-	const firstLoadingDiv = (
-		<div className={styles.flex_div}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif"
-				type="video/gif"
-				alt="loading"
-				className={styles.object_styles}
-			/>
-		</div>
-
-	);
-
-	const messageConversation = (
-		<>
-			{loadingPrevMessages
-				? loader
-				: (
-					<div className={styles.load_prev_messages}>
-						{!lastPage && (
-							<IcMRefresh
-								className={styles.refresh_icon}
-								onClick={getNextData}
-							/>
-						)}
-					</div>
-				)}
-			{(messagesData || []).map((eachMessage) => (
-				eachMessage?.conversation_type !== 'received' ? (
-					<ReceiveDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				) : (
-					<SentDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				)
-			))}
-
-		</>
-	);
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -187,201 +111,50 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
-				{firstLoadingMessages ? firstLoadingDiv : messageConversation }
-			</div>
-
-			<div
-				className={cl`${styles.nofile_container} 
-				${
-					((finalUrl) || uploading?.[id])
-					&& styles.upload_file_container
-				}`}
-			>
-				{(finalUrl) && !uploading?.[id] && (
-					<>
-						<div className={styles.files_view}>
-							<div className={styles.file_icon_container}>
-								{fileIcon}
-							</div>
-							<div
-								role="presentation"
-								className={styles.file_name_container}
-								onClick={() => {
-									// eslint-disable-next-line no-undef
-									window.open(
-										finalUrl,
-										'_blank',
-										'noreferrer',
-									);
-								}}
-							>
-								{uploadedFileName}
-							</div>
-						</div>
-						<div className={styles.delete_icon_container}>
-							<IcMDelete
-								className={styles.delete_icon}
-								onClick={() => setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }))}
-							/>
-						</div>
-					</>
-				)}
-				{uploading?.[id] && (
-					<div className={styles.uploading}>uploading.....</div>
-				)}
-			</div>
-
-			<div
-				className={cl`${styles.text_area_div} ${
-					hasPermissionToEdit ? '' : styles.opacity
-				}`}
-			>
-				{!isEmpty(suggestions) && (
-					<div className={styles.suggestions_div}>
-						<div className={styles.flex}>
-							<div className={styles.suggestions_text}>
-								Suggestions:
-							</div>
-							{(suggestions || []).map((eachSuggestion) => (
-								<div
-									className={styles.tag_div}
-									role="presentation"
-									onClick={() => {
-										if (hasPermissionToEdit) {
-											sentQuickSuggestions(
-												eachSuggestion,
-												scrollToBottom,
-											);
-										}
-									}}
-									style={{
-										cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer',
-									}}
-								>
-									{eachSuggestion}
-								</div>
-							))}
-						</div>
-
-					</div>
-				)}
-				<textarea
-					rows={4}
-					placeholder={
-						hasPermissionToEdit
-							? 'Type your message...'
-							: 'You do not have typing controls as you are observing this chat'
-					}
-					className={styles.text_area}
-					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({
-						...p,
-						[id]: e.target.value,
-					}))}
-					disabled={!hasPermissionToEdit}
-					style={{
-						cursor: !hasPermissionToEdit ? 'not-allowed' : 'text',
-					}}
-					onKeyPress={(e) => handleKeyPress(e)}
-				/>
-
-				<div className={styles.flex_space_between}>
-					<div className={styles.icon_tools}>
-						{hasPermissionToEdit && (
-							<CustomFileUploader
-								disabled={uploading?.[id]}
-								handleProgress={handleProgress}
-								showProgress={false}
-								draggable
-								className="file_uploader"
-								uploadIcon={(
-									<IcMAttach
-										className={styles.upload_icon}
-										style={{
-											cursor: !hasPermissionToEdit
-												? 'not-allowed'
-												: 'pointer',
-										}}
-									/>
-								)}
-								onChange={(val) => {
-									setDraftUploadedFiles((prev) => ({
-										...prev,
-										[id]: val,
-									}));
-								}}
-							/>
-						)}
-						<Popover
-							placement="top"
-							render={(
-								<EmojisBody
-									emojisList={emojisList}
-									setOnClicked={setOnClicked}
-									updateMessage={(val) => setDraftMessages((p) => ({
-										...p,
-										[id]: !p?.[id]
-											? val
-											: p?.[id]?.concat(val),
-									}))}
-								/>
-							)}
-							visible={onClicked}
-							maxWidth={355}
-							onClickOutside={() => {
-								if (hasPermissionToEdit) {
-									setOnClicked(false);
-								}
-							}}
-						>
-							<IcMHappy
-								fill="#828282"
-								onClick={() => {
-									if (hasPermissionToEdit) {
-										setOnClicked((p) => !p);
-									}
-								}}
-								style={{
-									cursor: !hasPermissionToEdit
-										? 'not-allowed'
-										: 'pointer',
-								}}
-							/>
-						</Popover>
-					</div>
-					<div>
-						<img
-							role="presentation"
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Vector%20(5).svg"
-							alt="img"
-							onClick={() => {
-								if (hasPermissionToEdit) {
-									openInstantMessages();
-								}
-							}}
-							style={{
-								cursor: !hasPermissionToEdit
-									? 'not-allowed'
-									: 'pointer',
-							}}
-						/>
-						<IcMSend
-							fill="#EE3425"
-							onClick={() => {
-								if (hasPermissionToEdit) {
-									sendChatMessage();
-									scrollToBottom();
-								}
-							}}
-							style={{
-								cursor: !hasPermissionToEdit || !(isEmpty(draftMessage?.trim()) || !finalUrl)
-									? 'not-allowed'
-									: 'pointer',
-							}}
+				{firstLoadingMessages ? (
+					<div className={styles.flex_div}>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
+							type="video/gif"
+							alt="loading"
+							width={80}
+							height={80}
 						/>
 					</div>
-				</div>
+				) : (
+					<MessagesThread
+						getNextData={getNextData}
+						lastPage={lastPage}
+						loadingPrevMessages={loadingPrevMessages}
+						messagesData={messagesData}
+						activeMessageCard={activeMessageCard}
+						formattedData={formattedData}
+						setRaiseTicketModal={setRaiseTicketModal}
+					/>
+				) }
 			</div>
+
+			<Footer
+				draftMessage={draftMessage}
+				sentQuickSuggestions={sentQuickSuggestions}
+				messageLoading={messageLoading}
+				canMessageOnBotSession={canMessageOnBotSession}
+				handleProgress={handleProgress}
+				openInstantMessages={openInstantMessages}
+				hasPermissionToEdit={hasPermissionToEdit}
+				suggestions={suggestions}
+				scrollToBottom={scrollToBottom}
+				setDraftMessages={setDraftMessages}
+				id={id}
+				sendChatMessage={sendChatMessage}
+				setDraftUploadedFiles={setDraftUploadedFiles}
+				uploading={uploading}
+				uploadedFileName={uploadedFileName}
+				fileIcon={fileIcon}
+				finalUrl={finalUrl}
+				formattedData={formattedData}
+				viewType={viewType}
+			/>
 		</div>
 	);
 }

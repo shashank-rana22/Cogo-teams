@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	justify-content: space-around;
+	padding: 8px 16px;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 4px;
+
+	& > div {
+		&:first-child {
+			width: 30%;
+		}
+
+		&:nth-child(2) {
+			width: 17.5%;
+		}
+
+		&:nth-child(3) {
+			width: 17.5%;
+		}
+
+		&:nth-child(4) {
+			width: 35%;
+		}
+	}
+}
+
+.card_title {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #000;
+}
+
+.icon {
+	justify-content: center;
+	width: 100%;
+}
+
+.header_col {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 4px;
+}

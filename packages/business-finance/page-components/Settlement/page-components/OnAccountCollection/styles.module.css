@@ -1,0 +1,107 @@
+.filter_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 12px;
+
+	:global {
+		.ui_select_display_container {
+			height: 32px !important;
+
+			.ui_select_input_control {
+				width: 120px;
+			}
+		}
+
+		.ui_select_input_placeholder {
+			color: var(--color-secondary-greyscale-4);
+		}
+	}
+}
+
+.filter_amount_collection {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.react-datepicker__input-container {
+			input {
+				width: 170px !important;
+				height: 32px !important;
+			}
+		}
+
+		.ui_select_container {
+			width: 150px;
+		}
+	}
+}
+
+.icon_color {
+	width: 15px;
+	height: 15px;
+	color: var(--color-accent-orange-2);
+}
+
+.content_filter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	padding: 8px 0;
+
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
+	}
+}
+
+.more_filter_div {
+	font-weight: 600;
+}
+
+.icon_div {
+	display: flex;
+	margin: 4px;
+}
+
+.container {
+	background: var(--color-secondary-5);
+}
+
+.filter_search_more_filters {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.filter_search {
+	width: 400px;
+	margin: 18px 0;
+}
+
+.clear_filters {
+	margin-left: 8px;
+	color: var(--color-accent-orange-2);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 40px;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	padding: 26px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.post {
+	margin-left: 16px;
+}

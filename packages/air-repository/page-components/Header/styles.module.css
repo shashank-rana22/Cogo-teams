@@ -1,0 +1,13 @@
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+.heading::after {
+	display: block;
+	width: 100px;
+	height: 4px;
+	content: "";
+	background: #ed3726;
+}

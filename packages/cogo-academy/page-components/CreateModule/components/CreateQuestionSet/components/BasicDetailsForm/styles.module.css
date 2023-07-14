@@ -1,0 +1,116 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-top: 40px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 12px;
+}
+
+.label {
+	font-weight: 400;
+	color: #221f20;
+}
+
+.sup {
+	color: #ee3425;
+}
+
+.flex_row {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 60px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.cancel_button {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: pointer;
+}
+
+.value {
+	margin-top: 4px;
+	font-weight: 600;
+}
+
+.form_component {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 16px 60px;
+}
+
+.control_container {
+	display: flex;
+	flex-basis: 40%;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: 12px auto;
+	}
+
+	:global {
+		.ui_input_container {
+			width: 250px;
+		}
+
+		.ui_select_container {
+			width: 250px;
+		}
+
+		.ui_multiselect_container {
+			width: 250px;
+		}
+	}
+}
+
+.control {
+	display: flex;
+	flex-direction: column;
+
+	.error_msg {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 500;
+		color: #cb6464;
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-right: 20px;
+	margin-bottom: 12px;
+}
+
+.vertical_line {
+	width: 2px;
+	height: 24px;
+	margin: 10px 32px;
+	border-left: 2px solid rgb(222 215 252);
+}
+
+.flex_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button {
+	cursor: pointer;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}

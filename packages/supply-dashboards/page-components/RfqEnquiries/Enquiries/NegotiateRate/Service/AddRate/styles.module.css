@@ -4,3 +4,9 @@
 	padding: 16px;
 	margin-right: 20px;
 }
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

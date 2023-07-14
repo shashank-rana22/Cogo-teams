@@ -2,6 +2,7 @@
 	:global {
 		padding: 24px 16px;
 		margin-bottom: 0 !important;
+		overflow: unset;
 		background-color: #ffff;
 
 		.ui_table_container {
@@ -10,6 +11,7 @@
 
 		.ui_table_body_cell {
 			padding: 21px 10px !important;
+			overflow: unset;
 		}
 
 		.ui_table_head_cell {

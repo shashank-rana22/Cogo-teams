@@ -2,7 +2,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -12,24 +14,33 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	sort: NestedObj;
-	subActiveTab?:string
+	subActiveTabReject?:string
+	jobNumber?:string
 }
 
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Props) => {
+interface Profile {
+	profile?: { partner: { id: string } };
+}
+
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
+	const profile: Profile = useSelector((state) => state);
+
+	const entityCode = getEntityCode(profile?.profile?.partner?.id);
+
 	const getStatus = () => {
-		if (subActiveTab === 'finance_rejected') {
+		if (subActiveTabReject === 'finance_rejected') {
 			return 'FINANCE_REJECTED';
 		}
-		if (subActiveTab === 'coe_rejected') {
+		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
-		return 'INITIATED';
+		return 'ALL';
 	};
 
 	const [currentTab, setCurrentTab] = useState(getStatus());
-	const [tab, setTab] = useState('all');
+	const [tab, setTab] = useState('ALL');
 	const { debounceQuery, query } = useDebounceQuery();
-	const [searchValue, setSearchValue] = useState('');
+	const [searchValue, setSearchValue] = useState(jobNumber || '');
 
 	const showFilter = () => {
 		if (filters?.billType === 'PURCHASE') {
@@ -38,6 +49,8 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 			return 'BILL';
 		} if (filters?.billType === 'CREDIT_NOTE') {
 			return 'CREDIT_NOTE';
+		} if (filters?.billType === 'CONSOLIDATED') {
+			return 'BILL';
 		} if (filters?.billType === 'REIMBURSEMENT') {
 			return 'REIMBURSEMENT';
 		}
@@ -46,6 +59,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 
 	const showbillType = filters?.billType === 'PURCHASE' ? 'false' : undefined;
 	const showProforma = filters?.billType === 'PROFORMA' ? true : undefined;
+	const showConsolidated = filters?.billType === 'CONSOLIDATED' ? 'CONSOLIDATED' : undefined;
 
 	const billDatesStartFilters = 	(filters?.billDate?.startDate === undefined
 		|| filters?.billDate?.startDate === null)
@@ -106,13 +120,14 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 				updatedDateTo   : updatedToData,
 				urgencyTag      : filters?.urgencyTag || undefined,
 				billType        : showFilter(),
+				jobType        	: showConsolidated,
 				proforma        : showbillType || showProforma,
 				status:
-                    currentTab !== 'all' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
+                    currentTab !== 'ALL' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
-				jobType  : 'SHIPMENT',
+				entityCode,
 			},
 			authKey: 'get_purchase_bills_list',
 		},

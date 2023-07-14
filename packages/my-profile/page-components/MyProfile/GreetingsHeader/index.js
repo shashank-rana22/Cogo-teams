@@ -1,8 +1,9 @@
-import { Button, Modal, Avatar, Tooltip } from '@cogoport/components';
+import { Placeholder, Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
+import BadgeGotList from './BadgeGotList';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
@@ -10,6 +11,8 @@ import styles from './styles.module.css';
 import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function Greetings({
+	badgeListLoading = false,
+	userBadges,
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
@@ -39,12 +42,19 @@ function Greetings({
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
+	const { badges_got : badgesGot = [], grouped_badges_got : groupedBadgesGot = {} } = userBadges || {};
+
+	const { badge_configuration = [] } = groupedBadgesGot || {};
+
+	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0] || {};
+
 	const { name: locationName = '' } = lowest_geo_location || {};
 
 	const { onCreate = () => {}, loading: apiLoading = false } = useEditPersonalDetails({
 		refetch: setRefetch,
 		detailsData,
 		setShowModal,
+		editNameModal,
 		setEditNameModal,
 		partner_user_id,
 	});
@@ -83,6 +93,30 @@ function Greetings({
 						className="icon"
 					/>
 				</div>
+
+				{ badgeListLoading && (
+					<div className={styles.preview_badge}>
+						<Placeholder type="circle" radius="48px" />
+					</div>
+				)}
+
+				{ !isEmpty(mastery_element) && !badgeListLoading
+				&& (
+					<div className={styles.preview_badge}>
+						<img
+							src={mastery_element.image_url}
+							alt="current badge"
+							height="40px"
+						/>
+					</div>
+				)}
+			</div>
+
+			<div className={styles.badges}>
+				<BadgeGotList
+					badgesGot={badgesGot}
+					badgeListLoading={badgeListLoading}
+				/>
 			</div>
 
 			<div>
@@ -96,7 +130,6 @@ function Greetings({
 
 						</div>
 					</Tooltip>
-
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>
@@ -107,7 +140,9 @@ function Greetings({
 
 						<IcMEdit
 							size={1.8}
-							onClick={() => setEditNameModal(true)}
+							onClick={() => setEditNameModal(
+								(prev) => ({ ...prev, from: 'name', state: true }),
+							)}
 							style={{ cursor: 'pointer' }}
 						/>
 
@@ -116,8 +151,8 @@ function Greetings({
 			</div>
 
 			<Modal
-				show={editNameModal}
-				onClose={() => setEditNameModal(false)}
+				show={editNameModal.state}
+				onClose={() => setEditNameModal((prev) => ({ ...prev, state: false }))}
 				onOuterClick={onOuterClick}
 				size="md"
 			>
@@ -128,6 +163,8 @@ function Greetings({
 						control={control}
 						errors={errors}
 						detailsData={detailsData}
+						editNameModal={editNameModal}
+
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -156,6 +193,8 @@ function Greetings({
 				detailsData={detailsData}
 				showMobileVerificationModal={showMobileVerificationModal}
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
+				editNameModal={editNameModal}
+				setEditNameModal={setEditNameModal}
 			/>
 
 			<Modal
@@ -188,7 +227,7 @@ function Greetings({
 							{picture || watchProfilePicture ? (
 								<div className={styles.image_container}>
 									<img
-										src={watchProfilePicture?.fileUrl || picture}
+										src={watchProfilePicture?.finalUrl || picture}
 										alt="loading"
 										className={styles.avatar_container}
 									/>

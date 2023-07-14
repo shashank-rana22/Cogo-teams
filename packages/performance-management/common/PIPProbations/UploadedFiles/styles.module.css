@@ -1,0 +1,7 @@
+.container {
+	:global {
+		.ui_select_display_container {
+			width: 160px;
+		}
+	}
+}

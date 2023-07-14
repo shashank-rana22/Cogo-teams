@@ -1,0 +1,61 @@
+.card_wrapper {
+	max-width: 100%;
+	box-shadow: none;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 11.11% 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+	border-right: none;
+	border-bottom: 1px solid red;
+}
+
+.row {
+	display: flex;
+	padding: 4px;
+	margin-right: 0;
+	margin-left: 0;
+	font-size: 13px;
+	font-weight: 500;
+	background: #fff;
+}
+
+@media (max-width: 768px) {
+	.card_wrapper {
+		max-width: 100%;
+		box-shadow: none;
+	}
+
+	.revenue_col {
+		position: relative;
+		display: flex;
+		flex: 0%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-width: 100px;
+		padding: 10px;
+		font-size: 10px;
+		text-align: center;
+		border-right: none;
+		border-bottom: 1px solid red;
+	}
+
+	.row {
+		display: flex;
+		padding: 4px;
+		margin-right: 0;
+		margin-left: 0;
+		font-size: 13px;
+		font-weight: 500;
+		background: #fff;
+	}
+}

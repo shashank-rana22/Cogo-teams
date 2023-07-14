@@ -1,40 +1,29 @@
-import { cl } from '@cogoport/components';
-import { SelectController, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
 import React from 'react';
+
+import { getFieldController } from '../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function getElementController(type = '') {
-	switch (type) {
-		case 'radio':
-			return RadioGroupController;
-
-		case 'checkboxgroup':
-			return CheckboxGroupController;
-		case 'select':
-			return SelectController;
-		default:
-			return null;
-	}
-}
-
 function Item(props) {
 	const {
-		type,
+		controllerType = '',
 		control,
 		label,
-		botToggle = false,
 		error = {},
 	} = props || {};
 
-	const Element = getElementController(type);
+	const Element = getFieldController(controllerType);
+
+	if (!Element) {
+		return null;
+	}
 
 	return (
 		<div className={styles.element}>
 			<div className={styles.label}>
 				{label}
 			</div>
-			<div className={cl`${styles.filters_types} ${botToggle ? styles.disabled : ''}`}>
+			<div className={styles.filters_types}>
 				<Element
 					{...props}
 					control={control}

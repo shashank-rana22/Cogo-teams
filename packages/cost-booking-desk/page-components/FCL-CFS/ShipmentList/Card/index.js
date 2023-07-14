@@ -1,0 +1,58 @@
+import { IcMCfs } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+
+import CardHeader from '../../../../common/Card/CardHeader';
+import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
+import CONSTANTS from '../../../../config/constants.json';
+
+import CargoDetails from './CargoDetails';
+import PortDetails from './PortDetails';
+import styles from './styles.module.css';
+
+const iconProps = {
+	Icon : IcMCfs,
+	text : 'FCL CFS',
+};
+
+function Card({ item = {} }) {
+	const router = useRouter();
+
+	const clickCard = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}
+		?${CONSTANTS.url_navigation_params}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
+
+	return (
+		<div
+			role="button"
+			tabIndex={0}
+			onClick={clickCard}
+			className={styles.card}
+		>
+			<CardHeader item={item} />
+
+			<div className={styles.card_body}>
+				<div className={styles.shipment_info}>
+					<ShipmentInfo item={item} />
+				</div>
+
+				<div className={styles.separator} />
+
+				<div className={styles.port}>
+					<PortDetails data={item} icon={iconProps} />
+				</div>
+
+				<div className={styles.separator} />
+
+				<div className={styles.cargo}>
+					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export default Card;

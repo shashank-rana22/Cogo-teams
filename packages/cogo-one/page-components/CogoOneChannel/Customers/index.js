@@ -1,129 +1,146 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import React from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import React, { useState } from 'react';
 
-import InactiveModal from './InactiveModal';
+import getTabMappings from '../../../configurations/getTabMappings';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
+
+import AgentStatus from './AgentStatus';
+import CommunicationModals from './CommunicationModals';
+import MailList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
-function Customers({
-	setActiveCardId = () => {},
-	setActiveMessage = () => {},
-	setActiveVoiceCard = () => {},
-	activeVoiceCard,
-	setSearchValue = () => {},
-	searchValue,
-	setFilterVisible = () => {},
-	filterVisible,
-	activeTab,
-	setActiveTab = () => {},
-	toggleStatus,
-	messagesList = [],
-	unReadChatsCount,
-	setAppliedFilters = () => {},
-	appliedFilters = {},
-	fetchworkPrefernce = () => {},
-	messagesLoading = false,
-	setOpenModal = () => {},
-	openModal = false,
-	updateUserStatus = () => {},
-	statusLoading = false,
-	activeCardId = '',
-	isomniChannelAdmin = false,
-	showBotMessages = false,
-	setShowBotMessages,
-	setShowDialModal = () => {},
+const COMPONENT_MAPPING = {
+	message : MessageList,
+	voice   : VoiceList,
+	mail    : MailList,
+};
 
+function Customers({
+	setActiveTab = () => {},
+	activeTab = '',
+	userId = '',
+	setModalType = () => {},
+	modalType = {},
+	tagOptions = [],
+	mailProps = {},
+	firestore = {},
+	viewType = '',
 }) {
-	const onChangeToggle = () => {
-		if (toggleStatus) {
-			setOpenModal(true);
-		} else {
-			updateUserStatus({ status: 'active' });
-		}
+	const [isBotSession, setIsBotSession] = useState(false);
+
+	const { unReadChatsCount } = useGetUnreadMessagesCount({
+		firestore,
+		viewType,
+		agentId: userId,
+		isBotSession,
+	});
+
+	const componentPropsMapping = {
+		message: {
+			userId,
+			firestore,
+			viewType,
+			isBotSession,
+			setIsBotSession,
+			tagOptions,
+		},
+		voice: {
+			setActiveVoiceCard: (val) => {
+				setActiveTab((prev) => ({ ...prev, data: val }));
+			},
+			activeVoiceCard : activeTab?.data || {},
+			activeTab       : activeTab?.tab,
+		},
+		mail: {
+			...mailProps,
+		},
 	};
+
+	const tabMappings = getTabMappings({ unReadChatsCount });
+
+	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
 				<div className={styles.logo}>
-					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg" alt="" />
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.cogo_one_logo}
+						alt="cogo_one_logo"
+						width={25}
+						height={25}
+					/>
 					<div className={styles.title}>
 						CogoOne
 					</div>
 				</div>
-				{!isomniChannelAdmin ? (
-					<div className={styles.styled_toggle}>
-						<Toggle
-							name="online"
-							size="md"
-							showOnOff
-							onChange={() => onChangeToggle()}
-							checked={toggleStatus}
-							loading={statusLoading}
-						/>
 
+				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
+					<div className={styles.styled_toggle}>
+						<AgentStatus />
 					</div>
-				) : (
+				)}
+
+				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bot_message_toggle && (
 					<div className={styles.bot_messages}>
 						<div>Bot Messages</div>
 						<Toggle
 							name="online"
 							size="sm"
-							onChange={() => setShowBotMessages((p) => !p)}
-							checked={showBotMessages}
+							onChange={() => setIsBotSession((prev) => !prev)}
+							checked={isBotSession}
 						/>
 					</div>
 				)}
 			</div>
+
 			<div className={styles.tabs}>
 				<Tabs
-					activeTab={activeTab}
+					activeTab={activeTab?.tab}
 					fullWidth
 					themeType="secondary"
-					onChange={setActiveTab}
+					onChange={(val) => {
+						setActiveTab({ tab: val, data: {} });
+					}}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-					<TabPanel name="voice" title="Voice" />
+					{tabMappings.map((eachTab) => {
+						if (!eachTab.show) {
+							return null;
+						}
+
+						return (
+							<TabPanel
+								key={eachTab?.value}
+								name={eachTab?.value}
+								title={eachTab?.label}
+								badge={eachTab?.badge || null}
+							/>
+						);
+					})}
 				</Tabs>
 			</div>
 
-			{activeTab === 'message' && (
-				<MessageList
-					isomniChannelAdmin={isomniChannelAdmin}
-					messagesList={messagesList}
-					setActiveMessage={setActiveMessage}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					filterVisible={filterVisible}
-					setFilterVisible={setFilterVisible}
-					setAppliedFilters={setAppliedFilters}
-					appliedFilters={appliedFilters}
-					messagesLoading={messagesLoading}
-					activeCardId={activeCardId}
-					setActiveCardId={setActiveCardId}
-					showBotMessages={showBotMessages}
-					setShowBotMessages={setShowBotMessages}
-				/>
-			)}
-
-			{activeTab === 'voice' && (
-				<VoiceList
-					setActiveVoiceCard={setActiveVoiceCard}
-					activeVoiceCard={activeVoiceCard}
+			{Component && (
+				<Component
+					key={activeTab?.tab}
+					{...(componentPropsMapping[activeTab?.tab] || {})}
+					setActiveTab={setActiveTab}
 					activeTab={activeTab}
-					setShowDialModal={setShowDialModal}
 				/>
 			)}
 
-			{openModal && (
-				<InactiveModal
-					fetchworkPrefernce={fetchworkPrefernce}
-					setOpenModal={setOpenModal}
-					loading={statusLoading}
-					updateUserStatus={updateUserStatus}
-
-				/>
-			)}
+			<CommunicationModals
+				mailProps={mailProps}
+				setModalType={setModalType}
+				modalType={modalType}
+				userId={userId}
+				viewType={viewType}
+			/>
 		</div>
 	);
 }

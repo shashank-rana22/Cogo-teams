@@ -29,7 +29,6 @@
 .remark {
 	width: 90%;
 	overflow-x: hidden;
-	font-size: 14px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

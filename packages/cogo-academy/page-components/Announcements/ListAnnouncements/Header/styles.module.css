@@ -1,0 +1,83 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.filters_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.input_bar {
+	position: relative;
+	width: 88%;
+}
+
+.cross_icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.tab_group {
+	width: 100%;
+	margin-top: 12px;
+	margin-bottom: 20px;
+
+	:global {
+		.ui_tab_list_container {
+			border-radius: 0 !important;
+			box-shadow: none !important;
+		}
+	}
+}
+
+.all_filters {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	min-width: 250px;
+	margin-bottom: 20px;
+}
+
+.label {
+	margin-bottom: 12px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.heading_reset {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.footer {
+	align-self: flex-end;
+}
+
+.icon_container {
+	position: relative;
+	display: flex;
+}
+
+.red_dot {
+	position: absolute;
+	bottom: 10px;
+	left: 16px;
+	width: 8px;
+	height: 8px;
+	background-color: #ee3425;
+	border-radius: 50%;
+}

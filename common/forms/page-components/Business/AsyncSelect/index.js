@@ -1,4 +1,5 @@
 import { MultiSelect, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
@@ -14,6 +15,42 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
+	listVendors,
+	asyncListCogoEntity,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
+	asyncListHsCodes,
+	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
+	asyncShipmentContainerDetails,
+	asyncJvList,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
+	asyncPlanPricingList,
+	asyncFieldsPartnerUsersIds,
+	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
+	asyncFortigoLocations,
+	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
+	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
+	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -35,17 +72,54 @@ import {
  * getModifiedOptions
  */
 
+const REST_VALUE_SLICE_INDEX = -1;
 const keyAsyncFieldsParamsMapping = {
-	organizations          : asyncFieldsOrganizations,
-	organization_users     : asyncFieldsOrganizationUser,
-	partners               : asyncFieldsPartner,
-	partner_users          : asyncFieldsPartnerUsers,
-	partner_roles          : asyncFieldsPartnerRoles,
-	segments               : asyncFieldsCampaignSegments,
-	list_locations         : asyncFieldsLocations,
-	list_operators         : asyncFieldsListOperators,
-	list_rate_charge_codes : asyncFieldListRateChargeCodes,
-	allot_bank             : asyncAllotBanks,
+	organizations                        : asyncFieldsOrganizations,
+	organization_users                   : asyncFieldsOrganizationUser,
+	partners                             : asyncFieldsPartner,
+	partner_users                        : asyncFieldsPartnerUsers,
+	partner_roles                        : asyncFieldsPartnerRoles,
+	segments                             : asyncFieldsCampaignSegments,
+	list_locations                       : asyncFieldsLocations,
+	list_operators                       : asyncFieldsListOperators,
+	list_rate_charge_codes               : asyncFieldListRateChargeCodes,
+	allot_bank                           : asyncAllotBanks,
+	shipping_lines                       : asyncShippingLines,
+	list_vendors                         : listVendors,
+	list_cogo_entity                     : asyncListCogoEntity,
+	expertise_configuration              : asyncFieldsExpertiseConfigurations,
+	badge_name                           : asyncFieldsExpertiseBadgeName,
+	rule_options                         : asyncKamExpertiseRuleOptions,
+	list_hs_codes                        : asyncListHsCodes,
+	list_exchange_rate_currencies        : asyncListCurrency,
+	engagement_scoring_events            : asyncAccountEngagementScoringEvents,
+	plan_pricing_list                    : asyncPlanPricingList,
+	partner_users_ids                    : asyncFieldsPartnerUsersIds,
+	addon_list                           : asyncQuotaList,
+	journal_category                     : asyncJvList,
+	journal_code                         : asyncJournalCode,
+	jv_account_mode                      : asyncAccMode,
+	shipment_container_details           : asyncShipmentContainerDetails,
+	jv_code_master                       : asyncCodeMaster,
+	list_trade_parties                   : asyncListOrgTradeParties,
+	allocation_rejection_type            : asyncAllocationRequestRejectionType,
+	search_products_v2                   : asyncSearchProducts,
+	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
+	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
+	list_organization_branches           : asyncOrganizationBranches,
+	faq_topics                           : asyncListFAQTopics,
+	faq_tags                             : asyncListFAQTags,
+	list_course_categories               : asyncListCourseCategories,
+	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	list_dunning_templates               : asyncListDunningTemplates,
+	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_chat_agents                     : asyncFieldsListAgents,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {
@@ -57,6 +131,7 @@ function AsyncSelect(props) {
 		getModifiedOptions,
 		getSelectedOption,
 		microService = '',
+		onOptionsChange,
 		...rest
 	} = props;
 
@@ -69,6 +144,7 @@ function AsyncSelect(props) {
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
+		onOptionsChange,
 		params       : params || defaultParams.params,
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,
@@ -82,14 +158,16 @@ function AsyncSelect(props) {
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(REST_VALUE_SLICE_INDEX);
 		} else {
 			selectedValue = rest.value;
 		}
 
-		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+		const selectedOption = getAsyncOptionsProps.options.filter(
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+		);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;

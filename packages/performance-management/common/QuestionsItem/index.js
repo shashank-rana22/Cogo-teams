@@ -93,7 +93,7 @@ function QuestionsItem({
 
 			{questionStatus === 'add_weightage' && (
 				<>
-					<div className={styles.weightage} style={{ width: '25%' }}>
+					<div className={styles.weightage}>
 						<p className={styles.label}>Weightage</p>
 						<Input
 							value={Math.round(item.weightage)}
@@ -109,7 +109,13 @@ function QuestionsItem({
 							theme="light"
 							placement="bottom-end"
 							animation="shift-away"
-							content="This will remove the question from this form.."
+							content={(
+								<div
+									style={{ wordBreak: 'break-word' }}
+								>
+									This will remove the question from this form..
+								</div>
+							)}
 						>
 							<ButtonIcon themeType="primary" icon={<IcMDelete />} onClick={() => undoAdd(item)} />
 						</Tooltip>

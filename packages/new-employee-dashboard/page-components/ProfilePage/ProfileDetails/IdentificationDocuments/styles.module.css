@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 12px;
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	padding: 8px;
+	font-weight: 600;
+}
+
+.card_wrapper {
+	padding-right: 16px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: center;
+	padding-top: 12px;
+}
+
+.tick_content {
+	display: flex;
+	align-items: center;
+}
+
+.verified_text {
+	padding: 2px 6px;
+	font-size: 12px;
+	border-radius: 6px;
+}
+
+.approve_btn {
+	padding-left: 12px;
+
+	:global {
+		.ui_button_container {
+			background-color: green;
+		}
+	}
+}

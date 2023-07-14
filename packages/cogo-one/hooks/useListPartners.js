@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useListPartners = () => {
 	const [{ loading:partnersLoading, data }, trigger] = useRequest({
@@ -6,7 +7,7 @@ const useListPartners = () => {
 		method : 'get',
 	}, { manual: true });
 
-	const fetchPartnerId = async (payload) => {
+	const fetchPartnerId = useCallback(async (payload) => {
 		try {
 			await trigger({
 				params: {
@@ -19,7 +20,8 @@ const useListPartners = () => {
 			// console.log("error:", error)
 
 		}
-	};
+	}, [trigger]);
+
 	const { list = [] } = data || {};
 	const { id = '' } = list?.[0] || {};
 

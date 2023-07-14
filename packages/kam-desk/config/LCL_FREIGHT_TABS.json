@@ -1,0 +1,97 @@
+{
+    "export": {
+      "tabs": [
+        {
+          "value": "confirm_booking",
+          "label": "Confirm Booking"
+        },
+        {
+          "value": "list_task_pending",
+          "label": "Commercial/SI"
+        },
+        {
+          "value": "upload_carting_order",
+          "label": "Carting Order"
+        },
+        {
+          "value": "document_approval",
+          "label": "BL Approval"
+        },
+        {
+          "value": "vessel_departed",
+          "label": "Vessel Departed"
+        },
+        {
+          "value": "vessel_arrived",
+          "label": "Vessel Arrived"
+        },
+        {
+          "value": "completed",
+          "label": "Completed"
+        },
+        {
+          "value": "cancelled",
+          "label": "Cancelled"
+        }
+      ],
+      "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
+    },
+    "import": {
+      "tabs": [
+        {
+          "value": "confirm_booking",
+          "label": "Confirm Booking"
+        },
+        {
+          "value": "list_task_pending",
+          "label": "Commercial/SI"
+        },
+        {
+          "value": "upload_carting_order",
+          "label": "Carting Order"
+        },
+        {
+          "value": "document_approval",
+          "label": "DO Approval"
+        },
+        {
+          "value": "vessel_departed",
+          "label": "Vessel Departed"
+        },
+        {
+          "value": "vessel_arrived",
+          "label": "Vessel Arrived"
+        },
+        {
+          "value": "completed",
+          "label": "Completed"
+        },
+        {
+          "value": "cancelled",
+          "label": "Cancelled"
+        }
+      ],
+      "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
+    },
+    "lcl_customs": {
+      "tabs": [
+        {
+          "label": "Confirm Booking",
+          "value": "mark_confirmed"
+        },
+        {
+          "label": "In Progress",
+          "value": "in_progress"
+        },
+        {
+          "label": "Completed",
+          "value": "completed"
+        },
+        {
+          "label": "Cancelled",
+          "value": "cancelled"
+        }
+      ],
+      "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
+    }
+  }

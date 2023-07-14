@@ -19,14 +19,17 @@ const useListFeedbackQuestions = ({
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
+	const refetchQuestions = ({ refetchParams }) => {
+		trigger({ params: { ...params, ...refetchParams } });
+	};
+
 	useEffect(() => {
-		setParams({ ...params, Q: searchValue || undefined, Page: 1 });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		setParams((pv) => ({ ...pv, Q: searchValue || undefined, Page: 1 }));
 	}, [searchValue]);
 
 	return {
 		loading,
-		trigger,
+		refetchQuestions,
 		data,
 		params,
 		setParams,

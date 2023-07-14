@@ -1,0 +1,111 @@
+.under_line {
+	width: 68px;
+	margin: 4px 0 12px;
+	font-size: 16px;
+	font-weight: 500;
+	border-bottom: 2px solid #ed3726;
+}
+
+.container {
+	width: 40%;
+	padding-bottom: 12px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.sub_sales_funnel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60%;
+	height: 40px;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+}
+
+.sales_funnel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.vertical_line {
+	height: 32px;
+	font-size: 16px;
+	font-weight: 500;
+	border-left: 1px solid #88cad1;
+}
+
+.count_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 28px;
+	color: #ed3726;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+}
+
+.sub_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 24px 40px;
+}
+
+.sales_sub_funnel {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.styled_text {
+	margin-right: 4px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.count {
+	margin-left: 2px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.styled_decoration {
+	display: flex;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.sales_funnel_loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.sales_sub_funnel_loader {
+	width: 70%;
+	height: 40px;
+	margin: 8px;
+}
+
+.sales_sub_funnel_lower_loader {
+	width: 20%;
+	height: 40px;
+	margin: 8px;
+}
+
+.icon {
+	height: 18px;
+	margin-left: 2px;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
+}

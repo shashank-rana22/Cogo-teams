@@ -16,8 +16,8 @@ function CardList({
 	setSelectedRate = {},
 	selectedRate,
 	total,
+	refetch,
 }) {
-	// loading = true;
 	const loadingArray = headerRequired ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5];
 	return (
 		<div className={styles.cardlist}>
@@ -33,6 +33,7 @@ function CardList({
 						setSelectedRate={setSelectedRate}
 						selectedRate={selectedRate}
 						status={filters?.negotiation_status}
+						refetch={refetch}
 					/>
 					{!headerRequired && <div className={styles.line} />}
 				</div>

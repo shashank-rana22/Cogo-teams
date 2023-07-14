@@ -1,92 +1,80 @@
-import { Input, Modal, Button } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-import useCreateQuestionSet
-	from '../../page-components/FAQs/page-components/Tabbase/QuestionsList/hooks/useCreateQuestionRequest';
-
+import RequestForm from './RequestQAForm';
 import styles from './styles.module.css';
 
-function EmptyQuestionListState({ searchState = '' }) {
+function EmptyQuestionListState({ searchState = '', source = 'empty_state' }) {
 	const [searchquestion, setSearchquestion] = useState(searchState);
 	const [questionCreated, setQuestionCreated] = useState(false);
+	const [answer, setAnswer] = useState('');
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		setSearchquestion(searchState);
 	}, [searchState]);
 
-	const [show, setShow] = useState(false);
+	const renderEmptyState = () => (
+		<div className={styles.nullstate_heading}>
+			{source !== 'list'
+				&& (
+					<div>
+						<div className={styles.text_wrapper}>
+							Oops!
+						</div>
 
-	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet();
+						<div>
+							Sorry, we couldn’t find any question related to your query.
+						</div>
+					</div>
+				)}
+
+			<div className={styles.nullstate_btn}>
+				<div
+					className={styles.request_question}
+					size="md"
+				>
+					{questionCreated === true ? (
+						<div className={styles.question_updated_text}>
+							<IcCFtick height={20} width={20} />
+							<span style={{ marginLeft: '4px' }}>
+								Your question has been successfully requested.
+							</span>
+
+						</div>
+					) : (
+						<div
+							role="presentation"
+							onClick={() => setShow(true)}
+							className={styles.ask_question_text}
+							style={{ paddingLeft: source === 'list' ? '24px' : '0px' }}
+
+						>
+							Request or Submit an answer
+						</div>
+					)}
+
+				</div>
+			</div>
+		</div>
+
+	);
 
 	return (
 		<div className={styles.nullstate}>
-			<div className={styles.nullstate_heading}>
-				<div style={{ fontSize: '24px' }}>
-					Oops!
-				</div>
-				{' '}
-				<br />
-				<div style={{ fontSize: '18px', marginTop: '-16px' }}>
-					Sorry, we couldn’t find any question related to your query.
-				</div>
-				<div className={styles.nullstate_btn}>
-					<div
-						className={styles.request_question}
-						size="md"
-					>
-						{questionCreated === true ? (
-							<div className={styles.question_updated_text}>
-								<IcCFtick height={20} width={20} />
-								<span style={{ marginLeft: '4px' }}>
-									Your question has been successfully requested.
-								</span>
+			{!show ? renderEmptyState()
+				: (
+					<RequestForm
+						searchquestion={searchquestion}
+						setSearchquestion={setSearchquestion}
+						answer={answer}
+						setAnswer={setAnswer}
+						setShow={setShow}
+						setQuestionCreated={setQuestionCreated}
+						source={source}
 
-							</div>
-						) : (
-							<div
-								role="presentation"
-								onClick={() => {
-									setShow(true);
-								}}
-								className={styles.ask_question_text}
-							>
-								Send a question request for your query.
-							</div>
-						)}
-
-					</div>
-				</div>
-			</div>
-
-			<Modal size="md" show={show} onClose={() => setShow(false)} placement="top">
-				<Modal.Header title="Request your question here" />
-				<Modal.Body>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<Input
-							value={searchquestion}
-							size="lg"
-							style={{ marginRight: '8px', width: '100%' }}
-							onChange={(value) => { setSearchquestion(value); }}
-						/>
-					</div>
-
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						loading={createQuestionLoading}
-						onClick={() => {
-							createQuestionSet({
-								searchState: searchquestion,
-								setShow,
-								setQuestionCreated,
-							});
-						}}
-					>
-						Submit
-					</Button>
-				</Modal.Footer>
-			</Modal>
+					/>
+				)}
 
 		</div>
 	);

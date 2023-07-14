@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 14px;
+	margin: 24px 0;
+	border-radius: 6px;
+}
+
+.loading_container {
+	margin: 24px 0;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+}
+
+.margin_right {
+	margin-right: 4px;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	margin-right: 12px;
+}
+
+.button_container {
+	display: flex;
+}
+
+.cancel_button {
+	margin-right: 10px;
+}

@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 30px 15px;
+}
+
+.break_the_chat {
+	width: 100%;
+	height: 1px;
+	background: #d0d0d0;
+}
+
+.timeline_text {
+	position: relative;
+	top: -9px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.timeline_container {
+	max-width: 80%;
+	padding: 0 7px;
+	font-size: 12px;
+	color: #828282;
+	text-align: center;
+	background: #f9f9f9;
+}

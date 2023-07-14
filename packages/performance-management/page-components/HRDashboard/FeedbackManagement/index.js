@@ -1,8 +1,6 @@
-import { Button, Input } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import Filters from '../../../common/Filters';
@@ -16,13 +14,10 @@ import styles from './styles.module.css';
 function FeedbackManagement() {
 	const router = useRouter();
 
-	const [searchValue, setSearchValue] = useState('');
-	const { query = '', debounceQuery } = useDebounceQuery();
-
 	const {
 		feedbackData = {}, loading = false, params,
 		setParams, setPage,
-	} = useListUserFeedbacks({ searchValue: query });
+	} = useListUserFeedbacks({});
 
 	const { getUserListCsv } = useDownloadCsvFeedbacks({ params });
 
@@ -32,11 +27,6 @@ function FeedbackManagement() {
 	const { list = [], pagination_data = {} } = feedbackData;
 
 	const { total_count } = pagination_data;
-
-	useEffect(() => {
-		debounceQuery(searchValue);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
 
 	const handleClick = () => {
 		router.push('/performance-management/hr-dashboard');
@@ -62,15 +52,7 @@ function FeedbackManagement() {
 
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
-					<div className={styles.department_select}>
-						<Filters setParams={setParams} params={params} source="hr_feedback" />
-
-						<Input
-							value={searchValue}
-							onChange={setSearchValue}
-							placeholder="Search User..."
-						/>
-					</div>
+					<Filters setParams={setParams} params={params} source="hr_feedback" />
 				</div>
 
 				<Button size="lg" onClick={() => getUserListCsv()}>Download CSV</Button>

@@ -1,0 +1,40 @@
+{
+    "trade_type": [
+        {
+            "label": "Export",
+            "value": "export"
+        },
+        {
+            "label": "Import",
+            "value": "import"
+        }
+    ],
+    "state" : [
+        {
+            "label": "Shipment Received",
+            "value": "shipment_received"
+        },
+        {
+            "label": "Confirmed by Importer-Exporter",
+            "value": "confirmed_by_importer_exporter"
+        },
+        {
+            "label": "In progress",
+            "value": "in_progress"
+        },
+        {
+            "label": "Completed",
+            "value": "completed"
+        }
+    ],
+    "is_job_closed": [
+        {
+            "label": "Yes",
+            "value": "yes"
+        },
+        {
+            "label": "No",
+            "value": "no"
+        }
+    ]
+}

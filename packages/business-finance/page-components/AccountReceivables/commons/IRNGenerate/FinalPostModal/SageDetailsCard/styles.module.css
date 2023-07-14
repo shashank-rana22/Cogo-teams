@@ -1,0 +1,27 @@
+.div_flex {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+}
+
+.lable {
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.tool_tip {
+	font-size: 12px;
+}
+
+.cursor {
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.styled_lable_value {
+	font-size: 12px;
+	font-weight: 600;
+}

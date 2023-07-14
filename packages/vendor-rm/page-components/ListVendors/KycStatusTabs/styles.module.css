@@ -1,0 +1,39 @@
+.kyc {
+	display: flex;
+	flex-wrap: row wrap;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 20%;
+	padding: 24px;
+	margin-right: 22px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 8px;
+	transition: all 0.5s ease;
+}
+
+.box:hover {
+	transform: scale(1.1);
+}
+
+.label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}
+
+.value {
+	font-size: 24px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+@media (max-width: 768px) {
+	.box {
+		width: 100%;
+	}
+}

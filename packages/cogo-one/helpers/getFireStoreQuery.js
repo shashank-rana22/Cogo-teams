@@ -1,84 +1,69 @@
-import { query, orderBy, where } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
+
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
+import getQueryFilterMapping from './getQueryFilterMapping';
+
+const BULK_ASSIGN_SEEN_MINUTES = 15;
+
+const TAB_WISE_QUERY_KEY_MAPPING = {
+	all      : 'all_chats_base_query',
+	observer : 'observer_chats_base_query',
+	groups   : 'group_chats_query',
+	teams    : 'teams_chats_base_query',
+	contacts : 'contacts_base_query',
+
+};
 
 function getFireStoreQuery({
-	omniChannelCollection,
 	userId,
 	appliedFilters,
-	isomniChannelAdmin = false,
-	showBotMessages = false,
+	isBotSession = false,
+	viewType,
+	activeSubTab,
 }) {
-	let firestoreQuery;
-	let queryFilters = [];
-	if (showBotMessages) {
-		if (isomniChannelAdmin) {
-			return query(
-				omniChannelCollection,
-				where('session_type', '==', 'bot'),
-				orderBy('new_message_sent_at', 'desc'),
-			);
-		}
-		return query(
-			omniChannelCollection,
-			where('session_type', '==', 'bot'),
-			where('spectators_ids', 'array-contains', userId),
-			orderBy('new_message_sent_at', 'desc'),
-		);
-	}
+	const filterId = appliedFilters.assigned_to === 'me'
+		? userId
+		: appliedFilters?.assigned_agent;
 
-	Object.keys(appliedFilters).forEach((item) => {
-		if (item === 'tags') {
-			queryFilters = [
-				...queryFilters,
-				where('chat_tags', 'array-contains', appliedFilters[item]),
-			];
-		} else if (item === 'channels') {
-			queryFilters = [
-				...queryFilters,
-				where('channel_type', 'in', appliedFilters[item]),
-			];
-		} else if (item === 'status' && appliedFilters[item] === 'unread') {
-			queryFilters = [
-				...queryFilters,
-				where('new_message_count', '>', 0),
-				orderBy('new_message_count', 'desc'),
-			];
-		} else if (item === 'escalation') {
-			queryFilters = [
-				...queryFilters,
-				where('chat_status', '==', appliedFilters[item]),
-			];
-		} else if (item === 'assigned_to') {
-			let filterId = '';
-			if (appliedFilters.assigned_to === 'me') {
-				filterId = userId;
-			} else {
-				filterId = appliedFilters?.assigned_agent;
-			}
-			queryFilters = [
-				...queryFilters,
-				where('spectators_ids', 'array-contains', filterId),
-			];
-		}
+	const currentTime = new Date();
+	currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
+	const epochTimestamp = currentTime.getTime();
+
+	const queryFilterMapping = getQueryFilterMapping({
+		appliedFilters,
+		isBotSession,
+		epochTimestamp,
+		filterId,
 	});
 
-	if (isomniChannelAdmin) {
-		firestoreQuery = query(
-			omniChannelCollection,
-			...queryFilters,
-			where('session_type', '==', 'admin'),
-			orderBy('new_message_sent_at', 'desc'),
-		);
-	} else {
-		firestoreQuery = query(
-			omniChannelCollection,
-			...queryFilters,
-			where('session_type', '==', 'admin'),
-			where('spectators_ids', 'array-contains', userId),
-			orderBy('new_message_sent_at', 'desc'),
-		);
-	}
+	const queryFilters = Object.keys(appliedFilters).reduce(
+		(accumulator, currentValue) => [
+			...accumulator,
+			...(queryFilterMapping?.[currentValue] || []),
+		],
+		[],
+	);
 
-	return firestoreQuery;
+	const tabWiseQuery = (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.({
+			agentId: userId,
+		}) || []
+	);
+
+	const sessionTypeQuery = (
+		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.({
+			sessionType        : isBotSession ? 'bot' : 'admin',
+			isContactsSelected : activeSubTab === 'contacts',
+		}) || []
+	);
+
+	return [
+		...tabWiseQuery,
+		...sessionTypeQuery,
+		...queryFilters,
+		orderBy('new_message_sent_at', 'desc'),
+	];
 }
 
 export default getFireStoreQuery;

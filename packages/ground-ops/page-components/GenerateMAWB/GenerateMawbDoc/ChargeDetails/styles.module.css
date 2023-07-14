@@ -15,19 +15,19 @@
 	padding-left: 240px;
 	font-weight: bold;
 	letter-spacing: 0;
-	border: 1px #8b8b8b solid;
+	border: 1px var(--temp-color) solid;
 	border: 0;
 }
 
 .block_row {
 	display: flex;
-	border: 1px #8b8b8b solid;
+	border: 1px transparent solid;
 }
 
 .block_col {
 	display: flex;
 	flex-direction: column;
-	border: 1px #8b8b8b solid;
+	border: 1px transparent solid;
 }
 
 .flex_col {

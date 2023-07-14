@@ -1,0 +1,51 @@
+.container {
+	background-color: var(--color-secondary-5);
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row > div {
+	width: 49%;
+}
+
+.email {
+	width: 48%;
+	margin-bottom: 10px;
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
+}
+
+.addbutton {
+	margin-top: 10px;
+}
+
+.addbuttonborder {
+	padding: 0 12px 10px;
+	margin-top: 12px;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.delete {
+	display: flex;
+	margin: 16px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.marginleft {
+	margin-left: 26px;
+}

@@ -1,0 +1,13 @@
+{
+    "primary_service": {
+        "state": [
+            "init",
+            "awaiting_service_provider_confirmation",
+            "confirmed_by_service_provider",
+            "vessel_departed",
+            "vessel_arrived",
+            "cargo_carted_in",
+            "cargo_stuffed"
+        ]
+    }
+}

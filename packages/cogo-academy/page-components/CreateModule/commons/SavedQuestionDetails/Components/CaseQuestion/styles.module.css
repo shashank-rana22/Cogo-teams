@@ -1,0 +1,36 @@
+.flex_column {
+	display: flex;
+	flex-direction: column;
+	overflow-y: hidden;
+}
+
+.flex_row {
+	display: flex;
+	align-items: center;
+	overflow-y: hidden;
+}
+
+.bold {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.question_text {
+	max-width: 600px;
+	overflow: hidden;
+	text-decoration: underline;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text {
+	margin-top: 12px;
+}
+
+.question_text_content {
+	overflow: unset;
+	text-overflow: unset;
+	white-space: unset;
+}

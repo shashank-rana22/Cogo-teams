@@ -1,8 +1,15 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetDashboardData = () => {
+import toastApiError from '../../commons/toastApiError';
+
+interface FilterInterface {
+	serviceType?:string
+	timePeriod?:string
+}
+const useGetDashboardData = (filters :FilterInterface) => {
+	const { serviceType = '', timePeriod } = filters || {};
+
 	const [{ data:dashboardData, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/daily-invoices-trend',
@@ -15,13 +22,18 @@ const useGetDashboardData = () => {
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				await trigger({});
+				await trigger({
+					params: {
+						service    : serviceType || undefined,
+						timePeriod : timePeriod || undefined,
+					},
+				});
 			} catch (err) {
-				Toast.error(err);
+				toastApiError(err);
 			}
 		};
 		getData();
-	}, [trigger]);
+	}, [trigger, serviceType, timePeriod]);
 
 	return { dashboardData, loading };
 };

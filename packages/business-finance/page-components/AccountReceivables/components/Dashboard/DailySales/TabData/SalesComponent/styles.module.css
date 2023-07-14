@@ -1,0 +1,79 @@
+.container {
+	:global {
+		table {
+			border-collapse: collapse;
+			border: 1px solid #e0e0e0;
+			border-radius: 4px !important;
+		}
+
+		td {
+			padding-left: 16px;
+			border-collapse: collapse;
+			border: 1px solid #e0e0e0;
+		}
+	}
+}
+
+.styled_amount {
+	font-size: 18px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.styled_count {
+	font-size: 18px;
+	font-weight: 600;
+	color: black;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+}
+
+.styled_credit {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.styled_date {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.credit_note {
+	height: 60px;
+}
+
+.credit_note_text {
+	color: #ee3425;
+}
+
+.styled_date_last {
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.chart {
+	width: 1200px;
+	height: 300px;
+}
+
+.placeholder_container {
+	width: 250px;
+	height: 80px;
+	margin-right: 16px;
+}
+
+.place {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.table_style {
+	width: 1200px;
+	height: 200px;
+	margin-top: 20px;
+}

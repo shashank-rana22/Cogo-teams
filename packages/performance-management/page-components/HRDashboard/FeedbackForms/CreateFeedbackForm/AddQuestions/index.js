@@ -1,6 +1,5 @@
 import { Placeholder, Pagination, Modal, Input, Button } from '@cogoport/components';
-import { useDebounceQuery, useForm } from '@cogoport/forms';
-import CreatableMultiSelectController from '@cogoport/forms/page-components/Controlled/CreatableMultiSelectController';
+import { useDebounceQuery, useForm, CreatableMultiSelectController } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -33,14 +32,13 @@ function AddQuestions({
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
-		data = {}, loading = false, params, setParams, trigger: refetchQuestions = () => {},
+		data = {}, loading = false, params, setParams, refetchQuestions = () => {},
 		setPage,
 	} = useListFeedbackQuestions({
 		searchValue: query,
 		formId,
 	});
 	const {
-		list: questions = [], form_questions: checkedQuestions = [],
 		pagination_data = {},
 	} = data;
 
@@ -51,39 +49,13 @@ function AddQuestions({
 
 	const tags = watch('tags');
 
-	useEffect(() => {
-		if (!isEmpty(data)) {
-			setQuestionActionList({
-				...questionActionList,
-				allList: questions,
-
-				checked: isEmpty(questionActionList.checked) ? checkedQuestions : questionActionList.checked,
-			});
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Tags: (tags || []).join(',') || undefined, Page: 1 }), [tags]);
-
-	useEffect(() => {
-		if (refetchList) {
-			refetchQuestions({ params: { ...params, Page: 1 } });
-		}
-		setRefetchList(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [refetchList]);
-
 	const showLoading = () => (
 		<div className={styles.questions}>
-			{Array(6).fill('').map((index) => (
+			{Array(6).fill().map((i) => (
 				<Placeholder
 					height="80px"
 					margin="0 0 8px 0"
-					key={index}
+					key={i}
 				/>
 			))}
 		</div>
@@ -93,9 +65,37 @@ function AddQuestions({
 	const currentDesignation = bulkDesignations.length > 1 ? '...' : designation;
 
 	useEffect(() => {
+		if (!isEmpty(data)) {
+			const {	list: questions = [], form_questions: checkedQuestions = [] } = data;
+
+			setQuestionActionList((pv) => ({
+				...pv,
+				allList: questions,
+
+				checked: isEmpty(pv.checked) ? checkedQuestions : pv.checked,
+			}));
+		}
+	}, [data, setQuestionActionList]);
+
+	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
+
+	useEffect(() => setParams((pv) => ({
+		...pv,
+		Tags: (
+			tags || []).join(',') || undefined,
+		Page: 1,
+	})), [setParams, tags]);
+
+	useEffect(() => {
+		if (refetchList) {
+			refetchQuestions({ Page: 1 });
+		}
+		setRefetchList(false);
+	}, [refetchList, refetchQuestions]);
+
+	useEffect(() => {
 		setFormsParams((pv) => ({ ...pv, bulkDesignations }));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [bulkDesignations]);
+	}, [bulkDesignations, setFormsParams]);
 
 	return (
 		<>
@@ -108,7 +108,7 @@ function AddQuestions({
 								Create Form :
 								{' '}
 								<div className={styles.dep}>
-									{startCase(department)}
+									{startCase(department || '---')}
 									{' > '}
 								</div>
 

@@ -1,0 +1,12 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}
+
+.empty_state {
+	margin-top: 12px;
+}

@@ -1,193 +1,210 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
+import { Image, useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
+import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
-import useListChats from '../../hooks/useListChats';
+import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
+import AgentStatusToggle from './AgentStatusToggle';
 import Conversations from './Conversations';
 import Customers from './Customers';
-import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
+import ModalComp from './ModalComps';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
 	const {
-		agentStatus = {},
-		fetchworkPrefernce = () => {},
-	} = useAgentWorkPrefernce();
+		query: {
+			assigned_chat = '',
+			channel_type = '',
+		},
+	} = useRouter();
 
-	const { status = '' } = agentStatus || {};
+	const { userId, token, emailAddress } = useSelector(({ profile, general }) => ({
+		userId       : profile?.user?.id,
+		token        : general.firestoreToken,
+		emailAddress : profile?.user?.email,
+	}));
 
-	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(false);
-	const [activeVoiceCard, setActiveVoiceCard] = useState({});
-	const [searchValue, setSearchValue] = useState('');
-	const [showBotMessages, setShowBotMessages] = useState(false);
-	const [filterVisible, setFilterVisible] = useState(false);
-	const [openModal, setOpenModal] = useState(false);
+	const [activeTab, setActiveTab] = useState({
+		tab  : 'message',
+		data : assigned_chat ? {
+			id: assigned_chat,
+			channel_type,
+		} : {},
+	});
+
+	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
+	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
+	const [modalType, setModalType] = useState({ type: null, data: {} });
+	const [recipientArray, setRecipientArray] = useState([]);
+	const [bccArray, setBccArray] = useState([]);
+	const [buttonType, setButtonType] = useState('');
+	const [emailState, setEmailState] = useState({
+		subject : '',
+		body    : '',
+	});
+
+	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
+		activeMessageCard : activeTab?.data,
+		activeVoiceCard   : activeTab?.data,
+		activeTab         : activeTab?.tab,
+		setRaiseTicketModal,
+		agentId           : userId,
+	});
+
+	const { viewType } = useAgentWorkPrefernce();
 	const { suggestions = [] } = useListChatSuggestions();
-	const [showDialModal, setShowDialModal] = useState(false);
+	const { tagOptions = [] } = useListAssignedChatTags();
 
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
 
-	const { userRoleIds, userId } = useSelector(({ profile }) => ({
-		userRoleIds : profile.partner?.user_role_ids || [],
-		userId      : profile?.user?.id,
-	}));
-
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
-
-	const {
-		loading:statusLoading,
-		updateUserStatus = () => {},
-	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
-
-	const {
-		listData = {},
-		setActiveMessage = () => {},
-		activeMessageCard = {},
-		setAppliedFilters = () => {},
-		appliedFilters,
-		loading,
-		setActiveCardId,
-		activeCardId,
-		firstLoading,
-		updateLeaduser,
-	} = useListChats({
-		firestore,
-		userId,
-		isomniChannelAdmin,
-		showBotMessages,
-	});
-	const { messagesList = [], unReadChatsCount } = listData;
-
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCardId('');
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, showBotMessages]);
-
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(agentStatus)]);
-
-	const renderComponent = () => {
-		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
-			return (
-				<>
-					<Conversations
-						activeTab={activeTab}
-						activeMessageCard={activeMessageCard}
-						firestore={firestore}
-						activeVoiceCard={activeVoiceCard}
-						suggestions={suggestions}
-						userId={userId}
-						isomniChannelAdmin={isomniChannelAdmin}
-						showBotMessages={showBotMessages}
-					/>
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						firestore={firestore}
-						updateLeaduser={updateLeaduser}
-						activeCardId={activeCardId}
-					/>
-				</>
-			);
-		}
-		return (
-			<EmptyChatPage
-				displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
-			/>
-		);
+	const mailProps = {
+		recipientArray,
+		setRecipientArray,
+		bccArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+		emailState,
+		setEmailState,
+		emailAddress,
+		activeMail    : activeTab?.data,
+		setActiveMail : (val) => {
+			setActiveTab((prev) => ({ ...prev, data: val }));
+		},
 	};
 
-	return (
-		<div className={styles.layout_container}>
-			<Customers
-				setActiveCardId={setActiveCardId}
-				isomniChannelAdmin={isomniChannelAdmin}
-				setActiveMessage={setActiveMessage}
-				activeMessageCard={activeMessageCard}
-				setActiveVoiceCard={setActiveVoiceCard}
-				activeVoiceCard={activeVoiceCard}
-				setSearchValue={setSearchValue}
-				searchValue={searchValue}
-				setFilterVisible={setFilterVisible}
-				filterVisible={filterVisible}
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				setToggleStatus={setToggleStatus}
-				toggleStatus={toggleStatus}
-				messagesList={messagesList}
-				unReadChatsCount={unReadChatsCount}
-				appliedFilters={appliedFilters}
-				setAppliedFilters={setAppliedFilters}
-				fetchworkPrefernce={fetchworkPrefernce}
-				messagesLoading={loading}
-				setOpenModal={setOpenModal}
-				openModal={openModal}
-				updateUserStatus={updateUserStatus}
-				statusLoading={statusLoading}
-				activeCardId={activeCardId}
-				setShowBotMessages={setShowBotMessages}
-				showBotMessages={showBotMessages}
-				setShowDialModal={setShowDialModal}
-			/>
+	useEffect(() => {
+		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
+			const auth = getAuth();
 
-			<div className={styles.chat_details_continer}>
-				{renderComponent()}
-			</div>
-			<div
-				className={styles.download_apk}
-			>
-				<div
-					role="presentation"
-					className={styles.download_div}
-					// eslint-disable-next-line no-undef
-					onClick={() => window.open(ANDRIOD_APK, '_blank')}
-				>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
-						alt="bot"
-						className={styles.bot_icon_styles}
+			signInWithCustomToken(auth, token).catch((error) => {
+				console.error(error.message);
+			});
+		}
+	}, [token]);
+
+	return (
+		<>
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
+				<div className={styles.settings}>
+					<AgentStatusToggle />
+				</div>
+			)}
+			<div className={styles.layout_container}>
+				<div className={styles.customers_layout}>
+					<Customers
+						viewType={viewType}
+						activeTab={activeTab}
+						setActiveTab={setActiveTab}
+						userId={userId}
+						setModalType={setModalType}
+						modalType={modalType}
+						tagOptions={tagOptions}
+						mailProps={mailProps}
+						firestore={firestore}
+						suggestions={suggestions}
 					/>
-					<div className={styles.text_styles}>
-						<div className={styles.flex}>
-							<IcMDownload
-								fill="#EE3425"
-								className={styles.download_icon}
+				</div>
+
+				{isEmpty(activeTab?.data)
+					? (
+						<div className={styles.empty_page}>
+							<EmptyChatPage
+								displayMessage={activeTab?.tab === 'message'
+									? 'chat' : 'call log'}
 							/>
-							<div>Get the</div>
 						</div>
-						app now
+					) : (
+						<>
+							<div
+								className={`${activeTab?.tab === 'mail'
+									? styles.mail_layout : styles.chats_layout}`}
+							>
+								<Conversations
+									activeTab={activeTab}
+									firestore={firestore}
+									userId={userId}
+									setRaiseTicketModal={setRaiseTicketModal}
+									viewType={viewType}
+									setActiveRoomLoading={setActiveRoomLoading}
+									mailProps={mailProps}
+									setActiveTab={setActiveTab}
+									suggestions={suggestions}
+								/>
+							</div>
+
+							{activeTab?.tab !== 'mail' && (
+								<div className={styles.user_profile_layout}>
+									<ProfileDetails
+										activeMessageCard={activeTab?.data}
+										activeTab={activeTab?.tab}
+										activeVoiceCard={activeTab?.data}
+										activeCardId={activeTab?.data?.id}
+										setModalType={setModalType}
+										activeRoomLoading={activeRoomLoading}
+										setRaiseTicketModal={setRaiseTicketModal}
+										zippedTicketsData={zippedTicketsData}
+										viewType={viewType}
+										firestore={firestore}
+										userId={userId}
+										setActiveTab={setActiveTab}
+									/>
+								</div>
+							)}
+						</>
+					)}
+
+				<div className={styles.download_apk}>
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.download_div}
+						onClick={() => window.open(ANDRIOD_APK, '_blank')}
+					>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
+							alt="bot"
+							height={16}
+							width={15}
+							className={styles.bot_icon_styles}
+						/>
+						<div className={styles.text_styles}>
+							<div className={styles.flex}>
+								<IcMDownload
+									className={styles.download_icon}
+								/>
+								<div>Get the</div>
+							</div>
+							app now
+						</div>
 					</div>
 				</div>
 			</div>
-			{showDialModal && (
-				<DialCallModal
-					setShowDialModal={setShowDialModal}
-					showDialModal={showDialModal}
-				/>
-			)}
-		</div>
+
+			<ModalComp
+				raiseTicketModal={raiseTicketModal}
+				setRaiseTicketModal={setRaiseTicketModal}
+				refetchTickets={refetchTickets}
+				firestore={firestore}
+				userId={userId}
+			/>
+		</>
 	);
 }
 

@@ -111,9 +111,9 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'update_organization_search_history',
+		api          : 'create_planet_search_history',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'location',
 	},
 	{
 		api          : 'get_organization_search_history',
@@ -425,6 +425,95 @@ const apis = [
 		api          : 'verify_otp',
 		access_type  : 'private',
 		service_name : 'user',
+	},
+	{
+		api         : 'get_saas_insurance_list_commodities',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_country_supported',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api          : 'get_spot_search_indicative_prices',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'get_spot_search_shipment_insights',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+		module       : 'insurance',
+		feature      : 'insurance',
+	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+		module       : 'insurance',
+		feature      : 'insurance',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+		module      : 'hs-code',
+		feature     : 'controlled checkout',
+	},
+	{
+		api          : 'create_organization_nomination',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_nominations',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_nomination',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_organization_nomination',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_nominated_spot_search',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'create_nominee_trade_party',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_spot_search_location_recommendations',
+		access_type  : 'private',
+		service_name : 'spot_search',
 	},
 ];
 export default apis;

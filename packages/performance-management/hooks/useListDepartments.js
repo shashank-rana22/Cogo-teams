@@ -1,12 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
-import { useEffect } from 'react';
 
 const useListDepartments = () => {
 	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
 		url    : 'get_iris_list_departments',
 		method : 'get',
-	}, { manual: true });
+	}, { manual: false });
 
 	const getListDepartments = () => {
 		try {
@@ -15,11 +14,6 @@ const useListDepartments = () => {
 			Toast.error(e.response?.data.error?.toString());
 		}
 	};
-
-	useEffect(() => {
-		getListDepartments();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	return { data, loading, getListDepartments };
 };

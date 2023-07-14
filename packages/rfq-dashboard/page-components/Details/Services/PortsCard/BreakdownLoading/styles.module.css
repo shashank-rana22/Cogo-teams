@@ -1,0 +1,20 @@
+.title {
+	padding: 20px;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-evenly;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.flex_content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.flex_border {
+	border-bottom: 1px solid #e0e0e0;
+}

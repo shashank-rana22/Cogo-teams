@@ -1,0 +1,42 @@
+.table {
+	margin: 20px 0;
+	background-color: #fff;
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
+
+	tr {
+		height: 44px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 12px;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 0 16px;
+	margin-bottom: 4px;
+}
+
+.empty {
+	width: 600px;
+	height: 120px;
+	padding: 20px 0;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	padding: 0 12px;
+
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}

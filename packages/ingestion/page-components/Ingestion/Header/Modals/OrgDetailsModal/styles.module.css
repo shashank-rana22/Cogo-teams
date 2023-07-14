@@ -1,0 +1,50 @@
+.form_section {
+	height: 80px;
+	margin-top: 16px;
+}
+
+.control_container {
+	height: 80px;
+	padding: 4px 16px;
+}
+
+.modal_container {
+	height: 220px;
+	margin-top: 0;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}
+
+.control_label {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.close_button {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.field_controller {
+	margin: 4px 0 0;
+
+	:global {
+		.ui_select_input_placeholder {
+			color: #bdbdbd;
+		}
+	}
+}
+
+.heading {
+	padding: 8px 16px;
+}
+
+.optional {
+	font-size: 12px;
+	color: #828282;
+}

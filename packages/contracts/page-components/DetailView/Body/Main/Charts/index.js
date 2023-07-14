@@ -7,23 +7,30 @@ import styles from './styles.module.css';
 function Charts({ activePair, handleUpdateContract, data, statsData, stats }) {
 	return (
 		<div className={styles.container}>
-			<div>
-				<div className={styles.heading}>Service Provider</div>
-				<ServiceProvier
-					activePair={activePair}
-					handleUpdateContract={handleUpdateContract}
-					statsData={statsData}
-					stats={stats}
-					data={data}
-				/>
-				<div className={styles.stats} />
-			</div>
-			<div>
-				<div className={styles.heading}>Profitability Prediction</div>
-				<ProfitabilityPrediction
-					activePair={activePair}
-				/>
-			</div>
+			{
+				data.source !== 'manual' && (
+					<>
+						<div>
+							<div className={styles.heading}>Service Provider</div>
+							<ServiceProvier
+								activePair={activePair}
+								handleUpdateContract={handleUpdateContract}
+								statsData={statsData}
+								stats={stats}
+								data={data}
+							/>
+							<div className={styles.stats} />
+						</div>
+						<div>
+							<div className={styles.heading}>Profitability Prediction</div>
+							<ProfitabilityPrediction
+								activePair={activePair}
+							/>
+						</div>
+					</>
+				)
+			}
+
 			<div>
 				<div className={styles.heading}>Revenue Prediction from Previous Contracts</div>
 				<RevenuePrediction

@@ -1,10 +1,10 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { global } from '../constants';
 import { FilterProps } from '../interface';
 
 interface Tab {
@@ -16,8 +16,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	}));
 
 	const isSettlementExecutive = userProfile.partner.user_role_ids.includes(
-		global.PROD_SETTLEMENT_EXECUTIVE,
-
+		GLOBAL_CONSTANTS.country_entity_ids.IN,
 	);
 
 	const [filters, setFilters] = useState<FilterProps>({
@@ -40,7 +39,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 			method  : 'get',
 			authKey : 'get_incident_management_incident_list',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -96,7 +95,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	useEffect(() => {
 		getIncidentData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), category, date, query, page, urgency]);
+	}, [JSON.stringify(rest), category, date, query, page, urgency, activeTab]);
 
 	useEffect(() => {
 		setFilters((prev) => ({

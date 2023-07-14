@@ -1,0 +1,33 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 16px;
+}
+
+.title {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	color: #221f20;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.button_container {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 12px;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}

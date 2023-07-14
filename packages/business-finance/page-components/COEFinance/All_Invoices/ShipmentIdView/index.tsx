@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
@@ -18,7 +19,7 @@ export interface ItemDataProps {
 	incomeCount: number,
 	incomeTotalAmount: number,
 	expenseCount: number,
-	expenseTotalAmount: number,
+	expenseTotalAmount: string,
 	serviceType: string,
 	discountAppliedKam: number,
 	discountAppliedRevenueDesk: number,
@@ -30,9 +31,11 @@ export interface ItemDataProps {
 }
 
 function ShipmentIdView() {
+	const { query } = useRouter();
+	const { jobNumber } = query || {};
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	const [pendingApproval, setPendingApproval] = useState('all');
-	const [serialId, setSerialId] = useState('');
+	const [serialId, setSerialId] = useState(jobNumber || '');
 	const {
 		hookSetters,
 		pageNo,
@@ -47,7 +50,14 @@ function ShipmentIdView() {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{[1, 2, 3, 4, 5].map(() => <LoadingState />)}
+					{[1, 2, 3, 4, 5].map((val) => <LoadingState key={val} />)}
+				</div>
+			);
+		}
+		if (data.length === 0) {
+			return (
+				<div className={styles.no_data}>
+					No data Available
 				</div>
 			);
 		}

@@ -1,0 +1,102 @@
+.inner_tabs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 12px 0;
+
+	:global {
+		.ui_select_container {
+			width: 24%;
+		}
+	}
+
+	@media (max-width: 868px) {
+		flex-direction: column;
+	}
+}
+
+.select_filter {
+	max-width: 120px;
+}
+
+.right_filters {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	@media (max-width: 868px) {
+		margin-top: 8px;
+	}
+}
+
+.service_tabs {
+	display: flex;
+	align-items: center;
+	width: 68%;
+	font-size: 12px;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}
+
+.service_tab {
+	display: flex;
+	justify-content: center;
+	min-width: 100px;
+	padding: 8px;
+	margin-right: 12px;
+	font-weight: 600;
+	color: #000;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.active.service_tab {
+	color: #ee3425;
+	background-color: #fdebe9;
+}
+
+.filters_tabs {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-top: 12px;
+	font-size: 12px;
+}
+
+.right_panel {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tab_container {
+	display: flex;
+}
+
+.scope_container {
+	margin-left: 8px;
+}
+
+.document_filter {
+	width: 90%;
+	margin-left: 8px;
+}
+
+.ready_to_collect {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+}
+
+.text {
+	font-weight: 600;
+}
+
+.search_filter {
+	min-width: 200px;
+	margin-left: 4px;
+}

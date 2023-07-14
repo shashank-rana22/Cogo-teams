@@ -22,6 +22,7 @@ function Footer({ item, revertCounts }) {
 					// eslint-disable-next-line no-unsafe-optional-chaining
 					content={(item?.remarks || []).length ? item?.remarks[item?.remarks.length - 1]
 						: 'No Remarks Present'}
+					interactive
 				>
 					<div className={styles.remarks}>
 						view here

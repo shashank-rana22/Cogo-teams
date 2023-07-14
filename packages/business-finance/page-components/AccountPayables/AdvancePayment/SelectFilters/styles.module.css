@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.search_filter {
+	display: flex;
+	gap: 12px;
+}
+
+.search_icon {
+	margin-right: 10px;
+}

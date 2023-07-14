@@ -1,0 +1,165 @@
+{
+	"name": "fcl_freight_service",
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_location"
+	},
+	"possibleFullRoute": [
+		{
+			"service_types": ["fcl_freight_service"],
+			"display": "FCL Freight",
+			"origin": "origin_main_port",
+			"alternateOrigin": "origin_port",
+			"destination": "destination_port",
+			"alternateDestination": "destination_port",
+			"iconType": "ship",
+			"type": "sea"
+		}
+	],
+	"operator": "shipping_line",
+	"details": [
+		{
+			"label": "Containers Count",
+			"key": "containers_count"
+		},
+		{
+			"label": "Container Size",
+			"key": "container_size"
+		},
+		{
+			"label": "Container Type",
+			"key": "container_type"
+		},
+		{
+			"label": "Commodity",
+			"key": "commodity",
+			"type": "commodity"
+		},
+		{
+			"label": "Shipping line",
+			"type": "obj",
+			"key": "shipping_line.business_name"
+		},
+		{
+			"label": "Rate reference number",
+			"type": "rate_reference_number",
+			"key": "rate_reference_number"
+		},
+		{
+			"label": "Container Pickup Date",
+			"key": "cargo_readiness_date",
+			"type": "date"
+		},
+		{
+			"label": "Cargo Description",
+			"key": "commodity_description"
+		},
+		{
+			"label": "Hs Code Name",
+			"key": "hs_code_name",
+			"showDefault": false
+		},
+		{
+			"label": "Number of Stop",
+			"key": "number_of_stops",
+			"type": "stops"
+		},
+		{
+			"label": "BL Category",
+			"key": "bl_category"
+		},
+		{
+			"label": "BL Count",
+			"key": "bls_count"
+		},
+		{
+			"label": "BL Type",
+			"key": "bl_type"
+		},
+		{
+			"label": "Destination Det. Free Days",
+			"key": "free_days_detention_destination"
+		},
+		{
+			"label": "Origin Det. Free Days",
+			"key": "free_days_detention_origin"
+		}, 
+		{ 
+			"label": "Destination Demurrage Free Days",
+			"key" : "free_days_demurrage_destination"
+		}, 
+		{
+			"label": "Origin Demurrage Free Days",
+			"key" : "free_days_demurrage_origin"
+		},
+		{
+			"key": "cargo_weight_per_container",
+			"label": "Cargo Weight/Cont.",
+			"type": "cargo"
+		},
+		{
+			"key": "refer_humidity",
+			"label": "Reefer Humidity",
+			"type": "percent"
+		},
+		{
+			"key": "refer_temperature",
+			"label": "Reefer Temperature",
+			"type": "temperature"
+		},
+		{
+			"key": "refer_vent_setting",
+			"label": "Reefer Ventilation Setting"
+		},
+		{
+			"key": "refer_ventilation",
+			"label": "Reefer Ventilation",
+			"type": "percent"
+		},
+		{
+			"key": "service_provider_reference_id",
+			"label": "Shipment Ref Id"
+		},
+		{
+			"type": "obj",
+			"key": "preferred_container_handover_location.name",
+			"label": "Preferred container handover location"
+		},
+		{
+			"type": "obj",
+			"key": "preferred_container_pickup_location.name",
+			"label": "Preferred container pickup location"
+		},
+		{
+			"type": "date",
+			"key": "schedule_departure",
+			"label": "ETD"
+		},
+		{
+			"type": "date",
+			"key": "schedule_arrival",
+			"label": "ETA"
+		}, 
+		{
+			"key": "export_detention_fee", 
+			"label" : "Origin Detention Days (Paid)"
+		}, 
+		{
+			"key": "import_detention_fee", 
+			"label" : "Destination Detention Days (Paid)"
+		}, 
+		{
+			"key": "export_demurrage_charges", 
+			"label" :"Origin Demurrage Days (Paid)"
+		}, 
+		{
+			"key": "import_demurrage_charges", 
+			"label" : "Destination Demurrage Days (Paid)"
+		}
+	],
+	"commnets": { "emptyContent": "" }
+}

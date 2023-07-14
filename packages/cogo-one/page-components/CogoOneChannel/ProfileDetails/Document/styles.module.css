@@ -1,0 +1,25 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.filter_icon {
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.filters_applied {
+	position: relative;
+	top: -28px;
+	left: 15px;
+	width: 5px;
+	height: 5px;
+	background: #f68b21;
+	border-radius: 5px;
+}

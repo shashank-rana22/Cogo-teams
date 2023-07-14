@@ -18,7 +18,7 @@ const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, l
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/detail_stakeholder',
-		mathod  : 'POST',
+		method  : 'POST',
 		authkey : 'post_allocation_detail_stakeholder',
 	}, { manual: true });
 

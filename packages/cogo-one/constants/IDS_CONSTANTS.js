@@ -1,11 +1,21 @@
-import ROLE_IDS from '@cogoport/constants/role_ids';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-export const hasPermission = [
-	ROLE_IDS.SUPERADMIN_ID,
-	ROLE_IDS.TECH_SUPERADMIN_ID,
-	ROLE_IDS.COGOVERSE_ADMIN,
-];
+const getViewTypeMapping = () => {
+	const geo = getGeoConstants();
 
-export const PARAMOUNT_ORG_ID = '1e4b9f43-4863-4e29-a944-8e9e8780e514';
+	const USER_IDS_CHECK = {
+		cogoone_admin: geo.uuid.cogo_one_admin_user_ids,
+	};
 
-export const COGOVERSE_USER_ID = 'a217c304-5296-4f1d-948c-814fa9ed9cdb';
+	const ROLE_IDS_CHECK = {
+		shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
+		kam_view      : geo.uuid.cogo_one_kam_agent_ids,
+		cogoone_admin : geo.uuid.cogo_one_admin_ids,
+	};
+
+	return {
+		USER_IDS_CHECK, ROLE_IDS_CHECK,
+	};
+};
+
+export default getViewTypeMapping;

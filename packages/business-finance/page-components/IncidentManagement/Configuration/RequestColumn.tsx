@@ -1,16 +1,10 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
-import BankDetails from '../Modals/BankDetails';
-import ConcorModal from '../Modals/ConcorModal';
-import ICJVModal from '../Modals/ICJV_Modal';
-import JvModal from '../Modals/JvModal';
-import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
-import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
+import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
@@ -43,7 +37,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
@@ -97,12 +91,29 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '' } = original || {};
+			const { type: requestType = '', data } = original || {};
+
+			const { creditNoteRequest } = data || {};
+
+			const { revoked } = creditNoteRequest || {};
 			return (
-				<span>
-					{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-						: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
-				</span>
+				<div className={styles.credit}>
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+
+					</span>
+					<span>
+						{typeof (revoked) === 'boolean' && (
+							<div>
+								{revoked
+									? <Pill size="md" color="#C4DC91">Fully</Pill>
+									: <Pill size="md" color="#FEF199">Partial</Pill>}
+							</div>
+						)}
+					</span>
+				</div>
+
 			);
 		},
 	},
@@ -138,88 +149,8 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 		id: 'request_date',
 	},
 	{
-		accessor: (row) => {
-			const { data } = row || {};
-			const {
-				tdsRequest,
-				bankRequest,
-				organization,
-				settlementRequest,
-				journalVoucherRequest,
-				interCompanyJournalVoucherRequest,
-				concorPdaApprovalRequest,
-			} = data || {};
-
-			const { type, id } = row || {};
-
-			return (
-				<>
-					{type === 'TDS_APPROVAL' && (
-						<TDSModal
-							tdsData={tdsRequest}
-							id={id}
-							refetch={getIncidentData}
-							row={row}
-						/>
-					)}
-					{type === 'SETTLEMENT_APPROVAL' && (
-						<SettlementModal
-							settlementData={settlementRequest}
-							id={id}
-							row={row}
-							refetch={getIncidentData}
-						/>
-					)}
-					{type === 'BANK_DETAIL_APPROVAL' && (
-						<BankDetails
-							bankData={bankRequest}
-							bankId={id}
-							organization={organization}
-							refetch={getIncidentData}
-							row={row}
-						/>
-					)}
-					{type === 'ISSUE_CREDIT_NOTE' && (
-						<RequestCN row={row} refetch={getIncidentData} id={id} />
-					)}
-
-					{type === 'CONSOLIDATED_CREDIT_NOTE' && (
-						<RequestCN row={row} refetch={getIncidentData} id={id} />
-					)}
-
-					{type === 'JOURNAL_VOUCHER_APPROVAL' && (
-						<JvModal
-							journalVoucherRequest={journalVoucherRequest}
-							id={id}
-							refetch={getIncidentData}
-							row={row}
-						/>
-					)}
-
-					{type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
-						<ICJVModal
-							interCompanyJournalVoucherRequest={
-							interCompanyJournalVoucherRequest
-								}
-							row={row}
-							refetch={getIncidentData}
-							id={id}
-						/>
-					)}
-
-					{
-						type === 'CONCOR_PDA_APPROVAL' && (
-							<ConcorModal
-								concorData={concorPdaApprovalRequest}
-								id={id}
-								refetch={getIncidentData}
-							/>
-						)
-					}
-
-				</>
-			);
-		},
+		accessor: (row) => (
+			<AccessorComponent row={row} getIncidentData={getIncidentData} />),
 		id: 'action',
 	},
 

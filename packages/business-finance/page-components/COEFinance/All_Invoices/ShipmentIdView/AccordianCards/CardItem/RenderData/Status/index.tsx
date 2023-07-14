@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -5,6 +6,7 @@ import styles from './styles.module.css';
 
 interface ItemTypes {
 	status?: string;
+	rejectionReason?: string;
 }
 
 interface PropsType {
@@ -12,19 +14,29 @@ interface PropsType {
 }
 
 function Status({ item }: PropsType) {
-	const { status }: ItemTypes = item;
+	const { rejectionReason = '', status }: ItemTypes = item;
 	if (status === 'FINANCE_ACCEPTED') {
 		return <div className={styles.finance_accepted}>Finance Accepted</div>;
 	}
 	if (status === 'INITIATED') {
 		return <div className={styles.initiated}>Initiated</div>;
 	}
+	if (status === 'LOCKED') {
+		return <div className={styles.initiated}>LOCKED</div>;
+	}
 	if (status === 'ACCEPTED') {
 		return <div className={styles.accepted}>Accepted</div>;
 	}
-	if (status === 'financeRejected') {
+	if (status === 'FINANCE_REJECTED') {
 		return (
-			<div className={styles.status_finance_rejected}>Finance Rejected</div>
+			<Tooltip
+				interactive
+				placement="top"
+				content={<div className={styles.styledText}>{rejectionReason || '-'}</div>}
+			>
+				<div className={styles.finance_rejected}>Finance Rejected</div>
+
+			</Tooltip>
 		);
 	}
 	if (status === 'POSTED') {

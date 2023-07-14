@@ -1,0 +1,95 @@
+.container {
+	position: relative;
+	width: 32%;
+	overflow: hidden;
+	border-right: 1px solid #e0e0e0;
+	transition: all 0.3s;
+}
+
+.list_container {
+	height: 367px;
+	overflow: auto;
+	background: #fff;
+
+	.colored {
+		background: #cfeaed;
+	}
+}
+
+.custom_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 4px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #f00;
+}
+
+.initial_state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 68%;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.card_item {
+	display: flex;
+	flex-direction: column;
+}
+
+.serial_id {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: #333;
+}
+
+.updated_at {
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #4f4f4f;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 18px;
+	padding: 0 2px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #fef3e9;
+	background: #ee3425;
+	border-radius: 5px;
+}
+
+.input_styles {
+	:global {
+		.ui_input_container.ui_ps_size_md {
+			height: 28px !important;
+		}
+
+		.ui_input_control {
+			height: 28px;
+			font-size: 14px;
+		}
+	}
+}
+
+.text {
+	font-size: 18px;
+	font-weight: 600;
+}

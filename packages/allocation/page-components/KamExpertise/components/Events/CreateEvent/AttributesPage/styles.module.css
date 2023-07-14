@@ -1,0 +1,128 @@
+.create_new_event {
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.form_container {
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.modified_data {
+	display: flex;
+	font-size: 12px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
+	color: #333;
+}
+
+.modified_date {
+	display: flex;
+	margin-right: 16px;
+}
+
+.add_rule_container {
+	flex: 1;
+}
+
+.account_attributes {
+	flex: 4;
+	height: 572px;
+	padding: 16px;
+	overflow-y: scroll;
+	background: rgb(249 249 249 / 100%);
+	border: 1px solid rgb(44 62 80 / 20%);
+	border-radius: 8px;
+}
+
+.add_rule_text {
+	margin: 16px 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.form_group:not(:first-child) {
+	margin: 16px 0;
+}
+
+.label {
+	display: flex;
+	flex: 1;
+	align-self: flex-start;
+	margin-bottom: 4px;
+	color: #4f4f4f;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}
+
+.input_group {
+	width: 250px;
+	margin: 0 16px 16px 0;
+}
+
+.rule_form_container {
+	padding-right: 16px;
+}
+
+.account_attribute_text {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+
+	& svg {
+		margin-left: 4px;
+	}
+}
+
+.row_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.attribute_form_group {
+	display: flex;
+	flex-basis: 33.33%;
+	flex-direction: column;
+}
+
+.rule_and_attribute {
+	display: flex;
+	margin-bottom: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tooltip_text {
+	word-break: break-word;
+}
+
+.location_options_type {
+	font-size: 8px;
+	color: #4f4f4f;
+}
+
+.modified_options {
+	display: flex;
+	flex-direction: column;
+}

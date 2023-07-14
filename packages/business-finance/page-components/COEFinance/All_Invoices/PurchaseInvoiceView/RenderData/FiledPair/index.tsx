@@ -24,7 +24,7 @@ interface Props {
 }
 
 function FieldPair({ itemData, field }:Props) {
-	const {	billType = '', billNumber = '', isProforma = '', billDocumentUrl, jobNumber = '', serviceType } = itemData;
+	const {	billType = '', billNumber = '', isProforma, billDocumentUrl, jobNumber = '', serviceType } = itemData;
 
 	return (
 		<div>

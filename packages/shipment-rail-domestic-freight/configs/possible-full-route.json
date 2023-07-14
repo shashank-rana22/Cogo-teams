@@ -1,0 +1,44 @@
+[
+	{
+		"service_type": "trailer_freight_service",
+		"display_label": "Origin Trailer Transportation",
+		"trade_type": "export",
+		"is_main"       : false
+	},
+	{
+		"service_type": "ftl_freight_service",
+		"display_label": "Origin FTL Transportation",
+		"trade_type": "export",
+		"is_main"       : false
+	},
+	{
+		"service_type": "haulage_freight_service",
+		"display_label": "Origin Haulage",
+		"trade_type": "export",
+		"is_main"       : false
+	},
+	{
+		"service_type": "rail_domestic_freight_service",
+		"display_label": "Rail Freight",
+		"trade_type": "domestic",
+		"is_main"       : true
+	},
+	{
+		"service_type": "haulage_freight_service",
+		"display_label": "Destination Haulage",
+		"trade_type": "import",
+		"is_main"       : false
+	},
+	{
+		"service_type": "ftl_freight_service",
+		"display_label": "Destination FTL Transportation",
+		"trade_type": "import",
+		"is_main"       : false
+	} ,
+	{
+		"service_type": "trailer_freight_service",
+		"display_label": "Destination Trailer Transportation",	
+		"trade_type": "import",
+		"is_main"       : false
+	}
+]

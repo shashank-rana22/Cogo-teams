@@ -1,0 +1,32 @@
+.container {
+	padding: 24px;
+	border-top: 1px solid #f2e3c3;
+
+	:global {
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_offlabel {
+			font-size: 14px;
+		}
+
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_onlabel {
+			font-size: 14px;
+		}
+	}
+}
+
+.header {
+	display: flex;
+	justify-content: space-around;
+	padding: 16px 32px;
+	font-size: 12px;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
+}
+
+.customer {
+	font-weight: 600;
+	color: #000;
+}
+
+.toggle {
+	place-content: end;
+}

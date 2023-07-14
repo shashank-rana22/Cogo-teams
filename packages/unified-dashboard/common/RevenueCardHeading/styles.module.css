@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 2px 2px;
+}
+
+.revenue {
+	width: 18px;
+	height: 18px;
+	margin-right: 12.8px;
+}
+
+.revenue_container {
+	display: flex;
+	align-items: center;
+}
+
+.text_title {
+	margin: 3px 10px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.flex_info {
+	display: flex;
+	align-items: center;
+}
+
+.info {
+	width: 16px;
+	height: 16px;
+}
+
+.collapse_icon {
+	width: 20px;
+	height: 14px;
+}
+
+.collapse_icon.active {
+	transition: transform 400ms;
+	transform: rotate(180deg);
+}
+
+.collapse_icon.inactive {
+	transition: transform 400ms;
+	transform: rotate(0deg);
+}
+
+@media (max-width: 540px) {
+	padding: 15px;
+}
+
+.flex_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+	cursor: pointer;
+}

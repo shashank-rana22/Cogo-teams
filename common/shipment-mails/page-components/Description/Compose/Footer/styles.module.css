@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.wrapper {
+	margin-top: 10px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.attachement_item {
+	display: flex;
+	align-items: center;
+	padding: 4px;
+	margin-right: 10px;
+	border-radius: 4px;
+
+	&:hover {
+		cursor: pointer;
+		background: #e0e0e0;
+	}
+}
+
+.name {
+	display: inline-block;
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -1,0 +1,14 @@
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		position: absolute;
+	}
+}
+
+.button_flex {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}

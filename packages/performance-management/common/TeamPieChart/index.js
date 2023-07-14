@@ -79,7 +79,7 @@ function TeamPieChart({ userId = '', params = {} }) {
 				}) => (
 					<div className={styles.pie_tooltip}>
 						<strong>
-							{startCase(id)}
+							{startCase(id || '---')}
 							{' '}
 							:
 							{' '}

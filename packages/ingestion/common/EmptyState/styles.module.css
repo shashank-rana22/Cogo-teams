@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+}
+
+.row {
+	display: flex;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.text {
+	font-size: 20px;
+	color: #bdbdbd;
+}

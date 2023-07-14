@@ -168,7 +168,7 @@ function TdsDeviationModal({
 							{documentUrls?.map((url:string) => (url !== '' ? (
 								<div className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
-										{url.split('/')[4] || '-'}
+										{url?.split('/')?.pop() || '-'}
 									</a>
 								</div>
 							) : (

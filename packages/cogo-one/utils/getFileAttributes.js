@@ -24,13 +24,13 @@ function getFileAttributes({ fileName = '', finalUrl }) {
 		fileIcon = fileIconMapping.img;
 		fileType = 'image';
 	} else if (['mp3', 'aac'].includes(fileExtension)) {
-		fileIcon = fileIconMapping.pdf;
+		fileIcon = fileIconMapping.document;
 		fileType = 'audio';
 	} else if (['mp4', 'gif'].includes(fileExtension)) {
 		fileIcon = fileIconMapping.img;
 		fileType = 'video';
 	} else {
-		fileIcon = fileIconMapping.doc;
+		fileIcon = fileIconMapping.document;
 		fileType = 'document';
 	}
 

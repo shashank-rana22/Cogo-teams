@@ -1,0 +1,30 @@
+.styled_text {
+	margin-bottom: 8px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.sage_style {
+	margin-left: 4px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.flex_style {
+	display: flex;
+	margin: 20px 0 4px;
+}
+
+.styled_body {
+	padding: 4px 20px;
+}
+
+.styled_header {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.styled_job_number {
+	color: #f68b21;
+}

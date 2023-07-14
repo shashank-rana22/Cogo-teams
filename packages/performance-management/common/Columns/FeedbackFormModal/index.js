@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function FeedbackFormModal({
 	action = '',
 	item = {},
-	getTeamFeedbackList = () => {},
 	setRefetchReportees = () => {},
 	feedbackMonth = '',
 	feedbackYear = '',
@@ -24,13 +23,13 @@ function FeedbackFormModal({
 
 	const onCloseFunction = () => {
 		setShowModal(false);
-		getTeamFeedbackList();
 	};
 
 	return (
 		<div className={styles.feedback_button}>
 			<div className={styles.add_button}>
 				<ButtonComponent
+					item={item}
 					action={action}
 					setShowModal={setShowModal}
 					showTypePopover={showTypePopover}
@@ -52,9 +51,9 @@ function FeedbackFormModal({
 							:
 							{' '}
 							<span>
-								{startCase(item.name)}
+								{startCase(item.name || '-')}
 							</span>
-							{showModal !== 'employed' && ` (${startCase(showModal)})`}
+							{![true, 'employed'].includes(showModal) && ` (${startCase(showModal || '-')})`}
 						</div>
 					)}
 					/>

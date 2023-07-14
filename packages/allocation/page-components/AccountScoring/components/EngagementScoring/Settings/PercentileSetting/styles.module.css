@@ -1,0 +1,12 @@
+.card {
+	width: 100%;
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.empty_container {
+	padding: 8px;
+	background: #fff;
+	border-radius: 8px;
+}

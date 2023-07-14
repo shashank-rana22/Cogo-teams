@@ -1,0 +1,30 @@
+.container_header {
+	margin-right: 12px;
+	margin-bottom: 32px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 16px;
+	color: #393f70;
+	text-transform: uppercase;
+}
+
+.warning {
+	margin: 0;
+	margin-bottom: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #4f4f4f;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+
+	& > button:first-child {
+		margin-right: 8px;
+	}
+}

@@ -1,4 +1,4 @@
-import Filters from './Filters.';
+import Filters from './Filters';
 import useGetListRfqs from './hooks/useGetListRfqs';
 import List from './List';
 import MonthyStats from './MonthyStats';
@@ -36,6 +36,7 @@ function RfqEnquiries() {
 							loading={loading}
 							filters={filters}
 							hookSetters={hookSetters}
+							refetch={refetch}
 						/>
 					</div>
 				</div>

@@ -2,11 +2,13 @@ import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+
+import UPLOAD_VALIDATION_MAPPING from '../../constants/UPLOAD_VALIDATION_MAPPING';
 
 import styles from './styles.module.css';
 
-function CustomFileUploader(props) {
+function CustomFileUploader(props, ref) {
 	const {
 		onChange,
 		showProgress = true,
@@ -15,6 +17,7 @@ function CustomFileUploader(props) {
 		docName,
 		uploadIcon = null,
 		handleProgress,
+		channel = '',
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null);
@@ -96,6 +99,16 @@ function CustomFileUploader(props) {
 	};
 
 	const handleChange = async (values) => {
+		let channelTemp = 'default';
+		if (channel in UPLOAD_VALIDATION_MAPPING) {
+			channelTemp = channel;
+		}
+		const isValid = UPLOAD_VALIDATION_MAPPING[channelTemp]?.({ values });
+
+		if (!isValid) {
+			return;
+		}
+
 		try {
 			setLoading(true);
 
@@ -133,7 +146,13 @@ function CustomFileUploader(props) {
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};
+	const externalHandleDelete = (val) => {
+		setUrlStore(val);
+	};
 
+	useImperativeHandle(ref, () => ({
+		externalHandleDelete,
+	}));
 	return (
 		<>
 			<Upload
@@ -149,7 +168,7 @@ function CustomFileUploader(props) {
 			/>
 
 			{showProgress && loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>
@@ -170,4 +189,4 @@ function CustomFileUploader(props) {
 	);
 }
 
-export default CustomFileUploader;
+export default forwardRef(CustomFileUploader);

@@ -1,10 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
-import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
 
 import styled from './styles.module.css';
 
@@ -38,19 +38,40 @@ function FormatedDate({ item, field }: Props) {
 			<div className={styled.pre_tax}>
 				Pre Tax :
 				<text className={styled.pre_tax_amount}>
-					{getFormattedPrice(subTotal, billCurrency!)}
+					{formatAmount({
+						amount   :	subTotal as any,
+						currency : billCurrency!,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</text>
 			</div>
 			<div className={styled.post_tax}>
 				Post Tax:
 				<text className={styled.post_tax_amount}>
-					{getFormattedPrice(grandTotal, billCurrency!)}
+					{formatAmount({
+						amount   : grandTotal as any,
+						currency : billCurrency!,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</text>
 			</div>
 		</>
 	);
 
-	const formatAmount = getFormattedPrice(grandTotal, billCurrency) || '-';
+	const formattedAmount = formatAmount({
+		amount   :	grandTotal as any,
+		currency :	billCurrency,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	}) || '-';
 	return (
 		<div>
 
@@ -58,9 +79,9 @@ function FormatedDate({ item, field }: Props) {
 			{field?.key === 'dueDate' && <div>{getDueDate}</div>}
 			{field?.key === 'grandTotal' && (
 				<div className={styled.invoice_amount}>
-					<div className={styled.show_amount}>{showOverflowingNumber(formatAmount, 16)}</div>
+					<div className={styled.show_amount}>{showOverflowingNumber(formattedAmount, 16)}</div>
 
-					<Tooltip placement="top" content={content}>
+					<Tooltip placement="top" content={content} interactive>
 						<div className={styled.ic_min_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

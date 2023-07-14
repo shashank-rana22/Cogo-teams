@@ -3,6 +3,7 @@
 	align-items: center;
 	margin: 8px 0 6px;
 	font-size: 13px;
+	color: #828282;
 }
 
 .back {
@@ -19,6 +20,7 @@
 .module {
 	margin: 6px 0 10px 4px;
 	font-weight: 600;
+	color: #828282;
 }
 
 .spinner_container {
@@ -41,6 +43,7 @@
 	font-size: 13px;
 	cursor: pointer;
 	background: #fff;
+	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 	transition: 0.3s ease-in-out;
 
@@ -82,13 +85,14 @@
 .tags {
 	display: flex;
 	flex-wrap: wrap;
+	margin-top: 10px;
 }
 
 .tags_name {
 	display: flex;
-	padding: 2px 5px;
+	padding: 1px 6px;
 	margin: 5px  10px 0 0;
-	font-size: 11px;
-	border: 1px solid #fcdc00;
-	border-radius: 16px;
+	font-size: 10px;
+	background: #f7faef;
+	border-radius: 6px;
 }

@@ -5,18 +5,21 @@ import React from 'react';
 import EmptyQuestionListState from '../../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../../commons/Spinner';
 import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
+import GPTAnswers from '../../GPTAnswers';
 
 import Questions from './Questions';
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = '' }) {
+function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = [] }) {
 	const {
 		page,
 		setPage,
 		data,
 		loading = false,
 		paginationData,
-	// eslint-disable-next-line react-hooks/rules-of-hooks
+		response_type,
+		gpt_answer,
+		show_more,
 	} = useListFaqQuestions({ topicId, tagId, searchState });
 
 	if (loading) {
@@ -32,20 +35,41 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 			</div>
 		);
 	}
+	if (response_type === 'falcon_gpt' && tagId.length === 0) {
+		if (gpt_answer) {
+			return (
+				<GPTAnswers
+					answer={gpt_answer}
+					showMore={show_more}
+					search={searchState}
+				/>
+			);
+		}
+		return (
+			<EmptyQuestionListState
+				searchState={searchState}
+			/>
+		);
+	}
 
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
-
 	return (
 		<div>
-			<div style={{ margin: '5px 0', width: '100%', height: '487px' }} className={styles.scrollable}>
+			<div style={{ margin: '6px 0', width: '100%', height: '488px' }} className={styles.scrollable}>
 
 				{(data?.list || []).map((question) => (
 					<div className={styles.border}>
 						<Questions questions={question} topicId={topicId} topicName={tabTitle} />
 					</div>
 				))}
+				{searchState && (
+					<EmptyQuestionListState
+						searchState={searchState}
+						source="list"
+					/>
+				)}
 			</div>
 
 			<div className={styles.pagination}>

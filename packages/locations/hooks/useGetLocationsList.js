@@ -25,6 +25,7 @@ const useGetLocationsList = () => {
 			page_limit,
 			includes : { aliases: null, default_params_required: true },
 			filters  : {
+				status: 'active',
 				...(restFilters || {}),
 			},
 		},

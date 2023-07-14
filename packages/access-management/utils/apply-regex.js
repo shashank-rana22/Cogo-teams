@@ -1,18 +1,33 @@
+import { isEmpty } from '@cogoport/utils';
+
 const applyRegEx = (searchString, list, key, aliases = []) => {
 	const newSearchString = searchString.toLowerCase();
-	const newList = (list || []).filter((item) => {
-		if (item[key].toLowerCase().includes(newSearchString)) {
-			return true;
+
+	const newList = [];
+
+	(list || []).forEach((item) => {
+		const already_present = newList.some((listItem) => item.key === listItem.key);
+
+		if (already_present) {
+			return;
 		}
 
-		let isPresentInAlias = false;
-		aliases.forEach((alias) => {
-			if (item[alias] && item[alias].toLowerCase().includes(newSearchString)) {
-				isPresentInAlias = true;
-			}
-		});
+		const { options = [] } = item;
 
-		return !!isPresentInAlias;
+		const newItem = {
+			...item,
+			options: isEmpty(options)
+				? []
+				: options.filter((optionItem) => optionItem.title.toLowerCase()
+					.includes(newSearchString)),
+		};
+
+		const isAliasPresent = aliases
+			.some((alias) => newItem[alias]?.toLowerCase().includes(newSearchString));
+
+		if ((isAliasPresent || !isEmpty(newItem.options) || newItem[key]?.toLowerCase().includes(newSearchString))) {
+			newList.push(newItem);
+		}
 	});
 
 	return newList;

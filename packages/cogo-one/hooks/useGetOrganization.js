@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetOrganization = ({ organizationId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -7,7 +7,7 @@ const useGetOrganization = ({ organizationId = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const fetchOrganization = async () => {
+	const fetchOrganization = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -18,18 +18,18 @@ const useGetOrganization = ({ organizationId = '' }) => {
 		} catch (error) {
 			// console.log(error);
 		}
-	};
+	}, [organizationId, trigger]);
 
 	useEffect(() => {
 		if (organizationId) {
 			fetchOrganization();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [organizationId]);
+	}, [fetchOrganization, organizationId]);
 
 	return {
 		organizationData : data?.data,
 		orgLoading       : loading,
+		fetchOrganization,
 	};
 };
 export default useGetOrganization;

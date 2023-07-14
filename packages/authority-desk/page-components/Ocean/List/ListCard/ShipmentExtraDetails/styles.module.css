@@ -1,0 +1,58 @@
+.shipment_extra_details {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	border-bottom: 1px solid #f2e3c3;
+}
+
+.documents_and_invoices {
+	width: 30%;
+	padding-left: 24px;
+	font-size: 12px;
+}
+
+.bl_remark_detail {
+	font-size: 10px;
+
+	&:has(.customized_empty_state) {
+		width: 30vw;
+	}
+
+	table {
+		border-spacing: 8px;
+	}
+}
+
+.all_remarks {
+	max-width: none !important;
+}
+
+.documents {
+	width: fit-content;
+	font-size: 12px;
+	color: #f68b21;
+	border-bottom: 1px solid #f68b21;
+}
+
+.text {
+	color: #f68b21;
+}
+
+.validation {
+	display: flex;
+	align-items: center;
+}
+
+.bl_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 45%;
+	padding-left: 24px;
+	font-size: 12px;
+	border-left: 1px solid #f2e3c3;
+}
+
+.customized_empty_state {
+	padding-top: 0;
+}

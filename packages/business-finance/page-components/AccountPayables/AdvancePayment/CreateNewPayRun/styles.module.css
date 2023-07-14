@@ -1,0 +1,139 @@
+.select_card {
+	display: flex;
+	padding: 16px 16px 16px 4px;
+	margin: 12px 0 8px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.card {
+	padding: 2px 16px;
+	margin-left: 20px;
+	background: #cfeaed;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+}
+
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.filter {
+	margin-bottom: 16px;
+}
+
+.link {
+	cursor: pointer;
+}
+
+.back {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+	margin-bottom: -8px;
+}
+
+.button {
+	display: flex;
+	margin-top: -8px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.checkbox_style {
+	margin-right: -24px;
+	margin-left: 60px;
+}
+
+.sub_container {
+	position: relative;
+	box-sizing: border-box;
+	display: flex;
+	padding: 20px;
+	margin-top: 16px;
+	background: #fff;
+	border: 1px solid #333;
+	border-radius: 8px;
+}
+
+.text {
+	display: flex;
+	width: 22%;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #000;
+}
+
+.info_container {
+	box-sizing: border-box;
+	display: flex;
+	padding: 8px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background: #fdebe9;
+	border: 1px solid #ee3425;
+	border-radius: 8px;
+}
+
+.info_text {
+	padding-left: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #ee3425;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	padding-left: 16px;
+}
+
+.ribbons {
+	align-items: center;
+	font-size: 10px;
+
+	.ribbon {
+		--f: 5.7px; /* control the folded part */
+		--r: 8px; /* control the ribbon shape */
+		--t: 8px; /* the top offset */
+
+		position: absolute;
+		inset: var(--t) calc(-1.2 * var(--f)) auto auto;
+		height: 24px;
+		padding: 0 10px var(--f) calc(10px + var(--r));
+		clip-path:
+			polygon(
+				0 0,
+				100% 0,
+				100% calc(100% - var(--f)),
+				calc(100% - var(--f)) 100%,
+				calc(100% - var(--f)) calc(100% - var(--f)),
+				0 calc(100% - var(--f)),
+				var(--r) calc(50% - var(--f) / 2)
+			);
+		color: #333;
+		background: #c4dc91;
+		box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+	}
+}
+
+.loader {
+	width: 160px;
+	height: 20px;
+	border-radius: 2px;
+}
+
+.amount_loader {
+	width: 100px;
+	height: 20px;
+	margin-left: 8px;
+	border-radius: 2px;
+}
+
+.list_container {
+	padding-bottom: 60px;
+}

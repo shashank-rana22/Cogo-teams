@@ -11,27 +11,24 @@ const useListForms = ({ formsParams = {} }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const getFormList = async () => {
-		try {
-			await trigger({
-				params: {
-					Department  : formsParams.department,
-					Designation : formsParams.designation,
-					Page        : pagination || 1,
-					PageLimit   : 10,
-				},
-			});
-		} catch (e) {
-			Toast.error(e.response?.data.error?.toString());
-		}
-	};
-
 	useEffect(() => {
 		if (!isEmpty(formsParams)) {
-			getFormList();
+			const { department, designation } = formsParams;
+
+			try {
+				trigger({
+					params: {
+						Department  : department,
+						Designation : designation,
+						Page        : pagination || 1,
+						PageLimit   : 10,
+					},
+				});
+			} catch (e) {
+				Toast.error(e.response?.data.error?.toString());
+			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formsParams, pagination]);
+	}, [formsParams, pagination, trigger]);
 
 	return {
 		formsData,

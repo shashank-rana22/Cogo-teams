@@ -1,0 +1,23 @@
+.head_text {
+	margin-bottom: 4px;
+}
+
+.supporting_text {
+	margin-bottom: 20px;
+	font-size: 12px;
+	font-style: italic;
+	color: #bf291e;
+}
+
+.table {
+	padding: 0;
+	cursor: pointer;
+	border: none;
+}
+
+.pill {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+}

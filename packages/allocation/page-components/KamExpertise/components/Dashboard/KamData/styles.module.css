@@ -1,0 +1,43 @@
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 16px 0;
+
+	&::after {
+		flex: auto;
+		content: "";
+	}
+}
+
+.empty_kam {
+	padding: 40px 0;
+	margin: 16px 0;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.empty_leaderboard {
+	height: 400px;
+	padding: 80px 0;
+	margin: 20px 0;
+	background: #fff;
+}
+
+.level_zero {
+	display: flex;
+	justify-content: center;
+	margin-top: 24px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.container {
+	padding-top: 20px;
+	border-top: 1px solid #bdbdbd;
+}
+
+.header {
+	font-size: 20px;
+	font-weight: 700;
+}

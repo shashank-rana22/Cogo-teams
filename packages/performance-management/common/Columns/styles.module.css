@@ -3,7 +3,6 @@
 	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
-	font-size: 14px;
 	font-weight: 700;
 	color: #221f20;
 }
@@ -12,6 +11,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+
+	:global {
+		.ui_pill_container {
+			display: flex;
+			justify-content: center;
+			width: fit-content;
+		}
+	}
 }
 
 .improvement_needed {
@@ -24,4 +31,28 @@
 
 .good_performance {
 	color: #67c676;
+}
+
+.dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+	background-color: #e0e0e0;
+	border-radius: 6px;
+}
+
+.green_dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+	background-color: #67c676;
+	border-radius: 6px;
+}
+
+.error_button {
+	:global {
+		.ui_buttonicon_container {
+			background-color: #ee3425;
+		}
+	}
 }

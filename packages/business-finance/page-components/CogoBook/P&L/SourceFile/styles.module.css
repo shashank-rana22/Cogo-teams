@@ -1,0 +1,110 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.filter_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 36px;
+}
+
+.date_range {
+	width: fit-content;
+
+	:global {
+		.react-datepicker__input-container {
+			input {
+				width: 150px;
+				height: 32px;
+				font-size: 12px;
+			}
+
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
+
+			.react-datepicker__close-icon {
+				right: -9px;
+				border: none;
+			}
+		}
+	}
+}
+
+.flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.input_container {
+	width: 300px;
+
+	:global {
+		.ui_input_container {
+			height: 32px;
+
+			input::placeholder {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+.select_container {
+	:global {
+		.ui_select_display_container {
+			height: 32px !important;
+
+			.ui_select_input_placeholder {
+				font-size: 12px;
+			}
+
+			.ui_select_input_control {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+.card_container {
+	padding: 0 36px 36px;
+	font-size: 12px;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 26px 36px;
+	margin-bottom: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.name_data {
+	display: flex;
+	gap: 4px;
+	width: 250px;
+}
+
+.date_data {
+	color: #828282;
+}
+
+.tag {
+	padding: 4px 8px;
+	background: #c4dc91;
+	border-radius: 6px;
+}
+
+.basis {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}

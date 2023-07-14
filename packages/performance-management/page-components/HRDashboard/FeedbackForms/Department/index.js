@@ -16,7 +16,7 @@ function Department({ department, setFormsParams, designation }) {
 					role="button"
 					tabIndex={0}
 				>
-					<p className={styles.department_label}>{startCase(department?.department)}</p>
+					<p className={styles.department_label}>{startCase(department.department || '---')}</p>
 					{!completionStatus && (
 						<Pill
 							color="#fef199"
@@ -32,16 +32,17 @@ function Department({ department, setFormsParams, designation }) {
 				{(department?.designations || []).map((role) => (
 					<div
 						className={`${styles.role} 
-                                        ${role?.designation === designation ? styles.selected_designation : ''}`}
+                                        ${role.designation === designation ? styles.selected_designation : ''}`}
 						role="button"
 						tabIndex={0}
 						onClick={() => setFormsParams({
 							department  : department?.department,
 							designation : role?.designation,
 						})}
+						key={role}
 					>
 						<p className={styles.role_label}>
-							{startCase(role?.designation)}
+							{startCase(role.designation || '---')}
 						</p>
 
 						{role.status === 'inactive' && (

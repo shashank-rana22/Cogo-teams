@@ -9,6 +9,7 @@ interface ItemTypes {
 	dueDate?: Date;
 	invoiceDate?: Date;
 	createdDate?: Date;
+	updatedAt?:Date;
 }
 
 interface PropsType {
@@ -17,12 +18,12 @@ interface PropsType {
 }
 
 function FormatedDate({ item, field }: PropsType) {
-	const { billDate, dueDate, invoiceDate, createdDate } = item || {};
-	const getBillDate = formatDate(billDate!, 'dd MMM, yyyy', {}, true);
-	const getDueDate = formatDate(dueDate!, 'dd MMM, yyyy', {}, true);
-	const getInvoiceDate = formatDate(invoiceDate!, 'dd MMM, yyyy', {}, true);
+	const { billDate, dueDate, invoiceDate, createdDate, updatedAt } = item || {};
+	const getBillDate = formatDate(billDate, 'dd MMM, yyyy', {}, true);
+	const getDueDate = formatDate(dueDate, 'dd MMM, yyyy', {}, true);
+	const getInvoiceDate = formatDate(invoiceDate, 'dd MMM, yyyy', {}, true);
 	const getLastModifiedDate = formatDate(
-		createdDate!,
+		createdDate || updatedAt,
 		'dd MMM, yyyy hh:mm:ss',
 		{},
 		true,
@@ -37,7 +38,7 @@ function FormatedDate({ item, field }: PropsType) {
 					{getInvoiceDate}
 				</div>
 			)}
-			{field.key === 'createdDate' && (
+			{(field.key === 'createdDate' || field.key === 'updatedAt') && (
 				<div className={styles.size}>
 					{getLastModifiedDate}
 				</div>

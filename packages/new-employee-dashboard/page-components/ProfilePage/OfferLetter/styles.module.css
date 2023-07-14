@@ -1,0 +1,22 @@
+.container {
+	padding-top: 10px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.view_text {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.status {
+	width: fit-content;
+	padding: 0 6px;
+	margin-right: 4px;
+	color: black;
+	background-color: #fee135;
+	border-radius: 6px;
+}

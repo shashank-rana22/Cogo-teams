@@ -3,29 +3,45 @@ import { useState } from 'react';
 
 import Templates from '../../../../../common/Templates';
 import useSendCommunicationTemplate from '../../../../../hooks/useSendCommunicationTemplate';
+import useSendUserWhatsappTemplate from '../../../../../hooks/useSendUserWhatsappTemplate';
 
 import ComposeEmail from './ComposeEmail';
 import styles from './styles.module.css';
+
+const COMPONENT_MAPPING = {
+	email    : ComposeEmail,
+	whatsapp : Templates,
+};
+
+const COUNTRY_CODE_INDEX = 1;
 
 function CommunicationModal({
 	setModalType = () => {},
 	userData = {},
 	modalType = '',
 	activeCardData = {},
+	viewType = '',
 }) {
-	const COMPONENT_MAPPING = {
-		email    : ComposeEmail,
-		whatsapp : Templates,
-	};
+	const [openCreateReply, setOpenCreateReply] = useState(false);
+
 	const { userId, name, leadUserId } = activeCardData;
 	const formattedData = {
 		user_name    : name,
 		user_id      : userId,
 		lead_user_id : leadUserId,
 	};
+	const {
+		whatsapp_country_code = '', whatsapp_number = '',
+	} = userData || {};
+
 	const closeModal = () => {
 		setModalType(null);
 	};
+
+	const {
+		sendUserWhatsappTemplate,
+		loading: whatsappLoading,
+	} =	 useSendUserWhatsappTemplate({ callbackfunc: closeModal, viewType });
 
 	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
 		{
@@ -40,26 +56,30 @@ function CommunicationModal({
 		type = '',
 		template_name = '',
 		variables = {},
+		...restArgs
 	}) => {
 		sendCommunicationTemplate({
 			template_name,
 			otherChannelRecipient,
 			variables,
 			type,
+			...restArgs,
 		});
 	};
 
-	const [openCreateReply, setOpenCreateReply] = useState(false);
 	const ActiveModalComp = COMPONENT_MAPPING[modalType] || null;
 
 	const whatsappTemplatesData = {
-		sendCommunicationTemplate: (args) => sendQuickCommuncation({
-			...args,
-			otherChannelRecipient : userData?.whatsapp_number_eformat,
-			type                  : 'whatsapp',
-		}),
+		sendCommunicationTemplate: (args) => sendUserWhatsappTemplate(
+			{
+				...args,
+				country_code: whatsapp_country_code?.slice(COUNTRY_CODE_INDEX) || '91',
+				whatsapp_number,
+			},
+		),
 		communicationLoading: loading,
 	};
+
 	return (
 		<Modal
 			show
@@ -77,6 +97,7 @@ function CommunicationModal({
 					</div>
 				)}
 			/>
+
 			{ActiveModalComp && (
 				<ActiveModalComp
 					closeModal={closeModal}
@@ -85,7 +106,7 @@ function CommunicationModal({
 					userData={userData}
 					sendQuickCommuncation={sendQuickCommuncation}
 					data={whatsappTemplatesData}
-					loading={loading}
+					loading={loading || whatsappLoading}
 				/>
 			)}
 		</Modal>

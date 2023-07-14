@@ -20,7 +20,7 @@ const Config = ({ data }) => {
 	const field = commonControlsFunc({ service: data?.service });
 
 	if (data?.service === 'fcl_freight') {
-		field.push(...fclControl());
+		field.push(...fclControl({ data }));
 
 		if (data?.data?.include_destination_local) {
 			field.push(chargeContolsFunc({
