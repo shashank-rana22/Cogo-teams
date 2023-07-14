@@ -20,6 +20,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 		handOverDate,
 		show_preview_only,
 		serviceProvidersData,
+		checkboxValue,
 	) => {
 		try {
 			await trigger({
@@ -36,6 +37,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 					priority            : item?.priority,
 					service_providers   : serviceProvidersData,
 					service_provider_id : data?.service_provider_id,
+					recipient_emails    : checkboxValue,
 				},
 			});
 

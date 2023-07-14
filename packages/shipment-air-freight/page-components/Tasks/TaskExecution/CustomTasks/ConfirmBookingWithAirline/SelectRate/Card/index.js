@@ -44,6 +44,7 @@ function Card({
 			handOverDate,
 			show_preview_only,
 			serviceProvidersData,
+			checkboxValue,
 		);
 	};
 

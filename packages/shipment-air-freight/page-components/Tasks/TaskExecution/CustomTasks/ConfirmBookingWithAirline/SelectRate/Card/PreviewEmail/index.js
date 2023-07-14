@@ -12,11 +12,12 @@ function PreviewEmail({
 	setCheckboxValue = () => {},
 	checkboxValue = [],
 }) {
-	console.log(data, 'data');
-	const options = [
-		{ name: 'R1', value: 'R1', label: 'checkbox1' }, { name: 'R2', value: 'R2', label: 'checkbox2' },
-		{ name: 'R3', value: 'R3', label: 'checkbox3' }, { name: 'R4', value: 'R4', label: 'checkbox4' },
-	];
+	const pocOptions = (data?.repository_data?.pocs_data || []).map((item) => (
+		{
+			label : item?.name,
+			value : item?.email,
+		}
+	));
 
 	return (
 
@@ -29,7 +30,7 @@ function PreviewEmail({
 			<Modal.Header title={emailData?.subject} />
 			<div className={styles.modal_body}>
 				<Modal.Body style={{ maxHeight: '570px' }}>
-					<CheckboxGroup value={checkboxValue} onChange={setCheckboxValue} options={options} />
+					<CheckboxGroup value={checkboxValue} onChange={setCheckboxValue} options={pocOptions} />
 
 					<div>
 						<div dangerouslySetInnerHTML={{ __html: emailData?.template }} />
