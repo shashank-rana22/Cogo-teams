@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
 const PERCENT_FACTOR = 100;
 
+const getFileName = (urlPath) => urlPath.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('');
+
 function CustomFileUploader(props, ref) {
 	const {
 		onChange,
@@ -32,7 +34,7 @@ function CustomFileUploader(props, ref) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			const tempFileName = defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('');
+			const tempFileName = getFileName(defaultValues);
 
 			setFileName([{ name: tempFileName }]);
 			setUrlStore([{
@@ -42,10 +44,10 @@ function CustomFileUploader(props, ref) {
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
 			const names = defaultValues.map((url) => ({
-				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				name: getFileName(url),
 			}));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				fileName : getFileName(url),
 				finalUrl : url,
 			}));
 
