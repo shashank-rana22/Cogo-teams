@@ -9,13 +9,12 @@ import styles from './styles.module.css';
 const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
-	data,
+	data = {},
 	updateTicketActivity = () => {},
 	setModalData = () => {},
 }) {
 	const {
 		ID: id = '',
-		Status: status = '',
 		Description: description = '',
 		CreatedAt: createdAt = '',
 		TicketActivity: ticketActivity = {},
@@ -33,11 +32,7 @@ function TicketStructureBody({
 	};
 
 	return (
-		<div
-			role="presentation"
-			className={styles.ticket_container}
-			onClick={() => setModalData({ ticketId: id })}
-		>
+		<div className={styles.ticket_container}>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
 					<div className={styles.ticket_id}>
@@ -45,47 +40,52 @@ function TicketStructureBody({
 						{id}
 					</div>
 					<TicketActions
+						id={id}
 						isModal={false}
-						status={status}
+						ticketStatus={ticketStatus}
 						handleTicket={handleTicket}
 						isClosureAuthorizer={isClosureAuthorizer}
 					/>
 				</div>
-				<div className={styles.category_ticket_activity}>
-					{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
-				</div>
 			</div>
-			<div className={styles.subcontainer_two}>
-				<div className={styles.subcontainer_header}>
-					<div
-						className={styles.ticket_status}
-						style={{
-							color: textColor || '#ABCD62',
-						}}
-					>
-						{label}
-					</div>
-					<div className={styles.ticket_date_time}>
-						{formatDate({
-							date       : createdAt,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
-							separator  : ', ',
-							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-							formatType : 'dateTime',
-						})}
+			<div className={styles.ticket_view} role="presentation" onClick={() => setModalData({ ticketId: id })}>
+				<div className={styles.ticket_type}>
+					<div className={styles.category_ticket_activity}>
+						{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 					</div>
 				</div>
-				<div className={styles.ticket_reason_box}>
-					<div className={styles.description}>
-						{(ticketActivity?.Description
-							|| description).substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
-					</div>
-					{activityCount ? (
-						<div className={styles.activity_count}>
-							{activityCount}
+				<div className={styles.subcontainer_two}>
+					<div className={styles.subcontainer_header}>
+						<div
+							className={styles.ticket_status}
+							style={{
+								color: textColor || '#ABCD62',
+							}}
+						>
+							{label}
 						</div>
-					) : null}
+						<div className={styles.ticket_date_time}>
+							{formatDate({
+								date       : createdAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
+								separator  : ', ',
+								timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+								formatType : 'dateTime',
+							})}
+						</div>
+					</div>
+					<div className={styles.ticket_reason_box}>
+						<div className={styles.description}>
+							{(ticketActivity?.Description
+							|| description).substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
+						</div>
+						{activityCount ? (
+							<div className={styles.activity_count}>
+								{activityCount}
+							</div>
+						) : null}
 
+					</div>
 				</div>
 			</div>
 		</div>

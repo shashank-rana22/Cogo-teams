@@ -157,6 +157,7 @@ export default {
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -463,9 +464,9 @@ export default {
 				registration_types    : true,
 			},
 			cogo_one: {
-				has_voice_call_access     : false,
-				default_country_code      : 'IN',
-				template_default_language : 'vietnamese',
+				has_voice_call_access       : false,
+				template_default_language   : 'vietnamese',
+				supply_sender_mobile_number : '918069195980',
 			},
 		},
 	},

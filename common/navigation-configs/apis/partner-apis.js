@@ -719,6 +719,27 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1116,6 +1137,19 @@ const partner = {
 			feature      : 'demand_crm',
 			service_name : 'contract',
 		},
+		{
+			api          : 'onboard_credit_application',
+			access_type  : 'private',
+			feature      : 'credit',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_organization_payment_modes',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'organization',
+		},
+
 		{
 			api          : 'get_domestic_contract',
 			access_type  : 'private',
@@ -3591,6 +3625,19 @@ const partner = {
 			service_name : 'cogo_assured_rate',
 			feature      : 'rate_feedbacks',
 		},
+		{
+			api          : 'update_checkout_risk_category',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api         : 'get_saas_hs_code_list_commodities',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_saas_hs_code_list',
+			access_type : 'private',
+		},
 	],
 	okam_dashboard: [
 		{
@@ -5535,6 +5582,21 @@ const partner = {
 		{
 			feature      : 'sales',
 			api          : 'create_organization_setting',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -8534,6 +8596,12 @@ const partner = {
 			module      : 'invoices',
 			feature     : 'invoices',
 		},
+		{
+			api         : 'get_payments_report_ar_ledger',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 	],
 	compliance: [
 		{
@@ -9369,6 +9437,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'get_segment_verification_stats',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
@@ -9650,6 +9723,16 @@ const partner = {
 			api          : 'get_campaign_nodes_result',
 			access_type  : 'private',
 			service_name : 'campaign',
+		},
+		{
+			api          : 'get_previous_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 	],
 	segmentation: [
@@ -9991,6 +10074,11 @@ const partner = {
 		},
 		{
 			api          : 'get_cogopoint_user_dashboard',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_organization_cogopoint_dashboard',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -12000,7 +12088,31 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
-
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_org_wise_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_org_bulk_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	contracts: [
 		{
@@ -12423,6 +12535,26 @@ const partner = {
 		},
 		{
 			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_services',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
