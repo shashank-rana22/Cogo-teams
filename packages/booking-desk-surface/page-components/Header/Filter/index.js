@@ -35,7 +35,7 @@ function Filter({
 		const data = getValues();
 		const {
 			tags = '', importer_exporter_id = '', fault_alarms_raised = '', trade_type = '',
-			triggered_pending_invoices = '', state = '',
+			triggered_pending_invoices = '', state = '', source = '',
 		} = data || {};
 
 		const empty_val = Object.values(data).some((item) => !isEmpty(item));
@@ -45,6 +45,7 @@ function Filter({
 			fault_alarms_raised        : fault_alarms_raised || undefined,
 			importer_exporter_id       : importer_exporter_id || undefined,
 			triggered_pending_invoices : triggered_pending_invoices || undefined,
+			source,
 			[serviceName]              : {
 				trade_type : trade_type || undefined,
 				state      : state || undefined,
