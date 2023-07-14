@@ -1,5 +1,7 @@
-import { Button } from '@cogoport/components';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+
+import styles from './styles.module.css';
 
 const getColumns = ({ handleEditKRA }) => [
 	{
@@ -27,11 +29,23 @@ const getColumns = ({ handleEditKRA }) => [
 		),
 	},
 	{
-		Header   : 'Edit KRA',
+		Header   : 'ACTIONS',
 		accessor : (item) => (
-			<Button size="xs" onClick={() => handleEditKRA(item?.id)}>
-				Edit
-			</Button>
+			<div className={styles.button_wrapper}>
+				<div className={styles.edit_wrapper}>
+					<IcMEdit
+						height={16}
+						width={16}
+						onClick={() => handleEditKRA(item?.id)}
+					/>
+				</div>
+
+				<IcMDelete
+					height={16}
+					width={16}
+				/>
+			</div>
+
 		),
 	},
 ];

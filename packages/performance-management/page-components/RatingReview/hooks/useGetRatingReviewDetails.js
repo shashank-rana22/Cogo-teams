@@ -42,7 +42,7 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab 
 		}
 	}, [fetchRatingReviewDetails, selectCycle, selectValue, activeTab]);
 
-	return { data, loading };
+	return { data, loading, fetchRatingReviewDetails };
 };
 
 export default useGetRatingReviewDetails;

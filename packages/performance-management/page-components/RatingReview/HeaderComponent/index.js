@@ -23,14 +23,16 @@ function HeaderComponent({ props = {} }) {
 		setSelectCycle,
 	} = useGetRatingCycles({ });
 
-	const { data } = useGetRatingReviewDetails({ selectValue, level, selectCycle, activeTab });
+	const { data, fetchRatingReviewDetails } = useGetRatingReviewDetails(
+		{ selectValue, level, selectCycle, activeTab },
+	);
 
 	const {
 		loading: Publish,
 		publishRatings,
 		toggleVal,
 		setToggleVal,
-	} = usePublishRatings({ selectedEmployees, level, data, selectCycle });
+	} = usePublishRatings({ selectedEmployees, level, data, selectCycle, activeTab, fetchRatingReviewDetails });
 	return (
 		<div>
 			<div className={styles.select_row}>

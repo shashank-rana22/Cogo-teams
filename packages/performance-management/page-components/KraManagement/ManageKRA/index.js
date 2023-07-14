@@ -29,6 +29,7 @@ function ManageKRA() {
 				Below are the KRAs. Click on the Edit Button of a particular KRA to Edit
 				<Button onClick={handleCreateKRA}>Add KRA</Button>
 			</div>
+
 			<StyledTable
 				columns={columns}
 				data={data?.list || []}

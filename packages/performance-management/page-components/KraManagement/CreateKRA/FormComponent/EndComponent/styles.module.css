@@ -33,6 +33,10 @@
 		.ui_text_area_control {
 			width: 390px;
 		}
+
+		.ui_select_container {
+			width: 300px;
+		}
 	}
 }
 

@@ -113,10 +113,11 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 		group       : 'end_controls',
 		subControls : [
 			{
-				name    : 'operation_type',
-				type    : 'select',
-				label   : 'Operation Type',
-				options : OPERATION_TYPE_OPTIONS,
+				name        : 'operation_type',
+				placeholder : 'Select operation type',
+				type        : 'select',
+				label       : 'Operation Type',
+				options     : OPERATION_TYPE_OPTIONS,
 			},
 
 			{

@@ -1,6 +1,8 @@
 import { InputNumber, Select } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 const OPTIONS = [
 	{ label: 'Yes', value: 'yes' },
 	{ label: 'No', value: 'no' },
@@ -47,7 +49,7 @@ function getIndividualColumn({
 		{
 			Header   : 'Is value entered by you in %',
 			accessor : (item) => (
-				<div>
+				<div className={styles.select_wrapper}>
 					<Select
 						placeholder="is percent"
 						size="sm"

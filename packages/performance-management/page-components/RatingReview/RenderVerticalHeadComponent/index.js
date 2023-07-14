@@ -19,7 +19,7 @@ function RenderTitle({ title, averageValue, level, activeTab }) {
 				<div className={styles.average_value}>
 					Average Rating :
 					{' '}
-					{averageValue || '-'}
+					{averageValue || 'N/A'}
 				</div>
 			)}
 		</div>
