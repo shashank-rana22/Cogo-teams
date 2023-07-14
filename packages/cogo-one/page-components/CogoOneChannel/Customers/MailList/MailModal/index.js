@@ -127,6 +127,7 @@ function MailModal({
 						<Select
 							value={emailState?.from_mail || activeMailAddress}
 							onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
+							disabled={buttonType !== 'send_mail'}
 							options={userActiveMails}
 							size="sm"
 						/>

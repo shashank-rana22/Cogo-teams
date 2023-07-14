@@ -10,8 +10,6 @@ const getReplyMails = ({
 	filteredCcData = [],
 	filteredBccData = [],
 }) => {
-	let toUserEmail = [];
-
 	if (
 		activeMailAddress.toLowerCase() !== senderAddress.toLowerCase()
 		|| filteredRecipientData.length !== CHECK_ONE_OR_MORE_ELEMENTS
@@ -20,12 +18,10 @@ const getReplyMails = ({
 			&& isEmpty(filteredBccData)
 		) || isEmpty(filteredRecipientData)
 	) {
-		toUserEmail = [senderAddress];
-	} else {
-		toUserEmail = filteredRecipientData;
+		return { toUserEmail: [senderAddress] };
 	}
 
-	return { toUserEmail };
+	return { toUserEmail: filteredRecipientData };
 };
 
 const getReplyAllMails = ({
