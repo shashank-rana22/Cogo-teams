@@ -45,7 +45,7 @@ function ModalContent({
 					<div className={styles.amount_inner_wrapper}>
 						<span className={styles.amount_value}>{data?.promocodes_count}</span>
 
-						<span>Codes worth</span>
+						<span className={styles.mid_label}>Codes worth</span>
 
 						<span className={styles.amount_value}>
 							{formatAmount({
@@ -68,7 +68,7 @@ function ModalContent({
 					<div className={styles.amount_inner_wrapper}>
 						<span className={styles.amount_value}>{data?.promocodes_used_count}</span>
 
-						<span>Codes worth</span>
+						<span className={styles.mid_label}>Codes worth</span>
 
 						<span className={styles.amount_value}>
 							{formatAmount({
@@ -91,19 +91,19 @@ function ModalContent({
 					<div className={styles.heading}>Generate Promocode</div>
 
 					<IcMCross
+						className={styles.cross}
 						width={20}
 						height={20}
-						className={styles.cross}
 						onClick={onClose}
 					/>
 				</div>
 
 				<Form
-					control={control}
 					controls={controls}
-					errors={errors}
-					watch={watch}
+					control={control}
 					handleSubmit={handleSubmit}
+					watch={watch}
+					errors={errors}
 					setValue={setValue}
 				/>
 

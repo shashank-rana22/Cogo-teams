@@ -1,7 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { countrieCodeHash } from '@cogoport/globalization/utils/getCountriesHash';
 import React, { useState } from 'react';
 
 import useCreateKamPromotion from './hooks/useCreateKamPromotions';
@@ -10,7 +9,7 @@ import styles from './styles.module.css';
 import SuccessModal from './SuccessModal';
 import WalletModal from './WalletModal';
 
-function Wallet({ data, service_key }) {
+function Wallet({ data = {}, service_key = 'search_type' }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showSuccesModal, setShowSuccessModal] = useState(false);
 
@@ -91,7 +90,7 @@ function Wallet({ data, service_key }) {
 					setShow={setShowSuccessModal}
 					promocode={promotionData?.promocode}
 					validityEnd={promotionData?.validity_end}
-					allotedAmountLeft={data.alloted_amount_left}
+					allotedAmountLeft={statsData.alloted_amount_left}
 				/>
 			) : null}
 		</>

@@ -63,7 +63,6 @@ function CreateContract({
 						<div className={styles.heading}>Request Contract</div>
 						<div className={styles.sub_heading}>Note: Rate will be locked for basic freights only.</div>
 						<PortSelect portDetail={details} contractData={contractData} />
-
 					</div>
 				)}
 				>
@@ -99,14 +98,14 @@ function CreateContract({
 							onClick={() => setShowContract(false)}
 							themeType="secondary"
 						>
-							Close
+							Cancel
 						</Button>
 						<Button
 							disabled={loading}
 							className={`${styles.nextStepCreateContract} primary md`}
 							onClick={handleSubmit(onSubmit)}
 						>
-							Create
+							Next
 						</Button>
 					</div>
 				</Modal.Footer>

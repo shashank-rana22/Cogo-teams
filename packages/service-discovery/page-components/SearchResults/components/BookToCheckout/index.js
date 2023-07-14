@@ -4,6 +4,7 @@ import React from 'react';
 
 import useCreateCheckout from '../../hooks/useCreateCheckout';
 
+import SelectedServices from './SelectedServices';
 import styles from './styles.module.css';
 
 function BookCheckout({
@@ -12,8 +13,6 @@ function BookCheckout({
 	setSelectedCard = () => {},
 	setScreen = () => {},
 }) {
-	console.log('detail', detail);
-
 	const { handleBook = () => {}, loading } = useCreateCheckout({
 		rateCardData,
 		spot_search_id: detail?.spot_search_id,
@@ -25,8 +24,6 @@ function BookCheckout({
 				display        : 'flex',
 				justifyContent : 'space-between',
 				alignItems     : 'center',
-				marginTop      : 52,
-				marginLeft     : 60,
 			}}
 			>
 				<div className={styles.congrats_text}>
@@ -48,12 +45,9 @@ function BookCheckout({
 					>
 
 						Share Quick Quotation
-
 					</Button>
 					<Button
-						onClick={() => {
-							handleBook();
-						}}
+						onClick={handleBook}
 						size="md"
 						themeType="accent"
 						className={styles.primary_button}
@@ -64,6 +58,15 @@ function BookCheckout({
 					</Button>
 				</div>
 			</div>
+
+			{/* <div className={styles.selected_services_container}>
+				<div className={styles.heading}>Following services has been added successfully to your freight</div>
+
+				<SelectedServices
+					rateDetails={rateCardData}
+					details={detail}
+				/>
+			</div> */}
 		</div>
 	);
 }

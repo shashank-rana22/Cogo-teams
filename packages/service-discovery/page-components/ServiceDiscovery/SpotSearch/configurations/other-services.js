@@ -13,13 +13,13 @@ const other_services = [
 		label        : 'Customs Clearance',
 		value        : 'customs',
 		icon         : IcMAppCustoms,
-		is_available : true,
+		is_available : false,
 	},
 	{
 		label        : 'Locals Handling',
 		value        : 'locals',
 		icon         : IcMAppLocalsHandling,
-		is_available : true,
+		is_available : false,
 	},
 	{
 		label        : 'Licensing & Docs',

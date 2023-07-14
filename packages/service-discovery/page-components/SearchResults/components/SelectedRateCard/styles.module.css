@@ -23,12 +23,24 @@
 .services {
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
+	padding: 0 20px;
+}
+
+.service_bundling {
+	width: 25%;
+
+	@media (max-width: 1200px) {
+		width: 32%;
+	}
 }
 
 .additional_services {
-	width: 80%;
-	margin-right: 20px;
-	margin-left: 33px;
+	width: 70%;
+
+	@media (max-width: 1200px) {
+		width: 60%;
+	}
 }
 
 .subsidiary_services {
@@ -42,12 +54,6 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: #000;
-}
-
-.service_bundling {
-	width: 30%;
-	margin-right: 33px;
-	margin-left: 20px;
 }
 
 .proceed_container {

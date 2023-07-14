@@ -26,7 +26,7 @@ function QuotationDetails({
 				disabled={isSelectedCard}
 				onClick={() => setShowContract(!showContract)}
 			>
-				{isSelectedCard ? ('Currrently Selected') : 'Lock Frieght Price'}
+				{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
 			</Button>
 			<Button
 				onClick={() => {

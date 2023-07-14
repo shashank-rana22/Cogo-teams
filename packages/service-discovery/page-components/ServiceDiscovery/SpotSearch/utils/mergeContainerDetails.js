@@ -1,3 +1,5 @@
+const DEFAULT_CONTAINERS_COUNT_VALUE = 0;
+
 const mergeContainerDetails = (containers) => {
 	const MERGRED_VALUES = {};
 
@@ -10,8 +12,8 @@ const mergeContainerDetails = (containers) => {
 			...container,
 
 			containers_count:
-				(MERGRED_VALUES[key]?.containers_count || 0)
-				+ (container.containers_count || 0),
+				(MERGRED_VALUES[key]?.containers_count || DEFAULT_CONTAINERS_COUNT_VALUE)
+				+ (container.containers_count || DEFAULT_CONTAINERS_COUNT_VALUE),
 
 			cargo_weight_per_container: isCargoWeight
 				? Math.max(

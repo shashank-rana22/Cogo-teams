@@ -1,44 +1,19 @@
-.PortArrow {
-	width: 40px;
-	height: 30px;
-	margin: 0 30px;
+.container {
+	display: flex;
+	align-items: center;
 }
 
-.PortName {
-	width: 200px;
+.load_details {
+	margin-left: 26px;
+}
+
+.load_item {
+	min-width: max-content;
+	padding: 6px 12px;
+	margin-left: 8px;
 	font-size: 12px;
-	font-weight: 700;
-}
-
-.TopSection {
-	display: flex;
-}
-
-.Tag {
-	padding: 4px 6px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	font-size: 12px;
-	background: #dfe1ef;
-	border-radius: 4px;
-}
-
-.Card {
-	width: 450px;
-	padding: 10px 10px 10px 0;
-	margin-right: 20px;
-	border-radius: 4px;
-}
-
-.CardRow {
-	display: flex;
-	flex-direction: row;
-	width: 510px;
-	margin: 20px 30px 10px;
-	overflow-x: scroll;
-}
-
-.BottomSection {
-	display: flex;
-	flex-wrap: wrap;
+	font-weight: 600;
+	background: #fcdc00;
+	border: 1px solid #fcdc00;
+	border-radius: 24px;
 }

@@ -20,7 +20,7 @@ function AdditionalServicesForm({
 	service = '',
 	refetchSearch = () => {},
 }) {
-	const { addService = () => {} } = useSpotSearchService({
+	const { addService = () => {}, loading = false } = useSpotSearchService({
 		refetchSearch, rateCardData,
 	});
 
@@ -74,9 +74,7 @@ function AdditionalServicesForm({
 				We need the following details to give you an accurate estimation and discount
 				<IcMCross
 					onClick={() => {
-						setHeaderProps({
-							key: 'default',
-						});
+						setHeaderProps({});
 					}}
 					style={{ cursor: 'pointer' }}
 				/>
@@ -125,6 +123,8 @@ function AdditionalServicesForm({
 					size="md"
 					themeType="accent"
 					className={styles.primaryButtton}
+					disabled={loading}
+					loading={loading}
 				>
 					Update Details
 				</Button>

@@ -8,3 +8,7 @@
 .image {
 	max-height: 40px;
 }
+
+.share_icon {
+	cursor: pointer;
+}

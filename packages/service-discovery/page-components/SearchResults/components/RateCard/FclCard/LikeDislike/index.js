@@ -7,7 +7,7 @@ import useLikeFeedback from '../../../../hooks/useLikeFeedback';
 import DislikeModal from './DislikeModal';
 import styles from './styles.module.css';
 
-function LikeDislike({ rateCardData, detail }) {
+function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
 	const { is_liked = false, likes_count = 0, is_disliked = false } = rateCardData;

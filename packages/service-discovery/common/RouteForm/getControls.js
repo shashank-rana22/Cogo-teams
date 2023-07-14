@@ -1,5 +1,3 @@
-// import { IcMLocation } from '@cogoport/icons-react';
-
 import { IcMLocation } from '@cogoport/icons-react';
 
 import airRouteControls from '../../configs/RouteFormControls/air-route-controls';
@@ -13,8 +11,8 @@ import trailerRouteControls from '../../configs/RouteFormControls/trailer-route-
 import MODES from '../../page-components/ServiceDiscovery/SpotSearch/configurations/modes.json';
 import CustomSelectOption from '../CustomSelectOption';
 
-const LOCATION_PREFIX = <IcMLocation fontSize={16} />;
-function LOCATION_LABEL(option) {
+function LocationPrefix() { return (<IcMLocation fontSize={16} />); }
+function LocationLabel(option) {
 	return (
 		<>
 			{ CustomSelectOption({ data: option, key: 'locations' }) }
@@ -53,8 +51,8 @@ const getControls = (service) => {
 		const newRouteItem = { ...routeItem };
 
 		if (routeItem.asyncKey && ['list_locations', 'list_locations_v2'].includes(routeItem.asyncKey)) {
-			newRouteItem.prefix = LOCATION_PREFIX;
-			newRouteItem.renderLabel = LOCATION_LABEL;
+			newRouteItem.prefix = LocationPrefix;
+			newRouteItem.renderLabel = LocationLabel;
 			newRouteItem.params = {
 				...LOCATION_PARAMS,
 				...newRouteItem.params,

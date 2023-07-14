@@ -67,17 +67,25 @@ function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = (
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
 
 				{LIKE_DISLIKE_ALLOWED.includes(detail?.search_type) ? (
-					<LikeDislike rateCardData={rateCardData} detail={detail} />
+					<LikeDislike
+						rateCardData={rateCardData}
+						detail={detail}
+					/>
 				) : null}
 
-				<IcMShare width="20px" height="16px" onClick={() => setShowShareModal(!showShareModal)} />
+				<IcMShare
+					className={styles.share_icon}
+					width="20px"
+					height="16px"
+					onClick={() => setShowShareModal(!showShareModal)}
+				/>
 			</div>
 
 			{showShareModal ? (
 				<ShareToUsers
 					rate={rateCardData}
 					show={showShareModal}
-					onClose={setShowShareModal}
+					onClose={() => setShowShareModal(false)}
 					source="spot_search"
 					org_id={detail?.importer_exporter_id}
 				/>
