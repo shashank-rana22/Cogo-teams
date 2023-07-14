@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -9,19 +10,24 @@ const DEFAULT_NO_OF_MAILS = 0;
 const DEFAULT_PAGE_NUMBER = 1;
 const MIN_HEIGHT_FOR_API_CALL = 50;
 
-const getParams = ({ activeMailAddress = '', activeSelect = '', page = '' }) => ({
+const getParams = ({ activeMailAddress = '', activeSelect = '', page = '', query = '' }) => ({
 	page,
 	email_address : activeMailAddress,
 	page_limit    : PAGE_LIMIT,
 	foldername    : MAIL_FOLDER_OPTIONS[activeSelect],
+	search        : query || undefined,
+	filters       : { importance: 'high' },
 });
 
 function useListMail({
 	activeSelect = '',
 	activeMailAddress = '',
+	searchQuery = '',
 }) {
 	const [listData, setListData] = useState({ value: [], isLastPage: false });
 	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ loading }, trigger] = useLensRequest({
 		url    : '/list_mails',
@@ -31,7 +37,7 @@ function useListMail({
 	const getEmails = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
-				params: getParams({ activeMailAddress, activeSelect, page }),
+				params: getParams({ activeMailAddress, activeSelect, page, query }),
 			});
 
 			setPagination(page);
@@ -48,7 +54,7 @@ function useListMail({
 		} catch (err) {
 			console.error(err);
 		}
-	}, [activeSelect, trigger, activeMailAddress]);
+	}, [trigger, activeMailAddress, activeSelect, query]);
 
 	const handleScroll = (e) => {
 		const { clientHeight, scrollTop, scrollHeight } = e.target;
@@ -64,6 +70,10 @@ function useListMail({
 		setListData({ value: [], isLastPage: false });
 		getEmails({ page: DEFAULT_PAGE_NUMBER });
 	}, [getEmails]);
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [debounceQuery, searchQuery]);
 
 	useEffect(() => {
 		handleRefresh();

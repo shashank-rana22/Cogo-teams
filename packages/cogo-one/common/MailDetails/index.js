@@ -1,8 +1,9 @@
+import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMRefresh } from '@cogoport/icons-react';
+import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
 import useListMail from '../../hooks/useListMail';
@@ -16,13 +17,14 @@ function MailDetails({
 	activeMail = {},
 	activeMailAddress = '',
 }) {
+	const [searchQuery, setSearchQuety] = useState('');
 	const {
 		listData = {},
 		loading,
 		handleScroll = () => {},
 		handleRefresh = () => {},
 		pagination,
-	} = useListMail({ activeSelect, activeMailAddress });
+	} = useListMail({ activeSelect, activeMailAddress, searchQuery });
 
 	const { value: list = [] } = listData || {};
 
@@ -40,25 +42,36 @@ function MailDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.title}>
-					{startCase(activeSelect)}
-				</div>
+			<div className={styles.header_container}>
+				<div className={styles.header}>
+					<div className={styles.title}>
+						{startCase(activeSelect)}
+					</div>
 
-				{loading
-					? (
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.colored_loading}
-							width={20}
-							height={20}
-							alt="uploading"
-						/>
-					) : (
-						<IcMRefresh
-							className={styles.filter_icon}
-							onClick={handleRefresh}
-						/>
-					)}
+					{loading
+						? (
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.colored_loading}
+								width={20}
+								height={20}
+								alt="uploading"
+							/>
+						) : (
+							<IcMRefresh
+								className={styles.filter_icon}
+								onClick={handleRefresh}
+							/>
+						)}
+				</div>
+				<div className={styles.search_container}>
+					<Input
+						size="sm"
+						placeholder="Search"
+						value={searchQuery}
+						onChange={setSearchQuety}
+						prefix={<IcMSearchlight />}
+					/>
+				</div>
 			</div>
 
 			{isEmpty(list || []) && !loading ? (

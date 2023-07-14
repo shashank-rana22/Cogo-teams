@@ -5,13 +5,22 @@
 	height: 100%;
 }
 
+.header_container {
+	width: 100%;
+	padding: 8px 13px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.search_container {
+	width: 100%;
+	padding-top: 10px;
+}
+
 .header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 8px 13px;
-	border-bottom: 1px solid #e0e0e0;
 }
 
 .left_div {
