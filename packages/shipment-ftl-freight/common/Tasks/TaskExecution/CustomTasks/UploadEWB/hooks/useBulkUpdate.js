@@ -22,7 +22,7 @@ const useBulkUpdate = () => {
 			});
 			return response;
 		} catch (e) {
-			toastApiError(e?.data || 'Something went wrong !! ');
+			toastApiError(e || 'Something went wrong !! ');
 			return null;
 		}
 	};
@@ -35,7 +35,7 @@ const useBulkUpdate = () => {
 			});
 			return response;
 		} catch (e) {
-			toastApiError(e?.data || 'Something went wrong !! ');
+			toastApiError(e || 'Something went wrong !! ');
 			return null;
 		}
 	};
