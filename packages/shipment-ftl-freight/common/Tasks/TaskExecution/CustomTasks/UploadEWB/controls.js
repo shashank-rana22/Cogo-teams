@@ -46,10 +46,10 @@ const getControl = ({ services }) => {
 					},
 				},
 				{
-					name       : 'ewb_validity',
+					name       : 'eway_bill_generation_date',
 					span       : 2.2,
 					type       : 'datepicker',
-					label      : 'Eway bill validity',
+					label      : 'EWB Generation Date',
 					width      : 3,
 					usePortal  : true,
 					conditions : [
@@ -63,10 +63,10 @@ const getControl = ({ services }) => {
 					withTimePicker : true,
 				},
 				{
-					name       : 'eway_bill_generation_date',
+					name       : 'ewb_validity',
 					span       : 2.2,
 					type       : 'datepicker',
-					label      : 'EWB Generation Date',
+					label      : 'Eway bill validity',
 					width      : 3,
 					usePortal  : true,
 					conditions : [
