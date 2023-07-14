@@ -14,8 +14,8 @@ const AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO = 166.67;
 
 export const renderValue = (label, detail = {}) => {
 	const {
-		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type,
-		payment_term, inco_term, price_type, service_type, source, cargo_readiness_date, awb_execution_date,
+		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type, source,
+		payment_term, inco_term, price_type, service_type, cargo_readiness_date, awb_execution_date, bl_category,
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
 
@@ -102,6 +102,8 @@ export const renderValue = (label, detail = {}) => {
 				return null;
 			}
 			return packageDetails();
+		case 'bl_category':
+			return `BL Category: ${upperCase(bl_category)}`;
 
 		case 'volume':
 			return ` ${vol} ${service_type === 'ftl_freight_service'
