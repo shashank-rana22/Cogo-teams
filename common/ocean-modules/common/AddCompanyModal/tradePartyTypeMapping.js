@@ -13,10 +13,6 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 				value : 'create_new_company',
 				label : 'Create New Company',
 			},
-			{
-				value : 'historical',
-				label : 'Historical',
-			},
 		],
 		consignee: [
 			{
@@ -26,10 +22,6 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 			{
 				value : 'create_new_company',
 				label : 'Create New Company',
-			},
-			{
-				value : 'historical',
-				label : 'Historical',
 			},
 		],
 		self: [

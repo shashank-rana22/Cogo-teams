@@ -20,8 +20,6 @@ import { convertObjectMappingToArray } from '../../../../utils/convertObjectMapp
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 const PINCODE_IN_ADDRESS_INDEX = 1;
 
 function SelfAndTradePartyForm({
@@ -37,6 +35,8 @@ function SelfAndTradePartyForm({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
 		organization_id: organization_id || importer_exporter_id,
 	});
+
+	const geo = getGeoConstants();
 
 	const {
 		control,
@@ -102,13 +102,13 @@ function SelfAndTradePartyForm({
 
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>
-										PAN Number / Registration Number
+										{geo.others.identification_number.label}
 									</label>
 									<InputController
 										size="sm"
 										name="registration_number"
 										control={control}
-										placeholder="Enter Registration Number"
+										placeholder={`Enter ${geo.others.identification_number.label}`}
 										disabled
 									/>
 								</div>
@@ -182,6 +182,7 @@ function SelfAndTradePartyForm({
 									<label className={styles.form_label}>Mobile Number</label>
 									<MobileNumberController
 										size="sm"
+										value={{ country_code: geo.country.mobile_country_code }}
 										control={control}
 										name="mobile_number"
 									/>
@@ -193,6 +194,7 @@ function SelfAndTradePartyForm({
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
 									<MobileNumberController
+										value={{ country_code: geo.country.mobile_country_code }}
 										size="sm"
 										control={control}
 										name="alternate_mobile_number"

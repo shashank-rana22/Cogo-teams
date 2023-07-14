@@ -583,6 +583,11 @@ export default {
 			label: 'SEZ',
 		},
 
+		identification_number: {
+			label   : 'PAN Number',
+			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		},
+
 		navigations: {
 			onboard_vendor: {
 				validate_registration : true,

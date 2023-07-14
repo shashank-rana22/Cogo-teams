@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {
 	CheckboxController,
 	CountrySelectController,
@@ -7,7 +8,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
-import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -34,12 +35,16 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 		defaultFilters : { organization_status: 'active' },
 	});
 
+	const geo = getGeoConstants();
+
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
 	const [pocNameOptions, setPocNameOptions] = useState([]);
 
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const formValues = watch();
+
+	const taxLabel = geo.others.registration_number.label;
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -108,6 +113,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							placeholder="Enter or Select Country"
 							optionValueKey="id"
+							value={geo.country.id}
 							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country', errors)}
@@ -115,17 +121,20 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`PAN Number / Registration Number ${
+							{`${geo.others.identification_number.label} ${
 								['collection_party', 'paying_party'].includes(tradePartyType) ? '' : '(Optional)'}`}
 						</label>
 						<InputController
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder="Enter Registration Number"
+							placeholder={`Enter ${geo.others.identification_number.label}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
+								pattern  : {
+									value   : geo.others.identification_number.pattern,
+									message : `${geo.others.identification_number.label} is invalid`,
+								},
 							}}
 						/>
 						{Error('registration_number', errors)}
@@ -218,13 +227,19 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							control={control}
 							name="mobile_number"
+							value={{ country_code: geo.country.mobile_country_code }}
 						/>
 						{Error('mobile_number', errors)}
 					</div>
 
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
-						<MobileNumberController size="sm" control={control} name="alternate_mobile_number" />
+						<MobileNumberController
+							size="sm"
+							control={control}
+							name="alternate_mobile_number"
+							value={{ country_code: geo.country.mobile_country_code }}
+						/>
 					</div>
 				</div>
 
@@ -250,14 +265,21 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					</div>
 
 					<div className={styles.upload_container}>
-						<label className={styles.form_label}>GST Proof</label>
+						<label className={styles.form_label}>
+							{taxLabel}
+							{' '}
+							Proof
+						</label>
 						<UploadController
 							className="tax_document"
 							name="tax_number_document_url"
 							disabled={formValues.not_reg_under_gst}
 							control={control}
 							rules={{
-								required: { value: !formValues.not_reg_under_gst, message: 'GST Proof is required' },
+								required: {
+									value   : !formValues.not_reg_under_gst,
+									message : `${taxLabel} Proof is required`,
+								},
 							}}
 						/>
 						{Error('tax_number_document_url', errors)}
