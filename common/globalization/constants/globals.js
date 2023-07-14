@@ -240,11 +240,13 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
-		inbox_icon         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/colored_inbox.png',
-		email_spam_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
-		spam_flag_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
-		email_inbox_icon   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
-		colored_loading    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		bluetide_hbl_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
+		inbox_icon       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/colored_inbox.png',
+		email_spam_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
+		spam_flag_icon   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
+		email_inbox_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
+		colored_loading  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
