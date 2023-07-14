@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -7,32 +8,45 @@ import AgentDashboard from './AgentDashboard';
 import useGetCogoOneDashboard from './hooks/useGetCogoOneDashboard';
 import styles from './styles.module.css';
 
+// const KAM_AGENT_ROLE_ID = ''; // KAM - SME Demand
+
 function CogoOneDashboard() {
-	const [timeline, setTimeline] = useState('day');
-	const [calendarData, setCalendarData] = useState([]);
-	const [selectedItem, setSelectedItem] = useState(new Date());
-
-	const selectedTimeline = (calendarData || []).filter(
-		(d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'),
-	)?.[0];
-
 	const {
 		userRoleId,
 		partnerUserId,
 		query,
 	} = useSelector(({ profile, general }) => ({
-		userRoleId: profile.partner.user_role_ids[0]
-		|| {},
+		userRoleId    : profile.partner.user_role_ids[GLOBAL_CONSTANTS.zeroth_index],
 		partnerUserId : profile.partner.partner_user_id,
 		query         : general?.query,
-
 	}));
+
+	const [timeline, setTimeline] = useState('day');
+	const [calendarData, setCalendarData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(new Date());
+
 	const { view = '' } = query || {};
-	const kamAgentRoleId = '0bc8c199-09ed-4a85-b3a3-a855f05a2716'; // KAM - SME Demand
-	const isAgentView = userRoleId.includes(kamAgentRoleId);
-	const { loading, listData = {}, getCogoOneDashboard = () => {} } = 	useGetCogoOneDashboard(
-		{ timeline, selectedTimeline, selectedItem, partnerUserId, isAgentView },
-	);
+
+	const isAgentView = userRoleId.includes(GLOBAL_CONSTANTS.uuid.kam_agent_role_id);
+
+	const selectedTimeline = (calendarData || []).filter(
+		(d) => format(d.date, GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']) === format(
+			selectedItem,
+			GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+		),
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const {
+		loading = false,
+		listData = {},
+		getCogoOneDashboard = () => {},
+	} = useGetCogoOneDashboard({
+		timeline,
+		selectedTimeline,
+		selectedItem,
+		partnerUserId,
+		isAgentView,
+	});
 
 	const commomProps = {
 		timeline,

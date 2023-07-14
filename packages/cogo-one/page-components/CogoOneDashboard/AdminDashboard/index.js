@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Calendar from '../common/Calendar';
+// import Calendar from '../common/Calendar';
 import CallAnalytics from '../common/CallAnalytics';
 import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
 import ChatStatistics from '../common/ChatStatistics';
@@ -33,7 +33,7 @@ function AdminDashboard(props) {
 				<div className={styles.calenderchart_plus_escalations}>
 					<div className={styles.calender_chart}>
 						<div className={styles.calender_container}>
-							<Calendar props={props} />
+							{/* <Calendar props={props} /> */}
 						</div>
 						<LineChart
 							cogoOneDashboardGraph={cogo_one_dashboard_graph}

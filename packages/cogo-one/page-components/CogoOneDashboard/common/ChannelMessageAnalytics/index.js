@@ -1,12 +1,17 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import { channelMessageAnayticsData } from '../../configurations/channel-message-analytic-data';
 
 import styles from './styles.module.css';
 
+const MAXIMUMN_MINUTE_VALUE = 60;
+const MIN_ROUND_UP = 2;
+
 function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {} }) {
 	const { calls = [], channel = [] } = channelMessageAnayticsData;
+
 	return (
 		<div className={styles.statistics}>
 			<div className={styles.heading}>Channels Messages Analytics</div>
@@ -14,7 +19,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 				{(calls || []).map((itm) => {
 					const itemKey = itm?.key;
 					return (
-						<div className={styles.time_durations}>
+						<div className={styles.time_durations} key={itemKey}>
 							{loading
 								? <Placeholder height="15px" width="60px" className={styles.placeholder} />
 								: (
@@ -22,12 +27,19 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 										className={styles.time_durations_header}
 									>
 										<span className={styles.time_durations_value}>
-											{(channelsMessageAnalytics[itemKey] || 0) >= 60
-												? ((channelsMessageAnalytics[itemKey] || 0) / 60).toFixed(2)
-												: (channelsMessageAnalytics[itemKey] || 0)}
+											{(channelsMessageAnalytics[itemKey]
+											|| GLOBAL_CONSTANTS.zeroth_index) >= MAXIMUMN_MINUTE_VALUE
+												? ((channelsMessageAnalytics[itemKey]
+													|| GLOBAL_CONSTANTS.zeroth_index)
+													/ MAXIMUMN_MINUTE_VALUE).toFixed(MIN_ROUND_UP)
+												: (channelsMessageAnalytics[itemKey] || GLOBAL_CONSTANTS.zeroth_index)}
 										</span>
 										{' '}
-										<span>{(channelsMessageAnalytics?.[itemKey] || 0) >= 60 ? 'hr' : 'min'}</span>
+										<span>
+											{(channelsMessageAnalytics?.[itemKey]
+											|| GLOBAL_CONSTANTS.zeroth_index) >= MAXIMUMN_MINUTE_VALUE ? 'hr' : 'min'}
+
+										</span>
 									</div>
 								)}
 							<div className={styles.time_durations_text}>{itm.label}</div>
@@ -38,7 +50,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 
 			<div className={styles.socoal_icons_and_data_list}>
 				{(channel || []).map((stat) => (
-					<div className={styles.socoal_icons_and_data}>
+					<div className={styles.socoal_icons_and_data} key={stat.key}>
 						<div className={styles.social_icons_and_its_name}>
 							{stat.icon}
 							<div className={styles.social_name}>{stat.channel}</div>
@@ -47,8 +59,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 							? <Placeholder height="15px" width="100px" className={styles.placeholder} />
 							: (
 								<div className={styles.customer_nos}>
-									<span>{channelsMessageAnalytics?.[stat.key] || 0}</span>
-									{' '}
+									<span>{channelsMessageAnalytics?.[stat.key] || GLOBAL_CONSTANTS.zeroth_index}</span>
 									<span>{stat.static_data}</span>
 								</div>
 							)}

@@ -1,4 +1,4 @@
-import Calendar from '../common/Calendar';
+// import Calendar from '../common/Calendar';
 import CallAnalytics from '../common/CallAnalytics';
 import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
 import ChatStatistics from '../common/ChatStatistics';
@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 import TotalChatsHandled from './TotalChatshandled';
 
 function AgentDashboard(props) {
-	const { timeline, setTimeline, listData, loading } = props || {};
+	const { timeline = '', setTimeline = () => {}, listData = {}, loading = false } = props || {};
+
 	const {
 		customer_satisfaction = {}, intents_served = {}, calls_analytics = {},
 		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {}, total_customers = '',
@@ -27,7 +28,7 @@ function AgentDashboard(props) {
 			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					<Calendar props={props} />
+					{/* <Calendar props={props} /> */}
 					<div className={styles.linechart_container}>
 						<LineChart
 							cogoOneDashboardGraph={cogo_one_dashboard_graph}

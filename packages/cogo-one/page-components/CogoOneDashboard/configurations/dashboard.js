@@ -17,11 +17,12 @@ export const satisfactionData = [
 
 	},
 ];
-export const callStatusMapping = {
+export const CALL_STATUS_MAPPING = {
 	busy_agents    : 'on call',
 	online_agents  : 'online',
 	offline_agents : 'offline',
 };
+
 export const chatsStatsData = [
 	{
 		label      : 'No. of chats closed',

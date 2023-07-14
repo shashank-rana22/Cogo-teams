@@ -156,6 +156,7 @@ const GLOBAL_CONSTANTS = {
 			'97dcd57c-d263-496f-9f59-7a7aef400d34',
 			'20f59087-12cf-4e6d-8463-27d41e23da6f',
 		],
+		kam_agent_role_id: ['0bc8c199-09ed-4a85-b3a3-a855f05a2716'],
 
 	},
 	view_key_mappings: {

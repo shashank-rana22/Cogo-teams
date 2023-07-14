@@ -7,9 +7,17 @@ import { cogoOneLogo } from '../../constants';
 
 import styles from './styles.module.css';
 
-function Header({ timeline, setTimeline }) {
+const FILTER_TAB_OPTIONS = [
+	{ label: 'Day', name: 'day' },
+	{ label: 'Week', name: 'week' },
+	{ label: 'Month', name: 'month' },
+];
+
+function Header({ timeline = '', setTimeline = () => {} }) {
 	const { query, back } = useRouter();
+
 	const { id: agentId = '' } = query || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -27,9 +35,11 @@ function Header({ timeline, setTimeline }) {
 					onChange={setTimeline}
 					className={styles.tabs_style}
 				>
-					<TabPanel name="day" title="Day" />
-					<TabPanel name="week" title="Week" />
-					<TabPanel name="month" title="Month" />
+					{FILTER_TAB_OPTIONS.map((item) => {
+						const { label = '', name = '' } = item;
+						return <TabPanel key={name} name={name} title={label} />;
+					})}
+
 				</Tabs>
 			</div>
 		</div>

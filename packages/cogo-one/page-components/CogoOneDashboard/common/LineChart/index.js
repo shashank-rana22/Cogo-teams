@@ -1,5 +1,6 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@cogoport/charts/line';
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import { LABLE_TYPE } from '../../configurations/dashboard';
@@ -16,26 +17,47 @@ function LineChart({
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
 	const GraphData = chartData({ cogoOneDashboardGraph, timeline }) || [];
 
+	function CustomToolTip({ point = {} }) {
+		return (
+			<div className={styles.tooltip_box}>
+				<div className={styles.tooltip_text}>
+					<div className={styles.column}>
+						<div>Customers</div>
+						<div>{LABLE_TYPE[timeline].label}</div>
+					</div>
+					<div className={cl`${styles.column} ${styles.column_center} `}>
+						<div>:</div>
+						<div>:</div>
+					</div>
+					<div className={styles.column}>
+						<div>{point.data.y || GLOBAL_CONSTANTS.zeroth_index}</div>
+						<div>{point.data.x || GLOBAL_CONSTANTS.zeroth_index}</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.chart_legends_box}>
 				<div className={styles.legend}>
 					<div className={styles.legend_left_box}>
-						<div className={`${styles.color_dot} ${styles.grey_color}`} />
+						<div className={cl`${styles.color_dot} ${styles.grey_color}`} />
 						<div className={styles.legend_text}>On Message</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_message_users || 0}
+						{graph_stats?.on_message_users || GLOBAL_CONSTANTS.zeroth_index}
 						<span>Users</span>
 					</div>
 				</div>
 				<div className={styles.legend}>
 					<div className={styles.legend_left_box}>
-						<div className={`${styles.color_dot} ${styles.orange_color}`} />
+						<div className={cl`${styles.color_dot} ${styles.orange_color}`} />
 						<div className={styles.legend_text}>On Call</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_call_users || 0}
+						{graph_stats?.on_call_users || GLOBAL_CONSTANTS.zeroth_index}
 						<span>Users</span>
 					</div>
 				</div>
@@ -53,23 +75,23 @@ function LineChart({
 						axisTop={null}
 						axisRight={null}
 						axisBottom={{
-            	orient         : 'bottom',
-            	tickSize       : 5,
-            	tickPadding    : 5,
-            	tickRotation   : 0,
-            	legend         : LABLE_TYPE[timeline].label,
-            	legendOffset   : 36,
-            	legendPosition : 'middle',
+							orient         : 'bottom',
+							tickSize       : 5,
+							tickPadding    : 5,
+							tickRotation   : 0,
+							legend         : LABLE_TYPE[timeline].label,
+							legendOffset   : 36,
+							legendPosition : 'middle',
 						}}
 						axisLeft={{
-            	orient         : 'left',
-            	tickSize       : 5,
-            	tickValues     : 5,
-            	tickPadding    : 5,
-            	tickRotation   : 0,
-            	legend         : 'Customers',
-            	legendOffset   : -40,
-            	legendPosition : 'middle',
+							orient         : 'left',
+							tickSize       : 5,
+							tickValues     : 5,
+							tickPadding    : 5,
+							tickRotation   : 0,
+							legend         : 'Customers',
+							legendOffset   : -40,
+							legendPosition : 'middle',
 						}}
 						colors={['#C4C4C4', '#F98600']}
 						enableGridX={false}
@@ -79,24 +101,7 @@ function LineChart({
 						pointBorderColor={{ from: 'serieColor' }}
 						pointLabelYOffset={-12}
 						useMesh
-						tooltip={({ point }) => (
-							<div className={styles.tooltip_box}>
-								<div className={styles.tooltip_text}>
-									<div className={styles.column}>
-										<div>Customers</div>
-										<div>{LABLE_TYPE[timeline].label}</div>
-									</div>
-									<div className={`${styles.column} ${styles.column_center} `}>
-										<div>:</div>
-										<div>:</div>
-									</div>
-									<div className={styles.column}>
-										<div>{point.data.y || 0}</div>
-										<div>{point.data.x || 0}</div>
-									</div>
-								</div>
-							</div>
-						)}
+						tooltip={({ point }) => <CustomToolTip point={point} />}
 					/>
 				</div>
 			)}
