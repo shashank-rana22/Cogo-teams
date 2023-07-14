@@ -7,7 +7,7 @@ interface Props {
 	checkedRows?:string[],
 	setCheckedRows?:Function,
 	setIsHeaderChecked?:Function,
-	entityCode?:String,
+	entityCode?:string,
 }
 
 const useBulkIrnGenerate = (
