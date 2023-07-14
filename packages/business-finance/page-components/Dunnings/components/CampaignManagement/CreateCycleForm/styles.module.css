@@ -1,0 +1,21 @@
+.modal_body_wrapper {
+	:global {
+		.ui_modal_body_container {
+			max-height: 500px;
+		}
+	}
+}
+
+.title {
+	font-weight: 600;
+}
+
+.step {
+	font-weight: 600;
+	color: var(--color-primary-error-red-2);
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+}

@@ -103,3 +103,29 @@ export const OPTIONSCN = [
 export const VERIFICATION_STATUS = ['pending', 'verified'];
 
 export const EMPTY_POC = [{ name: '', email: '', mobile_number: '', alternate_mobile_number: '' }];
+
+export const PAYMENT_TYPE = [
+	{ label: 'Full', value: 'full' },
+	{ label: 'Balance', value: 'balance' },
+	{ label: 'Advance', value: 'advanced' },
+];
+
+export const IS_INVOICE_INCEDENTAL = [
+	{ label: 'Yes', value: 'yes' },
+	{ label: 'No', value: 'no' },
+];
+
+export const REMARKS_FOR_CN = [
+	{
+		label : 'Delayed Delivery',
+		value : 'delayed_delivery',
+	},
+	{
+		label : 'Goods Damage',
+		value : 'good_damage',
+	},
+	{
+		label : 'Non-Placement Penalty charges',
+		value : 'non_placement_penalty_charges',
+	},
+];

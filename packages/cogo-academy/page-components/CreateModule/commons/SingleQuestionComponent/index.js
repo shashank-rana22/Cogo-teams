@@ -1,5 +1,5 @@
 import { Checkbox, Button } from '@cogoport/components';
-import { SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { SelectController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import OptionsComponent from './OptionsComponent';
@@ -26,10 +26,13 @@ function SingleQuestionComponent({
 	mode,
 	editorValue,
 	setEditorValue,
+	questionState = {},
+	setQuestionState = () => {},
 	subjectiveEditorValue,
 	setUploadable = () => {},
 	uploadable,
 	setSubjectiveEditorValue = () => {},
+	caseStudyQuestionEditorValue,
 	...restProps
 }) {
 	const {
@@ -38,6 +41,7 @@ function SingleQuestionComponent({
 		loading,
 		NAME_CONTROL_MAPPING,
 		handleChangeEditorValue,
+		handleChangeQuestionEditor,
 	} = useHandleSingleQuestion({
 		mode,
 		editDetails,
@@ -46,24 +50,28 @@ function SingleQuestionComponent({
 		questionTypeWatch,
 		editorValue,
 		setEditorValue,
+		questionState,
+		setQuestionState,
+		caseStudyQuestionEditorValue,
 		...restProps,
 	});
 
+	const questionText = questionTypeWatch === 'case_study'
+		? questionState?.editorValue?.[`case_questions_${index}`] : questionState?.editorValue?.question_0 || {};
+
+	const error = questionTypeWatch === 'case_study'
+		? questionState?.error?.[`case_questions_${index}`] : questionState?.error?.question_0 || false;
+
 	return (
 		<div className={styles.container}>
+
 			<div
 				className={`${styles.first_row} ${
 					errors?.question_text ? styles.question_text_err : null
 				} ${errors?.question_type ? styles.question_type_err : null}`}
 			>
-				<InputController
-					className={`${
-						errors?.question_text ? styles.question_text_err : null
-					} ${styles.input_container}`}
-					{...NAME_CONTROL_MAPPING.question_text}
-					control={control}
-					name={`${name}.${index}.question_text`}
-				/>
+
+				<h3>Question: </h3>
 
 				{questionTypeWatch !== 'subjective' && (
 					<SelectController
@@ -78,6 +86,24 @@ function SingleQuestionComponent({
 					/>
 				)}
 			</div>
+
+			<RichTextEditor
+				value={questionText}
+				onChange={handleChangeQuestionEditor}
+				required
+				id="question-text"
+				name="questionText"
+				multiline
+				variant="filled"
+				placeholder="Type Question Here..."
+				rootStyle={{
+					zIndex    : 0,
+					position  : 'relative',
+					minHeight : '200px',
+				}}
+			/>
+
+			{error && <p className={styles.error_msg}>Question is required</p>}
 
 			{questionTypeWatch !== 'subjective' ? (
 				<OptionsComponent
@@ -141,17 +167,6 @@ function SingleQuestionComponent({
 							onChange={() => { setUploadable(!uploadable); }}
 						/>
 					</div>
-
-					{/* <div className={styles.character_limit}>
-						<div className={styles.set_limit}>Set Character Limit</div>
-
-						<InputController
-							control={control}
-							name={`${name}.${index}.character_limit`}
-							placeholder="No Limit"
-							type="number"
-						/>
-					</div> */}
 				</div>
 			)}
 

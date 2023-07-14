@@ -118,3 +118,8 @@
 	z-index: 10;
 	width: 140px;
 }
+
+.amount_style {
+	display: flex;
+	margin-left: 10px;
+}

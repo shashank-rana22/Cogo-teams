@@ -42,6 +42,8 @@ function ConversationsComp({
 						zippedTicketsData={zippedTicketsData}
 						viewType={viewType}
 						hasVoiceCallAccess={hasVoiceCallAccess}
+						firestore={firestore}
+						userId={userId}
 					/>
 				)}
 			</>
