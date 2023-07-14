@@ -1,16 +1,22 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import ScopeSelect from '@cogoport/scope-select';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useEnrichmentDashboard from './hooks/useEnrichmentDashboard';
+import styles from './styles.module.css';
 import PRIMARY_TABS_MAPPING from './utils/primary-tabs-mapping';
+
+const geo = getGeoConstants();
 
 function EnrichmentDashboard() {
 	const [primaryTab, setPrimaryTab] = useState('manual_enrichment');
 
 	const [secondaryTab, setSecondaryTab] = useState('active');
 
-	const options = Object.values(PRIMARY_TABS_MAPPING);
+	const allowedTabs = geo.navigations.enrichment.tabs;
+	const tabOptions = Object.values(PRIMARY_TABS_MAPPING);
 
 	const {
 		refetch,
@@ -28,43 +34,52 @@ function EnrichmentDashboard() {
 
 	return (
 		<div>
-			<Tabs
-				activeTab={primaryTab}
-				onChange={setPrimaryTab}
-				themeType="secondary"
-			>
-				{(options || []).map((option) => {
-					const { key = '', containerComponent: ContainerComponent = null } = option;
 
-					if (!ContainerComponent) return null;
+			<div className={styles.scope_select}>
+				<ScopeSelect size="md" />
+			</div>
 
-					return (
-						<TabPanel
-							name={key}
-							key={key}
-							title={startCase(key)}
-						>
-							<ContainerComponent
-								refetch={refetch}
-								list={list}
-								paginationData={paginationData}
-								loading={loading}
-								setParams={setParams}
-								getNextPage={getNextPage}
-								columns={columns}
-								primaryTab={primaryTab}
-								debounceQuery={debounceQuery}
-								searchValue={searchValue}
-								setSearchValue={setSearchValue}
-								secondaryTab={secondaryTab}
-								setSecondaryTab={setSecondaryTab}
-								authRoleId={authRoleId}
-							/>
-						</TabPanel>
-					);
-				})}
+			<div>
+				<Tabs
+					activeTab={primaryTab}
+					onChange={setPrimaryTab}
+					themeType="secondary"
+					className={styles.tabs}
+				>
+					{(tabOptions || []).map((option) => {
+						const { key = '', containerComponent: ContainerComponent = null } = option;
 
-			</Tabs>
+						if ((!ContainerComponent) || !allowedTabs.includes(key)) return null;
+
+						return (
+							<TabPanel
+								name={key}
+								key={key}
+								title={startCase(key)}
+							>
+								<ContainerComponent
+									refetch={refetch}
+									list={list}
+									paginationData={paginationData}
+									loading={loading}
+									setParams={setParams}
+									getNextPage={getNextPage}
+									columns={columns}
+									primaryTab={primaryTab}
+									debounceQuery={debounceQuery}
+									searchValue={searchValue}
+									setSearchValue={setSearchValue}
+									secondaryTab={secondaryTab}
+									setSecondaryTab={setSecondaryTab}
+									authRoleId={authRoleId}
+								/>
+							</TabPanel>
+						);
+					})}
+
+				</Tabs>
+			</div>
+
 		</div>
 	);
 }

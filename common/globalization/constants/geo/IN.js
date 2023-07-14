@@ -560,17 +560,15 @@ export default {
 		enrichment: {
 			enrichment_response_source            : 'manual',
 			allowed_to_create_enrichment_requests : false,
-
-			manual_enrichment: {
-				columns: ['id', 'business_name', 'created_at', 'registration_number', 'action'],
-
-				hide_columns: {
+			tabs                                  : ['manual_enrichment', 'file_management'],
+			manual_enrichment                     : {
+				columns      : ['id', 'business_name', 'registration_number', 'created_at', 'action'],
+				hide_columns : {
 					active    : [],
 					responded : [],
 					success   : ['action'],
 				},
 			},
-
 			file_management: {
 				columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
 			},

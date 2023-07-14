@@ -32,26 +32,27 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 
 	const [selectedRowId, setSelectedRowId] = useState('');
 
-	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
+	const allowedToSeeAgentsData = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId)
+	&& primaryTab === 'manual_enrichment';
 
 	const filtersMapping = useMemo(() => ({
 		manual_enrichment: {
 			status: secondaryTab,
-			...(allowedToSeeAgentsData && {
-				user_data_required: true,
-			}),
 		},
 		file_management: {
 			user_id,
 		},
-	}), [allowedToSeeAgentsData, secondaryTab, user_id]);
+	}), [secondaryTab, user_id]);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		filters    : {
+		...(allowedToSeeAgentsData && {
+			user_data_required: true,
+		}),
+		filters: {
 			...filtersMapping[primaryTab],
 			q: searchQuery || undefined,
 			partner_id,
@@ -95,23 +96,29 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
+			...(allowedToSeeAgentsData && {
+				user_data_required: true,
+			}),
 			filters: {
 				...filtersMapping[primaryTab],
 				partner_id,
 			},
 
 		}));
-	}, [filtersMapping, partner_id, primaryTab]);
+	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab]);
 
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
+			...(allowedToSeeAgentsData && {
+				user_data_required: true,
+			}),
 			filters: {
 				...previousParams?.filters,
 				status: [secondaryTab],
 			},
 		}));
-	}, [secondaryTab]);
+	}, [allowedToSeeAgentsData, secondaryTab]);
 
 	const handleEditDetails = (feedback_request_id) => {
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);

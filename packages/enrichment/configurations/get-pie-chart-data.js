@@ -2,7 +2,7 @@ function getPieChartData({ stats = {} }) {
 	return {
 		request_status_chart: {
 			title  : 'Status',
-			colors : ['#F37166', '#ABCD62'],
+			colors : ['#c2e4e7', '#70bfc8', '#37878f', '#276066'],
 			data   : [
 				{
 					id    : 'requested',
@@ -11,8 +11,18 @@ function getPieChartData({ stats = {} }) {
 				},
 				{
 					id    : 'responded',
-					label : 'Responded',
-					value : stats.total_responded_request_count,
+					label : 'Ongoing',
+					value : stats.total_ongoing_request_count,
+				},
+				{
+					id    : 'success',
+					label : 'Success',
+					value : stats.success_feedback_request_count,
+				},
+				{
+					id    : 'failed',
+					label : 'Failed',
+					value : stats.failed_feedback_request_count,
 				},
 			],
 		},

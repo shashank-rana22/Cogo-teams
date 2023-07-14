@@ -57,10 +57,10 @@ export default {
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
 		third_party_enrichment_agencies_role_ids: [
-			'5ba22edd-9048-4449-8a24-311797d609bd',
-			'79bdc116-2d11-4a8b-9600-64a5c48a7e43',
+			'72053f8a-14c3-45bc-b44a-2e9c609a76b1',
+			'9fc9dabf-9d82-46ef-a935-080afb85b273',
 		],
-		third_party_enrichment_agencies_rm_ids: ['79bdc116-2d11-4a8b-9600-64a5c48a7e43'],
+		third_party_enrichment_agencies_rm_ids: ['9fc9dabf-9d82-46ef-a935-080afb85b273'],
 
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
 		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
@@ -436,10 +436,11 @@ export default {
 		enrichment: {
 			enrichment_response_source            : 'manual_enriched',
 			allowed_to_create_enrichment_requests : true,
-
-			manual_enrichment: {
-				columns: [
-					'id', 'business_name', 'created_at', 'registration_number', 'requested_agent', 'action',
+			tabs                                  : ['manual_enrichment'],
+			manual_enrichment                     : {
+				allowed : true,
+				columns : [
+					'id', 'business_name', 'registration_number', 'requested_agent', 'created_at', 'action',
 				],
 				hide_columns: {
 					active    : [],
@@ -449,7 +450,8 @@ export default {
 			},
 
 			file_management: {
-				columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
+				allowed : false,
+				columns : ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
 			},
 
 		},
