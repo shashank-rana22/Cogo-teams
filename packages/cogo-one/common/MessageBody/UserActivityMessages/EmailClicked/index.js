@@ -1,20 +1,24 @@
 import { Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import PreviewModal from './PreviewModal';
 import styles from './styles.module.css';
 
+// const GET_LAST_STRING = 2;
+
 function EmailClicked({ serviceData = {}, name = '', formattedData = {} }) {
+	const [previewModal, setPreviewModal] = useState(false);
 	const { email = '', user_name = '' } = formattedData;
 	const { content = {} } = serviceData || {};
 	const { subject = '', body } = content;
-	const [previewModal, setPreviewModal] = useState(false);
+
+	// const parts = name.split(':');
+	// const evnetTitle = parts[GET_LAST_STRING].trim() || '';
 
 	return (
 		<>
-			<div className={styles.title}>{startCase(name)}</div>
+			<div className={styles.title}>{name}</div>
 			<div className={styles.message}>
 				Following is a preview of the mail -
 			</div>

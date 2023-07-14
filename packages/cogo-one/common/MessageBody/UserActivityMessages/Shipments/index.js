@@ -9,9 +9,12 @@ import getShipmentActivityDetails from '../../../../helpers/getShipmentActivityD
 import styles from './styles.module.css';
 
 const GET_LAST_ITEM = -1;
+const GET_LAST_STRING = 2;
 
 function Shipments({ serviceData = {}, eventType = '', name = '' }) {
 	const configarableData = getShipmentActivityDetails({ serviceData, eventType });
+	const parts = name.split(':');
+	const evnetTitle = parts[GET_LAST_STRING].trim();
 
 	const {
 		shippingLineUrl = '',
@@ -30,7 +33,7 @@ function Shipments({ serviceData = {}, eventType = '', name = '' }) {
 	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
 	return (
 		<>
-			<div className={styles.title}>{startCase(name)}</div>
+			<div className={styles.title}>{evnetTitle}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned checkout -
 			</div>
