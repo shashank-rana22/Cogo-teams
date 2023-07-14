@@ -386,18 +386,7 @@ export default {
 			},
 		],
 		migration_status : [],
-		timezone         : [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
-		],
-		services: [
+		services         : [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
 			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
 			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },

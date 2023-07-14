@@ -1,5 +1,4 @@
 import { Chips, Datepicker, Select, TabPanel, Tabs } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -49,9 +48,8 @@ interface Props {
 	isEditMode?: boolean;
 }
 
-function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
-	const geo = getGeoConstants();
-	const timezoneOptions = geo?.options.timezone;
+function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false }:Props) {
+	const timezoneOptions = GLOBAL_CONSTANTS.options.timezone_options;
 
 	const {
 		triggerType, frequency, weekDay,
@@ -61,7 +59,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		name,
 		cycleType,
 		cogoEntityId,
-	} = formData || {};
+	} = formData;
 
 	const {
 		organizationStakeholderIds,
@@ -125,7 +123,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		if (isEditMode) {
 			const unformattedOneTimeDate = unformatDate(oneTimeDateSchedule);
 			const timeArray = (scheduleTime)?.split(':');
-			const scheduledHourValue = timeArray?.[0];
+			const scheduledHourValue = timeArray?.[GLOBAL_CONSTANTS.zeroth_index];
 			const scheduledMinuteValue = timeArray?.[1];
 
 			setFormData((prev:object) => ({
@@ -169,7 +167,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				GLOBAL_CONSTANTS.cogoport_entities,
 			)?.filter((obj:{ id?: string }) => obj?.id === cogoEntityId);
 
-			const currencyValue = currencyEntityData?.[0]?.currency;
+			const currencyValue = currencyEntityData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
 			setFormData((prev:object) => ({
 				...prev,
 				dueOutstandingCurrency: currencyValue,

@@ -36,7 +36,7 @@
 		.ui_select_options_container {
 			top: auto;
 			bottom: 42px;
-			background: var(--color-primary-yellow-5);
+			box-shadow: 0 1px 10px -2px;
 		}
 	}
 }
