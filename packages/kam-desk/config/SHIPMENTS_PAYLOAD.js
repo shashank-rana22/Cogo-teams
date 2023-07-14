@@ -1,11 +1,18 @@
 import { addDays, subtractDays } from '@cogoport/utils';
 
 const TODAY = new Date();
-const THREE_DAYS_LEFT_FOR_DEPARTURE = 3;
-const ONE_DAY_LEFT_FOR_DEPARTURE = 1;
-const scheduleDepartureInThreeDays = { schedule_departure_less_than: addDays(TODAY, THREE_DAYS_LEFT_FOR_DEPARTURE) };
-const scheduleDepartureYesterday = { schedule_departure_less_than: subtractDays(TODAY, ONE_DAY_LEFT_FOR_DEPARTURE) };
-const scheduleDepartureTomorrow = { schedule_departure_less_than: addDays(TODAY, ONE_DAY_LEFT_FOR_DEPARTURE) };
+const DAYS_DIFFERENCE_COUNT_FOR_THREE_DAYS = 3;
+const DAYS_DIFFERENCE_COUNT_FOR_TOMORROW = 1;
+const DAYS_DIFFERENCE_COUNT_FOR_YESTERDAY = 1;
+const scheduleDepartureInThreeDays = {
+	schedule_departure_less_than:
+	addDays(TODAY, DAYS_DIFFERENCE_COUNT_FOR_THREE_DAYS),
+};
+const scheduleDepartureYesterday = {
+	schedule_departure_less_than:
+	subtractDays(TODAY, DAYS_DIFFERENCE_COUNT_FOR_YESTERDAY),
+};
+const scheduleDepartureTomorrow = { schedule_departure_less_than: addDays(TODAY, DAYS_DIFFERENCE_COUNT_FOR_TOMORROW) };
 const scheduleArrivalToday = { schedule_arrival_less_than: TODAY };
 
 export const CRITICAL_TABS = {
