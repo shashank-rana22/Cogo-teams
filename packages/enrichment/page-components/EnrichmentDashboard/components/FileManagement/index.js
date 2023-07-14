@@ -19,6 +19,7 @@ function FileManagement(props) {
 		searchValue,
 		setSearchValue,
 		primaryTab = '',
+		authRoleId,
 	} = props;
 
 	const [showUpload, setShowUpload] = useState(false);
@@ -34,6 +35,7 @@ function FileManagement(props) {
 				setShowUpload={setShowUpload}
 				setParams={setParams}
 				primaryTab={primaryTab}
+				authRoleId={authRoleId}
 			/>
 
 			<TableComponent

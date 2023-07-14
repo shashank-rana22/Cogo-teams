@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useEnrichmentDashboard from './hooks/useEnrichmentDashboard';
@@ -22,6 +23,7 @@ function EnrichmentDashboard() {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		authRoleId,
 	} = useEnrichmentDashboard({ primaryTab, secondaryTab, setSecondaryTab });
 
 	return (
@@ -32,7 +34,7 @@ function EnrichmentDashboard() {
 				themeType="secondary"
 			>
 				{(options || []).map((option) => {
-					const { key = '', title = '', containerComponent: ContainerComponent = null } = option;
+					const { key = '', containerComponent: ContainerComponent = null } = option;
 
 					if (!ContainerComponent) return null;
 
@@ -40,7 +42,7 @@ function EnrichmentDashboard() {
 						<TabPanel
 							name={key}
 							key={key}
-							title={title}
+							title={startCase(key)}
 						>
 							<ContainerComponent
 								refetch={refetch}
@@ -56,6 +58,7 @@ function EnrichmentDashboard() {
 								setSearchValue={setSearchValue}
 								secondaryTab={secondaryTab}
 								setSecondaryTab={setSecondaryTab}
+								authRoleId={authRoleId}
 							/>
 						</TabPanel>
 					);

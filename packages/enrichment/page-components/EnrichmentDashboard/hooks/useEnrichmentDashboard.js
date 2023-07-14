@@ -141,8 +141,7 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-		// partnerId   : partner_id,
-		// authRoleId,
+		authRoleId,
 	};
 };
 

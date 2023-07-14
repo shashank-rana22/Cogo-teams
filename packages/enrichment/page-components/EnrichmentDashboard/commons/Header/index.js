@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
 import useDownloadEnrichmentCsv from '../../hooks/useDownloadEnrichmentCsv';
@@ -6,6 +7,8 @@ import CreateBulkFeedbackRequest from '../CreateBulkFeedbackRequest';
 import Filters from '../Filters';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function Header(props) {
 	const {
@@ -15,9 +18,12 @@ function Header(props) {
 		setSearchValue = () => {},
 		setShowUpload = () => {},
 		primaryTab = 'manual_enrichment',
+		authRoleId = '',
 	} = props;
 
 	const { loading, onDownload } = useDownloadEnrichmentCsv();
+
+	const allowedToCreateBulkRequest = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
 
 	const COMPONENT_MAPPING = {
 		file_management: (
@@ -44,7 +50,7 @@ function Header(props) {
 			</>
 		),
 		manual_enrichment: (
-			<CreateBulkFeedbackRequest refetch={refetch} />
+			allowedToCreateBulkRequest ? <CreateBulkFeedbackRequest refetch={refetch} /> : null
 		),
 	};
 

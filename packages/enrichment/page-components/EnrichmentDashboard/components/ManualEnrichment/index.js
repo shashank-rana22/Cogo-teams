@@ -22,6 +22,7 @@ function ManualEnrichment(props) {
 		primaryTab = '',
 		secondaryTab = '',
 		setSecondaryTab = () => {},
+		authRoleId = '',
 	} = props;
 
 	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions();
@@ -38,6 +39,7 @@ function ManualEnrichment(props) {
 				setSearchValue={setSearchValue}
 				setParams={setParams}
 				primaryTab={primaryTab}
+				authRoleId={authRoleId}
 			/>
 
 			<EnrichmentStats />
