@@ -11,7 +11,6 @@ function useGetEmployeesWithLowWeightage({ filters }) {
 
 	const getEmployeesWithLowWeightage = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
-
 		try {
 			trigger({
 				params: {

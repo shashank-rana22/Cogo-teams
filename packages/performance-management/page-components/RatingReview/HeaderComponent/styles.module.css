@@ -1,0 +1,56 @@
+.select_container {
+	width: 40%;
+}
+
+.ratings_cycles {
+	width: 200px;
+	padding-left: 0;
+	margin-left: 10px;
+
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
+	}
+}
+
+.toggle_container {
+	:global {
+		.ui_toggle_switch {
+			padding-top: 3px;
+		}
+
+		.ui_switch {
+			top: 3px;
+		}
+	}
+}
+
+.back_arrow {
+	display: flex;
+	align-items: center;
+	padding-right: 6px;
+	cursor: pointer;
+}
+
+.employee_name:hover {
+	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.select_row {
+	display: flex;
+	align-items: center;
+	padding: 4px 0 16px;
+}
+
+.level {
+	display: flex;
+	padding: 8px;
+}
+
+.publish_button {
+	padding: 3px;
+	margin-left: 180%;
+}

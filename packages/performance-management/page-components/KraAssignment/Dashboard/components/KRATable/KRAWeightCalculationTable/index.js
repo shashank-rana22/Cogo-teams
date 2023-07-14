@@ -27,6 +27,7 @@ function KRAWeightCalculationTable({
 	getEmployeesWithLowWeightage,
 	getUnassignedEmployee,
 	resetObjects,
+	getkrasAssigned,
 }) {
 	const [deletedKraArray, setDeletedKraArray] = useState([]);
 
@@ -39,6 +40,7 @@ function KRAWeightCalculationTable({
 		resetObjects,
 		deletedKraArray,
 		setDeletedKraArray,
+		getkrasAssigned,
 	});
 
 	const updatedValue = [...inputValue];

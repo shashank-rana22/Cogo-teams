@@ -15,6 +15,7 @@ function KRATable({
 	filtersFields,
 	dataFrom,
 	resetObjects,
+	getkrasAssigned,
 }) {
 	const fieldsFilterLastElement = filtersFields?.single_item?.
 		[(filtersFields.single_item || []).length - ARRAY_LENGTH]
@@ -49,6 +50,7 @@ function KRATable({
 				getUnassignedEmployee={getUnassignedEmployee}
 				getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
 				resetObjects={resetObjects}
+				getkrasAssigned={getkrasAssigned}
 			/>
 		</div>
 	);

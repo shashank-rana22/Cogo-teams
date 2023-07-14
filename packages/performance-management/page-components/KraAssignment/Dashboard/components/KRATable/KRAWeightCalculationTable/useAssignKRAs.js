@@ -10,6 +10,7 @@ const useAssignKRAs = ({
 	resetObjects,
 	setDeletedKraArray,
 	deletedKraArray,
+	getkrasAssigned,
 }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
@@ -24,6 +25,7 @@ const useAssignKRAs = ({
 
 			getEmployeesWithLowWeightage();
 			getUnassignedEmployee();
+			getkrasAssigned();
 			resetObjects();
 
 			Toast.success('KRAs Assigned successfully!');

@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
+const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab }) => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
 	const { end_date, start_date } = selectCycle || {};
@@ -21,7 +21,7 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 				params: {
 					manager_id : user?.id,
 					label      : selectValue,
-					level,
+					level      : level === 'vertical_head' ? activeTab : level,
 					end_date   : format(end_date, 'yyyy-MM-dd'),
 					start_date : format(start_date, 'yyyy-MM-dd'),
 
@@ -34,13 +34,13 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle }) => {
 				);
 			}
 		}
-	}, [end_date, level, selectValue, start_date, trigger, user?.id]);
+	}, [activeTab, end_date, level, selectValue, start_date, trigger, user?.id]);
 
 	useEffect(() => {
 		if (selectValue && selectCycle) {
 			fetchRatingReviewDetails();
 		}
-	}, [fetchRatingReviewDetails, selectCycle, selectValue]);
+	}, [fetchRatingReviewDetails, selectCycle, selectValue, activeTab]);
 
 	return { data, loading };
 };

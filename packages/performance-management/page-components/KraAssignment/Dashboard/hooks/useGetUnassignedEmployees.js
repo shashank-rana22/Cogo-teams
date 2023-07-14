@@ -15,7 +15,6 @@ function useGetUnassignedEmployee() {
 
 	const getUnassignedEmployee = useCallback(() => {
 		const { employee_ids = [], ...rest } = filters || [];
-
 		try {
 			trigger({
 				params: {

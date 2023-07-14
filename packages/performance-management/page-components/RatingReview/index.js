@@ -1,40 +1,24 @@
-import { Button, Select } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { TabPanel, Tabs, Loader } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
+import HeaderComponent from './HeaderComponent';
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
-import useGetRatingCycles from './hooks/useGetRatingCycles';
-import useGetRatingReviewDetails from './hooks/useGetRatingReviewDetails';
-import usePublishRatings from './hooks/usePublicRatings';
-import KraModal from './KraModal';
-import RenderVerticalHeadComponent from './RenderVerticalHeadComponent';
 import styles from './styles.module.css';
 
+const TABS_MAPPING = ['vertical_head', 'functional_head'];
+
 function PerformanceRatingReview() {
-	const {
-		selectOptions,
-		selectValue,
-		setSelectValue,
-		selectedEmployees,
-		setSelectedEmployees,
-		show,
-		setShow,
-		level,
-	} = useGetEmployeeLevels();
+	const props = useGetEmployeeLevels();
 
-	const {
-		ratingCycleOptions,
-		selectCycle,
-		setSelectCycle,
-	} = useGetRatingCycles({ });
+	const { level, activeTab, setActiveTab, loading } = props || {};
 
-	const { data } = useGetRatingReviewDetails({ selectValue, level, selectCycle });
-
-	const {
-		loading: Publish,
-		publishRatings,
-		toggleVal,
-		setToggleVal,
-	} = usePublishRatings({ selectedEmployees, level, data, selectCycle });
+	if (loading) {
+		return (
+			<div className={styles.loader}>
+				<Loader style={{ height: '60px', width: '60px' }} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -42,49 +26,24 @@ function PerformanceRatingReview() {
 				Performance Rating Review
 			</div>
 
-			<div className={styles.select_row}>
-				<div className={styles.select_container}>
-					<Select
-						value={selectValue}
-						onChange={setSelectValue}
-						options={selectOptions}
-					/>
-				</div>
+			{
+				level === 'vertical_head' ? (
+					<Tabs
+						activeTab={activeTab}
+						themeType="primary"
+						onChange={setActiveTab}
+					>
+						{
+							TABS_MAPPING.map((tab) => (
+								<TabPanel name={tab} title={startCase(tab)} key={tab}>
+									<HeaderComponent props={props} />
+								</TabPanel>
+							))
+						}
+					</Tabs>
+				) : <HeaderComponent props={props} />
+			}
 
-				<div className={styles.level}>
-					<div className={styles.ratings_cycles}>
-						<Select
-							value={selectCycle}
-							onChange={setSelectCycle}
-							options={ratingCycleOptions}
-							width="100px"
-						/>
-					</div>
-
-					<div className={styles.publish_button}>
-						<Button
-							disabled={isEmpty(selectedEmployees)}
-							onClick={publishRatings}
-							loading={Publish}
-						>
-							Publish
-
-						</Button>
-					</div>
-				</div>
-			</div>
-
-			<RenderVerticalHeadComponent
-				list={data}
-				setSelectedEmployees={setSelectedEmployees}
-				selectedEmployees={selectedEmployees}
-				level={level}
-				setShow={setShow}
-				toggleVal={toggleVal}
-				setToggleVal={setToggleVal}
-			/>
-
-			{show ? <KraModal show={show} setShow={setShow} selectCycle={selectCycle} /> : null}
 		</div>
 	);
 }

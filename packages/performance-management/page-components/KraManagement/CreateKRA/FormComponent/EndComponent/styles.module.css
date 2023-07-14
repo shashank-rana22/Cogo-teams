@@ -35,3 +35,8 @@
 		}
 	}
 }
+
+.error_message {
+	padding-top: 3px;
+	color: #ee3426;
+}
