@@ -13,8 +13,8 @@ const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const DEFAULT_VALUE_FOR_NUMBER_KEYS = 1;
 
-const extraApiPayload = (values, end_point, task) => {
-	if (end_point === 'send_nomination_notification') {
+const extraApiPayload = (values, endPoint, task) => {
+	if (endPoint === 'send_nomination_notification') {
 		return {
 			booking_reference_number : values?.booking_reference_number,
 			booking_reference_proof  : {
@@ -25,7 +25,7 @@ const extraApiPayload = (values, end_point, task) => {
 		};
 	}
 
-	if (end_point === 'create_shipment_document' || end_point === 'fcl_freight/create_document') {
+	if (['create_shipment_document', 'fcl_freight/create_document'].includes(endPoint)) {
 		let documentArr = values?.documents;
 
 		if (!documentArr) documentArr = [values];
@@ -45,9 +45,9 @@ const extraApiPayload = (values, end_point, task) => {
 		return { documents: formatValues };
 	}
 
-	if (end_point === 'update_shipment_service') return { data: values };
+	if (endPoint === 'update_shipment_service') return { data: values };
 
-	if (end_point === 'bulk_update_shipment_services') {
+	if (endPoint === 'bulk_update_shipment_services') {
 		const payload = {
 			service      : task.shipment_type,
 			service_data : [],
@@ -94,7 +94,7 @@ const extraApiPayload = (values, end_point, task) => {
 		return payload;
 	}
 
-	if (end_point === 'update_shipment_bl_details'
+	if (endPoint === 'update_shipment_bl_details'
 	&& ['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)) {
 		const payload = {
 			ids  : values?.bl_detail?.map((i) => i?.id),

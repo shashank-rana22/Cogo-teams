@@ -7,16 +7,17 @@ import styles from './styles.module.css';
 import { sectionThreeFields, containersDetails } from './templateConfig';
 
 function Write({
-	control,
+	control = () => {},
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	isReadonly = false,
 	watermark = null,
+	blNumber = '',
 }) {
 	return (
 		<main className={styles.main}>
 			{watermark
-				? <Watermark text="draft" /> : null}
+				? <Watermark text={watermark} /> : null}
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
@@ -89,7 +90,6 @@ function Write({
 								/>
 							</div>
 						</div>
-
 					</div>
 
 					<div className={styles.section_one_child_2}>
@@ -106,7 +106,7 @@ function Write({
 						</div>
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b> BL0423003182</b>
+							<b>{blNumber}</b>
 						</div>
 						<div className={styles['section_one_child_2-details']}>
 							<img
@@ -116,7 +116,6 @@ function Write({
 							/>
 							<span className={styles.details_text_lg}>
 								BLUETIDE ESERVICES PVT. LTD.
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Complex, Old Delhi Gurgaon Road, Gurgaon
@@ -124,19 +123,15 @@ function Write({
 							</span>
 							<span className={styles.details_text_sm}>
 								Building No. 1, Shop No 7, Natraj
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Haryana - 122001
-
 							</span>
 							<span className={styles.details_text_sm}>
 								Tel No: 43708987 Fax No: 43708988
-
 							</span>
 							<span className={styles.details_text_md}>
 								Rge No:MTO/DGS/2274/DEC/2023
-
 							</span>
 							<p>
 								Taken in Charge in apparently good condition,herein at the place of receipt,
@@ -217,11 +212,9 @@ function Write({
 						<div className={styles['section_four_child_1-weight_measurement']}>
 							<span className={styles.section_four_text}>
 								Weight and measurement of container not to be included
-
 							</span>
 							<span className={styles.section_four_text}>
 								(TERMS CONTINUED ON BACK HEREOF)
-
 							</span>
 						</div>
 					</div>
@@ -236,7 +229,7 @@ function Write({
 							size="sm"
 						>
 							{addAnnexure ? 'Remove' : 'Add'}
-							&nbsp;
+							{' '}
 							Annexure
 						</Button>
 					</div>

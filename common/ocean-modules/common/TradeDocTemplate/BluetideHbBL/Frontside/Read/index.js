@@ -73,7 +73,7 @@ function Read({
 
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b>BL0423003182</b>
+							<b>{defaultValues?.bl_number}</b>
 						</div>
 
 						<div className={styles['section_one_child_2-details']}>
