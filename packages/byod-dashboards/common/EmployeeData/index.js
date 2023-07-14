@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function EmployeeData({ data }) {
 	const { detail } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Employee Details :</div>
@@ -20,7 +21,7 @@ function EmployeeData({ data }) {
 						</div>
 						<div className={styles.employee_detail}>
 							{val.key === 'hrbp'
-								? detail[val.key]?.userEmail : startCase(detail?.[val.key]) || '-'}
+								? detail?.[val.key]?.userEmail : startCase(detail?.[val.key]) || '-'}
 						</div>
 					</div>
 				))}
