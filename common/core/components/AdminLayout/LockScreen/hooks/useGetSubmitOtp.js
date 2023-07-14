@@ -20,8 +20,8 @@ const updateRoom = async ({ agentId, firestore }) => {
 };
 
 const useGetSubmitOtp = ({ agentId, firestore, setShowModal }) => {
-	const [otpNumber, setOtpNumber] = useState('');
 	const { agent_id } = useSelector(({ profile }) => ({ agent_id: profile.user.id }));
+	const [otpNumber, setOtpNumber] = useState('');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_omnichannel_lock_screen_otp',

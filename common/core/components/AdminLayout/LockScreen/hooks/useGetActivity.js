@@ -29,9 +29,15 @@ const getTimeoutConstant = async (firestore) => {
 	return { timeoutValue: screen_lock_timeout, isLockedBool: is_locked_screen };
 };
 
-function activityTracker({ trackerRef, roomDoc, activity }) {
+async function activityTracker({ trackerRef, roomDoc, activity }) {
 	clearTimeout(trackerRef.current);
 	const refForTracker = trackerRef;
+	const userDocData = await getDoc(roomDoc);
+	const lastActivity = userDocData?.data()?.last_activity;
+
+	if (lastActivity === 'locked_screen') {
+		return;
+	}
 
 	refForTracker.current = setTimeout(() => {
 		setDoc(roomDoc, {
@@ -96,15 +102,10 @@ function useGetActivity({
 			`${FIRESTORE_PATH.users_path}/${agentId}`,
 		);
 		try {
-			const userDocData = await getDoc(roomDoc);
-			const lastTimestamp = userDocData?.data()?.last_activity_timestamp || Date.now();
-
-			if ((Date.now() - lastTimestamp) < timeoutValue) {
-				mountActivityTracker({ FUNC_MAPPING });
-			}
+			mountActivityTracker({ FUNC_MAPPING });
 
 			activityTrackerSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
-				const { last_activity_timestamp = Date.now(), last_activity = '' } = roomDocData?.data() || {};
+				const { last_activity_timestamp = Date.now() } = roomDocData?.data() || {};
 
 				const differenceFromLastActivity = Date.now() - last_activity_timestamp;
 
@@ -112,12 +113,13 @@ function useGetActivity({
 					? DEFAULT_TIMEOUT_VALUE : timeoutValue - differenceFromLastActivity;
 
 				clearTimeout(activitytimeoutRef?.current);
-				if (last_activity === 'submit_otp') {
-					mountActivityTracker({ FUNC_MAPPING });
-				}
+
 				activitytimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
-					unMountActivityTracker({ FUNC_MAPPING });
+					setDoc(roomDoc, {
+						last_activity_timestamp : Date.now(),
+						last_activity           : 'locked_screen',
+					}, { merge: true });
 				}, timer);
 			});
 		} catch (e) {
