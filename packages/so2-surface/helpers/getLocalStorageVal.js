@@ -1,5 +1,5 @@
 import CONTROLS_CONFIG from '../configs/CONTROLS_CONFIG.json';
-import TabContainer from '../configs/TAB_CONFIG';
+import TabContainer from '../configs/tabContainer';
 
 const getLocalStorageVal = () => {
 	const TABS_CONFIG = TabContainer();

@@ -96,5 +96,5 @@ const TAB_CONFIG = {
 		},
 	],
 };
-const TabContainer = () => TAB_CONFIG;
-export default TabContainer;
+const tabContainer = () => TAB_CONFIG;
+export default tabContainer;

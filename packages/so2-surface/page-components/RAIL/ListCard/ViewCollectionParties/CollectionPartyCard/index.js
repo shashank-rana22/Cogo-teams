@@ -10,7 +10,7 @@ import UploadedInvoices from './UploadedInvoices';
 const DEFAULT_INVOICE_VALUE = 0;
 const DEFAULT_INVOICE_COUUNT = 0;
 
-function CollectionPartyCard({ data }) {
+function CollectionPartyCard({ data = {} }) {
 	const [showInvoices, setShowInvoices] = useState(false);
 	const services = [...new Set((data?.services || []).map((service) => startCase(service?.service_type)))];
 
@@ -59,7 +59,8 @@ function CollectionPartyCard({ data }) {
 					</Tooltip>
 				</div>
 				<div className={styles.live_invoice} style={{ width: '30%' }}>
-					Live Invoice Value -&nbsp;
+					Live Invoice Value -
+					{' '}
 					<span className={styles.live_invoice_value}>
 						{formatAmount({
 							amount   : data?.invoice_total || DEFAULT_INVOICE_VALUE,

@@ -5,12 +5,16 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function ListMiddlePart({ item = {} }) {
+	const { shipment_type = '', origin_location = {}, destination_location = {} } = item;
+	const originLocationName = origin_location?.display_name;
+	const destinationLocationName = destination_location?.display_name;
+
 	return (
 		<div className={styles.list_middle_part}>
 			<div className={styles.service_icon}>
 				<IcCHaulage />
 				<div className={styles.service_name}>
-					{startCase(item?.shipment_type)}
+					{startCase(shipment_type)}
 				</div>
 			</div>
 
@@ -18,11 +22,11 @@ function ListMiddlePart({ item = {} }) {
 				<Tooltip
 					content={(
 						<div>
-							<div style={{ fontSize: '10px' }}>{item?.origin_location?.display_name }</div>
+							<div style={{ fontSize: '10px' }}>{originLocationName}</div>
 						</div>
 					)}
 				>
-					<div>{item?.origin_location?.display_name || '-'}</div>
+					<div>{originLocationName || '-'}</div>
 				</Tooltip>
 				<div className={styles.arrow}>
 					<IcMPortArrow />
@@ -30,11 +34,11 @@ function ListMiddlePart({ item = {} }) {
 				<Tooltip
 					content={(
 						<div>
-							<div style={{ fontSize: '10px' }}>{item?.destination_location?.display_name}</div>
+							<div style={{ fontSize: '10px' }}>{destinationLocationName}</div>
 						</div>
 					)}
 				>
-					<div>{item?.destination_location?.display_name || '-'}</div>
+					<div>{destinationLocationName || '-'}</div>
 				</Tooltip>
 			</div>
 

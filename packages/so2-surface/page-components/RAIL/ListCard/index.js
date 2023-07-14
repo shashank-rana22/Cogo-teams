@@ -15,7 +15,7 @@ function ListCard({ item = {} }) {
 			<ListBody item={item} />
 			{dropDown ? <ViewCollectionParties shipmentId={item?.id} /> : null}
 			<button
-				onClick={() => setDropDown(!dropDown)}
+				onClick={() => setDropDown((prev) => !prev)}
 				className={styles.dropdown}
 			>
 				{ dropDown ? (

@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const MAX_ROWS = 3;
 
-function UploadedInvoices({ invoices }) {
+function UploadedInvoices({ invoices = [] }) {
 	const [showModal, setShowModal] = useState(false);
 	return (
 		<div>

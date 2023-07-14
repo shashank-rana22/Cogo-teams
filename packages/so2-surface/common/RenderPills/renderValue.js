@@ -2,30 +2,24 @@ import { startCase } from '@cogoport/utils';
 
 const DEFAULT_CONTAINER_COUNT = 1;
 
+const getContainerCount = (count) => {
+	if (count > DEFAULT_CONTAINER_COUNT) {
+		return `${startCase(count)} containers`;
+	}
+	return `${startCase(count)} container`;
+};
+
 export const renderValue = (label, detail = {}) => {
 	const {
 		weight, commodity, trade_type, source, containers_count, container_size, container_type,
 		container_load_sub_type, container_load_type,
 	} = detail;
 
-	const commodityDetails = () => (
-		<div>
-			{startCase(commodity)}
-		</div>
-	);
-
-	const getContainerCount = (count) => {
-		if (count > DEFAULT_CONTAINER_COUNT) {
-			return `${startCase(containers_count)} containers`;
-		}
-		return `${startCase(containers_count)} container`;
-	};
-
 	switch (label) {
 		case 'trade_type':
 			return startCase(trade_type || '');
 		case 'commodity':
-			return commodityDetails();
+			return startCase(commodity);
 		case 'weight':
 			return ` ${weight} kgs`;
 		case 'source':

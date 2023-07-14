@@ -6,16 +6,19 @@ function ListLeftPart({ item = {} }) {
 	const {
 		serial_id = '',
 		booking_party_details = {},
+		kam_detail = {},
 	} = item;
 
 	const { company_name = '' } = booking_party_details;
+	const { name = '' } = kam_detail;
 
 	return (
 		<div className={styles.list_left_part}>
 			<div className={styles.container}>
 				<div>
-					SHIPMENT ID :&nbsp;
-					{serial_id || ''}
+					SHIPMENT ID :
+					{' '}
+					{serial_id}
 				</div>
 				<Tooltip
 					theme="light"
@@ -30,8 +33,9 @@ function ListLeftPart({ item = {} }) {
 				</Tooltip>
 
 				<div className={styles.agent_name}>
-					KAM :&nbsp;
-					<span>{item?.kam_detail?.name}</span>
+					KAM :
+					{' '}
+					<span>{name}</span>
 				</div>
 			</div>
 			<div className={styles.line} />

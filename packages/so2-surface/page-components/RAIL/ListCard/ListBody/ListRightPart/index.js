@@ -3,7 +3,7 @@ import SERVICE_WISE_LABELS from '../../../../../helpers/service-wise-label';
 
 import styles from './styles.module.css';
 
-function ListRightPart({ item = {}, shipmentType }) {
+function ListRightPart({ item = {}, shipmentType = 'rail_domestic_freight' }) {
 	return (
 		<div className={styles.list_right_part}>
 			<div>

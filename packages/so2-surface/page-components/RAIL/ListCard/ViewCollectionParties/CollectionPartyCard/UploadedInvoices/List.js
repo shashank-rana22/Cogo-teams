@@ -1,5 +1,4 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -73,8 +72,11 @@ function List({ data = [], limit = false }) {
 		const displayType = label || 'Purchase';
 
 		if (item?.status === 'init') return `${displayType} Uploaded`;
-		if (item?.status === 'coe_approved' && item?.utr_nos?.length) { return `${displayType} Payment Processed`; }
-		if (item?.status === 'coe_approved') { return `${displayType} Pending For Payment`; }
+		if (item?.status === 'coe_approved') {
+			return item?.utr_nos?.length
+				? `${displayType} Payment Processed`
+				: `${displayType} Pending For Payment`;
+		}
 
 		return `${displayType} ${startCase(item?.status)}`;
 	};
@@ -86,8 +88,16 @@ function List({ data = [], limit = false }) {
 					return null;
 				}
 
+				const {
+					id, invoice_no, invoice_url, bank_details, invoice_total, invoice_currency,
+					remarks,
+				} = item || {};
+
+				const [bankDetail] = bank_details || [];
+				const { bank_name, bank_account_number } = bankDetail || {};
+
 				return (
-					<div key={data?.id} className={styles.row}>
+					<div key={id} className={styles.row}>
 						<div
 							className={styles.column}
 							style={{
@@ -95,15 +105,15 @@ function List({ data = [], limit = false }) {
 							}}
 						>
 							<Tooltip
-								content={item?.invoice_no}
+								content={invoice_no}
 							>
 								<a
-									href={item?.invoice_url}
+									href={invoice_url}
 									target="_blank"
 									rel="noreferrer"
 									className={styles.invoice_url}
 								>
-									{item?.invoice_no}
+									{invoice_no}
 								</a>
 							</Tooltip>
 						</div>
@@ -114,19 +124,19 @@ function List({ data = [], limit = false }) {
 							<Tooltip
 								content={(
 									<div>
-										<span>{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_name}</span>
+										<span>{bank_name}</span>
 										{' - A/C '}
 										<span>
-											{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_account_number}
+											{bank_account_number}
 										</span>
 									</div>
 								)}
 							>
 								<div className={styles.bank_details}>
-									<span>{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_name}</span>
+									<span>{bank_name}</span>
 									{' - A/C '}
 									<span>
-										{item?.bank_details?.[GLOBAL_CONSTANTS?.zeroth_index]?.bank_account_number}
+										{bank_account_number}
 									</span>
 								</div>
 							</Tooltip>
@@ -138,8 +148,8 @@ function List({ data = [], limit = false }) {
 										Invoice Total :
 										{' '}
 										{formatAmount({
-											amount   : item?.invoice_total,
-											currency : item?.invoice_currency,
+											amount   : invoice_total,
+											currency : invoice_currency,
 											options  : {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -154,8 +164,8 @@ function List({ data = [], limit = false }) {
 									Invoice Total :
 									{' '}
 									{formatAmount({
-										amount   : item?.invoice_total,
-										currency : item?.invoice_currency,
+										amount   : invoice_total,
+										currency : invoice_currency,
 										options  : {
 											style                 : 'currency',
 											currencyDisplay       : 'code',
@@ -173,7 +183,7 @@ function List({ data = [], limit = false }) {
 						<div className={styles.column} style={{ width: '20%' }}>
 							{item?.status === 'coe_rejected' ? (
 								<Tooltip
-									content={<p>{(item?.remarks || []).join(' , ')}</p>}
+									content={<p>{(remarks || []).join(' , ')}</p>}
 								>
 									<Pill>{purchaseType(item)}</Pill>
 								</Tooltip>

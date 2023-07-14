@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const LOADER_ARRAY_LENGTH = 5;
 const LOADER_ARRAY = Array.from(Array(LOADER_ARRAY_LENGTH).keys());
 
-function ViewCollectionParties({ shipmentId }) {
+function ViewCollectionParties({ shipmentId = '' }) {
 	const { loading, data } = useListShipmentCollectionParty(shipmentId);
 
 	const list = data?.list;

@@ -2,13 +2,13 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useContext } from 'react';
 
 import controlConfig from '../../../configs/CONTROLS_CONFIG.json';
-import TabContainer from '../../../configs/TAB_CONFIG';
+import tabContainer from '../../../configs/tabContainer';
 import DashboardContext from '../../../context/DashboardContext';
 
 function StepperTabs() {
 	const { stepperTab, filters, setFilters, setActiveTab, setStepperTab } = useContext(DashboardContext);
 
-	const tabsConfig = TabContainer();
+	const tabsConfig = tabContainer();
 
 	const onStepperTabChange = (val) => {
 		const [firstTab] = tabsConfig[val] || [];

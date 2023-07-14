@@ -13,9 +13,8 @@ import styles from './styles.module.css';
 
 function RAIL() {
 	const { setFilters = () => {} } = useContext(DashboardContext);
-	const { data, loading } = useListDocumentDesk();
-	const tabData = data?.pending_tasks_stats;
-	const { list = [], total_count = 0, page = 0, page_limit = 0 } = data;
+	const { data = {}, loading } = useListDocumentDesk();
+	const { list = [], total_count = 0, page = 0, page_limit = 0, pending_tasks_stats: tabData = {} } = data;
 	const handlePageChange = (pageVal) => {
 		setFilters((prev) => ({ ...prev, page: pageVal }));
 	};

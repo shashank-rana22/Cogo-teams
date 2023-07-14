@@ -1,5 +1,3 @@
-// import Loader from '../../common/Loader';
-
 import useListDocumentDesk from '../../hooks/useListDocumentDesk';
 
 import DeskTabs from './DeskTabs';

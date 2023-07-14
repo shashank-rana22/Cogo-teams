@@ -1,8 +1,6 @@
-import { useRouter } from 'next/router';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 import DashboardContext from '../context/DashboardContext';
-import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
 import FTL from './FTL';
 import Filters from './FTL/Filters';
@@ -11,19 +9,10 @@ import RAIL from './RAIL';
 import styles from './styles.module.css';
 
 export default function SO2Surface() {
-	const defaultValues = getLocalStorageVal();
-	const router = useRouter();
-
-	const [filters, setFilters] = useState(defaultValues?.filters);
-	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
-	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
-	const [scopeFilters] = useState(defaultValues?.scopeFilters);
-
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-		localStorage.setItem('document_desk_version', 'v1');
-	}, [router.asPath]);
+	const [filters, setFilters] = useState({});
+	const [stepperTab, setStepperTab] = useState('ftl_freight');
+	const [activeTab, setActiveTab] = useState('mandatory_docs_upload');
+	const [scopeFilters] = useState({});
 
 	const contextValues = useMemo(() => ({
 		activeTab,
@@ -31,10 +20,9 @@ export default function SO2Surface() {
 		filters,
 		setFilters,
 		scopeFilters,
-		handleVersionChange,
 		stepperTab,
 		setStepperTab,
-	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange, stepperTab, setStepperTab]);
+	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, stepperTab, setStepperTab]);
 
 	const getTabComponent = () => {
 		switch (stepperTab) {
