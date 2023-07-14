@@ -4,18 +4,22 @@ export const EMPLOYEE_DETAILS = [
 		key   : 'name',
 	},
 	{
-		label : 'Net Invoice Amount',
-		key   : 'net_invoice_amount',
-		type  : 'installment',
+		label   : 'Net Invoice Amount',
+		key     : 'net_invoice_amount',
+		type    : 'installment',
+		prefix  : 'INR',
+		objType : 'amount',
 	},
 	{
 		label : 'Employee Id',
 		key   : 'employee_code',
 	},
 	{
-		label : 'Monthly Installments',
-		key   : 'monthly_installments',
-		type  : 'installment',
+		label   : 'Monthly Installments',
+		key     : 'monthly_installments',
+		type    : 'installment',
+		prefix  : 'INR',
+		objType : 'amount',
 	},
 	{
 		label : 'Team Name',
@@ -29,45 +33,37 @@ export const EMPLOYEE_DETAILS = [
 
 export const EMPLOYEE_DEVICE_DETAILS = [
 	{
-		label : 'Current Device Status',
-		key   : 'current_device_status',
-	},
-	{
-		label : 'Surrendering Reason',
-		key   : 'surrendering_reason',
+		label : 'Device Type',
+		key   : 'device_type',
 	},
 	{
 		label : 'Serial ID',
 		key   : 'device_serial_id',
 	},
 	{
+		label  : 'Invoice Amount - GST in INR',
+		key    : 'invoice_amount',
+		prefix : 'INR',
+		type   : 'amount',
+	},
+	{
+		label  : 'GST Amount (Amount in INR)',
+		key    : 'tax_amount',
+		prefix : 'INR',
+		type   : 'amount',
+	},
+	{
 		label : 'Vendor Name',
 		key   : 'vendor_name',
-	},
-	{
-		label : 'Device Type',
-		key   : 'device_type',
-	},
-	{
-		label  : 'Invoice Amount (Amount in Rupees)',
-		key    : 'invoice_amount',
-		prefix : '₹',
-		type   : 'amount',
-	},
-	{
-		label  : 'GST Amount (Amount in Rupees)',
-		key    : 'tax_amount',
-		prefix : '₹',
-		type   : 'amount',
 	},
 	{
 		label : 'Warranty',
 		key   : 'warranty',
 	},
 	{
-		label  : 'Warranty Amount (Amount in Rupees)',
+		label  : 'Warranty Amount (Amount in INR)',
 		key    : 'warranty_amount',
-		prefix : '₹',
+		prefix : 'INR',
 		type   : 'amount',
 	},
 ];

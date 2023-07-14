@@ -19,6 +19,12 @@
 	flex-basis: calc(33.33% - 20px);
 	margin: 10px;
 
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+
 	@media (max-width: 768px) {
 		flex-basis: 100%;
 	}

@@ -1,5 +1,7 @@
 import { Button, Modal, Textarea, Toast, Tags } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -17,6 +19,7 @@ import styles from './styles.module.css';
 const geo = getGeoConstants();
 
 const DEFAULT_FIXED_VALUE = 2;
+const DEFAULT_VALUE = 1;
 
 function EmployeeDetails() {
 	const router = useRouter();
@@ -36,13 +39,13 @@ function EmployeeDetails() {
 	const { data, loading, refetch } = useGetEmployeeDetails(employee_id);
 	const { updateDetail, loading : detailLoading } = useUpdateDetail(refetch);
 
-	const { employee_detail, employee_device_detail } = data || {};
+	const { employee_detail, employee_device_detail = [] } = data || {};
 
-	const [employeeDeviceData] = employee_device_detail || [];
+	const employeeDeviceData = employee_device_detail[employee_device_detail.length - DEFAULT_VALUE] || [];
 
 	const { invoice_url, status } = employeeDeviceData || {};
 
-	const getData = (key, type) => {
+	const getData = (key, type, isNumber) => {
 		const payloadType = type ? employeeDeviceData : employee_detail;
 		const payloadValue = payloadType?.[key];
 
@@ -50,7 +53,14 @@ function EmployeeDetails() {
 			return startCase(payloadValue || '-');
 		}
 
-		return payloadValue?.toFixed(DEFAULT_FIXED_VALUE) || '-';
+		if (isNumber) {
+			return formatAmount({
+				amount   : payloadValue?.toFixed(DEFAULT_FIXED_VALUE) || GLOBAL_CONSTANTS.zeroth_index,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+			});
+		}
+
+		return payloadValue?.toString()?.replace(/\.?0+$/, '') || '-';
 	};
 
 	const handleTags = (text, color) => {
@@ -167,7 +177,12 @@ function EmployeeDetails() {
 									{' '}
 									:
 								</div>
-								<div className={styles.employee_detail}>{getData(val.key, val.type)}</div>
+								<div className={styles.employee_detail}>
+									{val.prefix}
+									{' '}
+
+									{getData(val.key, val.type, val.objType)}
+								</div>
 							</div>
 						))}
 					</div>

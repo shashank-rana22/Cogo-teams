@@ -93,8 +93,7 @@ function EmployeeList() {
 							/>
 						</div>
 					</>
-				) }
-
+				)}
 		</>
 	);
 }

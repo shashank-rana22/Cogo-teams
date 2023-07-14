@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import {
 	useForm, InputController, SelectController, DatepickerController, UploadController,
 } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
@@ -18,6 +17,8 @@ import {
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 1;
+
 function EmployeeDashboard() {
 	const { profile = {} } = useSelector((state) => state);
 
@@ -29,7 +30,11 @@ function EmployeeDashboard() {
 	const { createDeviceDetail, loading } = useCreateInvoice(refetch);
 	const { data : employeeData, loading : employeeDataLoading } = useGetEmployeeData();
 
-	const { employee_device_detail } = data || {};
+	const { employee_device_detail = [] } = data || {};
+
+	const lastData = employee_device_detail[employee_device_detail.length - DEFAULT_VALUE];
+
+	const { status } = lastData || {};
 
 	const {
 		control,
@@ -49,12 +54,16 @@ function EmployeeDashboard() {
 		createDeviceDetail(values);
 	};
 
-	const { vendor_name, device_type } = formValues;
+	const { vendor_name, device_type, warranty } = formValues;
 
 	useEffect(() => {
 		setValue('vendor_name', '');
 		setValue('other_vendor_name', '');
 	}, [device_type, setValue]);
+
+	useEffect(() => {
+		setValue('warranty_amount', '0');
+	}, [warranty, setValue]);
 
 	if (dataLoading || employeeDataLoading) {
 		return (
@@ -64,7 +73,7 @@ function EmployeeDashboard() {
 		);
 	}
 
-	if (data) {
+	if (data && !status.includes('rejected')) {
 		return (
 			<>
 				<div className={styles.title}>Employee BYOD Form</div>
@@ -123,14 +132,14 @@ function EmployeeDashboard() {
 						)}
 					</div>
 					<div className={styles.controller}>
-						<div className={styles.label}>Invoice Amount</div>
+						<div className={styles.label}>Invoice Amount - GST in INR</div>
 						<InputController
 							control={control}
 							name="invoice_amount"
 							size="md"
 							type="number"
 							placeholder="Invoice Amount or 0"
-							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
+							prefix="INR"
 							rules={{ required: true }}
 						/>
 						{errors.invoice_amount && (
@@ -138,14 +147,14 @@ function EmployeeDashboard() {
 						)}
 					</div>
 					<div className={styles.controller}>
-						<div className={styles.label}>GST Amount</div>
+						<div className={styles.label}>GST Amount in INR</div>
 						<InputController
 							control={control}
 							name="tax_amount"
 							size="md"
 							type="number"
 							placeholder="GST Amount or 0"
-							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
+							prefix="INR"
 							rules={{ required: true }}
 						/>
 						{errors.tax_amount && (
@@ -153,14 +162,15 @@ function EmployeeDashboard() {
 						)}
 					</div>
 					<div className={styles.controller}>
-						<div className={styles.label}>Warranty Amount</div>
+						<div className={styles.label}>Warranty Amount in INR</div>
 						<InputController
 							control={control}
 							name="warranty_amount"
 							size="md"
 							type="number"
+							disabled={warranty === 'no'}
 							placeholder="Warranty Amount or 0"
-							prefix={GLOBAL_CONSTANTS.currency_symbol.INR}
+							prefix="INR"
 							rules={{ required: true }}
 						/>
 						{errors.warranty_amount && (

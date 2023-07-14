@@ -86,6 +86,7 @@ const useGetColumns = (isAdmin) => {
 
 		return (
 			<Button
+				disabled
 				className={`${styles.color_blue} ${styles.cursor_auto}`}
 			>
 				Approve

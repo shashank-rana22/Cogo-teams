@@ -121,10 +121,6 @@ export const SURRENDER_OPTIONS = [
 		value : 'buying_new_laptop_from_outside',
 	},
 	{
-		label : 'Allotted a desktop',
-		value : 'allotted_desktop',
-	},
-	{
 		label : 'Bringing your device',
 		value : 'bring_your_device',
 	},
@@ -143,10 +139,6 @@ export const WARRANTY = [
 		label : 'No',
 		value : 'no',
 	},
-	{
-		label : 'Not Applicable (Desktop)',
-		value : 'not_applicable',
-	},
 ];
 
 export const DEVICE_OPTIONS = [
@@ -157,10 +149,6 @@ export const DEVICE_OPTIONS = [
 	{
 		label : 'New Laptop',
 		value : 'new_laptop',
-	},
-	{
-		label : 'Desktop',
-		value : 'desktop',
 	},
 ];
 
@@ -187,10 +175,7 @@ export const getVendorNameOptions = (deviceType) => {
 		}];
 	}
 
-	return [{
-		label : 'Alloted By Cogoport',
-		value : 'alloted_by_cogoport',
-	}];
+	return [];
 };
 
 export const HRBP_TAB_OPTIONS = [
