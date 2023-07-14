@@ -15,6 +15,25 @@ import styles from './styles.module.css';
 
 const SHIPPER = 'shipper';
 const PINCODE_INDEX = 1;
+
+function Error({ keyName = '', errors = {} }) {
+	return errors?.[keyName] ? <div className={styles.errors}>{errors?.[keyName]?.message}</div> : null;
+}
+
+function TaxNumber({ prefix = '', postfix = '', country_id = '' }) {
+	return (
+		<>
+			{prefix}
+			<CountrySpecificData
+				country_id={country_id}
+				accessorType="registration_number"
+				accessor="label"
+			/>
+			{postfix}
+		</>
+	);
+}
+
 function DefaultForm({
 	companyType = '',
 	tradePartyType = '',
@@ -35,19 +54,6 @@ function DefaultForm({
 	});
 	const isShipperFTL = tradePartyType === SHIPPER && shipment_type === 'ftl_freight';
 
-	function TaxNumber({ prefix = '', postfix = '' }) {
-		return (
-			<>
-				{prefix}
-				<CountrySpecificData
-					country_id={country_id}
-					accessorType="registration_number"
-					accessor="label"
-				/>
-				{postfix}
-			</>
-		);
-	}
 	const {
 		control,
 		watch,
@@ -75,10 +81,6 @@ function DefaultForm({
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
 
-	function Error(key) {
-		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
-	}
-
 	return (
 		<div>
 			<form className={styles.form_container}>
@@ -97,7 +99,7 @@ function DefaultForm({
 									rules={{ required: { value: true, message: 'Company is required' } }}
 								/>
 
-								{Error('trade_party_id')}
+								<Error keyName="trade_party_id" errors={errors} />
 							</div>
 
 							{!isEmpty(formValues?.trade_party_id) && (
@@ -112,7 +114,7 @@ function DefaultForm({
 										options={address_options[formValues.trade_party_id]}
 										rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
-									{Error('address')}
+									<Error keyName="address" errors={errors} />
 								</div>
 							)}
 							{!isEmpty(formValues?.address) && isShipperFTL
@@ -129,7 +131,7 @@ function DefaultForm({
 											options={pan_options[formValues.trade_party_id]}
 											rules={{ required: { value: true, message: 'PAN is required' } }}
 										/>
-										{Error('registration_number')}
+										<Error keyName="registration_number" errors={errors} />
 									</div>
 								)}
 							{!isEmpty(formValues?.address) && isShipperFTL
@@ -137,23 +139,26 @@ function DefaultForm({
 								&& (
 									<div className={styles.form_item_container}>
 										<label className={styles.form_label}>
-											<TaxNumber prefix="Select " />
+											<TaxNumber country_id={country_id} prefix="Select " />
 										</label>
 										<SelectController
 											style={{ maxWidth: '250px', minWidth: '200px' }}
 											size="sm"
 											name="tax_number"
-											placeholder={<TaxNumber prefix="Select " />}
+											placeholder={<TaxNumber country_id={country_id} prefix="Select " />}
 											control={control}
 											options={gstin_options[formValues.trade_party_id]}
 											rules={{
 												required: {
 													value   : true,
-													message : <TaxNumber postfix=" is required" />,
+													message : <TaxNumber
+														country_id={country_id}
+														postfix=" is required"
+													/>,
 												},
 											}}
 										/>
-										{Error('tax_number')}
+										<Error keyName="tax_number" errors={errors} />
 									</div>
 								)}
 							{!isEmpty(formValues?.address) && (
