@@ -8,7 +8,7 @@ const TIME_TEXT_TEN_SECONDS = 10;
 const TIME_TEXT_TWENTY_SECONDS = 20;
 const TIME_VALUE_ONE_SECOND = 1;
 
-function Timer({ timer }) {
+function Timer({ timer = {} }) {
 	let abc = 'green_text';
 	const timerClass = () => {
 		if (timer.seconds <= TIME_TEXT_TEN_SECONDS) {
@@ -39,10 +39,10 @@ function Timer({ timer }) {
 	);
 }
 function TimerContainer({
-	resendOtpTimerDuration,
-	sendOtp,
-	useImperativeHandleRef,
-	loading,
+	resendOtpTimerDuration = 0,
+	sendOtp = () => {},
+	useImperativeHandleRef = {},
+	loading = false,
 	manualOtpRequest = false,
 }) {
 	const [isOtpRequestManual, setIsOtpRequestManual] = useState(
@@ -83,14 +83,13 @@ function TimerContainer({
 }
 
 function OTPInput({
-	otpLength,
+	otpLength = 4,
 	setOtpValue = () => { },
 	loading = false,
 	sendOtp = () => { },
 	resendOtpTimerDuration = 30,
 	placeholder = ' ',
 	manualOtpRequest = false,
-
 }) {
 	const useImperativeHandleRef = useRef({});
 
@@ -103,7 +102,7 @@ function OTPInput({
 			<OtpInput
 				otpLength={otpLength}
 				inputSize="lg"
-				onChange={(value) => handleChange(value)}
+				onChange={handleChange}
 				ref={useImperativeHandleRef}
 				placeholder={placeholder}
 			/>

@@ -26,10 +26,6 @@ const WHITE_BACKGROUND_MAPPING = [
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
-	const [showMobileNavbar, setShowMobileNavbar] = useState(false);
-	const [pinnedNavKeys, setPinnedNavKeys] = useState([]);
-	const [announcements, setAnnouncements] = useState([]);
-
 	const {
 		user_data,
 		pathname,
@@ -37,6 +33,10 @@ function AdminLayout({
 		user_data : profile || {},
 		pathname  : general.pathname,
 	}));
+
+	const [showMobileNavbar, setShowMobileNavbar] = useState(false);
+	const [pinnedNavKeys, setPinnedNavKeys] = useState([]);
+	const [announcements, setAnnouncements] = useState([]);
 
 	const {
 		user: { id: user_id = '' },
@@ -114,7 +114,6 @@ function AdminLayout({
 				userRoleIds={user_role_ids}
 				firestore={firestore}
 			/>
-
 		</div>
 	);
 }

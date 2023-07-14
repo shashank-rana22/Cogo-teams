@@ -11,7 +11,7 @@ const useGetGenerateOtp = () => {
 
 	const generateOtp = useCallback(async ({ timer } = {}) => {
 		try {
-			await trigger({});
+			await trigger();
 			timer?.restart?.();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
