@@ -19,6 +19,7 @@ import styles from './styles.module.css';
 const MINIMUM_VALUE = 1;
 
 function Inventory() {
+	const { shipment_data = {}, isGettingShipment } = useContext(ShipmentDetailContext);
 	const [globalRouteState, setGlobalRouteState] = useState({
 		routeList   : new Set(),
 		allSelected : false,
@@ -27,8 +28,6 @@ function Inventory() {
 	});
 
 	const [showModal, setShowModal] = useState(false);
-
-	const { shipment_data = {}, isGettingShipment } = useContext(ShipmentDetailContext);
 
 	const { data } = useGetRailShipmentContainerDetail({
 		defaultParams: {

@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -23,13 +23,12 @@ const FIRST_INDEX = 1;
 const SECOND_INDEX = 2;
 
 function EditCancelService({ serviceData = {} }) {
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { state, trade_type, service_type } = serviceData || {};
-
-	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -52,15 +51,15 @@ function EditCancelService({ serviceData = {} }) {
 	}
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<div
+		<Button
 			key={value}
-			role="button"
-			tabIndex={0}
 			className={styles.action_button}
 			onClick={() => openModal(value)}
+			themeType="tertiary"
+			size="md"
 		>
 			{label}
-		</div>
+		</Button>
 	) : null));
 
 	return (
@@ -71,6 +70,7 @@ function EditCancelService({ serviceData = {} }) {
 				placement="bottom"
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
+				className={styles.popover}
 			>
 				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 			</Popover>
