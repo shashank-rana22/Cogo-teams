@@ -34,7 +34,7 @@ function CreateRecordedSessions({
 						video_name: e,
 					}))}
 					placeholder="Enter Video Name"
-					mandatory
+					rules={{ required: 'Video Name is required' }}
 				/>
 			</div>
 
@@ -46,7 +46,7 @@ function CreateRecordedSessions({
 						video_link: e,
 					}))}
 					placeholder="Enter Video Link"
-					mandatory
+					rules={{ required: 'Video Link is required' }}
 				/>
 			</div>
 
