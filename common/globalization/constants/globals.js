@@ -330,6 +330,17 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
 		],
+		timezone_options: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
 	},
 
 	regex_patterns: {
