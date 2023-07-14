@@ -562,15 +562,69 @@ export default {
 			allowed_to_create_enrichment_requests : false,
 			tabs                                  : ['manual_enrichment', 'file_management'],
 			manual_enrichment                     : {
-				columns      : ['id', 'business_name', 'registration_number', 'created_at', 'action'],
-				hide_columns : {
-					active    : [],
-					responded : [],
-					success   : ['action'],
+				possible_columns: [
+					'id',
+					'business_name',
+					'registration_number',
+					'requested_agent',
+					'created_at',
+					'action',
+					'status',
+				],
+				columns: {
+					relationship_manager_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'status',
+						],
+					},
+					agent_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'status',
+						],
+					},
 				},
 			},
 			file_management: {
-				columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
+				possible_columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
 			},
 
 		},

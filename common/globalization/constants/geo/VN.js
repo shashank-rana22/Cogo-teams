@@ -60,7 +60,9 @@ export default {
 			'72053f8a-14c3-45bc-b44a-2e9c609a76b1',
 			'9fc9dabf-9d82-46ef-a935-080afb85b273',
 		],
-		third_party_enrichment_agencies_rm_ids: ['9fc9dabf-9d82-46ef-a935-080afb85b273'],
+		third_party_enrichment_agencies_rm_ids: [
+			'9fc9dabf-9d82-46ef-a935-080afb85b273',
+		],
 
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
 		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
@@ -438,22 +440,75 @@ export default {
 			allowed_to_create_enrichment_requests : true,
 			tabs                                  : ['manual_enrichment'],
 			manual_enrichment                     : {
-				allowed : true,
-				columns : [
-					'id', 'business_name', 'registration_number', 'requested_agent', 'created_at', 'action',
-				],
-				hide_columns: {
-					active    : [],
-					responded : [],
-					success   : ['action'],
+				possible_columns: ['id',
+					'business_name',
+					'registration_number',
+					'requested_agent',
+					'created_at',
+					'action', 'status'],
+				columns: {
+					relationship_manager_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'status',
+						],
+					},
+					agent_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'status',
+						],
+					},
 				},
 			},
 
 			file_management: {
-				allowed : false,
-				columns : ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
+				possible_columns: [
+					'file_id',
+					'file_name',
+					'upload_date',
+					'error_sheet_url',
+					'sheet_url',
+					'status',
+				],
 			},
-
 		},
 
 		account_receivables: {

@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { startCase } from '@cogoport/utils';
 
 import Header from '../../commons/Header';
@@ -6,6 +7,8 @@ import TableComponent from '../../commons/TableComponent';
 import { getSecondaryTabOptions } from '../../utils/secondary-tabs-mapping';
 
 import EnrichmentStats from './components/EnrichmentStats';
+
+const geo = getGeoConstants();
 
 function ManualEnrichment(props) {
 	const {
@@ -52,9 +55,19 @@ function ManualEnrichment(props) {
 					themeType="primary"
 				>
 					{(options || []).map((option) => {
-						const { title = '', key = '', hide_columns = [] } = option;
+						const { title = '', key = '' } = option;
 
-						const filteredColumns = columns.filter((listItem) => !hide_columns?.includes(listItem.id));
+						const is_manager_role = geo.uuid.third_party_enrichment_agencies_rm_ids.includes(authRoleId);
+
+						let allowedColumns = geo.navigations
+							.enrichment.manual_enrichment.columns.agent_view?.[secondaryTab];
+
+						if (is_manager_role) {
+							allowedColumns = geo.navigations
+								.enrichment.manual_enrichment.columns.relationship_manager_view?.[secondaryTab];
+						}
+
+						const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 						return (
 							<TabPanel

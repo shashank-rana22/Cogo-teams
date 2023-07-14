@@ -73,7 +73,7 @@ const getEnrichmentColumns = ({
 	},
 	{
 		id       : 'registration_number',
-		Header   : 'PAN',
+		Header   : 'TAX Number',
 		accessor : ({ organization, lead_organization, lead_organization_id }) => (
 			<section>
 				{lead_organization_id

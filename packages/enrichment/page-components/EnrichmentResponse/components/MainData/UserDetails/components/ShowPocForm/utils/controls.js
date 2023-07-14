@@ -9,7 +9,7 @@ const controls = [
 		type        : 'text',
 		style       : { flexBasis: '42%' },
 		placeholder : 'Enter Name',
-		rules       : { required: 'Contact Name is required' },
+		rules       : { required: false },
 
 	},
 	{
@@ -19,7 +19,7 @@ const controls = [
 		style       : { flexBasis: '42%' },
 		placeholder : 'Type here..',
 		rules       : {
-			required : 'Email of the Contact is required',
+			required : false,
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : 'Email is invalid',
@@ -33,7 +33,7 @@ const controls = [
 		type        : 'mobile-number-select',
 		style       : { flexBasis: '42%' },
 		placeholder : 'Type here',
-		rules       : { required: 'Contact Number is required' },
+		rules       : { required: false },
 
 	},
 
@@ -60,7 +60,7 @@ const controls = [
 		type        : 'multiSelect',
 		placeholder : 'Select a role type',
 		style       : { flexBasis: '42%' },
-		rules       : { required: 'Role in Company is required' },
+		rules       : { required: false },
 		options     : workScopes,
 
 	},

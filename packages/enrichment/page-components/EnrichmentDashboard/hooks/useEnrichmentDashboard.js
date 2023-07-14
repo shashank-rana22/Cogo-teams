@@ -109,6 +109,7 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 
 	useEffect(() => {
 		setParams((previousParams) => ({
+
 			...previousParams,
 			...(allowedToSeeAgentsData && {
 				user_data_required: true,
@@ -133,13 +134,13 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 		secondaryTab,
 	});
 
-	const allowedColumns = geo.navigations.enrichment[primaryTab].columns;
+	const allowedColumns = geo.navigations.enrichment[primaryTab].possible_columns;
 
 	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
 	return {
-		listRefetch :	refetch,
-		columns     : filteredColumns,
+		refetch,
+		columns: filteredColumns,
 		list,
 		paginationData,
 		loading,

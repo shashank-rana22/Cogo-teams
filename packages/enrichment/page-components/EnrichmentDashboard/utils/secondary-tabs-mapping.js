@@ -1,32 +1,25 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-
-const geo = getGeoConstants();
-
 export const getSecondaryTabOptions = () => ({
 	active: {
-		key          : 'active',
-		title        : 'active',
-		hide_columns : geo.navigations.enrichment.manual_enrichment.hide_columns.active,
-		actions      : {
+		key     : 'active',
+		title   : 'active',
+		actions : {
 			add    : 'Add Details',
 			failed : 'Mark as Failed',
 
 		},
 	},
 	responded: {
-		key          : 'responded',
-		title        : 'processing',
-		hide_columns : geo.navigations.enrichment.manual_enrichment.hide_columns.responded,
-		actions      : {
+		key     : 'responded',
+		title   : 'processing',
+		actions : {
 			edit    : 'Edit Details',
 			success : 'Mark as Completed',
 		},
 	},
 	success: {
-		key          : 'success',
-		title        : 'completed',
-		hide_columns : geo.navigations.enrichment.manual_enrichment.hide_columns.success,
-		actions      : {},
+		key     : 'success',
+		title   : 'completed',
+		actions : {},
 	},
 
 });

@@ -24,7 +24,7 @@ const getControls = ({ country_id, region_id }) => {
 			style       : { flexBasis: '42%' },
 			isClearable : true,
 			rules       : {
-				required: 'Full Address is required',
+				required: false,
 			},
 		},
 		{
@@ -39,7 +39,7 @@ const getControls = ({ country_id, region_id }) => {
 				filters: { type: ['country'] },
 			},
 			placeholder : 'Select Country',
-			rules       : { required: { value: true, message: 'Country is required' } },
+			rules       : { required: false },
 		},
 		{
 			name        : 'state',
@@ -74,7 +74,7 @@ const getControls = ({ country_id, region_id }) => {
 			multiple    : false,
 			isClearable : true,
 			rules       : {
-				required: 'City is required',
+				required: false,
 			},
 		},
 
@@ -90,7 +90,7 @@ const getControls = ({ country_id, region_id }) => {
 			placeholder : 'Select Pincode',
 			params      : { filters: { type: ['pincode'], country_id, region_id } },
 			rules       : {
-				required: { value: true, message: 'Pincode is required' },
+				required: false,
 			},
 			show: true,
 		},
@@ -103,7 +103,8 @@ const getControls = ({ country_id, region_id }) => {
 			placeholder : `Enter ${taxLabel}`,
 			isClearable : true,
 			rules       : {
-				pattern: {
+				required : false,
+				pattern  : {
 					value   : taxPattern,
 					message : `Please enter a valid ${taxLabel}`,
 				},
