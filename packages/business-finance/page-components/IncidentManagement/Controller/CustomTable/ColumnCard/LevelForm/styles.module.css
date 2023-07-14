@@ -1,0 +1,19 @@
+.flex {
+	display: flex;
+	padding-left: 12px;
+}
+
+.form {
+	display: flex;
+}
+
+.container {
+	padding-left: 12px;
+	background-color: #f3fafa;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}

@@ -1,0 +1,24 @@
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.plus {
+	margin-right: 24px;
+	color: #ee3425;
+}
+
+.delete {
+	color: #ee3425;
+}
+
+.flex {
+	display: flex;
+}
