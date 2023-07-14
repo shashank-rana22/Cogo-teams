@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/email-check */
 /* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
@@ -240,6 +241,11 @@ const GLOBAL_CONSTANTS = {
 		cogo_one_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
 		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		inbox_icon          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/colored_inbox.png',
+		email_spam_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
+		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
+		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
+		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -248,8 +254,18 @@ const GLOBAL_CONSTANTS = {
 	drive_link: {
 		introduction_to_cogoport_link:
 		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-		git_course_link      : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-		html_css_course_link : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+		git_course_link:
+		'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
+		html_css_course_link:
+		'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+		html_css_assessment:
+		'https://drive.google.com/file/d/1N1HFExQLhUaeppFEdOYUz5H1lMQq1GOx/view?usp=drive_link',
+		responsive_web_design:
+		'https://drive.google.com/file/d/17-q8E1OtNaqzG5eDqUriA9JL4IDVTpeX/view?usp=drive_link',
+		responsive_web_design_assessment:
+		'https://drive.google.com/file/d/1uqJ8jiDcDj6-6Yd_mQnBE3muuoFpGmbf/view?usp=sharing',
+		javascript_basics_game_development:
+		'https://drive.google.com/file/d/1IIVowcpe4EurhYamS16h1n2oyjUFAns8/view?usp=sharing',
 	},
 
 	urls: {
@@ -321,6 +337,17 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
 		],
+		timezone_options: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
 	},
 
 	regex_patterns: {
@@ -335,6 +362,7 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
@@ -434,6 +462,11 @@ const GLOBAL_CONSTANTS = {
 		fcl_freight_local     : 'fcl-local',
 		domestic_air_freight  : 'domestic-air-freight',
 		rail_domestic_freight : 'rail-domestic',
+	},
+
+	emails: {
+		import_rates : 'import.rates@cogoport.com',
+		export_rates : 'export.rates@cogoport.com',
 	},
 };
 

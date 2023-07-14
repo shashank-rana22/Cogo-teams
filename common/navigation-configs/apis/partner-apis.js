@@ -8596,6 +8596,12 @@ const partner = {
 			module      : 'invoices',
 			feature     : 'invoices',
 		},
+		{
+			api         : 'get_payments_report_ar_ledger',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 	],
 	compliance: [
 		{
@@ -9431,6 +9437,11 @@ const partner = {
 
 	campaign_dashboard: [
 		{
+			api          : 'get_segment_verification_stats',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
@@ -9717,6 +9728,11 @@ const partner = {
 			api          : 'get_previous_campaign_node',
 			access_type  : 'private',
 			service_name : 'campaign',
+		},
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 	],
 	segmentation: [
@@ -12519,6 +12535,26 @@ const partner = {
 		},
 		{
 			api          : 'create_promotional_rate_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_services',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

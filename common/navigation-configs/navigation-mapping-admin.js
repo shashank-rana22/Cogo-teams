@@ -205,7 +205,7 @@ const navigationMappingAdmin = {
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
 			...apis.sales_dashboard,
-
+			...apis.cogopoints,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -692,8 +692,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Operators',
-				href  : '/operators',
-				as    : '/operators',
+				href  : '/v2/operators',
+				as    : '/v2/operators',
 				type  : 'link',
 			},
 		],
@@ -1444,7 +1444,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/so2-surface',
 				as            : '/v2/so2-surface',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
 		],
@@ -2311,6 +2311,16 @@ const navigationMappingAdmin = {
 				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
 				type          : 'link',
 				possible_apis : [],
 				icon          : IcMDataPipeline,

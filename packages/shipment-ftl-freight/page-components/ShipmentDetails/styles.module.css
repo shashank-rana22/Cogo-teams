@@ -17,6 +17,14 @@
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 }
 
+.purchasecontainer {
+	padding: 16px 12px 14px;
+}
+
+.accordian {
+	margin: 14px 12px;
+}
+
 .loader {
 	display: flex;
 	flex-direction: column-reverse;
