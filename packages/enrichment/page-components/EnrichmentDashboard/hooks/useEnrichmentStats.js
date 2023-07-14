@@ -27,8 +27,8 @@ const useEnrichmentStats = () => {
 
 	return {
 		loading,
-		stats: data,
-		refetch,
+		stats        : data,
+		refetchStats : refetch,
 	};
 };
 

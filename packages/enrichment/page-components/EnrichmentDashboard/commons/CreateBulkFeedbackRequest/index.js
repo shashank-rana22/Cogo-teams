@@ -16,7 +16,7 @@ const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
 const geo = getGeoConstants();
 
-function CreateBulkFeedbackRequest({ refetch = () => {} }) {
+function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {} }) {
 	const {
 		onCreateFeedback,
 		showModal,
@@ -28,7 +28,7 @@ function CreateBulkFeedbackRequest({ refetch = () => {} }) {
 		thirdParty,
 		setThirdParty,
 		setThirdPartyPayload = () => {},
-	} = useCreateBulkEnrichmentRequests({ refetch });
+	} = useCreateBulkEnrichmentRequests({ refetch, refetchStats });
 
 	const thirdPartyOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),

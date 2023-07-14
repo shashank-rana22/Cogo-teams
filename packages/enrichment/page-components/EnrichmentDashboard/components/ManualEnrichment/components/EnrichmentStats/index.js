@@ -3,18 +3,17 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import getPieChartData from '../../../../../../configurations/get-pie-chart-data';
-import useEnrichmentStats from '../../../../hooks/useEnrichmentStats';
 
 import styles from './styles.module.css';
 
-function EnrichmentStats() {
-	const { stats = {}, loading = false } = useEnrichmentStats();
+function EnrichmentStats(props) {
+	const { stats = {}, loading: loadingStats = false } = props;
 
 	const pieChartData = getPieChartData({ stats });
 
 	const isEmpty = Object.values(stats).every((item) => item === GLOBAL_CONSTANTS.zeroth_index);
 
-	if (isEmpty && !loading) {
+	if (isEmpty && !loadingStats) {
 		return (
 			<section className={styles.empty_container}>
 				<div className={styles.empty_text}>Pie Statistics Not Found !!!</div>

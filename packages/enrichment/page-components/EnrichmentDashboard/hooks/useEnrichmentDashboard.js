@@ -109,17 +109,17 @@ const useEnrichmentDashboard = ({ primaryTab = 'manual_enrichment', secondaryTab
 
 	useEffect(() => {
 		setParams((previousParams) => ({
-
 			...previousParams,
 			...(allowedToSeeAgentsData && {
 				user_data_required: true,
 			}),
 			filters: {
 				...previousParams?.filters,
-				status: [secondaryTab],
+				user_id : selected_agent_id || undefined,
+				status  : [secondaryTab],
 			},
 		}));
-	}, [allowedToSeeAgentsData, secondaryTab]);
+	}, [allowedToSeeAgentsData, secondaryTab, selected_agent_id]);
 
 	const handleEditDetails = (feedback_request_id) => {
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);

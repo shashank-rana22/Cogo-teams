@@ -451,7 +451,6 @@ export default {
 						active: [
 							'id',
 							'business_name',
-							'registration_number',
 							'requested_agent',
 							'created_at',
 							'action',
@@ -459,7 +458,6 @@ export default {
 						responded: [
 							'id',
 							'business_name',
-							'registration_number',
 							'requested_agent',
 							'created_at',
 							'action',
@@ -467,7 +465,6 @@ export default {
 						success: [
 							'id',
 							'business_name',
-							'registration_number',
 							'requested_agent',
 							'created_at',
 							'status',
@@ -477,21 +474,18 @@ export default {
 						active: [
 							'id',
 							'business_name',
-							'registration_number',
 							'created_at',
 							'action',
 						],
 						responded: [
 							'id',
 							'business_name',
-							'registration_number',
 							'created_at',
 							'action',
 						],
 						success: [
 							'id',
 							'business_name',
-							'registration_number',
 							'created_at',
 							'status',
 						],

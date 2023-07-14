@@ -13,6 +13,7 @@ const geo = getGeoConstants();
 function Header(props) {
 	const {
 		refetch = () => {},
+		refetchStats = () => {},
 		debounceQuery,
 		searchValue = '',
 		setSearchValue = () => {},
@@ -50,7 +51,12 @@ function Header(props) {
 			</>
 		),
 		manual_enrichment: (
-			allowedToCreateBulkRequest ? <CreateBulkFeedbackRequest refetch={refetch} /> : null
+			allowedToCreateBulkRequest ? (
+				<CreateBulkFeedbackRequest
+					refetch={refetch}
+					refetchStats={refetchStats}
+				/>
+			) : null
 		),
 	};
 

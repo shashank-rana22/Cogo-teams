@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkEnrichmentRequests = ({ refetch = () => {} }) => {
+const useCreateBulkEnrichmentRequests = ({ refetch = () => {}, refetchStats = () => {} }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const [thirdParty, setThirdParty] = useState('');
@@ -39,6 +39,7 @@ const useCreateBulkEnrichmentRequests = ({ refetch = () => {} }) => {
 			setShowModal(false);
 
 			refetch();
+			refetchStats();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

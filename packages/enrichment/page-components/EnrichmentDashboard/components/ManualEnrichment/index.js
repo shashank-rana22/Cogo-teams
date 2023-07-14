@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 
 import Header from '../../commons/Header';
 import TableComponent from '../../commons/TableComponent';
+import useEnrichmentStats from '../../hooks/useEnrichmentStats';
 import { getSecondaryTabOptions } from '../../utils/secondary-tabs-mapping';
 
 import EnrichmentStats from './components/EnrichmentStats';
@@ -28,6 +29,8 @@ function ManualEnrichment(props) {
 		authRoleId = '',
 	} = props;
 
+	const { stats = {}, loading: loadingStats = false, refetchStats = () => {} } = useEnrichmentStats();
+
 	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions();
 
 	const options = Object.values(SECONDARY_TAB_OPTIONS);
@@ -37,6 +40,7 @@ function ManualEnrichment(props) {
 
 			<Header
 				refetch={refetch}
+				refetchStats={refetchStats}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
@@ -45,7 +49,7 @@ function ManualEnrichment(props) {
 				authRoleId={authRoleId}
 			/>
 
-			<EnrichmentStats />
+			<EnrichmentStats stats={stats} loadingStats={loadingStats} />
 
 			<div>
 				<Tabs
