@@ -7,10 +7,10 @@ const SINGULAR_CONSTANT = 1;
 const ROUNDING_OFF_CONSTANT = 2;
 const VOLUMN_CONVERSION_CONSTANT = 166.67;
 const INCREMENT_CONSTANT = 1;
-const DEFAULT_VOLUMN = 0;
+const DEFAULT_VOLUME = 0;
 
 export const renderValue = (label, overview, detail = {}) => {
-	const chargableWeight = Math.max((detail?.volume || DEFAULT_VOLUMN) * VOLUMN_CONVERSION_CONSTANT, detail?.weight);
+	const chargableWeight = Math.max((detail?.volume || DEFAULT_VOLUME) * VOLUMN_CONVERSION_CONSTANT, detail?.weight);
 
 	const volume = ` ${detail.volume} cbm`;
 
