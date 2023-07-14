@@ -22,7 +22,7 @@ Object.values(GLOBAL_CONSTANTS.cogoport_entities).map((value) => (
 
 export const useFieldArrayData = ({ services, shipment_data }) => {
 	const [ewayBillData, setewayBillData] = useState({});
-	const [finalDoc, setFinalDoc] = useState();
+	const [finalDoc, setFinalDoc] = useState([]);
 
 	const fields = getControl({ services });
 	const defaultValues = getDefaultValues(fields);

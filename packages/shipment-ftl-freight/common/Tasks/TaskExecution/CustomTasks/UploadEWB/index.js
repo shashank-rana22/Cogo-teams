@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 const STATUS_CODE = 200;
 
 function UploadEWB({
-	shipment_data,
+	shipment_data = {},
 	onCancel = () => {},
-	task,
-	services,
+	task = {},
+	services = [],
 	refetch = () => {},
 }) {
 	const { fields, control, errors, handleSubmit } = useFieldArrayData({
