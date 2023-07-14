@@ -11,7 +11,7 @@ import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
 const INCREAMNET_BY_ONE = 1;
-const LABEL_SPILIT_LOWER_INDEX = -1;
+const LABEL_SPLIT_LOWER_INDEX = -1;
 const STARTING_POINT = 1;
 
 const SUPPLIER_STAKEHOLDERS = [
@@ -91,7 +91,7 @@ function Content({
 
 				<div className={styles.main}>
 					<div className={styles.heading}>
-						{item?.label.split('Upload').slice(LABEL_SPILIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
+						{item?.label.split('Upload').slice(LABEL_SPLIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
 					</div>
 					{isChecked ? (
 						<div className={styles.gap}>
