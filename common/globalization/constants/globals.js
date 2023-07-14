@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
@@ -6,6 +7,9 @@ const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+	},
+	country_ids: {
+		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
 	},
 	platform_supported_country_codes: ['IN', 'VN'],
 
@@ -206,6 +210,10 @@ const GLOBAL_CONSTANTS = {
 		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		risk_free:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png',
+		empty_list           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg',
+		pie_chart_loader     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
 		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
 		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
 		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
@@ -220,10 +228,41 @@ const GLOBAL_CONSTANTS = {
 		list_no_result_found : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg',
 		line_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		cogo_one_logo        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
+		call_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg',
+		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
+		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
+		cargo_insurance_loader:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
+		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
+		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
+		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
+		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+	},
+	drive_link: {
+		introduction_to_cogoport_link:
+		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
+		git_course_link:
+		'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
+		html_css_course_link:
+		'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+		html_css_assessment:
+		'https://drive.google.com/file/d/1N1HFExQLhUaeppFEdOYUz5H1lMQq1GOx/view?usp=drive_link',
+		responsive_web_design:
+		'https://drive.google.com/file/d/17-q8E1OtNaqzG5eDqUriA9JL4IDVTpeX/view?usp=drive_link',
+		responsive_web_design_assessment:
+		'https://drive.google.com/file/d/1uqJ8jiDcDj6-6Yd_mQnBE3muuoFpGmbf/view?usp=sharing',
+		javascript_basics_game_development:
+		'https://drive.google.com/file/d/1IIVowcpe4EurhYamS16h1n2oyjUFAns8/view?usp=sharing',
+	},
+
+	urls: {
+		list_emojis: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
 	},
 
 	options: {
@@ -240,37 +279,49 @@ const GLOBAL_CONSTANTS = {
 		},
 		inco_term: {
 			cif: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIF - Cost, Insurance and Freight',
 			},
 			cfr: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CFR - Cost and Freight',
 			},
 			cpt: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CPT - Carriage Paid To',
 			},
 			cip: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'CIP - Carriage and Insurance Paid to',
 			},
 			dat: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAT - Delivered At Terminal',
 			},
 			dap: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DAP - Delivered At Place',
 			},
 			ddp: {
-				trade_type: 'export',
+				trade_type : 'export',
+				label      : 'DDP - Delivered Duty Paid',
 			},
 			fob: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FOB - Free On Board',
 			},
 			exw: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'EXW - Ex Works',
 			},
 			fca: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FCA - Free Carrier',
 			},
 			fas: {
-				trade_type: 'import',
+				trade_type : 'import',
+				label      : 'FAS - Free Alongside Ship',
+
 			},
 		},
 		role_options: [
@@ -293,6 +344,7 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
@@ -315,6 +367,13 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
+	service_supported_countries: {
+		feature_supported_service: {
+			cargo_insurance: {
+				countries: ['IN'],
+			},
+		},
+	},
 	services: {
 		fcl_freight: {
 			unit: {
@@ -371,6 +430,20 @@ const GLOBAL_CONSTANTS = {
 				name: 'per truck', short_name: '/Truck',
 			},
 		},
+	},
+	SHIPMENT_ROUTE_MAPPING: {
+		fcl_freight           : 'fcl',
+		air_freight           : 'air-freight',
+		lcl_freight           : 'lcl',
+		ltl_freight           : 'ltl',
+		ftl_freight           : 'ftl',
+		haulage_freight       : 'haulage',
+		air_customs           : 'air-customs',
+		fcl_customs           : 'fcl-custom',
+		air_freight_local     : 'air-freight-local',
+		fcl_freight_local     : 'fcl-local',
+		domestic_air_freight  : 'domestic-air-freight',
+		rail_domestic_freight : 'rail-domestic',
 	},
 };
 

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAnnouncement,
 	IcMSettings,
@@ -204,7 +205,7 @@ const navigationMappingAdmin = {
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
 			...apis.sales_dashboard,
-
+			...apis.cogopoints,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -691,8 +692,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Operators',
-				href  : '/operators',
-				as    : '/operators',
+				href  : '/v2/operators',
+				as    : '/v2/operators',
 				type  : 'link',
 			},
 		],
@@ -889,7 +890,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-dunnings',
 				title         : 'Dunnings',
 				href          : '/v2/business-finance/dunnings/[active_tab]',
-				as            : '/v2/business-finance/dunnings/campaign-management',
+				as            : '/v2/business-finance/dunnings/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.business_finance_dunnings,
@@ -1156,7 +1157,8 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
+					...apis.sales_invoice, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-shipment_air',
@@ -1416,7 +1418,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1428,12 +1430,21 @@ const navigationMappingAdmin = {
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
+				key           : 'coe-risk-management',
+				title         : 'Risk Management',
+				href          : '/v2/risk-management',
+				as            : '/v2/risk-management',
+				type          : 'link',
+				main_apis     : ['list_risk_prone_shipments'],
+				possible_apis : [...apis.risk_management],
+			},
+			{
 				key           : 'coe-so2_surface',
 				title         : 'SO2 Dashboard',
 				href          : '/v2/so2-surface',
 				as            : '/v2/so2-surface',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
 		],
@@ -1968,7 +1979,7 @@ const navigationMappingAdmin = {
 		title : 'CogoVerse',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
 				alt="cogo-verse"
 				width="22px"
 				height="22px"
@@ -2052,7 +2063,7 @@ const navigationMappingAdmin = {
 		title : 'Cogo One',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
 				width="22px"
 				height="22px"
@@ -2304,6 +2315,16 @@ const navigationMappingAdmin = {
 				possible_apis : [],
 				icon          : IcMDataPipeline,
 			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
 		],
 	},
 	air_repository: {
@@ -2489,6 +2510,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.employee_list,
 			},
 		],
+	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
 	},
 };
 

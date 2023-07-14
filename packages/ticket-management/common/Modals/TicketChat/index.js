@@ -1,13 +1,15 @@
 import { Modal } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
+import ReassignTicket from '../../ReassignTicket';
 
 import ChatBody from './ChatBody';
+import EscalateTicket from './EscalateTicket';
 import FooterChat from './FooterChat';
 import ModalHeader from './ModalHeader';
 import styles from './styles.module.css';
@@ -15,25 +17,33 @@ import TicketSummary from './TicketSummary';
 
 const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
+const DEFAULT_TICKET_ACTIVITY = 0;
+const RESOLVED_CHECK = ['closed', 'overdue'];
 
-const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
-	if (!ticketExists) {
+const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
+	if (!doesTicketsExists) {
 		return '100%';
 	}
-	if (['closed', 'rejected'].includes(status)) {
+	if (RESOLVED_CHECK.includes(status)) {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 55px)';
+		return 'calc(100% - 82px)';
 	}
 	return 'calc(100% - 75px)';
 };
 
-function TicketChat({ modalData = {}, setModalData = () => {} }) {
+function TicketChat({
+	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
+}) {
+	const { ticketId = '' } = modalData || {};
+
 	const messageRef = useRef(null);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [showEscalate, setShowEscalate] = useState(false);
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
@@ -50,16 +60,14 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 
 	const {
 		getTicketDetails = () => {},
-		ticketData = '',
+		ticketData = {},
 		detailsLoading,
 	} = useGetTicketDetails({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
-	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } = ticketData || {};
-
-	const { Rating: rating = 0 } = ticketFeedback || {};
-	const { Status: status = '' } = ticket || {};
+	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
 
 	const {
 		listData = {},
@@ -67,26 +75,37 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		getTicketActivity = () => {},
 		setListData = () => {},
 	} = useGetTicketActivity({
-		ticketId: modalData?.ticketId || '',
+		ticketId: ticketId || '',
 	});
 
-	const refetchTicket = () => {
+	const isEmptyChat = isEmpty(listData?.items);
+
+	const refreshTickets = () => {
 		setListData({
 			items       : [],
 			page        : 0,
 			total_pages : 0,
 		});
-		getTicketDetails();
-		getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
+		getTicketDetails(ticketId);
+		getTicketActivity(DEFAULT_TICKET_ACTIVITY);
+
+		setIsUpdated(true);
 	};
 
-	const isEmptyChat = isEmpty(listData?.items || {});
-
-	const { createTicketActivity = () => {}, createLoading = false } =		useCreateTicketActivity({
-		ticketId: modalData?.ticketId || '',
-		refetchTicket,
+	const { createTicketActivity = () => {}, createLoading = false } = useCreateTicketActivity({
+		ticketId: ticketId || '',
+		refreshTickets,
 		scrollToBottom,
+		isInternal,
 	});
+
+	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
+		refreshTickets,
+	});
+
+	const doesTicketsExists = !isEmpty(ticketData);
+
+	const loading = chatLoading || createLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -107,10 +126,6 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		}
 	};
 
-	const ticketExists = typeof ticketData === 'object' || false;
-
-	const loading = chatLoading || createLoading;
-
 	useEffect(() => {
 		if (!isEmptyChat) {
 			scrollToBottom();
@@ -124,8 +139,11 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 					<ModalHeader
 						modalData={modalData}
 						ticketData={ticketData}
-						refetchTicket={refetchTicket}
-						ticketExists={ticketExists}
+						updateLoading={updateLoading}
+						refreshTickets={refreshTickets}
+						setShowReassign={setShowReassign}
+						setShowEscalate={setShowEscalate}
+						updateTicketActivity={updateTicketActivity}
 					/>
 				)}
 			/>
@@ -133,13 +151,12 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 				<div
 					className={styles.container}
 					style={{
-						height: chatBodyHeight(
-							rating,
-							ticketExists,
+						height: getChatBodyHeight({
+							doesTicketsExists,
 							status,
 							file,
 							uploading,
-						),
+						}),
 					}}
 				>
 					<ChatBody
@@ -149,14 +166,13 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 						messageRef={messageRef}
 						getTicketActivity={getTicketActivity}
 						ticketData={ticketData}
-						ticketExists={ticketExists}
+						doesTicketsExists={doesTicketsExists}
 						setModalData={setModalData}
 						detailsLoading={detailsLoading}
 					/>
 				</div>
-				{ticketExists && (
-					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
-						{!['closed', 'rejected'].includes(status)
+
+				{(doesTicketsExists && isCurrentReviewer) && !RESOLVED_CHECK.includes(status)
 							&& (
 								<FooterChat
 									file={file}
@@ -165,17 +181,36 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 									uploading={uploading}
 									setMessage={setMessage}
 									setUploading={setUploading}
+									setIsInternal={setIsInternal}
+									createLoading={createLoading}
+									isInternal={isInternal}
+									notifyCustomer={notifyCustomer}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
 							)}
-					</div>
-				)}
-				{ticketExists && (
+				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} ticketExists={ticketExists} />
+						<TicketSummary {...ticketData} />
 					</div>
 				)}
+
+				<EscalateTicket
+					ticketId={ticketId}
+					showEscalate={showEscalate}
+					updateLoading={updateLoading}
+					setShowEscalate={setShowEscalate}
+					updateTicketActivity={updateTicketActivity}
+				/>
+
+				<ReassignTicket
+					ticketId={ticketId}
+					showReassign={showReassign}
+					setShowReassign={setShowReassign}
+					getTicketActivity={getTicketActivity}
+					getTicketDetails={getTicketDetails}
+					setListData={setListData}
+				/>
 			</Modal.Body>
 		</>
 	);
