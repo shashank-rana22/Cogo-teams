@@ -8,7 +8,7 @@ const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
 const STEP_ON_BACK = 2;
 
-function Step3({ data, setStep = () => {}, shipment_id }) {
+function Step3({ data = {}, setStep = () => {}, shipment_id = '' }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });

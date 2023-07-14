@@ -1,9 +1,24 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
+
+const getPayload = ({
+	whatsapp_number,
+	country_code,
+	template_name,
+	viewType,
+	supplySenderNumber,
+}) => ({
+	whatsapp_number,
+	country_code,
+	template_name,
+	sender: viewType?.includes('supply') ? supplySenderNumber : undefined,
+});
 
 function useSendUserWhatsappTemplate({
 	callbackfunc = () => {},
+	viewType = '',
 }) {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -12,6 +27,7 @@ function useSendUserWhatsappTemplate({
 		},
 		{ manual: true },
 	);
+	const geoConstants = getGeoConstants();
 
 	const sendUserWhatsappTemplate = async (
 		{
@@ -22,13 +38,15 @@ function useSendUserWhatsappTemplate({
 	) => {
 		try {
 			await trigger({
-				data: {
+				data: getPayload({
 					whatsapp_number,
 					country_code,
 					template_name,
-
-				},
+					viewType,
+					supplySenderNumber: geoConstants.others.navigations.cogo_one.supply_sender_mobile_number,
+				}),
 			});
+
 			callbackfunc();
 			Toast.success('Message Sent Sucessfully');
 		} catch (error) {

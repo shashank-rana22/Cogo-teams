@@ -7,15 +7,15 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ConfirmModal({
-	confirmModal,
-	setConfirmModal,
-	airServiceFormValues,
-	airLocalServiceFormValues,
-	handleSubmit,
-	onCreate,
+	confirmModal = false,
+	setConfirmModal = () => {},
+	airServiceFormValues = {},
+	airLocalServiceFormValues = {},
+	handleSubmit = () => {},
+	onCreate = () => {},
 	reallocationFunc = () => {},
-	confirmLoading,
-	watchServiceProvider,
+	confirmLoading = false,
+	watchServiceProvider = {},
 }) {
 	const geo = getGeoConstants();
 	const isCogoXpress =		watchServiceProvider?.normal_service_provider === geo.uuid.cogoxpress_id
@@ -63,7 +63,6 @@ function ConfirmModal({
 											name="airline_id"
 											asyncKey="list_operators"
 											value={airServiceFormValues.airline_id}
-											placeholder="Select Partner User"
 											disabled
 											params={{
 												filters: { operator_type: 'airline', status: 'active' },
@@ -82,7 +81,6 @@ function ConfirmModal({
 										asyncKey="organizations"
 										value={airServiceFormValues.service_provider_id}
 										disabled
-										placeholder="Select Partner User"
 									/>
 								</div>
 							</div>
@@ -99,7 +97,6 @@ function ConfirmModal({
 												name="local_airline_id"
 												asyncKey="list_operators"
 												value={airLocalServiceFormValues.origin_airline_id}
-												placeholder="Select Partner User"
 												disabled
 												params={{
 													filters: { operator_type: 'airline', status: 'active' },
@@ -134,7 +131,6 @@ function ConfirmModal({
 												name="local_airline_id"
 												asyncKey="list_operators"
 												value={airLocalServiceFormValues.destination_airline_id}
-												placeholder="Select Partner User"
 												disabled
 												params={{
 													filters: { operator_type: 'airline', status: 'active' },

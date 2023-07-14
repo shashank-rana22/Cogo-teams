@@ -6,16 +6,17 @@ import styles from './styles.module.css';
 
 function ModalHeader({
 	ticketData = {},
+	updateLoading = false,
 	refreshTickets = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
 	updateTicketActivity = () => {},
 }) {
 	const {
-		Ticket: ticket = {},
+		Ticket: ticket = {}, TicketStatus : ticketStatus = '',
 		IsClosureAuthorizer: isClosureAuthorizer = false, IsCurrentReviewer: isCurrentReviewer = '',
 	} = ticketData || {};
-	const { ID: id = '', Status: status = '' } = ticket || {};
+	const { ID: id = '' } = ticket || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
@@ -30,7 +31,9 @@ function ModalHeader({
 			</div>
 			<TicketActions
 				isModal
-				status={status}
+				id={id}
+				updateLoading={updateLoading}
+				ticketStatus={ticketStatus}
 				handleTicket={handleTicket}
 				setShowReassign={setShowReassign}
 				setShowEscalate={setShowEscalate}
