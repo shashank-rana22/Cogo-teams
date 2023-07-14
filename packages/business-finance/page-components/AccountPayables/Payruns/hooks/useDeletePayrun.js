@@ -24,8 +24,8 @@ const useDeletePayrun = ({ overseasData, setShowDeleteModal = () => {} }) => {
 				},
 			});
 			// refetch();
-			setShowDeleteModal(false);
 			Toast.success(deletePayrunData.message || 'Payrun deleted successfully');
+			setShowDeleteModal(false);
 		} catch (e) {
 			Toast.error(e?.response?.data?.message || 'Failed to Delete Payrun');
 		}

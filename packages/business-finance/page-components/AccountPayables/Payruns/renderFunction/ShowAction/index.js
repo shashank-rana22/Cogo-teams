@@ -1,53 +1,46 @@
 import { Popover, Button } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-// import { useEffect } from 'react';
 
-// import { StyledLink, ButtonContainer, Section } from './styles';
+import useDeleteInvoice from '../../hooks/useDeleteInvoice';
+
 import styles from './styles.module.css';
 
-function ShowAction({
-	itemData,
-	isInvoiceView,
-	setIsInvoiceView,
-	setGlobalFilters,
-	setShowBackButton,
-	confirmDeletePayrun,
-}) {
-	const { payrunName = '' } = itemData;
-
-	const handleClick = () => {
-		setIsInvoiceView(!isInvoiceView);
-		setGlobalFilters((p) => ({ ...p, searchquery: payrunName }));
-		setShowBackButton(true);
-	};
-	const tooltipContent = () => (
+function PopoverContent({ payrunName = '', id = '' }) {
+	const {
+		deleteinvoiceLoading,
+		deleteInvoice,
+	} = useDeleteInvoice({});
+	return (
 		<div>
 			<div>
 				<div className={styles.section}>Transaction Type:</div>
-				<div role="presentation" className={styles.styled_link} onClick={handleClick}>{payrunName}</div>
+				<div className={styles.styled_link}>{payrunName}</div>
 			</div>
 			<div>
 				<Button
 					size="sm"
+					disabled={deleteinvoiceLoading}
 					style={{ marginTop: '4px' }}
 					themeType="primary"
-					onClick={() => confirmDeletePayrun(itemData, 'invoice')}
+					onClick={() => deleteInvoice(id)}
 				>
 					Delete
 				</Button>
 			</div>
 		</div>
 	);
-	// useEffect(() => {
-	// 	setGlobalFilters((p) => ({ ...p, searchquery: undefined }));
-	// 	setShowBackButton(false);
-	// }, [isInvoiceView, setGlobalFilters, setShowBackButton]);
+}
+
+function ShowAction({
+	itemData = {},
+}) {
+	const { payrunName = '', id = '' } = itemData;
 
 	return (
 		<div>
 			<Popover
 				placement="left"
-				render={tooltipContent()}
+				render={<PopoverContent payrunName={payrunName} id={id} />}
 			>
 				<div>
 					<IcMOverflowDot height={16} width={16} style={{ cursor: 'pointer' }} />

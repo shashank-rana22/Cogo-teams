@@ -24,10 +24,10 @@ const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () =>
 				},
 			});
 			// refetch();
-			setShowDeleteInvoiceModal(false);
 			Toast.success(deleteInvoiceData?.message || 'Invoice Deleted Successfully');
-		} catch (e) {
 			setShowDeleteInvoiceModal(false);
+		} catch (e) {
+			// setShowDeleteInvoiceModal(false);
 			Toast.error(e?.response?.data?.message || 'Failed to delete Invoice');
 		}
 	};

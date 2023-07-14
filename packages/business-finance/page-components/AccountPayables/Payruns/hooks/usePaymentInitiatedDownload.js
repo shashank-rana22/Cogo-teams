@@ -1,17 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const usePostDownloadPayrunHistory = () => {
-	const [{ data : payrunHistory, loading }, trigger] = useRequestBf({
-		url     : '/purchase/payrun/download-zip',
-		method  : 'post',
-		authKey : 'post_purchase_payrun_download_zip',
+const usePaymentInitiatedDownload = () => {
+	const [{ data:downloadData, loading }, trigger] = useRequestBf({
+		url     : '/purchase/payrun/download',
+		method  : 'get',
+		authKey : 'get_purchase_payrun_download',
 	}, { manual: true, autoCancel: false });
-	const downloadPayrunHistory = async (id) => {
+	const downloadPayrun = async (itemData) => {
+		const { id = '', batchNo = '' } = itemData || {};
 		try {
 			const res = await trigger({
-				data: {
+				params: {
 					payrunId: id,
+					batchNo,
 				},
 			});
 			const { data = {} } = res || {};
@@ -23,10 +25,10 @@ const usePostDownloadPayrunHistory = () => {
 		}
 	};
 	return {
-		downloadPayrunHistory,
+		downloadData,
+		downloadPayrun,
 		loading,
-		payrunHistory,
 	};
 };
 
-export default usePostDownloadPayrunHistory;
+export default usePaymentInitiatedDownload;

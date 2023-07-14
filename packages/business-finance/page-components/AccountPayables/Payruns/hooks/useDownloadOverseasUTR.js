@@ -1,16 +1,17 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const usePostDownloadPayrunHistory = () => {
-	const [{ data : payrunHistory, loading }, trigger] = useRequestBf({
-		url     : '/purchase/payrun/download-zip',
-		method  : 'post',
-		authKey : 'post_purchase_payrun_download_zip',
+const useDownloadOverseasUTR = () => {
+	const [{ data : overseasUTRdownloadData, loading }, trigger] = useRequestBf({
+		url     : '/purchase/payrun/download-overseas-utr',
+		method  : 'get',
+		authKey : 'get_purchase_payrun_download_overseas_utr',
 	}, { manual: true, autoCancel: false });
-	const downloadPayrunHistory = async (id) => {
+
+	const overseasUTRdownload = (id = '') => {
 		try {
-			const res = await trigger({
-				data: {
+			const res = trigger({
+				params: {
 					payrunId: id,
 				},
 			});
@@ -23,10 +24,10 @@ const usePostDownloadPayrunHistory = () => {
 		}
 	};
 	return {
-		downloadPayrunHistory,
+		overseasUTRdownloadData,
 		loading,
-		payrunHistory,
+		overseasUTRdownload,
 	};
 };
 
-export default usePostDownloadPayrunHistory;
+export default useDownloadOverseasUTR;

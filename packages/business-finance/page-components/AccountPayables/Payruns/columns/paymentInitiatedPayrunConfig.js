@@ -55,6 +55,10 @@ export const PAYMENT_INITIATED_PAYRUN = {
 			span : 0.5,
 		},
 		{
+			func : 'renderOverseasUtr',
+			span : 0.1,
+		},
+		{
 			func : 'renderRibbon',
 			span : 1,
 		},

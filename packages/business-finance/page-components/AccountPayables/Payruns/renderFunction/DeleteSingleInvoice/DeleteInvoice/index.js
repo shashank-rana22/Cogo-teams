@@ -44,7 +44,7 @@ function DeleteInvoice({
 					</Button>
 					<Button
 						disabled={deleteinvoiceLoading}
-						onClick={deleteInvoice(id)}
+						onClick={() => deleteInvoice(id)}
 					>
 						Delete
 					</Button>

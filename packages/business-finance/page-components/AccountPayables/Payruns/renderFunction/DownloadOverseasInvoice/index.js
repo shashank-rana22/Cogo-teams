@@ -5,7 +5,7 @@ import usePostDownloadPayrunHistory from '../../hooks/usePostDownloadPayrunHisto
 
 import styles from './styles.module.css';
 
-function DownloadOverseasInvoice({ itemData, overseasData }) {
+function DownloadOverseasInvoice({ itemData = {}, overseasData = '' }) {
 	const { downloadPayrunHistory } = usePostDownloadPayrunHistory();
 	return (
 		<div>

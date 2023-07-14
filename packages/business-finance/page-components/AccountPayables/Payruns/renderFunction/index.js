@@ -7,6 +7,7 @@ import BankDetails from './BankDetails';
 import DeletePayrunInvoice from './DeletePayrunInvoice';
 import DeleteSingleInvoice from './DeleteSingleInvoice';
 import DownloadOverseasInvoice from './DownloadOverseasInvoice';
+import DownloadOverseasUTR from './DownloadOverseasUTR';
 import DownloadUploadHistoryStatusFile from './DownloadUplaodHistoryStatusFile.js';
 import DownloadUploadHistoryFile from './DownloadUploadHistoryFile.js';
 import FormatAmountCurrency from './FormatAmountCurrency';
@@ -84,6 +85,9 @@ const RenderFunctions = (
 				/>
 			);
 		},
+		renderOverseasUtr: (itemData) => (itemData?.type === 'OVERSEAS' ? (
+			<DownloadOverseasUTR itemData={itemData} />
+		) : null),
 		renderPaidPaymentStatus: (itemData) => (
 			<PaidPaymentStatus itemData={itemData} />
 		),

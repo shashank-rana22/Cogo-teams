@@ -34,7 +34,7 @@ function DeletePayrun({ itemData = {}, overseasData = '', showDeleteModal = fals
 					</Button>
 					<Button
 						disabled={deletePayrunLoading}
-						onClick={deletePayrun(id)}
+						onClick={() => deletePayrun(id)}
 					>
 						Delete
 					</Button>
