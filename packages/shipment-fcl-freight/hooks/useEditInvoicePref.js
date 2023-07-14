@@ -181,20 +181,8 @@ const useEditInvoicePref = ({
 					}
 				});
 			}
-			const entitySpecificData = ENTITY_MAPPING[shipment_data?.entity_id] || {};
 
-			const { navigations } = entitySpecificData.others || {};
-
-			const { bookings } = navigations.partner || {};
-
-			const { is_invoice_mergeable = false } = bookings?.invoicing || {};
-
-			if (
-				isBasicFreight &&
-				updateExportInvoices &&
-				!allowServiceMerge &&
-				!is_invoice_mergeable
-			) {
+			if (isBasicFreight && updateExportInvoices && !allowServiceMerge) {
 				Toast.error(
 					'Basic Freight or IGST invoices cannot be merged with other services',
 				);
