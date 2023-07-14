@@ -16,9 +16,7 @@ const useListDocumentDesk = () => {
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
-	const { page = 1, serial_ids, ...restFilters } = filters || {};
-
-	const tempSerialId = serial_ids?.filter((item) => !isEmpty(item));
+	const { page = 1, ...restFilters } = filters || {};
 
 	const { startDate:from_created_at, endDate:to_created_at } = filters || {};
 	const [apiData, setApiData] = useState({});
@@ -29,7 +27,6 @@ const useListDocumentDesk = () => {
 			filters: {
 				from_created_at,
 				to_created_at,
-				serial_ids: tempSerialId,
 				...restFilters,
 				...payloadMapping[stepperTab][activeTab],
 			},
