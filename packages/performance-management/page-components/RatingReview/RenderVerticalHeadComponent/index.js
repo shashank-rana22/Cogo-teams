@@ -10,12 +10,12 @@ import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data found';
 
-function RenderTitle({ title, averageValue, level }) {
+function RenderTitle({ title, averageValue, level, activeTab }) {
 	return (
 		<div className={styles.title}>
 			<div>{startCase(title)}</div>
 
-			{level === 'vertical_manager' && (
+			{level === 'vertical_head' && activeTab === 'vertical_head' && (
 				<div className={styles.average_value}>
 					Average Rating :
 					{' '}
@@ -109,6 +109,7 @@ function RenderVerticalHeadComponent({
 							employee_list={employee_list}
 							setAccordianList={setAccordianList}
 							level={level}
+							activeTab={activeTab}
 						/>
 					)}
 				>

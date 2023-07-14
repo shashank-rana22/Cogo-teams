@@ -5,7 +5,7 @@ import HeaderComponent from './HeaderComponent';
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import styles from './styles.module.css';
 
-const TABS_MAPPING = ['vertical_head', 'functional_head'];
+const TABS_MAPPING = ['vertical_head', 'functional_manager'];
 
 function PerformanceRatingReview() {
 	const props = useGetEmployeeLevels();
