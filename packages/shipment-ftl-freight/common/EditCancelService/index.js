@@ -146,7 +146,7 @@ function EditCancelService({ serviceData = {} }) {
 				content={content}
 				onClickOutside={() => setShowPopover(false)}
 			>
-				{!isTruckPresent
+				{isTruckPresent
 					? <IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 					: null}
 			</Popover>
