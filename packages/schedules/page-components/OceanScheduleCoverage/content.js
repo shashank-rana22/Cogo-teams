@@ -47,7 +47,7 @@ function OceanScheduleCoverage() {
 								loadingRowsCount={15}
 							/>
 						) : (
-							<EmptyState height={300} />
+							<EmptyState />
 						)}
 					</div>
 					<div className={styles.pagination}>

@@ -19,7 +19,7 @@ function Cards({ item, loading }) {
 			<ShippingLineDetails item={item} loading={loading} />
 			<div className={styles.details}>
 				<PortPair item={item} loading={loading} />
-				<TimeTable item={item} loadin={loading} />
+				<TimeTable item={item} loading={loading} />
 			</div>
 		</div>
 	);
