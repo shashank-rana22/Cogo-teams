@@ -12,6 +12,7 @@ const injectValues = (
 	getApisData,
 	shipment_data,
 	stepConfig,
+	setCommodityDetails = () => {},
 ) => {
 	const controls = populatedControls || [];
 
@@ -123,6 +124,40 @@ const injectValues = (
 			if (control.name === 'containers_count') {
 				controls[index].value = containersCount;
 				controls[index].rules.max = containersCount;
+			}
+		});
+	} else if (
+		task?.task === 'mark_confirmed'
+		&& task?.shipment_type === 'fcl_freight'
+	) {
+		(controls || []).forEach((ctrl, index) => {
+			if (ctrl?.name === 'bl_category') {
+				controls[index].disabled = !!shipment_data?.bl_category;
+				controls[index].value = shipment_data?.bl_category || 'hbl';
+			}
+
+			if (ctrl?.name === 'hs_code') {
+				controls[index].handleChange = (obj) => {
+					setCommodityDetails((prev) => ({ ...prev, unit: obj?.units }));
+				};
+			}
+
+			if (ctrl?.name === 'commodity_category') {
+				controls[index].disabled = !!shipment_data?.commodity_category;
+				controls[index].value = shipment_data?.commodity_category;
+			}
+
+			if (ctrl?.name === 'bl_type') {
+				controls[index].disabled = !!shipment_data?.bl_type;
+				controls[index].value = shipment_data?.bl_type;
+			}
+
+			if (
+				shipment_data?.bl_category === 'mbl'
+				&& ctrl?.name === 'payment_term'
+			) {
+				controls[index].disabled = true;
+				controls[index].value = ctrl?.value;
 			}
 		});
 	}

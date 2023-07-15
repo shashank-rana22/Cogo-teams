@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+
+import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
 import EditBookingParams from './EditBookingParams';
 import { getCanShipmentRollover } from './helpers/getCanShipmentRollover';
@@ -18,7 +20,28 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
+	shipment_data = {},
 }) {
+	const [commodityDetails, setCommodityDetails] = useState({
+		commodity    : '',
+		subCommodity : '',
+		unit         : '',
+	});
+
+	const { commodityTypeOptions, allCommodity } = useGetCommodityOptions({
+		shipment_data,
+	});
+
+	const subCommodityOptions = (allCommodity || [])
+		.find(
+			(item) => item?.commodity
+			=== (shipment_data?.commodity_category || commodityDetails?.commodity),
+		)
+		?.subCommodityClassification?.map((ele) => ({
+			label : ele?.subCommodityDisplayName,
+			value : ele?.subCommodity,
+		}));
+
 	const {
 		formProps,
 		fields,
@@ -28,6 +51,7 @@ function ExecuteStep({
 		stepConfig,
 		getApisData,
 		selectedMail,
+		setCommodityDetails,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
@@ -47,6 +71,10 @@ function ExecuteStep({
 		isLastStep,
 		getApisData,
 		showElements,
+		commodityTypeOptions,
+		subCommodityOptions,
+		commodityDetails,
+		setCommodityDetails,
 	});
 
 	const handleTaskSubmit = async () => {

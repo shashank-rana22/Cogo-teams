@@ -53,7 +53,7 @@ function ExecuteTask({
 		currentStep = {},
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
-	} = useTaskExecution({ task, taskConfigData });
+	} = useTaskExecution({ task, taskConfigData, shipment_data });
 
 	const stepConfigValue = steps.length
 		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]

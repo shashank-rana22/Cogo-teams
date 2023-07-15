@@ -12,6 +12,7 @@ function useStepExecution({
 	stepConfig = {},
 	getApisData = {},
 	selectedMail = {},
+	setCommodityDetails = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -23,6 +24,7 @@ function useStepExecution({
 		task,
 		getApisData,
 		stepConfig,
+		setCommodityDetails,
 	);
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
