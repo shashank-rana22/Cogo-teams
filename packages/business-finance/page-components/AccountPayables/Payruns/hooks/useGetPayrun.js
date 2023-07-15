@@ -2,8 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-// import { initiatedConfig } from '../columns/initiatedConfig';
-
 const useGetPayrun = ({ activePayrunTab, overseasData, query, pageIndex }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -13,11 +11,6 @@ const useGetPayrun = ({ activePayrunTab, overseasData, query, pageIndex }) => {
 		},
 		{ manual: true, autoCancel: false },
 	);
-	// const config = initiatedConfig;
-	// let config = {};
-	// if (activePayrunTab === 'INITIATED') {
-	// 	config = initiatedConfig;
-	// }
 
 	const getPayrunList = useCallback(() => {
 		(async () => {
@@ -37,16 +30,11 @@ const useGetPayrun = ({ activePayrunTab, overseasData, query, pageIndex }) => {
 		})();
 	}, [activePayrunTab, overseasData, pageIndex, query, trigger]);
 
-	// useEffect(() => {
-	// 	getPayrunList();
-	// }, [activePayrunTab, getPayrunList]);
-
 	const { stats } = data || {};
 
 	return {
 		payrunData    : data,
 		payrunLoading : loading,
-		// config,
 		payrunStats   : stats,
 		getPayrunList,
 	};
