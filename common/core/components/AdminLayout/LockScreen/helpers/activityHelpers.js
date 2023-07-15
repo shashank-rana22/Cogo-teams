@@ -64,10 +64,10 @@ export function mountActivityTracker({ FUNC_MAPPING }) {
 	});
 }
 
-export async function unMountActivityTracker({ FUNC_MAPPING, firestore }) {
+export async function unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent = false }) {
 	const { isLockedBool } = await getTimeoutConstant(firestore);
 
-	if (!isLockedBool) {
+	if (!isLockedBool || !isRolePresent) {
 		return;
 	}
 
