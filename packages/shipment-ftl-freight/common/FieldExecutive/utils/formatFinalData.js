@@ -3,14 +3,14 @@ import { isEmpty } from '@cogoport/utils';
 import { CUSTOM_TYPES } from './pageMappings';
 import { ALL_STEPPER_CONFIGS_OBJ } from './stepperConfigs';
 
-const functionObjectCreator = (formatData, str, val) => {
+const objectCreator = (formatData, str, val) => {
 	if (isEmpty(str)) {
 		return formatData;
 	}
 	const [head, ...rest] = str.split('.');
 	const newData = { ...formatData };
 	newData[head] = rest.length
-		? functionObjectCreator(newData[head], rest.join('.'), val)
+		? objectCreator(newData[head], rest.join('.'), val)
 		: val;
 
 	return newData;
@@ -29,7 +29,7 @@ const formatSingleData = (
 	} else {
 		tempValue = otherFormattedData[item?.key] || '';
 	}
-	return functionObjectCreator(formattedData, path, tempValue);
+	return objectCreator(formattedData, path, tempValue);
 };
 
 export const formatFinalData = ({

@@ -19,7 +19,6 @@ function CardDetails({
 			window.open(url);
 		}
 	};
-	console.log(styles);
 
 	return (
 		<div className={styles.container}>
