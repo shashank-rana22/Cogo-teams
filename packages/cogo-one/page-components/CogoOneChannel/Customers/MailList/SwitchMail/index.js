@@ -18,7 +18,8 @@ function SwitchMail({
 
 	const filteredMails = userActiveMails.filter((itm) => (itm !== activeMailAddress));
 
-	const activePersonName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ');
+	const activePersonName = activeMailAddress
+		.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ').replace('_', ' ');
 
 	return (
 		<div className={styles.container}>

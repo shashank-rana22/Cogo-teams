@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMRefresh, IcMSearchlight, IcMFilter } from '@cogoport/icons-react';
+import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
 import useListMail from '../../hooks/useListMail';
 
+import FilterComponent from './FilterComponent';
 import ListMails from './ListMails';
 import styles from './styles.module.css';
 
@@ -77,7 +78,7 @@ function MailDetails({
 							/>
 						)}
 					/>
-					<IcMFilter className={styles.filter_icon} />
+					<FilterComponent />
 				</div>
 			</div>
 

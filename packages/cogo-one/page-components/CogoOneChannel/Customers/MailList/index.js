@@ -22,7 +22,7 @@ function MailList(mailprops) {
 	const [activeSelect, setActiveSelect] = useState('inbox');
 	const [showPopover, setShowPopover] = useState(false);
 
-	const userName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ');
+	const userName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ').replace('_', ' ');
 
 	return (
 		<div className={styles.container}>
