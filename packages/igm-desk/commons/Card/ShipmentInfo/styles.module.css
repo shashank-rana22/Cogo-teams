@@ -48,3 +48,9 @@
 		font-weight: 700;
 	}
 }
+
+.stakeholder {
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}

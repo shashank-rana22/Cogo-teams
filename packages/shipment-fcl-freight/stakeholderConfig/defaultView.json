@@ -25,7 +25,8 @@
     "tasks":{
         "feature_permission" : { "api_permission":["list_tasks"]  },
         "tab_title":"Timeline and Tasks",
-        "checked_show_my_tasks": false
+        "checked_show_my_tasks": false,
+        "show_others_tasks": true
     },
 
     "purchase":{

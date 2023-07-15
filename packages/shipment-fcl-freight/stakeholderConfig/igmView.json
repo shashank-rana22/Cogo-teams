@@ -2,7 +2,8 @@
     "features":["shipment_info", "shipment_header","overview", "tasks", "documents", "emails"],  
     "shipment_info":{},
     "shipment_header": {
-        "show_po_number": false
+        "show_po_number": false,
+        "is_igm": true
     },
     "default_tab":"tasks",
     "overview":{
@@ -17,7 +18,8 @@
         "checked_show_my_tasks":false,
         "is_task_assigned":false,
         "can_reassign_task":true,
-        "show_cfs_details": true
+        "show_cfs_details": true,
+        "show_others_tasks": false
     },
     "documents":{
         "tab_title":"Documents",

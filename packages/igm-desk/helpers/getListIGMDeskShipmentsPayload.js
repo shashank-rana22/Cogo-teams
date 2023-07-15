@@ -4,7 +4,7 @@ export default function getListIGMDeskShipmentsPayload({
 	filters = {},
 	tabState = {},
 }) {
-	const { page, q, sort_type = 'asc', sort_by = 'selected_schedule_arrival', fileType, ...restFilters } = filters;
+	const { page, q, sort_type = 'asc', sort_by = 'schedule_arrival', fileType, ...restFilters } = filters;
 	const { activeTab } = tabState;
 
 	const updatedTabSpecificPayload = tabSpecificPayload[activeTab] || {};

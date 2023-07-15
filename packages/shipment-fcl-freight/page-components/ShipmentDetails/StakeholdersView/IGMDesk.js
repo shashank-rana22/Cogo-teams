@@ -4,8 +4,6 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import { useMemo, useState, useEffect } from 'react';
 
-import CancelDetails from '../../../common/CancelDetails';
-import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import ShipmentHeader from '../../../common/ShipmentHeader';
@@ -95,10 +93,6 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 				</div>
-
-				<CancelDetails />
-
-				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader />

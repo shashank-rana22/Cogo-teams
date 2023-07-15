@@ -1,6 +1,7 @@
-import { Button, Toggle, Popover } from '@cogoport/components';
+import { Button, Toggle, Popover, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCopy } from '@cogoport/icons-react';
 import { useContext, useState } from 'react';
 
 import BookingRequirements from './BookingRequirements';
@@ -8,6 +9,12 @@ import styles from './styles.module.css';
 
 const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
 const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
+
+const STYLE_ICON = {
+	marginLeft : 4,
+	height     : 20,
+	width      : 20,
+};
 
 function Header({
 	count = 0,
@@ -30,6 +37,33 @@ function Header({
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
 	const showCfsDetails = !!stakeholderConfig?.tasks?.show_cfs_details;
+	const show_others_tasks = !!stakeholderConfig?.tasks?.show_others_tasks;
+
+	const handleCopy = async (val) => {
+		navigator.clipboard
+			.writeText(val)
+			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+	};
+
+	const cfsDetails = () => (
+		<div className={styles.cfs_details}>
+			<text>
+				{' '}
+				CFS Address:
+				{primary_service?.cfs_service || 'NA'}
+			</text>
+			<div
+				role="presentation"
+				onClick={() => {
+					navigator.clipboard.writeText(primary_service?.cfs_service);
+				}}
+			/>
+			<IcMCopy
+				onClick={() => handleCopy(primary_service?.cfs_service)}
+				style={STYLE_ICON}
+			/>
+		</div>
+	);
 
 	return (
 		<div className={styles.container}>
@@ -39,13 +73,13 @@ function Header({
 				</div>
 
 				<div className={styles.right_content}>
-					{showSupplyRemarks && showCfsDetails ? (
+					{showCfsDetails ? (
 						<Popover
 							placement="bottom"
 							trigger="mouseenter"
 							caret={false}
 							visible={visibleCfsDetails}
-							render={`CFS Address: ${primary_service?.cfs_service || 'NA'}`}
+							render={cfsDetails()}
 						>
 							<Button
 								size="md"
@@ -78,24 +112,28 @@ function Header({
 						</Popover>
 					) : null }
 
-					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
-						<Toggle
-							checked={hideCompletedTasks}
-							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
-						/>
-					</div>
+					{show_others_tasks ? (
+						<div className={styles.toggle_container}>
+							<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
+							<Toggle
+								checked={hideCompletedTasks}
+								onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
+							/>
+						</div>
+					) : null }
 
-					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
+					{show_others_tasks ? (
+						<div className={styles.toggle_container}>
+							<div style={{ marginTop: '12px' }}>Show only my tasks</div>
 
-						<Toggle
-							checked={showMyTasks}
-							onChange={() => {
-								setShowMyTasks(!showMyTasks);
-							}}
-						/>
-					</div>
+							<Toggle
+								checked={showMyTasks}
+								onChange={() => {
+									setShowMyTasks(!showMyTasks);
+								}}
+							/>
+						</div>
+					) : null }
 				</div>
 			</div>
 

@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -41,8 +41,10 @@ function ShipmentHeader() {
 		stakeholderConfig,
 	});
 
+	const is_igm_desk = !!stakeholderConfig?.shipment_header?.is_igm;
+
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${is_igm_desk ? styles.igm_desk : ''}`}>
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"

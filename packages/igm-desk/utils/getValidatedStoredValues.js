@@ -30,7 +30,7 @@ export default function getValidatedStoredValues() {
 	}
 
 	if (typeof sort_by !== 'string') {
-		sort_by = 'selected_schedule_arrival';
+		sort_by = 'schedule_arrival';
 	}
 
 	if (typeof fileType !== 'boolean') {

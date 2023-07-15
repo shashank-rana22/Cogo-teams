@@ -53,9 +53,10 @@
 }
 
 .circle {
+	position: absolute;
+	right: 16px;
 	width: 8px;
 	height: 8px;
-	margin: -15px -5px 0;
 	background: red;
 	border-radius: 50%;
 }
@@ -67,6 +68,11 @@
 .filter_container {
 	display: flex;
 	justify-content: space-between;
+}
+
+.btn_div {
+	position: relative;
+	display: flex;
 }
 
 .button_div {

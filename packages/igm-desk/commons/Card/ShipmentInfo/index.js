@@ -24,6 +24,11 @@ export default function ShipmentInfo({ item = {} }) {
 					Line:
 					<div className={cl`${styles.ellipsis_text} ${styles.pointer}`}>{shipping_line?.business_name}</div>
 				</div>
+				{/* <div className={styles.stakeholder}>
+						POC:
+						{' '}
+						{stakeholder ?? 'NA'}
+					</div> */}
 			</Tooltip>
 		</div>
 	);

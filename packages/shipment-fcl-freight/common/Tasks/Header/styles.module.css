@@ -70,3 +70,7 @@
 	color: red;
 	text-decoration: underline;
 }
+
+.cfs_details {
+	display: flex;
+}

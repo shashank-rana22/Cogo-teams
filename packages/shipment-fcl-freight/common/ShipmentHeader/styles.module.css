@@ -6,6 +6,10 @@
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+
+	&.igm_desk {
+		width: 100%;
+	}
 }
 
 .po_number {

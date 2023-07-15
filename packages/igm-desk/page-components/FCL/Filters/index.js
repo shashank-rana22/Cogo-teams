@@ -20,44 +20,50 @@ const Icon = {
 function Filters() {
 	const { filters = {}, setFilters = () => {} } = useContext(IGMDeskContext);
 
-	const { q = '', fileType } = filters || {};
+	const { q = '', fileType, current_filter } = filters || {};
 
 	const [showArrivalDesc, setShowArrivalDesc] = useState(true);
 	const [showDepartureDesc, setShowDepartureDesc] = useState(true);
+	const [showCurrentFilter, setShowCurrentFilter] = useState(current_filter || 'schedule_arrival');
 
 	const handleSortState = (state, setState, sort_by) => {
 		let sort_type;
-		if (sort_by === 'selected_schedule_arrival') {
+		if (sort_by === 'schedule_arrival') {
 			sort_type = showArrivalDesc ? 'asc' : 'desc';
 		}
-		if (sort_by === 'selected_schedule_departure') {
+		if (sort_by === 'schedule_departure') {
 			sort_type = showDepartureDesc ? 'asc' : 'desc';
 		}
 
 		setState(!state);
+		setShowCurrentFilter(sort_by);
 		setFilters({
 			...filters,
 			sort_by,
 			sort_type,
+			current_filter: showCurrentFilter,
 		});
 	};
 
-	function ButtonFilter(state, setState, sort_type, btn_text) {
+	function ButtonFilter(state, setState, sort_by, btn_text) {
 		return (
-			<Button
-				onClick={() => handleSortState(state, setState, sort_type)}
-				size="md"
-				themeType="secondary"
-				className={styles.button_div}
-			>
-				{btn_text}
-				{' '}
-				{state ? (
-					Icon.IcMDescending
-				) : (
-					Icon.IcMAscending
-				)}
-			</Button>
+			<div className={styles.btn_div}>
+				<Button
+					onClick={() => handleSortState(state, setState, sort_by)}
+					size="md"
+					themeType="secondary"
+					className={styles.button_div}
+				>
+					{btn_text}
+					{' '}
+					{state ? (
+						Icon.IcMDescending
+					) : (
+						Icon.IcMAscending
+					)}
+				</Button>
+				{sort_by === showCurrentFilter ? <div className={styles.circle} /> : null}
+			</div>
 		);
 	}
 	return (
@@ -73,8 +79,8 @@ function Filters() {
 			</div>
 
 			<div className={styles.filter_container}>
-				{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'selected_schedule_arrival', 'Arrival')}
-				{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'selected_schedule_departure', 'Departure')}
+				{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
+				{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
 			</div>
 
 			<div className={styles.input_container}>

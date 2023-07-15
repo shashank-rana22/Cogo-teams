@@ -6,15 +6,17 @@ import React from 'react';
 import Content from './Content';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
+const IGM_DOCUMNETS = ['bill_of_lading', 'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading'];
 
 const Card = ({
-	taskList,
-	completedDocs,
-	emailDocs,
-	shipment_data,
-	primary_service,
-	setShowDoc,
-	setShowApproved,
+	taskList = [],
+	completedDocs = [],
+	emailDocs = [],
+	shipment_data = {},
+	primary_service = {},
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	canEditDocuments = true,
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -25,6 +27,8 @@ const Card = ({
 			saveAs(url);
 		}
 	};
+
+	const ALL_UPLOADED_IGM_DOCS = [];
 
 	return (taskList || []).map((item, idx) => {
 		const docType =	item?.document_type
@@ -37,7 +41,14 @@ const Card = ({
 			allUploadedDocs = [{}];
 		}
 
-		return allUploadedDocs.map((uploadedItem) => {
+		if (IGM_DOCUMNETS.includes(docType)) {
+			console.log({ docType });
+			ALL_UPLOADED_IGM_DOCS.push(docType);
+		}
+		// console.log({ALL_UPLOADED_IGM_DOCS, allUploadedDocs});
+		const allUpdatedUploadedDocs = false ? ALL_UPLOADED_IGM_DOCS : allUploadedDocs;
+
+		return allUpdatedUploadedDocs.map((uploadedItem) => {
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
 			const showUploadText = item?.pendingItem ? 'Upload' : '';
@@ -59,6 +70,7 @@ const Card = ({
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					canEditDocuments={canEditDocuments}
 				/>
 			);
 		});

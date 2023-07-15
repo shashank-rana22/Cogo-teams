@@ -15,7 +15,7 @@ import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
-	const { shipment_data, primary_service, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
@@ -62,13 +62,13 @@ function Documents() {
 	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
 	|| item?.document_type?.toLowerCase().includes(searchValue));
 
-	const can_edit_documents = !!stakeholderConfig?.documents?.can_edit_documents;
+	const canEditDocuments = !!stakeholderConfig?.documents?.can_edit_documents;
 
 	const renderContent = () => {
 		if (loading) {
 			return <LoadingState />;
 		}
-		if (!activeToggle) {
+		if (!activeToggle && !canEditDocuments) {
 			return (
 				<CheckList
 					taskList={filteredTaskList}
@@ -76,10 +76,12 @@ function Documents() {
 					completedDocs={completedDocs?.list}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					canEditDocuments={canEditDocuments}
 				/>
 			);
 		}
-		return <Wallet activeWallet={activeWallet} />;
+		if (canEditDocuments) { return <Wallet activeWallet={activeWallet} />; }
+		return null;
 	};
 
 	return (
@@ -87,7 +89,6 @@ function Documents() {
 			<HeaderComponent
 				activeToggle={activeToggle}
 				setActiveToggle={setActiveToggle}
-				shipment_data={shipment_data}
 				data={completedDocs?.organizations}
 				filters={filters}
 				setFilters={setFilters}
@@ -95,7 +96,6 @@ function Documents() {
 				searchValue={searchValue}
 				activeWallet={activeWallet}
 				setActiveWallet={setActiveWallet}
-				activeStakeholder={activeStakeholder}
 				refetch={refetch}
 			/>
 			<Modal
@@ -117,7 +117,7 @@ function Documents() {
 
 			{renderContent()}
 
-			{can_edit_documents ? (
+			{canEditDocuments ? (
 				<Approve
 					showApproved={showApproved}
 					setShowApproved={setShowApproved}
