@@ -1,6 +1,97 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: auto;
 	height: calc(100% - 100px);
+	margin: 6px -10px;
+}
+
+.title {
+	margin: 8px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.left_div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 24px;
+}
+
+.icon_div {
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
+}
+
+.name {
+	font-size: 16px;
+	color: #221f20;
+	text-align: center;
+}
+
+.right_arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-right: 14px;
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+}
+
+.gmail_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.user_mail_address {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 4px 10px 4px 4px;
+	cursor: pointer;
+	background: #fefce6;
+	border-radius: 4px;
+}
+
+.mail_address {
+	width: calc(100% - 75px);
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: 500;
+	color: #000;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+}
+
+.arrow_right {
+	width: 20px;
+	height: 20px;
+	fill: #4e4e4e;
+}
+
+.styled_popover {
+	width: 100%;
+	max-width: unset !important;
+	padding: 0;
+
+	>div {
+		padding: 0;
+	}
+}
+
+.list_mails {
+	display: flex;
+	width: 100%;
+	height: calc(100% - 50px);
 }
