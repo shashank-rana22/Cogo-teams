@@ -10,7 +10,10 @@
 	justify-content: space-between;
 	align-items: center;
 }
-.tabPanelWrapper button {
+
+.button_container {
+	display: flex;
+	gap: 6px;
 	margin-left: auto;
 	margin-top: -40px;
 	margin-right: 20px;

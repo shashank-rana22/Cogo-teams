@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
-	asyncFieldsOperators, asyncFieldsLocations,
+	asyncFieldsOperators, asyncFieldsLocations, asyncListServiceLanes, asyncListVessels,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
@@ -14,7 +14,7 @@ const useCreateVesselSchedules = ({
 	makeRequest,
 	watch,
 	formValues,
-
+	handleClose,
 }) => {
 	const [errors, setErrors] = useState({});
 	const no_of_ports = watch('port_number');
@@ -29,6 +29,12 @@ const useCreateVesselSchedules = ({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type: 'shipping_line' } } },
 	));
+	const serviceLaneOptions = useGetAsyncOptions(
+		asyncListServiceLanes(),
+	);
+	const vesselOptions = useGetAsyncOptions(
+		asyncListVessels(),
+	);
 	const locationOptions = useGetAsyncOptions(merge(
 		asyncFieldsLocations(),
 		{ params: { filters: { type: 'seaport' } } },
@@ -37,7 +43,14 @@ const useCreateVesselSchedules = ({
 		asyncFieldsLocations(),
 		{ params: { filters: { type: 'seaport_terminal' } } },
 	));
-	const fields = controls(no_of_ports, locationOptions, shippingLineOptions, terminalOptions);
+	const fields = controls(
+		no_of_ports,
+		locationOptions,
+		shippingLineOptions,
+		terminalOptions,
+		serviceLaneOptions,
+		vesselOptions,
+	);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_vessel_schedule',
@@ -45,16 +58,28 @@ const useCreateVesselSchedules = ({
 	}, { manual: true });
 
 	const createSchedule = async () => {
-		const res = await trigger({ data: formValues });
+		try {
+			const formattedFormValues = {
+				chartered_operators : (formValues?.chartered_operators || []).length || undefined,
+				service_lane_id     : formValues?.service_lane_id || undefined,
+				vessel_id           : formValues?.vessel_id || undefined,
+				port_number         : formValues?.port_number,
+				shipping_line_id    : formValues?.shipping_line_id,
+				waypoint_locations  : formValues?.waypoint_locations.map((item) => ({
+					terminal_id : item?.terminal_id || undefined,
+					location_id : item?.location_id,
+					eta         : item?.eta,
+					etd         : item?.etd,
+				})),
+			};
+			await trigger({ data: formattedFormValues });
 
-		Toast.success('Successfully Created');
-		// createRefetch();
-
-		// } catch (err) {
-		// 	Toast.error(err);
-
-		// 	console.log(err, 'error');
-		// }
+			Toast.success('Successfully Created');
+			createRefetch();
+			handleClose();
+		} catch (err) {
+			Toast.error(err);
+		}
 	};
 	return { loading, createSchedule, fields, onError, errors };
 };

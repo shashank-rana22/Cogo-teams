@@ -1,5 +1,5 @@
 .table {
-    background-color: rgb(255 244 244);
+    background-color: #ffffff
 }
 
 .th {
@@ -20,7 +20,13 @@
         .ui_placeholder_skeleton_loader {
             height: 40px !important;
         }
+        .ui_button_container:hover {
+            background-color: #f9f5ec;
+
+        }
     }
+
+
 }
 
 .container{

@@ -13,6 +13,7 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 	const {
 		createServiceLane, handleClose, fields,
 	} = useCreateServiceLane({ makeRequest, formValues, setShowModal, watch });
+
 	return (
 		<Modal
 			size="lg"

@@ -44,6 +44,15 @@ const controls = (no_of_ports, shippingLineOptions, locationOptions) => ({
 			...shippingLineOptions,
 		},
 		{
+			name        : 'trade_lane',
+			label       : 'Trade Name',
+			type        : 'text',
+			placeholder : 'Type here...',
+			span        : 4,
+			size        : 'md',
+			rules       : { required: 'Required' },
+		},
+		{
 			name        : 'name',
 			label       : 'Service Name',
 			type        : 'text',
@@ -95,7 +104,7 @@ const controls = (no_of_ports, shippingLineOptions, locationOptions) => ({
 		section : 'two',
 		span    : 5,
 		size    : 'md',
-		min     : 2,
+		min     : 3,
 		rules   : { required: 'Required' },
 	},
 	],
@@ -145,8 +154,6 @@ const controls = (no_of_ports, shippingLineOptions, locationOptions) => ({
 				placeholder : 'Type here...',
 				options     : DAY_OF_WEEK_OPTIONS,
 				size        : 'md',
-				rules       : { required: 'Required' },
-
 			},
 			{
 				label       : 'ETD Day',
@@ -156,8 +163,6 @@ const controls = (no_of_ports, shippingLineOptions, locationOptions) => ({
 				span        : 4,
 				placeholder : 'Type here...',
 				size        : 'md',
-				rules       : { required: 'Required' },
-
 			},
 		],
 	}],

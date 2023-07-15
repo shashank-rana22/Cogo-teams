@@ -1,20 +1,30 @@
-const controls = (no_of_ports, locationOptions, shippingLineOptions, terminalOptions) => ({
+const controls = (
+	no_of_ports,
+	locationOptions,
+	shippingLineOptions,
+	terminalOptions,
+	serviceLaneOptions,
+	vesselOptions,
+) => ({
 	basic: [
 		{
 			name        : 'vessel_id',
 			label       : 'Vessel Name',
-			type        : 'text',
+			type        : 'select',
 			placeholder : 'Type here...',
 			span        : 6,
 			size        : 'md',
+			...vesselOptions,
 			rules       : { required: 'Required' },
 		},
 		{
 			name        : 'service_lane_id',
 			label       : 'Service Lane',
-			type        : 'text',
+			type        : 'select',
+			isClearable : true,
 			placeholder : 'Type here...',
 			span        : 6,
+			...serviceLaneOptions,
 			size        : 'md',
 		},
 		{

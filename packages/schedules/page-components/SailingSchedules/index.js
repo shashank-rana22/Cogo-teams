@@ -26,11 +26,16 @@ function SailingSchedules() {
 				</TabPanel>
 				<TabPanel name="sailing_schedules" title="Sailing Schedules">
 					<div className={styles.tabPanelWrapper}>
-						<Button size="lg" themeType="primary" onClick={() => { setShowModal(true); }}>
-							+ Create
-						</Button>
+						<div className={styles.button_container}>
+							<Button size="lg" themeType="primary" onClick={() => { setShowModal(true); }}>
+								+ Create
+							</Button>
+						</div>
 					</div>
-					<SailingScheduleList showModal={showModal} setShowModal={setShowModal} />
+					<SailingScheduleList
+						showModal={showModal}
+						setShowModal={setShowModal}
+					/>
 				</TabPanel>
 
 				<TabPanel name="vessel_schedules" title="Vessel Schedules">

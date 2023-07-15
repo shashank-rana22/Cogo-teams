@@ -6,7 +6,7 @@ const controls = [
 		placeholder : 'Select Origin Port',
 		span        : 4,
 		size        : 'md',
-		// rules       : 'Required',
+		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'destination_port_id',
@@ -15,7 +15,7 @@ const controls = [
 		placeholder : 'Select Destination Port',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 	{
 		name           : 'shipping_line_id',
@@ -25,7 +25,7 @@ const controls = [
 		placeholder    : 'Select Shipping Line',
 		span           : 4,
 		size           : 'md',
-		// rules          : { required: 'Required' },
+		rules          : { required: 'Required' },
 	},
 	{
 		name        : 'number_of_stops',
@@ -34,7 +34,7 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'departure',
@@ -43,7 +43,7 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'arrival',
@@ -52,7 +52,7 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
+		rules       : { required: 'Required' },
 	},
 	{
 		name        : 'transit_time',
@@ -61,7 +61,6 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'vessel_name',
@@ -70,7 +69,6 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'imo_number',
@@ -79,7 +77,6 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'voyage_number',
@@ -88,7 +85,6 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'service_name',
@@ -97,7 +93,6 @@ const controls = [
 		placeholder : 'Type here...',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'terminal_cutoff',
@@ -106,7 +101,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'bk_cutoff',
@@ -115,7 +109,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'si_cutoff',
@@ -124,7 +117,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'vgm_cutoff',
@@ -133,7 +125,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'reefer_cutoff',
@@ -142,7 +133,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'haz_bk_cutoff',
@@ -151,16 +141,6 @@ const controls = [
 		placeholder : 'Select Date',
 		span        : 4,
 		size        : 'md',
-		// rules       : { required: 'Required' },
-	},
-	{
-		name        : 'si_cutoff',
-		label       : 'SI Cutoff',
-		type        : 'date_picker',
-		placeholder : 'Select Date',
-		span        : 4,
-		size        : 'md',
-		// rules       : { required: 'Required' },
 	},
 	{
 		name        : 'origin_terminal_name',
@@ -170,7 +150,6 @@ const controls = [
 		placeholder : 'Select Destination Port',
 		span        : 4,
 		size        : 'md',
-		// rules          : { required: 'Required' },
 	},
 	{
 		name        : 'destination_terminal_name',
@@ -180,7 +159,6 @@ const controls = [
 		placeholder : 'Select Destination Port',
 		span        : 4,
 		size        : 'md',
-		// rules          : { required: 'Required' },
 	},
 ];
 

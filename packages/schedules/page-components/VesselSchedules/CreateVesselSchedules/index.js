@@ -13,7 +13,9 @@ function CreateModal({ showModal, setShowModal, makeRequest }) {
 	const { handleSubmit, control, watch } = useForm();
 	const formValues = watch();
 
-	const { createSchedule, fields, onError, errors } = useCreateVesselSchedules({ makeRequest, formValues, watch });
+	const { createSchedule, fields, onError, errors } =	 useCreateVesselSchedules(
+		{ makeRequest, formValues, watch, handleClose },
+	);
 	return (
 		<Modal
 			size="lg"
