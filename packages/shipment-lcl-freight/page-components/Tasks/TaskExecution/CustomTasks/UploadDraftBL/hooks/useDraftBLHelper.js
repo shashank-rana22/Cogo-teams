@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest, request } from '@cogoport/request';
 import { useState } from 'react';
@@ -10,7 +11,7 @@ const useDraftBLHelper = ({
 	shipment_data = {},
 	primary_service = {},
 }) => {
-	const [createTradeDocLoading, setCreateTradeDocLoading] = useState();
+	const [createTradeDocLoading, setCreateTradeDocLoading] = useState(false);
 
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
@@ -34,13 +35,14 @@ const useDraftBLHelper = ({
 						...data,
 						service_id   : pendingTask?.service_id,
 						service_type : pendingTask?.service_type,
+						watermark    : 'DRAFT',
 					},
 					uploaded_by_org_id: pendingTask?.organization_id,
 				};
 
 				const promise = request({
 					method : 'POST',
-					url    : '/create_shipment_trade_document',
+					url    : '/generate_bluetide_hbl',
 					data   : body,
 				});
 
@@ -87,7 +89,7 @@ const useDraftBLHelper = ({
 				const rpaMappings = {
 					cogo_shipment_id        : pendingTask.shipment_id,
 					cogo_shipment_serial_no : shipment_data?.serial_id,
-					bill_of_lading          : body.documents[0].data.document_number,
+					bill_of_lading          : body.documents[GLOBAL_CONSTANTS.zeroth_index].data.document_number,
 				};
 
 				await submitShipmentMapping(rpaMappings);
