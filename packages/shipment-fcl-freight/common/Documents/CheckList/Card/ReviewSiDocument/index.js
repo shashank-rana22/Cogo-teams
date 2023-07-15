@@ -35,7 +35,7 @@ function ReviewSiDocument({
 	};
 
 	const minContentLength = (value) => value.length >= MIN_CONTENT_LENGTH
-        || 'remark must be at least 20 characters long';
+        || 'Remark must be at least 20 characters long';
 
 	return (
 		<Modal
@@ -51,7 +51,7 @@ function ReviewSiDocument({
 						name="remark"
 						placeholder="Type here..."
 						control={control}
-						style={{ height: '100px' }}
+						rows={6}
 						rules={{ validate: minContentLength }}
 					/>
 					{ errors?.remark ? (

@@ -10,7 +10,7 @@ import VerticleLine from '../VerticleLine';
 import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
-const INCREAMNET_BY_ONE = 1;
+const INCREMENT_BY_ONE = 1;
 const LABEL_SPLIT_LOWER_INDEX = -1;
 const STARTING_POINT = 1;
 
@@ -79,19 +79,19 @@ function Content({
 		return null;
 	};
 
-	const SI_REVIEW_CONDITION =		document_type === 'si' && state === 'document_accepted';
+	const SI_REVIEW_CONDITION =	document_type === 'si' && state === 'document_accepted';
 
 	return (
 		<div className={styles.single_item}>
 			<VerticleLine
 				checked={isChecked}
-				isLast={taskList.length === idx + INCREAMNET_BY_ONE}
+				isLast={taskList.length === idx + INCREMENT_BY_ONE}
 			/>
 			<div className={isChecked ? styles.single_item_child : styles.upload_item}>
 
 				<div className={styles.main}>
 					<div className={styles.heading}>
-						{item?.label.split('Upload').slice(LABEL_SPLIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
+						{item?.label?.split('Upload')?.slice(LABEL_SPLIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
 					</div>
 					{isChecked ? (
 						<div className={styles.gap}>
