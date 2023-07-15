@@ -104,7 +104,7 @@ const useEditQuotations = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		if (formattedRate?.primary_service?.id === service_charge?.service_id) {
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
 			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
 				?.line_items?.map((line_item) => ({
 					code     : line_item?.code,

@@ -23,11 +23,11 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 		const rate = data[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		return {
-			id                   : selectedRate.id,
+			id                : selectedRate.id,
 			primary_service,
 			origin_local,
 			destination_local,
-			[primary_service.id] : {
+			[rate.service_id] : {
 				service_provider_id : rate.service_provider_id,
 				airline_id          : rate.airline_id,
 				line_items:
@@ -79,8 +79,8 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 	const rate = data[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return {
 		primary_service,
-		id                   : selectedRate.id,
-		[primary_service.id] : {
+		id                : selectedRate.id,
+		[rate.service_id] : {
 			service_provider_id: rate.service_provider_id,
 			line_items:
 					rate && rate.line_items
