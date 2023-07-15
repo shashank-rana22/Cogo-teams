@@ -1,5 +1,4 @@
-import { Button, Avatar } from '@cogoport/components';
-import { IcMCall, IcMScreenShare } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
@@ -10,12 +9,11 @@ import { firebaseConfig } from './configurations/firebase-config';
 import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import styles from './styles.module.css';
-// import VideoCallScreen from './VideoCallScreen';
+import VideoCallScreen from './VideoCallScreen';
 
 function VideoCall() {
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
-	const peerRef = useRef(null);
 
 	const [callComing, setCallComing] = useState(false);
 	const [inACall, setInACall] = useState(false);
@@ -42,15 +40,12 @@ function VideoCall() {
 		isScreenShareActive : false,
 		isMaximize          : false,
 	});
-	console.log(options, 'options');
+
 	const streamRef = useRef({
 		user : null,
 		peer : null,
 	});
-	const componentsRef = useRef({
-		call_comming : null,
-		call_screen  : null,
-	});
+	const peerRef = useRef(null);
 
 	// const { } = callDetails.calling_details || {};
 
@@ -68,8 +63,6 @@ function VideoCall() {
 		streams,
 		peerRef,
 	});
-
-	console.log(callEnd, stopStream, 'reihgiergnkj');
 
 	const { rejectOfCall, answerOfCall } = useComingCall({
 		firestore,
@@ -93,8 +86,6 @@ function VideoCall() {
 			streamRef.current.user.srcObject = streams.user_stream;
 		}
 		if (streams.peer_stream) {
-			console.log(streams.peer_stream.getVideoTracks(), 'user_stream');
-			console.log(streams.peer_stream.getAudioTracks(), 'user_stream');
 			streamRef.current.peer.srcObject = streams.peer_stream;
 		}
 	}, [streams]);
@@ -107,32 +98,13 @@ function VideoCall() {
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
 
-	const onDragHandler = (ev, moving_ref) => {
-		const shiftX = ev.clientX;
-		const shiftY = ev.clientY;
-		const SHIFT = 50;
-
-		if (shiftX && shiftY) {
-			componentsRef[moving_ref].style = `top: ${shiftY - SHIFT}px;
-			left: ${shiftX - SHIFT}px;`;
-		}
-	};
-
 	return (
 		<div>
-			<div className={styles.call_comming}>
+			<div className={styles.call_test}>
 				<Button onClick={callingTo}>Call</Button>
 			</div>
 			{callComing ? (
-				<div
-					className={styles.call_comming}
-					draggable="true"
-					onDrag={(ev) => onDragHandler(ev, 'call_comming')}
-					ref={(e) => {
-						componentsRef.call_comming = e;
-					}}
-					onDragOver={(e) => e.preventDefault()}
-				>
+				<div>
 					<CallComing
 						rejectOfCall={rejectOfCall}
 						answerOfCall={answerOfCall}
@@ -140,47 +112,18 @@ function VideoCall() {
 				</div>
 			) : null}
 			{inACall ? (
-				<div
-					className={styles.container}
-					draggable="true"
-					onDrag={(ev) => onDragHandler(ev, 'call_screen')}
-					ref={(e) => {
-						componentsRef.call_screen = e;
-					}}
-					onDragOver={(e) => e.preventDefault()}
-				>
-					<div className={styles.header}>Purnendu Shekhar</div>
-					<Avatar personName="Purnendu Shekhar" size="250px" className={styles.styled_avatar} />
-					<div className={styles.footer}>
-						<div className={styles.call_text}>
-							On Call
-							<span>00:44</span>
-						</div>
-						<div className={styles.image_container}>
-							<IcMScreenShare className={styles.share_icon} />
-							<div className={styles.hangup_icon}>
-								<IcMCall className={styles.end_call_icon} />
-							</div>
-						</div>
-					</div>
-					{/*
-
-								{streams && (
-									<VideoCallScreen
-										setStreams={setStreams}
-										ref={streamRef}
-										setOptions={setOptions}
-										options={options}
-										callEnd={callEnd}
-										stopStream={stopStream}
-										callUpdate={callUpdate}
-									/>
-								)}
-							</div>
-						</div>
-						*/}
-				</div>
-
+				<VideoCallScreen
+					ref={streamRef}
+					options={options}
+					setOptions={setOptions}
+					setStreams={setStreams}
+					streams={streams}
+					callEnd={callEnd}
+					stopStream={stopStream}
+					callUpdate={callUpdate}
+					peerRef={peerRef}
+					callDetails={callDetails}
+				/>
 			) : null}
 		</div>
 	);

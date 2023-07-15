@@ -1,28 +1,24 @@
 import { Avatar } from '@cogoport/components';
+import { IcMCall, IcMScreenShare } from '@cogoport/icons-react';
 import { forwardRef } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
-import VideoCallOptions from './VideoCallOptions';
 
-function VideoCallScreen(
-	{
-		setStreams = () => {},
-		streams = {},
-		stopStream = () => {},
-		callEnd = () => {},
-		setOptions = () => {},
-		options = {},
-		callUpdate = () => {},
-		peerRef = {},
-	},
-	ref,
-) {
+function VideoCallScreen({
+	options = {},
+	setOptions = () => {},
+	setStreams = () => {},
+	streams = {},
+	callEnd = () => {},
+	stopStream = () => {},
+	callUpdate = () => {},
+	peerRef = null,
+	callDetails = {},
+}, ref) {
 	const tempRef = ref;
-	const USERNAME = 'Abhijit';
-
-	const { videoOn, micOn, shareScreen, stopCall } = useVideocallOptions({
+	const { shareScreen, stopCall } = useVideocallOptions({
 		options,
 		setOptions,
 		setStreams,
@@ -32,45 +28,47 @@ function VideoCallScreen(
 		callUpdate,
 		peerRef,
 	});
+	console.log('callDetail', callDetails?.calling_type);
 
 	return (
-		<div className={styles.screen_div}>
-			<div className={styles.peer_screen}>
-				<video
-					// muted
-					ref={(e) => {
-						tempRef.current.peer = e;
-					}}
-					autoPlay
-				/>
-			</div>
-			<div
-				className={`${
-					options?.isVideoActive || options?.isScreenShareActive
-						? styles.my_screen
-						: styles.my_screen_avoter
-				}`}
-			>
-				<div className={styles.avoter}>
-					<Avatar personName={USERNAME} />
+		<div className={styles.container}>
+			<div className={streams?.peer_stream ? styles.peer_screen : styles.call_screen}>
+				<div className={styles.avatar_screen}>
+					<div className={styles.header}>Purnendu Shekhar</div>
+					<Avatar personName="Purnendu Shekhar" size="250px" className={styles.styled_avatar} />
 				</div>
-				<video
-					// muted
-					ref={(e) => {
-						tempRef.current.user = e;
-					}}
-					autoPlay
-				/>
+				<div className={styles.peer_video_stream}>
+					<video
+						ref={(e) => {
+							tempRef.current.peer = e;
+						}}
+						autoPlay
+					/>
+				</div>
 			</div>
-			<div className={styles.video_call_option}>
-				<VideoCallOptions
-					stopCall={stopCall}
-					shareScreen={shareScreen}
-					options={options}
-					setOptions={setOptions}
-					micOn={micOn}
-					videoOn={videoOn}
-				/>
+			<div className={styles.footer}>
+				{streams?.peer_stream ? (
+					<div className={styles.call_text}>
+						On Call
+						<span> 00:44</span>
+					</div>
+				) : (
+					<div className={styles.call_text}>
+						{ callDetails?.calling_type === 'incoming' ? 'Conecting..' : 'Ringing...'}
+					</div>
+				)}
+
+				<div className={styles.calling_options}>
+					{streams?.peer_stream ? (
+						<div role="presentation" className={styles.share_icon} onClick={shareScreen}>
+							<IcMScreenShare className={styles.end_call_icon} />
+						</div>
+					) : null }
+
+					<div className={styles.hangup_icon} role="presentation" onClick={stopCall}>
+						<IcMCall className={styles.end_call_icon} />
+					</div>
+				</div>
 			</div>
 		</div>
 	);
