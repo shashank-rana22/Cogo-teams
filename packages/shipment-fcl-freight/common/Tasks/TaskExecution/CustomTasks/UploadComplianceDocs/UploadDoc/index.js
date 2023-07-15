@@ -16,7 +16,7 @@ function UploadDoc({
 
 	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
 
-	function Error(key) {
+	function hanldeError(key) {
 		return errors?.[key] ? (
 			<div className={styles.errors}>
 				{errors?.[key]?.message}
@@ -83,7 +83,7 @@ function UploadDoc({
 					control={control}
 					rules={{ required: 'Document is required' }}
 				/>
-				{Error('upload_doc')}
+				{hanldeError('upload_doc')}
 			</Modal.Body>
 
 			<Modal.Footer>
