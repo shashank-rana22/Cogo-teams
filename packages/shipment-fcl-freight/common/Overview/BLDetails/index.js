@@ -48,7 +48,6 @@ function BLDetails() {
 				(
 				{primary_service?.bls_count || DEFAULT_BL_COUNT}
 				{' '}
-				{' '}
 				BL
 				{' '}
 				{containerDetailsArray?.length || containersCount || DEFAULT_CONTAINER_COUNT}
@@ -86,7 +85,7 @@ function BLDetails() {
 			{containerDetailsArray?.[GLOBAL_CONSTANTS.zeroth_index]?.container_number && can_edit_container_details
 				? <div className={styles.button_div}>{renderButtons()}</div> : null}
 
-			<Accordion title={renderBlCount} style={{ width: '100%' }}>
+			<Accordion title={renderBlCount()} style={{ width: '100%' }}>
 				{!list?.length ? (
 					<EmptyState
 						showContent={EMPTY_STATE_CONTENT}
