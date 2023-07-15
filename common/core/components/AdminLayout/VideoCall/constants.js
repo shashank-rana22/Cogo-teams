@@ -34,3 +34,6 @@ export const ICESERVER = [
 		username   : '28224511:1379330808',
 	},
 ];
+
+// eslint-disable-next-line max-len
+export const CALL_RING_TONE_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/f6e9f86e0a529b01b554dc8eb5de5bec/Microsoft%20Teams%20Audio%20Call%20Tone.mp3';

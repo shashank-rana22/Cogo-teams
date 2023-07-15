@@ -1,15 +1,32 @@
 import { IcMCall, IcMMinus, IcMVideoCall } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
+import { CALL_RING_TONE_URL } from '../constants';
 
 import styles from './styles.module.css';
 
 function CallComing({
 	rejectOfCall = () => {}, answerOfCall = () => {},
+	callDetails = {},
 }) {
+	const { my_details } = callDetails?.calling_details || {};
 	const [isMaximize, setIsMaximize] = useState(true);
+	const audioRef = useRef(null);
+
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.play();
+		}
+	}, []);
+
+	console.log(callDetails.calling_details);
 
 	return (
 		<div className={styles.call_comming}>
+			<audio
+				ref={audioRef}
+				src={CALL_RING_TONE_URL}
+			/>
 			{isMaximize ? (
 				<div className={styles.big_call_comming}>
 					<div
@@ -26,8 +43,8 @@ function CallComing({
 						/>
 					</div>
 					<div className={styles.comming_call_text}>
-						incoming Call from
-						<div className={styles.agent_name}>Agent Name</div>
+						Incoming Call from
+						<div className={styles.agent_name}>{my_details?.name || 'UnKnown'}</div>
 					</div>
 					<div className={styles.comming_call_options}>
 						<div role="presentation" onClick={answerOfCall} className={styles.accept}>
@@ -52,7 +69,7 @@ function CallComing({
 						className={styles.call_comming_text}
 						onClick={() => setIsMaximize(true)}
 					>
-						Agent Name
+						{my_details?.name || 'UnKnown'}
 					</div>
 					<div className={styles.call_comming_btn}>
 						<div role="presentation" onClick={rejectOfCall} className={styles.reject}>

@@ -108,6 +108,7 @@ function VideoCall() {
 					<CallComing
 						rejectOfCall={rejectOfCall}
 						answerOfCall={answerOfCall}
+						callDetails={callDetails}
 					/>
 				</div>
 			) : null}

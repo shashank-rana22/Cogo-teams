@@ -214,6 +214,7 @@ function useVideoCallFirebase({
 			videoCallRef,
 			where('call_status', '==', 'calling'),
 			where('calling_by', '==', 'user'),
+			where('peer_id', '==', 'a356bdf7-153e-4054-a76e-ccd5538baac3'),
 		);
 
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
