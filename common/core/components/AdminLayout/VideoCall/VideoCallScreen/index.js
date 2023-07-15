@@ -9,11 +9,13 @@ import VideoCallOptions from './VideoCallOptions';
 function VideoCallScreen(
 	{
 		setStreams = () => {},
+		streams = {},
 		stopStream = () => {},
 		callEnd = () => {},
 		setOptions = () => {},
 		options = {},
 		callUpdate = () => {},
+		peerRef = {},
 	},
 	ref,
 ) {
@@ -24,16 +26,18 @@ function VideoCallScreen(
 		options,
 		setOptions,
 		setStreams,
+		streams,
 		callEnd,
 		stopStream,
 		callUpdate,
+		peerRef,
 	});
 
 	return (
 		<div className={styles.screen_div}>
 			<div className={styles.peer_screen}>
 				<video
-					muted
+					// muted
 					ref={(e) => {
 						tempRef.current.peer = e;
 					}}
@@ -51,7 +55,7 @@ function VideoCallScreen(
 					<Avatar personName={USERNAME} />
 				</div>
 				<video
-					muted
+					// muted
 					ref={(e) => {
 						tempRef.current.user = e;
 					}}

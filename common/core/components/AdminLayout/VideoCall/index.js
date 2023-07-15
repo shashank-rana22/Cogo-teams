@@ -57,9 +57,9 @@ function VideoCall() {
 	const { callingTo, callUpdate, callEnd, stopStream, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
+		callComing,
 		setOptions,
 		setWebrtcToken,
-		callComing,
 		setInACall,
 		inACall,
 		setCallDetails,
@@ -83,6 +83,7 @@ function VideoCall() {
 		saveWebrtcToken,
 		setWebrtcToken,
 		webrtcToken,
+		callEnd,
 	});
 
 	useEffect(() => {
@@ -92,12 +93,14 @@ function VideoCall() {
 			streamRef.current.user.srcObject = streams.user_stream;
 		}
 		if (streams.peer_stream) {
+			console.log(streams.peer_stream.getVideoTracks(), 'user_stream');
+			console.log(streams.peer_stream.getAudioTracks(), 'user_stream');
 			streamRef.current.peer.srcObject = streams.peer_stream;
 		}
 	}, [streams]);
 
 	useEffect(() => {
-		if (webrtcToken?.peer_token && callDetails?.calling_type === 'calling') {
+		if (webrtcToken?.peer_token && callDetails?.calling_type === 'outgoing') {
 			if (peerRef.current) {
 				peerRef.current.signal(webrtcToken?.peer_token);
 			}

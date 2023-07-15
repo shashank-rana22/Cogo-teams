@@ -16,6 +16,7 @@ function useComingCall({
 	saveWebrtcToken,
 	webrtcToken,
 	setWebrtcToken,
+	callEnd,
 }) {
 	const getWebrtcToken = async () => {
 		if (callDetails.webrtc_token_room_id && callDetails.calling_room_id) {
@@ -83,6 +84,13 @@ function useComingCall({
 					console.log('stream connected');
 					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
 				});
+
+				peer.on('error', () => {
+					callEnd();
+					callUpdate({
+						call_status: 'technical_error',
+					});
+				});
 			})
 			.catch((error) => {
 				console.log('user stream is not working', error);
@@ -106,6 +114,7 @@ function useComingCall({
 		});
 		setCallComing(false);
 	};
+
 	return {
 		answerOfCall,
 		rejectOfCall,
