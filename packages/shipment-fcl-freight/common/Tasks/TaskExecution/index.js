@@ -13,7 +13,7 @@ function TaskExecution({
 	tasksList = [],
 }) {
 	if (['approve_document', 'amend_document'].includes(task?.task_type)
-	&& ['approve_compliance_documents', 'amend_compliance_documents'].includes(task.task)) {
+	&& ['approve_compliance_documents', 'amend_compliance_documents'].includes(task?.task)) {
 		return (
 			<UploadComplianceDocs
 				task={task}

@@ -10,7 +10,7 @@ const TOOLTIP_WIDTH = 1000;
 function List({ item = {} }) {
 	return (
 		<div className={styles.container}>
-			<IcMAppDocumentUpload height={UPLOAD_ICON_DIM} weight={UPLOAD_ICON_DIM} />
+			<IcMAppDocumentUpload height={UPLOAD_ICON_DIM} width={UPLOAD_ICON_DIM} />
 
 			<div className={styles.doc_name_div}>
 				<div className={styles.doc_label}>Document Name</div>

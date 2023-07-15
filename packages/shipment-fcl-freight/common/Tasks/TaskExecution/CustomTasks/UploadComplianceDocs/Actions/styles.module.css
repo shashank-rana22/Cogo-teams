@@ -32,7 +32,7 @@
 	margin-right: 16px;
 	font-size: 10px;
 	line-height: 150%;
-	color: var(--black, #221f20);
+	color: #221f20;
 	white-space: nowrap;
 	border-radius: 4px;
 }

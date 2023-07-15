@@ -26,7 +26,7 @@ const EXCLUDE_SERVICES = [
 	'haulage_freight_service',
 ];
 
-const REDUCE_LEGTH_BY = 1;
+const REDUCE_LENGTH_BY = 1;
 
 function ExecuteTask({
 	task = {},
@@ -49,7 +49,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - REDUCE_LEGTH_BY]
+		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
 		: {};
 
 	if (loading) {
@@ -205,7 +205,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - REDUCE_LEGTH_BY}
+			isLastStep={currentStep === steps.length - REDUCE_LENGTH_BY}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

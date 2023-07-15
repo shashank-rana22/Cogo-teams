@@ -1,6 +1,6 @@
 .errors {
 	font-size: var(--font-size-md);
-	color: red;
+	color: #ee3425;
 }
 
 .file_view {
