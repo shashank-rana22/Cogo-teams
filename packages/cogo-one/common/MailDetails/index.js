@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMRefresh, IcMSearchlight, IcMFilter } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -58,7 +58,7 @@ function MailDetails({
 							/>
 						) : (
 							<IcMRefresh
-								className={styles.filter_icon}
+								className={styles.refresh_icon}
 								onClick={handleRefresh}
 							/>
 						)}
@@ -69,8 +69,15 @@ function MailDetails({
 						placeholder="Search"
 						value={searchQuery}
 						onChange={setSearchQuety}
-						prefix={<IcMSearchlight />}
+						prefix={(
+							<IcMSearchlight
+								height={20}
+								width={20}
+								fill="#9f9f9f"
+							/>
+						)}
 					/>
+					<IcMFilter className={styles.filter_icon} />
 				</div>
 			</div>
 

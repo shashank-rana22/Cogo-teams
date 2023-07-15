@@ -43,7 +43,7 @@
 	color: #6f6f6f;
 }
 
-.filter_icon {
+.refresh_icon {
 	width: 17px;
 	height: 17px;
 	cursor: pointer;
@@ -55,4 +55,11 @@
 	align-items: center;
 	justify-content: center;
 	height: calc(100% - 8px);
+}
+
+.filter_icon {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	fill: #6f6f6f;
 }
