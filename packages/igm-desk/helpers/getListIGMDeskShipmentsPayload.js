@@ -20,7 +20,7 @@ export default function getListIGMDeskShipmentsPayload({
 			[file_type] : true,
 		},
 		page,
-		additional_methods: ['pagination'],
+		additional_methods: ['pagination', 'documents'],
 		sort_by,
 		sort_type,
 	};

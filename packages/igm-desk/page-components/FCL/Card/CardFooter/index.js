@@ -15,7 +15,7 @@ export default function CardFooter({ item = {} }) {
 
 	return (
 		<div className={styles.card_footer}>
-			{isEmpty(item?.documents) ? (
+			{!isEmpty(item?.documents) ? (
 				<div className={styles.details}>
 					<div className={styles.text}>Documents :</div>
 

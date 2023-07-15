@@ -56,8 +56,8 @@ export default function CargoDetails({ cargo_details = {}, item = {}, activeTab 
 				<Tooltip
 					content={(
 						<div>
-							{restCargoDetails.map((cargo_detail, i) => (
-								<div key={mapKeys[i]}>
+							{(restCargoDetails || []).map((cargo_detail, i) => (
+								<div key={mapKeys?.[i]}>
 									{renderCargoPills(cargo_detail)}
 								</div>
 							))}

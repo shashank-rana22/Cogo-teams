@@ -26,13 +26,3 @@
 		color: var(--color-primary-error-red-2);
 	}
 }
-
-.red_faded {
-	svg path {
-		fill: var(--color-primary-error-red-3);
-	}
-
-	.icon_text {
-		color: var(--color-primary-error-red-3);
-	}
-}

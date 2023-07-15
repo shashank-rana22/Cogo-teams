@@ -21,7 +21,8 @@
     },
     "documents":{
         "tab_title":"Documents",
-        "default_wallet":"trade_documents"
+        "default_wallet":"trade_documents",
+        "can_edit_documents": false
     },
     "additional_services": {
         "action_buttons": {

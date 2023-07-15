@@ -15,6 +15,8 @@ import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
+	const { shipment_data, primary_service, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
@@ -23,7 +25,6 @@ function Documents() {
 	const [searchValue, setSearchValue] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
-	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
 		loading,
@@ -60,6 +61,8 @@ function Documents() {
 
 	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
 	|| item?.document_type?.toLowerCase().includes(searchValue));
+
+	const can_edit_documents = !!stakeholderConfig?.documents?.can_edit_documents;
 
 	const renderContent = () => {
 		if (loading) {
@@ -114,14 +117,16 @@ function Documents() {
 
 			{renderContent()}
 
-			<Approve
-				showApproved={showApproved}
-				setShowApproved={setShowApproved}
-				addToWallet={addToWallet}
-				setAddToWallet={setAddToWallet}
-				handleApprove={handleApprove}
-				setShowDoc={setShowDoc}
-			/>
+			{can_edit_documents ? (
+				<Approve
+					showApproved={showApproved}
+					setShowApproved={setShowApproved}
+					addToWallet={addToWallet}
+					setAddToWallet={setAddToWallet}
+					handleApprove={handleApprove}
+					setShowDoc={setShowDoc}
+				/>
+			) : null }
 		</div>
 	);
 }

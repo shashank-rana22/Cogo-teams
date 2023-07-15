@@ -44,9 +44,8 @@ function Header({
 							placement="bottom"
 							trigger="mouseenter"
 							caret={false}
-							visibleRemarks={visibleCfsDetails}
-							render={`CFS Address: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
+							visible={visibleCfsDetails}
+							render={`CFS Address: ${primary_service?.cfs_service || 'NA'}`}
 						>
 							<Button
 								size="md"
@@ -64,7 +63,7 @@ function Header({
 							placement="bottom"
 							trigger="mouseenter"
 							caret={false}
-							visibleRemarks={visibleRemarks}
+							visible={visibleRemarks}
 							render={`Supply Remarks: ${primary_service?.booking_preferences?.
 								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
 						>

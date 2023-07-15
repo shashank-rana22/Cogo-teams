@@ -40,7 +40,7 @@ export default function useListIGMDeskShipments() {
 			}
 		} catch (err) {
 			const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
-			if (message !== 'canceled') { Toast.error(message); }
+			Toast.error(message);
 			setData(EMPTY_DATA);
 		}
 	}, [filters, selected_agent_id, setFilters, tabState, trigger]);
