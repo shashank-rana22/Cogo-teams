@@ -21,6 +21,7 @@ function Services() {
 		servicesList,
 		servicesLoading,
 		activeStakeholder,
+		stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -34,6 +35,8 @@ function Services() {
 	});
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+
+	const can_upsell = !!stakeholderConfig?.overview?.can_upsell;
 
 	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
@@ -63,23 +66,25 @@ function Services() {
 								))}
 							</div>
 
-							<div className={styles.upselling}>
-								{(upsellServices[serviceCategory]).map((service) => (
-									<AddNewService
-										key={`${service?.trade_type}_${service?.service_type}`}
-										upsellableService={service}
-										servicesList={servicesList}
-										shipmentData={shipment_data}
-										primary_service={primary_service}
-										cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-										cancelUpsellOriginFor={cancelUpsellOriginFor}
-										activeStakeholder={activeStakeholder}
-										setShowTradeHeading={setShowTradeHeading}
-										showTradeHeading={showTradeHeading}
-										userServicesData={data}
-									/>
-								))}
-							</div>
+							{can_upsell ? (
+								<div className={styles.upselling}>
+									{(upsellServices[serviceCategory]).map((service) => (
+										<AddNewService
+											key={`${service?.trade_type}_${service?.service_type}`}
+											upsellableService={service}
+											servicesList={servicesList}
+											shipmentData={shipment_data}
+											primary_service={primary_service}
+											cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+											cancelUpsellOriginFor={cancelUpsellOriginFor}
+											activeStakeholder={activeStakeholder}
+											setShowTradeHeading={setShowTradeHeading}
+											showTradeHeading={showTradeHeading}
+											userServicesData={data}
+										/>
+									))}
+								</div>
+							) : null }
 						</>
 					))}
 				</div>

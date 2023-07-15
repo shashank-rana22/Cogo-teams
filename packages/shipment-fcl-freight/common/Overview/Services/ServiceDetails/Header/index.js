@@ -1,7 +1,8 @@
 import { cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import EditCancelService from '../../../../EditCancelService';
 import Details from '../Details';
@@ -9,6 +10,10 @@ import Details from '../Details';
 import styles from './styles.module.css';
 
 function Header({ serviceData = [] }) {
+	const { stakeholderConfig } = useContext(ShipmentDetailContext);
+
+	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
+
 	const SERVICE_DATA_FIRST = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { state, display_label, service_provider, payment_term } = SERVICE_DATA_FIRST;
@@ -36,8 +41,7 @@ function Header({ serviceData = [] }) {
 
 					<div className={styles.extra_details}>
 						<div
-							role="button"
-							tabIndex={0}
+							role="presentation"
 							onClick={() => setShowDetails({
 								...showDetails,
 								[SERVICE_DATA_FIRST.display_label]: !showDetails[SERVICE_DATA_FIRST.display_label],
@@ -46,9 +50,11 @@ function Header({ serviceData = [] }) {
 						>
 							{ showDetails[SERVICE_DATA_FIRST.display_label] ? 'Hide Details' : 'View Details'}
 						</div>
-						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={SERVICE_DATA_FIRST} />
-						</div>
+						{can_edit_cancel_service ? (
+							<div className={styles.edit_cancel}>
+								<EditCancelService serviceData={SERVICE_DATA_FIRST} />
+							</div>
+						) : null }
 					</div>
 				</div>
 			</div>

@@ -44,7 +44,7 @@ function Header({
 							caret={false}
 							visible={visible}
 							render={`Supply Remarks: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index]?.remarks}`}
+								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
 						>
 							<Button
 								size="md"

@@ -33,6 +33,7 @@
     "@cogoport/controlled-booking": "workspace:0.1.0",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/cost-booking-desk": "workspace:0.1.0",
+    "@cogoport/igm-desk" : "workspace:0.1.0",
     "@cogoport/document-desk": "workspace:0.1.0",
     "@cogoport/employee-portal": "workspace:0.1.0",
     "@cogoport/enrichment": "workspace:0.1.0",

@@ -14,12 +14,16 @@ import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
+	const user_data = useSelector((({ profile }) => profile?.user));
+
+	const {
+		shipment_data, primary_service,
+		isGettingShipment,
+		activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
+
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
-
-	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
-
-	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
 
@@ -27,11 +31,14 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
+	const show_po_number = stakeholderConfig?.shipment_header?.show_po_number;
+
 	const showCancelShipmentIcon = getCanCancelShipment({
 		shipment_data,
 		primary_service,
 		user_data,
 		activeStakeholder,
+		stakeholderConfig,
 	});
 
 	return (
@@ -58,21 +65,25 @@ function ShipmentHeader() {
 					</div>
 				</Tooltip>
 
-				{po_number ? (
-					<div className={styles.po_number}>
-						PO Number:&nbsp;
-						{po_number}
+				{show_po_number ? (
+					<div>
+						{po_number ? (
+							<div className={styles.po_number}>
+								PO Number:
+								{' '}
+								{po_number}
+							</div>
+						) : (
+							<div
+								className={styles.button}
+								role="presentation"
+								onClick={() => setShowModal('add_po_number')}
+							>
+								Add PO Number
+							</div>
+						)}
 					</div>
-				) : (
-					<div
-						className={styles.button}
-						role="button"
-						tabIndex={0}
-						onClick={() => setShowModal('add_po_number')}
-					>
-						Add PO Number
-					</div>
-				)}
+				) : null }
 			</div>
 
 			<div className={styles.port_details}>
@@ -87,8 +98,7 @@ function ShipmentHeader() {
 						visible={showPopover}
 						render={(
 							<div
-								role="button"
-								tabIndex={0}
+								role="presentation"
 								className={styles.cancel_button}
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>

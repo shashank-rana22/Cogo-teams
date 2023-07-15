@@ -1,6 +1,7 @@
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 
 export function canEditSchedule({ primary_service, activeStakeholder }) {
+	// igm change
 	const stateCheck = TIMELINE_EDITABLE.primary_service.state
 		.includes(primary_service?.state);
 

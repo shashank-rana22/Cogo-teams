@@ -1,0 +1,63 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 50%;
+	padding: 0 20px;
+}
+
+.port_detail {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 35%;
+
+	> div {
+		max-width: 100%;
+	}
+
+	.eta_etd {
+		font-size: var(--font-size-md);
+	}
+}
+
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 5%;
+	margin: 0 12px;
+}
+
+.port_code {
+	display: flex;
+	align-items: center;
+	min-height: 16px;
+	font-size: var(--font-size-md);
+
+	.code {
+		margin-right: 2px;
+		color: var(--color-accent-orange-2);
+	}
+
+	.country {
+		color: #828282;
+	}
+}
+
+.ellipsis_text {
+	width: fit-content;
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.icd {
+	margin: 4px 0;
+	font-size: 10px;
+	font-weight: 700;
+}

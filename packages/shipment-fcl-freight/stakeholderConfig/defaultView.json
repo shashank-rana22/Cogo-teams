@@ -5,7 +5,8 @@
     "shipment_header" : {
         "can_add_po_number": false,
         "can_cancel_shipment": false,
-        "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"}
+        "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"},
+        "show_po_number": true
     },
 
     "timeline": {
@@ -15,7 +16,10 @@
     "default_tab":"tasks",
 
     "overview":{
-        "tab_title":"Overview"
+        "tab_title":"Overview",
+        "can_upsell": true,
+        "can_edit_cancel_service": true,
+        "can_edit_container_details": true
     },
 
     "tasks":{

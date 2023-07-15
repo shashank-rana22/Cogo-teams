@@ -1,0 +1,47 @@
+{
+    "file_igm": {
+        "task_attributes":[
+            {
+                "task": ["cargo_sailed"],
+                "state": ["containers_gated_in"],
+                "status": ["completed"],
+                "assigned_stakeholder": ["service_ops2"]
+            }
+        ],
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    },
+    "igm_filed": {
+        "task_attributes":[
+            {
+                "task": ["upload_igm_document"],
+                "state": ["vessel_departed"],
+                "status": ["completed"],
+                "assigned_stakeholder": ["service_ops2"]
+            },
+            {
+                "task": ["upload_checklist"],
+                "state": ["vessel_departed"],
+                "status": ["completed"],
+                "assigned_stakeholder": ["service_ops2"]
+            }
+        ],
+        "state" : ["shipment_received", "confirmed_by_importer_exporter","in_progress"]
+    },
+    "completed":  {
+        "task_attributes":[
+            {
+                "task": ["upload_igm_document"],
+                "state": ["vessel_departed"],
+                "status": ["completed"],
+                "assigned_stakeholder": ["service_ops2"]
+            },
+            {
+                "task": ["upload_checklist"],
+                "state": ["vessel_departed"],
+                "status": ["completed"],
+                "assigned_stakeholder": ["service_ops2"]
+            }
+        ],
+        "state" : ["completed"]
+    }
+}

@@ -20,6 +20,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import groundOps from './config/ground-ops';
+import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
@@ -119,6 +120,7 @@ const routeConfig = {
 	...liabilityDashboard,
 	...rfqDashboard,
 	...ftlAdmin,
+	...igmDesk,
 };
 
 export default routeConfig;

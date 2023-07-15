@@ -26,12 +26,17 @@ const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent'
 	'superadmin', 'admin'];
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder, primary_service } = useContext(
+	const {
+		servicesList, refetchServices = () => {},
+		shipment_data, activeStakeholder, primary_service, stakeholderConfig,
+	} = useContext(
 		ShipmentDetailContext,
 	);
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
+
+	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -138,14 +143,16 @@ function List({ isSeller = false }) {
 					)
 					: null }
 
-				<Button
-					onClick={() => setShowModal('cargo_insurance_service')}
-					className={styles.btn_div}
-					disabled={!!isCargoInsured}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Cargo Insurance
-				</Button>
+				{can_edit_cancel_service ? (
+					<Button
+						onClick={() => setShowModal('cargo_insurance_service')}
+						className={styles.btn_div}
+						disabled={!!isCargoInsured}
+					>
+						<div className={styles.add_icon}>+</div>
+						Add Cargo Insurance
+					</Button>
+				) : null }
 			</div>
 
 			{showModal === 'add_sell_price'

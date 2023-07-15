@@ -12,6 +12,7 @@
     },
     "stakeholders_not_allowed": [
         "booking_agent",
-        "consignee_shipper_booking_agent"
+        "consignee_shipper_booking_agent",
+        "superadmin" 
     ]
 }
