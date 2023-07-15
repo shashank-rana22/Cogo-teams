@@ -5,14 +5,21 @@ import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
-const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' }];
+const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' },
+	{ value: 'task_created_at', label: 'Task Creation Date' },
+	{ value: 'task_deadline', label: 'Task Deadline' },
+	{ value: 'ftl_freight_eta', label: 'Trucks Estimated Arrival' },
+	{ value: 'ftl_freight_etd', label: 'Trucks Estimated Departure' },
+	{ value: 'ftl_pickup_date', label: 'Trucks Pickup Date' },
+	{ value: 'ftl_delivery_date', label: 'Trucks Delivery Date' }];
+
 const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
 function SortBy({
 	popoverFilter = {},
 	setShowPopover = () => {},
 }) {
-	const [order, setOrder] = useState('asc');
 	const { filters = {}, setFilters } = useContext(DashboardContext);
+	const [order, setOrder] = useState('desc');
 
 	const [sortValue, setSortValue] = useState('created_at');
 	const handleReset = () => {

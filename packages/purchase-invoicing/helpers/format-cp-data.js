@@ -1,13 +1,25 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, format } from '@cogoport/utils';
 
 import { BILL_MAPPINGS, VERIFICATION_STATUS } from '../constants';
 
+const DEFAULT_ZERO_VALUE = 0;
+const DEFAULT_ONE_VALUE = 1;
+const DEFAULT_ITEM_QUANTITY = 1;
+const TAX_TOTAL_PERCENTAGE = 100;
+const TDS_RATE = 2.0;
+const HOUR_COUNT = 24;
+const MINUTE_COUNT = 60;
+const SECOND_COUNT = 60;
+const TOTAL_TIME_COUNT = 1000;
+const PIN_CODE_LENGTH = 30;
+
 export const formatLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
-		const total = Number(item?.rate) * Number(item?.quantity || 1);
-		const tax_total = (total * (codes?.[item?.code]?.tax_percent || 0)) / 100;
-		const cost = (total || 0) + (tax_total || 0);
+		const total = Number(item?.rate) * Number(item?.quantity || DEFAULT_ITEM_QUANTITY);
+		const tax_total = (total * (codes?.[item?.code]?.tax_percent || DEFAULT_ZERO_VALUE)) / TAX_TOTAL_PERCENTAGE;
+		const cost = (total || DEFAULT_ZERO_VALUE) + (tax_total || DEFAULT_ZERO_VALUE);
 
 		const { tax_percent, service_name, trade_type, product_code, actualname } = codes?.[item?.code] || {};
 
@@ -16,17 +28,17 @@ export const formatLineItems = (line_items, codes) => {
 			currencyCode        : item?.currency,
 			currency            : item?.currency,
 			priceInBillCurrency : item?.currency,
-			price               : Number(item?.rate || 0),
-			quantity            : Number(item?.quantity || 1),
-			exchangeRate        : Number(item?.exchange_rate || 1),
+			price               : Number(item?.rate || DEFAULT_ZERO_VALUE),
+			quantity            : Number(item?.quantity || DEFAULT_ITEM_QUANTITY),
+			exchangeRate        : Number(item?.exchange_rate || DEFAULT_ITEM_QUANTITY),
 			taxPercent          : tax_percent,
-			taxPrice            : Number(tax_total || 0),
+			taxPrice            : Number(tax_total || DEFAULT_ZERO_VALUE),
 			discount            : '0',
 			serviceName:
                 ['fcl_freight', 'lcl_freight', 'air_freight'].includes(service_name)
                     && trade_type === 'LOCAL' ? `${service_name}_local` : service_name,
 			productCode     : product_code,
-			taxTotalPrice   : Number(cost || 0),
+			taxTotalPrice   : Number(cost || DEFAULT_ZERO_VALUE),
 			name            : actualname || item?.actualname,
 			unit            : item?.unit,
 			containerNumber : item?.container_number || '',
@@ -38,9 +50,9 @@ export const formatLineItems = (line_items, codes) => {
 
 export const formatPurchaseLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
-		const total = Number(item?.rate || 0) * Number(item?.quantity || 1);
-		const tax_total = (total * (codes?.[item?.code]?.tax_percent || 0)) / 100;
-		const cost = (total || 0) + (tax_total || 0);
+		const total = Number(item?.rate || DEFAULT_ZERO_VALUE) * Number(item?.quantity || DEFAULT_ITEM_QUANTITY);
+		const tax_total = (total * (codes?.[item?.code]?.tax_percent || DEFAULT_ZERO_VALUE)) / TAX_TOTAL_PERCENTAGE;
+		const cost = (total || DEFAULT_ZERO_VALUE) + (tax_total || DEFAULT_ZERO_VALUE);
 
 		const { tax_percent, service_name, trade_type, product_code, actualname } = codes?.[item?.code] || {};
 
@@ -60,18 +72,18 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 			currency_code          : currency,
 			currency,
 			price_in_bill_currency : currency,
-			price                  : Number(rate || 0),
-			quantity               : Number(quantity || 1),
-			exchange_rate          : Number(exchange_rate || 1),
+			price                  : Number(rate || DEFAULT_ZERO_VALUE),
+			quantity               : Number(quantity || DEFAULT_ITEM_QUANTITY),
+			exchange_rate          : Number(exchange_rate || DEFAULT_ITEM_QUANTITY),
 			tax_percent,
-			tax_price              : Number(tax_total || 0),
+			tax_price              : Number(tax_total || DEFAULT_ZERO_VALUE),
 			discount               : '0',
 			service_name:
 				['fcl_freight', 'lcl_freight', 'air_freight'].includes(service_name
 					|| serviceName) && trade_type === 'LOCAL'
 					? `${service_name || serviceName}_local` : service_name || serviceName,
 			product_code,
-			tax_total_price  : Number(cost || 0),
+			tax_total_price  : Number(cost || DEFAULT_ZERO_VALUE),
 			name             : actualname || item?.actualname,
 			unit,
 			container_number : container_number || '',
@@ -82,7 +94,7 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 };
 
 const validatePincode = (pincode, context) => {
-	if (pincode?.length > 30) {
+	if (pincode?.length > PIN_CODE_LENGTH) {
 		Toast.error(`Pincode Is Invalid For ${context}`);
 		return false;
 	}
@@ -90,7 +102,7 @@ const validatePincode = (pincode, context) => {
 };
 
 const validateIfsc = (ifsc, context) => {
-	if (ifsc?.length > 30) {
+	if (ifsc?.length > PIN_CODE_LENGTH) {
 		Toast.error(`Ifsc Is Invalid For ${context}`);
 		return false;
 	}
@@ -161,27 +173,25 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 		billId,
 	} = extraData || {};
 
-	const formatTaggedIds = [];
-	const formatRootIds = [];
+	const FORMAT_TAGGED_IDS = [];
+	const FORMAT_ROOT_IDS = [];
 	taggedProformas?.forEach((item) => {
 		if (item?.finance_job_number || item?.billId) {
-			formatTaggedIds.push(item?.finance_job_number || item?.billId);
+			FORMAT_TAGGED_IDS.push(item?.finance_job_number || item?.billId);
 			if (item.finance_job_number) {
-				formatRootIds.push(item.finance_job_number);
+				FORMAT_ROOT_IDS.push(item.finance_job_number);
 			}
 		} else {
 			item?.root?.split(',')?.forEach((id) => {
-				formatTaggedIds.push(id);
-				formatRootIds.push(id);
+				FORMAT_TAGGED_IDS.push(id);
+				FORMAT_ROOT_IDS.push(id);
 			});
 		}
 	});
-
-	const uniqueIds = new Set(formatRootIds);
-
+	const uniqueIds = new Set(FORMAT_ROOT_IDS);
 	let rootBillIds = '';
 	[...uniqueIds].forEach((element, index) => {
-		const isLast = index === ([...uniqueIds]?.length || 0) - 1;
+		const isLast = index === ([...uniqueIds]?.length || DEFAULT_ZERO_VALUE) - DEFAULT_ONE_VALUE;
 		const idbill = isLast ? `${element}` : `${element},`;
 		rootBillIds += idbill;
 	});
@@ -199,26 +209,21 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	const bankDetails = (bank_details || []).find(
 		(item) => item?.data?.bank_account_number === formValues?.collection_party_bank_details,
 	);
-
 	const billingpartyAddress = (billingPartyObj.addresses || []).find(
 		(addr) => addr?.gst_number === data?.billing_party_address,
 	);
-
 	const allBillingAddresses = [
 		...(collectionPartyObj?.billing_addresses || []),
 		...(collectionPartyObj?.other_addresses || []),
 	];
-
 	const billType = activeTab === 'pass_through' ? 'REIMBURSEMENT' : BILL_MAPPINGS[formValues?.invoice_type];
-
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
 		(address) => address?.tax_number === formValues?.collection_party_address,
 	) || {};
-
-	const collectionPartyPOC = collectionPartyObj?.poc_data?.[0] || {};
-
-	const rootid = taggedProformas?.length === 1 ? rooBill?.[0] : rootBillIds || undefined;
+	const collectionPartyPOC = collectionPartyObj?.poc_data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const rootid = taggedProformas?.length === DEFAULT_ONE_VALUE
+		? rooBill?.[GLOBAL_CONSTANTS.zeroth_index] : rootBillIds || undefined;
 
 	const finalData = {
 		jobSource           : 'LOGISTICS',
@@ -236,7 +241,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			isTaxable  : collectionPartyObj?.is_tax_applicable,
 			billDate   : format(
 				data.invoice_date || formValues?.invoice_date,
-				'yyyy-MM-dd hh:mm:ss',
+				`${GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']} ${GLOBAL_CONSTANTS.formats.time['hh:mm:ss']}`,
 				{},
 				true,
 			),
@@ -245,7 +250,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			creditDays:
                 Math.ceil(Math.abs(new Date(formValues?.due_date)
                         - new Date(formValues?.invoice_date))
-                    / (24 * 60 * 60 * 1000)) || 0,
+                    / (HOUR_COUNT * MINUTE_COUNT * SECOND_COUNT * TOTAL_TIME_COUNT)) || DEFAULT_ZERO_VALUE,
 
 			billDocumentUrl : uploadProof,
 			billNumber      : data?.tax_invoice_no.trim(),
@@ -294,7 +299,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			taxNumber               : collectionPartyBA?.tax_number || collectionPartyBA?.gst_number,
 			corporateIdentityNumber : billingPartyObj?.cin,
 			tdsRate                 : isEmpty(collectionPartyObj?.tds_deduction_rate)
-				? 2.0
+				? TDS_RATE
 				: collectionPartyObj?.tds_deduction_rate,
 			logoUrl           : collectionPartyBA?.billingAddress?.logoUrl,
 			signatureUrl      : collectionPartyBA?.signature_url,
@@ -370,15 +375,28 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			rootBillId      : isTagginsAllowed ? rootid : undefined,
 			refBillId:
 				formValues?.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
+			outstandingDocument: formValues?.outstanding_document?.finalUrl
+			|| undefined,
+			reasonForCN:
+				formValues?.invoice_type === 'credit_note' ? formValues?.reason_for_cn : undefined,
+			paymentType:
+				formValues?.invoice_type === 'purchase_invoice' || formValues?.invoice_type === 'proforma_invoice'
+					? formValues?.payment_type
+					: undefined,
+			advancedAmount: formValues?.payment_type === 'advanced' ? formValues?.advanced_amount : undefined,
+			advancedAmountCurrency:
+					formValues?.payment_type === 'advanced' ? formValues?.unit : undefined,
+			isIncidental: formValues?.invoice_type === 'purchase_invoice'
+				? formValues?.is_invoice_incedental
+				: undefined,
 		},
 		paymentMode     : formValues?.payment_mode || 'cash',
 		invoiceCurrency : formValues?.invoice_currency || ocrData?.invoice_currency,
 		invoiceUrl      : uploadProof,
 		lineItems       : formatLineItems(data.line_items || [], codes),
 		taggedBills:
-            taggedProformas?.length > 0 && isTagginsAllowed ? formatTaggedIds : undefined,
+		!isEmpty(taggedProformas) && isTagginsAllowed ? FORMAT_TAGGED_IDS : undefined,
 	};
-
 	return finalData;
 };
 
