@@ -1928,8 +1928,8 @@ const navigationMappingAdmin = {
 	airline_booking_plugin: {
 		key           : 'airline_booking_plugin',
 		title         : 'Airline Booking Plugin',
-		href          : '/airline-booking-plugin',
-		as            : '/airline-booking-plugin',
+		href          : '/v2/airline-booking-plugin',
+		as            : '/v2/airline-booking-plugin',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.airline_booking_plugin,
