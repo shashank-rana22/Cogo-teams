@@ -443,17 +443,6 @@ export default {
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
 		],
-		timezone: [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
-		],
 		services: [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
 			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },

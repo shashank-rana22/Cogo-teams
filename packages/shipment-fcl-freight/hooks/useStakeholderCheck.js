@@ -35,6 +35,7 @@ export const useStakeholderCheck = () => {
 			stakeholder: 'credit_control',
 		},
 		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },
+		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 	];
 
 	const matchingStakeholders = stakeholderMap
