@@ -8,7 +8,7 @@ import toastApiError from '../../commons/toastApiError.ts';
 
 const MONTH_MINUS = 1;
 const PAGE = 1;
-const useOutwardFileList = ({ entity, gstIn, month, year }) => {
+const useOutwardFileList = ({ entity, gstIn, month, year, setFilters }) => {
 	const { profile } = useSelector((state) => state || {});
 	const [page, setPage] = useState(PAGE);
 	function getFirstAndLastDate() {
@@ -81,6 +81,7 @@ const useOutwardFileList = ({ entity, gstIn, month, year }) => {
 				},
 			});
 			refetch();
+			setFilters({});
 		} catch (error) {
 			toastApiError(error);
 		}

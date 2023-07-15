@@ -28,6 +28,7 @@ function Outward({ filters, setFilters }) {
 		gstIn  : filters?.gstIn,
 		month  : filters?.month,
 		year   : filters?.year,
+		setFilters,
 	});
 
 	const { refresh, refreshLoading } = useRefreshData({ refetch });
