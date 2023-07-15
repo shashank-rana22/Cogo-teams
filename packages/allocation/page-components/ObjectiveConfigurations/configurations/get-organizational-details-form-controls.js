@@ -1,6 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import RenderListLocationOption from '../../../common/RenderListLocationOption';
+
+const getIdsFromValues = ({ values }) => {
+	if (isEmpty(values)) return undefined;
+
+	return values.map((value) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]);
+};
 
 const getOrganizationalDetailsControls = (props) => {
 	const { watchCountryIds, watchStateIds, watchCityIds } = props;
@@ -13,6 +20,7 @@ const getOrganizationalDetailsControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
 				filters    : { type: 'country', status: 'active' },
@@ -34,9 +42,14 @@ const getOrganizationalDetailsControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
-				filters    : { type: 'region', status: 'active', country_id: watchCountryIds },
+				filters: {
+					type       : 'region',
+					status     : 'active',
+					country_id : getIdsFromValues({ values: watchCountryIds }),
+				},
 				page_limit : 10,
 				sort_by    : 'name',
 				sort_type  : 'asc',
@@ -56,9 +69,14 @@ const getOrganizationalDetailsControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
-				filters    : { type: 'city', status: 'active', region_id: watchStateIds },
+				filters: {
+					type      : 'city',
+					status    : 'active',
+					region_id : getIdsFromValues({ values: watchStateIds }),
+				},
 				page_limit : 10,
 				sort_by    : 'name',
 				sort_type  : 'asc',
@@ -78,9 +96,14 @@ const getOrganizationalDetailsControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
-				filters    : { type: 'pincode', status: 'active', city_id: watchCityIds },
+				filters: {
+					type    : 'pincode',
+					status  : 'active',
+					city_id : getIdsFromValues({ values: watchCityIds }),
+				},
 				page_limit : 10,
 				sort_by    : 'name',
 				sort_type  : 'asc',
