@@ -1,10 +1,10 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
-import incoTermArray from '../../../constants/inco-terms.json';
 import useTask from '../../../hooks/useTask';
 import Card from '../Card';
 import Header from '../Header';
@@ -29,7 +29,7 @@ function TaskView() {
 	} = useContext(ShipmentDetailContext);
 
 	const incoTerm = shipment_data?.inco_term;
-	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term[incoTerm]?.tradeType
 		|| primary_service.trade_type;
 
 	const {
