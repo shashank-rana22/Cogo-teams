@@ -35,11 +35,16 @@ function UploadBookingNote({
 	const [step, setStep] = useState(initialStep);
 	const [fileUrl, setFileUrl] = useState();
 
-	const step0_data = useGetStep0Data({ shipment_data, task, servicesList, setStep });
+	const step0_data = useGetStep0Data({ shipment_data, task, servicesList });
+	let selectedRate = step0_data.selectedServiceProvider || undefined;
 
-	const selectedRate = step0_data.selectedServiceProvider || undefined;
+	if (initialStep === THREE) {
+		const selected_priorities = (step0_data.listBookingPreferences || [])
+			.filter((item) => item.priority === item.selected_priority);
+		selectedRate = selected_priorities;
+	}
 
-	const formattedRate = getFormattedRates({ servicesList, selectedRate });
+	const formattedRate = getFormattedRates(selectedRate, task.service_type);
 
 	const step1_data = useGetStep1Data({ setFileUrl });
 
@@ -61,6 +66,7 @@ function UploadBookingNote({
 		onCancel,
 		task,
 		taskListRefetch,
+		formattedRate,
 	});
 	const { serviceQuotationLoading = true } = step3_data || {};
 

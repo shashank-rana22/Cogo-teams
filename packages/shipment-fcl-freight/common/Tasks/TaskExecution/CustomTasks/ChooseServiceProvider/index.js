@@ -20,10 +20,15 @@ function ChooseServiceProvider({
 	services = [],
 }) {
 	const SERVICE_IDS = [];
-
+	let title = {};
 	(services || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service') {
 			SERVICE_IDS.push(serviceObj?.id);
+			title = {
+				...title,
+				[serviceObj?.id]: `${serviceObj.container_count} * 
+				${serviceObj.container_size} ${serviceObj.container_type} ${serviceObj.commodity}`,
+			};
 		}
 	});
 

@@ -40,7 +40,6 @@ function MarkServiceConfirmed({
 			/>
 		);
 	}
-	console.log(selectedCard, 'values');
 
 	const formattedRate = formatRate(
 		selectedCard,

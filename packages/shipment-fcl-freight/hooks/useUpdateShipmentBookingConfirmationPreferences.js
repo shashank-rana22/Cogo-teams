@@ -16,7 +16,6 @@ const useUpdateShipmentBookingConfirmationPreferences = ({
 	const apiTrigger = useCallback(
 		async (item) => {
 			const SELECTED_PRIORITY = [];
-			console.log(new Date(), 'hit_time_0');
 			item.forEach((priority) => (SELECTED_PRIORITY.push({
 				id                : priority.preference_id,
 				selected_priority : priority.priority,
@@ -26,7 +25,6 @@ const useUpdateShipmentBookingConfirmationPreferences = ({
 
 				if (!res.hasError) {
 					Toast.success(successMessage);
-					console.log(new Date(), 'hit_time_1');
 					setStep((prev) => prev + ONE);
 				}
 			} catch (err) {

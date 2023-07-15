@@ -1,11 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
-// import { useEffect } from 'react';
-
-// import useListShipmentBookingConfirmationPreferences from
-// 	'../../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
-// import { DEFAULT_INDEX } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
