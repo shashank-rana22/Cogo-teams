@@ -6,17 +6,17 @@ import AgentModal from '../AgentModal';
 import styles from './styles.module.css';
 
 function AgentStatusToggle() {
-	const [agentDetails, setAgentDetails] = useState(false);
+	const [showAgentDetails, setShowAgentDetails] = useState(false);
 
 	return (
 		<>
 			<IcMSettings
 				className={styles.settings_icon}
-				onClick={() => setAgentDetails(true)}
+				onClick={() => setShowAgentDetails(true)}
 			/>
 			<AgentModal
-				agentDetails={agentDetails}
-				setAgentDetails={setAgentDetails}
+				showAgentDetails={showAgentDetails}
+				setShowAgentDetails={setShowAgentDetails}
 			/>
 		</>
 	);

@@ -2,9 +2,24 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-function useListChatAgents(search) {
-	const [pagination, setPagination] = useState(1);
-	const { query = '', debounceQuery } = useDebounceQuery();
+const getParams = ({ agentType, page, query }) => ({
+	filters: {
+		q          : query || undefined,
+		agent_type : agentType || undefined,
+	},
+	page,
+	page_limit: 10,
+});
+
+function useListChatAgents() {
+	const [paramsState, setParamsState] = useState({
+		page      : 1,
+		query     : '',
+		agentType : '',
+	});
+
+	const { query:debounceSearchQuery = '', debounceQuery } = useDebounceQuery();
+
 	const [{ loading, data: listAgentStatus }, trigger] = useRequest(
 		{
 			url    : '/list_chat_agents',
@@ -16,24 +31,24 @@ function useListChatAgents(search) {
 	const getListChatAgents = useCallback(async () => {
 		try {
 			await trigger({
-				params: {
-					filters    : { q: query || undefined },
-					page       : pagination,
-					page_limit : 10,
-				},
+				params: getParams({
+					agentType : paramsState?.agentType,
+					page      : paramsState?.page,
+					query     : debounceSearchQuery,
+				}),
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
-	}, [trigger, pagination, query]);
+	}, [trigger, paramsState?.agentType, paramsState?.page, debounceSearchQuery]);
 
 	useEffect(() => {
-		debounceQuery(search);
-	}, [debounceQuery, search]);
+		debounceQuery(paramsState?.query);
+	}, [debounceQuery, paramsState?.query]);
 
 	useEffect(() => {
-		setPagination(1);
-	}, [query]);
+		setParamsState((p) => ({ ...p, page: 1 }));
+	}, [debounceSearchQuery, paramsState?.agentType]);
 
 	useEffect(() => {
 		getListChatAgents();
@@ -42,8 +57,11 @@ function useListChatAgents(search) {
 	return {
 		loading,
 		listAgentStatus,
-		setPagination,
+		setPagination : (val) => setParamsState((p) => ({ ...p, page: val })),
 		getListChatAgents,
+		setSearch     : (val) => setParamsState((p) => ({ ...p, query: val })),
+		setAgentType  : (val) => setParamsState((p) => ({ ...p, agentType: val })),
+		paramsState,
 	};
 }
 export default useListChatAgents;

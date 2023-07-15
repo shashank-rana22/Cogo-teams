@@ -82,6 +82,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			show_organization_users     : true,
 			send_promotional_rate       : true,
+			agent_type_filter           : false,
 		},
 	},
 	sales_admin: {
@@ -111,6 +112,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			show_organization_users     : true,
 			send_promotional_rate       : true,
+			agent_type_filter           : false,
 		},
 	},
 	support: {
@@ -142,6 +144,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			show_organization_users     : false,
 			send_promotional_rate       : true,
+			agent_type_filter           : false,
 		},
 	},
 	support_admin: {
@@ -171,6 +174,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
 			send_promotional_rate       : true,
+			agent_type_filter           : false,
 		},
 	},
 	supply: {
@@ -204,6 +208,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			show_organization_users     : true,
 			send_promotional_rate       : false,
+			agent_type_filter           : false,
 		},
 	},
 	supply_admin: {
@@ -236,6 +241,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			show_organization_users     : true,
 			send_promotional_rate       : false,
+			agent_type_filter           : false,
 		},
 	},
 	shipment_specialist: {
@@ -262,6 +268,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
 			send_promotional_rate       : true,
+			agent_type_filter           : false,
 		},
 	},
 	cogoone_admin: {
@@ -291,6 +298,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			show_organization_users     : false,
 			send_promotional_rate       : true,
+			agent_type_filter           : true,
 		},
 	},
 };
