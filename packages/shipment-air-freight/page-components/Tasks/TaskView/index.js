@@ -3,6 +3,7 @@ import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useTask from '../../../hooks/useTask';
@@ -109,9 +110,9 @@ function TaskView() {
 			/>
 			{loading ? <LoadingState /> : null}
 
-			{tasksList?.isEmpty && !loading ? <EmptyState /> : null}
+			{isEmpty(tasksList) && !loading ? <EmptyState /> : null}
 
-			{!tasksList?.isEmpty && !loading ? (
+			{!isEmpty(tasksList) && !loading ? (
 				<>
 					{selectedTaskId ? (
 						<Button

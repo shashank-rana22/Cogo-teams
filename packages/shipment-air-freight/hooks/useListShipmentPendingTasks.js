@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {}, filters }) => {
+const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {}, filters = {} }) => {
 	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
