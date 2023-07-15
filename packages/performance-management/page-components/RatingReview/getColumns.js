@@ -12,7 +12,6 @@ const getColumns = ({
 	level,
 	setShow,
 	toggleVal,
-	// setToggleVal,
 	selectedEmployeeList = () => {},
 	activeTab,
 }) => {
@@ -40,16 +39,22 @@ const getColumns = ({
 
 		{
 			Header   : 'Name',
-			accessor : (item) => (
-				<div
-					className={styles.employee_name}
-					role="presentation"
-					onClick={level === 'functional_manager' || activeTab !== 'vertical_head'
-						? () => setShow(item?.employee_id) : null}
-				>
-					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
-				</div>
-			),
+			accessor : (item) => {
+				const isVerticalHead = level === 'functional_manager' || activeTab !== 'vertical_head';
+				return (
+					<div
+						className={styles.employee_name}
+						style={{
+							cursor         : isVerticalHead ? 'pointer' : 'custom',
+							textDecoration : isVerticalHead ? 'underline' : 'custom',
+						}}
+						role="presentation"
+						onClick={isVerticalHead ? () => setShow(item?.employee_id) : null}
+					>
+						{startCase(item?.employee_name) || startCase(item?.name) || '-'}
+					</div>
+				);
+			},
 		},
 
 		{

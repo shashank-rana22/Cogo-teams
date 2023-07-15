@@ -54,10 +54,3 @@
 	padding: 3px;
 	margin-left: 180%;
 }
-
-.loader {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80vh;
-}

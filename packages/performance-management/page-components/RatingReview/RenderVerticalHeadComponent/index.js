@@ -1,4 +1,4 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion, Placeholder } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -56,11 +56,14 @@ function RenderStyledTable({
 	});
 
 	return (
-		<StyledTable
-			columns={columns}
-			data={employee_list}
-			emptyText={TABLE_EMPTY_TEXT}
-		/>
+		<div className={styles.table_wrapper}>
+			<StyledTable
+				columns={columns}
+				data={employee_list}
+				emptyText={TABLE_EMPTY_TEXT}
+			/>
+		</div>
+
 	);
 }
 
@@ -74,7 +77,7 @@ function RenderVerticalHeadComponent({
 	toggleVal,
 	setToggleVal,
 	activeTab,
-
+	getRatingApiLoading,
 }) {
 	const {
 		onClickCheckbox,
@@ -85,6 +88,15 @@ function RenderVerticalHeadComponent({
 		toggleVal,
 		setToggleVal,
 	});
+
+	if (getRatingApiLoading) {
+		return (
+			<div>
+				<Placeholder height="40px" width="100%" style={{ marginBottom: '20px' }} />
+				<Placeholder height="40px" width="100%" />
+			</div>
+		);
+	}
 
 	if (isEmpty(list)) {
 		return (

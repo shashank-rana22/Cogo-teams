@@ -1,4 +1,4 @@
-import { Button, Select, Loader } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetRatingCycles from '../hooks/useGetRatingCycles';
@@ -23,24 +23,16 @@ function HeaderComponent({ props = {} }) {
 		setSelectCycle,
 	} = useGetRatingCycles({ });
 
-	const { data, fetchRatingReviewDetails, loading } = useGetRatingReviewDetails(
+	const { data, fetchRatingReviewDetails, loading: getRatingApiLoading } = useGetRatingReviewDetails(
 		{ selectValue, level, selectCycle, activeTab },
 	);
 
 	const {
-		loading: Publish,
+		loading: publishButtonLoading,
 		publishRatings,
 		toggleVal,
 		setToggleVal,
 	} = usePublishRatings({ selectedEmployees, level, data, selectCycle, activeTab, fetchRatingReviewDetails });
-
-	if (loading) {
-		return (
-			<div className={styles.loader}>
-				<Loader style={{ height: '60px', width: '60px' }} />
-			</div>
-		);
-	}
 
 	return (
 		<div>
@@ -67,7 +59,7 @@ function HeaderComponent({ props = {} }) {
 						<Button
 							disabled={isEmpty(selectedEmployees)}
 							onClick={publishRatings}
-							loading={Publish}
+							loading={publishButtonLoading}
 						>
 							Publish
 
@@ -85,7 +77,7 @@ function HeaderComponent({ props = {} }) {
 				toggleVal={toggleVal}
 				setToggleVal={setToggleVal}
 				activeTab={activeTab}
-
+				getRatingApiLoading={getRatingApiLoading}
 			/>
 
 			{show ? (
