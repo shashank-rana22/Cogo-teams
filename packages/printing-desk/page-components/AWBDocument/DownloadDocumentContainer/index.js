@@ -44,7 +44,7 @@ function DownloadDocumentContainer({
 
 	const {
 		document_number: documentNumber, awbNumber, documentType, id,
-		documentState, documentId,
+		documentState, documentId, serviceId,
 	} = taskItem || {};
 
 	const { handleUpload } = useGetMediaUrl();
@@ -63,6 +63,13 @@ function DownloadDocumentContainer({
 		const { file } = getFileObject(newImage, 'awb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
+			data: {
+				...taskItem,
+				status          : 'generated',
+				document_number : documentNumber,
+				service_id      : serviceId,
+				service_type    : 'air_freight_service',
+			},
 			id,
 			documentId,
 			documentType: documentType === 'draft_airway_bill'
