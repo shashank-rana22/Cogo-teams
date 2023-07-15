@@ -1,18 +1,12 @@
 import { cl, Button, Modal } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from '../styles.module.css';
 
-const STATES = {
-	liners_exchange_rate : 'Liners Exchange Rates are',
-	eta                  : 'Schedule arrival Date is',
-	etd                  : 'Scchedule departure date is',
-};
-
-const SPLIT_INDEX = 1;
+const ZERO_PARAMETER = 0;
+const FIRST_PARAMETER = 1;
 
 function LinersExchangeRateConfirm({
 	invoice = {},
@@ -28,9 +22,8 @@ function LinersExchangeRateConfirm({
 					<div className={styles.message}>
 						<IcMError width={30} height={30} fill="#ffe6a7" />
 						<div className={styles.confirm_label}>
-							{STATES[invoice?.exchange_rate_state]}
-							not available yet. Do you
-							want to proceed with system exchange rates?
+							Liners Exchange Rates are not available yet. Do you want to
+							proceed with system exchange rates?
 						</div>
 					</div>
 
@@ -42,10 +35,10 @@ function LinersExchangeRateConfirm({
 
 					{Object.keys(invoice?.exchange_rates)?.map((item) => (
 						<div key={item} className={cl`${styles.flex} ${styles.row}`}>
-							<div className={styles.title}>{item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
+							<div className={styles.title}>{item?.split('_')?.[ZERO_PARAMETER]}</div>
 							<div className={styles.line} />
 
-							<div className={styles.title}>{item?.split('_')?.[SPLIT_INDEX]}</div>
+							<div className={styles.title}>{item?.split('_')?.[FIRST_PARAMETER]}</div>
 							<div className={cl`${styles.line} ${styles.arrow}`} />
 
 							<div className={cl`${styles.title} ${styles.value}`}>

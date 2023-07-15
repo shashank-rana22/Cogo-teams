@@ -16,10 +16,6 @@
 	}
 }
 
-.flex {
-	display: flex;
-}
-
 .gst {
 	display: flex;
 	align-items: center;
@@ -231,26 +227,11 @@
 .invoice_source {
 	width: fit-content;
 	padding: 2px 16px;
-	font-size: var(--font-size-sm);
-	font-weight: 600;
-	color: var(--color-secondary-3);
-	background-color: var(--color-accent-orange-5);
-	border-radius: 0 0 4px;
-}
-
-.invoice_rate {
-	width: fit-content;
-	padding: 2px 16px;
 	margin-right: 6px;
 	font-size: var(--font-size-sm);
-	color: var(--color-secondary-3);
-	background-color: var(--color-accent-orange-5);
-	border-left: 1px solid var(--color-accent-orange-2);
+	color: #393f70;
+	background-color: #fef6df;
 	border-radius: 0 0 4px;
-}
-
-.exchange_rate {
-	display: flex;
 }
 
 .payment_mode_status {
@@ -262,8 +243,8 @@
 	margin-right: 10px;
 
 	.reviewed {
-		color: var(--color-secondary-3);
-		background-color: var(--color-tertiary-success-green-5);
+		color: #393f70;
+		background-color: #e6fbe9;
 	}
 }
 
@@ -279,6 +260,6 @@
 }
 
 .tooltip_div {
-	font-size: var(--font-size-sm);
+	font-size: 10px;
 	text-transform: capitalize;
 }

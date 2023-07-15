@@ -17,12 +17,12 @@ const UPPER_CASE_EXCHANGE_RATE_STATE = ['eta', 'etd'];
 function Header({
 	children = null,
 	invoice = {},
-	bfInvoiceRefetch = () => { },
+	bfInvoiceRefetch = () => {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
-	salesInvoicesRefetch = () => { },
-	refetchCN = () => { },
+	salesInvoicesRefetch = () => {},
+	refetchCN = () => {},
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -34,7 +34,7 @@ function Header({
 		salesInvoicesRefetch();
 	};
 
-	const { updateInvoiceStatus = () => { } } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
+	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
@@ -47,33 +47,21 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.flex}>
-				<div className={styles.exchange_rate}>
-					{invoice?.exchange_rate_source ? (
-						<div className={styles.invoice_source}>
-							{startCase(invoice?.exchange_rate_source)}
-						</div>
-					) : null}
+			<div>
+				{invoice?.source === 'pass_through' ? (
+					<div className={styles.invoice_source}>
+						Source -
+						{' '}
+						{startCase(invoice?.source)}
+					</div>
+				) : null}
 
-					{invoice?.exchange_rate_state ? (
-						<div className={styles.invoice_rate}>
-							{`Applied At State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
-								? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
-						</div>
-					) : null}
-				</div>
-
-				<div className={styles.exchange_rate}>
-					{invoice?.source === 'pass_through'
-						? (
-							<div className={styles.invoice_source}>
-								Source -
-								{' '}
-								{startCase(invoice?.source)}
-							</div>
-						)
-						: null}
-				</div>
+				{invoice?.exchange_rate_state ? (
+					<div className={styles.invoice_source}>
+						{`Applicable State - ${UPPER_CASE_EXCHANGE_RATE_STATE.includes(invoice?.exchange_rate_state)
+							? upperCase(invoice?.exchange_rate_state) : startCase(invoice?.exchange_rate_state)}`}
+					</div>
+				) : null}
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
@@ -97,7 +85,8 @@ function Header({
 
 				<div
 					className={styles.icon_wrapper}
-					role="presentation"
+					role="button"
+					tabIndex={0}
 					onClick={() => setOpen(!open)}
 					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
