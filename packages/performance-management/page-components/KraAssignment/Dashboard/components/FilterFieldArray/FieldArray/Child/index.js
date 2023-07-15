@@ -56,8 +56,8 @@ function Child(props) {
 					className={`form-fieldArray-${name}-remove`}
 					onClick={() => remove(index, REMOVE_CHILD_INDEX)}
 					style={{
-						height    : '20px',
-						width     : '20px',
+						height    : '60px',
+						width     : '60px',
 						marginTop : '24px',
 						cursor    : 'pointer',
 					}}

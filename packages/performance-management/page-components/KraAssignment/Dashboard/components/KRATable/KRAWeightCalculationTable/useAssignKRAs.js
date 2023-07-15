@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
+const KRA_MIN_VALUE = 0;
+
 const useAssignKRAs = ({
 	inputValue, selectArray,
 	getEmployeesWithLowWeightage,
@@ -17,7 +19,13 @@ const useAssignKRAs = ({
 		method : 'post',
 	}, { manual: true });
 
+	const isKraNonEmpty = (inputValue || []).every((element) => element?.weightage > KRA_MIN_VALUE);
+
 	const onClickSubmitKRAs = async () => {
+		if (!isKraNonEmpty) {
+			Toast.error('KRA should be more than 0');
+			return;
+		}
 		try {
 			await trigger({
 				data: { kras_assigned: inputValue, employee_ids: selectArray, kra_removed: deletedKraArray },
