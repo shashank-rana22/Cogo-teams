@@ -27,7 +27,7 @@ const getMonthOptions = (minMonth) => {
 };
 
 function CreateExpenseModal({
-	setShowModal,
+	setShowModal = () => {},
 	showModal = false,
 	createExpenseType = '',
 	getList = () => {},

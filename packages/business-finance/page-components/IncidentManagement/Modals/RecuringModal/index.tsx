@@ -106,8 +106,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 									GLOBAL_CONSTANTS.formats.date[
 										'dd MMM yyyy'
 									],
-							formatType : 'date',
-							separator  : ' | ',
+							formatType: 'date',
 						})
 						: '-'}
 				</div>
