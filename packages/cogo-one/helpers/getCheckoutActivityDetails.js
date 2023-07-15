@@ -1,7 +1,8 @@
+// import ContainerInfo from '../utils/getContainerDetails';
 import getLocationDetails from '../utils/getLocationDetails';
 import isSingleLocation from '../utils/isSingleLocation';
 
-const getShipmentActivityDetails = ({ serviceData = '', eventType = '' }) => {
+const getCheckoutActivityDetails = ({ serviceData = '', eventType = '' }) => {
 	const {
 		primary_service,
 		services,
@@ -43,4 +44,4 @@ const getShipmentActivityDetails = ({ serviceData = '', eventType = '' }) => {
 	return eventDetails;
 };
 
-export default getShipmentActivityDetails;
+export default getCheckoutActivityDetails;

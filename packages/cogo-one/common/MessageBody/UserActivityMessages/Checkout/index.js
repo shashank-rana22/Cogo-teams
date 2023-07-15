@@ -1,31 +1,43 @@
-import PortDetails from './PortDetails';
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMPortArrow } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
+
+import getShipmentActivityDetails from '../../../../helpers/getCheckoutActivityDetails';
+
 import styles from './styles.module.css';
 
-function Shipments({ serviceData = {} }) {
+const GET_LAST_ITEM = -1;
+const GET_LAST_STRING = 2;
+
+function Checkout({ serviceData = {}, eventType = '', name = '' }) {
+	const configarableData = getShipmentActivityDetails({ serviceData, eventType });
+	const parts = name.split(':');
+	const evnetTitle = parts[GET_LAST_STRING].trim();
+
+	const {
+		shippingLineUrl = '',
+		shippingLineName = '',
+		destinationPort = {},
+		originPort = {},
+	} = configarableData || {};
+
+	const CHECKOUT_DETAILS = {
+		a : '2 Ctr',
+		b : '2 Ctr',
+		c : '2 Ctr',
+		d : '2 Ctr',
+		e : '2 Ctr',
+	};
+	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
 	return (
 		<>
-			{/* <div className={styles.title}>{evnetTitle}</div> */}
+			<div className={styles.title}>{evnetTitle}</div>
 			<div className={styles.message}>
-				Following are the details of the abandoned shipments -
+				Following are the details of the abandoned checkout -
 			</div>
-
-			{/* <div className={styles.company_details}>
-				<Image
-					src={shippingLineUrl}
-					alt="status-icon"
-					width={30}
-					height={30}
-				/>
-
-				<Tooltip content={shippingLineName} placement="bottom">
-					<div className={styles.company_name}>
-						{shippingLineName}
-					</div>
-				</Tooltip>
-			</div> */}
-
-			<PortDetails serviceData={serviceData} />
-			{/* <div className={styles.banner}>
+			<div className={styles.banner}>
 				<div className={styles.company_details}>
 					<Image
 						src={shippingLineUrl}
@@ -89,11 +101,11 @@ function Shipments({ serviceData = {} }) {
 							{val}
 						</div>
 					))}
-					{Object.values(CHECKOUT_DETAILS).map((val, index) => (
+					{/* {Object.values(CHECKOUT_DETAILS).map((val, index) => (
 						<div key={index} className={styles.commodity}>
 							{val}
 						</div>
-					))}
+					))} */}
 				</div>
 
 				<div className={styles.landed_cost}>
@@ -102,10 +114,10 @@ function Shipments({ serviceData = {} }) {
 				<div className={styles.landed_amount}>
 					INR 2,65,903.37
 				</div>
-			</div> */}
+			</div>
 
 		</>
 	);
 }
 
-export default Shipments;
+export default Checkout;
