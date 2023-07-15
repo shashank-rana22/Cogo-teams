@@ -8,6 +8,8 @@ import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
 
 const ObjectiveRequirements = forwardRef((props, ref) => {
+	const { formValues, setFormValues } = props;
+
 	const divRef = useRef({});
 
 	const { control, watch, reset, resetField } = useForm({
@@ -34,6 +36,8 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 					control={control}
 					watch={watch}
 					resetField={resetField}
+					formValues={formValues}
+					setFormValues={setFormValues}
 				/>
 
 				<OrganizationalDetails control={control} />

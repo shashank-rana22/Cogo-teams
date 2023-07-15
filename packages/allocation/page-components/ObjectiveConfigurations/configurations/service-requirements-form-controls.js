@@ -79,7 +79,6 @@ const getServiceRequirementControls = (props) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
-			multiple    : true,
 			initialCall : false,
 			params      : {
 				page_limit: 20,
@@ -97,13 +96,17 @@ const getServiceRequirementControls = (props) => {
 			placeholder : 'Select Destination',
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
 				page_limit: 20,
 				...getListLocationParams({ watchShipmentMode, watchServiceType }),
 			},
-			isClearable : true,
-			renderLabel : (item) => <RenderListLocationOption item={item} />,
+			isClearable        : true,
+			renderLabel        : (item) => <RenderListLocationOption item={item} />,
+			getModifiedOptions : ({ options }) => options.map(
+				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
+			),
 		},
 		{
 			name        : 'inco_term',
@@ -123,7 +126,7 @@ const getServiceRequirementControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'list_hs_codes',
-			valueKey    : 'name',
+			valueKey    : 'hs_code',
 			isClearable : true,
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight', 'air_domestic', 'air_international'],

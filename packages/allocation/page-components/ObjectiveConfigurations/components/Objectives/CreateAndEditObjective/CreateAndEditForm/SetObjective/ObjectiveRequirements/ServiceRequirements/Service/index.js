@@ -1,5 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../../common/Form/getFieldController';
@@ -18,6 +20,7 @@ function Service(props) {
 		remove,
 		watch,
 		resetField,
+		serviceRequirementOperator,
 	} = props;
 
 	const watchShipmentMode = watch(`${name}.${index}.shipment_mode`);
@@ -52,7 +55,19 @@ function Service(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
-				<h4>{`1.${index + FIRST_INDEX_NORMALIZATION} Service Requirements`}</h4>
+				<div className={styles.heading_container}>
+					{index > GLOBAL_CONSTANTS.zeroth_index
+					&& (
+						<Pill
+							color="orange"
+							style={{ marginRight: '8px' }}
+						>
+							{startCase(serviceRequirementOperator || '')}
+						</Pill>
+					)}
+
+					<h4 className={styles.heading}>{`1.${index + FIRST_INDEX_NORMALIZATION} Service Requirements`}</h4>
+				</div>
 
 				{index >= FIRST_INDEX_NORMALIZATION ? (
 					<Button

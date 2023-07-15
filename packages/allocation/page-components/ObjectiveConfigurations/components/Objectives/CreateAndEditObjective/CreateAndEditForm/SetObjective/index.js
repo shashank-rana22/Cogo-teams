@@ -23,6 +23,7 @@ function SetObjective(props) {
 
 			<ObjectiveRequirements
 				ref={objReqRef}
+				formValues={formValues}
 				setFormValues={setFormValues}
 			/>
 		</>
