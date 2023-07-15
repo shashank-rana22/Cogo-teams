@@ -9,9 +9,8 @@ const getCollectionPartyParams = ({ profile_data, servicesData = [] }) => {
 	const isFcl = primary_service?.service_type === 'fcl_freight_service';
 	const isImport = getTradeTypeByIncoTerm(primary_service?.inco_term) === 'import';
 
-	console.log({ primary_service, profile_data, isFcl, isImport });
 	const { partner:{ user_role_ids = [] } = {} } = profile_data || {};
-	console.log({ user_role_ids });
+
 	if (isFcl && isImport) {
 		if (user_role_ids.includes(geo.uuid.document_control_manager)) {
 			return { required_bl_do_quotations: true };
