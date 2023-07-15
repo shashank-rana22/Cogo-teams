@@ -19,12 +19,12 @@
 	display: flex;
 	align-items: center;
 
-	:global {
+	/* :global {
 		.ui_VZAaD {
 			min-height: fit-content;
 			padding: 0;
 		}
-	}
+	} */
 }
 
 .remarks {

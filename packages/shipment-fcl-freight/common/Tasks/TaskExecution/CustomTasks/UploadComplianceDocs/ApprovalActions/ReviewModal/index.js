@@ -79,7 +79,6 @@ function ReviewModal({
 					</div>
 
 					<Textarea
-						className="remark_text"
 						value={remarkValue}
 						onChange={(e) => setRemarkValue(e)}
 						placeholder="Enter Remark Here"

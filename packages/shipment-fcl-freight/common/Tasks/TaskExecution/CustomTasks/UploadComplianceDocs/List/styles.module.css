@@ -5,7 +5,7 @@
 	padding: 10px 24px;
 	margin-bottom: 12px;
 	background: #fff;
-	border: 1px solid var(--balck-40-disabled, #bdbdbd);
+	border: 1px solid #bdbdbd;
 	border-radius: 4px;
 }
 
@@ -24,7 +24,7 @@
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 150%;
-	color: var(--link-blue, #034afd);
+	color: #034afd;
 	text-decoration-line: underline;
 	cursor: pointer;
 }

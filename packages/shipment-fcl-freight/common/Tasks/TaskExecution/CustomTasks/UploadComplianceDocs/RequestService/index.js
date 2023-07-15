@@ -21,13 +21,12 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 	});
 
 	const DOCS_LIST = [];
-	requestedDocsList?.map((resultItem) => {
+	requestedDocsList?.forEach((resultItem) => {
 		const obj = {
 			value: resultItem.doc_code, label: resultItem.doc_name,
 		};
 
 		DOCS_LIST.push(obj);
-		return DOCS_LIST;
 	});
 
 	const onReviewSubmit = async () => {

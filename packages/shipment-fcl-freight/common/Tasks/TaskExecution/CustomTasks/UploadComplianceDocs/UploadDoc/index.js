@@ -17,7 +17,11 @@ function UploadDoc({
 	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
 
 	function Error(key) {
-		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
+		return errors?.[key] ? (
+			<div className={styles.errors}>
+				{errors?.[key]?.message}
+			</div>
+		) : null;
 	}
 
 	const afterCreateRefetch = () => {
