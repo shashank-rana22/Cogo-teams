@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-const FIRST_INDEX = 1;
+const REMOVAL_ELEMENT_COUNT = 1;
 const SERVICE_TYPE_PARTITION_INDEX = 3;
 
 export default function getControls({
@@ -34,7 +34,10 @@ export default function getControls({
 		},
 	];
 
-	const showControls = showAllControls ? controls : controls.splice(GLOBAL_CONSTANTS.zeroth_index, FIRST_INDEX);
+	const showControls = showAllControls ? controls : controls.splice(
+		GLOBAL_CONSTANTS.zeroth_index,
+		REMOVAL_ELEMENT_COUNT,
+	);
 
 	return {
 		controls      : showControls,

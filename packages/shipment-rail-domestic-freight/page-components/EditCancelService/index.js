@@ -19,8 +19,8 @@ const actionButtons = [
 	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
+const PRIMARY_BUTTON_INDEX = 1;
+const SECONDARY_BUTTON_INDEX = 2;
 
 function EditCancelService({ serviceData = {} }) {
 	const user_data = useSelector((({ profile }) => profile?.user));
@@ -43,8 +43,13 @@ function EditCancelService({ serviceData = {} }) {
 		state,
 		stakeholderConfig,
 	});
-	actionButtons[FIRST_INDEX].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	actionButtons[SECOND_INDEX].show = getCanCancelService({ state, stakeholderConfig });
+	actionButtons[PRIMARY_BUTTON_INDEX].show = getCanEditParams({
+		shipment_data,
+		user_data,
+		serviceData,
+		stakeholderConfig,
+	});
+	actionButtons[SECONDARY_BUTTON_INDEX].show = getCanCancelService({ state, stakeholderConfig });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
