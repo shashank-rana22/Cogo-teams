@@ -79,7 +79,7 @@ function Content({
 		return null;
 	};
 
-	const SI_REVIEW_CONDITION =	document_type === 'si' && state === 'document_accepted';
+	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
 	return (
 		<div className={styles.single_item}>
