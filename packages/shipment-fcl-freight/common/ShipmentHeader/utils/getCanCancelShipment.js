@@ -7,7 +7,7 @@ const SHIPMENT_CANCELLATION_STATES = [
 ];
 
 const SHIPMENT_CANCEL_STAKEHOLDERS = [
-	// 'superadmin',
+	'superadmin',
 	'admin',
 	'booking_agent',
 	'sales_agent',

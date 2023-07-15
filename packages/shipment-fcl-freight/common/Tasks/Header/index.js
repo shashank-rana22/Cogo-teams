@@ -20,14 +20,16 @@ function Header({
 	const contextValues = useContext(ShipmentDetailContext);
 
 	const [showBookingReq, setShowBookingReq] = useState(false);
-	const [visible, setVisible] = useState(false);
+	const [visibleRemarks, setVisibleRemarks] = useState(false);
+	const [visibleCfsDetails, setVisibleCfsDetails] = useState(false);
 
-	const { activeStakeholder, shipment_data, primary_service } = contextValues || {};
+	const { activeStakeholder, shipment_data, primary_service, stakeholderConfig } = contextValues || {};
 
 	const showBookingRequirementsCondition = BOOKING_REQUIREMENTS_ROLES
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
+	const showCfsDetails = !!stakeholderConfig?.tasks?.show_cfs_details;
 
 	return (
 		<div className={styles.container}>
@@ -37,25 +39,46 @@ function Header({
 				</div>
 
 				<div className={styles.right_content}>
+					{showSupplyRemarks && showCfsDetails ? (
+						<Popover
+							placement="bottom"
+							trigger="mouseenter"
+							caret={false}
+							visibleRemarks={visibleCfsDetails}
+							render={`CFS Address: ${primary_service?.booking_preferences?.
+								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
+						>
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setVisibleCfsDetails((pev) => !pev)}
+							>
+								CFS Address
+
+							</Button>
+						</Popover>
+					) : null }
+
 					{showSupplyRemarks ? (
 						<Popover
 							placement="bottom"
 							trigger="mouseenter"
 							caret={false}
-							visible={visible}
+							visibleRemarks={visibleRemarks}
 							render={`Supply Remarks: ${primary_service?.booking_preferences?.
 								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
 						>
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setVisible((pev) => !pev)}
+								onClick={() => setVisibleRemarks((pev) => !pev)}
 							>
 								Remarks
 
 							</Button>
 						</Popover>
 					) : null }
+
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
 						<Toggle

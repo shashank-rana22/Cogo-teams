@@ -16,7 +16,8 @@
         "show_booking_req":true,
         "checked_show_my_tasks":false,
         "is_task_assigned":false,
-        "can_reassign_task":true
+        "can_reassign_task":true,
+        "show_cfs_details": true
     },
     "documents":{
         "tab_title":"Documents",
