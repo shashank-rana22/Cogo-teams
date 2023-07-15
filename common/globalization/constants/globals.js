@@ -468,8 +468,8 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	emails: {
-		import_rates : 'import.rates@cogoport.com',
-		export_rates : 'export.rates@cogoport.com',
+		import_rates : 'Import.rates@cogoport.com',
+		export_rates : 'Export.rates@cogoport.com',
 	},
 };
 
