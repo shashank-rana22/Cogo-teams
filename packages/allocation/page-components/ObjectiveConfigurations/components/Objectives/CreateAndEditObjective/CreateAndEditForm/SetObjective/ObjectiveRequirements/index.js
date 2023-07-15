@@ -40,7 +40,11 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 					setFormValues={setFormValues}
 				/>
 
-				<OrganizationalDetails control={control} />
+				<OrganizationalDetails
+					control={control}
+					watch={watch}
+					resetField={resetField}
+				/>
 
 				<AccountTransactionFunnel control={control} />
 
