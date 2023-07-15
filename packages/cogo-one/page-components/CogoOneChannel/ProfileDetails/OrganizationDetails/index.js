@@ -180,7 +180,7 @@ function OrganizationDetails({
 					<div className={styles.agent_title}>Organization Users</div>
 					<div
 						className={styles.organization_users}
-						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+						onScroll={handleScroll}
 					>
 						{organizationUsersLoading ? (
 							<div className={styles.agent_loading_state}>

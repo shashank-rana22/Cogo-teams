@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 const FIRST_PAGE = 1;
-const SCROLL_HEIGHT = 0;
+const SCROLL_HEIGHT = 20;
 
 const getPayload = ({ orgId = '', page }) => ({
 	filters: {
@@ -35,14 +35,15 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 
 			if (res?.data) {
 				const { list = [], ...paginationData } = res?.data || {};
-				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+				setListData((prev) => ({ list: [...(prev.list || []), ...(list || [])], ...paginationData }));
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	}, [trigger]);
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
+	const handleScroll = (e) => {
+		const { clientHeight, scrollTop, scrollHeight } = e.target;
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= SCROLL_HEIGHT;
 		const hasMoreData = pagination < listData?.total;
 
@@ -53,7 +54,7 @@ const useGetListOrganizationUsers = ({ organizationId = '', isOrgUsersVisible = 
 
 	useEffect(() => {
 		if (isOrgUsersVisible) {
-			setListData((p) => ({ ...p, list: [] }));
+			setListData((prev) => ({ ...prev, list: [] }));
 			listOrganizationsUsers({ orgId: organizationId, page: FIRST_PAGE });
 		}
 	}, [isOrgUsersVisible, listOrganizationsUsers, organizationId]);
