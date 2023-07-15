@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
 const PERCENT_FACTOR = 100;
 
+const getFileName = (urlPath) => urlPath.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('');
+
 function CustomFileUploader(props, ref) {
 	const {
 		onChange,
@@ -32,18 +34,20 @@ function CustomFileUploader(props, ref) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('') }]);
+			const tempFileName = getFileName(defaultValues);
+
+			setFileName([{ name: tempFileName }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
+				fileName : tempFileName,
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
 			const names = defaultValues.map((url) => ({
-				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				name: getFileName(url),
 			}));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+				fileName : getFileName(url),
 				finalUrl : url,
 			}));
 
@@ -55,11 +59,7 @@ function CustomFileUploader(props, ref) {
 	}, [!isEmpty(defaultValues)]);
 
 	useEffect(() => {
-		if (multiple) {
-			onChange(urlStore);
-		} else {
-			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
-		}
+		onChange(multiple ? urlStore : urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [urlStore]);
 
@@ -73,9 +73,7 @@ function CustomFileUploader(props, ref) {
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * PERCENT_FACTOR) / total);
-
-				return percentCompleted;
+				return Math.floor((loaded * PERCENT_FACTOR) / total);
 			})(),
 		}));
 	};
@@ -102,9 +100,7 @@ function CustomFileUploader(props, ref) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
-
-		return finalUrl;
+		return url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 	};
 
 	const handleChange = async (values) => {
@@ -121,31 +117,43 @@ function CustomFileUploader(props, ref) {
 		try {
 			setLoading(true);
 
-			if (!isEmpty(values)) {
-				setProgress({});
-
-				const promises = values.map((value, index) => uploadFile(index)(value));
-
-				const allUrls = await Promise.all(promises);
-
-				if (multiple) {
-					setUrlStore((prev) => {
-						if (prev === null) { return allUrls; }
-						return [...prev, ...allUrls];
-					});
-					setFileName((prev) => {
-						if (prev === null) { return values; }
-						let prevValue = [];
-
-						if (typeof prev !== 'object' || !Array.isArray(prev)) { prevValue = prev?.target?.value || []; }
-
-						return [...prevValue, ...values];
-					});
-				} else {
-					setUrlStore(allUrls);
-					setFileName(values);
-				}
+			if (isEmpty(values)) {
+				return;
 			}
+
+			setProgress({});
+
+			const promises = values.map((value, index) => uploadFile(index)(value));
+
+			const allUrls = await Promise.all(promises);
+
+			if (!multiple) {
+				setUrlStore(allUrls);
+				setFileName(values);
+				return;
+			}
+
+			setUrlStore((prev) => {
+				if (prev === null) {
+					return allUrls;
+				}
+
+				return [...prev, ...allUrls];
+			});
+
+			setFileName((prev) => {
+				if (prev === null) {
+					return values;
+				}
+
+				let prevValue = [];
+
+				if (typeof prev !== 'object' || !Array.isArray(prev)) {
+					prevValue = prev?.target?.value || [];
+				}
+
+				return [...prevValue, ...values];
+			});
 		} catch (error) {
 			Toast.error('File Upload failed.......');
 		} finally {
