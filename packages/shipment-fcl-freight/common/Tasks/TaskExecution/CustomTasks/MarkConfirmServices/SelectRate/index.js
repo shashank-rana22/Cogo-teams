@@ -41,7 +41,7 @@ function SelectRate({
 			setSelectedCard(SELECTED_PRIORITY);
 			setStep(TWO);
 		}
-	}, [setStep, setSelectedCard, data, selectedCard]);
+	}, [setStep, setSelectedCard, data]);
 
 	return (
 		<div className={styles.container}>
