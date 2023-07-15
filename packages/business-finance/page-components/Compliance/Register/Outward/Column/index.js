@@ -168,7 +168,7 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 			),
 		},
 		{
-			Header   : <div>Export Month Year</div>,
+			Header   : <div>Filled Month Year</div>,
 			id       : 'monthYear',
 			accessor : ({ month, year }) => (
 				<div>
