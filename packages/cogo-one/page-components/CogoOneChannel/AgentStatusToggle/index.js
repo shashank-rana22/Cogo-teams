@@ -5,7 +5,7 @@ import AgentModal from '../AgentModal';
 
 import styles from './styles.module.css';
 
-function AgentStatusToggle() {
+function AgentStatusToggle({ firestore }) {
 	const [agentDetails, setAgentDetails] = useState(false);
 
 	return (
@@ -17,6 +17,7 @@ function AgentStatusToggle() {
 			<AgentModal
 				agentDetails={agentDetails}
 				setAgentDetails={setAgentDetails}
+				firestore={firestore}
 			/>
 		</>
 	);
