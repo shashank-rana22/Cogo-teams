@@ -44,10 +44,10 @@
 	color: var(--color-secondary-greyscale-1);
 	white-space: nowrap;
 
-	.bl-count {
-		margin: 0 8px;
+	.bl_count {
+		margin-left: 4px;
 		font-weight: 400;
-		color: var(--color-secondary-greyscale-3);
+		color: var(--color-secondary-greyscale-1);
 
 		@media (max-width: 768px) {
 			font-size: 10;

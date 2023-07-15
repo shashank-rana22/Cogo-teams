@@ -1,11 +1,11 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
+import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
@@ -17,17 +17,12 @@ const INCR_IN_CONTAINER_COUNT_FOR_BL = 0;
 const DEFAULT_BL_COUNT = 0;
 const DEFAULT_CONTAINER_COUNT = 0;
 
-const EMPTY_STATE_CONTENT = {
-	heading     : 'No BL Details Found!',
-	description : 'Currently BL is not uploaded from the respective stakeholder.',
-};
-
 function BLDetails() {
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+
 	const [open, setOpen] = useState(false);
 	const [activeId, setActiveId] = useState('');
 	const [showModal, setShowModal] = useState(false);
-
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	let containersCount = 0;
 
@@ -39,17 +34,18 @@ function BLDetails() {
 
 	const containerDetailsArray = containerDetails?.[shipment_data?.id];
 
-	const renderBlCount = (
+	const renderBlCount = () => (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
-			<div className="bl-count">
+			<div className={styles.bl_count}>
 				(
 				{primary_service?.bls_count || DEFAULT_BL_COUNT}
-				&nbsp;BL & &nbsp;
+				{' '}
+				BL &
+				{' '}
 				{containerDetailsArray?.length || containersCount || DEFAULT_CONTAINER_COUNT}
-				&nbsp;
-				Containers
-				)
+				{' '}
+				Containers)
 			</div>
 		</div>
 	);
@@ -81,14 +77,12 @@ function BLDetails() {
 			{containerDetailsArray?.[GLOBAL_CONSTANTS.zeroth_index]?.container_number
 				? <div className={styles.button_div}>{renderButtons()}</div> : null}
 
-			<Accordion title={renderBlCount} style={{ width: '100%' }}>
+			<Accordion title={renderBlCount()} style={{ width: '100%' }}>
 				{!list?.length ? (
 					<div className={styles.empty_state}>
 						<EmptyState
-							showContent={EMPTY_STATE_CONTENT}
-							textSize="20px"
-							emptyText="No BL Details Found!"
-							subEmptyText="Currently BL is not uploaded from the respective stakeholder."
+							title="No BL Details Found"
+							subtitle="Currently BL is not uploaded from the respective stakeholder."
 						/>
 					</div>
 				) : (
