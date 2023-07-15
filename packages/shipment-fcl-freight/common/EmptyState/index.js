@@ -5,6 +5,8 @@ import styles from './styles.module.css';
 function EmptyState({
 	title = 'Data not found',
 	subtitle = '',
+	titleSize = '',
+	subtitleSize = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -14,8 +16,8 @@ function EmptyState({
 			/>
 
 			<div>
-				<h2>{title}</h2>
-				<p className={styles.subtitle}>{subtitle}</p>
+				<h2 style={{ fontSize: titleSize }}>{title}</h2>
+				<p className={styles.subtitle} style={{ fontSize: subtitleSize }}>{subtitle}</p>
 			</div>
 		</div>
 	);
