@@ -36,7 +36,7 @@ function List({ isSeller = false }) {
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
 
-	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
+	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -84,6 +84,7 @@ function List({ isSeller = false }) {
 									setItem,
 									shipment_data,
 									activeStakeholder,
+									canEditCancelService,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
@@ -143,7 +144,7 @@ function List({ isSeller = false }) {
 					)
 					: null }
 
-				{can_edit_cancel_service ? (
+				{canEditCancelService ? (
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
