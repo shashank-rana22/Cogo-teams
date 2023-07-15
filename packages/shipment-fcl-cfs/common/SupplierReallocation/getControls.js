@@ -15,19 +15,11 @@ export default function getControls({
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
-
+	const SPLIT_SECOND_PARAMETER = 2;
 	let services = service_type;
 
-	if (shipment_type === 'fcl_freight_local') {
-		services = 'fcl_freight_local_agent';
-	}
-
 	if (primary_service?.service_type !== service_type) {
-		if (shipment_type === 'fcl_freight_local') {
-			services = ['fcl_freight_local_agent', serviceObj?.service_type];
-		} else if (serviceObj?.service_type === 'fcl_freight_local_service') {
-			services = [shipment_type, 'fcl_freight_local_agent'];
-		} else { services = [shipment_type, serviceObj?.service_type]; }
+		services = [shipment_type, serviceObj?.service_type];
 	}
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
@@ -47,7 +39,8 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : services,
+					service      : services.length !== SPLIT_SECOND_PARAMETER
+						? service_type.split('_', SPLIT_SECOND_PARAMETER).join('_') : services,
 				},
 			},
 			size  : 'sm',

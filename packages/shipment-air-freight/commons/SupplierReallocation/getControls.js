@@ -5,7 +5,7 @@ export default function getControls({
 }) {
 	const { service_provider, service_type } = serviceObj || {};
 	let services = service_type;
-
+	const SPLIT_SECOND_PARAMETER = 2;
 	if (primary_service?.service_type !== service_type) {
 		services = [shipment_type, service_type];
 	}
@@ -22,7 +22,8 @@ export default function getControls({
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
 					status       : 'active',
-					service      : services,
+					service      : services.length !== SPLIT_SECOND_PARAMETER
+						? service_type.split('_', SPLIT_SECOND_PARAMETER).join('_') : services,
 				},
 			},
 			size  : 'sm',
