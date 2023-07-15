@@ -6,8 +6,6 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { AddCustomerInterface } from '../../Interfaces';
-
 import styles from './styles.module.css';
 
 const TRADE_PARTY_PARAMS = {
@@ -17,16 +15,16 @@ const TRADE_PARTY_PARAMS = {
 const SAMPLE_PDF_URL = GLOBAL_CONSTANTS.pdf_url.exception_customer_sample_url;
 
 function AddCustomerModal({
-	show,
-	setShow,
-	watch,
-	control,
-	handleSubmit,
-	getUploadList,
-	uploadListLoading,
+	show = false,
+	setShow = () => {},
+	watch = () => {},
+	control = {},
+	handleSubmit = undefined,
+	getUploadList = () => {},
+	uploadListLoading = false,
 	reset = () => {},
 	showEntityFilter = true,
-}:AddCustomerInterface) {
+}) {
 	const [fileValue, setFileValue] = useState('');
 
 	const entityOptions = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entityValue) => (
@@ -76,7 +74,7 @@ function AddCustomerModal({
 					<div className={styles.upload}>
 						<FileUploader
 							value={fileValue}
-							onChange={(val:string) => { setFileValue(val); }}
+							onChange={(val) => { setFileValue(val); }}
 							showProgress
 							draggable
 							accept=".csv,.xlsx"

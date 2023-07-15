@@ -62,7 +62,7 @@ const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error(err);
 		}
 	}), [ageingBucket, cogoEntityId, creditController,
 		dueOutstandingCurrency, pageIndex, query, serviceType,

@@ -15,11 +15,11 @@ const useGetSeverityTemplates = () => {
 	);
 
 	useEffect(() => {
-		const getTemplateData = async () => {
+		const getTemplateData = () => {
 			try {
-				await trigger();
+				trigger();
 			} catch (err) {
-				console.log('err-', err);
+				console.error(err);
 			}
 		};
 		getTemplateData();

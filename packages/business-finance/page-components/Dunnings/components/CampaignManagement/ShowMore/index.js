@@ -1,17 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import NoData from './NoData';
-import PieData from './PieData';
+import NoData from './NoData/index.tsx';
+import PieData from './PieData/index.tsx';
 import styles from './styles.module.css';
 
-interface Props {
-	data?: { status?: string };
-	selectedExecution?: number;
-}
-
-function ShowMore({ data = {}, selectedExecution = 0 }:Props) {
+function ShowMore({ data = {}, selectedExecution = 0 }) {
 	const { status = '' } = data;
-	if (selectedExecution === 0 && status !== 'COMPLETED') {
+	if (selectedExecution === GLOBAL_CONSTANTS.zeroth_index && status !== 'COMPLETED') {
 		return <NoData />;
 	}
 	if (status === 'COMPLETED') {

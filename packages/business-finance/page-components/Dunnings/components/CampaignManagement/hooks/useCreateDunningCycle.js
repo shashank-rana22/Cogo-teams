@@ -5,21 +5,13 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-interface StateInterface {
-	profile?: {
-		user?: {
-			id?: string | number;
-		};
-	};
-}
-
 const useCreateDunningCycle = ({
 	formData,
 	uncheckedRows, setShowCreateForm, getDunningList,
 }) => {
 	const {
 		profile,
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 
 	const {
 		cycleName,

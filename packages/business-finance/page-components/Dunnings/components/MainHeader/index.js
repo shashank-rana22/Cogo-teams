@@ -2,15 +2,10 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-interface Props {
-	activeTab?:string,
-	setActiveTab?:Function,
-}
-
-function MainHeader({ activeTab = '', setActiveTab = () => {} }:Props) {
+function MainHeader({ activeTab = '', setActiveTab = () => {} }) {
 	const { push } = useRouter();
 
-	const handleTabChange = (tab:string) => {
+	const handleTabChange = (tab) => {
 		if (activeTab !== tab) {
 			setActiveTab(tab);
 			push(

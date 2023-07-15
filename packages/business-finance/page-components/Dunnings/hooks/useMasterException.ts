@@ -84,7 +84,7 @@ const useMasterException = ({
 					},
 				});
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		})();
 	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger, entities]);
@@ -102,7 +102,7 @@ const useMasterException = ({
 					},
 				});
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		})();
 	}, [query, pageIndex, sort?.sortBy, sort?.sortType, cycleStatus, cycleWiseApi]);

@@ -3,52 +3,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import Filter from '../../../../../commons/Filters';
-import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
+import Filter from '../../../../../commons/Filters/index.tsx';
+import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants/index.ts';
 
 import { controls } from './controls';
 import styles from './styles.module.css';
 
-interface FormData {
-	triggerType?: string;
-	frequency?: string;
-	weekDay?: string;
-	monthDay?: string;
-	timezone?: string;
-	time?: Date;
-	isAllCreditControllers?: boolean;
-	creditController?: string[];
-	oneTimeDate?: Date;
-	scheduledHour?: string;
-	scheduledMinute?: string;
-	scheduleRule?: {
-		scheduleTime?: string;
-		dunningExecutionFrequency?: string;
-		week?: string;
-		scheduleTimeZone?: string;
-		dayOfMonth?: string | number;
-		oneTimeDate?: string;
-	};
-	name?: string;
-	cycleType?: string;
-	cogoEntityId?: string;
-	filters?: {
-		dueOutstandingCurrency?: string;
-		organizationStakeholderIds?: string[];
-		serviceTypes?: string[];
-		cogoEntityId?: string;
-		ageingBucket?: string;
-		totalDueOutstanding?: number | string;
-	}
-}
+const MINUTE_POSITION = 1;
 
-interface Props {
-	formData?: FormData;
-	setFormData?: (p:object)=>void;
-	isEditMode?: boolean;
-}
-
-function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false }:Props) {
+function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false }) {
 	const timezoneOptions = GLOBAL_CONSTANTS.options.timezone_options;
 
 	const {
@@ -79,7 +42,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 		oneTimeDate:oneTimeDateSchedule,
 	} = scheduleRule || {};
 
-	const handleTabChange = (val?: string) => {
+	const handleTabChange = (val) => {
 		const updatedFormData = { ...formData };
 
 		switch (val) {
@@ -106,7 +69,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 		setFormData(updatedFormData);
 	};
 
-	const unformatDate = (stringDate:string = '') => {
+	const unformatDate = (stringDate) => {
 		const [day, month, year] = stringDate.split('/');
 		const date = new Date(`${year}-${month}-${day}`);
 		return date;
@@ -124,9 +87,9 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 			const unformattedOneTimeDate = unformatDate(oneTimeDateSchedule);
 			const timeArray = (scheduleTime)?.split(':');
 			const scheduledHourValue = timeArray?.[GLOBAL_CONSTANTS.zeroth_index];
-			const scheduledMinuteValue = timeArray?.[1];
+			const scheduledMinuteValue = timeArray?.[MINUTE_POSITION];
 
-			setFormData((prev:object) => ({
+			setFormData((prev) => ({
 				...prev,
 				frequency       : dunningExecutionFrequency,
 				weekDay         : week,
@@ -163,12 +126,12 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 	useEffect(() => {
 		// setting currency value based on selected entity
 		if (cogoEntityId && !isEditMode) {
-			const currencyEntityData:{ currency?: string }[] = Object.values(
+			const currencyEntityData = Object.values(
 				GLOBAL_CONSTANTS.cogoport_entities,
-			)?.filter((obj:{ id?: string }) => obj?.id === cogoEntityId);
+			)?.filter((obj) => obj?.id === cogoEntityId);
 
 			const currencyValue = currencyEntityData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
-			setFormData((prev:object) => ({
+			setFormData((prev) => ({
 				...prev,
 				dueOutstandingCurrency: currencyValue,
 			}));
@@ -190,7 +153,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 							<Tabs
 								activeTab={frequency === 'ONE_TIME' ? 'DAILY' : frequency}
 								themeType="primary"
-								onChange={(e?: string) => handleTabChange(e)}
+								onChange={(e) => handleTabChange(e)}
 							>
 								<TabPanel name="DAILY" title="Daily">
 									<div className={styles.empty_space} />
@@ -203,7 +166,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 											size="md"
 											items={WEEK_OPTIONS}
 											selectedItems={weekDay}
-											onItemChange={(val?: string) => setFormData((prev) => ({
+											onItemChange={(val) => setFormData((prev) => ({
 												...prev,
 												weekDay: val,
 											}))}

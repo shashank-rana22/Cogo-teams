@@ -1,25 +1,12 @@
 import { Tooltip, Toggle, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 
-import GetSortingData from '../components/ExceptionsManagement/sorting';
+import GetSortingData from '../components/ExceptionsManagement/sorting.tsx';
 
 import styles from './styles.module.css';
 
-interface Sort {
-	sortType?: string;
-	sortBy?: string;
-}
-interface MasterExceptionColumnInterface {
-	sort?: Sort;
-	setSort?: React.Dispatch<React.SetStateAction<object>>;
-	deleteMasterLoading?: boolean;
-	deleteMasterException?: Function;
-	exceptionFilter?: object;
-	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
-	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	setMasterListId?: React.Dispatch<React.SetStateAction<string>>;
-}
 const masterExceptionColumn = ({
 	sort,
 	setSort,
@@ -29,7 +16,7 @@ const masterExceptionColumn = ({
 	setExceptionFilter,
 	setShowConfirmationModal,
 	setMasterListId,
-}:MasterExceptionColumnInterface) => (
+}) => (
 	[
 		{
 			Header   : 'Customer Name',
@@ -85,7 +72,7 @@ const masterExceptionColumn = ({
 			id       : 'creditDays',
 			accessor : (row) => (
 				<div className={styles.text}>
-					{row?.creditDays || 0}
+					{row?.creditDays || GLOBAL_CONSTANTS.zeroth_index}
 				</div>
 			),
 		},
@@ -106,7 +93,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.creditAmount || 0,
+						amount   : row?.creditAmount || GLOBAL_CONSTANTS.zeroth_index,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',
@@ -134,7 +121,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.totalDueAmount || 0,
+						amount   : row?.totalDueAmount || GLOBAL_CONSTANTS.zeroth_index,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',

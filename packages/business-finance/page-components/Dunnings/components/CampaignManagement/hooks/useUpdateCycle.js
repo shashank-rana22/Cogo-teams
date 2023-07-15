@@ -4,23 +4,10 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	getDunningList?: Function;
-	setActionModal?: Function;
-}
-
-interface StateInterface {
-	profile?: {
-		user?: {
-			id?: string | number;
-		};
-	};
-}
-
-function useUpdateCycle({ getDunningList, setActionModal }:Props) {
+function useUpdateCycle({ getDunningList, setActionModal }) {
 	const {
 		profile,
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 	const [
 		{ data, loading },
 		trigger,

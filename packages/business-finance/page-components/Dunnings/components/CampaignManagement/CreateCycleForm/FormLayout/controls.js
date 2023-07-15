@@ -2,18 +2,18 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import { SERVICE_OPTIONS } from '../../constants';
+import { SERVICE_OPTIONS } from '../../constants/index.ts';
 
 import styles from './styles.module.css';
 
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
+	const geo = getGeoConstants();
+	const ELIGIBLE_ENTITIES = geo.navigations.dunnings.campaign_management.eligible_entites;
 	const { totalDueOutstanding } = formData || {};
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
-	const geo = getGeoConstants();
-	const eligibleEntities = geo.navigations.dunnings.campaign_management.eligible_entites;
 
 	const entityOptions = Object.keys(entityData).map((entity) => {
-		const isEligible = eligibleEntities?.includes(entity);
+		const isEligible = ELIGIBLE_ENTITIES?.includes(entity);
 		return ({
 			label    : `${entity} (${entityData[entity].currency})`,
 			name     : String(entity),
@@ -31,7 +31,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 		}
 	));
 
-	function unformatNumber(string:string) {
+	function unformatNumber(string) {
 		if (isEmpty(string)) {
 			return undefined;
 		}
@@ -86,7 +86,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			checkboxLabel : 'Select All Credit Contollers',
 			checked       : formData?.isAllCreditControllers,
 			disabled      : isEditMode,
-			onChange      : (e:{ target?:{ checked?:boolean } }) => {
+			onChange      : (e) => {
 				if (e?.target?.checked) {
 					setFormData((prev) => ({ ...prev, isAllCreditControllers: true }));
 				} else {
@@ -163,7 +163,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					name        : 'totalDueOutstanding',
 					placeholder : 'Insert Amount',
 					type        : 'input',
-					onChange    : (e:string) => {
+					onChange    : (e) => {
 						const unformattedNumber = unformatNumber(e);
 						if (!Number.isNaN(unformattedNumber)) {
 							setFormData((prev) => ({
@@ -184,7 +184,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			name     : 'triggerType',
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
-			onChange : (value:string) => {
+			onChange : (value) => {
 				setFormData((prev) => ({ ...prev, triggerType: value }));
 			},
 			radioOptions: [

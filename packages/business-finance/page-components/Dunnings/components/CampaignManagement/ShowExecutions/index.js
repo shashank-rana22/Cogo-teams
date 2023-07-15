@@ -7,8 +7,11 @@ import ShowMore from '../ShowMore';
 
 import styles from './styles.module.css';
 
-function ShowExecutions({ rowId, dropdown }) {
-	const [selectedExecution, setSelectedExecution] = useState(0);
+const SINGLE_SLIDE_LIMIT = 10;
+const INCREMENT = 1;
+
+function ShowExecutions({ rowId = '', dropdown = '' }) {
+	const [selectedExecution, setSelectedExecution] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const {
 		data:executionListData, loading,
@@ -17,17 +20,17 @@ function ShowExecutions({ rowId, dropdown }) {
 
 	const { totalRecords = 0, list = [] } = executionListData || {};
 
-	let totalSlides = Math.floor(totalRecords / 10);
-	if (totalRecords % 10 > 0) {
-		totalSlides += 1;
+	let totalSlides = Math.floor(totalRecords / SINGLE_SLIDE_LIMIT);
+	if (totalRecords % SINGLE_SLIDE_LIMIT > GLOBAL_CONSTANTS.zeroth_index) {
+		totalSlides += INCREMENT;
 	}
 
 	const CAROUSELDATA = Array(totalSlides).fill('').map((item, index) => ({
 		key    : index,
 		render : () => (
 			<div className={styles.carousel_element}>
-				{Array(10).fill('').map((i, position) => {
-					const elementPosition = (index * 10) + position;
+				{Array(SINGLE_SLIDE_LIMIT).fill('').map((i, position) => {
+					const elementPosition = (index * SINGLE_SLIDE_LIMIT) + position;
 					const { scheduleRule, status } = list?.[elementPosition] || {};
 					const { scheduleTime, scheduleTimeZone } = scheduleRule || {};
 					const dateText = list?.[elementPosition]
@@ -92,7 +95,7 @@ function ShowExecutions({ rowId, dropdown }) {
 					) : (
 						<div>
 							<div style={{ display: 'flex' }}>
-								{Array(10).fill('').map(() => (
+								{Array(SINGLE_SLIDE_LIMIT).fill('').map(() => (
 									<Placeholder
 										key="key"
 										height="32px"

@@ -3,21 +3,24 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CustomList from '../../../commons/CustomList';
-import showOverflowingNumber from '../../../commons/showOverflowingNumber';
+import CustomList from '../../../commons/CustomList/index.tsx';
+import showOverflowingNumber from '../../../commons/showOverflowingNumber.tsx';
 
 import ActionModal from './ActionModal';
 import { CYCLE_LIST_CONFIG } from './config/cycleListConfig';
-import CreateCycleForm from './CreateCycleForm';
-import FilterHeaders from './FilterHeaders';
+import CreateCycleForm from './CreateCycleForm/index.tsx';
+import FilterHeaders from './FilterHeaders/index.tsx';
 import useListDunningCycles from './hooks/useListDunningCycles';
-import RenderActions from './RenderActions';
-import RenderViewMore from './RenderViewMore';
+import RenderActions from './RenderActions/index.tsx';
+import RenderViewMore from './RenderViewMore/index.tsx';
 import ShowExecutions from './ShowExecutions';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE_INDEX = 1;
 const DEFAULT_PAGE_SIZE = 10;
+const MAX_STRING_LIMIT = 2;
+const WEEK_SECTION_START = 0;
+const WEEK_SECTION_END = 3;
 
 const STATUS_COLOR_MAPPING = {
 	SCHEDULED   : '#CFEAED',
@@ -38,7 +41,7 @@ function CampaignManagement() {
 		rowData : null,
 	});
 	const [sort, setSort] = useState({});
-	const [dropdown, setDropdown] = useState();
+	const [dropdown, setDropdown] = useState(undefined);
 
 	const {
 		cycleData,
@@ -48,7 +51,7 @@ function CampaignManagement() {
 
 	const functions = {
 		renderName: ({ name }) => (
-			<div>{showOverflowingNumber(name, 20)}</div>
+			<div>{showOverflowingNumber(name, MAX_STRING_LIMIT)}</div>
 		),
 		renderFrequency: ({ scheduleRule }) => {
 			const {
@@ -74,7 +77,7 @@ function CampaignManagement() {
 							: ''}
 						{week ? (
 							<span>
-								{week.slice(0, 3)}
+								{week.slice(WEEK_SECTION_START, WEEK_SECTION_END)}
 							</span>
 						) : ''}
 						{'  '}
@@ -164,9 +167,9 @@ function CampaignManagement() {
 					functions={functions}
 					sort={sort}
 					setSort={setSort}
-					page={globalFilters.page || 1}
+					page={globalFilters.page || DEFAULT_PAGE_INDEX}
 					pageSize={DEFAULT_PAGE_SIZE}
-					handlePageChange={(pageValue:number) => {
+					handlePageChange={(pageValue) => {
 						setGlobalFilters((p) => ({ ...p, page: pageValue }));
 					}}
 					renderDropdown={showExecutions}

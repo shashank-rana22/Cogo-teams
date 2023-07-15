@@ -2,21 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface GlobalFilters {
-	search?: string;
-	page?: number;
-	cycleStatus?: string;
-	dunningCycleType?: string;
-	frequency?: string;
-}
-interface Props {
-	globalFilters?: GlobalFilters;
-	setGlobalFilters?: Function;
-	sort?: object;
-	setDropdown?: Function;
-}
-
-function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdown }:Props) {
+function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdown }) {
 	const { search, page, cycleStatus, dunningCycleType, frequency } = globalFilters || {};
 	const [sortBy] = Object.keys(sort);
 	const [sortType] = Object.values(sort);
@@ -37,7 +23,7 @@ function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdo
 
 	useEffect(() => {
 		debounceQuery(search);
-		setGlobalFilters((prev) => ({ ...prev, page: 1 }));
+		setGlobalFilters((prev) => ({ ...prev, page: 1 })); // reset page to 1 on search
 	}, [search, debounceQuery, setGlobalFilters]);
 
 	const getDunningCycle = useCallback((async () => {
@@ -54,13 +40,13 @@ function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdo
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error(err);
 		}
 	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency, sortBy, sortType]);
 
 	useEffect(() => {
 		getDunningCycle();
-		setDropdown(null);
+		setDropdown(null); // closing opened dropdown on list refetch
 	}, [query, page, cycleStatus,
 		dunningCycleType, getDunningCycle,
 		sortType, sortBy, setDropdown,

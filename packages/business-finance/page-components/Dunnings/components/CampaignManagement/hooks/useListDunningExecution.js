@@ -1,12 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-interface Props {
-	rowId?: string;
-	sort?: object;
-}
-
-function useListDunningExecution({ rowId }:Props) {
+function useListDunningExecution({ rowId }) {
 	const [
 		{ data, loading },
 		trigger,
@@ -27,7 +22,7 @@ function useListDunningExecution({ rowId }:Props) {
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error(err);
 		}
 	}, [rowId, trigger]);
 

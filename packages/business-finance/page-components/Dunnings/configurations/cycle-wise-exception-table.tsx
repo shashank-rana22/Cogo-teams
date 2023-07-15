@@ -8,7 +8,7 @@ import GetSortingData from '../components/ExceptionsManagement/sorting';
 
 import styles from './styles.module.css';
 
-const CycleWiseExceptionTable = ({
+const cycleWiseExceptionTable = ({
 	setShowCycleExceptions,
 	sort,
 	setSort,
@@ -174,4 +174,4 @@ const CycleWiseExceptionTable = ({
 	]
 );
 
-export default CycleWiseExceptionTable;
+export default cycleWiseExceptionTable;

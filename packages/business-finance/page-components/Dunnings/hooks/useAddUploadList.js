@@ -4,19 +4,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-interface AddUploadInterface {
-	onClose?: () => void;
-	subTabsValue?: string;
-	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
-	cycleListId?: string;
-	uncheckedRows?: Array<string>;
-	getMasterList?: Function;
-}
-
-interface Profile {
-	profile?: { user: { id: string } }
-}
-
 const useAddUploadList = ({
 	onClose,
 	subTabsValue,
@@ -24,8 +11,8 @@ const useAddUploadList = ({
 	cycleListId,
 	uncheckedRows = [],
 	getMasterList,
-}:AddUploadInterface) => {
-	const profile: Profile = useSelector((state) => state);
+}) => {
+	const profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const SUB_TABS_VALUES = subTabsValue === 'masterExceptionList';
 	const [{ loading:uploadListLoading }, trigger] = useRequestBf(
