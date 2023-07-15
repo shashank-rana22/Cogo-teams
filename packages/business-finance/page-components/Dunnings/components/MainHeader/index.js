@@ -2,7 +2,7 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function MainHeader({ activeTab = '', setActiveTab = () => {} }) {
+function MainHeader({ activeTab = '', setActiveTab = null }) {
 	const { push } = useRouter();
 
 	const handleTabChange = (tab) => {

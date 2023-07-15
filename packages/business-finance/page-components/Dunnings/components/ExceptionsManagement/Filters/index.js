@@ -13,14 +13,14 @@ import styles from './styles.module.css';
 
 function Filters({
 	exceptionFilter = {},
-	setExceptionFilter = () => {},
+	setExceptionFilter = null,
 	subTabsValue = '',
 	searchValue = '',
 	showCycleExceptions = true,
-	setShowCycleExceptions = () => {},
-	setSearchValue = () => {},
+	setShowCycleExceptions = null,
+	setSearchValue = null,
 	cycleListId = '',
-	getMasterList = () => {},
+	getMasterList = null,
 }) {
 	const [show, setShow] = useState(false);
 	const [uncheckedRows, setUncheckedRows] = useState([]);
