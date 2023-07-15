@@ -2,33 +2,39 @@ export const CONTROLLER_CONFIG = {
 	headerClass : 'border',
 	fields      : [
 		{
+			label : 'Id',
+			key   : 'id',
+			span  : 0.5,
+		},
+		{
 			label : 'Incident Type',
 			key   : 'incidentType',
-			span  : 3,
+			span  : 2,
+		},
+		{
+			label : 'Incident SubType',
+			key   : 'incidentSubType',
+			span  : 2,
 		},
 		{
 			label : 'Entity',
-			key   : 'entity',
-			func  : 'renderIncidentNumber',
-			span  : 2,
+			key   : 'entityCode',
+			span  : 1,
 		},
 		{
 			label : 'Levels',
 			key   : 'levels',
-			func  : 'renderSIDnumber',
-			span  : 2,
+			span  : 1,
 		},
 		{
 			label : 'Users',
 			key   : 'users',
-			func  : 'renderModifiedName',
-			span  : 4.6,
+			span  : 3.5,
 		},
 		{
 			label : '',
 			key   : 'edit',
-			func  : 'renderAmountWithCurrency',
-			span  : 0.4,
+			span  : 2,
 		},
 	],
 };

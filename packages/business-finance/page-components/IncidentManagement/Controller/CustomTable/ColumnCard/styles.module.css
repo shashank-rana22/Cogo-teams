@@ -1,5 +1,7 @@
 .flex {
 	display: flex;
+	justify-content: center;
+	width: 100%;
 }
 
 .col {
@@ -18,5 +20,10 @@
 }
 
 .marginbottom {
+	padding-top: 12px;
 	margin-bottom: 6px;
+}
+
+.cancel {
+	margin-right: 8px;
 }

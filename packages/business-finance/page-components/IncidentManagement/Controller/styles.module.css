@@ -3,3 +3,8 @@
 	margin-top: 26px;
 	background-color: #fff;
 }
+
+.create {
+	display: flex;
+	justify-content: flex-end;
+}

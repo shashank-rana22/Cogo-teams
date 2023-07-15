@@ -8658,6 +8658,10 @@ const partner = {
 			api         : 'post_payments_journal_voucher_reject',
 			access_type : 'private',
 		},
+		{
+			api         : 'list_partner_users',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
@@ -10255,8 +10259,8 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api        	 : 'create_campaign_email_configuration',
-			access_type	 : 'private',
+			api          : 'create_campaign_email_configuration',
+			access_type  : 'private',
 			service_name : 'campaign',
 		},
 		{

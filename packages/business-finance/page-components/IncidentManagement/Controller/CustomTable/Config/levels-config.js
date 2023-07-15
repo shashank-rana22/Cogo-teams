@@ -3,31 +3,25 @@ export const LEVELS_CONFIG = {
 		{
 			label : 'Levels',
 			key   : 'levels',
-			span  : 1,
+			span  : 3,
 		},
 		{
 			label : 'User',
 			key   : 'user',
 			func  : 'renderIncidentNumber',
-			span  : 3,
+			span  : 4,
 		},
 		{
 			label : 'Criteria',
 			key   : 'criteria',
 			func  : 'renderSIDnumber',
-			span  : 3,
-		},
-		{
-			label : 'Parameter',
-			key   : 'parameter',
-			func  : 'renderModifiedName',
-			span  : 3,
+			span  : 4,
 		},
 		{
 			label : '',
 			key   : 'edit',
 			func  : 'renderAmountWithCurrency',
-			span  : 2,
+			span  : 1,
 		},
 	],
 };

@@ -1,8 +1,9 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React, { useState, useRef } from 'react';
 
-import { LevelForm } from './LevelForm';
+import LevelForm from './LevelForm';
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 1;
@@ -11,21 +12,59 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function ColumnCard({ config = {} }) {
+function ColumnCard({ config = {}, item = {} }) {
 	const [show, setShow] = useState(null);
 	const { fields = [] } = config;
+
+	const ref = useRef();
 
 	const onShow = () => {
 		setShow(true);
 	};
 
-	const DATA = {
-		incidentType : 'OpenJob Request OpenJob Request OpenJob Request',
-		entity       : '301',
-		levels       : '04',
-		users        : 'Zubinkhanna,Zubinkhanna,Zubinkhanna,Zubinkhanna',
-		edit         : <IcMEdit className={styles.edit} height={25} width={25} onClick={onShow} />,
+	const getData = (data) => {
+		console.log(data, 'data');
 	};
+
+	const update = () => {
+		ref.current.handleSubmit(getData)();
+	};
+
+	const getLevel = () => {
+		if (!isEmpty(item?.level3)) {
+			return '3';
+		} if (!isEmpty(item?.level2)) {
+			return '2';
+		}
+		return '1';
+	};
+
+	const formData = {
+		id              : item?.id || '_',
+		incidentType    : startCase(item?.incidentType || '-'),
+		incidentSubType : startCase(item?.incidentSubType || '_'),
+		entityCode      : item?.entityCode || '-',
+		levels          : getLevel(),
+		users           : `${item?.level3?.stakeholder?.userName}, 
+		${item?.level2?.stakeholder?.userName}, ${item?.level1?.stakeholder?.userName}` || '_',
+		edit: (
+			<div className={styles.flex}>
+				{!show ? <IcMEdit className={styles.edit} height={25} width={25} onClick={onShow} /> : (
+					<>
+						<Button
+							onClick={() => setShow(false)}
+							className={styles.cancel}
+							themeType="secondary"
+						>
+							Cancel
+						</Button>
+						<Button onClick={update}>Confirm</Button>
+					</>
+				)}
+			</div>
+		),
+	};
+
 	return (
 		<div className={styles.marginbottom}>
 			<div className={cl`${styles.flex} ${show ? styles.background : ''}`}>
@@ -38,11 +77,11 @@ function ColumnCard({ config = {} }) {
 						}}
 						className={styles.col}
 					>
-						{DATA[field.key]}
+						{formData[field.key]}
 					</div>
 				))}
 			</div>
-			{show ? <LevelForm /> : null}
+			{show ? <LevelForm ref={ref} /> : null}
 		</div>
 	);
 }

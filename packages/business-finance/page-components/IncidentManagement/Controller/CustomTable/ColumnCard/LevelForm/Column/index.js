@@ -1,3 +1,4 @@
+import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMPlus } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -10,23 +11,53 @@ const DEFAULT_VAL = 1;
 const DEFAULT_LENGTH = 1;
 const MAX_LEVEL = 3;
 
-function Column({ config = {}, append = () => { }, remove = () => { }, length = 1, totalLength = 1 }) {
+function Column({
+	config = {},
+	control = {},
+	errors = [],
+	append = () => { },
+	remove = () => { },
+	index = 0,
+	totalLength = 1,
+}) {
+	const { levels } = errors;
 	const { fields = [] } = config;
 	const DATA = {
-		levels: () => (
+		levels: (
 			<div>
-				level -
-				{' '}
-				{length + DEFAULT_VAL}
+				Level -
+				{index + DEFAULT_VAL}
 			</div>
 		),
-		user      : '301',
-		criteria  : '04',
-		parameter : 'Zubinkhanna,Zubinkhanna,Zubinkhanna,Zubinkhanna',
-		edit      : (
+		user: (
+			<div className={styles.select}>
+				<AsyncSelectController
+					control={control}
+					name={`levels.${index}.user`}
+					asyncKey="partner_users"
+					valueKey="user_id"
+					initialCall
+					rules={{ required: { value: true, message: 'User is required' } }}
+				/>
+				{levels?.[index]?.user?.message
+					? <div className={styles.message}>{levels?.[index]?.user?.message}</div> : null}
+			</div>
+		),
+		criteria: (
+			<div className={styles.input}>
+				<InputController
+					control={control}
+					name={`levels.${index}.criteria`}
+					rules={{ required: { value: true, message: 'Criteria is required' } }}
+				/>
+				{levels?.[index]?.criteria?.message
+					? <div className={styles.message}>{levels?.[index]?.criteria?.message}</div> : null}
+			</div>
+		),
+		edit: (
 			<div className={styles.buttons}>
 				<div>
-					{totalLength < MAX_LEVEL ? (
+					{(totalLength < MAX_LEVEL && totalLength === index + DEFAULT_LENGTH) ? (
 						<IcMPlus
 							height={20}
 							width={20}
@@ -38,7 +69,7 @@ function Column({ config = {}, append = () => { }, remove = () => { }, length = 
 						<IcMDelete
 							height={20}
 							width={20}
-							onClick={() => remove(length)}
+							onClick={() => remove(index)}
 							className={styles.delete}
 						/>
 					) : null}

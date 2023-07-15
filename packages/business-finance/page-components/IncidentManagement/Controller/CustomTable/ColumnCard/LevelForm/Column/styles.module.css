@@ -6,19 +6,47 @@
 
 .buttons {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	width: 100%;
 }
 
 .plus {
 	margin-right: 24px;
 	color: #ee3425;
+	cursor: pointer;
 }
 
 .delete {
 	color: #ee3425;
+	cursor: pointer;
 }
 
 .flex {
 	display: flex;
+}
+
+.select {
+	:global {
+		.ui_select_container {
+			width: 260px;
+		}
+	}
+}
+
+.message {
+	padding-left: 4px;
+	font-size: 10px;
+	color: #ee3425;
+}
+
+.input {
+	:global {
+		.ui_input_container {
+			width: 260px;
+		}
+
+		.ui_input_control::placeholder {
+			opacity: 0.6;
+		}
+	}
 }
