@@ -1,7 +1,9 @@
-import { Modal, Input, Pagination, Select } from '@cogoport/components';
+import { Modal, Input, Pagination, Select, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
+import { getIsActive, updateRoom } from '../../../helpers/configurationHelpers';
 import { formatAgentList } from '../../../helpers/groupAgentsHelpers';
 import useGetOmnichannelAgentTypes from '../../../hooks/useGetOmnichannelAgentTypes';
 import useListChatAgents from '../../../hooks/useListChatAgents';
@@ -15,9 +17,12 @@ const LOADER_COUNT = 8;
 function AgentModal({
 	showAgentDetails = false,
 	setShowAgentDetails = () => {},
+	firestore = {},
 }) {
+	const [isLockedToggle, setIsLockedToggle] = useState(false);
+
 	const {
-		getListChatAgents = () => {},
+		getListChatAgents = () => { },
 		loading = false,
 		listAgentStatus = {},
 		setPagination = () => {},
@@ -40,8 +45,17 @@ function AgentModal({
 		page = 0,
 	} = listAgentStatus;
 
+	const onToggle = (e) => {
+		setIsLockedToggle(e?.target?.checked);
+		updateRoom({ firestore, value: e?.target?.checked });
+	};
+
 	const modifiedGroupedAgents = loading
 		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
+
+	useEffect(() => {
+		setIsLockedToggle(getIsActive(firestore));
+	}, [firestore]);
 
 	return (
 		<Modal
@@ -52,6 +66,13 @@ function AgentModal({
 		>
 			<Modal.Header title="Agent Status" />
 			<Modal.Body className={styles.modal_body}>
+				<div className={styles.search_switch_toggle_space}>
+					Screen Lock
+					<Toggle
+						onChange={onToggle}
+						checked={isLockedToggle}
+					/>
+				</div>
 				<div className={styles.header_filters}>
 					<Input
 						size="sm"

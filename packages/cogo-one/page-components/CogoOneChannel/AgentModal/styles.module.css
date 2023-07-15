@@ -9,6 +9,13 @@
 
 .modal_body {
 	height: 464px;
+	padding: 8px;
+}
+
+.search_switch_toggle_space {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .empty_state {
