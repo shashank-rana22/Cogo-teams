@@ -17,7 +17,7 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const initialStep = 	['air_freight_service', 'air_customs_service', 'ftl_freight_service']
+	const initialStep = 	['air_freight_service', 'air_customs_service', 'ftl_freight_service', 'ltl_freight_service']
 		.includes(task.service_type)
 		? LIST_PREFERENCE_RATE_STEP : CONFIRM_PREFERENCE_RATE_STEP;
 	const [selectedCard, setSelectedCard] = useState(null);

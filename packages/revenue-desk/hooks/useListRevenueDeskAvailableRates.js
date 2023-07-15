@@ -16,7 +16,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 
 	const packages = singleServiceData?.packages?.[DEFAULT_INDEX];
 
-	const ListRevenueAvailableRates = useCallback(async () => {
+	const listRevenueAvailableRates = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -58,9 +58,9 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 	}, [singleServiceData, isPreferenceSet, shipmentData, trigger, user_profile, packages]);
 	useEffect(() => {
 		if (singleServiceData) {
-			ListRevenueAvailableRates();
+			listRevenueAvailableRates();
 		}
-	}, [singleServiceData, ListRevenueAvailableRates]);
+	}, [singleServiceData, listRevenueAvailableRates]);
 	return {
 		loading,
 		data,

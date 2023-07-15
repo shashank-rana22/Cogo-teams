@@ -72,9 +72,6 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 
-	// if (serviceName === 'bookings') {
-	// 	newConfig.baseURL = 'http://10.10.13.226:5002/';
-	// }
 	return {
 		...newConfig,
 		headers: {

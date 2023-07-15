@@ -1,4 +1,3 @@
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -27,7 +26,7 @@ const useListShipmentAudits = ({ defaultFilters = {} }) => {
 		} catch (err) {
 			setApiData({});
 
-			toastApiError(err);
+			// console.log(err);
 		}
 	}, [trigger]);
 
