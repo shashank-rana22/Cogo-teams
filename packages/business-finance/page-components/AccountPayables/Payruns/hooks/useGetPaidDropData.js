@@ -17,9 +17,9 @@ const useGetPaidDropData = ({ itemData = {}, overseasData = '' }) => {
 	const getApi =		overseasData === 'ADVANCE_PAYMENT'
 		? advanceTrigger
 		: trigger;
-	const getData = () => {
+	const getData = async () => {
 		try {
-			getApi({ params: {} });
+			await getApi({ params: {} });
 		} catch (error) {
 			Toast.error(error.message, 'Somthing went Wrong');
 		}

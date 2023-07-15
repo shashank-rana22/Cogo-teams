@@ -21,15 +21,17 @@ import UrgencyTag from './UrgencyTag';
 import ViewInvoices from './ViewInvoice';
 
 const RenderFunctions = (
-	overseasData = '',
-	viewId = null,
-	setViewId = () => {},
-	setLoadingDropDown = () => {},
-	setDropDownData = () => {},
-	selectedPayrun = null,
-	setSelectedPayrun = () => {},
-	checkedRow = null,
-	setCheckedRow = () => {},
+	{
+		overseasData = '',
+		viewId = null,
+		setViewId = () => {},
+		setDropDownData = () => {},
+		setLoadingDropDown = () => {},
+		selectedPayrun = null,
+		setSelectedPayrun = () => {},
+		checkedRow = null,
+		setCheckedRow = () => {},
+	},
 ) => {
 	const functions = {
 		renderFormatedAmount: (itemData) => (
@@ -75,12 +77,13 @@ const RenderFunctions = (
 			const { objectId = '' } = itemData || {};
 			return (
 				<PaidDropDown
+					itemData={itemData}
 					setViewId={setViewId}
 					showAccordian={viewId === objectId}
-					itemData={itemData}
 					setDropDownData={setDropDownData}
 					setLoadingDropDown={setLoadingDropDown}
 					overseasData={overseasData}
+					viewId={viewId}
 				/>
 			);
 		},

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useGetPaidDropData from '../../hooks/useGetPaidDropData';
 
@@ -11,18 +11,35 @@ function PaidDropDown({
 	setDropDownData = () => {},
 	setLoadingDropDown = () => {},
 	overseasData = '',
+	viewId = null,
 }) {
 	const { objectId = '' } = itemData || {};
-	const { getData, data, loading } = useGetPaidDropData({ itemData, overseasData });
+	const { loading, getData, data } = useGetPaidDropData({ itemData, overseasData });
+	useEffect(() => {
+		if (showAccordian && data) {
+			setDropDownData(data);
+		} else {
+			setDropDownData([]);
+		}
+	}, [showAccordian, data, setDropDownData, viewId]);
+
+	useEffect(() => {
+		if (loading) {
+			setLoadingDropDown(true);
+		} else {
+			setLoadingDropDown(false);
+		}
+	}, [loading, setLoadingDropDown]);
 
 	const handleClick = () => {
 		setViewId(showAccordian ? '' : objectId);
 		if (!showAccordian) {
+			setLoadingDropDown(true);
 			getData();
-			setDropDownData(data);
-			setLoadingDropDown(loading);
+			setLoadingDropDown(false);
 		}
 	};
+
 	return (
 		<div>
 			<Button

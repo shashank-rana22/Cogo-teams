@@ -1,10 +1,10 @@
-import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import RenderTooltip from '../../RenderTooltip';
 
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function DropDownItem({ data = [], loadingDropDown = false }) {
@@ -19,7 +19,7 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 				return (
 					<div key={objectNumber}>
 						{loadingDropDown ? (
-							<Loader />
+							<LoadingState />
 						) : (
 							<div className={styles.container}>
 
@@ -29,7 +29,7 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 										<div className={styles.value}>
 											<RenderTooltip
 												content={cogoBankName || 'N/A'}
-												maxLength={25}
+												maxLength={16}
 											/>
 										</div>
 									</div>
@@ -42,14 +42,14 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 										<div className={styles.value}>
 											<RenderTooltip
 												content={transactionRef || 'N/A'}
-												maxLength={25}
+												maxLength={16}
 											/>
 										</div>
 									</div>
 									<div className={styles.div_container} style={{ width: '400px' }}>
 										<div className={styles.label}>Payrun Name</div>
 										<div className={styles.value}>
-											<RenderTooltip content={payrunName || 'N/A'} maxLength={25} />
+											<RenderTooltip content={payrunName || 'N/A'} maxLength={16} />
 										</div>
 									</div>
 									<div className={styles.div_container} style={{ width: '250px' }}>
@@ -80,7 +80,7 @@ function DropDownItem({ data = [], loadingDropDown = false }) {
 											})}
 										</div>
 									</div>
-									<div className={styles.div_container} style={{ width: '200px' }}>
+									<div className={styles.div_container} style={{ width: '300px' }}>
 										<div className={styles.label}> Payment Date</div>
 										<div className={styles.value}>
 											{formatDate({

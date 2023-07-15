@@ -15,7 +15,6 @@ function Payruns() {
 	const [viewId, setViewId] = useState(null);
 	const [dropDownData, setDropDownData] = useState([]);
 	const [loadingDropDown, setLoadingDropDown] = useState(false);
-	const [activeAdvPaid, setActiveAdvPaid] = useState('NORMAL');
 	const [checkedRow, setCheckedRow] = useState(null);
 	const {
 		data,
@@ -31,20 +30,20 @@ function Payruns() {
 		setOverseasData,
 		setViewId,
 		setCheckedRow,
-		setActiveAdvPaid,
 	});
 
 	const { functions } = RenderFunctions(
-		overseasData,
-		viewId,
-		setViewId,
-		activeAdvPaid,
-		setDropDownData,
-		setLoadingDropDown,
-		selectedPayrun,
-		setSelectedPayrun,
-		checkedRow,
-		setCheckedRow,
+		{
+			overseasData,
+			viewId,
+			setViewId,
+			setDropDownData,
+			setLoadingDropDown,
+			selectedPayrun,
+			setSelectedPayrun,
+			checkedRow,
+			setCheckedRow,
+		},
 	);
 
 	return (

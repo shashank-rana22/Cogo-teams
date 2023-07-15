@@ -117,6 +117,7 @@ function List({
 									<DropDownItem
 										data={dropDownData}
 										loadingDropDown={loadingDropDown}
+										key={viewId}
 									/>
 								) : null}
 							</>
