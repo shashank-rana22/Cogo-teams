@@ -1,4 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import SHIPMENT_STATES from './shipment-states';
+
+const geo = getGeoConstants();
 
 const filterCommonControls = [
 	{
@@ -53,6 +57,24 @@ const filterCommonControls = [
 			},
 		],
 		isClearable : true,
+		span        : 6,
+	},
+	{
+		label          : 'KAM',
+		name           : 'stakeholder_id',
+		type           : 'select',
+		className      : 'primary md',
+		optionsListKey : 'partner-users',
+		valueKey       : 'user_id',
+		params         : {
+			page_limit : 100,
+			filters    : {
+				partner_id : geo.uuid.parent_entity_id,
+				status     : 'active',
+			},
+		},
+		placeholder : 'Select KAM',
+		caret       : true,
 		span        : 6,
 	},
 	{
