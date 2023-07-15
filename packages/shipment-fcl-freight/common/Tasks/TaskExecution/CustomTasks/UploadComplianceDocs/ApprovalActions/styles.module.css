@@ -18,13 +18,6 @@
 .action_div {
 	display: flex;
 	align-items: center;
-
-	/* :global {
-		.ui_VZAaD {
-			min-height: fit-content;
-			padding: 0;
-		}
-	} */
 }
 
 .remarks {

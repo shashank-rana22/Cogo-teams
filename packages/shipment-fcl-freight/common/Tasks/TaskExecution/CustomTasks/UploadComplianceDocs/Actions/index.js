@@ -9,6 +9,11 @@ import UploadDoc from '../UploadDoc';
 import styles from './styles.module.css';
 
 const DELETE_ICON_DIM = 20;
+const STATE_MAPPING = {
+	document_uploaded            : 'uploaded',
+	document_accepted            : 'approved',
+	document_amendment_requested : 'rejected',
+};
 
 function Actions({
 	item = {}, task = {}, allDocs = [], uploadedDocsRefetch = () => {},
@@ -19,12 +24,7 @@ function Actions({
 	const docData = allDocs?.filter((doc) => [item?.file_name || item?.docName].includes(doc?.file_name))
 		?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	let state = 'uploaded';
-	if (docData?.state === 'document_accepted') {
-		state = 'approved';
-	} else if (docData?.state === 'document_amendment_requested') {
-		state = 'rejected';
-	}
+	const state = STATE_MAPPING[docData?.state];
 
 	return (
 		<div>

@@ -37,15 +37,15 @@ function UploadDoc({
 
 	const onSubmit = async (values) => {
 		if (type === 'update' || task.task === 'amend_compliance_documents') {
-			const UPDATE_DATA = {
+			const updateData = {
 				id                  : existingDoc?.id,
 				document_url        : values?.upload_doc?.finalUrl,
 				performed_by_org_id : task?.organization_id,
 			};
 
-			await updateDocument(UPDATE_DATA);
+			await updateDocument(updateData);
 		} else {
-			const DATA = {
+			const data = {
 				documents: [{
 					document_url : values?.upload_doc?.finalUrl,
 					file_name    : item?.docName || values?.upload_doc?.fileName,
@@ -64,7 +64,7 @@ function UploadDoc({
 				state               : 'document_uploaded',
 			};
 
-			await apiTrigger(DATA);
+			await apiTrigger(data);
 		}
 	};
 

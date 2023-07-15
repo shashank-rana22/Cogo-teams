@@ -1,7 +1,6 @@
 import { Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useGetListShipmentDocuments from '../../../../../hooks/useGetListShipmentDocuments';
@@ -14,7 +13,6 @@ import styles from './styles.module.css';
 import excludeDocs from './utils/excludeDocsList';
 
 const LENGTH_CHECK = 1;
-const SUCCESS_HTTP_CODE = 200;
 
 const TRADETYPE_MAPPING = {
 	export : 'EXPORT',
@@ -46,6 +44,8 @@ function UploadComplianceDocs({
 			onCancel();
 			taskListRefetch();
 		},
+		task,
+		tasksList,
 	});
 
 	const handleSubmit = async () => {
@@ -53,16 +53,7 @@ function UploadComplianceDocs({
 			id: task?.id,
 		};
 
-		const res = await apiTrigger(payload);
-
-		if (res.status === SUCCESS_HTTP_CODE && task.task === 'approve_compliance_documents') {
-			const amendmentTask = tasksList?.filter((t) => t.task === 'amend_compliance_documents'
-			&& t?.status === 'pending');
-
-			if (!isEmpty(amendmentTask?.[GLOBAL_CONSTANTS.zeroth_index])) {
-				await apiTrigger({ id: amendmentTask?.[GLOBAL_CONSTANTS.zeroth_index]?.id });
-			}
-		}
+		await apiTrigger(payload);
 	};
 
 	const serviceTradeType = servicesList?.filter((service) => service?.id === task?.service_id)

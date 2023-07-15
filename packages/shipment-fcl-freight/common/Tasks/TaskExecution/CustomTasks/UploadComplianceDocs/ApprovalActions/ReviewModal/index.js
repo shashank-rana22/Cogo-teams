@@ -41,7 +41,7 @@ function ReviewModal({
 			return;
 		}
 
-		const UPDATE_DATA = {
+		const updateData = {
 			id                   : item?.id,
 			state                : value,
 			remarks              : remarkValue ? [remarkValue] : undefined,
@@ -49,7 +49,7 @@ function ReviewModal({
 			performed_by_user_id : userId,
 		};
 
-		await updateDocument(UPDATE_DATA);
+		await updateDocument(updateData);
 	};
 
 	return (

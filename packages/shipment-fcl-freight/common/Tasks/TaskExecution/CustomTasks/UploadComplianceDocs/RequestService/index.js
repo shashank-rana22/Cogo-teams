@@ -33,7 +33,7 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 		const filterDocList = requestedDocsList?.filter((obj) => obj?.doc_code === newDoc)
 			?.[GLOBAL_CONSTANTS.zeroth_index];
 
-		const DATA = {
+		const data = {
 			documents: [{
 				file_name : filterDocList?.doc_name || undefined,
 				data      : {
@@ -50,7 +50,7 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 			state               : 'document_requested',
 		};
 
-		await apiTrigger(DATA);
+		await apiTrigger(data);
 	};
 
 	const handleSelect = (val) => {
