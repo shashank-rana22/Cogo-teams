@@ -1,7 +1,14 @@
 export default function getControls({
+	primary_service = {},
 	serviceObj = {},
 }) {
-	const { service_provider, service_type } = serviceObj || {};
+	const { service_provider, service_type, shipment_type } = serviceObj || {};
+
+	let services = service_type;
+
+	if (primary_service?.service_type !== service_type) {
+		services = [shipment_type, serviceObj?.service_type];
+	}
 
 	const controls = [
 		{
@@ -14,7 +21,7 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : (service_type || '').split('_', 2).join('_'),
+					service      : services,
 				},
 			},
 			size  : 'sm',

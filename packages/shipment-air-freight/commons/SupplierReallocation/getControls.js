@@ -4,6 +4,7 @@ const SPLICE_FIRST_PARAMETER = 0;
 const SPLICE_SECOND_PARAMETER = 1;
 
 export default function getControls({
+	primary_service = {},
 	serviceObj = {},
 	shipment_type,
 	documents,
@@ -14,6 +15,12 @@ export default function getControls({
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
+
+	let services = service_type;
+
+	if (primary_service?.service_type !== service_type) {
+		services = [shipment_type, serviceObj?.service_type];
+	}
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
 		? [{ label: 'Mbl', value: 'mbl' },
@@ -32,7 +39,7 @@ export default function getControls({
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
 					status       : 'active',
-					service      : shipment_type,
+					service      : services,
 				},
 			},
 			size  : 'sm',
