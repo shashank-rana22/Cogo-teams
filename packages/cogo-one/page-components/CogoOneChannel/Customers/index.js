@@ -58,6 +58,7 @@ function Customers({
 		},
 		mail: {
 			...mailProps,
+			viewType,
 		},
 	};
 

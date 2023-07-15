@@ -2,20 +2,23 @@ import { Button, Modal, MultiSelect, SingleDateRange } from '@cogoport/component
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useLedgerDownload from '../../../../hooks/useLedgerDownload';
 
 import styles from './styles.module.css';
 
-const ENTITY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => ({
-	label : entity,
+const CHECK_SINGLE_VALUE = 1;
+
+const ALL_ENTITIES = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => ({
+	label : `(${entity})${GLOBAL_CONSTANTS.cogoport_entities[entity].name}`,
 	value : String(entity),
 }));
 
 function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item = {} }) {
 	const [date, setDate] = useState(null);
 	const [entities, setEntites] = useState([]);
+	const [entityOptions, setEntityOptions] = useState(ALL_ENTITIES);
 
 	const { downloadLedger, loading } = useLedgerDownload({
 		date,
@@ -30,9 +33,31 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 	const isEnabled = date?.startDate && date?.endDate && !isEmpty(entities)
 	&& !loading;
 
+	useEffect(() => {
+		// functionality to select the entity combination of same country only
+		if (entities?.length === CHECK_SINGLE_VALUE) {
+			const allowedEntites = ALL_ENTITIES
+				.filter((singleEntity) => {
+					const selectedCountryCode = GLOBAL_CONSTANTS.cogoport_entities[entities].country_code;
+					const singleEntityValue = singleEntity?.value;
+					const singleCountryCode = GLOBAL_CONSTANTS.cogoport_entities[+singleEntityValue].country_code;
+					return singleCountryCode === selectedCountryCode;
+				});
+			setEntityOptions([...allowedEntites]);
+		}
+		if (isEmpty(entities)) {
+			setEntityOptions([...ALL_ENTITIES]);
+		}
+	}, [entities]);
+
 	return (
 		<div>
-			<Modal size="md" show={showLedgerModal} onClose={() => setShowLedgerModal(false)}>
+			<Modal
+				size="md"
+				show={showLedgerModal}
+				onClose={() => setShowLedgerModal(false)}
+				className={styles.modal}
+			>
 				<Modal.Header title="Download Ledger" />
 				<Modal.Body>
 					<div className={styles.container}>
@@ -55,7 +80,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 								value={entities}
 								onChange={setEntites}
 								placeholder="Select Entity"
-								options={ENTITY_OPTIONS}
+								options={entityOptions}
 								isClearable
 								style={{ width: '250px' }}
 								prefix={() => {}}
