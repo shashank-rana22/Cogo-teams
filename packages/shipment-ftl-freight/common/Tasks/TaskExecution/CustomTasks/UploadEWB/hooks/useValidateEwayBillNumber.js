@@ -26,8 +26,8 @@ const useValidateEwayBillNumber = () => {
 			return res;
 		} catch (e) {
 			toastApiError(e?.data);
+			return null;
 		}
-		return {};
 	};
 
 	return {
