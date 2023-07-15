@@ -1,4 +1,5 @@
 import { Button, Modal, CheckboxGroup } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -15,7 +16,10 @@ function PreviewEmail({
 	const pocOptions = (data?.repository_data?.pocs_data || []).map((item) => (
 		{
 			label : item?.name,
-			value : item?.email,
+			value : JSON.stringify({
+				name  : item?.name,
+				email : item?.email,
+			}),
 		}
 	));
 
@@ -30,6 +34,7 @@ function PreviewEmail({
 			<Modal.Header title={emailData?.subject} />
 			<div className={styles.modal_body}>
 				<Modal.Body style={{ maxHeight: '570px' }}>
+					<div>Select The Recipient:</div>
 					<CheckboxGroup value={checkboxValue} onChange={setCheckboxValue} options={pocOptions} />
 
 					<div>
@@ -49,7 +54,7 @@ function PreviewEmail({
 				</div>
 				<Button
 					className="primary md"
-					disabled={loading}
+					disabled={loading || isEmpty(checkboxValue)}
 					onClick={() => onConfirm(false)}
 				>
 					Send Mail

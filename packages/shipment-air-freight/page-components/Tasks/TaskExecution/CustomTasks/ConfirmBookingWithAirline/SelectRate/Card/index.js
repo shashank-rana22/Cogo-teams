@@ -14,8 +14,8 @@ import styles from './styles.module.css';
 const CONFIRM_PREFERENCE_STEP = 2;
 function Card({
 	item = {},
-	priority,
-	serviceProvidersData,
+	priority = 1,
+	serviceProvidersData = [],
 	step = 1,
 	updateShipmentPendingTask = () => {},
 	taskData = {},
@@ -34,7 +34,11 @@ function Card({
 	const bookingMode = data?.repository_data?.booking_mode;
 
 	const { updateConfirmation, updateLoading } = useUpdateBookingPreference();
-	const { emailData, loading, sendBookingRequestEmail } =	useSendBookingRequestEmail(onCancel, setShowEmailPreview);
+	const {
+		emailData,
+		loading,
+		sendBookingRequestEmail,
+	} = useSendBookingRequestEmail(onCancel, setShowEmailPreview, checkboxValue);
 
 	const handleProceedWithEmail = async (show_preview_only) => {
 		await sendBookingRequestEmail(
@@ -44,7 +48,6 @@ function Card({
 			handOverDate,
 			show_preview_only,
 			serviceProvidersData,
-			checkboxValue,
 		);
 	};
 

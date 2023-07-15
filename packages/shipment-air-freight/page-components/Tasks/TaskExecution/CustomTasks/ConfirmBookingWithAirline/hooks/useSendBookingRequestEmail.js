@@ -7,11 +7,13 @@ import getBuyPrice from '../utils/getBuyPrice';
 const VOLUMETRIC_WEIGHT = 166.67;
 const DECIMAL_PLACE = 2;
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
+const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue) => {
 	const [{ loading, data: emailData }, trigger] = useRequest({
 		url    : '/send_booking_request_email_to_airline',
 		method : 'POST',
 	}, { manual: true });
+
+	const recipient_datas = checkboxValue.map((item) => JSON.parse(item));
 
 	const sendBookingRequestEmail = async (
 		item,
@@ -20,7 +22,6 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 		handOverDate,
 		show_preview_only,
 		serviceProvidersData,
-		checkboxValue,
 	) => {
 		try {
 			await trigger({
@@ -37,7 +38,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 					priority            : item?.priority,
 					service_providers   : serviceProvidersData,
 					service_provider_id : data?.service_provider_id,
-					recipient_emails    : checkboxValue,
+					recipient_datas,
 				},
 			});
 
