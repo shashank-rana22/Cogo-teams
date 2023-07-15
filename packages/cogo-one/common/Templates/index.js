@@ -13,21 +13,27 @@ import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 
 function Templates({
-	openCreateReply,
+	openCreateReply = false,
 	setOpenCreateReply = () => {},
 	data = {},
 	type = '',
 	dialNumber = '',
 	setDialNumber = () => {},
+	viewType = '',
 }) {
+	const [customizableData, setCustomizableData] = useState({});
+	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
 	} = data || {};
 
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+	const { name, html_template, variables = [] } = activeCard?.data || {};
 
-	const { name, html_template } = activeCard?.data || {};
+	const isAllKeysAndValuesPresent = variables.every(
+		(key) => (key in customizableData) && customizableData[key],
+	);
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
 	const maskMobileNumber = type === 'voice_call_component';
@@ -42,7 +48,7 @@ function Templates({
 		infiniteList: { list = [] },
 		loading,
 		refetch,
-	} = useListTemplate();
+	} = useListTemplate({ viewType });
 
 	const { createTemplate, loading: createLoading } = useCreateCommunicationTemplate();
 
@@ -51,6 +57,7 @@ function Templates({
 			template_name : name,
 			type          : 'whatsapp',
 			tags          : ['update_time'],
+			variables     : customizableData,
 		});
 	};
 
@@ -64,6 +71,7 @@ function Templates({
 			return;
 		}
 
+		setCustomizableData({});
 		setActiveCard({ show: true, data: val });
 	};
 
@@ -163,7 +171,12 @@ function Templates({
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									<Preview previewData={html_template} />
+									<Preview
+										previewData={html_template}
+										variables={variables}
+										customizableData={customizableData}
+										setCustomizableData={setCustomizableData}
+									/>
 								</div>
 							</div>
 						</div>
@@ -186,7 +199,7 @@ function Templates({
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							disabled={!name}
+							disabled={!name || !isAllKeysAndValuesPresent}
 							loading={communicationLoading}
 						>
 							Send
