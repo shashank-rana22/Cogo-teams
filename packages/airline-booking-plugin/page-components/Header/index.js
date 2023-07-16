@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function Header({ setShow = () => {} }) {
 	return (
 		<header className={styles.header_container}>
-			<div className={styles.heading}>AWB Inventory</div>
+			<div className={styles.heading}>Airline Booking Plugin</div>
 			<div className={styles.button_head}>
 				<div className={styles.button_style}>
 					<ScopeSelect size="md" showChooseAgent={false} apisToConsider={['list_air_india_awb_numbers']} />

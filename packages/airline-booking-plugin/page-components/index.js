@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import tabs from '../configurations/tabs';
 
+import AirIndiaAWB from './AirIndiaAWB';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -20,7 +21,7 @@ function AirlinePluginBooking() {
 				>
 					{tabs.map((tab) => (
 						<TabPanel name={tab.name} title={tab.title} key={tab.key}>
-							Air India
+							<AirIndiaAWB activeTab={activeTab} />
 						</TabPanel>
 					))}
 				</Tabs>
