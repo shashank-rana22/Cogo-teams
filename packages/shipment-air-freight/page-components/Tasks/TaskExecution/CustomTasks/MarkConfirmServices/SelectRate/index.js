@@ -5,7 +5,6 @@ import useListBookingPreferences
 	from '../../../../../../hooks/useListBookingPreferences';
 
 import Card from './Card';
-import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
@@ -16,7 +15,6 @@ function SelectRate({
 	step = {},
 	task = {},
 }) {
-	const SERVICE_TYPES = ['air_freight_service'];
 	const { data, loading } = useListBookingPreferences({
 		shipment_id    : task.shipment_id,
 		defaultFilters : { service_id: task.service_id },
@@ -78,11 +76,6 @@ function SelectRate({
 						task={task}
 					/>
 				))}
-				{!SERVICE_TYPES.includes(task?.service_type) ? (
-					<SelectNormal setStep={setStep} />
-				) : (
-					null
-				)}
 			</div>
 		</div>
 	);
