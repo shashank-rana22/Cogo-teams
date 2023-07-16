@@ -263,7 +263,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1000;
+	z-index: 1009;
 	width: var(--layout-navbar-collapsed);
 	height: calc(100vh - var(--layout-topbar));
 	padding: 16px;

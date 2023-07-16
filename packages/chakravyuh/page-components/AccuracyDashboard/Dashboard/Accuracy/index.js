@@ -2,6 +2,7 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { cl } from '@cogoport/components';
 import React from 'react';
 
+import CustomTooltip from '../../../../common/CustomTooltip';
 import { CUSTOM_DATA, CUSTOM_THEME } from '../../../../constants/line_chart_config';
 import { section_header, section_container } from '../styles.module.css';
 
@@ -13,15 +14,6 @@ const CONSTANT_TWENTY_FIVE = 25;
 const CONSTANT_FIFTY = 50;
 const CONSTANT_SEVENTY_FIVE = 75;
 const CONSTANT_HUNDRED = 100;
-
-function CustomTooltip({ point = { data: {} } }) {
-	return (
-		<div className={styles.tooltip_container}>
-			<p className={styles.tooltip_date}>{point?.data?.x}</p>
-			<p className={styles.tooltip_accuracy}>{`${point?.data?.y}% Accuracy`}</p>
-		</div>
-	);
-}
 
 function Accuracy() {
 	return (
@@ -69,7 +61,7 @@ function Accuracy() {
 					gridYValues={[CONSTANT_ZERO]}
 					gridXValues={[CONSTANT_ZERO]}
 					theme={CUSTOM_THEME}
-					colors={['#FEF199', '#CFEAED', '#FBD1A6']}
+					colors={['#9BA0CB', '#e8a838', '#61cdbb']}
 					pointSize={6}
 					pointColor={{ from: 'color', modifiers: [['brighter', CONSTANT_POINT_TWO]] }}
 					pointBorderWidth={2}
@@ -87,7 +79,7 @@ function Accuracy() {
 							itemDirection     : 'left-to-right',
 							itemWidth         : 140,
 							itemHeight        : 20,
-							itemOpacity       : 0.95,
+							itemOpacity       : 1,
 							symbolSize        : 12,
 							symbolShape       : 'circle',
 							symbolBorderColor : 'rgba(0, 0, 0, .5)',
