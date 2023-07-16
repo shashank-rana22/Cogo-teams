@@ -3,7 +3,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 
 import { SHIPPING_LINE } from '../../../../constants/getShippingLines';
-// import { convertCurrencyValue } from '../../../../utils/convertCurrencyValue';
 import CargoDetails from '../../../CargoDetails';
 import PortDetails from '../../../PortDetails';
 
@@ -14,7 +13,6 @@ const GET_LAST_STRING = 2;
 function ShipmentDetails({ serviceData = {}, name = '' }) {
 	const {
 		detail = {}, rate = {},
-		//  currency_conversions = {}
 	} = serviceData || {};
 
 	const {
@@ -22,24 +20,12 @@ function ShipmentDetails({ serviceData = {}, name = '' }) {
 		services = {},
 	} = detail || {};
 
-	// const total = 0;
-	// const value = Number(totalDisplay.toFixed(4));
-	// total += convertCurrencyValue(
-	// 	Number(totalDisplay.toFixed(4)),
-	// 	item?.tax_total_price_currency,
-	// 	rate?.total_price_currency,
-	// 	conversions,
-	// );
-
 	const primaryService = Object.values(services || {}).find(
 		(service) => service?.service_type === primary_service || !service?.trade_type,
 	);
-	console.log('primaryService:', primaryService);
 
 	const shippingLineMapping = SHIPPING_LINE[primary_service];
 	const shippingLines = primaryService[shippingLineMapping];
-
-	// const { shipping_line = {}, airline = {} } = primaryService;
 
 	const parts = name.split(':');
 	const evnetTitle = parts[GET_LAST_STRING].trim();
@@ -82,8 +68,8 @@ function ShipmentDetails({ serviceData = {}, name = '' }) {
 			<div className={styles.landed_amount}>
 
 				{formatAmount({
-					amount   : rate?.total_price,
-					currency : rate?.total_price_currency,
+					amount   : rate?.tax_total_price,
+					currency : rate?.tax_total_price_currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',

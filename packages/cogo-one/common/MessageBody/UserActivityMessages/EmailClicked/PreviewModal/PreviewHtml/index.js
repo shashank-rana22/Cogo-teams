@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 function PreviewHtml({ html = '' }) {
 	const frameRef = useRef();
@@ -12,7 +12,7 @@ function PreviewHtml({ html = '' }) {
 	return (
 		<iframe
 			width="100%"
-			height="300px"
+			height="75%"
 			frameBorder="0"
 			title="Preview"
 			ref={frameRef}
