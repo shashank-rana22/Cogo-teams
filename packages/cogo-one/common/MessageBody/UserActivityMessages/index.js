@@ -1,13 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-import Checkout from './Checkout';
+import CheckoutDetails from './CheckoutDetails';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
-import Shipments from './Shipments';
+import Shipments from './ShipmentDetails';
 
 const COMPONENT_MAPPING = {
-	checkout      : Checkout,
+	checkout      : CheckoutDetails,
 	shipment      : Shipments,
 	user          : LoginFailed,
 	communication : EmailClicked,

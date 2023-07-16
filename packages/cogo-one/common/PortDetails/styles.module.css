@@ -1,5 +1,6 @@
 .container {
 	display: flex;
+	align-items: center;
 }
 
 .flex_row_origin {
@@ -75,7 +76,7 @@
 }
 
 .port_name {
-	max-width: 50px;
+	width: 50px;
 	overflow: hidden;
 	font-size: 11px;
 	font-weight: 600;

@@ -1,10 +1,11 @@
-import CargoDetails from './CargoDetails';
-import PortDetails from './PortDetails';
+import CargoDetails from '../../../CargoDetails';
+import PortDetails from '../../../PortDetails';
+
 import styles from './styles.module.css';
 
 const GET_LAST_STRING = 2;
 
-function Shipments({ serviceData = {}, name = '' }) {
+function ShipmentDetails({ serviceData = {}, name = '' }) {
 	const parts = name.split(':');
 	const evnetTitle = parts[GET_LAST_STRING].trim();
 
@@ -23,4 +24,4 @@ function Shipments({ serviceData = {}, name = '' }) {
 	);
 }
 
-export default Shipments;
+export default ShipmentDetails;

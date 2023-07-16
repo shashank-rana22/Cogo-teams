@@ -3,14 +3,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import getLocations from '../getLocations';
+import getLocations from '../../utils/getLocations';
 
 import styles from './styles.module.css';
 
 const GET_LAST_ITEM = -1;
 
-function PortDetails({ serviceData: data = {} }) {
-	const { origin, destination } =	getLocations({ ...data, search_type: data?.shipment_type }) || {};
+function PortDetails({ serviceData = {} }) {
+	const data = serviceData || {};
+	const { origin = {}, destination = {} } = getLocations({ data }) || {};
 
 	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
 	const handleLocationDetails = (location, icdInfo) => (
@@ -54,7 +55,9 @@ function PortDetails({ serviceData: data = {} }) {
 						<div className={styles.label}>Location : </div>
 					</div>
 
-					<div className={styles.flex_row_origin}>{handleLocationDetails(origin)}</div>
+					<div className={styles.flex_row_origin}>
+						{handleLocationDetails(origin)}
+					</div>
 				</div>
 			);
 		}
@@ -65,7 +68,9 @@ function PortDetails({ serviceData: data = {} }) {
 					<div className={styles.label}>custom clearance : </div>
 				</div>
 
-				<div className={styles.flex_row_origin}>{handleLocationDetails(origin)}</div>
+				<div className={styles.flex_row_origin}>
+					{handleLocationDetails(origin)}
+				</div>
 			</div>
 		);
 	}
