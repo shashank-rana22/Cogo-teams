@@ -12,7 +12,9 @@ function CheckList({
 	setShowApproved = () => {},
 	canEditDocuments = true,
 }) {
-	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
+	const { primary_service, shipment_data, stakeholderConfig } = useContext(ShipmentDetailContext);
+
+	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
 
 	return (
 		<div className={styles.wrapper}>
@@ -25,6 +27,7 @@ function CheckList({
 				setShowDoc={setShowDoc}
 				setShowApproved={setShowApproved}
 				canEditDocuments={canEditDocuments}
+				isIGM={isIGM}
 			/>
 		</div>
 	);

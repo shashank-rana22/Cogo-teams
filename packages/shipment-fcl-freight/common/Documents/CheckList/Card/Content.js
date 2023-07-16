@@ -75,7 +75,7 @@ function Content({
 
 				<div className={styles.main}>
 					<div className={styles.heading}>
-						{item?.label.split('Upload').slice(SLICE_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
+						{item?.label?.split('Upload').slice(SLICE_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
 					</div>
 					{isChecked ? (
 						<div className={styles.gap}>

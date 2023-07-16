@@ -6,7 +6,7 @@ import React from 'react';
 import Content from './Content';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
-const IGM_DOCUMNETS = ['bill_of_lading', 'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading'];
+const IGM_DOCUMENTS = ['bill_of_lading', 'draft_bill_of_lading', 'house_bill_of_lading', 'draft_house_bill_of_lading'];
 
 const Card = ({
 	taskList = [],
@@ -17,6 +17,7 @@ const Card = ({
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	canEditDocuments = true,
+	isIGM = false,
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -27,10 +28,17 @@ const Card = ({
 			saveAs(url);
 		}
 	};
+	// igm work pending on documents
+	// const ALL_UPLOADED_IGM_DOCS = [];
+	const updatedTaskList = isIGM ? IGM_DOCUMENTS : taskList;
 
-	const ALL_UPLOADED_IGM_DOCS = [];
+	// (completedDocs || []).map((item, idx) => {
+	// 	if(IGM_DOCUMENTS.includes(item?.document_type)) {
+	// 		ALL_UPLOADED_IGM_DOCS.push(item);
+	// 	}
+	// })
 
-	return (taskList || []).map((item, idx) => {
+	return (updatedTaskList || []).map((item, idx) => {
 		const docType =	item?.document_type
 		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -41,14 +49,10 @@ const Card = ({
 			allUploadedDocs = [{}];
 		}
 
-		if (IGM_DOCUMNETS.includes(docType)) {
-			console.log({ docType });
-			ALL_UPLOADED_IGM_DOCS.push(docType);
-		}
-		// console.log({ALL_UPLOADED_IGM_DOCS, allUploadedDocs});
-		const allUpdatedUploadedDocs = false ? ALL_UPLOADED_IGM_DOCS : allUploadedDocs;
+		// console.log({ALL_UPLOADED_IGM_DOCS, allUploadedDocs , completedDocs});
+		// const allUpdatedUploadedDocs = isIGM ? ALL_UPLOADED_IGM_DOCS : allUploadedDocs;
 
-		return allUpdatedUploadedDocs.map((uploadedItem) => {
+		return allUploadedDocs.map((uploadedItem) => {
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
 			const showUploadText = item?.pendingItem ? 'Upload' : '';
@@ -60,7 +64,7 @@ const Card = ({
 					receivedViaEmail={receivedViaEmail}
 					showUploadText={showUploadText}
 					idx={idx}
-					taskList={taskList}
+					taskList={updatedTaskList}
 					isChecked={isChecked}
 					shipment_data={shipment_data}
 					item={item}

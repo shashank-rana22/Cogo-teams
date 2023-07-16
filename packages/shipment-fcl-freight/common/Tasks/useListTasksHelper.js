@@ -4,13 +4,18 @@ import { useContext, useState } from 'react';
 import useListTasks from '../../hooks/useListTasks';
 
 function useListTasksHelper() {
+	const {
+		shipment_data,
+		isGettingShipment, activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
+
+	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
+
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
-	const [showMyTasks, setShowMyTasks] = useState(true);
+	const [showMyTasks, setShowMyTasks] = useState(!isIGM);
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
-
-	const { shipment_data, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const { id: shipment_id } = shipment_data || '';
 
