@@ -44,7 +44,6 @@ const filterCommonControls = [
 		isClearable : true,
 		span        : 6,
 	},
-
 	{
 		label       : 'Raised Alarm?',
 		name        : 'fault_alarms_raised',

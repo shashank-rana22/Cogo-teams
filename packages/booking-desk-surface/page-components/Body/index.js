@@ -14,9 +14,6 @@ const SIZE_FOR_SHIPMENT_PAGE = 10;
 function Body({ data = {}, loading = false, setPage = () => {} }) {
 	const { list = [], total_count = 0, page = 0 } = data;
 
-	const handlePageChange = (pageVal) => {
-		setPage(pageVal);
-	};
 	return (
 		<div className={styles.body_container}>
 			{loading ? <Loader />
@@ -43,7 +40,7 @@ function Body({ data = {}, loading = false, setPage = () => {} }) {
 										totalItems={total_count || TOTAL_COUNT_FOR_PAGINATION}
 										currentPage={page || INITIAL_PAGE}
 										pageSize={SIZE_FOR_SHIPMENT_PAGE}
-										onPageChange={(pageVal) => handlePageChange(pageVal)}
+										onPageChange={(pageVal) => setPage(pageVal)}
 									/>
 								</div>
 							</div>
