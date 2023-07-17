@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function List({
 	item = {}, task = {}, uploadedDocsRefetch = () => {}, allUploadedDocs = [],
 }) {
-	const uploadedDocs = allUploadedDocs?.filter((doc) => doc?.file_name === item?.docName);
+	const uploadedDocs = allUploadedDocs?.filter((doc) => [item?.docName, item?.file_name].includes(doc?.file_name));
 
 	return (
 		<div className={styles.container}>
