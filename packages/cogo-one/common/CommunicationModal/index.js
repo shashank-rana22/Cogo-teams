@@ -8,18 +8,22 @@ import Templates from '../Templates';
 
 import styles from './styles.module.css';
 
-const TAKE_COUNTRY_CODE_TILL = 1;
+const COMPONENT_MAPPING = {
+	email    : ComposeEmail,
+	whatsapp : Templates,
+};
+
+const COUNTRY_CODE_INDEX = 1;
 
 function CommunicationModal({
 	closeModal = () => {},
 	userData = {},
 	modalType = '',
 	activeCardData = {},
+	viewType = '',
 }) {
-	const COMPONENT_MAPPING = {
-		email    : ComposeEmail,
-		whatsapp : Templates,
-	};
+	const [openCreateReply, setOpenCreateReply] = useState(false);
+
 	const { userId, name, leadUserId } = activeCardData;
 	const formattedData = {
 		user_name    : name,
@@ -33,7 +37,7 @@ function CommunicationModal({
 	const {
 		sendUserWhatsappTemplate,
 		loading: whatsappLoading,
-	} =	 useSendUserWhatsappTemplate({ callbackfunc: closeModal });
+	} =	 useSendUserWhatsappTemplate({ callbackfunc: closeModal, viewType });
 
 	const { sendCommunicationTemplate, loading } = useSendCommunicationTemplate(
 		{
@@ -59,19 +63,19 @@ function CommunicationModal({
 		});
 	};
 
-	const [openCreateReply, setOpenCreateReply] = useState(false);
 	const ActiveModalComp = COMPONENT_MAPPING[modalType] || null;
 
 	const whatsappTemplatesData = {
 		sendCommunicationTemplate: (args) => sendUserWhatsappTemplate(
 			{
 				...args,
-				country_code: whatsapp_country_code?.slice(TAKE_COUNTRY_CODE_TILL) || '91',
+				country_code: whatsapp_country_code?.slice(COUNTRY_CODE_INDEX) || '91',
 				whatsapp_number,
 			},
 		),
 		communicationLoading: loading,
 	};
+
 	return (
 		<Modal
 			show

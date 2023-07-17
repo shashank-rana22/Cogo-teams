@@ -18,3 +18,7 @@
 		transform: scale(0.9);
 	}
 }
+
+.action_disabled {
+	cursor: not-allowed;
+}

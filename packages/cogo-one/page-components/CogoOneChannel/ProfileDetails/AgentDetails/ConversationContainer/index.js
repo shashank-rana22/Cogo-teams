@@ -3,12 +3,12 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CommunicationModal from '../../../../../common/CommunicationModal';
-import OtherChannelsConfig from '../../../../../configurations/other-channels-config';
+import otherChannelsConfig from '../../../../../configurations/other-channels-config';
 import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
-const ARRAY_LENGTH_FOR_LOADER = 2;
+const LOADER_LENGTH = 2;
 
 function ConversationContainer({
 	userData = {},
@@ -18,14 +18,37 @@ function ConversationContainer({
 	activeMessageCard = {},
 	setActiveMessage = () => {},
 	activeRoomLoading = false,
+	viewType = '',
 }) {
 	const [modalType, setModalType] = useState(null);
 	const { user_channel_ids = {}, channel_type = '', user_details = {} } = activeMessageCard || {};
 	const { business_name = '' } = user_details || {};
 	const showLoader = loading || activeRoomLoading;
+
+	const modifiedOtherChannelsConfig = otherChannelsConfig.map((eachRoomConfig) => {
+		const { id_name = '' } = eachRoomConfig || {};
+		return {
+			...eachRoomConfig, has_existing_room: id_name && (id_name in user_channel_ids),
+		};
+	});
+
+	const closeModal = () => {
+		setModalType(null);
+	};
+
+	const onCardClick = ({ other_channel_type, has_existing_room = false, id_name }) => {
+		if (has_existing_room) {
+			setActiveMessage({
+				channel_type: other_channel_type, id: user_channel_ids?.[id_name],
+			});
+		} else {
+			setModalType(other_channel_type);
+		}
+	};
+
 	if (showLoader) {
-		return ([...Array(ARRAY_LENGTH_FOR_LOADER).keys()].map((item) => (
-			<div className={styles.container} key={item}>
+		return ([...Array(LOADER_LENGTH).keys()].map((key) => (
+			<div className={styles.container} key={key}>
 				<div className={styles.icon_type}>
 					<Placeholder type="circle" radius="30px" />
 				</div>
@@ -50,29 +73,10 @@ function ConversationContainer({
 		))
 		);
 	}
+
 	if ((isEmpty(userData) || noData)) {
 		return <div className={styles.empty}>No data Found...</div>;
 	}
-	const modifiedOtherChannelsConfig = OtherChannelsConfig.map((eachRoomConfig) => {
-		const { id_name = '' } = eachRoomConfig || {};
-		return {
-			...eachRoomConfig, has_existing_room: id_name && (id_name in user_channel_ids),
-		};
-	});
-
-	const onCardClick = ({ other_channel_type, has_existing_room = false, id_name }) => {
-		if (has_existing_room) {
-			setActiveMessage({
-				channel_type: other_channel_type, id: user_channel_ids?.[id_name],
-			});
-		} else {
-			setModalType(other_channel_type);
-		}
-	};
-
-	const closeModal = () => {
-		setModalType(null);
-	};
 
 	return (
 		<>
@@ -128,6 +132,7 @@ function ConversationContainer({
 					closeModal={closeModal}
 					userData={userData}
 					activeCardData={activeCardData}
+					viewType={viewType}
 				/>
 			)}
 		</>

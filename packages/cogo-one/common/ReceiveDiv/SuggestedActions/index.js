@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -72,9 +72,13 @@ function SuggestedActions({ formattedData = {} }) {
 	};
 
 	const ACTIONS = [
-		{ label: 'Call', action: handleCall },
-		{ label: 'Message on WhatsApp', action: handleSendTemplate },
-		{ label: 'Send Email', action: handleSendEmail },
+		{
+			label    : 'Call',
+			action   : handleCall,
+			disabled : !mobile_no || !hasVoiceCallAccess,
+		},
+		{ label: 'Message on WhatsApp', action: handleSendTemplate, disabled: false },
+		{ label: 'Send Email', action: handleSendEmail, disabled: false },
 	];
 
 	return (
@@ -84,7 +88,7 @@ function SuggestedActions({ formattedData = {} }) {
 				{(ACTIONS || []).map((item) => (
 					<Button
 						onClick={item?.action}
-						className={styles.actions_button}
+						className={cl`${styles.actions_button} ${item?.disabled ? styles.action_disabled : ''}`}
 						key={item}
 						size="sm"
 						themeType="secondary"
