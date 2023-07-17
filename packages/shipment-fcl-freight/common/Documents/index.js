@@ -34,6 +34,7 @@ function Documents() {
 		filters,
 		setFilters,
 		refetch,
+		bl_details,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -76,6 +77,7 @@ function Documents() {
 					setShowApproved={setShowApproved}
 					shipmentDocumentRefetch={refetch}
 					activeStakeholder={activeStakeholder}
+					bl_details={bl_details}
 				/>
 			);
 		}
