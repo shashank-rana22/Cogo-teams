@@ -45,7 +45,7 @@ export const airIndiaCompletedFields = [
 	{
 		key   : 'air_awb_number',
 		label : 'AWB No.',
-		span  : 1.2,
+		span  : 1.8,
 		func  : 'handleAWBNumber',
 	},
 	{
@@ -58,5 +58,6 @@ export const airIndiaCompletedFields = [
 		key   : 'plugin-action',
 		label : 'Action',
 		span  : 1.2,
+		func  : 'handleAction',
 	},
 ];

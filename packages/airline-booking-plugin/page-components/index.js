@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 function AirlinePluginBooking() {
 	const [activeTab, setActiveTab] = useState('air_india');
-	const [showPlugInModal, setShowPlugInModal] = useState([]);
+	const [showPlugInModal, setShowPlugInModal] = useState(null);
+	const [edit, setEdit] = useState(false);
 
 	const showModal = !isEmpty(showPlugInModal);
 
@@ -25,7 +26,12 @@ function AirlinePluginBooking() {
 				>
 					{tabs.map((tab) => (
 						<TabPanel name={tab.name} title={tab.title} key={tab.key}>
-							<AirIndiaAWB activeTab={activeTab} />
+							<AirIndiaAWB
+								activeTab={activeTab}
+								setEditPlugInModal={setShowPlugInModal}
+								edit={edit}
+								setEdit={setEdit}
+							/>
 						</TabPanel>
 					))}
 				</Tabs>
@@ -38,7 +44,11 @@ function AirlinePluginBooking() {
 					className={styles.modal_container}
 					size="xl"
 				>
-					<AirIndiaBooking showPlugInModa={showPlugInModal} setShowPlugInModal={setShowPlugInModal} />
+					<AirIndiaBooking
+						showPlugInModa={showPlugInModal}
+						setShowPlugInModal={setShowPlugInModal}
+						edit={edit}
+					/>
 				</Modal>
 			)}
 		</div>

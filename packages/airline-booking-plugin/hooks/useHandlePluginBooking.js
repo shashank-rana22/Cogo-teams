@@ -6,9 +6,11 @@ import CONSTANTS from '../constants/constants';
 
 const EMPTY_VALUE = 0;
 
-const useCreatePluginBooking = () => {
+const useHandlePluginBooking = (edit) => {
+	const api = edit ? '/update_awb_plugin_booking_information' : '/create_awb_booking_information';
+
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_awb_booking_information',
+		url    : `${api}`,
 		method : 'POST',
 	});
 
@@ -49,10 +51,34 @@ const useCreatePluginBooking = () => {
 		}
 	};
 
+	const stateBooking = async ({
+		statusAwb,
+		airIndiaAwbNumbersList,
+		setFinalList,
+		setPage,
+		airId,
+	}) => {
+		try {
+			if (airId) {
+				await trigger({
+					data: { id: airId, status: statusAwb },
+				}).then(() => {
+					Toast.success(`AWB Booking Information ${statusAwb}d Successfully`);
+					setFinalList([]);
+					airIndiaAwbNumbersList();
+					setPage(CONSTANTS.START_PAGE);
+				});
+			}
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
+		}
+	};
+
 	return {
 		createBooking,
+		stateBooking,
 		loading,
 	};
 };
 
-export default useCreatePluginBooking;
+export default useHandlePluginBooking;

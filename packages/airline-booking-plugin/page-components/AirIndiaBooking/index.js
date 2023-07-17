@@ -7,7 +7,7 @@ import Layout from '../../commons/Layout';
 import List from '../../commons/List';
 import { bookingControl } from '../../configurations/air-india-booking-control';
 import { pluginHeader } from '../../configurations/plugin-header';
-import useCreatePluginBooking from '../../hooks/useCreatePluginBooking';
+import useHandlePluginBooking from '../../hooks/useHandlePluginBooking';
 
 import styles from './styles.module.css';
 
@@ -15,14 +15,14 @@ function AirIndiaBooking({
 	showPlugInModal = [],
 	setShowPlugInModal = () => {},
 	refresh = {},
+	edit = false,
 }) {
 	const [locationData, setLocationData] = useState({});
-
 	const requiredControl = bookingControl(setLocationData);
 
 	const { control, handleSubmit, reset, formState:{ errors } } = useForm();
 
-	const { createBooking, loading } = useCreatePluginBooking();
+	const { createBooking, loading } = useHandlePluginBooking(edit);
 
 	return (
 		<div className={styles.booking_container}>

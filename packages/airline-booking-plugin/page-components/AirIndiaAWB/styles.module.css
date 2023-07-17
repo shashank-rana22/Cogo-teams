@@ -20,3 +20,21 @@
 		}
 	}
 }
+
+.edit_button_group {
+	display: flex;
+	margin-bottom: 8px;
+	font-size: 30px;
+
+	svg {
+		width: 40px;
+		font-size: 16px;
+	}
+
+	:global {
+		.ui_button_container {
+			min-width: 28px;
+			padding: 2px;
+		}
+	}
+}

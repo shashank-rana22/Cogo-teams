@@ -46,5 +46,6 @@ export const airIndiaNewFields = [
 		key   : 'plugin-action',
 		label : 'Action',
 		span  : 1.2,
+		func  : 'handleAction',
 	},
 ];
