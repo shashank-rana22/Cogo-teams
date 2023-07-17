@@ -24,7 +24,7 @@
 	padding: 20px 20px 20px 50px;
 	background: #f7f7f7;
 	border: 1px solid #e1e1e1;
-	box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+	box-shadow: #0000000a;
 }
 
 .cNCard {
@@ -32,7 +32,7 @@
 	padding: 15px 36px 20px 80px;
 	margin-bottom: 20px;
 	background-color: #eafbea;
-	box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+	box-shadow: #0000000a;
 }
 
 .cardItems {
@@ -43,7 +43,7 @@
 	margin-right: 15px;
 	margin-bottom: 10px;
 	margin-left: 10px;
-	box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+	box-shadow: #0000000a;
 }
 
 .items {

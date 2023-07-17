@@ -7,7 +7,6 @@ import {
 import { SelectController, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import useBulkUpdate from './hooks/useBulkUpdate';
 import useGetCNDetails from './hooks/useGetCNDetails';
@@ -146,7 +145,7 @@ function ApprovePurchaseDeduction({
 							deducted_amount = '',
 						} = item || {};
 						return (
-							<div className={styles.cardItems} key={uuid()}>
+							<div className={styles.cardItems} key={item}>
 								<Checkbox
 									style={{ marginRight: '30px' }}
 									checked={selected[index]}
