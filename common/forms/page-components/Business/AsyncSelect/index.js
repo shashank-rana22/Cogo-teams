@@ -155,6 +155,7 @@ function AsyncSelect(props) {
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
@@ -162,10 +163,6 @@ function AsyncSelect(props) {
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
 	});
-
-	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
-		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
-	}
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
