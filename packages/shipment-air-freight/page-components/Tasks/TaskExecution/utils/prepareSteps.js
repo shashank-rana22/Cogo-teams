@@ -19,7 +19,7 @@ const dataExtractionFunc = (obj, index, arr, fieldTypeMapping) => {
 		return undefined;
 	}
 
-	return dataExtractionFunc(obj?.[arr?.[index]], index + INDEX_VALUE, arr);
+	return dataExtractionFunc(obj?.[arr?.[index]], index + INDEX_VALUE, arr, fieldTypeMapping);
 };
 
 const evalAdhocConditions = (requiredCondition) => {
