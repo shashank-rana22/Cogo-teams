@@ -3,6 +3,7 @@ import { IcMCenterAlign } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ActionConfirmation from './ActionConfirmation';
 import styles from './styles.module.css';
 
 const OPEN_TICKETS_CHECK = ['escalated', 'unresolved'];
@@ -36,8 +37,8 @@ function getActionType({ ticketStatus, isClosureAuthorizer }) {
 }
 
 function RenderContent({
-	filteredActions = [], isModal = false, handleAction = () => {}, isCurrentReviewer = false,
-	updateLoading = false, actionLoading = '', setActionLoading = () => {},
+	filteredActions = [], isModal = false, isCurrentReviewer = false,
+	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
 }) {
 	return (
 		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
@@ -50,10 +51,7 @@ function RenderContent({
 						size="sm"
 						themeType={isModal ? 'primary' : 'linkUi'}
 						className={cl`${styles.action_button} ${isModal ? styles.modal_button : ''}`}
-						onClick={(e) => {
-							setActionLoading(item);
-							handleAction(e, item);
-						}}
+						onClick={() => setConfirmationConfig({ show: true, actionType: item })}
 						loading={updateLoading && actionLoading === item}
 						disabled={updateLoading && actionLoading !== item}
 					>
@@ -66,6 +64,7 @@ function RenderContent({
 }
 
 function TicketActions({
+	id = '',
 	ticketStatus = '',
 	isModal = false,
 	updateLoading = false,
@@ -76,6 +75,9 @@ function TicketActions({
 	isCurrentReviewer = false,
 }) {
 	const [actionLoading, setActionLoading] = useState('');
+	const [confirmationConfig, setConfirmationConfig] = useState({ show: false, actionType: '' });
+	const { show, actionType } = confirmationConfig || {};
+
 	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
 
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
@@ -89,6 +91,12 @@ function TicketActions({
 		const { action, args } = HANDLE_ACTION_MAPPING[item] || {};
 
 		return action ? action(args) : handleTicket(e, { actionType: item });
+	};
+
+	const onSubmit = async (e) => {
+		setActionLoading(actionType);
+		await handleAction(e, actionType);
+		setConfirmationConfig({ show: false, actionType: '' });
 	};
 
 	if (isEmpty(filteredActions)) { return null; }
@@ -108,6 +116,7 @@ function TicketActions({
 							filteredActions={filteredActions}
 							setActionLoading={setActionLoading}
 							isCurrentReviewer={isCurrentReviewer}
+							setConfirmationConfig={setConfirmationConfig}
 						/>
 					)}
 				>
@@ -123,9 +132,16 @@ function TicketActions({
 						filteredActions={filteredActions}
 						setActionLoading={setActionLoading}
 						isCurrentReviewer={isCurrentReviewer}
+						setConfirmationConfig={setConfirmationConfig}
 					/>
 				)}
-
+			<ActionConfirmation
+				id={id}
+				show={show}
+				onSubmit={onSubmit}
+				actionType={actionType}
+				setConfirmationConfig={setConfirmationConfig}
+			/>
 		</div>
 	);
 }

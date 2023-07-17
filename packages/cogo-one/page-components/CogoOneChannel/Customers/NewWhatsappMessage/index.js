@@ -49,13 +49,15 @@ function NewWhatsappMessage({
 			return;
 		}
 
-		const { template_name } = args;
+		const { template_name, variables } = args;
 		sendUserWhatsappTemplate({
 			country_code    : country_code.slice(COUNTRY_CODE_INDEX),
 			whatsapp_number : number,
 			template_name,
+			variables,
 		});
 	};
+
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
 		communicationLoading      : loading,
