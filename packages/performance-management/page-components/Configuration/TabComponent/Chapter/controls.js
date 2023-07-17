@@ -7,7 +7,6 @@ const controls = [
 		type        : 'input',
 		placeholder : 'Enter chapter name',
 	},
-
 	{
 		name        : 'chapter_leader',
 		label       : 'Chapter leader',
@@ -21,7 +20,6 @@ const controls = [
 		},
 		params,
 	},
-
 	{
 		name        : 'sub_chapter_ids',
 		type        : 'asyncSelect',
@@ -34,7 +32,6 @@ const controls = [
 		},
 		params,
 	},
-
 ];
 
 export default controls;
