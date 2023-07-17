@@ -102,9 +102,9 @@ const useDraftBLHelper = ({
 
 			try {
 				const rpaMappings = {
-					cogo_shipment_id        : pendingTask.shipment_id,
+					cogo_shipment_id        : pendingTask?.shipment_id,
 					cogo_shipment_serial_no : shipment_data?.serial_id,
-					bill_of_lading          : body.documents[GLOBAL_CONSTANTS.zeroth_index].data.document_number,
+					bill_of_lading          : body?.documents[GLOBAL_CONSTANTS.zeroth_index]?.data?.document_number,
 				};
 
 				await submitShipmentMapping(rpaMappings);
