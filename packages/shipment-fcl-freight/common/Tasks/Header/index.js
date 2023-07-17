@@ -57,7 +57,7 @@ function Header({
 						</Popover>
 					) : null }
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
+						<div>Hide completed tasks</div>
 						<Toggle
 							checked={hideCompletedTasks}
 							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
@@ -65,7 +65,7 @@ function Header({
 					</div>
 
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
+						<div>Show only my tasks</div>
 
 						<Toggle
 							checked={showMyTasks}

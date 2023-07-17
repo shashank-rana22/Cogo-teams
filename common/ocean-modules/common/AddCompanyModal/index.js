@@ -1,6 +1,7 @@
 import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
+
 import TRADE_PARTY_MAPPING from '../../constants/TRADE_PARTY_MAPPING';
 import useCreateShipmentTradePartner from '../../hooks/useCreateShipmentTradePartner';
 import { convertObjectMappingToArray } from '../../utils/convertObjectMappingToArray';
@@ -16,8 +17,10 @@ function AddCompanyModal({
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
 	shipment_id,
-	importer_exporter_id, 
+	importer_exporter_id,
 	throughPoc = true,
+	shipment_data = {},
+	primary_service = {},
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
@@ -57,78 +60,87 @@ function AddCompanyModal({
 		createTrigger(params);
 	};
 
-	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)(); 
+	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 
-	const modalBodyContent = <div className={styles.modal_body_container}>
-		<div className={styles.role_container}>
-			<label>Role</label>
-			<Select
-				options={tradePartyOptions}
-				value={role}
-				size="sm"
-				disabled={trade_party_type}
-				onChange={(val) => setRole(val)}
+	const modalBodyContent = (
+		<div className={styles.modal_body_container}>
+			<div className={styles.role_container}>
+				<label>Role</label>
+				<Select
+					options={tradePartyOptions}
+					value={role}
+					size="sm"
+					disabled={trade_party_type}
+					onChange={(val) => setRole(val)}
+				/>
+			</div>
+			<div className={styles.radio_container}>
+				<RadioGroup
+					options={options}
+					onChange={(val) => setCompanyType(val)}
+					value={companyType}
+				/>
+			</div>
+			<Form
+				companyType={companyType}
+				tradePartyType={role}
+				tradePartnersData={tradePartnersData}
+				ref={formRef}
+				importer_exporter_id={importer_exporter_id}
+				shipment_id={shipment_id}
+				organization_id={organization_id}
+				shipment_data={shipment_data}
+				primary_service={primary_service}
 			/>
 		</div>
-		<div className={styles.radio_container}>
-			<RadioGroup
-				options={options}
-				onChange={(val) => setCompanyType(val)}
-				value={companyType}
-			/>
+	);
+
+	const modalFooterContent = (
+		<div className={styles.actions}>
+			<div className={styles.cancel}>
+				<Button
+					themeType="secondary"
+					onClick={onClose}
+					disabled={createLoading}
+				>
+					Cancel
+				</Button>
+			</div>
+			<div>
+				<Button
+					themeType="accent"
+					onClick={formSubmit}
+					disabled={createLoading}
+				>
+					Submit
+				</Button>
+			</div>
 		</div>
-		<Form
-			companyType={companyType}
-			tradePartyType={role}
-			tradePartnersData={tradePartnersData}
-			ref={formRef}
-			importer_exporter_id={importer_exporter_id}
-			shipment_id={shipment_id}
-			organization_id={organization_id}
-		/>
-	</div>
+	);
 
-const modalFooterContent =  <div className={styles.actions}>
-					<div className={styles.cancel}>
-						<Button
-							themeType="secondary"
-							onClick={onClose}
-							disabled={createLoading}
-						>
-							Cancel
-						</Button>
-					</div>
-					<div>
-						<Button
-							themeType="accent"
-							onClick={formSubmit}
-							disabled={createLoading}
-						>
-							Submit
-						</Button>
-					</div>
-				</div>
+	if (throughPoc) {
+		return (
+			<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
+				<Modal.Header title="Add Company" />
 
-	return  throughPoc ? (
-		<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
-			<Modal.Header title="Add Company" />
+				<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+					{ modalBodyContent}
+				</Modal.Body>
 
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
-				{ modalBodyContent}
-			</Modal.Body>
+				<Modal.Footer>
+					{ modalFooterContent}
+				</Modal.Footer>
 
-			<Modal.Footer>
-				{ modalFooterContent}
-			</Modal.Footer>
+			</Modal>
+		);
+	}
 
-		</Modal>
-	) : 
-	<div> 
-		{modalBodyContent}
-	<div className={styles.footer}>{modalFooterContent}</div>	
-	</div>
-	
-	;
+	return (
+		<div>
+			{modalBodyContent}
+			<div className={styles.footer}>{modalFooterContent}</div>
+		</div>
+	);
 }
 
 export default AddCompanyModal;

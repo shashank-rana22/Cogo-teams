@@ -15,7 +15,7 @@ function Frontside({
 }) {
 	const isReadonly = mode === MODE_READ;
 
-	const { bl_number } = initialValues;
+	const { bl_number } = initialValues || {};
 
 	return isReadonly ? (
 		<Read defaultValues={initialValues} />
