@@ -39,7 +39,7 @@ function VideoCall({
 		isMicActive         : true,
 		isVideoActive       : true,
 		isScreenShareActive : false,
-		isMaximize          : false,
+		isMinimize          : false,
 	});
 
 	const streamRef = useRef({

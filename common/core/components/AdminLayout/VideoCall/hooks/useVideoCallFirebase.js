@@ -149,7 +149,7 @@ function useVideoCallFirebase({
 			isMicActive         : true,
 			isVideoActive       : true,
 			isScreenShareActive : false,
-			isMaximize          : false,
+			isMinimize          : false,
 		});
 		setStreams({
 			user_stream   : null,
