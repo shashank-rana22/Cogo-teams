@@ -112,10 +112,8 @@ const evaluateExpression = (operator, lhs, rhs) => {
 	return true;
 };
 
-const evaluateObject = (control, task, shipment_data) => {
-	const FIELD_TYPE_MAPPING = {};
+const evaluateObject = (control, task, shipment_data, fieldTypeMapping) => {
 	const finalControl = control;
-	FIELD_TYPE_MAPPING[control.name] = control.type;
 
 	if (control.conditions) {
 		(control.conditions || []).forEach((obj) => {
@@ -125,12 +123,13 @@ const evaluateObject = (control, task, shipment_data) => {
 				finalControl[obj.key_to_add] = evaluateVal(
 					value_to_insert,
 					shipment_data,
+					fieldTypeMapping,
 				);
 			} else {
 				const {
 					leftHandSide, rightHandSide,
 					value, elseValue,
-				} = getConditionalParams(condition, shipment_data, obj, FIELD_TYPE_MAPPING);
+				} = getConditionalParams(condition, shipment_data, obj, fieldTypeMapping);
 				const addConditionsValue = evaluateExpression(
 					condition?.operator,
 					leftHandSide,
@@ -155,7 +154,8 @@ const evaluateObject = (control, task, shipment_data) => {
 		});
 	}
 	if (control?.type === 'fieldArray') {
-		finalControl.controls = (control.controls || []).map((ctrl) => evaluateObject(ctrl, task, shipment_data));
+		finalControl.controls = (control.controls || [])
+			.map((ctrl) => evaluateObject(ctrl, task, shipment_data, fieldTypeMapping));
 	}
 
 	return finalControl;
@@ -220,11 +220,16 @@ const conditionalAddition = (step, shipment_data) => {
 	return modifiedStep;
 };
 
-const injectDataIntoValues = (step, task, shipment_data) => {
+const injectDataIntoValues = (step, task, shipment_data, fieldTypeMapping) => {
+	let updatedFieldTypeMapping = { ...fieldTypeMapping };
+	step.controls.forEach((ctrl) => {
+		updatedFieldTypeMapping = { ...updatedFieldTypeMapping };
+		updatedFieldTypeMapping[ctrl.name] = ctrl.type;
+	});
 	const newStep = {
 		...step,
 		controls: (step.controls || []).map((ctrl) => ({
-			...evaluateObject(ctrl, task, shipment_data),
+			...evaluateObject(ctrl, task, shipment_data, updatedFieldTypeMapping),
 		})),
 	};
 
@@ -232,11 +237,13 @@ const injectDataIntoValues = (step, task, shipment_data) => {
 };
 
 const prepareSteps = (steps, task, primary_service = {}) => {
+	const FIELD_TYPE_MAPPING = {};
 	const filteredSteps = steps
 		?.filter((step) => evaluateCondition(step, primary_service, task))
 		?.map((step) => conditionalAddition(step, primary_service));
 
-	const dataRichUi = filteredSteps?.map((step) => injectDataIntoValues(step, task, primary_service));
+	const dataRichUi = filteredSteps
+		?.map((step) => injectDataIntoValues(step, task, primary_service, FIELD_TYPE_MAPPING));
 	return dataRichUi;
 };
 
