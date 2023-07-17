@@ -5,7 +5,7 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 const FIREBASE_QUERY_LIMIT = 1;
 
-export const getIsActive = async (firestore) => {
+async function getConstantsDoc({ firestore }) {
 	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
 
 	const constantsQuery = query(constantCollection, limit(FIREBASE_QUERY_LIMIT));
@@ -14,17 +14,21 @@ export const getIsActive = async (firestore) => {
 
 	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
 
+	return cogoOneConstantsDocs;
+}
+
+export const getIsActive = async ({ firestore, setIsLockedToggle }) => {
+	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
+
 	const { is_locked_screen = false } = cogoOneConstantsDocs?.data() || {};
 
-	return is_locked_screen;
+	setIsLockedToggle(is_locked_screen);
 };
 
 export const updateRoom = async ({ firestore, value }) => {
-	const constantRoom = collection(firestore, FIRESTORE_PATH.cogoone_constants);
+	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
 
-	const roomsQuery = query(constantRoom, limit(FIREBASE_QUERY_LIMIT));
-	const docs = await getDocs(roomsQuery);
-	const roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+	const roomId = cogoOneConstantsDocs?.id;
 
 	const docRef = doc(
 		firestore,

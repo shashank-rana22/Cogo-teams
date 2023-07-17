@@ -18,7 +18,7 @@ function useListChatAgents() {
 		agentType : '',
 	});
 
-	const { query:debounceSearchQuery = '', debounceQuery } = useDebounceQuery();
+	const { query: debounceSearchQuery = '', debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data: listAgentStatus }, trigger] = useRequest(
 		{

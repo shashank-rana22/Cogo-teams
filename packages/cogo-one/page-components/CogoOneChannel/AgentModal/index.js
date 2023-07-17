@@ -54,7 +54,7 @@ function AgentModal({
 		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
 
 	useEffect(() => {
-		setIsLockedToggle(getIsActive(firestore));
+		getIsActive({ firestore, setIsLockedToggle });
 	}, [firestore]);
 
 	return (
