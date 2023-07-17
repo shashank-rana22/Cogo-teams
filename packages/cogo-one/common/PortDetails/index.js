@@ -13,14 +13,15 @@ function PortDetails({ serviceData = {} }) {
 	const data = serviceData || {};
 	const { origin = {}, destination = {} } = getLocations({ data }) || {};
 
-	const countryName = (val) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
-	const handleLocationDetails = (location, icdInfo) => (
+	const countryName = ({ val }) => val?.split(',').slice(GET_LAST_ITEM)[GLOBAL_CONSTANTS.zeroth_index];
+
+	const handleLocationDetails = ({ location, icdInfo }) => (
 		<>
 			<div className={styles.port_code}>
 				{location?.port_code || location?.postal_code ? (
 					<div className={styles.code}>
 						(
-						{location?.port_code || location?.postal_code}
+						{location.port_code || location.postal_code}
 						)
 					</div>
 				) : (
@@ -31,7 +32,8 @@ function PortDetails({ serviceData = {} }) {
 			</div>
 
 			<div className={styles.value}>{location?.name}</div>
-			{icdInfo?.name ? <div className={styles.icd}>{icdInfo?.name}</div> : null}
+
+			{icdInfo?.name && <div className={styles.icd}>{icdInfo.name}</div>}
 		</>
 	);
 
@@ -56,7 +58,7 @@ function PortDetails({ serviceData = {} }) {
 					</div>
 
 					<div className={styles.flex_row_origin}>
-						{handleLocationDetails(origin)}
+						{handleLocationDetails({ location: origin })}
 					</div>
 				</div>
 			);
@@ -69,7 +71,7 @@ function PortDetails({ serviceData = {} }) {
 				</div>
 
 				<div className={styles.flex_row_origin}>
-					{handleLocationDetails(origin)}
+					{handleLocationDetails({ location: origin })}
 				</div>
 			</div>
 		);
@@ -94,7 +96,7 @@ function PortDetails({ serviceData = {} }) {
 				</div>
 
 				<div className={styles.country}>
-					{startCase(origin?.country || countryName(origin?.display_name))}
+					{startCase(origin?.country || countryName({ val: origin?.display_name }))}
 				</div>
 
 			</div>
@@ -114,7 +116,7 @@ function PortDetails({ serviceData = {} }) {
 					</div>
 				</div>
 				<div className={styles.country}>
-					{startCase(destination?.country || countryName(destination?.display_name))}
+					{startCase(destination?.country || countryName({ val: destination?.display_name }))}
 				</div>
 			</div>
 		</div>

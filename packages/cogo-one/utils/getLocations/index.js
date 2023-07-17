@@ -3,12 +3,12 @@ import { CHECKOUT_PORT_PAIR_MAPPING } from '../../constants/checkoutPortPairMapp
 import getLocationShipmentDetails from './getLocationShipmentDetails';
 import isSingleLocation from './isSingleLocation';
 
-const getPortConfigs = ({ data }) => {
+const getPortConfigs = ({ data = {} }) => {
 	if (data?.search_type) {
-		const origin = getLocationShipmentDetails({}, data, 'origin');
+		const origin = getLocationShipmentDetails({ summary: data, type: 'origin' });
 
-		const destination = !isSingleLocation(data?.search_type)
-			? getLocationShipmentDetails({}, data, 'destination')
+		const destination = !isSingleLocation({ searchType: data?.search_type })
+			? getLocationShipmentDetails({ summary: data, type: 'destination' })
 			: null;
 
 		return { origin, destination };

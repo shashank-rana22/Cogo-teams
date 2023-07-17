@@ -1,5 +1,4 @@
 import { Tooltip } from '@cogoport/components';
-import { Image } from '@cogoport/next';
 
 import { SHIPPING_LINE } from '../../../../constants/getShippingLines';
 import { getEventTitle } from '../../../../utils/getEventTitle';
@@ -25,11 +24,11 @@ function ShipmentDetails({ serviceData = {}, name = '' }) {
 				{shippingLines && (
 					<div className={styles.company_details}>
 						{shippingLines?.logo_url && (
-							<Image
+							<img // getting other hostname images
 								src={shippingLines?.logo_url}
 								alt="status-icon"
-								width={30}
-								height={30}
+								width="30px"
+								height="25px"
 							/>
 						)}
 						<Tooltip

@@ -1,4 +1,4 @@
-const isSingleLocation = (search_type) => {
+const isSingleLocation = ({ searchType }) => {
 	const onlySingleLocation = [
 		'fcl_customs',
 		'lcl_customs',
@@ -15,7 +15,7 @@ const isSingleLocation = (search_type) => {
 		'lcl_freight_local',
 	];
 
-	return onlySingleLocation.includes(search_type);
+	return onlySingleLocation.includes(searchType);
 };
 
 export default isSingleLocation;

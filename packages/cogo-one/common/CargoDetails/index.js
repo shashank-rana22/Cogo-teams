@@ -3,7 +3,7 @@ import React from 'react';
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
-const labels = [
+const LABELS = [
 	'container_size',
 	'containers_count',
 	'container_type',
@@ -21,7 +21,7 @@ function CargoDetails({ detail = {} }) {
 	const COMMODITY = 'commodity';
 	return (
 		<div className={styles.shipment_details}>
-			{labels.map((label) => {
+			{(LABELS || []).map((label) => {
 				if (label === COMMODITY && !detail?.[label] && isFTL) {
 					return (
 						<div className={styles.chips} key={label}>

@@ -1,7 +1,7 @@
 import isSingleLocation from './isSingleLocation';
 
-const getLocationShipmentDetails = (data, summary, type) => {
-	const { search_type } = summary;
+const getLocationShipmentDetails = ({ data = {}, summary = {}, type = '' }) => {
+	const { search_type = '' } = summary;
 
 	const SUFFIX_CONFIG = {
 		fcl_freight             : 'port',
@@ -27,7 +27,7 @@ const getLocationShipmentDetails = (data, summary, type) => {
 
 	const suffix =	SUFFIX_CONFIG[`${type}_${search_type}`] || SUFFIX_CONFIG[search_type];
 
-	const objName =		!isSingleLocation(search_type)
+	const objName =	!isSingleLocation({ searchType: search_type })
 		&& !['ftl_freight', 'ltl_freight'].includes(search_type)
 		? `${type}_${suffix}`
 		: suffix;
