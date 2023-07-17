@@ -362,6 +362,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'delete_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

@@ -6,12 +6,20 @@ import useListKRA from '../EditKRA/hooks/useListKRA';
 
 import getColumns from './getColumns';
 import styles from './styles.module.css';
+import useDeleteKRA from './useDeleteKRA';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
 
 function ManageKRA() {
 	const router = useRouter();
 	const { data, loading } = useListKRA();
+
+	const {
+		onClickDeleteKRA,
+		loading:deleteKRALoading,
+		showPopOver,
+		setShowPopOver,
+	} = useDeleteKRA();
 
 	const handleEditKRA = (kra_id) => {
 		router.push(`/performance-management/kra-management/manage-kra/update-kra/${kra_id}`);
@@ -21,7 +29,7 @@ function ManageKRA() {
 		router.push('/performance-management/kra-management/manage-kra/create-kra');
 	};
 
-	const columns = getColumns({ handleEditKRA });
+	const columns = getColumns({ handleEditKRA, showPopOver, setShowPopOver, deleteKRALoading, onClickDeleteKRA });
 
 	return (
 		<div className={styles.container}>
