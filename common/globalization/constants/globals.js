@@ -354,6 +354,7 @@ const GLOBAL_CONSTANTS = {
 		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		file_upload_url                   : /:finalUrl=>"([^"]*)"/,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
