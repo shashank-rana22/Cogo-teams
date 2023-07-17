@@ -11,10 +11,15 @@ import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
-function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
+function CommunicationModals({
+	mailProps = {},
+	setModalType = () => {},
+	modalType = {},
+	userId = '',
+	viewType = '',
+}) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
-	const [attachments, setAttachments] = useState([]);
 
 	const {
 		replyMailApi = () => {},
@@ -84,14 +89,13 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 			<NewWhatsappMessage
 				setModalType={setModalType}
 				modalType={modalType}
+				viewType={viewType}
 			/>
 
 			{!!buttonType && (
 				<MailModal
 					mailProps={mailProps}
 					userId={userId}
-					attachments={attachments}
-					setAttachments={setAttachments}
 					activeMail={activeMail}
 					replyMailApi={replyMailApi}
 					replyLoading={replyLoading}
