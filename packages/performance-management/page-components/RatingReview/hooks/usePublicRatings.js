@@ -2,8 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
 import { useState } from 'react';
+
+import { formattedDate } from '../../../common/formattedDate';
 
 const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, fetchRatingReviewDetails }) => {
 	const { end_date, start_date } = selectCycle || {};
@@ -43,8 +44,8 @@ const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, f
 				data: {
 					employee_data,
 					manager_user_id : user?.id,
-					start_date      : format(start_date, 'YYYY-MM-dd'),
-					end_date        : format(end_date, 'YYYY-MM-dd'),
+					start_date      : formattedDate(start_date),
+					end_date        : formattedDate(end_date),
 					level           : level === 'vertical_head' ? activeTab : level,
 				},
 			});

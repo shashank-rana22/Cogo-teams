@@ -22,8 +22,6 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 		starRating, setStarRating, comments, setCommemts,
 	} = useUpdateEmployeeFinalRating({ data, selectCycle, setShow, fetchRatingReviewDetails });
 
-	console.log('comments', comments);
-
 	return (
 		<Modal show={show} placement="top" className={styles.modal} size="xl" onClose={() => setShow(false)}>
 			<Modal.Header title={(
@@ -189,7 +187,6 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 						>
 							Cancel
 						</Button>
-
 					</div>
 
 					<Button
@@ -199,7 +196,6 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 					>
 						Submit
 					</Button>
-
 				</div>
 			</Modal.Footer>
 

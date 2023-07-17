@@ -47,10 +47,10 @@
 
 .level {
 	display: flex;
+	width: 100%;
 	padding: 8px;
 }
 
 .publish_button {
 	padding: 3px;
-	margin-left: 180%;
 }

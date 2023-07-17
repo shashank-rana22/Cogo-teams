@@ -21,7 +21,7 @@ function HeaderComponent({ props = {} }) {
 		ratingCycleOptions,
 		selectCycle,
 		setSelectCycle,
-	} = useGetRatingCycles({ });
+	} = useGetRatingCycles();
 
 	const { data, fetchRatingReviewDetails, loading: getRatingApiLoading } = useGetRatingReviewDetails(
 		{ selectValue, level, selectCycle, activeTab },
@@ -37,15 +37,15 @@ function HeaderComponent({ props = {} }) {
 	return (
 		<div>
 			<div className={styles.select_row}>
-				<div className={styles.select_container}>
-					<Select
-						value={selectValue}
-						onChange={setSelectValue}
-						options={activeTab === 'vertical_head' ? selectOptions : EMPLOYEES_OPTIONS}
-					/>
-				</div>
-
 				<div className={styles.level}>
+					<div className={styles.select_container}>
+						<Select
+							value={selectValue}
+							onChange={setSelectValue}
+							options={activeTab === 'vertical_head' ? selectOptions : EMPLOYEES_OPTIONS}
+						/>
+					</div>
+
 					<div className={styles.ratings_cycles}>
 						<Select
 							value={selectCycle}
@@ -54,17 +54,17 @@ function HeaderComponent({ props = {} }) {
 							width="100px"
 						/>
 					</div>
+				</div>
 
-					<div className={styles.publish_button}>
-						<Button
-							disabled={isEmpty(selectedEmployees)}
-							onClick={publishRatings}
-							loading={publishButtonLoading}
-						>
-							Publish
+				<div className={styles.publish_button}>
+					<Button
+						disabled={isEmpty(selectedEmployees)}
+						onClick={publishRatings}
+						loading={publishButtonLoading}
+					>
+						Publish
 
-						</Button>
-					</div>
+					</Button>
 				</div>
 			</div>
 

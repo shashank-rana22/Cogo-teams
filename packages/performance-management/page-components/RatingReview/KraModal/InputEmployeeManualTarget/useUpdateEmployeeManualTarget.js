@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useState } from 'react';
+
+import { formattedDate } from '../../../../common/formattedDate';
 
 const MIN_RATING = 0;
 
@@ -24,8 +25,8 @@ const useUpdateEmployeeManualTarget = ({ item, data, selectCycle, employeeKraDet
 					manager_id            : data?.employee_details?.manager_id,
 					kra_id                : item.kra_id,
 					target_achieved_value : val,
-					start_date            : format(start_date, 'yyyy-MM-dd'),
-					end_date              : format(end_date, 'yyyy-MM-dd'),
+					start_date            : formattedDate(start_date),
+					end_date              : formattedDate(end_date),
 				},
 			});
 

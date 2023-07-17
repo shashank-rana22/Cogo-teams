@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 const useGetRatingCycles = () => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
+
 	const [selectCycle, setSelectCycle] = useState('');
 
 	const [{ data, loading }] = useHarbourRequest({
@@ -17,6 +18,7 @@ const useGetRatingCycles = () => {
 
 	const ratingCycleOptions = (data || []).map((element) => {
 		const { start_date, end_date } = element;
+
 		return {
 			value : element,
 			label : `${start_date} to ${end_date}`,

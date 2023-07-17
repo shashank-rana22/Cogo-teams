@@ -21,6 +21,7 @@ function AccordianDisplay({
 	setDataFrom,
 }) {
 	const { employee_details, kra_details } = data;
+
 	const [isActive, setIsActive] = useState(false);
 
 	const OBJECT_OF_EMPLOYEE_IDS = employee_details?.reduce((acc, obj) => {

@@ -2,8 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
+
+import { formattedDate } from '../../../common/formattedDate';
 
 const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab }) => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
@@ -22,8 +23,8 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab 
 					manager_id : user?.id,
 					label      : selectValue,
 					level      : level === 'vertical_head' ? activeTab : level,
-					end_date   : format(end_date, 'yyyy-MM-dd'),
-					start_date : format(start_date, 'yyyy-MM-dd'),
+					end_date   : formattedDate(end_date),
+					start_date : formattedDate(start_date),
 
 				},
 			});

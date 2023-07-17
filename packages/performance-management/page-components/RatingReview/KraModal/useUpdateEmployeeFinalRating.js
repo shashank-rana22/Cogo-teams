@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useState } from 'react';
+
+import { formattedDate } from '../../../common/formattedDate';
 
 const MIN_RATING = 0;
 
@@ -34,8 +35,8 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 					manager_id          : data?.employee_details?.manager_id,
 					kra_rating_assigned : starRating,
 					comments,
-					start_date          : format(start_date, 'yyyy-MM-dd'),
-					end_date            : format(end_date, 'yyyy-MM-dd'),
+					start_date          : formattedDate(start_date),
+					end_date            : formattedDate(end_date),
 				},
 			});
 			Toast.success('Sucessfully Update Rating');

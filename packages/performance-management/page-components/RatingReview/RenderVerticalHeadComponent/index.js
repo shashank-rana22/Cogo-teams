@@ -10,22 +10,6 @@ import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data found';
 
-function RenderTitle({ title }) {
-	return (
-		<div className={styles.title}>
-			<div>{startCase(title)}</div>
-
-			{/* {level === 'vertical_head' && activeTab === 'vertical_head' && (
-				<div className={styles.average_value}>
-					Average Rating :
-					{' '}
-					{averageValue || 'N/A'}
-				</div>
-			)} */}
-		</div>
-	);
-}
-
 function RenderStyledTable({
 	employee_list,
 	identifier_key,
@@ -69,7 +53,6 @@ function RenderStyledTable({
 
 function RenderVerticalHeadComponent({
 	list,
-	setAccordianList,
 	setSelectedEmployees,
 	selectedEmployees,
 	level,
@@ -107,23 +90,14 @@ function RenderVerticalHeadComponent({
 	}
 
 	return (list || []).map((element) => {
-		const { details:employee_list, label, average_value } = element || {};
+		const { details:employee_list, label } = element || {};
 
 		return (
 			<div key={label} className={styles.single_accordian}>
 				<Accordion
 					type="text"
 					isOpen={label === 'all_employees'}
-					title={(
-						<RenderTitle
-							title={label}
-							averageValue={average_value}
-							employee_list={employee_list}
-							setAccordianList={setAccordianList}
-							level={level}
-							activeTab={activeTab}
-						/>
-					)}
+					title={startCase(label)}
 				>
 					<RenderStyledTable
 						employee_list={employee_list}
