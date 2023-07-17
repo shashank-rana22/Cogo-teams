@@ -19,6 +19,7 @@ function MailDetails({
 	activeMailAddress = '',
 }) {
 	const [searchQuery, setSearchQuety] = useState('');
+
 	const {
 		listData = {},
 		loading,

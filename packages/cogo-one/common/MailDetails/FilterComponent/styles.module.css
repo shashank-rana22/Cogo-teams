@@ -9,3 +9,13 @@
 	cursor: pointer;
 	fill: #6f6f6f;
 }
+
+.popover_component {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			padding: 0;
+		}
+	}
+}

@@ -1,9 +1,13 @@
 const controls = [
 	{
-		label       : '',
+		label       : 'Mail Type',
 		name        : 'is_read',
-		controlType : 'checkboxGroup',
+		controlType : 'radio',
 		options     : [
+			{
+				label : 'All',
+				value : 'all',
+			},
 			{
 				label : 'Unread',
 				value : 'unread',
@@ -13,7 +17,7 @@ const controls = [
 	{
 		label       : 'Importance',
 		name        : 'importance',
-		controlType : 'checkboxGroup',
+		controlType : 'radio',
 		options     : [
 			{
 				label : 'Hight',
