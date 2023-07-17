@@ -29,8 +29,8 @@ function ApprovedAWB({
 			const { documentId, shipmentId, serviceId, documentUrl } = singleItem || {};
 			const payload = {
 				id              : documentId,
-				shipment_id     : shipmentId,
-				document_type   : 'draft_airway_bill',
+				shipmentId,
+				documentType    : 'draft_airway_bill',
 				handedOverForTd : true,
 				serviceId,
 				documentUrl,

@@ -46,12 +46,12 @@ function SaveDocumentContainer({
 		const { file } = getFileObject(newImage, 'awb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
-			id            : documentId,
-			shipment_id   : shipmentId || pendingShipmentId,
+			id           : documentId,
+			shipmentId   : shipmentId || pendingShipmentId,
 			...formData,
-			document_type : category === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
+			documentType : category === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
 			serviceId,
-			documentUrl   : res || undefined,
+			documentUrl  : res || undefined,
 		};
 
 		const individualCopyPayload = {
