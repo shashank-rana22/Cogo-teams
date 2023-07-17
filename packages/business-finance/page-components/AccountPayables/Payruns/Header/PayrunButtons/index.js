@@ -5,16 +5,21 @@ import React, { useState } from 'react';
 import useGetAllotEntityBank from '../../hooks/useGetAllotEntityBank';
 
 import AllotBankList from './AllotBankList';
+import SendReportModal from './SendReportModal';
+import UploadUTR from './UploadUTR';
 
 function PayrunButtons({
 	activePayrunTab, setActivePayrunTab = () => {}, isInvoiceView, overseasData,
 	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null,
-	setCheckedRow = () => {},
+	setCheckedRow = () => {}, itemData = {}, activeEntity = '',
 }) {
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
 	});
 	const [showAllotBank, setShowAllotBank] = useState(false);
+	const [showReport, setShowReport] = useState(false);
+	const [showUploadUTR, setShowUploadUTR] = useState(false);
+
 	if (activePayrunTab === 'AUDITED' && !isInvoiceView) {
 		return (
 			<div>
@@ -50,16 +55,35 @@ function PayrunButtons({
 	}
 	if (activePayrunTab === 'UPLOAD_HISTORY') {
 		return (
-			<Button>
-				UPLOAD BULK UTR
-			</Button>
+			<div>
+				<Button onClick={() => setShowUploadUTR(true)}>
+					UPLOAD BULK UTR
+				</Button>
+				{showUploadUTR ? (
+					<UploadUTR
+						showUploadUTR={showUploadUTR}
+						setShowUploadUTR={setShowUploadUTR}
+						activeEntity={activeEntity}
+					/>
+				) : null }
+			</div>
 		);
 	}
 	if (activePayrunTab === 'PAID' && overseasData !== 'ADVANCE_PAYMRNT') {
 		return (
-			<Button themeType="secondary">
-				SEND REPORT
-			</Button>
+			<div>
+				<Button themeType="secondary" onClick={() => setShowReport(true)}>
+					SEND REPORT
+				</Button>
+				{showReport ? (
+					<SendReportModal
+						showReport={showReport}
+						setShowReport={setShowReport}
+						activePayrunTab={activePayrunTab}
+						itemData={itemData}
+					/>
+				) : null}
+			</div>
 		);
 	}
 }

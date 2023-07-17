@@ -43,6 +43,8 @@ function SelectFilters({
 	setSelectedPayrun = () => {},
 	checkedRow = null,
 	setCheckedRow = () => {},
+	itemData = {},
+	activeEntity = '',
 }) {
 	const { search } = globalFilters || {};
 	const { entityBank = [] } = useGetEntityBanks({});
@@ -150,6 +152,8 @@ function SelectFilters({
 						setSelectedPayrun={setSelectedPayrun}
 						checkedRow={checkedRow}
 						setCheckedRow={setCheckedRow}
+						itemData={itemData}
+						activeEntity={activeEntity}
 					/>
 				</div>
 			</div>

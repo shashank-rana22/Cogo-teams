@@ -8,7 +8,7 @@ import InvoiceCard from './InvoiceCard/index';
 import RenderFunctions from './renderFunction/index';
 import styles from './styles.module.css';
 
-function Payruns() {
+function Payruns({ activeEntity = '' }) {
 	const [activePayrunTab, setActivePayrunTab] = useState('INITIATED');
 	const [isInvoiceView, setIsInvoiceView] = useState(false);
 	const [overseasData, setOverseasData] = useState('NORMAL');
@@ -63,6 +63,8 @@ function Payruns() {
 				setSelectedPayrun={setSelectedPayrun}
 				checkedRow={checkedRow}
 				setCheckedRow={setCheckedRow}
+				itemData={data}
+				activeEntity={activeEntity}
 			/>
 			{selectedPayrun ? <InvoiceCard setSelectedPayrun={setSelectedPayrun} itemData={data} /> : null}
 			<List

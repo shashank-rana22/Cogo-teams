@@ -18,6 +18,8 @@ function Header({
 	setSelectedPayrun = () => {},
 	checkedRow = null,
 	setCheckedRow = () => {},
+	itemData = {},
+	activeEntity = '',
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
@@ -87,6 +89,8 @@ function Header({
 					setSelectedPayrun={setSelectedPayrun}
 					checkedRow={checkedRow}
 					setCheckedRow={setCheckedRow}
+					itemData={itemData}
+					activeEntity={activeEntity}
 				/>
 			</div>
 

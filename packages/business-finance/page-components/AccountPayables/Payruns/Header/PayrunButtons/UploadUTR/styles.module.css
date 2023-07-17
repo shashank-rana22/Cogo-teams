@@ -1,0 +1,9 @@
+.download_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-left: 120px;
+}
+
+.icon {
+	margin-left: 2px;
+}
