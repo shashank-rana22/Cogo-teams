@@ -8,10 +8,13 @@ import {
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
 	ApproveTruck,
+	ApprovePurchaseDeduction,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
+
+const LAST_INDEX = 1;
 
 function ExecuteTask({
 	task = {},
@@ -31,7 +34,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - LAST_INDEX]
 		: {};
 
 	if (loading) {
@@ -83,6 +86,21 @@ function ExecuteTask({
 			/>
 		);
 	}
+	if (
+		task.task === 'approve_purchase_deduction'
+		&& task.shipment_type === 'ftl_freight'
+	) {
+		return (
+			<ApprovePurchaseDeduction
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
 
 	return (
 		<ExecuteStep
@@ -90,7 +108,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - LAST_INDEX}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
