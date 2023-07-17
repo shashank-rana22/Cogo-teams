@@ -11,8 +11,8 @@ import getMaskedNumber from '../../../../../utils/getMaskedNumber';
 import ReasonModal from './ReasonModal';
 import styles from './styles.module.css';
 
-const MAX_SHOW_LENGTH = 2;
-const MIN_SHOW_LENGTH = 0;
+const MAX_PREVIEW_LIMIT = 2;
+const MIN_PREVIEW_LIMIT = 0;
 
 function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 	const dispatch = useDispatch();
@@ -31,9 +31,9 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 		organization_id = '', work_scopes = [],
 	} = user || {};
 
-	const lessList = (work_scopes || []).slice(MIN_SHOW_LENGTH, MAX_SHOW_LENGTH);
-	const moreList = (work_scopes || []).slice(MAX_SHOW_LENGTH);
-	const showMoreList = (work_scopes || []).length > MAX_SHOW_LENGTH;
+	const lessList = (work_scopes || []).slice(MIN_PREVIEW_LIMIT, MAX_PREVIEW_LIMIT);
+	const moreList = (work_scopes || []).slice(MAX_PREVIEW_LIMIT);
+	const showMoreList = (work_scopes || []).length > MAX_PREVIEW_LIMIT;
 
 	const onClose = ({ reset }) => {
 		setMaskConfig((prev) => ({ ...prev, showReasonModal: false }));
@@ -104,7 +104,7 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false }) {
 							<span>
 								{`${
 									mobile_country_code || ''
-								} ${getMaskedNumber(mobile_number)}`}
+								} ${getMaskedNumber({ number: mobile_number })}`}
 
 							</span>
 						)}

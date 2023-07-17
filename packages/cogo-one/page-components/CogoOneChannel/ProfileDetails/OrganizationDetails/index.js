@@ -31,7 +31,10 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 }) {
 	const [showConvertModal, setShowConvertModal] = useState(false);
-	const { organization_id: messageOrgId = '', user_id: messageUserId = '' } = formattedMessageData || {};
+	const {
+		organization_id: messageOrgId = '', user_id: messageUserId = '',
+		account_type = '',
+	} = formattedMessageData || {};
 	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
@@ -39,7 +42,7 @@ function OrganizationDetails({
 	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
-	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
+	const { agent = {}, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const isOrgUsersVisible = account_type === 'service_provider';
 	const {
 		organizationUsersData,

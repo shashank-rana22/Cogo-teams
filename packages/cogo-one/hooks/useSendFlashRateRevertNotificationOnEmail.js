@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({ userId, response = {} }) => ({
+const getPayload = ({ userId, bookingRateId }) => ({
 	source_user_id        : userId,
-	flash_booking_rate_id : response?.data?.id,
+	flash_booking_rate_id : bookingRateId,
 });
 
 const useSendFlashRateRevertNotificationOnEmail = ({ userId }) => {
@@ -13,10 +13,10 @@ const useSendFlashRateRevertNotificationOnEmail = ({ userId }) => {
 		method : 'post',
 	}, { manual: true });
 
-	const sendNotificationEmail = async ({ response }) => {
+	const sendNotificationEmail = async ({ bookingRateId = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ userId, response }),
+				data: getPayload({ userId, bookingRateId }),
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

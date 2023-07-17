@@ -38,7 +38,7 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates, charge
 			});
 
 			if (response?.data?.id) {
-				await sendNotificationEmail({ response });
+				await sendNotificationEmail({ bookingRateId: response?.data?.id });
 			}
 
 			Toast.success('Price successfully reverted.');
