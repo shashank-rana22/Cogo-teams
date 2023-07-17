@@ -1,6 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
@@ -14,13 +13,13 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
-	{ label: 'Cancel', value: 'cancel' },
-];
-const PRIMARY_BUTTON_INDEX = 1;
-const SECONDARY_BUTTON_INDEX = 2;
+const ACTION_BUTTON_ITEMS = ['editButton', 'editParamButton', 'cancelButton'];
+
+const actionButtons = {
+	editButton      : { label: 'Edit', value: 'supplier_reallocation' },
+	editParamButton : { label: 'Edit Params', value: 'edit_params' },
+	cancelButton    : { label: 'Cancel', value: 'cancel' },
+};
 
 function EditCancelService({ serviceData = {} }) {
 	const user_data = useSelector((({ profile }) => profile?.user));
@@ -37,35 +36,38 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[GLOBAL_CONSTANTS.zeroth_index].show = getCanEditSupplier({
+	actionButtons.editButton.show = getCanEditSupplier({
 		shipment_data,
 		user_data,
 		state,
 		stakeholderConfig,
 	});
-	actionButtons[PRIMARY_BUTTON_INDEX].show = getCanEditParams({
+	actionButtons.editParamButton.show = getCanEditParams({
 		shipment_data,
 		user_data,
 		serviceData,
 		stakeholderConfig,
 	});
-	actionButtons[SECONDARY_BUTTON_INDEX].show = getCanCancelService({ state, stakeholderConfig });
+	actionButtons.cancelButton.show = getCanCancelService({ state, stakeholderConfig });
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTON_ITEMS.some((actionButtonName) => actionButtons[actionButtonName].show)) {
 		return null;
 	}
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
-		<Button
-			key={value}
-			className={styles.action_button}
-			onClick={() => openModal(value)}
-			themeType="tertiary"
-			size="md"
-		>
-			{label}
-		</Button>
-	) : null));
+	const content = ACTION_BUTTON_ITEMS.map((actionButtonName) => {
+		const { label, value, show } = actionButtons[actionButtonName];
+		return (show ? (
+			<Button
+				key={value}
+				className={styles.action_button}
+				onClick={() => openModal(value)}
+				themeType="tertiary"
+				size="md"
+			>
+				{label}
+			</Button>
+		) : null);
+	});
 
 	return (
 		<div className={styles.container}>
