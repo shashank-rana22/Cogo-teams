@@ -100,3 +100,28 @@
 .marginright {
 	margin-right: 16px;
 }
+
+.uploadbuttonwrapper {
+	position: relative;
+}
+
+.uploadbuttonwrapper > .uploadtooltip {
+	display: none;
+}
+
+.uploadbuttonwrapper:hover > .uploadtooltip {
+	position: absolute;
+	top: 110%;
+	z-index: 999;
+	display: block;
+	padding: 5px 10px;
+	font-size: 10px;
+	color: #000;
+	white-space: nowrap;
+	background-color: #fff;
+	border: 1px solid #000;
+	border-radius: 5px;
+	box-shadow:
+		#00000030 0 10px 20px,
+		#0000003b 0 6px 6px;
+}

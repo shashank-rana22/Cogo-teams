@@ -31,6 +31,7 @@ function ModalHeader({
 			</div>
 			<TicketActions
 				isModal
+				id={id}
 				updateLoading={updateLoading}
 				ticketStatus={ticketStatus}
 				handleTicket={handleTicket}
