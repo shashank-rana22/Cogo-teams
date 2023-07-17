@@ -5,13 +5,12 @@ import { useState, useContext, useEffect, useMemo } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
+import isMileStoneCompleted from './helpers/isMilestoneCompleted';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
 const OFFSET_TO_CHECK_LAST_INDEX = 1;
-
-const ICD_MILESTONES_TO_SHOW_COMPLETED = ['Container Departed From ICD', 'Container Arrived At destination ICD'];
 
 function Timeline() {
 	const {
@@ -51,8 +50,9 @@ function Timeline() {
 		<div className={styles.container}>
 			<div className={styles.list_container}>
 				{(filteredTimelineData || []).map((timelineItem, index) => {
-					consecutivelyCompleted = consecutivelyCompleted && (timelineItem.completed_on
-						|| ICD_MILESTONES_TO_SHOW_COMPLETED.includes(timelineItem?.milestone));
+					consecutivelyCompleted = isMileStoneCompleted({
+						consecutivelyCompleted, timelineItem,
+					})?.consecutivelyCompleted;
 
 					return (
 						<TimelineItem
@@ -60,7 +60,6 @@ function Timeline() {
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + OFFSET_TO_CHECK_LAST_INDEX}
 							key={keysForTimlineItems[index]}
-							icd_milestones_to_show_completed={ICD_MILESTONES_TO_SHOW_COMPLETED}
 						/>
 					);
 				})}
