@@ -14,7 +14,9 @@ const getFormatedRates = (type, data, singleServiceData) => {
 								|| element?.shipping_line?.business_name || element?.shipping_line?.short_name,
 				air_line: element?.reverted_airline?.business_name
 							|| element?.airline?.business_name,
-				price_type                        : element?.data?.price_type,
+				price_type                        : validities?.price_type,
+				is_minimum_price_rate             : validities?.is_minimum_price_rate,
+				chargeable_weight                 : validities?.chargeable_weight,
 				container_count,
 				service_provider                  : element?.service_provider,
 				price                             : Number(validities?.total_price) / Number(container_count),

@@ -113,23 +113,30 @@ function Card({
 						</div>
 						<div className={styles.source}>
 							{
-							singleServiceData?.is_minimum_price_shipment ? (
+							data?.rowData?.is_minimum_price_rate ? (
 								<div>
 									<Pill size="md" color="#FEF3E9">
-										minimum price shipment :
-										{singleServiceData?.is_minimum_price_shipment}
+										is minimum price rate : yes
 									</Pill>
 								</div>
-							) : null
+							)
+								: (
+									<Pill size="md" color="#FEF3E9">
+										is minimum price rate : no
+									</Pill>
+								)
 							}
 						</div>
 						<div className={styles.source}>
 							{
-							singleServiceData?.chargeable_weight ? (
+							data?.rowData?.chargeable_weight ? (
 								<div>
 									<Pill size="md" color="#FEF3E9">
 										chargeable weight :
-										{singleServiceData?.chargeable_weight}
+										{' '}
+										{data?.rowData?.chargeable_weight}
+										{' '}
+										kg
 									</Pill>
 								</div>
 							) : null
@@ -137,11 +144,12 @@ function Card({
 						</div>
 						<div className={styles.source}>
 							{
-							singleServiceData?.price_type ? (
+							data?.rowData?.price_type ? (
 								<div>
 									<Pill size="md" color="#FEF3E9">
 										price type :
-										{singleServiceData?.price_type?.replace(/_/g, ' ')}
+										{' '}
+										{data?.rowData?.price_type?.replace(/_/g, ' ')}
 									</Pill>
 								</div>
 							) : null
