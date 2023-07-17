@@ -6,7 +6,7 @@ import { jsPDF as JsPDF } from 'jspdf';
 import React, { useState } from 'react';
 
 import { BACK_PAGE, FOOTER_IMAGES } from '../../../constants/image-copies';
-import useUpdateIndividualEditing from '../../../hooks/useUpdateIndividualEditing';
+import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
 import getFileObject from '../../../utils/getFileObject';
 import useGetMediaUrl from '../../../utils/useGetMediaUrl';
 import SelectDocumentCopies from '../SelectDocumentCopies';
@@ -43,13 +43,13 @@ function DownloadDocumentContainer({
 	const [copiesValue, copiesOnChange] = useState([]);
 
 	const {
-		document_number: documentNumber, awbNumber, documentType, id,
+		document_number: documentNumber, awbNumber, documentType, shipmentId, pendingShipmentId,
 		documentState, documentId, serviceId,
 	} = taskItem || {};
 
 	const { handleUpload } = useGetMediaUrl();
 
-	const { updateIndividualEditing, loading } = useUpdateIndividualEditing({});
+	const { updateShipment, loading } = useUpdateShipmentDocument({});
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
@@ -63,22 +63,17 @@ function DownloadDocumentContainer({
 		const { file } = getFileObject(newImage, 'awb.pdf');
 		const res = await handleUpload('awb.pdf', file);
 		const payload = {
-			data: {
-				...taskItem,
-				status          : 'generated',
-				document_number : documentNumber,
-				service_id      : serviceId,
-				service_type    : 'air_freight_service',
-			},
-			id,
-			documentId,
-			documentType: documentType === 'draft_airway_bill'
+			...taskItem,
+			id           : documentId,
+			shipmentId   : shipmentId || pendingShipmentId,
+			documentType : documentType === 'draft_airway_bill'
 				? 'draft_airway_bill' : 'draft_house_airway_bill',
-			documentNumber,
+			serviceId,
 			documentUrl: res || undefined,
 		};
-		updateIndividualEditing(payload);
-		setSaveDocument(false);
+		updateShipment({ payload }).then(() => {
+			setSaveDocument(false);
+		});
 	};
 
 	const handleView = (download24) => {

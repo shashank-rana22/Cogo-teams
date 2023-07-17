@@ -21,6 +21,7 @@ function SaveDocumentContainer({
 	taskItem = {},
 	formData = {},
 	editCopies = '',
+	setEditCopies = () => {},
 	listAPI = () => {},
 }) {
 	const {
@@ -71,7 +72,12 @@ function SaveDocumentContainer({
 		};
 
 		if (editCopies) {
-			updateIndividualEditing(individualCopyPayload);
+			updateIndividualEditing(individualCopyPayload).then(() => {
+				setViewDoc(false);
+				setBack(false);
+				setEditCopies('');
+				listAPI();
+			});
 		} else {
 			updateShipment({ payload }).then(() => {
 				setViewDoc(false);

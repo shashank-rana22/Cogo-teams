@@ -24,10 +24,11 @@ function AWBDocument({
 	listAPI = () => {},
 	back = false,
 	setBack = () => {},
+	editCopies = '',
+	setEditCopies = () => {},
 }) {
 	const [whiteout, setWhiteout] = useState(false);
 	const [saveDocument, setSaveDocument] = useState(false);
-	const [editCopies, setEditCopies] = useState('');
 
 	const ref = createRef(null);
 
@@ -89,7 +90,7 @@ function AWBDocument({
 								/>
 								<ContainerDetails
 									formData={taskItem}
-									chargeableWeight={6}
+									chargeableWeight={taskItem?.chargeableWeight}
 									whiteout={whiteout}
 								/>
 								<ChargeDetails
@@ -117,6 +118,7 @@ function AWBDocument({
 								taskItem={taskItem}
 								formData={formData}
 								editCopies={editCopies}
+								setEditCopies={setEditCopies}
 								listAPI={listAPI}
 							/>
 						)}
