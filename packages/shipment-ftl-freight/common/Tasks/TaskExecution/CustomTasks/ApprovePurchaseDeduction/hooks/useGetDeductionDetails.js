@@ -20,7 +20,7 @@ const useGetDeductionDetails = (shipment_data, watchCN) => {
 				params: payload,
 			});
 		} catch (e) {
-			Toast.error(getApiErrorString(e?.data) || 'Something went wrong !! ');
+			Toast.error(getApiErrorString(e?.response?.data) || 'Something went wrong !! ');
 		}
 	}, [shipment_data?.id, trigger, watchCN]);
 

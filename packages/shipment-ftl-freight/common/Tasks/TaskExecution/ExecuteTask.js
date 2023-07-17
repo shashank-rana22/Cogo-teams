@@ -89,7 +89,6 @@ function ExecuteTask({
 	}
 	if (
 		task.task === 'approve_purchase_deduction'
-		&& task.shipment_type === 'ftl_freight'
 	) {
 		return (
 			<ApprovePurchaseDeduction
