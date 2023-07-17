@@ -1,6 +1,7 @@
-import { missedcallIcon, incomingcallIcon, outgoingcallIcon } from '../constants';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 
-export const callAnalytics = [
+export const CALL_ANALYTICS = [
 	{
 		label : 'Longest Chat duration',
 		key   : 'longest_call_duration',
@@ -14,22 +15,38 @@ export const callAnalytics = [
 
 	}];
 
-export const analyticStats = [
+export const ANALYTICS_STATS = [
 	{
-		key         : 'incoming_calls',
-		icon        : <img src={incomingcallIcon} alt="a" style={{ width: '16px', height: '16px' }} />,
+		key  : 'incoming_calls',
+		icon : <Image
+			src={GLOBAL_CONSTANTS.image_url.incoming_green_svg}
+			alt="incoming"
+			width={16}
+			height={16}
+		/>,
 		channel     : 'Incoming Calls',
 		static_data : 'Calls',
 	},
 	{
-		key         : 'outgoing_calls',
-		icon        : <img src={outgoingcallIcon} alt="b" style={{ width: '16px', height: '16px' }} />,
+		key  : 'outgoing_calls',
+		icon : <Image
+			src={GLOBAL_CONSTANTS.image_url.outgoing_orange_svg}
+			alt="outgoing"
+			width={16}
+			height={16}
+		/>,
+
 		channel     : 'Outgoing Calls',
 		static_data : 'Calls',
 	},
 	{
-		key         : 'missed_calls',
-		icon        : <img src={missedcallIcon} alt="c" style={{ width: '16px', height: '16px' }} />,
+		key  : 'missed_calls',
+		icon : <Image
+			src={GLOBAL_CONSTANTS.image_url.missed_call_red_svg}
+			alt="missed"
+			width={16}
+			height={16}
+		/>,
 		channel     : 'Missed Calls',
 		static_data : 'Calls',
 	},
@@ -37,7 +54,7 @@ export const analyticStats = [
 ];
 
 export const callAnalyticsStatData = 	{
-	calls   : callAnalytics,
-	channel : analyticStats,
+	calls   : CALL_ANALYTICS,
+	channel : ANALYTICS_STATS,
 
 };

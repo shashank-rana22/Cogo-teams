@@ -3,8 +3,8 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { LABLE_TYPE } from '../../configurations/dashboard';
 import chartData from '../../configurations/line-chart-data';
+import { LABLE_TYPE } from '../../constants';
 
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';

@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { channelMessageAnayticsData } from '../../configurations/channel-message-analytic-data';
+import { CHANNEL_MESSAGE_ANALYTICS_MAPPING_DATA } from '../../configurations/channel-message-analytic-data';
 
 import styles from './styles.module.css';
 
@@ -10,7 +10,7 @@ const MAXIMUMN_MINUTE_VALUE = 60;
 const MIN_ROUND_UP = 2;
 
 function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {} }) {
-	const { calls = [], channel = [] } = channelMessageAnayticsData;
+	const { calls = [], channel = [] } = CHANNEL_MESSAGE_ANALYTICS_MAPPING_DATA;
 
 	return (
 		<div className={styles.statistics}>
@@ -18,6 +18,7 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 			<div className={styles.time_durations_section}>
 				{(calls || []).map((itm) => {
 					const itemKey = itm?.key;
+
 					return (
 						<div className={styles.time_durations} key={itemKey}>
 							{loading

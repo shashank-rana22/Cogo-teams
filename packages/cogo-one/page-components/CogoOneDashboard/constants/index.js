@@ -1,20 +1,181 @@
-/* eslint-disable max-len */
-export const cogoOneLogo = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg';
-export const dArrow = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/decreasing_arrow.png';
-export const aArrow = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 
-export const happyIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg';
-export const neutralIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg';
-export const angryIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg';
+export const SATIFICATION_IMAGE_MAPPING = [
+	{
+		key   : 'happy_customers',
+		label : 'Happy Customers',
+		icon  : <Image src={GLOBAL_CONSTANTS.image_url.happy_emoji} alt="very-happy" width={25} height={25} />,
+	}, {
+		key   : 'neutral_customers',
+		label : 'Neutral Customers',
+		icon  : <Image src={GLOBAL_CONSTANTS.image_url.neutral_user_emoji} alt="happy" width={25} height={25} />,
 
-export const mailIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg';
-export const platformChatIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg';
+	}, {
+		key   : 'sad_customers',
+		label : 'Sad Customers',
+		icon  : <Image src={GLOBAL_CONSTANTS.image_url.angry_emoji} alt="sad" width={25} height={25} />,
 
-export const missedcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png';
-export const incomingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png';
-export const outgoingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png';
-export const agentAvatar = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg';
-export const emptyImage = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg';
-export const emptyEscalations = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg';
-export const emptyPerformance = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty.svg';
-export const agentActivityLoaderImg = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg';
+	},
+];
+
+export const CALL_STATUS_MAPPING = {
+	busy_agents    : 'on call',
+	online_agents  : 'online',
+	offline_agents : 'offline',
+};
+
+export const CHAT_STATS_DATA = [
+	{
+		label      : 'No. of chats closed',
+		percentage : 'chats_closed_percent',
+		key        : 'chats_closed',
+		isAgent    : false,
+	},
+	{
+		label      : 'No. of chats assigned further',
+		percentage : 'chats_assigned_percent',
+		key        : 'chats_assigned',
+		isAgent    : true,
+	}, {
+		label      : 'No. of warning chats',
+		percentage : 'warning_chats_percent',
+		key        : 'warning_chats',
+		isAgent    : false,
+	}, {
+		label      : 'No. of escalated chat',
+		percentage : 'escalated_chats_percent',
+		key        : 'escalated_chats',
+		isAgent    : true,
+	},
+];
+
+export const INTENT_SERVED_DATA = [
+	{
+		key   : 'normal_conversation',
+		label : 'Normal conversation',
+	}, {
+		key   : 'shipment_booking',
+		label : 'Shipment Booking',
+
+	}, {
+		key   : 'trade_enquiry',
+		label : 'Shipment booking',
+	},
+	{
+		key   : 'invoice',
+		label : 'Invoice',
+	},
+];
+
+export const AGENT_CONFIG_DATA = {
+	agents_details_config: {
+		busy_agents: {
+			agent_label : 'Busy Agents',
+			total_agent : 0,
+			agents      : [],
+		},
+		online_agents: {
+			agent_label : 'Online Agents',
+			total_agent : 0,
+			agents      : [],
+		},
+		offline_agents: {
+			agent_label : 'Offline Agents',
+			total_agent : 0,
+			agents      : [],
+		},
+	},
+};
+
+export const ESCALATION_ACTIVITY = [
+	{
+		id: 'eas1',
+	},
+	{
+		id: 'eas2',
+	},
+	{
+		id: 'eas3',
+	},
+	{
+		id: 'eas4',
+	},
+	{
+		id: 'eas5',
+	},
+	{
+		id: 'eas6',
+	},
+	{
+		id: 'eas7',
+	},
+];
+
+export const PERFORMANCE_ACTIVITY = [
+	{
+		id: 'pas1',
+	},
+	{
+		id: 'pas2',
+	},
+	{
+		id: 'pas3',
+	},
+	{
+		id: 'pas4',
+	},
+	{
+		id: 'pas5',
+	},
+];
+
+export const AGENT_ACTIVITY = [
+	{
+		id: 'aas1',
+	},
+	{
+		id: 'aas2',
+	},
+	{
+		id: 'aas3',
+	},
+];
+
+export 	const PERFORMANCE_BUTTON_MAPPING = [
+	{
+		key   : 'best_performance',
+		label : 'Best Performance',
+	},
+	{
+		key   : 'worst_performance',
+		label : 'Worst Performance',
+	},
+];
+
+export const LABLE_TYPE = {
+	day: {
+		label: 'Hour',
+	},
+	week: {
+		label: 'Day',
+	},
+	month: {
+		label: 'Week',
+	},
+};
+
+export const FORMAT_TYPE = {
+	day: {
+		label    : GLOBAL_CONSTANTS.formats.date.dd,
+		subLabel : GLOBAL_CONSTANTS.formats.date['MMM yyyy'], /// 'MMM yy'
+	},
+	week: {
+		label    : GLOBAL_CONSTANTS.formats.date['MMM yyyy'],
+		subLabel : GLOBAL_CONSTANTS.formats.date.dd,
+	},
+	month: {
+		label    : GLOBAL_CONSTANTS.formats.date.MMM,
+		subLabel : GLOBAL_CONSTANTS.formats.date.yyyy,
+	},
+};

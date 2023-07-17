@@ -39,6 +39,9 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
 			'dd MMM'            : 'dd MMM',
+			dd                  : 'dd',
+			MMM                 : 'MMM',
+			yyyy                : 'yyyy',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
@@ -240,6 +243,12 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		increasing_arrow   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg',
+		decreasing_arrow   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/decreasing_arrow.png',
+		happy_emoji        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
+		neutral_user_emoji : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
+		angry_emoji        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
+		agent_avatar_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

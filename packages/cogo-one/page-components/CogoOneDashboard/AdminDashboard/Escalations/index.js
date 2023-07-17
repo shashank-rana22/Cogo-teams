@@ -1,16 +1,20 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
-
-import { agentAvatar, emptyEscalations } from '../../constants';
 
 import LoaderEscalation from './LoaderEscalations';
 import styles from './styles.module.css';
 
 function Escalation({ loading = false, escalations = [] }) {
 	if (loading) {
-		return <LoaderEscalation />;
+		return (
+			<div className={styles.redflags_container}>
+				<div className={styles.heading}>Escalations</div>
+				<LoaderEscalation />
+			</div>
+		);
 	}
 
 	return (
@@ -18,10 +22,10 @@ function Escalation({ loading = false, escalations = [] }) {
 			<div className={styles.heading}>Escalations</div>
 			{(isEmpty(escalations)) ? (
 				<img
-					src={emptyEscalations}
+					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
 					alt="No Escalations"
-					width="200px"
-					height="200px"
+					width={200}
+					height={200}
 					className={styles.empty_escalations_picture}
 				/>
 			)
@@ -34,7 +38,12 @@ function Escalation({ loading = false, escalations = [] }) {
 								<div className={styles.escalations_list} key={id}>
 									<div className={styles.picture_name_kam_box}>
 										<div className={styles.agent_picture}>
-											<img src={agentAvatar} alt="Agent Avatar" />
+											<Image
+												src={GLOBAL_CONSTANTS.image_url.agent_avatar_icon}
+												alt="Agent Avatar"
+												width={30}
+												height={30}
+											/>
 										</div>
 										<div className={styles.agent_name}>{agent_name}</div>
 										<Tooltip

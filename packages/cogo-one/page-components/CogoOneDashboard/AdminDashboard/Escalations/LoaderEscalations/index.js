@@ -1,14 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { escalationActivitySection } from '../../../configurations/dashboard';
+import { ESCALATION_ACTIVITY } from '../../../constants';
 
 import styles from './styles.module.css';
 
 function LoaderEscalation() {
 	return (
 		<>
-			{escalationActivitySection.map((val) => (
+			{ESCALATION_ACTIVITY.map((val) => (
 				<div key={val.id} className={styles.loader_box}>
 					<div className={styles.left_loader}>
 						<Placeholder

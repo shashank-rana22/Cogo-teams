@@ -1,14 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { performanceActivitySection } from '../../../configurations/dashboard';
+import { PERFORMANCE_ACTIVITY } from '../../../constants';
 
 import styles from './styles.module.css';
 
 function LoaderPerformance() {
 	return (
 		<>
-			{performanceActivitySection.map((val) => (
+			{PERFORMANCE_ACTIVITY.map((val) => (
 				<div key={val.id} className={styles.loader_box}>
 					<div className={styles.left_loader}>
 						<Placeholder

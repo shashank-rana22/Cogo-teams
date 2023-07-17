@@ -1,9 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
 import React from 'react';
-
-import { cogoOneLogo } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -24,7 +23,7 @@ function Header({ timeline = '', setTimeline = () => {} }) {
 				{agentId && (
 					<IcMArrowBack className={styles.back_icon} onClick={() => back()} />
 				)}
-				<div><img src={cogoOneLogo} alt="CogoOne" /></div>
+				<div><Image src={GLOBAL_CONSTANTS.image_url.cogo_one_logo} alt="CogoOne" width={30} height={30} /></div>
 				<div className={styles.heading_name}>ogoOne Dashboard</div>
 			</div>
 

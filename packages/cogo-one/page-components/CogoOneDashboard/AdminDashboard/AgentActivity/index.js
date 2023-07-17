@@ -1,12 +1,11 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMProfile } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { agentsConfigurationData, CALL_STATUS_MAPPING } from '../../configurations/dashboard';
-import { agentAvatar } from '../../constants';
+import { AGENT_CONFIG_DATA, CALL_STATUS_MAPPING } from '../../constants';
 
 import EmptyStateAgentActivity from './EmptyStateAgentActivity';
 import LoaderAgentActivity from './LoaderAgentActivityBox';
@@ -21,7 +20,7 @@ const TAB_MAPPING = {
 function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 	const { push } = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
-	const { agents_details_config } = agentsConfigurationData;
+	const { agents_details_config } = AGENT_CONFIG_DATA;
 
 	const redirectToAgentView = ({ agentId = '', name = '' }) => {
 		if (!agentId) return;
@@ -83,7 +82,12 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 									<div className={styles.profile_box_left}>
 										<div className={cl`${styles.circle_icon} ${TAB_MAPPING[activeTab]}`} />
 										<div className={styles.profile_icon}>
-											<img src={agentAvatar} alt="Agent avatar" />
+											<Image
+												src={GLOBAL_CONSTANTS.image_url.agent_avatar_icon}
+												alt="Agent avatar"
+												width={30}
+												height={30}
+											/>
 										</div>
 									</div>
 									<div className={styles.profile_box_right}>
