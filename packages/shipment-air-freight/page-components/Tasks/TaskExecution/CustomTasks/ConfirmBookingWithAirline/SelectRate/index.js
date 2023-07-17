@@ -25,6 +25,7 @@ function SelectRate({
 	onCancel = () => {},
 	refetch = () => {},
 	shipmentData = {},
+	primary_service = {},
 }) {
 	const [step, setStep] = useState(LIST_PREFERENCE_RATE_STEP);
 	const [selectedCard, setSelectedCard] = useState(null);
@@ -118,6 +119,7 @@ function SelectRate({
 							serviceProvidersData={SERVICE_PROVIDERS_DATA}
 							refetchList={getList}
 							setStep={setStep}
+							primary_service={primary_service}
 						/>
 					) : (
 						<>
@@ -152,6 +154,7 @@ function SelectRate({
 												serviceProvidersData={SERVICE_PROVIDERS_DATA}
 												refetchList={getList}
 												setStep={setStep}
+												primary_service={primary_service}
 											/>
 										))}
 									</>

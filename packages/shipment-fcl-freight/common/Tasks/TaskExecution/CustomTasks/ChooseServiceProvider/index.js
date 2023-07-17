@@ -1,11 +1,14 @@
-import { Loader } from '@cogoport/components';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Loader, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useUpdateShipmentBookingConfirmationPreferences from
+	'../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentService';
 
@@ -19,6 +22,7 @@ function ChooseServiceProvider({
 	onCancel = () => {},
 	services = [],
 }) {
+	const ONE = 1;
 	const SERVICE_IDS = [];
 	let title = {};
 	(services || []).forEach((serviceObj) => {
@@ -40,11 +44,16 @@ function ChooseServiceProvider({
 		shipment_id: services[GLOBAL_CONSTANTS.zeroth_index]?.shipment_id,
 	});
 
+	const [selectedCard, setSelectedCard] = useState([]);
+	const [activeTab, setActiveTab] = useState(SERVICE_IDS[GLOBAL_CONSTANTS.zeroth_index]);
+
 	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({});
 
 	const { apiTrigger: updateService } = useUpdateShipmentService({});
 
-	const handleUpdateTask = async (item, serviceProvider) => {
+	const SIMILAR_LENGTH = SERVICE_IDS.length;
+
+	const handleUpdateTask = async (item) => {
 		const mainService = (services || []).filter(
 			(service) => service.service_type === 'fcl_freight_service',
 		)?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -77,13 +86,13 @@ function ChooseServiceProvider({
 			if (!isEmpty(LOCAL_SERVICE_IDS) && res_fcl?.status === SUCCESS_HTTP_CODE) {
 				const res_local = await updateService({
 					data: {
-						service_provider_id : serviceProvider,
+						service_provider_id : item?.serviceProvider,
 						shipping_line_id    : item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					},
 					ids                 : LOCAL_SERVICE_IDS,
 					service_type        : 'fcl_freight_local_service',
 					shipment_id         : task?.shipment_id,
-					performed_by_org_id : serviceProvider,
+					performed_by_org_id : item?.serviceProvider,
 				});
 
 				if (res_local?.status === SUCCESS_HTTP_CODE) {
@@ -101,6 +110,14 @@ function ChooseServiceProvider({
 		}
 	};
 
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ handleUpdateTask });
+
+	useEffect(() => {
+		if (selectedCard.length === SIMILAR_LENGTH) {
+			apiTrigger(selectedCard);
+		}
+	}, [selectedCard, SIMILAR_LENGTH]);
+
 	if (loading) {
 		return (
 			<div className={styles.loader_container}>
@@ -110,18 +127,48 @@ function ChooseServiceProvider({
 	}
 
 	return (
-		!isEmpty(data?.list)
-			? data?.list.map((item) => (
-				<Card
-					key={item?.id}
-					item={item}
-					priority={item.priority}
-					handleUpdateTask={handleUpdateTask}
-				/>
-			))
-			: (
-				<EmptyState subEmptyText="No Booking Preference Found" />
-			)
+		<div>
+			{(SERVICE_IDS || []).length <= ONE ? (
+				<>
+					{(data?.list || []).map((item) => (
+						<Card
+							key={item?.id}
+							item={item}
+							priority={item.priority}
+							handleUpdateTask={handleUpdateTask}
+							similarServiceIds={SERVICE_IDS}
+							selectedCard={selectedCard}
+							setSelectedCard={setSelectedCard}
+						/>
+					))}
+				</>
+			) : (
+				<Tabs activeTab={activeTab} onChange={setActiveTab}>
+					{(SERVICE_IDS || []).map((service_id) => (
+						<TabPanel
+							name={service_id}
+							title={title[service_id]}
+							key={service_id}
+						>
+							{(data?.list || []).map((item) => (
+								item?.service_id === service_id ? (
+									<Card
+										key={item?.id}
+										item={item}
+										priority={item.priority}
+										similarServiceIds={SERVICE_IDS}
+										handleUpdateTask={handleUpdateTask}
+										selectedCard={selectedCard}
+										setSelectedCard={setSelectedCard}
+									/>
+								) : null
+							))}
+						</TabPanel>
+					))}
+				</Tabs>
+			)}
+		</div>
+
 	);
 }
 export default ChooseServiceProvider;

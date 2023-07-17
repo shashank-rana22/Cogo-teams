@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
@@ -6,6 +7,7 @@ import { useCallback } from 'react';
 const useUpdateShipmentBookingConfirmationPreferences = ({
 	successMessage = 'Updated Successfully!',
 	setStep = () => {},
+	handleUpdateTask = () => {},
 }) => {
 	const ONE = 1;
 	const [{ loading }, trigger] = useRequest({
@@ -25,12 +27,14 @@ const useUpdateShipmentBookingConfirmationPreferences = ({
 
 				if (!res.hasError) {
 					Toast.success(successMessage);
+					handleUpdateTask(item[GLOBAL_CONSTANTS.zeroth_index]);
 					setStep((prev) => prev + ONE);
 				}
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[setStep, trigger, successMessage],
 	);
 	return {

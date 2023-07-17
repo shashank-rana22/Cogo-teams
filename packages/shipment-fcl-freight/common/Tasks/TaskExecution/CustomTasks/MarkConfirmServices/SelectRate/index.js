@@ -5,6 +5,8 @@ import { v4 as uuid } from 'uuid';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useUpdateShipmentBookingConfirmationPreferences from
+	'../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 import groupedSimilarServicesData from '../../../helpers/groupSimilarServices';
 
 import Card from './Card';
@@ -20,6 +22,7 @@ function SelectRate({
 	step,
 }) {
 	const TWO = 2;
+	const ONE = 1;
 	const { similarServiceIds, title } = groupedSimilarServicesData(servicesList, task.service_type, task.service_id);
 	const { data, loading } = useListShipmentBookingConfirmationPreferences({
 		shipment_id    : task.shipment_id,
@@ -43,6 +46,15 @@ function SelectRate({
 		}
 	}, [setStep, setSelectedCard, data]);
 
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ setStep, step });
+	const SIMILAR_LENGTH = similarServiceIds.length;
+
+	useEffect(() => {
+		if (selectedCard.length === SIMILAR_LENGTH && step === ONE) {
+			apiTrigger(selectedCard);
+		}
+	}, [selectedCard, SIMILAR_LENGTH, step, apiTrigger]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.selection_div}>
@@ -52,6 +64,24 @@ function SelectRate({
 						&nbsp;
 						Loading Task...
 					</div>
+				) : null}
+				{(similarServiceIds || []).length <= ONE ? (
+					<>
+						{(data?.list || []).map((item) => (
+							<Card
+								key={uuid()}
+								item={item}
+								priority={item.priority}
+								setStep={setStep}
+								setSelectedCard={setSelectedCard}
+								similarServiceIds={similarServiceIds}
+								selectedCard={selectedCard}
+							/>
+						))}
+						<SelectNormal
+							setStep={setStep}
+						/>
+					</>
 				) : (
 					<Tabs activeTab={activeTab} onChange={setActiveTab}>
 						{(similarServiceIds || []).map((service_id) => (
@@ -70,7 +100,6 @@ function SelectRate({
 											setSelectedCard={setSelectedCard}
 											similarServiceIds={similarServiceIds}
 											selectedCard={selectedCard}
-											step={step}
 										/>
 									) : null
 								))}
@@ -81,7 +110,6 @@ function SelectRate({
 						))}
 					</Tabs>
 				)}
-
 			</div>
 		</div>
 	);

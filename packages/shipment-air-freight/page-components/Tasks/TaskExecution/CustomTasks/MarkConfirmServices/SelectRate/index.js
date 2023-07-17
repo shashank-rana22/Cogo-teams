@@ -14,6 +14,7 @@ function SelectRate({
 	updateConfirmation,
 	step = {},
 	task = {},
+	primaryService = {},
 }) {
 	const { data, loading } = useListBookingPreferences({
 		shipment_id    : task.shipment_id,
@@ -74,6 +75,7 @@ function SelectRate({
 						updateConfirmation={updateConfirmation}
 						serviceProvidersData={SERVICE_PROVIDERS_DATA}
 						task={task}
+						primaryService={primaryService}
 					/>
 				))}
 			</div>

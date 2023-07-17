@@ -30,6 +30,7 @@ function MarkServiceConfirmed({
 				setSelectedCard={setSelectedCard}
 				task={task}
 				step={step}
+				primaryService={primaryService}
 			/>
 		);
 	}

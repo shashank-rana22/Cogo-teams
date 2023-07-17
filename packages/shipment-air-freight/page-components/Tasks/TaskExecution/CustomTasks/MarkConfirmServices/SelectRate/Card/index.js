@@ -32,6 +32,7 @@ function Card({
 	setSelectedCard = () => {},
 	serviceProvidersData = [],
 	task = {},
+	primaryService = {},
 }) {
 	const { data } = item;
 	const dataArr = Array.isArray(data) ? data : [data];
@@ -72,10 +73,10 @@ function Card({
 						chargeable_weight: dataChargeableWeight,
 						price_type,
 						rate_procurement_proof_url,
-						hs_code,
-						commodity_description,
 						is_minimum_price_rate,
 					} = dataObj || {};
+
+					const { hs_code, commodity_description } = primaryService;
 
 					return (
 						<div className={styles.space_between} key={dataObj?.id}>
@@ -120,15 +121,15 @@ function Card({
 											</Tooltip>
 										</div>
 									)}
-									{hs_code &&	(
+									{hs_code?.hs_code_name &&	(
 										<div>
 											<div className={styles.heading}>HS Code</div>
 											<Tooltip
-												content={hs_code}
+												content={hs_code?.hs_code_name}
 												placement="top"
 											>
 												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
-													{hs_code}
+													{hs_code?.hs_code_name}
 												</div>
 											</Tooltip>
 										</div>

@@ -5,6 +5,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import groupedSimilarServicesData from '../../../../../../helpers/groupSimilarServices';
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useUpdateShipmentBookingConfirmationPreferences from
+	'../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 
 import Card from './Card';
 import SelectNormal from './SelectNormal';
@@ -18,6 +20,7 @@ function SelectRate({
 	selectedCard = [],
 	step = 1,
 }) {
+	const ONE = 1;
 	const TWO = 2;
 	const { similarServiceIds, title } = groupedSimilarServicesData(servicesList, task.service_type, task.service_id);
 	const { data, loading } = useListShipmentBookingConfirmationPreferences({
@@ -43,6 +46,15 @@ function SelectRate({
 		}
 	}, [data, setStep, setSelectedCard]);
 
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ setStep, step });
+	const SIMILAR_LENGTH = similarServiceIds.length;
+
+	useEffect(() => {
+		if (selectedCard.length === SIMILAR_LENGTH && step === ONE) {
+			apiTrigger(selectedCard);
+		}
+	}, [selectedCard, SIMILAR_LENGTH, step, apiTrigger]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.selection_div}>
@@ -52,6 +64,24 @@ function SelectRate({
 						{' '}
 						Loading Task...
 					</div>
+				) : null}
+				{(similarServiceIds || []).length <= ONE ? (
+					<>
+						{(data?.list || []).map((item, idx) => (
+							<Card
+								key={keys?.[idx]}
+								item={item}
+								priority={item.priority}
+								setStep={setStep}
+								setSelectedCard={setSelectedCard}
+								similarServiceIds={similarServiceIds}
+								selectedCard={selectedCard}
+							/>
+						))}
+						<SelectNormal
+							setStep={setStep}
+						/>
+					</>
 				) : (
 					<Tabs activeTab={activeTab} onChange={setActiveTab}>
 						{(similarServiceIds || []).map((service_id) => (
@@ -61,19 +91,17 @@ function SelectRate({
 								key={service_id}
 							>
 								{(data?.list || []).map((item, idx) => (
-									item?.service_id === service_id
-										? (
-											<Card
-												key={keys?.[idx]}
-												item={item}
-												priority={item.priority}
-												setStep={setStep}
-												setSelectedCard={setSelectedCard}
-												similarServiceIds={similarServiceIds}
-												selectedCard={selectedCard}
-												step={step}
-											/>
-										) : null
+									item?.service_id === service_id ? (
+										<Card
+											key={keys?.[idx]}
+											item={item}
+											priority={item.priority}
+											setStep={setStep}
+											setSelectedCard={setSelectedCard}
+											similarServiceIds={similarServiceIds}
+											selectedCard={selectedCard}
+										/>
+									) : null
 								))}
 								<SelectNormal
 									setStep={setStep}
@@ -82,7 +110,6 @@ function SelectRate({
 						))}
 					</Tabs>
 				)}
-
 			</div>
 		</div>
 	);

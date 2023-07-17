@@ -4,27 +4,22 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useUpdateShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
-
 import cardValues from './cardValues';
 import styles from './styles.module.css';
 
-function Card({ item, priority, handleUpdateTask }) {
+function Card({
+	item, priority, similarServiceIds,
+	selectedCard,
+	setSelectedCard,
+}) {
+	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 	const [serviceProvider, setServiceProvider] = useState(
 		item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
 	);
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({});
-
 	const onSubmit = async () => {
-		const payload = {
-			selected_priority : item.priority,
-			id                : item.preference_id,
-		};
-		await apiTrigger(payload);
-		handleUpdateTask(item, serviceProvider);
+		setSelectedCard([...selectedCard, { ...item, serviceProvider }]);
 	};
 
 	return (
@@ -64,8 +59,13 @@ function Card({ item, priority, handleUpdateTask }) {
 			/>
 
 			<div className={styles.button_wrap}>
-				<Button size="sm" onClick={() => onSubmit()} disabled={loading}>
-					Confirm This Prefernce
+				<Button
+					size="sm"
+					onClick={() => onSubmit()}
+					disabled={(selectedCard || []).find((service) => item.service_id === service.service_id)}
+				>
+					{selectedCard.length
+						=== (similarServiceIds.length - ONE) ? 'Proceed With Preference' : 'Save This Preference'}
 				</Button>
 			</div>
 		</div>

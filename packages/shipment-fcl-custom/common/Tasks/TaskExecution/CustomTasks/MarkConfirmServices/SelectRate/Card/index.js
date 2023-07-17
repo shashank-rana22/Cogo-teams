@@ -3,10 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
-
-import useUpdateShipmentBookingConfirmationPreferences
-	from '../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 
 import styles from './styles.module.css';
 
@@ -28,30 +24,16 @@ const getBuyPrice = (dataObj) => {
 function Card({
 	item = {},
 	priority,
-	setStep = () => {},
 	setSelectedCard = () => {},
 	similarServiceIds = [],
 	selectedCard = [],
-	step = 1,
 }) {
 	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({ setStep });
-
 	const handleProceed = async () => {
 		setSelectedCard([...selectedCard, item]);
 	};
-
-	const payload = JSON.stringify(selectedCard);
-
-	const SIMILAR_LENGTH = similarServiceIds.length;
-
-	useEffect(() => {
-		if (selectedCard.length === SIMILAR_LENGTH && step === ONE) {
-			apiTrigger(selectedCard);
-		}
-	}, [payload, selectedCard, SIMILAR_LENGTH, step, setStep, apiTrigger]);
 
 	return (
 		<div className={styles.container}>
@@ -113,8 +95,9 @@ function Card({
 				<div className={styles.button_wrap}>
 					<Button
 						onClick={() => handleProceed()}
-						disabled={loading
-							|| (selectedCard || []).find((service) => item.service_id === service.service_id)}
+						disabled={
+							(selectedCard || []).find((service) => item.service_id === service.service_id)
+}
 					>
 						{selectedCard.length
 						=== (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
