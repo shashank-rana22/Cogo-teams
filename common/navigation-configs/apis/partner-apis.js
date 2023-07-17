@@ -3881,21 +3881,6 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 		},
 		{
-			api          : 'list_haulage_freight_rate_sheet_stats',
-			access_type  : 'private',
-			service_name : 'haulage_freight_rate',
-		},
-		{
-			api          : 'update_haulage_freight_rate_sheet',
-			access_type  : 'private',
-			service_name : 'haulage_freight_rate',
-		},
-		{
-			api          : 'create_haulage_freight_rate_sheet',
-			access_type  : 'private',
-			service_name : 'haulage_freight_rate',
-		},
-		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
