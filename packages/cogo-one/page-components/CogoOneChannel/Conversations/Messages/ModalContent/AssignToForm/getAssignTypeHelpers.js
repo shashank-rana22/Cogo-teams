@@ -49,7 +49,7 @@ function AssignUsers({
 							agent_type        : watchAgentType || undefined,
 						},
 					}}
-					className={errors?.assign_user && styles.error_class}
+					className={errors?.assign_user ? styles.error_class : ''}
 					renderLabel={(item) => (
 						<div>
 							<div className={styles.agent_label}>
@@ -160,9 +160,7 @@ export function GetAssignTypeComp({
 
 	const COMPONENT_PROPS_MAPPING = {
 		assign_user: {
-			control,
 			assignUser : assign_user,
-			errors,
 			agentType  : agent_type,
 			viewType,
 			options,
@@ -170,16 +168,12 @@ export function GetAssignTypeComp({
 			resetField,
 		},
 		assign_on_shipment_invoice: {
-			control,
 			assignCondition : assign_condition,
 			watchCondtion,
-			errors,
 			conditionValue  : condition_value,
 		},
 		assign_on_entity: {
-			control,
 			assignEntity      : assign_entity,
-			errors,
 			assignRole        : assign_role,
 			accountType,
 			assignServiceType : assign_service_type,
@@ -193,7 +187,11 @@ export function GetAssignTypeComp({
 	}
 
 	return (
-		<Component {...(COMPONENT_PROPS_MAPPING[assignType] || {})} />
+		<Component
+			{...(COMPONENT_PROPS_MAPPING[assignType] || {})}
+			control={control}
+			errors={errors}
+		/>
 	);
 }
 

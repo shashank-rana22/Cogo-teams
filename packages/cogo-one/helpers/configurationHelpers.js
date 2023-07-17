@@ -25,7 +25,7 @@ export const getIsActive = async ({ firestore, setIsLockedToggle }) => {
 	setIsLockedToggle(is_locked_screen);
 };
 
-export const updateRoom = async ({ firestore, value }) => {
+export const updateCogooneConstants = async ({ firestore, value }) => {
 	const cogoOneConstantsDocs = await getConstantsDoc({ firestore });
 
 	const roomId = cogoOneConstantsDocs?.id;

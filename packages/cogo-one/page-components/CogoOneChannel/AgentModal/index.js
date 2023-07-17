@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { getIsActive, updateRoom } from '../../../helpers/configurationHelpers';
+import { getIsActive, updateCogooneConstants } from '../../../helpers/configurationHelpers';
 import { formatAgentList } from '../../../helpers/groupAgentsHelpers';
 import useGetOmnichannelAgentTypes from '../../../hooks/useGetOmnichannelAgentTypes';
 import useListChatAgents from '../../../hooks/useListChatAgents';
@@ -47,7 +47,7 @@ function AgentModal({
 
 	const onToggle = (e) => {
 		setIsLockedToggle(e?.target?.checked);
-		updateRoom({ firestore, value: e?.target?.checked });
+		updateCogooneConstants({ firestore, value: e?.target?.checked });
 	};
 
 	const modifiedGroupedAgents = loading

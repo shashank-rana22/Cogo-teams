@@ -2,13 +2,15 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+const PAGE_LIMIT = 10;
+
 const getParams = ({ agentType, page, query }) => ({
 	filters: {
 		q          : query || undefined,
 		agent_type : agentType || undefined,
 	},
 	page,
-	page_limit: 10,
+	page_limit: PAGE_LIMIT,
 });
 
 function useListChatAgents() {
@@ -57,10 +59,10 @@ function useListChatAgents() {
 	return {
 		loading,
 		listAgentStatus,
-		setPagination : (val) => setParamsState((p) => ({ ...p, page: val })),
+		setPagination : (val) => setParamsState((prev) => ({ ...prev, page: val })),
 		getListChatAgents,
-		setSearch     : (val) => setParamsState((p) => ({ ...p, query: val })),
-		setAgentType  : (val) => setParamsState((p) => ({ ...p, agentType: val })),
+		setSearch     : (val) => setParamsState((prev) => ({ ...prev, query: val })),
+		setAgentType  : (val) => setParamsState((prev) => ({ ...prev, agentType: val })),
 		paramsState,
 	};
 }
