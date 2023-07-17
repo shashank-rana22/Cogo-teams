@@ -50,21 +50,18 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			Header   : 'CHAPTER NAME',
 			accessor : (item) => <div>{startCase(item?.chapter_name) || '-'}</div>,
 		},
-
 		{
 			Header   : 'CHAPTER LEADER',
 			accessor : (item) => (
 				<div>{startCase(item?.chapter_leader?.name) || '-'}</div>
 			),
 		},
-
 		{
 			Header   : 'SUB CHAPTERS',
 			accessor : (item) => (
 				<RenderSubChapters item={item} tooltip_data={tooltip_data} />
 			),
 		},
-
 		{
 			Header   : 'LAST UPDATED AT',
 			accessor : (item) => (
@@ -73,7 +70,6 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 				</div>
 			),
 		},
-
 		{
 			Header   : 'STATUS',
 			accessor : (item) => (
@@ -84,7 +80,6 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 				</Pill>
 			),
 		},
-
 	];
 
 	if (activeTab === default_active_tab) {
