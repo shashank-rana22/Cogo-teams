@@ -255,22 +255,6 @@ const GLOBAL_CONSTANTS = {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
-	drive_link: {
-		introduction_to_cogoport_link:
-		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-		git_course_link:
-		'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-		html_css_course_link:
-		'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
-		html_css_assessment:
-		'https://drive.google.com/file/d/1N1HFExQLhUaeppFEdOYUz5H1lMQq1GOx/view?usp=drive_link',
-		responsive_web_design:
-		'https://drive.google.com/file/d/17-q8E1OtNaqzG5eDqUriA9JL4IDVTpeX/view?usp=drive_link',
-		responsive_web_design_assessment:
-		'https://drive.google.com/file/d/1uqJ8jiDcDj6-6Yd_mQnBE3muuoFpGmbf/view?usp=sharing',
-		javascript_basics_game_development:
-		'https://drive.google.com/file/d/1IIVowcpe4EurhYamS16h1n2oyjUFAns8/view?usp=sharing',
-	},
 
 	urls: {
 		list_emojis: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/emoji-list.json',
@@ -355,13 +339,14 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number          : /^[+-]?\d*\.?\d+$/,
-		white_space     : /\s+/,
-		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
-		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
-		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		number           : /^[+-]?\d*\.?\d+$/,
+		white_space      : /\s+/,
+		email            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		pan_number       : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number    : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number  : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code        : /^[A-Za-z]{4}\d{7}$/,
+		eway_bill_number : /^\d{12}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
