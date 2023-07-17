@@ -3,14 +3,15 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 
 import { SHIPPING_LINE } from '../../../../constants/getShippingLines';
+import { getEventTitle } from '../../../../utils/getEventTitle';
 import CargoDetails from '../../../CargoDetails';
 import PortDetails from '../../../PortDetails';
 
 import styles from './styles.module.css';
 
-const GET_LAST_STRING = 2;
-
 function ShipmentDetails({ serviceData = {}, name = '' }) {
+	const eventTitle = getEventTitle({ name });
+
 	const {
 		detail = {}, rate = {},
 	} = serviceData || {};
@@ -27,12 +28,9 @@ function ShipmentDetails({ serviceData = {}, name = '' }) {
 	const shippingLineMapping = SHIPPING_LINE[primary_service];
 	const shippingLines = primaryService[shippingLineMapping];
 
-	const parts = name.split(':');
-	const evnetTitle = parts[GET_LAST_STRING].trim();
-
 	return (
 		<>
-			<div className={styles.title}>{evnetTitle}</div>
+			<div className={styles.title}>{eventTitle}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned checkout -
 			</div>

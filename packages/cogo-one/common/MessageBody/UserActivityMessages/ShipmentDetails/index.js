@@ -2,23 +2,21 @@ import { Tooltip } from '@cogoport/components';
 import { Image } from '@cogoport/next';
 
 import { SHIPPING_LINE } from '../../../../constants/getShippingLines';
+import { getEventTitle } from '../../../../utils/getEventTitle';
 import CargoDetails from '../../../CargoDetails';
 import PortDetails from '../../../PortDetails';
 
 import styles from './styles.module.css';
 
-// const GET_LAST_STRING = 2;
-
 function ShipmentDetails({ serviceData = {}, name = '' }) {
-	// const parts = name.split(':');
-	// const evnetTitle = parts[GET_LAST_STRING].trim();
+	const eventTitle = getEventTitle({ name });
 
 	const shippingLineMapping = SHIPPING_LINE[serviceData?.shipment_type];
 	const shippingLines = serviceData[shippingLineMapping];
 
 	return (
 		<>
-			<div className={styles.title}>{name}</div>
+			<div className={styles.title}>{eventTitle}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned shipments -
 			</div>

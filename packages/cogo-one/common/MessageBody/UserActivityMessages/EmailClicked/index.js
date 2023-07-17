@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { getEventTitle } from '../../../../utils/getEventTitle';
+
 import PreviewModal from './PreviewModal';
 import styles from './styles.module.css';
 
@@ -10,10 +12,10 @@ function EmailClicked({ serviceData = {}, name = '', formattedData = {} }) {
 	const { email = '', user_name = '' } = formattedData;
 	const { content = {} } = serviceData || {};
 	const { subject = '', body } = content;
-
+	const eventTitle = getEventTitle({ name });
 	return (
 		<>
-			<div className={styles.title}>{name}</div>
+			<div className={styles.title}>{eventTitle}</div>
 			<div className={styles.message}>
 				Following is a preview of the mail -
 			</div>
