@@ -1,0 +1,629 @@
+[
+	{
+		"doc_code": "001000",
+		"doc_name": "Certificate of analysis",
+		"doc_desc": "Certificate providing the values of an analysis."
+	},
+	{
+		"doc_code": "0010DC",
+		"doc_name": "Certificate of analysis - Drug",
+		"doc_desc": "Certificate attesting to the quality or purity of the goods."
+	},
+	{
+		"doc_code": "0010FS",
+		"doc_name": "Certificate of Analysis - Food & Supplement",
+		"doc_desc": "Certificate by an accredited by a laboratory recognized in the Country of Origin providing the parameters and values of an analysis of a food product."
+	},
+	{
+		"doc_code": "001002",
+		"doc_name": "Lab analysis Report",
+		"doc_desc": "Certificate providing the values of an analysis of a sample by a laboratory."
+	},
+	{
+		"doc_code": "001003",
+		"doc_name": "Blood Analysis Report",
+		"doc_desc": "Certificate providing the values of an analysis of a sample of blood."
+	},
+	{
+		"doc_code": "002000",
+		"doc_name": "Certificate of conformity",
+		"doc_desc": "Certificate certifying the conformity to predefined definitions."
+	},
+	{
+		"doc_code": "003000",
+		"doc_name": "Certificate of quality",
+		"doc_desc": "Certificate certifying the quality of goods, services etc."
+	},
+	{
+		"doc_code": "003001",
+		"doc_name": "Product Approval",
+		"doc_desc": "A Certificate signifying the quality approval of a food product."
+	},
+	{
+		"doc_code": "0030DC",
+		"doc_name": "Batch Release Certificate",
+		"doc_desc": "A Certificate confirming the release of a production batch after due testing and quality controls."
+	},
+	{
+		"doc_code": "004000",
+		"doc_name": "Test report",
+		"doc_desc": "Report providing the results of a test session."
+	},
+	{
+		"doc_code": "004001",
+		"doc_name": "Test Certificate",
+		"doc_desc": "A Certificate providing the results of a test session."
+	},
+	{
+		"doc_code": "005000",
+		"doc_name": "Price/sales catalogue",
+		"doc_desc": "A document/message to enable the transmission of information regarding pricing and catalogue details for goods and services offered by a seller to a buyer."
+	},
+	{
+		"doc_code": "006000",
+		"doc_name": "Product specification report",
+		"doc_desc": "Report providing specification values of products."
+	},
+	{
+		"doc_code": "006001",
+		"doc_name": "Technical Writeup/ Literature",
+		"doc_desc": "A report providing technical specifications of products"
+	},
+	{
+		"doc_code": "011000",
+		"doc_name": "Federal label approval",
+		"doc_desc": "A pre-approved document relating to federal label approval requirements"
+	},
+	{
+		"doc_code": "0110FS",
+		"doc_name": "Specimen Copy of Label",
+		"doc_desc": "A copy of a label of packaged food product intended to be imported, whether approved or under approval of FSSAI"
+	},
+	{
+		"doc_code": "0380AQ",
+		"doc_name": "Vaccination certificate",
+		"doc_desc": "Official document proving immunisation against certain diseases."
+	},
+	{
+		"doc_code": "0530HZ",
+		"doc_name": "Safety and hazard data sheet",
+		"doc_desc": "Document or message to supply advice on a dangerous or hazardous material to industrial customers so as to enable them to take measures to protect their employees and the environment from any potential harmful effects from these material."
+	},
+	{
+		"doc_code": "101000",
+		"doc_name": "Registration Document",
+		"doc_desc": "An official document providing registration details."
+	},
+	{
+		"doc_code": "101001",
+		"doc_name": "Importer Exporter Certificate",
+		"doc_desc": "The Certificate of registration issued by DGFT to an Importer or an Exporter"
+	},
+	{
+		"doc_code": "1010DC",
+		"doc_name": "Registration Certificate",
+		"doc_desc": "The Certificate issued by the Drug Controller General for the Drug Manufacturer"
+	},
+	{
+		"doc_code": "101002",
+		"doc_name": "RCMC",
+		"doc_desc": "Registration Cum Membership Certificate issued by an Export Promotion Council"
+	},
+	{
+		"doc_code": "105000",
+		"doc_name": "Purchase order",
+		"doc_desc": "Document/message issued within an enterprise to initiate the purchase of articles, materials or services required for the production or manufacture of goods to be offered for sale or otherwise supplied to customers."
+	},
+	{
+		"doc_code": "165000",
+		"doc_name": "Bond",
+		"doc_desc": "A document indicating a bond that guarantees the payment of duties etc or a performance."
+	},
+	{
+		"doc_code": "250000",
+		"doc_name": "Crew list declaration",
+		"doc_desc": "Declaration regarding crew members aboard the conveyance."
+	},
+	{
+		"doc_code": "2670PQ",
+		"doc_name": "Fumigation certificate",
+		"doc_desc": "Certificate attesting that fumigation has been performed."
+	},
+	{
+		"doc_code": "271000",
+		"doc_name": "Packing list",
+		"doc_desc": "Document/message specifying the distribution of goods in individual packages (in trade environment the despatch advice message is used for the packing list)."
+	},
+	{
+		"doc_code": "293000",
+		"doc_name": "Inspection report",
+		"doc_desc": "A message informing a party of the results of an inspection."
+	},
+	{
+		"doc_code": "298000",
+		"doc_name": "Dangerous goods list",
+		"doc_desc": "Listing of all details of dangerous goods carried."
+	},
+	{
+		"doc_code": "315000",
+		"doc_name": "Contract",
+		"doc_desc": "(1296) Document/message evidencing an agreement between the seller and the buyer for the supply of goods or services; its effects are equivalent to those of order followed by an acknowledgement of order."
+	},
+	{
+		"doc_code": "325000",
+		"doc_name": "Proforma invoice",
+		"doc_desc": "Document/message serving as a preliminary invoice, containing - on the whole - the same information as the final invoice, but not actually claiming payment."
+	},
+	{
+		"doc_code": "331000",
+		"doc_name": "Commercial invoice which includes a packing list",
+		"doc_desc": "Commercial transaction (invoice) will include a packing list."
+	},
+	{
+		"doc_code": "430000",
+		"doc_name": "Banker's guarantee",
+		"doc_desc": "Document/message in which a bank undertakes to pay out a limited amount of money to a designated party, on conditions stated therein (other than those laid down in the Uniform Customs Practice)."
+	},
+	{
+		"doc_code": "465000",
+		"doc_name": "Documentary credit",
+		"doc_desc": "Document/message in which a bank states that it has issued a documentary credit under which the beneficiary is to obtain payment, acceptance, or negotiation on compliance with certain terms and conditions and against presentation of stipulated documents and such drafts may be specified. The credit may or may not be confirmed by another bank."
+	},
+	{
+		"doc_code": "626000",
+		"doc_name": "Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) Certificate",
+		"doc_desc": "A certificate used in the trade of endangered species in accordance with the CITES convention."
+	},
+	{
+		"doc_code": "627000",
+		"doc_name": "Free Sale Certificate in the Country of Origin",
+		"doc_desc": "A certificate confirming that a specified product is free for sale in the country of origin."
+	},
+	{
+		"doc_code": "629000",
+		"doc_name": "Veterinary quarantine certificate",
+		"doc_desc": "A certification that livestock or animal products, that are either imported or entering free zones, are kept under health supervision for a time period determined by veterinary quarantine instructions."
+	},
+	{
+		"doc_code": "636000",
+		"doc_name": "Health certificate",
+		"doc_desc": "A document legalized by a competent authority that shows that the product has been tested microbiologically and is free from any pathogens and fit for human consumption and/or declares that the product is in compliance with sanitary and phytosanitary measures."
+	},
+	{
+		"doc_code": "6360AQ",
+		"doc_name": "Health certificate",
+		"doc_desc": "Health Certificate from the country of origin fulfilling all import health guidelines of India."
+	},
+	{
+		"doc_code": "637000",
+		"doc_name": "Food grade certificate",
+		"doc_desc": "A document that shows that the product (food additive, detergent, disinfectant, and sanitizer) is suitable to be used in the food industry."
+	},
+	{
+		"doc_code": "648000",
+		"doc_name": "Certificate of compliance with standards of the World Organization for Animal Health (OIE)",
+		"doc_desc": "A certification that the products have been treated in a way consistent with the standards set by the World Organization for Animal Health (OIE)."
+	},
+	{
+		"doc_code": "649000",
+		"doc_name": "Production facility license",
+		"doc_desc": "A license granted by a competent authority to a production facility for manufacturing specific products."
+	},
+	{
+		"doc_code": "6490HZ",
+		"doc_name": "Consent to Operate/Registration",
+		"doc_desc": "A Certificate issued by the State Pollution Control Board to operate a facility."
+	},
+	{
+		"doc_code": "6490DC",
+		"doc_name": "Certified copy of the licensed premises",
+		"doc_desc": "Certified copy of the licensed premises where drugs are to be stored."
+	},
+	{
+		"doc_code": "651000",
+		"doc_name": "Manufacturing license",
+		"doc_desc": "A license granted by a competent authority to a manufacturer for production of specific products."
+	},
+	{
+		"doc_code": "651001",
+		"doc_name": "Industrial License",
+		"doc_desc": "A license granted by a competent authority to establish and operate a specific industry."
+	},
+	{
+		"doc_code": "6570PQ",
+		"doc_name": "Phytosanitary Re-export Certificate",
+		"doc_desc": "A message/document consistent with the model for re-export phytosanitary certificates of the IPPC, attesting that a consignment meets phytosanitary import requirements."
+	},
+	{
+		"doc_code": "700000",
+		"doc_name": "Waybill",
+		"doc_desc": "Non-negotiable document evidencing the contract for the transport of cargo."
+	},
+	{
+		"doc_code": "703000",
+		"doc_name": "House waybill",
+		"doc_desc": "The document made out by an agent/consolidator which evidences the contract between the shipper and the agent/consolidator for the arrangement of carriage of goods."
+	},
+	{
+		"doc_code": "704000",
+		"doc_name": "Master bill of lading",
+		"doc_desc": "A bill of lading issued by the master of a vessel (in actuality the owner or charterer of the vessel). It could cover a number of house bills."
+	},
+	{
+		"doc_code": "705000",
+		"doc_name": "Bill of lading",
+		"doc_desc": "Negotiable document/message which evidences a contract of carriage by sea and the taking over or loading of goods by the carrier, and by which the carrier undertakes to deliver goods against surrender of the document. A provision in the document that goods are to be delivered to the order of a named person, or to order, or to bearer, constitutes such an undertaking."
+	},
+	{
+		"doc_code": "708000",
+		"doc_name": "Empty container bill",
+		"doc_desc": "Bill of lading indicating an empty container."
+	},
+	{
+		"doc_code": "709000",
+		"doc_name": "Tanker bill of lading",
+		"doc_desc": "Document which evidences the transport of liquid bulk cargo."
+	},
+	{
+		"doc_code": "710000",
+		"doc_name": "Sea waybill",
+		"doc_desc": "Non-negotiable document which evidences a contract for the carriage of goods by sea and the taking over of the goods by the carrier, and by which the carrier undertakes to deliver the goods to the consignee named in the document."
+	},
+	{
+		"doc_code": "711000",
+		"doc_name": "Inland waterway bill of lading",
+		"doc_desc": "Negotiable transport document made out to a named person, to order or to bearer, signed by the carrier and handed to the sender after receipt of the goods."
+	},
+	{
+		"doc_code": "713000",
+		"doc_name": "Mate's receipt",
+		"doc_desc": "Document/message issued by a ship's officer to acknowledge that a specified consignment has been received on board a vessel, and the apparent condition of the goods; enabling the carrier to issue a Bill of lading."
+	},
+	{
+		"doc_code": "714000",
+		"doc_name": "House bill of lading",
+		"doc_desc": "The bill of lading issued not by the carrier but by the freight forwarder/consolidator known by the carrier."
+	},
+	{
+		"doc_code": "720000",
+		"doc_name": "Rail consignment note (generic term)",
+		"doc_desc": "Transport document constituting a contract for the carriage of goods between the sender and the carrier (the railway). For international rail traffic, this document must conform to the model prescribed by the international conventions concerning carriage of goods by rail, e.g. CIM Convention, SMGS Convention."
+	},
+	{
+		"doc_code": "730000",
+		"doc_name": "Road consignment note",
+		"doc_desc": "Transport document/message which evidences a contract between a carrier and a sender for the carriage of goods by road (generic term)."
+	},
+	{
+		"doc_code": "740000",
+		"doc_name": "Air waybill",
+		"doc_desc": "Document/message made out by or on behalf of the shipper which evidences the contract between the shipper and carrier(s) for the carriage of goods over routes of the carrier(s) and which is identified by the airline prefix issuing the document plus a serial (IATA)."
+	},
+	{
+		"doc_code": "741000",
+		"doc_name": "Master air waybill",
+		"doc_desc": "Document/message made out by or on behalf of the agent/consolidator which evidences the contract between the agent/consolidator and carrier(s) for the carriage of goods over routes of the carrier(s) for a consignment consisting of goods originated by more than one shipper (IATA)."
+	},
+	{
+		"doc_code": "744000",
+		"doc_name": "Crew's effects declaration",
+		"doc_desc": "Declaration to Customs regarding the personal effects of crew members aboard the conveyance; equivalent to IMO FAL 4."
+	},
+	{
+		"doc_code": "745000",
+		"doc_name": "Passenger list",
+		"doc_desc": "Declaration to Customs regarding passengers aboard the conveyance; equivalent to IMO FAL 6."
+	},
+	{
+		"doc_code": "788000",
+		"doc_name": "Container manifest (unit packing list)",
+		"doc_desc": "Document/message specifying the contents of particular freight containers or other transport units, prepared by the party responsible for their loading into the container or unit."
+	},
+	{
+		"doc_code": "7880FS",
+		"doc_name": "Container Stuffing Report",
+		"doc_desc": "Document specifying the contents of particular containers prepared by the party responsible for their loading into the container indicating the contents of the packages."
+	},
+	{
+		"doc_code": "797000",
+		"doc_name": "Maritime declaration of health",
+		"doc_desc": "Document certifying the health condition on board a vessel, valid to a specified date."
+	},
+	{
+		"doc_code": "798000",
+		"doc_name": "Certificate of registry",
+		"doc_desc": "Official certificate stating the vessel's registry."
+	},
+	{
+		"doc_code": "799000",
+		"doc_name": "Ship's stores declaration",
+		"doc_desc": "Declaration to Customs regarding the contents of the ship's stores (equivalent to IMO FAL 3) i.e. goods intended for consumption by passengers/crew on board vessels, aircraft or trains, whether or not sold or landed; goods necessary for operation/maintenance of conveyance, including fuel/lubricants, excluding spare parts/equipment (IMO)."
+	},
+	{
+		"doc_code": "811000",
+		"doc_name": "Export licence",
+		"doc_desc": "Permit issued by a government authority permitting exportation of a specified commodity subject to specified conditions such as quantity, country of destination, etc."
+	},
+	{
+		"doc_code": "8510FS",
+		"doc_name": "Phytosanitary certificate",
+		"doc_desc": "A message/document consistent with the model for certificates of the IPPC, attesting that a consignment meets phytosanitary import requirements."
+	},
+	{
+		"doc_code": "852000",
+		"doc_name": "Sanitary certificate",
+		"doc_desc": "Document/message issued by the competent authority in the exporting country evidencing that alimentary and animal products, including dead animals, are fit for human consumption, and giving details, when relevant, of controls undertaken."
+	},
+	{
+		"doc_code": "8520PQ",
+		"doc_name": "Phytosanitary Import Permit",
+		"doc_desc": "Phytosanitary Import permit issued by the Directorate of Plant Protection & Quarantine Services."
+	},
+	{
+		"doc_code": "8520AQ",
+		"doc_name": "Sanitary Import Permit",
+		"doc_desc": "Sanitary Import Permit issued by Animal Quarantine & Control Service."
+	},
+	{
+		"doc_code": "853000",
+		"doc_name": "Veterinary certificate",
+		"doc_desc": "Document/message issued by the competent authority in the exporting country evidencing that live animals or birds are not infested or infected with disease, and giving details regarding their provenance, and of vaccinations and other treatment to which they have been subjected."
+	},
+	{
+		"doc_code": "856000",
+		"doc_name": "Inspection certificate",
+		"doc_desc": "Document/message issued by a competent body evidencing that the goods described therein have been inspected in accordance with national or international standards, in conformity with legislation in the country in which the inspection is required, or as specified in the contract."
+	},
+	{
+		"doc_code": "856001",
+		"doc_name": "Pre Shipment Inspection Certificate",
+		"doc_desc": "A Certificate issued prior to the goods being shipped after inspection by a competent body evidencing that the goods described therein have been inspected in accordance with national or international standards, in conformity with legislation in the country in which the inspection is required, or as specified in the contract."
+	},
+	{
+		"doc_code": "861000",
+		"doc_name": "Certificate of origin",
+		"doc_desc": "Document/message identifying goods, in which the authority or body authorized to issue it certifies expressly that the goods to which the certificate relates originate in a specific country. The word 'country' may include a group of countries, a region, or a part of a country. This certificate may also include a declaration by the manufacturer, producer, supplier, exporter, or other competent person."
+	},
+	{
+		"doc_code": "864000",
+		"doc_name": "Preference certificate of origin",
+		"doc_desc": "Document/message describing a certificate of origin meeting the requirements for preferential treatment."
+	},
+	{
+		"doc_code": "865000",
+		"doc_name": "Certificate of origin form GSP",
+		"doc_desc": "Specific form of certificate of origin for goods qualifying for preferential treatment under the generalized system of preferences (includes a declaration of origin and certificate, form A)."
+	},
+	{
+		"doc_code": "870000",
+		"doc_name": "Consular invoice",
+		"doc_desc": "Document/message to be prepared by an exporter in their country and presented to a diplomatic representation of the importing country for endorsement and subsequently to be presented by the importer in connection with the import of the goods described therein."
+	},
+	{
+		"doc_code": "890000",
+		"doc_name": "Dangerous goods declaration",
+		"doc_desc": "(1115) Document/message issued by a consignor in accordance with applicable conventions or regulations, describing hazardous goods or materials for transport purposes, and stating that the latter have been packed and labeled in accordance with the provisions of the relevant conventions or regulations."
+	},
+	{
+		"doc_code": "911000",
+		"doc_name": "Import licence",
+		"doc_desc": "Document/message issued by the competent body in accordance with import regulations in force, by which authorization is granted to a named party to import either a limited quantity of designated articles or an unlimited quantity of such articles during a limited period, under conditions specified in the document.(CCC)."
+	},
+	{
+		"doc_code": "911001",
+		"doc_name": "FSSAI Import License"
+	},
+	{
+		"doc_code": "934000",
+		"doc_name": "Value declaration (GATT Valuation Declaration)",
+		"doc_desc": "Document/message in which a declarant (importer) states the invoice or other price (e.g. selling price, price of identical goods), and specifies costs for freight, insurance and packing, etc., terms of delivery and payment, any relationship with the trading partner, etc., for the purpose of determining the Customs value of goods imported."
+	},
+	{
+		"doc_code": "935000",
+		"doc_name": "Customs invoice",
+		"doc_desc": "(Value declared for Customs purposes) - Document/message required by the Customs in an importing country in which an exporter states the invoice or other price (e.g. selling price, price of identical goods), and specifies costs for freight, insurance and packing, etc., terms of delivery and payment, for the purpose of determining the Customs value in the importing country of goods consigned to that country."
+	},
+	{
+		"doc_code": "955000",
+		"doc_name": "ATA carnet",
+		"doc_desc": "International Customs document (Admission Temporaire / Temporary Admission) which, issued under the terms of the ATA Convention (1961), incorporates an internationally valid guarantee and may be used, in lieu of national Customs documents and as security for import duties and taxes, to cover the temporary admission of goods and, where appropriate, the transit of goods. If accepted for controlling the temporary export and reimport of goods, international guarantee does not apply (CCC)."
+	},
+	{
+		"doc_code": "XXX0FS",
+		"doc_name": "Rejection Certificate",
+		"doc_desc": "Certificate issued by the country of import where an export consignment was rejected."
+	},
+	{
+		"doc_code": "XXX001",
+		"doc_name": "Narcotics Certificate",
+		"doc_desc": "A Certificate issued by the country of origin that the item does not contain any narcotic or psychotropic substances."
+	},
+	{
+		"doc_code": "XXX002",
+		"doc_name": "Stuffing List"
+	},
+	{
+		"doc_code": "XXX003",
+		"doc_name": "Radio Activity report",
+		"doc_desc": "A report providing the levels of radioactive elements in the food items."
+	},
+	{
+		"doc_code": "6570FS",
+		"doc_name": "Food grade certificate",
+		"doc_desc": "A document that shows that the product (food additive, detergent, disinfectant, and sanitizer) is suitable to be used in the food industry."
+	},
+	{
+		"doc_code": "520000",
+		"doc_name": "Insurance certificate",
+		"doc_desc": "Document/message issued to the insured certifying that insurance has been effected and that a policy has been issued."
+	},
+	{
+		"doc_code": "XXX000",
+		"doc_name": "Protocols Approval Letter",
+		"doc_desc": "An approval containing details of the protocol to be followed in the handling of a product."
+	},
+	{
+		"doc_code": "911TB1",
+		"doc_name": "CC for Tea Import by Tea Board"
+	},
+	{
+		"doc_code": "002KP0",
+		"doc_name": "Kimberley Process Certificate"
+	},
+	{
+		"doc_code": "911BN2",
+		"doc_name": "Import Certificate for import of Narcotic Drugs"
+	},
+	{
+		"doc_code": "101DC1",
+		"doc_name": "Registration Certificate (Drugs)"
+	},
+	{
+		"doc_code": "101DC2",
+		"doc_name": "Registration Certificate (Cosmetics)"
+	},
+	{
+		"doc_code": "911CI3",
+		"doc_name": "Import Permit for Non-Insecticidal use"
+	},
+	{
+		"doc_code": "101CP1",
+		"doc_name": "Registration Certificate"
+	},
+	{
+		"doc_code": "911DF1",
+		"doc_name": "Permit for Import of Livestock Products"
+	},
+	{
+		"doc_code": "911DA3",
+		"doc_name": "NOC for Import of Aircraft for Operating Air Transport Services"
+	},
+	{
+		"doc_code": "9111DC",
+		"doc_name": "Import Licence for Drugs"
+	},
+	{
+		"doc_code": "101LM1",
+		"doc_name": "Certificate of Registration of Importer of Weights and Measures"
+	},
+	{
+		"doc_code": "911PE1",
+		"doc_name": "Licence Form LE -8( Licence to Import explsovies)"
+	},
+	{
+		"doc_code": "911PE2",
+		"doc_name": "License to Import Ammonium Nitrate (licence Form P-5)"
+	},
+	{
+		"doc_code": "851000",
+		"doc_name": "Phyto Sanitary Certificates (PSCs) from NPPOs of origin country"
+	},
+	{
+		"doc_code": "911PQ1",
+		"doc_name": "Import Permit issued by PQIS"
+	},
+	{
+		"doc_code": "911RB1",
+		"doc_name": "No Objection Certificate (NOC) for import of Natural Rubber"
+	},
+	{
+		"doc_code": "101TO2",
+		"doc_name": "Registration-Cum-Membership Certificate [RCMC]"
+	},
+	{
+		"doc_code": "626WC3",
+		"doc_name": "Capitive Bred/ artifically propogated Certificate"
+	},
+	{
+		"doc_code": "101RN1",
+		"doc_name": "Certificate of Registration"
+	},
+	{
+		"doc_code": "911AB1",
+		"doc_name": "No objection Certificate for Procurement of Radiation Source"
+	},
+	{
+		"doc_code": "0110DC",
+		"doc_name": "Label of Consignment under Drugs and Cosmetics Act"
+	},
+	{
+		"doc_code": "TBDI",
+		"doc_name": "CC for Tea Import by TB issued by Tea Board"
+	},
+	{
+		"doc_code": "GJEPC",
+		"doc_name": "Kimberley Process Certificate issued by GJEPC"
+	},
+	{
+		"doc_code": "CBN",
+		"doc_name": "Import Certificate for import of Narcotic Drugs issued by CBN"
+	},
+	{
+		"doc_code": "CIB",
+		"doc_name": "Import Permit for Non-Insecticidal use issued by CIB&RC"
+	},
+	{
+		"doc_code": "CPCB",
+		"doc_name": "Registration Certificate issued by CPCB"
+	},
+	{
+		"doc_code": "DADF",
+		"doc_name": "Permit for Import of Livestock Products issued by DADF"
+	},
+	{
+		"doc_code": "DGCA",
+		"doc_name": "NOC for Import/Procurement of Aircraft for Operating Air Transport Services issued by DGCA"
+	},
+	{
+		"doc_code": "LGMET",
+		"doc_name": "Certificate of Registration of Importer of Weights and Measures issued by Legal Metrology Division, DoCA"
+	},
+	{
+		"doc_code": "PQ",
+		"doc_name": "Import Permit issued by PQIS"
+	},
+	{
+		"doc_code": "RBBD",
+		"doc_name": "No Objection Certificate (NOC) for import of Natural Rubber issued by Rubber Board"
+	},
+	{
+		"doc_code": "TOBBD",
+		"doc_name": "Registration-Cum-Membership Certificate [RCMC] issued by Tobacco Board"
+	},
+	{
+		"doc_code": "RNI",
+		"doc_name": "Certificate of Registration issued by RNI for registering the publisher/Owner."
+	},
+	{
+		"doc_code": "AERB",
+		"doc_name": "No Objection Certificate for Procurement of Radiation Source issued by AERB"
+	},
+	{
+		"doc_code": "CDRUG1",
+		"doc_name": "Registration Certificate (Drugs) issued by CDSCO"
+	},
+	{
+		"doc_code": "CDRUG2",
+		"doc_name": "Registration Certificate (Cosmetics) issued by CDSCO"
+	},
+	{
+		"doc_code": "CDRUG3",
+		"doc_name": "Import Licence issued by CDSCO for Drugs"
+	},
+	{
+		"doc_code": "PESO1",
+		"doc_name": "Licence Form LE -8 (Licence to Import explosives) issued by PESO"
+	},
+	{
+		"doc_code": "PESO2",
+		"doc_name": "License to Import Ammonium Nitrate (licence Form P-5) issued by PESO"
+	},
+	{
+		"doc_code": "WCCB1",
+		"doc_name": "A certificate used in the trade of endangered species in accordance with the CITES convention."
+	},
+	{
+		"doc_code": "WCCB2",
+		"doc_name": "Captive Bred/ artificially propagated Certificate issued by WCCB for species which fall under appendix 1 of CITES"
+	}
+]
