@@ -280,7 +280,7 @@ function LineItemCard({
 											{' '}
 											{startCase(bill?.billCurrency)}
 											{' '}
-											{startCase(bill?.tdsAmount) || 0}
+											{bill?.tdsAmount || 0}
 											)
 										</div>
 										<div className={styles.tds_amount}>
@@ -291,7 +291,7 @@ function LineItemCard({
 											{' '}
 											{startCase(bill?.billCurrency)}
 											{' '}
-											{startCase(paidTds) || 0}
+											{paidTds || 0}
 											)
 										</div>
 									</div>
