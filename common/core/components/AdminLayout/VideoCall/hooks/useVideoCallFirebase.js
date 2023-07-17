@@ -1,4 +1,5 @@
-import { useSelector } from '@cogoport/store';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import {
 	addDoc,
 	collection,
@@ -27,15 +28,16 @@ function useVideoCallFirebase({
 	setStreams,
 	streams,
 	peerRef,
-	callComing,
+	// callComing,
 	inACall,
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
 	const { id: userId, name: userName } = user_data || {};
+	const dispatch = useDispatch();
 
-	const saveWebrtcToken = async (data, calling_room_id, path) => {
+	const saveWebrtcToken = useCallback(async (data, calling_room_id, path) => {
 		if (calling_room_id) {
 			const WebrtcTokenRoomDoc = doc(
 				firestore,
@@ -55,9 +57,9 @@ function useVideoCallFirebase({
 				console.error(error);
 			}
 		}
-	};
+	}, [firestore]);
 
-	const saveCallingData = async (data) => {
+	const saveCallingData = useCallback(async (data) => {
 		const videoCallRoomCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH.video_calls}`,
@@ -82,7 +84,7 @@ function useVideoCallFirebase({
 			console.error(error);
 			return null;
 		}
-	};
+	}, [firestore, setCallDetails]);
 
 	const callUpdate = (data) => {
 		if (callDetails?.calling_room_id) {
@@ -114,61 +116,63 @@ function useVideoCallFirebase({
 	}, [streams]);
 
 	const callEnd = useCallback(() => {
-		if (inACall) {
-			setInACall(false);
-			stopStream('screen_stream');
-			stopStream('user_stream');
-			const localPeerRef = peerRef;
-			if (localPeerRef.current) {
-				localPeerRef.current.destroy();
-			}
-			localPeerRef.current = null;
-			setCallDetails({
-				my_details           : null,
-				peer_details         : null,
-				calling_details      : null,
-				calling_room_id      : null,
-				webrtc_token_room_id : null,
-				calling_type         : null,
-			});
-			setWebrtcToken({
-				user_token : null,
-				peer_token : null,
-			});
-			setOptions({
-				isMicActive         : true,
-				isVideoActive       : true,
-				isScreenShareActive : false,
-				isMaximize          : false,
-			});
-			setStreams({
-				user_stream   : null,
-				peer_stream   : null,
-				screen_stream : null,
-			});
+		dispatch(
+			setProfileState({
+				video_call_recipient_data : {},
+				is_in_video_call          : false,
+			}),
+		);
+
+		setInACall(false);
+		setCallComing(false);
+		stopStream('screen_stream');
+		stopStream('user_stream');
+		const localPeerRef = peerRef;
+		if (localPeerRef.current) {
+			localPeerRef.current.destroy();
 		}
-		if (callComing) {
-			setCallComing(false);
-		}
-	}, [inACall, callComing, setInACall, stopStream, peerRef, setCallDetails,
+		localPeerRef.current = null;
+
+		setCallDetails({
+			my_details           : null,
+			peer_details         : null,
+			calling_details      : null,
+			calling_room_id      : null,
+			webrtc_token_room_id : null,
+			calling_type         : null,
+		});
+		setWebrtcToken({
+			user_token : null,
+			peer_token : null,
+		});
+		setOptions({
+			isMicActive         : true,
+			isVideoActive       : true,
+			isScreenShareActive : false,
+			isMaximize          : false,
+		});
+		setStreams({
+			user_stream   : null,
+			peer_stream   : null,
+			screen_stream : null,
+		});
+	}, [dispatch, setInACall, stopStream, peerRef, setCallDetails,
 		setWebrtcToken, setOptions, setStreams, setCallComing]);
 
-	const callingTo = () => {
-		if (inACall) return;
-
+	const callingTo = useCallback((peer_details = {}) => {
 		setCallDetails((prev) => ({
 			...prev,
-			call_status  : 'calling',
-			calling_by   : 'admin',
-			peer_details : {
+			call_status : 'calling',
+			calling_by  : 'admin',
+			my_details  : {
 				name      : userName,
 				user_id   : userId,
 				user_type : 'admin',
 			},
+			peer_details,
 			webrtc_token_room_id : userId,
 			calling_type         : 'outgoing',
 		}));
-
 		navigator.mediaDevices
 			.getUserMedia({ video: true, audio: true })
 			.then((myStream) => {
@@ -206,7 +210,7 @@ function useVideoCallFirebase({
 					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
 				});
 			});
-	};
+	}, [peerRef, saveCallingData, saveWebrtcToken, setCallDetails, setInACall, setStreams, userId, userName]);
 
 	useEffect(() => {
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);

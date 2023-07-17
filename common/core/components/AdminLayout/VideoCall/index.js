@@ -11,7 +11,10 @@ import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import styles from './styles.module.css';
 import VideoCallScreen from './VideoCallScreen';
 
-function VideoCall() {
+function VideoCall({
+	videoCallRecipientData = {},
+	inVideoCall = false,
+}) {
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
@@ -80,6 +83,12 @@ function VideoCall() {
 	});
 
 	useEffect(() => {
+		if (inVideoCall) {
+			callingTo(videoCallRecipientData);
+		}
+	}, [callingTo, inVideoCall, videoCallRecipientData]);
+
+	useEffect(() => {
 		if (streams.screen_stream && streamRef.current.user) {
 			streamRef.current.user.srcObject = streams.screen_stream;
 		} else if (streams.user_stream && streamRef.current.user) {
@@ -101,7 +110,7 @@ function VideoCall() {
 	return (
 		<div>
 			<div className={styles.call_test}>
-				<Button onClick={callingTo}>Call</Button>
+				<Button onClick={() => callingTo({})}>Call</Button>
 			</div>
 			{callComing ? (
 				<div>

@@ -38,6 +38,7 @@ function AdminLayout({
 		user: { id: user_id = '' },
 		partner: partnerData,
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
+		is_in_video_call:inVideoCall = false, video_call_recipient_data = {},
 	} = user_data;
 
 	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partnerData || {};
@@ -93,7 +94,10 @@ function AdminLayout({
 				}}
 				inCall={inCall}
 			/>
-			<VideoCall />
+			<VideoCall
+				videoCallRecipientData={video_call_recipient_data}
+				inVideoCall={inVideoCall}
+			/>
 			<AnnouncementModal data={announcements} />
 
 			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}

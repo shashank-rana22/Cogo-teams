@@ -44,26 +44,22 @@
 	align-items: center;
 	justify-content: center;
 
-	:global {
-		.styled_avatar {
-			border-radius: 50% !important;
-		}
+	.styled_avatar {
+		border-radius: 50% !important;
+	}
 
-		.header {
-			margin-bottom: 14px;
-			font-size: 40px;
-			font-weight: 500;
-			color: #fff;
-			text-align: center;
-		}
+	.header {
+		margin-bottom: 14px;
+		font-size: 40px;
+		font-weight: 500;
+		color: #fff;
+		text-align: center;
 	}
 }
 
 .call_screen {
-	:global {
-		.peer_video_stream {
-			display: none;
-		}
+	.peer_video_stream {
+		display: none;
 	}
 }
 
@@ -71,10 +67,8 @@
 	width: 100%;
 	height: 100%;
 
-	:global {
-		.avatar_screen {
-			display: none;
-		}
+	.avatar_screen {
+		display: none;
 	}
 }
 
@@ -92,15 +86,13 @@
 	background: #312d2d;
 	border-radius: 48px;
 
-	:global {
-		.call_text {
-			font-size: 18px;
-			text-align: center;
+	.call_text {
+		font-size: 18px;
+		text-align: center;
 
-			span {
-				margin-left: 8px;
-				font-weight: 600;
-			}
+		span {
+			margin-left: 8px;
+			font-weight: 600;
 		}
 	}
 }
@@ -123,13 +115,11 @@
 	background: #f44336;
 	border-radius: 50%;
 
-	:global {
-		.end_call_icon {
-			width: 28px;
-			height: 28px;
-			cursor: pointer;
-			transform: rotate(135deg);
-		}
+	.end_call_icon {
+		width: 28px;
+		height: 28px;
+		cursor: pointer;
+		transform: rotate(135deg);
 	}
 }
 
@@ -139,11 +129,9 @@
 	margin-right: 10px;
 	cursor: pointer;
 
-	:global {
-		.end_call_icon {
-			width: 40px;
-			height: 40px;
-			cursor: pointer;
-		}
+	.end_call_icon {
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
 	}
 }
