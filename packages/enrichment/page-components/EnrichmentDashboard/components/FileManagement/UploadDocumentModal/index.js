@@ -25,7 +25,6 @@ function UploadDocumentModal(props) {
 	});
 
 	return (
-
 		<>
 			<Modal.Header title="Upload POC Details" />
 

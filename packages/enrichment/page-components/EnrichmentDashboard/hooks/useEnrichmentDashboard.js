@@ -6,7 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { useState, useMemo, useEffect } from 'react';
 
 import ENRICHMENT_API_MAPPING from '../../../constants/enrichment-api-mapping';
-import getEnrichmentColumns from '../configurations/get-enrichment-columns';
+import getEnrichmentColumnsData from '../configurations/get-enrichment-columns-data';
 
 import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
 
@@ -110,7 +110,7 @@ const useEnrichmentDashboard = ({
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
 	};
 
-	const columns = getEnrichmentColumns({
+	const columns = getEnrichmentColumnsData({
 		handleEditDetails,
 		selectedRowId,
 		setSelectedRowId,

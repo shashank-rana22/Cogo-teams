@@ -10,7 +10,7 @@ import { getActionConfigurations } from '../../../../utils/secondary-tabs-mappin
 
 import styles from './styles.module.css';
 
-const ICON_MAPPING = {
+const ICONS_MAPPING = {
 	edit    : IcMEdit,
 	add     : IcMPlusInCircle,
 	success : IcMTick,
@@ -24,7 +24,7 @@ function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComple
 		<div className={styles.action_container}>
 
 			{Object.keys(CTA_MAPPING || {}).map((key) => {
-				const Icon = key ? ICON_MAPPING[key] : null;
+				const Icon = key ? ICONS_MAPPING[key] : null;
 
 				return (
 					<Button

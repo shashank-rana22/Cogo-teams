@@ -8,7 +8,7 @@ import UPLOAD_DOCUMENT_STATUS_MAPPING from '../../../constants/upload-document-s
 import ActionContent from '../components/ManualEnrichment/components/ActionContent';
 import styles from '../styles.module.css';
 
-const getEnrichmentColumns = ({
+const getEnrichmentColumnsData = ({
 	handleEditDetails = () => {},
 	setSelectedRowId = () => {},
 	selectedRowId = '',
@@ -233,4 +233,4 @@ const getEnrichmentColumns = ({
 	},
 ];
 
-export default getEnrichmentColumns;
+export default getEnrichmentColumnsData;
