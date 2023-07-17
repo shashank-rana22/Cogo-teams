@@ -111,6 +111,42 @@ function Card({
 							) : null
 							}
 						</div>
+						<div className={styles.source}>
+							{
+							singleServiceData?.is_minimum_price_shipment ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										minimum price shipment :
+										{singleServiceData?.is_minimum_price_shipment}
+									</Pill>
+								</div>
+							) : null
+							}
+						</div>
+						<div className={styles.source}>
+							{
+							singleServiceData?.chargeable_weight ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										chargeable weight :
+										{singleServiceData?.chargeable_weight}
+									</Pill>
+								</div>
+							) : null
+							}
+						</div>
+						<div className={styles.source}>
+							{
+							singleServiceData?.price_type ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										price type :
+										{singleServiceData?.price_type?.replace(/_/g, ' ')}
+									</Pill>
+								</div>
+							) : null
+							}
+						</div>
 						{
 							data?.rowData?.schedule_type ? (
 								<div>
