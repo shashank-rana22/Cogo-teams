@@ -68,49 +68,52 @@ function Card({
 					refetch={refetch}
 				/>
 			</div>
+			{
+	task.task === 'upload_indent' ? (
+		<Modal show={show} onClose={() => setShow(false)}>
+			<Modal.Header title="EMAIL FORM" />
+			<Modal.Body>
+				<div className={styles.flex}>
+					{
+					(controls || []).map((fieldControls) => (
+						<div key={fieldControls.name} className={styles.field}>
+							<div className={styles.label}>{fieldControls.label}</div>
+							<InputController
+								control={control}
+								{...fieldControls}
+							/>
+							{!isEmpty(errors) ? (
+								<div className={styles.error}>
+									{errors[fieldControls.name]?.message}
+								</div>
+							) : null}
+						</div>
+					))
+		}
+				</div>
+				<div className={styles.footer}>
+					<Button
+						onClick={() => setShow(false)}
+						themeType="secondary"
+						disabled={loading}
+					>
+						Cancel
+					</Button>
+					<Button
+						onClick={handleSubmit(onSubmit)}
+						themeType="accent"
+						type="submit"
+						disabled={loading}
+						loading={loading}
+					>
+						Show Preview
+					</Button>
+				</div>
 
-			<Modal show={show} onClose={() => setShow(false)} className={styles.modal_container}>
-				<Modal.Header title="EMAIL FORM" />
-				<Modal.Body>
-					<div className={styles.flex}>
-						{
-						(controls || []).map((fieldControls) => (
-							<div key={fieldControls.name} className={styles.field}>
-								<div className={styles.label}>{fieldControls.label}</div>
-								<InputController
-									control={control}
-									{...fieldControls}
-								/>
-								{!isEmpty(errors) ? (
-									<div className={styles.error}>
-										{errors[fieldControls.name]?.message}
-									</div>
-								) : null}
-							</div>
-						))
-					}
-					</div>
-					<div className={styles.footer}>
-						<Button
-							onClick={() => setShow(false)}
-							themeType="secondary"
-							disabled={loading}
-						>
-							Cancel
-						</Button>
-						<Button
-							onClick={handleSubmit(onSubmit)}
-							themeType="accent"
-							type="submit"
-							disabled={loading}
-							loading={loading}
-						>
-							Show Preview
-						</Button>
-					</div>
-
-				</Modal.Body>
-			</Modal>
+			</Modal.Body>
+		</Modal>
+	) : null
+}
 
 		</div>
 	);

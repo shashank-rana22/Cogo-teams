@@ -50,11 +50,3 @@
 .error {
 	color: #f00;
 }
-
-.modal_container {
-	:global {
-		.ui_modal_backdrop {
-			background-color: none;
-		}
-	}
-}
