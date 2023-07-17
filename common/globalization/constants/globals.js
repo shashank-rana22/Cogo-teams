@@ -141,6 +141,7 @@ const GLOBAL_CONSTANTS = {
 		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		sachin_mehra_user_id   : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		local_charge_providers : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -353,17 +354,21 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number          : /^[+-]?\d*\.?\d+$/,
-		white_space     : /\s+/,
-		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
-		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
-		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		number           : /^[+-]?\d*\.?\d+$/,
+		white_space      : /\s+/,
+		email            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		pan_number       : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number    : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number  : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code        : /^[A-Za-z]{4}\d{7}$/,
+		eway_bill_number : /^\d{12}$/,
 		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
+		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
@@ -467,8 +472,8 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	emails: {
-		import_rates : 'import.rates@cogoport.com',
-		export_rates : 'export.rates@cogoport.com',
+		import_rates : 'Import.rates@cogoport.com',
+		export_rates : 'Export.rates@cogoport.com',
 	},
 };
 

@@ -19,6 +19,7 @@ const DEFAULT_TIMEOUT_VALUE = 0;
 function useGetActivity({
 	firestore = {},
 	agentId = '',
+	isRolePresent = false,
 }) {
 	const activityTrackerSnapShotRef = useRef(null);
 	const activitytimeoutRef = useRef(null);
@@ -45,7 +46,7 @@ function useGetActivity({
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
 		const { timeoutValue, isLockedBool } = await getTimeoutConstant(firestore);
 
-		if (!isLockedBool) {
+		if (!isLockedBool || !isRolePresent) {
 			return;
 		}
 
@@ -83,12 +84,12 @@ function useGetActivity({
 		} catch (e) {
 			console.error('error:', e);
 		}
-	}, [agentId, firestore, FUNC_MAPPING]);
+	}, [agentId, firestore, FUNC_MAPPING, isRolePresent]);
 
 	useEffect(() => {
 		mountActivityTrackerSnapShotRef();
-		return () => unMountActivityTracker({ FUNC_MAPPING, firestore });
-	}, [mountActivityTrackerSnapShotRef, FUNC_MAPPING, firestore]);
+		return () => unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent });
+	}, [mountActivityTrackerSnapShotRef, FUNC_MAPPING, firestore, isRolePresent]);
 
 	return { showModal, setShowModal };
 }
