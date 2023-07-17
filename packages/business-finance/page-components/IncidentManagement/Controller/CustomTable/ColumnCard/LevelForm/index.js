@@ -10,13 +10,13 @@ import styles from './styles.module.css';
 function LevelForm({ background = '#f3fafa' }, ref) {
 	const {
 		control,
-		// watch,
 		handleSubmit,
+		setValue,
 		formState: { errors = {} },
-	} = useForm({ defaultValues: { levels: [{}] } });
+	} = useForm({ defaultValues: { approvalLevelConditions: [{}] } });
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
-	const { fields = [], append, remove } = useFieldArray({ control, name: 'levels' });
+	const { fields = [], append, remove } = useFieldArray({ control, name: 'approvalLevelConditions' });
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
 			<Header config={LEVELS_CONFIG} />
@@ -31,6 +31,7 @@ function LevelForm({ background = '#f3fafa' }, ref) {
 						index={index}
 						errors={errors}
 						totalLength={fields.length}
+						setValue={setValue}
 					/>
 				))}
 			</div>

@@ -19,12 +19,13 @@ function Column({
 	remove = () => { },
 	index = 0,
 	totalLength = 1,
+	setValue = () => { },
 }) {
-	const { levels } = errors;
+	const { approvalLevelConditions } = errors;
 	const { fields = [] } = config;
 	const DATA = {
 		levels: (
-			<div>
+			<div className={styles.center}>
 				Level -
 				{index + DEFAULT_VAL}
 			</div>
@@ -33,25 +34,37 @@ function Column({
 			<div className={styles.select}>
 				<AsyncSelectController
 					control={control}
-					name={`levels.${index}.user`}
+					name={`approvalLevelConditions.${index}.user`}
 					asyncKey="partner_users"
 					valueKey="user_id"
 					initialCall
+					onChange={(val, obj) => {
+						setValue(`approvalLevelConditions.${index}.stakeholder`, {
+							userId    : obj?.id,
+							userName  : obj?.name,
+							userEmail : obj?.email,
+						});
+					}}
 					rules={{ required: { value: true, message: 'User is required' } }}
 				/>
-				{levels?.[index]?.user?.message
-					? <div className={styles.message}>{levels?.[index]?.user?.message}</div> : null}
+				{approvalLevelConditions?.[index]?.user?.message
+					? <div className={styles.message}>{approvalLevelConditions?.[index]?.user?.message}</div> : null}
 			</div>
 		),
 		criteria: (
 			<div className={styles.input}>
 				<InputController
 					control={control}
-					name={`levels.${index}.criteria`}
+					name={`approvalLevelConditions.${index}.condition`}
+					placeholder="Criteria"
 					rules={{ required: { value: true, message: 'Criteria is required' } }}
 				/>
-				{levels?.[index]?.criteria?.message
-					? <div className={styles.message}>{levels?.[index]?.criteria?.message}</div> : null}
+				{approvalLevelConditions?.[index]?.condition?.message
+					? (
+						<div className={styles.message}>
+							{approvalLevelConditions?.[index]?.condition?.message}
+						</div>
+					) : null}
 			</div>
 		),
 		edit: (

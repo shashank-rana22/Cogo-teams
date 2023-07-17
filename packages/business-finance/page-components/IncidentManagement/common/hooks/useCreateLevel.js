@@ -1,60 +1,76 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
+import toastApiError from '../../../commons/toastApiError.ts';
 import { controls } from '../../Controller/Config/create-level-config';
 
+const DEFAULT_VALUE = 1;
+
 const useCreateRequest = ({
-	refetch = () => {},
-	setShowCreateRoleModal = () => {},
+	refetch = () => { },
+	setShowCreateModal = () => { },
+	lineItemsRef,
+	ref,
 }) => {
 	const {
 		profile: profileData = {},
 	} = useSelector((state) => state);
-	const formProps = useForm();
-	const { watch } = formProps;
-	const translatedValue = watch('translatedText');
+
+	const { id, name, email } = profileData?.user || {};
 
 	const [{ loading }, trigger] = useRequestBf({
-		url     : '/translation/translate',
+		url     : '/incident-management/incident-approval',
 		method  : 'POST',
-		authKey : 'post_translation_translate',
+		authKey : 'post_incident_management_incident_approval',
 	}, { manual: true });
 
 	const onCancel = () => {
-		const { reset } = formProps;
-		reset();
-		setShowCreateRoleModal(false);
+		setShowCreateModal(false);
 	};
 
-	const onSubmit = async (values) => {
-		if (!values) return;
+	const create = async (payload) => {
 		try {
-			const payload = {
-				...values,
-				createdBy    : profileData.user.id,
-				updatedBy    : profileData.user.id,
-				translatedBy : !isEmpty(translatedValue) ? profileData.user.id : undefined,
-			};
-
-			const response = await trigger({ data: payload });
-			if (response.hasError) {
-				Toast.error(response?.message || 'Something went wrong');
-				return;
-			}
-			Toast.success('Created successfully...');
+			await trigger({ data: payload });
+			Toast.success('Created successfully');
 			refetch();
-			onCancel();
-		} catch (error) {
-			Toast.error(error?.response?.data?.message || 'Something went wrong');
+		} catch (e) {
+			toastApiError(e);
 		}
+	};
+
+	const getData = (lineItemLevels) => {
+		const { approvalLevelConditions } = lineItemLevels || {};
+		const formatLineItems = approvalLevelConditions.map((item, index) => ({
+			...item,
+			level: index + DEFAULT_VALUE,
+		}));
+		const formData = ref.current.watch();
+
+		if (
+			!isEmpty(formData?.incidentType)
+			&& !isEmpty(formData?.incidentSubtype)
+			&& !isEmpty(formData?.approvalType)
+			&& !isEmpty(formData?.entityCode)) {
+			const payload = {
+				...(formData || {}),
+				approvalLevelConditions : formatLineItems,
+				createdBy               : { userId: id, userName: name, userEmail: email },
+			};
+			create(payload);
+		}
+	};
+
+	const getFormData = (formData) => formData;
+
+	const onSubmit = async () => {
+		lineItemsRef.current.handleSubmit(getData)();
+		ref.current.formSubmit(getFormData)();
 	};
 
 	return {
 		controls,
-		formProps,
 		onSubmit,
 		createApi: { loading },
 		onCancel,

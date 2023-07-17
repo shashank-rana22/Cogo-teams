@@ -1,11 +1,12 @@
 import {
-	useFormContext,
 	InputController,
 	MultiselectController,
 	SelectController,
 	TextAreaController,
+	AsyncSelectController,
+	useForm,
 } from '@cogoport/forms';
-import React from 'react';
+import React, { useImperativeHandle, forwardRef } from 'react';
 
 import styles from './styles.module.css';
 
@@ -26,13 +27,17 @@ const getElementController = (type) => {
 		case 'textArea':
 			return TextAreaController;
 
+		case 'asyncSelect':
+			return AsyncSelectController;
+
 		default:
 			return null;
 	}
 };
 
-function Form({ controls = [] }) {
-	const { formState: { errors } } = useFormContext() || {};
+function Form({ controls = [] }, ref) {
+	const { formState: { errors }, control, handleSubmit, watch } = useForm();
+	useImperativeHandle(ref, () => ({ formSubmit: handleSubmit, watch }));
 	return (
 		<section className={styles.flex}>
 			{controls.map((controlItem) => {
@@ -51,6 +56,7 @@ function Form({ controls = [] }) {
 								<>
 									<Element
 										{...el}
+										control={control}
 										key={el.name}
 										id={`${el.name}_input`}
 									/>
@@ -66,4 +72,4 @@ function Form({ controls = [] }) {
 	);
 }
 
-export default Form;
+export default forwardRef(Form);

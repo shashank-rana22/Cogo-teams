@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Placeholder, cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
@@ -12,7 +12,7 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function ColumnCard({ config = {}, item = {} }) {
+function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 	const [show, setShow] = useState(null);
 	const { fields = [] } = config;
 
@@ -77,6 +77,9 @@ function ColumnCard({ config = {}, item = {} }) {
 						}}
 						className={styles.col}
 					>
+						{incidentLoading}
+						?
+						<Placeholder />
 						{formData[field.key]}
 					</div>
 				))}

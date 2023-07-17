@@ -1,23 +1,20 @@
-import { FormProvider } from '@cogoport/forms';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Form from '../Form';
 
 import styles from './styles.module.css';
 
 function CreateRequest({
-	formProps = {},
 	controls = [],
-}) {
+}, ref) {
 	return (
 		<section className={styles.section} id="create_form">
-			<FormProvider {...formProps}>
-				<Form
-					controls={controls}
-				/>
-			</FormProvider>
+			<Form
+				controls={controls}
+				ref={ref}
+			/>
 		</section>
 	);
 }
 
-export default CreateRequest;
+export default forwardRef(CreateRequest);

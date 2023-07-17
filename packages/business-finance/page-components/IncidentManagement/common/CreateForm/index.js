@@ -11,14 +11,14 @@ import styles from './styles.module.css';
 function CreateLevelModal({
 	refetch = () => { },
 }) {
-	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
+	const [showCreateModal, setShowCreateModal] = useState(false);
+	const ref = useRef();
+
+	const lineItemsRef = useRef();
 
 	const {
-		controls, formProps, onSubmit, createApi, onCancel, updating,
-	} = useCreateRequest({ refetch, setShowCreateRoleModal });
-	const { handleSubmit } = formProps;
-
-	const ref = useRef();
+		controls, onSubmit, createApi, onCancel, updating,
+	} = useCreateRequest({ refetch, setShowCreateModal, ref, lineItemsRef });
 
 	const { loading } = createApi;
 
@@ -28,7 +28,7 @@ function CreateLevelModal({
 				scroll={false}
 				size="lg"
 				className={styles.modal_container}
-				show={showCreateRoleModal}
+				show={showCreateModal}
 				onClose={onCancel}
 				placement="center"
 			>
@@ -39,37 +39,36 @@ function CreateLevelModal({
 						/>
 					)}
 				/>
-				<form
-					id="create_form"
-					onSubmit={handleSubmit(onSubmit)}
-				>
+				{showCreateModal ? (
 					<Modal.Body>
+
 						<CreateRequest
-							formProps={formProps}
+							ref={ref}
 							controls={controls}
 						/>
-						<LevelForm ref={ref} background="#fff" />
+						<LevelForm ref={lineItemsRef} background="#fff" />
+
 					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							size="md"
-							style={{ marginRight: 10 }}
-							themeType="secondary"
-							onClick={onCancel}
-						>
-							Cancel
-						</Button>
-						<Button
-							size="md"
-							loading={loading || updating}
-							type="submit"
-						>
-							Create
-						</Button>
-					</Modal.Footer>
-				</form>
+				) : null}
+				<Modal.Footer>
+					<Button
+						size="md"
+						style={{ marginRight: 10 }}
+						themeType="secondary"
+						onClick={onCancel}
+					>
+						Cancel
+					</Button>
+					<Button
+						size="md"
+						loading={loading || updating}
+						onClick={onSubmit}
+					>
+						Create
+					</Button>
+				</Modal.Footer>
 			</Modal>
-			<Button onClick={() => { setShowCreateRoleModal(true); }}>
+			<Button onClick={() => { setShowCreateModal(true); }}>
 				Create
 			</Button>
 		</>

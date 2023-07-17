@@ -6,6 +6,7 @@
 
 .buttons {
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	width: 100%;
 }
@@ -28,7 +29,7 @@
 .select {
 	:global {
 		.ui_select_container {
-			width: 260px;
+			width: 280px;
 		}
 	}
 }
@@ -49,4 +50,10 @@
 			opacity: 0.6;
 		}
 	}
+}
+
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

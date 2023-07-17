@@ -114,21 +114,23 @@ function IncidentManagement() {
 					fullWidth
 					themeType="primary"
 				>
-					{tabs.map(({ key = '', label = '' }) => (
-						<TabPanel
-							name={key}
-							key={key}
-							title={label}
-							badge={getStatsData(key)}
-						>
-							{ActiveTabComponent && (
-								<ActiveTabComponent
-									key={key}
-									{...tabComponentProps[key]}
-								/>
-							)}
-						</TabPanel>
-					))}
+					{
+						tabs.map(({ key = '', label = '' }) => (
+							<TabPanel
+								name={key}
+								key={key}
+								title={label}
+								badge={getStatsData(key)}
+							>
+								{ActiveTabComponent && (
+									<ActiveTabComponent
+										key={key}
+										{...tabComponentProps[key]}
+									/>
+								)}
+							</TabPanel>
+						))
+}
 				</Tabs>
 			</div>
 		</div>
