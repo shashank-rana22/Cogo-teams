@@ -11,11 +11,12 @@ const EVENT_ICON_MAPPING = ['user', 'checkout', 'shipment', 'communication'];
 function UserAvatar({ type = '', imageSource = '', event = '' }) {
 	const eventIcon = EVENT_ICON_MAPPING.includes(event);
 	const topIcon = eventIcon ? SOURCE_ICON_MAPPING[event] : SOURCE_ICON_MAPPING[type];
+
 	return (
 		<div className={styles.container}>
 			{topIcon && (
 				<div className={styles.source_icon}>
-					{topIcon }
+					{topIcon}
 				</div>
 			)}
 

@@ -14,9 +14,10 @@ const COUNTRY_CODE_END = 2;
 
 function SuggestedActions({ formattedData = {} }) {
 	const dispatch = useDispatch();
-	const geo = getGeoConstants();
 
 	const [modalType, setModalType] = useState(null);
+
+	const geo = getGeoConstants();
 
 	const {
 		id = '',

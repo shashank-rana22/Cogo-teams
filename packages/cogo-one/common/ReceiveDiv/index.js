@@ -12,7 +12,7 @@ import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 import SuggestedActions from './SuggestedActions';
 
-function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
+function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
 		setRaiseTicketModal((p) => {
 			if (p?.state) {
@@ -22,7 +22,7 @@ function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
 		});
 	};
 	return (
-		<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+		<div className={styles.raise_ticket} role="presentation" onClick={triggerModal}>
 			Raise a ticket
 		</div>
 	);
@@ -35,7 +35,6 @@ function ReceiveDiv({
 	setRaiseTicketModal = () => {},
 	formattedData = {},
 }) {
-	console.log('eachMessage:', eachMessage);
 	const [showOrder, setShowOrder] = useState(false);
 	const {
 		message_type = 'text',
@@ -101,8 +100,7 @@ function ReceiveDiv({
 					className={styles.order_container}
 				>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.list_button}
 						onClick={() => setShowOrder((p) => !p)}
 					>

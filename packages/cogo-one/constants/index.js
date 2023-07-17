@@ -36,8 +36,8 @@ export const SOURCE_ICON_MAPPING = {
 	user: <Image
 		src={GLOBAL_CONSTANTS.image_url.login_failed}
 		alt="status-icon"
-		width={20}
-		height={20}
+		width={18}
+		height={18}
 	/>,
 	checkout: <Image
 		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
