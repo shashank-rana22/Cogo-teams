@@ -59,13 +59,13 @@ const filterCommonControls = [
 		span        : 6,
 	},
 	{
-		label          : 'KAM',
-		name           : 'stakeholder_id',
-		type           : 'select',
-		className      : 'primary md',
-		optionsListKey : 'partner-users',
-		valueKey       : 'user_id',
-		params         : {
+		label     : 'KAM',
+		name      : 'stakeholder_id',
+		type      : 'async-select',
+		className : 'primary md',
+		asyncKey  : 'partner_users',
+		valueKey  : 'user_id',
+		params    : {
 			page_limit : 100,
 			filters    : {
 				partner_id : geo.uuid.parent_entity_id,
