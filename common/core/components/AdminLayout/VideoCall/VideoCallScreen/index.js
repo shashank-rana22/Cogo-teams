@@ -1,11 +1,12 @@
 import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall } from '@cogoport/icons-react';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
+import VideoCallTimer from './VideoCallTimer';
 
 const FIRST_VARIABLE = 1;
 
@@ -23,6 +24,8 @@ function VideoCallScreen({
 	const { peer_stream } = streams || {};
 	const { calling_type, peer_details	} = callDetails || {};
 	const { user_name = 'Unknown' } = peer_details || {};
+
+	const [time, setTime] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const tempRef = ref;
 
@@ -60,8 +63,8 @@ function VideoCallScreen({
 			<div className={styles.footer}>
 				{peer_stream ? (
 					<div className={styles.call_text}>
-						On Call
-						<span> 00:44</span>
+						<div>On Call</div>
+						<VideoCallTimer peer_stream={streams?.peer_stream} time={time} setTime={setTime} />
 					</div>
 				) : (
 					<div className={styles.call_text}>

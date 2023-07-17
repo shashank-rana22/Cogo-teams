@@ -103,8 +103,6 @@ function VideoCall({
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
 
-	console.log('stream', streams);
-
 	return (
 		<div>
 			{callComing ? (
