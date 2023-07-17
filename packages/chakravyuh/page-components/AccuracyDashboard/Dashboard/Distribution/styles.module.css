@@ -93,3 +93,13 @@
 	margin: 0 0 0 19px;
 	color: #f37166;
 }
+
+.legend_percentage_dark {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.default_pie_chart_btn {
+	margin: -10px auto 0;
+}
