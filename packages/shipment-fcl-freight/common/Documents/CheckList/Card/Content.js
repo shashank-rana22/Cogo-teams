@@ -20,6 +20,15 @@ const SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
 ];
 
+const BL_SHOW_STATUS = [
+	'approved',
+	'released',
+	'surrendered',
+	'delivered',
+	'surrender_pending',
+	'release_pending',
+];
+
 function Content({
 	uploadedItem = {},
 	idx = 0,
@@ -37,15 +46,14 @@ function Content({
 	docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
+	bl_details = [],
 }) {
 	const [siReviewState, setSiReviewState] = useState(false);
 
-	const isBlReleased = [
-		'approved',
-		'released',
-		'surrendered',
-		'delivered',
-	].includes(uploadedItem?.bl_detail_status);
+	const { data:bl_data } = uploadedItem || {};
+	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
+
+	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
 
