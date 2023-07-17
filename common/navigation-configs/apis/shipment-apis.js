@@ -1615,11 +1615,6 @@ const apis = [
 		api         : 'get_saas_trade_engine_documents',
 		access_type : 'private',
 	},
-	{
-		api          : 'send_rail_domestic_indent_email',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
 ];
 
 export default apis;
