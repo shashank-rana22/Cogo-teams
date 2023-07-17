@@ -153,7 +153,7 @@ const controls = [
 	},
 	{
 		name        : 'destination_terminal_name',
-		label       : 'Destination Port',
+		label       : 'Destination Terminal',
 		valueKey    : 'display_name',
 		type        : 'select',
 		placeholder : 'Select Destination Port',
