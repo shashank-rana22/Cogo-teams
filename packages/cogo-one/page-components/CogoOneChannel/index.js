@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
+import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -33,10 +34,10 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, emailAddress } = useSelector(({ profile, general }) => ({
-		userId       : profile?.user?.id,
-		token        : general.firestoreToken,
-		emailAddress : profile?.user?.email,
+	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+		userId           : profile?.user?.id,
+		token            : general.firestoreToken,
+		userEmailAddress : profile?.user?.email,
 	}));
 
 	const [activeTab, setActiveTab] = useState({
@@ -51,13 +52,9 @@ function CogoOne() {
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const [recipientArray, setRecipientArray] = useState([]);
-	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
-	const [emailState, setEmailState] = useState({
-		subject : '',
-		body    : '',
-	});
+	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
+	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -77,15 +74,14 @@ function CogoOne() {
 	const firestore = getFirestore(app);
 
 	const mailProps = {
-		recipientArray,
-		setRecipientArray,
-		bccArray,
-		setBccArray,
 		buttonType,
 		setButtonType,
 		emailState,
 		setEmailState,
-		emailAddress,
+		userEmailAddress,
+		activeMailAddress,
+		setActiveMailAddress,
+		viewType,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
@@ -107,7 +103,7 @@ function CogoOne() {
 		<>
 			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
 				<div className={styles.settings}>
-					<AgentStatusToggle />
+					<AgentStatusToggle firestore={firestore} />
 				</div>
 			)}
 			<div className={styles.layout_container}>
@@ -130,10 +126,7 @@ function CogoOne() {
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage
-								displayMessage={activeTab?.tab === 'message'
-									? 'chat' : 'call log'}
-							/>
+							<EmptyChatPage activeTab={activeTab} />
 						</div>
 					) : (
 						<>

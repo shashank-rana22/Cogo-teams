@@ -294,5 +294,3 @@ export const ACCEPT_FILE_MAPPING = {
 };
 
 export const MAX_WEIGHT_SLAB = 500;
-
-export const SEND_PROMOTIONAL_RATE_VIEW = ['admin', 'bot'];
