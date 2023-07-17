@@ -99,7 +99,9 @@ const mutateControls = (
 			newControl.value = '';
 		}
 		if (task.task === 'confirm_booking_with_customer') {
-			if (!(control.name || '').includes('consignee') && !(control.name || '').includes('consignor')) {
+			// consignee/consignor will be the substring of control.name
+			if (
+				!(control.name || '').includes('consignee') && !(control.name || '').includes('consignor')) {
 				if (control.type === 'pills') {
 					newControl.options = (control?.options || []).map((option) => ({
 						...option,
