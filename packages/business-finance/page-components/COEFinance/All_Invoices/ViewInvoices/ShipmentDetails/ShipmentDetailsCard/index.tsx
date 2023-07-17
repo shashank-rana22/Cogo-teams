@@ -151,6 +151,9 @@ function ShipmentDetailsCard({
 
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
 		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
+	// const advancePaymentObjData = JSON.parse(advancedPaymentObj?.data);
+
+	// console.log('advancePaymentObjData', advancedPaymentObj);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -851,14 +854,16 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
-											&& advancedPaymentObj?.updatedAdvancedAmopunt
+											&& advancedPaymentObj?.updated_advanced_amount
 											&& (
 												<div className={styles.margin_bottom}>
 													Updated Advanced Amount -
 													{' '}
 													{advancedAmountCurrency}
 													{' '}
-													<span>{advancedPaymentObj?.updatedAdvancedAmopunt}</span>
+													<span>
+														{advancedPaymentObj?.updated_advanced_amount}
+													</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'

@@ -104,11 +104,18 @@ function HighAmountRequestModal({
 			Toast.error('Pls Change Advance amount , Cannot be same as previous Advance Amount while Rejecting');
 			return;
 		}
+
+		const advancePaymentObjData = JSON.parse(advancedPaymentObj.data);
+
 		updateDocument({
 			id                  : advancedPaymentObj?.id,
 			remarks             : [REJECTED, remark],
 			performed_by_org_id : serviceProviderOrgId,
-			data                : { updatedAdvancedAmopunt: advanceAmount },
+			data                : {
+				...advancePaymentObjData,
+				updated_advanced_amount: advanceAmount,
+			},
+
 		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
