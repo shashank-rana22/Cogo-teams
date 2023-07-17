@@ -1,6 +1,6 @@
 import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcMScreenShare } from '@cogoport/icons-react';
+import { IcMCall } from '@cogoport/icons-react';
 import { forwardRef } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
@@ -26,7 +26,7 @@ function VideoCallScreen({
 
 	const tempRef = ref;
 
-	const { shareScreen, stopCall } = useVideocallOptions({
+	const { stopCall } = useVideocallOptions({
 		options,
 		setOptions,
 		setStreams,
@@ -70,12 +70,6 @@ function VideoCallScreen({
 				)}
 
 				<div className={styles.calling_options}>
-					{peer_stream ? (
-						<div role="presentation" className={styles.share_icon} onClick={shareScreen}>
-							<IcMScreenShare className={styles.end_call_icon} />
-						</div>
-					) : null }
-
 					<div className={styles.hangup_icon} role="presentation" onClick={stopCall}>
 						<IcMCall className={styles.end_call_icon} />
 					</div>

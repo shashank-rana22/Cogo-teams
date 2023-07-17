@@ -177,7 +177,7 @@ function useVideoCallFirebase({
 			calling_type         : 'outgoing',
 		}));
 		navigator.mediaDevices
-			.getUserMedia({ video: false, audio: true })
+			.getUserMedia({ video: true, audio: true })
 			.then((myStream) => {
 				setInACall(true);
 				setStreams((prev) => ({ ...prev, user_stream: myStream }));
@@ -195,14 +195,16 @@ function useVideoCallFirebase({
 
 				peer.on('signal', (data) => {
 					saveCallingData({
-						call_status  : 'calling',
-						calling_by   : 'admin',
-						peer_details : {
+						call_status : 'calling',
+						calling_by  : 'admin',
+						my_details  : {
 							name      : userName,
 							user_id   : userId,
 							user_type : 'admin',
 						},
-						webrtc_token_room_id: userId,
+						peer_details,
+						peer_id              : peer_details?.user_id,
+						webrtc_token_room_id : userId,
 					}).then((calling_room_id) => {
 						saveWebrtcToken({ user_token: data }, calling_room_id, userId);
 					});
@@ -221,7 +223,7 @@ function useVideoCallFirebase({
 			videoCallRef,
 			where('call_status', '==', 'calling'),
 			where('calling_by', '==', 'user'),
-			where('peer_id', '==', 'a356bdf7-153e-4054-a76e-ccd5538baac3'),
+			// where('peer_id', '==', 'a356bdf7-153e-4054-a76e-ccd5538baac3'),
 		);
 
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
@@ -256,17 +258,21 @@ function useVideoCallFirebase({
 					calling_details      : room_data,
 					webrtc_token_room_id : room_data.webrtc_token_room_id,
 				}));
-				const endCallStatus = ['rejected', 'end_call', 'technical_error'];
-				if (
-					room_data?.call_status
-					&& endCallStatus.includes(room_data?.call_status)
-					&& callDetails?.calling_room_id
-				) {
-					callEnd();
-				}
 			});
 		}
 	}, [callDetails?.calling_room_id, callEnd, firestore, setCallDetails]);
+
+	useEffect(() => {
+		const room_data = callDetails?.calling_details;
+		const endCallStatus = ['rejected', 'end_call'];
+		if (
+			room_data?.call_status
+			&& endCallStatus.includes(room_data?.call_status)
+			&& callDetails?.calling_room_id
+		) {
+			callEnd();
+		}
+	}, [callDetails?.calling_details, callDetails?.calling_room_id, callEnd]);
 
 	return {
 		callingTo,

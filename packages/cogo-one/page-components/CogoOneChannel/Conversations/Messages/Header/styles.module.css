@@ -147,3 +147,16 @@
 .escalate_button {
 	margin-right: 5px;
 }
+
+.video_call_btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px;
+
+	svg {
+		width: 30px;
+		height: 30px;
+		fill: red;
+	}
+}

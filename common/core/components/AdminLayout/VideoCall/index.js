@@ -48,8 +48,6 @@ function VideoCall({
 	});
 	const peerRef = useRef(null);
 
-	// const { } = callDetails.calling_details || {};
-
 	const { callingTo, callUpdate, callEnd, stopStream, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
@@ -105,7 +103,8 @@ function VideoCall({
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
 
-	console.log(callDetails, 'callDetails');
+	console.log('stream', streams);
+
 	return (
 		<div>
 			{callComing ? (

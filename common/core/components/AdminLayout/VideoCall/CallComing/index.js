@@ -19,8 +19,6 @@ function CallComing({
 		}
 	}, []);
 
-	console.log(callDetails.calling_details);
-
 	return (
 		<div className={styles.call_comming}>
 			<audio

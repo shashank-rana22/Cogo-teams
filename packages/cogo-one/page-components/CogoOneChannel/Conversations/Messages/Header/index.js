@@ -1,5 +1,5 @@
 import { Button, cl } from '@cogoport/components';
-import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
+import { IcMProfile, IcMRefresh, IcCFcrossInCircle, IcCFtick, IcMCallmonitor } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
@@ -107,8 +107,6 @@ function Header({
 		);
 	}, [dispatch, user_id, user_name]);
 
-	console.log('formattedData', formattedData);
-
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
 	const hasAccessToApprove = (support_agent_id === userId
@@ -199,12 +197,10 @@ function Header({
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
 						{user_type === 'cp' ? (
-							<Button
-								themeType="secondary"
-								onClick={unmountVideoCall}
-							>
-								video call
-							</Button>
+							<div role="presentation" className={styles.video_call_btn} onClick={unmountVideoCall}>
+								<IcMCallmonitor />
+							</div>
+
 						) : null}
 
 						{account_type === 'service_provider' && (
