@@ -851,6 +851,17 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
+											&& advancedPaymentObj?.updatedAdvancedAmopunt
+											&& (
+												<div className={styles.margin_bottom}>
+													Updated Advanced Amount -
+													{' '}
+													{advancedAmountCurrency}
+													{' '}
+													<span>{advancedPaymentObj?.updatedAdvancedAmopunt}</span>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
 											&& outstandingDocument
 											&& (
 												<div className={styles.margin_bottom}>
