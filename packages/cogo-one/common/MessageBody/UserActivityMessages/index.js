@@ -6,6 +6,7 @@ import Default from './Default';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
 import Shipments from './ShipmentDetails';
+import SpotSearchDetails from './SpotSearchDetails';
 
 const COMPONENT_MAPPING = {
 	checkout      : CheckoutDetails,
@@ -13,6 +14,7 @@ const COMPONENT_MAPPING = {
 	user          : LoginFailed,
 	communication : EmailClicked,
 	default       : Default,
+	spot_search   : SpotSearchDetails,
 };
 
 const ICON_MAPPING = {
@@ -21,6 +23,7 @@ const ICON_MAPPING = {
 	user          : GLOBAL_CONSTANTS.image_url.login_failed,
 	communication : GLOBAL_CONSTANTS.image_url.email_clicked,
 	default       : GLOBAL_CONSTANTS.image_url.login_failed,
+	spot_search   : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 };
 
 function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
@@ -29,6 +32,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 		service_details: serviceData = {},
 		source = '',
 		data = {},
+		scope = '',
 	} = eachMessage;
 
 	const ActiveModalComp = COMPONENT_MAPPING[source] || COMPONENT_MAPPING.default;
@@ -50,6 +54,7 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 					name={name}
 					formattedData={formattedData}
 					data={data}
+					scope={scope}
 				/>
 			)}
 

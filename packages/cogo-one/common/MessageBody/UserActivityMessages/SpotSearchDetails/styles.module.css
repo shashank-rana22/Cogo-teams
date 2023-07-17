@@ -1,0 +1,39 @@
+.title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.message {
+	font-size: 11px;
+}
+
+.banner {
+	padding: 8px;
+	margin-top: 5px;
+	background: #fff;
+	border: 1px dashed #e0e0e0;
+	border-radius: 8px;
+}
+
+.company_details {
+	display: flex;
+	align-items: center;
+}
+
+.company_name {
+	width: 90%;
+	margin-left: 5px;
+	overflow: hidden;
+	font-size: 13px;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.serial_id {
+	margin-top: 2%;
+	font-size: 13px;
+	font-weight: 500;
+	color: #000;
+}

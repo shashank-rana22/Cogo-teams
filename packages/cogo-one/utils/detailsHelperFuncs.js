@@ -14,7 +14,7 @@ const FIRST_INDEX = 0;
 const NO_VOLUME_SERVICE_TYPES = ['ftl_freight_service', 'haulage_freight_service'];
 const AIR_TYPE_SERVICES = ['air_freight_service', 'domestic_air_freight_service'];
 
-function FormatCertificate({ certificates }) {
+function FormatCertificate({ certificates = [] }) {
 	return (
 		<div>
 			{(certificates || []).map((item, index) => (
@@ -29,7 +29,7 @@ function FormatCertificate({ certificates }) {
 	);
 }
 
-function FormatPocData({ pocDetails }) {
+function FormatPocData({ pocDetails = {} }) {
 	return (
 		<div>
 			<div>{pocDetails?.name}</div>
@@ -43,7 +43,7 @@ function FormatPocData({ pocDetails }) {
 	);
 }
 
-function FormatShipperDetails({ shipperDetails }) {
+function FormatShipperDetails({ shipperDetails = {} }) {
 	return (
 		<div>
 			<div>{shipperDetails?.name}</div>
@@ -252,4 +252,16 @@ export function formatServiceDetails(details) {
 	const isAir = AIR_TYPE_SERVICES.includes(service_type);
 
 	return { ...details, isAir, isLTL };
+}
+
+export function serviceDetails({ detail = {} }) {
+	const isAir = detail?.service_type === 'air_freight_service'
+		|| detail?.service_type === 'domestic_air_freight_service'
+		|| detail?.shipment_type === 'air_freight';
+
+	const isLTL = detail?.service_type === 'ltl_freight_service';
+
+	const isFTL = detail?.service_type === 'ftl_freight_service';
+
+	return { ...detail, isAir, isLTL, isFTL };
 }

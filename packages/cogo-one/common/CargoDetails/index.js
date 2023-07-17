@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { renderValue } from './renderValue';
+import { RENDER_VALUE_MAPPING, serviceDetails } from '../../utils/detailsHelperFuncs';
+
 import styles from './styles.module.css';
 
 const LABELS = [
@@ -17,22 +18,21 @@ const LABELS = [
 ];
 
 function CargoDetails({ detail = {} }) {
-	const isFTL = detail?.shipment_type === 'ftl_freight';
-	const COMMODITY = 'commodity';
+	const details = serviceDetails({ detail });
+
 	return (
 		<div className={styles.shipment_details}>
 			{(LABELS || []).map((label) => {
-				if (label === COMMODITY && !detail?.[label] && isFTL) {
-					return (
-						<div className={styles.chips} key={label}>
-							General
-						</div>
-					);
+				const value = RENDER_VALUE_MAPPING[label]?.(details) || details[label] || '';
+
+				if (!value) {
+					return null;
 				}
-				if (detail?.[label] && renderValue({ label, detail })) {
+
+				if (detail?.[label]) {
 					return (
 						<div className={styles.chips} key={label}>
-							{renderValue({ label, detail })}
+							{value}
 						</div>
 					);
 				}
