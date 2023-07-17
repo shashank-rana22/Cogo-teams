@@ -1,9 +1,11 @@
+import { Popover } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import PopOverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-const getColumns = ({ handleEditKRA }) => [
+const getColumns = ({ handleEditKRA, showPopOver, setShowPopOver, deleteKRALoading, onClickDeleteKRA }) => [
 	{
 		Header   : 'KRA NAME',
 		accessor : (item) => (
@@ -38,12 +40,34 @@ const getColumns = ({ handleEditKRA }) => [
 						width={16}
 						onClick={() => handleEditKRA(item?.id)}
 					/>
+
 				</div>
 
-				<IcMDelete
-					height={16}
-					width={16}
-				/>
+				<Popover
+					placement="top"
+					interactive
+					visible={showPopOver === item?.id}
+					styles={{ marginRight: '20px' }}
+					render={(
+						<PopOverContent
+							loading={deleteKRALoading}
+							onCLickYesButton={() => onClickDeleteKRA(item?.id)}
+							onClickNoButton={() => setShowPopOver(null)}
+						/>
+					)}
+				>
+
+					<div className={styles.delete_button}>
+						<IcMDelete
+							height={20}
+							width={20}
+							onClick={() => {
+								setShowPopOver(() => (showPopOver === item?.id ? null : item?.id));
+							}}
+						/>
+					</div>
+				</Popover>
+
 			</div>
 
 		),
