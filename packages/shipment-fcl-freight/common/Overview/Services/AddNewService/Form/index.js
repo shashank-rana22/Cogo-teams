@@ -1,8 +1,8 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal, Pill } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Layout, useShipmentBack } from '@cogoport/ocean-modules';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase, isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
@@ -11,6 +11,10 @@ import Footer from '../Footer';
 import styles from './styles.module.css';
 
 const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
+
+const ZEROTH_INDEX = 0;
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
 
 function Form({
 	upsellableService = {},
@@ -27,7 +31,7 @@ function Form({
 
 	const { handleShipmentsClick = () => {} } = useShipmentBack();
 
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(FIRST_STEP);
 
 	const {
 		consignee_shipper = {},
@@ -35,6 +39,25 @@ function Form({
 		importer_exporter_id = '',
 		consignee_shipper_id = '',
 	} = shipmentData;
+
+	const {
+		destination_port = {},
+		cargo_details = [],
+		trade_type = '',
+		inco_term = '',
+	} = primary_service;
+
+	const {
+		name: destination_port_name = '',
+	} = destination_port;
+
+	const {
+		cargo_weight_per_container = 0,
+		commodity = '',
+		container_size = '',
+		container_type = '',
+		containers_count = '',
+	} = cargo_details[ZEROTH_INDEX] || {};
 
 	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 
@@ -82,30 +105,44 @@ function Form({
 			<Modal.Header title={(
 				<div className={styles.header}>
 					{haveToUpsell ? (
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.button}
+						<Button
+							themeType="tertiary"
 							onClick={handleShipmentsClick}
 						>
-							<IcMArrowBack />
-						</div>
+							<IcMArrowBack height={16} width={16} />
+						</Button>
 					) : null}
 
 					{startCase(upsellableService.trade_type)}
-					&nbsp;
+					{' '}
 					{startCase(service)}
 				</div>
 			)}
 			/>
 
 			<Modal.Body>
-				{ controls?.length === 0 && step === 1
+				{ isEmpty(controls) && step === FIRST_STEP
 					? (
-						<div> Are you sure you want to upsell this service?</div>
+						<div className={styles.modal_content}>
+							<div className={styles.label}> Are you sure you want to upsell this service?</div>
+							<div className={styles.destination_label}>
+								Destination Port:
+								{' '}
+								<strong>{destination_port_name}</strong>
+							</div>
+							<div>
+								<Pill>{`${cargo_weight_per_container}MT`}</Pill>
+								<Pill>{startCase(container_type)}</Pill>
+								<Pill>{startCase(commodity)}</Pill>
+								<Pill>{`${container_size}ft`}</Pill>
+								<Pill>{`${containers_count} containers`}</Pill>
+								<Pill>{startCase(trade_type)}</Pill>
+								<Pill>{`Inco : ${upperCase(inco_term)}`}</Pill>
+							</div>
+						</div>
 					)
 					: null }
-				{ controls?.length !== 0 && step === 1
+				{ !isEmpty(controls) && step === FIRST_STEP
 					? (
 						<Layout
 							control={control}
@@ -115,7 +152,7 @@ function Form({
 					)
 					: null }
 
-				{ step === 2 && haveToAskOrgDetails
+				{ step === SECOND_STEP && haveToAskOrgDetails
 					? (
 						<>
 							<div> Choose The organisation for which you want to upsell- </div>
@@ -130,7 +167,7 @@ function Form({
 					) : null}
 
 				{
-					step === 2 ? (
+					step === SECOND_STEP ? (
 						<AsyncSelectController
 							className={styles.select}
 							control={formProps.control}
