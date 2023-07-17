@@ -813,6 +813,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'delete_contract_service',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
 ];
 
 export default apis;
