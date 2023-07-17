@@ -19,8 +19,8 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 	const { documents, primary_service_detail, summary, document_delay_status, booking_note_details } = data || {};
 
 	const primary_service = {
-		...(primary_service_detail || {}),
 		...(summary || {}),
+		...(primary_service_detail || {}),
 	};
 
 	const getShipment = useCallback(async () => {
