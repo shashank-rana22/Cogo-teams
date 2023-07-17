@@ -144,8 +144,9 @@ function ApprovePurchaseDeduction({
 							currency = '',
 							deducted_amount = '',
 						} = item || {};
+						const key_id = JSON.stringify(item);
 						return (
-							<div className={styles.cardItems} key={item}>
+							<div className={styles.cardItems} key={key_id}>
 								<Checkbox
 									style={{ marginRight: '30px' }}
 									checked={selected[index]}
