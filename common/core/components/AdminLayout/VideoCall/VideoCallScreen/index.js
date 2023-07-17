@@ -17,7 +17,11 @@ function VideoCallScreen({
 	peerRef = null,
 	callDetails = {},
 }, ref) {
+	const { peer_stream } = streams || {};
+	const { calling_type } = callDetails || {};
+
 	const tempRef = ref;
+
 	const { shareScreen, stopCall } = useVideocallOptions({
 		options,
 		setOptions,
@@ -28,11 +32,10 @@ function VideoCallScreen({
 		callUpdate,
 		peerRef,
 	});
-	console.log('callDetail', callDetails?.calling_type);
 
 	return (
 		<div className={styles.container}>
-			<div className={streams?.peer_stream ? styles.peer_screen : styles.call_screen}>
+			<div className={peer_stream ? styles.peer_screen : styles.call_screen}>
 				<div className={styles.avatar_screen}>
 					<div className={styles.header}>Purnendu Shekhar</div>
 					<Avatar personName="Purnendu Shekhar" size="250px" className={styles.styled_avatar} />
@@ -47,19 +50,19 @@ function VideoCallScreen({
 				</div>
 			</div>
 			<div className={styles.footer}>
-				{streams?.peer_stream ? (
+				{peer_stream ? (
 					<div className={styles.call_text}>
 						On Call
 						<span> 00:44</span>
 					</div>
 				) : (
 					<div className={styles.call_text}>
-						{ callDetails?.calling_type === 'incoming' ? 'Conecting..' : 'Ringing...'}
+						{calling_type === 'incoming' ? 'Conecting..' : 'Ringing...'}
 					</div>
 				)}
 
 				<div className={styles.calling_options}>
-					{streams?.peer_stream ? (
+					{peer_stream ? (
 						<div role="presentation" className={styles.share_icon} onClick={shareScreen}>
 							<IcMScreenShare className={styles.end_call_icon} />
 						</div>
