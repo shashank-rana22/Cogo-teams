@@ -10,6 +10,11 @@
 
 .section {
 	width: 50%;
+
+	img {
+		max-width: 100%;
+		height: 100%;
+	}
 }
 
 .icon {
@@ -36,6 +41,10 @@
 		.ui_accordion_header {
 			padding: 12px 24px 8px 0;
 			border-radius: 0;
+		}
+
+		.ui_accordion_icon {
+			align-self: flex-start;
 		}
 	}
 }

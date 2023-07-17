@@ -1,23 +1,8 @@
-import { SelectController, CheckboxGroupController, RadioGroupController, InputController } from '@cogoport/forms';
 import React from 'react';
 
+import { getFieldController } from '../../../../../utils/getFieldController';
+
 import styles from './styles.module.css';
-
-function getElementController(type = '') {
-	switch (type) {
-		case 'radio':
-			return RadioGroupController;
-
-		case 'checkboxgroup':
-			return CheckboxGroupController;
-		case 'select':
-			return SelectController;
-		case 'input':
-			return InputController;
-		default:
-			return null;
-	}
-}
 
 function Item(props) {
 	const {
@@ -27,7 +12,11 @@ function Item(props) {
 		error = {},
 	} = props || {};
 
-	const Element = getElementController(controllerType);
+	const Element = getFieldController(controllerType);
+
+	if (!Element) {
+		return null;
+	}
 
 	return (
 		<div className={styles.element}>
@@ -35,13 +24,11 @@ function Item(props) {
 				{label}
 			</div>
 			<div className={styles.filters_types}>
-				{Element && (
-					<Element
-						{...props}
-						control={control}
-						className={styles.field_controller}
-					/>
-				)}
+				<Element
+					{...props}
+					control={control}
+					className={styles.field_controller}
+				/>
 				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>

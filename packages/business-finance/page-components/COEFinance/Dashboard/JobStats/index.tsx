@@ -9,7 +9,7 @@ const MAPPING_STATE = {
 	CLOSED     : 'FINANCIALLY CLOSED',
 };
 
-function JobStats({ jobData }) {
+function JobStats({ jobData = [] }) {
 	return (
 		<div className={styles.flex}>
 			{(jobData || [{}]).map((item) => {
@@ -21,7 +21,7 @@ function JobStats({ jobData }) {
 
 						<div className={styles.sub_flex}>
 							<div className={styles.label}>
-								<div>{ MAPPING_STATE[state] || state}</div>
+								<div style={{ marginRight: '4px' }}>{ MAPPING_STATE[state] || state}</div>
 								<div>JOBS</div>
 							</div>
 							<Tooltip
@@ -60,7 +60,8 @@ function JobStats({ jobData }) {
 								placement="bottom"
 							>
 								<div className={styles.ship_id}>
-									Shipment ID’s :
+									Shipment Count :
+									{' '}
 									{count}
 								</div>
 							</Tooltip>
@@ -70,7 +71,7 @@ function JobStats({ jobData }) {
 						<div className={styles.border} />
 
 						<div className={styles.value}>
-							{profit.toFixed(2)}
+							{(profit || 0).toFixed(2)}
 
 							%
 						</div>

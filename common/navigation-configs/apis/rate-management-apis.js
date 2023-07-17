@@ -642,5 +642,25 @@ const rms = [
 		access_type  : 'private',
 		service_name : 'air_customs_rate',
 	},
+	{
+		api          : 'list_air_freight_rate_sheets',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+	},
+	{
+		api          : 'list_air_freight_rate_sheet_stats',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+	},
+	{
+		api          : 'update_air_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+	},
+	{
+		api          : 'create_air_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+	},
 ];
 export default rms;

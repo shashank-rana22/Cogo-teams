@@ -36,21 +36,25 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 
 	const salesFunnel = [
 		{
+			id         : 1,
 			name       : 'Draft',
 			count      : draftInvoicesCount || 0,
 			percentage : draftToFinanceAcceptedPercentage || 0,
 		},
 		{
+			id         : 2,
 			name       : 'Finance Accepted',
 			count      : financeAcceptedInvoiceCount || 0,
 			percentage : financeToIrnPercentage || 0,
 		},
 		{
+			id         : 3,
 			name       : 'IRN Generated',
 			count      : irnGeneratedInvoicesCount || 0,
 			percentage : settledPercentage || 0,
 		},
 		{
+			id    : 4,
 			name  : 'Settled',
 			count : settledInvoicesCount || 0,
 		},
@@ -101,8 +105,8 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 				</div>
 			</div>
 
-			{salesFunnelLoading ? ([1, 2, 3, 4].map(() => (
-				<div className={styles.sales_funnel_loader}>
+			{salesFunnelLoading ? ([1, 2, 3, 4].map((item) => (
+				<div key={item} className={styles.sales_funnel_loader}>
 
 					<Placeholder className={styles.sales_sub_funnel_loader} />
 					<Placeholder className={styles.sales_sub_funnel_lower_loader} />
@@ -112,7 +116,7 @@ function SalesFunnel({ salesFunnelData, salesFunnelMonth, setSalesFunnelMonth, s
 			)))
 
 				: (salesFunnel.map((item) => (
-					<div className={styles.sales_funnel}>
+					<div key={item.id} className={styles.sales_funnel}>
 						<div className={styles.sub_sales_funnel}>
 							<div
 								className={styles.styled_decoration}
