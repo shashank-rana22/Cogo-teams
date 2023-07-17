@@ -42,3 +42,14 @@
 	padding: 0 10px 10px;
 	overflow-y: auto;
 }
+
+.note_container {
+	margin-top: 10px;
+	font-size: 12px;
+	font-weight: 600;
+
+	span {
+		margin-left: 4px;
+		font-weight: 400;
+	}
+}

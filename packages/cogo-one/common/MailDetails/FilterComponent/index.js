@@ -2,16 +2,16 @@ import { Badge, Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import getFiltersCount from '../../../helpers/getFiltersCount';
-
 import PopoverComponent from './PopoverComponent';
 import styles from './styles.module.css';
 
-function FilterComponent() {
+function FilterComponent({
+	searchQuery = '',
+	appliedFiltersCount = 0,
+	appliedFilters = {},
+	setAppliedFilters = () => {},
+}) {
 	const [showPopover, setShowPopover] = useState(false);
-	const [appliedFilters, setAppliedFilters] = useState(null);
-
-	const appliedFiltersCount = getFiltersCount({ filters: appliedFilters });
 
 	return (
 		<Popover
@@ -19,11 +19,14 @@ function FilterComponent() {
 			visible={showPopover}
 			className={styles.popover_component}
 			render={(
-				<PopoverComponent
-					appliedFilters={appliedFilters}
-					setAppliedFilters={setAppliedFilters}
-					setShowPopover={setShowPopover}
-				/>
+				showPopover && (
+					<PopoverComponent
+						searchQuery={searchQuery}
+						appliedFilters={appliedFilters}
+						setAppliedFilters={setAppliedFilters}
+						setShowPopover={setShowPopover}
+					/>
+				)
 			)}
 		>
 			{appliedFiltersCount

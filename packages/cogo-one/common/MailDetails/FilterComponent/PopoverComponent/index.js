@@ -9,10 +9,12 @@ import { getFieldController } from '../../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function PopoverComponent({
+	searchQuery = '',
 	appliedFilters = {},
 	setAppliedFilters = () => {},
 	setShowPopover = () => {},
 }) {
+	console.log('searchQuery:', searchQuery, !!searchQuery);
 	const {
 		control,
 		watch = () => {},
@@ -58,6 +60,12 @@ function PopoverComponent({
 				</Button>
 			</div>
 			<div className={styles.filter_body}>
+				{(searchQuery || noOfFilters) ? (
+					<div className={styles.note_container}>
+						Note:
+						<span>Filters and search can&apos;t be used together.</span>
+					</div>
+				) : null}
 				{filterControls.map((itm) => {
 					const { name, label, controlType } = itm;
 
@@ -91,6 +99,7 @@ function PopoverComponent({
 				<Button
 					size="md"
 					themeType="accent"
+					disabled={!!searchQuery}
 					onClick={handleSubmit(handleApplyFilters)}
 				>
 					Apply

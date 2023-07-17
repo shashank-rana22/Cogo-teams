@@ -6,6 +6,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { DEFAULT_LIST_MAILS_TIMEOUT } from '../../constants/mailConstants';
+import getFiltersCount from '../../helpers/getFiltersCount';
 import useListMail from '../../hooks/useListMail';
 
 import FilterComponent from './FilterComponent';
@@ -13,9 +14,11 @@ import ListMails from './ListMails';
 import styles from './styles.module.css';
 
 function MailDetails({
-	activeSelect = '',
+	activeFolder = '',
 	setActiveMail = () => {},
 	activeMail = {},
+	appliedFilters = {},
+	setAppliedFilters = () => {},
 	activeMailAddress = '',
 }) {
 	const [searchQuery, setSearchQuety] = useState('');
@@ -26,28 +29,30 @@ function MailDetails({
 		handleScroll = () => {},
 		handleRefresh = () => {},
 		pagination,
-	} = useListMail({ activeSelect, activeMailAddress, searchQuery });
+	} = useListMail({ activeFolder, activeMailAddress, searchQuery, appliedFilters });
 
 	const { value: list = [] } = listData || {};
+
+	const appliedFiltersCount = getFiltersCount({ filters: appliedFilters });
 
 	useEffect(() => {
 		let interval = '';
 
-		if (activeSelect) {
+		if (activeFolder) {
 			interval = setInterval(() => {
 				handleRefresh();
 			}, DEFAULT_LIST_MAILS_TIMEOUT);
 		}
 
 		return () => clearInterval(interval);
-	}, [handleRefresh, activeSelect, pagination]);
+	}, [handleRefresh, activeFolder, pagination]);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
 				<div className={styles.header}>
 					<div className={styles.title}>
-						{startCase(activeSelect)}
+						{startCase(activeFolder)}
 					</div>
 
 					{loading
@@ -71,6 +76,7 @@ function MailDetails({
 						placeholder="Search"
 						value={searchQuery}
 						onChange={setSearchQuety}
+						disabled={!!appliedFiltersCount}
 						prefix={(
 							<IcMSearchlight
 								height={20}
@@ -79,7 +85,12 @@ function MailDetails({
 							/>
 						)}
 					/>
-					<FilterComponent />
+					<FilterComponent
+						searchQuery={searchQuery}
+						appliedFilters={appliedFilters}
+						setAppliedFilters={setAppliedFilters}
+						appliedFiltersCount={appliedFiltersCount}
+					/>
 				</div>
 			</div>
 

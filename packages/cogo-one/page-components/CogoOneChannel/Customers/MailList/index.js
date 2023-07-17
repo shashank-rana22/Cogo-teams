@@ -19,7 +19,8 @@ function MailList(mailprops) {
 		setActiveMailAddress = () => {},
 	} = mailprops;
 
-	const [activeSelect, setActiveSelect] = useState('inbox');
+	const [activeFolder, setActiveFolder] = useState('inbox');
+	const [appliedFilters, setAppliedFilters] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const userName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ').replace('_', ' ');
@@ -62,16 +63,18 @@ function MailList(mailprops) {
 
 			<div className={styles.list_mails}>
 				<MailSideBar
-					activeSelect={activeSelect}
-					setActiveSelect={setActiveSelect}
+					activeFolder={activeFolder}
+					setActiveFolder={setActiveFolder}
+					setAppliedFilters={setAppliedFilters}
 				/>
 
 				<MailDetails
-					activeSelect={activeSelect}
-					setActiveSelect={setActiveSelect}
+					activeFolder={activeFolder}
 					setActiveMail={setActiveMail}
 					activeMail={activeMail}
 					activeMailAddress={activeMailAddress}
+					appliedFilters={appliedFilters}
+					setAppliedFilters={setAppliedFilters}
 				/>
 			</div>
 		</div>

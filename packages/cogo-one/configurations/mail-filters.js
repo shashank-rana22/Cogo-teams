@@ -1,7 +1,7 @@
 const controls = [
 	{
 		label       : 'Mail Type',
-		name        : 'is_read',
+		name        : 'mail_type',
 		controlType : 'radio',
 		options     : [
 			{
@@ -20,7 +20,7 @@ const controls = [
 		controlType : 'radio',
 		options     : [
 			{
-				label : 'Hight',
+				label : 'High',
 				value : 'high',
 			},
 			{
