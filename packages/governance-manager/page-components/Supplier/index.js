@@ -11,19 +11,10 @@ import NeedAnalysis from './Steps/NeedAnalysis';
 import SupplierApproval from './Steps/SupplierApproval';
 import SupplierEvaluation from './Steps/SupplierEvaluation';
 import styles from './styles.module.css';
+import { items } from './utils/supplier-utils';
 
 function Supplier() {
-	const items = [
-		{ title: 'Need analysis', key: 'need_analysis' },
-		{ title: 'Market Feedback', key: 'market_feedback' },
-		{ title: 'Supplier Evaluation', key: 'organization_evaluation' },
-		{ title: 'Due Dilligance', key: 'due_dilligance' },
-		{ title: 'Suppliar Approval', key: 'supplier_approval' },
-		{ title: 'Contract and SLA', key: 'contract_sla' },
-
-	];
 	const [status, setStatus] = useState('need_analysis');
-
 	const { query } = useRouter();
 	const { id } = query;
 	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });
@@ -39,6 +30,7 @@ function Supplier() {
 				shadowed
 				className={styles.stepper}
 			/>
+
 			{{
 				need_analysis: <NeedAnalysis
 					organization_id={supplierData?.organization_id}

@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function MarketFeedback({ organization_id, service, getOrganizationService }) {
 	const { UpdateOrganizationService } = useUpdateOrganizationService({
-		organization_id, stage_of_approval: 'supplier_evaluation', service, getOrganizationService,
+		organization_id, stage_of_approval: 'organization_evaluation', service, getOrganizationService,
 	});
 	const [totalInput, setTotalInput] = useState(1);
 	return (

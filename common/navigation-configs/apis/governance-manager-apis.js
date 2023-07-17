@@ -10,6 +10,11 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'list_organization_service_expertise_suppliers',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api          : 'update_organization_service_expertise_feedback',
 		access_type  : 'private',
 		service_name : 'organization',
