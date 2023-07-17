@@ -20,8 +20,6 @@ import styles from './styles.module.css';
 
 const LOADER_COUNT_FOR_CARD = 3;
 
-const geo = getGeoConstants();
-
 function OrganizationDetails({
 	activeTab = '',
 	activeVoiceCard = {},
@@ -31,6 +29,7 @@ function OrganizationDetails({
 	getOrgDetails = () => {},
 }) {
 	const [showConvertModal, setShowConvertModal] = useState(false);
+	const geo = getGeoConstants();
 	const {
 		organization_id: messageOrgId = '', user_id: messageUserId = '',
 		account_type = '',
