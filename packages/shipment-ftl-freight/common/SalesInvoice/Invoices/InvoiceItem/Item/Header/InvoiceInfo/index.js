@@ -2,6 +2,7 @@ import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -38,6 +39,11 @@ function InvoiceInfo({
 	salesInvoicesRefetch = () => {},
 
 }) {
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorizedForCN = [
+		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id].includes(user_data?.user?.id);
+
 	const {
 		invoice_total_currency,
 		invoice_total_discounted,
@@ -181,7 +187,7 @@ function InvoiceInfo({
 						</Button>
 					) : null}
 
-				{showRequestCN ? (
+				{showRequestCN && isAuthorizedForCN ? (
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"

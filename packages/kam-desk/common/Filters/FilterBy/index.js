@@ -43,7 +43,10 @@ function FilterBy({
 	const handleReset = () => {
 		const { startDate, endDate } = DATE_RANGE_MAPPING.today;
 
-		const { pending_invoice, importer_exporter_id, source, payment_term, tags, ...restFilters } = filters || {};
+		const {
+			triggered_pending_invoices, importer_exporter_id,
+			source, payment_term, tags, ...restFilters
+		} = filters || {};
 
 		const finalFilters = {
 			...restFilters,
@@ -60,15 +63,15 @@ function FilterBy({
 	};
 
 	const handleApplyFilters = () => {
-		const { pending_invoice, ...restFilters } = filters || {};
+		const { triggered_pending_invoices, ...restFilters } = filters || {};
 
-		const { pending_invoice:currentPendingInvoice, ...restPopOverFilters } = popoverFilter || {};
+		const { triggered_pending_invoices:currentPendingInvoice, ...restPopOverFilters } = popoverFilter || {};
 
 		const finalFilters = {
 			...restFilters,
 			...restPopOverFilters,
 			...(currentPendingInvoice
-				? { pending_invoice: true } : {}),
+				? { triggered_pending_invoices: true } : {}),
 		};
 
 		setFilters(finalFilters);
@@ -110,13 +113,13 @@ function FilterBy({
 				</div>
 			) : null}
 
-			{possibleFilters?.includes('pending_invoice') ? (
+			{possibleFilters?.includes('triggered_pending_invoices') ? (
 				<div className={styles.pending_invoice}>
 					<Checkbox
-						checked={popoverFilter?.pending_invoice}
+						checked={popoverFilter?.triggered_pending_invoices}
 						onChange={() => setPopoverFilter({
 							...popoverFilter,
-							pending_invoice: !popoverFilter.pending_invoice,
+							triggered_pending_invoices: !popoverFilter.triggered_pending_invoices,
 						})}
 					/>
 					<div className={styles.filter_heading}>Pending Invoices</div>

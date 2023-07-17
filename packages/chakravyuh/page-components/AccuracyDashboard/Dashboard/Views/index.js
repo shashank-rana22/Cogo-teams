@@ -26,9 +26,7 @@ const DATA = { dropoffs_percentage: '93%', rates_count: '4532' };
 
 function Views({ setView = () => {} }) {
 	const handleClick = (key) => {
-		if (key === 'view_details') {
-			setView('drilldown');
-		}
+		setView(key === 'view_details' ? 'drilldown' : key);
 	};
 
 	return (
@@ -49,6 +47,7 @@ function Views({ setView = () => {} }) {
 							<Button
 								onClick={() => handleClick(key)}
 								themeType="secondary"
+								className={styles.custom_btn}
 							>
 								{startCase(key)}
 								<span className={styles.arrow_right}>&gt;</span>

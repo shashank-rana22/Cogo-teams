@@ -1,9 +1,11 @@
-import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import Heading from '../../common/Heading';
 
 import DashboardView from './Dashboard';
 import DrillDownView from './DrillDown';
 import Filters from './Filters';
+import MapView from './MapView';
 import styles from './styles.module.css';
 
 const VIEW_MAPPING = {
@@ -16,6 +18,10 @@ const VIEW_MAPPING = {
 		heading   : 'Rates DrillDown',
 		backView  : 'dashboard',
 	},
+	map_view: {
+		Component : MapView,
+		backView  : 'dashboard',
+	},
 };
 
 function AccuracyDashboard() {
@@ -23,19 +29,26 @@ function AccuracyDashboard() {
 	const [filters, setFilters] = useState({});
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
+	const showCommons = view !== 'map_view';
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading_container}>
-				{backView && (
-					<IcMArrowBack
-						onClick={() => setView(backView)}
+			{showCommons && (
+				<>
+					<Heading
+						heading={heading}
+						setView={setView}
+						backView={backView}
 					/>
-				)}
-				<h1 className={styles.heading}>{heading}</h1>
-			</div>
-			<Filters />
-			<Component setView={setView} filters={filters} setFilters={setFilters} />
+					<Filters />
+				</>
+			)}
+			<Component
+				setView={setView}
+				filters={filters}
+				setFilters={setFilters}
+				backView={backView}
+			/>
 		</div>
 	);
 }

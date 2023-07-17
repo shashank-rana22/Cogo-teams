@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/email-check */
 /* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
@@ -140,6 +141,7 @@ const GLOBAL_CONSTANTS = {
 		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		sachin_mehra_user_id   : '68c7e272-0c66-43a9-9537-eedb4e543194',
 		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		local_charge_providers : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -239,6 +241,14 @@ const GLOBAL_CONSTANTS = {
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		bluetide_hbl_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
+		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		inbox_icon          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/colored_inbox.png',
+		email_spam_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
+		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
+		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
+		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -247,8 +257,18 @@ const GLOBAL_CONSTANTS = {
 	drive_link: {
 		introduction_to_cogoport_link:
 		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-		git_course_link      : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-		html_css_course_link : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+		git_course_link:
+		'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
+		html_css_course_link:
+		'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+		html_css_assessment:
+		'https://drive.google.com/file/d/1N1HFExQLhUaeppFEdOYUz5H1lMQq1GOx/view?usp=drive_link',
+		responsive_web_design:
+		'https://drive.google.com/file/d/17-q8E1OtNaqzG5eDqUriA9JL4IDVTpeX/view?usp=drive_link',
+		responsive_web_design_assessment:
+		'https://drive.google.com/file/d/1uqJ8jiDcDj6-6Yd_mQnBE3muuoFpGmbf/view?usp=sharing',
+		javascript_basics_game_development:
+		'https://drive.google.com/file/d/1IIVowcpe4EurhYamS16h1n2oyjUFAns8/view?usp=sharing',
 	},
 
 	urls: {
@@ -320,6 +340,17 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
 		],
+		timezone_options: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
 	},
 
 	regex_patterns: {
@@ -334,6 +365,9 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
+		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 	},
 	zeroth_index                 : 0,
@@ -434,6 +468,11 @@ const GLOBAL_CONSTANTS = {
 		fcl_freight_local     : 'fcl-local',
 		domestic_air_freight  : 'domestic-air-freight',
 		rail_domestic_freight : 'rail-domestic',
+	},
+
+	emails: {
+		import_rates : 'Import.rates@cogoport.com',
+		export_rates : 'Export.rates@cogoport.com',
 	},
 };
 

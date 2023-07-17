@@ -1,0 +1,26 @@
+.container {
+	--layout-side-panel: 408px;
+	--layout-side-shift: -20px;
+	--layout-top-shift: -24px;
+
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.map {
+	width: 100vw;
+	height: calc(100vh);
+	margin: var(--layout-top-shift) var(--layout-side-shift);
+
+	:global {
+		.leaflet-tile {
+			filter: hue-rotate(45deg) !important;
+		}
+
+		.leaflet-container {
+			cursor: default !important;
+			background-color: #ccd6db !important;
+		}
+	}
+}
