@@ -3856,6 +3856,26 @@ const partner = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
+			api          : 'list_air_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'update_air_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'create_air_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4912,6 +4932,26 @@ const partner = {
 			api          : 'create_fcl_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'update_air_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'create_air_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'create_fcl_customs_rate_sheet',
@@ -8596,6 +8636,12 @@ const partner = {
 			module      : 'invoices',
 			feature     : 'invoices',
 		},
+		{
+			api         : 'get_payments_report_ar_ledger',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 	],
 	compliance: [
 		{
@@ -9430,6 +9476,11 @@ const partner = {
 	],
 
 	campaign_dashboard: [
+		{
+			api          : 'get_segment_verification_stats',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
 		{
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',

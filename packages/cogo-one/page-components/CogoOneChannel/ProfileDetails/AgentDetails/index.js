@@ -1,5 +1,6 @@
 import { Pill, Placeholder, Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -20,29 +21,27 @@ import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
-const LINK_BEFORE_QUERY_PARAMS = 0;
-
 const handleClick = ({ id, channel_type }) => {
-	const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 	navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 	Toast.success('Copied!!!');
 };
 
 function AgentDetails({
 	activeMessageCard = {},
-	activeTab,
+	activeTab = '',
 	activeVoiceCard = {},
 	formattedMessageData = {},
 	customerId = '',
 	setModalType = () => {},
-	activeRoomLoading,
-	activeSelect,
+	activeRoomLoading = false,
+	activeSelect = '',
 	setActiveSelect = () => {},
 	setShowMore = () => {},
-	firestore,
-	userId: agentId,
-	viewType,
-	setActiveTab,
+	firestore = {},
+	userId: agentId = '',
+	viewType = '',
+	setActiveTab = () => {},
 }) {
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -260,6 +259,7 @@ function AgentDetails({
 						setActiveMessage={setActiveMessage}
 						leadLoading={leadLoading}
 						activeRoomLoading={activeRoomLoading}
+						viewType={viewType}
 					/>
 				</>
 			)}

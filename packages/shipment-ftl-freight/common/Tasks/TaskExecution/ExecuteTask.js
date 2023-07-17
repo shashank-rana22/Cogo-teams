@@ -9,12 +9,13 @@ import {
 	CustomerInvoiceDetails,
 	ApproveTruck,
 	ApprovePurchaseDeduction,
+	UploadEWB,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
 
-const LAST_INDEX = 1;
+const FIND_LAST_INDEX = 1;
 
 function ExecuteTask({
 	task = {},
@@ -34,7 +35,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - LAST_INDEX]
+		? steps[currentStep] || steps[steps.length - FIND_LAST_INDEX]
 		: {};
 
 	if (loading) {
@@ -102,13 +103,28 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		task?.task === 'upload_ftl_eway_bill_copy'
+	) {
+		return (
+			<UploadEWB
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - LAST_INDEX}
+			isLastStep={currentStep === steps.length - FIND_LAST_INDEX}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
