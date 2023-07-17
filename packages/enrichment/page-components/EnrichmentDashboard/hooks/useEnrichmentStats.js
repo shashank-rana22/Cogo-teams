@@ -22,8 +22,7 @@ const useEnrichmentStats = () => {
 			await trigger({
 				params: {
 					filters: {
-						partner_id : profile.partner?.id,
-						user_id    : selected_agent_id || undefined,
+						user_id: selected_agent_id || undefined,
 					},
 				},
 			});
@@ -32,7 +31,7 @@ const useEnrichmentStats = () => {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [profile.partner?.id, selected_agent_id, trigger]);
+	}, [selected_agent_id, trigger]);
 
 	useEffect(() => {
 		refetchStats();
