@@ -478,9 +478,9 @@ const rms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
-		api          : 'create_air_freight_rate_sheet',
+		api          : 'create_haulage_freight_rate_sheet',
 		access_type  : 'private',
-		service_name : 'air_freight_rate',
+		service_name : 'haulage_freight_rate',
 	},
 	{
 		api          : 'list_rate_sheets',
@@ -498,9 +498,9 @@ const rms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
-		api          : 'list_air_freight_rate_sheets',
+		api          : 'list_haulage_freight_rate_sheets',
 		access_type  : 'private',
-		service_name : 'air_freight_rate',
+		service_name : 'haulage_freight_rate',
 	},
 	{
 		api          : 'update_rate_sheet',
@@ -518,9 +518,9 @@ const rms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
-		api          : 'update_air_freight_rate_sheet',
+		api          : 'update_haulage_freight_rate_sheet',
 		access_type  : 'private',
-		service_name : 'air_freight_rate',
+		service_name : 'haulage_freight_rate',
 	},
 	{
 		api          : 'list_rate_charge_codes',

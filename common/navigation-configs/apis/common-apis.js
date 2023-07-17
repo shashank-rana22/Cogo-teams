@@ -234,9 +234,9 @@ const common_apis = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
-			api          : 'create_air_freight_rate_sheet',
+			api          : 'create_haulage_freight_rate_sheet',
 			access_type  : 'private',
-			service_name : 'air_freight_rate',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'update_organization',
