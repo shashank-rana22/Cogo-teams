@@ -1,0 +1,30 @@
+.booking_container {
+	height: auto;
+	padding: 2px;
+}
+
+.title {
+	padding: 0;
+	margin-bottom: 20px;
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	color: var(--color-primary-error-red-2);
+}
+
+.apply_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 15px;
+	margin-bottom: 20px;
+	border: 1px solid var(--color-accent-orange-5);
+	border-radius: 4px;
+
+	:global {
+		.react-datepicker__input-container {
+			span {
+				display: none;
+			}
+		}
+	}
+}

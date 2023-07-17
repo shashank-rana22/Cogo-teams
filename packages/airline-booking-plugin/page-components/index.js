@@ -1,19 +1,23 @@
 import { Tabs, TabPanel, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import tabs from '../configurations/tabs';
 
 import AirIndiaAWB from './AirIndiaAWB';
+import AirIndiaBooking from './AirIndiaBooking';
 import Header from './Header';
 import styles from './styles.module.css';
 
 function AirlinePluginBooking() {
 	const [activeTab, setActiveTab] = useState('air_india');
-	const [show, setShow] = useState(false);
+	const [showPlugInModal, setShowPlugInModal] = useState([]);
+
+	const showModal = !isEmpty(showPlugInModal);
 
 	return (
 		<div>
-			<Header setShow={setShow} />
+			<Header setShow={setShowPlugInModal} />
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
@@ -26,13 +30,15 @@ function AirlinePluginBooking() {
 					))}
 				</Tabs>
 			</div>
-			{show && (
+			{showModal && (
 				<Modal
-					show={show}
-					onClose={() => setShow(false)}
+					show={showModal}
+					onClose={() => setShowPlugInModal([])}
+					showCloseIcon
 					className={styles.modal_container}
+					size="xl"
 				>
-					Hello
+					<AirIndiaBooking showPlugInModa={showPlugInModal} setShowPlugInModal={setShowPlugInModal} />
 				</Modal>
 			)}
 		</div>
