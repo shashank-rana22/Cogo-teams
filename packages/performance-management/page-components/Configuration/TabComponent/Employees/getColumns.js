@@ -1,7 +1,7 @@
 import { Pill } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+
+import { formattedDate } from '../../../../common/formattedDate';
 
 import styles from './styles.module.css';
 
@@ -36,11 +36,7 @@ const getColumns = () => [
 		Header   : 'DATE OF JOINING',
 		accessor : (item) => (
 			<div>
-				{formatDate({
-					date       : item.date_of_joining,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-					formatType : 'date',
-				})}
+				{formattedDate(item?.updated_at, 'dd MMM yyyy')}
 			</div>
 		),
 	},

@@ -1,9 +1,8 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { formattedDate } from '../../../../common/formattedDate';
 import PACKAGE_CONSTANTS from '../../../../common/packageConstants';
 import TooltipContent from '../../commons/tooltipContent';
 
@@ -72,11 +71,7 @@ const getColumns = ({ setShowDeleteModal, setShowCreateModal, activeTab }) => {
 			Header   : 'LAST UPDATED AT',
 			accessor : (item) => (
 				<div>
-					{formatDate({
-						date       : item?.updated_at,
-						formatType : 'date',
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-					})}
+					{formattedDate(item?.updated_at, 'dd MMM yyyy')}
 				</div>
 			),
 		},
