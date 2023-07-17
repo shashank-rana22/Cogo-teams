@@ -9,6 +9,8 @@ import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 import styles from './styles.module.css';
 
 const INCREASE_COUNT_BY_ONE = 1;
+const GET_LAST_INDEX = 1;
+const DEFAULT_ARRAY_LENGTH = 0;
 
 const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,${showPreview?.contentBytes}`;
 
@@ -57,6 +59,11 @@ function MailAttachments({
 	const allAttachements = attachmentData?.value || [];
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 
+	const activeAttachmentContents = activeAttachmentData?.contentType.split('/') || [];
+	const activeAttachmentContentType = activeAttachmentContents?.[
+		activeAttachmentContents?.length || DEFAULT_ARRAY_LENGTH - GET_LAST_INDEX
+	] || '';
+
 	return (
 		<div className={styles.container}>
 			{loading ? (
@@ -91,8 +98,8 @@ function MailAttachments({
 				<Modal
 					show={activeAttachmentData}
 					onClose={() => setActiveAttachmentData(null)}
-					size="fullscreen"
-					placement="fullscreen"
+					size="xl"
+					placement="center"
 					onOuterClick={() => setActiveAttachmentData(null)}
 					className={styles.styled_ui_modal_dialog}
 				>
@@ -106,7 +113,7 @@ function MailAttachments({
 					/>
 					<Modal.Body>
 						<object
-							className={styles.media_styles}
+							className={activeAttachmentContentType === 'pdf' ? styles.pdf_styles : styles.media_styles}
 							aria-label="Doc Preview"
 							data={renderContent(activeAttachmentData)}
 						/>

@@ -8,6 +8,14 @@
 		.ui_tag_container {
 			padding-left: 0 !important;
 		}
+
+		.ui_popover_container {
+			padding: 0;
+		}
+
+		.tippy-content {
+			padding: 5px 0;
+		}
 	}
 }
 

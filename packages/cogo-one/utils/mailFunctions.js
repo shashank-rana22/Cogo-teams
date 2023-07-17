@@ -26,15 +26,17 @@ function mailFunction({
 		return emailRegex.test(emailInput);
 	};
 
-	const handleKeyPress = ({ e, type }) => {
-		if (e.key === 'Enter') {
-			e.preventDefault();
-			if (!validateEmail(value)) {
+	const handleKeyPress = ({ e, type, email = '' }) => {
+		if (e?.key === 'Enter' || email) {
+			e?.preventDefault();
+			const newEmail = email || value;
+
+			if (!validateEmail(newEmail)) {
 				setErrorValue('Enter valid id');
 				return;
 			}
 
-			if (isInList(value, emailState?.[type] || [])) {
+			if (isInList(newEmail, emailState?.[type] || [])) {
 				setErrorValue('Email already present');
 				return;
 			}
@@ -42,7 +44,7 @@ function mailFunction({
 			setErrorValue(null);
 			setEmailState((prev) => ({
 				...prev,
-				[type]: [...(prev?.[type] || []), value],
+				[type]: [...(prev?.[type] || []), newEmail],
 			}));
 			setShowControl(null);
 		}

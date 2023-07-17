@@ -36,7 +36,7 @@ function EmailBodyStructure({
 	const { emailAddress = {} } = sender || {};
 	const { name = '', address = '' } = emailAddress || {};
 
-	const userName = name.replace('.', ' ');
+	const userName = name.replace('.', ' ').replace('_', ' ');
 
 	const avatarName = userName.split(' ', GET_FIRST_TWO_ELEMENTS).join(' ');
 

@@ -1,8 +1,8 @@
 import { Avatar, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import { getUserActiveMails } from '../../../../../configurations/mail-configuration';
+import getUserNameFromEmail from '../../../../../helpers/getUserNameFromEmail';
 
 import styles from './styles.module.css';
 
@@ -18,8 +18,7 @@ function SwitchMail({
 
 	const filteredMails = userActiveMails.filter((itm) => (itm !== activeMailAddress));
 
-	const activePersonName = activeMailAddress
-		.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ').replace('_', ' ');
+	const activePersonName = getUserNameFromEmail({ email: activeMailAddress });
 
 	return (
 		<div className={styles.container}>
@@ -42,7 +41,7 @@ function SwitchMail({
 
 			{filteredMails.map(
 				(itm) => {
-					const currentPersonName = itm.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ');
+					const currentPersonName = getUserNameFromEmail({ email: itm });
 
 					return (
 						<div
