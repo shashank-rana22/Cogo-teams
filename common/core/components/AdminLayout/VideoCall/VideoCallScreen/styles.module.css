@@ -44,22 +44,26 @@
 	align-items: center;
 	justify-content: center;
 
-	.styled_avatar {
-		border-radius: 50% !important;
-	}
+	:global {
+		.styled_avatar {
+			border-radius: 50% !important;
+		}
 
-	.header {
-		margin-bottom: 14px;
-		font-size: 40px;
-		font-weight: 500;
-		color: #fff;
-		text-align: center;
+		.header {
+			margin-bottom: 14px;
+			font-size: 40px;
+			font-weight: 500;
+			color: #fff;
+			text-align: center;
+		}
 	}
 }
 
 .call_screen {
-	.peer_video_stream {
-		display: none;
+	:global {
+		.peer_video_stream {
+			display: none;
+		}
 	}
 }
 
@@ -67,8 +71,10 @@
 	width: 100%;
 	height: 100%;
 
-	.avatar_screen {
-		display: none;
+	:global {
+		.avatar_screen {
+			display: none;
+		}
 	}
 }
 
@@ -86,52 +92,58 @@
 	background: #312d2d;
 	border-radius: 48px;
 
-	.call_text {
-		font-size: 18px;
-		text-align: center;
+	:global {
+		.call_text {
+			font-size: 18px;
+			text-align: center;
 
-		span {
-			margin-left: 8px;
-			font-weight: 600;
+			span {
+				margin-left: 8px;
+				font-weight: 600;
+			}
 		}
 	}
+}
 
-	.calling_options {
-		display: flex;
-		align-items: center;
+.calling_options {
+	display: flex;
+	align-items: center;
 
-		@media (max-width: 768px) {
-			width: 90%;
+	@media (max-width: 768px) {
+		width: 90%;
+	}
+}
+
+.hangup_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	height: 45px;
+	background: #f44336;
+	border-radius: 50%;
+
+	:global {
+		.end_call_icon {
+			width: 28px;
+			height: 28px;
+			cursor: pointer;
+			transform: rotate(135deg);
 		}
+	}
+}
 
-		.hangup_icon {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 45px;
-			height: 45px;
-			background: #f44336;
-			border-radius: 50%;
+.share_icon {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	cursor: pointer;
 
-			.end_call_icon {
-				width: 28px;
-				height: 28px;
-				cursor: pointer;
-				transform: rotate(135deg);
-			}
-		}
-
-		.share_icon {
+	:global {
+		.end_call_icon {
 			width: 40px;
 			height: 40px;
-			margin-right: 10px;
 			cursor: pointer;
-
-			.end_call_icon {
-				width: 40px;
-				height: 40px;
-				cursor: pointer;
-			}
 		}
 	}
 }
