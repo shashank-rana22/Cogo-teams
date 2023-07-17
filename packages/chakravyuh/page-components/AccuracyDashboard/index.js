@@ -6,6 +6,7 @@ import DashboardView from './Dashboard';
 import DrillDownView from './DrillDown';
 import Filters from './Filters';
 import MapView from './MapView';
+import SupplyRates from './RatesList';
 import styles from './styles.module.css';
 
 const VIEW_MAPPING = {
@@ -26,7 +27,7 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({ classType: 'sea' });
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';
@@ -49,6 +50,7 @@ function AccuracyDashboard() {
 				setFilters={setFilters}
 				backView={backView}
 			/>
+			<SupplyRates filters={filters} />
 		</div>
 	);
 }

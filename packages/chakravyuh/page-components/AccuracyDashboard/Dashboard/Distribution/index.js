@@ -10,12 +10,17 @@ import styles from './styles.module.css';
 const CONSTANT_ZERO = 0;
 
 function Distribution() {
+	const handlePieClick = (event, data) => {
+		console.log('Clicked segment:', event, '\n\n', data);
+	};
+
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Distribution</h3>
 			<div className={styles.pie_chart_container}>
 				<div className={styles.pie_chart_left_container}>
 					<ResponsivePie
+						onClick={handlePieClick}
 						data={CUMSTOM_DATA}
 						margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
 						innerRadius={0.7}
@@ -68,8 +73,10 @@ function Distribution() {
 							<div className={styles.legend_box} key={key}>
 								<div className={styles.legend_row}>
 									<div className={cl`${styles.legend_symbol} ${styles[key]}`} />
-									<p className={styles.legend_name}>{label}</p>
-									<p className={styles.legend_rate}>{`(${value} Rates)`}</p>
+									<div className={styles.legend_text_row}>
+										<p className={styles.legend_name}>{label}</p>
+										<p className={styles.legend_rate}>{`(${value} Rates)`}</p>
+									</div>
 								</div>
 								<p className={styles.legend_percentage}>{`${cancellation} % Cancellation`}</p>
 							</div>
