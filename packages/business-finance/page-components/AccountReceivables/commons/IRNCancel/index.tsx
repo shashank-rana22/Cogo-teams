@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -6,9 +6,8 @@ import React, { useState } from 'react';
 import usePostToSage from '../../hooks/usePostToSage';
 
 import CancellationModal from './CancellationModal';
+import Content from './content';
 import styles from './styles.module.css';
-
-const { cogoport_entities: CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 const TIME_VALUE = 86400000;
 
@@ -38,52 +37,19 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const { postToSage, loading } = usePostToSage({ id });
 
-	const { labels } = CogoportEntity[entityCode] || {};
-
-	const { irn_label: IRNLabel } = labels || {};
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels;
 
 	const sageAllowed = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('post_to_sage');
 	const cancelSupported = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
+
 	const cancelApproved = (cancelSupported && invoiceAdditionals?.reqCancelReason)
 		|| (!cancelSupported && (irnGeneratedAt !== null ? Number(irnGeneratedAt) + TIME_VALUE >= Date.now() : false));
 
 	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed);
 
-	function Content() {
-		return (
-			<div className={styles.container}>
-				{ cancelApproved ? (
-					<Button
-						size="sm"
-						type="button"
-						onClick={() => {
-							setShowCancellationModal(true);
-							setShow(false);
-						}}
-						style={{ marginBottom: '8px' }}
-					>
-						Cancel
-						{' '}
-						{IRNLabel}
-					</Button>
-				) : null}
-				{(statusPresent && sageAllowed) ? (
-					<Button
-						disabled={loading}
-						size="sm"
-						type="button"
-						onClick={postToSage}
-					>
-						Post to Sage
-					</Button>
-				) : null}
-			</div>
-		);
-	}
-
 	const rest = {
-		onClickOutside: () => setShow(!show),
+		onClickOutside: () => setShow(false),
 	};
 
 	if (
@@ -96,7 +62,18 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 						<Popover
 							placement="left"
 							visible={show}
-							render={<Content />}
+							render={(
+								<Content
+									cancelApproved={cancelApproved}
+									statusPresent={statusPresent}
+									sageAllowed={sageAllowed}
+									loading={loading}
+									postToSage={postToSage}
+									setShowCancellationModal={setShowCancellationModal}
+									setShow={setShow}
+									irnLabel={irnLabel}
+								/>
+							)}
 							{...rest}
 						>
 							<div>
@@ -114,7 +91,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 								itemData={itemData}
 								showCancellationModal={showCancellationModal}
 								setShowCancellationModal={setShowCancellationModal}
-								IRNLabel={IRNLabel}
+								IRNLabel={irnLabel}
 								refetch={refetch}
 							/>
 						)}

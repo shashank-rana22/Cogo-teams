@@ -13,9 +13,7 @@ interface Props {
 const useBulkIrnGenerate = (
 	{ entityCode, getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
 ) => {
-	const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-	const { labels } = CogoportEntity[entityCode] || {};
-	const { irn_label: IrnLabel } = labels || {};
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels;
 	const [
 		{ loading:bulkIrnLoading },
 		bulkIrnTrigger,
@@ -37,7 +35,7 @@ const useBulkIrnGenerate = (
 			});
 			if (resp.status === 200) {
 				Toast.success(
-					`Request sent! ${IrnLabel} status awaited...`,
+					`Request sent! ${irnLabel} status awaited...`,
 				);
 				getOrganizationInvoices(); // refetching the list
 				setCheckedRows([]);

@@ -8,12 +8,12 @@ import ViewButton from '../../common/ViewButton';
 import styles from './style.module.css';
 
 function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
-	const [showModal, setShowModal] = useState(false);
-	const [remarks, setRemarks] = useState(remark);
 	const { data = {} } = row || {};
 	const { revokeInvoiceRequest = {} } = data;
 	const { agreementNumber, documentUrls, agreementDate, invoiceNumber } = revokeInvoiceRequest;
 	const agreementDocument = (documentUrls || [])[0];
+	const [showModal, setShowModal] = useState(false);
+	const [remarks, setRemarks] = useState(remark);
 	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
 
 	const { useOnAction:OnAction, loading } = useGetRevokeInvoiceData({

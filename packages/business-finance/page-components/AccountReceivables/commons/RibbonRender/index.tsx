@@ -15,8 +15,8 @@ interface Interface {
 	row?: ItemData
 }
 
-function RibbonRender({ row }: Interface) {
-	const { daysLeftForAutoIrnGeneration = '', invoiceAdditionals = {} } = row || {};
+function RibbonRender({ row = {} }: Interface) {
+	const { daysLeftForAutoIrnGeneration = '', invoiceAdditionals = {} } = row;
 	const { reqCancelReason = '' } = invoiceAdditionals || {};
 	let value;
 	if ((daysLeftForAutoIrnGeneration as unknown as number) >= 0) {
