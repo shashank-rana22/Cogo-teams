@@ -110,15 +110,6 @@ const getColumns = ({
 				</div>
 			),
 		},
-
-		{
-			Header   : 'Z-Score',
-			accessor : (item) => (
-				<div>
-					{startCase(item?.z_score) || '-'}
-				</div>
-			),
-		},
 	];
 
 	if (level === 'vertical_head' && activeTab === 'vertical_head') {
