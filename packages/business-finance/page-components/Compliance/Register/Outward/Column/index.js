@@ -15,10 +15,10 @@ const Column = (refresh, deleteId, statusId, uploadId) => {
 	const { push } = useRouter();
 
 	const handleErrorReport = (errorReportFile) => {
-		if (errorReportFile === 'ERROR') {
-			Toast.error('Error In File Upload');
+		if (errorReportFile !== 'ERROR') {
+			window.open(errorReportFile, '_blank');
 		}
-		window.open(errorReportFile, '_blank');
+		Toast.error('Error In File Upload');
 	};
 
 	const contentData = (row) => {
