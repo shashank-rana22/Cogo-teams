@@ -34,12 +34,12 @@ function TaskDetails({
 			<div className={styles.task_and_icon}>
 				<div className={styles.icon}>
 					{task?.status === 'completed' ? (
-						<IcMTaskCompleted fill="##F68B21" width="1.5em" height="1.5em" />
+						<IcMTaskCompleted fill="#027a48" width="1.75em" height="1.75em" />
 					) : (
 						<IcMTaskNotCompleted
-							fill="##F68B21"
-							width="1.5em"
-							height="1.5em"
+							fill="#F68B21"
+							width="1.75em"
+							height="1.75em"
 						/>
 					)}
 				</div>
@@ -50,7 +50,7 @@ function TaskDetails({
 					<div className={styles.task_name}>{taskName}</div>
 
 					<div className={styles.task_date_details}>
-						{task?.deadline ? (
+						{task?.deadline && task?.status !== 'completed' ? (
 							<Tooltip
 								interactive
 								theme="light"
