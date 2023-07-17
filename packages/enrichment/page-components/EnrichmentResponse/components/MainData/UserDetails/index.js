@@ -13,6 +13,7 @@ function UserDetails({
 	data = [],
 	refetchResponses = () => {},
 	loadingResponses = false,
+	actionType = '',
 }) {
 	const [showForm, setShowForm] = useState(false);
 
@@ -34,6 +35,7 @@ function UserDetails({
 
 			<div className={styles.main}>
 				<Header
+					actionType={actionType}
 					showForm={showForm}
 					setShowForm={setShowForm}
 					title="POC"

@@ -458,6 +458,7 @@ export default {
 							'requested_agent',
 							'created_at',
 							'status',
+							'action',
 						],
 					},
 					agent_view: {
@@ -478,6 +479,7 @@ export default {
 							'business_name',
 							'created_at',
 							'status',
+							'action',
 						],
 					},
 				},

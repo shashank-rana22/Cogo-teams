@@ -7,13 +7,15 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 
 	const { query = {} } = router;
 
+	const { action_type:actionType = '', id:feedback_request_id } = query;
+
 	const [params, setParams] = useState({
 		sort_type : 'asc',
 		sort_by   : 'created_at',
 		page      : 1,
 		filters   : {
-			feedback_request_id : query.id,
-			response_type       : 'user',
+			feedback_request_id,
+			response_type: 'user',
 		},
 		is_third_party: true,
 	});
@@ -43,6 +45,7 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 		refetchResponses : refetch,
 		loadingResponses : loading,
 		setParams,
+		actionType,
 	};
 };
 

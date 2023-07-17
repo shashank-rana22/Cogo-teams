@@ -585,6 +585,7 @@ export default {
 							'requested_agent',
 							'created_at',
 							'status',
+							'action',
 						],
 					},
 					agent_view: {
@@ -608,6 +609,7 @@ export default {
 							'registration_number',
 							'created_at',
 							'status',
+							'action',
 						],
 					},
 				},

@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function AddressDetails({
 	data = {},
+	actionType = '',
 	refetchResponses = () => {},
 	loadingResponses = false,
 }) {
@@ -36,6 +37,7 @@ function AddressDetails({
 				<Header
 					setShowForm={setShowForm}
 					title="Address"
+					actionType={actionType}
 				/>
 
 				{isEmpty(data) ? (

@@ -172,14 +172,26 @@ const getEnrichmentColumnsData = ({
 		),
 	},
 	{
+		id       : 'status',
+		Header   : 'STATUS',
+		accessor : ({ status }) => (
+			<seaction>
+				<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>
+					{startCase(status) || '-'}
+				</Pill>
+			</seaction>
+		),
+	},
+
+	{
 		id       : 'action',
 		Header   : <div className={styles.action_header}>Action</div>,
 		accessor : (item) => {
 			const { id, assigned_user = {} } = item;
 
 			const onClickCta = (workflow) => {
-				if (['add', 'edit'].includes(workflow)) {
-					handleEditDetails(id);
+				if (['add', 'edit', 'view'].includes(workflow)) {
+					handleEditDetails(id, workflow);
 				} else {
 					onEnrichmentClick({ id, workflow, refetch });
 				}
@@ -220,17 +232,7 @@ const getEnrichmentColumnsData = ({
 			);
 		},
 	},
-	{
-		id       : 'status',
-		Header   : 'STATUS',
-		accessor : ({ status }) => (
-			<seaction>
-				<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>
-					{startCase(status) || '-'}
-				</Pill>
-			</seaction>
-		),
-	},
+
 ];
 
 export default getEnrichmentColumnsData;

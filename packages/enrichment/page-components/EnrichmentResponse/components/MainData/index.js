@@ -13,6 +13,7 @@ function MainData() {
 		data = [],
 		refetchResponses = () => {},
 		loadingResponses = false,
+		actionType = '',
 	} = useEnrichmentResponse({ activeTab });
 
 	return (
@@ -36,6 +37,7 @@ function MainData() {
 						>
 							<ContainerComponent
 								data={data}
+								actionType={actionType}
 								refetchResponses={refetchResponses}
 								loadingResponses={loadingResponses}
 							/>

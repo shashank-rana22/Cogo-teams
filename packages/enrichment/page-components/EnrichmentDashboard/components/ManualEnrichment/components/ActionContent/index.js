@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import {
 	IcMCross,
 	IcMEdit,
+	IcMEyeopen,
 	IcMPlusInCircle,
 	IcMTick,
 } from '@cogoport/icons-react';
@@ -15,6 +16,7 @@ const ICONS_MAPPING = {
 	add     : IcMPlusInCircle,
 	success : IcMTick,
 	failed  : IcMCross,
+	view    : IcMEyeopen,
 };
 
 function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComplete = false }) {

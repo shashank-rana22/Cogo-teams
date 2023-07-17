@@ -19,7 +19,9 @@ export const getSecondaryTabOptions = () => ({
 	success: {
 		key     : 'success',
 		title   : 'completed',
-		actions : {},
+		actions : {
+			view: 'View Details',
+		},
 	},
 
 });

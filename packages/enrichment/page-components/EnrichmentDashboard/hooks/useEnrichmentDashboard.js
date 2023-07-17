@@ -106,8 +106,8 @@ const useEnrichmentDashboard = ({
 		}));
 	}, [allowedToSeeAgentsData, filtersMapping, partner_id, primaryTab, searchQuery, selected_agent_id, user_id]);
 
-	const handleEditDetails = (feedback_request_id) => {
-		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
+	const handleEditDetails = (feedback_request_id, action) => {
+		router.push(`/enrichment/${feedback_request_id}?action_type=${action}`);
 	};
 
 	const columns = getEnrichmentColumnsData({

@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 function Header({
 	setShowForm = () => {},
 	title = '',
+	actionType = '',
 }) {
 	return (
 		<div className={styles.top}>
@@ -17,6 +18,7 @@ function Header({
 				<Button
 					size="md"
 					themeType="accent"
+					disabled={actionType === 'view'}
 					role="presentation"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowForm(true)}
