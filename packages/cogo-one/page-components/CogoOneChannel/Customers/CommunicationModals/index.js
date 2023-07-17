@@ -17,6 +17,9 @@ function CommunicationModals({
 	modalType = {},
 	userId = '',
 	viewType = '',
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
+	setAutoAssignChats = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -90,6 +93,9 @@ function CommunicationModals({
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}
+				selectedAutoAssign={selectedAutoAssign}
+				setSelectedAutoAssign={setSelectedAutoAssign}
+				setAutoAssignChats={setAutoAssignChats}
 			/>
 
 			{!!buttonType && (

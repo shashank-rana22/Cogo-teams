@@ -26,11 +26,14 @@ function MessageList(messageProps) {
 		viewType = '',
 		isBotSession,
 		setIsBotSession,
+		setModalType = () => {},
+		selectedAutoAssign = {},
+		setSelectedAutoAssign = () => {},
+		autoAssignChats,
+		setAutoAssignChats = () => {},
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
-	const [autoAssignChats, setAutoAssignChats] = useState(true);
-	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [carouselState, setCarouselState] = useState('hide');
 	const [searchValue, setSearchValue] = useState('');
 	const [activeSubTab, setActiveSubTab] = useState('all');
@@ -87,10 +90,10 @@ function MessageList(messageProps) {
 		setAutoAssignChats(true);
 		setSelectedAutoAssign({});
 	};
-
 	useEffect(() => {
-		handleAutoAssignBack();
-	}, [isBotSession, appliedFilters]);
+		setAutoAssignChats(true);
+		setSelectedAutoAssign({});
+	}, [isBotSession, appliedFilters, setSelectedAutoAssign, setAutoAssignChats]);
 
 	return (
 		<>
@@ -130,8 +133,7 @@ function MessageList(messageProps) {
 					</div>
 				) : (
 					<>
-						{isBotSession
-							&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bulk_auto_assign
+						{ VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bulk_auto_assign
 							&& (
 								<AutoAssignComponent
 									autoAssignChats={autoAssignChats}
@@ -140,6 +142,8 @@ function MessageList(messageProps) {
 									selectedAutoAssign={selectedAutoAssign}
 									bulkAssignLoading={bulkAssignLoading}
 									bulkAssignChat={bulkAssignChat}
+									setModalType={setModalType}
+									isBotSession={isBotSession}
 								/>
 							)}
 						<div

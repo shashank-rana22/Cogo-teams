@@ -29,6 +29,10 @@
 		.ui_button_container {
 			width: 100px;
 		}
+
+		.ui_ps_themeType_secondary {
+			padding: 0;
+		}
 	}
 }
 
@@ -65,4 +69,8 @@
 		margin-right: 5px;
 		font-weight: 600;
 	}
+}
+
+.list_icon {
+	padding-right: 2px;
 }

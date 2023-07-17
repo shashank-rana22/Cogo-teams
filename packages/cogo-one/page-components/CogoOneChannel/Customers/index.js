@@ -32,6 +32,8 @@ function Customers({
 	viewType = '',
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -48,6 +50,11 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			setModalType,
+			selectedAutoAssign,
+			setSelectedAutoAssign,
+			autoAssignChats,
+			setAutoAssignChats,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -141,6 +148,9 @@ function Customers({
 				modalType={modalType}
 				userId={userId}
 				viewType={viewType}
+				selectedAutoAssign={selectedAutoAssign}
+				setSelectedAutoAssign={setSelectedAutoAssign}
+				setAutoAssignChats={setAutoAssignChats}
 			/>
 		</div>
 	);

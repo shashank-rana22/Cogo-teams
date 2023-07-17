@@ -12,6 +12,8 @@ import CreateTemplateForm from './CreateTemplateForm';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 
+const ZERO_COUNT = 0;
+
 function Templates({
 	openCreateReply = false,
 	setOpenCreateReply = () => {},
@@ -20,9 +22,14 @@ function Templates({
 	dialNumber = '',
 	setDialNumber = () => {},
 	viewType = '',
+	selectedAutoAssign = {},
 }) {
 	const [customizableData, setCustomizableData] = useState({});
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+	const [activeCard, setActiveCard] = useState({
+		show : type === 'whatsapp_new_message_modal' || 'bulk_communication',
+		data : {},
+	});
+	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -37,6 +44,7 @@ function Templates({
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
 	const maskMobileNumber = type === 'voice_call_component';
+	const bulkCommunicationTemplate = type === 'bulk_communication';
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
@@ -79,6 +87,19 @@ function Templates({
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
 				<div>
+					{
+						bulkCommunicationTemplate && (
+							<>
+								<div className={styles.template_heading}>
+									{count}
+									org
+								</div>
+								{/* <div className={styles.template_heading}>
+									<div>Select a template</div>
+								</div> */}
+							</>
+						)
+					}
 					{isDefaultOpen && (
 						<>
 							<div className={styles.wrap_heading}>
