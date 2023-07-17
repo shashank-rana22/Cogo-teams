@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { isEmpty } from '@cogoport/utils';
 import {
 	addDoc,
 	collection,
@@ -122,7 +123,6 @@ function useVideoCallFirebase({
 				is_in_video_call          : false,
 			}),
 		);
-
 		setInACall(false);
 		setCallComing(false);
 		stopStream('screen_stream');
@@ -160,6 +160,8 @@ function useVideoCallFirebase({
 		setWebrtcToken, setOptions, setStreams, setCallComing]);
 
 	const callingTo = useCallback((peer_details = {}) => {
+		if (isEmpty(peer_details?.user_id)) return;
+
 		setCallDetails((prev) => ({
 			...prev,
 			call_status : 'calling',
@@ -170,11 +172,12 @@ function useVideoCallFirebase({
 				user_type : 'admin',
 			},
 			peer_details,
+			peer_id              : peer_details?.user_id,
 			webrtc_token_room_id : userId,
 			calling_type         : 'outgoing',
 		}));
 		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true })
+			.getUserMedia({ video: false, audio: true })
 			.then((myStream) => {
 				setInACall(true);
 				setStreams((prev) => ({ ...prev, user_stream: myStream }));

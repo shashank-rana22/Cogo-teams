@@ -71,6 +71,8 @@ function Header({
 		group_members = [],
 		organization_id = '',
 		user_id,
+		user_name,
+		user_type = '',
 		account_type = '',
 		managers_ids = [],
 		id,
@@ -96,11 +98,16 @@ function Header({
 	const unmountVideoCall = useCallback(() => {
 		dispatch(
 			setProfileState({
-				video_call_recipient_data : {},
-				is_in_video_call          : true,
+				video_call_recipient_data: {
+					user_id,
+					user_name,
+				},
+				is_in_video_call: true,
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, user_id, user_name]);
+
+	console.log('formattedData', formattedData);
 
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
@@ -191,12 +198,15 @@ function Header({
 				<div className={styles.flex_space_between}>
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
-						<Button
-							themeType="secondary"
-							onClick={unmountVideoCall}
-						>
-							video call
-						</Button>
+						{user_type === 'cp' ? (
+							<Button
+								themeType="secondary"
+								onClick={unmountVideoCall}
+							>
+								video call
+							</Button>
+						) : null}
+
 						{account_type === 'service_provider' && (
 							<Button
 								themeType="secondary"

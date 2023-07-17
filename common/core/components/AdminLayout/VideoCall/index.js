@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
@@ -8,7 +7,6 @@ import CallComing from './CallComing';
 import { firebaseConfig } from './configurations/firebase-config';
 import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
-import styles from './styles.module.css';
 import VideoCallScreen from './VideoCallScreen';
 
 function VideoCall({
@@ -107,11 +105,9 @@ function VideoCall({
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
 
+	console.log(callDetails, 'callDetails');
 	return (
 		<div>
-			<div className={styles.call_test}>
-				<Button onClick={() => callingTo({})}>Call</Button>
-			</div>
 			{callComing ? (
 				<div>
 					<CallComing

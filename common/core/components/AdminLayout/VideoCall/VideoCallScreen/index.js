@@ -1,10 +1,13 @@
 import { Avatar } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcMScreenShare } from '@cogoport/icons-react';
 import { forwardRef } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
+
+const FIRST_VARIABLE = 1;
 
 function VideoCallScreen({
 	options = {},
@@ -18,7 +21,8 @@ function VideoCallScreen({
 	callDetails = {},
 }, ref) {
 	const { peer_stream } = streams || {};
-	const { calling_type } = callDetails || {};
+	const { calling_type, peer_details	} = callDetails || {};
+	const { user_name = 'Unknown' } = peer_details || {};
 
 	const tempRef = ref;
 
@@ -37,8 +41,12 @@ function VideoCallScreen({
 		<div className={styles.container}>
 			<div className={peer_stream ? styles.peer_screen : styles.call_screen}>
 				<div className={styles.avatar_screen}>
-					<div className={styles.header}>Purnendu Shekhar</div>
-					<Avatar personName="Purnendu Shekhar" size="250px" className={styles.styled_avatar} />
+					<div className={styles.header}>{user_name}</div>
+					<Avatar
+						personName={user_name.slice(GLOBAL_CONSTANTS.zeroth_index, FIRST_VARIABLE)}
+						size="250px"
+						className={styles.styled_avatar}
+					/>
 				</div>
 				<div className={styles.peer_video_stream}>
 					<video
