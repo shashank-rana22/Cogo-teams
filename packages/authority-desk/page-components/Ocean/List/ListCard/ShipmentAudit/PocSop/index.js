@@ -69,6 +69,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 											shipment_data={shipment_data}
 											servicesList={servicesList}
 											activeStakeholder="credit_control"
+											primary_service={primary_service}
 										/>
 									</div>
 								</TabPanel>

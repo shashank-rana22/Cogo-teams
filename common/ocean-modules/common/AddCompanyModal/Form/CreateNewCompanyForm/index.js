@@ -29,13 +29,20 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function CreateNewCompanyForm({ tradePartyType }, ref) {
+function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
 		defaultFilters : { organization_status: 'active' },
 	});
 
 	const geo = getGeoConstants();
+
+	const { destination_port, origin_port } = primary_service || {};
+
+	const COUNTRY_DATA = {
+		shipper   : origin_port,
+		consignee : destination_port,
+	};
 
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
@@ -96,10 +103,14 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			});
 		}
 	}, [formValues?.name, pocNameOptions, setValue, resetMultipleFields]);
+	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
+	useEffect(() => {
+		if (formValues?.country_id) {
+			setValue('mobile_number', { country_code: countryValidation?.country?.mobile_country_code });
+		}
+	}, [formValues?.country_id, countryValidation?.country?.mobile_country_code, setValue]);
 
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
-
-	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
 
 	return (
 		<div>
@@ -113,7 +124,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							placeholder="Enter or Select Country"
 							optionValueKey="id"
-							value={geo.country.id}
+							value={(COUNTRY_DATA?.[tradePartyType])?.country_id}
 							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country', errors)}
@@ -131,10 +142,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							placeholder={`Enter ${geo.others.identification_number.label}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
-								pattern  : {
-									value   : geo.others.identification_number.pattern,
-									message : `${geo.others.identification_number.label} is invalid`,
-								},
+								pattern  : { value: countryValidation?.regex?.PAN, message: 'Pan Number is invalid' },
 							}}
 						/>
 						{Error('registration_number', errors)}
@@ -227,7 +235,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							control={control}
 							name="mobile_number"
-							value={{ country_code: geo.country.mobile_country_code }}
+
 						/>
 						{Error('mobile_number', errors)}
 					</div>
@@ -238,7 +246,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							control={control}
 							name="alternate_mobile_number"
-							value={{ country_code: geo.country.mobile_country_code }}
 						/>
 					</div>
 				</div>

@@ -17,7 +17,7 @@ import roleBasedView from './config/role_base_view.json';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
+function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '', primary_service = {} }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -75,6 +75,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 							setAddCompany={setAddCompany}
 							setAddPoc={setAddPoc}
 							rolesPermission={rolesPermission}
+							primary_service={primary_service}
 						/>
 
 						{rolesViewPermission?.includes('notifying_party') ? (
@@ -109,6 +110,8 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 								tradePartnerTrigger={tradePartnerTrigger}
 								shipment_id={shipment_id}
 								importer_exporter_id={importer_exporter_id}
+								shipment_data={shipment_data}
+								primary_service={primary_service}
 							/>
 						)}
 

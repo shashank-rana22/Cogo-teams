@@ -9,7 +9,8 @@ import {
 } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useEffect, useImperativeHandle, forwardRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useImperativeHandle, forwardRef, useState, useCallback } from 'react';
 
 import getCompanyAddressOptions from '../../../../components/Poc/helpers/getCompanyAddressOptions';
 import getCompanyNameOptions from '../../../../components/Poc/helpers/getCompanyNameOptions';
@@ -17,6 +18,7 @@ import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/get
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
 
@@ -47,9 +49,17 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const { trade_party_id, address } = watch() || {};
+	const { trade_party_id, address, name } = watch() || {};
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+
+	const [addressData, setAddressData] = useState([]);
+	const [id, setId] = useState('');
+	const [pocNameOptions, setPocNameOptions] = useState([]);
+
+	const resetMultipleFields = useCallback((fields = []) => {
+		fields?.map((field) => resetField(field));
+	}, [resetField]);
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -61,6 +71,12 @@ function SelfAndTradePartyForm({
 		const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
 		setValue('registration_number', selectedTradeParty?.registration_number || '');
 
+		if (!isEmpty(selectedTradeParty)) {
+			setAddressData([...(selectedTradeParty?.billing_addresses || []),
+				...(selectedTradeParty.other_addresses || [])]);
+			setId(selectedTradeParty?.id);
+		}
+
 		resetField('address');
 		resetField('pincode');
 	}, [trade_party_id, list, setValue, resetField]);
@@ -68,6 +84,33 @@ function SelfAndTradePartyForm({
 	useEffect(() => {
 		setValue('pincode', address?.split('::')?.[PINCODE_IN_ADDRESS_INDEX]);
 	}, [address, setValue]);
+
+	useEffect(() => {
+		resetMultipleFields(['name']);
+
+		const { pocNameOptions:nameOptions } = getAddressRespectivePincodeAndPoc({
+			data: addressData,
+			address,
+			id,
+		});
+
+		setPocNameOptions(nameOptions);
+	}, [address, addressData, setValue, resetMultipleFields, id]);
+
+	useEffect(() => {
+		resetMultipleFields(['work_scopes', 'email', 'mobile_number']);
+
+		if (name) {
+			const selectedName = pocNameOptions?.find((item) => item?.value === name);
+			console.log(selectedName, 'selectedName');
+			setValue('work_scopes', selectedName?.work_scopes || []);
+			setValue('email', selectedName?.email || '');
+			setValue('mobile_number', {
+				country_code : selectedName?.mobile_country_code,
+				number       : selectedName?.mobile_number,
+			});
+		}
+	}, [name, pocNameOptions, setValue, resetMultipleFields]);
 
 	const company_options = getCompanyNameOptions(list);
 	const address_options = getCompanyAddressOptions(list);
@@ -149,6 +192,7 @@ function SelfAndTradePartyForm({
 										control={control}
 										name="name"
 										placeholder="Enter your POC Name"
+										options={pocNameOptions}
 									/>
 								</div>
 								<div className={styles.form_item_container}>
@@ -182,7 +226,6 @@ function SelfAndTradePartyForm({
 									<label className={styles.form_label}>Mobile Number</label>
 									<MobileNumberController
 										size="sm"
-										value={{ country_code: geo.country.mobile_country_code }}
 										control={control}
 										name="mobile_number"
 									/>
@@ -194,7 +237,6 @@ function SelfAndTradePartyForm({
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
 									<MobileNumberController
-										value={{ country_code: geo.country.mobile_country_code }}
 										size="sm"
 										control={control}
 										name="alternate_mobile_number"
