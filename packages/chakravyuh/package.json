@@ -11,6 +11,7 @@
     "@cogoport/constants": "workspace:0.1.0",
     "@cogoport/forms": "workspace:^0.1.0",
     "@cogoport/globalization": "workspace:*",
+    "@cogoport/air-modules": "workspace:^1.0.0",
     "@cogoport/icons-react": "^1.0.58",
     "@cogoport/map-components": "workspace:0.0.1",
     "@cogoport/maps": "^1.0.2",
