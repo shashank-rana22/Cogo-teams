@@ -1,0 +1,18 @@
+.errors {
+	font-size: var(--font-size-md);
+	color: #ee3425;
+}
+
+.file_view {
+	display: flex;
+	justify-content: center;
+	margin: 12px 0;
+}
+
+.remark {
+	margin: 12px 0;
+
+	.ui-textarea {
+		padding: 6px;
+	}
+}
