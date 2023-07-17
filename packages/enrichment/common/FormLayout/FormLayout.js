@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import { getElementController } from '../../configurations/get-element-controller';
 
 import styles from './styles.module.css';
@@ -10,7 +8,7 @@ function FormLayout({
 	errors = {},
 }) {
 	return (
-		<div className={styles.form_container}>
+		<section className={styles.form_container}>
 			{fields.map((controlItem) => {
 				const element = { ...controlItem };
 
@@ -19,19 +17,15 @@ function FormLayout({
 				if (!Element) return null;
 
 				return (
-					<div key={controlItem.name} className={styles.form_group} style={element?.style}>
-						<div className={styles.form_label}>
-							{element.label}
-							{isEmpty(controlItem?.rules)
-								? <span className={styles.optional_tag}> (optional) </span>
-								: null}
-						</div>
-						<div>
+					<div key={controlItem.name} className={styles.form_group}>
+						<span className={styles.label}>{element.label}</span>
+
+						<div className={styles.input_group}>
 							<Element
 								{...element}
 								key={element.name}
 								control={control}
-								id={`onboard_vendor_form_${element.name}_input`}
+								id={`enrichment_${element.name}_input`}
 							/>
 
 							{errors?.[element.name]?.message ? (
@@ -43,7 +37,7 @@ function FormLayout({
 					</div>
 				);
 			})}
-		</div>
+		</section>
 	);
 }
 

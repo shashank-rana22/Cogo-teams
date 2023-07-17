@@ -11,17 +11,14 @@ const getControls = () => {
 			name        : 'name',
 			label       : 'Name',
 			type        : 'text',
-			style       : { flexBasis: '42%' },
-			placeholder : 'Enter Name',
-			rules       : { required: false },
+			placeholder : 'Enter name',
 
 		},
 		{
 			name        : 'email',
-			label       : 'Contact Email ID',
+			label       : 'Email ID',
 			type        : 'text',
-			style       : { flexBasis: '42%' },
-			placeholder : 'Type here..',
+			placeholder : 'Enter email',
 			rules       : {
 				required : false,
 				pattern  : {
@@ -33,38 +30,30 @@ const getControls = () => {
 		},
 		{
 			name        : 'mobile_number',
-			label       : 'Contact Number',
+			label       : 'Mobile Number',
 			type        : 'mobile-number-select',
-			style       : { flexBasis: '42%' },
-			placeholder : 'Type here',
-			rules       : { required: false },
+			placeholder : 'Type here...',
 
 		},
 
 		{
 			name        : 'alternate_mobile_number',
-			label       : 'Alternate Contact Number',
+			label       : 'Alternate Number',
 			type        : 'mobile-number-select',
-			style       : { flexBasis: '42%' },
-			placeholder : 'Type here',
-			rules       : { required: false },
+			placeholder : 'Type here...',
 		},
 		{
 			name        : 'whatsapp_number',
 			label       : geo.navigations.enrichment.whatsapp_number_label,
 			type        : 'mobile-number-select',
-			style       : { flexBasis: '42%' },
-			placeholder : 'Type here',
-			rules       : { required: false },
+			placeholder : 'Type here...',
 		},
 
 		{
 			name        : 'work_scopes',
 			label       : 'Role in Company',
 			type        : 'multiSelect',
-			placeholder : 'Select a role type',
-			style       : { flexBasis: '42%' },
-			rules       : { required: false },
+			placeholder : 'Select role type',
 			options     : workScopes,
 		},
 	];

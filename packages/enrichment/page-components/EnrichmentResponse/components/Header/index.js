@@ -22,7 +22,7 @@ function Header() {
 	const avatarName = `${str.split(' ')[GLOBAL_CONSTANTS.zeroth_index]} ${str.split(' ')[FIRST_INDEX] || ''}`;
 
 	if (loading) {
-		return <div className={styles.card}><Placeholder width="500px" height="80px" /></div>;
+		return <div className={styles.card}><Placeholder width="500px" height="64px" /></div>;
 	}
 
 	return (

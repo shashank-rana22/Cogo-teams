@@ -23,13 +23,14 @@ function MainData() {
 				themeType="primary"
 			>
 				{(options || []).map((option) => {
-					const { key = '', title = '', containerComponent: ContainerComponent = null } = option;
+					const { key = '', title = '', icon:Icon, containerComponent: ContainerComponent = null } = option;
 
 					if (!ContainerComponent) return null;
 
 					return (
 						<TabPanel
 							name={key}
+							icon={<Icon />}
 							key={key}
 							title={title}
 						>

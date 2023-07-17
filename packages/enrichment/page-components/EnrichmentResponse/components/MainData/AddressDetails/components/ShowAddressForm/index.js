@@ -22,12 +22,12 @@ function ShowAddressForm({
 	return (
 
 		<Modal
-			size="lg"
+			size="md"
 			show={showForm}
 			onClose={() => setShowForm(false)}
 			placement="center"
 		>
-			<Modal.Header title="Address Details" />
+			<Modal.Header title="Add Address Details" />
 
 			<Modal.Body>
 				<FormLayout

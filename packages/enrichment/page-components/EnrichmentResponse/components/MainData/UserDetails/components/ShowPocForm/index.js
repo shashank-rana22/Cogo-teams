@@ -22,12 +22,12 @@ function ShowPocForm({
 	return (
 
 		<Modal
-			size="lg"
+			size="md"
 			show={showForm}
 			onClose={() => setShowForm(false)}
 			placement="center"
 		>
-			<Modal.Header title="POC Details" />
+			<Modal.Header title="Add POC Details" />
 
 			<Modal.Body>
 				<FormLayout
