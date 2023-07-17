@@ -6,9 +6,11 @@ import { SOURCE_ICON_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
-function UserAvatar({ type = '', imageSource = '' }) {
-	const topIcon = SOURCE_ICON_MAPPING[type];
+const EVENT_ICON_MAPPING = ['user', 'checkout', 'shipment', 'communication'];
 
+function UserAvatar({ type = '', imageSource = '', event = '' }) {
+	const eventIcon = EVENT_ICON_MAPPING.includes(event);
+	const topIcon = eventIcon ? SOURCE_ICON_MAPPING[event] : SOURCE_ICON_MAPPING[type];
 	return (
 		<div className={styles.container}>
 			{topIcon && (

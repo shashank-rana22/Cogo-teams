@@ -104,6 +104,7 @@ function MessageCardData({
 						<div className={styles.avatar_container}>
 							<UserAvatar
 								type={channel_type}
+								event={last_message_document?.source}
 							/>
 							<div className={styles.user_details}>
 								<Tooltip

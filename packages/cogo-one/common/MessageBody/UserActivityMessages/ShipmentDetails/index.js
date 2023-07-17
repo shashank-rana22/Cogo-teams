@@ -7,24 +7,23 @@ import PortDetails from '../../../PortDetails';
 
 import styles from './styles.module.css';
 
-const GET_LAST_STRING = 2;
+// const GET_LAST_STRING = 2;
 
 function ShipmentDetails({ serviceData = {}, name = '' }) {
-	const parts = name.split(':');
-	const evnetTitle = parts[GET_LAST_STRING].trim();
+	// const parts = name.split(':');
+	// const evnetTitle = parts[GET_LAST_STRING].trim();
 
 	const shippingLineMapping = SHIPPING_LINE[serviceData?.shipment_type];
 	const shippingLines = serviceData[shippingLineMapping];
 
 	return (
 		<>
-			<div className={styles.title}>{evnetTitle}</div>
+			<div className={styles.title}>{name}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned shipments -
 			</div>
 
 			<div className={styles.banner}>
-
 				{shippingLines && (
 					<div className={styles.company_details}>
 						{shippingLines?.logo_url && (
@@ -45,7 +44,11 @@ function ShipmentDetails({ serviceData = {}, name = '' }) {
 						</Tooltip>
 					</div>
 				)}
-
+				<div className={styles.serial_id}>
+					SID:
+					{' '}
+					{serviceData?.serial_id}
+				</div>
 				<PortDetails serviceData={serviceData} />
 				<CargoDetails detail={serviceData} />
 			</div>

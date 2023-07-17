@@ -33,25 +33,30 @@ export const SOURCE_ICON_MAPPING = {
 		width="30px"
 		height="30px"
 	/>,
-	login: <Image
+	user: <Image
 		src={GLOBAL_CONSTANTS.image_url.login_failed}
 		alt="status-icon"
-		width={15}
-		height={15}
+		width={20}
+		height={20}
 	/>,
 	checkout: <Image
 		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
 		alt="status-icon"
-		width={15}
-		height={15}
+		width={20}
+		height={20}
 	/>,
-	email_clicked: <Image
+	communication: <Image
 		src={GLOBAL_CONSTANTS.image_url.email_clicked}
 		alt="status-icon"
-		width={15}
-		height={15}
+		width={20}
+		height={20}
 	/>,
-
+	shipment: <Image
+		src={GLOBAL_CONSTANTS.image_url.abandon_shipmemts}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];

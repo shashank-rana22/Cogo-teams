@@ -30,3 +30,10 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.serial_id {
+	margin-top: 2%;
+	font-size: 13px;
+	font-weight: 500;
+	color: #000;
+}

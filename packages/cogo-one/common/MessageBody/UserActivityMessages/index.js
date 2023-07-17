@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
 import CheckoutDetails from './CheckoutDetails';
+import Default from './Default';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
 import Shipments from './ShipmentDetails';
@@ -11,13 +12,15 @@ const COMPONENT_MAPPING = {
 	shipment      : Shipments,
 	user          : LoginFailed,
 	communication : EmailClicked,
+	default       : Default,
 };
 
 const ICON_MAPPING = {
 	checkout      : GLOBAL_CONSTANTS.image_url.checkout_failed,
-	shipment      : GLOBAL_CONSTANTS.image_url.checkout_failed,
+	shipment      : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	user          : GLOBAL_CONSTANTS.image_url.login_failed,
 	communication : GLOBAL_CONSTANTS.image_url.email_clicked,
+	default       : GLOBAL_CONSTANTS.image_url.login_failed,
 };
 
 function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
@@ -28,8 +31,8 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 		data = {},
 	} = eachMessage;
 
-	const ActiveModalComp = COMPONENT_MAPPING[source] || null;
-	const userActivityIcon = ICON_MAPPING[source] || '';
+	const ActiveModalComp = COMPONENT_MAPPING[source] || COMPONENT_MAPPING.default;
+	const userActivityIcon = ICON_MAPPING[source] || ICON_MAPPING.default;
 
 	return (
 		<div>
