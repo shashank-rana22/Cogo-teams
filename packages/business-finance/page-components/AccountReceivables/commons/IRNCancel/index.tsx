@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import usePostToSage from '../../hooks/usePostToSage';
 
 import CancellationModal from './CancellationModal';
-import Content from './content';
+import Content from './Content';
 import styles from './styles.module.css';
 
 const TIME_VALUE = 86400000;
