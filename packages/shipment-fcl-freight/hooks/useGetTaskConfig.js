@@ -25,8 +25,10 @@ function useGetTaskConfig({ task = {} }) {
 	}, [trigger, task.id]);
 
 	useEffect(() => {
-		getTaskConfigTrigger();
-	}, [getTaskConfigTrigger]);
+		if (task?.task !== 'upload_compliance_documents') {
+			getTaskConfigTrigger();
+		}
+	}, [getTaskConfigTrigger, task?.task]);
 
 	return {
 		loading,
