@@ -12,11 +12,10 @@ export const getFormmatedIds = (checkedRows) => {
 
 const useInitiatePaymentAllotBank = ({
 	checkedRows = () => {},
-	// refetch = () => {},
-	setActivePayrunTab = () => {},
 	setShowAllotBank = () => {},
 	setCheckedRows = () => {},
-	activeAdvPaid,
+	refetch = () => {},
+	overseasData = '',
 }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, session_type = '' } = profile;
@@ -43,13 +42,12 @@ const useInitiatePaymentAllotBank = ({
 					performedByType : session_type,
 					billIds         : formattedValues || undefined,
 					payrunType:
-						activeAdvPaid === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
+					overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
 				},
 			});
-			setActivePayrunTab('PAYMENT_INITIATED');
-			setShowAllotBank(false);
 			setCheckedRows({});
-			// refetch();
+			setShowAllotBank(false);
+			refetch();
 			Toast.success('Bank Alloted Successfully');
 		} catch (e) {
 			Toast.error('Oops, Something Went Wrong');

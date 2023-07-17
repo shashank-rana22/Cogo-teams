@@ -39,6 +39,7 @@ const useFilterData = ({
 		dataLoading : false,
 		listConfig  : initiatedConfig,
 	});
+	const [refetch, setRefetch] = useState(() => () => {});
 
 	const [selectedPayrun, setSelectedPayrun] = useState(null);
 
@@ -87,14 +88,29 @@ const useFilterData = ({
 		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				getAdvancePaymentInvoiceList();
+				setRefetch(() => () => {
+					getAdvancePaymentInvoiceList();
+				});
 			} else if ((overseasData === 'NORMAL' || overseasData === 'OVERSEAS') && isInvoiceView) {
 				getPayrunListView();
+				setRefetch(() => () => {
+					getPayrunListView();
+				});
 			} else if ((!isInvoiceView && !isEmpty(selectedPayrun) && overseasData !== 'ADVANCE_PAYMENT')) {
 				getViewInvoice();
+				setRefetch(() => () => {
+					getViewInvoice();
+				});
 			} else if ((!isInvoiceView && !isEmpty(selectedPayrun) && overseasData === 'ADVANCE_PAYMENT')) {
 				getViewInvoicesAdvancePayment();
+				setRefetch(() => () => {
+					getViewInvoicesAdvancePayment();
+				});
 			} else {
 				getPayrunList();
+				setRefetch(() => () => {
+					getPayrunList();
+				});
 			}
 		} else if (activePayrunTab === 'PAID') {
 			if (overseasData === 'NORMAL') {
@@ -104,6 +120,9 @@ const useFilterData = ({
 			}
 		} else if (activePayrunTab === 'UPLOAD_HISTORY') {
 			getUploadHistoryList();
+			setRefetch(() => () => {
+				getUploadHistoryList();
+			});
 		}
 	}, [activePayrunTab, overseasData, isInvoiceView, getViewInvoice, getAdvancePaymentInvoiceList, getPayrunListView,
 		getPayrunList, getPaidList, getUploadHistoryList, createdAt, getAdvancePaidData, selectedPayrun,
@@ -182,6 +201,11 @@ const useFilterData = ({
 		setViewId('');
 		setSelectedPayrun(null);
 		setCheckedRow(null);
+		setGlobalFilters({
+			search    : undefined,
+			pageIndex : 1,
+			pageSize  : 10,
+		});
 	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId]);
 
 	return {
@@ -195,6 +219,7 @@ const useFilterData = ({
 		setSort,
 		setSelectedPayrun,
 		selectedPayrun,
+		refetch,
 	};
 };
 

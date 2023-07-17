@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () => {} }) => {
+const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () => {}, refetch = () => {} }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, session_type = '' } = profile;
 	const { id: user_id } = user;
@@ -23,11 +23,10 @@ const useDeleteInvoice = ({ overseasData = '', setShowDeleteInvoiceModal = () =>
                             overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_DOCUMENT' : undefined,
 				},
 			});
-			// refetch();
 			Toast.success(deleteInvoiceData?.message || 'Invoice Deleted Successfully');
 			setShowDeleteInvoiceModal(false);
+			refetch();
 		} catch (e) {
-			// setShowDeleteInvoiceModal(false);
 			Toast.error(e?.response?.data?.message || 'Failed to delete Invoice');
 		}
 	};

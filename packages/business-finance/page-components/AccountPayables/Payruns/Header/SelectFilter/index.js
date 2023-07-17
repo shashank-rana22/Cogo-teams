@@ -35,7 +35,6 @@ function SelectFilters({
 	setGlobalFilters = () => {},
 	isInvoiceView = false,
 	activePayrunTab = '',
-	setActivePayrunTab = () => {},
 	setIsInvoiceView = () => {},
 	overseasData = '',
 	setOverseasData = () => {},
@@ -45,6 +44,7 @@ function SelectFilters({
 	setCheckedRow = () => {},
 	itemData = {},
 	activeEntity = '',
+	refetch = () => {},
 }) {
 	const { search } = globalFilters || {};
 	const { entityBank = [] } = useGetEntityBanks({});
@@ -145,7 +145,6 @@ function SelectFilters({
 				<div>
 					<PayrunButtons
 						activePayrunTab={activePayrunTab}
-						setActivePayrunTab={setActivePayrunTab}
 						isInvoiceView={isInvoiceView}
 						overseasData={overseasData}
 						selectedPayrun={selectedPayrun}
@@ -154,6 +153,8 @@ function SelectFilters({
 						setCheckedRow={setCheckedRow}
 						itemData={itemData}
 						activeEntity={activeEntity}
+						refetch={refetch}
+						globalFilters={globalFilters}
 					/>
 				</div>
 			</div>

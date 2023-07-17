@@ -4,13 +4,14 @@ import React from 'react';
 
 import useDownloadOverseasUTR from '../../hooks/useDownloadOverseasUTR';
 
+import styles from './styles.module.css';
+
 function PopoverContent({ id = '' }) {
 	const { loading, overseasUTRdownload } = useDownloadOverseasUTR();
 	return (
-		<div>
+		<div className={styles.container}>
 			Overseas UTR
 			<Button
-				style={{ marginTop: '4px' }}
 				themeType="tertiary"
 				onClick={() => overseasUTRdownload(id)}
 				size="sm"

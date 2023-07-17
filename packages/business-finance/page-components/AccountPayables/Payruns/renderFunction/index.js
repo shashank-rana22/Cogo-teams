@@ -31,6 +31,7 @@ const RenderFunctions = (
 		setSelectedPayrun = () => {},
 		checkedRow = null,
 		setCheckedRow = () => {},
+		refetch = () => {},
 	},
 ) => {
 	const functions = {
@@ -38,7 +39,7 @@ const RenderFunctions = (
 			<FormatAmountCurrency itemData={itemData} />
 		),
 		renderTrashPayrun: (itemData) => (
-			<DeletePayrunInvoice itemData={itemData} overseasData={overseasData} />
+			<DeletePayrunInvoice itemData={itemData} overseasData={overseasData} refetch={refetch} />
 		),
 		renderViewInvoice: (itemData) => (
 			<ViewInvoices itemData={itemData} selectedPayrun={selectedPayrun} setSelectedPayrun={setSelectedPayrun} />
@@ -56,7 +57,7 @@ const RenderFunctions = (
 			<InvoiceDetailsTimeLine item={itemData} />
 		),
 		renderAction: (itemData) => (
-			<ShowAction itemData={itemData} />
+			<ShowAction itemData={itemData} refetch={refetch} overseasData={overseasData} />
 		),
 		renderBankDetails: (itemData) => (
 			<BankDetails itemData={itemData} />
@@ -104,7 +105,7 @@ const RenderFunctions = (
 			/>
 		),
 		renderTrashInvoice: (itemData) => (
-			<DeleteSingleInvoice itemData={itemData} overseasData={overseasData} />
+			<DeleteSingleInvoice itemData={itemData} overseasData={overseasData} refetch={refetch} />
 		),
 	};
 	return {

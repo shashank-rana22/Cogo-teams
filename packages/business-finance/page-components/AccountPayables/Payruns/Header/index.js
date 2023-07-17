@@ -20,6 +20,7 @@ function Header({
 	setCheckedRow = () => {},
 	itemData = {},
 	activeEntity = '',
+	refetch = () => {},
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
@@ -81,7 +82,6 @@ function Header({
 					setGlobalFilters={setGlobalFilters}
 					isInvoiceView={isInvoiceView}
 					activePayrunTab={activePayrunTab}
-					setActivePayrunTab={setActivePayrunTab}
 					setIsInvoiceView={setIsInvoiceView}
 					overseasData={overseasData}
 					setOverseasData={setOverseasData}
@@ -91,6 +91,7 @@ function Header({
 					setCheckedRow={setCheckedRow}
 					itemData={itemData}
 					activeEntity={activeEntity}
+					refetch={refetch}
 				/>
 			</div>
 

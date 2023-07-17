@@ -6,12 +6,15 @@ import useDeletePayrun from '../../../hooks/useDeletePayrun';
 
 import styles from './styles.module.css';
 
-function DeletePayrun({ itemData = {}, overseasData = '', showDeleteModal = false, setShowDeleteModal = () => {} }) {
+function DeletePayrun({
+	itemData = {}, overseasData = '', showDeleteModal = false, setShowDeleteModal = () => {},
+	refetch = () => {},
+}) {
 	const { id } = itemData || {};
 	const {
 		deletePayrun,
 		deletePayrunLoading,
-	} = useDeletePayrun({ overseasData, setShowDeleteModal });
+	} = useDeletePayrun({ overseasData, setShowDeleteModal, refetch });
 	return (
 		<div>
 			<Modal size="sm" show={showDeleteModal} onClose={() => setShowDeleteModal(false)} placement="top">

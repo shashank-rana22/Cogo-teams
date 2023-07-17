@@ -8,15 +8,16 @@ import { ALLOT_BANK_CONFIG } from './allotBankConfig';
 import RenderFunction from './renderFunction/index';
 
 function AllotBankList({
-	selectedPayrun = null, showAllotBank = false, setShowAllotBank = () => {}, checkedRow = null,
-	setCheckedRow = () => {}, allotEntityBank = {}, allotEntityLoading = false, setActivePayrunTab = () => {},
+	selectedPayrun = null, showAllotBank = false, setShowAllotBank = () => {}, checkedRow = null, refetch = () => {},
+	setCheckedRow = () => {}, allotEntityBank = {}, allotEntityLoading = false, overseasData = '',
 }) {
 	const { entityCode } = selectedPayrun || checkedRow || {};
 	const { selectBank, loading } = useInitiatePaymentAllotBank({
 		checkedRow,
 		setCheckedRow,
 		setShowAllotBank,
-		setActivePayrunTab,
+		refetch,
+		overseasData,
 	});
 	const [selectedBankId, setSelectedBankId] = useState(null);
 	const { functions } = RenderFunction(

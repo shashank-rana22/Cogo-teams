@@ -46,7 +46,6 @@ const useGetPaidBillReport = ({
 				await trigger({
 					params: {
 						...rest,
-						// date        : undefined,
 						startDate   : selectFromDate || undefined,
 						endDate     : selectToDate || undefined,
 						pageSize    : size,

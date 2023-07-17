@@ -5,8 +5,9 @@ import { useSelector } from '@cogoport/store';
 const useUploadBulkUtr = ({
 	setFileValue,
 	activeEntity,
-	// fileValue,
 	advancePayment,
+	refetch,
+	setShowUploadUTR = () => {},
 }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, name = '', session_type = '' } = profile;
@@ -32,8 +33,10 @@ const useUploadBulkUtr = ({
 			});
 			setFileValue(null);
 			Toast.success('File successfully uploaded');
+			setShowUploadUTR(false);
+			refetch();
 		} catch (e) {
-			Toast.error(e?.error?.message || 'Failed to upload');
+			Toast.error(e?.response?.data?.message || 'Failed to upload');
 		}
 	};
 

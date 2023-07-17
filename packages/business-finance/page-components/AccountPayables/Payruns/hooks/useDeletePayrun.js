@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeletePayrun = ({ overseasData, setShowDeleteModal = () => {} }) => {
+const useDeletePayrun = ({ overseasData, setShowDeleteModal = () => {}, refetch = () => {} }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {}, session_type = '' } = profile;
 	const { id: user_id } = user;
@@ -23,8 +23,8 @@ const useDeletePayrun = ({ overseasData, setShowDeleteModal = () => {} }) => {
                             overseasData === 'ADVANCE_PAYMENT' ? 'ADVANCE_PAYMENT' : undefined,
 				},
 			});
-			// refetch();
-			Toast.success(deletePayrunData.message || 'Payrun deleted successfully');
+			refetch();
+			Toast.success(deletePayrunData?.message || 'Payrun deleted successfully');
 			setShowDeleteModal(false);
 		} catch (e) {
 			Toast.error(e?.response?.data?.message || 'Failed to Delete Payrun');

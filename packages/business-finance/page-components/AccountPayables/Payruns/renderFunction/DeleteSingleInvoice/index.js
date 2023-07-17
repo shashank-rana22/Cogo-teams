@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import DeleteInvoice from './DeleteInvoice';
 
-function DeleteSingleInvoice({ itemData = {}, overseasData = '' }) {
+function DeleteSingleInvoice({ itemData = {}, overseasData = '', refetch = () => {} }) {
 	const [showDeleteInvoiceModal, setShowDeleteInvoiceModal] = useState(false);
 
 	return (
@@ -19,6 +19,7 @@ function DeleteSingleInvoice({ itemData = {}, overseasData = '' }) {
 						showDeleteInvoiceModal={showDeleteInvoiceModal}
 						setShowDeleteInvoiceModal={setShowDeleteInvoiceModal}
 						overseasData={overseasData}
+						refetch={refetch}
 					/>
 				) : null}
 		</div>

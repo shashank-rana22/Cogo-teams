@@ -3,18 +3,25 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetAllotEntityBank from '../../hooks/useGetAllotEntityBank';
+import useGetInvoiceListDownload from '../../hooks/useGetInvoiceListDownload';
 
 import AllotBankList from './AllotBankList';
 import SendReportModal from './SendReportModal';
 import UploadUTR from './UploadUTR';
 
 function PayrunButtons({
-	activePayrunTab, setActivePayrunTab = () => {}, isInvoiceView, overseasData,
+	activePayrunTab, isInvoiceView, overseasData = '', globalFilters = {},
 	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null,
-	setCheckedRow = () => {}, itemData = {}, activeEntity = '',
+	setCheckedRow = () => {}, itemData = {}, activeEntity = '', refetch = () => {},
 }) {
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
+	});
+	const { downloadInvoice, loading } = useGetInvoiceListDownload({
+		overseasData,
+		activePayrunTab,
+		globalFilters,
+		size: itemData?.totalRecords,
 	});
 	const [showAllotBank, setShowAllotBank] = useState(false);
 	const [showReport, setShowReport] = useState(false);
@@ -38,7 +45,8 @@ function PayrunButtons({
 						setSelectedPayrun={setSelectedPayrun}
 						allotEntityBank={allotEntityBank}
 						allotEntityLoading={allotEntityLoading}
-						setActivePayrunTab={setActivePayrunTab}
+						overseasData={overseasData}
+						refetch={refetch}
 					/>
 				) : null}
 			</div>
@@ -64,6 +72,7 @@ function PayrunButtons({
 						showUploadUTR={showUploadUTR}
 						setShowUploadUTR={setShowUploadUTR}
 						activeEntity={activeEntity}
+						refetch={refetch}
 					/>
 				) : null }
 			</div>
@@ -83,6 +92,15 @@ function PayrunButtons({
 						itemData={itemData}
 					/>
 				) : null}
+			</div>
+		);
+	}
+	if (['PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab) && isInvoiceView) {
+		return (
+			<div>
+				<Button size="sm" onClick={downloadInvoice} disabled={loading}>
+					{loading ? 'Generating' : 'Download'}
+				</Button>
 			</div>
 		);
 	}

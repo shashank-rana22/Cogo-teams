@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import DeletePayrun from './DeletePayrun';
 
-function DeletePayrunInvoice({ itemData = {}, overseasData = '' }) {
+function DeletePayrunInvoice({ itemData = {}, overseasData = '', refetch = () => {} }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	return (
@@ -19,6 +19,7 @@ function DeletePayrunInvoice({ itemData = {}, overseasData = '' }) {
 						showDeleteModal={showDeleteModal}
 						setShowDeleteModal={setShowDeleteModal}
 						overseasData={overseasData}
+						refetch={refetch}
 					/>
 				) : null}
 		</div>

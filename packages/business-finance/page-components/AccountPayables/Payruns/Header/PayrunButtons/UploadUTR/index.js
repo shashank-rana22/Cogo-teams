@@ -16,14 +16,16 @@ function UploadUTR({
 	showUploadUTR = false,
 	setShowUploadUTR = () => {},
 	activeEntity = '',
+	refetch = () => {},
 }) {
 	const [advancePayment, setAdvancePayment] = useState(false);
 	const [fileValue, setFileValue] = useState(null);
 	const { upload, loading } = useUploadBulkUtr({
 		setFileValue,
 		activeEntity,
-		// fileValue,
 		advancePayment,
+		refetch,
+		setShowUploadUTR,
 	});
 
 	const SAMPLE_FILE = advancePayment ? ADVANCE_SAMPLE_LINK : SAMPLE_LINK;

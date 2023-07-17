@@ -11,12 +11,13 @@ function DeleteInvoice({
 	showDeleteInvoiceModal = false,
 	setShowDeleteInvoiceModal = () => {},
 	overseasData = '',
+	refetch = () => {},
 }) {
 	const { id } = itemData;
 	const {
 		deleteinvoiceLoading,
 		deleteInvoice,
-	} = useDeleteInvoice({ overseasData, setShowDeleteInvoiceModal });
+	} = useDeleteInvoice({ overseasData, setShowDeleteInvoiceModal, refetch });
 	return (
 		<div>
 			<Modal

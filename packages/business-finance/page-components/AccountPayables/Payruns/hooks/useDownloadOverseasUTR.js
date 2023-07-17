@@ -6,21 +6,21 @@ const useDownloadOverseasUTR = () => {
 		url     : '/purchase/payrun/download-overseas-utr',
 		method  : 'get',
 		authKey : 'get_purchase_payrun_download_overseas_utr',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
-	const overseasUTRdownload = (id = '') => {
+	const overseasUTRdownload = async (id = '') => {
 		try {
-			const res = trigger({
+			const res = await trigger({
 				params: {
 					payrunId: id,
 				},
 			});
 			const { data = {} } = res || {};
-			const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}`
-             + `/purchase/download/document?id=${data.urlId}`;
+			const bfUrl = process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL;
+			const downloadFile = `${bfUrl}/purchase/download/document?id=${data.urlId}`;
 			if (data.urlId) window.open(downloadFile);
 		} catch (e) {
-			Toast.error(e?.error?.message || 'Failed to Download');
+			Toast.error(e?.response?.data?.message || 'Failed to Download');
 		}
 	};
 	return {
