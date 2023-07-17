@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.2
+      '@cogoport/eslint-config': 2.0.3
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -32,7 +32,7 @@ importers:
       next: 13.1.6_ob7c7ogpcitikph4afkm5ompve
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 2.0.2_eslint@8.42.0
+      '@cogoport/eslint-config': 2.0.3_eslint@8.42.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.42.0
@@ -284,6 +284,7 @@ importers:
       cookies-next: ^2.1.1
       dotenv: ^16.0.3
       dotenv-expand: ^10.0.0
+      firebase: ^9.17.2
       firebase-admin: ^11.5.0
       nprogress: ^0.2.0
       react: 18.2.0
@@ -301,6 +302,7 @@ importers:
       cookies-next: 2.1.2
       dotenv: 16.1.4
       dotenv-expand: 10.0.0
+      firebase: 9.22.2
       firebase-admin: 11.9.0
       nprogress: 0.2.0
       react: 18.2.0
@@ -968,7 +970,7 @@ importers:
   packages/cogo-one:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.419
+      '@cogoport/components': ^1.0.431
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.68
@@ -982,7 +984,7 @@ importers:
       uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.3_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.427_4hpwt3xjfbus5pvesg2at6445e
+      '@cogoport/components': 1.0.431_4hpwt3xjfbus5pvesg2at6445e
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
@@ -1885,6 +1887,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.395
       '@cogoport/context': workspace:^0.1.0
+      '@cogoport/core': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.60
@@ -1906,6 +1909,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.427_4hpwt3xjfbus5pvesg2at6445e
       '@cogoport/context': link:../../common/context
+      '@cogoport/core': link:../../common/core
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
@@ -3938,8 +3942,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.2_eslint@8.42.0:
-    resolution: {integrity: sha512-dTFlb4i5hZTFq2urfp4wx6DJ2CJrQyHsPzEN1zpCmy5+HBVKsDp3VLnHlP7s+7GLlpxn3pMLyOq8O0kePC/Bug==}
+  /@cogoport/eslint-config/2.0.3_eslint@8.42.0:
+    resolution: {integrity: sha512-lFWGRXqz954NjknRPBg7FL8GYum+ZnNK1OgCj8TSt/tButZAuKhCXdqpLpR+y+1v+HA1GLsMmOsMGLWXY7Jk9A==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
