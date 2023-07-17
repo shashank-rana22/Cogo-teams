@@ -13,7 +13,7 @@ const formatRates = (selectedRate, service_type_prop) => {
 				...formattedData,
 				[rate?.service_id]: {
 					service_provider_id : rate?.id,
-					shipping_line_id    : rate?.shipping_line_id,
+					shipping_line_id    : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.shipping_line_id,
 					line_items:
 						rate && rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.line_items
 							? rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.line_items.map((item) => ({

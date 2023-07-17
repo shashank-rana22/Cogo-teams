@@ -127,20 +127,18 @@ const useGetStep2Data = ({
 			(service) => service?.service_type === 'fcl_freight_local_service',
 		)?.[GLOBAL_CONSTANTS.zeroth_index];
 
-		if (formattedRate?.[GLOBAL_CONSTANTS.zeroth_index]?.[primary_service.id]) {
-			FORM_VALUES_FOR_FCL.service_provider_id = 	formattedRate?.[GLOBAL_CONSTANTS.zeroth_index]?.
-				[primary_service.id]?.service_provider_id;
+		if (formattedRate?.[primary_service.id]) {
+			FORM_VALUES_FOR_FCL.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
 
-			FORM_VALUES_FOR_FCL.shipping_line_id =	formattedRate?.[GLOBAL_CONSTANTS.zeroth_index]?.
-				[primary_service.id]?.shipping_line_id;
+			FORM_VALUES_FOR_FCL.shipping_line_id =	formattedRate?.[primary_service.id]?.shipping_line_id;
 
 			FORM_VALUES_FOR_LOCALS.service_provider_id = shipment_data?.main_service_trade_type === 'import'
 				? importLocalService?.service_provider_id
-				: formattedRate?.[GLOBAL_CONSTANTS.zeroth_index]?.[primary_service.id]?.service_provider_id;
+				: formattedRate?.[primary_service.id]?.service_provider_id;
 
 			FORM_VALUES_FOR_LOCALS.shipping_line_id = shipment_data?.main_service_trade_type === 'import'
 				? importLocalService?.shipping_line_id
-				: formattedRate?.[GLOBAL_CONSTANTS.zeroth_index][primary_service.id]?.shipping_line_id;
+				: formattedRate?.[primary_service.id]?.shipping_line_id;
 		}
 
 		const payloadForUpdateShipment = {

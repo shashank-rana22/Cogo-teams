@@ -29,7 +29,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 			destination_local,
 			[rate.service_id] : {
 				service_provider_id : rate.service_provider_id,
-				airline_id          : rate.airline_id,
+				airline_id          : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.airline_id,
 				line_items:
 					rate && rate.line_items
 						? rate.line_items.map((item) => ({
@@ -44,7 +44,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 			},
 			[origin_local?.id]: {
 				service_provider_id : rate.service_provider_id,
-				airline_id          : rate.airline_id,
+				airline_id          : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.airline_id,
 				line_items:
 					rate && rate?.origin_locals?.line_items
 						? rate.line_items.map((item) => ({
@@ -59,7 +59,7 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 			},
 			[destination_local?.id]: {
 				service_provider_id : rate.service_provider_id,
-				airline_id          : rate.airline_id,
+				airline_id          : rate?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.airline_id,
 				line_items:
 					rate && rate?.destination_locals?.line_items
 						? rate.line_items.map((item) => ({
