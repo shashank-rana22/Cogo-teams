@@ -5,12 +5,13 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 function CheckList({
-	taskList,
-	emailDocs,
-	completedDocs,
-	setShowDoc,
-	setShowApproved,
-
+	taskList = [],
+	emailDocs = [],
+	completedDocs = [],
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
@@ -24,6 +25,8 @@ function CheckList({
 				primary_service={primary_service}
 				setShowDoc={setShowDoc}
 				setShowApproved={setShowApproved}
+				shipmentDocumentRefetch={shipmentDocumentRefetch}
+				activeStakeholder={activeStakeholder}
 			/>
 		</div>
 	);

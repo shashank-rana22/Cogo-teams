@@ -104,6 +104,7 @@ function UploadComplianceDocs({
 				<RequestService
 					task={task}
 					uploadedDocsRefetch={getDocs}
+					totalDocsList={totalDocsList}
 				/>
 			) : null}
 
