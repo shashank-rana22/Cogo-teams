@@ -1,4 +1,4 @@
-export const overheadsConfig = [
+export const OVER_HEAD_CONFIGS = [
 	{
 		Header   : 'Name',
 		accessor : 'name',

@@ -1,5 +1,4 @@
 import { Tooltip, Textarea, Modal, Button } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,9 +7,10 @@ import usePostExpense from '../../apisModal/usePostExpense';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 import StyledTable from '../../StyledTable';
+import mappingNonRecurring from '../../utils/mappingNonRecurring';
 import { toTitleCase } from '../../utils/titleCase';
 
-import { overheadsConfig } from './overheadsConfig';
+import { OVER_HEAD_CONFIGS } from './overheadsConfig';
 import styles from './style.module.css';
 
 interface RowData {
@@ -44,18 +44,9 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 	const { data = {} } = row || {};
 	const { overheadConfirmationRequest, organization, referenceId = '' } = data;
 	const {
-		invoiceNumber,
-		subTotalAmount,
-		taxTotalAmount,
-		grandTotalAmount,
 		lineItems,
-		ledgerGrandTotal,
-		ledgerCurrency,
 		remarks: remarkData,
-		billCurrency: currency,
 		documents,
-		branchName,
-		categoryName,
 		expenseType,
 	} = overheadConfirmationRequest || {};
 
@@ -68,58 +59,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 
 	const { businessName } = organization || {};
 
-	const incidentMappings = [
-		{
-			key   : 'Invoice number',
-			value : invoiceNumber,
-		},
-		{ key: 'Category Name', value: categoryName },
-		{ key: 'Branch Name', value: branchName },
-		{
-			key   : 'SubTotal',
-			value : formatAmount({
-				amount  : subTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'TaxAmount',
-			value : formatAmount({
-				amount  : taxTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'GrandTotal',
-			value : formatAmount({
-				amount  : grandTotalAmount,
-				currency,
-				options : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-		{
-			key   : 'Ledger GrandTotal',
-			value : formatAmount({
-				amount   : ledgerGrandTotal,
-				currency : ledgerCurrency,
-				options  : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}),
-		},
-	];
+	const { INCIDENT_MAPPING = [] } = mappingNonRecurring({ overheadConfirmationRequest });
 
 	return (
 		<div>
@@ -143,7 +83,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 					{!isEditable && <ApproveAndReject row={row} />}
 
 					<div className={styles.flex}>
-						{incidentMappings?.map((item) => (
+						{INCIDENT_MAPPING?.map((item) => (
 							<div
 								className={styles.value_data}
 								key={item.key}
@@ -198,7 +138,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 					{!isEmpty(lineItems) ? (
 						<div className={styles.list_container}>
 							<StyledTable
-								columns={overheadsConfig}
+								columns={OVER_HEAD_CONFIGS}
 								showPagination={false}
 								data={lineItems}
 							/>

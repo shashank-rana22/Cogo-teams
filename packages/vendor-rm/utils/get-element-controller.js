@@ -8,32 +8,15 @@ import {
 	CountrywiseTaxNumberSelectController,
 } from '@cogoport/forms';
 
-export const getElementController = (type = 'text') => {
-	switch (type) {
-		case 'text':
-			return InputController;
-		case 'number':
-			return InputController;
-
-		case 'select':
-			return SelectController;
-
-		case 'multiSelect':
-			return MultiselectController;
-
-		case 'file':
-			return UploadController;
-
-		case 'mobile-number-select':
-			return MobileNumberController;
-
-		case 'countrywise-tax-select':
-			return CountrywiseTaxNumberSelectController;
-
-		case 'asyncSelect':
-			return AsyncSelectController;
-
-		default:
-			return null;
-	}
+const CONTROLLER_MAPPING = {
+	text                     : InputController,
+	number                   : InputController,
+	select                   : SelectController,
+	multiSelect              : MultiselectController,
+	file                     : UploadController,
+	'mobile-number-select'   : MobileNumberController,
+	'countrywise-tax-select' : CountrywiseTaxNumberSelectController,
+	asyncSelect              : AsyncSelectController,
 };
+
+export const getElementController = (type = 'text') => CONTROLLER_MAPPING[type];
