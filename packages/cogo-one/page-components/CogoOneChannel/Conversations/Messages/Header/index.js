@@ -29,7 +29,7 @@ function Header({
 	activeAgentName = '',
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
-	activeMessageCard,
+	activeMessageCard = {},
 	tagOptions = [],
 	support_agent_id = null,
 	showBotMessages = false,
@@ -40,9 +40,9 @@ function Header({
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
 	viewType = '',
-	firestore,
-	escalateToSupplyRm,
-	supplierLoading,
+	firestore = {},
+	escalateToSupplyRm = () => {},
+	supplierLoading = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const dispatch = useDispatch();
@@ -73,13 +73,16 @@ function Header({
 		user_id,
 		account_type = '',
 		managers_ids = [],
+		id,
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
-				organization_user_id: user_id,
+				organization_user_id : user_id,
+				channel              : channel_type,
+				channel_chat_id      : id,
 			},
 		});
 	};
@@ -170,8 +173,7 @@ function Header({
 
 						{channel_type === 'whatsapp' && (
 							<div
-								role="button"
-								tabIndex="0"
+								role="presentation"
 								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
 								onClick={handleUpdateUser}
 							>
