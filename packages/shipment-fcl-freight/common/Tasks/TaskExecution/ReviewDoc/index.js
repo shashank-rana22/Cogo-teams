@@ -93,7 +93,6 @@ function ReviewDoc({
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			// To handle different url format from backend
 			const match = url.match(REGEX);
 			return match[GET_FINAL_URL];
 		}
