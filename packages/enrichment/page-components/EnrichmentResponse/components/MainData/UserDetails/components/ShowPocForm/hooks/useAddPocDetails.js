@@ -1,13 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
 import getControls from '../utils/controls';
-
-const getByKey = (obj, key) => (obj && obj[key]) || undefined;
+import getPocDetailsPayload from '../utils/get-poc-details-payload';
 
 const useAddPocDetails = ({
 	setShowForm = () => {},
@@ -21,8 +19,6 @@ const useAddPocDetails = ({
 		handleSubmit,
 		getValues,
 	} = useForm();
-
-	const geo = getGeoConstants();
 
 	const controls = getControls();
 
@@ -39,26 +35,9 @@ const useAddPocDetails = ({
 	const onSubmit = async () => {
 		const values = getValues();
 
-		try {
-			const payload = {
-				...values,
-				mobile_country_code           : getByKey(values?.mobile_number, 'country_code'),
-				mobile_number                 : getByKey(values?.mobile_number, 'number'),
-				alternate_mobile_country_code : getByKey(
-					values?.alternate_mobile_number,
-					'country_code',
-				),
-				alternate_mobile_number: getByKey(
-					values?.alternate_mobile_number,
-					'number',
-				),
-				whatsapp_country_code : getByKey(values?.whatsapp_number, 'country_code'),
-				whatsapp_number       : getByKey(values?.whatsapp_number, 'number'),
-				response_type         : 'user',
-				source                : geo.navigations.enrichment.enrichment_response_source,
-				feedback_request_id   : getByKey(query, 'id'),
-			};
+		const payload = getPocDetailsPayload({ values, query });
 
+		try {
 			await trigger({
 				data: payload,
 			});

@@ -423,7 +423,6 @@ export default {
 			},
 		},
 		enrichment: {
-			enrichment_response_source            : 'manual_enriched',
 			whatsapp_number_label                 : 'Zalo Number',
 			allowed_to_create_enrichment_requests : true,
 			tabs                                  : ['manual_enrichment'],

@@ -1,19 +1,26 @@
-import { Breadcrumb } from '@cogoport/components';
-import { Link } from '@cogoport/next';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import styles from './styles.module.css';
+
 function BackButton() {
+	const router = useRouter();
+
+	const goToDashboard = () => {
+		router.push('/enrichment');
+	};
+
 	return (
-		<Breadcrumb>
-			<Breadcrumb.Item
-				label={(
-					<Link href="/enrichment">
-						Enrichment
-					</Link>
-				)}
-			/>
-			<Breadcrumb.Item label="Organization Details" />
-		</Breadcrumb>
+		<div>
+			<button className={styles.btn} onClick={() => goToDashboard()}>
+				<IcMArrowBack />
+
+				<div className={styles.backer}>
+					Back to Enrichment
+				</div>
+			</button>
+		</div>
 	);
 }
 

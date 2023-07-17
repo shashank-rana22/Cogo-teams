@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 import getControls from '../utils/controls';
@@ -16,8 +16,6 @@ const useAddAddressDetails = ({
 	const router = useRouter();
 
 	const [addressData, setAddressData] = useState({});
-
-	const geo = getGeoConstants();
 
 	const {
 		control,
@@ -49,11 +47,13 @@ const useAddAddressDetails = ({
 	const onSubmit = async () => {
 		const values = getValues();
 
+		const { tax_number = '' } = values || {};
+
 		try {
 			const payload = {
 				...values,
-				response_type       : 'address',
-				source              : geo.navigations.enrichment.enrichment_response_source,
+				response_type       : isEmpty(tax_number) ? 'address' : 'billing_address',
+				source              : 'manual',
 				feedback_request_id : query?.id,
 			};
 

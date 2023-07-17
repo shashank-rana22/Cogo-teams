@@ -32,7 +32,7 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 			...prev,
 			filters: {
 				...prev.filters,
-				response_type: activeTab,
+				response_type: activeTab === 'address' ? ['address', 'billing_address'] : activeTab,
 			},
 		}));
 	// eslint-disable-next-line react-hooks/exhaustive-deps

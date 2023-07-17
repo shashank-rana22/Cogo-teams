@@ -79,11 +79,11 @@ const getControls = ({ country_id, region_id }) => {
 		},
 
 		{
-			type        : 'asyncSelect',
-			style       : { flexBasis: '42%' },
 			name        : 'pincode',
 			label       : 'Pincode',
-			labelKey    : 'postal_code',
+			type        : 'asyncSelect',
+			style       : { flexBasis: '42%' },
+			labelKey    : 'display_name',
 			valueKey    : 'postal_code',
 			asyncKey    : 'list_locations',
 			initialCall : false,

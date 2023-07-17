@@ -58,6 +58,7 @@ function EnrichmentDashboard() {
 								title={startCase(key)}
 							>
 								<ContainerComponent
+									key={key}
 									refetch={refetch}
 									list={list}
 									paginationData={paginationData}

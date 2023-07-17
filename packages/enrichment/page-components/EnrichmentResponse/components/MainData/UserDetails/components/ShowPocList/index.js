@@ -35,7 +35,8 @@ function ShowPocList({ data = [] }) {
 								</div>
 
 								<div className={styles.bottom}>
-									{pocKey === 'work_scopes' ? <Workscopes work_scopes={poc?.[pocKey]} />
+									{(pocKey === 'work_scopes' && poc?.[pocKey])
+										? <Workscopes work_scopes={poc?.[pocKey]} />
 										: poc?.[pocKey] }
 								</div>
 							</div>

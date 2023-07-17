@@ -11,8 +11,6 @@ import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
@@ -27,6 +25,8 @@ function EnrichmentRequest({
 		setThirdParty = () => {},
 		setThirdPartyPayload = () => {},
 	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId });
+
+	const geo = getGeoConstants();
 
 	const thirdPartyOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(),

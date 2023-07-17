@@ -547,7 +547,6 @@ export default {
 		},
 
 		enrichment: {
-			enrichment_response_source            : 'manual',
 			whatsapp_number_label                 : 'Whatsapp Number',
 			allowed_to_create_enrichment_requests : false,
 			tabs                                  : ['manual_enrichment', 'file_management'],

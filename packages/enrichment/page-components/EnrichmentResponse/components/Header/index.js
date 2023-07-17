@@ -1,42 +1,48 @@
-import { Placeholder } from '@cogoport/components';
-import React from 'react';
+import { Avatar, Pill, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 import useHeaderStats from '../../hooks/useHeaderStats';
-import getResponseHeaderValues from '../../utils/get-response-header-values';
+import getSourceOrganizationData from '../../utils/get-source-organization-data';
 
 import styles from './styles.module.css';
 
-const KEYS_TO_DISPLAY = [
-	'serial_id',
-	'business_name',
-	'request_id',
-	'request_type',
-	'created_on',
-];
+const FIRST_INDEX = 1;
 
 function Header() {
 	const { data = {}, loading } = useHeaderStats();
 
-	const values = getResponseHeaderValues({ data });
+	const { lead_organization, organization } = data;
+
+	const sourceOrganization = getSourceOrganizationData({ lead_organization, organization });
+
+	const { business_name, serial_id = '' } = sourceOrganization;
+
+	const str = business_name || '';
+	const avatarName = `${str.split(' ')[GLOBAL_CONSTANTS.zeroth_index]} ${str.split(' ')[FIRST_INDEX] || ''}`;
 
 	if (loading) {
-		return <Placeholder className={styles.loading} height="80px" width="100%" />;
+		return <div className={styles.card}><Placeholder width="500px" height="80px" /></div>;
 	}
 
 	return (
-		<div className={styles.main_container}>
-			<div className={styles.content}>
-				{(KEYS_TO_DISPLAY || []).map((item) => (
-					<div key={item} className={styles.item}>
-						<div className={styles.label}>
-							{values[item].label}
-						</div>
+		<div className={styles.card}>
+			<Avatar personName={avatarName || '--'} size="72px" />
+			<div className={styles.details}>
+				<span>
+					<span className={styles.label}>	Organization Name:</span>
+					<span className={styles.name}>{startCase(business_name || '--')}</span>
+				</span>
 
-						<div className={styles.value}>
-							{values[item].value}
-						</div>
-					</div>
-				))}
+				<Pill
+					size="md"
+					color="blue"
+					className={styles.pill}
+				>
+					<span className={styles.label}>	ID:</span>
+					<span className={styles.value}>{serial_id || 'Nil'}</span>
+				</Pill>
+
 			</div>
 		</div>
 	);
