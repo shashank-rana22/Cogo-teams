@@ -3,14 +3,13 @@ import { subtractDays } from '@cogoport/utils';
 
 const INDEX_VALUE = 1;
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const FIELD_TYPE_MAPPING = {};
-const dataExtractionFunc = (obj, index, arr) => {
+const dataExtractionFunc = (obj, index, arr, fieldTypeMapping) => {
 	if (index === (arr?.length || DEFAULT_VALUE_FOR_NULL_HANDLING) - INDEX_VALUE) {
 		if (obj === undefined) {
 			return undefined;
 		}
 		let returnValue = obj?.[arr?.[index]];
-		if (returnValue && FIELD_TYPE_MAPPING[arr?.[index]] === 'datepicker') {
+		if (returnValue && fieldTypeMapping[arr?.[index]] === 'datepicker') {
 			returnValue = new Date(obj?.[arr?.[index]]);
 		}
 		return returnValue;
@@ -35,24 +34,29 @@ const evalAdhocConditions = (requiredCondition) => {
 	return comingKeyMap[key_to_eval](requiredCondition[key_to_eval]);
 };
 
-const splitAndGet = (value_to_insert, data) => {
+const splitAndGet = (value_to_insert, data, fieldTypeMapping) => {
 	const splitArr = value_to_insert.split('.').map((element, index) => {
 		if (index === GLOBAL_CONSTANTS.zeroth_index) {
 			return data;
 		}
 		return element;
 	});
-	const finalVal = dataExtractionFunc(splitArr[GLOBAL_CONSTANTS.zeroth_index], INDEX_VALUE, splitArr);
+	const finalVal = dataExtractionFunc(
+		splitArr[GLOBAL_CONSTANTS.zeroth_index],
+		INDEX_VALUE,
+		splitArr,
+		fieldTypeMapping,
+	);
 
 	return finalVal;
 };
 
-const evaluateVal = (value_to_insert, data) => {
+const evaluateVal = (value_to_insert, data, fieldTypeMapping) => {
 	if (
 		typeof value_to_insert === 'string'
     && value_to_insert?.includes('data')
 	) {
-		return splitAndGet(value_to_insert, data);
+		return splitAndGet(value_to_insert, data, fieldTypeMapping);
 	}
 	if (Array.isArray(value_to_insert)) {
 		const NEW_VALUE_TO_INSERT = [];
@@ -61,7 +65,7 @@ const evaluateVal = (value_to_insert, data) => {
 			const NEW_OBJ = {};
 			Object.keys(valObj || {}).forEach((key) => {
 				NEW_OBJ[key] = typeof valObj[key] === 'string' && valObj[key]?.includes('data')
-					? splitAndGet(valObj[key], data)
+					? splitAndGet(valObj[key], data, fieldTypeMapping)
 					: valObj[key];
 			});
 			NEW_VALUE_TO_INSERT.push(NEW_OBJ);
@@ -73,13 +77,13 @@ const evaluateVal = (value_to_insert, data) => {
 	return value_to_insert;
 };
 
-const getConditionalParams = (condition, shipment_data, obj) => {
-	const leftHandSide = evaluateVal(condition?.leftValue, shipment_data);
-	const rightHandSide = evaluateVal(condition?.rightValue, shipment_data);
+const getConditionalParams = (condition, shipment_data, obj, fieldTypeMapping) => {
+	const leftHandSide = evaluateVal(condition?.leftValue, shipment_data, fieldTypeMapping);
+	const rightHandSide = evaluateVal(condition?.rightValue, shipment_data, fieldTypeMapping);
 
-	const value = evaluateVal(obj.value, shipment_data);
+	const value = evaluateVal(obj.value, shipment_data, fieldTypeMapping);
 
-	const elseValue = evaluateVal(obj.elseValue, shipment_data);
+	const elseValue = evaluateVal(obj.elseValue, shipment_data, fieldTypeMapping);
 
 	return {
 		leftHandSide,
@@ -109,6 +113,7 @@ const evaluateExpression = (operator, lhs, rhs) => {
 };
 
 const evaluateObject = (control, task, shipment_data) => {
+	const FIELD_TYPE_MAPPING = {};
 	const finalControl = control;
 	FIELD_TYPE_MAPPING[control.name] = control.type;
 
@@ -125,7 +130,7 @@ const evaluateObject = (control, task, shipment_data) => {
 				const {
 					leftHandSide, rightHandSide,
 					value, elseValue,
-				} = getConditionalParams(condition, shipment_data, obj);
+				} = getConditionalParams(condition, shipment_data, obj, FIELD_TYPE_MAPPING);
 				const addConditionsValue = evaluateExpression(
 					condition?.operator,
 					leftHandSide,
