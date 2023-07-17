@@ -1,20 +1,21 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-import CheckoutDetails from './CheckoutDetails';
+// import CheckoutDetails from './CheckoutDetails';
 import Default from './Default';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
-import Shipments from './ShipmentDetails';
-import SpotSearchDetails from './SpotSearchDetails';
+import Shipments from './Shipments';
+// import Shipments from './ShipmentDetails';
+// import SpotSearchDetails from './SpotSearchDetails';
 
 const COMPONENT_MAPPING = {
-	checkout      : CheckoutDetails,
+	checkout      : Shipments,
 	shipment      : Shipments,
 	user          : LoginFailed,
 	communication : EmailClicked,
 	default       : Default,
-	spot_search   : SpotSearchDetails,
+	spot_search   : Shipments,
 };
 
 const ICON_MAPPING = {

@@ -3,3 +3,11 @@ export const SHIPPING_LINE = {
 	lcl_freight : 'shipping_line',
 	air_freight : 'airline',
 };
+
+export const SHOW_SID = ['shipment', 'spot_search'];
+
+export const EVENT_LABEL = {
+	checkout    : 'Checkout',
+	shipment    : 'Shipment',
+	spot_search : 'Spot Search',
+};
