@@ -50,6 +50,7 @@ interface LineItemCardInterface {
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
+const DEFAULT_ZERO_VALUE = 0;
 function LineItemCard({
 	lineItems = [],
 	bill = {
@@ -280,7 +281,7 @@ function LineItemCard({
 											{' '}
 											{startCase(bill?.billCurrency)}
 											{' '}
-											{bill?.tdsAmount || 0}
+											{bill?.tdsAmount || DEFAULT_ZERO_VALUE}
 											)
 										</div>
 										<div className={styles.tds_amount}>
@@ -291,7 +292,7 @@ function LineItemCard({
 											{' '}
 											{startCase(bill?.billCurrency)}
 											{' '}
-											{paidTds || 0}
+											{paidTds || DEFAULT_ZERO_VALUE}
 											)
 										</div>
 									</div>

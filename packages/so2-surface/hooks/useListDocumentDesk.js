@@ -16,7 +16,7 @@ const useListDocumentDesk = () => {
 	const dashboardContextValues = useContext(DashboardContext);
 	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
-	const { page = 1, ...restFilters } = filters || {};
+	const { page = MIN_PAGE_VALUE, ...restFilters } = filters || {};
 
 	const { startDate:from_created_at, endDate:to_created_at } = filters || {};
 	const [apiData, setApiData] = useState({});

@@ -9,6 +9,8 @@ import FilterBy from './FilterBy';
 import SortBy from './SortBy';
 import styles from './styles.module.css';
 
+const MIN_PAGE_VALUE = 1;
+
 function Filters() {
 	const { filters = {}, setFilters = () => {} } = useContext(DashboardContext);
 	const { q = '' } = filters || {};
@@ -26,7 +28,7 @@ function Filters() {
 					size="sm"
 					suffix={<IcMSearchlight />}
 					value={q}
-					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+					onChange={(val) => setFilters({ ...filters, q: val, page: MIN_PAGE_VALUE })}
 				/>
 			</div>
 
