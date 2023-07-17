@@ -25,6 +25,7 @@ function ApprovePurchaseDeduction({
 	refetch = () => {},
 }) {
 	const { data: CNData } = useGetCNDetails({ shipment_data });
+
 	const optionsForCNNumber = (CNData?.list || [])
 		.filter((item) => item?.status === 'approved')
 		.map((item) => ({
@@ -42,9 +43,11 @@ function ApprovePurchaseDeduction({
 	const { data } = useGetDeductionDetails(shipment_data, watchCN);
 
 	const dataLength = (data?.partial || data?.revoke || []).length;
+
 	const [selected, setSelected] = useState(new Array(dataLength).fill(false));
 
 	const { handleBulkPayload, handlePendingTask } = useBulkUpdate();
+
 	const submitTask = async () => {
 		const response = await handleBulkPayload({
 			selected,
