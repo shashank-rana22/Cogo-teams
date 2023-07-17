@@ -5,18 +5,18 @@ import Layout from '@cogoport/surface-modules/components/Layout';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import getFilterControls from '../../../utils/getControls';
+import filterCommonControls from '../../../constants/filter-common-controls';
 
 import styles from './styles.module.css';
+
+const CONTROLS = [...filterCommonControls];
 
 function Filter({
 	serviceActiveTab = 'ftl_freight',
 	setFilters = () => {},
 	setFilterPopover = () => {},
 }) {
-	const getControls = getFilterControls({ serviceActiveTab });
-
-	const { formState:{ errors }, control, reset, getValues } = useForm({ getControls });
+	const { formState:{ errors }, control, reset, getValues } = useForm({ CONTROLS });
 
 	const handleReset = () => {
 		reset({
@@ -74,7 +74,7 @@ function Filter({
 				<IcMCross onClick={() => setFilterPopover(false)} className={styles.cross_icon} />
 			</div>
 			<Layout
-				fields={getControls}
+				fields={CONTROLS}
 				control={control}
 				errors={errors}
 			/>
