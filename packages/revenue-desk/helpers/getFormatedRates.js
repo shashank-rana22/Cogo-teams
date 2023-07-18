@@ -11,6 +11,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			};
 			const rowData = {
 				shipping_line: element?.reverted_shipping_line?.business_name
+								|| element?.reverted_shipping_line?.short_name
 								|| element?.shipping_line?.business_name || element?.shipping_line?.short_name,
 				air_line: element?.reverted_airline?.business_name
 							|| element?.airline?.business_name,

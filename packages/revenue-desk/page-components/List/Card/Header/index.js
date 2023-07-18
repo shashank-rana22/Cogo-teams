@@ -2,9 +2,9 @@ import { Pill } from '@cogoport/components';
 import { IcCCogoassured, IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
-import iconMapping from '../../../../helper/iconMapping';
-import incoTermMapping from '../../../../helper/incoTermMapping';
-import serviceLabelMapping from '../../../../helper/serviceLabelMapping';
+import iconMapping from '../../../../helpers/iconMapping';
+import incoTermMapping from '../../../../helpers/incoTermMapping';
+import serviceLabelMapping from '../../../../helpers/serviceLabelMapping';
 
 import styles from './styles.module.css';
 

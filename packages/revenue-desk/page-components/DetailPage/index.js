@@ -3,8 +3,8 @@ import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp, IcMTick } from 
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import iconMapping from '../../helper/iconMapping';
-import serviceLabelMapping from '../../helper/serviceLabelMapping';
+import iconMapping from '../../helpers/iconMapping';
+import serviceLabelMapping from '../../helpers/serviceLabelMapping';
 import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 import { DEFAULT_INDEX } from '../constants';

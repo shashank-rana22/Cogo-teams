@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-import incoTermMapping from '../helper/incoTermMapping';
+import incoTermMapping from '../helpers/incoTermMapping';
 import { DEFAULT_INDEX } from '../page-components/constants';
 
 const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isPreferenceSet } = {}) => {

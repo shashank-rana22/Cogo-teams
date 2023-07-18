@@ -3,15 +3,14 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 80%;
-	padding-top: 50%;
+	padding-top: 10%;
+	margin: auto;
 }
 
 .small_container {
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 80%;
-	padding-top: 50px;
 	margin: auto;
 }
 

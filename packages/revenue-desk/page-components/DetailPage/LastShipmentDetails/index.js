@@ -2,9 +2,9 @@ import { Pill, Placeholder } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 
 import EmptyState from '../../../EmptyState';
-import iconMapping from '../../../helper/iconMapping';
-import incoTermMapping from '../../../helper/incoTermMapping';
-import serviceLabelMapping from '../../../helper/serviceLabelMapping';
+import iconMapping from '../../../helpers/iconMapping';
+import incoTermMapping from '../../../helpers/incoTermMapping';
+import serviceLabelMapping from '../../../helpers/serviceLabelMapping';
 import useGetCustomerLastShipmentDetails from '../../../hooks/useGetCustomerLastShipmentDetails';
 import { DEFAULT_INDEX } from '../../constants';
 import CargoDetails from '../../List/Card/Body/CargoDetails';

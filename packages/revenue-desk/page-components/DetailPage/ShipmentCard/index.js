@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
-import incoTermMapping from '../../../helper/incoTermMapping';
+import incoTermMapping from '../../../helpers/incoTermMapping';
 import { DEFAULT_INDEX } from '../../constants';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
