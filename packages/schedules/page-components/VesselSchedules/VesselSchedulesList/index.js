@@ -9,11 +9,12 @@ import Filter from './Filter';
 import styles from './styles.module.css';
 import VesselScheduleCard from './VesselScheduleCard';
 
+const FOUR = 4;
 function VesselSchedulesList({ showModal, setShowModal }) {
 	const [filters, setFilters] = useState({});
 	const { data, makeRequest, loading, totalItems } = useGetVesselSchedules({ filters });
 
-	let content = (data || [[...Array(4)]])?.map((vessel) => (
+	let content = (data || [...Array(FOUR)])?.map((vessel) => (
 		<VesselScheduleCard key={vessel?.id} vessel={vessel} loading={loading} />
 	));
 

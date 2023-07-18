@@ -37,7 +37,7 @@ function RoutePort({ isFirst, isLast, port, diffInDays, loading }) {
 							{' '}
 							{dayChoices[Number(port?.eta_day) - ONE]}
 							{' '}
-							( Day &nbsp;
+							(Day &nbsp;
 							{port?.eta_day_count}
 							)
 						</div>
@@ -48,7 +48,7 @@ function RoutePort({ isFirst, isLast, port, diffInDays, loading }) {
 							{' '}
 							{dayChoices[Number(port?.etd_day) - ONE]}
 							{' '}
-							( Day &nbsp;
+							(Day &nbsp;
 							{port?.etd_day_count}
 							)
 						</div>

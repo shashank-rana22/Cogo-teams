@@ -17,6 +17,7 @@ function WeekCalendar({ startingDay }) {
 					{' '}
 				</span>
 			))}
+			{') '}
 		</div>
 	);
 }
