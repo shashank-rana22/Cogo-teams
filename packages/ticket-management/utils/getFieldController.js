@@ -3,6 +3,7 @@ import {
 	UploadController,
 	CreatableMultiSelectController, TextAreaController,
 	SelectController,
+	CheckboxController,
 } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
@@ -11,6 +12,7 @@ const CONTROLLER_MAPPING = {
 	'creatable-select' : CreatableMultiSelectController,
 	uploader           : UploadController,
 	text               : InputController,
+	checkbox           : CheckboxController,
 
 };
 

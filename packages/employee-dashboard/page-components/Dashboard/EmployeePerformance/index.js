@@ -146,7 +146,7 @@ function EmployeePerformance({
 
 			{renderData()}
 
-			{!loading && final_rating && !current_month_feedback_given && (
+			{!loading && final_rating && !current_month_feedback_given ? (
 				<div className={styles.system_recommended_rating}>
 					<div className={styles.heading}>
 						Feedback :
@@ -169,15 +169,15 @@ function EmployeePerformance({
 						<Button onClick={submitFeedback}>Submit Feedback</Button>
 					</div>
 				</div>
-			)}
+			) : null}
 
-			{openHistory && (
+			{openHistory ? (
 				<ModificationHistory
 					openHistory={openHistory}
 					handleClose={handleClose}
 					ratingCycle={ratingCycle}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

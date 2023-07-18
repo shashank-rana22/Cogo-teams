@@ -1,10 +1,16 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import injectCustomFormValidations from './inject-custom-form-validations';
 
 const TRUCK_NUM_TASKS = [
 	'upload_lorry_receipt',
 	'upload_ftl_commercial_invoice',
 	'upload_commercial_invoice',
+	'upload_weight_note',
+	'upload_load_truck_image',
 ];
+
+const TRUCK_EXCEED_NUMBER = -1;
 
 const injectValues = (
 	selectedMail,
@@ -21,7 +27,7 @@ const injectValues = (
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
-					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
+					? controls[index]?.value : [{ url: selectedMail?.formatted?.[GLOBAL_CONSTANTS.zeroth_index]?.url }];
 			}
 		});
 	}
@@ -48,22 +54,22 @@ const injectValues = (
 			}
 
 			if (control.name === 'truck_details_count') {
-				const truck_details_count = [];
+				const TRUCK_DETAILS_COUNT = [];
 				(servicesList || []).forEach((item) => {
-					const ind = truck_details_count.findIndex(
+					const ind = TRUCK_DETAILS_COUNT.findIndex(
 						(i) => i.truck_type === item.truck_type,
 					);
 
-					if (ind !== -1) {
-						truck_details_count[ind].truck_numbers += 1;
+					if (ind !== TRUCK_EXCEED_NUMBER) {
+						TRUCK_DETAILS_COUNT[ind].truck_numbers += 1;
 					} else {
-						truck_details_count.push({
+						TRUCK_DETAILS_COUNT.push({
 							truck_type    : item.truck_type,
 							truck_numbers : 1,
 						});
 					}
 				});
-				controls[index].value = [...truck_details_count];
+				controls[index].value = [...TRUCK_DETAILS_COUNT];
 			}
 		});
 	}
@@ -121,7 +127,6 @@ const injectValues = (
 			}
 		});
 	}
-
 	if (task.task === 'upload_proof_of_delivery') {
 		controls.forEach((control, index) => {
 			if (control.name === 'documents') {
@@ -169,6 +174,20 @@ const injectValues = (
 						newFieldItem.options = truckNumberOptions;
 					}
 				});
+			}
+		});
+	}
+
+	if (['pod_sent_to_shipper', 'upload_service_provider_proof_of_delivery'].includes(task?.task)) {
+		controls.forEach((control) => {
+			if (control?.type === 'fieldArray') {
+				const tempControl = control;
+				tempControl.value = servicesList?.reduce((acc, item) => {
+					if (item.service_type !== 'subsidiary_service') {
+						acc.push({ service_id: item?.id, truck_number: item?.truck_number });
+					}
+					return acc;
+				}, []);
 			}
 		});
 	}

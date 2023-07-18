@@ -5,7 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
-const actionNameMapping = {
+const ACTION_NAME_MAPPING = {
 	stand_alone : 'Stand Alone',
 	case_study  : 'Case Study',
 	subjective 	: 'Subjective',
@@ -17,7 +17,10 @@ function useCreateTestQuestion({
 	questionSetId,
 	listSetQuestions,
 	editorValue = {},
+	questionState = {},
+	setQuestionState,
 	subjectiveEditorValue = '',
+	caseStudyQuestionEditorValue,
 	setUploadable,
 	uploadable,
 }) {
@@ -45,7 +48,10 @@ function useCreateTestQuestion({
 			questionSetId,
 			type: question_type,
 			editorValue,
+			questionState,
+			setQuestionState,
 			subjectiveEditorValue,
+			caseStudyQuestionEditorValue,
 			uploadable,
 			setUploadable,
 		});
@@ -56,6 +62,7 @@ function useCreateTestQuestion({
 			});
 			return;
 		}
+
 		const triggerToUse = TRIGGER_MAPPING?.[question_type] || triggerNonCase;
 
 		try {
@@ -63,7 +70,7 @@ function useCreateTestQuestion({
 				data: payload,
 			});
 
-			Toast.success(`${actionNameMapping[question_type]} question created successfully`);
+			Toast.success(`${ACTION_NAME_MAPPING[question_type]} question created successfully`);
 
 			reset();
 			listSetQuestions({ questionSetId });

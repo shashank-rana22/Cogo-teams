@@ -1,11 +1,11 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -30,12 +30,6 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode, container_details } = get || {};
-
-	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
-		window.location.replace(newHref);
-		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const rollover_containers = (container_details || []).filter(
 		(container) => container?.rollover_status === 'requested',
@@ -84,7 +78,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;
+						{' '}
 						Refresh
 					</Button>
 				</div>
@@ -112,12 +106,6 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 					<RolloveDetails />
 
 					<div className={styles.toggle_chat}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
 						<ShipmentChat />
 					</div>
 
