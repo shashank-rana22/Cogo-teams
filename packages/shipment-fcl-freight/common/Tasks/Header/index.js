@@ -1,4 +1,4 @@
-import { Button, Toggle, Popover } from '@cogoport/components';
+import { Button, Toggle, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext, useState } from 'react';
@@ -20,7 +20,6 @@ function Header({
 	const contextValues = useContext(ShipmentDetailContext);
 
 	const [showBookingReq, setShowBookingReq] = useState(false);
-	const [visible, setVisible] = useState(false);
 
 	const { activeStakeholder, shipment_data, primary_service } = contextValues || {};
 
@@ -28,6 +27,7 @@ function Header({
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
+	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
 		<div className={styles.container}>
@@ -37,27 +37,20 @@ function Header({
 				</div>
 
 				<div className={styles.right_content}>
-					{showSupplyRemarks ? (
-						<Popover
+					{showSupplyRemarks && supplyRemarks ? (
+						<Tooltip
+							theme="light"
 							placement="bottom"
-							trigger="mouseenter"
-							caret={false}
-							visible={visible}
-							render={`Supply Remarks: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index]?.remarks}`}
+							animation="shift-away"
+							interactive
+							content={`Supply Remarks: ${supplyRemarks}`}
 						>
-							<Button
-								size="md"
-								themeType="link"
-								onClick={() => setVisible((pev) => !pev)}
-							>
-								Remarks
-
-							</Button>
-						</Popover>
+							<div className={styles.remarks}>Remarks</div>
+						</Tooltip>
 					) : null }
+
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
+						<div>Hide completed tasks</div>
 						<Toggle
 							checked={hideCompletedTasks}
 							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
@@ -65,13 +58,10 @@ function Header({
 					</div>
 
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
-
+						<div>Show only my tasks</div>
 						<Toggle
 							checked={showMyTasks}
-							onChange={() => {
-								setShowMyTasks(!showMyTasks);
-							}}
+							onChange={() => setShowMyTasks(!showMyTasks)}
 						/>
 					</div>
 				</div>
