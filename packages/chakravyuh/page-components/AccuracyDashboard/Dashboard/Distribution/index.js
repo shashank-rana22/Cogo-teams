@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Button, cl } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
 import { section_header, section_container } from '../styles.module.css';
@@ -9,14 +9,18 @@ import styles from './styles.module.css';
 
 const CONSTANT_ZERO = 0;
 
-function Distribution() {
-	const [currentPieChart, setCurrentPieChart] = useState('default');
-	const { customData, pieColors } = usePieChartConfigs(currentPieChart);
+function Distribution({ filters = {}, setFilters = () => {} }) {
+	const { pieChartView } = filters;
+	const { customData, pieColors } = usePieChartConfigs(pieChartView);
 
 	const handlePieClick = (event) => {
-		if (currentPieChart === 'default') {
-			setCurrentPieChart(event?.data?.key);
+		if (pieChartView === 'default') {
+			setFilters((prev) => ({ ...prev, pieChartView: event?.data?.key }));
 		}
+	};
+
+	const defaultView = () => {
+		setFilters((prev) => ({ ...prev, pieChartView: 'default' }));
 	};
 
 	return (
@@ -71,6 +75,17 @@ function Distribution() {
 					<p className={styles.pie_center_count}>
 						{customData.reduce((total, item) => total + item.value, CONSTANT_ZERO)}
 					</p>
+					{ pieChartView !== 'default'
+					&& (
+						<Button
+							themeType="linkUi"
+							className={styles.default_pie_chart_btn}
+							onClick={defaultView}
+							size="sm"
+						>
+							Go Back
+						</Button>
+					)}
 				</div>
 				<div className={styles.pie_chart_right_container}>
 					{
@@ -83,11 +98,11 @@ function Distribution() {
 									/>
 									<div className={styles.legend_text_row}>
 										<p className={styles.legend_name}>{label}</p>
-										{ currentPieChart === 'default'
+										{ pieChartView === 'default'
 										&& <p className={styles.legend_rate}>{`(${value} Rates)`}</p>}
 									</div>
 								</div>
-								{ currentPieChart === 'default'
+								{ pieChartView === 'default'
 									? (
 										<p className={styles.legend_percentage}>
 											{`${cancellation} % Cancellation`}
@@ -103,17 +118,6 @@ function Distribution() {
 					}
 				</div>
 			</div>
-			{ currentPieChart !== 'default'
-			&& (
-				<Button
-					themeType="secondary"
-					className={styles.default_pie_chart_btn}
-					onClick={() => setCurrentPieChart('default')}
-					size="sm"
-				>
-					Default
-				</Button>
-			)}
 		</div>
 	);
 }

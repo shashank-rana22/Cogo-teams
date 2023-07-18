@@ -142,7 +142,7 @@ const COMMON_END_COLUMNS = [
 	},
 ];
 function useSupplyRatesListTable(CLASS_TYPE) {
-	if (CLASS_TYPE === 'sea') {
+	if (CLASS_TYPE === 'fcl') {
 		return {
 			columns: [
 				...COMMON_START_COLUMNS,

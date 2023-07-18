@@ -6,7 +6,8 @@ import Distribution from './Distribution';
 import styles from './styles.module.css';
 import Views from './Views';
 
-function DashboardView({ setView = () => {} }) {
+function DashboardView(props) {
+	const { setView = () => {} } = props;
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.graph_container}>
@@ -15,7 +16,7 @@ function DashboardView({ setView = () => {} }) {
 			</div>
 			<div className={styles.side_container}>
 				<Views setView={setView} />
-				<Distribution />
+				<Distribution {...props} />
 			</div>
 		</div>
 
