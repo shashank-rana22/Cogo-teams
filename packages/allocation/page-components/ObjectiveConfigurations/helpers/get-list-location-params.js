@@ -27,7 +27,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 			service_type: 'lcl_freight',
 		},
 	},
-	air_international: {
+	air_freight: {
 		filters: {
 			status : 'active',
 			type   : ['airport', 'country', 'city'],
@@ -41,7 +41,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 			service_type: 'air_freight',
 		},
 	},
-	air_domestic: {
+	domestic_air_freight: {
 		filters: {
 			status : 'active',
 			type   : ['airport', 'country', 'city'],
@@ -69,7 +69,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 			service_type: 'trailer_freight',
 		},
 	},
-	haulage_freight: {
+	rail_freight: {
 		filters: {
 			status : 'active',
 			type   : ['seaport', 'country', 'city'],
@@ -125,7 +125,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 			service_type: 'ltl_freight',
 		},
 	},
-	rail_domestic: {
+	rail_domestic_freight: {
 		filters: {
 			status : 'active',
 			type   : ['railway_terminal'],

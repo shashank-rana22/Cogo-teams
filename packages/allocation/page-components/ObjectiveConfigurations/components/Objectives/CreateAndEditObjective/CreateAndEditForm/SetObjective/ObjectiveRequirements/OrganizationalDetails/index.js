@@ -9,24 +9,24 @@ import styles from './styles.module.css';
 function OrganizationalDetails(props) {
 	const { control, watch, resetField } = props;
 
-	const watchCountryIds = watch('country_ids');
-	const watchStateIds = watch('state_ids');
-	const watchCityIds = watch('city_ids');
+	const watchCountries = watch('countries');
+	const watchStates = watch('states');
+	const watchCities = watch('cities');
 
 	const controls = getOrganizationalDetailsControls(
-		{ watchCountryIds, watchStateIds, watchCityIds },
+		{ watchCountries, watchStates, watchCities },
 	);
 
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
-			if (controlName === 'city_ids') {
-				resetField('pincode_ids');
+			if (controlName === 'cities') {
+				resetField('pincodes');
 			}
-			if (controlName === 'state_ids') {
-				resetField('city_ids');
+			if (controlName === 'states') {
+				resetField('cities');
 			}
-			if (controlName === 'country_ids') {
-				resetField('state_ids');
+			if (controlName === 'countries') {
+				resetField('states');
 			}
 		});
 

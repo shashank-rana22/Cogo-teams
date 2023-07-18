@@ -12,11 +12,11 @@ const SERVICE_TYPE_OPTIONS_MAPPING = {
 	air: [
 		{
 			label : 'International',
-			value : 'air_international',
+			value : 'air_freight', // 'air_international'
 		},
 		{
 			label : 'Domestic',
-			value : 'air_domestic',
+			value : 'domestic_air_freight',
 		},
 	],
 	surface: [
@@ -36,7 +36,7 @@ const SERVICE_TYPE_OPTIONS_MAPPING = {
 		},
 		{
 			label : 'Rail',
-			value : 'haulage_freight',
+			value : 'rail_freight', // 'haulage_freight',
 		},
 		{
 			label : 'Barge',

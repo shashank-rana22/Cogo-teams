@@ -1,20 +1,14 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import RenderListLocationOption from '../../../common/RenderListLocationOption';
-
-const getIdsFromValues = ({ values }) => {
-	if (isEmpty(values)) return undefined;
-
-	return values.map((value) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]);
-};
+import getSeparatedIdData from '../helpers/get-separated-id-data';
 
 const getOrganizationalDetailsControls = (props) => {
-	const { watchCountryIds, watchStateIds, watchCityIds } = props;
+	const { watchCountries, watchStates, watchCities } = props;
 
 	const controls = [
 		{
-			name        : 'country_ids',
+			name        : 'countries',
 			label       : 'Select Country',
 			placeholder : 'Country',
 			type        : 'asyncSelect',
@@ -36,7 +30,7 @@ const getOrganizationalDetailsControls = (props) => {
 			renderLabel: (item) => <RenderListLocationOption item={item} />,
 		},
 		{
-			name        : 'state_ids',
+			name        : 'states',
 			label       : 'Select State',
 			placeholder : 'State',
 			type        : 'asyncSelect',
@@ -48,7 +42,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type       : 'region',
 					status     : 'active',
-					country_id : getIdsFromValues({ values: watchCountryIds }),
+					country_id : getSeparatedIdData({ values: watchCountries }),
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -59,11 +53,11 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchCountryIds),
+			disabled    : isEmpty(watchCountries),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
-			name        : 'city_ids',
+			name        : 'cities',
 			label       : 'Select City',
 			placeholder : 'City',
 			type        : 'asyncSelect',
@@ -75,7 +69,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type      : 'city',
 					status    : 'active',
-					region_id : getIdsFromValues({ values: watchStateIds }),
+					region_id : getSeparatedIdData({ values: watchStates }),
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -86,11 +80,11 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchStateIds),
+			disabled    : isEmpty(watchStates),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
-			name        : 'pincode_ids',
+			name        : 'pincodes',
 			label       : 'Select Pincode',
 			placeholder : 'Pincode',
 			type        : 'asyncSelect',
@@ -102,7 +96,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type    : 'pincode',
 					status  : 'active',
-					city_id : getIdsFromValues({ values: watchCityIds }),
+					city_id : getSeparatedIdData({ values: watchCities }),
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -113,7 +107,7 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchCityIds),
+			disabled    : isEmpty(watchCities),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{

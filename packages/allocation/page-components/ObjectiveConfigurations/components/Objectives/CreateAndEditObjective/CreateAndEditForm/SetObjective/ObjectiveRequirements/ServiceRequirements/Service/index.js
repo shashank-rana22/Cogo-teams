@@ -25,15 +25,16 @@ function Service(props) {
 
 	const watchShipmentMode = watch(`${name}.${index}.shipment_mode`);
 	const watchServiceType = watch(`${name}.${index}.service_type`);
+	const watchTradeType = watch(`${name}.${index}.trade_type`);
 
-	const controls = getServiceRequirementControls({ watchShipmentMode, watchServiceType });
+	const controls = getServiceRequirementControls({ watchShipmentMode, watchServiceType, watchTradeType });
 
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
 			if (controlName === `${name}.${index}.service_type`) {
 				resetField(`${name}.${index}.trade_type`);
-				resetField(`${name}.${index}.origin_location_id`);
-				resetField(`${name}.${index}.destination_location_id`);
+				resetField(`${name}.${index}.origin_location`);
+				resetField(`${name}.${index}.destination_location`);
 				resetField(`${name}.${index}.inco_term`);
 				resetField(`${name}.${index}.hs_codes`);
 				resetField(`${name}.${index}.container_count`);

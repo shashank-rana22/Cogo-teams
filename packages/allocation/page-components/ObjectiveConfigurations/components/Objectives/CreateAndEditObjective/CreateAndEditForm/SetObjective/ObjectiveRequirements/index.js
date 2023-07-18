@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
+import getSeparatedIdData from '../../../../../../helpers/get-separated-id-data';
+
 import AccountTransactionFunnel from './AccountTransactionFunnel';
 import OrganizationalDetails from './OrganizationalDetails';
 import ServiceRequirements from './ServiceRequirements';
@@ -12,7 +14,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 
 	const divRef = useRef({});
 
-	const { control, watch, reset, resetField } = useForm({
+	const { control, watch, reset, resetField, handleSubmit } = useForm({
 		defaultValues: {
 			service_requirements: [{}],
 		},
@@ -23,6 +25,25 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 		resetObjectiveRequirementForm : reset,
 	}));
 
+	const onSubmit = (values) => {
+		const {
+			countries, states, cities, pincodes, segments, date_range, shipment_count, quotation_count, search_count,
+		} = values;
+
+		setFormValues((previousValues) => ({
+			...previousValues,
+			objectiveRequirements: {
+				...values,
+				organization_details: getSeparatedIdData({
+					countries, states, cities, pincodes, segments,
+				}),
+				stats_details: {
+					date_range, shipment_count, quotation_count, search_count,
+				},
+			},
+		}));
+	};
+
 	return (
 		<div ref={divRef} className={styles.container}>
 			<div className={styles.heading_container}>
@@ -30,7 +51,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				<p>If no field is selected, it will automatically mean for all the inputs in that field</p>
 			</div>
 
-			<form>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<ServiceRequirements
 					name="service_requirements"
 					control={control}

@@ -7,7 +7,7 @@ import getListLocationParams from '../helpers/get-list-location-params';
 import getServiceTypeOptions from '../helpers/get-service-type-options';
 
 const getServiceRequirementControls = (props) => {
-	const { watchShipmentMode, watchServiceType } = props;
+	const { watchShipmentMode, watchServiceType, watchTradeType } = props;
 
 	const geo = getGeoConstants();
 
@@ -36,7 +36,7 @@ const getServiceRequirementControls = (props) => {
 				},
 				{
 					label : 'Rail Domestic',
-					value : 'rail_domestic',
+					value : 'rail_domestic_freight',
 				},
 			],
 			isClearable: true,
@@ -73,7 +73,7 @@ const getServiceRequirementControls = (props) => {
 			},
 		},
 		{
-			name        : 'origin_location_id',
+			name        : 'origin_location',
 			label       : 'Origin Country/Port',
 			placeholder : 'Select Origin',
 			type        : 'asyncSelect',
@@ -91,7 +91,7 @@ const getServiceRequirementControls = (props) => {
 			),
 		},
 		{
-			name        : 'destination_location_id',
+			name        : 'destination_location',
 			label       : 'Destination Country/Port',
 			placeholder : 'Select Destination',
 			type        : 'asyncSelect',
@@ -113,7 +113,7 @@ const getServiceRequirementControls = (props) => {
 			label       : 'Incoterm',
 			placeholder : 'Select Incoterm',
 			type        : 'multiSelect',
-			options     : getIncotermOptionsByTradeType({ trade_type: 'export' }),
+			options     : getIncotermOptionsByTradeType({ trade_type: watchTradeType }),
 			isClearable : true,
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
@@ -173,19 +173,19 @@ const getServiceRequirementControls = (props) => {
 			options     : [
 				{
 					label : '20ft',
-					value : '20ft',
+					value : '20',
 				},
 				{
 					label : '40ft',
-					value : '40ft',
+					value : '40',
 				},
 				{
 					label : '40ft HC',
-					value : '40ft HC',
+					value : '40 HC',
 				},
 				{
 					label : '45ft HC',
-					value : '45ft HC',
+					value : '45 HC',
 				},
 			],
 			isClearable : true,
