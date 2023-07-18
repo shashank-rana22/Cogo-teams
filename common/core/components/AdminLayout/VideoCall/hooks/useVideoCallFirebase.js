@@ -117,7 +117,6 @@ function useVideoCallFirebase({
 		);
 		setInACall(false);
 		setCallComing(false);
-		stopStream('screen_stream');
 		stopStream('user_stream');
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
