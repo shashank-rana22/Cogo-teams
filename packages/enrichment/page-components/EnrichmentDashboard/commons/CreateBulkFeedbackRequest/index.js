@@ -19,19 +19,21 @@ function CreateBulkFeedbackRequest({ refetch = () => {}, refetchStats = () => {}
 				Assign Accounts
 			</Button>
 
-			<Modal
-				show={showModal}
-				size="md"
-				closeOnOuterClick={false}
-				onClose={() => setShowModal(false)}
-				placement="top"
-			>
-				<FeedbackRequestModal
-					refetch={refetch}
-					refetchStats={refetchStats}
-					setShowModal={setShowModal}
-				/>
-			</Modal>
+			{showModal && (
+				<Modal
+					show={showModal}
+					size="md"
+					closeOnOuterClick={false}
+					onClose={() => setShowModal(false)}
+					placement="top"
+				>
+					<FeedbackRequestModal
+						refetch={refetch}
+						refetchStats={refetchStats}
+						setShowModal={setShowModal}
+					/>
+				</Modal>
+			)}
 		</div>
 
 	);
