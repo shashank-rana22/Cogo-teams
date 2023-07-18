@@ -3,11 +3,9 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
-// import tabs from '../configurations/tabs';
 import CONSTANTS from '../constants/constants';
 import useGetAwbList from '../hooks/useGetAwbList';
 
-// import AddAwbNumber from './AddAwbNumber';
 import AwbInventoryStock from './AwbInventoryStock';
 import AwbNumber from './AwbNumber';
 import AwbNumberDeleted from './AwbNumberDeleted';
@@ -18,16 +16,12 @@ import styles from './styles.module.css';
 
 const { START_PAGE } = CONSTANTS;
 const status_value = [
-	{ label: 'Available', value: 'available' },
+	{ label: 'Available(Non-reserved)', value: 'available_non_reserved' },
+	{ label: 'Available(Reserved)', value: 'available_reserved' },
 	{ label: 'Cancelled', value: 'cancelled' },
 	{ label: 'Used', value: 'used' },
 ];
 
-// const TABS_COMPONENT_MAPPING = {
-// 	awb_number        : AwbNumber,
-// 	awb_number_used   : AwbNumberUsed,
-// 	awb_number_cancel : AwbNumberDeleted,
-// };
 const getVariableTabMapping = ({ value }) => {
 	const tabComponentMapping = {
 		overview: {
@@ -38,37 +32,18 @@ const getVariableTabMapping = ({ value }) => {
 		awb_details: {
 			name      : 'awb_details',
 			title     : 'AWB DETAILS',
-			Component : (value === 'available' && AwbNumber)
+			Component : (value === 'available_non_reserved' && AwbNumber)
+						|| (value === 'available_reserved' && AwbNumber)
 						|| (value === 'cancelled' && AwbNumberDeleted)
 						|| AwbNumberUsed,
 		},
 	};
 	return tabComponentMapping;
 };
-// const TABS_COMPONENT_MAPPING = {
-// 	overview: {
-// 		name      : 'overview',
-// 		title     : 'OVERVIEW',
-// 		Component : AwbNumber,
-// 	},
-// 	awb_details: {
-// 		name      : 'awb_details',
-// 		title     : 'AWB DETAILS',
-// 		Component : AwbNumberUsed,
-// 	},
-// };
-
-// const STATUS_MAPPING = {
-// 	available : 'available',
-// 	used      : '',
-// 	cancelled : 'cancelled',
-// };
 
 function AwbInventory() {
 	const [activeTab, setActiveTab] = useState('overview');
-	const [value, setValue] = useState('available');
-	// const [show, setShow] = useState(false);
-	// const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
+	const [value, setValue] = useState('available_non_reserved');
 	const profile = useSelector((state) => state);
 
 	const { profile: { authParams } } = profile || {};
@@ -167,65 +142,6 @@ function AwbInventory() {
 					);
 				})}
 			</Tabs>
-			{/* <div className={styles.filters_container}>
-				<div className={styles.flex}>
-					<Input
-						value={qfilter}
-						suffix={<IcMSearchlight className="search_icon" />}
-						className={styles.input_search}
-						placeholder="Search by SID or AWB Number"
-						type="text"
-						onChange={(val) => {
-							setQfilter(val);
-						}}
-					/>
-					<Filters
-						filters={filters}
-						setFilters={setFilters}
-						activeTab={activeTab}
-					/>
-				</div>
-			</div>
-			<div className={styles.tabs_container}>
-				<Tabs
-					activeTab={activeTab}
-					onChange={setActiveTab}
-				>
-					{tabs.map((tab) => (
-						<TabPanel name={tab.name} title={tab.title} key={tab.key}>
-							<ActiveTabComponent
-								key={activeTab}
-								data={data}
-								loading={loading}
-								awbList={awbList}
-								page={page}
-								setPage={setPage}
-								finalList={finalList}
-								setFinalList={setFinalList}
-								setQfilter={setQfilter}
-								activeTab={activeTab}
-								status={STATUS_MAPPING[activeTab]}
-							/>
-						</TabPanel>
-					))}
-				</Tabs>
-			</div> */}
-			{/* {show && (
-				<Modal
-					show={show}
-					onClose={() => setShow(false)}
-					className={styles.modal_container}
-				>
-					<AddAwbNumber
-						setShow={setShow}
-						awbList={awbList}
-						setActiveTab={setActiveTab}
-						setFinalList={setFinalList}
-						setPage={setPage}
-						page={page}
-					/>
-				</Modal>
-			)} */}
 		</div>
 	);
 }

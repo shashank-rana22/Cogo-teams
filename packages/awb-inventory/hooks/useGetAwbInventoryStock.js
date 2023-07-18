@@ -20,7 +20,6 @@ const useGetInventoryStock = ({ activeTab, filterData }) => {
 	);
 
 	const awbInventoryStockList = useCallback(() => {
-		// const { filter = [] } = formValues;
 		(async () => {
 			try {
 				await trigger({

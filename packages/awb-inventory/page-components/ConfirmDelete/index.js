@@ -10,8 +10,8 @@ function ConfirmDelete({
 	loading,
 	status,
 }) {
-	const confirmMessage = status === 'available' ? 'delete' : 'recover';
-	const updateStatus = status === 'available' ? 'cancelled' : 'available';
+	const confirmMessage = ['available_non_reserved', 'available_reserved'].includes(status) ? 'delete' : 'recover';
+	const updateStatus = ['available_non_reserved', 'available_reserved'].includes(status) ? 'cancelled' : 'available';
 	return (
 		<div className={styles.delete_container}>
 			<h2 className={styles.modal_title}>

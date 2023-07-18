@@ -20,7 +20,7 @@ const useCreateAwbNumber = (
 
 	const createAwbNumber = async (finalData) => {
 		const payload = {
-			status: 'available',
+			status: 'available_non_reserved',
 			...finalData,
 		};
 		try {

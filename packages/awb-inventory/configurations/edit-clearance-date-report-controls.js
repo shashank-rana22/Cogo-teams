@@ -1,21 +1,6 @@
 import checkValidation from '../utils/checkValidation';
 
-const awbControls = [
-	{
-		name        : 'serviceProviderId',
-		type        : 'async-select',
-		asyncKey    : 'organizations',
-		label       : 'Service Provider',
-		span        : 6,
-		placeholder : 'Service Provider',
-		disabled    : true,
-		params      : {
-			filters: { service_type: 'air_freight' },
-		},
-		rules: {
-			required: true,
-		},
-	},
+const editClearanceDateReportContols = [
 	{
 		name        : 'airlineId',
 		type        : 'async-select',
@@ -61,16 +46,6 @@ const awbControls = [
 		isClearable: true,
 	},
 	{
-		name        : 'chargeable_weight',
-		type        : 'text',
-		label       : 'Add Chargeable Weight',
-		placeholder : 'Enter Weight',
-		span        : 6,
-		rules       : {
-			required: true,
-		},
-	},
-	{
 		name        : 'awbNumber',
 		type        : 'text',
 		label       : 'AWB Number',
@@ -107,15 +82,6 @@ const awbControls = [
 			required: true,
 		},
 	},
-	{
-		name  : 'so_confirmation',
-		type  : 'checkbox',
-		label : 'Booking Confirmation received from SO1',
-		span  : 12,
-		rules : {
-			required: true,
-		},
-	},
 ];
 
-export default awbControls;
+export default editClearanceDateReportContols;

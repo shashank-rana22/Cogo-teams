@@ -47,13 +47,6 @@ function AddAwbNumber({
 	});
 	const { first_awb_number: firstAwbNumber = '', airline_id: airlineId = '' } = watch();
 
-	// const getShowElements = () => !!awbBlock;
-
-	// const showElements = {
-	// 	importer_exporter_id    : getShowElements(),
-	// 	destination_location_id : getShowElements(),
-	// 	booking_agent_id        : getShowElements(),
-	// };
 	useEffect(() => {
 		if (airlineId) {
 			getAWBPrefix(airlineId);
@@ -97,7 +90,6 @@ function AddAwbNumber({
 				fields={fields}
 				control={control}
 				errors={errors}
-				// showElements={showElements}
 			/>
 			<div className={styles.button_container}>
 				<Button

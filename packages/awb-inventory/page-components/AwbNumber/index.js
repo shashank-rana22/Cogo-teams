@@ -6,7 +6,6 @@ import { functions } from '../../commons/Functions';
 import List from '../../commons/List';
 import { AwbNumberFields } from '../../configurations/awb-number-fields';
 import useEditAwbNumber from '../../hooks/useEditAwbNumber';
-import ConfirmDelete from '../ConfirmDelete';
 import EditAwbNumber from '../EditAwbNumber';
 
 import styles from './styles.module.css';
@@ -20,11 +19,9 @@ function AwbNumber({
 	setFinalList,
 	finalList,
 	setQfilter,
-	status,
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showEdit, setShowEdit] = useState(false);
-	const [showConfirm, setShowConfirm] = useState(false);
 
 	const { fields } = AwbNumberFields;
 
@@ -35,14 +32,13 @@ function AwbNumber({
 		setPage,
 		setFinalList,
 		setQfilter,
-		setShowConfirm,
 		page,
 	});
 
 	const otherFunctions = {
 		handleAction: (singleItem) => (
 			<div className={styles.button_group}>
-				{singleItem.status === 'available' && (
+				{singleItem.status === 'available_non_reserved' && (
 					<Button
 						themeType="primary"
 						size="md"
@@ -54,7 +50,7 @@ function AwbNumber({
 						Reserve AWB
 					</Button>
 				)}
-				{singleItem.status === 'available_unreserved' && (
+				{singleItem.status === 'available_reserved' && (
 					<>
 						<Pill size="sm" color="green">Reserved</Pill>
 						<Button
@@ -68,15 +64,6 @@ function AwbNumber({
 						</Button>
 					</>
 				)}
-				{/* <Button
-					themeType="linkUi"
-					onClick={() => {
-						setItem(singleItem);
-						setShowConfirm(true);
-					}}
-				>
-					<IcMDelete height={16} width={16} fill="#8B8B8B" />
-				</Button> */}
 			</div>
 		),
 	};
@@ -106,20 +93,6 @@ function AwbNumber({
 						setShowEdit={setShowEdit}
 						editAwbNumber={editAwbNumber}
 						loading={editLoading}
-					/>
-				</Modal>
-			)}
-			{showConfirm && (
-				<Modal
-					show={showConfirm}
-					onClose={() => setShowConfirm(false)}
-					className={styles.modal_container}
-				>
-					<ConfirmDelete
-						setShowConfirm={setShowConfirm}
-						editAwbNumber={editAwbNumber}
-						loading={editLoading}
-						status={status}
 					/>
 				</Modal>
 			)}

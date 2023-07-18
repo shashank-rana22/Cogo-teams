@@ -3,20 +3,20 @@ import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
-import awbControls from '../../configurations/edit-awb-controls';
+import editClearanceDateReportContols from '../../configurations/edit-clearance-date-report-controls';
 
 import styles from './styles.module.css';
 
-function EditAwbNumber({
+function EditClearanceDateReport({
 	setShowEdit = () => {},
 	item = {},
-	editAwbNumber = () => {},
+	editClearanceDateReport = () => {},
 	loading,
 }) {
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	useEffect(() => {
-		awbControls.forEach((c) => {
+		editClearanceDateReportContols.forEach((c) => {
 			setValue(c.name, item[c.name] || c?.value);
 		});
 		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
@@ -24,10 +24,10 @@ function EditAwbNumber({
 	}, []);
 
 	return (
-		<div className={styles.addawb_container}>
-			<div className={styles.modal_header}>EDIT AWB NUMBER</div>
+		<div className={styles.edit_clearancereport_container}>
+			<div className={styles.modal_header}>EDIT</div>
 			<Layout
-				fields={awbControls}
+				fields={editClearanceDateReportContols}
 				control={control}
 				errors={errors}
 			/>
@@ -42,7 +42,7 @@ function EditAwbNumber({
 				</Button>
 				<Button
 					size="md"
-					onClick={handleSubmit((finalData) => editAwbNumber(finalData))}
+					onClick={handleSubmit((finalData) => editClearanceDateReport(finalData))}
 					disabled={loading}
 				>
 					{loading ? 'Updating' : 'Update'}
@@ -51,4 +51,4 @@ function EditAwbNumber({
 		</div>
 	);
 }
-export default EditAwbNumber;
+export default EditClearanceDateReport;

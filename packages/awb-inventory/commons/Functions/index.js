@@ -40,20 +40,12 @@ export const functions = {
 	handleAirport: (singleItem) => {
 		const { originAirport, originAirportCode } = singleItem || {};
 		return (
-			`(${originAirportCode}) ${originAirport}`
+			`(${originAirportCode || '-'}) ${originAirport || '-'}`
 		) || '-';
-		// return originAirport;
 	},
 	handleDestLocation: (singleItem) => {
 		const { destinationAirport } = singleItem || {};
 		return (destinationAirport) || '-';
-	},
-	handleIE: (singleItem) => {
-		const { importer_exporter } = singleItem || {};
-		const { business_name } = importer_exporter || {};
-		return (
-			business_name
-		);
 	},
 	handleAgent: (singleItem) => {
 		const { procuredByName = {} } = singleItem || {};

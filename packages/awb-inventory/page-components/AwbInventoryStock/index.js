@@ -46,7 +46,7 @@ function AwbInventoryStock() {
 		setPage: ClearanceReportSetPage,
 		page: ClearanceReportPage,
 		data: ClearanceReportData,
-		// clearanceDateReport,
+		clearanceDateReport,
 		finalList: ClearanceReportFinalList,
 		setFinalList: ClearanceReportSetFinalList,
 		filters,
@@ -74,7 +74,6 @@ function AwbInventoryStock() {
 							name={name}
 							title={title}
 						>
-							{/* <Component /> */}
 							<div className={styles.filters_container}>
 								{activeTab === 'clearance_date_confirmation' && (
 									<div className={styles.flex}>
@@ -150,6 +149,8 @@ function AwbInventoryStock() {
 									data={ClearanceReportData}
 									finalList={ClearanceReportFinalList}
 									setFinalList={ClearanceReportSetFinalList}
+									clearanceDateReport={clearanceDateReport}
+									setQfilter={setQfilter}
 								/>
 							) }
 						</TabPanel>

@@ -22,6 +22,7 @@ export const ClearanceDateReportFields = {
 			key   : 'awb_number',
 			label : 'AWB Number',
 			span  : 1.2,
+			func  : 'handleAwbNumber',
 		},
 		{
 			key   : 'custom_clearance_date',
