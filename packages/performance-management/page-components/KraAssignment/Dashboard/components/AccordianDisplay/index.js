@@ -35,7 +35,7 @@ function AccordianDisplay({
 	const onClickFilters = () => {
 		setSelectAccordianObject();
 		setSelectAccordian(kra_details);
-		setIsActive(!isActive);
+		setIsActive((pv) => !pv);
 		resetObjects();
 	};
 
