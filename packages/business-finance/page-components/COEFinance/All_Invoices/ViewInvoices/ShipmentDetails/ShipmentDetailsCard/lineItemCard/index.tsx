@@ -197,7 +197,7 @@ function LineItemCard({
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
 	};
 
-	const paidTdsPercentage = +((+paidTds / (subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+	const paidTdsPercentage = +((+paidTds / (+subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
 		.toFixed(MAX_DECIMAL_PLACES);
 
 	return (
