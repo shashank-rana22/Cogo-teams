@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE_INDEX = 1;
 const DEFAULT_PAGE_SIZE = 10;
-const MAX_STRING_LIMIT = 2;
+const MAX_STRING_LIMIT = 20;
 const WEEK_SECTION_START = 0;
 const WEEK_SECTION_END = 3;
 

@@ -51,7 +51,7 @@ const useCreateDunningCycle = ({
 			await trigger({
 				data: {
 					name                         : cycleName,
-					cycle_type                   : cycleType,
+					cycleType,
 					triggerType                  : triggerType || 'ONE_TIME',
 					frequency                    : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 					severityLevel,

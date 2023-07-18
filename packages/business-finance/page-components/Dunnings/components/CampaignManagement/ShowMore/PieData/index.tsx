@@ -19,6 +19,62 @@ function PieData() {
 			label      : 'Rate',
 			percentage : 'X%',
 		},
+		{
+			data: [
+				{
+					id    : 'a',
+					value : 30,
+				},
+				{
+					id    : 'b',
+					value : 60,
+				},
+			],
+			label      : 'Rate',
+			percentage : 'X%',
+		},
+		{
+			data: [
+				{
+					id    : 'a',
+					value : 30,
+				},
+				{
+					id    : 'b',
+					value : 60,
+				},
+			],
+			label      : 'Rate',
+			percentage : 'X%',
+		},
+		{
+			data: [
+				{
+					id    : 'a',
+					value : 30,
+				},
+				{
+					id    : 'b',
+					value : 60,
+				},
+			],
+			label      : 'Rate',
+			percentage : 'X%',
+		},
+		{
+			data: [
+				{
+					id    : 'a',
+					value : 30,
+				},
+				{
+					id    : 'b',
+					value : 60,
+				},
+			],
+			label      : 'Rate',
+			percentage : 'X%',
+		},
 
 	];
 

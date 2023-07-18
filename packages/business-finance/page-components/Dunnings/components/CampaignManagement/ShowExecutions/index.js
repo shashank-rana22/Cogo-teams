@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 
 const SINGLE_SLIDE_LIMIT = 10;
 const INCREMENT = 1;
+const WEEK_SLICE_FROM = 0;
+const WEEK_SLICE_TILL = 3;
 
 function ShowExecutions({ rowId = '', dropdown = '' }) {
 	const [selectedExecution, setSelectedExecution] = useState(GLOBAL_CONSTANTS.zeroth_index);
@@ -32,10 +34,11 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 				{Array(SINGLE_SLIDE_LIMIT).fill('').map((i, position) => {
 					const elementPosition = (index * SINGLE_SLIDE_LIMIT) + position;
 					const { scheduleRule, status } = list?.[elementPosition] || {};
-					const { scheduleTime, scheduleTimeZone } = scheduleRule || {};
+					const { scheduleTime, scheduleTimeZone, week } = scheduleRule || {};
 					const dateText = list?.[elementPosition]
 						?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
 					const timeText = `${scheduleTime} ${scheduleTimeZone}`;
+					const weekDay = `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` || '';
 
 					return (
 						<div
@@ -60,7 +63,7 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 											{dateText || ''}
 										</div>
 										<div style={{ fontSize: '10px' }}>
-											{`weekDay | ${timeText}`}
+											{`${weekDay} ${timeText}`}
 										</div>
 									</button>
 								) : null}
