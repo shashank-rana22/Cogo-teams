@@ -191,6 +191,7 @@ export function GetAssignTypeComp({
 			{...(COMPONENT_PROPS_MAPPING[assignType] || {})}
 			control={control}
 			errors={errors}
+			key={assignType}
 		/>
 	);
 }
