@@ -8,6 +8,7 @@ import NonRecuringModal from '../../Modals/NonRecuringModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
 import RecuringModal from '../../Modals/RecuringModal';
 import RequestCN from '../../Modals/RequestCN';
+import RevokeInvoice from '../../Modals/RevokeInvoice';
 import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
@@ -40,6 +41,7 @@ const TYPE_COMPONENT_MAPPING = {
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
 	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
 	OVERHEAD_APPROVAL                      : NonRecuringModal,
+	REVOKE_INVOICE                         : RevokeInvoice,
 };
 
 function AccessorComponent({ row = {} as Row, getIncidentData = () => {} }: { row?: Row; getIncidentData?: Function }) {
