@@ -366,6 +366,7 @@ const GLOBAL_CONSTANTS = {
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		four_characters_pin               : /^.{4}$/,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

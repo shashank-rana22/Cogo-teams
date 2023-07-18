@@ -1611,6 +1611,16 @@ const apis = [
 		api         : 'get_saas_hs_code_list',
 		access_type : 'private',
 	},
+	{
+		api          : 'get_shipment_ftl_freight_fuel_payment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_ftl_freight_fuel_payment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
