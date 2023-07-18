@@ -1,6 +1,8 @@
-import { Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow, IcCFtick, IcMArrowDown } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -9,9 +11,19 @@ import { USER_ACTIVITY_KEYS_MAPPING } from '../../../../../constants/USER_ACTIVI
 
 import styles from './styles.module.css';
 
-function TransactionalActivity({ transactional = {} }) {
-	const [viewDetails, setViewDetails] = useState('');
+const DEFAULT_LENGTH_OF_MILESTONE_ACTIVITY = 0;
+const REMOVE_LENGTH_OF_MILESTONE_ACTIVITY = 1;
+const MAX_LENGTH_OF_MILESTONE_ACTIVITY = 1;
+
+function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () => {} }) {
 	const router = useRouter();
+
+	const { userId } = useSelector(({ profile }) => ({
+		userId: profile.user?.id,
+
+	}));
+
+	const [viewDetails, setViewDetails] = useState('');
 
 	const redirectToShipment = (shipmentId) => {
 		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
@@ -41,7 +53,7 @@ function TransactionalActivity({ transactional = {} }) {
 	return (
 		<div>
 			{(list || []).map((item) => {
-				const { id = '', shipment_type = '' } = item || {};
+				const { id = '', shipment_type = '', trade_type = '' } = item || {};
 				const viewCheck = viewDetails === id;
 				const services = shipment_type;
 				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services] || {};
@@ -63,13 +75,20 @@ function TransactionalActivity({ transactional = {} }) {
 
 				const { name:destination_name = '', port_code:destination_port_code = '' } = destination_port || {};
 
+				const FORMATTED_DATA = {
+					category     : shipment_type,
+					sub_category : trade_type,
+					shipment_id  : serial_id,
+					user_id      : userId,
+				};
+
 				return (
 					<>
 						<div className={styles.activity_date}>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
-								{format(created_at, 'hh:mm a,')}
-								{format(created_at, ' MMM dd')}
+								{format(created_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
+								{format(created_at, GLOBAL_CONSTANTS.formats.date['dd MMM'])}
 
 							</div>
 						</div>
@@ -79,15 +98,29 @@ function TransactionalActivity({ transactional = {} }) {
 									className={cl`${viewCheck ? styles.open_card_details : styles.card_details}`}
 								>
 
-									<div
-										className={styles.booking_id}
-										role="button"
-										tabIndex={0}
-										onClick={() => redirectToShipment(id)}
-									>
-										SID:&nbsp;
-										{serial_id}
+									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+										<div
+											role="presentation"
+											className={styles.booking_id}
+											onClick={() => redirectToShipment(id)}
+										>
+											SID:
+											{' '}
+											{serial_id}
+										</div>
+										<Button
+											size="xs"
+											tabIndex={0}
+											onClick={() => setRaiseTicketModal({
+												state  : true,
+												data   : { formattedData: FORMATTED_DATA } || {},
+												source : 'transactional_activity',
+											})}
+										>
+											Raise Ticket
+										</Button>
 									</div>
+
 									<div className={styles.port_pair}>
 										<div className={styles.port}>
 											<div className={styles.port_details}>
@@ -142,15 +175,23 @@ function TransactionalActivity({ transactional = {} }) {
 													<div className={styles.activity_date}>
 														<div className={styles.dot} />
 														<div className={styles.durations}>
-															{format(completed_on, 'hh:mm a,')}
-															{format(completed_on, ' MMM dd')}
+															{format(
+																completed_on,
+																GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+															)}
+															{format(
+																completed_on,
+																GLOBAL_CONSTANTS.formats.date['dd MMM'],
+															)}
 
 														</div>
 													</div>
 													<div
 														className={cl`${styles.milestone_main_card} 
 																 ${index
-																	=== (filteredMilestoneActivity?.length || 0) - 1
+																	=== (filteredMilestoneActivity?.length
+																		|| DEFAULT_LENGTH_OF_MILESTONE_ACTIVITY)
+																		- REMOVE_LENGTH_OF_MILESTONE_ACTIVITY
 															? styles.milestone_last_card : ''}`}
 													>
 
@@ -175,7 +216,7 @@ function TransactionalActivity({ transactional = {} }) {
 									</div>
 
 								</div>
-								{filteredMilestoneActivity.length > 1 && (
+								{(filteredMilestoneActivity || []).length > MAX_LENGTH_OF_MILESTONE_ACTIVITY && (
 									<div
 										role="presentation"
 										className={styles.show_more}

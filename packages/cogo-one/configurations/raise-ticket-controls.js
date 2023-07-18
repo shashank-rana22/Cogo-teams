@@ -1,4 +1,5 @@
 import { asyncFieldsTicketTypes } from '@cogoport/forms';
+import { merge } from '@cogoport/utils';
 
 import useGetAsyncTicketOptions from '../helpers/useGetAsyncTicketOptions';
 
@@ -7,8 +8,17 @@ const TICKET_DATA_KEYWORDS_MAPPING = [
 	{ keyword: 'invoice', datakey: 'InvoiceNumber', validation: 'number' },
 ];
 
-const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
-	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
+const MIN_ADDITIONAL_DATA_LENGTH = 0;
+
+const useRaiseTicketControls = ({
+	watchTicketType = '',
+	source = '',
+	ticketType = '',
+	setAdditionalInfo = () => {},
+}) => {
+	const loadOptions = useGetAsyncTicketOptions(merge(asyncFieldsTicketTypes(), {
+		params: { QFilter: ticketType },
+	}));
 
 	const { keyword = '', datakey = '', validation = '' } = TICKET_DATA_KEYWORDS_MAPPING
 		.find(({ keyword:matchKeyword }) => watchTicketType?.toLowerCase()?.includes(matchKeyword)) || {};
@@ -19,10 +29,12 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			label       : 'Reason for raising a ticket',
 			name        : 'ticket_type',
 			controlType : 'select',
+			value       : ticketType,
 			rules       : {
 				required: 'This is Required',
 			},
 			...(loadOptions || {}),
+			onChange: (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
 			label       : ticketDataLabel,
@@ -32,7 +44,8 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			size        : 'md',
 			type        : validation === 'number' ? 'number' : 'text',
 			rules       : {
-				validate: (value) => ((validation === 'number' && value < 0) ? 'Cannot be Negative' : true),
+				validate: (value) => ((validation === 'number'
+				&& value < MIN_ADDITIONAL_DATA_LENGTH) ? 'Cannot be Negative' : true),
 			},
 		},
 		{
