@@ -21,7 +21,7 @@ const red_location_icon = 	L.icon({
 });
 const yellow_location_icon = 	L.icon({
 	iconUrl    : 'https://cogoport-production.sgp1.digitaloceanspaces.com/af5dcf467b54929d7aa71af6a5bcdfd9/Mediamodifier-Design%20%281%29.svg',
-	iconSize   : [80, 80],
+	iconSize   : [0, 0],
 	iconAnchor : [40, 55],
 });
 

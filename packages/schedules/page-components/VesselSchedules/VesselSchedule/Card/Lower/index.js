@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -6,6 +7,8 @@ import styles from './styles.module.css';
 const ZERO = 0;
 const ONE = 1;
 function Lower({ vessel, loading }) {
+	const route_length = parseFloat(vessel?.route?.length);
+	const displayText = `${(route_length)?.toFixed(2) || '-'} km`;
 	return (
 		<div className={styles.lower}>
 			<div className={styles.left}>
@@ -13,8 +16,11 @@ function Lower({ vessel, loading }) {
 					<div className={styles.port_heading}>Origin</div>
 					{loading ? <Placeholder width="160px" /> : (
 						<div className={styles.port_name}>
-							{vessel?.vessel_schedule_link?.[ZERO]?.display_name}
+							{vessel?.vessel_schedule_link?.[ZERO]?.display_name.split('(')?.[0]}
+							,
+							{vessel?.vessel_schedule_link?.[ZERO].port_code ? <div style={{ color: '#f68b21' }}>{`(${vessel?.vessel_schedule_link?.[ZERO].port_code})`}</div> : null}
 						</div>
+
 					)}
 					{loading ? <Placeholder width="100px" /> : (
 						<div className={styles.time}>
@@ -25,6 +31,7 @@ function Lower({ vessel, loading }) {
 						</div>
 					)}
 				</div>
+				<IcMPortArrow style={{ height: '100px' }} />
 				<div>
 					<div className={styles.port_heading}>Destination</div>
 					{loading ? <Placeholder width="160px" /> : (
@@ -32,8 +39,10 @@ function Lower({ vessel, loading }) {
 							{
                 vessel?.vessel_schedule_link?.[
                 	Number(vessel?.vessel_schedule_link?.length) - ONE
-                ]?.display_name
+                ]?.display_name.split('(')?.[0]
               }
+							,
+							{vessel?.vessel_schedule_link?.[Number(vessel?.vessel_schedule_link?.length) - ONE].port_code ? <div style={{ color: '#f68b21' }}>{`(${vessel?.vessel_schedule_link?.[Number(vessel?.vessel_schedule_link?.length) - ONE].port_code})`}</div> : null}
 						</div>
 					)}
 					{loading ? <Placeholder width="100px" /> : (
@@ -68,7 +77,7 @@ function Lower({ vessel, loading }) {
 						<div>
 							<span className={styles.key}>Length </span>
 							{' '}
-							{vessel?.route?.length}
+							{displayText}
 						</div>
 					)}
 				</div>

@@ -12,6 +12,9 @@ function Lower({ vessel, loading }) {
 			`/schedules/vessel-schedules/${vessel?.id}`,
 		);
 	};
+	const route_length = parseFloat(vessel?.route?.length);
+	const displayText = `${(route_length)?.toFixed(2) || '-'} km`;
+
 	return (
 		<div className={styles.lower}>
 			<div className={styles.lower_left}>
@@ -37,7 +40,7 @@ function Lower({ vessel, loading }) {
 				{loading ? <Placeholder width="100px" />
 					: (
 						<div className={styles.feature_value}>
-							{vessel?.route?.length}
+							{displayText}
 						</div>
 					)}
 			</div>

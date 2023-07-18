@@ -23,6 +23,7 @@
 }
 
 .port_name {
+  display: flex;
   font-size: 16px;
   font-weight: 500;
   color: #221f20;
@@ -51,3 +52,4 @@
 .key {
   color: #828282;
 }
+
