@@ -16,18 +16,18 @@ const AIR_CONTROLS = [
 		label   : 'Rate Source',
 		options : [
 			{
-				key   : 'supply_rate',
-				value : 'supply_rate',
+				key   : 'supply_rates',
+				value : 'supply_rates',
 				label : 'Supply Rate',
 			},
 			{
-				key   : 'predicted_rate',
-				value : 'predicted_rate',
+				key   : 'predicted_rates',
+				value : 'predicted_rates',
 				label : 'Predicted Rate',
 			},
 			{
-				key   : 'supply_predicted_rate',
-				value : 'supply_predicted_rate',
+				key   : 'extended_rates',
+				value : 'extended_rates',
 				label : 'Supply Predicted Rate',
 			},
 		],
@@ -127,18 +127,18 @@ const SEA_CONTROLS = (commodityType) => ([
 		label   : 'Rate Source',
 		options : [
 			{
-				key   : 'supply_rate',
-				value : 'supply_rate',
+				key   : 'supply_rates',
+				value : 'supply_rates',
 				label : 'Supply Rate',
 			},
 			{
-				key   : 'predicted_rate',
-				value : 'predicted_rate',
+				key   : 'predicted_rates',
+				value : 'predicted_rates',
 				label : 'Predicted Rate',
 			},
 			{
-				key   : 'supply_predicted_rate',
-				value : 'supply_predicted_rate',
+				key   : 'extended_rates',
+				value : 'extended_rates',
 				label : 'Supply Predicted Rate',
 			},
 		],

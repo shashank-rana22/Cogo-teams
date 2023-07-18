@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import Views from './Views';
 
 function DashboardView(props) {
-	const { setView = () => {}, filters = {} } = props;
-	const { pieChartView = 'default' } = filters;
+	const { setView = () => {}, globalFilters = {} } = props;
+	const { rate_type } = globalFilters;
 	return (
 		<>
 			<div className={styles.main_container}>
@@ -23,7 +23,7 @@ function DashboardView(props) {
 					<Distribution {...props} />
 				</div>
 			</div>
-			<SupplyRates {...props} visible={pieChartView !== 'default'} />
+			{rate_type && <SupplyRates heading="Supply Rates" {...props} />}
 		</>
 	);
 }

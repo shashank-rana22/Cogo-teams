@@ -80,7 +80,8 @@ function DrillDown({ globalFilters = {} }) {
 					);
 				})}
 			</div>
-			<SupplyRates visible={activeParent} />
+			{activeParent
+			&& <SupplyRates />}
 		</div>
 	);
 }

@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 const CONSTANT_ONE = 1;
 
-function Filters({ globalFilters = {}, setGlobalFilters = () => {} }) {
+function Filters(props) {
+	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
 	const { service_type, origin, destination } = globalFilters;
 	const [showFiltersPopover, setShowFiltersPopover] = useState(false);
 	const [popupKey, setPopupKey] = useState(GLOBAL_CONSTANTS.zeroth_index);
@@ -89,7 +90,7 @@ function Filters({ globalFilters = {}, setGlobalFilters = () => {} }) {
 			<div className={styles.filters_container}>
 				<Popover
 					key={popupKey}
-					render={<FilterContainer globalFilters={globalFilters} />}
+					render={<FilterContainer {...props} />}
 					trigger="click"
 					placement="bottom"
 					visible={showFiltersPopover}

@@ -7,8 +7,8 @@ import { usePopupFilterControls } from '../../../../constants/popup_filter_contr
 
 import styles from './styles.module.css';
 
-function FilterContainer({ globalFilters = {} }) {
-	const { service_type = 'fcl' } = globalFilters;
+function FilterContainer({ globalFilters = {}, setGlobalFilters = () => {} }) {
+	const { service_type = 'fcl', rate_type = null } = globalFilters;
 	const {
 		control,
 		formState: { errors },
@@ -27,12 +27,26 @@ function FilterContainer({ globalFilters = {} }) {
 		}
 	}, [containerType, setValue]);
 
+	useEffect(() => { setValue('rate_source', rate_type); }, [rate_type, setValue]);
+
+	const rateSource = watch('rate_source');
+	useEffect(() => {
+		if (rateSource) {
+			setGlobalFilters((prev) => ({ ...prev, rate_type: rateSource }));
+		}
+	}, [rateSource, setGlobalFilters]);
+
+	const resetPopover = () => {
+		setGlobalFilters((prev) => ({ ...prev, rate_type: rateSource }));
+		reset();
+	};
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header_row}>
 				<span className={styles.title}>Filters</span>
 				<div className={styles.filter_action_buttons}>
-					<Button themeType="secondary" onClick={reset}>Reset</Button>
+					<Button themeType="secondary" onClick={resetPopover}>Reset</Button>
 					<Button themeType="accent">Apply</Button>
 				</div>
 			</div>

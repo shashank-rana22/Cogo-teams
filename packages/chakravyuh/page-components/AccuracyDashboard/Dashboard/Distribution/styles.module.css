@@ -1,6 +1,11 @@
 .container {
 	height: 314px;
 	font-weight: 600;
+
+	:global #pie-chart-back-btn {
+		min-width: none;
+		padding: 0;
+	}
 }
 
 .pie_chart_container {
@@ -17,7 +22,7 @@
 
 .pie_chart_middle_container {
 	position: absolute;
-	top: 95px;
+	top: 90px;
 	left: 72px;
 	display: flex;
 	flex-direction: column;
@@ -76,7 +81,7 @@
 		background-color: #f9ae64;
 	}
 
-	&.supply_pred_rates {
+	&.extended_rates {
 		background-color: #9ba0cb;
 	}
 }
@@ -102,5 +107,6 @@
 }
 
 .default_pie_chart_btn {
+	padding: 0;
 	margin: -10px auto 0;
 }

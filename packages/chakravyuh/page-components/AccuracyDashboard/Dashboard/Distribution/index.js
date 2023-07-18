@@ -81,7 +81,8 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 							themeType="linkUi"
 							className={styles.default_pie_chart_btn}
 							onClick={defaultView}
-							size="sm"
+							size="md"
+							id="pie-chart-back-btn"
 						>
 							Go Back
 						</Button>
