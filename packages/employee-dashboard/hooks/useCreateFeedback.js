@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 
 import { formattedDate } from '../utils/formattedDate';
 
-function useCreateFeedback(ratingCycle) {
+function useCreateFeedback({ ratingCycle, refetch, onHide }) {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
@@ -14,11 +14,11 @@ function useCreateFeedback(ratingCycle) {
 		url    : '/create_employee_feedback',
 	}, { manual: true });
 
-	const createFeedback = (values) => {
+	const createFeedback = async (values) => {
 		const splitRatingCycle = ratingCycle?.split('_');
 		const [firstDate, lastDate] = splitRatingCycle || [];
 		try {
-			trigger({
+			await trigger({
 				data: {
 					...values,
 					start_date        : formattedDate(firstDate),
@@ -28,6 +28,9 @@ function useCreateFeedback(ratingCycle) {
 					employee_user_id  : userId,
 				},
 			});
+			Toast.success('Self Rating form submitted Successfully');
+			refetch();
+			onHide();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

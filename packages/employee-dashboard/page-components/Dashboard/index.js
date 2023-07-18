@@ -8,9 +8,9 @@ import EmployeePerformance from './EmployeePerformance';
 import styles from './styles.module.css';
 
 function EmployeeDashboard() {
-	const [ratingCycle, setRatingCycle] = useState('21-June-2023_20-July-2023');
-	const { data, loading } = useGetEmployeeDetails(ratingCycle);
-	const { ratingOptions } = useGetRatingCycle(setRatingCycle);
+	const [ratingCycle, setRatingCycle] = useState('');
+	const { ratingOptions, loading : ratingLoading } = useGetRatingCycle(setRatingCycle);
+	const { data, loading, refetch, openRatingForm, setOpenRatingForm } = useGetEmployeeDetails(ratingCycle);
 
 	const { employee_basic_details } = data || {};
 
@@ -30,6 +30,10 @@ function EmployeeDashboard() {
 						setRatingCycle={setRatingCycle}
 						ratingOptions={ratingOptions}
 						loading={loading}
+						ratingLoading={ratingLoading}
+						refetch={refetch}
+						openRatingForm={openRatingForm}
+						setOpenRatingForm={setOpenRatingForm}
 					/>
 				</div>
 			</div>

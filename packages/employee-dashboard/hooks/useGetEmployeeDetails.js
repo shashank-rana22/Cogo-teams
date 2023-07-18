@@ -2,22 +2,24 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { formattedDate } from '../utils/formattedDate';
 
 function useGetEmployeeDetails(ratingCycle) {
 	const { user } = useSelector((state) => state?.profile);
+	const [openRatingForm, setOpenRatingForm] = useState(false);
 	const { id: userId } = user || {};
 
 	const [{ loading, data = {} }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_employee_dashboard_details',
-	}, { manual: false });
+	}, { manual: true });
 
 	const getEmployeeDetails = useCallback(() => {
 		const splitRatingCycle = ratingCycle?.split('_');
 		const [firstDate, lastDate] = splitRatingCycle || [];
+
 		try {
 			trigger({
 				params: {
@@ -32,14 +34,26 @@ function useGetEmployeeDetails(ratingCycle) {
 	}, [ratingCycle, trigger, userId]);
 
 	useEffect(() => {
-		if (ratingCycle) {
+		if (ratingCycle !== '') {
 			getEmployeeDetails();
 		}
 	}, [getEmployeeDetails, ratingCycle]);
 
+	useEffect(() => {
+		if (data) {
+			const { is_rating_published, current_month_feedback_given } = data || {};
+			if (is_rating_published && !current_month_feedback_given) {
+				setOpenRatingForm(true);
+			}
+		}
+	}, [data]);
+
 	return {
 		loading,
 		data,
+		refetch: () => {},
+		openRatingForm,
+		setOpenRatingForm,
 	};
 }
 
