@@ -63,6 +63,8 @@ function OrgUsersList({
 						userName,
 						whatsapp_number_eformat,
 						email,
+						countryCode,
+						mobile_no,
 					} = eachUser || {};
 
 					if (loading) {
@@ -83,10 +85,12 @@ function OrgUsersList({
 									data: {
 										organization_id,
 										user_id,
-										userName,
-										mobile_no    : whatsapp_number_eformat,
+										user_name    : userName,
+										whatsapp_number_eformat,
 										email,
 										channel_type : 'whatsapp',
+										countryCode,
+										mobile_no,
 									},
 								});
 							}}

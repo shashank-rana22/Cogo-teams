@@ -1,5 +1,5 @@
 import { Toast, Modal } from '@cogoport/components';
-import React, { useState, useEffect	} from 'react';
+import React, { useState	} from 'react';
 
 import Templates from '../../../../common/Templates';
 import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 
 const COUNTRY_CODE_INDEX = 1;
 
+const PREFILL_CALL_DATA = ['voice_call_component', 'new_user_outbound'];
+
 function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
@@ -15,11 +17,12 @@ function NewWhatsappMessage({
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
-	const [dialNumber, setDialNumber] = useState({
+	const { type = '', data:modalData = {}, userName = '' } = modalType || {};
+
+	const [dialNumber, setDialNumber] = useState(PREFILL_CALL_DATA.includes(type) ? modalData : {
 		number       : '',
 		country_code : '+91',
 	});
-	const { type = '', data:modalData = {} } = modalType || {};
 
 	const closeModal = () => {
 		setModalType({ type: null, data: {} });
@@ -28,12 +31,6 @@ function NewWhatsappMessage({
 			country_code : '+91',
 		});
 	};
-
-	useEffect(() => {
-		if (type === 'voice_call_component') {
-			setDialNumber(modalData);
-		}
-	}, [modalData, type]);
 
 	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
@@ -86,6 +83,7 @@ function NewWhatsappMessage({
 				setDialNumber={setDialNumber}
 				dialNumber={dialNumber}
 				key={type}
+				userName={userName}
 			/>
 		</Modal>
 	);

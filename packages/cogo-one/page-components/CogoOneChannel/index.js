@@ -147,6 +147,7 @@ function CogoOne() {
 									mailProps={mailProps}
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
+									setModalType={setModalType}
 								/>
 							</div>
 

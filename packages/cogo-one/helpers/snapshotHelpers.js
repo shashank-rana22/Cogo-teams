@@ -235,21 +235,23 @@ export function mountActiveRoomSnapShot({
 }) {
 	const snapshotRef = activeRoomSnapshotListener;
 
-	setActiveRoomLoading(true);
 	snapshotCleaner({ ref: activeRoomSnapshotListener });
 
-	if (activeCardId) {
-		const activeMessageDoc = doc(
-			firestore,
-			`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
-		);
-
-		snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
-			setActiveTab((prev) => ({
-				...prev,
-				data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
-			}));
-		});
+	if (!activeCardId) {
+		return;
 	}
-	setActiveRoomLoading(false);
+
+	setActiveRoomLoading(true);
+	const activeMessageDoc = doc(
+		firestore,
+		`${FIRESTORE_PATH[activeChannelType]}/${activeCardId}`,
+	);
+
+	snapshotRef.current = onSnapshot(activeMessageDoc, (activeMessageData) => {
+		setActiveTab((prev) => ({
+			...prev,
+			data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
+		}));
+		setActiveRoomLoading(false);
+	});
 }

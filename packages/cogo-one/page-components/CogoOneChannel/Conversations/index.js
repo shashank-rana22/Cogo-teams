@@ -19,6 +19,7 @@ function Conversations({
 	mailProps = {},
 	setActiveTab = () => {},
 	suggestions = [],
+	setModalType = () => {},
 }) {
 	const componentPropsMapping = {
 		message: {
@@ -30,6 +31,7 @@ function Conversations({
 			setActiveRoomLoading,
 			setActiveTab,
 			suggestions,
+			setModalType,
 		},
 		voice: {
 			activeVoiceCard: activeTab?.data || {},

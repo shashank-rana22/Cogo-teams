@@ -98,6 +98,7 @@ function CommunicationModals({
 			</div>
 
 			<NewWhatsappMessage
+				key={modalType?.type}
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}

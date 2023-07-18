@@ -24,13 +24,15 @@ import styles from './styles.module.css';
 
 function Messages({
 	activeTab = {},
-	firestore,
+	firestore = {},
 	suggestions = [],
 	userId = '',
 	setRaiseTicketModal = () => {},
 	viewType = '',
 	setActiveRoomLoading = false,
 	setActiveTab = () => {},
+	newUserRoomLoading = false,
+	setModalType = () => {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
@@ -46,6 +48,8 @@ function Messages({
 
 	const formattedData = getActiveCardDetails(activeTab?.data) || {};
 
+	const { hasNoFireBaseRoom = false } = activeTab || {};
+
 	const closeModal = () => {
 		setOpenModal({ type: null, data: {} });
 	};
@@ -53,16 +57,11 @@ function Messages({
 	let activeChatCollection;
 
 	const {
-		id = '',
-		channel_type = '',
-		support_agent_id = '',
-		spectators_data = [],
-		session_type = '',
+		id = '', channel_type = '', support_agent_id = '', spectators_data = [], session_type = '',
 	} = formattedData || {};
 
 	const {
-		sendCommunicationTemplate,
-		loading: communicationLoading,
+		sendCommunicationTemplate, loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
 
 	const showBotMessages = session_type === 'bot';
@@ -76,6 +75,7 @@ function Messages({
 		formattedData,
 		canMessageOnBotSession,
 		viewType,
+		hasNoFireBaseRoom,
 	});
 
 	const filteredSpectators = (spectators_data || []).filter(
@@ -115,12 +115,9 @@ function Messages({
 	});
 
 	const {
-		getNextData = () => {},
-		lastPage,
-		firstLoadingMessages,
-		messagesData,
-		loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id, viewType });
+		getNextData = () => {}, lastPage, firstLoadingMessages,
+		messagesData, loadingPrevMessages,
+	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom });
 
 	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose           : closeModal,
@@ -207,6 +204,7 @@ function Messages({
 					firestore={firestore}
 					escalateToSupplyRm={escalateToSupplyRm}
 					supplierLoading={supplierLoading}
+					hasNoFireBaseRoom={hasNoFireBaseRoom}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -219,7 +217,7 @@ function Messages({
 						setDraftUploadedFiles={setDraftUploadedFiles}
 						sendChatMessage={changeSessionAndMessage('chat_message')}
 						getNextData={getNextData}
-						firstLoadingMessages={firstLoadingMessages}
+						firstLoadingMessages={firstLoadingMessages || newUserRoomLoading}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
 						activeMessageCard={activeTab?.data}
@@ -236,6 +234,9 @@ function Messages({
 						canMessageOnBotSession={canMessageOnBotSession}
 						changeSessionAndMessage={changeSessionAndMessage}
 						viewType={viewType}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+						setModalType={setModalType}
+						activeTab={activeTab}
 					/>
 				</div>
 			</div>
