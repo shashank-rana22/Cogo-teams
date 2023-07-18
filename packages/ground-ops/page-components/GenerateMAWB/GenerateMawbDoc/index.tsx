@@ -151,8 +151,9 @@ function GenerateMawb({
 				status          : 'generated',
 				document_number : activeCategory === 'hawb'
 					? formData?.document_number || activeHawb?.documentNo : awbNumber,
-				service_id   : serviceId,
-				service_type : 'air_freight_service',
+				service_id      : serviceId,
+				service_type    : 'air_freight_service',
+				handedOverForTd : false,
 			},
 			document_url: res || undefined,
 			file_name:
@@ -167,11 +168,12 @@ function GenerateMawb({
 					data         : {
 						document_number: activeCategory === 'hawb'
 							? formData?.document_number || activeHawb?.documentNo : awbNumber,
-						service_id   : serviceId,
-						service_type : 'air_freight_service',
+						service_id      : serviceId,
+						service_type    : 'air_freight_service',
 						...filteredData,
-						status       : 'generated',
-						bl_detail_id : blDetailId,
+						status          : 'generated',
+						bl_detail_id    : blDetailId,
+						handedOverForTd : false,
 					},
 				},
 			],
