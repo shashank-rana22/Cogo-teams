@@ -40,7 +40,7 @@ const VALID_ADVANCE_ATH_RANGE = 80;
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
-const DEFAULT_ZERO_VALUE = 0;
+const MIN_AMOUNT = 0;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -862,7 +862,7 @@ function ShipmentDetailsCard({
 													{' '}
 													<span>
 														{JSON.parse(advancedPaymentObj?.data)?.updated_advanced_amount
-														|| DEFAULT_ZERO_VALUE}
+														|| MIN_AMOUNT}
 													</span>
 												</div>
 											)}
