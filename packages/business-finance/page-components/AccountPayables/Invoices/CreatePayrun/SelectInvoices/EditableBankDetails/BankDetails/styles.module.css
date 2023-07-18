@@ -7,7 +7,7 @@
 }
 
 .font {
-	font-size: 10px;
+	font-size: var(--font-size-xs);
 	font-weight: 500;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .iconeye {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .pointer {
@@ -29,7 +29,7 @@
 }
 
 .eye {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .edit {

@@ -31,7 +31,7 @@ const useDeleteSelectedInvoice = ({ refetch = () => {}, itemData }) => {
 				performedByName : name,
 			};
 			await trigger({ data: payload });
-			Toast.error('Delete Sucessfully');
+			Toast.error('Deleted Successfully');
 			refetch();
 		} catch (err) {
 			toastApiError(err);

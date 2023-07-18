@@ -25,7 +25,7 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 						Currency
 					</div>
 					<div className={styles.currency}>
-						{(CURRENCY_DATA || []).map((item) => {
+						{(CURRENCY_DATA).map((item) => {
 							const { id: itemId, icon: Icon, text: itemText } = item || {};
 							return (
 								<div
@@ -74,7 +74,7 @@ function PayRunModal({ showPayrunModal, setShowPayrunModal, activeEntity }) {
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => setShowPayrunModal(false)}>Cancel</Button>
 					<div className={styles.button}>
-						<Button onClick={() => { getPayrunId(); }} disabled={loading}>
+						<Button onClick={getPayrunId} disabled={loading}>
 							Create
 						</Button>
 					</div>

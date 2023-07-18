@@ -13,7 +13,7 @@ function ViewSupplierModal({
 	suppliers,
 	viewSupplier,
 	showViewSupplier,
-	refetch = () => {},
+	refetch = () => { },
 	setApiData,
 	setFilters,
 }) {
@@ -33,13 +33,7 @@ function ViewSupplierModal({
 	const FUNCTIONS = {
 		renderCn: (itemData) => (
 			<Button
-				onClick={() => {
-					if (itemData?.organizationId === showId) {
-						setShowId(null);
-					} else {
-						setShowId(itemData?.organizationId);
-					}
-				}}
+				onClick={() => setShowId(itemData?.organizationId === showId ? null : itemData?.organizationId)}
 				disabled={isEmpty(itemData?.creditNotes)}
 			>
 				{itemData?.organizationId === showId ? 'View Less' : 'View CN'}

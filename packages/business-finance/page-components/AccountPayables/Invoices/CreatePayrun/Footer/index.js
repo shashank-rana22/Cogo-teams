@@ -23,10 +23,10 @@ function Footer({
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
 	const { totalValue = '', invoiceCount = '' } = apiData || {};
 	const { list: viewSelectedList = [] } = apiData || {};
-	const isChecked = (list || []).filter((item) => item.checked);
-	const hasError = !isEmpty((isChecked || []).filter((item) => item.hasError));
-	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
-	const buttonDisabled = isEmpty(isChecked) || loading || hasError;
+	const checkedList = (list || []).filter((item) => item.checked);
+	const hasError = !isEmpty((checkedList || []).filter((item) => item.hasError));
+	const totalInvoiceAmount = checkedList.reduce((acc, obj) => +acc + +obj.payableAmount, INITIAL_VALUE);
+	const buttonDisabled = isEmpty(checkedList) || loading || hasError;
 	const handleView = () => {
 		setViewSelectedInvoices(true);
 	};
@@ -54,7 +54,7 @@ function Footer({
 							SID :
 						</div>
 						<div>
-							{viewSelectedInvoices ? invoiceCount : isChecked.length}
+							{viewSelectedInvoices ? invoiceCount : checkedList?.length}
 						</div>
 					</div>
 				</div>

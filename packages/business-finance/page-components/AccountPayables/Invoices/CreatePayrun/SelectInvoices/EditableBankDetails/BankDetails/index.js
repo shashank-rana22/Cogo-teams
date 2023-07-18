@@ -55,6 +55,7 @@ function BankDetails({ itemData }) {
 					<div className={styles.bold}>{BankName}</div>
 					<div className={styles.flex}>
 						A/C No.
+						{' '}
 						{AccountNumber}
 					</div>
 

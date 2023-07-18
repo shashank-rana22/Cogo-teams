@@ -36,7 +36,7 @@ function SavePayRunModal({
 			'/business-finance/account-payables/payruns',
 		);
 		setSavePayrunModal(false);
-		Toast.success('Please wait while PayRun Saves...');
+		Toast.success('Please wait while Payrun Saves...');
 	};
 
 	return (

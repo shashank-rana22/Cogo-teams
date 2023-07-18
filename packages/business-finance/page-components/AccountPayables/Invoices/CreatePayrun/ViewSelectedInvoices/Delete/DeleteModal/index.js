@@ -27,7 +27,7 @@ function DeleteModal({ show, setShow, refetch, itemData }) {
 						<div className={styles.icon}>
 							Are you sure You want to delete this invoice (
 							{itemData?.invoiceNumber || ''}
-							)
+							) ?.
 						</div>
 					</div>
 				</Modal.Body>

@@ -10,7 +10,7 @@
 		}
 
 		.ui_select_input_control {
-			font-size: 12px !important;
+			font-size: var(--font-size-sm) !important;
 		}
 
 		.ui_select_options_container {
