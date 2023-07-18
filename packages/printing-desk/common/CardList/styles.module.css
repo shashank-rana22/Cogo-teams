@@ -20,11 +20,12 @@
 .pagination {
 	display: flex;
 	justify-content: flex-end;
+	margin: 8px;
 }
 
 .accordian_style {
 	position: relative;
-	bottom: 20px;
+	bottom: var(--length);
 	max-width: 60px;
 	max-height: 16px;
 	margin: auto;
