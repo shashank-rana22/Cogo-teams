@@ -12612,7 +12612,8 @@ const partner = {
 			api          : 'list_email_suggestions',
 			access_type  : 'private',
 			service_name : 'cogolens',
-		}, {
+		},
+		{
 			api          : 'get_omnichannel_agent_types',
 			access_type  : 'private',
 			service_name : 'communication',

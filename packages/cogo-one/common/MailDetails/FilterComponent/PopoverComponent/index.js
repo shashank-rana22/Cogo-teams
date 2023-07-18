@@ -14,7 +14,6 @@ function PopoverComponent({
 	setAppliedFilters = () => {},
 	setShowPopover = () => {},
 }) {
-	console.log('searchQuery:', searchQuery, !!searchQuery);
 	const {
 		control,
 		watch = () => {},
