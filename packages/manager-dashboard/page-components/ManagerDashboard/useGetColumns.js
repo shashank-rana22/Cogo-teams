@@ -54,7 +54,6 @@ const useGetColumns = ({
 				</div>
 			),
 		},
-
 		{
 			Header: (
 				<div className={styles.header_text}>
@@ -69,7 +68,6 @@ const useGetColumns = ({
 			),
 			id: 'system_rating',
 		},
-
 		{
 			Header   : <div className={styles.table_text}>Revised Rating</div>,
 			accessor : (item) => (
@@ -79,7 +77,6 @@ const useGetColumns = ({
 			),
 			id: 'revised_rating',
 		},
-
 		{
 			Header: (
 				<div className={styles.header_text}>
