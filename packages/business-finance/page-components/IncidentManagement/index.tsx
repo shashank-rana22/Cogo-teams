@@ -110,6 +110,7 @@ function IncidentManagement() {
 					{tabs.map(({ key = '', label = '' }) => (
 						<TabPanel
 							name={key}
+							key={key}
 							title={label}
 							badge={getStatsData(key)}
 						>

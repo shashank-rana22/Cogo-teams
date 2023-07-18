@@ -2,10 +2,13 @@ import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+const DEFAULT_LIST_LENGTH = 0;
+
 const useHandleSearchFilter = ({ setFilters }) => {
 	const router = useRouter();
 
 	const [showFilter, setShowFilter] = useState(false);
+	const [showRecordedSession, setShowRecordedSession] = useState(false);
 
 	const { control, handleSubmit, reset } = useForm();
 
@@ -13,7 +16,7 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		let filterApplied = false;
 
 		Object.keys(values).forEach((key) => {
-			if (values[key]?.length > 0) filterApplied = true;
+			if (values[key]?.length > DEFAULT_LIST_LENGTH) filterApplied = true;
 		});
 
 		if (!filterApplied) {
@@ -48,6 +51,8 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		onClickReset,
 		reset,
 		onClickCreate,
+		showRecordedSession,
+		setShowRecordedSession,
 	};
 };
 
