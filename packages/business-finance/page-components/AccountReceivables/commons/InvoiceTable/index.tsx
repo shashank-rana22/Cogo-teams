@@ -42,6 +42,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 		bulkIrnGenerate,
 		bulkIrnLoading,
 	} = useBulkIrnGenerate({
+		entityCode,
 		getOrganizationInvoices,
 		checkedRows,
 		setCheckedRows,
@@ -139,6 +140,7 @@ function InvoiceTable({ organizationId = '', entityCode = '', showName = false }
 
 			</div>
 			<FooterCard
+				entityCode={entityCode}
 				bulkIrnGenerate={bulkIrnGenerate}
 				bulkIrnLoading={bulkIrnLoading}
 				checkedRows={checkedRows}
