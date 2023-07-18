@@ -89,8 +89,7 @@ const injectValues = (
 		});
 	} else if (task.task === 'mark_vessel_departed') {
 		controls.forEach((control, index) => {
-			if (
-				task.state === 'containers_gated_in'
+			if (task.state === 'containers_gated_in'
 				&& control.name === 'containers_count'
 			) {
 				controls[index].value = containersCount;
@@ -99,6 +98,23 @@ const injectValues = (
 				controls[index].value = containerDetails.map((containerObj) => ({
 					container_number : containerObj.container_number,
 					id               : containerObj.id,
+				}));
+			}
+		});
+	} else if (
+		['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)) {
+		const doc_type = task.task === 'update_hbl_collection_status'
+			? 'draft_house_bill_of_lading' : 'draft_bill_of_lading';
+
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'bl_detail') {
+				const shipment_bl_details =	getApisData?.list_shipment_bl_details?.filter(
+					(i) => i?.bl_document_type === doc_type,
+				);
+
+				controls[index].value = shipment_bl_details?.map((bl_detail) => ({
+					id        : bl_detail?.id,
+					bl_number : bl_detail?.bl_number,
 				}));
 			}
 		});

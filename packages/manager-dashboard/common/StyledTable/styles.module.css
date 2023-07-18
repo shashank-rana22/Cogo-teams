@@ -11,17 +11,17 @@
 
 		.ui_table_head_cell {
 			padding: 10px;
-			background-color: #deebed;
 			font-weight: 700;
+			background-color: #deebed;
 		}
 
 		.ui_table_body_cell {
 			flex-wrap: wrap;
 			width: auto;
 			padding: 12px 8px;
+			font-size: 14px;
 			background: #fff;
 			background-color: #fff;
-			font-size: 14px;
 		}
 
 		.ui_table_body_row {

@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import HeaderName from '../../../../../common/HeaderName';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useTransferChat from '../../../../../hooks/useTransferChat';
 
 import Assignes from './Assignes';
@@ -26,21 +27,20 @@ function Header({
 	activeAgentName = '',
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
-	activeMessageCard,
+	activeMessageCard = {},
 	tagOptions = [],
 	support_agent_id = null,
 	showBotMessages = false,
 	userId = '',
-	isomniChannelAdmin = false,
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
 	viewType = '',
-	firestore,
-	escalateToSupplyRm,
-	supplierLoading,
+	firestore = {},
+	escalateToSupplyRm = () => {},
+	supplierLoading = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -69,13 +69,17 @@ function Header({
 		organization_id = '',
 		user_id,
 		account_type = '',
+		managers_ids = [],
+		id,
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
-				organization_user_id: user_id,
+				organization_user_id : user_id,
+				channel              : channel_type,
+				channel_chat_id      : id,
 			},
 		});
 	};
@@ -88,7 +92,8 @@ function Header({
 
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 
-	const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
+	const hasAccessToApprove = (support_agent_id === userId
+		|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.has_permission_to_edit);
 
 	const hasRequests = !!agent_id;
 
@@ -97,6 +102,7 @@ function Header({
 	const showApprovePanel = (hasRequests && hasAccessToApprove);
 
 	const isPartOfGroup = group_members?.includes(userId);
+	const isManager = managers_ids?.includes(userId);
 
 	return (
 		<div className={styles.outer_container}>
@@ -150,11 +156,12 @@ function Header({
 							isGroupFormed={isGroupFormed}
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
+							isManager={isManager}
 						/>
-						{isomniChannelAdmin && channel_type === 'whatsapp' && (
+
+						{channel_type === 'whatsapp' && (
 							<div
-								role="button"
-								tabIndex="0"
+								role="presentation"
 								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
 								onClick={handleUpdateUser}
 							>

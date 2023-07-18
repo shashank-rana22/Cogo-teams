@@ -135,9 +135,7 @@ export function TestSetButtons({
 									themeType="secondary"
 									className={styles.btn}
 									type="button"
-									onClick={() => {
-										setShowDuplicateModal(true);
-									}}
+									onClick={() => setShowDuplicateModal(true)}
 								>
 									<IcMCopy />
 									<div>Duplicate</div>
@@ -145,20 +143,32 @@ export function TestSetButtons({
 							) : null }
 
 							{current_status !== 'draft' ?	(
-								<Button
-									loading={loading}
-									themeType="secondary"
-									className={styles.btn}
-									type="button"
-									onClick={() => {
-										setShowExtendValidityModal(true);
-									}}
-								>
-									<IcMEdit />
-									<div>Extend Validity</div>
-								</Button>
+								<>
+									<Button
+										loading={loading}
+										themeType="secondary"
+										className={styles.btn}
+										type="button"
+										onClick={() => setShowExtendValidityModal(true)}
+									>
+										<IcMEdit />
+										<div>Extend Validity</div>
+									</Button>
+									<Button
+										loading={loading}
+										themeType="primary"
+										className={styles.btn}
+										type="button"
+										onClick={() => {
+											setShowModal(true);
+											setTestId(id);
+										}}
+									>
+										<IcMDelete />
+										<div>Delete</div>
+									</Button>
+								</>
 							) : null }
-
 						</div>
 					)}
 					trigger="click"

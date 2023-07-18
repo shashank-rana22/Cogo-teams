@@ -3,6 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const MIN_MARKS = 0;
+
 function MarksComponent({
 	view = '',
 	value,
@@ -23,30 +25,29 @@ function MarksComponent({
 					<div className={styles.wrapper}>
 
 						<div className={styles.text}>
-							Assign Marks
+							Assign Marks in the range 1 to 10
 							<sup className={styles.required_mark}>*</sup>
 						</div>
 
 						<div className={styles.input_container}>
 							<Input
 								name="asign_marks"
+								size="xs"
 								value={value}
 								onChange={(e) => { setValue(e); setError(''); }}
 								placeholder=" "
-								suffix={<span>/10</span>}
 							/>
-
-							<div className={styles.save_button}>
-								<Button
-									type="button"
-									size="sm"
-									themeType="tertiary"
-									disabled={loading}
-									onClick={handleOnSubmit}
-								>
-									<strong>Save</strong>
-								</Button>
-							</div>
+						</div>
+						<div className={styles.save_button}>
+							<Button
+								type="button"
+								size="sm"
+								themeType="primary"
+								disabled={loading}
+								onClick={handleOnSubmit}
+							>
+								<strong>Save</strong>
+							</Button>
 						</div>
 
 						<div className={styles.passing_marks}>Passing marks: 4</div>
@@ -59,7 +60,7 @@ function MarksComponent({
 			) : (
 				<div className={styles.marks_obtained_container}>
 					<div className={styles.text}>Marks Obtained</div>
-					<Pill size="lg" color="green"><strong>{`${assign_marks || 0}/10`}</strong></Pill>
+					<Pill size="lg" color="green"><strong>{`${assign_marks || MIN_MARKS}/10`}</strong></Pill>
 				</div>
 			)}
 		</div>

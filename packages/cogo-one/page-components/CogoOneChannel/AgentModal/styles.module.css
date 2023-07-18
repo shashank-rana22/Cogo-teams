@@ -12,6 +12,12 @@
 	height: 464px;
 }
 
+.search_switch_toggle_space {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .empty_state {
 	display: flex;
 	align-items: center;

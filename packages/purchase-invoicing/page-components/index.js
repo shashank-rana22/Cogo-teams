@@ -21,6 +21,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 						refetch={refetch}
 						servicesData={servicesData}
 						key={collectionParty.id}
+						fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
 					/>
 				))}
 		</div>

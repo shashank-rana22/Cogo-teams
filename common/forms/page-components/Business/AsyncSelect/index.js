@@ -36,12 +36,15 @@ import {
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 	asyncListEmployeeDetails,
@@ -49,6 +52,10 @@ import {
 	asyncListAllTribes,
 	asyncListAllChapters,
 	asyncListAllManagers,
+	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -103,12 +110,15 @@ const keyAsyncFieldsParamsMapping = {
 	allocation_rejection_type            : asyncAllocationRequestRejectionType,
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
 	faq_topics                           : asyncListFAQTopics,
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_employee_details                : asyncListEmployeeDetails,
@@ -116,6 +126,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_all_tribes                      : asyncListAllTribes,
 	list_all_chapters                    : asyncListAllChapters,
 	list_all_managers                    : asyncListAllManagers,
+	list_chat_agents                     : asyncFieldsListAgents,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {
@@ -139,6 +153,7 @@ function AsyncSelect(props) {
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
@@ -146,10 +161,6 @@ function AsyncSelect(props) {
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
 	});
-
-	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
-		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
-	}
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
