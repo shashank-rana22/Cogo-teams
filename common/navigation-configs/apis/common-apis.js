@@ -609,6 +609,11 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_ef_invoice_advice',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 };
 export default common_apis;
