@@ -22,6 +22,7 @@ function ViewBillingAddresses({
 	data = {},
 	setCurrentView = () => {},
 	setPaymentModes = () => {},
+	setActiveState = () => {},
 }) {
 	const [valuesState, setValuesState] = useState([]);
 	const [optionsDisabledState, setOptionsDisabledState] = useState({});
@@ -115,6 +116,7 @@ function ViewBillingAddresses({
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 					setCurrentView={setCurrentView}
 					setPaymentModes={setPaymentModes}
+					setActiveState={setActiveState}
 				/>
 			))}
 		</div>

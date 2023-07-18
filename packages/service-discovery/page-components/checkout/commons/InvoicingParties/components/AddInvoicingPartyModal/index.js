@@ -105,6 +105,8 @@ function AddInvoicingPartyModal({
 						onItemChange={(value) => {
 							setActiveComponentKey(value);
 							setSelectedAddress({});
+							setCurrentView('select_address');
+							setActiveState('view_billing_addresses');
 						}}
 					/>
 				</div>

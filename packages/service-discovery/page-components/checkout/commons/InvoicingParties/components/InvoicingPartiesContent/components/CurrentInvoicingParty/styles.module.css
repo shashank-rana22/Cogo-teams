@@ -28,6 +28,29 @@
 
 .flex {
 	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_pill_text {
+			font-weight: 600;
+		}
+	}
+
+	&.self {
+		:global {
+			.ui_pill_text {
+				color: #ee3425;
+			}
+		}
+	}
+
+	&.paying_party {
+		:global {
+			.ui_pill_text {
+				color: #7278ad;
+			}
+		}
+	}
 }
 
 .gst {

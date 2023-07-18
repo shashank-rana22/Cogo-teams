@@ -37,16 +37,22 @@ export const convertCurrencyValue = (
 		base_currency,
 		currencies,
 		currency_conversion_delta = 0.04,
+		cogofx_currencies = {},
 	} = conversions || {};
+
 	const fxFees = 1 + currency_conversion_delta;
+
 	if (fromCurrency === toCurrency) {
 		return value;
 	}
+
 	if (base_currency === fromCurrency) {
-		return (value / currencies[toCurrency]) * fxFees;
+		return (value / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 	}
+
 	const inBase = value * currencies[fromCurrency];
-	return (inBase / currencies[toCurrency]) * fxFees;
+
+	return (inBase / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 };
 
 export const displayTotalValue = (
@@ -65,7 +71,7 @@ export const displayTotalValue = (
 			(m) => m.margin_type === filterMarginType,
 		);
 		const editedMargin = editedMargins.find((em) => em.code === lineItem.code);
-		if (tempMargins?.length === 0) {
+		if (!tempMargins?.length) {
 			tempMargins.push({
 				type               : editedMargin?.type,
 				value              : 0,

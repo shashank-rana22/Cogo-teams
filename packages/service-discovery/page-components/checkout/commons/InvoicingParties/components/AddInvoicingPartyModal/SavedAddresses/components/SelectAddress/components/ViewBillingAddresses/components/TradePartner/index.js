@@ -11,11 +11,11 @@ function TradePartner({
 	value = [],
 	organization = {},
 	optionsDisabled = {},
-	setActiveState = () => {},
 	setInvoiceToTradePartyDetails = () => {},
 	setCurrentView = () => {},
 	setSelectedAddress = () => {},
 	setPaymentModes = () => {},
+	setActiveState = () => {},
 }) {
 	const {
 		id: tradePartyId,
@@ -179,6 +179,7 @@ function TradePartner({
 				<Button
 					onClick={() => {
 						setActiveState('create_billing_address');
+
 						setInvoiceToTradePartyDetails((previousDetails) => ({
 							...previousDetails,
 							tradePartyId,

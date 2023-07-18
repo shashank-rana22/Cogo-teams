@@ -1,9 +1,9 @@
-import { Button, cl, Select } from '@cogoport/components';
+import { Button, cl, Chips } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle, IcCFtick } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
 import { CheckoutContext } from '../../../../../../../context';
-import currencies from '../../../../../../../helpers/currencies';
 import useCreateCheckoutInvoice from '../../../../../hooks/useCreateCheckoutInvoice';
 import useGetPaymentModes from '../../../../../hooks/useGetPaymentModes';
 import PaymentModes from '../../../../InvoicingPartiesContent/components/CurrentInvoicingParty/PaymentModes';
@@ -18,6 +18,19 @@ const IconMapping = {
 	false : IcMPlusInCircle,
 };
 
+const CURRENCY_OPTIONS = [
+	GLOBAL_CONSTANTS.currency_code.USD,
+	GLOBAL_CONSTANTS.currency_code.INR,
+	GLOBAL_CONSTANTS.currency_code.VND,
+].map((currencyCode) => ({
+	key      : currencyCode,
+	disabled : false,
+	children : currencyCode,
+	prefix   : GLOBAL_CONSTANTS.currency_symbol[currencyCode],
+	suffix   : null,
+	tooltip  : false,
+}));
+
 function SelectServices({
 	selectedAddress = {},
 	setCurrentView = () => {},
@@ -29,7 +42,7 @@ function SelectServices({
 	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
 }) {
-	const { detail = {}, checkout_id = '' } = useContext(CheckoutContext);
+	const { detail = {}, checkout_id = '', conversions = {} } = useContext(CheckoutContext);
 
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
 		invoicingParties: [selectedAddress],
@@ -114,21 +127,18 @@ function SelectServices({
 
 	const { services = [] } = selectedAddress;
 
-	console.log('selectedAddress', selectedAddress);
-
 	const currSelectedServiceIds = services.map((item) => item.service_id);
 
 	return (
 		<div key={loading} className={styles.container}>
-			<div className={styles.heading}>SELECT SERVICES</div>
-
 			<div className={styles.currency}>
 				<div className={styles.label}>Select Currency</div>
 
-				<Select
-					value={selectedAddress.invoice_currency}
-					options={currencies}
-					onChange={(val) => {
+				<Chips
+					size="md"
+					items={CURRENCY_OPTIONS}
+					selectedItems={selectedAddress.invoice_currency}
+					onItemChange={(val) => {
 						setSelectedAddress((prev) => ({ ...prev, invoice_currency: val }));
 					}}
 				/>
@@ -138,7 +148,7 @@ function SelectServices({
 				Please select all the services that you would want to invoice to this trade partner -
 			</div>
 
-			<div className={`${styles.label} ${styles.light}`}>
+			<div className={cl`${styles.label} ${styles.light}`}>
 				We have automatically split the invoices basis incoterm, you can modify it.
 			</div>
 
@@ -184,6 +194,8 @@ function SelectServices({
 							<ServiceInfo
 								rateObject={rateObject}
 								serviceDetail={serviceDetail}
+								conversions={conversions}
+								currency={selectedAddress.invoice_currency}
 							/>
 
 							<IconToShow width={20} height={20} className={styles.icon} />

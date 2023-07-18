@@ -8,10 +8,6 @@
 	border-radius: 6px;
 }
 
-.heading {
-	font-weight: 600;
-}
-
 .footer {
 	position: fixed;
 	bottom: 0;
@@ -28,15 +24,20 @@
 
 .service_container {
 	position: relative;
-	min-width: 240px;
+	flex-basis: 31%;
 	height: 140px;
 	padding: 14px;
 	margin-top: 20px;
 	margin-right: 20px;
 	cursor: pointer;
 	background-color: #fff;
-	border: 1px solid #e2fbfe;
+	border: 1px solid #cfeaed;
 	border-radius: 8px;
+
+	&:hover {
+		background-color: #f3fafa;
+		transform: scale(1.04);
+	}
 
 	&.inactive {
 		svg {
@@ -45,7 +46,7 @@
 	}
 
 	&.active {
-		background-color: #f3fafa;
+		background-color: #cfeaed;
 	}
 
 	.icon {
@@ -74,12 +75,53 @@
 .currency {
 	display: flex;
 	flex-direction: column;
-	max-width: 200px;
-	margin: 20px 0;
+	margin-bottom: 32px;
+
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_chip_container svg {
+			display: none;
+		}
+
+		.ui_chip_container.ui_ps_themeType_primary {
+			padding: 16px 8px;
+			background-color: #fff;
+			border: 1px solid #ececec;
+			border-radius: 28px;
+
+			&:hover {
+				background-color: #f3fafa;
+				border: 1px solid #ececec;
+			}
+		}
+
+		.ui_chip_container.ui_ps_themeType_secondary {
+			padding: 16px 8px;
+			font-weight: 600;
+			background-color: #cfeaed;
+			border: 1px solid #ececec;
+			border-radius: 28px;
+
+			&:hover {
+				background-color: #acdadf;
+				border: 1px solid #ececec;
+			}
+		}
+
+		.ui_pill_container {
+			margin: unset;
+			margin-left: 8px;
+			cursor: pointer;
+			border-radius: 24px;
+		}
+	}
 }
 
 .label {
-	margin-bottom: 4px;
+	margin-bottom: 6px;
 	font-size: 12px;
 	font-weight: 600;
 

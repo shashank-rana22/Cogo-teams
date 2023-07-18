@@ -3,6 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
+import { convertCurrencyValue } from '../../../../../../../../helpers/dynamic-values';
 // eslint-disable-next-line max-len
 import ShippingLineDetails from '../../../../../../../../page-components/FclCheckout/components/PreviewBooking/components/BookingPreview/BookingDetails/ShippingLineDetails';
 import ServiceIcon from '../../../../../../commons/ServiceIcon';
@@ -27,7 +28,7 @@ const formatSavedServicesInvoiceTo = ({ service = {} }) => {
 	return startCase(serviceName);
 };
 
-function AmountDisplay({ rateObject = {} }) {
+function AmountDisplay({ rateObject = {}, conversions = {}, currency = '' }) {
 	const {
 		source = '',
 		tax_total_price_discounted = 0,
@@ -38,15 +39,22 @@ function AmountDisplay({ rateObject = {} }) {
 		return <div>Billed at actuals</div>;
 	}
 
+	const finalAmount = convertCurrencyValue(
+		tax_total_price_discounted,
+		tax_total_price_currency,
+		currency,
+		conversions,
+	);
+
 	return (
 		<div className={styles.flex}>
 			<div>Basic Freight :</div>
 
 			<div className={styles.bold}>
 				{formatAmount({
-					amount   : tax_total_price_discounted,
-					currency : tax_total_price_currency,
-					options  : {
+					amount  : finalAmount,
+					currency,
+					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
 						maximumFractionDigits : 0,
@@ -58,7 +66,7 @@ function AmountDisplay({ rateObject = {} }) {
 	);
 }
 
-function ServiceInfo({ serviceDetail = {}, rateObject = {} }) {
+function ServiceInfo({ serviceDetail = {}, rateObject = {}, conversions = {}, currency = '' }) {
 	const {
 		service_type = '',
 		shipping_line = '',
@@ -105,7 +113,11 @@ function ServiceInfo({ serviceDetail = {}, rateObject = {} }) {
 					</div>
 				</div>
 
-				<AmountDisplay rateObject={rateObject} />
+				<AmountDisplay
+					rateObject={rateObject}
+					conversions={conversions}
+					currency={currency}
+				/>
 			</div>
 		);
 	}
@@ -118,7 +130,11 @@ function ServiceInfo({ serviceDetail = {}, rateObject = {} }) {
 				{formatSavedServicesInvoiceTo({ service: serviceDetail })}
 			</div>
 
-			<AmountDisplay rateObject={rateObject} />
+			<AmountDisplay
+				rateObject={rateObject}
+				conversions={conversions}
+				currency={currency}
+			/>
 		</div>
 	);
 }

@@ -1,3 +1,4 @@
+import { Pill, cl } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
@@ -12,6 +13,19 @@ import styles from './styles.module.css';
 const ICON_MAPPING = {
 	true  : IcMCrossInCircle,
 	false : IcMEdit,
+};
+
+const TRADE_PARTY_TYPE_MAPPING = {
+	self: {
+		color : '#fff8f5',
+		label : 'SELF',
+		style : { border: '1px solid  #FFD9D6', color: '#ee3425', marginLeft: '8px' },
+	},
+	paying_party: {
+		color : '#ced1ed',
+		label : 'TRADE PARTNER',
+		style : { border: '1px solid  #888FD1', color: '#7278ad', marginLeft: '8px' },
+	},
 };
 
 function CurrentInvoicingParty({
@@ -39,6 +53,8 @@ function CurrentInvoicingParty({
 
 	const IconToShow = ICON_MAPPING[editInvoice[id]];
 
+	const tradePartyObj = TRADE_PARTY_TYPE_MAPPING[trade_party_type] || TRADE_PARTY_TYPE_MAPPING.self;
+
 	return (
 		<div
 			className={styles.container}
@@ -47,8 +63,15 @@ function CurrentInvoicingParty({
 			<div className={styles.invoice_content}>
 				<div className={styles.left_content}>
 					<div className={styles.text}>Invoice to:</div>
-					<div className={styles.flex}>
+					<div className={cl`${styles.flex} ${styles[trade_party_type]}`}>
 						<div className={styles.org_name}>{startCase(business_name)}</div>
+
+						<Pill
+							{...tradePartyObj}
+							size="md"
+						>
+							{tradePartyObj.label}
+						</Pill>
 					</div>
 
 					<div className={styles.text} style={{ marginTop: '12px' }}>
