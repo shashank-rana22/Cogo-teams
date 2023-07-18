@@ -12594,12 +12594,12 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
-			api          : 'send_shipment_document_notification',
+			api          : 'send_users_bulk_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
 		{
-			api          : 'send_users_bulk_communication',
+			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
