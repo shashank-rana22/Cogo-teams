@@ -1,10 +1,13 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import styles from './styles.module.css';
 
 function ListInvoicePart({ item = {} }) {
 	const {
 		uploaded_invoice_count = '',
-		live_invoice_inr_value = '',
-		net_total_inr_value = '',
+		live_invoice_value = '',
+		net_total_value = '',
+		currency = '',
 	} = item;
 
 	return (
@@ -18,12 +21,32 @@ function ListInvoicePart({ item = {} }) {
 				<div className={styles.agent_name}>
 					Live Invoice Value :
 					{' '}
-					<span>{live_invoice_inr_value}</span>
+					<span className={styles.live_invoice_value}>
+						{formatAmount({
+							amount  : live_invoice_value,
+							currency,
+							options : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</span>
 				</div>
 				<div className={styles.agent_name}>
 					Estimated Buy :
 					{' '}
-					<span>{net_total_inr_value}</span>
+					<span className={styles.live_invoice_value}>
+						{formatAmount({
+							amount  : net_total_value,
+							currency,
+							options : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</span>
 				</div>
 			</div>
 			<div className={styles.line} />
