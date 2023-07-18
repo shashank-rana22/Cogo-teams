@@ -7,24 +7,29 @@ import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data, Card, couldBeCardsCritical = false }) {
-	const { filters, setFilters, tabState: { activeTab } = {} } = useContext(BookingDeskContext) || {};
-	const { list = [], total } = data || {};
+function RenderPagination(props) {
+	const { total = 0, filters = {}, setFilters = () => {} } = props;
 
-	const renderPagination = (
+	return (
 		<Pagination
 			type="table"
 			totalItems={total}
 			pageSize={10}
 			currentPage={filters.page}
 			onPageChange={(val) => setFilters({ ...filters, page: val })}
+			className={styles.pagination}
 		/>
 	);
+}
+
+export default function List({ data, Card, couldBeCardsCritical = false }) {
+	const { filters, setFilters, tabState: { activeTab } = {} } = useContext(BookingDeskContext) || {};
+	const { list = [], total } = data || {};
 
 	return (
 		isEmpty(list) ? <EmptyState /> : (
 			<>
-				{renderPagination}
+				<RenderPagination total={total} filters={filters} setFilters={setFilters} />
 
 				<div className={styles.list_container}>
 					{list.map((item) => (
@@ -40,7 +45,7 @@ export default function List({ data, Card, couldBeCardsCritical = false }) {
 
 				</div>
 
-				{renderPagination}
+				<RenderPagination total={total} filters={filters} setFilters={setFilters} />
 			</>
 		)
 	);

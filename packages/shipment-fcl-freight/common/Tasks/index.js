@@ -1,7 +1,8 @@
 import { Button, Loader } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../EmptyState';
 
 import Card from './Card';
 import Header from './Header';
@@ -30,8 +31,8 @@ function List() {
 	if (loading) {
 		return (
 			<div className={styles.loading_container}>
-				Loading Tasks....
 				<Loader themeType="primary" className={styles.loader_icon} />
+				Loading Tasks....
 			</div>
 		);
 	}
@@ -48,7 +49,7 @@ function List() {
 			/>
 
 			{isEmpty(tasksList)
-				? <EmptyState width={500} height={300} />
+				? <EmptyState title="No Tasks Found" subtitle="Looks like you have no remaining tasks" />
 				: (
 					<>
 
