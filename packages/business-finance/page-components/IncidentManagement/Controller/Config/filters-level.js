@@ -39,6 +39,14 @@ const controls = [
 				value : 'PAYMENT_CONFIRMATION_APPROVAL',
 				label : 'Payment Confirmation Approval',
 			},
+			{
+				value : 'RECURRING_EXPENSE_APPROVAL',
+				label : 'Recurring Expense Approval',
+			},
+			{
+				value : 'OVERHEAD_APPROVAL',
+				label : 'NON Recurring Expense Approval',
+			},
 		],
 		rules: { required: 'Incident Type is required' },
 	},
