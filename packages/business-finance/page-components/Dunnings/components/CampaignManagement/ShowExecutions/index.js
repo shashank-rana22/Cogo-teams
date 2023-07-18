@@ -38,14 +38,14 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 					const dateText = list?.[elementPosition]
 						?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
 					const timeText = `${scheduleTime} ${scheduleTimeZone}`;
-					const weekDay = `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` || '';
+					const weekDay = week ? `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` : '';
 
 					return (
 						<div
 							key={list?.[elementPosition]?.id || position}
 							style={{
 								borderBottom: elementPosition === selectedExecution
-									? '4px solid red' : '1px solid #a8a8a8',
+									? '4px solid #ee3425' : '1px solid #a8a8a8',
 							}}
 							className={styles.execution_tabs}
 						>
@@ -54,7 +54,7 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 									<button
 										onClick={() => setSelectedExecution(elementPosition)}
 										style={{
-											color: elementPosition === selectedExecution ? 'red' : null,
+											color: elementPosition === selectedExecution ? '#ee3425' : null,
 										}}
 										className={styles.tabs_btn}
 										disabled={status !== 'COMPLETED'}

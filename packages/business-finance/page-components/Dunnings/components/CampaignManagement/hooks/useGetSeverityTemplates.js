@@ -9,7 +9,7 @@ const useGetSeverityTemplates = () => {
 		{
 			url     : '/payments/dunning/severity-level-templates',
 			method  : 'get',
-			authKey : 'payments_dunning_severity_level_templates',
+			authKey : 'get_payments_dunning_severity_level_templates',
 		},
 		{ manual: true },
 	);

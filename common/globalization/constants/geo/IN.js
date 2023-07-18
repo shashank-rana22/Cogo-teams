@@ -550,11 +550,6 @@ export default {
 				},
 			},
 		},
-		dunnings: {
-			campaign_management: {
-				eligible_entites: ['101', '301', '501'],
-			},
-		},
 	},
 	others: {
 		registration_number: {

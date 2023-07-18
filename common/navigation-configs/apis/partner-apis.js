@@ -12962,7 +12962,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'payments_dunning_severity_level_templates',
+			api         : 'get_payments_dunning_severity_level_templates',
 			access_type : 'private',
 		},
 		{

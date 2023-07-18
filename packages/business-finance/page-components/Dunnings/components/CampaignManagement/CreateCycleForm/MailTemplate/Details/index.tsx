@@ -1,6 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const SPLICE_FROM = 2;
+const SEVERITY_MAIL_POSITION = 1;
 
 interface Props {
 	text?: string;
@@ -15,12 +19,12 @@ function Details({
 	isBody = false,
 	bodyData = [],
 	severityData = {},
-	severityLevel,
+	severityLevel = '',
 }:Props) {
 	const combinedData = [...bodyData];
 
-	if (combinedData?.[1] === '{{severity_mail}}') {
-		combinedData?.splice(2, 0, severityData[severityLevel]);
+	if (combinedData?.[SEVERITY_MAIL_POSITION] === '{{severity_mail}}') {
+		combinedData?.splice(SPLICE_FROM, GLOBAL_CONSTANTS.zeroth_index, severityData[severityLevel]);
 	}
 
 	if (!isBody) {

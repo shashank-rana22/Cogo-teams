@@ -1,4 +1,3 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -7,13 +6,11 @@ import { SERVICE_OPTIONS } from '../../constants/index.ts';
 import styles from './styles.module.css';
 
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
-	const geo = getGeoConstants();
-	const ELIGIBLE_ENTITIES = geo.navigations.dunnings.campaign_management.eligible_entites;
 	const { totalDueOutstanding } = formData || {};
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => {
-		const isEligible = ELIGIBLE_ENTITIES?.includes(entity);
+		const isEligible = entityData[entity].feature_supported.includes('dunning');
 		return ({
 			label    : `${entity} (${entityData[entity].currency})`,
 			name     : String(entity),
