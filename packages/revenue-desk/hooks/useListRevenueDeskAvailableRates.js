@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-import incoTermMapping from '../helper/incoTermMapping';
+import incoTermMapping from '../helpers/incoTermMapping';
 import { DEFAULT_INDEX } from '../page-components/constants';
 
 const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isPreferenceSet } = {}) => {
@@ -16,7 +16,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 
 	const packages = singleServiceData?.packages?.[DEFAULT_INDEX];
 
-	const ListRevenueAvailableRates = useCallback(async () => {
+	const listRevenueAvailableRates = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -43,9 +43,10 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 						destination_main_port_id : shipmentData?.destination_main_port_id || undefined,
 						origin_main_port_id      : shipmentData?.origin_main_port_id || undefined,
 						service_id               : singleServiceData?.id,
+						truck_type               : singleServiceData?.truck_type,
 					},
 					shipment_id        : singleServiceData?.shipment_id,
-					service_type       : singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
+					service_type       : singleServiceData?.service_type,
 					preferred_currency : 'USD',
 					refresh_rates      : !isPreferenceSet && !['cancelled', 'completed']
 						.includes(shipmentData.state),
@@ -57,9 +58,9 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData, isP
 	}, [singleServiceData, isPreferenceSet, shipmentData, trigger, user_profile, packages]);
 	useEffect(() => {
 		if (singleServiceData) {
-			ListRevenueAvailableRates();
+			listRevenueAvailableRates();
 		}
-	}, [singleServiceData, ListRevenueAvailableRates]);
+	}, [singleServiceData, listRevenueAvailableRates]);
 	return {
 		loading,
 		data,

@@ -1,57 +1,80 @@
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import { folderOptions } from '../constants/MAIL_CONSTANT';
+import { MAIL_FOLDER_OPTIONS } from '../constants/mailConstants';
 
-function useListMail({ activeSelect, senderMail }) {
+const PAGE_LIMIT = 10;
+const NEXT_PAGE_COUNT = 1;
+const DEFAULT_NO_OF_MAILS = 0;
+const DEFAULT_PAGE_NUMBER = 1;
+const MIN_HEIGHT_FOR_API_CALL = 50;
+
+const getParams = ({ activeMailAddress = '', activeSelect = '', page = '' }) => ({
+	page,
+	email_address : activeMailAddress,
+	page_limit    : PAGE_LIMIT,
+	foldername    : MAIL_FOLDER_OPTIONS[activeSelect],
+});
+
+function useListMail({
+	activeSelect = '',
+	activeMailAddress = '',
+}) {
 	const [listData, setListData] = useState({ value: [], isLastPage: false });
+	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
 
-	const [pagination, setPagination] = useState(1);
-	const PAGE_LIMIT = 10;
 	const [{ loading }, trigger] = useLensRequest({
 		url    : '/list_mails',
 		method : 'get',
 	}, { manual: true });
 
-	const getEmails = useCallback(async () => {
+	const getEmails = useCallback(async ({ page }) => {
 		try {
 			const res = await trigger({
-				params: {
-					email_address : senderMail,
-					foldername    : folderOptions[activeSelect],
-					page          : pagination,
-					page_limit    : PAGE_LIMIT,
-				},
+				params: getParams({ activeMailAddress, activeSelect, page }),
 			});
+
+			setPagination(page);
 
 			if (res.data) {
 				const { value = [] } = res.data || {};
-				const isLastPage = (value.length || 0) < PAGE_LIMIT;
-				setListData((p) => ({ value: [...(p.value || []), ...(value || [])], isLastPage }));
+				const isLastPage = (value.length || DEFAULT_NO_OF_MAILS) < PAGE_LIMIT;
+
+				setListData((prev) => ({
+					value: [...(prev?.value || []), ...(value || [])],
+					isLastPage,
+				}));
 			}
 		} catch (err) {
-			// console.log(err);
+			console.error(err);
 		}
-	}, [activeSelect, trigger, pagination, senderMail]);
+	}, [activeSelect, trigger, activeMailAddress]);
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollTop + clientHeight + 50 >= scrollHeight;
+	const handleScroll = (e) => {
+		const { clientHeight, scrollTop, scrollHeight } = e.target;
+
+		const reachBottom = scrollTop + clientHeight + MIN_HEIGHT_FOR_API_CALL >= scrollHeight;
+
 		if (reachBottom && !loading && !listData?.isLastPage) {
-			setPagination((p) => p + 1);
+			getEmails({ page: pagination + NEXT_PAGE_COUNT });
 		}
 	};
 
-	useEffect(() => {
-		getEmails();
+	const handleRefresh = useCallback(() => {
+		setListData({ value: [], isLastPage: false });
+		getEmails({ page: DEFAULT_PAGE_NUMBER });
 	}, [getEmails]);
+
+	useEffect(() => {
+		handleRefresh();
+	}, [handleRefresh]);
 
 	return {
 		listData,
 		handleScroll,
 		loading,
-		getEmails,
-		setPagination,
-		setListData,
+		handleRefresh,
+		pagination,
 	};
 }
 

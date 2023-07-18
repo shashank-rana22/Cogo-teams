@@ -1,7 +1,7 @@
 import { RadioGroup, Chips, SingleDateRange, Tags } from '@cogoport/components';
 
-import { statusOptions, tradeOptions, shipmentSourceOptions, rdStatusOptions } from '../../helper/filterOptionMapping';
-import getFiltersTagsArray from '../../helper/getFiltersTagsArray';
+import { statusOptions, tradeOptions, shipmentSourceOptions, rdStatusOptions } from '../../helpers/filterOptionMapping';
+import getFiltersTagsArray from '../../helpers/getFiltersTagsArray';
 import { VALUE_TWO, VALUE_ZERO } from '../constants';
 
 import FilterLocation from './FilterLocation';

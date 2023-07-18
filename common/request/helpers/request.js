@@ -7,7 +7,7 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate'];
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -72,9 +72,6 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 
-	// if (serviceName === 'bookings') {
-	// 	newConfig.baseURL = 'http://10.10.13.226:5002/';
-	// }
 	return {
 		...newConfig,
 		headers: {

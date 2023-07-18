@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
 import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
-import useGetAsyncTicketOptions from '../../../hooks/useGetAsyncTicketOptions';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -37,6 +36,7 @@ import {
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
@@ -48,6 +48,9 @@ import {
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
 	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -102,6 +105,7 @@ const keyAsyncFieldsParamsMapping = {
 	allocation_rejection_type            : asyncAllocationRequestRejectionType,
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
 	faq_topics                           : asyncListFAQTopics,
@@ -113,10 +117,9 @@ const keyAsyncFieldsParamsMapping = {
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_chat_agents                     : asyncFieldsListAgents,
-};
-
-const MICRO_SERVICE_HOOKS_MAPPING = {
-	tickets: useGetAsyncTicketOptions,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {
@@ -129,22 +132,18 @@ function AsyncSelect(props) {
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
-		service,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const mircoService = (microService || defaultParams.microService);
-	const microservicHook = mircoService ? MICRO_SERVICE_HOOKS_MAPPING[microService]
-	|| useGetAsyncOptionsMicroservice : null;
-
-	const microServiceAsyncOptionsHook = microService
-		? microservicHook
+	const asyncOptionsHook = (microService || defaultParams.microService)
+		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
 
-	const getAsyncOptionsProps = microServiceAsyncOptionsHook({
+	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
@@ -152,10 +151,6 @@ function AsyncSelect(props) {
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
 	});
-
-	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
-		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
-	}
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;

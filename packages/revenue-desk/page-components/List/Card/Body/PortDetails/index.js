@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
-import getLocations from '../../../../../helper/locations-shipment';
+import getLocations from '../../../../../helpers/locations-shipment';
 
 import styles from './styles.module.css';
 

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
+import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
@@ -14,16 +14,34 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
+const HTTP_SUCCESS_CODE = 200;
+
 const useGetStep3Data = ({
-	servicesList = [], shipment_data, onCancel, task,
+	servicesList = [],
+	shipment_data = {},
+	onCancel = () => {},
+	task = {},
 	taskListRefetch = () => {},
+	formattedRate = {},
 }) => {
-	const SUCCESS_CODE = 200;
+	let notMainService = false;
 	const SERVICE_IDS = [];
+	let trade_type;
+
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service')
-		) {
+		if ((serviceObj.service_type === 'fcl_freight_service'
+			|| serviceObj.service_type === 'fcl_freight_local_service')
+			&& task.service_type === 'fcl_freight_service') {
+			notMainService = true;
+			SERVICE_IDS.push(serviceObj.id);
+		}
+		if (serviceObj.id === task.service_id) {
+			trade_type = serviceObj?.trade_type;
+		}
+	});
+
+	(servicesList || []).forEach((serviceObj) => {
+		if (!notMainService && task.service_type === serviceObj.service_type && trade_type === serviceObj?.trade_type) {
 			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
@@ -35,8 +53,7 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
 
 	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
 		refetch: () => {
@@ -78,14 +95,26 @@ const useGetStep3Data = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {
@@ -119,7 +148,7 @@ const useGetStep3Data = ({
 			try {
 				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === SUCCESS_CODE) {
+				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {

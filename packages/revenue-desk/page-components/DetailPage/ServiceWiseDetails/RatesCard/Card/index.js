@@ -111,6 +111,45 @@ function Card({
 							) : null
 							}
 						</div>
+						<div className={styles.source}>
+							{singleServiceData?.service_type === 'air_freight_service' ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										is minimum price rate:
+										{' '}
+										{data?.rowData?.is_minimum_price_rate ? 'yes' : 'no'}
+									</Pill>
+								</div>
+							) : null}
+						</div>
+						<div className={styles.source}>
+							{
+							data?.rowData?.chargeable_weight ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										chargeable weight :
+										{' '}
+										{data?.rowData?.chargeable_weight}
+										{' '}
+										kg
+									</Pill>
+								</div>
+							) : null
+							}
+						</div>
+						<div className={styles.source}>
+							{
+							data?.rowData?.price_type ? (
+								<div>
+									<Pill size="md" color="#FEF3E9">
+										price type :
+										{' '}
+										{data?.rowData?.price_type?.replace(/_/g, ' ')}
+									</Pill>
+								</div>
+							) : null
+							}
+						</div>
 						{
 							data?.rowData?.schedule_type ? (
 								<div>

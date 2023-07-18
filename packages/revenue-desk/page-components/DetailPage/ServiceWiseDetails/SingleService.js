@@ -1,11 +1,11 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import getAvailableRatesDetails from '../../../helper/getAvailableRatesDetails';
-import getFormatedRates from '../../../helper/getFormatedRates';
-import getSellRateDetailPayload from '../../../helper/getSellRateDetailPayload';
-import getSystemFormatedRates from '../../../helper/getSystemFormatedRates';
-import groupSimilarServices from '../../../helper/groupSimilarServices';
+import getAvailableRatesDetails from '../../../helpers/getAvailableRatesDetails';
+import getFormatedRates from '../../../helpers/getFormatedRates';
+import getSellRateDetailPayload from '../../../helpers/getSellRateDetailPayload';
+import getSystemFormatedRates from '../../../helpers/getSystemFormatedRates';
+import groupSimilarServices from '../../../helpers/groupSimilarServices';
 // import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import { DEFAULT_INDEX, VALUE_ONE } from '../../constants';

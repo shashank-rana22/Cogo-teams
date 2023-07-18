@@ -1,9 +1,9 @@
 import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import iconMapping from '../../../helper/iconMapping';
-import incoTermMapping from '../../../helper/incoTermMapping';
-import serviceLabelMapping from '../../../helper/serviceLabelMapping';
+import iconMapping from '../../../helpers/iconMapping';
+import incoTermMapping from '../../../helpers/incoTermMapping';
+import serviceLabelMapping from '../../../helpers/serviceLabelMapping';
 import { VALUE_ONE, VALUE_ZERO } from '../../constants';
 import PortDetails from '../../List/Card/Body/PortDetails';
 

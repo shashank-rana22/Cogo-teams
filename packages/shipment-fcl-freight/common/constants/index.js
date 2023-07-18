@@ -13,3 +13,4 @@ export const VALUE_ONE = 1;
 export const VALUE_TWO = 2;
 export const VALUE_THREE = 3;
 export const VALUE_FOUR = 4;
+export const VALUE_STATUS = 200;

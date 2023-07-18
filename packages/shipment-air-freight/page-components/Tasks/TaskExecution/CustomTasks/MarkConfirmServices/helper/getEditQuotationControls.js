@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const DECIMAL_PLACE = 6;
+const DECIMAL_PLACE = 2;
 const getEditQuotationControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { service_type, service_detail, trade_type, service_id } = service_charge || {};
 

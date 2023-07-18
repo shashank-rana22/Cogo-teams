@@ -24,6 +24,7 @@ function Card({
 	handOverDate = '',
 	refetchList = () => {},
 	setStep = () => {},
+	primary_service = {},
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showEmailPreview, setShowEmailPreview] = useState(false);
@@ -132,6 +133,7 @@ function Card({
 				handleSubmit={handleSubmit}
 				step={step}
 				bookingMode={bookingMode}
+				primary_service={primary_service}
 			/>
 			{step === CONFIRM_PREFERENCE_STEP && (
 				<div className={styles.footer}>

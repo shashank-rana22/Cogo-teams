@@ -2,7 +2,7 @@ import { Select, Input, Pagination, Button, Placeholder } from '@cogoport/compon
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { serviceOptions, sortByOptions } from '../helper/filterOptionMapping';
+import { serviceOptions, sortByOptions } from '../helpers/filterOptionMapping';
 import useGetRDShipmentList from '../hooks/useGetRDShipmentList';
 
 import { VALUE_TWO, VALUE_ZERO } from './constants';

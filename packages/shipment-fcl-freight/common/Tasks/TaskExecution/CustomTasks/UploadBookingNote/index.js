@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext, useState } from 'react';
 
 import Step0 from './components/Step0';
@@ -16,26 +17,34 @@ function UploadBookingNote({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 }) {
+	const THREE = 3;
+	const ONE = 1;
+	const TWO = 2;
 	const { primary_service, shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	let initialStep = 0;
 	let skipStep0 = false;
 
 	if (primary_service?.trade_type === 'import') {
-		initialStep = 3;
+		initialStep = THREE;
 		skipStep0 = true;
 	}
 
-	if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
+	if (task.tags && task.tags?.length) initialStep = Number(task.tags[GLOBAL_CONSTANTS.zeroth_index]) + ONE;
 
 	const [step, setStep] = useState(initialStep);
 	const [fileUrl, setFileUrl] = useState();
 
-	const step0_data = useGetStep0Data({ shipment_data, task, servicesList, setStep });
+	const step0_data = useGetStep0Data({ shipment_data, task, servicesList });
+	let selectedRate = step0_data.selectedServiceProvider || undefined;
 
-	const selectedRate = step0_data.selectedServiceProvider || undefined;
+	if (initialStep === THREE) {
+		const selected_priorities = (step0_data.listBookingPreferences || [])
+			.filter((item) => item.priority === item.selected_priority);
+		selectedRate = selected_priorities;
+	}
 
-	const formattedRate = getFormattedRates({ servicesList, selectedRate });
+	const formattedRate = getFormattedRates(selectedRate, task.service_type);
 
 	const step1_data = useGetStep1Data({ setFileUrl });
 
@@ -57,21 +66,25 @@ function UploadBookingNote({
 		onCancel,
 		task,
 		taskListRefetch,
+		formattedRate,
 	});
 	const { serviceQuotationLoading = true } = step3_data || {};
 
 	return (
 
 		<div>
-			{step === 0 ? (
+			{step === GLOBAL_CONSTANTS.zeroth_index ? (
 				<Step0
 					data={step0_data}
 					onCancel={onCancel}
 					setStep={setStep}
+					servicesList={servicesList}
+					task={task}
+					step={step}
 				/>
 			) : null}
 
-			{step === 1 ? (
+			{step === ONE ? (
 				<Step1
 					data={step1_data}
 					skipStep0={skipStep0}
@@ -80,7 +93,7 @@ function UploadBookingNote({
 			) : null}
 
 			{
-				step === 2 ? (
+				step === TWO ? (
 					<Step2
 						data={step2_data}
 						setStep={setStep}
@@ -90,7 +103,7 @@ function UploadBookingNote({
 			}
 
 			{
-				step === 3 && !serviceQuotationLoading ? (
+				step === THREE && !serviceQuotationLoading ? (
 					<Step3
 						data={step3_data}
 						setStep={setStep}

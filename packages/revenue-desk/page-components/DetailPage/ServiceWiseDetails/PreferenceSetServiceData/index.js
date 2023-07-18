@@ -1,5 +1,5 @@
-import getFormatedNotPreferenceData from '../../../../helper/getFormatedNotPreferenceData';
-import getFormatedPreferenceSetData from '../../../../helper/getFormatedPreferenceSetData';
+import getFormatedNotPreferenceData from '../../../../helpers/getFormatedNotPreferenceData';
+import getFormatedPreferenceSetData from '../../../../helpers/getFormatedPreferenceSetData';
 import useListRevenueDeskAvailableRates from '../../../../hooks/useListRevenueDeskAvailableRates';
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../hooks/useListShipmentBookingConfirmationPreferences';

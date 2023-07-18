@@ -1,28 +1,26 @@
 import { Button, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
 
-import { DEFAULT_INDEX } from '../../../../../../../constants';
-
 import styles from './styles.module.css';
 
-function BookingPreferenceCard({ item, step0_data = {} }) {
-	const { priority, source, data, preference_id } = item || {};
+function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds = [] }) {
+	const ONE = 1;
+	const { priority, source, data } = item || {};
 
-	const { updateBookingPreference = () => {}, updatePreferenceLoading, setSelectedServiceProvider } = step0_data;
+	const {
+		setSelectedServiceProvider,
+		selectedServiceProvider = [],
+	} = step0_data;
 
 	const dataArray = Array.isArray(data) ? data : [data];
-	const { remarks, supplier_contract_no } = dataArray?.[DEFAULT_INDEX]?.validities?.[DEFAULT_INDEX]
-	|| dataArray?.[DEFAULT_INDEX] || {};
+	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const handleProceed = () => {
-		setSelectedServiceProvider(item);
-		updateBookingPreference({
-			selected_priority : priority,
-			id                : preference_id,
-		});
+		setSelectedServiceProvider((prev) => [...prev, item]);
 	};
 
 	const labelValueMapping = (obj) => [
@@ -85,9 +83,7 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 					{!isEmpty(remarks) && (
 						<div>
 							<b>Supply Remarks</b>
-							&nbsp;
 							:
-							&nbsp;
 							{remarks}
 						</div>
 					)}
@@ -96,9 +92,7 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 						!isEmpty(supplier_contract_no) && (
 							<div>
 								<b>Supplier Contract No.</b>
-								&nbsp;
 								:
-								&nbsp;
 								{supplier_contract_no}
 							</div>
 						)
@@ -106,8 +100,16 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 				</div>
 
 				<div>
-					<Button themeType="accent" size="sm" onClick={handleProceed} disabled={updatePreferenceLoading}>
-						<b>Proceed</b>
+					<Button
+						themeType="accent"
+						size="sm"
+						onClick={handleProceed}
+						disabled={(selectedServiceProvider || [])
+							.find((service) => item.service_id === service.service_id)}
+					>
+						<b>
+							{selectedServiceProvider.length === (similarServiceIds.length - ONE) ? 'Proceed' : 'Save'}
+						</b>
 					</Button>
 				</div>
 			</div>

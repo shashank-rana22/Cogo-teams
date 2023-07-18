@@ -1,7 +1,8 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import useGetServicesQuotation from '../../../../../../hooks/useGetServicesQuotation';
 import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
@@ -22,7 +23,12 @@ const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},
 	selectedCard = {},
+	formattedRate = {},
 }) => {
+	const {
+		refetch:getShipmentRefetch,
+	} = useContext(ShipmentDetailContext);
+
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const SERVICE_IDS = [];
 	let notMainService = false;
@@ -50,12 +56,13 @@ const useEditQuotations = ({
 		service_detail_required : true,
 
 	});
-	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { loading, apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({ });
 
 	const { loading:updateTaskLoading, apiTrigger:updateTask } = useUpdateTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
+			getShipmentRefetch();
 		},
 	});
 	const service_charges = servicesQuotation?.service_charges || [];
@@ -97,14 +104,26 @@ const useEditQuotations = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {

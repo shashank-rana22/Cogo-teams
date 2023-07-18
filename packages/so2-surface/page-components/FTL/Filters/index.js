@@ -1,5 +1,6 @@
 import { Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import ScopeSelect from '@cogoport/scope-select';
 import { useState, useContext } from 'react';
 
 import DashboardContext from '../../../context/DashboardContext';
@@ -83,6 +84,7 @@ function Filters() {
 					</Button>
 				</Popover>
 			</div>
+			<ScopeSelect size="md" />
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip, Button, cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getBuyPrice from '../../../utils/getBuyPrice';
@@ -13,7 +13,9 @@ function ListItem({
 	handleProceed = () => {},
 	step = 1,
 	bookingMode = '',
+	primary_service = {},
 }) {
+	const { hs_code, commodity_description } = primary_service;
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -38,6 +40,32 @@ function ListItem({
 						{data?.source || '-'}
 					</div>
 				</div>
+				{commodity_description && (
+					<div>
+						<div className={styles.heading}>Commodity Desc.</div>
+						<Tooltip
+							content={commodity_description}
+							placement="top"
+						>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{commodity_description}
+							</div>
+						</Tooltip>
+					</div>
+				)}
+				{hs_code?.hs_code_name &&	(
+					<div>
+						<div className={styles.heading}>HS Code</div>
+						<Tooltip
+							content={hs_code?.hs_code_name}
+							placement="top"
+						>
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{hs_code?.hs_code_name}
+							</div>
+						</Tooltip>
+					</div>
+				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
 					<div className={styles.sub_heading}>

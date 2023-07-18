@@ -22,6 +22,7 @@ const useGetRDShipmentList = () => {
 		haulage_freight : 'list_revenue_desk_haulage_freight_shipments',
 		ltl_freight     : 'list_revenue_desk_ltl_freight_shipments',
 		lcl_freight     : 'lcl_freight/list_revenue_desk_shipments',
+		lcl_customs     : 'lcl_customs/list_revenue_desk_shipments',
 	};
 	const api = API_MAPPING[filters?.service];
 	const [{ loading }, trigger] = useRequest({

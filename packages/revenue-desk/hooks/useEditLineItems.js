@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import rawControls from '../helper/sell_quotations_controls';
+import rawControls from '../helpers/sell_quotations_controls';
 import { VALUE_ONE, VALUE_ZERO } from '../page-components/constants';
 
 const getDefaultValues = (oldfields) => {
