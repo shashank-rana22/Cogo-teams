@@ -16,13 +16,13 @@ interface Props {
 }
 
 function CreateExpenseForm({
-	active,
-	createExpenseType,
-	recurringData,
-	setRecurringData,
-	nonRecurringData,
-	setNonRecurringData,
-	setIsFormValidated,
+	active = '',
+	createExpenseType = '',
+	recurringData = {},
+	setRecurringData = () => {},
+	nonRecurringData = {},
+	setNonRecurringData = () => {},
+	setIsFormValidated = () => {},
 }:Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);

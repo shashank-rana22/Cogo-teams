@@ -42,3 +42,16 @@
 	color: blue;
 	text-decoration: underline;
 }
+
+.steeper {
+	:global {
+		.ui_stepper_step_wrapper,
+		.ui_stepper_text {
+			color: #000;
+		}
+
+		.ui_stepper_container {
+			margin: 10px;
+		}
+	}
+}

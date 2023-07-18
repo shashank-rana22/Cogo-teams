@@ -1,6 +1,6 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, Stepper } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
@@ -14,40 +14,40 @@ import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 import styles from './styles.module.css';
 
 interface SummaryElemet {
-	title?: string,
-	value?: any,
+	title?: string;
+	value?: any;
 }
 interface Entity {
-	entity_code?: number | string,
-	id?: number,
+	entity_code?: number | string;
+	id?: number;
 }
 
 interface Data {
-	vendorName?: string,
-	transactionDate?: Date,
-	paymentMode?: string,
-	uploadedInvoice?: string,
-	periodOfTransaction?: string,
-	expenseCategory?: string,
-	expenseSubCategory?: string,
-	branch?: any,
-	entityObject?: Entity,
-	invoiceDate?: Date,
-	stakeholderName?: string,
-	invoiceCurrency?: string,
-	vendorID?: number | string,
-	payableAmount?: number,
-	startDate?: Date,
-	endDate?: Date,
-	repeatEvery?: string,
-	agreementNumber?: number,
-	currency?: string,
+	vendorName?: string;
+	transactionDate?: Date;
+	paymentMode?: string;
+	uploadedInvoice?: string;
+	periodOfTransaction?: string;
+	expenseCategory?: string;
+	expenseSubCategory?: string;
+	branch?: any;
+	entityObject?: Entity;
+	invoiceDate?: Date;
+	stakeholderName?: string;
+	invoiceCurrency?: string;
+	vendorID?: number | string;
+	payableAmount?: number;
+	startDate?: Date;
+	endDate?: Date;
+	repeatEvery?: string;
+	agreementNumber?: number;
+	currency?: string;
 }
 
 interface Props {
-	expenseData?: Data,
-	setExpenseData?: (p: any) => void,
-	rowData?: SummaryInterface,
+	expenseData?: Data;
+	setExpenseData?: (p: any) => void;
+	rowData?: SummaryInterface;
 }
 
 function Summary({ expenseData, setExpenseData, rowData }: Props) {
@@ -56,8 +56,13 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { name: branchName } = branch || {};
 
 	const {
-		categoryName, startDate, endDate,
-		repeatFrequency, businessName, agreementNumber, branchId,
+		categoryName,
+		startDate,
+		endDate,
+		repeatFrequency,
+		businessName,
+		agreementNumber,
+		branchId,
 	} = rowData || {};
 
 	const {
@@ -67,12 +72,33 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-
-	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
-		expenseCategory : categoryName,
-		entity          : entityObject?.id,
-		currency,
+	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
+		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
+		incidentSubType : categoryName,
+		entityId        : entityObject?.id,
 	});
+
+	const { level3, level2, level1 } = stakeholdersData || {};
+	const { stakeholder: stakeholder1 } = level3 || {};
+	const { stakeholder: stakeholder2 } = level2 || {};
+	const { stakeholder: stakeholder3 } = level1 || {};
+
+	const stakeHolderTimeLine = () => {
+		if (!isEmpty(level3)) {
+			return [
+				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
+				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
+				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
+			];
+		}
+		if (!isEmpty(level2)) {
+			return [
+				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
+				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
+			];
+		}
+		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
+	};
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -102,9 +128,14 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	useEffect(() => {
 		if (branchId) {
 			// eslint-disable-next-line max-len
-			const branchData = officeLocations?.filter((location: any) => JSON.parse(location?.value)?.branchId === branchId);
+			const branchData = officeLocations?.filter(
+				(location: any) => JSON.parse(location?.value)?.branchId === branchId,
+			);
 			if (branchData?.length > 0) {
-				setExpenseData((p: object) => ({ ...p, branch: JSON.parse(branchData[0]?.value || '{}') }));
+				setExpenseData((p: object) => ({
+					...p,
+					branch: JSON.parse(branchData[0]?.value || '{}'),
+				}));
 			}
 		}
 	}, [branchId, setExpenseData]);
@@ -122,28 +153,29 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			title : 'Entity',
 			value : entityCode || '-',
 		},
-
 	];
 	const summaryDataSecond = [
-
 		{
 			title : 'Branch ',
 			value : branchName || '-',
 		},
 		{
-			title : 'Payable Amount',
-			value : (currency && payableAmount) ? (
-				<div>
-					{formatAmount({
-						amount  : payableAmount as any,
-						currency,
-						options : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})}
-				</div>
-			) : '-',
+			title: 'Payable Amount',
+			value:
+				currency && payableAmount ? (
+					<div>
+						{formatAmount({
+							amount  : payableAmount as any,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+					</div>
+				) : (
+					'-'
+				),
 		},
 		{
 			title : 'Start Date',
@@ -160,7 +192,8 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			value : (
 				<div>
 					{endDate
-						? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
+						? formatDate(endDate, 'dd/MMM/yy', {}, false)
+						: '-'}
 				</div>
 			),
 		},
@@ -176,25 +209,32 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'To be Approved by',
-			value : stakeholdersLoading ? <Placeholder height="20px" width="150px" />
-				: (startCase(stakeholderName || '') || '-'),
+			value : stakeholdersLoading ? (
+				<Placeholder height="20px" width="150px" />
+			) : (
+				startCase(stakeholderName || '') || '-'
+			),
 		},
 		{
 			title : 'Uploaded Documents',
 			value : (
 				<div>
-					{uploadedInvoice
-						? (
-							<a
-								href={uploadedInvoice}
-								style={{ color: 'blue', textDecoration: 'underline', fontSize: '16px' }}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{showOverflowingNumber(filename, 20)}
-							</a>
-						)
-						: '-'}
+					{uploadedInvoice ? (
+						<a
+							href={uploadedInvoice}
+							style={{
+								color          : 'blue',
+								textDecoration : 'underline',
+								fontSize       : '16px',
+							}}
+							target="_blank"
+							rel="noreferrer"
+						>
+							{showOverflowingNumber(filename, 20)}
+						</a>
+					) : (
+						'-'
+					)}
 				</div>
 			),
 		},
@@ -218,6 +258,19 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			{renderSummary(summaryDataFirst)}
 			{renderSummary(summaryDataSecond)}
 			{renderSummary(summaryDataThird)}
+			<div>
+				<div className={styles.title}>To be Approved by</div>
+				<div className={styles.steeper}>
+					{stakeholdersLoading ? (
+						<Placeholder height="20px" width="150px" />
+					) : (
+						<Stepper
+							setActive={() => {}}
+							items={stakeHolderTimeLine()}
+						/>
+					)}
+				</div>
+			</div>
 		</div>
 	);
 }
