@@ -10,7 +10,7 @@ const COMPONENT_MAPPING = {
 };
 
 function FclCheckout({ state = 'draft' }) {
-	const ActiveComponent = COMPONENT_MAPPING.booking_confirmation;
+	const ActiveComponent = COMPONENT_MAPPING[state];
 
 	return (
 		<ActiveComponent />

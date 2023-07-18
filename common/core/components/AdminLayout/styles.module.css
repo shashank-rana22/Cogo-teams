@@ -23,11 +23,11 @@
 	}
 
 	&.dark {
-		background: #828282;
+		background-color: #828282;
 	}
 
 	&.light {
-		background: #f9f5ec;
+		background-color: #fff;
 	}
 }
 
