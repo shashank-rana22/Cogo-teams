@@ -1621,6 +1621,15 @@ const apis = [
 		api         : 'get_saas_hs_code_list',
 		access_type : 'private',
 	},
+	{
+		api         : 'get_saas_trade_engine_documents',
+		access_type : 'private',
+	},
+	{
+		api          : 'update_shipment_bl_numbers',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.doc_name_div {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-left: 24px;
+	line-height: 140%;
+}
+
+.doc_label {
+	margin-bottom: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.doc_name {
+	margin-right: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+}
+
+.doc_name_info {
+	display: flex;
+}
+
+.info_icon {
+	cursor: pointer;
+}
+
+.tooltip_content {
+	font-size: 10px;
+}
