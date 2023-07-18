@@ -4,15 +4,16 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { MONTH_MAPPING } from '../../../Constants';
 import useGetEntityReport from '../../../hooks/useGetEntityReport';
 
 import Details from './Details';
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 function ColumnCard({
-	item, filters,
-	setFilters,
+	item = {}, filters = {},
+	setFilters = () => {},
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [activeEntityCode, setActiveEntityCode] = useState('301');
@@ -23,7 +24,7 @@ function ColumnCard({
 		date = '',
 		month = '',
 		year = '',
-	} = item || {};
+	} = item;
 
 	const { reportCurrency = '' } = filters || {};
 
@@ -55,7 +56,7 @@ function ColumnCard({
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 							formatType : 'date',
 						})
-						: `${MONTH_MAPPING[month]} ${year}`}
+						: `${GLOBAL_CONSTANTS.MONTH_MAPPING[month - ONE]} ${year}`}
 				</div>
 				<div className={styles.alloted}>
 					{	getFormattedPrice(
@@ -106,7 +107,7 @@ function ColumnCard({
 					setFilters={setFilters}
 					activeEntityCode={activeEntityCode}
 					setActiveEntityCode={setActiveEntityCode}
-					monthName={MONTH_MAPPING[month]}
+					monthName={GLOBAL_CONSTANTS.MONTH_MAPPING[month - ONE]}
 				/>
 			) : null}
 		</div>

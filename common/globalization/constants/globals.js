@@ -461,6 +461,21 @@ const GLOBAL_CONSTANTS = {
 		import_rates : 'Import.rates@cogoport.com',
 		export_rates : 'Export.rates@cogoport.com',
 	},
+
+	MONTH_MAPPING: [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	],
 };
 
 export default GLOBAL_CONSTANTS;

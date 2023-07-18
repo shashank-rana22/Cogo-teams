@@ -1,4 +1,4 @@
-import { ICON_MAPPING } from '../../Constants';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 
 import styles from './styles.module.css';
 
@@ -10,7 +10,8 @@ function Entity({ entityCode = '' }) {
 				{' '}
 				{entityCode}
 			</div>
-			{ICON_MAPPING[entityCode]}
+
+			{ENTITY_MAPPING[entityCode].icon()}
 		</div>
 	);
 }
