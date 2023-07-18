@@ -1,4 +1,4 @@
-const performanceManagement = {
+const PERFORMANCE_MANAGEMENT = {
 	'/[partner_id]/performance-management/configuration': {
 		navigation : 'performance_management-performance_management_configuration',
 		isMainNav  : true,
@@ -23,4 +23,4 @@ const performanceManagement = {
 	},
 };
 
-module.exports = performanceManagement;
+module.exports = PERFORMANCE_MANAGEMENT;

@@ -3,7 +3,7 @@ import React from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 
-import ratingInfoColumn from './getRatingInfoColumn';
+import RATING_INFO_COLUMN from './getRatingInfoColumn';
 import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
@@ -35,7 +35,7 @@ function RatingInfo({ ratingInfo, loading }) {
 
 			<div className={styles.table_style}>
 				<StyledTable
-					columns={ratingInfoColumn}
+					columns={RATING_INFO_COLUMN}
 					data={kra_ratings || []}
 					emptyText={TABLE_EMPTY_TEXT}
 					loading={loading}

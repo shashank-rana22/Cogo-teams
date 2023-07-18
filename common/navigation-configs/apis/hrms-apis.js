@@ -1,4 +1,4 @@
-const hrms = {
+const HRMS = {
 	new_employee_dashboard: [
 		{
 			api          : 'create_employee_detail',
@@ -370,4 +370,4 @@ const hrms = {
 	],
 };
 
-export default hrms;
+export default HRMS;

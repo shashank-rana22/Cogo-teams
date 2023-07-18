@@ -1,6 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-const ratingInfoColumn = [
+const RATING_INFO_COLUMN = [
 	{
 		Header   : 'Achieved Value Range',
 		accessor : (item) => (
@@ -20,4 +20,4 @@ const ratingInfoColumn = [
 
 ];
 
-export default ratingInfoColumn;
+export default RATING_INFO_COLUMN;
