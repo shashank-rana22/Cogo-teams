@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 function EmployeeDashboard() {
 	const [ratingCycle, setRatingCycle] = useState('21-June-2023_20-July-2023');
+
 	const { data, loading } = useGetEmployeeDetails(ratingCycle);
 	const { ratingOptions } = useGetRatingCycle(setRatingCycle);
 
@@ -19,10 +20,12 @@ function EmployeeDashboard() {
 			<div className={styles.heading}>
 				Employee Dashboard
 			</div>
+
 			<div className={styles.flex_container}>
 				<div className={styles.flex_item1}>
 					<EmployeeDetails data={employee_basic_details} loading={loading} />
 				</div>
+
 				<div className={styles.flex_item2}>
 					<EmployeePerformance
 						data={data}
