@@ -41,9 +41,9 @@
 	background-color: var(--color-tertiary-beige-4);
 }
 
-.employee_name{
-    display: flex;
-    font-size: 16px;
+.employee_name {
+	display: flex;
+	font-size: 16px;
 }
 
 .left_section {
@@ -53,14 +53,14 @@
 	height: 470px;
 	padding-left: 15px;
 	overflow-y: auto;
-    border-right: 1px solid black;
+	border-right: 1px solid black;
 
 	@media (max-width: 768px) {
 		width: 100%;
-		max-height: 250px;
 		height: 100%;
-		border-right: none;
+		max-height: 250px;
 		padding-left: 0;
+		border-right: none;
 		border-bottom: 1px solid #000;
 	}
 }
@@ -69,7 +69,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-    padding: 10px;
+	padding: 10px;
 
 	@media (max-width: 768px) {
 		width: 100%;
@@ -157,8 +157,8 @@
 .modification_history {
 	flex-direction: column;
 	width: 100%;
-	padding: 10px;
 	height: 400px;
+	padding: 10px;
 	overflow-y: auto;
 	background-color: #fff;
 	border: 1px solid #000;
@@ -205,11 +205,12 @@
 
 .text_area {
 	padding: 5px;
-    :global {
+
+	:global {
 		.ui_text_area_control {
 			padding: 12px;
 		}
-    }
+	}
 }
 
 .input_display {
@@ -224,11 +225,10 @@
 	}
 }
 
-
-.spinner_container{
+.spinner_container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	height: 500px;
+	justify-content: center;
 	width: 100%;
+	height: 500px;
 }

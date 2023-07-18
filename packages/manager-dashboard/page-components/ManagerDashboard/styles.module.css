@@ -1,7 +1,7 @@
 .header {
+	margin-right: 30px;
 	font-size: 24px;
 	font-weight: 700;
-	margin-right: 30px;
 
 	@media (max-width: 768px) {
 		width: 100%;
@@ -17,23 +17,23 @@
 .flex {
 	display: flex;
 	align-items: center;
-	
+
 	@media (max-width: 768px) {
-		margin-top: 50px;
 		flex-wrap: wrap;
+		margin-top: 50px;
 	}
 }
 
-.rating_cycle_select{
+.rating_cycle_select {
 	width: 300px;
 
 	@media (max-width: 768px) {
-		margin-top: 20px;
 		width: 100%;
+		margin-top: 20px;
 	}
 }
 
-.select_container{
+.select_container {
 	display: flex;
 	align-items: center;
 	margin: 16px 0;
@@ -43,9 +43,9 @@
 	}
 }
 
-.async_select{
+.async_select {
 	width: 250px;
-	margin : 0 8px;
+	margin: 0 8px;
 
 	@media (max-width: 768px) {
 		width: 100%;
@@ -62,14 +62,14 @@
 	text-align: center;
 }
 
-.label{
+.label {
 	margin-bottom: 4px;
 }
 
 .table_container {
 	display: flex;
-	margin-top: 20px;
 	max-width: 100%;
+	margin-top: 20px;
 
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
@@ -80,13 +80,13 @@
 	width: 80%;
 
 	@media (max-width: 768px) {
-		width: 100%;
 		order: 2;
+		width: 100%;
 		margin-top: 20px;
 	}
 
 	:global {
-		.ui_accordion_title div{
+		.ui_accordion_title div {
 			width: 100%;
 		}
 	}
@@ -97,33 +97,33 @@
 	padding-left: 20px;
 
 	@media (max-width: 768px) {
+		order: 1;
 		width: 100%;
 		padding-left: 0;
-		order: 1;
 	}
 }
 
 .icon_flex {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	margin-left: 8px;
 
 	& svg{
-		
+
 	}
 }
 
-.active{
-	fill : red;
+.active {
+	fill: red;
 }
 
 .inactive {
-	fill : #fff;
+	fill: #fff;
 }
 
-.header_text{
+.header_text {
 	display: flex;
 	align-items: center;
 	justify-content: center;
