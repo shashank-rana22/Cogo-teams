@@ -87,7 +87,7 @@ function CancelEinvoice({
 										placeholder="Agreement Date"
 										rules={{ required: 'Agreement Date is required' }}
 									/>
-									{(response?.agreementDate === '') ? (
+									{response?.agreementDate ? (
 										<span className={styles.errors}>
 											{errorVal?.agreementDate?.message.toString()}
 										</span>
@@ -104,7 +104,7 @@ function CancelEinvoice({
 										placeholder="E-invoice Date"
 										rules={{ required: 'E invoice Date is required.' }}
 									/>
-									{(response?.invoiceDate === '') ? (
+									{(invoiceDate === '') ? (
 										<span className={styles.errors}>
 											{' '}
 											{errorVal?.invoiceDate?.message.toString()}
