@@ -1,4 +1,4 @@
-const DescriptionControls = (kra_name) => [
+const descriptionControls = (kra_name) => [
 	{
 		name        : 'kra_name',
 		type        : 'text',
@@ -21,4 +21,4 @@ const DescriptionControls = (kra_name) => [
 
 ];
 
-export default DescriptionControls;
+export default descriptionControls;

@@ -16,7 +16,6 @@ const ELEMENT_MAPPING = {
 	multiSelect : MultiselectController,
 	number      : InputController,
 	input       : InputController,
-
 };
 
 function getElementController(type) {

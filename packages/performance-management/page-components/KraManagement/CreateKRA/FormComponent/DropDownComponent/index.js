@@ -68,6 +68,8 @@ function RenderFields({ control, errors, setShowSelectedValue, showSelectedValue
 
 					const DynamicController = getElementController(type);
 
+					if (!DynamicController) return null;
+
 					return (
 						<div key={name} className={styles.form_container}>
 

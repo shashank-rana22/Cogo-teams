@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import getElementController from '../../../../configs/getElementController';
 import useCreateKRA from '../hooks/useCreateKRA';
 
-import DescriptionControls from './DescriptionControls';
+import descriptionControls from './DescriptionControls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
@@ -37,7 +37,7 @@ function FormComponent({ data }) {
 
 	const { kra_name, kra_description, operation_key, is_rating_individual } = kra_details || {};
 
-	const controls = DescriptionControls(kra_name);
+	const controls = descriptionControls(kra_name);
 
 	useEffect(() => {
 		setValue('kra_name', kra_name);
@@ -84,6 +84,8 @@ function FormComponent({ data }) {
 					if (!type) return null;
 
 					const DynamicController = getElementController(type);
+
+					if (!DynamicController) return null;
 
 					return (
 						<div key={name} className={styles.form_container}>

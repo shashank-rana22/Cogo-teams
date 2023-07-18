@@ -36,6 +36,8 @@ function RenderFields({ control, errors, watch, setValue }) {
 
 							const DynamicController = getElementController(type);
 
+							if (!DynamicController) return null;
+
 							if (name === 'is_target_achieved_manually' && watchOperationType !== 'manual') {
 								return null;
 							}
