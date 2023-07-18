@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 8px;
+}
+
+.image {
+	max-height: 40px;
+}
+
+.share_icon {
+	cursor: pointer;
+}

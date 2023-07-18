@@ -1,0 +1,50 @@
+.container {
+	flex-shrink: 0;
+	height: 320px;
+	padding: 50px;
+	background: #f7faef;
+	border-top: 1px solid #ebebf4;
+}
+
+.congrats_text {
+	display: flex;
+	align-items: center;
+	font-size: 29px;
+	line-height: 150%;
+	color: #000;
+}
+
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 60px;
+}
+
+.primary_button {
+	display: inline-flex;
+	align-items: center;
+	padding: 12px 20px;
+	margin-left: 16px;
+}
+
+.secondary_button {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	height: 48px;
+	padding: 12px 20px;
+	background: var(--white, #fff);
+	border: 1px solid var(--black-20, #e0e0e0);
+	border-radius: 6px;
+}
+
+.selected_services_container {
+	margin-top: 80px;
+}
+
+.heading {
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 600;
+}

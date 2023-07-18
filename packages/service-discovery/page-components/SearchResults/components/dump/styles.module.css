@@ -1,0 +1,31 @@
+/* MovingIcon.module.css */
+.moving-icon {
+	position: relative;
+	width: 400px; /* adjust to match your desired container size */
+	height: 400px; /* adjust to match your desired container size */
+}
+
+.icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: all 2s linear; /* adjust the duration and timing function to your preference */
+}
+
+.icon.moving {
+	animation: move-icon 4s linear infinite; /* adjust the duration and timing function to your preference */
+}
+
+@keyframes move-icon {
+	0% {
+		left: 0;
+	}
+
+	50% {
+		left: 200px; /* adjust the position and keyframe percentages to define your desired path */
+	}
+
+	100% {
+		left: 0;
+	}
+}

@@ -247,6 +247,14 @@
 	transition: transform 0.5s ease;
 	transform: translateX(-200px);
 	will-change: transform;
+
+	&.light {
+		background-color: #fff;
+	}
+
+	&.dark {
+		background-color: #828282;
+	}
 }
 
 .icon {

@@ -1,4 +1,4 @@
-import { Button, Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -6,12 +6,14 @@ import { differenceInSeconds } from 'date-fns';
 
 import styles from './styles.module.css';
 import FieldPair from './TableItems/FieldPair';
+import renderButton from './TableItems/renderButton';
 import renderPortPair from './TableItems/renderPortPair';
 import SearchType from './TableItems/SearchType';
 import renderShipment from './TableItems/ShipmentDetails';
 
 const getTableColumnFunction = (key) => {
 	const newFunction = {
+		renderButton,
 		renderSerialId: (itemData) => {
 			const { serial_id = '-', performed_by_type } = itemData || {};
 
@@ -54,11 +56,16 @@ const getTableColumnFunction = (key) => {
 				</span>
 			</Tooltip>
 		),
-		renderSource: ({ source = '-' }) => (
-			<Pill size="md" color="#F7FAEF">
-				{source === 'direct' ? 'Sell Without Buy' : startCase(source)}
-			</Pill>
-		),
+		renderSource: (itemData) => {
+			const { source = '-' } = itemData || {};
+			console.log(itemData);
+
+			return (
+				<Pill size="md" color="#F7FAEF">
+					{source === 'direct' ? 'Sell Without Buy' : startCase(source)}
+				</Pill>
+			);
+		},
 		renderValidityEnd: ({ shipment_id, validity_end }) => {
 			if (shipment_id) {
 				return <span>NA</span>;
@@ -125,9 +132,6 @@ const getTableColumnFunction = (key) => {
 
 			return <div>{startCase(task)}</div>;
 		},
-		renderButton: (itemData, field) => (
-			<Button size="md" themeType="primary">{field?.btnLabel}</Button>
-		),
 	};
 
 	return newFunction[key];

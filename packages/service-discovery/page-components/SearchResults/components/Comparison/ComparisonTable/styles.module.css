@@ -1,0 +1,40 @@
+.container {
+	margin: 20px;
+}
+
+.table {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.tableHeader {
+	display: flex;
+	font-weight: bold;
+	background-color: #fff;
+}
+
+.column {
+	flex: 1;
+	padding: 8px;
+	border-right: 1px solid #ccc;
+}
+
+.column:first-child {
+	flex: 0 0 40%; /* Set the width of the first column to 40% */
+}
+
+.tableBody {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+}
+
+.even {
+	background-color: #e8f6f6;
+}

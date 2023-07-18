@@ -2,7 +2,6 @@
 	"heading": "Quotations",
 	"api": "list_checkouts",
 	"type": "quotations",
-	"placement": "center",
 	"href": "/quotation-approval",
 	"as": "/quotation-approval",
 	"extraParams": {
@@ -14,11 +13,6 @@
 			"key": "serial_id",
 			"label": "ID",
 			"func": "renderSerialId"
-		},
-		{
-			"label": "Service",
-			"key": "primary_service",
-			"func": "renderSearchType"
 		},
 		{
 			"label": "Shipper",
@@ -35,7 +29,7 @@
 		},
 		{
 			"label": "Port pair",
-			"key": "",
+			"key": "primary_service",
 			"pair_type": "primary_service",
 			"func": "renderPortPair"
 		},
@@ -56,14 +50,11 @@
 			"func": "renderCreated"
 		},
 		{
-			"key": "validity_end",
-			"label": "Expiry",
-			"func": "renderValidityEnd"
-		},
-		{
-			"key": "booking_status",
-			"label": "Booking Status",
-			"func": "renderBookingStatus"
+			"key": "quotations",
+			"label": "",
+			"btnLabel":"Show Rates",
+			"func": "renderButton",
+			"showPrice": true
 		}
 	],
 	"filterProps": {

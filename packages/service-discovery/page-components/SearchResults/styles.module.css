@@ -1,21 +1,36 @@
 .container {
-	margin: 0 -20px;
+	position: relative;
+	min-height: 100vh;
+	margin: -24px -20px;
+	background-color: #fff;
 }
 
 .header {
-	position: fixed;
+	position: sticky;
 	top: 0;
-	width: 100%;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+}
+
+.backdrop {
+	background: rgb(0 0 0 / 30%);
 }
 
 .loading {
 	display: flex;
-	flex: 1;
 	align-items: center;
 	min-height: 100vh;
 	padding-left: 40px;
 	margin: -20px;
 	background: #fff;
+
+	:global {
+		.ui_loader {
+			background-color: #221f20;
+		}
+	}
 }
 
 .loading_text {

@@ -29,10 +29,6 @@
 	align-items: center;
 }
 
-.form{
-
-}
-
 .button {
 	position: relative;
 	gap: 8px;
@@ -49,10 +45,10 @@
 
 .red_dot {
 	position: absolute;
-	top: 15%;
-	right: 60%;
-	width: 6px;
-	height: 6px;
+	top: 12%;
+	right: 56%;
+	width: 12px;
+	height: 12px;
 	background: #ee3425;
 	border-radius: 50%;
 }

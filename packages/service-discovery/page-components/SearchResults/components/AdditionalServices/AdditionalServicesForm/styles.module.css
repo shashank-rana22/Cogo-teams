@@ -1,0 +1,36 @@
+.container {
+	padding: 20px;
+	background: #fff;
+	border-top: 1px solid #ebebf0;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+}
+
+.control_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 90%;
+}
+
+.control_style {
+	margin: 16px;
+}
+
+.primaryButtton {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.label {
+	margin-bottom: 4px;
+	font-size: 12px;
+	color: #373737;
+}

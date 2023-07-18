@@ -38,6 +38,7 @@ function AdminLayout({
 		user: { id: user_id = '' },
 		partner: partnerData,
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
+		platformTheme = 'light',
 	} = user_data;
 
 	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partnerData || {};
@@ -60,7 +61,7 @@ function AdminLayout({
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
-			${showNavbar ? styles.has_navbar : ''}`}
+			${showNavbar ? styles.has_navbar : ''} ${styles[platformTheme]}`}
 		>
 			<main className={styles.children_container}>{children}</main>
 			{showTopbar ? (

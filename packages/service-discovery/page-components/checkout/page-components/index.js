@@ -2,6 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import Header from '../../../common/Header';
 import { LoadingState } from '../commons/LoadingState';
 import { CheckoutContext } from '../context';
 import useGetCheckout from '../hooks/useGetCheckout';
@@ -11,6 +12,7 @@ import useUpdateCheckout from '../hooks/useUpdateCheckout';
 import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
 import LclCheckout from './LclCheckout';
+import styles from './styles.module.css';
 
 const MAPPING = {
 	fcl_freight : FclCheckout,
@@ -163,7 +165,16 @@ function Checkout({ checkout_type = '' }) {
 
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
-			<ActiveComponent state={state} />
+			<div className={styles.container}>
+				<Header
+					data={detail}
+					service_key="primary_service"
+					activePage="checkout"
+					loading={loading}
+				/>
+
+				<ActiveComponent state={state} />
+			</div>
 		</CheckoutContext.Provider>
 	);
 }

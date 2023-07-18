@@ -21,6 +21,14 @@
 	&.white_bg {
 		background-color: #fff;
 	}
+
+	&.dark {
+		background: #828282;
+	}
+
+	&.light {
+		background: #f9f5ec;
+	}
 }
 
 .children_container {

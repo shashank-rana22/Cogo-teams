@@ -1,5 +1,6 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React, { useCallback, useState, useRef } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -29,6 +30,8 @@ function Navbar({
 	const userBasedNavView = formatUserBasedNavView(nav);
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
+
+	const { platformTheme } = useSelector(({ profile }) => profile);
 
 	const {
 		data,
@@ -80,7 +83,7 @@ function Navbar({
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
 			>
-				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
+				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav} ${styles[platformTheme]} `} />
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img

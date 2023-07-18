@@ -1,6 +1,14 @@
 import { addDays } from '@cogoport/utils';
 
-const getCommonPayload = (serviceType, origin, destination) => {
+import getIncoterm from './getIncoterm';
+
+const getPayload = (serviceType, origin, destination) => {
+	const incoTerm = getIncoterm(origin, destination);
+
+	const { id: originId = '' } = origin || {};
+
+	const { id: destinationId = '' } = destination || {};
+
 	const COMMON_PAYLOAD_MAPPING = {
 		fcl_freight: {
 			bls_count                  : 1,
@@ -9,17 +17,17 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			container_size             : '20',
 			container_type             : 'standard',
 			containers_count           : 1,
-			inco_term                  : 'fob',
-			destination_port_id        : destination,
-			origin_port_id             : origin,
+			inco_term                  : incoTerm,
+			destination_port_id        : destinationId,
+			origin_port_id             : originId,
 			status                     : 'active',
 		},
 		lcl_freight: {
 			bls_count           : 1,
 			commodity           : 'general',
-			destination_port_id : destination,
-			inco_term           : 'fob',
-			origin_port_id      : origin,
+			destination_port_id : destinationId,
+			inco_term           : incoTerm,
+			origin_port_id      : originId,
 			packages_count      : 1,
 			volume              : 1,
 			weight              : 1,
@@ -29,10 +37,10 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			cargo_clearance_date   : addDays(new Date(), 1),
 			commodity              : 'general',
 			commodity_details      : [{ commodity_type: 'all' }],
-			destination_airport_id : destination,
+			destination_airport_id : destinationId,
 			dry_ice_required       : false,
-			inco_term              : 'cif',
-			origin_airport_id      : origin,
+			inco_term              : incoTerm,
+			origin_airport_id      : originId,
 			load_selection_type    : 'cargo_gross',
 			packages_count         : 1,
 			packages               : [
@@ -53,27 +61,41 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			ftl_freight_service_touch_points_attributes : [
 				{
 					sequence_number         : 1,
-					touch_point_location_id : origin,
+					touch_point_location_id : originId,
 					touch_point_type        : 'origin',
 				},
 				{
 					sequence_number         : 1,
-					touch_point_location_id : destination,
+					touch_point_location_id : destinationId,
 					touch_point_type        : 'destination',
 				},
 			],
-			destination_location_id : destination,
-			origin_location_id      : origin,
+			load_selection_type : 'truck',
+			packages            : [
+				{
+					handling_type  : 'stackable',
+					height         : 1,
+					length         : 1,
+					width          : 1,
+					package_weight : 1,
+					packages_count : 1,
+					packing_type   : 'box',
+				},
+			],
+			truck_type              : 'open_body_pickup_1ton',
+			trucks_count            : 1,
+			destination_location_id : destinationId,
+			origin_location_id      : originId,
 			status                  : 'active',
 			trade_type              : 'domestic',
 			trip_type               : 'one_way',
 		},
 		ltl_freight: {
-			cargo_readiness_date    : new Date(),
+			cargo_readiness_date    : addDays(new Date(), 1),
 			commodity               : null,
 			load_selection_type     : 'cargo_gross',
-			destination_location_id : destination,
-			origin_location_id      : origin,
+			destination_location_id : destinationId,
+			origin_location_id      : originId,
 			packages                : [
 				{
 					handling_type  : 'stackable',
@@ -96,8 +118,8 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			container_size             : '20',
 			container_type             : 'standard',
 			containers_count           : 1,
-			destination_location_id    : destination,
-			origin_location_id         : origin,
+			destination_location_id    : destinationId,
+			origin_location_id         : originId,
 			status                     : 'active',
 			trade_type                 : 'domestic',
 			transport_mode             : 'trailer',
@@ -109,8 +131,8 @@ const getCommonPayload = (serviceType, origin, destination) => {
 			container_size             : '20',
 			container_type             : 'standard',
 			containers_count           : 1,
-			destination_location_id    : destination,
-			origin_location_id         : origin,
+			destination_location_id    : destinationId,
+			origin_location_id         : originId,
 			status                     : 'active',
 			trade_type                 : 'domestic',
 			transport_mode             : 'rail',
@@ -120,69 +142,16 @@ const getCommonPayload = (serviceType, origin, destination) => {
 	return COMMON_PAYLOAD_MAPPING[serviceType];
 };
 
-const getExtraPayload = (serviceType, subType) => {
-	const EXTRA_PAYLOAD_MAPPING = {
-		fcl_freight: {
-			containers: {},
-		},
-		lcl_freight: {
-			packages: {},
-		},
-		air_freight: {
-			packages: {},
-		},
-		ftl_freight: {
-			truck: {
-				load_selection_type : 'truck',
-				packages            : [
-					{
-						handling_type  : 'stackable',
-						height         : 1,
-						length         : 1,
-						width          : 1,
-						package_weight : 1,
-						packages_count : 1,
-						packing_type   : 'box',
-					},
-				],
-				truck_type   : 'open_body_pickup_1ton',
-				trucks_count : 1,
-			},
-			cargo_full_truck: {
-				load_selection_type : 'cargo_gross',
-				packages            : [],
-				volume              : 1,
-				weight              : 1,
-			},
-		},
-		ltl_freight: {
-			cargo_partial_truck: {},
-		},
-		trailer_freight: {
-			mode_by_truck: {},
-		},
-		haulage_freight: {
-			mode_by_rail: {},
-		},
-	};
-
-	return EXTRA_PAYLOAD_MAPPING[serviceType][subType] || {};
-};
-
 const getDefaultPayload = ({
-	serviceType = '',
-	origin = '',
-	destination = '',
-	sub_type = '',
+	service_type = '',
+	origin = {},
+	destination = {},
 }) => {
-	const extraPayloadKey = serviceType === 'ftl_freight' ? 'truck' : sub_type;
-
 	const payloadObject = {
-		...getCommonPayload(serviceType, origin, destination),
-		...getExtraPayload(serviceType, extraPayloadKey),
+		...getPayload(service_type, origin, destination),
 	};
 
-	const payloadKey = [serviceType, 'services_attributes'].join('_');
+	const payloadKey = [service_type, 'services_attributes'].join('_');
 
 	const payload = { [payloadKey]: [payloadObject] };
 

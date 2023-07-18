@@ -2,6 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
+import getDefaultPayload from '../utils/getDefaultPayload';
+import getEditPayload from '../utils/getEditPayload';
+
 const useCreateSearch = () => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'post',
@@ -12,11 +15,37 @@ const useCreateSearch = () => {
 		try {
 			let payload = {};
 
+			const {
+				organization_branch_id,
+				organization_id,
+				service_type,
+				user_id,
+				origin,
+				destination,
+			} = values;
+
 			if (action === 'default') {
-				const { default_payload, organization_branch_id, organization_id, service_type, user_id } = values;
+				const defaultPayload = getDefaultPayload({
+					service_type,
+					origin,
+					destination,
+				});
 
 				payload = {
-					...default_payload,
+					...defaultPayload,
+					importer_exporter_branch_id : organization_branch_id,
+					importer_exporter_id        : organization_id,
+					source                      : 'platform',
+					search_type                 : service_type,
+					user_id,
+				};
+			} else if (['edit', 'quick-search'].includes(action)) {
+				const { formValues = {} } = values;
+
+				const editPayload = getEditPayload(service_type, { origin, destination, formValues });
+
+				payload = {
+					...editPayload,
 					importer_exporter_branch_id : organization_branch_id,
 					importer_exporter_id        : organization_id,
 					source                      : 'platform',

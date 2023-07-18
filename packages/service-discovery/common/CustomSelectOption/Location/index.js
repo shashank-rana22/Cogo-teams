@@ -3,6 +3,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO_INDEX = 0;
+const FIRST_INDEX = 1;
+
 function Location(props) {
 	const { data = {}, returnOnlyIcon } = props;
 
@@ -12,7 +15,7 @@ function Location(props) {
 
 	const tempNameArray = display_name.split(',').reverse() || [];
 
-	const cityAndCountryName = `${tempNameArray[1] || ''},${tempNameArray[0] || ''}`;
+	const cityAndCountryName = `${tempNameArray[FIRST_INDEX] || ''},${tempNameArray[ZERO_INDEX] || ''}`;
 
 	let portCode = null;
 	let IconElemennt = IcMLocation;
@@ -40,7 +43,9 @@ function Location(props) {
 
 	return (
 		<div className={styles.label_container}>
-			<div className={styles.label_icon}><IconElemennt fill="#333333" /></div>
+			<div className={styles.label_icon}>
+				<IconElemennt fill="#333333" />
+			</div>
 
 			<div className={styles.name_container}>
 				<div className={styles.name_sub_container}>

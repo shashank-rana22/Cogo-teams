@@ -1,0 +1,61 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.form_item {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
+
+	:global {
+		.ui_input_container {
+			padding: 0;
+			border: none;
+		}
+
+		.ui_select_input_control {
+			font-size: 14px !important;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 14px !important;
+		}
+
+		.ui_text_area_container {
+			padding: 8px 12px;
+		}
+
+		.ui_input_control {
+			padding: 8px 12px;
+			font-size: 12px !important;
+			border: 1px solid #dedede;
+			border-radius: 4px;
+		}
+
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+	}
+}
+
+.label {
+	display: flex;
+	margin-bottom: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+}
+
+.required_mark {
+	margin-left: 4px;
+	color: #e74c3c;
+}
+
+.error_message {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #e42525;
+}

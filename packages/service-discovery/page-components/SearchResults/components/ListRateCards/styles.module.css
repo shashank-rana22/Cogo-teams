@@ -1,0 +1,10 @@
+.container {
+	background-color: #fff;
+}
+
+.header {
+	position: sticky;
+	top: 120px;
+	z-index: 99;
+	width: 100%;
+}

@@ -296,8 +296,15 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.checkout_promotions,
 		],
-		main_apis     : [],
-		module_type   : 'dashboards',
+		main_apis: [
+			'list_organizations',
+			'list_shipments',
+			'list_spot_searches',
+			'list_margins',
+			'list_checkouts',
+			'list_partners',
+		],
+		module_type: 'dashboards',
 	},
 	sales_dashboard: {
 		key           : 'sales_dashboard',

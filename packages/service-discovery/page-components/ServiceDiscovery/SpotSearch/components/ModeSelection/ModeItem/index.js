@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const SET_TIMEOUT_DURATION = 1500;
+const MEDIUM_FONT_WEIGHT = 500;
+const SEMIBOLD_FONT_WEIGHT = 600;
+
 function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedService, setLocation }) {
 	const [bouncing, setBouncing] = useState(false);
 
@@ -14,7 +18,7 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 
 			setTimeout(() => {
 				setBouncing(false);
-			}, 1500);
+			}, SET_TIMEOUT_DURATION);
 			return;
 		}
 		if (selectedMode.mode_value === value) setSelectedMode({});
@@ -49,7 +53,7 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 
 			<div
 				className={styles.label}
-				style={{ fontWeight: selectedMode.mode_value === value ? 600 : 500 }}
+				style={{ fontWeight: selectedMode.mode_value === value ? SEMIBOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT }}
 			>
 				{label}
 			</div>

@@ -1,4 +1,3 @@
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -12,13 +11,13 @@ import styles from './styles.module.css';
 
 function SpotSearch() {
 	const [organization, setOrganization] = useState({});
-	const [selectedMode, setSelectedMode] = useState({});
+	const [selectedMode, setSelectedMode] = useState({
+		mode_label : 'FCL',
+		mode_value : 'fcl_freight',
+	});
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
-
-	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
-
-	const importer_exporter_id = watch('organization_id');
+	const [errors, setErrors] = useState({});
 
 	const { createSearch, loading } = useCreateSearch();
 
@@ -28,10 +27,8 @@ function SpotSearch() {
 				<Header
 					organization={organization}
 					setOrganization={setOrganization}
-					control={control}
 					errors={errors}
-					watch={watch}
-					setValue={setValue}
+					setErrors={setErrors}
 				/>
 			</div>
 
@@ -52,15 +49,15 @@ function SpotSearch() {
 							formValues={location}
 							setFormValues={setLocation}
 							organization={organization}
-							handleSubmit={handleSubmit}
 							errors={errors}
-							watch={watch}
 							createSearch={createSearch}
 							createSearchLoading={loading}
+							setErrors={setErrors}
 						/>
 					</div>
+
 					<div className={styles.sales_dashboard}>
-						<SalesDashboard importer_exporter_id={importer_exporter_id} />
+						<SalesDashboard importer_exporter_id={organization?.organization_id} />
 					</div>
 				</>
 			) : null}
@@ -80,11 +77,10 @@ function SpotSearch() {
 						formValues={location}
 						setFormValues={setLocation}
 						organization={organization}
-						handleSubmit={handleSubmit}
 						errors={errors}
-						watch={watch}
 						createSearch={createSearch}
 						createSearchLoading={loading}
+						setErrors={setErrors}
 					/>
 				</div>
 			)}

@@ -1,0 +1,57 @@
+.rateDetails {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.container {
+	min-height: 160px;
+	padding-top: 12px;
+	margin: 12px 20px 20px;
+	background: #fffdfc;
+	border: 1px solid #f9f7f7;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+}
+
+.middle {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.freightDetailsContainer {
+	flex-basis: 50%;
+	margin-right: 24px;
+}
+
+.totalFreightContainer {
+	flex-basis: 50%;
+}
+
+.freightText {
+	margin-bottom: 12px;
+	font-size: 10px;
+	color: #000;
+}
+
+.freightDetails {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+	.middle {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.freightDetailsContainer,
+	.totalFreightContainer {
+		flex-basis: 100%;
+		margin-right: 0;
+		margin-bottom: 24px;
+	}
+}

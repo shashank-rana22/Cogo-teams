@@ -1,15 +1,10 @@
-.container {
+.content {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	align-items: flex-start;
-	text-align: left;
-}
-
-.content{
-
 }
 
 .tooltip {
-	text-align: left;
-	word-break: keep-all;
+	/* text-align: left;
+	word-break: keep-all; */
 }

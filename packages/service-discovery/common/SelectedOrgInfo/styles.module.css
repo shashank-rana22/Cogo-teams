@@ -1,0 +1,66 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	max-width: 30%;
+	padding: 16px 24px;
+	margin-right: 24px;
+	margin-left: -24px;
+
+	&.light {
+		background: #fffafa;
+	}
+
+	&.dark {
+		color: #fff;
+		background: #2c2a2a;
+	}
+}
+
+.org_name {
+	margin-bottom: 6px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 400;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+	opacity: 0.6;
+
+	&.light {
+		color: #000;
+	}
+
+	&.dark {
+		color: #fff;
+	}
+}
+
+.user_name {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+	text-overflow: ellipsis;
+	text-transform: capitalize;
+	white-space: nowrap;
+
+	&.light {
+		color: #000;
+	}
+
+	&.dark {
+		color: #fff;
+	}
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.tooltip {
+	width: max-content;
+}
+
+.tooltip_content {
+	text-align: left;
+	word-break: keep-all;
+}

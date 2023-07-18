@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
+import SearchType from './SearchType';
+
 const LOCATION_KEY_MAPPING = {
 	origin      : 'pickup',
 	destination : 'drop',
@@ -97,38 +99,50 @@ const renderPortPair = (item, field) => {
 	);
 	const isSingleLocation = onlySingleLocation.includes(service_type);
 
-	return isSingleLocation ? (
-		<Tooltip content={origin_display_name}>
-			<div>{origin}</div>
-		</Tooltip>
-	) : (
-		<Tooltip
-			content={(
-				<div style={{ textAlign: 'center', wordBreak: 'keep-all' }}>
-					{origin_display_name?.length && (
-						<>
-							{origin_display_name}
-							{' '}
-							<br />
-							<IcMPortArrow height={20} width={20} />
-							<br />
-						</>
+	return (
+		<div style={{ display: 'flex', alignItems: 'center' }}>
+			<span style={{ marginRight: 20 }}>
+				<SearchType item={item} field={field} />
+			</span>
+
+			{ isSingleLocation ? (
+				<Tooltip content={origin_display_name}>
+					<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>{origin}</span>
+				</Tooltip>
+			) : (
+				<Tooltip
+					content={(
+						<div style={{ textAlign: 'center', wordBreak: 'keep-all' }}>
+							{origin_display_name?.length && (
+								<>
+									{origin_display_name}
+									{' '}
+									<br />
+									<IcMPortArrow height={20} width={20} />
+									<br />
+								</>
+							)}
+							{destination_display_name}
+						</div>
 					)}
-					{destination_display_name}
-				</div>
+				>
+					<div style={{ display: 'flex', alignItems: 'center', width: 'fit-content' }}>
+						{(origin || origin_display_name)?.length && (
+							<>
+								<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>
+									{origin || origin_display_name}
+								</span>
+								{' '}
+								<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
+							</>
+						)}
+						<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>
+							{destination || destination_display_name}
+						</span>
+					</div>
+				</Tooltip>
 			)}
-		>
-			<div style={{ display: 'flex', alignItems: 'center', width: 'fit-content' }}>
-				{(origin || origin_display_name)?.length && (
-					<>
-						<span style={{ maxWidth: 100 }}>{origin || origin_display_name}</span>
-						{' '}
-						<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
-					</>
-				)}
-				<span style={{ maxWidth: 100 }}>{destination || destination_display_name}</span>
-			</div>
-		</Tooltip>
+		</div>
 	);
 };
 export default renderPortPair;

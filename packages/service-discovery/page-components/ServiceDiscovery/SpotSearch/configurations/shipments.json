@@ -1,7 +1,6 @@
 {
 	"heading": "Shipments",
 	"api": "list_shipments",
-	"placement": "center",
 	"type": "sales_shipments",
 	"href": "/shipment-management",
 	"as": "/shipment-management",

@@ -31,7 +31,7 @@
 }
 
 .sub_label {
-	min-width: 10%;
+	min-width: max-content;
 	font-size: 12px;
 	color: rgb(130 130 130);
 }

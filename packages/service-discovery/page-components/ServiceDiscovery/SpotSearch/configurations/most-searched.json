@@ -1,18 +1,12 @@
 {
 	"heading": "Most Searched",
 	"api": "list_spot_searches",
-	"placement": "center",
 	"type": "most_searched",
 	"fields": [
 		{
 			"key": "serial_id",
 			"label": "ID",
 			"func": "renderSerialId"
-		},
-		{
-			"label": "Service",
-			"key": "search_type",
-			"func": "renderSearchType"
 		},
 		{
 			"label": "Shipper",
@@ -29,7 +23,7 @@
 		},
 		{
 			"label": "Port pair",
-			"key": "",
+			"key": "search_type",
 			"pair_type": "search_type",
 			"func": "renderPortPair"
 		},
@@ -45,9 +39,10 @@
 			"func": "renderCreated"
 		},
 		{
-			"key": "button",
+			"key": "spot_search",
 			"label": "",
 			"btnLabel":"Show Rates",
+			"inDifferentWindow": true,
 			"func": "renderButton"
 		}
 	],
