@@ -33,7 +33,7 @@ interface LineItemCardInterface {
 		billCurrency: string;
 		grandTotal: any;
 		subTotal: string | number;
-		tdsAmount: any;
+		tdsAmount: string | number;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
@@ -42,9 +42,9 @@ interface LineItemCardInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
 	shipmentType: string;
-	tdsRate: any;
-	paidTds: any;
-	subTotal: any;
+	tdsRate: string | number;
+	paidTds: string | number;
+	subTotal: string | number;
 }
 
 const PERCENTAGE_FACTOR = 100;
