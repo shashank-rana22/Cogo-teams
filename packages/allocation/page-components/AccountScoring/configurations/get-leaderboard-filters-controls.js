@@ -44,6 +44,7 @@ const controls = [
 		label       : 'Role',
 		placeholder : 'Select Role',
 		type        : 'asyncSelect',
+		multiple    : true,
 		asyncKey    : 'partner_roles',
 		initialCall : false,
 		isClearable : true,
@@ -71,10 +72,6 @@ const controls = [
 			page_limit          : 50,
 			agent_data_required : true,
 			page                : 1,
-			filters             : {
-				is_channel_partner : false,
-				account_type       : 'importer_exporter',
-			},
 		},
 		isClearable: true,
 	},

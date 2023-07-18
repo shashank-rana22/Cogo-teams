@@ -3,17 +3,18 @@
 	font-weight: 600;
 	color: #4f4f4f;
 }
-.button_container{
+
+.button_container {
 	display: flex;
 	justify-content: flex-end;
 	margin: 16px;
-
 }
+
 .table_container {
 	margin: 16px 0;
 }
 
-.bulk_container{
+.bulk_container {
 	display: flex;
 	justify-content: space-between;
 }
@@ -43,7 +44,7 @@
 	justify-content: flex-end;
 }
 
-.bulk_deallocate_toggle{
+.bulk_deallocate_toggle {
 	display: flex;
 	align-items: center;
 }

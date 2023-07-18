@@ -36,7 +36,7 @@ const useGetAccountLeaderboardData = () => {
 	});
 
 	const {
-		organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration, role,
+		organization, user_id: userId, date_range, service, warmth: accountWarmth, segment, duration, role_id,
 	} = watch();
 
 	const mutatedControls = controls.map((singleControl) => {
@@ -82,11 +82,11 @@ const useGetAccountLeaderboardData = () => {
 			to_date   : date_range?.endDate || new Date(),
 			service   : service || undefined,
 			filters   : {
-				service_id : organization || undefined,
-				user_id    : userId || undefined,
-				warmth     : accountWarmth || undefined,
-				segment    : segment || undefined,
-				role       : role || undefined,
+				service_id     : organization || undefined,
+				stakeholder_id : userId || undefined,
+				warmth         : accountWarmth || undefined,
+				segment        : segment || undefined,
+				role_id        : role_id || undefined,
 			},
 		}));
 
@@ -96,14 +96,16 @@ const useGetAccountLeaderboardData = () => {
 			to_date   : date_range?.endDate || new Date(),
 			service   : service || undefined,
 			filters   : {
-				service_id : organization || undefined,
-				user_id    : userId || undefined,
-				warmth     : accountWarmth || undefined,
-				segment    : segment || undefined,
-				role       : role || undefined,
+				service_id     : organization || undefined,
+				stakeholder_id : userId || undefined,
+				warmth         : accountWarmth || undefined,
+				segment        : segment || undefined,
+				role_id        : role_id || undefined,
 			},
+			page: 1,
 		}));
-	}, [organization, userId, service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range, role]);
+	}, [organization, userId,
+		service, accountWarmth, segment, setGraphParams, setLeaderboardParams, date_range, role_id]);
 
 	const currentPageListIds = useMemo(() => leaderboardList
 		?.map(({ service_user_id }) => service_user_id), [leaderboardList]);
