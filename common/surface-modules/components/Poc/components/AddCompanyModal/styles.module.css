@@ -2,6 +2,12 @@
 	max-height: 600px;
 }
 
+.modal_head_container {
+	min-height: 300px;
+	max-height: 500px;
+	scrollbar-gutter: stable both-edges;
+}
+
 .role_container {
 	width: 30%;
 }
@@ -31,4 +37,21 @@
 			font-weight: 600;
 		}
 	}
+}
+
+.input_container {
+	max-width: 200px;
+	margin-right: 40px;
+	margin-left: auto;
+
+	:global {
+		.ui_input_container {
+			min-width: 240px;
+			padding-right: 6px;
+		}
+	}
+}
+
+.form_container {
+	margin-top: 38px;
 }

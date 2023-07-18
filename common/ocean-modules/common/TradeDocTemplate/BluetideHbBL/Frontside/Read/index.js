@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 
 import Watermark from '../../../commons/Watermark';
 
@@ -73,14 +74,15 @@ function Read({
 
 						<div className={styles['section_one_child_2-bl_number']}>
 							<p>Bill of Lading No.</p>
-							<b>BL0423003182</b>
+							<b>{defaultValues?.bl_number}</b>
 						</div>
 
 						<div className={styles['section_one_child_2-details']}>
-							<img
-								// eslint-disable-next-line max-len
-								src="https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png"
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.bluetide_hbl_logo}
 								alt="Bluetide Logo"
+								height={20}
+								width={180}
 							/>
 							<span className={styles.details_text_lg}>
 								BLUETIDE ESERVICES PVT. LTD.
