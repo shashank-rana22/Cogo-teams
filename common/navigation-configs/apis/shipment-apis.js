@@ -1612,6 +1612,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
+		api         : 'get_saas_trade_engine_documents',
+		access_type : 'private',
+	},
+	{
 		api          : 'get_shipment_ftl_freight_fuel_payment',
 		access_type  : 'private',
 		service_name : 'shipment',
