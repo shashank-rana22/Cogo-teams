@@ -1,6 +1,7 @@
 import { Carousel, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useListDunningExecution from '../hooks/useListDunningExecution';
 import ShowMore from '../ShowMore';
@@ -27,52 +28,55 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 		totalSlides += INCREMENT;
 	}
 
-	const CAROUSELDATA = Array(totalSlides).fill('').map((item, index) => ({
-		key    : index,
-		render : () => (
-			<div className={styles.carousel_element}>
-				{Array(SINGLE_SLIDE_LIMIT).fill('').map((i, position) => {
-					const elementPosition = (index * SINGLE_SLIDE_LIMIT) + position;
-					const { scheduleRule, status } = list?.[elementPosition] || {};
-					const { scheduleTime, scheduleTimeZone, week } = scheduleRule || {};
-					const dateText = list?.[elementPosition]
-						?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
-					const timeText = `${scheduleTime} ${scheduleTimeZone}`;
-					const weekDay = week ? `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` : '';
+	const CAROUSELDATA = Array(totalSlides).fill('').map((item, index) => {
+		const key = uuid();
+		return ({
+			key,
+			render: () => (
+				<div className={styles.carousel_element}>
+					{Array(SINGLE_SLIDE_LIMIT).fill('').map((i, position) => {
+						const elementPosition = (index * SINGLE_SLIDE_LIMIT) + position;
+						const { scheduleRule, status } = list?.[elementPosition] || {};
+						const { scheduleTime, scheduleTimeZone, week } = scheduleRule || {};
+						const dateText = list?.[elementPosition]
+							?.scheduledAt?.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
+						const timeText = `${scheduleTime} ${scheduleTimeZone}`;
+						const weekDay = week ? `${week?.slice(WEEK_SLICE_FROM, WEEK_SLICE_TILL)} | ` : '';
 
-					return (
-						<div
-							key={list?.[elementPosition]?.id || position}
-							style={{
-								borderBottom: elementPosition === selectedExecution
-									? '4px solid #ee3425' : '1px solid #a8a8a8',
-							}}
-							className={styles.execution_tabs}
-						>
-							{ list?.[elementPosition]
-								? (
-									<button
-										onClick={() => setSelectedExecution(elementPosition)}
-										style={{
-											color: elementPosition === selectedExecution ? '#ee3425' : null,
-										}}
-										className={styles.tabs_btn}
-										disabled={status !== 'COMPLETED'}
-									>
-										<div>
-											{dateText || ''}
-										</div>
-										<div style={{ fontSize: '10px' }}>
-											{`${weekDay} ${timeText}`}
-										</div>
-									</button>
-								) : null}
-						</div>
-					);
-				})}
-			</div>
-		),
-	}));
+						return (
+							<div
+								key={list?.[elementPosition]?.id}
+								style={{
+									borderBottom: elementPosition === selectedExecution
+										? '4px solid #ee3425' : '1px solid #a8a8a8',
+								}}
+								className={styles.execution_tabs}
+							>
+								{ list?.[elementPosition]
+									? (
+										<button
+											onClick={() => setSelectedExecution(elementPosition)}
+											style={{
+												color: elementPosition === selectedExecution ? '#ee3425' : null,
+											}}
+											className={styles.tabs_btn}
+											disabled={status !== 'COMPLETED'}
+										>
+											<div>
+												{dateText || ''}
+											</div>
+											<div style={{ fontSize: '10px' }}>
+												{`${weekDay} ${timeText}`}
+											</div>
+										</button>
+									) : null}
+							</div>
+						);
+					})}
+				</div>
+			),
+		});
+	});
 
 	useEffect(() => {
 		if (dropdown === rowId) {
@@ -98,17 +102,20 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 					) : (
 						<div>
 							<div style={{ display: 'flex' }}>
-								{Array(SINGLE_SLIDE_LIMIT).fill('').map(() => (
-									<Placeholder
-										key="key"
-										height="32px"
-										width="120px"
-										style={{ margin: '0px 20px' }}
-									/>
-								))}
+								{Array(SINGLE_SLIDE_LIMIT).fill('').map(() => {
+									const key = uuid();
+									return (
+										<Placeholder
+											key={key}
+											height="32px"
+											width="120px"
+											style={{ margin: '0px 20px' }}
+										/>
+									);
+								})}
 							</div>
 							<div>
-								<Placeholder key="key" height="90px" width="100%" style={{ margin: '20px 0px' }} />
+								<Placeholder height="90px" width="100%" style={{ margin: '20px 0px' }} />
 							</div>
 						</div>
 					)}
