@@ -28,3 +28,11 @@
 		}
 	}
 }
+
+.container {
+	:global {
+		.styles_label__w_POy {
+			display: none;
+		}
+	}
+}

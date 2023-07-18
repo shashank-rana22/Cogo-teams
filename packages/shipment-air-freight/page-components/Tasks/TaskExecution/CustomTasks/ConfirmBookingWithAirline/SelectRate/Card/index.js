@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useSendBookingRequestEmail from '../../hooks/useSendBookingRequestEmail';
@@ -40,7 +40,11 @@ function Card({
 		sendBookingRequestEmail,
 	} = useSendBookingRequestEmail(onCancel, setShowEmailPreview, checkboxValue);
 
-	const handleProceedWithEmail = async (show_preview_only) => {
+	const handleProceedWithEmail = async (show_preview_only, formValues) => {
+		const pocData = (data?.repository_data?.pocs_data || []).find((val) => (
+			val?.email === formValues?.recipient_email
+		));
+
 		await sendBookingRequestEmail(
 			item,
 			taskData,
@@ -48,6 +52,7 @@ function Card({
 			handOverDate,
 			show_preview_only,
 			serviceProvidersData,
+			pocData,
 		);
 	};
 
@@ -93,17 +98,20 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-			<PreviewEmail
-				emailData={emailData}
-				show={showEmailPreview}
-				loading={loading}
-				onCloseModal={setShowEmailPreview}
-				onConfirm={handleProceedWithEmail}
-				data={data}
-				checkboxValue={checkboxValue}
-				setCheckboxValue={setCheckboxValue}
-			/>
-
+			{
+				!isEmpty(emailData) && (
+					<PreviewEmail
+						emailData={emailData}
+						show={showEmailPreview}
+						loading={loading}
+						onCloseModal={setShowEmailPreview}
+						onConfirm={handleProceedWithEmail}
+						data={data}
+						checkboxValue={checkboxValue}
+						setCheckboxValue={setCheckboxValue}
+					/>
+				)
+			}
 			<Modal
 				show={showModal}
 				onClose={() => setShowModal(false)}

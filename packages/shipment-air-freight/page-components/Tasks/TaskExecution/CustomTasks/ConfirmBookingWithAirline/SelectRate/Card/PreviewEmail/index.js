@@ -1,8 +1,13 @@
+import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal, CheckboxGroup } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
+
+import controls from '../../../configs/add-poc-controls';
 
 import styles from './styles.module.css';
 
+const CHECK_MULTIPLE_POC = 1;
 function PreviewEmail({
 	emailData = {},
 	show = false,
@@ -16,12 +21,27 @@ function PreviewEmail({
 	const pocOptions = (data?.repository_data?.pocs_data || []).map((item) => (
 		{
 			label : item?.name,
-			value : JSON.stringify({
-				name  : item?.name,
-				email : item?.email,
-			}),
+			value : item?.email,
 		}
 	));
+	const finalControls = controls(pocOptions);
+
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		watch,
+	} = useForm(finalControls);
+
+	const showCCEmailRecipient = watch('add_cc');
+
+	const pocData = watch('recipient_email');
+
+	const showElements = {
+		add_cc: pocOptions.length > CHECK_MULTIPLE_POC,
+	};
+
+	const ccEmailOptions = (pocOptions || []).filter((item) => item.value !== pocData);
 
 	return (
 
@@ -34,11 +54,32 @@ function PreviewEmail({
 			<Modal.Header title={emailData?.subject} />
 			<div className={styles.modal_body}>
 				<Modal.Body style={{ maxHeight: '570px' }}>
-					<div>Select The Recipient:</div>
-					<CheckboxGroup value={checkboxValue} onChange={setCheckboxValue} options={pocOptions} />
+					<div className={styles.container}>
+						<div>Select the recipient:</div>
+						<Layout
+							fields={finalControls}
+							errors={errors}
+							control={control}
+							showElements={showElements}
+						/>
+						{
+						showCCEmailRecipient
+						&& (
+							<>
+								<div>Select the CC recipient</div>
+								<CheckboxGroup
+									value={checkboxValue}
+									onChange={setCheckboxValue}
+									options={ccEmailOptions}
+								/>
+							</>
 
-					<div>
-						<div dangerouslySetInnerHTML={{ __html: emailData?.template }} />
+						)
+					}
+
+						<div>
+							<div dangerouslySetInnerHTML={{ __html: emailData?.template }} />
+						</div>
 					</div>
 				</Modal.Body>
 			</div>
@@ -54,8 +95,8 @@ function PreviewEmail({
 				</div>
 				<Button
 					className="primary md"
-					disabled={loading || isEmpty(checkboxValue)}
-					onClick={() => onConfirm(false)}
+					disabled={loading || isEmpty(pocData)}
+					onClick={handleSubmit((formValues) => onConfirm(false, formValues))}
 				>
 					Send Mail
 				</Button>

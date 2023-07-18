@@ -13,8 +13,6 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue
 		method : 'POST',
 	}, { manual: true });
 
-	const recipient_datas = checkboxValue.map((item) => JSON.parse(item));
-
 	const sendBookingRequestEmail = async (
 		item,
 		taskData,
@@ -22,6 +20,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue
 		handOverDate,
 		show_preview_only,
 		serviceProvidersData,
+		pocData,
 	) => {
 		try {
 			await trigger({
@@ -38,7 +37,9 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue
 					priority            : item?.priority,
 					service_providers   : serviceProvidersData,
 					service_provider_id : data?.service_provider_id,
-					recipient_datas,
+					poc_name            : pocData?.name,
+					poc_email           : pocData?.email,
+					cc_email            : checkboxValue,
 				},
 			});
 
