@@ -1,0 +1,9 @@
+.org_users_styles {
+	width: 100%;
+	height: 80%;
+}
+
+.body_styles {
+	height: 440px;
+	max-height: unset !important;
+}

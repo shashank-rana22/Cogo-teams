@@ -41,9 +41,10 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab    : 'message',
-		subTab : 'all',
-		data   : assigned_chat ? {
+		tab               : 'message',
+		subTab            : 'all',
+		hasNoFireBaseRoom : false,
+		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
@@ -55,6 +56,7 @@ function CogoOne() {
 	const [buttonType, setButtonType] = useState('');
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
+	const [openKamContacts, setOpenKamContacts] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -87,7 +89,7 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
-	const { subTab } = activeTab || {};
+	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -120,6 +122,7 @@ function CogoOne() {
 						firestore={firestore}
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
+						setOpenKamContacts={setOpenKamContacts}
 					/>
 				</div>
 
@@ -149,7 +152,7 @@ function CogoOne() {
 
 							{activeTab?.tab !== 'mail' && (
 								<div className={cl`${styles.user_profile_layout} 
-								${subTab === 'kamContacts' ? styles.disable_user_profile : ''}`}
+								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -165,7 +168,7 @@ function CogoOne() {
 										userId={userId}
 										setActiveTab={setActiveTab}
 									/>
-									{subTab === 'kamContacts' && <div className={styles.overlay_div} />}
+									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -203,6 +206,9 @@ function CogoOne() {
 				refetchTickets={refetchTickets}
 				firestore={firestore}
 				userId={userId}
+				openKamContacts={openKamContacts}
+				setOpenKamContacts={setOpenKamContacts}
+				setActiveTab={setActiveTab}
 			/>
 		</>
 	);

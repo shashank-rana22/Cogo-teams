@@ -17,6 +17,7 @@ function CommunicationModals({
 	modalType = {},
 	userId = '',
 	viewType = '',
+	setOpenKamContacts = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -76,6 +77,16 @@ function CommunicationModals({
 									onClick={() => setButtonType('send_mail')}
 									src={GLOBAL_CONSTANTS.image_url.email_icon}
 									alt="gmail icon"
+									role="presentation"
+									height={60}
+									width={60}
+								/>
+							</div>
+							<div className={cl`${styles.action} ${styles.contacts_icon}`}>
+								<Image
+									onClick={() => setOpenKamContacts(true)}
+									src={GLOBAL_CONSTANTS.image_url.bot_logo_svg}
+									alt="contacts icon"
 									role="presentation"
 									height={60}
 									width={60}

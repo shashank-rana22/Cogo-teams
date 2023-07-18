@@ -1,38 +1,55 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import formatOrganizationUsers from '../helpers/formatOrganizationUsers';
 
-const getParams = ({ organizationId }) => ({
-	organization_id : organizationId,
-	page            : 1,
-	page_Limit      : 1000,
+const getParams = ({ organizationId, query }) => ({
+	filters    : { organization_id: organizationId,	q: query || undefined },
+	page       : 1,
+	page_limit : 8,
+
 });
 
-const useListOrganizationUsers = () => {
-	const [openOrgAccordian, setOpenOrgAccordian] = useState(false);
+const useListOrganizationUsers = ({ organizationId }) => {
+	const [search, setSearch] = useState('');
 
-	const [data, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_organization_users',
 		method : 'get',
 	}, { manual: true });
 
-	const getOrganizationUsers = useCallback(async ({
-		organizationId,
-	}) => {
+	const { debounceQuery, query } = useDebounceQuery();
+
+	const getOrganizationUsers = useCallback(async () => {
+		if (!organizationId) {
+			return;
+		}
+
 		try {
-			await trigger({ params: getParams({ organizationId }) });
-			setOpenOrgAccordian(true);
+			await trigger({ params: getParams({ organizationId, query }) });
 		} catch (err) {
 			console.error('err', err);
 		}
-	}, [trigger]);
+	}, [trigger, organizationId, query]);
+
+	useEffect(() => {
+		getOrganizationUsers();
+	}, [getOrganizationUsers]);
+
+	useEffect(() => {
+		debounceQuery(search);
+	}, [search, debounceQuery]);
+
+	useEffect(() => {
+		setSearch('');
+	}, [organizationId]);
 
 	return {
-		getOrganizationUsers,
-		formattedOrgUsersList: formatOrganizationUsers({ data }),
-		openOrgAccordian,
-		setOpenOrgAccordian,
+		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data }) : [],
+		loading,
+		setSearch,
+		search,
 	};
 };
 export default useListOrganizationUsers;

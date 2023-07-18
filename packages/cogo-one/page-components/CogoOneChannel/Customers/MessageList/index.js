@@ -8,30 +8,13 @@ import { useState, useEffect } from 'react';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import useListChats from '../../../../hooks/useListChats';
-import useListOrganizationUsers from '../../../../hooks/useListOrganizationUsers';
 import LoadingState from '../LoadingState';
 
 import AutoAssignComponent from './AutoAssignComponent';
 import FlashUserChats from './FlashUserChats';
 import Header from './Header';
-import KamOrgAccordian from './KamOrgAccordian';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
-
-const SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING = {
-	all: {
-		dataKey   : 'messagesList',
-		component : MessageCardData,
-	},
-	kamContacts: {
-		dataKey   : 'kamContacts',
-		component : KamOrgAccordian,
-	},
-	default: {
-		dataKey   : 'messagesList',
-		component : MessageCardData,
-	},
-};
 
 function MessageList(messageProps) {
 	const {
@@ -43,7 +26,6 @@ function MessageList(messageProps) {
 		viewType = '',
 		isBotSession,
 		setIsBotSession,
-		workPrefernceLoading = false,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -53,7 +35,6 @@ function MessageList(messageProps) {
 	const [searchValue, setSearchValue] = useState('');
 
 	const { subTab } = activeTab || {};
-
 	const {
 		chatsData,
 		appliedFilters,
@@ -70,8 +51,11 @@ function MessageList(messageProps) {
 		setActiveTab,
 		activeSubTab: subTab,
 		setCarouselState,
-		workPrefernceLoading,
 	});
+
+	const setActiveSubTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
+	};
 
 	const {
 		bulkAssignChat = () => {},
@@ -80,12 +64,6 @@ function MessageList(messageProps) {
 		setSelectedAutoAssign,
 		setAutoAssignChats,
 	});
-
-	const orgUserProps = useListOrganizationUsers();
-
-	const setActiveSubTab = (val) => {
-		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
-	};
 
 	const {
 		messagesList,
@@ -114,35 +92,6 @@ function MessageList(messageProps) {
 		setSelectedAutoAssign({});
 	};
 
-	const {
-		dataKey = '',
-		component:Component,
-	} = SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING[
-		subTab] || SUB_TAB_WISE_RECENT_CHATS_DATA_MAPPING.default;
-
-	const SUB_TAB_PROPS_MAPPING = {
-		all: {
-			userId,
-			firestore,
-			autoAssignChats,
-			handleCheckedChats,
-			setActiveMessage,
-			activeTab,
-			viewType,
-		},
-		kamContacts: {
-			...orgUserProps,
-		},
-		default: {
-			userId,
-			firestore,
-			autoAssignChats,
-			handleCheckedChats,
-			setActiveMessage,
-			activeTab,
-			viewType,
-		},
-	};
 	useEffect(() => {
 		handleAutoAssignBack();
 	}, [isBotSession, appliedFilters]);
@@ -240,15 +189,22 @@ function MessageList(messageProps) {
 							)}
 
 							<div className={styles.recent_text}>Recent</div>
-							{(chatsData?.[dataKey] || []).map(
+							{(messagesList || []).map(
 								(item) => (
-									<Component
+									<MessageCardData
 										key={item?.id}
 										item={item}
-										{...(SUB_TAB_PROPS_MAPPING[subTab] || SUB_TAB_PROPS_MAPPING.default)}
+										userId={userId}
+										firestore={firestore}
+										autoAssignChats={autoAssignChats}
+										handleCheckedChats={handleCheckedChats}
+										setActiveMessage={setActiveMessage}
+										activeTab={activeTab}
+										viewType={viewType}
 									/>
 								),
 							)}
+
 							{loadingState?.chatsLoading && <LoadingState />}
 						</div>
 					</>

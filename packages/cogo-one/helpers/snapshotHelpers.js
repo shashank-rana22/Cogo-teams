@@ -12,7 +12,6 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
-const FIREBASE_MESSAGES_NOT_REQUIRED_TABS = ['kam_contacts'];
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -93,14 +92,14 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState, workPrefernceLoading,
+	activeSubTab, updateLoadingState,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats || workPrefernceLoading) {
+	if (activeSubTab !== 'all' || viewType === 'shipment_specialist' || !canShowPinnedChats) {
 		return;
 	}
 
@@ -157,16 +156,11 @@ export function mountUnreadCountSnapShot({
 
 export function mountSnapShot({
 	setLoadingState, setListData, snapshotListener, omniChannelCollection,
-	queryForSearch, omniChannelQuery, updateLoadingState, activeSubTab, workPrefernceLoading,
+	queryForSearch, omniChannelQuery, updateLoadingState,
 }) {
 	const snapshotRef = snapshotListener;
 	setListData((prev) => ({ ...prev, messagesListData: {}, pinnedMessagesData: {} }));
 	snapshotCleaner({ ref: snapshotListener });
-
-	if (FIREBASE_MESSAGES_NOT_REQUIRED_TABS.includes(activeSubTab) || workPrefernceLoading) {
-		return;
-	}
-
 	setLoadingState((prev) => ({ ...prev, chatsLoading: true }));
 
 	const newChatsQuery = query(
@@ -256,7 +250,6 @@ export function mountActiveRoomSnapShot({
 				data: { ...(prev.data || {}), id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
 			}));
 		});
-
-		setActiveRoomLoading(false);
 	}
+	setActiveRoomLoading(false);
 }

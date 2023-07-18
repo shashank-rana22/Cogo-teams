@@ -7,12 +7,12 @@ import getQueryFilterMapping from './getQueryFilterMapping';
 const BULK_ASSIGN_SEEN_MINUTES = 15;
 
 const TAB_WISE_QUERY_KEY_MAPPING = {
-	all      : 'all_chats_base_query',
-	observer : 'observer_chats_base_query',
-	groups   : 'group_chats_query',
-	teams    : 'teams_chats_base_query',
-	contacts : 'contacts_base_query',
-
+	all         : 'all_chats_base_query',
+	observer    : 'observer_chats_base_query',
+	groups      : 'group_chats_query',
+	teams       : 'teams_chats_base_query',
+	contacts    : 'contacts_base_query',
+	kamContacts : 'kam_contacts_base_query',
 };
 
 function getFireStoreQuery({

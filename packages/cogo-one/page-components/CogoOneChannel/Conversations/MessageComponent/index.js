@@ -1,17 +1,12 @@
-import KamUserMessages from '../KamUserMessages';
 import Messages from '../Messages';
-
-const COMPONENT_MAPPING = {
-	all         : Messages,
-	kamContacts : KamUserMessages,
-	default     : Messages,
-};
+import NewUserRoom from '../NewUserRoom';
 
 function MessageComponent(props = {}) {
 	const { activeTab } = props;
-	const { subTab } = activeTab || {};
+	const { hasNoFireBaseRoom = false } = activeTab || {};
 
-	const Component = COMPONENT_MAPPING[subTab] || COMPONENT_MAPPING.default;
+	const Component = hasNoFireBaseRoom ? NewUserRoom : Messages;
+
 	return (
 		<Component {...props} />
 	);

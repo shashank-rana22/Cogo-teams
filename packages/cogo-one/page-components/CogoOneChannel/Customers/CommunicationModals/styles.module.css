@@ -90,3 +90,11 @@
 	background: #ffff;
 	border-radius: 50%;
 }
+
+.contacts_icon {
+	top: 140%;
+	right: -25px;
+	user-select: none;
+	background: #ffff;
+	border-radius: 50%;
+}

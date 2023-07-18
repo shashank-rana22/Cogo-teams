@@ -29,12 +29,12 @@ function Messages({
 	userId = '',
 	setRaiseTicketModal = () => {},
 	viewType = '',
-	setActiveRoomLoading,
-	setActiveTab,
+	setActiveRoomLoading = false,
+	setActiveTab = () => {},
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
-	const [headertags, setheaderTags] = useState();
+	const [headertags, setheaderTags] = useState('');
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});

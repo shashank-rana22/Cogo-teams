@@ -22,7 +22,7 @@ function NewWhatsappMessage({
 	const { type = '', data:modalData = {} } = modalType || {};
 
 	const closeModal = () => {
-		setModalType(false);
+		setModalType({ type: null, data: {} });
 		setDialNumber({
 			number       : '',
 			country_code : '+91',
@@ -64,7 +64,7 @@ function NewWhatsappMessage({
 	};
 	return (
 		<Modal
-			show={modalType?.type}
+			show={type}
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}

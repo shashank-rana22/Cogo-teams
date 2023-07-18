@@ -31,6 +31,7 @@ function Customers({
 	firestore = {},
 	viewType = '',
 	workPrefernceLoading = false,
+	setOpenKamContacts = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 
@@ -143,6 +144,7 @@ function Customers({
 				modalType={modalType}
 				userId={userId}
 				viewType={viewType}
+				setOpenKamContacts={setOpenKamContacts}
 			/>
 		</div>
 	);
