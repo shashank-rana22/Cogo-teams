@@ -40,7 +40,7 @@ function HighAmountRequestModal({
 
 	const [remark, setRemark] = useState('');
 
-	const [advanceAmount, setadvanceAmount] = useState(0);
+	const [advanceAmount, setadvanceAmount] = useState('');
 
 	const { loading, data } = useGetAdvancedPaymentHistory({ sellerOrganizationId });
 
@@ -261,6 +261,7 @@ function HighAmountRequestModal({
 									setadvanceAmount(e);
 								}}
 							/>
+
 						</div>
 
 					</div>
