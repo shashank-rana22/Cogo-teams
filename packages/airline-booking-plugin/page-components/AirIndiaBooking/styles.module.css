@@ -1,14 +1,18 @@
 .booking_container {
 	height: auto;
 	padding: 2px;
-}
 
-.title {
-	padding: 0;
-	margin-bottom: 20px;
-	font-size: var(--font-size-xl);
-	font-weight: 500;
-	color: var(--color-primary-error-red-2);
+	:global {
+		.ui_modal_header_container {
+			padding: 8px;
+
+			.ui_modal_header_title {
+				font-size: var(--font-size-xl);
+				font-weight: 500;
+				color: var(--color-primary-error-red-2);
+			}
+		}
+	}
 }
 
 .apply_box {

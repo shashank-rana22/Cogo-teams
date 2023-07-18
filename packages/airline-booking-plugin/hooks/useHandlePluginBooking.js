@@ -6,7 +6,7 @@ import CONSTANTS from '../constants/constants';
 
 const EMPTY_VALUE = 0;
 
-const useHandlePluginBooking = (edit) => {
+const useHandlePluginBooking = (edit = false) => {
 	const api = edit ? '/update_awb_plugin_booking_information' : '/create_awb_booking_information';
 
 	const [{ loading }, trigger] = useRequest({
@@ -15,12 +15,13 @@ const useHandlePluginBooking = (edit) => {
 	});
 
 	const createBooking = async ({
-		finalData,
-		setShowPlugInModal,
-		locationData,
-		refresh,
+		finalData = {},
+		setPluginData = () => {},
+		locationData = {},
+		refresh = {},
+		setEdit = () => {},
 	}) => {
-		const { setFinalList, setPage, airIndiaAwbNumbersList } = refresh;
+		const { setFinalList = () => {}, setPage = () => {}, getAirIndiaAwbNumbersList = () => {} } = refresh || {};
 		const FORMATTED_DATA = {};
 		Object.keys(finalData).forEach((bookInfoKey) => {
 			if (['commodity', 'flight_number'].includes(bookInfoKey)) {
@@ -34,18 +35,23 @@ const useHandlePluginBooking = (edit) => {
 			}
 		});
 
+		const payload = edit ? { ...FORMATTED_DATA } : { booking_informations: [FORMATTED_DATA] };
+
 		try {
 			await trigger({
-				data: { booking_informations: [FORMATTED_DATA] },
+				data: payload,
 			});
 			Toast.success('AWB Booking Information Successfully Added');
-			setShowPlugInModal((prev) => [
+			setPluginData((prev) => (edit ? [] : [
 				...prev,
 				{ ...finalData, ...locationData },
-			]);
+			]));
 			setFinalList([]);
 			setPage(CONSTANTS.START_PAGE);
-			airIndiaAwbNumbersList();
+			getAirIndiaAwbNumbersList();
+			if (edit) {
+				setEdit(false);
+			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
 		}
@@ -53,19 +59,19 @@ const useHandlePluginBooking = (edit) => {
 
 	const stateBooking = async ({
 		statusAwb,
-		airIndiaAwbNumbersList,
+		getAirIndiaAwbNumbersList,
 		setFinalList,
 		setPage,
-		airId,
+		id,
 	}) => {
 		try {
-			if (airId) {
+			if (id) {
 				await trigger({
-					data: { id: airId, status: statusAwb },
+					data: { id, status: statusAwb },
 				}).then(() => {
 					Toast.success(`AWB Booking Information ${statusAwb}d Successfully`);
 					setFinalList([]);
-					airIndiaAwbNumbersList();
+					getAirIndiaAwbNumbersList();
 					setPage(CONSTANTS.START_PAGE);
 				});
 			}

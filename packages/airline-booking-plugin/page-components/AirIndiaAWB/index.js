@@ -16,11 +16,16 @@ import styles from './styles.module.css';
 const { START_PAGE } = CONSTANTS;
 const NO_DATA_COUNT = 0;
 
-function AirIndiaAWB({ activeTab = 'air_india', setEdit = () => {} }) {
+function AirIndiaAWB({
+	activeTab = 'air_india',
+	setEdit = () => {},
+	item = {},
+	setItem = () => {},
+	setRefresh = () => {},
+}) {
 	const profile = useSelector((state) => state);
 	const [status, setStatus] = useState('inactive');
 	const [statusAwb, setStatusAwb] = useState(null);
-	const [item, setItem] = useState({});
 
 	const { profile: { authParams } } = profile || {};
 	const { stateBooking } = useHandlePluginBooking(true);
@@ -63,7 +68,7 @@ function AirIndiaAWB({ activeTab = 'air_india', setEdit = () => {} }) {
 						themeType="linkUi"
 						onClick={() => {
 							setEdit(true);
-							setItem(item);
+							setItem(singleItem);
 						}}
 					>
 						<IcMEdit fill="var(--color-accent-orange-2)" />
@@ -73,7 +78,7 @@ function AirIndiaAWB({ activeTab = 'air_india', setEdit = () => {} }) {
 						themeType="linkUi"
 						onClick={() => {
 							setStatusAwb('delete');
-							setItem(item);
+							setItem(singleItem);
 						}}
 					>
 						<IcMDelete fill="var(--color-accent-orange-2)" />
@@ -92,12 +97,11 @@ function AirIndiaAWB({ activeTab = 'air_india', setEdit = () => {} }) {
 				getAirIndiaAwbNumbersList,
 				setFinalList,
 				setPage,
-				airId: item?.id,
+				id: item?.id,
 			});
 			setStatusAwb(null);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [statusAwb]);
+	}, [getAirIndiaAwbNumbersList, item?.id, setFinalList, setPage, stateBooking, statusAwb]);
 
 	useEffect(() => {
 		setFinalList([]);
@@ -108,6 +112,10 @@ function AirIndiaAWB({ activeTab = 'air_india', setEdit = () => {} }) {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(authParams)]);
+
+	useEffect(() => {
+		setRefresh({ setFinalList, setPage, getAirIndiaAwbNumbersList });
+	}, [getAirIndiaAwbNumbersList, setFinalList, setPage, setRefresh]);
 
 	return (
 		<div className={styles.air_india_container}>

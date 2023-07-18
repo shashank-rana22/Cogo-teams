@@ -1,4 +1,4 @@
-export const bookingControl = (setLocationData) => [
+export const bookingControl = (setLocationData, edit) => [
 	{
 		name        : 'source',
 		type        : 'async-select',
@@ -6,7 +6,7 @@ export const bookingControl = (setLocationData) => [
 		initialCall : true,
 		placeholder : 'Source',
 		span        : 1.7,
-		onChange    : (obj) => setLocationData((pre) => ({ ...pre, source: obj?.name })),
+		onChange    : (val, obj) => setLocationData((pre) => ({ ...pre, source: obj?.name })),
 		params      : {
 			filters: {
 				type: ['airport'],
@@ -23,7 +23,7 @@ export const bookingControl = (setLocationData) => [
 		initialCall : true,
 		placeholder : 'Destination',
 		span        : 1.7,
-		onChange    : (obj) => setLocationData((pre) => ({ ...pre, destination: obj?.name })),
+		onChange    : (val, obj) => setLocationData((pre) => ({ ...pre, destination: obj?.name })),
 		params      : {
 			filters: {
 				type: ['airport'],
@@ -80,7 +80,7 @@ export const bookingControl = (setLocationData) => [
 	},
 	{
 		name        : 'flight_date',
-		type        : 'date_range',
+		type        : edit ? 'date_picker' : 'date_range',
 		placeholder : 'Flight Date',
 		span        : 2,
 		minDate     : new Date(),
