@@ -29,7 +29,7 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
+function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
 		defaultFilters : { organization_status: 'active' },
@@ -50,8 +50,6 @@ function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
 
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const formValues = watch();
-
-	const taxLabel = geo.others.registration_number.label;
 
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
@@ -103,7 +101,11 @@ function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
 			});
 		}
 	}, [formValues?.name, pocNameOptions, setValue, resetMultipleFields]);
+
 	const countryValidation = getCountryConstants({ country_id: formValues.country_id, isDefaultData: false });
+
+	const taxLabel = countryValidation?.others?.registration_number?.label || 'PAN';
+
 	useEffect(() => {
 		if (formValues?.country_id) {
 			setValue('mobile_number', { country_code: countryValidation?.country?.mobile_country_code });
@@ -132,7 +134,7 @@ function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
 
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`${geo.others.identification_number.label} ${
+							{`${countryValidation?.others?.identification_number?.label || 'PAN'} ${
 								['collection_party', 'paying_party'].includes(tradePartyType) ? '' : '(Optional)'}`}
 						</label>
 						<InputController
@@ -250,48 +252,62 @@ function CreateNewCompanyForm({ tradePartyType, primary_service = {} }, ref) {
 					</div>
 				</div>
 
-				<div className={styles.checkbox}>
-					<CheckboxController name="not_reg_under_gst" control={control} />
-					<label className={styles.form_label}>Not registered under GST</label>
-				</div>
+				{ countryValidation?.others?.ask_gst_details === false
+					? (
 
-				<div className={styles.row}>
-					<div>
-						<label className={styles.form_label}>GST Number</label>
-						<InputController
-							size="sm"
-							name="tax_number"
-							control={control}
-							rules={{
-								required : { value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
-								pattern  : { value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
-							}}
-							disabled={formValues.not_reg_under_gst}
-						/>
-						{Error('tax_number', errors)}
-					</div>
+						null
 
-					<div className={styles.upload_container}>
-						<label className={styles.form_label}>
-							{taxLabel}
-							{' '}
-							Proof
-						</label>
-						<UploadController
-							className="tax_document"
-							name="tax_number_document_url"
-							disabled={formValues.not_reg_under_gst}
-							control={control}
-							rules={{
-								required: {
-									value   : !formValues.not_reg_under_gst,
-									message : `${taxLabel} Proof is required`,
-								},
-							}}
-						/>
-						{Error('tax_number_document_url', errors)}
-					</div>
-				</div>
+					) : (
+						<>
+							<div className={styles.checkbox}>
+								<CheckboxController name="not_reg_under_gst" control={control} checked />
+								<label className={styles.form_label}>Not registered under GST</label>
+							</div>
+
+							<div className={styles.row}>
+								<div>
+									<label className={styles.form_label}>GST Number</label>
+									<InputController
+										size="sm"
+										name="tax_number"
+										control={control}
+										rules={{
+
+											required:
+									{ value: !formValues.not_reg_under_gst, message: 'GST Number is required' },
+											pattern:
+									{ value: countryValidation?.regex?.GST, message: 'GST Number is invalid' },
+										}}
+										disabled={formValues.not_reg_under_gst}
+									/>
+									{Error('tax_number', errors)}
+								</div>
+
+								<div className={styles.upload_container}>
+									<label className={styles.form_label}>
+										{taxLabel}
+										{' '}
+										Proof
+									</label>
+									<UploadController
+										className="tax_document"
+										name="tax_number_document_url"
+										disabled={formValues.not_reg_under_gst}
+										control={control}
+										rules={{
+											required: {
+												value   : !formValues.not_reg_under_gst,
+												message : `${taxLabel} Proof is required`,
+											},
+										}}
+									/>
+									{Error('tax_number_document_url', errors)}
+								</div>
+							</div>
+
+						</>
+					)}
+
 			</form>
 		</div>
 	);

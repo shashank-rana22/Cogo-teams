@@ -447,6 +447,8 @@ export default {
 			label: 'Non-Tariff Zone',
 		},
 
+		ask_gst_details: false,
+
 		navigations: {
 			onboard_vendor: {
 				validate_registration : false,
