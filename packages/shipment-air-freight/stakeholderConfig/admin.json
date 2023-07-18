@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview","purchase", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
         "can_edit": true
@@ -28,6 +28,9 @@
         },
         "role": "sales"
     },
+    "purchase":{
+        "tab_title": "Purchase Invoice"
+    },
     "edit_supplier": false,
     "cancel_service": false,
     "edit_params": {
@@ -42,5 +45,8 @@
             "status::amendment_requested_by_importer_exporter": false,
             "status::cancelled_by_supplier": false
         }
+    },
+    "tracking": {
+        "tab_title": "Tracking"
     }
 }

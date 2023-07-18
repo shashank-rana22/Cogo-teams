@@ -24,18 +24,19 @@ const useGetVesselSchedules = ({ filters }) => {
 					q                : q || undefined,
 					started_at       : started_at || undefined,
 					shipping_line_id : shipping_line_id || undefined,
-					sort_by          : sort_by || undefined,
 				},
 				page_limit               : 10,
 				page,
 				pagination_data_required : true,
-				sort_by                  : 'updated_at',
+				sort_by                  : sort_by || undefined,
 				sort_type                : 'desc',
 			};
 			await trigger({
 				params: payload,
 			});
-		} catch (err) {}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	useEffect(() => {

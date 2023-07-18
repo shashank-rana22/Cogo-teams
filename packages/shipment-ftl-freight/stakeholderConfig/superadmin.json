@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop","purchase", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
     "shipment_info":{},
     "shipment_header": {
         "add_po_number": true
@@ -14,6 +14,9 @@
         "checked_show_my_tasks":false,
         "is_task_assigned":false,
         "can_reassign_task":true
+    },
+    "purchase":{
+        "tab_title":"Purchase Invoice"
     },
     "documents":{
         "tab_title":"Documents",

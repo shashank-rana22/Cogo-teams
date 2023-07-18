@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const ONE = 1;
+const TEN_THOUSAND = 10000;
 function RoutePortForm({
-	isFirst, isLast, port, diffInDay, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete,
+	isFirst, isLast, port, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete,
 }) {
-
 	const [showPopover, setShowPopover] = useState(false);
 	const dayChoices = [
 		'Sunday',
@@ -21,11 +23,11 @@ function RoutePortForm({
 
 	const getPortName = (name) => {
 		const splitIndex = name?.indexOf(',')
-            < (name?.indexOf('(') < 0 ? 10000 : name?.indexOf('('))
+            < (name?.indexOf('(') < ZERO ? TEN_THOUSAND : name?.indexOf('('))
             	? name?.indexOf(',')
             	: name?.indexOf('(');
 
-		return name?.substring(0, splitIndex - 1);
+		return name?.substring(ZERO, splitIndex - ONE);
 	};
 
 	return (
@@ -36,7 +38,7 @@ function RoutePortForm({
 						<div className={styles.eta}>
 							ETA :
 							{' '}
-							{dayChoices[port?.eta_day - 1]}
+							{dayChoices[Number(port?.eta_day) - ONE]}
 							{' '}
 							( Day &nbsp;
 							{port?.eta_day_count}
@@ -45,7 +47,7 @@ function RoutePortForm({
 						<div className={styles.etd}>
 							ETD :
 							{' '}
-							{dayChoices[port?.etd_day - 1]}
+							{dayChoices[Number(port?.etd_day) - ONE]}
 							{' '}
 							( Day &nbsp;
 							{port?.etd_day_count}
@@ -57,7 +59,11 @@ function RoutePortForm({
 				</div>
 
 			</div>
-			{ !isFirst ? <div className={styles.add_icon}><IcMPlusInCircle onClick={() => { onClickAdd(index); }} /></div> : <div style={{ margin: '7px' }} />}
+			{ !isFirst ? (
+				<div className={styles.add_icon}>
+					<IcMPlusInCircle onClick={() => { onClickAdd(index); }} />
+				</div>
+			) : <div style={{ margin: '7px' }} />}
 			<div className={styles.middle}>
 				{!isFirst && <div className={styles.hr_line_up} />}
 				<div className={styles.circle} />
@@ -101,13 +107,6 @@ function RoutePortForm({
 					/>
 
 				</div>
-				{/* {!isLast && (
-					<div className={styles.diff_in_days}>
-						{diffInDays}
-						{' '}
-						Days
-					</div>
-				)} */}
 			</div>
 		</div>
 	);

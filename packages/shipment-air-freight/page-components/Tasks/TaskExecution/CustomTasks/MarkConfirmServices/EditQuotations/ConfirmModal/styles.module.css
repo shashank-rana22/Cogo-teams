@@ -1,0 +1,97 @@
+.container {
+	.core-ui-select__control--is-disabled {
+		font-weight: 600;
+		background: none !important;
+		border: none !important;
+	}
+
+	.core-ui-select__control {
+		min-height: 24px !important;
+	}
+}
+
+.header {
+	text-align: center;
+
+	.bold {
+		font-weight: 600;
+	}
+}
+
+.heading {
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 15px;
+	color: #cb6464;
+	text-align: center;
+	letter-spacing: 0.01em;
+}
+
+.title {
+	margin-bottom: 8px;
+
+	&::after {
+		display: block;
+		width: 20%;
+		height: 2px;
+		content: "";
+		background: #5936f0;
+		border-radius: 20px;
+	}
+}
+
+.description {
+	display: flex;
+	justify-content: flex-start;
+	margin-right: 16px;
+	font-size: 12px;
+}
+
+.info {
+	width: 100%;
+	margin-left: 20px;
+}
+
+.button_div {
+	display: flex;
+	justify-content: flex-end;
+
+	.cancel {
+		margin-right: 16px;
+	}
+}
+
+.controller {
+	width: 60%;
+	margin-top: 8px;
+
+	:global {
+		.ui_select_display_container {
+			border: none;
+		}
+
+		.ui_select_disableicon {
+			display: none;
+		}
+
+		.ui_select_toggle_button {
+			padding: 4px 0;
+		}
+	}
+}
+
+.label {
+	width: 40%;
+	margin: auto 0;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.main_container {
+	padding: 12px;
+}
+
+.button_head {
+	margin-right: 8px;
+}

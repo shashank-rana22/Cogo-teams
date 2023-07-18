@@ -43,8 +43,6 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = !isAdminSuperAdmin && shipment_data?.serial_id > 130000;
-
 	const formValues = watch();
 
 	useEffect(() => {
@@ -88,7 +86,6 @@ function EditInvoice({
 						fields={controls}
 						errors={errors}
 						customValues={newFormValues}
-						disabledProps={disabledProps}
 					/>
 				</div>
 

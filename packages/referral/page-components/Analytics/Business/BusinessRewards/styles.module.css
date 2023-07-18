@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+
+	:global {
+		.ui_tab_container {
+			justify-content: space-between !important;
+			width: 300px !important;
+		}
+	}
+}
+
+.tab_container {
+	display: flex;
+	width: 100%;
+	border-radius: 6px 0 6px 6px;
+
+	:global {
+		.ui_tab_container {
+			padding: 15px !important;
+		}
+	}
+}

@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import getPayload from '../helpers/update_payload';
 
+const ZERO = 0;
+const ONE = 1;
 const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refetch }) => {
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
@@ -16,19 +18,19 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refet
 	const handleClick = (input) => {
 		if (input === 'edit') {
 			setFinalRoute(route);
-		  setEdit(true);
+			setEdit(true);
 		} else {
-		  setEdit(false);
+			setEdit(false);
 		}
 		setPortEdit(false);
 		setForm(null);
 		setAdd(null);
 		setDeletePort(null);
-	  };
+	};
 
 	const onClickAdd = (index) => {
 		setForm(index);
-		modifiedRoute = [...tempRoute?.slice(0, index), { ...submit }, ...tempRoute?.slice(index, tempRoute.length)];
+		modifiedRoute = [...tempRoute?.slice(ZERO, index), { ...submit }, ...tempRoute?.slice(index, tempRoute.length)];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 		setFinalRoute(order);
 		setAdd(index);
@@ -40,15 +42,15 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refet
 	const onClickDelete = (index) => {
 		if (add !== null) {
 			const updatedFinalRoute = [...finalRoute];
-			if (index >= 0 && index < updatedFinalRoute.length) {
-				updatedFinalRoute.splice(index, 1);
+			if (index >= ONE && index < updatedFinalRoute.length) {
+				updatedFinalRoute.splice(index, ONE);
 			}
 			setFinalRoute(updatedFinalRoute);
 			setAdd(null);
 		} else if (!portEdit) {
 			setForm(null);
 			setDeletePort((prevDeletePort) => (prevDeletePort ? [...prevDeletePort, index] : [index]));
-			modifiedRoute = [...finalRoute.slice(0, index), ...finalRoute.slice(index + 1, finalRoute.length)];
+			modifiedRoute = [...finalRoute.slice(ZERO, index), ...finalRoute.slice(index + ONE, finalRoute.length)];
 			const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 			setFinalRoute(order);
 		}

@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 
 import CardHeader from '../../../../common/Card/CardHeader';
 import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
+import CONSTANTS from '../../../../config/constants.json';
 
 import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
@@ -17,7 +18,8 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}
+		?${CONSTANTS.url_navigation_params}`;
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;

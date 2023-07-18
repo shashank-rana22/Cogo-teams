@@ -1,10 +1,15 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 import { getAmountLineChartInLakh } from '../../getAmountLineChartInLakh';
 
+import styles from './styles.module.css';
+
 function ResponsiveBarChart({ barData }) {
+	const foundCurrency = barData.find((item) => item.currency);
+
 	return (
 		<ResponsiveBar
 			data={barData}
@@ -32,13 +37,33 @@ function ResponsiveBarChart({ barData }) {
 				tickSize     : 0,
 				tickPadding  : -10,
 				tickRotation : 0,
-				format       : (value) => `${getAmountInLakhCrK(value, 'INR')}`,
+				format       : (value) => `${getAmountInLakhCrK(value, foundCurrency?.currency)}`,
 			}}
 			labelSkipWidth={36}
 			labelSkipHeight={12}
 			labelTextColor={{
 				from: 'color', modifiers: [['darker',	1]],
 			}}
+			tooltip={({ label, value, data }) => (
+				<div className={styles.tooltip}>
+					{label?.split('-')[0]}
+					{' '}
+					:
+					{' '}
+					<tspan color="#000">
+						{formatAmount({
+							amount   : (value || '')?.toString(),
+							currency : data?.currency,
+							options  : {
+								currencyDisplay       : 'code',
+								compactDisplay        : 'short',
+								maximumFractionDigits : 2,
+								style                 : 'currency',
+							},
+						})}
+					</tspan>
+				</div>
+			)}
 			layers={['grid', 'axes', 'bars', 'markers', 'legends',
 				({ bars }) => (
 					<g>
@@ -61,6 +86,23 @@ function ResponsiveBarChart({ barData }) {
 						))}
 					</g>
 				),
+			]}
+			legends={[
+				{
+					dataFrom      : 'keys',
+					anchor        : 'top-right',
+					direction     : 'row',
+					justify       : false,
+					translateY    : -30,
+					translateX    : -80,
+					itemsSpacing  : 60,
+					itemWidth     : 100,
+					itemHeight    : 30,
+					itemDirection : 'left-to-right',
+					itemOpacity   : 0.85,
+					symbolSize    : 20,
+					symbolShape   : 'circle',
+				},
 			]}
 			role="application"
 			animate

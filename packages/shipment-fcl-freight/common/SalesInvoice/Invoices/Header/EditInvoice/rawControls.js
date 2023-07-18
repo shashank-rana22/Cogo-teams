@@ -15,7 +15,7 @@ const rawControls = (
 	isAdminSuperAdmin,
 	shipment_data,
 	index,
-	trade_mapping = {},
+	TRADE_MAPPING = {},
 ) => ({
 	type         : 'edit_service_charges',
 	name         : `${charge?.service_id}:${index}`,
@@ -41,7 +41,7 @@ const rawControls = (
 			label: startCase(
 				`${
 					(`${shipment_data?.shipment_type}_service` !== charge?.service_type
-						&& trade_mapping[charge?.trade_type])
+						&& TRADE_MAPPING[charge?.trade_type])
 					|| ''
 				} - ${charge?.service_type}`,
 			),
@@ -117,7 +117,7 @@ const rawControls = (
 			label  : 'Amount (Tax Excl.)',
 			type   : 'static',
 			name   : 'total',
-			render : (item) => <div style={{ marginTop: '5px' }} className="amount-excl">{item?.total}</div>,
+			render : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
 			span   : 2,
 		},
 	],

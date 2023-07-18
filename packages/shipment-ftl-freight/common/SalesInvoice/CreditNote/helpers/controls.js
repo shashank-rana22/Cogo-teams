@@ -56,7 +56,7 @@ const commonControls = (service) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 

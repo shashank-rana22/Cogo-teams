@@ -784,6 +784,35 @@ const apis = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_contract_locations',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+
+	{
+		api          : 'create_contract_additional_services',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'delete_contract_additional_services',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_checkout_risk_category',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
 ];
 
 export default apis;

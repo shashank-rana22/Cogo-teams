@@ -16,7 +16,6 @@ function ShipmentAirFreight() {
 
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
-
 	const shipment = useGetShipment({ defaultParams: { id: shipment_id } });
 	const services = useListShipmentServices({
 		defaultFilters: {
@@ -33,7 +32,6 @@ function ShipmentAirFreight() {
 		defaultParams : { shipment_id: shipment?.shipment_data?.id },
 		initialCall   : false,
 	});
-
 	const contextValues = useMemo(() => ({
 		...shipment,
 		...services,

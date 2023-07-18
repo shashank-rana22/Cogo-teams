@@ -1,0 +1,7 @@
+[
+	"fcl_freight_local_service",
+	"haulage_freight_service",
+	"trailer_freight_service",
+	"fcl_customs_service",
+	"fcl_cfs_service"
+]

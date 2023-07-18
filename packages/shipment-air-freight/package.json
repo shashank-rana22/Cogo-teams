@@ -17,6 +17,8 @@
 		"@cogoport/shipment-mails": "workspace:^0.1.0",
 		"@cogoport/navigation-configs": "workspace:^0.1.0",
 		"@cogoport/air-modules": "workspace:^1.0.0",
+		"@cogoport/purchase-invoicing": "workspace:^0.1.0",
+		"file-saver": "^2.0.5",
 		"react": "18.2.0"
 	}
 }

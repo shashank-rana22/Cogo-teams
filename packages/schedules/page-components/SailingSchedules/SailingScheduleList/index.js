@@ -9,6 +9,7 @@ import Filter from './Filter';
 import SailingScheduleCard from './SailingScheduleCard';
 import styles from './styles.module.css';
 
+const FOUR = 4;
 function SailingScheduleList({ showModal, setShowModal }) {
 	const [filters, setFilters] = useState({
 		page: 1,
@@ -16,7 +17,7 @@ function SailingScheduleList({ showModal, setShowModal }) {
 
 	const { data, totalItems, loading, listSailingSchedules } = useListSailingSchedules({ filters });
 
-	let content = (data || [1, 2, 3, 4]).map((sailingSchedule) => (
+	let content = (data || [...Array(FOUR)]).map((sailingSchedule) => (
 		<SailingScheduleCard key={sailingSchedule?.id} sailingSchedule={sailingSchedule} loading={loading} />
 	));
 

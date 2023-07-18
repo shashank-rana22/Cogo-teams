@@ -9,6 +9,9 @@ import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocum
 
 import styles from './styles.module.css';
 
+const REGEX = /:finalUrl=>"([^"]*)"/;
+const GET_FINAL_URL = 1;
+
 function ReviewDoc({
 	task = {},
 	refetch = () => {},
@@ -34,7 +37,7 @@ function ReviewDoc({
 	let params = {};
 
 	if (!loading && list.list?.length) {
-		docData = list.list[0] || {};
+		docData = list.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 		params = {
 			id                  : docData.id,
 			pending_task_id     : task.id,
@@ -90,10 +93,8 @@ function ReviewDoc({
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
-			const regex = /:finalUrl=>"([^"]*)"/;
-			const match = url.match(regex);
-
-			return match[1];
+			const match = url.match(REGEX);
+			return match[GET_FINAL_URL];
 		}
 
 		return url;
@@ -150,7 +151,7 @@ function ReviewDoc({
 					<Textarea
 						className="remark_text"
 						value={remarkValue}
-						onChange={(e) => setRemarkValue(e?.target?.value)}
+						onChange={(e) => setRemarkValue(e)}
 						placeholder="Type Remarks"
 					/>
 				</div>

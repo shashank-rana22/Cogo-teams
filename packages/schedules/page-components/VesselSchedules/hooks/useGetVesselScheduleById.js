@@ -1,6 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
+const ZERO = 0;
 const useGetVesselScheduleById = ({ vesselId }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -25,14 +26,16 @@ const useGetVesselScheduleById = ({ vesselId }) => {
 			await trigger({
 				params: payload,
 			});
-		} catch (err) {}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	useEffect(() => {
 		if (vesselId) makeRequest();
 	}, [vesselId]);
 	return {
-		data    : data?.list?.[0],
+		data    : data?.list?.[ZERO],
 		loading,
 		refetch : makeRequest,
 	};

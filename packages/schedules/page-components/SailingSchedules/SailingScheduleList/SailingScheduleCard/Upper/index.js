@@ -2,6 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
 function Upper({ sailingSchedule, loading }) {
 	return (
 		<div className={styles.upper}>
@@ -28,7 +29,7 @@ function Upper({ sailingSchedule, loading }) {
 						<div className={styles.tag}>
 							{sailingSchedule.transit_time}
 							{' '}
-							{sailingSchedule?.transit_time > 1 ? 'days' : 'day'}
+							{sailingSchedule?.transit_time > ONE ? 'days' : 'day'}
 						</div>
 					) : <Placeholder width="40px" />}
 				</div>

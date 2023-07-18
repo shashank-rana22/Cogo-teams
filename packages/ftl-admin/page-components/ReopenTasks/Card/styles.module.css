@@ -1,0 +1,47 @@
+.container {
+	margin: 12px 0;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px #a9bcdaa6;
+
+	&:hover {
+		box-shadow: 0 0 4px #00000040;
+	}
+}
+
+.body_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 4px 16px;
+}
+
+.details_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.taskDetails {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	font-weight: 500;
+
+	> .label {
+		width: 50%;
+		font-weight: 600;
+		text-transform: capitalize;
+	}
+
+	> .deadline {
+		width: 25%;
+	}
+
+	> .completedOn {
+		width: 25%;
+		color: #67c676;
+	}
+}

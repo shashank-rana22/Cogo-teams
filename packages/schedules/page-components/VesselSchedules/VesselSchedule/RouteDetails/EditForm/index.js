@@ -26,7 +26,9 @@ function RoutePortForm({
 					</div>
 				</div>
 			</div>
-			{(!isFirst) ? <div><IcMPlusInCircle style={{ cursor: 'pointer' }} onClick={() => { onClickAdd(index); }} /></div> : <div style={{ margin: '7px' }} />}
+			{(!isFirst)
+				? <div><IcMPlusInCircle style={{ cursor: 'pointer' }} onClick={() => { onClickAdd(index); }} /></div>
+				: <div style={{ margin: '7px' }} />}
 			<div className={styles.middle}>
 				{!isFirst && <div className={styles.hr_line_up} />}
 				<div className={styles.circle} />

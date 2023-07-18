@@ -38,6 +38,7 @@ function Filter({ filters, setFilters }) {
 					placeholder="Origin Port"
 					value={filters?.origin_port_id}
 					onChange={(value) => handleFilter(value, 'origin_port_id')}
+					isClearable
 				/>
 				<Select
 					className={styles.filter_select}
@@ -45,6 +46,7 @@ function Filter({ filters, setFilters }) {
 					placeholder="Destination Port"
 					value={filters?.destination_port_id}
 					onChange={(value) => handleFilter(value, 'destination_port_id')}
+					isClearable
 				/>
 				<Datepicker
 					className={styles.input}
@@ -64,6 +66,7 @@ function Filter({ filters, setFilters }) {
 					value={filters?.shipping_line_id}
 					onChange={(value) => handleFilter(value, 'shipping_line_id')}
 					{...shippingLineOptions}
+					isClearable
 				/>
 				<Select
 					className={styles.filter_select}
@@ -71,6 +74,7 @@ function Filter({ filters, setFilters }) {
 					placeholder="Sort By"
 					value={filters?.sort_by}
 					onChange={(value) => handleFilter(value, 'sort_by')}
+					isClearable
 				/>
 			</div>
 		</div>

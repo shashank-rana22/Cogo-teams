@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import CardHeader from '../../../../commons/Card/CardHeader';
 import PortDetails from '../../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../../commons/Card/ShipmentInfo';
+import CONSTANTS from '../../../../config/constants.json';
 import isCardCritical from '../../../../helpers/isCardCritical';
 import styles from '../../card.module.css';
 
@@ -20,7 +21,8 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 
 	return (
 		<a
-			href={`${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`}
+			href={`${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}
+			?${CONSTANTS.url_navigation_params}`}
 			className={`${styles.card} ${criticalClass}`}
 			onClick={handleCardClick}
 		>

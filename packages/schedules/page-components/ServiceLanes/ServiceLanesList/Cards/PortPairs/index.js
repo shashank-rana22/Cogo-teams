@@ -4,6 +4,8 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import portData from './utils/portData';
 
+const ZERO = 0;
+const ONE = 1;
 function PortPair({ item, loading }) {
 	const {
 		origin,
@@ -39,7 +41,7 @@ function PortPair({ item, loading }) {
 							<span
 								style={{ color: '#f68b21' }}
 							>
-								{`(${item?.service_lane_links?.[0]?.port_code})`}
+								{`(${item?.service_lane_links?.[ZERO]?.port_code})`}
 
 							</span>
 						)}
@@ -73,7 +75,7 @@ function PortPair({ item, loading }) {
 						{loading ? <Placeholder width="100px" /> : (
 							<span style={{ color: '#f68b21' }}>
 								{`(${
-									item?.service_lane_links?.[links - 1]?.port_code
+									item?.service_lane_links?.[links - ONE]?.port_code
 								})`}
 
 							</span>

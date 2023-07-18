@@ -5,6 +5,13 @@ import styles from './styles.module.css';
 import Toggler from './Toggler';
 
 function ShippingLineDetails({ item, loading }) {
+	const imageContent = item?.operator?.logo_url ? (
+		<img
+			src={item?.operator?.logo_url}
+			alt="Company Logo"
+			style={{ width: '52px' }}
+		/>
+	) : null;
 	return (
 		<div className={styles.container}>
 			{ loading ? <Placeholder width="300px" height="30px" />
@@ -12,11 +19,7 @@ function ShippingLineDetails({ item, loading }) {
 			<div className={styles.company_logo_name}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					{loading ? <Placeholder width="100px" /> : (
-						<img
-							src={item?.operator?.logo_url}
-							alt="Company Logo"
-							style={{ width: '52px' }}
-						/>
+						imageContent
 					)}
 				</div>
 
