@@ -30,6 +30,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-left: 12px;
+	color: #ee3425;
+	cursor: pointer;
 }
 
 .add_icon {
@@ -38,12 +41,6 @@
 	background: #fff;
 	border: 1px solid #221f20;
 	border-radius: 50%;
-}
-
-.tick_icon {
-	margin-left: 12px;
-	color: #ee3425;
-	cursor: pointer;
 }
 
 .disabled {

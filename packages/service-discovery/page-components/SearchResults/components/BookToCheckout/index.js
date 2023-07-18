@@ -30,7 +30,10 @@ function BookCheckout({
 					<IcCFtick width={48} height={48} />
 					<div style={{ marginLeft: 16 }}>
 						<div>Congratulations!</div>
-						You are saving INR 56,234 on this booking.
+						You are saving
+						{' '}
+						<strong>INR 56,234 </strong>
+						on this booking.
 					</div>
 				</div>
 				<div className={styles.button_wrapper}>

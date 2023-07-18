@@ -1,39 +1,41 @@
-.box_div {
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 0 6px;
+	margin-top: 8px;
+}
+
+.rate_item {
 	display: flex;
 	align-items: center;
-
-	& > div:nth-child(2) {
-		display: flex;
-		margin-left: 4px;
-	}
-}
-
-.btn_wrap {
-	display: flex;
-	justify-content: center;
-}
-
-.text {
-	margin-bottom: 10px;
-	font-size: 20px;
-	font-weight: 700;
-}
-
-.rate {
-	display: flex;
 	justify-content: space-between;
+	margin-bottom: 2px;
 
 	&.final {
 		border-bottom: 1px solid #f2e2c3;
 	}
 }
 
-.tooltip_container {
-	max-width: 250px;
-	font-size: var(--font-size-sm);
-	font-weight: 300;
+.premium_rate_label_container {
+	display: flex;
+	align-items: center;
 }
 
-.btn_div {
-	margin-left: 16px;
+.label {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.strong_label {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.strong_price {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.info_icon {
+	margin: 6px 0 0 6px;
 }

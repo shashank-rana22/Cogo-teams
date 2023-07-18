@@ -27,39 +27,45 @@ function PremiumRate({ rateData = {} }) {
 	} = rateData || {};
 
 	return (
-		<div>
-			<div className={styles.rate}>
-				<div className={styles.box_div}>
-					<span>Premium:</span>
+		<div className={styles.container}>
+			<div className={styles.rate_item}>
+				<div className={styles.premium_rate_label_container}>
+					<span className={styles.label}>Premium:</span>
+
 					<Tooltip
 						theme="light"
 						placement="bottom"
-						content={(
-							<div className={styles.tooltip_container}>
-								<div>Exclusive of Taxes</div>
-							</div>
-						)}
+						content="Exclusive of Taxes"
 					>
-						<IcMInfo />
+						<IcMInfo className={styles.info_icon} />
 					</Tooltip>
 				</div>
 
-				<div>{formatAmounts(serviceChargeList?.[PREMIUM]?.totalCharges)}</div>
+				<span className={styles.price}>
+					{formatAmounts(serviceChargeList?.[PREMIUM]?.totalCharges)}
+				</span>
 			</div>
 
-			<div className={styles.rate}>
-				<div>Platform Charges:</div>
-				<div>{formatAmounts(serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}</div>
+			<div className={styles.rate_item}>
+				<span className={styles.label}>Platform Charges:</span>
+
+				<span className={styles.price}>
+					{formatAmounts(serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}
+				</span>
 			</div>
 
-			<div className={cl`${styles.rate} ${styles.final}`}>
-				<div>Convenience Fee:</div>
-				<div>{formatAmounts(serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}</div>
+			<div className={cl`${styles.rate_item} ${styles.final}`}>
+				<span className={styles.label}>Convenience Fee:</span>
+
+				<span className={styles.price}>
+					{formatAmounts(serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}
+				</span>
 			</div>
 
-			<div className={styles.rate}>
-				<div>Amount Payable:</div>
-				<div>{formatAmounts(totalCharges)}</div>
+			<div className={styles.rate_item}>
+				<span className={styles.strong_label}>Amount Payable:</span>
+
+				<span className={styles.strong_price}>{formatAmounts(totalCharges)}</span>
 			</div>
 		</div>
 	);

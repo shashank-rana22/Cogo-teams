@@ -79,18 +79,14 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 					<div className={styles.starting_at_price}>Starting at $0.25/km</div>
 
 					{isSelected ? (
-						<div
-							className={styles.selected_icon}
+						<SelectedIcon
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}
-						>
-							<SelectedIcon
-								height={25}
-								width={25}
-								className={styles.tick_icon}
-								onClick={() => setShowDeleteModal(true)}
-							/>
-						</div>
+							height={25}
+							width={25}
+							className={styles.tick_icon}
+							onClick={() => setShowDeleteModal(true)}
+						/>
 					) : (
 						<IcMPlus
 							height={22}

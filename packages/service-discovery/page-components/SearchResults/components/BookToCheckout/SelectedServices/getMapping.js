@@ -41,9 +41,8 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 	const freightTypeIncoTermsMapping = {
 		fcl_freight: [
 			{
-				icon  : IcMAppTruck,
-				label : 'Delhi - Mumbai',
-				key   : Object.keys(hash).includes('origin_ftl_freight')
+				icon : IcMAppTruck,
+				key  : Object.keys(hash).includes('origin_ftl_freight')
 					? 'origin_ftl_freight'
 					: 'origin_trailer_freight',
 			},
@@ -57,36 +56,30 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 			// 	iconName : 'origin_haulage_freight',
 			// },
 			{
-				icon  : IcMAppCustoms,
-				label : 'Nhava Seva Customs',
-				key   : 'origin_fcl_customs',
+				icon : IcMAppCustoms,
+				key  : 'origin_fcl_customs',
 			},
 			{
-				icon  : IcMAppCfs,
-				label : 'Nhava Seva CFS Clearance',
-				key   : 'origin_fcl_cfs',
+				icon : IcMAppCfs,
+				key  : 'origin_fcl_cfs',
 			},
 			{
-				icon  : IcMAppCustoms,
-				label : startCase('origin_fcl_freight_local'),
-				key   : 'origin_fcl_freight_local',
+				icon : IcMAppCustoms,
+				key  : 'origin_fcl_freight_local',
 			},
 			{ type: 'icon', key: 'fcl_freight' },
 			{
-				icon  : IcMAppCustoms,
-				label : startCase('destination_fcl_freight_local'),
-				key   : 'destination_fcl_freight_local',
+				icon : IcMAppCustoms,
+				key  : 'destination_fcl_freight_local',
 			},
 			// { type: 'icon', iconName: 'destination_fcl_freight_local' },
 			{
-				icon  : IcMAppCfs,
-				label : 'Jebel Ali CFS Clearance',
-				key   : 'destination_fcl_cfs',
+				icon : IcMAppCfs,
+				key  : 'destination_fcl_cfs',
 			},
 			{
-				icon  : IcMAppCustoms,
-				label : 'Jebel Ali Customs',
-				key   : 'destination_fcl_customs',
+				icon : IcMAppCustoms,
+				key  : 'destination_fcl_customs',
 			},
 			// primaryService?.destination_main_port?.name && {
 			// 	type     : 'icon',

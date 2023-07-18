@@ -72,18 +72,14 @@ function ServiceItem({
 
 		if (selectedServices.some((item) => item.value === value)) {
 			return (
-				<div
+				<SelectedIcon
 					className={styles.selected_icon}
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
-				>
-					<SelectedIcon
-						height={22}
-						width={22}
-						className={styles.tick_icon}
-						onClick={() => setShowDelete(true)}
-					/>
-				</div>
+					height={22}
+					width={22}
+					onClick={() => setShowDelete(true)}
+				/>
 			);
 		}
 

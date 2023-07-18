@@ -1,8 +1,8 @@
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import getAddedServices from './getAddedServices';
 import ServiceItem from './ServiceItem';
@@ -83,6 +83,11 @@ function SubsidiaryServices({
 		);
 	}
 
+	const servicesToShow = useMemo(
+		() => [...selectedServices, ...popularServices],
+		[popularServices, selectedServices],
+	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.select_container}>
@@ -101,7 +106,9 @@ function SubsidiaryServices({
 				<div className={styles.label}>Our most popular services</div>
 
 				<div className={styles.wrapper}>
-					{([...selectedServices, ...popularServices] || []).map((item) => (
+					{isEmpty(servicesToShow) ? (
+						<strong>Nothing to show here</strong>
+					) : (servicesToShow || []).map((item) => (
 						<ServiceItem
 							data={data}
 							itemData={item}
