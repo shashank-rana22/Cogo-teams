@@ -1,10 +1,14 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
+import { getHasPermissionToEdit } from '../../../../helpers/conversationHelpers';
+import { snapshotCleaner, mountActiveRoomSnapShot } from '../../../../helpers/snapshotHelpers';
 import useAssignChat from '../../../../hooks/useAssignChat';
+import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
@@ -19,35 +23,42 @@ import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
 function Messages({
-	activeMessageCard = {},
+	activeTab = {},
 	firestore,
 	suggestions = [],
 	userId = '',
-	isomniChannelAdmin = false,
-	setActiveMessage = () => {},
 	setRaiseTicketModal = () => {},
 	viewType = '',
+	setActiveRoomLoading,
+	setActiveTab,
 }) {
+	const activeRoomSnapshotListener = useRef(null);
+
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [disableButton, setDisableButton] = useState('');
+
 	const { tagOptions = [] } = useListAssignedChatTags();
-	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+
+	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
+
+	const formattedData = getActiveCardDetails(activeTab?.data) || {};
+
 	const closeModal = () => {
 		setOpenModal({ type: null, data: {} });
-		setDisableButton('');
 	};
+
 	let activeChatCollection;
+
 	const {
 		id = '',
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
 		session_type = '',
-	} = activeMessageCard || {};
+	} = formattedData || {};
 
 	const {
 		sendCommunicationTemplate,
@@ -56,10 +67,16 @@ function Messages({
 
 	const showBotMessages = session_type === 'bot';
 
-	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
+	const canMessageOnBotSession = showBotMessages
+		&& VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.can_message_on_bot_session;
 
-	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
-		|| ['admin_view', 'shipment_view'].includes(viewType)));
+	const hasPermissionToEdit = getHasPermissionToEdit({
+		showBotMessages,
+		userId,
+		formattedData,
+		canMessageOnBotSession,
+		viewType,
+	});
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
@@ -78,7 +95,7 @@ function Messages({
 
 	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
-		channel_type,
+		channelType: channel_type,
 		id,
 		draftMessages,
 		setDraftMessages,
@@ -90,10 +107,10 @@ function Messages({
 
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,
+		firestore,
 		closeModal,
-		activeMessageCard,
+		activeMessageCard: activeTab?.data,
 		formattedData,
-		setDisableButton,
 		canMessageOnBotSession,
 	});
 
@@ -103,11 +120,11 @@ function Messages({
 		firstLoadingMessages,
 		messagesData,
 		loadingPrevMessages,
-	} = useGetMessages({ activeChatCollection, id });
+	} = useGetMessages({ activeChatCollection, id, viewType });
 
 	const { updateChat, loading } = useUpdateAssignedChat({
-		onClose: closeModal,
-		activeMessageCard,
+		onClose           : closeModal,
+		activeMessageCard : activeTab?.data,
 		formattedData,
 	});
 
@@ -115,27 +132,50 @@ function Messages({
 		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
+
 	const {
 		requestForAssignChat,
 		requestAssignLoading,
 	} = useRequestAssignChat();
-
-	const changeSessionAndMessage = (type = '') => {
-		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
-		if (!canMessageOnBotSession) {
-			return callbackFunc;
-		}
-		return (scrollToBottom, val) => assignChat(
-			{ agent_id: userId, is_allowed_to_chat: true },
-			() => callbackFunc(scrollToBottom, val),
-		);
-	};
 
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
 		modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
+
+	const activeCardId = activeTab?.data?.id;
+	const activeChannelType = activeTab?.data?.channel_type;
+
+	const changeSessionAndMessage = (type = '') => {
+		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
+
+		if (!canMessageOnBotSession) {
+			return callbackFunc;
+		}
+
+		return (scrollToBottom, val) => assignChat(
+			{
+				payload      : { agent_id: userId, is_allowed_to_chat: true },
+				callbackFunc : () => callbackFunc(scrollToBottom, val),
+			},
+		);
+	};
+
+	useEffect(() => {
+		mountActiveRoomSnapShot({
+			activeRoomSnapshotListener,
+			setActiveRoomLoading,
+			activeCardId,
+			firestore,
+			activeChannelType,
+			setActiveTab,
+		});
+
+		return () => {
+			snapshotCleaner({ ref: activeRoomSnapshotListener });
+		};
+	}, [activeCardId, activeChannelType, activeTab.data.channel_type, firestore, setActiveRoomLoading, setActiveTab]);
 
 	return (
 		<>
@@ -148,7 +188,7 @@ function Messages({
 					formattedData={formattedData}
 					updateChat={updateChat}
 					loading={loading}
-					activeMessageCard={activeMessageCard}
+					activeMessageCard={activeTab?.data}
 					closeModal={closeModal}
 					assignLoading={assignLoading}
 					activeAgentName={activeAgentName}
@@ -158,14 +198,15 @@ function Messages({
 					support_agent_id={support_agent_id}
 					showBotMessages={showBotMessages}
 					userId={userId}
-					isomniChannelAdmin={isomniChannelAdmin}
-					setDisableButton={setDisableButton}
-					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
 					requestForAssignChat={requestForAssignChat}
 					requestAssignLoading={requestAssignLoading}
 					canMessageOnBotSession={canMessageOnBotSession}
+					viewType={viewType}
+					firestore={firestore}
+					escalateToSupplyRm={escalateToSupplyRm}
+					supplierLoading={supplierLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -181,7 +222,7 @@ function Messages({
 						firstLoadingMessages={firstLoadingMessages}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
-						activeMessageCard={activeMessageCard}
+						activeMessageCard={activeTab?.data}
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
@@ -191,10 +232,10 @@ function Messages({
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
 						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
-						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
 						canMessageOnBotSession={canMessageOnBotSession}
 						changeSessionAndMessage={changeSessionAndMessage}
+						viewType={viewType}
 					/>
 				</div>
 			</div>
@@ -220,8 +261,10 @@ function Messages({
 					)}
 					<ActiveModalComp
 						data={openModal?.data || {}}
+						activeMessageCard={activeTab?.data}
 						assignLoading={assignLoading}
 						loading={loading}
+						viewType={viewType}
 					/>
 				</Modal>
 			)}

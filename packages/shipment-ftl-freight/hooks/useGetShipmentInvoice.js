@@ -4,16 +4,16 @@ import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback } from 'react';
 
 const groupByRegistrationNum = (invoices) => {
-	const groupByOrgInvoices = {};
+	const GROUP_BY_ORG_INVOICES = {};
 	(invoices || []).forEach((invoice) => {
 		const key = invoice.billing_address?.registration_number;
-		groupByOrgInvoices[key] = {
-			invoices      : [...(groupByOrgInvoices[key]?.invoices || []), invoice],
+		GROUP_BY_ORG_INVOICES[key] = {
+			invoices      : [...(GROUP_BY_ORG_INVOICES[key]?.invoices || []), invoice],
 			business_name : invoice?.billing_address?.business_name,
 			name          : invoice?.billing_address?.name,
 		};
 	});
-	return groupByOrgInvoices;
+	return GROUP_BY_ORG_INVOICES;
 };
 
 const useGetShipmentInvoice = () => {

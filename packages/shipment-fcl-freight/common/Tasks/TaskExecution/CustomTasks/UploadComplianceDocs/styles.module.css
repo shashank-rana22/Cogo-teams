@@ -1,0 +1,14 @@
+.submit {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 36px;
+}
+
+.submit_btn {
+	:global {
+		.ui_button_container.ui_ps_themeType_secondary {
+			color: #fff;
+			background-color: #000;
+		}
+	}
+}

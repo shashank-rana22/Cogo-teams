@@ -1,251 +1,147 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
-import { IcMPlus } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useReplyMail from '../../../hooks/useReplyMail';
+import getTabMappings from '../../../configurations/getTabMappings';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 
-import InactiveModal from './InactiveModal';
+import AgentStatus from './AgentStatus';
+import CommunicationModals from './CommunicationModals';
 import MailList from './MailList';
-import MailModal from './MailList/MailModal';
 import MessageList from './MessageList';
-import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
+const COMPONENT_MAPPING = {
+	message : MessageList,
+	voice   : VoiceList,
+	mail    : MailList,
+};
+
 function Customers({
-	setActiveMessage = () => {},
-	setActiveVoiceCard = () => {},
-	activeVoiceCard,
-	setSearchValue = () => {},
-	searchValue,
-	setFilterVisible = () => {},
-	filterVisible,
-	activeTab,
 	setActiveTab = () => {},
-	toggleStatus,
-	chatsData = {},
-	setAppliedFilters = () => {},
-	appliedFilters = {},
-	fetchworkPrefernce = () => {},
-	messagesLoading = false,
-	setOpenModal = () => {},
-	openModal = false,
-	updateUserStatus = () => {},
-	statusLoading = false,
-	activeCardId = '',
-	isomniChannelAdmin = false,
-	showBotMessages = false,
-	setShowBotMessages,
-	setShowDialModal = () => {},
-	activeMail = {},
-	setActiveMail = () => {},
+	activeTab = '',
 	userId = '',
-	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
 	tagOptions = [],
 	mailProps = {},
-	firestore,
+	firestore = {},
 	viewType = '',
-	flashMessagesLoading,
-	hasVoiceCallAccess,
 }) {
-	const { emailAddress, buttonType, setButtonType } = mailProps;
-	const [isChecked, setIsChecked] = useState(false);
-	const [attachments, setAttachments] = useState([]);
-	const {
-		messagesList = [],
-		unReadChatsCount = 0,
-		sortedPinnedChatList = [],
-		flashMessagesList = [],
-	} = chatsData || {};
+	const [isBotSession, setIsBotSession] = useState(false);
 
-	const {
-		replyMailApi = () => {},
-		replyLoading = false,
-	} = useReplyMail(mailProps);
-
-	const onChangeToggle = () => {
-		if (toggleStatus) {
-			setOpenModal(true);
-		} else {
-			updateUserStatus({ status: 'active' });
-		}
-	};
-
-	const handleOpenOptions = () => {
-		setIsChecked(!isChecked);
-	};
-
-	const COMPONENT_MAPPING = {
-		message : MessageList,
-		voice   : VoiceList,
-		mail    : MailList,
-	};
-	const Component = COMPONENT_MAPPING[activeTab] || null;
-
-	const messageProps = {
-		isomniChannelAdmin,
-		messagesList,
-		setActiveMessage,
-		setSearchValue,
-		searchValue,
-		filterVisible,
-		setFilterVisible,
-		setAppliedFilters,
-		appliedFilters,
-		messagesLoading,
-		activeCardId,
-		showBotMessages,
-		setShowBotMessages,
-		handleScroll,
-		setModalType,
-		modalType,
-		tagOptions,
-		userId,
-		sortedPinnedChatList,
+	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
 		viewType,
-		flashMessagesList,
-		flashMessagesLoading,
+		agentId: userId,
+		isBotSession,
+	});
+
+	const componentPropsMapping = {
+		message: {
+			userId,
+			firestore,
+			viewType,
+			isBotSession,
+			setIsBotSession,
+			tagOptions,
+		},
+		voice: {
+			setActiveVoiceCard: (val) => {
+				setActiveTab((prev) => ({ ...prev, data: val }));
+			},
+			activeVoiceCard : activeTab?.data || {},
+			activeTab       : activeTab?.tab,
+		},
+		mail: {
+			...mailProps,
+			viewType,
+		},
 	};
 
-	const voiceProps = {
-		setActiveVoiceCard,
-		activeVoiceCard,
-		activeTab,
-		setShowDialModal,
-	};
+	const tabMappings = getTabMappings({ unReadChatsCount });
 
-	const emailprops = {
-		activeMail,
-		setActiveMail,
-		emailAddress,
-	};
-
-	const componentProps = {
-		message : { ...messageProps },
-		voice   : { ...voiceProps },
-		mail    : { ...emailprops },
-	};
+	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
 				<div className={styles.logo}>
-					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg" alt="" />
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.cogo_one_logo}
+						alt="cogo_one_logo"
+						width={25}
+						height={25}
+					/>
 					<div className={styles.title}>
 						CogoOne
 					</div>
 				</div>
-				{!isomniChannelAdmin ? (
-					<div className={styles.styled_toggle}>
-						<Toggle
-							name="online"
-							size="md"
-							showOnOff
-							onChange={() => onChangeToggle()}
-							checked={toggleStatus}
-							loading={statusLoading}
-						/>
 
+				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_self_status && (
+					<div className={styles.styled_toggle}>
+						<AgentStatus />
 					</div>
-				) : (
+				)}
+
+				{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.bot_message_toggle && (
 					<div className={styles.bot_messages}>
 						<div>Bot Messages</div>
 						<Toggle
 							name="online"
 							size="sm"
-							onChange={() => setShowBotMessages((p) => !p)}
-							checked={showBotMessages}
+							onChange={() => setIsBotSession((prev) => !prev)}
+							checked={isBotSession}
 						/>
 					</div>
 				)}
 			</div>
+
 			<div className={styles.tabs}>
 				<Tabs
-					activeTab={activeTab}
+					activeTab={activeTab?.tab}
 					fullWidth
 					themeType="secondary"
-					onChange={setActiveTab}
+					onChange={(val) => {
+						setActiveTab({ tab: val, data: {} });
+					}}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount || null} />
-					{hasVoiceCallAccess && <TabPanel name="voice" title="Voice" />}
-					<TabPanel name="mail" title="Mail" />
+					{tabMappings.map((eachTab) => {
+						if (!eachTab.show) {
+							return null;
+						}
+
+						return (
+							<TabPanel
+								key={eachTab?.value}
+								name={eachTab?.value}
+								title={eachTab?.label}
+								badge={eachTab?.badge || null}
+							/>
+						);
+					})}
 				</Tabs>
 			</div>
+
 			{Component && (
-				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
-			)}
-
-			{openModal && (
-				<InactiveModal
-					fetchworkPrefernce={fetchworkPrefernce}
-					setOpenModal={setOpenModal}
-					loading={statusLoading}
-					updateUserStatus={updateUserStatus}
-
-				/>
-			)}
-			<div className={styles.wrapper}>
-				<input
-					id="plus_checkbox"
-					type="checkbox"
-					className={styles.checkbox}
-					checked={isChecked}
-				/>
-				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
-					<div className={styles.wheel_box}>
-						<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
-						<div className={styles.wheel}>
-							<div className={`${styles.action} ${styles.call_icon}`}>
-								<img
-									onClick={() => setShowDialModal(true)}
-									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
-									alt="call icon"
-									role="presentation"
-								/>
-							</div>
-							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
-								<img
-									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
-									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
-									alt="whatsapp icon"
-									role="presentation"
-								/>
-
-							</div>
-
-							<div className={`${styles.action} ${styles.mail_icon}`}>
-								<img
-									onClick={() => setButtonType('send_mail')}
-									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
-									alt="gmail icon"
-									role="presentation"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			{modalType?.type && (
-				<NewWhatsappMessage
-					setModalType={setModalType}
-					modalType={modalType}
+				<Component
+					key={activeTab?.tab}
+					{...(componentPropsMapping[activeTab?.tab] || {})}
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
 				/>
 			)}
 
-			{buttonType && (
-				<MailModal
-					mailProps={mailProps}
-					userId={userId}
-					attachments={attachments}
-					setAttachments={setAttachments}
-					activeMail={activeMail}
-					replyMailApi={replyMailApi}
-					replyLoading={replyLoading}
-				/>
-			)}
+			<CommunicationModals
+				mailProps={mailProps}
+				setModalType={setModalType}
+				modalType={modalType}
+				userId={userId}
+				viewType={viewType}
+			/>
 		</div>
 	);
 }

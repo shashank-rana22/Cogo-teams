@@ -13,7 +13,7 @@ const useUpdateInvoiceCombination = ({
 	successMessage = 'Invoice Preference edited!',
 	servicesList,
 	selectedParties,
-	initial_service_invoice_id,
+	INITIAL_SERVICE_INVOICE_ID,
 	allServiceLineitemsCount,
 	importer_exporter_id,
 	updateExportInvoices,
@@ -54,7 +54,7 @@ const useUpdateInvoiceCombination = ({
 					return ({
 						...rest,
 						invoice_combination_id: updateExportInvoices
-							? initial_service_invoice_id[item?.serviceKey] || undefined
+							? INITIAL_SERVICE_INVOICE_ID[item?.serviceKey] || undefined
 							: undefined,
 					});
 				});

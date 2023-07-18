@@ -11,7 +11,7 @@ const ShipmentTabMapping = {
 	surface,
 	all         : {
 		tabs             : commonTabs,
-		possible_filters : ['importer_exporter_id', 'pending_invoice', 'source', 'payment_term', 'tags'],
+		possible_filters : ['importer_exporter_id', 'triggered_pending_invoices', 'source', 'payment_term', 'tags'],
 	},
 };
 

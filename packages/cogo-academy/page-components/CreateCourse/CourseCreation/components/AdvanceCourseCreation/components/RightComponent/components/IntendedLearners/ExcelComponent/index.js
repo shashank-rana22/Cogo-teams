@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
@@ -14,12 +15,13 @@ function ExcelComponent({
 	control,
 	errors,
 	cogo_academy_sheets = [],
-	getCogoAcademyCourse = () => [],
+	getCogoAcademyCourse = () => {},
+	disableExcel = false,
 }) {
 	const { dropareaProps, draggable, multiple, placeholder, rules, accept } = controlItem || {};
 
 	const { MAPPING, sheetData } = useMemo(() => {
-		const cogoAcademySheet = cogo_academy_sheets?.[0] || {};
+		const cogoAcademySheet = cogo_academy_sheets?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		return {
 			sheetData : cogoAcademySheet,
@@ -96,8 +98,15 @@ function ExcelComponent({
 					placeholder={placeholder}
 					accept={accept}
 					rules={rules}
+					disabled={disableExcel}
 				/>
 			</div>
+
+			{disableExcel ? (
+				<div className={styles.error_message}>
+					Please click on save and generate to proceed
+				</div>
+			) : null}
 
 			{errors?.[name]?.message ? (
 				<div className={styles.error_message}>{errors?.[name]?.message}</div>

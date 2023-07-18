@@ -1,8 +1,9 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useGetShipment({ defaultParams = {}, defaultFilters = {}, initialCall = true }) {
+	const [getShipmentStatusCode, setGetShipmentStatusCode] = useState('');
 	const [{ loading: isGettingShipment, data }, trigger] = useRequest({
 		url          : '/get_shipment',
 		method       : 'GET',
@@ -17,11 +18,17 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 
 	const { documents, primary_service_detail, summary, document_delay_status, booking_note_details } = data || {};
 
+	const primary_service = {
+		...(primary_service_detail || {}),
+	};
+
 	const getShipment = useCallback(async () => {
 		try {
-			await trigger();
+			const res = await trigger();
+			setGetShipmentStatusCode(res?.status);
 		} catch (err) {
 			toastApiError(err);
+			setGetShipmentStatusCode(err?.response?.data?.status_code || err?.response?.status);
 		}
 	}, [trigger]);
 
@@ -31,12 +38,13 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 
 	return {
 		isGettingShipment,
-		refetch         : getShipment,
+		refetch       : getShipment,
 		documents,
-		primary_service : primary_service_detail,
-		shipment_data   : summary,
+		primary_service,
+		shipment_data : summary,
 		document_delay_status,
 		booking_note_details,
 		data,
+		getShipmentStatusCode,
 	};
 }

@@ -15,7 +15,6 @@ const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
 };
-
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 
 function Status({
@@ -27,10 +26,14 @@ function Status({
 	isIRNGenerated = false,
 	setAskNullify = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const isAuthorizedForCN = [
+		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id,
+		GLOBAL_CONSTANTS.uuid.manoj_mahapatra_user_id].includes(user_data?.user?.id);
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
@@ -93,7 +96,7 @@ function Status({
 						</Button>
 				) : null}
 
-			{showRequestCN ? (
+			{showRequestCN && isAuthorizedForCN ? (
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"

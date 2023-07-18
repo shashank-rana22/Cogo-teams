@@ -1,33 +1,18 @@
-import { Select } from '@cogoport/components';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
-
-import useRaiseTicketControls from '../../../../configurations/raise-ticket-controls';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
 import styles from './styles.module.css';
 
 function CategoryType(props) {
 	const { searchParams, setSearchParams, isAdmin } = props;
-	const raiseTicketControl = useRaiseTicketControls();
-	const ticketControlOption = raiseTicketControl?.options.map(
-		(item) => ({ value: item.TicketType, label: item.TicketType }),
-	);
-
-	const serviceProviderOptions = useGetAsyncOptions(
-		merge(asyncFieldsPartnerUsers(), {
-			params: {
-				filters: { kyc_status: 'verified' },
-			},
-		}),
-	);
 
 	return (
 		<div className={styles.category_container}>
 			{isAdmin && (
-				<Select
-					size="sm"
-					{...serviceProviderOptions}
+				<AsyncSelect
+					name="user_id"
+					asyncKey="partner_users"
+					valueKey="user_id"
+					initialCall
 					value={searchParams.agent}
 					placeholder="Select agent"
 					isClearable
@@ -37,17 +22,18 @@ function CategoryType(props) {
 					}))}
 				/>
 			)}
-			<Select
-				size="sm"
+			<AsyncSelect
+				name="ticket_type"
 				onChange={(val) => setSearchParams((prev) => ({
 					...prev,
 					category: val,
 				}))}
-				value={raiseTicketControl.loading ? '' : searchParams.category}
-				options={ticketControlOption || []}
+				asyncKey="default_types"
+				value={searchParams.category}
 				placeholder="Ticket type"
+				microService="tickets"
 				isClearable
-
+				initialCall
 			/>
 		</div>
 	);

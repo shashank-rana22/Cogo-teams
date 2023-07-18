@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
         "can_edit": false
@@ -17,10 +17,16 @@
     "emails":{
         "tab_title":"Emails"
     },
+    "edit_params": {
+        "can_edit": true
+    },
     "cancel_shipment": {
         "can_cancel": true,
         "list_reasons": {
             "stakeholder_type": ["booking_agent"]
         }
+    },
+    "tracking": {
+        "tab_title": "Tracking"
     }
 }

@@ -3,14 +3,17 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const TOTAL_DECIMAL = 2;
+const TOTAL_LENGTH = 1;
+
 function ExchangeDetails({
 	children = null,
-	availableCurrencyConversions = {},
+	AVAILABLE_CURRENCY_CONVERSION = {},
 	invoiceCurrency = '',
 }) {
 	const [show, setShow] = useState(false);
 
-	const currencyConversions = Object.keys(availableCurrencyConversions || {});
+	const currencyConversions = Object.keys(AVAILABLE_CURRENCY_CONVERSION || {});
 
 	const renderBody = () => (
 		<div className={styles.flex_col}>
@@ -20,7 +23,7 @@ function ExchangeDetails({
 					{' '}
 					1 =
 					{' '}
-					{`${Number(availableCurrencyConversions[key])?.toFixed(2)}`}
+					{`${Number(AVAILABLE_CURRENCY_CONVERSION[key])?.toFixed(TOTAL_DECIMAL)}`}
 					{' '}
 					{`${invoiceCurrency}`}
 				</div>
@@ -30,7 +33,7 @@ function ExchangeDetails({
 
 	return (
 		<div>
-			{currencyConversions?.length > 1 ? (
+			{currencyConversions?.length > TOTAL_LENGTH ? (
 				<Popover
 					theme="light"
 					show={show}

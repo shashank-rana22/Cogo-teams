@@ -1,4 +1,5 @@
 import { MultiSelect, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
@@ -35,12 +36,21 @@ import {
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncFieldsTicketTypes,
+	asyncInsuranceCommoditiesList,
+	asyncListDunningTemplates,
+	asyncListOrganizationStakeholders,
+	asyncFieldsListAgents,
+	asyncListShipmentServices,
+	asyncListShipments,
+	asyncListShipmentPendingTasks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -62,6 +72,7 @@ import {
  * getModifiedOptions
  */
 
+const REST_VALUE_SLICE_INDEX = -1;
 const keyAsyncFieldsParamsMapping = {
 	organizations                        : asyncFieldsOrganizations,
 	organization_users                   : asyncFieldsOrganizationUser,
@@ -94,12 +105,21 @@ const keyAsyncFieldsParamsMapping = {
 	allocation_rejection_type            : asyncAllocationRequestRejectionType,
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
+	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
 	faq_topics                           : asyncListFAQTopics,
 	faq_tags                             : asyncListFAQTags,
 	list_course_categories               : asyncListCourseCategories,
 	list_tests                           : asyncListTests,
+	default_types                        : asyncFieldsTicketTypes,
+	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	list_dunning_templates               : asyncListDunningTemplates,
+	list_organization_stakeholders       : asyncListOrganizationStakeholders,
+	list_chat_agents                     : asyncFieldsListAgents,
+	list_shipment_services               : asyncListShipmentServices,
+	list_shipments                       : asyncListShipments,
+	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 };
 
 function AsyncSelect(props) {
@@ -123,6 +143,7 @@ function AsyncSelect(props) {
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
+		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
@@ -131,21 +152,19 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
-	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
-		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
-	}
-
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(REST_VALUE_SLICE_INDEX);
 		} else {
 			selectedValue = rest.value;
 		}
 
-		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+		const selectedOption = getAsyncOptionsProps.options.filter(
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+		);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;
