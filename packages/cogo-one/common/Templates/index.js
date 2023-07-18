@@ -30,6 +30,8 @@ function Templates({
 		data : {},
 	});
 	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
+	// const usersName =
+	// Object.keys(selectedAutoAssign || {}).map((key) => selectedAutoAssign[key].user_name).join(', ');
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -89,15 +91,10 @@ function Templates({
 				<div>
 					{
 						bulkCommunicationTemplate && (
-							<>
-								<div className={styles.template_heading}>
-									{count}
-									org
-								</div>
-								{/* <div className={styles.template_heading}>
-									<div>Select a template</div>
-								</div> */}
-							</>
+							<div className={styles.template_heading}>
+								<div className={styles.organization_count}>{count}</div>
+								Users Selected
+							</div>
 						)
 					}
 					{isDefaultOpen && (
@@ -113,11 +110,11 @@ function Templates({
 									placeholder="Enter number"
 								/>
 							</div>
-							<div className={styles.template_heading}>
-								<div>Select a template</div>
-							</div>
 						</>
 					)}
+					<div className={styles.template_heading}>
+						<div>Select a template</div>
+					</div>
 					{
 						maskMobileNumber && (
 							<div className={styles.flex_div}>

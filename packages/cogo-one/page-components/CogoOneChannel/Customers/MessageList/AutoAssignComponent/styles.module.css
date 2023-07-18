@@ -71,6 +71,11 @@
 	}
 }
 
-.list_icon {
-	padding-right: 2px;
+.action_label {
+	font-size: 12px;
+}
+
+.action_button {
+	display: flex;
+	justify-content: space-around;
 }

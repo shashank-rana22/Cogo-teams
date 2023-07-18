@@ -8,6 +8,7 @@ function ChatBulks({
 	bulkAssignChat = () => {},
 	setModalType = () => {},
 	isBotSession = false,
+	setPopoverVisible = () => {},
 }) {
 	return (
 		<div>
@@ -29,10 +30,13 @@ function ChatBulks({
 			<Button
 				size="sm"
 				themeType="secondary"
-				onClick={() => setModalType({
-					type : 'bulk_communication',
-					data : {},
-				})}
+				onClick={() => {
+					setModalType({
+						type : 'bulk_communication',
+						data : {},
+					});
+					setPopoverVisible((prev) => !prev);
+				}}
 			>
 				Template Send
 			</Button>

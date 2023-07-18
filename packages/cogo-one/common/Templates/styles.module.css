@@ -57,6 +57,18 @@
 	width: 360px;
 }
 
+/* .tooltip {
+	width: fit-content;
+	max-width: 240px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+
+	text-align: start;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+} */
+
 .create_footer {
 	display: flex;
 	justify-content: flex-end;
@@ -162,6 +174,16 @@
 	max-width: 361px;
 	padding: 6px 10px;
 	font-size: 16px;
+}
+
+.organization_count {
+	padding: 3px 9px;
+	margin-right: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #fff;
+	background: #ee3425;
+	border-radius: 7px;
 }
 
 .wrap_mobile_number {

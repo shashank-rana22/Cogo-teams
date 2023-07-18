@@ -1,6 +1,7 @@
 import { Button, cl, Popover } from '@cogoport/components';
 import { IcMListView, IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import ChatBulks from './ChatBulks';
 import styles from './styles.module.css';
@@ -17,6 +18,7 @@ function AutoAssignComponent({
 	setModalType = () => {},
 	isBotSession = false,
 }) {
+	const [popoverVisible, setPopoverVisible] = useState(false);
 	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
 
 	return (
@@ -58,17 +60,21 @@ function AutoAssignComponent({
 											selectedAutoAssign={selectedAutoAssign}
 											setModalType={setModalType}
 											isBotSession={isBotSession}
+											setPopoverVisible={setPopoverVisible}
 										/>
 									)}
-									// visible={popoverProps?.isOpen}
-									// onClickOutside={() => setPopoverProps({ isOpen: false, clickedButton: '' })}
+									visible={popoverVisible}
+									onClickOutside={() => setPopoverVisible((prev) => !prev)}
 								>
 									<Button
 										size="sm"
 										themeType="secondary"
+										className={styles.action_button}
+										onClick={() => setPopoverVisible((prev) => !prev)}
+
 									>
-										<IcMListView height={13} width={13} className={styles.list_icon} />
-										Template Send
+										<IcMListView height={15} width={15} />
+										<div className={styles.action_label}>Actions</div>
 									</Button>
 								</Popover>
 
