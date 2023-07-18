@@ -6,13 +6,14 @@ import RecurringSummary from '../RecurringSummary';
 import UploadInvoiceForm from '../UploadInvoiceForm';
 
 interface Props {
-	active:string
-	createExpenseType:string,
-	recurringData?:object,
-	setRecurringData?:(obj:any)=>void,
-	nonRecurringData?:object,
-	setNonRecurringData?:(obj:any)=>void,
-	setIsFormValidated?:(obj:any)=>void,
+	active: string;
+	createExpenseType: string;
+	recurringData?: object;
+	setRecurringData?: (obj: any) => void;
+	nonRecurringData?: object;
+	setNonRecurringData?: (obj: any) => void;
+	setIsFormValidated?: (obj: any) => void;
+	setIncidentMangementId?: (obj) => void;
 }
 
 function CreateExpenseForm({
@@ -23,7 +24,8 @@ function CreateExpenseForm({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
 	setIsFormValidated = () => {},
-}:Props) {
+	setIncidentMangementId = () => {},
+}: Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
 	const [taxOptions, setTaxOptions] = useState([]);
@@ -31,8 +33,8 @@ function CreateExpenseForm({
 	const [entityOptions, setEntityOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 
-	let formData:any;
-	let setFormData:any;
+	let formData: any;
+	let setFormData: any;
 	if (createExpenseType === 'recurring') {
 		formData = recurringData;
 		setFormData = setRecurringData;
@@ -43,8 +45,7 @@ function CreateExpenseForm({
 
 	return (
 		<div>
-			{active === 'Expense Details'
-			&& (
+			{active === 'Expense Details' && (
 				<div style={{ marginTop: '40px' }}>
 					<ExpenseDetailsForm
 						formData={formData}
@@ -62,23 +63,26 @@ function CreateExpenseForm({
 					/>
 				</div>
 			)}
-			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
-				<UploadInvoiceForm
-					formData={formData}
-					setFormData={setFormData}
-					isUploadConfirm={isUploadConfirm}
-					setIsUploadConfirm={setIsUploadConfirm}
-					taxOptions={taxOptions}
-					setTaxOptions={setTaxOptions}
-					setIsFormValidated={setIsFormValidated}
-				/>
+			{active === 'Upload Invoice'
+				&& createExpenseType === 'nonRecurring' && (
+					<UploadInvoiceForm
+						formData={formData}
+						setFormData={setFormData}
+						isUploadConfirm={isUploadConfirm}
+						setIsUploadConfirm={setIsUploadConfirm}
+						taxOptions={taxOptions}
+						setTaxOptions={setTaxOptions}
+						setIsFormValidated={setIsFormValidated}
+					/>
 			)}
-			{ active === 'Final Confirmation' && (
+
+			{active === 'Final Confirmation' && (
 				<div>
 					{createExpenseType === 'nonRecurring' && (
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}
+							setIncidentMangementId={setIncidentMangementId}
 						/>
 					)}
 					{createExpenseType === 'recurring' && (

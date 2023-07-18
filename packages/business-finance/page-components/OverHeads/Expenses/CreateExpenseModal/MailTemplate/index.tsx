@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useCreateExpense from '../../hooks/useCreateExpense';
@@ -10,22 +10,35 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 interface Data {
-	uploadedInvoice?:any,
-	vendorName?:string,
-	expenseCategory?:string,
-	stakeholderEmail?:string,
+	uploadedInvoice?: any;
+	vendorName?: string;
+	expenseCategory?: string;
+	stakeholderEmail?: string;
 }
 
 interface Props {
-	mailData?:Data,
-	setShowModal?:boolean,
-	getList?:(p:any)=>void,
-	getRecurringList?:(p:any)=>void,
-	createExpenseType?:string,
+	mailData?: Data;
+	setShowModal?: (p: any) => void;
+	getList?: (p: any) => void;
+	getRecurringList?: (p: any) => void;
+	createExpenseType?: string;
+	incidentMangementId?: string;
 }
 
-function MailTemplate({ mailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
-	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
+function MailTemplate({
+	mailData = {},
+	setShowModal = () => {},
+	getList = () => {},
+	getRecurringList = () => {},
+	createExpenseType = '',
+	incidentMangementId = '',
+}: Props) {
+	const {
+		uploadedInvoice,
+		vendorName = '-',
+		expenseCategory = '-',
+		stakeholderEmail,
+	} = mailData || {};
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
@@ -35,7 +48,12 @@ function MailTemplate({ mailData, setShowModal, getList, getRecurringList, creat
 		setShowModal,
 		getList,
 	});
-	const { createRecurring, recurringLoading } = useCreateExpenseConfig({ mailData, setShowModal, getRecurringList });
+	const { createRecurring, recurringLoading } = useCreateExpenseConfig({
+		mailData,
+		setShowModal,
+		getRecurringList,
+		incidentMangementId,
+	});
 
 	const handleClick = () => {
 		if (createExpenseType === 'recurring') {
@@ -47,7 +65,6 @@ function MailTemplate({ mailData, setShowModal, getList, getRecurringList, creat
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.heading}>Email recipients</div>
 			<div className={styles.section}>
 				<div className={styles.keys}>From :</div>
@@ -64,31 +81,45 @@ function MailTemplate({ mailData, setShowModal, getList, getRecurringList, creat
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
-				<Details text={`${vendorName} | ${startCase(expenseCategory)} | Expense Approval Request`} />
+				<Details
+					text={`${vendorName} | ${startCase(
+						expenseCategory,
+					)} | Expense Approval Request`}
+				/>
 			</div>
 
 			<div className={styles.heading_body}>Email body</div>
 			<div className={styles.subject}>
-				<Details
-					isBody
-					mailData={mailData}
-				/>
+				<Details isBody mailData={mailData} />
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				{uploadedInvoice?.length > 0 && (
+				{!isEmpty(uploadedInvoice) ? (
 					<div className={styles.file}>
-						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
+						<a
+							href={uploadedInvoice}
+							target="_blank"
+							rel="noreferrer"
+						>
 							<div style={{ display: 'flex' }}>
-								<div><IcMFileUploader /></div>
-								<div style={{ marginLeft: '4px' }}>{showOverflowingNumber(filename, 10)}</div>
+								<div>
+									<IcMFileUploader />
+								</div>
+								<div style={{ marginLeft: '4px' }}>
+									{showOverflowingNumber(filename, 10)}
+								</div>
 							</div>
 						</a>
 					</div>
-				)}
+				) : null}
 				<div className={styles.button}>
-					<Button onClick={() => handleClick()} disabled={loading || recurringLoading}>
-						{loading || recurringLoading ? 'Sending...' : 'Send Email'}
+					<Button
+						onClick={() => handleClick()}
+						disabled={loading || recurringLoading}
+					>
+						{loading || recurringLoading
+							? 'Sending...'
+							: 'Send Email'}
 					</Button>
 				</div>
 			</div>

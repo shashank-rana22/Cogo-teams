@@ -44,9 +44,14 @@ interface Data {
 interface Props {
 	nonRecurringData?: Data;
 	setNonRecurringData?: (obj) => void;
+	setIncidentMangementId?:(val)=>void;
 }
 
-function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () => {} }: Props) {
+function NonRecurringSummary({
+	nonRecurringData = {},
+	setNonRecurringData = () => {},
+	setIncidentMangementId = () => {},
+}: Props) {
 	const {
 		periodOfTransaction,
 		vendorName,
@@ -63,8 +68,10 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders({
-		incidentSubType: expenseCategory, incidentType: 'OVERHEAD_APPROVAL', entityId: entityObject?.id,
+	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
+		incidentSubType : expenseCategory,
+		incidentType    : 'OVERHEAD_APPROVAL',
+		entityId        : entityObject?.id,
 	});
 
 	const { level3, level2, level1 } = stakeholdersData || {};
@@ -93,6 +100,10 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
+
+	useEffect(() => {
+		setIncidentMangementId(stakeholdersData?.id);
+	}, [stakeholdersData, setIncidentMangementId]);
 
 	useEffect(() => {
 		if (stakeholdersData) {
@@ -264,7 +275,6 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 					)}
 				</div>
 			</div>
-
 		</div>
 	);
 }

@@ -4,7 +4,12 @@ import { useSelector } from '@cogoport/store';
 
 import { formatDate } from '../../../commons/utils/formatDate';
 
-const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) => {
+const useCreateExpenseConfig = ({
+	mailData,
+	setShowModal,
+	getRecurringList,
+	incidentMangementId,
+}) => {
 	const {
 		expenseCategory,
 		stakeholderId,
@@ -25,14 +30,12 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		categoryName,
 	} = mailData || {};
 
-	const { branchId, name:branchName } = JSON.parse(branch || '{}');
-	const { registration_number:registrationNumber } = vendorData || {};
-	const { id:cogoEntityId } = entityObject || {};
-	const { organization_trade_party_detail_id:tradePartyDetailId } = tradeParty || {};
+	const { branchId, name: branchName } = JSON.parse(branch || '{}');
+	const { registration_number: registrationNumber } = vendorData || {};
+	const { id: cogoEntityId } = entityObject || {};
+	const { organization_trade_party_detail_id: tradePartyDetailId } =		tradeParty || {};
 
-	const {
-		profile,
-	} = useSelector((state:any) => state);
+	const { profile } = useSelector((state: any) => state);
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -47,26 +50,28 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 		try {
 			await trigger({
 				data: {
-					categoryId           : expenseCategory,
-					approvedBy           : stakeholderId,
+					categoryId                   : expenseCategory,
+					approvedBy                   : stakeholderId,
 					branchId,
-					businessName         : vendorName,
-					organizationSerialId : vendorSerialId,
+					businessName                 : vendorName,
+					organizationSerialId         : vendorSerialId,
 					registrationNumber,
-					repeatFrequency      : repeatEvery,
-					vendorId             : vendorID,
+					repeatFrequency              : repeatEvery,
+					vendorId                     : vendorID,
 					cogoEntityId,
-					maxPayoutAllowed     : payableAmount,
+					maxPayoutAllowed             : payableAmount,
 					currency,
-					startDate            : formatDate(startDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
-					endDate              : formatDate(endDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
-					proofDocuments       : uploadedInvoice,
-					createdBy            : profile?.user?.id,
-					updatedBy            : profile?.user?.id,
+					startDate                    : formatDate(startDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+					endDate                      : formatDate(endDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
+					proofDocuments               : uploadedInvoice,
+					createdBy                    : profile?.user?.id,
+					updatedBy                    : profile?.user?.id,
 					agreementNumber,
 					tradePartyDetailId,
 					categoryName,
 					branchName,
+					incidentSubType              : categoryName,
+					incidentApprovalManagementId : incidentMangementId,
 				},
 			});
 		} catch (err) {
