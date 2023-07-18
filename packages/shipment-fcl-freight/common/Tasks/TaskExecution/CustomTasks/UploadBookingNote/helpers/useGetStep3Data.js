@@ -95,7 +95,8 @@ const useGetStep3Data = ({
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)
+		&& (formattedRate?.[service_charge?.service_id]?.line_items || []).length) {
 			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
 				?.line_items?.map((line_item) => ({
 					code     : line_item?.code,
