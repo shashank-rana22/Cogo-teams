@@ -1,32 +1,16 @@
 import { Placeholder, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMActivePlans, IcMFileUploader, IcMInvoiceTriggers } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useDashboard from '../hooks/useDashboard';
 import { lastThreeFinancialYears } from '../Register/Outward/helper';
 
+import { COLORS, dataValue, getInvoiceData } from './constant';
 import PieData from './PieData';
 import styles from './styles.module.css';
 
 const GET_ZERO_INDEX = 0;
-
-const dataValue = (filedCount, remainCount) => [
-	{
-		id    : 'filedCount',
-		label : 'File Count',
-		value : filedCount,
-		color : '#3FD9EA',
-	},
-	{
-		id    : 'remainCount',
-		label : 'Remain Count',
-		value : remainCount,
-		color : '#D9D9D9',
-	},
-];
-const COLORS = ['#3FD9EA', '#D9D9D9'];
 
 function Dashboard() {
 	const [year, setYear] = useState('');
@@ -39,20 +23,6 @@ function Dashboard() {
 		fullMatchTotal,
 		erroredOutTotal,
 	} = data || {};
-
-	const getInvoiceData = [
-		{
-			label : 'Total Invoices Uploaded',
-			value : totalUploaded || '0',
-			icon  : <IcMFileUploader height="25px" width="25px" />,
-		},
-		{
-			label : 'Total Errored Out Uploaded',
-			value : erroredOutTotal || '0',
-			icon  : <IcMInvoiceTriggers height="25px" width="25px" />,
-		},
-		{ label: 'Full Match', value: fullMatchTotal || '0', icon: <IcMActivePlans height="25px" width="25px" /> },
-	];
 
 	const { filedCount, totalCount, lastFiledDate, dueDate } = Gstr1Data || {};
 
@@ -121,7 +91,7 @@ function Dashboard() {
 					/>
 				</div>
 				<div className={styles.invoice_show_data}>
-					{getInvoiceData.map((item) => (
+					{getInvoiceData(totalUploaded, erroredOutTotal, fullMatchTotal).map((item) => (
 						<div key={item?.label} className={styles.invoice_data}>
 							<div className={styles.label_value}>
 								<div className={styles.icon}>{item?.icon}</div>

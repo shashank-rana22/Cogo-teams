@@ -5,12 +5,13 @@ import { optionEntity, optionsGSTIN, optionsMonth, optionsYear } from '../helper
 import styles from './styles.module.css';
 
 function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
+	const { entity, gstIn, month, year } = filters || {};
 	return (
 		<div className={styles.header_container}>
 			<div>
 				<div className={styles.filter_heading}>Entity</div>
 				<Select
-					value={filters?.entity}
+					value={entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 					placeholder="Select Entity"
 					options={optionEntity}
@@ -23,11 +24,11 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>GSTIN</div>
 				<Select
-					value={filters?.gstIn}
-					disabled={!filters?.entity}
+					value={gstIn}
+					disabled={!entity}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, gstIn: val })); }}
 					placeholder="Choose"
-					options={optionsGSTIN(filters?.entity)}
+					options={optionsGSTIN(entity)}
 					isClearable
 					style={{ width: '250px' }}
 					size="sm"
@@ -37,7 +38,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>Return Period</div>
 				<Select
-					value={filters?.month}
+					value={month}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
 					placeholder="Period"
 					options={optionsMonth}
@@ -50,7 +51,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			<div className={styles.margin_select}>
 				<div className={styles.filter_heading}>Year</div>
 				<Select
-					value={filters?.year}
+					value={year}
 					onChange={(val) => { setFilters((prev) => ({ ...prev, year: val })); }}
 					placeholder="Year"
 					options={optionsYear}
@@ -63,7 +64,7 @@ function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 			<div className={styles.margin_select}>
 				<Button
 					loading={loading}
-					disabled={!(filters?.year && filters?.gstIn && filters?.month && filters?.entity)}
+					disabled={!(year && gstIn && month && entity)}
 					onClick={exportTrigger}
 				>
 					Export
