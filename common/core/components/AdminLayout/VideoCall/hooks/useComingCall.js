@@ -18,6 +18,7 @@ function useComingCall({
 	setWebrtcToken,
 	callEnd,
 }) {
+	const { calling_details } = callDetails || {};
 	const getWebrtcToken = async () => {
 		if (callDetails.webrtc_token_room_id && callDetails.calling_room_id) {
 			const tokenDocRef = doc(
@@ -114,6 +115,14 @@ function useComingCall({
 		});
 		setCallComing(false);
 	};
+
+	useEffect(() => {
+		const notCallingCallStatus = ['rejected', 'end_call', 'accepted'];
+
+		if (notCallingCallStatus.includes(calling_details?.call_status)) {
+			setCallComing(false);
+		}
+	}, [calling_details, setCallComing]);
 
 	return {
 		answerOfCall,
