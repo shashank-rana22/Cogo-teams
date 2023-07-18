@@ -19,26 +19,25 @@ function Card({
 		<div className={styles.container}>
 			<TaskDetails task={task} isTaskOpen={isTaskOpen} servicesList={servicesList} />
 
-			<div className={styles.action}>
-				{isTaskOpen ? (
-					null
-				) : (
-					<UpdateButton
-						task={task}
-						handleClick={handleClick}
-						handleChange={handleChange}
-						hideButton={task.status === 'completed' || selectedTaskId.length}
-						disabledTaskButton={task?.disabled}
-					/>
-				)}
-
-				<UpdateAction
+			{isTaskOpen ? (
+				null
+			) : (
+				<UpdateButton
 					task={task}
-					hideThreeDots={task.status === 'completed'}
-					refetch={refetch}
-					services={servicesList}
+					handleClick={handleClick}
+					handleChange={handleChange}
+					hideButton={task.status === 'completed' || selectedTaskId.length}
+					disabledTaskButton={task?.disabled}
 				/>
-			</div>
+			)}
+
+			<UpdateAction
+				task={task}
+				hideThreeDots={task.status === 'completed'}
+				refetch={refetch}
+				services={servicesList}
+			/>
+
 		</div>
 	);
 }

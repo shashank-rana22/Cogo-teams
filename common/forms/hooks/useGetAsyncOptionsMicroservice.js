@@ -21,6 +21,7 @@ function useGetAsyncOptionsMicroservice({
 	microService = '',
 	searchByq,
 	qFilterKey = 'q',
+	getModifiedOptions,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -36,7 +37,11 @@ function useGetAsyncOptionsMicroservice({
 		authkey,
 		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || data?.items || data || [];
+	let options = data?.list || data?.items || data || [];
+
+	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
+		options = getModifiedOptions({ options });
+	}
 
 	const optionValues = options.map((item) => item[valueKey]);
 

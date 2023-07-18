@@ -19,16 +19,18 @@ function LockScreen({
 	userRoleIds = [],
 	firestore = {},
 }) {
-	const { showModal, setShowModal } = useGetActivity({
-		firestore,
-		agentId,
-	});
-	const { apiTrigger, loading, otpNumber, setOtpNumber } = useSubmitOtp({ agentId, firestore, setShowModal });
-	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
-
 	const { ROLE_IDS_CHECK } = getViewTypeMapping();
 
 	const isRolePresent = userRoleIds.some((itm) => ROLE_IDS_CHECK.kam_view.includes(itm));
+
+	const { showModal, setShowModal } = useGetActivity({
+		firestore,
+		agentId,
+		isRolePresent,
+	});
+	const { apiTrigger, loading, otpNumber, setOtpNumber } = useSubmitOtp({ agentId, firestore, setShowModal });
+
+	const { generateOtp } = useGetGenerateOtp({ agentId, firestore, setShowModal });
 
 	const showLockScreen = isRolePresent && showModal;
 
