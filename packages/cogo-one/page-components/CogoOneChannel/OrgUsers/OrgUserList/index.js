@@ -1,4 +1,5 @@
 import { Placeholder, Input } from '@cogoport/components';
+import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
@@ -6,7 +7,7 @@ import useListOrganizationUsers from '../../../../hooks/useListOrganizationUsers
 
 import styles from './styles.module.css';
 
-const LOADER_COUNT = 8;
+const LOADER_COUNT = 4;
 
 function OrgUsersList({
 	orgId = '',
@@ -51,6 +52,7 @@ function OrgUsersList({
 					value={search}
 					className={styles.input_styles}
 					size="sm"
+					prefix={<IcMSearchdark />}
 				/>
 			</div>
 			<div className={styles.list_container}>
@@ -89,8 +91,11 @@ function OrgUsersList({
 								});
 							}}
 						>
-							<UserAvatar type="whatsapp" />
-							<div className={styles.name}>{startCase(userName)}</div>
+							<div className={styles.parent_flex}>
+								<UserAvatar type="whatsapp" />
+								<div className={styles.name}>{startCase(userName)}</div>
+							</div>
+							<IcMArrowNext className={styles.arrow_icon} />
 						</div>
 					);
 				}) : <div className={styles.no_data_found}>No Users Found</div>}

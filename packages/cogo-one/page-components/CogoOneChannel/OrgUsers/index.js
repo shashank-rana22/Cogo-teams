@@ -13,8 +13,17 @@ function OrgUsers({
 	const [orgId, setOrgId] = useState('');
 
 	return (
-		<Modal show={openKamContacts} onClose={() => setOpenKamContacts(false)} placement="center">
-			<Modal.Header title="Organizaton Users" />
+		<Modal
+			show={openKamContacts}
+			onClose={() => setOpenKamContacts(false)}
+			placement="center"
+			scroll={false}
+			className={styles.styled_modal}
+		>
+			<Modal.Header
+				className={styles.header_styles}
+				title="Organizaton Users"
+			/>
 			<Modal.Body className={styles.body_styles}>
 				<AsyncSelect
 					asyncKey="organizations"

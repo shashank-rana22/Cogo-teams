@@ -30,11 +30,13 @@ function ModalComp({
 				agentId={userId}
 			/>
 
-			<OrgUsers
-				openKamContacts={openKamContacts}
-				setOpenKamContacts={setOpenKamContacts}
-				setActiveTab={setActiveTab}
-			/>
+			{openKamContacts && (
+				<OrgUsers
+					openKamContacts={openKamContacts}
+					setOpenKamContacts={setOpenKamContacts}
+					setActiveTab={setActiveTab}
+				/>
+			)}
 		</>
 	);
 }

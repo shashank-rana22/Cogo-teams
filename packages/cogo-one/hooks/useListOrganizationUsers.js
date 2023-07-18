@@ -7,7 +7,7 @@ import formatOrganizationUsers from '../helpers/formatOrganizationUsers';
 const getParams = ({ organizationId, query }) => ({
 	filters    : { organization_id: organizationId,	q: query || undefined },
 	page       : 1,
-	page_limit : 8,
+	page_limit : 100,
 
 });
 
