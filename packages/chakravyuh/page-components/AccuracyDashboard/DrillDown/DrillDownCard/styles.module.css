@@ -40,6 +40,14 @@
 		animation-duration: 3s;
 		animation-iteration-count: infinite;
 	}
+
+	&.custom_card {
+		width: 200px;
+		border: 1px solid #e0e0e0;
+		border-left: none;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
 }
 
 .flex_between {
@@ -54,24 +62,24 @@
 
 .indicator {
 	position: absolute;
-	bottom: 0;
-	left: 0;
+	bottom: -1px;
+	left: -3px;
 	width: 3px;
 
 	&.checkout {
-		color: #001219;
+		background-color: #001219;
 	}
 
 	&.missing {
-		color: #0a9396;
+		background-color: #0a9396;
 	}
 
 	&.dislike {
-		color: #ca6702;
+		background-color: #ca6702;
 	}
 
 	&.dropoff {
-		color: #9b2226;
+		background-color: #9b2226;
 	}
 }
 
@@ -97,4 +105,15 @@
 	100% {
 		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
 	}
+}
+
+.drop_off_text {
+	color: #bf291e;
+}
+
+.parent_action_text {
+	padding-left: 5px;
+	margin-right: auto;
+	font-size: 12px;
+	color: #828282;
 }

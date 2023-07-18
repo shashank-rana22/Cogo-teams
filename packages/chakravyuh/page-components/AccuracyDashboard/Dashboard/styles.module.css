@@ -29,3 +29,10 @@
 		transform: scale(1.005) translateY(-4px);
 	}
 }
+
+.list_title {
+	padding: 16px 0 12px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}

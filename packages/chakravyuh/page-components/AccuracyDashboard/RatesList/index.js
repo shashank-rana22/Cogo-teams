@@ -8,14 +8,15 @@ import styles from './styles.module.css';
 
 function SupplyRates({
 	filters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
-	className = '',
+	className = '', tableTitle = 'Supply Rates', visible = false,
 }) {
-	const { service_type = 'fcl', pieChartView = 'default' } = filters;
+	const { service_type = 'fcl' } = filters;
 	const { columns } = useSupplyRatesListTable(service_type);
 
-	if (pieChartView !== 'default') {
+	if (visible) {
 		return (
 			<div className={cl`${styles.main_container} ${className}`}>
+				<p className={styles.main_title}>{tableTitle}</p>
 				<Table columns={columns} data={LIST_DATA} className={styles.table_container} />
 				<div className={styles.pagination_container} id="rnp_role">
 					<Pagination
