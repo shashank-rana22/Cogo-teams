@@ -30,7 +30,7 @@ const VIEW_NUMBER_REASONS = [
 	{ label: 'Other', value: 'other' },
 ];
 
-const controls = [
+const CONTROLS = [
 	{
 		name        : 'reason',
 		controlType : 'radio',
@@ -44,4 +44,4 @@ const controls = [
 
 ];
 
-export default controls;
+export default CONTROLS;

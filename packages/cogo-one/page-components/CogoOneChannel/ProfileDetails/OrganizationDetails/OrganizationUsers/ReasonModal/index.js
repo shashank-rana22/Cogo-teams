@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import controls from '../../../../../../configurations/reason-for-number-view-controls';
+import CONTROLS from '../../../../../../configurations/reason-for-number-view-controls';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -41,7 +41,7 @@ function ReasonModal({
 			<Modal.Header title="Enter reason to view number !" />
 
 			<Modal.Body className={styles.container}>
-				<Form control={control} controls={controls} showElements={showElements} />
+				<Form control={control} controls={CONTROLS} showElements={showElements} />
 			</Modal.Body>
 
 			<Modal.Footer>
