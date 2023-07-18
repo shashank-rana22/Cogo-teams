@@ -16,6 +16,7 @@ import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { ICESERVER } from '../constants';
+import { stopStream } from '../utils';
 
 // eslint-disable-next-line max-lines-per-function
 function useVideoCallFirebase({
@@ -27,7 +28,7 @@ function useVideoCallFirebase({
 	setOptions,
 	callDetails,
 	setStreams,
-	streams,
+	// streams,
 	peerRef,
 	// callComing,
 	inACall,
@@ -107,15 +108,6 @@ function useVideoCallFirebase({
 		}
 	};
 
-	const stopStream = useCallback((stream_type) => {
-		if (!streams[stream_type]) return;
-
-		const tracks = streams[stream_type].getTracks();
-		tracks.forEach((track) => {
-			track.stop();
-		});
-	}, [streams]);
-
 	const callEnd = useCallback(() => {
 		dispatch(
 			setProfileState({
@@ -156,7 +148,7 @@ function useVideoCallFirebase({
 			peer_stream   : null,
 			screen_stream : null,
 		});
-	}, [dispatch, setInACall, stopStream, peerRef, setCallDetails,
+	}, [dispatch, setInACall, peerRef, setCallDetails,
 		setWebrtcToken, setOptions, setStreams, setCallComing]);
 
 	const callingTo = useCallback((peer_details = {}) => {
@@ -223,7 +215,7 @@ function useVideoCallFirebase({
 			videoCallRef,
 			where('call_status', '==', 'calling'),
 			where('calling_by', '==', 'user'),
-			// where('peer_id', '==', 'a356bdf7-153e-4054-a76e-ccd5538baac3'),
+			where('peer_id', '==', userId),
 		);
 
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
@@ -242,7 +234,7 @@ function useVideoCallFirebase({
 				}
 			});
 		});
-	}, [firestore, inACall, setCallComing, setCallDetails]);
+	}, [firestore, inACall, setCallComing, setCallDetails, userId]);
 
 	useEffect(() => {
 		if (callDetails?.calling_room_id) {

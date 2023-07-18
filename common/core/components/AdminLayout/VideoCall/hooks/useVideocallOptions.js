@@ -1,12 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { stopStream } from '../utils';
+
 function useVideocallOptions({
 	options,
 	setOptions,
 	setStreams,
 	streams,
 	callEnd,
-	stopStream,
 	callUpdate,
 	peerRef,
 }) {
@@ -19,7 +20,7 @@ function useVideocallOptions({
 				streams.user_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
 				streams.user_stream,
 			);
-			stopStream('screen_stream');
+			stopStream('screen_stream', streams);
 		} else {
 			navigator.mediaDevices
 				.getDisplayMedia({ cursor: true })

@@ -48,10 +48,10 @@ function VideoCall({
 	});
 	const peerRef = useRef(null);
 
-	const { callingTo, callUpdate, callEnd, stopStream, saveWebrtcToken } = useVideoCallFirebase({
+	const { callingTo, callUpdate, callEnd, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
-		callComing,
+		// callComing,
 		setOptions,
 		setWebrtcToken,
 		setInACall,
@@ -59,7 +59,7 @@ function VideoCall({
 		setCallDetails,
 		callDetails,
 		setStreams,
-		streams,
+		// streams,
 		peerRef,
 	});
 
@@ -119,10 +119,8 @@ function VideoCall({
 					ref={streamRef}
 					options={options}
 					setOptions={setOptions}
-					setStreams={setStreams}
 					streams={streams}
 					callEnd={callEnd}
-					stopStream={stopStream}
 					callUpdate={callUpdate}
 					peerRef={peerRef}
 					callDetails={callDetails}

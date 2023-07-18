@@ -13,10 +13,8 @@ const FIRST_VARIABLE = 1;
 function VideoCallScreen({
 	options = {},
 	setOptions = () => {},
-	setStreams = () => {},
 	streams = {},
 	callEnd = () => {},
-	stopStream = () => {},
 	callUpdate = () => {},
 	peerRef = null,
 	callDetails = {},
@@ -32,10 +30,8 @@ function VideoCallScreen({
 	const { stopCall } = useVideocallOptions({
 		options,
 		setOptions,
-		setStreams,
 		streams,
 		callEnd,
-		stopStream,
 		callUpdate,
 		peerRef,
 	});
