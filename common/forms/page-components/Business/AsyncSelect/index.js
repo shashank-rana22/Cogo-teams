@@ -52,6 +52,7 @@ import {
 	asyncListShipmentServices,
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
+	asyncIncidentSubtypeList,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -122,6 +123,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipment_services               : asyncListShipmentServices,
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
+	list_incident_subtype                : asyncIncidentSubtypeList,
 };
 
 function AsyncSelect(props) {

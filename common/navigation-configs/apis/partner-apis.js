@@ -8698,6 +8698,14 @@ const partner = {
 			api         : 'post_payments_journal_voucher_reject',
 			access_type : 'private',
 		},
+		{
+			api         : 'list_partner_users',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
