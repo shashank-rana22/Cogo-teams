@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
@@ -11,7 +11,7 @@ import RepliedMessage from '../RepliedMessage';
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 
-function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
+function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
 		setRaiseTicketModal((p) => {
 			if (p?.state) {
@@ -21,9 +21,9 @@ function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
 		});
 	};
 	return (
-		<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+		<Button size="md" themeType="secondary" onClick={triggerModal}>
 			Raise a ticket
-		</div>
+		</Button>
 	);
 }
 
@@ -92,8 +92,7 @@ function ReceiveDiv({
 					className={styles.order_container}
 				>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.list_button}
 						onClick={() => setShowOrder((p) => !p)}
 					>
