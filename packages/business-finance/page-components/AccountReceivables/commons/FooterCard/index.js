@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function FooterCard({ entityCode = '', bulkIrnGenerate = () => {}, bulkIrnLoading = false, checkedRows = [] }) {
 	const [confirmation, setConfirmation] = useState(false);
-	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].irn_label;
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
 
 	return (
 		<div className={styles.footer_div}>

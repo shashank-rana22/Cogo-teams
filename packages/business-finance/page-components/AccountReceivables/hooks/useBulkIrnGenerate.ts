@@ -13,7 +13,7 @@ interface Props {
 const useBulkIrnGenerate = (
 	{ entityCode, getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
 ) => {
-	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels;
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
 	const [
 		{ loading:bulkIrnLoading },
 		bulkIrnTrigger,

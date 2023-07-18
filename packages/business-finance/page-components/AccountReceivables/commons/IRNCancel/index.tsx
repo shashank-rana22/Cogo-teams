@@ -37,7 +37,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const { postToSage, loading } = usePostToSage({ id });
 
-	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels;
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
 
 	const sageAllowed = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('post_to_sage');
 	const cancelSupported = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
