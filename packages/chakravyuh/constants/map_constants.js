@@ -9,6 +9,12 @@ export const BASE_LAYER = [
 	},
 ];
 const MAX_LNG = 90;
+export const COLORS = [
+	{ weight: 0.5 },
+	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 0.8, opacity: 0.8, min: 0, max: 40 },
+	{ fillColor: '#FEF3E9', color: '#F68B21', fillOpacity: 0.8, opacity: 0.8, min: 40, max: 60 },
+	{ fillColor: '#FDEBE9', color: '#EE3425', fillOpacity: 0.8, opacity: 0.8, min: 60, max: 100 },
+];
 
 export const SORT_OPTIONS = [
 	{ label: 'Deviation', value: 'deviation' },
@@ -20,5 +26,17 @@ export const MAX_BOUNDS = [
 	[-MAX_LNG, -Infinity],
 	[MAX_LNG, Infinity],
 ];
-export const LAYOUT = 408;
-export const TIME_LIMIT = 110;
+export const LAYOUT_WIDTH = 408;
+export const TIME_LIMIT = 200;
+export const ICON_SIZE = 40;
+export const ICON_ANCHORX = 30;
+export const ICON_ANCHORY = 50;
+export const PADDING_TOP = 10;
+export const PREFFERED_ZOOM = 4;
+export const ONE = 1;
+export const ITEMS = [
+	{ label: 'NA', spectrumStyle: { backgroundColor: '#f4f4f4', borderColor: '#828282' }, key: 'na' },
+	{ label: '0-40 %', spectrumStyle: { backgroundColor: '#F7FAEF', borderColor: '#849E4C' }, key: 'green' },
+	{ label: '40-60 %', spectrumStyle: { backgroundColor: '#FEF3E9', borderColor: '#F68B21' }, key: 'orange' },
+	{ label: '60-100 %', spectrumStyle: { backgroundColor: '#FDEBE9', borderColor: '#EE3425' }, key: 'red' },
+];
