@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useCreateEBooking from '../../hooks/useCreateEBooking';
 import useSendBookingRequestEmail from '../../hooks/useSendBookingRequestEmail';
 import useUpdateBookingPreference from '../../hooks/useUpdateBookingPreference';
 
@@ -37,6 +38,9 @@ function Card({
 	const { updateConfirmation, updateLoading } = useUpdateBookingPreference();
 	const { emailData, loading, sendBookingRequestEmail } =	useSendBookingRequestEmail(onCancel, setShowEmailPreview);
 
+	const { createEBooking } = useCreateEBooking();
+	// createBookingLoading
+
 	const handleProceedWithEmail = async (show_preview_only) => {
 		await sendBookingRequestEmail(
 			item,
@@ -48,9 +52,17 @@ function Card({
 		);
 	};
 
+	const handleProceedWithEBooking = () => {
+		createEBooking();
+	};
+
 	const handleProceed = async () => {
 		if (bookingMode === 'email') {
 			handleProceedWithEmail(true);
+			return;
+		}
+		if (bookingMode === 'e_booking') {
+			handleProceedWithEBooking();
 			return;
 		}
 		(serviceProvidersData || []).forEach((itm) => {
@@ -114,9 +126,11 @@ function Card({
 				/>
 			</Modal>
 			<div className={styles.header}>
-				<div className={styles.ribbon_container}>
-					<div className={styles.ribbon_pop}>E-Booking</div>
-				</div>
+				{ item?.source === 'cargo_ai' && (
+					<div className={styles.ribbon_container}>
+						<div className={styles.ribbon_pop}>E-Booking</div>
+					</div>
+				)}
 				<div className={styles.row}>
 					<div className={styles.priority_text}>
 						(

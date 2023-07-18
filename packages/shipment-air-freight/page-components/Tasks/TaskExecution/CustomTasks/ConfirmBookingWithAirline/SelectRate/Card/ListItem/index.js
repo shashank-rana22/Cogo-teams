@@ -17,6 +17,13 @@ function ListItem({
 	step = 1,
 	bookingMode = '',
 }) {
+	const PROCEED_CTA_LABEL = {
+		email              : 'Proceed With Mail',
+		e_booking          : 'Proceed With E-Booking',
+		platform           : 'Proceed With Platform',
+		email_and_platform : 'Proceed With Platform',
+	};
+
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -148,9 +155,7 @@ function ListItem({
 							}
 								onClick={handleSubmit(handleProceed)}
 							>
-								{bookingMode === 'email'
-									? 'Proceed With Mail'
-									: 'Proceed With Platform'}
+								{PROCEED_CTA_LABEL[bookingMode]}
 							</Button>
 						</div>
 					</>
