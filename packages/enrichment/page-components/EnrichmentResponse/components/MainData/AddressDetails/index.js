@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
-import Header from '../commons/Header';
+import Header from '../../../commons/Header';
 
 import ShowAddressForm from './components/ShowAddressForm';
 import ShowAddressList from './components/ShowAddressList';
