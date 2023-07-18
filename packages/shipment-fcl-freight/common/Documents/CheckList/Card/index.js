@@ -17,6 +17,7 @@ const Card = ({
 	setShowApproved = () => {},
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
+	bl_details = [],
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -63,6 +64,7 @@ const Card = ({
 					setShowApproved={setShowApproved}
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
 					activeStakeholder={activeStakeholder}
+					bl_details={bl_details}
 				/>
 			);
 		});

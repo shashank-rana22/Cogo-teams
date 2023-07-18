@@ -1626,6 +1626,11 @@ const apis = [
 		access_type : 'private',
 	},
 	{
+		api          : 'send_rail_domestic_indent_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'update_shipment_bl_numbers',
 		access_type  : 'private',
 		service_name : 'shipment',
