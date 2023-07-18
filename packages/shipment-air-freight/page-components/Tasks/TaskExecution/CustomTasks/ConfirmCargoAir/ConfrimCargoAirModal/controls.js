@@ -2,14 +2,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const controls = (primary_service, services) => [
 	{
-		label       : 'Cargo Ready Date',
-		name        : 'cargo_ready_date',
-		placeholder : 'Select Cargo Ready Date',
-		type        : 'datepicker',
-		span        : 4,
-		value       : new Date(primary_service?.cargo_clearance_date),
-		minDate     : new Date(),
-		rules       : {
+		label                 : 'Cargo Ready Date',
+		name                  : 'cargo_ready_date',
+		placeholder           : 'Select Cargo Ready Date',
+		type                  : 'datepicker',
+		span                  : 4,
+		value                 : new Date(primary_service?.cargo_clearance_date),
+		isPreviousDaysAllowed : true,
+		rules                 : {
 			required: true,
 		},
 	},
@@ -54,11 +54,11 @@ const controls = (primary_service, services) => [
 		value : new Date(services?.[GLOBAL_CONSTANTS.zeroth_index]?.schedule_departure
 			|| primary_service?.schedule_departure
 			|| primary_service?.selected_schedule_departure),
-		placeholder : 'Select Final Flight Departure Date',
-		type        : 'datepicker',
-		span        : 4,
-		minDate     : new Date(),
-		rules       : {
+		placeholder           : 'Select Final Flight Departure Date',
+		type                  : 'datepicker',
+		span                  : 4,
+		isPreviousDaysAllowed : true,
+		rules                 : {
 			required: true,
 		},
 	},
@@ -68,11 +68,11 @@ const controls = (primary_service, services) => [
 		value : new Date(services?.[GLOBAL_CONSTANTS.zeroth_index]?.schedule_arrival
 			|| primary_service?.schedule_arrival
 			|| primary_service?.selected_schedule_arrival),
-		placeholder : 'Select Final Flight Arrival Date',
-		type        : 'datepicker',
-		span        : 4,
-		minDate     : new Date(),
-		rules       : {
+		placeholder           : 'Select Final Flight Arrival Date',
+		type                  : 'datepicker',
+		span                  : 4,
+		isPreviousDaysAllowed : true,
+		rules                 : {
 			required: true,
 		},
 	},
@@ -149,24 +149,24 @@ const controls = (primary_service, services) => [
 				span: 4,
 			},
 			{
-				label       : 'Flight Departure',
-				name        : 'schedule_departure',
-				placeholder : 'Select Flight Departure Date',
-				type        : 'datepicker',
-				span        : 4,
-				minDate     : new Date(),
-				className   : 'primary lg validity',
-				rules       : { required: 'Flight Departure Date is Required' },
+				label                 : 'Flight Departure',
+				name                  : 'schedule_departure',
+				placeholder           : 'Select Flight Departure Date',
+				type                  : 'datepicker',
+				span                  : 4,
+				isPreviousDaysAllowed : true,
+				className             : 'primary lg validity',
+				rules                 : { required: 'Flight Departure Date is Required' },
 			},
 			{
-				label       : 'Flight Arrival',
-				name        : 'schedule_arrival',
-				placeholder : 'Select Flight Arrival Date',
-				type        : 'datepicker',
-				span        : 4,
-				minDate     : new Date(),
-				className   : 'primary lg validity',
-				rules       : { required: 'Flight Arrival Date is Required' },
+				label                 : 'Flight Arrival',
+				name                  : 'schedule_arrival',
+				placeholder           : 'Select Flight Arrival Date',
+				type                  : 'datepicker',
+				span                  : 4,
+				isPreviousDaysAllowed : true,
+				className             : 'primary lg validity',
+				rules                 : { required: 'Flight Arrival Date is Required' },
 			},
 			{
 				label       : 'Flight Number',

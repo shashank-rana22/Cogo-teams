@@ -1,0 +1,115 @@
+.container {
+    padding: 12px;
+
+    .ui-single-date-picker-input-container {
+        width: 92%;
+        border: 1px solid #cbcff5;
+        height: 44px;
+        border-radius: 4px;
+        
+        .core-ui-input-root {
+            border: none;
+            input {
+                font-size: 14px;
+                margin-top: 8px;
+                margin-left: 2px;
+            }
+        }
+    }
+
+    &.notDisabled {
+        .core-ui-input-root.primary.error {
+            background: #f2f2f2;
+        }
+
+        .custom-select-input-container {
+            background: #f2f2f2;
+        }
+
+        .custom-select-input-select-placeholder {
+            color: #0b1717 !important;
+        }
+
+        .core-ui-input-control {
+            font-size: 14px;
+            color: #bdbdbd;
+        }
+
+        .ui-single-date-picker-input-container {
+            background: #f2f2f2;
+        }
+
+        .core-ui-input-root {
+            background: #f2f2f2;
+        }
+    }
+
+    .ui-single-date-picker-input-container {
+        width: 92%;
+        border: 1px solid #cbcff5;
+        height: 44px;
+        border-radius: 4px;
+
+        .core-ui-input-root {
+            border: none;
+            input {
+                font-size: 14px;
+                margin-top: 8px;
+                margin-left: 2px;
+            }
+        }
+    }
+
+    .form-item-label {
+		font-weight: 500;
+	}
+	.custom-select-input-container {
+		width: 92%;
+		.custom-select-input-subcontainer {
+			border: 1px solid #cbcff5;
+			border-radius: 4px;
+			height: 44px;
+			.custom-select-input-select-placeholder {
+				color: #cbcff5;
+			}
+			.custom-select-input-select-value {
+				color: #393f70;
+			}
+		}
+	}
+}
+
+.button_div {
+    display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.div1 {
+    margin-right: 10px;
+}
+
+.div_middle {
+    margin-right: 16px;
+	margin-left: 10px;
+
+	.core-ui-button-root {
+		padding: 8px 16px;
+	}
+}
+
+.heading_div {
+    font-weight: 500;
+	font-size: 20px;
+	line-height: 16px;
+	margin-top: 32px;
+	color: #393f70;
+    padding: 10px;
+}
+
+.layout_div {
+    .Line_row {
+		border-bottom: none;
+		margin-top: 0px;
+	}
+}

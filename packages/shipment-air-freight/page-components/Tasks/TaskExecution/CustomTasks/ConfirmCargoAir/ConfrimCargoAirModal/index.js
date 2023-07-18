@@ -14,12 +14,12 @@ const LOWER_KEYS = ['flight_departure', 'flight_arrival', 'flight_number'];
 const ZERO_STOPPAGE = 0;
 const FOR_LOOP_INCREMENT_VALUE = 1;
 function ConfirmCargoAirModal({
-	task,
-	handleUpdate,
-	loading,
-	primary_service,
-	onCancel,
-	services,
+	task = {},
+	handleUpdate = () => {},
+	loading = false,
+	primary_service = {},
+	onCancel = () => {},
+	services = {},
 }) {
 	const controls = fieldControls(primary_service, services);
 	const {
@@ -34,11 +34,12 @@ function ConfirmCargoAirModal({
 	const agent = watch('contact_with_agent');
 	const noOfStops1 = Number(watch('no_of_stops1'));
 
+	const noOfStopsControl = controls.find((ctrl) => ctrl.name === 'flight_number');
 	if (noOfStops1 > ZERO_STOPPAGE) {
-		controls.flight_number = {};
+		noOfStopsControl.value = {};
 	} else {
-		controls.flight_number = {
-			...controls.flight_number,
+		noOfStopsControl.value = {
+			...noOfStopsControl.value,
 		};
 	}
 
