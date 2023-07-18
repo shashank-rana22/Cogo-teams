@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 const MULTI_SELECT_PLACEHOLDER = 'Select KRAs';
 
-function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions = [], onClickAddKRAs }) {
+function SelectKRAs({ selectedValue, setSelectedValue, kraOptions = [], onClickAddKRAs }) {
 	return (
 		<div className={styles.container}>
 			<div>
@@ -19,7 +19,7 @@ function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions = [], onClickA
 						placeholder={MULTI_SELECT_PLACEHOLDER}
 						value={selectedValue}
 						onChange={(e) => setSelectedValue(e)}
-						options={KRAOptions}
+						options={kraOptions}
 					/>
 				</div>
 			</div>

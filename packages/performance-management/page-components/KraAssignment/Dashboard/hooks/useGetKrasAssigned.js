@@ -4,6 +4,19 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
+const getPayload = ({ filters }) => {
+	const { employee_ids = [], ...rest } = filters || [];
+	const params = {
+		filters: {
+			employee_ids,
+			...rest,
+		},
+	};
+	return {
+		params,
+	};
+};
+
 function useGetkrasAssigned({ filters }) {
 	const [selectAccordian, setSelectAccordian] = useState([]);
 	const [selectAccordianObject, setSelectAccordianObject] = useState({});
@@ -17,16 +30,11 @@ function useGetkrasAssigned({ filters }) {
 	);
 
 	const getkrasAssigned = useCallback(() => {
-		const { employee_ids = [], ...rest } = filters || [];
+		const payload = getPayload({ filters });
 
 		try {
 			trigger({
-				params: {
-					filters: {
-						employee_ids,
-						...rest,
-					},
-				},
+				params: payload,
 			});
 		} catch (error) {
 			if (error?.response?.data) {

@@ -15,9 +15,9 @@ function RenderSubChapters({ item, tooltip_data }) {
 		<div className={styles.pill_box}>
 			{item?.sub_chapters
 				?.slice(start_index, end_index)
-				.map((singlesub) => (
-					<Pill key={singlesub?.name} size="md" className={styles.pill}>
-						{startCase(singlesub?.sub_chapter_name)}
+				.map((single_sub) => (
+					<Pill key={single_sub?.name} size="md" className={styles.pill}>
+						{startCase(single_sub?.sub_chapter_name)}
 					</Pill>
 				))}
 

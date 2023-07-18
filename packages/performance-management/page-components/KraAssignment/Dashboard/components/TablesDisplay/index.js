@@ -27,7 +27,7 @@ function TableDisplay({
 		}
 	};
 
-	const allElementsPresent = 	!isEmpty(selectObject)
+	const allElementsPresent = !isEmpty(selectObject)
 	&& countTrueValues(selectObject) === countTrueValues(OBJECT_OF_IDS)
 		? Object.keys(selectObject).every((key) => Object.prototype.hasOwnProperty.call(OBJECT_OF_IDS, key)
 		&& selectObject[key] === OBJECT_OF_IDS[key])

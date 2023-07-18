@@ -31,23 +31,27 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 				<div className={styles.container}>
 
 					<div className={styles.employee_name}>
-						Employee Name:&nbsp;
+						Employee Name:
+						{' '}
 						<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.employee_name}</span>
 					</div>
 
 					<div className={styles.squad}>
 						<div className={styles.squad_name}>
-							Squad:&nbsp;
+							Squad:
+							{' '}
 							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.squad_name}</span>
 						</div>
 
 						<div className={styles.tribe_name}>
-							Tribe:&nbsp;
+							Tribe:
+							{' '}
 							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.tribe_name}</span>
 						</div>
 
 						<div className={styles.total_kra}>
-							Total Kra:&nbsp;
+							Total Kra:
+							{' '}
 							<span style={{ fontWeight: 'bold' }}>{(list || [])?.length}</span>
 						</div>
 					</div>

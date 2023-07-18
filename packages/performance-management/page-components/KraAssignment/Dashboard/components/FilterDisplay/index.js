@@ -51,12 +51,14 @@ function FilterFieldArray({
 			</div>
 
 			<div className={styles.filter_container}>
-				{(controls || [])?.map((item) => {
+				{(controls || []).map((item) => {
 					const { label, type, name } = item || {};
 
 					if (!type) return null;
 
 					const Element = getElementController(type);
+
+					if (!Element) return null;
 
 					return (
 						<div key={name} style={{ width: '100%' }}>

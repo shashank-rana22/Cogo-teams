@@ -26,7 +26,7 @@ function KRATable({
 	const {
 		selectedValue,
 		setSelectedValue,
-		KRAOptions,
+		kraOptions,
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,
@@ -39,7 +39,7 @@ function KRATable({
 			<SelectKRAs
 				selectedValue={selectedValue}
 				setSelectedValue={setSelectedValue}
-				KRAOptions={KRAOptions}
+				kraOptions={kraOptions}
 				onClickAddKRAs={onClickAddKRAs}
 			/>
 
