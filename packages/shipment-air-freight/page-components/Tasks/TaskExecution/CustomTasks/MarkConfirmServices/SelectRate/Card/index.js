@@ -5,7 +5,6 @@ import { startCase } from '@cogoport/utils';
 
 import useUpdateBookingPreferences
 	from '../../../../../../../hooks/useUpdateBookingPreferences';
-import { VALUE_ZERO } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -16,7 +15,7 @@ const getBuyPrice = (dataObj) => {
 	const currency = dataObj?.currency;
 
 	return formatAmount({
-		amount  : price || VALUE_ZERO,
+		amount  : price || GLOBAL_CONSTANTS.zeroth_index,
 		currency,
 		options : {
 			style           : 'currency',
@@ -36,7 +35,7 @@ function Card({
 }) {
 	const { data } = item;
 	const dataArr = Array.isArray(data) ? data : [data];
-	const { source } = dataArr[VALUE_ZERO];
+	const { source } = dataArr[GLOBAL_CONSTANTS.zeroth_index];
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
