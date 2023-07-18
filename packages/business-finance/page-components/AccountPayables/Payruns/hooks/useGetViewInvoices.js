@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetViewInvoices = ({ globalFilters, selectedPayrun, query }) => {
+const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, query }) => {
 	const { id, batchNo } = selectedPayrun || {};
 	const { pageIndex, pageSize } = globalFilters || {};
 	const [{ data:viewInvoiceDataList, loading:viewInvoiceDataLoading }, viewInvoiceTrigger] = useRequestBf({
@@ -22,13 +22,14 @@ const useGetViewInvoices = ({ globalFilters, selectedPayrun, query }) => {
 					uploadDateSortType : 'desc',
 					dueDateSortType    : 'asc',
 					createdAtSortType  : 'desc',
+					status             : activePayrunTab === 'COMPLETED' ? 'COMPLETED' : undefined,
 					q                  : query !== '' ? query : undefined,
 				},
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
 		}
-	}, [batchNo, id, pageIndex, pageSize, query, viewInvoiceTrigger]);
+	}, [activePayrunTab, batchNo, id, pageIndex, pageSize, query, viewInvoiceTrigger]);
 	return {
 		getViewInvoice,
 		viewInvoiceDataList,

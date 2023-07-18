@@ -77,7 +77,7 @@ const useFilterData = ({
 		getViewInvoice,
 		viewInvoiceDataList,
 		viewInvoiceDataLoading,
-	} = useGetViewInvoices({ globalFilters, selectedPayrun, query });
+	} = useGetViewInvoices({ activePayrunTab, globalFilters, selectedPayrun, query });
 	const {
 		getViewInvoicesAdvancePayment, viewInvoicesAdvancePaymentData,
 		viewInvoicesAdvancePaymentLoading,

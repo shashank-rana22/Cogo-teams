@@ -1,34 +1,13 @@
 import { Input, TabPanel, Tabs, Toggle } from '@cogoport/components';
-import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
-import useGetEntityBanks from '../../hooks/useGetEntityBank';
 import PayrunButtons from '../PayrunButtons/index';
 
-import { INVOICE_VIEW_FILTERS } from './invoiceViewFilterControl';
-import { PAYRUNS_BANK_DATE_FILTERS } from './payrunPaidFilterControls';
+import getChooseFilterControls from './GetChooseFilterControls';
+import GetSearchCrossIcon from './GetSearchCrossIcon';
 import styles from './styles.module.css';
-import { UPLOAD_HISTORY_FILTERS } from './uploadHistoryFilterControl';
-
-function GetIcon({ globalFilters = {}, setGlobalFilters = () => {} }) {
-	if (isEmpty(globalFilters.search)) {
-		return (
-			<div className={styles.icon_wrapper}>
-				<IcMSearchlight />
-			</div>
-		);
-	}
-	return (
-		<div className={styles.icon_wrapper}>
-			<IcMCross
-				onClick={() => setGlobalFilters((prev) => ({ ...prev, search: '' }))}
-				style={{ cursor: 'pointer', color: '#000000' }}
-			/>
-		</div>
-	);
-}
 
 function SelectFilters({
 	globalFilters = {},
@@ -49,7 +28,6 @@ function SelectFilters({
 	setSelectedIds = () => {},
 }) {
 	const { search } = globalFilters || {};
-	const { entityBank = [] } = useGetEntityBanks({});
 	let searchType;
 
 	if (activePayrunTab === 'PAID') {
@@ -58,32 +36,11 @@ function SelectFilters({
 		searchType = 'Search by File Name';
 	} else if (isInvoiceView) {
 		searchType = 'Search by Invoice/SID/Payrun/Supplier ';
+	} else if (selectedPayrun) {
+		searchType = 'Search by Invoice Number/SID';
 	} else {
 		searchType = 'Search by PayRun Name';
 	}
-	const powerControls = (banks = []) => (banks || []).map((control) => (control || []).map(
-		({ id = '', beneficiary_name = '', account_number = '' }) => ({
-			value : id,
-			label : `${beneficiary_name} (${account_number})`,
-		}),
-	));
-	const banks = (entityBank || []).map((control) => control.bank_details);
-
-	const bankDetails = powerControls(banks);
-	const flatBankDetails = (bankDetails || []).flat();
-	const getchooseFilters = () => {
-		if (activePayrunTab === 'PAID') {
-			return PAYRUNS_BANK_DATE_FILTERS(flatBankDetails, overseasData);
-		}
-		if (activePayrunTab === 'UPLOAD_HISTORY') {
-			return UPLOAD_HISTORY_FILTERS;
-		}
-		if (activePayrunTab !== 'PAID' && isInvoiceView) {
-			return INVOICE_VIEW_FILTERS;
-		}
-		return [];
-	};
-	const chooseFilters = getchooseFilters();
 
 	return (
 
@@ -94,7 +51,7 @@ function SelectFilters({
 						<Filter
 							filters={globalFilters}
 							setFilters={setGlobalFilters}
-							controls={chooseFilters}
+							controls={getChooseFilterControls({ activePayrunTab, overseasData, isInvoiceView })}
 						/>
 						{(['AUDITED', 'PAYMENT_INITIATED',
 							'COMPLETED', 'PAID'].includes(activePayrunTab) && !isInvoiceView)
@@ -121,7 +78,12 @@ function SelectFilters({
 						})}
 						style={{ width: '360px', marginRight: '8px' }}
 						placeholder={searchType}
-						suffix={<GetIcon globalFilters={globalFilters} setGlobalFilters={setGlobalFilters} />}
+						suffix={(
+							<GetSearchCrossIcon
+								globalFilters={globalFilters}
+								setGlobalFilters={setGlobalFilters}
+							/>
+						)}
 					/>
 				</div>
 				{(['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED', 'INITIATED'].includes(activePayrunTab))

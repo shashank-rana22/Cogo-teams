@@ -17,10 +17,13 @@ const useGetPayrun = ({ activePayrunTab, overseasData, query, pageIndex }) => {
 			try {
 				await trigger({
 					params: {
-						pageSize : 10,
-						state    : activePayrunTab,
-						type     : overseasData,
-						q        : query !== '' ? query : undefined,
+						pageSize           : 10,
+						state              : activePayrunTab,
+						type               : activePayrunTab !== 'INITIATED' ? overseasData : undefined,
+						uploadDateSortType : 'desc',
+						dueDateSortType    : 'asc',
+						createdAtSortType  : 'desc',
+						q                  : query !== '' ? query : undefined,
 						pageIndex,
 					},
 				});

@@ -1,0 +1,20 @@
+.container {
+	padding: 8px;
+	margin-right: 12px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.stat {
+	padding: 0 6px;
+	margin-left: 12px;
+	color: #fff;
+	background: #ee3425;
+	border-radius: 6px;
+}
+
+.active {
+	background-color: #fdebe9;
+}

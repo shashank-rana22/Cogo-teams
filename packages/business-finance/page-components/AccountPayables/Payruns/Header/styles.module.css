@@ -12,3 +12,9 @@
 .search_icon {
 	margin-right: 8px;
 }
+
+.tab_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}

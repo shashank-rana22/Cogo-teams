@@ -1,9 +1,17 @@
-import { TabPanel, Tabs } from '@cogoport/components';
 import React from 'react';
 
+import InnerTabsData from './InnerTabsData';
 import SelectFilters from './SelectFilter';
 import styles from './styles.module.css';
 
+const INNER_TABS = [
+	{ name: 'INITIATED', title: 'To be Audited' },
+	{ name: 'AUDITED', title: 'Payment Ready' },
+	{ name: 'PAYMENT_INITIATED', title: 'Payment Initiated' },
+	{ name: 'PAID', title: 'Paid' },
+	{ name: 'UPLOAD_HISTORY', title: 'Upload History' },
+	{ name: 'COMPLETED', title: 'Payrun History' },
+];
 function Header({
 	activePayrunTab = '',
 	setActivePayrunTab = () => {},
@@ -24,59 +32,21 @@ function Header({
 	selectedIds = [],
 	setSelectedIds = () => {},
 }) {
-	const {
-		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
-		UPLOAD_HISTORY = 0, COMPLETED = 0,
-	} = payrunStats;
-
 	return (
 		<div className={styles.container}>
 			<div>
-				<Tabs
-					activeTab={activePayrunTab}
-					themeType="secondary"
-					onChange={setActivePayrunTab}
-					// fullWidth
-				>
-					<TabPanel
-						id="INITIATED"
-						name="INITIATED"
-						title="To be Audited"
-						badge={INITIATED}
-					/>
-					<TabPanel
-						id="AUDITED"
-						name="AUDITED"
-						title="Payment Ready"
-						badge={AUDITED}
-					/>
-					<TabPanel
-						id="PAYMENT_INITIATED"
-						name="PAYMENT_INITIATED"
-						title="Payment Initiated"
-						badge={PAYMENT_INITIATED}
-					/>
-
-					<TabPanel
-						id="PAID"
-						name="PAID"
-						title="Paid"
-						badge={PAID}
-					/>
-
-					<TabPanel
-						id="UPLOAD_HISTORY"
-						name="UPLOAD_HISTORY"
-						title="Upload History"
-						badge={UPLOAD_HISTORY}
-					/>
-					<TabPanel
-						id="COMPLETED"
-						name="COMPLETED"
-						title="Payrun History"
-						badge={COMPLETED}
-					/>
-				</Tabs>
+				<div className={styles.tab_container}>
+					{INNER_TABS.map(({ name, title }) => (
+						<InnerTabsData
+							key={name}
+							isActive={activePayrunTab === name}
+							setActivePayrunTab={setActivePayrunTab}
+							name={name}
+							title={title}
+							payrunStats={payrunStats}
+						/>
+					))}
+				</div>
 			</div>
 			<div>
 				<SelectFilters
