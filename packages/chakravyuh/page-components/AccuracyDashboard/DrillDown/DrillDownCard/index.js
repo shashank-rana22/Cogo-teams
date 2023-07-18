@@ -9,7 +9,7 @@ function DrillDownCard({ data = {}, isMainCard = false, delay = 2, handleClick =
 		<div
 			style={{ animationDelay: `${delay}s` }}
 			className={cl`${styles.container} ${isMainCard ? styles.main_card : styles.secondary_card}
-		 ${styles[data.parent]} ${!animate ? styles.hide_animation : ''}`}
+		 ${styles[data.parent]} ${animate ? styles.animate : ''}`}
 		>
 			<div className={styles.flex_between}>
 				<p className={styles.card_name}>{startCase(data?.action_type)}</p>
