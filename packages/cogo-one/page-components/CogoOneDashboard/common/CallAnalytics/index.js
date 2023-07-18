@@ -1,30 +1,41 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import { callAnalyticsStatData } from '../../configurations/call-analytic-data';
 
 import styles from './styles.module.css';
 
+const ONE_MINUTE = 60;
+const ROUND_UP = 2;
+
 function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 	const { calls = [], channel = [] } = callAnalyticsStatData || {};
+
 	return (
 		<div className={styles.statistics}>
 			<div className={styles.heading}>Calls Analytics</div>
 			<div className={styles.time_durations_section}>
 				{(calls || []).map((itm) => {
 					const itemKey = itm.key;
+
 					return (
-						<div className={styles.time_durations}>
+						<div className={styles.time_durations} key={itemKey}>
 							{loading
 								? <Placeholder height="15px" width="60px" className={styles.placeholder} />
 								: (
 									<div className={styles.time_durations_header}>
 										<span className={styles.time_durations_value}>
-											{(callsAnalytics[itemKey] || 0) >= 60
-												? ((callsAnalytics[itemKey] || 0) / 60).toFixed(2)
-												: (callsAnalytics[itemKey] || 0)}
+											{(callsAnalytics[itemKey] || GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE
+												? ((callsAnalytics[itemKey]
+													|| GLOBAL_CONSTANTS.zeroth_index) / ONE_MINUTE).toFixed(ROUND_UP)
+												: (callsAnalytics[itemKey] || GLOBAL_CONSTANTS.zeroth_index)}
 										</span>
-										<span>{(callsAnalytics[itemKey] || 0) >= 60 ? 'hr' : 'min'}</span>
+										<span>
+											{(callsAnalytics[itemKey]
+											|| GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE ? 'hr' : 'min'}
+
+										</span>
 									</div>
 								)}
 							<div className={styles.time_durations_text}>{itm.label}</div>
@@ -34,7 +45,7 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 			</div>
 			<div className={styles.socoal_icons_and_data_list}>
 				{(channel || []).map((stat) => (
-					<div className={styles.socoal_icons_and_data}>
+					<div className={styles.socoal_icons_and_data} key={stat.key}>
 						<div className={styles.social_icons_and_its_name}>
 							{stat.icon}
 							<div className={styles.social_name}>{stat.channel}</div>
@@ -43,7 +54,9 @@ function CallAnalytics({ loading = false, callsAnalytics = {} }) {
 							? <Placeholder height="15px" width="100px" className={styles.placeholder} />
 							: (
 								<div className={styles.customer_nos}>
-									<span className={styles.calls_counts}>{callsAnalytics?.[stat.key] || 0}</span>
+									<span className={styles.calls_counts}>
+										{callsAnalytics?.[stat.key] || GLOBAL_CONSTANTS.zeroth_index}
+									</span>
 									<span>{stat.static_data}</span>
 								</div>
 							)}

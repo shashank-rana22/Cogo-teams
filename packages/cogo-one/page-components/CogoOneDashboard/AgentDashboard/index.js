@@ -1,4 +1,4 @@
-// import Calendar from '../common/Calendar';
+import Calendar from '../common/Calendar';
 import CallAnalytics from '../common/CallAnalytics';
 import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
 import ChatStatistics from '../common/ChatStatistics';
@@ -28,7 +28,7 @@ function AgentDashboard(props) {
 			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					{/* <Calendar props={props} /> */}
+					<Calendar props={props} />
 					<div className={styles.linechart_container}>
 						<LineChart
 							cogoOneDashboardGraph={cogo_one_dashboard_graph}
