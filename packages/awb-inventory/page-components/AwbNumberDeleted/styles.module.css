@@ -1,0 +1,9 @@
+.awbnumber_container {
+	padding: 10px 0;
+	background-color: #fff;
+}
+
+.airline {
+	display: flex;
+	align-items: center;
+}

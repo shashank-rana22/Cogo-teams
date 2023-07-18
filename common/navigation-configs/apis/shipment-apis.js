@@ -620,7 +620,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -730,7 +730,7 @@ const apis = [
 	{
 		api          : 'list_cogo_entities',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'partner',
 	},
 	{
 		api          : 'list_organization_documents',
@@ -1269,6 +1269,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'update_buy_quotations',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'raise_query',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
@@ -1564,6 +1569,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_shipment_sales_utr',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'list_platform_config_constants',
 		access_type  : 'private',
 		service_name : 'platform_config',
@@ -1580,6 +1590,33 @@ const apis = [
 	},
 	{
 		api          : 'read_collection_party_line_items',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_ftl_freight_rate_min_max_validity_dates',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_consolidated_purchase_invoices',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'get_saas_hs_code_list_commodities',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_trade_engine_documents',
+		access_type : 'private',
+	},
+	{
+		api          : 'send_rail_domestic_indent_email',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

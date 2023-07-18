@@ -3,6 +3,9 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 
+const MAX_SPAN = 12;
+const PERCENT_FACTOR = 100;
+const INCR_IN_INDEX_FOR_BL_SERIAL_NO = 1;
 const controlTypeMapping = {
 	file     : UploadController,
 	text     : InputController,
@@ -12,21 +15,21 @@ const controlTypeMapping = {
 
 function FormElement({ name, label, errors, type, span, ...rest }) {
 	const Element = controlTypeMapping[type];
-	const widthVal = (span / 12) * 100;
+
+	const widthVal = (span / MAX_SPAN) * PERCENT_FACTOR;
+
 	return Element ? (
 		<div style={{ width: `${widthVal}%` }}>
 			<div className={styles.label}>{label}</div>
+
 			<Element name={name} type={type} {...rest} />
-			{errors[name] ? <div>{errors[name].message}</div> : null}
+
+			{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
 		</div>
 	) : null;
 }
 
-function Form(props, ref) {
-	const {
-		id, bl_type = '', controls = [],
-	} = props || {};
-
+function Form({ id, bl_type = '', controls = [] }, ref) {
 	const {
 		control,
 		formState: { errors },
@@ -41,8 +44,9 @@ function Form(props, ref) {
 			<div className={styles.text}>
 				{bl_type}
 				&nbsp;
-				{id + 1}
+				{id + INCR_IN_INDEX_FOR_BL_SERIAL_NO}
 			</div>
+
 			<form className={styles.form_container}>
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={item?.name} />)}
 			</form>

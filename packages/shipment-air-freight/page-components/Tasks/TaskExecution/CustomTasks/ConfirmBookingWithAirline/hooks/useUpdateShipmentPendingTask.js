@@ -15,7 +15,7 @@ const useUpdateShipmentPendingTask = ({ refetch, onCancel }) => {
 			onCancel();
 			refetch();
 		} catch (err) {
-			Toast.error(toastApiError(err?.data) || 'Something went wrong.');
+			toastApiError(err);
 		}
 	};
 

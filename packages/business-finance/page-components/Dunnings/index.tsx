@@ -1,46 +1,34 @@
-import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import CampaignManagement from './components/CampaignManagement';
 import ExceptionsManagement from './components/ExceptionsManagement';
+import FinancialSummary from './components/FinancialSummary';
+import MainHeader from './components/MainHeader';
 import styles from './styles.module.css';
 
 function Dunnings() {
-	const { query, push } = useRouter();
+	const { query } = useRouter();
 
-	const [activeTab, setActiveTab] = useState(query?.active_tab || 'campaign-management');
-	const handleTabChange = (tab:string) => {
-		setActiveTab(tab);
-		push(
-			'/business-finance/dunnings/[active_tab]',
-			`/business-finance/dunnings/${tab}`,
-		);
+	const [activeTab, setActiveTab] = useState(query?.active_tab || 'dashboard');
+
+	const TABS_MAPPING = {
+		'campaign-management'   : <CampaignManagement />,
+		'exceptions-management' : <ExceptionsManagement />,
+		dashboard               : <FinancialSummary />,
 	};
 
 	return (
 		<div>
-			<div className={styles.header}>
-				Dunning
-			</div>
-			<div className={styles.tabs_container}>
-				<Tabs
+			<div className={styles.header} />
+			<div>
+				<MainHeader
 					activeTab={activeTab}
-					onChange={(tab:string) => handleTabChange(tab)}
-					fullWidth
-					themeType="primary"
-				>
-					<TabPanel
-						className={styles.tab_panel_dashboard}
-						name="campaign-management"
-						title="Campaign Management"
-					>
-						<CampaignManagement />
-					</TabPanel>
-					<TabPanel name="exceptions-management" title="Exceptions Management">
-						<ExceptionsManagement />
-					</TabPanel>
-				</Tabs>
+					setActiveTab={setActiveTab}
+				/>
+			</div>
+			<div>
+				{TABS_MAPPING[activeTab]}
 			</div>
 		</div>
 	);

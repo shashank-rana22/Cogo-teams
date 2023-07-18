@@ -54,7 +54,7 @@ export interface TableProps {
 }
 
 export interface ListDataProps {
-	list: object[];
+	list?: object[];
 	pageIndex?: number;
 	totalPage?: number;
 	totalRecords?: number;
@@ -64,6 +64,13 @@ export interface Options {
 	label: string;
 	value: string;
 	name?:string;
+}
+
+export interface RadioOptions {
+	label?: string;
+	name: string;
+	disabled?: boolean;
+	value: string;
 }
 
 export interface ControlProps {

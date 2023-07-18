@@ -49,3 +49,9 @@
 	font-size: var(--font-size-sm);
 	color: var(--color-primary-error-red-2);
 }
+
+.upload_container {
+	display: flex;
+	width: 46%;
+	margin: 10px 0;
+}
