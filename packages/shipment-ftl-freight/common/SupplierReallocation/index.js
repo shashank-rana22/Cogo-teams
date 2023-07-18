@@ -32,14 +32,14 @@ function SupplierReallocation({
 	setShow = () => {},
 }) {
 	const { refetch, refetchServices, primary_service = {}, shipment_data = {} } = useContext(ShipmentDetailContext);
-	const { service_provider = {} } = primary_service;
+	const { service_provider = {}, service_type: primary_service_type = '' } = primary_service;
 	const { shipment_type } = shipment_data || {};
 	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls } = getControls({
 		shipment_type,
-		primary_service,
+		primary_service_type,
 		serviceObj,
 	});
 

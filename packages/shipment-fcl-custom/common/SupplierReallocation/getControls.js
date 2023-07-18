@@ -2,6 +2,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const SPLICE_FIRST_PARAMETER = 0;
 const SPLICE_SECOND_PARAMETER = 1;
+const SPLIT_SECOND_PARAMETER = 2;
 
 export default function getControls({
 	primary_service = {},
@@ -14,11 +15,12 @@ export default function getControls({
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
-	const SPLIT_SECOND_PARAMETER = 2;
-	let services = service_type;
+	const serviceType = serviceObj?.service_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
+	const shipmentType = shipment_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
+	let services = [];
 
 	if (primary_service?.service_type !== service_type) {
-		services = [shipment_type, serviceObj?.service_type];
+		services = [shipmentType, serviceType];
 	}
 
 	const controls = [
@@ -33,7 +35,7 @@ export default function getControls({
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
 					service      : services.length !== SPLIT_SECOND_PARAMETER
-						? service_type.split('_', SPLIT_SECOND_PARAMETER).join('_') : services,
+						? serviceType : services,
 				},
 			},
 			size  : 'sm',
