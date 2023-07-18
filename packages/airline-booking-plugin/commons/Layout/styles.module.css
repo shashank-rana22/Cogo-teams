@@ -12,7 +12,7 @@
 .label {
 	max-height: 16px;
 	margin-bottom: 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .item {
