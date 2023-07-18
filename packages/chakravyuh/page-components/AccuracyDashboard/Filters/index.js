@@ -27,7 +27,13 @@ const SELECT_ICON_MAPPING = {
 	air : <IcMAir />,
 };
 function Filters() {
-	const [filtersData, setFilters] = useState({ service_type: 'fcl', origin: '', destination: '' });
+	const [filtersData, setFilters] = useState({
+		service_type : 'fcl',
+		origin       : '',
+		destination  : '',
+	});
+
+	const [showFiltersPopover, setShowFiltersPopover] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -61,7 +67,7 @@ function Filters() {
 						size="sm"
 						params={{
 							filters: {
-								account_type : 'importer_exporter',
+								account_type : 'hs_code_list',
 								status       : 'active',
 								kyc_status   : 'verified',
 							},
@@ -73,7 +79,7 @@ function Filters() {
 				<div className={styles.service_type}>
 					<p className={styles.title_label}>Destination</p>
 					<AsyncSelect
-						asyncKey="organizations"
+						asyncKey="list_locations"
 						initialCall={false}
 						onChange={(value) => (
 							setFilters((prev) => ({ ...prev, destination: value }))
@@ -84,9 +90,7 @@ function Filters() {
 						size="sm"
 						params={{
 							filters: {
-								account_type : 'importer_exporter',
-								status       : 'active',
-								kyc_status   : 'verified',
+								is_icd: true,
 							},
 						}}
 						className={styles.location_select}
@@ -94,8 +98,19 @@ function Filters() {
 				</div>
 			</div>
 			<div className={styles.filters_container}>
-				<Popover render={<FilterContainer />} trigger="mouseenter" placement="bottom">
-					<Button id="dash-main-filters" themeType="secondary">
+				<Popover
+					render={<FilterContainer />}
+					trigger="click"
+					placement="bottom"
+					visible={showFiltersPopover}
+					onClickOutside={() => { setShowFiltersPopover(false); }}
+					interactive
+				>
+					<Button
+						id="dash-main-filters"
+						themeType="secondary"
+						onClick={() => setShowFiltersPopover(true)}
+					>
 						<IcMFilter className={styles.filter_icon} />
 						<span className={styles.btn_label}>Filter</span>
 					</Button>

@@ -55,8 +55,10 @@
 .row_default_cell {
 	padding: 16px;
 	font-size: 12px;
+	font-weight: 500;
 
 	.row_cell_subtitle {
+		font-weight: 400;
 		color: #828282;
 	}
 }

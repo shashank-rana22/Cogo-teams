@@ -1,8 +1,8 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
-import { cl } from '@cogoport/components';
-import React from 'react';
+import { Button, cl } from '@cogoport/components';
+import React, { useState } from 'react';
 
-import { CUMSTOM_DATA, CUSTOM_THEME } from '../../../../constants/pie_chart_config';
+import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
@@ -10,13 +10,23 @@ import styles from './styles.module.css';
 const CONSTANT_ZERO = 0;
 
 function Distribution() {
+	const [currentPieChart, setCurrentPieChart] = useState('default');
+	const { customData, pieColors } = usePieChartConfigs(currentPieChart);
+
+	const handlePieClick = (event) => {
+		if (currentPieChart === 'default') {
+			setCurrentPieChart(event?.data?.key);
+		}
+	};
+
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Distribution</h3>
 			<div className={styles.pie_chart_container}>
 				<div className={styles.pie_chart_left_container}>
 					<ResponsivePie
-						data={CUMSTOM_DATA}
+						onClick={handlePieClick}
+						data={customData}
 						margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
 						innerRadius={0.7}
 						activeOuterRadiusOffset={8}
@@ -32,7 +42,7 @@ function Distribution() {
 						arcLabelsSkipAngle={8}
 						arcLabelsTextColor="#4F4F4F"
 						arcLabelsTextSize={36}
-						colors={CUMSTOM_DATA.map((item) => item.color)}
+						colors={pieColors}
 						defs={[
 							{
 								id         : 'dots',
@@ -59,24 +69,51 @@ function Distribution() {
 				<div className={styles.pie_chart_middle_container}>
 					<p className={styles.pie_center_text}>Total Rates</p>
 					<p className={styles.pie_center_count}>
-						{CUMSTOM_DATA.reduce((total, item) => total + item.value, CONSTANT_ZERO)}
+						{customData.reduce((total, item) => total + item.value, CONSTANT_ZERO)}
 					</p>
 				</div>
 				<div className={styles.pie_chart_right_container}>
 					{
-						CUMSTOM_DATA.map(({ key, label, value, cancellation }) => (
+						customData.map(({ key, label, value, cancellation }, index) => (
 							<div className={styles.legend_box} key={key}>
 								<div className={styles.legend_row}>
-									<div className={cl`${styles.legend_symbol} ${styles[key]}`} />
-									<p className={styles.legend_name}>{label}</p>
-									<p className={styles.legend_rate}>{`(${value} Rates)`}</p>
+									<div
+										style={{ backgroundColor: pieColors[index] }}
+										className={styles.legend_symbol}
+									/>
+									<div className={styles.legend_text_row}>
+										<p className={styles.legend_name}>{label}</p>
+										{ currentPieChart === 'default'
+										&& <p className={styles.legend_rate}>{`(${value} Rates)`}</p>}
+									</div>
 								</div>
-								<p className={styles.legend_percentage}>{`${cancellation} % Cancellation`}</p>
+								{ currentPieChart === 'default'
+									? (
+										<p className={styles.legend_percentage}>
+											{`${cancellation} % Cancellation`}
+										</p>
+									)
+									: (
+										<p className={styles.legend_percentage_dark}>
+											{`${value} Rates (${cancellation}%)`}
+										</p>
+									)}
 							</div>
 						))
 					}
 				</div>
 			</div>
+			{ currentPieChart !== 'default'
+			&& (
+				<Button
+					themeType="secondary"
+					className={styles.default_pie_chart_btn}
+					onClick={() => setCurrentPieChart('default')}
+					size="sm"
+				>
+					Default
+				</Button>
+			)}
 		</div>
 	);
 }

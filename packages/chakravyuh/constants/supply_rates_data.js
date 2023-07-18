@@ -15,8 +15,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -43,8 +44,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -70,8 +72,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -97,8 +100,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -124,8 +128,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -152,8 +157,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -179,8 +185,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {
@@ -206,8 +213,9 @@ export const LIST_DATA = [
 		shipping_line: {
 			name: 'MAERSK',
 		},
-		airline: {
-			name: 'AIR LINE',
+		weight_slab : '100 - 300 Kg',
+		airline     : {
+			name: 'AIR INDIA',
 		},
 		commodity         : 'GENERAL',
 		container_details : {

@@ -11,14 +11,14 @@
 }
 
 .pie_chart_left_container {
-	width: 230px;
-	height: 230px;
+	width: 210px;
+	height: 210px;
 }
 
 .pie_chart_middle_container {
 	position: absolute;
 	top: 95px;
-	left: 85px;
+	left: 70px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -50,13 +50,20 @@
 
 .legend_row {
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	margin: 0 0 2px;
+}
+
+.legend_text_row {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: calc(100% - 15px);
 }
 
 .legend_symbol {
 	width: 15px;
 	height: 15px;
+	margin-top: 2px;
 	background-color: #221f20;
 	border-radius: 50%;
 
@@ -85,4 +92,14 @@
 .legend_percentage {
 	margin: 0 0 0 19px;
 	color: #f37166;
+}
+
+.legend_percentage_dark {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.default_pie_chart_btn {
+	margin: -10px auto 0;
 }

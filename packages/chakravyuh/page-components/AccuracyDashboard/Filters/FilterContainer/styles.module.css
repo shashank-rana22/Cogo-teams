@@ -1,6 +1,38 @@
 .main_container {
 	width: 600px;
-	padding: 24px;
+	padding: 24px 8px 24px 12px;
+
+	:global .form_layout_row {
+		.ui_chip_container.ui_ps_size_md {
+			height: fit-content;
+			padding: 4px 8px;
+			margin: 0 8px 0 0;
+			font-size: 14px;
+			color: #221f20;
+		}
+
+		h4 {
+			font-size: 14px;
+			font-weight: 400;
+			color: #4f4f4f;
+		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_multiselect_container.ui_ps_size_sm .ui_multiselect_display_container {
+			height: 40px;
+		}
+
+		.shipping-line-select {
+			margin-right: 8px;
+		}
+
+		.filter-row-flex {
+			flex-wrap: wrap;
+		}
+	}
 }
 
 .header_row {
@@ -8,6 +40,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-bottom: 24px;
+	margin: 0 16px 0 12px;
 	border-bottom: 1px solid #bdbdbd;
 
 	.title {
@@ -15,28 +48,10 @@
 		font-weight: 600;
 		color: #000;
 	}
-}
 
-.filters_container {
-	margin-top: 24px;
-
-	.filter_row {
+	.filter_action_buttons {
 		display: flex;
-		flex-direction: column;
-
-		.row_label {
-			margin: 0;
-			font-size: 14px;
-			color: #4f4f4f;
-		}
-
-		.default_pill {
-			padding: 4px 8px;
-			margin: 8px 12px 0 0;
-			font-size: 14px;
-			color: #221f20;
-			cursor: pointer;
-			border: 1px solid #e0e0e0;
-		}
+		justify-content: space-between;
+		width: 150px;
 	}
 }
