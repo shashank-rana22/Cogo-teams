@@ -28,9 +28,8 @@ function useVideoCallFirebase({
 	setOptions,
 	callDetails,
 	setStreams,
-	// streams,
+	streams,
 	peerRef,
-	// callComing,
 	inACall,
 }) {
 	const { user_data } = useSelector((state) => ({
@@ -117,7 +116,7 @@ function useVideoCallFirebase({
 		);
 		setInACall(false);
 		setCallComing(false);
-		stopStream('user_stream');
+		stopStream('user_stream', streams);
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
 			localPeerRef.current.destroy();
@@ -147,8 +146,7 @@ function useVideoCallFirebase({
 			peer_stream   : null,
 			screen_stream : null,
 		});
-	}, [dispatch, setInACall, peerRef, setCallDetails,
-		setWebrtcToken, setOptions, setStreams, setCallComing]);
+	}, [dispatch, setInACall, setCallComing, streams, peerRef, setCallDetails, setWebrtcToken, setOptions, setStreams]);
 
 	const callingTo = useCallback((peer_details = {}) => {
 		if (isEmpty(peer_details?.user_id)) return;

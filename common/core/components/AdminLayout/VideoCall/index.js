@@ -51,7 +51,6 @@ function VideoCall({
 	const { callingTo, callUpdate, callEnd, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
-		// callComing,
 		setOptions,
 		setWebrtcToken,
 		setInACall,
@@ -59,7 +58,7 @@ function VideoCall({
 		setCallDetails,
 		callDetails,
 		setStreams,
-		// streams,
+		streams,
 		peerRef,
 	});
 
