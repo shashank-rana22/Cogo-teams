@@ -12,7 +12,7 @@ function Sop({
 	primary_service = {},
 	showIndicator,
 }) {
-	const { id:shipment_id, importer_exporter_id:organization_id, services = [] } = shipment_data || {};
+	const { id: shipment_id, importer_exporter_id: organization_id, services = [] } = shipment_data || {};
 	const { trade_type } = primary_service || {};
 
 	const [showHistory, setShowHistory] = useState(false);

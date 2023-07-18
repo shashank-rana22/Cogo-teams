@@ -5,9 +5,12 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
 
+import useUpdateShipmentBookingConfirmationPreferences from
+	'../../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+
 import styles from './styles.module.css';
 
-function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds = [] }) {
+function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds = [], setStep = () => {} }) {
 	const ONE = 1;
 	const { priority, source, data } = item || {};
 
@@ -19,8 +22,14 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 	const dataArray = Array.isArray(data) ? data : [data];
 	const { remarks, supplier_contract_no } = dataArray?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const handleProceed = () => {
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ });
+
+	const handleProceed = async () => {
 		setSelectedServiceProvider((prev) => [...prev, item]);
+		if (selectedServiceProvider.length >= similarServiceIds.length - ONE) {
+			await apiTrigger([...selectedServiceProvider, item]);
+			setStep((prev) => prev + ONE);
+		}
 	};
 
 	const labelValueMapping = (obj) => [
@@ -84,6 +93,7 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 						<div>
 							<b>Supply Remarks</b>
 							:
+							{' '}
 							{remarks}
 						</div>
 					)}

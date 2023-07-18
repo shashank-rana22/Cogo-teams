@@ -18,7 +18,7 @@ function Body({
 	loading = false,
 	primary_service = {},
 }) {
-	const { operating_procedure:{ id:procedure_id = '' } = {} } = data;
+	const { operating_procedure:{ id: procedure_id = '' } = {} } = data;
 
 	const {
 		invoice_preference = [],
@@ -26,7 +26,7 @@ function Body({
 		document_handling_preference = [],
 	} = getInstructionData({ data });
 
-	const shipment_ids = { shipment_id, organization_id, procedure_id };
+	const shipment_data = { shipment_id, organization_id, procedure_id };
 
 	return loading
 		? (
@@ -39,7 +39,7 @@ function Body({
 				<Card label="Document Handling" defaultOpen={document_handling_preference.length}>
 					<Document
 						data={document_handling_preference}
-						shipment_ids={shipment_ids}
+						shipment_data={shipment_data}
 						getProcedureTrigger={getProcedureTrigger}
 						auditsTrigger={auditsTrigger}
 						primary_service={primary_service}
@@ -49,7 +49,7 @@ function Body({
 				<Card label="Invoice Preferences" defaultOpen={invoice_preference.length}>
 					<InvoicePref
 						data={invoice_preference}
-						shipment_ids={shipment_ids}
+						shipment_data={shipment_data}
 						getProcedureTrigger={getProcedureTrigger}
 						services={services}
 						auditsTrigger={auditsTrigger}
@@ -61,7 +61,7 @@ function Body({
 					<Additional
 						data={additional_preference}
 						getProcedureTrigger={getProcedureTrigger}
-						shipment_ids={shipment_ids}
+						shipment_data={shipment_data}
 					/>
 				</Card>
 			</>

@@ -23,7 +23,7 @@ function EditSellQuotation({ data }) {
 					className={styles.modal_body}
 				>
 					<Modal.Header title="Edit Sell Quotation" />
-					<Modal.Body size="xl" height="1000px">
+					<Modal.Body size="xl" height="80vh">
 						<div className={styles.invoice_container}>
 							{Object.keys(groupedInvoices || {}).map((item) => (
 								<InvoiceItem

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Body({ data }) {
 	let total_revert_count = 0;
-	if (data?.shipment_type === 'fcl_freight') {
+	if (['fcl_freight', 'fcl_customs', 'lcl_freight', ' lcl_customs'].includes(data?.shipment_type)) {
 		(data?.freight_services || [])?.forEach((element) => {
 			total_revert_count += Number(element?.revert_count);
 		});

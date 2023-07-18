@@ -18,10 +18,10 @@ const EMPTY_VALUES = {
 };
 function AdditionalForm({
 	setShowForm = () => {},
-	shipment_ids = {},
+	shipment_data = {},
 	getProcedureTrigger = () => {},
 }) {
-	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+	const { shipment_id, organization_id, procedure_id } = shipment_data;
 
 	const afterUpdateOrCreateRefetch = () => {
 		setShowForm(false);

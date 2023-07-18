@@ -32,13 +32,13 @@ function Error(key, errors) {
 }
 
 function InvoicePrefForm({
-	setShowForm = () => {}, data = [], showForm = '', shipment_ids = {},
+	setShowForm = () => {}, data = [], showForm = '', shipment_data = {},
 	getProcedureTrigger = () => {},
 	auditsTrigger = () => {},
 	services = [],
 	primary_service,
 }) {
-	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+	const { shipment_id, organization_id, procedure_id } = shipment_data;
 	const { trade_type } = primary_service || {};
 
 	const { data: orgData, loading } = useGetShipmentOperatingProcedure({

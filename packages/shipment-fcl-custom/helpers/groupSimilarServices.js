@@ -8,7 +8,7 @@ const groupedSimilarServicesData = (servicesList, service_type, service_id) => {
 	(servicesList || []).forEach((service) => {
 		if (service?.trade_type === trade_type && service?.service_type === service_type) {
 			SERVICE_IDS.push(service?.id);
-			const commodity = service?.commodity ? service?.commodity : 'GENERAL';
+			const commodity = service?.commodity ? service?.commodity : 'All Commodities';
 			title = {
 				...title,
 				[service?.id]: `${service?.containers_count} *

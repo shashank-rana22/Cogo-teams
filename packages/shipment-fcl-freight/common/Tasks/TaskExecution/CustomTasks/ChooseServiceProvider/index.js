@@ -1,14 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Loader, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../hooks/useListShipmentBookingConfirmationPreferences';
-import useUpdateShipmentBookingConfirmationPreferences from
-	'../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentService';
 
@@ -50,8 +48,6 @@ function ChooseServiceProvider({
 	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({});
 
 	const { apiTrigger: updateService } = useUpdateShipmentService({});
-
-	const SIMILAR_LENGTH = SERVICE_IDS.length;
 
 	const handleUpdateTask = async (item) => {
 		const mainService = (services || []).filter(
@@ -110,14 +106,6 @@ function ChooseServiceProvider({
 		}
 	};
 
-	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ handleUpdateTask });
-
-	useEffect(() => {
-		if (selectedCard.length === SIMILAR_LENGTH) {
-			apiTrigger(selectedCard);
-		}
-	}, [selectedCard, SIMILAR_LENGTH]);
-
 	if (loading) {
 		return (
 			<div className={styles.loader_container}>
@@ -141,6 +129,10 @@ function ChooseServiceProvider({
 							setSelectedCard={setSelectedCard}
 						/>
 					))}
+					{
+						(data?.list || []).length === GLOBAL_CONSTANTS.zeroth_index
+							? <EmptyState subEmptyText="No Booking Preference Found" /> : null
+					}
 				</>
 			) : (
 				<Tabs activeTab={activeTab} onChange={setActiveTab}>

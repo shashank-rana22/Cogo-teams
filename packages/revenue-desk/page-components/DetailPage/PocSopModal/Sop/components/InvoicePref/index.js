@@ -5,7 +5,7 @@ import InvoicePrefForm from './InvoicePrefForm';
 
 function InvoicePref({
 	data = [],
-	shipment_ids = {},
+	shipment_data = {},
 	getProcedureTrigger = () => {},
 	services = [],
 	auditsTrigger = () => {},
@@ -18,7 +18,7 @@ function InvoicePref({
 				setShowForm={setShowForm}
 				data={data}
 				showForm={showForm}
-				shipment_ids={shipment_ids}
+				shipment_data={shipment_data}
 				getProcedureTrigger={getProcedureTrigger}
 				services={services}
 				auditsTrigger={auditsTrigger}

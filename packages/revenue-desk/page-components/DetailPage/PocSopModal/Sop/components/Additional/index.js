@@ -5,7 +5,7 @@ import Details from './Details';
 
 function Additional({
 	data = [],
-	shipment_ids = {},
+	shipment_data = {},
 	getProcedureTrigger = () => {},
 }) {
 	const [showForm, setShowForm] = useState(false);
@@ -13,7 +13,7 @@ function Additional({
 	return showForm ? (
 		<AdditionalForm
 			setShowForm={setShowForm}
-			shipment_ids={shipment_ids}
+			shipment_data={shipment_data}
 			getProcedureTrigger={getProcedureTrigger}
 		/>
 	)

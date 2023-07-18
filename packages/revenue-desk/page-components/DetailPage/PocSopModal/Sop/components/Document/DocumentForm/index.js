@@ -19,14 +19,14 @@ const DOCUMENT_FORM_FIELDS = ['bl_category', 'bl_preference', 'preferred_mode_of
 function DocumentForm({
 	sop_detail = {},
 	setShowForm = () => {},
-	shipment_ids = {},
+	shipment_data = {},
 	showForm = '',
 	instruction_id = '',
 	getProcedureTrigger = () => {},
 	auditsTrigger = () => {},
 	primary_service = {},
 }) {
-	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+	const { shipment_id, organization_id, procedure_id } = shipment_data;
 	const { trade_type } = primary_service || {};
 
 	const afterUpdateOrCreateRefetch = () => {

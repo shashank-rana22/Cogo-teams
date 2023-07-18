@@ -4,13 +4,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateShipmentBookingConfirmationPreferences from
+	'../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+
 import cardValues from './cardValues';
 import styles from './styles.module.css';
 
 function Card({
 	item, priority, similarServiceIds,
 	selectedCard,
-	setSelectedCard,
+	setSelectedCard, handleUpdateTask,
 }) {
 	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
@@ -18,8 +21,13 @@ function Card({
 		item?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id,
 	);
 
+	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ handleUpdateTask });
+
 	const onSubmit = async () => {
 		setSelectedCard([...selectedCard, { ...item, serviceProvider }]);
+		if (selectedCard.length >= similarServiceIds.length - ONE) {
+			await apiTrigger([...selectedCard, { ...item, serviceProvider }]);
+		}
 	};
 
 	return (

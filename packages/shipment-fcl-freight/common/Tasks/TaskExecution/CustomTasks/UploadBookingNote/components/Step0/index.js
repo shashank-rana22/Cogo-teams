@@ -1,22 +1,20 @@
 import { Button, Loader, Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 
-import useUpdateShipmentBookingConfirmationPreferences from
-	'../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
 import groupedSimilarServicesData from '../../../../helpers/groupSimilarServices';
 import getStep0Controls from '../../helpers/getStep0Controls';
 
 import BookingPreferenceCard from './BookingPreferenceCard';
 import styles from './styles.module.css';
 
-function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesList = [], task = {}, step = 1 }) {
+function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesList = [], task = {} }) {
 	const ONE = 1;
 	const { similarServiceIds, title } = groupedSimilarServicesData(servicesList, task.service_type, task.service_id);
 	const [activeTab, setActiveTab] = useState(similarServiceIds[GLOBAL_CONSTANTS.zeroth_index]);
 	const {
-		formProps = {}, listBookingPreferences = [], bookingPreferenceLoading, shipment_data, selectedServiceProvider,
+		formProps = {}, listBookingPreferences = [], bookingPreferenceLoading, shipment_data,
 	} = data || {};
 
 	const { control, formState :{ errors = {} } = {}, handleSubmit } = formProps || {};
@@ -36,14 +34,6 @@ function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesLis
 		() => Array(listBookingPreferences.length).fill(null).map(() => Math.random()),
 		[listBookingPreferences.length],
 	);
-	const { apiTrigger } = useUpdateShipmentBookingConfirmationPreferences({ setStep, step });
-	const SIMILAR_LENGTH = similarServiceIds.length;
-
-	useEffect(() => {
-		if (selectedServiceProvider.length === SIMILAR_LENGTH && step === GLOBAL_CONSTANTS.zeroth_index) {
-			apiTrigger(selectedServiceProvider);
-		}
-	}, [selectedServiceProvider, SIMILAR_LENGTH, step, apiTrigger]);
 
 	return (
 		<div>
@@ -64,6 +54,7 @@ function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesLis
 												step0_data={data}
 												key={keysForPreference[i]}
 												similarServiceIds={similarServiceIds}
+												setStep={setStep}
 											/>
 										) : null
 									))}

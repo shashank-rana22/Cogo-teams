@@ -6,7 +6,7 @@ import DocumentForm from './DocumentForm';
 
 function Document({
 	data = [],
-	shipment_ids = {},
+	shipment_data = {},
 	getProcedureTrigger = () => {},
 	auditsTrigger = () => {},
 	primary_service = {},
@@ -20,7 +20,7 @@ function Document({
 			<DocumentForm
 				sop_detail={sop_detail}
 				setShowForm={setShowForm}
-				shipment_ids={shipment_ids}
+				shipment_data={shipment_data}
 				showForm={showForm}
 				instruction_id={instruction_id}
 				getProcedureTrigger={getProcedureTrigger}

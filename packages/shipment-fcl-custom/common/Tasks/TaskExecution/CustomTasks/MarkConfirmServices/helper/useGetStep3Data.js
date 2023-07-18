@@ -99,7 +99,7 @@ const useGetStep3Data = ({
 					total    : line_item?.total,
 				}));
 		} else {
-			DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
 				code     : line_item?.code,
 				currency : line_item?.currency,
 				price    : line_item?.price,
