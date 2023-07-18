@@ -21,6 +21,8 @@ function Header({
 	itemData = {},
 	activeEntity = '',
 	refetch = () => {},
+	selectedIds = [],
+	setSelectedIds = () => {},
 }) {
 	const {
 		INITIATED = 0, AUDITED = 0, PAYMENT_INITIATED = 0, PAID = 0,
@@ -92,6 +94,8 @@ function Header({
 					itemData={itemData}
 					activeEntity={activeEntity}
 					refetch={refetch}
+					selectedIds={selectedIds}
+					setSelectedIds={setSelectedIds}
 				/>
 			</div>
 

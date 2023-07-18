@@ -45,6 +45,8 @@ function SelectFilters({
 	itemData = {},
 	activeEntity = '',
 	refetch = () => {},
+	selectedIds = [],
+	setSelectedIds = () => {},
 }) {
 	const { search } = globalFilters || {};
 	const { entityBank = [] } = useGetEntityBanks({});
@@ -155,6 +157,8 @@ function SelectFilters({
 						activeEntity={activeEntity}
 						refetch={refetch}
 						globalFilters={globalFilters}
+						selectedIds={selectedIds}
+						setSelectedIds={setSelectedIds}
 					/>
 				</div>
 			</div>

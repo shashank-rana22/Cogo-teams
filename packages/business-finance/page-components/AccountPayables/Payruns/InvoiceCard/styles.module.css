@@ -9,3 +9,12 @@
 	border-radius: 8px;
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
+
+.sub_container {
+	display: flex;
+	align-items: center;
+}
+
+.value {
+	margin-left: 2px;
+}

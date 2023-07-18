@@ -97,7 +97,7 @@ function List({
 					</div>
 				) : (
 					<div>
-						{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+						{(!isEmpty(list) ? list : [1, 2, 3, 4, 5]).map((singleitem) => (
 							<>
 								<CardColumn
 									key={singleitem.id}

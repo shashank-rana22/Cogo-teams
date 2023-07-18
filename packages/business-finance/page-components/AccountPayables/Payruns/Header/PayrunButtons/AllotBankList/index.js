@@ -10,14 +10,17 @@ import RenderFunction from './renderFunction/index';
 function AllotBankList({
 	selectedPayrun = null, showAllotBank = false, setShowAllotBank = () => {}, checkedRow = null, refetch = () => {},
 	setCheckedRow = () => {}, allotEntityBank = {}, allotEntityLoading = false, overseasData = '',
+	selectedIds = [],
+	setSelectedIds = () => {},
 }) {
 	const { entityCode } = selectedPayrun || checkedRow || {};
 	const { selectBank, loading } = useInitiatePaymentAllotBank({
-		checkedRow,
 		setCheckedRow,
 		setShowAllotBank,
 		refetch,
 		overseasData,
+		selectedIds,
+		setSelectedIds,
 	});
 	const [selectedBankId, setSelectedBankId] = useState(null);
 	const { functions } = RenderFunction(

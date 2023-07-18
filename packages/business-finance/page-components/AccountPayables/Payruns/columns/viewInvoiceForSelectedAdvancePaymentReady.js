@@ -1,19 +1,23 @@
-export const ADVANCE_PAYMENT_VIEW_INVOICE = {
+export const VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {
-		borderRadius : '8px',
-		background   : 'none',
-		color        : 'black',
-		marginLeft   : '8px',
+		background : 'none',
+		color      : '#333333',
+		fontWeight : 600,
 	},
 	bodyStyles: {
-		color      : ' #333333',
+		color      : '#333333',
 		fontWeight : '400',
 		fontSize   : '12px',
-		borderTop  : '1.8px solid #F68B21',
+		borderTop  : '2px solid #F68B21',
 	},
 	fields: [
+		{
+			label : '',
+			func  : 'renderCheckbox',
+			span  : 0.4,
+		},
 		{
 			key   : 'organizationName',
 			label : 'Organization',
@@ -33,24 +37,22 @@ export const ADVANCE_PAYMENT_VIEW_INVOICE = {
 		{
 			label  : 'SID',
 			topKey : {
-				key: 'jobNumber',
+				key         : 'sid',
+				type        : 'href',
+				redirectKey : 'shipmentId',
 			},
 			lowerKey: {
 				key  : 'serviceType',
 				type : 'serviceType',
 			},
 			func : 'renderFieldPair',
-			span : 1,
+			span : 1.8,
 		},
 		{
-			label  : 'Payable Amount',
-			span   : 1.7,
-			topKey : {
-				key         : 'payableAmount',
-				type        : 'amount',
-				currencyKey : 'currency',
-			},
-			func: 'renderFieldPair',
+			key   : 'payableAmount',
+			func  : 'renderAmount',
+			label : 'Payable',
+			span  : 1.5,
 		},
 		{
 			key   : 'dueDate',
@@ -58,9 +60,20 @@ export const ADVANCE_PAYMENT_VIEW_INVOICE = {
 			span  : 1.5,
 		},
 		{
+			key   : 'urgencyTag',
+			label : 'Urgency',
+			// func  : 'renderUrgencyData',
+			span  : 1,
+		},
+		{
 			key  : 'delete',
 			span : 0.5,
 			func : 'renderTrashInvoice',
+		},
+		{
+			key  : 'invoiceDetails',
+			func : 'renderInvoiceTimeLine',
+			span : 0.5,
 		},
 	],
 };

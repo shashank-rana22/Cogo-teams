@@ -14,6 +14,7 @@ import FormatAmountCurrency from './FormatAmountCurrency';
 import PaidDropDown from './PaidDropDown';
 import PaidPaymentStatus from './PaidPaymentStatus';
 import PaymentInitiatedPayrunDownload from './PaymentInitiatedPayrunDownload.js';
+import PaymentReadyCheckbox from './PaymentReadyCheckbox';
 import RadioSelectPayrun from './RadioSelectPayrun';
 import RibbonData from './RibbonData';
 import ShowAction from './ShowAction';
@@ -32,6 +33,8 @@ const RenderFunctions = (
 		checkedRow = null,
 		setCheckedRow = () => {},
 		refetch = () => {},
+		selectedIds = [],
+		setSelectedIds = () => {},
 	},
 ) => {
 	const functions = {
@@ -106,6 +109,13 @@ const RenderFunctions = (
 		),
 		renderTrashInvoice: (itemData) => (
 			<DeleteSingleInvoice itemData={itemData} overseasData={overseasData} refetch={refetch} />
+		),
+		renderCheckbox: (itemData) => (
+			<PaymentReadyCheckbox
+				itemData={itemData}
+				selectedIds={selectedIds}
+				setSelectedIds={setSelectedIds}
+			/>
 		),
 	};
 	return {

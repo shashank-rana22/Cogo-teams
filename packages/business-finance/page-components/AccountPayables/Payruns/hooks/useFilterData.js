@@ -13,6 +13,8 @@ import { payrunPaidConfig } from '../columns/payrunPaidConfig';
 import { uploadHistoryConfig } from '../columns/uploadHistoryConfig';
 import { VIEW_INVOICE_NORMAL_CONFIG } from '../columns/viewInvoiceForSelected';
 import { ADVANCE_PAYMENT_VIEW_INVOICE } from '../columns/viewInvoiceForSelectedAdvance';
+import { VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG } from '../columns/viewInvoiceForSelectedAdvancePaymentReady';
+import { VIEW_INVOICE_NORMAL_PAYMENT_READY_CONFIG } from '../columns/viewInvoiceForSelectedPaymentReady';
 
 import useGetAdvancePaymentView from './useGetAdvancePaymentView';
 import useGetAdvPaymentInvoiceList from './useGetAdvPaymentInvoiceList';
@@ -42,7 +44,7 @@ const useFilterData = ({
 	const [refetch, setRefetch] = useState(() => () => {});
 
 	const [selectedPayrun, setSelectedPayrun] = useState(null);
-
+	const [selectedIds, setSelectedIds] = useState([]);
 	const { search, pageIndex, createdAt } = globalFilters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
@@ -155,13 +157,15 @@ const useFilterData = ({
 				setApiData({
 					listData    : viewInvoiceDataList,
 					dataLoading : viewInvoiceDataLoading,
-					listConfig  : VIEW_INVOICE_NORMAL_CONFIG,
+					listConfig  : activePayrunTab === 'AUDITED' ? VIEW_INVOICE_NORMAL_PAYMENT_READY_CONFIG
+						: VIEW_INVOICE_NORMAL_CONFIG,
 				});
 			} else if ((!isInvoiceView && !isEmpty(selectedPayrun) && overseasData === 'ADVANCE_PAYMENT')) {
 				setApiData({
 					listData    : viewInvoicesAdvancePaymentData,
 					dataLoading : viewInvoicesAdvancePaymentLoading,
-					listConfig  : ADVANCE_PAYMENT_VIEW_INVOICE,
+					listConfig  : activePayrunTab === 'AUDITED' ? VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG
+						: ADVANCE_PAYMENT_VIEW_INVOICE,
 				});
 			} else {
 				setApiData({
@@ -201,6 +205,7 @@ const useFilterData = ({
 		setViewId('');
 		setSelectedPayrun(null);
 		setCheckedRow(null);
+		setSelectedIds([]);
 		setGlobalFilters({
 			search    : undefined,
 			pageIndex : 1,
@@ -220,6 +225,8 @@ const useFilterData = ({
 		setSelectedPayrun,
 		selectedPayrun,
 		refetch,
+		selectedIds,
+		setSelectedIds,
 	};
 };
 

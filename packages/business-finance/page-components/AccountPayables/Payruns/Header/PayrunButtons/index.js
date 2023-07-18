@@ -13,6 +13,8 @@ function PayrunButtons({
 	activePayrunTab, isInvoiceView, overseasData = '', globalFilters = {},
 	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null,
 	setCheckedRow = () => {}, itemData = {}, activeEntity = '', refetch = () => {},
+	selectedIds = [],
+	setSelectedIds = () => {},
 }) {
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
@@ -26,12 +28,15 @@ function PayrunButtons({
 	const [showAllotBank, setShowAllotBank] = useState(false);
 	const [showReport, setShowReport] = useState(false);
 	const [showUploadUTR, setShowUploadUTR] = useState(false);
-
+	const allotBankDisabledCondition = isEmpty(selectedPayrun) && isEmpty(checkedRow);
 	if (activePayrunTab === 'AUDITED' && !isInvoiceView) {
 		return (
 			<div>
 				<div>
-					<Button disabled={isEmpty(checkedRow)} onClick={() => { setShowAllotBank(true); getEntityBank(); }}>
+					<Button
+						disabled={allotBankDisabledCondition}
+						onClick={() => { setShowAllotBank(true); getEntityBank(); }}
+					>
 						ALLOT BANK
 					</Button>
 				</div>
@@ -47,6 +52,8 @@ function PayrunButtons({
 						allotEntityLoading={allotEntityLoading}
 						overseasData={overseasData}
 						refetch={refetch}
+						selectedIds={selectedIds}
+						setSelectedIds={setSelectedIds}
 					/>
 				) : null}
 			</div>

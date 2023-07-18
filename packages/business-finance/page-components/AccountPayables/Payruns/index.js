@@ -16,12 +16,13 @@ function Payruns({ activeEntity = '' }) {
 	const [dropDownData, setDropDownData] = useState([]);
 	const [loadingDropDown, setLoadingDropDown] = useState(false);
 	const [checkedRow, setCheckedRow] = useState(null);
+
 	const {
 		data = {},
 		loading = false,
 		payrunStats = {},
 		config = {}, setSelectedPayrun = () => {}, selectedPayrun = null,
-		globalFilters = {},
+		globalFilters = {}, selectedIds = [], setSelectedIds = () => {},
 		setGlobalFilters = () => {}, sort = {}, setSort = () => {}, refetch = () => {},
 	} = useFilterData({
 		isInvoiceView,
@@ -44,6 +45,8 @@ function Payruns({ activeEntity = '' }) {
 			checkedRow,
 			setCheckedRow,
 			refetch,
+			selectedIds,
+			setSelectedIds,
 		},
 	);
 
@@ -67,8 +70,17 @@ function Payruns({ activeEntity = '' }) {
 				itemData={data}
 				activeEntity={activeEntity}
 				refetch={refetch}
+				selectedIds={selectedIds}
+				setSelectedIds={setSelectedIds}
 			/>
-			{selectedPayrun ? <InvoiceCard setSelectedPayrun={setSelectedPayrun} itemData={data} /> : null}
+			{selectedPayrun ? (
+				<InvoiceCard
+					setSelectedPayrun={setSelectedPayrun}
+					itemData={data}
+					setSelectedIds={setSelectedIds}
+					loading={loading}
+				/>
+			) : null}
 			<List
 				itemData={data}
 				config={config}
