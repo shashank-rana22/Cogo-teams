@@ -9,10 +9,9 @@ import useRenderCalender from '../../hooks/useRenderCalender';
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
-const NUMBER_OF_ELEMENTS = 30;
-const DEFAULT_DATE_OF_MONTH = 1;
-const WEEK_LAST_NUMBER = 6;
-const PAGE_NUMBER = 1;
+const CONSTANT_ONE = 1;
+const CONSTANT_SIX = 6;
+const CONSTANT_THIRTY = 30;
 const SCROLL_DURATION_DELAY = 500;
 
 function Calendar({ props = {} }) {
@@ -25,7 +24,7 @@ function Calendar({ props = {} }) {
 		setSelectedDate = () => {},
 	} = props || {};
 
-	const [pagination, setPagination] = useState(PAGE_NUMBER);
+	const [pagination, setPagination] = useState(CONSTANT_ONE);
 
 	const calendarRef = useRef();
 	const scrollHandleRef = useRef(null);
@@ -36,45 +35,77 @@ function Calendar({ props = {} }) {
 		calcWeek,
 	} = useRenderCalender();
 
-	const processData = useCallback((func) => {
-		const NEW_DATA = Array.from(
-			{ length: (pagination * NUMBER_OF_ELEMENTS) },
-			(_, i) => func(i),
-		);
-		const DATA = NEW_DATA.reverse().map((item, iterator) => ({
-			key      : `cal-${timeline}-${pagination}-${iterator}`,
-			label    : format(item, FORMAT_TYPE[timeline]?.label),
-			subLabel : format(item, FORMAT_TYPE[timeline]?.subLabel),
-			date     : new Date(item),
-		}));
-		setCalendarData(DATA.reverse());
-	}, [pagination, setCalendarData, timeline]);
+	// const processData = useCallback((func) => {
+	// 	const NEW_DATA = Array.from(
+	// 		{ length: (pagination * CONSTANT_THIRTY) },
+	// 		(_, i) => func(i),
+	// 	);
+	// 	const DATA = NEW_DATA.reverse().map((item, iterator) => ({
+	// 		key      : `cal-${timeline}-${pagination}-${iterator}`,
+	// 		label    : format(item, FORMAT_TYPE[timeline]?.label),
+	// 		subLabel : format(item, FORMAT_TYPE[timeline]?.subLabel),
+	// 		date     : new Date(item),
+	// 	}));
+	// 	setCalendarData(DATA.reverse());
+	// }, [pagination, setCalendarData, timeline]);
 
-	const loadWeeks = useCallback(() => {
+	// const loadWeeks = useCallback(() => {
+	// 	const NEW_DATA = [];
+
+	// 	for (let i = 0; i < pagination * CONSTANT_THIRTY; i += CONSTANT_ONE) {
+	// 		NEW_DATA.push(calcWeek(i));
+	// 	}
+
+	// 	const DATA = NEW_DATA.map((item, iterator) => {
+	// 		const startDate = new Date(item);
+	// 		const endDate = new Date(startDate);
+	// 		endDate.setDate(startDate.getDate() + CONSTANT_SIX);
+
+	// 		return {
+	// 			key      : `cal-${timeline}-${pagination}-${iterator}`,
+	// 			label    : format(item, FORMAT_TYPE[timeline].label),
+	// 			subLabel : `${format(
+	// 				item,
+	// 				FORMAT_TYPE[timeline].subLabel,
+	// 			)} to ${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
+	// 			date: new Date(item),
+	// 			endDate,
+	// 		};
+	// 	});
+	// 	setCalendarData(DATA);
+	// }, [calcWeek, pagination, setCalendarData, timeline]);
+
+	const loadData = useCallback((func) => {
 		const NEW_DATA = [];
 
-		for (let i = 0; i < pagination * NUMBER_OF_ELEMENTS; i += DEFAULT_DATE_OF_MONTH) {
-			NEW_DATA.push(calcWeek(i));
+		for (let i = 0; i < pagination * CONSTANT_THIRTY; i += CONSTANT_ONE) {
+			NEW_DATA.push(func(i));
 		}
+
+		const formatSubLabel = (item) => format(item, FORMAT_TYPE[timeline]?.subLabel);
 
 		const DATA = NEW_DATA.map((item, iterator) => {
 			const startDate = new Date(item);
 			const endDate = new Date(startDate);
-			endDate.setDate(startDate.getDate() + WEEK_LAST_NUMBER);
+			endDate.setDate(startDate.getDate() + CONSTANT_SIX);
+
+			let subLabel = '';
+			if (timeline === 'week') {
+				subLabel = `${formatSubLabel(item)} to ${formatSubLabel(endDate)}`;
+			} else {
+				subLabel = formatSubLabel(item);
+			}
 
 			return {
-				key      : `cal-${timeline}-${pagination}-${iterator}`,
-				label    : format(item, FORMAT_TYPE[timeline].label),
-				subLabel : `${format(
-					item,
-					FORMAT_TYPE[timeline].subLabel,
-				)} to ${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
-				date: new Date(item),
+				key   : `cal-${timeline}-${pagination}-${iterator}`,
+				label : format(item, FORMAT_TYPE[timeline]?.label),
+				subLabel,
+				date  : new Date(item),
 				endDate,
 			};
 		});
 		setCalendarData(DATA);
-	}, [calcWeek, pagination, setCalendarData, timeline]);
+	}, [pagination, setCalendarData, timeline]);
 
 	const handleScroll = () => {
 		const { scrollLeft } = calendarRef.current;
@@ -82,7 +113,7 @@ function Calendar({ props = {} }) {
 		if (scrollLeft <= GLOBAL_CONSTANTS.zeroth_index) {
 			if (scrollHandleRef.current) {
 				scrollHandleRef.current = false;
-				setPagination((prev) => prev + DEFAULT_DATE_OF_MONTH);
+				setPagination((prev) => prev + CONSTANT_ONE);
 				setTimeout(() => {
 					scrollHandleRef.current = true;
 				}, SCROLL_DURATION_DELAY);
@@ -92,10 +123,10 @@ function Calendar({ props = {} }) {
 
 	const doPagination = useCallback(() => {
 		setCalendarData([]);
-		if (timeline === 'day') processData(calcDate);
-		else if (timeline === 'month') processData(calcMonth);
-		else loadWeeks();
-	}, [setCalendarData, timeline, processData, calcDate, calcMonth, loadWeeks]);
+		if (timeline === 'day') loadData(calcDate);
+		else if (timeline === 'month') loadData(calcMonth);
+		else loadData(calcWeek);
+	}, [setCalendarData, timeline, loadData, calcDate, calcMonth, calcWeek]);
 
 	useEffect(() => {
 		doPagination();
@@ -104,7 +135,7 @@ function Calendar({ props = {} }) {
 	useEffect(() => {
 		scrollHandleRef.current = true;
 		setSelectedItem(new Date());
-		setPagination(PAGE_NUMBER);
+		setPagination(CONSTANT_ONE);
 	}, [setSelectedItem, timeline]);
 
 	return (
