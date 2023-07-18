@@ -12,10 +12,18 @@ const FILTER_TAB_OPTIONS = [
 	{ label: 'Month', name: 'month' },
 ];
 
-function Header({ timeline = '', setTimeline = () => {} }) {
+function Header({ timeline = '', setTimeline = () => {}, setSelectedDate = () => {} }) {
 	const { query, back } = useRouter();
 
 	const { id: agentId = '' } = query || {};
+
+	const handleTabChange = (val) => {
+		setTimeline(val);
+		setSelectedDate({
+			startDate : null,
+			endDate   : null,
+		});
+	};
 
 	return (
 		<div className={styles.container}>
@@ -31,7 +39,7 @@ function Header({ timeline = '', setTimeline = () => {} }) {
 				<Tabs
 					activeTab={timeline}
 					themeType="tertiary"
-					onChange={setTimeline}
+					onChange={(val) => handleTabChange(val)}
 					className={styles.tabs_style}
 				>
 					{FILTER_TAB_OPTIONS.map((item) => {

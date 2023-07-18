@@ -29,7 +29,7 @@ function AgentActivity({ loading = false, agentsDetails = {}, getCogoOneDashboar
 			`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,
 		);
 		if (agentId) {
-			getCogoOneDashboard(agentId);
+			getCogoOneDashboard(); // pass agentId to getCogoOneDashboard
 		}
 	};
 

@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 import {
 	// useCallback,
@@ -9,37 +10,33 @@ import {
 
 import styles from './styles.module.css';
 
-const CONSTANT_ZERO = 0;
-const CONSTANT_ONE = 1;
 // const INTERSECTION_OPTIONS = {
 // 	root       : null,
 // 	rootMargin : '0px',
 // 	threshold  : [CONSTANT_ONE],
 // };
-const CONSTANT_TWENTY_NINE = 29;
+const THIRTY_DAYS = 30;
+const SCROLL_DURATION_DELAY = 300;
+const MONTH_NUMBER = 1;
 // const CONSTANT_FIFTY_NINE = 59;
 // const CONSTANT_FIVE_HUNDRED = 500;
 // const CONSTANT_THOUSAND = 1000;
 
-export function CalendarEntity(
-	{
-		selectedItem = {},
-		setSelectedItem = () => {},
-		calendarData = [],
-		timeline = 'day',
+export function CalendarEntity({
+	selectedItem = {},
+	setSelectedItem = () => {},
+	calendarData = [],
+	timeline = 'day',
+	setSelectedDate = () => {},
 	// addPagination,
-	},
-) {
-	// const [offset, setOffset] = useState(CONSTANT_TWENTY_NINE);
+}) {
+	// const [offset, setOffset] = useState(CONSTANT_THIRTY);
 	// const [leftShift, setLeftShift] = useState(CONSTANT_ZERO);
-	//
 
 	const isWeek = timeline === 'week';
 	// let leftCount = 0;
-	// const calendarRef = useRef();
-	const leftEnd = useRef();
+	const calendarRef = useRef();
 	const middle = useRef();
-	const end = useRef();
 
 	// const leftShift = useCallback(
 	// 	() => {
@@ -59,144 +56,83 @@ export function CalendarEntity(
 	// 	[],
 	// );
 
+	const handleClick = (item) => {
+		const { date, endDate } = item || {};
+		setSelectedItem(item?.date);
+		if (timeline === 'day') {
+			setSelectedDate({
+				startDate : date,
+				endDate   : date,
+			});
+		}
+		if (timeline === 'week') {
+			setSelectedDate({
+				startDate: date,
+				endDate,
+			});
+		}
+		if (timeline === 'month') {
+			setSelectedDate({
+				startDate : date,
+				endDate   : new Date(date.getFullYear(), date.getMonth() + MONTH_NUMBER, GLOBAL_CONSTANTS.zeroth_index),
+			});
+		}
+	};
+
 	useEffect(() => {
-		// setOffset(CONSTANT_TWENTY_NINE);
-		// if (typeof window !== 'undefined') {
-		// 	const leftObserver = new window.IntersectionObserver(leftShift, INTERSECTION_OPTIONS);
-		// 	setTimeout(() => {
-		// 		if (leftEnd.current)leftObserver.observe(leftEnd.current);
-		// 		end?.current?.scrollIntoView({
-		// 			behavior : 'smooth',
-		// 			block    : 'nearest',
-		// 			inline   : 'end',
-		// 		});
-		// 	}, CONSTANT_FIVE_HUNDRED);
-		// 	setTimeout(() => {
-		// 		setOffset(CONSTANT_FIFTY_NINE);
-		// 	}, CONSTANT_THOUSAND);
-		// }
-		middle?.current?.scrollIntoView({
-			behavior : 'smooth',
-			block    : 'nearest',
-			inline   : 'end',
-		});
-		console.log('calendarData', calendarData);
+		setTimeout(() => {
+			middle?.current?.scrollIntoView({
+				behavior : 'instant',
+				block    : 'nearest',
+				inline   : 'start',
+			});
+		}, SCROLL_DURATION_DELAY);
 	}, [calendarData, timeline]);
 
 	return (
 		<div
-			// onScroll={handleScroll}
-			// ref={calendarRef}
+			ref={calendarRef}
 			className={cl`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}
 		>
-			{
-				calendarData?.map(({ label, subLabel, key, date, endDate }, index) => {
-					let isDateEqual;
-					if (timeline === 'day') {
-						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
-					} else if (timeline === 'week') {
-						isDateEqual = (selectedItem.getTime() >= date.getTime())
+			{calendarData?.map((item, index) => {
+				const { label, subLabel, key, date, endDate } = item || {};
+
+				let isDateEqual;
+
+				if (timeline === 'day') {
+					isDateEqual = format(
+						selectedItem,
+						GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+					) === format(date, GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']);
+				} else if (timeline === 'week') {
+					isDateEqual = (selectedItem.getTime() >= date.getTime())
 						&& (selectedItem.getTime() <= endDate?.getTime());
-					} else if (timeline === 'month') {
-						isDateEqual = format(selectedItem, 'MMM YYYY') === format(date, 'MMM YYYY');
-					}
+				} else if (timeline === 'month') {
+					isDateEqual = format(
+						selectedItem,
+						GLOBAL_CONSTANTS.formats.date['MMM YYYY'],
+					) === format(date, GLOBAL_CONSTANTS.formats.date['MMM YYYY']);
+				}
 
-					return (
-						<>
-							{index === CONSTANT_ZERO && (
-								<div
-									ref={leftEnd}
-									onClick={() => setSelectedItem(date)}
-									className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-									role="presentation"
-								>
-									<div className={styles.day_hours1}>
-										{label}
-									</div>
-									<div className={styles.day_hours2}>
-										{subLabel}
-									</div>
-								</div>
-							)}
-
-							{index > CONSTANT_ZERO
-							&& (index < CONSTANT_TWENTY_NINE)
-							&& index !== calendarData.length - CONSTANT_ONE
-							&& (
-								<div
-									key={key}
-									onClick={() => setSelectedItem(date)}
-									className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-									role="presentation"
-								>
-									<div className={styles.day_hours1}>
-										{label}
-									</div>
-									<div className={styles.day_hours2}>
-										{subLabel}
-									</div>
-								</div>
-							)}
-							{
-								index === CONSTANT_TWENTY_NINE && index !== calendarData.length - CONSTANT_ONE
-
-							&& (
-								<div
-									ref={middle}
-									onClick={() => setSelectedItem(date)}
-									className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-									role="presentation"
-								>
-									<div className={styles.day_hours1}>
-										{label}
-									</div>
-									<div className={styles.day_hours2}>
-										{subLabel}
-									</div>
-								</div>
-							)
-							}
-							{
-								index > CONSTANT_TWENTY_NINE && index !== calendarData.length - CONSTANT_ONE
-
-							&& (
-								<div
-									onClick={() => setSelectedItem(date)}
-									className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-									role="presentation"
-								>
-									<div className={styles.day_hours1}>
-										{label}
-									</div>
-									<div className={styles.day_hours2}>
-										{subLabel}
-									</div>
-								</div>
-							)
-							}
-							{
-								index === calendarData.length - CONSTANT_ONE
-
-							&& (
-								<div
-									ref={end}
-									onClick={() => setSelectedItem(date)}
-									className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
-									role="presentation"
-								>
-									<div className={styles.day_hours1}>
-										{label}
-									</div>
-									<div className={styles.day_hours2}>
-										{subLabel}
-									</div>
-								</div>
-							)
-							}
-						</>
-					);
-				})
-			}
+				return (
+					<div
+						key={key}
+						ref={index === Number(calendarData.length - THIRTY_DAYS) ? middle : null}
+						onClick={() => handleClick(item)}
+						className={cl`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
+						role="presentation"
+					>
+						<div className={styles.label}>
+							{label}
+							{/* {index} */}
+						</div>
+						<div className={styles.sub_label}>
+							{subLabel}
+							{/* {Number(calendarData.length - CONSTANT_THIRTY)} */}
+						</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 }

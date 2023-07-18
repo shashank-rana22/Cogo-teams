@@ -168,7 +168,7 @@ export const LABLE_TYPE = {
 export const FORMAT_TYPE = {
 	day: {
 		label    : GLOBAL_CONSTANTS.formats.date.dd,
-		subLabel : GLOBAL_CONSTANTS.formats.date['MMM yyyy'], /// 'MMM yy'
+		subLabel : GLOBAL_CONSTANTS.formats.date['MMM yyyy'],
 	},
 	week: {
 		label    : GLOBAL_CONSTANTS.formats.date['MMM yyyy'],

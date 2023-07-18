@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 
-const ONE = 1;
-const SIX = 6;
-const SEVEN = 7;
+const DEFAULT_DATE_OF_MONTH = 1;
+const WEEK_LAST_NUMBER = 6;
+const WEEK_COUNT = 7;
+
 export default function useRenderCalender() {
 	const calcDate = useCallback((subtractDays) => {
 		const d = new Date();
@@ -12,25 +13,23 @@ export default function useRenderCalender() {
 
 	const calcMonth = useCallback((subtractMonths) => {
 		const d = new Date();
-		d.setDate(ONE);
+		d.setDate(DEFAULT_DATE_OF_MONTH);
 		d.setMonth(d.getMonth() - subtractMonths);
 		return d;
 	}, []);
 
 	const calcWeek = useCallback((subtractWeeks) => {
 		const d = new Date();
-		if (d.getDay() !== ONE) {
-			d.setDate(d.getDate() - ((d.getDay() + SIX) % SEVEN));
+		if (d.getDay() !== DEFAULT_DATE_OF_MONTH) {
+			d.setDate(d.getDate() - ((d.getDay() + WEEK_LAST_NUMBER) % WEEK_COUNT));
 		}
-		d.setDate(d.getDate() - (subtractWeeks * SEVEN));
+		d.setDate(d.getDate() - (subtractWeeks * WEEK_COUNT));
 		return d;
 	}, []);
 
-	return (
-		{
-			calcDate,
-			calcMonth,
-			calcWeek,
-		}
-	);
+	return {
+		calcDate,
+		calcMonth,
+		calcWeek,
+	};
 }

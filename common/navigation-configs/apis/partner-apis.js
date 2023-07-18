@@ -12755,10 +12755,10 @@ const partner = {
 	],
 	cogo_one_dashboard: [
 		{
-			api          : 'get_cogo_one_dashboard',
+			api          : 'get_omnichannel_agent_stats',
 			access_type  : 'private',
 			service_name : 'communication',
-		}
+		},
 	],
 
 	referral_dashboard: [

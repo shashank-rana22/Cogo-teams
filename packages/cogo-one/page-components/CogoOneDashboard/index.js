@@ -1,14 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 // import { format } from '@cogoport/utils';
-import {
-	useState,
-	// useCallback
-} from 'react';
+import { useState } from 'react';
 
 import AdminDashboard from './AdminDashboard';
 import AgentDashboard from './AgentDashboard';
-import useGetCogoOneDashboard from './hooks/useGetCogoOneDashboard';
+import useGetCogoOneAgentStats from './hooks/useGetCogoOneAgentStats';
 import styles from './styles.module.css';
 
 // const KAM_AGENT_ROLE_ID = ''; // KAM - SME Demand
@@ -27,6 +24,10 @@ function CogoOneDashboard() {
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState({
+		startDate : null,
+		endDate   : null,
+	});
 
 	const { view = '' } = query || {};
 
@@ -43,8 +44,9 @@ function CogoOneDashboard() {
 		loading = false,
 		listData = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneDashboard({
+	} = useGetCogoOneAgentStats({
 		timeline,
+		selectedDate,
 		// selectedTimeline,
 		selectedItem,
 		partnerUserId,
@@ -60,6 +62,7 @@ function CogoOneDashboard() {
 		setSelectedItem,
 		listData,
 		loading,
+		setSelectedDate,
 	};
 
 	return (

@@ -5,14 +5,12 @@
 	justify-content: space-evenly;
 	width: fit-content;
 	margin: 10px 0;
-	font-style: normal;
 	cursor: pointer;
 	scroll-snap-stop: always;
 }
 
-.day_hours1 {
+.label {
 	font-size: 16px;
-	font-weight: 400;
 	line-height: 22px;
 	color: #828282;
 	text-align: center;
@@ -38,12 +36,11 @@
 }
 
 .week_calendar {
-	gap: 15px;
+	display: flex;
 }
 
-.day_hours2 {
+.sub_label {
 	font-size: 10px;
-	font-weight: 400;
 	line-height: 22px;
 	color: #828282;
 	text-align: center;
@@ -61,34 +58,33 @@
 		transition: 0.1s;
 	}
 
-	.day_hours1 {
+	.label {
 		font-size: 16px;
 		font-weight: 500;
 		color: #444;
 		transition: 0.3s;
 	}
 
-	.day_hours2 {
-		font-size: 12.5px;
+	.sub_label {
+		font-size: 12px;
 		font-weight: 500;
 		color: #444;
 		transition: 0.3s;
 	}
 }
 
-.week_calendar .day_hours1 {
-	font-size: 14px;
+.week_calendar .label {
 	white-space: nowrap;
 }
 
-.date_container:hover .day_hours1 {
+.date_container:hover .label {
 	font-size: 16px;
 	font-weight: 500;
 	color: #444;
 	transition: 0.3s;
 }
 
-.date_container:hover .day_hours2 {
+.date_container:hover .sub_label {
 	font-size: 12px;
 	font-weight: 500;
 	color: #444;

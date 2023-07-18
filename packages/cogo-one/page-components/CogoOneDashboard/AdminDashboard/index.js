@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Calendar from '../common/Calendar';
 import CallAnalytics from '../common/CallAnalytics';
 import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
@@ -13,21 +11,27 @@ import PerformanceTab from './PerformanceTabs';
 import styles from './styles.module.css';
 
 function AdminDashboard(props) {
-	const { timeline, setTimeline, listData, loading, getCogoOneDashboard = () => {} } = props || {};
+	const {
+		timeline,
+		setTimeline,
+		listData,
+		loading,
+		getCogoOneDashboard = () => {},
+		setSelectedDate = () => {},
+	} = props || {};
+
 	const {
 		escalations = [], calls_analytics = {}, channels_message_analytics = {},
 		agents_details = {}, agents_performance = {}, status_of_chats = {}, cogo_one_dashboard_graph = {},
 	} = listData || {};
-	const [activeTab, setActiveTab] = useState('day');
 
 	return (
 
 		<div className={styles.prime_container}>
 			<Header
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
 				timeline={timeline}
 				setTimeline={setTimeline}
+				setSelectedDate={setSelectedDate}
 			/>
 			<div className={styles.sub_container}>
 				<div className={styles.calenderchart_plus_escalations}>
