@@ -17,7 +17,7 @@ function EmptyState({
 				width={width}
 				height={height}
 				alt="Empty-state"
-				style={{ margin: '10px' }}
+				style={{ margin: '10' }}
 			/>
 
 			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>

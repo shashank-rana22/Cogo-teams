@@ -8,7 +8,7 @@ const useGetEmployeeLevels = () => {
 		url    : '/get_employee_level',
 		method : 'GET',
 		params : {
-			user_id: '2fac2a22-dd10-49db-8a5e-ca6188d63cf8' || user?.id,
+			user_id: user?.id,
 		},
 	}, { manual: false });
 
