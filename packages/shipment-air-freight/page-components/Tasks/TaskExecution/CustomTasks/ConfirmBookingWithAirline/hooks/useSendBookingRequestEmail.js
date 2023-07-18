@@ -51,9 +51,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue
 				onCancel();
 			}
 		} catch (err) {
-			Toast.error(
-				toastApiError(err),
-			);
+			toastApiError(err);
 		}
 	};
 

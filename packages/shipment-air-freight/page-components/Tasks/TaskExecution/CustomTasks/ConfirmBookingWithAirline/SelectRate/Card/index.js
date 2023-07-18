@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -41,6 +41,10 @@ function Card({
 	} = useSendBookingRequestEmail(onCancel, setShowEmailPreview, checkboxValue);
 
 	const handleProceedWithEmail = async (show_preview_only, formValues) => {
+		if (!show_preview_only && !formValues?.recipient_email) {
+			Toast.error('Recipient email is required');
+			return;
+		}
 		const pocData = (data?.repository_data?.pocs_data || []).find((val) => (
 			val?.email === formValues?.recipient_email
 		));

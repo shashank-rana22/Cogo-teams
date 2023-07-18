@@ -1,7 +1,6 @@
 import Layout from '@cogoport/air-modules/components/Layout';
 import { Button, Modal, CheckboxGroup } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 
 import controls from '../../../configs/add-poc-controls';
 
@@ -95,7 +94,7 @@ function PreviewEmail({
 				</div>
 				<Button
 					className="primary md"
-					disabled={loading || isEmpty(pocData)}
+					disabled={loading}
 					onClick={handleSubmit((formValues) => onConfirm(false, formValues))}
 				>
 					Send Mail
