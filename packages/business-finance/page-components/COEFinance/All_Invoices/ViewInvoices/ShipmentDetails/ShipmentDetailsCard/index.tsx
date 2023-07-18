@@ -40,6 +40,7 @@ const VALID_ADVANCE_ATH_RANGE = 80;
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
+const DEFAULT_ZERO_VALUE = 0;
 
 function ShipmentDetailsCard({
 	data = {},
@@ -150,10 +151,8 @@ function ShipmentDetailsCard({
 	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
 
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
-		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
-	// const advancePaymentObjData = JSON.parse(advancedPaymentObj?.data);
-
-	// console.log('advancePaymentObjData', advancedPaymentObj);
+		?.filter((item) => JSON.parse(item?.data)?.invoice_number === billNumber
+		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -854,7 +853,7 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
-											&& advancedPaymentObj?.updated_advanced_amount
+											&& advancedPaymentObj?.data
 											&& (
 												<div className={styles.margin_bottom}>
 													Updated Advanced Amount -
@@ -862,7 +861,8 @@ function ShipmentDetailsCard({
 													{advancedAmountCurrency}
 													{' '}
 													<span>
-														{advancedPaymentObj?.updated_advanced_amount}
+														{JSON.parse(advancedPaymentObj?.data)?.updated_advanced_amount
+														|| DEFAULT_ZERO_VALUE}
 													</span>
 												</div>
 											)}

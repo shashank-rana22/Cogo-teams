@@ -101,7 +101,7 @@ function HighAmountRequestModal({
 			return;
 		}
 		if (+advancedAmountValue === +advanceAmount) {
-			Toast.error('Pls Change Advance amount , Cannot be same as previous Advance Amount while Rejecting');
+			Toast.error('Pls Change Advance amount , Cannot be same as previous Advance Amount');
 			return;
 		}
 
