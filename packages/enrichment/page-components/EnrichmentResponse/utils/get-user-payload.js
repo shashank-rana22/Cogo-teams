@@ -6,6 +6,7 @@ const getUserPayload = ({ values = {}, getByKey }) => {
 	return {
 		response_type                 : 'user',
 		email                         : getByKey(values, 'email'),
+		name                          : getByKey(values, 'name'),
 		work_scopes                   : isEmpty(work_scopes) ? undefined : work_scopes,
 		mobile_country_code           : getByKey(values?.mobile_number, 'country_code'),
 		mobile_number                 : getByKey(values?.mobile_number, 'number'),

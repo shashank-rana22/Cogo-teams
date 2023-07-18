@@ -473,6 +473,19 @@ export default {
 						],
 					},
 				},
+				actions: {
+					active: {
+						add    : 'Add Details',
+						failed : 'Mark as Failed',
+					},
+					responded:	{
+						edit    : 'Edit Details',
+						success : 'Mark as Completed',
+					},
+					success: {
+						view: 'View Details',
+					},
+				},
 			},
 		},
 

@@ -1,33 +1,17 @@
-export const getSecondaryTabOptions = () => ({
+const getSecondaryTabOptions = () => ({
 	active: {
-		key     : 'active',
-		title   : 'active',
-		actions : {
-			add    : 'Add Details',
-			failed : 'Mark as Failed',
-
-		},
+		key   : 'active',
+		title : 'active',
 	},
 	responded: {
-		key     : 'responded',
-		title   : 'Ongoing',
-		actions : {
-			edit    : 'Edit Details',
-			success : 'Mark as Completed',
-		},
+		key   : 'responded',
+		title : 'Ongoing',
 	},
 	success: {
-		key     : 'success',
-		title   : 'completed',
-		actions : {
-			view: 'View Details',
-		},
+		key   : 'success',
+		title : 'completed',
 	},
 
 });
 
-export const getActionConfigurations = ({ secondaryTab = '' }) => {
-	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions();
-
-	return SECONDARY_TAB_OPTIONS[secondaryTab]?.actions;
-};
+export default getSecondaryTabOptions;

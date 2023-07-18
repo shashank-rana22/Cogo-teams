@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import {
 	IcMCross,
 	IcMEdit,
@@ -6,8 +7,6 @@ import {
 	IcMPlusInCircle,
 	IcMTick,
 } from '@cogoport/icons-react';
-
-import { getActionConfigurations } from '../../../../utils/secondary-tabs-mapping';
 
 import styles from './styles.module.css';
 
@@ -20,12 +19,16 @@ const ICONS_MAPPING = {
 };
 
 function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComplete = false }) {
-	const CTA_MAPPING = getActionConfigurations({ secondaryTab });
+	const geo = getGeoConstants();
+
+	const ACTIONS_MAPPING = geo.navigations.enrichment.manual_enrichment.actions;
+
+	const actions = ACTIONS_MAPPING[secondaryTab];
 
 	return (
 		<div className={styles.action_container}>
 
-			{Object.keys(CTA_MAPPING || {}).map((key) => {
+			{Object.keys(actions || {}).map((key) => {
 				const Icon = key ? ICONS_MAPPING[key] : null;
 
 				return (
@@ -39,7 +42,7 @@ function ActionContent({ onClickCta = () => {}, secondaryTab = '', loadingComple
 					>
 						<Icon width={16} height={16} style={{ marginRight: '10px' }} />
 
-						<div>{CTA_MAPPING[key]}</div>
+						<div>{actions[key]}</div>
 
 					</Button>
 

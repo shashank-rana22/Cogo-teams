@@ -604,6 +604,17 @@ export default {
 						],
 					},
 				},
+				actions: {
+					active: {
+						add: 'Add Details',
+					},
+					responded:	{
+						edit: 'Edit Details',
+					},
+					success: {
+						view: 'View Details',
+					},
+				},
 			},
 		},
 		account_receivables: {

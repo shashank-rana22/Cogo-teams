@@ -18,7 +18,7 @@ function DetailsCard({ response = {} }) {
 						</div>
 
 						<div className={styles.bottom}>
-							{responseKey === 'work_scopes'
+							{(responseKey === 'work_scopes' && response?.[responseKey])
 								? <Workscopes work_scopes={response?.[responseKey]} />
 								: response?.[responseKey] }
 						</div>

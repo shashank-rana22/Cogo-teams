@@ -5,7 +5,7 @@ import Header from '../../commons/Header';
 import TableComponent from '../../commons/TableComponent';
 import useEnrichmentStats from '../../hooks/useEnrichmentStats';
 import getEnrichmentTableColumns from '../../utils/get-enrichment-table-columns';
-import { getSecondaryTabOptions } from '../../utils/secondary-tabs-mapping';
+import getSecondaryTabOptions from '../../utils/secondary-tabs-mapping';
 
 import EnrichmentStats from './components/EnrichmentStats';
 
