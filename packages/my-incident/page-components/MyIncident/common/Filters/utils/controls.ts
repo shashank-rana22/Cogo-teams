@@ -27,6 +27,14 @@ export const filterControls = (activeTab) => {
 							value : 'PAYMENT_CONFIRMATION_APPROVAL',
 							label : 'Payment Confirmation Approval',
 						},
+						{
+							value : 'RECURRING_EXPENSE_APPROVAL',
+							label : 'Recurring Expense Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'NON Recurring Expense Approval',
+						},
 					],
 				},
 				{
@@ -77,6 +85,14 @@ export const filterControls = (activeTab) => {
 							value : 'PAYMENT_CONFIRMATION_APPROVAL',
 							label : 'Payment Confirmation Approval',
 						},
+						{
+							value : 'RECURRRING_EXPENSE_APPROVAL',
+							label : 'Recurring EXpense Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'NON Recurring EXpense Approval',
+						},
 					],
 				},
 				{
@@ -126,6 +142,14 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'PAYMENT_CONFIRMATION_APPROVAL',
 							label : 'Payment Confirmation Approval',
+						},
+						{
+							value : 'RECURRING_EXPENSE_APPROVAL',
+							label : 'Recurring Expense Approval',
+						},
+						{
+							value : 'OVERHEAD_APPROVAL',
+							label : 'NON Recurring EXpense Approval',
 						},
 					],
 				},
