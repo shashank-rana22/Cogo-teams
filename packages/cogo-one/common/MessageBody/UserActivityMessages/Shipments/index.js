@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 
 import { SHIPPING_LINE, SHOW_SID, EVENT_LABEL } from '../../../../constants/getShippingLines';
 import { getEventTitle } from '../../../../utils/getEventTitle';
@@ -51,6 +52,21 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	const shippingLineMapping = SHIPPING_LINE[lineType] || '';
 	const matchShippingLine = SERVICE_DETAILS[eventType] || '';
 	const shippingLines = matchShippingLine[shippingLineMapping] || '';
+
+	if (isEmpty(serviceData)) {
+		return (
+			<>
+				<div className={styles.title}>{eventTitle}</div>
+				<div className={styles.message}>
+					Following are the details of the abandoned
+					{' '}
+					{EVENT_LABEL[eventType]}
+					{' '}
+					-
+				</div>
+			</>
+		);
+	}
 
 	return (
 		<>
