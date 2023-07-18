@@ -1,11 +1,22 @@
 const SUFFIXCONFIG = {
+	fcl_freight             : 'port',
+	lcl_freight             : 'port',
+	air_freight             : 'airport',
+	domestic_air_freight    : 'airport',
 	rail_domestic_freight   : 'location',
 	origin_ftl_freight      : 'pickup',
 	destination_ftl_freight : 'drop',
 	origin_ltl_freight      : 'pickup',
 	destination_ltl_freight : 'drop',
 	haulage_freight         : 'location',
+	fcl_customs             : 'port',
+	lcl_customs             : 'location',
+	air_customs             : 'airport',
 	trailer_freight         : 'location',
+	fcl_cfs                 : 'port',
+	fcl_freight_local       : 'port',
+	air_freight_local       : 'airport',
+	lcl_freight_local       : 'port',
 };
 
 export default function getShipmentLocation({ data = {}, type = 'origin' }) {
