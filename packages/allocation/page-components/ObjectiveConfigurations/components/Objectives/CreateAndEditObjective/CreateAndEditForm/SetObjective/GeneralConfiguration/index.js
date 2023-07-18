@@ -1,7 +1,8 @@
 import { Button, Toast, cl } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
-import { IcMEdit } from '@cogoport/icons-react';
+import { IcMEdit, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { forwardRef } from 'react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 import LIFECYCLE_STAGE_OPTIONS from '../../../../../../configurations/lifecycle-stage-options';
@@ -10,8 +11,14 @@ import EditApplicableAgentsModal from './EditApplicableAgentsModal';
 import styles from './styles.module.css';
 import useSetGeneralConfiguration from './useSetGeneralConfigurations';
 
-function GeneralConfiguration(props) {
-	const { formValues, setFormValues, onSaveCallback } = props;
+const GeneralConfiguration = forwardRef((props, ref) => {
+	const {
+		formValues,
+		setFormValues,
+		onSaveCallback,
+		onResetCallback,
+		disabled,
+	} = props;
 
 	const {
 		selectedRoles,
@@ -22,10 +29,16 @@ function GeneralConfiguration(props) {
 		handleSubmit,
 		controls,
 		onSave,
-	} = useSetGeneralConfiguration({ setFormValues, onSaveCallback });
+		onReset,
+	} = useSetGeneralConfiguration({
+		setFormValues,
+		onSaveCallback,
+		onResetCallback,
+		disabled,
+	});
 
 	return (
-		<div className={styles.container}>
+		<div ref={ref} className={styles.container}>
 			<h3 className={styles.heading}>General Configuration</h3>
 
 			<form className={styles.form_container} onSubmit={handleSubmit(onSave)}>
@@ -69,6 +82,7 @@ function GeneralConfiguration(props) {
 								}
 								return setShowEditAgentsModal(true);
 							}}
+							disabled={disabled}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />
 							Edit Applicable Agents
@@ -80,16 +94,28 @@ function GeneralConfiguration(props) {
 					<RadioGroupController
 						control={control}
 						name="lifecycle_stage"
-						options={LIFECYCLE_STAGE_OPTIONS}
+						options={LIFECYCLE_STAGE_OPTIONS.map((option) => ({ ...option, disabled }))}
 					/>
 
-					<Button
-						type="submit"
-						themeType="secondary"
-						size="md"
-					>
-						Save
-					</Button>
+					{disabled ? (
+						<Button
+							type="button"
+							themeType="secondary"
+							size="md"
+							onClick={onReset}
+						>
+							<IcMRefresh style={{ marginRight: '4px' }} />
+							Reset
+						</Button>
+					) : (
+						<Button
+							type="submit"
+							themeType="secondary"
+							size="md"
+						>
+							Save
+						</Button>
+					)}
 				</div>
 			</form>
 
@@ -104,6 +130,6 @@ function GeneralConfiguration(props) {
 			)}
 		</div>
 	);
-}
+});
 
 export default GeneralConfiguration;

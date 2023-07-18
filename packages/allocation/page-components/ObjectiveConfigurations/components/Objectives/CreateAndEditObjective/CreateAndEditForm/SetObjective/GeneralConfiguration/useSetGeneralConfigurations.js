@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
 
 const useSetGeneralConfiguration = (props) => {
-	const { setFormValues, onSaveCallback } = props;
+	const { setFormValues, onSaveCallback, onResetCallback, disabled } = props;
 
 	const [selectedRoles, setSelectedRoles] = useState([]);
 	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
@@ -18,11 +18,9 @@ const useSetGeneralConfiguration = (props) => {
 	const watchPartner = watch('partner');
 	const watchChannel = watch('channel');
 
-	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setSelectedRoles });
+	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setSelectedRoles, disabled });
 
-	const onSave = (values, event) => {
-		event.preventDefault();
-
+	const onSave = (values) => {
 		setFormValues((previousValues) => ({
 			...previousValues,
 			generalConfiguration: {
@@ -34,6 +32,12 @@ const useSetGeneralConfiguration = (props) => {
 		}));
 
 		if (typeof onSaveCallback === 'function') onSaveCallback();
+	};
+
+	const onReset = (event) => {
+		event.preventDefault();
+
+		if (typeof onResetCallback === 'function') onResetCallback();
 	};
 
 	useEffect(() => {
@@ -61,6 +65,7 @@ const useSetGeneralConfiguration = (props) => {
 		handleSubmit,
 		controls,
 		onSave,
+		onReset,
 	};
 };
 

@@ -4,20 +4,20 @@ import { isEmpty } from '@cogoport/utils';
 const getSeparatedIdData = ({ values }) => {
 	if (isEmpty(values)) return undefined;
 
-	if (values.isArray()) {
+	if (Array.isArray(values)) {
 		return values.map((value) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
 	if (typeof (values) === 'object') {
 		const SEPARATED_VALUES = {};
 
-		Object.entries(values).forEach(([key, value]) => {
-			if (value.isArray()) {
-				SEPARATED_VALUES[key] = values.map(
+		Object.entries(values).forEach(([key, valueItem]) => {
+			if (Array.isArray(valueItem)) {
+				SEPARATED_VALUES[key] = valueItem.map(
 					(singleValue) => singleValue.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 				);
 			} else {
-				SEPARATED_VALUES[key] = value;
+				SEPARATED_VALUES[key] = valueItem;
 			}
 		});
 

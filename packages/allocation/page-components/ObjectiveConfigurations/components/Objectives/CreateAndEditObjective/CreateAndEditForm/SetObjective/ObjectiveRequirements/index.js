@@ -10,7 +10,7 @@ import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
 
 const ObjectiveRequirements = forwardRef((props, ref) => {
-	const { formValues, setFormValues } = props;
+	const { formValues, setFormValues, disabled } = props;
 
 	const divRef = useRef({});
 
@@ -27,19 +27,33 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 
 	const onSubmit = (values) => {
 		const {
-			countries, states, cities, pincodes, segments, date_range, shipment_count, quotation_count, search_count,
+			countries,
+			states,
+			cities,
+			pincodes,
+			segments,
+			date_range,
+			shipment_count,
+			quotation_count,
+			search_count,
+			service_requirements,
 		} = values;
 
 		setFormValues((previousValues) => ({
 			...previousValues,
 			objectiveRequirements: {
-				...values,
-				organization_details: getSeparatedIdData({
-					countries, states, cities, pincodes, segments,
-				}),
+				organization_details: {
+					...getSeparatedIdData({
+						values: {
+							countries, states, cities, pincodes,
+						},
+					}),
+					segments,
+				},
 				stats_details: {
 					date_range, shipment_count, quotation_count, search_count,
 				},
+				service_requirements,
 			},
 		}));
 	};
@@ -59,21 +73,27 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 					resetField={resetField}
 					formValues={formValues}
 					setFormValues={setFormValues}
+					disabled={disabled}
 				/>
 
 				<OrganizationalDetails
 					control={control}
 					watch={watch}
 					resetField={resetField}
+					disabled={disabled}
 				/>
 
-				<AccountTransactionFunnel control={control} />
+				<AccountTransactionFunnel
+					control={control}
+					disabled={disabled}
+				/>
 
 				<div className={styles.button_container}>
 					<Button
 						type="submit"
 						themeType="primary"
 						size="md"
+						disabled={disabled}
 					>
 						Proceed & Review
 					</Button>

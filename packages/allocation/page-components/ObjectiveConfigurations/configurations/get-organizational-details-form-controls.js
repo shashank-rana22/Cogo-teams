@@ -4,7 +4,7 @@ import RenderListLocationOption from '../../../common/RenderListLocationOption';
 import getSeparatedIdData from '../helpers/get-separated-id-data';
 
 const getOrganizationalDetailsControls = (props) => {
-	const { watchCountries, watchStates, watchCities } = props;
+	const { watchCountries, watchStates, watchCities, disabled } = props;
 
 	const controls = [
 		{
@@ -28,6 +28,7 @@ const getOrganizationalDetailsControls = (props) => {
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
 			renderLabel: (item) => <RenderListLocationOption item={item} />,
+			disabled,
 		},
 		{
 			name        : 'states',
@@ -53,7 +54,7 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchCountries),
+			disabled    : disabled || isEmpty(watchCountries),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
@@ -80,7 +81,7 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchStates),
+			disabled    : disabled || isEmpty(watchStates),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
@@ -107,7 +108,7 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : isEmpty(watchCities),
+			disabled    : disabled || isEmpty(watchCities),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
@@ -134,6 +135,7 @@ const getOrganizationalDetailsControls = (props) => {
 				},
 			],
 			isClearable: true,
+			disabled,
 		},
 	];
 

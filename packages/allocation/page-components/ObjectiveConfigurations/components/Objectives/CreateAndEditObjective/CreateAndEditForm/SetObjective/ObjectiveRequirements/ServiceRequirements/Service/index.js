@@ -21,13 +21,14 @@ function Service(props) {
 		watch,
 		resetField,
 		serviceRequirementOperator,
+		disabled,
 	} = props;
 
 	const watchShipmentMode = watch(`${name}.${index}.shipment_mode`);
 	const watchServiceType = watch(`${name}.${index}.service_type`);
 	const watchTradeType = watch(`${name}.${index}.trade_type`);
 
-	const controls = getServiceRequirementControls({ watchShipmentMode, watchServiceType, watchTradeType });
+	const controls = getServiceRequirementControls({ watchShipmentMode, watchServiceType, watchTradeType, disabled });
 
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {

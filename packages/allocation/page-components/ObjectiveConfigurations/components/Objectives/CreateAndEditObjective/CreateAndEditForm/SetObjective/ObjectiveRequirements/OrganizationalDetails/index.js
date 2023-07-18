@@ -7,14 +7,14 @@ import getOrganizationalDetailsControls from '../../../../../../../configuration
 import styles from './styles.module.css';
 
 function OrganizationalDetails(props) {
-	const { control, watch, resetField } = props;
+	const { control, watch, resetField, disabled } = props;
 
 	const watchCountries = watch('countries');
 	const watchStates = watch('states');
 	const watchCities = watch('cities');
 
 	const controls = getOrganizationalDetailsControls(
-		{ watchCountries, watchStates, watchCities },
+		{ watchCountries, watchStates, watchCities, disabled },
 	);
 
 	useEffect(() => {

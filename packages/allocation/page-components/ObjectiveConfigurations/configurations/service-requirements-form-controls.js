@@ -7,7 +7,7 @@ import getListLocationParams from '../helpers/get-list-location-params';
 import getServiceTypeOptions from '../helpers/get-service-type-options';
 
 const getServiceRequirementControls = (props) => {
-	const { watchShipmentMode, watchServiceType, watchTradeType } = props;
+	const { watchShipmentMode, watchServiceType, watchTradeType, disabled } = props;
 
 	const geo = getGeoConstants();
 
@@ -40,6 +40,7 @@ const getServiceRequirementControls = (props) => {
 				},
 			],
 			isClearable: true,
+			disabled,
 		},
 		{
 			name        : 'service_type',
@@ -51,6 +52,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				shipmentMode: ['ocean', 'air', 'surface', 'haulage'],
 			},
+			disabled,
 		},
 		{
 			name        : 'trade_type',
@@ -71,6 +73,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
 			},
+			disabled,
 		},
 		{
 			name        : 'origin_location',
@@ -89,6 +92,7 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
+			disabled,
 		},
 		{
 			name        : 'destination_location',
@@ -107,6 +111,7 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
+			disabled,
 		},
 		{
 			name        : 'inco_term',
@@ -118,6 +123,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
 			},
+			disabled,
 		},
 		{
 			name        : 'hs_codes',
@@ -132,6 +138,7 @@ const getServiceRequirementControls = (props) => {
 				serviceType: ['fcl_freight', 'lcl_freight', 'air_domestic', 'air_international'],
 			},
 			renderLabel: ({ name = '', hs_code = '' }) => `${name} (${hs_code})`,
+			disabled,
 		},
 		{
 			name        : 'container_count',
@@ -143,6 +150,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['fcl_freight'],
 			},
+			disabled,
 		},
 		{
 			name        : 'cargo_weight',
@@ -154,6 +162,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['fcl_freight', 'lcl_freight'],
 			},
+			disabled,
 		},
 		{
 			name        : 'volume',
@@ -164,6 +173,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['lcl_freight', 'air_domestic', 'air_international'],
 			},
+			disabled,
 		},
 		{
 			name        : 'container_size',
@@ -193,6 +203,7 @@ const getServiceRequirementControls = (props) => {
 				shipmentMode : ['rail_domestic'],
 				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
 			},
+			disabled,
 		},
 		{
 			name        : 'container_type',
@@ -205,6 +216,7 @@ const getServiceRequirementControls = (props) => {
 				shipmentMode : ['rail_domestic'],
 				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
 			},
+			disabled,
 		},
 		{
 			name        : 'truck_type',
@@ -216,6 +228,7 @@ const getServiceRequirementControls = (props) => {
 			showElement : {
 				serviceType: ['ftl_freight'],
 			},
+			disabled,
 		},
 	];
 

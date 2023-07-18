@@ -17,6 +17,7 @@ function ServiceRequirements(props) {
 		resetField,
 		formValues,
 		setFormValues,
+		disabled,
 	} = props;
 
 	const [showAddAnotherConditionModal, setShowAnotherConditionModal] = useState(false);
@@ -35,12 +36,14 @@ function ServiceRequirements(props) {
 					watch={watch}
 					resetField={resetField}
 					serviceRequirementOperator={formValues.objectiveRequirements?.service_requirement_operator}
+					disabled={disabled}
 				/>
 			))}
 
 			<Button
 				type="button"
 				themeType="tertiary"
+				disabled={disabled}
 				onClick={() => {
 					if (fields?.length === MIN_FIELD_LENGTH) {
 						return setShowAnotherConditionModal(true);

@@ -3,7 +3,7 @@ import { DateRangePickerController, InputController } from '@cogoport/forms';
 import styles from './styles.module.css';
 
 function AccountTransactionFunnel(props) {
-	const { control } = props;
+	const { control, disabled } = props;
 
 	return 		(
 		<div className={styles.container}>
@@ -18,6 +18,7 @@ function AccountTransactionFunnel(props) {
 						control={control}
 						maxDate={new Date()}
 						isPreviousDaysAllowed
+						disabled={disabled}
 					/>
 				</div>
 
@@ -29,6 +30,7 @@ function AccountTransactionFunnel(props) {
 							name="shipment_count"
 							control={control}
 							placeholder="Shipment Count"
+							disabled={disabled}
 						/>
 					</div>
 
@@ -39,6 +41,7 @@ function AccountTransactionFunnel(props) {
 							name="quotation_count"
 							control={control}
 							placeholder="Quotation Count"
+							disabled={disabled}
 						/>
 					</div>
 
@@ -49,6 +52,7 @@ function AccountTransactionFunnel(props) {
 							name="search_count"
 							control={control}
 							placeholder="Search Count"
+							disabled={disabled}
 						/>
 					</div>
 				</div>

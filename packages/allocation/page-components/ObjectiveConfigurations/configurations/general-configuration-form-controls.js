@@ -5,7 +5,7 @@ import getChannelWiseRolesFilters from '../helpers/get-channel-wise-roles-filter
 import getEntityOptions from '../helpers/get-entity-options';
 
 const getGeneralConfiguratioFormControls = (props) => {
-	const { watchPartner, watchChannel, setSelectedRoles } = props;
+	const { watchPartner, watchChannel, setSelectedRoles, disabled } = props;
 
 	const controls = [
 		{
@@ -31,6 +31,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			rules: {
 				required: 'Objective Type is required',
 			},
+			disabled,
 		},
 		{
 			name  : 'name',
@@ -45,6 +46,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			rules       : {
 				required: 'Objective Name is required',
 			},
+			disabled,
 		},
 		{
 			name  : 'partner',
@@ -60,6 +62,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			rules       : {
 				required: 'Cogo Entity is required',
 			},
+			disabled,
 		},
 		{
 			name  : 'channel',
@@ -88,6 +91,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			rules: {
 				required: 'Channel is required',
 			},
+			disabled,
 		},
 		{
 			name  : 'roles',
@@ -118,6 +122,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			onChange: (_, selectedRoles) => {
 				setSelectedRoles(selectedRoles?.map((role) => ({ id: role.id, name: role.name })));
 			},
+			disabled,
 		},
 	];
 
