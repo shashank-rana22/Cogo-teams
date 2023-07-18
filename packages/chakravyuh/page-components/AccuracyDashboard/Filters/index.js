@@ -1,39 +1,28 @@
 import { Button, Popover, Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { IcMFcl, IcMLcl, IcMAir, IcMSearchlight, IcMPortArrow, IcMFilter } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMSearchlight, IcMPortArrow, IcMFilter } from '@cogoport/icons-react';
+import React, { useState, useEffect } from 'react';
+
+import { SELECT_ICON_MAPPING, SERVICE_TYPE_OPTIONS } from '../../../constants/dashboard_filter_controls';
 
 import FilterContainer from './FilterContainer';
 import styles from './styles.module.css';
 
-const OPTIONS = [
-	{
-		label : <p className={styles.dropdown_label}>FCL</p>,
-		value : 'fcl',
-	},
-	{
-		label : <p className={styles.dropdown_label}>LCL</p>,
-		value : 'lcl',
-	},
-	{
-		label : <p className={styles.dropdown_label}>AIR</p>,
-		value : 'air',
-	},
-];
+const CONSTANT_ONE = 1;
 
-const SELECT_ICON_MAPPING = {
-	fcl : <IcMFcl />,
-	lcl : <IcMLcl />,
-	air : <IcMAir />,
-};
-function Filters() {
-	const [filtersData, setFilters] = useState({
-		service_type : 'fcl',
-		origin       : '',
-		destination  : '',
-	});
-
+function Filters({ filters = {}, setFilters = () => {} }) {
+	const { service_type, origin, destination } = filters;
 	const [showFiltersPopover, setShowFiltersPopover] = useState(false);
+	const [popupKey, setPopupKey] = useState(GLOBAL_CONSTANTS.zeroth_index);
+
+	const changePrimaryFilters = (key, value) => {
+		setFilters((prev) => ({ ...prev, [key]: value }));
+	};
+
+	useEffect(() => {
+		setPopupKey((prev) => prev + CONSTANT_ONE);
+	}, [service_type]);
 
 	return (
 		<div className={styles.container}>
@@ -43,12 +32,10 @@ function Filters() {
 					size="sm"
 					isClearable={false}
 					placeholder="Select here"
-					value={filtersData?.service_type}
-					options={OPTIONS}
-					prefix={SELECT_ICON_MAPPING[filtersData?.service_type] || null}
-					onChange={(value) => (
-						setFilters((prev) => ({ ...prev, service_type: value }))
-					)}
+					value={service_type}
+					options={SERVICE_TYPE_OPTIONS}
+					prefix={SELECT_ICON_MAPPING[service_type] || null}
+					onChange={(value) => changePrimaryFilters('service_type', value)}
 					className={styles.dropdown}
 				/>
 			</div>
@@ -56,22 +43,22 @@ function Filters() {
 				<div className={styles.service_type}>
 					<p className={styles.title_label}>Origin</p>
 					<AsyncSelect
-						asyncKey="organizations"
+						asyncKey="list_locations"
 						initialCall={false}
-						onChange={(value) => (
-							setFilters((prev) => ({ ...prev, origin: value }))
-						)}
-						value={filtersData?.origin}
+						onChange={(value) => changePrimaryFilters('origin', value)}
+						value={origin}
 						placeholder="Port / Country"
 						prefix={<IcMSearchlight className={styles.search_icon} />}
 						size="sm"
 						params={{
 							filters: {
-								account_type : 'hs_code_list',
-								status       : 'active',
-								kyc_status   : 'verified',
+								type: [
+									`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
+									'country',
+								],
 							},
 						}}
+						isClearable
 						className={styles.location_select}
 					/>
 				</div>
@@ -81,25 +68,28 @@ function Filters() {
 					<AsyncSelect
 						asyncKey="list_locations"
 						initialCall={false}
-						onChange={(value) => (
-							setFilters((prev) => ({ ...prev, destination: value }))
-						)}
-						value={filtersData?.destination}
+						onChange={(value) => changePrimaryFilters('destination', value)}
+						value={destination}
 						placeholder="Port / Country"
 						prefix={<IcMSearchlight className={styles.search_icon} />}
 						size="sm"
 						params={{
 							filters: {
-								is_icd: true,
+								type: [
+									`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
+									'country',
+								],
 							},
 						}}
+						isClearable
 						className={styles.location_select}
 					/>
 				</div>
 			</div>
 			<div className={styles.filters_container}>
 				<Popover
-					render={<FilterContainer />}
+					key={popupKey}
+					render={<FilterContainer filters={filters} />}
 					trigger="click"
 					placement="bottom"
 					visible={showFiltersPopover}

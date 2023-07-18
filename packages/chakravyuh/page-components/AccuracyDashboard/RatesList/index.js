@@ -10,23 +10,26 @@ function SupplyRates({
 	filters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
 	className = '',
 }) {
-	const { classType = 'air' } = filters;
-	const { columns } = useSupplyRatesListTable(classType);
+	const { service_type = 'fcl', pieChartView = 'default' } = filters;
+	const { columns } = useSupplyRatesListTable(service_type);
 
-	return (
-		<div className={cl`${styles.main_container} ${className}`}>
-			<Table columns={columns} data={LIST_DATA} className={styles.table_container} />
-			<div className={styles.pagination_container} id="rnp_role">
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={totalCount}
-					pageSize={pageSize}
-					onPageChange={getNextPage}
-				/>
+	if (pieChartView !== 'default') {
+		return (
+			<div className={cl`${styles.main_container} ${className}`}>
+				<Table columns={columns} data={LIST_DATA} className={styles.table_container} />
+				<div className={styles.pagination_container} id="rnp_role">
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={totalCount}
+						pageSize={pageSize}
+						onPageChange={getNextPage}
+					/>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
+	return null;
 }
 
 export default SupplyRates;
