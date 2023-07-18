@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function SupplyRates({
 	globalFilters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
-	className = '',
+	className = '', heading = null,
 }) {
 	const { service_type = 'fcl', rate_type } = globalFilters;
 	const { columns } = useSupplyRatesListTable(service_type);
@@ -16,6 +16,10 @@ function SupplyRates({
 	if (rate_type) {
 		return (
 			<div className={cl`${styles.main_container} ${className}`}>
+				{
+					heading
+				&& <p className={styles.main_title}>{heading}</p>
+				}
 				<Table columns={columns} data={LIST_DATA} className={styles.table_container} />
 				<div className={styles.pagination_container} id="rnp_role">
 					<Pagination

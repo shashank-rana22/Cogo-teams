@@ -68,17 +68,19 @@ function DrillDown({ globalFilters = {} }) {
 								<DrillDownCard
 									key={item.action_type}
 									data={item}
-									isMainCard={!colIdx}
+									cardIndex={colIdx}
 									delay={DEFAULT_DELAY + colIdx * (FACTOR / (row.length - FACTOR || FACTOR))}
 									handleClick={handleClick}
 									animate={!activeParent}
+									isAtTop={isActive}
+									parentAction={row[colIdx - FACTOR]?.action_type || 'search'}
 								/>
 							))}
 						</div>
 					);
 				})}
 			</div>
-			{activeParent && <SupplyRates />}
+			<SupplyRates visible={activeParent} />
 		</div>
 	);
 }

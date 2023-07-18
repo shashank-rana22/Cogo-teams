@@ -3,9 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import anime from 'animejs/lib/anime.es';
 import { useRef, useEffect } from 'react';
 
-import { ONE } from '../../../../constants/map_constants';
+// import { ONE } from '../../../../constants/map_constants';
 import { ANIMATION_CONFIG, MAPPING, LAST_INDEX, FACTOR } from '../../../../constants/svg_constants';
 import styles from '../styles.module.css';
+
+const ONE = 1;
 
 function BranchAnimation({ rate_type = null }) {
 	const svgRef = useRef(null);
