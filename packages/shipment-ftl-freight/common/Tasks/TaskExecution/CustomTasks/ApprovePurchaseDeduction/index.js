@@ -39,7 +39,7 @@ function ApprovePurchaseDeduction({
 
 	const watchCN = watch('cn_number');
 
-	const { data } = useGetDeductionDetails(shipment_data, watchCN);
+	const { data = {} } = useGetDeductionDetails(shipment_data, watchCN);
 
 	const dataLength = (data?.partial || data?.revoke || []).length;
 

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetCNDetails = ({ shipment_data }) => {
+const useGetCNDetails = ({ shipment_data = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url: '/list_shipment_credit_notes',
 

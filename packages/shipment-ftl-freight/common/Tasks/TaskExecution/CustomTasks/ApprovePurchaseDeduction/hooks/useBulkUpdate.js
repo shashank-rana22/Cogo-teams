@@ -32,7 +32,7 @@ const useBulkUpdate = () => {
 		}
 	};
 
-	const handlePendingTask = async ({ task }) => {
+	const handlePendingTask = async ({ task = {} }) => {
 		try {
 			const response = await updateShipmentPendingTaskTrigger({
 				data: { id: task?.id },

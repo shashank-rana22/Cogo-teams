@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetDeductionDetails = (shipment_data, watchCN) => {
+const useGetDeductionDetails = (watchCN, shipment_data = {}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_purchase_deduction_details',
 		method : 'GET',
@@ -20,6 +20,7 @@ const useGetDeductionDetails = (shipment_data, watchCN) => {
 				params: payload,
 			});
 		} catch (e) {
+			if (e?.message === 'canceled') { return; }
 			Toast.error(getApiErrorString(e?.response?.data) || 'Something went wrong !! ');
 		}
 	}, [shipment_data?.id, trigger, watchCN]);
