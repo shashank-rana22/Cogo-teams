@@ -112,20 +112,15 @@ function Card({
 							}
 						</div>
 						<div className={styles.source}>
-							{
-							data?.rowData?.is_minimum_price_rate ? (
+							{singleServiceData?.service_type === 'air_freight_service' ? (
 								<div>
 									<Pill size="md" color="#FEF3E9">
-										is minimum price rate : yes
+										is minimum price rate:
+										{' '}
+										{data?.rowData?.is_minimum_price_rate ? 'yes' : 'no'}
 									</Pill>
 								</div>
-							)
-								: (
-									<Pill size="md" color="#FEF3E9">
-										is minimum price rate : no
-									</Pill>
-								)
-							}
+							) : null}
 						</div>
 						<div className={styles.source}>
 							{
