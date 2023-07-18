@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -14,6 +15,14 @@ function EmployeeDetails({ data, loading }) {
 	const { diff_in_days, name, designation } = data || {};
 
 	const { months_gap, days_gap, years_gap } = diff_in_days || {};
+
+	const getDetail = (item, showStartCase = false) => {
+		if (showStartCase) {
+			return startCase(item);
+		}
+
+		return item;
+	};
 
 	const getDiffDays = () => {
 		const TIME_PERIODS = [];
@@ -67,7 +76,7 @@ function EmployeeDetails({ data, loading }) {
 						:
 					</div>
 					<div className={styles.item}>
-						{val.func(data?.[val.key || ''], val.startCase) || '-'}
+						{getDetail(data?.[val.key || ''], val.startCase) || '-'}
 					</div>
 				</div>
 			))}

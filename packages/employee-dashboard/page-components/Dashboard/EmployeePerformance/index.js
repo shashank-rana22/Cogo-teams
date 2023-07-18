@@ -132,6 +132,7 @@ function EmployeePerformance({
 					ratingCycle={ratingCycle}
 				/>
 			)}
+
 			{openRatingForm && (
 				<SelfRatingForm
 					open={openRatingForm}
