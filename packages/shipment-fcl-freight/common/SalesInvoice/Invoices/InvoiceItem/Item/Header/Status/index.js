@@ -31,7 +31,8 @@ function Status({
 	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 	const isAuthorizedForCN = [
 		GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id].includes(user_data?.user?.id);
+		GLOBAL_CONSTANTS.uuid.sachin_mehra_user_id,
+		GLOBAL_CONSTANTS.uuid.manoj_mahapatra_user_id].includes(user_data?.user?.id);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
