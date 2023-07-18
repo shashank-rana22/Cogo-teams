@@ -1,3 +1,11 @@
+.main_card {
+	position: absolute;
+	top: 303px !important;
+	left: 360px !important;
+	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+	animation: pulse 3s 0.9s infinite;
+}
+
 .source_card {
 	position: absolute;
 	z-index: 2;
@@ -12,13 +20,6 @@
 	box-shadow: 0 0 8px #e3aa0b;
 }
 
-.main_card {
-	top: 303px;
-	left: 360px;
-	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
-	animation: pulse 3s 0.9s infinite;
-}
-
 .main_container {
 	position: relative;
 	height: calc(100vh - 137px);
@@ -31,12 +32,12 @@
 	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 	.source_card:nth-child(3) {
-		top: 170px;
+		top: 295px;
 		left: 45px;
 	}
 
 	.source_card:nth-child(4) {
-		top: 295px;
+		top: 170px;
 		left: 45px;
 	}
 

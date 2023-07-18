@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import IcBranch from '../../../assets/ic-tree.svg';
 import { DUMMY_DATA } from '../../../constants/drilldown_config';
 import SupplyRates from '../RatesList';
 
@@ -26,10 +26,16 @@ function DrillDown({ rate_type = null }) {
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.main_container} ${activeParent ? styles.minimize : ''}`}>
+				<img
+					src={!rate_type
+						? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
+						: GLOBAL_CONSTANTS.image_url.ic_tree_single}
+					alt="img"
+					className={styles.tree_icon}
+				/>
 				{!activeParent ? (
 					<>
-						<IcBranch className={styles.tree_icon} />
-						<BranchAnimation />
+						<BranchAnimation rate_type={rate_type} />
 						{rateSources.map((type) => (
 							<div className={styles.source_card} key={type}>
 								{startCase(type)}
@@ -52,7 +58,7 @@ function DrillDown({ rate_type = null }) {
 
 					return (!activeParent || isActive) && (
 						<div
-							className={cl`${styles.tree_branch} 
+							className={cl`${styles.tree_branch}
 							${styles[`branch_${rowIdx}`]}
 							${isActive ? styles.to_top : ''}`}
 							key={row[GLOBAL_CONSTANTS.zeroth_index].action_type}
