@@ -2620,6 +2620,9 @@ importers:
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
+      '@cogoport/core':
+        specifier: workspace:^0.1.0
+        version: link:../../common/core
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms

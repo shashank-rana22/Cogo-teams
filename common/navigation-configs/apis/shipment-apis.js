@@ -1616,6 +1616,10 @@ const apis = [
 		api         : 'get_saas_hs_code_list',
 		access_type : 'private',
 	},
+	{
+		api         : 'get_saas_trade_engine_documents',
+		access_type : 'private',
+	},
 ];
 
 export default apis;
