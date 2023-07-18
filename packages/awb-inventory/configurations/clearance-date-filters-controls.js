@@ -15,7 +15,6 @@ const clearance_date_report_controls = [
 		asyncKey    : 'list_locations',
 		label       : 'Origin Airport',
 		placeholder : 'Select Origin Airport',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			filters: {
@@ -29,7 +28,6 @@ const clearance_date_report_controls = [
 		asyncKey    : 'list_locations',
 		label       : 'Destination Airport',
 		placeholder : 'Select Destination Airport',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			filters: {
