@@ -26,15 +26,16 @@ function DrillDown({ rate_type = null }) {
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.main_container} ${activeParent ? styles.minimize : ''}`}>
-				<img
-					src={!rate_type
-						? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
-						: GLOBAL_CONSTANTS.image_url.ic_tree_single}
-					alt="img"
-					className={styles.tree_icon}
-				/>
+
 				{!activeParent ? (
 					<>
+						<img
+							src={!rate_type
+								? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
+								: GLOBAL_CONSTANTS.image_url.ic_tree_single}
+							alt="branches"
+							className={styles.tree_icon}
+						/>
 						<BranchAnimation rate_type={rate_type} />
 						{rateSources.map((type) => (
 							<div className={styles.source_card} key={type}>
