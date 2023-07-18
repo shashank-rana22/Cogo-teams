@@ -3,6 +3,9 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const ROUND_OFF_DIGIT = 2;
+const DEFAULT_FINAL_RAING = 0;
+
 const getColumns = ({
 	onClickCheckbox,
 	selectedEmployees,
@@ -14,7 +17,10 @@ const getColumns = ({
 	toggleVal,
 	selectedEmployeeList = () => {},
 	activeTab,
+	rest,
 }) => {
+	const { mean_rating, standard_deviation } = rest || {};
+
 	const columns = [
 		{
 			id     : 'select_options',
@@ -109,6 +115,19 @@ const getColumns = ({
 					{startCase(item?.average_rating) || '-'}
 				</div>
 			),
+		},
+
+		{
+			Header   : 'Z-Score',
+			accessor : (item) => {
+				const zScore = ((item?.final_rating || DEFAULT_FINAL_RAING) - mean_rating) / standard_deviation;
+
+				return (
+					<div>
+						{Math.round(zScore * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+					</div>
+				);
+			},
 		},
 	];
 

@@ -22,6 +22,7 @@ function RenderStyledTable({
 	selectedEmployeeList,
 	toggleVal,
 	activeTab,
+	rest,
 
 }) {
 	const columns = getColumns({
@@ -36,6 +37,7 @@ function RenderStyledTable({
 		selectedEmployeeList,
 		toggleVal,
 		activeTab,
+		rest,
 
 	});
 
@@ -52,7 +54,7 @@ function RenderStyledTable({
 }
 
 function RenderVerticalHeadComponent({
-	list,
+	data,
 	setSelectedEmployees,
 	selectedEmployees,
 	level,
@@ -62,6 +64,8 @@ function RenderVerticalHeadComponent({
 	activeTab,
 	getRatingApiLoading,
 }) {
+	const { list, ...rest } = data || {};
+
 	const {
 		onClickCheckbox,
 		onClickHeaderCheckbox, selectedEmployeeList,
@@ -90,7 +94,7 @@ function RenderVerticalHeadComponent({
 	}
 
 	return (list || []).map((element) => {
-		const { details:employee_list, label } = element || {};
+		const { details: employee_list, label } = element || {};
 
 		return (
 			<div key={label} className={styles.single_accordian}>
@@ -110,6 +114,7 @@ function RenderVerticalHeadComponent({
 						setShow={setShow}
 						selectedEmployeeList={selectedEmployeeList}
 						activeTab={activeTab}
+						rest={rest}
 
 					/>
 				</Accordion>

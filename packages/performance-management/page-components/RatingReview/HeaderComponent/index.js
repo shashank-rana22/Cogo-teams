@@ -69,7 +69,7 @@ function HeaderComponent({ props = {} }) {
 			</div>
 
 			<RenderVerticalHeadComponent
-				list={data}
+				data={data}
 				setSelectedEmployees={setSelectedEmployees}
 				selectedEmployees={selectedEmployees}
 				level={level}
