@@ -68,7 +68,7 @@ const filterCommonControls = [
 		params    : {
 			page_limit : 100,
 			filters    : {
-				partner_id : geo.uuid.parent_entity_id,
+				partner_id : geo?.uuid?.parent_entity_id,
 				status     : 'active',
 			},
 		},
