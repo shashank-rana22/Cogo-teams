@@ -6,14 +6,14 @@ import getControls from '../utils/getControls';
 
 import styles from './styles.module.css';
 
-const keysToShow = [
+const KEYS_TO_SHOW = [
+	{ title: 'Container Size', key: 'container_size' },
+	{ title: 'Containers Count', key: 'containers_count' },
+	{ title: 'Container Type', key: 'container_type' },
 	{ title: 'Commodity', key: 'commodity' },
-	{ title: 'Inco Term', key: 'inco_term' },
-	{ title: 'Packages Count', key: 'packages_count' },
-	{ title: 'Total Volume(cbm)', key: 'volume' },
-	{ title: 'Total Weight(kgs)', key: 'weight' },
-	{ title: 'BL Type', key: 'bl_type' },
-	{ title: 'BLs Count', key: 'bls_count' },
+	{ title: 'Trade Type', key: 'trade_type' },
+	{ title: 'Packing Type', key: 'packing_type' },
+	{ title: 'Container Weight(Mt)', key: 'cargo_weight_per_container' },
 ];
 
 function renderValue(key, value) {
@@ -40,7 +40,7 @@ export default forwardRef(({ service }, ref) => {
 
 	return (
 		<div>
-			{keysToShow.map(({ key, title }) => {
+			{KEYS_TO_SHOW.map(({ key, title }) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
 					<div key={key} className={styles.form_element}>
@@ -49,14 +49,16 @@ export default forwardRef(({ service }, ref) => {
 								<div className={styles.label}>
 									<div>{label}</div>
 								</div>
-								<InputController
-									className={styles.value}
-									name={name}
-									control={control}
-									{...rest}
-								/>
-								{errors[name]
+								<div className={styles.field_container}>
+									<InputController
+										className={styles.value}
+										name={name}
+										control={control}
+										{...rest}
+									/>
+									{errors[name]
                                     && <div className={styles.error}>{errors[name].message}</div>}
+								</div>
 							</>
 						) : (
 							<>
