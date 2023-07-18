@@ -2,7 +2,7 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useEnrichmentResponse = ({ activeTab = 'user' }) => {
+const useListEnrichmentResponses = ({ activeTab = 'user' }) => {
 	const router = useRouter();
 
 	const { query = {} } = router;
@@ -10,11 +10,10 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 	const { action_type:actionType = '', id:feedback_request_id } = query;
 
 	const [params, setParams] = useState({
-		sort_type  : 'desc',
-		sort_by    : 'created_at',
-		page       : 1,
-		page_limit : 4,
-		filters    : {
+		sort_type : 'asc',
+		sort_by   : 'created_at',
+		page      : 1,
+		filters   : {
 			feedback_request_id,
 			response_type: 'user',
 		},
@@ -28,14 +27,7 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 		params,
 	}, { manual: false });
 
-	const { list = [], ...paginationData } = data || {};
-
-	const getNextPage = (newPage) => {
-		setParams((previousParams) => ({
-			...previousParams,
-			page: newPage,
-		}));
-	};
+	const { list = [] } = data || {};
 
 	useEffect(() => {
 		setParams((prev) => ({
@@ -45,17 +37,16 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 				response_type: activeTab === 'address' ? ['address', 'billing_address'] : activeTab,
 			},
 		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return {
-		list,
+		data             : list,
 		refetchResponses : refetch,
 		loadingResponses : loading,
 		setParams,
 		actionType,
-		getNextPage,
-		paginationData,
 	};
 };
 
-export default useEnrichmentResponse;
+export default useListEnrichmentResponses;

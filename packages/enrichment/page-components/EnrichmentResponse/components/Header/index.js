@@ -10,16 +10,16 @@ import styles from './styles.module.css';
 const FIRST_INDEX = 1;
 
 function Header() {
-	const { data = {}, loading } = useHeaderStats();
+	const { data = {}, loading = false } = useHeaderStats();
 
 	const { lead_organization, organization } = data;
 
 	const sourceOrganization = getSourceOrganizationData({ lead_organization, organization });
 
-	const { business_name, serial_id = '' } = sourceOrganization;
+	const { business_name = '', serial_id = '' } = sourceOrganization || {};
 
-	const str = business_name || '';
-	const avatarName = `${str.split(' ')[GLOBAL_CONSTANTS.zeroth_index]} ${str.split(' ')[FIRST_INDEX] || ''}`;
+	const avatarName = `${business_name.split(' ')[GLOBAL_CONSTANTS.zeroth_index]}
+	 ${business_name.split(' ')[FIRST_INDEX] || ''}`;
 
 	if (loading) {
 		return <div className={styles.card}><Placeholder width="500px" height="64px" /></div>;
@@ -27,8 +27,11 @@ function Header() {
 
 	return (
 		<div className={styles.card}>
+
 			<Avatar personName={avatarName || '--'} size="72px" />
+
 			<div className={styles.details}>
+
 				<span>
 					<span className={styles.label}>	Organization Name:</span>
 					<span className={styles.name}>{startCase(business_name || '--')}</span>

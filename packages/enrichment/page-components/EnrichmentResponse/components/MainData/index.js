@@ -1,8 +1,10 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
+import TAB_OPTION_MAPPING from '../../configurations/tab_options_mapping';
 import useEnrichmentResponse from '../../hooks/useEnrichmentResponse';
-import TAB_OPTION_MAPPING from '../../utils/tab_options_mapping';
+
+import ContainerComponent from './ContainerComponent';
 
 function MainData() {
 	const [activeTab, setActiveTab] = useState('user');
@@ -10,10 +12,12 @@ function MainData() {
 	const options = Object.values(TAB_OPTION_MAPPING);
 
 	const {
-		data = [],
+		list = [],
 		refetchResponses = () => {},
 		loadingResponses = false,
 		actionType = '',
+		getNextPage = () => {},
+		paginationData = {},
 	} = useEnrichmentResponse({ activeTab });
 
 	return (
@@ -24,9 +28,7 @@ function MainData() {
 				themeType="primary"
 			>
 				{(options || []).map((option) => {
-					const { key = '', title = '', icon:Icon, containerComponent: ContainerComponent = null } = option;
-
-					if (!ContainerComponent) return null;
+					const { key = '', title = '', icon: Icon } = option;
 
 					return (
 						<TabPanel
@@ -36,10 +38,13 @@ function MainData() {
 							title={title}
 						>
 							<ContainerComponent
-								data={data}
+								list={list}
 								actionType={actionType}
 								refetchResponses={refetchResponses}
 								loadingResponses={loadingResponses}
+								activeTab={activeTab}
+								paginationData={paginationData}
+								getNextPage={getNextPage}
 							/>
 						</TabPanel>
 					);
