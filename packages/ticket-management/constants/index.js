@@ -4,19 +4,35 @@ export const STATUS_MAPPING = {
 	resolve_requested : 'pending',
 	closed            : 'closed',
 	rejected          : 'closed',
-	overdue           : 'closed',
+	overdue           : 'overdue',
 	unresolved        : 'open',
 	escalated         : 'escalated',
 };
 
-export const ACTION_KEYS = {
-	unresolved: {
-		label : 'Resolve',
-		name  : 'resolve',
+export const STATUS_TYPE_MAPPING = {
+	resolve: {
+		Status : 'resolved',
+		Type   : 'mark_as_resolved',
 	},
-	closed: {
-		label : 'Reopen',
-		name  : 'reopen',
+	resolve_request: {
+		Status : 'resolve_requested',
+		Type   : 'resolve_requested',
+	},
+	approve: {
+		Status : 'resolved',
+		Type   : 'mark_as_resolved',
+	},
+	reject: {
+		Status : 'unresolved',
+		Type   : 'resolution_rejected',
+	},
+	reopen: {
+		Status : 'reopened',
+		Type   : 'reopened',
+	},
+	escalate: {
+		Status : 'escalated',
+		Type   : 'escalated',
 	},
 };
 
@@ -24,7 +40,7 @@ export const TICKET_SECTION_MAPPING = {
 	Open: {
 		Statuses: 'unresolved',
 	},
-	Pending: {
+	'Closure Pending': {
 		Statuses: 'pending,reject_requested,resolve_requested',
 	},
 	Escalated: {
@@ -52,19 +68,19 @@ export const TICKET_OPEN_STATUS = [
 
 export const STATUS_LABEL_MAPPING = {
 	open: {
-		label : 'Open',
+		label : 'OPEN',
 		color : '#D6B300',
 	},
 	closed: {
-		label : 'Closed',
-		color : '#BDBDBD',
+		label : 'CLOSED',
+		color : '#009900',
 	},
-	rejected: {
-		label : 'Rejected!!',
-		color : '#F37166',
+	overdue: {
+		label : 'OVERDUE',
+		color : '#8d99ae',
 	},
 	pending: {
-		label : 'Pending',
+		label : 'PENDING',
 		color : '#F68B21',
 	},
 	escalated: {
@@ -78,3 +94,11 @@ export const PRIORITY_MAPPING = {
 	medium : 'medium',
 	low    : 'low',
 };
+
+export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
+
+export const SPECTATOR_TYPE_OPTIONS = [
+	{ label: 'Tickets raised by me', value: 'agent' },
+	{ label: 'Tickets assigned to me', value: 'reviewer' },
+	{ label: 'Closure Authorizer', value: 'closure_authorizer' },
+];

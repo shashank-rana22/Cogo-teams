@@ -13,27 +13,31 @@ const HONORIFICS_OPTIONS = [
 		label : 'Ms.',
 		value : 'Ms.',
 	},
+	{
+		label : 'Dr.',
+		value : 'Dr.',
+	},
 ];
 
 const RELATION_TYPE_OPTIONS = [
 	{
-		label : 'Son of',
-		value : 'Son of',
+		label : 'Father',
+		value : 'Father',
 	},
 	{
-		label : 'Daughter of',
-		value : 'Daughter of',
+		label : 'Mother',
+		value : 'Mother',
 	},
 	{
-		label : 'Wife of',
-		value : 'Wife of',
+		label : 'Husband',
+		value : 'Husband',
 	},
 ];
 
 const controls = () => [
 	{
 		name        : 'name_title',
-		label       : 'Honorifics',
+		label       : 'Honorifics*',
 		type        : 'select',
 		options     : HONORIFICS_OPTIONS,
 		placeholder : 'Honorifics',
@@ -41,7 +45,7 @@ const controls = () => [
 	},
 	{
 		name        : 'name',
-		label       : 'Name',
+		label       : 'Name*',
 		type        : 'input',
 		placeholder : 'First Name',
 		disabled    : true,
@@ -49,7 +53,7 @@ const controls = () => [
 	},
 	{
 		name        : 'relation_type',
-		label       : 'Relation Type',
+		label       : 'Relation with you*',
 		type        : 'select',
 		placeholder : 'Relation',
 		options     : RELATION_TYPE_OPTIONS,
@@ -57,14 +61,14 @@ const controls = () => [
 	},
 	{
 		name        : 'relation_person_name',
-		label       : 'Relation Person Name',
+		label       : 'Name of relative*',
 		type        : 'input',
 		placeholder : 'Full Name',
 		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'gender',
-		label       : 'Gender',
+		label       : 'Gender*',
 		type        : 'select',
 		placeholder : 'Select Gender',
 		rules       : { required: 'This is required' },
@@ -82,7 +86,7 @@ const controls = () => [
 	},
 	{
 		name        : 'designation',
-		label       : 'Employee Designation',
+		label       : 'Employee Designation*',
 		type        : 'input',
 		disabled    : true,
 		placeholder : 'Employee Designation',
@@ -90,7 +94,7 @@ const controls = () => [
 	},
 	{
 		name                  : 'date_of_birth',
-		label                 : 'Date of Birth',
+		label                 : 'Date of Birth*',
 		type                  : 'date-select',
 		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'].toUpperCase(),
 		isPreviousDaysAllowed : true,
@@ -98,7 +102,7 @@ const controls = () => [
 	},
 	{
 		name                  : 'date_of_joining',
-		label                 : 'Date of Joining',
+		label                 : 'Date of Joining*',
 		type                  : 'date-select',
 		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'].toUpperCase(),
 		disable               : true,
@@ -107,14 +111,14 @@ const controls = () => [
 	},
 	{
 		name        : 'mobile_number',
-		label       : 'Phone Number',
+		label       : 'Phone Number*',
 		type        : 'mobilenumber',
 		placeholder : 'Mobile',
 		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'personal_email',
-		label       : 'Personal Email Id',
+		label       : 'Personal Email Id*',
 		type        : 'email',
 		disabled    : true,
 		placeholder : 'Email',
@@ -122,14 +126,14 @@ const controls = () => [
 	},
 	{
 		name        : 'emergency_contact_details',
-		label       : 'Emergency Contact Number',
+		label       : 'Relative contact number*',
 		type        : 'mobilenumber',
 		placeholder : 'Number',
 		rules       : { required: 'This is required' },
 	},
 	{
 		name    : 'passport_size_photo_url',
-		label   : 'Passport Size Photograph',
+		label   : 'Passport Size Photograph*',
 		type    : 'fileUpload',
 		accept  : '.png,.jpg,.jpeg,',
 		maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],

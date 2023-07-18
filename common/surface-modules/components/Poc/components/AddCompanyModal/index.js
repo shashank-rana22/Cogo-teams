@@ -1,4 +1,6 @@
-import { Button, Modal, RadioGroup, Select } from '@cogoport/components';
+import { Button, Modal, RadioGroup, Select, Input } from '@cogoport/components';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
@@ -11,16 +13,22 @@ import getCreateTradePartnerParams from './helpers/getCreateTradePartnerParams';
 import styles from './styles.module.css';
 import tradePartyTypeMapping from './tradePartyTypeMapping';
 
+const HISTORICAL = 'historical';
+const SHIPPER = 'shipper';
 function AddCompanyModal({
 	tradePartnersData = {},
 	addCompany = {},
 	setAddCompany = () => {},
 	tradePartnerTrigger = () => {},
-	shipment_id,
-	importer_exporter_id,
+	shipment_id = '',
+	shipment_type = '',
+	importer_exporter_id = '',
+	country_id = '',
 }) {
 	const formRef = useRef(null);
 	const { trade_party_type = '', organization_id } = addCompany || {};
+
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [role, setRole] = useState(trade_party_type);
 	const [companyType, setCompanyType] = useState('trade_partner');
@@ -58,12 +66,20 @@ function AddCompanyModal({
 	};
 
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
-
+	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL
+		&& shipment_type === 'ftl_freight';
 	return (
-		<Modal show={!isEmpty(addCompany)} placement="top" size="lg" onClose={onClose}>
+		<Modal
+			show={!isEmpty(addCompany)}
+			placement="top"
+			size={shipment_type === 'ftl_freight' ? 'xl' : 'lg'}
+			onClose={onClose}
+		>
 			<Modal.Header title="Add Company" />
 
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Body
+				className={styles.modal_head_container}
+			>
 				<div className={styles.modal_body_container}>
 					<div className={styles.role_container}>
 						<label>Role</label>
@@ -83,16 +99,32 @@ function AddCompanyModal({
 							value={companyType}
 						/>
 					</div>
+					<div className={styles.input_container}>
+						{isShipperHistorical && (
+							<Input
+								placeholder="Pincode, PAN, Name, TAX Number"
+								type="search"
+								size="sm"
+								suffix={<IcMSearchlight />}
+								onChange={(e) => debounceQuery(e)}
+							/>
+						)}
+					</div>
+					<div className={styles.form_container}>
 
-					<Form
-						companyType={companyType}
-						tradePartyType={role}
-						tradePartnersData={tradePartnersData}
-						ref={formRef}
-						importer_exporter_id={importer_exporter_id}
-						shipment_id={shipment_id}
-						organization_id={organization_id}
-					/>
+						<Form
+							companyType={companyType}
+							tradePartyType={role}
+							tradePartnersData={tradePartnersData}
+							ref={formRef}
+							importer_exporter_id={importer_exporter_id}
+							shipment_id={shipment_id}
+							shipment_type={shipment_type}
+							country_id={country_id}
+							organization_id={organization_id}
+							query={query}
+						/>
+					</div>
 				</div>
 
 			</Modal.Body>

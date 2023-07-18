@@ -1,10 +1,19 @@
 import { Tooltip } from '@cogoport/components';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase, upperCase, isEmpty } from '@cogoport/utils';
+
+const UNIT_ELEMENT = 1;
+const DECIMAL_UPTO_SECOND_PLACE = 2;
 
 export const renderValue = (label, detail) => {
-	const { packages = [] } = detail || {};
+	const {
+		packages = [],
+		weight = '', volume = '',
+	} = detail || {};
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const valueForInput = Array.isArray(packages)
+	&& !isEmpty(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -19,7 +28,7 @@ export const renderValue = (label, detail) => {
 	const keysForPackages = Array(packages.length).fill(null).map(() => Math.random());
 
 	const packageDetails = () => {
-		if (packages?.length > 1) {
+		if (packages?.length > UNIT_ELEMENT) {
 			return (
 				<Tooltip
 					placement="bottom"
@@ -37,7 +46,7 @@ export const renderValue = (label, detail) => {
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
+						{`Package: ${inputValue} + ${packages.length - UNIT_ELEMENT
 						} more`}
 
 					</div>
@@ -77,7 +86,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.containers_count === 1) {
+			if (detail.containers_count === UNIT_ELEMENT) {
 				return '1 Container';
 			}
 
@@ -87,7 +96,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.packages_count === 1) {
+			if (detail.packages_count === UNIT_ELEMENT) {
 				return '1 Package';
 			}
 
@@ -97,7 +106,7 @@ export const renderValue = (label, detail) => {
 				return null;
 			}
 
-			if (detail.trucks_count === 1) {
+			if (detail.trucks_count === UNIT_ELEMENT) {
 				return '1 Truck';
 			}
 
@@ -115,7 +124,7 @@ export const renderValue = (label, detail) => {
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (isEmpty(packages)) {
 				return null;
 			}
 			return packageDetails();
@@ -167,11 +176,15 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${detail?.buy_quotation_agreed_rates.toFixed(DECIMAL_UPTO_SECOND_PLACE)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.delivery_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'container_load_type':
 			return startCase(detail?.container_load_type);
 		case 'truck_number':
@@ -179,9 +192,24 @@ export const renderValue = (label, detail) => {
 		case 'driver_details':
 			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
 		case 'estimated_departure':
-			return format(detail?.estimated_departure, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.estimated_departure,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
 		case 'estimated_arrival':
-			return format(detail?.estimated_arrival, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.estimated_arrival,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
+		case 'weight':
+			return ` ${weight} ${'Ton'}`;
+		case 'volume':
+			return ` ${volume} ${'Cbm'}`;
+		case 'trip_type':
+			return detail?.trip_type ? startCase(detail?.trip_type) : null;
+
 		default:
 			return detail[label] || null;
 	}

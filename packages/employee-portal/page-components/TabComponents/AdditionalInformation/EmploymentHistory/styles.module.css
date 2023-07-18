@@ -10,6 +10,18 @@
 	margin-bottom: 10px;
 }
 
+.check {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+
+	:global {
+		.ui_checkbox_container {
+			padding-left: 0;
+		}
+	}
+}
+
 .sup {
 	color: #cb6464;
 }

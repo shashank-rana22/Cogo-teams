@@ -1,6 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import { isEmpty } from '@cogoport/utils';
 
 import Card from './Card';
 import Header from './Header';
@@ -46,7 +47,8 @@ function List() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{tasksList?.length === 0 ? <EmptyState width={500} height={300} />
+			{isEmpty(tasksList)
+				? <EmptyState width={500} height={300} />
 				: (
 					<>
 
@@ -62,15 +64,16 @@ function List() {
 							</Button>
 						) : null}
 
-						{!selectedTaskId ? (tasksList || []).map((task) => (
-							<Card
-								key={task?.id}
-								task={task}
-								handleClick={handleClick}
-								loading={loading}
-								tasksList={tasksList}
-							/>
-						)) : null}
+						{!selectedTaskId
+							? (tasksList || []).map((task) => (
+								<Card
+									key={task?.id}
+									task={task}
+									handleClick={handleClick}
+									loading={loading}
+									tasksList={tasksList}
+								/>
+							)) : null}
 
 						{selectedTaskId ? (
 							<>
@@ -88,6 +91,7 @@ function List() {
 									taskListRefetch={taskListRefetch}
 									selectedMail={selectedMail}
 									setSelectedMail={setSelectedMail}
+									tasksList={tasksList}
 								/>
 							</>
 						) : null }
