@@ -90,7 +90,7 @@ function VideoCall({
 		} else if (streams.user_stream && streamRef.current.user) {
 			streamRef.current.user.srcObject = streams.user_stream;
 		}
-		if (streams.peer_stream) {
+		if (streams.peer_stream && streamRef.current.peer) {
 			streamRef.current.peer.srcObject = streams.peer_stream;
 		}
 	}, [streams]);
@@ -102,8 +102,6 @@ function VideoCall({
 			}
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
-
-	console.log('stream', streams);
 
 	return (
 		<div>
