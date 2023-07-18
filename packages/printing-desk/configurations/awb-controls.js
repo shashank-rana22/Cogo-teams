@@ -41,7 +41,7 @@ const awbControls = [
 		span        : 6,
 		disabled    : true,
 		rules       : {
-			required : true,
+			required : 'Package Count is Required',
 			validate : (value) => (value <= NEGATIVE_CHECK_VALUE ? 'Should be greater than 0' : true),
 		},
 	},

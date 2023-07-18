@@ -1,9 +1,10 @@
 import { Button, Checkbox, CheckboxGroup } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import { OPTIONS } from '../../../constants/awb-copies-options';
 import useGetMultipleCopiesList from '../../../hooks/useGetMultipleCopiesList';
 
-import multipleCopies from './multipleCopies';
 import styles from './styles.module.css';
 
 const TOTAL_AWB_COPIES = 12;
@@ -27,31 +28,23 @@ function SelectDocumentCopies({
 	copiesOnChange = () => {},
 	setSaveDocument = () => {},
 	handleView = () => {},
-	setViewDoc = () => {},
 	download24 = false,
-	setEdit = () => {},
-	setItem = () => {},
 	setDocCopies = () => {},
-	setEditCopies = () => {},
 	taskItem = {},
 	loading = false,
 }) {
 	const { data } = useGetMultipleCopiesList(taskItem);
-
-	const options = multipleCopies({ data, setEditCopies, setViewDoc, setEdit, setItem });
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		copiesOnChange(event.currentTarget.checked ? DOCUMENT_COPIES : []);
 	};
 
 	useEffect(() => {
-		setDocCopies(null);
 		(copiesValue || []).forEach((copy) => {
 			(data || []).forEach((item) => {
 				if (copy === item?.copyType) {
 					setDocCopies((prev) => (
-						prev ? [...prev, { [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
-							: [{ [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
+						[...prev, { [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
 					));
 				}
 			});
@@ -75,10 +68,10 @@ function SelectDocumentCopies({
 
 	return (
 		<div className={styles.select_copies_container}>
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+			<div className={styles.column_flex}>
 				{getSelectAllCheckbox()}
 				<CheckboxGroup
-					options={options}
+					options={OPTIONS}
 					onChange={copiesOnChange}
 					value={copiesValue}
 				/>
@@ -92,7 +85,7 @@ function SelectDocumentCopies({
 						handleView(download24);
 					}}
 					style={{ marginLeft: 'auto' }}
-					disabled={loading}
+					disabled={loading || isEmpty(copiesValue)}
 				>
 					Download
 				</Button>

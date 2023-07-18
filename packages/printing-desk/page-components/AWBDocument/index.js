@@ -11,7 +11,6 @@ import { FOOTER_VALUES } from '../../constants/footer-values';
 import DownloadDocumentContainer from './DownloadDocumentContainer';
 import SaveDocumentContainer from './SaveDocumentContainer';
 import styles from './styles.module.css';
-import Watermark from './watermark';
 
 function AWBDocument({
 	item = {},
@@ -24,8 +23,6 @@ function AWBDocument({
 	listAPI = () => {},
 	back = false,
 	setBack = () => {},
-	editCopies = '',
-	setEditCopies = () => {},
 }) {
 	const [whiteout, setWhiteout] = useState(false);
 	const [saveDocument, setSaveDocument] = useState(false);
@@ -40,7 +37,7 @@ function AWBDocument({
 		...formData,
 	};
 
-	const { documentType = 'mawb', documentState } = taskItem;
+	const { documentType = 'mawb' } = taskItem;
 
 	const category = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
 
@@ -63,7 +60,6 @@ function AWBDocument({
 								taskItem={taskItem}
 								setViewDoc={setViewDoc}
 								setItem={setItem}
-								setEditCopies={setEditCopies}
 							/>
 						)}
 						<div
@@ -71,9 +67,6 @@ function AWBDocument({
 							id="awb"
 							ref={ref}
 						>
-							{((viewDoc && documentState !== 'document_accepted') || (!viewDoc && editCopies === ''))
-									&& <Watermark text="draft" rotateAngle="315deg" />}
-
 							<div style={{ position: 'relative' }}>
 								<ShipperConsigneeDetails
 									formData={taskItem}
@@ -109,7 +102,6 @@ function AWBDocument({
 							<SaveDocumentContainer
 								back={back}
 								edit={edit}
-								setEdit={setEdit}
 								setBack={setBack}
 								setViewDoc={setViewDoc}
 								saveDocument={saveDocument}
@@ -117,9 +109,8 @@ function AWBDocument({
 								category={category}
 								taskItem={taskItem}
 								formData={formData}
-								editCopies={editCopies}
-								setEditCopies={setEditCopies}
 								listAPI={listAPI}
+								setEdit={setEdit}
 							/>
 						)}
 					</div>

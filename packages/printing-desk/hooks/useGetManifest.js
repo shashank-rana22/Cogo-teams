@@ -11,18 +11,16 @@ const useGetManifest = () => {
 		{ manual: true },
 	);
 
-	const getManifest = useCallback((shipmentId) => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						shipmentId,
-					},
-				});
-			} catch (err) {
-				console.error(err);
-			}
-		})();
+	const getManifest = useCallback(async (shipmentId) => {
+		try {
+			await trigger({
+				params: {
+					shipmentId,
+				},
+			});
+		} catch (err) {
+			console.error(err);
+		}
 	}, [trigger]);
 
 	return {

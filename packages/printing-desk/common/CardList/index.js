@@ -1,4 +1,4 @@
-import { Button, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import { IcMArrowUp, IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { Fragment, useState } from 'react';
@@ -44,27 +44,15 @@ function CardList({
 						{blCategory === 'hawb' && (
 							<div className={styles.accordian_style}>
 								{open === id ? (
-									<Button
-										themeType="linkUi"
-										onClick={() => {
-											setOpen('');
-										}}
-									>
-										Show Less
-										{' '}
-										<IcMArrowUp />
-									</Button>
+									<IcMArrowUp onClick={() => {
+										setOpen('');
+									}}
+									/>
 								) : (
-									<Button
-										themeType="linkUi"
-										onClick={() => {
-											setOpen(id);
-										}}
-									>
-										Show More
-										{' '}
-										<IcMArrowDown />
-									</Button>
+									<IcMArrowDown onClick={() => {
+										setOpen(id);
+									}}
+									/>
 								)}
 							</div>
 						)}

@@ -24,7 +24,6 @@
 
 .footer_button {
 	display: flex;
-	gap: 20px;
 	justify-content: flex-end;
 	padding: 8px;
 	margin-top: 10px;

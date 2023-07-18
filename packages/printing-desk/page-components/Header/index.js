@@ -69,17 +69,15 @@ function Header({
 				/>
 			</div>
 			<div className={styles.filters_container}>
-				<div className={styles.flex}>
-					<Toggle
-						name="stakeholder_id"
-						size="sm"
-						disabled={false}
-						onLabel="Relevent to me"
-						offLabel="All"
-						onChange={() => setRelevantToMe((prev) => !prev)}
-					/>
-					<Filters setFilters={setFilters} filters={filters} />
-				</div>
+				<Toggle
+					name="stakeholder_id"
+					size="sm"
+					disabled={false}
+					onLabel="Relevent to me"
+					offLabel="All"
+					onChange={() => setRelevantToMe((prev) => !prev)}
+				/>
+				<Filters setFilters={setFilters} filters={filters} />
 			</div>
 
 		</header>

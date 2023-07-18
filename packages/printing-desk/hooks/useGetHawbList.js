@@ -11,26 +11,24 @@ const useGetHawbList = (shipmentId) => {
 		{ manual: true },
 	);
 
-	const getHawbList = useCallback(() => {
-		(async () => {
-			const payload = {
-				assignedStakeholder : 'service_ops2_docs',
-				documentState       : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
-				documentType        : ['draft_house_airway_bill'],
-				task                : ['approve_draft_house_airway_bill', 'amend_draft_house_airway_bill'],
-				status              : ['pending', 'completed'],
-				isDocDataRequired   : true,
-				shipmentId,
-				pageSize            : 100,
-			};
-			try {
-				await trigger({
-					params:	payload,
-				});
-			} catch (err) {
-				console.error(err);
-			}
-		})();
+	const getHawbList = useCallback(async () => {
+		const payload = {
+			assignedStakeholder : 'service_ops2_docs',
+			documentState       : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
+			documentType        : ['draft_house_airway_bill'],
+			task                : ['approve_draft_house_airway_bill', 'amend_draft_house_airway_bill'],
+			status              : ['pending', 'completed'],
+			isDocDataRequired   : true,
+			shipmentId,
+			pageSize            : 100,
+		};
+		try {
+			await trigger({
+				params:	payload,
+			});
+		} catch (err) {
+			console.error(err);
+		}
 	}, [shipmentId, trigger]);
 
 	return {

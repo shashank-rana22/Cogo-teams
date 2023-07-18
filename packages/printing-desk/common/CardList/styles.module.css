@@ -25,18 +25,17 @@
 .accordian_style {
 	position: relative;
 	bottom: 20px;
-	min-height: 20px;
-	text-align: center;
-	background: #fffaeb;
+	max-width: 60px;
+	max-height: 16px;
+	margin: auto;
+	background: var(--color-secondary-5);
+	border: 1px solid #eceff8;
+	border-top: none;
 	border-radius: 0 0 5px 5px;
 	box-shadow: 0 5px 10px #0000000d;
 
-	:global {
-		.ui_button_container {
-			min-width: 100px;
-			max-height: 16px;
-			margin: auto;
-			color: var(--color-accent-orange-2);
-		}
+	svg {
+		width: 100%;
+		cursor: pointer;
 	}
 }

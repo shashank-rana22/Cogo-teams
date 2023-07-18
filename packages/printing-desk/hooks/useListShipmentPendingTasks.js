@@ -16,6 +16,15 @@ const AUTH_KEY_MAPPING = {
 	handed_over  : 'get_air_coe_pending_tasks_list',
 };
 
+const PAYLOAD_ITEM = {
+	assignedStakeholder : 'service_ops2_docs',
+	status              : 'completed',
+	task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
+	documentType        : ['draft_airway_bill'],
+	documentState       : 'document_accepted',
+	isDocDataRequired   : true,
+};
+
 const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, relevantToMe }) => {
 	const {
 		user_data: userData,
@@ -36,47 +45,35 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 		{ manual: true },
 	);
 
-	const listAPI = useCallback(() => {
+	const listAPI = useCallback(async () => {
 		const payload = {
 			approved_awb: {
-				assignedStakeholder  : 'service_ops2_docs',
-				status               : 'completed',
-				task                 : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
-				documentType         : ['draft_airway_bill'],
-				documentState        : 'document_accepted',
+				...PAYLOAD_ITEM,
 				handedOverAtOriginAt : new Date().toISOString(),
-				isDocDataRequired    : true,
 				handedOverForTd      : false,
 
 			},
 			handed_over: {
-				assignedStakeholder : 'service_ops2_docs',
-				status              : 'completed',
-				task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
-				documentType        : ['draft_airway_bill'],
-				documentState       : 'document_accepted',
-				isDocDataRequired   : true,
-				handedOverForTd     : true,
+				...PAYLOAD_ITEM,
+				handedOverForTd: true,
 			},
 		};
 
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						q       : (query || '').trim() || undefined,
-						filters : {
-						},
-						...filter,
-						...payload[activeTab],
-						stakeholderId : relevantToMe ? userData.user.id : undefined,
-						pageIndex     : page,
+		try {
+			await trigger({
+				params: {
+					q       : (query || '').trim() || undefined,
+					filters : {
 					},
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
+					...filter,
+					...payload[activeTab],
+					stakeholderId : relevantToMe ? userData.user.id : undefined,
+					pageIndex     : page,
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [activeTab, filter, page, query, relevantToMe, trigger, userData.user.id]);
 
 	useEffect(() => {

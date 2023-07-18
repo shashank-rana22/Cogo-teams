@@ -25,9 +25,9 @@ export const handedOverFields = {
 		},
 		{
 			key   : 'handoverDate',
-			label : '',
+			label : 'Handover Date',
 			span  : 2,
-			func  : 'handleHandDate',
+			func  : 'handleHandoverDate',
 		},
 		{
 			key   : 'download',

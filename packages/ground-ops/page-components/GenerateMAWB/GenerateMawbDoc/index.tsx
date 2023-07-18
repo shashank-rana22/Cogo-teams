@@ -54,7 +54,13 @@ const DOWNLOAD_BUTTON = {
 	document_amendment_requested : 'Download',
 };
 
-const includeTnC = ['original_3', 'original_2', 'original_1'];
+const INCLUDE_TNC = ['original_3', 'original_2', 'original_1'];
+
+const ZERO_COORDINATE = 0;
+const UPDATE_CHECK_INDEX = 1;
+const PDF_HEIGHT_ADJUST_VALUE = 14;
+const PDF_SCALE = 4.5;
+const TWELEVE_COPIES_LAST_INDEX = 1;
 
 function GenerateMawb({
 	taskItem = {},
@@ -213,23 +219,30 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
 				(docCopies || copiesValue || []).forEach((item, i) => {
-					pdf.addImage(Object.values(item)[1] === 'updated'
+					pdf.addImage(Object.values(item)[UPDATE_CHECK_INDEX] === 'updated'
 						? `${Object.values(item)[GLOBAL_CONSTANTS.zeroth_index]}`
-						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+						: imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index]]
-							|| footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(
+							footerImages[Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index]]
+							|| footerImages[item],
+							'jpeg',
+							ZERO_COORDINATE,
+							pdfHeight - PDF_HEIGHT_ADJUST_VALUE,
+							pdfWidth,
+							PDF_SCALE,
+						);
 					}
 
 					if (download24) {
-						if (includeTnC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
+						if (INCLUDE_TNC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
-							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+							pdf.addImage(backPage, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 						} else {
 							pdf.addPage();
 						}
 					}
-					if (i < copiesValue.length - 1) {
+					if (i < copiesValue.length - TWELEVE_COPIES_LAST_INDEX) {
 						pdf.addPage();
 					}
 				});
@@ -241,7 +254,7 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+				pdf.addImage(imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
 			});
 		}

@@ -18,6 +18,8 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 		Object.keys(formValues).forEach((key) => {
 			if (formValues[key] === '') {
 				FINAL_VALUES[key] = undefined;
+			} else if (key === 'cargoHandedOverAtOriginAt') {
+				FINAL_VALUES[key] = new Date(formValues[key]).toISOString();
 			} else {
 				FINAL_VALUES[key] = formValues[key];
 			}
@@ -39,7 +41,14 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 			<>
 				<Layout fields={filterControls} control={control} errors={errors} />
 				<div className={styles.footer_button}>
-					<Button themeType="secondary" onClick={() => handleClear()}>Clear</Button>
+					<Button
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => handleClear()}
+					>
+						Clear
+
+					</Button>
 					<Button onClick={handleSubmit(onSubmit)}>Apply</Button>
 				</div>
 			</>

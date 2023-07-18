@@ -37,10 +37,10 @@ const filterControls = [
 		span        : 6,
 	},
 	{
-		name                  : 'deadline',
+		name                  : 'cargoHandedOverAtOriginAt',
 		type                  : 'date_picker',
-		label                 : 'Due Date',
-		placeholder           : 'Due Date',
+		label                 : 'Handover Date',
+		placeholder           : 'Handover Date',
 		isPreviousDaysAllowed : true,
 		span                  : 6,
 	},

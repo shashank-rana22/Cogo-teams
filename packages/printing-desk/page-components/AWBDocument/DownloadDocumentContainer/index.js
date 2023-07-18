@@ -1,5 +1,6 @@
-import { Button, Checkbox, Popover } from '@cogoport/components';
+import { cl, Button, Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -37,14 +38,13 @@ function DownloadDocumentContainer({
 	taskItem = {},
 	setViewDoc = () => {},
 	setItem = () => {},
-	setEditCopies = () => {},
 }) {
-	const [docCopies, setDocCopies] = useState(null);
+	const [docCopies, setDocCopies] = useState([]);
 	const [copiesValue, copiesOnChange] = useState([]);
 
 	const {
 		document_number: documentNumber, awbNumber, documentType, shipmentId, pendingShipmentId,
-		documentState, documentId, serviceId,
+		documentState, documentId, serviceId, blCategory,
 	} = taskItem || {};
 
 	const { handleUpload } = useGetMediaUrl();
@@ -84,7 +84,9 @@ function DownloadDocumentContainer({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
-				(docCopies || copiesValue || []).forEach((itm, i) => {
+				const copiesArray = isEmpty(docCopies) ? copiesValue : docCopies;
+
+				(copiesArray || []).forEach((itm, i) => {
 					pdf.addImage(Object.values(itm)[UPDATE_CHECK_INDEX] === 'updated'
 						? `${Object.values(itm)[GLOBAL_CONSTANTS.zeroth_index]}`
 						: imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
@@ -101,7 +103,7 @@ function DownloadDocumentContainer({
 					}
 
 					if (download24) {
-						if (INCLUDE_TNC.includes(Object.keys(itm)[GLOBAL_CONSTANTS.zeroth_index] || itm)) {
+						if (INCLUDE_TNC.includes(itm)) {
 							pdf.addPage();
 							pdf.addImage(BACK_PAGE, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 						} else {
@@ -124,14 +126,16 @@ function DownloadDocumentContainer({
 				pdf.save(category === 'hawb' ? documentNumber : awbNumber);
 			});
 		}
-		handleSave();
+		if (blCategory === 'hawb') {
+			handleSave();
+		}
 	};
 
 	return (
 		<div className={styles.download_button_div}>
-			<div style={{ marginRight: '36px', display: 'flex', alignItems: 'center' }}>
+			<div className={styles.button_flex}>
 				{documentState === 'document_accepted' && (
-					<div className={styles.flex} style={{ alignItems: 'center', margin: '0 8px' }}>
+					<div className={cl`${styles.flex} ${styles.whiteout}`}>
 						<Checkbox
 							label="Whiteout"
 							value={whiteout}
@@ -150,7 +154,6 @@ function DownloadDocumentContainer({
 									setEdit={setEdit}
 									setItem={setItem}
 									setDocCopies={setDocCopies}
-									setEditCopies={setEditCopies}
 									taskItem={taskItem}
 									loading={loading}
 									download24
@@ -182,7 +185,6 @@ function DownloadDocumentContainer({
 									download24={false}
 									setItem={setItem}
 									setDocCopies={setDocCopies}
-									setEditCopies={setEditCopies}
 									taskItem={taskItem}
 									loading={loading}
 								/>

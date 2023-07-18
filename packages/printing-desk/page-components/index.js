@@ -20,9 +20,8 @@ function PrintingDesk() {
 	const [item, setItem] = useState({});
 	const [viewDoc, setViewDoc] = useState(false);
 	const [edit, setEdit] = useState(false);
-	const [editCopies, setEditCopies] = useState('');
 
-	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
+	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || undefined;
 
 	const {
 		data, loading, page,
@@ -65,19 +64,17 @@ function PrintingDesk() {
 					edit={edit}
 					setEdit={setEdit}
 					setItem={setItem}
-					editCopies={editCopies}
-					setEditCopies={setEditCopies}
 				/>
 			)}
 
-			<EditAWB
-				item={item}
-				edit={edit}
-				setEdit={setEdit}
-				listAPI={listAPI}
-				editCopies={editCopies}
-				setEditCopies={setEditCopies}
-			/>
+			{edit && (
+				<EditAWB
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+					listAPI={listAPI}
+				/>
+			)}
 		</div>
 	);
 }

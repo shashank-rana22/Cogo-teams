@@ -1,7 +1,14 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen, IcMDownload, IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
+
+const BL_MAPPING = {
+	draft_airway_bill       : 'MAWB',
+	draft_house_airway_bill : 'HAWB',
+};
 
 const commonFunctions = ({
 	setViewDoc = () => {},
@@ -48,7 +55,15 @@ const commonFunctions = ({
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMEyeopen fill="var(--color-accent-orange-2)" />
+				<div className={styles.tooltip_container}>
+					<Tooltip
+						content={`Preview ${BL_MAPPING[singleItem?.documentType]}`}
+						placement="right"
+						interactive
+					>
+						<IcMEyeopen fill="var(--color-accent-orange-2)" />
+					</Tooltip>
+				</div>
 			</Button>
 		),
 		handleDownloadManifest: (singleItem) => (
@@ -71,9 +86,24 @@ const commonFunctions = ({
 					themeType="linkUi"
 					onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
 				>
-					<IcMEdit fill="var(--color-accent-orange-2)" />
+					<div className={styles.tooltip_container}>
+						<Tooltip
+							content={`Edit ${BL_MAPPING[singleItem?.documentType]}`}
+							placement="right"
+							interactive
+						>
+							<IcMEdit fill="var(--color-accent-orange-2)" />
+						</Tooltip>
+					</div>
 				</Button>
 			)
+		),
+		handleHandoverDate: (singleItem) => (
+			formatDate({
+				date       : singleItem?.cargoHandedOverAtOriginAt,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			})
 		),
 	}
 	);

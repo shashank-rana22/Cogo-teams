@@ -13,8 +13,6 @@ function EditAWB({
 	edit = false,
 	setEdit = () => {},
 	listAPI = () => {},
-	editCopies = '',
-	setEditCopies = () => {},
 }) {
 	const [preview, setPreview] = useState(false);
 	const [formData, setFormData] = useState({});
@@ -26,7 +24,6 @@ function EditAWB({
 	const onSubmit = (value) => {
 		setFormData(value);
 		setPreview(true);
-		setEdit(false);
 	};
 
 	useEffect(() => {
@@ -34,8 +31,8 @@ function EditAWB({
 			...item,
 			...item?.documentData,
 		};
-		awbControls.forEach((c) => {
-			setValue(c.name, taskItem[c.name]);
+		awbControls.forEach((ctrl) => {
+			setValue(ctrl.name, taskItem[ctrl.name]);
 		});
 	}, [item, setValue]);
 
@@ -79,8 +76,6 @@ function EditAWB({
 					setBack={setPreview}
 					setEdit={setEdit}
 					listAPI={listAPI}
-					editCopies={editCopies}
-					setEditCopies={setEditCopies}
 				/>
 			)}
 		</>

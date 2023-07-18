@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import React from 'react';
 
-import useUpdateIndividualEditing from '../../../hooks/useUpdateIndividualEditing';
 import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
 import getFileObject from '../../../utils/getFileObject';
 import useGetMediaUrl from '../../../utils/useGetMediaUrl';
@@ -20,18 +19,11 @@ function SaveDocumentContainer({
 	category = 'mawb',
 	taskItem = {},
 	formData = {},
-	editCopies = '',
-	setEditCopies = () => {},
 	listAPI = () => {},
 }) {
-	const {
-		id, documentId, documentType = 'mawb',
-		serviceId, shipment_id: pendingShipmentId, shipmentId, documentNumber,
-	} = taskItem;
+	const { documentId, serviceId, shipment_id: pendingShipmentId, shipmentId } = taskItem;
 
 	const { updateShipment, loading } = useUpdateShipmentDocument({ listAPI });
-
-	const { updateIndividualEditing } = useUpdateIndividualEditing({ setEdit });
 
 	const { handleUpload } = useGetMediaUrl();
 
@@ -55,35 +47,11 @@ function SaveDocumentContainer({
 			documentUrl  : res || undefined,
 		};
 
-		const individualCopyPayload = {
-			id,
-			documentId,
-			documentType: documentType === 'draft_airway_bill'
-				? 'draftairway_bill' : 'draft_house_airway_bill',
-			documentNumber,
-			data: {
-				...formData,
-				status          : 'generated',
-				document_number : documentNumber,
-				service_id      : serviceId,
-				service_type    : 'air_freight_service',
-			},
-			documentUrl: res || undefined,
-		};
-
-		if (editCopies) {
-			updateIndividualEditing(individualCopyPayload).then(() => {
-				setViewDoc(false);
-				setBack(false);
-				setEditCopies('');
-				listAPI();
-			});
-		} else {
-			updateShipment({ payload }).then(() => {
-				setViewDoc(false);
-				setBack(false);
-			});
-		}
+		updateShipment({ payload }).then(() => {
+			setViewDoc(false);
+			setBack(false);
+			setEdit(false);
+		});
 
 		setSaveDocument(false);
 	};

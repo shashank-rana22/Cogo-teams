@@ -22,7 +22,7 @@ function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdi
 
 	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(shipmentId);
 
-	const finalHawbFields = [...fields, documentData?.handedOverForTd && EDIT_HAWB];
+	const finalHawbFields = [...fields, documentData?.handedOverForTd ? EDIT_HAWB : {}];
 
 	useEffect(() => {
 		listAPI();
@@ -33,15 +33,18 @@ function HawbList({ data = {}, setViewDoc = () => {}, setItem = () => {}, setEdi
 			{loading ? <Loader /> : (
 				<div className={styles.hawb_list}>
 					<header className={styles.header}>
-						{finalHawbFields.map((field) => (
-							<div
-								className={styles.col}
-								style={{ '--span': field.span || CONSTANTS.DEFAULT_SPAN }}
-								key={field.key}
-							>
-								{ field.label }
-							</div>
-						))}
+						{finalHawbFields.map((field) => {
+							const { span = 1, label = '' } = field || {};
+							return (
+								<div
+									className={styles.col}
+									style={{ '--span': span || CONSTANTS.DEFAULT_SPAN }}
+									key={field.key}
+								>
+									{ label }
+								</div>
+							);
+						})}
 					</header>
 					{(hawbData?.data?.shipmentPendingTasks || []).map((item) => (
 						<HawbListItem
