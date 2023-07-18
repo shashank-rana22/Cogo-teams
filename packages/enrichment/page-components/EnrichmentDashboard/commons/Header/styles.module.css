@@ -16,3 +16,8 @@
 		margin-top: 12px;
 	}
 }
+
+.button {
+	margin-left: 12px;
+	cursor: pointer;
+}

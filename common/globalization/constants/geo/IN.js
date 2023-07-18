@@ -551,15 +551,6 @@ export default {
 			allowed_to_create_enrichment_requests : false,
 			tabs                                  : ['manual_enrichment', 'file_management'],
 			manual_enrichment                     : {
-				possible_columns: [
-					'id',
-					'business_name',
-					'registration_number',
-					'requested_agent',
-					'created_at',
-					'action',
-					'status',
-				],
 				columns: {
 					relationship_manager_view: {
 						active: [
@@ -614,10 +605,6 @@ export default {
 					},
 				},
 			},
-			file_management: {
-				possible_columns: ['file_id', 'file_name', 'upload_date', 'error_sheet_url', 'sheet_url', 'status'],
-			},
-
 		},
 		account_receivables: {
 			defaulters: {

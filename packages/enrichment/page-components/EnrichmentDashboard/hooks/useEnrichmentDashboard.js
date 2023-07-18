@@ -6,6 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { useState, useMemo, useEffect } from 'react';
 
 import ENRICHMENT_API_MAPPING from '../../../constants/enrichment-api-mapping';
+import getColumnConfiguration from '../configurations/get-columns-configuration';
 import getEnrichmentColumnsData from '../configurations/get-enrichment-columns-data';
 
 import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
@@ -121,7 +122,7 @@ const useEnrichmentDashboard = ({
 		user_id,
 	});
 
-	const allowedColumns = geo.navigations.enrichment[primaryTab].possible_columns;
+	const allowedColumns = getColumnConfiguration({ primaryTab });
 
 	const filteredColumns = columns.filter((listItem) => allowedColumns?.includes(listItem.id));
 
