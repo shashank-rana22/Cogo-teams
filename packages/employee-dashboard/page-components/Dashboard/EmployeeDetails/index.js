@@ -1,9 +1,11 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { EMPLOYEE_DETAIL_MAPPING } from '../../../configurations/employeeDetailMapping';
+import useGetEmployeeData from '../../../hooks/useGetEmployeeData';
 
 import styles from './styles.module.css';
 
@@ -11,7 +13,9 @@ const DEFAULT_GAP = 0;
 const DEFAULT_LENGTH_CHECK = 0;
 const ARRAY_LENGTH = 5;
 
-function EmployeeDetails({ data, loading }) {
+function EmployeeDetails() {
+	const { data, loading } = useGetEmployeeData();
+
 	const { diff_in_days, name, designation } = data || {};
 
 	const { months_gap, days_gap, years_gap } = diff_in_days || {};
@@ -57,7 +61,7 @@ function EmployeeDetails({ data, loading }) {
 			<div className={styles.img_container}>
 				<img
 					className={styles.avatar_img}
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
+					src={GLOBAL_CONSTANTS.image_url.empty_data}
 					alt="avtar"
 				/>
 			</div>

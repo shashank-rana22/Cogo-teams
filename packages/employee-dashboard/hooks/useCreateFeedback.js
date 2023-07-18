@@ -21,11 +21,9 @@ function useCreateFeedback({ ratingCycle, refetch, onHide }) {
 			await trigger({
 				data: {
 					...values,
-					start_date        : formattedDate(firstDate),
-					end_date          : formattedDate(lastDate),
-					performed_by_id   : userId,
-					performed_by_type : 'user',
-					employee_user_id  : userId,
+					start_date       : formattedDate(firstDate),
+					end_date         : formattedDate(lastDate),
+					employee_user_id : userId,
 				},
 			});
 			Toast.success('Self Rating form submitted Successfully');

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import styles from './styles.module.css';
 
 const DEFAULT_NUMBER = 1;
@@ -14,9 +13,11 @@ const useGetColumns = () => [
 		id: 'no',
 	},
 	{
-		Header: <div className={`${styles.table_heading} ${styles.table_heading_width}`}>
-			KRA Name and Description
-		</div>,
+		Header: (
+			<div className={`${styles.table_heading} ${styles.table_heading_width}`}>
+				KRA Name and Description
+			</div>
+		),
 		accessor: (item) => (
 			<>
 				<div className={styles.table_cell_item_kra}>{item.kra_name}</div>

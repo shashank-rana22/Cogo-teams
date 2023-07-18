@@ -1,5 +1,3 @@
-// get_employee_dashboard_details
-
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';

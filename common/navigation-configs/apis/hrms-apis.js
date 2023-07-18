@@ -161,6 +161,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_employee_dashboard_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
