@@ -1,9 +1,9 @@
 .container {
+	position: relative;
 	padding: 20px;
 	margin: 8px 0 20px;
 	background-color: #fbfbff;
 	border: 1px solid #f7f7fd;
-	position: relative;
 }
 
 .invoice_content {
@@ -89,10 +89,14 @@
 	text-align: left;
 }
 
-
-.edit_icon {
+.icon_container {
 	position: absolute;
 	top: 12px;
 	right: 12px;
+	display: flex;
+}
+
+.icon {
+	margin-left: 20px;
 	cursor: pointer;
 }

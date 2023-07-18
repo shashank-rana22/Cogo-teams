@@ -6,7 +6,6 @@ import { useContext, useState, useEffect } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
-import { QuoteLoader } from '../LoadingState';
 
 import AddLineItemModal from './components/AddLineItemModal';
 import ContainerDetails from './components/ContainerDetails';
@@ -99,10 +98,6 @@ function BreakdownDetails({
 			};
 		}));
 	}, [rate?.services, setRateDetails]);
-
-	if (getCheckoutLoading && isEmpty(rateDetails)) {
-		return <QuoteLoader />;
-	}
 
 	return (
 		<div>

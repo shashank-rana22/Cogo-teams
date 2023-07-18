@@ -1,12 +1,13 @@
 .container {
-    /* border: 1px dotted #F9AE64;
+	margin-top: 24px;
+
+	/* border: 1px dotted #F9AE64;
     background-color: #FFFBF8; */
-    border-radius: 8px;
-    margin-top: 24px;
+	border-radius: 8px;
 }
 
 .stepper_container {
-    display: flex;
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 

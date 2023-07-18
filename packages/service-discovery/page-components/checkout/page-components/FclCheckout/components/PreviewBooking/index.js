@@ -12,36 +12,25 @@ function PreviewBooking() {
 		detail = {},
 		primaryService,
 		rate,
-		checkoutMethod,
 	} = useContext(CheckoutContext);
 
-	const { margin_approval_request_remarks = [], checkout_approvals = [] } =		detail;
+	const { margin_approval_request_remarks = [] } = detail;
 
-	const { hs_code, cargo_readiness_date, cargo_value } = primaryService;
-
-	const { booking_status = '', manager_approval_proof } = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { hs_code, cargo_readiness_date = '', cargo_value } = primaryService;
 
 	const [showBreakup, setShowBreakup] = useState(false);
 	const [additionalRemark, setAdditionalRemark] = useState(
 		() => margin_approval_request_remarks[GLOBAL_CONSTANTS.zeroth_index] || '',
 	);
+
 	const [cargoDetails, setCargoDetails] = useState(() => ({
 		hs_code,
-		cargo_readiness_date: new Date(cargo_readiness_date),
+		cargo_readiness_date: cargo_readiness_date ? new Date(cargo_readiness_date) : undefined,
 		cargo_value,
 	}));
 
 	const [isVeryRisky, setIsVeryRisky] = useState(false);
-	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(false);
-	const [disableButtonConditions, setDisableButtonConditions] = useState(
-		() => ({
-			notAgreeTandC: false,
-			controlledBooking:
-				checkoutMethod === 'controlled_checkout'
-					? ['pending_approval', 'rejected'].includes(booking_status) || !manager_approval_proof
-					: false,
-		}),
-	);
+	const [agreeTandC, setAgreeTandC] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -60,10 +49,9 @@ function PreviewBooking() {
 				setCargoDetails={setCargoDetails}
 				setIsVeryRisky={setIsVeryRisky}
 				isVeryRisky={isVeryRisky}
-				disableButtonConditions={disableButtonConditions}
-				setDisableButtonConditions={setDisableButtonConditions}
-				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
-				setIsControlBookingDetailsFilled={setIsControlBookingDetailsFilled}
+				agreeTandC={agreeTandC}
+				setAgreeTandC={setAgreeTandC}
+				additionalRemark={additionalRemark}
 			/>
 		</div>
 	);

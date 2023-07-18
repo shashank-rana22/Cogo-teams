@@ -1,52 +1,51 @@
 .flex {
-    display: flex;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
 .count {
-	font-weight: bold;
-	font-size: 14px;
-	line-height: 140%;
 	display: flex;
 	align-items: center;
+	padding: 6px 11px;
+	margin-right: 8px;
+	margin-left: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 140%;
+	color: #828282;
 	text-align: center;
 	letter-spacing: 0.02em;
 	border: 1px solid #828282;
 	border-radius: 50%;
-	color: #828282;
-	margin-right: 8px;
-	margin-left: 8px;
-	padding: 6px 11px;
 
 	&.active {
+		color: #fff;
 		background: #2c3e50;
-
-		color: #ffffff;
 		border: 1px solid #2c3e50;
 	}
 }
 
 .title {
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 140%;
 	display: flex;
 	align-items: center;
-	letter-spacing: 0.02em;
-	color: #828282;
-	margin-right: 8px;
-	cursor: pointer;
 	min-width: fit-content;
+	margin-right: 8px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 140%;
+	color: #828282;
+	letter-spacing: 0.02em;
+	cursor: pointer;
 
 	@media (max-width: 768px) {
-		font-size: 9px;
 		min-width: auto;
+		font-size: 9px;
 	}
 }
 
 .line {
-	border: 1px solid #828282;
-	height: 2px;
 	display: flex;
+	height: 2px;
+	border: 1px solid #828282;
 }

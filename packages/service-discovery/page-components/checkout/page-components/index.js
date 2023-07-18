@@ -2,6 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import { LoadingState } from '../commons/LoadingState';
 import { CheckoutContext } from '../context';
 import useGetCheckout from '../hooks/useGetCheckout';
 import useGetOrganization from '../hooks/useGetOrganization';
@@ -47,6 +48,7 @@ function Checkout({ checkout_type = '' }) {
 		quotation_email_sent_at = '',
 		credit_terms_amd_condition = {},
 		terms_and_conditions = [],
+		state = '',
 	} = detail || {};
 
 	const {
@@ -150,7 +152,7 @@ function Checkout({ checkout_type = '' }) {
 	);
 
 	if (loading && isEmpty(data)) {
-		return null;
+		return <LoadingState />;
 	}
 
 	const ActiveComponent = MAPPING[primary_service];
@@ -161,7 +163,7 @@ function Checkout({ checkout_type = '' }) {
 
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
-			<ActiveComponent />
+			<ActiveComponent state={state} />
 		</CheckoutContext.Provider>
 	);
 }

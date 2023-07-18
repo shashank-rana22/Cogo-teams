@@ -66,7 +66,6 @@ function AddNewItem({
 					themeType="accent"
 				>
 					Invite Trade Partner
-
 				</Button>
 
 				<div className={styles.terms_text}>*Terms & Conditions Apply</div>
@@ -83,6 +82,8 @@ function SelectAddress({
 	selectedAddress = {},
 	setSelectedAddress = () => {},
 	source = '',
+	setCurrentView = () => {},
+	setPaymentModes = () => {},
 }) {
 	const { orgData = {} } = useContext(CheckoutContext);
 
@@ -108,11 +109,12 @@ function SelectAddress({
 			disabledInvoicingParties,
 			organization: orgData?.data,
 			setActiveState,
-			selectedAddress,
 			setSelectedAddress,
 			setInvoiceToTradePartyDetails,
 			loading,
 			data,
+			setCurrentView,
+			setPaymentModes,
 		},
 		create_billing_address: {
 			organization: orgData?.data,

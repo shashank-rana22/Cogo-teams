@@ -1,4 +1,5 @@
-import { Pill, Tooltip, Button } from '@cogoport/components';
+import { Pill, Tooltip, Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -6,12 +7,15 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function TradePartner({
-	item,
-	value,
-	organization,
-	optionsDisabled,
+	item = {},
+	value = [],
+	organization = {},
+	optionsDisabled = {},
 	setActiveState = () => {},
 	setInvoiceToTradePartyDetails = () => {},
+	setCurrentView = () => {},
+	setSelectedAddress = () => {},
+	setPaymentModes = () => {},
 }) {
 	const {
 		id: tradePartyId,
@@ -22,9 +26,21 @@ function TradePartner({
 		other_addresses,
 		verification_status = '',
 		rejection_reason = '',
+		trade_party_type = '',
+		credit_option = {},
 	} = item;
 
 	const { is_tax_applicable = false } = organization;
+
+	const disabledIds = Object.entries(optionsDisabled).reduce(
+		(acc, [key, optionValue]) => {
+			if (optionValue) {
+				return [...acc, key];
+			}
+			return acc;
+		},
+		[],
+	);
 
 	return (
 		<div className={styles.container}>
@@ -63,7 +79,7 @@ function TradePartner({
 			</div>
 
 			{((is_tax_applicable ? billing_addresses : other_addresses) || []).map(
-				(billingAddress, index) => {
+				(billingAddress) => {
 					const {
 						id,
 						address = '',
@@ -73,13 +89,47 @@ function TradePartner({
 					} = billingAddress;
 
 					return (
-						<div className={styles.main_container} key={id}>
+						<div
+							key={id}
+							role="presentation"
+							onClick={() => {
+								setSelectedAddress({
+									...billingAddress,
+									address_object_type: is_tax_applicable
+										? 'billing_address'
+										: 'address',
+									additional_info: {
+										business_name,
+										trade_party_type,
+										registration_number,
+										organization_country_id: country_id,
+									},
+									credit_option,
+									freight_invoice_currency : null,
+									invoice_currency         : GLOBAL_CONSTANTS.currency_code.INR,
+								});
+
+								setPaymentModes((pv) => ({
+									...pv,
+									[id]: {
+										credit_days : 0,
+										interest    : 0,
+										paymentMode : 'cash',
+									},
+								}));
+
+								setCurrentView('select_services');
+							}}
+							className={cl`${styles.main_container} ${
+								value.includes(id) && styles.active
+							} ${disabledIds.includes(id) && styles.disabled}`}
+						>
 							<div className={styles.address_container}>
 								<div className={styles.text}>{address}</div>
 
 								{is_sez && (
 									<div className={styles.address_container}>
-										<div className={`${styles.tag_container} ${styles.sez}`}>
+										<div className={cl`${styles.tag_container} ${styles.sez}`}>
 											<Pill className={is_sez_verification_status}>
 												SEZ verification is
 												{' '}
@@ -141,7 +191,6 @@ function TradePartner({
 				>
 					{' '}
 					+ Add Address
-
 				</Button>
 			</div>
 		</div>

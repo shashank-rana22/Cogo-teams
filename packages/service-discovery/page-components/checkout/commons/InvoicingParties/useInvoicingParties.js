@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetPaymentModes from './hooks/useGetPaymentModes';
@@ -56,7 +56,7 @@ const useInvoicingParties = ({ detail = {} }) => {
 
 	const [paymentModes, setPaymentModes] = useState({});
 
-	const [{ data = {} }] = useRequest(
+	const [{ data = {} }, trigger] = useRequest(
 		{
 			url    : '/list_checkout_invoices',
 			method : 'GET',
@@ -73,22 +73,62 @@ const useInvoicingParties = ({ detail = {} }) => {
 		services: Object.values(services),
 	});
 
+	const getCheckoutInvoices = () => {
+		trigger({ params: { filters: { checkout_id: detail.id, status: 'active' } } });
+	};
+
 	useEffect(() => {
-		setInvoicingParties(list.map((savedInvoicingParty) => ({
-			...savedInvoicingParty,
-			services: formatServices({
-				savedServicesInvoiceTo,
-				invoicingPartyServices: savedInvoicingParty?.services || [],
-			}),
+		if (!isEmpty(list)) {
+			setInvoicingParties(list.map((savedInvoicingParty) => ({
+				...savedInvoicingParty,
+				services: formatServices({
+					savedServicesInvoiceTo,
+					invoicingPartyServices: savedInvoicingParty?.services || [],
+				}),
 
-			state: {
-				isSaved           : true,
-				toDelete          : false,
-				showHiddenContent : false,
-			},
-		})));
+				state: {
+					isSaved           : true,
+					toDelete          : false,
+					showHiddenContent : false,
+				},
+			})));
 
-		setEditInvoice(list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}));
+			setEditInvoice(list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}));
+
+			setPaymentModes(() => {
+				let mode = {};
+				list.forEach((savedInvoicingParty) => {
+					const {
+						payment_mode = '',
+						payment_term = '',
+						payment_method = '',
+						documentCategory = '',
+						documentType = '',
+						documentDeliveryMode = '',
+					} = savedInvoicingParty?.payment_mode_details || {};
+
+					const { credit_option = {}, organization_trade_party_id = '', id = '' } = savedInvoicingParty;
+
+					console.log('savedInvoicingParty', savedInvoicingParty);
+
+					mode = {
+						...mode,
+						[id || savedInvoicingParty.length]: {
+							credit_days    : credit_option?.selected_credit_days || 0,
+							interest       : credit_option?.interest_percent || 0,
+							paymentMode    : payment_mode || 'cash',
+							paymentTerms   : payment_term,
+							paymentMethods : payment_method,
+							documentCategory,
+							documentType,
+							documentDeliveryMode,
+							organization_trade_party_id,
+						},
+					};
+				});
+				return mode;
+			});
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
 
@@ -107,6 +147,9 @@ const useInvoicingParties = ({ detail = {} }) => {
 		editInvoice,
 		loading,
 		setEditInvoice,
+		paymentModes,
+		setPaymentModes,
+		getCheckoutInvoices,
 	};
 };
 

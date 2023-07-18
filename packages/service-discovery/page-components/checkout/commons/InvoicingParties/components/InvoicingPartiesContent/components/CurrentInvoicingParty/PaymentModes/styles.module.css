@@ -1,0 +1,15 @@
+.value {
+	font-weight: 600;
+}
+
+.label {
+	font-size: 12px;
+}
+
+.container {
+	:global {
+		.ui_select_options_container {
+			z-index: 2;
+		}
+	}
+}

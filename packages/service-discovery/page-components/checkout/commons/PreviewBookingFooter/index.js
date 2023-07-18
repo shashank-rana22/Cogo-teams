@@ -1,62 +1,28 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { useRef, useEffect } from 'react';
 
-import useControlBookingApproval from '../../hooks/useControlBookingApproval';
 import handleTimer from '../../utils/handleTimer';
 
 import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-const getButtonLabel = ({ checkoutMethod, booking_status }) => {
-	if (
-		checkoutMethod === 'controlled_checkout'
-		&& booking_status === 'pending_approval'
-	) {
-		return 'Sent For Approval, Please wait...';
-	}
-
-	if (
-		checkoutMethod === 'controlled_checkout'
-		&& booking_status === 'rejected'
-	) {
-		return 'This Booking has been Rejected';
-	}
-
-	if (checkoutMethod === 'controlled_checkout') {
-		return 'Send for Approval';
-	}
-
-	return 'Place Booking';
-};
-
 function PreviewBookingFooter({
 	detail = {},
 	updateCheckout = () => {},
 	updateLoading = false,
 	isVeryRisky = false,
-	checkoutMethod = '',
-	disableButtonConditions = {},
-	isControlBookingDetailsFilled = false,
+	agreeTandC = false,
+	cargoDetails = {},
+	additionalRemark = '',
 }) {
 	const timerRef = useRef(null);
 
 	const {
 		validity_end,
-		checkout_approvals = [],
-		importer_exporter_id,
-		importer_exporter,
+		id = '',
 	} = detail;
-
-	const { booking_status = '' } =		checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const { controlBookingApproval, loading } = useControlBookingApproval({
-		checkout_approvals,
-		importer_exporter_id,
-		importer_exporter,
-	});
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -80,12 +46,6 @@ function PreviewBookingFooter({
 		return () => {};
 	}, [hasExpired, validity_end]);
 
-	const handleSubmit = () => {
-		if (checkoutMethod === 'controlled_checkout') {
-			controlBookingApproval();
-		}
-	};
-
 	const MAPPING = [
 		{
 			label     : 'Save For Later',
@@ -94,17 +54,14 @@ function PreviewBookingFooter({
 			key       : 'save_for_later',
 		},
 		{
-			label     : getButtonLabel({ checkoutMethod, booking_status }),
+			label     : 'Select Invoicing Parties',
 			themeType : 'primary',
 			size      : 'lg',
-			loading   : updateLoading || loading,
-			disabled:
-				isVeryRisky
-				|| Object.values(disableButtonConditions).some((val) => val)
-				|| !isControlBookingDetailsFilled,
-			style   : { marginLeft: '16px' },
-			key     : 'place_booking',
-			onClick : () => handleSubmit(),
+			loading   : updateLoading,
+			disabled  : isVeryRisky || !agreeTandC,
+			style     : { marginLeft: '16px' },
+			key       : 'place_booking',
+			onClick   : () => updateCheckout({ values: { id, state: 'booking_confirmation', margin_approval_request_remarks: additionalRemark ? [additionalRemark] : undefined, ...cargoDetails } }),
 		},
 	];
 

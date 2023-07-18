@@ -1,40 +1,40 @@
 .container {
-	padding: 32px;
-	background-color: #fff;
-	margin: 32px 0px;
-	box-shadow: 0px 1px 6px rgba(169, 188, 218, 0.65);
 	position: relative;
+	padding: 32px;
+	margin: 32px 0;
+	background-color: #fff;
 	border-radius: 8px;
+	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
 }
 
 .status {
-    position: absolute;
+	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: #acdade;
-	padding: 4px 8px 4px 8px;
-	border-radius: 0 0 0 8px;
+	padding: 4px 8px;
 	font-size: 10px;
+	background-color: #acdade;
+	border-radius: 0 0 0 8px;
 
 	&.rejected {
-		background-color: #ee3425;
 		color: #fff;
+		background-color: #ee3425;
 	}
 }
 
 .heading {
 	display: flex;
-	justify-content: Space-between;
+	justify-content: space-between;
 }
 
 .title {
-	font-weight: 600;
 	font-size: 16px;
+	font-weight: 600;
 }
 
 .text {
-	font-size: 12px;
 	margin-top: 8px;
+	font-size: 12px;
 	color: #ee3425;
 }
 

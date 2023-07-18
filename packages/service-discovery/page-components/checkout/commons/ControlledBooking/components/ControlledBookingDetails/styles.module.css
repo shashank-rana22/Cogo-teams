@@ -1,17 +1,17 @@
 .container {
-    margin: 16px 0px;
+	margin: 16px 0;
 
-    :global {
-        .ui_table_container {
-            border:unset;
-            background-color: #f8f2e7;
-        }
+	:global {
+		.ui_table_container {
+			background-color: #f8f2e7;
+			border: unset;
+		}
 
-        .ui_table_body_container {
-            :hover {
-                background-color: unset;
-                cursor: pointer;
-            }
-        }
-    }
+		.ui_table_body_container {
+			:hover {
+				cursor: pointer;
+				background-color: unset;
+			}
+		}
+	}
 }

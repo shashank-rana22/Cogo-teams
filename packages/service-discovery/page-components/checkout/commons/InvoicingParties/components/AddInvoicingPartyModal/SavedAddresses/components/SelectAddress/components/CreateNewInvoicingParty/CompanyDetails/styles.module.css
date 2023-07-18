@@ -1,33 +1,33 @@
 .btn_grp {
 	display: flex;
 	justify-content: flex-end;
-	background: #ffffff;
 	padding: 16px;
+	background: #fff;
 	border-top: 1px solid #cbcff5;
 
 	@media (min-width: 768px) {
 		position: absolute;
-		left: 0;
 		right: 0;
 		bottom: 0;
+		left: 0;
 	}
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-    border: 1px dotted #F9AE64;
-	background-color: #FFFBF8;
 	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 60px;
+	background-color: #fffbf8;
+	border: 1px dotted #f9ae64;
 	border-radius: 8px;
-    margin-top: 20px;
-    margin-bottom: 60px;
 }
 
 .title {
-	color: #393f70;
+	margin: 16px 0 0;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	margin: 16px 0px 0px;
+	color: #393f70;
 }

@@ -1,4 +1,4 @@
-import { IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -15,11 +15,14 @@ const ICON_MAPPING = {
 };
 
 function CurrentInvoicingParty({
-	paymentModes,
+	paymentModes = [],
 	invoiceParty = {},
-	lastItem,
+	lastItem = true,
 	editInvoice = {},
 	setEditInvoice = () => {},
+	length = 0,
+	updateCheckoutInvoice = () => {},
+	updateLoading = false,
 }) {
 	const { rate, conversions, detail = {} } = useContext(CheckoutContext);
 
@@ -27,15 +30,12 @@ function CurrentInvoicingParty({
 		services,
 		additional_info = {},
 		billing_address = {},
-		payment_mode_details = {},
 		id,
 	} = invoiceParty;
 
 	const { business_name = '', trade_party_type = '' } = additional_info;
 
 	const { tax_number = '', address = '' } = billing_address || {};
-
-	console.log('editInvoice', editInvoice, id);
 
 	const IconToShow = ICON_MAPPING[editInvoice[id]];
 
@@ -70,18 +70,29 @@ function CurrentInvoicingParty({
 				</div>
 			</div>
 
-			<div className={styles.edit_icon}>
+			<div className={styles.icon_container}>
 				<IconToShow
 					height={18}
 					width={18}
+					className={styles.icon}
 					onClick={() => setEditInvoice((prev) => ({ ...prev, [id]: !prev[id] }))}
 				/>
+
+				{length > 1 ? (
+					<IcMDelete
+						height={18}
+						width={18}
+						className={styles.icon}
+						onClick={() => {
+							updateCheckoutInvoice({ values: { id, status: 'inactive' } });
+						}}
+					/>
+				) : null}
 			</div>
 
 			<div className={styles.payment_modes}>
 				<PaymentModes
 					paymentModes={paymentModes}
-					payment_mode_details={payment_mode_details}
 					editMode={editInvoice[id]}
 				/>
 			</div>

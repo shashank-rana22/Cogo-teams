@@ -1,4 +1,5 @@
 import { Modal, Chips, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import { CheckoutContext } from '../../../../context';
@@ -31,22 +32,23 @@ const CHIPS_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
 
 function AddInvoicingPartyModal({
 	disabledInvoicingParties = [],
-	isInvoicingPartiesSaved,
-	setShowAddInvoicingPartyModal,
-	showAddInvoicingPartyModal,
+	isInvoicingPartiesSaved = true,
+	setShowAddInvoicingPartyModal = () => {},
+	showAddInvoicingPartyModal = false,
 	source = '',
+	services = [],
+	rate = {},
+	paymentModes = {},
+	setPaymentModes = () => {},
+	getCheckoutInvoices = () => {},
 }) {
 	const {
 		orgData = {},
 		primary_service,
-		rate,
-		conversions,
-		detail = {},
-		invoice = {},
 	} = useContext(CheckoutContext);
 
 	const [activeComponentKey, setActiveComponentKey] = useState(
-		() => CHIPS_OPTIONS[0].key,
+		() => CHIPS_OPTIONS[GLOBAL_CONSTANTS.zeroth_index].key,
 	);
 	const [currentView, setCurrentView] = useState('select_address');
 	const [activeState, setActiveState] = useState('view_billing_addresses');
@@ -57,12 +59,7 @@ function AddInvoicingPartyModal({
 			organization : orgData?.data,
 			primary_service,
 			disabledInvoicingParties,
-			// updateInvoicingParty,
 			bookingType  : 'self',
-			// onClose,
-			// isIE,
-			// setIgstValues,
-			// isOrgCountryInvoicesRequired,
 			currentView,
 			activeState,
 			setActiveState,
@@ -75,11 +72,7 @@ function AddInvoicingPartyModal({
 			organization : orgData?.data,
 			primary_service,
 			disabledInvoicingParties,
-			// updateInvoicingParty,
 			bookingType  : 'paying_party',
-			// onClose,
-			// setIgstValues,
-			// isOrgCountryInvoicesRequired,
 			currentView,
 			activeState,
 			setActiveState,
@@ -116,7 +109,16 @@ function AddInvoicingPartyModal({
 					/>
 				</div>
 
-				<ActiveComponent key={activeComponentKey} {...activeComponentProps} />
+				<ActiveComponent
+					key={activeComponentKey}
+					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
+					services={services}
+					rate={rate}
+					paymentModes={paymentModes}
+					setPaymentModes={setPaymentModes}
+					getCheckoutInvoices={getCheckoutInvoices}
+					{...activeComponentProps}
+				/>
 			</Modal.Body>
 		</Modal>
 	);

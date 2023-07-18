@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	align-items: center;
+	height: 20px;
 
 	img {
 		max-width: 100%;

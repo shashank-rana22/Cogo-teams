@@ -1,31 +1,31 @@
 .container {
-	background: #ffffff;
-	padding: 12px 16px;
-	border-radius: 10px;
 	position: relative;
 	display: flex;
-    border: 1px solid #dedede;
-	padding-bottom: 20px;
 	justify-content: space-between;
+	padding: 12px 16px;
+	padding-bottom: 20px;
+	background: #fff;
+	border: 1px solid #dedede;
+	border-radius: 10px;
 
 	.main-flex {
-		background: #ffffff;
-		border: 1px solid #e0e0e0;
 		box-sizing: border-box;
-		box-shadow: 0px 2px 55px rgba(60, 67, 83, 0.1);
+		background: #fff;
+		border: 1px solid #e0e0e0;
 		border-radius: 10px;
+		box-shadow: 0 2px 55px rgb(60 67 83 / 10%);
 	}
 
 	.kyc-title {
-		font-weight: bold;
 		font-size: 16px;
+		font-weight: bold;
 		line-height: 36px;
-		color: #000000;
+		color: #000;
 	}
 
 	.kyc-text {
-		font-weight: normal;
 		font-size: 14px;
+		font-weight: normal;
 		line-height: 18px;
 		color: #828282;
 
@@ -36,11 +36,11 @@
 }
 
 .heading {
-	font-weight: bold;
+	padding-bottom: 4px;
 	font-size: 20px;
+	font-weight: bold;
 	line-height: 36px;
 	color: #2c3e50;
-	padding-bottom: 4px;
 }
 
 .credit_approval_container {
@@ -50,10 +50,10 @@
 }
 
 .text_container {
-	padding-right: 50px;
-	font-size: 14px;
-	padding-left: 2px;
 	padding-top: 4px;
+	padding-right: 50px;
+	padding-left: 2px;
+	font-size: 14px;
 }
 
 .link_container {
@@ -61,20 +61,20 @@
 }
 
 .refresh_text {
-	cursor: pointer;
 	position: absolute;
-	right: 0px;
-	top: 0px;
-	border-radius: 0 10px 0 0;
-	background: #356efd;
-	font-weight: 500;
-	font-size: 10px;
-	text-align: center;
-	padding: 6px 16px;
-	color: #ffffff;
-	text-transform: uppercase;
+	top: 0;
+	right: 0;
 	display: flex;
 	flex-direction: row;
+	padding: 6px 16px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	cursor: pointer;
+	background: #356efd;
+	border-radius: 0 10px 0 0;
 
 	.animate {
 		animation: spin-anim 1.2s linear infinite;
@@ -83,6 +83,7 @@
 			0% {
 				transform: rotate(0deg);
 			}
+
 			100% {
 				transform: rotate(360deg);
 			}
@@ -95,15 +96,15 @@
 }
 
 .refresh_icon {
-	margin-left: 8px;
 	display: flex;
 	align-items: center;
+	margin-left: 8px;
 }
 
 .approval_icon {
-	padding: 8px 12px 0 0px;
 	display: flex;
 	align-items: center;
+	padding: 8px 12px 0 0;
 }
 
 .flex_column {

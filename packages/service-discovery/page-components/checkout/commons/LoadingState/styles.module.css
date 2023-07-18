@@ -1,5 +1,23 @@
-.parent_container {
+.loading_text {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	margin-right: 20px;
+	font-size: 36px;
+	font-weight: 800;
+	color: #888fd1;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 40px;
+	padding-top: 26vh;
+}
+
+.content {
+	margin-top: 24px;
+	font-size: 22px;
+	animation-name: fade-in-out;
+	animation-duration: 6s;
+	animation-iteration-count: infinite;
 }

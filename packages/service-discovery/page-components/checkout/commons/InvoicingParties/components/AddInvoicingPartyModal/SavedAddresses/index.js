@@ -16,6 +16,12 @@ function SavedAddresses({
 	selectedAddress = {},
 	setSelectedAddress = () => {},
 	source = '',
+	setShowAddInvoicingPartyModal = () => {},
+	services = [],
+	rate = {},
+	paymentModes = {},
+	setPaymentModes = () => {},
+	getCheckoutInvoices = () => {},
 }) {
 	const componentProps = {
 		select_address: {
@@ -27,17 +33,26 @@ function SavedAddresses({
 			selectedAddress,
 			setSelectedAddress,
 			source,
+			setPaymentModes,
 		},
-		select_services: {},
+		select_services: {
+			selectedAddress,
+			setCurrentView,
+			setSelectedAddress,
+			setShowAddInvoicingPartyModal,
+			services,
+			rate,
+			paymentModes,
+			setPaymentModes,
+			getCheckoutInvoices,
+		},
 	};
 
 	const ActiveComponent = COMPONENT_MAPPING[currentView];
 	const activeComponentprops = componentProps[currentView];
 
 	return (
-		<div>
-			<ActiveComponent {...activeComponentprops} />
-		</div>
+		<ActiveComponent {...activeComponentprops} />
 	);
 }
 

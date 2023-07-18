@@ -1,13 +1,10 @@
-import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import useListOrganizationInvoicingParties from '../../../../../../../hooks/useListOrganizationInvoicingParties';
 import EmptyState from '../../../../../../EmptyState';
 
 import SelfInvoice from './components/SelfInvoice';
 import TradePartner from './components/TradePartner';
-import styles from './styles.module.css';
 
 const MAPPING = {
 	self         : SelfInvoice,
@@ -19,12 +16,12 @@ function ViewBillingAddresses({
 	is_tax_applicable = false,
 	disabledInvoicingParties = [],
 	organization = {},
-	setActiveState = () => {},
-	selectedAddress = {},
 	setSelectedAddress = () => {},
 	setInvoiceToTradePartyDetails = () => {},
 	loading = false,
 	data = {},
+	setCurrentView = () => {},
+	setPaymentModes = () => {},
 }) {
 	const [valuesState, setValuesState] = useState([]);
 	const [optionsDisabledState, setOptionsDisabledState] = useState({});
@@ -42,12 +39,12 @@ function ViewBillingAddresses({
 			return;
 		}
 
-		const values = [];
-		const optionsDisabled = {};
-		const igstValues = {};
+		const VALUES = [];
+		const OPTIONS_DISABLED = {};
+		const IGSTVALUES = {};
 
 		list.forEach((item, index) => {
-			const billingAddresses = [];
+			const BILLING_ADDRESSES = [];
 			(item.billing_addresses || []).forEach((billingAddress) => {
 				const {
 					id = '',
@@ -62,37 +59,37 @@ function ViewBillingAddresses({
 					isTaxNumberSelected
 					&& ['verified', 'pending'].includes(verification_status)
 				) {
-					values.push(id);
-					billingAddresses.push(billingAddress);
+					VALUES.push(id);
+					BILLING_ADDRESSES.push(billingAddress);
 				}
 
-				optionsDisabled[id] = isTaxNumberSelected;
+				OPTIONS_DISABLED[id] = isTaxNumberSelected;
 
 				if (
 					is_sez
 					&& ['rejected', 'pending_from_approval'].includes(verification_status)
 				) {
-					optionsDisabled[id] = true;
+					OPTIONS_DISABLED[id] = true;
 				}
 			});
 
-			const billingAddressesIds = billingAddresses.map(
+			const billingAddressesIds = BILLING_ADDRESSES.map(
 				(billingAddress) => billingAddress.id,
 			);
 
 			reorderedList[index].billing_addresses = [
-				...billingAddresses,
+				...BILLING_ADDRESSES,
 				...(item.billing_addresses || []).filter(
 					(billingAddress) => !billingAddressesIds.includes(billingAddress.id),
 				),
 			];
 
-			igstValues.cogo_entity_id = item?.cogo_entity_id;
-			igstValues.country_id = item?.country_id;
+			IGSTVALUES.cogo_entity_id = item?.cogo_entity_id;
+			IGSTVALUES.country_id = item?.country_id;
 		});
 
-		setValuesState(values);
-		setOptionsDisabledState(optionsDisabled);
+		setValuesState(VALUES);
+		setOptionsDisabledState(OPTIONS_DISABLED);
 	}, [disabledInvoicingParties, list, loading, reorderedList]);
 
 	const newList = reorderedList.filter(
@@ -113,21 +110,13 @@ function ViewBillingAddresses({
 					item={item}
 					value={valuesState}
 					organization={organization}
-					// handleChange={handleChange}
 					optionsDisabled={optionsDisabledState}
-					setActiveState={setActiveState}
-					selectedAddress={selectedAddress}
 					setSelectedAddress={setSelectedAddress}
 					setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
+					setCurrentView={setCurrentView}
+					setPaymentModes={setPaymentModes}
 				/>
 			))}
-
-			{!isEmpty(selectedAddress) ? (
-				<div className={styles.footer}>
-					<Button themeType="secondary">Cancel</Button>
-					<Button style={{ marginLeft: '16px' }} themeType="accent">Next</Button>
-				</div>
-			) : null}
 		</div>
 	);
 }

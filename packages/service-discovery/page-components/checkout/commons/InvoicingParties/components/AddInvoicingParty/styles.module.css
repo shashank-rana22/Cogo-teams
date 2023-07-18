@@ -1,4 +1,6 @@
 .container {
+	position: relative;
+	z-index: 1;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -9,6 +11,4 @@
 	background-color: #fffcfc;
 	border: 1px solid #fbe7e5;
 	border-radius: 8px;
-	position: relative;
-	z-index: 1;
 }

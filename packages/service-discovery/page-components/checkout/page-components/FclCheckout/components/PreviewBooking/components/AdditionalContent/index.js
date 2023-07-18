@@ -6,7 +6,6 @@ import BookingContent from '../../../../../../commons/BookingContent';
 import Cancellation from '../../../../../../commons/Cancellation';
 import CargoDetails from '../../../../../../commons/CargoDetails';
 import ConfirmationTexts from '../../../../../../commons/ConfirmationTexts';
-import ControlledBooking from '../../../../../../commons/ControlledBooking';
 import DefaultQuotationInfo from '../../../../../../commons/DefaultQuotationInfo';
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
@@ -20,11 +19,10 @@ function AdditionalContent({
 	cargoDetails = {},
 	setCargoDetails = () => {},
 	setIsVeryRisky = () => {},
-	disableButtonConditions = {},
-	setDisableButtonConditions = () => {},
 	isVeryRisky = false,
-	setIsControlBookingDetailsFilled = () => {},
-	isControlBookingDetailsFilled = false,
+	agreeTandC = false,
+	setAgreeTandC = () => {},
+	additionalRemark = '',
 }) {
 	const {
 		rate,
@@ -40,7 +38,6 @@ function AdditionalContent({
 		updateLoading,
 		orgData,
 		loading,
-		checkoutMethod,
 	} = useContext(CheckoutContext);
 
 	const { primary_service = '', services = {}, trade_type = '' } = detail || {};
@@ -51,14 +48,6 @@ function AdditionalContent({
 				cargoDetails={cargoDetails}
 				setCargoDetails={setCargoDetails}
 			/>
-
-			{checkoutMethod === 'controlled_checkout' ? (
-				<ControlledBooking
-					detail={detail}
-					getCheckout={getCheckout}
-					setIsControlBookingDetailsFilled={setIsControlBookingDetailsFilled}
-				/>
-			) : null}
 
 			<BookingContent
 				detail={detail}
@@ -114,8 +103,8 @@ function AdditionalContent({
 
 			<ServiceTerms
 				detail={detail}
-				disableButtonConditions={disableButtonConditions}
-				setDisableButtonConditions={setDisableButtonConditions}
+				agreeTandC={agreeTandC}
+				setAgreeTandC={setAgreeTandC}
 			/>
 
 			<PreviewBookingFooter
@@ -123,9 +112,9 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				isVeryRisky={isVeryRisky}
-				checkoutMethod={checkoutMethod}
-				disableButtonConditions={disableButtonConditions}
-				isControlBookingDetailsFilled={isControlBookingDetailsFilled}
+				agreeTandC={agreeTandC}
+				cargoDetails={cargoDetails}
+				additionalRemark={additionalRemark}
 			/>
 		</div>
 	);

@@ -16,8 +16,8 @@ const redirectUrl = (type) => {
 };
 
 function AccordionTitle({
-	notAgreeTandC = false,
-	setDisableButtonConditions = () => {},
+	agreeTandC = false,
+	setAgreeTandC = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -59,11 +59,8 @@ function AccordionTitle({
 						</Button>
 					</span>
 				)}
-				checked={notAgreeTandC}
-				onChange={() => setDisableButtonConditions((prev) => ({
-					...prev,
-					notAgreeTandC: !prev?.notAgreeTandC,
-				}))}
+				checked={agreeTandC}
+				onChange={() => setAgreeTandC((prev) => !prev)}
 			/>
 		</div>
 	);
@@ -71,8 +68,8 @@ function AccordionTitle({
 
 function ServiceTerms({
 	detail = {},
-	disableButtonConditions = {},
-	setDisableButtonConditions = () => {},
+	agreeTandC = false,
+	setAgreeTandC = () => {},
 }) {
 	const { terms_and_conditions: tncList, primary_service } = detail;
 
@@ -87,15 +84,15 @@ function ServiceTerms({
 			type="text"
 			title={(
 				<AccordionTitle
-					notAgreeTandC={!disableButtonConditions?.notAgreeTandC}
-					setDisableButtonConditions={setDisableButtonConditions}
+					agreeTandC={agreeTandC}
+					setAgreeTandC={setAgreeTandC}
 				/>
 			)}
 			className={styles.accordion}
 		>
 			<div className={styles.show_container}>
 				{list.map((condition) => {
-					const str =						typeof condition === 'string' ? condition : condition?.message;
+					const str = typeof condition === 'string' ? condition : condition?.message;
 
 					return (
 						<li key={str}>
