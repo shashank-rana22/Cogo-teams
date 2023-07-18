@@ -1,6 +1,7 @@
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMPlus } from '@cogoport/icons-react';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -15,14 +16,31 @@ function Column({
 	config = {},
 	control = {},
 	errors = [],
-	append = () => { },
-	remove = () => { },
+	append = () => {},
+	remove = () => {},
 	index = 0,
 	totalLength = 1,
-	setValue = () => { },
+	setValue = () => {},
+	item = {},
 }) {
 	const { approvalLevelConditions } = errors;
 	const { fields = [] } = config;
+
+	useEffect(() => {
+		const { level1 = {}, level2 = {}, level3 = {} } = item;
+		const { stakeholder: stakeholderLevel1 = {} } = level1 || {};
+		const { stakeholder: stakeholderLevel2 = {} } = level2 || {};
+		const { stakeholder: stakeholderLevel3 = {} } = level3 || {};
+		if (!isEmpty(stakeholderLevel3)) {
+			setValue('approvalLevelConditions.2.stakeholder', stakeholderLevel3);
+		}
+		if (!isEmpty(stakeholderLevel2)) {
+			setValue('approvalLevelConditions.1.stakeholder', stakeholderLevel2);
+		}
+		if (!isEmpty(stakeholderLevel1)) {
+			setValue('approvalLevelConditions.0.stakeholder', stakeholderLevel1);
+		}
+	}, [item, setValue]);
 	const DATA = {
 		levels: (
 			<div className={styles.center}>
@@ -40,7 +58,7 @@ function Column({
 					initialCall
 					onChange={(val, obj) => {
 						setValue(`approvalLevelConditions.${index}.stakeholder`, {
-							userId    : obj?.id,
+							userId    : obj?.user_id,
 							userName  : obj?.name,
 							userEmail : obj?.email,
 						});

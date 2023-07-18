@@ -1,3 +1,10 @@
 .container {
 	background-color: #fff;
 }
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	margin: 30px 26px 16px 0;
+}

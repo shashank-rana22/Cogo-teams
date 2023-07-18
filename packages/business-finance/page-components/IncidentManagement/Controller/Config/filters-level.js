@@ -1,11 +1,10 @@
-export const controls = ({ incidentType }) => [
+const controls = [
 	{
 		name        : 'incidentType',
-		label       : 'Incident Type',
 		type        : 'select',
 		placeholder : 'Select Incident Type',
 		isClearable : true,
-		span        : 6,
+		span        : 2,
 		options     : [
 			{ value: 'TDS_APPROVAL', label: 'TDS Deviation' },
 			{ value: 'BANK_DETAIL_APPROVAL', label: 'Bank Account Add/Edit' },
@@ -45,42 +44,39 @@ export const controls = ({ incidentType }) => [
 	},
 	{
 		name        : 'incidentSubtype',
-		label       : 'Incident Subtype',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_incident_subtype',
-		span        : 5.5,
+		isClearable : true,
+		span        : 2,
 		initialCall : true,
+		style       : { width: '200px', marginLeft: '8px' },
 		placeholder : 'Incident Subtype',
-		params      : { incidentType: incidentType || undefined },
-		rules       : { required: 'Incident Subtype is required' },
-	},
-	{
-		name        : 'approvalType',
-		label       : 'Approval Type',
-		placeholder : 'Approval Type',
-		span        : 6,
-		type        : 'select',
-		options     : [
-			{
-				label : 'Multiple',
-				value : 'MULTIPLE',
-			},
-			{
-				label : 'Single',
-				value : 'SINGLE',
-			},
-		],
-		rules: { required: 'Approval Type is required' },
 	},
 	{
 		name        : 'entityCode',
-		label       : 'Entity Code',
 		type        : 'asyncSelect',
-		span        : 5.5,
 		asyncKey    : 'list_cogo_entity',
-		placeholder : 'Enter Entity',
-		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
+		isClearable : true,
+		span        : 2,
 		initialCall : true,
-		rules       : { required: 'EntityCode is required' },
+		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
+		style       : { width: '200px', marginLeft: '8px' },
+		placeholder : 'Entity',
+	},
+	{
+		name        : 'level',
+		type        : 'select',
+		asyncKey    : 'list_cogo_entity',
+		isClearable : true,
+		options     : [
+			{ label: 'Level 1', value: 1 },
+			{ label: 'Level 2', value: 2 },
+			{ label: 'Level 3', value: 3 },
+		],
+		span        : 2,
+		style       : { marginLeft: '8px' },
+		placeholder : 'Level',
 	},
 ];
+
+export default controls;

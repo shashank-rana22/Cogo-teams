@@ -8,7 +8,7 @@ import { controls } from '../../Controller/Config/create-level-config';
 
 const DEFAULT_VALUE = 1;
 
-const useCreateRequest = ({
+const useCreateLevel = ({
 	refetch = () => { },
 	setShowCreateModal = () => { },
 	lineItemsRef,
@@ -33,6 +33,7 @@ const useCreateRequest = ({
 	const create = async (payload) => {
 		try {
 			await trigger({ data: payload });
+			setShowCreateModal(false);
 			Toast.success('Created successfully');
 			refetch();
 		} catch (e) {
@@ -77,4 +78,4 @@ const useCreateRequest = ({
 	};
 };
 
-export default useCreateRequest;
+export default useCreateLevel;

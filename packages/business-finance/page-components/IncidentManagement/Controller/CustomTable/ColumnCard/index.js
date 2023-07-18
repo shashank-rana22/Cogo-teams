@@ -3,6 +3,8 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
+import useUpdateLevel from '../../../common/hooks/useUpdateLevel';
+
 import LevelForm from './LevelForm';
 import styles from './styles.module.css';
 
@@ -12,9 +14,17 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
+const DEFAULT_VALUE = 1;
+
+function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch = () => { } }) {
 	const [show, setShow] = useState(null);
 	const { fields = [] } = config;
+	const {
+		id = '',
+		referenceId = '',
+		createdBy = {},
+	} = item || {};
+	const { update } = useUpdateLevel({ refetch, setShow, createdBy, referenceId, id });
 
 	const ref = useRef();
 
@@ -23,10 +33,15 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 	};
 
 	const getData = (data) => {
-		console.log(data, 'data');
+		const { approvalLevelConditions = [] } = data || {};
+		const formatLineItems = approvalLevelConditions.map((val, index) => ({
+			...val,
+			level: index + DEFAULT_VALUE,
+		}));
+		update(formatLineItems);
 	};
 
-	const update = () => {
+	const onUpdate = () => {
 		ref.current.handleSubmit(getData)();
 	};
 
@@ -39,15 +54,24 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 		return '1';
 	};
 
+	const getUsers = () => {
+		if (!isEmpty(item?.level3)) {
+			return `${item?.level3?.stakeholder?.userName}, 
+			${item?.level2?.stakeholder?.userName}, ${item?.level1?.stakeholder?.userName}`;
+		} if (!isEmpty(item?.level2)) {
+			return `${item?.level2?.stakeholder?.userName}, ${item?.level1?.stakeholder?.userName}`;
+		}
+		return `${item?.level1?.stakeholder?.userName}`;
+	};
+
 	const formData = {
-		id              : item?.id || '_',
+		referenceId     : item?.referenceId || '_',
 		incidentType    : startCase(item?.incidentType || '-'),
 		incidentSubType : startCase(item?.incidentSubType || '_'),
 		entityCode      : item?.entityCode || '-',
 		levels          : getLevel(),
-		users           : `${item?.level3?.stakeholder?.userName}, 
-		${item?.level2?.stakeholder?.userName}, ${item?.level1?.stakeholder?.userName}` || '_',
-		edit: (
+		users           : getUsers(),
+		edit            : (
 			<div className={styles.flex}>
 				{!show ? <IcMEdit className={styles.edit} height={25} width={25} onClick={onShow} /> : (
 					<>
@@ -58,7 +82,7 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 						>
 							Cancel
 						</Button>
-						<Button onClick={update}>Confirm</Button>
+						<Button onClick={onUpdate}>Confirm</Button>
 					</>
 				)}
 			</div>
@@ -77,14 +101,13 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false }) {
 						}}
 						className={styles.col}
 					>
-						{incidentLoading}
-						?
-						<Placeholder />
-						{formData[field.key]}
+						{incidentLoading
+							? <Placeholder />
+							: formData[field.key]}
 					</div>
 				))}
 			</div>
-			{show ? <LevelForm ref={ref} /> : null}
+			{show ? <LevelForm ref={ref} item={item} /> : null}
 		</div>
 	);
 }

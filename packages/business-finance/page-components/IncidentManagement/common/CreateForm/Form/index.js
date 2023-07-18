@@ -35,12 +35,15 @@ const getElementController = (type) => {
 	}
 };
 
-function Form({ controls = [] }, ref) {
+function Form({ controls = () => { } }, ref) {
 	const { formState: { errors }, control, handleSubmit, watch } = useForm();
+
+	const finalControls = controls({ incidentType: watch('incidentType') });
+
 	useImperativeHandle(ref, () => ({ formSubmit: handleSubmit, watch }));
 	return (
 		<section className={styles.flex}>
-			{controls.map((controlItem) => {
+			{finalControls.map((controlItem) => {
 				const { span, show = true } = controlItem || {};
 				const el = { ...controlItem };
 				const Element = getElementController(el.type);

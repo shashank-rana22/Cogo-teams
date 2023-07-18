@@ -1,17 +1,17 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
 const useGetLevels = () => {
 	const [filters, setFilters] = useState({
-		page        : 1,
+		pageIndex   : 1,
 		pageLimit   : 10,
 		searchQuery : '',
 	});
 	const {
-		search, page, pageLimit,
+		search, pageIndex, pageLimit, incidentType, incidentSubtype, entityCode, level,
 	} = filters || {};
 
 	const [
@@ -28,23 +28,37 @@ const useGetLevels = () => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
+	const LEVEL_KEY_MAP = useMemo(() => ({
+		1 : 'onlyLevel1IncidentApproval',
+		2 : 'onlyLevel2IncidentApproval',
+		3 : 'onlyLevel3IncidentApproval',
+	}), []);
+
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
+
+	useEffect(() => {
+		setFilters((prev) => ({ ...prev, pageIndex: 1 }));
+	}, [query]);
 
 	const getIncidentLevels = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					q         : query !== '' ? query : undefined,
-					pageIndex : page,
-					pageSize  : pageLimit,
+					q                      : query !== '' ? query : undefined,
+					pageIndex,
+					pageSize               : pageLimit,
+					incidentType           : incidentType || undefined,
+					incidentSubtype        : incidentSubtype || undefined,
+					entityCode             : entityCode || undefined,
+					[LEVEL_KEY_MAP[level]] : level ? true : undefined,
 				},
 			});
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [page, pageLimit, query, trigger]);
+	}, [pageIndex, pageLimit, query, trigger, incidentType, incidentSubtype, entityCode, level, LEVEL_KEY_MAP]);
 
 	useEffect(() => {
 		getIncidentLevels();

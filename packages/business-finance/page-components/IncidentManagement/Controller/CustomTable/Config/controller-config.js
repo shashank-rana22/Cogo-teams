@@ -2,9 +2,9 @@ export const CONTROLLER_CONFIG = {
 	headerClass : 'border',
 	fields      : [
 		{
-			label : 'Id',
-			key   : 'id',
-			span  : 0.5,
+			label : 'ReferenceId',
+			key   : 'referenceId',
+			span  : 1,
 		},
 		{
 			label : 'Incident Type',
@@ -19,7 +19,7 @@ export const CONTROLLER_CONFIG = {
 		{
 			label : 'Entity',
 			key   : 'entityCode',
-			span  : 1,
+			span  : 0.5,
 		},
 		{
 			label : 'Levels',
