@@ -53,7 +53,7 @@ const OPTIONS = [
 ];
 
 export function LoadingState() {
-	const [currentIndex, setCurrentIndex] = useState(Math.random() * OPTIONS.length);
+	const [currentIndex, setCurrentIndex] = useState(Math.floor(Math.random() * OPTIONS.length));
 
 	useEffect(() => {
 		const interval = setInterval(() => {

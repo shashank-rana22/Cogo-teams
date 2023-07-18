@@ -18,7 +18,6 @@ function ShareQuotation({
 	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
-	setShouldResetMargins = () => {},
 }) {
 	const {
 		rate,
@@ -43,7 +42,7 @@ function ShareQuotation({
 	const {
 		updateCheckoutMargin,
 		loading,
-	} = useUpdateCheckoutMargin({ getCheckout, setShouldResetMargins, setCheckoutState });
+	} = useUpdateCheckoutMargin({ getCheckout, setCheckoutState });
 
 	const quotationOptions = [
 		{

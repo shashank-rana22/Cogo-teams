@@ -50,7 +50,7 @@ export const convertCurrencyValue = (
 		return (value / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 	}
 
-	const inBase = value * currencies[fromCurrency];
+	const inBase = value * (currencies[fromCurrency] || cogofx_currencies[fromCurrency]);
 
 	return (inBase / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 };
@@ -153,50 +153,47 @@ export const displayTotal = (
 	});
 
 	editedMargins?.forEach((editedMargin) => {
-		const { type, isNew = false, value = 0, code } = editedMargin || {};
+		const { type, isNew = false, value = 0 } = editedMargin || {};
 
 		if (type === 'absolute_unit' && !isNew) {
-			(lineItems || [])?.forEach((lineItem) => {
-				const { margins = [], quantity = 0, code: lineItemCode = '', source = '' } = lineItem;
+			const lineItem = (lineItems || []).find((item) => item.code === editedMargin.code);
 
-				const predefined_margin = (margins || []).find(
-					(item) => item?.margin_type === 'demand',
-				);
-				const { total_margin_value = 0 } = predefined_margin || {};
+			const { margins = [], quantity = 0, source = '' } = lineItem;
 
-				if (code === lineItemCode) {
-					const temp = value * quantity - (source !== 'manual' ? total_margin_value : 0);
+			const predefined_margin = (margins || []).find(
+				(item) => item?.margin_type === 'demand',
+			);
+			const { total_margin_value = 0 } = predefined_margin || {};
 
-					Total += convertCurrencyValue(
-						temp,
-						editedMargin.currency,
-						toCurrency,
-						conversions,
-					);
-				}
-			});
+			const temp = value * quantity - (source !== 'manual' ? total_margin_value : 0);
+
+			Total += convertCurrencyValue(
+				temp,
+				editedMargin.currency,
+				toCurrency,
+				conversions,
+			);
 		}
 
-		if (editedMargin.type === 'absolute_total' && !editedMargin.isNew) {
-			(lineItems || []).forEach((lineItem) => {
-				const { margins = [] } = lineItem;
+		if (type === 'absolute_total' && !editedMargin.isNew) {
+			const lineItem = (lineItems || []).find((item) => item.code === editedMargin.code);
 
-				const predefined_margin = (margins || []).find(
-					(item) => item?.margin_type === 'demand',
-				);
-				const { total_margin_value = 0 } = predefined_margin || {};
+			const { margins = [] } = lineItem;
 
-				if (editedMargin.code === lineItem.code) {
-					const temp = editedMargin.value
+			const predefined_margin = (margins || []).find(
+				(item) => item?.margin_type === 'demand',
+			);
+			const { total_margin_value = 0 } = predefined_margin || {};
+
+			const temp = editedMargin.value
 						- (lineItem.source !== 'manual' ? total_margin_value : 0);
-					Total += convertCurrencyValue(
-						temp,
-						editedMargin.currency,
-						toCurrency,
-						conversions,
-					);
-				}
-			});
+
+			Total += convertCurrencyValue(
+				temp,
+				editedMargin.currency,
+				toCurrency,
+				conversions,
+			);
 		}
 
 		if (editedMargin.isNew) {

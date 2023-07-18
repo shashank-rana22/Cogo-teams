@@ -24,7 +24,6 @@ function BreakdownDetails({
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
 	convenience_line_item = {},
-	setShouldResetMargins = () => {},
 	source = '',
 }) {
 	const {
@@ -32,7 +31,6 @@ function BreakdownDetails({
 		detail,
 		primaryService,
 		conversions,
-		loading:getCheckoutLoading,
 		getCheckout,
 		shouldEditMargin,
 		checkout_id,
@@ -194,7 +192,6 @@ function BreakdownDetails({
 									themeType="tertiary"
 									className={styles.add_line_item}
 									onClick={() => {
-										setShouldResetMargins(false);
 										setAddLineItemData({
 											index,
 											service_type : item?.service_type,
@@ -210,7 +207,6 @@ function BreakdownDetails({
 									themeType="tertiary"
 									className={styles.add_line_item}
 									onClick={() => {
-										setShouldResetMargins(false);
 										setEditLineItemData({
 											index,
 											service_type : item?.service_type,

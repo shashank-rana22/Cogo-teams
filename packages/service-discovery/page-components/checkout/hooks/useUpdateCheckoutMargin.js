@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateCheckoutMargin = ({ getCheckout, setShouldResetMargins, setCheckoutState }) => {
+const useUpdateCheckoutMargin = ({ getCheckout, setCheckoutState }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout_margin',
 		method : 'POST',
@@ -11,8 +11,6 @@ const useUpdateCheckoutMargin = ({ getCheckout, setShouldResetMargins, setChecko
 	const updateCheckoutMargin = async ({ finalPayload }) => {
 		try {
 			await trigger({ data: finalPayload });
-
-			setShouldResetMargins(true);
 
 			await getCheckout();
 
