@@ -7,19 +7,19 @@ import styles from './styles.module.css';
 
 export const functions = {
 	handleAirline: (singleItem) => {
-		const { airline } = singleItem || {};
-		const { business_name, logo_url } = airline || {};
+		const { airlineName, airlineLogo } = singleItem || {};
+
 		return (
 			<div className={styles.tooltip_container}>
 				<Tooltip
-					content={business_name}
+					content={airlineName}
 					placement="top"
 					interactive
 				>
 					<div className={styles.airline_name}>
-						{logo_url ? (
+						{airlineLogo ? (
 							<img
-								src={logo_url}
+								src={airlineLogo}
 								alt="Airline Logo"
 								style={{ maxWidth: '20px', marginRight: '8px' }}
 							/>
@@ -31,23 +31,22 @@ export const functions = {
 								style={{ marginRight: '8px' }}
 							/>
 						)}
-						{business_name}
+						{airlineName}
 					</div>
 				</Tooltip>
 			</div>
 		);
 	},
 	handleAirport: (singleItem) => {
-		const { airport } = singleItem || {};
-		const { port_code, name } = airport || {};
+		const { originAirport, originAirportCode } = singleItem || {};
 		return (
-			`(${port_code}) ${name}`
-		);
+			`(${originAirportCode}) ${originAirport}`
+		) || '-';
+		// return originAirport;
 	},
 	handleDestLocation: (singleItem) => {
-		const { destination_location } = singleItem || {};
-		const { name } = destination_location || {};
-		return (name);
+		const { destinationAirport } = singleItem || {};
+		return (destinationAirport) || '-';
 	},
 	handleIE: (singleItem) => {
 		const { importer_exporter } = singleItem || {};
@@ -57,27 +56,55 @@ export const functions = {
 		);
 	},
 	handleAgent: (singleItem) => {
-		const { procured_by = {} } = singleItem || {};
-		return (
-			procured_by?.name
-		);
+		const { procuredByName = {} } = singleItem || {};
+		return procuredByName || '-';
 	},
 	handleServiceProvider: (singleItem) => {
-		const { service_provider = {} } = singleItem || {};
-		return (
-			service_provider?.business_name
-		);
+		const { serviceProviderName } = singleItem || {};
+		return serviceProviderName || '-';
 	},
 	handleDate: (singleItem) => {
-		const { procured_date } = singleItem || {};
+		const { procuredDate } = singleItem || {};
 		return (
 			<div className={styles.overflow_text}>
 				{formatDate({
-					date       : procured_date,
+					date       : procuredDate,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				})}
 			</div>
-		);
+		) || '-';
+	},
+	handleTotalStock: (singleItem) => {
+		const { totalStock } = singleItem || {};
+		return totalStock || '-';
+	},
+	handleUsedStock: (singleItem) => {
+		const { usedStock } = singleItem || {};
+		return usedStock || '-';
+	},
+	handleUnusedStock: (singleItem) => {
+		const { unusedStock } = singleItem || {};
+		return unusedStock || '-';
+	},
+	handleCancelledStock: (singleItem) => {
+		const { cancelledStock } = singleItem || {};
+		return cancelledStock || '-';
+	},
+	handleCustomClearanceDate: (singleItem) => {
+		const { customClearanceDate } = singleItem || {};
+		return customClearanceDate || '-';
+	},
+	handleBookingDate: (singleItem) => {
+		const { bookingDate } = singleItem || {};
+		return bookingDate || '-';
+	},
+	handleAwbNumber: (singleItem) => {
+		const { awbNumber } = singleItem || {};
+		return awbNumber || '-';
+	},
+	handleIataCode: (singleItem) => {
+		const { iataCode } = singleItem || {};
+		return iataCode || '-';
 	},
 };

@@ -1,5 +1,5 @@
-import { Button, Modal } from '@cogoport/components';
-import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
+import { Button, Modal, Pill } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { functions } from '../../commons/Functions';
@@ -42,16 +42,33 @@ function AwbNumber({
 	const otherFunctions = {
 		handleAction: (singleItem) => (
 			<div className={styles.button_group}>
-				<Button
-					themeType="linkUi"
-					onClick={() => {
-						setItem(singleItem);
-						setShowEdit(true);
-					}}
-				>
-					<IcMEdit height={16} width={16} fill="#8B8B8B" />
-				</Button>
-				<Button
+				{singleItem.status === 'available' && (
+					<Button
+						themeType="primary"
+						size="md"
+						onClick={() => {
+							setItem(singleItem);
+							setShowEdit(true);
+						}}
+					>
+						Reserve AWB
+					</Button>
+				)}
+				{singleItem.status === 'available_unreserved' && (
+					<>
+						<Pill size="sm" color="green">Reserved</Pill>
+						<Button
+							themeType="linkUi"
+							onClick={() => {
+								setItem(singleItem);
+								setShowEdit(true);
+							}}
+						>
+							<IcMEdit height={16} width={16} fill="#8B8B8B" />
+						</Button>
+					</>
+				)}
+				{/* <Button
 					themeType="linkUi"
 					onClick={() => {
 						setItem(singleItem);
@@ -59,7 +76,7 @@ function AwbNumber({
 					}}
 				>
 					<IcMDelete height={16} width={16} fill="#8B8B8B" />
-				</Button>
+				</Button> */}
 			</div>
 		),
 	};

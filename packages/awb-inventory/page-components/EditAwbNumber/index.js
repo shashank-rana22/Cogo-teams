@@ -21,6 +21,7 @@ function EditAwbNumber({
 	editAwbNumber = () => {},
 	loading,
 }) {
+	console.log('item', item);
 	const [serviceProviderData, setServiceProviderData] = useState({});
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
@@ -30,12 +31,13 @@ function EditAwbNumber({
 		setServiceProviderData,
 		serviceProviderData,
 	});
-
+	// write prefill code below this line in useEffect
 	useEffect(() => {
 		fields.forEach((c) => {
+			console.log('c.name', c.name, item[c.name]);
 			setValue(c.name, item[c.name] || c?.value);
 		});
-		setValue('procured_date', new Date(item?.procured_date));
+		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

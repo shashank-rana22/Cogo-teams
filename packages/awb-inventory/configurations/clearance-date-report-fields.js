@@ -1,4 +1,4 @@
-export const AwbNumberFields = {
+export const ClearanceDateReportFields = {
 	fields: [
 		{
 			key   : 'airline',
@@ -22,25 +22,18 @@ export const AwbNumberFields = {
 			key   : 'awb_number',
 			label : 'AWB Number',
 			span  : 1.2,
-			func  : 'handleAwbNumber',
 		},
 		{
-			key   : 'procured_by',
-			label : 'Procured Agent',
+			key   : 'custom_clearance_date',
+			label : 'Custom Clearance Date',
 			span  : 1,
-			func  : 'handleAgent',
+			func  : 'handleCustomClearanceDate',
 		},
 		{
-			key   : 'service_provider',
-			label : 'Service Provider',
+			key   : 'booking_date',
+			label : 'Booking Date',
 			span  : 1.4,
-			func  : 'handleServiceProvider',
-		},
-		{
-			key   : 'procured_date',
-			label : 'Procured Date',
-			span  : 1,
-			func  : 'handleDate',
+			func  : 'handleBookingDate',
 		},
 		{
 			key   : 'action',

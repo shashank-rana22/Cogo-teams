@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
+import clearance_date_report_controls from '../../configurations/clearance-date-filters-controls';
 import controls from '../../configurations/filters-controls';
 
 import styles from './styles.module.css';
@@ -51,11 +52,22 @@ function Filters({ filters, setFilters, activeTab }) {
 							<IcMCrossInCircle width={18} height={18} fill="#333" />
 						</Button>
 					</div>
-					<Layout
-						control={control}
-						fields={controls}
-						errors={errors}
-					/>
+					{
+						activeTab === 'clearance_date_confirmation' ? (
+							<Layout
+								control={control}
+								fields={clearance_date_report_controls}
+								errors={errors}
+							/>
+						) : (
+							<Layout
+								control={control}
+								fields={controls}
+								errors={errors}
+							/>
+						)
+					}
+
 					<div className={styles.styled_button}>
 						<Button
 							themeType="secondary"

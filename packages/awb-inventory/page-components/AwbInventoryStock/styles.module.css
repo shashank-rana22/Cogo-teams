@@ -1,0 +1,28 @@
+.filters_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.input_search {
+	width: 280px;
+	height: 32px !important;
+
+	:global(.ui_input_control) {
+		font-size: 12px !important;
+	}
+
+	:global(.ui_input_suffix) {
+		width: 20px;
+		height: 80%;
+	}
+}
+
+.modal_container {
+	padding: 20px;
+}

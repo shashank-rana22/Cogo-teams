@@ -6,7 +6,7 @@ import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
 
-const useGetAwbList = ({ activeTab, value }) => {
+const useGetClearanceDateReport = ({ activeTab }) => {
 	const [page, setPage] = useState(START_PAGE);
 	const [finalList, setFinalList] = useState([]);
 	const [qfilter, setQfilter] = useState('');
@@ -16,15 +16,14 @@ const useGetAwbList = ({ activeTab, value }) => {
 
 	const [{ data = {}, loading }, trigger] = useRequestAir('/air-coe/awb-inventory/list', { manual: true });
 
-	const awbList = useCallback(() => {
+	const clearanceDateReport = useCallback(() => {
 		(async () => {
 			try {
 				await trigger({
 					params: {
 
-						status : value,
 						...filters,
-						q      : query,
+						q: query,
 
 						page,
 					},
@@ -33,7 +32,7 @@ const useGetAwbList = ({ activeTab, value }) => {
 				console.error(err);
 			}
 		})();
-	}, [filters, page, query, trigger, value]);
+	}, [filters, page, query, trigger]);
 
 	useEffect(() => {
 		debounceQuery(qfilter);
@@ -51,15 +50,15 @@ const useGetAwbList = ({ activeTab, value }) => {
 	}, [filters, query]);
 
 	useEffect(() => {
-		awbList();
-	}, [page, filters, query, awbList, value]);
+		clearanceDateReport();
+	}, [page, filters, query, clearanceDateReport]);
 
 	return {
 		loading,
 		setPage,
 		page,
 		data,
-		awbList,
+		clearanceDateReport,
 		finalList,
 		setFinalList,
 		filters,
@@ -69,4 +68,4 @@ const useGetAwbList = ({ activeTab, value }) => {
 	};
 };
 
-export default useGetAwbList;
+export default useGetClearanceDateReport;

@@ -45,15 +45,15 @@ function AddAwbNumber({
 		setServiceProviderData,
 		serviceProviderData,
 	});
-	const { first_awb_number: firstAwbNumber = '', airline_id: airlineId = '', awb_block: awbBlock = '' } = watch();
+	const { first_awb_number: firstAwbNumber = '', airline_id: airlineId = '' } = watch();
 
-	const getShowElements = () => !!awbBlock;
+	// const getShowElements = () => !!awbBlock;
 
-	const showElements = {
-		importer_exporter_id    : getShowElements(),
-		destination_location_id : getShowElements(),
-		booking_agent_id        : getShowElements(),
-	};
+	// const showElements = {
+	// 	importer_exporter_id    : getShowElements(),
+	// 	destination_location_id : getShowElements(),
+	// 	booking_agent_id        : getShowElements(),
+	// };
 	useEffect(() => {
 		if (airlineId) {
 			getAWBPrefix(airlineId);
@@ -92,12 +92,12 @@ function AddAwbNumber({
 
 	return (
 		<div className={styles.addawb_container}>
-			<div className={styles.modal_header}>ADD AWB NUMBER</div>
+			<div className={styles.modal_header}>ADD NEW AWB</div>
 			<Layout
 				fields={fields}
 				control={control}
 				errors={errors}
-				showElements={showElements}
+				// showElements={showElements}
 			/>
 			<div className={styles.button_container}>
 				<Button
@@ -113,7 +113,7 @@ function AddAwbNumber({
 					onClick={handleSubmit((finalData) => createAwbNumber(finalData))}
 					disabled={loading}
 				>
-					{loading ? 'Creating' : 'Create'}
+					{loading ? 'Adding' : 'Add'}
 				</Button>
 			</div>
 		</div>

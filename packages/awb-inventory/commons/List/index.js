@@ -25,7 +25,7 @@ function List({
 	setFinalList,
 }) {
 	const [isMobile, setIsMobile] = useState(false);
-	const { list = [], total_count:totalCount } = listData;
+	const { list = [], totalRecords:totalCount } = listData;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -36,7 +36,7 @@ function List({
 	}, [loading, setPage]);
 
 	const render = () => {
-		if (loading || finalList.length) {
+		if (loading || (finalList || []).length) {
 			return (finalList || []).map((singleitem) => (
 				<ListItem
 					key={singleitem.id}
@@ -102,7 +102,7 @@ function List({
 						<Loader />
 					</div>
 				)}
-				{finalList.length === totalCount && !isEmpty(finalList) ? (
+				{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
 					<div className={styles.end_message}>No more data to show</div>
 				) : null}
 			</div>

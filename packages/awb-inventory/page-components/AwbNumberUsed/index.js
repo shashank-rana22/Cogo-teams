@@ -1,11 +1,15 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { functions } from '../../commons/Functions';
 import List from '../../commons/List';
 import { AwbNumberUsedFields } from '../../configurations/awb-number-used-fields';
+import useEditAwbNumber from '../../hooks/useEditAwbNumber';
+import ConfirmDelete from '../ConfirmDelete';
+import EditAwbNumber from '../EditAwbNumber';
 
 import styles from './styles.module.css';
 
@@ -16,9 +20,23 @@ function AwbNumberUsed({
 	finalList,
 	page,
 	setPage,
+	status,
 }) {
 	const { fields } = AwbNumberUsedFields;
 	const router = useRouter();
+
+	const [item, setItem] = useState({ id: '' });
+	const [showEdit, setShowEdit] = useState(false);
+	const [showConfirm, setShowConfirm] = useState(false);
+
+	const { editAwbNumber, loading:editLoading } = useEditAwbNumber({
+		item,
+		setShowEdit,
+		setPage,
+		setFinalList,
+		setShowConfirm,
+		page,
+	});
 
 	const redirectToShipment = (shipmentId) => {
 		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
@@ -49,6 +67,28 @@ function AwbNumberUsed({
 				</div>
 			);
 		},
+		handleAction: (singleItem) => (
+			<div className={styles.button_group}>
+				<Button
+					themeType="linkUi"
+					onClick={() => {
+						setItem(singleItem);
+						setShowEdit(true);
+					}}
+				>
+					<IcMEdit height={16} width={16} fill="#8B8B8B" />
+				</Button>
+				<Button
+					themeType="linkUi"
+					onClick={() => {
+						setItem(singleItem);
+						setShowConfirm(true);
+					}}
+				>
+					<IcMDelete height={16} width={16} fill="#8B8B8B" />
+				</Button>
+			</div>
+		),
 	};
 
 	const allFunctions = { ...functions, ...otherFunctions };
@@ -65,6 +105,34 @@ function AwbNumberUsed({
 				finalList={finalList}
 				setFinalList={setFinalList}
 			/>
+			{showEdit && (
+				<Modal
+					show={showEdit}
+					onClose={() => setShowEdit(false)}
+					className={styles.modal_container}
+				>
+					<EditAwbNumber
+						item={item}
+						setShowEdit={setShowEdit}
+						editAwbNumber={editAwbNumber}
+						loading={editLoading}
+					/>
+				</Modal>
+			)}
+			{showConfirm && (
+				<Modal
+					show={showConfirm}
+					onClose={() => setShowConfirm(false)}
+					className={styles.modal_container}
+				>
+					<ConfirmDelete
+						setShowConfirm={setShowConfirm}
+						editAwbNumber={editAwbNumber}
+						loading={editLoading}
+						status={status}
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }

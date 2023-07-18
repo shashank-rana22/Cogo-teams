@@ -22,11 +22,13 @@ export const AwbNumberUsedFields = {
 			key   : 'iata_code',
 			label : 'IATA Code',
 			span  : 1,
+			func  : 'handleIataCode',
 		},
 		{
 			key   : 'awb_number',
 			label : 'AWB Number',
 			span  : 1.4,
+			func  : 'handleAwbNumber',
 		},
 		{
 			key   : 'shipments',
@@ -51,6 +53,12 @@ export const AwbNumberUsedFields = {
 			label : 'Procured Date',
 			span  : 1.2,
 			func  : 'handleDate',
+		},
+		{
+			key   : 'action',
+			label : 'Action',
+			span  : 1.2,
+			func  : 'handleAction',
 		},
 	],
 };
