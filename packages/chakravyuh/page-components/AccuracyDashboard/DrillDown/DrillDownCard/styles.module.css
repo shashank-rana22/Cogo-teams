@@ -8,7 +8,7 @@
 	width: 180px;
 	height: 100px;
 	padding: 12px 12px 8px;
-	margin-left: 50px;
+	margin-right: 50px;
 	background-color: #fff;
 	border: 1px solid transparent;
 	border-radius: 8px;
@@ -36,6 +36,10 @@
 
 	&.dropoff {
 		--card-color: #9b2226;
+	}
+
+	&.hide_animation {
+		animation-iteration-count: 1;
 	}
 }
 

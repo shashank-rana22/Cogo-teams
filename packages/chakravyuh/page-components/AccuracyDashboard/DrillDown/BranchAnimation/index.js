@@ -4,6 +4,7 @@ import anime from 'animejs/lib/anime.es';
 import { useRef, useEffect } from 'react';
 
 import { ANIMATION_CONFIG, MAPPING, LAST_INDEX, FACTOR } from '../../../../constants/svg_constants';
+import styles from '../styles.module.css';
 
 function BranchAnimation() {
 	const svgRef = useRef(null);
@@ -42,24 +43,17 @@ function BranchAnimation() {
 			height="800"
 			viewBox="0 0 1000 800"
 			xmlSpace="preserve"
+			className={styles.tree_icon}
 		>
-			<defs>
-				<clipPath id="clip">
-					<rect x="0" y="100" width="1000" height="600" />
-				</clipPath>
-			</defs>
-			<g clipPath="url(#clip)">
-				f
-				{ANIMATION_CONFIG.map(({ parentProps, children }) => (
-					<g {...parentProps} key={parentProps.id}>
-						{children.map(({ gProps, pathProps }) => (
-							<g key={gProps.id} {...gProps}>
-								<path {...pathProps} />
-							</g>
-						))}
-					</g>
-				))}
-			</g>
+			{ANIMATION_CONFIG.map(({ parentProps, children }) => (
+				<g {...parentProps} key={parentProps.id}>
+					{children.map(({ gProps, pathProps }) => (
+						<g key={gProps.id} {...gProps}>
+							<path {...pathProps} />
+						</g>
+					))}
+				</g>
+			))}
 		</svg>
 	);
 }

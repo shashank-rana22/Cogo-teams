@@ -68,6 +68,7 @@ function Accuracy() {
 					pointBorderColor={{ from: 'color', modifiers: [['darker', CONSTANT_POINT_TWO]] }}
 					pointLabelYOffset={-12}
 					useMesh
+					enableSlices="x"
 					legends={[
 						{
 							anchor            : 'top-left',

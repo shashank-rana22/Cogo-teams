@@ -4,12 +4,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DrillDownCard({ data = {}, isMainCard = false, delay = 2 }) {
+function DrillDownCard({ data = {}, isMainCard = false, delay = 2, handleClick = () => {}, animate = false }) {
 	return (
 		<div
 			style={{ animationDelay: `${delay}s` }}
 			className={cl`${styles.container} ${isMainCard ? styles.main_card : styles.secondary_card}
-		 ${styles[data.parent]}`}
+		 ${styles[data.parent]} ${!animate ? styles.hide_animation : ''}`}
 		>
 			<div className={styles.flex_between}>
 				<p className={styles.card_name}>{startCase(data?.action_type)}</p>
@@ -18,7 +18,7 @@ function DrillDownCard({ data = {}, isMainCard = false, delay = 2 }) {
 			<div className={styles.flex_between}>
 				<p className={styles.drop_off}>{data?.drop}</p>
 				{isMainCard
-					? <Button themeType="linkUi">View Dropoff</Button>
+					? <Button themeType="linkUi" onClick={() => handleClick(data.parent)}>View Dropoff</Button>
 					: <h3 className={styles.rate_amount}>{data?.rates_count}</h3>}
 			</div>
 		</div>

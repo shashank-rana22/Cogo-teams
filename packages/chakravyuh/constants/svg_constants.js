@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const PATH_STYLE = {
-	stroke           : '#F1CB0E',
+	stroke           : '#e3aa0b',
 	strokeOpacity    : '1',
 	strokeWidth      : '4',
 	strokeDasharray  : 'none',
@@ -10,7 +10,7 @@ const PATH_STYLE = {
 	strokeMiterlimit : '4',
 	fill             : 'none',
 	fillRule         : 'nonzero',
-	opacity          : '1',
+	opacity          : '0.8',
 };
 
 const LINE_TRANSFORM = 'translate(151.5685, 110.0803)';
@@ -30,7 +30,7 @@ export const MAPPING = {
 };
 
 const COLORS_CONFIG = {
-	checkout : { ...PATH_STYLE, stroke: '#001219' },
+	checkout : { ...PATH_STYLE, stroke: '#044863dd' },
 	missing  : { ...PATH_STYLE, stroke: '#0a9396' },
 	dislike  : { ...PATH_STYLE, stroke: '#ca6702' },
 	dropoff  : { ...PATH_STYLE, stroke: '#9b2226' },
