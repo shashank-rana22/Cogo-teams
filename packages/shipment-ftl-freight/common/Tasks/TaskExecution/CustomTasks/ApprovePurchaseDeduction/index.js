@@ -14,7 +14,8 @@ import useGetDeductionDetails from './hooks/useGetDeductionDetails';
 import Loading from './Loading';
 import styles from './styles.module.css';
 
-const OK_RESPONSE_STATUS = 200;
+const SUCCESS_RESPONSE_STATUS = 200;
+
 const DEFAULT_AMOUNT = 0;
 
 function ApprovePurchaseDeduction({
@@ -53,9 +54,9 @@ function ApprovePurchaseDeduction({
 			shipment_data,
 			watchCN,
 		});
-		if (response?.status === OK_RESPONSE_STATUS) {
+		if (response?.status === SUCCESS_RESPONSE_STATUS) {
 			const taskResponse = await handlePendingTask({ task });
-			if (taskResponse?.status === OK_RESPONSE_STATUS) {
+			if (taskResponse?.status === SUCCESS_RESPONSE_STATUS) {
 				Toast.success('Task Completed Successfully');
 				refetch();
 				onCancel();
