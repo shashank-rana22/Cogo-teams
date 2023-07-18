@@ -1,6 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDownload } from '@cogoport/icons-react';
-import { Image, useRouter } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -9,18 +7,17 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ANDRIOD_APK } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
-import AgentStatusToggle from './AgentStatusToggle';
+import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
+import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
@@ -97,11 +94,10 @@ function CogoOne() {
 
 	return (
 		<>
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
-				<div className={styles.settings}>
-					<AgentStatusToggle firestore={firestore} />
-				</div>
-			)}
+			<HeaderBar
+				firestore={firestore}
+				viewType={viewType}
+			/>
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
 					<Customers
@@ -162,31 +158,7 @@ function CogoOne() {
 							)}
 						</>
 					)}
-
-				<div className={styles.download_apk}>
-					<div
-						role="presentation"
-						className={styles.download_div}
-						onClick={() => window.open(ANDRIOD_APK, '_blank')}
-					>
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
-							alt="bot"
-							height={16}
-							width={15}
-							className={styles.bot_icon_styles}
-						/>
-						<div className={styles.text_styles}>
-							<div className={styles.flex}>
-								<IcMDownload
-									className={styles.download_icon}
-								/>
-								<div>Get the</div>
-							</div>
-							app now
-						</div>
-					</div>
-				</div>
+				<AndroidApp />
 			</div>
 
 			<ModalComp
