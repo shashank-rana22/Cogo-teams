@@ -6,6 +6,8 @@ import { mainControls, bookingNoteNumberControls, movementDetailsControls } from
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 1;
+
 function Step2({ data, setStep, step1_data }) {
 	const [currentBookingNote, setCurrentBookingNote] = useState('0');
 
@@ -23,42 +25,42 @@ function Step2({ data, setStep, step1_data }) {
 		<div>
 			<div className={styles.container}>
 
-				<div className={styles.tabs_container}>
-					<Tabs
-						activeTab={currentBookingNote}
-						onChange={setCurrentBookingNote}
-					>
-						{step1Files?.map((file, index) => {
-							const currentUrl = typeof file === 'object' ? file?.finalUrl : file;
-							const splitUrl = currentUrl.split('.');
-							const fileType = splitUrl?.[(splitUrl?.length || 1) - 1];
-							let type = '';
+				<Tabs
+					activeTab={currentBookingNote}
+					onChange={setCurrentBookingNote}
+					className={styles.tabs_container}
+				>
+					{step1Files?.map((file, index) => {
+						const currentUrl = typeof file === 'object' ? file?.finalUrl : file;
+						const splitUrl = currentUrl.split('.');
+						const fileType = splitUrl?.[(splitUrl?.length || FIRST_INDEX) - FIRST_INDEX];
+						let type = '';
 
-							if (['png', 'jpeg'].includes(fileType)) {
-								type = `image/${fileType}`;
-							} else {
-								type = 'application/pdf';
-							}
+						if (['png', 'jpeg'].includes(fileType)) {
+							type = `image/${fileType}`;
+						} else {
+							type = 'application/pdf';
+						}
 
-							return (
-								<TabPanel
-									name={`${index}`}
-									title={`Booking Note ${index + 1}`}
-									key={keysForRows[index]}
-								>
-									<div>
-										<object
-											title="Booking Note"
-											width="100%"
-											type={type}
-											data={currentUrl}
-										/>
-									</div>
-								</TabPanel>
-							);
-						})}
-					</Tabs>
-				</div>
+						return (
+							<TabPanel
+								name={`${index}`}
+								title={`Booking Note ${index + FIRST_INDEX}`}
+								key={keysForRows[index]}
+							>
+								<div>
+									<object
+										title="Booking Note"
+										width="100%"
+										type={type}
+										data={currentUrl}
+									/>
+								</div>
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+
 				<div className={styles.form_container}>
 					<div className={styles.heading}>Review Details</div>
 
@@ -82,7 +84,7 @@ function Step2({ data, setStep, step1_data }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(1)}>Back</Button>
+				<Button themeType="secondary" onClick={() => setStep(FIRST_INDEX)}>Back</Button>
 
 				<Button themeType="primary" onClick={handleSubmit(handleFinalSubmit)}>Next</Button>
 			</div>

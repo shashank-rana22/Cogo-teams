@@ -102,10 +102,11 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
-				{name.toUpperCase()}
+				{name.toUpperCase().replace('_', ' ')}
 				&nbsp;
 				{index + INDEX_INCR_BY}
 			</h3>
+
 			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {

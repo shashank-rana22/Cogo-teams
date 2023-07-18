@@ -45,50 +45,47 @@ function TaskDetails({
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.details_container}>
 				<div className={styles.details}>
 					<div className={styles.task_name}>{taskName}</div>
 
 					<div className={styles.task_date_details}>
-						{task?.deadline && task?.status !== 'completed' ? (
-							<Tooltip
-								interactive
-								theme="light"
-								content={(
-									<div style={{ fontSize: '10px' }}>
-										{format(
-											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+						<Tooltip
+							interactive
+							theme="light"
+							content={(
+								<div style={{ fontSize: '10px' }}>
+									{format(
+										task?.status === 'completed' ? task?.updated_at : task?.deadline,
+										`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
 											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-											null,
-											true,
-										)}
-									</div>
-								)}
-							>
-								<div>
-									<div className={styles.deadline}>
-										<IcMTimer />
+										null,
+										true,
+									)}
+								</div>
+							)}
+						>
+							{task?.status === 'completed' ? (
+								<div className={styles.completed}>
+									<IcMFtick />
+
+									{`Completed On: ${formatDate({
+										date       : task?.updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+										separator  : ' - ',
+									})}`}
+								</div>
+							) : (
+								<div className={styles.deadline}>
+									<IcMTimer />
 
 										&nbsp;Deadline: &nbsp;
-										{formatDeadlineDate(new Date(task?.deadline))}
-									</div>
+									{formatDeadlineDate(new Date(task?.deadline))}
 								</div>
-							</Tooltip>
-						) : null}
+							)}
 
-						{task?.status === 'completed' ? (
-							<div className={styles.completed}>
-								<IcMFtick />
-
-								{`Completed On: ${formatDate({
-									date       : task?.updated_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									formatType : 'date',
-									separator  : ' - ',
-								})}`}
-							</div>
-						) : null}
+						</Tooltip>
 
 						{task?.due_in ? (
 							<div className={styles.completed}>
