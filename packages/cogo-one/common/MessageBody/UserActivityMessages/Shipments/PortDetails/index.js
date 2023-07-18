@@ -28,7 +28,7 @@ function PortDetails({ serviceData = {}, service = '' }) {
 		export : singleDestinationDisplay,
 	};
 
-	if (!isSingleLocation) {
+	if (isSingleLocation) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.flex_row_origin}>
