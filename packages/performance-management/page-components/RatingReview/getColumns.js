@@ -45,22 +45,19 @@ const getColumns = ({
 
 		{
 			Header   : 'Name',
-			accessor : (item) => {
-				const isVerticalHead = level === 'functional_manager' || activeTab !== 'vertical_head';
-				return (
-					<div
-						className={styles.employee_name}
-						style={{
-							cursor         : isVerticalHead ? 'pointer' : 'custom',
-							textDecoration : isVerticalHead ? 'underline' : 'custom',
-						}}
-						role="presentation"
-						onClick={isVerticalHead ? () => setShow(item?.employee_id) : null}
-					>
-						{startCase(item?.employee_name) || startCase(item?.name) || '-'}
-					</div>
-				);
-			},
+			accessor : (item) => (
+				<div
+					style={{
+						cursor         : 'pointer',
+						textDecoration : 'underline',
+					}}
+					role="presentation"
+					onClick={() => setShow(item?.employee_id)}
+				>
+					{startCase(item?.employee_name) || startCase(item?.name) || '-'}
+				</div>
+			)
+			,
 		},
 
 		{

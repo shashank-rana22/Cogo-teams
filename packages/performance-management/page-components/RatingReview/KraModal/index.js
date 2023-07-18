@@ -7,6 +7,9 @@ import styles from './styles.module.css';
 import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
+const ROUNF_OFF_DIGIT = 100;
+const DEFAULT_OVERALL_RATING = 0;
+
 function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 	const {
 		data = [],
@@ -101,7 +104,9 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 											<div className={styles.average_overall_rating}>
 												Average Overall Rating:
 												{' '}
-												{data?.average_overall_rating}
+
+												{ Math.round((data?.average_overall_rating || DEFAULT_OVERALL_RATING)
+												* ROUNF_OFF_DIGIT) / ROUNF_OFF_DIGIT}
 											</div>
 
 											<div className={styles.rating_obtained}>

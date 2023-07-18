@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { formattedDate } from '../../../common/formattedDate';
 
 const MIN_RATING = 0;
+const RATING_THRESHOLD = 1;
 
 const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingReviewDetails }) => {
 	const { end_date, start_date } = selectCycle || {};
@@ -18,6 +19,8 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 		method : 'POST',
 	}, { manual: true });
 
+	const { final_rating } = data || {};
+
 	const updateEmployeeFinalRating = async () => {
 		if (starRating === MIN_RATING) {
 			Toast.error('Rating is required');
@@ -25,6 +28,10 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 		}
 		if (!comments) {
 			Toast.error('Comments is required');
+			return;
+		}
+		if (starRating > final_rating + RATING_THRESHOLD || starRating < final_rating - RATING_THRESHOLD) {
+			Toast.error("Can't change rating more or less than 1");
 			return;
 		}
 
@@ -46,6 +53,10 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
+
+	useEffect(() => {
+		setStarRating(final_rating);
+	}, [final_rating]);
 
 	return {
 		updateEmployeeFinalRating,
