@@ -4,7 +4,7 @@ import GeneralConfiguration from './GeneralConfiguration';
 import ObjectiveRequirements from './ObjectiveRequirements';
 
 function SetObjective(props) {
-	const { formValues, setFormValues } = props;
+	const { formValues, setFormValues, setActiveStep } = props;
 
 	const [generalConfigFormState, setGeneralConfigFormState] = useState('edit');
 
@@ -41,6 +41,7 @@ function SetObjective(props) {
 				formValues={formValues}
 				setFormValues={setFormValues}
 				disabled={generalConfigFormState === 'edit'}
+				setActiveStep={setActiveStep}
 			/>
 		</>
 	);

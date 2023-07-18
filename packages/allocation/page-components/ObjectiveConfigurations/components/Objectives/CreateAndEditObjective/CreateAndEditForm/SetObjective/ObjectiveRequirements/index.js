@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
+import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../../constants/create-form-stepper-keys-mapping';
 import getSeparatedIdData from '../../../../../../helpers/get-separated-id-data';
 
 import AccountTransactionFunnel from './AccountTransactionFunnel';
@@ -9,8 +10,10 @@ import OrganizationalDetails from './OrganizationalDetails';
 import ServiceRequirements from './ServiceRequirements';
 import styles from './styles.module.css';
 
+const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
+
 const ObjectiveRequirements = forwardRef((props, ref) => {
-	const { formValues, setFormValues, disabled } = props;
+	const { formValues, setFormValues, disabled, setActiveStep } = props;
 
 	const divRef = useRef({});
 
@@ -39,6 +42,8 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 			service_requirements,
 		} = values;
 
+		console.log('values :: ', values);
+
 		setFormValues((previousValues) => ({
 			...previousValues,
 			objectiveRequirements: {
@@ -56,6 +61,8 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				service_requirements,
 			},
 		}));
+
+		setActiveStep(REVIEW_OBJECTIVE);
 	};
 
 	return (

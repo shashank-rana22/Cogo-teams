@@ -51,7 +51,7 @@ const getServiceRequirementControls = (props) => {
 			],
 			isClearable : true,
 			showElement : {
-				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
+				serviceType: ['fcl_freight', 'lcl_freight', 'air_freight'],
 			},
 			disabled,
 		},
@@ -101,7 +101,7 @@ const getServiceRequirementControls = (props) => {
 			options     : getIncotermOptionsByTradeType({ trade_type: watchTradeType }),
 			isClearable : true,
 			showElement : {
-				serviceType: ['fcl_freight', 'lcl_freight', 'air_international'],
+				serviceType: ['fcl_freight', 'lcl_freight', 'air_freight'],
 			},
 			disabled,
 		},
@@ -115,7 +115,7 @@ const getServiceRequirementControls = (props) => {
 			valueKey    : 'hs_code',
 			isClearable : true,
 			showElement : {
-				serviceType: ['fcl_freight', 'lcl_freight', 'air_domestic', 'air_international'],
+				serviceType: ['fcl_freight', 'lcl_freight', 'domestic_air_freight', 'air_freight'],
 			},
 			renderLabel: ({ name = '', hs_code = '' }) => `${name} (${hs_code})`,
 			disabled,
@@ -151,7 +151,7 @@ const getServiceRequirementControls = (props) => {
 			type        : 'text',
 			isClearable : true,
 			showElement : {
-				serviceType: ['lcl_freight', 'air_domestic', 'air_international'],
+				serviceType: ['lcl_freight', 'domestic_air_freight', 'air_freight'],
 			},
 			disabled,
 		},
@@ -181,7 +181,7 @@ const getServiceRequirementControls = (props) => {
 			isClearable : true,
 			showElement : {
 				shipmentMode : ['rail_domestic'],
-				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
+				serviceType  : ['fcl_freight', 'trailer_freight', 'rail_freight', 'barge_freight'],
 			},
 			disabled,
 		},
@@ -194,7 +194,7 @@ const getServiceRequirementControls = (props) => {
 			isClearable : true,
 			showElement : {
 				shipmentMode : ['rail_domestic'],
-				serviceType  : ['fcl_freight', 'trailer_freight', 'haulage_freight', 'barge_freight'],
+				serviceType  : ['fcl_freight', 'trailer_freight', 'rail_freight', 'barge_freight'],
 			},
 			disabled,
 		},

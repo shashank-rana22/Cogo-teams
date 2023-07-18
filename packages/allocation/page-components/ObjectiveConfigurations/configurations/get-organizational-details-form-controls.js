@@ -43,7 +43,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type       : 'region',
 					status     : 'active',
-					country_id : getSeparatedIdData({ values: watchCountries }),
+					country_id : getSeparatedIdData({ values: watchCountries })?.map((item) => item.id),
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -70,7 +70,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type      : 'city',
 					status    : 'active',
-					region_id : getSeparatedIdData({ values: watchStates }),
+					region_id : getSeparatedIdData({ values: watchStates })?.map((item) => item.id),
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -97,7 +97,7 @@ const getOrganizationalDetailsControls = (props) => {
 				filters: {
 					type    : 'pincode',
 					status  : 'active',
-					city_id : getSeparatedIdData({ values: watchCities }),
+					city_id : getSeparatedIdData({ values: watchCities })?.map((item) => item.id),
 				},
 				page_limit : 10,
 				sort_by    : 'name',

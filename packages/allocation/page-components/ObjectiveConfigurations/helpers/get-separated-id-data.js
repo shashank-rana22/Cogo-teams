@@ -1,11 +1,14 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 const getSeparatedIdData = ({ values }) => {
 	if (isEmpty(values)) return undefined;
 
 	if (Array.isArray(values)) {
-		return values.map((value) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]);
+		return values.map((value) => {
+			const [id, name] = value.split('_');
+
+			return { id, name };
+		});
 	}
 
 	if (typeof (values) === 'object') {
@@ -14,7 +17,11 @@ const getSeparatedIdData = ({ values }) => {
 		Object.entries(values).forEach(([key, valueItem]) => {
 			if (Array.isArray(valueItem)) {
 				SEPARATED_VALUES[key] = valueItem.map(
-					(singleValue) => singleValue.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+					(singleValue) => {
+						const [id, name] = singleValue.split('_');
+
+						return { id, name };
+					},
 				);
 			} else {
 				SEPARATED_VALUES[key] = valueItem;
