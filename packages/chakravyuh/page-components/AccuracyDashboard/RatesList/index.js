@@ -7,13 +7,13 @@ import useSupplyRatesListTable from '../../../hooks/useListTable';
 import styles from './styles.module.css';
 
 function SupplyRates({
-	filters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
+	globalFilters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
 	className = '',
 }) {
-	const { service_type = 'fcl', pieChartView = 'default' } = filters;
+	const { service_type = 'fcl', rate_type } = globalFilters;
 	const { columns } = useSupplyRatesListTable(service_type);
 
-	if (pieChartView !== 'default') {
+	if (rate_type) {
 		return (
 			<div className={cl`${styles.main_container} ${className}`}>
 				<Table columns={columns} data={LIST_DATA} className={styles.table_container} />

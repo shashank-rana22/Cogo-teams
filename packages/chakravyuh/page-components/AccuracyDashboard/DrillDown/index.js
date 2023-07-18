@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
@@ -15,7 +14,8 @@ const RATE_TYPES = ['supply', 'predicted', 'extended'];
 const DEFAULT_DELAY = 1.8;
 const FACTOR = 1;
 
-function DrillDown({ rate_type = null }) {
+function DrillDown({ globalFilters = {} }) {
+	const { rate_type } = globalFilters;
 	const rateSources = rate_type ? [rate_type] : RATE_TYPES;
 	const [activeParent, setActiveParent] = useState(null);
 

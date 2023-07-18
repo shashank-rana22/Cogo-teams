@@ -31,9 +31,9 @@ const CUMSTOM_DATA = [
 		cancellation : 70,
 	},
 	{
-		key          : 'supply_transformed_rates',
-		id           : 'Supply Transformed Rates',
-		label        : 'Supply Transformed Rates',
+		key          : 'extended_rates',
+		id           : 'Extended Rates',
+		label        : 'Extended Rates',
 		value        : 1312,
 		color        : '#9BA0CB',
 		cancellation : 65,
@@ -72,13 +72,13 @@ const EXPLORED_VIEW_DATA = [
 ];
 
 const ColorMappings = {
-	supply_rates             : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
-	predicted_rates          : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
-	supply_transformed_rates : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
+	supply_rates    : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
+	predicted_rates : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
+	extended_rates  : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
 };
 
 export const usePieChartConfigs = (type) => {
-	if (type === 'default') {
+	if (!type) {
 		return {
 			customData : CUMSTOM_DATA,
 			pieColors  : CUMSTOM_DATA.map((item) => item.color),

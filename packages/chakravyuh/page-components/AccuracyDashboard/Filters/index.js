@@ -11,13 +11,13 @@ import styles from './styles.module.css';
 
 const CONSTANT_ONE = 1;
 
-function Filters({ filters = {}, setFilters = () => {} }) {
-	const { service_type, origin, destination } = filters;
+function Filters({ globalFilters = {}, setGlobalFilters = () => {} }) {
+	const { service_type, origin, destination } = globalFilters;
 	const [showFiltersPopover, setShowFiltersPopover] = useState(false);
 	const [popupKey, setPopupKey] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const changePrimaryFilters = (key, value) => {
-		setFilters((prev) => ({ ...prev, [key]: value }));
+		setGlobalFilters((prev) => ({ ...prev, [key]: value }));
 	};
 
 	useEffect(() => {
@@ -89,7 +89,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 			<div className={styles.filters_container}>
 				<Popover
 					key={popupKey}
-					render={<FilterContainer filters={filters} />}
+					render={<FilterContainer globalFilters={globalFilters} />}
 					trigger="click"
 					placement="bottom"
 					visible={showFiltersPopover}
@@ -97,7 +97,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 					interactive
 				>
 					<Button
-						id="dash-main-filters"
+						id="dash-main-globalFilters"
 						themeType="secondary"
 						onClick={() => setShowFiltersPopover(true)}
 					>
