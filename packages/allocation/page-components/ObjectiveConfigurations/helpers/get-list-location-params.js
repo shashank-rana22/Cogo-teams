@@ -2,7 +2,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 	fcl_freight: {
 		filters: {
 			status : 'active',
-			type   : ['seaport', 'country'],
+			type   : ['seaport', 'country', 'trade'],
 		},
 		includes: {
 			city                    : true,
@@ -16,7 +16,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 	lcl_freight: {
 		filters: {
 			status : 'active',
-			type   : ['seaport', 'country'],
+			type   : ['seaport', 'country', 'trade'],
 		},
 		includes: {
 			city                    : true,
@@ -30,7 +30,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 	air_freight: {
 		filters: {
 			status : 'active',
-			type   : ['airport', 'country', 'city'],
+			type   : ['airport', 'country'],
 		},
 		includes: {
 			city                    : true,
@@ -44,7 +44,7 @@ const PARAMS_SHIPMENT_TYPE_MAPPING = {
 	domestic_air_freight: {
 		filters: {
 			status : 'active',
-			type   : ['airport', 'country', 'city'],
+			type   : ['airport', 'country'],
 		},
 		includes: {
 			city                    : true,

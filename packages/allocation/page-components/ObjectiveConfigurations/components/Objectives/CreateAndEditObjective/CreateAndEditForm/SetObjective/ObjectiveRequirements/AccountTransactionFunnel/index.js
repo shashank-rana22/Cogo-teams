@@ -3,7 +3,7 @@ import { DateRangePickerController, InputController } from '@cogoport/forms';
 import styles from './styles.module.css';
 
 function AccountTransactionFunnel(props) {
-	const { control, disabled } = props;
+	const { lifecycleStage, control, disabled } = props;
 
 	return 		(
 		<div className={styles.container}>
@@ -45,16 +45,18 @@ function AccountTransactionFunnel(props) {
 						/>
 					</div>
 
-					<div className={styles.form_element}>
-						<p>No of Searches in selected date Range</p>
+					{lifecycleStage === 'transacting' && (
+						<div className={styles.form_element}>
+							<p>No of Searches in selected date Range</p>
 
-						<InputController
-							name="search_count"
-							control={control}
-							placeholder="Search Count"
-							disabled={disabled}
-						/>
-					</div>
+							<InputController
+								name="search_count"
+								control={control}
+								placeholder="Search Count"
+								disabled={disabled}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

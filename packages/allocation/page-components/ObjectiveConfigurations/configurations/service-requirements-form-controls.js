@@ -5,9 +5,10 @@ import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
 import getIncotermOptionsByTradeType from '../helpers/get-incoterm-options-by-trade-type';
 import getListLocationParams from '../helpers/get-list-location-params';
 import getServiceTypeOptions from '../helpers/get-service-type-options';
+import getShipmentModeOptions from '../helpers/get-shipment-mode-options';
 
 const getServiceRequirementControls = (props) => {
-	const { watchShipmentMode, watchServiceType, watchTradeType, disabled } = props;
+	const { watchShipmentMode, watchServiceType, watchTradeType, lifecycleStage, disabled } = props;
 
 	const geo = getGeoConstants();
 
@@ -17,29 +18,8 @@ const getServiceRequirementControls = (props) => {
 			label       : 'Shipment Mode',
 			placeholder : 'Select Mode',
 			type        : 'select',
-			options     : [
-				{
-					label : 'Ocean',
-					value : 'ocean',
-				},
-				{
-					label : 'Air',
-					value : 'air',
-				},
-				{
-					label : 'Surface',
-					value : 'surface',
-				},
-				{
-					label : 'Haulage',
-					value : 'haulage',
-				},
-				{
-					label : 'Rail Domestic',
-					value : 'rail_domestic_freight',
-				},
-			],
-			isClearable: true,
+			options     : getShipmentModeOptions({ lifecycleStage }),
+			isClearable : true,
 			disabled,
 		},
 		{

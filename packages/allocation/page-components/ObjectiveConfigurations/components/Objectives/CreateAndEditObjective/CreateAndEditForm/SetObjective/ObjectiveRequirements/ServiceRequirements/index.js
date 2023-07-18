@@ -36,6 +36,7 @@ function ServiceRequirements(props) {
 					watch={watch}
 					resetField={resetField}
 					serviceRequirementOperator={formValues.objectiveRequirements?.service_requirement_operator}
+					lifecycleStage={formValues.generalConfiguration?.lifecycle_stage}
 					disabled={disabled}
 				/>
 			))}

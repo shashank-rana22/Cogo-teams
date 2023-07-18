@@ -21,11 +21,17 @@ const useSetGeneralConfiguration = (props) => {
 	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setSelectedRoles, disabled });
 
 	const onSave = (values) => {
+		const { partner } = values;
+		const [id, business_name] = partner.split('_');
+
 		setFormValues((previousValues) => ({
 			...previousValues,
 			generalConfiguration: {
 				...(previousValues.generalConfiguration || {}),
 				...values,
+				partner: {
+					id, business_name,
+				},
 				roles: selectedRoles,
 			},
 			objectiveRequirements: {},

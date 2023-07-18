@@ -84,6 +84,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				/>
 
 				<AccountTransactionFunnel
+					lifecycleStage={formValues.generalConfiguration?.lifecycle_stage}
 					control={control}
 					disabled={disabled}
 				/>
