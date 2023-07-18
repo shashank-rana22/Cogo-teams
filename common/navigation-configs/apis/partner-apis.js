@@ -12579,6 +12579,16 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'send_flash_rate_revert_notification_on_email',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'list_shipment_pending_tasks',
 			access_type  : 'private',
 			service_name : 'shipment',
