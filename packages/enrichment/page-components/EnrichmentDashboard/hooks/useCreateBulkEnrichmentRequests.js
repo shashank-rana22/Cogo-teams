@@ -3,9 +3,11 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkEnrichmentRequests = ({ refetch = () => {}, refetchStats = () => {} }) => {
-	const [showModal, setShowModal] = useState(false);
-
+const useCreateBulkEnrichmentRequests = ({
+	refetch = () => {},
+	refetchStats = () => {},
+	setShowModal = () => {},
+}) => {
 	const [thirdParty, setThirdParty] = useState('');
 
 	const [thirdPartyPayload, setThirdPartyPayload] = useState([]);
@@ -17,11 +19,6 @@ const useCreateBulkEnrichmentRequests = ({ refetch = () => {}, refetchStats = ()
 		method : 'POST',
 
 	}, { manual: true });
-
-	const onCloseModal = () => {
-		setSelectedCount({});
-		setShowModal(false);
-	};
 
 	const onCreateFeedback = async () => {
 		try {
@@ -47,12 +44,9 @@ const useCreateBulkEnrichmentRequests = ({ refetch = () => {}, refetchStats = ()
 
 	return {
 		onCreateFeedback,
-		showModal,
-		setShowModal,
 		loading,
 		selectedCount,
 		setSelectedCount,
-		onCloseModal,
 		thirdParty,
 		setThirdParty,
 		thirdPartyPayload,

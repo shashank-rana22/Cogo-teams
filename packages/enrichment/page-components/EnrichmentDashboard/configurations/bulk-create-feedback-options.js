@@ -5,5 +5,4 @@ export const OPTIONS = [
 	{ label: '20', value: '20' },
 	{ label: '40', value: '40' },
 	{ label: '100', value: '100' },
-	{ label: '500', value: '500' },
 ];
