@@ -1,44 +1,56 @@
+import { Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
-import LoadingState from '../../../../../common/LoadingState';
-import Header from '../../../commons/Header';
-
+import CreateResponse from './components/CreateResponse';
+import Header from './components/Header';
 import List from './components/List';
-import ResponseForm from './components/ResponseForm';
 import styles from './styles.module.css';
 
 function ContainerComponent({
-	data = [],
+	list = [],
 	refetchResponses = () => {},
 	loadingResponses = false,
 	actionType = '',
 	activeTab = '',
+	paginationData = {},
+	getNextPage = () => {},
 }) {
-	const [showForm, setShowForm] = useState('');
+	const [showForm, setShowForm] = useState(false);
 
-	if (loadingResponses) {
-		return (
-			<LoadingState height="100px" />
-		);
-	}
+	const { page, page_limit, total_count } = paginationData || {};
 
 	return (
 		<div className={styles.padd}>
 
 			<div className={styles.main}>
 				<Header
-					actionType={actionType}
 					activeTab={activeTab}
+					actionType={actionType}
 					setShowForm={setShowForm}
+					loadingResponses={loadingResponses}
 				/>
 
-				<List data={data} activeTab={activeTab} />
+				<List
+					list={list}
+					activeTab={activeTab}
+					loadingResponses={loadingResponses}
+				/>
 
-				<ResponseForm
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						pageSize={page_limit}
+						totalItems={total_count}
+						onPageChange={getNextPage}
+					/>
+				</div>
+
+				<CreateResponse
 					showForm={showForm}
+					activeTab={activeTab}
 					setShowForm={setShowForm}
 					refetchResponses={refetchResponses}
-					activeTab={activeTab}
 				/>
 
 			</div>

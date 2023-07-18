@@ -5,13 +5,12 @@ const TAB_OPTION_MAPPING = {
 		key   : 'user',
 		title : 'Point Of Contacts',
 		icon  : IcMProfile,
-
 	},
+
 	address: {
 		key   : 'address',
 		title : 'Address Details',
 		icon  : IcMLocation,
-
 	},
 
 };

@@ -10,10 +10,11 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 	const { action_type:actionType = '', id:feedback_request_id } = query;
 
 	const [params, setParams] = useState({
-		sort_type : 'asc',
-		sort_by   : 'created_at',
-		page      : 1,
-		filters   : {
+		sort_type  : 'desc',
+		sort_by    : 'created_at',
+		page       : 1,
+		page_limit : 4,
+		filters    : {
 			feedback_request_id,
 			response_type: 'user',
 		},
@@ -27,7 +28,14 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 		params,
 	}, { manual: false });
 
-	const { list = [] } = data || {};
+	const { list = [], ...paginationData } = data || {};
+
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
 
 	useEffect(() => {
 		setParams((prev) => ({
@@ -37,15 +45,16 @@ const useEnrichmentResponse = ({ activeTab = 'user' }) => {
 				response_type: activeTab === 'address' ? ['address', 'billing_address'] : activeTab,
 			},
 		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return {
-		data             : list,
+		list,
 		refetchResponses : refetch,
 		loadingResponses : loading,
 		setParams,
 		actionType,
+		getNextPage,
+		paginationData,
 	};
 };
 

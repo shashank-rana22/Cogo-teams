@@ -1,52 +1,40 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../../common/EmptyState';
-import Workscopes from '../../commons/Workscopes';
-import getDetails from '../../configurations/get-details';
-import getResponseKeysMapping from '../../configurations/response-keys-mapping';
+import LoadingState from '../../../../../../../common/LoadingState';
+import getResponseKeysMapping from '../../../../../configurations/response-keys-mapping';
+import getFilteredData from '../../../../../utils/get-filtered-data';
 
+import DetailsCard from './DetailsCard';
 import styles from './styles.module.css';
 
-function List({ data = [], activeTab = '' }) {
-	const RESPONSE_LABEL_KEYS = getResponseKeysMapping({ activeTab });
-	const details = getDetails({ data, activeTab });
+function List({ list = [], activeTab = '', loadingResponses = false }) {
+	const LABEL_KEYS = getResponseKeysMapping({ activeTab });
 
-	if (isEmpty(details)) {
+	const data = getFilteredData({ list, activeTab, LABEL_KEYS }) || [];
+
+	if (loadingResponses) {
 		return (
-			<div className={styles.padd}>
-				<div className={styles.main}>
-					<EmptyState />
-				</div>
+			<div className={styles.main}>
+				<LoadingState height="80px" arrayLength={4} />
 			</div>
+
+		);
+	}
+
+	if (isEmpty(data)) {
+		return (
+			<div className={styles.main}>
+				<EmptyState />
+			</div>
+
 		);
 	}
 
 	return (
 		<div className={styles.main}>
-
-			{(details || []).map((poc) => (
-				<div key={poc} className={styles.content}>
-
-					<div className={styles.box_info}>
-
-						{Object.keys(poc).map((pocKey) => (
-							<div key={pocKey} className={styles.label_value_container}>
-								<div className={styles.top}>
-									{RESPONSE_LABEL_KEYS[pocKey]}
-								</div>
-
-								<div className={styles.bottom}>
-									{(pocKey === 'work_scopes' && poc?.[pocKey])
-										? <Workscopes work_scopes={poc?.[pocKey]} />
-										: poc?.[pocKey] }
-								</div>
-							</div>
-
-						))}
-
-					</div>
-
-				</div>
+			{data.map((response) => (
+				<DetailsCard key={response} response={response} />
 			))}
 
 		</div>
