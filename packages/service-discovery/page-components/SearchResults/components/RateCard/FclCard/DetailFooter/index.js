@@ -87,9 +87,9 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 						render={(
 							<Detention
 								heading="Update No. of Free Days"
-								buttonTitle="udpate"
+								buttonTitle="Update"
 								values={addDaysValue}
-								handleClick={onAddAdditionaldays}
+								handleSave={onAddAdditionaldays}
 							/>
 						)}
 						caret={false}

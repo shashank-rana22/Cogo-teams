@@ -40,7 +40,6 @@ function List({
 
 	return (
 		<div className={styles.container}>
-
 			{['most_searched', 'most_booked'].includes(rest.type) ? null : (
 				<div className={styles.header_wrapper}>
 					<Statistics
@@ -84,7 +83,6 @@ function List({
 					placement={placement}
 				/>
 			</div>
-
 		</div>
 	);
 }

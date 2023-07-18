@@ -1,13 +1,11 @@
 import { Button } from '@cogoport/components';
 import { CheckboxController, InputNumberController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
-
-const ADDITIONAL_DAYS_KEYS = ['destination_demurrage', 'origin_detention', 'origin_demurrage', 'destination_detention'];
 
 const renderFormItem = ({ name, control }) => (
 	<div className={styles.form_subgroup}>
@@ -41,18 +39,14 @@ const renderFormItem = ({ name, control }) => (
 	</div>
 );
 
-function Detention({ values = {}, handleClick = () => {}, ...rest }) {
-	const { control, handleSubmit, setValue } = useForm();
-
-	const onClickSave = (val) => {
-		handleClick(val);
-	};
-
-	useEffect(() => {
-		ADDITIONAL_DAYS_KEYS.forEach((item) => {
-			setValue(item, values[item]);
-		});
-	}, [setValue, values]);
+function Detention({
+	values = {},
+	handleSave = () => {},
+	handleReset = () => {},
+	action = 'update',
+	...rest
+}) {
+	const { control, handleSubmit } = useForm({ defaultValues: values });
 
 	return (
 		<div className={styles.container}>
@@ -66,28 +60,33 @@ function Detention({ values = {}, handleClick = () => {}, ...rest }) {
 
 				{renderFormItem({ name: 'demurrage', control })}
 
-				<CheckboxController
-					name="save_for_later"
-					control={control}
-					label="Save these preferences for future."
-				/>
+				{action === 'filter' ? (
+					<CheckboxController
+						name="save_for_later"
+						control={control}
+						label="Save these preferences for future."
+					/>
+				) : null}
 			</div>
 
 			<div className={styles.button_container}>
-				{/* <Button
-					type="button"
-					size="md"
-					themeType="secondary"
-					className={styles.button}
-				>
-					Reset
-				</Button> */}
+				{action === 'filter' ? (
+					<Button
+						type="button"
+						size="md"
+						themeType="secondary"
+						className={styles.button}
+						onClick={handleReset}
+					>
+						Reset
+					</Button>
+				) : null}
 
 				<Button
 					type="button"
 					size="md"
 					themeType="accent"
-					onClick={handleSubmit(onClickSave)}
+					onClick={handleSubmit(handleSave)}
 				>
 					{rest.buttonTitle || 'Save'}
 				</Button>

@@ -93,10 +93,8 @@ function Routes({
 					loading={createSearchLoading}
 				>
 					Find Rates
-
 				</Button>
 			</div>
-
 		</div>
 	);
 }
