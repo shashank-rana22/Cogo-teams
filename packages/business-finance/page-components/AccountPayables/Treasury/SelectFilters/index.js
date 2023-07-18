@@ -1,5 +1,5 @@
 import { Input, SingleDateRange } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
 import SegmentedControl from '../../../commons/SegmentedControl/index.tsx';
@@ -10,23 +10,27 @@ import {
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
+const CURRENCY_OPTIONS = [
+	GLOBAL_CONSTANTS.currency_code.INR,
+	GLOBAL_CONSTANTS.currency_code.USD,
+	GLOBAL_CONSTANTS.currency_code.EUR,
+	GLOBAL_CONSTANTS.currency_code.GBP,
+	GLOBAL_CONSTANTS.currency_code.SGD,
+	GLOBAL_CONSTANTS.currency_code.VND,
+].map((currencyCode) => ({
+	label : currencyCode,
+	value : currencyCode,
+}));
 
-const CURRENCY_OPTIONS = geo?.navigations.business_finance
-	.account_payables.treasury.allowed_currency.map((currency) => (
-		{
-			label : currency,
-			value : currency,
-		}
-	));
-
-const ENTITY_OPTION_CURRENCY = geo?.navigations.business_finance
-	.account_payables.treasury.entity_option_currency.map((currency) => (
-		{
-			label : currency,
-			value : currency.toLowerCase(),
-		}
-	));
+const ENTITY_OPTION_CURRENCY = [
+	'ALL',
+	GLOBAL_CONSTANTS.currency_code.INR,
+	GLOBAL_CONSTANTS.currency_code.USD,
+	GLOBAL_CONSTANTS.currency_code.VND,
+].map((currencyCode) => ({
+	label : currencyCode,
+	value : currencyCode.toLowerCase(),
+}));
 
 function SelectFilters({
 	filters = {},

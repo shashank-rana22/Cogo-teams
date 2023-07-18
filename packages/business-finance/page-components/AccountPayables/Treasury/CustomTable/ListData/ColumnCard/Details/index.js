@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import SegmentedControl from '../../../../../../commons/SegmentedControl/index.tsx';
@@ -10,15 +10,12 @@ import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 import ViewDetailsModal from './ViewDetailsModal';
 
-const geo = getGeoConstants();
-
-const ENTITY_LIST_OPTIONS = geo?.navigations.business_finance
-	.account_payables.treasury.allowed_entity.map((entity) => (
-		{
-			label : `Entity ${entity}`,
-			value : entity,
-		}
-	));
+const ENTITY_TAB = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => (
+	{
+		label : `Entity ${entity}`,
+		value : entity,
+	}
+));
 
 const LAST_INDEX = 1;
 
@@ -51,7 +48,7 @@ function Details({
 			<div className={styles.line} />
 			<div className={styles.segmented_style}>
 				<SegmentedControl
-					options={ENTITY_LIST_OPTIONS}
+					options={ENTITY_TAB}
 					activeTab={activeEntityCode}
 					setActiveTab={setActiveEntityCode}
 					background="#FDEBE9"

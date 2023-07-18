@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { MONTH_MAPPING } from '../../../Constants';
 import useGetEntityReport from '../../../hooks/useGetEntityReport';
 
 import Details from './Details';
@@ -54,7 +55,7 @@ function ColumnCard({
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 							formatType : 'date',
 						})
-						: `${GLOBAL_CONSTANTS.MONTH_MAPPING[month]} ${year}`}
+						: `${MONTH_MAPPING[month]} ${year}`}
 				</div>
 				<div className={styles.alloted}>
 					{	getFormattedPrice(
@@ -105,7 +106,7 @@ function ColumnCard({
 					setFilters={setFilters}
 					activeEntityCode={activeEntityCode}
 					setActiveEntityCode={setActiveEntityCode}
-					monthName={GLOBAL_CONSTANTS.MONTH_MAPPING[month]}
+					monthName={MONTH_MAPPING[month]}
 				/>
 			) : null}
 		</div>

@@ -14,7 +14,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['compliance', 'post_to_sage'],
+		feature_supported   : ['compliance', 'post_to_sage', 'treasury'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -27,7 +27,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryNetherland,
 		currency            : 'EUR',
 		default_entity_code : '201',
-		feature_supported   : ['cogo_books', 'post_to_sage'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'treasury'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -40,7 +40,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'treasury'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -53,7 +53,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountrySingapore,
 		currency            : 'SGD',
 		default_entity_code : '401',
-		feature_supported   : ['cogo_books', 'post_to_sage'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'treasury'],
 		labels              : {
 			irn_label: 'IRN',
 		},
