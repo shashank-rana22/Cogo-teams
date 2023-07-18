@@ -10,6 +10,7 @@ function ConfirmationModal(
 		bulkIrnLoading = false,
 		confirmation = false,
 		setConfirmation = () => {},
+		IrnLabel = '',
 	},
 ) {
 	return (
@@ -28,7 +29,10 @@ function ConfirmationModal(
 				{' '}
 				{checkedRows?.length}
 				{' '}
-				Invoices. Are you sure you want to Generate IRN?
+				Invoices. Are you sure you want to Generate
+				{' '}
+				{IrnLabel}
+				?
 			</div>
 			<div className={styles.buttons}>
 				<Button
@@ -47,7 +51,9 @@ function ConfirmationModal(
 					className={styles.post}
 					disabled={bulkIrnLoading}
 				>
-					IRN Generate
+					{IrnLabel}
+					{' '}
+					Generate
 				</Button>
 			</div>
 		</Modal>
