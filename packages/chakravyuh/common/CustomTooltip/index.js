@@ -2,7 +2,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
 
-function CustomTooltip({ bar = {}, point = {} }) {
+function CustomTooltip(props) {
+	const { bar = {}, point = {} } = props;
 	const headingText = bar?.key
 		? `${(bar.key || '').split('%')[GLOBAL_CONSTANTS.zeroth_index]} % Daviation`
 		: point?.data?.x;

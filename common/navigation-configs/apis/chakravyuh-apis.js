@@ -26,7 +26,11 @@ const chakravyuh = {
 		},
 	],
 	pricing_accuracy_dashboard: [
-
+		{
+			api          : 'get_simplified_country_geometry',
+			service_name : 'location',
+			access_type  : 'private',
+		},
 	],
 };
 

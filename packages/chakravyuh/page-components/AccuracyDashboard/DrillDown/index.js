@@ -1,84 +1,77 @@
-/* eslint-disable no-param-reassign */
-import anime from 'animejs/lib/anime.es';
-import React, { useRef, useEffect } from 'react';
+import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 // import IcBranch from '../../../assets/ic-tree.svg';
-import { D_NEXT, D_TOP, PATH_STYLE } from '../../../constants/svg_constants';
+import { DUMMY_DATA } from '../../../constants/drilldown_config';
+import SupplyRates from '../RatesList';
 
+import BranchAnimation from './BranchAnimation';
+import DrillDownCard from './DrillDownCard';
 import styles from './styles.module.css';
 
-function DrillDown() {
-	const svgRef = useRef(null);
+const RATE_TYPES = ['supply', 'predicted', 'extended'];
+const DEFAULT_DELAY = 1.8;
+const FACTOR = 1;
 
-	useEffect(() => {
-		if (svgRef.current) {
-			const paths = svgRef.current.querySelectorAll('path');
-			paths.forEach((path) => {
-				const length = path.getTotalLength();
-				path.style.strokeDasharray = length;
-				path.style.strokeDashoffset = length;
+function DrillDown({ rate_type = null }) {
+	const rateSources = rate_type ? [rate_type] : RATE_TYPES;
+	const [activeParent, setActiveParent] = useState(null);
 
-				anime({
-					targets          : path,
-					strokeDashoffset : 0,
-					easing           : 'linear',
-					duration         : 2000,
-					delay            : 0,
-					loop             : true,
-				});
-			});
-		}
-	}, []);
+	const handleClick = (val) => {
+		setActiveParent(val);
+	};
 
 	return (
-		<div className={styles.main_container}>
-			{/* <IcBranch /> */}
-			<svg
-				ref={svgRef}
-				xmlns="http://www.w3.org/2000/svg"
-				width="600"
-				height="600"
-				viewBox="0 0 1000 1000"
-				xmlSpace="preserve"
-			>
-				<g transform="matrix(1.5053 0 0 1.5259 500 506.2204)" id="group1">
-					<g transform="matrix(1 0 0 1 14.2195 -168.2045)" id="path1_group1">
-						<path
-							style={PATH_STYLE}
-							transform=" translate(-881.2645, -201.2655)"
-							d={D_TOP}
-							strokeLinecap="round"
-						/>
-					</g>
-					<g transform="matrix(1 0 0 1 11.9845 -80.249)" id="path2_group1">
-						<path
-							style={PATH_STYLE}
-							transform=" translate(-879.0295, -289.221)"
-							d={D_NEXT}
-							strokeLinecap="round"
-						/>
-					</g>
-				</g>
-				<g transform="matrix(1.0017 0 0 0.8991 498.2413 449.55)" id="group2">
-					<g transform="matrix(1.5053 0 0 -1.5053 21.4002 253.1932)" id="path1_group2">
-						<path
-							style={PATH_STYLE}
-							transform=" translate(-881.2645, -201.2655)"
-							d={D_TOP}
-							strokeLinecap="round"
-						/>
-					</g>
-					<g transform="matrix(1.5053 0 0 -1.5053 18.0358 120.7938)" id="path2_group2">
-						<path
-							style={PATH_STYLE}
-							transform=" translate(-879.0295, -289.221)"
-							d={D_NEXT}
-							strokeLinecap="round"
-						/>
-					</g>
-				</g>
-			</svg>
-			<div className={styles.main_card}>Total Rates</div>
+		<div className={styles.container}>
+			<div className={cl`${styles.main_container} ${activeParent ? styles.minimize : ''}`}>
+				{!activeParent ? (
+					<>
+						{/* <IcBranch className={styles.tree_icon} /> */}
+						<BranchAnimation />
+						{rateSources.map((type) => (
+							<div className={styles.source_card} key={type}>
+								{startCase(type)}
+							</div>
+						))}
+						<div className={cl`${styles.source_card} ${styles.main_card}`}>11000 Searches</div>
+					</>
+				) : (
+					<Button
+						themeType="secondary"
+						className={styles.show_btn}
+						onClick={() => setActiveParent(null)}
+					>
+						Show All
+					</Button>
+				)}
+
+				{DUMMY_DATA.map((row, rowIdx) => {
+					const isActive = activeParent === row[GLOBAL_CONSTANTS.zeroth_index].parent;
+
+					return (!activeParent || isActive) && (
+						<div
+							className={cl`${styles.tree_branch} 
+							${styles[`branch_${rowIdx}`]}
+							${isActive ? styles.to_top : ''}`}
+							key={row[GLOBAL_CONSTANTS.zeroth_index].action_type}
+						>
+							{row.map((item, colIdx) => (
+								<DrillDownCard
+									key={item.action_type}
+									data={item}
+									isMainCard={!colIdx}
+									delay={DEFAULT_DELAY + colIdx * (FACTOR / (row.length - FACTOR || FACTOR))}
+									handleClick={handleClick}
+									animate={!activeParent}
+								/>
+							))}
+						</div>
+					);
+				})}
+			</div>
+			{activeParent && <SupplyRates />}
 		</div>
 	);
 }

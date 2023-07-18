@@ -1,20 +1,55 @@
 .container {
+	--card-color: rgb(8 23 39 / 7%);
+
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	width: 180px;
 	height: 100px;
-	padding: 12px 8px;
-	margin-left: 46px;
+	padding: 12px 12px 8px;
+	margin-right: 50px;
 	background-color: #fff;
+	border: 1px solid transparent;
 	border-radius: 8px;
-	box-shadow: 0 0 4px rgb(8 23 39 / 7.4%);
+	box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+
+	&.secondary_card {
+		width: max-content;
+		min-width: 100px;
+	}
+
+	&.checkout {
+		--card-color: #044863dd;
+	}
+
+	&.missing {
+		--card-color: #0a9396;
+	}
+
+	&.dislike {
+		--card-color: #ca6702;
+	}
+
+	&.dropoff {
+		--card-color: #9b2226;
+	}
+
+	&.animate {
+		animation-name: shadow-animation;
+		animation-duration: 3s;
+		animation-iteration-count: infinite;
+	}
 }
 
 .flex_between {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	:global(.ui_button_container) {
+		padding-right: 0;
+	}
 }
 
 .indicator {
@@ -24,11 +59,42 @@
 	width: 3px;
 
 	&.checkout {
-		color: green;
+		color: #001219;
+	}
+
+	&.missing {
+		color: #0a9396;
+	}
+
+	&.dislike {
+		color: #ca6702;
+	}
+
+	&.dropoff {
+		color: #9b2226;
 	}
 }
 
 .rate_amount {
 	font-size: 16px;
 	font-weight: 600;
+}
+
+.card_name {
+	font-size: 12px;
+}
+
+@keyframes shadow-animation {
+	0% {
+		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+	}
+
+	30% {
+		border: 1px solid var(--card-color);
+		box-shadow: 0 0 4px var(--card-color);
+	}
+
+	100% {
+		box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+	}
 }

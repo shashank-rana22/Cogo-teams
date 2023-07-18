@@ -26,6 +26,6 @@
 
 	&:hover {
 		box-shadow: 0 0 8px rgb(81 47 16 / 9%);
-		transform: scale(1.01) translateY(-4px);
+		transform: scale(1.005) translateY(-4px);
 	}
 }
