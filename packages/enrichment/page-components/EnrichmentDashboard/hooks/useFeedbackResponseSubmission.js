@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useFeedbackResponseSubmission = () => {
+const useFeedbackResponseSubmission = ({ refetchStats = () => {} }) => {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/feedback_response_submission',
 		method  : 'post',
@@ -23,6 +23,7 @@ const useFeedbackResponseSubmission = () => {
 			Toast.success('Enrichment Completed Successfully');
 
 			refetch();
+			refetchStats();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

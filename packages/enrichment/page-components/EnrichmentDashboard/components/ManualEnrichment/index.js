@@ -3,7 +3,6 @@ import { startCase } from '@cogoport/utils';
 
 import Header from '../../commons/Header';
 import TableComponent from '../../commons/TableComponent';
-import useEnrichmentStats from '../../hooks/useEnrichmentStats';
 import getEnrichmentTableColumns from '../../utils/get-enrichment-table-columns';
 import getSecondaryTabOptions from '../../utils/secondary-tabs-mapping';
 
@@ -25,9 +24,10 @@ function ManualEnrichment(props) {
 		secondaryTab = '',
 		setSecondaryTab = () => {},
 		authRoleId = '',
+		stats = {},
+		loadingStats = false,
+		refetchStats = () => {},
 	} = props;
-
-	const { stats = {}, loading: loadingStats = false, refetchStats = () => {} } = useEnrichmentStats();
 
 	const SECONDARY_TAB_OPTIONS = getSecondaryTabOptions();
 
@@ -37,7 +37,6 @@ function ManualEnrichment(props) {
 
 	return (
 		<div>
-
 			<Header
 				refetch={refetch}
 				refetchStats={refetchStats}

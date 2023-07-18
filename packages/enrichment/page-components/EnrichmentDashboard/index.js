@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useEnrichmentDashboard from './hooks/useEnrichmentDashboard';
+import useEnrichmentStats from './hooks/useEnrichmentStats';
 import styles from './styles.module.css';
 import PRIMARY_TABS_MAPPING from './utils/primary-tabs-mapping';
 
@@ -18,6 +19,8 @@ function EnrichmentDashboard() {
 	const allowedTabs = geo.navigations.enrichment.tabs;
 	const tabOptions = Object.values(PRIMARY_TABS_MAPPING);
 
+	const { stats = {}, loading: loadingStats = false, refetchStats = () => {} } = useEnrichmentStats();
+
 	const {
 		refetch,
 		list,
@@ -30,7 +33,7 @@ function EnrichmentDashboard() {
 		searchValue,
 		setSearchValue,
 		authRoleId,
-	} = useEnrichmentDashboard({ primaryTab, secondaryTab, setSecondaryTab });
+	} = useEnrichmentDashboard({ primaryTab, secondaryTab, setSecondaryTab, refetchStats });
 
 	return (
 		<div>
@@ -73,6 +76,9 @@ function EnrichmentDashboard() {
 									secondaryTab={secondaryTab}
 									setSecondaryTab={setSecondaryTab}
 									authRoleId={authRoleId}
+									stats={stats}
+									loadingStats={loadingStats}
+									refetchStats={refetchStats}
 								/>
 							</TabPanel>
 						);

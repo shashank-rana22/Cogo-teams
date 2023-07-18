@@ -14,12 +14,13 @@ import useFeedbackResponseSubmission from './useFeedbackResponseSubmission';
 const useEnrichmentDashboard = ({
 	primaryTab = 'manual_enrichment',
 	secondaryTab = 'active',
+	refetchStats = () => {},
 }) => {
 	const router = useRouter();
 
 	const { profile } = useSelector((state) => state || {});
 
-	const { onEnrichmentClick = () => {}, loadingComplete = false } = useFeedbackResponseSubmission();
+	const { onEnrichmentClick = () => {}, loadingComplete = false } = useFeedbackResponseSubmission({ refetchStats });
 
 	const geo = getGeoConstants();
 
