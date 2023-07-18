@@ -109,6 +109,7 @@
     cursor: pointer;
 }
 .days{
-    width: 70px;
-    margin-left: -190px;
+    width: 140px;
+    margin-right: -120px;
+    padding: 2px;
 }

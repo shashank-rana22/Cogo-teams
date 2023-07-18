@@ -1,6 +1,9 @@
-const getPayload = ({ finalRoute, data }) => {
-	const waypoint_locations = finalRoute?.map((route) => {
+const getPayload = ({ finalRoute, data, submit, form }) => {
+	const waypoint_locations = finalRoute?.map((route, index) => {
 		const { location_id, eta, etd } = route;
+		if (index === form) {
+			return { ...submit };
+		}
 		return { location_id, eta, etd };
 	});
 

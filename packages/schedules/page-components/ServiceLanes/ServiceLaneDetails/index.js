@@ -14,7 +14,7 @@ const TEN = 10;
 function ServiceLaneDetails() {
 	const { query } = useRouter();
 	const routeId = query?.id;
-	const { data, loading } = useListServiceLanes({ filters: { id: routeId } });
+	const { data, loading, refetch } = useListServiceLanes({ filters: { id: routeId } });
 
 	const [finalRoute, setFinalRoute] = useState(null);
 	return (
@@ -29,6 +29,7 @@ function ServiceLaneDetails() {
 					setFinalRoute={setFinalRoute}
 					loading={loading}
 					data={data}
+					refetch={refetch}
 				/>
 				<ServiceLanesMap data={data} />
 			</div>

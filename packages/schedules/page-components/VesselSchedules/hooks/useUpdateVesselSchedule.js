@@ -1,11 +1,10 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import getPayload from '../helpers/update_payload';
 
-const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute }) => {
+const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute, refetch }) => {
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
 	const [form, setForm] = useState(null);
@@ -57,24 +56,31 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute }) => 
 		setPortEdit(false);
 		setSubmit(null);
 	};
-	const payload = getPayload({ finalRoute, data });
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_vessel_schedule',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateVesselSchedule = async () => {
-		// try {
-		const res = await trigger({ data: payload });
-		// console.log(res, 'insidee');
-		// } catch (error) {
-		// 	if (error?.response) {
-		// 		Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
-		// 	}
-		// }
+	const updateVesselSchedule = async (payload) => {
+		if (form) {
+			if (!(submit?.eta && submit?.etd && submit?.location_id)) {
+				Toast.error('Please fill all values');
+				return;
+			}
+		}
+		try {
+			await trigger({ data: payload });
+			refetch();
+			setEdit(false);
+			Toast.success('Vessel Schedule Updated');
+		} catch (err) {
+			Toast.error(err);
+		}
 	};
-
+	const onSubmitHandler = async () => {
+		const payload = getPayload({ finalRoute, data, form, submit });
+		await updateVesselSchedule(payload);
+	};
 	return {
 		updateVesselSchedule,
 		setPortEdit,
@@ -83,10 +89,12 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute }) => 
 		form,
 		add,
 		deletePort,
+		loading,
 		handleClick,
 		onClickAdd,
 		onClickEdit,
 		onClickDelete,
+		onSubmitHandler,
 	};
 };
 

@@ -65,7 +65,6 @@ function RoutePort({ isFirst, isLast, port, diffInDays, loading }) {
 				<div className={styles.port_name}>
 					{getPortName(port?.display_name)}
 					{' '}
-					<IcMArrowRight width={24} height={30} />
 				</div>
 				{!isLast && (
 					<div className={styles.diff_in_days}>

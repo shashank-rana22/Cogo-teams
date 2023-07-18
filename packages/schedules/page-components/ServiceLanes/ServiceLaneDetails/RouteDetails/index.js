@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 
 import useUpdateServiceLane from '../../hooks/useUpdateServiceLane';
@@ -12,21 +12,29 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 const ONE = 1;
-function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, data }) {
+
+function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, data, refetch }) {
 	const {
-		updateServiceLane,
 		totalTransit,
 		handleClick,
 		onClickAdd,
 		onClickEdit,
 		onClickDelete,
+		onSubmitHandler,
 		setSubmit,
 		setPortEdit,
 		edit,
 		deletePort,
 		form,
 		add,
-	} = useUpdateServiceLane({ route, finalRoute, setFinalRoute, data });
+		frequency,
+		setFrequency,
+	} = useUpdateServiceLane({ route, finalRoute, setFinalRoute, data, refetch });
+	const FREQUENCY_CHOICES = [
+		{ label: 'Daily', value: 1 },
+		{ label: 'Weekly', value: 7 },
+		{ label: 'Monthly', value: 12 },
+	];
 	return (
 		<div className={styles.box}>
 			<div className={styles.header}>
@@ -56,7 +64,14 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 			startingDay={Number(route?.[ZERO]?.eta_day) - ONE}
 		/>
 	</div>
-                            ) : null
+                            ) : (
+	<Select
+		className={styles.frequency_select}
+		options={FREQUENCY_CHOICES}
+		value={frequency}
+		onChange={(value) => { setFrequency(value); }}
+	/>
+                            )
                         }
 
 					</div>
@@ -89,7 +104,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 							<Button
 								size="md"
 								className={styles.button_style}
-								onClick={updateServiceLane}
+								onClick={onSubmitHandler}
 							>
 								Save Changes
 

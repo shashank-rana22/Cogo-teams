@@ -12,7 +12,7 @@ import VesselScheduleMap from './VesselSchedulesMap';
 function VesselScheduele() {
 	const { query } = useRouter();
 	const vesselId = query?.id;
-	const { data, loading } = useGetVesselScheduleById({ vesselId });
+	const { data, loading, refetch } = useGetVesselScheduleById({ vesselId });
 	const [finalRoute, setFinalRoute] = useState(null);
 	const NUMBER_OF_ELEMENTS = 2;
 	const [tooltipRefArray, setTooltipRefArray] = useState([]);
@@ -49,6 +49,7 @@ function VesselScheduele() {
 					setFinalRoute={setFinalRoute}
 					handleMouseEnter={handleMouseEnter}
 					handleMouseLeave={handleMouseLeave}
+					refetch={refetch}
 				/>
 				<VesselScheduleMap data={data} tooltipRefArray={tooltipRefArray} isTooltipVisible={isTooltipVisible} />
 			</div>

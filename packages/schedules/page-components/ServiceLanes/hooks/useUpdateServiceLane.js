@@ -1,13 +1,14 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import getPayload from '../helpers/update_payload';
 
-const ONE = 1;
 const ZERO = 0;
-const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
+const ONE = 1;
+const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data, refetch }) => {
 	const totalTransit = Number(route?.[Number(route?.length) - ONE]?.eta_day_count)
-		- Number(route?.[ZERO]?.etd_day_count);
+	- Number(route?.[ZERO]?.etd_day_count);
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
 	const [form, setForm] = useState(null);
@@ -15,7 +16,7 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 	const [deletePort, setDeletePort] = useState(null);
 	const [submit, setSubmit] = useState(null);
 	const tempRoute = Array.isArray(route) ? [...route] : [];
-
+	const [frequency, setFrequency] = useState(null);
 	let modifiedRoute = [];
 	const handleClick = (input) => {
 		if (input === 'edit') {
@@ -29,13 +30,11 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 		setAdd(null);
 		setDeletePort(null);
 	};
-	const OBJECT_TO_INSERT = { display_name: '', location_id: '', order: null, port_code: '' };
 
 	const onClickAdd = (index) => {
 		setForm(index);
-		modifiedRoute = [...(tempRoute?.slice(ZERO, index) || []),
-			{ ...submit },
-			OBJECT_TO_INSERT, ...(tempRoute?.slice(index, tempRoute.length) || [])];
+		modifiedRoute = [...(tempRoute)?.slice(ZERO, index),
+			{ ...submit }, ...(tempRoute)?.slice(index, tempRoute.length)];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 		setFinalRoute(order);
 		setAdd(index);
@@ -45,7 +44,12 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 		setAdd(null);
 	};
 	const onClickDelete = (index) => {
-		if (add) {
+		if (add !== null) {
+			const updatedFinalRoute = [...finalRoute];
+			if (index >= 0 && index < updatedFinalRoute.length) {
+				updatedFinalRoute.splice(index, 1);
+			}
+			setFinalRoute(updatedFinalRoute);
 			setAdd(null);
 		} else if (!portEdit) {
 			setForm(null);
@@ -58,17 +62,32 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 		setPortEdit(false);
 		setSubmit(null);
 	};
-	const payload = getPayload({ finalRoute, data });
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_service_lane',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateServiceLane = async () => {
-		await trigger({ data: payload });
+	const updateServiceLane = async (payload) => {
+		if (form) {
+			if (!(submit?.location_id && submit?.eta_day_count && submit?.etd_day_count)) {
+				Toast.error('Please fill all values');
+				return;
+			}
+		}
+		try {
+			await trigger({ data: payload });
+			refetch();
+			setEdit(false);
+			Toast.success('Service Lane Updated');
+		} catch (err) {
+			Toast.error(err);
+		}
 	};
-
+	const onSubmitHandler = async () => {
+		const payload = getPayload({ finalRoute, data, form, submit, frequency });
+		await updateServiceLane(payload);
+	};
 	return {
 		updateServiceLane,
 		loading,
@@ -83,7 +102,9 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 		deletePort,
 		form,
 		add,
-
+		onSubmitHandler,
+		setFrequency,
+		frequency,
 	};
 };
 

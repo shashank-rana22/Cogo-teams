@@ -13,10 +13,9 @@ const ONE = 1;
 const TEN = 10;
 function RouteDetails({
 	data, route, finalRoute, setFinalRoute, handleMouseEnter,
-	handleMouseLeave,
+	handleMouseLeave, refetch,
 }) {
 	const {
-		updateVesselSchedule,
 		setPortEdit,
 		setSubmit,
 		edit,
@@ -27,7 +26,8 @@ function RouteDetails({
 		onClickAdd,
 		onClickEdit,
 		onClickDelete,
-	} = useUpdateVesselSchedule({ route, data, finalRoute, setFinalRoute });
+		onSubmitHandler,
+	} = useUpdateVesselSchedule({ route, data, finalRoute, setFinalRoute, refetch });
 	return (
 		<div className={styles.route_details}>
 			<div className={styles.heading}>
@@ -60,10 +60,9 @@ function RouteDetails({
 							<Button
 								size="md"
 								className={styles.button_style}
-								onClick={updateVesselSchedule}
+								onClick={onSubmitHandler}
 							>
 								Save Changes
-
 							</Button>
 						</div>
 

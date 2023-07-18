@@ -28,7 +28,8 @@ function PortForm({ isFirst, isLast, diffInDays = 4, index, onClickDelete, setSu
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
 								onChange={(value) => {
-									setArrivalDate(value); setSubmit((prev) => ({ ...prev, eta: value }));
+									setArrivalDate(value);
+									setSubmit((prev) => ({ ...prev, eta: value }));
 								}}
 								value={arrival_date}
 							/>
@@ -42,7 +43,8 @@ function PortForm({ isFirst, isLast, diffInDays = 4, index, onClickDelete, setSu
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
 								onChange={(value) => {
-									setDepartureDate(value); setSubmit((prev) => ({ ...prev, etd: value }));
+									setDepartureDate(value);
+									setSubmit((prev) => ({ ...prev, etd: value }));
 								}}
 								value={departure_date}
 							/>
@@ -61,7 +63,8 @@ function PortForm({ isFirst, isLast, diffInDays = 4, index, onClickDelete, setSu
 						placeholder="Port Name"
 						{...options}
 						onChange={(value) => {
-							setPortName(value); setSubmit((prev) => ({ ...prev, location_id: value }));
+							setPortName(value);
+							setSubmit((prev) => ({ ...prev, location_id: value }));
 						}}
 						value={port_name}
 

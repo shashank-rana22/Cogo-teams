@@ -43,7 +43,7 @@ const useListServiceLanes = ({ filters }) => {
 		loading,
 		totalItems  : data?.total_count,
 		currentPage : page,
-		listServiceLanes,
+		refetch     : listServiceLanes,
 	};
 };
 

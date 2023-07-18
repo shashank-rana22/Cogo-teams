@@ -32,8 +32,9 @@ const useGetVesselScheduleById = ({ vesselId }) => {
 		if (vesselId) makeRequest();
 	}, [vesselId]);
 	return {
-		data: data?.list?.[0],
+		data    : data?.list?.[0],
 		loading,
+		refetch : makeRequest,
 	};
 };
 export default useGetVesselScheduleById;
