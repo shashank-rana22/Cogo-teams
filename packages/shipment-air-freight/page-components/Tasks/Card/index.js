@@ -1,3 +1,7 @@
+import { Button } from '@cogoport/components';
+import { useState } from 'react';
+
+import ShowEmailContent from './ShowEmailContent';
 import styles from './styles.module.css';
 import TaskDetails from './TaskDetails';
 import UpdateAction from './UpdateAction';
@@ -11,8 +15,16 @@ function Card({
 	refetch = () => {},
 	servicesList = [],
 }) {
+	const [openView, setOpenView] = useState(false);
+	const [taskId, setTaskId] = useState('');
+
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
+	};
+
+	const handleEmail = () => {
+		setTaskId(task?.id);
+		setOpenView(true);
 	};
 
 	return (
@@ -32,6 +44,15 @@ function Card({
 					/>
 				)}
 
+				{task?.status === 'completed' && task?.assigned_stakeholder === 'system' && (
+					<Button
+						className={styles.view_button}
+						onClick={handleEmail}
+					>
+						View
+					</Button>
+				)}
+
 				<UpdateAction
 					task={task}
 					hideThreeDots={task.status === 'completed'}
@@ -39,6 +60,8 @@ function Card({
 					services={servicesList}
 				/>
 			</div>
+
+			{openView && <ShowEmailContent taskId={taskId} task={task} openView={openView} setOpenView={setOpenView} />}
 		</div>
 	);
 }

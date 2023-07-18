@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 14px;
+}
+
+.green_style {
+	color: #358856;
+}
+
+.red_style {
+	color: #f00;
+}

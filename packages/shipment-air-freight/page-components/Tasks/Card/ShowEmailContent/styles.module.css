@@ -1,0 +1,14 @@
+.loading_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 15px;
+}
+
+.modal_container {
+	:global {
+		.ui_modal_header_container {
+			padding: 10px 16px;
+		}
+	}
+}
