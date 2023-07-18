@@ -1,25 +1,24 @@
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
-function WeekCalendar({ dayOfWeek, startingDay }) {
-    const week = ["S", "M", "T", "W", "T", "F", "S"];
+function WeekCalendar({ startingDay }) {
+	const week = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-    return (
-        <div className={styles.box}>
-            {"( "}
-            {week?.map((days, index) => {
-                return (
-                    <span
-                        className={
+	return (
+		<div className={styles.box}>
+			{'( '}
+			{week?.map((days, index) => (
+				<span
+					key={days}
+					className={
                             index === startingDay ? styles.active_day : null
                         }
-                    >
-                        {days}{" "}
-                    </span>
-                );
-            })}
-            {")"}
-        </div>
-    );
+				>
+					{days}
+					{' '}
+				</span>
+			))}
+		</div>
+	);
 }
 
 export default WeekCalendar;

@@ -14,29 +14,27 @@ function VesselScheduele() {
 	const vesselId = query?.id;
 	const { data, loading } = useGetVesselScheduleById({ vesselId });
 	const [finalRoute, setFinalRoute] = useState(null);
-	const numberOfElements = 2;
+	const NUMBER_OF_ELEMENTS = 2;
 	const [tooltipRefArray, setTooltipRefArray] = useState([]);
 
 	useEffect(() => {
-		setTooltipRefArray((prev) => Array(numberOfElements)
+		setTooltipRefArray((prev) => Array(NUMBER_OF_ELEMENTS)
 			.fill()
 			.map((_, i) => prev[i] || createRef()));
-	}, [numberOfElements]);
+	}, [NUMBER_OF_ELEMENTS]);
 
 	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 	const handleMouseLeave = (index) => {
 		if (tooltipRefArray[index]) {
 			setIsTooltipVisible(false);
-			// console.log(tooltipRefArray[index].current, 'reff', isTooltipVisible, 'exit');
 		}
 	};
 
 	const handleMouseEnter = (index) => {
 		const { children } = tooltipRefArray[index]?.current?.options || '';
-		
+
 		setIsTooltipVisible(true);
 	};
-	// console.log(tooltipRefArray[2]?.current, 'reff', isTooltipVisible);
 
 	return (
 		<>

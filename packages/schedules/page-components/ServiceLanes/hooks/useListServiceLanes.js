@@ -10,17 +10,20 @@ const useListServiceLanes = ({ filters }) => {
 		{ manual: true },
 	);
 
-	const { page = 1 } = filters;
+	const { page = 1, sort_by, q, origin_port_id, destination_port_id, ...restFilters } = filters;
 	const listServiceLanes = async () => {
 		try {
 			const payload = {
 				filters: {
-					...filters,
+					q                   : q || undefined,
+					origin_port_id      : origin_port_id || undefined,
+					destination_port_id : destination_port_id || undefined,
+					...restFilters,
 				},
 				page_limit               : 10,
 				page,
 				pagination_data_required : true,
-				sort_by                  : 'updated_at',
+				sort_by                  : sort_by || undefined,
 				sort_type                : 'desc',
 			};
 			await trigger({

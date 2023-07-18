@@ -8,6 +8,9 @@ import PortForm from './PortForm';
 import RoutePort from './RoutePort';
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const ONE = 1;
+const TEN = 10;
 function RouteDetails({
 	data, route, finalRoute, setFinalRoute, handleMouseEnter,
 	handleMouseLeave,
@@ -33,8 +36,8 @@ function RouteDetails({
 					{' '}
 					{route
               && differenceInDays(
-              	Date.parse(route?.[route.length - 1]?.eta?.slice(0, 10)),
-              	Date.parse(route?.[0]?.etd?.slice(0, 10)),
+              	Date.parse(route?.[route.length - ONE]?.eta?.slice(ZERO, TEN)),
+              	Date.parse(route?.[ZERO]?.etd?.slice(ZERO, TEN)),
               )}
 					{' '}
 					Days
@@ -54,7 +57,14 @@ function RouteDetails({
 							>
 								Cancel
 							</Button>
-							<Button size="md" className={styles.button_style} onClick={updateVesselSchedule}>Save Changes</Button>
+							<Button
+								size="md"
+								className={styles.button_style}
+								onClick={updateVesselSchedule}
+							>
+								Save Changes
+
+							</Button>
 						</div>
 
 					)
@@ -64,9 +74,10 @@ function RouteDetails({
 			{!edit ? (
 				<div className={styles.route_points}>
 					{route?.map((port, index) => {
-						if (index === route.length - 1) {
+						if (index === route.length - ONE) {
 							return (
 								<RoutePort
+									key={port?.id}
 									isLast
 									port={port}
 									handleMouseEnter={handleMouseEnter}
@@ -77,11 +88,12 @@ function RouteDetails({
 						}
 						return (
 							<RoutePort
-								isFirst={index === 0}
+								key={port?.id}
+								isFirst={index === ZERO}
 								port={port}
 								diffInDays={differenceInDays(
-									Date.parse(route?.[index + 1]?.etd?.slice(0, 10)),
-									Date.parse(route?.[index]?.etd?.slice(0, 10)),
+									Date.parse(route?.[index + ONE]?.etd?.slice(ZERO, TEN)),
+									Date.parse(route?.[index]?.etd?.slice(ZERO, TEN)),
 								)}
 								handleMouseEnter={handleMouseEnter}
 								handleMouseLeave={handleMouseLeave}
@@ -98,22 +110,22 @@ function RouteDetails({
 								return (
 									<>
 										<PortForm
-											isFirst={index === 0}
-											isLast={index === route.length - 1}
+											isFirst={index === ZERO}
+											isLast={index === route.length - ONE}
 											port={port}
-											diffInDays={0}
+											diffInDays={ZERO}
 											index={index}
 											onClickDelete={onClickDelete}
 											setSubmit={setSubmit}
 										/>
 										{add ? (
 											<RoutePortForm
-												isFirst={index === 0}
-												isLast={index === route.length - 1}
+												isFirst={index === ZERO}
+												isLast={index === route.length - ONE}
 												port={port}
 												diffInDays={differenceInDays(
-													Date.parse(route?.[index + 1]?.etd?.slice(0, 10)),
-													Date.parse(route?.[index]?.etd?.slice(0, 10)),
+													Date.parse(route?.[index + ONE]?.etd?.slice(ZERO, TEN)),
+													Date.parse(route?.[index]?.etd?.slice(ZERO, TEN)),
 												)}
 												index={index}
 												onClickAdd={onClickAdd}
@@ -131,12 +143,13 @@ function RouteDetails({
 							if (!deletePort?.includes(index)) {
 								return (
 									<RoutePortForm
-										isFirst={index === 0}
-										isLast={index === route.length - 1}
+										key={port?.id}
+										isFirst={index === ZERO}
+										isLast={index === route.length - ONE}
 										port={port}
 										diffInDays={differenceInDays(
-											Date.parse(route?.[index + 1]?.etd?.slice(0, 10)),
-											Date.parse(route?.[index]?.etd?.slice(0, 10)),
+											Date.parse(route?.[index + ONE]?.etd?.slice(ZERO, TEN)),
+											Date.parse(route?.[index]?.etd?.slice(ZERO, TEN)),
 										)}
 										index={index}
 										onClickAdd={onClickAdd}

@@ -1,6 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
+const ZERO = 0;
 const useGetSailingSchedule = ({ id }) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
@@ -33,7 +34,7 @@ const useGetSailingSchedule = ({ id }) => {
 		if (id) getSailingSchedule();
 	}, [id]);
 	return {
-		data: data?.list?.[0],
+		data: data?.list?.[ZERO],
 		loading,
 	};
 };

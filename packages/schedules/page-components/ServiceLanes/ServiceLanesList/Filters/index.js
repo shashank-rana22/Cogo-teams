@@ -6,8 +6,6 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 const sortByOptions = [
-	{ label: 'Departure', value: 'departure' },
-	{ label: 'Arrival', value: 'arrival' },
 	{ label: 'Transit Time', value: 'transit_time' },
 ];
 
@@ -26,7 +24,7 @@ function Filters({ filters, setFilters }) {
 					}}
 					Placement="right"
 					render={(
-						<PopoverContent setFilters={setFilters} />
+						<PopoverContent setFilters={setFilters} setShowPopover={setShowPopover} />
 					)}
 				>
 					<Button
@@ -55,6 +53,7 @@ function Filters({ filters, setFilters }) {
 					options={sortByOptions}
 					placeholder="Sort By"
 					value={filters?.sort_by}
+					isClearable
 					onChange={(value) => handleFilter(value, 'sort_by')}
 				/>
 			</div>

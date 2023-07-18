@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PopoverContent({ setFilters }) {
+function PopoverContent({ setFilters, setShowPopover }) {
 	const originPortOptions = useGetAsyncOptions(
 		merge(asyncFieldsLocations(), {
 			params: { filters: { type: ['seaport'] } },
@@ -27,6 +27,7 @@ function PopoverContent({ setFilters }) {
 
 	const handleApply = () => {
 		setFilters((prev) => ({ ...prev, ...popoverFilters }));
+		setShowPopover(false);
 	};
 
 	const handlePopoverFilter = (value, type) => {
@@ -54,6 +55,7 @@ function PopoverContent({ setFilters }) {
 					Shipping Line
 				</div>
 				<Select
+					isClearable
 					className={styles.filter_select}
 					{...shippingLineOptions}
 					placeholder="Shipping Line"
@@ -67,16 +69,20 @@ function PopoverContent({ setFilters }) {
 				</div>
 				<div className={styles.pairs}>
 					<Select
+						isClearable
 						className={styles.filter_select}
 						{...originPortOptions}
+						valueKey="port_code"
 						placeholder="Origin Port"
 						value={popoverFilters?.origin_port_id}
 						onChange={(value) => handlePopoverFilter(value, 'origin_port_id')}
 					/>
 					<IcMPortArrow />
 					<Select
+						isClearable
 						className={styles.filter_select}
 						{...destinationPortOptions}
+						valueKey="port_code"
 						placeholder="Destination Port"
 						value={popoverFilters?.destination_port_id}
 						onChange={(value) => handlePopoverFilter(value, 'destination_port_id')}

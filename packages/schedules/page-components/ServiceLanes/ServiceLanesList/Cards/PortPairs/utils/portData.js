@@ -1,29 +1,39 @@
+const ZERO = 0;
+const ONE = 1;
+const THREE = 3;
+const TEN_THOUSAND = 10000;
+const TWO = 2;
+const TEN = 10;
+const SIXTEEN = 16;
+const TWETY = 20;
+const EIGHT = 8;
+
 const portData = ({ item }) => {
-	const truncate = (str, len) => (str?.length > len ? `${str.substring(0, len - 3)}...` : str);
+	const truncate = (str, len) => (str?.length > len ? `${str.substring(ZERO, len - THREE)}...` : str);
 
 	const links = item?.service_lane_links?.length;
 
-	const origin = item?.service_lane_links?.[0]?.display_name;
+	const origin = item?.service_lane_links?.[ZERO]?.display_name;
 	const splitOrigin = origin?.indexOf(',')
-        < (origin?.indexOf('(') < 0 ? 10000 : origin?.indexOf('('))
+        < (origin?.indexOf('(') < ZERO ? TEN_THOUSAND : origin?.indexOf('('))
 		? origin?.indexOf(',')
 		: origin?.indexOf('(');
-	const originPort = origin?.substring(0, splitOrigin);
+	const originPort = origin?.substring(ZERO, splitOrigin);
 	const commaIndexOrigin = origin?.indexOf(',');
 	const originLocation = truncate(
-		origin?.substring(commaIndexOrigin + 2).trim(),
-		originPort?.length > 16 ? 10 : 20,
+		origin?.substring(commaIndexOrigin + TWO).trim(),
+		originPort?.length > SIXTEEN ? TEN : TWETY,
 	);
 
-	const destination = item?.service_lane_links?.[links - 1]?.display_name;
+	const destination = item?.service_lane_links?.[links - ONE]?.display_name;
 	const splitDestination = destination?.indexOf(',') < destination?.indexOf('(')
 		? destination?.indexOf(',')
 		: destination?.indexOf('(');
-	const destinationPort = destination?.substring(0, splitDestination);
+	const destinationPort = destination?.substring(ZERO, splitDestination);
 	const commaIndexDestination = destination?.indexOf(',');
 	const destinationLocation = truncate(
-		destination?.substring(commaIndexDestination + 2).trim(),
-		destinationPort?.length > 16 ? 8 : 20,
+		destination?.substring(commaIndexDestination + TWO).trim(),
+		destinationPort?.length > SIXTEEN ? EIGHT : TWETY,
 	);
 
 	return {

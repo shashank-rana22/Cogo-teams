@@ -3,8 +3,11 @@ import { useState } from 'react';
 
 import getPayload from '../helpers/update_payload';
 
+const ONE = 1;
+const ZERO = 0;
 const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
-	const totalTransit = route?.[route?.length - 1]?.eta_day_count - route?.[0]?.etd_day_count;
+	const totalTransit = Number(route?.[Number(route?.length) - ONE]?.eta_day_count)
+		- Number(route?.[ZERO]?.etd_day_count);
 	const [edit, setEdit] = useState(false);
 	const [portEdit, setPortEdit] = useState(false);
 	const [form, setForm] = useState(null);
@@ -30,7 +33,7 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 
 	const onClickAdd = (index) => {
 		setForm(index);
-		modifiedRoute = [...(tempRoute?.slice(0, index) || []),
+		modifiedRoute = [...(tempRoute?.slice(ZERO, index) || []),
 			{ ...submit },
 			OBJECT_TO_INSERT, ...(tempRoute?.slice(index, tempRoute.length) || [])];
 		const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
@@ -47,7 +50,7 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 		} else if (!portEdit) {
 			setForm(null);
 			setDeletePort((prevDeletePort) => (prevDeletePort ? [...prevDeletePort, index] : [index]));
-			modifiedRoute = [...finalRoute.slice(0, index), ...finalRoute.slice(index + 1, finalRoute.length)];
+			modifiedRoute = [...finalRoute.slice(ZERO, index), ...finalRoute.slice(index + ONE, finalRoute.length)];
 			const order = modifiedRoute.map((obj, i) => ({ ...obj, order: i }));
 			setFinalRoute(order);
 		}
@@ -63,7 +66,7 @@ const useUpdateServiceLane = ({ route, finalRoute, setFinalRoute, data }) => {
 	}, { manual: true });
 
 	const updateServiceLane = async () => {
-		const res = await trigger({ data: payload });
+		await trigger({ data: payload });
 	};
 
 	return {

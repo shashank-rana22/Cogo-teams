@@ -9,6 +9,8 @@ import ServiceLanesMap from './ServiceLaneMap';
 import ShipmentDetailsCard from './ShipmentDetailsCard';
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const TEN = 10;
 function ServiceLaneDetails() {
 	const { query } = useRouter();
 	const routeId = query?.id;
@@ -21,8 +23,8 @@ function ServiceLaneDetails() {
 			<ShipmentDetailsCard data={data} loading={loading} />
 			<div className={styles.partition}>
 				<RouteDetails
-					route={data?.[0]?.service_lane_links}
-					dayOfWeek={data?.[0]?.day_of_week || 10}
+					route={data?.[ZERO]?.service_lane_links}
+					dayOfWeek={data?.[ZERO]?.day_of_week || TEN}
 					finalRoute={finalRoute}
 					setFinalRoute={setFinalRoute}
 					loading={loading}

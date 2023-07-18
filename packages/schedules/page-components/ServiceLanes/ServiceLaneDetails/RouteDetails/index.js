@@ -10,6 +10,8 @@ import RoutePort from './RoutePort';
 import RoutePortForm from './RoutePortForm';
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const ONE = 1;
 function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, data }) {
 	const {
 		updateServiceLane,
@@ -46,12 +48,12 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 	<div className={styles.frequency_data}>
 		<WeekFrequency
 			dayOfWeek={dayOfWeek || '-'}
-			startingDay={Number(route?.[0]?.eta_day) - 1}
+			startingDay={Number(route?.[ZERO]?.eta_day) - ONE}
 		/>
                             &ensp;
 		<WeekCalendar
 			dayOfWeek={dayOfWeek || '-'}
-			startingDay={Number(route?.[0]?.eta_day) - 1}
+			startingDay={Number(route?.[ZERO]?.eta_day) - ONE}
 		/>
 	</div>
                             ) : null
@@ -100,14 +102,14 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 			{!edit ? (
 				<div className={styles.route_points}>
 					{route?.map((port, index) => {
-						if (index === route.length - 1) { return <RoutePort isLast port={port} key={port?.id} />; }
+						if (index === route.length - ONE) { return <RoutePort isLast port={port} key={port?.id} />; }
 						return (
 							<RoutePort
-								isFirst={index === 0}
+								isFirst={index === ZERO}
 								port={port}
 								key={port?.id}
 								diffInDays={
-													Number(route?.[index + 1]?.eta_day_count)
+													Number(route?.[index + ONE]?.eta_day_count)
 													- Number(route?.[index]?.etd_day_count)
 												}
 								handleClick={handleClick}
@@ -170,6 +172,7 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 
 							);
 						}
+						return null;
 					})}
 
 				</div>
