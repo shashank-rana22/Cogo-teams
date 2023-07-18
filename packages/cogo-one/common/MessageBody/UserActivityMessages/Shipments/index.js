@@ -3,9 +3,9 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { SHIPPING_LINE, SHOW_SID, EVENT_LABEL } from '../../../../constants/getShippingLines';
 import { getEventTitle } from '../../../../utils/getEventTitle';
-import CargoDetails from '../../../CargoDetails';
-import PortDetails from '../../../PortDetails';
 
+import CargoDetails from './CargoDetails';
+import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
 function Shipments({ serviceData = {}, name = '', eventType = '' }) {
@@ -36,13 +36,18 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 		spot_search : serviceData?.search_type,
 	};
 
+	const SERVICE_MAPPING = {
+		checkout    : 'service_type',
+		shipment    : 'shipment_type',
+		spot_search : 'search_type',
+	};
+
 	const SID_MAPPING = {
 		shipment    : serviceData?.serial_id,
 		spot_search : detail?.serial_id,
 	};
 
 	const lineType = SHIPPING_LINE_MAPPING[eventType];
-
 	const shippingLineMapping = SHIPPING_LINE[lineType] || '';
 	const matchShippingLine = SERVICE_DETAILS[eventType] || '';
 	const shippingLines = matchShippingLine[shippingLineMapping] || '';
@@ -62,7 +67,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 				{shippingLines && (
 					<div className={styles.company_details}>
 						{shippingLines?.logo_url && (
-							<img // getting other hostname images
+							<img // getting error other hostname images
 								src={shippingLines?.logo_url}
 								alt="status-icon"
 								width="30px"
@@ -89,7 +94,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 					</div>
 				)}
 
-				<PortDetails serviceData={SERVICE_DETAILS[eventType]} />
+				<PortDetails serviceData={SERVICE_DETAILS[eventType]} service={SERVICE_MAPPING[eventType]} />
 				<CargoDetails detail={SERVICE_DETAILS[eventType]} />
 			</div>
 

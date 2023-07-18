@@ -7,7 +7,7 @@ const popLastName = (name) => name?.split(' ').pop() || '';
 const getAppendedString = ({ code, name, country }) => `${code ? `${code},` : ''} 
 ${name} ${country ? `(${country})` : ''}`;
 
-export function formatRouteData({ item }) {
+export function formatRouteData({ item = {} }) {
 	const originlocationData = (
 		item.origin_port
 		|| item.origin_airport
@@ -18,9 +18,9 @@ export function formatRouteData({ item }) {
 	);
 
 	const {
-		port_code:originCode,
-		name:originName,
-		display_name:originDisplayName,
+		port_code: originCode,
+		name: originName,
+		display_name: originDisplayName,
 	} = originlocationData;
 
 	const destinationLocationData = (
@@ -72,6 +72,26 @@ export function formatRouteData({ item }) {
 			code    : destinationMainPortCode,
 			country : popLastName(destinationMainPortDisplayName),
 			name    : splitByBrackets(destinationMainPortName),
+		}),
+		originDetails: {
+			code    : originCode,
+			country : popLastName(originDisplayName),
+			name    : originDisplayName,
+		},
+		destinationDetails: {
+			code    : destinationCode,
+			country : popLastName(destinationDisplayName),
+			name    : destinationDisplayName,
+		},
+		singleOriginDisplay: getAppendedString({
+			code    : originMainPortCode,
+			country : popLastName(originMainPortDisplayName),
+			name    : originMainPortDisplayName,
+		}),
+		singleDestinationDisplay: getAppendedString({
+			code    : destinationMainPortCode,
+			country : popLastName(destinationMainPortDisplayName),
+			name    : destinationMainPortDisplayName,
 		}),
 	};
 }
