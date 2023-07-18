@@ -23,6 +23,7 @@ function AwbNumberDeleted({
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showConfirm, setShowConfirm] = useState(false);
+	const [changedStatus, setChangedStatus] = useState('');
 
 	const { fields } = AwbNumberFields;
 
@@ -34,6 +35,7 @@ function AwbNumberDeleted({
 		setQfilter,
 		setShowConfirm,
 		page,
+		changedStatus,
 	});
 
 	const otherFunctions = {
@@ -49,6 +51,7 @@ function AwbNumberDeleted({
 						onClick={() => {
 							setItem(singleItem);
 							setShowConfirm(true);
+							setChangedStatus('available_non_reserved');
 						}}
 					>
 						<IcMProvision height={16} width={16} fill="#8B8B8B" />

@@ -22,6 +22,7 @@ function AwbNumber({
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showEdit, setShowEdit] = useState(false);
+	const [changedStatus, setChangedStatus] = useState('');
 
 	const { fields } = AwbNumberFields;
 
@@ -33,6 +34,7 @@ function AwbNumber({
 		setFinalList,
 		setQfilter,
 		page,
+		changedStatus,
 	});
 
 	const otherFunctions = {
@@ -45,6 +47,7 @@ function AwbNumber({
 						onClick={() => {
 							setItem(singleItem);
 							setShowEdit(true);
+							setChangedStatus('available_reserved');
 						}}
 					>
 						Reserve AWB
@@ -58,6 +61,7 @@ function AwbNumber({
 							onClick={() => {
 								setItem(singleItem);
 								setShowEdit(true);
+								setChangedStatus('available_non_reserved');
 							}}
 						>
 							<IcMEdit height={16} width={16} fill="#8B8B8B" />
