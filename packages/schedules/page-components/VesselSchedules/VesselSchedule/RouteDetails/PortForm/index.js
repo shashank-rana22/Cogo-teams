@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete, setSubmit }) {
+function PortForm({ isFirst, isLast, diffInDays = 4, index, onClickDelete, setSubmit }) {
 	const [arrival_date, setArrivalDate] = useState(null);
 	const [departure_date, setDepartureDate] = useState(null);
 	const [port_name, setPortName] = useState('');
@@ -15,7 +15,7 @@ function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 	const options = useGetAsyncOptions(
 		merge(asyncFieldsLocations()),
 	);
-	
+
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -27,7 +27,10 @@ function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={(value) => { setArrivalDate(value); setSubmit((prev) => ({ ...prev, eta: value })); }}
+								onChange={(value) => {
+									setArrivalDate(value);
+									setSubmit((prev) => ({ ...prev, eta: value }));
+								}}
 								value={arrival_date}
 							/>
 						</div>
@@ -39,7 +42,10 @@ function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 								showTimeSelect
 								dateFormat="MM/dd/yyyy HH:mm"
 								name="date"
-								onChange={(value) => { setDepartureDate(value); setSubmit((prev) => ({ ...prev, etd: value })); }}
+								onChange={(value) => {
+									setDepartureDate(value);
+									setSubmit((prev) => ({ ...prev, etd: value }));
+								}}
 								value={departure_date}
 							/>
 						</div>
@@ -56,12 +62,21 @@ function PortForm({ isFirst, isLast, port, diffInDays = 4, index, onClickDelete,
 					<Select
 						placeholder="Port Name"
 						{...options}
-						onChange={(value) => { setPortName(value); setSubmit((prev) => ({ ...prev, location_id: value })); }}
+						onChange={(value) => {
+							setPortName(value);
+							setSubmit((prev) => ({ ...prev, location_id: value }));
+						}}
 						value={port_name}
 
 					/>
 				</div>
-				<IcMDelete style={{ cursor: 'pointer' }} height="20px" width="20px" margin="2px" onClick={() => { onClickDelete(index); }} />
+				<IcMDelete
+					style={{ cursor: 'pointer' }}
+					height="20px"
+					width="20px"
+					margin="2px"
+					onClick={() => { onClickDelete(index); }}
+				/>
 
 				{!isLast && (
 					<div className={styles.diff_in_days}>

@@ -12,7 +12,7 @@ import VesselScheduleMap from './VesselSchedulesMap';
 function VesselScheduele() {
 	const { query } = useRouter();
 	const vesselId = query?.id;
-	const { data, loading } = useGetVesselScheduleById({ vesselId });
+	const { data, loading, refetch } = useGetVesselScheduleById({ vesselId });
 	const [finalRoute, setFinalRoute] = useState(null);
 	const numberOfElements = 2;
 	const [tooltipRefArray, setTooltipRefArray] = useState([]);
@@ -33,7 +33,7 @@ function VesselScheduele() {
 
 	const handleMouseEnter = (index) => {
 		const { children } = tooltipRefArray[index]?.current?.options || '';
-		
+
 		setIsTooltipVisible(true);
 	};
 	// console.log(tooltipRefArray[2]?.current, 'reff', isTooltipVisible);
@@ -51,6 +51,7 @@ function VesselScheduele() {
 					setFinalRoute={setFinalRoute}
 					handleMouseEnter={handleMouseEnter}
 					handleMouseLeave={handleMouseLeave}
+					refetch={refetch}
 				/>
 				<VesselScheduleMap data={data} tooltipRefArray={tooltipRefArray} isTooltipVisible={isTooltipVisible} />
 			</div>

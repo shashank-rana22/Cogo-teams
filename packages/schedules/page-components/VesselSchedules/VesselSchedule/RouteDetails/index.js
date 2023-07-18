@@ -10,10 +10,9 @@ import styles from './styles.module.css';
 
 function RouteDetails({
 	data, route, finalRoute, setFinalRoute, handleMouseEnter,
-	handleMouseLeave,
+	handleMouseLeave, refetch,
 }) {
 	const {
-		updateVesselSchedule,
 		setPortEdit,
 		setSubmit,
 		edit,
@@ -24,7 +23,8 @@ function RouteDetails({
 		onClickAdd,
 		onClickEdit,
 		onClickDelete,
-	} = useUpdateVesselSchedule({ route, data, finalRoute, setFinalRoute });
+		onSubmitHandler,
+	} = useUpdateVesselSchedule({ route, data, finalRoute, setFinalRoute, refetch });
 	return (
 		<div className={styles.route_details}>
 			<div className={styles.heading}>
@@ -54,7 +54,7 @@ function RouteDetails({
 							>
 								Cancel
 							</Button>
-							<Button size="md" className={styles.button_style} onClick={updateVesselSchedule}>Save Changes</Button>
+							<Button size="md" className={styles.button_style} onClick={onSubmitHandler}>Save Changes</Button>
 						</div>
 
 					)
