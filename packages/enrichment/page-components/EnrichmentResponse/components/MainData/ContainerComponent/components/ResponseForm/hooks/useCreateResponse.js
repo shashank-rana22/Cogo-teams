@@ -26,8 +26,6 @@ const useCreateResponse = ({
 
 	const { country_id, region_id } = addressData;
 
-	const controls = getResponseControls({ activeTab });
-
 	const { query = {} } = router;
 
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -38,9 +36,9 @@ const useCreateResponse = ({
 
 	}, { manual: true });
 
-	const controls = getControls({
-		country_id, region_id,
-	});
+	const controls = getResponseControls({ activeTab, country_id, region_id });
+
+	const mutatedControls = getMutatedControls({ controls, setAddressData });
 
 	const onSubmit = async () => {
 		const values = getValues();
