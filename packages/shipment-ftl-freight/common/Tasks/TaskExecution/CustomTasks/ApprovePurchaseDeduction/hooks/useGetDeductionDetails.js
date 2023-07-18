@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetDeductionDetails = (watchCN, shipment_data = {}) => {
+const useGetDeductionDetails = ({ watchCN, shipment_data = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_purchase_deduction_details',
 		method : 'GET',
