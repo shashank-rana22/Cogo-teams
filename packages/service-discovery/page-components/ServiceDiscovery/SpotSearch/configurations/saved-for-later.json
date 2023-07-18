@@ -1,7 +1,7 @@
 {
-	"heading": "Quotations",
+	"heading": "Saved for Later",
 	"api": "list_checkouts",
-	"type": "quotations",
+	"type": "saved_for_later",
 	"href": "/quotation-approval",
 	"as": "/quotation-approval",
 	"extraParams": {
@@ -50,7 +50,7 @@
 			"func": "renderCreated"
 		},
 		{
-			"key": "quotations",
+			"key": "saved_for_later",
 			"label": "",
 			"btnLabel":"Show Rates",
 			"func": "renderButton",

@@ -4,7 +4,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import React, { useMemo, useEffect, useCallback } from 'react';
 
 import CustomSelectOption from '../CustomSelectOption';
@@ -123,7 +122,7 @@ function OrganisationForm({
 					prefix={<IcMManufacturing fontSize={16} />}
 				/>
 
-				{errors.organization_id && (
+				{errors.organization_id && !organization?.organization_id && (
 					<div className={styles.error_message}>
 						This is required
 					</div>
@@ -147,7 +146,7 @@ function OrganisationForm({
 					loading={loading}
 				/>
 
-				{errors.user_id && !isEmpty(errors.user_id) && (
+				{errors.user_id && !organization?.user_id && (
 					<div className={styles.error_message}>
 						This is required
 					</div>

@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 4px 0;
 }
 
 .back_button {

@@ -59,14 +59,14 @@ function BookCheckout({
 				</div>
 			</div>
 
-			{/* <div className={styles.selected_services_container}>
+			<div className={styles.selected_services_container}>
 				<div className={styles.heading}>Following services has been added successfully to your freight</div>
 
 				<SelectedServices
 					rateDetails={rateCardData}
 					details={detail}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 }

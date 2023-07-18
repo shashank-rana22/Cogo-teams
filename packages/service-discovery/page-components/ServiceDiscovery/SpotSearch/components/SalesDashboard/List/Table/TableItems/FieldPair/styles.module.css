@@ -3,6 +3,7 @@
 	flex-direction: column;
 	width: fit-content;
 	text-align: left;
+	word-break: keep-all;
 }
 
 .org_details {
@@ -34,13 +35,12 @@
 }
 
 .upper_name {
-	/* background: #FFFFFF;
-    border: 0.5px solid #BDBDBD;
-    border-radius: 6px;
-    padding: 0 16px;
-    font-weight: 600;
-    font-size: 12px;
-    color: #4F4F4F; */
+	max-width: 120px;
+	overflow: hidden;
+	font-size: 12px;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .card {

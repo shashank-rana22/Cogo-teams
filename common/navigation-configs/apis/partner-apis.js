@@ -3606,6 +3606,11 @@ const partner = {
 			service_name : 'cogo_assured_rate',
 			feature      : 'rate_feedbacks',
 		},
+		{
+			api          : 'list_spot_search_stats',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
 	],
 	okam_dashboard: [
 		{

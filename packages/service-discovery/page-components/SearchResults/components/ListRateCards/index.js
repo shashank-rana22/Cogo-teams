@@ -44,7 +44,7 @@ function ListRateCards({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 120 : 80 }}>
+			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 110 : 80 }}>
 				<Header
 					ratesData={rates}
 					details={detail}

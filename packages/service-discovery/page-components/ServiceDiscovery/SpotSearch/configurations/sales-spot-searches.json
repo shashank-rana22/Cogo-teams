@@ -42,12 +42,13 @@
 			"key": "spot_search",
 			"label": "",
 			"btnLabel":"Show Rates",
+			"inDifferentWindow": true,
 			"func": "renderButton"
 		}
 	],
 	"filterProps": {
 		"searchKey": "serial_id",
-		"searchPlaceholder": "Search by Serial Id",
+		"searchPlaceholder": "Search by Id",
 		"controls": [
 			{
 				"name": "rates_availability",

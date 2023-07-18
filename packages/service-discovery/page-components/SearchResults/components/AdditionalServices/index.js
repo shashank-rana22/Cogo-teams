@@ -23,9 +23,9 @@ function AdditionalServices({
 	setHeaderProps = () => {},
 	refetchSearch = () => {},
 }) {
-	const { service_type, service_rates = [] } = rateCardData;
+	const { service_rates = [] } = rateCardData;
 
-	const { service_details } = detail;
+	const { service_details = {}, service_type = '' } = detail;
 
 	const [incoterm, setIncoterm] = useState('cif');
 

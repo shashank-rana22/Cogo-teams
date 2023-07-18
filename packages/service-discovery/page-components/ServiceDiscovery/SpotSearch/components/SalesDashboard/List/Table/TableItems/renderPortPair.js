@@ -106,7 +106,7 @@ const renderPortPair = (item, field) => {
 			</span>
 
 			{ isSingleLocation ? (
-				<Tooltip content={origin_display_name}>
+				<Tooltip content={<span style={{ wordBreak: 'keep-all' }}>{origin_display_name}</span>}>
 					<span style={{ maxWidth: 80, fontSize: 14, fontWeight: 500 }}>{origin}</span>
 				</Tooltip>
 			) : (

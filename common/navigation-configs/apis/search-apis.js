@@ -515,5 +515,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'list_spot_search_rate_cards',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;

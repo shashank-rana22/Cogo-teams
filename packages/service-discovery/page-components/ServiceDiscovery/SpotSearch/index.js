@@ -57,7 +57,12 @@ function SpotSearch() {
 					</div>
 
 					<div className={styles.sales_dashboard}>
-						<SalesDashboard importer_exporter_id={organization?.organization_id} />
+						<SalesDashboard
+							importer_exporter_id={organization?.organization_id}
+							service_type={selectedMode?.mode_value}
+							origin_location_id={location?.origin?.id}
+							destination_location_id={location?.destination?.id}
+						/>
 					</div>
 				</>
 			) : null}

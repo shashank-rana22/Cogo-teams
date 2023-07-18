@@ -1,10 +1,16 @@
 import { IcMAppCfs, IcMAppCustoms, IcMAppTruck } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 const getMapping = ({ primaryService = {}, otherServices = {} }) => {
-	const origin_main_port_name = primaryService?.origin_main_port?.display_name
-		|| primaryService?.origin_port?.display_name;
-	const destination_main_port_name = primaryService?.destination_main_port?.display_name
-		|| primaryService?.destination_port?.display_name;
+	// const origin_main_port_name = primaryService?.origin_main_port?.display_name
+	// 	|| primaryService?.origin_port?.display_name;
+	const originDisplayNameArray = primaryService?.origin_port?.display_name.split(',');
+	const originName = `${primaryService?.origin_port?.name} - 
+	${originDisplayNameArray.reverse()[1]}`;
+
+	const destinationDisplayNameArray = primaryService?.destination_port?.display_name.split(',');
+	const destinatioName = `${primaryService?.destination_port?.name} - 
+	${destinationDisplayNameArray.reverse()[1]}`;
 
 	const hash = {};
 
@@ -60,26 +66,35 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 				label : 'Nhava Seva CFS Clearance',
 				key   : 'origin_fcl_cfs',
 			},
-			// { type: 'icon', iconName: 'origin_fcl_freight_local' },
-			{ type: 'icon', iconName: 'fcl_freight' },
+			{
+				icon  : IcMAppCustoms,
+				label : startCase('origin_fcl_freight_local'),
+				key   : 'origin_fcl_freight_local',
+			},
+			{ type: 'icon', key: 'fcl_freight' },
+			{
+				icon  : IcMAppCustoms,
+				label : startCase('destination_fcl_freight_local'),
+				key   : 'destination_fcl_freight_local',
+			},
 			// { type: 'icon', iconName: 'destination_fcl_freight_local' },
 			{
 				icon  : IcMAppCfs,
-				label : 'destination_fcl_cfs',
+				label : 'Jebel Ali CFS Clearance',
 				key   : 'destination_fcl_cfs',
 			},
 			{
 				icon  : IcMAppCustoms,
-				label : 'destination_fcl_customs',
+				label : 'Jebel Ali Customs',
 				key   : 'destination_fcl_customs',
 			},
 			// primaryService?.destination_main_port?.name && {
 			// 	type     : 'icon',
 			// 	iconName : 'destination_haulage_freight',
 			// },
-			primaryService?.destination_main_port?.display_name && {
+			primaryService?.destination_port?.name && {
 				icon  : IcMAppTruck,
-				label : 'Dubai',
+				label : destinatioName,
 				key   : Object.keys(hash).includes('destination_ftl_freight')
 					? 'destination_ftl_freight'
 					: 'destination_trailer_freight',

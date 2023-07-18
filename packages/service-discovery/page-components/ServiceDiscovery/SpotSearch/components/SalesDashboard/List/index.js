@@ -10,6 +10,7 @@ import Table from './Table';
 
 function List({
 	importer_exporter_id,
+	service_type = '',
 	heading = '',
 	fields = [],
 	api = '',
@@ -17,9 +18,7 @@ function List({
 	placement = 'center',
 	...rest
 }) {
-	const isRateList = ['missing_rates', 'disliked_rates'].includes(rest?.type);
-
-	const [serviceType, setServiceType] = useState(() => (isRateList ? 'fcl_freight' : null));
+	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
 
 	const {
 		isConditionMatches,
@@ -29,7 +28,7 @@ function List({
 		filters,
 		setFilters,
 		setBucketParams,
-	} = useGetSalesDashboardData({ serviceType, isRateList, api, stats, importer_exporter_id, ...rest });
+	} = useGetSalesDashboardData({ serviceType, api, stats, importer_exporter_id, ...rest });
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
@@ -42,33 +41,35 @@ function List({
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.header_wrapper}>
-				<Statistics
-					statsArray={stats}
-					statsData={statsData}
-					setFilters={setFilters}
-					setBucketParams={setBucketParams}
-					activeStat={activeStat}
-					restFilters={restFilters}
-				/>
+			{['most_searched', 'most_booked'].includes(rest.type) ? null : (
+				<div className={styles.header_wrapper}>
+					<Statistics
+						statsArray={stats}
+						statsData={statsData}
+						setFilters={setFilters}
+						setBucketParams={setBucketParams}
+						activeStat={activeStat}
+						restFilters={restFilters}
+					/>
 
-				<Header
-					{...(rest || {})}
-					heading={heading}
-					filters={restFilters}
-					serviceType={serviceType}
-					setServiceType={setServiceType}
-					setFilters={(val) => {
-						setFilters({
-							...(restFilters || {}),
-							...(val || {}),
-							activeStat,
-							page_limit,
-							page: 1,
-						});
-					}}
-				/>
-			</div>
+					<Header
+						{...(rest || {})}
+						heading={heading}
+						filters={restFilters}
+						serviceType={serviceType}
+						setServiceType={setServiceType}
+						setFilters={(val) => {
+							setFilters({
+								...(restFilters || {}),
+								...(val || {}),
+								activeStat,
+								page_limit,
+								page: 1,
+							});
+						}}
+					/>
+				</div>
+			)}
 
 			<div className={styles.table}>
 				<Table

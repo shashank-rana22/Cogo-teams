@@ -15,7 +15,7 @@ const getFlex = (span) => {
 	return flex;
 };
 
-function RouteForm({ mode = '', setFormValues, formValues }) {
+function RouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) {
 	const serviceType = mode;
 
 	const controls = getFormControls(serviceType);
@@ -37,7 +37,6 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 						value={formValues?.location?.id}
 						onChange={(val, obj) => setFormValues((prev) => ({ ...prev, location: obj }))}
 					/>
-
 				</div>
 
 				<div className={styles.form_item} style={{ width: `${getFlex(typeControls.span)}%` }}>
@@ -52,7 +51,6 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 						value={formValues?.type}
 						onChange={(val) => setFormValues((prev) => ({ ...prev, type: val }))}
 					/>
-
 				</div>
 
 				<div className={styles.form_item} style={{ width: `${getFlex(serviceControls.span)}%` }}>
@@ -67,47 +65,41 @@ function RouteForm({ mode = '', setFormValues, formValues }) {
 						value={formValues?.service}
 						onChange={(val) => setFormValues((prev) => ({ ...prev, service: val }))}
 					/>
-
 				</div>
-
 			</div>
 		);
 	}
 
 	const [originControls, destinationControls] = controls;
 
+	const renderLocationControl = (itemControls = {}, key = '') => {
+		const { label, span } = itemControls || {};
+
+		const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
+
+		return (
+			<div className={styles.form_item} style={{ width: `${flex}%` }}>
+				<div className={styles.label}>
+					{label || ''}
+					{' '}
+					<div className={styles.required_mark}>*</div>
+				</div>
+
+				<AsyncSelect
+					{...itemControls}
+					value={formValues?.[key]?.id}
+					onChange={(val, obj) => setFormValues((prev) => ({ ...prev, [key]: obj }))}
+				/>
+			</div>
+		);
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.form_item} style={{ width: `${getFlex(originControls.span)}%` }}>
-				<div className={styles.label}>
-					{originControls.label || ''}
-					{' '}
-					<div className={styles.required_mark}>*</div>
-				</div>
 
-				<AsyncSelect
-					{...originControls}
-					value={formValues?.origin?.id}
-					onChange={(val, obj) => setFormValues((prev) => ({ ...prev, origin: obj }))}
-				/>
+			{renderLocationControl(originControls, 'origin')}
 
-			</div>
-
-			<div className={styles.form_item} style={{ width: `${getFlex(destinationControls.span)}%` }}>
-				<div className={styles.label}>
-					{destinationControls.label || ''}
-					{' '}
-					<div className={styles.required_mark}>*</div>
-				</div>
-
-				<AsyncSelect
-					{...destinationControls}
-					value={formValues?.destination?.id}
-					onChange={(val, obj) => setFormValues((prev) => ({ ...prev, destination: obj }))}
-				/>
-
-			</div>
-
+			{renderLocationControl(destinationControls, 'destination')}
 		</div>
 	);
 }

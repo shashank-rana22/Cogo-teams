@@ -1,4 +1,3 @@
-/* eslint-disable custom-rules/custom-rules-matching */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';

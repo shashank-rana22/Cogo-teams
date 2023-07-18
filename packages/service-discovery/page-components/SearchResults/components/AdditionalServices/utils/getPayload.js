@@ -1,5 +1,5 @@
 const getPayload = ({
-	rateCardData = {},
+	// rateCardData = {},
 	additionalFormInfo = {},
 	detail = {},
 	service_name = '',
@@ -17,10 +17,7 @@ const getPayload = ({
 		haulage_type = '',
 	} = additionalFormInfo;
 
-	console.log('detail', detail);
-
-	const { spot_search_id, bls_count = '', service_details = {} } = detail;
-	const { service_type } = rateCardData;
+	const { spot_search_id, bls_count = '', service_details = {}, service_type = '' } = detail;
 	const primaryService = service_type;
 
 	const primaryServicesObj = Object.values(service_details).filter((item) => item.service_type === primaryService);

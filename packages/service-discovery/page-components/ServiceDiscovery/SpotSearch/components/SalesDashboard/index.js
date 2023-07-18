@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import { salesDashboard as configurations } from '../../configurations/sales-dashboard';
@@ -6,12 +7,15 @@ import { salesDashboard as configurations } from '../../configurations/sales-das
 import List from './List';
 import styles from './styles.module.css';
 
-const ZEROTH_INDEX = 0;
+function SalesDashboard({
+	importer_exporter_id = '',
+	service_type = '',
+	destination_location_id = '',
+	origin_location_id = '',
+}) {
+	const allLists = configurations;
 
-function SalesDashboard({ importer_exporter_id = '' }) {
-	const lists = configurations;
-
-	const [activeTab, setActiveTab] = useState(lists[ZEROTH_INDEX].type);
+	const [activeTab, setActiveTab] = useState(allLists[GLOBAL_CONSTANTS.zeroth_index].type);
 
 	return (
 		<div className={styles.container}>
@@ -21,23 +25,22 @@ function SalesDashboard({ importer_exporter_id = '' }) {
 				activeTab={activeTab}
 				onChange={setActiveTab}
 			>
-				{lists.map((list) => {
-					const newList = { ...list };
-
-					if (newList.api === 'list_shipments') {
-						newList.type = 'sales_shipments';
-					}
+				{allLists.map((listItem) => {
+					const { type = '', heading = '' } = listItem;
 
 					return (
 						<TabPanel
-							key={newList.type}
-							name={newList.type}
-							title={newList.heading}
+							key={type}
+							name={type}
+							title={heading}
 						>
 							<List
-								key={newList.type}
-								{...newList}
+								key={`${type}_${heading}`}
+								{...listItem}
 								importer_exporter_id={importer_exporter_id || undefined}
+								service_type={service_type || undefined}
+								origin_location_id={origin_location_id || undefined}
+								destination_location_id={destination_location_id || undefined}
 								dashboard="sales"
 							/>
 						</TabPanel>

@@ -37,7 +37,8 @@ function SearchResults() {
 		selectedCard,
 	} = useGetSpotSearch();
 
-	const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
+	const { spot_search_detail:detail = {}, list:rates = [], possible_subsidiary_services = [] } = data || {};
+	// const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 

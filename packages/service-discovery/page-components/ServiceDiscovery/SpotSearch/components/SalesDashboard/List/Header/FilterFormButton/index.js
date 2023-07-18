@@ -4,16 +4,11 @@ import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getElementController from '../../../../../../../../configs/getElementController';
-
+import FilterForm from './renderFilterForm';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
-const ONE_VALUE = 0;
-const MARGIN_VALUE = 20;
-const DEFAULT_SPAN = 12;
-const PERCENT_FACTOR = 100;
-const FLEX_OFFSET = 1;
+const ONE_VALUE = 1;
 
 const isObjEmpty = (obj) => {
 	let objIsEmpty = true;
@@ -23,16 +18,17 @@ const isObjEmpty = (obj) => {
 	return isEmpty(obj) || objIsEmpty;
 };
 
-function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
+function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 	const [filtersCount, setFiltersCount] = useState(ZERO_VALUE);
 	const [visible, setVisible] = useState(false);
 
-	const { control, watch, handleSubmit, reset } = useForm();
+	const { control, watch, handleSubmit, reset, setValue } = useForm();
 
 	const formValues = watch();
 
 	const onClickOutside = () => {
 		setVisible(false);
+		Object.keys(filters).forEach((key) => setValue(key, filters[key]));
 		if (filtersCount) return;
 		reset();
 	};
@@ -63,70 +59,30 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 		let count = 0;
 
 		Object.keys(formValues).forEach((key) => {
-			if (formValues[key] && !isEmpty(formValues[key])) count += ONE_VALUE;
+			if (['object', 'array'].includes(typeof formValues[key]) && !isEmpty(formValues[key])) {
+				count += ONE_VALUE;
+			} else if (formValues[key]) {
+				count += ONE_VALUE;
+			}
 		});
 
 		setFiltersCount(count);
 	};
-
-	const renderFilterForm = (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.heading}>Search</div>
-
-				<div className={styles.button_container}>
-					<Button size="sm" themeType="primary" style={{ marginRight: 12 }} onClick={handleReset}>
-						Reset
-					</Button>
-
-					<Button size="sm" themeType="secondary" onClick={handleSubmit(handleApply)}>
-						Apply
-					</Button>
-				</div>
-			</div>
-
-			<div className={styles.form}>
-				{controls.map((controlItem, index) => {
-					const { label, type, name, span } = controlItem;
-
-					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
-
-					const Element = getElementController(type);
-
-					return (
-						<div
-							key={`${name}_${label}`}
-							className={styles.form_item}
-							style={{ width: `${flex}%`, marginTop: index === ZERO_VALUE ? ZERO_VALUE : MARGIN_VALUE }}
-						>
-							<div className={styles.label}>
-								{label || ''}
-								{' '}
-								{controlItem?.rules?.required ? (
-									<div className={styles.required_mark}>*</div>
-								) : null}
-							</div>
-
-							<Element
-								{...controlItem}
-								name={name}
-								label={label}
-								control={control}
-								value={filters[name] || formValues[name]}
-							/>
-						</div>
-					);
-				})}
-			</div>
-		</div>
-	);
 
 	return (
 		<div className={styles.container}>
 
 			<Popover
 				placement="bottom"
-				render={renderFilterForm}
+				render={(
+					<FilterForm
+						controls={controls}
+						handleSubmit={handleSubmit}
+						handleApply={handleApply}
+						handleReset={handleReset}
+						control={control}
+					/>
+				)}
 				onClickOutside={onClickOutside}
 				visible={visible}
 			>
@@ -138,7 +94,7 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 				>
 					{filtersCount ? (
 						<div className={styles.red_dot}>
-							<div style={{ color: '#fff', fontSize: 9, fontWeight: 700 }}>{filtersCount}</div>
+							<div style={{ color: '#fff', fontSize: 9, fontWeight: 700 }} />
 						</div>
 					) : null}
 
@@ -150,4 +106,4 @@ function FilterForm({ controls = [], filters = {}, setFilters = () => {} }) {
 	);
 }
 
-export default FilterForm;
+export default FilterButton;

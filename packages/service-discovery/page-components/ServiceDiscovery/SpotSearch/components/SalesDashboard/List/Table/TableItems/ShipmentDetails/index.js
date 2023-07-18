@@ -30,7 +30,7 @@ const renderShipment = (itemData, field) => {
 
 	const firstLoadObject = load.shift();
 
-	const renderLoadDetails = (data) => (
+	const renderLoadDetails = (data = {}) => (
 		(
 			<>
 				{data?.container_size ? (
@@ -41,13 +41,13 @@ const renderShipment = (itemData, field) => {
 					</Pill>
 				) : null}
 
-				{data.containers_count > 0 ? (
+				{data?.containers_count > 0 ? (
 					<Pill size="md" color="#F9F9F9">
 						{`${data.containers_count} Container`}
 					</Pill>
 				) : null}
 
-				{data.container_type ? (
+				{data?.container_type ? (
 					<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
 				) : null}
 

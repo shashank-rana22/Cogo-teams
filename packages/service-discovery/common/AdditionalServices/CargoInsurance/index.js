@@ -32,6 +32,7 @@ function CargoInsurance({
 	allowCargoInsurance = true,
 	setShowAddInvoicingParty = () => {},
 	setDone = () => {},
+	defaultValues = {},
 }) {
 	const [commodity, setCommodity] = useState('');
 	const [rateData, setRateData] = useState({});
@@ -50,7 +51,7 @@ function CargoInsurance({
 
 	const importer_exporter_country_id = importer_exporter?.country_id || importer_exporter?.country?.id;
 
-	const { control, watch, formState:{ errors }, setValue, handleSubmit } = useForm();
+	const { control, watch, formState:{ errors }, setValue, handleSubmit } = useForm({ defaultValues });
 
 	const {
 		cargo_value: cargoValue,
@@ -175,7 +176,7 @@ function CargoInsurance({
 
 	return (
 		<Modal
-			size={['allowed', 'not_allowed'].includes(activeComponent) ? 'md' : 'sm'}
+			size="sm"
 			show={addCargoInsurance}
 			onClose={() => setAddCargoInsurance(false)}
 			closeOnOuterClick={false}

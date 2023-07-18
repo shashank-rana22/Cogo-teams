@@ -4,7 +4,7 @@ import React from 'react';
 import SearchInput from '../../../../../../../common/SearchInput';
 
 import ExtraFilters from './ExtraFilters';
-import FilterForm from './FilterFormButton';
+import FilterButton from './FilterFormButton';
 import styles from './styles.module.css';
 
 function Header({
@@ -64,7 +64,7 @@ function Header({
 			</div>
 
 			{!isEmpty(controls) ? (
-				<FilterForm
+				<FilterButton
 					controls={controls}
 					filters={filters}
 					setFilters={setFilters}

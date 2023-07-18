@@ -13,7 +13,7 @@ const useGetTableColumns = ({ activeTab = 'spot_searches', fields = [] }) => {
 
 			let data = { ...item };
 
-			if (['quotations', 'spot_booking'].includes(activeTab)) {
+			if (['quotations', 'saved_for_later'].includes(activeTab)) {
 				const { primary_service, services } = item || {};
 				const primary_service_data = Object.values(services || {}).find(
 					(itm) => itm.service_type === primary_service,
