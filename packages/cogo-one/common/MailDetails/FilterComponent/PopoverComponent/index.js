@@ -60,12 +60,12 @@ function PopoverComponent({
 				</Button>
 			</div>
 			<div className={styles.filter_body}>
-				{(searchQuery || noOfFilters) ? (
-					<div className={styles.note_container}>
-						Note:
-						<span>Filters and search can&apos;t be used together.</span>
-					</div>
-				) : null}
+
+				<div className={styles.note_container}>
+					Note:
+					<span>Filters and search can&apos;t be used together.</span>
+				</div>
+
 				{filterControls.map((itm) => {
 					const { name, label, controlType } = itm;
 
