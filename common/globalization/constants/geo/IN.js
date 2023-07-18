@@ -582,7 +582,6 @@ export default {
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
-
 		},
 	},
 };
