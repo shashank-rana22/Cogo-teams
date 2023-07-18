@@ -1,9 +1,10 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlus } from '@cogoport/icons-react';
+import { IcMPlus, IcMAppPoc } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
 import DialCallModal from '../../DialCallModal';
 import MailModal from '../MailList/MailModal';
@@ -82,16 +83,16 @@ function CommunicationModals({
 									width={60}
 								/>
 							</div>
-							<div className={cl`${styles.action} ${styles.contacts_icon}`}>
-								<Image
-									onClick={() => setOpenKamContacts(true)}
-									src={GLOBAL_CONSTANTS.image_url.bot_logo_svg}
-									alt="contacts icon"
-									role="presentation"
-									height={60}
-									width={60}
-								/>
-							</div>
+							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.global_contacts && (
+								<div className={cl`${styles.action} ${styles.contacts_icon}`}>
+									<IcMAppPoc
+										onClick={() => setOpenKamContacts(true)}
+										height={25}
+										width={25}
+										fill="#432609"
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
