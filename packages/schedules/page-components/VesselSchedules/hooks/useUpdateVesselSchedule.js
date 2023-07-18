@@ -13,7 +13,6 @@ const useUpdateVesselSchedule = ({ route, data, finalRoute, setFinalRoute }) => 
 	const [deletePort, setDeletePort] = useState(null);
 	const tempRoute = Array.isArray(route) ? [...route] : [];
 	const [submit, setSubmit] = useState(null);
-
 	let modifiedRoute = [];
 	const handleClick = (input) => {
 		if (input === 'edit') {

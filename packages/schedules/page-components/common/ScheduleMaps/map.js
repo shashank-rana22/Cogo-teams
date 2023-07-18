@@ -1,16 +1,12 @@
 import Point from '@cogoport/map-components/ui/Point';
-import { CogoMaps, L, Marker, Polyline, Popup } from '@cogoport/maps';
+import { CogoMaps, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-import Pointer from './Pointer';
 import Route from './Route';
 
 const center = [20.5937, 78.9629];
-const icon = new L.Icon({
-	iconUrl  : '/images/default-red.svg',
-	iconSize : [20, 20],
-});
+
 const baseLayer = [
 	{
 		name : 'Cogo Maps',
@@ -22,11 +18,10 @@ const baseLayer = [
 	},
 ];
 
-function MapComp({ path, points, bounds, setBounds, displayNameArray, data }) {
+function MapComp({
+	path, points, bounds, setBounds, displayNameArray, data, tooltipRefArray, isTooltipVisible,
+}) {
 	const [map, setMap] = useState();
-	const coordinates = data?.[0]?.route?.coordinates || data?.route?.coordinates || [];
-	// const curvePointLength = path?.length;
-
 	useEffect(() => {
 		if (!isEmpty(bounds) && map && bounds instanceof L.LatLngBounds) {
 			map?.fitBounds(bounds);
@@ -42,25 +37,20 @@ function MapComp({ path, points, bounds, setBounds, displayNameArray, data }) {
 			baseLayer={baseLayer}
 			setMap={setMap}
 		>
-			<Pointer
-				points={points}
-				iconSvg="source"
-				map={map}
-				setBounds={setBounds}
-				displayNameArray={displayNameArray}
-			/>
-			{/* { (data?.[0]?.service_lane_links || data?.vessel_schedule_link || [])?.map(({ coordinates, display_name = '', type, index }, i) => (
+			{points?.map((coordinates, index) => (
 				<Point
-					key={`${displayNameArray?.[index]}_${type}_${JSON.stringify(coordinates?.[index])}`}
-					position={coordinates?.[index]}
-					tooltipText={<div className={tooltip}>{displayNameArray[index]?.split(',')[0]}</div>}
-					service_name={type}
-					pane={!i || (i === data?.vessel_schedule_link?.length - 1) || (data?.[0]?.service_lane_links?.length - 1) ? 'shadowPane' : 'markerPane'}
-					size={[13, 13]}
+					key={coordinates?.route}
+					position={coordinates}
+					tooltipText={displayNameArray[index]}
+					index={index}
+					points={points}
+					tooltipProps={{ permanent: true }}
+					showPointer
+					tooltipRefArray={tooltipRefArray}
+					isTooltipVisible={isTooltipVisible}
 				/>
-			))} */}
+			))}
 			{(path || []).length ? <Route positions={path} map={map} pathOptions={lineOptions} /> : null}
-			{/* <Polyline positions={} /> */}
 		</CogoMaps>
 	);
 }

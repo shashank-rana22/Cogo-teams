@@ -1,7 +1,13 @@
 import { format } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
-function RoutePort({ isFirst, isLast, port, diffInDays }) {
+function RoutePort({
+	isFirst, isLast, port, diffInDays,
+	handleMouseEnter,
+	handleMouseLeave,
+	index,
+}) {
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -25,7 +31,11 @@ function RoutePort({ isFirst, isLast, port, diffInDays }) {
 				{!isLast && <div className={styles.hr_line_down} />}
 			</div>
 			<div className={styles.right}>
-				<div className={styles.port_name}>
+				<div
+					className={styles.port_name}
+					onMouseEnter={() => { handleMouseEnter(index); }}
+					onMouseLeave={() => { handleMouseLeave(index); }}
+				>
 					{port?.display_name.split(',')[0]}
 
 					<span className={styles.port_terminal} />

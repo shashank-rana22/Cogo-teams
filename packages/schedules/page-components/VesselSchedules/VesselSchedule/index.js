@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useRef, useEffect, createRef } from 'react';
 
 import BackButton from '../../common/BackButtom';
 import useGetVesselScheduleById from '../hooks/useGetVesselScheduleById';
@@ -14,6 +14,30 @@ function VesselScheduele() {
 	const vesselId = query?.id;
 	const { data, loading } = useGetVesselScheduleById({ vesselId });
 	const [finalRoute, setFinalRoute] = useState(null);
+	const numberOfElements = 2;
+	const [tooltipRefArray, setTooltipRefArray] = useState([]);
+
+	useEffect(() => {
+		setTooltipRefArray((prev) => Array(numberOfElements)
+			.fill()
+			.map((_, i) => prev[i] || createRef()));
+	}, [numberOfElements]);
+
+	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+	const handleMouseLeave = (index) => {
+		if (tooltipRefArray[index]) {
+			setIsTooltipVisible(false);
+			// console.log(tooltipRefArray[index].current, 'reff', isTooltipVisible, 'exit');
+		}
+	};
+
+	const handleMouseEnter = (index) => {
+		const { children } = tooltipRefArray[index]?.current?.options || '';
+		
+		setIsTooltipVisible(true);
+	};
+	// console.log(tooltipRefArray[2]?.current, 'reff', isTooltipVisible);
+
 	return (
 		<>
 			<BackButton title="Back To Vessel Schedule" toPush="vessel-schedules" />
@@ -25,8 +49,10 @@ function VesselScheduele() {
 					route={data?.vessel_schedule_link}
 					finalRoute={finalRoute}
 					setFinalRoute={setFinalRoute}
+					handleMouseEnter={handleMouseEnter}
+					handleMouseLeave={handleMouseLeave}
 				/>
-				<VesselScheduleMap data={data} />
+				<VesselScheduleMap data={data} tooltipRefArray={tooltipRefArray} isTooltipVisible={isTooltipVisible} />
 			</div>
 		</>
 	);

@@ -60,7 +60,7 @@ const useCreateVesselSchedules = ({
 	const createSchedule = async () => {
 		try {
 			const formattedFormValues = {
-				chartered_operators : (formValues?.chartered_operators || []).length || undefined,
+				chartered_operators : (formValues?.chartered_operators || []) || undefined,
 				service_lane_id     : formValues?.service_lane_id || undefined,
 				vessel_id           : formValues?.vessel_id || undefined,
 				port_number         : formValues?.port_number,

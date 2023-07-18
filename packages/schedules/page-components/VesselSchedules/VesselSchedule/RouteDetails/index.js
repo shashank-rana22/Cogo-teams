@@ -8,7 +8,10 @@ import PortForm from './PortForm';
 import RoutePort from './RoutePort';
 import styles from './styles.module.css';
 
-function RouteDetails({ data, route, finalRoute, setFinalRoute }) {
+function RouteDetails({
+	data, route, finalRoute, setFinalRoute, handleMouseEnter,
+	handleMouseLeave,
+}) {
 	const {
 		updateVesselSchedule,
 		setPortEdit,
@@ -61,7 +64,17 @@ function RouteDetails({ data, route, finalRoute, setFinalRoute }) {
 			{!edit ? (
 				<div className={styles.route_points}>
 					{route?.map((port, index) => {
-						if (index === route.length - 1) return <RoutePort isLast port={port} />;
+						if (index === route.length - 1) {
+							return (
+								<RoutePort
+									isLast
+									port={port}
+									handleMouseEnter={handleMouseEnter}
+									handleMouseLeave={handleMouseLeave}
+									index={index}
+								/>
+							);
+						}
 						return (
 							<RoutePort
 								isFirst={index === 0}
@@ -70,6 +83,9 @@ function RouteDetails({ data, route, finalRoute, setFinalRoute }) {
 									Date.parse(route?.[index + 1]?.etd?.slice(0, 10)),
 									Date.parse(route?.[index]?.etd?.slice(0, 10)),
 								)}
+								handleMouseEnter={handleMouseEnter}
+								handleMouseLeave={handleMouseLeave}
+								index={index}
 							/>
 						);
 					})}

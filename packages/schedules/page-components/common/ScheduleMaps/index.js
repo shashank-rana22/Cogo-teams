@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const CogoMaps = dynamic(() => import('./map'), { ssr: false });
 const ZERO = 0;
 const ONE = 1;
-function ScheduleMap({ data }) {
+function ScheduleMap({ data, tooltipRefArray, isTooltipVisible }) {
 	const coordinates = data?.[ZERO]?.route?.coordinates || data?.route?.coordinates || [];
 	const route_points = data?.[ZERO]?.route?.points || data?.route?.points || [];
 	let path = getDecodedPath(coordinates);
@@ -30,7 +30,6 @@ function ScheduleMap({ data }) {
 		points = [...(data?.route_cordinates.slice(ZERO, ONE) || []),
 			...(data?.route_cordinates.slice(-ONE) || [])];
 	}
-
 	return (
 		<div className={styles.map}>
 			<CogoMaps
@@ -40,6 +39,8 @@ function ScheduleMap({ data }) {
 				path={path}
 				bounds={bounds}
 				setBounds={setBounds}
+				tooltipRefArray={tooltipRefArray}
+				isTooltipVisible={isTooltipVisible}
 			/>
 		</div>
 	);
