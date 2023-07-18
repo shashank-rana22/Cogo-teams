@@ -7,8 +7,8 @@ import { usePopupFilterControls } from '../../../../constants/popup_filter_contr
 
 import styles from './styles.module.css';
 
-function FilterContainer({ filters = {} }) {
-	const { service_type = 'fcl' } = filters;
+function FilterContainer({ globalFilters = {} }) {
+	const { service_type = 'fcl' } = globalFilters;
 	const {
 		control,
 		formState: { errors },

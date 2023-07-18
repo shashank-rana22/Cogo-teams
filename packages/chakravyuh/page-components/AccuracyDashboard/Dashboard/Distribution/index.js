@@ -9,18 +9,18 @@ import styles from './styles.module.css';
 
 const CONSTANT_ZERO = 0;
 
-function Distribution({ filters = {}, setFilters = () => {} }) {
-	const { pieChartView } = filters;
-	const { customData, pieColors } = usePieChartConfigs(pieChartView);
+function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
+	const { rate_type = null } = globalFilters;
+	const { customData, pieColors } = usePieChartConfigs(rate_type);
 
 	const handlePieClick = (event) => {
-		if (pieChartView === 'default') {
-			setFilters((prev) => ({ ...prev, pieChartView: event?.data?.key }));
+		if (!rate_type) {
+			setGlobalFilters((prev) => ({ ...prev, rate_type: event?.data?.key }));
 		}
 	};
 
 	const defaultView = () => {
-		setFilters((prev) => ({ ...prev, pieChartView: 'default' }));
+		setGlobalFilters((prev) => ({ ...prev, rate_type: null }));
 	};
 
 	return (
@@ -75,7 +75,7 @@ function Distribution({ filters = {}, setFilters = () => {} }) {
 					<p className={styles.pie_center_count}>
 						{customData.reduce((total, item) => total + item.value, CONSTANT_ZERO)}
 					</p>
-					{ pieChartView !== 'default'
+					{ rate_type
 					&& (
 						<Button
 							themeType="linkUi"
@@ -98,11 +98,11 @@ function Distribution({ filters = {}, setFilters = () => {} }) {
 									/>
 									<div className={styles.legend_text_row}>
 										<p className={styles.legend_name}>{label}</p>
-										{ pieChartView === 'default'
+										{ !rate_type
 										&& <p className={styles.legend_rate}>{`(${value} Rates)`}</p>}
 									</div>
 								</div>
-								{ pieChartView === 'default'
+								{ !rate_type
 									? (
 										<p className={styles.legend_percentage}>
 											{`${cancellation} % Cancellation`}

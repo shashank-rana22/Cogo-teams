@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import IcBranch from '../../../assets/ic-tree.svg';
 import { DUMMY_DATA } from '../../../constants/drilldown_config';
 import SupplyRates from '../RatesList';
 
@@ -15,7 +14,8 @@ const RATE_TYPES = ['supply', 'predicted', 'extended'];
 const DEFAULT_DELAY = 1.8;
 const FACTOR = 1;
 
-function DrillDown({ rate_type = null }) {
+function DrillDown({ globalFilters = {} }) {
+	const { rate_type } = globalFilters;
 	const rateSources = rate_type ? [rate_type] : RATE_TYPES;
 	const [activeParent, setActiveParent] = useState(null);
 
@@ -26,10 +26,17 @@ function DrillDown({ rate_type = null }) {
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.main_container} ${activeParent ? styles.minimize : ''}`}>
+
 				{!activeParent ? (
 					<>
-						{/* <IcBranch className={styles.tree_icon} /> */}
-						<BranchAnimation />
+						<img
+							src={!rate_type
+								? GLOBAL_CONSTANTS.image_url.ic_tree_multiple
+								: GLOBAL_CONSTANTS.image_url.ic_tree_single}
+							alt="branches"
+							className={styles.tree_icon}
+						/>
+						<BranchAnimation rate_type={rate_type} />
 						{rateSources.map((type) => (
 							<div className={styles.source_card} key={type}>
 								{startCase(type)}
@@ -52,7 +59,7 @@ function DrillDown({ rate_type = null }) {
 
 					return (!activeParent || isActive) && (
 						<div
-							className={cl`${styles.tree_branch} 
+							className={cl`${styles.tree_branch}
 							${styles[`branch_${rowIdx}`]}
 							${isActive ? styles.to_top : ''}`}
 							key={row[GLOBAL_CONSTANTS.zeroth_index].action_type}

@@ -7,16 +7,19 @@ import useSupplyRatesListTable from '../../../hooks/useListTable';
 import styles from './styles.module.css';
 
 function SupplyRates({
-	filters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
-	className = '', tableTitle = 'Supply Rates', visible = false,
+	globalFilters = {}, page = 1, totalCount = 8, pageSize = 10, getNextPage = () => {},
+	className = '', heading = null,
 }) {
-	const { service_type = 'fcl' } = filters;
+	const { service_type = 'fcl', rate_type } = globalFilters;
 	const { columns } = useSupplyRatesListTable(service_type);
 
-	if (visible) {
+	if (rate_type) {
 		return (
 			<div className={cl`${styles.main_container} ${className}`}>
-				<p className={styles.main_title}>{tableTitle}</p>
+				{
+					heading
+				&& <p className={styles.main_title}>{heading}</p>
+				}
 				<Table columns={columns} data={LIST_DATA} className={styles.table_container} />
 				<div className={styles.pagination_container} id="rnp_role">
 					<Pagination

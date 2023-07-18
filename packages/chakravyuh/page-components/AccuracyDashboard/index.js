@@ -26,7 +26,7 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
-	const [filters, setFilters] = useState({ service_type: 'fcl', pieChartView: 'default' });
+	const [globalFilters, setGlobalFilters] = useState({ service_type: 'fcl', rate_type: null });
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';
@@ -41,15 +41,15 @@ function AccuracyDashboard() {
 						backView={backView}
 					/>
 					<Filters
-						filters={filters}
-						setFilters={setFilters}
+						globalFilters={globalFilters}
+						setGlobalFilters={setGlobalFilters}
 					/>
 				</>
 			)}
 			<Component
 				setView={setView}
-				filters={filters}
-				setFilters={setFilters}
+				globalFilters={globalFilters}
+				setGlobalFilters={setGlobalFilters}
 				backView={backView}
 			/>
 		</div>
