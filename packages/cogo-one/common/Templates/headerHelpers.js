@@ -16,7 +16,7 @@ function MobileNumberInput({
 			<div className={styles.wrap_mobile_number}>
 				<SelectMobileNumber
 					value={dialNumber}
-					onChange={(val) => setDialNumber(val)}
+					onChange={setDialNumber}
 					inputType="number"
 					placeholder="Enter number"
 				/>

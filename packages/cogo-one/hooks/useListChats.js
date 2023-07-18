@@ -28,6 +28,7 @@ function useListChats({
 	activeSubTab,
 	setActiveTab,
 	setCarouselState,
+	workPrefernceLoading = false,
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -136,13 +137,14 @@ function useListChats({
 			viewType,
 			activeSubTab,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
 	}, [canShowPinnedChats, omniChannelCollection, omniChannelQuery, queryForSearch, userId, viewType, activeSubTab,
-		updateLoadingState]);
+		updateLoadingState, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountSnapShot({
@@ -153,11 +155,12 @@ function useListChats({
 			queryForSearch,
 			omniChannelQuery,
 			updateLoadingState,
+			workPrefernceLoading,
 		});
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState, workPrefernceLoading]);
 
 	useEffect(() => {
 		mountFlashChats({

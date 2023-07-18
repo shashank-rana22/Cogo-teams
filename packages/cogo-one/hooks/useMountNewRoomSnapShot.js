@@ -7,6 +7,7 @@ import {
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const FIRST_DOC = 1;
+
 const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, firestore = {} }) => {
 	const [loading, setLoading] = useState(false);
 

@@ -21,13 +21,13 @@ const useListOrganizationUsers = ({ organizationId }) => {
 
 	const { debounceQuery, query } = useDebounceQuery();
 
-	const getOrganizationUsers = useCallback(async () => {
+	const getOrganizationUsers = useCallback(() => {
 		if (!organizationId) {
 			return;
 		}
 
 		try {
-			await trigger({ params: getParams({ organizationId, query }) });
+			trigger({ params: getParams({ organizationId, query }) });
 		} catch (err) {
 			console.error('err', err);
 		}

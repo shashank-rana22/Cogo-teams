@@ -8,7 +8,7 @@ import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
 
 import CreateTemplateForm from './CreateTemplateForm';
-import { Header } from './header';
+import { Header } from './headerHelpers';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 

@@ -26,6 +26,7 @@ function MessageList(messageProps) {
 		viewType = '',
 		isBotSession,
 		setIsBotSession,
+		workPrefernceLoading,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -35,6 +36,7 @@ function MessageList(messageProps) {
 	const [searchValue, setSearchValue] = useState('');
 
 	const { subTab } = activeTab || {};
+
 	const {
 		chatsData,
 		appliedFilters,
@@ -51,6 +53,7 @@ function MessageList(messageProps) {
 		setActiveTab,
 		activeSubTab: subTab,
 		setCarouselState,
+		workPrefernceLoading,
 	});
 
 	const setActiveSubTab = (val) => {

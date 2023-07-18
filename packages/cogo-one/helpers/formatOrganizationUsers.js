@@ -1,6 +1,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const REMOVE_PLUS_SIGN = 1;
+
 function formatOrganizationUsers({ data }) {
 	const { list = [] } = data || {};
 	const geo = getGeoConstants();

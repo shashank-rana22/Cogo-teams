@@ -22,13 +22,33 @@ function OrgUsersList({
 		search = '',
 	} = useListOrganizationUsers({ organizationId: orgId });
 
-	const onCardClick = ({ data }) => {
+	const onCardClick = ({ item }) => {
+		const {
+			organization_id,
+			user_id,
+			userName,
+			whatsapp_number_eformat,
+			email,
+			countryCode,
+			mobile_no,
+		} = item || {};
+
 		setActiveTab((p) => ({
 			...p,
 			hasNoFireBaseRoom : true,
-			data,
-			activeTab         : 'message',
+			data              : {
+				organization_id,
+				user_id,
+				user_name    : userName,
+				whatsapp_number_eformat,
+				email,
+				channel_type : 'whatsapp',
+				countryCode,
+				mobile_no,
+			},
+			activeTab: 'message',
 		}));
+
 		setOpenKamContacts(false);
 		setOrgId('');
 	};
@@ -58,13 +78,8 @@ function OrgUsersList({
 			<div className={styles.list_container}>
 				{!isEmpty(modifiedList) ? modifiedList?.map((eachUser) => {
 					const {
-						organization_id,
 						user_id,
 						userName,
-						whatsapp_number_eformat,
-						email,
-						countryCode,
-						mobile_no,
 					} = eachUser || {};
 
 					if (loading) {
@@ -75,6 +90,7 @@ function OrgUsersList({
 							/>
 						);
 					}
+
 					return (
 						<div
 							key={user_id}
@@ -82,16 +98,7 @@ function OrgUsersList({
 							className={styles.each_container}
 							onClick={() => {
 								onCardClick({
-									data: {
-										organization_id,
-										user_id,
-										user_name    : userName,
-										whatsapp_number_eformat,
-										email,
-										channel_type : 'whatsapp',
-										countryCode,
-										mobile_no,
-									},
+									item: eachUser,
 								});
 							}}
 						>
