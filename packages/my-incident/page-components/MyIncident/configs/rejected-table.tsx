@@ -1,4 +1,6 @@
-import { format, getByKey, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { getByKey, startCase } from '@cogoport/utils';
 
 import ActionRejected from '../accessorComponent/ActionRejected';
 import ClickableIncidentId from '../accessorComponent/ClickableIncidentId';
@@ -51,6 +53,11 @@ const rejectedColumn = ({
 		),
 	},
 	{
+		Header   : 'REQUEST SUB TYPE',
+		accessor : 'incidentSubtype',
+		id       : 'request_sub_type',
+	},
+	{
 		Header   : <div>REJECTED BY & ON</div>,
 		id       : 'rejectedBy',
 		accessor : (row) => (
@@ -69,8 +76,21 @@ const rejectedColumn = ({
 			const { createdAt } = row;
 			return (
 				<div>
-					{format(createdAt, 'dd MMM YYYY', {}, false)}
-					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+					{formatDate({
+						date: createdAt,
+						dateFormat:
+							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'date',
+					})}
+					<div>
+						{formatDate({
+							date: createdAt,
+							timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType: 'time',
+						})}
+					</div>
 				</div>
 			);
 		},
