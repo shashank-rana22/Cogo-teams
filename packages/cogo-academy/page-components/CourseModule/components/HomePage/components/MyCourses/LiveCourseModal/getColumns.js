@@ -20,7 +20,7 @@ const getColumns = ({ onClickOpen }) => [
 					type="button"
 					themeType="tertiary"
 					className={styles.view_text}
-					onClick={() => onClickOpen(item?.video)}
+					onClick={() => onClickOpen(item?.video_link)}
 				>
 					View
 				</Button>
