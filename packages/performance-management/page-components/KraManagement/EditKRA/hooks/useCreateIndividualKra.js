@@ -5,7 +5,7 @@ import { useCallback, useState, useEffect } from 'react';
 
 const DEFAULT_TARGET_VALUE = 0;
 
-function useCreateIndividualKra({ data: createKraData }) {
+function useCreateIndividualKra({ data: createKraData, fetchIndividualKRA }) {
 	const [individualKRAValues, setIndividualKRAValues] = useState([]);
 	const [ratingInfo, setRatingInfo] = useState(DEFAULT_TARGET_VALUE);
 
@@ -32,6 +32,7 @@ function useCreateIndividualKra({ data: createKraData }) {
 			});
 
 			Toast('Targets submitted successfully');
+			fetchIndividualKRA();
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(
@@ -39,7 +40,7 @@ function useCreateIndividualKra({ data: createKraData }) {
 				);
 			}
 		}
-	}, [trigger]);
+	}, [fetchIndividualKRA, trigger]);
 
 	useEffect(() => {
 		setIndividualKRAValues(createKraData);
@@ -48,7 +49,7 @@ function useCreateIndividualKra({ data: createKraData }) {
 
 	const handleTargetChange = (val, item, name) => {
 		const newData = individualKRAValues?.map((element) => {
-			if (element.employee_id === item.employee_id) {
+			if (`${element.employee_id}_${element?.kra_id}` === `${item.employee_id}_${item?.kra_id}`) {
 				if (name === 'target_value') {
 					return {
 						...element,

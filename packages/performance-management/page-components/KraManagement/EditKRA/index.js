@@ -7,7 +7,7 @@ import IndividualKraAssignment from './IndividualKraAssignment';
 import styles from './styles.module.css';
 
 function EditKRA() {
-	const { data, loading, setActiveTab, activeTab, handleManageKRA } = useListIndividualKra();
+	const { data, loading, setActiveTab, activeTab, handleManageKRA, fetchIndividualKRA } = useListIndividualKra();
 
 	return (
 		<div className={styles.container}>
@@ -32,7 +32,11 @@ function EditKRA() {
 				>
 					<TabPanel name="individual" title="Individual">
 						<div className={styles.individual_kra}>
-							<IndividualKraAssignment data={data?.list} loading={loading} />
+							<IndividualKraAssignment
+								data={data?.list}
+								loading={loading}
+								fetchIndividualKRA={fetchIndividualKRA}
+							/>
 						</div>
 					</TabPanel>
 				</Tabs>

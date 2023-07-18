@@ -12,14 +12,14 @@ const TABLE_EMPTY_TEXT = 'No data to show';
 
 function ManageKRA() {
 	const router = useRouter();
-	const { data, loading } = useListKRA();
+	const { data, loading, fetchListKRA } = useListKRA();
 
 	const {
 		onClickDeleteKRA,
 		loading:deleteKRALoading,
 		showPopOver,
 		setShowPopOver,
-	} = useDeleteKRA();
+	} = useDeleteKRA({ fetchListKRA });
 
 	const handleEditKRA = (kra_id) => {
 		router.push(`/performance-management/kra-management/manage-kra/update-kra/${kra_id}`);

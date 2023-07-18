@@ -159,7 +159,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'rating_1',
 				type        : 'number',
-				label       : 'Rating 1 for: ',
+				label       : 'Upper cap for rating 1 :',
 				placeholder : '0',
 				rules       : { required: 'Rating 1 is required' },
 			},
@@ -167,7 +167,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'rating_2',
 				type        : 'number',
-				label       : 'Rating 2 for: ',
+				label       : 'Upper cap for rating 2 :',
 				placeholder : '0',
 				rules       : { required: 'Rating 2 is required' },
 			},
@@ -175,7 +175,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'rating_3',
 				type        : 'number',
-				label       : 'Rating 3 for: ',
+				label       : 'Upper cap for rating 3 :',
 				placeholder : '0',
 				rules       : { required: 'Rating 3 is required' },
 			},
@@ -183,7 +183,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'rating_4',
 				type        : 'number',
-				label       : 'Rating 4 for: ',
+				label       : 'Upper cap for rating 4 :',
 				placeholder : '0',
 				rules       : { required: 'Rating 4 is required' },
 			},
@@ -191,7 +191,7 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 			{
 				name        : 'rating_5',
 				type        : 'number',
-				label       : 'Rating 5 for: ',
+				label       : 'Lower cap for rating 5 :',
 				placeholder : '0',
 				rules       : { required: 'Rating 5 is required' },
 			},

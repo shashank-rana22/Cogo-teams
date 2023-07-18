@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const TABLE_EMPTY_TEXT = 'No data to show';
 
-function IndividualKraAssignment({ data, loading }) {
+function IndividualKraAssignment({ data, loading, fetchIndividualKRA }) {
 	const {
 		loading: submitLoading,
 		createIndividualKra,
@@ -18,7 +18,7 @@ function IndividualKraAssignment({ data, loading }) {
 		ratingInfo,
 		setRatingInfo,
 		handleTargetChange,
-	} = useCreateIndividualKra({ data });
+	} = useCreateIndividualKra({ data, fetchIndividualKRA });
 
 	const columns = getIndividualColumn({
 		loading,

@@ -78,12 +78,12 @@ function ActiveTabs({ source }) {
 
 	const {
 		onClickSubmitButton,
-		loading: CreateLoading,
+		loading: createLoading,
 	} = useCreateComponent({ fetchList, setShowCreateModal, source });
 
 	const {
 		onClickUpdateButton,
-		loading: UpdateLoading,
+		loading: updateLoading,
 	} = useUpdateComponent({ fetchList, setShowCreateModal, showCreateModal, source, reset });
 
 	const onClickAddButton = () => {
@@ -128,7 +128,7 @@ function ActiveTabs({ source }) {
 					onClickSubmitButton={
 						showCreateModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton
 }
-					loading={showCreateModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
+					loading={showCreateModal === FUNCTION_ADD ? createLoading : updateLoading}
 					handleSubmit={handleSubmit}
 					type={showCreateModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}

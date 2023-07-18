@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useDeleteKRA = () => {
+const useDeleteKRA = ({ fetchListKRA }) => {
 	const [showPopOver, setShowPopOver] = useState(null);
 
 	const [{ loading }, trigger] = useHarbourRequest(
@@ -23,6 +23,7 @@ const useDeleteKRA = () => {
 			});
 
 			setShowPopOver(null);
+			fetchListKRA();
 			Toast.success('KRA deleted successfully');
 		} catch (err) {
 			if (err.response?.data) {

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -13,7 +14,7 @@ function useListIndividualKra() {
 
 	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
-	const [{ data, loading }] = useHarbourRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/list_individual_kra',
 		method : 'GET',
 		params : {
@@ -21,6 +22,18 @@ function useListIndividualKra() {
 		},
 
 	}, { manual: false });
+
+	const fetchIndividualKRA = () => {
+		try {
+			trigger({
+				params: {
+					manager_user_id: user_id,
+				},
+			});
+		} catch (err) {
+			Toast.error(err?.message);
+		}
+	};
 
 	const handleManageKRA = () => {
 		router.push('/performance-management/kra-management/manage-kra');
@@ -32,6 +45,7 @@ function useListIndividualKra() {
 		setActiveTab,
 		activeTab,
 		handleManageKRA,
+		fetchIndividualKRA,
 	};
 }
 
