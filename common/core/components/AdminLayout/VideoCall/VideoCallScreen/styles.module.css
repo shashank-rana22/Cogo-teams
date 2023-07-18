@@ -14,7 +14,6 @@
 	transform: translate(-50%, -50%);
 	animation-name: center-animation;
 	animation-duration: 0.5s;
-	
 
 	.minimize_video_call {
 		display: none;
@@ -33,9 +32,57 @@
 	}
 }
 
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.hangup_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background: #f44336;
+	border-radius: 50%;
+}
+
+.end_call_icon {
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	fill: #fff;
+	transform: rotate(135deg);
+}
+
 .minimize_container {
+	position: fixed;
+	right: 5%;
+	bottom: 5%;
+	z-index: 9000;
+	display: flex;
+	align-items: center;
+	width: 15%;
+	padding: 18px 28px;
+	cursor: pointer;
+	background: rgb(49 45 45 / 30%);
+	border-radius: 48px;
+	backdrop-filter: blur(5px);
 	animation-name: bottom-animation;
 	animation-duration: 0.5s;
+
+	.content {
+		display: none;
+	}
+
+	.minimize_video_call {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
 }
 
 @keyframes bottom-animation {
@@ -51,13 +98,13 @@
 }
 
 .minus_icon {
+	position: fixed;
+	top: 2%;
+	right: 2%;
 	width: 40px;
 	height: 40px;
-	fill: #fff;
 	cursor: pointer;
-    position: fixed;
-    top: 2%;
-    right: 2%;
+	fill: #fff;
 }
 
 .peer_video_stream {
@@ -133,23 +180,6 @@
 	}
 }
 
-.hangup_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 45px;
-	height: 45px;
-	background: #f44336;
-	border-radius: 50%;
-
-	.end_call_icon {
-		width: 28px;
-		height: 28px;
-		cursor: pointer;
-		transform: rotate(135deg);
-	}
-}
-
 .share_icon {
 	width: 40px;
 	height: 40px;
@@ -163,61 +193,8 @@
 	}
 }
 
-.minimize_container {
-	position: fixed;
-	right: 5%;
-	bottom: 5%;
-	z-index: 9000;
-	display: flex;
-	align-items: center;
-	width: 15%;
-	padding: 18px 28px;
-	background: rgb(49 45 45 / 30%);
-	border-radius: 48px;
-	backdrop-filter: blur(5px);
-	cursor: pointer;
-
-	.content {
-		display: none;
-	}
-
-	.minimize_video_call {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-}
-
-
-
 .timer {
 	font-size: 20px;
 	font-weight: 600;
 	color: #fff;
-}
-
-.hangup_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40px;
-	height: 40px;
-	background: #f44336;
-	border-radius: 50%;
-}
-
-.end_call_icon {
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-	fill: #fff;
-	transform: rotate(135deg);
-}
-
-.content {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
