@@ -17,6 +17,7 @@ function AutoAssignComponent({
 	bulkAssignChat = () => {},
 	setModalType = () => {},
 	isBotSession = false,
+	viewType = '',
 }) {
 	const [popoverVisible, setPopoverVisible] = useState(false);
 	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
@@ -41,7 +42,7 @@ function AutoAssignComponent({
 						/>
 					</div>
 					{isEmpty(selectedAutoAssign)
-						? <div className={styles.select_chats}>Select Chat Bulks</div>
+						? <div className={styles.select_chats}>Select Chat Bulks to be Assigned</div>
 						: (
 							<>
 								<div className={styles.selected_count}>
@@ -61,6 +62,7 @@ function AutoAssignComponent({
 											setModalType={setModalType}
 											isBotSession={isBotSession}
 											setPopoverVisible={setPopoverVisible}
+											viewType={viewType}
 										/>
 									)}
 									visible={popoverVisible}

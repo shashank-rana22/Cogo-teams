@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
+
 import styles from './styles.module.css';
 
 function ChatBulks({
@@ -9,11 +11,14 @@ function ChatBulks({
 	setModalType = () => {},
 	isBotSession = false,
 	setPopoverVisible = () => {},
+	viewType = '',
 }) {
+	const bulkSendActions = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features;
+
 	return (
 		<div>
 			{
-				isBotSession && (
+				isBotSession && bulkSendActions.includes('bulk_auto_assign') && (
 					<Button
 						size="sm"
 						themeType="secondary"
@@ -27,19 +32,21 @@ function ChatBulks({
 					</Button>
 				)
 			}
-			<Button
-				size="sm"
-				themeType="secondary"
-				onClick={() => {
-					setModalType({
-						type : 'bulk_communication',
-						data : {},
-					});
-					setPopoverVisible((prev) => !prev);
-				}}
-			>
-				Template Send
-			</Button>
+			{bulkSendActions.includes('bulk_send_templates') && (
+				<Button
+					size="sm"
+					themeType="secondary"
+					onClick={() => {
+						setModalType({
+							type : 'bulk_communication',
+							data : {},
+						});
+						setPopoverVisible((prev) => !prev);
+					}}
+				>
+					Template Send
+				</Button>
+			)}
 		</div>
 	);
 }

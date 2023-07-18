@@ -29,9 +29,8 @@ function Templates({
 		show : type === 'whatsapp_new_message_modal' || 'bulk_communication',
 		data : {},
 	});
+
 	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
-	// const usersName =
-	// Object.keys(selectedAutoAssign || {}).map((key) => selectedAutoAssign[key].user_name).join(', ');
 
 	const {
 		sendCommunicationTemplate = () => {},

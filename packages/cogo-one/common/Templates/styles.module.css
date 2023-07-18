@@ -57,18 +57,6 @@
 	width: 360px;
 }
 
-/* .tooltip {
-	width: fit-content;
-	max-width: 240px;
-	overflow: hidden;
-	font-size: 12px;
-	font-weight: 500;
-
-	text-align: start;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-} */
-
 .create_footer {
 	display: flex;
 	justify-content: flex-end;
