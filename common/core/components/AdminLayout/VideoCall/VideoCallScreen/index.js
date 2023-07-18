@@ -1,12 +1,12 @@
 import { Avatar, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcMMinus } from '@cogoport/icons-react';
+import { IcMMinus } from '@cogoport/icons-react';
 import { forwardRef, useState } from 'react';
-// import { IcMCall } from '@cogoport/icons-react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
+import VideoCallOptions from './VideoCallOptions';
 import VideoCallTimer from './VideoCallTimer';
 
 const FIRST_VARIABLE = 1;
@@ -14,6 +14,7 @@ const FIRST_VARIABLE = 1;
 function VideoCallScreen({
 	options = {},
 	setOptions = () => {},
+	setStreams = () => {},
 	streams = {},
 	callEnd = () => {},
 	callUpdate = () => {},
@@ -29,9 +30,10 @@ function VideoCallScreen({
 
 	const tempRef = ref;
 
-	const { stopCall } = useVideocallOptions({
+	const { stopCall, shareScreen, micOn, videoOn } = useVideocallOptions({
 		options,
 		setOptions,
+		setStreams,
 		streams,
 		callEnd,
 		callUpdate,
@@ -53,14 +55,25 @@ function VideoCallScreen({
 				<div className={styles.timer}>
 					<VideoCallTimer peer_stream={streams?.peer_stream} time={time} setTime={setTime} />
 				</div>
-				<div
+				<div className={styles.calling_options}>
+					<VideoCallOptions
+						stopCall={stopCall}
+						shareScreen={shareScreen}
+						options={options}
+						setOptions={setOptions}
+						micOn={micOn}
+						videoOn={videoOn}
+					/>
+				</div>
+
+				{/* <div
 					role="presentation"
 					type="button"
 					className={styles.hangup_icon}
 					onClick={stopCall}
 				>
 					<IcMCall className={styles.end_call_icon} />
-				</div>
+				</div> */}
 
 			</div>
 			<div className={styles.content}>
@@ -87,7 +100,7 @@ function VideoCallScreen({
 					{peer_stream ? (
 						<div className={styles.call_text}>
 							On Call
-							<span> 00:44</span>
+							<VideoCallTimer peer_stream={streams?.peer_stream} time={time} setTime={setTime} />
 						</div>
 					) : (
 						<div className={styles.call_text}>
@@ -96,9 +109,15 @@ function VideoCallScreen({
 					)}
 
 					<div className={styles.calling_options}>
-						<div className={styles.hangup_icon} role="presentation" onClick={stopCall}>
-							<IcMCall className={styles.end_call_icon} />
-						</div>
+
+						<VideoCallOptions
+							stopCall={stopCall}
+							shareScreen={shareScreen}
+							options={options}
+							setOptions={setOptions}
+							micOn={micOn}
+							videoOn={videoOn}
+						/>
 					</div>
 				</div>
 			</div>

@@ -119,6 +119,7 @@ function VideoCall({
 					options={options}
 					setOptions={setOptions}
 					streams={streams}
+					setStreams={setStreams}
 					callEnd={callEnd}
 					callUpdate={callUpdate}
 					peerRef={peerRef}

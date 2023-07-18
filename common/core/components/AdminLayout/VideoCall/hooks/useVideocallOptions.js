@@ -44,7 +44,29 @@ function useVideocallOptions({
 		callUpdate({ call_status: 'end_call' });
 	};
 
-	return { shareScreen, stopCall };
+	const micOn = () => {
+		setOptions((prev) => ({ ...prev, isMicActive: !options.isMicActive }));
+		const loaclStream = streams;
+		if (loaclStream?.user) {
+			loaclStream.user.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = options.isMicActive;
+		}
+	};
+
+	const videoOn = () => {
+		stopStream('user_stream', streams);
+		navigator.mediaDevices
+			.getUserMedia({ video: !options.isVideoActive, audio: true })
+			.then((userStream) => {
+				console.log(userStream, 'in call user_stream');
+				setStreams((prev) => ({ ...prev, user_stream: userStream }));
+			})
+			.catch((error) => {
+				console.log('user stream is not working', error);
+			});
+		setOptions((prev) => ({ ...prev, isVideoActive: !options.isVideoActive }));
+	};
+
+	return { shareScreen, stopCall, micOn, videoOn };
 }
 
 export default useVideocallOptions;

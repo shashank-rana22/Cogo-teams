@@ -212,12 +212,12 @@ function useVideoCallFirebase({
 			videoCallRef,
 			where('call_status', '==', 'calling'),
 			where('calling_by', '==', 'user'),
-			where('peer_id', '==', userId),
+			// where('peer_id', '==', userId),
 		);
 
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
-				if (!inACall) {
+				if (inACall === false) {
 					const room_data = val.data();
 					setCallDetails((prev) => ({
 						...prev,
@@ -228,6 +228,8 @@ function useVideoCallFirebase({
 						webrtc_token_room_id : room_data.webrtc_token_room_id,
 					}));
 					setCallComing(true);
+				} else {
+					console.log('in a call laready');
 				}
 			});
 		});

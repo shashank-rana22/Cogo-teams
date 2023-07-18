@@ -6,7 +6,6 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 function useComingCall({
 	firestore,
-	// setCallDetails,
 	callDetails,
 	setInACall,
 	setCallComing,

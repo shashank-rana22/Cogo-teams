@@ -1,0 +1,35 @@
+.call_options_icons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	height: 45px;
+	margin: 3px;
+	cursor: pointer;
+	background-color: white;
+	border-radius: 50px;
+
+	svg {
+		width: 30px;
+		height: 30px;
+		fill: #2c3e50;
+	}
+}
+
+.end_call_icon {
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	transform: rotate(135deg);
+}
+
+.hangup_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	height: 45px;
+	margin: 3px;
+	background: #f44336;
+	border-radius: 50%;
+}
