@@ -9,6 +9,8 @@ import filterControls from '../../configurations/filter-controls';
 
 import styles from './styles.module.css';
 
+const MINUTE_TO_MILLISECOND = 60000;
+
 function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
@@ -18,8 +20,9 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 		Object.keys(formValues).forEach((key) => {
 			if (formValues[key] === '') {
 				FINAL_VALUES[key] = undefined;
-			} else if (key === 'cargoHandedOverAtOriginAt') {
-				FINAL_VALUES[key] = new Date(formValues[key]).toISOString();
+			} else if (key === 'cargoHandedOverAtOriginAt' && formValues[key] !== undefined) {
+				FINAL_VALUES[key] = new Date(formValues[key].getTime()
+				- new Date().getTimezoneOffset() * MINUTE_TO_MILLISECOND).toISOString();
 			} else {
 				FINAL_VALUES[key] = formValues[key];
 			}
