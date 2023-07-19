@@ -6,3 +6,21 @@
 .sid_container {
 	font-weight: 600;
 }
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.input_container {
+	width: 20%;
+}
+
+.button_container {
+	margin-left: 4px;
+	font-size: 12px !important;
+	font-weight: 600;
+}
