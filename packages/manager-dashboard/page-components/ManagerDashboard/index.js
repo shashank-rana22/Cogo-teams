@@ -37,6 +37,8 @@ function ManagerDashboard() {
 		loading, isReportingManager,
 	} = useGetRatingReviewDetails({ level, ratingCycle, setSortedData });
 
+	const { list = [] } = data || {};
+
 	const { data : ratingData, loading : ratingLoading } = useGetRatingDetails(ratingCycle);
 
 	const columns = useGetColumns({
@@ -111,7 +113,7 @@ function ManagerDashboard() {
 			)}
 
 			<div className={styles.table_container}>
-				{!loading && !levelLoading && isEmpty(data.list) ? (
+				{!loading && !levelLoading && isEmpty(list) ? (
 					<div className={styles.flexitem_1}>
 						<EmptyState />
 					</div>

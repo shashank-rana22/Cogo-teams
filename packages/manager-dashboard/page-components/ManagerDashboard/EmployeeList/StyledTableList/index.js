@@ -8,22 +8,6 @@ import useGetColumns from '../../useGetColumns';
 
 import styles from './styles.module.css';
 
-function RenderTitle({ title, averageValue, level }) {
-	return (
-		<div className={styles.title}>
-			<div>{startCase(title)}</div>
-
-			{level === 'vertical_manager' && (
-				<div className={styles.average_value}>
-					Average Rating :
-					{' '}
-					{averageValue || '-'}
-				</div>
-			)}
-		</div>
-	);
-}
-
 function RenderStyledTable({
 	level,
 	setEmployeeId,
@@ -49,7 +33,7 @@ function RenderStyledTable({
 	);
 }
 
-function StyledTableList({ data, label, average_value, level, setEmployeeId, setOpenKraModal }) {
+function StyledTableList({ data, label, level, setEmployeeId, setOpenKraModal }) {
 	const [sorting, setSorting] = useState({
 		sortOrder: 'asc',
 	});
@@ -72,11 +56,9 @@ function StyledTableList({ data, label, average_value, level, setEmployeeId, set
 				type="text"
 				isOpen={label === 'all_employees'}
 				title={(
-					<RenderTitle
-						title={label}
-						averageValue={average_value}
-						level={level}
-					/>
+					<div className={styles.title}>
+						<div>{startCase(label)}</div>
+					</div>
 				)}
 			>
 				<RenderStyledTable
