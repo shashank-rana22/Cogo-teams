@@ -1,6 +1,16 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const CATEGORY_MAPPING = {
+	fcl_freight : 'FCL',
+	air_freight : 'Air',
+};
+
+const SUB_CATEGORY_MAPPING = {
+	import : 'IMPORTS',
+	export : 'EXPORTS',
+};
+
 const useListDefaultTypes = ({ raiseTicketModal = {} }) => {
 	const { source = '', data:{ formattedData = {} } } = raiseTicketModal || {};
 	const { category = '', sub_category = '' } = formattedData || {};
@@ -11,12 +21,12 @@ const useListDefaultTypes = ({ raiseTicketModal = {} }) => {
 		authkey : 'get_ticket_default_types',
 	}, { manual: true });
 
-	const getDefaultTypes = useCallback(async () => {
+	const getDefaultTypes = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
-					Category    : category,
-					Subcategory : sub_category,
+					Category    : CATEGORY_MAPPING[category] || category,
+					Subcategory : SUB_CATEGORY_MAPPING[sub_category] || sub_category,
 				},
 			});
 		} catch (e) {

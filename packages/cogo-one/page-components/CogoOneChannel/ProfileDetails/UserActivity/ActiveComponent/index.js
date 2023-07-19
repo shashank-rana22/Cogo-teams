@@ -13,29 +13,31 @@ function ActiveComponent(props) {
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
-	const ActiveComp = getUserActivityComponent(activityTab, activeSubTab) || null;
-
-	return (
-		emptyCheck ? (
+	if (emptyCheck) {
+		return (
 			<div className={styles.empty}>
 				<EmptyState type="activities" />
 			</div>
-		) : (
-			<div
-				className={styles.list_container}
-			>
-				{ActiveComp && (
-					<ActiveComp
-						communication={communication}
-						platform={platform}
-						transactional={transactional}
-						timeLineList={timeLineList}
-						chatDataList={chatDataList}
-						setRaiseTicketModal={setRaiseTicketModal}
-					/>
-				)}
-			</div>
-		)
+		);
+	}
+
+	const ActiveComp = getUserActivityComponent({ activityTab, activeSubTab }) || null;
+
+	if (!ActiveComp) {
+		return null;
+	}
+
+	return (
+		<div className={styles.list_container}>
+			<ActiveComp
+				communication={communication}
+				platform={platform}
+				transactional={transactional}
+				timeLineList={timeLineList}
+				chatDataList={chatDataList}
+				setRaiseTicketModal={setRaiseTicketModal}
+			/>
+		</div>
 	);
 }
 

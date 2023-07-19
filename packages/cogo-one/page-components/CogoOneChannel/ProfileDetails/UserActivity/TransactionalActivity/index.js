@@ -97,8 +97,7 @@ function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () =>
 								<div
 									className={cl`${viewCheck ? styles.open_card_details : styles.card_details}`}
 								>
-
-									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									<div className={styles.header}>
 										<div
 											role="presentation"
 											className={styles.booking_id}

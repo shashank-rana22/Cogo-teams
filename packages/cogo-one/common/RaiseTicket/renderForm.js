@@ -11,15 +11,19 @@ function RenderForm({ control = {}, errors = {}, controls = [] }) {
 				const { label = '', controlType = '', name = '' } = eachControl || {};
 				const Element = getFieldController(controlType) || null;
 
-				return (Element && (
-					<div className={styles.styled_element}>
+				if (!Element) {
+					return null;
+				}
+
+				return (
+					<div key={name} className={styles.styled_element}>
 						<div className={styles.label}>{label}</div>
 						<Element control={control} {...eachControl} />
 						<div className={styles.error_text}>
 							{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
 						</div>
 					</div>
-				));
+				);
 			})}
 		</div>
 	);

@@ -18,7 +18,7 @@ const DEFAULT_PAGE_COUNT = 1;
 
 function UserActivities(props) {
 	const {
-		activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard, showMore,
+		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
 		setRaiseTicketModal = () => {},
 	} = props || {};
 

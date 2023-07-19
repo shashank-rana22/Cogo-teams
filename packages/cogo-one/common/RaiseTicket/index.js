@@ -69,7 +69,7 @@ function RaiseTicket({
 		} = messageData;
 
 		const { user_id = null, lead_user_id = null } = formattedData || {};
-		const { ticket_data = null, ticket_type = null, description = null, sid } = val || {};
+		const { ticket_data = null, ticket_type = null, description = null, sid = '' } = val || {};
 		const payload = {
 			UserID      : user_id || lead_user_id,
 			Source      : 'client',
@@ -120,7 +120,7 @@ function RaiseTicket({
 						</div>
 					</>
 				)}
-				<RenderForm control={control} errors={errors} controls={newControls} />
+				<RenderForm control={control} controls={newControls} errors={errors} />
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_buttons}>
 				<Button size="md" themeType="tertiary" onClick={closeModal}>cancel</Button>
