@@ -1,14 +1,26 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMFilter } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { RenderFlashedAt } from './renderTableHeaders';
 import styles from './styles.module.css';
 
-const getLogsColumns = () => {
-	const handleClickFilter = () => {
+const getLogsColumns = (props) => {
+	const { setFilterParams, filtersParams } = props;
+	console.log('filtersParams:', filtersParams, setFilterParams);
+	// const handleDeleteFilter = ({ type }) => {
+	// 	setFilterParams((prev) => ({
+	// 		...prev,
+	// 		[type]: undefined,
+	// 	}));
+	// };
 
-	};
+	// const handleApplyFilter = ({ val }) => {
+	// 	setFilterParams((prev) => ({
+	// 		...prev,
+	// 		sidQuery: val,
+	// 	}));
+	// };
 
 	return [
 		{
@@ -52,14 +64,9 @@ const getLogsColumns = () => {
 			),
 		},
 		{
-			id     : 'flashed_at',
-			Header : () => (
-				<div>
-					Flashed At
-					<IcMFilter onClick={() => handleClickFilter('flashed_at')} />
-				</div>
-			),
-			accessor: (values) => (
+			id       : 'flashed_at',
+			Header   : <RenderFlashedAt {...props} />,
+			accessor : (values) => (
 				<div>
 					{formatDate({
 						date       : values?.flashed_at,

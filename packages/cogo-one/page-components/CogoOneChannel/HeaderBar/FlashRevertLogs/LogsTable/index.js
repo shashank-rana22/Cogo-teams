@@ -1,6 +1,5 @@
 import { Table, Input, Button, ButtonIcon } from '@cogoport/components';
-import { IcMDelete } from '@cogoport/icons-react';
-// import { isEmpty } from '@cogoport/utils';
+import { IcMDelete, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import dummyData from './dummyData';
@@ -10,20 +9,6 @@ import styles from './styles.module.css';
 function LogsTable() {
 	const [sidQuery, setSidQuery] = useState('');
 	const [filtersParams, setFilterParams] = useState({});
-
-	// const handleDeleteFilter = ({ type }) => {
-	// 	setFilterParams((prev) => ({
-	// 		...prev,
-	// 		[type]: undefined,
-	// 	}));
-	// };
-
-	// const handleInputChange = (val) => {
-	// 	setFilterParams((prev) => ({
-	// 		...prev,
-	// 		sidQuery: val,
-	// 	}));
-	// };
 
 	const logColumns = getLogsColumns({ setFilterParams, filtersParams });
 
@@ -38,6 +23,7 @@ function LogsTable() {
 					placeholder="Search sid no.."
 					className={styles.input_container}
 					onChange={setSidQuery}
+					prefix={<IcMSearchlight className={styles.search_icon} />}
 					suffix={sidQuery && (
 						<ButtonIcon
 							size="sm"

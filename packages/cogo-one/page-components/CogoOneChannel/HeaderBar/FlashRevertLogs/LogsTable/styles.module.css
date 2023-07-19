@@ -24,3 +24,25 @@
 	font-size: 12px !important;
 	font-weight: 600;
 }
+
+.search_icon {
+	width: 18px;
+	height: 18px;
+	fill: #4f4f4f;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_badge_container_main {
+			align-items: center;
+		}
+	}
+}
+
+.filter_icon {
+	margin-inline: 4px;
+	cursor: pointer;
+}
