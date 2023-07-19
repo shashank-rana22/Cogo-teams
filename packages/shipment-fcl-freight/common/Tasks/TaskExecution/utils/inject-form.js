@@ -8,7 +8,7 @@ const injectForm = ({
 	shipment_data = {},
 	formValues = {},
 	getApisData = {},
-	commodityTypeOptions = [],
+	getOptions,
 	subCommodityOptions = [],
 }) => {
 	const showElements = getShowTaskFields(formValues, stepConfig.controls, getApisData);
@@ -19,7 +19,7 @@ const injectForm = ({
 		task,
 		shipment_data,
 		formValues,
-		commodityTypeOptions,
+		getOptions,
 		subCommodityOptions,
 	);
 

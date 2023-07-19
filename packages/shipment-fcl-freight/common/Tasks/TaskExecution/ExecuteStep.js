@@ -28,7 +28,7 @@ function ExecuteStep({
 		unit         : '',
 	});
 
-	const { commodityTypeOptions, allCommodity } = useGetCommodityOptions({
+	const { getOptions, allCommodity } = useGetCommodityOptions({
 		shipment_data,
 	});
 
@@ -52,7 +52,7 @@ function ExecuteStep({
 		getApisData,
 		selectedMail,
 		setCommodityDetails,
-		commodityTypeOptions,
+		getOptions,
 		subCommodityOptions,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;

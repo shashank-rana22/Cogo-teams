@@ -4,16 +4,17 @@ const mutateControls = (
 	task,
 	shipment_data,
 	formValues,
-	commodityTypeOptions,
+	getOptions,
 	subCommodityOptions,
 ) => {
+	const options = getOptions();
 	let finalControls = [];
 
 	(controls || []).forEach((control) => {
 		const newControl = control;
 
 		if (control?.name === 'commodity_category') {
-			newControl.options = commodityTypeOptions;
+			newControl.options = options;
 			newControl.value = shipment_data?.commodity_category;
 		}
 
