@@ -513,6 +513,10 @@ const apis = [
 		service_name : 'sage',
 	},
 	{
+		api         : 'put_air_coe_e_booking',
+		access_type : 'private',
+	},
+	{
 		api          : 'get_proforma_invoice',
 		access_type  : 'private',
 		service_name : 'sage',
