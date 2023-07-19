@@ -1,0 +1,7 @@
+.overflow_div {
+	display: flex;
+	flex-direction: column;
+	max-height: 100px;
+	overflow-y: scroll;
+	font-size: 12px;
+}

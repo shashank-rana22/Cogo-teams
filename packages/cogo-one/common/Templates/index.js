@@ -8,11 +8,10 @@ import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTe
 import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
 
+import BulkCommunicationTemplate from './BulkCommunicaitonTemplate';
 import CreateTemplateForm from './CreateTemplateForm';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
-
-const ZERO_COUNT = 0;
 
 function Templates({
 	openCreateReply = false,
@@ -30,8 +29,6 @@ function Templates({
 		data : {},
 	});
 
-	const count = Object.keys(selectedAutoAssign || {}).length || ZERO_COUNT;
-
 	const {
 		sendCommunicationTemplate = () => {},
 		communicationLoading = false,
@@ -45,7 +42,7 @@ function Templates({
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
 	const maskMobileNumber = type === 'voice_call_component';
-	const bulkCommunicationTemplate = type === 'bulk_communication';
+	const isBulkCommunicationTemplate = type === 'bulk_communication';
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
@@ -88,14 +85,10 @@ function Templates({
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
 				<div>
-					{
-						bulkCommunicationTemplate && (
-							<div className={styles.template_heading}>
-								<div className={styles.organization_count}>{count}</div>
-								Users Selected
-							</div>
-						)
-					}
+					{isBulkCommunicationTemplate && (
+						<BulkCommunicationTemplate selectedAutoAssign={selectedAutoAssign} />
+					)}
+
 					{isDefaultOpen && (
 						<>
 							<div className={styles.wrap_heading}>

@@ -206,7 +206,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		default_side_nav             : 'flash_shipment_bookings',
 		show_relevant_templates      : ['supply'],
 		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
-		bulk_assign_features         : [],
+		bulk_assign_features         : ['bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
@@ -241,7 +241,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		default_side_nav             : 'flash_shipment_bookings',
 		show_relevant_templates      : ['supply'],
 		mails_to_be_shown            : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
-		bulk_assign_features         : [],
+		bulk_assign_features         : ['bulk_send_templates'],
 		permissions                  : {
 			auto_assign                 : false,
 			bot_message_toggle          : false,
