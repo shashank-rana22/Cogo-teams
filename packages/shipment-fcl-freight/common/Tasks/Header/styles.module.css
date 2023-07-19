@@ -72,3 +72,9 @@
 	color: red;
 	text-decoration: underline;
 }
+
+.remarks {
+	font-size: var(--font-size-md);
+	text-decoration: underline;
+	cursor: pointer;
+}

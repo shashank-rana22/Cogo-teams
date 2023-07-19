@@ -459,6 +459,21 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_course_videos',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_video',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	create_course: [
 		{
@@ -575,6 +590,11 @@ const faq = {
 	course_module: [
 		{
 			api          : 'list_user_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_videos',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

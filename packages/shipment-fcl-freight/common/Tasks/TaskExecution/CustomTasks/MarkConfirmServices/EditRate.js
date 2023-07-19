@@ -18,11 +18,12 @@ function EditRate({
 	formattedRate = {},
 }) {
 	const editQuote = useGetStep3Data({
-		servicesList    : servicesList.filter((item) => item.id === task.service_id),
+		servicesList,
 		shipment_data,
 		onCancel,
 		task,
-		taskListRefetch : refetch,
+		taskListRefetch: refetch,
+		formattedRate,
 	});
 
 	const subsidiaryService = (servicesList || []).find(
@@ -39,7 +40,7 @@ function EditRate({
 	const requiredControls = requiredRawControls.map((ctrl) => ({
 		...ctrl,
 		value:
-				formattedRate?.[formattedRate?.primary_service?.id]?.[ctrl.name]
+				formattedRate?.[task?.service_id]?.[ctrl.name]
 				|| ctrl.value,
 	}));
 

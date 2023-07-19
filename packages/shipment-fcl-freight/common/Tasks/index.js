@@ -92,6 +92,7 @@ function List() {
 									taskListRefetch={taskListRefetch}
 									selectedMail={selectedMail}
 									setSelectedMail={setSelectedMail}
+									tasksList={tasksList}
 								/>
 							</>
 						) : null }

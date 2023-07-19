@@ -9,21 +9,22 @@ import { getOptionsMapping } from './rightButtonHelpers';
 import styles from './styles.module.css';
 
 function RightButton({
-	assignChat,
-	openAssignModal,
-	requestToJoinGroup,
-	formattedData,
-	requestForAssignChat,
-	userId,
-	assignLoading,
-	requestAssignLoading,
-	viewType,
-	supportAgentId,
-	isGroupFormed,
-	showBotMessages,
-	accountType,
-	isPartOfGroup,
-	isManager,
+	assignChat = () => {},
+	openAssignModal = () => {},
+	requestToJoinGroup = () => {},
+	formattedData = {},
+	requestForAssignChat = () => {},
+	userId = '',
+	assignLoading = false,
+	requestAssignLoading = false,
+	viewType = '',
+	supportAgentId = '',
+	isGroupFormed = false,
+	showBotMessages = false,
+	accountType = '',
+	isPartOfGroup = false,
+	isManager = false,
+	hasNoFireBaseRoom = false,
 }) {
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
@@ -52,7 +53,7 @@ function RightButton({
 
 	const loading = assignLoading || requestAssignLoading;
 
-	if (isEmpty(accessableButtons)) {
+	if (hasNoFireBaseRoom || isEmpty(accessableButtons)) {
 		return (
 			<Button
 				themeType="secondary"
@@ -98,7 +99,7 @@ function RightButton({
 				onClick={() => setPopoverProps({ isOpen: true, clickedButton: '' })}
 			>
 				<IcMListView height={15} width={15} />
-				&nbsp;
+				{' '}
 				Assign
 			</Button>
 		</Popover>
