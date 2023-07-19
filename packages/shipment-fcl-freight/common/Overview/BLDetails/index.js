@@ -44,7 +44,7 @@ function BLDetails() {
 	const renderBlCount = () => (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
-			<div className="bl-count">
+			<div className={styles.bl_count}>
 				(
 				{primary_service?.bls_count || DEFAULT_BL_COUNT}
 				{' '}

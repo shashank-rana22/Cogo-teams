@@ -11,7 +11,7 @@ export default function useCallApi({
 }) {
 	const [, view_type] = (authParams || '').split(':');
 
-	const debounceQuery = useRef({ q: filters.q });
+	const debounceQuery = useRef({ q: filters?.q });
 
 	useEffect(() => {
 		if (debounceQuery.current.q !== filters.q) {

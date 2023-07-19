@@ -8,7 +8,7 @@ import EmptyState from '../../EmptyState';
 import styles from './styles.module.css';
 
 export default function List({ data, Card }) {
-	const { filters, setFilters, tabState: { activeTab } = {} } = useContext(IGMDeskContext) || {};
+	const { filters, setFilters, tabState = {} } = useContext(IGMDeskContext) || {};
 	const { list = [], total } = data || {};
 
 	const renderPagination = () => (
@@ -32,7 +32,7 @@ export default function List({ data, Card }) {
 							<Card
 								key={item?.id}
 								item={item}
-								activeTab={activeTab}
+								activeTab={tabState?.activeTab}
 							/>
 						) : null
 					))}

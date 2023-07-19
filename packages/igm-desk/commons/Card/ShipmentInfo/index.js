@@ -1,4 +1,5 @@
 import { Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
 
@@ -29,14 +30,15 @@ export default function ShipmentInfo({ item = {} }) {
 				MBL No:
 				<div
 					className={cl`${styles.ellipsis_text}
-					${styles.pointer} ${bl_details?.document_url ? styles.mbl_document : ''}`}
+					${styles.pointer} ${bl_details?.
+						[GLOBAL_CONSTANTS.zeroth_index]?.document_url ? styles.mbl_document : ''}`}
 					onClick={() => window.open(
-						bl_details?.document_url,
+						bl_details?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url,
 						'_blank',
 					)}
 					role="presentation"
 				>
-					{bl_details?.bl_number
+					{bl_details?.[GLOBAL_CONSTANTS.zeroth_index]?.bl_number
 				|| 'NA'}
 
 				</div>
