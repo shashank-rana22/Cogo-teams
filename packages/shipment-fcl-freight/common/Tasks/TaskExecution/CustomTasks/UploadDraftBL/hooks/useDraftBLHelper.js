@@ -76,7 +76,6 @@ const useDraftBLHelper = ({
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
 				service_type       : pendingTask.service_type,
-				task_id        	   : pendingTask?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
 					document_url : value?.url?.finalUrl,

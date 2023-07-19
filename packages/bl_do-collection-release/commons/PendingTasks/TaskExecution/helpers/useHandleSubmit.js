@@ -52,7 +52,6 @@ function useHandleSubmit({
 				}
 			});
 		}
-
 		const dataToSend = finalConfig?.data_to_send;
 
 		const transformedRawValues = formatRawValues(rawValues, task);
