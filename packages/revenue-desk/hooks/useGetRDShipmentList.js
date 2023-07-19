@@ -14,15 +14,15 @@ const useGetRDShipmentList = () => {
 	const [shipmentList, setShipmentList] = useState([]);
 
 	const API_MAPPING = {
-		fcl_freight     : 'fcl_freight/list_revenue_desk_shipments',
-		fcl_customs     : 'fcl_customs/list_revenue_desk_shipments',
+		fcl_freight     : 'list_revenue_desk_fcl_freight_shipments',
+		fcl_customs     : 'list_revenue_desk_fcl_customs_shipments',
 		air_customs     : 'list_revenue_desk_air_customs_shipments',
 		air_freight     : 'list_revenue_desk_air_freight_shipments',
 		ftl_freight     : 'list_revenue_desk_ftl_freight_shipments',
 		haulage_freight : 'list_revenue_desk_haulage_freight_shipments',
 		ltl_freight     : 'list_revenue_desk_ltl_freight_shipments',
-		lcl_freight     : 'lcl_freight/list_revenue_desk_shipments',
-		lcl_customs     : 'lcl_customs/list_revenue_desk_shipments',
+		lcl_freight     : 'list_revenue_desk_lcl_freight_shipments',
+		lcl_customs     : 'list_revenue_desk_lcl_customs_shipments',
 	};
 	const api = API_MAPPING[filters?.service];
 	const [{ loading }, trigger] = useRequest({

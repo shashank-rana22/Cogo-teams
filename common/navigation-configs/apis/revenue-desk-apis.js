@@ -180,9 +180,24 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_revenue_desk_shipments',
+		api          : 'list_revenue_desk_fcl_freight_shipments',
 		access_type  : 'private',
-		service_name : 'bookings',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_fcl_customs_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_lcl_freight_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_lcl_customs_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
 	},
 	{
 		api          : 'get_shipment_transaction_insights',
