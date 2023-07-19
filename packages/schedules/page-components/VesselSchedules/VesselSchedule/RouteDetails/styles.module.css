@@ -1,31 +1,32 @@
 .route_details {
-  background-color: white;
-  border-radius: 8px 8px 0 0;
-  width: 1000px;
+	width: 1000px;
+	background-color: white;
+	border-radius: 8px 8px 0 0;
 }
 
 .heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #221f20;
-  border-bottom: 1px solid #bdbdbd;
-  min-width: max-content;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: max-content;
+	padding: 16px 24px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+	border-bottom: 1px solid #bdbdbd;
 }
 
 .route_points {
-  max-height: 650px;
-  overflow: scroll;
+	max-height: 650px;
+	overflow: scroll;
 }
 
 .save {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
+
 .button_style {
-    margin: 2px;
+	margin: 2px;
 }

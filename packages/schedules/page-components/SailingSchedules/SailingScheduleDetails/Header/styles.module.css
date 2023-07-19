@@ -1,11 +1,11 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px;
-    margin-bottom: 16px;
-    background-color: white;
-    padding: 16px;
-    gap: 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 16px;
+	margin: 0 10px;
+	margin-bottom: 16px;
+	background-color: white;
 }
 
 .upper {
@@ -13,7 +13,6 @@
 	align-items: center;
 	justify-content: space-between;
 }
-
 
 .upper_left,
 .upper_right {

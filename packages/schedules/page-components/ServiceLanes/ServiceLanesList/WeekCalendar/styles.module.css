@@ -1,9 +1,9 @@
 .box {
-    color: var(--black, #828282);
-    font-weight: 500;
+	font-weight: 500;
+	color: var(--black, #828282);
 }
 
 .active_day {
-    color: var(--black, #221f20);
-    font-weight: 600;
+	font-weight: 600;
+	color: var(--black, #221f20);
 }

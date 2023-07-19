@@ -1,115 +1,113 @@
 .route_port {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
+	display: flex;
+	gap: 30px;
+	justify-content: center;
 }
 
 .left,
 .right {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40%;
-    height: 120px;
-    padding: 8px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 40%;
+	height: 120px;
+	padding: 8px;
 }
 
 .left {
-    justify-content: right;
+	justify-content: right;
 }
 
-
-
 .middle {
-    position: relative;
+	position: relative;
 }
 
 .circle {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 8px);
-    width: 16px;
-    height: 16px;
-    background-color: #acdadf;
-    border-radius: 50%;
+	position: absolute;
+	top: calc(50% - 8px);
+	left: calc(50% - 8px);
+	width: 16px;
+	height: 16px;
+	background-color: #acdadf;
+	border-radius: 50%;
 }
 
 .hr_line_down,
 .hr_line_up {
-    position: absolute;
-    top: calc(50% + 8px);
-    left: calc(50% - 1px);
-    width: calc(50% - 8px);
-    height: calc(50% - 8px);
-    border-right: 2px solid #acdadf;
+	position: absolute;
+	top: calc(50% + 8px);
+	left: calc(50% - 1px);
+	width: calc(50% - 8px);
+	height: calc(50% - 8px);
+	border-right: 2px solid #acdadf;
 }
 
 .hr_line_up {
-    top: 0;
+	top: 0;
 }
 
-
 .eta_etd {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .eta,
 .etd {
-    font-size: 14px;
-    font-weight: 500;
-    color: #828282;
-    line-height: 150%;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #828282;
 }
 
 .port_name {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #221f20;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
 }
 
 .port_terminal {
-    font-size: 14px;
-    font-weight: 400;
-    color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .diff_in_days {
-    position: absolute;
-    top: calc(100% - 12px);
-    font-size: 14px;
-    font-weight: 400;
-    color: #828282;
+	position: absolute;
+	top: calc(100% - 12px);
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
 }
 
-
-.vertical_dots{
-    margin-left: 10px;
+.vertical_dots {
+	margin-left: 10px;
 }
 
 .popover_content {
-    :global {
-        .tippy-content {
-            padding: 0 !important;
-        }
-    }
+	:global {
+		.tippy-content {
+			padding: 0 !important;
+		}
+	}
 }
-.port_input{
-    display: flex;
-    width: 200px;
-    align-items: center;
-    margin-top: 30px;
-    margin: 20px;
-    margin-left: -40px;
-    cursor: pointer;
+
+.port_input {
+	display: flex;
+	align-items: center;
+	width: 200px;
+	margin: 20px;
+	margin-top: 30px;
+	margin-left: -40px;
+	cursor: pointer;
 }
-.days{
-    width: 140px;
-    margin-right: -120px;
-    padding: 2px;
+
+.days {
+	width: 140px;
+	padding: 2px;
+	margin-right: -120px;
 }

@@ -1,8 +1,9 @@
 .button {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
 }
+
 .partition {
-    display: flex;
+	display: flex;
 }

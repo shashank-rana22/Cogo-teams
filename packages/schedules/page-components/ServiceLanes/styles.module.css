@@ -1,16 +1,17 @@
 .button {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
 }
 
 .tabPanelWrapper {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
+
 .tabPanelWrapper button {
-	margin-left: auto;
 	margin-top: -40px;
 	margin-right: 20px;
+	margin-left: auto;
 }

@@ -1,94 +1,95 @@
 .flex {
-    display: flex;
-    gap: 24px;
-    margin: 20px;
-  }
-
-.sailing_details{
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    background-color: white;
-    border-radius: 8px 8px 0 0;
-    width: 800px;
-  } 
-
-.heading{
-    font-size: 18px;
-    padding: 10px 0px 0px 20px;
-}
-
-.hr_line{
-    border: none;
-    border-left: 1px dotted rgb(187 187 187);
-    height: 100px; /* Adjust the height as needed */
-    margin: 10px;
-}
-
-.port_details{
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
-    margin: 60px 0px 0px 40px;
-}
-
-.port{
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.port_name{
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 21px;
-    text-align: left;
-    max-width: 100px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.date{
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
-    text-align: left;
-    color: #4F4F4F;
-}
-
-.details_card{
 	display: flex;
-	justify-content: space-between;
+	gap: 16px;
+	width: 100%;
+	margin: 10px;
+}
+
+.sailing_details {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	width: 48%;
+	background-color: white;
+	border-radius: 8px 8px 0 0;
+}
+
+.heading {
+	padding: 10px 0 0 20px;
+	font-size: 18px;
+}
+
+.hr_line {
+	height: 100px; /* Adjust the height as needed */
+	margin: 10px;
+	border: none;
+	border-left: 1px dotted rgb(187 187 187);
+}
+
+.port_details {
+	display: flex;
+	flex-direction: column;
+	padding-left: 20px;
+	margin: 60px 0 0 40px;
+}
+
+.port {
+	display: flex;
+	gap: 6px;
 	align-items: center;
+}
+
+.port_name {
+	max-width: 100px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 21px;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.date {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.details_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 500px;
 	padding: 16px 12px;
 	font-size: 14px;
 	font-weight: 600;
-	background-color: #FFFFFF;
+	background-color: #fff;
 	border-radius: 8px;
-    box-shadow: 0px 0px 8px 0px #627FAC33;
-    width: 500px;
+	box-shadow: 0 0 8px 0 #627fac33;
 }
 
-.label{
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0em;
-    text-align: left;   
-    color: #4F4F4F;
+.label {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+	color: #4f4f4f;
+	text-align: left;
+	letter-spacing: 0;
 }
 
-.value{
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0em;
-    text-align: center;    
+.value {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+	text-align: center;
+	letter-spacing: 0;
 }
 
-.transit_time{
-    padding: 6px;
+.transit_time {
+	padding: 6px;
 	font-size: 12px;
 	font-weight: 400;
 	color: #4f4f4f;
@@ -96,7 +97,7 @@
 	border-radius: 6px;
 }
 
-.middle{
-    display: flex;
-    align-items: center;
+.middle {
+	display: flex;
+	align-items: center;
 }

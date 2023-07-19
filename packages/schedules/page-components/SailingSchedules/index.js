@@ -1,19 +1,19 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import SailingScheduleList from './SailingScheduleList';
 import styles from './styles.module.css';
 
 function SailingSchedules() {
+	const router = useRouter();
 	const ACTIVE_TAB = 'sailing_schedules';
-	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 	const [showModal, setShowModal] = useState(false);
 	const handleTabChange = (tab) => {
 		if (tab !== 'sailing_schedules') {
 			const route = tab.replace(/_/g, '-');
 			// eslint-disable-next-line no-undef
-			window.location.href = `/v2/${partnerId}/schedules/${route}`;
+			router.push(`/schedules/${route}`);
 		}
 	};
 

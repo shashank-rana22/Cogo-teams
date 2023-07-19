@@ -1,17 +1,17 @@
 .container {
-    display: flex;
-    height: 32px;
-    margin: 0 24px 24px 0;
-    color: var(--black-80, #4f4f4f);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 150%;
-    cursor: pointer;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	height: 32px;
+	margin: 0 24px 24px 0;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 150%;
+	color: var(--black-80, #4f4f4f);
+	cursor: pointer;
 }
 
 .arrow {
-    display: flex;
-    margin-right: 8px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
 }

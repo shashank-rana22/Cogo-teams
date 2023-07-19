@@ -10,7 +10,7 @@ import SailingScheduleCard from './SailingScheduleCard';
 import styles from './styles.module.css';
 
 const FOUR = 4;
-function SailingScheduleList({ showModal, setShowModal }) {
+function SailingScheduleList({ showModal = false, setShowModal = () => {} }) {
 	const [filters, setFilters] = useState({
 		page: 1,
 	});

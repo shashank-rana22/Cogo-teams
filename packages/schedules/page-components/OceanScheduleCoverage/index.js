@@ -1,18 +1,17 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
+import { useRouter } from '@cogoport/next';
 
 import Content from './content';
 import styles from './styles.module.css';
 
 function OceanScheduleCoverage() {
 	const ACTIVE_TAB = 'ocean_schedule_coverage';
-	const partnerId = useSelector((state) => state?.profile?.partner?.id);
-
+	const router = useRouter;
 	const handleTabChange = (tab) => {
 		if (tab !== 'ocean_schedule_coverage') {
 			const route = tab.replace(/_/g, '-');
 			// eslint-disable-next-line no-undef
-			window.location.href = `/v2/${partnerId}/schedules/${route}`;
+			router.push(`/schedules/${route}`);
 		}
 	};
 	return (

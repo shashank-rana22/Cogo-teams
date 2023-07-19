@@ -30,6 +30,7 @@ function ScheduleMap({ data, tooltipRefArray, isTooltipVisible }) {
 		points = [...(data?.route_cordinates.slice(ZERO, ONE) || []),
 			...(data?.route_cordinates.slice(-ONE) || [])];
 	}
+
 	return (
 		<div className={styles.map}>
 			<CogoMaps
