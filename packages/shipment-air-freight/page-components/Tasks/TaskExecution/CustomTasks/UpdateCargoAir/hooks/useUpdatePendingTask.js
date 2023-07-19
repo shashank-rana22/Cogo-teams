@@ -62,7 +62,7 @@ const useUpdatePendingTask = ({
 			onCancel();
 			timeLineRefetch();
 		} catch (err) {
-			Toast.error(err?.data?.base);
+			Toast.error(err?.data?.base || 'Something went wrong');
 		}
 	};
 

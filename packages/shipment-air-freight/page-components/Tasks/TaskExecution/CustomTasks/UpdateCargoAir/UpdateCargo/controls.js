@@ -4,14 +4,13 @@ const ONE_STOP = 1;
 
 const controls = (primary_service, mainService, noOfStops, disabled) => [
 	{
-		label      : 'Number of stops',
-		name       : 'no_of_stops',
-		type       : 'select',
-		span       : 4,
-		value      : '0',
-		isEditable : true,
-		disabled   : (Number(noOfStops) < ONE_STOP && !disabled),
-		options    : [
+		label    : 'Number of stops',
+		name     : 'no_of_stops',
+		type     : 'select',
+		span     : 4,
+		value    : '0',
+		disabled : (Number(noOfStops) < ONE_STOP && !disabled),
+		options  : [
 			{ label: '0', value: '0' },
 			{ label: 1, value: 1 },
 			{ label: 2, value: 2 },
@@ -21,13 +20,13 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		],
 	},
 	{
-		label          : 'Final Origin Airport',
-		name           : 'origin_airport_id',
-		optionsListKey : 'locations',
+		label    : 'Final Origin Airport',
+		name     : 'origin_airport_id',
+		type     : 'async-select',
+		asyncKey : 'list_locations',
 		value:
 				mainService?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_airport_id
 				|| primary_service?.origin_airport_id,
-		type        : 'location-select',
 		span        : 4,
 		placeholder : 'Select Origin Airport',
 		disabled    : !!(
@@ -44,10 +43,10 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		},
 	},
 	{
-		label          : 'Final Destination Airport',
-		name           : 'destination_airport_id',
-		optionsListKey : 'locations',
-		type           : 'location-select',
+		label    : 'Final Destination Airport',
+		name     : 'destination_airport_id',
+		type     : 'async-select',
+		asyncKey : 'list_locations',
 		value:
 				mainService?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_airport_id
 				|| primary_service?.destination_airport_id,
@@ -119,13 +118,13 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		value            : [],
 		controls         : [
 			{
-				label          : 'Origin Airport',
-				name           : 'from_airport_id',
-				optionsListKey : 'locations',
-				placeholder    : 'Select Origin Airport',
-				type           : 'location-select',
-				span           : 4,
-				params         : {
+				label       : 'Origin Airport',
+				name        : 'from_airport_id',
+				type        : 'async-select',
+				asyncKey    : 'list_locations',
+				placeholder : 'Select Origin Airport',
+				span        : 4,
+				params      : {
 					filters: {
 						type: ['airport'],
 					},
@@ -135,13 +134,13 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				},
 			},
 			{
-				label          : 'Destination Airport',
-				name           : 'to_airport_id',
-				optionsListKey : 'locations',
-				placeholder    : 'Select Destination Airport',
-				type           : 'location-select',
-				span           : 4,
-				params         : {
+				label       : 'Destination Airport',
+				name        : 'to_airport_id',
+				type        : 'async-select',
+				asyncKey    : 'list_locations',
+				placeholder : 'Select Destination Airport',
+				span        : 4,
+				params      : {
 					filters: {
 						type: ['airport'],
 					},

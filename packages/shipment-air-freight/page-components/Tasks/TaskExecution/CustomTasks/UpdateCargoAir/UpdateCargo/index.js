@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 const ZERO_STOPS = 0;
 const INCREMENT_STOPS_BY_ONE = 1;
+const FOR_LOOP_INCREMENT_VALUE = 1;
 
 const AIRPORT_KEYS = [
 	'origin_airport_id',
@@ -64,7 +65,7 @@ function UpdateCargo({
 			if (!noOfStops) {
 				movementValue = [];
 			} else if (noOfStops) {
-				Array.from({ length: noOfStops + INCREMENT_STOPS_BY_ONE }).forEach((_, i) => {
+				[...Array(noOfStops + FOR_LOOP_INCREMENT_VALUE)].forEach((_, i) => {
 					if (services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details) {
 						movementValue.push({
 							...MOVEMENT_DETAILS,
@@ -149,13 +150,12 @@ function UpdateCargo({
 				{render()}
 				<div className={styles.button}>
 					<div style={{ margin: '0 10px 0 0' }}>
-						<Button className="secondary md" onClick={() => onCancel()}>
+						<Button onClick={() => onCancel()}>
 							Cancel
 						</Button>
 					</div>
 					<div style={{ margin: '0 16px 0 10px' }}>
 						<Button
-							className="secondary md"
 							onClick={() => setDisabled((prev) => !prev)}
 						>
 							<EditSvg style={{ marginRight: '8px' }} />

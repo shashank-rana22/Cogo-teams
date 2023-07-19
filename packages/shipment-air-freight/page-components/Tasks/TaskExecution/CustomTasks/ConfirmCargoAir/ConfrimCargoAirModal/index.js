@@ -76,7 +76,7 @@ function ConfirmCargoAirModal({
 			if (noOfStops === ZERO_STOPS) {
 				newStopsValue = [];
 			} else if (noOfStops) {
-				for (let i = 0; i <= noOfStops; i += FOR_LOOP_INCREMENT_VALUE) {
+				[...Array(noOfStops + FOR_LOOP_INCREMENT_VALUE)].forEach((_, i) => {
 					newStopsValue.push({
 						from_airport_id:
 							i === GLOBAL_CONSTANTS.zeroth_index
@@ -102,7 +102,7 @@ function ConfirmCargoAirModal({
 								: '',
 						flight_number_stop: '',
 					});
-				}
+				});
 			}
 		}
 		setValue('movement', newStopsValue);
