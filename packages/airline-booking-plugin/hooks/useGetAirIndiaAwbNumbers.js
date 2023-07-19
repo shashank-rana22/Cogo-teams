@@ -9,22 +9,20 @@ const useGetAirIndiaAwbNumbers = (activeTab = 'air_india_awb', status = 'complet
 
 	const [{ data = {}, loading }, trigger] = useRequest('/list_air_india_awb_numbers', { manual: true });
 
-	const getAirIndiaAwbNumbersList = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						filters: {
-							status,
-						},
-
-						page,
+	const getAirIndiaAwbNumbersList = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					filters: {
+						status,
 					},
-				});
-			} catch (err) {
-				console.error(err);
-			}
-		})();
+
+					page,
+				},
+			});
+		} catch (err) {
+			console.error(err);
+		}
 	}, [page, status, trigger]);
 
 	useEffect(() => {

@@ -45,7 +45,7 @@ export const pluginHeader = [
 		label : 'FLIGHT DATE',
 		name  : 'flight_date',
 		key   : 'flight_date',
-		span  : 1.4,
+		span  : 1.5,
 		func  : 'handleFlightDate',
 	},
 ];

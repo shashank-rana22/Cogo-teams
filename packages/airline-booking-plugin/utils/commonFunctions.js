@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-const commonFunctions = () => ({
+export const commonFunctions = {
 	handleSource: (singleItem) => (
 		singleItem?.source?.name
 	),
@@ -23,6 +23,4 @@ const commonFunctions = () => ({
 	handleFlightStatus: (singleItem) => (
 		singleItem?.air_india_awb_number?.flight_status
 	),
-});
-
-export default commonFunctions;
+};

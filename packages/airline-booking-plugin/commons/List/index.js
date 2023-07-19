@@ -30,7 +30,7 @@ function List({
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!loading) {
-				setPage((p) => p + START_PAGE);
+				setPage((prev) => prev + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
 	}, [loading, setPage]);

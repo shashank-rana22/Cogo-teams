@@ -9,7 +9,7 @@ import { airIndiaNewFields } from '../../configurations/air-india-new-fields';
 import CONSTANTS from '../../constants/constants';
 import useGetAirIndiaAwbNumbers from '../../hooks/useGetAirIndiaAwbNumbers';
 import useHandlePluginBooking from '../../hooks/useHandlePluginBooking';
-import commonFunctions from '../../utils/commonFunctions';
+import { commonFunctions } from '../../utils/commonFunctions';
 
 import styles from './styles.module.css';
 
@@ -88,7 +88,7 @@ function AirIndiaAWB({
 		),
 	};
 
-	const functions = { ...commonFunctions(), ...otherFunctions };
+	const functions = { ...commonFunctions, ...otherFunctions };
 
 	useEffect(() => {
 		if (statusAwb) {

@@ -5,6 +5,8 @@ import { useRequest } from '@cogoport/request';
 import CONSTANTS from '../constants/constants';
 
 const EMPTY_VALUE = 0;
+const TEXT_DATA = ['commodity', 'flight_number'];
+const NUMBER_DATA = ['number_of_pieces', 'volume', 'weight'];
 
 const useHandlePluginBooking = (edit = false) => {
 	const api = edit ? '/update_awb_plugin_booking_information' : '/create_awb_booking_information';
@@ -24,10 +26,10 @@ const useHandlePluginBooking = (edit = false) => {
 		const { setFinalList = () => {}, setPage = () => {}, getAirIndiaAwbNumbersList = () => {} } = refresh || {};
 		const FORMATTED_DATA = {};
 		Object.keys(finalData).forEach((bookInfoKey) => {
-			if (['commodity', 'flight_number'].includes(bookInfoKey)) {
+			if (TEXT_DATA.includes(bookInfoKey)) {
 				FORMATTED_DATA[bookInfoKey] = finalData[bookInfoKey].toUpperCase();
 			} else if (
-				['number_of_pieces', 'volume', 'weight'].includes(bookInfoKey)
+				NUMBER_DATA.includes(bookInfoKey)
 			) {
 				FORMATTED_DATA[bookInfoKey] = Number(finalData[bookInfoKey]) || EMPTY_VALUE;
 			} else {
@@ -65,16 +67,17 @@ const useHandlePluginBooking = (edit = false) => {
 		id,
 	}) => {
 		try {
-			if (id) {
-				await trigger({
-					data: { id, status: statusAwb },
-				}).then(() => {
-					Toast.success(`AWB Booking Information ${statusAwb}d Successfully`);
-					setFinalList([]);
-					getAirIndiaAwbNumbersList();
-					setPage(CONSTANTS.START_PAGE);
-				});
+			if (!id) {
+				return;
 			}
+			await trigger({
+				data: { id, status: statusAwb },
+			}).then(() => {
+				Toast.success(`AWB Booking Information ${statusAwb}d Successfully`);
+				setFinalList([]);
+				getAirIndiaAwbNumbersList();
+				setPage(CONSTANTS.START_PAGE);
+			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
 		}
