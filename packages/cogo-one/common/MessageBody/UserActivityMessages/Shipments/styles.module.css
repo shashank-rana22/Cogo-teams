@@ -50,8 +50,29 @@
 }
 
 .serial_id {
-	margin-top: 2%;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
 	font-size: 13px;
 	font-weight: 500;
 	color: #000;
+}
+
+.id_number {
+	margin-left: 2px;
+	color: #0652dd;
+}
+
+.service_type {
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+}
+
+.type {
+	margin: 6px;
+	font-weight: 600;
 }

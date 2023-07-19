@@ -15,7 +15,7 @@ const COUNTRY_CODE_END = 2;
 function SuggestedActions({ formattedData = {} }) {
 	const dispatch = useDispatch();
 
-	const [modalType, setModalType] = useState(null);
+	const [modalType, setModalType] = useState('');
 
 	const geo = getGeoConstants();
 
@@ -69,7 +69,7 @@ function SuggestedActions({ formattedData = {} }) {
 	};
 
 	const closeModal = () => {
-		setModalType(null);
+		setModalType('');
 	};
 
 	const ACTIONS = [

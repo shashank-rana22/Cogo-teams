@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { SHIPPING_LINE, SHOW_SID, EVENT_LABEL } from '../../../../constants/shippingLineMappings';
+import { SHIPPING_LINE, EVENT_LABEL } from '../../../../constants/shippingLineMappings';
 import { getEventTitle } from '../../../../utils/getEventTitle';
 
 import CargoDetails from './CargoDetails';
@@ -34,7 +34,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	const SHIPPING_LINE_MAPPING = {
 		checkout    : primary_service,
 		shipment    : serviceData?.shipment_type,
-		spot_search : serviceData?.search_type,
+		spot_search : detail?.search_type,
 	};
 
 	const SERVICE_MAPPING = {
@@ -46,6 +46,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	const SID_MAPPING = {
 		shipment    : serviceData?.serial_id,
 		spot_search : detail?.serial_id,
+		checkout    : primaryService?.serial_id,
 	};
 
 	const lineType = SHIPPING_LINE_MAPPING[eventType];
@@ -103,11 +104,17 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 					</div>
 				)}
 
-				{(SHOW_SID || []).includes(eventType) && (
+				{SID_MAPPING[eventType] && (
 					<div className={styles.serial_id}>
-						SID:
-						{' '}
-						{SID_MAPPING[eventType]}
+						SID :
+						<div className={styles.id_number}>{SID_MAPPING[eventType]}</div>
+					</div>
+				)}
+
+				{lineType && (
+					<div className={styles.service_type}>
+						Service Type :
+						<div className={styles.type}>{startCase(lineType)}</div>
 					</div>
 				)}
 

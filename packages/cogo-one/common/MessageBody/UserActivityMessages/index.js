@@ -21,7 +21,7 @@ const COMPONENT_MAPPING = {
 	spot_search   : Shipments,
 };
 
-const ICON_MAPPING = {
+const IMAGE_URL_MAPPING = {
 	checkout      : GLOBAL_CONSTANTS.image_url.checkout_failed,
 	shipment      : GLOBAL_CONSTANTS.image_url.abandon_shipmemts,
 	user          : GLOBAL_CONSTANTS.image_url.login_failed,
@@ -40,12 +40,12 @@ function UserActivityMessages({ eachMessage = {}, formattedData = {} }) {
 	} = eachMessage;
 
 	const ActiveModalComp = COMPONENT_MAPPING[source] || COMPONENT_MAPPING.default;
-	const userActivityIcon = ICON_MAPPING[source] || ICON_MAPPING.default;
+	const activeImageUrl = IMAGE_URL_MAPPING[source] || IMAGE_URL_MAPPING.default;
 
 	return (
 		<div>
 			<Image
-				src={userActivityIcon}
+				src={activeImageUrl}
 				alt="status-icon"
 				width={25}
 				height={25}

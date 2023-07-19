@@ -123,7 +123,7 @@ export const RENDER_VALUE_MAPPING = {
 	volume: (detail) => {
 		const { chargable_weight, weight, volume, isLTL, service_type } = detail || {};
 
-		const calcVolume = volume && `${volume} ${isLTL ? 'cc' : 'cbm'}`;
+		const calcVolume = volume && `${volume?.toFixed(TO_FIXED_2)} ${isLTL ? 'cc' : 'cbm'}`;
 
 		const chargableWeight = isLTL
 			? (chargable_weight || weight)

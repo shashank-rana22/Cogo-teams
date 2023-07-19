@@ -38,7 +38,7 @@
 .port_pair {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	margin: 14px 0;
 }
 
@@ -56,7 +56,7 @@
 .port_name {
 	width: 50px;
 	overflow: hidden;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #000;
 	text-overflow: ellipsis;

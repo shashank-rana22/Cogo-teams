@@ -29,15 +29,11 @@ function CargoDetails({ detail = {} }) {
 					return null;
 				}
 
-				if (detail?.[label]) {
-					return (
-						<div className={styles.chips} key={label}>
-							{value}
-						</div>
-					);
-				}
-
-				return null;
+				return (
+					<div className={styles.chips} key={label}>
+						{value}
+					</div>
+				);
 			})}
 		</div>
 	);
