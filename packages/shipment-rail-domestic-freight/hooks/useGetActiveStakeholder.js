@@ -1,10 +1,10 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-
-const geo = getGeoConstants();
+import { isEmpty } from '@cogoport/utils';
 
 const useGetActiveStakeholder = () => {
+	const geo = getGeoConstants();
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
 	const stakeholderMap = [
@@ -35,7 +35,7 @@ const useGetActiveStakeholder = () => {
 		.filter(({ role_ids: ids }) => (role_ids || [])
 			.some((item) => ids.includes(item)));
 
-	const activeStakeholder = matchingStakeholders.length > GLOBAL_CONSTANTS.zeroth_index
+	const activeStakeholder = !isEmpty(matchingStakeholders)
 		? matchingStakeholders[GLOBAL_CONSTANTS.zeroth_index].stakeholder : '';
 
 	return 	activeStakeholder;
