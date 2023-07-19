@@ -26,9 +26,9 @@ function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdo
 		setGlobalFilters((prev) => ({ ...prev, page: 1 })); // reset page to 1 on search
 	}, [search, debounceQuery, setGlobalFilters]);
 
-	const getDunningCycle = useCallback((async () => {
+	const getDunningCycle = useCallback((() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					query            : query || undefined,
 					pageIndex        : page,

@@ -14,9 +14,9 @@ function useListDunningExecution({ rowId }) {
 		{ manual: true },
 	);
 
-	const getDunningExecutions = useCallback(async () => {
+	const getDunningExecutions = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					dunningCycleId: rowId,
 				},
