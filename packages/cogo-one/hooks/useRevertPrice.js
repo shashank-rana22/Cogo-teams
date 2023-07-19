@@ -6,11 +6,15 @@ import { isEmpty } from '@cogoport/utils';
 import getPayload from '../helpers/getRevertPricePayload';
 import { formatLineItems, formatFirstLineItem } from '../helpers/revertPriceHelpers';
 
-const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates, chargeableWeight }) => {
+import useSendFlashRateRevertNotificationOnEmail from './useSendFlashRateRevertNotificationOnEmail';
+
+const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates, chargeableWeight, userId = '' }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_flash_booking_rate',
 		method : 'post',
 	}, { manual: true });
+
+	const { sendNotificationEmail = () => {} } = useSendFlashRateRevertNotificationOnEmail({ userId });
 
 	const { line_items = [], id = '', service_type } = item || {};
 
@@ -29,9 +33,13 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates, charge
 				return;
 			}
 
-			await trigger({
+			const response = await trigger({
 				data: getPayload({ lineItemsParams, values, id, service_type, chargeableWeight }),
 			});
+
+			if (response?.data?.id) {
+				await sendNotificationEmail({ bookingRateId: response?.data?.id });
+			}
 
 			Toast.success('Price successfully reverted.');
 			shipmentFlashBookingRates({ page: 1 });
