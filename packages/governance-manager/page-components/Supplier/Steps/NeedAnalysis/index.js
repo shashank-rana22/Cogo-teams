@@ -1,4 +1,4 @@
-import { Button, Table } from '@cogoport/components';
+import { Button, Placeholder, Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import useGetOrganizationServiceSuppliers from '../../../hooks/useListOrganizationExpertiseSuppliers';
@@ -8,7 +8,7 @@ import EvaluateModal from './EvaluateModal';
 import styles from './styles.module.css';
 import { columns } from './utils/need-analysis-utils';
 
-function NeedAnalysis({ organization_id, service, getOrganizationService }) {
+function NeedAnalysis({ organization_id, service, getOrganizationService, service_type }) {
 	const {
 		data: serviceExpertiseData,
 		loading:loadingSE,
@@ -26,20 +26,31 @@ function NeedAnalysis({ organization_id, service, getOrganizationService }) {
 		getOrganizationService,
 	});
 
-	const [show, setShow] = useState('');
-	console.log(serviceExpertiseData);
+	const [show, setShow] = useState(null);
 	return (
 		<>
 			{
+				loadingSE && <Placeholder width="100%" height="500px" />
+			}
+			{
 				!loadingSE && serviceExpertiseData
-				&& <Table columns={columns({ setShow })} data={serviceExpertiseData} className={styles.table} />
+				&& (
+					<Table
+						columns={columns({ setShow, service_type })}
+						data={serviceExpertiseData}
+						className={styles.table}
+					/>
+				)
 			}
 			<div className={styles.submit_btn}>
 				<Button onClick={() => UpdateOrganizationService()}>
 					Submit & Next
 				</Button>
 			</div>
-			<EvaluateModal show={show} setShow={setShow} />
+			{
+				show && <EvaluateModal show={show} setShow={setShow} />
+
+			}
 		</>
 	);
 }

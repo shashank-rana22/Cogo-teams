@@ -1,45 +1,49 @@
 /* eslint-disable no-magic-numbers */
 import { Button } from '@cogoport/components';
-import { useState } from 'react';
+import { useForm } from '@cogoport/forms';
 
 import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
 
-import RoleInput from './RoleInput';
+import useCreateOrganizationMarketFeedback from './hooks/useCreateOrganizationMarketFeedback';
+import Layout from './Layout';
 import styles from './styles.module.css';
+import { controls, defaultValues } from './utils/email-from-controls';
 
-function MarketFeedback({ organization_id, service, getOrganizationService }) {
+function MarketFeedback({ organization_id, service, getOrganizationService, id:service_id }) {
 	const { UpdateOrganizationService } = useUpdateOrganizationService({
-		organization_id, stage_of_approval: 'organization_evaluation', service, getOrganizationService,
+		organization_id,
+		stage_of_approval: 'organization_evaluation',
+		service,
+		getOrganizationService,
 	});
-	const [totalInput, setTotalInput] = useState(1);
+
+	const { createMarketFeedback } = useCreateOrganizationMarketFeedback({
+		UpdateOrganizationService,
+		service_id,
+		service_type: service,
+		organization_id,
+	});
+
+	const {
+		control,
+		handleSubmit,
+		formState:{ errors = {} },
+	} = useForm({ defaultValues });
+
 	return (
 		<div className={styles.parent}>
-			<div className={styles.heading}>
-				<div>
-					Role
-				</div>
-				<div>
-					Email Id
-				</div>
-			</div>
-			{
-				[...Array(totalInput)]?.map((item) => (
-					<RoleInput key={item} />
-				))
-			}
-			<div role="presentation" className={styles.add_more} onClick={() => setTotalInput(totalInput + 1)}>
-				+Add More
-			</div>
+
+			<Layout control={control} controls={controls} errors={errors} />
+
 			<div className={styles.flex_right}>
 				<Button
 					themeType="secondary"
 					onClick={() => UpdateOrganizationService()}
 				>
 					Save & Do it Later
-
 				</Button>
-				<Button onClick={() => UpdateOrganizationService()}>Submit & Next</Button>
 
+				<Button onClick={handleSubmit(createMarketFeedback)}>Submit & Next</Button>
 			</div>
 		</div>
 	);

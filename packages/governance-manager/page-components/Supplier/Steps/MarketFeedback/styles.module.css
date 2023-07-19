@@ -4,27 +4,6 @@
 	border-radius: 8px;
 }
 
-.parent > * {
-	width: 900px;
-}
-
-.heading {
-	display: flex;
-	font-size: 16px;
-	font-weight: 600;
-}
-
-.heading > :first-child {
-	width: 320px;
-}
-
-.add_more {
-	margin-top: 12px;
-	text-align: right;
-	text-decoration: underline;
-	cursor: pointer;
-}
-
 .flex_right {
 	display: flex;
 	gap: 20px;

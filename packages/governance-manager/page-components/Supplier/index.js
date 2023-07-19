@@ -18,7 +18,6 @@ function Supplier() {
 	const { query } = useRouter();
 	const { id } = query;
 	const { data: supplierData, getOrganizationService } = useGetOrganizationService({ id, setStatus });
-
 	return (
 		<div>
 			<h2>Governance Manager</h2>
@@ -34,6 +33,7 @@ function Supplier() {
 			{{
 				need_analysis: <NeedAnalysis
 					organization_id={supplierData?.organization_id}
+					service_type={supplierData?.service}
 					id={id}
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
@@ -44,9 +44,16 @@ function Supplier() {
 					service={supplierData?.service}
 					getOrganizationService={getOrganizationService}
 				/>,
-				organization_evaluation : <SupplierEvaluation setStatus={setStatus} />,
-				supplier_approval       : <SupplierApproval setStatus={setStatus} />,
-				contract_sla            : <ContractSla setStatus={setStatus} />,
+				organization_evaluation: <SupplierEvaluation
+					id={id}
+					service={supplierData?.service}
+					organization_id={supplierData?.organization_id}
+					setStatus={setStatus}
+					getOrganizationService={getOrganizationService}
+				/>,
+				due_dilligance    : <SupplierApproval setStatus={setStatus} />,
+				supplier_approval : <SupplierApproval setStatus={setStatus} />,
+				contract_sla      : <ContractSla setStatus={setStatus} />,
 			}[status]}
 
 		</div>

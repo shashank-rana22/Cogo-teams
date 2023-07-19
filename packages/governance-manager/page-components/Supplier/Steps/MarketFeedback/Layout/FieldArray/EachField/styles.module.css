@@ -1,0 +1,21 @@
+.main_parent {
+	display: flex;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 300px;
+	margin-right: 10px;
+}
+
+.container > * {
+	width: 100%;
+}
+
+.error_text {
+	margin-top: 2px;
+	color: #ee3425;
+	text-align: center;
+}

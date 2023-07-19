@@ -2,7 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 
 import styles from '../styles.module.css';
 
-export const columns = ({ setShow }) => [
+export const columns = ({ setShow, service_type }) => [
 	{ Header: 'Origin Country', accessor: (row) => (<div>{row?.expertise_data?.origin_name}</div>) },
 	{ Header: 'Destination Trade Lane', accessor: (row) => (<div>{row?.expertise_data?.destination_name}</div>) },
 	{
@@ -28,10 +28,11 @@ export const columns = ({ setShow }) => [
 	},
 	{
 		Header   : ' ',
-		accessor : (row) => (
-			<Button themeType="accent" onClick={() => setShow(row?.id)}>
+		accessor : (row) => !row?.service_requirement && (
+			<Button themeType="accent" onClick={() => setShow({ ...row, service_type })}>
 				Evaluate
 			</Button>
-		),
+		)
+		,
 	},
 ];

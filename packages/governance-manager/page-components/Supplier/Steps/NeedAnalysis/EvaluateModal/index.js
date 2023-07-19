@@ -1,12 +1,14 @@
 import { Button, Modal, Table, Radio, Textarea } from '@cogoport/components';
 import { useState } from 'react';
 
+import useGetOrganizationServiceExpertises from '../../../../hooks/useGetOrganizationServiceExpertises';
 import useUpdateOrganizationServiceExpertiseFeedback from
 	'../../../../hooks/useUpdateOrganizationServiceExpertiseFeedback';
 
 import styles from './styles.module.css';
 
 function EvaluateModal({ show, setShow }) {
+	const FIFTY = 50;
 	const [feedback, setFeedback] = useState('');
 	const [checkbox, setCheckbox] = useState('');
 	const { UpdateOrganizationServiceExpertiseFeedback } = useUpdateOrganizationServiceExpertiseFeedback({
@@ -15,26 +17,16 @@ function EvaluateModal({ show, setShow }) {
 		id                  : show,
 		setShow,
 	});
+
+	const { data, loading } = useGetOrganizationServiceExpertises({ show });
 	const columns = [
-		{ Header: 'Name of Current Supplier', accessor: 'current_supplier' },
-		{ Header: 'Volume Served', accessor: 'volume_served' },
+		{
+			Header   : 'Name of Current Supplier',
+			accessor : (row) => row?.organization?.business_name,
+		},
+		{ Header: 'Volume Served', accessor: 'total_teus' },
 	];
-	const data = [
-		{
-			firstName : 'tanner',
-			lastName  : 'linsley',
 
-		},
-		{
-			firstName : 'tandy',
-			lastName  : 'miller',
-		},
-		{
-			firstName : 'joe',
-			lastName  : 'dirte',
-
-		},
-	];
 	const handleSubmit = () => {
 		UpdateOrganizationServiceExpertiseFeedback();
 	};
@@ -43,9 +35,9 @@ function EvaluateModal({ show, setShow }) {
 		<div>
 			<Modal
 				size="xl"
-				show={show?.length > 0}
+				show={show}
 				placement="centre"
-				onClose={() => setShow('')}
+				onClose={() => setShow(null)}
 				maxHeight={100}
 				scroll={false}
 			>
@@ -53,7 +45,9 @@ function EvaluateModal({ show, setShow }) {
 				<Modal.Body>
 					<div className={styles.parent}>
 						<div className={styles.left}>
-							<Table columns={columns} data={data} />
+							{
+								data && <Table columns={columns} data={data} loading={loading} />
+							}
 						</div>
 						<div className={styles.right}>
 							<div className={styles.right_upper}>
@@ -87,7 +81,7 @@ function EvaluateModal({ show, setShow }) {
 					<Button
 						onClick={handleSubmit}
 						disabled={
-						feedback?.length < 50
+						feedback?.length < FIFTY
 						|| checkbox === ''
 					}
 					>
