@@ -1,10 +1,16 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-import Default from './Default';
 import EmailClicked from './EmailClicked';
 import LoginFailed from './LoginFailed';
 import Shipments from './Shipments';
+import styles from './styles.module.css';
+
+function Default() {
+	return (
+		<div className={styles.title}>User Event</div>
+	);
+}
 
 const COMPONENT_MAPPING = {
 	checkout      : Shipments,

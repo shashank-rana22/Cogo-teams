@@ -28,7 +28,7 @@ function SuggestedActions({ formattedData = {} }) {
 		lead_user_id,
 	} = formattedData;
 
-	const activeCardData = {
+	const ACTIVE_CARD_DATA = {
 		userId     : user_id,
 		leadUserId : lead_user_id,
 		name       : user_name,
@@ -104,7 +104,7 @@ function SuggestedActions({ formattedData = {} }) {
 					modalType={modalType}
 					closeModal={closeModal}
 					userData={userData}
-					activeCardData={activeCardData}
+					activeCardData={ACTIVE_CARD_DATA}
 				/>
 			)}
 		</>

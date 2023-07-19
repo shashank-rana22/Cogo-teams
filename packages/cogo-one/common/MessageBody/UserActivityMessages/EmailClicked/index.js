@@ -9,10 +9,12 @@ import styles from './styles.module.css';
 
 function EmailClicked({ serviceData = {}, name = '', formattedData = {} }) {
 	const [previewModal, setPreviewModal] = useState(false);
+
 	const { email = '', user_name = '' } = formattedData;
 	const { content = {} } = serviceData || {};
 	const { subject = '', body } = content;
 	const eventTitle = getEventTitle({ name });
+
 	return (
 		<>
 			<div className={styles.title}>{eventTitle}</div>

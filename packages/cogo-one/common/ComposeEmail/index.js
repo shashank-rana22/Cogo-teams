@@ -12,6 +12,13 @@ import styles from './styles.module.css';
 
 const LAST_FILE_NAME = 1;
 
+const getdecodedData = ({ data = '' }) => {
+	const val = decodeURI(data).split('/');
+	const fileName = val[val.length - LAST_FILE_NAME];
+	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
+	return { uploadedFileName, fileIcon };
+};
+
 function ComposeEmail({
 	closeModal = () => {},
 	userData = {},
@@ -41,15 +48,9 @@ function ComposeEmail({
 			});
 		}
 	};
+
 	const handleProgress = (val) => {
 		setUploading(val);
-	};
-
-	const decode = (data = '') => {
-		const val = decodeURI(data).split('/');
-		const fileName = val[val.length - LAST_FILE_NAME];
-		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-		return { uploadedFileName, fileIcon };
 	};
 
 	const handleDelete = (url) => {
@@ -110,7 +111,7 @@ function ComposeEmail({
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
 						{(attachments || []).map((eachAttachement) => {
-							const { fileIcon, uploadedFileName } = decode(eachAttachement);
+							const { fileIcon, uploadedFileName } = getdecodedData({ data: eachAttachement });
 							return (
 								<div className={styles.uploaded_files} key={eachAttachement}>
 									<div className={styles.uploaded_files_content}>

@@ -14,6 +14,8 @@ export function formatRouteData({ item = {} }) {
 		|| item.port
 		|| item.origin_location
 		|| item.location
+		|| item.airport
+		|| item.pickup
 		|| {}
 	);
 
@@ -29,6 +31,8 @@ export function formatRouteData({ item = {} }) {
 		|| item.port
 		|| item.destination_location
 		|| item.location
+		|| item.airport
+		|| item.drop
 		|| {}
 	);
 
@@ -83,15 +87,15 @@ export function formatRouteData({ item = {} }) {
 			country : popLastName(destinationDisplayName),
 			name    : destinationDisplayName,
 		},
-		singleOriginDisplay: getAppendedString({
-			code    : originMainPortCode,
-			country : popLastName(originMainPortDisplayName),
-			name    : originMainPortDisplayName,
-		}),
-		singleDestinationDisplay: getAppendedString({
-			code    : destinationMainPortCode,
-			country : popLastName(destinationMainPortDisplayName),
-			name    : destinationMainPortDisplayName,
-		}),
+		singleOriginDisplay: {
+			code    : originMainPortCode || originCode,
+			country : popLastName(originMainPortDisplayName || originDisplayName),
+			name    : originMainPortDisplayName || originDisplayName,
+		},
+		singleDestinationDisplay: {
+			code    : destinationMainPortCode || destinationCode,
+			country : popLastName(destinationMainPortDisplayName || destinationDisplayName),
+			name    : destinationMainPortDisplayName || destinationDisplayName,
+		},
 	};
 }

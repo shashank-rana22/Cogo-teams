@@ -15,12 +15,11 @@ function PreviewModal({
 		<Modal
 			show={previewModal}
 			size="sm"
-			className={styles.styled_ui_modal_dialog}
 			onClose={() => setPreviewModal(false)}
-			scroll
+			scroll={false}
 		>
 			<Modal.Header title="Preview Email" />
-			<div className={styles.container}>
+			<Modal.Body className={styles.styled_modal_body}>
 				<div className={styles.title}>{startCase(name)}</div>
 				<div className={styles.message}>
 					Following is a preview of the mail -
@@ -33,7 +32,7 @@ function PreviewModal({
 				</div>
 				<PreviewHtml html={body} />
 
-			</div>
+			</Modal.Body>
 
 		</Modal>
 	);

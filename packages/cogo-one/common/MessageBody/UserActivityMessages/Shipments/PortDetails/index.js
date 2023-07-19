@@ -2,10 +2,30 @@ import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { SINGLE_LOCATIONS } from '../../../../../constants/flashRatesMapping';
 import { formatRouteData } from '../../../../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
+
+const SINGLE_LOCATIONS = [
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'origin_fcl_customs',
+	'destination_fcl_customs',
+	'origin_lcl_customs',
+	'destination_lcl_customs',
+	'origin_air_customs',
+	'destination_air_customs',
+	'fcl_cfs',
+	'fcl_freight_local',
+	'air_freight_local',
+	'lcl_freight_local',
+];
+
+const TRADE_TYPE_MAPPING = {
+	import : 'Origin',
+	export : 'Destination',
+};
 
 function PortDetails({ serviceData = {}, service = '' }) {
 	const { trade_type: tradeType = '' } = serviceData || {};
@@ -16,12 +36,7 @@ function PortDetails({ serviceData = {}, service = '' }) {
 		singleDestinationDisplay = {},
 	} = formatRouteData({ item: serviceData });
 
-	const isSingleLocation = SINGLE_LOCATIONS.includes(service);
-
-	const TRADE_TYPE_MAPPING = {
-		import : 'Origin',
-		export : 'Destination',
-	};
+	const isSingleLocation = SINGLE_LOCATIONS.includes(serviceData[service]);
 
 	const DISPLAY_DATA_MAPPING = {
 		import : singleOriginDisplay,
@@ -32,7 +47,12 @@ function PortDetails({ serviceData = {}, service = '' }) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.flex_row_origin}>
-					<div className={styles.label}>{TRADE_TYPE_MAPPING[tradeType]}</div>
+					<div className={styles.label}>
+						{TRADE_TYPE_MAPPING[tradeType]}
+						{' '}
+						:-
+						{' '}
+					</div>
 				</div>
 
 				<div className={styles.flex_row_origin}>

@@ -57,6 +57,12 @@ export const SOURCE_ICON_MAPPING = {
 		width={20}
 		height={20}
 	/>,
+	spot_search: <Image
+		src={GLOBAL_CONSTANTS.image_url.checkout_failed}
+		alt="status-icon"
+		width={20}
+		height={20}
+	/>,
 };
 
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];

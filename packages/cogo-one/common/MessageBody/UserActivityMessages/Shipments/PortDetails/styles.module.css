@@ -11,7 +11,6 @@
 }
 
 .label {
-	margin: 0;
 	font-size: 12px;
 	font-weight: 400;
 	color: #828282;
@@ -24,7 +23,6 @@
 }
 
 .code {
-	margin: 0;
 	margin-right: 4px;
 	font-size: 10px;
 	font-weight: 400;
@@ -32,7 +30,6 @@
 }
 
 .country {
-	margin: 0;
 	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
@@ -42,7 +39,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 15px 0;
+	margin: 14px 0;
 }
 
 .port {
@@ -53,6 +50,7 @@
 .port_details {
 	display: flex;
 	align-items: center;
+	width: 100%;
 }
 
 .port_name {

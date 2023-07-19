@@ -25,7 +25,7 @@ function CargoDetails({ detail = {} }) {
 			{(LABELS || []).map((label) => {
 				const value = RENDER_VALUE_MAPPING[label]?.(details) || details[label] || '';
 
-				if (!value) {
+				if (!value || !detail?.[label]) {
 					return null;
 				}
 

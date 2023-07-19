@@ -1,8 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
-import { SHIPPING_LINE, SHOW_SID, EVENT_LABEL } from '../../../../constants/getShippingLines';
+import { SHIPPING_LINE, SHOW_SID, EVENT_LABEL } from '../../../../constants/shippingLineMappings';
 import { getEventTitle } from '../../../../utils/getEventTitle';
 
 import CargoDetails from './CargoDetails';
@@ -51,12 +51,13 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 	const lineType = SHIPPING_LINE_MAPPING[eventType];
 	const shippingLineMapping = SHIPPING_LINE[lineType] || '';
 	const matchShippingLine = SERVICE_DETAILS[eventType] || '';
-	const shippingLines = matchShippingLine[shippingLineMapping] || '';
+	const shippingLines = matchShippingLine[shippingLineMapping] || {};
+	const { logo_url = '', business_name = '' } = shippingLines || {};
 
 	if (isEmpty(serviceData)) {
 		return (
 			<>
-				<div className={styles.title}>{eventTitle}</div>
+				<div className={styles.title}>{startCase(eventTitle)}</div>
 				<div className={styles.message}>
 					Following are the details of the abandoned
 					{' '}
@@ -70,7 +71,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 
 	return (
 		<>
-			<div className={styles.title}>{eventTitle}</div>
+			<div className={styles.title}>{startCase(eventTitle)}</div>
 			<div className={styles.message}>
 				Following are the details of the abandoned
 				{' '}
@@ -80,11 +81,11 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 			</div>
 
 			<div className={styles.banner}>
-				{shippingLines && (
+				{!isEmpty(shippingLines) && (
 					<div className={styles.company_details}>
-						{shippingLines?.logo_url && (
-							<img // getting error other hostname images
-								src={shippingLines?.logo_url}
+						{logo_url && (
+							<img
+								src={logo_url}
 								alt="status-icon"
 								width="30px"
 								height="25px"
@@ -92,11 +93,11 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 						)}
 
 						<Tooltip
-							content={shippingLines?.business_name}
+							content={business_name}
 							placement="bottom"
 						>
 							<div className={styles.company_name}>
-								{shippingLines?.business_name}
+								{business_name}
 							</div>
 						</Tooltip>
 					</div>
