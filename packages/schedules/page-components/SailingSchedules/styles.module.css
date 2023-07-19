@@ -7,14 +7,14 @@
 
 .tabPanelWrapper {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .button_container {
 	display: flex;
 	gap: 6px;
-	margin-left: auto;
 	margin-top: -40px;
 	margin-right: 20px;
+	margin-left: auto;
 }

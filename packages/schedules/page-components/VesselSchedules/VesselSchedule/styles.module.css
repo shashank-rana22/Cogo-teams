@@ -1,16 +1,17 @@
 .card {
-  padding: 16px;
-  margin: 0 10px;
-  margin-bottom: 16px;
-  background-color: white;
+	padding: 16px;
+	margin: 0 10px;
+	margin-bottom: 16px;
+	background-color: white;
 }
 
 .flex {
-  display: flex;
-  gap: 12px;
-  margin: 8px;
+	display: flex;
+	gap: 12px;
+	margin: 8px;
 }
+
 .halfWidth {
-  width: 40%;
-  box-sizing: border-box;
+	box-sizing: border-box;
+	width: 40%;
 }

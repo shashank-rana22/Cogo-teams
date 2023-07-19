@@ -1,98 +1,95 @@
 .route_port {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
+	display: flex;
+	gap: 30px;
+	justify-content: center;
 }
 
 .left,
 .right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 40%;
-    height: 125px;
-    padding: 8px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 40%;
+	height: 125px;
+	padding: 8px;
 }
 
 .left {
-    justify-content: right;
+	justify-content: right;
 }
 
 .right {
-    justify-content: left;
+	justify-content: left;
 }
 
 .middle {
-    position: relative;
+	position: relative;
 }
 
 .circle {
-    position: absolute;
-    top: calc(50% - 8px); 
-    left: calc(50% - 8px);
-    width: 16px;
-    height: 16px;
-    background-color: #acdadf;
-    border-radius: 50%;
-  }
-  
-  
-  .hr_line_up {
-    position: absolute;
-    left: calc(50% - 1px);
-    border-right: 2px solid #acdadf;
-    height: 130px;
-    margin-top: -60px; 
-  }
+	position: absolute;
+	top: calc(50% - 8px);
+	left: calc(50% - 8px);
+	width: 16px;
+	height: 16px;
+	background-color: #acdadf;
+	border-radius: 50%;
+}
 
+.hr_line_up {
+	position: absolute;
+	left: calc(50% - 1px);
+	height: 130px;
+	margin-top: -60px;
+	border-right: 2px solid #acdadf;
+}
 
 .eta_etd {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .eta,
 .etd {
-    font-size: 14px;
-    font-weight: 500;
-    color: #828282;
-    line-height: 150%;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #828282;
 }
 
 .port_name {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #221f20;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
 }
 
 .port_terminal {
-    font-size: 14px;
-    font-weight: 400;
-    color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .diff_in_days {
-    position: absolute;
-    top: calc(100% - 12px);
-    font-size: 14px;
-    font-weight: 400;
-    color: #828282;
-    margin-left: -50px;
+	position: absolute;
+	top: calc(100% - 12px);
+	margin-left: -50px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
 }
 
-
-.vertical_dots{
-    margin-left: 10px;
+.vertical_dots {
+	margin-left: 10px;
 }
 
 .popover_content {
-    :global {
-        .tippy-content {
-            padding: 0 !important;
-        }
-    }
+	:global {
+		.tippy-content {
+			padding: 0 !important;
+		}
+	}
 }

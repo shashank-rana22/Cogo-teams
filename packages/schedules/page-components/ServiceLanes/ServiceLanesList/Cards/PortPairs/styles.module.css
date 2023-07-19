@@ -1,47 +1,46 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    margin: 16px 0;
-    padding-left: 24px;
-    padding-right: 68px;
-    width: 60%;
-    padding-right: 68px;
-    border-right: dotted 1px #bdbdbd;
-    position: relative;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 60%;
+	padding-right: 68px;
+	padding-left: 24px;
+	margin: 16px 0;
+	border-right: dotted 1px #bdbdbd;
 }
 
 .origin {
-    color: #4f4f4f;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 150%;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #4f4f4f;
 }
 
 .origin_heading {
-    color: var(--black-60, #828282);
-    font-size: 16px;
-    line-height: 150%;
-    font-weight: 500;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: var(--black-60, #828282);
 }
 
 .arrow {
-    position: absolute;
-    left: 50%;
-    bottom: 0%;
+	position: absolute;
+	bottom: 0%;
+	left: 50%;
 }
 
 .destination {
-    color: #4f4f4f;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 150%;
-    position: absolute;
-    left: 55%;
+	position: absolute;
+	left: 55%;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: #4f4f4f;
 }
 
 .destination_heading {
-    color: var(--black-60, #828282);
-    font-size: 16px;
-    line-height: 150%;
-    font-weight: 500;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 150%;
+	color: var(--black-60, #828282);
 }

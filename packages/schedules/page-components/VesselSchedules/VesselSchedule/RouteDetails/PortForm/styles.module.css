@@ -1,93 +1,90 @@
 .route_port {
-  display: flex;
-  gap: 20px;
-  align-items: cent;
-  justify-content: flex-start;
-  margin-left: 48px;
+	display: flex;
+	gap: 20px;
+	align-items: cent;
+	justify-content: flex-start;
+	margin-left: 48px;
 }
 
 .left,
 .right {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 45%;
-  height: 135px;
-  padding: 8px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 45%;
+	height: 135px;
+	padding: 8px;
 }
 
 .left {
-  justify-content: right;
+	justify-content: right;
 }
 
 .right {
-  justify-content: left;
+	justify-content: left;
 }
 
 .middle {
-  position: relative;
+	position: relative;
 }
 
 .circle {
-  position: absolute;
-  top: calc(50% - 8px); 
-  left: calc(50% - 8px);
-  width: 16px;
-  height: 16px;
-  background-color: #acdadf;
-  border-radius: 50%;
-
+	position: absolute;
+	top: calc(50% - 8px);
+	left: calc(50% - 8px);
+	width: 16px;
+	height: 16px;
+	background-color: #acdadf;
+	border-radius: 50%;
 }
 
-
 .hr_line_up {
-  position: absolute;
-  border-right: 2px solid #acdadf;
-  height: 130px;
-  margin-top: -60px; 
+	position: absolute;
+	height: 130px;
+	margin-top: -60px;
+	border-right: 2px solid #acdadf;
 }
 
 .eta_etd {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .eta,
 .etd {
-  font-size: 12px;
-  font-weight: 500;
-  color: #828282;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
 }
 
 .port_name {
-  font-size: 14.5px;
-  font-weight: 600;
-  color: #221f20;
-
+	font-size: 14.5px;
+	font-weight: 600;
+	color: #221f20;
 }
 
 .port_terminal {
-  font-size: 14px;
-  font-weight: 400;
-  color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .diff_in_days {
-  position: absolute;
-  top: calc(100% - 12px);
-  font-size: 14px;
-  font-weight: 400;
-  color: #828282;
+	position: absolute;
+	top: calc(100% - 12px);
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
 }
 
 .add_icon {
-  cursor: pointer;
-}
-.vertical_dots{
-  margin: 5px;
+	cursor: pointer;
 }
 
+.vertical_dots {
+	margin: 5px;
+}
 
 .popover_content {
 	:global {
@@ -97,21 +94,18 @@
 	}
 }
 
+.eta_etd_form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-top: 40px;
+}
 
-.eta_etd_form{
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 40px;
-}
-.eta_form,
-.etd_form{
-}
-.port_name_form{
-  font-size: 14px;
-  font-weight: 500;
-  color: #221f20;
-  margin-left: -15px;
-  width: 200px;
-  padding: 10px;
+.port_name_form {
+	width: 200px;
+	padding: 10px;
+	margin-left: -15px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
 }
