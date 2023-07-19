@@ -20,7 +20,7 @@ function AwbInventoryStockReport({
 	setFilterData,
 }) {
 	const [filter, setFilter] = useState({});
-	const cc = controls(setFilter);
+	const inventory_stock_controls = controls(setFilter);
 	const { fields } = AwbInventoryStockReportFields;
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ function AwbInventoryStockReport({
 			</header>
 
 			<Layout
-				fields={cc}
+				fields={inventory_stock_controls}
 				control={control}
 				errors={errors}
 			/>

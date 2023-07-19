@@ -59,7 +59,7 @@ function Item({
 						{...props}
 						rules={rules}
 						control={control}
-						className={cl`element_ui`}
+						className="element_ui"
 					/>
 				</>
 			)}

@@ -40,7 +40,7 @@ export const functions = {
 	handleAirport: (singleItem) => {
 		const { originAirport, originAirportCode } = singleItem || {};
 		return (
-			`(${originAirportCode || '-'}) ${originAirport || '-'}`
+			`(${originAirportCode}) ${originAirport}`
 		) || '-';
 	},
 	handleDestLocation: (singleItem) => {

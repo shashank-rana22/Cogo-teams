@@ -22,7 +22,6 @@ const useEditAwbNumber = ({
 	page,
 	changedStatus,
 }) => {
-	console.log('item', item);
 	const { id = '' } = item;
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_awb_inventory',

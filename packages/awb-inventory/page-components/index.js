@@ -15,7 +15,7 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 const { START_PAGE } = CONSTANTS;
-const status_value = [
+const STATUS_VALUE = [
 	{ label: 'Available(Non-reserved)', value: 'available_non_reserved' },
 	{ label: 'Available(Reserved)', value: 'available_reserved' },
 	{ label: 'Cancelled', value: 'cancelled' },
@@ -103,7 +103,7 @@ function AwbInventory() {
 												setFinalList([]);
 											}}
 											placeholder="Select here..."
-											options={status_value}
+											options={STATUS_VALUE}
 											style={{ width: '250px', margin: '10px' }}
 											size="sm"
 										/>

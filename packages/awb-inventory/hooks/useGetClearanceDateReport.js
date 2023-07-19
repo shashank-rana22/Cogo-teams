@@ -14,7 +14,13 @@ const useGetClearanceDateReport = ({ activeTab }) => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequestAir('/air-coe/awb-inventory/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequestAir(
+		{
+			url    : '/air-coe/awb-inventory/list',
+			method : 'GET',
+		},
+		{ manual: true },
+	);
 
 	const clearanceDateReport = useCallback(() => {
 		(async () => {

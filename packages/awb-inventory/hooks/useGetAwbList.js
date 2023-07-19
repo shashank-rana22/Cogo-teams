@@ -6,7 +6,7 @@ import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
 
-const useGetAwbList = ({ activeTab, value }) => {
+const useGetAwbList = ({ activeTab, value = 'available_non_reserved' }) => {
 	const [page, setPage] = useState(START_PAGE);
 	const [finalList, setFinalList] = useState([]);
 	const [qfilter, setQfilter] = useState('');
@@ -14,7 +14,13 @@ const useGetAwbList = ({ activeTab, value }) => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequestAir('/air-coe/awb-inventory/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequestAir(
+		{
+			url    : '/air-coe/awb-inventory/list',
+			method : 'GET',
+		},
+		{ manual: true },
+	);
 
 	const awbList = useCallback(() => {
 		(async () => {

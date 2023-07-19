@@ -1,7 +1,7 @@
 .stock_report_container {
 	:global {
 		.layout_ui {
-			background: white;
+			background: var(--color-secondary-5);
 		}
 
 		.row_ui {
@@ -22,7 +22,7 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: 8px;
-	background: white;
+	background: var(--color-secondary-5);
 }
 
 .heading {
@@ -37,5 +37,5 @@
 	width: 100px;
 	height: 4px;
 	content: "";
-	background: #ed3726;
+	background: var(--color-primary-error-red-2);
 }

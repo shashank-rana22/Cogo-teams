@@ -15,7 +15,10 @@ const useGetInventoryStock = ({ activeTab, filterData }) => {
 	const { control, formState:{ errors } } = formProps;
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
-		'/air-coe/awb-inventory/list-awb-inventory-stock',
+		{
+			url    : '/air-coe/awb-inventory/list-awb-inventory-stock',
+			method : 'GET',
+		},
 		{ manual: true },
 	);
 

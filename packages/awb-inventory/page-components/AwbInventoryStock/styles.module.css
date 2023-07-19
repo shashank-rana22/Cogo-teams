@@ -14,7 +14,7 @@
 	height: 32px !important;
 
 	:global(.ui_input_control) {
-		font-size: 12px !important;
+		font-size: var(--font-size-md) !important;
 	}
 
 	:global(.ui_input_suffix) {
