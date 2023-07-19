@@ -1,6 +1,6 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button, Modal, Skeleton } from '@cogoport/components';
+import { Button, Modal, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -17,7 +17,7 @@ import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const SHOW_CONTENT = 'Please Revert Rate First';
-const NUMBER_OF_SKELETON = 6;
+const NUMBER_OF_PLACEHOLDER = 6;
 const LIST_PREFERENCE_RATE_STEP = 1;
 const CONFIRM_PREFERENCE_STEP = 2;
 function SelectRate({
@@ -123,13 +123,13 @@ function SelectRate({
 						<>
 							<div>
 								{loading ? (
-									<div className={styles.skeleton_wrap}>
-										{Array.from(Array(NUMBER_OF_SKELETON).keys()).map((index) => (
-											<Skeleton
+									<div className={styles.placeholder_wrap}>
+										{Array.from(Array(NUMBER_OF_PLACEHOLDER).keys()).map((index) => (
+											<Placeholder
 												key={index}
 												width="100%"
 												height="20px"
-												style={{ marginBottom: '10px' }}
+												margin="0px 0px 20px 0px"
 											/>
 										))}
 									</div>
