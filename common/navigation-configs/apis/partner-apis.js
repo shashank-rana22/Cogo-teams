@@ -12240,6 +12240,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'create_shipment_document',
 			access_type  : 'private',
 			service_name : 'shipment',

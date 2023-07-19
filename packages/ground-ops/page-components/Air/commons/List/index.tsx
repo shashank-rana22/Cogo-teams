@@ -1,6 +1,9 @@
 import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import React, { useState, ReactFragment } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, ReactFragment, useEffect } from 'react';
+
+import useGetUsers from '../../hooks/useGetUsers';
 
 import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
@@ -29,9 +32,9 @@ function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
+	page = 1,
+	setPage = () => {},
+	functions = {},
 	activeTab = '',
 	Child = () => {},
 	setViewDoc = () => {},
@@ -42,8 +45,30 @@ function List({
 	setGenerate = () => {},
 } :Props) {
 	const { data = {} } = listData;
-	const { shipmentPendingTasks = [] } = data;
+	const { stakeholderIds = [], shipmentPendingTasks = [] } = data;
 	const [isOpen, setIsOpen] = useState(null);
+
+	const { data: userData = {}, listUsers } = useGetUsers({ stakeholderIds });
+
+	const { list: userList = [] } = userData;
+
+	useEffect(() => {
+		listUsers();
+	}, [listUsers]);
+
+	const FINAL_DATA = [];
+	(userList || []).forEach((item) => {
+		(shipmentPendingTasks || []).map((itm) => {
+			if (item.user_id === itm.stakeholderId) {
+				const pushData = {
+					...itm,
+					stakeholderName: item.name,
+				};
+				FINAL_DATA.push(pushData);
+			}
+			return FINAL_DATA;
+		});
+	});
 
 	const handleProgramDetail = (itm) => {
 		setIsOpen(isOpen === null ? itm.id : null);
@@ -52,10 +77,11 @@ function List({
 
 	const render = () => {
 		type TypeObject = string | number | Date | null | React.FC ;
-		const showlist:TypeObject = shipmentPendingTasks.length ? shipmentPendingTasks : Array(6).fill(1);
+		const finalList = isEmpty(FINAL_DATA) ? shipmentPendingTasks : FINAL_DATA;
+		const showlist:TypeObject = finalList.length ? finalList : Array(6).fill(1);
 
-		if (loading || shipmentPendingTasks.length) {
-			return (showlist).map((singleitem) => (
+		if (loading || finalList.length) {
+			return (FINAL_DATA || showlist).map((singleitem) => (
 				<div className="card-list-data" key={singleitem.id}>
 					<ListItem
 						singleitem={singleitem}
@@ -137,7 +163,7 @@ function List({
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
 				{render()}
-				{!loading && shipmentPendingTasks.length > 0 ? (
+				{!loading && !isEmpty(shipmentPendingTasks) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

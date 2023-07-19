@@ -13,6 +13,12 @@ const AmendmentFields = {
 			func  : 'handleBlCategory',
 		},
 		{
+			key   : 'stakeholder',
+			label : 'Stakeholder',
+			span  : 3,
+			func  : 'handleStakeholder',
+		},
+		{
 			key   : 'awbNumber',
 			label : 'AWB',
 			span  : 3,
