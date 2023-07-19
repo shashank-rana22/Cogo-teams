@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 
 function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
+
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
 	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);

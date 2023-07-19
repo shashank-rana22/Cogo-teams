@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -52,7 +52,7 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		>
 			<div>
 				<div className={styles.header}>
-					<div className={styles.business_name}>{business_name}</div>
+					<div className={styles.business_name}>{startCase(business_name)}</div>
 					<div>
 						{isEmpty(poc_data)
 							? (
