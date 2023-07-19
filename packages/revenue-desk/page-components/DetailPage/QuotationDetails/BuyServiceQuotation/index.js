@@ -6,9 +6,7 @@ import { DECIMAL_PLACES, PERCENTAGE_CHECK, TOTAL_PERCENT } from '../../../consta
 
 import styles from './styles.module.css';
 
-const BASE_INDEX = 0;
-
-function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemData }) {
+function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemData, servicesList }) {
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
 		{ Header: 'Services Charge', accessor: 'total_price_discounted' },
@@ -18,10 +16,10 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
 		.map(
-			({ service_type, total_price, source, currency, informations }) => ({
-				service_type: service_type.includes('local')
-					? `${startCase(service_type)} (${informations?.[BASE_INDEX]?.category.split('_')[BASE_INDEX]})`
-					: startCase(service_type),
+			({ service_type, total_price, source, currency, service_id }) => ({
+				service_type: `${startCase(service_type)} (${(servicesList || [])
+					.find((service) => service?.id === service_id)?.trade_type === 'export'
+					? 'Origin' : 'Destination'})`,
 				total_price_discounted: formatAmount({
 					amount  : total_price,
 					currency,

@@ -116,6 +116,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 									itemData={itemData}
 									setPriceData={setPriceData}
 									priceData={priceData}
+									servicesList={shipment_services}
 								/>
 								<div
 									role="presentation"

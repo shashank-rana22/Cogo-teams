@@ -6,7 +6,7 @@ import BuyServiceQuotation from './BuyServiceQuotation';
 import SellServiceQuotation from './SellServiceQuotation';
 import styles from './styles.module.css';
 
-function QuotationDetails({ itemData, setPriceData, priceData }) {
+function QuotationDetails({ itemData, setPriceData, priceData, servicesList }) {
 	const { data:SellData, loading } = useGetShipmentQuotation({ shipmentData: itemData });
 	const { data:BuyData, loading:BuyLoading } = useGetBuyQuotation({ shipmentData: itemData });
 	const totalBuyPrice = BuyData?.net_pre_tax_total;
@@ -27,6 +27,7 @@ function QuotationDetails({ itemData, setPriceData, priceData }) {
 					profitAmount={profitAmount}
 					profitCurrency={profitCurrency}
 					itemData={itemData}
+					servicesList={servicesList}
 				/>
 			</div>
 			<div>
@@ -36,6 +37,7 @@ function QuotationDetails({ itemData, setPriceData, priceData }) {
 					profitPercentage={profitPercentage}
 					priceData={priceData}
 					itemData={itemData}
+					servicesList={servicesList}
 				/>
 			</div>
 

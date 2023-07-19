@@ -3,11 +3,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { DEFAULT_INDEX, PERCENTAGE_CHECK } from '../../../constants';
+import { PERCENTAGE_CHECK } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profitCurrency, itemData }) {
+function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profitCurrency, itemData, servicesList }) {
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
 		{ Header: 'Services Charge', accessor: 'total_price_discounted' },
@@ -16,10 +16,10 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 	const service_charges = data?.service_charges || [];
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
-		.map(({ service_type, total_price_discounted, source, currency, service_id, informations }) => ({
-			service_type: (service_type.includes('local'))
-				? `${startCase(service_type)} (${informations?.[DEFAULT_INDEX]?.category.split('_')[DEFAULT_INDEX]})`
-				: startCase(service_type),
+		.map(({ service_type, total_price_discounted, source, currency, service_id }) => ({
+			service_type: `${startCase(service_type)} (${(servicesList || [])
+				.find((service) => service?.id === service_id)?.trade_type === 'export'
+				? 'Origin' : 'Destination'})`,
 			total_price_discounted: formatAmount({
 				amount  : total_price_discounted,
 				currency,
