@@ -6,8 +6,8 @@ import { serviceMappings } from '../../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../../configs/incoterms.json';
 import useSpotSearchService from '../../hooks/useCreateSpotSearchService';
 
+import { getFclPayload } from './configs';
 import styles from './styles.module.css';
-import getPayload from './utils/getPayload';
 
 const getServiceName = (service) => {
 	const { trade_type = '', service_type = '' } = service || {};
@@ -39,7 +39,7 @@ function AdditionalServices({ // used in search results and checkout
 
 	const handleAddServices = async (serviceItem) => {
 		if (!serviceItem.controls.length) {
-			const payload = getPayload({
+			const payload = getFclPayload({
 				rateCardData,
 				detail,
 				additionalFormInfo : {},
