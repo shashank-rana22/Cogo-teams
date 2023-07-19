@@ -12,12 +12,10 @@ import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-const excludedServices = [
-	'fcl_freight_local_service',
-	'lcl_freight_local_service',
-	'air_freight_local_service',
-	'subsidiary_service',
-];
+const included_services = ['fcl_freight_service',
+	'air_freight_service', 'lcl_freight_service', 'fcl_customs_service',
+	'air_customs_service', 'lcl_customs_service', 'haulage_freight_service',
+	'ftl_freight_service', 'ltl_freight_service', 'fcl_cfs_service'];
 
 function ServiceWiseDetails({
 	serviceData,
@@ -29,7 +27,7 @@ function ServiceWiseDetails({
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const GROUPED_SERVICES = {};
 	serviceData.forEach((service) => {
-		if (!excludedServices.includes(service.service_type)) {
+		if (included_services.includes(service.service_type)) {
 			GROUPED_SERVICES[service.service_type] = [
 				...(GROUPED_SERVICES[service.service_type] || []),
 				service,
