@@ -41,6 +41,8 @@ function AwbInventoryStock() {
 		errors,
 	} = useGetInventoryStock({ activeTab, filterData });
 
+	const { totalRecords:totalRecordsInventoryStock } = data;
+
 	const {
 		loading: ClearanceReportLoading,
 		setPage: ClearanceReportSetPage,
@@ -54,6 +56,8 @@ function AwbInventoryStock() {
 		qfilter,
 		setQfilter,
 	} = useGetClearanceDateReport({ activeTab });
+
+	const { totalRecords:totalRecordsClearanceDateReport } = ClearanceReportData;
 
 	return (
 		<div>
@@ -73,6 +77,9 @@ function AwbInventoryStock() {
 							key={name}
 							name={name}
 							title={title}
+							badge={name === 'inventory_stock'
+								? totalRecordsInventoryStock
+								: totalRecordsClearanceDateReport}
 						>
 							<div className={styles.filters_container}>
 								{activeTab === 'clearance_date_confirmation' && (
