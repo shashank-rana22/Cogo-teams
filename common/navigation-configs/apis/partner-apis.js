@@ -9185,6 +9185,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 
 		{
 			api          : 'list_partner_users',
@@ -9195,6 +9200,11 @@ const partner = {
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipment_collection_party',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 
@@ -13019,6 +13029,74 @@ const partner = {
 			api          : 'list_shipment_pending_tasks',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+	],
+	printing_desk: [
+		{
+			api         : 'get_air_coe_pending_tasks_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_documents_weight_amend',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_document_copy_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_document_copy',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_pending_tasks_amend_list',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_rate_charge_codes',
+			access_type  : 'private',
+			service_name : 'rate_sheet',
 		},
 	],
 };
