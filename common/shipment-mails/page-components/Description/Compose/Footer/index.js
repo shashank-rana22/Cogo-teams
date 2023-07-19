@@ -48,7 +48,7 @@ function Footer({
 		buttonText = 'Forward';
 	}
 
-	const sendMail = async (data) => {
+	const sendMail = async () => {
 		const payload = {
 			sender        : COMPOSE_EMAIL || '',
 			toUserEmail   : userEmailArray || [],
