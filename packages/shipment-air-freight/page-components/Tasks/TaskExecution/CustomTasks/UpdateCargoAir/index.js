@@ -92,7 +92,6 @@ function UpdateCargoAir({
 			controls={controls}
 			setValue={setValue}
 			primary_service={primary_service}
-			disabled={disabled}
 			setDisabled={setDisabled}
 			control={control}
 		/>

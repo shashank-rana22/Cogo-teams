@@ -106,7 +106,7 @@ function ConfirmCargoAirModal({
 			}
 		}
 		setValue('movement', newStopsValue);
-	}, [JSON.stringify(noOfStops)]);
+	}, noOfStops);
 
 	const render = () => {
 		if (agent === 'true') {

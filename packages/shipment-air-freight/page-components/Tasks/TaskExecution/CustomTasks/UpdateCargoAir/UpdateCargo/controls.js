@@ -8,7 +8,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		name       : 'no_of_stops',
 		type       : 'select',
 		span       : 4,
-		className  : 'primary lg',
 		value      : '0',
 		isEditable : true,
 		disabled   : (Number(noOfStops) < ONE_STOP && !disabled),
@@ -31,7 +30,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		type        : 'location-select',
 		span        : 4,
 		placeholder : 'Select Origin Airport',
-		className   : 'primary lg',
 		disabled    : !!(
 			mainService?.[GLOBAL_CONSTANTS.zeroth_index]?.origin_airport_id
 				|| primary_service?.origin_airport_id
@@ -55,7 +53,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				|| primary_service?.destination_airport_id,
 		span        : 4,
 		placeholder : 'Select Destination Airport',
-		className   : 'primary lg',
 		params      : {
 			filter: {
 				type: ['airport'],
@@ -79,7 +76,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		placeholder           : 'Select Flight Departure Date',
 		type                  : 'datepicker',
 		span                  : 4,
-		className             : 'primary lg validity',
 		disabled              : (Number(noOfStops) < ONE_STOP && !disabled),
 		isPreviousDaysAllowed : true,
 		rules                 : {
@@ -97,8 +93,7 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		type                  : 'datepicker',
 		span                  : 4,
 		isPreviousDaysAllowed : true,
-		className             : 'primary lg validity',
-		disabled              : !!(Number(noOfStops) < ONE_STOP && !disabled),
+		disabled              : (Number(noOfStops) < ONE_STOP && !disabled),
 		rules                 : {
 			required: true,
 		},
@@ -110,8 +105,7 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 		type        : 'text',
 		span        : 4,
 		value       : mainService?.[GLOBAL_CONSTANTS.zeroth_index]?.flight_number,
-		className   : 'primary lg',
-		disabled    : !!(Number(noOfStops) < ONE_STOP && !disabled),
+		disabled    : (Number(noOfStops) < ONE_STOP && !disabled),
 		rules       : {
 			required: 'Flight Number is Required',
 		},
@@ -131,7 +125,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				placeholder    : 'Select Origin Airport',
 				type           : 'location-select',
 				span           : 4,
-				className      : 'primary lg',
 				params         : {
 					filters: {
 						type: ['airport'],
@@ -148,7 +141,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				placeholder    : 'Select Destination Airport',
 				type           : 'location-select',
 				span           : 4,
-				className      : 'primary lg',
 				params         : {
 					filters: {
 						type: ['airport'],
@@ -159,8 +151,7 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				},
 			},
 			{
-				span      : 4,
-				className : 'primary lg',
+				span: 4,
 			},
 			{
 				label                 : 'Flight Departure',
@@ -169,7 +160,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				type                  : 'datepicker',
 				span                  : 4,
 				isPreviousDaysAllowed : true,
-				className             : 'primary lg validity',
 				rules                 : {
 					required: true,
 				},
@@ -181,7 +171,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				type                  : 'datepicker',
 				span                  : 4,
 				isPreviousDaysAllowed : true,
-				className             : 'primary lg validity',
 				rules                 : {
 					required: true,
 				},
@@ -192,7 +181,6 @@ const controls = (primary_service, mainService, noOfStops, disabled) => [
 				placeholder : 'Input Flight Number',
 				type        : 'text',
 				span        : 4,
-				className   : 'primary lg',
 				rules       : {
 					required: true,
 				},

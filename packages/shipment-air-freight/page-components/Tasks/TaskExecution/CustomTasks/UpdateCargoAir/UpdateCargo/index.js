@@ -1,5 +1,5 @@
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit as EditSvg } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
@@ -29,7 +29,6 @@ function UpdateCargo({
 	watch = () => {},
 	controls = {},
 	setValue = () => {},
-	disabled = false,
 	setDisabled = () => {},
 	control = {},
 }) {
@@ -54,7 +53,7 @@ function UpdateCargo({
 	useEffect(() => {
 		const movementDetails = watch('movement');
 		let movementValue = [];
-		const STOP_DETAIL = {
+		const MOVEMENT_DETAILS = {
 			from_airport_id    : '',
 			to_airport_id      : '',
 			schedule_departure : null,
@@ -65,10 +64,10 @@ function UpdateCargo({
 			if (!noOfStops) {
 				movementValue = [];
 			} else if (noOfStops) {
-				for (let i = 0; i <= noOfStops; i += INCREMENT_STOPS_BY_ONE) {
+				Array.from({ length: noOfStops + INCREMENT_STOPS_BY_ONE }).forEach((_, i) => {
 					if (services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details) {
 						movementValue.push({
-							...STOP_DETAIL,
+							...MOVEMENT_DETAILS,
 							from_airport_id:
 								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.from_airport_id
                                 || undefined,
@@ -87,10 +86,10 @@ function UpdateCargo({
 						});
 					} else {
 						movementValue.push({
-							...STOP_DETAIL,
+							...MOVEMENT_DETAILS,
 						});
 					}
-				}
+				});
 			} else {
 				movementValue = movementDetails?.slice(ZERO_STOPS, noOfStops + INCREMENT_STOPS_BY_ONE);
 			}
@@ -130,7 +129,7 @@ function UpdateCargo({
 						</div>
 					</div>
 					<div>
-						<div className={styles.layout_div}>
+						<div>
 							<Layout
 								fields={MOVEMENT_CONTROLS}
 								control={control}
@@ -145,7 +144,7 @@ function UpdateCargo({
 	};
 
 	return (
-		<div className={cl`${styles.container} ${!disabled && 'notDisabled'}`}>
+		<div className={styles.container}>
 			<div>
 				{render()}
 				<div className={styles.button}>

@@ -37,7 +37,7 @@ const useUpdatePendingTask = ({
 			data: {
 				movement_details     : FORMAT_MOVEMENT_DETAILS,
 				flight_number        : noOfStops > ZERO_STOPS ? undefined : data?.flight_number,
-				number_of_stops      : data?.no_of_stops1 || ZERO_STOPS,
+				number_of_stops      : data?.no_of_stops || ZERO_STOPS,
 				cargo_readiness_date : data?.cargo_ready_date,
 				schedule_arrival     : data?.flight_arrival,
 				schedule_departure   : data?.flight_departure,
@@ -48,27 +48,19 @@ const useUpdatePendingTask = ({
 			service_type        : task?.service_type,
 		};
 		try {
-			const res = await updateServiceTrigger({
+			await updateServiceTrigger({
 				data: payloadForUpdateShipment,
 			});
 
-			if (!res?.hasError) {
-				const response = await updatePendingTaskTrigger({
-					data: {
-						id: task.id,
-					},
-				});
-				if (!response.hasError) {
-					Toast.success('Task Updated Successfully !');
-					refetch();
-					onCancel();
-					timeLineRefetch();
-				} else {
-					Toast.error('Something went wrong !');
-				}
-			} else {
-				Toast.error(JSON.stringify(res?.data));
-			}
+			await updatePendingTaskTrigger({
+				data: {
+					id: task.id,
+				},
+			});
+			Toast.success('Task Updated Successfully !');
+			refetch();
+			onCancel();
+			timeLineRefetch();
 		} catch (err) {
 			Toast.error(err?.data?.base);
 		}
