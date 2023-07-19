@@ -1,11 +1,10 @@
 import { TabPanel, Tabs, Loader } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
 
 import HeaderComponent from './HeaderComponent';
 import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import styles from './styles.module.css';
 
-const TABS_MAPPING = ['vertical_head', 'functional_manager'];
+const TABS_MAPPING = { vertical_head: 'Across All', functional_manager: 'Team View' };
 
 function PerformanceRatingReview() {
 	const props = useGetEmployeeLevels();
@@ -34,11 +33,11 @@ function PerformanceRatingReview() {
 						onChange={setActiveTab}
 					>
 						{
-							TABS_MAPPING.map((tab) => (
-								<TabPanel name={tab} title={startCase(tab)} key={tab}>
-									<HeaderComponent props={props} key={tab} />
-								</TabPanel>
-							))
+						Object.keys(TABS_MAPPING).map((tab) => (
+							<TabPanel name={tab} title={TABS_MAPPING[tab]} key={tab}>
+								<HeaderComponent props={props} key={tab} />
+							</TabPanel>
+						))
 						}
 					</Tabs>
 				) : <HeaderComponent props={props} />
