@@ -66,7 +66,7 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType, loading:workPrefernceLoading = false } = useAgentWorkPrefernce();
+	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
 
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();

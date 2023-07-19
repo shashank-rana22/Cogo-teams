@@ -40,6 +40,7 @@ function OrgUsers({
 						setActiveTab={setActiveTab}
 						setOpenKamContacts={setOpenKamContacts}
 						setOrgId={setOrgId}
+						key={orgId}
 					/>
 				</div>
 			</Modal.Body>

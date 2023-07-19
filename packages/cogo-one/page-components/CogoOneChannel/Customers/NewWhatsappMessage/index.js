@@ -18,7 +18,7 @@ function NewWhatsappMessage({
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
-	const { type = '', data:modalData = {}, userName = '' } = modalType || {};
+	const { type = '', data: modalData = {}, userName = '' } = modalType || {};
 	const geo = getGeoConstants();
 
 	const [dialNumber, setDialNumber] = useState(PREFILL_CALL_DATA.includes(type) ? modalData : {
@@ -30,7 +30,7 @@ function NewWhatsappMessage({
 		setModalType({ type: null, data: {} });
 		setDialNumber({
 			number       : '',
-			country_code : '+91',
+			country_code : geo.country.mobile_country_code,
 		});
 	};
 

@@ -8,7 +8,10 @@ function MessageComponent(props = {}) {
 	const Component = hasNoFireBaseRoom ? NewUserRoom : Messages;
 
 	return (
-		<Component {...props} />
+		<Component
+			{...props}
+			key={hasNoFireBaseRoom}
+		/>
 	);
 }
 export default MessageComponent;

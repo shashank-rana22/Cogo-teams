@@ -6,7 +6,7 @@ import {
 } from 'firebase/firestore';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const FIRST_DOC = 1;
+const DOCS_LIMIT = 1;
 
 const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, firestore = {} }) => {
 	const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, fire
 			collectionGroup(firestore, 'rooms'),
 			where('user_id', '==', user_id),
 			where('channel_type', '==', 'whatsapp'),
-			limit(FIRST_DOC),
+			limit(DOCS_LIMIT),
 		);
 
 		try {

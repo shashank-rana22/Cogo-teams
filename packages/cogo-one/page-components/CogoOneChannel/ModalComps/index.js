@@ -1,7 +1,8 @@
 import RaiseTicket from '../../../common/RaiseTicket';
 import FeedbackModal from '../FeedbackModal';
-import OrgUsers from '../OrgUsers';
 import ReminderModal from '../ReminderModal';
+
+import OrgUsers from './OrgUsers';
 
 function ModalComp({
 	raiseTicketModal = {},

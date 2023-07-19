@@ -41,10 +41,6 @@ const useListOrganizationUsers = ({ organizationId }) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	useEffect(() => {
-		setSearch('');
-	}, [organizationId]);
-
 	return {
 		formattedOrgUsersList: organizationId ? formatOrganizationUsers({ data }) : [],
 		loading,

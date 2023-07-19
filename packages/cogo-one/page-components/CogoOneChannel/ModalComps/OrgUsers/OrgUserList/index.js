@@ -2,8 +2,8 @@ import { Placeholder, Input } from '@cogoport/components';
 import { IcMSearchdark, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import UserAvatar from '../../../../common/UserAvatar';
-import useListOrganizationUsers from '../../../../hooks/useListOrganizationUsers';
+import UserAvatar from '../../../../../common/UserAvatar';
+import useListOrganizationUsers from '../../../../../hooks/useListOrganizationUsers';
 
 import styles from './styles.module.css';
 
@@ -33,8 +33,8 @@ function OrgUsersList({
 			mobile_no,
 		} = item || {};
 
-		setActiveTab((p) => ({
-			...p,
+		setActiveTab((prev) => ({
+			...prev,
 			hasNoFireBaseRoom : true,
 			data              : {
 				organization_id,
@@ -68,7 +68,7 @@ function OrgUsersList({
 			<div className={styles.input_container}>
 				<Input
 					placeholder="search by name..."
-					onChange={(e) => setSearch(e)}
+					onChange={setSearch}
 					value={search}
 					className={styles.input_styles}
 					size="sm"
