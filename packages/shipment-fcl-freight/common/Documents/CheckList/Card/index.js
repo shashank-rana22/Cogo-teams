@@ -8,13 +8,16 @@ import Content from './Content';
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
 
 const Card = ({
-	taskList,
-	completedDocs,
-	emailDocs,
-	shipment_data,
-	primary_service,
-	setShowDoc,
-	setShowApproved,
+	taskList = [],
+	completedDocs = [],
+	emailDocs = [],
+	shipment_data = {},
+	primary_service = {},
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
+	bl_details = [],
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -59,6 +62,9 @@ const Card = ({
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					shipmentDocumentRefetch={shipmentDocumentRefetch}
+					activeStakeholder={activeStakeholder}
+					bl_details={bl_details}
 				/>
 			);
 		});

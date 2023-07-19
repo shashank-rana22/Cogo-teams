@@ -10,10 +10,8 @@ export default function getControls({
 	shipment_type,
 	documents,
 	isAdditional,
-	trade_type,
-	payment_term,
 }) {
-	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
+	const { service_provider, service_type } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
 	const serviceType = serviceObj?.service_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
@@ -23,11 +21,6 @@ export default function getControls({
 	if (primary_service?.service_type !== service_type) {
 		services = [shipmentType, serviceType];
 	}
-
-	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
-		? [{ label: 'Mbl', value: 'mbl' },
-			{ label: 'Hbl', value: 'hbl' }]
-		: [{ label: 'Hbl', value: 'hbl' }];
 
 	const controls = [
 		{
@@ -42,33 +35,11 @@ export default function getControls({
 					kyc_status   : 'verified',
 					service      : services.length !== SPLIT_SECOND_PARAMETER
 						? serviceType : services,
+					status: 'active',
 				},
 			},
 			size  : 'sm',
 			rules : { required: 'Service Provider is required' },
-		},
-		{
-			name        : 'bls_count',
-			label       : 'BL Count',
-			type        : 'number',
-			placeholder : 'Enter BL Count',
-			size        : 'sm',
-			rules       : {
-				required : 'BL Count required',
-				min      : {
-					value   : 1,
-					message : 'BL count cannot be less than 0',
-				},
-			},
-		},
-		{
-			name        : 'bl_category',
-			label       : 'BL Category',
-			type        : 'select',
-			options     : blCategoryOptions,
-			placeholder : 'Enter Bl Category',
-			size        : 'sm',
-			rules       : { required: 'BL Category is required' },
 		},
 	];
 
@@ -78,10 +49,6 @@ export default function getControls({
 		controls      : showControls,
 		defaultValues : {
 			service_provider_id: service_provider?.id,
-			...(showAllControls ? {
-				bls_count,
-				bl_category,
-			} : {}),
 		},
 		showAllControls,
 	};

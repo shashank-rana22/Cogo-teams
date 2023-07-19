@@ -1,6 +1,5 @@
 .search {
-	width: 30%;
-	margin-bottom: 10px;
+	width: 40%;
 }
 
 .pagination {
@@ -10,12 +9,13 @@
 
 .modal_body {
 	height: 464px;
+	padding: 8px;
 }
 
 .search_switch_toggle_space {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 }
 
 .empty_state {
@@ -25,4 +25,19 @@
 	height: 100%;
 	font-size: 16px;
 	text-align: center;
+}
+
+.header_filters {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.select_styles {
+	width: 40%;
+	margin-left: 30px;
+}
+
+.footer_styles {
+	min-height: 48px;
 }
