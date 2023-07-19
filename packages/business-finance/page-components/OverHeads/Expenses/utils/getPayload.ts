@@ -54,6 +54,7 @@ const getPayload = ({
 	expenseConfigurationId,
 	remarks,
 	categoryName,
+	incidentMangementId,
 }) => {
 	const lineItemsData = (lineItemsList || []).map((lineItem: any) => {
 		if (lineItem?.tax) {
@@ -209,15 +210,17 @@ const getPayload = ({
 			userId    : stakeholderId,
 			userName  : stakeholderName,
 		},
+		incidentApprovalManagementId : incidentMangementId,
 		expenseType,
 		branchName,
 		categoryName,
-		branchId  : addressData?.branchId,
-		kycStatus : kycStatus?.toUpperCase(),
-		pan       : vendorRegistrationNumber,
+		incidentSubType              : categoryName,
+		branchId                     : addressData?.branchId,
+		kycStatus                    : kycStatus?.toUpperCase(),
+		pan                          : vendorRegistrationNumber,
 		remarks,
-		documents : uploadedInvoice,
-		createdBy : profile?.user?.id,
+		documents                    : uploadedInvoice,
+		createdBy                    : profile?.user?.id,
 	};
 };
 

@@ -89,6 +89,7 @@ function CreateExpenseForm({
 						<RecurringSummary
 							recurringData={recurringData}
 							setRecurringData={setRecurringData}
+							setIncidentMangementId={setIncidentMangementId}
 						/>
 					)}
 				</div>

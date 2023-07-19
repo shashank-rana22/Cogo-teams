@@ -47,6 +47,7 @@ function MailTemplate({
 		formData: mailData,
 		setShowModal,
 		getList,
+		incidentMangementId,
 	});
 	const { createRecurring, recurringLoading } = useCreateExpenseConfig({
 		mailData,

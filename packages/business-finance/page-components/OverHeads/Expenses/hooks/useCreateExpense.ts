@@ -16,7 +16,12 @@ interface AddressInterface {
 	branchId?: number | string;
 }
 
-const useCreateExpense = ({ formData, setShowModal, getList }) => {
+const useCreateExpense = ({
+	formData,
+	setShowModal,
+	getList,
+	incidentMangementId,
+}) => {
 	const [addressData, setAddressData] = useState<AddressInterface>({});
 	const { profile } = useSelector((state: any) => state);
 
@@ -178,6 +183,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		expenseConfigurationId : null,
 		remarks,
 		categoryName,
+		incidentMangementId,
 	});
 
 	const submitData = async () => {

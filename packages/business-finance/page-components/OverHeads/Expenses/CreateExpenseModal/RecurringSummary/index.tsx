@@ -48,11 +48,13 @@ interface Data {
 interface Props {
 	recurringData?: Data;
 	setRecurringData?: (p: any) => void;
+	setIncidentMangementId?: (val) => void;
 }
 
 function RecurringSummary({
 	recurringData = {},
 	setRecurringData = () => {},
+	setIncidentMangementId = () => {},
 }: Props) {
 	const {
 		vendorName,
@@ -69,7 +71,7 @@ function RecurringSummary({
 		categoryName,
 	} = recurringData || {};
 
-	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders({
+	const { stakeholdersData, loading: stakeholderLoading } =		useGetStakeholders({
 		incidentType    : 'OVERHEAD_APPROVAL',
 		entityId        : entityObject?.id,
 		incidentSubType : categoryName,
@@ -253,6 +255,10 @@ function RecurringSummary({
 			))}
 		</div>
 	);
+
+	useEffect(() => {
+		setIncidentMangementId(stakeholdersData?.id);
+	}, [stakeholdersData, setIncidentMangementId]);
 
 	return (
 		<div className={styles.container}>

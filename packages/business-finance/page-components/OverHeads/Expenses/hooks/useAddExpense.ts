@@ -24,6 +24,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		categoryId,
 		category: expenseCategory,
 		categoryName,
+		incidentApprovalManagementId,
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});
@@ -171,16 +172,17 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		vendorBusinessName,
 		vendorCountryId,
 		vendorRegistrationNumber,
-		expenseCategory : expenseCategory || categoryId,
+		expenseCategory     : expenseCategory || categoryId,
 		stakeholderEmail,
 		stakeholderId,
 		stakeholderName,
 		kycStatus,
 		lineItemsList,
-		expenseType     : 'RECURRING',
+		expenseType         : 'RECURRING',
 		expenseConfigurationId,
 		remarks,
 		categoryName,
+		incidentMangementId : incidentApprovalManagementId,
 	});
 
 	const submitData = async () => {
