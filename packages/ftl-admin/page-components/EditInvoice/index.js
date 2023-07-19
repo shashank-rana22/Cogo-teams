@@ -1,4 +1,4 @@
-import { Input, Modal, Button, cl } from '@cogoport/components';
+import { CreatableSelect, Modal, Button, Toast, cl } from '@cogoport/components';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import Loader from '../../common/Loader';
@@ -10,9 +10,59 @@ import { EditInvoiceIndex } from './context';
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
+const EDIT_INVOICE_REMARK_OPTIONS = [
+	{
+		label : 'Contracted rate is applicable on Quotation Booking',
+		value : 'Contracted rate is applicable on Quotation Booking',
+	},
+	{
+		label : 'Min Guarantee is based on Material Type & there is a change in Material Type',
+		value : 'Min Guarantee is based on Material Type & there is a change in Material Type',
+	},
+	{
+		label : 'Truck Type is updated',
+		value : 'Truck Type is updated',
+	},
+	{
+		label : 'Material Type is updated',
+		value : 'Material Type is updated',
+	},
+	{
+		label : 'Charged Weight is updated as per actual loading',
+		value : 'Charged Weight is updated as per actual loading',
+	},
+	{
+		label : 'Wrong Charge Code was selected during Checkout Quotation',
+		value : 'Wrong Charge Code was selected during Checkout Quotation',
+	},
+	{
+		label : 'Convenience Fee is to be removed from Checkout Quotation (Contracted Booking)',
+		value : 'Convenience Fee is to be removed from Checkout Quotation (Contracted Booking)',
+	},
+	{
+		label : 'Convenience Fee is to be removed from Checkout Quotation (Ad-hoc Booking)',
+		value : 'Convenience Fee is to be removed from Checkout Quotation (Ad-hoc Booking)',
+	},
+	{
+		label : 'Fuel Surcharge is to be removed from Checkout Quotation',
+		value : 'Fuel Surcharge is to be removed from Checkout Quotation',
+	},
+	{
+		label: `Only Freight 
+		Charge (inclusive of Convenience & Fuel Surcharges) is required by the Customer in 1 Sales Invoice`,
+		value: `Only Freight 
+		Charge (inclusive of Convenience & Fuel Surcharges) is required by the Customer in 1 Sales Invoice`,
+	},
+	{
+		label : 'Incidental Charges like loading & loading detention is to be added in 1 Sales Invoice',
+		value : 'Incidental Charges like loading & loading detention is to be added in 1 Sales Invoice',
+	},
+];
+
 function EditInvoice() {
 	const [selectedInvoices, setSelectedInvoices] = useState(new Map());
 	const [showModal, setShowModal] = useState(false);
+	const [remarks, setRemarks] = useState({});
 
 	const {
 		loading,
@@ -29,6 +79,12 @@ function EditInvoice() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		if (Object.values(remarks || {}).some((remark) => !remark)) {
+			Toast.error('Remarks are required');
+			return;
+		}
+
 		const val = new FormData(e?.target);
 		const payload = Array.from(val?.entries())?.reduce((acc, [invoiceId, remark]) => (
 			[...acc, {
@@ -57,7 +113,7 @@ function EditInvoice() {
 		udpateInvoices({
 			invoice_edit_remarks : payload,
 			edit_invoice         : false,
-		}, () => { getInvoices(); setShowModal(false); });
+		}, () => { getInvoices(); setShowModal(false); setRemarks({}); });
 	};
 
 	useEffect(() => {
@@ -78,7 +134,7 @@ function EditInvoice() {
 							data={invoices}
 							loading={loading}
 							setFilters={setFilters}
-							setShowModal={setShowModal}
+							setShowModal={(val) => { setShowModal(val); setRemarks({}); }}
 							handleDisableInvoices={handleDisableInvoices}
 						/>
 					</EditInvoiceIndex.Provider>
@@ -115,7 +171,17 @@ function EditInvoice() {
 										<span className={cl`${styles.invoice_id} ${styles.bold}`}>
 											{invoiceId?.split('@')?.pop()?.split('#')?.shift()}
 										</span>
-										<Input name={invoiceId} placeholder="Add remark ..." required />
+										<CreatableSelect
+											name={invoiceId}
+											options={EDIT_INVOICE_REMARK_OPTIONS}
+											style={{ width: '100%' }}
+											placeholder="Select Remark"
+											onChange={(e) => setRemarks(
+												{ ...remarks, [shipmentKey.split('@')?.pop()]: e },
+											)}
+											value={remarks[shipmentKey.split('@')?.pop()]}
+											required
+										/>
 									</div>
 								));
 								acc.push(row);
