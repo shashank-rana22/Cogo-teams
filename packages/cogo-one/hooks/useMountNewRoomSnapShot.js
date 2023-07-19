@@ -48,7 +48,7 @@ const useMountNewRoomSnapShot = ({ activeTab = {}, setActiveTab = () => {}, fire
 				setLoading(false);
 			});
 		} catch (e) {
-			console.log('e', e);
+			console.error('e', e);
 		}
 	}, [firestore, setActiveTab, user_id]);
 
