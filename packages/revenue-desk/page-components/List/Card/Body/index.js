@@ -8,15 +8,10 @@ import styles from './styles.module.css';
 
 function Body({ data }) {
 	let total_revert_count = 0;
-	if (['fcl_freight', 'fcl_customs', 'lcl_freight', ' lcl_customs'].includes(data?.shipment_type)) {
-		(data?.freight_services || [])?.forEach((element) => {
-			total_revert_count += Number(element?.revert_count);
-		});
-	} else {
-		(data?.[`${data?.shipment_type}_services`] || [])?.forEach((element) => {
-			total_revert_count += Number(element?.revert_count);
-		});
-	}
+
+	(data?.[`${data?.shipment_type}_services`] || [])?.forEach((element) => {
+		total_revert_count += Number(element?.revert_count);
+	});
 
 	return (
 		<div className={styles.container}>

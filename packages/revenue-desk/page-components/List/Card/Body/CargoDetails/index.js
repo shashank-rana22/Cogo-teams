@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function CargoDetails({ data }) {
 	const serviceMapping = {
 		air_freight : data?.air_freight_services,
-		fcl_freight : data?.freight_services,
+		fcl_freight : data?.fcl_freight_services,
 	};
 
 	const includeShipment = ['air_freight', 'fcl_freight'];
