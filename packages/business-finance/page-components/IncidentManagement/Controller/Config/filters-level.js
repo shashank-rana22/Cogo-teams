@@ -41,11 +41,11 @@ const controls = [
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'Recurring Expense Approval',
+				label : 'Expense Configuration Approval',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'NON Recurring Expense Approval',
+				label : 'Expense Approval',
 			},
 		],
 		rules: { required: 'Incident Type is required' },

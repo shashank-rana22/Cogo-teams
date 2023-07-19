@@ -36,9 +36,9 @@ const getElementController = (type) => {
 };
 
 function Form({ controls = () => { } }, ref) {
-	const { formState: { errors }, control, handleSubmit, watch } = useForm();
+	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm();
 
-	const finalControls = controls({ incidentType: watch('incidentType') });
+	const finalControls = controls({ incidentType: watch('incidentType'), setValue });
 
 	useImperativeHandle(ref, () => ({ formSubmit: handleSubmit, watch }));
 	return (

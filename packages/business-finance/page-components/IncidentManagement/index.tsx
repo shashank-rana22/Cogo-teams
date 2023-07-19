@@ -24,7 +24,7 @@ const tabs = [
 	},
 	{
 		key   : 'controller',
-		label : 'Controller',
+		label : 'Approval Management',
 	},
 ];
 

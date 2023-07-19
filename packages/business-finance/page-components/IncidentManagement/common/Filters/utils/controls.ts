@@ -44,11 +44,11 @@ export const requestControls = (isSettlementExecutive = false) => {
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'Recurring Expense Approval',
+				label : 'Expense Configuration Approval',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'NON Recurring Expense Approval',
+				label : 'Expense Approval',
 			},
 		];
 	}
@@ -128,8 +128,8 @@ export const remainControls = (isSettlementExecutive = false) => {
 				label : 'Payment Confirmation Approval',
 			},
 			{
-				value : 'RECURRRING_EXPENSE_APPROVAL',
-				label : 'Recurring EXpense Approval',
+				value : 'RECURRING_EXPENSE_APPROVAL',
+				label : 'EXPENSE APPROVAL',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',

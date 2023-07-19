@@ -1,4 +1,6 @@
-export const controls = ({ incidentType }) => [
+import { isEmpty } from '@cogoport/utils';
+
+export const controls = ({ incidentType, setValue = () => {} }) => [
 	{
 		name        : 'incidentType',
 		label       : 'Incident Type',
@@ -6,7 +8,10 @@ export const controls = ({ incidentType }) => [
 		placeholder : 'Select Incident Type',
 		isClearable : true,
 		span        : 6,
-		options     : [
+		onChange    : () => {
+			setValue('incidentSubtype', null);
+		},
+		options: [
 			{ value: 'TDS_APPROVAL', label: 'TDS Deviation' },
 			{ value: 'BANK_DETAIL_APPROVAL', label: 'Bank Account Add/Edit' },
 			{ value: 'SETTLEMENT_APPROVAL', label: 'Settlement' },
@@ -42,11 +47,11 @@ export const controls = ({ incidentType }) => [
 			},
 			{
 				value : 'RECURRING_EXPENSE_APPROVAL',
-				label : 'Recurring Expense Approval',
+				label : 'Expense Configuration Approval',
 			},
 			{
 				value : 'OVERHEAD_APPROVAL',
-				label : 'NON Recurring Expense Approval',
+				label : 'Expense Approval',
 			},
 		],
 		rules: { required: 'Incident Type is required' },
@@ -59,6 +64,7 @@ export const controls = ({ incidentType }) => [
 		span        : 5.5,
 		initialCall : true,
 		placeholder : 'Incident Subtype',
+		disabled    : isEmpty(incidentType),
 		params      : { incidentType: incidentType || undefined },
 		rules       : { required: 'Incident Subtype is required' },
 	},

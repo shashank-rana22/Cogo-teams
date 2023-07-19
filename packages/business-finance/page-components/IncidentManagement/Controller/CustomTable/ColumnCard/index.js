@@ -24,7 +24,9 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 		referenceId = '',
 		createdBy = {},
 	} = item || {};
-	const { update } = useUpdateLevel({ refetch, setShow, createdBy, referenceId, id });
+	const { update, createApi } = useUpdateLevel({ refetch, setShow, createdBy, referenceId, id });
+
+	const { loading } = createApi;
 
 	const ref = useRef();
 
@@ -79,10 +81,11 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 							onClick={() => setShow(false)}
 							className={styles.cancel}
 							themeType="secondary"
+							disabled={loading}
 						>
 							Cancel
 						</Button>
-						<Button onClick={onUpdate}>Confirm</Button>
+						<Button onClick={onUpdate} disabled={loading}>Confirm</Button>
 					</>
 				)}
 			</div>
