@@ -4,11 +4,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 import { checkObjectValues } from '../utils/checkObjectValues';
 
-const useGetRatingReviewDetails = ({ level, ratingCycle, setSortedData }) => {
+const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 	const [filters, setFilters] = useState({});
 	const { user }	 = useSelector((state) => state?.profile || {});
 
@@ -30,7 +31,6 @@ const useGetRatingReviewDetails = ({ level, ratingCycle, setSortedData }) => {
 	const fetchRatingReviewDetails = useCallback(async () => {
 		const splitRatingCycle = ratingCycle?.split('_');
 		const [firstDate, lastDate] = splitRatingCycle || [];
-
 		try {
 			await trigger({
 				params: {
@@ -50,17 +50,13 @@ const useGetRatingReviewDetails = ({ level, ratingCycle, setSortedData }) => {
 				);
 			}
 		}
-	}, [level, trigger, filters, ratingCycle, isReportingManager, id]);
+	}, [trigger, id, filters, level, ratingCycle, isReportingManager]);
 
 	useEffect(() => {
-		if (level) {
+		if (level && !isEmpty(ratingCycle)) {
 			fetchRatingReviewDetails();
 		}
-	}, [fetchRatingReviewDetails, level]);
-
-	useEffect(() => {
-		setSortedData(data);
-	}, [data, setSortedData]);
+	}, [fetchRatingReviewDetails, level, ratingCycle]);
 
 	return { data, loading, filters, setFilters, isReportingManager };
 };

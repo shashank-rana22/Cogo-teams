@@ -8,6 +8,7 @@ import Spinner from '../../common/Spinner';
 import useEmployeeKraDetails from '../../hooks/useGetKraDetails';
 
 import styles from './styles.module.css';
+import Title from './Title';
 
 function KraModal({ show, onHide, employeeId, ratingCycle }) {
 	const {
@@ -15,9 +16,7 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 		loading,
 	} = useEmployeeKraDetails({ employeeId, ratingCycle });
 
-	const { list : ld = [], modification_history = [] } = data;
-
-	const list = [...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld, ...ld];
+	const { list, modification_history = [] } = data;
 
 	return (
 		<Modal
@@ -36,41 +35,7 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 						</div>
 					) : (
 						<>
-							<Modal.Header title={(
-								<div className={styles.container}>
-
-									<div className={styles.employee_name}>
-										Employee Name:&nbsp;
-										<span style={{ fontWeight: 'bold' }}>
-											{data?.employee_details?.employee_name}
-										</span>
-									</div>
-
-									<div className={styles.squad}>
-										<div className={styles.squad_name}>
-											Squad:&nbsp;
-											<span style={{ fontWeight: 'bold' }}>
-												{data?.employee_details?.squad_name}
-											</span>
-										</div>
-
-										<div className={styles.tribe_name}>
-											Tribe:&nbsp;
-											<span style={{ fontWeight: 'bold' }}>
-												{data?.employee_details?.tribe_name}
-											</span>
-										</div>
-
-										<div className={styles.total_kra}>
-											Total Kra:&nbsp;
-											<span style={{ fontWeight: 'bold' }}>
-												{(list || [])?.length}
-											</span>
-										</div>
-									</div>
-								</div>
-							)}
-							/>
+							<Modal.Header title={<Title data={data} list={list} />} />
 
 							<Modal.Body className={styles.body}>
 								<div className={styles.modal_body_container}>
@@ -112,7 +77,7 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 												</div>
 											</div>
 											<div className={styles.modification_history}>
-												<div>Modification History:</div>
+												<div className={styles.fw}>Modification History:</div>
 												{ !isEmpty(modification_history)
 													? modification_history?.map((item) => (
 														<div className={styles.modification} key={item.id}>
@@ -146,8 +111,8 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 														</div>
 													))
 													: (
-														<div>
-															Data Not Found
+														<div className={styles.empty_history}>
+															Modification History Not Found
 														</div>
 													)}
 											</div>

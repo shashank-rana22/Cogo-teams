@@ -1,4 +1,3 @@
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -9,7 +8,7 @@ const useGetRatingColumns = () => {
 			Header   : <div className={styles.table_text}>Rating</div>,
 			accessor : (item) => (
 				<div className={styles.table_text}>
-					{startCase(item?.rating_scale) || '-'}
+					{item?.rating_scale}
 				</div>
 			),
 			id: 'rating_scale',
@@ -18,7 +17,7 @@ const useGetRatingColumns = () => {
 			Header   : <div className={styles.table_text}>No. of Employee</div>,
 			accessor : (item) => (
 				<div className={styles.table_text}>
-					{startCase(item?.system_rating) || '-'}
+					{item?.count}
 				</div>
 			),
 			id: 'system_rating',

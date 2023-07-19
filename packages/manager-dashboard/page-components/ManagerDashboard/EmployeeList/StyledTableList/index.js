@@ -20,7 +20,6 @@ function RenderTitle({ title, averageValue, level }) {
 					{averageValue || '-'}
 				</div>
 			)}
-
 		</div>
 	);
 }
@@ -55,9 +54,7 @@ function StyledTableList({ data, label, average_value, level, setEmployeeId, set
 		sortOrder: 'asc',
 	});
 
-	const SORTED_DATA_ARR = [];
-
-	const [sortedData, setSortedData] = useState(SORTED_DATA_ARR);
+	const [sortedData, setSortedData] = useState([]);
 
 	useEffect(() => {
 		if (sorting.sortBy) {

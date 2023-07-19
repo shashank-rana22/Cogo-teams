@@ -1,12 +1,12 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
 import { formattedDate } from '../utils/formattedDate';
 
 function useEmployeeKraDetails({ employeeId, ratingCycle }) {
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/list_employee_kra_details',
 		method : 'GET',
 	}, { manual: true });

@@ -130,8 +130,8 @@ const useGetColumns = ({
 		},
 	];
 
-	if (level === 'vertical_head') {
-		return [...columns, {
+	const surpriseGift = [
+		{
 			Header   : <div className={styles.table_text}>Surprise Gift</div>,
 			accessor : (item) => (
 				<div className={styles.rating_flag}>
@@ -139,10 +139,10 @@ const useGetColumns = ({
 				</div>
 			),
 			id: 'surprise_gift',
-		}];
-	}
+		},
+	];
 
-	return columns;
+	return level === 'vertical_head' ? [...columns, ...surpriseGift] : columns;
 };
 
 export default useGetColumns;

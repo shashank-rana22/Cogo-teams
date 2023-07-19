@@ -20,7 +20,7 @@ import useGetColumns from './useGetColumns';
 import useGetRatingColumns from './useGetRatingColumns';
 
 function ManagerDashboard() {
-	const [employeeId, setEmployeeId] = useState();
+	const [employeeId, setEmployeeId] = useState('');
 	const [openKraModal, setOpenKraModal] = useState(false);
 	const [ratingCycle, setRatingCycle] = useState('');
 	const [sorting, setSorting] = useState({
@@ -47,7 +47,7 @@ function ManagerDashboard() {
 		sortData    : sorting,
 	});
 
-	const { ratingOptions } = useGetRatingCycle(setRatingCycle);
+	const { ratingOptions, loading : ratingCycleLoading } = useGetRatingCycle(setRatingCycle);
 
 	const handleModalClose = () => {
 		setOpenKraModal(false);
@@ -83,14 +83,16 @@ function ManagerDashboard() {
 				<div className={styles.header}>
 					Manager Dashboard
 				</div>
-				<Select
-					className={styles.rating_cycle_select}
-					options={ratingOptions}
-					value={ratingCycle}
-					renderLabel={(item) => renderLabel(item)}
-					onChange={(e) => setRatingCycle(e)}
-					size="sm"
-				/>
+				{!ratingCycleLoading && (
+					<Select
+						className={styles.rating_cycle_select}
+						options={ratingOptions}
+						value={ratingCycle}
+						renderLabel={(item) => renderLabel(item)}
+						onChange={(e) => setRatingCycle(e)}
+						size="sm"
+					/>
+				)}
 			</div>
 
 			{level === 'vertical_head' && (
@@ -109,7 +111,7 @@ function ManagerDashboard() {
 			)}
 
 			<div className={styles.table_container}>
-				{!loading && !levelLoading && isEmpty(data) ? (
+				{!loading && !levelLoading && isEmpty(data.list) ? (
 					<div className={styles.flexitem_1}>
 						<EmptyState />
 					</div>
@@ -128,21 +130,23 @@ function ManagerDashboard() {
 						) : (
 							<StyledTable
 								columns={columns}
-								data={sortedData}
+								data={sortedData?.list || []}
 								loading={loading || levelLoading}
 								emptyText="No Data Found"
 							/>
 						)}
 					</div>
 				)}
-				<div className={styles.flexitem_2}>
-					<StyledTable
-						columns={ratingColumns}
-						data={ratingData}
-						emptyText="No Data Found"
-						loading={ratingLoading}
-					/>
-				</div>
+				{!isEmpty(ratingCycle) && (
+					<div className={styles.flexitem_2}>
+						<StyledTable
+							columns={ratingColumns}
+							data={ratingData}
+							emptyText="No Data Found"
+							loading={ratingLoading}
+						/>
+					</div>
+				)}
 			</div>
 
 			{openKraModal ? (

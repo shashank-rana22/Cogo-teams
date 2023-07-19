@@ -3,7 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useMemo } from 'react';
 
-const ARRAY_LENGTH = 0;
+const MINIMUM_ARRAY_LENGTH = 0;
 
 const useGetRatingCycle = (setRatingCycle) => {
 	const [{ data, loading }] = useHarbourRequest({
@@ -23,7 +23,7 @@ const useGetRatingCycle = (setRatingCycle) => {
 	})), [data]);
 
 	useEffect(() => {
-		if ((ratingOptions || []).length > ARRAY_LENGTH) {
+		if ((ratingOptions || []).length > MINIMUM_ARRAY_LENGTH) {
 			const [firstItem] = ratingOptions;
 			setRatingCycle(firstItem.value);
 		}
