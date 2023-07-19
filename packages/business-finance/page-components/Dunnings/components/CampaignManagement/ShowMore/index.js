@@ -26,13 +26,13 @@ function ShowMore({ data = {}, selectedExecution = 0 }) {
 						<div>
 							<div>
 								<div className={styles.heading}>Service Type</div>
-								<div>
+								<div className={styles.sub_text}>
 									{!isEmpty(serviceTypes) ? serviceTypes.map((service, index) => (
-										<div key={service} className={styles.sub_text}>
+										<div key={service}>
 											{service?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}
 											{index !== serviceTypes.length - SINGLE_DECREMENT ? ' , ' : null}
 										</div>
-									)) : '-'}
+									)) : 'All'}
 
 								</div>
 								<div className={styles.heading}>Cogo Entity</div>
