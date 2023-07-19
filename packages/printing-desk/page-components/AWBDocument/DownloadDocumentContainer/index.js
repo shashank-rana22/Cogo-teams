@@ -6,13 +6,14 @@ import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { useState } from 'react';
 
-import { BACK_PAGE, FOOTER_IMAGES } from '../../../constants/image-copies';
 import useUpdateShipmentDocument from '../../../hooks/useUpdateShipmentDocument';
 import getFileObject from '../../../utils/getFileObject';
 import useGetMediaUrl from '../../../utils/useGetMediaUrl';
 import SelectDocumentCopies from '../SelectDocumentCopies';
 
 import styles from './styles.module.css';
+
+const { image_url } = GLOBAL_CONSTANTS;
 
 const DOWNLOAD_BUTTON = {
 	document_accepted            : 'Download 12 Copies',
@@ -92,8 +93,8 @@ function DownloadDocumentContainer({
 						: imgData, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 					if (!whiteout) {
 						pdf.addImage(
-							FOOTER_IMAGES[Object.keys(itm)[GLOBAL_CONSTANTS.zeroth_index]]
-							|| FOOTER_IMAGES[itm],
+							image_url.awb_docs_images[Object.keys(itm)[GLOBAL_CONSTANTS.zeroth_index]]
+							|| image_url.awb_docs_images[itm],
 							'jpeg',
 							ZERO_COORDINATE,
 							pdfHeight - PDF_HEIGHT_ADJUST_VALUE,
@@ -105,7 +106,14 @@ function DownloadDocumentContainer({
 					if (download24) {
 						if (INCLUDE_TNC.includes(itm)) {
 							pdf.addPage();
-							pdf.addImage(BACK_PAGE, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
+							pdf.addImage(
+								image_url.awb_docs_tnc_page,
+								'jpeg',
+								ZERO_COORDINATE,
+								ZERO_COORDINATE,
+								pdfWidth,
+								pdfHeight,
+							);
 						} else {
 							pdf.addPage();
 						}
