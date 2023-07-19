@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -8,11 +9,14 @@ const TIME_SEC = 60;
 const MILI_SEC = 1000;
 const MIN_IN_MILI_SEC = 60000;
 
-function VideoCallTimer({ peer_stream = {}, time = 0, setTime = () => {} }) {
+function VideoCallTimer({ callingDetails = {} }) {
+	const { call_status = '' } = callingDetails || {};
+	const [time, setTime] = useState(GLOBAL_CONSTANTS.zeroth_index);
+
 	useEffect(() => {
 		let interval = null;
 
-		if (peer_stream) {
+		if (call_status === 'accepted') {
 			interval = setInterval(() => {
 				setTime((prev) => prev + DEFAULT_TIME);
 			}, DEFAULT_TIME);
@@ -22,7 +26,7 @@ function VideoCallTimer({ peer_stream = {}, time = 0, setTime = () => {} }) {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [peer_stream, setTime]);
+	}, [call_status]);
 
 	return (
 		<div className={styles.stop_watch}>

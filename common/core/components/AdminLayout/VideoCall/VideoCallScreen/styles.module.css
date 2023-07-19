@@ -73,8 +73,6 @@
 	animation-name: bottom-animation;
 	animation-duration: 0.5s;
 
-	/* backdrop-filter: blur(5px); */
-
 	.content {
 		display: none;
 	}
@@ -143,6 +141,9 @@
 }
 
 .call_screen {
+	width: 100%;
+	height: 100%;
+
 	.peer_video_stream {
 		display: none;
 	}

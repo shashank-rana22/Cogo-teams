@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import {
 	IcMCall,
 	IcMMicrophone,
@@ -10,24 +11,79 @@ import {
 
 import styles from './styles.module.css';
 
+function CustomTootTipContent({ icon = () => {}, content = '' }) {
+	return (
+		<Tooltip trigger="mouseenter" interactive content={content} placement="bottom" theme="light">
+			<div className={styles.icon_div}>{icon}</div>
+		</Tooltip>
+	);
+}
+
 function VideoCallOptions({
 	stopCall = () => {},
-	shareScreen = () => {},
-	options = null,
-	// setOptions = () => {},
+	// shareScreen = () => {},
+	options = {},
+	setOptions = () => {},
 	micOn = () => {},
 	videoOn = () => {},
+	callingDetails = {},
+	callUpdate = () => {},
 }) {
+	const { isScreenShareActive = false, isMicActive = false, isVideoActive = false } = options || {};
+	const { request_screen_share = false } = callingDetails || {};
+
+	const handleRequestScreenShare = () => {
+		const data = ({
+			request_screen_share: !request_screen_share,
+		});
+		callUpdate(data);
+		setOptions((prev) => ({ ...prev, isScreenShareActive: !prev?.isScreenShareActive }));
+	};
+
 	return (
 		<>
-			<div role="presentation" onClick={shareScreen} className={styles.call_options_icons}>
-				{options?.isScreenShareActive ? <IcMStopShare /> : <IcMScreenShare />}
+
+			<div role="presentation" onClick={handleRequestScreenShare} className={styles.call_options_icons}>
+				{isScreenShareActive
+					? (
+						<CustomTootTipContent
+							icon={<IcMStopShare />}
+							content="Stop Request"
+						/>
+					) : (
+						<CustomTootTipContent
+							icon={<IcMScreenShare />}
+							content="Request Screen Share"
+						/>
+					)}
 			</div>
 			<div role="presentation" onClick={micOn} className={styles.call_options_icons}>
-				{options?.isMicActive ? <IcMMicrophone /> : <IcMMicrophoneMute />}
+				{isMicActive
+					? (
+						<CustomTootTipContent
+							icon={<IcMMicrophone />}
+							content="Mute"
+						/>
+					) : (
+						<CustomTootTipContent
+							icon={<IcMMicrophoneMute />}
+							content="UnMute"
+						/>
+					)}
 			</div>
 			<div role="presentation" onClick={videoOn} className={styles.call_options_icons}>
-				{options?.isVideoActive ? <IcMVideoCall /> : <IcMVideoCallMute />}
+				{isVideoActive
+					? (
+						<CustomTootTipContent
+							icon={<IcMVideoCall />}
+							content="Turn off Camera"
+						/>
+					) : (
+						<CustomTootTipContent
+							icon={<IcMVideoCallMute />}
+							content="Turn on camera"
+						/>
+					)}
 			</div>
 			<div role="presentation" onClick={stopCall} className={styles.hangup_icon}>
 				<IcMCall className={styles.end_call_icon} />

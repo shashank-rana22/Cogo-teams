@@ -1,15 +1,12 @@
 import { Avatar, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMMinus } from '@cogoport/icons-react';
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
 import VideoCallOptions from './VideoCallOptions';
 import VideoCallTimer from './VideoCallTimer';
-
-const FIRST_VARIABLE = 1;
 
 function VideoCallScreen({
 	options = {},
@@ -22,11 +19,10 @@ function VideoCallScreen({
 	callDetails = {},
 }, ref) {
 	const { peer_stream } = streams || {};
-	const { calling_type, peer_details	} = callDetails || {};
+	const { calling_type, peer_details, calling_details = {}	} = callDetails || {};
 	const { user_name = 'Unknown' } = peer_details || {};
 
 	const { isMinimize } = options || {};
-	const [time, setTime] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const tempRef = ref;
 
@@ -53,7 +49,7 @@ function VideoCallScreen({
 				onClick={() => setOptions((prev) => ({ ...prev, isMinimize: false }))}
 			>
 				<div className={styles.timer}>
-					<VideoCallTimer peer_stream={streams?.peer_stream} time={time} setTime={setTime} />
+					<VideoCallTimer callingDetails={calling_details} />
 				</div>
 				<div className={styles.calling_options}>
 					<VideoCallOptions
@@ -63,6 +59,8 @@ function VideoCallScreen({
 						setOptions={setOptions}
 						micOn={micOn}
 						videoOn={videoOn}
+						callingDetails={calling_details}
+						callUpdate={callUpdate}
 					/>
 				</div>
 
@@ -82,7 +80,7 @@ function VideoCallScreen({
 					<div className={styles.avatar_screen}>
 						<div className={styles.header}>{user_name}</div>
 						<Avatar
-							personName={user_name.slice(GLOBAL_CONSTANTS.zeroth_index, FIRST_VARIABLE)}
+							personName={user_name}
 							size="250px"
 							className={styles.styled_avatar}
 						/>
@@ -100,7 +98,7 @@ function VideoCallScreen({
 					{peer_stream ? (
 						<div className={styles.call_text}>
 							On Call
-							<VideoCallTimer peer_stream={streams?.peer_stream} time={time} setTime={setTime} />
+							<VideoCallTimer callingDetails={calling_details} />
 						</div>
 					) : (
 						<div className={styles.call_text}>
@@ -109,7 +107,6 @@ function VideoCallScreen({
 					)}
 
 					<div className={styles.calling_options}>
-
 						<VideoCallOptions
 							stopCall={stopCall}
 							shareScreen={shareScreen}
@@ -117,6 +114,8 @@ function VideoCallScreen({
 							setOptions={setOptions}
 							micOn={micOn}
 							videoOn={videoOn}
+							callingDetails={calling_details}
+							callUpdate={callUpdate}
 						/>
 					</div>
 				</div>
