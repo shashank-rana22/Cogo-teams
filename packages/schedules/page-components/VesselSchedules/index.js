@@ -1,5 +1,5 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -8,12 +8,12 @@ import VesselSchedulesList from './VesselSchedulesList';
 function VesselSchedule() {
 	const ACTIVE_TAB = 'vessel_schedules';
 	const [showModal, setShowModal] = useState(false);
-	const partnerId = useSelector((state) => state?.profile?.partner?.id);
+	const router = useRouter();
 	const handleTabChange = (tab) => {
 		if (tab !== 'vessel_schedules') {
 			const route = tab.replace(/_/g, '-');
 			// eslint-disable-next-line no-undef
-			window.location.href = `/v2/${partnerId}/schedules/${route}`;
+			router.push(`/schedules/${route}`);
 		}
 	};
 

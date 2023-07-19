@@ -3,7 +3,7 @@ import Middle from './Middle';
 import styles from './styles.module.css';
 import Upper from './Upper';
 
-function SailingScheduleCard({ sailingSchedule, loading }) {
+function SailingScheduleCard({ sailingSchedule = {}, loading = false }) {
 	return (
 		<div className={styles.card}>
 			<Upper sailingSchedule={sailingSchedule} loading={loading} />

@@ -11,7 +11,7 @@ function Details({ data, loading }) {
 	return (
 		<div className={styles.flex}>
 			<SailingDetails data={data} loading={loading} />
-			<div style={{ borderRadius: '8px' }}>
+			<div style={{ borderRadius: '8px', width: '50%' }}>
 				<ScheduleMap data={{ ...data, route_cordinates: route_data }} />
 			</div>
 		</div>
