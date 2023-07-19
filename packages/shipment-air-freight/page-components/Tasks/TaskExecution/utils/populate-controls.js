@@ -20,7 +20,7 @@ const populateControls = ({
 				const awbNumber = mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 					? getApisData?.get_awb_inventory_data?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
 					: '';
-				finalControls[index].value = mainAirFreight?.master_airway_bill_number || awbNumber || '';
+				finalControls[index].value = mainAirFreight?.booking_reference_number || awbNumber || '';
 				if (
 					mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 				) {

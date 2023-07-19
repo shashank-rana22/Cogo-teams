@@ -8,6 +8,7 @@ export default function useUpdateShipment({
 	refetch = () => {},
 	successMessage = 'Shipment updated successfully!',
 	cancelEBooking = () => {},
+	shipment_data = {},
 }) {
 	const { refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
 
@@ -21,7 +22,9 @@ export default function useUpdateShipment({
 		try {
 			await trigger({ data: payload });
 
-			cancelEBooking();
+			if (shipment_data?.tags.includes('cargo_ai')) {
+				cancelEBooking();
+			}
 
 			refetch();
 

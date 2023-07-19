@@ -60,6 +60,7 @@ export default function CancelShipment({ setShow }) {
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
 		cancelEBooking,
+		shipment_data,
 	});
 
 	const { id } = shipment_data || {};
