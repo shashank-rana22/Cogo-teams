@@ -1,6 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../commons/List';
@@ -25,7 +26,7 @@ function AirIndiaAWB({
 }) {
 	const profile = useSelector((state) => state);
 	const [status, setStatus] = useState('inactive');
-	const [statusAwb, setStatusAwb] = useState(null);
+	const [statusAwb, setStatusAwb] = useState([]);
 
 	const { profile: { authParams } } = profile || {};
 	const { stateBooking } = useHandlePluginBooking(true);
@@ -71,7 +72,15 @@ function AirIndiaAWB({
 							setItem(singleItem);
 						}}
 					>
-						<IcMEdit fill="var(--color-accent-orange-2)" />
+						<div className={styles.tooltip_container}>
+							<Tooltip
+								content="Edit Booking"
+								placement="right"
+								interactive
+							>
+								<IcMEdit fill="var(--color-accent-orange-2)" />
+							</Tooltip>
+						</div>
 					</Button>
 					<Button
 						size="md"
@@ -81,7 +90,15 @@ function AirIndiaAWB({
 							setItem(singleItem);
 						}}
 					>
-						<IcMDelete fill="var(--color-accent-orange-2)" />
+						<div className={styles.tooltip_container}>
+							<Tooltip
+								content="Delete Booking"
+								placement="right"
+								interactive
+							>
+								<IcMDelete fill="var(--color-accent-orange-2)" />
+							</Tooltip>
+						</div>
 					</Button>
 				</div>
 			)
@@ -91,7 +108,7 @@ function AirIndiaAWB({
 	const functions = { ...commonFunctions, ...otherFunctions };
 
 	useEffect(() => {
-		if (statusAwb) {
+		if (!isEmpty(statusAwb)) {
 			stateBooking({
 				statusAwb,
 				getAirIndiaAwbNumbersList,
@@ -99,7 +116,7 @@ function AirIndiaAWB({
 				setPage,
 				id: item?.id,
 			});
-			setStatusAwb(null);
+			setStatusAwb([]);
 		}
 	}, [getAirIndiaAwbNumbersList, item?.id, setFinalList, setPage, stateBooking, statusAwb]);
 

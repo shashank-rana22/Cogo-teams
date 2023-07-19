@@ -38,3 +38,14 @@
 		}
 	}
 }
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 4px;
+			font-size: 12px;
+		}
+	}
+}
