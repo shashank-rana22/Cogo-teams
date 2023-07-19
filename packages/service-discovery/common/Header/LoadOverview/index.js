@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 
-function LoadOverview({ data = {}, service_key = 'search_type', loading = false, isEditable = true }) {
+function LoadOverview({ data = {}, service_key = 'search_type', loading = false, isAllowedToEdit = true }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const service = data[service_key];
@@ -29,7 +29,7 @@ function LoadOverview({ data = {}, service_key = 'search_type', loading = false,
 						${startCase(loadItem.container_type)}`}
 				</span>
 
-				{isEditable && isFirst ? (
+				{isAllowedToEdit && isFirst ? (
 					<IcMEdit
 						height={12}
 						width={12}
@@ -55,7 +55,7 @@ function LoadOverview({ data = {}, service_key = 'search_type', loading = false,
 					{`${loadItem.packages_count} X ${loadItem.volume} CBM`}
 				</span>
 
-				{isEditable && isFirst ? (
+				{isAllowedToEdit && isFirst ? (
 					<IcMEdit
 						height={12}
 						width={12}

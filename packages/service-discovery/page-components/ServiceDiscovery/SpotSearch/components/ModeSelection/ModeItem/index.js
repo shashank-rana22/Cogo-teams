@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, cl } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -7,7 +7,13 @@ const SET_TIMEOUT_DURATION = 1500;
 const MEDIUM_FONT_WEIGHT = 500;
 const SEMIBOLD_FONT_WEIGHT = 600;
 
-function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedService, setLocation }) {
+function ModeItem({
+	data = {},
+	selectedMode = {},
+	setSelectedMode = () => {},
+	setSelectedService = () => {},
+	setLocation = () => {},
+}) {
 	const [bouncing, setBouncing] = useState(false);
 
 	const { label, value, icon, is_available } = data;
@@ -47,7 +53,7 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 					width={34}
 					height={34}
 					alt="mode-icon"
-					className={`${styles.icon} ${selectedMode.mode_value !== value && styles.icon_hover}`}
+					className={cl`${styles.icon} ${selectedMode.mode_value !== value && styles.icon_hover}`}
 				/>
 			</div>
 
@@ -60,7 +66,7 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 
 			{!is_available ? (
 				<div
-					className={`${styles.pill} ${bouncing ? styles.bounce : {}}`}
+					className={cl`${styles.pill} ${bouncing ? styles.bounce : {}}`}
 				>
 					<Pill size="sm" color="yellow">Coming Soon</Pill>
 				</div>

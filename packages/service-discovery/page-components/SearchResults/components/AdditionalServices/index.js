@@ -6,6 +6,7 @@ import { serviceMappings } from '../../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../../configs/incoterms.json';
 import useSpotSearchService from '../../hooks/useCreateSpotSearchService';
 
+import ICONS_MAPPING from './icons-mapping';
 import styles from './styles.module.css';
 import getPayload from './utils/getPayload';
 
@@ -25,9 +26,9 @@ function AdditionalServices({
 }) {
 	const { service_rates = [] } = rateCardData;
 
-	const { service_details = {}, service_type = '' } = detail;
+	const { service_details = {}, service_type = '', inco_term = '' } = detail;
 
-	const [incoterm, setIncoterm] = useState('cif');
+	const [incoterm, setIncoterm] = useState(inco_term || 'cif');
 
 	const primaryService = service_type;
 
@@ -192,9 +193,10 @@ function AdditionalServices({
 							>
 
 								<div className={styles.service_div}>
-									<span
-										className={styles.icon}
-									/>
+									<span className={styles.icon}>
+										{ICONS_MAPPING[serviceItem.service_type]}
+									</span>
+
 									<span className={styles.service_text}>
 										{serviceItem.title}
 									</span>
@@ -239,7 +241,9 @@ function AdditionalServices({
 							>
 
 								<div className={styles.service_div}>
-									<span className={styles.icon} />
+									<span className={styles.icon}>
+										{ICONS_MAPPING[serviceItem.service_type]}
+									</span>
 									<span className={styles.service_text}>
 										{serviceItem.title}
 									</span>

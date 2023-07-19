@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 
 const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {} }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_spot_search_service',
+		url    : '/add_spot_search_service',
 		method : 'POST',
 	}, { manual: true });
 
@@ -14,7 +14,7 @@ const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {} }) =
 			await trigger({ data: values });
 			refetchSearch({
 				screenObj: {
-					card_id : rateCardData.card,
+					card_id : rateCardData.id,
 					screen  : 'selectedCard',
 				},
 			});

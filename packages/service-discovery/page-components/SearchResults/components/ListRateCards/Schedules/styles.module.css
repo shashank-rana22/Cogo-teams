@@ -1,0 +1,32 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 24px 24px 0;
+	margin: 8px 0;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #000;
+}
+
+.schedule_items_container {
+	display: flex;
+	align-items: center;
+	padding: 24px 4px;
+	overflow-x: scroll;
+}
+
+.footer {
+	margin-top: 6px;
+}
+
+.rates_count {
+	float: left;
+}
+
+.pagination {
+	float: right;
+	margin-right: 20px;
+}

@@ -1,4 +1,4 @@
-import { Tooltip, Loader } from '@cogoport/components';
+import { Tooltip, Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -87,7 +87,7 @@ function ServiceItem({
 			<IcMPlus
 				height={22}
 				width={22}
-				className={`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
+				className={cl`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
 				fill="black"
 				onClick={onClickAdd}
 			/>

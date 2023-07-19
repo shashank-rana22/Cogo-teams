@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -43,7 +44,7 @@ function Header({
 	const isAllowedToEdit = rest.activePage === 'search_results';
 
 	return (
-		<div className={`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}>
+		<div className={cl`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}>
 			<div className={styledTheme.header_wrapper}>
 				{scrollDirection === 'up' ? (
 					<Back heading={rest.headerHeading} {...rest} />
@@ -69,7 +70,7 @@ function Header({
 							service_key={service_key}
 							loading={loading && isEmpty(data)}
 							activePage={rest.activePage}
-							isEditable={isAllowedToEdit}
+							isAllowedToEdit={isAllowedToEdit}
 						/>
 
 						<Wallet

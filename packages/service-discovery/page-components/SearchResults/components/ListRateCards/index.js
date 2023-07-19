@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import React from 'react';
 
 import useScrollDirection from '../../../../common/Header/useScrollDirection';
@@ -5,6 +6,7 @@ import FclCard from '../RateCard/FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
 import Header from './Header';
+import Schedules from './Schedules';
 import styles from './styles.module.css';
 
 const RateCardMapping = {
@@ -30,7 +32,9 @@ function ListRateCards({
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
-
+	weekly_data = [],
+	paginationProps = {},
+	loading = false,
 }) {
 	const { scrollDirection } = useScrollDirection();
 
@@ -44,22 +48,36 @@ function ListRateCards({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 110 : 80 }}>
+			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 115 : 80 }}>
 				<Header
-					ratesData={rates}
 					details={detail}
 					filters={filters}
 					setFilters={setFilters}
+					total_count={paginationProps?.total_count}
 				/>
+
 				{showComparison ? (
 					<ComparisonHeader
 						rateCardsForComparison={rateCardsForComparison}
 						setScreen={setScreen}
 					/>
 				) : null}
+
 			</div>
 
-			{(rates || []).map((rateCardData) => (
+			<Schedules
+				weekly_data={weekly_data}
+				paginationProps={paginationProps}
+				filters={filters}
+				setFilters={setFilters}
+			/>
+
+			{loading ? (
+				<div className={styles.loading}>
+					<span className={styles.loading_text}>Looking for Rates</span>
+					<Loader themeType="primary" className={styles.loader} background="#000" />
+				</div>
+			) : ((rates || []).map((rateCardData) => (
 				<RateCard
 					key={rateCardData.id}
 					rateCardData={rateCardData}
@@ -70,7 +88,8 @@ function ListRateCards({
 					comparisonCheckbox={comparisonCheckbox}
 					refetchSearch={refetchSearch}
 				/>
-			))}
+			)))}
+
 		</div>
 	);
 }

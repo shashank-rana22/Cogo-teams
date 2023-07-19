@@ -9,7 +9,7 @@ const useAddSubsidiaryService = ({
 	data = {},
 	checkout_id = '',
 }) => {
-	const URL = data?.checkout_id || checkout_id ? '/create_checkout_service' : '/create_spot_search_service';
+	const URL = data?.checkout_id || checkout_id ? '/create_checkout_service' : '/add_spot_search_service';
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : URL,
@@ -47,13 +47,13 @@ const useAddSubsidiaryService = ({
 			let payload = {};
 			if (!data?.checkout_id || checkout_id) {
 				payload = {
-					id                  : data?.spot_search_id,
+					spot_search_id      : data?.spot_search_id,
 					service             : 'subsidiary',
 					subsidiary_services : subsidiaryServicesArr,
 				};
 			} else {
 				payload = {
-					id                             : data?.checkout_id,
+					spot_search_id                 : data?.checkout_id,
 					service                        : 'subsidiary',
 					subsidiary_services_attributes : subsidiaryServicesArr,
 				};

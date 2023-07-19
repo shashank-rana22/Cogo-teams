@@ -7,11 +7,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import FILTER_SERVICE_MAPPING from '../configurations/filter-service-mapping.json';
-import CC from '../utils/condition-constants';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
 import getSalesDashboardListStats from '../utils/getSalesDashboardListStats';
-
-import useGetPermission from './useGetPermission';
 
 const getKeyName = ({ type, serviceType }) => {
 	const mapping = {
@@ -34,14 +31,11 @@ const useGetSalesDashboardData = ({
 	destination_location_id,
 	...rest
 }) => {
-	const { user_profile, pathname } = useSelector(({ general, profile }) => ({
+	const { user_profile } = useSelector(({ general, profile }) => ({
 		...general,
 		user_profile: profile,
 	}));
 
-	const { isConditionMatches } = useGetPermission();
-
-	const [initialPath] = useState(pathname);
 	const [filters, setFilters] = useState({
 		page       : 1,
 		page_limit : 10,
@@ -59,10 +53,6 @@ const useGetSalesDashboardData = ({
 
 	const { id: user_id = '' } = user;
 
-	const showAllSpots = isConditionMatches(CC.SHOW_ALL_SPOT_BOOKING, 'or')
-		|| pathname !== '/[partner_id]/service_discovery';
-
-	const createdByFilter = !showAllSpots ? { created_by_id: user_id } : {};
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
 	const statsData = getSalesDashboardListStats({
@@ -71,25 +61,6 @@ const useGetSalesDashboardData = ({
 		stats,
 	});
 
-	// const keyToSend = globalViewKeys[rest.type];
-	// const agentFilter = keyToSend ? { [keyToSend]: selected_agent_id } : {};
-
-	// const timeKeysToSend = globalTimeKeys[rest.type];
-
-	// const dateFilters = {};
-	// if (timeKeysToSend) {
-	// 	const initialDateFilters = {
-	// 		startDate: subtractDays(new Date(), 2).setHours(0, 0, 0, 0),
-	// 		endDate: new Date(),
-	// 	};
-	// 	dateFilters[timeKeysToSend?.startDate] = formatDateToString(
-	// 		initialDateFilters?.startDate,
-	// 	);
-	// 	dateFilters[timeKeysToSend?.endDate] = formatDateToString(
-	// 		initialDateFilters?.endDate,
-	// 	);
-	// }
-
 	const getList = async () => {
 		try {
 			await trigger({
@@ -97,15 +68,12 @@ const useGetSalesDashboardData = ({
 					...getSalesDashboardListParams(
 						rest.type,
 						{
-							// ...(dateFilters || {}),
 							...(rest.defaultFilters || {}),
 							...(restFilters || {}),
 							...(activeStat?.filter || {}),
-							// ...agentFilter,
 							importer_exporter_id,
 							origin_location_id,
 							destination_location_id,
-							// ...createdByFilter,
 							...getKeyName({ type: rest.type, serviceType }),
 						},
 						{
@@ -128,9 +96,7 @@ const useGetSalesDashboardData = ({
 	};
 
 	useEffect(() => {
-		if (initialPath === pathname) {
-			getList();
-		}
+		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user_profile?.authorizationparameters,
 		extraParams,
@@ -138,8 +104,6 @@ const useGetSalesDashboardData = ({
 		importer_exporter_id,
 		origin_location_id,
 		destination_location_id,
-		initialPath,
-		pathname,
 		filters,
 	]);
 
@@ -155,7 +119,6 @@ const useGetSalesDashboardData = ({
 	}, [stats]);
 
 	return {
-		isConditionMatches,
 		loading,
 		listData: data,
 		statsData,

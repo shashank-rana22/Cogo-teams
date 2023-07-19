@@ -13,7 +13,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 	const { shipping_line = {}, service_rates = [] } = rateDetails;
 
 	const serviceData = Object.values(service_rates).find((service) => service.service_type === service_type);
-	const { total_price_currency, total_price_discounted, validity_start, validity_end } = serviceData || {};
+	const { total_price_currency, total_price_discounted, departure, arrival } = serviceData || {};
 
 	const { origin, destination } = getLocationInfo(details, {}, 'search_type');
 
@@ -48,7 +48,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 
 					<span className={styles.date}>
 						{formatDate({
-							date       : validity_start,
+							date       : departure,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
 						})}
@@ -71,7 +71,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 
 					<span className={styles.date}>
 						{formatDate({
-							date       : validity_end,
+							date       : arrival,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
 						})}

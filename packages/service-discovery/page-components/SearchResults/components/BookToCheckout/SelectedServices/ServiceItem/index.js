@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import { Toast, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -47,7 +47,7 @@ function ServiceItem({
 	return (
 		<div
 			key={service}
-			className={`${styles.container} ${isSelected ? styles.selected_service : {}}`}
+			className={cl`${styles.container} ${isSelected ? styles.selected_service : {}}`}
 		>
 			<div className={styles.icns_container}>
 				<Icon width={32} height={32} />
@@ -77,7 +77,7 @@ function ServiceItem({
 			<span className={styles.price}>
 				{is_rate_available ? (
 					formatAmount({
-						amount   : total_price_discounted || 0,
+						amount   : total_price_discounted,
 						currency : total_price_currency,
 						options  : {
 							style                 : 'currency',

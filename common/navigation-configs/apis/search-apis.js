@@ -520,5 +520,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'add_spot_search_service',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;

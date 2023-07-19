@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	min-width: max-content;
+	padding: 8px 16px;
+	margin-right: 20px;
+	cursor: pointer;
+	background: #fffffc;
+	border: 1px solid #fff;
+	border-radius: 8px;
+	transition: 0.5s;
+
+	&:hover {
+		transform: scale(1.06);
+	}
+
+	&.selected {
+		background: #fffbdb;
+		border: 1px solid #ffef81;
+		border-radius: 8px;
+	}
+}
+
+.week {
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
+
+	&.selected_week {
+		font-weight: 600;
+	}
+}
+
+.rate {
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+	opacity: 0.6;
+}

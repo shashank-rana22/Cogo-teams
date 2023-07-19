@@ -49,8 +49,8 @@ const getPayload = ({
 
 	if (service_name === 'export_transportation') {
 		const payload = {
-			id      : spot_search_id,
-			service : origin_cargo_handling_type === 'stuffing_at_factory' ? 'trailer_freight' : 'ftl_freight',
+			spot_search_id,
+			service: origin_cargo_handling_type === 'stuffing_at_factory' ? 'trailer_freight' : 'ftl_freight',
 			...origin_cargo_handling_type === 'stuffing_at_factory' ? {
 				trailer_freight_services: primaryServicesObj.map((item) => ({
 					origin_location_id,
@@ -87,8 +87,8 @@ const getPayload = ({
 
 	if (service_name === 'import_transportation') {
 		const payload = {
-			id      : spot_search_id,
-			service : destination_cargo_handling_type !== 'destuffing_at_dock' ? 'trailer_freight' : 'ftl_freight',
+			spot_search_id,
+			service: destination_cargo_handling_type !== 'destuffing_at_dock' ? 'trailer_freight' : 'ftl_freight',
 			...destination_cargo_handling_type !== 'destuffing_at_dock' ? {
 				trailer_freight_services: primaryServicesObj.map((item) => ({
 					origin_location_id,
@@ -125,7 +125,7 @@ const getPayload = ({
 
 	if (service_name.includes('fcl_freight_local')) {
 		const payload = {
-			id                         : spot_search_id,
+			spot_search_id,
 			service                    : 'fcl_freight_local',
 			fcl_freight_local_services : primaryServicesObj.map((item) => ({
 				port_id,
@@ -147,7 +147,7 @@ const getPayload = ({
 
 	if (service_name.includes('haulage_freight')) {
 		const payload = {
-			id                       : spot_search_id,
+			spot_search_id,
 			service                  : 'haulage_freight',
 			haulage_freight_services : primaryServicesObj.map((item) => ({
 				...trade_type === 'export'
@@ -171,7 +171,7 @@ const getPayload = ({
 
 	if (service_name.includes('fcl_cfs')) {
 		const payload = {
-			id               : spot_search_id,
+			spot_search_id,
 			service          : 'fcl_cfs',
 			fcl_cfs_services : primaryServicesObj.map((item) => ({
 				port_id,
@@ -193,7 +193,7 @@ const getPayload = ({
 
 	if (service_name.includes('fcl_customs')) {
 		const payload = {
-			id                   : spot_search_id,
+			spot_search_id,
 			service              : 'fcl_customs',
 			fcl_customs_services : primaryServicesObj.map((item) => ({
 				port_id,

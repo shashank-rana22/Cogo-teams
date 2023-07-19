@@ -24,6 +24,8 @@ function SelectedServices({ rateDetails = {}, details = {} }) {
 	return (
 		<div className={styles.container}>
 			{(servicesMapping || []).map((serviceItem) => {
+				if (!serviceItem) return null;
+
 				if (serviceItem.key === service_type) {
 					return (
 						<PrimaryService

@@ -11,7 +11,11 @@ const useGetSpotSearch = () => {
 
 	const [screen, setScreen] = useState('listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({
+		page             : 1,
+		departure_before : undefined,
+		departure_after  : undefined,
+	});
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
@@ -23,6 +27,9 @@ const useGetSpotSearch = () => {
 			await trigger({
 				params: {
 					spot_search_id,
+					page       : filters.page,
+					page_limit : 10,
+					filters    : { ...filters },
 				},
 			});
 
@@ -32,25 +39,33 @@ const useGetSpotSearch = () => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [spot_search_id, trigger]);
+	}, [filters, spot_search_id, trigger]);
 
 	useEffect(() => {
 		getSearch({ firstScreen: 'listRateCard' });
-	}, [getSearch]);
+	}, [getSearch, filters]);
 
 	const refetch = async ({ screenObj = {} } = {}) => {
 		try {
 			const res = await trigger({
 				params: {
 					spot_search_id,
+					page       : filters.page,
+					page_limit : 100,
+					filters    : { ...filters },
 				},
 			});
 
+			console.log('res', res);
+
 			setScreen(screenObj?.screen || 'listRateCard');
+			console.log('inAPi', res.data.list.filter(
+				(item) => item.id === screenObj?.card_id,
+			)?.[GLOBAL_CONSTANTS.zeroth_index]);
 
 			if (screenObj?.screen === 'selectedCard') {
-				setSelectedCard(res.data.rates.filter(
-					(item) => item.card === screenObj?.card_id,
+				setSelectedCard(res.data.list.filter(
+					(item) => item.id === screenObj?.card_id,
 				)?.[GLOBAL_CONSTANTS.zeroth_index]);
 			}
 		} catch (error) {

@@ -1,17 +1,6 @@
 import { IcMAppCfs, IcMAppCustoms, IcMAppTruck } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 
 const getMapping = ({ primaryService = {}, otherServices = {} }) => {
-	// const origin_main_port_name = primaryService?.origin_main_port?.display_name
-	// 	|| primaryService?.origin_port?.display_name;
-	const originDisplayNameArray = primaryService?.origin_port?.display_name.split(',');
-	const originName = `${primaryService?.origin_port?.name} - 
-	${originDisplayNameArray.reverse()[1]}`;
-
-	const destinationDisplayNameArray = primaryService?.destination_port?.display_name.split(',');
-	const destinatioName = `${primaryService?.destination_port?.name} - 
-	${destinationDisplayNameArray.reverse()[1]}`;
-
 	const hash = {};
 
 	const selectedServices = (Object.values(otherServices) || []).map(
@@ -38,64 +27,53 @@ const getMapping = ({ primaryService = {}, otherServices = {} }) => {
 		},
 	);
 
-	const freightTypeIncoTermsMapping = {
-		fcl_freight: [
-			{
-				icon : IcMAppTruck,
-				key  : Object.keys(hash).includes('origin_ftl_freight')
-					? 'origin_ftl_freight'
-					: 'origin_trailer_freight',
-			},
-			// primaryService?.origin_main_port?.display_name && {
-			// 	type     : 'text',
-			// 	iconName : '',
-			// 	label    : primaryService?.origin_port?.display_name,
-			// },
-			// primaryService?.origin_main_port?.display_name && {
-			// 	type     : 'icon',
-			// 	iconName : 'origin_haulage_freight',
-			// },
-			{
-				icon : IcMAppCustoms,
-				key  : 'origin_fcl_customs',
-			},
-			{
-				icon : IcMAppCfs,
-				key  : 'origin_fcl_cfs',
-			},
-			{
-				icon : IcMAppCustoms,
-				key  : 'origin_fcl_freight_local',
-			},
-			{ type: 'icon', key: 'fcl_freight' },
-			{
-				icon : IcMAppCustoms,
-				key  : 'destination_fcl_freight_local',
-			},
-			// { type: 'icon', iconName: 'destination_fcl_freight_local' },
-			{
-				icon : IcMAppCfs,
-				key  : 'destination_fcl_cfs',
-			},
-			{
-				icon : IcMAppCustoms,
-				key  : 'destination_fcl_customs',
-			},
-			// primaryService?.destination_main_port?.name && {
-			// 	type     : 'icon',
-			// 	iconName : 'destination_haulage_freight',
-			// },
-			primaryService?.destination_port?.name && {
-				icon  : IcMAppTruck,
-				label : destinatioName,
-				key   : Object.keys(hash).includes('destination_ftl_freight')
-					? 'destination_ftl_freight'
-					: 'destination_trailer_freight',
-			},
-		],
-	};
-
-	const servicesMapping = freightTypeIncoTermsMapping.fcl_freight.filter((item) => item);
+	const servicesMapping = [
+		{
+			icon : IcMAppTruck,
+			key  : Object.keys(hash).includes('origin_ftl_freight')
+				? 'origin_ftl_freight'
+				: 'origin_trailer_freight',
+		},
+		primaryService?.origin_main_port?.display_name && {
+			icon : IcMAppTruck,
+			key  : 'origin_haulage_freight',
+		},
+		{
+			icon : IcMAppCustoms,
+			key  : 'origin_fcl_customs',
+		},
+		{
+			icon : IcMAppCfs,
+			key  : 'origin_fcl_cfs',
+		},
+		{
+			icon : IcMAppCfs,
+			key  : 'origin_fcl_freight_local',
+		},
+		{ type: 'icon', key: 'fcl_freight' },
+		{
+			icon : IcMAppCfs,
+			key  : 'destination_fcl_freight_local',
+		},
+		{
+			icon : IcMAppCfs,
+			key  : 'destination_fcl_cfs',
+		},
+		{
+			icon : IcMAppCustoms,
+			key  : 'destination_fcl_customs',
+		},
+		primaryService?.destination_main_port?.display_name && {
+			icon : IcMAppTruck,
+			key  : 'destination_haulage_freight',
+		},
+		primaryService?.destination_port?.name && {
+			icon : IcMAppTruck,
+			key  : Object.keys(hash).includes('destination_ftl_freight')
+				? 'destination_ftl_freight'
+				: 'destination_trailer_freight',
+		},
+	];
 
 	return {
 		selectedServices,

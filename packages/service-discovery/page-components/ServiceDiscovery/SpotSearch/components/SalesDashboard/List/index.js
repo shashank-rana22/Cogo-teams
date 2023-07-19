@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
-import CC from '../../../utils/condition-constants';
 
 import Header from './Header';
 import Statistics from './Statistics';
@@ -21,7 +20,6 @@ function List({
 	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
 
 	const {
-		isConditionMatches,
 		statsData,
 		listData,
 		loading: listLoading,
@@ -31,12 +29,6 @@ function List({
 	} = useGetSalesDashboardData({ serviceType, api, stats, importer_exporter_id, ...rest });
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
-
-	if (rest.type === 'superAdmins') {
-		if (!isConditionMatches(CC.SHOW_SHIPMENT_STATS)) {
-			return null;
-		}
-	}
 
 	return (
 		<div className={styles.container}>

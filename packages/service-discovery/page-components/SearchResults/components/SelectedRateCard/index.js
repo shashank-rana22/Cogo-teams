@@ -37,6 +37,8 @@ function SelectedRateCard({
 }) {
 	const PrimaryService = detail?.search_type;
 
+	console.log('rateCardData', rateCardData);
+
 	const { total_price_discounted, total_price_currency } = rateCardData;
 
 	if (PrimaryService === undefined) {
@@ -48,7 +50,7 @@ function SelectedRateCard({
 	const refetch = () => refetchSearch({
 		screenObj: {
 			screen  : 'selectedCard',
-			card_id : rateCardData?.card,
+			card_id : rateCardData?.id,
 		},
 	});
 
@@ -93,7 +95,7 @@ function SelectedRateCard({
 								data={detail}
 								refetch={refetch}
 								primary_service={PrimaryService}
-								card_id={rateCardData?.card}
+								card_id={rateCardData?.id}
 							/>
 
 							<div className={styles.proceed_container}>
@@ -128,10 +130,6 @@ function SelectedRateCard({
 
 						{!isEmpty(possible_subsidiary_services) ? (
 							<div className={styles.subsidiary_services}>
-								<div className={styles.subsidiary_heading}>
-									Looking for smaller services? Check out our subsidiary services -
-								</div>
-
 								<SubsidiaryServices
 									possible_subsidiary_services={possible_subsidiary_services}
 									data={detail}

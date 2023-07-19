@@ -78,7 +78,11 @@ function SubsidiaryServices({
 					/>
 				) : null}
 
-				<IcMSearchlight width={20} height={20} className={styles.input_suffix} />
+				<IcMSearchlight
+					width={20}
+					height={20}
+					className={styles.input_suffix}
+				/>
 			</div>
 		);
 	}
@@ -90,6 +94,10 @@ function SubsidiaryServices({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.heading}>
+				Looking for smaller services? Check out our subsidiary services -
+			</div>
+
 			<div className={styles.select_container}>
 				<div className={styles.label}>Search Subsidiary Services</div>
 

@@ -40,7 +40,7 @@ const useCreateCheckout = ({
 		const params = {
 			id            : query?.search_id || spot_search_id,
 			source        : source || null,
-			selected_card : rateCardData?.card,
+			selected_card : rateCardData?.id,
 			tags:
 				scope === 'partner'
 				&& (query?.source === 'communication' || isCogoVerseMember)
