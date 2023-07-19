@@ -29,7 +29,7 @@ const useListCommunication = ({ taskId }) => {
 				},
 			});
 		} catch (e) {
-			console.error(e);
+			console.log(e);
 		}
 	}, [taskId, trigger]);
 
