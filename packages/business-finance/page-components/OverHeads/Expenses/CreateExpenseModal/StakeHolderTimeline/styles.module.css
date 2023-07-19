@@ -7,7 +7,7 @@
 .line {
 	width: 210px;
 	margin: 10px;
-	border-top: 2px solid #ee3425;
+	border-top: 2px solid #fcdc00;
 }
 
 .faded_text {
@@ -16,9 +16,9 @@
 
 .circle {
 	width: 24px;
-	color: #fff;
+	color: #000;
 	text-align: center;
-	background: #ee3425;
+	background: #fcdc00;
 	border-radius: 50%;
 }
 
