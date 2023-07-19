@@ -9,7 +9,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,
-	} = useGetCollectionParty({ shipment_id: shipmentData?.id });
+	} = useGetCollectionParty({ shipment_id: shipmentData?.id, servicesData });
 
 	return (
 		<div>
