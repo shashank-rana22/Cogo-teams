@@ -11,9 +11,10 @@ const SINGLE_SLIDE_LIMIT = 10;
 const INCREMENT = 1;
 const WEEK_SLICE_FROM = 0;
 const WEEK_SLICE_TILL = 3;
+const DEFAULT_VALUE = 0;
 
 function ShowExecutions({ rowId = '', dropdown = '' }) {
-	const [selectedExecution, setSelectedExecution] = useState(GLOBAL_CONSTANTS.zeroth_index);
+	const [selectedExecution, setSelectedExecution] = useState(DEFAULT_VALUE);
 
 	const {
 		data:executionListData, loading,
@@ -23,7 +24,7 @@ function ShowExecutions({ rowId = '', dropdown = '' }) {
 	const { totalRecords = 0, list = [] } = executionListData || {};
 
 	let totalSlides = Math.floor(totalRecords / SINGLE_SLIDE_LIMIT);
-	if (totalRecords % SINGLE_SLIDE_LIMIT > GLOBAL_CONSTANTS.zeroth_index) {
+	if (totalRecords % SINGLE_SLIDE_LIMIT > DEFAULT_VALUE) {
 		totalSlides += INCREMENT;
 	}
 
