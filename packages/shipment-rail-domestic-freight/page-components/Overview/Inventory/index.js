@@ -1,7 +1,9 @@
 import { Accordion, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ShipmentInventoryContext from '@cogoport/context/page-components/ShipmentInventoryContext';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { EmptyState } from '@cogoport/surface-modules';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState, useMemo } from 'react';
 
 import useGetRailShipmentContainerDetail from '../../../hooks/useGetRailShipmentContainerDetail';
@@ -15,7 +17,10 @@ import useParseContainerData from './helpers/useParseContainerData';
 import RoutePlan from './RoutePlan';
 import styles from './styles.module.css';
 
+const MINIMUM_ROUTE_LIST_SIZE = 1;
+
 function Inventory() {
+	const { shipment_data = {}, isGettingShipment } = useContext(ShipmentDetailContext);
 	const [globalRouteState, setGlobalRouteState] = useState({
 		routeList   : new Set(),
 		allSelected : false,
@@ -24,8 +29,6 @@ function Inventory() {
 	});
 
 	const [showModal, setShowModal] = useState(false);
-
-	const { shipment_data = {}, isGettingShipment } = useContext(ShipmentDetailContext);
 
 	const { data } = useGetRailShipmentContainerDetail({
 		defaultParams: {
@@ -41,7 +44,7 @@ function Inventory() {
 	} = useUpdateRailShipmentContainerDetails({});
 
 	const onSubmit = () => {
-		if (globalRouteState?.routeList?.size > 1) {
+		if (globalRouteState?.routeList?.size > MINIMUM_ROUTE_LIST_SIZE) {
 			setShowModal(true);
 			return;
 		}
@@ -57,11 +60,16 @@ function Inventory() {
 		[routeList, globalRouteState, routeInformation, setRouteList],
 	);
 
-	const routesExist = routeList?.[0]?.route?.length > 0;
+	const routesExist = !isEmpty(routeList?.[GLOBAL_CONSTANTS.zeroth_index]?.route);
 
 	return (
 		<ShipmentInventoryContext.Provider value={providerValue}>
-			<Accordion title={<div className={styles.title}>Inventory</div>} isOpen>
+			<Accordion
+				title={<div className={styles.title}>Inventory</div>}
+				isOpen
+				type="text"
+				className={styles.accordian}
+			>
 				{!isGettingShipment ? (
 					<div>
 						<div>Overview</div>
@@ -77,7 +85,7 @@ function Inventory() {
 								<>
 									<RoutePlan
 										list={{
-											route     : routeList?.[0]?.route || [],
+											route     : routeList?.[GLOBAL_CONSTANTS.zeroth_index]?.route || [],
 											isChecked : false,
 										}}
 										type="summary"
@@ -107,13 +115,14 @@ function Inventory() {
 												<div>
 													<Button
 														disabled={updateLoading}
-														themeType={`${globalRouteState?.routeList?.size > 1
+														themeType={`${globalRouteState?.routeList?.size
+															> MINIMUM_ROUTE_LIST_SIZE
 															? 'secondary' : 'primary'}`}
 														size="md"
 														style={{ marginLeft: '15px' }}
 														onClick={onSubmit}
 													>
-														{globalRouteState?.routeList?.size > 1
+														{globalRouteState?.routeList?.size > MINIMUM_ROUTE_LIST_SIZE
 															? 'Update Containers' : 'Submit'}
 													</Button>
 												</div>
