@@ -1,4 +1,4 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -9,17 +9,18 @@ import CargoDetails from '../CargoDetails';
 import PortDetails from '../PortDetails';
 
 import AddPoNumber from './AddPoNumber';
+import { getAlteredPrimaryService } from './getAlteredPrimaryService';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
-	const [showModal, setShowModal] = useState(false);
-	const [showPopover, setShowPopover] = useState(false);
+	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
 
-	const user_data = useSelector((({ profile }) => profile?.user));
+	const [showModal, setShowModal] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 
 	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
 
@@ -28,6 +29,11 @@ function ShipmentHeader() {
 	}
 
 	const showCancelShipmentIcon = getCanCancelShipment({ shipment_data, user_data, activeStakeholder });
+
+	const newPrimaryService = getAlteredPrimaryService({
+		primary_service,
+		shipment_data,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -55,18 +61,20 @@ function ShipmentHeader() {
 
 				{po_number ? (
 					<div className={styles.po_number}>
-						PO Number:&nbsp;
+						PO Number:
+						{' '}
 						{po_number}
 					</div>
 				) : (
-					<div
-						className={styles.button}
-						role="button"
+					<Button
 						tabIndex={0}
+						className={styles.button}
 						onClick={() => setShowModal('add_po_number')}
+						themeType="linkUi"
 					>
 						Add PO Number
-					</div>
+					</Button>
+
 				)}
 			</div>
 
@@ -74,21 +82,20 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails primary_service={primary_service} />
+			<CargoDetails primary_service={newPrimaryService} />
 
 			{showCancelShipmentIcon
 				? (
 					<Popover
 						visible={showPopover}
 						render={(
-							<div
-								role="button"
-								tabIndex={0}
+							<Button
 								className={styles.cancel_button}
+								themeType="tertiary"
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>
 								Cancel Shipment
-							</div>
+							</Button>
 						)}
 						onClickOutside={() => setShowPopover(false)}
 						placement="bottom"

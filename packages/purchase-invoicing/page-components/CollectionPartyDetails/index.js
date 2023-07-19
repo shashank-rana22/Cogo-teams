@@ -34,10 +34,14 @@ const STAKE_HOLDER_TYPES = [
 	'cost booking manager',
 ];
 
-function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {}, fullwidth = false }) {
+function CollectionPartyDetails({
+	collectionParty = {}, refetch = () => {}, servicesData = {},
+	fullwidth = false, Component = () => {},
+}) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
+	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -153,6 +157,19 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							) : null}
 						</div>
 						) : null}
+					{shipment_type === 'ftl_freight' && (
+						<div className={styles.not_added}>
+							<Button
+								size="md"
+								themeType="secondary"
+								className={styles.marginright}
+								onClick={() => setShowModal('purchase')}
+								disabled={shipment_data?.is_job_closed}
+							>
+								Add Incidental Charges
+							</Button>
+						</div>
+					) }
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} shipment_data={shipment_data} />
 				<div className={styles.totalamount}>
@@ -202,6 +219,17 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						</Modal.Footer>
 					</Modal>
 				) : null}
+
+				{showModal === 'purchase'
+				&& (
+					<Component
+						shipmentId={shipment_data?.id}
+						services={SERVICES_LIST}
+						refetch={refetch}
+						source="purchase"
+						setShowChargeCodes={setShowModal}
+					/>
+				)}
 
 				{openComparision ? (
 					<ComparisionModal

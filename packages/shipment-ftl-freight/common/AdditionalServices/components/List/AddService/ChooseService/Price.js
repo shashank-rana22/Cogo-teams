@@ -24,10 +24,12 @@ function Price({
 	});
 
 	const onRequestRate = (data) => {
+		console.log(data, 'Data');
 		const addedService = (data.services || []).find(
 			(service) => service.service_type === data.service_type,
 		);
 		const { name, code, shipment_id, service_type } = data;
+		console.log(addedService, 'addda');
 		const payload = {
 			name,
 			code,
@@ -63,7 +65,11 @@ function Price({
 				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
-					onRequestRate(item);
+					if (isSeller) {
+						setAddRate(item);
+					} else {
+						onRequestRate(item);
+					}
 				}}
 				style={{ marginRight: 10 }}
 				disabled={loading}
