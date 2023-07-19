@@ -21,13 +21,16 @@ const useListCommunication = ({ taskId }) => {
 	}, { manual: false });
 
 	const getList = useCallback(async (restFilters) => {
-		const res = await trigger({
-			params  : getParams({ taskId, restFilters }),
-			headers : {
-				stopApiCache: true,
-			},
-		});
-		return res;
+		try {
+			await trigger({
+				params  : getParams({ taskId, restFilters }),
+				headers : {
+					stopApiCache: true,
+				},
+			});
+		} catch (e) {
+			console.error(e);
+		}
 	}, [taskId, trigger]);
 
 	useEffect(() => {
