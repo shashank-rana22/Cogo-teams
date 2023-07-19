@@ -52,6 +52,8 @@ function ExecuteStep({
 		getApisData,
 		selectedMail,
 		setCommodityDetails,
+		commodityTypeOptions,
+		subCommodityOptions,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
@@ -71,8 +73,6 @@ function ExecuteStep({
 		isLastStep,
 		getApisData,
 		showElements,
-		commodityTypeOptions,
-		subCommodityOptions,
 		commodityDetails,
 		setCommodityDetails,
 	});

@@ -1,6 +1,6 @@
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallBack } from 'react';
+import { useEffect } from 'react';
 
 import { getServiceMode } from '../common/utils/getServiceMode';
 
@@ -11,25 +11,20 @@ function useGetCommodityOptions({ shipment_data }) {
 		authKey : 'get_saas_hs_code_list_commodities',
 	}, { manual: true, autoCancel: false });
 
-	const getOptions = useCallBack(() => {
-		const mode = getServiceMode(shipment_data?.shipment_type);
-
-		try {
-			trigger({
-				params: {
-					service: mode,
-				},
-			});
-		} catch (err) {
-			console.error(err?.data);
-		}
-	}, []);
-
 	useEffect(() => {
 		if (shipment_data?.shipment_type === 'fcl_freight') {
-			getOptions();
+			const mode = getServiceMode(shipment_data?.shipment_type);
+			try {
+				trigger({
+					params: {
+						service: mode,
+					},
+				});
+			} catch (err) {
+				console.error(err?.data);
+			}
 		}
-	}, [getOptions, shipment_data?.shipment_type]);
+	}, [shipment_data?.shipment_type, trigger]);
 
 	let commodityTypeOptions = [];
 

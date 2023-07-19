@@ -5,7 +5,7 @@ import injectCustomFormValidations from './inject-custom-form-validations';
 const MINIMUM_BLS_COUNT = 1;
 const MINIMUM_CONTAINERS_COUNT = 1;
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
@@ -13,7 +13,7 @@ const injectValues = (
 	shipment_data,
 	stepConfig,
 	setCommodityDetails = () => {},
-) => {
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
@@ -128,7 +128,6 @@ const injectValues = (
 		});
 	} else if (
 		task?.task === 'mark_confirmed'
-		&& task?.shipment_type === 'fcl_freight'
 	) {
 		(controls || []).forEach((ctrl, index) => {
 			if (ctrl?.name === 'bl_category') {
@@ -143,8 +142,9 @@ const injectValues = (
 			}
 
 			if (ctrl?.name === 'commodity_category') {
-				controls[index].disabled = !!shipment_data?.commodity_category;
-				controls[index].value = shipment_data?.commodity_category;
+				if (shipment_data?.commodity_category) {
+					controls[index].value = shipment_data?.commodity_category;
+				}
 			}
 
 			if (ctrl?.name === 'bl_type') {
