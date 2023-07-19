@@ -127,7 +127,6 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 													Number(route?.[index + ONE]?.eta_day_count)
 													- Number(route?.[index]?.etd_day_count)
 												}
-								handleClick={handleClick}
 								loading={loading}
 							/>
 						);
@@ -141,27 +140,25 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 							return (
 								<>
 									<PortForm
-										isFirst={index === 0}
-										isLast={index === route.length - 1}
-										port={port}
 										index={index}
 										onClickDelete={onClickDelete}
 										setSubmit={setSubmit}
+										deletePort={deletePort}
+										route={route}
 									/>
 									{add ? (
 										<RoutePortForm
 											key={port?.id}
-											isFirst={index === 0}
-											isLast={index === route.length - 1}
 											port={port}
-											diffInDays={Number(route?.[index + 1]?.eta_day_count)
+											index={index}
+											diffInDays={Number(route?.[index + ONE]?.eta_day_count)
 												- Number(route?.[index]?.etd_day_count)}
 											onClickAdd={onClickAdd}
 											onClickEdit={onClickEdit}
 											setPortEdit={setPortEdit}
 											onClickDelete={onClickDelete}
-											index={index}
-
+											deletePort={deletePort}
+											route={route}
 										/>
 									) : null}
 
@@ -173,16 +170,16 @@ function RouteDetails({ route, dayOfWeek, finalRoute, setFinalRoute, loading, da
 							return (
 								<RoutePortForm
 									key={port?.id}
-									isFirst={index === 0}
-									isLast={index === route.length - 1}
 									port={port}
-									diffInDays={Number(route?.[index + 1]?.eta_day_count)
+									index={index}
+									diffInDays={Number(route?.[index + ONE]?.eta_day_count)
 										- Number(route?.[index]?.etd_day_count)}
 									onClickAdd={onClickAdd}
-									index={index}
 									onClickEdit={onClickEdit}
 									setPortEdit={setPortEdit}
 									onClickDelete={onClickDelete}
+									deletePort={deletePort}
+									route={route}
 								/>
 
 							);

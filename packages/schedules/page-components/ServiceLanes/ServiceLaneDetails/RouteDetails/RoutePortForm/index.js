@@ -8,7 +8,15 @@ const ZERO = 0;
 const ONE = 1;
 const TEN_THOUSAND = 10000;
 function RoutePortForm({
-	isFirst, isLast, port, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete,
+	port,
+	index,
+	diffInDays,
+	onClickAdd,
+	onClickEdit,
+	setPortEdit,
+	onClickDelete,
+	deletePort,
+	route,
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const dayChoices = [
@@ -24,11 +32,24 @@ function RoutePortForm({
 	const getPortName = (name) => {
 		const splitIndex = name?.indexOf(',')
             < (name?.indexOf('(') < ZERO ? TEN_THOUSAND : name?.indexOf('('))
-            	? name?.indexOf(',')
-            	: name?.indexOf('(');
+			? name?.indexOf(',')
+			: name?.indexOf('(');
 
 		return name?.substring(ZERO, splitIndex - ONE);
 	};
+	let firstIndex = ZERO;
+	let lastIndex = route.length - ONE;
+
+	if (deletePort && (deletePort.includes(ZERO) || deletePort.includes(route.length - ONE))) {
+		const allNumbers = new Set(Array.from({ length: route.length }, (_, i) => i));
+		const missingNumbers = [...allNumbers].filter((num) => !deletePort.includes(num));
+		firstIndex = deletePort.includes(ZERO) ? missingNumbers[ZERO] : ZERO;
+		lastIndex = deletePort.includes(route.length - ONE)
+			? missingNumbers[missingNumbers.length - ONE]
+			: (route.length - ONE);
+	}
+	const isFirst = firstIndex === index;
+	const isLast = lastIndex === index;
 
 	return (
 		<div className={styles.route_port}>
@@ -53,11 +74,8 @@ function RoutePortForm({
 							{port?.etd_day_count}
 							)
 						</div>
-
 					</div>
-
 				</div>
-
 			</div>
 			{ !isFirst ? (
 				<div className={styles.add_icon}>
@@ -105,7 +123,13 @@ function RoutePortForm({
 							setShowPopover(true);
 						}}
 					/>
-
+					{!isLast && (
+						<div className={styles.diff_in_days}>
+							{diffInDays}
+							{' '}
+							Days
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

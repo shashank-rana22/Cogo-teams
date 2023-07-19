@@ -1,17 +1,17 @@
 .manual_container {
-    display: flex;
-    width: 120px;
-    height: 28px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    margin-right: 20px;
-    background-color: #f2f3fa;
-    color: #7278ad;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    margin-top: -4px;
+        display: flex;
+        width: 120px;
+        height: 28px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 150%;
+        margin-right: 20px;
+        background-color: #f2f3fa;
+        color: #7278ad;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        margin-top: -4px;
 }
 
 .system_container {

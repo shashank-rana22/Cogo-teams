@@ -5,10 +5,35 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const ONE = 1;
+
 function RoutePortForm({
-	isFirst, isLast, port, diffInDays, index, onClickAdd, onClickEdit, setPortEdit, onClickDelete, add,
+	port,
+	diffInDays,
+	index,
+	onClickAdd,
+	onClickEdit,
+	setPortEdit,
+	onClickDelete,
+	deletePort,
+	route,
 }) {
 	const [showPopover, setShowPopover] = useState(false);
+	let firstIndex = ZERO;
+	let lastIndex = route.length - ONE;
+
+	if (deletePort && (deletePort.includes(ZERO) || deletePort.includes(route.length - ONE))) {
+		const allNumbers = new Set(Array.from({ length: route.length }, (_, i) => i));
+		const missingNumbers = [...allNumbers].filter((num) => !deletePort.includes(num));
+		firstIndex = deletePort.includes(ZERO) ? missingNumbers[ZERO] : ZERO;
+		lastIndex = deletePort.includes(route.length - ONE)
+			? missingNumbers[missingNumbers.length - ONE]
+			: (route.length - ONE);
+	}
+	const isFirst = firstIndex === index;
+	const isLast = lastIndex === index;
+
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
@@ -36,7 +61,7 @@ function RoutePortForm({
 			</div>
 			<div className={styles.right}>
 				<div className={styles.port_name}>
-					{port?.display_name.split(',')[0] }
+					{port?.display_name.split(',')[ZERO] }
 					<span className={styles.port_terminal} />
 				</div>
 				<div className={styles.popover_content}>

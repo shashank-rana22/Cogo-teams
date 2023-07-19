@@ -1,13 +1,21 @@
-import { InputNumber, Select } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete, setSubmit }) {
+const ZERO = 0;
+const ONE = 1;
+function PortForm({
+	index,
+	onClickDelete,
+	setSubmit,
+	deletePort,
+	route,
+}) {
 	const [location_id, setLocation_id] = useState('');
 	const [eta_day_count, setEta_day] = useState('');
 	const [etd_day_count, setEtd_day] = useState('');
@@ -23,32 +31,68 @@ function PortForm({ isFirst, isLast, port, diffInDays, index, onClickDelete, set
 		{ label: 'Saturday', value: 7 },
 		{ label: 'Sunday', value: 1 },
 	];
+	let firstIndex = ZERO;
+	let lastIndex = route.length - ONE;
+
+	if (deletePort && (deletePort.includes(ZERO) || deletePort.includes(route.length - ONE))) {
+		const allNumbers = new Set(Array.from({ length: route.length }, (_, i) => i));
+		const missingNumbers = [...allNumbers].filter((num) => !deletePort.includes(num));
+		firstIndex = deletePort.includes(ZERO) ? missingNumbers[ZERO] : ZERO;
+		lastIndex = deletePort.includes(route.length - ONE)
+			? missingNumbers[missingNumbers.length - ONE]
+			: (route.length - ONE);
+	}
+	const isFirst = firstIndex === index;
+	const isLast = lastIndex === index;
 	return (
 		<div className={styles.route_port}>
 			<div className={styles.left}>
 
 				<div className={styles.days}>
-					<Select options={DAY_OF_WEEK_OPTIONS} placeholder="ETA" value={eta_day_count} onChange={(value) => { setEta_day(value); setSubmit((prev) => ({ ...prev, eta_day_count: value })); }} />
+					<Select
+						options={DAY_OF_WEEK_OPTIONS}
+						placeholder="ETA"
+						value={eta_day_count}
+						onChange={(value) => {
+							setEta_day(value);
+							setSubmit((prev) => ({ ...prev, eta_day_count: value }));
+						}}
+					/>
 				</div>
 				<div className={styles.days}>
-					<Select options={DAY_OF_WEEK_OPTIONS} placeholder="ETD" value={etd_day_count} onChange={(value) => { setEtd_day(value); setSubmit((prev) => ({ ...prev, etd_day_count: value })); }} />
+					<Select
+						options={DAY_OF_WEEK_OPTIONS}
+						placeholder="ETD"
+						value={etd_day_count}
+						onChange={(value) => {
+							setEtd_day(value);
+							setSubmit((prev) => ({ ...prev, etd_day_count: value }));
+						}}
+					/>
 				</div>
 			</div>
-			{ !isFirst ? <div className={styles.add_icon}><IcMPlusInCircle /></div> : <div style={{ margin: '7px' }} />}
 			<div className={styles.middle}>
-				{!isFirst ? <div className={styles.hr_line_up} /> : null}
+				{!isFirst && <div className={styles.hr_line_up} /> }
 				<div className={styles.circle} />
-				<div className={styles.hr_line_down} />
+				{!isLast && <div className={styles.hr_line_down} />}
 			</div>
 			<div className={styles.right}>
 				<div className={styles.port_input}>
 					<Select
 						placeholder="Port Name"
 						{...options}
-						onChange={(value) => { setLocation_id(value); setSubmit((prev) => ({ ...prev, location_id: value })); }}
+						onChange={(value) => {
+							setLocation_id(value);
+							setSubmit((prev) => ({ ...prev, location_id: value }));
+						}}
 						value={location_id}
 					/>
-					<IcMDelete height="20px" width="20px" margin="40px" onClick={() => { onClickDelete(index); }} />
+					<IcMDelete
+						className={styles.delete_icon}
+						onClick={() => {
+							onClickDelete(index);
+						}}
+					/>
 				</div>
 
 			</div>

@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     width: 40%;
-    height: 120px;
+    height: 125px;
     padding: 8px;
 }
 
@@ -28,27 +28,23 @@
 
 .circle {
     position: absolute;
-    top: calc(50% - 8px);
+    top: calc(50% - 8px); 
     left: calc(50% - 8px);
     width: 16px;
     height: 16px;
     background-color: #acdadf;
     border-radius: 50%;
-}
-
-.hr_line_down,
-.hr_line_up {
+  }
+  
+  
+  .hr_line_up {
     position: absolute;
-    top: calc(50% + 8px);
     left: calc(50% - 1px);
-    width: calc(50% - 8px);
-    height: calc(50% - 8px);
     border-right: 2px solid #acdadf;
-}
+    height: 130px;
+    margin-top: -60px; 
+  }
 
-.hr_line_up {
-    top: 0;
-}
 
 .eta_etd {
     display: flex;
@@ -85,6 +81,7 @@
     font-size: 14px;
     font-weight: 400;
     color: #828282;
+    margin-left: -50px;
 }
 
 

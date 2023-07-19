@@ -27,26 +27,25 @@
 
 .circle {
     position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 8px);
+    top: calc(50% - 8px); 
+    left: calc(50% + 11px);
     width: 16px;
     height: 16px;
     background-color: #acdadf;
     border-radius: 50%;
 }
 
-.hr_line_down,
+
 .hr_line_up {
     position: absolute;
-    top: calc(50% + 8px);
-    left: calc(50% - 1px);
-    width: calc(50% - 8px);
-    height: calc(50% - 8px);
     border-right: 2px solid #acdadf;
+    height: 128px;
+    margin-top: -60px;
+    left: 20px; 
 }
 
 .hr_line_up {
-    top: 0;
+top: 0;
 }
 
 
@@ -105,11 +104,17 @@
     align-items: center;
     margin-top: 30px;
     margin: 20px;
-    margin-left: -40px;
+
     cursor: pointer;
 }
 .days{
-    width: 140px;
-    margin-right: -120px;
+    width: 160px;
+    margin-right: -100px;
     padding: 2px;
+}
+
+.delete_icon {
+    height:20px;
+    width:20px;
+    margin:40px ;
 }

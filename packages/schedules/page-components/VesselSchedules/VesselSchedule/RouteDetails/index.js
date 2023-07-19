@@ -12,8 +12,13 @@ const ZERO = 0;
 const ONE = 1;
 const TEN = 10;
 function RouteDetails({
-	data, route, finalRoute, setFinalRoute, handleMouseEnter,
-	handleMouseLeave, refetch,
+	data,
+	route,
+	finalRoute,
+	setFinalRoute,
+	handleMouseEnter,
+	handleMouseLeave,
+	refetch,
 }) {
 	const {
 		setPortEdit,
@@ -35,10 +40,10 @@ function RouteDetails({
 					Total Transit :
 					{' '}
 					{route
-              && differenceInDays(
-              	Date.parse(route?.[route.length - ONE]?.eta?.slice(ZERO, TEN)),
-              	Date.parse(route?.[ZERO]?.etd?.slice(ZERO, TEN)),
-              )}
+					&& differenceInDays(
+						Date.parse(route?.[route.length - ONE]?.eta?.slice(ZERO, TEN)),
+						Date.parse(route?.[ZERO]?.etd?.slice(ZERO, TEN)),
+					)}
 					{' '}
 					Days
 				</div>
@@ -76,10 +81,10 @@ function RouteDetails({
 						if (index === route.length - ONE) {
 							return (
 								<RoutePort
-									key={port?.id}
 									isLast
 									port={port}
 									handleMouseEnter={handleMouseEnter}
+									key={port?.id}
 									handleMouseLeave={handleMouseLeave}
 									index={index}
 								/>
@@ -87,7 +92,6 @@ function RouteDetails({
 						}
 						return (
 							<RoutePort
-								key={port?.id}
 								isFirst={index === ZERO}
 								port={port}
 								diffInDays={differenceInDays(
@@ -95,6 +99,7 @@ function RouteDetails({
 									Date.parse(route?.[index]?.etd?.slice(ZERO, TEN)),
 								)}
 								handleMouseEnter={handleMouseEnter}
+								key={port?.id}
 								handleMouseLeave={handleMouseLeave}
 								index={index}
 							/>
@@ -109,18 +114,15 @@ function RouteDetails({
 								return (
 									<>
 										<PortForm
-											isFirst={index === ZERO}
-											isLast={index === route.length - ONE}
-											port={port}
 											diffInDays={ZERO}
 											index={index}
 											onClickDelete={onClickDelete}
 											setSubmit={setSubmit}
+											deletePort={deletePort}
+											route={route}
 										/>
 										{add ? (
 											<RoutePortForm
-												isFirst={index === ZERO}
-												isLast={index === route.length - ONE}
 												port={port}
 												diffInDays={differenceInDays(
 													Date.parse(route?.[index + ONE]?.etd?.slice(ZERO, TEN)),
@@ -131,20 +133,17 @@ function RouteDetails({
 												onClickEdit={onClickEdit}
 												setPortEdit={setPortEdit}
 												onClickDelete={onClickDelete}
-												add={add}
+												key={port?.id}
+												deletePort={deletePort}
+												route={route}
 											/>
 										) : null}
-
 									</>
-
 								);
 							}
 							if (!deletePort?.includes(index)) {
 								return (
 									<RoutePortForm
-										key={port?.id}
-										isFirst={index === ZERO}
-										isLast={index === route.length - ONE}
 										port={port}
 										diffInDays={differenceInDays(
 											Date.parse(route?.[index + ONE]?.etd?.slice(ZERO, TEN)),
@@ -152,18 +151,20 @@ function RouteDetails({
 										)}
 										index={index}
 										onClickAdd={onClickAdd}
+										key={port?.id}
 										onClickEdit={onClickEdit}
 										setPortEdit={setPortEdit}
 										onClickDelete={onClickDelete}
-										add={add}
-
+										deletePort={deletePort}
+										route={route}
 									/>
 								);
 							}
+
+							return null;
 						})}
 					</div>
 				)}
-
 		</div>
 	);
 }
