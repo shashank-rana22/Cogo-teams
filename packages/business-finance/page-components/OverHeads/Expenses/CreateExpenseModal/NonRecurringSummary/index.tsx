@@ -134,8 +134,8 @@ function NonRecurringSummary({
 	}, [stakeholdersData, setIncidentMangementId]);
 
 	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
+		if (stakeholder1) {
+			const { userEmail, userId, userName } = stakeholder1 || {};
 			setNonRecurringData((prev: object) => ({
 				...prev,
 				stakeholderEmail : userEmail,
@@ -143,7 +143,7 @@ function NonRecurringSummary({
 				stakeholderName  : userName,
 			}));
 		}
-	}, [stakeholdersData, setNonRecurringData]);
+	}, [stakeholder1, setNonRecurringData]);
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {

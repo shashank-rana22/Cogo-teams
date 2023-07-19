@@ -72,7 +72,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
+	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
 		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
 		incidentSubType : categoryName,
 		entityId        : entityObject?.id,
@@ -131,8 +131,8 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const filename = splitArray[splitArray.length - 1];
 
 	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
+		if (stakeholder1) {
+			const { userEmail, userId, userName } = stakeholder1 || {};
 			setExpenseData((prev: object) => ({
 				...prev,
 				stakeholderEmail : userEmail,
@@ -140,7 +140,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 				stakeholderName  : userName,
 			}));
 		}
-	}, [stakeholdersData, setExpenseData]);
+	}, [stakeholder1, setExpenseData]);
 
 	useEffect(() => {
 		if (tradePartyData?.length > 0) {

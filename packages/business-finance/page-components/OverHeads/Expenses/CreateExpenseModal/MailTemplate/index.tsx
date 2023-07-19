@@ -14,6 +14,7 @@ interface Data {
 	vendorName?: string;
 	expenseCategory?: string;
 	stakeholderEmail?: string;
+	categoryName?: string;
 }
 
 interface Props {
@@ -36,8 +37,8 @@ function MailTemplate({
 	const {
 		uploadedInvoice,
 		vendorName = '-',
-		expenseCategory = '-',
 		stakeholderEmail,
+		categoryName = '-',
 	} = mailData || {};
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -84,7 +85,7 @@ function MailTemplate({
 			<div className={styles.subject}>
 				<Details
 					text={`${vendorName} | ${startCase(
-						expenseCategory,
+						categoryName,
 					)} | Expense Approval Request`}
 				/>
 			</div>

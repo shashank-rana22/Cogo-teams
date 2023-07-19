@@ -130,8 +130,8 @@ function RecurringSummary({
 	};
 
 	useEffect(() => {
-		if (stakeholdersData) {
-			const { userEmail, userId, userName } = stakeholdersData || {};
+		if (stakeholder1) {
+			const { userEmail, userId, userName } = stakeholder1 || {};
 			setRecurringData((prev: object) => ({
 				...prev,
 				stakeholderEmail : userEmail,
@@ -139,7 +139,7 @@ function RecurringSummary({
 				stakeholderName  : userName,
 			}));
 		}
-	}, [stakeholdersData, setRecurringData]);
+	}, [stakeholder1, setRecurringData]);
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
