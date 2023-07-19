@@ -26,15 +26,24 @@ function Header({ serviceData = [] }) {
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
 			<div className={cl` ${styles.container}`}>
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
-					<div className={styles.service_name}>{display_label}</div>
-					<div className={styles.service_provider}>{service_provider?.business_name}</div>
+					<div className={styles.service_name}>
+						{display_label}
+					</div>
+
+					<div className={styles.service_provider}>
+						{service_provider?.business_name}
+					</div>
 				</div>
 
 				<div className={styles.secondary_details}>
 					<div>
 						{payment_term
-							? <div className={styles.payment_term}>{payment_term}</div>
-							: null }
+							? (
+								<div className={styles.payment_term}>
+									{payment_term}
+								</div>
+							)
+							: null}
 
 						<div className={styles.state}>{statusText}</div>
 					</div>
@@ -48,7 +57,7 @@ function Header({ serviceData = [] }) {
 							})}
 							className={styles.details_cta}
 						>
-							{ showDetails[SERVICE_DATA_FIRST.display_label] ? 'Hide Details' : 'View Details'}
+							{showDetails[SERVICE_DATA_FIRST.display_label] ? 'Hide Details' : 'View Details'}
 						</div>
 						{can_edit_cancel_service ? (
 							<div className={styles.edit_cancel}>

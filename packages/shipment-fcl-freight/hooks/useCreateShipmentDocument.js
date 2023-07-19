@@ -27,4 +27,5 @@ const useCreateShipmentDocument = ({ refetch = () => {} }) => {
 		docLoading: loading,
 	};
 };
+
 export default useCreateShipmentDocument;

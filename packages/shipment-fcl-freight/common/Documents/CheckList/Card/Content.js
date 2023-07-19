@@ -3,13 +3,31 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import VerticleLine from '../VerticleLine';
 
+import ReviewSiDocument from './ReviewSiDocument';
 import styles from './styles.module.css';
 
-const INCREMENT_FACTOR = 1;
-const SLICE_INDEX = -1;
+const INCREMENT_BY_ONE = 1;
+const LABEL_SPLIT_LOWER_INDEX = -1;
+const STARTING_POINT = 1;
+
+const SUPPLIER_STAKEHOLDERS = [
+	'booking_desk',
+	'booking_desk_manager',
+	'superadmin',
+];
+
+const BL_SHOW_STATUS = [
+	'approved',
+	'released',
+	'surrendered',
+	'delivered',
+	'surrender_pending',
+	'release_pending',
+];
 
 function Content({
 	uploadedItem = {},
@@ -27,15 +45,23 @@ function Content({
 	setShowApproved = () => {},
 	docType = '',
 	canEditDocuments = true,
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	docType = '',
+	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
+	bl_details = [],
 }) {
-	const isBlReleased = [
-		'approved',
-		'released',
-		'surrendered',
-		'delivered',
-	].includes(uploadedItem?.bl_detail_status);
+	const [siReviewState, setSiReviewState] = useState(false);
+
+	const { data:bl_data } = uploadedItem || {};
+	const isBlUploaded = bl_details?.find((i) => i?.id === bl_data?.bl_detail_id);
+
+	const isBlReleased = BL_SHOW_STATUS.includes(isBlUploaded?.status);
 
 	const tradeType = primary_service?.trade_type;
+
+	const { document_type, state } = uploadedItem;
 
 	const getUploadButton = () => {
 		if (showUploadText.length && canEditDocuments) {
@@ -65,17 +91,19 @@ function Content({
 		return null;
 	};
 
+	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
+
 	return (
 		<div className={styles.single_item}>
 			<VerticleLine
 				checked={isChecked}
-				isLast={taskList.length === idx + INCREMENT_FACTOR}
+				isLast={taskList.length === idx + INCREMENT_BY_ONE}
 			/>
 			<div className={isChecked ? styles.single_item_child : styles.upload_item}>
 
 				<div className={styles.main}>
 					<div className={styles.heading}>
-						{item?.label?.split('Upload').slice(SLICE_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
+						{item?.label?.split('Upload')?.slice(LABEL_SPLIT_LOWER_INDEX)[GLOBAL_CONSTANTS.zeroth_index]}
 					</div>
 					{isChecked ? (
 						<div className={styles.gap}>
@@ -90,18 +118,17 @@ function Content({
 								Uploaded On:
 								{' '}
 								{formatDate({
-									date       : uploadedItem?.created_at,
-									formatType : 'dateTime',
+									date       : uploadedItem?.uploaded_at,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
 								})}
-
 							</div>
 							<div className={cl`${styles.document_status}
 							 ${['document_amendment_requested', 'document_rejected'].includes(uploadedItem?.state)
 								? styles.pending : styles.accepted}`}
 							>
-								{startCase(uploadedItem?.state?.split('_')?.[INCREMENT_FACTOR])}
+								{startCase(uploadedItem?.state?.split('_')?.[STARTING_POINT])}
 							</div>
 						</div>
 					) : (
@@ -110,14 +137,12 @@ function Content({
 								<div className={styles.upload_info}>
 									Due On:
 									{' '}
-									{
-									formatDate({
+									{formatDate({
 										date       : item?.pendingItem?.deadline,
-										formatType : 'dateTime',
 										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-										timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
-									})
-}
+										timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+										formatType : 'dateTime',
+									})}
 								</div>
 							) : null}
 
@@ -131,6 +156,15 @@ function Content({
 						</div>
 					)}
 				</div>
+
+				{SI_REVIEW_CONDITION && SUPPLIER_STAKEHOLDERS.includes(activeStakeholder) ? (
+					<Button
+						themeType="link"
+						onClick={() => setSiReviewState(true)}
+					>
+						Reject
+					</Button>
+				) : null}
 
 				{isChecked ? (
 					<div className={styles.action_container}>
@@ -162,6 +196,15 @@ function Content({
 				) : getUploadButton()}
 
 			</div>
+
+			{siReviewState ? (
+				<ReviewSiDocument
+					siReviewState={siReviewState}
+					setSiReviewState={setSiReviewState}
+					uploadedItem={uploadedItem}
+					shipmentDocumentRefetch={shipmentDocumentRefetch}
+				/>
+			) : null}
 
 		</div>
 	);

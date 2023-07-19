@@ -12,6 +12,9 @@ function CheckList({
 	setShowApproved = () => {},
 	canEditDocuments = true,
 	isIGM = false,
+	shipmentDocumentRefetch = () => {},
+	activeStakeholder = '',
+	bl_details = [],
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
@@ -27,6 +30,9 @@ function CheckList({
 				setShowApproved={setShowApproved}
 				canEditDocuments={canEditDocuments}
 				isIGM={isIGM}
+				shipmentDocumentRefetch={shipmentDocumentRefetch}
+				activeStakeholder={activeStakeholder}
+				bl_details={bl_details}
 			/>
 		</div>
 	);

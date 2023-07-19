@@ -1,4 +1,4 @@
-import { Button, Toggle, Popover, Toast } from '@cogoport/components';
+import { Button, Toggle, Popover, Toast, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
@@ -27,7 +27,6 @@ function Header({
 	const contextValues = useContext(ShipmentDetailContext);
 
 	const [showBookingReq, setShowBookingReq] = useState(false);
-	const [visibleRemarks, setVisibleRemarks] = useState(false);
 	const [visibleCfsDetails, setVisibleCfsDetails] = useState(false);
 
 	const { activeStakeholder, shipment_data, primary_service, stakeholderConfig } = contextValues || {};
@@ -64,6 +63,7 @@ function Header({
 			/>
 		</div>
 	);
+	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
 		<div className={styles.container}>
@@ -87,50 +87,38 @@ function Header({
 								onClick={() => setVisibleCfsDetails((pev) => !pev)}
 							>
 								CFS Address
-
 							</Button>
 						</Popover>
 					) : null }
 
-					{showSupplyRemarks ? (
-						<Popover
+					{showSupplyRemarks && supplyRemarks ? (
+						<Tooltip
+							theme="light"
 							placement="bottom"
-							trigger="mouseenter"
-							caret={false}
-							visible={visibleRemarks}
-							render={`Supply Remarks: ${primary_service?.booking_preferences?.
-								[GLOBAL_CONSTANTS.zeroth_index]?.remarks || 'NA'}`}
+							animation="shift-away"
+							interactive
+							content={`Supply Remarks: ${supplyRemarks}`}
 						>
-							<Button
-								size="md"
-								themeType="link"
-								onClick={() => setVisibleRemarks((pev) => !pev)}
-							>
-								Remarks
-
-							</Button>
-						</Popover>
+							<div className={styles.remarks}>Remarks</div>
+						</Tooltip>
 					) : null }
 
 					{show_others_tasks ? (
 						<div className={styles.toggle_container}>
-							<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
+							<div>Hide completed tasks</div>
 							<Toggle
 								checked={hideCompletedTasks}
 								onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
 							/>
 						</div>
-					) : null }
+					) : null}
 
 					{show_others_tasks ? (
 						<div className={styles.toggle_container}>
-							<div style={{ marginTop: '12px' }}>Show only my tasks</div>
-
+							<div>Show only my tasks</div>
 							<Toggle
 								checked={showMyTasks}
-								onChange={() => {
-									setShowMyTasks(!showMyTasks);
-								}}
+								onChange={() => setShowMyTasks(!showMyTasks)}
 							/>
 						</div>
 					) : null }

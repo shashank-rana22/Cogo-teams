@@ -16,18 +16,18 @@ import {
 	AmendDraftBl,
 	UploadSI,
 	MarkIgmShipmentConfirm,
+	UploadComplianceDocs,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const excludeServices = [
+const EXCLUDE_SERVICES = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
-const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
 
-const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
+const REDUCE_LENGTH_BY = 1;
 
 function ExecuteTask({
 	task = {},
@@ -35,6 +35,7 @@ function ExecuteTask({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	tasksList = [],
 }) {
 	const { servicesList, shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
 
@@ -51,7 +52,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
+		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
 		: {};
 
 	if (loading) {
@@ -61,7 +62,7 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task.service_type))
+		&& (!EXCLUDE_SERVICES.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -153,9 +154,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_nomination_details'
-	) {
+	if (task.task === 'update_nomination_details') {
 		return (
 			<NominationTask
 				primaryService={primary_service}
@@ -177,10 +176,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'upload_si'
-		&& primary_service?.trade_type === 'export'
-	) {
+	if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
 		return (
 			<UploadSI
 				pendingTask={task}
@@ -191,10 +187,18 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task?.task === 'generate_cargo_insurance'
-		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
-	) {
+	if (task.task === 'upload_compliance_documents') {
+		return (
+			<UploadComplianceDocs
+				task={task}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
+			/>
+		);
+	}
+
+	if (task?.task === 'generate_cargo_insurance') {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
@@ -214,7 +218,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT}
+			isLastStep={currentStep === steps.length - REDUCE_LENGTH_BY}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

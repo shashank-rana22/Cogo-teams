@@ -32,11 +32,13 @@
 
 .right_content {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
 .toggle_container {
 	display: flex;
+	align-items: center;
 	margin-left: 22px;
 	font-size: var(--font-size-sm);
 	color: #000;
@@ -73,4 +75,10 @@
 
 .cfs_details {
 	display: flex;
+}
+
+.remarks {
+	font-size: var(--font-size-md);
+	text-decoration: underline;
+	cursor: pointer;
 }
