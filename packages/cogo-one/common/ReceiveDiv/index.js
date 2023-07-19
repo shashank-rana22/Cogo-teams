@@ -13,8 +13,8 @@ import styles from './styles.module.css';
 
 function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
-		setRaiseTicketModal((p) => {
-			if (p?.state) {
+		setRaiseTicketModal((previous) => {
+			if (previous?.state) {
 				return { state: false, data: {}, source: null };
 			}
 			return { state: true, data: { messageData: data, formattedData }, source: 'message' };
@@ -94,7 +94,7 @@ function ReceiveDiv({
 					<div
 						role="presentation"
 						className={styles.list_button}
-						onClick={() => setShowOrder((p) => !p)}
+						onClick={() => setShowOrder((previous) => !previous)}
 					>
 						{showOrder ? (
 							<span className={styles.btn_container}>

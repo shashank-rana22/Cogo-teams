@@ -18,8 +18,8 @@ const useListDefaultTypes = ({ shipmentData = {} }) => {
 					Subcategory : sub_category,
 				},
 			});
-		} catch (e) {
-			console.error(e?.response?.data || 'something went wrong');
+		} catch (error) {
+			console.error(error);
 		}
 	}, [category, sub_category, trigger]);
 

@@ -20,7 +20,7 @@ function TransactionalActivity({ transactional = {} }) {
 	const router = useRouter();
 
 	const { userId } = useSelector(({ profile }) => ({
-		userId: profile.user?.id,
+		userId: profile.user.id,
 
 	}));
 
@@ -74,7 +74,7 @@ function TransactionalActivity({ transactional = {} }) {
 
 				const destination_port = item[destination] || {};
 
-				const { name:destination_name = '', port_code:destination_port_code = '' } = destination_port || {};
+				const { name: destination_name = '', port_code: destination_port_code = '' } = destination_port || {};
 
 				const SHIPMENT_FORMATTED_DATA = {
 					category     : shipment_type,

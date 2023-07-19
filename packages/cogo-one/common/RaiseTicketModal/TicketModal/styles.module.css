@@ -10,3 +10,11 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+.modal_header {
+	padding: 8px;
+}
+
+.modal_footer {
+	padding: 12px;
+}

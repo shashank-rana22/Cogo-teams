@@ -4,22 +4,22 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
-	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	notify_customer,
+	agentId, priority, finalUrl, selectedServices,
+	issueType, additionalInformation, notifyCustomer,
 }) => ({
-	UserID         : id,
-	PerformedByID  : id,
+	UserID         : agentId,
+	PerformedByID  : agentId,
 	Source         : 'admin',
 	Priority       : priority,
 	Usertype       : 'ticket_user',
 	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
-	Type           : issue_type,
-	Description    : additional_information,
-	NotifyCustomer : notify_customer,
+	Type           : issueType,
+	Description    : additionalInformation,
+	NotifyCustomer : notifyCustomer,
 });
 
 const useRaiseTicket = ({ setShowRaiseTicket = () => {}, additionalInfo = [] }) => {
-	const { profile } = useSelector((state) => state);
+	const { agentId = '' } = useSelector(({ profile }) => ({ agentId: profile.user.id }));
 
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/ticket',
@@ -29,16 +29,16 @@ const useRaiseTicket = ({ setShowRaiseTicket = () => {}, additionalInfo = [] }) 
 
 	const raiseTickets = async (val) => {
 		const {
-			issue_type,
-			additional_information,
-			organization_id,
-			user_id,
+			issue_type: issueType = '',
+			additional_information: additionalInformation = '',
+			organization_id : organizationId = '',
+			user_id: userId = '',
 			priority,
-			file_url,
-			notify_customer,
+			file_url: fileUrl = '',
+			notify_customer: notifyCustomer,
 			...rest
 		} = val || {};
-		const { finalUrl = '' } = file_url || {};
+		const { finalUrl = '' } = fileUrl || {};
 
 		let additionalData = {};
 
@@ -46,23 +46,23 @@ const useRaiseTicket = ({ setShowRaiseTicket = () => {}, additionalInfo = [] }) 
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
 
-		if (!isEmpty(organization_id)) {
+		if (!isEmpty(organizationId)) {
 			additionalData = {
-				OrganizationID : organization_id,
-				UserID         : user_id,
+				OrganizationID : organizationId,
+				UserID         : userId,
 			};
 		}
 
 		try {
 			await trigger({
 				data: getPayload({
-					id: profile?.user?.id,
+					agentId,
 					priority,
 					finalUrl,
 					selectedServices,
-					issue_type,
-					additional_information,
-					notify_customer,
+					issueType,
+					additionalInformation,
+					notifyCustomer,
 					additionalData,
 				}),
 			});

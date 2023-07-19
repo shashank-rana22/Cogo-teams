@@ -18,13 +18,13 @@ const getDefaultValues = ({ shipmentData = {} }) => ({
 function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 	const { ticketDefaultTypeData = {} } = useListDefaultTypes({ shipmentData });
 	const {
-		TicketType: ticketType,
+		TicketType: ticketType = '',
 		AdditionalInfo: additionalInfo = '',
 	} = ticketDefaultTypeData[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const defaultFormValues = getDefaultValues({ shipmentData });
 
-	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
+	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
 
 	const {
 		control,
@@ -43,7 +43,7 @@ function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 
 	return (
 		<form onSubmit={handleSubmit(raiseTickets)}>
-			<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
+			<Modal.Header title="Raise Ticket" className={styles.modal_header} />
 
 			<Modal.Body className={styles.preview_modal_body}>
 				<RaiseTickets
@@ -55,7 +55,7 @@ function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 				/>
 			</Modal.Body>
 
-			<Modal.Footer style={{ padding: 12 }}>
+			<Modal.Footer className={styles.modal_footer}>
 				<Button size="md" type="submit" loading={loading}>
 					Submit
 				</Button>
