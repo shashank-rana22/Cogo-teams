@@ -9,16 +9,16 @@ interface NestedObj {
 }
 interface Props {
 	item:NestedObj;
-	listRepository: React.FC;
+	listRepository: Function;
 
 }
 
-function ConfirmDelete({ item, listRepository }:Props) {
+function ConfirmDelete({ item = {}, listRepository = () => {} }:Props) {
 	const { handleRepository, loading } = useHandleRepository(true);
 
 	const handleDelete = () => {
 		const payload = { id: item?.id, action_name: 'delete' };
-		handleRepository(payload, listRepository);
+		handleRepository({ payload, listRepository });
 	};
 
 	return (
