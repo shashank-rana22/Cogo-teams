@@ -1,24 +1,13 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	getDunningList?: Function;
-	setActionModal?: Function;
-}
-
-interface StateInterface {
-	profile?: {
-		user?: {
-			id?: string | number;
-		};
-	};
-}
-
-function useUpdateCycle({ getDunningList, setActionModal }:Props) {
+function useUpdateCycle({ getDunningList, setActionModal }) {
 	const {
 		profile,
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 	const [
 		{ data, loading },
 		trigger,
@@ -39,6 +28,13 @@ function useUpdateCycle({ getDunningList, setActionModal }:Props) {
 			monthDay,
 			oneTimeDate,
 		} = formData || {};
+
+		const oneTimeDateValue = triggerType !== 'PERIODIC' ? formatDate({
+			date       : oneTimeDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			formatType : 'date',
+		}) : undefined;
+
 		try {
 			await trigger({
 				data: {
@@ -51,7 +47,7 @@ function useUpdateCycle({ getDunningList, setActionModal }:Props) {
 						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 						week                      : weekDay || undefined,
 						dayOfMonth                : monthDay || undefined,
-						oneTimeDate               : triggerType !== 'PERIODIC' ? oneTimeDate : undefined,
+						oneTimeDate               : oneTimeDateValue,
 					},
 				},
 			});

@@ -20,32 +20,32 @@ const BODY_STYLES = {
 	padding    : '0px 16px',
 };
 
-export const LIST_CONFIG = {
+export const CYCLE_LIST_CONFIG = {
 	showHeader   : true,
 	headerStyles : HEADER_STYLES,
 	bodyStyles   : BODY_STYLES,
 	fields       : [
 		{
-			label : 'Name',
+			label : 'Cycle Name',
 			key   : 'name',
 			span  : 1.5,
 			func  : 'renderName',
 		},
 		{
 			label : 'Type',
-			key   : 'dunningCycleType',
+			key   : 'cycleType',
 			func  : 'renderType',
 			span  : 1.5,
 		},
 		{
 			label : 'Frequency',
-			key   : 'Frequency',
+			key   : 'frequency',
 			func  : 'renderFrequency',
 			span  : 1.5,
 		},
 		{
 			label   : 'Created On',
-			key     : 'CreatedOn',
+			key     : 'createdAt',
 			func    : 'renderCreatedOn',
 			sorting : { name: 'createdAt' },
 			span    : 1.5,
@@ -53,16 +53,10 @@ export const LIST_CONFIG = {
 
 		{
 			label   : 'Last Edited On',
-			key     : 'LastEditedOn',
+			key     : 'updatedAt',
 			func    : 'renderUpdatedAt',
 			sorting : { name: 'updatedAt' },
 			span    : 1.5,
-		},
-		{
-			label : 'Status',
-			key   : 'status',
-			func  : 'renderStatus',
-			span  : 1.5,
 		},
 		{
 			label : 'Actions',
@@ -71,7 +65,7 @@ export const LIST_CONFIG = {
 		},
 		{
 			key  : '',
-			func : 'viewMore',
+			func : 'viewExecutions',
 			span : 1.5,
 		},
 	],

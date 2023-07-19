@@ -2,24 +2,12 @@ import { Tooltip, Toggle, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 
-import GetSortingData from '../components/ExceptionsManagement/sorting';
+import GetSortingData from '../components/ExceptionsManagement/sorting.tsx';
 
 import styles from './styles.module.css';
 
-interface Sort {
-	sortType?: string;
-	sortBy?: string;
-}
-interface MasterExceptionColumnInterface {
-	sort?: Sort;
-	setSort?: React.Dispatch<React.SetStateAction<object>>;
-	deleteMasterLoading?: boolean;
-	deleteMasterException?: Function;
-	exceptionFilter?: object;
-	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
-	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	setMasterListId?: React.Dispatch<React.SetStateAction<string>>;
-}
+const DEFAULT_VALUE = 0;
+
 const masterExceptionColumn = ({
 	sort,
 	setSort,
@@ -29,7 +17,7 @@ const masterExceptionColumn = ({
 	setExceptionFilter,
 	setShowConfirmationModal,
 	setMasterListId,
-}:MasterExceptionColumnInterface) => (
+}) => (
 	[
 		{
 			Header   : 'Customer Name',
@@ -85,7 +73,7 @@ const masterExceptionColumn = ({
 			id       : 'creditDays',
 			accessor : (row) => (
 				<div className={styles.text}>
-					{row?.creditDays || 0}
+					{row?.creditDays || DEFAULT_VALUE}
 				</div>
 			),
 		},
@@ -106,7 +94,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.creditAmount || 0,
+						amount   : row?.creditAmount || DEFAULT_VALUE,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',
@@ -134,7 +122,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.totalDueAmount || 0,
+						amount   : row?.totalDueAmount || DEFAULT_VALUE,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',
@@ -142,6 +130,15 @@ const masterExceptionColumn = ({
 							minimumFractionDigits : 2,
 						},
 					})}
+				</div>
+			),
+		},
+		{
+			Header   : 'Entity Code',
+			id       : 'entityCode',
+			accessor : (row) => (
+				<div className={styles.text}>
+					{row?.entityCode || '-'}
 				</div>
 			),
 		},

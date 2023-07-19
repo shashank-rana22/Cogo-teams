@@ -3,52 +3,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import Filter from '../../../../../commons/Filters';
-import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
+import Filter from '../../../../../commons/Filters/index.tsx';
+import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants/index.ts';
 
 import { controls } from './controls';
 import styles from './styles.module.css';
 
-interface FormData {
-	triggerType?: string;
-	frequency?: string;
-	weekDay?: string;
-	monthDay?: string;
-	timezone?: string;
-	time?: Date;
-	isAllCreditControllers?: boolean;
-	creditController?: string[];
-	oneTimeDate?: Date;
-	scheduledHour?: string;
-	scheduledMinute?: string;
-	scheduleRule?: {
-		scheduleTime?: string;
-		dunningExecutionFrequency?: string;
-		week?: string;
-		scheduleTimeZone?: string;
-		dayOfMonth?: string | number;
-		oneTimeDate?: string;
-	};
-	name?: string;
-	dunningCycleType?: string;
-	cogoEntityId?: string;
-	filters?: {
-		dueOutstandingCurrency?: string;
-		organizationStakeholderIds?: string[];
-		serviceTypes?: string[];
-		cogoEntityId?: string;
-		ageingBucket?: string;
-		totalDueOutstanding?: number | string;
-	}
-}
+const MINUTE_POSITION = 1;
 
-interface Props {
-	formData?: FormData;
-	setFormData?: (p:object)=>void;
-	isEditMode?: boolean;
-}
-
-function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false }:Props) {
+function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false }) {
 	const timezoneOptions = GLOBAL_CONSTANTS.options.timezone_options;
 
 	const {
@@ -57,7 +20,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 		isAllCreditControllers, oneTimeDate, scheduleRule,
 		filters,
 		name,
-		dunningCycleType,
+		cycleType,
 		cogoEntityId,
 	} = formData;
 
@@ -79,7 +42,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 		oneTimeDate:oneTimeDateSchedule,
 	} = scheduleRule || {};
 
-	const handleTabChange = (val?: string) => {
+	const handleTabChange = (val) => {
 		const updatedFormData = { ...formData };
 
 		switch (val) {
@@ -106,6 +69,12 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 		setFormData(updatedFormData);
 	};
 
+	const unformatDate = (stringDate) => {
+		const [day, month, year] = stringDate.split('/');
+		const date = new Date(`${year}-${month}-${day}`);
+		return date;
+	};
+
 	useEffect(() => {
 		if (isAllCreditControllers) {
 			setFormData((prev) => ({ ...prev, creditController: null }));
@@ -115,13 +84,12 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 	useEffect(() => {
 		// pre-filling all the details in case of updating
 		if (isEditMode) {
-			const stringDate = oneTimeDate || oneTimeDateSchedule;
-			const formattedOneTimeDate = new Date(stringDate);
+			const unformattedOneTimeDate = unformatDate(oneTimeDateSchedule);
 			const timeArray = (scheduleTime)?.split(':');
 			const scheduledHourValue = timeArray?.[GLOBAL_CONSTANTS.zeroth_index];
-			const scheduledMinuteValue = timeArray?.[1];
+			const scheduledMinuteValue = timeArray?.[MINUTE_POSITION];
 
-			setFormData((prev:object) => ({
+			setFormData((prev) => ({
 				...prev,
 				frequency       : dunningExecutionFrequency,
 				weekDay         : week,
@@ -130,27 +98,27 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 				scheduledMinute : scheduledMinuteValue,
 				monthDay        : dayOfMonth
 					? String(dayOfMonth) : undefined,
-				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
+				oneTimeDate            : unformattedOneTimeDate || undefined,
 				dueOutstandingCurrency : dueOutstandingCurrency || undefined,
 				isAllCreditControllers : isEmpty(organizationStakeholderIds),
 				creditController       : organizationStakeholderIds || undefined,
 				serviceType            : serviceTypes || undefined,
 				cycleName              : name || undefined,
-				cycleType              : dunningCycleType || undefined,
+				cycleType              : cycleType || undefined,
 				cogoEntityId           : cogoEntityIdFromData || undefined,
 				ageingBucket,
 				totalDueOutstanding,
 			}));
 		}
 	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
-		week, isEditMode, setFormData, oneTimeDate,
+		week, isEditMode, setFormData,
 		dueOutstandingCurrency,
 		organizationStakeholderIds,
 		serviceTypes,
 		oneTimeDateSchedule,
 		ageingBucket,
 		cogoEntityIdFromData,
-		dunningCycleType,
+		cycleType,
 		name,
 		totalDueOutstanding,
 	]);
@@ -158,12 +126,12 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 	useEffect(() => {
 		// setting currency value based on selected entity
 		if (cogoEntityId && !isEditMode) {
-			const currencyEntityData:{ currency?: string }[] = Object.values(
+			const currencyEntityData = Object.values(
 				GLOBAL_CONSTANTS.cogoport_entities,
-			)?.filter((obj:{ id?: string }) => obj?.id === cogoEntityId);
+			)?.filter((obj) => obj?.id === cogoEntityId);
 
 			const currencyValue = currencyEntityData?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
-			setFormData((prev:object) => ({
+			setFormData((prev) => ({
 				...prev,
 				dueOutstandingCurrency: currencyValue,
 			}));
@@ -183,9 +151,9 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 						<div>
 							<h3>Frequency</h3>
 							<Tabs
-								activeTab={frequency}
+								activeTab={frequency === 'ONE_TIME' ? 'DAILY' : frequency}
 								themeType="primary"
-								onChange={(e?: string) => handleTabChange(e)}
+								onChange={(e) => handleTabChange(e)}
 							>
 								<TabPanel name="DAILY" title="Daily">
 									<div className={styles.empty_space} />
@@ -198,10 +166,10 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 											size="md"
 											items={WEEK_OPTIONS}
 											selectedItems={weekDay}
-											onItemChange={(val?: string) => setFormData({
-												...formData,
+											onItemChange={(val) => setFormData((prev) => ({
+												...prev,
 												weekDay: val,
-											})}
+											}))}
 										/>
 
 									</div>
@@ -210,7 +178,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 								<TabPanel name="MONTHLY" title="Monthly">
 									<Select
 										value={monthDay}
-										onChange={(day) => setFormData({ ...formData, monthDay: day })}
+										onChange={(day) => setFormData((prev) => ({ ...prev, monthDay: day }))}
 										placeholder="Select Day"
 										options={MONTH_DAYS}
 										className={styles.date}
@@ -224,9 +192,9 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 							<h4>Select Date</h4>
 							<Datepicker
 								placeholder="Enter Date"
-								dateFormat="MM/dd/yyyy"
-								name="date"
-								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
+								dateFormat="dd/MM/yyyy"
+								name="oneTimeDate"
+								onChange={(date) => setFormData((prev) => ({ ...prev, oneTimeDate: date }))}
 								value={oneTimeDate}
 							/>
 
@@ -240,7 +208,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 								<h5>Timezone</h5>
 								<Select
 									value={timezone}
-									onChange={(e) => setFormData({ ...formData, timezone: e })}
+									onChange={(e) => setFormData((prev) => ({ ...prev, timezone: e }))}
 									placeholder="Timezone"
 									options={timezoneOptions}
 									className={styles.timezone}
@@ -252,7 +220,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 								<div style={{ display: 'flex' }}>
 									<Select
 										value={scheduledHour}
-										onChange={(e) => setFormData({ ...formData, scheduledHour: e })}
+										onChange={(e) => setFormData((prev) => ({ ...prev, scheduledHour: e }))}
 										placeholder="Hour"
 										options={HOURS}
 										className={styles.timezone}
@@ -265,7 +233,7 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 								<div style={{ display: 'flex' }}>
 									<Select
 										value={scheduledMinute}
-										onChange={(e) => setFormData({ ...formData, scheduledMinute: e })}
+										onChange={(e) => setFormData((prev) => ({ ...prev, scheduledMinute: e }))}
 										placeholder="Hour"
 										options={MINUTES}
 										className={styles.timezone}
@@ -275,7 +243,6 @@ function FormLayout({ formData = {}, setFormData = () => {}, isEditMode = false 
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	);
