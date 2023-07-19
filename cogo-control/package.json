@@ -75,6 +75,7 @@
     "@cogoport/shipment-ltl-freight": "workspace:0.1.0",
     "@cogoport/shipment-mails": "workspace:0.1.0",
     "@cogoport/shipment-rail-domestic-freight": "workspace:0.1.0",
+    "@cogoport/revenue-desk" : "workspace:0.1.0",
     "@cogoport/so2-surface": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/supply-dashboards": "workspace:0.1.0",
