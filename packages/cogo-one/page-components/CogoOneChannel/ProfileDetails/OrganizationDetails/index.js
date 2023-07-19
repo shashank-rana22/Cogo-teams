@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useGetListOrganizationUsers from '../../../../hooks/useGetListOrganizationUsers';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -19,7 +18,7 @@ import OrganizationUsers from './OrganizationUsers';
 import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
+const LOADER_COUNT_FOR_CARD = 3;
 
 function OrganizationDetails({
 	activeTab = '',
@@ -28,10 +27,13 @@ function OrganizationDetails({
 	openNewTab = () => {},
 	hideCpButton = false,
 	getOrgDetails = () => {},
-	viewType = '',
 }) {
 	const [showConvertModal, setShowConvertModal] = useState(false);
-	const { organization_id: messageOrgId = '', user_id: messageUserId = '' } = formattedMessageData || {};
+	const geo = getGeoConstants();
+	const {
+		organization_id: messageOrgId = '', user_id: messageUserId = '',
+		account_type = '',
+	} = formattedMessageData || {};
 	const { organization_id: voiceOrgId = '', user_id: voiceUserId = '' } = activeVoiceCard || {};
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
@@ -39,15 +41,17 @@ function OrganizationDetails({
 	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
 
 	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
-	const isOrgUsersVisible = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_organization_users;
-
+	const { agent = {}, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
+	const isOrgUsersVisible = account_type === 'service_provider';
 	const {
 		organizationUsersData,
 		organizationUsersLoading,
+		handleScroll = () => {},
 	} = useGetListOrganizationUsers({ organizationId, isOrgUsersVisible });
+
 	const { list: organizationUserList = [] } = organizationUsersData || {};
 
-	const showOrgUsers = isOrgUsersVisible && !organizationUsersLoading && !isEmpty(organizationUserList);
+	const showOrgUsers = isOrgUsersVisible && !isEmpty(organizationUserList);
 
 	const {
 		pointData = {},
@@ -56,7 +60,7 @@ function OrganizationDetails({
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
-	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
+
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
@@ -78,7 +82,7 @@ function OrganizationDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Organization Details</div>
-			{orgLoading || organizationUsersLoading ? (
+			{orgLoading ? (
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
@@ -176,14 +180,27 @@ function OrganizationDetails({
 			{showOrgUsers && (
 				<>
 					<div className={styles.agent_title}>Organization Users</div>
-					<div className={styles.organization_users}>
-						{(organizationUserList || []).map((item) => (
-							<OrganizationUsers
-								user={item}
-								key={item.id}
-								hasVoiceCallAccess={hasVoiceCallAccess}
-							/>
-						))}
+					<div
+						className={styles.organization_users}
+						onScroll={handleScroll}
+					>
+						{organizationUsersLoading ? (
+							<div className={styles.agent_loading_state}>
+								{[...Array(LOADER_COUNT_FOR_CARD).keys()].map((key) => (
+									<Placeholder width="80%" height="15px" margin="10px 0 0 0 " key={key} />
+								))}
+							</div>
+						) : (
+							<>
+								{(organizationUserList || []).map((item) => (
+									<OrganizationUsers
+										user={item}
+										key={item.id}
+										hasVoiceCallAccess={hasVoiceCallAccess}
+									/>
+								))}
+							</>
+						)}
 					</div>
 				</>
 			)}

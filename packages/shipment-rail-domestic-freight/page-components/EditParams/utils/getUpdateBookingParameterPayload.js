@@ -14,12 +14,12 @@ export default function getUpdateBookingParameterPaylaod({ formValues, shipment_
 	(formValues || []).forEach((formData) => {
 		const { service_id, service_type, ...booking_params } = formData || {};
 
-		const newBookingParams = {};
+		const NEW_BOOKING_PARAMS = {};
 		Object.entries(booking_params).forEach(([key, val]) => {
-			newBookingParams[key] = Number(val);
+			NEW_BOOKING_PARAMS[key] = Number(val);
 		});
 
-		payload.services.push({ service_id, service_type, booking_params: newBookingParams });
+		payload.services.push({ service_id, service_type, booking_params: NEW_BOOKING_PARAMS });
 
 		const dependentServices = servicesList.filter(
 			(service) => dependentServicesArray.includes(service?.service_type),
@@ -34,7 +34,7 @@ export default function getUpdateBookingParameterPaylaod({ formValues, shipment_
 			payload.services.push({
 				service_id     : dependentService?.id,
 				service_type   : dependentService?.service_type,
-				booking_params : newBookingParams,
+				booking_params : NEW_BOOKING_PARAMS,
 			});
 		});
 	});
