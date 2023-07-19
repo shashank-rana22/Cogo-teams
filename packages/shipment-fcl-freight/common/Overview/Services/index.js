@@ -40,9 +40,14 @@ function Services() {
 
 	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
-	const heading = (serviceCategory) => (
-		<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	);
+	const heading = (serviceCategory) => {
+		if (serviceCategory === 'originServices') return null;
+		return (
+			<div className={styles.header}>
+				{startCase(serviceCategory)}
+			</div>
+		);
+	};
 
 	return !servicesLoading && !isGettingShipment
 		? (
