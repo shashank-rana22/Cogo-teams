@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
@@ -10,28 +11,28 @@ const MAX_LENGTH = 18;
 
 const FIRST_INDEX = 1;
 
-function Summery({
+function RecurringSummery({
 	itemData = {},
 }) {
 	const {
 		branchName,
 		entityCode,
-		billDocumentUrl,
-		payableAmount,
-		billCurrency,
-		createdDate,
-		billDate,
+		// billDocumentUrl,
+		// payableAmount,
+		// currency,
+		endDate,
+		startDate,
 		level3,
 		level2,
 		level1,
-		billNumber,
-		category,
-		sellerDetails,
+		agreementNumber,
+		repeatFrequency,
+		categoryName,
+		businessName,
+		proofDocuments,
 	} = itemData || {};
 
-	const { organizationName } = sellerDetails || {};
-
-	const splitArray = (billDocumentUrl || '').toString().split('/') || [];
+	const splitArray = (proofDocuments?.[GLOBAL_CONSTANTS.zeroth_index] || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - FIRST_INDEX];
 
 	const { stakeholder: stakeholder3 } = level3 || {};
@@ -94,11 +95,11 @@ function Summery({
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : organizationName ? showOverflowingNumber(organizationName, MAX_LENGTH) : '-',
+			value : businessName ? showOverflowingNumber(businessName, MAX_LENGTH) : '-',
 		},
 		{
 			title : 'Expense Category',
-			value : startCase(category),
+			value : startCase(categoryName),
 		},
 		{
 			title : 'Entity',
@@ -106,55 +107,56 @@ function Summery({
 		},
 		{
 			title : 'Branch ',
-			value : branchName || '-',
+			value : branchName
+				? showOverflowingNumber(branchName, MAX_LENGTH)
+				: '-',
 		},
 	];
 	const summaryDataSecond = [
+	// 	{
+	// 		title: 'Payable Amount',
+	// 		value:
+		//             currency && payableAmount ? (
+	// <div>
+	// 	{currency}
+	// 	{payableAmount}
+	// </div>
+		//             ) : ('-'),
+	// 	},
 		{
-			title: 'Payable Amount',
-			value:
-				billCurrency
-					&& payableAmount ? (
-						<div>
-							{billCurrency}
-							{payableAmount}
-						</div>
-					) : ('-'),
-		},
-		{
-			title : 'Expense Date',
+			title : 'Start Date',
 			value : (
 				<div>
-					{billDate
-						? formatDate(billDate, 'dd/MMM/yy', {}, false)
-						: '-'}
+					{startDate ? formatDate(startDate, 'dd/MMM/yy', {}, false) : '-'}
 				</div>
 			),
 		},
 		{
-			title : 'Transaction Date',
+			title : 'End Date',
 			value : (
 				<div>
-					{createdDate
-						? formatDate(createdDate, 'dd/MMM/yy', {}, false)
-						: '-'}
+					{endDate ? formatDate(endDate, 'dd/MMM/yy', {}, false) : '-'}
 				</div>
 			),
 		},
 		{
-			title : 'Invoice Number',
-			value : billNumber || '-',
+			title : 'Agreement Number',
+			value : agreementNumber || '-',
 		},
 	];
 	const summaryDataThird = [
+		{
+			title : 'Duration',
+			value : repeatFrequency || '-',
+		},
 
 		{
 			title : 'Uploaded Documents',
 			value : (
 				<div>
-					{billDocumentUrl ? (
+					{proofDocuments?.[GLOBAL_CONSTANTS.zeroth_index] ? (
 						<a
-							href={billDocumentUrl}
+							href={proofDocuments?.[GLOBAL_CONSTANTS.zeroth_index]}
 							style={{
 								color          : 'blue',
 								textDecoration : 'underline',
@@ -206,4 +208,4 @@ function Summery({
 	);
 }
 
-export default Summery;
+export default RecurringSummery;

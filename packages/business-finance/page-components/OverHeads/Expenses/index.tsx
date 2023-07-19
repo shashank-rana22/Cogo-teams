@@ -490,8 +490,8 @@ function ExpenseComponent() {
 			<div>
 				<ViewRecurringSummery
 					itemData={itemData}
+					recurringState={recurringState}
 				/>
-
 			</div>
 		),
 	};

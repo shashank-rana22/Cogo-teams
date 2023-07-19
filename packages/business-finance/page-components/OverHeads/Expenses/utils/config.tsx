@@ -48,28 +48,28 @@ export const expenseRecurringConfig = () => {
 			{
 				label : 'Agreement',
 				func  : 'showAgreement',
-				span  : 1.5,
+				span  : 1.2,
 			},
 			{
 				label : 'Category',
-				span  : 1.8,
+				span  : 1,
 				func  : 'renderCategory',
 			},
 			{
 				label   : 'Created on',
 				func    : 'getCreatedOn',
-				span    : 2,
+				span    : 1.6,
 				sorting : { name: 'createdDateSortBy' },
 			},
 			{
 				label : renderExpensePeriod(),
-				span  : 2,
+				span  : 1.6,
 				func  : 'renderExpensePeriod',
 			},
 			{
 				label   : 'Recurring Amount',
 				key     : 'recurringAmount',
-				span    : 2,
+				span    : 1.6,
 				func    : 'renderRecurringAmount',
 				sorting : { name: 'amountSortBy' },
 				// styles  : { display: 'flex', justifyContent: 'center' },
@@ -77,12 +77,17 @@ export const expenseRecurringConfig = () => {
 			{
 				label : 'Approved By',
 				func  : 'getApprovedByRecurring',
-				span  : 1.5,
+				span  : 1.1,
 			},
 			{
 				key  : 'actionButton',
-				span : 1.5,
+				span : 1.1,
 				func : 'addExpense',
+			},
+			{
+				label : '',
+				func  : 'renderView',
+				span  : 1,
 			},
 		],
 	};

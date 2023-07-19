@@ -1,11 +1,14 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import RecurringSummery from './RecurringSummery';
 import styles from './styles.module.css';
 import Summery from './Summery';
 
-function ViewRecurringSummery({ itemData = {} }) {
+function ViewRecurringSummery({ itemData = {}, recurringState = '' }) {
 	const [showModal, setShowModal] = useState(false);
+
+	const Element = recurringState === 'recurring' ? RecurringSummery : Summery;
 	return (
 		<div>
 			<Modal
@@ -17,7 +20,7 @@ function ViewRecurringSummery({ itemData = {} }) {
 				<Modal.Header title="Details" />
 				<Modal.Body className={styles.modal_data}>
 					<div style={{ marginTop: '20px' }}>
-						<Summery
+						<Element
 							itemData={itemData}
 						/>
 					</div>
