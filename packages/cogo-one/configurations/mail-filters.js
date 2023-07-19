@@ -1,4 +1,4 @@
-const controls = [
+const MAIL_FILTERS = [
 	{
 		label       : 'Mail Type',
 		name        : 'mail_type',
@@ -35,4 +35,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default MAIL_FILTERS;

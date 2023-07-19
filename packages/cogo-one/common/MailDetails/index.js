@@ -39,9 +39,10 @@ function MailDetails({
 		let interval = '';
 
 		if (activeFolder) {
-			interval = setInterval(() => {
-				handleRefresh();
-			}, DEFAULT_LIST_MAILS_TIMEOUT);
+			interval = setInterval(
+				handleRefresh,
+				DEFAULT_LIST_MAILS_TIMEOUT,
+			);
 		}
 
 		return () => clearInterval(interval);

@@ -35,7 +35,7 @@ function ViewModal({
 	const activeAttachmentContent = activeAttachmentData?.contentType;
 	const activeAttachmentType = activeAttachmentContent.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const ActiveCompoonent = COMPONENT_MAPPING?.[activeAttachmentType] || ObjectBody;
+	const ActiveCompoonent = COMPONENT_MAPPING[activeAttachmentType] || ObjectBody;
 
 	return (
 		<Modal

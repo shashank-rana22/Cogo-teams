@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import filterControls from '../../../../configurations/mail-filters';
+import MAIL_FILTERS from '../../../../configurations/mail-filters';
 import getFiltersCount from '../../../../helpers/getFiltersCount';
 import { getFieldController } from '../../../../utils/getFieldController';
 
@@ -26,7 +26,7 @@ function PopoverComponent({
 	const noOfFilters = getFiltersCount({ filters: formValues || {} });
 
 	const handleClearAll = () => {
-		const nullFormValues = filterControls.reduce(
+		const nullFormValues = MAIL_FILTERS.reduce(
 			(prev, currentItem) => (
 				{ ...prev, [currentItem?.name]: '' }
 			),
@@ -62,6 +62,7 @@ function PopoverComponent({
 					Clear All
 				</Button>
 			</div>
+
 			<div className={styles.filter_body}>
 
 				<div className={styles.note_container}>
@@ -69,7 +70,7 @@ function PopoverComponent({
 					<span>Filters and search can&apos;t be used together.</span>
 				</div>
 
-				{filterControls.map(
+				{MAIL_FILTERS.map(
 					(itm) => {
 						const { name, label, controlType } = itm;
 
@@ -93,6 +94,7 @@ function PopoverComponent({
 					},
 				)}
 			</div>
+
 			<div className={styles.footer}>
 				<Button
 					size="md"

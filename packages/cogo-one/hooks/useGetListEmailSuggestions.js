@@ -2,6 +2,10 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const getParams = ({ search }) => ({
+	sender: search,
+});
+
 function useGetListEmailSuggestions({
 	searchQuery = '',
 	shouldShowSuggestions = false,
@@ -13,17 +17,18 @@ function useGetListEmailSuggestions({
 		method : 'get',
 	}, { manual: true });
 
-	const getEmailSuggestions = useCallback(({ search }) => {
-		try {
-			trigger({
-				params: {
-					sender: search,
-				},
-			});
-		} catch (err) {
-			console.error(err);
-		}
-	}, [trigger]);
+	const getEmailSuggestions = useCallback(
+		(props) => {
+			try {
+				trigger({
+					params: getParams(props),
+				});
+			} catch (err) {
+				console.error(err);
+			}
+		},
+		[trigger],
+	);
 
 	useEffect(() => {
 		debounceQuery(searchQuery);

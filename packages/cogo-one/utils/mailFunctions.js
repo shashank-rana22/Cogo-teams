@@ -19,7 +19,7 @@ function mailFunction({
 	attachments = [],
 	uploaderRef,
 }) {
-	const isInList = (email, data) => data?.includes(email);
+	const isInList = ({ email, data }) => data?.includes(email);
 
 	const validateEmail = (emailInput) => {
 		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.email;
@@ -32,7 +32,7 @@ function mailFunction({
 		email = '',
 	}) => {
 		if (event?.key === 'Enter' || email) {
-			event?.preventDefault();
+			event?.preventDefault?.();
 			const newEmail = email || value;
 
 			if (!validateEmail(newEmail)) {
@@ -40,7 +40,12 @@ function mailFunction({
 				return;
 			}
 
-			if (isInList(newEmail, emailState?.[type] || [])) {
+			const isEmailPresent = isInList({
+				email : newEmail,
+				data  : emailState?.[type] || [],
+			});
+
+			if (isEmailPresent) {
 				setErrorValue('Email already present');
 				return;
 			}
