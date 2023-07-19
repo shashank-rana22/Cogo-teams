@@ -153,10 +153,11 @@
 	align-items: center;
 	justify-content: center;
 	margin: 10px;
+	cursor: pointer;
 
 	svg {
-		width: 30px;
-		height: 30px;
+		width: 32px;
+		height: 32px;
 		fill: red;
 	}
 }
