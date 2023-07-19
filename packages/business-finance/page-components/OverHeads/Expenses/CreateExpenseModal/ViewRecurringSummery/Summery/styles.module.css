@@ -37,17 +37,11 @@
 	font-weight: 600;
 }
 
-.upload_invoice {
-	font-size: 16px;
-	color: blue;
-	text-decoration: underline;
-}
-
-.approved {
-	margin-top: 12px;
-}
-
 .steeper {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+
 	:global {
 		.ui_stepper_step_wrapper,
 		.ui_stepper_text {

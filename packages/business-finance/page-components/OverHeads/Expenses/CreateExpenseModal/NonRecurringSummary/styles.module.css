@@ -38,8 +38,6 @@
 }
 
 .textarea {
-	margin-top: 10px;
-
 	:global {
 		.ui_text_area_container {
 			height: 100px;
@@ -47,7 +45,15 @@
 	}
 }
 
+.approved {
+	margin-top: 12px;
+}
+
 .steeper {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+
 	:global {
 		.ui_stepper_step_wrapper,
 		.ui_stepper_text {

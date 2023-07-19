@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -5,13 +6,14 @@ import styles from './styles.module.css';
 const FIRST = 1;
 
 function StakeHolderTimeline({ timeline = [] }) {
+	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
 	return (
 		<div className={styles.container}>
-			{timeline.map((item, index) => (
+			{stakeHolders.map((item, index) => (
 				<div className={styles.section} key={item.key}>
 					<div className={styles.inner_div}>
 						<div className={styles.circle}>{index + FIRST}</div>
-						{index < timeline.length - FIRST ? (
+						{index < stakeHolders.length - FIRST ? (
 							<div
 								className={styles.line}
 							/>

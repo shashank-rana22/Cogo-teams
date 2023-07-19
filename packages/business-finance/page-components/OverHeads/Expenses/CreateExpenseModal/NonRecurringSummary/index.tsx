@@ -85,33 +85,43 @@ function NonRecurringSummary({
 		if (!isEmpty(level3)) {
 			return [
 				{
-					email   : stakeholder1?.userEmail,
-					name    : stakeholder1?.userName,
-					remarks : level1?.remarks,
+					...(stakeholder1 ? {
+						email   : stakeholder1?.userEmail,
+						name    : stakeholder1?.userName,
+						remarks : level1?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder2?.userEmail,
-					name    : stakeholder2?.userName,
-					remarks : level2?.remarks,
+					...(stakeholder2 ? {
+						email   : stakeholder2?.userEmail,
+						name    : stakeholder2?.userName,
+						remarks : level2?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder3?.userEmail,
-					name    : stakeholder3?.userName,
-					remarks : level3?.remarks,
+					...(stakeholder3 ? {
+						email   : stakeholder3?.userEmail,
+						name    : stakeholder3?.userName,
+						remarks : level3?.remarks,
+					} : {}),
 				},
 			];
 		}
 		if (!isEmpty(level2)) {
 			return [
 				{
-					email   : stakeholder1?.userEmail,
-					name    : stakeholder1?.userName,
-					remarks : level1?.remarks,
+					...(stakeholder1 ? {
+						email   : stakeholder1?.userEmail,
+						name    : stakeholder1?.userName,
+						remarks : level1?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder2?.userEmail,
-					name    : stakeholder2?.userName,
-					remarks : level2?.remarks,
+					...(stakeholder2 ? {
+						email   : stakeholder2?.userEmail,
+						name    : stakeholder2?.userName,
+						remarks : level2?.remarks,
+					} : {}),
 				},
 			];
 		}
@@ -221,10 +231,7 @@ function NonRecurringSummary({
 				</div>
 			),
 		},
-		{
-			title : 'Payment Mode ',
-			value : startCase(paymentMode || '') || '-',
-		},
+
 	];
 	const summaryDataThird = [
 		{
@@ -250,6 +257,10 @@ function NonRecurringSummary({
 				</div>
 			),
 		},
+		{
+			title : 'Payment Mode ',
+			value : startCase(paymentMode || '') || '-',
+		},
 	];
 
 	const renderSummaryData = (summary: Summary[]) => (
@@ -270,8 +281,16 @@ function NonRecurringSummary({
 			{renderSummaryData(summaryDataFirst)}
 			{renderSummaryData(summaryDataSecond)}
 			{renderSummaryData(summaryDataThird)}
+			<div className={styles.textarea}>
+				<Textarea
+					value={nonRecurringData?.remarks}
+					onChange={(e) => setNonRecurringData({ ...nonRecurringData, remarks: e })}
+					size="lg"
+					placeholder="Reason..."
+				/>
+			</div>
 			<div>
-				<div className={styles.title}>To be Approved by</div>
+				<div className={styles.approved}>To be Approved by</div>
 				{isEmpty(stakeholdersData) && !stakeholderLoading ? (
 					<div className={styles.value}>No Stakeholders Present</div>
 				) : (
@@ -285,14 +304,6 @@ function NonRecurringSummary({
 						)}
 					</div>
 				)}
-			</div>
-			<div className={styles.textarea}>
-				<Textarea
-					value={nonRecurringData?.remarks}
-					onChange={(e) => setNonRecurringData({ ...nonRecurringData, remarks: e })}
-					size="lg"
-					placeholder="Reason..."
-				/>
 			</div>
 		</div>
 	);

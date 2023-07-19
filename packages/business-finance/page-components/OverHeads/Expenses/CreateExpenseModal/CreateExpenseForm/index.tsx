@@ -14,6 +14,7 @@ interface Props {
 	setNonRecurringData?: (obj: any) => void;
 	setIsFormValidated?: (obj: any) => void;
 	setIncidentMangementId?: (obj) => void;
+	summeryOnlyModal?: boolean;
 }
 
 function CreateExpenseForm({
@@ -25,6 +26,7 @@ function CreateExpenseForm({
 	setNonRecurringData = () => {},
 	setIsFormValidated = () => {},
 	setIncidentMangementId = () => {},
+	summeryOnlyModal = false,
 }: Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
@@ -45,7 +47,7 @@ function CreateExpenseForm({
 
 	return (
 		<div>
-			{active === 'Expense Details' && (
+			{active === 'Expense Details' && !summeryOnlyModal && (
 				<div style={{ marginTop: '40px' }}>
 					<ExpenseDetailsForm
 						formData={formData}
@@ -64,6 +66,7 @@ function CreateExpenseForm({
 				</div>
 			)}
 			{active === 'Upload Invoice'
+				&& !summeryOnlyModal
 				&& createExpenseType === 'nonRecurring' && (
 					<UploadInvoiceForm
 						formData={formData}
@@ -76,7 +79,7 @@ function CreateExpenseForm({
 					/>
 			)}
 
-			{active === 'Final Confirmation' && (
+			{(active === 'Final Confirmation' || summeryOnlyModal) && (
 				<div>
 					{createExpenseType === 'nonRecurring' && (
 						<NonRecurringSummary

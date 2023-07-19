@@ -90,33 +90,43 @@ function RecurringSummary({
 		if (!isEmpty(level3)) {
 			return [
 				{
-					email   : stakeholder1?.userEmail,
-					name    : stakeholder1?.userName,
-					remarks : level1?.remarks,
+					...(stakeholder1 ? {
+						email   : stakeholder1?.userEmail,
+						name    : stakeholder1?.userName,
+						remarks : level1?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder2?.userEmail,
-					name    : stakeholder2?.userName,
-					remarks : level2?.remarks,
+					...(stakeholder2 ? {
+						email   : stakeholder2?.userEmail,
+						name    : stakeholder2?.userName,
+						remarks : level2?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder3?.userEmail,
-					name    : stakeholder3?.userName,
-					remarks : level3?.remarks,
+					...(stakeholder3 ? {
+						email   : stakeholder3?.userEmail,
+						name    : stakeholder3?.userName,
+						remarks : level3?.remarks,
+					} : {}),
 				},
 			];
 		}
 		if (!isEmpty(level2)) {
 			return [
 				{
-					email   : stakeholder1?.userEmail,
-					name    : stakeholder1?.userName,
-					remarks : level1?.remarks,
+					...(stakeholder1 ? {
+						email   : stakeholder1?.userEmail,
+						name    : stakeholder1?.userName,
+						remarks : level1?.remarks,
+					} : {}),
 				},
 				{
-					email   : stakeholder2?.userEmail,
-					name    : stakeholder2?.userName,
-					remarks : level2?.remarks,
+					...(stakeholder2 ? {
+						email   : stakeholder2?.userEmail,
+						name    : stakeholder2?.userName,
+						remarks : level2?.remarks,
+					} : {}),
 				},
 			];
 		}
@@ -210,10 +220,6 @@ function RecurringSummary({
 		},
 	];
 	const summaryDataThird = [
-		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
-		},
 		{
 			title : 'Duration',
 			value : (repeatEvery || '').replaceAll('_', ' ') || '-',

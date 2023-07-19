@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -19,6 +20,7 @@ import {
 
 import AddExpenseModal from './AddExpenseModal';
 import CreateExpenseModal from './CreateExpenseModal';
+import ViewRecurringSummery from './CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
 import useSendEmail from './hooks/useSendEmail';
@@ -84,7 +86,7 @@ function ExpenseComponent() {
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } = useListExpenseConfig({ expenseFilters, sort });
+	const { getRecurringList, recurringListData, recurringListLoading } =		useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
 
 	useEffect(() => {
@@ -376,7 +378,7 @@ function ExpenseComponent() {
 			if (proofCount === 1) {
 				return (
 					<a
-						href={proofDocuments[0]}
+						href={proofDocuments[GLOBAL_CONSTANTS.zeroth_index]}
 						target="_blank"
 						className={styles.proof}
 						rel="noreferrer"
@@ -484,6 +486,14 @@ function ExpenseComponent() {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
+		renderView: (itemData) => (
+			<div>
+				<ViewRecurringSummery
+					itemData={itemData}
+				/>
+
+			</div>
+		),
 	};
 
 	const showDropDown = (singleItem: { id?: string }) => {
