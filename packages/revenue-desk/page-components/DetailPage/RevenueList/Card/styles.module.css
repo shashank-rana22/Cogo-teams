@@ -1,0 +1,70 @@
+.title {
+	display: flex;
+	justify-content: space-between;
+	color: #4f4f4f;
+}
+
+.serial_id {
+	font-weight: 600;
+}
+
+.created_at {
+	display: flex;
+	justify-content: end;
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.detail_name {
+	width: 80%;
+	padding: 8px 0;
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.body_name {
+	width: 100%;
+}
+
+.currency {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.body_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.negative_profit {
+	align-items: center;
+	margin: 0 4px;
+	font-weight: 600;
+	color: rgb(255 50 50);
+}
+
+.positive_profit {
+	align-items: center;
+	margin: 0 4px;
+	font-weight: 600;
+	color: rgb(66 218 40);
+}
+
+.status {
+	display: flex;
+	justify-content: flex-end;
+	font-weight: 500;
+}

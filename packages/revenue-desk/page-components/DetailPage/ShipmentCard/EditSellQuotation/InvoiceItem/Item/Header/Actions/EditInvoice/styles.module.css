@@ -1,0 +1,22 @@
+.invoice_value {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+
+	.amount {
+		margin-left: 4px;
+		color: #5936f0;
+	}
+}
+
+.button_container {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.forms {
+	max-height: 60vh;
+}

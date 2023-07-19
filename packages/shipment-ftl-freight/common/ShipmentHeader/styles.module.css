@@ -55,14 +55,8 @@
 }
 
 .button {
-	font-size: var(--font-size-md);
-	color: var(--color-primary-error-red-2);
-	text-decoration: underline;
-	cursor: pointer;
-
-	:hover {
-		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
-	}
+	padding: 0 !important;
+	color: var(--color-primary-error-red-2) !important;
 }
 
 .three_dot_icon {
