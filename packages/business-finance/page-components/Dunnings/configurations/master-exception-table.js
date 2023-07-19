@@ -1,11 +1,12 @@
 import { Tooltip, Toggle, Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 
 import GetSortingData from '../components/ExceptionsManagement/sorting.tsx';
 
 import styles from './styles.module.css';
+
+const DEFAULT_VALUE = 0;
 
 const masterExceptionColumn = ({
 	sort,
@@ -72,7 +73,7 @@ const masterExceptionColumn = ({
 			id       : 'creditDays',
 			accessor : (row) => (
 				<div className={styles.text}>
-					{row?.creditDays || GLOBAL_CONSTANTS.zeroth_index}
+					{row?.creditDays || DEFAULT_VALUE}
 				</div>
 			),
 		},
@@ -93,7 +94,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.creditAmount || GLOBAL_CONSTANTS.zeroth_index,
+						amount   : row?.creditAmount || DEFAULT_VALUE,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',
@@ -121,7 +122,7 @@ const masterExceptionColumn = ({
 			accessor : (row) => (
 				<div className={styles.text}>
 					{formatAmount({
-						amount   : row?.totalDueAmount || GLOBAL_CONSTANTS.zeroth_index,
+						amount   : row?.totalDueAmount || DEFAULT_VALUE,
 						currency : row?.currency,
 						options  : {
 							style                 : 'currency',

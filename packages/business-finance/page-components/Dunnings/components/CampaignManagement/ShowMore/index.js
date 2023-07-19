@@ -15,7 +15,7 @@ function ShowMore({ data = {}, selectedExecution = 0 }) {
 			(singleEntityData) => singleEntityData.id === cogoEntityId,
 		)?.[GLOBAL_CONSTANTS.zeroth_index]?.default_entity_code;
 
-	if (selectedExecution === GLOBAL_CONSTANTS.zeroth_index && status !== 'COMPLETED') {
+	if (!selectedExecution && status !== 'COMPLETED') {
 		return <NoData />;
 	}
 	if (status === 'COMPLETED') {
