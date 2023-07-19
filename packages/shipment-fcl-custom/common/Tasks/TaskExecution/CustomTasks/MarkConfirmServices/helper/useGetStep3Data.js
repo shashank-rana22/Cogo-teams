@@ -16,11 +16,12 @@ const TRADE_MAPPING = {
 
 const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
-	taskListRefetch = () => {}, primary_service,
+	taskListRefetch = () => {}, primary_service, formattedRate = {},
 }) => {
+	const SUCCESS_HTTP_CODE = 200;
 	const { trade_type } = primary_service || {};
 
-	const service_ids = [];
+	const SERVICE_IDS = [];
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
@@ -28,20 +29,20 @@ const useGetStep3Data = ({
 			&& trade_type === 'import' && serviceObj.trade_type === 'export')
 		) {
 			notMainService = true;
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (!notMainService) {
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			service_ids,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -84,21 +85,33 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		defaultValues[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {
-		const quotations = [];
+		const QUOTATIONS = [];
 
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
@@ -117,18 +130,18 @@ const useGetStep3Data = ({
 				})),
 			};
 
-			quotations.push(newQuote);
+			QUOTATIONS.push(newQuote);
 		});
 
-		const checkSum = checkLineItemsSum(quotations);
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === 200) {
+				if (res?.status === SUCCESS_HTTP_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
@@ -143,7 +156,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues,
+		defaultValues: DEFAULT_VALUES,
 	};
 };
 

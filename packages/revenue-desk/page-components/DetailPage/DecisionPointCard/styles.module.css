@@ -1,0 +1,10 @@
+.container {
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+	color: #4f4f4f;
+}

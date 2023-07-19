@@ -1,0 +1,36 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	display: flex;
+
+	:global {
+		.tippy-box {
+			right: 20px;
+			max-width: 380px !important;
+
+			.tippy-content {
+				width: 100%;
+			}
+		}
+
+		.heading {
+			display: none;
+		}
+	}
+}
+
+.filter_svg {
+	svg { margin-left: 10px; }
+}
+
+.footer_button {
+	display: flex;
+	justify-content: flex-end;
+	padding: 8px;
+	margin-top: 10px;
+}
+
+.filter_dot {
+	position: absolute;
+	top: 144px;
+	right: 32px;
+}
