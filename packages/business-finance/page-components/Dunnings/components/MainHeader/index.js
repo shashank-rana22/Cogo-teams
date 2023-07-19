@@ -2,15 +2,10 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-interface Props {
-	activeTab?:string,
-	setActiveTab?:Function,
-}
-
-function MainHeader({ activeTab, setActiveTab }:Props) {
+function MainHeader({ activeTab = '', setActiveTab = null }) {
 	const { push } = useRouter();
 
-	const handleTabChange = (tab:string) => {
+	const handleTabChange = (tab) => {
 		if (activeTab !== tab) {
 			setActiveTab(tab);
 			push(
@@ -23,7 +18,29 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 	const cardsData = [
 		{
 			id      : 'dashboard',
-			content : <h3>Dashboard</h3>,
+			content : (
+				<div className={styles.campaign_card}>
+					<div style={{ textAlign: 'left' }}>
+						<h3>Financial</h3>
+						<h3>Summary</h3>
+					</div>
+					<div className={styles.vertical_border} />
+					<div className={styles.campaign_card_data}>
+						<div style={{ display: 'flex' }}>
+							<span>
+								Total Due:
+								{' '}
+							</span>
+						</div>
+						<div className={styles.collection_rate}>
+							<span>
+								Customers:
+								{' '}
+							</span>
+						</div>
+					</div>
+				</div>
+			),
 		},
 		{
 			id      : 'campaign-management',
@@ -35,17 +52,14 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 					</div>
 					<div className={styles.vertical_border} />
 					<div className={styles.campaign_card_data}>
-						<div style={{ display: 'flex' }}>
-							<span>Ongoing Campaigns:&nbsp;</span>
-							<span>
-								-
-							</span>
-						</div>
-						<div className={styles.collection_rate}>
-							<span>Collection Rate:&nbsp;</span>
-							<span>
-								-
-							</span>
+						<div>
+							<div>
+								<span>
+									Ongoing Campaigns:
+									{' '}
+								</span>
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -53,7 +67,7 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 		},
 		{
 			id      : 'exceptions-management',
-			content : <h3>Exceptions Management</h3>,
+			content : <h3 className={styles.heading_text}>Exceptions Management</h3>,
 		},
 	];
 

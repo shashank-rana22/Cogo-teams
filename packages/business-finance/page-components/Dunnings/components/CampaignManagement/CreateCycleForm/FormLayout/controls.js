@@ -1,18 +1,24 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 
-import { SERVICE_OPTIONS } from '../../constants';
+import { SERVICE_OPTIONS } from '../../constants/index.ts';
 
 import styles from './styles.module.css';
 
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
+	const { totalDueOutstanding, dueOutstandingCurrency } = formData || {};
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
-	const entityOptions = Object.keys(entityData).map((entity) => ({
-		label    : `${entity} (${entityData[entity].currency})`,
-		name     : String(entity),
-		value    : entityData[entity].id,
-		disabled : isEditMode,
-	}));
+	const entityOptions = Object.keys(entityData).map((entity) => {
+		const isEligible = entityData[entity].feature_supported.includes('dunning');
+		return ({
+			label    : `${entity} (${entityData[entity].currency})`,
+			name     : String(entity),
+			value    : entityData[entity].id,
+			disabled : isEditMode || !isEligible,
+		});
+	});
 
 	const currencyData = GLOBAL_CONSTANTS.currency_code;
 
@@ -22,6 +28,19 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			value : currency,
 		}
 	));
+
+	function unformatNumber(string) {
+		if (isEmpty(string)) {
+			return undefined;
+		}
+
+		// Removing any thousands separators
+		const unformattedString = string.toLocaleString().replace(GLOBAL_CONSTANTS.regex_patterns.amount_seperator, '');
+
+		// Converting the string to a number
+		const number = parseFloat(unformattedString);
+		return number;
+	}
 
 	return [
 		{
@@ -65,11 +84,11 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			checkboxLabel : 'Select All Credit Contollers',
 			checked       : formData?.isAllCreditControllers,
 			disabled      : isEditMode,
-			onChange      : (e:{ target?:{ checked?:boolean } }) => {
+			onChange      : (e) => {
 				if (e?.target?.checked) {
-					setFormData({ ...formData, isAllCreditControllers: true });
+					setFormData((prev) => ({ ...prev, isAllCreditControllers: true }));
 				} else {
-					setFormData({ ...formData, isAllCreditControllers: false });
+					setFormData((prev) => ({ ...prev, isAllCreditControllers: false }));
 				}
 			},
 			span: 12,
@@ -139,13 +158,30 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					span        : 1,
 				},
 				{
-					name               : 'totalDueOutstanding',
-					placeholder        : 'Insert Amount',
-					type               : 'input',
-					onlyNumbersAllowed : true,
-					prefix             : null,
-					disabled           : isEditMode,
-					span               : 9,
+					name        : 'totalDueOutstanding',
+					placeholder : 'Insert Amount',
+					type        : 'input',
+					onChange    : (e) => {
+						const unformattedNumber = unformatNumber(e);
+						if (!Number.isNaN(unformattedNumber)) {
+							setFormData((prev) => ({
+								...prev,
+								totalDueOutstanding: unformattedNumber,
+							}));
+						}
+					},
+					value: totalDueOutstanding ? formatAmount({
+						amount   : String(totalDueOutstanding),
+						currency : dueOutstandingCurrency,
+						options  : {
+							style                 : 'decimal',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					}) : undefined,
+					prefix   : null,
+					disabled : isEditMode,
+					span     : 9,
 				},
 			],
 		},
@@ -154,8 +190,8 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			name     : 'triggerType',
 			type     : 'radioGroup',
 			value    : formData?.triggerType || 'ONE_TIME',
-			onChange : (value:string) => {
-				setFormData({ ...formData, triggerType: value });
+			onChange : (value) => {
+				setFormData((prev) => ({ ...prev, triggerType: value }));
 			},
 			radioOptions: [
 				{ name: 'ONE_TIME', value: 'ONE_TIME', label: 'One Time' },

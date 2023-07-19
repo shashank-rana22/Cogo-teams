@@ -3,24 +3,24 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import ExcludeList from '../../../../commons/ExcludeList';
-import useManageExceptionList from '../../../../hooks/useManageExceptionList';
-import { ManageExceptionInterface } from '../../Interfaces';
+import ExcludeList from '../../../../commons/ExcludeList/index.tsx';
+import useManageExceptionList from '../../../../hooks/useManageExceptionList.ts';
 import styles from '../styles.module.css';
 
-import { config } from './config';
+import { config } from './config.tsx';
 
 function ManageExceptionsModal({
-	showCycleExceptions,
-	setShowCycleExceptions,
-	setShow,
-	handleSubmit,
-	getUploadList,
-	uploadListLoading,
-	cycleListId,
-	uncheckedRows,
-	setUncheckedRows,
-}:ManageExceptionInterface) {
+	showCycleExceptions = false,
+	setShowCycleExceptions = () => {},
+	setShow = () => {},
+	handleSubmit = () => {},
+	getUploadList = () => {},
+	uploadListLoading = false,
+	cycleListId = '',
+	uncheckedRows = [],
+	setUncheckedRows = () => {},
+	setShowEntityFilter = () => {},
+}) {
 	const [manageExceptionFilter, setManageExceptionFilter] = useState({});
 	const {
 		manageExceptionData,
@@ -34,6 +34,11 @@ function ManageExceptionsModal({
 		getUploadList(data);
 	};
 	const showAddCustomerModal = !isEmpty(uncheckedRows);
+
+	const handleClick = () => {
+		setShow(true);
+		setShowEntityFilter(false);
+	};
 
 	useEffect(() => {
 		getManageExceptionList();
@@ -53,7 +58,7 @@ function ManageExceptionsModal({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => setShow(true)}
+						onClick={handleClick}
 						disabled={showAddCustomerModal}
 					>
 						+ Add New Customer
@@ -64,7 +69,7 @@ function ManageExceptionsModal({
 							name="q"
 							size="sm"
 							value={searchValue}
-							onChange={(e: string) => setSearchValue(e)}
+							onChange={(e) => setSearchValue(e)}
 							placeholder="Search By Customer Name"
 							suffix={(
 								<div className={styles.search_icon}>
@@ -85,7 +90,7 @@ function ManageExceptionsModal({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				{ uncheckedRows.length > 0 ? (
+				{ !isEmpty(uncheckedRows) ? (
 					<div style={{ margin: '6px 20px' }}>
 						{uncheckedRows?.length}
 						{' '}

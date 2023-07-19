@@ -2,24 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	id?: string;
-	getDunningList?: Function;
-	setActionModal?: Function;
-}
-
-interface StateInterface {
-	profile?: {
-		user?: {
-			id?: string | number;
-		};
-	};
-}
-
-function useDeleteDunningCycle({ id, getDunningList, setActionModal }:Props) {
+function useDeleteDunningCycle({ id, getDunningList, setActionModal }) {
 	const {
 		profile,
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 
 	const [
 		{ data, loading },

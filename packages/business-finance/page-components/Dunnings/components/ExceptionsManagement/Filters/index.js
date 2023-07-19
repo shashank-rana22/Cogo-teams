@@ -3,28 +3,28 @@ import { useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import Filter from '../../../../commons/Filters';
+import Filter from '../../../../commons/Filters/index.tsx';
 import { exceptionMasterFilters, exceptionCycleWiseFilters } from '../../../configurations/exceptions-filters';
 import useAddUploadList from '../../../hooks/useAddUploadList';
-import { FilterProps } from '../Interfaces';
 
 import AddCustomerModal from './AddCustomerModal';
 import ManageExceptionsModal from './ManageExceptionsModal';
 import styles from './styles.module.css';
 
 function Filters({
-	exceptionFilter,
-	setExceptionFilter,
-	subTabsValue,
-	searchValue,
-	showCycleExceptions,
-	setShowCycleExceptions,
-	setSearchValue,
-	cycleListId,
-	getMasterList,
-}:FilterProps) {
+	exceptionFilter = {},
+	setExceptionFilter = null,
+	subTabsValue = '',
+	searchValue = '',
+	showCycleExceptions = true,
+	setShowCycleExceptions = null,
+	setSearchValue = null,
+	cycleListId = '',
+	getMasterList = null,
+}) {
 	const [show, setShow] = useState(false);
 	const [uncheckedRows, setUncheckedRows] = useState([]);
+	const [showEntityFilter, setShowEntityFilter] = useState(true);
 
 	const { control, handleSubmit, watch, reset } = useForm();
 
@@ -61,7 +61,7 @@ function Filters({
 					name="q"
 					size="sm"
 					value={searchValue}
-					onChange={(e: any) => setSearchValue(e)}
+					onChange={(e) => setSearchValue(e)}
 					placeholder={subTabsValue === 'masterExceptionList'
 						? 'Search By Customer Name' : 'Search By Cycle Name'}
 					suffix={(
@@ -75,7 +75,10 @@ function Filters({
 						<Button
 							size="md"
 							themeType="primary"
-							onClick={() => { setShow(true); }}
+							onClick={() => {
+								setShow(true);
+								setShowEntityFilter(true);
+							}}
 							style={{ width: '30%' }}
 						>
 							Add To list
@@ -91,6 +94,8 @@ function Filters({
 						handleSubmit={handleSubmit}
 						getUploadList={getUploadList}
 						uploadListLoading={uploadListLoading}
+						reset={reset}
+						showEntityFilter={showEntityFilter}
 					/>
 				)}
 
@@ -105,6 +110,7 @@ function Filters({
 						cycleListId={cycleListId}
 						uncheckedRows={uncheckedRows}
 						setUncheckedRows={setUncheckedRows}
+						setShowEntityFilter={setShowEntityFilter}
 					/>
 				)}
 			</div>
