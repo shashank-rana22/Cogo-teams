@@ -81,7 +81,7 @@ const useRaiseTicketControls = ({ watchOrgId }) => {
 		{
 			label          : 'Upload Supporting Document',
 			name           : 'file_url',
-			controllerType : 'uploader',
+			controllerType : 'fileUpload',
 			showOptional   : false,
 		},
 		{

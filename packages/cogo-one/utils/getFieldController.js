@@ -25,8 +25,6 @@ const CONTROLLER_MAPPING = {
 	radio              : RadioGroupController,
 	checkboxGroup      : CheckboxGroupController,
 	textArea           : TextAreaController,
-	uploader           : UploadController,
-	text               : InputController,
 	checkbox           : CheckboxController,
 	'creatable-select' : CreatableMultiSelectController,
 };

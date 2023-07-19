@@ -14,7 +14,7 @@ function RaiseTickets({
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : upperCase(item),
 		name           : item,
-		controllerType : 'text',
+		controllerType : 'input',
 		placeholder    : `add ${item}`,
 		showOptional   : false,
 		disabled       : true,
