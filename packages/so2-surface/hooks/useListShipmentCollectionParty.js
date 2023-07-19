@@ -1,6 +1,14 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
+const DEFAULT_PAGE_LIMIT = 20;
+
+const getParams = (shipmentId = '', paginationFilter = {}) => ({
+	filters    : { shipment_id: shipmentId },
+	...paginationFilter,
+	page_limit : DEFAULT_PAGE_LIMIT,
+});
+
 function useListShipmentCollectionParty(shipmentId) {
 	const [paginationFilter, setPaginationFilter] = useState({ page: 1 });
 
@@ -12,12 +20,7 @@ function useListShipmentCollectionParty(shipmentId) {
 	const fetch = useCallback(async () => {
 		try {
 			await trigger({
-				params: {
-					filters    : { shipment_id: shipmentId },
-					...paginationFilter,
-					page_limit : 20,
-				},
-
+				params: getParams(shipmentId, paginationFilter),
 			});
 		} catch (e) {
 			console.error(e);

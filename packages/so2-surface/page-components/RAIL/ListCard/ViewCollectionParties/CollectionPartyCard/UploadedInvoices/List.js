@@ -25,48 +25,48 @@ const PURCHASE_TYPE_LIST = [
 	},
 ];
 
-function List({ data = [], limit = false }) {
-	const handleLineItemsMapping = (services) => {
-		const SERVICE_LINE_ITEM_MAPPING = {};
-		(services?.mappings || []).forEach((item) => {
-			(item?.buy_line_items || []).forEach((lineItem) => {
-				SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] = !isEmpty(
-					SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type],
-				)
-					? [...(SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] || []), lineItem?.code]
-					: [lineItem?.code];
-			});
+function LineItemsMapping({ services = [] }) {
+	const SERVICE_LINE_ITEM_MAPPING = {};
+	(services?.mappings || []).forEach((item) => {
+		(item?.buy_line_items || []).forEach((lineItem) => {
+			SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] = !isEmpty(
+				SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type],
+			)
+				? [...(SERVICE_LINE_ITEM_MAPPING[lineItem?.service_type] || []), lineItem?.code]
+				: [lineItem?.code];
 		});
+	});
 
-		const servicesKeys = Object.keys(SERVICE_LINE_ITEM_MAPPING);
+	const servicesKeys = Object.keys(SERVICE_LINE_ITEM_MAPPING);
 
-		return (
-			<Tooltip
-				theme="light"
-				interactive
-				content={(servicesKeys || []).map((item) => (
-					<div key={item}>
+	return (
+		<Tooltip
+			theme="light"
+			interactive
+			content={(servicesKeys || []).map((item) => (
+				<div key={item}>
+					{startCase(item)}
+					{' '}
+					-
+					{SERVICE_LINE_ITEM_MAPPING[item]?.join(', ')}
+				</div>
+			))}
+		>
+			<div className={styles.service_types}>
+				{(servicesKeys || []).map((item) => (
+					<span key={item}>
 						{startCase(item)}
 						{' '}
 						-
 						{SERVICE_LINE_ITEM_MAPPING[item]?.join(', ')}
-					</div>
+					</span>
 				))}
-			>
-				<div className={styles.service_types}>
-					{(servicesKeys || []).map((item) => (
-						<span key={item}>
-							{startCase(item)}
-							{' '}
-							-
-							{SERVICE_LINE_ITEM_MAPPING[item]?.join(', ')}
-						</span>
-					))}
-				</div>
-			</Tooltip>
-		);
-	};
+			</div>
+		</Tooltip>
+	);
+}
 
+function List({ data = [], limit = false }) {
 	const purchaseType = (item) => {
 		const label = PURCHASE_TYPE_LIST.find((val) => val?.value === item?.invoice_type)?.label;
 		const displayType = label || 'Purchase';
@@ -118,7 +118,7 @@ function List({ data = [], limit = false }) {
 							</Tooltip>
 						</div>
 						<div className={styles.column} style={{ width: '20%' }}>
-							{handleLineItemsMapping(item)}
+							<LineItemsMapping services={item} />
 						</div>
 						<div className={styles.column} style={{ width: '20%' }}>
 							<Tooltip

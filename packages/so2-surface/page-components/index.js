@@ -2,11 +2,16 @@ import { useState, useMemo } from 'react';
 
 import DashboardContext from '../context/DashboardContext';
 
-import FTL from './FTL';
+import Ftl from './FTL';
 import Filters from './FTL/Filters';
 import StepperTabs from './FTL/StepperTabs';
-import RAIL from './RAIL';
+import Rail from './RAIL';
 import styles from './styles.module.css';
+
+const TAB_COMPONENT_MAPPER = {
+	ftl_freight           : Ftl,
+	rail_domestic_freight : Rail,
+};
 
 export default function SO2Surface() {
 	const [filters, setFilters] = useState({});
@@ -24,13 +29,7 @@ export default function SO2Surface() {
 		setStepperTab,
 	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, stepperTab, setStepperTab]);
 
-	const getTabComponent = () => {
-		switch (stepperTab) {
-			case 'ftl_freight': return <FTL key={stepperTab} />;
-			case 'rail_domestic_freight': return <RAIL key={stepperTab} />;
-			default: return <FTL />;
-		}
-	};
+	const ActiveStepperComponent = TAB_COMPONENT_MAPPER[stepperTab];
 
 	return (
 		<DashboardContext.Provider value={contextValues}>
@@ -40,7 +39,7 @@ export default function SO2Surface() {
 					<Filters />
 				</div>
 				<StepperTabs />
-				{getTabComponent()}
+				<ActiveStepperComponent key={stepperTab} />
 			</div>
 		</DashboardContext.Provider>
 	);

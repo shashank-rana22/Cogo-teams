@@ -11,7 +11,7 @@ import DeskTabs from '../FTL/DeskTabs';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-function RAIL() {
+function Rail() {
 	const { setFilters = () => {} } = useContext(DashboardContext);
 	const { data = {}, loading } = useListDocumentDesk();
 	const { list = [], total_count = 0, page = 0, page_limit = 0, pending_tasks_stats: tabData = {} } = data;
@@ -52,4 +52,4 @@ function RAIL() {
 	);
 }
 
-export default RAIL;
+export default Rail;
