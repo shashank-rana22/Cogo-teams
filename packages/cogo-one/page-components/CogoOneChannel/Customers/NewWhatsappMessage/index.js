@@ -27,7 +27,7 @@ function NewWhatsappMessage({
 	});
 
 	const closeModal = () => {
-		setModalType({ type: null, data: {} });
+		setModalType({ type: '', data: {} });
 		setDialNumber({
 			number       : '',
 			country_code : geo.country.mobile_country_code,
