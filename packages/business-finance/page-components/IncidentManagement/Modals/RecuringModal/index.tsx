@@ -2,6 +2,7 @@ import { Modal, Button, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
@@ -59,7 +60,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		},
 		{
 			title : 'Expense Category',
-			value : categoryName,
+			value : startCase(categoryName),
 		},
 		{
 			title : 'Entity',

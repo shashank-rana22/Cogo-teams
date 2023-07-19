@@ -1,4 +1,4 @@
-import { Placeholder, Stepper } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -8,6 +8,7 @@ import { formatDate } from '../../../../commons/utils/formatDate';
 import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
+import StakeHolderTimeline from '../../CreateExpenseModal/StakeHolderTimeline';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
@@ -67,7 +68,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 
 	const {
 		uploadedInvoice,
-		stakeholderName,
 		vendorID,
 		payableAmount,
 		invoiceCurrency: currency,
@@ -79,25 +79,51 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	});
 
 	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder1 } = level3 || {};
+	const { stakeholder: stakeholder3 } = level3 || {};
 	const { stakeholder: stakeholder2 } = level2 || {};
-	const { stakeholder: stakeholder3 } = level1 || {};
+	const { stakeholder: stakeholder1 } = level1 || {};
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
 			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
-				{ title: stakeholder3?.userName, key: stakeholder3?.userName },
+				{
+					email   : stakeholder1?.userEmail,
+					name    : stakeholder1?.userName,
+					remarks : level1?.remarks,
+				},
+				{
+					email   : stakeholder2?.userEmail,
+					name    : stakeholder2?.userName,
+					remarks : level2?.remarks,
+				},
+				{
+					email   : stakeholder3?.userEmail,
+					name    : stakeholder3?.userName,
+					remarks : level3?.remarks,
+				},
 			];
 		}
 		if (!isEmpty(level2)) {
 			return [
-				{ title: stakeholder1?.userName, key: stakeholder1?.userName },
-				{ title: stakeholder2?.userName, key: stakeholder2?.userName },
+				{
+					email   : stakeholder1?.userEmail,
+					name    : stakeholder1?.userName,
+					remarks : level1?.remarks,
+				},
+				{
+					email   : stakeholder2?.userEmail,
+					name    : stakeholder2?.userName,
+					remarks : level2?.remarks,
+				},
 			];
 		}
-		return [{ title: stakeholder1?.userName, key: stakeholder1?.userName }];
+		return [
+			{
+				email   : stakeholder1?.userEmail,
+				name    : stakeholder1?.userName,
+				remarks : level1?.remarks,
+			},
+		];
 	};
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
@@ -147,7 +173,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		},
 		{
 			title : 'Expense Category',
-			value : categoryName,
+			value : startCase(categoryName),
 		},
 		{
 			title : 'Entity',
@@ -208,14 +234,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			value : DURATION_MAPPING[repeatFrequency] || '-',
 		},
 		{
-			title : 'To be Approved by',
-			value : stakeholdersLoading ? (
-				<Placeholder height="20px" width="150px" />
-			) : (
-				startCase(stakeholderName || '') || '-'
-			),
-		},
-		{
 			title : 'Uploaded Documents',
 			value : (
 				<div>
@@ -261,13 +279,20 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			<div>
 				<div className={styles.title}>To be Approved by</div>
 				<div className={styles.steeper}>
-					{stakeholdersLoading ? (
-						<Placeholder height="20px" width="150px" />
+					{isEmpty(stakeholdersData) && !stakeholdersLoading ? (
+						<div className={styles.value}>
+							No Stakeholders Present
+						</div>
 					) : (
-						<Stepper
-							setActive={() => {}}
-							items={stakeHolderTimeLine()}
-						/>
+						<div className={styles.steeper}>
+							{stakeholdersLoading ? (
+								<Placeholder height="20px" width="150px" />
+							) : (
+								<StakeHolderTimeline
+									timeline={stakeHolderTimeLine()}
+								/>
+							)}
+						</div>
 					)}
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMFileUploader } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useAddExpense from '../../hooks/useAddExpense';
@@ -66,7 +66,7 @@ function MailTemplate({ expenseData, setShowModal, getList, rowData }:Props) {
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				{uploadedInvoice?.length > 0 && (
+				{!isEmpty(uploadedInvoice) && (
 					<div className={styles.file}>
 						<a href={uploadedInvoice} target="_blank" rel="noreferrer">
 							<div style={{ display: 'flex' }}>

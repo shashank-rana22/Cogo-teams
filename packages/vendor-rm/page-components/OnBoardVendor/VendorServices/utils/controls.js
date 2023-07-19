@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import officeLocations from '../../../../utils/office-locations.json';
 
 const controls = [
@@ -17,6 +19,7 @@ const controls = [
 				initialCall : true,
 				placeholder : 'Select a Category',
 				valueKey    : 'categoryName',
+				renderLabel : (item) => startCase(item.categoryName),
 				style       : { flexBasis: '30%' },
 				rules       : { required: 'Category is required' },
 			},

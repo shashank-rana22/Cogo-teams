@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import { BRANCH_OPTIONS } from '../constants/BRANCH_OPTIONS';
 import { REPEAT_FREQUENCY } from '../constants/REPEAT_FREQUENCY';
 
@@ -8,6 +10,7 @@ export const nonRecurringFilters = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_expense_category',
 		initialCall : true,
+		renderLabel : (item) => startCase(item.categoryName),
 		valueKey    : 'id',
 		span        : 2,
 		style       : { width: '164px', height: '32px' },
@@ -31,6 +34,7 @@ export const recurringFilters = [
 		placeholder : 'Expense Category',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_expense_category',
+		renderLabel : (item) => startCase(item.categoryName),
 		initialCall : true,
 		valueKey    : 'id',
 		span        : 1,
