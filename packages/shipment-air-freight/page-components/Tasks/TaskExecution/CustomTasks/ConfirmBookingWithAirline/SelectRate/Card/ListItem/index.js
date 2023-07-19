@@ -16,10 +16,11 @@ function ListItem({
 	handleProceed = () => {},
 	step = 1,
 	bookingMode = '',
+	createBookingLoading = false,
 }) {
 	const PROCEED_CTA_LABEL = {
 		email              : 'Proceed With Mail',
-		e_booking          : 'Proceed With E-Booking',
+		e_booking          : 'Place Booking',
 		platform           : 'Proceed With Platform',
 		email_and_platform : 'Proceed With Platform',
 	};
@@ -150,12 +151,12 @@ function ListItem({
 							<Button
 								className="secondary sm"
 								disabled={
-								item?.booking_confirmation_status === 'not_booked'
-								|| isEmpty(data?.repository_data)
+									createBookingLoading || item?.booking_confirmation_status === 'not_booked'
+								|| (isEmpty(data?.repository_data) && bookingMode !== 'e_booking')
 							}
 								onClick={handleSubmit(handleProceed)}
 							>
-								{PROCEED_CTA_LABEL[bookingMode]}
+								{PROCEED_CTA_LABEL[bookingMode] || 'Proceed With Platform'}
 							</Button>
 						</div>
 					</>

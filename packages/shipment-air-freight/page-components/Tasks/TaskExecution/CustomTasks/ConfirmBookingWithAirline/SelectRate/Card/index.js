@@ -26,6 +26,7 @@ function Card({
 	handOverDate = '',
 	refetchList = () => {},
 	setStep = () => {},
+	mainServiceData = {},
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showEmailPreview, setShowEmailPreview] = useState(false);
@@ -33,13 +34,21 @@ function Card({
 
 	const data = Array.isArray(item?.data) ? item?.data[GLOBAL_CONSTANTS.zeroth_index] : item?.data;
 
-	const bookingMode = data?.repository_data?.booking_mode;
+	let bookingMode = data?.repository_data?.booking_mode;
+
+	if (data?.validity?.flight_uuid) {
+		bookingMode = 'e_booking';
+	}
 
 	const { updateConfirmation, updateLoading } = useUpdateBookingPreference();
 	const { emailData, loading, sendBookingRequestEmail } =	useSendBookingRequestEmail(onCancel, setShowEmailPreview);
 
-	const { createEBooking } = useCreateEBooking();
-	// createBookingLoading
+	const { createEBooking, loading:createBookingLoading } = useCreateEBooking({
+		setShowBookingStatus,
+		item,
+		serviceProvidersData,
+		mainServiceData,
+	});
 
 	const handleProceedWithEmail = async (show_preview_only) => {
 		await sendBookingRequestEmail(
@@ -52,8 +61,28 @@ function Card({
 		);
 	};
 
+	const handleOnClick = () => {
+		(serviceProvidersData || []).forEach((itm) => {
+			const value = itm;
+			if (item?.priority === value?.priority) {
+				value.booking_confirmation_status = 'booked';
+				value.booking_source = bookingMode;
+			}
+		});
+		const payload = {
+			selected_priority : item?.priority,
+			id                : item?.preference_id,
+			service_providers : serviceProvidersData,
+		};
+
+		const value = {
+			...taskData,
+		};
+		updateConfirmation({ payload, updateShipmentPendingTask, value });
+	};
+
 	const handleProceedWithEBooking = () => {
-		createEBooking();
+		createEBooking(handleOnClick, data?.validity);
 	};
 
 	const handleProceed = async () => {
@@ -79,25 +108,6 @@ function Card({
 		await updateConfirmation({ payload });
 		window.open(data?.repository_data?.lms_url, '_blank');
 		onCancel();
-	};
-
-	const handleOnClick = () => {
-		(serviceProvidersData || []).forEach((itm) => {
-			const value = itm;
-			if (item?.priority === value?.priority) {
-				value.booking_confirmation_status = 'booked';
-			}
-		});
-		const payload = {
-			selected_priority : item?.priority,
-			id                : item?.preference_id,
-			service_providers : serviceProvidersData,
-		};
-
-		const value = {
-			...taskData,
-		};
-		updateConfirmation({ payload, updateShipmentPendingTask, value });
 	};
 
 	return (
@@ -126,7 +136,7 @@ function Card({
 				/>
 			</Modal>
 			<div className={styles.header}>
-				{ item?.source === 'cargo_ai' && (
+				{ bookingMode === 'e_booking' && (
 					<div className={styles.ribbon_container}>
 						<div className={styles.ribbon_pop}>E-Booking</div>
 					</div>
@@ -151,6 +161,7 @@ function Card({
 				handleSubmit={handleSubmit}
 				step={step}
 				bookingMode={bookingMode}
+				createBookingLoading={createBookingLoading}
 			/>
 			{showBookingStatus && (
 				<EBookingStatus setShowBookingStatus={setShowBookingStatus} showBookingStatus={showBookingStatus} />

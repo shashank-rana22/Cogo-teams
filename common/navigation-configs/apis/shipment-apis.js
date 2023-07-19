@@ -1539,6 +1539,10 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'post_air_coe_e_booking',
+		access_type : 'private',
+	},
+	{
 		api          : 'list_contracts',
 		access_type  : 'private',
 		service_name : 'contract',
