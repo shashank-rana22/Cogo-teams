@@ -46,10 +46,6 @@
 			"label": "Expected Delivery Date"
 		},
 		{
-			"label": "Commodity",
-			"key": "commodity"
-		},
-		{
 			"key": "packing_type",
 			"label": "Cargo Type"
 		},
@@ -72,6 +68,14 @@
 		{ 
 			"label": "Destination Demurrage Free Days",
 			"key" : "free_days_demurrage_destination"
+		},
+		{
+			"label": "Commodity",
+			"key": "commodity"
+		},
+		{
+			"label":"Commodity Sub Type",
+			"key":"commodity_subtype"
 		}
 	],
 	"commnets": { "emptyContent": "" }
