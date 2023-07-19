@@ -1,5 +1,6 @@
 import { Avatar, cl } from '@cogoport/components';
 import { IcMMinus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { forwardRef } from 'react';
 
 import useVideocallOptions from '../hooks/useVideocallOptions';
@@ -76,7 +77,7 @@ function VideoCallScreen({
 			</div>
 			<div className={styles.content}>
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />
-				<div className={peer_stream ? styles.peer_screen : styles.call_screen}>
+				<div className={!isEmpty(peer_stream) ? styles.peer_screen : styles.call_screen}>
 					<div className={styles.avatar_screen}>
 						<div className={styles.header}>{user_name}</div>
 						<Avatar

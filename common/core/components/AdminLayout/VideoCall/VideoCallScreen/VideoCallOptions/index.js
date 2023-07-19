@@ -37,7 +37,11 @@ function VideoCallOptions({
 			request_screen_share: !request_screen_share,
 		});
 		callUpdate(data);
-		setOptions((prev) => ({ ...prev, isScreenShareActive: !prev?.isScreenShareActive }));
+		setOptions((prev) => ({
+			...prev,
+			isScreenShareActive : !prev?.isScreenShareActive,
+			isMinimize          : !prev?.isMinimize,
+		}));
 	};
 
 	return (
