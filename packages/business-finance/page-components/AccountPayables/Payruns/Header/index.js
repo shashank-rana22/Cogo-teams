@@ -1,5 +1,3 @@
-import React from 'react';
-
 import InnerTabsData from './InnerTabsData';
 import SelectFilters from './SelectFilter';
 import styles from './styles.module.css';

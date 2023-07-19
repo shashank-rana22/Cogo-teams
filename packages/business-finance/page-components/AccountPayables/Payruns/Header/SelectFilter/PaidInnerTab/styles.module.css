@@ -5,13 +5,3 @@
 	justify-content: space-between;
 	margin-top: 8px;
 }
-
-.search_icon {
-	margin-right: 8px;
-}
-
-.filter {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-}

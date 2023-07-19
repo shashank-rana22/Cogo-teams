@@ -12,7 +12,7 @@ function InnerTabsData({ setActivePayrunTab = () => {}, isActive = false, payrun
 			onClick={() => { setActivePayrunTab(name); }}
 		>
 			<span>{title}</span>
-			<span className={styles.stat}>{stats}</span>
+			<span className={styles.stats}>{stats}</span>
 		</div>
 	);
 }

@@ -6,7 +6,7 @@ import useGetAllotEntityBank from '../../hooks/useGetAllotEntityBank';
 import useGetInvoiceListDownload from '../../hooks/useGetInvoiceListDownload';
 
 import AllotBankList from './AllotBankList';
-import SendReportModal from './SendReportModal';
+import styles from './styles.module.css';
 import UploadUTR from './UploadUTR';
 
 function PayrunButtons({
@@ -26,7 +26,6 @@ function PayrunButtons({
 		size: itemData?.totalRecords,
 	});
 	const [showAllotBank, setShowAllotBank] = useState(false);
-	const [showReport, setShowReport] = useState(false);
 	const [showUploadUTR, setShowUploadUTR] = useState(false);
 	const allotBankDisabledCondition = isEmpty(selectedPayrun) && isEmpty(checkedRow);
 	if (activePayrunTab === 'AUDITED' && !isInvoiceView) {
@@ -34,6 +33,7 @@ function PayrunButtons({
 			<div>
 				<div>
 					<Button
+						className={styles.upload_button}
 						disabled={allotBankDisabledCondition}
 						onClick={() => { setShowAllotBank(true); getEntityBank(); }}
 					>
@@ -71,7 +71,7 @@ function PayrunButtons({
 	if (activePayrunTab === 'UPLOAD_HISTORY') {
 		return (
 			<div>
-				<Button onClick={() => setShowUploadUTR(true)}>
+				<Button onClick={() => setShowUploadUTR(true)} className={styles.upload_button}>
 					UPLOAD BULK UTR
 				</Button>
 				{showUploadUTR ? (
@@ -85,27 +85,11 @@ function PayrunButtons({
 			</div>
 		);
 	}
-	if (activePayrunTab === 'PAID' && overseasData !== 'ADVANCE_PAYMRNT') {
-		return (
-			<div>
-				<Button themeType="secondary" onClick={() => setShowReport(true)}>
-					SEND REPORT
-				</Button>
-				{showReport ? (
-					<SendReportModal
-						showReport={showReport}
-						setShowReport={setShowReport}
-						activePayrunTab={activePayrunTab}
-						itemData={itemData}
-					/>
-				) : null}
-			</div>
-		);
-	}
+
 	if (['PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab) && isInvoiceView) {
 		return (
 			<div>
-				<Button size="sm" onClick={downloadInvoice} disabled={loading}>
+				<Button onClick={downloadInvoice} disabled={loading}>
 					{loading ? 'Generating' : 'Download'}
 				</Button>
 			</div>
