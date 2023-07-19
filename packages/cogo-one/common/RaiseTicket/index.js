@@ -1,34 +1,24 @@
 import { Modal, Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { upperCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { TextAreaController, InputController, useForm, SelectController } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import useRaiseTicketControls from '../../configurations/raise-ticket-controls';
 import useCreateTicket from '../../hooks/useCreateTicket';
-import useListDefaultTypes from '../../hooks/useListDefaultTypes';
 import HeaderName from '../HeaderName';
 import ReceiveDiv from '../ReceiveDiv';
 
-import RenderForm from './renderForm';
 import styles from './styles.module.css';
 
-function RaiseTicket({
-	setRaiseTicketModal = () => {},
-	raiseTicketModal = {},
-	refetchTickets = () => {},
-}) {
-	const [additionalInfo, setAdditionalInfo] = useState([]);
-
+const CONTROLLER_MAPPING = {
+	input    : InputController,
+	select   : SelectController,
+	textarea : TextAreaController,
+};
+function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, refetchTickets = () => {} }) {
 	const { data:{ messageData = {}, formattedData = {} } = {}, source = null } = raiseTicketModal || {};
-	const { shipment_id : shipmentId = '' } = formattedData || {};
-
 	const closeModal = () => {
 		setRaiseTicketModal({ state: false, data: {} });
 	};
-
-	const { data = {} } = useListDefaultTypes({ raiseTicketModal });
-	const { TicketType: ticketType = '' } = data[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const {
 		createTicket,
@@ -42,42 +32,28 @@ function RaiseTicket({
 		setValue,
 	} = useForm();
 
-	const { ticket_type: watchTicketType = '' } = watch();
-
-	const additionalControls = (additionalInfo || []).map((item) => ({
-		label        : upperCase(item),
-		name         : item,
-		controlType  : 'input',
-		placeholder  : `Add ${item}`,
-		size         : 'md',
-		showOptional : false,
-	}));
+	const { ticket_type:watchTicketType = '' } = watch();
 
 	const { controls = [], ticketDataKey = '' } = useRaiseTicketControls({
 		watchTicketType,
 		source,
-		ticketType,
-		setAdditionalInfo,
 	});
-
-	const newControls = controls.concat(additionalControls);
 
 	const onCreateTicket = (val) => {
 		const {
-			response: { message = '', media_url = '' } = {}, message_type = 'text',
+			response:{ message = '', media_url = '' } = {}, message_type = 'text',
 			created_at = '',
 		} = messageData;
 
 		const { user_id = null, lead_user_id = null } = formattedData || {};
-		const { ticket_data = null, ticket_type = null, description = null, sid = '' } = val || {};
+		const { ticket_data = null, ticket_type = null, description = null } = val || {};
 		const payload = {
 			UserID      : user_id || lead_user_id,
 			Source      : 'client',
 			Type        : ticket_type,
 			Description : description,
 			Data        : {
-				sid         : sid || undefined,
-				MessageData : {
+				MessageData: {
 					Message     : message,
 					MediaUrl    : media_url,
 					MessageType : message_type,
@@ -92,11 +68,6 @@ function RaiseTicket({
 	useEffect(() => {
 		setValue('ticket_data', '');
 	}, [watchTicketType, setValue]);
-
-	useEffect(() => {
-		setValue('ticket_type', ticketType);
-		setValue('sid', shipmentId);
-	}, [setValue, ticketType, shipmentId]);
 
 	return (
 		<Modal
@@ -120,7 +91,21 @@ function RaiseTicket({
 						</div>
 					</>
 				)}
-				<RenderForm control={control} controls={newControls} errors={errors} />
+				<div className={styles.styled_form}>
+					{controls.map((eachControl = {}) => {
+						const { label = '', controlType = '', name = '' } = eachControl || {};
+						const Element = CONTROLLER_MAPPING[controlType] || null;
+						return (Element && (
+							<div className={styles.styled_element}>
+								<div className={styles.label}>{label}</div>
+								<Element control={control} {...eachControl} />
+								<div className={styles.error_text}>
+									{errors?.[name] && (errors?.[name]?.message || 'This is Required')}
+								</div>
+							</div>
+						));
+					})}
+				</div>
 			</Modal.Body>
 			<Modal.Footer className={styles.footer_buttons}>
 				<Button size="md" themeType="tertiary" onClick={closeModal}>cancel</Button>
