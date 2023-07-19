@@ -9,7 +9,7 @@ import Heading from './Header';
 import styles from './styles.module.css';
 
 function CreateLevelModal({
-	refetch = () => { },
+	refetch = () => {},
 }) {
 	const [showCreateModal, setShowCreateModal] = useState(false);
 	const [level, setLevel] = useState(null);

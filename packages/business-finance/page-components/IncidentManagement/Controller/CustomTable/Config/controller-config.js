@@ -2,7 +2,7 @@ export const CONTROLLER_CONFIG = {
 	headerClass : 'border',
 	fields      : [
 		{
-			label : 'ReferenceId',
+			label : 'id',
 			key   : 'referenceId',
 			span  : 1,
 		},
