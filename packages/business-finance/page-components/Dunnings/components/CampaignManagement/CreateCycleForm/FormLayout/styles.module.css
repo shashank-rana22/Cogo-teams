@@ -31,6 +31,14 @@
 .timezone_container {
 	display: flex;
 	align-items: center;
+
+	:global {
+		.ui_select_options_container {
+			top: auto;
+			bottom: 42px;
+			box-shadow: 0 1px 10px -2px;
+		}
+	}
 }
 
 .filter_container {
