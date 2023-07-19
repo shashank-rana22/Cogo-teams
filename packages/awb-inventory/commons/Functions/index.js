@@ -43,19 +43,10 @@ export const functions = {
 			`(${originAirportCode}) ${originAirport}`
 		);
 	},
-	handleDestLocation: (singleItem) => {
-		const { destinationAirport } = singleItem || {};
-		return (destinationAirport);
-	},
-	handleAgent: (singleItem) => {
-		const { procuredByName = {} } = singleItem || {};
-		return procuredByName;
-	},
-	handleServiceProvider: (singleItem) => {
-		const { serviceProviderName } = singleItem || {};
-		return serviceProviderName;
-	},
-	handleDate: (singleItem) => {
+	handleDestLocation    : (singleItem) => singleItem.destinationAirport,
+	handleAgent           : (singleItem) => singleItem.procuredByName,
+	handleServiceProvider : (singleItem) => singleItem.serviceProviderName,
+	handleDate            : (singleItem) => {
 		const { procuredDate } = singleItem || {};
 		return (
 			<div className={styles.overflow_text}>
@@ -67,36 +58,12 @@ export const functions = {
 			</div>
 		);
 	},
-	handleTotalStock: (singleItem) => {
-		const { totalStock } = singleItem || {};
-		return totalStock;
-	},
-	handleUsedStock: (singleItem) => {
-		const { usedStock } = singleItem || {};
-		return usedStock;
-	},
-	handleUnusedStock: (singleItem) => {
-		const { unusedStock } = singleItem || {};
-		return unusedStock;
-	},
-	handleCancelledStock: (singleItem) => {
-		const { cancelledStock } = singleItem || {};
-		return cancelledStock;
-	},
-	handleCustomClearanceDate: (singleItem) => {
-		const { customClearanceDate } = singleItem || {};
-		return customClearanceDate;
-	},
-	handleBookingDate: (singleItem) => {
-		const { bookingDate } = singleItem || {};
-		return bookingDate;
-	},
-	handleAwbNumber: (singleItem) => {
-		const { awbNumber } = singleItem || {};
-		return awbNumber;
-	},
-	handleIataCode: (singleItem) => {
-		const { iataCode } = singleItem || {};
-		return iataCode;
-	},
+	handleTotalStock          : (singleItem) => singleItem.totalStock,
+	handleUsedStock           : (singleItem) => singleItem.usedStock,
+	handleUnusedStock         : (singleItem) => singleItem.unusedStock,
+	handleCancelledStock      : (singleItem) => singleItem.cancelledStock,
+	handleCustomClearanceDate : (singleItem) => singleItem.customClearanceDate,
+	handleBookingDate         : (singleItem) => singleItem.bookingDate,
+	handleAwbNumber           : (singleItem) => singleItem.awbNumber,
+	handleIataCode            : (singleItem) => singleItem.iataCode,
 };
