@@ -11,7 +11,7 @@ const useGetEntityList = () => {
 	const [entityFilters, setEntityFilters] = useState({
 		activeEntity   : '301',
 		entityRequest  : 'all',
-		entityCurrency : 'all',
+		entityCurrency : '',
 		reportTime     : 'day',
 		reportCurrency : 'INR',
 		search         : '',
@@ -86,7 +86,7 @@ const useGetEntityList = () => {
 					entityCode : isReportActiveEntity ? undefined : activeEntity,
 					request    : isReportActiveEntity ? undefined : entityRequest,
 					currency   : isReportActiveEntity
-						? reportCurrency : entityCurrency,
+						? reportCurrency : entityCurrency || 'all',
 					viewBy    : selectFromDate && selectToDate ? 'date_Range' : view,
 					fromDate  : isReportActiveEntity ? selectFromDate : undefined,
 					toDate    : isReportActiveEntity ? selectToDate : undefined,

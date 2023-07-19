@@ -56,7 +56,7 @@ function ColumnCard({
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 							formatType : 'date',
 						})
-						: `${GLOBAL_CONSTANTS.MONTH_MAPPING[month - ONE]} ${year}`}
+						: `${GLOBAL_CONSTANTS.months[month - ONE]} ${year}`}
 				</div>
 				<div className={styles.alloted}>
 					{	getFormattedPrice(
@@ -107,7 +107,7 @@ function ColumnCard({
 					setFilters={setFilters}
 					activeEntityCode={activeEntityCode}
 					setActiveEntityCode={setActiveEntityCode}
-					monthName={GLOBAL_CONSTANTS.MONTH_MAPPING[month - ONE]}
+					monthName={GLOBAL_CONSTANTS.months[month - ONE]}
 				/>
 			) : null}
 		</div>

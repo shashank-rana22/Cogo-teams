@@ -34,6 +34,11 @@
 	}
 }
 
+.curency_select {
+	width: 160px;
+	margin-left: 20px;
+}
+
 .search_container {
 	display: flex;
 	min-width: 310px;

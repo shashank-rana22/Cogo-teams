@@ -1,4 +1,4 @@
-import { Input, SingleDateRange } from '@cogoport/components';
+import { Input, Select, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
@@ -10,27 +10,16 @@ import {
 
 import styles from './styles.module.css';
 
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-	GLOBAL_CONSTANTS.currency_code.SGD,
-	GLOBAL_CONSTANTS.currency_code.VND,
-].map((currencyCode) => ({
+const CURRENCY_OPTIONS = Object.keys(GLOBAL_CONSTANTS.currency_code).map((currencyCode) => ({
 	label : currencyCode,
 	value : currencyCode,
 }));
 
-const ENTITY_OPTION_CURRENCY = [
-	'ALL',
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.VND,
-].map((currencyCode) => ({
-	label : currencyCode,
-	value : currencyCode.toLowerCase(),
-}));
+const ENTITY_OPTION_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.treasury
+	.currencies.map((currencyCode) => ({
+		label : currencyCode,
+		value : currencyCode.toLowerCase(),
+	}));
 
 function SelectFilters({
 	filters = {},
@@ -73,15 +62,16 @@ function SelectFilters({
 							background="#FDEBE9"
 							color="#ED3726"
 						/>
-						<div className={styles.currency_toggle}>
-							<SegmentedControl
+						<div className={styles.curency_select}>
+							<Select
 								options={ENTITY_OPTION_CURRENCY}
-								activeTab={filters?.entityCurrency}
-								setActiveTab={(val) => (
+								value={filters?.entityCurrency}
+								placeholder="Select Currency"
+								onChange={(val) => (
 									setFilters((prev) => ({ ...prev, entityCurrency: val })))}
 								background="#FDEBE9"
 								color="#ED3726"
-
+								isClearable
 							/>
 						</div>
 					</div>
