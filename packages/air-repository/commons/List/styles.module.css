@@ -20,4 +20,25 @@
 .scroll {
 	max-height: 600px;
 	overflow: auto;
+	background: var(--color-secondary-5);
+}
+
+.accordian_style {
+	position: relative;
+	bottom: 8px;
+	min-height: 20px;
+	margin: 0 8px;
+	text-align: center;
+	background: #fffaeb;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0 5px 10px #0000000d;
+
+	:global {
+		.ui_button_container {
+			min-width: 100px;
+			max-height: 16px;
+			margin: auto;
+			color: var(--color-accent-orange-2);
+		}
+	}
 }
