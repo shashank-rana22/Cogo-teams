@@ -8,6 +8,7 @@ import {
 	IcMVideoCallMute,
 	IcMMicrophoneMute,
 } from '@cogoport/icons-react';
+import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -37,12 +38,11 @@ function VideoCallOptions({
 			request_screen_share: !request_screen_share,
 		});
 		callUpdate(data);
-		setOptions((prev) => ({
-			...prev,
-			isScreenShareActive : !prev?.isScreenShareActive,
-			isMinimize          : !prev?.isMinimize,
-		}));
 	};
+
+	useEffect(() => {
+		setOptions((prev) => ({ ...prev, isScreenShareActive: request_screen_share }));
+	}, [request_screen_share, setOptions]);
 
 	return (
 		<>
