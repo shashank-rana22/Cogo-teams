@@ -100,8 +100,12 @@ function VideoCall({
 
 	useEffect(() => {
 		if (webrtcToken?.peer_token && callDetails?.calling_type === 'outgoing') {
-			if (peerRef.current && webrtcToken?.peer_token?.type === 'answer') {
-				peerRef.current.signal(webrtcToken?.peer_token);
+			if (peerRef.current) {
+				try {
+					peerRef.current.signal(webrtcToken?.peer_token);
+				} catch (error) {
+					console.log('not able to load signal', error);
+				}
 			}
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);
