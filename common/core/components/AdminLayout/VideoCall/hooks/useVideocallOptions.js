@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useCallback } from 'react';
 
 import { stopStream } from '../utils';
 
@@ -11,60 +12,50 @@ function useVideocallOptions({
 	callUpdate,
 	peerRef,
 }) {
-	const shareScreen = () => {
-		if (options.isScreenShareActive) {
-			setOptions((prev) => ({ ...prev, isScreenShareActive: false }));
-			setStreams((prev) => ({ ...prev, screen_stream: null }));
-			peerRef.current.replaceTrack(
-				streams.screen_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
-				streams.user_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
-				streams.user_stream,
-			);
-			stopStream('screen_stream', streams);
+	const shareScreen = useCallback(() => {
+		if (options.shareScreen) {
+			console.log('request share screen');
 		} else {
-			navigator.mediaDevices
-				.getDisplayMedia({ cursor: true })
-				.then((screenStream) => {
-					setOptions((prev) => ({ ...prev, isScreenShareActive: true }));
-					setStreams((prev) => ({ ...prev, screen_stream: screenStream }));
-					peerRef.current.replaceTrack(
-						streams.user_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
-						screenStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
-						streams.user_stream,
-					);
-				})
-				.catch((error) => {
-					console.log('Failed to share screen', error);
-				});
+			console.log('request share screen');
 		}
-	};
+	}, [options.shareScreen]);
 
 	const stopCall = () => {
 		callEnd();
 		callUpdate({ call_status: 'end_call' });
 	};
 
-	const micOn = () => {
+	const micOn = useCallback(() => {
 		setOptions((prev) => ({ ...prev, isMicActive: !options.isMicActive }));
 		const loaclStream = streams;
-		if (loaclStream?.user) {
-			loaclStream.user.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = options.isMicActive;
+		if (loaclStream?.user_stream) {
+			loaclStream.user_stream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isMicActive;
 		}
-	};
+	}, [options.isMicActive, setOptions, streams]);
 
-	const videoOn = () => {
-		stopStream('user_stream', streams);
-		navigator.mediaDevices
-			.getUserMedia({ video: !options.isVideoActive, audio: true })
-			.then((userStream) => {
-				console.log(userStream, 'in call user_stream');
-				setStreams((prev) => ({ ...prev, user_stream: userStream }));
-			})
-			.catch((error) => {
-				console.log('user stream is not working', error);
-			});
+	const videoOn = useCallback(() => {
+		if (options.isVideoActive) {
+			peerRef.current.removeTrack(
+				streams.video_stream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
+				streams.user_stream,
+			);
+			stopStream('video_stream', streams);
+			setStreams((prev) => ({ ...prev, video_stream: null }));
+		} else {
+			navigator.mediaDevices
+				.getUserMedia({
+					video: true,
+				})
+				.then((videoStream) => {
+					setStreams((prev) => ({ ...prev, video_stream: videoStream }));
+					peerRef.current.addTrack(
+						videoStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index],
+						streams.user_stream,
+					);
+				});
+		}
 		setOptions((prev) => ({ ...prev, isVideoActive: !options.isVideoActive }));
-	};
+	}, [options.isVideoActive, peerRef, setOptions, setStreams, streams]);
 
 	return { shareScreen, stopCall, micOn, videoOn };
 }

@@ -55,7 +55,7 @@ function useComingCall({
 
 	const accepteCallMedia = () => {
 		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true })
+			.getUserMedia({ video: false, audio: true })
 			.then((userStream) => {
 				setStreams((prev) => ({ ...prev, user_stream: userStream }));
 				const peer = new Peer({
@@ -78,6 +78,10 @@ function useComingCall({
 						callDetails.calling_room_id,
 						callDetails.webrtc_token_room_id,
 					);
+				});
+
+				peer.on('track', (track, stream) => {
+					console.log(track, 'truck', stream, 'in call answerOfCall');
 				});
 
 				peer.on('stream', (peerStream) => {

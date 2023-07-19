@@ -87,7 +87,7 @@ function useVideoCallFirebase({
 		}
 	}, [firestore, setCallDetails]);
 
-	const callUpdate = (data) => {
+	const callUpdate = useCallback((data) => {
 		if (callDetails?.calling_room_id) {
 			const { calling_room_id } = callDetails;
 
@@ -105,7 +105,7 @@ function useVideoCallFirebase({
 				console.error(error);
 			}
 		}
-	};
+	}, [callDetails, firestore]);
 
 	const callEnd = useCallback(() => {
 		dispatch(
@@ -117,6 +117,8 @@ function useVideoCallFirebase({
 		setInACall(false);
 		setCallComing(false);
 		stopStream('user_stream', streams);
+		stopStream('video_stream', streams);
+		stopStream('screen_stream', streams);
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
 			localPeerRef.current.destroy();
@@ -137,7 +139,7 @@ function useVideoCallFirebase({
 		});
 		setOptions({
 			isMicActive         : true,
-			isVideoActive       : true,
+			isVideoActive       : false,
 			isScreenShareActive : false,
 			isMinimize          : false,
 		});
@@ -166,7 +168,7 @@ function useVideoCallFirebase({
 			calling_type         : 'outgoing',
 		}));
 		navigator.mediaDevices
-			.getUserMedia({ video: true, audio: true })
+			.getUserMedia({ video: false, audio: true })
 			.then((myStream) => {
 				setInACall(true);
 				setStreams((prev) => ({ ...prev, user_stream: myStream }));
@@ -197,6 +199,10 @@ function useVideoCallFirebase({
 					}).then((calling_room_id) => {
 						saveWebrtcToken({ user_token: data }, calling_room_id, userId);
 					});
+				});
+
+				peer.on('track', (track, stream) => {
+					console.log(track, 'truck', stream, 'in call callingTo');
 				});
 
 				peer.on('stream', (peerStream) => {

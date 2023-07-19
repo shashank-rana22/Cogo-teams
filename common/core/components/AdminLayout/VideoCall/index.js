@@ -31,13 +31,13 @@ function VideoCall({
 		calling_type         : null, // incoming or outgoing
 	});
 	const [streams, setStreams] = useState({
-		user_stream   : null,
-		peer_stream   : null,
-		screen_stream : null,
+		user_stream  : null,
+		video_stream : null,
+		peer_stream  : null,
 	});
 	const [options, setOptions] = useState({
 		isMicActive         : true,
-		isVideoActive       : true,
+		isVideoActive       : false,
 		isScreenShareActive : false,
 		isMinimize          : false,
 	});
@@ -91,12 +91,16 @@ function VideoCall({
 		}
 		if (streams.peer_stream && streamRef.current.peer) {
 			streamRef.current.peer.srcObject = streams.peer_stream;
+			const tracks = streams.peer_stream.getTracks();
+			tracks.forEach((track) => {
+				console.log(track);
+			});
 		}
 	}, [streams]);
 
 	useEffect(() => {
 		if (webrtcToken?.peer_token && callDetails?.calling_type === 'outgoing') {
-			if (peerRef.current) {
+			if (peerRef.current && webrtcToken?.peer_token?.type === 'answer') {
 				peerRef.current.signal(webrtcToken?.peer_token);
 			}
 		}
