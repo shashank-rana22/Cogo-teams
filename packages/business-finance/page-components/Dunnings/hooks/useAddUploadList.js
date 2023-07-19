@@ -4,19 +4,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-interface AddUploadInterface {
-	onClose?: () => void;
-	subTabsValue?: string;
-	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
-	cycleListId?: string;
-	uncheckedRows?: Array<string>;
-	getMasterList?: Function;
-}
-
-interface Profile {
-	profile?: { user: { id: string } }
-}
-
 const useAddUploadList = ({
 	onClose,
 	subTabsValue,
@@ -24,8 +11,8 @@ const useAddUploadList = ({
 	cycleListId,
 	uncheckedRows = [],
 	getMasterList,
-}:AddUploadInterface) => {
-	const profile: Profile = useSelector((state) => state);
+}) => {
+	const profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const SUB_TABS_VALUES = subTabsValue === 'masterExceptionList';
 	const [{ loading:uploadListLoading }, trigger] = useRequestBf(
@@ -40,7 +27,7 @@ const useAddUploadList = ({
 	const PROFILE_ID = user?.id;
 	const UN_CHECKED_DATA = !isEmpty(uncheckedRows);
 	const exceptionType = SUB_TABS_VALUES ? 'in master exceptions' : 'in this cycle exception';
-	const getUploadList = useCallback((data, fileValue) => {
+	const getUploadList = useCallback(({ data, fileValue, entity }) => {
 		(async () => {
 			try {
 				const res = await trigger({
@@ -52,6 +39,7 @@ const useAddUploadList = ({
 						actionType    : UN_CHECKED_DATA ? 'DELETE' : 'UPLOAD',
 						createdBy     : PROFILE_ID,
 						cycleId       : SUB_TABS_VALUES ? undefined : cycleListId || undefined,
+						entityCode    : entity,
 					},
 				});
 				if (!isEmpty(res?.data)) {

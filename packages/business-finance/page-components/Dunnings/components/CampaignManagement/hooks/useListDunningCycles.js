@@ -2,20 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface GlobalFilters {
-	search?: string;
-	page?: number;
-	cycleStatus?: string;
-	dunningCycleType?: string;
-	frequency?: string;
-}
-interface Props {
-	globalFilters?: GlobalFilters;
-	setGlobalFilters?: Function;
-	sort?: object;
-}
-
-function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
+function useListDunningCycles({ globalFilters, setGlobalFilters, sort, setDropdown }) {
 	const { search, page, cycleStatus, dunningCycleType, frequency } = globalFilters || {};
 	const [sortBy] = Object.keys(sort);
 	const [sortType] = Object.values(sort);
@@ -25,9 +12,9 @@ function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/dunning/list-dunning-cycle-execution',
+			url     : '/payments/dunning/list-dunning',
 			method  : 'get',
-			authKey : 'get_payments_dunning_list_dunning_cycle_execution',
+			authKey : 'get_payments_dunning_list_dunning',
 		},
 		{ manual: true },
 	);
@@ -36,39 +23,40 @@ function useListDunningCycle({ globalFilters, setGlobalFilters, sort }:Props) {
 
 	useEffect(() => {
 		debounceQuery(search);
-		setGlobalFilters((prev) => ({ ...prev, page: 1 }));
+		setGlobalFilters((prev) => ({ ...prev, page: 1 })); // reset page to 1 on search
 	}, [search, debounceQuery, setGlobalFilters]);
 
-	const getDunningList = useCallback((async () => {
+	const getDunningCycle = useCallback((() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					query            : query || undefined,
+					pageIndex        : page,
 					cycleStatus      : cycleStatus || undefined,
-					dunningCycleType : dunningCycleType || undefined,
-					frequency        : frequency || undefined,
 					sortBy,
 					sortType,
-					pageIndex        : page,
+					dunningCycleType : dunningCycleType || undefined,
+					frequency        : frequency || undefined,
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error(err);
 		}
 	}), [cycleStatus, dunningCycleType, page, query, trigger, frequency, sortBy, sortType]);
 
 	useEffect(() => {
-		getDunningList();
+		getDunningCycle();
+		setDropdown(null); // closing opened dropdown on list refetch
 	}, [query, page, cycleStatus,
-		dunningCycleType, getDunningList,
-		sortType, sortBy,
+		dunningCycleType, getDunningCycle,
+		sortType, sortBy, setDropdown,
 	]);
 
 	return {
-		data,
-		loading,
-		getDunningList,
+		cycleData    : data,
+		cycleLoading : loading,
+		getDunningCycle,
 	};
 }
 
-export default useListDunningCycle;
+export default useListDunningCycles;

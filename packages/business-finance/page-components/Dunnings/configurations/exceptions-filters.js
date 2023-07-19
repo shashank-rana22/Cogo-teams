@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 export const exceptionMasterFilters = [
 	{
 		name        : 'category',
@@ -42,7 +44,20 @@ export const exceptionMasterFilters = [
 			},
 		],
 	},
-
+	{
+		name        : 'entities',
+		type        : 'multiSelect',
+		span        : 1,
+		placeholder : 'Entities',
+		isClearable : true,
+		prefix      : () => {},
+		options     : Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => (
+			{
+				label : String(entity),
+				value : String(entity),
+			}
+		)),
+	},
 ];
 
 export const exceptionCycleWiseFilters = [

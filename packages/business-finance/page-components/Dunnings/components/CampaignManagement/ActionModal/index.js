@@ -7,17 +7,7 @@ import useUpdateCycle from '../hooks/useUpdateCycle';
 
 import styles from './styles.module.css';
 
-interface Props {
-	actionModal?: {
-		rowData?: { id?: string, name?: string };
-		action?: string;
-		visible?: boolean;
-	};
-	setActionModal?: Function;
-	getDunningList?: Function;
-}
-
-function ActionModal({ actionModal, setActionModal, getDunningList }:Props) {
+function ActionModal({ actionModal = {}, setActionModal = () => {}, getDunningList = () => {} }) {
 	const [formData, setFormData] = useState({});
 
 	const { updateCycle, loading } = useUpdateCycle({ getDunningList, setActionModal });
@@ -44,7 +34,8 @@ function ActionModal({ actionModal, setActionModal, getDunningList }:Props) {
 					<>
 						<div className={styles.header}>
 							<h3>
-								Are you sure you want to delete &nbsp;
+								Are you sure you want to delete
+								{' '}
 								{rowData?.name}
 								?
 							</h3>
