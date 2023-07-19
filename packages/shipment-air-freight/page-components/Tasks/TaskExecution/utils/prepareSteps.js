@@ -227,7 +227,7 @@ const injectDataIntoValues = (step, task, shipment_data, fieldTypeMapping) => {
 	});
 	const newStep = {
 		...step,
-		controls: (step.controls || []).map((ctrl) => ({
+		controls: (step?.controls || []).map((ctrl) => ({
 			...evaluateObject(ctrl, task, shipment_data, updatedFieldTypeMapping),
 		})),
 	};
