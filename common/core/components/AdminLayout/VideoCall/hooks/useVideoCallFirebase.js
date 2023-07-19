@@ -158,7 +158,7 @@ function useVideoCallFirebase({
 			call_status : 'calling',
 			calling_by  : 'admin',
 			my_details  : {
-				name      : userName,
+				user_name : userName,
 				user_id   : userId,
 				user_type : 'admin',
 			},
@@ -189,7 +189,7 @@ function useVideoCallFirebase({
 						call_status : 'calling',
 						calling_by  : 'admin',
 						my_details  : {
-							name      : userName,
+							user_name : userName,
 							user_id   : userId,
 							user_type : 'admin',
 						},
