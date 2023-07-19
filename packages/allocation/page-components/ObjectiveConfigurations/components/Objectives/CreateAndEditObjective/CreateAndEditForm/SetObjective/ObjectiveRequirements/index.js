@@ -15,11 +15,14 @@ const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 const ObjectiveRequirements = forwardRef((props, ref) => {
 	const { formValues, setFormValues, disabled, setActiveStep, generalConfigFormState } = props;
 
+	const { objectiveRequirements: { stats_details = {} } } = formValues;
+
 	const divRef = useRef({});
 
 	const { control, watch, reset, resetField, handleSubmit } = useForm({
 		defaultValues: {
 			service_requirements: [{}],
+			...(stats_details || {}),
 		},
 	});
 

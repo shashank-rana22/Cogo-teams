@@ -2,7 +2,8 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
+// eslint-disable-next-line max-len
+import getGeneralConfiguratioFormControls from '../../../../../../configurations/get-general-configuration-form-controls';
 import getSeparatedIdData from '../../../../../../helpers/get-separated-id-data';
 
 const useSetGeneralConfiguration = (props) => {

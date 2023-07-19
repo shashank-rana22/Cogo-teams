@@ -16,27 +16,27 @@ const CARD_DATA_MAPPING = [
 	},
 	{
 		label : 'No. of Searches',
-		key   : 'shipment_count',
+		key   : 'search_count',
 	},
 ];
 
 function TransactionFunnelCard(props) {
 	const { statsDetails } = props;
 
-	const { start_date, end_date } = statsDetails;
+	const { date_range : { startDate, endDate } = {} } = statsDetails;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
 				<h4 className={styles.heading}>Transaction Funnel</h4>
-				{start_date && end_date && (
+				{startDate && endDate && (
 					<Pill size="md">
 						{`From ${formatDate({
-							date       : start_date,
+							date       : startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
 						})} - ${formatDate({
-							date       : end_date,
+							date       : endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
 						})}`}
