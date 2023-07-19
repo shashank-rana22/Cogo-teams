@@ -10,8 +10,8 @@ const useUploadBulkUtr = ({
 	setShowUploadUTR = () => {},
 }) => {
 	const { profile = {} } = useSelector((state) => state);
-	const { user = {}, name = '', session_type = '' } = profile;
-	const { id: user_id } = user;
+	const { user = {}, session_type = '' } = profile;
+	const { id: user_id, name = '' } = user;
 
 	const [{ data, loading }, trigger] = useRequestBf({
 		url     : '/purchase/payrun/upload',

@@ -62,7 +62,7 @@ function PayrunButtons({
 	if (activePayrunTab === 'INITIATED' && !isInvoiceView) {
 		return (
 			<div>
-				<Button disabled={isEmpty(checkedRow)}>
+				<Button className={styles.upload_button} disabled={isEmpty(checkedRow)}>
 					Go To Audit
 				</Button>
 			</div>
