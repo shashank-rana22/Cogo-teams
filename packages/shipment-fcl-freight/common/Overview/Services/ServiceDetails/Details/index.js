@@ -64,8 +64,8 @@ function Details({ serviceData = [] }) {
 							key={val}
 							themeType="none"
 							className={cl`${styles.mainservice_tabs}
-										${multiServiceType === val ? styles.active : null}
-										${styles[state]}`}
+                                        ${multiServiceType === val ? styles.active : null}
+                                        ${styles[state]}`}
 							onClick={() => setMultiServiceType(val)}
 						>
 							{`${SERVICE_INITIAL_KEYS[val].container_size} ft`}
@@ -74,12 +74,12 @@ function Details({ serviceData = [] }) {
 							{' '}
 							{SERVICE_INITIAL_KEYS[val].container_type
 								.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
-							+ SERVICE_INITIAL_KEYS[val].container_type.slice(SLICE_VALUE)}
+                            + SERVICE_INITIAL_KEYS[val].container_type.slice(SLICE_VALUE)}
 							{' '}
 							|
 							{' '}
 							{SERVICE_INITIAL_KEYS[val].commodity.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
-							+ SERVICE_INITIAL_KEYS[val].commodity.slice(SLICE_VALUE)}
+                            + SERVICE_INITIAL_KEYS[val].commodity.slice(SLICE_VALUE)}
 						</Button>
 					))}
 				</div>

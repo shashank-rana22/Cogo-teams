@@ -67,6 +67,8 @@ function ShipmentDetails() {
 		case 'prod_process_owner':
 		case 'tech_super_admin':
 		case 'corporate_owner':
+		case 'operation_manager':
+		case 'coe_head':
 			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
 		default:
 			return (

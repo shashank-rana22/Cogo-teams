@@ -18,8 +18,7 @@ function useStepExecution({
 	shipment_data = {},
 	primary_service = {},
 	services = [],
-	onCancel = () => {},
-	refetch = () => {},
+	tradeType = '',
 }) {
 	const mainAirFreight = (services || []).find(
 		(service) => service?.service_type === 'air_freight_service',
@@ -29,21 +28,15 @@ function useStepExecution({
 		controls: stepConfig.controls,
 		getApisData,
 		task,
-		shipment_data,
-		stepConfig,
+		primary_service,
 		mainAirFreight,
-		onCancel,
-		refetch,
+		tradeType,
 	});
 
 	const valueInjectedControls = injectValues({
 		selectedMail,
 		populatedControls,
 		task,
-		getApisData,
-		stepConfig,
-		shipment_data,
-		primary_service,
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
@@ -67,7 +60,7 @@ function useStepExecution({
 			&& mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
 			&& getApisData?.get_awb_inventory_data?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
 			&& !getApisData?.list_platform_config_constants?.[GLOBAL_CONSTANTS.zeroth_index]
-				?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[shipment_data?.airline_id]
+				?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[primary_service?.airline_id]
 		) {
 			Toast.info(
 				'AWB stock is not available, please contact to inventory manager',

@@ -25,8 +25,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@cogoport/eslint-config':
-        specifier: 2.0.1
-        version: 2.0.1(eslint@8.42.0)
+        specifier: 2.0.3
+        version: 2.0.3(eslint@8.42.0)
       '@cogoport/stylelint-config':
         specifier: ^1.0.3
         version: 1.0.3(stylelint@14.16.1)
@@ -168,6 +168,9 @@ importers:
       '@cogoport/icons-react':
         specifier: ^1.0.58
         version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/ihls':
+        specifier: workspace:0.1.0
+        version: link:../packages/ihls
       '@cogoport/ingestion':
         specifier: workspace:0.1.0
         version: link:../packages/ingestion
@@ -201,9 +204,15 @@ importers:
       '@cogoport/ocean-modules':
         specifier: workspace:0.1.0
         version: link:../common/ocean-modules
+      '@cogoport/operators':
+        specifier: workspace:1.0.0
+        version: link:../packages/operators
       '@cogoport/performance-management':
         specifier: workspace:1.0.0
         version: link:../packages/performance-management
+      '@cogoport/printing-desk':
+        specifier: workspace:1.0.0
+        version: link:../packages/printing-desk
       '@cogoport/referral':
         specifier: workspace:0.1.0
         version: link:../packages/referral
@@ -213,6 +222,9 @@ importers:
       '@cogoport/rfq-dashboard':
         specifier: workspace:0.1.0
         version: link:../packages/rfq-dashboard
+      '@cogoport/risk-management':
+        specifier: workspace:0.1.0
+        version: link:../packages/risk-management
       '@cogoport/saas-subscription':
         specifier: workspace:0.1.0
         version: link:../packages/saas-subscription
@@ -420,6 +432,9 @@ importers:
       dotenv-expand:
         specifier: ^10.0.0
         version: 10.0.0
+      firebase:
+        specifier: ^9.17.2
+        version: 9.22.2
       firebase-admin:
         specifier: ^11.5.0
         version: 11.9.0
@@ -433,8 +448,8 @@ importers:
   common/forms:
     dependencies:
       '@cogoport/components':
-        specifier: ^1.0.412
-        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.430
+        version: 1.0.431(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/globalization':
         specifier: workspace:*
         version: link:../globalization
@@ -1341,8 +1356,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
-        specifier: ^1.0.419
-        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.431
+        version: 1.0.431(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1601,6 +1616,9 @@ importers:
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
         version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
@@ -1613,6 +1631,9 @@ importers:
       '@cogoport/request':
         specifier: workspace:0.1.0
         version: link:../../common/request
+      '@cogoport/scope-select':
+        specifier: workspace:*
+        version: link:../../common/scope-select
       '@cogoport/store':
         specifier: workspace:0.1.0
         version: link:../../common/store
@@ -1658,6 +1679,9 @@ importers:
 
   packages/ground-ops:
     dependencies:
+      '@cogoport/air-modules':
+        specifier: workspace:^1.0.0
+        version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
         version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
@@ -1700,6 +1724,42 @@ importers:
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
+
+  packages/ihls:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.359
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:*
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:*
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.58
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      axios:
+        specifier: ^1.3.4
+        version: 1.4.0
+      axios-hooks:
+        specifier: ^4.0.0
+        version: 4.0.0(axios@1.4.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
 
   packages/ingestion:
     dependencies:
@@ -1924,8 +1984,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
-        specifier: ^1.0.359
-        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^1.0.430
+        version: 1.0.431(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -1963,6 +2023,36 @@ importers:
         specifier: ^0.16.5
         version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
 
+  packages/operators:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.322
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.51
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.2
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-infinite-scroller:
+        specifier: ^1.2.4
+        version: 1.2.6(react@18.2.0)
+
   packages/performance-management:
     dependencies:
       '@cogoport/charts':
@@ -1992,6 +2082,51 @@ importers:
       '@cogoport/utils':
         specifier: ^1.2.2
         version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+
+  packages/printing-desk:
+    dependencies:
+      '@cogoport/air-modules':
+        specifier: workspace:^1.0.0
+        version: link:../../common/air-modules
+      '@cogoport/components':
+        specifier: ^1.0.322
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.51
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.2
+        version: 1.2.10
+      file-saver:
+        specifier: ^2.0.5
+        version: 2.0.5
+      html-to-image:
+        specifier: ^1.11.11
+        version: 1.11.11
+      html2canvas:
+        specifier: ^1.4.1
+        version: 1.4.1
+      jspdf:
+        specifier: ^2.5.1
+        version: 2.5.1
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2118,6 +2253,55 @@ importers:
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
+
+  packages/risk-management:
+    dependencies:
+      '@cogoport/charts':
+        specifier: ^1.0.1
+        version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/components':
+        specifier: ^1.0.366
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/constants':
+        specifier: workspace:0.1.0
+        version: link:../../common/constants
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.58
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/map-components':
+        specifier: workspace:0.0.1
+        version: link:../../common/map-components
+      '@cogoport/maps':
+        specifier: ^1.0.2
+        version: 1.0.3(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-hook-form:
+        specifier: ^7.43.3
+        version: 7.44.3(react@18.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.0.28
+        version: 18.2.12
 
   packages/saas-subscription:
     dependencies:
@@ -2451,6 +2635,9 @@ importers:
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
+      '@cogoport/core':
+        specifier: workspace:^0.1.0
+        version: link:../../common/core
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2880,6 +3067,9 @@ importers:
       '@cogoport/request':
         specifier: workspace:0.1.0
         version: link:../../common/request
+      '@cogoport/scope-select':
+        specifier: workspace:^0.1.0
+        version: link:../../common/scope-select
       '@cogoport/store':
         specifier: workspace:0.1.0
         version: link:../../common/store
@@ -4520,8 +4710,43 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config@2.0.1(eslint@8.42.0):
-    resolution: {integrity: sha512-cHaF/dgCUrH8ov7h6Hsc1pNEd26QV3vXQBGX6BS9juF+Bk1v6jdn+ApvedGVxAIzJXOl/PU5xCjkehPo79W3qA==}
+  /@cogoport/components@1.0.431(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-q0g+s+5GRqHZwRNxB3CtoRgdEKV/L5pCpIlB4/HAfj3SC4URuRRMrm2r5zo6F9IROasRSkaT6i4y9SYf4cLfUQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.79(react-dom@18.2.0)(react@18.2.0)
+      '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0(axios@1.4.0)(react@18.2.0)
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+      react-hook-form: 7.44.3(react@18.2.0)
+      react-quill: 2.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-rte: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+      react-table: 7.8.0(react@18.2.0)
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/eslint-config@2.0.3(eslint@8.42.0):
+    resolution: {integrity: sha512-lFWGRXqz954NjknRPBg7FL8GYum+ZnNK1OgCj8TSt/tButZAuKhCXdqpLpR+y+1v+HA1GLsMmOsMGLWXY7Jk9A==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
