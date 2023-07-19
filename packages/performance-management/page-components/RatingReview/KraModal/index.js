@@ -1,4 +1,6 @@
 import { Button, Modal, RatingComponent, Textarea, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -7,7 +9,8 @@ import styles from './styles.module.css';
 import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
-const ROUNF_OFF_DIGIT = 100;
+const DEFAULT_ACHIEVED_TARGET = 0;
+const ROUND_OFF_DIGIT = 100;
 const DEFAULT_OVERALL_RATING = 0;
 
 function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
@@ -93,7 +96,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 														employeeKraDetails={employeeKraDetails}
 													/>
 												)
-													: item.achieved_rating}
+													: item.achieved_target || DEFAULT_ACHIEVED_TARGET}
 											</div>
 
 											<div className={styles.label}>
@@ -101,10 +104,17 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 												{' '}
 												{item.weightage}
 											</div>
+
+											<div className={styles.label}>
+												Rating:
+												{' '}
+												{item.rating}
+											</div>
 										</div>
 									))}
 
 								</div>
+
 								<div className={styles.right_section}>
 									<div className={styles.overall_rating}>
 										<div className={styles.rating}>
@@ -113,7 +123,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 												{' '}
 
 												{ Math.round((data?.average_overall_rating || DEFAULT_OVERALL_RATING)
-												* ROUNF_OFF_DIGIT) / ROUNF_OFF_DIGIT}
+												* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
 											</div>
 
 											<div className={styles.rating_obtained}>
@@ -148,7 +158,12 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 														<div>
 															Modified On:
 															{' '}
-															{item.modified_on}
+															{formatDate({
+																date       : item?.updated_at,
+																dateFormat : GLOBAL_CONSTANTS.formats
+																	.date['dd MMM yyyy'],
+																formatType: 'date',
+															})}
 														</div>
 
 													</div>
@@ -176,6 +191,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 										</div>
 
 										<Textarea
+											style={{ height: '40%' }}
 											value={comments}
 											onChange={(e) => setCommemts(e)}
 											className={styles.text_area}
