@@ -5,7 +5,7 @@ const useUpdateShipmentDocument = ({ listAPI = () => {} }) => {
 	const [{ loading }, trigger] = useRequestAir({
 		url     : '/air-coe/documents/weight-amend',
 		method  : 'PUT',
-		authKey : 'put_air_coe_documents',
+		authKey : 'put_air_coe_documents_weight_amend',
 	});
 
 	const updateShipment = async ({ payload }) => {

@@ -8,8 +8,6 @@ import CardItem from './CardItem';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-const DEFAULT_POSITION = 0;
-
 function CardList({
 	fields = [],
 	data = {},
@@ -46,7 +44,6 @@ function CardList({
 						{blCategory === 'hawb' && (
 							<div
 								className={styles.accordian_style}
-								style={{ '--length': open ? '20px' : DEFAULT_POSITION }}
 							>
 								{open === id ? (
 									<IcMArrowUp onClick={() => {

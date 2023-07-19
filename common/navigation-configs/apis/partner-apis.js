@@ -13016,7 +13016,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'put_air_coe_documents',
+			api         : 'put_air_coe_documents_weight_amend',
 			access_type : 'private',
 		},
 		{

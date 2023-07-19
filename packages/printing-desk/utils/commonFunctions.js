@@ -15,7 +15,10 @@ const commonFunctions = ({
 	setItem = () => {},
 	setTriggerManifest = () => {},
 	setEdit = () => {},
+	profile = {},
 }) => {
+	const isVinodTalapaProfile = profile?.user?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
+
 	const handleClickOnDownload = (documentUrl) => {
 		if (typeof window !== 'undefined') {
 			window.open(documentUrl, '_blank');
@@ -80,24 +83,28 @@ const commonFunctions = ({
 				</Button>
 			)
 		),
-		handleEdit: (singleItem) => (
-			singleItem?.documentData?.status !== 'uploaded' && (
-				<Button
-					themeType="linkUi"
-					onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
-				>
-					<div className={styles.tooltip_container}>
-						<Tooltip
-							content={`Edit ${BL_MAPPING[singleItem?.documentType]}`}
-							placement="right"
-							interactive
+		handleEdit: (singleItem) => {
+			const { documentData, documentType } = singleItem || {};
+			return (
+				(documentData?.status !== 'uploaded' && (isVinodTalapaProfile
+					|| BL_MAPPING[documentType] === 'HAWB')) && (
+						<Button
+							themeType="linkUi"
+							onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
 						>
-							<IcMEdit fill="var(--color-accent-orange-2)" />
-						</Tooltip>
-					</div>
-				</Button>
-			)
-		),
+							<div className={styles.tooltip_container}>
+								<Tooltip
+									content={`Edit ${BL_MAPPING[documentType]}`}
+									placement="right"
+									interactive
+								>
+									<IcMEdit fill="var(--color-accent-orange-2)" />
+								</Tooltip>
+							</div>
+						</Button>
+				)
+			);
+		},
 		handleHandoverDate: (singleItem) => (
 			formatDate({
 				date       : singleItem?.cargoHandedOverAtOriginAt,

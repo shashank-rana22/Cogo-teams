@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -17,10 +18,11 @@ function HandedOver({
 	setViewDoc = () => {},
 	setEdit = () => {},
 }) {
+	const { profile } = useSelector((state) => state);
 	const [triggerManifest, setTriggerManifest] = useState('');
 	const { fields } = handedOverFields;
 
-	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit }) };
+	const allFunctions = { ...commonFunctions({ setViewDoc, setItem, setTriggerManifest, setEdit, profile }) };
 
 	return (
 		<>

@@ -6,16 +6,6 @@ import { useState, useEffect, useCallback } from 'react';
 
 import CONSTANTS from '../constants/constants';
 
-const URL_MAPPING = {
-	approved_awb : 'list',
-	handed_over  : 'list',
-};
-
-const AUTH_KEY_MAPPING = {
-	approved_awb : 'get_air_coe_pending_tasks_list',
-	handed_over  : 'get_air_coe_pending_tasks_list',
-};
-
 const PAYLOAD_ITEM = {
 	assignedStakeholder : 'service_ops2_docs',
 	status              : 'completed',
@@ -38,9 +28,9 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : `/air-coe/pending-tasks/${URL_MAPPING[activeTab]}`,
+			url     : '/air-coe/pending-tasks/list',
 			method  : 'get',
-			authKey : `${AUTH_KEY_MAPPING[activeTab]}`,
+			authKey : 'get_air_coe_pending_tasks_list',
 		},
 		{ manual: true },
 	);
