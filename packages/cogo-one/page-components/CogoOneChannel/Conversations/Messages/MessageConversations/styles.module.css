@@ -39,7 +39,6 @@
 
 .text_area {
 	width: 100%;
-	padding: 10px;
 	overflow: auto;
 	line-height: 20px;
 	resize: none;
