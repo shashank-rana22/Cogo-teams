@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function TicketSummary({
 	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
-	TicketReviewer: ticketReviewer = {},
+	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '',
 }) {
 	const {
@@ -23,11 +23,14 @@ function TicketSummary({
 		UpdatedAt: updatedAt = '',
 		CreatedAt: createdAt = '',
 		Priority: priority = '',
+		Source: source = '',
 	} = ticket || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
 	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
+
+	const isTicketExpired = new Date(tat) > new Date();
 
 	const endDate = new Date(tat);
 
@@ -48,13 +51,14 @@ function TicketSummary({
 							#
 							{id}
 						</div>
-						<Tooltip content="Ticket escalation time" placement="right">
-							<div className={styles.timer}>
-								<IcCWaitForTimeSlots fill="#ee3425" />
-								{formattedTime}
-							</div>
-
-						</Tooltip>
+						{isCurrentReviewer && isTicketExpired ? (
+							<Tooltip content="Ticket escalation time" placement="right">
+								<div className={styles.timer}>
+									<IcCWaitForTimeSlots />
+									{formattedTime}
+								</div>
+							</Tooltip>
+						) : <div className={styles.escalation_label}>Already Escalated</div>}
 					</div>
 					<div className={styles.description}>{type}</div>
 				</div>
@@ -113,7 +117,7 @@ function TicketSummary({
 				</div>
 				<div className={styles.ticket_data}>
 					Source:
-					<span className={styles.updated_at}>{startCase(ticketUser?.Type)}</span>
+					<span className={styles.updated_at}>{startCase(source)}</span>
 				</div>
 				<div className={styles.ticket_data}>
 					Assigned To:
