@@ -5,7 +5,7 @@ import { useRef, useEffect } from 'react';
 import styles from './styles.module.css';
 
 function TemplateModalContent({ list = [] }) {
-	const templateRef = useRef(null);
+	const templateRef = useRef(undefined);
 
 	useEffect(() => {
 		const handleContent = (event) => {

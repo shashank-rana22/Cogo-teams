@@ -6,13 +6,12 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 const FIRST_INDEX = 1;
 
 function MailStatus({ list = [] }) {
 	let date = '';
 	const renderTemplate = list[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const geo = getGeoConstants();
 
 	const priorityArray = [
 		'is_blocked',

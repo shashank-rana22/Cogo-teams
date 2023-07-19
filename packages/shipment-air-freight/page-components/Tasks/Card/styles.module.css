@@ -12,10 +12,15 @@
 		align-items: flex-start;
 		justify-content: center;
 	}
+
+	:global {
+		.ui_button_container {
+			min-width: 140px;
+		}
+	}
 }
 
 .view_button {
-	width: 140px;
 	margin-right: 20px;
 	font-weight: 600;
 

@@ -3,15 +3,15 @@
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 14px;
 }
 
 .green_style {
-	color: #358856;
+	color: var(--color-tertiary-success-green-1);
 }
 
 .red_style {
-	color: #f00;
+	color: var(--color-primary-error-red-1);
 }
