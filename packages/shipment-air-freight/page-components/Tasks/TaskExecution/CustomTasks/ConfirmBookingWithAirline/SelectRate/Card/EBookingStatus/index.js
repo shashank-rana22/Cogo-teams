@@ -22,14 +22,6 @@ function EBookingStatus({ setShowBookingStatus = () => {}, showBookingStatus }) 
 				<div className={styles.button_container}>
 					<div className={styles.button_head}>
 						<Button
-							themeType="secondary"
-							onClick={() => setShowBookingStatus(false)}
-						>
-							Cancel
-						</Button>
-					</div>
-					<div className={styles.button_head}>
-						<Button
 							className="primary md"
 							onClick={() => setShowBookingStatus(false)}
 						>
