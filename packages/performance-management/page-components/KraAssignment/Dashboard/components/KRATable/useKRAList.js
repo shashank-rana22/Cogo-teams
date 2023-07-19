@@ -42,7 +42,7 @@ const useKRAList = ({ filters = {}, selectAccordian = [], dataFrom }) => {
 
 	const selectedKRAkeys = (inputValue || []).map((item) => item?.kra_assigned);
 
-	const KRAOptions = (initialKRAOptions || []).filter((element) => !selectedKRAkeys.includes(element?.value));
+	const kraOptions = (initialKRAOptions || []).filter((element) => !selectedKRAkeys.includes(element?.value));
 
 	const onClickAddKRAs = () => {
 		(selectedValue || []).map((value) => (
@@ -63,7 +63,7 @@ const useKRAList = ({ filters = {}, selectAccordian = [], dataFrom }) => {
 	return {
 		selectedValue,
 		setSelectedValue,
-		KRAOptions,
+		kraOptions,
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,

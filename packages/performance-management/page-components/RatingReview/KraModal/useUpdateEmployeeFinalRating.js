@@ -8,9 +8,20 @@ import { formattedDate } from '../../../common/formattedDate';
 const MIN_RATING = 0;
 const RATING_THRESHOLD = 1;
 
-const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingReviewDetails }) => {
+const getPayload = ({ data, starRating, comments, selectCycle }) => {
 	const { end_date, start_date } = selectCycle || {};
 
+	return {
+		employee_id         : data?.employee_details?.employee_id,
+		manager_id          : data?.employee_details?.manager_id,
+		kra_rating_assigned : starRating,
+		comments,
+		start_date          : formattedDate(start_date),
+		end_date            : formattedDate(end_date),
+	};
+};
+
+const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingReviewDetails }) => {
 	const [starRating, setStarRating] = useState(MIN_RATING);
 	const [comments, setCommemts] = useState('');
 
@@ -35,16 +46,11 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 			return;
 		}
 
+		const payload = getPayload({ data, starRating, comments, selectCycle });
+
 		try {
 			await trigger({
-				data: {
-					employee_id         : data?.employee_details?.employee_id,
-					manager_id          : data?.employee_details?.manager_id,
-					kra_rating_assigned : starRating,
-					comments,
-					start_date          : formattedDate(start_date),
-					end_date            : formattedDate(end_date),
-				},
+				data: payload,
 			});
 			Toast.success('Sucessfully Update Rating');
 			setShow(false);

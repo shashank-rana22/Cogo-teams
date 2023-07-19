@@ -6,10 +6,20 @@ import { useEffect, useCallback } from 'react';
 
 import { formattedDate } from '../../../common/formattedDate';
 
+const getPayload = ({ selectCycle, selectValue, level, activeTab, manager_id }) => {
+	const { end_date, start_date } = selectCycle || {};
+
+	return {
+		manager_id,
+		label      : selectValue,
+		level      : level === 'vertical_head' ? activeTab : level,
+		end_date   : formattedDate(end_date),
+		start_date : formattedDate(start_date),
+	};
+};
+
 const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab }) => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
-
-	const { end_date, start_date } = selectCycle || {};
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_rating_review_details',
@@ -17,16 +27,11 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab 
 	}, { manual: true });
 
 	const fetchRatingReviewDetails = useCallback(() => {
+		const payload = getPayload({ selectCycle, selectValue, level, activeTab, manager_id: user?.id });
+
 		try {
 			trigger({
-				params: {
-					manager_id : user?.id,
-					label      : selectValue,
-					level      : level === 'vertical_head' ? activeTab : level,
-					end_date   : formattedDate(end_date),
-					start_date : formattedDate(start_date),
-
-				},
+				params: payload,
 			});
 		} catch (error) {
 			if (error?.response?.data) {
@@ -35,7 +40,7 @@ const useGetRatingReviewDetails = ({ selectValue, level, selectCycle, activeTab 
 				);
 			}
 		}
-	}, [activeTab, end_date, level, selectValue, start_date, trigger, user?.id]);
+	}, [activeTab, level, selectCycle, selectValue, trigger, user?.id]);
 
 	useEffect(() => {
 		if (selectValue && selectCycle) {

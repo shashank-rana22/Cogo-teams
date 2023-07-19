@@ -5,29 +5,35 @@ import { useCallback, useEffect } from 'react';
 
 import { formattedDate } from '../../../common/formattedDate';
 
-function useEmployeeKraDetails({ show, selectCycle }) {
+const getPayload = ({ show, selectCycle }) => {
 	const { end_date, start_date } = selectCycle || {};
 
+	return {
+		employee_id : show,
+		start_date  : formattedDate(start_date),
+		end_date    : formattedDate(end_date),
+	};
+};
+
+function useEmployeeKraDetails({ show, selectCycle }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_employee_kra_details',
 		method : 'GET',
 	}, { manual: true });
 
 	const employeeKraDetails = useCallback(() => {
+		const params = getPayload({ show, selectCycle });
+
 		try {
 			trigger({
-				params: {
-					employee_id : show,
-					start_date  : formattedDate(start_date),
-					end_date    : formattedDate(end_date),
-				},
+				params,
 			});
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [end_date, show, start_date, trigger]);
+	}, [selectCycle, show, trigger]);
 
 	useEffect(() => {
 		employeeKraDetails();

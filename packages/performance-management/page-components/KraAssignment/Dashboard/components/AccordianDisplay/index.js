@@ -32,10 +32,10 @@ function AccordianDisplay({
 	const active = JSON.stringify(selectAccordian);
 	const current = JSON.stringify(kra_details);
 
-	const clicked = () => {
+	const onClickFilters = () => {
 		setSelectAccordianObject();
 		setSelectAccordian(kra_details);
-		setIsActive(!isActive);
+		setIsActive((pv) => !pv);
 		resetObjects();
 	};
 
@@ -45,7 +45,7 @@ function AccordianDisplay({
 		>
 			<div
 				className={styles.accordian_heading}
-				onClick={() => clicked()}
+				onClick={() => onClickFilters()}
 				role="button"
 				tabIndex={0}
 			>

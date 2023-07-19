@@ -3,6 +3,17 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+const getPayload = ({ filters }) => {
+	const { employee_ids = [], ...rest } = filters || [];
+
+	return {
+		filters: {
+			employee_ids,
+			...rest,
+		},
+	};
+};
+
 function useGetEmployeesWithLowWeightage({ filters }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_employees_with_low_weightage',
@@ -10,15 +21,11 @@ function useGetEmployeesWithLowWeightage({ filters }) {
 	}, { manual: true });
 
 	const getEmployeesWithLowWeightage = useCallback(() => {
-		const { employee_ids = [], ...rest } = filters || [];
+		const payload = getPayload({ filters });
+
 		try {
 			trigger({
-				params: {
-					filters: {
-						employee_ids,
-						...rest,
-					},
-				},
+				params: payload,
 			});
 		} catch (error) {
 			if (error?.response?.data) {

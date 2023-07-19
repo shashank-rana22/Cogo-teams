@@ -17,16 +17,13 @@
 .squad_name {
 	display: flex;
 	margin-right: 15px;
+	font-size: 15px;
 }
 
-.tribe_name {
-	display: flex;
-	margin-right: 15px;
-}
-
-.total_kra {
-	display: flex;
-	margin-right: 15px;
+.squad_span {
+	padding-left: 6px;
+	font-size: 15px;
+	font-weight: 600;
 }
 
 .modal_body_container {
@@ -38,11 +35,6 @@
 .body {
 	overflow-y: scroll;
 	background-color: var(--color-tertiary-beige-4);
-}
-
-.employee_name {
-	display: flex;
-	font-size: medium;
 }
 
 .left_section {

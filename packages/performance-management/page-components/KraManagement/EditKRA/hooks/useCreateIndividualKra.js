@@ -6,6 +6,13 @@ import { useCallback, useState, useEffect } from 'react';
 
 const DEFAULT_TARGET_VALUE = 0;
 
+const getPayload = (values) => values?.map((item) => ({
+	employee_id                    : item?.employee_id,
+	kra_id                         : item?.kra_id,
+	target_value                   : item?.target_value || DEFAULT_TARGET_VALUE,
+	is_value_entered_in_percentage : item?.selected_value_type === 'percentage',
+}));
+
 function useCreateIndividualKra({ data: createKraData, fetchIndividualKRA }) {
 	const [individualKRAValues, setIndividualKRAValues] = useState([]);
 	const [ratingInfo, setRatingInfo] = useState(DEFAULT_TARGET_VALUE);
@@ -14,13 +21,6 @@ function useCreateIndividualKra({ data: createKraData, fetchIndividualKRA }) {
 		url    : '/create_individual_kra',
 		method : 'POST',
 	}, { manual: true });
-
-	const getPayload = (values) => values?.map((item) => ({
-		employee_id                    : item?.employee_id,
-		kra_id                         : item?.kra_id,
-		target_value                   : item?.target_value || DEFAULT_TARGET_VALUE,
-		is_value_entered_in_percentage : item?.selected_value_type === 'percentage',
-	}));
 
 	const createIndividualKra = useCallback(async (values) => {
 		const objData = getPayload(values);

@@ -3,6 +3,17 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+const getPayload = ({ filters }) => {
+	const { employee_ids = [], ...rest } = filters || [];
+
+	return {
+		filters: {
+			employee_ids,
+			...rest,
+		},
+	};
+};
+
 function useGetUnassignedEmployee() {
 	const [filters, setFilters] = useState({});
 	const [filtersFields, setFiltersFields] = useState({});
@@ -14,15 +25,11 @@ function useGetUnassignedEmployee() {
 	}, { manual: true });
 
 	const getUnassignedEmployee = useCallback(() => {
-		const { employee_ids = [], ...rest } = filters || [];
+		const payload = getPayload({ filters });
+
 		try {
 			trigger({
-				params: {
-					filters: {
-						employee_ids,
-						...rest,
-					},
-				},
+				params: payload,
 			});
 		} catch (error) {
 			if (error?.response?.data) {

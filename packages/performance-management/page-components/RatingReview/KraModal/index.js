@@ -30,25 +30,32 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 			<Modal.Header title={(
 				<div className={styles.container}>
 
-					<div className={styles.employee_name}>
-						Employee Name:&nbsp;
-						<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.employee_name}</span>
+					<div className={styles.squad_name}>
+						Employee Name:
+						{' '}
+						<span className={styles.squad_span}>{data?.employee_details?.employee_name}</span>
 					</div>
 
 					<div className={styles.squad}>
 						<div className={styles.squad_name}>
-							Squad:&nbsp;
-							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.squad_name}</span>
+							Squad:
+							{' '}
+							<span className={styles.squad_span}>
+								{data?.employee_details?.squad_name}
+
+							</span>
 						</div>
 
-						<div className={styles.tribe_name}>
-							Tribe:&nbsp;
-							<span style={{ fontWeight: 'bold' }}>{data?.employee_details?.tribe_name}</span>
+						<div className={styles.squad_name}>
+							Tribe:
+							{' '}
+							<span className={styles.squad_span}>{data?.employee_details?.tribe_name}</span>
 						</div>
 
-						<div className={styles.total_kra}>
-							Total Kra:&nbsp;
-							<span style={{ fontWeight: 'bold' }}>{(list || [])?.length}</span>
+						<div className={styles.squad_name}>
+							Total Kra:
+							{' '}
+							<span className={styles.squad_span}>{(list || [])?.length}</span>
 						</div>
 					</div>
 				</div>

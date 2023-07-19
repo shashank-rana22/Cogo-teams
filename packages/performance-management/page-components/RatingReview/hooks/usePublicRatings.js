@@ -6,12 +6,7 @@ import { useState } from 'react';
 
 import { formattedDate } from '../../../common/formattedDate';
 
-const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, fetchRatingReviewDetails }) => {
-	const { end_date, start_date } = selectCycle || {};
-	const { user = {} }	 = useSelector((state) => state?.profile || {});
-
-	const [toggleVal, setToggleVal] = useState([]);
-
+const getPayload = ({ toggleVal, selectedEmployees, manager_user_id, level, activeTab, selectCycle }) => {
 	const SELECTED_EMPLOYEES_LIST = [];
 
 	(Object.keys(selectedEmployees) || [])
@@ -31,24 +26,43 @@ const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, f
 		surprise_gift,
 	}));
 
+	const employee_data = (level === 'vertical_head' && activeTab === 'vertical_head') ? resultArray : flattenedArray;
+	const { end_date, start_date } = selectCycle || {};
+
+	return {
+		employee_data,
+		manager_user_id,
+		start_date : formattedDate(start_date),
+		end_date   : formattedDate(end_date),
+		level      : level === 'vertical_head' ? activeTab : level,
+	};
+};
+
+const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, fetchRatingReviewDetails }) => {
+	const { user = {} }	 = useSelector((state) => state?.profile || {});
+
+	const [toggleVal, setToggleVal] = useState([]);
+
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/publish_ratings',
 		method : 'POST',
 	}, { manual: true });
 
-	const employee_data = (level === 'vertical_head' && activeTab === 'vertical_head') ? resultArray : flattenedArray;
-
 	const publishRatings = async () => {
+		const payload = getPayload({
+			selectCycle,
+			manager_user_id: user?.id,
+			level,
+			activeTab,
+			selectedEmployees,
+			toggleVal,
+		});
+
 		try {
 			await trigger({
-				data: {
-					employee_data,
-					manager_user_id : user?.id,
-					start_date      : formattedDate(start_date),
-					end_date        : formattedDate(end_date),
-					level           : level === 'vertical_head' ? activeTab : level,
-				},
+				data: payload,
 			});
+
 			fetchRatingReviewDetails();
 			Toast.success('Rating has been updated successfully');
 		} catch (err) {

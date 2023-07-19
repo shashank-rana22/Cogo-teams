@@ -36,7 +36,7 @@ function PerformanceRatingReview() {
 						{
 							TABS_MAPPING.map((tab) => (
 								<TabPanel name={tab} title={startCase(tab)} key={tab}>
-									<HeaderComponent props={props} />
+									<HeaderComponent props={props} key={tab} />
 								</TabPanel>
 							))
 						}

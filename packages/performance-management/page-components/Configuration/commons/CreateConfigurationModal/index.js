@@ -22,6 +22,8 @@ const RenderModalBody = ({ controls, control, errors }) => (controls || []).map(
 
 	const DynamicController = getElementController(type);
 
+	if (!DynamicController) return null;
+
 	return (
 		<div key={name}>
 			<div className={styles.label}>{controlLabel}</div>

@@ -27,7 +27,6 @@ function RatingInfo({ ratingInfo, loading }) {
 							:
 							{' '}
 						</strong>
-
 						{KRA_MAPPING[element] || 'N/A'}
 					</div>
 				))}

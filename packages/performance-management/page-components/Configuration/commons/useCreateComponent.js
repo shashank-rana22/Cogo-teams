@@ -10,9 +10,7 @@ const useCreateComponent = ({ fetchList, setShowCreateModal, source = 'tribe' })
 	const onClickSubmitButton = async (values) => {
 		try {
 			await trigger({
-				data: {
-					...values,
-				},
+				data: values,
 			});
 
 			Toast.success(`${source} has been created successfully`);
