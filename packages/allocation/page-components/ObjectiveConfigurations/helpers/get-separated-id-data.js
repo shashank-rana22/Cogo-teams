@@ -3,6 +3,12 @@ import { isEmpty } from '@cogoport/utils';
 const getSeparatedIdData = ({ values }) => {
 	if (isEmpty(values)) return undefined;
 
+	if (typeof (values) === 'string') {
+		const [id, name] = values.split('_');
+
+		return { id, name };
+	}
+
 	if (Array.isArray(values)) {
 		return values.map((value) => {
 			const [id, name] = value.split('_');

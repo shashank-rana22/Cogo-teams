@@ -75,8 +75,12 @@ function OrganizationDetailsCard(props) {
 											{location.name || startCase(location) || null}
 										</Pill>
 									))}
-									+
-									{locationItem.length > MIN_LENGTH && locationItem.length - MIN_LENGTH}
+									{locationItem.length > MIN_LENGTH && (
+										<span>
+											+
+											{locationItem.length - MIN_LENGTH}
+										</span>
+									)}
 								</div>
 							</Tooltip>
 						</div>

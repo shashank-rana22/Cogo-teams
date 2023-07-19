@@ -7,7 +7,7 @@ import getOrganizationalDetailsControls from '../../../../../../../configuration
 import styles from './styles.module.css';
 
 function OrganizationalDetails(props) {
-	const { control, watch, resetField, disabled } = props;
+	const { control, watch, setValue, disabled } = props;
 
 	const watchCountries = watch('countries');
 	const watchStates = watch('states');
@@ -20,18 +20,18 @@ function OrganizationalDetails(props) {
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
 			if (controlName === 'cities') {
-				resetField('pincodes');
+				setValue('pincodes', []);
 			}
 			if (controlName === 'states') {
-				resetField('cities');
+				setValue('cities', []);
 			}
 			if (controlName === 'countries') {
-				resetField('states');
+				setValue('states', []);
 			}
 		});
 
 		return () => subscription.unsubscribe();
-	}, [watch, resetField]);
+	}, [watch, setValue]);
 
 	return (
 		<div className={styles.container}>

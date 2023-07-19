@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
 import CREATE_FORM_STEPPER_KEYS_MAPPING from '../../../../../../constants/create-form-stepper-keys-mapping';
+import getAttachedIdData from '../../../../../../helpers/get-attached-id-data';
 import getSeparatedIdData from '../../../../../../helpers/get-separated-id-data';
 
 import AccountTransactionFunnel from './AccountTransactionFunnel';
@@ -15,14 +16,28 @@ const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 const ObjectiveRequirements = forwardRef((props, ref) => {
 	const { formValues, setFormValues, disabled, setActiveStep, generalConfigFormState } = props;
 
-	const { objectiveRequirements: { stats_details = {} } } = formValues;
+	const { objectiveRequirements: { stats_details = {}, organization_details = {} } } = formValues;
+
+	const {
+		countries: filledCountries,
+		states: filledStates,
+		cities: filledCities,
+		pincodes: filledPincodes,
+		segments: filledSegments,
+	} = organization_details;
 
 	const divRef = useRef({});
 
-	const { control, watch, reset, resetField, handleSubmit } = useForm({
+	const { control, watch, reset, resetField, setValue, handleSubmit } = useForm({
 		defaultValues: {
-			service_requirements: [{}],
+			service_requirements : [{}],
+			countries            : getAttachedIdData({ values: filledCountries }),
+			states               : getAttachedIdData({ values: filledStates }),
+			cities               : getAttachedIdData({ values: filledCities }),
+			pincodes             : getAttachedIdData({ values: filledPincodes }),
+			segments             : filledSegments,
 			...(stats_details || {}),
+
 		},
 	});
 
@@ -60,7 +75,13 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				stats_details: {
 					date_range, shipment_count, quotation_count, search_count,
 				},
-				service_requirements,
+				service_requirements: service_requirements.map(
+					(item) => ({
+						...item,
+						origin_location      : getSeparatedIdData({ values: item.origin_location }),
+						destination_location : getSeparatedIdData({ values: item.destination_location }),
+					}),
+				),
 			},
 			generalConfigFormState,
 		}));
@@ -89,7 +110,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				<OrganizationalDetails
 					control={control}
 					watch={watch}
-					resetField={resetField}
+					setValue={setValue}
 					disabled={disabled}
 				/>
 
