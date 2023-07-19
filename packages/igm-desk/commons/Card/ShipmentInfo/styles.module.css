@@ -36,7 +36,7 @@
 		cursor: pointer;
 	}
 
-	&.mbl_document{
+	&.mbl_document {
 		text-decoration-line: underline;
 	}
 }

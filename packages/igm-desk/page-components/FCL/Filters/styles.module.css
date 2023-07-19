@@ -65,11 +65,6 @@
 	margin-right: 8px;
 }
 
-.filter_container {
-	display: flex;
-	justify-content: space-between;
-}
-
 .btn_div {
 	position: relative;
 	display: flex;
@@ -81,9 +76,10 @@
 
 .filter_container {
 	display: flex;
+	justify-content: space-between;
 	margin: 4px 0;
 
-	&.custom_filter{
+	&.custom_filter {
 		flex-direction: column;
 	}
 }
@@ -92,7 +88,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 0 6px 16px 0; 
+	margin: 0 6px 16px 0;
 }
 
 .action_text {
