@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -11,9 +12,10 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentId,
-	services,
-	isSeller,
+	shipmentId = '',
+	services = {},
+	isSeller = false,
+	source = '',
 	refetch = () => {},
 	setShowChargeCodes = () => {},
 }) {
@@ -43,7 +45,7 @@ function AddService({
 	if (filters.service_type) {
 		finalList = finalList.filter((item) => {
 			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[0];
+				return item.service_type === filters?.service_type?.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 			}
 			return item.service_type === filters?.service_type;
 		});
@@ -88,7 +90,7 @@ function AddService({
 							setShowChargeCodes={setShowChargeCodes}
 							refetch={refetch}
 							filters={filters}
-							source="overview"
+							source={source}
 						/>
 					) : null}
 

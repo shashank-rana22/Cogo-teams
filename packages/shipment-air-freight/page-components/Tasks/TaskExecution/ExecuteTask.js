@@ -7,6 +7,7 @@ import LoadingState from '../LoadingState';
 import {
 	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, ConfirmSellPrice, ConfirmCargoAir,
 } from './CustomTasks';
+import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -161,6 +162,22 @@ function ExecuteTask({
 				timeLineRefetch={getShipmentTimeline}
 				services={services}
 				primary_service={modifiedDataForConfig}
+				shipment_data={shipment_data}
+			/>
+		);
+	}
+	if (
+		task.task === 'update_flight_departure_and_flight_arrival'
+		&& tradeType === 'import'
+	) {
+		return (
+			<UpdateCargoAir
+				task={task}
+				services={services}
+				primary_service={primary_service}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+				timeLineRefetch={getShipmentTimeline}
 				shipment_data={shipment_data}
 			/>
 		);
