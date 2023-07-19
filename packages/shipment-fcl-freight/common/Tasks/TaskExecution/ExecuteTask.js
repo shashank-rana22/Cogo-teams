@@ -17,6 +17,7 @@ import {
 	UploadDraftBL,
 	AmendDraftBl,
 	UploadSI,
+	UploadComplianceDocs,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
@@ -42,6 +43,7 @@ function ExecuteTask({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	tasksList = [],
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
@@ -107,8 +109,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_container_details') {
+	if (task.task === 'update_container_details') {
 		return (
 			<UploadContainerDetails
 				pendingTask={task}
@@ -158,9 +159,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_nomination_details'
-	) {
+	if (task.task === 'update_nomination_details') {
 		return (
 			<NominationTask
 				primaryService={primary_service}
@@ -182,10 +181,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'upload_si'
-		&& primary_service?.trade_type === 'export'
-	) {
+	if (task.task === 'upload_si' && primary_service?.trade_type === 'export') {
 		return (
 			<UploadSI
 				pendingTask={task}
@@ -209,10 +205,18 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task?.task === 'generate_cargo_insurance'
-		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
-	) {
+	if (task.task === 'upload_compliance_documents') {
+		return (
+			<UploadComplianceDocs
+				task={task}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
+			/>
+		);
+	}
+
+	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
