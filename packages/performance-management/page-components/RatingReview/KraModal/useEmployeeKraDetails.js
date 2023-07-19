@@ -3,6 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import { formattedDate } from '../../../common/formattedDate';
+
 function useEmployeeKraDetails({ show, selectCycle }) {
 	const { end_date, start_date } = selectCycle || {};
 
@@ -15,9 +17,9 @@ function useEmployeeKraDetails({ show, selectCycle }) {
 		try {
 			trigger({
 				params: {
-					employee_id: show,
-					start_date,
-					end_date,
+					employee_id : show,
+					start_date  : formattedDate(start_date),
+					end_date    : formattedDate(end_date),
 				},
 			});
 		} catch (error) {

@@ -54,8 +54,8 @@ function getIndividualColumn({
 						placeholder="is percent"
 						size="sm"
 						options={OPTIONS || []}
-						value={individualKRAValues?.find((element) => `${element.employee_id}_${element?.kra_id}`
-						=== `${item.employee_id}_${item?.kra_id}`)?.selected_value_type === 'percentage' ? 'yes' : 'no'}
+						value="no"
+						disabled
 						onChange={(e) => handleTargetChange(e, item, 'selected_value_type')}
 					/>
 				</div>

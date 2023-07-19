@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 const KRA_MIN_VALUE = 0;
 
@@ -10,10 +11,10 @@ const useAssignKRAs = ({
 	getUnassignedEmployee,
 	setInputValue,
 	resetObjects,
-	setDeletedKraArray,
-	deletedKraArray,
 	getkrasAssigned,
 }) => {
+	const [deletedKraArray, setDeletedKraArray] = useState([]);
+
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
 		method : 'post',

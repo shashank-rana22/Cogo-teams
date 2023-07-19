@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useState, useEffect } from 'react';
 
 const DEFAULT_TARGET_VALUE = 0;
@@ -64,7 +65,7 @@ function useCreateIndividualKra({ data: createKraData, fetchIndividualKRA }) {
 			return element;
 		});
 
-		if (newData?.length) {
+		if (!isEmpty(newData)) {
 			setIndividualKRAValues(newData);
 		}
 	};

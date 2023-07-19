@@ -1,6 +1,5 @@
 import { Button, Input } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import useAssignKRAs from './useAssignKRAs';
@@ -9,43 +8,10 @@ const INITIAL_TOTAL_AMOUNT = 0.00;
 const MAX_VALUE_OF_TOTAL_AMOUNT = 1.00;
 const ROUND_OFF_DIGIT = 100;
 
-const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element) => {
-	const { weightage } = element;
-	const parsedValue = parseFloat(weightage);
-
-	if (!Number.isNaN(parsedValue)) {
-		return total + parsedValue;
-	}
-
-	return Math.round(total * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
-}, INITIAL_TOTAL_AMOUNT);
-
-function KRAWeightCalculationTable({
-	setInputValue,
-	inputValue,
-	selectArray,
-	getEmployeesWithLowWeightage,
-	getUnassignedEmployee,
-	resetObjects,
-	getkrasAssigned,
-}) {
-	const [deletedKraArray, setDeletedKraArray] = useState([]);
-
-	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
-		inputValue,
-		selectArray,
-		getEmployeesWithLowWeightage,
-		getUnassignedEmployee,
-		setInputValue,
-		resetObjects,
-		deletedKraArray,
-		setDeletedKraArray,
-		getkrasAssigned,
-	});
-
+const RenderFields = ({ inputValue, setInputValue, onClickDeleteIcon }) => {
 	const updatedValue = [...inputValue];
 
-	const renderFields = () => (inputValue || []).map((element, index) => (
+	return (inputValue || []).map((element, index) => (
 		<div className={styles.value} key={element?.kra_assigned}>
 			<Input
 				value={inputValue[index]?.weightage}
@@ -67,6 +33,37 @@ function KRAWeightCalculationTable({
 			</div>
 		</div>
 	));
+};
+
+const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element) => {
+	const { weightage } = element;
+	const parsedValue = parseFloat(weightage);
+
+	if (!Number.isNaN(parsedValue)) {
+		return total + parsedValue;
+	}
+
+	return Math.round(total * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
+}, INITIAL_TOTAL_AMOUNT);
+
+function KRAWeightCalculationTable({
+	setInputValue,
+	inputValue,
+	selectArray,
+	getEmployeesWithLowWeightage,
+	getUnassignedEmployee,
+	resetObjects,
+	getkrasAssigned,
+}) {
+	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
+		inputValue,
+		selectArray,
+		getEmployeesWithLowWeightage,
+		getUnassignedEmployee,
+		setInputValue,
+		resetObjects,
+		getkrasAssigned,
+	});
 
 	const totalAmount = Math.round(getTotalAmount(inputValue) * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 
@@ -90,7 +87,11 @@ function KRAWeightCalculationTable({
 						Weight
 					</div>
 
-					{renderFields()}
+					<RenderFields
+						inputValue={inputValue}
+						setInputValue={setInputValue}
+						onClickDeleteIcon={onClickDeleteIcon}
+					/>
 				</div>
 			</div>
 
