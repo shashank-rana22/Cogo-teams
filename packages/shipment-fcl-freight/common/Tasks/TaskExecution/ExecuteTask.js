@@ -206,8 +206,10 @@ function ExecuteTask({
 		return (
 			<MarkIgmShipmentConfirm
 				task={task}
-				shipmentData={shipment_data}
-				primaryService={primary_service}
+				taskConfigData={taskConfigData}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				tasksList={tasksList}
 			/>
 		);
 	}

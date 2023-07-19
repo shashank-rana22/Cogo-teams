@@ -38,3 +38,12 @@
 .button {
 	margin-right: 8px;
 }
+
+.bl_not_uploaded {
+	display: flex;
+	justify-content: flex-start;
+	margin: 8px;
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+	color: var(--color-primary-error-red-2);
+}

@@ -1,6 +1,6 @@
-import { Popover, Tooltip, cl } from '@cogoport/components';
+import { Popover, Tooltip, Toast, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
@@ -12,6 +12,11 @@ import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
+
+const STYLE_ICON = {
+	height : 25,
+	width  : 25,
+};
 
 function ShipmentHeader() {
 	const user_data = useSelector((({ profile }) => profile?.user));
@@ -42,11 +47,36 @@ function ShipmentHeader() {
 		stakeholderConfig,
 	});
 
-	const isIgm = !!stakeholderConfig?.shipment_header?.show_poc_details;
+	const showPocDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
+
+	const handleCopy = async (val) => {
+		navigator.clipboard
+			.writeText(val)
+			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+	};
+
+	const cfsDetails = () => (
+		<div className={styles.heading}>
+			<span>CFS Address:</span>
+			<div className={styles.cfs_details}>
+				RSP Tower, Plot No.28-P, Urban Estate, Sector - 44 ,Gurgaon – 122003, Haryana, India
+			</div>
+			<div
+				role="presentation"
+				onClick={() => {
+					navigator.clipboard.writeText(primary_service?.cfs_service);
+				}}
+			/>
+			<IcMCopy
+				onClick={() => handleCopy(primary_service?.cfs_service)}
+				style={STYLE_ICON}
+			/>
+		</div>
+	);
 
 	return (
-		<div className={cl`${styles.container} ${isIgm ? styles.igm_desk : ''}`}>
-			<div className={styles.customer}>
+		<div className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
+			<div className={cl`${styles.customer} ${!showPocDetails ? styles.igm_desk : ''}`}>
 				<Tooltip
 					theme="light"
 					placement="bottom"
@@ -61,7 +91,6 @@ function ShipmentHeader() {
 					)}
 				>
 					<div className={styles.business_name}>
-
 						{activeStakeholder !== 'consignee_shipper_booking_agent'
 							? importer_exporter?.business_name
 							: consignee_shipper?.business_name}
@@ -93,7 +122,7 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			{showCfsDetails ? <div>CFS Details</div> : <CargoDetails primary_service={primary_service} />}
+			{showCfsDetails ? <CargoDetails primary_service={primary_service} /> : <div>{cfsDetails()}</div>}
 
 			{showCancelShipmentIcon
 				? (

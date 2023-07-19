@@ -1,7 +1,6 @@
-import { Button, Toggle, Popover, Toast, Tooltip } from '@cogoport/components';
+import { Button, Toggle, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCopy } from '@cogoport/icons-react';
 import { useContext, useState } from 'react';
 
 import BookingRequirements from './BookingRequirements';
@@ -9,12 +8,6 @@ import styles from './styles.module.css';
 
 const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
 const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
-
-const STYLE_ICON = {
-	marginLeft : 4,
-	height     : 20,
-	width      : 20,
-};
 
 function Header({
 	count = 0,
@@ -27,7 +20,6 @@ function Header({
 	const contextValues = useContext(ShipmentDetailContext);
 
 	const [showBookingReq, setShowBookingReq] = useState(false);
-	const [visibleCfsDetails, setVisibleCfsDetails] = useState(false);
 
 	const { activeStakeholder, shipment_data, primary_service, stakeholderConfig } = contextValues || {};
 
@@ -35,34 +27,8 @@ function Header({
 		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
 
 	const showSupplyRemarks = SUPPLY_REMARKS_ROLES.includes(activeStakeholder);
-	const showCfsDetails = !!stakeholderConfig?.tasks?.show_cfs_details;
 	const show_others_tasks = !!stakeholderConfig?.tasks?.show_others_tasks;
 
-	const handleCopy = async (val) => {
-		navigator.clipboard
-			.writeText(val)
-			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
-	};
-
-	const cfsDetails = () => (
-		<div className={styles.cfs_details}>
-			<text>
-				{' '}
-				CFS Address:
-				{primary_service?.cfs_service || 'NA'}
-			</text>
-			<div
-				role="presentation"
-				onClick={() => {
-					navigator.clipboard.writeText(primary_service?.cfs_service);
-				}}
-			/>
-			<IcMCopy
-				onClick={() => handleCopy(primary_service?.cfs_service)}
-				style={STYLE_ICON}
-			/>
-		</div>
-	);
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
@@ -73,24 +39,6 @@ function Header({
 				</div>
 
 				<div className={styles.right_content}>
-					{showCfsDetails ? (
-						<Popover
-							placement="bottom"
-							trigger="mouseenter"
-							caret={false}
-							visible={visibleCfsDetails}
-							render={cfsDetails()}
-						>
-							<Button
-								size="md"
-								themeType="link"
-								onClick={() => setVisibleCfsDetails((pev) => !pev)}
-							>
-								CFS Address
-							</Button>
-						</Popover>
-					) : null }
-
 					{showSupplyRemarks && supplyRemarks ? (
 						<Tooltip
 							theme="light"

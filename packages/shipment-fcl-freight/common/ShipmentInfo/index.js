@@ -37,7 +37,7 @@ function ShipmentInfo() {
 					</Pill>
 				) : null}
 
-			{shipment_data?.is_cogo_assured ? (
+			{showSource && shipment_data?.is_cogo_assured ? (
 				<img
 					src={GLOBAL_CONSTANTS.image_url.cogo_assured_svg}
 					alt="cogo-assured"

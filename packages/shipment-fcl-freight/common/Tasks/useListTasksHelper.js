@@ -6,12 +6,13 @@ import useListTasks from '../../hooks/useListTasks';
 function useListTasksHelper() {
 	const {
 		shipment_data,
-		isGettingShipment, activeStakeholder,
+		isGettingShipment, activeStakeholder, stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
+	const showOtherTasks = !!stakeholderConfig.tasks.show_others_tasks;
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
-	const [showMyTasks, setShowMyTasks] = useState(true);
+	const [showMyTasks, setShowMyTasks] = useState(showOtherTasks);
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
 

@@ -1,5 +1,8 @@
 import { Button, Toast, cl } from '@cogoport/components';
 import { IcMCopy } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 import styles from './styles.module.css';
 
@@ -9,7 +12,33 @@ const STYLE_ICON = {
 	width      : 20,
 };
 
-function MarkIgmShipmentConfirm() {
+const hbl = ['house_bill_of_lading', 'draft_house_bill_of_lading'];
+// const mbl = ['master_bill_of_lading', 'draft_bill_of_lading'];
+
+function MarkIgmShipmentConfirm({
+	task = {},
+	taskConfigData = {},
+	taskListRefetch = () => {},
+	tasksList = [],
+	onCancel = () => {},
+}) {
+	const { apiTrigger, loading: taskUpdateLoading } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			onCancel();
+			taskListRefetch();
+		},
+		task,
+		tasksList,
+	});
+
+	const handleSubmit = async () => {
+		const payload = {
+			id: task?.id,
+		};
+
+		await apiTrigger(payload);
+	};
+
 	const handleCopy = async (val) => {
 		navigator.clipboard
 			.writeText(val)
@@ -24,7 +53,7 @@ function MarkIgmShipmentConfirm() {
 				{' '}
 			</div>
 			<div className={cl`${styles.bl_container} ${styles.bl_details}`}>
-				<div className={styles.bl_number}>{bl_number}</div>
+				<div className={styles.bl_number}>{bl_number ?? 'NA'}</div>
 				<IcMCopy
 					onClick={() => handleCopy(bl_number)}
 					style={STYLE_ICON}
@@ -33,19 +62,40 @@ function MarkIgmShipmentConfirm() {
 		</div>
 	);
 
+	const list = taskConfigData?.apis_data?.list_shipment_bl_details;
+
 	return (
 		<div>
-			{getBLContainerDetails('MBL Number', '177KGGGGA3957')}
-			{getBLContainerDetails('HBL Number', 'KY23060228')}
+			<div>
+				{isEmpty(list)
+					? <div className={styles.bl_not_uploaded}>BL is not uploaded yet!!</div>
+					:			(
+						<div>
+							{
+				(list || []).map((item) => {
+					if (hbl.includes(item?.bl_document_type)) {
+						return <div key={item?.id}>{getBLContainerDetails('HBL Number', item?.bl_number)}</div>;
+					}
+					return <div key={item?.id}>{getBLContainerDetails('MBL Number', item?.bl_number)}</div>;
+				})
+			}
+						</div>
+					)}
+
+			</div>
 			<div className={styles.btn_div}>
 				<Button
 					themeType="secondary"
 					className={styles.button}
+					onClick={onCancel}
 				>
 					Cancel
 				</Button>
 
-				<Button>
+				<Button
+					disabled={taskUpdateLoading || isEmpty(list)}
+					onClick={handleSubmit}
+				>
 					Confirm
 				</Button>
 			</div>

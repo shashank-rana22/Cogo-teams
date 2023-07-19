@@ -5,7 +5,7 @@
     },
     "shipment_header": {
         "show_po_number": false,
-        "show_poc_details": true
+        "show_poc_details": false
     },
     "default_tab":"tasks",
     "overview":{
@@ -20,7 +20,6 @@
         "checked_show_my_tasks":false,
         "is_task_assigned":false,
         "can_reassign_task":true,
-        "show_cfs_details": true,
         "show_others_tasks": false,
         "show_igm_tasks": true
     },

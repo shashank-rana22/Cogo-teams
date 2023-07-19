@@ -16,8 +16,7 @@ const PAGE_ONE = 1;
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 
 export default function useListIGMDeskShipments() {
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
-
+	const { authParams, selected_agent_id, user } = useSelector(({ profile }) => profile) || {};
 	const { filters, setFilters, tabState } = useContext(IGMDeskContext) || {};
 
 	const [data, setData] = useState(EMPTY_DATA);
@@ -45,7 +44,7 @@ export default function useListIGMDeskShipments() {
 		}
 	}, [filters, selected_agent_id, setFilters, tabState, trigger]);
 
-	useCallApi({ listShipments, filters, authParams, tabState, selected_agent_id });
+	useCallApi({ listShipments, filters, authParams, tabState, user: user?.id });
 
 	return {
 		data: {

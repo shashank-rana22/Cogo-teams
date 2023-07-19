@@ -73,10 +73,6 @@
 	text-decoration: underline;
 }
 
-.cfs_details {
-	display: flex;
-}
-
 .remarks {
 	font-size: var(--font-size-md);
 	text-decoration: underline;

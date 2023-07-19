@@ -32,7 +32,6 @@
         "tab_title":"Timeline and Tasks",
         "checked_show_my_tasks": false,
         "show_others_tasks": true,
-        "show_cfs_details": false,
         "show_igm_tasks": false
     },
 
