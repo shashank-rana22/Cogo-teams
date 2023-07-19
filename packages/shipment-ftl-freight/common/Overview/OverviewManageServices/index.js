@@ -30,7 +30,7 @@ function OverviewManageServices({ isOpen = true, isPurchaseTab = false }) {
 		<Accordion title={<Title />} isOpen={isOpen}>
 			{!isPurchaseTab && <Services />}
 
-			<AdditionalServiceList />
+			<AdditionalServiceList isSeller />
 			{!loading && !isEmpty(invoiceData) && isPurchaseTab
 						&& (
 							<div className={styles.tags}>
