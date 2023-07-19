@@ -8,3 +8,4 @@ export { default as NominationTask } from './NominationTask';
 export { default as GenerateFreightCertificate } from './GenerateFreightCertificate';
 export { default as AmendDraftBl } from './AmendDraftBl';
 export { default as UploadSI } from './UploadSI';
+export { default as MarkIgmShipmentConfirm } from './MarkIgmShipmentConfirm';

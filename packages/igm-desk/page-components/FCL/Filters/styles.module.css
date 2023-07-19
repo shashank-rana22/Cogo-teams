@@ -78,3 +78,24 @@
 .button_div {
 	margin-right: 16px;
 }
+
+.filter_container {
+	display: flex;
+	margin: 4px 0;
+
+	&.custom_filter{
+		flex-direction: column;
+	}
+}
+
+.action_buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 6px 16px 0; 
+}
+
+.action_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

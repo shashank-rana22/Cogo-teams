@@ -28,19 +28,23 @@ const Card = ({
 			saveAs(url);
 		}
 	};
-	// igm work pending on documents
-	// const ALL_UPLOADED_IGM_DOCS = [];
-	const updatedTaskList = isIGM ? IGM_DOCUMENTS : taskList;
 
-	// (completedDocs || []).map((item, idx) => {
-	// 	if(IGM_DOCUMENTS.includes(item?.document_type)) {
-	// 		ALL_UPLOADED_IGM_DOCS.push(item);
-	// 	}
-	// })
+	const IGM_TASK_LIST = [];
+
+	const getDocType = (item) => item?.document_type
+		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[GLOBAL_CONSTANTS.zeroth_index];
+
+	(taskList || []).forEach((item) => {
+		const docType =	getDocType(item);
+		if (!IGM_TASK_LIST.includes(docType) && IGM_DOCUMENTS.includes(docType)) {
+			IGM_TASK_LIST.push(item);
+		}
+	});
+
+	const updatedTaskList = isIGM ? IGM_TASK_LIST : taskList;
 
 	return (updatedTaskList || []).map((item, idx) => {
-		const docType =	item?.document_type
-		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[GLOBAL_CONSTANTS.zeroth_index];
+		const docType =	getDocType(item);
 
 		let allUploadedDocs = (completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
@@ -48,9 +52,6 @@ const Card = ({
 		if (isEmpty(allUploadedDocs)) {
 			allUploadedDocs = [{}];
 		}
-
-		// console.log({ALL_UPLOADED_IGM_DOCS, allUploadedDocs , completedDocs});
-		// const allUpdatedUploadedDocs = isIGM ? ALL_UPLOADED_IGM_DOCS : allUploadedDocs;
 
 		return allUploadedDocs.map((uploadedItem) => {
 			const isChecked = uploadedItem?.document_type === docType;

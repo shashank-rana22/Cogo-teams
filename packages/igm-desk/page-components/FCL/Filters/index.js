@@ -18,7 +18,7 @@ const Icon = {
 };
 
 function Filters() {
-	const { filters = {}, setFilters = () => {} } = useContext(IGMDeskContext);
+	const { filters = {}, setFilters = () => {}, tabState = {} } = useContext(IGMDeskContext);
 
 	const { q = '', fileType, current_filter } = filters || {};
 
@@ -78,14 +78,18 @@ function Filters() {
 				/>
 			</div>
 
-			<div className={styles.filter_container}>
-				{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
-				{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
-			</div>
+			{tabState?.activeTab === 'daily_report' ? (
+				null
+			) : (
+				<div className={styles.filter_container}>
+					{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
+					{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
+				</div>
+			) }
 
 			<div className={styles.input_container}>
 				<Input
-					placeholder="Search Shipments"
+					placeholder="Search SID, MBL and HBL"
 					type="search"
 					size="sm"
 					suffix={<IcMSearchlight />}

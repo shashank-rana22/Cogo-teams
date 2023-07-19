@@ -1,15 +1,19 @@
 const FCL_COMMON_TABS = [
 	{
-		name  : 'file_igm',
+		name  : 'initial_stage',
 		title : 'File IGM',
+	},
+	{
+		name  : 'awaiting_stage',
+		title : 'Awaiting Stage',
 	},
 	{
 		name  : 'igm_filed',
 		title : 'IGM Filed',
 	},
 	{
-		name  : 'completed',
-		title : 'Completed',
+		name  : 'daily_report',
+		title : 'Daily Report',
 	},
 ];
 

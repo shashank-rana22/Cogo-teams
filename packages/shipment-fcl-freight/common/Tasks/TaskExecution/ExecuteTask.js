@@ -15,6 +15,7 @@ import {
 	UploadDraftBL,
 	AmendDraftBl,
 	UploadSI,
+	MarkIgmShipmentConfirm,
 } from './CustomTasks';
 import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
@@ -35,10 +36,12 @@ function ExecuteTask({
 	selectedMail = [],
 	setSelectedMail = () => {},
 }) {
+	const { servicesList, shipment_data, primary_service, stakeholderConfig } = useContext(ShipmentDetailContext);
+
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
 
 	const {
 		steps = [],
@@ -193,6 +196,16 @@ function ExecuteTask({
 		&&	SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)
 	) {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+	}
+
+	if (isIGM && task?.task === 'mark_igm_shipment_confirmed') {
+		return (
+			<MarkIgmShipmentConfirm
+				task={task}
+				shipmentData={shipment_data}
+				primaryService={primary_service}
+			/>
+		);
 	}
 
 	return (

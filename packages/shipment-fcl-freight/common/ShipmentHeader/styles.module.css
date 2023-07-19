@@ -35,7 +35,7 @@
 
 .business_name {
 	width: fit-content;
-	max-width: 100px;
+	max-width: 210px;
 	overflow: hidden;
 	font-size: var(--font-size-md);
 	text-overflow: ellipsis;

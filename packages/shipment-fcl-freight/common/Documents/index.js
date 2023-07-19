@@ -63,6 +63,7 @@ function Documents() {
 	|| item?.document_type?.toLowerCase().includes(searchValue));
 
 	const canEditDocuments = !!stakeholderConfig?.documents?.can_edit_documents;
+	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
 
 	const renderContent = () => {
 		if (loading) {
@@ -77,6 +78,7 @@ function Documents() {
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
 					canEditDocuments={canEditDocuments}
+					isIGM={isIGM}
 				/>
 			);
 		}
@@ -86,18 +88,20 @@ function Documents() {
 
 	return (
 		<div className={styles.main_container}>
-			<HeaderComponent
-				activeToggle={activeToggle}
-				setActiveToggle={setActiveToggle}
-				data={completedDocs?.organizations}
-				filters={filters}
-				setFilters={setFilters}
-				setSearchValue={setSearchValue}
-				searchValue={searchValue}
-				activeWallet={activeWallet}
-				setActiveWallet={setActiveWallet}
-				refetch={refetch}
-			/>
+			{!isIGM ? (
+				<HeaderComponent
+					activeToggle={activeToggle}
+					setActiveToggle={setActiveToggle}
+					data={completedDocs?.organizations}
+					filters={filters}
+					setFilters={setFilters}
+					setSearchValue={setSearchValue}
+					searchValue={searchValue}
+					activeWallet={activeWallet}
+					setActiveWallet={setActiveWallet}
+					refetch={refetch}
+				/>
+			) : null}
 			<Modal
 				className={styles.modal_container}
 				show={showDoc}

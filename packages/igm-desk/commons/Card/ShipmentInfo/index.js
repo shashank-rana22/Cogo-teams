@@ -1,12 +1,12 @@
 import { Tooltip, cl } from '@cogoport/components';
 
-import styles, { container } from './styles.module.css';
+import styles from './styles.module.css';
 
 export default function ShipmentInfo({ item = {} }) {
-	const { serial_id, shipping_line } = item;
+	const { serial_id, shipping_line, stakeholder = {}, bl_details = {} } = item;
 
 	return (
-		<div className={container}>
+		<div className={styles.container}>
 			<div className={styles.serial_id}>
 				Shipment ID #
 				{serial_id}
@@ -24,12 +24,28 @@ export default function ShipmentInfo({ item = {} }) {
 					Line:
 					<div className={cl`${styles.ellipsis_text} ${styles.pointer}`}>{shipping_line?.business_name}</div>
 				</div>
-				{/* <div className={styles.stakeholder}>
-						POC:
-						{' '}
-						{stakeholder ?? 'NA'}
-					</div> */}
 			</Tooltip>
+			<div className={styles.heading}>
+				MBL No:
+				<div
+					className={cl`${styles.ellipsis_text}
+					${styles.pointer} ${bl_details?.document_url ? styles.mbl_document : ''}`}
+					onClick={() => window.open(
+						bl_details?.document_url,
+						'_blank',
+					)}
+					role="presentation"
+				>
+					{bl_details?.bl_number
+				|| 'NA'}
+
+				</div>
+			</div>
+			<div className={styles.stakeholder}>
+				POC:
+				{' '}
+				{stakeholder?.name || 'NA'}
+			</div>
 		</div>
 	);
 }

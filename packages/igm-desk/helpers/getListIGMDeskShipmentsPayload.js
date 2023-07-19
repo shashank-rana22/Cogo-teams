@@ -4,11 +4,19 @@ export default function getListIGMDeskShipmentsPayload({
 	filters = {},
 	tabState = {},
 }) {
-	const { page, q, sort_type = 'asc', sort_by = 'schedule_arrival', fileType, ...restFilters } = filters;
+	const {
+		page,
+		q,
+		sort_type = 'asc',
+		sort_by = 'schedule_arrival',
+		fileType,
+		current_filter,
+		...restFilters
+	} = filters;
 	const { activeTab } = tabState;
 
 	const updatedTabSpecificPayload = tabSpecificPayload[activeTab] || {};
-	const file_type = fileType ? 'pre_alrert' : 'draft';
+	const file_type = fileType ? 'pre_alert' : 'draft';
 
 	const payload = {
 		filters: {
@@ -18,6 +26,7 @@ export default function getListIGMDeskShipmentsPayload({
 			trade_type  : 'import',
 			...(q && { q }),
 			[file_type] : true,
+			...(activeTab === 'daily_report' && { date: true }),
 		},
 		page,
 		additional_methods: ['pagination', 'documents'],

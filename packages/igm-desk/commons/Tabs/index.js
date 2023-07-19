@@ -6,10 +6,10 @@ import IGMDeskContext from '../../context/IGMDeskContext';
 import styles from './styles.module.css';
 
 export default function Tabs({ tabs = [] }) {
-	const { tabState: { activeTab = '' } = {}, setTabState, filters, setFilters } = useContext(IGMDeskContext) || {};
+	const { tabState = {}, setTabState, filters, setFilters } = useContext(IGMDeskContext) || {};
 
 	const handleActiveTabChange = (val) => {
-		if (val === activeTab) {
+		if (val === tabState?.activeTab) {
 			return;
 		}
 
@@ -24,7 +24,7 @@ export default function Tabs({ tabs = [] }) {
 		<div className={styles.container}>
 			<TabContainer
 				themeType="secondary"
-				activeTab={activeTab}
+				activeTab={tabState?.activeTab}
 				onChange={handleActiveTabChange}
 			>
 				{tabs.map((tab) => (

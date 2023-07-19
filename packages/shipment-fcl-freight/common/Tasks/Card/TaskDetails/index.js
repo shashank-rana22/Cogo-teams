@@ -50,7 +50,7 @@ function TaskDetails({
 					<div className={styles.task_name}>{taskName}</div>
 
 					<div className={styles.task_date_details}>
-						{task?.deadline ? (
+						{task?.status !== 'completed' && task?.deadline ? (
 							<Tooltip
 								interactive
 								theme="light"
@@ -69,8 +69,9 @@ function TaskDetails({
 								<div>
 									<div className={styles.deadline}>
 										<IcMTimer />
-
-										&nbsp;Deadline: &nbsp;
+										{' '}
+										Deadline:
+										{' '}
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>
@@ -93,7 +94,7 @@ function TaskDetails({
 						{task?.due_in ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
+									src={GLOBAL_CONSTANTS.image_url.due_in_svg}
 									alt="due-in"
 								/>
 								{`( Due In: ${task.due_in} )`}
@@ -103,7 +104,7 @@ function TaskDetails({
 						{task?.over_due ? (
 							<div className={styles.completed}>
 								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
+									src={GLOBAL_CONSTANTS.image_url.over_due_svg}
 									alt="over-due"
 								/>
 								{`( Due In: ${task.over_due} )`}

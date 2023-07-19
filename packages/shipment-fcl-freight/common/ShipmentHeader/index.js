@@ -31,7 +31,8 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
-	const show_po_number = stakeholderConfig?.shipment_header?.show_po_number;
+	const show_po_number = !!stakeholderConfig?.shipment_header?.show_po_number;
+	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
 
 	const showCancelShipmentIcon = getCanCancelShipment({
 		shipment_data,
@@ -92,7 +93,7 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails primary_service={primary_service} />
+			{isIGM ? <div>CFS Details</div> : <CargoDetails primary_service={primary_service} />}
 
 			{showCancelShipmentIcon
 				? (
