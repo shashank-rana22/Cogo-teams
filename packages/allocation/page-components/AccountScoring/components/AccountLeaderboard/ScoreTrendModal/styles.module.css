@@ -12,6 +12,10 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0 12px;
+
+	:global(.react-datepicker__aria-live) {
+		display: none;
+	}
 }
 
 .label {

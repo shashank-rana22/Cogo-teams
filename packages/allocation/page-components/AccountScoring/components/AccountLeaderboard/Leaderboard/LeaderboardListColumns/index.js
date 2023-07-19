@@ -173,11 +173,19 @@ const getLeaderBoardColumns = ({
 		},
 		{
 			Header   : 'ORG NAME',
-			accessor : ({ business_name }) => (
-				<div>
-					{business_name || '-'}
-				</div>
-			),
+			accessor : ({ business_name }) => {
+				const renderOrgName = () => `${startCase(business_name)}`;
+
+				return (
+					<Tooltip content={renderOrgName()} placement="bottom">
+						<div className={styles.org_name}>
+							{startCase(business_name) || '-'}
+						</div>
+
+					</Tooltip>
+
+				);
+			},
 		},
 		{
 			Header   : 'USER NAME',
@@ -202,7 +210,7 @@ const getLeaderBoardColumns = ({
 		{
 			Header   : 'ALLOCATED KAM',
 			accessor : ({ stakeholder_name = '', role_name = '' }) => {
-				const renderToolTip = () => (`${startCase(stakeholder_name)}`);
+				const renderToolTip = () => `${startCase(stakeholder_name)}`;
 
 				return (
 					<Tooltip content={renderToolTip()} placement="bottom">
