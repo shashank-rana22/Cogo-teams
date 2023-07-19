@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAnnouncement,
 	IcMSettings,
@@ -6,7 +7,6 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
-	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -205,7 +205,7 @@ const navigationMappingAdmin = {
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
 			...apis.sales_dashboard,
-
+			...apis.cogopoints,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -692,8 +692,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Operators',
-				href  : '/operators',
-				as    : '/operators',
+				href  : '/v2/operators',
+				as    : '/v2/operators',
 				type  : 'link',
 			},
 		],
@@ -860,6 +860,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.overheads,
 			},
 			{
+				key           : 'business_finance-compliance',
+				title         : 'Compliance',
+				href          : '/v2/business-finance/compliance/[active_tab]',
+				as            : '/v2/business-finance/compliance/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.compliance,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -881,7 +890,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-dunnings',
 				title         : 'Dunnings',
 				href          : '/v2/business-finance/dunnings/[active_tab]',
-				as            : '/v2/business-finance/dunnings/campaign-management',
+				as            : '/v2/business-finance/dunnings/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.business_finance_dunnings,
@@ -1148,7 +1157,8 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
+					...apis.sales_invoice, ...apis.cargo_insurance],
 			},
 			{
 				key           : 'coe-shipment_air',
@@ -1196,6 +1206,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
+			},
+			{
+				key           : 'coe-cost_booking',
+				title         : 'FF Cost Booking',
+				href          : '/cost-booking',
+				as            : '/cost-booking',
+				type          : 'link',
+				main_apis     : ['list_shipment_air_csr_sheets'],
+				possible_apis : apis.ff_cost_booking,
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',
@@ -1336,11 +1355,13 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key   : 'coe-communication',
-				title : 'Communcation',
-				href  : '/communication',
-				as    : '/communication',
-				type  : 'link',
+				key           : 'coe-communication',
+				title         : 'Communcation',
+				href          : '/communication',
+				as            : '/communication',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.shipment,
 			},
 			{
 				key           : 'coe-ltl_run_sheets',
@@ -1397,7 +1418,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1409,12 +1430,21 @@ const navigationMappingAdmin = {
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
+				key           : 'coe-risk-management',
+				title         : 'Risk Management',
+				href          : '/v2/risk-management',
+				as            : '/v2/risk-management',
+				type          : 'link',
+				main_apis     : ['list_risk_prone_shipments'],
+				possible_apis : [...apis.risk_management],
+			},
+			{
 				key           : 'coe-so2_surface',
 				title         : 'SO2 Dashboard',
 				href          : '/v2/so2-surface',
 				as            : '/v2/so2-surface',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
 		],
@@ -1544,6 +1574,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				possible_apis : apis.omni_channel,
 				main_apis     : [],
+			},
+			{
+				key           : 'marketing-utm_parameters',
+				title         : 'UTM Parameters',
+				href          : '/marketing/utm_parameters',
+				as            : '/marketing/utm_parameters',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.utm_parameters,
 			},
 		],
 		module_type: 'dashboards',
@@ -1868,8 +1907,8 @@ const navigationMappingAdmin = {
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
-		href          : '/awb-inventory',
-		as            : '/awb-inventory',
+		href          : '/v2/awb-inventory',
+		as            : '/v2/awb-inventory',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
@@ -1885,7 +1924,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.ground_ops,
 		module_type   : 'dashboards',
 	},
-
+	printing_desk: {
+		key           : 'printing_desk',
+		title         : 'Printing Desk',
+		href          : '/v2/printing-desk',
+		as            : '/v2/printing-desk',
+		main_apis     : [],
+		icon          : IcMDocument,
+		possible_apis : apis.printing_desk,
+		module_type   : 'dashboards',
+	},
 	airline_booking_plugin: {
 		key           : 'airline_booking_plugin',
 		title         : 'Airline Booking Plugin',
@@ -1902,7 +1950,7 @@ const navigationMappingAdmin = {
 		title         : 'Enrichment',
 		href          : '/v2/enrichment',
 		as            : '/v2/enrichment',
-		main_apis     : ['/list_lead_organizations_enrichment'],
+		main_apis     : ['get_allocation_feedback_requests'],
 		possible_apis : apis.enrichment,
 		module_type   : 'dashboards',
 	},
@@ -1915,17 +1963,6 @@ const navigationMappingAdmin = {
 		possible_apis : apis.document_walet,
 		icon          : IcMDocument,
 		main_apis     : [],
-		module_type   : 'dashboards',
-	},
-	cost_booking: {
-		key           : 'cost_booking',
-		title         : 'FF Cost Booking',
-		href          : '/cost-booking',
-		as            : '/cost-booking',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : apis.cost_booking,
-		icon          : IcMBooking,
 		module_type   : 'dashboards',
 	},
 	platform_configuration: {
@@ -1951,7 +1988,7 @@ const navigationMappingAdmin = {
 		title : 'CogoVerse',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
 				alt="cogo-verse"
 				width="22px"
 				height="22px"
@@ -2035,7 +2072,7 @@ const navigationMappingAdmin = {
 		title : 'Cogo One',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
 				width="22px"
 				height="22px"
@@ -2287,6 +2324,16 @@ const navigationMappingAdmin = {
 				possible_apis : [],
 				icon          : IcMDataPipeline,
 			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
 		],
 	},
 	air_repository: {
@@ -2437,8 +2484,24 @@ const navigationMappingAdmin = {
 				as            : '/v2/pricing/trends',
 				possible_apis : apis.pricing_trends,
 			},
+			{
+				key           : 'chakravyuh-feedback',
+				title         : 'Feedback Dashboard',
+				href          : '/v2/chakravyuh/feedback-dashboard',
+				as            : '/v2/chakravyuh/feedback-dashboard',
+				possible_apis : apis.pricing_trends,
+			},
 		],
 
+	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
 	},
 };
 

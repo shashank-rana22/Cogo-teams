@@ -36,9 +36,13 @@ packages/employee-portal @Cogoport/platform-engineering @shivam-cogo @prachidewa
 packages/new-employee-dashboard @Cogoport/platform-engineering @shivam-cogo @prachidewangan26
 packages/unified-dashboard @Cogoport/platform-engineering @akshaysawant23 @vineet-cogo
 packages/ticket-management @Cogoport/platform-engineering @sandeepn1709
+packages/awb-inventory @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport
 packages/controlled-checkout @Cogoport/platform-engineering @Priyank-cogo
 common/air-modules @Cogoport/platform-engineering @Arpit-Cogoport
+packages/booking-desk-air @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-air-freight @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-air-customs @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-air-freight-local @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-domestic-air-freight @Cogoport/platform-engineering @Arpit-Cogoport
+packages/ihls @Cogoport/platform-engineering @sagar-paliwal
+packages/printing-desk @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport

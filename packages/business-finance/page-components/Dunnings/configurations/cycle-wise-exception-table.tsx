@@ -55,6 +55,7 @@ const cycleWiseExceptionTable = ({
 					dunningExecutionFrequency = '', oneTimeDate = '',
 					scheduleTime = '', dayOfMonth = '',
 					week = '',
+					scheduleTimeZone = '',
 				} = row?.scheduleRule || {};
 				return (
 					<div className={styles.text}>
@@ -66,11 +67,7 @@ const cycleWiseExceptionTable = ({
 							? (
 								<>
 									<span className={styles.frequency_value}>
-										{formatDate({
-											date       : oneTimeDate,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-											formatType : 'date',
-										})}
+										{oneTimeDate}
 									</span>
 									<span className={styles.border} />
 
@@ -98,6 +95,8 @@ const cycleWiseExceptionTable = ({
 
 						<span style={{ marginLeft: '4px' }}>
 							{scheduleTime}
+							{' '}
+							{scheduleTimeZone}
 						</span>
 						)
 					</div>

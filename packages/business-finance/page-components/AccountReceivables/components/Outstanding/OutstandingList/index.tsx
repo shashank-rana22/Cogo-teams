@@ -1,10 +1,13 @@
-import { TabPanel, Tabs, Tooltip } from '@cogoport/components';
-import { startCase, format } from '@cogoport/utils';
+import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { CARD_DETAILS } from '../../../constants/index';
+import { getTaxLabels } from '../../../constants/index';
 import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
+import DownloadLedgerModal from './DownloadLedgerModal';
 import PopoverTags from './PopoverTags';
 import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
@@ -39,8 +42,9 @@ interface OutstandingListProps {
 	entityCode?: string
 }
 
-function OutstandingList({ item, entityCode }: OutstandingListProps) {
+function OutstandingList({ item = {}, entityCode = '' }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('');
+	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
@@ -68,7 +72,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 		selfOrganizationName,
 		organizationId = '',
 		selfOrganizationId = '',
-	} = item || {};
+	} = item;
 
 	const propsData = {
 		invoice_details: {
@@ -137,13 +141,13 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 							{' '}
 						</div>
 						<div className={styles.value}>
-							{' '}
-							{format(
-								lastUpdatedAt,
-								'dd MMM yyyy hh:mm aaa',
-								{},
-								false,
-							)}
+							{formatDate({
+								date       : lastUpdatedAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : '|',
+							})}
 						</div>
 					</div>
 					<div className={styles.custom_tag_margin}>
@@ -178,7 +182,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 									placement="right"
 								>
 									<div className={styles.styled_tag}>
-										{`${startCase(collectionPartyType[0])}  +${
+										{`${startCase(collectionPartyType[GLOBAL_CONSTANTS.zeroth_index])}  +${
 											collectionPartyType.length - 1
 										}` || '-'}
 									</div>
@@ -186,7 +190,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 								</Tooltip>
 							) : (
 								<div className={styles.styled_tag}>
-									{startCase(collectionPartyType[0]) || '-'}
+									{startCase(collectionPartyType[GLOBAL_CONSTANTS.zeroth_index]) || '-'}
 								</div>
 							)}
 						</div>
@@ -198,20 +202,33 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 
 					</div>
 					<div className={styles.category_container}>
-						{CARD_DETAILS.map((it) => (
-							<div className={styles.sub_category_container} key={it?.label}>
-								<div className={styles.tag_text}>
-									{it.label}
-									:
-								</div>
-								<div className={styles.tag_text_left}>
-									{it.valueKey === 'registrationNumber'
-										? item[it.valueKey]
-										: startCase(item[it.valueKey]?.name || item[it.valueKey])
+						{getTaxLabels(entityCode).map((it) => {
+							if (!it.label) {
+								return null;
+							}
+							return (
+								<div className={styles.sub_category_container} key={it?.label}>
+									<div className={styles.tag_text}>
+										{it.label}
+										:
+									</div>
+									<div className={styles.tag_text_left}>
+										{it.valueKey === 'registrationNumber'
+											? item[it.valueKey]
+											: startCase(item[it.valueKey]?.name || item[it.valueKey])
                                             || it.defaultValueKey}
+									</div>
 								</div>
-							</div>
-						))}
+							);
+						})}
+						<Button
+							size="sm"
+							style={{ marginLeft: '20px' }}
+							onClick={() => setShowLedgerModal(true)}
+						>
+							Download Ledger
+
+						</Button>
 					</div>
 				</div>
 
@@ -232,6 +249,14 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 					))}
 				</Tabs>
 			</div>
+
+			{showLedgerModal ? (
+				<DownloadLedgerModal
+					showLedgerModal={showLedgerModal}
+					setShowLedgerModal={setShowLedgerModal}
+					item={item}
+				/>
+			) : null}
 
 		</div>
 	);

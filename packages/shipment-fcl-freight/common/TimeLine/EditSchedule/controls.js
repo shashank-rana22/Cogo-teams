@@ -1,9 +1,15 @@
+import { getDate } from '../../../utils/getDate';
 import TIMELINE_EDITABLE from '../config/timelineEditable.json';
-import { getDate } from '../utils/getDate';
+import { getDepartureArrivalDate } from '../utils/getDepartureArrivalDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const { state, origin_port, destination_port } = primary_service || {};
+	const modifiedPrimaryService = {
+		...primary_service || {},
+		schedule_departure : getDepartureArrivalDate(primary_service, 'departure'),
+		schedule_arrival   : getDepartureArrivalDate(primary_service, 'arrival'),
+	};
+	const { state, origin_port, destination_port } = modifiedPrimaryService || {};
 
 	const disabledState = state === 'vessel_arrived'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
@@ -57,15 +63,23 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control || {};
+		const { name, label, maxDate = departureDate, disable = disabledState } = control || {};
+		const prefillValue = getDate(modifiedPrimaryService[name]);
+
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
+		finalControls[index].rules = {
+			required: {
+				value   : !!prefillValue,
+				message : `${label} is required`,
+			},
+		};
 
-		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = prefillValue;
 	});
 
 	return { finalControls, defaultValues: DEFAULT_VALUES };

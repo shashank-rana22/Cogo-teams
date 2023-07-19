@@ -1,6 +1,6 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useCreateEBooking from '../../hooks/useCreateEBooking';
@@ -16,8 +16,8 @@ import styles from './styles.module.css';
 const CONFIRM_PREFERENCE_STEP = 2;
 function Card({
 	item = {},
-	priority,
-	serviceProvidersData,
+	priority = 1,
+	serviceProvidersData = [],
 	step = 1,
 	updateShipmentPendingTask = () => {},
 	taskData = {},
@@ -30,6 +30,7 @@ function Card({
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showEmailPreview, setShowEmailPreview] = useState(false);
+	const [checkboxValue, setCheckboxValue] = useState([]);
 	const [showBookingStatus, setShowBookingStatus] = useState(false);
 
 	const data = Array.isArray(item?.data) ? item?.data[GLOBAL_CONSTANTS.zeroth_index] : item?.data;
@@ -41,7 +42,11 @@ function Card({
 	}
 
 	const { updateConfirmation, updateLoading } = useUpdateBookingPreference();
-	const { emailData, loading, sendBookingRequestEmail } =	useSendBookingRequestEmail(onCancel, setShowEmailPreview);
+	const {
+		emailData,
+		loading,
+		sendBookingRequestEmail,
+	} = useSendBookingRequestEmail(onCancel, setShowEmailPreview, checkboxValue);
 
 	const { createEBooking, loading:createBookingLoading } = useCreateEBooking({
 		setShowBookingStatus,
@@ -50,7 +55,14 @@ function Card({
 		mainServiceData,
 	});
 
-	const handleProceedWithEmail = async (show_preview_only) => {
+	const handleProceedWithEmail = async (show_preview_only, formValues) => {
+		if (!show_preview_only && !formValues?.recipient_email) {
+			Toast.error('Recipient email is required');
+			return;
+		}
+		const pocData = (data?.repository_data?.pocs_data || []).find((val) => (
+			val?.email === formValues?.recipient_email
+		));
 		await sendBookingRequestEmail(
 			item,
 			taskData,
@@ -58,6 +70,7 @@ function Card({
 			handOverDate,
 			show_preview_only,
 			serviceProvidersData,
+			pocData,
 		);
 	};
 
@@ -112,14 +125,20 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-			<PreviewEmail
-				emailData={emailData}
-				show={showEmailPreview}
-				loading={loading}
-				onCloseModal={setShowEmailPreview}
-				onConfirm={handleProceedWithEmail}
-			/>
-
+			{
+				!isEmpty(emailData) && (
+					<PreviewEmail
+						emailData={emailData}
+						show={showEmailPreview}
+						loading={loading}
+						onCloseModal={setShowEmailPreview}
+						onConfirm={handleProceedWithEmail}
+						data={data}
+						checkboxValue={checkboxValue}
+						setCheckboxValue={setCheckboxValue}
+					/>
+				)
+			}
 			<Modal
 				show={showModal}
 				onClose={() => setShowModal(false)}

@@ -1,10 +1,11 @@
 import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
+import isMileStoneCompleted from './helpers/isMilestoneCompleted';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
@@ -31,6 +32,9 @@ function Timeline() {
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 
+	const keysForTimlineItems = useMemo(() => Array(filteredTimelineData.length)
+		.fill(null).map(() => Math.random()), [filteredTimelineData.length]);
+
 	const totalItems = (timelineData || []).length;
 	let consecutivelyCompleted = true;
 
@@ -46,13 +50,16 @@ function Timeline() {
 		<div className={styles.container}>
 			<div className={styles.list_container}>
 				{(filteredTimelineData || []).map((timelineItem, index) => {
-					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
+					consecutivelyCompleted = isMileStoneCompleted({
+						consecutivelyCompleted, timelineItem,
+					})?.consecutivelyCompleted;
+
 					return (
 						<TimelineItem
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + OFFSET_TO_CHECK_LAST_INDEX}
-							key={timelineItem.milestone}
+							key={keysForTimlineItems[index]}
 						/>
 					);
 				})}

@@ -1,0 +1,17 @@
+.custom_list {
+	background: #fff;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+	height: 20px;
+	padding: 0 8px;
+	font-size: var(--font-size-sm);
+	color: black;
+	border-radius: 8px;
+}
+
+.date_time {
+	font-size: var(--font-size-md);
+}

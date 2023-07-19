@@ -49,6 +49,7 @@ export default function Card({
 		actionButton,
 		showDeliveryOrderTask,
 		showInvoiceAndTask,
+		showTask,
 	} = getAccordionAndButton({
 		activeTab: stateProps.inner_tab,
 		item,
@@ -84,7 +85,7 @@ export default function Card({
 		if (stateProps.inner_tab === 'knockoff_pending') {
 			setConfirmationModal({
 				show      : true,
-				labelText : 'Do you want to Knock Off these invoices?',
+				labelText : 'Do you want to Knock Off these invoices ?',
 			});
 			listTasks();
 		} else if (
@@ -198,6 +199,7 @@ export default function Card({
 					getShipmentPendingTask={listTasks}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
+					showTask={showTask}
 				/>
 			) : null}
 
@@ -219,14 +221,15 @@ export default function Card({
 							<Button
 								disabled={loading}
 								onClick={closeModal}
-								className="primary md"
+								themeType="secondary"
+								className={styles.cancel_button}
 							>
 								CANCEL
 							</Button>
 							<Button
 								disabled={loading}
 								onClick={handleSubmit}
-								className="primary md"
+								themeType="primary"
 							>
 								CONFIRM
 							</Button>

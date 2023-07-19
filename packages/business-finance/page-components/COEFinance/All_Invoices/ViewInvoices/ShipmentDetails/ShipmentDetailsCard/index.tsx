@@ -7,8 +7,10 @@ import {
 	Checkbox,
 	ButtonIcon,
 } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -38,16 +40,17 @@ const VALID_ADVANCE_ATH_RANGE = 80;
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
 const DEFAULT_GRAND_TOTAL = 1;
+const MIN_AMOUNT = 0;
 
 function ShipmentDetailsCard({
-	data,
-	remarksVal,
-	setRemarksVal,
-	lineItemsRemarks,
-	setLineItemsRemarks,
-	setItemCheck,
-	setLineItem,
-	invoiceStatus,
+	data = {},
+	remarksVal = {},
+	setRemarksVal = () => {},
+	lineItemsRemarks = {},
+	setLineItemsRemarks = () => {},
+	setItemCheck = () => {},
+	setLineItem = () => {},
+	invoiceStatus = '',
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -148,7 +151,8 @@ function ShipmentDetailsCard({
 	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
 
 	const [advancedPaymentObj = {}] = (shipmentDocData?.list
-		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
+		?.filter((item) => JSON.parse(item?.data)?.invoice_number === billNumber
+		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -187,7 +191,7 @@ function ShipmentDetailsCard({
 	};
 
 	const onSubmit = () => {
-		const current = Object.keys(showRejected)?.[0];
+		const current = Object.keys(showRejected)?.[GLOBAL_CONSTANTS.zeroth_index];
 		handleRejected(+current);
 		setShowRejected(false);
 	};
@@ -421,7 +425,12 @@ function ShipmentDetailsCard({
 															Invoice Date -
 															{' '}
 															<span>
-																{format(billDate, 'dd/MMM/yyyy', {}, false)}
+																{formatDate({
+																	date: billDate,
+																	dateFormat:
+																	GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+																	formatType: 'date',
+																})}
 															</span>
 														</div>
 													</div>
@@ -744,7 +753,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Bill -
+												Bill Type -
 												{' '}
 												<span>{invoiceType}</span>
 											</div>
@@ -757,7 +766,11 @@ function ShipmentDetailsCard({
 												Invoice Date -
 												{' '}
 												<span>
-													{format(billDate, 'dd/MMM/yyyy', {}, false)}
+													{formatDate({
+														date       : billDate,
+														dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+														formatType : 'date',
+													})}
 												</span>
 											</div>
 											<div className={styles.margin_bottom}>
@@ -837,6 +850,20 @@ function ShipmentDetailsCard({
 																/>
 															)
 														: null}
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& advancedPaymentObj?.data
+											&& (
+												<div className={styles.margin_bottom}>
+													Updated Advanced Amount -
+													{' '}
+													{advancedAmountCurrency}
+													{' '}
+													<span>
+														{JSON.parse(advancedPaymentObj?.data)?.updated_advanced_amount
+														|| MIN_AMOUNT}
+													</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'

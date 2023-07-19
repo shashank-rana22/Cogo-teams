@@ -14,6 +14,7 @@ function FieldArray(props) {
 		buttonText,
 		showButtons = true,
 		disabled = false,
+		watch,
 		...rest
 	} = props;
 
@@ -47,6 +48,7 @@ function FieldArray(props) {
 					error={error?.[index]}
 					showElements={showElements?.[index]}
 					disabled={disabled}
+					watchField={watch?.[index]}
 				/>
 			))}
 

@@ -17,7 +17,7 @@ import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const SHOW_CONTENT = 'Please Revert Rate First';
-const NUMBER_OF_SKELETON = 6;
+const NUMBER_OF_PLACEHOLDER = 6;
 const LIST_PREFERENCE_RATE_STEP = 1;
 const CONFIRM_PREFERENCE_STEP = 2;
 function SelectRate({
@@ -127,13 +127,13 @@ function SelectRate({
 						<>
 							<div>
 								{loading ? (
-									<div className={styles.skeleton_wrap}>
-										{Array.from(Array(NUMBER_OF_SKELETON).keys()).map((index) => (
+									<div className={styles.placeholder_wrap}>
+										{Array.from(Array(NUMBER_OF_PLACEHOLDER).keys()).map((index) => (
 											<Placeholder
 												key={index}
 												width="100%"
 												height="20px"
-												style={{ marginBottom: '10px' }}
+												margin="0px 0px 20px 0px"
 											/>
 										))}
 									</div>

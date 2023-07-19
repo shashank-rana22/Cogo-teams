@@ -1,9 +1,11 @@
-import { Button, DateRangepicker } from '@cogoport/components';
+import { Button, DateRangepicker, MultiSelect } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import DashboardContext from '../../../../context/DashboardContext';
 
+import SHIPMENT_STATES from './shipmentStates';
 import styles from './styles.module.css';
 
 function FilterBy({
@@ -118,6 +120,21 @@ function FilterBy({
 					}}
 
 				/>
+			</div>
+			<div className={styles.filter_container}>
+				<MultiSelect
+					placeholder="Select Shipment states"
+					options={SHIPMENT_STATES}
+					onChange={(e) => setFormValue((prev) => ({
+						...prev,
+						ftl_freight_services: { state: isEmpty(e) ? undefined : e },
+					}))}
+					value={formValue?.ftl_freight_services?.state}
+					isClearable
+					size="sm"
+					prefix={<div />}
+				/>
+
 			</div>
 			<div className={styles.filter_container}>
 				<DateRangepicker

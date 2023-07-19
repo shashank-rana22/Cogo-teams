@@ -1,12 +1,14 @@
-import { Placeholder, Pill } from '@cogoport/components';
+import { Placeholder, Pill, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 import { STATUS_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
 const PREVIEW_REPLACE_MAPPING = [
-	{ find: /<p>\s+(<[/]p>)/g, replace: '<br>' },
-	{ find: /<p>(<[/]p>)/g, replace: '<br>' },
+	{ find: GLOBAL_CONSTANTS.regex_patterns.occurrences_of_paragraphs_tag, replace: '<br>' },
+	{ find: GLOBAL_CONSTANTS.regex_patterns.enclosed_within_forward_slashes, replace: '<br>' },
 	{ find: '<p', replace: '<div' },
 	{ find: '<p>', replace: '<div>' },
 	{ find: '</p>', replace: '&nbsp;</div>' },
@@ -14,13 +16,41 @@ const PREVIEW_REPLACE_MAPPING = [
 ];
 const LOADER_COUNT = 6;
 
-export function Preview({ previewData }) {
+export function Preview({
+	previewData = '',
+	variables = [],
+	setCustomizableData = () => {},
+}) {
 	const formattedPreview = PREVIEW_REPLACE_MAPPING.reduce(
 		(accumulator, currentValue) => accumulator?.replaceAll(currentValue?.find, currentValue?.replace),
 		previewData,
 	);
 
-	return <div dangerouslySetInnerHTML={{ __html: formattedPreview }} />;
+	const handleInputChange = ({ variable, value }) => {
+		setCustomizableData((prevData) => ({
+			...prevData,
+			[variable]: value,
+		}));
+	};
+
+	return (
+		<>
+			<div dangerouslySetInnerHTML={{ __html: formattedPreview }} />
+			<div className={styles.user_work_scope}>
+				{(variables || []).map((item) => (
+					<div className={styles.scope_name} key={item}>
+						{startCase(item)}
+						<Input
+							className={styles.value_field}
+							size="xs"
+							placeholder="value"
+							onChange={(val) => handleInputChange({ variable: item, value: val })}
+						/>
+					</div>
+				))}
+			</div>
+		</>
+	);
 }
 
 export function Loader() {
@@ -32,13 +62,11 @@ export function Loader() {
 	));
 }
 
-export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
+export function ListItem({ item = {}, activeCard = {}, handleTemplateSelect = () => {}, openCreateReply = false }) {
 	const {
 		content: { name: messageTitle = '' } = {},
 		description: messageContent = '',
 		third_party_template_status,
-		html_template,
-		name: templateTitle,
 		id,
 	} = item || {};
 
@@ -46,23 +74,12 @@ export function ListItem({ item, activeCard, handleSelect, openCreateReply }) {
 
 	const { label, color } = STATUS_MAPPING[third_party_template_status || 'pending'] || {};
 
-	const handleClick = () => {
-		handleSelect(
-			{
-				val    : html_template,
-				status : third_party_template_status,
-				name   : templateTitle,
-				id,
-			},
-		);
-	};
-
 	return (
 		<div
 			key={id}
 			role="presentation"
 			className={activeCard === id ? styles.active : styles.each_message}
-			onClick={handleClick}
+			onClick={() => handleTemplateSelect(item)}
 			style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
 		>
 			<div className={styles.wrap}>
