@@ -1219,8 +1219,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-igm_desk',
 				title         : 'IGM Desk',
-				href          : '/igm-desk',
-				as            : '/igm-desk',
+				href          : '/v2/igm-desk',
+				as            : '/v2/igm-desk',
 				type          : 'link',
 				main_apis     : ['list_igm_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.igm_desk],

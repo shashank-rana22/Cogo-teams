@@ -29,7 +29,7 @@ export default function useListIGMDeskShipments() {
 	const listShipments = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: getPayload({ filters, tabState, selected_agent_id }),
+				params: getPayload({ filters, tabState, selected_agent_id, userId: user?.id }),
 			});
 
 			if (isEmpty(res.data?.list) && filters.page > PAGE_ONE) {
@@ -42,9 +42,9 @@ export default function useListIGMDeskShipments() {
 			Toast.error(message);
 			setData(EMPTY_DATA);
 		}
-	}, [filters, selected_agent_id, setFilters, tabState, trigger]);
+	}, [filters, selected_agent_id, setFilters, tabState, trigger, user?.id]);
 
-	useCallApi({ listShipments, filters, authParams, tabState, user: user?.id });
+	useCallApi({ listShipments, filters, authParams, tabState, userId: user?.id });
 
 	return {
 		data: {

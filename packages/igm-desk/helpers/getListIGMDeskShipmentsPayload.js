@@ -3,7 +3,7 @@ import tabSpecificPayload from './tabSpecificPayload.json';
 export default function getListIGMDeskShipmentsPayload({
 	filters = {},
 	tabState = {},
-	user,
+	userId = '',
 }) {
 	const {
 		page,
@@ -27,7 +27,7 @@ export default function getListIGMDeskShipmentsPayload({
 			trade_type  : 'import',
 			...(q && { q }),
 			[file_type] : true,
-			partner_id  : user,
+			partner_id  : userId,
 			...(activeTab === 'daily_report' && { date: true }),
 		},
 		page,
