@@ -41,7 +41,6 @@ const clearance_date_report_controls = [
 		label                 : 'Booking Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 	},
 	{
@@ -50,7 +49,6 @@ const clearance_date_report_controls = [
 		label                 : 'Custom Clearance Date',
 		placeholder           : 'Select Date',
 		isPreviousDaysAllowed : true,
-		value                 : new Date(),
 		span                  : 6,
 	},
 ];
