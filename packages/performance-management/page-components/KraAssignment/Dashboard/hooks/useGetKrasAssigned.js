@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -19,7 +19,7 @@ function useGetkrasAssigned({ filters }) {
 	const [selectAccordian, setSelectAccordian] = useState([]);
 	const [selectAccordianObject, setSelectAccordianObject] = useState({});
 
-	const [{ data, loading }, trigger] = useRequest(
+	const [{ data, loading }, trigger] = useHarbourRequest(
 		{
 			url    : '/get_kras_assigned',
 			method : 'GET',

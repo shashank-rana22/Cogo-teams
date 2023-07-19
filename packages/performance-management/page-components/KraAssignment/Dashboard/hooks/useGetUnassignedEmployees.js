@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 const getPayload = ({ filters }) => {
@@ -19,7 +19,7 @@ function useGetUnassignedEmployee() {
 	const [filtersFields, setFiltersFields] = useState({});
 	const [showKRACalculationTable, setShowKRACalculationTable] = useState(false);
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_unassigned_employees',
 		method : 'GET',
 	}, { manual: true });

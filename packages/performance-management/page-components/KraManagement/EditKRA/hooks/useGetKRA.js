@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 function useGetKRA() {
-	const [{ loading, data = {} }, trigger] = useRequest({
+	const [{ loading, data = {} }, trigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/get_kra',
 	}, { manual: true });

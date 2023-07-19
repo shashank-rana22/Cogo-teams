@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 import { formattedDate } from '../../../common/formattedDate';
@@ -25,7 +25,7 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 	const [starRating, setStarRating] = useState(MIN_RATING);
 	const [comments, setCommemts] = useState('');
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_final_rating',
 		method : 'POST',
 	}, { manual: true });

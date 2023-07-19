@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
 const getPayload = ({ filters }) => {
@@ -15,7 +15,7 @@ const getPayload = ({ filters }) => {
 };
 
 function useGetEmployeesWithLowWeightage({ filters }) {
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/get_employees_with_low_weightage',
 		method : 'GET',
 	}, { manual: true });
