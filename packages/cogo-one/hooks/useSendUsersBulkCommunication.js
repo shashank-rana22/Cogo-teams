@@ -4,6 +4,23 @@ import { useRequest } from '@cogoport/request';
 
 import getActiveCardDetails from '../utils/getActiveCardDetails';
 
+const getPayload = ({ selectedAutoAssign = {}, variables = {}, template_name = '' }) => {
+	const recipients = Object.values(selectedAutoAssign || {}).map(
+		(eachChat) => {
+			const { mobile_no = '' } = getActiveCardDetails(eachChat) || {};
+			return mobile_no;
+		},
+	);
+
+	return {
+		recipients,
+		channel     : 'whatsapp',
+		template_name,
+		variables,
+		assign_chat : false,
+	};
+};
+
 function useSendUsersBulkCommunication({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {}, callbackfunc = () => {},
@@ -14,20 +31,8 @@ function useSendUsersBulkCommunication({
 	}, { manual: true, autoCancel: false });
 
 	const bulkCommunicationChat = async ({ selectedAutoAssign = {}, variables = {}, template_name = '' }) => {
-		const recipients = Object.values(selectedAutoAssign || {}).map((eachChat) => {
-			const {	mobile_no = '' } = getActiveCardDetails(eachChat) || {};
-			return mobile_no;
-		});
-
 		try {
-			await trigger({
-				data: {
-					recipients,
-					channel: 'whatsapp',
-					template_name,
-					variables,
-				},
-			});
+			await trigger({ data: getPayload({ selectedAutoAssign, variables, template_name }) });
 
 			Toast.success('Successfully Template Send');
 		} catch (error) {
