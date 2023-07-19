@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
@@ -25,13 +27,14 @@ const useGetSailingSchedulePortPairCoverage = ({
 					page                : 1,
 				},
 			});
-		} catch (error) {
-			console.log(error);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 
 	useEffect(() => {
 		getSailingSchedulePortPairCoverageData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {

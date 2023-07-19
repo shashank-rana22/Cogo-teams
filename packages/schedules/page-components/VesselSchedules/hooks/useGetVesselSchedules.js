@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -34,13 +36,14 @@ const useGetVesselSchedules = ({ filters }) => {
 			await trigger({
 				params: payload,
 			});
-		} catch (err) {
-			console.log(err);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 
 	useEffect(() => {
 		makeRequest();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters]);
 	return {
 		data       : data?.list,

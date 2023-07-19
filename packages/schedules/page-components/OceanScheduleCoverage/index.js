@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function OceanScheduleCoverage() {
 	const ACTIVE_TAB = 'ocean_schedule_coverage';
-	const router = useRouter;
+	const router = useRouter();
 	const handleTabChange = (tab) => {
 		if (tab !== 'ocean_schedule_coverage') {
 			const route = tab.replace(/_/g, '-');

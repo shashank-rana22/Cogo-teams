@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -10,7 +12,7 @@ const useListServiceLanes = ({ filters }) => {
 		{ manual: true },
 	);
 
-	const { page = 1, sort_by, q, origin_port_id, destination_port_id, ...restFilters } = filters;
+	const { page = 1, sort_by, q, origin_port_id, destination_port_id, shipping_line_id } = filters;
 	const listServiceLanes = async () => {
 		try {
 			const payload = {
@@ -18,7 +20,7 @@ const useListServiceLanes = ({ filters }) => {
 					q                   : q || undefined,
 					origin_port_id      : origin_port_id || undefined,
 					destination_port_id : destination_port_id || undefined,
-					...restFilters,
+					shipping_line_id    : shipping_line_id || undefined,
 				},
 				page_limit               : 10,
 				page,
@@ -29,13 +31,14 @@ const useListServiceLanes = ({ filters }) => {
 			await trigger({
 				params: payload,
 			});
-		} catch (error) {
-			console.log(error);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 
 	useEffect(() => {
 		listServiceLanes();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters)]);
 
 	return {

@@ -8,7 +8,7 @@ function VesselScheduleCard({ vessel, loading }) {
 		<div className={styles.card}>
 			<Upper vessel={vessel} loading={loading} />
 			<Middle vessel_schedule_link={vessel?.vessel_schedule_link} loading={loading} />
-			<Lower vessel={vessel} />
+			<Lower vessel={vessel} loading={loading} />
 		</div>
 	);
 }

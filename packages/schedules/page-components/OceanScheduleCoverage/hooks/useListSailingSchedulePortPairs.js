@@ -1,3 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
@@ -27,13 +30,14 @@ const useListSailingSchedulePortPairs = ({ filters, currentPage }) => {
 					page_limit : 15,
 				},
 			});
-		} catch (error) {
-			console.log(error);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 
 	useEffect(() => {
 		getListSailingSchedulePortPairData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters), currentPage]);
 
 	return {

@@ -7,8 +7,8 @@ import VesselSchedulesList from './VesselSchedulesList';
 
 function VesselSchedule() {
 	const ACTIVE_TAB = 'vessel_schedules';
-	const [showModal, setShowModal] = useState(false);
 	const router = useRouter();
+	const [showModal, setShowModal] = useState(false);
 	const handleTabChange = (tab) => {
 		if (tab !== 'vessel_schedules') {
 			const route = tab.replace(/_/g, '-');

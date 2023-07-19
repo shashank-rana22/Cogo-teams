@@ -72,7 +72,6 @@ function PopoverContent({ setFilters, setShowPopover }) {
 						isClearable
 						className={styles.filter_select}
 						{...originPortOptions}
-						valueKey="port_code"
 						placeholder="Origin Port"
 						value={popoverFilters?.origin_port_id}
 						onChange={(value) => handlePopoverFilter(value, 'origin_port_id')}
@@ -82,7 +81,6 @@ function PopoverContent({ setFilters, setShowPopover }) {
 						isClearable
 						className={styles.filter_select}
 						{...destinationPortOptions}
-						valueKey="port_code"
 						placeholder="Destination Port"
 						value={popoverFilters?.destination_port_id}
 						onChange={(value) => handlePopoverFilter(value, 'destination_port_id')}

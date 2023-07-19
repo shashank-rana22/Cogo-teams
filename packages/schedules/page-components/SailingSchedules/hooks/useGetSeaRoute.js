@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -19,8 +21,8 @@ const useGetSeaRoute = ({ origin_port_id, destination_port_id }) => {
 					// enable_sea_route_processing: true,
 				},
 			});
-		} catch (err) {
-			console.error(err?.error?.message);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 
@@ -28,6 +30,7 @@ const useGetSeaRoute = ({ origin_port_id, destination_port_id }) => {
 		if (origin_port_id && destination_port_id) {
 			getOceanRoute();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [origin_port_id, destination_port_id]);
 
 	return {

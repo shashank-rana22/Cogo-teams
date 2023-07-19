@@ -2,9 +2,6 @@
 	display: flex;
 	gap: 30px;
 	justify-content: center;
-	display: flex;
-	gap: 30px;
-	justify-content: center;
 }
 
 .left,
@@ -19,27 +16,17 @@
 
 .left {
 	justify-content: right;
-	justify-content: right;
 }
 
 .right {
-	justify-content: left;
 	justify-content: left;
 }
 
 .middle {
 	position: relative;
-	position: relative;
 }
 
 .circle {
-	position: absolute;
-	top: calc(50% - 8px);
-	left: calc(50% - 8px);
-	width: 16px;
-	height: 16px;
-	background-color: #acdadf;
-	border-radius: 50%;
 	position: absolute;
 	top: calc(50% - 8px);
 	left: calc(50% - 8px);
@@ -61,17 +48,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
 }
 
 .eta,
 .etd {
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 150%;
-	color: #828282;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 150%;
@@ -85,18 +65,9 @@
 	font-weight: 600;
 	color: #221f20;
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-	font-size: 16px;
-	font-weight: 600;
-	color: #221f20;
-	cursor: pointer;
 }
 
 .port_terminal {
-	font-size: 14px;
-	font-weight: 400;
-	color: #4f4f4f;
 	font-size: 14px;
 	font-weight: 400;
 	color: #4f4f4f;
@@ -113,20 +84,16 @@
 
 .vertical_dots {
 	margin-left: 10px;
-.vertical_dots {
-	margin-left: 10px;
-}
 
-.popover_content {
-	:global {
-		.tippy-content {
-			padding: 0 !important;
-		}
+	.vertical_dots {
+		margin-left: 10px;
 	}
-	:global {
-		.tippy-content {
-			padding: 0 !important;
+
+	.popover_content {
+		:global {
+			.tippy-content {
+				padding: 0 !important;
+			}
 		}
 	}
 }
-
