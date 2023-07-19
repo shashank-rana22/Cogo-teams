@@ -8,9 +8,8 @@ import getConfigs from '../../configurations/get-configs';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const MIN_LENGTH = 1;
-const FIRST_CHAR = 0;
-const SLICE_FROM = 1;
+const INITIAL_LENGTH = 1;
+const SLICE_VALUE = 1;
 
 function Details({ serviceData = [] }) {
 	const {
@@ -58,7 +57,7 @@ function Details({ serviceData = [] }) {
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>
 
-			{Object.keys(SERVICE_INITIAL_KEYS).length > MIN_LENGTH ? (
+			{Object.keys(SERVICE_INITIAL_KEYS).length > INITIAL_LENGTH ? (
 				<div className={cl`${styles.multiservices_heading} ${styles[state]}`}>
 					{(Object.keys(SERVICE_INITIAL_KEYS)).map((val) => (
 						<Button
@@ -73,13 +72,14 @@ function Details({ serviceData = [] }) {
 							{' '}
 							|
 							{' '}
-							{SERVICE_INITIAL_KEYS[val].container_type.charAt(FIRST_CHAR).toUpperCase()
-							+ SERVICE_INITIAL_KEYS[val].container_type.slice(SLICE_FROM)}
+							{SERVICE_INITIAL_KEYS[val].container_type
+								.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
+							+ SERVICE_INITIAL_KEYS[val].container_type.slice(SLICE_VALUE)}
 							{' '}
 							|
 							{' '}
-							{SERVICE_INITIAL_KEYS[val].commodity.charAt(FIRST_CHAR).toUpperCase()
-							+ SERVICE_INITIAL_KEYS[val].commodity.slice(SLICE_FROM)}
+							{SERVICE_INITIAL_KEYS[val].commodity.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase()
+							+ SERVICE_INITIAL_KEYS[val].commodity.slice(SLICE_VALUE)}
 						</Button>
 					))}
 				</div>
