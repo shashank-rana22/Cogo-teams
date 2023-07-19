@@ -222,6 +222,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
+			shipment_data={shipment_data}
 			isLastStep={currentStep === steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}

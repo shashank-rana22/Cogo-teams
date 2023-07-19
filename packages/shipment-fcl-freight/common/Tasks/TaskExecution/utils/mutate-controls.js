@@ -4,11 +4,23 @@ const mutateControls = (
 	task,
 	shipment_data,
 	formValues,
+	getOptions,
+	subCommodityOptions,
 ) => {
+	const options = getOptions();
 	let finalControls = [];
 
 	(controls || []).forEach((control) => {
 		const newControl = control;
+
+		if (control?.name === 'commodity_category') {
+			newControl.options = options;
+			newControl.value = shipment_data?.commodity_category;
+		}
+
+		if (control?.name === 'commodity_subtype') {
+			newControl.options = subCommodityOptions;
+		}
 
 		if (control?.name === 'shipper_contact_status') {
 			if (shipment_data?.shipper_contact_status === 'pending') {

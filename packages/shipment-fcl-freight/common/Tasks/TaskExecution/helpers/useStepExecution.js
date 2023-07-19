@@ -12,18 +12,23 @@ function useStepExecution({
 	stepConfig = {},
 	getApisData = {},
 	selectedMail = {},
+	setCommodityDetails = () => {},
+	subCommodityOptions,
+	commodityTypeOptions,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const populatedControls = populateControls(stepConfig.controls);
 
-	const valueInjectedControls = injectValues(
+	const valueInjectedControls = injectValues({
 		selectedMail,
 		populatedControls,
 		task,
 		getApisData,
+		shipment_data,
 		stepConfig,
-	);
+		setCommodityDetails,
+	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
 
@@ -38,6 +43,8 @@ function useStepExecution({
 		task,
 		shipment_data,
 		getApisData,
+		commodityTypeOptions,
+		subCommodityOptions,
 	});
 
 	return {
