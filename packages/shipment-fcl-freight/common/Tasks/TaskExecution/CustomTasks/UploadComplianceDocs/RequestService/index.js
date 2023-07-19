@@ -10,7 +10,7 @@ import requestedDocsList from '../utils/requestDocsList.json';
 
 import styles from './styles.module.css';
 
-function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
+function RequestService({ task = {}, uploadedDocsRefetch = () => {}, totalDocsList = [] }) {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
@@ -21,7 +21,10 @@ function RequestService({ task = {}, uploadedDocsRefetch = () => {} }) {
 	});
 
 	const DOCS_LIST = [];
-	requestedDocsList?.forEach((resultItem) => {
+	const exculdeDocs = totalDocsList?.map((t) => JSON.parse(t.data)?.doc_code);
+	const finaList = requestedDocsList?.filter((doc) => !exculdeDocs.includes(doc.doc_code));
+
+	finaList?.forEach((resultItem) => {
 		const obj = {
 			value: resultItem.doc_code, label: resultItem.doc_name,
 		};
