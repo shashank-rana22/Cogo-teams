@@ -13,11 +13,11 @@ function ShowEmailContent({
 	openView = false,
 	setOpenView = () => {},
 }) {
-	const { list, loading } = useListCommunication({ taskId });
+	const { list = [], loading = false } = useListCommunication({ taskId });
 
 	const handleClose = () => {
 		setOpenView(false);
-		setTaskId(null);
+		setTaskId('');
 	};
 
 	const renderContent = () => {
@@ -37,6 +37,7 @@ function ShowEmailContent({
 			className={styles.modal_container}
 			show={openView}
 			onClose={handleClose}
+			closeOnOuterClick
 		>
 			<Modal.Header />
 			<Modal.Body>

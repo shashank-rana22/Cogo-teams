@@ -46,6 +46,7 @@ function Card({
 
 				{task?.status === 'completed' && task?.assigned_stakeholder === 'system' && (
 					<Button
+						type="button"
 						className={styles.view_button}
 						onClick={handleEmail}
 					>
@@ -61,7 +62,14 @@ function Card({
 				/>
 			</div>
 
-			{openView && <ShowEmailContent taskId={taskId} task={task} openView={openView} setOpenView={setOpenView} />}
+			{openView && (
+				<ShowEmailContent
+					taskId={taskId}
+					setTaskId={setTaskId}
+					openView={openView}
+					setOpenView={setOpenView}
+				/>
+			)}
 		</div>
 	);
 }
