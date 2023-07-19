@@ -1,9 +1,8 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useListDefaultTypes = ({ raiseTicketModal = {} }) => {
-	const { source = '', data:{ formattedData = {} } } = raiseTicketModal || {};
-	const { category = '', sub_category = '' } = formattedData || {};
+const useListDefaultTypes = ({ shipmentData = {} }) => {
+	const { category = '', sub_category = '' } = shipmentData || {};
 
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/default_types',
@@ -25,15 +24,13 @@ const useListDefaultTypes = ({ raiseTicketModal = {} }) => {
 	}, [category, sub_category, trigger]);
 
 	useEffect(() => {
-		if (source === 'transactional_activity') {
-			getDefaultTypes();
-		}
-	}, [getDefaultTypes, source]);
+		getDefaultTypes();
+	}, [getDefaultTypes]);
 
 	return {
 		getDefaultTypes,
-		typesLoading : loading,
-		data         : data?.items || {},
+		typesLoading          : loading,
+		ticketDefaultTypeData : data?.items || {},
 	};
 };
 export default useListDefaultTypes;

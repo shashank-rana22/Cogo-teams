@@ -1,4 +1,4 @@
-import { Button, Tooltip, cl } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow, IcCFtick, IcMArrowDown } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -7,6 +7,7 @@ import { format, startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import RaiseTicketModal from '../../../../../common/RaiseTicketModal';
 import { USER_ACTIVITY_KEYS_MAPPING } from '../../../../../constants/USER_ACTIVITY_KEYS_MAPPING';
 
 import styles from './styles.module.css';
@@ -15,7 +16,7 @@ const DEFAULT_LENGTH_OF_MILESTONE_ACTIVITY = 0;
 const REMOVE_LENGTH_OF_MILESTONE_ACTIVITY = 1;
 const MAX_LENGTH_OF_MILESTONE_ACTIVITY = 1;
 
-function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () => {} }) {
+function TransactionalActivity({ transactional = {} }) {
 	const router = useRouter();
 
 	const { userId } = useSelector(({ profile }) => ({
@@ -53,7 +54,7 @@ function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () =>
 	return (
 		<div>
 			{(list || []).map((item) => {
-				const { id = '', shipment_type = '', trade_type = '' } = item || {};
+				const { id = '', shipment_type = '', trade_type = '', importer_exporter_id = '' } = item || {};
 				const viewCheck = viewDetails === id;
 				const services = shipment_type;
 				const { origin = '', destination = '' } = USER_ACTIVITY_KEYS_MAPPING[services] || {};
@@ -75,11 +76,12 @@ function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () =>
 
 				const { name:destination_name = '', port_code:destination_port_code = '' } = destination_port || {};
 
-				const FORMATTED_DATA = {
+				const SHIPMENT_FORMATTED_DATA = {
 					category     : shipment_type,
 					sub_category : trade_type,
 					shipment_id  : serial_id,
 					user_id      : userId,
+					importer_exporter_id,
 				};
 
 				return (
@@ -107,17 +109,7 @@ function TransactionalActivity({ transactional = {}, setRaiseTicketModal = () =>
 											{' '}
 											{serial_id}
 										</div>
-										<Button
-											size="xs"
-											tabIndex={0}
-											onClick={() => setRaiseTicketModal({
-												state  : true,
-												data   : { formattedData: FORMATTED_DATA } || {},
-												source : 'transactional_activity',
-											})}
-										>
-											Raise Ticket
-										</Button>
+										<RaiseTicketModal shipmentData={SHIPMENT_FORMATTED_DATA} />
 									</div>
 
 									<div className={styles.port_pair}>
