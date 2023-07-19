@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+
+	path {
+		color: #000;
+	}
+}
+
+.location_details {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 6px;
+}
+
+.date {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.port_label {
+	font-weight: 400;
+	color: #828282;
+}
+
+.flex {
+	display: flex;
+	margin-top: 10px;
+}
+
+.bold {
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+.service_type {
+	margin-top: 12px;
+	font-weight: 600;
+}

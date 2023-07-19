@@ -1,0 +1,34 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	margin-top: 32px;
+	background-color: #fbffff;
+	border: 1px solid #e0efef;
+	border-radius: 8px;
+}
+
+.validity_time {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	white-space: nowrap;
+
+	.hidden {
+		display: none;
+	}
+
+	.visible {
+		margin-left: 6px;
+		font-weight: 600;
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.button_container {
+	display: flex;
+}

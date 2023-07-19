@@ -1,5 +1,6 @@
 import { CheckboxGroupController } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -10,26 +11,30 @@ import getDistinctOptions from '../../../../../helpers/getDistinctOptions';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 const geo = getGeoConstants();
 
-function CheckboxLabel({ item }) {
+function CheckboxLabel({ item = {} }) {
+	const { name = '', email = '' } = item;
+
 	return (
 		<div className={styles.label_container}>
-			<div className={styles.name}>{startCase(item?.name)}</div>
-			<div className={styles.email}>{item.email}</div>
+			<div className={styles.name}>{startCase(name)}</div>
+			<div className={styles.email}>{email}</div>
 		</div>
 	);
 }
 
 function SelectRecipients({
-	organization,
-	selected,
+	organization = {},
+	selected = '',
 	emailPreviews = {},
-	recipientsControl: control,
-	setValue,
-	recipientWatch,
-	orgUsersData,
-	emailWatch,
+	recipientsControl: control = {},
+	setValue = () => {},
+	recipientWatch = '',
+	orgUsersData = {},
+	emailWatch = '',
 	emailContent = {},
 }) {
 	const {
@@ -64,8 +69,6 @@ function SelectRecipients({
 			sales_agent_ids : [user_profile?.id],
 		},
 	};
-
-	console.log('selected', emailPreviews);
 
 	const [{ data: salesOkamApiData = {} }] = useRequest({
 		method : 'get',
@@ -129,7 +132,7 @@ function SelectRecipients({
 						</div>
 
 						<CheckboxGroupController
-							{...(controls[0])}
+							{...(controls[GLOBAL_CONSTANTS.zeroth_index])}
 							options={recipients || []}
 							id="checkout_send_emails_users_ids_select"
 							control={control}
@@ -143,7 +146,7 @@ function SelectRecipients({
 							CC:
 						</div>
 						<CheckboxGroupController
-							{...(controls[1])}
+							{...(controls[ONE])}
 							options={[
 								...(recipients || []).filter(
 									(item) => !(recipientWatch().user_ids || []).includes(item.user_id),

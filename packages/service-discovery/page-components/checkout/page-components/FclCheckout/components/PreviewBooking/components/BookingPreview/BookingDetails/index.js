@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function BookingDetails({ setShowBreakup = () => {} }) {
+function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 	const {
 		detail = {},
 		rate = {},
@@ -65,7 +65,7 @@ function BookingDetails({ setShowBreakup = () => {} }) {
 		},
 		{
 			key       : 'view_details',
-			label     : 'View Details & Break Up',
+			label     : showBreakup ? 'Hide Details & Break Up' : 'View Details & Break Up',
 			themeType : 'link',
 			style     : { marginLeft: '36px' },
 			onClick   : handleShowDetails,

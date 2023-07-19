@@ -213,6 +213,10 @@ const GLOBAL_CONSTANTS = {
 		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		risk_free:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png',
+		empty_list           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg',
+		pie_chart_loader     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
 		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
 		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
 		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
@@ -249,6 +253,8 @@ const GLOBAL_CONSTANTS = {
 		bi_amendment_s2c_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/bi_amendment-s2c',
 		no_of_bi_s2c_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_of_bi-s2c',
 		ip_empty_state_s2c_png       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ip_empty_icon_s2c',
+		kyc_pending_png:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -344,6 +350,8 @@ const GLOBAL_CONSTANTS = {
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		gst_number                        : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

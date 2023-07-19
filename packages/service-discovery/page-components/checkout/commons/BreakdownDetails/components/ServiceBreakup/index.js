@@ -4,10 +4,10 @@ import styles from './styles.module.css';
 
 function ServiceBreakup({
 	item = {},
-	index,
-	detail,
-	rate,
-	setRateDetails,
+	index = 0,
+	detail = {},
+	rate = {},
+	setRateDetails = () => {},
 	fclLocalEmpty,
 	shouldEditMargin,
 	disableForm,
@@ -18,9 +18,19 @@ function ServiceBreakup({
 		);
 	}
 
+	const { line_items = [] } = item;
+
+	const finalLineItems = line_items.reduce((acc, cur) => {
+		if (acc.map((lineItem) => lineItem.code).includes(cur.code)) {
+			return acc;
+		}
+
+		return [...acc, cur];
+	}, []);
+
 	return (
 		<div className={styles.container}>
-			{(item?.line_items || []).map((lineItem, itemIndex) => (
+			{finalLineItems.map((lineItem, itemIndex) => (
 				<RenderLineItem
 					key={lineItem?.product_code}
 					lineItem={lineItem}

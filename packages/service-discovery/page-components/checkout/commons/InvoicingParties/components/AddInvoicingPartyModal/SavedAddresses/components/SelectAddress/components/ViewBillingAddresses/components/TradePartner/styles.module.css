@@ -1,0 +1,107 @@
+.container {
+	padding: 12px;
+	margin-top: 20px;
+	border: 1px solid #cfeaed;
+	border-radius: 8px;
+}
+
+.main_container {
+	display: flex;
+	flex-direction: column;
+	padding: 12px;
+	cursor: pointer;
+
+	&:hover {
+		background: #f6f5fe;
+		border-radius: 4px;
+	}
+
+	&.active {
+		background-color: #fff7f0;
+		border: 1px solid #ffd4aa;
+	}
+
+	&.disabled {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+.address_container {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.gst_number {
+	margin: 0;
+	font-size: 10px;
+	font-weight: 400;
+	color: #000;
+}
+
+.tag_container {
+	display: flex;
+	align-items: center;
+	margin-left: 4px;
+	font-size: 8px;
+
+	&.sez {
+		margin-left: 8px;
+	}
+
+	:global {
+		.ui_pill_container {
+			border-radius: 16px;
+
+			&.rejected {
+				color: #fff;
+				background: #ed9d8e;
+			}
+
+			&.pending {
+				color: #d6b300;
+				background: #fef199;
+			}
+
+			&.verified {
+				color: #6c8830;
+				background: #ddebc0;
+			}
+
+			&.pending_from_approval {
+				background: #f0dc29;
+			}
+		}
+
+		.ui_pill_text {
+			font-size: 10px;
+			font-weight: 600;
+			color: unset;
+			text-transform: uppercase;
+		}
+	}
+}
+
+.label {
+	display: flex;
+	align-items: center;
+}
+
+.business_name {
+	padding-left: 10px;
+	margin: 0;
+	font-weight: 700;
+	color: #333;
+}
+
+.button_container {
+	padding-left: 10px;
+	margin-top: 12px;
+}

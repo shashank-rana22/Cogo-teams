@@ -1,0 +1,12 @@
+[
+	{
+		"type": "select",
+		"optionsListKey": "trade-parties",
+		"name": "organization_trade_party_id",
+		"label": "Invoicing Party",
+		"caret": true,
+		"rules": { "required": true },
+		"defaultOptions": true,
+		"span": 6
+	}
+]

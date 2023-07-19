@@ -16,8 +16,8 @@ const redirectUrl = (type) => {
 };
 
 function AccordionTitle({
-	agreeTandC,
-	setAgreeTandC,
+	agreeTandC = false,
+	setAgreeTandC = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -67,9 +67,9 @@ function AccordionTitle({
 }
 
 function ServiceTerms({
-	detail,
-	agreeTandC,
-	setAgreeTandC,
+	detail = {},
+	agreeTandC = false,
+	setAgreeTandC = () => {},
 }) {
 	const { terms_and_conditions: tncList, primary_service } = detail;
 
@@ -96,9 +96,7 @@ function ServiceTerms({
 
 					return (
 						<li key={str}>
-							<span className={styles.text}>
-								{str}
-							</span>
+							<span className={styles.text}>{str}</span>
 						</li>
 					);
 				})}

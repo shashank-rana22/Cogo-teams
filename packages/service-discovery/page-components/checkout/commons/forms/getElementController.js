@@ -9,6 +9,9 @@ import {
 	MultiselectController,
 	MobileNumberController,
 	UploadController,
+	DatepickerController,
+	CheckboxGroupController,
+	CheckboxController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
@@ -23,6 +26,9 @@ const ELEMENT_MAPPING = {
 	'mobile-number-select' : MobileNumberController,
 	text                   : InputController,
 	'file-uploader'        : UploadController,
+	'single-date-picker'   : DatepickerController,
+	checkbox_group         : CheckboxGroupController,
+	checkbox               : CheckboxController,
 };
 
 function getElementController(type) {

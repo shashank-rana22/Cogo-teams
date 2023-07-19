@@ -3,14 +3,14 @@ import PreviewBooking from './components/PreviewBooking';
 import ShipmentExecution from './components/ShipmentExecution';
 
 const COMPONENT_MAPPING = {
-	add_or_edit_margin : EditMargin,
-	preview_booking    : PreviewBooking,
-	shipment_execution : ShipmentExecution,
+	draft                : EditMargin,
+	locked               : PreviewBooking,
+	booking_confirmation : ShipmentExecution,
 
 };
 
-function FclCheckout({ checkoutState = 'shipment_execution' }) {
-	const ActiveComponent = COMPONENT_MAPPING[checkoutState];
+function FclCheckout({ state = 'draft' }) {
+	const ActiveComponent = COMPONENT_MAPPING[state];
 
 	return (
 		<ActiveComponent />

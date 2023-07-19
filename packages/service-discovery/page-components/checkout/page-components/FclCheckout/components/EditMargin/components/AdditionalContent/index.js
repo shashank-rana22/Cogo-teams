@@ -13,7 +13,6 @@ function AdditionalContent({
 	additionalRemark,
 	convenienceDetails,
 	convenience_line_item,
-	setShouldResetMargins,
 }) {
 	const {
 		rate,
@@ -49,7 +48,6 @@ function AdditionalContent({
 				additionalRemark={additionalRemark}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
-				setShouldResetMargins={setShouldResetMargins}
 			/>
 		</div>
 	);

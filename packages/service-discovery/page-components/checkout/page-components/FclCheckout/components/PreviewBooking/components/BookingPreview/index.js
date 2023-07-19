@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const FIRST_INDEX = 0;
 
-function BookingPreview({ rate = {}, setShowBreakup, showBreakup }) {
+function BookingPreview({ rate = {}, setShowBreakup = () => {}, showBreakup = false }) {
 	const [rateDetails, setRateDetails] = useState([]);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[FIRST_INDEX];
@@ -24,7 +24,7 @@ function BookingPreview({ rate = {}, setShowBreakup, showBreakup }) {
 		<div className={styles.container}>
 			<div className={styles.heading}>Booking Preview</div>
 
-			<BookingDetails setShowBreakup={setShowBreakup} />
+			<BookingDetails setShowBreakup={setShowBreakup} showBreakup={showBreakup} />
 
 			{showBreakup ? (
 				<div className={styles.breakdown_details}>

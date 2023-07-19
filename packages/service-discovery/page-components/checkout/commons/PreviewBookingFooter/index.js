@@ -8,10 +8,21 @@ import styles from './styles.module.css';
 
 const SECOND_TO_MILLISECOND = 1000;
 
-function PreviewBookingFooter({ detail }) {
+function PreviewBookingFooter({
+	detail = {},
+	updateCheckout = () => {},
+	updateLoading = false,
+	isVeryRisky = false,
+	agreeTandC = false,
+	cargoDetails = {},
+	additionalRemark = '',
+}) {
 	const timerRef = useRef(null);
 
-	const { validity_end, quotation_email_sent_at = '' } = detail;
+	const {
+		validity_end,
+		id = '',
+	} = detail;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -43,11 +54,14 @@ function PreviewBookingFooter({ detail }) {
 			key       : 'save_for_later',
 		},
 		{
-			label     : quotation_email_sent_at ? 'Place Booking' : 'Share Link',
+			label     : 'Select Invoicing Parties',
 			themeType : 'primary',
 			size      : 'lg',
+			loading   : updateLoading,
+			disabled  : isVeryRisky || !agreeTandC,
 			style     : { marginLeft: '16px' },
 			key       : 'place_booking',
+			onClick   : () => updateCheckout({ values: { id, state: 'booking_confirmation', margin_approval_request_remarks: additionalRemark ? [additionalRemark] : undefined, ...cargoDetails } }),
 		},
 	];
 

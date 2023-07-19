@@ -1,6 +1,7 @@
 import { Input } from '@cogoport/components';
 import { useContext } from 'react';
 
+import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
 import BookingContent from '../../../../../../commons/BookingContent';
 import Cancellation from '../../../../../../commons/Cancellation';
 import CargoDetails from '../../../../../../commons/CargoDetails';
@@ -13,12 +14,15 @@ import { CheckoutContext } from '../../../../../../context';
 import styles from './styles.module.css';
 
 function AdditionalContent({
-	value,
-	onChange,
+	value = '',
+	onChange = () => {},
 	cargoDetails = {},
 	setCargoDetails = () => {},
-	agreeTandC,
-	setAgreeTandC,
+	setIsVeryRisky = () => {},
+	isVeryRisky = false,
+	agreeTandC = false,
+	setAgreeTandC = () => {},
+	additionalRemark = '',
 }) {
 	const {
 		rate,
@@ -26,6 +30,14 @@ function AdditionalContent({
 		primaryService,
 		getCheckout,
 		isChannelPartner,
+		showSendTncEmail,
+		showOverallCreditRisk,
+		kycShowCondition,
+		tncPresent,
+		updateCheckout,
+		updateLoading,
+		orgData,
+		loading,
 	} = useContext(CheckoutContext);
 
 	const { primary_service = '', services = {}, trade_type = '' } = detail || {};
@@ -41,6 +53,20 @@ function AdditionalContent({
 				detail={detail}
 				getCheckout={getCheckout}
 				isChannelPartner={isChannelPartner}
+			/>
+
+			<AdditionalConditions
+				detail={detail}
+				updateCheckout={updateCheckout}
+				updateLoading={updateLoading}
+				tncPresent={tncPresent}
+				showSendTncEmail={showSendTncEmail}
+				showOverallCreditRisk={showOverallCreditRisk}
+				kycShowCondition={kycShowCondition}
+				setIsVeryRisky={setIsVeryRisky}
+				orgData={orgData}
+				getCheckout={getCheckout}
+				loading={loading}
 			/>
 
 			<div className={styles.additional_remark}>
@@ -81,7 +107,15 @@ function AdditionalContent({
 				setAgreeTandC={setAgreeTandC}
 			/>
 
-			<PreviewBookingFooter detail={detail} />
+			<PreviewBookingFooter
+				detail={detail}
+				updateCheckout={updateCheckout}
+				updateLoading={updateLoading}
+				isVeryRisky={isVeryRisky}
+				agreeTandC={agreeTandC}
+				cargoDetails={cargoDetails}
+				additionalRemark={additionalRemark}
+			/>
 		</div>
 	);
 }

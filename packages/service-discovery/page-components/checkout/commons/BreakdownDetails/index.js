@@ -6,7 +6,6 @@ import { useContext, useState, useEffect } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
-import { QuoteLoader } from '../LoadingState';
 
 import AddLineItemModal from './components/AddLineItemModal';
 import ContainerDetails from './components/ContainerDetails';
@@ -25,7 +24,6 @@ function BreakdownDetails({
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
 	convenience_line_item = {},
-	setShouldResetMargins = () => {},
 	source = '',
 }) {
 	const {
@@ -33,7 +31,6 @@ function BreakdownDetails({
 		detail,
 		primaryService,
 		conversions,
-		loading:getCheckoutLoading,
 		getCheckout,
 		shouldEditMargin,
 		checkout_id,
@@ -99,10 +96,6 @@ function BreakdownDetails({
 			};
 		}));
 	}, [rate?.services, setRateDetails]);
-
-	if (getCheckoutLoading && isEmpty(rateDetails)) {
-		return <QuoteLoader />;
-	}
 
 	return (
 		<div>
@@ -175,7 +168,6 @@ function BreakdownDetails({
 							</div>
 						)}
 					>
-
 						{!fclLocalEmpty ? <Header /> : null}
 
 						<ServiceBreakup
@@ -200,7 +192,6 @@ function BreakdownDetails({
 									themeType="tertiary"
 									className={styles.add_line_item}
 									onClick={() => {
-										setShouldResetMargins(false);
 										setAddLineItemData({
 											index,
 											service_type : item?.service_type,
@@ -216,7 +207,6 @@ function BreakdownDetails({
 									themeType="tertiary"
 									className={styles.add_line_item}
 									onClick={() => {
-										setShouldResetMargins(false);
 										setEditLineItemData({
 											index,
 											service_type : item?.service_type,

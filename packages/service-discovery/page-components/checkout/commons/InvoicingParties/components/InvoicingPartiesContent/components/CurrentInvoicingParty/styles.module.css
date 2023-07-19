@@ -1,4 +1,5 @@
 .container {
+	position: relative;
 	padding: 20px;
 	margin: 8px 0 20px;
 	background-color: #fbfbff;
@@ -27,6 +28,29 @@
 
 .flex {
 	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_pill_text {
+			font-weight: 600;
+		}
+	}
+
+	&.self {
+		:global {
+			.ui_pill_text {
+				color: #ee3425;
+			}
+		}
+	}
+
+	&.paying_party {
+		:global {
+			.ui_pill_text {
+				color: #7278ad;
+			}
+		}
+	}
 }
 
 .gst {
@@ -86,4 +110,16 @@
 	font-size: 12px;
 	font-weight: 600;
 	text-align: left;
+}
+
+.icon_container {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	display: flex;
+}
+
+.icon {
+	margin-left: 20px;
+	cursor: pointer;
 }

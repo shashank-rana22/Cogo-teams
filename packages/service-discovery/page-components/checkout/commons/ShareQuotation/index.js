@@ -6,16 +6,18 @@ import { CheckoutContext } from '../../context';
 import useUpdateCheckoutMargin from '../../hooks/useUpdateCheckoutMargin';
 import { transformMargins } from '../../utils/transformMargins';
 
+import LockMarginModal from './LockMarginModal';
 import PocDetails from './PocDetails';
 import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 function ShareQuotation({
 	rateDetails = [],
-	additionalRemark,
+	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
-	setShouldResetMargins,
 }) {
 	const {
 		rate,
@@ -35,11 +37,12 @@ function ShareQuotation({
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [selectedModes, setSelectedModes] = useState([]);
+	const [showLockMarginModal, setShowLockMarginModal] = useState(false);
 
 	const {
 		updateCheckoutMargin,
 		loading,
-	} = useUpdateCheckoutMargin({ getCheckout, setShouldResetMargins, setCheckoutState });
+	} = useUpdateCheckoutMargin({ getCheckout, setCheckoutState });
 
 	const quotationOptions = [
 		{
@@ -58,17 +61,7 @@ function ShareQuotation({
 
 	const { quotation_email_sent_at = '' } = detail || {};
 
-	const updateQuote = async () => {
-		if (quotation_email_sent_at) {
-			updateCheckout({
-				values        : { state: 'preview_booking', id: checkout_id },
-				closeFunction : setCheckoutState,
-				stateValue    : 'preview_booking',
-			});
-
-			return;
-		}
-
+	const updateQuotation = async () => {
 		const marginValues = rateDetails.reduce((acc, curr) => {
 			const { id = '', line_items = [] } = curr;
 
@@ -110,15 +103,26 @@ function ShareQuotation({
 			margin_approval_request_remarks         : additionalRemark ? [additionalRemark] : undefined,
 		};
 
-		updateCheckoutMargin({ finalPayload });
+		await updateCheckoutMargin({ finalPayload });
+
+		setShowLockMarginModal(false);
+		setShowShareQuotationModal(true);
+	};
+
+	const updateState = () => {
+		updateCheckout({
+			values        : { state: 'locked', id: checkout_id },
+			closeFunction : setCheckoutState,
+			stateValue    : 'preview_booking',
+		});
 	};
 
 	const getModalSize = () => {
-		if (selectedModes.includes('email') && selectedModes.length > 1) {
+		if (selectedModes.includes('email') && selectedModes.length > ONE) {
 			return { size: 'xl', widths: { email: '65%', message: '35%' } };
 		}
 
-		if (selectedModes.includes('email') && selectedModes.length === 1) {
+		if (selectedModes.includes('email') && selectedModes.length === ONE) {
 			return { size: 'xl', widths: { email: '100%', message: '0%' } };
 		}
 
@@ -139,7 +143,7 @@ function ShareQuotation({
 			key             : 'share_quotation',
 			label           : 'Share Quotation',
 			themeType       : 'secondary',
-			onClickFunction : () => setShowShareQuotationModal(true),
+			onClickFunction : () => setShowLockMarginModal(true),
 			style           : { marginLeft: '20px' },
 			disabled        : isEmpty(selectedModes),
 			loading         : false,
@@ -149,8 +153,9 @@ function ShareQuotation({
 			label           : 'Proceed to Booking',
 			themeType       : 'accent',
 			style           : { marginLeft: '20px' },
-			onClickFunction : updateQuote,
-			loading,
+			disabled        : !quotation_email_sent_at,
+			onClickFunction : updateState,
+			loading         : updateLoading,
 		},
 	];
 
@@ -192,6 +197,15 @@ function ShareQuotation({
 					widths={widths}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
+				/>
+			) : null}
+
+			{showLockMarginModal ? (
+				<LockMarginModal
+					updateQuotation={updateQuotation}
+					showLockMarginModal={showLockMarginModal}
+					setShowLockMarginModal={setShowLockMarginModal}
+					loading={loading}
 				/>
 			) : null}
 

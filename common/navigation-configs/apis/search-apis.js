@@ -405,6 +405,24 @@ const apis = [
 		service_name : 'checkout',
 	},
 	{
+		api          : 'list_checkout_invoices',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'create_checkout_invoice',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'update_checkout_invoice',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
+	{
 		api          : 'create_spot_search_contract',
 		access_type  : 'private',
 		feature      : 'search',
