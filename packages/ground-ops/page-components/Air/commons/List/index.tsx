@@ -52,10 +52,6 @@ function List({
 
 	const { list: userList = [] } = userData;
 
-	useEffect(() => {
-		listUsers();
-	}, [listUsers]);
-
 	const FINAL_DATA = [];
 	(userList || []).forEach((item) => {
 		(shipmentPendingTasks || []).map((itm) => {
@@ -75,13 +71,15 @@ function List({
 		setIsOpen(itm.id);
 	};
 
+	useEffect(() => {
+		listUsers();
+	}, [listUsers]);
+
 	const render = () => {
-		type TypeObject = string | number | Date | null | React.FC ;
 		const finalList = isEmpty(FINAL_DATA) ? shipmentPendingTasks : FINAL_DATA;
-		const showlist:TypeObject = finalList.length ? finalList : Array(6).fill(1);
 
 		if (loading || finalList.length) {
-			return (FINAL_DATA || showlist).map((singleitem) => (
+			return (finalList).map((singleitem) => (
 				<div className="card-list-data" key={singleitem.id}>
 					<ListItem
 						singleitem={singleitem}
