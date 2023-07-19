@@ -3,22 +3,22 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
+interface InvoiceAdditionals {
+	reqAgreementDate?: string
+	reqAgreementNumber?: string
+	reqCancelReason?: string
+	reqDocumentUrl?: string
+}
+interface InvoiceData {
+	invoiceAdditionals?: InvoiceAdditionals
+}
+
 interface IrnCancellationProps {
 	id?: string;
 	entityCode?: string;
 	setShowCancellationModal?: Function;
 	refetch?: Function;
-}
-interface Values {
-	agreementNumber?: string;
-	agreementDate?: string;
-	agreementPdfFile?: AgreementPdfFile;
-	remarks?: string;
-	value?: string;
-}
-
-interface AgreementPdfFile {
-	finalUrl?: string;
+	itemData?: InvoiceData
 }
 
 const useGetIrnCancellation = ({
@@ -26,10 +26,14 @@ const useGetIrnCancellation = ({
 	setShowCancellationModal,
 	refetch,
 	entityCode,
+	itemData = {},
 }: IrnCancellationProps) => {
 	const [response, setResponse] = useState({
-		remarks	: '',
-		value  	: '',
+		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
+		value             : '',
+		agreementDocument : itemData?.invoiceAdditionals?.reqDocumentUrl,
+		agreementNumber   : itemData?.invoiceAdditionals?.reqAgreementNumber,
+		agreementDate     : new Date(itemData?.invoiceAdditionals?.reqAgreementDate),
 	});
 	const [
 		{ loading },
@@ -48,32 +52,28 @@ const useGetIrnCancellation = ({
 	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
 		?.feature_supported?.includes('cancel_e_invoice');
 
-	const onSubmit = async (values: Values) => {
-		const {
-			agreementNumber,
-			agreementDate,
-			agreementPdfFile,
-		} = values || {};
-		const { finalUrl } = agreementPdfFile || {};
-
+	const onSubmit = async () => {
 		try {
-			let PAYLOAD = {};
+			let payload = {};
+
 			if (CANCEL_EINVOICE) {
-				PAYLOAD = {
-					cancelReason      : response?.remarks || undefined,
-					agreementNumber   : agreementNumber || undefined,
-					agreementDate     : agreementDate || undefined,
-					agreementDocument : finalUrl || undefined,
+				payload = {
+					cancelReason      : response?.remarks,
+					agreementDocument : response?.agreementDocument,
+					agreementNumber   : response?.agreementNumber,
+					agreementDate     : response?.agreementDate,
 				};
 			} else if (CANCEL_IRN) {
-				PAYLOAD = {
+				payload = {
 					cancelReason   : response?.value,
 					cancelReminder : response?.remarks,
 				};
 			}
+
 			const resp = await cancelIrnApi({
-				data: PAYLOAD,
+				data: payload,
 			});
+
 			if (resp.status === 200) {
 				Toast.success('IRN Cancelled Successfully');
 				setShowCancellationModal(false);
