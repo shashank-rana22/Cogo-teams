@@ -1,4 +1,4 @@
-import { Button, Modal, Pill } from '@cogoport/components';
+import { Button, Modal, Pill, Tooltip } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -55,7 +55,7 @@ function AwbNumber({
 				)}
 				{singleItem.status === 'available_reserved' && (
 					<>
-						<Pill size="sm" color="green">Reserved</Pill>
+						<Pill size="sm" color="var(--color-tertiary-success-green-2)">Reserved</Pill>
 						<Button
 							themeType="linkUi"
 							onClick={() => {
@@ -64,7 +64,9 @@ function AwbNumber({
 								setChangedStatus('available_reserved');
 							}}
 						>
-							<IcMEdit height={16} width={16} fill="#8B8B8B" />
+							<Tooltip content="Edit" placement="top">
+								<IcMEdit height={16} width={16} fill="#8B8B8B" />
+							</Tooltip>
 						</Button>
 					</>
 				)}

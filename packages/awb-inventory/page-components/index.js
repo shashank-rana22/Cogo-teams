@@ -104,7 +104,7 @@ function AwbInventory() {
 											}}
 											placeholder="Select here..."
 											options={STATUS_VALUE}
-											style={{ width: '250px', margin: '10px' }}
+											className={styles.selectbox}
 											size="sm"
 										/>
 										<Input

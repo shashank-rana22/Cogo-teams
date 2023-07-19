@@ -122,7 +122,7 @@ const awbControls = ({
 		name        : 'awb_type',
 		type        : 'select',
 		label       : 'Type of AWB',
-		placeholder : 'Select',
+		placeholder : 'Select Adhoc/Advance',
 		span        : 6,
 		rules       : {
 			required: true,

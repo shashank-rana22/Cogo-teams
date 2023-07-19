@@ -3,7 +3,7 @@ export const AwbNumberUsedFields = {
 		{
 			key   : 'airline',
 			label : 'Airline Name',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleAirline',
 		},
 		{
@@ -27,7 +27,7 @@ export const AwbNumberUsedFields = {
 		{
 			key   : 'awb_number',
 			label : 'AWB Number',
-			span  : 1.4,
+			span  : 1,
 			func  : 'handleAwbNumber',
 		},
 		{
@@ -45,19 +45,19 @@ export const AwbNumberUsedFields = {
 		{
 			key   : 'service_provider',
 			label : 'Service Provider',
-			span  : 1.4,
+			span  : 1.2,
 			func  : 'handleServiceProvider',
 		},
 		{
 			key   : 'procured_date',
 			label : 'Procured Date',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleDate',
 		},
 		{
 			key   : 'action',
 			label : 'Action',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleAction',
 		},
 	],

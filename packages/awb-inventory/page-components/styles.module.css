@@ -44,3 +44,8 @@
 		height: 80%;
 	}
 }
+
+.selectbox {
+	min-width: 250px;
+	margin: 10px;
+}

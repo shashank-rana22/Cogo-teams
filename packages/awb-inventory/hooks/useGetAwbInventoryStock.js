@@ -25,11 +25,12 @@ const useGetInventoryStock = ({ activeTab, filterData }) => {
 	const awbInventoryStockList = useCallback(() => {
 		(async () => {
 			try {
+				const { airline = '', origin = '', procured = '' } = filterData;
 				await trigger({
 					params: {
-						airlineId    : filterData.airline || undefined,
-						airportId    : filterData.origin || undefined,
-						procuredById : filterData.procured || undefined,
+						airlineId    : airline || undefined,
+						airportId    : origin || undefined,
+						procuredById : procured || undefined,
 						page,
 					},
 				});

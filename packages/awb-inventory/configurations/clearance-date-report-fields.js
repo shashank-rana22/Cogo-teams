@@ -8,7 +8,7 @@ export const ClearanceDateReportFields = {
 		},
 		{
 			key   : 'airport',
-			label : 'Region',
+			label : 'Origin Airport',
 			span  : 1.8,
 			func  : 'handleAirport',
 		},

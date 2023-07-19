@@ -10,15 +10,15 @@
 }
 
 .input_search {
-	width: 280px;
-	height: 32px !important;
+	min-width: 280px;
+	max-height: 32px;
 
 	:global(.ui_input_control) {
 		font-size: var(--font-size-md) !important;
 	}
 
 	:global(.ui_input_suffix) {
-		width: 20px;
+		min-width: 20px;
 		height: 80%;
 	}
 }

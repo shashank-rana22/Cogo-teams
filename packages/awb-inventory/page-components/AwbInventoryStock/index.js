@@ -6,7 +6,7 @@ import useGetInventoryStock from '../../hooks/useGetAwbInventoryStock';
 import useGetClearanceDateReport from '../../hooks/useGetClearanceDateReport';
 import AddAwbNumber from '../AddAwbNumber';
 import AwbInventoryStockReport from '../AwbInventoryStockReport';
-import ClearanceDateReportList from '../ClearanceDateReport';
+import ClearanceDateReport from '../ClearanceDateReport';
 import Filters from '../Filters';
 
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ const TABS_COMPONENT_MAPPING = {
 	clearance_date_confirmation: {
 		name      : 'clearance_date_confirmation',
 		title     : 'Clearance Date Confirmation',
-		Component : ClearanceDateReportList,
+		Component : ClearanceDateReport,
 	},
 };
 

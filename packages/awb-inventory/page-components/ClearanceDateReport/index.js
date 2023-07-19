@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Tooltip } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -10,7 +10,7 @@ import EditClearanceDateReport from '../EditClearanceDateReport';
 
 import styles from './styles.module.css';
 
-function ClearanceDateReportList({
+function ClearanceDateReport({
 	loading,
 	setPage,
 	page,
@@ -45,7 +45,9 @@ function ClearanceDateReportList({
 						setShowEdit(true);
 					}}
 				>
-					<IcMEdit height={16} width={16} fill="#8B8B8B" />
+					<Tooltip content="Edit" placement="top">
+						<IcMEdit height={16} width={16} fill="#8B8B8B" />
+					</Tooltip>
 				</Button>
 			</div>
 		),
@@ -54,7 +56,7 @@ function ClearanceDateReportList({
 	const allFunctions = { ...functions, ...otherFunctions };
 
 	return (
-		<div className={styles.awbnumber_container}>
+		<div>
 			<List
 				fields={fields}
 				data={data}
@@ -69,7 +71,6 @@ function ClearanceDateReportList({
 				<Modal
 					show={showEdit}
 					onClose={() => setShowEdit(false)}
-					className={styles.modal_container}
 				>
 					<EditClearanceDateReport
 						item={item}
@@ -83,4 +84,4 @@ function ClearanceDateReportList({
 	);
 }
 
-export default ClearanceDateReportList;
+export default ClearanceDateReport;

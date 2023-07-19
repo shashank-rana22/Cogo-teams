@@ -5,7 +5,6 @@ const controls = (setFilter) => [
 		asyncKey    : 'list_locations',
 		placeholder : 'Origin Airport',
 		span        : 2,
-		initialCall : false,
 		isClearable : true,
 		onChange    : (obj) => setFilter((prev) => ({ ...prev, origin: obj })),
 		params      : {
@@ -19,7 +18,6 @@ const controls = (setFilter) => [
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		placeholder : 'Airline',
-		initialCall : false,
 		isClearable : true,
 		onChange    : (obj) => setFilter((prev) => ({ ...prev, airline: obj })),
 		span        : 2,
@@ -30,7 +28,6 @@ const controls = (setFilter) => [
 		asyncKey    : 'partner_users',
 		placeholder : 'Procured by agent',
 		valueKey    : 'user_id',
-		initialCall : false,
 		isClearable : true,
 		onChange    : (obj) => setFilter((prev) => ({ ...prev, procured: obj })),
 		span        : 2,

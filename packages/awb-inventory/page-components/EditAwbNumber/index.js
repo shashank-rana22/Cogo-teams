@@ -16,8 +16,8 @@ function EditAwbNumber({
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	useEffect(() => {
-		awbControls.forEach((c) => {
-			setValue(c.name, item[c.name] || c?.value);
+		awbControls.forEach((controlFields) => {
+			setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
 		});
 		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
 	// eslint-disable-next-line react-hooks/exhaustive-deps

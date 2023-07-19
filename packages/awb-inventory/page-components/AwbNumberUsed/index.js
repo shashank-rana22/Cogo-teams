@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -79,7 +79,9 @@ function AwbNumberUsed({
 						setChangedStatus('used');
 					}}
 				>
-					<IcMEdit height={16} width={16} fill="#8B8B8B" />
+					<Tooltip content="Edit" placement="top">
+						<IcMEdit height={16} width={16} fill="#8B8B8B" />
+					</Tooltip>
 				</Button>
 				<Button
 					themeType="linkUi"
@@ -89,7 +91,9 @@ function AwbNumberUsed({
 						setChangedStatus('cancelled');
 					}}
 				>
-					<IcMDelete height={16} width={16} fill="#8B8B8B" />
+					<Tooltip content="Cancel" placement="top">
+						<IcMDelete height={16} width={16} fill="#8B8B8B" />
+					</Tooltip>
 				</Button>
 			</div>
 		),

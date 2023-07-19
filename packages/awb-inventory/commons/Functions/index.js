@@ -41,19 +41,19 @@ export const functions = {
 		const { originAirport, originAirportCode } = singleItem || {};
 		return (
 			`(${originAirportCode}) ${originAirport}`
-		) || '-';
+		);
 	},
 	handleDestLocation: (singleItem) => {
 		const { destinationAirport } = singleItem || {};
-		return (destinationAirport) || '-';
+		return (destinationAirport);
 	},
 	handleAgent: (singleItem) => {
 		const { procuredByName = {} } = singleItem || {};
-		return procuredByName || '-';
+		return procuredByName;
 	},
 	handleServiceProvider: (singleItem) => {
 		const { serviceProviderName } = singleItem || {};
-		return serviceProviderName || '-';
+		return serviceProviderName;
 	},
 	handleDate: (singleItem) => {
 		const { procuredDate } = singleItem || {};
@@ -65,38 +65,38 @@ export const functions = {
 					formatType : 'date',
 				})}
 			</div>
-		) || '-';
+		);
 	},
 	handleTotalStock: (singleItem) => {
 		const { totalStock } = singleItem || {};
-		return totalStock || '-';
+		return totalStock;
 	},
 	handleUsedStock: (singleItem) => {
 		const { usedStock } = singleItem || {};
-		return usedStock || '-';
+		return usedStock;
 	},
 	handleUnusedStock: (singleItem) => {
 		const { unusedStock } = singleItem || {};
-		return unusedStock || '-';
+		return unusedStock;
 	},
 	handleCancelledStock: (singleItem) => {
 		const { cancelledStock } = singleItem || {};
-		return cancelledStock || '-';
+		return cancelledStock;
 	},
 	handleCustomClearanceDate: (singleItem) => {
 		const { customClearanceDate } = singleItem || {};
-		return customClearanceDate || '-';
+		return customClearanceDate;
 	},
 	handleBookingDate: (singleItem) => {
 		const { bookingDate } = singleItem || {};
-		return bookingDate || '-';
+		return bookingDate;
 	},
 	handleAwbNumber: (singleItem) => {
 		const { awbNumber } = singleItem || {};
-		return awbNumber || '-';
+		return awbNumber;
 	},
 	handleIataCode: (singleItem) => {
 		const { iataCode } = singleItem || {};
-		return iataCode || '-';
+		return iataCode;
 	},
 };

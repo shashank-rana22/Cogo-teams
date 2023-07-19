@@ -16,8 +16,8 @@ function EditClearanceDateReport({
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	useEffect(() => {
-		editClearanceDateReportContols.forEach((c) => {
-			setValue(c.name, item[c.name] || c?.value);
+		editClearanceDateReportContols.forEach((controlFields) => {
+			setValue(controlFields.name, item[controlFields.name] || controlFields?.value);
 		});
 		setValue('procured_date', item?.procured_date ? new Date(item?.procured_date) : new Date());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,13 +36,13 @@ function EditClearanceDateReport({
 					size="md"
 					themeType="secondary"
 					onClick={() => setShowEdit(false)}
-					style={{ marginRight: 12 }}
+					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>
 				<Button
 					size="md"
-					onClick={handleSubmit((finalData) => editClearanceDateReport(finalData))}
+					onClick={handleSubmit(editClearanceDateReport)}
 					disabled={loading}
 				>
 					{loading ? 'Updating' : 'Update'}

@@ -31,7 +31,7 @@ const clearance_date_report_controls = [
 		span        : 6,
 		params      : {
 			filters: {
-				type: ['airport', 'country'],
+				type: ['airport'],
 			},
 		},
 	},

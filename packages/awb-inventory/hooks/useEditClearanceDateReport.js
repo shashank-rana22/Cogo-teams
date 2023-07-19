@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 import CONSTANTS from '../constants/constants';
@@ -48,10 +49,7 @@ const useEditClearanceDateReport = ({
 				setPage(START_PAGE);
 			}
 		} catch (error) {
-			const { data = {} } = error;
-			const { base = '' } = data || {};
-			const cleanStr = base.replace(/Base/g, '');
-			Toast.error(cleanStr || 'Unable to Edit Clearance Report Details');
+			Toast.error(getApiErrorString(error?.data?.base || 'Unable to Edit Clearance Report Details'));
 		}
 	};
 

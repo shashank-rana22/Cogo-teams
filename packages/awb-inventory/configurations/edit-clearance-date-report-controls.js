@@ -40,7 +40,7 @@ const editClearanceDateReportContols = [
 		span        : 6,
 		params      : {
 			filters: {
-				type: ['airport', 'country'],
+				type: ['airport'],
 			},
 		},
 		isClearable: true,
