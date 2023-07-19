@@ -83,6 +83,18 @@ const TAB_CONFIG = {
 			},
 		},
 	],
+
+	rail_domestic_freight: [
+		{
+			label   : 'Upload Purchase Invoice',
+			value   : 'upload_purchase_invoice',
+			stats   : 'upload_purchase_invoice',
+			payload : {
+				shipment_type : 'rail_domestic_freight',
+				invoice_type  : 'upload_purchase_invoice',
+			},
+		},
+	],
 };
-const TabContainer = () => TAB_CONFIG;
-export default TabContainer;
+const tabContainer = () => TAB_CONFIG;
+export default tabContainer;
