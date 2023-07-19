@@ -222,7 +222,7 @@ const conditionalAddition = (step, shipment_data) => {
 
 const injectDataIntoValues = (step, task, shipment_data, fieldTypeMapping) => {
 	const updatedFieldTypeMapping = { ...fieldTypeMapping };
-	step.controls.forEach((ctrl) => {
+	(step?.controls || []).forEach((ctrl) => {
 		updatedFieldTypeMapping[ctrl.name] = ctrl.type;
 	});
 	const newStep = {
