@@ -1,89 +1,79 @@
-import { Modal, Input, Pagination, Toggle } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Modal, Input, Pagination, Select, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { collection, query, limit, getDocs, updateDoc, doc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { FIRESTORE_PATH } from '../../../configurations/firebase-config';
+import { getIsActive, updateCogooneConstants } from '../../../helpers/configurationHelpers';
+import { formatAgentList } from '../../../helpers/groupAgentsHelpers';
+import useGetOmnichannelAgentTypes from '../../../hooks/useGetOmnichannelAgentTypes';
 import useListChatAgents from '../../../hooks/useListChatAgents';
 import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
 
-import AgentDetail from './AgentDetail';
+import GroupedAgents from './GroupedAgents';
 import styles from './styles.module.css';
 
-const FIREBASE_QUERY_LIMIT = 1;
-const ARRAY_LENGTH = 8;
-
-const getIsActive = async (firestore) => {
-	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
-
-	const constantsQuery = await query(constantCollection, limit(FIREBASE_QUERY_LIMIT));
-	const cogoOneConstants = await getDocs(constantsQuery);
-	const cogoOneConstantsDocs = cogoOneConstants?.docs[GLOBAL_CONSTANTS.zeroth_index];
-	const { is_locked_screen = false } = cogoOneConstantsDocs?.data() || {};
-	return is_locked_screen;
-};
-
-const updateRoom = async ({ firestore, value }) => {
-	const constantRoom = collection(firestore, FIRESTORE_PATH.cogoone_constants);
-
-	const roomsQuery = await query(constantRoom, limit(FIREBASE_QUERY_LIMIT));
-	const docs = await getDocs(roomsQuery);
-	const roomId = docs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
-
-	const docRef = doc(
-		firestore,
-		`${FIRESTORE_PATH.cogoone_constants}/${roomId}`,
-	);
-
-	updateDoc(docRef, { is_locked_screen: value });
-};
+const LOADER_COUNT = 8;
 
 function AgentModal({
-	agentDetails = false,
-	setAgentDetails = () => { },
-	firestore,
+	showAgentDetails = false,
+	setShowAgentDetails = () => {},
+	firestore = {},
 }) {
-	const { isLockedBool } = getIsActive(firestore);
-	const [search, setSearch] = useState('');
-	const [isLockedToggle, setIsLockedToggle] = useState(isLockedBool);
+	const [isLockedToggle, setIsLockedToggle] = useState(false);
+
 	const {
 		getListChatAgents = () => { },
 		loading = false,
 		listAgentStatus = {},
-		setPagination = () => { },
-	} = useListChatAgents(search);
+		setPagination = () => {},
+		setSearch = () => {},
+		paramsState = {},
+		setAgentType = () => {},
+	} = useListChatAgents();
 
 	const {
 		updateAgentPreference,
 		createLoading = false,
 	} = useUpdateAgentPreference({ getListChatAgents });
 
+	const { options = [] } = useGetOmnichannelAgentTypes();
+
 	const {
 		list = [],
-		page_limit,
-		total_count,
-		page,
+		page_limit = 10,
+		total_count = 0,
+		page = 0,
 	} = listAgentStatus;
-
-	const modifiedList = loading ? [...Array(ARRAY_LENGTH).keys()] : list || [];
 
 	const onToggle = (e) => {
 		setIsLockedToggle(e?.target?.checked);
-		updateRoom({ firestore, value: e?.target?.checked });
+		updateCogooneConstants({ firestore, value: e?.target?.checked });
 	};
+
+	const modifiedGroupedAgents = loading
+		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
+
+	useEffect(() => {
+		getIsActive({ firestore, setIsLockedToggle });
+	}, [firestore]);
 
 	return (
 		<Modal
 			size="md"
-			show={agentDetails}
-			onClose={() => setAgentDetails(false)}
+			show={showAgentDetails}
+			onClose={() => setShowAgentDetails(false)}
 			placement="center"
 		>
 			<Modal.Header title="Agent Status" />
-			<Modal.Body className={styles.modal_body} key={loading}>
+			<Modal.Body className={styles.modal_body}>
 				<div className={styles.search_switch_toggle_space}>
+					Screen Lock
+					<Toggle
+						onChange={onToggle}
+						checked={isLockedToggle}
+					/>
+				</div>
+				<div className={styles.header_filters}>
 					<Input
 						size="sm"
 						placeholder="Search here"
@@ -91,35 +81,41 @@ function AgentModal({
 						prefix={<IcMSearchlight />}
 						onChange={setSearch}
 					/>
-					<div className={styles.search_switch_toggle_space}>
-						Screen Lock
-						<Toggle
-							onChange={onToggle}
-							checked={isLockedToggle}
-						/>
-					</div>
-				</div>
-				{!isEmpty(modifiedList) ? (modifiedList || []).map(({ name = '', status = '', agent_id = '' }) => (
-					<AgentDetail
-						key={agent_id}
-						createLoading={createLoading}
-						updateAgentPreference={updateAgentPreference}
-						loading={loading}
-						agent={name}
-						status={status}
-						agent_id={agent_id}
+					<Select
+						size="sm"
+						placeholder="Select agent type"
+						className={styles.select_styles}
+						prefix={<IcMSearchlight />}
+						onChange={setAgentType}
+						options={options}
+						value={paramsState?.agentType}
+						isClearable
 					/>
-				)) : <div className={styles.empty_state}>No data found</div>}
+				</div>
+				{!isEmpty(modifiedGroupedAgents)
+					? Object.keys(modifiedGroupedAgents).map((eachType) => (
+						<GroupedAgents
+							key={eachType}
+							groupedList={modifiedGroupedAgents[eachType]}
+							groupName={eachType}
+							createLoading={createLoading}
+							updateAgentPreference={updateAgentPreference}
+							loading={loading}
+						/>
+					))
+					: <div className={styles.empty_state}>No data found</div>}
 			</Modal.Body>
-			<Modal.Footer>
-				<Pagination
-					className={styles.pagination}
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={setPagination}
-				/>
+			<Modal.Footer className={styles.footer_styles}>
+				{!loading && (
+					<Pagination
+						className={styles.pagination}
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={setPagination}
+					/>
+				)}
 			</Modal.Footer>
 		</Modal>
 	);
