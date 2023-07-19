@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters/index.tsx';
+import { INNER_TAB_MAPPING, TAB_NAME } from '../../constants';
 import PayrunButtons from '../PayrunButtons/index';
 
 import getChooseFilterControls from './GetChooseFilterControls';
@@ -40,13 +41,12 @@ function SelectFilters({
 									setFilters={setGlobalFilters}
 									controls={getChooseFilterControls({ activePayrunTab, overseasData, isInvoiceView })}
 								/>
-								{(['AUDITED', 'PAYMENT_INITIATED',
-									'COMPLETED'].includes(activePayrunTab) && !isInvoiceView)
+								{((TAB_NAME).includes(activePayrunTab) && !isInvoiceView)
 									? (
 										<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
-											<TabPanel title="Domestic" name="NORMAL" />
-											<TabPanel title="Overseas" name="OVERSEAS" />
-											<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
+											{INNER_TAB_MAPPING.map((tab) => (
+												<TabPanel title={tab.title} name={tab.name} key={tab.name} />
+											))}
 										</Tabs>
 									)
 									: null}

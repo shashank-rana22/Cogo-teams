@@ -5,7 +5,9 @@ import styles from './styles.module.css';
 function ModifiedCurrency({ itemData = {}, selectedPayrun = {}, checkedRow = null }) {
 	const { totalValue } = selectedPayrun || checkedRow || {};
 	const { balance, currency } = itemData || {};
-	return <div>{balance < totalValue ? <div className={styles.text}>{currency}</div> : currency}</div>;
+	return (
+		<div className={balance < totalValue ? styles.text : ''}>{currency}</div>
+	);
 }
 
 export default ModifiedCurrency;

@@ -3,14 +3,10 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { ADVANCE_SAMPLE_LINK, SAMPLE_LINK } from '../../../constants';
 import useUploadBulkUtr from '../../../hooks/useUploadBulkUTR';
 
 import styles from './styles.module.css';
-
-const SAMPLE_LINK =	'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
-+ 'a312ee8f3fe0ded72246/UTRuploadSampleFile.xlsx';
-const ADVANCE_SAMPLE_LINK =	'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
-+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx';
 
 function UploadUTR({
 	showUploadUTR = false,

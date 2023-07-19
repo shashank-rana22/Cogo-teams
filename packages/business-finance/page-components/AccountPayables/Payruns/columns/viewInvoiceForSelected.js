@@ -67,7 +67,7 @@ export const VIEW_INVOICE_NORMAL_CONFIG = {
 		{
 			key   : 'urgencyTag',
 			label : 'Urgency',
-			// func  : 'renderUrgencyData',
+			func  : 'renderUrgencyData',
 			span  : 1,
 		},
 		{

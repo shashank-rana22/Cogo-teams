@@ -29,7 +29,6 @@ function DeletePayrun({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						id="cancel-trash--invoice"
 						themeType="secondary"
 						style={{ marginRight: '20px' }}
 					>

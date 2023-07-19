@@ -72,7 +72,7 @@ export const VIEW_INVOICE_NORMAL_PAYMENT_READY_CONFIG = {
 		{
 			key   : 'urgencyTag',
 			label : 'Urgency',
-			// func  : 'renderUrgencyData',
+			func  : 'renderUrgencyData',
 			span  : 1,
 		},
 		{

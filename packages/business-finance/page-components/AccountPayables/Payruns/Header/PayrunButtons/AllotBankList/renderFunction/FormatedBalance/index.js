@@ -8,31 +8,17 @@ function FormatedBalance({ itemData = {}, selectedPayrun = {}, checkedRow = null
 	const { totalValue } = selectedPayrun || checkedRow || {};
 
 	return (
-		<div>
-			{balance < totalValue ? (
-				<div className={styles.text}>
-					{formatAmount({
-						amount  : balance,
-						currency,
-						options : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+		<div className={balance < totalValue ? styles.text : ''}>
+			{formatAmount({
+				amount  : balance,
+				currency,
+				options : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			})}
 
-				</div>
-			) : (
-				formatAmount({
-					amount  : balance,
-					currency,
-					options : {
-						style                 : 'currency',
-						currencyDisplay       : 'code',
-						maximumFractionDigits : 2,
-					},
-				})
-			)}
 		</div>
 	);
 }

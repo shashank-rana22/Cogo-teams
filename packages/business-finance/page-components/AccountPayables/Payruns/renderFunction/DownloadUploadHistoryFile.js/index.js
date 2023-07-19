@@ -5,15 +5,17 @@ import RenderTooltip from '../../../../commons/RenderTooltip';
 
 import styles from './styles.module.css';
 
-function DownloadUploadHistoryFile({ itemData }) {
+function DownloadUploadHistoryFile({ itemData = {} }) {
+	const { fileName = '', fileUrl = '' } = itemData;
 	return (
 		<div className={styles.container}>
-			<RenderTooltip content={itemData?.fileName} maxLength={60} />
+			<RenderTooltip content={fileName} maxLength={60} />
 			<div className={styles.button}>
 				<IcMDownload
-					onClick={() => window.open(itemData?.fileUrl)}
-					id="download"
-					style={{ width: 20, height: 20, fill: '#F68B21' }}
+					onClick={() => window.open(fileUrl)}
+					height={20}
+					width={20}
+					color="#F68B21"
 				/>
 			</div>
 		</div>

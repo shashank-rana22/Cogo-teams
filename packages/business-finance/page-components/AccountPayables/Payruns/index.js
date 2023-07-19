@@ -18,10 +18,7 @@ function Payruns({ activeEntity = '' }) {
 	const [checkedRow, setCheckedRow] = useState(null);
 
 	const {
-		data = {},
-		loading = false,
-		payrunStats = {},
-		config = {}, setSelectedPayrun = () => {}, selectedPayrun = null,
+		data = {}, loading = false, payrunStats = {}, config = {}, setSelectedPayrun = () => {}, selectedPayrun = null,
 		globalFilters = {}, selectedIds = [], setSelectedIds = () => {},
 		setGlobalFilters = () => {}, sort = {}, setSort = () => {}, refetch = () => {},
 	} = useFilterData({
@@ -90,10 +87,10 @@ function Payruns({ activeEntity = '' }) {
 				pageSize={10}
 				sort={sort}
 				setSort={setSort}
-				handlePageChange={(val) => setGlobalFilters({
-					...globalFilters,
+				handlePageChange={(val) => setGlobalFilters((prev) => ({
+					...prev,
 					pageIndex: val,
-				})}
+				}))}
 				showPagination
 				viewId={viewId}
 				dropDownData={dropDownData}

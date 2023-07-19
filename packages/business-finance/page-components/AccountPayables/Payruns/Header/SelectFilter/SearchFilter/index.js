@@ -2,6 +2,7 @@ import { Input, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { SHOW_TOGGLE_TAB_NAME } from '../../../constants';
 import GetSearchCrossIcon from '../GetSearchCrossIcon';
 
 import styles from './styles.module.css';
@@ -29,10 +30,7 @@ function SearchFilter({
 				<Input
 					value={search || ''}
 					size="sm"
-					onChange={(value) => setGlobalFilters({
-						...globalFilters,
-						search: value || undefined,
-					})}
+					onChange={(value) => setGlobalFilters((prev) => ({ ...prev, search: value || undefined }))}
 					className={styles.search_filter}
 					placeholder={searchType}
 					suffix={(
@@ -43,7 +41,7 @@ function SearchFilter({
 					)}
 				/>
 			</div>
-			{(['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED', 'INITIATED'].includes(activePayrunTab))
+			{((SHOW_TOGGLE_TAB_NAME).includes(activePayrunTab))
 				? (
 					<div>
 						{isEmpty(selectedPayrun)

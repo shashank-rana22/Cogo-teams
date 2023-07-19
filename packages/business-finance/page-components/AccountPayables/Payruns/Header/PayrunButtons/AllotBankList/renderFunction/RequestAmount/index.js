@@ -84,7 +84,7 @@ function RequestAmount({ itemData = {}, selectedPayrun = null, checkedRow = null
 					<Modal.Footer>
 						<Button
 							themeType="secondary"
-							style={{ marginRight: '12px' }}
+							className={styles.button}
 							onClick={() => {
 								setShowRequestModal(false);
 							}}

@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { SHOW_DOWNLOAD_BUTTON_TAB_NAME } from '../../constants';
 import useGetAllotEntityBank from '../../hooks/useGetAllotEntityBank';
 import useGetInvoiceListDownload from '../../hooks/useGetInvoiceListDownload';
 
@@ -10,11 +11,9 @@ import styles from './styles.module.css';
 import UploadUTR from './UploadUTR';
 
 function PayrunButtons({
-	activePayrunTab, isInvoiceView, overseasData = '', globalFilters = {},
-	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null,
-	setCheckedRow = () => {}, itemData = {}, activeEntity = '', refetch = () => {},
-	selectedIds = [],
-	setSelectedIds = () => {},
+	activePayrunTab = '', isInvoiceView = false, overseasData = '', globalFilters = {},
+	selectedPayrun = null, setSelectedPayrun = () => {}, checkedRow = null, setCheckedRow = () => {},
+	itemData = {}, activeEntity = '', refetch = () => {}, selectedIds = [], setSelectedIds = () => {},
 }) {
 	const { allotEntityBank, allotEntityLoading, getEntityBank } = useGetAllotEntityBank({
 		selectedPayrun, checkedRow,
@@ -86,7 +85,7 @@ function PayrunButtons({
 		);
 	}
 
-	if (['PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab) && isInvoiceView) {
+	if ((SHOW_DOWNLOAD_BUTTON_TAB_NAME).includes(activePayrunTab) && isInvoiceView) {
 		return (
 			<div>
 				<Button onClick={downloadInvoice} disabled={loading}>

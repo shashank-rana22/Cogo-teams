@@ -7,3 +7,7 @@
 	font-size: var(--font-size-sm);
 	color: var(--color-primary-error-red-2);
 }
+
+.button {
+	margin-right: 12px;
+}

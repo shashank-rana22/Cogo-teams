@@ -25,7 +25,6 @@ function SelectRadio({
 				<div className={styles.radio_circle} />
 			) : (
 				<Radio
-					// style={{ display: 'flex', justifyContent: 'center', width: '80px' }}
 					checked={selectedBankId === bankId}
 					onChange={handleRadioChange}
 				/>

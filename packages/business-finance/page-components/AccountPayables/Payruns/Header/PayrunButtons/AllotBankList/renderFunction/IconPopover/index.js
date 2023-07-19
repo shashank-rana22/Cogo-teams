@@ -5,7 +5,7 @@ import React from 'react';
 import RemarkContent from './RemarkContent';
 
 function IconPopover({ itemData = {} }) {
-	const { fundAllotmentTimeline, currency } = itemData;
+	const { fundAllotmentTimeline = [], currency = '' } = itemData;
 	return (
 		<div>
 			<Tooltip

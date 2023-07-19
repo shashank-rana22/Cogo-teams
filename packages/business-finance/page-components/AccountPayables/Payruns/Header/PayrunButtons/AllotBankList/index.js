@@ -6,12 +6,12 @@ import useInitiatePaymentAllotBank from '../../../hooks/useInitiatePaymentAllotB
 
 import { ALLOT_BANK_CONFIG } from './allotBankConfig';
 import RenderFunction from './renderFunction/index';
+import styles from './styles.module.css';
 
 function AllotBankList({
 	selectedPayrun = null, showAllotBank = false, setShowAllotBank = () => {}, checkedRow = null, refetch = () => {},
 	setCheckedRow = () => {}, allotEntityBank = {}, allotEntityLoading = false, overseasData = '',
-	selectedIds = [],
-	setSelectedIds = () => {},
+	selectedIds = [], setSelectedIds = () => {},
 }) {
 	const { entityCode } = selectedPayrun || checkedRow || {};
 	const { selectBank, loading } = useInitiatePaymentAllotBank({
@@ -51,7 +51,7 @@ function AllotBankList({
 
 					<Button
 						disabled={loading}
-						style={{ marginRight: '12px' }}
+						className={styles.button}
 						onClick={() => setShowAllotBank(false)}
 					>
 						Cancel

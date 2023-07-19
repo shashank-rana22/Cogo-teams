@@ -1,13 +1,14 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
-function FormatAmountCurrency({ itemData }) {
+function FormatAmountCurrency({ itemData = {} }) {
+	const { totalValue, currency } = itemData;
 	return (
 		<div>
 			{ formatAmount({
-				amount   : itemData.totalValue,
-				currency : itemData.currency,
-				options  : {
+				amount  : totalValue,
+				currency,
+				options : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,

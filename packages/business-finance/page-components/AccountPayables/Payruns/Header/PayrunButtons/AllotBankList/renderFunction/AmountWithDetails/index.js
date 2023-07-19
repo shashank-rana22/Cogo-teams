@@ -14,21 +14,8 @@ function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = nu
 	return (
 		<div className={styles.container}>
 			<div className={styles.amount_container}>
-				{balance < totalValue ? (
-					<div className={styles.text}>
-						{formatAmount({
-							amount  : allocatedAmount,
-							currency,
-							options : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
-
-					</div>
-				) : (
-					formatAmount({
+				<div className={balance < totalValue ? styles.text : ''}>
+					{formatAmount({
 						amount  : allocatedAmount,
 						currency,
 						options : {
@@ -36,8 +23,8 @@ function AmountWithDetails({ itemData = {}, selectedPayrun = {}, checkedRow = nu
 							currencyDisplay       : 'code',
 							maximumFractionDigits : 2,
 						},
-					})
-				)}
+					})}
+				</div>
 			</div>
 			{length > TIMELINE_DEFAULT_LENGTH && (
 				<div className={styles.details_text}>

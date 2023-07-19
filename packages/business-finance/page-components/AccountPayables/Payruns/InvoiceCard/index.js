@@ -4,10 +4,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function InvoiceCard({
-	setSelectedPayrun = () => {}, itemData = {}, setSelectedIds = () => {}, loading = false,
-}) {
+function InvoiceCard({ setSelectedPayrun = () => {}, itemData = {}, setSelectedIds = () => {}, loading = false }) {
 	const { name, invoiceCount, currency, totalValue, createdAt } = itemData;
+
 	return (
 		<div className={styles.container}>
 			<Button

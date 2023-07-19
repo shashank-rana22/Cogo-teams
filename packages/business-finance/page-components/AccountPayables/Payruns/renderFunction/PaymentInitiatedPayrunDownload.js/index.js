@@ -13,7 +13,7 @@ function PaymentInitiatedPayrunDownload({ itemData = {} }) {
 		<div>
 			<Button
 				themeType="tertiary"
-				onClick={() => (itemData.type === 'OVERSEAS'
+				onClick={() => (itemData?.type === 'OVERSEAS'
 					? downloadPayrunHistory(itemData?.id)
 					: downloadPayrun(itemData))}
 			>

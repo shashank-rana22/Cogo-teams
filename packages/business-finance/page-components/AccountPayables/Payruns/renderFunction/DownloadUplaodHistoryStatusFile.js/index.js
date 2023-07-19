@@ -4,19 +4,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const COLOR_MAPPING = {
+const STATUS_COLOR_MAPPING = {
 	success    : '#CDF7D4',
 	processing : '#FBE39F',
 	error      : '#ff726f',
 	uploaded   : '#F2F2EA',
 };
-function DownloadUploadHistoryStatusFile({ itemData }) {
-	const { status, statusId } = itemData || [];
+function DownloadUploadHistoryStatusFile({ itemData = {} }) {
+	const { status, statusId } = itemData;
 	const displayStatus = status === 'processing' ? 'In Process' : status;
 
 	return (
 		<div className={styles.container}>
-			<div style={{ backgroundColor: COLOR_MAPPING[status] }} className={styles.status}>
+			<div style={{ backgroundColor: STATUS_COLOR_MAPPING[status] }} className={styles.status}>
 				{startCase(displayStatus)}
 			</div>
 			{itemData?.status === 'error' ? (
@@ -27,7 +27,6 @@ function DownloadUploadHistoryStatusFile({ itemData }) {
                             + `/purchase/download/document?id=${statusId}`;
 							window.open(downloadFile);
 						}}
-						id="download"
 						width={20}
 						height={20}
 						color="#F68B21"

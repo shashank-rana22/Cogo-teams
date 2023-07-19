@@ -1,6 +1,7 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { PAID_INNER_TAB_MAPPING } from '../../../constants';
 import SendReportButton from '../../PayrunButtons/SendReportButton';
 
 import styles from './styles.module.css';
@@ -15,8 +16,9 @@ function PaidInnerTab({
 			<div>
 				{activePayrunTab === 'PAID' ? (
 					<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
-						<TabPanel title="Domestic" name="NORMAL" />
-						<TabPanel title="Adv.Payment" name="ADVANCE_PAYMENT" />
+						{PAID_INNER_TAB_MAPPING.map((tab) => (
+							<TabPanel title={tab.title} name={tab.name} key={tab.name} />
+						))}
 					</Tabs>
 				) : null}
 			</div>
