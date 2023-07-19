@@ -8,7 +8,10 @@ export default function getControls({
 	const { service_provider, service_type } = serviceObj || {};
 
 	const serviceType = service_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
-	const services = primary_service_type !== service_type ? [shipment_type, serviceType] : serviceType;
+	let services = primary_service_type !== service_type ? [shipment_type, serviceType] : serviceType;
+	if (serviceObj?.service_type === 'trailer_freight_service') {
+		services = [shipment_type, serviceType, 'haulage_freight'];
+	}
 
 	const controls = [
 		{

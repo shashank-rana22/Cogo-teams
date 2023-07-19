@@ -32,6 +32,9 @@ export default function getControls({
 			services = [shipmentType, 'fcl_freight_local_agent'];
 		}
 	}
+	if (serviceObj?.service_type === 'trailer_freight_service') {
+		services = [shipmentType, serviceType, 'haulage_freight'];
+	}
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
 		? [
