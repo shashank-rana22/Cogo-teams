@@ -10,17 +10,17 @@ import RequestedConfig from '../../../../../Configuration/RequestedConfig';
 import styles from './styles.module.css';
 
 function ViewDetailsModal({
-	year,
-	fundAllocationDetails,
-	selectedCurrency,
-	monthName,
-	activeTime,
-	date,
-	bankData,
-	activeEntityCode,
-	showMore,
-	setShowMore,
-	loading,
+	year = '',
+	fundAllocationDetails = [],
+	selectedCurrency = '',
+	monthName = '-',
+	activeTime = '',
+	date = '',
+	bankData = {},
+	activeEntityCode = '',
+	showMore = false,
+	setShowMore = () => {},
+	loading = false,
 }) {
 	const { bankName, accountNumber } = bankData || {};
 
