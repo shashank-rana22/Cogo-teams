@@ -7,7 +7,7 @@ const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCus
 		}
 		return service.service_type === item?.service_type;
 	});
-	console.log(addedService, item, 'Added');
+
 	const { name, code, shipment_id, service_type, pending_task_id } = item;
 	const { quantity, buy_price, currency, unit, service_provider_id, alias, price } = data;
 	let add_to_sell_quotation;
