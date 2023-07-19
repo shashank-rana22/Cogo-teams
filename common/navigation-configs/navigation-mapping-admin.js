@@ -1193,12 +1193,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [
-					...apis.shipment,
-					...apis.search,
-					...apis.feedback,
-					...apis.sales_invoice,
-				],
 				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
 					...apis.sales_invoice, ...apis.cargo_insurance],
 			},
