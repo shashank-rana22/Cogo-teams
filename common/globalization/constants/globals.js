@@ -12,6 +12,7 @@ const GLOBAL_CONSTANTS = {
 	country_ids: {
 		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
 	},
+
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code   : CURRENCY_CODE,
@@ -135,22 +136,22 @@ const GLOBAL_CONSTANTS = {
 		'CCOV',
 	],
 	uuid: {
-		amitabh_user_id        : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
-		superadmin_id          : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		tech_superadmin_id     : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
-		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
-		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
-		sachin_mehra_user_id   : '68c7e272-0c66-43a9-9537-eedb4e543194',
-		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
-		local_charge_providers : {
+		amitabh_user_id         : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
+		superadmin_id           : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		tech_superadmin_id      : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		cogoacademy_admin_id    : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
+		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
+		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
+		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 			UK : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 		},
-		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-		paramount_org_id                         : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
-		rfq_admin_ids                            : [
+		paramount_org_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
+		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
 		],
@@ -182,7 +183,7 @@ const GLOBAL_CONSTANTS = {
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
 		empty_chart:
-		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
 		email_svg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
 		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
@@ -235,7 +236,7 @@ const GLOBAL_CONSTANTS = {
 		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
 		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
 		cargo_insurance_loader:
-		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
@@ -252,7 +253,7 @@ const GLOBAL_CONSTANTS = {
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
 	urls: {
@@ -347,7 +348,7 @@ const GLOBAL_CONSTANTS = {
 		ifsc_code        : /^[A-Za-z]{4}\d{7}$/,
 		eway_bill_number : /^\d{12}$/,
 		url_match:
-		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+			'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
 		mime                              : /:(.*?);/m,
