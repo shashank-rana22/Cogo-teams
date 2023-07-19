@@ -31,8 +31,8 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
-	const show_po_number = !!stakeholderConfig?.shipment_header?.show_po_number;
-	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
+	const showPoNumber = !!stakeholderConfig?.shipment_header?.show_po_number;
+	const showCfsDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
 
 	const showCancelShipmentIcon = getCanCancelShipment({
 		shipment_data,
@@ -42,10 +42,10 @@ function ShipmentHeader() {
 		stakeholderConfig,
 	});
 
-	const is_igm_desk = !!stakeholderConfig?.shipment_header?.is_igm;
+	const isIgm = !!stakeholderConfig?.shipment_header?.show_poc_details;
 
 	return (
-		<div className={cl`${styles.container} ${is_igm_desk ? styles.igm_desk : ''}`}>
+		<div className={cl`${styles.container} ${isIgm ? styles.igm_desk : ''}`}>
 			<div className={styles.customer}>
 				<Tooltip
 					theme="light"
@@ -68,7 +68,7 @@ function ShipmentHeader() {
 					</div>
 				</Tooltip>
 
-				{show_po_number ? (
+				{showPoNumber ? (
 					<div>
 						{po_number ? (
 							<div className={styles.po_number}>
@@ -93,7 +93,7 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			{isIGM ? <div>CFS Details</div> : <CargoDetails primary_service={primary_service} />}
+			{showCfsDetails ? <div>CFS Details</div> : <CargoDetails primary_service={primary_service} />}
 
 			{showCancelShipmentIcon
 				? (

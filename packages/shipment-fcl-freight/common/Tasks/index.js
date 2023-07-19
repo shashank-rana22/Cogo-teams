@@ -33,7 +33,7 @@ function List() {
 		setSelectedMail = () => {},
 	} = useListTasksHelper();
 
-	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
+	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
 	const IGM_TASK_LIST = [];
 
@@ -43,7 +43,7 @@ function List() {
 		}
 	});
 
-	const updatedTaskList = isIGM ? IGM_TASK_LIST : tasksList;
+	const updatedTaskList = showIgmTasks ? IGM_TASK_LIST : tasksList;
 
 	if (loading) {
 		return (
@@ -56,7 +56,7 @@ function List() {
 
 	return (
 		<div className={styles.container}>
-			{!isIGM ? (
+			{!showIgmTasks ? (
 				<Header
 					count={count}
 					completedTaskCount={completedTaskCount}

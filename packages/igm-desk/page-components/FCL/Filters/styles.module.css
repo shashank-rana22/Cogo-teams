@@ -7,19 +7,6 @@
 	margin-left: 10px;
 }
 
-.toggle_container {
-	:global {
-		.ui_toggle_container {
-			align-items: center;
-			padding: 0 10px;
-		}
-
-		.ui_toggle_offlabel {
-			color: var(--color-secondary-greyscale-2);
-		}
-	}
-}
-
 .input_container {
 	:global {
 		.ui_input_container {
@@ -94,4 +81,16 @@
 .action_text {
 	font-size: var(--font-size-md);
 	font-weight: 600;
+}
+
+.filter_row_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_toggle_container {
+			align-items: center;
+			padding: 0 10px;
+		}
+	}
 }

@@ -11,7 +11,7 @@ function CheckList({
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	canEditDocuments = true,
-	isIGM = false,
+	showIgmDocs = false,
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
@@ -29,7 +29,7 @@ function CheckList({
 				setShowDoc={setShowDoc}
 				setShowApproved={setShowApproved}
 				canEditDocuments={canEditDocuments}
-				isIGM={isIGM}
+				showIgmDocs={showIgmDocs}
 				shipmentDocumentRefetch={shipmentDocumentRefetch}
 				activeStakeholder={activeStakeholder}
 				bl_details={bl_details}

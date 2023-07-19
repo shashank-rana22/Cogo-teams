@@ -64,7 +64,7 @@ function Documents() {
 	|| item?.document_type?.toLowerCase().includes(searchValue));
 
 	const canEditDocuments = !!stakeholderConfig?.documents?.can_edit_documents;
-	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
+	const showIgmDocs = !!stakeholderConfig?.documents?.show_igm_docs;
 
 	const renderContent = () => {
 		if (loading) {
@@ -79,7 +79,7 @@ function Documents() {
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
 					canEditDocuments={canEditDocuments}
-					isIGM={isIGM}
+					showIgmDocs={showIgmDocs}
 					shipmentDocumentRefetch={refetch}
 					activeStakeholder={activeStakeholder}
 					bl_details={bl_details}
@@ -92,7 +92,7 @@ function Documents() {
 
 	return (
 		<div className={styles.main_container}>
-			{!isIGM ? (
+			{!showIgmDocs ? (
 				<HeaderComponent
 					activeToggle={activeToggle}
 					setActiveToggle={setActiveToggle}

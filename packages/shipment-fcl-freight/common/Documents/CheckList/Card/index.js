@@ -17,7 +17,7 @@ const Card = ({
 	setShowDoc = () => {},
 	setShowApproved = () => {},
 	canEditDocuments = true,
-	isIGM = false,
+	showIgmDocs = false,
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
@@ -44,7 +44,7 @@ const Card = ({
 		}
 	});
 
-	const updatedTaskList = isIGM ? IGM_TASK_LIST : taskList;
+	const updatedTaskList = showIgmDocs ? IGM_TASK_LIST : taskList;
 
 	return (updatedTaskList || []).map((item, idx) => {
 		const docType =	getDocType(item);

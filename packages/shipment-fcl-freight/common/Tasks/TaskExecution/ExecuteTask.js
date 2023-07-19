@@ -42,7 +42,7 @@ function ExecuteTask({
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	const isIGM = !!stakeholderConfig?.shipment_header?.is_igm;
+	const showIgmTasks = !!stakeholderConfig?.tasks?.show_igm_tasks;
 
 	const {
 		steps = [],
@@ -202,7 +202,7 @@ function ExecuteTask({
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
-	if (isIGM && task?.task === 'mark_igm_shipment_confirmed') {
+	if (showIgmTasks && task?.task === 'mark_igm_shipment_confirmed') {
 		return (
 			<MarkIgmShipmentConfirm
 				task={task}

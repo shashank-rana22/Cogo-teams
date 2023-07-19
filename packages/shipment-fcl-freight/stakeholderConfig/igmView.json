@@ -1,9 +1,11 @@
 {
     "features":["shipment_info", "shipment_header","overview", "tasks", "documents", "emails"],  
-    "shipment_info":{},
+    "shipment_info":{
+        "show_source": false
+    },
     "shipment_header": {
         "show_po_number": false,
-        "is_igm": true
+        "show_poc_details": true
     },
     "default_tab":"tasks",
     "overview":{
@@ -19,12 +21,14 @@
         "is_task_assigned":false,
         "can_reassign_task":true,
         "show_cfs_details": true,
-        "show_others_tasks": false
+        "show_others_tasks": false,
+        "show_igm_tasks": true
     },
     "documents":{
         "tab_title":"Documents",
         "default_wallet":"trade_documents",
-        "can_edit_documents": false
+        "can_edit_documents": false,
+        "show_igm_docs": true
     },
     "additional_services": {
         "action_buttons": {

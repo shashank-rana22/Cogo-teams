@@ -68,22 +68,22 @@ function Filters() {
 	}
 	return (
 		<div className={styles.container}>
-			<div className={styles.toggle_container}>
-				<Toggle
-					size="md"
-					offLabel="Draft"
-					onLabel="Pre-alert"
-					checked={fileType}
-					onChange={() => setFilters({ ...filters, fileType: !fileType, page: 1 })}
-				/>
-			</div>
 
 			{tabState?.activeTab === 'daily_report' ? (
 				null
 			) : (
-				<div className={styles.filter_container}>
-					{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
-					{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
+				<div className={styles.filter_row_container}>
+					<Toggle
+						size="md"
+						offLabel="Draft"
+						onLabel="Pre-alert"
+						checked={fileType}
+						onChange={() => setFilters({ ...filters, fileType: !fileType, page: 1 })}
+					/>
+					<div className={styles.filter_container}>
+						{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
+						{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
+					</div>
 				</div>
 			) }
 
