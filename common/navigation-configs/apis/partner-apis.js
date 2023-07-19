@@ -12992,6 +12992,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_dunning_severity_level_templates',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
 			access_type : 'private',
 		},

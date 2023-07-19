@@ -1,5 +1,6 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
 import useUpdateBookingPreferences
@@ -9,26 +10,18 @@ import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
 const PRIORITY_DEFAULT = 1;
-const getBuyPrice = (dataObj, source) => {
-	if (source === 'system_rate') {
-		const firstValidty = (dataObj?.validities || dataObj?.line_items)?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-		const price = firstValidty?.price || firstValidty?.min_price || '--';
-		const currency = firstValidty?.currency || '--';
+const getBuyPrice = (dataObj) => {
+	const price = dataObj?.price;
+	const currency = dataObj?.currency;
 
-		return `${currency} ${price}`;
-	}
-
-	if (source === 'flash_booking') {
-		const price = dataObj?.line_items?.[GLOBAL_CONSTANTS.zeroth_index]?.price;
-		const currency = dataObj?.line_items?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
-
-		return `${currency} ${price}`;
-	}
-
-	const price = dataObj?.charges?.line_items?.[GLOBAL_CONSTANTS.zeroth_index]?.price;
-	const currency = dataObj?.charges?.line_items?.[GLOBAL_CONSTANTS.zeroth_index]?.currency;
-
-	return `${currency} ${price}`;
+	return formatAmount({
+		amount  : price || GLOBAL_CONSTANTS.zeroth_index,
+		currency,
+		options : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	});
 };
 
 function Card({
@@ -38,9 +31,11 @@ function Card({
 	setSelectedCard = () => {},
 	serviceProvidersData = [],
 	task = {},
+	primaryService = {},
 }) {
-	const { data, source } = item;
+	const { data } = item;
 	const dataArr = Array.isArray(data) ? data : [data];
+	const { source } = dataArr[GLOBAL_CONSTANTS.zeroth_index];
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
@@ -77,13 +72,11 @@ function Card({
 						chargeable_weight: dataChargeableWeight,
 						price_type,
 						rate_procurement_proof_url,
-					} = dataObj?.data || dataObj || {};
-					const {
-						hs_code,
-						commodity_description,
-						chargeable_weight,
-						is_minimum_price_shipment,
-					} = dataObj?.service || {};
+						is_minimum_price_rate,
+					} = dataObj || {};
+
+					const { hs_code, commodity_description } = primaryService;
+
 					return (
 						<div className={styles.space_between} key={dataObj?.id}>
 							<div>
@@ -97,23 +90,19 @@ function Card({
 									</div>
 								</Tooltip>
 							</div>
-							<div>
-								<div className={styles.heading}>Airline</div>
-								<div className={styles.sub_heading}>
-									{source === 'system_rate'
-										? dataObj?.airline?.business_name || '-'
-										: dataObj?.reverted_airline?.business_name || '-'}
-								</div>
-							</div>
 							{task?.service_type === 'air_freight_service' && (
 								<>
+									<div>
+										<div className={styles.heading}>Airline</div>
+										<div className={styles.sub_heading}>
+											{dataObj?.airline?.business_name || '-'}
+										</div>
+									</div>
 									<div>
 										<div className={styles.heading}>Chargeable Wt.</div>
 										<div className={styles.sub_heading}>
 											{`${
 												dataChargeableWeight
-													|| data?.[GLOBAL_CONSTANTS.zeroth_index]?.chargeable_weight
-													|| chargeable_weight
 														|| '--'
 											} Kg`}
 										</div>
@@ -131,15 +120,15 @@ function Card({
 											</Tooltip>
 										</div>
 									)}
-									{hs_code &&	(
+									{hs_code?.hs_code_name &&	(
 										<div>
 											<div className={styles.heading}>HS Code</div>
 											<Tooltip
-												content={hs_code}
+												content={hs_code?.hs_code_name}
 												placement="top"
 											>
 												<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
-													{hs_code}
+													{hs_code?.hs_code_name}
 												</div>
 											</Tooltip>
 										</div>
@@ -154,7 +143,7 @@ function Card({
 										<div className={styles.heading}>Min. Price</div>
 										<div className={styles.sub_heading}>
 											{data?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_system_rate
-											|| is_minimum_price_shipment
+											|| is_minimum_price_rate
 												? 'Yes'
 												: 'No'}
 										</div>
@@ -165,17 +154,17 @@ function Card({
 							<div>
 								<div className={styles.heading}>Source of Rate</div>
 
-								<div className={styles.sub_heading}>{startCase(source)}</div>
+								<div className={styles.sub_heading}>{startCase(dataObj?.source)}</div>
 							</div>
 
 							<div>
 								<div className={styles.heading}>Buy Rate</div>
 
-								<div className={styles.sub_heading}>{getBuyPrice(dataObj, source)}</div>
+								<div className={styles.sub_heading}>{getBuyPrice(dataObj)}</div>
 							</div>
 
 							{rate_procurement_proof_url
-						&& source === 'flash_booking' && (
+						&& dataObj?.source === 'flash_booking' && (
 							<div>
 								<div className={styles.heading}>Rate Procurement Proof</div>
 								<div className={styles.sub_heading}>

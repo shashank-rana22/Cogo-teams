@@ -63,15 +63,23 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control || {};
+		const { name, label, maxDate = departureDate, disable = disabledState } = control || {};
+		const prefillValue = getDate(modifiedPrimaryService[name]);
+
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
+		finalControls[index].rules = {
+			required: {
+				value   : !!prefillValue,
+				message : `${label} is required`,
+			},
+		};
 
-		DEFAULT_VALUES[name] = getDate(modifiedPrimaryService[name]);
+		DEFAULT_VALUES[name] = prefillValue;
 	});
 
 	return { finalControls, defaultValues: DEFAULT_VALUES };
