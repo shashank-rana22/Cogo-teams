@@ -27,9 +27,9 @@ const useMasterException = ({
 	exceptionFilter, subTabsValue = '',
 	setShowConfirmationModal, setExceptionFilter,
 }:Props) => {
+	const profile: Profile = useSelector((state) => state);
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', creditDays = 0, cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
-	const profile: Profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const PROFILE_ID = user?.id;
 

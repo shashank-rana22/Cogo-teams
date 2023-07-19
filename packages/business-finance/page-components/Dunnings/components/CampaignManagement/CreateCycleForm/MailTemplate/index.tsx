@@ -15,7 +15,7 @@ interface Props {
 	formData?: FormData;
 }
 
-function MailTemplate({ formData, setFormData }:Props) {
+function MailTemplate({ formData = {}, setFormData = () => {} }:Props) {
 	const { severityTemplate } = useGetSeverityTemplates();
 	return (
 		<div className={styles.container}>

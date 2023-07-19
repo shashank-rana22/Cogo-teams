@@ -7,7 +7,7 @@ interface Props {
 	setDropdown?: Function;
 }
 
-function RenderViewMore({ id, dropdown, setDropdown }:Props) {
+function RenderViewMore({ id = '', dropdown = '', setDropdown = () => {} }:Props) {
 	const handleViewExecutions = () => {
 		setDropdown(id);
 	};

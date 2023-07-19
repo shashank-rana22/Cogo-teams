@@ -12,7 +12,7 @@ function ActionModal({ actionModal = {}, setActionModal = () => {}, getDunningLi
 
 	const { updateCycle, loading } = useUpdateCycle({ getDunningList, setActionModal });
 
-	const { rowData, action, visible } = actionModal;
+	const { rowData, action, visible } = actionModal || {};
 	const {
 		deleteCycle,
 		loading:deleteLoading,

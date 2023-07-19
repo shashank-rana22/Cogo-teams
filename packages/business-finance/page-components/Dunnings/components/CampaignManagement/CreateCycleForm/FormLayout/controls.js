@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
 import { SERVICE_OPTIONS } from '../../constants/index.ts';
@@ -6,7 +7,7 @@ import { SERVICE_OPTIONS } from '../../constants/index.ts';
 import styles from './styles.module.css';
 
 export const controls = ({ formData, setFormData, isEditMode = false }) => {
-	const { totalDueOutstanding } = formData || {};
+	const { totalDueOutstanding, dueOutstandingCurrency } = formData || {};
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => {
@@ -33,10 +34,10 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			return undefined;
 		}
 
-		// Remove any thousands separators (commas)
-		const unformattedString = string.replaceAll(',', '');
+		// Removing any thousands separators
+		const unformattedString = string.toLocaleString().replace(GLOBAL_CONSTANTS.regex_patterns.amount_seperator, '');
 
-		// Convert the string to a number
+		// Converting the string to a number
 		const number = parseFloat(unformattedString);
 		return number;
 	}
@@ -169,7 +170,15 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 							}));
 						}
 					},
-					value    : totalDueOutstanding ? Number(totalDueOutstanding)?.toLocaleString() : undefined,
+					value: totalDueOutstanding ? formatAmount({
+						amount   : String(totalDueOutstanding),
+						currency : dueOutstandingCurrency,
+						options  : {
+							style                 : 'decimal',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					}) : undefined,
 					prefix   : null,
 					disabled : isEditMode,
 					span     : 9,
