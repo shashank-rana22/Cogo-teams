@@ -28,7 +28,7 @@ export default function useCountdown(time, interval = SECOND) {
 	const minutes = Math.floor((timespan / MINUTE) % GENERAL_SECONDS);
 	const seconds = Math.floor((timespan / SECOND) % GENERAL_SECONDS);
 
-	const formattedTime = `${days || ''}${days ? 'd' : ''} ${hours}h ${minutes}m ${seconds}s`;
+	const formattedTime = `${days}d ${Math.abs(hours)}h ${Math.abs(minutes)}m ${Math.abs(seconds)}s`;
 
 	return formattedTime;
 }
