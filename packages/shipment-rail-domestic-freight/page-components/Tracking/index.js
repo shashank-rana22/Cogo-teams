@@ -16,7 +16,6 @@ function Tracking() {
 
 	return (
 		<>
-			<TablePagination data={data} filters={filters} setFilters={setFilters} />
 			<Table
 				columns={tableColumns}
 				data={data?.list || []}

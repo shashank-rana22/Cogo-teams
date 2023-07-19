@@ -5,7 +5,6 @@ import { useSelector } from '@cogoport/store';
 const useGetRevokeInvoiceData = ({
 	refetch,
 	setShowModal,
-	row,
 	id,
 	reqRevokeInvoiceRequest,
 	remarks = 'Approved',
