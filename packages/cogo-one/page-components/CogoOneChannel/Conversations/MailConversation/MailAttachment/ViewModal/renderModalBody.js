@@ -2,7 +2,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-export function ImageBody({ media_url = '', contentType = '' }) {
+export function ImageBody({
+	media_url = '',
+	contentType = '',
+}) {
 	return (
 		<img
 			src={media_url}
@@ -12,7 +15,10 @@ export function ImageBody({ media_url = '', contentType = '' }) {
 	);
 }
 
-export function AudioBody({ media_url = '', contentType = '' }) {
+export function AudioBody({
+	media_url = '',
+	contentType = '',
+}) {
 	return (
 		<audio
 			controls
@@ -23,7 +29,10 @@ export function AudioBody({ media_url = '', contentType = '' }) {
 	);
 }
 
-export function VideoBody({ contentType = '', media_url = '' }) {
+export function VideoBody({
+	contentType = '',
+	media_url = '',
+}) {
 	return (
 		<video
 			controls

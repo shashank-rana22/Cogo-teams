@@ -26,9 +26,13 @@ function mailFunction({
 		return emailRegex.test(emailInput);
 	};
 
-	const handleKeyPress = ({ e, type, email = '' }) => {
-		if (e?.key === 'Enter' || email) {
-			e?.preventDefault();
+	const handleKeyPress = ({
+		event = {},
+		type = '',
+		email = '',
+	}) => {
+		if (event?.key === 'Enter' || email) {
+			event?.preventDefault();
 			const newEmail = email || value;
 
 			if (!validateEmail(newEmail)) {
@@ -56,9 +60,9 @@ function mailFunction({
 		setValue('');
 	};
 
-	const handleChange = ({ e, type }) => {
+	const handleChange = ({ event, type }) => {
 		if (showControl === type) {
-			setValue(e.target?.value);
+			setValue(event?.target?.value);
 		}
 	};
 

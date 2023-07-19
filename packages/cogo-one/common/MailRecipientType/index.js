@@ -24,7 +24,10 @@ function MailRecipientType({
 }) {
 	const shouldShowSuggestions = value.length > TRIGGER_WHEN_QUERY_LENGTH_GREATER_THAN;
 
-	const { emailSuggestions, loading } = useGetListEmailSuggestions({ searchQuery: value, shouldShowSuggestions });
+	const { emailSuggestions, loading } = useGetListEmailSuggestions({
+		searchQuery: value,
+		shouldShowSuggestions,
+	});
 
 	return (
 		<div className={styles.tags_div}>
@@ -43,7 +46,11 @@ function MailRecipientType({
 				<Popover
 					placement="bottom"
 					key={showControl}
-					visible={shouldShowSuggestions && !isEmpty(emailSuggestions) && !loading}
+					visible={(
+						shouldShowSuggestions
+						&& !isEmpty(emailSuggestions)
+						&& !loading
+					)}
 					caret={false}
 					render={(
 						<ListEmails
@@ -61,8 +68,8 @@ function MailRecipientType({
 								placeholder="Enter recipient"
 								type="text"
 								value={value}
-								onChange={(e) => handleChange({ e, type })}
-								onKeyPress={(e) => handleKeyPress({ e, type })}
+								onChange={(event) => handleChange({ event, type })}
+								onKeyPress={(event) => handleKeyPress({ event, type })}
 								className={errorValue
 									? styles.error_input_container
 									: styles.input_container}

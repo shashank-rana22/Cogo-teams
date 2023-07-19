@@ -1,9 +1,9 @@
 import { Avatar, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';
+import getUserNameFromEmail from '../../../../helpers/getUserNameFromEmail';
 
 import MailSideBar from './MailSideBar';
 import styles from './styles.module.css';
@@ -23,7 +23,7 @@ function MailList(mailprops) {
 	const [appliedFilters, setAppliedFilters] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const userName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ').replace('_', ' ');
+	const { shortName, userName } = getUserNameFromEmail({ query: activeMailAddress });
 
 	return (
 		<div className={styles.container}>
@@ -52,7 +52,7 @@ function MailList(mailprops) {
 				>
 					<Avatar
 						size="40px"
-						personName={userName}
+						personName={shortName}
 					/>
 					<span className={styles.mail_address}>
 						{userName}

@@ -12,7 +12,10 @@ function ListEmails({
 }) {
 	return (
 		<div className={styles.list_container}>
-			{emailSuggestions.slice(GLOBAL_CONSTANTS.zeroth_index, EMAILS_TO_BE_SHOWN).map(
+			{emailSuggestions.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				EMAILS_TO_BE_SHOWN,
+			).map(
 				(itm) => (
 					<div
 						className={styles.email_container}

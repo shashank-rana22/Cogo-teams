@@ -18,7 +18,7 @@ function SwitchMail({
 
 	const filteredMails = userActiveMails.filter((itm) => (itm !== activeMailAddress));
 
-	const activePersonName = getUserNameFromEmail({ email: activeMailAddress });
+	const { shortName: activePersonName } = getUserNameFromEmail({ query: activeMailAddress });
 
 	return (
 		<div className={styles.container}>
@@ -41,7 +41,7 @@ function SwitchMail({
 
 			{filteredMails.map(
 				(itm) => {
-					const currentPersonName = getUserNameFromEmail({ email: itm });
+					const { shortName: currentPersonName } = getUserNameFromEmail({ query: itm });
 
 					return (
 						<div

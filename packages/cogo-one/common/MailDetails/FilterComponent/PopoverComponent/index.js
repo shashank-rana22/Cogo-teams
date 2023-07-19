@@ -26,8 +26,12 @@ function PopoverComponent({
 	const noOfFilters = getFiltersCount({ filters: formValues || {} });
 
 	const handleClearAll = () => {
-		const nullFormValues = filterControls.reduce((prev, currentItem) => (
-			{ ...prev, [currentItem?.name]: '' }), {});
+		const nullFormValues = filterControls.reduce(
+			(prev, currentItem) => (
+				{ ...prev, [currentItem?.name]: '' }
+			),
+			{},
+		);
 
 		reset(nullFormValues);
 	};
@@ -47,9 +51,9 @@ function PopoverComponent({
 			<div className={styles.header}>
 				<h3 className={styles.title}>
 					Filters
-					{' '}
-					{noOfFilters ? `(${noOfFilters})` : ''}
+					{noOfFilters ? ` (${noOfFilters})` : ''}
 				</h3>
+
 				<Button
 					size="md"
 					themeType="tertiary"
@@ -65,27 +69,29 @@ function PopoverComponent({
 					<span>Filters and search can&apos;t be used together.</span>
 				</div>
 
-				{filterControls.map((itm) => {
-					const { name, label, controlType } = itm;
+				{filterControls.map(
+					(itm) => {
+						const { name, label, controlType } = itm;
 
-					const Element = getFieldController(controlType);
+						const Element = getFieldController(controlType);
 
-					if (!Element) {
-						return null;
-					}
+						if (!Element) {
+							return null;
+						}
 
-					return (
-						<div key={name}>
-							<h4 className={styles.title}>
-								{label}
-							</h4>
-							<Element
-								control={control}
-								{...itm}
-							/>
-						</div>
-					);
-				})}
+						return (
+							<div key={name}>
+								<h4 className={styles.title}>
+									{label}
+								</h4>
+								<Element
+									control={control}
+									{...itm}
+								/>
+							</div>
+						);
+					},
+				)}
 			</div>
 			<div className={styles.footer}>
 				<Button

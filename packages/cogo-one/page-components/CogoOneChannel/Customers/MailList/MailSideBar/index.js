@@ -25,7 +25,9 @@ function MailSideBar({
 					<div
 						role="presentation"
 						key={value}
-						className={cl`${styles.content} ${activeFolder === value ? styles.active_content : ''}`}
+						className={cl`${styles.content} 
+							${activeFolder === value
+							? styles.active_content : ''}`}
 						onMouseEnter={() => setHover(value)}
 						onMouseLeave={() => setHover('')}
 						onClick={() => {
@@ -46,7 +48,8 @@ function MailSideBar({
 							: icon}
 						<span
 							className={cl`${styles.folder_name} 
-								${activeFolder === value ? styles.active_content : ''}`}
+								${activeFolder === value
+								? styles.active_content : ''}`}
 						>
 							{label}
 						</span>

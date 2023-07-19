@@ -56,6 +56,7 @@ function ViewModal({
 			/>
 			<Modal.Body>
 				<ActiveCompoonent
+					key={activeAttachmentType}
 					media_url={renderContent(activeAttachmentData)}
 					contentType={activeAttachmentContent}
 				/>
