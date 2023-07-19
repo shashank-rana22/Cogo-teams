@@ -154,7 +154,7 @@ function ShipmentDetails() {
 								<PurchaseInvoicing
 									shipmentData={shipment_data}
 									servicesData={servicesGet?.servicesList}
-									Component={AddService}
+									AddService={AddService}
 								/>
 							</main>
 						</TabPanel>

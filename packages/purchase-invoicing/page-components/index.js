@@ -5,7 +5,7 @@ import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 
-function PurchaseInvoicing({ shipmentData = {}, servicesData = [], Component = () => {} }) {
+function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = () => {} }) {
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,
@@ -21,7 +21,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], Component = (
 						refetch={refetch}
 						servicesData={servicesData}
 						key={collectionParty.id}
-						Component={Component}
+						AddService={AddService}
 						fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
 					/>
 				))}

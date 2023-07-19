@@ -67,7 +67,6 @@ function ShipmentHeader() {
 					</div>
 				) : (
 					<Button
-						tabIndex={0}
 						className={styles.button}
 						onClick={() => setShowModal('add_po_number')}
 						themeType="linkUi"

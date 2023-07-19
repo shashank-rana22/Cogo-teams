@@ -1,5 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
+const DEFAULT_VALUE = 0;
 export const getAlteredPrimaryService = ({
 	primary_service = {},
 	shipment_data = {},
@@ -11,8 +10,8 @@ export const getAlteredPrimaryService = ({
 		shipment_data?.all_services || []
 	).reduce(
 		(acc, curr) => {
-			acc.weight += curr?.weight || GLOBAL_CONSTANTS.zeroth_index;
-			acc.volume += curr?.volume || GLOBAL_CONSTANTS.zeroth_index;
+			acc.weight += curr?.weight || DEFAULT_VALUE;
+			acc.volume += curr?.volume || DEFAULT_VALUE;
 			acc.truck_types.push(curr?.truck_type || '');
 
 			return acc;

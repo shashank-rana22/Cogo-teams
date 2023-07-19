@@ -155,7 +155,7 @@ function List({ isSeller = false }) {
 						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 					/>
 				)}
-			{console.log(servicesList, 'ss')}
+
 			{showModal === 'charge_code'
 				&& (
 					<AddService

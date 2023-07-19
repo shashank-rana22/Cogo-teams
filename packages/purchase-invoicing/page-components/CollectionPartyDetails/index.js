@@ -36,10 +36,10 @@ const STAKE_HOLDER_TYPES = [
 
 function CollectionPartyDetails({
 	collectionParty = {}, refetch = () => {}, servicesData = {},
-	fullwidth = false, Component = () => {},
+	fullwidth = false, AddService = () => {},
 }) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
@@ -222,7 +222,7 @@ function CollectionPartyDetails({
 
 				{showModal === 'purchase'
 				&& (
-					<Component
+					<AddService
 						shipmentId={shipment_data?.id}
 						services={SERVICES_LIST}
 						refetch={refetch}
