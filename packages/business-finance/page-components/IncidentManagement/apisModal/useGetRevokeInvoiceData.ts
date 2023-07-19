@@ -20,7 +20,7 @@ const useGetRevokeInvoiceData = ({
 		{
 			url     : `/incident-management/incident/${id}`,
 			method  : 'patch',
-			authKey : `patch_incident_management_incident_by_id`,
+			authKey : 'patch_incident_management_incident_by_id',
 		},
 		{ manual: true },
 	);
