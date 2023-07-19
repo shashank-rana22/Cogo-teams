@@ -1,6 +1,7 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import { LEVELS_CONFIG } from '../../Config/levels-config';
 import Header from '../../Header';
@@ -8,7 +9,7 @@ import Header from '../../Header';
 import Column from './Column';
 import styles from './styles.module.css';
 
-function LevelForm({ background = '#f3fafa', item = {} }, ref) {
+function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 	const { level1 = {}, level2 = {}, level3 = {} } = item;
 	const { stakeholder: stakeholderLevel1 = {}, condition: conditionLevel1 = '' } = level1 || {};
 	const { userId: userLevel1 } = stakeholderLevel1;
@@ -44,6 +45,16 @@ function LevelForm({ background = '#f3fafa', item = {} }, ref) {
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
 	const { fields = [], append, remove } = useFieldArray({ control, name: 'approvalLevelConditions' });
+
+	useEffect(() => {
+		if (level === 'SINGLE') {
+			fields.forEach((_, index) => {
+				if (index > GLOBAL_CONSTANTS.zeroth_index) {
+					remove(index);
+				}
+			});
+		}
+	}, [level, remove, fields]);
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
 			<Header config={LEVELS_CONFIG} />
@@ -60,6 +71,7 @@ function LevelForm({ background = '#f3fafa', item = {} }, ref) {
 						totalLength={fields.length}
 						setValue={setValue}
 						item={item}
+						level={level || item?.approvalType}
 					/>
 				))}
 			</div>

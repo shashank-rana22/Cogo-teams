@@ -16,12 +16,13 @@ function Column({
 	config = {},
 	control = {},
 	errors = [],
-	append = () => {},
-	remove = () => {},
+	append = () => { },
+	remove = () => { },
 	index = 0,
 	totalLength = 1,
-	setValue = () => {},
+	setValue = () => { },
 	item = {},
+	level = '',
 }) {
 	const { approvalLevelConditions } = errors;
 	const { fields = [] } = config;
@@ -41,6 +42,7 @@ function Column({
 			setValue('approvalLevelConditions.0.stakeholder', stakeholderLevel1);
 		}
 	}, [item, setValue]);
+
 	const DATA = {
 		levels: (
 			<div className={styles.center}>
@@ -88,7 +90,7 @@ function Column({
 		edit: (
 			<div className={styles.buttons}>
 				<div>
-					{(totalLength < MAX_LEVEL && totalLength === index + DEFAULT_LENGTH) ? (
+					{(totalLength < MAX_LEVEL && level === 'MULTIPLE' && totalLength === index + DEFAULT_LENGTH) ? (
 						<IcMPlus
 							height={20}
 							width={20}

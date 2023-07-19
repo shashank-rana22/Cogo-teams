@@ -6,7 +6,7 @@ import {
 	AsyncSelectController,
 	useForm,
 } from '@cogoport/forms';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import React, { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -35,12 +35,19 @@ const getElementController = (type) => {
 	}
 };
 
-function Form({ controls = () => { } }, ref) {
+function Form({ controls = () => {}, setLevel = () => {} }, ref) {
 	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm();
 
 	const finalControls = controls({ incidentType: watch('incidentType'), setValue });
 
 	useImperativeHandle(ref, () => ({ formSubmit: handleSubmit, watch }));
+
+	const isMultipleLevel = watch('approvalType');
+
+	useEffect(() => {
+		setLevel(isMultipleLevel);
+	}, [isMultipleLevel, setLevel]);
+
 	return (
 		<section className={styles.flex}>
 			{finalControls.map((controlItem) => {

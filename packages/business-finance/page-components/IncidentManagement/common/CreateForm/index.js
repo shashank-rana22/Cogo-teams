@@ -12,6 +12,7 @@ function CreateLevelModal({
 	refetch = () => { },
 }) {
 	const [showCreateModal, setShowCreateModal] = useState(false);
+	const [level, setLevel] = useState(null);
 	const ref = useRef();
 
 	const lineItemsRef = useRef();
@@ -45,8 +46,9 @@ function CreateLevelModal({
 						<CreateRequest
 							ref={ref}
 							controls={controls}
+							setLevel={setLevel}
 						/>
-						<LevelForm ref={lineItemsRef} background="#fff" />
+						<LevelForm ref={lineItemsRef} background="#fff" level={level} />
 
 					</Modal.Body>
 				) : null}
