@@ -6,6 +6,7 @@ import ICJVModal from '../../Modals/ICJV_Modal';
 import JvModal from '../../Modals/JvModal';
 import PaymentConfirmation from '../../Modals/PaymentConfirmation';
 import RequestCN from '../../Modals/RequestCN';
+import RevokeInvoice from '../../Modals/RevokeInvoice';
 import SettlementModal from '../../Modals/SettlementModal';
 import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
@@ -25,6 +26,7 @@ const TYPE_COMPONENT_MAPPING = {
 	SEZ_APPROVAL                           : SezApproval,
 	CONCOR_PDA_APPROVAL                    : ConcorModal,
 	CONSOLIDATED_CREDIT_NOTE               : RequestCN,
+	REVOKE_INVOICE                         : RevokeInvoice,
 };
 
 function AccessorComponent({ row, getIncidentData }) {

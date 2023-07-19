@@ -7,7 +7,7 @@ import getBuyPrice from '../utils/getBuyPrice';
 const VOLUMETRIC_WEIGHT = 166.67;
 const DECIMAL_PLACE = 2;
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
+const useSendBookingRequestEmail = (onCancel, setShowEmailPreview, checkboxValue) => {
 	const [{ loading, data: emailData }, trigger] = useRequest({
 		url    : '/send_booking_request_email_to_airline',
 		method : 'POST',
@@ -20,6 +20,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 		handOverDate,
 		show_preview_only,
 		serviceProvidersData,
+		pocData,
 	) => {
 		try {
 			await trigger({
@@ -36,6 +37,9 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 					priority            : item?.priority,
 					service_providers   : serviceProvidersData,
 					service_provider_id : data?.service_provider_id,
+					poc_name            : pocData?.name,
+					poc_email           : pocData?.email,
+					cc_email            : checkboxValue,
 				},
 			});
 
@@ -47,9 +51,7 @@ const useSendBookingRequestEmail = (onCancel, setShowEmailPreview) => {
 				onCancel();
 			}
 		} catch (err) {
-			Toast.error(
-				toastApiError(err),
-			);
+			toastApiError(err);
 		}
 	};
 
