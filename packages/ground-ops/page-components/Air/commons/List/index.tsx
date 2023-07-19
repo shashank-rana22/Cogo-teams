@@ -72,8 +72,11 @@ function List({
 	};
 
 	useEffect(() => {
-		listUsers();
-	}, [listUsers]);
+		if (!loading) {
+			listUsers();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [listData]);
 
 	const render = () => {
 		const finalList = isEmpty(FINAL_DATA) ? shipmentPendingTasks : FINAL_DATA;
