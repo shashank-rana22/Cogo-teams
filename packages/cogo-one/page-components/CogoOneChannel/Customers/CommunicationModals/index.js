@@ -14,13 +14,12 @@ import styles from './styles.module.css';
 function CommunicationModals({
 	mailProps = {},
 	setModalType = () => {},
-	modalType = '',
+	modalType = {},
 	userId = '',
 	viewType = '',
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
-	const [attachments, setAttachments] = useState([]);
 
 	const {
 		replyMailApi = () => {},
@@ -97,8 +96,6 @@ function CommunicationModals({
 				<MailModal
 					mailProps={mailProps}
 					userId={userId}
-					attachments={attachments}
-					setAttachments={setAttachments}
 					activeMail={activeMail}
 					replyMailApi={replyMailApi}
 					replyLoading={replyLoading}

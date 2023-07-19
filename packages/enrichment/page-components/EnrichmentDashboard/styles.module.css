@@ -1,0 +1,78 @@
+.title_container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.title {
+	font-size: 28px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.tabs {
+	:global {
+		.ui_tabs_list_title {
+			font-size: 16px;
+		}
+	}
+}
+
+.scope_select {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.enrichment {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.address {
+	display: flex;
+}
+
+.address_label {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.value_container {
+	min-width: 200px;
+}
+
+.email_id {
+	color: #888fd1;
+}
+
+.link_text {
+	margin-left: 20px;
+	text-decoration: underline;
+}
+
+.svg_container {
+	text-align: center;
+	cursor: pointer;
+}
+
+.action_cta {
+	text-align: center;
+}
+
+.content_container {
+	display: flex;
+	justify-content: center;
+}
+
+.action_header {
+	text-align: center;
+}
+
+.secondary_tabs {
+	margin-top: 20px;
+}
+
+.edit_cta {
+	margin-right: 12px;
+}

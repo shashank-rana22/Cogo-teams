@@ -1,5 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+
+const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 
 const useHeaderStats = () => {
 	const router = useRouter();
@@ -22,7 +25,7 @@ const useHeaderStats = () => {
 	const { list = [] } = data || {};
 
 	return {
-		requestData: list[0],
+		data: list[ZEROTH_INDEX],
 		loading,
 	};
 };

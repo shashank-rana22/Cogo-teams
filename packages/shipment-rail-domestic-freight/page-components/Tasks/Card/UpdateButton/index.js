@@ -20,25 +20,19 @@ function UpdateButton({
 	hideButton = false,
 	show = false,
 }) {
-	if (hideButton) {
-		return null;
-	}
-
 	let buttonText = 'Update';
 
-	if (task?.task_type?.includes('approve_quote')) {
+	if (hideButton && task?.task === 'upload_indent') {
+		buttonText = 'PREVIEW MAIL';
+	} else if (hideButton) {
+		return null;
+	} else if (task?.task_type?.includes('approve_quote')) {
 		buttonText = 'Approve Quote';
-	}
-
-	if (task?.task_type?.includes('amend_quote')) {
+	} else if (task?.task_type?.includes('amend_quote')) {
 		buttonText = 'Amend Quote';
-	}
-
-	if (task?.task_type === 'upload_document') {
+	} else if (task?.task_type === 'upload_document') {
 		buttonText = 'Upload';
-	}
-
-	if (task?.task_type === 'approve_document') {
+	} else if (task?.task_type === 'approve_document') {
 		buttonText = 'Review';
 	}
 
