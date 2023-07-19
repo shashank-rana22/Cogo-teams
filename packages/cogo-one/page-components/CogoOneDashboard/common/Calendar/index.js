@@ -35,46 +35,6 @@ function Calendar({ props = {} }) {
 		calcWeek,
 	} = useRenderCalender();
 
-	// const processData = useCallback((func) => {
-	// 	const NEW_DATA = Array.from(
-	// 		{ length: (pagination * CONSTANT_THIRTY) },
-	// 		(_, i) => func(i),
-	// 	);
-	// 	const DATA = NEW_DATA.reverse().map((item, iterator) => ({
-	// 		key      : `cal-${timeline}-${pagination}-${iterator}`,
-	// 		label    : format(item, FORMAT_TYPE[timeline]?.label),
-	// 		subLabel : format(item, FORMAT_TYPE[timeline]?.subLabel),
-	// 		date     : new Date(item),
-	// 	}));
-	// 	setCalendarData(DATA.reverse());
-	// }, [pagination, setCalendarData, timeline]);
-
-	// const loadWeeks = useCallback(() => {
-	// 	const NEW_DATA = [];
-
-	// 	for (let i = 0; i < pagination * CONSTANT_THIRTY; i += CONSTANT_ONE) {
-	// 		NEW_DATA.push(calcWeek(i));
-	// 	}
-
-	// 	const DATA = NEW_DATA.map((item, iterator) => {
-	// 		const startDate = new Date(item);
-	// 		const endDate = new Date(startDate);
-	// 		endDate.setDate(startDate.getDate() + CONSTANT_SIX);
-
-	// 		return {
-	// 			key      : `cal-${timeline}-${pagination}-${iterator}`,
-	// 			label    : format(item, FORMAT_TYPE[timeline].label),
-	// 			subLabel : `${format(
-	// 				item,
-	// 				FORMAT_TYPE[timeline].subLabel,
-	// 			)} to ${format(endDate, FORMAT_TYPE[timeline].subLabel)}`,
-	// 			date: new Date(item),
-	// 			endDate,
-	// 		};
-	// 	});
-	// 	setCalendarData(DATA);
-	// }, [calcWeek, pagination, setCalendarData, timeline]);
-
 	const loadData = useCallback((func) => {
 		const NEW_DATA = [];
 
