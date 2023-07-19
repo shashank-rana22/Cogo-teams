@@ -37,7 +37,7 @@ function VideoCall({
 	});
 	const [options, setOptions] = useState({
 		isMicActive         : true,
-		isVideoActive       : false,
+		isVideoActive       : true,
 		isScreenShareActive : false,
 		isMinimize          : false,
 	});

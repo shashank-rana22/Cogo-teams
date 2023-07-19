@@ -139,7 +139,7 @@ function useVideoCallFirebase({
 		});
 		setOptions({
 			isMicActive         : true,
-			isVideoActive       : false,
+			isVideoActive       : true,
 			isScreenShareActive : false,
 			isMinimize          : false,
 		});
@@ -168,7 +168,7 @@ function useVideoCallFirebase({
 			calling_type         : 'outgoing',
 		}));
 		navigator.mediaDevices
-			.getUserMedia({ video: false, audio: true })
+			.getUserMedia({ video: true, audio: true })
 			.then((myStream) => {
 				setInACall(true);
 				setStreams((prev) => ({ ...prev, user_stream: myStream }));
@@ -199,10 +199,6 @@ function useVideoCallFirebase({
 					}).then((calling_room_id) => {
 						saveWebrtcToken({ user_token: data }, calling_room_id, userId);
 					});
-				});
-
-				peer.on('track', (track, stream) => {
-					console.log(track, 'truck', stream, 'in call callingTo');
 				});
 
 				peer.on('stream', (peerStream) => {

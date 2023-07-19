@@ -55,7 +55,7 @@ function useComingCall({
 
 	const accepteCallMedia = () => {
 		navigator.mediaDevices
-			.getUserMedia({ video: false, audio: true })
+			.getUserMedia({ video: true, audio: true })
 			.then((userStream) => {
 				setStreams((prev) => ({ ...prev, user_stream: userStream }));
 				const peer = new Peer({
