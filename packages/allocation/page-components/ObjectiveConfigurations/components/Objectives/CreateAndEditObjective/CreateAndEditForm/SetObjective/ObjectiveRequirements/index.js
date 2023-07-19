@@ -42,11 +42,10 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 			service_requirements,
 		} = values;
 
-		console.log('values :: ', values);
-
 		setFormValues((previousValues) => ({
 			...previousValues,
 			objectiveRequirements: {
+				...(previousValues.objectiveRequirements || {}),
 				organization_details: {
 					...getSeparatedIdData({
 						values: {

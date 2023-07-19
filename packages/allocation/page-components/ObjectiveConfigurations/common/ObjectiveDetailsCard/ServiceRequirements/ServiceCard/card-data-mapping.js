@@ -128,7 +128,7 @@ const CARD_DATA_MAPPING = [
 					</div>
 
 					<div className={styles.key_value_container}>
-						{truck_type.map((value) => <Pill key={value}>{value}</Pill>)}
+						{truck_type.map((value) => <Pill key={value}>{startCase(value || '')}</Pill>)}
 					</div>
 				</div>
 

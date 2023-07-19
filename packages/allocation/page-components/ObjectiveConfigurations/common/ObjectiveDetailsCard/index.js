@@ -155,14 +155,20 @@ function ObjectiveDetailsCard(props) {
 
 	return (
 		<>
-			<ServiceRequirements
-				serviceRequirementsDetails={serviceRequirementsDetails}
-				service_requirement_operator={service_requirement_operator}
-			/>
+			{serviceRequirementsDetails.some((item) => Object.values(item).some(
+				(singleItem) => !isEmpty(singleItem),
+			)) && (
+				<ServiceRequirements
+					serviceRequirementsDetails={serviceRequirementsDetails}
+					service_requirement_operator={service_requirement_operator}
+				/>
+			)}
 
-			{!isEmpty(organizationDetails) && <OrganizationDetailsCard organizationDetails={organizationDetails} />}
+			{Object.values(organizationDetails).some((item) => !isEmpty(item))
+			&& <OrganizationDetailsCard organizationDetails={organizationDetails} />}
 
-			{!isEmpty(statsDetails) && <TransactionFunnelCard statsDetails={statsDetails} />}
+			{Object.values(statsDetails).some((item) => !isEmpty(item))
+			&& <TransactionFunnelCard statsDetails={statsDetails} />}
 		</>
 	);
 }
