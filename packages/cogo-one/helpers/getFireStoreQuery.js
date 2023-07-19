@@ -53,8 +53,8 @@ function getFireStoreQuery({
 
 	const sessionTypeQuery = (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query?.({
-			sessionType        : isBotSession ? 'bot' : 'admin',
-			isContactsSelected : activeSubTab === 'contacts',
+			sessionType: isBotSession ? 'bot' : 'admin',
+			activeSubTab,
 		}) || []
 	);
 

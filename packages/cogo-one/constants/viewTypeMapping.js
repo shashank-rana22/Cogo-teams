@@ -3,8 +3,8 @@ import { where } from 'firebase/firestore';
 
 const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
 
-function getSupplySessionQuery({ sessionType, isContactsSelected = false }) {
-	return isContactsSelected
+function getSupplySessionQuery({ sessionType, activeSubTab = '' }) {
+	return activeSubTab === 'contacts'
 		? [where('session_type', 'in', ['bot', 'admin'])]
 		: [where('session_type', '==', sessionType)];
 }
@@ -71,14 +71,20 @@ function getSupplyAgentButtons({
 	return ['request_for_assign', 'add_me_to_group'];
 }
 
+function getSalesSessionQuery({ sessionType, activeSubTab = '' }) {
+	return activeSubTab === 'kamContacts'
+		? [where('session_type', 'in', ['bot', 'admin'])]
+		: [where('session_type', '==', sessionType)];
+}
+
 export const VIEW_TYPE_GLOBAL_MAPPING = {
 	sales: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		kam_contacts_base_query   : ({ agentId }) => [where('sales_agent_ids', 'array-contains', agentId)],
+		session_type_query        : getSalesSessionQuery,
+		kam_contacts_base_query   : ({ agentId }) => [where('user_details.sales_agent_ids', 'array-contains', agentId)],
 		chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
 		default_side_nav          : 'profile',
 		accesible_filters         : {
@@ -110,8 +116,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 		all_chats_base_query    : () => [where('agent_type', 'in', ['sales'])],
 		group_chats_query       : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 		teams_chats_base_query  : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-		session_type_query      : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		kam_contacts_base_query : ({ agentId }) => [where('sales_agent_ids', 'array-contains', agentId)],
+		session_type_query      : getSalesSessionQuery,
+		kam_contacts_base_query : ({ agentId }) => [where('user_details.sales_agent_ids', 'array-contains', agentId)],
 		chat_sub_tabs_access    : ['all', 'teams', 'kamContacts'],
 		default_side_nav        : 'profile',
 		accesible_filters       : {
