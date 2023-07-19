@@ -61,7 +61,7 @@ function AwbNumber({
 							onClick={() => {
 								setItem(singleItem);
 								setShowEdit(true);
-								setChangedStatus('available_non_reserved');
+								setChangedStatus('available_reserved');
 							}}
 						>
 							<IcMEdit height={16} width={16} fill="#8B8B8B" />
