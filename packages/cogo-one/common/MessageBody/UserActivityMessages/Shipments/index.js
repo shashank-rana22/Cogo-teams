@@ -119,7 +119,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 				) : null}
 
 				<PortDetails serviceData={SERVICE_DETAILS[eventType]} service={SERVICE_MAPPING[eventType]} />
-				<CargoDetails detail={SERVICE_DETAILS[eventType]} />
+				<CargoDetails detail={SERVICE_DETAILS[eventType]} service={SERVICE_MAPPING[eventType]} />
 			</div>
 
 			{eventType === 'checkout' && (

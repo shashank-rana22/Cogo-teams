@@ -253,14 +253,18 @@ export function formatServiceDetails(details) {
 	return { ...details, isAir, isLTL };
 }
 
-export function serviceDetails({ detail = {} }) {
-	const isAir = detail?.service_type === 'air_freight_service'
-		|| detail?.service_type === 'domestic_air_freight_service'
-		|| detail?.shipment_type === 'air_freight';
+const AIR_SERVICES = ['air_freight', 'domestic_air_freight_service', 'air_freight_service', 'domestic_air_freight'];
 
-	const isLTL = detail?.service_type === 'ltl_freight_service';
+const FTL_SERVICES = ['ftl_freight', 'haulage_freight', 'ftl_freight_service', 'haulage_freight_service'];
 
-	const isFTL = detail?.service_type === 'ftl_freight_service';
+const LTL_SERVICES = ['ltl_freight', 'ltl_freight_service'];
+
+export function serviceDetails({ detail = {}, service }) {
+	const isAir = (AIR_SERVICES || []).includes(detail[service]);
+
+	const isFTL = (FTL_SERVICES || []).includes(detail[service]);
+
+	const isLTL = (LTL_SERVICES || []).includes(detail[service]);
 
 	return { ...detail, isAir, isLTL, isFTL };
 }

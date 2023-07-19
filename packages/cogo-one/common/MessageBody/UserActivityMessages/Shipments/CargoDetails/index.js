@@ -17,8 +17,8 @@ const LABELS = [
 	'weight',
 ];
 
-function CargoDetails({ detail = {} }) {
-	const details = serviceDetails({ detail });
+function CargoDetails({ detail = {}, service = '' }) {
+	const details = serviceDetails({ detail, service });
 
 	return (
 		<div className={styles.shipment_details}>
