@@ -16,14 +16,17 @@ const ENTITY_CODE_LENGTH = 1;
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState(
-		query?.active_tab || 'dashboard',
-	);
+
 	const profile = useSelector((state) => state);
 	const {
 		profile: { partner },
 	} = profile || {};
 	const { id: partnerId } = partner || {};
+
+	const [activePayables, setActivePayables] = useState(
+		query?.active_tab || 'dashboard',
+	);
+
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 

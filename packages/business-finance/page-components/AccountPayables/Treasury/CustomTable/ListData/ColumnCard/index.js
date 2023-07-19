@@ -1,7 +1,9 @@
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import useGetEntityReport from '../../../hooks/useGetEntityReport';
@@ -15,8 +17,15 @@ function ColumnCard({
 	item = {}, filters = {},
 	setFilters = () => {},
 }) {
+	const profile = useSelector((state) => state);
+	const {
+		profile: { partner },
+	} = profile || {};
+	const { id: partnerId } = partner || {};
+
+	const entity = getDefaultEntityCode(partnerId);
 	const [showDetails, setShowDetails] = useState(false);
-	const [activeEntityCode, setActiveEntityCode] = useState('301');
+	const [activeEntityCode, setActiveEntityCode] = useState(entity);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
 

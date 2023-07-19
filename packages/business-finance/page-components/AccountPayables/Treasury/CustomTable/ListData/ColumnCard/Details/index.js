@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { cl, Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
@@ -24,8 +24,8 @@ const MAX_BANK_ACCOUNT_LENGTH = 25;
 const MIN_LENGTH = 0;
 
 function Details({
-	item, data, loading, setActiveEntityCode, activeEntityCode, filters,
-	monthName,
+	item = {}, data = {}, loading = false, setActiveEntityCode = () => {}, activeEntityCode = '', filters = {},
+	monthName = '',
 }) {
 	const { list = [] } = data || {};
 	const [showMore, setShowMore] = useState(false);
@@ -59,7 +59,7 @@ function Details({
 				<LineItemsHeader />
 				{list.map((singleitem, index) => (
 					<div
-						className={`${styles.col} ${listTotal - LAST_INDEX === index ? styles.islast : ''}`}
+						className={cl`${styles.col} ${listTotal - LAST_INDEX === index ? styles.islast : ''}`}
 						key={singleitem?.id}
 					>
 						<div className={styles.account_number}>

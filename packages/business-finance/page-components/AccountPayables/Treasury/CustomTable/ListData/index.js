@@ -3,7 +3,7 @@ import React from 'react';
 import ColumnCard from './ColumnCard';
 import styles from './styles.module.css';
 
-function ListData({ list = [], filters, setFilters }) {
+function ListData({ list = [], filters = {}, setFilters = () => {} }) {
 	return (
 		<div className={styles.list}>
 			{(list || []).map((item) => (
