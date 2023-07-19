@@ -1574,11 +1574,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_sell_quotations',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'update_shipment_invoice_preference',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1632,6 +1627,11 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_bl_numbers',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_nomination_shipment_sell_quotations',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
