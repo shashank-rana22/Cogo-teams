@@ -53,6 +53,16 @@
 	width: 100%;
 }
 
+.single_port {
+	width: 80px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .port_name {
 	width: 50px;
 	overflow: hidden;

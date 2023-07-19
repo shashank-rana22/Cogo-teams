@@ -10,7 +10,6 @@ const VOLUME_MULTIPLY = 166.67;
 const TO_FIXED_2 = 2;
 const INCREASE_INDEX_BY = 1;
 const LAST_INDEX = 1;
-const FIRST_INDEX = 0;
 const NO_VOLUME_SERVICE_TYPES = ['ftl_freight_service', 'haulage_freight_service'];
 const AIR_TYPE_SERVICES = ['air_freight_service', 'domestic_air_freight_service'];
 
@@ -92,7 +91,7 @@ export const RENDER_VALUE_MAPPING = {
 			return null;
 		}
 
-		const valueForInput = Array.isArray(packages) ? packages[FIRST_INDEX] : null;
+		const valueForInput = Array.isArray(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 		const { length = 0, width = 0, height = 0, packages_count, packing_type } = valueForInput || {};
 		const dimension = length

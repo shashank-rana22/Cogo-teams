@@ -51,7 +51,7 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 
 	const lineType = SHIPPING_LINE_MAPPING[eventType];
 	const shippingLineMapping = SHIPPING_LINE[lineType] || '';
-	const matchShippingLine = SERVICE_DETAILS[eventType] || '';
+	const matchShippingLine = SERVICE_DETAILS[eventType] || {};
 	const shippingLines = matchShippingLine[shippingLineMapping] || {};
 	const { logo_url = '', business_name = '' } = shippingLines || {};
 
@@ -84,14 +84,14 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 			<div className={styles.banner}>
 				{!isEmpty(shippingLines) && (
 					<div className={styles.company_details}>
-						{logo_url && (
+						{logo_url ? (
 							<img
 								src={logo_url}
 								alt="status-icon"
 								width="30px"
 								height="25px"
 							/>
-						)}
+						) : null}
 
 						<Tooltip
 							content={business_name}
@@ -104,19 +104,19 @@ function Shipments({ serviceData = {}, name = '', eventType = '' }) {
 					</div>
 				)}
 
-				{SID_MAPPING[eventType] && (
+				{SID_MAPPING[eventType] ? (
 					<div className={styles.serial_id}>
 						SID :
 						<div className={styles.id_number}>{SID_MAPPING[eventType]}</div>
 					</div>
-				)}
+				) : null}
 
-				{lineType && (
+				{lineType ? (
 					<div className={styles.service_type}>
 						Service Type :
 						<div className={styles.type}>{startCase(lineType)}</div>
 					</div>
-				)}
+				) : null}
 
 				<PortDetails serviceData={SERVICE_DETAILS[eventType]} service={SERVICE_MAPPING[eventType]} />
 				<CargoDetails detail={SERVICE_DETAILS[eventType]} />

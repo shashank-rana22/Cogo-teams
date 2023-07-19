@@ -1,6 +1,6 @@
-const FIRST_ELEMENT = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const splitByBrackets = (name) => name?.split('(')[FIRST_ELEMENT] || '';
+const splitByBrackets = (name) => name?.split('(')[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 const popLastName = (name) => name?.split(' ').pop() || '';
 

@@ -59,7 +59,7 @@ function PortDetails({ serviceData = {}, service = '' }) {
 					<div className={styles.port_details}>
 
 						<Tooltip content={DISPLAY_DATA_MAPPING[tradeType]?.name} placement="bottom">
-							<div className={styles.port_name}>
+							<div className={styles.single_port}>
 								{DISPLAY_DATA_MAPPING[tradeType]?.name}
 							</div>
 						</Tooltip>
