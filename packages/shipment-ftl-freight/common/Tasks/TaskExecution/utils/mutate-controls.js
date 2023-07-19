@@ -19,7 +19,7 @@ const mutateControls = (
 
 		const dateTimeControl = control?.controls.find((item) => item?.type === 'datepicker');
 
-		if (dateTimeControl && TIME_BASED_TASK.includes(task?.task)) {
+		if (TIME_BASED_TASK.includes(task?.task) && dateTimeControl?.withTimePicker) {
 			dateTimeControl.showTimeSelect = true;
 		}
 
