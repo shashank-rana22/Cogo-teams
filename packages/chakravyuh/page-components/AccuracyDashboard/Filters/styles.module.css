@@ -40,13 +40,17 @@
 			color: #221f20;
 		}
 	}
+
+	.time_range_drop_down {
+		width: 200px;
+	}
 }
 
 .location_filter_container {
 	display: flex;
 	align-items: flex-end;
 	width: fit-content;
-	margin-left: 6px;
+	margin: 0 22px 0 6px;
 
 	.location_select {
 		width: 240px;

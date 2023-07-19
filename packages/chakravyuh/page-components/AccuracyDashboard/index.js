@@ -26,7 +26,7 @@ const VIEW_MAPPING = {
 
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
-	const [globalFilters, setGlobalFilters] = useState({ service_type: 'fcl', rate_type: null });
+	const [globalFilters, setGlobalFilters] = useState({ service_type: 'fcl', rate_type: null, time_range: 'all' });
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';

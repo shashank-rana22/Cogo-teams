@@ -4,7 +4,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight, IcMPortArrow, IcMFilter } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import { SELECT_ICON_MAPPING, SERVICE_TYPE_OPTIONS } from '../../../constants/dashboard_filter_controls';
+import {
+	SELECT_ICON_MAPPING,
+	SERVICE_TYPE_OPTIONS,
+	TIME_RANGE_OPTIONS,
+} from '../../../constants/dashboard_filter_controls';
 
 import FilterContainer from './FilterContainer';
 import styles from './styles.module.css';
@@ -13,7 +17,7 @@ const CONSTANT_ONE = 1;
 
 function Filters(props) {
 	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
-	const { service_type, origin, destination } = globalFilters;
+	const { service_type, time_range, origin, destination } = globalFilters;
 	const [showFiltersPopover, setShowFiltersPopover] = useState(false);
 	const [popupKey, setPopupKey] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
@@ -86,6 +90,19 @@ function Filters(props) {
 						className={styles.location_select}
 					/>
 				</div>
+			</div>
+			<div className={styles.service_type}>
+				<p className={styles.title_label}>Time Range</p>
+				<Select
+					size="sm"
+					isClearable={false}
+					placeholder="Select here"
+					value={time_range}
+					options={TIME_RANGE_OPTIONS}
+					prefix={null}
+					onChange={(value) => changePrimaryFilters('time_range', value)}
+					className={styles.time_range_drop_down}
+				/>
 			</div>
 			<div className={styles.filters_container}>
 				<Popover

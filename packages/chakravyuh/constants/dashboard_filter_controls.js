@@ -17,3 +17,22 @@ export const SELECT_ICON_MAPPING = {
 	fcl : <IcMFcl />,
 	air : <IcMAir />,
 };
+
+export const TIME_RANGE_OPTIONS = [
+	{
+		label : 'Last one month',
+		value : 'last_one_month',
+	},
+	{
+		label : 'Last three months',
+		value : 'last_three_months',
+	},
+	{
+		label : 'Last six months',
+		value : 'last_six_months',
+	},
+	{
+		label : 'All',
+		value : 'all',
+	},
+];
