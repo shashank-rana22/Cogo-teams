@@ -106,7 +106,7 @@ const getOrganizationalDetailsControls = (props) => {
 			},
 			isClearable        : true,
 			getModifiedOptions : ({ options }) => options.map(
-				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
+				(option) => ({ ...option, value: `${option.id}_${option.postal_code}` }),
 			),
 			disabled    : disabled || isEmpty(watchCities),
 			renderLabel : (item) => <RenderListLocationOption item={item} />,

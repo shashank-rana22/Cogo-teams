@@ -19,7 +19,7 @@
 
 .label_value_cotainer {
 	display: flex;
-	flex-basis: 25%;
+	flex-basis: 33%;
 	align-items: center;
 
 	@media (max-width: 768px) {
@@ -32,7 +32,20 @@
 	color: #828282;
 }
 
-.pills {
+.tooltip_content {
+	display: flex;
+	flex-direction: column;
+}
+
+.tooltip_child {
 	display: flex;
 	align-items: center;
+}
+
+.pill {
+	:global {
+		.ui_pill_text {
+			word-break: break-word;
+		}
+	}
 }

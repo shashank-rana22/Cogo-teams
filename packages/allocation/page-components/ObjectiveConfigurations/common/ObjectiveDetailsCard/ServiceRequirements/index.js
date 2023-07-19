@@ -2,7 +2,7 @@ import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
 function ServiceRequirements(props) {
-	const { serviceRequirementsDetails, operator } = props;
+	const { serviceRequirementsDetails, service_requirement_operator } = props;
 
 	return (
 		<div>
@@ -11,10 +11,10 @@ function ServiceRequirements(props) {
 			<div className={styles.card_list}>
 				{serviceRequirementsDetails.map((item, index) => (
 					<ServiceCard
-						key={item.id}
+						key={item.name}
 						index={index}
 						item={item}
-						operator={operator}
+						service_requirement_operator={service_requirement_operator}
 					/>
 				))}
 			</div>

@@ -144,7 +144,7 @@ import TransactionFunnelCard from './TransactionFunnelCard';
 function ObjectiveDetailsCard(props) {
 	const { objectiveData } = props;
 
-	// const { objectiveData } = useGetObjectiveDetails({ activeObjectiveId });
+	console.log('objectiveData :: ', objectiveData);
 
 	const {
 		service_requirements: serviceRequirementsDetails,
@@ -157,7 +157,7 @@ function ObjectiveDetailsCard(props) {
 		<>
 			<ServiceRequirements
 				serviceRequirementsDetails={serviceRequirementsDetails}
-				operator={service_requirement_operator}
+				service_requirement_operator={service_requirement_operator}
 			/>
 
 			{!isEmpty(organizationDetails) && <OrganizationDetailsCard organizationDetails={organizationDetails} />}

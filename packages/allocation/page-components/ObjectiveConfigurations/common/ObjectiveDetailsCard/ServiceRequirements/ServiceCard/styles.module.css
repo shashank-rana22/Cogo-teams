@@ -14,6 +14,7 @@
 .heading_container {
 	display: flex;
 	align-items: center;
+	margin-bottom: 8px;
 }
 
 .heading {
@@ -33,10 +34,13 @@
 .key_value_container {
 	display: flex;
 	align-items: center;
-	margin: 8px 0;
 }
 
 .value_container {
 	display: flex;
 	align-items: center;
+}
+
+.origin_location {
+	margin-right: 48px;
 }

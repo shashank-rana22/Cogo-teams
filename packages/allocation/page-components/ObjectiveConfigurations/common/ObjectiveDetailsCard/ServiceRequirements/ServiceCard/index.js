@@ -1,14 +1,19 @@
 import { Pill } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
+import CARD_DATA_MAPPING from './card-data-mapping';
 import styles from './styles.module.css';
 
 const FIRST_INDEX = 0;
 
 function ServiceCard(props) {
-	const { index, item, operator } = props;
+	const { index, item, service_requirement_operator } = props;
 
-	const { shipment_mode, service_type, trade_type, inco_term } = item;
+	const {
+		shipment_mode,
+		service_type,
+		trade_type,
+	} = item;
 
 	return (
 		<div className={styles.container}>
@@ -19,7 +24,7 @@ function ServiceCard(props) {
 						color="orange"
 						className={styles.operator}
 					>
-						{(operator || '').toUpperCase()}
+						{(service_requirement_operator || '').toUpperCase()}
 					</Pill>
 				)}
 
@@ -27,23 +32,18 @@ function ServiceCard(props) {
 					{startCase(shipment_mode)}
 					,
 					{' '}
-					{startCase(service_type)}
+					{startCase(service_type || '')}
 					,
 					{' '}
 					{startCase(trade_type || '')}
 				</h4>
 			</div>
 
-			<div className={styles.key_value_container}>
-				<div className={styles.label}>
-					Incoterm:
-				</div>
-				{!isEmpty(inco_term) && (
-					<div className={styles.value_container}>
-						{inco_term.map((value) => ` ${value.toUpperCase()},`)}
-					</div>
-				)}
-			</div>
+			{CARD_DATA_MAPPING.map((value) => {
+				const { accessor } = value;
+
+				return accessor(item);
+			})}
 		</div>
 	);
 }

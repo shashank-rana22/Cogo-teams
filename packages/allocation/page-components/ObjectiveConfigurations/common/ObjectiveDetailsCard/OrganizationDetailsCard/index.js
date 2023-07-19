@@ -1,7 +1,11 @@
-import { Pill } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Pill, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const INDEX_LENGTH_NORMALIZATION = 1;
+const MIN_LENGTH = 2;
 
 const CARD_DATA_MAPPING = [
 	{
@@ -19,6 +23,10 @@ const CARD_DATA_MAPPING = [
 	{
 		key   : 'pincodes',
 		label : 'Pincode',
+	},
+	{
+		key   : 'segments',
+		label : 'Segment',
 	},
 ];
 
@@ -44,16 +52,33 @@ function OrganizationDetailsCard(props) {
 								:
 							</div>
 
-							<div className={styles.pills}>
-								{locationItem.map((location) => (
-									<Pill
-										size="md"
-										key={location.id}
-									>
-										{location.name}
-									</Pill>
-								))}
-							</div>
+							<Tooltip content={(
+								<div className={styles.tooltip_content}>
+									{locationItem.map((location, index) => (
+										<div key={location.name}>
+											{index + INDEX_LENGTH_NORMALIZATION}
+											.
+											{' '}
+											{location.name || startCase(location) || null}
+										</div>
+									))}
+								</div>
+							)}
+							>
+								<div className={styles.tooltip_child}>
+									{locationItem.slice(GLOBAL_CONSTANTS.zeroth_index, MIN_LENGTH).map((location) => (
+										<Pill
+											className={styles.pill}
+											size="md"
+											key={location.id}
+										>
+											{location.name || startCase(location) || null}
+										</Pill>
+									))}
+									+
+									{locationItem.length > MIN_LENGTH && locationItem.length - MIN_LENGTH}
+								</div>
+							</Tooltip>
 						</div>
 					);
 				})}
