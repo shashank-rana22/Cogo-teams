@@ -73,3 +73,25 @@
 	font-size: 12px;
 	color: #828282;
 }
+
+.ticket_timer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.timer {
+	display: flex;
+	align-items: center;
+	color: #ee3425;
+
+	svg {
+		width: 16px;
+		height: 16px;
+		margin-right: 4px;
+
+		path {
+			fill: #ee3425;
+		}
+	}
+}

@@ -1,10 +1,12 @@
-import { cl } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
+import useCountdown from '../../../../utils/getCountdown';
 
 import styles from './styles.module.css';
 
@@ -15,6 +17,7 @@ function TicketSummary({
 }) {
 	const {
 		ID: id = '',
+		Tat: tat = '',
 		Type: type = '',
 		Status: status = '',
 		UpdatedAt: updatedAt = '',
@@ -26,6 +29,10 @@ function TicketSummary({
 
 	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
 
+	const endDate = new Date(tat);
+
+	const formattedTime = useCountdown(endDate);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -36,9 +43,18 @@ function TicketSummary({
 			</div>
 			<div className={styles.ticket_body}>
 				<div className={styles.ticket_header}>
-					<div className={styles.ticket_id}>
-						#
-						{id}
+					<div className={styles.ticket_timer}>
+						<div className={styles.ticket_id}>
+							#
+							{id}
+						</div>
+						<Tooltip content="Ticket escalation time" placement="right">
+							<div className={styles.timer}>
+								<IcCWaitForTimeSlots fill="#ee3425" />
+								{formattedTime}
+							</div>
+
+						</Tooltip>
 					</div>
 					<div className={styles.description}>{type}</div>
 				</div>
