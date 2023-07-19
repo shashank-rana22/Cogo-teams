@@ -21,7 +21,7 @@ function BulkCommunicationTemplate({ selectedAutoAssign = {} }) {
 
 			{((firstUserNames || []).map((name) => (
 				<div className={styles.user_names} key={name}>
-					{`${startCase(name.toLowerCase())}`}
+					{`${startCase(name?.toLowerCase())}` || 'User'}
 				</div>
 
 			)))}
