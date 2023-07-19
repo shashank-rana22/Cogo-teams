@@ -11,7 +11,13 @@ import VesselScheduleCard from './VesselScheduleCard';
 
 const FOUR = 4;
 function VesselSchedulesList({ showModal, setShowModal }) {
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({
+		started_at       : '',
+		q                : '',
+		shipping_line_id : '',
+		sort_by          : '',
+		page             : 1,
+	});
 	const { data, makeRequest, loading, totalItems } = useGetVesselSchedules({ filters });
 
 	let content = (data || [...Array(FOUR)])?.map((vessel) => (

@@ -12,7 +12,7 @@ const useListServiceLanes = ({ filters }) => {
 		{ manual: true },
 	);
 
-	const { page = 1, sort_by, q, origin_port_id, destination_port_id, shipping_line_id } = filters;
+	const { page = 1, sort_by, q, origin_port_id, destination_port_id, shipping_line_id, id } = filters;
 	const listServiceLanes = async () => {
 		try {
 			const payload = {
@@ -21,6 +21,7 @@ const useListServiceLanes = ({ filters }) => {
 					origin_port_id      : origin_port_id || undefined,
 					destination_port_id : destination_port_id || undefined,
 					shipping_line_id    : shipping_line_id || undefined,
+					id                  : id || undefined,
 				},
 				page_limit               : 10,
 				page,

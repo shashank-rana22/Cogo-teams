@@ -12,7 +12,12 @@ import styles from './styles.module.css';
 const SIX = 6;
 function ServiceLanesList({ showModal, setShowModal }) {
 	const [filters, setFilters] = useState({
-		page: 1,
+		sort_by             : '',
+		q                   : '',
+		origin_port_id      : '',
+		destination_port_id : '',
+		shipping_line_id    : '',
+		page                : 1,
 	});
 
 	const { data, loading, totalItems, currentPage, listServiceLanes } = useListServiceLanes({
