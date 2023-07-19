@@ -11,7 +11,7 @@ const SHIPMENT_STATE_MAPPINGS = {
 const DEFAULT_PAGE = 1;
 
 const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) => {
-	const { authParams, selected_agent_id, user } = useSelector(({ profile }) => profile) || {};
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [{ loading, data }, trigger] = useRequest({
@@ -22,7 +22,6 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 			filters: {
 				state                    : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
 				q                        : searchQuery,
-				stakeholder_id           : user?.id,
 				stakeholder_service_type : 'ftl_freight_service',
 				...filters,
 			},
