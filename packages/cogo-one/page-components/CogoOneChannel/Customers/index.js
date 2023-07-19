@@ -30,6 +30,8 @@ function Customers({
 	mailProps = {},
 	firestore = {},
 	viewType = '',
+	workPrefernceLoading = false,
+	setOpenKamContacts = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
@@ -55,6 +57,7 @@ function Customers({
 			setSelectedAutoAssign,
 			autoAssignChats,
 			setAutoAssignChats,
+			workPrefernceLoading,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -113,7 +116,7 @@ function Customers({
 					fullWidth
 					themeType="secondary"
 					onChange={(val) => {
-						setActiveTab({ tab: val, data: {} });
+						setActiveTab({ tab: val, data: {}, subTab: 'all' });
 					}}
 				>
 					{tabMappings.map((eachTab) => {
@@ -151,6 +154,7 @@ function Customers({
 				selectedAutoAssign={selectedAutoAssign}
 				setSelectedAutoAssign={setSelectedAutoAssign}
 				setAutoAssignChats={setAutoAssignChats}
+				setOpenKamContacts={setOpenKamContacts}
 			/>
 		</div>
 	);

@@ -33,12 +33,14 @@ function MessageList(messageProps) {
 		setSelectedAutoAssign = () => {},
 		autoAssignChats,
 		setAutoAssignChats = () => {},
+		workPrefernceLoading,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [carouselState, setCarouselState] = useState('hide');
 	const [searchValue, setSearchValue] = useState('');
-	const [activeSubTab, setActiveSubTab] = useState('all');
+
+	const { subTab } = activeTab || {};
 
 	const {
 		chatsData,
@@ -54,9 +56,14 @@ function MessageList(messageProps) {
 		searchValue,
 		viewType,
 		setActiveTab,
-		activeSubTab,
+		activeSubTab: subTab,
 		setCarouselState,
+		workPrefernceLoading,
 	});
+
+	const setActiveSubTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
+	};
 
 	const {
 		bulkAssignChat = () => {},
@@ -111,7 +118,7 @@ function MessageList(messageProps) {
 			/>
 
 			<Header
-				activeSubTab={activeSubTab}
+				activeSubTab={subTab}
 				setActiveSubTab={setActiveSubTab}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}

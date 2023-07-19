@@ -3,8 +3,8 @@ import { where } from 'firebase/firestore';
 
 const COMMON_ADMIN_ACCESIBLE_BUTTONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
 
-function getSupplySessionQuery({ sessionType, isContactsSelected = false }) {
-	return isContactsSelected
+function getSupplySessionQuery({ sessionType, activeSubTab = '' }) {
+	return activeSubTab === 'contacts'
 		? [where('session_type', 'in', ['bot', 'admin'])]
 		: [where('session_type', '==', sessionType)];
 }
@@ -24,6 +24,23 @@ function getKamButtons({
 	}
 
 	return [];
+}
+
+function getSalesAgentButtons({
+	supportAgentId,
+	userId,
+	showBotMessages,
+	isManager,
+}) {
+	if (supportAgentId === userId || isManager) {
+		return ['assign_modal'];
+	}
+
+	if (showBotMessages) {
+		return ['assign_to_me'];
+	}
+
+	return ['request_for_assign'];
 }
 
 function getSupplyAgentButtons({
@@ -54,21 +71,28 @@ function getSupplyAgentButtons({
 	return ['request_for_assign', 'add_me_to_group'];
 }
 
+function getSalesSessionQuery({ sessionType, activeSubTab = '' }) {
+	return activeSubTab === 'kamContacts'
+		? [where('session_type', 'in', ['bot', 'admin'])]
+		: [where('session_type', '==', sessionType)];
+}
+
 export const VIEW_TYPE_GLOBAL_MAPPING = {
 	sales: {
 		all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 		observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 		teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 		group_chats_query         : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access      : ['all', 'observer', 'teams'],
+		session_type_query        : getSalesSessionQuery,
+		kam_contacts_base_query   : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
+		chat_sub_tabs_access      : ['all', 'observer', 'teams', 'kamContacts'],
 		default_side_nav          : 'profile',
 		accesible_filters         : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
 		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : getKamButtons,
+		get_accesible_assign_buttons : getSalesAgentButtons,
 		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
@@ -86,16 +110,18 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
+			global_contacts             : true,
 		},
 	},
 	sales_admin: {
-		all_chats_base_query   : () => [where('agent_type', 'in', ['sales'])],
-		group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
-		teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
-		session_type_query     : ({ sessionType }) => [where('session_type', '==', sessionType)],
-		chat_sub_tabs_access   : ['all', 'teams'],
-		default_side_nav       : 'profile',
-		accesible_filters      : {
+		all_chats_base_query    : () => [where('agent_type', 'in', ['sales'])],
+		group_chats_query       : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
+		teams_chats_base_query  : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
+		session_type_query      : getSalesSessionQuery,
+		kam_contacts_base_query : ({ agentId }) => [where('user_details.agent_ids', 'array-contains', agentId)],
+		chat_sub_tabs_access    : ['all', 'teams', 'kamContacts'],
+		default_side_nav        : 'profile',
+		accesible_filters       : {
 			observer : ['closed_session'],
 			all      : ['chat_tags'],
 		},
@@ -118,6 +144,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
+			global_contacts             : true,
 		},
 	},
 	support: {
@@ -152,6 +179,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
+			global_contacts             : false,
 		},
 	},
 	support_admin: {
@@ -184,6 +212,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
+			global_contacts             : false,
 		},
 	},
 	supply: {
@@ -220,6 +249,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : false,
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
+			global_contacts             : false,
 		},
 	},
 	supply_admin: {
@@ -255,6 +285,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
+			global_contacts             : false,
 		},
 	},
 	shipment_specialist: {
@@ -285,6 +316,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			show_organization_users     : false,
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
+			global_contacts             : false,
 		},
 	},
 	cogoone_admin: {
@@ -317,6 +349,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : true,
+			global_contacts             : true,
 		},
 	},
 };

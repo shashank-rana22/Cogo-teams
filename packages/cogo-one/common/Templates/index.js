@@ -1,6 +1,5 @@
 import { Input, Button } from '@cogoport/components';
-import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -8,8 +7,8 @@ import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTe
 import useListTemplate from '../../hooks/useListTemplates';
 import hideDetails from '../../utils/hideDetails';
 
-import BulkCommunicationTemplate from './BulkCommunicaitonTemplate';
 import CreateTemplateForm from './CreateTemplateForm';
+import { Header } from './headerHelpers';
 import styles from './styles.module.css';
 import { Preview, Loader, ListItem } from './templatesHelpers';
 
@@ -22,6 +21,7 @@ function Templates({
 	setDialNumber = () => {},
 	viewType = '',
 	selectedAutoAssign = {},
+	userName = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
 	const [activeCard, setActiveCard] = useState({
@@ -41,8 +41,6 @@ function Templates({
 	);
 
 	const isDefaultOpen = type === 'whatsapp_new_message_modal';
-	const maskMobileNumber = type === 'voice_call_component';
-	const isBulkCommunicationTemplate = type === 'bulk_communication';
 
 	const maskedMobileNumber = `${dialNumber?.country_code}
 	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
@@ -85,37 +83,14 @@ function Templates({
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
 				<div>
-					{isBulkCommunicationTemplate && (
-						<BulkCommunicationTemplate selectedAutoAssign={selectedAutoAssign} />
-					)}
-
-					{isDefaultOpen && (
-						<>
-							<div className={styles.wrap_heading}>
-								<div>Enter mobile number</div>
-							</div>
-							<div className={styles.wrap_mobile_number}>
-								<SelectMobileNumber
-									value={dialNumber}
-									onChange={(val) => setDialNumber(val)}
-									inputType="number"
-									placeholder="Enter number"
-								/>
-							</div>
-						</>
-					)}
-					<div className={styles.template_heading}>
-						<div>Select a template</div>
-					</div>
-					{
-						maskMobileNumber && (
-							<div className={styles.flex_div}>
-								<div className={styles.mobile_number}>To</div>
-								<IcCSendWhatsapp className={styles.whatsapp_icon} />
-								<div className={styles.mobile_number}>{maskedMobileNumber}</div>
-							</div>
-						)
-					}
+					<Header
+						type={type}
+						dialNumber={dialNumber}
+						setDialNumber={setDialNumber}
+						maskedMobileNumber={maskedMobileNumber}
+						userName={userName}
+						selectedAutoAssign={selectedAutoAssign}
+					/>
 					<div className={styles.container}>
 						<Input
 							value={qfilter}
