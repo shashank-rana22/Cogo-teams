@@ -160,7 +160,8 @@ function Filters({ filters, setFilters }) {
 				<div className={styles.sub_heading}>
 					Date
 				</div>
-				{!(filters?.service === 'air_customs')
+				{!(['air_customs', 'fcl_customs', 'lcl_customs', 'ftl_freight', 'ltl_freight', 'haulage_freight']
+					.includes(filters?.service))
 					? (
 						<div className={styles.date_subsection}>
 							<div className={styles.date_text}>

@@ -1,6 +1,6 @@
 const revenueDesk = {
 	'/[partner_id]/revenue-desk': {
-		navigation: 'coe-revenue_desk',
+		navigation: 'revenue_desk-bookings',
 	},
 };
 
