@@ -1145,7 +1145,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/revenue-desk',
 				type          : '',
 				main_apis     : [],
-				possible_apis : apis.revenue_desk,
+				possible_apis : [...apis.revenue_desk, ...apis.sop],
 
 			},
 			{
