@@ -69,7 +69,6 @@
 	cursor: pointer;
 	background: rgb(122 121 121 / 20.6%);
 	border-radius: 48px;
-	box-shadow: 2px 2px 10px #b7b4b4;
 	animation-name: bottom-animation;
 	animation-duration: 0.5s;
 
@@ -107,7 +106,6 @@
 	cursor: pointer;
 	background-color: #6862627b;
 	border-radius: 5px;
-	box-shadow: 2px 2px 10px #b7b4b4;
 	fill: #fff;
 }
 
@@ -171,7 +169,6 @@
 	color: #fff;
 	background: #55545442;
 	border-radius: 48px;
-	box-shadow: 2px 2px 10px #b7b4b4;
 
 	.call_text {
 		display: flex;
