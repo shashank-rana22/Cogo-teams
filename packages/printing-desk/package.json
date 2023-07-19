@@ -1,7 +1,7 @@
 {
-	"name": "@cogoport/ground-ops",
-	"version": "0.1.0",
-	"description": "Package for Operators",
+	"name": "@cogoport/printing-desk",
+	"version": "1.0.0",
+	"description": "Package for Printing Desk",
 	"private": true,
 	"dependencies": {
 		"@cogoport/components": "^1.0.322",
@@ -17,7 +17,6 @@
 		"html2canvas": "^1.4.1",
 		"file-saver": "^2.0.5",
 		"jspdf": "^2.5.1",
-		"react": "18.2.0",
-		"uuid": "^9.0.0"
+		"react": "18.2.0"
 	}
 }

@@ -1,0 +1,42 @@
+.loading_style {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.end_message {
+	margin-top: 20px;
+	font-size: var(--font-size-xl);
+	color: var(--color-secondary-greyscale-1);
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.scroll {
+	max-height: 600px;
+	overflow: auto;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	margin: 8px;
+}
+
+.accordian_style {
+	position: relative;
+	bottom: 20px;
+	max-width: 60px;
+	max-height: 16px;
+	margin: auto;
+	background: var(--color-secondary-5);
+	border: 1px solid #eceff8;
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0 5px 10px #0000000d;
+
+	svg {
+		width: 100%;
+		cursor: pointer;
+	}
+}
