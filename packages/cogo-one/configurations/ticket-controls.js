@@ -1,9 +1,10 @@
 import { asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
+import { merge } from '@cogoport/utils';
 
 const useRaiseTicketControls = ({ watchOrgId }) => {
-	const ticketTypeOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
+	const ticketTypeOptions = useGetAsyncTicketOptions(merge(asyncFieldsTicketTypes(), { initialCall: false }));
 
 	const organizationOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizations(),

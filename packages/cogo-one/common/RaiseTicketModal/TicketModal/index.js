@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useListDefaultTypes from '../../../hooks/useListDefaultTypes';
 import useRaiseTicket from '../../../hooks/useRaiseTicket';
@@ -9,8 +9,7 @@ import useRaiseTicket from '../../../hooks/useRaiseTicket';
 import RaiseTickets from './RaiseTickets';
 import styles from './styles.module.css';
 
-const getDefaultValues = ({ shipmentData = {}, ticketType = '' }) => ({
-	issue_type      : ticketType,
+const getDefaultValues = ({ shipmentData = {} }) => ({
 	organization_id : shipmentData?.importer_exporter_id,
 	priority        : 'medium',
 	sid             : shipmentData?.shipment_id,
@@ -23,7 +22,7 @@ function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 		AdditionalInfo: additionalInfo = '',
 	} = ticketDefaultTypeData[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const defaultFormValues = getDefaultValues({ shipmentData, ticketType });
+	const defaultFormValues = getDefaultValues({ shipmentData });
 
 	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
 
@@ -32,26 +31,28 @@ function TicketModal({ shipmentData = {}, setShowRaiseTicket = () => {} }) {
 		handleSubmit,
 		formState: { errors },
 		watch,
+		setValue = () => {},
 	} = useForm({
 		defaultValues: defaultFormValues,
 	});
-
 	const watchOrgId = watch('organization_id');
+
+	useEffect(() => {
+		setValue('issue_type', ticketType);
+	}, [setValue, ticketType]);
 
 	return (
 		<form onSubmit={handleSubmit(raiseTickets)}>
 			<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
 
 			<Modal.Body className={styles.preview_modal_body}>
-				{ticketType && (
-					<RaiseTickets
-						errors={errors}
-						control={control}
-						additionalInfo={additionalInfo}
-						shipmentData={shipmentData}
-						watchOrgId={watchOrgId}
-					/>
-				)}
+				<RaiseTickets
+					errors={errors}
+					control={control}
+					additionalInfo={additionalInfo}
+					shipmentData={shipmentData}
+					watchOrgId={watchOrgId}
+				/>
 			</Modal.Body>
 
 			<Modal.Footer style={{ padding: 12 }}>
