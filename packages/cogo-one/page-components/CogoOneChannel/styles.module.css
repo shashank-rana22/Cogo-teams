@@ -27,11 +27,26 @@
 }
 
 .user_profile_layout {
+	position: relative;
 	width: 28%;
 	height: 100%;
 	overflow-x: hidden;
 	background-color: #fff;
 	border-radius: 4px;
+}
+
+.disable_user_profile {
+	pointer-events: none;
+}
+
+.overlay_div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(255 255 255 / 40%);
+	backdrop-filter: blur(2px);
 }
 
 .empty_page {

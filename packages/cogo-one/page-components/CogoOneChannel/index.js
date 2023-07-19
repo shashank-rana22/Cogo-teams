@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -37,8 +38,10 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab  : 'message',
-		data : assigned_chat ? {
+		tab               : 'message',
+		subTab            : 'all',
+		hasNoFireBaseRoom : false,
+		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
@@ -50,6 +53,7 @@ function CogoOne() {
 	const [buttonType, setButtonType] = useState('');
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
+	const [openKamContacts, setOpenKamContacts] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -59,7 +63,8 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType } = useAgentWorkPrefernce();
+	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -81,6 +86,7 @@ function CogoOne() {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
+	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -111,6 +117,8 @@ function CogoOne() {
 						mailProps={mailProps}
 						firestore={firestore}
 						suggestions={suggestions}
+						workPrefernceLoading={workPrefernceLoading}
+						setOpenKamContacts={setOpenKamContacts}
 					/>
 				</div>
 
@@ -135,11 +143,14 @@ function CogoOne() {
 									mailProps={mailProps}
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
+									setModalType={setModalType}
 								/>
 							</div>
 
 							{activeTab?.tab !== 'mail' && (
-								<div className={styles.user_profile_layout}>
+								<div className={cl`${styles.user_profile_layout} 
+								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
 										activeTab={activeTab?.tab}
@@ -154,6 +165,7 @@ function CogoOne() {
 										userId={userId}
 										setActiveTab={setActiveTab}
 									/>
+									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -167,6 +179,9 @@ function CogoOne() {
 				refetchTickets={refetchTickets}
 				firestore={firestore}
 				userId={userId}
+				openKamContacts={openKamContacts}
+				setOpenKamContacts={setOpenKamContacts}
+				setActiveTab={setActiveTab}
 			/>
 		</>
 	);

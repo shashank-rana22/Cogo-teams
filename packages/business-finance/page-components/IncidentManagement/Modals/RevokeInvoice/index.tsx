@@ -20,7 +20,6 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 		refetch,
 		setShowModal,
 		id,
-		row,
 		reqRevokeInvoiceRequest,
 		remarks,
 	});
