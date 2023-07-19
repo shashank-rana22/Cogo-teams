@@ -1,7 +1,7 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getByKey, omit } from '@cogoport/utils';
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
@@ -13,11 +13,6 @@ const FIRST_CHAR = 0;
 const SLICE_FROM = 1;
 
 function Details({ serviceData = [] }) {
-	const keysForPreference = useMemo(
-		() => Array(serviceData.length).fill(null).map(() => Math.random()),
-		[serviceData.length],
-	);
-
 	const {
 		service_type,
 		state,
@@ -65,9 +60,9 @@ function Details({ serviceData = [] }) {
 
 			{Object.keys(SERVICE_INITIAL_KEYS).length > MIN_LENGTH ? (
 				<div className={cl`${styles.multiservices_heading} ${styles[state]}`}>
-					{(Object.keys(SERVICE_INITIAL_KEYS)).map((val, i) => (
+					{(Object.keys(SERVICE_INITIAL_KEYS)).map((val) => (
 						<Button
-							key={keysForPreference[i]}
+							key={val}
 							themeType="none"
 							className={cl`${styles.mainservice_tabs}
 										${multiServiceType === val ? styles.active : null}
@@ -91,12 +86,12 @@ function Details({ serviceData = [] }) {
 			) : null}
 
 			<div className={cl`${styles.multiservice} ${styles[state]}`}>
-				{(service_items_key || []).map((element, i) => (getByKey(
+				{(service_items_key || []).map((element) => (getByKey(
 					SERVICE_INITIAL_KEYS[multiServiceType],
 					element?.key,
 				) ? (
 					<Item
-						key={keysForPreference[i]}
+						key={element.key}
 						state={state}
 						label={element}
 						detail={SERVICE_INITIAL_KEYS[multiServiceType]}
@@ -105,14 +100,14 @@ function Details({ serviceData = [] }) {
 			</div>
 
 			<div className={styles.remaining_keys}>
-				{(service_items_key || {}).map((element, i) => (getByKey(remainingServiceData, element.key) ? (
-					<Item key={keysForPreference[i]} state={state} label={element} detail={remainingServiceData} />
+				{(service_items_key || []).map((element) => (getByKey(remainingServiceData, element.key) ? (
+					<Item key={element.key} state={state} label={element} detail={remainingServiceData} />
 				) : null))}
 			</div>
 
 			<div className={styles.free_days}>
-				{(service_items_key || {}).map((element, i) => (getByKey(freeDays, element.key) ? (
-					<Item key={keysForPreference[i]} state={state} label={element} detail={freeDays} />
+				{(service_items_key || []).map((element) => (getByKey(freeDays, element.key) ? (
+					<Item key={element.key} state={state} label={element} detail={freeDays} />
 				) : null))}
 			</div>
 		</div>
