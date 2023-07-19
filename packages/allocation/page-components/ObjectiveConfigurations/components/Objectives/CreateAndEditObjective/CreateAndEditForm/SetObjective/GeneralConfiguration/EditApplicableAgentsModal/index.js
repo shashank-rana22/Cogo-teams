@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import useEditApplicableAgents from './useEditApplicableAgents';
 
 function EditApplicableAgentsModal(props) {
-	const { showEditAgentsModal, setShowEditAgentsModal, selectedRoles, formValues, setFormValues } = props;
+	const { showEditAgentsModal, setShowEditAgentsModal, watchRoles, formValues, setFormValues } = props;
 
 	const {
 		list,
@@ -24,7 +24,7 @@ function EditApplicableAgentsModal(props) {
 		selectedAgentIds,
 		setSelectedAgentIds,
 		onApplyChanges,
-	} = useEditApplicableAgents({ selectedRoles, formValues, setFormValues, setShowEditAgentsModal });
+	} = useEditApplicableAgents({ watchRoles, formValues, setFormValues, setShowEditAgentsModal });
 
 	const { LIST_COLUMNS } = getListColumns({ selectMode, selectedAgentIds, setSelectedAgentIds });
 

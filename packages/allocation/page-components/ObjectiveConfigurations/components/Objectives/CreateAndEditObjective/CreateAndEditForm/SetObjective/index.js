@@ -6,7 +6,7 @@ import ObjectiveRequirements from './ObjectiveRequirements';
 function SetObjective(props) {
 	const { formValues, setFormValues, setActiveStep } = props;
 
-	const [generalConfigFormState, setGeneralConfigFormState] = useState('edit');
+	const [generalConfigFormState, setGeneralConfigFormState] = useState(formValues.generalConfigFormState || 'edit');
 
 	const objReqRef = useRef({});
 	const genConfigRef = useRef({});
@@ -42,6 +42,7 @@ function SetObjective(props) {
 				setFormValues={setFormValues}
 				disabled={generalConfigFormState === 'edit'}
 				setActiveStep={setActiveStep}
+				generalConfigFormState={generalConfigFormState}
 			/>
 		</>
 	);

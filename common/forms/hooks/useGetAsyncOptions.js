@@ -68,14 +68,18 @@ function useGetAsyncOptions({
 					TO_BE_FETCHED.push(v);
 				}
 			});
-			let res;
+			let unhydratedOptions;
 			if (TO_BE_FETCHED.length) {
-				res = await triggerSingle({
+				const res = await triggerSingle({
 					params: merge(params, { filters: { [valueKey]: TO_BE_FETCHED } }),
 				});
-				storeoptions.push(...res?.data?.list || []);
+				unhydratedOptions = res?.data?.list;
+				if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
+					unhydratedOptions = getModifiedOptions({ options: unhydratedOptions });
+				}
+				storeoptions.push(...unhydratedOptions || []);
 			}
-			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.list || []);
+			unorderedHydratedValue = unorderedHydratedValue.concat(unhydratedOptions || []);
 
 			const hydratedValue = value.map((v) => {
 				const singleHydratedValue = unorderedHydratedValue.find((uv) => uv?.[valueKey] === v);
@@ -93,7 +97,11 @@ function useGetAsyncOptions({
 			const res = await triggerSingle({
 				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || null;
+			let unhydratedOptions = res?.data?.list;
+			if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
+				unhydratedOptions = getModifiedOptions({ options: unhydratedOptions });
+			}
+			return unhydratedOptions?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};

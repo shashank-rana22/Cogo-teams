@@ -1,24 +1,43 @@
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import getGeneralConfiguratioFormControls from '../../../../../../configurations/general-configuration-form-controls';
+import getSeparatedIdData from '../../../../../../helpers/get-separated-id-data';
 
 const useSetGeneralConfiguration = (props) => {
-	const { setFormValues, onSaveCallback, onResetCallback, disabled } = props;
+	const { formValues, setFormValues, onSaveCallback, onResetCallback, disabled } = props;
 
-	const [selectedRoles, setSelectedRoles] = useState([]);
+	const {
+		generalConfiguration:
+		{
+			type,
+			name,
+			partner:{ id: partner_id, business_name: partner_name } = {},
+			channel,
+			roles: agentRoles,
+			lifecycle_stage,
+		},
+	} = formValues;
+
 	const [showEditAgentsModal, setShowEditAgentsModal] = useState(false);
 
-	const { control, watch, handleSubmit, resetField, formState: { errors } } = useForm({
+	const { control, watch, handleSubmit, setValue, formState: { errors } } = useForm({
 		defaultValues: {
-			roles: [],
+			type,
+			name,
+			partner : (partner_id && partner_name) ? `${partner_id}_${partner_name}` : '',
+			channel,
+			roles   : !isEmpty(agentRoles) ? agentRoles.map((role) => `${role.id}_${role.name}`) : [],
+			lifecycle_stage,
 		},
 	});
 
 	const watchPartner = watch('partner');
 	const watchChannel = watch('channel');
+	const watchRoles = watch('roles');
 
-	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, setSelectedRoles, disabled });
+	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, disabled });
 
 	const onSave = (values) => {
 		const { partner } = values;
@@ -32,7 +51,7 @@ const useSetGeneralConfiguration = (props) => {
 				partner: {
 					id, business_name,
 				},
-				roles: selectedRoles,
+				roles: getSeparatedIdData({ values: watchRoles }),
 			},
 			objectiveRequirements: {},
 		}));
@@ -47,23 +66,28 @@ const useSetGeneralConfiguration = (props) => {
 	};
 
 	useEffect(() => {
-		resetField('roles');
+		const subscription = watch((_, { name: controlName }) => {
+			if (controlName === 'partner' || controlName === 'channel') {
+				setValue('roles', []);
+			}
 
-		setSelectedRoles([]);
+			if (controlName === 'roles') {
+				setFormValues((previousValues) => ({
+					...previousValues,
+					generalConfiguration: {
+						...(previousValues.generalConfiguration || {}),
+						selectMode : 'select_all',
+						user_ids   : [],
+					},
+				}));
+			}
+		});
 
-		setFormValues((previousValues) => ({
-			...previousValues,
-			generalConfiguration: {
-				...(previousValues.generalConfiguration || {}),
-				roles      : [],
-				selectMode : 'select_all',
-				user_ids   : [],
-			},
-		}));
-	}, [watchPartner, watchChannel, resetField, setFormValues]);
+		return () => subscription.unsubscribe();
+	}, [watch, setValue, setFormValues]);
 
 	return {
-		selectedRoles,
+		watchRoles,
 		showEditAgentsModal,
 		setShowEditAgentsModal,
 		control,

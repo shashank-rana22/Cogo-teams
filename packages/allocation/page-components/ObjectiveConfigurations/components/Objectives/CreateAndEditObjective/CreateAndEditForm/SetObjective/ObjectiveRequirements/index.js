@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 
 const ObjectiveRequirements = forwardRef((props, ref) => {
-	const { formValues, setFormValues, disabled, setActiveStep } = props;
+	const { formValues, setFormValues, disabled, setActiveStep, generalConfigFormState } = props;
 
 	const divRef = useRef({});
 
@@ -59,6 +59,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 				},
 				service_requirements,
 			},
+			generalConfigFormState,
 		}));
 
 		setActiveStep(REVIEW_OBJECTIVE);

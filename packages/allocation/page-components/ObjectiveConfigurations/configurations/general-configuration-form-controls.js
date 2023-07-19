@@ -5,7 +5,7 @@ import getChannelWiseRolesFilters from '../helpers/get-channel-wise-roles-filter
 import getEntityOptions from '../helpers/get-entity-options';
 
 const getGeneralConfiguratioFormControls = (props) => {
-	const { watchPartner, watchChannel, setSelectedRoles, disabled } = props;
+	const { watchPartner, watchChannel, disabled } = props;
 
 	const controls = [
 		{
@@ -105,6 +105,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'partner_roles',
+			valueKey    : 'value',
 			initialCall : false,
 			params      : {
 				permissions_data_required : false,
@@ -119,9 +120,9 @@ const getGeneralConfiguratioFormControls = (props) => {
 			rules: {
 				required: 'Roles is required',
 			},
-			onChange: (_, selectedRoles) => {
-				setSelectedRoles(selectedRoles?.map((role) => ({ id: role.id, name: role.name })));
-			},
+			getModifiedOptions: ({ options }) => options.map(
+				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
+			),
 			disabled,
 		},
 	];

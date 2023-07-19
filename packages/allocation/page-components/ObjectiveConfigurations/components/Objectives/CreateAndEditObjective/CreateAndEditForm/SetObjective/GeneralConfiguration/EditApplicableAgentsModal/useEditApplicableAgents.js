@@ -1,9 +1,10 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useEditApplicableAgents = (props) => {
-	const { selectedRoles, formValues, setFormValues, setShowEditAgentsModal } = props;
+	const { watchRoles, formValues, setFormValues, setShowEditAgentsModal } = props;
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -17,7 +18,7 @@ const useEditApplicableAgents = (props) => {
 		page       : 1,
 		page_limit : 10,
 		filters    : {
-			role_ids : selectedRoles.map((role) => role.id),
+			role_ids : watchRoles.map((role) => role.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]),
 			status   : 'active',
 			q        : searchQuery || undefined,
 		},

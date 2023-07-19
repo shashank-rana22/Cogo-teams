@@ -21,7 +21,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 	} = props;
 
 	const {
-		selectedRoles,
+		watchRoles,
 		showEditAgentsModal,
 		setShowEditAgentsModal,
 		control,
@@ -31,6 +31,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 		onSave,
 		onReset,
 	} = useSetGeneralConfiguration({
+		formValues,
 		setFormValues,
 		onSaveCallback,
 		onResetCallback,
@@ -77,11 +78,12 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 							size="lg"
 							themeType="secondary"
 							onClick={() => {
-								if (isEmpty(selectedRoles)) {
+								if (isEmpty(watchRoles)) {
 									return Toast.error('Please Select a role first');
 								}
 								return setShowEditAgentsModal(true);
 							}}
+							// onClick={() => setShowEditAgentsModal(true)}
 							disabled={disabled}
 						>
 							<IcMEdit style={{ marginRight: '4px' }} />
@@ -123,7 +125,7 @@ const GeneralConfiguration = forwardRef((props, ref) => {
 				<EditApplicableAgentsModal
 					showEditAgentsModal={showEditAgentsModal}
 					setShowEditAgentsModal={setShowEditAgentsModal}
-					selectedRoles={selectedRoles}
+					watchRoles={watchRoles}
 					formValues={formValues}
 					setFormValues={setFormValues}
 				/>
