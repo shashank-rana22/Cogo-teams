@@ -32,7 +32,26 @@ const getButtonLabel = ({ checkoutMethod, booking_status }) => {
 	return 'Place Booking';
 };
 
-function BookingConfirmationFooter({ detail = {}, checkoutMethod = '', disableButtonConditions = false }) {
+const getDisabledCondition = ({
+	checkoutMethod,
+	booking_status,
+	manager_approval_proof,
+	isControlBookingDetailsFilled,
+}) => {
+	if (checkoutMethod === 'controlled_checkout') {
+		return ['pending_approval', 'rejected'].includes(booking_status)
+			|| !manager_approval_proof
+			|| !isControlBookingDetailsFilled;
+	}
+
+	return false;
+};
+
+function BookingConfirmationFooter({
+	detail = {},
+	checkoutMethod = '',
+	isControlBookingDetailsFilled = false,
+}) {
 	const timerRef = useRef(null);
 
 	const {
@@ -42,7 +61,10 @@ function BookingConfirmationFooter({ detail = {}, checkoutMethod = '', disableBu
 		importer_exporter,
 	} = detail;
 
-	const { booking_status = '' } =	checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const {
+		booking_status = '',
+		manager_approval_proof = '',
+	} = checkout_approvals[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { controlBookingApproval, loading } = useControlBookingApproval({
 		checkout_approvals,
@@ -108,8 +130,14 @@ function BookingConfirmationFooter({ detail = {}, checkoutMethod = '', disableBu
 					<Button
 						type="button"
 						size="lg"
-						onClick={() => handleSubmit()}
+						onClick={handleSubmit}
 						loading={loading}
+						disabled={getDisabledCondition({
+							checkoutMethod,
+							booking_status,
+							manager_approval_proof,
+							isControlBookingDetailsFilled,
+						})}
 					>
 						{getButtonLabel({ checkoutMethod, booking_status })}
 					</Button>

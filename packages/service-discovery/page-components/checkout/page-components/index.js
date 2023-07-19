@@ -1,6 +1,6 @@
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import Header from '../../../common/Header';
 import { LoadingState } from '../commons/LoadingState';
@@ -26,17 +26,18 @@ function Checkout({ checkout_type = '' }) {
 		entity_types : profile?.partner?.entity_types,
 	}));
 
+	const [headerProps, setHeaderProps] = useState({});
+
 	const { checkout_id = '' } = query;
 
 	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id });
-
-	const { updateCheckout, updateLoading } = useUpdateCheckout({ getCheckout });
 
 	const {
 		detail = {},
 		rate,
 		currency_conversions: conversions,
 		invoice,
+		possible_subsidiary_services = [],
 	} = data;
 
 	const {
@@ -60,6 +61,8 @@ function Checkout({ checkout_type = '' }) {
 	} = credit_details || {};
 
 	const { is_tnc_accepted = false } = credit_terms_amd_condition || {};
+
+	const { updateCheckout, updateLoading } = useUpdateCheckout({ getCheckout, detail });
 
 	const {
 		data: orgData = {},
@@ -126,6 +129,9 @@ function Checkout({ checkout_type = '' }) {
 			showOverallCreditRisk,
 			kycShowCondition,
 			tncPresent,
+			headerProps,
+			setHeaderProps,
+			possible_subsidiary_services,
 		}),
 		[
 			primaryService,
@@ -150,6 +156,8 @@ function Checkout({ checkout_type = '' }) {
 			showOverallCreditRisk,
 			kycShowCondition,
 			tncPresent,
+			headerProps,
+			possible_subsidiary_services,
 		],
 	);
 
@@ -163,6 +171,8 @@ function Checkout({ checkout_type = '' }) {
 		return null;
 	}
 
+	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
+
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
 			<div className={styles.container}>
@@ -171,6 +181,8 @@ function Checkout({ checkout_type = '' }) {
 					service_key="primary_service"
 					activePage="checkout"
 					loading={loading}
+					headerProps={headerProps}
+					showAdditionalHeader={showAdditionalHeader}
 				/>
 
 				<ActiveComponent state={state} />

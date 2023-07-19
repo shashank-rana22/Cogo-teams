@@ -4,6 +4,12 @@
 
 .form_group {
 	margin-bottom: 24px;
+
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+	}
 }
 
 .error_message {

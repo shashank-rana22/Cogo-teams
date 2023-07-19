@@ -21,7 +21,9 @@ function AdditionalServicesForm({
 	refetchSearch = () => {},
 }) {
 	const { addService = () => {}, loading = false } = useSpotSearchService({
-		refetchSearch, rateCardData,
+		refetchSearch,
+		rateCardData,
+		checkout_id: detail?.checkout_id,
 	});
 
 	const {

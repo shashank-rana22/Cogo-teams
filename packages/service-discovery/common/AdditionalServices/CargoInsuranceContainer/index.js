@@ -118,6 +118,7 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 					setAddCargoInsurance={setShowModal}
 					setDone={setIsSelected}
 					service_details={service_details}
+					checkout_id={checkout_id}
 				/>
 			)}
 

@@ -1,6 +1,6 @@
+import { cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 // eslint-disable-next-line max-len
 import AdditionalServicesForm from '../../page-components/SearchResults/components/AdditionalServices/AdditionalServicesForm';
@@ -26,6 +26,7 @@ function Header({
 	headerProps = {},
 	service_key = 'search_type',
 	loading = false,
+	activePage = '',
 	...rest
 }) {
 	const { platformTheme } = useSelector(({ profile }) => profile);
@@ -40,12 +41,12 @@ function Header({
 	};
 
 	const SubHeaderComponent = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key] || null;
-	const isAllowedToEdit = rest.activePage === 'search_results';
+	const isAllowedToEdit = activePage === 'search_results';
 
 	return (
-		<div className={`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}>
+		<div className={cl`${styledTheme.container} ${showAdditionalHeader ? styles.show : {}}`}>
 			<div className={styledTheme.header_wrapper}>
-				{scrollDirection === 'up' ? (
+				{scrollDirection === 'up' && activePage !== 'checkout' ? (
 					<Back heading={rest.headerHeading} {...rest} />
 				) : null}
 
@@ -59,7 +60,7 @@ function Header({
 							platformTheme={platformTheme}
 							showAdditionalHeader={showAdditionalHeader}
 							isAllowedToEdit={isAllowedToEdit}
-							activePage={rest.activePage}
+							activePage={activePage}
 						/>
 					</div>
 
@@ -68,7 +69,7 @@ function Header({
 							data={data}
 							service_key={service_key}
 							loading={loading && isEmpty(data)}
-							activePage={rest.activePage}
+							activePage={activePage}
 							isEditable={isAllowedToEdit}
 						/>
 

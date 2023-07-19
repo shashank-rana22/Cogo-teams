@@ -7,17 +7,22 @@ import useUpdateCustomizeQuotation from '../../../../hooks/useUpdateCustomizeQuo
 import AddLineItem from './AddLineItem';
 import useListRateChargeCodes from './useListRateChargeCodes';
 
-function AddLineItemModal({ setAddLineItemData, addLineItemData, setRateDetails, checkout_id }) {
+function AddLineItemModal({
+	setAddLineItemData = () => {},
+	addLineItemData = {},
+	checkout_id = '',
+	getCheckout = () => {},
+}) {
 	const ref = useRef({});
 
-	const { service_type, service_id = '', index } = addLineItemData || {};
+	const { service_type, service_id = '' } = addLineItemData || {};
 
 	const { CHARGE_CODE_DATA } = useListRateChargeCodes({ service_type });
 
-	const {
-		updateCustomizeQuotation,
-		loading,
-	} = useUpdateCustomizeQuotation({ setAddLineItemData, setRateDetails, index, checkout_id });
+	const { updateCustomizeQuotation, loading } = useUpdateCustomizeQuotation({
+		setAddLineItemData,
+		getCheckout,
+	});
 
 	const handleSubmitForm = async () => {
 		await ref.current.handleSubmit().then((res) => {

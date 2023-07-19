@@ -8,14 +8,12 @@ function ServiceBreakup({
 	detail = {},
 	rate = {},
 	setRateDetails = () => {},
-	fclLocalEmpty,
-	shouldEditMargin,
-	disableForm,
+	fclLocalEmpty = true,
+	shouldEditMargin = false,
+	disableForm = false,
 }) {
 	if (fclLocalEmpty) {
-		return (
-			<div className={styles.locals_rate}>Locals charges will be billed at Actual</div>
-		);
+		return null;
 	}
 
 	const { line_items = [] } = item;
@@ -34,12 +32,11 @@ function ServiceBreakup({
 				<RenderLineItem
 					key={lineItem?.product_code}
 					lineItem={lineItem}
-					id_prefix={`${index}_${itemIndex}`}
 					setRateDetails={setRateDetails}
 					serviceIndex={index}
 					lineItemIndex={itemIndex}
 					rate={rate}
-					shouldEditMargin={shouldEditMargin}
+					shouldEditMargin={shouldEditMargin && item?.service_type !== 'cargo_insurance'}
 					detail={detail}
 					service_type={item.service_type}
 					disableForm={disableForm}

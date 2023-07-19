@@ -52,6 +52,7 @@ const useUpdateControlledCheckoutService = ({
 			await trigger({
 				data: { checkout_service_params: payload },
 			});
+
 			Toast.success('updated successfully');
 			getCheckout();
 			setShowForm(false);

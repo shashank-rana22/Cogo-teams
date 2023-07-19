@@ -7,28 +7,26 @@ import useCreateOrganizationLineItemAlias from '../../../../hooks/useCreateOrgan
 import EditLineItem from './EditLineItem';
 
 function EditLineItemModal({
-	editLineItemData,
-	setEditLineItemData,
-	setRateDetails,
-	checkout_id,
+	editLineItemData = {},
+	setEditLineItemData = () => {},
+	checkout_id = '',
 	rateDetails = [],
 	detail = {},
+	getCheckout = () => {},
 }) {
 	const ref = useRef({});
 
-	const { service_id = '', index, service_type = '' } = editLineItemData || {};
+	const { service_id = '', service_type = '' } = editLineItemData || {};
 
 	const { createOrganizationLineItemAlias, loading } = useCreateOrganizationLineItemAlias({
 		setEditLineItemData,
-		setRateDetails,
-		index,
-		checkout_id,
+		getCheckout,
 	});
 
 	const handleSubmitForm = async () => {
 		await ref.current.handleSubmit().then((res) => {
 			if (!res.hasError) {
-				createOrganizationLineItemAlias({ values: res?.values, code: res?.code });
+				createOrganizationLineItemAlias({ values: res?.values });
 			}
 		});
 	};
@@ -66,7 +64,7 @@ function EditLineItemModal({
 
 			<Modal.Footer>
 				<Button disabled={loading} onClick={handleSubmitForm}>
-					{!loading ? 'Add Line Item' : 'Saving...'}
+					{!loading ? 'Edit Line Item' : 'Saving...'}
 				</Button>
 			</Modal.Footer>
 		</Modal>

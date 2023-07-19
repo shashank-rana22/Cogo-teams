@@ -1,16 +1,30 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useRouter } from 'next/router';
 
-const useControlBookingApproval = ({ importer_exporter, checkout_approvals, importer_exporter_id }) => {
+const useControlBookingApproval = ({
+	importer_exporter,
+	checkout_approvals,
+	importer_exporter_id,
+}) => {
 	const { push } = useRouter();
 
-	const [{ loading }, trigger] = useRequest({
-		method : 'post',
-		url    : '/send_checkout_for_approval',
-	}, { manual: true });
+	const {
+		general: { query = {} },
+	} = useSelector((reduxState) => reduxState);
+
+	const { partner_id = '' } = query;
+
+	const [{ loading }, trigger] = useRequest(
+		{
+			method : 'post',
+			url    : '/send_checkout_for_approval',
+		},
+		{ manual: true },
+	);
 
 	const controlBookingApproval = async () => {
 		try {
@@ -27,9 +41,15 @@ const useControlBookingApproval = ({ importer_exporter, checkout_approvals, impo
 			Toast.success('Sent for Approval');
 
 			if (importer_exporter.tags.includes('partner')) {
-				push('/prm/[id]', `/prm/${importer_exporter_id}`);
+				push(
+					'/[partner_id]/prm/[id]',
+					`/${partner_id}/prm/${importer_exporter_id}`,
+				);
 			} else {
-				push('/details/demand/[id]', `/details/demand/${importer_exporter_id}`);
+				push(
+					'/[partner_id]/details/demand/[id]',
+					`/${partner_id}/details/demand/${importer_exporter_id}`,
+				);
 			}
 		} catch (error) {
 			if (error.response) {

@@ -13,7 +13,12 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 
-const CargoInsuranceContainer = dynamic(() => import('../../../../common/AdditionalServices/CargoInsuranceContainer'), { ssr: false });
+const CargoInsuranceContainer = dynamic(
+	() => import(
+		'../../../../common/AdditionalServices/CargoInsuranceContainer'
+	),
+	{ ssr: false },
+);
 
 const RateCardMapping = {
 	fcl_freight: {
