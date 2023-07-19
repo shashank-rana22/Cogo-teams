@@ -18,6 +18,36 @@ const DISPLAY_ALLOCATE_KRA_BUTTON = 1;
 const TABLE_TYPE_UNASSIGNED = 'Unassigned';
 const TABLE_TYPE_LOW_WEIGHTAGE = 'LowWeightage';
 
+function RenderAccordian({
+	loadingKrasAssigned, krasAssignedData, selectAccordian, setSelectAccordian,
+	selectAccordianObject, setSelectAccordianObject, resetObjects, setDataFrom, dataFrom,
+}) {
+	if (loadingKrasAssigned) {
+		return (
+			<div>
+				<Placeholder height="40px" width="100%" margin="5px" />
+				<Placeholder height="40px" width="100%" margin="5px" />
+			</div>
+		);
+	}
+
+	return krasAssignedData?.list?.map((item, index) => (
+		<AccordianDisplay
+			key={`${JSON.stringify(item)}`}
+			data={item}
+			index={index}
+			loading={loadingKrasAssigned}
+			selectAccordian={selectAccordian}
+			setSelectAccordian={setSelectAccordian}
+			selectAccordianObject={selectAccordianObject}
+			setSelectAccordianObject={setSelectAccordianObject}
+			resetObjects={resetObjects}
+			setDataFrom={setDataFrom}
+			dataFrom={dataFrom}
+		/>
+	));
+}
+
 function Dashboard() {
 	const {
 		data: unassignedData = [],
@@ -81,33 +111,6 @@ function Dashboard() {
 		Unassigned    : selectUnassignedEmployeeObject,
 		AccordianData : selectAccordianObject,
 		LowWeightage  : selectAccordianObject,
-	};
-
-	const renderAccordians = () => {
-		if (loadingKrasAssigned) {
-			return (
-				<div>
-					<Placeholder height="40px" width="100%" margin="5px" />
-					<Placeholder height="40px" width="100%" margin="5px" />
-				</div>
-			);
-		}
-
-		return krasAssignedData?.list?.map((item, index) => (
-			<AccordianDisplay
-				key={`${JSON.stringify(item)}`}
-				data={item}
-				index={index}
-				loading={loadingKrasAssigned}
-				selectAccordian={selectAccordian}
-				setSelectAccordian={setSelectAccordian}
-				selectAccordianObject={selectAccordianObject}
-				setSelectAccordianObject={setSelectAccordianObject}
-				resetObjects={resetObjects}
-				setDataFrom={setDataFrom}
-				dataFrom={dataFrom}
-			/>
-		));
 	};
 
 	return (
@@ -199,7 +202,17 @@ function Dashboard() {
 							<div>
 								<h4>All KRA List : </h4>
 								{!isEmpty(filters) ? (
-									renderAccordians()
+									<RenderAccordian
+										krasAssignedData={krasAssignedData}
+										loading={loadingKrasAssigned}
+										selectAccordian={selectAccordian}
+										setSelectAccordian={setSelectAccordian}
+										selectAccordianObject={selectAccordianObject}
+										setSelectAccordianObject={setSelectAccordianObject}
+										resetObjects={resetObjects}
+										setDataFrom={setDataFrom}
+										dataFrom={dataFrom}
+									/>
 								) : (
 									<div>Select/Apply Filters to Display List of KRAs</div>
 								)}
