@@ -1,4 +1,4 @@
-const TIME_BASED_TASK = [
+const TIME_BASED_TASKS = [
 	'upload_ftl_commercial_invoice',
 	'upload_invoice_submission_acknowledgement',
 	'cargo_picked_up_at',
@@ -19,7 +19,7 @@ const mutateControls = (
 
 		const dateTimeControl = control?.controls.find((item) => item?.type === 'datepicker');
 
-		if (TIME_BASED_TASK.includes(task?.task) && dateTimeControl?.withTimePicker) {
+		if (TIME_BASED_TASKS.includes(task?.task) && dateTimeControl?.withTimePicker) {
 			dateTimeControl.showTimeSelect = true;
 		}
 
