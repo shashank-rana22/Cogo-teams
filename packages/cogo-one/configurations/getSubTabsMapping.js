@@ -36,7 +36,7 @@ const SUB_TAB_MAPPING = [
 	},
 	{
 		name  : 'observer',
-		label : 'History',
+		label : 'Observer',
 		icon  : <IcMHourglass height={20} width={20} />,
 	},
 ];

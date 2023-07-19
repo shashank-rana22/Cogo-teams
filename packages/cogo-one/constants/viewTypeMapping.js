@@ -25,6 +25,22 @@ function getKamButtons({
 
 	return [];
 }
+function getSalesAgentButtons({
+	supportAgentId,
+	userId,
+	showBotMessages,
+	isManager,
+}) {
+	if (supportAgentId === userId || isManager) {
+		return ['assign_modal'];
+	}
+
+	if (showBotMessages) {
+		return ['assign_to_me'];
+	}
+
+	return ['request_for_assign'];
+}
 
 function getSupplyAgentButtons({
 	showBotMessages,
@@ -69,7 +85,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			all      : ['chat_tags'],
 		},
 		extra_side_bar_navs_access   : ['spot_search'],
-		get_accesible_assign_buttons : getKamButtons,
+		get_accesible_assign_buttons : getSalesAgentButtons,
 		accesible_agent_types_query  : [where('agent_type', 'in', ['sales', 'bot'])],
 		show_relevant_templates      : ['quick_reply'],
 		mails_to_be_shown            : [],
