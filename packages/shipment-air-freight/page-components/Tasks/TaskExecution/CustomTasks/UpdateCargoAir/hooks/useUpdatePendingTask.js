@@ -10,7 +10,7 @@ const useUpdatePendingTask = ({
 	timeLineRefetch,
 	refetch,
 	services,
-	noOfStops1,
+	noOfStops,
 }) => {
 	const [{ loading:pendingTaskLoading }, updatePendingTaskTrigger] = useRequest({
 		url    : '/update_shipment_pending_task',
@@ -25,18 +25,18 @@ const useUpdatePendingTask = ({
 		const FORMAT_MOVEMENT_DETAILS = [];
 		data.movement.forEach((stopDetails) => {
 			FORMAT_MOVEMENT_DETAILS.push({
-				service_type       : services[GLOBAL_CONSTANTS.zeroth_index]?.service_type || null,
-				flight_number      : stopDetails?.flight_number_stop || null,
-				from_airport_id    : stopDetails?.from_airport_id || null,
-				to_airport_id      : stopDetails?.to_airport_id || null,
-				schedule_arrival   : new Date(stopDetails?.schedule_arrival) || null,
-				schedule_departure : new Date(stopDetails?.schedule_departure) || null,
+				service_type       : services[GLOBAL_CONSTANTS.zeroth_index]?.service_type || undefined,
+				flight_number      : stopDetails?.flight_number_stop || undefined,
+				from_airport_id    : stopDetails?.from_airport_id || undefined,
+				to_airport_id      : stopDetails?.to_airport_id || undefined,
+				schedule_arrival   : new Date(stopDetails?.schedule_arrival) || undefined,
+				schedule_departure : new Date(stopDetails?.schedule_departure) || undefined,
 			});
 		});
 		const payloadForUpdateShipment = {
 			data: {
 				movement_details     : FORMAT_MOVEMENT_DETAILS,
-				flight_number        : noOfStops1 > ZERO_STOPS ? null : data?.flight_number,
+				flight_number        : noOfStops > ZERO_STOPS ? undefined : data?.flight_number,
 				number_of_stops      : data?.no_of_stops1 || ZERO_STOPS,
 				cargo_readiness_date : data?.cargo_ready_date,
 				schedule_arrival     : data?.flight_arrival,

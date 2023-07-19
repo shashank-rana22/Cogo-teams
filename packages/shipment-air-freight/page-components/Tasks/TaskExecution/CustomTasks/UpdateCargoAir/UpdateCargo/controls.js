@@ -2,16 +2,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const ONE_STOP = 1;
 
-const controls = (primary_service, mainService, noOfStops, disabledTrue) => [
+const controls = (primary_service, mainService, noOfStops, disabled) => [
 	{
 		label      : 'Number of stops',
-		name       : 'no_of_stops1',
+		name       : 'no_of_stops',
 		type       : 'select',
 		span       : 4,
 		className  : 'primary lg',
 		value      : '0',
 		isEditable : true,
-		disabled   : !!(Number(noOfStops) < ONE_STOP && !disabledTrue),
+		disabled   : (Number(noOfStops) < ONE_STOP && !disabled),
 		options    : [
 			{ label: '0', value: '0' },
 			{ label: 1, value: 1 },
@@ -80,8 +80,7 @@ const controls = (primary_service, mainService, noOfStops, disabledTrue) => [
 		type                  : 'datepicker',
 		span                  : 4,
 		className             : 'primary lg validity',
-		disabled              : !!(Number(noOfStops) < ONE_STOP && !disabledTrue),
-		showOptional          : false,
+		disabled              : (Number(noOfStops) < ONE_STOP && !disabled),
 		isPreviousDaysAllowed : true,
 		rules                 : {
 			required: true,
@@ -99,8 +98,7 @@ const controls = (primary_service, mainService, noOfStops, disabledTrue) => [
 		span                  : 4,
 		isPreviousDaysAllowed : true,
 		className             : 'primary lg validity',
-		disabled              : !!(Number(noOfStops) < ONE_STOP && !disabledTrue),
-		showOptional          : false,
+		disabled              : !!(Number(noOfStops) < ONE_STOP && !disabled),
 		rules                 : {
 			required: true,
 		},
@@ -113,13 +111,13 @@ const controls = (primary_service, mainService, noOfStops, disabledTrue) => [
 		span        : 4,
 		value       : mainService?.[GLOBAL_CONSTANTS.zeroth_index]?.flight_number,
 		className   : 'primary lg',
-		disabled    : !!(Number(noOfStops) < ONE_STOP && !disabledTrue),
+		disabled    : !!(Number(noOfStops) < ONE_STOP && !disabled),
 		rules       : {
 			required: 'Flight Number is Required',
 		},
 	},
 	{
-		label            : 'Stops',
+		label            : 'Movement details',
 		name             : 'movement',
 		type             : 'fieldArray',
 		showButtons      : false,
@@ -193,7 +191,6 @@ const controls = (primary_service, mainService, noOfStops, disabledTrue) => [
 				name        : 'flight_number_stop',
 				placeholder : 'Input Flight Number',
 				type        : 'text',
-				disabled    : false,
 				span        : 4,
 				className   : 'primary lg',
 				rules       : {

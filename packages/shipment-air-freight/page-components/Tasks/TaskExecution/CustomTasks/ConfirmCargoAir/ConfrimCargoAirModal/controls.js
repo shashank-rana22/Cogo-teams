@@ -33,7 +33,7 @@ const controls = (primary_service, services) => [
 	},
 	{
 		label        : 'Number of stops',
-		name         : 'no_of_stops1',
+		name         : 'no_of_stops',
 		type         : 'select',
 		span         : 4,
 		size         : 'md',

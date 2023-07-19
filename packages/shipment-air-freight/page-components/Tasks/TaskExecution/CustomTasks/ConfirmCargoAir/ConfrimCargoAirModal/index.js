@@ -8,10 +8,10 @@ import React, { useEffect } from 'react';
 import fieldControls from './controls';
 import styles from './styles.module.css';
 
-const MIDDLE_KEYS1 = ['cargo_ready_date', 'airline', 'no_of_stops1'];
+const MIDDLE_KEYS1 = ['cargo_ready_date', 'airline', 'no_of_stops'];
 
 const LOWER_KEYS = ['flight_departure', 'flight_arrival', 'flight_number'];
-const ZERO_STOPPAGE = 0;
+const ZERO_STOPS = 0;
 const FOR_LOOP_INCREMENT_VALUE = 1;
 function ConfirmCargoAirModal({
 	task = {},
@@ -32,14 +32,14 @@ function ConfirmCargoAirModal({
 	} = useForm({ controls });
 
 	const agent = watch('contact_with_agent');
-	const noOfStops1 = Number(watch('no_of_stops1'));
+	const noOfStops = Number(watch('no_of_stops'));
 
-	const noOfStopsControl = controls.find((ctrl) => ctrl.name === 'flight_number');
-	if (noOfStops1 > ZERO_STOPPAGE) {
-		noOfStopsControl.value = {};
+	const flightNumberControlIndex = controls.findIndex((ctrl) => ctrl.name === 'flight_number');
+	if (noOfStops > ZERO_STOPS) {
+		controls[flightNumberControlIndex] = {};
 	} else {
-		noOfStopsControl.value = {
-			...noOfStopsControl.value,
+		controls[flightNumberControlIndex].value = {
+			...controls[flightNumberControlIndex],
 		};
 	}
 
@@ -65,18 +65,18 @@ function ConfirmCargoAirModal({
 	};
 
 	useEffect(() => {
-		if (noOfStops1 > ZERO_STOPPAGE) {
+		if (noOfStops > ZERO_STOPS) {
 			clearErrors('flight_number');
 		}
-	}, [noOfStops1]);
+	}, [noOfStops]);
 
 	useEffect(() => {
 		let newStopsValue = [];
 		if (task.task === 'update_flight_details') {
-			if (noOfStops1 === ZERO_STOPPAGE) {
+			if (noOfStops === ZERO_STOPS) {
 				newStopsValue = [];
-			} else if (noOfStops1) {
-				for (let i = 0; i <= noOfStops1; i += FOR_LOOP_INCREMENT_VALUE) {
+			} else if (noOfStops) {
+				for (let i = 0; i <= noOfStops; i += FOR_LOOP_INCREMENT_VALUE) {
 					newStopsValue.push({
 						from_airport_id:
 							i === GLOBAL_CONSTANTS.zeroth_index
@@ -90,13 +90,13 @@ function ConfirmCargoAirModal({
 								|| primary_service?.selected_schedule_departure)
 								: '',
 						schedule_arrival:
-							i === noOfStops1
+							i === noOfStops
 								? new Date(services?.[GLOBAL_CONSTANTS.zeroth_index]?.schedule_arrival
 								|| primary_service?.schedule_arrival
 								|| primary_service?.selected_schedule_arrival)
 								: '',
 						to_airport_id:
-							i === noOfStops1
+							i === noOfStops
 								? services?.[GLOBAL_CONSTANTS.zeroth_index]?.destination_airport_id
 								|| primary_service?.destination_airport_id
 								: '',
@@ -106,7 +106,7 @@ function ConfirmCargoAirModal({
 			}
 		}
 		setValue('movement', newStopsValue);
-	}, [JSON.stringify(noOfStops1)]);
+	}, [JSON.stringify(noOfStops)]);
 
 	const render = () => {
 		if (agent === 'true') {

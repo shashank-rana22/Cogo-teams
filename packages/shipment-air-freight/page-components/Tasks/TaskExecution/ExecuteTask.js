@@ -136,7 +136,6 @@ function ExecuteTask({
 	}
 	if (
 		task.task === 'update_flight_departure_and_flight_arrival'
-		&& task.shipment_type === 'air_freight'
 		&& tradeType === 'import'
 	) {
 		return (

@@ -18,7 +18,7 @@ function UpdateCargoAir({
 	shipment_data = {},
 }) {
 	let noOfStops = 0;
-	const [disabledTrue, setDisabledTrue] = useState(false);
+	const [disabled, setDisabled] = useState(false);
 	const mainService = services.filter(
 		(service) => service.service_type === 'air_freight_service',
 	);
@@ -26,7 +26,7 @@ function UpdateCargoAir({
 	const controls = fieldControls(
 		primary_service,
 		mainService,
-		disabledTrue,
+		disabled,
 		noOfStops,
 	);
 
@@ -36,11 +36,10 @@ function UpdateCargoAir({
 		handleSubmit,
 		watch,
 		setValue,
-		setValues,
 		clearErrors = () => {},
 	} = useForm({ controls });
 
-	noOfStops = Number(watch('no_of_stops1'));
+	noOfStops = Number(watch('no_of_stops'));
 
 	const { handleUpdate, loading } = useUpdatePendingTask({
 		task,
@@ -71,7 +70,7 @@ function UpdateCargoAir({
 		controls[destinationAirportControlIndex] = {};
 	}
 
-	if (!disabledTrue) {
+	if (!disabled) {
 		const movementControl = controls.find((ctrl) => ctrl.name === 'movement');
 		movementControl.value = {
 			...movementControl.value,
@@ -87,15 +86,14 @@ function UpdateCargoAir({
 			loading={loading}
 			services={mainService}
 			errors={errors}
-			noOfStops1={noOfStops}
+			noOfStops={noOfStops}
 			handleSubmit={handleSubmit}
 			watch={watch}
 			controls={controls}
 			setValue={setValue}
-			setValues={setValues}
 			primary_service={primary_service}
-			disabledTrue={disabledTrue}
-			setDisabledTrue={setDisabledTrue}
+			disabled={disabled}
+			setDisabled={setDisabled}
 			control={control}
 		/>
 	);

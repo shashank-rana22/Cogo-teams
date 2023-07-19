@@ -6,16 +6,16 @@ import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const ZERO_STOPS = 1;
+const ZERO_STOPS = 0;
 const INCREMENT_STOPS_BY_ONE = 1;
 
-const MIDDLE_KEYS2 = [
+const AIRPORT_KEYS = [
 	'origin_airport_id',
 	'destination_airport_id',
-	'no_of_stops1',
+	'no_of_stops',
 ];
 
-const LOWER_KEYS = ['flight_departure', 'flight_arrival', 'flight_number'];
+const FLIGHT_KEYS = ['flight_departure', 'flight_arrival', 'flight_number'];
 
 function UpdateCargo({
 	task = {},
@@ -24,27 +24,26 @@ function UpdateCargo({
 	loading = false,
 	services = [],
 	errors = {},
-	noOfStops1 = '',
+	noOfStops = '',
 	handleSubmit = () => {},
 	watch = () => {},
 	controls = {},
 	setValue = () => {},
-	setValues = () => {},
-	disabledTrue = false,
-	setDisabledTrue = () => {},
+	disabled = false,
+	setDisabled = () => {},
 	control = {},
 }) {
-	const STOP_CONTROLS = [];
-	const MIDDLE_CONTROLS = [];
-	const LOWER_CONTROLS = [];
+	const MOVEMENT_CONTROLS = [];
+	const AIRPORT_CONTROLS = [];
+	const FLIGHT_CONTROLS = [];
 
 	controls.forEach((ctrl) => {
 		if (ctrl.type === 'fieldArray' && ctrl.name === 'movement') {
-			STOP_CONTROLS.push(ctrl);
-		} else if (MIDDLE_KEYS2.includes(ctrl.name)) {
-			MIDDLE_CONTROLS.push(ctrl);
-		} else if (LOWER_KEYS.includes(ctrl.name)) {
-			LOWER_CONTROLS.push(ctrl);
+			MOVEMENT_CONTROLS.push(ctrl);
+		} else if (AIRPORT_KEYS.includes(ctrl.name)) {
+			AIRPORT_CONTROLS.push(ctrl);
+		} else if (FLIGHT_KEYS.includes(ctrl.name)) {
+			FLIGHT_CONTROLS.push(ctrl);
 		}
 	});
 
@@ -53,8 +52,8 @@ function UpdateCargo({
 	};
 
 	useEffect(() => {
-		const stopArrayValue = watch('movement');
-		let newStopsValue = [];
+		const movementDetails = watch('movement');
+		let movementValue = [];
 		const STOP_DETAIL = {
 			from_airport_id    : '',
 			to_airport_id      : '',
@@ -63,16 +62,16 @@ function UpdateCargo({
 			flight_number_stop : '',
 		};
 		if (task.task === 'update_flight_departure_and_flight_arrival') {
-			if (!noOfStops1) {
-				newStopsValue = [];
-			} else if (noOfStops1) {
-				for (let i = 0; i <= noOfStops1; i += INCREMENT_STOPS_BY_ONE) {
+			if (!noOfStops) {
+				movementValue = [];
+			} else if (noOfStops) {
+				for (let i = 0; i <= noOfStops; i += INCREMENT_STOPS_BY_ONE) {
 					if (services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details) {
-						newStopsValue.push({
+						movementValue.push({
 							...STOP_DETAIL,
 							from_airport_id:
 								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.from_airport_id
-                                || null,
+                                || undefined,
 							schedule_departure:
 								new Date(services?.[GLOBAL_CONSTANTS.zeroth_index]
 									?.movement_details[i]?.schedule_departure || new Date()),
@@ -80,33 +79,31 @@ function UpdateCargo({
 							new Date(services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.schedule_arrival
                                 || new Date()),
 							to_airport_id:
-								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.to_airport_id || null,
+								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.to_airport_id
+								|| undefined,
 							flight_number_stop:
-								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.flight_number || null,
+								services?.[GLOBAL_CONSTANTS.zeroth_index]?.movement_details[i]?.flight_number
+								|| undefined,
 						});
 					} else {
-						newStopsValue.push({
+						movementValue.push({
 							...STOP_DETAIL,
 						});
 					}
 				}
 			} else {
-				newStopsValue = stopArrayValue?.slice(ZERO_STOPS, noOfStops1 + INCREMENT_STOPS_BY_ONE);
+				movementValue = movementDetails?.slice(ZERO_STOPS, noOfStops + INCREMENT_STOPS_BY_ONE);
 			}
-			setValue('movement', newStopsValue);
+			setValue('movement', movementValue);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [noOfStops1]);
+	}, [noOfStops]);
 
 	useEffect(() => {
 		if (services?.[GLOBAL_CONSTANTS.zeroth_index]?.number_of_stops) {
-			setValues({
-				no_of_stops1: services?.[GLOBAL_CONSTANTS.zeroth_index]?.number_of_stops || ZERO_STOPS,
-			});
+			setValue('no_of_stops', services?.[GLOBAL_CONSTANTS.zeroth_index]?.number_of_stops || ZERO_STOPS);
 		} else {
-			setValues({
-				no_of_stops1: 0,
-			});
+			setValue('no_of_stops', ZERO_STOPS);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -117,16 +114,16 @@ function UpdateCargo({
 				<>
 					<div>
 						<Layout
-							fields={MIDDLE_CONTROLS}
+							fields={AIRPORT_CONTROLS}
 							control={control}
 							errors={errors}
 						/>
 					</div>
 					<div>
-						<div className={styles.heading_div}>Flight Details</div>
+						<div className={styles.heading}>Flight Details</div>
 						<div>
 							<Layout
-								fields={LOWER_CONTROLS}
+								fields={FLIGHT_CONTROLS}
 								control={control}
 								errors={errors}
 							/>
@@ -135,7 +132,7 @@ function UpdateCargo({
 					<div>
 						<div className={styles.layout_div}>
 							<Layout
-								fields={STOP_CONTROLS}
+								fields={MOVEMENT_CONTROLS}
 								control={control}
 								errors={errors}
 							/>
@@ -148,26 +145,26 @@ function UpdateCargo({
 	};
 
 	return (
-		<div className={cl`${styles.container} ${!disabledTrue && 'notDisabled'}`}>
+		<div className={cl`${styles.container} ${!disabled && 'notDisabled'}`}>
 			<div>
 				{render()}
-				<div className={styles.button_div}>
-					<div className={styles.div1}>
+				<div className={styles.button}>
+					<div style={{ margin: '0 10px 0 0' }}>
 						<Button className="secondary md" onClick={() => onCancel()}>
 							Cancel
 						</Button>
 					</div>
-					<div className={styles.div_middle}>
+					<div style={{ margin: '0 16px 0 10px' }}>
 						<Button
 							className="secondary md"
-							onClick={() => setDisabledTrue((prev) => !prev)}
+							onClick={() => setDisabled((prev) => !prev)}
 						>
 							<EditSvg style={{ marginRight: '8px' }} />
 							Edit
 						</Button>
 					</div>
 					<div>
-						<Button onClick={handleSubmit(onSubmit)}>
+						<Button onClick={handleSubmit(onSubmit)} disabled={loading}>
 							{loading ? 'Submitting...' : 'Submit'}
 						</Button>
 					</div>
