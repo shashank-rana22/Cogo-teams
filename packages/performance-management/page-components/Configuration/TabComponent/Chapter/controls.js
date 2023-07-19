@@ -1,5 +1,3 @@
-import params from '../../../../common/getParams';
-
 const controls = [
 	{
 		name        : 'chapter_name',
@@ -18,7 +16,13 @@ const controls = [
 		rules       : {
 			required: 'Chapter leader is required',
 		},
-		params,
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
 	},
 	{
 		name        : 'sub_chapter_ids',
@@ -30,7 +34,13 @@ const controls = [
 		rules       : {
 			required: 'Sub chapters are required',
 		},
-		params,
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
 	},
 ];
 

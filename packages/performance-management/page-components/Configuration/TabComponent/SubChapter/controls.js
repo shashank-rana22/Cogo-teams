@@ -1,5 +1,3 @@
-import params from '../../../../common/getParams';
-
 const controls = [
 	{
 		name        : 'sub_chapter_name',
@@ -19,7 +17,13 @@ const controls = [
 		rules       : {
 			required: 'Sub-chapter leader is required',
 		},
-		params,
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
 	},
 
 	{
@@ -32,7 +36,13 @@ const controls = [
 		rules       : {
 			required: 'Employees are required',
 		},
-		params,
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
 	},
 ];
 

@@ -1,5 +1,3 @@
-import params from '../../../../../common/getParams';
-
 const getControls = (watchTribeId) => {
 	const controlItems = {
 		name     : 'single_item',
@@ -13,7 +11,13 @@ const getControls = (watchTribeId) => {
 				placeholder : 'Select',
 				initialCall : true,
 				isClearable : true,
-				params,
+				params      : {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 			{
 				name        : 'tribe_id',
@@ -23,7 +27,13 @@ const getControls = (watchTribeId) => {
 				placeholder : 'Select',
 				isClearable : true,
 				initialCall : true,
-				params,
+				params      : {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 			{
@@ -36,11 +46,12 @@ const getControls = (watchTribeId) => {
 				disabled    : !watchTribeId,
 				isClearable : true,
 				params      : {
-					...params,
 					filters: {
-						...params.filters,
-						tribe_id: watchTribeId,
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+						tribe_id             : watchTribeId,
 					},
+					page_limit: 100,
 				},
 			},
 		],

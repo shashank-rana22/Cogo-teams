@@ -1,5 +1,3 @@
-import params from '../../../../common/getParams';
-
 const controls = [
 	{
 		name        : 'tribe_name',
@@ -18,7 +16,13 @@ const controls = [
 		rules       : {
 			required: 'Tribe leader is required',
 		},
-		params,
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit: 100,
+		},
 	},
 
 	{
@@ -28,8 +32,12 @@ const controls = [
 		label       : 'Squads',
 		placeholder : 'Squads',
 		params      : {
-			exclude_squads_assigned: true,
-			...params,
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+			},
+			page_limit              : 100,
+			exclude_squads_assigned : true,
 		},
 		multiple : true,
 		rules    : {

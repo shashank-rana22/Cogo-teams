@@ -1,5 +1,3 @@
-import params from '../../../../../common/getParams';
-
 const getControls = ({ watchTriveId, check }) => {
 	const controls = [
 		{
@@ -13,7 +11,13 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			multiple    : true,
 			isClearable : true,
-			params,
+			params      : {
+				filters: {
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+				},
+				page_limit: 100,
+			},
 		},
 
 		{
@@ -25,7 +29,13 @@ const getControls = ({ watchTriveId, check }) => {
 			disabled    : check,
 			isClearable : true,
 			initialCall : true,
-			params,
+			params      : {
+				filters: {
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+				},
+				page_limit: 100,
+			},
 		},
 
 		{
@@ -37,7 +47,13 @@ const getControls = ({ watchTriveId, check }) => {
 			initialCall : true,
 			isClearable : true,
 			disabled    : check,
-			params,
+			params      : {
+				filters: {
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+				},
+				page_limit: 100,
+			},
 		},
 
 		{
@@ -52,10 +68,11 @@ const getControls = ({ watchTriveId, check }) => {
 			isClearable : true,
 			params      : {
 				filters: {
-					...params.filters,
-					tribe_id: watchTriveId,
+					status               : 'active',
+					partner_entity_types : ['cogoport'],
+					tribe_id             : watchTriveId,
 				},
-				...params.page_limit,
+				page_limit: 100,
 			},
 		},
 	];

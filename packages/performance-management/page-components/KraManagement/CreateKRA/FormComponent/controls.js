@@ -1,5 +1,3 @@
-import params from '../../../../common/getParams';
-
 const OPTIONS = [
 	{
 		value : 'yes',
@@ -36,7 +34,13 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 						role_ids: e,
 					}));
 				},
-				params,
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 			{
@@ -53,7 +57,13 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 						tribe_ids: e,
 					}));
 				},
-				params,
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 			{
@@ -70,7 +80,13 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 						squad_ids: e,
 					}));
 				},
-				params,
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 			{
@@ -87,7 +103,13 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 						chapter_ids: e,
 					}));
 				},
-				params,
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 			{
@@ -104,7 +126,13 @@ const getControls = ({ setShowSelectedValue = () => {}, watchOperationType }) =>
 						sub_chapter_ids: e,
 					}));
 				},
-				params,
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+					},
+					page_limit: 100,
+				},
 			},
 
 		],
