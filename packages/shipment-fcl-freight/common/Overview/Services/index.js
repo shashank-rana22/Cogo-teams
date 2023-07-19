@@ -36,12 +36,12 @@ function Services() {
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
-	const can_upsell = !!stakeholderConfig?.overview?.can_upsell;
+	const canUpsell = !!stakeholderConfig?.overview?.can_upsell;
 
 	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
 	const heading = (serviceCategory) => {
-		if (serviceCategory === 'originServices') return null;
+		if (!canUpsell && serviceCategory === 'originServices') return null;
 		return (
 			<div className={styles.header}>
 				{startCase(serviceCategory)}
@@ -70,7 +70,7 @@ function Services() {
 								))}
 							</div>
 
-							{can_upsell ? (
+							{canUpsell ? (
 								<div className={styles.upselling}>
 									{(upsellServices[serviceCategory]).map((service) => (
 										<AddNewService

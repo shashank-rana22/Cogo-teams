@@ -11,7 +11,8 @@
         "can_cancel_shipment": false,
         "feature_permission":{ "api_permission":["list_tasks"],"add_key_in_feature":"test_case"},
         "show_po_number": true,
-        "show_cfs_details": false
+        "show_cfs_details": false,
+        "show_poc_details": true
     },
 
     "timeline": {
@@ -49,7 +50,7 @@
         "default_wallet":"trade_documents",
         "feature_permission": { "api_permission":["list_documents", "list_tasks", "get_process"]},
         "can_edit_documents": false,
-        "show_igm_tasks": false
+        "show_igm_docs": false
     },
 
     "emails":{

@@ -8,6 +8,9 @@
         "show_poc_details": false
     },
     "default_tab":"tasks",
+    "timeline": {
+        "can_edit_schedule": true
+    },
     "overview":{
         "tab_title":"Overview",
         "can_upsell": false,
@@ -28,15 +31,5 @@
         "default_wallet":"trade_documents",
         "can_edit_documents": false,
         "show_igm_docs": true
-    },
-    "additional_services": {
-        "action_buttons": {
-            "reallocate": false,
-            "review_comments": false
-        },
-        "add_rate": {
-            "status::amendment_requested_by_importer_exporter": false,
-            "status::cancelled_by_supplier": false
-        }
     }
 }
