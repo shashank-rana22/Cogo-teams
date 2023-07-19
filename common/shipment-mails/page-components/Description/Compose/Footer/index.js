@@ -20,6 +20,7 @@ function Footer({
 	userEmailArray,
 	ccEmailArray,
 	bccEmailArray,
+	subject,
 }) {
 	const [attachments, setAttachements] = useState([]);
 	const userId = useSelector(({ profile }) => profile?.id);
@@ -53,7 +54,7 @@ function Footer({
 			toUserEmail   : userEmailArray || [],
 			ccrecipients  : ccEmailArray || [],
 			bccrecipients : bccEmailArray || [],
-			subject       : data?.subject,
+			subject       : subject || '',
 			content,
 			attachments   : attachments?.map((item) => item),
 			msgId         : composingEmail?.id || undefined,
