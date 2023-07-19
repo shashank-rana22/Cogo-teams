@@ -18,18 +18,18 @@ function MessageConversations({
 	messagesData = [],
 	draftMessage = '',
 	setDraftMessages = () => {},
-	sendChatMessage,
+	sendChatMessage = () => {},
 	draftUploadedFile : finalUrl = '',
 	setDraftUploadedFiles = () => {},
-	getNextData,
-	setOpenModal,
-	activeMessageCard,
+	getNextData = () => {},
+	setOpenModal = () => {},
+	activeMessageCard = {},
 	suggestions = [],
-	uploading,
-	setUploading,
+	uploading = {},
+	setUploading = () => {},
 	hasPermissionToEdit = false,
-	firstLoadingMessages,
-	loadingPrevMessages,
+	firstLoadingMessages = false,
+	loadingPrevMessages = false,
 	sentQuickSuggestions = () => {},
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
@@ -37,8 +37,11 @@ function MessageConversations({
 	messageLoading = false,
 	formattedData = {},
 	setRaiseTicketModal = () => {},
-	canMessageOnBotSession,
+	canMessageOnBotSession = false,
 	viewType = '',
+	hasNoFireBaseRoom = false,
+	setModalType = () => {},
+	activeTab = {},
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
@@ -130,6 +133,9 @@ function MessageConversations({
 						activeMessageCard={activeMessageCard}
 						formattedData={formattedData}
 						setRaiseTicketModal={setRaiseTicketModal}
+						hasNoFireBaseRoom={hasNoFireBaseRoom}
+						setModalType={setModalType}
+						activeTab={activeTab}
 					/>
 				) }
 			</div>
