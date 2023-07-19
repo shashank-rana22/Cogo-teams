@@ -19,7 +19,6 @@ import styles from './styles.module.css';
 const DEFAULT_PAGE_INDEX = 1;
 const DEFAULT_PAGE_SIZE = 10;
 const MAX_STRING_LIMIT = 20;
-const WEEK_SECTION_START = 0;
 const WEEK_SECTION_END = 3;
 
 const STATUS_COLOR_MAPPING = {
@@ -77,7 +76,7 @@ function CampaignManagement() {
 							: ''}
 						{week ? (
 							<span>
-								{week.slice(WEEK_SECTION_START, WEEK_SECTION_END)}
+								{week.slice(GLOBAL_CONSTANTS.zeroth_index, WEEK_SECTION_END)}
 							</span>
 						) : ''}
 						{'  '}

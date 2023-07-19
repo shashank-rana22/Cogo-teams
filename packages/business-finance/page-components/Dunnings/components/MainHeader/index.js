@@ -31,17 +31,11 @@ function MainHeader({ activeTab = '', setActiveTab = null }) {
 								Total Due:
 								{' '}
 							</span>
-							<span>
-								-
-							</span>
 						</div>
 						<div className={styles.collection_rate}>
 							<span>
 								Customers:
 								{' '}
-							</span>
-							<span>
-								-
 							</span>
 						</div>
 					</div>
@@ -66,10 +60,6 @@ function MainHeader({ activeTab = '', setActiveTab = null }) {
 								</span>
 
 							</div>
-							<span>
-								- - -
-							</span>
-
 						</div>
 					</div>
 				</div>

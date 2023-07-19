@@ -68,6 +68,7 @@ function BarGraphView({ barData = [], currency = '' }:Props) {
 							legendOffset   : 46,
 							legendPosition : 'middle',
 						}}
+						valueFormat={(value) => value?.toLocaleString('en-IN')}
 						legends={[
 							{
 								dataFrom          : null,

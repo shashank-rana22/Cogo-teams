@@ -28,6 +28,13 @@ function useUpdateCycle({ getDunningList, setActionModal }) {
 			monthDay,
 			oneTimeDate,
 		} = formData || {};
+
+		const oneTimeDateValue = triggerType !== 'PERIODIC' ? formatDate({
+			date       : oneTimeDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+			formatType : 'date',
+		}) : undefined;
+
 		try {
 			await trigger({
 				data: {
@@ -40,11 +47,7 @@ function useUpdateCycle({ getDunningList, setActionModal }) {
 						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 						week                      : weekDay || undefined,
 						dayOfMonth                : monthDay || undefined,
-						oneTimeDate               : triggerType !== 'PERIODIC' ? formatDate({
-							date       : oneTimeDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-							formatType : 'date',
-						}) : undefined,
+						oneTimeDate               : oneTimeDateValue,
 					},
 				},
 			});
