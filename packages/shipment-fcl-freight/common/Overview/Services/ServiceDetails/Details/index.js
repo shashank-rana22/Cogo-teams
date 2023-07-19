@@ -29,8 +29,8 @@ function Details({ serviceData = [] }) {
 
 	const SERVICE_INITIAL_KEYS = {};
 
-	(serviceData || []).forEach((data) => {
-		SERVICE_INITIAL_KEYS[data?.container_size] = {
+	(serviceData || []).forEach((data, i) => {
+		SERVICE_INITIAL_KEYS[i] = {
 			container_size             : data?.container_size,
 			commodity                  : data?.commodity,
 			containers_count           : data?.containers_count,
@@ -72,10 +72,9 @@ function Details({ serviceData = [] }) {
 							className={cl`${styles.mainservice_tabs}
 										${multiServiceType === val ? styles.active : null}
 										${styles[state]}`}
-							tabIndex={0}
 							onClick={() => setMultiServiceType(val)}
 						>
-							{`${val} ft`}
+							{`${SERVICE_INITIAL_KEYS[val].container_size} ft`}
 							{' '}
 							|
 							{' '}
