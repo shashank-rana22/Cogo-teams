@@ -4,10 +4,9 @@ const mutateControls = (
 	task,
 	shipment_data,
 	formValues,
-	getOptions,
+	options,
 	subCommodityOptions,
 ) => {
-	const options = getOptions();
 	let finalControls = [];
 
 	(controls || []).forEach((control) => {

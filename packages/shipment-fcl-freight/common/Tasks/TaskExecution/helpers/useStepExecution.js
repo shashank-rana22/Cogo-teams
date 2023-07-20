@@ -14,7 +14,7 @@ function useStepExecution({
 	selectedMail = {},
 	setCommodityDetails = () => {},
 	subCommodityOptions,
-	getOptions,
+	options,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -43,7 +43,7 @@ function useStepExecution({
 		task,
 		shipment_data,
 		getApisData,
-		getOptions,
+		options,
 		subCommodityOptions,
 	});
 
