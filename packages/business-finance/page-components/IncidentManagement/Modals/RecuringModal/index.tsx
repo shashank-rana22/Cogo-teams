@@ -2,13 +2,14 @@ import { Modal, Button, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import usePostExpense from '../../apisModal/usePostExpense';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StakeHolderTimeline from '../../StakeHolderTimeline';
 import { toTitleCase } from '../../utils/titleCase';
 
 import styles from './style.module.css';
@@ -27,7 +28,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const [remarks, setRemarks] = useState('');
-	const { data = {} } = row || {};
+	const { data = {}, level3, level2, level1 } = row || {};
 	const { reccuringExpenseApproval, organization } = data;
 	const {
 		proofDocuments,
@@ -45,6 +46,79 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		ledgerCurrency,
 		ledgerMaxPayoutAllowed,
 	} = reccuringExpenseApproval || {};
+
+	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
+
+	const stakeHolderTimeLine = () => {
+		if (!isEmpty(level3)) {
+			return [
+				{
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder3
+						? {
+							email   : stakeholder3?.userEmail,
+							name    : stakeholder3?.userName,
+							remarks : level3?.remarks,
+							status  : status3,
+						}
+						: {}),
+				},
+			];
+		}
+		if (!isEmpty(level2)) {
+			return [
+				{
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
+				},
+			];
+		}
+		return [
+			{
+				email   : stakeholder1?.userEmail,
+				name    : stakeholder1?.userName,
+				remarks : level1?.remarks,
+				status  : status1,
+			},
+		];
+	};
 
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
@@ -93,15 +167,16 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 				),
 		},
 		{
-			title : 'Ledger Account',
-			value : formatAmount({
-				amount   : ledgerMaxPayoutAllowed,
-				currency : ledgerCurrency,
-				options  : {
-					style           : 'currency',
-					currencyDisplay : 'code',
-				},
-			}) || '-',
+			title: 'Ledger Account',
+			value:
+				formatAmount({
+					amount   : ledgerMaxPayoutAllowed,
+					currency : ledgerCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}) || '-',
 		},
 	];
 	const summaryDataThird = [
@@ -226,6 +301,7 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 								marginBottom : '12px',
 							}}
 						/>
+						<StakeHolderTimeline timeline={stakeHolderTimeLine()} />
 					</>
 				</Modal.Body>
 				{isEditable && (

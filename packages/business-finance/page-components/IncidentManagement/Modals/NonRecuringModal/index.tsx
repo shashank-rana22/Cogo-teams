@@ -6,6 +6,7 @@ import { useState } from 'react';
 import usePostExpense from '../../apisModal/usePostExpense';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StakeHolderTimeline from '../../StakeHolderTimeline';
 import StyledTable from '../../StyledTable';
 import mappingNonRecurring from '../../utils/mappingNonRecurring';
 import { toTitleCase } from '../../utils/titleCase';
@@ -13,42 +14,100 @@ import { toTitleCase } from '../../utils/titleCase';
 import { OVER_HEAD_CONFIGS } from './overheadsConfig';
 import styles from './style.module.css';
 
-interface RowData {
-	data: {
-		overheadConfirmationRequest?: {
-			invoiceNumber?:string;
-			subTotalAmount?: any;
-			taxTotalAmount?: any;
-			grandTotalAmount?: any;
-			lineItems?: any;
-			ledgerGrandTotal?: any;
-			ledgerCurrency?: string;
-			remarks?: string;
-			billCurrency?: string;
-			documents?: any;
-			branchName?: string;
-			categoryName?: string;
-			expenseType?: string;
-		}
-		organization?: {
-			businessName?: string;
-		}
-		referenceId?: string;
-	};
-}
-
-function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, isEditable = true }) {
+function NonRecuringModal({
+	id = '',
+	refetch = () => {},
+	row = {},
+	isEditable = true,
+}: any) {
 	const [showModal, setShowModal] = useState(false);
 
 	const [remarks, setRemarks] = useState('');
-	const { data = {} } = row || {};
-	const { overheadConfirmationRequest, organization, referenceId = '' } = data;
+	const { data = {}, level3, level2, level1 } = row || {};
+	const {
+		overheadConfirmationRequest,
+		organization,
+		referenceId = '',
+	} = data;
 	const {
 		lineItems,
 		remarks: remarkData,
 		documents,
 		expenseType,
 	} = overheadConfirmationRequest || {};
+
+	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
+
+	const stakeHolderTimeLine = () => {
+		if (!isEmpty(level3)) {
+			return [
+				{
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder3
+						? {
+							email   : stakeholder3?.userEmail,
+							name    : stakeholder3?.userName,
+							remarks : level3?.remarks,
+							status  : status3,
+						}
+						: {}),
+				},
+			];
+		}
+		if (!isEmpty(level2)) {
+			return [
+				{
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
+				},
+				{
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
+				},
+			];
+		}
+		return [
+			{
+				email   : stakeholder1?.userEmail,
+				name    : stakeholder1?.userName,
+				remarks : level1?.remarks,
+				status  : status1,
+			},
+		];
+	};
 
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
@@ -59,7 +118,9 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 
 	const { businessName } = organization || {};
 
-	const { INCIDENT_MAPPING = [] } = mappingNonRecurring({ overheadConfirmationRequest });
+	const { INCIDENT_MAPPING = [] } = mappingNonRecurring({
+		overheadConfirmationRequest,
+	});
 
 	return (
 		<div>
@@ -75,19 +136,14 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 				<Modal.Header
 					title={`Expense Approval - ${toTitleCase(
 						businessName,
-					)} (${toTitleCase(
-						startCase(expenseType),
-					)}) ${referenceId}`}
+					)} (${toTitleCase(startCase(expenseType))}) ${referenceId}`}
 				/>
 				<Modal.Body>
 					{!isEditable && <ApproveAndReject row={row} />}
 
 					<div className={styles.flex}>
 						{INCIDENT_MAPPING?.map((item) => (
-							<div
-								className={styles.value_data}
-								key={item.key}
-							>
+							<div className={styles.value_data} key={item.key}>
 								<div className={styles.label_value}>
 									{item?.key || '-'}
 								</div>
@@ -165,6 +221,7 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 							/>
 						</>
 					)}
+					<StakeHolderTimeline timeline={stakeHolderTimeLine()} />
 				</Modal.Body>
 				{isEditable && (
 					<Modal.Footer>

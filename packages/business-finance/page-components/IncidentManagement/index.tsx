@@ -102,6 +102,13 @@ function IncidentManagement() {
 		return 0;
 	};
 
+	const statProps = (key) => {
+		if (key === 'controller') {
+			return {};
+		}
+		return { badge: getStatsData(key) };
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -114,23 +121,21 @@ function IncidentManagement() {
 					fullWidth
 					themeType="primary"
 				>
-					{
-						tabs.map(({ key = '', label = '' }) => (
-							<TabPanel
-								name={key}
-								key={key}
-								title={label}
-								badge={getStatsData(key)}
-							>
-								{ActiveTabComponent && (
-									<ActiveTabComponent
-										key={key}
-										{...tabComponentProps[key]}
-									/>
-								)}
-							</TabPanel>
-						))
-}
+					{tabs.map(({ key = '', label = '' }) => (
+						<TabPanel
+							name={key}
+							key={key}
+							title={label}
+							{...statProps(key)}
+						>
+							{ActiveTabComponent && (
+								<ActiveTabComponent
+									key={key}
+									{...tabComponentProps[key]}
+								/>
+							)}
+						</TabPanel>
+					))}
 				</Tabs>
 			</div>
 		</div>

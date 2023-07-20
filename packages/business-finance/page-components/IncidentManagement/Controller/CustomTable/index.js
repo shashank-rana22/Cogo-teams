@@ -1,5 +1,8 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import EmptyState from '../../common/EmptyState/index.tsx';
 
 import ColumnCard from './ColumnCard';
 import { CONTROLLER_CONFIG } from './Config/controller-config';
@@ -20,16 +23,20 @@ function CustomTable({
 	const { total, pageSize, pageIndex } = paginationData || {};
 	return (
 		<div>
-			<Header config={CONTROLLER_CONFIG} />
-			{(list || Array(DEFAULT_LOADER_LEN).fill(FILL)).map((item) => (
-				<ColumnCard
-					key={item?.id}
-					config={CONTROLLER_CONFIG}
-					item={item}
-					incidentLoading={incidentLoading}
-					refetch={getIncidentLevels}
-				/>
-			))}
+			{!isEmpty(list) ? <Header config={CONTROLLER_CONFIG} /> : null}
+			{!isEmpty(list) || incidentLoading ? (
+				<>
+					{(!isEmpty(list) ? list : Array(DEFAULT_LOADER_LEN).fill(FILL)).map((item) => (
+						<ColumnCard
+							key={item?.id}
+							config={CONTROLLER_CONFIG}
+							item={item}
+							incidentLoading={incidentLoading}
+							refetch={getIncidentLevels}
+						/>
+					))}
+				</>
+			) : <EmptyState />}
 			<div className={styles.pagination_container}>
 				{incidentLoading ? null : (
 					<Pagination
