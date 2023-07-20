@@ -1,23 +1,24 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
-const getBuyPrice = (item, source) => {
-	let price = item?.charges?.line_items?.[0]?.price;
-	let currency = item?.charges?.line_items?.[0]?.currency;
+const getBuyPrice = (item) => {
+	const price = item?.price;
+	const currency = item?.currency;
 
-	if (source === 'system_rate') {
-		price = item?.validities?.[0]?.price;
-		currency = item?.validities?.[0]?.currency;
-	} else if (source === 'flash_booking') {
-		price = item?.line_items?.[0]?.price;
-		currency = item?.line_items?.[0]?.currency;
-	}
-
-	return `${currency} ${price}`;
+	return formatAmount({
+		amount  : price,
+		currency,
+		options : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	});
 };
 
-const cardValues = (item = {}, data = {}) => {
+const cardValues = (item = {}) => {
 	const fields = [
 		{
 			label : 'Supplier Name',
@@ -26,17 +27,15 @@ const cardValues = (item = {}, data = {}) => {
 		{
 			label: 'Shipping Line',
 			value:
-				item?.reverted_shipping_line?.business_name
-				|| item?.operator?.business_name
-				|| item?.shipping_line.business_name,
+				item?.shipping_line.business_name,
 		},
 		{
 			label : 'Source of Rate',
-			value : startCase(data?.source),
+			value : startCase(item?.source),
 		},
 		{
 			label : 'Buy Rate',
-			value : getBuyPrice(item, data?.source),
+			value : getBuyPrice(item),
 		},
 		{
 			label : 'Sailing Date',

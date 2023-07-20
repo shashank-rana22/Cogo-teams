@@ -8,6 +8,7 @@ import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
+import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
@@ -153,6 +154,7 @@ function ShipmentDetails() {
 								<PurchaseInvoicing
 									shipmentData={shipment_data}
 									servicesData={servicesGet?.servicesList}
+									AddService={AddService}
 								/>
 							</main>
 						</TabPanel>

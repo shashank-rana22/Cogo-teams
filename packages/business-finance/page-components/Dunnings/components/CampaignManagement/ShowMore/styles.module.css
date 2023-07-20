@@ -17,7 +17,7 @@
 
 .data_container {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	padding: 20px;
 }
 
@@ -34,4 +34,8 @@
 
 .no_data_text {
 	color: #a9a0a0;
+}
+
+.sub_text {
+	font-size: var(--font-size-md);
 }

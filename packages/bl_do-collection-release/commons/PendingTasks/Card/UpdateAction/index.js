@@ -25,6 +25,7 @@ function UpdateAction({ task = {}, hideThreeDots }) {
 		geo.uuid.prod_process_owner,
 		geo.uuid.admin_id,
 		geo.uuid.tech_super_admin_id,
+		geo.uuid.coe_head,
 	].includes(ele));
 
 	return (
