@@ -19,18 +19,18 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const [callComing, setCallComing] = useState(false);
+	const [callComing, setCallComing] = useState(true);
 	const [webrtcToken, setWebrtcToken] = useState({
 		user_token : null,
 		peer_token : null,
 	});
 	const [callDetails, setCallDetails] = useState({
-		my_details           : null, // agent_details
-		peer_details         : null, // video connected to the person
-		calling_details      : null, // room_details
-		calling_room_id      : null, // room_id
+		my_details           : null,
+		peer_details         : null,
+		calling_details      : null,
+		calling_room_id      : null,
 		webrtc_token_room_id : null,
-		calling_type         : null, // incoming or outgoing
+		calling_type         : null,
 	});
 	const [streams, setStreams] = useState({
 		user_stream  : null,

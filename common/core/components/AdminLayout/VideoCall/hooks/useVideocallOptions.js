@@ -11,7 +11,7 @@ function useVideocallOptions({
 	callDetails,
 	firestore,
 }) {
-	const stopCall = () => {
+	const stopCall = useCallback(() => {
 		callEnd();
 		callUpdate({
 			data: {
@@ -20,7 +20,7 @@ function useVideocallOptions({
 			firestore,
 			calling_room_id: callDetails?.calling_room_id,
 		});
-	};
+	}, [callDetails?.calling_room_id, callEnd, firestore]);
 
 	const micOn = useCallback(() => {
 		setOptions((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));

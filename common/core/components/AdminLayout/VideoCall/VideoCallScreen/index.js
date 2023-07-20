@@ -14,7 +14,7 @@ function VideoCallScreen({
 	streams = {},
 	callEnd = () => {},
 	callDetails = {},
-	firestore,
+	firestore = {},
 }, ref) {
 	const { calling_type, peer_details, calling_details = {} } = callDetails || {};
 	const { user_name = 'Unknown' } = peer_details || {};
@@ -61,16 +61,6 @@ function VideoCallScreen({
 						callingDetails={calling_details}
 					/>
 				</div>
-
-				{/* <div
-					role="presentation"
-					type="button"
-					className={styles.hangup_icon}
-					onClick={stopCall}
-				>
-					<IcMCall className={styles.end_call_icon} />
-				</div> */}
-
 			</div>
 			<div className={styles.content}>
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />

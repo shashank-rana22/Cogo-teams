@@ -43,13 +43,23 @@
 		border-radius: 50%;
 		fill: white;
 	}
+}
 
-	.reject svg {
-		background-color: #bf291e;
-	}
+.reject svg {
+	background-color: #bf291e;
+}
 
-	.accept svg {
-		background-color: #849e4c;
+.accept svg {
+	background-color: #849e4c;
+}
+
+.minimize_btn {
+	position: absolute;
+	top: 10px;
+
+	svg {
+		width: 30px;
+		height: 30px;
 	}
 }
 
@@ -63,68 +73,58 @@
 	color: #fff;
 	background: #312d2d;
 	border-radius: 10px;
+}
 
-	.avator {
+.avator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+
+	img {
+		width: 30%;
+		border-radius: 50%;
+	}
+}
+
+.comming_call_text {
+	font-size: 18px;
+	text-align: center;
+
+	.agent_name {
+		font-size: 40px;
+		font-weight: 500;
+	}
+}
+
+.comming_call_options {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 40%;
+
+	.reject,
+	.accept {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 100%;
-
-		img {
-			width: 30%;
-			border-radius: 50%;
-		}
+		width: 55px;
+		height: 55px;
+		border-radius: 50%;
 	}
 
-	.minimize_btn {
-		position: absolute;
-		top: 10px;
-
-		svg {
-			width: 30px;
-			height: 30px;
-		}
+	.reject {
+		background-color: red;
+		rotate: 135deg;
 	}
 
-	.comming_call_text {
-		font-size: 18px;
-		text-align: center;
-
-		.agent_name {
-			font-size: 40px;
-			font-weight: 500;
-		}
+	.accept {
+		background-color: green;
 	}
 
-	.comming_call_options {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 40%;
-
-		.reject,
-		.accept {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 55px;
-			height: 55px;
-			border-radius: 50%;
-		}
-
-		.reject {
-			background-color: red;
-			rotate: 135deg;
-		}
-
-		.accept {
-			background-color: green;
-		}
-
-		svg {
-			width: 50px;
-			height: 50px;
-			padding: 5px;
-		}
+	svg {
+		width: 50px;
+		height: 50px;
+		padding: 5px;
 	}
 }

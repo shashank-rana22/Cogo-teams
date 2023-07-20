@@ -23,8 +23,8 @@ function CustomTootTipContent({ icon = () => {}, content = '' }) {
 }
 
 function VideoCallOptions({
-	firestore,
-	callDetails,
+	firestore = {},
+	callDetails = {},
 	stopCall = () => {},
 	options = {},
 	setOptions = () => {},
