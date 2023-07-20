@@ -6,7 +6,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
-import useCountdown from '../../../../hooks/getCountdown';
+import useGetCountdown from '../../../../hooks/useGetCountdown';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ function TicketSummary({
 
 	const endDate = new Date(tat);
 
-	const formattedTime = useCountdown({ time: endDate });
+	const formattedTime = useGetCountdown({ time: endDate });
 
 	if (detailsLoading) {
 		return <TicketLoader count={1} />;
