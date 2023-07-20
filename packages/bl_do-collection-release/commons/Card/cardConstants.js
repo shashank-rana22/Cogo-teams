@@ -9,22 +9,47 @@ export const SUCCESS_MSG = {
 
 export const TASK_FILTER = {
 	knockoff_pending: {
-		import: [
-			'generate_do_noc_certificate',
-			'generate_do_certificate',
-			'upload_security_dd',
-			'knockoff_invoices',
-		],
-		export: 'knockoff_invoices',
+		bl: {
+			import: [
+				'generate_do_noc_certificate',
+				'generate_do_certificate',
+				'upload_security_dd',
+				'knockoff_invoices',
+			],
+			export: 'knockoff_invoices',
+		},
+		do: {
+			import: [
+				'generate_do_noc_certificate',
+				'generate_do_certificate',
+				'upload_security_dd',
+				'knockoff_invoices',
+			],
+			export: 'knockoff_do_invoices',
+		},
 	},
 	collection_pending : 'update_collection_details',
 	under_collection   : {
-		import : 'upload_endorsed_bill_of_lading',
-		export : 'upload_bill_of_lading',
+		bl: {
+			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
+				'generate_do_certificate', 'upload_security_dd'],
+			export: 'upload_bill_of_lading',
+		},
+		do: {
+			import: ['upload_endorsed_bill_of_lading', 'upload_delivery_order', 'generate_do_noc_certificat',
+				'generate_do_certificate', 'upload_security_dd'],
+			export: 'upload_bill_of_lading',
+		},
 	},
 	collected: {
-		import : ['mark_do_released', 'upload_delivery_order'],
-		export : 'mark_bl_released',
+		bl: {
+			import : ['mark_do_released', 'upload_delivery_order'],
+			export : 'mark_bl_released',
+		},
+		do: {
+			import : ['mark_do_released', 'upload_delivery_order'],
+			export : 'mark_bl_released',
+		},
 	},
 	released    : 'mark_bl_delivered',
 	surrendered : 'mark_bl_surrendered',
