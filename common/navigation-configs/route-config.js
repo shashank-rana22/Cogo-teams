@@ -1,4 +1,5 @@
 import airRepository from './config/air-repository';
+import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
@@ -123,6 +124,7 @@ const routeConfig = {
 	...rfqDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...airlinePluginBooking,
 };
 
 export default routeConfig;
