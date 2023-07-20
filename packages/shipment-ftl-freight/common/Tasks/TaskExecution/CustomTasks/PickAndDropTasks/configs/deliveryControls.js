@@ -1,4 +1,4 @@
-const delayed_delivery_reasons = [
+const DELAYED_DELIVERY_REASONS = [
 	{ label: 'Delivery Address Not Found', value: 'Delivery Address Not Found' },
 	{ label: 'Delivery Address Incorrect', value: 'Delivery Address Incorrect' },
 	{ label: 'Vehicle Breakdown', value: 'Vehicle Breakdown' },
@@ -56,7 +56,7 @@ const getControls = (item, dateObj) => {
 			span    : 2,
 			type    : 'select',
 			label   : 'Reason',
-			options : delayed_delivery_reasons,
+			options : DELAYED_DELIVERY_REASONS,
 			rules   : {
 				required: {
 					value   : true,

@@ -1,4 +1,4 @@
-const delayed_pickup_reasons = [
+const DELAYED_PICKUP_REASONS = [
 	{ label: 'Pickup Address Not Found', value: 'Pickup Address Not Found' },
 	{ label: 'Pickup Address Incorrect', value: 'Pickup Address Incorrect' },
 	{ label: 'Vendor Unavailable', value: 'Vendor Unavailable' },
@@ -60,7 +60,7 @@ const getControls = (item, dateObj) => {
 			span    : 2,
 			type    : 'select',
 			label   : 'Reason',
-			options : delayed_pickup_reasons,
+			options : DELAYED_PICKUP_REASONS,
 			rules   : {
 				required: {
 					value   : true,

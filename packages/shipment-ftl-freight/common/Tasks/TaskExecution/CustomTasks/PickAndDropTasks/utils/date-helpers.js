@@ -4,7 +4,7 @@ const DEFAULT_TIME = 0;
 
 const getDateTimeWithDefaultHours = (date) => {
 	const newDate = new Date(date);
-	// hoursValue, minutesValue, secondsValue, msValue
+	// setHours(hoursValue, minutesValue, secondsValue, msValue)
 	newDate.setHours(DEFAULT_TIME, DEFAULT_TIME, DEFAULT_TIME, DEFAULT_TIME);
 
 	return newDate.getTime();
