@@ -37,6 +37,8 @@ function BillingAddressDetails({
 		formState: { errors },
 	} = formProps;
 
+	const controls = billingAddressControlForSelf();
+
 	return (
 		<>
 			{policyForSelf ? (
@@ -123,7 +125,7 @@ function BillingAddressDetails({
 								})}
 							</div>
 							<Layout
-								fields={billingAddressControlForSelf}
+								fields={controls}
 								control={control}
 								errors={errors}
 							/>
