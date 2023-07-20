@@ -34,8 +34,9 @@ function MailStatus({ list = [] }) {
 	});
 
 	if (isEmpty(STATUS)) {
-		return null;
+		return undefined;
 	}
+
 	let isSuccess = true;
 	if (STATUS.key === 'spammed' || STATUS.key === 'blocked') {
 		isSuccess = false;
