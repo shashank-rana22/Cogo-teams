@@ -2,62 +2,51 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
-import { RenderFlashedAt } from './renderTableHeaders';
+import { RenderFlashedAt, RenderShipmentType } from './renderTableHeaders';
 import styles from './styles.module.css';
 
 const getLogsColumns = (props) => {
-	const { setFilterParams, filtersParams } = props;
-	console.log('filtersParams:', filtersParams, setFilterParams);
-	// const handleDeleteFilter = ({ type }) => {
-	// 	setFilterParams((prev) => ({
-	// 		...prev,
-	// 		[type]: undefined,
-	// 	}));
-	// };
-
-	// const handleApplyFilter = ({ val }) => {
-	// 	setFilterParams((prev) => ({
-	// 		...prev,
-	// 		sidQuery: val,
-	// 	}));
-	// };
+	const { filtersParams } = props;
+	console.log('setFilterParams:', filtersParams);
 
 	return [
 		{
 			id     : 'sid',
 			Header : () => (
-				<div>
-					SID No.
-				</div>
+				<div className={styles.title}>SID No.</div>
 			),
 			accessor: (values) => (
 				<div className={styles.sid_container}>
-					{values.sid}
+					{values?.shipment_details?.serial_id}
 				</div>
 			),
 		},
 		{
 			id       : 'shipment_type',
-			Header   : 'Shipment Type',
+			Header   : <RenderShipmentType {...props} />,
 			accessor : (values) => (
 				<div>
-					{startCase(values.shipment_type)}
+					{startCase(values?.shipment_details?.shipment_type)}
 				</div>
 			),
 		},
 		{
-			id       : 'business_name',
-			Header   : 'Business Name',
-			accessor : (values) => (
+			id     : 'business_name',
+			Header : () => (
+				<div className={styles.title}>Business Name</div>
+			),
+			accessor: (values) => (
 				<div>
-					{values.business_name}
+					{values?.service_provider?.business_name}
 				</div>
 			),
 		},
 		{
-			id       : 'reverted_by',
-			Header   : 'Reverted By',
-			accessor : (values) => (
+			id     : 'reverted_by',
+			Header : () => (
+				<div className={styles.title}>Reverted By</div>
+			),
+			accessor: (values) => (
 				<div>
 					{values.reverted_by}
 				</div>
@@ -69,7 +58,7 @@ const getLogsColumns = (props) => {
 			accessor : (values) => (
 				<div>
 					{formatDate({
-						date       : values?.flashed_at,
+						date       : values?.created_at,
 						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'dateTime',
@@ -79,9 +68,11 @@ const getLogsColumns = (props) => {
 			),
 		},
 		{
-			id       : 'reverted_at',
-			Header   : 'Reverted At',
-			accessor : (values) => (
+			id     : 'reverted_at',
+			Header : () => (
+				<div className={styles.title}>Reverted At</div>
+			),
+			accessor: (values) => (
 				<div>
 					{formatDate({
 						date       : values?.reverted_at,

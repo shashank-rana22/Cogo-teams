@@ -17,19 +17,21 @@ function FlashRevertLogs() {
 				Flash Revert Logs
 			</Button>
 
-			<Modal
-				show={showLogs}
-				size="xl"
-				onClose={() => setShowLogs(false)}
-				onOuterClick={() => setShowLogs(false)}
-				placement="top"
-				className={styles.modal_container}
-			>
-				<Modal.Header title="Flash Revert Logs" />
-				<Modal.Body>
-					<LogsTable />
-				</Modal.Body>
-			</Modal>
+			{showLogs && (
+				<Modal
+					show={showLogs}
+					size="xl"
+					onClose={() => setShowLogs(false)}
+					onOuterClick={() => setShowLogs(false)}
+					placement="top"
+					className={styles.modal_container}
+				>
+					<Modal.Header title="Flash Revert Logs" />
+					<Modal.Body>
+						<LogsTable />
+					</Modal.Body>
+				</Modal>
+			)}
 		</>
 	);
 }

@@ -1,6 +1,12 @@
 .container {
 	width: 100%;
 	height: 100%;
+
+	:global {
+		.ui_table_body_cell {
+			font-size: 14px;
+		}
+	}
 }
 
 .sid_container {
@@ -45,4 +51,49 @@
 .filter_icon {
 	margin-inline: 4px;
 	cursor: pointer;
+}
+
+.applied_filter {
+	position: relative;
+	top: 5px;
+	left: 15px;
+	width: 8px;
+	height: 8px;
+	background: #f68a21;
+	border-radius: 50%;
+}
+
+.empty_filter_badge {
+	background: #e0e0e0;
+}
+
+.title {
+	margin-top: 4px;
+}
+
+.delete_icon {
+	width: 12px;
+	height: 12px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.filters_view {
+	display: flex;
+	align-items: center;
+	margin-left: 8px;
+
+	:global {
+		.ui_pill_text {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding-block: 8px;
 }
