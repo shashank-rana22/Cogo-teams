@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcMMinus, IcMVideoCall } from '@cogoport/icons-react';
 import { useState, useRef, useEffect } from 'react';
 
@@ -36,7 +37,7 @@ function CallComing({
 					</div>
 					<div className={styles.avator}>
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp"
+							src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 							alt="avatar-placeholder"
 						/>
 					</div>
@@ -58,7 +59,7 @@ function CallComing({
 				<div className={styles.call_comming_body}>
 					<div>
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp"
+							src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 							alt="avatar-placeholder"
 						/>
 					</div>

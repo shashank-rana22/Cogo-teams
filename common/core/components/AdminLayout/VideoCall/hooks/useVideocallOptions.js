@@ -3,8 +3,6 @@ import { useCallback } from 'react';
 
 import { callUpdate } from '../utils';
 
-// import { stopStream } from '../utils';
-
 function useVideocallOptions({
 	options,
 	setOptions,
