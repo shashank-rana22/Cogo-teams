@@ -18,7 +18,7 @@ function useGetListEmailSuggestions({
 	}, { manual: true });
 
 	const getEmailSuggestions = useCallback(
-		(props) => {
+		(props = {}) => {
 			try {
 				trigger({
 					params: getParams(props),
