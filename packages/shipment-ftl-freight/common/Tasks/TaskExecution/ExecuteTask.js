@@ -8,10 +8,13 @@ import {
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
 	ApproveTruck,
+	PickAndDropTasks,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
+
+const LAST_INDEX_VALUE = 1;
 
 function ExecuteTask({
 	task = {},
@@ -31,7 +34,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - 1]
+		? steps[currentStep] || steps[steps.length - LAST_INDEX_VALUE]
 		: {};
 
 	if (loading) {
@@ -84,13 +87,30 @@ function ExecuteTask({
 		);
 	}
 
+	if (
+		(task.task === 'mark_completed'
+			&& ['cargo_dropped', 'cargo_picked_up'].includes(task.state))
+			|| task.task === 'cargo_picked_up_at'
+	) {
+		return (
+			<PickAndDropTasks
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - LAST_INDEX_VALUE}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
