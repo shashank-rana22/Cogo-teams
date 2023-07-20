@@ -339,8 +339,8 @@
 					"name": "surrender_location",
 					"label": "Location",
 					"span": 4,
-					"type": "location-select",
-					"optionsListKey": "location",
+					"type": "select",
+					"optionsListKey": "locations",
 					"params": { "filters": { "type": ["city", "seaport", "pincode"] } },
 					"rules": {
 						"required": "Location is Required"
