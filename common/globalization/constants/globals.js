@@ -425,6 +425,9 @@ const GLOBAL_CONSTANTS = {
 			cargo_insurance: {
 				countries: ['IN'],
 			},
+			treasury: {
+				currencies: ['INR', 'USD', 'VND'],
+			},
 		},
 	},
 	services: {

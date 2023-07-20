@@ -1,0 +1,47 @@
+.container {
+	margin-bottom: -30px;
+
+	.history_tl_container ul.tl li {
+		position: relative;
+		padding: 0 30px 30px;
+		font-size: var(--font-size-md);
+		list-style: none;
+		border-left: 1px solid #f68b21;
+	}
+
+	.history_tl_container ul.tl li:last-child {
+		border-left: 0;
+	}
+
+	.history_tl_container ul.tl li::before {
+		position: absolute;
+		left: -8px;
+		content: " ";
+		background: #f68b21;
+		border: 8px solid #f68b21;
+		border-radius: 500%;
+	}
+}
+
+.sub_container {
+	display: flex;
+	width: 300px;
+}
+
+.date_name_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.date_name_text {
+	flex-direction: column;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.amount_text {
+	width: 100px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
