@@ -30,7 +30,7 @@ export default function useGetCountdown({ time, interval = SECOND }) {
 	const minutes = getFormattedTime((timespan / MINUTE) % GENERAL_SECONDS);
 	const seconds = getFormattedTime((timespan / SECOND) % GENERAL_SECONDS);
 
-	const formattedTime = `${days}${days ? 'd' : ''} ${hours}h ${minutes}m ${seconds}s`;
+	const formattedTime = `${days || ''}${days ? 'd' : ''} ${hours}h ${minutes}m ${seconds}s`;
 
 	return formattedTime;
 }
