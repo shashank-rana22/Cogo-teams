@@ -10,7 +10,6 @@ const controls = [
 		label       : 'Select Airline',
 		placeholder : 'Select Airline...',
 		initialCall : true,
-		multiple    : true,
 		span        : 6,
 	},
 	{
@@ -19,7 +18,6 @@ const controls = [
 		asyncKey    : 'list_locations',
 		label       : 'Origin Airport',
 		placeholder : 'Select Origin Airport',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			filters: {
@@ -33,7 +31,6 @@ const controls = [
 		asyncKey    : 'list_locations',
 		label       : 'Destination Location',
 		placeholder : 'Select Destination Airport',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			filters: {
@@ -48,7 +45,6 @@ const controls = [
 		label       : 'Service Provider',
 		span        : 6,
 		placeholder : 'Service Provider',
-		multiple    : true,
 		params      : {
 			filters: { service_type: 'air_freight' },
 		},
@@ -60,7 +56,6 @@ const controls = [
 		label       : 'Procured by Cogoport Agent',
 		placeholder : 'Search via name/email',
 		valueKey    : 'user_id',
-		multiple    : true,
 		span        : 6,
 	},
 	{
@@ -70,7 +65,6 @@ const controls = [
 		label       : 'Booking Agent (KAM)',
 		placeholder : 'Booking Agent',
 		valueKey    : 'user_id',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			filters: {
@@ -85,7 +79,6 @@ const controls = [
 		asyncKey    : 'organizations',
 		label       : 'Shipper Name',
 		placeholder : 'Shipper Name',
-		multiple    : true,
 		span        : 6,
 		params      : {
 			branches_data_required : true,

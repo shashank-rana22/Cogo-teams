@@ -6,7 +6,6 @@ const clearance_date_report_controls = [
 		label       : 'Airline Name',
 		placeholder : 'Select Airline...',
 		initialCall : true,
-		multiple    : true,
 		span        : 6,
 	},
 	{
