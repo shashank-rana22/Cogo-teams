@@ -1,10 +1,10 @@
 const contracts = {
 	'/[partner_id]/contracts': {
-		navigation : 'contracts',
+		navigation : 'revenue_desk-contracts',
 		isMainNav  : true,
 	},
 	'/[partner_id]/contracts/details': {
-		navigation : 'contracts',
+		navigation : 'revenue_desk-contracts',
 		isMainNav  : true,
 	},
 };
