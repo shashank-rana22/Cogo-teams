@@ -26,7 +26,7 @@ function UploadBookingNote({
 	let skipStep0 = false;
 
 	if (primary_service?.trade_type === 'import') {
-		initialStep = THREE;
+		initialStep = ONE;
 		skipStep0 = true;
 	}
 

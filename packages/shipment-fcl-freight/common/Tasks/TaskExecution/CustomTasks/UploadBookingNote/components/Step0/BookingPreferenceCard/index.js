@@ -47,7 +47,7 @@ function BookingPreferenceCard({ item = {}, step0_data = {}, similarServiceIds =
 			label : 'Buy Rate',
 			value : getFormattedPrice(
 				obj?.price,
-				obj?.currency,
+				obj?.buy_currency || obj?.currency,
 			),
 		},
 		{
