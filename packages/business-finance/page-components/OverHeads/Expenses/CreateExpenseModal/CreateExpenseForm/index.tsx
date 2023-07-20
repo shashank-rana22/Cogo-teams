@@ -12,7 +12,7 @@ interface Props {
 	createExpenseType: string;
 	recurringData?: object;
 	setRecurringData?: (obj: any) => void;
-	nonRecurringData?: { vendorID?: string };
+	nonRecurringData?: any;
 	setNonRecurringData?: (obj: any) => void;
 	setIsFormValidated?: (obj: any) => void;
 	setIncidentMangementId?: (obj) => void;
@@ -77,7 +77,10 @@ function CreateExpenseForm({
 						taxOptions={taxOptions}
 						setTaxOptions={setTaxOptions}
 						setIsFormValidated={setIsFormValidated}
-						isTaxApplicable={tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]?.is_tax_applicable}
+						isTaxApplicable={
+							tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.is_tax_applicable
+						}
 					/>
 			)}
 
