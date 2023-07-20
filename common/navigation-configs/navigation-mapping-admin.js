@@ -1825,11 +1825,11 @@ const navigationMappingAdmin = {
 		as          : '/kam-monitoring',
 		main_apis   : [],
 	},
-	awb_inventory: {
-		key           : 'awb_inventory',
-		title         : 'AWB Inventory',
-		href          : '/v2/awb-inventory',
-		as            : '/v2/awb-inventory',
+	advance_booking_manager: {
+		key           : 'advance_booking_manager',
+		title         : 'Advance Booking Manager',
+		href          : '/v2/advance-booking-manager',
+		as            : '/v2/advance-booking-manager',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
