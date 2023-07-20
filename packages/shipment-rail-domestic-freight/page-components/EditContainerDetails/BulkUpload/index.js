@@ -42,6 +42,7 @@ function BulkUpload({ disabledButton = false, shipment_id = '', setShow = () => 
 						value={fileValue}
 						drag
 						themeType="secondary"
+						multiple={false}
                         // eslint-disable-next-line
 						accept="image/*,.pdf,.eml,.doc,.csv,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 						uploadType="aws"
