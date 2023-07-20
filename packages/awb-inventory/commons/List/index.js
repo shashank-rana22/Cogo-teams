@@ -80,32 +80,38 @@ function List({
 	return (
 		<section>
 			{!isMobile && <ListHeader fields={fields} />}
-			<div className={styles.scroll}>
-				<InfiniteScroll
-					pageStart={1}
-					initialLoad={false}
-					loadMore={loadMore}
-					hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
-					loader={!loading ? (
+			{!loading ? (
+				<div className={styles.scroll}>
+					<InfiniteScroll
+						pageStart={1}
+						initialLoad={false}
+						loadMore={loadMore}
+						hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
+						loader={!loading ? (
+							<div className={styles.loading_style}>
+								<Loader />
+							</div>
+						) : null}
+						useWindow={false}
+						threshold={600}
+					>
+						<div>{render()}</div>
+					</InfiniteScroll>
+					{isEmpty(finalList) && !loading ? <EmptyState /> : null}
+					{loading && (
 						<div className={styles.loading_style}>
 							<Loader />
 						</div>
+					)}
+					{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
+						<div className={styles.end_message}>No more data to show</div>
 					) : null}
-					useWindow={false}
-					threshold={600}
-				>
-					<div>{render()}</div>
-				</InfiniteScroll>
-				{isEmpty(finalList) && !loading ? <EmptyState /> : null}
-				{loading && (
-					<div className={styles.loading_style}>
-						<Loader />
-					</div>
-				)}
-				{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
-					<div className={styles.end_message}>No more data to show</div>
-				) : null}
-			</div>
+				</div>
+			) : (
+				<div className={styles.loading_style}>
+					<Loader />
+				</div>
+			)}
 		</section>
 	);
 }
