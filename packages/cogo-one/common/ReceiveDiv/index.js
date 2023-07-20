@@ -10,8 +10,9 @@ import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
+import SuggestedActions from './SuggestedActions';
 
-function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
+function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
 		setRaiseTicketModal((p) => {
 			if (p?.state) {
@@ -21,7 +22,7 @@ function TicketPopoverContent({ formattedData, setRaiseTicketModal, data }) {
 		});
 	};
 	return (
-		<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+		<div className={styles.raise_ticket} role="presentation" onClick={triggerModal}>
 			Raise a ticket
 		</div>
 	);
@@ -84,16 +85,22 @@ function ReceiveDiv({
 					<MessageBody
 						response={response}
 						message_type={message_type}
+						eachMessage={eachMessage}
+						formattedData={formattedData}
 					/>
 				</div>
 			</div>
+
+			{message_type === 'event' && (
+				<SuggestedActions formattedData={formattedData} />
+			)}
+
 			{message_type === 'order' && (
 				<div
 					className={styles.order_container}
 				>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.list_button}
 						onClick={() => setShowOrder((p) => !p)}
 					>

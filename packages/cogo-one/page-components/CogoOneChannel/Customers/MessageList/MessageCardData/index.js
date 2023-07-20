@@ -21,14 +21,14 @@ function MessageCardData({
 	item = {},
 	activeTab = {},
 	userId = '',
-	setActiveMessage,
-	firestore,
+	setActiveMessage = () => {},
+	firestore = {},
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
 	source = '',
 	claimChat = () => {},
 	claimLoading = false,
-	viewType,
+	viewType = '',
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
@@ -89,8 +89,7 @@ function MessageCardData({
 			)}
 
 			<div
-				role="button"
-				tabIndex={0}
+				role="presentation"
 				onClick={() => setActiveMessage(item)}
 				className={cl`
 						${styles.card_container} 
@@ -104,6 +103,7 @@ function MessageCardData({
 						<div className={styles.avatar_container}>
 							<UserAvatar
 								type={channel_type}
+								event={last_message_document?.source}
 							/>
 							<div className={styles.user_details}>
 								<Tooltip

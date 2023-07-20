@@ -32,6 +32,7 @@ interface RootState {
 		partner?: {
 			id?: string;
 		};
+		permissions_navigations?: object;
 	};
 }
 
@@ -40,6 +41,15 @@ const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
+
+const PERMISSION_BUTTON = {
+	upload_invoice: {
+		title          : 'Upload Invoice',
+		API_NAME       : 'post_sales_invoice_einvoice',
+		NAVIGATION_KEY : 'business_finance-account_receivables',
+	},
+};
+
 function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { profile = {} }: RootState = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
@@ -50,7 +60,12 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 	const { id = '' } = itemData;
 
-	const { partner = {} } = profile;
+	const { partner = {}, permissions_navigations: PERMISSION_NAVIGATION = {} } = profile;
+
+	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
+
+	const NAVIGATION = PERMISSION_NAVIGATION
+		?.[NAVIGATION_KEY]?.[API_NAME][GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
@@ -101,7 +116,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 			<div
 				className={styles.generate_container}
 			>
-				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION)
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost && UPLOAD_INVOICE_PERMISSION && NAVIGATION)
 					&& (
 						<div className={styles.button_container}>
 							<Button

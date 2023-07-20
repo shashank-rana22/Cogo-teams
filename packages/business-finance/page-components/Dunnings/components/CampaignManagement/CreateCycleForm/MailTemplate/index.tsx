@@ -1,6 +1,7 @@
 import { AsyncSelect } from '@cogoport/forms';
 
 import SegmentedControl from '../../../../../commons/SegmentedControl';
+import useGetSeverityTemplates from '../../hooks/useGetSeverityTemplates';
 
 import Details from './Details';
 import styles from './styles.module.css';
@@ -14,7 +15,8 @@ interface Props {
 	formData?: FormData;
 }
 
-function MailTemplate({ formData, setFormData }:Props) {
+function MailTemplate({ formData = {}, setFormData = () => {} }:Props) {
+	const { severityTemplate } = useGetSeverityTemplates();
 	return (
 		<div className={styles.container}>
 			<div className={styles.severity}>
@@ -26,15 +28,15 @@ function MailTemplate({ formData, setFormData }:Props) {
 						options={[
 							{
 								label : 'Low',
-								value : '1',
+								value : 'LOW',
 							},
 							{
 								label : 'Medium',
-								value : '2',
+								value : 'MEDIUM',
 							},
 							{
 								label : 'High',
-								value : '3',
+								value : 'HIGH',
 							}]}
 						activeTab={formData?.severityLevel}
 						setActiveTab={(val:string) => { setFormData({ ...formData, severityLevel: val }); }}
@@ -105,6 +107,8 @@ function MailTemplate({ formData, setFormData }:Props) {
 				<Details
 					isBody
 					bodyData={formData?.templateData?.body}
+					severityData={severityTemplate}
+					severityLevel={formData?.severityLevel}
 				/>
 			</div>
 

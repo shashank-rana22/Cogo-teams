@@ -1,13 +1,19 @@
-const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCustomer = null) => {
+const SERVICE_ID_INDEX = 1;
+
+const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCustomer = null, whoIsAddingRate = '') => {
 	const addedService = (item.services || []).find((service) => {
 		if (filters?.service_type?.includes('?')) {
-			return service.id === filters?.service_type?.split('?')?.[1];
+			return service.id === filters?.service_type?.split('?')?.[SERVICE_ID_INDEX];
 		}
 		return service.service_type === item?.service_type;
 	});
 
 	const { name, code, shipment_id, service_type, pending_task_id } = item;
 	const { quantity, buy_price, currency, unit, service_provider_id, alias, price } = data;
+	let add_to_sell_quotation;
+	if (['customer', 'okam_create'].includes(whoIsAddingRate)) {
+		add_to_sell_quotation = true;
+	}
 
 	const payload = preProps.api === '/create_shipment_additional_service'
 		? {
@@ -24,7 +30,7 @@ const getPayload = (data = {}, item = {}, preProps = {}, filters = {}, billToCus
 			price                 : Number(price) || undefined,
 			service_provider_id   : service_provider_id || undefined,
 			pending_task_id       : pending_task_id || undefined,
-			add_to_sell_quotation : null,
+			add_to_sell_quotation : add_to_sell_quotation || undefined,
 			alias                 : alias || undefined,
 			state                 : preProps.state,
 		}
