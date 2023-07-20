@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPlus } from '@cogoport/icons-react';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAddressForInsurance from '../../../../../../hooks/useListAddressForInsurance';
 import AddressListPopover from '../AddressListPopover';
@@ -22,9 +22,10 @@ function BillingAddressDetails({
 	checked = [],
 	setChecked = () => {},
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const [showFilters, setshowFilters] = useState(false);
 	const [addAddressModal, setAddAddressModal] = useState(false);
-	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { data, loading: addressLoading } = useListAddressForInsurance({
 		organization_id: shipment_data?.importer_exporter?.id,
@@ -134,15 +135,15 @@ function BillingAddressDetails({
 			{policyForSelf && !isEmpty(Object.keys(prosporerAddress)) ? (
 				<div className={styles.section2}>
 					<div className={styles.selected}>
-						<div className={`${styles.card_txt} ${styles.orgName}`}>
+						<div className={cl`${styles.card_txt} ${styles.orgName}`}>
 							{startCase(prosporerAddress?.name)}
 						</div>
-						<div className={`${styles.card_txt} ${styles.orgName}`}>
+						<div className={cl`${styles.card_txt} ${styles.orgName}`}>
 							{`${startCase(prosporerAddress?.address)} - ${
 								prosporerAddress?.pincode
 							}`}
 						</div>
-						<div className={`${styles.card_txt} ${styles.orgName}`}>{prosporerAddress?.tax_number}</div>
+						<div className={cl`${styles.card_txt} ${styles.orgName}`}>{prosporerAddress?.tax_number}</div>
 					</div>
 				</div>
 			) : null}

@@ -5,7 +5,7 @@ import styles from './styles.modules.css';
 function Loading() {
 	return (
 		<div className={styles.loader_wrapper}>
-			<div className={styles.text}>Please wait while we fetch Details!!</div>
+			<span className={styles.text}>Please wait while we fetch Details!!</span>
 			{' '}
 			<img
 				src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}

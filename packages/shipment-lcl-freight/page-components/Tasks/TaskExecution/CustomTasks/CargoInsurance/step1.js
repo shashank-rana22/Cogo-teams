@@ -15,7 +15,7 @@ const INCREMENT_FACTOR = 1;
 
 function Step1({
 	setStep = () => {},
-	step,
+	step = 0,
 	insuranceDetails = {},
 	shipmentData = {},
 	policyId = '',

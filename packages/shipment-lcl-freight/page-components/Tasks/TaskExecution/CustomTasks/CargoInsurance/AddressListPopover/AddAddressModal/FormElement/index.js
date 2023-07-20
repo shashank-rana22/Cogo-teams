@@ -23,7 +23,7 @@ function FormElement({ name, label, type, errors, span, ...rest }) {
 
 	return Element ? (
 		<div className={styles.element}>
-			<div className={styles.label}>{label}</div>
+			<label className={styles.label}>{label}</label>
 			<Element
 				name={name}
 				type={type}

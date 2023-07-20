@@ -4,7 +4,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useCreateSpotSearch from '../../../../../hooks/useCreateSpotSearch';
 import useGetInsuranceCountrySupported from '../../../../../hooks/useGetInsuranceCountrySupported';
@@ -26,6 +26,8 @@ function CargoInsurance({
 	refetch = () => {},
 	primary_service = {},
 }) {
+	const { user } = useSelector((state) => state?.profile);
+
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
@@ -33,7 +35,6 @@ function CargoInsurance({
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
 	const refetchAfterApiCall = () => {

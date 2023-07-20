@@ -57,7 +57,7 @@ function List({ isSeller = false }) {
 	const isCargoInsured = servicesList?.some((service) => service?.service_type === 'cargo_insurance_service');
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 
 			{loading ? <Loader /> : null}
 
@@ -125,7 +125,7 @@ function List({ isSeller = false }) {
 					onClick={() => setShowModal('charge_code')}
 					disabled={shipment_data?.is_job_closed}
 				>
-					<div className={styles.add_icon}>+</div>
+					<span className={styles.add_icon}>+</span>
 					Add Additional Services
 				</Button>
 				<Button
@@ -133,7 +133,7 @@ function List({ isSeller = false }) {
 					className={styles.btn_div}
 					disabled={!!isCargoInsured}
 				>
-					<div className={styles.add_icon}>+</div>
+					<span className={styles.add_icon}>+</span>
 					Add Cargo Insurance
 				</Button>
 			</div>
@@ -187,7 +187,7 @@ function List({ isSeller = false }) {
 				/>
 			) : null}
 
-		</div>
+		</section>
 	);
 }
 

@@ -16,7 +16,7 @@ const INCREMENT_FACTOR = 1;
 
 function Step2({
 	setStep = () => {},
-	step,
+	step = 0,
 	insuranceDetails = {},
 	shipmentData = {},
 	policyId = '',
@@ -68,7 +68,6 @@ function Step2({
 				policyForSelf    : insuranceDetails?.policyForSelf,
 				addressId,
 				premiumData,
-				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
 			});
 			saveData({ key, payload });
 		})();

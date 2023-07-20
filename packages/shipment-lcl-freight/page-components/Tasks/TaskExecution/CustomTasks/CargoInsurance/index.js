@@ -17,12 +17,11 @@ function CargoInsurance({
 	refetch = () => {},
 	task = {},
 }) {
-	const [step, setStep] = useState(FIRST_STEP);
-	const [addressId, setAddressId] = useState('');
-
 	const { shipment_data, primary_service, servicesList } = useContext(
 		ShipmentDetailContext,
 	);
+	const [step, setStep] = useState(FIRST_STEP);
+	const [addressId, setAddressId] = useState('');
 
 	const policyDetails = (servicesList || []).find(
 		(item) => item?.service_type === 'cargo_insurance_service',

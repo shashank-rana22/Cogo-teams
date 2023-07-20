@@ -14,7 +14,7 @@ function EmptyState({ reason = '' }) {
 		<div className={styles.no_support}>
 			<div className={styles.sad_container}>
 				<IcMVerySad className={styles.icon} width={40} height={40} />
-				<div className={styles.sad_text}>{TEXT_MAPPING[reason]}</div>
+				<span className={styles.sad_text}>{TEXT_MAPPING[reason]}</span>
 			</div>
 		</div>
 	);

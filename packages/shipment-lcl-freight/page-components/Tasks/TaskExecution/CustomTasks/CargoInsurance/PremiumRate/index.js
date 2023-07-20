@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -21,9 +20,9 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 
 	const getPremiumLineItem = ({ amount, item, key }) => (
 		<div className={styles.premium_line_item} key={key}>
-			<div className={styles.text}>{item}</div>
+			<span className={styles.text}>{item}</span>
 			<div className={cl`${styles.flex_row} ${styles.values}`}>
-				<div className={styles.line} />
+				<hr className={styles.line} />
 				{formarAmountData(amount)}
 			</div>
 		</div>
@@ -32,7 +31,7 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 	if (premiumLoading) {
 		return (
 			<div className={cl`${styles.premium_value} ${styles.loading}`}>
-				<div className={cl`${styles.text} ${styles.bold}`}>Please wait while we fetch Details!!!!!!</div>
+				<span className={cl`${styles.text} ${styles.bold}`}>Please wait while we fetch Details!!!!!!</span>
 			</div>
 		);
 	}
@@ -47,7 +46,7 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 					key    : item?.displayName,
 				}))}
 
-			<div className={styles.line} />
+			<hr className={styles.line} />
 			{getPremiumLineItem({ amount: premiumData?.totalApplicableCharges, item: 'Amount Payable', key: '' })}
 		</div>
 	);

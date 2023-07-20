@@ -16,7 +16,7 @@ const BACK_STEP = 2;
 
 function Step3({
 	setStep = () => {},
-	step,
+	step = 0,
 	policyId = '',
 	formProps = {},
 	insuranceDetails = {},
@@ -82,7 +82,6 @@ function Step3({
 				billingData,
 				policyForSelf    : insuranceDetails?.policyForSelf,
 				addressId,
-				billingType      : insuranceDetails?.billingType ? 'INDIVIDUAL' : 'CORPORATE',
 			});
 			const payloadForUpdateShipment = getPayloadForUpdateShipment({ insuranceDetails, primary_service, task });
 

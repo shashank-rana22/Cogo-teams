@@ -79,7 +79,7 @@ function AddModal({
 			size="md"
 		>
 			<form>
-				<div className={styles.container}>
+				<section className={styles.container}>
 					<Modal.Header title={(
 						<div className={styles.header}>
 							<div className={styles.icon_container}>
@@ -97,7 +97,7 @@ function AddModal({
 
 					<div className={styles.section}>
 						<div className={styles.section_title}>
-							<div className="title">Billing Details</div>
+							<h1>Billing Details</h1>
 						</div>
 						<div className={styles.check_box_wrapper}>
 							<Checkbox
@@ -112,7 +112,7 @@ function AddModal({
 									});
 								}}
 							/>
-							<div className={styles.gst}>Include Tax Number</div>
+							<span className={styles.gst}>Include Tax Number</span>
 						</div>
 						<div className={styles.row}>
 							{(addAddressControls || [])
@@ -163,7 +163,7 @@ function AddModal({
 
 						{!checked && (
 							<div className={styles.addressType}>
-								<div className={styles.addressSave}>Save address as</div>
+								<span className={styles.addressSave}>Save address as</span>
 								<div className={styles.addresses}>
 									{OPTIONS.map((item) => (
 										<div
@@ -183,7 +183,7 @@ function AddModal({
 							</div>
 						)}
 					</div>
-				</div>
+				</section>
 
 				<Modal.Footer>
 					<Button
