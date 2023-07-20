@@ -9,9 +9,7 @@ import styles from './styles.module.css';
 const PLATFORM_CHARGES = 1;
 const CONVENIENCE_CHARGES = 2;
 
-const geo = getGeoConstants();
-
-const formatAmounts = (amount) => formatAmount({
+const formatAmounts = (geo, amount) => formatAmount({
 	amount,
 	currency : geo.country.currency.code,
 	options  : {
@@ -22,6 +20,8 @@ const formatAmounts = (amount) => formatAmount({
 });
 
 function PremiumRate({ rateData = {} }) {
+	const geo = getGeoConstants();
+
 	const {
 		serviceChargeList = [],
 		totalCharges = 0,
@@ -45,22 +45,22 @@ function PremiumRate({ rateData = {} }) {
 					</Tooltip>
 				</div>
 
-				<div>{formatAmounts(serviceChargeList?.[GLOBAL_CONSTANTS.zeroth_index]?.totalCharges)}</div>
+				<div>{formatAmounts(geo, serviceChargeList?.[GLOBAL_CONSTANTS.zeroth_index]?.totalCharges)}</div>
 			</div>
 
 			<div className={styles.rate}>
 				<span>Platform Charges:</span>
-				<div>{formatAmounts(serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}</div>
+				<div>{formatAmounts(geo, serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}</div>
 			</div>
 
 			<div className={cl`${styles.rate} ${styles.final}`}>
 				<span>Convenience Fee:</span>
-				<div>{formatAmounts(serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}</div>
+				<div>{formatAmounts(geo, serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}</div>
 			</div>
 
 			<div className={styles.rate}>
 				<span>Amount Payable:</span>
-				<div>{formatAmounts(totalCharges)}</div>
+				<div>{formatAmounts(geo, totalCharges)}</div>
 			</div>
 		</>
 	);

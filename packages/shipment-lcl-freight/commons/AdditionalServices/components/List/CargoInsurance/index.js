@@ -11,14 +11,12 @@ import useGetInsuranceCountrySupported from '../../../../../hooks/useGetInsuranc
 import useGetInsuranceListCommodities from '../../../../../hooks/useGetInsuranceListCommodities';
 import useGetInsuranceRate from '../../../../../hooks/useGetInsuranceRate';
 
-import controls from './controls';
 import EmptyState from './EmptyState';
+import getControls from './getControls';
 import Loading from './Loading';
 import PremiumRate from './PremiumRate';
 import styles from './styles.module.css';
 import POLICY_TYPE_MAPPING from './utils/policyTypeMapping.json';
-
-const geo = getGeoConstants();
 
 function CargoInsurance({
 	setShowModal = () => {},
@@ -27,6 +25,7 @@ function CargoInsurance({
 	primary_service = {},
 }) {
 	const { user } = useSelector((state) => state?.profile);
+	const geo = getGeoConstants();
 
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
@@ -75,6 +74,7 @@ function CargoInsurance({
 	} = useForm();
 
 	const formValues = watch();
+	const controls = getControls();
 
 	useEffect(() => {
 		if (!isEmpty(formValues?.cargo_value) && !isEmpty(formValues?.cargo_insurance_commodity)) {

@@ -1,8 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const fileUploadRestControls = {
 	type       : 'file',
 	themeType  : 'secondary',
 	drag       : true,
 	uploadIcon : 'ic-upload',
+	maxSize    : '10485760',
 	height     : 80,
 	accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'
@@ -33,7 +36,8 @@ export const invoiceControls = [
 		isPreviousDaysAllowed : true,
 		showOptional          : false,
 		showTimeSelect        : true,
-		dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+		dateFormat            : `${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']},
+		${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']})}`,
 	},
 	{
 		label : 'Upload GST Certificate',

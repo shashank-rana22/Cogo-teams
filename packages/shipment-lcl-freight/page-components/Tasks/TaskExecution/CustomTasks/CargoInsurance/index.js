@@ -10,7 +10,12 @@ import Step3 from './step3';
 import getDefaultValues from './utils/getDefaultValues';
 
 const FIRST_STEP = 1;
-const SECOND_STEP = 2;
+
+const stepMapping = {
+	1 : Step1,
+	2 : Step2,
+	3 : Step3,
+};
 
 function CargoInsurance({
 	onCancel = () => {},
@@ -55,54 +60,29 @@ function CargoInsurance({
 
 	const formProps = useForm({ values: defaultValues });
 
-	if (step === FIRST_STEP) {
+	const RenderStep = stepMapping[step];
+
+	if (RenderStep) {
 		return (
-			<Step1
+			<RenderStep
 				setStep={setStep}
 				step={step}
 				insuranceDetails={insuranceDetails}
 				shipmentData={shipment_data}
 				policyId={policyDetails?.cargo_insurance_policy_id}
+				onCancel={onCancel}
+				refetch={refetch}
+				primary_service={primary_service}
+				task={task}
 				addressId={addressId}
+				billingData={billingData}
+				formProps={formProps}
 				setAddressId={setAddressId}
-				billingData={billingData}
 				setBillingData={setBillingData}
-				formProps={formProps}
 			/>
 		);
 	}
-
-	if (step === SECOND_STEP) {
-		return (
-			<Step2
-				setStep={setStep}
-				step={step}
-				insuranceDetails={insuranceDetails}
-				shipmentData={shipment_data}
-				policyId={policyDetails?.cargo_insurance_policy_id}
-				addressId={addressId}
-				billingData={billingData}
-				formProps={formProps}
-			/>
-		);
-	}
-
-	return (
-		<Step3
-			setStep={setStep}
-			step={step}
-			insuranceDetails={insuranceDetails}
-			shipmentData={shipment_data}
-			policyId={policyDetails?.cargo_insurance_policy_id}
-			onCancel={onCancel}
-			refetch={refetch}
-			primary_service={primary_service}
-			task={task}
-			addressId={addressId}
-			billingData={billingData}
-			formProps={formProps}
-		/>
-	);
+	return null;
 }
 
 export default CargoInsurance;

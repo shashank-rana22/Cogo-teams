@@ -104,8 +104,9 @@ export const cargoControls = ({ insuranceDetails = {} }) => [
 		maxDate        : addDays(new Date(), MAX_DATE_LIMIT),
 		rules          : { required: 'Transition Date is required' },
 		showTimeSelect : true,
-		dateFormat     : 'MMM dd, yyyy, hh:mm:ss aaa',
-		showOptional   : false,
+		dateFormat     : `${GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']},
+		${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']})}`,
+		showOptional: false,
 	},
 	{
 		name           : 'policyCurrency',
