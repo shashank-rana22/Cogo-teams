@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequestAir } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -24,7 +25,7 @@ const useGetMultipleCopiesList = (taskItem) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 

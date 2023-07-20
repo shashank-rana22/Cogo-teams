@@ -1,0 +1,25 @@
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.flex {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.scroll {
+	max-height: 600px;
+	overflow: auto;
+}
+
+.loading_style {
+	margin: 40px 0;
+	text-align: center;
+}
+
+.end_message {
+	text-align: center;
+}
