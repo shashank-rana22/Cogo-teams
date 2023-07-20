@@ -23,7 +23,7 @@ import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const EXCLUDE_SERVICES = [
+const EXCLUDED_SERVICES = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
@@ -34,6 +34,9 @@ const TRADE_PARTY_TYPE = {
 };
 
 const REDUCE_LENGTH_BY = 1;
+const SERVICES_FOR_INSURANCE = ['fcl_freight_service'];
+
+const INDEX_OFFSET_FOR_LAST_ELEMENT = 1;
 
 function ExecuteTask({
 	task = {},
@@ -56,7 +59,7 @@ function ExecuteTask({
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
-		? steps[currentStep] || steps[steps.length - REDUCE_LENGTH_BY]
+		? steps[currentStep] || steps[steps.length - INDEX_OFFSET_FOR_LAST_ELEMENT]
 		: {};
 
 	if (loading) {
@@ -66,7 +69,7 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!EXCLUDE_SERVICES.includes(task.service_type))
+		&& (!EXCLUDED_SERVICES.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -107,8 +110,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (
-		task.task === 'update_container_details') {
+	if (task.task === 'update_container_details') {
 		return (
 			<UploadContainerDetails
 				pendingTask={task}
@@ -204,19 +206,6 @@ function ExecuteTask({
 		);
 	}
 
-	if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
-		return (
-			<AddCompanyModal
-				tradePartnersData={data}
-				addCompany={TRADE_PARTY_TYPE[task.task]}
-				tradePartnerTrigger={apiTrigger}
-				shipment_id={shipment_data?.id}
-				importer_exporter_id={shipment_data?.importer_exporter_id}
-				throughPoc={false}
-			/>
-		);
-	}
-
 	if (task.task === 'upload_compliance_documents') {
 		return (
 			<UploadComplianceDocs
@@ -228,7 +217,7 @@ function ExecuteTask({
 		);
 	}
 
-	if (task?.task === 'generate_cargo_insurance') {
+	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
 		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
 	}
 
