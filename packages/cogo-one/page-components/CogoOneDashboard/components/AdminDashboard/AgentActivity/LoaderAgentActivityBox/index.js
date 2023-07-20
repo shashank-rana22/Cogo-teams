@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import { AGENT_ACTIVITY } from '../../../constants';
+import { AGENT_ACTIVITY } from '../../../../constants';
 
 import styles from './styles.module.css';
 

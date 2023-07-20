@@ -1,7 +1,11 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
+
+const ONE_MINUTE = 60;
+const MIN_ROUND_UP = 2;
 
 function Improvement({ loading = false, agentDelay = '' }) {
 	return (
@@ -24,13 +28,13 @@ function Improvement({ loading = false, agentDelay = '' }) {
 							: (
 								<>
 									<span className={styles.agent_delay}>
-										{(agentDelay || 0) >= 60
-											? ((agentDelay || 0) / 60).toFixed(2)
-											: (agentDelay || 0)}
+										{(agentDelay || GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE
+											? ((agentDelay || GLOBAL_CONSTANTS) / ONE_MINUTE).toFixed(MIN_ROUND_UP)
+											: (agentDelay || GLOBAL_CONSTANTS)}
 									</span>
 									{' '}
 									<span className={styles.unit}>
-										{(agentDelay || 0) >= 60 ? 'hr' : 'min'}
+										{(agentDelay || GLOBAL_CONSTANTS) >= ONE_MINUTE ? 'hr' : 'min'}
 									</span>
 								</>
 							)}

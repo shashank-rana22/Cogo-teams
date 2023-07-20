@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { INTENT_SERVED_DATA } from '../../constants';
+import { INTENT_SERVED_DATA } from '../../../constants';
 
 import styles from './styles.module.css';
 

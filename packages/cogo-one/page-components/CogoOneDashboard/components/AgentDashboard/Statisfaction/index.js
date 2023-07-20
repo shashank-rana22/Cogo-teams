@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import { SATIFICATION_IMAGE_MAPPING } from '../../constants';
+import { SATIFICATION_IMAGE_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';
 

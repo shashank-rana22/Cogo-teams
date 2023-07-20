@@ -5,7 +5,7 @@ import { Image, useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { AGENT_CONFIG_DATA, CALL_STATUS_MAPPING } from '../../constants';
+import { AGENT_CONFIG_DATA, CALL_STATUS_MAPPING } from '../../../constants';
 
 import EmptyStateAgentActivity from './EmptyStateAgentActivity';
 import LoaderAgentActivity from './LoaderAgentActivityBox';

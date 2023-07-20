@@ -1,10 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-// import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import AdminDashboard from './AdminDashboard';
-import AgentDashboard from './AgentDashboard';
+import AdminDashboard from './components/AdminDashboard';
+import AgentDashboard from './components/AgentDashboard';
 import useGetCogoOneAgentStats from './hooks/useGetCogoOneAgentStats';
 import styles from './styles.module.css';
 
@@ -42,7 +41,7 @@ function CogoOneDashboard() {
 
 	const {
 		loading = false,
-		listData = {},
+		data = {},
 		getCogoOneDashboard = () => {},
 	} = useGetCogoOneAgentStats({
 		timeline,
@@ -53,6 +52,8 @@ function CogoOneDashboard() {
 		isAgentView,
 	});
 
+	console.log(data, 'data');
+
 	const commomProps = {
 		timeline,
 		setTimeline,
@@ -60,7 +61,7 @@ function CogoOneDashboard() {
 		setCalendarData,
 		selectedItem,
 		setSelectedItem,
-		listData,
+		data,
 		loading,
 		setSelectedDate,
 	};

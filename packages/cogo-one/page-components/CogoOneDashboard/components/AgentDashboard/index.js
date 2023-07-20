@@ -1,9 +1,9 @@
-import Calendar from '../common/Calendar';
-import CallAnalytics from '../common/CallAnalytics';
-import ChannelMessageAnalytic from '../common/ChannelMessageAnalytics';
-import ChatStatistics from '../common/ChatStatistics';
-import Header from '../common/Header';
-import LineChart from '../common/LineChart';
+import Calendar from '../../common/Calendar';
+import CallAnalytics from '../../common/CallAnalytics';
+import ChannelMessageAnalytic from '../../common/ChannelMessageAnalytics';
+import ChatStatistics from '../../common/ChatStatistics';
+import Header from '../../common/Header';
+import LineChart from '../../common/LineChart';
 
 import Improvement from './Improvement';
 import IntentServed from './IntentServed';
