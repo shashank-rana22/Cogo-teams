@@ -54,8 +54,8 @@ function AwbNumberUsed({
 			const { shipments = [] } = singleItem;
 
 			const handleClick = () => {
-				if (shipments[GLOBAL_CONSTANTS.zeroth_index]?.id) {
-					redirectToShipment(shipments[GLOBAL_CONSTANTS.zeroth_index].id);
+				if (shipments?.[GLOBAL_CONSTANTS.zeroth_index]?.id) {
+					redirectToShipment(shipments?.[GLOBAL_CONSTANTS.zeroth_index].id);
 				}
 			};
 			return (
@@ -64,7 +64,7 @@ function AwbNumberUsed({
 						themeType="linkUi"
 						onClick={handleClick}
 					>
-						{shipments[GLOBAL_CONSTANTS.zeroth_index]?.serial_id || '-'}
+						{shipments?.[GLOBAL_CONSTANTS.zeroth_index]?.serialId || '-'}
 					</Button>
 				</div>
 			);

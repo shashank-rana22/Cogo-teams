@@ -11796,6 +11796,14 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'operator',
 		},
+		{
+			api         : '/air-coe/awb-inventory/list-stock',
+			access_type : 'private',
+		},
+		{
+			api         : '/air-coe/awb-inventory/list',
+			access_type : 'private',
+		},
 	],
 	airline_booking_plugin: [
 		{
