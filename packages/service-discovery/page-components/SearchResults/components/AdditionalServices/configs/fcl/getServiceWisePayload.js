@@ -1,4 +1,4 @@
-const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', rateCardData, tradeType = '' }) => {
+const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '' }) => {
 	const {
 		origin_warehouse_id = '',
 		destination_warehouse_id = '',
@@ -11,11 +11,9 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 		haulage_type = '',
 	} = additionalFormInfo;
 
-	const { bls_count = '', service_details = {} } = detail;
-	const { service_type } = rateCardData;
-	const primaryService = service_type;
+	const { bls_count = '', service_details = {}, service_type = '' } = detail;
 
-	const primaryServicesObj = Object.values(service_details).filter((item) => item.service_type === primaryService);
+	const primaryServicesObj = Object.values(service_details).filter((item) => item.service_type === service_type);
 
 	const TRADE_TYPE_MAPPING = {
 		export: {

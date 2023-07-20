@@ -5,7 +5,6 @@ const getCheckoutPayload = ({
 	additionalFormInfo,
 	detail,
 	service_name = '',
-	rateCardData,
 }) => {
 	const {
 		destination_cargo_handling_type = '',
@@ -25,7 +24,6 @@ const getCheckoutPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name : 'haulage_freight',
-						rateCardData,
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
 					}),
 				}
@@ -34,7 +32,6 @@ const getCheckoutPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name : 'ftl_freight',
-						rateCardData,
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
 					}),
 				}),
@@ -54,7 +51,6 @@ const getCheckoutPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name : 'haulage_freight',
-						rateCardData,
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
 					}),
 				}
@@ -63,7 +59,6 @@ const getCheckoutPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name : 'ftl_freight',
-						rateCardData,
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
 					}),
 				}),
@@ -80,7 +75,6 @@ const getCheckoutPayload = ({
 		additionalFormInfo,
 		detail,
 		service_name: finalServiceName,
-		rateCardData,
 		tradeType,
 	});
 

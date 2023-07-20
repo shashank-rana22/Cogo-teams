@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import { cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
