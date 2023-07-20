@@ -13,6 +13,8 @@ const CargoInsurance = dynamic(
 	{ ssr: false },
 );
 
+const MAX_SERVICES_LENGTH = 3;
+
 function AdditionalServices({
 	setHeaderProps = () => {},
 	rate = {},
@@ -21,6 +23,7 @@ function AdditionalServices({
 	getCheckout = () => {},
 	possible_subsidiary_services = [],
 	loading = false,
+	servicesLength = 0,
 }) {
 	const { services, id, ...restDetails } = detail;
 
@@ -33,7 +36,12 @@ function AdditionalServices({
 	const rateCardData = { ...rate, service_rates: serviceRates, service_type: restDetails.primary_service };
 
 	return (
-		<Accordion className={styles.accordion} type="form" title="Looking for additional services?">
+		<Accordion
+			className={styles.accordion}
+			type="form"
+			isOpen={servicesLength < MAX_SERVICES_LENGTH}
+			title="Looking for additional services?"
+		>
 			<AdditionalServicesComponent
 				detail={finalDetails}
 				rateCardData={rateCardData}

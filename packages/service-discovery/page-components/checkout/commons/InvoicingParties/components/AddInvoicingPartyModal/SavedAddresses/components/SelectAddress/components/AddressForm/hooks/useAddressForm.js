@@ -159,8 +159,6 @@ const getAddressValues = ({ data, controls, addressType }) => {
 			value = !isEmpty(value);
 		}
 
-		console.log('data', data);
-
 		if (name === 'tax_number_document_url') {
 			value =				data?.tax_number_document_url?.finalUrl
 				|| data?.tax_number_document_url;

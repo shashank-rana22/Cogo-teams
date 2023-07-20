@@ -1,8 +1,7 @@
-/* eslint-disable max-lines-per-function */
-import { Button, Accordion, cl } from '@cogoport/components';
+import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
@@ -15,8 +14,7 @@ import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
+import useHandleBreakdownDetails from './useHandleBreakdownDetails';
 
 function BreakdownDetails({
 	rateDetails = [],
@@ -39,79 +37,18 @@ function BreakdownDetails({
 		checkout_id,
 	} = useContext(CheckoutContext);
 
-	const [addLineItemData, setAddLineItemData] = useState({});
-	const [editLineItemData, setEditLineItemData] = useState({});
+	const {
+		addLineItemData,
+		setAddLineItemData,
+		editLineItemData,
+		setEditLineItemData,
+	} = useHandleBreakdownDetails({ rate, setRateDetails });
 
 	let total = 0;
 
 	const disableForm = source === 'preview_booking';
 
 	const { primary_service = '' } = detail || {};
-
-	useEffect(() => {
-		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
-			const { line_items = [] } = serviceData;
-
-			const { line_items: presentLineItems = [] } = prev.find((item) => key === item.id) || {};
-
-			const updateLineItems = line_items.map((lineItem) => {
-				const presentPrefillValues = presentLineItems.find((item) => item.code === lineItem.code);
-
-				const { filteredMargins: presentFilteredMargins } = presentPrefillValues || {};
-
-				if (!isEmpty(presentFilteredMargins)) {
-					return {
-						filteredMargins: presentFilteredMargins,
-						...lineItem,
-					};
-				}
-
-				const filteredMargins = (lineItem?.margins || []).filter(
-					(m) => m.margin_type === 'demand',
-				);
-
-				if (filteredMargins?.length) {
-					const [margin] = filteredMargins;
-					let type = margin?.type;
-					let value = margin?.value || DEFAULT_VALUE;
-
-					if (type === 'percentage') {
-						type = 'absolute_total';
-						value = margin?.total_margin_value;
-					}
-					const prefillValues = {
-						type,
-						value,
-						currency : margin?.currency || lineItem?.currency,
-						code     : margin?.code,
-					};
-
-					return {
-						filteredMargins: prefillValues,
-						...lineItem,
-					};
-				}
-
-				const prefillValues = {
-					type     : 'absolute_unit',
-					value    : 0,
-					currency : lineItem?.currency,
-					code     : lineItem?.code,
-				};
-
-				return {
-					filteredMargins: prefillValues,
-					...lineItem,
-				};
-			});
-
-			return {
-				...rate?.services[key],
-				id         : key,
-				line_items : updateLineItems,
-			};
-		}));
-	}, [rate?.services, setRateDetails]);
 
 	return (
 		<div>
@@ -191,17 +128,22 @@ function BreakdownDetails({
 								</div>
 
 								{noRatesFound ? (
-									<Button
-										type="button"
-										size="sm"
-										themeType="accent"
-										onClick={() => handleDeleteRate({ serviceType: item?.service_type, id })}
-										disabled={deleteRateLoading}
-									>
-										Remove
-										{' '}
-										{startCase(item?.service_type)}
-									</Button>
+									<div className={styles.flex}>
+										<Pill size="lg">NO RATES</Pill>
+
+										<Button
+											type="button"
+											size="sm"
+											themeType="accent"
+											onClick={() => handleDeleteRate({ serviceType: item?.service_type, id })}
+											disabled={deleteRateLoading}
+										>
+											Remove
+											{' '}
+											{startCase(item?.service_type)}
+										</Button>
+									</div>
+
 								) : <div className={styles.total_display}>{totalDisplayString}</div>}
 
 							</div>

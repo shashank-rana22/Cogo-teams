@@ -12,3 +12,10 @@
 	margin-bottom: 6px;
 	font-weight: 600;
 }
+
+
+.error {
+	font-size: 12px;
+	margin-left: 16px;
+	color: #ff0000;
+}

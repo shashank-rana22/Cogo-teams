@@ -34,6 +34,7 @@ function EditMargin() {
 		refetch: getCheckout,
 		detail,
 		checkout_id,
+		setNoRatesPresent,
 	});
 
 	const { margin_approval_request_remarks = [] } = detail;
@@ -54,6 +55,11 @@ function EditMargin() {
 				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}
 			/>
+			{noRatesPresent ? (
+				<div className={styles.error}>
+					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION.
+				</div>
+			) : null}
 
 			<div className={styles.additional_remark}>
 				<div className={styles.sub_heading}>Additional Remark</div>

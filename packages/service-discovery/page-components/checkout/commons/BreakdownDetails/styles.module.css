@@ -54,13 +54,13 @@
 .add_line_item {
 	padding: unset 16px !important;
 	margin-left: 16px;
-	margin-bottom: 4px;
 	font-weight: 600;
 	color: #ff7f00 !important;
 }
 
 .button_container {
 	display: flex;
+	background: #f8f9fa;
 }
 
 .service_details {
@@ -76,6 +76,23 @@
 
 		.ui_pill_text {
 			color: #24c7d9;
+		}
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_pill_container {
+			margin-right: 12px;
+			height: 24px;
+		}
+
+		.ui_pill_text {
+			font-weight: 600;
+			font-size: 12px;
 		}
 	}
 }
