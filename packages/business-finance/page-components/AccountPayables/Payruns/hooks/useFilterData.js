@@ -67,7 +67,7 @@ const useFilterData = ({
 		getAdvancePaymentInvoiceList,
 		advancePaymentInvoiceList,
 		advancePaymentInvoiceLoading,
-	} = useGetAdvPaymentInvoiceList({ globalFilters, activePayrunTab });
+	} = useGetAdvPaymentInvoiceList({ sort, query, globalFilters, activePayrunTab });
 	const {
 		getAdvancePaidData,
 		paidAdvanceListData,
@@ -206,6 +206,7 @@ const useFilterData = ({
 		setSelectedPayrun(null);
 		setCheckedRow(null);
 		setSelectedIds([]);
+		setSort({});
 		setGlobalFilters({
 			search    : undefined,
 			pageIndex : 1,

@@ -30,7 +30,6 @@ export const uploadHistoryConfig = {
 		{
 			label   : 'Uploaded Date',
 			key     : 'createdAt',
-			// func    : 'renderDateAndTime',
 			span    : 2.5,
 			sorting : { name: 'uploadDateSortType' },
 		},

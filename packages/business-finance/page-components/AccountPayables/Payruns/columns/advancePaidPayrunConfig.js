@@ -45,20 +45,21 @@ export const advencePayrunPaidConfig = {
 		{
 			label : 'Organization',
 			key   : 'organizationName',
-			// func  : 'renderAdvanceName',
+			func  : 'renderTooltip',
 			span  : 2.4,
 		},
 		{
 			key   : 'grandTotal',
 			label : 'Advance Amount',
-			// func  : 'renderAmount',
+			func  : 'renderAmount',
 			span  : 1.4,
 		},
 		{
-			key   : 'paidAmount',
-			label : 'Paid Amount',
-			// func  : 'renderAmount',
-			span  : 1.4,
+			key         : 'totalPaidAmount',
+			func        : 'renderAmount',
+			currencyKey : 'currency',
+			label       : 'Paid Amount',
+			span        : 1,
 		},
 		{
 			key   : 'paymentDate',

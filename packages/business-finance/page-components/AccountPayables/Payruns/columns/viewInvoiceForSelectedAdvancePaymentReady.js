@@ -22,7 +22,7 @@ export const VIEW_INVOICE_ADVANCE_PAYMENT_READY_CONFIG = {
 			key   : 'organizationName',
 			label : 'Organization',
 			span  : 2.2,
-			// func  : 'renderAdvanceName',
+			func  : 'renderTooltip',
 		},
 		{
 			key   : 'advanceDocumentNo',

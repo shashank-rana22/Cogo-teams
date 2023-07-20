@@ -18,7 +18,7 @@ export const ADVANCE_PAYMENT_VIEW_INVOICE = {
 			key   : 'organizationName',
 			label : 'Organization',
 			span  : 2.2,
-			// func  : 'renderAdvanceName',
+			func  : 'renderTooltip',
 		},
 		{
 			key   : 'advanceDocumentNo',

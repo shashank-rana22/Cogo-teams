@@ -37,10 +37,12 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 					params: {
 						pageIndex,
 						pageSize,
-						state     : activePayrunTab,
-						q         : query !== '' ? query : undefined,
-						startDate : selectFromDate || undefined,
-						endDate   : selectToDate || undefined,
+						state             : activePayrunTab,
+						q                 : query !== '' ? query : undefined,
+						startDate         : selectFromDate || undefined,
+						endDate           : selectToDate || undefined,
+						dueDateSortType   : 'asc',
+						createdAtSortType : 'desc',
 						...sort,
 					},
 				});
