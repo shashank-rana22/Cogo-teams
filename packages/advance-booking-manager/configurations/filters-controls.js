@@ -4,7 +4,7 @@ const geo = getGeoConstants();
 
 const controls = [
 	{
-		name        : 'airline_id',
+		name        : 'airlineId',
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		label       : 'Select Airline',
@@ -13,7 +13,7 @@ const controls = [
 		span        : 6,
 	},
 	{
-		name        : 'airport_id',
+		name        : 'airportId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		label       : 'Origin Airport',
@@ -26,7 +26,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'destination_location_id',
+		name        : 'destinationLocationId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		label       : 'Destination Location',
@@ -39,7 +39,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'service_provider_id',
+		name        : 'serviceProviderId',
 		type        : 'async-select',
 		asyncKey    : 'organizations',
 		label       : 'Service Provider',
@@ -50,7 +50,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'procured_by_id',
+		name        : 'procuredById',
 		type        : 'async-select',
 		asyncKey    : 'partner_users',
 		label       : 'Procured by Cogoport Agent',
@@ -59,7 +59,7 @@ const controls = [
 		span        : 6,
 	},
 	{
-		name        : 'booking_agent_id',
+		name        : 'bookingAgentId',
 		type        : 'async-select',
 		asyncKey    : 'partner_users',
 		label       : 'Booking Agent (KAM)',
@@ -74,7 +74,7 @@ const controls = [
 		isClearable: true,
 	},
 	{
-		name        : 'importer_exporter_id',
+		name        : 'importerExporterId',
 		type        : 'async-select',
 		asyncKey    : 'organizations',
 		label       : 'Shipper Name',

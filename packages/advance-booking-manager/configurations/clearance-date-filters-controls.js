@@ -1,6 +1,6 @@
 const clearance_date_report_controls = [
 	{
-		name        : 'airline_id',
+		name        : 'airlineId',
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		label       : 'Airline Name',
@@ -9,7 +9,7 @@ const clearance_date_report_controls = [
 		span        : 6,
 	},
 	{
-		name        : 'airport_id',
+		name        : 'airportId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		label       : 'Origin Airport',
@@ -22,7 +22,7 @@ const clearance_date_report_controls = [
 		},
 	},
 	{
-		name        : 'destination_location_id',
+		name        : 'destinationLocationId',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		label       : 'Destination Airport',
@@ -35,7 +35,7 @@ const clearance_date_report_controls = [
 		},
 	},
 	{
-		name                  : 'booking_date',
+		name                  : 'bookingDate',
 		type                  : 'date_picker',
 		label                 : 'Booking Date',
 		placeholder           : 'Select Date',
@@ -43,7 +43,7 @@ const clearance_date_report_controls = [
 		span                  : 6,
 	},
 	{
-		name                  : 'custom_clearance_date',
+		name                  : 'customClearanceDate',
 		type                  : 'date_picker',
 		label                 : 'Custom Clearance Date',
 		placeholder           : 'Select Date',
