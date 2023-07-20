@@ -7,14 +7,13 @@ import styles from './styles.module.css';
 import Thread from './Thread';
 
 function EmailView({
-	RECIEVE_EMAIL,
 	activeMail,
 	onAction,
 }) {
-	const email = RECIEVE_EMAIL;
+	const { source } = activeMail || {};
 	const message_id = activeMail?.message_id || activeMail?.id;
 
-	const mailPayload = { email_address: email, message_id, mail_id: activeMail?.id };
+	const mailPayload = { email_address: source, message_id, mail_id: activeMail?.id };
 	const { getMailApi, getMailRpaApi } = useGetMail({ payload: mailPayload });
 
 	const isFromRpa = getMailApi?.data?.error?.code === 'ErrorItemNotFound';
@@ -38,7 +37,7 @@ function EmailView({
 	const emailData = isFromRpa ? rpaMailData : getMailApi?.data;
 	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
 
-	const attachmentPaylaod = { email, message_id };
+	const attachmentPaylaod = { source, message_id };
 	const { getAttachementsApi } = useGetAttachements({ payload: attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 

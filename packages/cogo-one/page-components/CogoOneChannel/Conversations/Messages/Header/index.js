@@ -27,7 +27,7 @@ function Header({
 	activeAgentName = '',
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
-	activeMessageCard,
+	activeMessageCard = {},
 	tagOptions = [],
 	support_agent_id = null,
 	showBotMessages = false,
@@ -38,9 +38,10 @@ function Header({
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
 	viewType = '',
-	firestore,
-	escalateToSupplyRm,
-	supplierLoading,
+	firestore = {},
+	escalateToSupplyRm = () => {},
+	supplierLoading = false,
+	hasNoFireBaseRoom = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -70,19 +71,22 @@ function Header({
 		user_id,
 		account_type = '',
 		managers_ids = [],
+		id,
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
-				organization_user_id: user_id,
+				organization_user_id : user_id,
+				channel              : channel_type,
+				channel_chat_id      : id,
 			},
 		});
 	};
 
 	const handleUpdateUser = () => {
-		if (!updateRoomLoading) {
+		if (!updateRoomLoading || !hasNoFireBaseRoom) {
 			updateUserRoom(mobile_no);
 		}
 	};
@@ -154,21 +158,22 @@ function Header({
 							accountType={account_type}
 							isPartOfGroup={isPartOfGroup}
 							isManager={isManager}
+							hasNoFireBaseRoom={hasNoFireBaseRoom}
 						/>
 
 						{channel_type === 'whatsapp' && (
 							<div
-								role="button"
-								tabIndex="0"
-								className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+								role="presentation"
+								className={cl`${styles.icon_div} 
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								onClick={handleUpdateUser}
 							>
 								<IcMProfile
 									className={cl`${styles.profile_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								/>
 								<IcMRefresh className={cl`${styles.update_icon} 
-								${updateRoomLoading ? styles.disable_icon : ''}`}
+								${(updateRoomLoading || hasNoFireBaseRoom) ? styles.disable_icon : ''}`}
 								/>
 							</div>
 						)}

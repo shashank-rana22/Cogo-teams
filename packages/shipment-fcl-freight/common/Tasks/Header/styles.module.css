@@ -3,6 +3,13 @@
 	flex-direction: column;
 	padding-left: 12px;
 	margin-bottom: 32px;
+
+	:global {
+		.ui_popover_container {
+			padding: 0;
+			font-size: 12px;
+		}
+	}
 }
 
 .top_panel {
@@ -25,11 +32,13 @@
 
 .right_content {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
 .toggle_container {
 	display: flex;
+	align-items: center;
 	margin-left: 22px;
 	font-size: var(--font-size-sm);
 	color: #000;
@@ -62,4 +71,10 @@
 	font-size: var(--font-size-md);
 	color: red;
 	text-decoration: underline;
+}
+
+.remarks {
+	font-size: var(--font-size-md);
+	text-decoration: underline;
+	cursor: pointer;
 }

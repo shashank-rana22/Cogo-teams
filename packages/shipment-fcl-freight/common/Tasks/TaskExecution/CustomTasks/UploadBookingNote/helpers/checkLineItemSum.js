@@ -1,28 +1,29 @@
-const checkLineItemsSum = (values) => {
+import { isEmpty } from '@cogoport/utils';
+
+const checkLineItemsSum = (value) => {
 	let check = true;
-	const message = [];
 	let lineItemCheck = false;
 	let sumCheck = false;
 
-	(values || []).forEach((value) => {
+	const MESSAGE = [];
+	value.forEach((val) => {
 		let line_item_sum = 0;
-		(value?.line_items || []).forEach((line_item) => {
+		(val?.line_items || []).forEach((line_item) => {
 			const { price = 0, quantity = 0 } = line_item;
 			line_item_sum += price * quantity;
 		});
-
-		if (value?.line_items?.length === 0 && !lineItemCheck) {
+		if (isEmpty(value?.line_items) && !lineItemCheck) {
 			lineItemCheck = true;
-			message.push('Atleast one line item should be present');
+			MESSAGE.push('Atleast one line item should be present');
 		}
-
-		if (line_item_sum === 0 && !sumCheck) {
+		if (!line_item_sum && !sumCheck) {
 			sumCheck = true;
-			message.push('Sum of line items should be > 0');
+			MESSAGE.push('Sum of line items should be > 0');
 		}
 		check = check && line_item_sum;
 	});
-	return { check, message };
+
+	return { check, message: MESSAGE };
 };
 
 export default checkLineItemsSum;

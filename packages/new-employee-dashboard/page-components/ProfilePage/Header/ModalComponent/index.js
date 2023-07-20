@@ -79,16 +79,18 @@ function ModalComponent({
 								className={styles.field_controller}
 							/>
 						</div>
+						{monthly && (
+							<div style={{ marginRight: '4px', width: '40%' }}>
+								<Element
+									{...monthly}
+									size="sm"
+									key={monthly.name}
+									control={control}
+									className={styles.field_controller}
+								/>
+							</div>
+						)}
 
-						<div style={{ marginRight: '4px', width: '40%' }}>
-							<Element
-								{...monthly}
-								size="sm"
-								key={monthly.name}
-								control={control}
-								className={styles.field_controller}
-							/>
-						</div>
 					</div>
 				);
 			})}

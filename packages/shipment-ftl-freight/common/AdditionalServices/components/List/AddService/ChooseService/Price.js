@@ -63,7 +63,11 @@ function Price({
 				themeType="secondary"
 				onClick={(e) => {
 					e.stopPropagation();
-					onRequestRate(item);
+					if (isSeller) {
+						setAddRate(item);
+					} else {
+						onRequestRate(item);
+					}
 				}}
 				style={{ marginRight: 10 }}
 				disabled={loading}

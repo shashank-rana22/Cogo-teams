@@ -1,42 +1,46 @@
 import { Toast, Modal } from '@cogoport/components';
-import React, { useState, useEffect	} from 'react';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import React, { useState } from 'react';
 
 import Templates from '../../../../common/Templates';
 import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
 
 import styles from './styles.module.css';
 
+const COUNTRY_CODE_INDEX = 1;
+
+const PREFILL_CALL_DATA = ['voice_call_component', 'new_user_outbound'];
+
 function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
+	viewType = '',
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
-	const [dialNumber, setDialNumber] = useState({
+	const { type = '', data: modalData = {}, userName = '' } = modalType || {};
+	const geo = getGeoConstants();
+
+	const [dialNumber, setDialNumber] = useState(PREFILL_CALL_DATA.includes(type) ? modalData : {
 		number       : '',
-		country_code : '+91',
+		country_code : geo.country.mobile_country_code,
 	});
-	const { type = '', data:modalData = {} } = modalType || {};
 
 	const closeModal = () => {
-		setModalType(false);
+		setModalType({ type: '', data: {} });
 		setDialNumber({
 			number       : '',
-			country_code : '+91',
+			country_code : geo.country.mobile_country_code,
 		});
 	};
-
-	useEffect(() => {
-		if (type === 'voice_call_component') {
-			setDialNumber(modalData);
-		}
-	}, [modalData, type]);
 
 	const { sendUserWhatsappTemplate, loading } = useSendUserWhatsappTemplate(
 		{
 			callbackfunc: closeModal,
+			viewType,
 		},
 	);
+
 	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
 		if (!number) {
@@ -44,16 +48,22 @@ function NewWhatsappMessage({
 			return;
 		}
 
-		const { template_name } = args;
-		sendUserWhatsappTemplate({ country_code: country_code.slice(1), whatsapp_number: number, template_name });
+		const { template_name, variables } = args;
+		sendUserWhatsappTemplate({
+			country_code    : country_code.slice(COUNTRY_CODE_INDEX),
+			whatsapp_number : number,
+			template_name,
+			variables,
+		});
 	};
+
 	const data = {
 		sendCommunicationTemplate : sendWhatsappCommunication,
 		communicationLoading      : loading,
 	};
 	return (
 		<Modal
-			show={modalType?.type}
+			show={type}
 			size="xs"
 			onClose={closeModal}
 			onClickOutside={closeModal}
@@ -74,6 +84,8 @@ function NewWhatsappMessage({
 				type={type}
 				setDialNumber={setDialNumber}
 				dialNumber={dialNumber}
+				key={type}
+				userName={userName}
 			/>
 		</Modal>
 	);

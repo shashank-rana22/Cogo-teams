@@ -14,7 +14,6 @@ function Step3({ data, setStep = () => {}, shipment_id }) {
 	const formProps = useForm({ defaultValues });
 
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
-
 	const formValues = watch();
 
 	const prepareFormValues = () => {

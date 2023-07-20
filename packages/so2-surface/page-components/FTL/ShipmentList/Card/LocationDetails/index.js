@@ -6,6 +6,10 @@ import ServiceIcon from '../ServiceIcon';
 
 import styles from './styles.module.css';
 
+function DefaultIcon() {
+	return <div />;
+}
+
 const handleLocationDetails = (location) => (
 	<>
 		<div className={styles.location_code}>
@@ -27,7 +31,7 @@ const handleLocationDetails = (location) => (
 	</>
 );
 
-function LocationDetails({ data = {}, icon }) {
+function LocationDetails({ data = {}, icon = DefaultIcon }) {
 	const { destination_location = {}, origin_location = {} } = data;
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>

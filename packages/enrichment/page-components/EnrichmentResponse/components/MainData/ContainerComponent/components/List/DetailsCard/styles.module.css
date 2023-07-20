@@ -1,0 +1,31 @@
+.content {
+	display: flex;
+	align-items: flex-start;
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid rgb(0 0 0 / 7%);
+	border-radius: 4px;
+}
+
+.box_info {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.label_value_container {
+	width: 200px;
+	margin-right: 12px;
+}
+
+.top {
+	font-size: 14px;
+	color: #707070;
+}
+
+.bottom {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}

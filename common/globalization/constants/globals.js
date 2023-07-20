@@ -1,3 +1,4 @@
+/* eslint-disable custom-eslint/email-check */
 /* eslint-disable custom-eslint/img-src-cdn, custom-eslint/uuid-check,  custom-eslint/regex-check  */
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
@@ -11,6 +12,7 @@ const GLOBAL_CONSTANTS = {
 	country_ids: {
 		IN: '541d1232-58ce-4d64-83d6-556a42209eb7',
 	},
+
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code   : CURRENCY_CODE,
@@ -60,6 +62,7 @@ const GLOBAL_CONSTANTS = {
 	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
+		'BASNO',
 		'AGC',
 		'STC',
 		'IHC',
@@ -134,21 +137,22 @@ const GLOBAL_CONSTANTS = {
 		'CCOV',
 	],
 	uuid: {
-		amitabh_user_id        : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
-		superadmin_id          : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		tech_superadmin_id     : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
-		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
-		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
-		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
-		local_charge_providers : {
+		amitabh_user_id         : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
+		superadmin_id           : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		tech_superadmin_id      : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		cogoacademy_admin_id    : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
+		sagar_bankar_user_id    : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		ajeet_singh_user_id     : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		sachin_mehra_user_id    : '68c7e272-0c66-43a9-9537-eedb4e543194',
+		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
+		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
+		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 			UK : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 		},
-		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
-		paramount_org_id                         : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
-		rfq_admin_ids                            : [
+		paramount_org_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
+		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
 		],
@@ -180,7 +184,7 @@ const GLOBAL_CONSTANTS = {
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
 		empty_chart:
-		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
 		email_svg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
 		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
@@ -210,6 +214,10 @@ const GLOBAL_CONSTANTS = {
 		nodata_image        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		risk_free:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png',
+		empty_list           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg',
+		pie_chart_loader     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
 		yellow_vessel        : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipYellow.png',
 		red_vessel           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipRed.png',
 		black_vessel         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipArrow.png',
@@ -229,22 +237,52 @@ const GLOBAL_CONSTANTS = {
 		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
 		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
 		cargo_insurance_loader:
-		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
 		empty_promocode    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg',
 		cogo_verse_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg',
 		cogo_one_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg',
 		cogo_one_loader    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-loader.gif',
+		bluetide_hbl_logo:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/6f67ac5379afb6694a75e573407899f2/bluetidelogo.png',
+		cogoport_admin_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		inbox_icon          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/colored_inbox.png',
+		email_spam_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_flag.png',
+		spam_flag_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spam_flag_black.png',
+		email_inbox_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/inbox_icon.png',
+		colored_loading     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg',
+		awb_docs_images     : {
+			original_3:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
+			original_2:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
+			original_1:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
+			copy_9:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
+			copy_4:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
+			copy_5:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
+			copy_6:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
+			copy_7:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
+			copy_8:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
+			copy_10:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
+			copy_11:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
+			copy_12:
+			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
+		},
+		awb_docs_tnc_page:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-		+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
-	},
-	drive_link: {
-		introduction_to_cogoport_link:
-		'https://drive.google.com/file/d/1LHKPCefOzcakw7-uoy2dQCuWI0lbLz8y/view?usp=drive_link',
-		git_course_link      : 'https://drive.google.com/file/d/1ybk4-hUbndH51oZZ7FoVVCtKqVskPPC5/view?usp=drive_link',
-		html_css_course_link : 'https://drive.google.com/file/d/1RWlTVkny4ZwlcdnWCiQIVimHOjqBsFWv/view?usp=drive_link',
+			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
 	},
 
 	urls: {
@@ -316,20 +354,39 @@ const GLOBAL_CONSTANTS = {
 			{ value: 'product_analyst', label: 'Product Analyst' },
 			{ value: 'business_consultant', label: 'Business Consultant' },
 		],
+		timezone_options: [
+			{
+				label: 'IST', value: 'IST',
+			},
+			{
+				label: 'GMT', value: 'GMT',
+			},
+			{
+				label: 'VNM', value: 'VNM',
+			},
+		],
 	},
 
 	regex_patterns: {
-		number          : /^[+-]?\d*\.?\d+$/,
-		white_space     : /\s+/,
-		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
-		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
-		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
-		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
+		number           : /^[+-]?\d*\.?\d+$/,
+		white_space      : /\s+/,
+		email            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		pan_number       : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number    : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number  : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code        : /^[A-Za-z]{4}\d{7}$/,
+		eway_bill_number : /^\d{12}$/,
 		url_match:
-		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+			'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 		image_extension                   : /\.(jpg|jpeg|png|gif|svg)$/i,
 		empty_spaces_before_tab_character : / +(?=\t)/g,
+		mime                              : /:(.*?);/m,
+		double_curly_braces_pattern       : /\{\{([^{}]+)\}\}/g,
+		occurrences_of_paragraphs_tag     : /<p>\s+(<[/]p>)/g,
+		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
+		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
+		file_upload_url                   : /:finalUrl=>"([^"]*)"/,
+		amount_seperator                  : /\D/g,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
@@ -415,6 +472,25 @@ const GLOBAL_CONSTANTS = {
 				name: 'per truck', short_name: '/Truck',
 			},
 		},
+	},
+	SHIPMENT_ROUTE_MAPPING: {
+		fcl_freight           : 'fcl',
+		air_freight           : 'air-freight',
+		lcl_freight           : 'lcl',
+		ltl_freight           : 'ltl',
+		ftl_freight           : 'ftl',
+		haulage_freight       : 'haulage',
+		air_customs           : 'air-customs',
+		fcl_customs           : 'fcl-custom',
+		air_freight_local     : 'air-freight-local',
+		fcl_freight_local     : 'fcl-local',
+		domestic_air_freight  : 'domestic-air-freight',
+		rail_domestic_freight : 'rail-domestic',
+	},
+
+	emails: {
+		import_rates : 'Import.rates@cogoport.com',
+		export_rates : 'Export.rates@cogoport.com',
 	},
 };
 

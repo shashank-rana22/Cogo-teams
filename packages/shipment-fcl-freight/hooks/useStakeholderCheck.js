@@ -26,6 +26,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.prod_process_owner, stakeholder: 'prod_process_owner' },
 		{ role_ids: geo.uuid.tech_super_admin_id, stakeholder: 'tech_super_admin' },
 		{ role_ids: geo.uuid.so1_so2_role_id, stakeholder: 'so1_so2_ops' },
+		{ role_ids: geo.uuid.coe_head, stakeholder: 'coe_head' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
 				geo.uuid.super_admin_id,
@@ -34,6 +35,7 @@ export const useStakeholderCheck = () => {
 			stakeholder: 'credit_control',
 		},
 		{ role_ids: geo.uuid.corporate_owner_id, stakeholder: 'corporate_owner' },
+		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 	];
 
 	const matchingStakeholders = stakeholderMap

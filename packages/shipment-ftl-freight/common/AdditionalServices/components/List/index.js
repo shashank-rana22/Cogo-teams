@@ -16,6 +16,8 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
+const MIN_COUNT = 8;
+const MAX_COUNT = 16;
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
@@ -23,7 +25,7 @@ function List({ isSeller = false }) {
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [pageLimit, setPageLimit] = useState(MIN_COUNT);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
@@ -79,15 +81,15 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
+			{totalCount > MIN_COUNT
 				? (
 					<div className={styles.show_more}>
-						{pageLimit > 8
+						{pageLimit > MIN_COUNT
 							? 	(
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(8)}
+									onClick={() => setPageLimit(MIN_COUNT)}
 								>
 									Show Less
 								</Button>
@@ -95,7 +97,7 @@ function List({ isSeller = false }) {
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(16)}
+									onClick={() => setPageLimit(MAX_COUNT)}
 								>
 									Show More
 								</Button>
@@ -163,6 +165,7 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
+						source="overview"
 					/>
 				)}
 
