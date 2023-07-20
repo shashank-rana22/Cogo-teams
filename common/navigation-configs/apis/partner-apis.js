@@ -12251,6 +12251,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'create_shipment_document',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -12618,6 +12623,11 @@ const partner = {
 			api          : 'send_shipment_document_notification',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_email_suggestions',
+			access_type  : 'private',
+			service_name : 'cogolens',
 		},
 		{
 			api          : 'get_omnichannel_agent_types',
@@ -13001,6 +13011,10 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_card_data',
 			access_type : 'private',
 		},
 	],

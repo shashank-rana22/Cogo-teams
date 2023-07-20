@@ -76,6 +76,7 @@
     "@cogoport/shipment-ltl-freight": "workspace:0.1.0",
     "@cogoport/shipment-mails": "workspace:0.1.0",
     "@cogoport/shipment-rail-domestic-freight": "workspace:0.1.0",
+    "@cogoport/revenue-desk" : "workspace:0.1.0",
     "@cogoport/so2-surface": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/supply-dashboards": "workspace:0.1.0",
@@ -94,7 +95,9 @@
     "typescript": "^4.9.5",
     "@cogoport/risk-management": "workspace:0.1.0",
     "@cogoport/ftl-admin":"workspace:1.0.0",
-    "@cogoport/schedules": "workspace:^0.1.0"
+    "@cogoport/schedules": "workspace:^0.1.0",
+    "@cogoport/airline-booking-plugin":"workspace:1.0.0",
+    "@cogoport/booking-desk-surface": "workspace:1.0.0"
   },
   "browserslist": [
     "defaults"

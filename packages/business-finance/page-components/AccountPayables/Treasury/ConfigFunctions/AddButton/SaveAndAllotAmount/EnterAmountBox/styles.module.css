@@ -1,0 +1,11 @@
+.button_conatiner {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 25px;
+}
+
+.error_message {
+	margin-top: 4px;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}

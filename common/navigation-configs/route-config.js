@@ -1,4 +1,5 @@
 import airRepository from './config/air-repository';
+import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
@@ -6,6 +7,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
+import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -34,11 +36,13 @@ import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import referral from './config/referral';
+import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import schedules from './config/schedules';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -58,7 +62,6 @@ import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import welcome from './config/welcome';
-import schedules from './config/schedules';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -113,6 +116,7 @@ const routeConfig = {
 	...chakravyuh,
 	...riskManagement,
 	...awbInventory,
+	...revenueDesk,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
@@ -122,7 +126,9 @@ const routeConfig = {
 	...rfqDashboard,
 	...printingDesk,
 	...ftlAdmin,
-	...schedules
+	...schedules,
+	...airlinePluginBooking,
+	...bookingDeskSurface,
 };
 
 export default routeConfig;
