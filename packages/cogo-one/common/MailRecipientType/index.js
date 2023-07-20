@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Input, ButtonIcon } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -63,27 +63,33 @@ function MailRecipientType({
 				>
 					<div className={styles.tag_and_error_container}>
 						<div className={styles.tag_container}>
-							<input
-								size="sm"
+							<Input
+								size="xs"
 								placeholder="Enter recipient"
 								type="text"
 								value={value}
-								onChange={(event) => handleChange({ event, type })}
-								onKeyPress={(event) => handleKeyPress({ event, type })}
+								onChange={(val) => handleChange({ val, type })}
+								onKeyDown={(event) => handleKeyPress({ event, type })}
+								suffix={value ? (
+									<ButtonIcon
+										size="xs"
+										icon={<IcMCross />}
+										disabled={false}
+										themeType="primary"
+										onClick={() => handleError(type)}
+									/>
+								) : null}
 								className={errorValue
 									? styles.error_input_container
 									: styles.input_container}
 							/>
-							<div className={styles.cross_icon}>
-								<IcMCross onClick={() => handleError(type)} />
-							</div>
 						</div>
 
-						{errorValue && (
+						{errorValue ? (
 							<div className={styles.error_content_container}>
 								{errorValue}
 							</div>
-						)}
+						) : null}
 					</div>
 				</Popover>
 			)}

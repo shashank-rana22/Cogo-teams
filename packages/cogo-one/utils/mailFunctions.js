@@ -65,9 +65,9 @@ function mailFunction({
 		setValue('');
 	};
 
-	const handleChange = ({ event, type }) => {
+	const handleChange = ({ val, type }) => {
 		if (showControl === type) {
-			setValue(event?.target?.value);
+			setValue(val);
 		}
 	};
 

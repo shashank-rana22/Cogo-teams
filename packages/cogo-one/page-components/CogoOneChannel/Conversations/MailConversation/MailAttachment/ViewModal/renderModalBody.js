@@ -6,6 +6,9 @@ export function ImageBody({
 	media_url = '',
 	contentType = '',
 }) {
+	// fixed height and width cant be given here.
+	// can be handled only by max-width and max-height.
+	// so using img tag instead of Image from @cogoport/next
 	return (
 		<img
 			src={media_url}

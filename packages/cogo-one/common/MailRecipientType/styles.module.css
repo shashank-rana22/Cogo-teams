@@ -37,20 +37,8 @@
 }
 
 .error_input_container {
-	display: flex;
-	height: 28px;
-	padding: 3px 25px 3px 8px;
-	margin-left: 8px;
-	border: 1px solid #f00;
-	border-radius: 6px;
-
-	&:focus {
-		border: 1px solid #f00 !important;
-	}
-
-	&:focus-within {
-		border: 1px solid #f00 !important;
-	}
+	width: 200px;
+	border: 1px solid #f00 !important;
 
 	&:focus-visible {
 		outline: #f00 solid 0.2px !important;
@@ -70,28 +58,7 @@
 }
 
 .input_container {
-	display: flex;
-	height: 28px;
-	padding: 3px 25px 3px 8px;
-	margin-left: 8px;
-	border: 1px solid #828282;
-	border-radius: 6px;
-
-	&:hover {
-		border: 1px solid #88cad1;
-	}
-
-	&:focus {
-		border: 1px solid #88cad1 !important;
-	}
-
-	&:focus-within {
-		border: 1px solid #88cad1 !important;
-	}
-
-	&:focus-visible {
-		outline: #88cad1 solid 0.2px !important;
-	}
+	width: 200px;
 }
 
 .add_icon {
