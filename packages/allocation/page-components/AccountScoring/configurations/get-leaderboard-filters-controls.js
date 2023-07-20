@@ -56,6 +56,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users',
 		valueKey    : 'user_id',
+		multiple    : true,
 		initialCall : true,
 		isClearable : true,
 		disabled    : true,
