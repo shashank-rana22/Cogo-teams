@@ -4,14 +4,17 @@ import { useState, useEffect, useContext } from 'react';
 
 import BreakdownDetails from '../../../../commons/BreakdownDetails';
 import { CheckoutContext } from '../../../../context';
+import useUpdateCheckoutService from '../../../../hooks/useUpdateCheckoutService';
 
-import AdditionalContent from './components/AdditionalContent';
+import AdditionalContent from './AdditionalContent';
 import styles from './styles.module.css';
 
 function EditMargin() {
 	const {
 		detail = {},
 		rate,
+		getCheckout,
+		checkout_id,
 	} = useContext(CheckoutContext);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
@@ -25,6 +28,13 @@ function EditMargin() {
 			unit     : convenience_line_item?.unit,
 		},
 	}));
+	const [noRatesPresent, setNoRatesPresent] = useState(false);
+
+	const { handleDeleteRate, deleteRateLoading } = useUpdateCheckoutService({
+		refetch: getCheckout,
+		detail,
+		checkout_id,
+	});
 
 	const { margin_approval_request_remarks = [] } = detail;
 
@@ -40,6 +50,9 @@ function EditMargin() {
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				convenience_line_item={convenience_line_item}
+				handleDeleteRate={handleDeleteRate}
+				deleteRateLoading={deleteRateLoading}
+				setNoRatesPresent={setNoRatesPresent}
 			/>
 
 			<div className={styles.additional_remark}>
@@ -57,6 +70,7 @@ function EditMargin() {
 				rateDetails={rateDetails}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
+				noRatesPresent={noRatesPresent}
 			/>
 		</div>
 	);

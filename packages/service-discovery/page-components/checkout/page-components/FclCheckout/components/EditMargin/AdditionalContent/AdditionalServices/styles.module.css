@@ -1,0 +1,29 @@
+.accordion {
+	margin: 20px 0;
+	background-color: #fdf3e9;
+
+	:global {
+		.ui_accordion_title {
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		.ui_accordion_header {
+			padding: 20px 24px;
+			background-color: #fdf3e9;
+		}
+
+		.ui_accordion_content {
+			padding: 32px;
+			padding-top: 8px;
+			background-color: #fdf3e9;
+		}
+
+		.ui_accordion_icon {
+			svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+}

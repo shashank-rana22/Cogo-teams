@@ -1,11 +1,12 @@
+import BookingConfirmation from './components/BookingConfirmation';
 import EditMargin from './components/EditMargin';
 import PreviewBooking from './components/PreviewBooking';
-import ShipmentExecution from './components/ShipmentExecution';
+import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
 	draft                : EditMargin,
 	locked               : PreviewBooking,
-	booking_confirmation : ShipmentExecution,
+	booking_confirmation : BookingConfirmation,
 
 };
 
@@ -13,7 +14,9 @@ function FclCheckout({ state = 'draft' }) {
 	const ActiveComponent = COMPONENT_MAPPING[state];
 
 	return (
-		<ActiveComponent />
+		<div className={styles.container}>
+			<ActiveComponent />
+		</div>
 	);
 }
 

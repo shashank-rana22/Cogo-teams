@@ -6,9 +6,9 @@ import { serviceMappings } from '../../../../configs/AdditionalServicesConfig';
 import Incoterms from '../../../../configs/incoterms.json';
 import useSpotSearchService from '../../hooks/useCreateSpotSearchService';
 
+import { getFclPayload } from './configs';
 import ICONS_MAPPING from './icons-mapping';
 import styles from './styles.module.css';
-import getPayload from './utils/getPayload';
 
 const getServiceName = (service) => {
 	const { trade_type = '', service_type = '' } = service || {};
@@ -18,7 +18,7 @@ const getServiceName = (service) => {
 const singleLocationServices = ['fcl_freight_local'];
 
 // eslint-disable-next-line max-lines-per-function
-function AdditionalServices({
+function AdditionalServices({ // used in search results and checkout
 	rateCardData = {},
 	detail = {},
 	setHeaderProps = () => {},
@@ -26,19 +26,21 @@ function AdditionalServices({
 }) {
 	const { service_rates = [] } = rateCardData;
 
-	const { service_details = {}, service_type = '', inco_term = '' } = detail;
+	const { service_details = {}, service_type = '', inco_term = '', checkout_id = '' } = detail;
 
 	const [incoterm, setIncoterm] = useState(inco_term || 'cif');
 
 	const primaryService = service_type;
 
 	const { addService = () => {}, loading } = useSpotSearchService({
-		refetchSearch, rateCardData,
+		refetchSearch,
+		rateCardData,
+		checkout_id,
 	});
 
 	const handleAddServices = async (serviceItem) => {
-		if (serviceItem.controls.length === 0) {
-			const payload = getPayload({
+		if (!serviceItem.controls.length) {
+			const payload = getFclPayload({
 				rateCardData,
 				detail,
 				additionalFormInfo : {},

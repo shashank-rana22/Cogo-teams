@@ -5,10 +5,6 @@
 	font-weight: 600;
 }
 
-.container {
-	margin-bottom: 60px;
-}
-
 .warn_text {
 	margin-left: 12px;
 	font-size: 12px;
@@ -35,6 +31,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 60px;
 }
 
 .btn_grp {

@@ -21,14 +21,6 @@
 	&.white_bg {
 		background-color: #fff;
 	}
-
-	&.dark {
-		background-color: #828282;
-	}
-
-	&.light {
-		background-color: #fff;
-	}
 }
 
 .children_container {

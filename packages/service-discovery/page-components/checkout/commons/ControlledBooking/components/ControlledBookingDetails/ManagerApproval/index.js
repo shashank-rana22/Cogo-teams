@@ -15,36 +15,45 @@ function ManagerApproval({
 }) {
 	const [file, setFile] = useState('');
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/send_checkout_for_approval',
-		method : 'POST',
-	}, { manual: true });
+	const [{ loading }, trigger] = useRequest(
+		{
+			url    : '/send_checkout_for_approval',
+			method : 'POST',
+		},
+		{ manual: true },
+	);
 
-	const handleBookingProof = useCallback(async (val) => {
-		try {
-			const payload = {
-				id                     : checkout_approvals?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
-				booking_status         : 'pending',
-				manager_approval_proof : val,
-			};
+	const handleBookingProof = useCallback(
+		async (val) => {
+			try {
+				const payload = {
+					id                     : checkout_approvals?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
+					booking_status         : 'pending',
+					manager_approval_proof : val,
+				};
 
-			await trigger({
-				data: payload,
-			});
+				await trigger({
+					data: payload,
+				});
 
-			await refetchCheckout();
-		} catch (error) {
-			if (error?.response) {
-				Toast.error(getApiErrorString(error?.response?.data));
+				await refetchCheckout();
+			} catch (error) {
+				if (error?.response) {
+					Toast.error(getApiErrorString(error?.response?.data));
+				}
 			}
-		}
-	}, [checkout_approvals, refetchCheckout, trigger]);
+		},
+		[checkout_approvals, refetchCheckout, trigger],
+	);
 
 	useEffect(() => {
-		if (typeof file === 'object' ? !isEmpty(file?.finalUrl) : file) {
+		if (
+			(typeof file === 'object' ? !isEmpty(file?.finalUrl) : file)
+			&& (file?.finalUrl || file) !== manager_approval_proof
+		) {
 			handleBookingProof(file?.finalUrl || file);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [file]);
 
 	return (

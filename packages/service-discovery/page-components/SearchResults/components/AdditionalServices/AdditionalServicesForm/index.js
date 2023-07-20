@@ -5,8 +5,8 @@ import React from 'react';
 
 import getElementController from '../../../../../configs/getElementController';
 import useSpotSearchService from '../../../hooks/useCreateSpotSearchService';
+import { getFclPayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
-import getPayload from '../utils/getPayload';
 
 import styles from './styles.module.css';
 
@@ -20,7 +20,9 @@ function AdditionalServicesForm({
 	refetchSearch = () => {},
 }) {
 	const { addService = () => {}, loading = false } = useSpotSearchService({
-		refetchSearch, rateCardData,
+		refetchSearch,
+		rateCardData,
+		checkout_id: detail?.checkout_id,
 	});
 
 	const {
@@ -57,7 +59,7 @@ function AdditionalServicesForm({
 	});
 
 	const onSubmit = async () => {
-		const payload = getPayload({
+		const payload = getFclPayload({
 			rateCardData,
 			detail,
 			additionalFormInfo : formValues,

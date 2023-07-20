@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -11,13 +11,12 @@ import ControlledBookingDetails from './components/ControlledBookingDetails';
 import styles from './styles.module.css';
 
 function ControlledBooking({
-	detail = {},
+	checkout_approvals = [],
 	getCheckout = () => {},
 	setIsControlBookingDetailsFilled = () => {},
+	controlledBookingServices = [],
 }) {
 	const ref = useRef({});
-
-	const { services, checkout_approvals = [] } = detail;
 
 	const {
 		booking_status: bookingStatus,
@@ -27,19 +26,14 @@ function ControlledBooking({
 
 	const [showForm, setShowForm] = useState(false);
 
-	const servicesApplicable = Object.values(services).filter(
-		(service) => (
-			service.service_type === 'fcl_freight'
-				&& service.container_type === 'refer'
-		),
-	);
-
 	const { onSubmit, loading } = useUpdateControlledCheckoutService({
 		getCheckout,
-		servicesApplicable,
+		servicesApplicable: controlledBookingServices,
 		setShowForm,
 		setIsControlBookingDetailsFilled,
 	});
+
+	console.log('bookingStatus', checkout_approvals, checkout_approvals[0]);
 
 	const handleSubmitForm = () => {
 		ref.current.handleSubmit();
@@ -48,7 +42,7 @@ function ControlledBooking({
 	return (
 		<div className={styles.container}>
 			{bookingStatus !== 'pending' ? (
-				<div className={`${styles.status} ${styles[bookingStatus]}`}>{startCase(bookingStatus)}</div>
+				<div className={cl`${styles.status} ${styles[bookingStatus]}`}>{startCase(bookingStatus)}</div>
 			) : null}
 
 			<div className={styles.heading}>
@@ -69,7 +63,7 @@ function ControlledBooking({
 					setShowForm={setShowForm}
 					showForm={showForm}
 					refetchCheckout={getCheckout}
-					servicesApplicable={servicesApplicable}
+					servicesApplicable={controlledBookingServices}
 				/>
 			) : null}
 
@@ -114,7 +108,7 @@ function ControlledBooking({
 					<Modal.Body>
 						<ContainerForm
 							checkout_approvals={checkout_approvals}
-							servicesApplicable={servicesApplicable}
+							servicesApplicable={controlledBookingServices}
 							onSubmit={onSubmit}
 							ref={ref}
 						/>

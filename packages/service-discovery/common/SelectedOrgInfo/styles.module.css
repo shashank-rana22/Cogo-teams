@@ -1,10 +1,12 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	max-width: 30%;
+	min-width: 38%;
+	max-width: 48%;
 	padding: 16px 24px;
 	margin-right: 24px;
 	margin-left: -24px;
+	border-radius: 0 6px 0 0;
 
 	&.light {
 		background: #fffafa;
@@ -36,6 +38,7 @@
 }
 
 .user_name {
+	overflow: hidden;
 	font-size: 16px;
 	font-weight: 600;
 	color: #000;

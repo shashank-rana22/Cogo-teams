@@ -1,8 +1,11 @@
-import { Button, CheckboxGroup } from '@cogoport/components';
+import { Button, CheckboxGroup, Toast } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
+import formatDateToString from '../../../ServiceDiscovery/SpotSearch/utils/formatDateToString';
 import { CheckoutContext } from '../../context';
+import handleCopy from '../../helpers/handleCopyUrl';
 import useUpdateCheckoutMargin from '../../hooks/useUpdateCheckoutMargin';
 import { transformMargins } from '../../utils/transformMargins';
 
@@ -18,13 +21,19 @@ function ShareQuotation({
 	additionalRemark = '',
 	convenienceDetails = {},
 	convenience_line_item = {},
+	noRatesPresent = false,
 }) {
+	const { query } = useSelector(({ general }) => ({
+		query: general.query,
+	}));
+
+	const { checkout_id, shipment_id } = query || {};
+
 	const {
 		rate,
 		detail,
 		isChannelPartner,
 		getCheckout,
-		checkout_id,
 		setCheckoutState,
 		invoice,
 		orgData,
@@ -111,9 +120,24 @@ function ShareQuotation({
 
 	const updateState = () => {
 		updateCheckout({
-			values        : { state: 'locked', id: checkout_id },
+			values        : { state: 'locked', id: checkout_id, is_locked: true },
 			closeFunction : setCheckoutState,
 			stateValue    : 'preview_booking',
+		});
+	};
+
+	const handleCopyQuoteLink = () => {
+		if (detail?.is_locked) {
+			handleCopy({ detail, shipment_id, checkout_id });
+			return;
+		}
+
+		updateCheckout({
+			values: {
+				id                      : checkout_id,
+				quotation_email_sent_at : formatDateToString(new Date()),
+			},
+			type: 'copy_link',
 		});
 	};
 
@@ -133,11 +157,13 @@ function ShareQuotation({
 
 	const BUTTON_MAPPING = [
 		{
-			key       : 'copy_link',
-			label     : 'Copy Link',
-			themeType : 'tertiary',
-			style     : {},
-			loading   : false,
+			key             : 'copy_link',
+			label           : 'Copy Link',
+			themeType       : 'link',
+			disabled        : noRatesPresent,
+			style           : {},
+			onClickFunction : () => handleCopyQuoteLink(),
+			loading         : false,
 		},
 		{
 			key             : 'share_quotation',
@@ -145,7 +171,7 @@ function ShareQuotation({
 			themeType       : 'secondary',
 			onClickFunction : () => setShowLockMarginModal(true),
 			style           : { marginLeft: '20px' },
-			disabled        : isEmpty(selectedModes),
+			disabled        : isEmpty(selectedModes) || noRatesPresent,
 			loading         : false,
 		},
 		{

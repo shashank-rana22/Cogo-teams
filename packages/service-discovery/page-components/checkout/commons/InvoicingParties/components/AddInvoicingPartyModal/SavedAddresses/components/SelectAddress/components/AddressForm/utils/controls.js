@@ -1,12 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
+import { IcMDocument } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import getAddressMappingControls from '../configurations/address-controls';
 import configInvoiceTradePartyControls from '../configurations/invoice-trade-party-controls.json';
 import getAddressRegisteredUnderGst from '../configurations/is-registered-under-gst-controls';
 import configPocControls from '../configurations/poc-controls.json';
-import UploadIconSvg from '../icons/doc-attach-icon.svg';
 
 import getValue from './getValue';
 
@@ -23,7 +23,7 @@ const getAddressNewControls = ({ organizationCountryId }) => {
 		if (type === 'file-uploader') {
 			newControl = {
 				...newControl,
-				uploadIcon: () => <UploadIconSvg size={2} />,
+				uploadIcon: () => <IcMDocument size={2} />,
 			};
 		}
 

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Button, Accordion } from '@cogoport/components';
+import { Button, Accordion, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useContext, useState, useEffect } from 'react';
@@ -25,6 +25,9 @@ function BreakdownDetails({
 	setConvenienceDetails = () => {},
 	convenience_line_item = {},
 	source = '',
+	handleDeleteRate = () => {},
+	deleteRateLoading = false,
+	setNoRatesPresent = () => {},
 }) {
 	const {
 		rate,
@@ -46,10 +49,23 @@ function BreakdownDetails({
 	const { primary_service = '' } = detail || {};
 
 	useEffect(() => {
-		setRateDetails(Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
+		setRateDetails((prev) => Object.entries(rate?.services || {}).map(([key, serviceData = {}]) => {
 			const { line_items = [] } = serviceData;
 
+			const { line_items: presentLineItems = [] } = prev.find((item) => key === item.id) || {};
+
 			const updateLineItems = line_items.map((lineItem) => {
+				const presentPrefillValues = presentLineItems.find((item) => item.code === lineItem.code);
+
+				const { filteredMargins: presentFilteredMargins } = presentPrefillValues || {};
+
+				if (!isEmpty(presentFilteredMargins)) {
+					return {
+						filteredMargins: presentFilteredMargins,
+						...lineItem,
+					};
+				}
+
 				const filteredMargins = (lineItem?.margins || []).filter(
 					(m) => m.margin_type === 'demand',
 				);
@@ -138,7 +154,7 @@ function BreakdownDetails({
 					conversions,
 				);
 
-				const totalDisplayString = formatAmount({
+				let totalDisplayString = formatAmount({
 					amount   : totalDisplay,
 					currency : item.tax_total_price_currency,
 					options  : {
@@ -148,9 +164,19 @@ function BreakdownDetails({
 					},
 				});
 
+				if (fclLocalEmpty) {
+					totalDisplayString = 'Billed at actual';
+				}
+
+				const noRatesFound = !item?.total_price_discounted && !fclLocalEmpty;
+
+				if (noRatesFound) {
+					setNoRatesPresent(true);
+				}
+
 				return (
 					<Accordion
-						className={`${styles.container} ${styles[source]}`}
+						className={cl`${styles.container} ${styles[source]}`}
 						key={id}
 						isOpen={!index}
 						title={(
@@ -164,11 +190,24 @@ function BreakdownDetails({
 									/>
 								</div>
 
-								<div className={styles.total_display}>{totalDisplayString}</div>
+								{noRatesFound ? (
+									<Button
+										type="button"
+										size="sm"
+										themeType="accent"
+										onClick={() => handleDeleteRate({ serviceType: item?.service_type, id })}
+										disabled={deleteRateLoading}
+									>
+										Remove
+										{' '}
+										{startCase(item?.service_type)}
+									</Button>
+								) : <div className={styles.total_display}>{totalDisplayString}</div>}
+
 							</div>
 						)}
 					>
-						{!fclLocalEmpty ? <Header /> : null}
+						{!fclLocalEmpty && !noRatesFound ? <Header /> : null}
 
 						<ServiceBreakup
 							item={item}
@@ -185,7 +224,7 @@ function BreakdownDetails({
 							disableForm={disableForm}
 						/>
 
-						{!disableForm ? (
+						{!disableForm && !noRatesFound ? (
 							<div className={styles.button_container}>
 								<Button
 									size="md"
@@ -228,8 +267,8 @@ function BreakdownDetails({
 					<AddLineItemModal
 						addLineItemData={addLineItemData}
 						setAddLineItemData={setAddLineItemData}
-						setRateDetails={setRateDetails}
 						checkout_id={checkout_id}
+						getCheckout={getCheckout}
 					/>
 				) : null}
 
@@ -242,6 +281,7 @@ function BreakdownDetails({
 						checkout_id={checkout_id}
 						rateDetails={rateDetails}
 						detail={detail}
+						getCheckout={getCheckout}
 					/>
 				) : null}
 
