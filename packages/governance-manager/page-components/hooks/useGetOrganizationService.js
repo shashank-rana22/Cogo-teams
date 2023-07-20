@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetOrganizationService({ id, setStatus }) {
+const useGetOrganizationService = ({ id, setStatus }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_services',
@@ -27,13 +29,13 @@ function useGetOrganizationService({ id, setStatus }) {
 	}, []);
 
 	useEffect(() => {
-		if (data) { setStatus(data?.list[0]?.stage_of_approval); }
+		if (data) { setStatus(data?.list[GLOBAL_CONSTANTS.zeroth_index]?.stage_of_approval); }
 	}, [data]);
 	return {
-		data       : data?.list[0],
+		data       : data?.list[GLOBAL_CONSTANTS.zeroth_index],
 		loading,
 		totalCount : data?.total_count,
 		getOrganizationService,
 	};
-}
+};
 export default useGetOrganizationService;
