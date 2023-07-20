@@ -8,6 +8,7 @@ const CONFIG_MAPPING = {
 	booking_agent     : bookingAgent,
 	admin             : adminConfig,
 	operation_manager : superadminConfig,
+	coe_head          : adminConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || {};
