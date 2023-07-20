@@ -56,7 +56,6 @@ function AwbNumber({
 				)}
 				{singleItem.status === 'available_reserved' && (
 					<>
-						{console.log('singleItem', singleItem)}
 						<Tooltip
 							content={(
 								<div style={{ wordBreak: 'break-word', minWidth: '250px' }}>
@@ -74,7 +73,7 @@ function AwbNumber({
 									</div>
 									<div>
 										Commodity:
-										{singleItem.commodity || '-'}
+										{singleItem?.commodityDetails?.commodity || '-'}
 										,
 									</div>
 									<div>
