@@ -4,6 +4,7 @@ import { Image } from '@cogoport/next';
 
 import ReceiveDiv from '../../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../../common/SentDiv';
+import NewUserOutBound from '../NewUserOutBound';
 import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
@@ -18,12 +19,25 @@ const CONVERSATION_TYPE_MAPPING = {
 
 function MessagesThread({
 	loadingPrevMessages = false,
-	lastPage, getNextData, messagesData = [], activeMessageCard,
-	formattedData = {}, setRaiseTicketModal = () => {},
+	lastPage = false,
+	getNextData = () => {},
+	messagesData = [],
+	activeMessageCard = () => {},
+	formattedData = {},
+	setRaiseTicketModal = () => {},
+	hasNoFireBaseRoom = false,
+	setModalType = () => {},
+	activeTab = {},
 }) {
 	const { channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 	const unreadIndex = new_user_message_count > messagesData.length
 		? DEFAULT_VALUE : messagesData.length - new_user_message_count;
+
+	if (hasNoFireBaseRoom) {
+		return (
+			<NewUserOutBound setModalType={setModalType} activeTab={activeTab} />
+		);
+	}
 
 	return (
 		<>
