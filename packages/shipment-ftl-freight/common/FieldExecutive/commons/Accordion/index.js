@@ -60,7 +60,7 @@ function Accordion({
 									setCheckRadio(e.target.value);
 								}}
 							/>
-							<div>{item?.label}</div>
+							<div className={styles.single_item_label}>{item?.label}</div>
 						</Button>
 					))}
 				</div>

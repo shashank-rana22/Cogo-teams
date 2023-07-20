@@ -94,6 +94,7 @@ function FieldExecutive(props) {
 						size="md"
 						onClick={() => setIsEdit(!isEdit)}
 						disabled={loading}
+						style={{ marginLeft: '10px' }}
 					>
 						Cancel
 					</Button>
@@ -102,6 +103,7 @@ function FieldExecutive(props) {
 						size="md"
 						onClick={handleUpdate}
 						disabled={loading}
+						style={{ marginLeft: '10px' }}
 					>
 						Update
 					</Button>

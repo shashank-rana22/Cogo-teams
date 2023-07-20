@@ -13,7 +13,6 @@
 
 .tracking {
 	display: flex;
-	gap: 30px;
 	align-items: flex-end;
 	margin-top: 20px;
 }
@@ -24,6 +23,7 @@
 
 .tracking_input {
 	width: 200px;
+	margin: 0 30px;
 
 	.sub_input {
 		width: 100%;
@@ -44,7 +44,6 @@
 @media (max-width: 767px) {
 	.tracking {
 		flex-direction: column;
-		gap: 10px;
 		align-items: flex-start;
 	}
 
