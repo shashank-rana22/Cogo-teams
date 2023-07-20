@@ -1557,7 +1557,7 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api         : 'put_air_coe_e_booking',
+		api         : 'put_air_coe_e_booking_cancel',
 		access_type : 'private',
 	},
 	{
