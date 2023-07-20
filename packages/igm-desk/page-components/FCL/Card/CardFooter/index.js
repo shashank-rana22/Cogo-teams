@@ -24,7 +24,7 @@ export default function CardFooter({ item = {} }) {
 		<div className={styles.card_footer}>
 			{!isEmpty(item?.documents) ? (
 				<div className={styles.details}>
-					<div className={styles.text}>Documents :</div>
+					<span className={styles.text}>Documents :</span>
 
 					{item?.documents?.map((doc) => (
 						<div key={doc?.label} className={cl`${styles.text} ${styles.heading}`}>
@@ -33,7 +33,7 @@ export default function CardFooter({ item = {} }) {
 							) : (
 								<IcCRedCircle height={8} width={8} />
 							)}
-							<div className={cl`${styles.text} ${styles.value}`}>{getDocLabel(doc?.label)}</div>
+							<span className={cl`${styles.text} ${styles.value}`}>{getDocLabel(doc?.label)}</span>
 						</div>
 					))}
 				</div>

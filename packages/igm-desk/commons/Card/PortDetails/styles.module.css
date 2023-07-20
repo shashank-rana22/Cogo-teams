@@ -16,7 +16,7 @@
 		max-width: 100%;
 	}
 
-	.eta_etd {
+	&.eta_etd {
 		font-size: var(--font-size-md);
 	}
 }
@@ -35,12 +35,12 @@
 	min-height: 16px;
 	font-size: var(--font-size-md);
 
-	.code {
+	&.code {
 		margin-right: 2px;
 		color: var(--color-accent-orange-2);
 	}
 
-	.country {
+	&.country {
 		color: #828282;
 	}
 }
@@ -54,10 +54,4 @@
 	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.icd {
-	margin: 4px 0;
-	font-size: 10px;
-	font-weight: 700;
 }

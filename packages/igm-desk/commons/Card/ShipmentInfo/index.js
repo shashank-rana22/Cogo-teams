@@ -8,10 +8,10 @@ export default function ShipmentInfo({ item = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.serial_id}>
+			<span className={styles.serial_id}>
 				Shipment ID #
 				{serial_id}
-			</div>
+			</span>
 			<Tooltip
 				placement="bottom"
 				interactive
@@ -23,7 +23,12 @@ export default function ShipmentInfo({ item = {} }) {
 			>
 				<div className={styles.heading}>
 					Line:
-					<div className={cl`${styles.ellipsis_text} ${styles.pointer}`}>{shipping_line?.business_name}</div>
+					<span
+						className={cl`${styles.ellipsis_text} ${styles.pointer}`}
+					>
+						{shipping_line?.business_name}
+
+					</span>
 				</div>
 			</Tooltip>
 			<div className={styles.heading}>
@@ -43,11 +48,11 @@ export default function ShipmentInfo({ item = {} }) {
 
 				</div>
 			</div>
-			<div className={styles.stakeholder}>
+			<span className={styles.stakeholder}>
 				POC:
 				{' '}
 				{stakeholder?.name || 'NA'}
-			</div>
+			</span>
 		</div>
 	);
 }

@@ -1,7 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import React from 'react';
 
 import ServiceIcon from '../ServiceIcon';
 
@@ -10,15 +9,15 @@ import styles from './styles.module.css';
 const handleLocationDetails = (location) => (
 	<>
 		<div className={styles.port_code}>
-			<div className={styles.code}>
+			<span className={styles.code}>
 				(
 				{location?.port_code || location?.postal_code}
 				)
-			</div>
+			</span>
 
-			<div className={styles.country}>
+			<span className={styles.country}>
 				{location?.country_code}
-			</div>
+			</span>
 		</div>
 
 		<Tooltip
@@ -38,35 +37,35 @@ function PortDetails({ data = {}, icon = {} }) {
 	const { origin_port, destination_port, estimated_arrival, estimated_departure } = data;
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<ServiceIcon {...icon} />
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(origin_port)}
 				{estimated_departure ? (
-					<div className={styles.eta_etd}>
+					<span className={styles.eta_etd}>
 						ETD:
 						{' '}
 						{getDisplayDate(estimated_departure)}
-					</div>
+					</span>
 				) : 'TBD'}
 			</div>
 
-			<div className={styles.icon_wrapper}>
+			<i className={styles.icon_wrapper}>
 				<IcMPortArrow />
-			</div>
+			</i>
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(destination_port)}
 				{estimated_arrival ? (
-					<div className={styles.eta_etd}>
+					<span className={styles.eta_etd}>
 						ETA:
 						{' '}
 						{getDisplayDate(estimated_arrival)}
-					</div>
+					</span>
 				) : 'TBD'}
 			</div>
-		</div>
+		</section>
 	);
 }
 
