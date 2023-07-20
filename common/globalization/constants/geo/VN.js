@@ -244,97 +244,97 @@ export default {
 				value : 'branch',
 			},
 		],
-		country_truck_type : 'Open_body_1_ton',
+		country_truck_type : 'open_body_1_ton',
 		open_truck         : [
 			{
 				label : '1 Ton',
-				value : 'Open_body_1_ton',
+				value : 'open_body_1_ton',
 			},
 			{
 				label : '1.5 Ton',
-				value : 'Open_body_1.5_ton',
+				value : 'open_body_1.5_ton',
 			},
 			{
 				label : '2 Ton',
-				value : 'Open_body_2_ton',
+				value : 'open_body_2_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Open_body_2.5_ton',
+				value : 'open_body_2.5_ton',
 			},
 			{
 				label : '3.5 Ton',
-				value : 'Open_body_3.5_ton',
+				value : 'open_body_3.5_ton',
 			},
 			{
 				label : '5 Ton',
-				value : 'Open_body_5_ton',
+				value : 'open_body_5_ton',
 			},
 			{
 				label : '7 Ton',
-				value : 'Open_body_7_ton',
+				value : 'open_body_7_ton',
 			},
 			{
 				label : '9 Ton',
-				value : 'Open_body_9_ton',
+				value : 'open_body_9_ton',
 			},
 			{
 				label : '11 Ton',
-				value : 'Open_body_11_ton',
+				value : 'open_body_11_ton',
 			},
 			{
 				label : '15 Ton',
-				value : 'Open_body_15_ton',
+				value : 'open_body_15_ton',
 			},
 			{
 				label : '18 Ton',
-				value : 'Open_body_18_ton',
+				value : 'open_body_18_ton',
 			},
 		],
 		closed_truck: [
 			{
 				label : '1 Ton',
-				value : 'Close_body_1_ton',
+				value : 'close_body_1_ton',
 			},
 			{
 				label : '1.5 Ton',
-				value : 'Close_body_1.5_ton',
+				value : 'close_body_1.5_ton',
 			},
 			{
 				label : '2 Ton',
-				value : 'Close_body_2_ton',
+				value : 'close_body_2_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Close_body_2.5_ton',
+				value : 'close_body_2.5_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Close_body_2.5_ton',
+				value : 'close_body_2.5_ton',
 			},
 			{
 				label : '5 Ton',
-				value : 'Close_body_5_ton',
+				value : 'close_body_5_ton',
 			},
 			{
 				label : '7 Ton',
-				value : 'Close_body_7_ton',
+				value : 'close_body_7_ton',
 			},
 			{
 				label : '9 Ton',
-				value : 'Close_body_9_ton',
+				value : 'close_body_9_ton',
 			},
 			{
 				label : '11 Ton',
-				value : 'Close_body_11_ton',
+				value : 'close_body_11_ton',
 			},
 			{
 				label : '15 Ton',
-				value : 'Close_body_15_ton',
+				value : 'close_body_15_ton',
 			},
 			{
 				label : '18 Ton',
-				value : 'Close_body_18_ton',
+				value : 'close_body_18_ton',
 			},
 		],
 		tax_types: [
