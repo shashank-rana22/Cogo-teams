@@ -205,8 +205,16 @@ function useVideoCallFirebase({
 					console.log('stream connected');
 					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
 				});
+
+				peer.on('error', () => {
+					callEnd();
+					callUpdate({
+						call_status: 'technical_error',
+					});
+				});
 			});
-	}, [peerRef, saveCallingData, saveWebrtcToken, setCallDetails, setInACall, setStreams, userId, userName]);
+	}, [callEnd, callUpdate, peerRef, saveCallingData, saveWebrtcToken,
+		setCallDetails, setInACall, setStreams, userId, userName]);
 
 	useEffect(() => {
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);

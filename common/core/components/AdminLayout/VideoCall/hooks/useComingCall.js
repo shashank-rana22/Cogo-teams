@@ -1,5 +1,5 @@
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -18,7 +18,7 @@ function useComingCall({
 	callEnd,
 }) {
 	const { calling_details } = callDetails || {};
-	const getWebrtcToken = async () => {
+	const getWebrtcToken = useCallback(async () => {
 		if (callDetails.webrtc_token_room_id && callDetails.calling_room_id) {
 			const tokenDocRef = doc(
 				firestore,
@@ -33,7 +33,7 @@ function useComingCall({
 				console.log('No such document!');
 			}
 		}
-	};
+	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
 
 	useEffect(() => {
 		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
@@ -53,7 +53,7 @@ function useComingCall({
 		}
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
 
-	const accepteCallMedia = () => {
+	const accepteCallMedia = useCallback(() => {
 		navigator.mediaDevices
 			.getUserMedia({ video: true, audio: true })
 			.then((userStream) => {
@@ -99,9 +99,10 @@ function useComingCall({
 			.catch((error) => {
 				console.log('user stream is not working', error);
 			});
-	};
+	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id,
+		callEnd, callUpdate, peerRef, saveWebrtcToken, setStreams, webrtcToken.user_token]);
 
-	const answerOfCall = () => {
+	const answerOfCall = useCallback(() => {
 		getWebrtcToken().then(() => {
 			setInACall(true);
 			setCallComing(false);
@@ -110,17 +111,17 @@ function useComingCall({
 			});
 			accepteCallMedia();
 		});
-	};
+	}, [accepteCallMedia, callUpdate, getWebrtcToken, setCallComing, setInACall]);
 
-	const rejectOfCall = () => {
+	const rejectOfCall = useCallback(() => {
 		callUpdate({
 			call_status: 'rejected',
 		});
 		setCallComing(false);
-	};
+	}, [callUpdate, setCallComing]);
 
 	useEffect(() => {
-		const notCallingCallStatus = ['rejected', 'end_call', 'accepted'];
+		const notCallingCallStatus = ['rejected', 'end_call', 'accepted', 'technical_error'];
 
 		if (notCallingCallStatus.includes(calling_details?.call_status)) {
 			setCallComing(false);

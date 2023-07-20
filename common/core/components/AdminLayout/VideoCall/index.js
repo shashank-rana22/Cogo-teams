@@ -78,10 +78,11 @@ function VideoCall({
 	});
 
 	useEffect(() => {
-		if (inVideoCall) {
+		if (inVideoCall === true && !inACall) {
 			callingTo(videoCallRecipientData);
 		}
-	}, [callingTo, inVideoCall, videoCallRecipientData]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [inACall, inVideoCall, videoCallRecipientData]);
 
 	useEffect(() => {
 		if (streams.screen_stream && streamRef.current.user) {

@@ -18,8 +18,9 @@ function VideoCallScreen({
 	peerRef = null,
 	callDetails = {},
 }, ref) {
-	const { calling_type, peer_details, calling_details = {}	} = callDetails || {};
+	const { calling_type, peer_details, calling_details = {} } = callDetails || {};
 	const { user_name = 'Unknown' } = peer_details || {};
+	const { isVideoActive = false, isScreenShareActive = false } = calling_details?.user_call_options || {};
 
 	const { isMinimize } = options || {};
 
@@ -75,7 +76,7 @@ function VideoCallScreen({
 			</div>
 			<div className={styles.content}>
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />
-				<div className={streams.peer_stream ? styles.peer_screen : styles.call_screen}>
+				<div className={(isVideoActive || isScreenShareActive) ? styles.peer_screen : styles.call_screen}>
 					<div className={styles.avatar_screen}>
 						<div className={styles.header}>{user_name}</div>
 						<Avatar
