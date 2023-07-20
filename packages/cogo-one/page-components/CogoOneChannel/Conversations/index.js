@@ -1,24 +1,25 @@
 import MailConversation from './MailConversation';
-import Messages from './Messages';
+import MessageComponent from './MessageComponent';
 import styles from './styles.module.css';
 import VoiceCall from './VoiceCall';
 
 const CONVERSATION_COMPONENT_MAPPING = {
-	message : Messages,
+	message : MessageComponent,
 	voice   : VoiceCall,
 	mail    : MailConversation,
 };
 
 function Conversations({
 	activeTab = {},
-	firestore,
-	userId,
+	firestore = {},
+	userId = '',
 	setRaiseTicketModal = () => {},
 	viewType = '',
-	setActiveRoomLoading,
-	mailProps,
-	setActiveTab,
-	suggestions,
+	setActiveRoomLoading = false,
+	mailProps = {},
+	setActiveTab = () => {},
+	suggestions = [],
+	setModalType = () => {},
 }) {
 	const componentPropsMapping = {
 		message: {
@@ -30,6 +31,7 @@ function Conversations({
 			setActiveRoomLoading,
 			setActiveTab,
 			suggestions,
+			setModalType,
 		},
 		voice: {
 			activeVoiceCard: activeTab?.data || {},

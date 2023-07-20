@@ -1,0 +1,137 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: fit-content;
+	padding: 5px 12px;
+	background-color: #fff;
+}
+
+.subheader_section {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	border-right: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+}
+
+.wallet_container {
+	display: flex;
+	align-items: center;
+	padding: 5px 12px;
+	margin-right: 12px;
+	background-color: #f7faef;
+	border: 1px solid #c4dc91;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.Detail_page {
+	margin: -24px -20px;
+}
+
+.subheader_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.port_pair_container {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	width: 700px;
+	padding: 0 30px;
+}
+
+.text {
+	margin-left: 7px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.origin_location_container,
+.destination_location_container {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.price_text {
+	font-size: 14px;
+	font-weight: 700;
+	color: #4f4f4f;
+}
+
+.wallet_text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #434343;
+}
+
+.text_container {
+	margin-left: 15px;
+}
+
+.card {
+	margin: 22px;
+}
+
+.heading {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: 16px 20px 16px 10px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 23px;
+	color: #221f20;
+
+	&:hover {
+		font-style: normal;
+		font-weight: 700;
+		cursor: pointer;
+
+		svg {
+			color: #ed3726;
+		}
+	}
+}
+
+.tabs_container {
+	padding: 24px 24px 0;
+	margin: 16px;
+	background-color: #fff;
+}
+
+.show_detail_tab {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 0;
+	margin: 0 16px;
+	margin: 10px -24px 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
+	background: #fdfbf6;
+	border-radius: 0 0 4px 4px;
+}
+
+.header_container {
+	font-weight: bold;
+}
+
+.custom_pill {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 4px 8px;
+	margin: 12px 0 -12px;
+	cursor: pointer;
+	background: #e3f1c5;
+	border-radius: 4px;
+}

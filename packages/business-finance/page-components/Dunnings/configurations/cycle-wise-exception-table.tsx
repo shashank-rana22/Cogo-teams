@@ -67,11 +67,7 @@ const cycleWiseExceptionTable = ({
 							? (
 								<>
 									<span className={styles.frequency_value}>
-										{formatDate({
-											date       : oneTimeDate,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-											formatType : 'date',
-										})}
+										{oneTimeDate}
 									</span>
 									<span className={styles.border} />
 
