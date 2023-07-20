@@ -1,0 +1,41 @@
+.container {
+	margin: 24px 0;
+}
+
+.heading {
+	margin-bottom: 12px;
+}
+
+.card {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 20px;
+	background-color: #fff;
+	border: 1px solid #f8f8f8;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 5%);
+}
+
+.label_value_cotainer {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	padding: 4px 0;
+
+	@media (max-width: 768px) {
+		flex-basis: 50%;
+	}
+}
+
+.label {
+	margin-right: 4px;
+}
+
+.roles {
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

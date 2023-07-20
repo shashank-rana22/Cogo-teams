@@ -2,6 +2,10 @@
 	margin: 24px 0;
 }
 
-.heading {
-	/* margin: 0; */
+.heading_container {
+	margin-bottom: 36px;
+}
+
+.subheading {
+	font-size: 12px;
 }

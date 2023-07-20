@@ -144,13 +144,11 @@ import TransactionFunnelCard from './TransactionFunnelCard';
 function ObjectiveDetailsCard(props) {
 	const { objectiveData } = props;
 
-	console.log('objectiveData :: ', objectiveData);
-
 	const {
-		service_requirements: serviceRequirementsDetails,
-		organization_details: organizationDetails,
-		stats_details: statsDetails,
-		service_requirement_operator,
+		service_requirements: serviceRequirementsDetails = [],
+		organization_details: organizationDetails = {},
+		stats_details: statsDetails = {},
+		service_requirement_operator = '',
 	} = objectiveData;
 
 	return (
