@@ -45,7 +45,6 @@ function Card({
 
 			{task?.status === 'completed' && task?.assigned_stakeholder === 'system' && (
 				<Button
-					type="button"
 					className={styles.view_button}
 					onClick={handleEmail}
 				>

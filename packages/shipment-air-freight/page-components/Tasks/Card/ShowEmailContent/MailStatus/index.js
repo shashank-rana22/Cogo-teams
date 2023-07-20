@@ -7,27 +7,27 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
+const PRIORITY_ARRAY = [
+	'is_blocked',
+	'is_spammed',
+	'is_bounced',
+	'is_clicked',
+	'is_seen',
+];
 
 function MailStatus({ list = [] }) {
 	let date = '';
 	const renderTemplate = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const geo = getGeoConstants();
 
-	const priorityArray = [
-		'is_blocked',
-		'is_spammed',
-		'is_bounced',
-		'is_clicked',
-		'is_seen',
-	];
-
 	const STATUS = {};
-	let not_found = true;
-	priorityArray.forEach((item) => {
-		if (renderTemplate[item] && not_found) {
+	let notFound = true;
+
+	PRIORITY_ARRAY.forEach((item) => {
+		if (renderTemplate[item] && notFound) {
 			STATUS.key = (item?.split('_')[FIRST_INDEX]);
 			date = renderTemplate[`${STATUS.key}_at`];
-			not_found = false;
+			notFound = false;
 			return STATUS;
 		}
 		return undefined;

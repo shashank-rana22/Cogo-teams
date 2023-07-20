@@ -1,11 +1,9 @@
-import { Modal, Placeholder } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Modal } from '@cogoport/components';
 
 import useListCommunication from '../../../../hooks/useListCommunication';
 
-import MailStatus from './MailStatus';
+import MailContent from './MailContent';
 import styles from './styles.module.css';
-import TemplateModalContent from './TemplateModalContent';
 
 function ShowEmailContent({
 	taskId = '',
@@ -20,18 +18,6 @@ function ShowEmailContent({
 		setTaskId('');
 	};
 
-	const renderContent = () => {
-		if (loading) {
-			return <div className={styles.loading_state}><Placeholder /></div>;
-		}
-		return (
-			<>
-				{!isEmpty(list) && <MailStatus list={list} />}
-				<TemplateModalContent list={list} />
-			</>
-		);
-	};
-
 	return (
 		<Modal
 			className={styles.modal_container}
@@ -41,7 +27,7 @@ function ShowEmailContent({
 		>
 			<Modal.Header />
 			<Modal.Body>
-				{renderContent()}
+				<MailContent loading={loading} list={list} />
 			</Modal.Body>
 		</Modal>
 	);

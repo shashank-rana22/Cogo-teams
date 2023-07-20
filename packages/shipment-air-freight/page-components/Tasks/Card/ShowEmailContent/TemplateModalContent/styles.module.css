@@ -5,7 +5,7 @@
 }
 
 .flexbox {
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }
 
 .empty_state {
