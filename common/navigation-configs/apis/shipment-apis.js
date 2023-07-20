@@ -1604,6 +1604,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'bulk_update_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
 		api         : 'get_saas_hs_code_list_commodities',
 		access_type : 'private',
 	},
@@ -1614,6 +1619,11 @@ const apis = [
 	{
 		api         : 'get_saas_trade_engine_documents',
 		access_type : 'private',
+	},
+	{
+		api          : 'send_rail_domestic_indent_email',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 
