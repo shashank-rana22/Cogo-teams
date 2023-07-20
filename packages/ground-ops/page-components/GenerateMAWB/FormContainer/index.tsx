@@ -205,7 +205,7 @@ function FormContainer({
 								setHawbDetails((prev) => ([...prev, {
 									id: uuid(),
 									documentNo:
-									isEmpty(cogoSeriesNumber)
+									!isEmpty(cogoSeriesNumber)
 										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
 										: `COGO-${taskItem.serialId}${
 											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
