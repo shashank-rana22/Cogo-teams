@@ -131,6 +131,7 @@ function ExecuteTask({
 				shipmentData={shipment_data}
 				onCancel={onCancel}
 				refetch={taskListRefetch}
+				primary_service={primary_service}
 			/>
 
 		);
