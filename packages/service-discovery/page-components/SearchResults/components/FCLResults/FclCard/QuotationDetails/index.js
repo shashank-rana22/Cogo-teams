@@ -17,6 +17,26 @@ function QuotationDetails({
 
 	const [showContract, setShowContract] = useState(false);
 
+	const formattedAmount = formatAmount({
+		amount   : total_price_discounted,
+		currency : total_price_currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			maximumFractionDigits : 0,
+		},
+	});
+
+	const handleSelectButtonClick = () => {
+		if (!isSelectedCard) {
+			setSelectedCard(rateCardData);
+			setScreen('selectedCard');
+		} else {
+			setSelectedCard({});
+			setScreen('listRateCard');
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<Button
@@ -28,33 +48,14 @@ function QuotationDetails({
 			>
 				{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
 			</Button>
+
 			<Button
-				onClick={() => {
-					if (!isSelectedCard) {
-						setSelectedCard(rateCardData);
-						setScreen('selectedCard');
-					} else {
-						setSelectedCard({});
-						setScreen('listRateCard');
-					}
-				}}
+				onClick={handleSelectButtonClick}
 				size="md"
 				themeType="accent"
 				className={styles.primaryBotton}
 			>
-				{!isSelectedCard ? (
-					` Select For ${formatAmount({
-						amount   : total_price_discounted,
-						currency : total_price_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
-						},
-					})}`) : (
-					'Remove'
-				)}
-
+				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Remove'}
 			</Button>
 
 			{showContract ? (
