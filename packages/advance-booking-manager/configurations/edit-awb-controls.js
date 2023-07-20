@@ -61,6 +61,22 @@ const awbControls = [
 		isClearable: true,
 	},
 	{
+		name        : 'commodity_details',
+		type        : 'select',
+		label       : 'Commodity',
+		placeholder : 'Select Commodity',
+		span        : 6,
+		options     : [
+			{ label: 'General', value: { commodity: 'general' } },
+			{ label: 'Special Consideration', value: { commodity: 'special_consideration' } },
+
+		],
+		rules: {
+			required: true,
+		},
+		isClearable: true,
+	},
+	{
 		name        : 'chargeable_weight',
 		type        : 'text',
 		label       : 'Add Chargeable Weight',

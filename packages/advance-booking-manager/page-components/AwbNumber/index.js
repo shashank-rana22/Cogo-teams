@@ -56,7 +56,37 @@ function AwbNumber({
 				)}
 				{singleItem.status === 'available_reserved' && (
 					<>
-						<Pill size="sm" color="var(--color-tertiary-success-green-2)">Reserved</Pill>
+						{console.log('singleItem', singleItem)}
+						<Tooltip
+							content={(
+								<div style={{ wordBreak: 'break-word', minWidth: '250px' }}>
+									<div>
+										Clearance Date:
+										{' '}
+										{singleItem.customClearanceDate || '-'}
+										,
+									</div>
+									<div>
+										Booking Date:
+										{' '}
+										{singleItem.bookingDate || '-'}
+										,
+									</div>
+									<div>
+										Commodity:
+										{singleItem.commodity || '-'}
+										,
+									</div>
+									<div>
+										Chargeable Weight:
+										{singleItem.chargeableWeight || '-'}
+									</div>
+								</div>
+							)}
+							placement="top"
+						>
+							<Pill size="sm" color="var(--color-tertiary-success-green-2)">Reserved</Pill>
+						</Tooltip>
 						<Button
 							themeType="linkUi"
 							onClick={() => {
