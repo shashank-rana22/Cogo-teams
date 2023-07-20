@@ -29,12 +29,12 @@ const shipmentChatStakeholders = [
 ];
 
 function Details({
-	id,
-	activeId,
-	sourceId,
-	source,
+	id = '',
+	activeId = '',
+	sourceId = '',
+	source = '',
 	subscribedUsers = [],
-	setShow = () => { },
+	setShow = () => {},
 	get = {},
 	personalData = {},
 }) {

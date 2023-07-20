@@ -16,7 +16,7 @@ const CHAR_LENGTH = 1;
 const SUGGESTION_LENGTH = 0;
 
 function Sendto(
-	{ data, setStakeHolderView = () => { }, isStakeholder = true },
+	{ data = {}, setStakeHolderView = () => {}, isStakeholder = true },
 	ref,
 ) {
 	const [suggestions, setSuggestions] = useState([]);
