@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import {
 	addDoc,
@@ -30,13 +29,12 @@ function useVideoCallFirebase({
 	setStreams,
 	streams,
 	peerRef,
-	inACall,
+	inVideoCall,
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
 	const { id: userId, name: userName } = user_data || {};
-	const dispatch = useDispatch();
 
 	const saveWebrtcToken = useCallback(async (data, calling_room_id, path) => {
 		if (calling_room_id) {
@@ -108,12 +106,6 @@ function useVideoCallFirebase({
 	}, [callDetails, firestore]);
 
 	const callEnd = useCallback(() => {
-		dispatch(
-			setProfileState({
-				video_call_recipient_data : {},
-				is_in_video_call          : false,
-			}),
-		);
 		setInACall(false);
 		setCallComing(false);
 		stopStream('user_stream', streams);
@@ -148,7 +140,7 @@ function useVideoCallFirebase({
 			peer_stream   : null,
 			screen_stream : null,
 		});
-	}, [dispatch, setInACall, setCallComing, streams, peerRef, setCallDetails, setWebrtcToken, setOptions, setStreams]);
+	}, [setInACall, setCallComing, streams, peerRef, setCallDetails, setWebrtcToken, setOptions, setStreams]);
 
 	const callingTo = useCallback((peer_details = {}) => {
 		if (isEmpty(peer_details?.user_id)) return;
@@ -227,7 +219,7 @@ function useVideoCallFirebase({
 
 		onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
-				if (inACall === false) {
+				if (inVideoCall === false) {
 					const room_data = val.data();
 					setCallDetails((prev) => ({
 						...prev,
@@ -243,7 +235,7 @@ function useVideoCallFirebase({
 				}
 			});
 		});
-	}, [firestore, inACall, setCallComing, setCallDetails, userId]);
+	}, [firestore, inVideoCall, setCallComing, setCallDetails, userId]);
 
 	useEffect(() => {
 		if (callDetails?.calling_room_id) {

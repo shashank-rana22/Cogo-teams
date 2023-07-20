@@ -6,6 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CallComing from './CallComing';
 import { firebaseConfig } from './configurations/firebase-config';
 import useComingCall from './hooks/useComingCall';
+import { useSetInACall } from './hooks/useSetInACall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import VideoCallScreen from './VideoCallScreen';
 
@@ -17,7 +18,6 @@ function VideoCall({
 	const firestore = getFirestore(app);
 
 	const [callComing, setCallComing] = useState(false);
-	const [inACall, setInACall] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
 		user_token : null,
 		peer_token : null,
@@ -48,13 +48,15 @@ function VideoCall({
 	});
 	const peerRef = useRef(null);
 
+	const { setInACall } = useSetInACall();
+
 	const { callingTo, callUpdate, callEnd, saveWebrtcToken } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
 		setOptions,
 		setWebrtcToken,
 		setInACall,
-		inACall,
+		inVideoCall,
 		setCallDetails,
 		callDetails,
 		setStreams,
@@ -78,11 +80,11 @@ function VideoCall({
 	});
 
 	useEffect(() => {
-		if (inVideoCall === true && !inACall) {
+		if (inVideoCall === true && videoCallRecipientData?.user_id) {
 			callingTo(videoCallRecipientData);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [inACall, inVideoCall, videoCallRecipientData]);
+	}, [videoCallRecipientData, inVideoCall]);
 
 	useEffect(() => {
 		if (streams.screen_stream && streamRef.current.user) {
@@ -122,7 +124,7 @@ function VideoCall({
 					/>
 				</div>
 			) : null}
-			{inACall ? (
+			{inVideoCall ? (
 				<VideoCallScreen
 					ref={streamRef}
 					options={options}
