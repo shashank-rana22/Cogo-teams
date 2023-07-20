@@ -10,6 +10,7 @@ import {
 	ApproveTruck,
 	ApprovePurchaseDeduction,
 	UploadEWB,
+	PickAndDropTasks,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -107,6 +108,23 @@ function ExecuteTask({
 	) {
 		return (
 			<UploadEWB
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (
+		(task.task === 'mark_completed'
+			&& ['cargo_dropped', 'cargo_picked_up'].includes(task.state))
+			|| task.task === 'cargo_picked_up_at'
+	) {
+		return (
+			<PickAndDropTasks
 				onCancel={onCancel}
 				services={servicesList}
 				shipment_data={shipment_data}
