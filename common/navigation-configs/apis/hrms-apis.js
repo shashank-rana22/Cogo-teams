@@ -367,6 +367,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_rating_cycle',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
