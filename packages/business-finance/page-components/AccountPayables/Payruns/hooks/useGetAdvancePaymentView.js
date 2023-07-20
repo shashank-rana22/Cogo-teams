@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 	const { pageIndex, pageSize } = globalFilters || {};
-	const { id } = selectedPayrun || {};
+	const { id, batchNo } = selectedPayrun || {};
 	const [{ data:viewInvoicesAdvancePaymentData, loading:viewInvoicesAdvancePaymentLoading },
 		viewInvoicesAdvancePaymentTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/advance-payment',
@@ -19,12 +19,13 @@ const useGetAdvancePaymentView = ({ globalFilters, selectedPayrun, query }) => {
 					q        : query !== '' ? query : undefined,
 					pageIndex,
 					pageSize,
+					batchNo,
 				},
 			});
 		} catch (err) {
 			Toast.error(err.message, 'Somthing went wrong');
 		}
-	}, [id, pageIndex, pageSize, query, viewInvoicesAdvancePaymentTrigger]);
+	}, [batchNo, id, pageIndex, pageSize, query, viewInvoicesAdvancePaymentTrigger]);
 	return {
 		getViewInvoicesAdvancePayment,
 		viewInvoicesAdvancePaymentData,
