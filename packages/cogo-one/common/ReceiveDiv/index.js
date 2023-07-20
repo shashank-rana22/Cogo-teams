@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
@@ -14,17 +14,17 @@ import SuggestedActions from './SuggestedActions';
 
 function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
-		setRaiseTicketModal((p) => {
-			if (p?.state) {
+		setRaiseTicketModal((previous) => {
+			if (previous?.state) {
 				return { state: false, data: {}, source: null };
 			}
 			return { state: true, data: { messageData: data, formattedData }, source: 'message' };
 		});
 	};
 	return (
-		<div className={styles.raise_ticket} role="presentation" onClick={triggerModal}>
+		<Button size="md" themeType="secondary" onClick={triggerModal}>
 			Raise a ticket
-		</div>
+		</Button>
 	);
 }
 
@@ -102,7 +102,7 @@ function ReceiveDiv({
 					<div
 						role="presentation"
 						className={styles.list_button}
-						onClick={() => setShowOrder((p) => !p)}
+						onClick={() => setShowOrder((previous) => !previous)}
 					>
 						{showOrder ? (
 							<span className={styles.btn_container}>
