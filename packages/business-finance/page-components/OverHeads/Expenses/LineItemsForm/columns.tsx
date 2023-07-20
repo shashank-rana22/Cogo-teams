@@ -12,7 +12,17 @@ const TDS_OPTIONS = [
 	{ label: '20 %', value: '20' },
 ];
 
-const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
+const TAX_NOT_APPLICABLE = [
+	{ label: '0 %', value: '0' },
+];
+
+const lineItemColumns = ({
+	remove,
+	control,
+	taxOptions,
+	formData,
+	isTaxApplicable,
+}) => {
 	const { lineItemsList = [] } = formData || {};
 
 	return [
@@ -58,7 +68,7 @@ const lineItemColumns = ({ remove, control, taxOptions, formData }) => {
 						key={row?.id}
 						control={control}
 						theme="admin"
-						options={taxOptions}
+						options={!isTaxApplicable ? TAX_NOT_APPLICABLE : taxOptions}
 						name={`line_items.${index}.tax`}
 						size="xs"
 						value={lineItemsList[index]?.tax}

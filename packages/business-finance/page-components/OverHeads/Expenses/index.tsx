@@ -274,6 +274,25 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
+		renderLedgerAmount: (itemData) => {
+			const { ledgerMaxPayoutAllowed, ledgerCurrency = '', ledgerTotal } = itemData || {};
+			return (
+				<div className={styles.data_container}>
+					<div className={styles.recurring_amount_data}>
+						<div>
+							{formatAmount({
+								amount   : ledgerTotal || ledgerMaxPayoutAllowed,
+								currency : ledgerCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) || '-'}
+						</div>
+					</div>
+				</div>
+			);
+		},
 		getPayable: (itemData: ItemDataInterface) => {
 			const {
 				grandTotal,

@@ -45,6 +45,8 @@ function RecuringModal({
 		repeatFrequency,
 		startDate,
 		endDate,
+		ledgerCurrency,
+		ledgerMaxPayoutAllowed,
 	} = reccuringExpenseApproval || {};
 
 	const { businessName } = organization || {};
@@ -87,8 +89,15 @@ function RecuringModal({
 				),
 		},
 		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
+			title : 'Ledger Account',
+			value : formatAmount({
+				amount   : ledgerMaxPayoutAllowed,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}) || '-',
 		},
 	];
 	const summaryDataThird = [
@@ -158,6 +167,10 @@ function RecuringModal({
 					)))}
 				</div>
 			),
+		},
+		{
+			title : 'Agreement Number',
+			value : agreementNumber || '-',
 		},
 	];
 

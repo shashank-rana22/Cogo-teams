@@ -23,17 +23,22 @@ function StakeHolderTimeline({ timeline = [] }) {
 					<div
 						className={styles.faded_text}
 					>
-						{item.name}
+						{item?.name || '-'}
 					</div>
 					<div
 						className={styles.faded_text}
 					>
-						{item?.email}
+						{item?.email || '-'}
 					</div>
 					<div
 						className={styles.faded_text}
 					>
-						{item?.remarks}
+						{item?.remarks || ' '}
+					</div>
+					<div
+						className={styles.status}
+					>
+						{item?.status || 'PENDING'}
 					</div>
 				</div>
 			))}

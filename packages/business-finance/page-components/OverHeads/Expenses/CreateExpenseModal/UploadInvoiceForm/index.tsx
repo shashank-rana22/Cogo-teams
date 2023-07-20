@@ -11,20 +11,21 @@ import LineItemsForm from '../../LineItemsForm';
 import styles from './styles.module.css';
 
 interface FilterInterface {
-	uploadedInvoice?:string,
-	repeatEvery?:string,
-	invoiceCurrency?:string,
-	invoiceNumber?:string,
-	lineItemsList?:any,
+	uploadedInvoice?: string;
+	repeatEvery?: string;
+	invoiceCurrency?: string;
+	invoiceNumber?: string;
+	lineItemsList?: any;
 }
 interface Props {
-	formData:FilterInterface,
-	setFormData:(p:object) => void,
-	isUploadConfirm?:boolean,
-	setIsUploadConfirm?:(p:any)=>void,
-	taxOptions?:object[],
-	setTaxOptions?:(p:any)=>void,
-	setIsFormValidated?:(p:boolean)=>void,
+	formData: FilterInterface;
+	setFormData: (p: object) => void;
+	isUploadConfirm?: boolean;
+	setIsUploadConfirm?: (p: any) => void;
+	taxOptions?: object[];
+	setTaxOptions?: (p: any) => void;
+	setIsFormValidated?: (p: boolean) => void;
+	isTaxApplicable?: boolean;
 }
 
 function UploadInvoiceForm({
@@ -35,35 +36,50 @@ function UploadInvoiceForm({
 	taxOptions,
 	setTaxOptions,
 	setIsFormValidated,
-}:Props) {
-	const { invoiceCurrency, invoiceNumber, uploadedInvoice:uploadUrl, lineItemsList } = formData || {};
+	isTaxApplicable,
+}: Props) {
+	const {
+		invoiceCurrency,
+		invoiceNumber,
+		uploadedInvoice: uploadUrl,
+		lineItemsList,
+	} = formData || {};
 
-	const isLineItemPresent = lineItemsList?.[GLOBAL_CONSTANTS.zeroth_index]?.payable_amount;
+	const isLineItemPresent =		lineItemsList?.[GLOBAL_CONSTANTS.zeroth_index]?.payable_amount;
 
 	useEffect(() => {
 		// Validation to ensure that all data is filled before moving to next page
-		const isValidated = invoiceCurrency && invoiceNumber && uploadUrl && isLineItemPresent;
+		const isValidated =			invoiceCurrency && invoiceNumber && uploadUrl && isLineItemPresent;
 		if (isValidated) {
 			setIsFormValidated(true);
 		} else {
 			setIsFormValidated(false);
 		}
 	}, [
-		invoiceCurrency, invoiceNumber, uploadUrl, isLineItemPresent, setIsFormValidated,
+		invoiceCurrency,
+		invoiceNumber,
+		uploadUrl,
+		isLineItemPresent,
+		setIsFormValidated,
 	]);
 
 	return (
 		<div>
-			<div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+			<div
+				style={{
+					display      : 'flex',
+					alignItems   : 'center',
+					marginBottom : '20px',
+				}}
+			>
 				<div className={styles.select}>
 					<Select
 						value={formData?.invoiceCurrency}
-						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
+						onChange={(val: string) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
 						options={getCurrencyOptions()}
 						size="sm"
 					/>
-
 				</div>
 				<div className={styles.input}>
 					<Input
@@ -71,7 +87,7 @@ function UploadInvoiceForm({
 						size="sm"
 						placeholder="Unique invoice no."
 						value={formData?.invoiceNumber}
-						onChange={(e:string) => setFormData({ ...formData, invoiceNumber: e })}
+						onChange={(e: string) => setFormData({ ...formData, invoiceNumber: e })}
 					/>
 				</div>
 			</div>
@@ -100,7 +116,10 @@ function UploadInvoiceForm({
 									<div className={styles.confirm}>
 										<Button
 											onClick={() => {
-												setFormData((p) => ({ ...p, uploadedInvoice: null }));
+												setFormData((p) => ({
+													...p,
+													uploadedInvoice: null,
+												}));
 												setIsUploadConfirm(false);
 											}}
 											style={{ marginRight: '20px' }}
@@ -119,33 +138,31 @@ function UploadInvoiceForm({
 								</div>
 							)}
 						</div>
-					)
-						: (
-							<div>
-								<div style={{ margin: '8px' }}>
-									<object
-										data={uploadUrl}
-										type="application/pdf"
-										height="478px"
-										width="100%"
-										aria-label="Document"
-									/>
-								</div>
+					) : (
+						<div>
+							<div style={{ margin: '8px' }}>
+								<object
+									data={uploadUrl}
+									type="application/pdf"
+									height="478px"
+									width="100%"
+									aria-label="Document"
+								/>
 							</div>
-						)}
-
+						</div>
+					)}
 				</div>
 				<div className={`${styles.upload_invoice} ${styles.line_item}`}>
 					<LineItemsForm
 						setFormData={setFormData}
 						formData={formData}
 						taxOptions={taxOptions}
+						isTaxApplicable={isTaxApplicable}
 						setTaxOptions={setTaxOptions}
 					/>
 				</div>
 			</div>
 		</div>
-
 	);
 }
 

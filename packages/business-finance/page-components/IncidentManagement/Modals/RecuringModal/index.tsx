@@ -42,6 +42,8 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 		repeatFrequency,
 		startDate,
 		endDate,
+		ledgerCurrency,
+		ledgerMaxPayoutAllowed,
 	} = reccuringExpenseApproval || {};
 
 	const { useOnAction: onAction, loading } = usePostExpense({
@@ -91,8 +93,15 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 				),
 		},
 		{
-			title : 'Agreement Number',
-			value : agreementNumber || '-',
+			title : 'Ledger Account',
+			value : formatAmount({
+				amount   : ledgerMaxPayoutAllowed,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}) || '-',
 		},
 	];
 	const summaryDataThird = [
@@ -161,6 +170,10 @@ function RecuringModal({ id, refetch, row, isEditable = true }) {
 					)))}
 				</div>
 			),
+		},
+		{
+			title : 'Agreement Number',
+			value : agreementNumber || '-',
 		},
 	];
 

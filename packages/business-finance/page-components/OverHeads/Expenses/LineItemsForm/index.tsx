@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
-function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
+function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTaxApplicable = true }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
 	const { lineItemsList, loading } = useGetListItemTaxes({ formData });
 	const rest = { loading };
@@ -120,6 +120,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 		control,
 		taxOptions,
 		formData,
+		isTaxApplicable,
 	}).filter((column) => column.id !== 'tds' || !hideTdsColumn);
 
 	return (

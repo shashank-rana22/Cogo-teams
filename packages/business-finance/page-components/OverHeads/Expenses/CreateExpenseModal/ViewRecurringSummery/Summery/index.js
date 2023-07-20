@@ -1,3 +1,4 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
@@ -27,6 +28,8 @@ function Summery({
 		billNumber,
 		category,
 		sellerDetails,
+		ledgerTotal,
+		ledgerCurrency,
 	} = itemData || {};
 
 	const { organizationName } = sellerDetails || {};
@@ -34,9 +37,9 @@ function Summery({
 	const splitArray = (billDocumentUrl || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - FIRST_INDEX];
 
-	const { stakeholder: stakeholder3 } = level3 || {};
-	const { stakeholder: stakeholder2 } = level2 || {};
-	const { stakeholder: stakeholder1 } = level1 || {};
+	const { stakeholder: stakeholder3, status:status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status:status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status:status1 } = level1 || {};
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
@@ -46,6 +49,7 @@ function Summery({
 						email   : stakeholder1?.userEmail,
 						name    : stakeholder1?.userName,
 						remarks : level1?.remarks,
+						status  : status1,
 					} : {}),
 				},
 				{
@@ -53,6 +57,7 @@ function Summery({
 						email   : stakeholder2?.userEmail,
 						name    : stakeholder2?.userName,
 						remarks : level2?.remarks,
+						status  : status2,
 					} : {}),
 				},
 				{
@@ -60,6 +65,7 @@ function Summery({
 						email   : stakeholder3?.userEmail,
 						name    : stakeholder3?.userName,
 						remarks : level3?.remarks,
+						status  : status3,
 					} : {}),
 				},
 			];
@@ -71,6 +77,7 @@ function Summery({
 						email   : stakeholder1?.userEmail,
 						name    : stakeholder1?.userName,
 						remarks : level1?.remarks,
+						status  : status1,
 					} : {}),
 				},
 				{
@@ -78,6 +85,7 @@ function Summery({
 						email   : stakeholder2?.userEmail,
 						name    : stakeholder2?.userName,
 						remarks : level2?.remarks,
+						status  : status2,
 					} : {}),
 				},
 			];
@@ -87,6 +95,7 @@ function Summery({
 				email   : stakeholder1?.userEmail,
 				name    : stakeholder1?.userName,
 				remarks : level1?.remarks,
+				status  : status1,
 			},
 		];
 	};
@@ -111,15 +120,16 @@ function Summery({
 	];
 	const summaryDataSecond = [
 		{
-			title: 'Payable Amount',
-			value:
-				billCurrency
-					&& payableAmount ? (
-						<div>
-							{billCurrency}
-							{payableAmount}
-						</div>
-					) : ('-'),
+			title : 'Payable Amount',
+			value : formatAmount({
+				amount   : payableAmount,
+				currency : billCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
+
 		},
 		{
 			title : 'Expense Date',
@@ -147,6 +157,18 @@ function Summery({
 		},
 	];
 	const summaryDataThird = [
+		{
+			title : 'Ledger Amount',
+			value : formatAmount({
+				amount   : ledgerTotal,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			})
+			|| '-',
+		},
 
 		{
 			title : 'Uploaded Documents',

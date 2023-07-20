@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
@@ -17,9 +18,10 @@ function RecurringSummery({
 	const {
 		branchName,
 		entityCode,
-		// billDocumentUrl,
-		// payableAmount,
-		// currency,
+		ledgerMaxPayoutAllowed,
+		maxPayoutAllowed,
+		ledgerCurrency,
+		currency,
 		endDate,
 		startDate,
 		level3,
@@ -30,14 +32,15 @@ function RecurringSummery({
 		categoryName,
 		businessName,
 		proofDocuments,
+		currentLevel,
 	} = itemData || {};
 
 	const splitArray = (proofDocuments?.[GLOBAL_CONSTANTS.zeroth_index] || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - FIRST_INDEX];
 
-	const { stakeholder: stakeholder3 } = level3 || {};
-	const { stakeholder: stakeholder2 } = level2 || {};
-	const { stakeholder: stakeholder1 } = level1 || {};
+	const { stakeholder: stakeholder3, status:status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status:status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status:status1 } = level1 || {};
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
@@ -47,6 +50,7 @@ function RecurringSummery({
 						email   : stakeholder1?.userEmail,
 						name    : stakeholder1?.userName,
 						remarks : level1?.remarks,
+						status  : status1,
 					} : {}),
 				},
 				{
@@ -54,6 +58,7 @@ function RecurringSummery({
 						email   : stakeholder2?.userEmail,
 						name    : stakeholder2?.userName,
 						remarks : level2?.remarks,
+						status  : status2,
 					} : {}),
 				},
 				{
@@ -61,6 +66,7 @@ function RecurringSummery({
 						email   : stakeholder3?.userEmail,
 						name    : stakeholder3?.userName,
 						remarks : level3?.remarks,
+						status  : status3,
 					} : {}),
 				},
 			];
@@ -72,6 +78,7 @@ function RecurringSummery({
 						email   : stakeholder1?.userEmail,
 						name    : stakeholder1?.userName,
 						remarks : level1?.remarks,
+						status  : status1,
 					} : {}),
 				},
 				{
@@ -79,6 +86,7 @@ function RecurringSummery({
 						email   : stakeholder2?.userEmail,
 						name    : stakeholder2?.userName,
 						remarks : level2?.remarks,
+						status  : status2,
 					} : {}),
 				},
 			];
@@ -88,6 +96,7 @@ function RecurringSummery({
 				email   : stakeholder1?.userEmail,
 				name    : stakeholder1?.userName,
 				remarks : level1?.remarks,
+				status  : status1,
 			},
 		];
 	};
@@ -113,16 +122,6 @@ function RecurringSummery({
 		},
 	];
 	const summaryDataSecond = [
-	// 	{
-	// 		title: 'Payable Amount',
-	// 		value:
-		//             currency && payableAmount ? (
-	// <div>
-	// 	{currency}
-	// 	{payableAmount}
-	// </div>
-		//             ) : ('-'),
-	// 	},
 		{
 			title : 'Start Date',
 			value : (
@@ -143,11 +142,33 @@ function RecurringSummery({
 			title : 'Agreement Number',
 			value : agreementNumber || '-',
 		},
-	];
-	const summaryDataThird = [
 		{
 			title : 'Duration',
 			value : repeatFrequency || '-',
+		},
+	];
+	const summaryDataThird = [
+		{
+			title : 'Payable Amount',
+			value : formatAmount({
+				amount  : maxPayoutAllowed,
+				currency,
+				options : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}) || '_',
+		},
+		{
+			title : 'Ledger Amount',
+			value : formatAmount({
+				amount   : ledgerMaxPayoutAllowed,
+				currency : ledgerCurrency,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}) || '-',
 		},
 
 		{
@@ -200,6 +221,7 @@ function RecurringSummery({
 					<div className={styles.steeper}>
 						<StakeHolderTimeline
 							timeline={stakeHolderTimeLine()}
+							currentLevel={currentLevel}
 						/>
 					</div>
 				)}

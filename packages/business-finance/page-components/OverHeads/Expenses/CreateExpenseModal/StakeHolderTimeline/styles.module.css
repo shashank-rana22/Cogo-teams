@@ -32,3 +32,12 @@
 	display: flex;
 	width: 100%;
 }
+
+.status {
+	width: max-content;
+	padding: 2px 4px;
+	margin-left: -40px;
+	font-size: 12px;
+	background-color: #ffe69b;
+	border-radius: 4px;
+}

@@ -41,7 +41,7 @@ function ViewRecurringSummery({ itemData = {}, recurringState = '' }) {
 					setShowModal(true);
 				}}
 			>
-				View More
+				Details
 			</Button>
 		</div>
 

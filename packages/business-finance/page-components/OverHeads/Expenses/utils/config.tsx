@@ -52,36 +52,41 @@ export const expenseRecurringConfig = () => {
 			},
 			{
 				label : 'Category',
-				span  : 1,
+				span  : 1.2,
 				func  : 'renderCategory',
 			},
 			{
 				label   : 'Created on',
 				func    : 'getCreatedOn',
-				span    : 1.6,
+				span    : 1.2,
 				sorting : { name: 'createdDateSortBy' },
 			},
 			{
 				label : renderExpensePeriod(),
-				span  : 1.6,
+				span  : 1.4,
 				func  : 'renderExpensePeriod',
 			},
 			{
 				label   : 'Recurring Amount',
 				key     : 'recurringAmount',
-				span    : 1.6,
+				span    : 1.8,
 				func    : 'renderRecurringAmount',
 				sorting : { name: 'amountSortBy' },
-				// styles  : { display: 'flex', justifyContent: 'center' },
+			},
+			{
+				label : 'Ledger Amount',
+				key   : 'recurringAmount',
+				span  : 1.8,
+				func  : 'renderLedgerAmount',
 			},
 			{
 				label : 'Approved By',
 				func  : 'getApprovedByRecurring',
-				span  : 1.1,
+				span  : 1.2,
 			},
 			{
 				key  : 'actionButton',
-				span : 1.1,
+				span : 1.4,
 				func : 'addExpense',
 			},
 			{
@@ -116,7 +121,7 @@ export const expenseNonRecurringConfig = () => ({
 		{
 			label   : 'Invoice Amount',
 			func    : 'renderInvoiceAmount',
-			span    : 1.4,
+			span    : 1.6,
 			sorting : { name: 'invoiceAmountSortType' },
 		},
 		{
@@ -136,6 +141,12 @@ export const expenseNonRecurringConfig = () => ({
 			func    : 'renderPaid',
 			span    : 1.2,
 			sorting : { name: 'paidAmountSortType' },
+		},
+		{
+			label : 'Ledger Amount',
+			key   : 'recurringAmount',
+			span  : 1.2,
+			func  : 'renderLedgerAmount',
 		},
 		{
 			label : 'Invoice Dates',

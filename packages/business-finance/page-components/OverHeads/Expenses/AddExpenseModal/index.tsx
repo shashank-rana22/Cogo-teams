@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect, useState } from 'react';
 
 import { SummaryInterface } from '../../commons/Interfaces';
@@ -79,6 +80,7 @@ function AddExpenseModal({
 						isUploadConfirm={isUploadConfirm}
 						setIsUploadConfirm={setIsUploadConfirm}
 						setIsFormValidated={setIsFormValidated}
+						isTaxApplicable={tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]?.is_tax_applicable}
 					/>
 				) : (
 					<Summary

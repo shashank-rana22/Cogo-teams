@@ -1,5 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
+import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 import ExpenseDetailsForm from '../ExpenseDetailsForm';
 import NonRecurringSummary from '../NonRecurringSummary';
 import RecurringSummary from '../RecurringSummary';
@@ -10,11 +12,10 @@ interface Props {
 	createExpenseType: string;
 	recurringData?: object;
 	setRecurringData?: (obj: any) => void;
-	nonRecurringData?: object;
+	nonRecurringData?: { vendorID?: string };
 	setNonRecurringData?: (obj: any) => void;
 	setIsFormValidated?: (obj: any) => void;
 	setIncidentMangementId?: (obj) => void;
-	summeryOnlyModal?: boolean;
 }
 
 function CreateExpenseForm({
@@ -26,7 +27,6 @@ function CreateExpenseForm({
 	setNonRecurringData = () => {},
 	setIsFormValidated = () => {},
 	setIncidentMangementId = () => {},
-	summeryOnlyModal = false,
 }: Props) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
@@ -45,9 +45,11 @@ function CreateExpenseForm({
 		setFormData = setNonRecurringData;
 	}
 
+	const { vendorID } = nonRecurringData || {};
+	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 	return (
 		<div>
-			{active === 'Expense Details' && !summeryOnlyModal && (
+			{active === 'Expense Details' && (
 				<div style={{ marginTop: '40px' }}>
 					<ExpenseDetailsForm
 						formData={formData}
@@ -66,7 +68,6 @@ function CreateExpenseForm({
 				</div>
 			)}
 			{active === 'Upload Invoice'
-				&& !summeryOnlyModal
 				&& createExpenseType === 'nonRecurring' && (
 					<UploadInvoiceForm
 						formData={formData}
@@ -76,16 +77,18 @@ function CreateExpenseForm({
 						taxOptions={taxOptions}
 						setTaxOptions={setTaxOptions}
 						setIsFormValidated={setIsFormValidated}
+						isTaxApplicable={tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]?.is_tax_applicable}
 					/>
 			)}
 
-			{(active === 'Final Confirmation' || summeryOnlyModal) && (
+			{active === 'Final Confirmation' && (
 				<div>
 					{createExpenseType === 'nonRecurring' && (
 						<NonRecurringSummary
 							nonRecurringData={nonRecurringData}
 							setNonRecurringData={setNonRecurringData}
 							setIncidentMangementId={setIncidentMangementId}
+							tradePartyData={tradePartyData}
 						/>
 					)}
 					{createExpenseType === 'recurring' && (
