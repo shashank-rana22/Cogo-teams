@@ -9,7 +9,7 @@ function PortDetails({ data = {}, icon = {} }) {
 	const { port, trade_type } = data;
 
 	return (
-		<div className={`${styles.container} core_ui_port_conatiner`}>
+		<div className={styles.container}>
 			<ServiceIcon {...icon} />
 
 			<div className={styles.single_location}>
@@ -20,13 +20,13 @@ function PortDetails({ data = {}, icon = {} }) {
 
 			<div className={styles.port_detail}>
 				<div className={styles.port_code}>
-					<div className={`${styles.code} core_ui_port_code`}>
+					<div className={styles.code}>
 						(
 						{port?.port_code || port?.postal_code}
 						)
 					</div>
 
-					<div className={`${styles.country} core_ui_country_code`}>
+					<div className={styles.country}>
 						{port?.country_code}
 					</div>
 				</div>
@@ -37,7 +37,7 @@ function PortDetails({ data = {}, icon = {} }) {
 					interactive
 					content={port?.display_name}
 				>
-					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{port?.name}</div>
+					<div className={styles.ellipsis_text}>{port?.name}</div>
 				</Tooltip>
 			</div>
 		</div>
