@@ -1,14 +1,16 @@
+import { cl } from '@cogoport/components';
+
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
-function RenderPills({ detail, labels }) {
+function RenderPills({ detail = {}, labels = [] }) {
 	return (
 		<>
 			{(labels || []).map((label) => {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (
-						<div className={styles.box} key={label}>
+						<div className={cl`${styles.box} ${label}`} key={label}>
 							{value}
 						</div>
 					);

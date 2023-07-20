@@ -1,0 +1,50 @@
+.container {
+	padding: 16px 24px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.upper_section {
+	display: flex;
+	gap: 60px;
+	align-items: center;
+}
+
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.text_container {
+	display: flex;
+	flex-grow: 1;
+	gap: 30px;
+	align-items: center;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.key {
+	font-size: 20px;
+	font-weight: 700;
+	color: #221f20;
+}
+
+.card_container {
+	border: 1px solid #88cad1 !important;
+}
+
+.modalFooter {
+	display: flex;
+	gap: 10px;
+	justify-content: end;
+	margin-right: 10px;
+}

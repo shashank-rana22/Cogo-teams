@@ -16,13 +16,23 @@ const air_lines = {
 	rules         : { required: 'Air Line Details is Required' },
 };
 const service_provider = {
-	name           : 'service_provider_id',
-	type           : 'select',
-	label          : 'Service Provider',
-	span           : 5,
-	optionsListKey : 'verified-service-providers',
-	placeholder    : 'Select Service Provider',
-	rules          : { required: 'Service Provider is Required' },
+	name        : 'service_provider_id',
+	type        : 'async-select',
+	asyncKey    : 'organizations',
+	label       : 'Service Provider',
+	span        : 5,
+	placeholder : 'Service Provider',
+	params      : {
+		filters: {
+			account_type : 'service_provider',
+			status       : 'active',
+			kyc_status   : 'verified',
+			service      : 'air_freight',
+		},
+	},
+	rules: {
+		required: true,
+	},
 };
 
 const getControls = ({

@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -6,11 +6,14 @@ import React, { useState } from 'react';
 import usePostToSage from '../../hooks/usePostToSage';
 
 import CancellationModal from './CancellationModal';
+import Content from './Content';
 import styles from './styles.module.css';
 
-const { cogoport_entities: CogoportEntity } = GLOBAL_CONSTANTS || {};
-
 const TIME_VALUE = 86400000;
+
+type InvoiceAdditionals = {
+	reqCancelReason?:string
+};
 
 type ItemData = {
 	id?: string;
@@ -18,6 +21,7 @@ type ItemData = {
 	entityCode?: number;
 	irnGeneratedAt?: string;
 	isRevoked?: boolean;
+	invoiceAdditionals?: InvoiceAdditionals
 };
 interface INRCancel {
 	itemData?: ItemData;
@@ -28,83 +32,72 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id, entityCode, irnGeneratedAt, isRevoked } = itemData || {};
-
-	const isAfterADay =	irnGeneratedAt !== null
-		? Number(irnGeneratedAt) + TIME_VALUE >= Date.now()
-		: false;
+	const { invoiceStatus, id, entityCode, irnGeneratedAt, invoiceAdditionals = { } } = itemData || {};
+	const statusPresent = ['IRN_GENERATED', 'FAILED'].includes(invoiceStatus);
 
 	const { postToSage, loading } = usePostToSage({ id });
 
-	const { labels } = CogoportEntity[entityCode] || {};
+	const irnLabel = GLOBAL_CONSTANTS.cogoport_entities[entityCode].labels.irn_label;
 
-	const { irn_label: IRNLabel } = labels || {};
+	const sageAllowed = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('post_to_sage');
+	const cancelSupported = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+		?.feature_supported?.includes('cancel_e_invoice');
 
-	const entityFeatures = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('is_revoked');
+	const cancelApproved = (cancelSupported && invoiceAdditionals?.reqCancelReason)
+		|| (!cancelSupported && (irnGeneratedAt !== null ? Number(irnGeneratedAt) + TIME_VALUE >= Date.now() : false));
 
-	const GET_ENTITY = (isRevoked && entityFeatures) || !entityFeatures;
+	const hasOptions = (cancelApproved) || (statusPresent && sageAllowed);
 
-	const content = () => (
-		<div className={styles.container}>
-			{ isAfterADay && GET_ENTITY && (
-				<Button
-					size="sm"
-					type="button"
-					onClick={() => {
-						setShowCancellationModal(true);
-						setShow(false);
-					}}
-					style={{ marginBottom: '8px' }}
-				>
-					Cancel
-					{' '}
-					{IRNLabel}
-				</Button>
-			)}
-			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (
-				<Button
-					disabled={loading}
-					size="sm"
-					type="button"
-					onClick={postToSage}
-				>
-					Post to Sage
-				</Button>
-			)}
-		</div>
-	);
+	const rest = {
+		onClickOutside: () => setShow(false),
+	};
 
 	if (
-		(isAfterADay)
-		|| (['IRN_GENERATED', 'FAILED'].includes(invoiceStatus))
+		(cancelApproved) || (statusPresent)
 	) {
 		return (
-			<div className={styles.div_container}>
-				<Popover
-					placement="left"
-					visible={show}
-					render={content()}
-				>
-					<div>
-						<IcMOverflowDot
-							onClick={() => setShow(!show)}
-							style={{ cursor: 'pointer' }}
-							width="16px"
-							height="16px"
-						/>
-					</div>
-				</Popover>
+			hasOptions
+				? (
+					<div className={styles.div_container}>
+						<Popover
+							placement="left"
+							visible={show}
+							render={(
+								<Content
+									cancelApproved={cancelApproved}
+									statusPresent={statusPresent}
+									sageAllowed={sageAllowed}
+									loading={loading}
+									postToSage={postToSage}
+									setShowCancellationModal={setShowCancellationModal}
+									setShow={setShow}
+									irnLabel={irnLabel}
+								/>
+							)}
+							{...rest}
+						>
+							<div>
+								<IcMOverflowDot
+									onClick={() => setShow(!show)}
+									style={{ cursor: 'pointer' }}
+									width="16px"
+									height="16px"
+								/>
+							</div>
+						</Popover>
 
-				{showCancellationModal && (
-					<CancellationModal
-						itemData={itemData}
-						showCancellationModal={showCancellationModal}
-						setShowCancellationModal={setShowCancellationModal}
-						IRNLabel={IRNLabel}
-						refetch={refetch}
-					/>
-				)}
-			</div>
+						{showCancellationModal && (
+							<CancellationModal
+								itemData={itemData}
+								showCancellationModal={showCancellationModal}
+								setShowCancellationModal={setShowCancellationModal}
+								IRNLabel={irnLabel}
+								refetch={refetch}
+							/>
+						)}
+					</div>
+				)
+				: null
 		);
 	}
 

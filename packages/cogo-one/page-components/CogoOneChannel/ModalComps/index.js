@@ -1,29 +1,23 @@
 import RaiseTicket from '../../../common/RaiseTicket';
-import AgentModal from '../AgentModal';
-import DialCallModal from '../DialCallModal';
 import FeedbackModal from '../FeedbackModal';
 import ReminderModal from '../ReminderModal';
 
+import OrgUsers from './OrgUsers';
+
 function ModalComp({
-	agentDetails, setAgentDetails, showFeedback, setShowFeedback, raiseTicketModal, setRaiseTicketModal,
-	refetchTickets, firestore, showDialModal, setShowDialModal, userId, getAssignedChats,
+	raiseTicketModal = {},
+	setRaiseTicketModal = () => {},
+	refetchTickets = () => {},
+	firestore = {},
+	userId = '',
+	setOpenKamContacts = () => {},
+	openKamContacts = false,
+	setActiveTab = () => {},
 }) {
 	return (
 		<>
-			{agentDetails && (
-				<AgentModal
-					agentDetails={agentDetails}
-					setAgentDetails={setAgentDetails}
-				/>
-			)}
-			{
-				showFeedback && (
-					<FeedbackModal
-						showFeedback={showFeedback}
-						setShowFeedback={setShowFeedback}
-					/>
-				)
-			}
+			<FeedbackModal />
+
 			{raiseTicketModal?.state && (
 				<RaiseTicket
 					setRaiseTicketModal={setRaiseTicketModal}
@@ -31,11 +25,17 @@ function ModalComp({
 					refetchTickets={refetchTickets}
 				/>
 			)}
-			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
-			{showDialModal && (
-				<DialCallModal
-					setShowDialModal={setShowDialModal}
-					showDialModal={showDialModal}
+
+			<ReminderModal
+				firestore={firestore}
+				agentId={userId}
+			/>
+
+			{openKamContacts && (
+				<OrgUsers
+					openKamContacts={openKamContacts}
+					setOpenKamContacts={setOpenKamContacts}
+					setActiveTab={setActiveTab}
 				/>
 			)}
 		</>

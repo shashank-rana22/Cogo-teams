@@ -5,12 +5,12 @@ import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
-import { useContext, useState, useCallback } from 'react';
+import { useContext, useState, useCallback, useEffect } from 'react';
 
-import DocumentHoldHeader from '../DocumentHoldHeader';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
+import ShipmentTags from '../ShipmentTags';
 import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
@@ -21,20 +21,22 @@ const TAB_MAPPING = {
 	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	tracking  : dynamic(() => import('@cogoport/air-modules/components/Tracking'), { ssr: false }),
 };
 
 const UNAUTHORIZED_STATUS_CODE = 403;
 
 function DefaultView() {
+	const router = useRouter();
+
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		servicesList = [], getShipmentStatusCode,
+		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
-
-	const router = useRouter();
 
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
@@ -66,22 +68,30 @@ function DefaultView() {
 			shipmentData : shipment_data,
 			servicesData : servicesList,
 		},
+		tracking: {
+			shipmentData: shipment_data,
+		},
 	};
+
+	useEffect(() => {
+		if (activeTab) {
+			refetchServices();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeTab]);
 
 	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<h2 className={styles.error_heading}>Something Went Wrong!</h2>
-
 				<div className={styles.error_subheading}>We are looking into it.</div>
-
 				<Button
 					onClick={() => router.push(`${window.location.origin}
 					/${router?.query?.partner_id}/shipment-management`)}
 					className={styles.refresh}
 				>
 					<IcMArrowBack />
-					&nbsp;
+					{' '}
 					Back to Bookings
 				</Button>
 			</div>
@@ -102,9 +112,7 @@ function DefaultView() {
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
-
-			{!isEmpty(shipment_data?.document_delay_status) && <DocumentHoldHeader />}
-
+			<ShipmentTags shipmentData={shipment_data} />
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
 				{conditionMapping.poc_sop ? <PocSop /> : null}

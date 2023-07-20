@@ -1,43 +1,58 @@
-import { cl } from '@cogoport/components';
-
 import MailConversation from './MailConversation';
-import Messages from './Messages';
+import MessageComponent from './MessageComponent';
 import styles from './styles.module.css';
 import VoiceCall from './VoiceCall';
 
+const CONVERSATION_COMPONENT_MAPPING = {
+	message : MessageComponent,
+	voice   : VoiceCall,
+	mail    : MailConversation,
+};
+
 function Conversations({
-	activeTab = '',
-	activeMessageCard = {},
-	firestore,
-	activeVoiceCard,
-	suggestions = [],
-	userId,
-	isomniChannelAdmin = false,
-	mailProps,
-	setActiveMessage = () => {},
+	activeTab = {},
+	firestore = {},
+	userId = '',
 	setRaiseTicketModal = () => {},
 	viewType = '',
+	setActiveRoomLoading = false,
+	mailProps = {},
+	setActiveTab = () => {},
+	suggestions = [],
+	setModalType = () => {},
 }) {
+	const componentPropsMapping = {
+		message: {
+			firestore,
+			activeTab,
+			userId,
+			viewType,
+			setRaiseTicketModal,
+			setActiveRoomLoading,
+			setActiveTab,
+			suggestions,
+			setModalType,
+		},
+		voice: {
+			activeVoiceCard: activeTab?.data || {},
+		},
+		mail: {
+			mailProps,
+		},
+	};
+
+	const Component = CONVERSATION_COMPONENT_MAPPING[activeTab?.tab] || null;
+
+	if (!Component) {
+		return null;
+	}
+
 	return (
-		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
-			{activeTab === 'message' && (
-				<Messages
-					activeMessageCard={activeMessageCard}
-					firestore={firestore}
-					suggestions={suggestions}
-					userId={userId}
-					isomniChannelAdmin={isomniChannelAdmin}
-					setActiveMessage={setActiveMessage}
-					setRaiseTicketModal={setRaiseTicketModal}
-					viewType={viewType}
-				/>
-			)}
-			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}
-			{activeTab === 'mail' && (
-				<MailConversation
-					mailProps={mailProps}
-				/>
-			)}
+		<div className={styles.container}>
+			<Component
+				key={activeTab?.tab}
+				{...(componentPropsMapping[activeTab?.tab] || {})}
+			/>
 		</div>
 	);
 }

@@ -5,7 +5,7 @@
 }
 
 .container {
-	width: 24vw;
+	width: 26vw;
 	height: 50vh;
 	padding: 24px;
 	overflow: scroll;
@@ -13,6 +13,11 @@
 	color: #4f4f4f;
 	background: #fff;
 	border-radius: 6px;
+
+	img {
+		max-width: 20vw;
+		max-height: 200px;
+	}
 }
 
 .header {

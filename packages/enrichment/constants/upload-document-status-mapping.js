@@ -1,5 +1,5 @@
 const UPLOAD_DOCUMENT_STATUS_MAPPING = {
-	active     : 'green',
+	success    : 'green',
 	inactive   : 'orange',
 	processing : 'yellow',
 	processed  : 'blue',

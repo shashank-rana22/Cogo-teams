@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAnnouncement,
 	IcMSettings,
@@ -204,7 +205,7 @@ const navigationMappingAdmin = {
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
 			...apis.sales_dashboard,
-
+			...apis.cogopoints,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -691,8 +692,8 @@ const navigationMappingAdmin = {
 			},
 			{
 				title : 'Operators',
-				href  : '/operators',
-				as    : '/operators',
+				href  : '/v2/operators',
+				as    : '/v2/operators',
 				type  : 'link',
 			},
 		],
@@ -889,7 +890,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-dunnings',
 				title         : 'Dunnings',
 				href          : '/v2/business-finance/dunnings/[active_tab]',
-				as            : '/v2/business-finance/dunnings/campaign-management',
+				as            : '/v2/business-finance/dunnings/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.business_finance_dunnings,
@@ -1131,6 +1132,33 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_events'],
 		module_type   : 'dashboards',
 	},
+	revenue_desk: {
+		key       : 'revenue_desk',
+		title     : 'Revenue Desk',
+		isSubNavs : true,
+		icon      : IcMCoe,
+		options   : [
+			{
+				key           : 'revenue_desk-bookings',
+				title         : 'Bookings',
+				href          : '/v2/revenue-desk',
+				as            : '/v2/revenue-desk',
+				type          : '',
+				main_apis     : [],
+				possible_apis : [...apis.revenue_desk, ...apis.sop],
+
+			},
+			{
+				key           : 'revenue_desk-contracts',
+				title         : 'Contracts',
+				href          : '/v2/contracts',
+				as            : '/v2/contracts',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.contracts,
+			},
+		],
+	},
 	coe: {
 		key         : 'coe',
 		title       : 'Center of Excellence [COE]',
@@ -1214,112 +1242,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipment_air_csr_sheets'],
 				possible_apis : apis.ff_cost_booking,
-			},
-			{
-				key           : 'coe-fcl_revenue_desk',
-				title         : 'FCL Revenue Desk',
-				href          : '/revenue-desk/fcl',
-				as            : '/revenue-desk/fcl',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-
-			},
-			{
-				key           : 'coe-lcl_revenue_desk',
-				title         : 'LCL Revenue Desk',
-				href          : '/revenue-desk/lcl',
-				as            : '/revenue-desk/lcl',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
-
-			},
-			{
-				key           : 'coe-air_revenue_desk',
-				title         : 'AIR Revenue Desk',
-				href          : '/revenue-desk/air',
-				as            : '/revenue-desk/air',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
-
-			},
-			{
-				key           : 'coe-domestic_air_revenue_desk',
-				title         : 'Domestic Air Revenue Desk',
-				href          : '/revenue-desk/domestic-air',
-				as            : '/revenue-desk/domestic-air',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-
-			},
-			{
-				key           : 'coe-ftl_revenue_desk',
-				title         : 'FTL Revenue Desk',
-				href          : '/revenue-desk/ftl',
-				as            : '/revenue-desk/ftl',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-
-			},
-			{
-				key           : 'coe-ltl_revenue_desk',
-				title         : 'LTL Revenue Desk',
-				href          : '/revenue-desk/ltl',
-				as            : '/revenue-desk/ltl',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-
-			},
-			{
-				key           : 'coe-air-customs_revenue_desk',
-				title         : 'Air Customs Revenue Desk',
-				href          : '/revenue-desk/air-customs',
-				as            : '/revenue-desk/air-customs',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-			},
-			{
-				key           : 'coe-fcl-customs_revenue_desk',
-				title         : 'Fcl Customs Revenue Desk',
-				href          : '/revenue-desk/fcl-customs',
-				as            : '/revenue-desk/fcl-customs',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-			},
-			{
-				key           : 'coe-fcl-cfs_revenue_desk',
-				title         : 'Fcl Cfs Revenue Desk',
-				href          : '/revenue-desk/fcl-cfs',
-				as            : '/revenue-desk/fcl-cfs',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-			},
-			{
-				key           : 'coe-haulage_revenue_desk',
-				title         : 'Haulage Revenue Desk',
-				href          : '/revenue-desk/haulage',
-				as            : '/revenue-desk/haulage',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
-
-			},
-			{
-				key           : 'coe-lcl-customs_revenue_desk',
-				title         : 'Lcl Customs Revenue Desk',
-				href          : '/revenue-desk/lcl-customs',
-				as            : '/revenue-desk/lcl-customs',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.shipment,
 			},
 			{
 				key       : 'coe-bl_do',
@@ -1417,7 +1339,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1429,12 +1351,21 @@ const navigationMappingAdmin = {
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 			{
+				key           : 'coe-risk-management',
+				title         : 'Risk Management',
+				href          : '/v2/risk-management',
+				as            : '/v2/risk-management',
+				type          : 'link',
+				main_apis     : ['list_risk_prone_shipments'],
+				possible_apis : [...apis.risk_management],
+			},
+			{
 				key           : 'coe-so2_surface',
 				title         : 'SO2 Dashboard',
 				href          : '/v2/so2-surface',
 				as            : '/v2/so2-surface',
 				type          : 'link',
-				main_apis     : [],
+				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
 		],
@@ -1914,7 +1845,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.ground_ops,
 		module_type   : 'dashboards',
 	},
-
+	printing_desk: {
+		key           : 'printing_desk',
+		title         : 'Printing Desk',
+		href          : '/v2/printing-desk',
+		as            : '/v2/printing-desk',
+		main_apis     : [],
+		icon          : IcMDocument,
+		possible_apis : apis.printing_desk,
+		module_type   : 'dashboards',
+	},
 	airline_booking_plugin: {
 		key           : 'airline_booking_plugin',
 		title         : 'Airline Booking Plugin',
@@ -1931,7 +1871,7 @@ const navigationMappingAdmin = {
 		title         : 'Enrichment',
 		href          : '/v2/enrichment',
 		as            : '/v2/enrichment',
-		main_apis     : ['/list_lead_organizations_enrichment'],
+		main_apis     : ['get_allocation_feedback_requests'],
 		possible_apis : apis.enrichment,
 		module_type   : 'dashboards',
 	},
@@ -1969,7 +1909,7 @@ const navigationMappingAdmin = {
 		title : 'CogoVerse',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_verse_svg}
 				alt="cogo-verse"
 				width="22px"
 				height="22px"
@@ -2053,7 +1993,7 @@ const navigationMappingAdmin = {
 		title : 'Cogo One',
 		icon  : () => (
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				src={GLOBAL_CONSTANTS.image_url.cogo_one_svg}
 				alt="cogo-one"
 				width="22px"
 				height="22px"
@@ -2127,15 +2067,6 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
-	},
-	contracts: {
-		key           : 'contracts',
-		title         : 'Contracts Revenue Desk',
-		href          : '/v2/contracts',
-		as            : '/v2/contracts',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : apis.contracts,
 	},
 	cogo_academy: {
 		key       : 'cogo_academy',
@@ -2305,6 +2236,16 @@ const navigationMappingAdmin = {
 				possible_apis : [],
 				icon          : IcMDataPipeline,
 			},
+
+			{
+				key           : 'ihls-file_upload',
+				title         : 'IHLS File Uploader',
+				href          : '/v2/ihls/file-upload',
+				as            : '/v2/ihls/file-upload',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
+			},
 		],
 	},
 	air_repository: {
@@ -2464,6 +2405,15 @@ const navigationMappingAdmin = {
 			},
 		],
 
+	},
+	ftl_admin: {
+		key           : 'ftl_admin',
+		title         : 'FTL Admin',
+		type          : 'link',
+		module_type   : 'dashboards',
+		href          : '/v2/ftl-admin',
+		as            : '/v2/ftl-admin',
+		possible_apis : apis.ftl_admin,
 	},
 };
 

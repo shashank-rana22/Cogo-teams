@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
@@ -8,6 +9,14 @@ import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
+const MINIMUM_LENGTH = 1;
+const MINIMUM_VALUE = 0;
+const INCREMENT_CONSTANT = 1;
+const MINIMUM_REMOVEABLE_NUMBER = 1;
+const TOTAL_SPAN = 12;
+const SPAN_CONVERTIABLE_FACTOR = 100;
+const START_ITERATING_VALUE = 0;
+
 function Child({
 	controls = [],
 	control = {},
@@ -17,43 +26,45 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field = {},
-	disabled,
+	disabled = false,
 	error = {},
 	formValues = {},
+	id = '',
+	length = MINIMUM_VALUE,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
-	let span = 0;
+	const TOTAL_FIELDS = [];
+	let span = MINIMUM_VALUE;
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
+		span += fields.span || TOTAL_SPAN;
+		if (span === TOTAL_SPAN) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
+			span = MINIMUM_VALUE;
+		} else if (span < TOTAL_SPAN) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[0]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[0]?.url?.fileName === '') {
+	if (formValues?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += 1) {
+		for (let i = START_ITERATING_VALUE; i < elements.length; i += INCREMENT_CONSTANT) {
 			elements[i].style.display = 'none';
 		}
 	}
@@ -90,10 +101,10 @@ function Child({
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
 				{startCase(name || 'document')}
-				&nbsp;
-				{index + 1}
+				{' '}
+				{index + INCREMENT_CONSTANT}
 			</h3>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
@@ -110,14 +121,16 @@ function Child({
 
 						const show = 'show' in controlItem ? controlItem.show : true;
 
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						const flex = ((controlItem?.span || TOTAL_SPAN) / TOTAL_SPAN) * SPAN_CONVERTIABLE_FACTOR;
+
 						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
+
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>
@@ -128,7 +141,7 @@ function Child({
 									? 								 (
 										<Element
 											{...newControl}
-											{...extraProps}
+											{...EXTRA_PROPS}
 											style={{ minWidth: '0px' }}
 											key={`${name}.${index}.${controlItem.name}`}
 											name={`${name}.${index}.${controlItem.name}`}
@@ -136,6 +149,7 @@ function Child({
 											control={control}
 											size="sm"
 											disabled={newControl?.disabled ?? (disabled || disable)}
+											id={id}
 										/>
 									)
 									: null}
@@ -159,11 +173,11 @@ function Child({
 
 				</div>
 			))}
-			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+			{showDeleteButton && index >= noDeleteButtonTill && !disabled && length > MINIMUM_LENGTH ? (
 				<div className={styles.delete_icon}>
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, MINIMUM_REMOVEABLE_NUMBER)}
 					/>
 				</div>
 			) : null}

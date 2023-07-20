@@ -1,13 +1,10 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip, Button, cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getBuyPrice from '../../../utils/getBuyPrice';
 
 import styles from './styles.module.css';
 
-const VOLUMETRIC_WEIGHT = 166.67;
-const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
-const DECIMAL_PLACE = 2;
 const LIST_PREFERENCE_RATE_STEP = 1;
 function ListItem({
 	data = {},
@@ -16,7 +13,9 @@ function ListItem({
 	handleProceed = () => {},
 	step = 1,
 	bookingMode = '',
+	primary_service = {},
 }) {
+	const { hs_code, commodity_description } = primary_service;
 	return (
 		<div className={styles.body}>
 			<div className={styles.space_between}>
@@ -32,76 +31,65 @@ function ListItem({
 				<div>
 					<div className={styles.heading}>Airline</div>
 					<div className={styles.sub_heading}>
-						{item?.source === 'system_rate'
-							? data?.airline?.business_name || '-'
-							: data?.reverted_airline?.business_name || '-'}
+						{ data?.airline?.business_name || '-'}
 					</div>
 				</div>
-
 				<div>
-					<div className={styles.heading}>No of Pkts</div>
-					<div className={styles.sub_heading}>{data?.service?.packages_count || '-'}</div>
-				</div>
-
-				<div>
-					<div className={styles.heading}>Vol. Weight</div>
+					<div className={styles.heading}>Source of Rate</div>
 					<div className={styles.sub_heading}>
-						{((data?.service?.volume
-							|| DEFAULT_VALUE_FOR_NULL_HANDLING) * VOLUMETRIC_WEIGHT).toFixed(DECIMAL_PLACE)}
+						{data?.source || '-'}
 					</div>
 				</div>
-				<div>
-					<div className={styles.heading}>Gross Weight</div>
-					<div className={styles.sub_heading}>{data?.service?.weight || '-'}</div>
-				</div>
-				<div>
-					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
-				</div>
-				{data?.service?.commodity_description && (
+				{commodity_description && (
 					<div>
-						<div className={styles.heading}>Commodity Description</div>
+						<div className={styles.heading}>Commodity Desc.</div>
 						<Tooltip
-							content={data?.service?.commodity_description}
+							content={commodity_description}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.commodity_description}
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{commodity_description}
 							</div>
 						</Tooltip>
 					</div>
 				)}
-				{data?.service?.hs_code &&	(
+				{hs_code?.hs_code_name &&	(
 					<div>
 						<div className={styles.heading}>HS Code</div>
 						<Tooltip
-							content={data?.service?.hs_code}
+							content={hs_code?.hs_code_name}
 							placement="top"
 						>
-							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
-								{data?.service?.hs_code}
+							<div className={cl`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{hs_code?.hs_code_name}
 							</div>
 						</Tooltip>
 					</div>
 				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
-					<div className={styles.sub_heading}>{startCase(data?.service?.price_type) || '-'}</div>
+					<div className={styles.sub_heading}>
+						{startCase(data?.price_type) || '-'}
+					</div>
+				</div>
+				<div>
+					<div className={styles.heading}>Operation Type</div>
+					<div className={styles.sub_heading}>
+						{startCase(data?.operation_type) || '-'}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Buy Price</div>
-					<div className={styles.sub_heading}>{getBuyPrice(data, item.source) || '-'}</div>
+					<div className={styles.sub_heading}>{getBuyPrice(data) || '-'}</div>
 				</div>
-				{item?.source === 'flash_booking' && (
-					<div>
-						<div className={styles.heading}>Min. Price</div>
-						<div className={styles.sub_heading}>
-							{data?.service?.is_minimum_price_shipment ? 'Yes' : 'No'}
-						</div>
+				<div>
+					<div className={styles.heading}>Min. Price</div>
+					<div className={styles.sub_heading}>
+						{(data?.service?.is_minimum_price_rate) ? 'Yes' : 'No'}
 					</div>
-				)}
-				{data?.data?.rate_procurement_proof_url
-				&& item?.source === 'flash_booking'
+				</div>
+				{(data?.rate_procurement_proof_url)
+				&& (data?.source === 'flashed')
 				&& (
 					<div>
 						<div className={styles.heading}>Rate Proof</div>
@@ -110,7 +98,7 @@ function ListItem({
 								themeType="linkUi"
 								size="md"
 								onClick={() => window.open(
-									data?.data?.rate_procurement_proof_url,
+									data?.rate_procurement_proof_url,
 									'_blank',
 								)}
 							>
