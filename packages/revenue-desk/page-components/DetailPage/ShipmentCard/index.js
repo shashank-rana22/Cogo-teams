@@ -169,18 +169,6 @@ function ShipmentCard({ itemData, priceData }) {
 								},
 							})}
 						</span>
-						<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
-						<span>
-							{formatAmount({
-								amount   : Number(itemData?.discount_amount) / Number(priceData?.exchange_rate),
-								currency : 'USD',
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</span>
 					</div>
 				</div>
 
