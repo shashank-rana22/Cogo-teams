@@ -49,18 +49,14 @@
 	margin: 8px;
 }
 
-.ribbon_container {
+.ribbon_pop {
 	position: relative;
 	top: -4px;
 	left: -26px;
-	margin-bottom: 4px;
-}
-
-.ribbon_pop {
-	position: relative;
 	display: inline-block;
 	padding-right: 16px;
 	padding-left: 12px;
+	margin-bottom: 4px;
 	background: #c4dc91;
 }
 

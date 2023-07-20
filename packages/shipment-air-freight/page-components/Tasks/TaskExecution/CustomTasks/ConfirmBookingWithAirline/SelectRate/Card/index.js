@@ -154,9 +154,7 @@ function Card({
 			</Modal>
 			<div className={styles.header}>
 				{ bookingMode === 'e_booking' && (
-					<div className={styles.ribbon_container}>
-						<div className={styles.ribbon_pop}>E-Booking</div>
-					</div>
+					<div className={styles.ribbon_pop}>E-Booking</div>
 				)}
 				<div className={styles.row}>
 					<div className={styles.priority_text}>
