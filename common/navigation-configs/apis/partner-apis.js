@@ -13012,6 +13012,10 @@ const partner = {
 			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_payments_dunning_card_data',
+			access_type : 'private',
+		},
 	],
 	ftl_admin: [
 		{

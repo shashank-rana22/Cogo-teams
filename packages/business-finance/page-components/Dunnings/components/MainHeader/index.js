@@ -1,9 +1,16 @@
+import { Placeholder } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
+
+import useGetTotalStats from '../../hooks/useGetTotalStats';
 
 import styles from './styles.module.css';
 
 function MainHeader({ activeTab = '', setActiveTab = null }) {
 	const { push } = useRouter();
+
+	const { statsLoading, statsData } = useGetTotalStats();
+	const { totalCustomers = 0, totalOutstandingAmount, activeCycles = 0, ledgerCurrency } = statsData || {};
 
 	const handleTabChange = (tab) => {
 		if (activeTab !== tab) {
@@ -29,13 +36,36 @@ function MainHeader({ activeTab = '', setActiveTab = null }) {
 						<div style={{ display: 'flex' }}>
 							<span>
 								Total Due:
-								{' '}
+							</span>
+							<span className={styles.stats_data}>
+								{ !statsLoading ? formatAmount({
+									amount   : totalOutstandingAmount,
+									currency : ledgerCurrency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 0,
+									},
+								}) : <Placeholder width={100} height={16} />}
+
 							</span>
 						</div>
 						<div className={styles.collection_rate}>
 							<span>
 								Customers:
 								{' '}
+							</span>
+							<span className={styles.stats_data}>
+								{!statsLoading
+									? formatAmount({
+										amount  : totalCustomers,
+										options : {
+											style                 : 'decimal',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 0,
+										},
+									})
+									: <Placeholder width={100} height={16} />}
 							</span>
 						</div>
 					</div>
@@ -58,7 +88,18 @@ function MainHeader({ activeTab = '', setActiveTab = null }) {
 									Ongoing Campaigns:
 									{' '}
 								</span>
-
+								<div style={{ marginTop: '8px' }}>
+									{!statsLoading
+										? formatAmount({
+											amount  : activeCycles,
+											options : {
+												style                 : 'decimal',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 0,
+											},
+										})
+										: <Placeholder width={100} height={16} />}
+								</div>
 							</div>
 						</div>
 					</div>
