@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 // eslint-disable-next-line max-len
-import AdditionalServicesForm from '../../page-components/SearchResults/components/AdditionalServices/AdditionalServicesForm';
+import AdditionalServicesForm from '../OtherServices/AdditionalServices/AdditionalServicesForm';
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
 
 import Back from './Back';

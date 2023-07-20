@@ -20,6 +20,7 @@ function ServiceItem({
 	refetch = () => {},
 	disabled = false,
 	setIsDisabled = () => {},
+	checkout_id = '',
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDelete, setShowDelete] = useState(false);
@@ -31,12 +32,14 @@ function ServiceItem({
 		possible_subsidiary_services,
 		data,
 		refetch,
+		checkout_id,
 	});
 
 	const { loading: deleteLoading, handleDeleteService } = useDeleteSubsidiaryService({
 		refetch,
 		data,
 		setShow: setShowDelete,
+		checkout_id,
 	});
 
 	const { label, value } = itemData || {};

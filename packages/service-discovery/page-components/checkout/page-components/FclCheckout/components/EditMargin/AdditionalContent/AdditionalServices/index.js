@@ -1,14 +1,14 @@
 import { Accordion } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 
-import SubsidiaryServices from '../../../../../../../../common/AdditionalServices/SubsidiaryServices';
-import AdditionalServicesComponent from '../../../../../../../SearchResults/components/AdditionalServices';
+import AdditionalServicesComponent from '../../../../../../../../common/OtherServices/AdditionalServices';
+import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
 
 import styles from './styles.module.css';
 
-const CargoInsuranceContainer = dynamic(
+const CargoInsurance = dynamic(
 	() => import(
-		'../../../../../../../../common/AdditionalServices/CargoInsuranceContainer'
+		'../../../../../../../../common/OtherServices/CargoInsurance'
 	),
 	{ ssr: false },
 );
@@ -41,7 +41,7 @@ function AdditionalServices({
 				refetchSearch={getCheckout}
 			/>
 
-			<CargoInsuranceContainer
+			<CargoInsurance
 				key={loading}
 				data={finalDetails}
 				refetch={getCheckout}
@@ -49,8 +49,9 @@ function AdditionalServices({
 
 			<SubsidiaryServices
 				possible_subsidiary_services={possible_subsidiary_services}
-				data={detail}
+				data={finalDetails}
 				refetch={getCheckout}
+				checkout_id={id}
 			/>
 		</Accordion>
 	);

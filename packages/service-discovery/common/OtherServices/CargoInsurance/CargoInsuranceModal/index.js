@@ -16,7 +16,7 @@ import Loading from './Loading';
 import POLICY_TYPE_MAPPING from './utils/policy-type-mapping.json';
 import TRANSIT_MODE_MAPPING from './utils/transit-mode-mapping.json';
 
-function CargoInsurance({
+function CargoInsuranceModal({
 	addCargoInsurance = false,
 	setAddCargoInsurance = () => {},
 	origin_country_id = '',
@@ -215,4 +215,4 @@ function CargoInsurance({
 	);
 }
 
-export default CargoInsurance;
+export default CargoInsuranceModal;

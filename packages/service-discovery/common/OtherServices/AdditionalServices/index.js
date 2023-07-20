@@ -2,9 +2,9 @@ import { Select } from '@cogoport/components';
 import { IcCFtick, IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { serviceMappings } from '../../../../configs/AdditionalServicesConfig';
-import Incoterms from '../../../../configs/incoterms.json';
-import useSpotSearchService from '../../hooks/useCreateSpotSearchService';
+import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
+import Incoterms from '../../../configs/incoterms.json';
+import useSpotSearchService from '../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 
 import { getFclPayload } from './configs';
 import ICONS_MAPPING from './icons-mapping';

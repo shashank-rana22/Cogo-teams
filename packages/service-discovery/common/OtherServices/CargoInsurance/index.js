@@ -1,10 +1,10 @@
 import { IcACarriageInsurancePaidTo, IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import CargoInsurance from '../CargoInsurance';
-import useDeleteCargoInsurance from '../CargoInsurance/hooks/useDeleteCargoInsurance';
 import DeleteServiceModal from '../DeleteServiceModal';
 
+import CargoInsuranceModal from './CargoInsuranceModal';
+import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
 import styles from './styles.module.css';
 
 const isCargoInsurancePresent = (services) => {
@@ -14,7 +14,7 @@ const isCargoInsurancePresent = (services) => {
 	return isAlreadyPresent;
 };
 
-function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
+function CargoInsurance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -103,7 +103,7 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 			</div>
 
 			{showModal && (
-				<CargoInsurance
+				<CargoInsuranceModal
 					destination_country_id={destination_country_id}
 					origin_country_id={origin_country_id}
 					trade_type={trade_type}
@@ -134,4 +134,4 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 	);
 }
 
-export default CargoInsuranceContainer;
+export default CargoInsurance;

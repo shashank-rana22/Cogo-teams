@@ -4,18 +4,18 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import SubsidiaryServices from '../../../../common/AdditionalServices/SubsidiaryServices';
-import AdditionalServices from '../AdditionalServices';
+import AdditionalServices from '../../../../common/OtherServices/AdditionalServices';
+import SubsidiaryServices from '../../../../common/OtherServices/SubsidiaryServices';
 import Bundles from '../Bundles';
 import FclCard from '../RateCard/FclCard';
 
 import styles from './styles.module.css';
 
-const ZERO_VALUE = 0;
+const DEFAULT_VALUE = 0;
 
-const CargoInsuranceContainer = dynamic(
+const CargoInsurance = dynamic(
 	() => import(
-		'../../../../common/AdditionalServices/CargoInsuranceContainer'
+		'../../../../common/OtherServices/CargoInsurance'
 	),
 	{ ssr: false },
 );
@@ -42,8 +42,6 @@ function SelectedRateCard({
 	refetchSearch = () => {},
 }) {
 	const PrimaryService = detail?.search_type;
-
-	console.log('rateCardData', rateCardData);
 
 	const { total_price_discounted, total_price_currency } = rateCardData;
 
@@ -97,7 +95,7 @@ function SelectedRateCard({
 								refetchSearch={refetchSearch}
 							/>
 
-							<CargoInsuranceContainer
+							<CargoInsurance
 								data={detail}
 								refetch={refetch}
 								primary_service={PrimaryService}
@@ -109,7 +107,7 @@ function SelectedRateCard({
 									Total landed Cost:
 									<span style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
 										{formatAmount({
-											amount   : total_price_discounted || ZERO_VALUE,
+											amount   : total_price_discounted || DEFAULT_VALUE,
 											currency : total_price_currency,
 											options  : {
 												style                 : 'currency',

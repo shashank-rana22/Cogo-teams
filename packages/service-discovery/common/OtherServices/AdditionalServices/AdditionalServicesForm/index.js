@@ -3,8 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
-import getElementController from '../../../../../configs/getElementController';
-import useSpotSearchService from '../../../hooks/useCreateSpotSearchService';
+import getElementController from '../../../../configs/getElementController';
+import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import { getFclPayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
 
