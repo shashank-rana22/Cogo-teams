@@ -11,12 +11,10 @@ import VideoCallTimer from './VideoCallTimer';
 function VideoCallScreen({
 	options = {},
 	setOptions = () => {},
-	setStreams = () => {},
 	streams = {},
 	callEnd = () => {},
-	callUpdate = () => {},
-	peerRef = null,
 	callDetails = {},
+	firestore,
 }, ref) {
 	const { calling_type, peer_details, calling_details = {} } = callDetails || {};
 	const { user_name = 'Unknown' } = peer_details || {};
@@ -29,11 +27,10 @@ function VideoCallScreen({
 	const { stopCall, shareScreen, micOn, videoOn } = useVideocallOptions({
 		options,
 		setOptions,
-		setStreams,
 		streams,
 		callEnd,
-		callUpdate,
-		peerRef,
+		callDetails,
+		firestore,
 	});
 
 	const handleMinimize = () => {
@@ -53,6 +50,8 @@ function VideoCallScreen({
 				</div>
 				<div className={styles.calling_options}>
 					<VideoCallOptions
+						firestore={firestore}
+						callDetails={callDetails}
 						stopCall={stopCall}
 						shareScreen={shareScreen}
 						options={options}
@@ -60,7 +59,6 @@ function VideoCallScreen({
 						micOn={micOn}
 						videoOn={videoOn}
 						callingDetails={calling_details}
-						callUpdate={callUpdate}
 					/>
 				</div>
 
@@ -108,6 +106,8 @@ function VideoCallScreen({
 
 					<div className={styles.calling_options}>
 						<VideoCallOptions
+							firestore={firestore}
+							callDetails={callDetails}
 							stopCall={stopCall}
 							shareScreen={shareScreen}
 							options={options}
@@ -115,7 +115,6 @@ function VideoCallScreen({
 							micOn={micOn}
 							videoOn={videoOn}
 							callingDetails={calling_details}
-							callUpdate={callUpdate}
 						/>
 					</div>
 				</div>

@@ -10,6 +10,8 @@ import {
 } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
+import { callUpdate } from '../../utils';
+
 import styles from './styles.module.css';
 
 function CustomTootTipContent({ icon = () => {}, content = '' }) {
@@ -21,23 +23,24 @@ function CustomTootTipContent({ icon = () => {}, content = '' }) {
 }
 
 function VideoCallOptions({
+	firestore,
+	callDetails,
 	stopCall = () => {},
-	// shareScreen = () => {},
 	options = {},
 	setOptions = () => {},
 	micOn = () => {},
 	videoOn = () => {},
 	callingDetails = {},
-	callUpdate = () => {},
 }) {
 	const { isScreenShareActive = false, isMicActive = false, isVideoActive = false } = options || {};
 	const { request_screen_share = false } = callingDetails || {};
 
 	const handleRequestScreenShare = () => {
-		const data = ({
-			request_screen_share: !request_screen_share,
+		callUpdate({
+			data            : { request_screen_share: !request_screen_share },
+			firestore,
+			calling_room_id : callDetails?.calling_room_id,
 		});
-		callUpdate(data);
 	};
 
 	useEffect(() => {

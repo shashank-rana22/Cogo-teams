@@ -1,20 +1,27 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useCallback } from 'react';
 
+import { callUpdate } from '../utils';
+
 // import { stopStream } from '../utils';
 
 function useVideocallOptions({
 	options,
 	setOptions,
-	// setStreams,
 	streams,
 	callEnd,
-	callUpdate,
-	// peerRef,
+	callDetails,
+	firestore,
 }) {
 	const stopCall = () => {
 		callEnd();
-		callUpdate({ call_status: 'end_call' });
+		callUpdate({
+			data: {
+				call_status: 'end_call',
+			},
+			firestore,
+			calling_room_id: callDetails?.calling_room_id,
+		});
 	};
 
 	const micOn = useCallback(() => {

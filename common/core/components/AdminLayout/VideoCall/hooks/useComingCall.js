@@ -1,23 +1,29 @@
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { useSelector } from '@cogoport/store';
+import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
 import { useEffect, useCallback } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { callUpdate, saveWebrtcToken } from '../utils';
 
 function useComingCall({
 	firestore,
+	setCallDetails,
 	callDetails,
 	setInACall,
+	inVideoCall,
 	setCallComing,
-	callUpdate,
 	setStreams,
 	peerRef,
-	saveWebrtcToken,
 	webrtcToken,
 	setWebrtcToken,
 	callEnd,
 }) {
-	const { calling_details } = callDetails || {};
+	const { user_data } = useSelector((state) => ({
+		user_data: state.profile.user,
+	}));
+	const { id: userId } = user_data || {};
+
 	const getWebrtcToken = useCallback(async () => {
 		if (callDetails.webrtc_token_room_id && callDetails.calling_room_id) {
 			const tokenDocRef = doc(
@@ -70,13 +76,14 @@ function useComingCall({
 					peer.signal(webrtcToken.user_token);
 				}
 
-				// console.log('calling peer.signal');
-
 				peer.on('signal', (data) => {
 					saveWebrtcToken(
-						{ peer_token: data },
-						callDetails.calling_room_id,
-						callDetails.webrtc_token_room_id,
+						{
+							data            : { peer_token: data },
+							calling_room_id : callDetails.calling_room_id,
+							path            : callDetails.webrtc_token_room_id,
+							firestore,
+						},
 					);
 				});
 
@@ -85,48 +92,100 @@ function useComingCall({
 				});
 
 				peer.on('stream', (peerStream) => {
-					console.log('stream connected');
 					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
 				});
 
 				peer.on('error', () => {
-					callEnd();
 					callUpdate({
-						call_status: 'technical_error',
+						data: {
+							call_status: 'technical_error',
+						},
+						firestore,
+						calling_room_id: callDetails?.calling_room_id,
 					});
+					callEnd();
 				});
 			})
 			.catch((error) => {
 				console.log('user stream is not working', error);
 			});
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id,
-		callEnd, callUpdate, peerRef, saveWebrtcToken, setStreams, webrtcToken.user_token]);
+		callEnd, firestore, peerRef, setStreams, webrtcToken.user_token]);
 
 	const answerOfCall = useCallback(() => {
 		getWebrtcToken().then(() => {
 			setInACall(true);
 			setCallComing(false);
+
 			callUpdate({
-				call_status: 'accepted',
+				data: {
+					call_status: 'accepted',
+				},
+				firestore,
+				calling_room_id: callDetails?.calling_room_id,
 			});
+
 			accepteCallMedia();
 		});
-	}, [accepteCallMedia, callUpdate, getWebrtcToken, setCallComing, setInACall]);
+	}, [accepteCallMedia, callDetails?.calling_room_id, firestore, getWebrtcToken, setCallComing, setInACall]);
 
 	const rejectOfCall = useCallback(() => {
 		callUpdate({
-			call_status: 'rejected',
+			data: {
+				call_status: 'rejected',
+			},
+			firestore,
+			calling_room_id: callDetails?.calling_room_id,
 		});
+
 		setCallComing(false);
-	}, [callUpdate, setCallComing]);
+	}, [callDetails?.calling_room_id, firestore, setCallComing]);
 
 	useEffect(() => {
-		const notCallingCallStatus = ['rejected', 'end_call', 'accepted', 'technical_error'];
+		const room_data = callDetails?.calling_details;
+		const notCallingCallStatus = ['rejected', 'end_call', 'miss_call', 'technical_error'];
 
-		if (notCallingCallStatus.includes(calling_details?.call_status)) {
+		if (
+			room_data?.call_status
+			&& notCallingCallStatus.includes(room_data?.call_status)
+			&& callDetails?.calling_room_id
+		) {
+			callEnd();
+		}
+
+		if (notCallingCallStatus.includes(room_data?.call_status)) {
 			setCallComing(false);
 		}
-	}, [calling_details, setCallComing]);
+	}, [callDetails?.calling_details, callDetails?.calling_room_id, callEnd, setCallComing]);
+
+	useEffect(() => {
+		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
+		const videoCallComingQuery = query(
+			videoCallRef,
+			where('call_status', '==', 'calling'),
+			where('calling_by', '==', 'user'),
+			where('peer_id', '==', userId),
+		);
+
+		onSnapshot(videoCallComingQuery, (querySnapshot) => {
+			querySnapshot.forEach((val) => {
+				if (inVideoCall === false) {
+					const room_data = val.data();
+					setCallDetails((prev) => ({
+						...prev,
+						peer_details         : room_data.peer_details,
+						calling_details      : room_data,
+						calling_room_id      : val.id,
+						calling_type         : 'incoming',
+						webrtc_token_room_id : room_data?.webrtc_token_room_id,
+					}));
+					setCallComing(true);
+				} else {
+					console.log('in a call aready');
+				}
+			});
+		});
+	}, [firestore, inVideoCall, setCallComing, setCallDetails, userId]);
 
 	return {
 		answerOfCall,

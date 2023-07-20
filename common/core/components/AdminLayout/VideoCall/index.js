@@ -1,14 +1,17 @@
 import { isEmpty } from '@cogoport/utils';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 import CallComing from './CallComing';
 import { firebaseConfig } from './configurations/firebase-config';
 import useComingCall from './hooks/useComingCall';
 import { useSetInACall } from './hooks/useSetInACall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
+import { callUpdate } from './utils';
 import VideoCallScreen from './VideoCallScreen';
+
+const CALL_TIME_LIMIT = 60000;
 
 function VideoCall({
 	videoCallRecipientData = {},
@@ -50,17 +53,15 @@ function VideoCall({
 
 	const { setInACall } = useSetInACall();
 
-	const { callingTo, callUpdate, callEnd, saveWebrtcToken } = useVideoCallFirebase({
+	const { callingTo, callEnd } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
-		setOptions,
-		setWebrtcToken,
 		setInACall,
-		inVideoCall,
 		setCallDetails,
+		setWebrtcToken,
+		setOptions,
 		callDetails,
 		setStreams,
-		streams,
 		peerRef,
 	});
 
@@ -69,22 +70,38 @@ function VideoCall({
 		setCallDetails,
 		callDetails,
 		setInACall,
+		inVideoCall,
 		setCallComing,
-		callUpdate,
 		setStreams,
 		peerRef,
-		saveWebrtcToken,
-		setWebrtcToken,
 		webrtcToken,
+		setWebrtcToken,
 		callEnd,
 	});
 
+	const missCallHandel = useCallback(() => {
+		callUpdate({
+			data: {
+				call_status: 'miss_call',
+			},
+			firestore,
+			calling_room_id: callDetails?.calling_room_id,
+		});
+	}, [callDetails?.calling_room_id, firestore]);
+
 	useEffect(() => {
-		if (inVideoCall === true && videoCallRecipientData?.user_id) {
+		if (inVideoCall && videoCallRecipientData?.user_id) {
 			callingTo(videoCallRecipientData);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [videoCallRecipientData, inVideoCall]);
+		const r = setTimeout(() => {
+			if (callDetails?.call_status === 'calling') {
+				missCallHandel();
+				callEnd();
+			}
+		}, CALL_TIME_LIMIT);
+
+		return () => clearTimeout(r);
+	}, [videoCallRecipientData, inVideoCall, callingTo, callEnd, missCallHandel, callDetails?.call_status]);
 
 	useEffect(() => {
 		if (streams.screen_stream && streamRef.current.user) {
@@ -94,10 +111,6 @@ function VideoCall({
 		}
 		if (streams.peer_stream && streamRef.current.peer) {
 			streamRef.current.peer.srcObject = streams.peer_stream;
-			const tracks = streams.peer_stream.getTracks();
-			tracks.forEach((track) => {
-				console.log(track);
-			});
 		}
 	}, [streams]);
 
@@ -126,15 +139,13 @@ function VideoCall({
 			) : null}
 			{inVideoCall ? (
 				<VideoCallScreen
-					ref={streamRef}
 					options={options}
 					setOptions={setOptions}
 					streams={streams}
-					setStreams={setStreams}
 					callEnd={callEnd}
-					callUpdate={callUpdate}
-					peerRef={peerRef}
 					callDetails={callDetails}
+					firestore={firestore}
+					ref={streamRef}
 				/>
 			) : null}
 		</div>
