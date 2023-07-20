@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import React, { useState, useContext, useMemo } from 'react';
+import { useState, useContext, useMemo } from 'react';
 
 import useGetInsuranceDraftDetails from '../../../../../hooks/useGetInsuranceDraftDetails';
 

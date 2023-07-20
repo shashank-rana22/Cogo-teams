@@ -1,7 +1,7 @@
 import { Button, FileSelect } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useInsuranceCheckoutAndGenerate from '../../../../../hooks/useInsuranceCheckoutAndGenerate';
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
@@ -94,7 +94,7 @@ function Step3({
 	};
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<Layout
 				control={control}
 				fields={invoiceControls}
@@ -102,7 +102,7 @@ function Step3({
 			/>
 
 			<div>
-				<div className={styles.title}>Customer Confirmation Proof</div>
+				<span className={styles.title}>Customer Confirmation Proof</span>
 
 				<FileSelect
 					value={uploadProof}
@@ -148,7 +148,7 @@ function Step3({
 					Generate Policy
 				</Button>
 			</div>
-		</div>
+		</section>
 	);
 }
 

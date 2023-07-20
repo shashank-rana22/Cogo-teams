@@ -104,11 +104,11 @@ function BillingAddressDetails({
 												})}
 											/>
 											<div className={styles.details}>
-												<div className={styles.billing_party}>{startCase(name)}</div>
-												<div className={cl`${styles.billing_party} ${styles.details}`}>
+												<span className={styles.billing_party}>{startCase(name)}</span>
+												<span className={cl`${styles.billing_party} ${styles.details}`}>
 													{tax_number}
-												</div>
-												<div className={cl`${styles.billing_party} ${styles.details}`}>
+												</span>
+												<span className={cl`${styles.billing_party} ${styles.details}`}>
 													{address}
 													,
 													{city}
@@ -116,7 +116,7 @@ function BillingAddressDetails({
 													{state}
 													,
 													{pincode}
-												</div>
+												</span>
 											</div>
 										</div>
 									);
@@ -135,15 +135,15 @@ function BillingAddressDetails({
 			{policyForSelf && !isEmpty(Object.keys(prosporerAddress)) ? (
 				<div className={styles.section2}>
 					<div className={styles.selected}>
-						<div className={cl`${styles.card_txt} ${styles.orgName}`}>
+						<span className={cl`${styles.card_txt} ${styles.orgName}`}>
 							{startCase(prosporerAddress?.name)}
-						</div>
-						<div className={cl`${styles.card_txt} ${styles.orgName}`}>
+						</span>
+						<span className={cl`${styles.card_txt} ${styles.orgName}`}>
 							{`${startCase(prosporerAddress?.address)} - ${
 								prosporerAddress?.pincode
 							}`}
-						</div>
-						<div className={cl`${styles.card_txt} ${styles.orgName}`}>{prosporerAddress?.tax_number}</div>
+						</span>
+						<span className={cl`${styles.card_txt} ${styles.orgName}`}>{prosporerAddress?.tax_number}</span>
 					</div>
 				</div>
 			) : null}

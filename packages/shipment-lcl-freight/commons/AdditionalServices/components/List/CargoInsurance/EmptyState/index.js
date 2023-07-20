@@ -11,12 +11,12 @@ const TEXT_MAPPING = {
 
 function EmptyState({ reason = '' }) {
 	return (
-		<div className={styles.no_support}>
+		<section className={styles.no_support}>
 			<div className={styles.sad_container}>
 				<IcMVerySad className={styles.icon} width={40} height={40} />
 				<span className={styles.sad_text}>{TEXT_MAPPING[reason]}</span>
 			</div>
-		</div>
+		</section>
 	);
 }
 export default EmptyState;
