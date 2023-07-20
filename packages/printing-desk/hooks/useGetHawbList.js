@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequestAir } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -27,7 +28,7 @@ const useGetHawbList = (shipmentId) => {
 				params:	payload,
 			});
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [shipmentId, trigger]);
 

@@ -19,22 +19,33 @@ function mailFunction({
 	attachments = [],
 	uploaderRef,
 }) {
-	const isInList = (email, data) => data?.includes(email);
+	const isInList = ({ email, data }) => data?.includes(email);
 
 	const validateEmail = (emailInput) => {
 		const emailRegex = GLOBAL_CONSTANTS.regex_patterns.email;
 		return emailRegex.test(emailInput);
 	};
 
-	const handleKeyPress = ({ e, type }) => {
-		if (e.key === 'Enter') {
-			e.preventDefault();
-			if (!validateEmail(value)) {
+	const handleKeyPress = ({
+		event = {},
+		type = '',
+		email = '',
+	}) => {
+		if (event?.key === 'Enter' || email) {
+			event?.preventDefault?.();
+			const newEmail = email || value;
+
+			if (!validateEmail(newEmail)) {
 				setErrorValue('Enter valid id');
 				return;
 			}
 
-			if (isInList(value, emailState?.[type] || [])) {
+			const isEmailPresent = isInList({
+				email : newEmail,
+				data  : emailState?.[type] || [],
+			});
+
+			if (isEmailPresent) {
 				setErrorValue('Email already present');
 				return;
 			}
@@ -42,7 +53,7 @@ function mailFunction({
 			setErrorValue(null);
 			setEmailState((prev) => ({
 				...prev,
-				[type]: [...(prev?.[type] || []), value],
+				[type]: [...(prev?.[type] || []), newEmail],
 			}));
 			setShowControl(null);
 		}
@@ -54,9 +65,9 @@ function mailFunction({
 		setValue('');
 	};
 
-	const handleChange = ({ e, type }) => {
+	const handleChange = ({ val, type }) => {
 		if (showControl === type) {
-			setValue(e.target?.value);
+			setValue(val);
 		}
 	};
 

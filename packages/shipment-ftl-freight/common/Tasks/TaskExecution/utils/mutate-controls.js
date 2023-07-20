@@ -1,3 +1,10 @@
+const TIME_BASED_TASKS = [
+	'upload_ftl_commercial_invoice',
+	'upload_invoice_submission_acknowledgement',
+	'cargo_picked_up_at',
+	'mark_completed',
+];
+
 const mutateControls = (
 	controls,
 	setValue,
@@ -9,6 +16,12 @@ const mutateControls = (
 
 	(controls || []).forEach((control) => {
 		const newControl = control;
+
+		const dateTimeControl = control?.controls.find((item) => item?.type === 'datepicker');
+
+		if (TIME_BASED_TASKS.includes(task?.task) && dateTimeControl?.withTimePicker) {
+			dateTimeControl.showTimeSelect = true;
+		}
 
 		if (control?.name === 'shipper_contact_status') {
 			if (shipment_data?.shipper_contact_status === 'pending') {
@@ -77,7 +90,6 @@ const mutateControls = (
 					: undefined),
 			};
 		}
-
 		finalControls = [...finalControls, newControl];
 	});
 

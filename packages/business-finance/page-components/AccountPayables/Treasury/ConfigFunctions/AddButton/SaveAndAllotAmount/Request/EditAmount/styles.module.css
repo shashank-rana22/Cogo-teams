@@ -1,0 +1,12 @@
+.value_text {
+	padding: 8px;
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	color: var(--color-accent-orange-2);
+}
+
+.div_style {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
