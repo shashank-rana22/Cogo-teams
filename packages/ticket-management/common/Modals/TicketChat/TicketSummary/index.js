@@ -6,7 +6,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
-import useCountdown from '../../../../utils/getCountdown';
+import useCountdown from '../../../../hooks/getCountdown';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
 import styles from './styles.module.css';
