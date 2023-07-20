@@ -11,54 +11,48 @@ const getLogsColumns = (props) => {
 
 	return [
 		{
-			id     : 'sid',
-			Header : () => (
-				<div className={styles.title}>SID No.</div>
-			),
-			accessor: (values) => (
+			id       : 'sid',
+			Header   : () => <div className={styles.title}>SID No.</div>,
+			accessor : (value) => (
 				<div className={styles.sid_container}>
-					{values?.shipment_details?.serial_id}
+					{value?.data?.shipment_serial_id}
 				</div>
 			),
 		},
 		{
 			id       : 'shipment_type',
 			Header   : <RenderShipmentType {...props} />,
-			accessor : (values) => (
+			accessor : (value) => (
 				<div>
-					{startCase(values?.shipment_details?.shipment_type)}
+					{startCase(value?.service_type)}
 				</div>
 			),
 		},
 		{
-			id     : 'business_name',
-			Header : () => (
-				<div className={styles.title}>Business Name</div>
-			),
-			accessor: (values) => (
+			id       : 'business_name',
+			Header   : () => <div className={styles.title}>Business Name</div>,
+			accessor : (value) => (
 				<div>
-					{values?.service_provider?.business_name}
+					{value?.service_provider?.business_name}
 				</div>
 			),
 		},
 		{
-			id     : 'reverted_by',
-			Header : () => (
-				<div className={styles.title}>Reverted By</div>
-			),
-			accessor: (values) => (
+			id       : 'reverted_by',
+			Header   : () => <div className={styles.title}>Reverted By</div>,
+			accessor : (value) => (
 				<div>
-					{values.reverted_by}
+					{value.reverted_by}
 				</div>
 			),
 		},
 		{
 			id       : 'flashed_at',
 			Header   : <RenderFlashedAt {...props} />,
-			accessor : (values) => (
+			accessor : (value) => (
 				<div>
 					{formatDate({
-						date       : values?.created_at,
+						date       : value?.created_at,
 						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'dateTime',
@@ -68,14 +62,12 @@ const getLogsColumns = (props) => {
 			),
 		},
 		{
-			id     : 'reverted_at',
-			Header : () => (
-				<div className={styles.title}>Reverted At</div>
-			),
-			accessor: (values) => (
+			id       : 'reverted_at',
+			Header   : () => <div className={styles.title}>Reverted At</div>,
+			accessor : (value) => (
 				<div>
 					{formatDate({
-						date       : values?.reverted_at,
+						date       : value?.reverted_at,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 						formatType : 'dateTime',

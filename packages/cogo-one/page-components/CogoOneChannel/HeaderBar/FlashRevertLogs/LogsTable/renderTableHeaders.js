@@ -10,13 +10,16 @@ export function RenderFlashedAt({ setFilterParams = () => {}, filtersParams = {}
 			<Popover
 				placement="bottom"
 				render={(
-					<Datepicker
-						name="date"
-						onChange={(val) => setFilterParams((prev) => ({ ...prev, flashed_at: val }))}
-						value={filtersParams?.flashed_at}
-						isPreviousDaysAllowed
-						maxDate={new Date()}
-					/>
+					<>
+						Flashed after
+						<Datepicker
+							name="date"
+							onChange={(val) => setFilterParams((prev) => ({ ...prev, flashed_at: val }))}
+							value={filtersParams?.flashed_at}
+							isPreviousDaysAllowed
+							maxDate={new Date()}
+						/>
+					</>
 				)}
 			>
 				<>

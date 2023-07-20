@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 const DEFAULT_PAGE = 1;
 const ITEMS_TO_BE_FETCHED = 10;
 
-const useListCogooneFlashRatesLogs = () => {
+const useListCogooneFlashRatesLogs = ({ sidQuery, filtersParams }) => {
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -21,13 +21,19 @@ const useListCogooneFlashRatesLogs = () => {
 					page_limit                   : ITEMS_TO_BE_FETCHED,
 					page                         : pagination,
 					sort_type                    : 'desc',
+					shipment_serial_id           : sidQuery || undefined,
+					filters                      : {
+						shipment_state          : ['confirmed_by_importer_exporter', 'in_progress'],
+						service_type            : filtersParams?.service_type || undefined,
+						created_at_greater_than : filtersParams?.flashed_at || undefined,
+					},
 
 				},
 			});
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [trigger, pagination]);
+	}, [trigger, pagination, filtersParams, sidQuery]);
 
 	useEffect(() => {
 		getFlashRateLogs();
@@ -35,8 +41,8 @@ const useListCogooneFlashRatesLogs = () => {
 
 	return {
 		logsLoading : loading,
-		getFlashRateLogs,
 		logsData    : data,
+		getFlashRateLogs,
 		setPagination,
 	};
 };
