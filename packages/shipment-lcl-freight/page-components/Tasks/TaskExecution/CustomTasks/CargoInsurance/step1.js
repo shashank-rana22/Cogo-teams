@@ -1,7 +1,7 @@
 import { Button, Toggle, cl } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useSaveDraft from '../../../../../hooks/useSaveDraft';
 
@@ -83,7 +83,7 @@ function Step1({
 	}, [prosporerAddressId, prosporerAddressType, billingId, billingDataAddressType, policyForSelf, setAddressId]);
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<Layout
 				fields={personalDetailsControl}
 				control={control}
@@ -92,7 +92,7 @@ function Step1({
 
 			<div className={styles.sub_header}>
 				<div className={cl`${styles.flex_row} ${styles.label}`}>
-					<div className={styles.label_val}>Billing Address Details</div>
+					<span className={styles.label_val}>Billing Address Details</span>
 					<Toggle
 						offLabel="Self"
 						onLabel="Other"
@@ -134,7 +134,7 @@ function Step1({
 					Next Step
 				</Button>
 			</div>
-		</div>
+		</section>
 	);
 }
 export default Step1;

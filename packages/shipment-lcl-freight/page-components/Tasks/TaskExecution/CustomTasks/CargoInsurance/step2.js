@@ -74,8 +74,8 @@ function Step2({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.label_val}>Cargo Details</div>
+		<section className={styles.container}>
+			<span className={styles.label_val}>Cargo Details</span>
 
 			<div className={styles.flex_row}>
 				<div className={cl`${styles.flex_row} ${styles.flex}`}>
@@ -120,7 +120,7 @@ function Step2({
 					Next Step
 				</Button>
 			</div>
-		</div>
+		</section>
 	);
 }
 

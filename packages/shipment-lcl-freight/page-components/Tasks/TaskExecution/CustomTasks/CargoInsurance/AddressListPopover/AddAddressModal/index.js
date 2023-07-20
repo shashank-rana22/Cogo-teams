@@ -90,15 +90,15 @@ function AddModal({
 									alt="seller_address_logo"
 								/>
 							</div>
-							<div className={styles.title}>Add New Address</div>
+							<span className={styles.title}>Add New Address</span>
 						</div>
 					)}
 					/>
 
-					<div className={styles.section}>
-						<div className={styles.section_title}>
+					<section className={styles.section}>
+						<span className={styles.section_title}>
 							<h1>Billing Details</h1>
-						</div>
+						</span>
 						<div className={styles.check_box_wrapper}>
 							<Checkbox
 								checked={checked}
@@ -182,7 +182,7 @@ function AddModal({
 								</div>
 							</div>
 						)}
-					</div>
+					</section>
 				</section>
 
 				<Modal.Footer>
