@@ -140,6 +140,7 @@ const GLOBAL_CONSTANTS = {
 		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
 		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
+		hk_user_id             : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 		vinod_talapa_user_id   : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		local_charge_providers : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
