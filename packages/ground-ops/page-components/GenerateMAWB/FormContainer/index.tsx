@@ -98,8 +98,6 @@ function FormContainer({
 		});
 	};
 
-	console.log(taskItem, 'taskItem');
-
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
