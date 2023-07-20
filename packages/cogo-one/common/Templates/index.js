@@ -25,7 +25,7 @@ function Templates({
 }) {
 	const [customizableData, setCustomizableData] = useState({});
 	const [activeCard, setActiveCard] = useState({
-		show : type === 'whatsapp_new_message_modal' || 'bulk_communication',
+		show : type === 'whatsapp_new_message_modal',
 		data : {},
 	});
 

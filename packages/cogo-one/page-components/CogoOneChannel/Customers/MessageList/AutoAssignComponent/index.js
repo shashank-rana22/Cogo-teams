@@ -35,14 +35,16 @@ function AutoAssignComponent({
 					Bulk Select
 				</Button>
 			) : (
-				<div className={styles.show_auto_assign}>
+				<div className={cl`${styles.show_auto_assign} 
+				${isEmpty(selectedAutoAssign) ? styles.select_chat_background : ''}`}
+				>
 					<div className={styles.icon_container}>
 						<IcMArrowBack
 							onClick={handleAutoAssignBack}
 						/>
 					</div>
 					{isEmpty(selectedAutoAssign)
-						? <div className={styles.select_chats}>Select Chat Bulks to be Assigned</div>
+						? <div className={styles.select_chats}>Select Chat</div>
 						: (
 							<>
 								<div className={styles.selected_count}>
@@ -73,7 +75,6 @@ function AutoAssignComponent({
 										themeType="secondary"
 										className={styles.action_button}
 										onClick={() => setPopoverVisible((prev) => !prev)}
-
 									>
 										<IcMListView height={15} width={15} />
 										<div className={styles.action_label}>Actions</div>

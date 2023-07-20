@@ -142,10 +142,9 @@ function MessageList(messageProps) {
 					</div>
 				) : (
 					<>
-						{ ((!isEmpty(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features) && isBotSession)
-							|| !isEmpty(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features.filter(
-								(itm) => !BOT_MESSAGES_BULK_ACTIONS.includes(itm),
-							)))
+						{!isEmpty(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.bulk_assign_features?.filter(
+							(itm) => (BOT_MESSAGES_BULK_ACTIONS.includes(itm) ? isBotSession : true),
+						))
 							&& (
 								<AutoAssignComponent
 									autoAssignChats={autoAssignChats}

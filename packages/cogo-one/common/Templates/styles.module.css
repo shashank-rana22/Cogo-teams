@@ -164,16 +164,6 @@
 	font-size: 16px;
 }
 
-.organization_count {
-	padding: 3px 9px;
-	margin-right: 10px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #fff;
-	background: #ee3425;
-	border-radius: 7px;
-}
-
 .wrap_mobile_number {
 	display: flex;
 	align-items: center;

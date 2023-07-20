@@ -67,13 +67,16 @@ function NewWhatsappMessage({
 		});
 	};
 
-	const data = {
-		sendCommunicationTemplate: type === 'bulk_communication' ? (args) => {
-			const { template_name, variables } = args;
-			bulkCommunicationChat({ selectedAutoAssign, variables, template_name });
-		} : sendWhatsappCommunication,
-		communicationLoading: loading,
+	const bulkCommunication = (args) => {
+		const { template_name, variables } = args;
+		bulkCommunicationChat({ selectedAutoAssign, variables, template_name });
 	};
+
+	const data = {
+		sendCommunicationTemplate : type === 'bulk_communication' ? bulkCommunication : sendWhatsappCommunication,
+		communicationLoading      : loading,
+	};
+
 	return (
 		<Modal
 			show={type}

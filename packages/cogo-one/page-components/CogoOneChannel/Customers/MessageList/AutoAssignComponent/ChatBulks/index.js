@@ -43,6 +43,7 @@ function ChatBulks({
 						});
 						setPopoverVisible((prev) => !prev);
 					}}
+					className={styles.popover_button}
 				>
 					Template Send
 				</Button>

@@ -36,6 +36,7 @@ function BulkCommunicationTemplate({ selectedAutoAssign = {} }) {
 					theme="light"
 					placement="right"
 					interactive
+					className={styles.tooltip_box}
 				>
 					<div className={styles.more_names}>
 						+

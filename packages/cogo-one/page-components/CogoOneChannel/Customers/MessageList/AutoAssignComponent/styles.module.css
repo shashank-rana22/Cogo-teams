@@ -29,11 +29,11 @@
 		.ui_button_container {
 			width: 100px;
 		}
-
-		.ui_ps_themeType_secondary {
-			padding: 0;
-		}
 	}
+}
+
+.select_chat_background {
+	justify-content: flex-start;
 }
 
 .icon_container {
@@ -55,7 +55,7 @@
 }
 
 .select_chats {
-	padding-right: 25px;
+	padding-left: 25px;
 	font-size: 12px;
 }
 
@@ -78,4 +78,5 @@
 
 .action_button {
 	display: flex;
+	padding: 0;
 }
