@@ -9185,6 +9185,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 
 		{
 			api          : 'list_partner_users',
@@ -9195,6 +9200,11 @@ const partner = {
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'list_shipment_collection_party',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 
@@ -12240,6 +12250,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'create_shipment_document',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -12579,6 +12594,16 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'send_flash_rate_revert_notification_on_email',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_user_contact_request',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'list_shipment_pending_tasks',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -12595,6 +12620,16 @@ const partner = {
 		},
 		{
 			api          : 'send_shipment_document_notification',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_email_suggestions',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+			api          : 'get_omnichannel_agent_types',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -12962,6 +12997,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_dunning_severity_level_templates',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_payments_dunning_list_overall_outstanding_and_on_account_per_trade_party',
 			access_type : 'private',
 		},
@@ -12971,6 +13010,10 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_dunning_send_mail_of_all_communication_to_trade_party',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_card_data',
 			access_type : 'private',
 		},
 	],
@@ -13004,6 +13047,74 @@ const partner = {
 			api          : 'list_shipment_pending_tasks',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+	],
+	printing_desk: [
+		{
+			api         : 'get_air_coe_pending_tasks_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_documents_weight_amend',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_document_copy_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_document_copy',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_pending_tasks_amend_list',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_document',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_rate_charge_codes',
+			access_type  : 'private',
+			service_name : 'rate_sheet',
 		},
 	],
 };

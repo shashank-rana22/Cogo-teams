@@ -27,7 +27,7 @@ function BarGraphView({ barData = [], currency = '' }:Props) {
 				) : (
 					<Bar
 						colors={['#DDEBC0', '#ACDADF']}
-						width={1600}
+						width={window.innerWidth - 180}
 						height={400}
 						margin={{ top: 60, right: 80, bottom: 60, left: 100 }}
 						data={barData}
@@ -68,6 +68,14 @@ function BarGraphView({ barData = [], currency = '' }:Props) {
 							legendOffset   : 46,
 							legendPosition : 'middle',
 						}}
+						valueFormat={(value) => formatAmount({
+							amount  : String(value),
+							currency,
+							options : {
+								style                 : 'decimal',
+								maximumFractionDigits : 2,
+							},
+						})}
 						legends={[
 							{
 								dataFrom          : null,

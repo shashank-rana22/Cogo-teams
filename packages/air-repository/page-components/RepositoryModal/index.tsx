@@ -8,8 +8,9 @@ import useHandleRepository from '../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
+type TypeObject = string | Array<object> | object[] | React.FC ;
 interface NestedObj {
-	[key: string]: string;
+	[key: string]: TypeObject;
 }
 
 interface ModalProps {
@@ -21,20 +22,35 @@ interface ModalProps {
 	setEdit:React.FC;
 }
 
-function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, setEdit }:ModalProps) {
+function RepositoryModal({
+	showModal = false,
+	setShowModal = () => {},
+	listRepository = () => {},
+	item = {},
+	edit = false,
+	setEdit = () => {},
+}:ModalProps) {
 	const { handleRepository, loading } = useHandleRepository(edit);
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
 	const fields = repositoryControls();
 	const mode = watch('booking_mode');
 
+	const dataPayload = (poc) => ({
+		name                : poc?.name,
+		email               : poc?.email,
+		mobile_country_code : poc?.mobile?.country_code,
+		mobile_number       : poc?.mobile?.number,
+	});
+
 	const onSubmit = (values) => {
-		const payload = { ...values, id: item?.id, action_name: edit ? 'update' : undefined };
-		handleRepository(payload, listRepository).then(() => {
+		const pocData = (values.pocs_data || []).map((poc) => dataPayload(poc));
+
+		const payload = { ...values, pocs_data: pocData, id: item?.id, action_name: edit ? 'update' : undefined };
+		handleRepository({ payload, listRepository, setShowModal }).then(() => {
 			if (edit) {
 				setEdit(false);
 			}
-			setShowModal(false);
 		});
 	};
 
@@ -49,6 +65,16 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 			finalFields.forEach((c) => {
 				setValue(c.name, item[c.name]);
 			});
+
+			const pocData = (item.pocs_data || []).map((poc) => {
+				const pocDataItem = ({
+					name   : poc?.name,
+					email  : poc?.email,
+					mobile : { country_code: poc?.mobile_country_code, number: poc?.mobile_number },
+				});
+				return pocDataItem;
+			});
+			setValue('pocs_data', pocData);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
