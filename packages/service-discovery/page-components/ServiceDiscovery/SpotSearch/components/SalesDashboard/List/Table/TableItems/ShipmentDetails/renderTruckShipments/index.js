@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -22,7 +23,7 @@ function RenderTruckShipments({
 			commodity = '',
 			trade_type = '',
 			truck_type = '',
-		} = services[0] || {};
+		} = services[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		commodityDetails = {
 			finalCommodity : commodity,
@@ -59,7 +60,7 @@ function RenderTruckShipments({
 				<div>
 					<span>
 						Commodity :
-						{startCase(finalCommodity)}
+						{startCase(finalCommodity || 'all_commodities')}
 					</span>
 
 					<span>
@@ -79,7 +80,7 @@ function RenderTruckShipments({
 			<div className={styles.container}>
 				<span>
 					Commodity :
-					{startCase(finalCommodity)}
+					{startCase(finalCommodity || 'all_commodities')}
 				</span>
 
 				<span>

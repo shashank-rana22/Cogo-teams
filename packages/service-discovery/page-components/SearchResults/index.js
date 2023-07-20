@@ -37,7 +37,18 @@ function SearchResults() {
 		selectedCard,
 	} = useGetSpotSearch();
 
-	const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
+	const {
+		spot_search_detail:detail = {},
+		list:rates = [],
+		possible_subsidiary_services = [],
+		weekly_data = [],
+		total_count,
+		page,
+		page_limit,
+	} = data || {};
+	// const { detail = {}, rates = [], possible_subsidiary_services = [] } = data || {};
+
+	const paginationProps = { page, page_limit, total_count };
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
@@ -56,6 +67,9 @@ function SearchResults() {
 			comparisonCheckbox,
 			filters,
 			setFilters,
+			weekly_data,
+			paginationProps,
+			loading,
 		},
 		selectedCard: {
 			rateCardData: selectedCard,

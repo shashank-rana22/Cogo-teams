@@ -33,11 +33,6 @@ const useCreateSearch = () => {
 
 				payload = {
 					...defaultPayload,
-					importer_exporter_branch_id : organization_branch_id,
-					importer_exporter_id        : organization_id,
-					source                      : 'platform',
-					search_type                 : service_type,
-					user_id,
 				};
 			} else if (['edit', 'quick-search'].includes(action)) {
 				const { formValues = {} } = values;
@@ -46,13 +41,18 @@ const useCreateSearch = () => {
 
 				payload = {
 					...editPayload,
-					importer_exporter_branch_id : organization_branch_id,
-					importer_exporter_id        : organization_id,
-					source                      : 'platform',
-					search_type                 : service_type,
-					user_id,
 				};
 			}
+
+			payload = {
+				...payload,
+				importer_exporter_branch_id : organization_branch_id,
+				importer_exporter_id        : organization_id,
+				source                      : 'platform',
+				search_type                 : service_type,
+				user_id,
+				tags                        : ['new_admin'],
+			};
 
 			const res = await trigger({ data: payload });
 

@@ -17,8 +17,8 @@ function Statistics({
 		<div className={styles.container}>
 			{(statsArray || []).map((stat) => {
 				const { key = '' } = stat;
-
 				const keyValue = statsData?.[key];
+
 				return (
 					<StatItem
 						key={key}

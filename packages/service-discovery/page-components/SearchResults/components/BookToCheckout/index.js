@@ -30,7 +30,10 @@ function BookCheckout({
 					<IcCFtick width={48} height={48} />
 					<div style={{ marginLeft: 16 }}>
 						<div>Congratulations!</div>
-						You are saving INR 56,234 on this booking.
+						You are saving
+						{' '}
+						<strong>INR 56,234 </strong>
+						on this booking.
 					</div>
 				</div>
 				<div className={styles.button_wrapper}>
@@ -59,14 +62,14 @@ function BookCheckout({
 				</div>
 			</div>
 
-			{/* <div className={styles.selected_services_container}>
+			<div className={styles.selected_services_container}>
 				<div className={styles.heading}>Following services has been added successfully to your freight</div>
 
 				<SelectedServices
 					rateDetails={rateCardData}
 					details={detail}
 				/>
-			</div> */}
+			</div>
 		</div>
 	);
 }

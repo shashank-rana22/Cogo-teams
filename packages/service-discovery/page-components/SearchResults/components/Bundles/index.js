@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import OfferBundle from './OfferBundle';
@@ -21,7 +22,10 @@ function Bundles() {
 		<div className={styles.container}>
 			<div className={styles.heading}>Pre-curated Offers (Coming Soon)</div>
 			{ARRAY.map((item, index) => (
-				<div key={item.bg_color} style={{ marginTop: index === 0 ? 0 : 20 }}>
+				<div
+					key={item.bg_color}
+					style={{ marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '20px' }}
+				>
 					<OfferBundle data={item} />
 				</div>
 			))}

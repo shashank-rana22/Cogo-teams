@@ -1,97 +1,35 @@
 {
 	"heading": "Most Booked",
-	"api": "list_spot_searches",
+	"api": "list_spot_search_stats",
 	"type": "most_booked",
 	"fields": [
 		{
-			"key": "serial_id",
-			"label": "ID",
-			"func": "renderSerialId"
-		},
-		{
-			"label": "Shipper",
-			"key": "importer_exporter.business_name",
-			"topKey": {
-				"key": "importer_exporter.business_name"
-			},
-			"lowerKey": {
-				"key": "created_by.name",
-				"popoverKey": "created_by",
-				"withPopover": true
-			},
-			"func": "renderFieldPair"
-		},
-		{
 			"label": "Port pair",
-			"key": "search_type",
-			"pair_type": "search_type",
+			"key": "primary_service",
+			"pair_type": "primary_service",
 			"func": "renderPortPair"
 		},
 		{
-			"key": "cargo_details",
-			"label": "Cargo/Load Details",
-			"commodityKey": "spot_search_cargo_details",
-			"func": "renderShipment"
+			"label": "Search Volume",
+			"key": "search_volume",
+			"func": "renderSearchVolume"
 		},
 		{
-			"key": "created_at",
-			"label": "Created at",
-			"func": "renderCreated"
+			"label": "Conversion Rate",
+			"key": "conversion_rate",
+			"func": "renderConversionRate"
 		},
 		{
-			"key": "spot_search",
+			"label": "Last Searched On",
+			"key": "last_searched",
+			"func": "renderLastSearched"
+		},
+		{
+			"key": "most_booked",
 			"label": "",
 			"btnLabel":"Show Rates",
+			"inDifferentWindow": true,
 			"func": "renderButton"
-		}
-	],
-	"filterProps": {
-		"searchKey": "serial_id",
-		"searchPlaceholder": "Search by Serial Id",
-		"controls": [
-			{
-				"name": "rates_availability",
-				"label": "Rates Availablity",
-				"type": "select",
-				"selectType": "pills",
-				"multiple": false,
-				"options": [
-					{
-						"label": "Rates Found",
-						"value": "is_rates_available"
-					},
-					{
-						"label": "No Rates Found",
-						"value": "is_rates_not_available"
-					}
-				]
-			}
-		]
-	},
-	"stats_key": "stats",
-	"stats": [
-		{
-			"text": "All",
-			"key": "total_count",
-			"filter": {
-				"action_name": "create"
-			}
-		},
-		{
-			"text": "BY CUSTOMER",
-			"key": "performed_by_user",
-			"filter": {
-				"performed_by_type": "user",
-				"action_name": "create"
-			}
-		},
-		{
-			"text": "By Partner User",
-			"key": "performed_by_agent",
-			"filter": {
-				"performed_by_type": "agent",
-				"action_name": "create"
-			}
 		}
 	]
 }

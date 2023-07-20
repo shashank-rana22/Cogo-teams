@@ -1,76 +1,58 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import CC from '../utils/condition-constants';
+import FILTER_SERVICE_MAPPING from '../configurations/filter-service-mapping.json';
 import getSalesDashboardListParams from '../utils/getSalesDashboardListParams';
 import getSalesDashboardListStats from '../utils/getSalesDashboardListStats';
 
-// import useAutoRefresh from './useAutoRefresh';
-import useGetPermission from './useGetPermission';
-
 const getKeyName = ({ type, serviceType }) => {
 	const mapping = {
-		most_searched   : { search_type: serviceType || undefined },
-		most_booked     : { search_type: serviceType || undefined },
+		most_searched   : { service_group: FILTER_SERVICE_MAPPING[serviceType] },
+		most_booked     : { service_group: FILTER_SERVICE_MAPPING[serviceType] },
 		spot_searches   : { search_type: serviceType || undefined },
-		sales_shipments : { shipment_type: serviceType || undefined },
-		spot_booking    : { primary_service: serviceType || undefined },
 		quotations      : { primary_service: serviceType || undefined },
+		saved_for_later : { primary_service: serviceType || undefined },
 	};
 
 	return mapping[type] || null;
 };
 
 const useGetSalesDashboardData = ({
-	serviceType = '',
-	isRateList = false,
+	serviceType,
 	api = '',
 	stats = [],
 	importer_exporter_id,
+	origin_location_id,
+	destination_location_id,
 	...rest
 }) => {
-	const { user_profile, pathname } = useSelector(({ general, profile }) => ({
+	const { user_profile } = useSelector(({ general, profile }) => ({
 		...general,
 		user_profile: profile,
 	}));
 
-	const { isConditionMatches } = useGetPermission();
-
-	const [initialPath] = useState(pathname);
 	const [filters, setFilters] = useState({
 		page       : 1,
 		page_limit : 10,
-		activeStat : stats?.[0] || {},
+		activeStat : stats?.[GLOBAL_CONSTANTS.zeroth_index] || {},
 	});
 	const [extraParams, setExtraParams] = useState(rest?.extraParams || {});
 	const [bucketParams, setBucketParams] = useState({});
 
-	// const { lastRefresh } = useAutoRefresh();
-
-	let newApi = !isRateList
-		? api
-		: [rest?.apiPrefix, serviceType, rest?.apiSuffix].join('_');
-
-	if (serviceType === 'fcl_freight_local' && isRateList) {
-		newApi = 'list_fcl_freight_rate_local_requests';
-	}
-
 	const [{ loading, data }, trigger] = useRequest({
-		url    : newApi,
-		method : 'get',
+		url    : api,
+		method : 'GET',
 	}, { manual: true });
 
 	const { user = {} } = user_profile;
 
 	const { id: user_id = '' } = user;
 
-	const showAllSpots = isConditionMatches(CC.SHOW_ALL_SPOT_BOOKING, 'or')
-		|| pathname !== '/[partner_id]/service_discovery';
-
-	const createdByFilter = !showAllSpots ? { created_by_id: user_id } : {};
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
 	const statsData = getSalesDashboardListStats({
@@ -79,25 +61,6 @@ const useGetSalesDashboardData = ({
 		stats,
 	});
 
-	// const keyToSend = globalViewKeys[rest.type];
-	// const agentFilter = keyToSend ? { [keyToSend]: selected_agent_id } : {};
-
-	// const timeKeysToSend = globalTimeKeys[rest.type];
-
-	// const dateFilters = {};
-	// if (timeKeysToSend) {
-	// 	const initialDateFilters = {
-	// 		startDate: subtractDays(new Date(), 2).setHours(0, 0, 0, 0),
-	// 		endDate: new Date(),
-	// 	};
-	// 	dateFilters[timeKeysToSend?.startDate] = formatDateToString(
-	// 		initialDateFilters?.startDate,
-	// 	);
-	// 	dateFilters[timeKeysToSend?.endDate] = formatDateToString(
-	// 		initialDateFilters?.endDate,
-	// 	);
-	// }
-
 	const getList = async () => {
 		try {
 			await trigger({
@@ -105,20 +68,17 @@ const useGetSalesDashboardData = ({
 					...getSalesDashboardListParams(
 						rest.type,
 						{
-							// ...(dateFilters || {}),
 							...(rest.defaultFilters || {}),
 							...(restFilters || {}),
 							...(activeStat?.filter || {}),
-							// ...agentFilter,
 							importer_exporter_id,
-							// ...createdByFilter,
+							origin_location_id,
+							destination_location_id,
 							...getKeyName({ type: rest.type, serviceType }),
 						},
 						{
 							...(extraParams || {}),
 							...(bucketParams || {}),
-							customer_details_required:
-								isRateList && serviceType === 'air_freight' ? true : undefined,
 							page_limit,
 							page,
 						},
@@ -136,31 +96,29 @@ const useGetSalesDashboardData = ({
 	};
 
 	useEffect(() => {
-		if (initialPath === pathname) {
-			getList();
-		}
+		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user_profile?.authorizationparameters,
-		page,
-		activeStat,
-		// lastRefresh,
 		extraParams,
 		serviceType,
 		importer_exporter_id,
-		initialPath,
-		pathname,
+		origin_location_id,
+		destination_location_id,
 		filters,
 	]);
 
 	useEffect(() => {
+		if ((typeof stats === 'object' && isEmpty(stats)) || !stats) {
+			return;
+		}
+
 		setFilters({
 			page       : 1,
-			activeStat : stats.find((stat) => stat.is_default) || stats[0] || {},
+			activeStat : stats.find((stat) => stat.is_default) || stats[GLOBAL_CONSTANTS.zeroth_index] || {},
 		});
 	}, [stats]);
 
 	return {
-		isConditionMatches,
 		loading,
 		listData: data,
 		statsData,

@@ -19,7 +19,9 @@ const REQUEST_RATE_ALLOWED_SERVICES = [
 	'trailer_freight',
 ];
 
-function EmptyState({ data = {}, filters = {}, setFilters = () => {} }) {
+function EmptyState({ data = {}, filters = {}, setFilters = () => {}, service_key = 'search_type' }) {
+	const service_type = data[service_key];
+
 	return (
 		<div className={styles.container}>
 			<NoRatesFound
@@ -28,7 +30,7 @@ function EmptyState({ data = {}, filters = {}, setFilters = () => {} }) {
 				setFilters={setFilters}
 			/>
 
-			{REQUEST_RATE_ALLOWED_SERVICES.includes(data?.search_type) ? (
+			{REQUEST_RATE_ALLOWED_SERVICES.includes(service_type) ? (
 				<div className={styles.request_rate_container}>
 					<RequestRate data={data} />
 				</div>

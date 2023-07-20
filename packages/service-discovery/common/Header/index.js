@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
@@ -69,8 +70,8 @@ function Header({
 							data={data}
 							service_key={service_key}
 							loading={loading && isEmpty(data)}
-							activePage={activePage}
-							isEditable={isAllowedToEdit}
+							activePage={rest.activePage}
+							isAllowedToEdit={isAllowedToEdit}
 						/>
 
 						<Wallet

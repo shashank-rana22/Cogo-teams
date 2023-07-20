@@ -5,12 +5,11 @@
 	padding: 20px 18px;
 	cursor: not-allowed;
 	background: #ced1ed;
-
-	/* opacity: 0.8; */
-	filter: blur(2px);
+	filter: blur(1.2px);
 	border: 1px solid #cbcfef;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px 0 rgb(114 120 173 / 60%);
+	opacity: 0.9;
 }
 
 .tag {
@@ -50,6 +49,6 @@
 	padding: 4px;
 	font-size: 10px;
 	font-weight: 400;
-	background: var(--20-hover, #fffce6);
+	background: #fffce6;
 	border-radius: 6px;
 }

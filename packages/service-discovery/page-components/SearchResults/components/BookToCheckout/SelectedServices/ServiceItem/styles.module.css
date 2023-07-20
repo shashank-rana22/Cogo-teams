@@ -1,0 +1,114 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 140px;
+	height: 150px;
+	padding: 8px;
+	background: #fffffc;
+	border: 1px solid #eff2f2;
+	border-radius: 8px;
+}
+
+.selected_service {
+	background: #f3fafa;
+	border: 1px solid #a9eaf1;
+	transition: 0.5s;
+
+	&:hover {
+		transform: scale(1.04);
+	}
+}
+
+.primary_service_item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 250px;
+	height: 150px;
+	padding: 8px;
+	background: #f3fafa;
+	border: 1px solid #a9eaf1;
+	border-radius: 8px;
+	transition: 0.5s all;
+
+	&:hover {
+		transform: scale(1.04);
+	}
+}
+
+.icns_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.shipping_line {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.label {
+	max-width: 80%;
+	font-size: 12px;
+}
+
+.add_icon {
+	cursor: pointer;
+	background: #fff;
+	border: 1.5px solid #221f20;
+	border-radius: 50%;
+}
+
+.route {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.location {
+	display: flex;
+	flex-direction: column;
+}
+
+.port_code {
+	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+	opacity: 0.5;
+}
+
+.date {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.dotted_line {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 1px;
+	border-top: 1.5px dotted #000;
+}
+
+.horizontal_line {
+	width: 30%;
+	height: 1px;
+	border-top: 1.5px solid #000;
+}
+
+.arrow_icon {
+	margin-left: -12px;
+}
+
+.selected_icon {
+	cursor: pointer;
+}
+
+.tick_icon {
+	color: #ee3425;
+	cursor: pointer;
+}

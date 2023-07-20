@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
-import CC from '../../../utils/condition-constants';
 
 import Header from './Header';
 import Statistics from './Statistics';
@@ -10,6 +9,7 @@ import Table from './Table';
 
 function List({
 	importer_exporter_id,
+	service_type = '',
 	heading = '',
 	fields = [],
 	api = '',
@@ -17,58 +17,50 @@ function List({
 	placement = 'center',
 	...rest
 }) {
-	const isRateList = ['missing_rates', 'disliked_rates'].includes(rest?.type);
-
-	const [serviceType, setServiceType] = useState(() => (isRateList ? 'fcl_freight' : null));
+	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
 
 	const {
-		isConditionMatches,
 		statsData,
 		listData,
 		loading: listLoading,
 		filters,
 		setFilters,
 		setBucketParams,
-	} = useGetSalesDashboardData({ serviceType, isRateList, api, stats, importer_exporter_id, ...rest });
+	} = useGetSalesDashboardData({ serviceType, api, stats, importer_exporter_id, ...rest });
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
-	if (rest.type === 'superAdmins') {
-		if (!isConditionMatches(CC.SHOW_SHIPMENT_STATS)) {
-			return null;
-		}
-	}
-
 	return (
 		<div className={styles.container}>
+			{['most_searched', 'most_booked'].includes(rest.type) ? null : (
+				<div className={styles.header_wrapper}>
+					<Statistics
+						statsArray={stats}
+						statsData={statsData}
+						setFilters={setFilters}
+						setBucketParams={setBucketParams}
+						activeStat={activeStat}
+						restFilters={restFilters}
+					/>
 
-			<div className={styles.header_wrapper}>
-				<Statistics
-					statsArray={stats}
-					statsData={statsData}
-					setFilters={setFilters}
-					setBucketParams={setBucketParams}
-					activeStat={activeStat}
-					restFilters={restFilters}
-				/>
-
-				<Header
-					{...(rest || {})}
-					heading={heading}
-					filters={restFilters}
-					serviceType={serviceType}
-					setServiceType={setServiceType}
-					setFilters={(val) => {
-						setFilters({
-							...(restFilters || {}),
-							...(val || {}),
-							activeStat,
-							page_limit,
-							page: 1,
-						});
-					}}
-				/>
-			</div>
+					<Header
+						{...(rest || {})}
+						heading={heading}
+						filters={restFilters}
+						serviceType={serviceType}
+						setServiceType={setServiceType}
+						setFilters={(val) => {
+							setFilters({
+								...(restFilters || {}),
+								...(val || {}),
+								activeStat,
+								page_limit,
+								page: 1,
+							});
+						}}
+					/>
+				</div>
+			)}
 
 			<div className={styles.table}>
 				<Table
@@ -83,7 +75,6 @@ function List({
 					placement={placement}
 				/>
 			</div>
-
 		</div>
 	);
 }

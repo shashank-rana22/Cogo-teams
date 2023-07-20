@@ -7,6 +7,7 @@ import Incoterms from '../../../../configs/incoterms.json';
 import useSpotSearchService from '../../hooks/useCreateSpotSearchService';
 
 import { getFclPayload } from './configs';
+import ICONS_MAPPING from './icons-mapping';
 import styles from './styles.module.css';
 
 const getServiceName = (service) => {
@@ -23,11 +24,11 @@ function AdditionalServices({ // used in search results and checkout
 	setHeaderProps = () => {},
 	refetchSearch = () => {},
 }) {
-	const { service_type, service_rates = [] } = rateCardData;
+	const { service_rates = [] } = rateCardData;
 
-	const { service_details, inco_term = 'cif', checkout_id = '' } = detail;
+	const { service_details = {}, service_type = '', inco_term = '', checkout_id = '' } = detail;
 
-	const [incoterm, setIncoterm] = useState(inco_term);
+	const [incoterm, setIncoterm] = useState(inco_term || 'cif');
 
 	const primaryService = service_type;
 
@@ -194,9 +195,10 @@ function AdditionalServices({ // used in search results and checkout
 							>
 
 								<div className={styles.service_div}>
-									<span
-										className={styles.icon}
-									/>
+									<span className={styles.icon}>
+										{ICONS_MAPPING[serviceItem.service_type]}
+									</span>
+
 									<span className={styles.service_text}>
 										{serviceItem.title}
 									</span>
@@ -241,7 +243,9 @@ function AdditionalServices({ // used in search results and checkout
 							>
 
 								<div className={styles.service_div}>
-									<span className={styles.icon} />
+									<span className={styles.icon}>
+										{ICONS_MAPPING[serviceItem.service_type]}
+									</span>
 									<span className={styles.service_text}>
 										{serviceItem.title}
 									</span>

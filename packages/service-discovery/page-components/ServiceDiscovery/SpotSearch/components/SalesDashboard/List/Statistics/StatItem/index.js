@@ -10,6 +10,7 @@ function StatItem({
 	className = '',
 	isActive = false,
 	onClick = () => {},
+	showCount = true,
 }) {
 	const newClass = `${styles[className] || ''} ${isActive ? styles.active : ''}`;
 
@@ -28,8 +29,10 @@ function StatItem({
 					</span>
 				)}
 			</div>
-			<div className={`${styles.active} ${styles.margin}`}>{count}</div>
 
+			{showCount ? (
+				<div className={`${styles.active} ${styles.margin}`}>{count}</div>
+			) : null}
 		</div>
 	);
 }

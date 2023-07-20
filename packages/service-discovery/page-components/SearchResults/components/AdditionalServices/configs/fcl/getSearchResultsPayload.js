@@ -1,7 +1,7 @@
 import getServiceWisePayload from './getServiceWisePayload';
 
 const getSearchResultsPayload = ({
-	checkout_id,
+	spot_search_id = '',
 	additionalFormInfo,
 	detail,
 	service_name = '',
@@ -14,7 +14,7 @@ const getSearchResultsPayload = ({
 
 	if (service_name === 'export_transportation') {
 		return {
-			id: checkout_id,
+			spot_search_id,
 			service:
 				origin_cargo_handling_type === 'stuffing_at_factory'
 					? 'trailer_freight'
@@ -41,7 +41,7 @@ const getSearchResultsPayload = ({
 
 	if (service_name === 'import_transportation') {
 		return {
-			id: checkout_id,
+			spot_search_id,
 			service:
 				destination_cargo_handling_type === 'stuffing_at_factory'
 					? 'trailer_freight'
@@ -74,7 +74,7 @@ const getSearchResultsPayload = ({
 	});
 
 	return {
-		id                           : checkout_id,
+		spot_search_id,
 		service                      : service_name,
 		[`${service_name}_services`] : serviceWiseValues,
 	};

@@ -46,9 +46,9 @@ function Back({
 				<span>{heading || 'Back'}</span>
 			</div>
 
-			<div style={{ marginRight: 8 }}>
+			{/* <div style={{ marginRight: 8 }}>
 				<ToggleSwitch />
-			</div>
+			</div> */}
 		</div>
 	);
 }

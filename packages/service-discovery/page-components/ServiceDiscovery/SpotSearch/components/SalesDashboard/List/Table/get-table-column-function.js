@@ -11,6 +11,9 @@ import renderPortPair from './TableItems/renderPortPair';
 import SearchType from './TableItems/SearchType';
 import renderShipment from './TableItems/ShipmentDetails';
 
+const TO_FIXED_DECIMAL_COUNT = 2;
+const PERCENTAGE_FACTOR = 100;
+
 const getTableColumnFunction = (key) => {
 	const newFunction = {
 		renderButton,
@@ -58,7 +61,6 @@ const getTableColumnFunction = (key) => {
 		),
 		renderSource: (itemData) => {
 			const { source = '-' } = itemData || {};
-			console.log(itemData);
 
 			return (
 				<Pill size="md" color="#F7FAEF">
@@ -99,7 +101,7 @@ const getTableColumnFunction = (key) => {
 				return <div className={styles.booking_status}><Pill size="md" color="green">Booked</Pill></div>;
 			}
 
-			if (quotation_email_sent_at && validityTime > 0) {
+			if (quotation_email_sent_at && validityTime > GLOBAL_CONSTANTS.zeroth_index) {
 				return (
 					<div className={styles.booking_status}>
 						<Pill size="md" color="yellow">Sent & Not Booked</Pill>
@@ -132,6 +134,30 @@ const getTableColumnFunction = (key) => {
 
 			return <div>{startCase(task)}</div>;
 		},
+		renderSearchVolume: ({ search_count = 0, total_search_count = 1 }) => (
+			<strong>
+				{total_search_count ? (
+					`${((search_count / total_search_count) * PERCENTAGE_FACTOR)
+						.toFixed(TO_FIXED_DECIMAL_COUNT)}%`
+				) : '-'}
+			</strong>
+		),
+		renderConversionRate: ({ booking_count = 0, quotation_count = 1 }) => (
+			<strong>
+				{quotation_count ? (
+					`${((booking_count / quotation_count) * PERCENTAGE_FACTOR).toFixed(TO_FIXED_DECIMAL_COUNT)}%`
+				) : '-'}
+			</strong>
+		),
+		renderLastSearched: ({ updated_at = '' }) => (
+			<span>
+				{formatDate({
+					date       : updated_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+			</span>
+		),
 	};
 
 	return newFunction[key];

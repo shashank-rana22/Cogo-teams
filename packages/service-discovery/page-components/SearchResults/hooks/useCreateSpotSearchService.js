@@ -1,10 +1,8 @@
 import { Toast } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, checkout_id = '' }) => {
-	const URL = checkout_id ? 'create_checkout_service' : 'create_spot_search_service';
+	const URL = checkout_id ? 'create_checkout_service' : 'add_spot_search_service';
 
 	const [{ loading }, trigger] = useRequest({
 		url    : URL,
@@ -16,7 +14,7 @@ const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, che
 			await trigger({ data: values });
 			refetchSearch({
 				screenObj: {
-					card_id : rateCardData.card,
+					card_id : rateCardData.id,
 					screen  : 'selectedCard',
 				},
 			});

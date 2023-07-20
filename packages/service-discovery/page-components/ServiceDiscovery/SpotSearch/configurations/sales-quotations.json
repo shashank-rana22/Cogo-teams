@@ -54,12 +54,13 @@
 			"label": "",
 			"btnLabel":"Show Rates",
 			"func": "renderButton",
+			"inDifferentWindow": true,
 			"showPrice": true
 		}
 	],
 	"filterProps": {
 		"searchKey": "serial_id",
-		"searchPlaceholder": "Search by Serial Id",
+		"searchPlaceholder": "Search by Id",
 		"controls": [
 			{
 				"name": "performed_by_type",

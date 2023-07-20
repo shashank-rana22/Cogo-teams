@@ -49,7 +49,7 @@ function FilterItem({
 				if (type === 'detention-demurrage') {
 					return (
 						<div className={styles.form_item} key={`${name}_${label}`} style={{ width: `${flex}%` }}>
-							<Detention control={control} />
+							<Detention control={control} action="filter" />
 						</div>
 					);
 				}

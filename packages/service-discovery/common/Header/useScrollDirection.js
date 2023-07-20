@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 
-const THRESHOLD = 50;
-const ZERO_VALUE = 50;
+const THRESHOLD = 40;
 
 const useScrollDirection = () => {
 	const [scrollDirection, setScrollDirection] = useState('up');
@@ -20,7 +19,7 @@ const useScrollDirection = () => {
 
 				setScrollDirection(newScrollDirection);
 
-				prevScrollY.current = scrollY > ZERO_VALUE ? scrollY : ZERO_VALUE;
+				prevScrollY.current = scrollY > THRESHOLD ? scrollY : THRESHOLD;
 			}
 
 			blocking.current = false;

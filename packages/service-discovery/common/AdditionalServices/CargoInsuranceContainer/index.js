@@ -1,5 +1,5 @@
-import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { IcACarriageInsurancePaidTo, IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
+import React, { useState, useEffect } from 'react';
 
 import CargoInsurance from '../CargoInsurance';
 import useDeleteCargoInsurance from '../CargoInsurance/hooks/useDeleteCargoInsurance';
@@ -59,15 +59,18 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 
 	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
+	useEffect(() => {
+		setIsSelected(isCargoInsuranceAlreadyTaken);
+	}, [isCargoInsuranceAlreadyTaken]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Other Services</div>
 
 			<div className={styles.wrapper}>
 				<div className={styles.left_section}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg"
-						alt="insurance"
+
+					<IcACarriageInsurancePaidTo
 						width={32}
 						height={32}
 					/>
@@ -79,18 +82,14 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {} }) {
 					<div className={styles.starting_at_price}>Starting at $0.25/km</div>
 
 					{isSelected ? (
-						<div
-							className={styles.selected_icon}
+						<SelectedIcon
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}
-						>
-							<SelectedIcon
-								height={25}
-								width={25}
-								className={styles.tick_icon}
-								onClick={() => setShowDeleteModal(true)}
-							/>
-						</div>
+							height={25}
+							width={25}
+							className={styles.tick_icon}
+							onClick={() => setShowDeleteModal(true)}
+						/>
 					) : (
 						<IcMPlus
 							height={22}

@@ -22,7 +22,7 @@ const useLikeFeedback = ({ rate, detail, setLikeState = () => {}, likeState = {}
 			const params = {
 				id                  : spot_search_id,
 				is_liked            : true,
-				selected_card       : rate.card,
+				selected_card       : rate.id,
 				performed_by_org_id : detail.importer_exporter.id,
 			};
 

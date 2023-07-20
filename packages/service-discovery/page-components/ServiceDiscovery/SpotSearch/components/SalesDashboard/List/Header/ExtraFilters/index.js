@@ -1,16 +1,11 @@
-import { Pill, Select } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
-import React, { useState, useMemo } from 'react';
+import { Select } from '@cogoport/components';
+import React from 'react';
 
-import FilterContent from './FilterContentComponents';
 import styles from './styles.module.css';
 
-const tabs = ['spot_searches', 'quotations', 'spot_booking', 'sales_shipments'];
+// const tabs = ['spot_searches', 'quotations', 'spot_booking', 'sales_shipments'];
 
-const getServices = ({ type }) => [
+const SERVICES = [
 	{ label: 'FCL', value: 'fcl_freight' },
 	{ label: 'LCL', value: 'lcl_freight' },
 	{ label: 'AIR International', value: 'air_freight' },
@@ -22,42 +17,38 @@ const getServices = ({ type }) => [
 	{ label: 'LTL', value: 'ltl_freight' },
 	{ label: 'Haulage Freight', value: 'haulage_freight' },
 	{ label: 'Trailer Freight', value: 'trailer_freight' },
-	type === 'disliked_rates'
-		? { label: 'Cogo Assured', value: 'cogo_assured' }
-		: { label: 'FCL Locals', value: 'fcl_freight_local' },
+	{ label: 'FCL Locals', value: 'fcl_freight_local' },
 ];
 
 function ExtraFilters({
 	serviceType,
-	filters,
+	// filters,
 	setFilters,
 	setServiceType,
 	type,
 }) {
-	const [date, setDate] = useState({});
-	const [range, setRange] = useState('last_3_days');
-	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+	// const [date, setDate] = useState({});
+	// const [range, setRange] = useState('last_3_days');
+	// const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
-	const { validity_end_less_than, validity_start_greater_than } = date || {};
+	// const { validity_end_less_than, validity_start_greater_than } = date || {};
 
-	const handleApplyFilters = () => {
-		let newDate = { ...date };
+	// const handleApplyFilters = () => {
+	// 	let newDate = { ...date };
 
-		if (tabs.includes(type)) {
-			newDate = {
-				created_at_greater_than : validity_start_greater_than,
-				created_at_less_than    : validity_end_less_than,
-			};
-		}
+	// 	if (tabs.includes(type)) {
+	// 		newDate = {
+	// 			created_at_greater_than : validity_start_greater_than,
+	// 			created_at_less_than    : validity_end_less_than,
+	// 		};
+	// 	}
 
-		setFilters({
-			...filters,
-			...newDate,
-			page: 1,
-		});
-	};
-
-	const SERVICES = useMemo(() => getServices({ type }), [type]);
+	// 	setFilters({
+	// 		...filters,
+	// 		...newDate,
+	// 		page: 1,
+	// 	});
+	// };
 
 	return (
 		<div className={styles.container}>

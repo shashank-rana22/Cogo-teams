@@ -1,51 +1,55 @@
-import React from 'react';
-
-import { serviceMappings } from '../../../../../configs/AdditionalServicesConfig';
+import React, { useState } from 'react';
 
 import getMapping from './getMapping';
+import ServiceItem from './ServiceItem';
+import PrimaryService from './ServiceItem/primaryService';
 import styles from './styles.module.css';
 
-const getServiceName = (service) => {
-	const { trade_type = '', service_type = '' } = service || {};
-	return trade_type ? `${trade_type}_${service_type}` : service_type;
-};
+const SERVICES_CANNOT_BE_REMOVED = ['origin_fcl_freight_local'];
 
 function SelectedServices({ rateDetails = {}, details = {} }) {
-	const { service_type, service_rates = [] } = rateDetails || {};
+	const { service_rates = [] } = rateDetails || {};
 
-	const { service_details } = details || {};
+	const { service_details = {}, service_type = '' } = details || {};
 
-	const primary_service = service_type;
-
-	const servicesArray = serviceMappings({
-		service                : primary_service,
-		destination_country_id : details.destination_country_id,
-		origin_country_id      : details.origin_country_id,
-	});
-
-	const serviceData = {};
-
-	Object.keys(service_rates).forEach((serviceId) => {
-		const serviceItem = service_rates[serviceId];
-
-		const serviceName = getServiceName(serviceItem);
-
-		if (!serviceData[serviceName]) {
-			serviceData[serviceName] = [];
-		}
-
-		serviceData[serviceName].push(serviceItem);
-	});
-
-	const primaryService = Object.keys(service_details).some((service) => service.service_type === primaryService);
+	const primaryService = Object.values(service_details).find((service) => service.service_type === service_type);
 
 	const { selectedServices, servicesMapping } = getMapping({
 		primaryService,
 		otherServices: service_details,
 	});
 
+	const [addedServices, setAddedServices] = useState(selectedServices);
+
 	return (
-		<div className={styles.container}>ServicesTimeline</div>
+		<div className={styles.container}>
+			{(servicesMapping || []).map((serviceItem) => {
+				if (!serviceItem) return null;
+
+				if (serviceItem.key === service_type) {
+					return (
+						<PrimaryService
+							key={serviceItem.key}
+							serviceItem={serviceItem}
+							rateDetails={rateDetails}
+							details={details}
+							service_type={service_type}
+						/>
+					);
+				}
+
+				return (
+					<ServiceItem
+						key={serviceItem.key}
+						serviceItem={serviceItem}
+						addedServices={addedServices}
+						setAddedServices={setAddedServices}
+						service_rates={service_rates}
+						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+					/>
+				);
+			})}
+		</div>
 	);
 }
 

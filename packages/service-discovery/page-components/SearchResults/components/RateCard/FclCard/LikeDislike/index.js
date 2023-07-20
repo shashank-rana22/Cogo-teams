@@ -14,17 +14,20 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 
 	const [likeState, setLikeState] = useState({ is_liked, likes_count, is_disliked });
 
-	const { handleLikeRateCard, loading } = useLikeFeedback({ rate: rateCardData, detail, setLikeState, likeState });
+	const { handleLikeRateCard, loading } = useLikeFeedback({
+		setLikeState,
+		detail,
+		rate: rateCardData,
+		likeState,
+	});
 
 	const handleLikeAction = () => {
 		if (likeState.is_liked) { return; }
-
 		handleLikeRateCard();
 	};
 
 	const handleDislikeAction = () => {
 		if (likeState.is_disliked) { return; }
-
 		setShowFeedbackModal(true);
 	};
 
@@ -57,7 +60,6 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 					height="16px"
 					className={`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
 				/>
-				{/* <span className={styles.count}>{rateCardData.dislikes_count}</span> */}
 			</Button>
 
 			{showFeedbackModal ? (

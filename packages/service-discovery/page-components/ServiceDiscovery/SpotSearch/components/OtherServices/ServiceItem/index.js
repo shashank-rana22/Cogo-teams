@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -8,7 +8,12 @@ const SET_TIMEOUT_DURATION = 1500;
 const MEDIUM_FONT_WEIGHT = 500;
 const SEMIBOLD_FONT_WEIGHT = 600;
 
-function ServiceItem({ data = {}, selectedService, setSelectedService, setSelectedMode }) {
+function ServiceItem({
+	data = {},
+	selectedService = {},
+	setSelectedService = () => {},
+	setSelectedMode = () => {},
+}) {
 	const [bouncing, setBouncing] = useState(false);
 
 	const { label, value, icon: Icon, is_available } = data;
@@ -29,7 +34,7 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 
 	return (
 		<div
-			className={`${styles.container} 
+			className={cl`${styles.container} 
 			${selectedService?.mode_value !== value && is_available && styles.top_border}`}
 			style={{
 				background: selectedService?.mode_value === value ? '#FCDC00' : '#FFFFFF',
@@ -45,7 +50,7 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 				)}
 
 				<Icon
-					className={`${styles.icon} ${selectedService?.mode_value !== value && styles.icon_hover}`}
+					className={cl`${styles.icon} ${selectedService?.mode_value !== value && styles.icon_hover}`}
 				/>
 			</div>
 			<div
@@ -60,7 +65,7 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 
 			{!is_available ? (
 				<div
-					className={`${styles.pill} ${bouncing ? styles.bounce : {}}`}
+					className={cl`${styles.pill} ${bouncing ? styles.bounce : {}}`}
 				>
 					<Pill size="sm" color="yellow">Coming Soon</Pill>
 				</div>

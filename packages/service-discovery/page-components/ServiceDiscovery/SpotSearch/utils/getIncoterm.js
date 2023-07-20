@@ -6,7 +6,7 @@ const getIncoterm = (origin, destination) => {
 
 	const INDIA_COUNTRY_CODE = getCountryDetails({
 		country_id: countryId,
-	});
+	}).country_code;
 
 	if (origin?.country_code !== INDIA_COUNTRY_CODE && destination?.country_code === INDIA_COUNTRY_CODE) {
 		return 'fob';

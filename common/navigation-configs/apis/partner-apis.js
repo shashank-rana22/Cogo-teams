@@ -3626,6 +3626,11 @@ const partner = {
 			feature      : 'rate_feedbacks',
 		},
 		{
+			api          : 'list_spot_search_stats',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
 			api          : 'update_checkout_risk_category',
 			access_type  : 'private',
 			service_name : 'checkout',
