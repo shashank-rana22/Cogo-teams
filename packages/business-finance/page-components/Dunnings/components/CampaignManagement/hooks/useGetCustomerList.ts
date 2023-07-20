@@ -47,9 +47,9 @@ const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
 		}));
 	}, [search, debounceQuery, setFormData]);
 
-	const getCustomerList = useCallback((async () => {
+	const getCustomerList = useCallback((() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					query                      : !isEmpty(query) ? query : undefined,
 					cogoEntityId,
@@ -62,7 +62,7 @@ const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
 				},
 			});
 		} catch (err) {
-			console.log('err-', err);
+			console.error(err);
 		}
 	}), [ageingBucket, cogoEntityId, creditController,
 		dueOutstandingCurrency, pageIndex, query, serviceType,
