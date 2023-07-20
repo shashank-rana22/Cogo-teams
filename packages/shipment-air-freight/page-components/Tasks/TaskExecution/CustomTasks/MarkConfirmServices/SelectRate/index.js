@@ -12,11 +12,14 @@ function SelectRate({
 	setStep,
 	setSelectedCard,
 	updateConfirmation,
+	step = {},
 	task = {},
+	primaryService = {},
 }) {
 	const { data, loading } = useListBookingPreferences({
 		shipment_id    : task.shipment_id,
-		defaultFilters : { service_type: task.service_type },
+		defaultFilters : { service_id: task.service_id },
+		step,
 	});
 
 	const list = data?.list || [];
@@ -72,6 +75,7 @@ function SelectRate({
 						updateConfirmation={updateConfirmation}
 						serviceProvidersData={SERVICE_PROVIDERS_DATA}
 						task={task}
+						primaryService={primaryService}
 					/>
 				))}
 			</div>

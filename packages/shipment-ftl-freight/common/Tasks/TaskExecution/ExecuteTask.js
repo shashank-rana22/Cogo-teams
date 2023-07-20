@@ -8,6 +8,7 @@ import {
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
 	ApproveTruck,
+	ApprovePurchaseDeduction,
 	UploadEWB,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
@@ -83,6 +84,20 @@ function ExecuteTask({
 				task={task}
 				timeLineRefetch={getShipmentTimeline}
 				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+	if (
+		task.task === 'approve_purchase_deduction'
+	) {
+		return (
+			<ApprovePurchaseDeduction
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
+				refetch={taskListRefetch}
 			/>
 		);
 	}

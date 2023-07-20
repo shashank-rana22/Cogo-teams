@@ -8,7 +8,6 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 const SERVICE_INITIAL_KEYS = [
-	'commodity',
 	'bl_category',
 	'bls_count',
 	'bl_type',
@@ -24,12 +23,12 @@ function Details({ serviceData = {} }) {
 
 		const remainingData = omit(serviceData, SERVICE_INITIAL_KEYS);
 
-		const initialDetail = {};
+		const INITIAL_DETAIL = {};
 		SERVICE_INITIAL_KEYS.forEach((key) => {
-			initialDetail[key] = serviceData?.[key];
+			INITIAL_DETAIL[key] = serviceData?.[key];
 		});
 
-		return [items_key, remainingData, initialDetail];
+		return [items_key, remainingData, INITIAL_DETAIL];
 	}, [serviceData, service_type]);
 
 	return (

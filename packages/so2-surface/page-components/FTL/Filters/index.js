@@ -1,7 +1,8 @@
 import { Input, Popover, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import DashboardContext from '../../../context/DashboardContext';
 
@@ -9,14 +10,17 @@ import FilterBy from './FilterBy';
 import SortBy from './SortBy';
 import styles from './styles.module.css';
 
-const MIN_PAGE_VALUE = 1;
-
 function Filters() {
 	const { filters = {}, setFilters = () => {} } = useContext(DashboardContext);
-	const { q = '' } = filters || {};
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
 	const [showFilterPopover, setShowFilterPopover] = useState(false);
 	const [showSortPopover, setShowSortPopover] = useState(false);
+
+	const { query, debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		setFilters((prev) => ({ ...prev, q: query, page: 1 }));
+	}, [query, setFilters]);
 
 	return (
 		<div className={styles.container}>
@@ -27,8 +31,7 @@ function Filters() {
 					type="search"
 					size="sm"
 					suffix={<IcMSearchlight />}
-					value={q}
-					onChange={(val) => setFilters({ ...filters, q: val, page: MIN_PAGE_VALUE })}
+					onChange={(val) => debounceQuery(val)}
 				/>
 			</div>
 

@@ -1604,12 +1604,46 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_shipment_field_service_ops_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_field_service_ops_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_field_service_ops_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_field_service_ops_document_history',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'bulk_update_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
 		api         : 'get_saas_hs_code_list_commodities',
 		access_type : 'private',
 	},
 	{
 		api         : 'get_saas_hs_code_list',
 		access_type : 'private',
+	},
+	{
+		api         : 'get_saas_trade_engine_documents',
+		access_type : 'private',
+	},
+	{
+		api          : 'send_rail_domestic_indent_email',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 
