@@ -60,6 +60,7 @@ const ZERO_COORDINATE = 0;
 const UPDATE_CHECK_INDEX = 1;
 const PDF_HEIGHT_ADJUST_VALUE = 14;
 const PDF_SCALE = 4.5;
+const TWELEVE_COPIES_LAST_INDEX = 1;
 
 function GenerateMawb({
 	taskItem = {},
@@ -236,12 +237,12 @@ function GenerateMawb({
 					if (download24) {
 						if (INCLUDE_TNC.includes(Object.keys(item)[GLOBAL_CONSTANTS.zeroth_index] || item)) {
 							pdf.addPage();
-							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+							pdf.addImage(backPage, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, pdfWidth, pdfHeight);
 						} else {
 							pdf.addPage();
 						}
 					}
-					if (i < copiesValue.length - 1) {
+					if (i < copiesValue.length - TWELEVE_COPIES_LAST_INDEX) {
 						pdf.addPage();
 					}
 				});
