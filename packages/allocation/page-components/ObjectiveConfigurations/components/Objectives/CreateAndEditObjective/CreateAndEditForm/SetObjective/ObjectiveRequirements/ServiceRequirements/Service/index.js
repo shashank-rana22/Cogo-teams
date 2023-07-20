@@ -5,7 +5,8 @@ import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../../common/Form/getFieldController';
-import getServiceRequirementControls from '../../../../../../../../configurations/service-requirements-form-controls';
+// eslint-disable-next-line max-len
+import getServiceRequirementControls from '../../../../../../../../configurations/get-service-requirements-form-controls';
 import checkElementAllowed from '../../../../../../../../helpers/check-element-allowed';
 
 import styles from './styles.module.css';
@@ -19,7 +20,7 @@ function Service(props) {
 		name,
 		remove,
 		watch,
-		resetField,
+		setValue,
 		serviceRequirementOperator,
 		lifecycleStage,
 		disabled,
@@ -40,26 +41,26 @@ function Service(props) {
 	useEffect(() => {
 		const subscription = watch((value, { name: controlName }) => {
 			if (controlName === `${name}.${index}.service_type`) {
-				resetField(`${name}.${index}.trade_type`);
-				resetField(`${name}.${index}.origin_location`);
-				resetField(`${name}.${index}.destination_location`);
-				resetField(`${name}.${index}.inco_term`);
-				resetField(`${name}.${index}.hs_codes`);
-				resetField(`${name}.${index}.container_count`);
-				resetField(`${name}.${index}.cargo_weight`);
-				resetField(`${name}.${index}.volume`);
-				resetField(`${name}.${index}.container_size`);
-				resetField(`${name}.${index}.container_type`);
-				resetField(`${name}.${index}.truck_type`);
+				setValue(`${name}.${index}.trade_type`, '');
+				setValue(`${name}.${index}.origin_location`, '');
+				setValue(`${name}.${index}.destination_location`, '');
+				setValue(`${name}.${index}.inco_term`, []);
+				setValue(`${name}.${index}.hs_codes`, []);
+				setValue(`${name}.${index}.container_count`, '');
+				setValue(`${name}.${index}.cargo_weight`, '');
+				setValue(`${name}.${index}.volume`, '');
+				setValue(`${name}.${index}.container_size`, []);
+				setValue(`${name}.${index}.container_type`, []);
+				setValue(`${name}.${index}.truck_type`, []);
 			}
 
 			if (controlName === `${name}.${index}.shipment_mode`) {
-				resetField(`${name}.${index}.service_type`);
+				setValue(`${name}.${index}.service_type`, '');
 			}
 		});
 
 		return () => subscription.unsubscribe();
-	}, [watch, index, name, resetField]);
+	}, [watch, index, name, setValue]);
 
 	return (
 		<div className={styles.container}>

@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import RenderListLocationOption from '../../../common/RenderListLocationOption';
 import getAllTruckTypeOptions from '../helpers/get-all-truck-type-options';
@@ -62,6 +63,7 @@ const getServiceRequirementControls = (props) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				page_limit: 20,
@@ -72,6 +74,7 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
+			setFilterValue: ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			disabled,
 		},
 		{
@@ -81,6 +84,7 @@ const getServiceRequirementControls = (props) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				page_limit: 20,
@@ -91,6 +95,7 @@ const getServiceRequirementControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
+			setFilterValue: ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			disabled,
 		},
 		{

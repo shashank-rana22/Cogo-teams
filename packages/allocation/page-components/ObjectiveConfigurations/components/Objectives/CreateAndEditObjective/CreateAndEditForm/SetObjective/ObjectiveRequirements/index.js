@@ -16,7 +16,13 @@ const { REVIEW_OBJECTIVE } = CREATE_FORM_STEPPER_KEYS_MAPPING;
 const ObjectiveRequirements = forwardRef((props, ref) => {
 	const { formValues, setFormValues, disabled, setActiveStep, generalConfigFormState } = props;
 
-	const { objectiveRequirements: { stats_details = {}, organization_details = {} } } = formValues;
+	const {
+		objectiveRequirements: {
+			stats_details,
+			organization_details,
+			service_requirements: serviceRequirements,
+		},
+	} = formValues;
 
 	const {
 		countries: filledCountries,
@@ -24,26 +30,61 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 		cities: filledCities,
 		pincodes: filledPincodes,
 		segments: filledSegments,
-	} = organization_details;
+	} = organization_details || {};
 
 	const divRef = useRef({});
 
-	const { control, watch, reset, resetField, setValue, handleSubmit } = useForm({
+	const { control, watch, setValue, handleSubmit } = useForm({
 		defaultValues: {
-			service_requirements : [{}],
-			countries            : getAttachedIdData({ values: filledCountries }),
-			states               : getAttachedIdData({ values: filledStates }),
-			cities               : getAttachedIdData({ values: filledCities }),
-			pincodes             : getAttachedIdData({ values: filledPincodes }),
-			segments             : filledSegments,
+			service_requirements: serviceRequirements ? serviceRequirements.map(
+				(requirement) => (
+					{
+						...requirement,
+						origin_location      : getAttachedIdData({ values: requirement.origin_location }),
+						destination_location : getAttachedIdData({ values: requirement.destination_location }),
+					}
+				),
+			) : [{}],
+			countries : getAttachedIdData({ values: filledCountries }),
+			states    : getAttachedIdData({ values: filledStates }),
+			cities    : getAttachedIdData({ values: filledCities }),
+			pincodes  : getAttachedIdData({ values: filledPincodes }),
+			segments  : filledSegments,
 			...(stats_details || {}),
 
 		},
 	});
 
+	const resetForm = () => {
+		setValue('service_requirements', [{
+			shipment_mode        : '',
+			service_type         : '',
+			trade_type           : '',
+			origin_location      : '',
+			destination_location : '',
+			inco_term            : [],
+			hs_codes             : [],
+			container_count      : '',
+			cargo_weight         : '',
+			volume               : '',
+			container_size       : [],
+			container_type       : [],
+			truck_type           : [],
+		}]);
+		setValue('countries', []);
+		setValue('states', []);
+		setValue('cities', []);
+		setValue('pincodes', []);
+		setValue('segments', []);
+		setValue('date_range', {});
+		setValue('shipment_count', '');
+		setValue('quotation_count', '');
+		setValue('search_count', '');
+	};
+
 	useImperativeHandle(ref, () => ({
 		container                     : divRef.current,
-		resetObjectiveRequirementForm : reset,
+		resetObjectiveRequirementForm : resetForm,
 	}));
 
 	const onSubmit = (values) => {
@@ -101,7 +142,7 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 					name="service_requirements"
 					control={control}
 					watch={watch}
-					resetField={resetField}
+					setValue={setValue}
 					formValues={formValues}
 					setFormValues={setFormValues}
 					disabled={disabled}

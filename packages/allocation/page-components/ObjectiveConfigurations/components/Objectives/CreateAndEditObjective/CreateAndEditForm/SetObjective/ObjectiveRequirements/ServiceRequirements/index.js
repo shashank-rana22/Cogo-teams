@@ -14,7 +14,7 @@ function ServiceRequirements(props) {
 		name,
 		control,
 		watch,
-		resetField,
+		setValue,
 		formValues,
 		setFormValues,
 		disabled,
@@ -34,7 +34,7 @@ function ServiceRequirements(props) {
 					name={name}
 					remove={remove}
 					watch={watch}
-					resetField={resetField}
+					setValue={setValue}
 					serviceRequirementOperator={formValues.objectiveRequirements?.service_requirement_operator}
 					lifecycleStage={formValues.generalConfiguration?.lifecycle_stage}
 					disabled={disabled}
