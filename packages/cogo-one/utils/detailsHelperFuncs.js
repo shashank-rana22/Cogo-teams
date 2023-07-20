@@ -12,6 +12,9 @@ const INCREASE_INDEX_BY = 1;
 const LAST_INDEX = 1;
 const NO_VOLUME_SERVICE_TYPES = ['ftl_freight_service', 'haulage_freight_service'];
 const AIR_TYPE_SERVICES = ['air_freight_service', 'domestic_air_freight_service'];
+const AIR_SERVICES = ['air_freight', 'domestic_air_freight_service', 'air_freight_service', 'domestic_air_freight'];
+const FTL_SERVICES = ['ftl_freight', 'haulage_freight', 'ftl_freight_service', 'haulage_freight_service'];
+const LTL_SERVICES = ['ltl_freight', 'ltl_freight_service'];
 
 function FormatCertificate({ certificates = [] }) {
 	return (
@@ -253,17 +256,9 @@ export function formatServiceDetails(details) {
 	return { ...details, isAir, isLTL };
 }
 
-const AIR_SERVICES = ['air_freight', 'domestic_air_freight_service', 'air_freight_service', 'domestic_air_freight'];
-
-const FTL_SERVICES = ['ftl_freight', 'haulage_freight', 'ftl_freight_service', 'haulage_freight_service'];
-
-const LTL_SERVICES = ['ltl_freight', 'ltl_freight_service'];
-
 export function serviceDetails({ detail = {}, service }) {
 	const isAir = (AIR_SERVICES || []).includes(detail[service]);
-
 	const isFTL = (FTL_SERVICES || []).includes(detail[service]);
-
 	const isLTL = (LTL_SERVICES || []).includes(detail[service]);
 
 	return { ...detail, isAir, isLTL, isFTL };
