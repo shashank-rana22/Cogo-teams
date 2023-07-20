@@ -8,7 +8,7 @@ const ARRAY_LENGTH = 4;
 function Loader() {
 	return (
 		<div>
-			{[...Array(ARRAY_LENGTH)].map((item) => (
+			{[...Array(ARRAY_LENGTH).keys()].map((item) => (
 				<Placeholder height="46px" key={item} className={styles.margin} />))}
 		</div>
 	);

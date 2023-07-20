@@ -6,9 +6,9 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-const CHECK_LIST_EMPTY = 0;
 const geo = getGeoConstants();
 
 const useGetEntityList = () => {
@@ -115,7 +115,7 @@ const useGetEntityList = () => {
 	const filtervalue = Object.values(entityFilters);
 
 	const filterClear = filtervalue.filter((item) => {
-		if (Array.isArray(item) && item.length === CHECK_LIST_EMPTY) {
+		if (Array.isArray(item) && isEmpty(item)) {
 			return false;
 		}
 		return item !== undefined && item !== '';

@@ -11,7 +11,7 @@ import useGetEntityReport from '../../../hooks/useGetEntityReport';
 import Details from './Details';
 import styles from './styles.module.css';
 
-const ONE = 1;
+const MONTH_INDEX = 1;
 
 function ColumnCard({
 	item = {}, filters = {},
@@ -65,7 +65,7 @@ function ColumnCard({
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 							formatType : 'date',
 						})
-						: `${GLOBAL_CONSTANTS.months[month - ONE]} ${year}`}
+						: `${GLOBAL_CONSTANTS.months[month - MONTH_INDEX]} ${year}`}
 				</div>
 				<div className={styles.alloted}>
 					{	getFormattedPrice(
@@ -116,7 +116,7 @@ function ColumnCard({
 					setFilters={setFilters}
 					activeEntityCode={activeEntityCode}
 					setActiveEntityCode={setActiveEntityCode}
-					monthName={GLOBAL_CONSTANTS.months[month - ONE]}
+					monthName={GLOBAL_CONSTANTS.months[month - MONTH_INDEX]}
 				/>
 			) : null}
 		</div>
