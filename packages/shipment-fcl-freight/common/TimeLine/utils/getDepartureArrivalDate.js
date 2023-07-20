@@ -8,7 +8,7 @@ export function getDepartureArrivalDate(primary_service = {}, key = '') {
 
 	const datesMapping = {
 		arrival   : schedule_arrival || selected_schedule_arrival,
-		deparutre : schedule_departure || selected_schedule_departure,
+		departure : schedule_departure || selected_schedule_departure,
 	};
 
 	return datesMapping[key];

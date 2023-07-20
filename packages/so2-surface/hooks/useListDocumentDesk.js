@@ -8,7 +8,7 @@ import payloadMapping from '../configs/payloadMapping';
 import DashboardContext from '../context/DashboardContext';
 
 const PAGE_SIZE = 20;
-const MIN_PAGE_VALUE = 1;
+const DEFAULT_PAGE = 1;
 const CANCELED_ERROR = 'canceled';
 
 const useListDocumentDesk = () => {
@@ -32,13 +32,14 @@ const useListDocumentDesk = () => {
 			},
 			pending_task_required: !['eway_bill_validity',
 				'cancelled_shipment', 'completed_shipment'].includes(activeTab),
-			service_details_required : true,
-			sort_by                  : filters?.sortValue,
-			sort_type                : filters?.order,
-			task_stats_required      : true,
-			pagination_data_required : true,
+			service_details_required          : true,
+			sort_by                           : filters?.sortValue,
+			sort_type                         : filters?.order,
+			task_stats_required               : true,
+			pagination_data_required          : true,
+			is_collection_party_data_required : true,
 			page,
-			page_limit               : PAGE_SIZE,
+			page_limit                        : PAGE_SIZE,
 		},
 	});
 
@@ -46,10 +47,11 @@ const useListDocumentDesk = () => {
 		try {
 			const res = await trigger();
 
-			if (isEmpty(res?.data?.list) && page > MIN_PAGE_VALUE) setFilters({ ...filters, page: 1 });
+			if (isEmpty(res?.data?.list) && page > DEFAULT_PAGE) setFilters({ ...filters, page: DEFAULT_PAGE });
 
 			setApiData(res?.data || {});
 		} catch (err) {
+			if (err?.message === 'canceled') return;
 			setApiData({});
 			if (err?.message === CANCELED_ERROR) { return; }
 			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');

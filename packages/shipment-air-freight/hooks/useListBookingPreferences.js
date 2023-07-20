@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '' }) => {
+const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '', step }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 
@@ -32,7 +32,7 @@ const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '' }) =>
 
 	useEffect(() => {
 		apiTrigger();
-	}, [shipment_id, apiTrigger]);
+	}, [shipment_id, apiTrigger, step]);
 
 	return {
 		loading,
