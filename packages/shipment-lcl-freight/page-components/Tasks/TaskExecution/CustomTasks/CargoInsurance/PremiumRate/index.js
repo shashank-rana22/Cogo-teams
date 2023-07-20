@@ -8,9 +8,7 @@ import styles from './styles.module.css';
 const CHARGES = ['Premium', 'Platform Charges', 'Convenience Fee'];
 const DEFAULT_AMOUNT = 0;
 
-const geo = getGeoConstants();
-
-const formarAmountData = (amount) => formatAmount({
+const formarAmountData = (amount, geo) => formatAmount({
 	amount,
 	currency : geo.country.currency.code,
 	options  : {
@@ -20,19 +18,21 @@ const formarAmountData = (amount) => formatAmount({
 	},
 });
 
-function PremiumLineItem({ amount = 0, item = '', key = '' }) {
+function PremiumLineItem({ amount = 0, item = '', key = '', geo = {} }) {
 	return (
 		<div className={styles.premium_line_item} key={key}>
 			<span className={styles.text}>{item}</span>
 			<div className={cl`${styles.flex_row} ${styles.values}`}>
 				<hr className={styles.line} />
-				{formarAmountData(amount)}
+				{formarAmountData(amount, geo)}
 			</div>
 		</div>
 	);
 }
 
 function PremiumRate({ premiumLoading = false, premiumData = {} }) {
+	const geo = getGeoConstants();
+
 	if (premiumLoading) {
 		return (
 			<div className={cl`${styles.premium_value} ${styles.loading}`}>
@@ -44,15 +44,30 @@ function PremiumRate({ premiumLoading = false, premiumData = {} }) {
 	return (
 		<div className={styles.premium_value}>
 			{isEmpty(premiumData?.serviceChargeList)
-				? CHARGES.map((item) => PremiumLineItem({ amount: DEFAULT_AMOUNT, item, key: item?.displayName }))
-				: premiumData?.serviceChargeList?.map((item) => PremiumLineItem({
-					amount : item?.totalCharges,
-					item   : item?.displayName,
-					key    : item?.displayName,
-				}))}
+				? CHARGES.map((item) => (
+					<PremiumLineItem
+						amount={DEFAULT_AMOUNT}
+						item={item}
+						key={item?.displayName}
+						geo={geo}
+					/>
+				))
+				: premiumData?.serviceChargeList?.map((item) => (
+					<PremiumLineItem
+						amount={item?.totalCharges}
+						item={item?.displayName}
+						key={item?.displayName}
+						geo={geo}
+					/>
+				))}
 
 			<hr className={styles.line} />
-			{PremiumLineItem({ amount: premiumData?.totalApplicableCharges, item: 'Amount Payable', key: '' })}
+			<PremiumLineItem
+				amount={premiumData?.totalApplicableCharges}
+				item="Amount Payable"
+				key=""
+				geo={geo}
+			/>
 		</div>
 	);
 }

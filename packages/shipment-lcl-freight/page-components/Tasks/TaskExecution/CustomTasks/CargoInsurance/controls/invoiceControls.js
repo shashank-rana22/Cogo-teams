@@ -5,7 +5,7 @@ const fileUploadRestControls = {
 	themeType  : 'secondary',
 	drag       : true,
 	uploadIcon : 'ic-upload',
-	maxSize    : '10485760',
+	maxSize    : `${GLOBAL_CONSTANTS.options.upload_file_size['1MB']}`,
 	height     : 80,
 	accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/'

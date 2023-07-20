@@ -66,6 +66,8 @@ function Step1({
 	const { id: prosporerAddressId, address_type: prosporerAddressType } = prosporerAddress || {};
 	const { billingId, address_type: billingDataAddressType } = billingData || {};
 
+	const controls = personalDetailsControl();
+
 	useEffect(() => {
 		if (policyForSelf) {
 			setAddressId(
@@ -85,7 +87,7 @@ function Step1({
 	return (
 		<section className={styles.container}>
 			<Layout
-				fields={personalDetailsControl}
+				fields={controls}
 				control={control}
 				errors={errors}
 			/>

@@ -62,27 +62,28 @@ function CargoInsurance({
 
 	const RenderStep = stepMapping[step];
 
-	if (RenderStep) {
-		return (
-			<RenderStep
-				setStep={setStep}
-				step={step}
-				insuranceDetails={insuranceDetails}
-				shipmentData={shipment_data}
-				policyId={policyDetails?.cargo_insurance_policy_id}
-				onCancel={onCancel}
-				refetch={refetch}
-				primary_service={primary_service}
-				task={task}
-				addressId={addressId}
-				billingData={billingData}
-				formProps={formProps}
-				setAddressId={setAddressId}
-				setBillingData={setBillingData}
-			/>
-		);
+	if (!RenderStep) {
+		return null;
 	}
-	return null;
+
+	return (
+		<RenderStep
+			setStep={setStep}
+			step={step}
+			insuranceDetails={insuranceDetails}
+			shipmentData={shipment_data}
+			policyId={policyDetails?.cargo_insurance_policy_id}
+			onCancel={onCancel}
+			refetch={refetch}
+			primary_service={primary_service}
+			task={task}
+			addressId={addressId}
+			billingData={billingData}
+			formProps={formProps}
+			setAddressId={setAddressId}
+			setBillingData={setBillingData}
+		/>
+	);
 }
 
 export default CargoInsurance;
