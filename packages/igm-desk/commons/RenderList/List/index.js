@@ -7,7 +7,7 @@ import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data, Card }) {
+export default function List({ data = {}, Card = null }) {
 	const { filters, setFilters, tabState = {} } = useContext(IGMDeskContext) || {};
 	const { list = [], total } = data || {};
 

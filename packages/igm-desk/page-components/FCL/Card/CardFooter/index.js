@@ -21,7 +21,7 @@ export default function CardFooter({ item = {} }) {
 	};
 
 	return (
-		<div className={styles.card_footer}>
+		<section className={styles.card_footer}>
 			{!isEmpty(item?.documents) ? (
 				<div className={styles.details}>
 					<span className={styles.text}>Documents :</span>
@@ -38,6 +38,6 @@ export default function CardFooter({ item = {} }) {
 					))}
 				</div>
 			) : null}
-		</div>
+		</section>
 	);
 }

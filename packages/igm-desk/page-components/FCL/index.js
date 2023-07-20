@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 export default function FclDesk() {
 	return (
 		<>
-			<div className={styles.flex_row}>
+			<span className={styles.flex_row}>
 				<h1>IGM Desk</h1>
-			</div>
+			</span>
 
 			<div className={styles.flex_row}>
 				<Tabs tabs={FCL_COMMON_TABS} />

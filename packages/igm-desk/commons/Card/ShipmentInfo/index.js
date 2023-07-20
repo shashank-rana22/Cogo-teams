@@ -16,12 +16,12 @@ export default function ShipmentInfo({ item = {} }) {
 				placement="bottom"
 				interactive
 				content={(
-					<div>
+					<span>
 						{shipping_line?.business_name}
-					</div>
+					</span>
 				)}
 			>
-				<div className={styles.heading}>
+				<span className={styles.heading}>
 					Line:
 					<span
 						className={cl`${styles.ellipsis_text} ${styles.pointer}`}
@@ -29,9 +29,9 @@ export default function ShipmentInfo({ item = {} }) {
 						{shipping_line?.business_name}
 
 					</span>
-				</div>
+				</span>
 			</Tooltip>
-			<div className={styles.heading}>
+			<span className={styles.heading}>
 				MBL No:
 				<div
 					className={cl`${styles.ellipsis_text}
@@ -47,7 +47,7 @@ export default function ShipmentInfo({ item = {} }) {
 				|| 'NA'}
 
 				</div>
-			</div>
+			</span>
 			<span className={styles.stakeholder}>
 				POC:
 				{' '}

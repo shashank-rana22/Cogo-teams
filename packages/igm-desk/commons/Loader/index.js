@@ -6,7 +6,7 @@ const LOADERS_COUNT = 4;
 
 function Card() {
 	return (
-		<div className={styles.card}>
+		<section className={styles.card}>
 			<div className={styles.shipment_info}>
 				<Placeholder className={styles.loader} />
 			</div>
@@ -25,7 +25,7 @@ function Card() {
 			<div className={styles.cargo_details}>
 				<Placeholder className={styles.loader} />
 			</div>
-		</div>
+		</section>
 	);
 }
 

@@ -15,7 +15,7 @@ export default function Card({ item = {}, activeTab = '' }) {
 			as={`/booking/igm/fcl/${item.id}?${CONSTANTS.url_navigation_params}`}
 			className={styles.card}
 		>
-			<div className={styles.card_body}>
+			<section className={styles.card_body}>
 				<ShipmentInfo item={item} />
 
 				<div className={styles.separator} />
@@ -26,11 +26,11 @@ export default function Card({ item = {}, activeTab = '' }) {
 
 				<div className={styles.heading}>
 					<span>CFS Address:</span>
-					<div className={styles.cfs_details}>
+					<span className={styles.cfs_details}>
 						RSP Tower, Plot No.28-P, Urban Estate, Sector - 44 ,Gurgaon – 122003, Haryana, India
-					</div>
+					</span>
 				</div>
-			</div>
+			</section>
 
 			{activeTab !== 'daily_report' ? <CardFooter item={item} /> : null}
 		</Link>
