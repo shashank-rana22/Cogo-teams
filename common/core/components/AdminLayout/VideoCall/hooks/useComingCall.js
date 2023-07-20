@@ -6,11 +6,12 @@ import Peer from 'simple-peer';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { callUpdate, saveWebrtcToken } from '../utils';
 
+import { useSetInACall } from './useSetInACall';
+
 function useComingCall({
 	firestore,
 	setCallDetails,
 	callDetails,
-	setInACall,
 	inVideoCall,
 	setCallComing,
 	setStreams,
@@ -19,6 +20,8 @@ function useComingCall({
 	setWebrtcToken,
 	callEnd,
 }) {
+	const { saveInACallStatus } = useSetInACall();
+
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
@@ -35,27 +38,7 @@ function useComingCall({
 			if (docSnap.exists()) {
 				const token = docSnap.data();
 				setWebrtcToken((prev) => ({ ...prev, user_token: token?.user_token }));
-			} else {
-				console.log('No such document!');
 			}
-		}
-	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
-
-	useEffect(() => {
-		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
-			const tokenDocRef = doc(
-				firestore,
-				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
-				callDetails.webrtc_token_room_id,
-			);
-			onSnapshot(tokenDocRef, (dop) => {
-				const room_data = dop.data();
-				setWebrtcToken((prev) => ({
-					...prev,
-					peer_token : room_data?.peer_token,
-					user_token : room_data?.user_token,
-				}));
-			});
 		}
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
 
@@ -87,10 +70,6 @@ function useComingCall({
 					);
 				});
 
-				peer.on('track', (track, stream) => {
-					console.log(track, 'truck', stream, 'in call answerOfCall');
-				});
-
 				peer.on('stream', (peerStream) => {
 					setStreams((prev) => ({ ...prev, peer_stream: peerStream }));
 				});
@@ -107,14 +86,14 @@ function useComingCall({
 				});
 			})
 			.catch((error) => {
-				console.log('user stream is not working', error);
+				console.error('user stream is not working', error);
 			});
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id,
 		callEnd, firestore, peerRef, setStreams, webrtcToken.user_token]);
 
 	const answerOfCall = useCallback(() => {
 		getWebrtcToken().then(() => {
-			setInACall(true);
+			saveInACallStatus(true);
 			setCallComing(false);
 
 			callUpdate({
@@ -127,7 +106,7 @@ function useComingCall({
 
 			accepteCallMedia();
 		});
-	}, [accepteCallMedia, callDetails?.calling_room_id, firestore, getWebrtcToken, setCallComing, setInACall]);
+	}, [accepteCallMedia, callDetails?.calling_room_id, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
 
 	const rejectOfCall = useCallback(() => {
 		callUpdate({
@@ -142,12 +121,30 @@ function useComingCall({
 	}, [callDetails?.calling_room_id, firestore, setCallComing]);
 
 	useEffect(() => {
+		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
+			const tokenDocRef = doc(
+				firestore,
+				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
+				callDetails.webrtc_token_room_id,
+			);
+			onSnapshot(tokenDocRef, (dop) => {
+				const room_data = dop.data();
+				setWebrtcToken((prev) => ({
+					...prev,
+					peer_token : room_data?.peer_token,
+					user_token : room_data?.user_token,
+				}));
+			});
+		}
+	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
+
+	useEffect(() => {
 		const room_data = callDetails?.calling_details;
 		const notCallingCallStatus = ['rejected', 'end_call', 'miss_call', 'technical_error'];
-
+		const stopCallStatus = ['rejected', 'end_call', 'technical_error'];
 		if (
 			room_data?.call_status
-			&& notCallingCallStatus.includes(room_data?.call_status)
+			&& stopCallStatus.includes(room_data?.call_status)
 			&& callDetails?.calling_room_id
 		) {
 			callEnd();
@@ -181,7 +178,7 @@ function useComingCall({
 					}));
 					setCallComing(true);
 				} else {
-					console.log('in a call aready');
+					console.error('you are already in a call aready');
 				}
 			});
 		});

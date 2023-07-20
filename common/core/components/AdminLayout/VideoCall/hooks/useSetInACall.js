@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 export const useSetInACall = () => {
 	const dispatch = useDispatch();
 
-	const setInACall = useCallback((call_status) => {
+	const saveInACallStatus = useCallback((call_status) => {
 		dispatch(
 			setProfileState({
 				video_call_recipient_data : {},
@@ -15,6 +15,6 @@ export const useSetInACall = () => {
 	}, [dispatch]);
 
 	return {
-		setInACall,
+		saveInACallStatus,
 	};
 };
