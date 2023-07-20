@@ -30,5 +30,5 @@ function Card() {
 }
 
 export default function Loader() {
-	return Array(LOADERS_COUNT).fill(null).map(() => <Card key={Math.random()} />);
+	return Array(LOADERS_COUNT).fill(null).map((i) => <Card key={i} />);
 }
