@@ -43,6 +43,34 @@ const useHandleQuotationModal = ({
 		agent_id,
 	]);
 
+	const org_id =		selected === 'main'
+		? detail?.importer_exporter_id
+		: selected?.organization_id;
+
+	const orgUsersParams = {
+		page_limit : 100,
+		filters    : {
+			organization_id: org_id,
+		},
+	};
+
+	const [{ loading }, trigger] = useRequest(
+		{
+			url    : '/send_checkout_quotation_emails',
+			method : 'POST',
+		},
+		{ manual: true },
+	);
+
+	const [{ data: orgUsersData = {} }, triggerListOrgUsers] = useRequest(
+		{
+			method : 'get',
+			url    : '/list_organization_users',
+			params : orgUsersParams,
+		},
+		{ manual: false },
+	);
+
 	const {
 		control: recipientsControl,
 		watch: recipientWatch,
@@ -62,34 +90,6 @@ const useHandleQuotationModal = ({
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	const [{ loading }, trigger] = useRequest(
-		{
-			url    : '/send_checkout_quotation_emails',
-			method : 'POST',
-		},
-		{ manual: true },
-	);
-
-	const org_id =		selected === 'main'
-		? detail?.importer_exporter_id
-		: selected?.organization_id;
-
-	const orgUsersParams = {
-		page_limit : 100,
-		filters    : {
-			organization_id: org_id,
-		},
-	};
-
-	const [{ data: orgUsersData = {} }, triggerListOrgUsers] = useRequest(
-		{
-			method : 'get',
-			url    : '/list_organization_users',
-			params : orgUsersParams,
-		},
-		{ manual: false },
-	);
 
 	const getEmailPreviewProps = useMemo(
 		() => ({
@@ -153,7 +153,7 @@ const useHandleQuotationModal = ({
 
 				Toast.success('Email sent');
 
-				updateCheckout({ values: { id: checkout_id, is_locked: true } });
+				// updateCheckout({ values: { id: checkout_id, is_locked: true } });
 			} catch (err) {
 				if (err?.response) {
 					getApiErrorString(err.response?.data);

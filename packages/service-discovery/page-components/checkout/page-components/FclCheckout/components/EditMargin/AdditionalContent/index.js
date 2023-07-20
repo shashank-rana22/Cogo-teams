@@ -1,29 +1,45 @@
 import { useContext } from 'react';
 
-import Cancellation from '../../../../../../commons/Cancellation';
-import ConfirmationTexts from '../../../../../../commons/ConfirmationTexts';
-import DefaultQuotationInfo from '../../../../../../commons/DefaultQuotationInfo';
-import ShareQuotation from '../../../../../../commons/ShareQuotation';
-import { CheckoutContext } from '../../../../../../context';
+import Cancellation from '../../../../../commons/Cancellation';
+import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
+import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
+import ShareQuotation from '../../../../../commons/ShareQuotation';
+import { CheckoutContext } from '../../../../../context';
 
+import AdditionalServices from './AdditionalServices';
 import styles from './styles.module.css';
 
 function AdditionalContent({
-	rateDetails,
-	additionalRemark,
-	convenienceDetails,
-	convenience_line_item,
+	rateDetails = [],
+	additionalRemark = '',
+	convenienceDetails = {},
+	convenience_line_item = {},
+	noRatesPresent = false,
 }) {
 	const {
 		rate,
 		detail,
 		primaryService,
+		getCheckout,
+		setHeaderProps,
+		possible_subsidiary_services = [],
+		loading,
 	} = useContext(CheckoutContext);
 
 	const { services = {}, trade_type = '' } = detail;
 
 	return (
 		<div className={styles.container}>
+			<AdditionalServices
+				rate={rate}
+				detail={detail}
+				setHeaderProps={setHeaderProps}
+				primaryService={primaryService}
+				getCheckout={getCheckout}
+				loading={loading}
+				possible_subsidiary_services={possible_subsidiary_services}
+			/>
+
 			<div className={styles.sub_heading}>Cancellation Policy</div>
 			<Cancellation
 				detail={detail}
@@ -48,6 +64,7 @@ function AdditionalContent({
 				additionalRemark={additionalRemark}
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
+				noRatesPresent={noRatesPresent}
 			/>
 		</div>
 	);

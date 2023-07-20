@@ -25,7 +25,7 @@ function PointOfContact({ bookingConfirmationMode = [], getCheckout, detail = {}
 	const {
 		updateCheckout,
 		updateLoading,
-	} = useUpdateCheckout({ getCheckout });
+	} = useUpdateCheckout({ getCheckout, detail });
 
 	const onEditorAddContact = (values) => {
 		updateCheckout({ values: { ...values, id } });

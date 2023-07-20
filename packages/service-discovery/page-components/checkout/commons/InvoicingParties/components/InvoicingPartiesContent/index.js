@@ -1,9 +1,12 @@
 import { isEmpty } from '@cogoport/utils';
 
+import CardLoadingState from '../../../LoadingState/CardLoadingState';
 import AddInvoicingParty from '../AddInvoicingParty';
 import EmptyState from '../EmptyState';
 
 import CurrentInvoicingParty from './components/CurrentInvoicingParty';
+
+const INDEX_TO_VALUE_DIF = 1;
 
 export const DOCUMENT_HANDLING_FIELDS = [
 	'Document Category',
@@ -25,7 +28,14 @@ function InvoicingPartiesContent({
 	getCheckoutInvoices = () => {},
 	updateCheckoutInvoice = () => {},
 	updateLoading = false,
+	loading = false,
 }) {
+	if (loading) {
+		return (
+			<CardLoadingState />
+		);
+	}
+
 	if (isEmpty(invoicingParties)) {
 		return (
 			<div>
@@ -72,7 +82,7 @@ function InvoicingPartiesContent({
 						key={invoiceParty.id}
 						paymentModes={finalPaymentModes}
 						invoiceParty={invoiceParty}
-						lastItem={invoicingParties.length - 1 === index}
+						lastItem={invoicingParties.length - INDEX_TO_VALUE_DIF === index}
 						editInvoice={editInvoice}
 						setEditInvoice={setEditInvoice}
 						length={invoicingParties.length}

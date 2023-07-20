@@ -1,11 +1,11 @@
 import { Toast } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {} }) => {
+const useSpotSearchService = ({ refetchSearch = () => {}, rateCardData = {}, checkout_id = '' }) => {
+	const URL = checkout_id ? 'create_checkout_service' : 'add_spot_search_service';
+
 	const [{ loading }, trigger] = useRequest({
-		url    : '/add_spot_search_service',
+		url    : URL,
 		method : 'POST',
 	}, { manual: true });
 

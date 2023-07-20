@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
@@ -44,10 +45,14 @@ function ContainerForm({
 	} = useForm();
 
 	useEffect(() => {
-		setValue(
-			'cargo_readiness_date',
-			new Date(servicesApplicable?.[GLOBAL_CONSTANTS.zeroth_index]?.cargo_readiness_date),
-		);
+		const cargo_readiness_date = servicesApplicable?.[GLOBAL_CONSTANTS.zeroth_index]?.cargo_readiness_date;
+
+		if (cargo_readiness_date) {
+			setValue(
+				'cargo_readiness_date',
+				new Date(servicesApplicable?.[GLOBAL_CONSTANTS.zeroth_index]?.cargo_readiness_date),
+			);
+		}
 	}, [servicesApplicable, setValue]);
 
 	useImperativeHandle(ref, () => ({
@@ -85,10 +90,10 @@ function ContainerForm({
 				if (!Element) return null;
 
 				return (
-					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+					<div key={name} className={cl`${styles.form_group} ${styles[name]}`}>
 						<div className={styles.label}>{label}</div>
 
-						<div className={`${styles.input_group} ${styles[name]}`}>
+						<div className={cl`${styles.input_group} ${styles[name]}`}>
 							<Element
 								control={control}
 								{...(type === 'fileUpload'

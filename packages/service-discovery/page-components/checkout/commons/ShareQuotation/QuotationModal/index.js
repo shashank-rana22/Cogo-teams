@@ -5,11 +5,11 @@ import styles from './styles.module.css';
 import useHandleQuotationModal from './useHandleQuotationModal';
 
 function QuotationModal({
-	modalSize,
+	modalSize = '',
 	setShowShareQuotationModal = () => {},
 	showShareQuotationModal = false,
 	detail = {},
-	checkout_type,
+	checkout_type = '',
 	...restProps
 }) {
 	const {

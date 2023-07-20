@@ -56,7 +56,7 @@ const useInvoicingParties = ({ detail = {} }) => {
 
 	const [paymentModes, setPaymentModes] = useState({});
 
-	const [{ data = {} }, trigger] = useRequest(
+	const [{ data = {}, loading: listLoading }, trigger] = useRequest(
 		{
 			url    : '/list_checkout_invoices',
 			method : 'GET',
@@ -145,7 +145,7 @@ const useInvoicingParties = ({ detail = {} }) => {
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
 		editInvoice,
-		loading,
+		loading: loading || listLoading,
 		setEditInvoice,
 		paymentModes,
 		setPaymentModes,

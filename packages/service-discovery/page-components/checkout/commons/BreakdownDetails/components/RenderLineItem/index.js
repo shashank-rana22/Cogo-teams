@@ -5,8 +5,17 @@ import { startCase } from '@cogoport/utils';
 import ServiceMargin from './ServiceMargin';
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function RenderLineItem({
-	lineItem = {}, id_prefix, setRateDetails, serviceIndex, lineItemIndex, rate, shouldEditMargin, detail, disableForm,
+	lineItem = {},
+	setRateDetails = () => {},
+	serviceIndex = 0,
+	lineItemIndex = 0,
+	rate = {},
+	shouldEditMargin = false,
+	detail = {},
+	disableForm = false,
 }) {
 	const {
 		margins = [],
@@ -20,7 +29,7 @@ function RenderLineItem({
 	} = lineItem;
 
 	const buy_price = total_price_discounted
-     - (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || 0);
+		- (margins.find((marginObj) => marginObj?.margin_type === 'demand')?.total_margin_value || DEFAULT_VALUE);
 
 	const displayBuyPrice = formatAmount({
 		amount  : Number(buy_price),
@@ -76,28 +85,22 @@ function RenderLineItem({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.service_name}>
-				{name}
-			</div>
-			<div className={styles.currency}>
-				{currency}
-			</div>
+			<div className={styles.service_name}>{name}</div>
+			<div className={styles.currency}>{currency}</div>
 			<div className={styles.buy_price}>
 				{displayBuyPrice}
 
 				<div className={styles.per_container_value}>
 					{`${(Number(buy_price) / quantity).toFixed(2)} ${
 						GLOBAL_CONSTANTS.freight_unit_mapping[unit]
-					|| `/${startCase(unit || 'Ctr')}`
+						|| `/${startCase(unit || 'Ctr')}`
 					}`}
 				</div>
 			</div>
 			<div className={styles.unit}>
 				{GLOBAL_CONSTANTS.freight_unit_mapping[unit] || startCase(unit)}
 			</div>
-			<div className={styles.quantity}>
-				{quantity}
-			</div>
+			<div className={styles.quantity}>{quantity}</div>
 
 			<ServiceMargin
 				serviceIndex={serviceIndex}
@@ -107,9 +110,11 @@ function RenderLineItem({
 				onChangeLineItem={onChangeLineItem}
 				shouldEditMargin={
 					(shouldEditMargin
-					&& isServiceMarginAllowedRate
-					&& isLineItemMarginEditAllowed
-					&& isQutationEditAllowed && !disableForm) || isNew
+						&& isServiceMarginAllowedRate
+						&& isLineItemMarginEditAllowed
+						&& isQutationEditAllowed
+						&& !disableForm)
+					|| isNew
 				}
 			/>
 		</div>

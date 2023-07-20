@@ -9,15 +9,10 @@ import useInvoicingParties from './useInvoicingParties';
 
 function InvoicingParties() {
 	const {
-		orgData = {},
-		primary_service,
 		rate,
-		conversions,
 		detail = {},
 		invoice = {},
 	} = useContext(CheckoutContext);
-
-	const { data: organization = {} } = orgData;
 
 	const { services = {} } = detail;
 
@@ -59,6 +54,7 @@ function InvoicingParties() {
 				getCheckoutInvoices={getCheckoutInvoices}
 				updateCheckoutInvoice={updateCheckoutInvoice}
 				updateLoading={updateLoading}
+				loading={loading}
 			/>
 		</div>
 	);

@@ -1,10 +1,9 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
-import CargoInsuranceContainer from '../../../../common/AdditionalServices/CargoInsuranceContainer';
 import SubsidiaryServices from '../../../../common/AdditionalServices/SubsidiaryServices';
 import AdditionalServices from '../AdditionalServices';
 import Bundles from '../Bundles';
@@ -13,6 +12,13 @@ import FclCard from '../RateCard/FclCard';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+
+const CargoInsuranceContainer = dynamic(
+	() => import(
+		'../../../../common/AdditionalServices/CargoInsuranceContainer'
+	),
+	{ ssr: false },
+);
 
 const RateCardMapping = {
 	fcl_freight: {
