@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
@@ -7,11 +8,33 @@ import getPieChartData from '../../../../../../configurations/get-pie-chart-data
 import styles from './styles.module.css';
 
 function EnrichmentStats(props) {
-	const { stats = {}, loading: loadingStats = false } = props;
+	const { stats = {}, loadingStats = false } = props;
 
 	const pieChartData = getPieChartData({ stats });
 
 	const isEmpty = Object.values(stats).every((item) => item === GLOBAL_CONSTANTS.zeroth_index);
+
+	if (loadingStats) {
+		return (
+
+			<div className={styles.container}>
+
+				<Placeholder
+					type="circle"
+					radius="163px"
+					margin="38px 32px 72px 200px"
+				/>
+
+				<Placeholder
+					type="circle"
+					radius="163px"
+					margin="38px 32px 72px 200px"
+				/>
+
+			</div>
+
+		);
+	}
 
 	if (isEmpty && !loadingStats) {
 		return (
@@ -24,6 +47,7 @@ function EnrichmentStats(props) {
 	return (
 		<section className={styles.container}>
 			{Object.values(pieChartData).map((chartData) => (
+
 				<div key={chartData} className={styles.chart_container}>
 					<div className={styles.chart_title}>{chartData.title}</div>
 
@@ -74,8 +98,10 @@ function EnrichmentStats(props) {
 							</div>
 						)}
 					/>
+
 				</div>
 			))}
+
 		</section>
 	);
 }

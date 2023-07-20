@@ -217,7 +217,8 @@ const getEnrichmentColumnsData = ({
 							size="md"
 							themeType="primary"
 							type="button"
-							disabled={assigned_user && !isEmpty(assigned_user) && assigned_user.id !== user_id}
+							disabled={secondaryTab !== 'success' && assigned_user
+							&& !isEmpty(assigned_user) && assigned_user.id !== user_id}
 							icon={(
 								<IcMOverflowDot
 									height={16}
