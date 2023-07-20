@@ -396,6 +396,7 @@ const GLOBAL_CONSTANTS = {
 		ends_with_star_char  : /\*[^0-9a-zA-Z]/,
 		string_to_array      : /'/g,
 		file_upload_url      : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin  : /^.{4}$/,
 		amount_seperator     : /\D/g,
 	},
 	zeroth_index                 : 0,
@@ -423,6 +424,9 @@ const GLOBAL_CONSTANTS = {
 		feature_supported_service: {
 			cargo_insurance: {
 				countries: ['IN'],
+			},
+			treasury: {
+				currencies: ['INR', 'USD', 'VND'],
 			},
 		},
 	},
