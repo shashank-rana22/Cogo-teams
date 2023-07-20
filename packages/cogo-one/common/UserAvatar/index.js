@@ -6,14 +6,14 @@ import { SOURCE_ICON_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
-function UserAvatar({ type = '', imageSource = '' }) {
-	const topIcon = SOURCE_ICON_MAPPING[type];
+function UserAvatar({ type = '', imageSource = '', event = '' }) {
+	const topIcon = SOURCE_ICON_MAPPING[event] || SOURCE_ICON_MAPPING[type];
 
 	return (
 		<div className={styles.container}>
 			{topIcon && (
 				<div className={styles.source_icon}>
-					{topIcon }
+					{topIcon}
 				</div>
 			)}
 

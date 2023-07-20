@@ -10,7 +10,7 @@
 	font-size: 12px;
 	font-weight: 500;
 	color: #000;
-	border-bottom: 1px solid #f68b21;
+	border-bottom: 2px solid var(--color-accent-orange-2);
 }
 
 .col {
