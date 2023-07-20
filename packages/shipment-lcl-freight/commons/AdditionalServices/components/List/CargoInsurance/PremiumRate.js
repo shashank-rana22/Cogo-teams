@@ -28,7 +28,7 @@ function PremiumRate({ rateData = {} }) {
 	} = rateData || {};
 
 	return (
-		<div>
+		<>
 			<div className={styles.rate}>
 				<div className={styles.box_div}>
 					<span>Premium:</span>
@@ -62,7 +62,7 @@ function PremiumRate({ rateData = {} }) {
 				<span>Amount Payable:</span>
 				<div>{formatAmounts(totalCharges)}</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

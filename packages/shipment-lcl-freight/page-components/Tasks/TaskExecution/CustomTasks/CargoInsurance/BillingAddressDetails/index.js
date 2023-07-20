@@ -38,7 +38,7 @@ function BillingAddressDetails({
 	} = formProps;
 
 	return (
-		<div>
+		<>
 			{policyForSelf ? (
 				<div className={styles.popover}>
 					<Layout
@@ -147,7 +147,7 @@ function BillingAddressDetails({
 					</div>
 				</div>
 			) : null}
-		</div>
+		</>
 	);
 }
 export default BillingAddressDetails;
