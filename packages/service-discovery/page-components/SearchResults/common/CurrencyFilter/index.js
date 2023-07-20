@@ -25,7 +25,7 @@ function Currency({
 				name="currency"
 				value={filters?.currency || 'USD'}
 				options={currencyOptions || []}
-				onChange={(val) => setFilters({ [filterKey]: val })}
+				onChange={(val) => setFilters({ ...filters, [filterKey]: val })}
 			/>
 		</div>
 	);

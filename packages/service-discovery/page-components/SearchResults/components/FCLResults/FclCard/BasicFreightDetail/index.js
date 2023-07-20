@@ -3,6 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 function FreightPriceDetail({
 	container_size = '',
 	container_type = '',
@@ -23,7 +25,7 @@ function FreightPriceDetail({
 
 			<div className={styles.amount}>
 				{`${formatAmount({
-					amount   : price || 0,
+					amount   : price || ZERO,
 					currency : price_currency,
 					options  : {
 						style                 : 'currency',

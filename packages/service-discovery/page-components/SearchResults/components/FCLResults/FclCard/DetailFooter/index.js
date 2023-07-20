@@ -36,6 +36,8 @@ const detailsComponentMapping = {
 	},
 };
 
+const ZERO = 0;
+
 function DetailFooter({ rateCardData, detail, refetchSearch }) {
 	const [showDetails, setShowDetails] = useState('');
 
@@ -50,7 +52,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 	ADDITIONAL_DAYS_KEYS.forEach((item) => {
 		addDaysValue = {
 			...addDaysValue,
-			[item]: (rateCardData[item]?.free_limit || 0 + rateCardData[item]?.additional_days || 0) || 0,
+			[item]: (rateCardData[item]?.free_limit || ZERO + rateCardData[item].additional_days || ZERO) || ZERO,
 		};
 	});
 
@@ -65,20 +67,20 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 					<span className={styles.tag}>Origin</span>
 					DET.
 					{' '}
-					{rateCardData?.origin_detention?.free_limit || 0}
+					{rateCardData?.origin_detention?.free_limit || ZERO}
 					{' '}
 					days, Demurrage
-					{rateCardData?.origin_demurrage?.free_limit || 0}
+					{rateCardData?.origin_demurrage?.free_limit || ZERO}
 					{' '}
 					days
 					<span className={styles.tag}>Destination</span>
 					DET.
 					{' '}
-					{rateCardData?.destination_detention?.free_limit || 0}
+					{rateCardData?.destination_detention?.free_limit || ZERO}
 					{' '}
 					days, Demurrage
 					{' '}
-					{rateCardData?.destination_demurrage?.free_limit || 0}
+					{rateCardData?.destination_demurrage?.free_limit || ZERO}
 					{' '}
 					days
 

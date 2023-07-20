@@ -2,7 +2,7 @@ import { Button, Popover } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React from 'react';
 
-import Detention from '../../../../common/Detention';
+import Detention from '../../../../../common/Detention';
 
 import styles from './styles.module.css';
 

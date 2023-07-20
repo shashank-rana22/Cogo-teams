@@ -1,25 +1,13 @@
 import { Loader } from '@cogoport/components';
 import React from 'react';
 
-import useScrollDirection from '../../../../common/Header/useScrollDirection';
-import FclCard from '../RateCard/FclCard';
+import useScrollDirection from '../../../../../common/Header/useScrollDirection';
+import FclCard from '../FclCard';
 
 import ComparisonHeader from './ComparisonHeader';
 import Header from './Header';
 import Schedules from './Schedules';
 import styles from './styles.module.css';
-
-const RateCardMapping = {
-	fcl_freight: {
-		RateCard: FclCard,
-	},
-	air_freight: {
-		RateCard: FclCard,
-	},
-	trailer_freight: {
-		RateCard: FclCard,
-	},
-};
 
 function ListRateCards({
 	rates = [], detail = {},
@@ -44,11 +32,9 @@ function ListRateCards({
 		return null;
 	}
 
-	const { RateCard = FclCard } = RateCardMapping[PrimaryService] || {};
-
 	return (
 		<div className={styles.container}>
-			<div className={styles.header} style={{ top: scrollDirection === 'up' ? 115 : 80 }}>
+			<div className={styles.header} style={{ top: scrollDirection === 'up' ? '115px' : '80px' }}>
 				<Header
 					details={detail}
 					filters={filters}
@@ -78,7 +64,7 @@ function ListRateCards({
 					<Loader themeType="primary" className={styles.loader} background="#000" />
 				</div>
 			) : ((rates || []).map((rateCardData) => (
-				<RateCard
+				<FclCard
 					key={rateCardData.id}
 					rateCardData={rateCardData}
 					detail={detail}

@@ -7,7 +7,7 @@ import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
 
-const SHOW_TAG_IN_SERVICES = ['fcl_freight', 'fcl_freight_local'];
+// const SHOW_TAG_IN_SERVICES = ['fcl_freight', 'fcl_freight_local'];
 
 const LIKE_DISLIKE_ALLOWED = [
 	'fcl_freight',
