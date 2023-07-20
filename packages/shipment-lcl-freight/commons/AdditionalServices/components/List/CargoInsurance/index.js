@@ -31,7 +31,7 @@ function CargoInsurance({
 	const [commodity, setCommodity] = useState('');
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
-	const { trade_type, origin_port, destination_port } = primary_service || {};
+	const { trade_type, origin_country_id, destination_country_id } = primary_service || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -47,21 +47,21 @@ function CargoInsurance({
 		premiumRate,
 	} = useGetInsuranceRate();
 
-	const cargoInsuranceCountryId =	trade_type === 'export' ? destination_port?.country_id : origin_port?.country_id;
+	const cargoInsuranceCountryId =	trade_type === 'export' ? destination_country_id : origin_country_id;
 
 	const { isEligible, loading: apiLoading } =	useGetInsuranceCountrySupported({
 		country_id: cargoInsuranceCountryId,
 	});
 
 	const { handleAddCargoInsurance, cargoLoading } = useCreateSpotSearch({
-		shipmentData           : data,
-		rateData               : premiumData,
+		shipmentData : data,
+		rateData     : premiumData,
 		commodity,
-		transitMode            : 'SEA',
-		origin_country_id      : origin_port?.country_id,
-		destination_country_id : destination_port?.country_id,
+		transitMode  : 'SEA',
+		origin_country_id,
+		destination_country_id,
 		trade_type,
-		refetch                : refetchAfterApiCall,
+		refetch      : refetchAfterApiCall,
 	});
 
 	const { list = [] } = useGetInsuranceListCommodities();
@@ -118,7 +118,7 @@ function CargoInsurance({
 	}
 
 	if (
-		![destination_port?.country_id, origin_port?.country_id].includes(geo.country.id)
+		![destination_country_id, origin_country_id].includes(geo.country.id)
 	) {
 		return <EmptyState reason="non_indian_search" />;
 	}

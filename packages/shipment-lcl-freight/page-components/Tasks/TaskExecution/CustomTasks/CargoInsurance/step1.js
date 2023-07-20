@@ -92,7 +92,7 @@ function Step1({
 
 			<div className={styles.sub_header}>
 				<div className={cl`${styles.flex_row} ${styles.label}`}>
-					<div className={styles.label_val}>Billing Address Details</div>
+					<span className={styles.label_val}>Billing Address Details</span>
 					<Toggle
 						offLabel="Self"
 						onLabel="Other"

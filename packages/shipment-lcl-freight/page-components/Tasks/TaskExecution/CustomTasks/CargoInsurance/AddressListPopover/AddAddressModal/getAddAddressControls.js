@@ -105,7 +105,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 		placeholder : 'Enter Email Id',
 		rules       : {
 			pattern: {
-				value   : geo.regex.EMAIL,
+				value   : geo?.regex.EMAIL,
 				message : 'Invalid email address',
 			},
 		},
@@ -121,7 +121,7 @@ export const getAddAddressControls = ({ setValue = () => {}, setCountryId = () =
 				if (!v?.number || !v?.country_code) {
 					return 'Phone Number is required';
 				}
-				return geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(v.number) || 'Invalid Phone Number';
+				return geo?.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(v.number) || 'Invalid Phone Number';
 			},
 		},
 		span: 12,

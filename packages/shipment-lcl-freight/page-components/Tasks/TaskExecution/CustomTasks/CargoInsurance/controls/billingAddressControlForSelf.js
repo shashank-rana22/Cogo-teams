@@ -13,7 +13,7 @@ export const billingAddressControlForSelf = [
 		disabled    : false,
 		rules       : {
 			pattern: {
-				value   : geo.regex.PAN,
+				value   : geo?.regex.PAN,
 				message : 'Enter a valid PAN',
 			},
 			required: { value: true, message: 'PAN Number is required' },

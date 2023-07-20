@@ -93,7 +93,7 @@ export const billingAddressControl = ({ setValue = () => {} }) => [
 		span        : 3,
 		rules       : {
 			pattern: {
-				value   : geo.regex.PAN,
+				value   : geo?.regex.PAN,
 				message : 'Enter a valid PAN',
 			},
 			required: 'PAN Number is required',
