@@ -1,4 +1,4 @@
-export const agentDetails = [
+export const AGENT_DETAILS = [
 	{
 		label          : 'Agent Name',
 		key            : 'agent_name',

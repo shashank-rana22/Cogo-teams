@@ -1,4 +1,4 @@
-export const truckDetails = [
+export const TRUCK_DETAILS = [
 	{
 		label          : 'RC',
 		key            : 'registration_ceretificate',

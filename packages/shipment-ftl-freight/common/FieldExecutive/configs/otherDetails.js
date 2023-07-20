@@ -1,4 +1,4 @@
-export const otherDetails = [
+export const OTHER_DETAILS = [
 	{
 		label          : 'Other Documents',
 		key            : 'other_documents',

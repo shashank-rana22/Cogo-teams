@@ -1,4 +1,4 @@
-export const rejectedDocuments = [
+export const REJECTED_DOCUMENTS = [
 	{
 		label          : 'Commercial Invoice Image',
 		key            : 'commmercial_invoice_image_rejected',

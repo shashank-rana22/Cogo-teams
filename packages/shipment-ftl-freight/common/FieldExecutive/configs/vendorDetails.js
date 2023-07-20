@@ -1,4 +1,4 @@
-export const vendorDetails = [
+export const VENDOR_DETAILS = [
 	{
 		label          : 'Fleet Owner Name',
 		key            : 'fleet_owner_name_vendor',

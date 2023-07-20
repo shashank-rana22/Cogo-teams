@@ -1,4 +1,4 @@
-export const fuelDetails = [
+export const FUEL_DETAILS = [
 	{
 		label          : 'Guage Before Taking Fuel',
 		key            : 'gauge_before_taking_fuel',

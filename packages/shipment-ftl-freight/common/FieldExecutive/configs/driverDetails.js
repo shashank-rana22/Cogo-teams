@@ -1,4 +1,4 @@
-export const driverDetails = [
+export const DRIVER_DETAILS = [
 	{
 		label          : 'Driver Name',
 		key            : 'driver_name',

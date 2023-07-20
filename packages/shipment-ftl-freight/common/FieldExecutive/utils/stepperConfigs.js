@@ -1,12 +1,12 @@
 import { startCase } from '@cogoport/utils';
 
-import { agentDetails } from '../configs/agentDetals';
-import { documents } from '../configs/documents';
-import { driverDetails } from '../configs/driverDetails';
-import { fuelDetails } from '../configs/fuelDetails';
-import { rejectedDocuments } from '../configs/rejectedDocuments';
-import { truckDetails } from '../configs/truckDetails';
-import { vendorDetails } from '../configs/vendorDetails';
+import { AGENT_DETAILS } from '../configs/agentDetals';
+import { DOCUMENTS } from '../configs/documents';
+import { DRIVER_DETAILS } from '../configs/driverDetails';
+import { FUEL_DETAILS } from '../configs/fuelDetails';
+import { REJECTED_DOCUMENTS } from '../configs/rejectedDocuments';
+import { TRUCK_DETAILS } from '../configs/truckDetails';
+import { VENDOR_DETAILS } from '../configs/vendorDetails';
 // import { otherDetails } from '../configs/otherDetails';
 
 /*
@@ -40,27 +40,27 @@ export const STEPPER_ARRAY = Object.values(STEPPER_KEYS_OBJ).map(
 
 export const STEPPER_OBJ = {
 	[STEPPER_KEYS_OBJ.TRIP_DOCUMENTS]: {
-		documents,
-		truck_details  : truckDetails,
-		driver_details : driverDetails,
-		fuel_details   : fuelDetails,
+		DOCUMENTS,
+		truck_details  : TRUCK_DETAILS,
+		driver_details : DRIVER_DETAILS,
+		fuel_details   : FUEL_DETAILS,
 	},
 	[STEPPER_KEYS_OBJ.ONBOARDING_DOCUMENTS]: {
-		vendor_details : vendorDetails,
-		agent_details  : agentDetails,
+		vendor_details : VENDOR_DETAILS,
+		agent_details  : AGENT_DETAILS,
 	},
 	[STEPPER_KEYS_OBJ.OTHER_DOCUMENTS]     : {},
 	[STEPPER_KEYS_OBJ.DISCARDED_DOCUMENTS] : {
-		discarded_documents: rejectedDocuments,
+		discarded_documents: REJECTED_DOCUMENTS,
 	},
 };
 
 export const ALL_STEPPER_CONFIGS_OBJ = {
-	documents,
-	truck_details       : truckDetails,
-	driver_details      : driverDetails,
-	fuel_details        : fuelDetails,
-	vendor_details      : vendorDetails,
-	agent_details       : agentDetails,
-	discarded_documents : rejectedDocuments,
+	DOCUMENTS,
+	truck_details       : TRUCK_DETAILS,
+	driver_details      : DRIVER_DETAILS,
+	fuel_details        : FUEL_DETAILS,
+	vendor_details      : VENDOR_DETAILS,
+	agent_details       : AGENT_DETAILS,
+	discarded_documents : REJECTED_DOCUMENTS,
 };

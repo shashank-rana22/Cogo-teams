@@ -1,4 +1,4 @@
-export const documents = [
+export const DOCUMENTS = [
 	{
 		label         : 'Commercial Invoice Image',
 		key           : 'commmercial_invoice_image',
