@@ -4,14 +4,16 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import InputEmployeeManualTarget from './InputEmployeeManualTarget';
+import StyledTable from '../../../common/StyledTable';
+
+import getColumns from './getKraColumns';
 import styles from './styles.module.css';
 import useEmployeeKraDetails from './useEmployeeKraDetails';
 import useUpdateEmployeeFinalRating from './useUpdateEmployeeFinalRating';
 
-const DEFAULT_ACHIEVED_TARGET = 0;
 const ROUND_OFF_DIGIT = 100;
 const DEFAULT_OVERALL_RATING = 0;
+const TABLE_EMPTY_TEXT = 'No data to show';
 
 function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 	const {
@@ -21,6 +23,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 	} = useEmployeeKraDetails({ show, selectCycle });
 
 	const { list = [], modification_history = [] } = data;
+	const columns = getColumns({ data, selectCycle, employeeKraDetails });
 
 	const {
 		loading: SubmitLoading,
@@ -32,34 +35,8 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 		<Modal show={show} placement="top" className={styles.modal} size="xl" onClose={() => setShow(false)}>
 			<Modal.Header title={(
 				<div className={styles.container}>
-
-					<div className={styles.squad_name}>
-						Employee Name:
-						{' '}
-						<span className={styles.squad_span}>{data?.employee_details?.employee_name}</span>
-					</div>
-
-					<div className={styles.squad}>
-						<div className={styles.squad_name}>
-							Squad:
-							{' '}
-							<span className={styles.squad_span}>
-								{data?.employee_details?.squad_name}
-
-							</span>
-						</div>
-
-						<div className={styles.squad_name}>
-							Tribe:
-							{' '}
-							<span className={styles.squad_span}>{data?.employee_details?.tribe_name}</span>
-						</div>
-
-						<div className={styles.squad_name}>
-							Total Kra:
-							{' '}
-							<span className={styles.squad_span}>{(list || [])?.length}</span>
-						</div>
+					<div className={styles.employee_name}>
+						Kra Rating
 					</div>
 				</div>
 			)}
@@ -77,41 +54,41 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 						: (
 							<div className={styles.modal_body_container}>
 								<div className={styles.left_section}>
-									{(list || []).map((item) => (
-										<div className={styles.sub_section} key={item.kra_id}>
-											<div className={styles.label}>
-												KRA Name:
-												{' '}
-												{item.kra_name}
+									<div className={styles.employee_details}>
+
+										<div className={styles.squad_name}>
+											<div>Squad</div>
+											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
+												{data?.employee_details?.squad_name}
 											</div>
 
-											<div className={styles.label}>
-												KRA Achieved:
-												{' '}
-												{item.rating_manual ? (
-													<InputEmployeeManualTarget
-														item={item}
-														data={data}
-														selectCycle={selectCycle}
-														employeeKraDetails={employeeKraDetails}
-													/>
-												)
-													: item.achieved_target || DEFAULT_ACHIEVED_TARGET}
-											</div>
-
-											<div className={styles.label}>
-												Weightage:
-												{' '}
-												{item.weightage}
-											</div>
-
-											<div className={styles.label}>
-												Rating:
-												{' '}
-												{item.rating}
-											</div>
 										</div>
-									))}
+
+										<div className={styles.squad_name}>
+											<div>Tribe</div>
+											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
+												{data?.employee_details?.tribe_name}
+											</div>
+
+										</div>
+
+										<div className={styles.squad_name}>
+											<div>Total Kra</div>
+											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
+												{(list || [])?.length}
+											</div>
+
+										</div>
+
+									</div>
+									<div style={{ paddingTop: '10px' }}>
+										<StyledTable
+											columns={columns}
+											data={data?.list || []}
+											emptyText={TABLE_EMPTY_TEXT}
+											loading={loading}
+										/>
+									</div>
 
 								</div>
 
@@ -121,21 +98,28 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 											<div className={styles.average_overall_rating}>
 												Average Overall Rating:
 												{' '}
-
-												{ Math.round((data?.average_overall_rating || DEFAULT_OVERALL_RATING)
+												<span className={styles.average_overall_rating_value}>
+													{ Math.round((data?.average_overall_rating
+													|| DEFAULT_OVERALL_RATING)
 												* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+												</span>
+
 											</div>
 
 											<div className={styles.rating_obtained}>
 												Rating:
 												{' '}
-												{ data?.final_rating}
+												<span className={styles.average_overall_rating_value}>
+													{ Math.round((data?.final_rating
+												|| DEFAULT_OVERALL_RATING)
+												* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+												</span>
 											</div>
 
 										</div>
 
 										<div className={styles.modification_history}>
-											<div>Modification History:</div>
+											<div style={{ textDecoration: 'underline' }}>Modification History:</div>
 
 											{ !isEmpty(modification_history)
 												? modification_history?.map((item) => (
@@ -170,6 +154,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 												))
 												: (
 													<div>
+														{' '}
 														Data Not Found
 													</div>
 												)}
@@ -189,15 +174,20 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 												/>
 											</div>
 										</div>
-
-										<Textarea
-											style={{ height: '40%' }}
-											value={comments}
-											onChange={(e) => setCommemts(e)}
-											className={styles.text_area}
-											rows={6}
-											placeholder="Please input your feedback about the employee"
-										/>
+										<div>
+											{' '}
+											<div style={{ paddingBottom: '5px' }}>
+												Comment/Feedback:
+											</div>
+											<Textarea
+												style={{ height: '50px' }}
+												value={comments}
+												onChange={(e) => setCommemts(e)}
+												className={styles.text_area}
+												rows={6}
+												placeholder="Please input your feedback about the employee"
+											/>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -27,7 +27,7 @@ const getColumns = ({
 			Header : (
 				<div role="presentation">
 					<Checkbox
-						checked={(selectedEmployees[identifier_key] || []).length === (employee_list || []).length}
+						checked={(selectedEmployees?.[identifier_key] || []).length === (employee_list || []).length}
 						onChange={(event) => onClickHeaderCheckbox({ event, identifier_key })}
 					/>
 				</div>
@@ -35,7 +35,7 @@ const getColumns = ({
 			accessor: (item) => (
 				<div>
 					<Checkbox
-						checked={(selectedEmployees[identifier_key] || [])
+						checked={(selectedEmployees?.[identifier_key] || [])
 							.includes(item?.employee_id)}
 						onChange={(event) => onClickCheckbox({ event, item, identifier_key })}
 					/>
