@@ -49,9 +49,11 @@ function Details({
 	const { channelData, primaryService } = data || {};
 	const { msgContent } = useFireBase({ id });
 
-	const isStakeholder = shipmentChatStakeholders.includes(
-		channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
-	);
+	let isStakeholder = false;
+
+	channelData?.stakeholder_types?.forEach((stakeholder) => {
+		isStakeholder = shipmentChatStakeholders.includes(stakeholder);
+	});
 
 	const formValues = {
 		message : textContent,
@@ -82,10 +84,10 @@ function Details({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index]]
+		? [...filteredArr, ...channelData.stakeholder_types]
 		: [...filteredArr];
 
-	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
+	visible_to_stakeholders = Array.from(new Set(visible_to_stakeholders?.filter((item) => item !== null)));
 
 	const GroupChannel = filteredArr.length
 		? {
