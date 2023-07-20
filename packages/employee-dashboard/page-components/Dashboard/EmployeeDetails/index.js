@@ -2,7 +2,6 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { EMPLOYEE_DETAIL_MAPPING } from '../../../configurations/employeeDetailMapping';
 import useGetEmployeeData from '../../../hooks/useGetEmployeeData';
@@ -13,6 +12,32 @@ const DEFAULT_GAP = 0;
 const DEFAULT_LENGTH_CHECK = 0;
 const ARRAY_LENGTH = 5;
 
+const getDiffDays = ({ years_gap, months_gap, days_gap }) => {
+	const TIME_PERIODS = [];
+
+	if (years_gap > DEFAULT_GAP) {
+		TIME_PERIODS.push(`${years_gap} ${years_gap !== DEFAULT_LENGTH_CHECK ? 'years' : 'year'}`);
+	}
+
+	if (months_gap > DEFAULT_GAP) {
+		TIME_PERIODS.push(`${months_gap} ${years_gap !== DEFAULT_LENGTH_CHECK ? 'months' : 'month'}`);
+	}
+
+	if (days_gap > DEFAULT_GAP) {
+		TIME_PERIODS.push(`${days_gap} ${days_gap !== DEFAULT_LENGTH_CHECK ? 'days' : 'day'}`);
+	}
+
+	return TIME_PERIODS.join(', ');
+};
+
+const getDetail = (item, showStartCase = false) => {
+	if (showStartCase) {
+		return startCase(item);
+	}
+
+	return item;
+};
+
 function EmployeeDetails() {
 	const { data, loading } = useGetEmployeeData();
 
@@ -20,38 +45,19 @@ function EmployeeDetails() {
 
 	const { months_gap, days_gap, years_gap } = diff_in_days || {};
 
-	const getDetail = (item, showStartCase = false) => {
-		if (showStartCase) {
-			return startCase(item);
-		}
-
-		return item;
-	};
-
-	const getDiffDays = () => {
-		const TIME_PERIODS = [];
-
-		if (years_gap > DEFAULT_GAP) {
-			TIME_PERIODS.push(`${years_gap} ${years_gap !== DEFAULT_LENGTH_CHECK ? 'years' : 'year'}`);
-		}
-
-		if (months_gap > DEFAULT_GAP) {
-			TIME_PERIODS.push(`${months_gap} ${months_gap !== DEFAULT_LENGTH_CHECK ? 'months' : 'month'}`);
-		}
-
-		if (days_gap > DEFAULT_GAP) {
-			TIME_PERIODS.push(`${days_gap} ${days_gap !== DEFAULT_LENGTH_CHECK ? 'days' : 'day'}`);
-		}
-
-		return TIME_PERIODS.join(', ');
-	};
-
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
 				<Placeholder type="circle" radius="100px" margin="0px 0px 30px 0px" />
 				{[...Array(ARRAY_LENGTH)]
-					.map(() => <Placeholder key={uuid()} height="20px" width="100%" margin="0px 0px 20px 0px" />)}
+					.map((_, index) => (
+						<Placeholder
+							key={`${index + ARRAY_LENGTH}`}
+							height="20px"
+							width="100%"
+							margin="0px 0px 20px 0px"
+						/>
+					))}
 			</div>
 		);
 	}
@@ -89,7 +95,7 @@ function EmployeeDetails() {
 					Days from joining :
 				</div>
 				<div className={styles.item}>
-					{getDiffDays()}
+					{getDiffDays({ years_gap, months_gap, days_gap })}
 				</div>
 			</div>
 		</div>
