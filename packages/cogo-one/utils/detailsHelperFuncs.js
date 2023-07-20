@@ -10,11 +10,13 @@ const VOLUME_MULTIPLY = 166.67;
 const TO_FIXED_2 = 2;
 const INCREASE_INDEX_BY = 1;
 const LAST_INDEX = 1;
-const FIRST_INDEX = 0;
 const NO_VOLUME_SERVICE_TYPES = ['ftl_freight_service', 'haulage_freight_service'];
 const AIR_TYPE_SERVICES = ['air_freight_service', 'domestic_air_freight_service'];
+const AIR_SERVICES = ['air_freight', 'domestic_air_freight_service', 'air_freight_service', 'domestic_air_freight'];
+const FTL_SERVICES = ['ftl_freight', 'haulage_freight', 'ftl_freight_service', 'haulage_freight_service'];
+const LTL_SERVICES = ['ltl_freight', 'ltl_freight_service'];
 
-function FormatCertificate({ certificates }) {
+function FormatCertificate({ certificates = [] }) {
 	return (
 		<div>
 			{(certificates || []).map((item, index) => (
@@ -29,7 +31,7 @@ function FormatCertificate({ certificates }) {
 	);
 }
 
-function FormatPocData({ pocDetails }) {
+function FormatPocData({ pocDetails = {} }) {
 	return (
 		<div>
 			<div>{pocDetails?.name}</div>
@@ -43,7 +45,7 @@ function FormatPocData({ pocDetails }) {
 	);
 }
 
-function FormatShipperDetails({ shipperDetails }) {
+function FormatShipperDetails({ shipperDetails = {} }) {
 	return (
 		<div>
 			<div>{shipperDetails?.name}</div>
@@ -92,7 +94,7 @@ export const RENDER_VALUE_MAPPING = {
 			return null;
 		}
 
-		const valueForInput = Array.isArray(packages) ? packages[FIRST_INDEX] : null;
+		const valueForInput = Array.isArray(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 		const { length = 0, width = 0, height = 0, packages_count, packing_type } = valueForInput || {};
 		const dimension = length
@@ -123,7 +125,7 @@ export const RENDER_VALUE_MAPPING = {
 	volume: (detail) => {
 		const { chargable_weight, weight, volume, isLTL, service_type } = detail || {};
 
-		const calcVolume = volume && `${volume} ${isLTL ? 'cc' : 'cbm'}`;
+		const calcVolume = volume && `${volume?.toFixed(TO_FIXED_2)} ${isLTL ? 'cc' : 'cbm'}`;
 
 		const chargableWeight = isLTL
 			? (chargable_weight || weight)
@@ -252,4 +254,12 @@ export function formatServiceDetails(details) {
 	const isAir = AIR_TYPE_SERVICES.includes(service_type);
 
 	return { ...details, isAir, isLTL };
+}
+
+export function serviceDetails({ detail = {}, service }) {
+	const isAir = (AIR_SERVICES || []).includes(detail[service]);
+	const isFTL = (FTL_SERVICES || []).includes(detail[service]);
+	const isLTL = (LTL_SERVICES || []).includes(detail[service]);
+
+	return { ...detail, isAir, isLTL, isFTL };
 }

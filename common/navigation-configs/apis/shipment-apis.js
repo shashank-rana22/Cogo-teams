@@ -1609,6 +1609,26 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_shipment_field_service_ops_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_field_service_ops_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_field_service_ops_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_field_service_ops_document_history',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'bulk_update_shipment_booking_confirmation_preferences',
 		access_type  : 'private',
 		service_name : 'revenue_desk',
