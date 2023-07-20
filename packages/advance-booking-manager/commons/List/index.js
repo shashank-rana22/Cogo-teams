@@ -23,6 +23,7 @@ function List({
 	functions,
 	finalList,
 	setFinalList,
+	status,
 }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = [], totalRecords:totalCount } = listData;
@@ -77,41 +78,39 @@ function List({
 		}
 	}, [list, page, setFinalList]);
 
+	useEffect(() => {
+		setFinalList([]);
+	}, [status, setFinalList]);
+
 	return (
 		<section>
 			{!isMobile && <ListHeader fields={fields} />}
-			{!loading ? (
-				<div className={styles.scroll}>
-					<InfiniteScroll
-						pageStart={1}
-						initialLoad={false}
-						loadMore={loadMore}
-						hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
-						loader={!loading ? (
-							<div className={styles.loading_style}>
-								<Loader />
-							</div>
-						) : null}
-						useWindow={false}
-						threshold={600}
-					>
-						<div>{render()}</div>
-					</InfiniteScroll>
-					{isEmpty(finalList) && !loading ? <EmptyState /> : null}
-					{loading && (
+			<div className={styles.scroll}>
+				<InfiniteScroll
+					pageStart={1}
+					initialLoad={false}
+					loadMore={loadMore}
+					hasMore={page < Math.ceil(totalCount / SCROLLING_LIMIT)}
+					loader={!loading ? (
 						<div className={styles.loading_style}>
 							<Loader />
 						</div>
-					)}
-					{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
-						<div className={styles.end_message}>No more data to show</div>
 					) : null}
-				</div>
-			) : (
-				<div className={styles.loading_style}>
-					<Loader />
-				</div>
-			)}
+					useWindow={false}
+					threshold={600}
+				>
+					<div>{render()}</div>
+				</InfiniteScroll>
+				{isEmpty(finalList) && !loading ? <EmptyState /> : null}
+				{loading && (
+					<div className={styles.loading_style}>
+						<Loader />
+					</div>
+				)}
+				{(finalList || []).length === totalCount && !isEmpty(finalList) ? (
+					<div className={styles.end_message}>No more data to show</div>
+				) : null}
+			</div>
 		</section>
 	);
 }

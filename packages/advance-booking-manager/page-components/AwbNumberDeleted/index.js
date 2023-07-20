@@ -104,6 +104,7 @@ function AwbNumberDeleted({
 				setPage={setPage}
 				finalList={finalList}
 				setFinalList={setFinalList}
+				status={status}
 			/>
 			{showConfirm && (
 				<Modal

@@ -19,6 +19,7 @@ function AwbNumber({
 	setFinalList,
 	finalList,
 	setQfilter,
+	status,
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showEdit, setShowEdit] = useState(false);
@@ -87,6 +88,7 @@ function AwbNumber({
 				setPage={setPage}
 				finalList={finalList}
 				setFinalList={setFinalList}
+				status={status}
 			/>
 			{showEdit && (
 				<Modal

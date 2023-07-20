@@ -113,6 +113,7 @@ function AwbNumberUsed({
 				setPage={setPage}
 				finalList={finalList}
 				setFinalList={setFinalList}
+				status={status}
 			/>
 			{showEdit && (
 				<Modal
