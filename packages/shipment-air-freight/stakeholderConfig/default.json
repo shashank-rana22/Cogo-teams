@@ -1,0 +1,23 @@
+{
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "overview", "tasks", "documents", "tracking"],  
+    "shipment_info":{},
+    "timeline": {
+        "can_edit": false
+    },
+    "default_tab":"tasks",
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks"
+    },
+    "documents":{
+        "tab_title":"Documents"
+    },
+    "edit_params": {
+        "can_edit": false
+    },
+    "tracking": {
+        "tab_title": "Tracking"
+    }
+}

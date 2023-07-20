@@ -3,9 +3,10 @@ import TermsAndConditions from '@cogoport/air-modules/components/TermsAndConditi
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
+import OverviewManageServices from '../../commons/OverviewManageServices';
+
 import AWBDetails from './AWBDetails';
 import FlightDetails from './FlightDetails';
-import OverviewManageServices from './OverviewManageServices';
 import styles from './styles.module.css';
 
 function Overview() {

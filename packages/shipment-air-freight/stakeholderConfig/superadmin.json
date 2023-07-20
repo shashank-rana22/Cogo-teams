@@ -1,5 +1,5 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks","purchase", "documents", "emails","tracking"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "sales", "purchase", "documents", "emails","tracking"],  
     "shipment_info":{},
     "timeline": {
         "can_edit": true
@@ -13,6 +13,9 @@
         "show_booking_req":true,
         "checked_show_my_tasks":false,
         "is_task_assigned":false
+    },
+    "sales":{
+        "tab_title":"Sales Invoice"
     },
     "purchase":{
         "tab_title":"Purchase Invoice"
