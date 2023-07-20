@@ -81,8 +81,8 @@ function FclCard({
 					<div>
 						<div className={styles.freightText}>Total Freight Price</div>
 						<FreightPriceDetail
-							container_size={primaryServiceRates?.[0]?.container_size}
-							container_type={primaryServiceRates?.[0]?.container_type}
+							container_size={primaryServiceRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_size}
+							container_type={primaryServiceRates?.[GLOBAL_CONSTANTS.zeroth_index]?.container_type}
 							price={rateCardData?.total_price_discounted}
 							price_current={rateCardData?.total_price_currency}
 							totalPrice

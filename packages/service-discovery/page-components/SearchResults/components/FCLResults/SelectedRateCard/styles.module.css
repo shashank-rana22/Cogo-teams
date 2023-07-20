@@ -22,24 +22,25 @@
 
 .services {
 	display: flex;
+	flex-wrap: wrap; /* Wrap items for smaller screens */
 	justify-content: space-between;
-	width: 100%;
 	padding: 0 20px;
 }
 
 .service_bundling {
-	width: 25%;
+	width: 100%; /* Initially take up the entire width */
+	margin-bottom: 20px; /* Add some spacing between services */
 
-	@media (max-width: 1200px) {
-		width: 32%;
+	@media (min-width: 768px) {
+		width: 25%; /* For larger screens, take 25% width */
 	}
 }
 
 .additional_services {
-	width: 70%;
+	width: 100%; /* Initially take up the entire width */
 
-	@media (max-width: 1200px) {
-		width: 60%;
+	@media (min-width: 768px) {
+		width: 70%; /* For larger screens, take 70% width */
 	}
 }
 
@@ -56,5 +57,9 @@
 }
 
 .proceed_button {
-	width: 200px;
+	width: 100%; /* Initially take up the entire width */
+
+	@media (min-width: 768px) {
+		max-width: 200px; /* For larger screens, set a maximum width of 200px */
+	}
 }

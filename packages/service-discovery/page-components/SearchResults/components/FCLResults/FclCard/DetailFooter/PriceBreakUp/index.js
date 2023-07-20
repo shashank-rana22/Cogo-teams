@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 
 const SUBSIDIARY_SERVICES = ['EDE', 'EDT', 'DET', 'DEA'];
 
+const ZERO = 0;
+
 const getPriceBreakUpColumn = [
 	{
 		Header   : <div style={{ fontSize: 10, fontWeight: 500 }}>Service name</div>,
@@ -31,7 +33,7 @@ const getPriceBreakUpColumn = [
 		accessor : ({ price = '', currency }) => (
 			<div style={{ fontSize: 10, fontWeight: 600 }}>
 				{formatAmount({
-					amount  : price || 0,
+					amount  : price || ZERO,
 					currency,
 					options : {
 						style                 : 'currency',
@@ -66,7 +68,7 @@ const getPriceBreakUpColumn = [
 		accessor : ({ total_price_discounted = '', currency = '' }) => (
 			<div style={{ fontSize: 12, fontWeight: 600 }}>
 				{formatAmount({
-					amount  : total_price_discounted || 0,
+					amount  : total_price_discounted || ZERO,
 					currency,
 					options : {
 						style                 : 'currency',
@@ -155,7 +157,7 @@ function PriceBreakup({ rateCardData, detail }) {
 				Total:
 				<div style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
 					{formatAmount({
-						amount   : total_price_discounted || 0,
+						amount   : total_price_discounted || ZERO,
 						currency : total_price_currency,
 						options  : {
 							style                 : 'currency',

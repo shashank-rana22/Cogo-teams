@@ -38,7 +38,7 @@ function DislikeModal({
 			size={size || 'md'}
 			themeType={themeType || 'primary'}
 			onClick={onClick}
-			style={{ marginRight: isFirstBtn ? 12 : 0 }}
+			style={{ marginRight: isFirstBtn ? '12px' : '0px' }}
 			disabled={loading}
 			loading={isSubmitBtn && loading}
 		>

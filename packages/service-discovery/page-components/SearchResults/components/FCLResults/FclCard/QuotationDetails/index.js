@@ -7,7 +7,7 @@ import CreateContract from '../../../../common/CreateContract';
 import styles from './styles.module.css';
 
 function QuotationDetails({
-	rateCardData,
+	rateCardData = {},
 	setSelectedCard = () => {},
 	isSelectedCard = false,
 	detail = {},
@@ -44,7 +44,7 @@ function QuotationDetails({
 			>
 				{!isSelectedCard ? (
 					` Select For ${formatAmount({
-						amount   : total_price_discounted || 0,
+						amount   : total_price_discounted,
 						currency : total_price_currency,
 						options  : {
 							style                 : 'currency',

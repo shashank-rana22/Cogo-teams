@@ -4,22 +4,18 @@ import React, { useState } from 'react';
 
 import Header from '../../common/Header';
 
-import EmptyState from './common/EmptyState';
-import BookCheckout from './components/BookToCheckout';
-import Comparison from './components/Comparison';
-import ListRateCards from './components/ListRateCards';
-import SelectedRateCard from './components/SelectedRateCard';
+import FCLResults from './components/FCLResults';
+// import ListRateCards from './components/FCLResults/ListRateCards';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
 import styles from './styles.module.css';
 
-const SCREEN_MAPPING = {
-	listRateCard : ListRateCards,
-	selectedCard : SelectedRateCard,
-	comparison   : Comparison,
-	bookCheckout : BookCheckout,
-};
+// const SERVICE_MAPPING = {
+// 	fcl_freight: ListRateCards,
+// };
 
 // Listratecards ki mapping krdo not card
+
+const MAGIC_NUMBER = 2;
 
 function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
@@ -52,64 +48,9 @@ function SearchResults() {
 
 	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
 
-	const showComparison = rateCardsForComparison.length >= 2;
+	const showComparison = rateCardsForComparison.length >= MAGIC_NUMBER;
 
-	const SCREEN_PROPS_MAPPING = {
-		listRateCard: {
-			rates,
-			detail,
-			setSelectedCard,
-			selectedCard,
-			setScreen,
-			setComparisonCheckbox,
-			showComparison,
-			rateCardsForComparison,
-			comparisonCheckbox,
-			filters,
-			setFilters,
-			weekly_data,
-			paginationProps,
-			loading,
-		},
-		selectedCard: {
-			rateCardData: selectedCard,
-			detail,
-			setSelectedCard,
-			setScreen,
-			setHeaderProps,
-			refetchSearch,
-			screen,
-			possible_subsidiary_services,
-		},
-		comparison: {
-			setScreen,
-			rateCardsForComparison,
-		},
-		bookCheckout: {
-			rateCardData: selectedCard,
-			detail,
-			setSelectedCard,
-			setScreen,
-		},
-	};
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
-
-	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
-
-	const handleRatesList = () => {
-		if (!loading && isEmpty(rates)) {
-			return (
-				<EmptyState
-					data={detail}
-					filters={filters}
-					setFilters={setFilters}
-				/>
-			);
-		}
-		return (
-			<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen || 'listRateCard']} />
-		);
-	};
 
 	if (loading && isEmpty(data)) {
 		return (
@@ -134,8 +75,28 @@ function SearchResults() {
 			/>
 
 			<div style={showAdditionalHeader ? { opacity: 0.6, pointerEvents: 'none' } : null}>
-				{handleRatesList()}
+				<FCLResults
+					rates={rates}
+					detail={detail}
+					setSelectedCard={setSelectedCard}
+					selectedCard={selectedCard}
+					setScreen={setScreen}
+					setComparisonCheckbox={setComparisonCheckbox}
+					showComparison={showComparison}
+					rateCardsForComparison={rateCardsForComparison}
+					comparisonCheckbox={comparisonCheckbox}
+					filters={filters}
+					setFilters={setFilters}
+					weekly_data={weekly_data}
+					paginationProps={paginationProps}
+					loading={loading}
+					setHeaderProps={setHeaderProps}
+					refetchSearch={refetchSearch}
+					screen={screen}
+					possible_subsidiary_services={possible_subsidiary_services}
+				/>
 			</div>
+
 		</div>
 	);
 }
