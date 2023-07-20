@@ -18,7 +18,7 @@ function MovePopOver(props) {
 				<Button
 					themeType="secondary"
 					size="sm"
-					onClick={() => setVisible(!visible)}
+					onClick={() => setVisible((prev) => !prev)}
 				>
 					Move
 				</Button>
@@ -29,7 +29,7 @@ function MovePopOver(props) {
 		<Button
 			themeType="secondary"
 			size="sm"
-			onClick={() => setVisible(!visible)}
+			onClick={() => setVisible((prev) => !prev)}
 		>
 			Move
 		</Button>

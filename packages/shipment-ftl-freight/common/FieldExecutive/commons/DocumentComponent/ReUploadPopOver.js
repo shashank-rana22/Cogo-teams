@@ -24,7 +24,7 @@ function ReUploadPopOver(props) {
 					themeType="secondary"
 					size="sm"
 					style={{ marginRight: '3px' }}
-					onClick={() => setVisible(!visible)}
+					onClick={() => setVisible((prev) => !prev)}
 				>
 					Re - Upload
 				</Button>
@@ -37,7 +37,7 @@ function ReUploadPopOver(props) {
 			themeType="secondary"
 			size="sm"
 			style={{ marginRight: '3px' }}
-			onClick={() => setVisible(!visible)}
+			onClick={() => setVisible((prev) => !prev)}
 		>
 			Re - Upload
 		</Button>
