@@ -16,8 +16,9 @@ const useGetClearanceDateReport = ({ activeTab }) => {
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/awb-inventory/list',
-			method : 'GET',
+			url     : '/air-coe/awb-inventory/list',
+			method  : 'GET',
+			authKey : 'get_air_coe_awb_inventory_list',
 		},
 		{ manual: true },
 	);
