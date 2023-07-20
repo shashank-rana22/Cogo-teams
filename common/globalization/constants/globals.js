@@ -62,6 +62,7 @@ const GLOBAL_CONSTANTS = {
 	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
+		'BASNO',
 		'AGC',
 		'STC',
 		'IHC',

@@ -20,7 +20,10 @@ function EditQuotations({
 
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const formProps = useForm({ defaultValues });
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, loading, confirmLoading } = formProps || {};
+	const {
+		control, handleSubmit, formState:{ errors = {} } = {},
+		watch, loading, confirmLoading,
+	} = formProps || {};
 
 	const CUSTOM_VALUES = {};
 	const formValues = watch();

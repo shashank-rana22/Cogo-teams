@@ -24,7 +24,6 @@ import useTaskExecution from './helpers/useTaskExecution';
 
 const EXCLUDE_SERVICES = [
 	'fcl_freight_service',
-	'haulage_freight_service',
 ];
 
 const REDUCE_LENGTH_BY = 1;

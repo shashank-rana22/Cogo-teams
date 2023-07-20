@@ -1132,6 +1132,33 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_events'],
 		module_type   : 'dashboards',
 	},
+	revenue_desk: {
+		key       : 'revenue_desk',
+		title     : 'Revenue Desk',
+		isSubNavs : true,
+		icon      : IcMCoe,
+		options   : [
+			{
+				key           : 'revenue_desk-bookings',
+				title         : 'Bookings',
+				href          : '/v2/revenue-desk',
+				as            : '/v2/revenue-desk',
+				type          : '',
+				main_apis     : [],
+				possible_apis : [...apis.revenue_desk, ...apis.sop],
+
+			},
+			{
+				key           : 'revenue_desk-contracts',
+				title         : 'Contracts',
+				href          : '/v2/contracts',
+				as            : '/v2/contracts',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.contracts,
+			},
+		],
+	},
 	coe: {
 		key         : 'coe',
 		title       : 'Center of Excellence [COE]',
@@ -2155,15 +2182,6 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
-	},
-	contracts: {
-		key           : 'contracts',
-		title         : 'Contracts Revenue Desk',
-		href          : '/v2/contracts',
-		as            : '/v2/contracts',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : apis.contracts,
 	},
 	cogo_academy: {
 		key       : 'cogo_academy',
