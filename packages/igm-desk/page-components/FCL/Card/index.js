@@ -1,7 +1,7 @@
 import { IcCFfcl } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 
-import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
+import PortDetails from '../../../commons/Card/PortDetails';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
 import CONSTANTS from '../../../config/constants.json';
 import styles from '../card.module.css';

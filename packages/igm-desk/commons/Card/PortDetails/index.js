@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import ServiceIcon from '../../ServiceIcon';
+import ServiceIcon from '../ServiceIcon';
 
 import styles from './styles.module.css';
 
