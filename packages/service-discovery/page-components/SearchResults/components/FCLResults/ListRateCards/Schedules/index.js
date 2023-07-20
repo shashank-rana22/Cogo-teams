@@ -1,11 +1,13 @@
-import { Pagination } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { Placeholder } from '@cogoport/components';
+import React, { useState, useEffect } from 'react';
 
+import useGetWeeklySchedules from '../../../../hooks/useGetWeeklySchedules';
+
+import Footer from './Footer';
 import ScheduleItem from './ScheduleItem';
 import styles from './styles.module.css';
+
+const LOADING_ARRAY_LENGTH = 5;
 
 const isAlreadyApplied = (filters, data) => {
 	if (!filters.departure_after || !filters.departure_before) {
@@ -16,75 +18,59 @@ const isAlreadyApplied = (filters, data) => {
 };
 
 function Schedules({
-	weekly_data = [],
 	paginationProps = {},
 	filters = {},
 	setFilters = () => {},
 }) {
-	const alreadyApplied = isAlreadyApplied(filters, weekly_data);
+	const { schedules = [], loading } = useGetWeeklySchedules();
 
-	const [selectedWeek, setSelectedWeek] = useState(alreadyApplied || {});
+	const [selectedWeek, setSelectedWeek] = useState({});
 
-	const { page, page_limit, total_count } = paginationProps;
+	useEffect(() => {
+		const alreadyApplied = isAlreadyApplied(filters, schedules);
+
+		setSelectedWeek(alreadyApplied || {});
+	}, [filters, schedules]);
 
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Available Schedules for your search</span>
 
-			<div className={styles.schedule_items_container}>
-				{(weekly_data || []).map((weekItem) => (
-					<ScheduleItem
-						key={`${weekItem.start_date}_${weekItem.end_date}`}
-						data={weekItem}
-						selectedWeek={selectedWeek}
-						setSelectedWeek={setSelectedWeek}
-						setFilters={setFilters}
-					/>
-				))}
-			</div>
-
-			<div className={styles.footer}>
-				{!isEmpty(selectedWeek) ? (
-					<div className={styles.rates_count}>
-						{selectedWeek?.count}
-						{' '}
-						Options available
-						{'  '}
-						<span>
-							between
-							{' '}
-							<strong>
-								{formatDate({
-									date       : selectedWeek?.start_date,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-									formatType : 'date',
-								})}
-								{' '}
-								&
-								{' '}
-								{formatDate({
-									date       : selectedWeek?.end_date,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-									formatType : 'date',
-								})}
-							</strong>
-						</span>
-					</div>
-				) : null}
-
-				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={(val) => setFilters((prev) => ({
-							...prev,
-							page: val,
-						}))}
-					/>
+			{loading ? (
+				<div className={styles.loading}>
+					{[...Array(LOADING_ARRAY_LENGTH)].map((_) => (
+						<Placeholder
+							key={_}
+							height="66px"
+							width="136px"
+							margin="0px 20px 0px 0px"
+							style={{ borderRadius: 8 }}
+						/>
+					))}
 				</div>
-			</div>
+			) : (
+				<div className={styles.wrapper}>
+					<div className={styles.schedule_items_container}>
+						{(schedules || []).map((weekItem) => (
+							<ScheduleItem
+								key={`${weekItem.start_date}_${weekItem.end_date}`}
+								data={weekItem}
+								selectedWeek={selectedWeek}
+								setSelectedWeek={setSelectedWeek}
+								setFilters={setFilters}
+							/>
+						))}
+					</div>
+
+					<div className={styles.footer}>
+						<Footer
+							paginationProps={paginationProps}
+							setFilters={setFilters}
+							selectedWeek={selectedWeek}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

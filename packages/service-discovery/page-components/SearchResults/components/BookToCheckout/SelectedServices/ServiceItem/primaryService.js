@@ -9,11 +9,21 @@ import getLocationInfo from '../../../../utils/locations-search';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, service_type = '' }) {
 	const { shipping_line = {}, service_rates = [] } = rateDetails;
 
 	const serviceData = Object.values(service_rates).find((service) => service.service_type === service_type);
-	const { total_price_currency, total_price_discounted, departure, arrival } = serviceData || {};
+	const {
+		total_price_currency,
+		total_price_discounted,
+		departure,
+		arrival,
+		source,
+		validity_start,
+		validity_end,
+	} = serviceData || {};
 
 	const { origin, destination } = getLocationInfo(details, {}, 'search_type');
 
@@ -48,7 +58,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 
 					<span className={styles.date}>
 						{formatDate({
-							date       : departure,
+							date       : source === 'cogo_assured_rate' ? validity_start : departure,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
 						})}
@@ -71,7 +81,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 
 					<span className={styles.date}>
 						{formatDate({
-							date       : arrival,
+							date       : source === 'cogo_assured_rate' ? validity_end : arrival,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
 						})}
@@ -84,7 +94,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 				{' '}
 				<strong>
 					{formatAmount({
-						amount   : total_price_discounted || 0,
+						amount   : total_price_discounted || DEFAULT_VALUE,
 						currency : total_price_currency,
 						options  : {
 							style                 : 'currency',

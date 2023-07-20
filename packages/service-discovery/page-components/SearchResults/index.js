@@ -37,7 +37,6 @@ function SearchResults() {
 		spot_search_detail:detail = {},
 		list:rates = [],
 		possible_subsidiary_services = [],
-		weekly_data = [],
 		total_count,
 		page,
 		page_limit,
@@ -87,7 +86,6 @@ function SearchResults() {
 					comparisonCheckbox={comparisonCheckbox}
 					filters={filters}
 					setFilters={setFilters}
-					weekly_data={weekly_data}
 					paginationProps={paginationProps}
 					loading={loading}
 					setHeaderProps={setHeaderProps}

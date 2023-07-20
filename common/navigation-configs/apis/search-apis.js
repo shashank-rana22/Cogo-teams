@@ -543,5 +543,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api          : 'get_spot_search_schedule_weeks',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;

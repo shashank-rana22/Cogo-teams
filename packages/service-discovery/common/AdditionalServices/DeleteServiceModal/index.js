@@ -14,6 +14,7 @@ function DeleteServiceModal({
 		<Modal
 			size={rest.size || 'sm'}
 			show={show}
+			showCloseIcon={false}
 			onClose={() => setShow(false)}
 			closeOnOuterClick={false}
 		>

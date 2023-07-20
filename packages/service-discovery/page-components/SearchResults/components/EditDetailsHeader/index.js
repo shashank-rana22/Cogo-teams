@@ -82,8 +82,8 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 			removeItemFromLocalStorage();
 
 			router.push(
-				'/book/[spot_search_id]/[importer_exporter_id]',
-				`/book/${spot_search_id}/${organization.organization_id}`,
+				'/book/[spot_search_id]',
+				`/book/${spot_search_id}`,
 			);
 		}
 	};
@@ -92,7 +92,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 		<div className={styles.container}>
 			<div className={styles.form}>
 
-				<div style={{ width: '50%', marginRight: 20 }}>
+				<div className={styles.form_item}>
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
@@ -101,7 +101,7 @@ function EditDetailsHeader({ data = {}, setShow, ...rest }) {
 					/>
 				</div>
 
-				<div style={{ width: '50%' }}>
+				<div className={styles.form_item}>
 					<RouteForm
 						mode={service_type}
 						formValues={locationValues}

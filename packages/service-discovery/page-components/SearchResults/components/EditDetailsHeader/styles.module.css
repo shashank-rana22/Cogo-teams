@@ -10,13 +10,21 @@
 	display: flex;
 	width: 80%;
 	margin-right: 32px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .form_item {
 	display: flex;
 	flex-direction: column;
-	width: 25%;
-	margin-right: 28px;
+	width: 48%;
+	margin-right: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .label {

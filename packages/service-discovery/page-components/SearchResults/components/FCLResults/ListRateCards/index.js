@@ -20,7 +20,6 @@ function ListRateCards({
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
-	weekly_data = [],
 	paginationProps = {},
 	loading = false,
 }) {
@@ -52,7 +51,6 @@ function ListRateCards({
 			</div>
 
 			<Schedules
-				weekly_data={weekly_data}
 				paginationProps={paginationProps}
 				filters={filters}
 				setFilters={setFilters}

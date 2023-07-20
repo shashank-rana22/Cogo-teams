@@ -52,7 +52,7 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 	ADDITIONAL_DAYS_KEYS.forEach((item) => {
 		addDaysValue = {
 			...addDaysValue,
-			[item]: (rateCardData[item]?.free_limit || ZERO + rateCardData[item].additional_days || ZERO) || ZERO,
+			[item]: (rateCardData[item]?.free_limit || ZERO + rateCardData[item]?.additional_days || ZERO) || ZERO,
 		};
 	});
 
