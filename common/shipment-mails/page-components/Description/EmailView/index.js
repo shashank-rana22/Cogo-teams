@@ -38,7 +38,7 @@ function EmailView({
 	const emailData = isFromRpa ? rpaMailData : getMailApi?.data;
 	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
 
-	const attachmentPaylaod = { email_address, message_id };
+	const attachmentPaylaod = { source: email_address, message_id };
 	const { getAttachementsApi } = useGetAttachements({ payload: attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 
