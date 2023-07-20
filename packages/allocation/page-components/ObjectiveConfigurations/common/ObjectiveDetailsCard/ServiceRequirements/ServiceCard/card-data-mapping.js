@@ -79,6 +79,8 @@ const CARD_DATA_MAPPING = [
 		accessor : ({ container_size }) => {
 			if (isEmpty(container_size)) return null;
 
+			console.log('container_size :: ', container_size);
+
 			return (
 				<div className={styles.key_value_container}>
 					<div className={styles.label}>

@@ -28,6 +28,7 @@ function CreateAndEditForm() {
 		/>,
 		[REVIEW_OBJECTIVE]: <ReviewObjective
 			formValues={formValues}
+			setActiveStep={setActiveStep}
 		/>,
 		[SET_OBJECTIVE_WEIGHTAGE]: <SetObjectiveWeightage />,
 	};
