@@ -7,8 +7,6 @@ import LikeDislike from '../LikeDislike';
 
 import styles from './styles.module.css';
 
-// const SHOW_TAG_IN_SERVICES = ['fcl_freight', 'fcl_freight_local'];
-
 const LIKE_DISLIKE_ALLOWED = [
 	'fcl_freight',
 	'air_freight',
@@ -22,75 +20,88 @@ const LIKE_DISLIKE_ALLOWED = [
 	'trailer_freight',
 ];
 
-function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {}, isSelectedCard }) {
-	const { shipping_line = {}, card } = rateCardData;
+function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) {
+	if (showShareModal) {
+		return (
+			<ShareToUsers
+				rate={rateCardData}
+				show={showShareModal}
+				onClose={() => setShowShareModal(false)}
+				source="spot_search"
+				org_id={detail?.importer_exporter_id}
+			/>
+		);
+	}
+	return null;
+}
 
+function RateCardTop({ rateCardData = {}, detail = {}, setComparisonCheckbox = () => {}, isSelectedCard = false }) {
+	const { shipping_line = {}, card } = rateCardData;
 	const [isChecked, setIsChecked] = useState(false);
 	const [showShareModal, setShowShareModal] = useState(false);
 
 	useEffect(() => {
 		if (isChecked) {
-			setComparisonCheckbox((pv) => ({
-				...pv,
+			setComparisonCheckbox((prevValue) => ({
+				...prevValue,
 				[card]: shipping_line?.id,
 			}));
 		} else {
-			setComparisonCheckbox((pv) => {
-				const temp = { ...pv };
+			setComparisonCheckbox((prevValue) => {
+				const temp = { ...prevValue };
 				delete temp[card];
 				return temp;
 			});
 		}
 	}, [card, isChecked, setComparisonCheckbox, shipping_line.id]);
 
+	const handleCheckboxChange = () => {
+		setIsChecked(!isChecked);
+	};
+
+	const renderCheckbox = () => {
+		if (isSelectedCard) return null;
+		return <Checkbox checked={isChecked} onChange={handleCheckboxChange} />;
+	};
+
+	const renderLikeDislike = () => {
+		if (!LIKE_DISLIKE_ALLOWED.includes(detail?.search_type)) return null;
+		return <LikeDislike rateCardData={rateCardData} detail={detail} />;
+	};
+
+	const handleShareIconClick = () => {
+		setShowShareModal(!showShareModal);
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.container}>
-
-				{isSelectedCard ? null : (
-					<Checkbox
-						checked={isChecked}
-						onChange={() => {
-							setIsChecked(!isChecked);
-						}}
-					/>
-				)}
+			<div className={styles.logoContainer}>
+				{renderCheckbox()}
 
 				<img
 					src={shipping_line?.logo_url}
 					alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
 					style={{ height: 24, objectFit: 'cover' }}
 				/>
-
 			</div>
 
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
-
-				{LIKE_DISLIKE_ALLOWED.includes(detail?.search_type) ? (
-					<LikeDislike
-						rateCardData={rateCardData}
-						detail={detail}
-					/>
-				) : null}
+				{renderLikeDislike()}
 
 				<IcMShare
 					className={styles.share_icon}
 					width="20px"
 					height="16px"
-					onClick={() => setShowShareModal(!showShareModal)}
+					onClick={handleShareIconClick}
 				/>
 			</div>
 
-			{showShareModal ? (
-				<ShareToUsers
-					rate={rateCardData}
-					show={showShareModal}
-					onClose={() => setShowShareModal(false)}
-					source="spot_search"
-					org_id={detail?.importer_exporter_id}
-				/>
-			) : null}
-
+			<ShareRate
+				showShareModal={showShareModal}
+				rateCardData={rateCardData}
+				detail={detail}
+				setShowShareModal={setShowShareModal}
+			/>
 		</div>
 	);
 }
