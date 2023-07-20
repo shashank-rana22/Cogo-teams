@@ -5,12 +5,13 @@ const getSearchResultsPayload = ({
 	additionalFormInfo,
 	detail,
 	service_name = '',
-	rateCardData,
 }) => {
 	const {
 		destination_cargo_handling_type = '',
 		origin_cargo_handling_type = '',
 	} = additionalFormInfo;
+
+	const tradeType = service_name.includes('export') ? 'export' : 'import';
 
 	if (service_name === 'export_transportation') {
 		return {
@@ -25,7 +26,7 @@ const getSearchResultsPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name: 'trailer_freight',
-						rateCardData,
+						tradeType,
 					}),
 				}
 				: {
@@ -33,7 +34,7 @@ const getSearchResultsPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name: 'ftl_freight',
-						rateCardData,
+						tradeType,
 					}),
 				}),
 		};
@@ -52,7 +53,7 @@ const getSearchResultsPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name: 'trailer_freight',
-						rateCardData,
+						tradeType,
 					}),
 				}
 				: {
@@ -60,23 +61,27 @@ const getSearchResultsPayload = ({
 						additionalFormInfo,
 						detail,
 						service_name: 'ftl_freight',
-						rateCardData,
+						tradeType,
 					}),
 				}),
 		};
 	}
 
+	let finalServiceName = service_name.replace('import_', '');
+
+	finalServiceName = finalServiceName.replace('export_', '');
+
 	const serviceWiseValues = getServiceWisePayload({
 		additionalFormInfo,
 		detail,
-		service_name,
-		rateCardData,
+		service_name: finalServiceName,
+		tradeType,
 	});
 
 	return {
 		spot_search_id,
-		service                      : service_name,
-		[`${service_name}_services`] : serviceWiseValues,
+		service                          : finalServiceName,
+		[`${finalServiceName}_services`] : serviceWiseValues,
 	};
 };
 
