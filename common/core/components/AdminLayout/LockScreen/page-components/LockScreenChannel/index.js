@@ -18,7 +18,7 @@ function LockScreen({
 	agentId = '',
 	userRoleIds = [],
 	firestore = {},
-	incall = false,
+	inCall = false,
 }) {
 	const { ROLE_IDS_CHECK } = getViewTypeMapping();
 
@@ -28,7 +28,7 @@ function LockScreen({
 		firestore,
 		agentId,
 		isRolePresent,
-		incall,
+		inCall,
 	});
 	const { apiTrigger, loading, otpNumber, setOtpNumber } = useSubmitOtp({ agentId, firestore, setShowModal });
 

@@ -22,15 +22,15 @@ function useGetActivity({
 	firestore = {},
 	agentId = '',
 	isRolePresent = false,
-	incall = false,
+	inCall = false,
 }) {
 	const activityTrackerSnapShotRef = useRef(null);
 	const activitytimeoutRef = useRef(null);
 	const trackerRef = useRef(null);
 
-	const { updateAgentStatus } = useUpdateAgentStatus();
-
 	const [showModal, setShowModal] = useState(false);
+
+	const { updateAgentStatus } = useUpdateAgentStatus();
 
 	const FUNC_MAPPING = useMemo(() => {
 		const roomDoc = doc(
@@ -51,7 +51,7 @@ function useGetActivity({
 	const mountActivityTrackerSnapShotRef = useCallback(async () => {
 		const { timeoutValue, isLockedBool } = await getTimeoutConstant(firestore);
 
-		if (!isLockedBool || !isRolePresent || incall) {
+		if (!isLockedBool || !isRolePresent || inCall) {
 			return;
 		}
 
@@ -90,12 +90,12 @@ function useGetActivity({
 		} catch (e) {
 			console.error('error:', e);
 		}
-	}, [firestore, isRolePresent, incall, agentId, FUNC_MAPPING, updateAgentStatus]);
+	}, [firestore, isRolePresent, inCall, agentId, FUNC_MAPPING, updateAgentStatus]);
 
 	useEffect(() => {
 		mountActivityTrackerSnapShotRef();
-		return () => unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent, incall });
-	}, [mountActivityTrackerSnapShotRef, FUNC_MAPPING, firestore, isRolePresent, incall]);
+		return () => unMountActivityTracker({ FUNC_MAPPING, firestore, isRolePresent, inCall });
+	}, [mountActivityTrackerSnapShotRef, FUNC_MAPPING, firestore, isRolePresent, inCall]);
 
 	return { showModal, setShowModal };
 }
