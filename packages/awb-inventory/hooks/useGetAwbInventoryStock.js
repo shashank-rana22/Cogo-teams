@@ -16,7 +16,7 @@ const useGetInventoryStock = ({ activeTab, filterData }) => {
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/awb-inventory/list-awb-inventory-stock',
+			url    : '/air-coe/awb-inventory/list-stock',
 			method : 'GET',
 		},
 		{ manual: true },
