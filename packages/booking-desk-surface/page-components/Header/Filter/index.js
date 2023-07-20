@@ -5,11 +5,11 @@ import Layout from '@cogoport/surface-modules/components/Layout';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import filterCommonControls from '../../../constants/filter-common-controls';
+import filterControls from '../../../constants/filter-common-controls';
 
 import styles from './styles.module.css';
 
-const CONTROLS = [...filterCommonControls];
+const CONTROLS = [...filterControls];
 
 function Filter({
 	serviceActiveTab = 'ftl_freight',

@@ -66,7 +66,7 @@ const filterCommonControls = [
 		asyncKey  : 'partner_users',
 		valueKey  : 'user_id',
 		params    : {
-			page_limit : 100,
+			page_limit : 20,
 			filters    : {
 				partner_id : geo?.uuid?.parent_entity_id,
 				status     : 'active',
