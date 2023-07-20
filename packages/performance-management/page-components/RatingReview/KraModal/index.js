@@ -36,7 +36,11 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 			<Modal.Header title={(
 				<div className={styles.container}>
 					<div className={styles.employee_name}>
-						Kra Rating
+						Kra Rating of
+						{' '}
+						<span style={{ fontWeight: 'bold', paddingLeft: '5px' }}>
+							{data?.employee_details?.employee_name}
+						</span>
 					</div>
 				</div>
 			)}
@@ -47,7 +51,6 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 					loading ? (
 						<div style={{ height: '58vh' }} className={styles.loader}>
 							<Loader style={{ height: '60px', width: '60px' }} />
-
 						</div>
 					)
 
@@ -58,6 +61,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 
 										<div className={styles.squad_name}>
 											<div>Squad</div>
+
 											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
 												{data?.employee_details?.squad_name}
 											</div>
@@ -66,6 +70,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 
 										<div className={styles.squad_name}>
 											<div>Tribe</div>
+
 											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
 												{data?.employee_details?.tribe_name}
 											</div>
@@ -74,6 +79,7 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 
 										<div className={styles.squad_name}>
 											<div>Total Kra</div>
+
 											<div style={{ fontWeight: 'bold', fontSize: 'medium', color: 'black' }}>
 												{(list || [])?.length}
 											</div>
@@ -115,7 +121,6 @@ function KraModal({ show, setShow, selectCycle, fetchRatingReviewDetails }) {
 												* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
 												</span>
 											</div>
-
 										</div>
 
 										<div className={styles.modification_history}>

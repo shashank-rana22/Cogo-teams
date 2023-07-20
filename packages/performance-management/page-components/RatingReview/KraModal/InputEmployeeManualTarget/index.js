@@ -18,6 +18,7 @@ function InputEmployeeManualTarget({ item, data, selectCycle, employeeKraDetails
 			<Input
 				value={inputValue}
 				onChange={(val) => setInputValue(val)}
+				type="number"
 				placeholder="Input Rating"
 			/>
 

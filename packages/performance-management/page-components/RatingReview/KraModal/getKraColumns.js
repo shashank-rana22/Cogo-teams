@@ -23,7 +23,7 @@ const getColumns = ({
 			Header   : 'WEIGHTAGE',
 			accessor : (item) => (
 				<div>
-					{startCase(item?.weightage) || '-'}
+					{(item?.weightage) || '-'}
 				</div>
 			),
 		},
@@ -31,7 +31,7 @@ const getColumns = ({
 			Header   : 'RATING',
 			accessor : (item) => (
 				<div>
-					{startCase(item?.rating) || '-'}
+					{(item?.rating) || '-'}
 				</div>
 			),
 		},
