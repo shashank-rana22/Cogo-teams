@@ -2,27 +2,38 @@ import { Toast, Modal, Button, RTE, Input } from '@cogoport/components';
 import { IcMCross, IcMAttach } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import CustomFileUploader from '../../../../../../common/CustomFileUploader';
-import { TOOLBARCONFIG } from '../../../../../../constants';
-import getFormatedEmailBody from '../../../../../../helpers/getFormatedEmailBody';
-import getFileAttributes from '../../../../../../utils/getFileAttributes';
-import hideDetails from '../../../../../../utils/hideDetails';
+import { TOOLBARCONFIG } from '../../constants';
+import getFormatedEmailBody from '../../helpers/getFormatedEmailBody';
+import getFileAttributes from '../../utils/getFileAttributes';
+import hideDetails from '../../utils/hideDetails';
+import CustomFileUploader from '../CustomFileUploader';
 
 import styles from './styles.module.css';
+
+const LAST_FILE_NAME = 1;
+
+const getdecodedData = ({ data = '' }) => {
+	const val = decodeURI(data).split('/');
+	const fileName = val[val.length - LAST_FILE_NAME];
+	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
+	return { uploadedFileName, fileIcon };
+};
 
 function ComposeEmail({
 	closeModal = () => {},
 	userData = {},
 	sendQuickCommuncation = () => {},
-	loading,
+	loading = false,
 }) {
 	const [attachments, setAttachments] = useState([]);
 	const [emailState, setEmailState] = useState({
 		subject : '',
 		body    : '',
 	});
+
 	const [uploading, setUploading] = useState(false);
 	const uploaderRef = useRef(null);
+
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (isEmptyMail || !emailState?.subject) {
@@ -37,15 +48,9 @@ function ComposeEmail({
 			});
 		}
 	};
+
 	const handleProgress = (val) => {
 		setUploading(val);
-	};
-
-	const decode = (data = '') => {
-		const val = decodeURI(data).split('/');
-		const fileName = val[val.length - 1];
-		const { uploadedFileName, fileIcon } = getFileAttributes({ fileName, finalUrl: data });
-		return { uploadedFileName, fileIcon };
 	};
 
 	const handleDelete = (url) => {
@@ -106,9 +111,9 @@ function ComposeEmail({
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
 						{(attachments || []).map((eachAttachement) => {
-							const { fileIcon, uploadedFileName } = decode(eachAttachement);
+							const { fileIcon, uploadedFileName } = getdecodedData({ data: eachAttachement });
 							return (
-								<div className={styles.uploaded_files}>
+								<div className={styles.uploaded_files} key={eachAttachement}>
 									<div className={styles.uploaded_files_content}>
 										{fileIcon}
 										<div className={styles.content_div}>

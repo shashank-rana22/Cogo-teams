@@ -98,6 +98,8 @@ function FormContainer({
 		});
 	};
 
+	console.log(taskItem, 'taskItem');
+
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
@@ -120,6 +122,7 @@ function FormContainer({
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			shipment_id         : taskItem?.shipmentId,
+			service_id          : taskItem?.serviceId,
 			document_type       : 'draft_house_airway_bill',
 		};
 		if (edit) {
