@@ -5,7 +5,7 @@ const DEFAULT_PAGE_NUMBER = 1;
 export default function getValidatedStoredValues() {
 	const storedValues = JSON.parse(localStorage.getItem('igm_desk_stored_values'));
 
-	let { page, q, fileType, sort_by, sort_type } = storedValues?.filters || {};
+	let { page, q, fileType, sort_by, sort_type, trade_type } = storedValues?.filters || {};
 
 	let { activeTab } = storedValues?.tabState || {};
 
@@ -25,6 +25,10 @@ export default function getValidatedStoredValues() {
 		q = '';
 	}
 
+	if (typeof trade_type !== 'string') {
+		trade_type = 'import';
+	}
+
 	if (typeof sort_type !== 'string') {
 		sort_type = 'asc';
 	}
@@ -42,6 +46,7 @@ export default function getValidatedStoredValues() {
 			...(q && { q }),
 			page,
 			fileType,
+			trade_type,
 		},
 		tabState: {
 			activeTab,

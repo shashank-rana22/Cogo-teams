@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
@@ -49,8 +49,8 @@ function Header({ serviceData = [] }) {
 					</div>
 
 					<div className={styles.extra_details}>
-						<div
-							role="presentation"
+						<Button
+							themeType="secondary"
 							onClick={() => setShowDetails({
 								...showDetails,
 								[SERVICE_DATA_FIRST.display_label]: !showDetails[SERVICE_DATA_FIRST.display_label],
@@ -58,7 +58,7 @@ function Header({ serviceData = [] }) {
 							className={styles.details_cta}
 						>
 							{showDetails[SERVICE_DATA_FIRST.display_label] ? 'Hide Details' : 'View Details'}
-						</div>
+						</Button>
 						{can_edit_cancel_service ? (
 							<div className={styles.edit_cancel}>
 								<EditCancelService serviceData={SERVICE_DATA_FIRST} />

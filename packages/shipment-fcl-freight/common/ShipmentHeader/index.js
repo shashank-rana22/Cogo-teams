@@ -1,4 +1,4 @@
-import { Popover, Tooltip, Toast, cl } from '@cogoport/components';
+import { Popover, Tooltip, Toast, cl, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot, IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -61,12 +61,6 @@ function ShipmentHeader() {
 			<div className={styles.cfs_details}>
 				RSP Tower, Plot No.28-P, Urban Estate, Sector - 44 ,Gurgaon – 122003, Haryana, India
 			</div>
-			<div
-				role="presentation"
-				onClick={() => {
-					navigator.clipboard.writeText(primary_service?.cfs_service);
-				}}
-			/>
 			<IcMCopy
 				onClick={() => handleCopy(primary_service?.cfs_service)}
 				style={STYLE_ICON}
@@ -106,13 +100,13 @@ function ShipmentHeader() {
 								{po_number}
 							</div>
 						) : (
-							<div
+							<Button
 								className={styles.button}
-								role="presentation"
+								themeType="linkUi"
 								onClick={() => setShowModal('add_po_number')}
 							>
 								Add PO Number
-							</div>
+							</Button>
 						)}
 					</div>
 				) : null }

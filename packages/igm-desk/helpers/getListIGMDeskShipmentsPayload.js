@@ -12,6 +12,7 @@ export default function getListIGMDeskShipmentsPayload({
 		sort_by = 'schedule_arrival',
 		fileType,
 		current_filter,
+		trade_type,
 		...restFilters
 	} = filters;
 	const { activeTab } = tabState;
@@ -24,7 +25,7 @@ export default function getListIGMDeskShipmentsPayload({
 			state       : activeTab,
 			...updatedTabSpecificPayload,
 			...restFilters,
-			trade_type  : 'import',
+			trade_type,
 			...(q && { q }),
 			[file_type] : true,
 			partner_id  : userId,
