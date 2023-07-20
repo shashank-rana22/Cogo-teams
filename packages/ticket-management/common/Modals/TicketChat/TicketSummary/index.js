@@ -43,7 +43,7 @@ function TicketSummary({
 
 	const endDate = new Date(tat);
 
-	const formattedTime = useCountdown(endDate);
+	const formattedTime = useCountdown({ time: endDate });
 
 	if (detailsLoading) {
 		return <TicketLoader count={1} />;

@@ -10,7 +10,7 @@ const DAY = HOUR * GENERAL_HOURS;
 
 const getFormattedTime = (val) => Math.abs(Math.floor(val));
 
-export default function useCountdown(time, interval = SECOND) {
+export default function useCountdown({ time, interval = SECOND }) {
 	const [timespan, setTimespan] = useState(new Date(time) - Date.now());
 
 	useEffect(() => {
