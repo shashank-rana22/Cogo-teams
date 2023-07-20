@@ -43,9 +43,9 @@ export const functions = {
 			`(${originAirportCode}) ${originAirport}`
 		);
 	},
-	handleDestLocation    : (singleItem) => singleItem.destinationAirport,
-	handleAgent           : (singleItem) => singleItem.procuredByName,
-	handleServiceProvider : (singleItem) => singleItem.serviceProviderName,
+	handleDestLocation    : (singleItem) => singleItem?.destinationAirport,
+	handleAgent           : (singleItem) => singleItem?.procuredByName,
+	handleServiceProvider : (singleItem) => singleItem?.serviceProviderName,
 	handleDate            : (singleItem) => {
 		const { procuredDate } = singleItem || {};
 		return (
@@ -54,16 +54,51 @@ export const functions = {
 					date       : procuredDate,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
-				})}
+				}) || '-'}
 			</div>
 		);
 	},
-	handleTotalStock          : (singleItem) => singleItem.totalStock,
-	handleUsedStock           : (singleItem) => singleItem.usedStock,
-	handleUnusedStock         : (singleItem) => singleItem.unusedStock,
-	handleCancelledStock      : (singleItem) => singleItem.cancelledStock,
-	handleCustomClearanceDate : (singleItem) => singleItem.customClearanceDate,
-	handleBookingDate         : (singleItem) => singleItem.bookingDate,
-	handleAwbNumber           : (singleItem) => singleItem.awbNumber,
-	handleIataCode            : (singleItem) => singleItem.iataCode,
+	handleValidityDate: (singleItem) => {
+		const { validityExpiryDate } = singleItem || {};
+		return (
+			<div className={styles.overflow_text}>
+				{formatDate({
+					date       : validityExpiryDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				}) || '-'}
+			</div>
+		);
+	},
+	handleTotalStock          : (singleItem) => singleItem?.totalStock,
+	handleUsedStock           : (singleItem) => singleItem?.usedStock,
+	handleUnusedStock         : (singleItem) => singleItem?.unusedStock,
+	handleCancelledStock      : (singleItem) => singleItem?.cancelledStock,
+	handleCustomClearanceDate : (singleItem) => {
+		const { customClearanceDate } = singleItem || {};
+		return (
+			<div className={styles.overflow_text}>
+				{formatDate({
+					date       : customClearanceDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				}) || '-'}
+			</div>
+		);
+	},
+	handleBookingDate: (singleItem) => {
+		const { bookingDate } = singleItem || {};
+		return (
+			<div className={styles.overflow_text}>
+				{formatDate({
+					date       : bookingDate,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				}) || '-'}
+			</div>
+		);
+	},
+	handleAwbNumber : (singleItem) => singleItem?.awbNumber,
+	handleIataCode  : (singleItem) => singleItem?.iataCode,
+	handleAwbType   : (singleItem) => singleItem?.awbType,
 };

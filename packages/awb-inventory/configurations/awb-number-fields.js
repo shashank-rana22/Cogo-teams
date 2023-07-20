@@ -37,10 +37,10 @@ export const AwbNumberFields = {
 			func  : 'handleServiceProvider',
 		},
 		{
-			key   : 'procured_date',
-			label : 'Procured Date',
+			key   : 'validity_expiry_date',
+			label : 'AWB Validity End',
 			span  : 1,
-			func  : 'handleDate',
+			func  : 'handleValidityDate',
 		},
 		{
 			key   : 'action',

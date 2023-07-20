@@ -10,13 +10,13 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Item({
-	type,
-	control,
-	span,
-	label,
-	error,
-	heading,
-	rules,
+	type = '',
+	control = {},
+	span = 1,
+	label = '',
+	error = '',
+	heading = '',
+	rules = {},
 	...props
 }) {
 	const errorOriginal = getErrorMessage({

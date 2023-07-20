@@ -42,9 +42,9 @@ const getVariableTabMapping = ({ value }) => {
 };
 
 function AwbInventory() {
+	const profile = useSelector((state) => state);
 	const [activeTab, setActiveTab] = useState('overview');
 	const [value, setValue] = useState('available_non_reserved');
-	const profile = useSelector((state) => state);
 
 	const { profile: { authParams } } = profile || {};
 
@@ -94,35 +94,33 @@ function AwbInventory() {
 						>
 							{activeTab === 'awb_details' && (
 								<div className={styles.filters_container}>
-									<div className={styles.flex}>
-										<Select
-											value={value}
-											onChange={(selectedValue) => {
-												setValue(selectedValue);
-												setPage(START_PAGE);
-												setFinalList([]);
-											}}
-											placeholder="Select here..."
-											options={STATUS_VALUE}
-											className={styles.selectbox}
-											size="sm"
-										/>
-										<Input
-											value={qfilter}
-											suffix={<IcMSearchlight className="search_icon" />}
-											className={styles.input_search}
-											placeholder="Search by SID or AWB Number"
-											type="text"
-											onChange={(val) => {
-												setQfilter(val);
-											}}
-										/>
-										<Filters
-											filters={filters}
-											setFilters={setFilters}
-											activeTab={activeTab}
-										/>
-									</div>
+									<Select
+										value={value}
+										onChange={(selectedValue) => {
+											setValue(selectedValue);
+											setPage(START_PAGE);
+											setFinalList([]);
+										}}
+										placeholder="Select here..."
+										options={STATUS_VALUE}
+										className={styles.selectbox}
+										size="sm"
+									/>
+									<Input
+										value={qfilter}
+										suffix={<IcMSearchlight className="search_icon" />}
+										className={styles.input_search}
+										placeholder="Search by SID or AWB Number"
+										type="text"
+										onChange={(val) => {
+											setQfilter(val);
+										}}
+									/>
+									<Filters
+										filters={filters}
+										setFilters={setFilters}
+										activeTab={activeTab}
+									/>
 								</div>
 							)}
 							<Component

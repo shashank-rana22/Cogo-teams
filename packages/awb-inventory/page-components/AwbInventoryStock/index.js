@@ -90,10 +90,7 @@ function AwbInventoryStock() {
 											className={styles.input_search}
 											placeholder="Search by SID or AWB Number"
 											type="text"
-											onChange={(val) => {
-												setQfilter(val);
-											}}
-											style={{ margin: '10px' }}
+											onChange={setQfilter}
 										/>
 										<Filters
 											filters={filters}

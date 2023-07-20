@@ -1,4 +1,4 @@
-import { Button, Modal, Tooltip } from '@cogoport/components';
+import { Button, Modal, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -71,30 +71,31 @@ function AwbNumberUsed({
 		},
 		handleAction: (singleItem) => (
 			<div className={styles.button_group}>
-				<Button
-					themeType="linkUi"
-					onClick={() => {
-						setItem(singleItem);
-						setShowEdit(true);
-						setChangedStatus('used');
-					}}
-				>
-					<Tooltip content="Edit" placement="top">
-						<IcMEdit height={16} width={16} fill="#8B8B8B" />
-					</Tooltip>
-				</Button>
-				<Button
-					themeType="linkUi"
-					onClick={() => {
-						setItem(singleItem);
-						setShowConfirm(true);
-						setChangedStatus('cancelled');
-					}}
-				>
-					<Tooltip content="Cancel" placement="top">
-						<IcMDelete height={16} width={16} fill="#8B8B8B" />
-					</Tooltip>
-				</Button>
+
+				<Tooltip content="Edit" placement="top">
+					<ButtonIcon
+						themeType="primary"
+						onClick={() => {
+							setItem(singleItem);
+							setShowEdit(true);
+							setChangedStatus('used');
+						}}
+						icon={<IcMEdit height={16} width={16} fill="#8B8B8B" />}
+					/>
+				</Tooltip>
+
+				<Tooltip content="Cancel" placement="top">
+					<ButtonIcon
+						themeType="primary"
+						onClick={() => {
+							setItem(singleItem);
+							setShowConfirm(true);
+							setChangedStatus('cancelled');
+						}}
+						icon={<IcMDelete height={16} width={16} fill="#8B8B8B" />}
+					/>
+				</Tooltip>
+
 			</div>
 		),
 	};

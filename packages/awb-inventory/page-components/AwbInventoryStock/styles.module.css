@@ -12,6 +12,7 @@
 .input_search {
 	min-width: 280px;
 	max-height: 32px;
+	margin: 8px;
 
 	:global(.ui_input_control) {
 		font-size: var(--font-size-md) !important;

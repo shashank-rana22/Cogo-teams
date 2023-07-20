@@ -26,11 +26,6 @@
 	justify-content: flex-end;
 }
 
-.flex {
-	display: flex;
-	align-items: center;
-}
-
 .input_search {
 	width: 280px;
 	height: 32px !important;

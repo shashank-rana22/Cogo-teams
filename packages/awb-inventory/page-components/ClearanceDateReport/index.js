@@ -1,4 +1,4 @@
-import { Button, Modal, Tooltip } from '@cogoport/components';
+import { Modal, Tooltip, ButtonIcon } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -38,17 +38,16 @@ function ClearanceDateReport({
 	const otherFunctions = {
 		handleAction: (singleItem) => (
 			<div className={styles.button_group}>
-				<Button
-					themeType="linkUi"
-					onClick={() => {
-						setItem(singleItem);
-						setShowEdit(true);
-					}}
-				>
-					<Tooltip content="Edit" placement="top">
-						<IcMEdit height={16} width={16} fill="#8B8B8B" />
-					</Tooltip>
-				</Button>
+				<Tooltip content="Edit" placement="top">
+					<ButtonIcon
+						themeType="primary"
+						onClick={() => {
+							setItem(singleItem);
+							setShowEdit(true);
+						}}
+						icon={<IcMEdit height={16} width={16} fill="#8B8B8B" />}
+					/>
+				</Tooltip>
 			</div>
 		),
 	};

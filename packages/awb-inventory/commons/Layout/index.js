@@ -10,27 +10,27 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Layout({
-	control, fields, showElements = {}, errors,
+	control = {}, fields = {}, showElements = {}, errors = {},
 }) {
-	let ROW_WISE_FIELDS = [];
+	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
 			span += field.span || TOTAL_SPAN;
 			if (span === TOTAL_SPAN) {
-				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-				ROW_WISE_FIELDS = [];
-				ROW_WISE_FIELDS.push(field);
+				TOTAL_FIELDS.push(rowWiseFields);
+				rowWiseFields = [];
+				rowWiseFields.push(field);
 				span = field.span;
 			} else {
-				ROW_WISE_FIELDS.push(field);
+				rowWiseFields.push(field);
 				span += field.span;
 			}
 		}
 	});
-	if (ROW_WISE_FIELDS.length) {
-		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+	if (rowWiseFields.length) {
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	return (
