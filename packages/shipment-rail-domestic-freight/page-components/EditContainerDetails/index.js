@@ -9,7 +9,7 @@ import { getDate } from '../../helpers/getDate';
 import useListShipmentContainerDetails from '../../hooks/useListShipmentContainerDetails';
 import useUpdateShipmentContainerDetails from '../../hooks/useUpdateShipmentContainerDetails';
 
-// import BulkUpload from './BulkUpload';
+import BulkUpload from './BulkUpload';
 import styles from './styles.module.css';
 import getControls from './utils/getControls';
 
@@ -105,7 +105,7 @@ function EditContainerDetails({ setShow = () => {}, serviceData = {} }) {
 					Update
 				</Button>
 
-				{/* <BulkUpload /> */}
+				<BulkUpload disabledButton={disabledButton} shipment_id={serviceData.shipment_id} setShow={setShow} />
 
 				<Button themeType="secondary" onClick={closeModal}>Cancel</Button>
 
