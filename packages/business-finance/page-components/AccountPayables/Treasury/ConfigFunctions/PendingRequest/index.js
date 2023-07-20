@@ -3,14 +3,12 @@ import { Popover } from '@cogoport/components';
 import styles from './styles.module.css';
 import UpdatedAmount from './UpdatedAmount';
 
-const CHECK_PENDING_COUNT = 0;
-
 function PendingRequest({ itemData = {} }) {
 	const { pendingRequestsCount, fundRequests, currency } = itemData;
 
 	return (
 		<div>
-			{pendingRequestsCount > CHECK_PENDING_COUNT && (
+			{pendingRequestsCount ? (
 				<Popover
 					placement="bottom-start"
 					trigger="mouseenter"
@@ -25,7 +23,7 @@ function PendingRequest({ itemData = {} }) {
 					</div>
 
 				</Popover>
-			)}
+			) : null}
 		</div>
 	);
 }

@@ -5,8 +5,6 @@ import EnterAmountBox from './EnterAmountBox';
 import Request from './Request';
 import styles from './styles.module.css';
 
-const CHECK_PENDING_REQUEST = 0;
-
 const commonFormatAmount = (amount, currency) => formatAmount({
 	amount,
 	currency,
@@ -51,7 +49,7 @@ function SaveAndAllotAmount({ itemData = {}, setShowModal = () => {}, refetch = 
 			<div className={styles.container}>
 
 				<div className={styles.sub_container}>
-					{pendingRequestsCount > CHECK_PENDING_REQUEST ? (
+					{pendingRequestsCount ? (
 						<div className={styles.bank}>
 							<div className={styles.label_text}>Bank A/C</div>
 							<div className={styles.value_text}>
@@ -80,7 +78,7 @@ function SaveAndAllotAmount({ itemData = {}, setShowModal = () => {}, refetch = 
 						</div>
 					</div>
 				</div>
-				{pendingRequestsCount > CHECK_PENDING_REQUEST ? (
+				{pendingRequestsCount ? (
 					<div>
 						{(fundRequests || []).map((item, index) => (
 							<Request

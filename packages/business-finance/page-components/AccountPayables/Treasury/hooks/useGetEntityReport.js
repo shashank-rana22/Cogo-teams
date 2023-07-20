@@ -1,4 +1,6 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
@@ -11,20 +13,26 @@ const END_ODD_MONTH_DATE = 31;
 const END_EVEN_MONTH_DATE = 30;
 const LEAP_YEAR_ODD_DATE = 29;
 const LEAP_YEAR_EVEN_DATE = 28;
-const LEAD_DATE_CHECK = 10;
 
 const THIRTY_DAY_MONTH = ['11', '9', '6', '4'];
 const THIRTY_ONE_DAY_MONTH = ['1', '3', '5', '7', '8', '10', '12'];
 const LEAP_YEAR_MONTH = ['2'];
 
-const CREATE_TIME = '05:30:00';
-
-function addLeadingZero(value) {
-	return value < LEAD_DATE_CHECK ? `0${value}` : value;
-}
-
 function createDate(year, month, day) {
-	return `${year}-${addLeadingZero(month)}-${addLeadingZero(day)} ${CREATE_TIME}`;
+	let createDateReturn;
+	if (year && month && day) {
+		createDateReturn = new Date(parseInt(year, 10), parseInt(month - START_MONTH_DATE, 10), day);
+	} else {
+		createDateReturn = '';
+	}
+
+	return formatDate({
+		date       : createDateReturn || '',
+		formatType : 'dateTime',
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+		separator  : ' ',
+	});
 }
 
 const useGetEntityReport = ({
