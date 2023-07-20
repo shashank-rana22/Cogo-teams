@@ -106,6 +106,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			multiple    : true,
 			asyncKey    : 'partner_roles',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				permissions_data_required : false,
@@ -123,6 +124,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			getModifiedOptions: ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
+			setFilterValue: ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			disabled,
 		},
 	];

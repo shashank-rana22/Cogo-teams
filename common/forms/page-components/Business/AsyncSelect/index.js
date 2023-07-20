@@ -129,6 +129,7 @@ function AsyncSelect(props) {
 		asyncKey,
 		initialCall,
 		getModifiedOptions,
+		setFilterValue,
 		getSelectedOption,
 		microService = '',
 		onOptionsChange,
@@ -144,12 +145,14 @@ function AsyncSelect(props) {
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		getModifiedOptions,
+		setFilterValue,
 		initialCall,
 		onOptionsChange,
 		params       : params || defaultParams.params,
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,
 		microService : microService || defaultParams.microService,
+		filterKey    : rest.filterKey || defaultParams.filterKey,
 	});
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {

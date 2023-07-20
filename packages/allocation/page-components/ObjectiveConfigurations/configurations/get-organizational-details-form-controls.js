@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import RenderListLocationOption from '../../../common/RenderListLocationOption';
@@ -15,6 +16,7 @@ const getOrganizationalDetailsControls = (props) => {
 			multiple    : true,
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				filters    : { type: 'country', status: 'active' },
@@ -27,7 +29,8 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			renderLabel: (item) => <RenderListLocationOption item={item} />,
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 			disabled,
 		},
 		{
@@ -38,6 +41,7 @@ const getOrganizationalDetailsControls = (props) => {
 			multiple    : true,
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				filters: {
@@ -54,8 +58,9 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : disabled || isEmpty(watchCountries),
-			renderLabel : (item) => <RenderListLocationOption item={item} />,
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			disabled       : disabled || isEmpty(watchCountries),
+			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
 			name        : 'cities',
@@ -65,6 +70,7 @@ const getOrganizationalDetailsControls = (props) => {
 			multiple    : true,
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				filters: {
@@ -81,8 +87,9 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.name}` }),
 			),
-			disabled    : disabled || isEmpty(watchStates),
-			renderLabel : (item) => <RenderListLocationOption item={item} />,
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			disabled       : disabled || isEmpty(watchStates),
+			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
 			name        : 'pincodes',
@@ -92,6 +99,7 @@ const getOrganizationalDetailsControls = (props) => {
 			multiple    : true,
 			asyncKey    : 'list_locations',
 			valueKey    : 'value',
+			filterKey   : 'id',
 			initialCall : false,
 			params      : {
 				filters: {
@@ -108,8 +116,9 @@ const getOrganizationalDetailsControls = (props) => {
 			getModifiedOptions : ({ options }) => options.map(
 				(option) => ({ ...option, value: `${option.id}_${option.postal_code}` }),
 			),
-			disabled    : disabled || isEmpty(watchCities),
-			renderLabel : (item) => <RenderListLocationOption item={item} />,
+			setFilterValue : ({ value }) => value.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+			disabled       : disabled || isEmpty(watchCities),
+			renderLabel    : (item) => <RenderListLocationOption item={item} />,
 		},
 		{
 			name        : 'segments',

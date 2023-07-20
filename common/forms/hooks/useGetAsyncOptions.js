@@ -10,9 +10,11 @@ function useGetAsyncOptions({
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
+	filterKey = '',
 	params = {},
 	onOptionsChange = () => {},
 	getModifiedOptions,
+	setFilterValue,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -65,13 +67,17 @@ function useGetAsyncOptions({
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
-					TO_BE_FETCHED.push(v);
+					let filterValue = v;
+					if (typeof (setFilterValue) === 'function' && !isEmpty(filterValue)) {
+						filterValue = setFilterValue({ value: filterValue });
+					}
+					TO_BE_FETCHED.push(filterValue);
 				}
 			});
 			let unhydratedOptions;
 			if (TO_BE_FETCHED.length) {
 				const res = await triggerSingle({
-					params: merge(params, { filters: { [valueKey]: TO_BE_FETCHED } }),
+					params: merge(params, { filters: { [filterKey || valueKey]: TO_BE_FETCHED } }),
 				});
 				unhydratedOptions = res?.data?.list;
 				if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
@@ -94,8 +100,12 @@ function useGetAsyncOptions({
 		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index];
 
 		try {
+			let filterValue = value;
+			if (typeof (setFilterValue) === 'function' && !isEmpty(filterValue)) {
+				filterValue = setFilterValue({ value: filterValue });
+			}
 			const res = await triggerSingle({
-				params: merge(params, { filters: { [valueKey]: value } }),
+				params: merge(params, { filters: { [filterKey || valueKey]: filterValue } }),
 			});
 			let unhydratedOptions = res?.data?.list;
 			if (typeof getModifiedOptions === 'function' && !isEmpty(unhydratedOptions)) {
