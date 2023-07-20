@@ -17,6 +17,7 @@ import useTaskExecution from './helpers/useTaskExecution';
 import styles from './styles.module.css';
 
 const FIND_LAST_INDEX = 1;
+const TASK_STATE = ['cargo_dropped', 'cargo_picked_up'];
 
 function ExecuteTask({
 	task = {},
@@ -120,7 +121,7 @@ function ExecuteTask({
 
 	if (
 		(task.task === 'mark_completed'
-			&& ['cargo_dropped', 'cargo_picked_up'].includes(task.state))
+			&& TASK_STATE.includes(task.state))
 			|| task.task === 'cargo_picked_up_at'
 	) {
 		return (

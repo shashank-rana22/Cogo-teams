@@ -54,13 +54,13 @@ function FTLPickAndDropTasks(props) {
 				<Button
 					className="secondary md"
 					disabled={bulkLoading || updateLoading}
-					onClick={() => onCancel()}
+					onClick={onCancel}
 				>
 					Cancel
 				</Button>
 				<Button
 					className="primary md"
-					onClick={() => finalSubmit()}
+					onClick={finalSubmit}
 					style={{ marginLeft: '10px' }}
 					disabled={bulkLoading || updateLoading}
 				>

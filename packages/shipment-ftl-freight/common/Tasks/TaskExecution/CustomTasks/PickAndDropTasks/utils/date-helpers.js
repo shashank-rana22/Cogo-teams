@@ -1,10 +1,11 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const TIME = 0;
+const DEFAULT_TIME = 0;
 
 const getDateTimeWithDefaultHours = (date) => {
 	const newDate = new Date(date);
-	newDate.setHours(TIME, TIME, TIME, TIME);
+	// hoursValue, minutesValue, secondsValue, msValue
+	newDate.setHours(DEFAULT_TIME, DEFAULT_TIME, DEFAULT_TIME, DEFAULT_TIME);
 
 	return newDate.getTime();
 };
