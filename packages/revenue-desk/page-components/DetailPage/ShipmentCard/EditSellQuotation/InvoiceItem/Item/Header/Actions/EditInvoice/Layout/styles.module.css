@@ -1,0 +1,30 @@
+.layout {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 8px;
+}
+
+.heading {
+	height: 22px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.empty_field {
+	margin: 8px 0 0;
+}

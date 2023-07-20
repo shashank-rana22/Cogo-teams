@@ -1612,6 +1612,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'bulk_update_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
 		api         : 'get_saas_hs_code_list_commodities',
 		access_type : 'private',
 	},

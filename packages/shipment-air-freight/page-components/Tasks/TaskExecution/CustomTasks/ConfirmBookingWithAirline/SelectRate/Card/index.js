@@ -26,6 +26,7 @@ function Card({
 	handOverDate = '',
 	refetchList = () => {},
 	setStep = () => {},
+	primary_service = {},
 	mainServiceData = {},
 }) {
 	const [showModal, setShowModal] = useState(false);
@@ -181,6 +182,7 @@ function Card({
 				step={step}
 				bookingMode={bookingMode}
 				createBookingLoading={createBookingLoading}
+				primary_service={primary_service}
 			/>
 			{showBookingStatus && (
 				<EBookingStatus setShowBookingStatus={setShowBookingStatus} showBookingStatus={showBookingStatus} />
