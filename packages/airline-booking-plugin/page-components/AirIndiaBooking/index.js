@@ -14,6 +14,37 @@ import useHandlePluginBooking from '../../hooks/useHandlePluginBooking';
 
 import styles from './styles.module.css';
 
+const FUNCTIONS = {
+	handleFlightDate: (singleItem) => {
+		const { flight_date } = singleItem || {};
+		const startDate = formatDate({
+			date       : flight_date?.startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			formatType : 'date',
+		});
+		const endDate = formatDate({
+			date       : flight_date?.endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			formatType : 'date',
+		});
+		return (
+			startDate === endDate ? (
+				startDate
+			) : (
+				<>
+					<div>
+						{startDate}
+						{' '}
+						-
+						{' '}
+					</div>
+					<div>{endDate}</div>
+				</>
+			)
+		);
+	},
+};
+
 function AirIndiaBooking({
 	pluginData = [],
 	setPluginData = () => {},
@@ -28,37 +59,6 @@ function AirIndiaBooking({
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
 	const { createBooking, loading } = useHandlePluginBooking(edit);
-
-	const functions = {
-		handleFlightDate: (singleItem) => {
-			const { flight_date } = singleItem || {};
-			const startDate = formatDate({
-				date       : flight_date?.startDate,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
-			});
-			const endDate = formatDate({
-				date       : flight_date?.endDate,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
-			});
-			return (
-				startDate === endDate ? (
-					startDate
-				) : (
-					<>
-						<div>
-							{startDate}
-							{' '}
-							-
-							{' '}
-						</div>
-						<div>{endDate}</div>
-					</>
-				)
-			);
-		},
-	};
 
 	useEffect(() => {
 		if (edit) {
@@ -104,7 +104,7 @@ function AirIndiaBooking({
 							key={singleitem.id}
 							singleitem={singleitem}
 							fields={pluginHeader}
-							functions={functions}
+							functions={FUNCTIONS}
 						/>
 					))}
 				</div>
