@@ -20,6 +20,7 @@ function getRenderHeader({
 		reopened                         : `This ticket has been reopened by ${name}`,
 		ticket_expired                   : 'The ticket has been expired.',
 		automatically_reviewer_escalated : `This ticket has been escalated to ${oldReviewerName}.`,
+		resolve_requested                : `${name} has requested to resolve the ticket.`,
 	};
 
 	if (type === 'escalated') {
