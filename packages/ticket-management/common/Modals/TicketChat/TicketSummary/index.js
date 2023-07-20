@@ -7,6 +7,7 @@ import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
 import useCountdown from '../../../../utils/getCountdown';
+import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
 import styles from './styles.module.css';
 
@@ -14,6 +15,7 @@ function TicketSummary({
 	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
 	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
+	detailsLoading = false,
 }) {
 	const {
 		Name: name = '', Email: email = '', MobileCountryCode: mobileCountryCode = '',
@@ -42,6 +44,10 @@ function TicketSummary({
 	const endDate = new Date(tat);
 
 	const formattedTime = useCountdown(endDate);
+
+	if (detailsLoading) {
+		return <TicketLoader count={1} />;
+	}
 
 	return (
 		<div className={styles.container}>
