@@ -11,6 +11,8 @@ const getPayload = ({
 		priority = '',
 		file_url: fileUrl = '',
 		notify_customer: notifyCustomer = false,
+		organization_id: OrganizationID = '',
+		user_id: UserID = '',
 		...rest
 	} = val || {};
 
@@ -21,15 +23,16 @@ const getPayload = ({
 	);
 
 	return {
-		UserID         : agentId,
 		PerformedByID  : agentId,
 		Source         : 'admin',
 		Priority       : priority,
-		Usertype       : 'ticket_user',
+		UserType       : 'ticket_user',
 		Data           : { Attachment: [finalUrl] || [], ...selectedServices },
 		Type           : issueType,
 		Description    : additionalInformation,
 		NotifyCustomer : notifyCustomer,
+		OrganizationID,
+		UserID,
 	};
 };
 
