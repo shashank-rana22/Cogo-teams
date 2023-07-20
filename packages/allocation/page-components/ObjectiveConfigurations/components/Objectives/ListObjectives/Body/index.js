@@ -1,5 +1,5 @@
-import Filters from './Filters';
 import List from './List';
+import ObjectiveFilters from './ObjectiveFilters';
 // import styles from './styles.module.css';
 
 function Body(props) {
@@ -7,7 +7,7 @@ function Body(props) {
 
 	return (
 		<section>
-			<Filters />
+			<ObjectiveFilters />
 
 			<List setActiveTabDetails={setActiveTabDetails} />
 		</section>
