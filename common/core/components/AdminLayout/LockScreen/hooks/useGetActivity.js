@@ -13,6 +13,8 @@ import {
 	unMountActivityTracker,
 } from '../helpers/activityHelpers';
 
+import useUpdateAgentStatus from './useUpdateAgentStatus';
+
 const EVENTS = ['click', 'keypress', 'scroll', 'pointermove'];
 const DEFAULT_TIMEOUT_VALUE = 0;
 
@@ -25,6 +27,8 @@ function useGetActivity({
 	const activityTrackerSnapShotRef = useRef(null);
 	const activitytimeoutRef = useRef(null);
 	const trackerRef = useRef(null);
+
+	const { updateAgentStatus } = useUpdateAgentStatus();
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -75,6 +79,7 @@ function useGetActivity({
 
 				activitytimeoutRef.current = setTimeout(() => {
 					setShowModal(true);
+					updateAgentStatus('screen_locked');
 					setDoc(roomDoc, {
 						last_activity_timestamp : Date.now(),
 						last_activity           : 'locked_screen',
@@ -85,7 +90,7 @@ function useGetActivity({
 		} catch (e) {
 			console.error('error:', e);
 		}
-	}, [firestore, isRolePresent, incall, agentId, FUNC_MAPPING]);
+	}, [firestore, isRolePresent, incall, agentId, FUNC_MAPPING, updateAgentStatus]);
 
 	useEffect(() => {
 		mountActivityTrackerSnapShotRef();
