@@ -33,7 +33,7 @@ interface LineItemCardInterface {
 		billCurrency: string;
 		grandTotal: any;
 		subTotal: string | number;
-		tdsAmount: any;
+		tdsAmount: string | number;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItemsRemarks: object;
@@ -42,9 +42,9 @@ interface LineItemCardInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
 	shipmentType: string;
-	tdsRate: any;
-	paidTds: any;
-	subTotal: any;
+	tdsRate: string | number;
+	paidTds: string | number;
+	subTotal: string | number;
 }
 
 const PERCENTAGE_FACTOR = 100;
@@ -197,7 +197,7 @@ function LineItemCard({
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
 	};
 
-	const paidTdsPercentage = +((+paidTds / (subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
+	const paidTdsPercentage = +((+paidTds / (+subTotal || DEFAULT_GRAND_TOTAL)) * PERCENTAGE_FACTOR)
 		.toFixed(MAX_DECIMAL_PLACES);
 
 	return (

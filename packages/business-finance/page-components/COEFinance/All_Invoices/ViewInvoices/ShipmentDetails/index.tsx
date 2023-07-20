@@ -32,7 +32,7 @@ interface BuyerDetailInterface {
 	address?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
-	tdsRate?: any;
+	tdsRate?: string | number;
 }
 
 interface SellerDetailInterface {
@@ -63,8 +63,8 @@ interface BillInterface {
 	recurringState?:string,
 	billType: string;
 	isProforma: boolean,
-	tdsAmount: any;
-	paidTds: any
+	tdsAmount: string | number;
+	paidTds: string | number
 }
 
 interface JobInterface {
