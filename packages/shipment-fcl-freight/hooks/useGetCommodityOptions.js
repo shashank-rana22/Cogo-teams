@@ -1,30 +1,31 @@
 import { useRequestBf } from '@cogoport/request';
+import { useEffect } from 'react';
 
-function useGetCommodityOptions({ shipment_data }) {
+const MODE = 'OCEAN';
+function useGetCommodityOptions() {
 	const [{ loading, data }, trigger] = useRequestBf({
 		url     : '/saas/hs-code/list-commodities',
 		method  : 'get',
 		authKey : 'get_saas_hs_code_list_commodities',
 	}, { manual: true, autoCancel: false });
 
-	const getOptions = async () => {
-		const mode = shipment_data?.shipment_type;
-		const resp = await trigger({
+	useEffect(() => {
+		trigger({
 			params: {
-				service: mode,
+				service: MODE,
 			},
 		});
-		const options = (resp?.data || []).map((item) => ({
-			label : item?.commodityDisplayName,
-			value : item?.commodity,
-		}));
-		return options;
-	};
+	}, [trigger]);
+
+	const options = (data || []).map((item) => ({
+		label : item?.commodityDisplayName,
+		value : item?.commodity,
+	}));
 
 	return {
 		loading,
 		allCommodity: data,
-		getOptions,
+		options,
 	};
 }
 
