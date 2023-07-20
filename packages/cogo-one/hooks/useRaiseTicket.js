@@ -57,7 +57,7 @@ const useRaiseTicket = ({ setShowRaiseTicket = () => {}, additionalInfo = [] }) 
 			Toast.success('Successfully Created');
 			setShowRaiseTicket(false);
 		} catch (error) {
-			console.error(error?.response?.data);
+			Toast.error(error?.response?.data);
 		}
 	};
 
