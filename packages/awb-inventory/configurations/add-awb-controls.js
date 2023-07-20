@@ -1,8 +1,4 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-
 import checkValidation from '../utils/checkValidation';
-
-const geo = getGeoConstants();
 
 const ALLOWED_TOTAL_AWB_ALLOTED = 200;
 
@@ -35,6 +31,18 @@ const awbControls = ({
 			},
 		},
 		rules: {
+			required: true,
+		},
+	},
+	{
+		name                  : 'validity_expiry_date',
+		type                  : 'date_picker',
+		label                 : 'AWB Validity',
+		placeholder           : 'Select Date',
+		isPreviousDaysAllowed : true,
+		value                 : new Date(),
+		span                  : 6,
+		rules                 : {
 			required: true,
 		},
 	},
@@ -111,48 +119,24 @@ const awbControls = ({
 		},
 	},
 	{
-		name  : 'awb_block',
-		type  : 'checkbox',
-		label : 'Are you sure want to block this AWB Number?',
-	},
-	{
-		name        : 'destination_location_id',
-		type        : 'async-select',
-		asyncKey    : 'list_locations',
-		label       : 'Destination Location',
-		placeholder : 'Select Destination Airport',
+		name        : 'awb_type',
+		type        : 'select',
+		label       : 'Type of AWB',
+		placeholder : 'Select Adhoc/Advance',
 		span        : 6,
-		params      : {
-			filters: {
-				type: ['airport', 'country'],
+		rules       : {
+			required: true,
+		},
+		options: [
+			{
+				label : 'Adhoc',
+				value : 'adhoc',
 			},
-		},
-	},
-	{
-		name        : 'importer_exporter_id',
-		type        : 'async-select',
-		asyncKey    : 'organizations',
-		label       : 'Shipper Name',
-		placeholder : 'Shipper Name',
-		span        : 6,
-		params      : {
-			branches_data_required : true,
-			filters                : { status: 'active', account_type: 'importer_exporter' },
-		},
-	},
-	{
-		name        : 'booking_agent_id',
-		type        : 'async-select',
-		asyncKey    : 'partner_users',
-		label       : 'Booking Agent (KAM)',
-		placeholder : 'Booking Agent',
-		valueKey    : 'user_id',
-		span        : 6,
-		params      : {
-			filters: {
-				role_ids: geo?.uuid.kam_ids,
+			{
+				label : 'Advance',
+				value : 'advance',
 			},
-		},
+		],
 	},
 ];
 

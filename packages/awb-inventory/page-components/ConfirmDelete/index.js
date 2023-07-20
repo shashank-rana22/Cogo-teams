@@ -4,14 +4,16 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const CONDITIONAL_STATUS = ['available_non_reserved', 'available_reserved'];
+
 function ConfirmDelete({
 	setShowConfirm = () => {},
 	editAwbNumber = () => {},
 	loading,
 	status,
 }) {
-	const confirmMessage = status === 'available' ? 'delete' : 'recover';
-	const updateStatus = status === 'available' ? 'cancelled' : 'available';
+	const confirmMessage = CONDITIONAL_STATUS.includes(status) ? 'delete' : 'recover';
+	const updateStatus = CONDITIONAL_STATUS.includes(status) ? 'cancelled' : 'available';
 	return (
 		<div className={styles.delete_container}>
 			<h2 className={styles.modal_title}>

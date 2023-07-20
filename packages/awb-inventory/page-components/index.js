@@ -1,13 +1,12 @@
-import { Tabs, TabPanel, Modal, Input } from '@cogoport/components';
+import { Tabs, TabPanel, Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
-import tabs from '../configurations/tabs';
 import CONSTANTS from '../constants/constants';
 import useGetAwbList from '../hooks/useGetAwbList';
 
-import AddAwbNumber from './AddAwbNumber';
+import AwbInventoryStock from './AwbInventoryStock';
 import AwbNumber from './AwbNumber';
 import AwbNumberDeleted from './AwbNumberDeleted';
 import AwbNumberUsed from './AwbNumberUsed';
@@ -16,24 +15,36 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 const { START_PAGE } = CONSTANTS;
+const STATUS_VALUE = [
+	{ label: 'Available(Non-reserved)', value: 'available_non_reserved' },
+	{ label: 'Available(Reserved)', value: 'available_reserved' },
+	{ label: 'Cancelled', value: 'cancelled' },
+	{ label: 'Used', value: 'used' },
+];
 
-const TABS_COMPONENT_MAPPING = {
-	awb_number        : AwbNumber,
-	awb_number_used   : AwbNumberUsed,
-	awb_number_cancel : AwbNumberDeleted,
-};
-
-const STATUS_MAPPING = {
-	awb_number        : 'available',
-	awb_number_used   : '',
-	awb_number_cancel : 'cancelled',
+const getVariableTabMapping = ({ value }) => {
+	const tabComponentMapping = {
+		overview: {
+			name      : 'overview',
+			title     : 'OVERVIEW',
+			Component : AwbInventoryStock,
+		},
+		awb_details: {
+			name      : 'awb_details',
+			title     : 'AWB DETAILS',
+			Component : (value === 'available_non_reserved' && AwbNumber)
+						|| (value === 'available_reserved' && AwbNumber)
+						|| (value === 'cancelled' && AwbNumberDeleted)
+						|| AwbNumberUsed,
+		},
+	};
+	return tabComponentMapping;
 };
 
 function AwbInventory() {
-	const [activeTab, setActiveTab] = useState('awb_number');
-	const [show, setShow] = useState(false);
-	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
 	const profile = useSelector((state) => state);
+	const [activeTab, setActiveTab] = useState('overview');
+	const [value, setValue] = useState('available_non_reserved');
 
 	const { profile: { authParams } } = profile || {};
 
@@ -49,7 +60,7 @@ function AwbInventory() {
 		setFilters,
 		qfilter,
 		setQfilter,
-	} = useGetAwbList(activeTab);
+	} = useGetAwbList({ activeTab, value });
 
 	useEffect(() => {
 		setFinalList([]);
@@ -63,34 +74,56 @@ function AwbInventory() {
 
 	return (
 		<div>
-			<Header setShow={setShow} />
-			<div className={styles.filters_container}>
-				<div className={styles.flex}>
-					<Input
-						value={qfilter}
-						suffix={<IcMSearchlight className="search_icon" />}
-						className={styles.input_search}
-						placeholder="Search by SID or AWB Number"
-						type="text"
-						onChange={(val) => {
-							setQfilter(val);
-						}}
-					/>
-					<Filters
-						filters={filters}
-						setFilters={setFilters}
-						activeTab={activeTab}
-					/>
-				</div>
-			</div>
-			<div className={styles.tabs_container}>
-				<Tabs
-					activeTab={activeTab}
-					onChange={setActiveTab}
-				>
-					{tabs.map((tab) => (
-						<TabPanel name={tab.name} title={tab.title} key={tab.key}>
-							<ActiveTabComponent
+			<Header />
+			<Tabs
+				activeTab={activeTab}
+				themeType="primary"
+				onChange={setActiveTab}
+				style={{ marginTop: '40px' }}
+			>
+				{Object.values(getVariableTabMapping({ value })).map((item) => {
+					const { name = '', title = '', Component } = item;
+
+					if (!Component) return null;
+
+					return (
+						<TabPanel
+							key={name}
+							name={name}
+							title={title}
+						>
+							{activeTab === 'awb_details' && (
+								<div className={styles.filters_container}>
+									<Select
+										value={value}
+										onChange={(selectedValue) => {
+											setValue(selectedValue);
+											setPage(START_PAGE);
+											setFinalList([]);
+										}}
+										placeholder="Select here..."
+										options={STATUS_VALUE}
+										className={styles.selectbox}
+										size="sm"
+									/>
+									<Input
+										value={qfilter}
+										suffix={<IcMSearchlight className="search_icon" />}
+										className={styles.input_search}
+										placeholder="Search by SID or AWB Number"
+										type="text"
+										onChange={(val) => {
+											setQfilter(val);
+										}}
+									/>
+									<Filters
+										filters={filters}
+										setFilters={setFilters}
+										activeTab={activeTab}
+									/>
+								</div>
+							)}
+							<Component
 								key={activeTab}
 								data={data}
 								loading={loading}
@@ -101,28 +134,12 @@ function AwbInventory() {
 								setFinalList={setFinalList}
 								setQfilter={setQfilter}
 								activeTab={activeTab}
-								status={STATUS_MAPPING[activeTab]}
+								status={value}
 							/>
 						</TabPanel>
-					))}
-				</Tabs>
-			</div>
-			{show && (
-				<Modal
-					show={show}
-					onClose={() => setShow(false)}
-					className={styles.modal_container}
-				>
-					<AddAwbNumber
-						setShow={setShow}
-						awbList={awbList}
-						setActiveTab={setActiveTab}
-						setFinalList={setFinalList}
-						setPage={setPage}
-						page={page}
-					/>
-				</Modal>
-			)}
+					);
+				})}
+			</Tabs>
 		</div>
 	);
 }

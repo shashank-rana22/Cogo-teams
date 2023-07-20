@@ -1,0 +1,41 @@
+.stock_report_container {
+	:global {
+		.layout_ui {
+			background: var(--color-secondary-5);
+		}
+
+		.row_ui {
+			justify-content: flex-start;
+		}
+
+		.element_ui {
+			margin: 12px 0 12px 20px;
+		}
+
+		.heading_ui {
+			margin: 0;
+		}
+	}
+}
+
+.header_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+	background: var(--color-secondary-5);
+}
+
+.heading {
+	margin: 12px 0 0 24px;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+.heading::after {
+	display: block;
+	width: 100px;
+	height: 4px;
+	content: "";
+	background: var(--color-primary-error-red-2);
+}

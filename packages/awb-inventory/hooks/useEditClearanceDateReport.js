@@ -12,16 +12,14 @@ const TOAST_MESSAGE = {
 
 const { START_PAGE } = CONSTANTS;
 
-const useEditAwbNumber = ({
+const useEditClearanceDateReport = ({
 	item = {},
-	awbList,
+	clearanceDateReport,
 	setShowEdit = () => {},
 	setPage,
 	setFinalList,
 	setQfilter,
-	setShowConfirm = () => {},
 	page,
-	changedStatus,
 }) => {
 	const { id = '' } = item;
 	const [{ loading }, trigger] = useRequest({
@@ -29,11 +27,10 @@ const useEditAwbNumber = ({
 		method : 'POST',
 	});
 
-	const editAwbNumber = async (finalData) => {
+	const editClearanceDateReport = async (finalData) => {
 		const payload = {
 			id,
 			...finalData,
-			status: changedStatus,
 		};
 		try {
 			await trigger({
@@ -41,26 +38,25 @@ const useEditAwbNumber = ({
 			});
 			Toast.success(
 				TOAST_MESSAGE[finalData?.status]
-					|| 'AWB Number is successfully updated.',
+					|| 'Successfully edited',
 			);
-			setShowConfirm(false);
 			setFinalList([]);
 			setQfilter('');
 			setShowEdit(false);
 			if (page === START_PAGE) {
-				awbList();
+				clearanceDateReport();
 			} else {
 				setPage(START_PAGE);
 			}
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data) || 'Unable to Update AWB Number');
+			Toast.error(getApiErrorString(error?.data?.base || 'Unable to Edit Clearance Report Details'));
 		}
 	};
 
 	return {
-		editAwbNumber,
+		editClearanceDateReport,
 		loading,
 	};
 };
 
-export default useEditAwbNumber;
+export default useEditClearanceDateReport;

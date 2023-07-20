@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import CONSTANTS from '../../constants/constants';
@@ -9,33 +10,33 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Layout({
-	control, fields, showElements = {}, errors,
+	control = {}, fields = {}, showElements = {}, errors = {},
 }) {
-	let ROW_WISE_FIELDS = [];
+	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
 			span += field.span || TOTAL_SPAN;
 			if (span === TOTAL_SPAN) {
-				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-				ROW_WISE_FIELDS = [];
-				ROW_WISE_FIELDS.push(field);
+				TOTAL_FIELDS.push(rowWiseFields);
+				rowWiseFields = [];
+				rowWiseFields.push(field);
 				span = field.span;
 			} else {
-				ROW_WISE_FIELDS.push(field);
+				rowWiseFields.push(field);
 				span += field.span;
 			}
 		}
 	});
-	if (ROW_WISE_FIELDS.length) {
-		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+	if (rowWiseFields.length) {
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	return (
-		<div className={styles.layout}>
+		<div className={cl`${styles.layout} layout_ui`}>
 			{Object.keys(TOTAL_FIELDS).map((field) => (
-				<div className={styles.row} key={field}>
+				<div className={cl`${styles.row} row_ui`} key={field}>
 					{TOTAL_FIELDS[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;

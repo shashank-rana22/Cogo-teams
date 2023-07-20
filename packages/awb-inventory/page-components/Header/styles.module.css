@@ -16,17 +16,3 @@
 	content: "";
 	background: #ed3726;
 }
-
-.button_head {
-	display: flex;
-}
-
-.button_style {
-	padding: 6px 14px;
-	margin: 4px 2px;
-	border-radius: 4px;
-}
-
-.plus_icon {
-	margin-right: 2px;
-}

@@ -1,4 +1,4 @@
-export const AwbNumberUsedFields = {
+export const AwbNumberDeletedFields = {
 	fields: [
 		{
 			key   : 'airline',
@@ -15,8 +15,20 @@ export const AwbNumberUsedFields = {
 		{
 			key   : 'destination_location',
 			label : 'Destination Location',
-			span  : 1.8,
+			span  : 1.6,
 			func  : 'handleDestLocation',
+		},
+		{
+			key   : 'awb_type',
+			label : 'Awb Type',
+			span  : 1.6,
+			func  : 'handleAwbType',
+		},
+		{
+			key   : 'service_provider',
+			label : 'Service Provider',
+			span  : 1,
+			func  : 'handleServiceProvider',
 		},
 		{
 			key   : 'iata_code',
@@ -35,18 +47,6 @@ export const AwbNumberUsedFields = {
 			label : 'SID Created',
 			span  : 1,
 			func  : 'handleShipments',
-		},
-		{
-			key   : 'procured_by',
-			label : 'Procured Agent',
-			span  : 1.2,
-			func  : 'handleAgent',
-		},
-		{
-			key   : 'service_provider',
-			label : 'Service Provider',
-			span  : 1.2,
-			func  : 'handleServiceProvider',
 		},
 		{
 			key   : 'booking_date',

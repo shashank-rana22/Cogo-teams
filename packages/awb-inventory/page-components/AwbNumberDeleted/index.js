@@ -1,10 +1,12 @@
-import { Button, Tooltip, Modal } from '@cogoport/components';
+import { Button, Tooltip, Modal, ButtonIcon } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMProvision } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import { functions } from '../../commons/Functions';
 import List from '../../commons/List';
-import { AwbNumberFields } from '../../configurations/awb-number-fields';
+import { AwbNumberDeletedFields } from '../../configurations/awb-number-deleted-fields';
 import useEditAwbNumber from '../../hooks/useEditAwbNumber';
 import ConfirmDelete from '../ConfirmDelete';
 
@@ -21,10 +23,12 @@ function AwbNumberDeleted({
 	setQfilter,
 	status,
 }) {
+	const router = useRouter();
 	const [item, setItem] = useState({ id: '' });
 	const [showConfirm, setShowConfirm] = useState(false);
+	const [changedStatus, setChangedStatus] = useState('');
 
-	const { fields } = AwbNumberFields;
+	const { fields } = AwbNumberDeletedFields;
 
 	const { editAwbNumber, loading:editLoading } = useEditAwbNumber({
 		item,
@@ -34,9 +38,38 @@ function AwbNumberDeleted({
 		setQfilter,
 		setShowConfirm,
 		page,
+		changedStatus,
 	});
 
+	const redirectToShipment = (shipmentId) => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
+		window.open(
+			newUrl,
+			'_blank',
+			'noreferrer',
+		);
+	};
+
 	const otherFunctions = {
+		handleShipments: (singleItem) => {
+			const { shipments = [] } = singleItem;
+
+			const handleClick = () => {
+				if (shipments[GLOBAL_CONSTANTS.zeroth_index]?.id) {
+					redirectToShipment(shipments[GLOBAL_CONSTANTS.zeroth_index].id);
+				}
+			};
+			return (
+				<div>
+					<Button
+						themeType="linkUi"
+						onClick={handleClick}
+					>
+						{shipments[GLOBAL_CONSTANTS.zeroth_index]?.serial_id || '-'}
+					</Button>
+				</div>
+			);
+		},
 		handleAction: (singleItem) => (
 			<div className={styles.tooltip_container}>
 				<Tooltip
@@ -44,15 +77,15 @@ function AwbNumberDeleted({
 					placement="top"
 					interactive
 				>
-					<Button
-						themeType="linkUi"
+					<ButtonIcon
+						themeType="primary"
 						onClick={() => {
 							setItem(singleItem);
 							setShowConfirm(true);
+							setChangedStatus('available_non_reserved');
 						}}
-					>
-						<IcMProvision height={16} width={16} fill="#8B8B8B" />
-					</Button>
+						icon={<IcMProvision height={16} width={16} fill="#8B8B8B" />}
+					/>
 				</Tooltip>
 			</div>
 		),

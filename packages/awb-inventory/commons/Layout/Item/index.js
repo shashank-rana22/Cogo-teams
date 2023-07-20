@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import CONSTANTS from '../../../constants/constants';
@@ -9,13 +10,13 @@ import styles from './styles.module.css';
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Item({
-	type,
-	control,
-	span,
-	label,
-	error,
-	heading,
-	rules,
+	type = '',
+	control = {},
+	span = 1,
+	label = '',
+	error = '',
+	heading = '',
+	rules = {},
 	...props
 }) {
 	const errorOriginal = getErrorMessage({
@@ -34,7 +35,7 @@ function Item({
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%` }}>
-			<div className={styles.item_heading}>
+			<div className={cl`${styles.item_heading} heading_ui`}>
 				{heading}
 			</div>
 			{type === 'checkbox' ? (
@@ -58,6 +59,7 @@ function Item({
 						{...props}
 						rules={rules}
 						control={control}
+						className="element_ui"
 					/>
 				</>
 			)}
