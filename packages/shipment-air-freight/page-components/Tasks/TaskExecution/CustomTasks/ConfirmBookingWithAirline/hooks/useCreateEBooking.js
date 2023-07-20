@@ -35,7 +35,7 @@ const useCreateEBooking = ({
 					req: { ...payload },
 				},
 			});
-			if (res?.status === 'PENDING_DELIVERY') {
+			if (res?.data?.status === 'PENDING_DELIVERY') {
 				handleOnClick();
 				Toast.success(
 					'Booking with airline has been successfully placed.',

@@ -22,6 +22,7 @@ function ListItem({
 	bookingMode = '',
 	primary_service = {},
 	createBookingLoading = false,
+	eBookingAvailableData = '',
 }) {
 	const { hs_code, commodity_description } = primary_service;
 
@@ -141,7 +142,8 @@ function ListItem({
 								className="secondary sm"
 								disabled={
 									createBookingLoading || item?.booking_confirmation_status === 'not_booked'
-								|| (isEmpty(data?.repository_data) && bookingMode !== 'e_booking')
+								|| (isEmpty(data?.repository_data)
+								|| (bookingMode === 'e_booking' && eBookingAvailableData === 'not_available'))
 							}
 								onClick={handleSubmit(handleProceed)}
 							>

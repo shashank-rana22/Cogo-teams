@@ -54,8 +54,7 @@
 	top: -4px;
 	left: -26px;
 	display: inline-block;
-	padding-right: 16px;
-	padding-left: 12px;
+	padding: 0 16px 0 12px;
 	margin-bottom: 4px;
 	background: #c4dc91;
 }

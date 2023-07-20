@@ -38,6 +38,8 @@ function Card({
 
 	let bookingMode = data?.repository_data?.booking_mode;
 
+	const eBookingAvailableData = data?.repository_data?.e_booking_availability;
+
 	if (data?.validity?.flight_uuid) {
 		bookingMode = 'e_booking';
 	}
@@ -178,6 +180,7 @@ function Card({
 				bookingMode={bookingMode}
 				createBookingLoading={createBookingLoading}
 				primary_service={primary_service}
+				eBookingAvailableData={eBookingAvailableData}
 			/>
 			{showBookingStatus && (
 				<EBookingStatus setShowBookingStatus={setShowBookingStatus} showBookingStatus={showBookingStatus} />
