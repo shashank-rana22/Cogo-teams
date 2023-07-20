@@ -27,8 +27,7 @@ function RaiseTickets({
 	return (
 		<div>
 			{(controls || []).map((controlItem) => {
-				const elementItem = { ...controlItem };
-				const { name, label, controllerType } = elementItem || {};
+				const { name, label, controllerType } = controlItem || {};
 				const Element = getFieldController(controllerType);
 
 				if (!Element) { return null; }
@@ -42,7 +41,7 @@ function RaiseTickets({
 					>
 						{(label && controllerType !== 'checkbox') && <div className={styles.label}>{label}</div>}
 						<Element
-							{...elementItem}
+							{...controlItem}
 							size="sm"
 							key={name}
 							control={control}
