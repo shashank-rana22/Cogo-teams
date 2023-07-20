@@ -20,7 +20,7 @@ const ACTION_BUTTON_ITEMS = ['editButton', 'editParamButton', 'cancelButton', 'e
 const actionButtons = {
 	editButton                 : { label: 'Edit', value: 'supplier_reallocation' },
 	editParamButton            : { label: 'Edit Params', value: 'edit_params' },
-	editContainerDetailsButton : { label: 'Edit Container Details', value: 'edit_container_deatils' },
+	editContainerDetailsButton : { label: 'Edit Container Details', value: 'edit_container_details' },
 	cancelButton               : { label: 'Cancel', value: 'cancel' },
 };
 
@@ -105,7 +105,7 @@ function EditCancelService({ serviceData = {} }) {
 				/>
 			)}
 
-			{showModal === 'edit_container_deatils'
+			{showModal === 'edit_container_details'
 			&& <EditContainerDetails setShow={setShowModal} serviceData={serviceData} />}
 
 		</div>
