@@ -11,7 +11,7 @@
 	:global {
 		.ui_accordion_content {
 			width: 100%;
-			padding: 0px;
+			padding: 0;
 			background: #fdfdfd;
 		}
 
@@ -53,8 +53,8 @@
 
 .add_line_item {
 	padding: unset 16px !important;
-	margin-left: 16px;
 	margin-bottom: 4px;
+	margin-left: 16px;
 	font-weight: 600;
 	color: #ff7f00 !important;
 }
