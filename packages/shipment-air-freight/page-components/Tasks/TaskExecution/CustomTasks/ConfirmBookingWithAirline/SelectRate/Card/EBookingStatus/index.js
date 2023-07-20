@@ -3,7 +3,7 @@ import { IcCError } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function EBookingStatus({ setShowBookingStatus = () => {}, showBookingStatus }) {
+function EBookingStatus({ setShowBookingStatus = () => {}, showBookingStatus = false }) {
 	return (
 		<Modal
 			show={showBookingStatus}

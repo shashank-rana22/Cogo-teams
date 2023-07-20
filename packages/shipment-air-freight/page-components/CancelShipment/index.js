@@ -49,7 +49,7 @@ function FormElement({ name, label, show, errors, type, ...rest }) {
 	) : null;
 }
 
-export default function CancelShipment({ setShow }) {
+export default function CancelShipment({ setShow = () => {} }) {
 	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 
 	const closeModal = () => setShow(false);
