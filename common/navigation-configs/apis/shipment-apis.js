@@ -1574,6 +1574,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'update_shipment_invoice_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'list_platform_config_constants',
 		access_type  : 'private',
 		service_name : 'platform_config',
@@ -1642,6 +1647,16 @@ const apis = [
 	},
 	{
 		api          : 'send_rail_domestic_indent_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_bl_numbers',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_nomination_shipment_sell_quotations',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
