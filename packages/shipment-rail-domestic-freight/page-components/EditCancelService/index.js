@@ -6,19 +6,22 @@ import React, { useState, useContext } from 'react';
 
 import SupplierReallocation from '../../commons/SupplierReallocation';
 import CancelService from '../CancelService';
+import EditContainerDetails from '../EditContainerDetails';
 import EditParams from '../EditParams';
 
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
+import getCanEditContainerDetails from './utils/getCanEditContainerDetails';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const ACTION_BUTTON_ITEMS = ['editButton', 'editParamButton', 'cancelButton'];
+const ACTION_BUTTON_ITEMS = ['editButton', 'editParamButton', 'cancelButton', 'editContainerDetailsButton'];
 
 const actionButtons = {
-	editButton      : { label: 'Edit', value: 'supplier_reallocation' },
-	editParamButton : { label: 'Edit Params', value: 'edit_params' },
-	cancelButton    : { label: 'Cancel', value: 'cancel' },
+	editButton                 : { label: 'Edit', value: 'supplier_reallocation' },
+	editParamButton            : { label: 'Edit Params', value: 'edit_params' },
+	editContainerDetailsButton : { label: 'Edit Container Details', value: 'edit_container_deatils' },
+	cancelButton               : { label: 'Cancel', value: 'cancel' },
 };
 
 function EditCancelService({ serviceData = {} }) {
@@ -43,6 +46,12 @@ function EditCancelService({ serviceData = {} }) {
 		stakeholderConfig,
 	});
 	actionButtons.editParamButton.show = getCanEditParams({
+		shipment_data,
+		user_data,
+		serviceData,
+		stakeholderConfig,
+	});
+	actionButtons.editContainerDetailsButton.show = getCanEditContainerDetails({
 		shipment_data,
 		user_data,
 		serviceData,
@@ -95,6 +104,10 @@ function EditCancelService({ serviceData = {} }) {
 					service_type={service_type}
 				/>
 			)}
+
+			{showModal === 'edit_container_deatils'
+			&& <EditContainerDetails setShow={setShowModal} serviceData={serviceData} />}
+
 		</div>
 	);
 }
