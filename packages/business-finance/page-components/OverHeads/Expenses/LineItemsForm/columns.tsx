@@ -12,10 +12,6 @@ const TDS_OPTIONS = [
 	{ label: '20 %', value: '20' },
 ];
 
-const TAX_NOT_APPLICABLE = [
-	{ label: '0 %', value: '0' },
-];
-
 const lineItemColumns = ({
 	remove,
 	control,
@@ -24,6 +20,8 @@ const lineItemColumns = ({
 	isTaxApplicable,
 }) => {
 	const { lineItemsList = [] } = formData || {};
+
+	const TAX_NOT_APPLICABLE = taxOptions.filter((item) => JSON.parse(item?.value)?.taxPercent === 0);
 
 	return [
 		{

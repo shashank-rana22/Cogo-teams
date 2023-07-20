@@ -76,10 +76,10 @@ export const recurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : `${geo.others.pan_number.label.toUpperCase()}`,
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData.registrationNumber || null,
 					className   : styles.pan_area,
-					placeholder : 'Autofilled PAN',
+					placeholder : 'PAN',
 					prefix      : null,
 					span        : 2.2,
 				},

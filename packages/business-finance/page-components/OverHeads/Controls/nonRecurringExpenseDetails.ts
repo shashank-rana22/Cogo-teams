@@ -135,8 +135,9 @@ export const nonRecurringExpenseDetails = ({
 				{
 					name        : 'registrationNumber',
 					label       : `${geo.others.pan_number.label.toUpperCase()}`,
-					type        : 'textarea',
+					type        : 'input',
 					value       : formData?.registrationNumber || null,
+					prefix      : null,
 					className   : styles.pan,
 					placeholder : `Autofilled ${geo.others.pan_number.label}`,
 					span        : 2.2,
