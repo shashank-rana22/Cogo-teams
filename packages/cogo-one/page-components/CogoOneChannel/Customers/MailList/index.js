@@ -1,9 +1,9 @@
 import { Avatar, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import MailDetails from '../../../../common/MailDetails';
+import getUserNameFromEmail from '../../../../helpers/getUserNameFromEmail';
 
 import MailSideBar from './MailSideBar';
 import styles from './styles.module.css';
@@ -19,10 +19,11 @@ function MailList(mailprops) {
 		setActiveMailAddress = () => {},
 	} = mailprops;
 
-	const [activeSelect, setActiveSelect] = useState('inbox');
+	const [activeFolder, setActiveFolder] = useState('inbox');
+	const [appliedFilters, setAppliedFilters] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const userName = activeMailAddress.split('@')[GLOBAL_CONSTANTS.zeroth_index].replace('.', ' ');
+	const { shortName, userName } = getUserNameFromEmail({ query: activeMailAddress });
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +52,7 @@ function MailList(mailprops) {
 				>
 					<Avatar
 						size="40px"
-						personName={userName}
+						personName={shortName}
 					/>
 					<span className={styles.mail_address}>
 						{userName}
@@ -62,16 +63,18 @@ function MailList(mailprops) {
 
 			<div className={styles.list_mails}>
 				<MailSideBar
-					activeSelect={activeSelect}
-					setActiveSelect={setActiveSelect}
+					activeFolder={activeFolder}
+					setActiveFolder={setActiveFolder}
+					setAppliedFilters={setAppliedFilters}
 				/>
 
 				<MailDetails
-					activeSelect={activeSelect}
-					setActiveSelect={setActiveSelect}
+					activeFolder={activeFolder}
 					setActiveMail={setActiveMail}
 					activeMail={activeMail}
 					activeMailAddress={activeMailAddress}
+					appliedFilters={appliedFilters}
+					setAppliedFilters={setAppliedFilters}
 				/>
 			</div>
 		</div>
