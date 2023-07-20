@@ -58,7 +58,6 @@ function NonRecurringSummary({
 	const {
 		periodOfTransaction,
 		vendorName,
-		expenseCategory,
 		branch,
 		paymentMode,
 		entityObject,
@@ -175,8 +174,8 @@ function NonRecurringSummary({
 		},
 		{
 			title : 'Expense Category',
-			value : expenseCategory
-				? showOverflowingNumber(startCase(expenseCategory), 18)
+			value : categoryName
+				? showOverflowingNumber(startCase(categoryName), 18)
 				: '-',
 		},
 		{
