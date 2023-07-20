@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import StyledTable from '../../../../common/StyledTable';
 import { handleSorting } from '../../../../utils/handleSorting';
-import useGetColumns from '../../useGetColumns';
+import getColumns from '../../getColumns';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,7 @@ function RenderStyledTable({
 	setSortData,
 	sortData,
 }) {
-	const columns = useGetColumns({
+	const columns = getColumns({
 		setEmployeeId,
 		level,
 		setOpenKraModal,

@@ -39,29 +39,36 @@ function KraModal({ show, onHide, employeeId, ratingCycle }) {
 
 							<Modal.Body className={styles.body}>
 								<div className={styles.modal_body_container}>
-									<div className={styles.left_section}>
-										{(list || []).map((item) => (
-											<div className={styles.sub_section} key={item.kra_id}>
-												<div className={styles.label}>
-													KRA Name:
-													{' '}
-													{item.kra_name}
-												</div>
+									{isEmpty(list) ? (
+										<div className={styles.kra_empty_section}>
+											KRA Details Not Found
+										</div>
+									) : (
+										<div className={styles.left_section}>
+											{(list || []).map((item) => (
+												<div className={styles.sub_section} key={item.kra_id}>
+													<div className={styles.label}>
+														KRA Name:
+														{' '}
+														{item.kra_name}
+													</div>
 
-												<div className={styles.label}>
-													KRA Achieved:
-													{' '}
-													{item.achieved_rating}
-												</div>
+													<div className={styles.label}>
+														KRA Achieved:
+														{' '}
+														{item.achieved_rating}
+													</div>
 
-												<div className={styles.label}>
-													Weightage:
-													{' '}
-													{item.weightage}
+													<div className={styles.label}>
+														Weightage:
+														{' '}
+														{item.weightage}
+													</div>
 												</div>
-											</div>
-										))}
-									</div>
+											))}
+										</div>
+									)}
+
 									<div className={styles.right_section}>
 										<div className={styles.overall_rating}>
 											<div className={styles.rating}>

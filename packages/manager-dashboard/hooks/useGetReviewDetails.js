@@ -9,6 +9,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { checkObjectValues } from '../utils/checkObjectValues';
 
+const formattedDate = (item) => formatDate({
+	date       : item,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
+
 const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 	const [filters, setFilters] = useState({});
 	const { user }	 = useSelector((state) => state?.profile || {});
@@ -19,12 +25,6 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 		url    : '/get_rating_review_details',
 		method : 'GET',
 	}, { manual: true });
-
-	const formattedDate = (item) => formatDate({
-		date       : item,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		formatType : 'date',
-	});
 
 	const isReportingManager = checkObjectValues(filters);
 

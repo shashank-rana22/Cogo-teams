@@ -15,8 +15,8 @@ import { handleSorting } from '../../utils/handleSorting';
 import KraModal from '../KRAModal';
 
 import EmployeeList from './EmployeeList';
+import getColumns from './getColumns';
 import styles from './styles.module.css';
-import useGetColumns from './useGetColumns';
 import useGetRatingColumns from './useGetRatingColumns';
 
 function ManagerDashboard() {
@@ -41,7 +41,7 @@ function ManagerDashboard() {
 
 	const { data : ratingData, loading : ratingLoading } = useGetRatingDetails(ratingCycle);
 
-	const columns = useGetColumns({
+	const columns = getColumns({
 		setEmployeeId,
 		level,
 		setOpenKraModal,

@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import React, { useId } from 'react';
+import React from 'react';
 
 import StyledTableList from './StyledTableList';
 import styles from './styles.module.css';
@@ -9,14 +9,13 @@ const ARRAY_MAP_KEY = 1;
 
 function EmployeeList({ data = [], level, setEmployeeId, setOpenKraModal, loading }) {
 	const { list = [] } = data || {};
-	const id = useId();
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
 				{[...Array(ARRAY_LENGTH)]
 					.map((_, index) => (
 						<Placeholder
-							key={`${index + ARRAY_MAP_KEY}_${id}`}
+							key={`${index + ARRAY_MAP_KEY}`}
 							height="20px"
 							width="100%"
 							style={{ marginBottom: '20px' }}
