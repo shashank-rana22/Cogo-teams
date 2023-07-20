@@ -1,4 +1,9 @@
 const STAKE_HOLDER_SPECIFIC_PROPS = {
+	customer: {
+		state        : 'requested_by_importer_exporter',
+		api          : '/create_shipment_additional_service',
+		buy_disabled : false,
+	},
 	okam_create: {
 		state        : 'requested_for_importer_exporter',
 		api          : '/create_shipment_additional_service',

@@ -10,6 +10,7 @@ import RepliedMessage from '../RepliedMessage';
 
 import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
+import SuggestedActions from './SuggestedActions';
 
 function TicketPopoverContent({ formattedData = {}, setRaiseTicketModal = () => {}, data = {} }) {
 	const triggerModal = () => {
@@ -84,9 +85,16 @@ function ReceiveDiv({
 					<MessageBody
 						response={response}
 						message_type={message_type}
+						eachMessage={eachMessage}
+						formattedData={formattedData}
 					/>
 				</div>
 			</div>
+
+			{message_type === 'event' && (
+				<SuggestedActions formattedData={formattedData} />
+			)}
+
 			{message_type === 'order' && (
 				<div
 					className={styles.order_container}

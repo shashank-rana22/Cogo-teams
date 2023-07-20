@@ -300,7 +300,7 @@ function Compose({
 
 				<Footer
 					content={editorState}
-					subject="Testing the flow wait"
+					subject={actualSubject}
 					COMPOSE_EMAIL={sender_email}
 					handleSubmit={handleSubmit}
 					action={action}

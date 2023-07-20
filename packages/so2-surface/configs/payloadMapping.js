@@ -58,5 +58,10 @@ const payloadMapping = {
 		},
 
 	},
+	rail_domestic_freight: {
+		upload_purchase_invoice: {
+			shipment_type: 'rail_domestic_freight',
+		},
+	},
 };
 export default payloadMapping;
