@@ -89,10 +89,7 @@ function Card({
 			service_providers : serviceProvidersData,
 		};
 
-		const value = {
-			...taskData,
-		};
-		updateConfirmation({ payload, updateShipmentPendingTask, value });
+		updateConfirmation({ payload, updateShipmentPendingTask, value: taskData });
 	};
 
 	const handleProceedWithEBooking = () => {

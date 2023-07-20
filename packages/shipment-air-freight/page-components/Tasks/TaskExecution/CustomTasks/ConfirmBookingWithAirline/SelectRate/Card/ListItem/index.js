@@ -5,6 +5,13 @@ import getBuyPrice from '../../../utils/getBuyPrice';
 
 import styles from './styles.module.css';
 
+const PROCEED_CTA_LABEL = {
+	email              : 'Proceed With Mail',
+	e_booking          : 'Place Booking',
+	platform           : 'Proceed With Platform',
+	email_and_platform : 'Proceed With Platform',
+};
+
 const LIST_PREFERENCE_RATE_STEP = 1;
 function ListItem({
 	data = {},
@@ -17,13 +24,6 @@ function ListItem({
 	createBookingLoading = false,
 }) {
 	const { hs_code, commodity_description } = primary_service;
-
-	const PROCEED_CTA_LABEL = {
-		email              : 'Proceed With Mail',
-		e_booking          : 'Place Booking',
-		platform           : 'Proceed With Platform',
-		email_and_platform : 'Proceed With Platform',
-	};
 
 	return (
 		<div className={styles.body}>

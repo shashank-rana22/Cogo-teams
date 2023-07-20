@@ -32,7 +32,7 @@ const useCancelEBookingShipment = (shipment_data) => {
 				'Shipment with airline has been successfully cancelled.',
 			);
 		} catch (err) {
-			toastApiError(err || ['Something went wrong.']);
+			toastApiError(err);
 		}
 	};
 

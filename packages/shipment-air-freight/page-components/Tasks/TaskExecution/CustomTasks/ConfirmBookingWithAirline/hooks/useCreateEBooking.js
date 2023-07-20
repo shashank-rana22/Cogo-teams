@@ -41,12 +41,12 @@ const useCreateEBooking = ({
 					'Booking with airline has been successfully placed.',
 				);
 			}
-			if (res?.status === 'FAILED') {
+			if (res?.data?.status === 'FAILED') {
 				setShowBookingStatus(true);
 			}
 		} catch (err) {
 			setShowBookingStatus(true);
-			toastApiError(err || ['Something went wrong.']);
+			toastApiError(err);
 		}
 	};
 

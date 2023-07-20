@@ -13,7 +13,7 @@
 
 .text {
 	font-weight: 500;
-	color: #333;
+	color: #000;
 	text-align: center;
 }
 
@@ -21,8 +21,4 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 16px;
-}
-
-.button_head {
-	margin: 4px;
 }
