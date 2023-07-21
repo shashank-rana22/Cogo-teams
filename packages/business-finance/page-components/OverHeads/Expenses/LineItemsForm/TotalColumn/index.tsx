@@ -4,6 +4,8 @@ import React from 'react';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import styles from '../styles.module.css';
 
+const MAX_LENGTH = 4;
+
 function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, payableAmount, totalTds }) {
 	const geo = getGeoConstants();
 	const getValue = (value) => {
@@ -49,7 +51,7 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 					&& (
 						<div className={`${styles.col}`} style={{ width: '10%' }}>
 							TDS
-							<span>{totalTds ? showOverflowingNumber(totalTds, 4) : null}</span>
+							<span>{totalTds ? showOverflowingNumber(totalTds, MAX_LENGTH) : null}</span>
 						</div>
 					)}
 				<div className={`${styles.col}`} style={{ width: '10%' }}>
