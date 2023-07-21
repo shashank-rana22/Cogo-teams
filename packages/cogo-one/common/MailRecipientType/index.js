@@ -29,6 +29,8 @@ function MailRecipientType({
 		shouldShowSuggestions,
 	});
 
+	const showPopover = shouldShowSuggestions && !isEmpty(emailSuggestions) && !loading;
+
 	return (
 		<div className={styles.tags_div}>
 			{(emailRecipientType || []).map(
@@ -46,19 +48,17 @@ function MailRecipientType({
 				<Popover
 					placement="bottom"
 					key={showControl}
-					visible={(
-						shouldShowSuggestions
-						&& !isEmpty(emailSuggestions)
-						&& !loading
-					)}
+					visible={showPopover}
 					caret={false}
 					render={(
-						<ListEmails
-							loading={loading}
-							emailSuggestions={emailSuggestions}
-							type={type}
-							handleKeyPress={handleKeyPress}
-						/>
+						showPopover ? (
+							<ListEmails
+								loading={loading}
+								emailSuggestions={emailSuggestions}
+								type={type}
+								handleKeyPress={handleKeyPress}
+							/>
+						) : null
 					)}
 				>
 					<div className={styles.tag_and_error_container}>
