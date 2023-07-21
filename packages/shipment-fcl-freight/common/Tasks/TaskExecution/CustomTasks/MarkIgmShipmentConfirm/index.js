@@ -13,7 +13,6 @@ const STYLE_ICON = {
 };
 
 const hbl = ['house_bill_of_lading', 'draft_house_bill_of_lading'];
-// const mbl = ['master_bill_of_lading', 'draft_bill_of_lading'];
 
 function MarkIgmShipmentConfirm({
 	task = {},
