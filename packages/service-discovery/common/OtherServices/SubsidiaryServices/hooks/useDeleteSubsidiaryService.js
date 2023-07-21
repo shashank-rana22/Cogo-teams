@@ -6,18 +6,21 @@ const useDeleteSubsidiaryService = ({
 	data = {},
 	service_details,
 	checkout_id = '',
+	spot_search_id = '',
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const URL = checkout_id ? '/update_checkout_service' : '/update_spot_search';
+	const url = checkout_id ? '/update_checkout_service' : '/remove_spot_search';
+	const idKey = checkout_id ? 'id' : 'spot_search_id';
+	const key = checkout_id ? 'subsidiary_services_attributes' : 'subsidiary_services';
 
 	const { service_details: serviceDetails = {} } = data || [];
 
 	const servicesList = Object.values(service_details || serviceDetails || {});
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : URL,
-		method : 'POST',
+		url,
+		method: 'POST',
 	}, { manual: true });
 
 	const handleDeleteService = async (service_code) => {
@@ -31,9 +34,9 @@ const useDeleteSubsidiaryService = ({
 
 		try {
 			const payload = {
-				id                             : data?.checkout_id ? data?.checkout_id : data?.spot_search_id,
-				service                        : 'subsidiary',
-				subsidiary_services_attributes : params,
+				[idKey] : spot_search_id || checkout_id,
+				service : 'subsidiary',
+				[key]   : params,
 			};
 
 			await trigger({ data: payload });

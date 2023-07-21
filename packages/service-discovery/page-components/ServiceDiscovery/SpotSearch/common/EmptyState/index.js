@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import styles from './styles.module.css';
 
 function EmptyState({ heading = 'data', placement = 'center' }) {
@@ -24,7 +26,7 @@ function EmptyState({ heading = 'data', placement = 'center' }) {
 			{placement === 'center' ? (
 				<div className={styles.icn_container}>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-nonfunded.svg"
+						src={GLOBAL_CONSTANTS.image_url.empty_state}
 						alt={`no ${heading} found`}
 						height="100%"
 						width="100%"

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetWeeklySchedules from '../../../../hooks/useGetWeeklySchedules';
@@ -19,13 +20,14 @@ function Schedules({
 	const { schedules = [], loading } = useGetWeeklySchedules({
 		filters,
 		setSelectedWeek,
+		setFilters,
 	});
 
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Available Schedules for your search</span>
 
-			{loading ? (
+			{loading && isEmpty(schedules) ? (
 				<div className={styles.loading}>
 					{[...Array(LOADING_ARRAY_LENGTH)].map((_) => (
 						<Placeholder

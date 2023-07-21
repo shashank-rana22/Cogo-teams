@@ -69,3 +69,33 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.loading_heading {
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+}
+
+.loading_service_item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	background: #fff;
+	border: 1px dashed #f3eae7;
+	border-radius: 4px;
+
+	&.active {
+		background: #f3fafa;
+		border: 1px solid #eaf2f3;
+	}
+}
+
+.add_icon {
+	margin-right: 25px;
+	cursor: pointer;
+	background: #fff;
+	border: 1.5px solid #221f20;
+	border-radius: 50%;
+}

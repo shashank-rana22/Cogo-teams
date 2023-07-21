@@ -21,3 +21,8 @@
 	font-size: 26px;
 	font-weight: 500;
 }
+
+.pagination {
+	float: right;
+	margin: 12px 32px 40px 0;
+}

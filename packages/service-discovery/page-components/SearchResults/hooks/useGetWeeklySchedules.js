@@ -24,6 +24,8 @@ const useGetWeeklySchedules = ({ filters = {}, setSelectedWeek = () => {} }) => 
 
 	const getSchedules = useCallback(async () => {
 		try {
+			if (!spot_search_id) return;
+
 			const res = await trigger({ params: { spot_search_id } });
 			const { data = {} } = res;
 

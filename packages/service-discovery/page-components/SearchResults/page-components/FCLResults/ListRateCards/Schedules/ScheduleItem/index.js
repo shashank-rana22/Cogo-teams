@@ -17,23 +17,13 @@ function ScheduleItem({
 	const { end_date = '', start_date = '', min_price = '', min_price_currency = 'USD' } = data;
 
 	const handleChange = () => {
-		if (getKey(selectedWeek) === getKey(data)) {
-			setSelectedWeek({});
-			setFilters((prev) => ({
-				...prev,
-				departure_before : undefined,
-				departure_after  : undefined,
-				page             : 1,
-			}));
-		} else {
-			setSelectedWeek(data);
-			setFilters((prev) => ({
-				...prev,
-				departure_before : end_date,
-				departure_after  : start_date,
-				page             : 1,
-			}));
-		}
+		setSelectedWeek(data);
+		setFilters((prev) => ({
+			...prev,
+			departure_before : end_date,
+			departure_after  : start_date,
+			page             : 1,
+		}));
 	};
 
 	return (

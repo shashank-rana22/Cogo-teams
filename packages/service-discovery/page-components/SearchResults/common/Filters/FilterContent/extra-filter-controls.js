@@ -9,6 +9,16 @@ const EXTRA_FILTERS = {
 				asyncKey    : 'list_operators',
 				initialCall : true,
 				span        : 12,
+				isClearable : true,
+				params      : {
+					filters: {
+						operator_type : 'shipping_line',
+						status        : 'active',
+					},
+					page_limit : 100,
+					sort_by    : 'short_name',
+					sort_type  : 'asc',
+				},
 			},
 		],
 	},

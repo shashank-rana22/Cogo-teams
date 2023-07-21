@@ -17,7 +17,7 @@ const useAddCargoInsurance = ({
 	trade_type = '',
 }) => {
 	const url = checkout_id ? '/create_checkout_service' : '/add_spot_search_service';
-
+	const idKey = checkout_id ? 'id' : 'spot_search_id';
 	const key = checkout_id ? 'cargo_insurance_services_attributes' : 'cargo_insurance_services';
 
 	const [{ loading }, trigger] = useRequest({
@@ -34,10 +34,10 @@ const useAddCargoInsurance = ({
 		} = values;
 
 		const payload = {
-			spot_search_id : spot_search_id || checkout_id,
+			[idKey] : spot_search_id || checkout_id,
 			rate_card_id,
-			service        : 'cargo_insurance',
-			[key]          : [
+			service : 'cargo_insurance',
+			[key]   : [
 				{
 					risk_coverage                : 'all_risk',
 					trade_type,

@@ -223,7 +223,10 @@ function AdditionalServices({ // used in search results and checkout
 										width={22}
 										className={styles.add_icon}
 										fill="black"
-										onClick={() => handleAddServices(serviceItem)}
+										onClick={(event) => {
+											event.stopPropagation();
+											handleAddServices(serviceItem);
+										}}
 									/>
 								)}
 
@@ -270,7 +273,10 @@ function AdditionalServices({ // used in search results and checkout
 										disabled={loading}
 										className={styles.add_icon}
 										fill="black"
-										onClick={() => handleAddServices(serviceItem)}
+										onClick={(event) => {
+											event.stopPropagation();
+											handleAddServices(serviceItem);
+										}}
 									/>
 								)}
 

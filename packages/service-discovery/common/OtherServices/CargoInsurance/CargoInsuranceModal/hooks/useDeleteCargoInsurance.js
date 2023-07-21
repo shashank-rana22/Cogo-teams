@@ -9,13 +9,15 @@ const useDeleteCargoInsurance = ({
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const URL = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
+	const url = checkout_id ? '/create_checkout_service' : '/add_spot_search_service';
+	const idKey = checkout_id ? 'id' : 'spot_search_id';
+	const key = checkout_id ? 'cargo_insurance_services_attributes' : 'cargo_insurance_services';
 
 	const servicesList = Object.values(service_details || {});
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : URL,
-		method : 'POST',
+		url,
+		method: 'POST',
 	}, { manual: true });
 
 	const handleDelete = async () => {
@@ -29,10 +31,9 @@ const useDeleteCargoInsurance = ({
 
 		try {
 			const payload = {
-				spot_search_id                      : spot_search_id || undefined,
-				id                                  : checkout_id || undefined,
-				service                             : 'cargo_insurance',
-				cargo_insurance_services_attributes : params,
+				[idKey] : spot_search_id || checkout_id,
+				service : 'cargo_insurance',
+				[key]   : params,
 			};
 
 			await trigger({ data: payload });

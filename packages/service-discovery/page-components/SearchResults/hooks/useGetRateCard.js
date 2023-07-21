@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useGetRateCard = () => {
 	const { general: { query = {} } } = useSelector((state) => state);
@@ -13,10 +13,9 @@ const useGetRateCard = () => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_spot_search_rate_card',
-		params : { rate_card_id, service_type: 'fcl_freight' },
-	}, { manual: false });
+	}, { manual: true });
 
-	const getRateDetails = () => {
+	const getRateDetails = useCallback(() => {
 		try {
 			trigger({
 				params: { rate_card_id, service_type: 'fcl_freight' },
@@ -26,7 +25,13 @@ const useGetRateCard = () => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	};
+	}, [rate_card_id, trigger]);
+
+	useEffect(() => {
+		if (!rate_card_id) return;
+
+		getRateDetails();
+	}, [getRateDetails, rate_card_id]);
 
 	return {
 		loading,

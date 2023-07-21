@@ -121,7 +121,7 @@ function SubsidiaryServices({
 						<ServiceItem
 							data={data}
 							itemData={item}
-							key={item.value}
+							key={`${item.label}_${item.value}`}
 							selectedServices={selectedServices}
 							setSelectedServices={setSelectedServices}
 							popularServices={popularServices}

@@ -12,6 +12,7 @@ import useCreateCheckout from '../../../hooks/useCreateCheckout';
 import useGetRateCard from '../../../hooks/useGetRateCard';
 import FclCard from '../FclCard';
 
+import LoadingState from './loadingState';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
@@ -60,6 +61,7 @@ function SelectedRateCard({
 	setSelectedCard = () => {},
 	setScreen = () => {},
 	setHeaderProps = () => {},
+	listLoading = false,
 }) {
 	const {
 		data = {},
@@ -77,18 +79,20 @@ function SelectedRateCard({
 
 	const primary_service = detail?.service_type;
 
-	const { handleBook = () => {}, loading:checkoutLoading } = useCreateCheckout({
+	const { handleBook = () => {} } = useCreateCheckout({
 		rateCardData,
 		spot_search_id: detail?.spot_search_id,
 	});
 
-	if (primary_service === undefined || !rateCardData) {
-		return null;
-	}
-
 	const handleProceedClick = () => {
 		setScreen('bookCheckout');
 	};
+
+	if (isEmpty(data) && (listLoading || loading)) {
+		return (
+			<LoadingState />
+		);
+	}
 
 	return (
 		<div className={styles.parent}>
