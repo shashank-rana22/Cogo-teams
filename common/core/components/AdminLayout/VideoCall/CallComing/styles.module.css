@@ -6,6 +6,22 @@
 	width: 23%;
 }
 
+.minimize_btn {
+	position: absolute;
+	top: 10px;
+
+	svg {
+		width: 30px;
+		height: 30px;
+	}
+}
+
+.comming_call_options svg {
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+}
+
 .call_comming_body {
 	display: flex;
 	flex-direction: row;
@@ -45,22 +61,12 @@
 	}
 }
 
-.reject svg {
+.call_comming_btn .reject svg {
 	background-color: #bf291e;
 }
 
-.accept svg {
+.call_comming_btn .accept svg {
 	background-color: #849e4c;
-}
-
-.minimize_btn {
-	position: absolute;
-	top: 10px;
-
-	svg {
-		width: 30px;
-		height: 30px;
-	}
 }
 
 .big_call_comming {
@@ -120,11 +126,5 @@
 
 	.accept {
 		background-color: green;
-	}
-
-	svg {
-		width: 50px;
-		height: 50px;
-		padding: 5px;
 	}
 }
