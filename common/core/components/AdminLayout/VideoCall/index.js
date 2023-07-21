@@ -19,7 +19,7 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const [callComing, setCallComing] = useState(true);
+	const [callComing, setCallComing] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
 		user_token : null,
 		peer_token : null,
