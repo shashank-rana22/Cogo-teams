@@ -18,10 +18,13 @@
 }
 
 .styled_text {
-	font-size: 12px;
-	color: #5936f0;
-	text-decoration: underline;
+	font-size: 13px;
+	color: #000;
 	cursor: pointer;
+
+	&.disabled {
+		cursor: not-allowed;
+	}
 
 	&.lg {
 		font-size: 22px;
@@ -31,7 +34,6 @@
 .flex {
 	display: flex;
 	align-items: center;
-	margin-left: 4px;
 }
 
 .popover {

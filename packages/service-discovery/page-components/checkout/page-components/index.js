@@ -1,3 +1,4 @@
+import { Breadcrumb, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState } from 'react';
@@ -14,6 +15,12 @@ import FclCheckout from './FclCheckout';
 import LclCheckout from './LclCheckout';
 import styles from './styles.module.css';
 
+const BREADCRUMB_MAPPING = {
+	draft                : 'Add or Edit Margin',
+	locked               : 'Preview Booking',
+	booking_confirmation : 'Set Invoicing Parties',
+};
+
 const MAPPING = {
 	fcl_freight : FclCheckout,
 	lcl_freight : LclCheckout,
@@ -28,7 +35,7 @@ function Checkout({ checkout_type = '' }) {
 
 	const [headerProps, setHeaderProps] = useState({});
 
-	const { checkout_id = '' } = query;
+	const { checkout_id = '', shipment_id = '' } = query;
 
 	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id });
 
@@ -51,6 +58,7 @@ function Checkout({ checkout_type = '' }) {
 		quotation_email_sent_at = '',
 		credit_terms_amd_condition = {},
 		terms_and_conditions = [],
+		source_id: search_id,
 		state = '',
 	} = detail || {};
 
@@ -67,7 +75,7 @@ function Checkout({ checkout_type = '' }) {
 	const {
 		data: orgData = {},
 		loading: orgLoading,
-		getOrganization,
+		// getOrganization,
 	} = useGetOrganization({ importer_exporter_id });
 
 	const { organization_settings = [], tags = [] } = importer_exporter || {};
@@ -173,6 +181,13 @@ function Checkout({ checkout_type = '' }) {
 
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
 
+	const resultsUrl = () => {
+		if (shipment_id) {
+			return `/book/${search_id}/${importer_exporter_id}/${shipment_id}`;
+		}
+		return `/book/${search_id}/${importer_exporter_id}`;
+	};
+
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
 			<div className={styles.container}>
@@ -184,6 +199,22 @@ function Checkout({ checkout_type = '' }) {
 					headerProps={headerProps}
 					showAdditionalHeader={showAdditionalHeader}
 				/>
+
+				<Breadcrumb className={styles.breadcrumb}>
+					<Breadcrumb.Item
+						label={<a href={resultsUrl()}>Service Discovery</a>}
+					/>
+
+					<Breadcrumb.Item label="Results" />
+
+					{Object.entries(BREADCRUMB_MAPPING).map(([key, value]) => (
+						<Breadcrumb.Item
+							className={cl`${styles.Breadcrumb_item} ${key === state && styles.active}`}
+							key={key}
+							label={value}
+						/>
+					))}
+				</Breadcrumb>
 
 				<ActiveComponent state={state} />
 			</div>

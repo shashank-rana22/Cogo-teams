@@ -39,7 +39,12 @@ function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], di
 				className={styles.flex}
 				role="presentation"
 			>
-				<div className={cl`${styles.styled_text} ${styles[size]}`}>{startCase(defaultValue)}</div>
+				<div className={cl`${styles.styled_text}
+				 ${styles[size]} ${disabled && styles.disabled}`}
+				>
+					{startCase(defaultValue)}
+
+				</div>
 
 				{!disabled ? (
 					<IcMArrowDown

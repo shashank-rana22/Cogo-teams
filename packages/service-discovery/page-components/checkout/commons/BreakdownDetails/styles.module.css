@@ -12,7 +12,11 @@
 		.ui_accordion_content {
 			width: 100%;
 			padding: 0;
-			background: #fdfdfd;
+			background-color: #f3f3f3;
+		}
+
+		.ui_accordion_header {
+			background-color: #f3f3f3;
 		}
 
 		.ui_accordion_title {
@@ -49,6 +53,7 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 20px;
+	margin-top: 4px;
 }
 
 .add_line_item {
@@ -60,7 +65,8 @@
 
 .button_container {
 	display: flex;
-	background: #f8f9fa;
+	padding-bottom: 4px;
+	background-color: #f3f3f3;
 }
 
 .service_details {

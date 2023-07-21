@@ -1,0 +1,30 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 20px;
+}
+
+.service_name {
+	margin-right: 16px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.price_display {
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.label {
+	margin-right: 6px;
+	font-weight: 400;
+}

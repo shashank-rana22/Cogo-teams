@@ -47,7 +47,8 @@ function AddLineItem({ CHARGE_CODE_DATA, service_id, checkout_id }, ref) {
 							},
 						],
 					},
-					get_checkout_data: true,
+					get_checkout_data                  : true,
+					update_quotation_type_to_customize : true,
 				};
 
 				return {

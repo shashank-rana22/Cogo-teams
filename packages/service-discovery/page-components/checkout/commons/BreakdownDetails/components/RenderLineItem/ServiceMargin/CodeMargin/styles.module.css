@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	margin-top: 12px;
+	margin-top: 10px;
 }
 
 .per_container_value {

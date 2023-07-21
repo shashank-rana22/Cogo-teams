@@ -2,7 +2,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { convertCurrencyValue } from '../../../../helpers/dynamic-values';
 
-import ExchangeRate from './ExchangeRate';
 import styles from './styles.module.css';
 
 function LandingCost({
@@ -10,9 +9,7 @@ function LandingCost({
 	convenience_line_item = {},
 	conversions = {},
 	rate = {},
-	total,
-	detail = {},
-	getCheckout = () => {},
+	total = 0,
 }) {
 	const {
 		tax_price_discounted,
@@ -44,29 +41,21 @@ function LandingCost({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.item_container}>
-				<div className={styles.convenience_container}>
-					<div className={styles.text}>Total Landed Cost</div>
-					<div className={styles.amount}>
-						{formatAmount({
-							amount   : totalCost,
-							currency : rate?.total_price_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 0,
-							},
-						})}
-					</div>
+			<div className={styles.convenience_container}>
+				<div className={styles.text}>Total Landed Cost :</div>
+
+				<div className={styles.amount}>
+					{formatAmount({
+						amount   : totalCost,
+						currency : rate?.total_price_currency,
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 0,
+						},
+					})}
 				</div>
 			</div>
-
-			<ExchangeRate
-				conversions={conversions}
-				rate={rate}
-				detail={detail}
-				getCheckout={getCheckout}
-			/>
 		</div>
 	);
 }

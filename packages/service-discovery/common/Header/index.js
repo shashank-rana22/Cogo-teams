@@ -2,9 +2,8 @@ import { cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-// eslint-disable-next-line max-len
-import AdditionalServicesForm from '../OtherServices/AdditionalServices/AdditionalServicesForm';
 import EditDetailsHeader from '../../page-components/SearchResults/components/EditDetailsHeader';
+import AdditionalServicesForm from '../OtherServices/AdditionalServices/AdditionalServicesForm';
 
 import Back from './Back';
 import LoadOverview from './LoadOverview';

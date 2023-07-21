@@ -143,9 +143,7 @@ function BreakdownDetails({
 											{startCase(item?.service_type)}
 										</Button>
 									</div>
-
 								) : <div className={styles.total_display}>{totalDisplayString}</div>}
-
 							</div>
 						)}
 					>
@@ -233,6 +231,9 @@ function BreakdownDetails({
 				setConvenienceDetails={setConvenienceDetails}
 				rate={rate}
 				disableForm={disableForm}
+				conversions={conversions}
+				detail={detail}
+				getCheckout={getCheckout}
 			/>
 
 			<LandingCost
@@ -241,8 +242,6 @@ function BreakdownDetails({
 				conversions={conversions}
 				rate={rate}
 				convenience_line_item={convenience_line_item}
-				detail={detail}
-				getCheckout={getCheckout}
 			/>
 		</div>
 	);

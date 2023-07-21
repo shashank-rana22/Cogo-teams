@@ -55,6 +55,7 @@ function EditMargin() {
 				deleteRateLoading={deleteRateLoading}
 				setNoRatesPresent={setNoRatesPresent}
 			/>
+
 			{noRatesPresent ? (
 				<div className={styles.error}>
 					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION.
