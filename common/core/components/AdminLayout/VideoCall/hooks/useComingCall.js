@@ -147,20 +147,10 @@ function useComingCall({
 						webrtc_token_room_id : room_data?.webrtc_token_room_id,
 					}));
 					setCallComing(true);
-				} else {
-					console.error('you are already in a call aready');
 				}
 			});
 		});
 	}, [callDetails.calling_room_id, firestore, inVideoCall, setCallComing, setCallDetails, userId]);
-
-	useEffect(() => {
-		getCallingRoomData();
-
-		return () => {
-			callCommingSnapshotRef?.current?.();
-		};
-	}, [getCallingRoomData]);
 
 	const getTokenData = useCallback(() => {
 		tokenSnapshotRef?.current?.();
@@ -181,6 +171,14 @@ function useComingCall({
 			});
 		}
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
+
+	useEffect(() => {
+		getCallingRoomData();
+
+		return () => {
+			callCommingSnapshotRef?.current?.();
+		};
+	}, [getCallingRoomData]);
 
 	useEffect(() => {
 		getTokenData();
