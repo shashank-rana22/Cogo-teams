@@ -1,6 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format, isEmpty } from '@cogoport/utils';
 
 import { emptyChartData } from './empty-chart-data';
+
+const DATE_INDEX = 1;
 
 const FORMAT_TYPE = {
 	day: {
@@ -34,7 +37,7 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${getDateValue(dates[0])}-${getDateValue(dates[1])}`,
+				: `${getDateValue(dates[GLOBAL_CONSTANTS.zeroth_index])}-${getDateValue(dates[DATE_INDEX])}`,
 			y: message_graph_data[key],
 		};
 	});
@@ -43,7 +46,7 @@ const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
 		return {
 			x: timeline === 'week'
 				? daysOfWeek[index]
-				: `${getDateValue(dates[0])}-${getDateValue(dates[1])}`,
+				: `${getDateValue(dates[GLOBAL_CONSTANTS.zeroth_index])}-${getDateValue(dates[DATE_INDEX])}`,
 			y: call_graph_data[key],
 		};
 	});
