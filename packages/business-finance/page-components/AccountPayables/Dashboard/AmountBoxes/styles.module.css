@@ -1,15 +1,18 @@
-.container {
-	padding-top: 16px;
-}
-
 .sub_container {
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 16px;
+
+	@media (max-width: 1068px) {
+		flex-wrap: wrap;
+	}
 }
 
 .box {
+	display: flex;
+	align-items: center;
 	padding: 28px 10px 0;
+	margin-top: 16px;
 	margin-right: 2px;
 	margin-left: 2px;
 	background: #fff;
@@ -33,7 +36,7 @@
 .vr {
 	width: 2px;
 	height: 50px;
-	margin: -16px 4px -18px 16px;
+	margin: -10px 4px 0 16px;
 	background: #ed3726;
 	border-radius: 10px;
 }
