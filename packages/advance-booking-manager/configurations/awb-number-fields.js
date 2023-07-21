@@ -3,19 +3,19 @@ export const AwbNumberFields = {
 		{
 			key   : 'airline',
 			label : 'Airline Name',
-			span  : 1.6,
+			span  : 1.8,
 			func  : 'handleAirline',
 		},
 		{
 			key   : 'airport',
 			label : 'Region',
-			span  : 1.8,
+			span  : 2,
 			func  : 'handleAirport',
 		},
 		{
 			key   : 'destination_location',
 			label : 'Destination Location',
-			span  : 1.8,
+			span  : 2,
 			func  : 'handleDestLocation',
 		},
 		{
@@ -27,7 +27,7 @@ export const AwbNumberFields = {
 		{
 			key   : 'procured_by',
 			label : 'Procured Agent',
-			span  : 1,
+			span  : 1.2,
 			func  : 'handleAgent',
 		},
 		{
@@ -39,7 +39,7 @@ export const AwbNumberFields = {
 		{
 			key   : 'validity_expiry_date',
 			label : 'AWB Validity End',
-			span  : 1,
+			span  : 1.2,
 			func  : 'handleValidityDate',
 		},
 		{

@@ -9,13 +9,13 @@ export const ClearanceDateReportFields = {
 		{
 			key   : 'airport',
 			label : 'Origin Airport',
-			span  : 1.8,
+			span  : 2.8,
 			func  : 'handleAirport',
 		},
 		{
 			key   : 'destination_location',
 			label : 'Destination Location',
-			span  : 1.8,
+			span  : 2.8,
 			func  : 'handleDestLocation',
 		},
 		{

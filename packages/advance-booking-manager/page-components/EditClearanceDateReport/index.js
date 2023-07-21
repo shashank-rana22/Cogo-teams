@@ -11,7 +11,7 @@ function EditClearanceDateReport({
 	setShowEdit = () => {},
 	item = {},
 	editClearanceDateReport = () => {},
-	loading,
+	loading = false,
 }) {
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
@@ -37,6 +37,7 @@ function EditClearanceDateReport({
 					themeType="secondary"
 					onClick={() => setShowEdit(false)}
 					style={{ marginRight: '12px' }}
+					disabled={loading}
 				>
 					Cancel
 				</Button>

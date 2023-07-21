@@ -11,7 +11,7 @@ function EditAwbNumber({
 	setShowEdit = () => {},
 	item = {},
 	editAwbNumber = () => {},
-	loading,
+	loading = false,
 }) {
 	const { control, handleSubmit, setValue, formState:{ errors } } = useForm();
 
@@ -37,12 +37,13 @@ function EditAwbNumber({
 					themeType="secondary"
 					onClick={() => setShowEdit(false)}
 					style={{ marginRight: 12 }}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
 				<Button
 					size="md"
-					onClick={handleSubmit((finalData) => editAwbNumber(finalData))}
+					onClick={handleSubmit(editAwbNumber)}
 					disabled={loading}
 				>
 					{loading ? 'Updating' : 'Update'}

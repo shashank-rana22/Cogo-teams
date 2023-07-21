@@ -11,7 +11,6 @@ import AwbNumber from './AwbNumber';
 import AwbNumberDeleted from './AwbNumberDeleted';
 import AwbNumberUsed from './AwbNumberUsed';
 import Filters from './Filters';
-import Header from './Header';
 import styles from './styles.module.css';
 
 const { START_PAGE } = CONSTANTS;
@@ -73,18 +72,18 @@ function AwbInventory() {
 	}, [JSON.stringify(authParams)]);
 
 	return (
-		<div>
-			<Header />
+		<>
+			<div className={styles.header_container}>
+				Advance Booking Dashboard
+			</div>
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
 				onChange={setActiveTab}
-				style={{ marginTop: '40px' }}
+				style={{ marginTop: '16px' }}
 			>
 				{Object.values(getVariableTabMapping({ value })).map((item) => {
 					const { name = '', title = '', Component } = item;
-
-					if (!Component) return null;
 
 					return (
 						<TabPanel
@@ -140,7 +139,7 @@ function AwbInventory() {
 					);
 				})}
 			</Tabs>
-		</div>
+		</>
 	);
 }
 

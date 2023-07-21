@@ -18,3 +18,8 @@
 .modal_container {
 	padding: 20px;
 }
+
+.tooltip_container{
+	word-break: break-word;
+	min-width: 250px;
+}

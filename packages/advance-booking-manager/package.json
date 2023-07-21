@@ -1,7 +1,7 @@
 {
 	"name": "@cogoport/advance-booking-manager",
 	"version": "1.0.0",
-	"description": "Package for AWB Inventory",
+	"description": "Package to check the inventory stock of airway bills as well as perform functionalities like adding new Awb numbers or updating the inventory. Status of the shipment can also be tracked using the dashboard.",
 	"private": true,
 	"dependencies": {
 		"@cogoport/components": "^1.0.322",

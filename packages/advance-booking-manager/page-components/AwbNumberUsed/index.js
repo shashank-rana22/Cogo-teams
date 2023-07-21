@@ -14,13 +14,13 @@ import EditAwbNumber from '../EditAwbNumber';
 import styles from './styles.module.css';
 
 function AwbNumberUsed({
-	data,
-	loading,
-	setFinalList,
-	finalList,
-	page,
-	setPage,
-	status,
+	data = {},
+	loading = false,
+	setFinalList = () => {},
+	finalList = [],
+	page = 1,
+	setPage = () => {},
+	status = '',
 }) {
 	const { fields } = AwbNumberUsedFields;
 	const router = useRouter();
@@ -41,7 +41,7 @@ function AwbNumberUsed({
 	});
 
 	const redirectToShipment = (shipmentId) => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
+		const newUrl = `${window.location.origin}/v2/${router?.query?.partner_id}/booking/air-freight/${shipmentId}`;
 		window.open(
 			newUrl,
 			'_blank',

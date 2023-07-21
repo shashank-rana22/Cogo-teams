@@ -1841,7 +1841,7 @@ const navigationMappingAdmin = {
 		as            : '/v2/advance-booking-manager',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
-		possible_apis : apis.awb_inventory,
+		possible_apis : apis.advance_booking_manager,
 		module_type   : 'dashboards',
 	},
 	ground_ops: {

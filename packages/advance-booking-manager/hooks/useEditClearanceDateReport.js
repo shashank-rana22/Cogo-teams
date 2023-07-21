@@ -27,17 +27,17 @@ const useEditClearanceDateReport = ({
 		method : 'POST',
 	});
 
-	const editClearanceDateReport = async (finalData) => {
+	const editClearanceDateReport = async (editClearanceReportData) => {
 		const payload = {
 			id,
-			...finalData,
+			...editClearanceReportData,
 		};
 		try {
 			await trigger({
 				data: payload,
 			});
 			Toast.success(
-				TOAST_MESSAGE[finalData?.status]
+				TOAST_MESSAGE[editClearanceReportData?.status]
 					|| 'Successfully edited',
 			);
 			setFinalList([]);

@@ -11,15 +11,15 @@ import EditAwbNumber from '../EditAwbNumber';
 import styles from './styles.module.css';
 
 function AwbNumber({
-	data,
-	loading,
-	awbList,
-	setPage,
-	page,
-	setFinalList,
-	finalList,
-	setQfilter,
-	status,
+	data = {},
+	loading = false,
+	awbList = () => {},
+	setPage = () => {},
+	page = 1,
+	setFinalList = () => {},
+	finalList = [],
+	setQfilter = () => {},
+	status = '',
 }) {
 	const [item, setItem] = useState({ id: '' });
 	const [showEdit, setShowEdit] = useState(false);
@@ -36,6 +36,7 @@ function AwbNumber({
 		setQfilter,
 		page,
 		changedStatus,
+		status,
 	});
 
 	const otherFunctions = {
@@ -58,7 +59,7 @@ function AwbNumber({
 					<>
 						<Tooltip
 							content={(
-								<div style={{ wordBreak: 'break-word', minWidth: '250px' }}>
+								<div className={styles.tooltip_container}>
 									<div>
 										{`Clearance Date: ${singleItem.customClearanceDate || '-'},`}
 									</div>
@@ -86,7 +87,7 @@ function AwbNumber({
 							}}
 						>
 							<Tooltip content="Edit" placement="top">
-								<IcMEdit height={16} width={16} fill="#8B8B8B" />
+								<IcMEdit height={16} width={16} fill="var(--color-secondary-greyscale-3)" />
 							</Tooltip>
 						</Button>
 					</>

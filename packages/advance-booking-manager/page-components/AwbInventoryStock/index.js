@@ -26,7 +26,7 @@ const TABS_COMPONENT_MAPPING = {
 
 function AwbInventoryStock() {
 	const [activeTab, setActiveTab] = useState('inventory_stock');
-	const [show, setShow] = useState(false);
+	const [showAwbNumberModal, setShowAwbNumberModal] = useState(false);
 	const [filterData, setFilterData] = useState({});
 
 	const {
@@ -60,29 +60,28 @@ function AwbInventoryStock() {
 	const { totalRecords:totalRecordsClearanceDateReport } = ClearanceReportData;
 
 	return (
-		<div>
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={setActiveTab}
-				style={{ marginTop: '40px' }}
-			>
-				{Object.values(TABS_COMPONENT_MAPPING).map((item) => {
-					const { name = '', title = '', Component } = item;
+		<Tabs
+			activeTab={activeTab}
+			themeType="primary"
+			onChange={setActiveTab}
+			style={{ marginTop: '20px' }}
+		>
+			{Object.values(TABS_COMPONENT_MAPPING).map((item) => {
+				const { name = '', title = '', Component } = item;
 
-					if (!Component) return null;
+				return (
+					<TabPanel
+						key={name}
+						name={name}
+						title={title}
+						badge={name === 'inventory_stock'
+							? totalRecordsInventoryStock
+							: totalRecordsClearanceDateReport}
+					>
 
-					return (
-						<TabPanel
-							key={name}
-							name={name}
-							title={title}
-							badge={name === 'inventory_stock'
-								? totalRecordsInventoryStock
-								: totalRecordsClearanceDateReport}
-						>
-							<div className={styles.filters_container}>
-								{activeTab === 'clearance_date_confirmation' && (
+						{activeTab === 'clearance_date_confirmation' && (
+							<>
+								<div className={styles.filters_container}>
 									<div className={styles.flex}>
 										<Input
 											value={qfilter}
@@ -98,54 +97,7 @@ function AwbInventoryStock() {
 											activeTab={activeTab}
 										/>
 									</div>
-								)}
-								{activeTab === 'inventory_stock' && (
-									<div className={styles.flex}>
-										<Button
-											size="md"
-											themeType="primary"
-											onClick={() => setShow(true)}
-										>
-											<IcMPlus
-												fill="#ffffff"
-												width={15}
-												height={15}
-											/>
-											ADD AWB
-
-										</Button>
-										{show && (
-											<Modal
-												show={show}
-												onClose={() => setShow(false)}
-												className={styles.modal_container}
-											>
-												<AddAwbNumber
-													setShow={setShow}
-													awbList={awbInventoryStockList}
-													setActiveTab={setActiveTab}
-													setFinalList={setFinalList}
-													setPage={setPage}
-													page={page}
-												/>
-											</Modal>
-										)}
-									</div>
-								)}
-							</div>
-							{activeTab === 'inventory_stock' ? (
-								<Component
-									loading={loading}
-									data={data}
-									page={page}
-									setPage={setPage}
-									finalList={finalList}
-									setFinalList={setFinalList}
-									control={control}
-									errors={errors}
-									setFilterData={setFilterData}
-								/>
-							) : (
+								</div>
 								<Component
 									loading={ClearanceReportLoading}
 									setPage={ClearanceReportSetPage}
@@ -156,12 +108,61 @@ function AwbInventoryStock() {
 									clearanceDateReport={clearanceDateReport}
 									setQfilter={setQfilter}
 								/>
-							) }
-						</TabPanel>
-					);
-				})}
-			</Tabs>
-		</div>
+							</>
+						)}
+						{
+							activeTab === 'inventory_stock' && (
+								<>
+									<div className={styles.filters_container}>
+										<div className={styles.flex}>
+											<Button
+												size="md"
+												themeType="primary"
+												onClick={() => setShowAwbNumberModal(true)}
+											>
+												<IcMPlus
+													width={15}
+													height={15}
+												/>
+												ADD AWB
+
+											</Button>
+											{showAwbNumberModal && (
+												<Modal
+													show={showAwbNumberModal}
+													onClose={() => setShowAwbNumberModal(false)}
+													className={styles.modal_container}
+												>
+													<AddAwbNumber
+														setShow={setShowAwbNumberModal}
+														awbList={awbInventoryStockList}
+														setActiveTab={setActiveTab}
+														setFinalList={setFinalList}
+														setPage={setPage}
+														page={page}
+													/>
+												</Modal>
+											)}
+										</div>
+									</div>
+									<Component
+										loading={loading}
+										data={data}
+										page={page}
+										setPage={setPage}
+										finalList={finalList}
+										setFinalList={setFinalList}
+										control={control}
+										errors={errors}
+										setFilterData={setFilterData}
+									/>
+								</>
+							)
+						}
+					</TabPanel>
+				);
+			})}
+		</Tabs>
 	);
 }
 export default AwbInventoryStock;

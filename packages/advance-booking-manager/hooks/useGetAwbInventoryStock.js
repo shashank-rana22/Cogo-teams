@@ -23,23 +23,21 @@ const useGetInventoryStock = ({ activeTab, filterData }) => {
 		{ manual: true },
 	);
 
-	const awbInventoryStockList = useCallback(() => {
-		(async () => {
-			try {
-				const { airline = '', origin = '', procured = '' } = filterData;
-				await trigger({
-					params: {
-						airlineId    : airline || undefined,
-						airportId    : origin || undefined,
-						procuredById : procured || undefined,
-						page,
-					},
-				});
-			} catch (err) {
-				console.error(err);
-			}
-		})();
-	}, [page, trigger, filterData]);
+	const awbInventoryStockList = useCallback((async () => {
+		try {
+			const { airline = '', origin = '', procured = '' } = filterData;
+			await trigger({
+				params: {
+					airlineId    : airline || undefined,
+					airportId    : origin || undefined,
+					procuredById : procured || undefined,
+					page,
+				},
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	}), [page, trigger, filterData]);
 
 	useEffect(() => {
 		setFinalList([]);

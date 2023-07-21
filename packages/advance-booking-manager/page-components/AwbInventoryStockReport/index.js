@@ -9,15 +9,15 @@ import { AwbInventoryStockReportFields } from '../../configurations/awb-inventor
 import styles from './styles.module.css';
 
 function AwbInventoryStockReport({
-	data,
-	loading,
-	page,
-	setPage,
-	finalList,
-	setFinalList,
-	control,
-	errors,
-	setFilterData,
+	data = {},
+	loading = false,
+	page = 1,
+	setPage = () => {},
+	finalList = [],
+	setFinalList = () => {},
+	control = {},
+	errors = {},
+	setFilterData = () => {},
 }) {
 	const [filter, setFilter] = useState({});
 	const inventory_stock_controls = controls(setFilter);
@@ -31,7 +31,8 @@ function AwbInventoryStockReport({
 		<div className={styles.stock_report_container}>
 
 			<header className={styles.header_container}>
-				<div className={styles.heading}>Inventory Stock</div>
+				Inventory Stock
+				{/* <div className={styles.heading}>Inventory Stock</div> */}
 			</header>
 
 			<Layout

@@ -11765,7 +11765,7 @@ const partner = {
 			service_name : 'allocation',
 		},
 	],
-	awb_inventory: [
+	advance_booking_manager: [
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',

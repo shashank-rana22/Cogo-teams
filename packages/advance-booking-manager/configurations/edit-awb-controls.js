@@ -7,7 +7,7 @@ const awbControls = [
 		asyncKey    : 'organizations',
 		label       : 'Service Provider',
 		span        : 6,
-		placeholder : 'Service Provider',
+		placeholder : 'Select Service Provider',
 		disabled    : true,
 		params      : {
 			filters: { service_type: 'air_freight' },
@@ -21,7 +21,7 @@ const awbControls = [
 		type        : 'async-select',
 		asyncKey    : 'list_operators',
 		label       : 'Airline Name',
-		placeholder : 'Select Airline...',
+		placeholder : 'Select Airline',
 		disabled    : true,
 		initialCall : true,
 		span        : 6,
@@ -61,14 +61,14 @@ const awbControls = [
 		isClearable: true,
 	},
 	{
-		name        : 'commodity_details',
+		name        : 'commodity',
 		type        : 'select',
 		label       : 'Commodity',
 		placeholder : 'Select Commodity',
 		span        : 6,
 		options     : [
-			{ label: 'General', value: { commodity: 'general' } },
-			{ label: 'Special Consideration', value: { commodity: 'special_consideration' } },
+			{ label: 'General', value: 'general' },
+			{ label: 'Special Consideration', value: 'special_consideration' },
 
 		],
 		rules: {

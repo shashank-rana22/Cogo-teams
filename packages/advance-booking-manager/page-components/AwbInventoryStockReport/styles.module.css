@@ -20,20 +20,16 @@
 
 .header_container {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	margin-top: 8px;
 	background: var(--color-secondary-5);
-}
-
-.heading {
-	margin: 12px 0 0 24px;
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 30px;
+	padding: 12px 0 0 24px;
 }
 
-.heading::after {
-	display: block;
+.header_container::after {
 	width: 100px;
 	height: 4px;
 	content: "";

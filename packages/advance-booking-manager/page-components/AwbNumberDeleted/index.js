@@ -13,15 +13,15 @@ import ConfirmDelete from '../ConfirmDelete';
 import styles from './styles.module.css';
 
 function AwbNumberDeleted({
-	data,
-	loading,
-	awbList,
-	setPage,
-	page,
-	setFinalList,
-	finalList,
-	setQfilter,
-	status,
+	data = {},
+	loading = false,
+	awbList = () => {},
+	setPage = () => {},
+	page = 1,
+	setFinalList = () => {},
+	finalList = [],
+	setQfilter = () => {},
+	status = '',
 }) {
 	const router = useRouter();
 	const [item, setItem] = useState({ id: '' });
@@ -42,7 +42,7 @@ function AwbNumberDeleted({
 	});
 
 	const redirectToShipment = (shipmentId) => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
+		const newUrl = `${window.location.origin}/v2/${router?.query?.partner_id}/booking/air-freight/${shipmentId}`;
 		window.open(
 			newUrl,
 			'_blank',

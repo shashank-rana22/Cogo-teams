@@ -18,12 +18,12 @@ function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
-	finalList,
-	setFinalList,
-	status,
+	page = 1,
+	setPage = () => {},
+	functions = {},
+	finalList = [],
+	setFinalList = () => {},
+	status = '',
 }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = [], totalRecords:totalCount } = listData;

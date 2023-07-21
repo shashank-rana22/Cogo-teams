@@ -22,6 +22,7 @@ const useEditAwbNumber = ({
 	setShowConfirm = () => {},
 	page,
 	changedStatus,
+	status,
 }) => {
 	const { id = '' } = item;
 	const [{ loading }, trigger] = useRequest({
@@ -30,10 +31,15 @@ const useEditAwbNumber = ({
 	});
 
 	const editAwbNumber = async (finalData) => {
+		const { commodity = '', ...rest } = finalData || {};
+
 		const payload = {
 			id,
-			...finalData,
-			status: changedStatus,
+			...rest,
+			status            : status !== changedStatus ? changedStatus : undefined,
+			commodity_details : {
+				commodity,
+			},
 		};
 		try {
 			await trigger({
