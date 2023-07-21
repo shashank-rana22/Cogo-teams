@@ -5,7 +5,7 @@ export default {
 		name : 'Vietnam',
 		code : 'VN',
 		flag_icon_url:
-			'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Vietnam_24.png',
+      'https://prod-cogoport.s3.ap-south-1.amazonaws.com/Vietnam_24.png',
 		currency: {
 			code   : 'VND',
 			symbol : '₫',
@@ -56,6 +56,13 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
+		third_party_enrichment_agencies_role_ids: [
+			'cd9e08e6-7922-403b-a9f7-717888eabb68',
+			'32b4949d-71a2-4a4a-b063-47a3b5e68a23',
+		],
+		third_party_enrichment_agencies_rm_ids: [
+			'cd9e08e6-7922-403b-a9f7-717888eabb68',
+		],
 		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
 		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
 		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
@@ -66,7 +73,7 @@ export default {
 		],
 		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		cogo_demo_account_shipper_user_branch:
-			'2c72817c-c663-48ea-b8ef-cd92397842a1',
+      '2c72817c-c663-48ea-b8ef-cd92397842a1',
 		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
 		supply_role_ids    : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
@@ -126,6 +133,7 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
+		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
@@ -140,10 +148,10 @@ export default {
 		],
 		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
 		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
-		prod_kam_cp         				: 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
-		prod_es_sales        			: 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
-		entity_manager_id     		: '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
-		service_ops1_role_ids  	: [
+		prod_kam_cp             : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
+		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
+		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		service_ops1_role_ids   : [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
@@ -200,6 +208,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
@@ -244,97 +253,97 @@ export default {
 				value : 'branch',
 			},
 		],
-		country_truck_type : 'Open_body_1_ton',
+		country_truck_type : 'open_body_1_ton',
 		open_truck         : [
 			{
 				label : '1 Ton',
-				value : 'Open_body_1_ton',
+				value : 'open_body_1_ton',
 			},
 			{
 				label : '1.5 Ton',
-				value : 'Open_body_1.5_ton',
+				value : 'open_body_1.5_ton',
 			},
 			{
 				label : '2 Ton',
-				value : 'Open_body_2_ton',
+				value : 'open_body_2_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Open_body_2.5_ton',
+				value : 'open_body_2.5_ton',
 			},
 			{
 				label : '3.5 Ton',
-				value : 'Open_body_3.5_ton',
+				value : 'open_body_3.5_ton',
 			},
 			{
 				label : '5 Ton',
-				value : 'Open_body_5_ton',
+				value : 'open_body_5_ton',
 			},
 			{
 				label : '7 Ton',
-				value : 'Open_body_7_ton',
+				value : 'open_body_7_ton',
 			},
 			{
 				label : '9 Ton',
-				value : 'Open_body_9_ton',
+				value : 'open_body_9_ton',
 			},
 			{
 				label : '11 Ton',
-				value : 'Open_body_11_ton',
+				value : 'open_body_11_ton',
 			},
 			{
 				label : '15 Ton',
-				value : 'Open_body_15_ton',
+				value : 'open_body_15_ton',
 			},
 			{
 				label : '18 Ton',
-				value : 'Open_body_18_ton',
+				value : 'open_body_18_ton',
 			},
 		],
 		closed_truck: [
 			{
 				label : '1 Ton',
-				value : 'Close_body_1_ton',
+				value : 'close_body_1_ton',
 			},
 			{
 				label : '1.5 Ton',
-				value : 'Close_body_1.5_ton',
+				value : 'close_body_1.5_ton',
 			},
 			{
 				label : '2 Ton',
-				value : 'Close_body_2_ton',
+				value : 'close_body_2_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Close_body_2.5_ton',
+				value : 'close_body_2.5_ton',
 			},
 			{
 				label : '2.5 Ton',
-				value : 'Close_body_2.5_ton',
+				value : 'close_body_2.5_ton',
 			},
 			{
 				label : '5 Ton',
-				value : 'Close_body_5_ton',
+				value : 'close_body_5_ton',
 			},
 			{
 				label : '7 Ton',
-				value : 'Close_body_7_ton',
+				value : 'close_body_7_ton',
 			},
 			{
 				label : '9 Ton',
-				value : 'Close_body_9_ton',
+				value : 'close_body_9_ton',
 			},
 			{
 				label : '11 Ton',
-				value : 'Close_body_11_ton',
+				value : 'close_body_11_ton',
 			},
 			{
 				label : '15 Ton',
-				value : 'Close_body_15_ton',
+				value : 'close_body_15_ton',
 			},
 			{
 				label : '18 Ton',
-				value : 'Close_body_18_ton',
+				value : 'close_body_18_ton',
 			},
 		],
 		tax_types: [
@@ -382,22 +391,12 @@ export default {
 		],
 		entities: [
 			{
-				label: '501 Cogoport Vietnam', value: '501',
+				label : '501 Cogoport Vietnam',
+				value : '501',
 			},
 		],
 		migration_status : [],
-		timezone         : [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
-		],
-		services: [
+		services         : [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
 			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
 			{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
@@ -424,6 +423,74 @@ export default {
 				],
 			},
 		},
+		enrichment: {
+			whatsapp_number_label                 : 'Zalo Number',
+			allowed_to_create_enrichment_requests : true,
+			tabs                                  : ['manual_enrichment'],
+			manual_enrichment                     : {
+				columns: {
+					relationship_manager_view: {
+						active: [
+							'id',
+							'business_name',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'requested_agent',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+					agent_view: {
+						active: [
+							'id',
+							'business_name',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+				},
+				actions: {
+					active: {
+						add    : 'Add Details',
+						failed : 'Mark as Failed',
+					},
+					responded:	{
+						edit    : 'Edit Details',
+						success : 'Mark as Completed',
+					},
+					success: {
+						view: 'View Details',
+					},
+				},
+			},
+		},
+
 		account_receivables: {
 			defaulters: {
 				migration_status: {

@@ -1,0 +1,20 @@
+.container {
+	:global {
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_select_container.ui_ps_size_sm .ui_select_display_container {
+			height: 42px;
+		}
+
+		.ui_input_container {
+			height: 42px;
+		}
+	}
+}
+
+.line {
+	margin-top: 10px;
+	border-top: 1px solid #808080;
+}

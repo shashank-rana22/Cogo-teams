@@ -47,10 +47,9 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{ !isKam
-								? heading(serviceCategory) : null}
+							{!isKam ? heading(serviceCategory) : null}
 
-							{ isKam
+							{isKam
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
 								? heading(serviceCategory) : null}
 

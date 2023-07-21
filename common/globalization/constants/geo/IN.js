@@ -57,10 +57,12 @@ export default {
 			'9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d',
 			'be57f277-0c81-47b4-9322-bf06ccc5314c',
 		],
-		cogoxpress_id             : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
-		any_carrier_airline_id    : '30798ff1-992c-48f0-aabd-eb92e98df747',
-		customer_service_role_ids : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
-		sales_role_ids            : [
+		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		third_party_enrichment_agencies_rm_ids   : [],
+		cogoxpress_id                            : '536abfe7-eab8-4a43-a4c3-6ff318ce01b5',
+		any_carrier_airline_id                   : '30798ff1-992c-48f0-aabd-eb92e98df747',
+		customer_service_role_ids                : ['0461c31b-4761-40b6-ac2a-59a4e9d4e23f'],
+		sales_role_ids                           : [
 			'fdf55227-a433-4450-aab0-5e4c215ea72c',
 			'95113dbb-43bf-4434-958c-3fe8063657e7',
 			'0461c31b-4761-40b6-ac2a-59a4e9d4e23f',
@@ -124,6 +126,7 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
+		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		service_ops2_role_id      : [
@@ -196,6 +199,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
@@ -442,17 +446,6 @@ export default {
 			{ label: 'True', value: true },
 			{ label: 'False', value: false },
 		],
-		timezone: [
-			{
-				label: 'IST', value: 'IST',
-			},
-			{
-				label: 'GMT', value: 'GMT',
-			},
-			{
-				label: 'VNM', value: 'VNM',
-			},
-		],
 		services: [
 			{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
 			{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
@@ -552,6 +545,78 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+
+		enrichment: {
+			whatsapp_number_label                 : 'Whatsapp Number',
+			allowed_to_create_enrichment_requests : false,
+			tabs                                  : ['manual_enrichment', 'file_management'],
+			manual_enrichment                     : {
+				columns: {
+					relationship_manager_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'requested_agent',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+					agent_view: {
+						active: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						responded: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'action',
+						],
+						success: [
+							'id',
+							'business_name',
+							'registration_number',
+							'created_at',
+							'status',
+							'action',
+						],
+					},
+				},
+				actions: {
+					active: {
+						add: 'Add Details',
+					},
+					responded:	{
+						edit: 'Edit Details',
+					},
+					success: {
+						view: 'View Details',
+					},
+				},
 			},
 		},
 		account_receivables: {

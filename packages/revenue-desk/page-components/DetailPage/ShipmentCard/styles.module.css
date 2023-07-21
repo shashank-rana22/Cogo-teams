@@ -1,0 +1,65 @@
+.container {
+	margin: 16px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.upper_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+	border-bottom: 1px dashed #bdbdbd;
+}
+
+.lower_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.first_section {
+	width: 32vw;
+	padding: 10px 12px;
+	border-right: 1px dashed #bdbdbd;
+}
+
+.second_section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30vw;
+	padding: 20px 40px;
+	border-right: 1px dashed #bdbdbd;
+}
+
+.last_section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	width: 32vw;
+	font-size: 16px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.kamdiscount_text {
+	display: flex;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.sell_price_text {
+	display: flex;
+	font-size: 18px;
+	font-weight: 500;
+	color: #4f4f4f;
+}

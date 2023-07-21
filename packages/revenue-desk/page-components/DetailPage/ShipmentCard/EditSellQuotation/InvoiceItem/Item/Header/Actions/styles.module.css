@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+	}
+
+	.core-ui-tooltip-root {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.actions_wrap {
+	display: flex;
+	align-items: flex-start;
+	margin-right: 20px;
+
+	&.icons {
+		align-items: center;
+		margin-right: 16px;
+	}
+}
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}

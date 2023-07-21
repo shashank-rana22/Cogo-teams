@@ -1,77 +1,121 @@
-import { Modal, Input, Pagination } from '@cogoport/components';
+import { Modal, Input, Pagination, Select, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+import { getIsActive, updateCogooneConstants } from '../../../helpers/configurationHelpers';
+import { formatAgentList } from '../../../helpers/groupAgentsHelpers';
+import useGetOmnichannelAgentTypes from '../../../hooks/useGetOmnichannelAgentTypes';
 import useListChatAgents from '../../../hooks/useListChatAgents';
 import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
 
-import AgentDetail from './AgentDetail';
+import GroupedAgents from './GroupedAgents';
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 8;
+
 function AgentModal({
-	agentDetails,
-	setAgentDetails = () => {},
+	showAgentDetails = false,
+	setShowAgentDetails = () => {},
+	firestore = {},
 }) {
-	const [search, setSearch] = useState('');
+	const [isLockedToggle, setIsLockedToggle] = useState(false);
+
 	const {
-		getListChatAgents = () => {},
+		getListChatAgents = () => { },
 		loading = false,
 		listAgentStatus = {},
 		setPagination = () => {},
-	} = useListChatAgents(search);
+		setSearch = () => {},
+		paramsState = {},
+		setAgentType = () => {},
+	} = useListChatAgents();
 
 	const {
 		updateAgentPreference,
 		createLoading = false,
 	} = useUpdateAgentPreference({ getListChatAgents });
 
+	const { options = [] } = useGetOmnichannelAgentTypes();
+
 	const {
 		list = [],
-		page_limit,
-		total_count,
-		page,
+		page_limit = 10,
+		total_count = 0,
+		page = 0,
 	} = listAgentStatus;
 
-	const modifiedList = loading ? [...Array(8).fill({})] : list || [];
+	const onToggle = (e) => {
+		setIsLockedToggle(e?.target?.checked);
+		updateCogooneConstants({ firestore, value: e?.target?.checked });
+	};
+
+	const modifiedGroupedAgents = loading
+		? { load: [...Array(LOADER_COUNT).fill({})] } : formatAgentList({ list }) || {};
+
+	useEffect(() => {
+		getIsActive({ firestore, setIsLockedToggle });
+	}, [firestore]);
 
 	return (
 		<Modal
 			size="md"
-			show={agentDetails}
-			onClose={() => setAgentDetails(false)}
+			show={showAgentDetails}
+			onClose={() => setShowAgentDetails(false)}
 			placement="center"
 		>
 			<Modal.Header title="Agent Status" />
 			<Modal.Body className={styles.modal_body}>
-				<Input
-					size="sm"
-					placeholder="Search here"
-					className={styles.search}
-					prefix={<IcMSearchlight />}
-					onChange={setSearch}
-				/>
-				{!isEmpty(modifiedList) ? modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
-					<AgentDetail
-						createLoading={createLoading}
-						updateAgentPreference={updateAgentPreference}
-						loading={loading}
-						agent={name}
-						status={status}
-						agent_id={agent_id}
+				<div className={styles.search_switch_toggle_space}>
+					Screen Lock
+					<Toggle
+						onChange={onToggle}
+						checked={isLockedToggle}
 					/>
-
-				)) : <div className={styles.empty_state}>No data found</div>}
+				</div>
+				<div className={styles.header_filters}>
+					<Input
+						size="sm"
+						placeholder="Search here"
+						className={styles.search}
+						prefix={<IcMSearchlight />}
+						onChange={setSearch}
+					/>
+					<Select
+						size="sm"
+						placeholder="Select agent type"
+						className={styles.select_styles}
+						prefix={<IcMSearchlight />}
+						onChange={setAgentType}
+						options={options}
+						value={paramsState?.agentType}
+						isClearable
+					/>
+				</div>
+				{!isEmpty(modifiedGroupedAgents)
+					? Object.keys(modifiedGroupedAgents).map((eachType) => (
+						<GroupedAgents
+							key={eachType}
+							groupedList={modifiedGroupedAgents[eachType]}
+							groupName={eachType}
+							createLoading={createLoading}
+							updateAgentPreference={updateAgentPreference}
+							loading={loading}
+						/>
+					))
+					: <div className={styles.empty_state}>No data found</div>}
 			</Modal.Body>
-			<Modal.Footer>
-				<Pagination
-					className={styles.pagination}
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={setPagination}
-				/>
+			<Modal.Footer className={styles.footer_styles}>
+				{!loading && (
+					<Pagination
+						className={styles.pagination}
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={setPagination}
+					/>
+				)}
 			</Modal.Footer>
 		</Modal>
 	);
