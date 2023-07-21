@@ -35,7 +35,7 @@ export default function getControls({
 	if (serviceObj?.service_type === 'trailer_freight_service'
 	|| serviceObj?.service_type === 'haulage_freight_service'
 	|| serviceObj?.service_type === 'ftl_freight_service') {
-		services = ['ftl_freight', 'trailer_freight', 'haulage_freight'];
+		services = ['ftl_freight', 'haulage_freight'];
 	}
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
