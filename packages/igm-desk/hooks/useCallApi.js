@@ -14,10 +14,10 @@ export default function useCallApi({
 	const debounceQuery = useRef({ q: filters?.q });
 
 	useEffect(() => {
-		if (debounceQuery.current.q !== filters.q) {
+		if (debounceQuery.current.q !== filters?.q) {
 			clearTimeout(debounceQuery.current.timerId);
 
-			debounceQuery.current.q = filters.q;
+			debounceQuery.current.q = filters?.q;
 			debounceQuery.current.timerId = setTimeout(listShipments, MILLISECONDS_IN_SET_TIME_OUT);
 		} else {
 			listShipments();
