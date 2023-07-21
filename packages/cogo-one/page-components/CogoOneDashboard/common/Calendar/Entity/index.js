@@ -22,16 +22,6 @@ export function CalendarEntity({
 	const isWeek = timeline === 'week';
 	const middle = useRef();
 
-	useEffect(() => {
-		setTimeout(() => {
-			middle?.current?.scrollIntoView({
-				behavior : 'instant',
-				block    : 'nearest',
-				inline   : 'start',
-			});
-		}, SCROLL_DURATION_DELAY);
-	}, [calendarData, timeline]);
-
 	const handleClick = (item) => {
 		const { date, endDate } = item || {};
 		setSelectedItem(item?.date);
@@ -74,6 +64,16 @@ export function CalendarEntity({
 		}
 		return false;
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			middle?.current?.scrollIntoView({
+				behavior : 'instant',
+				block    : 'nearest',
+				inline   : 'start',
+			});
+		}, SCROLL_DURATION_DELAY);
+	}, [calendarData, timeline]);
 
 	return (
 		<div className={cl`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>

@@ -4,7 +4,6 @@
 	width: 100%;
 	padding: 15px;
 	margin-right: 12px;
-	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -15,61 +14,6 @@
 	font-weight: 600;
 	line-height: 28px;
 	color: #4f4f4f;
-}
-
-.time_durations_section {
-	display: flex;
-	padding-top: 10px;
-}
-
-.time_durations {
-	width: 100%;
-	padding: 7px 8px;
-	background: rgb(224 224 224 / 40%);
-	border-radius: 6px;
-
-	&:nth-child(2) {
-		margin-inline: 12px;
-	}
-}
-
-.time_durations_header {
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 20px;
-	color: #221f20;
-}
-
-.time_durations_value {
-	position: relative;
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 500;
-	color: #221f20;
-}
-
-.time_durations_value::after {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 1px;
-	content: "";
-	background-color: #000;
-	transition: transform 0.25s ease-out;
-	transform: scaleX(0);
-	transform-origin: bottom right;
-}
-
-.time_durations_value:hover::after {
-	transform: scaleX(1);
-	transform-origin: bottom left;
-}
-
-.time_durations_text {
-	font-size: 10px;
-	line-height: 20px;
-	color: #828282;
 }
 
 .socoal_icons_and_data_list {
@@ -85,21 +29,19 @@
 	padding-top: 22px;
 }
 
-.social_icons_and_its_name {
+.name {
 	display: flex;
 	align-items: center;
 }
 
-.social_name {
+.channel_name {
 	padding-left: 10px;
-	font-size: 14px;
 	line-height: 20px;
 	color: #475569;
 	transition: 0.4s;
 }
 
 .customer_nos {
-	font-size: 14px;
 	line-height: 20px;
 	color: #828282;
 	text-align: right;
@@ -110,7 +52,7 @@
 	border-radius: 5px;
 }
 
-.socoal_icons_and_data:hover .social_name {
+.socoal_icons_and_data:hover .channel_name {
 	font-size: 16px;
 	color: black;
 	transition: 0.4s;

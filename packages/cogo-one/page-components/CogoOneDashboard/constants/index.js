@@ -20,9 +20,8 @@ export const SATIFICATION_IMAGE_MAPPING = [
 ];
 
 export const CALL_STATUS_MAPPING = {
-	busy_agents    : 'on call',
-	online_agents  : 'online',
-	offline_agents : 'offline',
+	active   : 'online',
+	inactive : 'offline',
 };
 
 export const CHAT_STATS_DATA = [
@@ -68,25 +67,18 @@ export const INTENT_SERVED_DATA = [
 	},
 ];
 
-export const AGENT_CONFIG_DATA = {
-	agents_details_config: {
-		busy_agents: {
-			agent_label : 'Busy Agents',
-			total_agent : 0,
-			agents      : [],
-		},
-		online_agents: {
-			agent_label : 'Online Agents',
-			total_agent : 0,
-			agents      : [],
-		},
-		offline_agents: {
-			agent_label : 'Offline Agents',
-			total_agent : 0,
-			agents      : [],
-		},
+export const STATUS_WISE_AGENTS_MAPPING = [
+	{
+		label : 'Online Agents',
+		name  : 'active',
+		total : 0,
 	},
-};
+	{
+		label : 'Offline Agents',
+		name  : 'inactive',
+		total : 0,
+	},
+];
 
 export const ESCALATION_ACTIVITY = [
 	{
@@ -136,9 +128,6 @@ export const AGENT_ACTIVITY = [
 	},
 	{
 		id: 'aas2',
-	},
-	{
-		id: 'aas3',
 	},
 ];
 

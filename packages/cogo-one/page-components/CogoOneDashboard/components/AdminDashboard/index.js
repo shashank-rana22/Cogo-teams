@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Calendar from '../../common/Calendar';
 import CallAnalytics from '../../common/CallAnalytics';
 import ChannelMessageAnalytic from '../../common/ChannelMessageAnalytics';
@@ -14,16 +16,14 @@ function AdminDashboard(props) {
 	const {
 		timeline,
 		setTimeline,
-		listData,
+		data,
 		loading,
-		getCogoOneDashboard = () => {},
 		setSelectedDate = () => {},
 	} = props || {};
 
-	const {
-		escalations = [], calls_analytics = {}, channels_message_analytics = {},
-		agents_details = {}, agents_performance = {}, status_of_chats = {}, cogo_one_dashboard_graph = {},
-	} = listData || {};
+	const { calls = {}, graph = {} } = data || {};
+
+	const [activeTab, setActiveTab] = useState('active');
 
 	return (
 
@@ -40,31 +40,30 @@ function AdminDashboard(props) {
 							<Calendar props={props} />
 						</div>
 						<LineChart
-							cogoOneDashboardGraph={cogo_one_dashboard_graph}
+							graph={graph}
 							timeline={timeline}
 							loading={loading}
 						/>
 					</div>
-					<Escalation escalations={escalations} loading={loading} />
+					<Escalation />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
 					<AgentActivity
-						agentsDetails={agents_details}
-						getCogoOneDashboard={getCogoOneDashboard}
-						loading={loading}
+						activeTab={activeTab}
+						setActiveTab={setActiveTab}
+
 					/>
-					<PerformanceTab agentsPerformance={agents_performance} loading={loading} />
+					<PerformanceTab />
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
 						<ChannelMessageAnalytic
-							channelsMessageAnalytics={channels_message_analytics}
 							loading={loading}
 						/>
-						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
+						<CallAnalytics callsAnalytics={calls} loading={loading} />
 					</div>
 					<div className={styles.four_characterisctics_container}>
-						<ChatStatistics isAdminView statusOfChats={status_of_chats} loading={loading} />
+						<ChatStatistics isAdminView loading={loading} />
 					</div>
 				</div>
 			</div>

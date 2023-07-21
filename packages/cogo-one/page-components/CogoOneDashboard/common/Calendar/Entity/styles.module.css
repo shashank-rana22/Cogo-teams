@@ -1,6 +1,5 @@
 .calendar {
 	display: flex;
-	flex: 1;
 	flex-direction: row-reverse;
 	justify-content: space-evenly;
 	width: fit-content;
@@ -53,7 +52,6 @@
 	transition: 0.1s;
 
 	&:hover {
-		background-color: #fff;
 		box-shadow: 0 0 10px #ababab;
 		transition: 0.1s;
 	}

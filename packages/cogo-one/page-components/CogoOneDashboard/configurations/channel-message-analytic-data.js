@@ -2,19 +2,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWhatsapp, IcCFacebook } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-export const MESSAGE_ANALYTICS = [
-	{
-		key   : 'longest_call_duration',
-		label : 'Longest Chat duration',
-	}, {
-		key   : 'shortest_call_duration',
-		label : 'Shortest Chat duration',
-	}, {
-		key   : 'average_call_duration',
-		label : 'Avg Chat duration',
-	},
-];
-
 export const CHANNEL_STATS = [
 	{
 		key         : 'whatsapp',
@@ -47,9 +34,3 @@ export const CHANNEL_STATS = [
 	},
 
 ];
-
-export const CHANNEL_MESSAGE_ANALYTICS_MAPPING_DATA = {
-	calls   : MESSAGE_ANALYTICS,
-	channel : CHANNEL_STATS,
-
-};

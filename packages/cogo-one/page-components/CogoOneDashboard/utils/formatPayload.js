@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import formatDateTime from './timezone-specific-utc-time';
+import formatDateTime from './timezoneSpecificTime';
 
 const FIRST_DAY_OF_MONTH = 1;
 const WEEK_NUMBER = 6;

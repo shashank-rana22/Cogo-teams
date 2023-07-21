@@ -1,15 +1,18 @@
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import DATE_MAPPING from '../utils/formatPayload';
 
+const getParams = ({ timeline, startDate, endDate }) => ({
+	duration_type : timeline,
+	start_date    : !startDate
+		? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
+	end_date: !endDate
+		? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
+});
+
 function useGetCogoOneAgentStats({
 	timeline = '',
-	// selectedTimeline = {},
-	// selectedItem = '',
-	// partnerUserId = '',
-	// isAgentView,
 	selectedDate = {},
 }) {
 	const { startDate = {}, endDate = {} } = selectedDate || {};
@@ -22,13 +25,7 @@ function useGetCogoOneAgentStats({
 	const getCogoOneDashboard = useCallback(() => {
 		try {
 			trigger({
-				params: {
-					duration_type : timeline,
-					start_date    : !startDate
-						? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
-					end_date: !endDate
-						? new Date(DATE_MAPPING[timeline].endDate) : new Date(endDate),
-				},
+				params: getParams({ timeline, startDate, endDate }),
 			});
 		} catch (error) {
 			console.error(error, 'err');

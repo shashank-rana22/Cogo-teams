@@ -10,12 +10,11 @@ import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
 function LineChart({
-	cogoOneDashboardGraph = {},
+	graph = {},
 	timeline = '',
 	loading = false,
 }) {
-	const { graph_stats = {} } = cogoOneDashboardGraph || {};
-	const GraphData = chartData({ cogoOneDashboardGraph, timeline }) || [];
+	const GraphData = chartData({ graph, timeline }) || [];
 
 	function CustomToolTip({ point = {} }) {
 		return (
@@ -47,7 +46,7 @@ function LineChart({
 						<div className={styles.legend_text}>On Message</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_message_users || GLOBAL_CONSTANTS.zeroth_index}
+						{graph?.on_message_users || GLOBAL_CONSTANTS.zeroth_index}
 						<span>Users</span>
 					</div>
 				</div>
@@ -57,7 +56,7 @@ function LineChart({
 						<div className={styles.legend_text}>On Call</div>
 					</div>
 					<div className={styles.users_nos}>
-						{graph_stats?.on_call_users || GLOBAL_CONSTANTS.zeroth_index}
+						{graph?.on_call_users || GLOBAL_CONSTANTS.zeroth_index}
 						<span>Users</span>
 					</div>
 				</div>

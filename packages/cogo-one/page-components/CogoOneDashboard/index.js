@@ -7,12 +7,9 @@ import AgentDashboard from './components/AgentDashboard';
 import useGetCogoOneAgentStats from './hooks/useGetCogoOneAgentStats';
 import styles from './styles.module.css';
 
-// const KAM_AGENT_ROLE_ID = ''; // KAM - SME Demand
-
 function CogoOneDashboard() {
 	const {
 		userRoleId,
-		partnerUserId,
 		query,
 	} = useSelector(({ profile, general }) => ({
 		userRoleId    : profile.partner.user_role_ids[GLOBAL_CONSTANTS.zeroth_index],
@@ -43,16 +40,7 @@ function CogoOneDashboard() {
 		loading = false,
 		data = {},
 		getCogoOneDashboard = () => {},
-	} = useGetCogoOneAgentStats({
-		timeline,
-		selectedDate,
-		// selectedTimeline,
-		selectedItem,
-		partnerUserId,
-		isAgentView,
-	});
-
-	console.log(data, 'data');
+	} = useGetCogoOneAgentStats({ timeline, selectedDate });
 
 	const commomProps = {
 		timeline,

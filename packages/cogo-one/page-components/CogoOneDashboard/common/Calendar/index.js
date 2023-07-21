@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { FORMAT_TYPE } from '../../constants';
-import useRenderCalender from '../../hooks/useRenderCalender';
+import useRenderCalender from '../../utils/renderCalender';
 
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
@@ -24,16 +24,30 @@ function Calendar({ props = {} }) {
 		setSelectedDate = () => {},
 	} = props || {};
 
-	const [pagination, setPagination] = useState(CONSTANT_ONE);
-
 	const calendarRef = useRef();
 	const scrollHandleRef = useRef(null);
+
+	const [pagination, setPagination] = useState(CONSTANT_ONE);
 
 	const {
 		calcDate,
 		calcMonth,
 		calcWeek,
 	} = useRenderCalender();
+
+	const handleScroll = () => {
+		const { scrollLeft } = calendarRef.current;
+
+		if (scrollLeft <= GLOBAL_CONSTANTS.zeroth_index) {
+			if (scrollHandleRef.current) {
+				scrollHandleRef.current = false;
+				setPagination((prev) => prev + CONSTANT_ONE);
+				setTimeout(() => {
+					scrollHandleRef.current = true;
+				}, SCROLL_DURATION_DELAY);
+			}
+		}
+	};
 
 	const loadData = useCallback((func) => {
 		const NEW_DATA = [];
@@ -67,25 +81,13 @@ function Calendar({ props = {} }) {
 		setCalendarData(DATA);
 	}, [pagination, setCalendarData, timeline]);
 
-	const handleScroll = () => {
-		const { scrollLeft } = calendarRef.current;
-
-		if (scrollLeft <= GLOBAL_CONSTANTS.zeroth_index) {
-			if (scrollHandleRef.current) {
-				scrollHandleRef.current = false;
-				setPagination((prev) => prev + CONSTANT_ONE);
-				setTimeout(() => {
-					scrollHandleRef.current = true;
-				}, SCROLL_DURATION_DELAY);
-			}
-		}
-	};
-
 	const doPagination = useCallback(() => {
 		setCalendarData([]);
-		if (timeline === 'day') loadData(calcDate);
-		else if (timeline === 'month') loadData(calcMonth);
-		else loadData(calcWeek);
+		if (timeline === 'day') {
+			loadData(calcDate);
+		} else if (timeline === 'month') {
+			loadData(calcMonth);
+		} else loadData(calcWeek);
 	}, [setCalendarData, timeline, loadData, calcDate, calcMonth, calcWeek]);
 
 	useEffect(() => {

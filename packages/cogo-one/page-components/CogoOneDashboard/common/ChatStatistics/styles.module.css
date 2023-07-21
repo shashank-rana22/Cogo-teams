@@ -1,11 +1,8 @@
 .chatstatistics_box {
 	display: flex;
-	flex: 1;
 	flex-direction: column;
 	align-items: center;
 	padding: 10px;
-	margin: 0;
-	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -17,7 +14,6 @@
 
 .small_data_box {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
 	width: 100%;
@@ -45,7 +41,6 @@
 	left: 3px;
 	width: 90%;
 	height: 1px;
-	content: "";
 	background-color: #000;
 	transition: transform 0.25s ease-out;
 	transform: scaleX(0);
@@ -55,12 +50,6 @@
 .chat_numbers:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
-}
-
-.percentage {
-	padding: 0;
-	font-size: 14px;
-	line-height: 21px;
 }
 
 .positive {

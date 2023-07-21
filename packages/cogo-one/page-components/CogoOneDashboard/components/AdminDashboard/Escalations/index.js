@@ -1,13 +1,17 @@
-import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
+
+import useListEscalationChat from '../../../hooks/useListEscalationChat';
 
 import LoaderEscalation from './LoaderEscalations';
 import styles from './styles.module.css';
 
-function Escalation({ loading = false, escalations = [] }) {
+function Escalation() {
+	const { data = {}, loading = false } = useListEscalationChat();
+	const { list = [] } = data || {};
+
 	if (loading) {
 		return (
 			<div className={styles.redflags_container}>
@@ -20,8 +24,8 @@ function Escalation({ loading = false, escalations = [] }) {
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>
-			{(isEmpty(escalations)) ? (
-				<img
+			{(isEmpty(list)) ? (
+				<Image
 					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
 					alt="No Escalations"
 					width={200}
@@ -31,8 +35,9 @@ function Escalation({ loading = false, escalations = [] }) {
 			)
 				: (
 					<div className={styles.redflags_lists}>
-						{(escalations || []).map((item) => {
-							const { agent_name, escalation_count, role, id } = item || {};
+						{(list || []).map((item) => {
+							const { agent_data = {}, active_assigned_chats, id } = item || {};
+							const { email = '', name = '' } = agent_data || {};
 
 							return (
 								<div className={styles.escalations_list} key={id}>
@@ -41,21 +46,16 @@ function Escalation({ loading = false, escalations = [] }) {
 											<Image
 												src={GLOBAL_CONSTANTS.image_url.agent_avatar_icon}
 												alt="Agent Avatar"
-												width={30}
-												height={30}
+												width={22}
+												height={22}
 											/>
 										</div>
-										<div className={styles.agent_name}>{agent_name}</div>
-										<Tooltip
-											content={<div>{role?.[GLOBAL_CONSTANTS.zeroth_index]?.name}</div>}
-											placement="bottom"
-										>
-											<div className={styles.job_role}>
-												{role?.[GLOBAL_CONSTANTS.zeroth_index]?.name}
-											</div>
-										</Tooltip>
+										<div className={styles.details}>
+											<div className={styles.agent_name}>{startCase(name)}</div>
+											<div className={styles.email_content}>{email}</div>
+										</div>
 									</div>
-									<div className={styles.notification_nos}>{escalation_count}</div>
+									<div className={styles.notification_nos}>{active_assigned_chats}</div>
 								</div>
 							);
 						})}

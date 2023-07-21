@@ -3,32 +3,32 @@ import { Image } from '@cogoport/next';
 
 export const CALL_ANALYTICS = [
 	{
-		label : 'Longest Chat duration',
-		key   : 'longest_call_duration',
+		label : 'Maximum Call duration',
+		key   : 'max_call_duration',
 	}, {
-		label : 'Shortest Chat duration',
-		key   : 'shortest_call_duration',
+		label : 'Min Call duration',
+		key   : 'min_call_duration',
 
 	}, {
-		label : 'Avg Chat duration',
+		label : 'Avg Call duration',
 		key   : 'average_call_duration',
 
 	}];
 
 export const ANALYTICS_STATS = [
 	{
-		key  : 'incoming_calls',
+		key  : 'incoming_answered',
 		icon : <Image
 			src={GLOBAL_CONSTANTS.image_url.incoming_green_svg}
 			alt="incoming"
 			width={16}
 			height={16}
 		/>,
-		channel     : 'Incoming Calls',
+		call_type   : 'Incoming Calls',
 		static_data : 'Calls',
 	},
 	{
-		key  : 'outgoing_calls',
+		key  : 'outgoing_answered',
 		icon : <Image
 			src={GLOBAL_CONSTANTS.image_url.outgoing_orange_svg}
 			alt="outgoing"
@@ -36,7 +36,7 @@ export const ANALYTICS_STATS = [
 			height={16}
 		/>,
 
-		channel     : 'Outgoing Calls',
+		call_type   : 'Outgoing Calls',
 		static_data : 'Calls',
 	},
 	{
@@ -47,13 +47,13 @@ export const ANALYTICS_STATS = [
 			width={16}
 			height={16}
 		/>,
-		channel     : 'Missed Calls',
+		call_type   : 'Missed Calls',
 		static_data : 'Calls',
 	},
 
 ];
 
-export const callAnalyticsStatData = 	{
+export const CALL_ANALYTICS_STATS = {
 	calls   : CALL_ANALYTICS,
 	channel : ANALYTICS_STATS,
 
