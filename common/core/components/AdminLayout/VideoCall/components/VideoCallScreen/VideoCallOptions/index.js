@@ -1,23 +1,27 @@
 import { Tooltip } from '@cogoport/components';
-import {
-	IcMCall,
-	IcMMicrophone,
-	IcMScreenShare,
-	IcMVideoCall,
-	IcMStopShare,
-	IcMVideoCallMute,
-	IcMMicrophoneMute,
-} from '@cogoport/icons-react';
+import { IcMCall } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
+import getVideoControls from '../../../configurations/videoControls';
 import { callUpdate } from '../../../utils/callFunctions';
 
 import styles from './styles.module.css';
 
-function CustomTootTipContent({ icon = () => {}, content = '' }) {
+function CustomTootTipContent({ Icon = null, content = '' }) {
+	if (!Icon) {
+		return null;
+	}
+
 	return (
-		<Tooltip trigger="mouseenter" interactive content={content} placement="bottom" theme="light">
-			<div className={styles.icon_div}>{icon}</div>
+		<Tooltip
+			interactive
+			content={content}
+			placement="bottom"
+			theme="light"
+		>
+			<div className={styles.icon_div}>
+				<Icon />
+			</div>
 		</Tooltip>
 	);
 }
@@ -43,56 +47,47 @@ function VideoCallOptions({
 		});
 	};
 
+	const controlMapping = getVideoControls({
+		handleRequestScreenShare,
+		isScreenShareActive,
+		micOn,
+		isMicActive,
+		videoOn,
+		isVideoActive,
+	});
+
 	useEffect(() => {
-		setOptions((prev) => ({ ...prev, isScreenShareActive: request_screen_share }));
+		setOptions((prev) => ({
+			...prev,
+			isScreenShareActive: request_screen_share,
+		}));
 	}, [request_screen_share, setOptions]);
 
 	return (
 		<>
+			{controlMapping.map((itm) => {
+				const { ActiveIcon, InactiveIcon, condition, activeContet, inActiveContent } = itm;
 
-			<div role="presentation" onClick={handleRequestScreenShare} className={styles.call_options_icons}>
-				{isScreenShareActive
-					? (
+				return (
+					<div
+						role="presentation"
+						key={itm.name}
+						onClick={itm.clickFunc}
+						className={styles.call_options_icons}
+					>
 						<CustomTootTipContent
-							icon={<IcMStopShare />}
-							content="Stop Request"
+							Icon={condition ? ActiveIcon : InactiveIcon}
+							content={condition ? activeContet : inActiveContent}
 						/>
-					) : (
-						<CustomTootTipContent
-							icon={<IcMScreenShare />}
-							content="Request Screen Share"
-						/>
-					)}
-			</div>
-			<div role="presentation" onClick={micOn} className={styles.call_options_icons}>
-				{isMicActive
-					? (
-						<CustomTootTipContent
-							icon={<IcMMicrophone />}
-							content="Mute"
-						/>
-					) : (
-						<CustomTootTipContent
-							icon={<IcMMicrophoneMute />}
-							content="UnMute"
-						/>
-					)}
-			</div>
-			<div role="presentation" onClick={videoOn} className={styles.call_options_icons}>
-				{isVideoActive
-					? (
-						<CustomTootTipContent
-							icon={<IcMVideoCall />}
-							content="Turn off Camera"
-						/>
-					) : (
-						<CustomTootTipContent
-							icon={<IcMVideoCallMute />}
-							content="Turn on camera"
-						/>
-					)}
-			</div>
-			<div role="presentation" onClick={stopCall} className={styles.hangup_icon}>
+					</div>
+				);
+			})}
+
+			<div
+				role="presentation"
+				onClick={stopCall}
+				className={styles.hangup_icon}
+			>
 				<IcMCall className={styles.end_call_icon} />
 			</div>
 		</>
