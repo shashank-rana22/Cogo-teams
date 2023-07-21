@@ -65,9 +65,9 @@ function useVideoCallFirebase({
 		});
 
 		setStreams((prev) => {
-			stopStream('user_stream', prev);
-			stopStream('video_stream', prev);
-			stopStream('screen_stream', prev);
+			stopStream({ stream_type: 'user_stream', current_stream: prev });
+			stopStream({ stream_type: 'video_stream', current_stream: prev });
+			stopStream({ stream_type: 'screen_stream', current_stream: prev });
 			return {
 				user_stream   : null,
 				peer_stream   : null,
@@ -195,7 +195,6 @@ function useVideoCallFirebase({
 	return {
 		callingTo,
 		callEnd,
-		stopStream,
 	};
 }
 

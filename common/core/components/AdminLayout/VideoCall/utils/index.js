@@ -2,7 +2,7 @@ import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-export const stopStream = (stream_type, current_stream) => {
+export const stopStream = ({ stream_type, current_stream }) => {
 	if (!current_stream) return;
 
 	if (!current_stream[stream_type]) return;
@@ -39,9 +39,9 @@ export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
 
 	try {
 		const data_to_save = {
+			...data,
 			updated_at : Date.now(),
 			created_at : Date.now(),
-			...data,
 		};
 		const doc_data = await addDoc(videoCallRoomCollection, data_to_save);
 		callBackFunc(doc_data.id);
@@ -61,8 +61,8 @@ export const saveWebrtcToken = async ({ data, calling_room_id, path, firestore }
 			await setDoc(
 				WebrtcTokenRoomDoc,
 				{
-					updated_at: Date.now(),
 					...data,
+					updated_at: Date.now(),
 				},
 				{ merge: true },
 			);

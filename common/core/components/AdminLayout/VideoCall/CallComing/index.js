@@ -2,8 +2,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCall, IcMMinus, IcMVideoCall } from '@cogoport/icons-react';
 import { useState, useRef, useEffect } from 'react';
 
-import { CALL_RING_TONE_URL } from '../constants';
-
 import styles from './styles.module.css';
 
 function CallComing({
@@ -24,7 +22,7 @@ function CallComing({
 		<div className={styles.call_comming}>
 			<audio
 				ref={audioRef}
-				src={CALL_RING_TONE_URL}
+				src={GLOBAL_CONSTANTS.video_call_ring_tone_url}
 			/>
 			{isMaximize ? (
 				<div className={styles.big_call_comming}>
