@@ -9,7 +9,7 @@ const useDeleteCargoInsurance = ({
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const URL = checkout_id ? '/update_checkout_service' : '/update_spot_search';
+	const URL = checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
 
 	const servicesList = Object.values(service_details || {});
 
@@ -29,7 +29,8 @@ const useDeleteCargoInsurance = ({
 
 		try {
 			const payload = {
-				id                                  : checkout_id || spot_search_id,
+				spot_search_id                      : spot_search_id || undefined,
+				id                                  : checkout_id || undefined,
 				service                             : 'cargo_insurance',
 				cargo_insurance_services_attributes : params,
 			};

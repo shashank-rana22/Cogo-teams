@@ -3,7 +3,7 @@ const serviceDiscovery = {
 		navigation : 'service_discovery',
 		isMainNav  : true,
 	},
-	'/[partner_id]/book/[spot_search_id]/[importer_exporter_id]': {
+	'/[partner_id]/book/[spot_search_id]': {
 		navigation: 'service_discovery',
 	},
 	'/[partner_id]/checkout/[checkout_id]': {

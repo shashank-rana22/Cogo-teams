@@ -28,6 +28,7 @@ function CargoInsuranceModal({
 	refetch = () => {},
 	spot_search_id = '',
 	importer_exporter_id = '',
+	rate_card_id = '',
 	importer_exporter = {},
 	allowCargoInsurance = true,
 	setShowAddInvoicingParty = () => {},
@@ -110,6 +111,7 @@ function CargoInsuranceModal({
 		rateData,
 		commodity,
 		transitMode,
+		rate_card_id,
 	});
 
 	const { is_applicable = true, type = '' } = isCargoInsuranceApplicable({

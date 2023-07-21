@@ -1,5 +1,17 @@
 const EXTRA_FILTERS = {
-	detention: {
+	shipping_line_id: {
+		label    : 'Shipping Line',
+		controls : [
+			{
+				name        : 'shipping_line_id',
+				type        : 'async-select',
+				asyncKey    : 'list_operators',
+				initialCall : true,
+				span        : 12,
+			},
+		],
+	},
+	detention_demurrage: {
 		label    : 'Detention & Demurrage Details',
 		controls : [
 			{
@@ -9,7 +21,7 @@ const EXTRA_FILTERS = {
 			},
 		],
 	},
-	operator: {
+	operator_type: {
 		label    : 'Operator Type',
 		controls : [
 			{
@@ -18,7 +30,7 @@ const EXTRA_FILTERS = {
 				options : [
 					{
 						label : 'All',
-						value : 'all',
+						value : null,
 					},
 					{
 						label : 'Shipping Line',
@@ -32,7 +44,7 @@ const EXTRA_FILTERS = {
 			},
 		],
 	},
-	readiness_date: {
+	cargo_readiness_date: {
 		label    : 'Cargo Readiness Date',
 		controls : [
 			{
@@ -44,39 +56,39 @@ const EXTRA_FILTERS = {
 			},
 		],
 	},
-	rate_type: {
-		label    : 'Rate Type',
+	source: {
+		label    : 'Source',
 		controls : [
 			{
-				name    : 'rate_type',
+				name    : 'source',
 				type    : 'chips',
 				options : [
 					{
 						label : 'All',
-						value : 'all',
+						value : null,
 					},
 					{
-						label : 'System Rate',
-						value : 'system_rate',
+						label : 'Cogo Assured',
+						value : 'cogo_assured_rate',
 					},
 					{
 						label : 'Spot Booking',
-						value : 'spot_booking',
+						value : 'spot_rates',
 					},
 				],
 			},
 		],
 	},
-	payment_type: {
+	payment_term: {
 		label    : 'Payment Terms',
 		controls : [
 			{
-				name    : 'payment_terms',
+				name    : 'payment_term',
 				type    : 'chips',
 				options : [
 					{
 						label : 'All',
-						value : 'all',
+						value : null,
 					},
 					{
 						label : 'Prepaid',
@@ -99,7 +111,7 @@ const EXTRA_FILTERS = {
 				options : [
 					{
 						label : 'All',
-						value : 'all',
+						value : null,
 					},
 					{
 						label : 'Yes',
@@ -108,6 +120,25 @@ const EXTRA_FILTERS = {
 					{
 						label : 'No',
 						value : 'no',
+					},
+				],
+			},
+		],
+	},
+	shipment_type: {
+		label    : 'Shipment Type',
+		controls : [
+			{
+				name    : 'shipment_type',
+				type    : 'chips',
+				options : [
+					{
+						label : 'Direct-Shipment',
+						value : 'direct',
+					},
+					{
+						label : 'Trans-Shipment',
+						value : 'trans',
 					},
 				],
 			},

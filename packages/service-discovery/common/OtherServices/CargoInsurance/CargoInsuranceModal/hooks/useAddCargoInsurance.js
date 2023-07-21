@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useAddCargoInsurance = ({
 	checkout_id = '',
+	rate_card_id = '',
 	refetch = () => {},
 	setAddCargoInsurance = () => {},
 	setDone = () => {},
@@ -34,6 +35,7 @@ const useAddCargoInsurance = ({
 
 		const payload = {
 			spot_search_id : spot_search_id || checkout_id,
+			rate_card_id,
 			service        : 'cargo_insurance',
 			[key]          : [
 				{

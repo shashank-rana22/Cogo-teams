@@ -41,6 +41,7 @@ function FilterModal({
 	setShow = () => {},
 	filters = {},
 	setFilters = () => {},
+	setFiltersApplied = () => {},
 	showLoadControlsOnly = false,
 	showFiltersOnly = false,
 }) {
@@ -99,13 +100,14 @@ function FilterModal({
 
 			if (spot_search_id && typeof spot_search_id === 'string') {
 				router.push(
-					'/book/[spot_search_id]/[importer_exporter_id]',
-					`/book/${spot_search_id}/${requiredParams.organization_id}`,
+					'/book/[spot_search_id]',
+					`/book/${spot_search_id}`,
 				);
 			}
 		}
 
 		setFilters({ ...filters, ...filterObj });
+		setFiltersApplied(true);
 		setShow(false);
 	};
 

@@ -109,8 +109,10 @@ function FclCard({
 	comparisonCheckbox = {},
 	refetchSearch = () => {},
 }) {
-	const { service_rates = {}, arrival = '', departure = '' } = rateCardData;
+	const { service_rates = {}, schedules = {} } = rateCardData;
 	const primaryService = detail?.search_type;
+
+	const { arrival, departure, validity_start, validity_end, transit_time, schedule_type } = schedules;
 
 	const serviceRateswithId = Object.keys(service_rates).map((service_id) => {
 		const service = service_rates[service_id];
@@ -123,15 +125,17 @@ function FclCard({
 
 	const scheduleData = {
 		arrival: formatDate({
-			date       : arrival,
+			date       : arrival || validity_end,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 			formatType : 'date',
 		}),
 		departure: formatDate({
-			date       : departure,
+			date       : departure || validity_start,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 			formatType : 'date',
 		}),
+		transit_time,
+		schedule_type,
 	};
 
 	return (

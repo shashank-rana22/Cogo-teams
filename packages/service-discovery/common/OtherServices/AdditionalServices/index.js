@@ -10,6 +10,11 @@ import { getFclPayload } from './configs';
 import ICONS_MAPPING from './icons-mapping';
 import styles from './styles.module.css';
 
+const INCOTERM_MAPPING = {
+	export : 'ddp',
+	import : 'exw',
+};
+
 const getServiceName = (service) => {
 	const { trade_type = '', service_type = '' } = service || {};
 	return trade_type ? `${trade_type}_${service_type}` : service_type;
@@ -26,9 +31,9 @@ function AdditionalServices({ // used in search results and checkout
 }) {
 	const { service_rates = [] } = rateCardData;
 
-	const { service_details = {}, service_type = '', inco_term = '', checkout_id = '' } = detail;
+	const { service_details = {}, service_type = '', trade_type = '', checkout_id = '' } = detail;
 
-	const [incoterm, setIncoterm] = useState(inco_term || 'cif');
+	const [incoterm, setIncoterm] = useState(INCOTERM_MAPPING[trade_type]);
 
 	const primaryService = service_type;
 

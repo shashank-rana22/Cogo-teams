@@ -1,10 +1,11 @@
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import getLocationInfo from '../../../../utils/locations-search';
 
 import styles from './styles.module.css';
 
-function DottedLineWithTag() {
+function DottedLineWithTag({ scheduleData = {} }) {
 	return (
 		<div style={{
 			color         : '#000',
@@ -19,7 +20,8 @@ function DottedLineWithTag() {
 		}}
 		>
 			<span style={{ padding: 4, background: '#F7FAEF' }}>4 days</span>
-			Trans-shipment
+			{startCase(scheduleData.schedule_type)}
+			-shipment
 		</div>
 	);
 }
@@ -69,7 +71,7 @@ function Route({ detail, scheduleData = {} }) {
 
 					<div className={styles.circle} />
 					<div className={styles.dottedLine} />
-					<DottedLineWithTag tag="tag" />
+					<DottedLineWithTag tag="tag" scheduleData={scheduleData} />
 					<div className={styles.dottedLine} />
 					<div className={styles.activeCircle} />
 

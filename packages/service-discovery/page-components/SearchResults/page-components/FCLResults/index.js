@@ -1,8 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../common/EmptyState';
-import BookCheckout from '../BookToCheckout';
-import Comparison from '../Comparison';
+import BookCheckout from '../../components/BookToCheckout';
+import Comparison from '../../components/Comparison';
 
 import ListRateCards from './ListRateCards';
 import SelectedRateCard from './SelectedRateCard';
@@ -26,7 +26,6 @@ function FCLResults({
 	comparisonCheckbox = [],
 	filters = {},
 	setFilters = () => {},
-	weekly_data,
 	paginationProps,
 	loading,
 	setHeaderProps,
@@ -47,7 +46,6 @@ function FCLResults({
 			comparisonCheckbox,
 			filters,
 			setFilters,
-			weekly_data,
 			paginationProps,
 			loading,
 		},

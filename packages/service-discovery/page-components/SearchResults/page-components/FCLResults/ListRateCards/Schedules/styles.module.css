@@ -18,15 +18,12 @@
 	overflow-x: scroll;
 }
 
+.loading {
+	display: flex;
+	padding: 24px 0;
+	margin-bottom: 28px;
+}
+
 .footer {
 	margin-top: 6px;
-}
-
-.rates_count {
-	float: left;
-}
-
-.pagination {
-	float: right;
-	margin-right: 20px;
 }

@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 const renderButton = (itemData, field, router) => {
 	const { query } = router;
 
-	const searchUrl = `/book/${itemData?.latest_spot_search_id || itemData?.id}/${itemData?.importer_exporter_id}`;
+	const searchUrl = `/book/${itemData?.latest_spot_search_id || itemData?.id}`;
 	const shipmentsUrl = `/shipments/${itemData?.shipment_id}`;
 	const checkoutUrl = `/checkout/${itemData?.checkout_id}`;
 

@@ -12,3 +12,8 @@
 .share_icon {
 	cursor: pointer;
 }
+
+.logoContainer {
+	display: flex;
+	align-items: center;
+}

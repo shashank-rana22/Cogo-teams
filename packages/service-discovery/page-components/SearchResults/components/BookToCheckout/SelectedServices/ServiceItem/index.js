@@ -19,7 +19,7 @@ function ServiceItem({
 	addedServices = [],
 	service_rates = {},
 	setAddedServices = () => {},
-	SERVICES_CANNOT_BE_REMOVED = [],
+	SERVICE_CANNOT_BE_REMOVED = '',
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -32,7 +32,7 @@ function ServiceItem({
 	const { total_price_currency, total_price_discounted, is_rate_available } = serviceData || {};
 
 	const handleRemove = () => {
-		if (SERVICES_CANNOT_BE_REMOVED.includes(service)) { Toast.error('This service cannot be removed'); return; }
+		if (SERVICE_CANNOT_BE_REMOVED === service) { Toast.error('This service cannot be removed'); return; }
 
 		setAddedServices((prev) => (prev.filter((item) => item !== service)));
 	};
@@ -42,7 +42,7 @@ function ServiceItem({
 	const handleMouseEnter = () => { setIsHovered(true); };
 	const handleMouseLeave = () => { setIsHovered(false); };
 
-	const SelectedIcon = isHovered && !SERVICES_CANNOT_BE_REMOVED.includes(service) ? IcMMinusInCircle : IcCFtick;
+	const SelectedIcon = isHovered && SERVICE_CANNOT_BE_REMOVED !== service ? IcMMinusInCircle : IcCFtick;
 
 	return (
 		<div

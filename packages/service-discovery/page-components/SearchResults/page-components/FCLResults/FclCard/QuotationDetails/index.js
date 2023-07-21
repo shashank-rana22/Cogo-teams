@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import CreateContract from '../../../../common/CreateContract';
@@ -13,6 +14,8 @@ function QuotationDetails({
 	detail = {},
 	setScreen = () => {},
 }) {
+	const router = useRouter();
+
 	const { total_price_discounted, total_price_currency } = rateCardData;
 
 	const [showContract, setShowContract] = useState(false);
@@ -29,9 +32,11 @@ function QuotationDetails({
 
 	const handleSelectButtonClick = () => {
 		if (!isSelectedCard) {
+			router.push(`/book/${router.query.spot_search_id}?rate_card_id=${rateCardData?.id}`);
 			setSelectedCard(rateCardData);
 			setScreen('selectedCard');
 		} else {
+			router.back();
 			setSelectedCard({});
 			setScreen('listRateCard');
 		}

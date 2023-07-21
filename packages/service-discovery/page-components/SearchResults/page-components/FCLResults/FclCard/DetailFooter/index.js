@@ -50,11 +50,9 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 	let addDaysValue = {};
 
 	ADDITIONAL_DAYS_KEYS.forEach((item) => {
-		const { free_limit = 0, additional_days = 0 } = rateCardData[item] || {};
-
 		addDaysValue = {
 			...addDaysValue,
-			[item]: free_limit + additional_days,
+			[item]: (rateCardData[item]?.free_limit || ZERO + rateCardData[item]?.additional_days || ZERO) || ZERO,
 		};
 	});
 

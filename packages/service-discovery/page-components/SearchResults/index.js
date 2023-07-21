@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 
 import Header from '../../common/Header';
 
-import FCLResults from './components/FCLResults';
-// import ListRateCards from './components/FCLResults/ListRateCards';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
+import FCLResults from './page-components/FCLResults';
+// import ListRateCards from './components/FCLResults/ListRateCards';
 import styles from './styles.module.css';
 
 // const SERVICE_MAPPING = {
@@ -37,7 +37,6 @@ function SearchResults() {
 		spot_search_detail:detail = {},
 		list:rates = [],
 		possible_subsidiary_services = [],
-		weekly_data = [],
 		total_count,
 		page,
 		page_limit,
@@ -46,7 +45,7 @@ function SearchResults() {
 
 	const paginationProps = { page, page_limit, total_count };
 
-	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.card));
+	const rateCardsForComparison = rates.filter((rateCard) => Object.keys(comparisonCheckbox).includes(rateCard.id));
 
 	const showComparison = rateCardsForComparison.length >= MAGIC_NUMBER;
 
@@ -87,7 +86,6 @@ function SearchResults() {
 					comparisonCheckbox={comparisonCheckbox}
 					filters={filters}
 					setFilters={setFilters}
-					weekly_data={weekly_data}
 					paginationProps={paginationProps}
 					loading={loading}
 					setHeaderProps={setHeaderProps}
@@ -96,7 +94,6 @@ function SearchResults() {
 					possible_subsidiary_services={possible_subsidiary_services}
 				/>
 			</div>
-
 		</div>
 	);
 }
