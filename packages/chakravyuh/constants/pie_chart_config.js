@@ -43,7 +43,7 @@ const CUMSTOM_DATA = [
 		id           : 'Backend Data 4',
 		label        : 'Backend Data 4',
 		value        : 1312,
-		color        : '#FFD700',
+		color        : '#58D3FE',
 		cancellation : 65,
 	},
 ];
@@ -83,7 +83,7 @@ const ColorMappings = {
 	pie_chart_key_1 : ['#63BEC8', '#BCCFD2', '#3D747A', '#7EB2B8'],
 	pie_chart_key_2 : ['#F9AE64', '#FDD3AD', '#F9AE64', '#F58B33'],
 	pie_chart_key_3 : ['#9BA0CB', '#C2C6E3', '#686E9F', '#A59CBE'],
-	pie_chart_key_4 : ['#FFD700', '#FFFF99', '#FFF44F', '#FEBE10'],
+	pie_chart_key_4 : ['#58D3FE', '#9CEBFE', '#87CEEB', '#ADD8E6'],
 };
 
 export const usePieChartConfigs = (type) => {
