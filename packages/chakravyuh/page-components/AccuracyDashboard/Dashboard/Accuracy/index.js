@@ -1,28 +1,28 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import CustomTooltip from '../../../../common/CustomTooltip';
-import { CUSTOM_DATA, CUSTOM_THEME } from '../../../../constants/line_chart_config';
+import { CUSTOM_THEME } from '../../../../constants/line_chart_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
 const CONSTANT_POINT_TWO = 0.2;
-const CONSTANT_ZERO = 0;
-const CONSTANT_TWENTY_FIVE = 25;
-const CONSTANT_FIFTY = 50;
-const CONSTANT_SEVENTY_FIVE = 75;
-const CONSTANT_HUNDRED = 100;
+const TICK_SIZE = 5;
 
-function Accuracy() {
+function Accuracy({ data = [] }) {
+	const formatedData = data.map(({ id, ...rest }) => ({ id: startCase(id), ...rest }));
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Accuracy with Time</h3>
 			<div className={styles.line_chart_container}>
 				<ResponsiveLine
-					data={CUSTOM_DATA}
-					margin={{ top: 50, right: 40, bottom: 50, left: 60 }}
+					data={formatedData}
+					margin={{ top: 50, right: 20, bottom: 60, left: 50 }}
 					xScale={{ type: 'point' }}
 					yScale={{
 						type    : 'linear',
@@ -37,9 +37,12 @@ function Accuracy() {
 					axisBottom={{
 						tickSize       : 5,
 						tickPadding    : 5,
-						tickRotation   : 0,
 						legendOffset   : 36,
 						legendPosition : 'middle',
+						tickRotation   : -45,
+						styles         : { transform: 'rotate(-45deg' },
+						format         : (val) => formatDate({ date: val, formatType: 'date' }),
+
 					}}
 					axisLeft={{
 						tickSize       : 5,
@@ -48,18 +51,12 @@ function Accuracy() {
 						legendOffset   : -40,
 						legendPosition : 'middle',
 						format         : (val) => `${val}%`,
-						tickValues     : [
-							CONSTANT_ZERO,
-							CONSTANT_TWENTY_FIVE,
-							CONSTANT_FIFTY,
-							CONSTANT_SEVENTY_FIVE,
-							CONSTANT_HUNDRED,
-						],
+						tickValues     : [...new Array(TICK_SIZE).keys()].map((i) => i * (TICK_SIZE * TICK_SIZE)),
 					}}
 					enableGridX
 					enableGridY
-					gridYValues={[CONSTANT_ZERO]}
-					gridXValues={[CONSTANT_ZERO]}
+					gridYValues={[GLOBAL_CONSTANTS.zeroth_index]}
+					gridXValues={[GLOBAL_CONSTANTS.zeroth_index]}
 					theme={CUSTOM_THEME}
 					colors={['#9BA0CB', '#e8a838', '#61cdbb']}
 					pointSize={6}
@@ -88,8 +85,7 @@ function Accuracy() {
 								{
 									on    : 'hover',
 									style : {
-										itemBackground : 'rgba(0, 0, 0, .03)',
-										itemOpacity    : 1,
+										itemOpacity: 1,
 									},
 								},
 							],

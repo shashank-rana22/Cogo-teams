@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetFclFreightRateStats from '../../../hooks/useGetFclFreightRateStats';
 import SupplyRates from '../RatesList';
 
 import Accuracy from './Accuracy';
@@ -11,12 +12,15 @@ import Views from './Views';
 function DashboardView(props) {
 	const { setView = () => {}, globalFilters = {} } = props;
 	const { rate_type } = globalFilters;
+
+	const { data, loading } = useGetFclFreightRateStats({ filters: globalFilters });
+
 	return (
 		<>
 			<div className={styles.main_container}>
 				<div className={styles.graph_container}>
-					<Accuracy />
-					<Deviation />
+					<Accuracy data={data?.accuracy} loading={loading} />
+					<Deviation data={data?.deviation} loading={loading} />
 				</div>
 				<div className={styles.side_container}>
 					<Views setView={setView} />

@@ -1,23 +1,59 @@
 import { ResponsiveBump } from '@cogoport/charts/bump';
 import { ResponsiveMarimekko } from '@cogoport/charts/marimekko';
 import { cl } from '@cogoport/components';
-import React from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import React, { useEffect, useState } from 'react';
 
 import CustomTooltip from '../../../../common/CustomTooltip';
-import { DUMMY_DATA, TOTAL_DEVIATION, DIMENSIONS } from '../../../../constants/histogram_config';
+import {
+	TOTAL_DEVIATION,
+	DIMENSIONS, BOTTOM_AXIS_UNIT, SEPARATION_INDEX,
+} from '../../../../constants/histogram_config';
 import { section_header, section_container } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
-const LINE_DATA = [{
-	id   : 'line',
-	data : DUMMY_DATA.map(({ countOfNegative, countOfPositive }, idx) => ({
-		x : idx,
-		y : -(countOfNegative + countOfPositive),
-	})),
-}];
+const ANIMATION_TIME = 500;
+const HALF_DECIMAL = 0.5;
 
-function Deviation() {
+function Deviation({ data = [], loading = false }) {
+	const [loadingData, setLoadingData] = useState([]);
+
+	const formatedData = data.map(({ range, count }, idx) => ({
+		deviation       : `(${range - BOTTOM_AXIS_UNIT} to ${range})%`,
+		participation   : BOTTOM_AXIS_UNIT,
+		countOfNegative : idx < SEPARATION_INDEX ? count : GLOBAL_CONSTANTS.zeroth_index,
+		countOfPositive : idx > SEPARATION_INDEX ? count : GLOBAL_CONSTANTS.zeroth_index,
+	}));
+
+	const lineData = [{
+		id   : 'line',
+		data : formatedData.map(({ countOfNegative, countOfPositive }, idx) => ({
+			x : idx,
+			y : -(countOfNegative + countOfPositive),
+		})),
+	}];
+
+	useEffect(() => {
+		const updateData = () => {
+			const randomArray = Array.from(
+				{ length: 10 },
+				() => Math.ceil(Math.random() * (ANIMATION_TIME + ANIMATION_TIME)),
+			);
+			const newData = [{
+				id   : 'line',
+				data : randomArray.map((val, idx) => ({
+					x : idx,
+					y : (Math.random() - HALF_DECIMAL) * val,
+				})),
+			}];
+			setLoadingData(newData);
+		};
+
+		const animationInterval = loading ? setInterval(updateData, ANIMATION_TIME) : null;
+		return () => clearInterval(animationInterval);
+	}, [loading]);
+
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
 			<h3 className={section_header}>Rate Deviation</h3>
@@ -32,7 +68,7 @@ function Deviation() {
 			</div>
 			<div className={styles.graph_container}>
 				<ResponsiveMarimekko
-					data={DUMMY_DATA}
+					data={formatedData}
 					id="deviation"
 					value="participation"
 					dimensions={DIMENSIONS}
@@ -88,7 +124,7 @@ function Deviation() {
 					tooltip={CustomTooltip}
 				/>
 				<ResponsiveBump
-					data={LINE_DATA}
+					data={loading ? loadingData : lineData}
 					margin={{ top: 10, right: 20, bottom: 25, left: 20 }}
 					axisTop={null}
 					axisRight={null}
