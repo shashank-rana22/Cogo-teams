@@ -2,7 +2,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const SPLICE_FIRST_PARAMETER = 0;
 const SPLICE_SECOND_PARAMETER = 1;
-const SPLIT_SECOND_PARAMETER = 2;
+const SPLIT_SERVICE_TEXT = 2;
 
 export default function getControls({
 	primary_service = {},
@@ -16,15 +16,16 @@ export default function getControls({
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
-	const serviceType = serviceObj?.service_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
-	const shipmentType = shipment_type.split('_', SPLIT_SECOND_PARAMETER).join('_');
+	const serviceType = serviceObj?.service_type.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const shipmentType = shipment_type.split('_', SPLIT_SERVICE_TEXT).join('_');
 	let services = [];
 
 	if (primary_service?.service_type !== service_type) {
 		services = [shipmentType, serviceType];
 	}
-	const validServiceTypes = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
-	if (validServiceTypes.includes(serviceObj?.service_type)) {
+	if (serviceObj?.service_type === 'trailer_freight_service'
+	|| serviceObj?.service_type === 'haulage_freight_service'
+	|| serviceObj?.service_type === 'ftl_freight_service') {
 		services = ['ftl_freight', 'haulage_freight'];
 	}
 
@@ -44,8 +45,8 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : services.length !== SPLIT_SECOND_PARAMETER
-						? serviceType : services,
+					service      : Array.isArray(services)
+						? services : serviceType,
 				},
 			},
 			size  : 'sm',
