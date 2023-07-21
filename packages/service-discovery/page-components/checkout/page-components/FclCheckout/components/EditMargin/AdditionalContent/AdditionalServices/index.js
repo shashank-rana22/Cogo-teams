@@ -1,17 +1,19 @@
 import { Accordion } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 
-import SubsidiaryServices from '../../../../../../../../common/AdditionalServices/SubsidiaryServices';
-import AdditionalServicesComponent from '../../../../../../../SearchResults/components/AdditionalServices';
+import AdditionalServicesComponent from '../../../../../../../../common/OtherServices/AdditionalServices';
+import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
 
 import styles from './styles.module.css';
 
-const CargoInsuranceContainer = dynamic(
+const CargoInsurance = dynamic(
 	() => import(
-		'../../../../../../../../common/AdditionalServices/CargoInsuranceContainer'
+		'../../../../../../../../common/OtherServices/CargoInsurance'
 	),
 	{ ssr: false },
 );
+
+const MAX_SERVICES_LENGTH = 3;
 
 function AdditionalServices({
 	setHeaderProps = () => {},
@@ -21,6 +23,7 @@ function AdditionalServices({
 	getCheckout = () => {},
 	possible_subsidiary_services = [],
 	loading = false,
+	servicesLength = 0,
 }) {
 	const { services, id, ...restDetails } = detail;
 
@@ -33,7 +36,12 @@ function AdditionalServices({
 	const rateCardData = { ...rate, service_rates: serviceRates, service_type: restDetails.primary_service };
 
 	return (
-		<Accordion className={styles.accordion} type="form" title="Looking for additional services?">
+		<Accordion
+			className={styles.accordion}
+			type="form"
+			isOpen={servicesLength < MAX_SERVICES_LENGTH}
+			title="Looking for additional services?"
+		>
 			<AdditionalServicesComponent
 				detail={finalDetails}
 				rateCardData={rateCardData}
@@ -41,7 +49,7 @@ function AdditionalServices({
 				refetchSearch={getCheckout}
 			/>
 
-			<CargoInsuranceContainer
+			<CargoInsurance
 				key={loading}
 				data={finalDetails}
 				refetch={getCheckout}
@@ -49,8 +57,9 @@ function AdditionalServices({
 
 			<SubsidiaryServices
 				possible_subsidiary_services={possible_subsidiary_services}
-				data={detail}
+				data={finalDetails}
 				refetch={getCheckout}
+				checkout_id={id}
 			/>
 		</Accordion>
 	);

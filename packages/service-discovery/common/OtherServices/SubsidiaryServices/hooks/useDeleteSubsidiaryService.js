@@ -9,7 +9,7 @@ const useDeleteSubsidiaryService = ({
 	refetch = () => {},
 	setShow = () => {},
 }) => {
-	const URL = data?.checkout_id || checkout_id ? '/update_checkout_service' : '/remove_spot_search_service';
+	const URL = checkout_id ? '/update_checkout_service' : '/update_spot_search';
 
 	const { service_details: serviceDetails = {} } = data || [];
 
@@ -31,8 +31,7 @@ const useDeleteSubsidiaryService = ({
 
 		try {
 			const payload = {
-				spot_search_id                 : data?.spot_search_id || undefined,
-				id                             : data?.checkout_id || undefined,
+				id                             : data?.checkout_id ? data?.checkout_id : data?.spot_search_id,
 				service                        : 'subsidiary',
 				subsidiary_services_attributes : params,
 			};

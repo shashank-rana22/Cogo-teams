@@ -1,8 +1,10 @@
-import { Button, cl, Chips } from '@cogoport/components';
+import { Button, cl, Chips, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlusInCircle, IcCFtick } from '@cogoport/icons-react';
+import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
+import getDetails from '../../../../../../../../../common/ContainerDetails/getDetails';
 import { CheckoutContext } from '../../../../../../../context';
 import useCreateCheckoutInvoice from '../../../../../hooks/useCreateCheckoutInvoice';
 import useGetPaymentModes from '../../../../../hooks/useGetPaymentModes';
@@ -12,11 +14,6 @@ import ServiceInfo from './ServiceInfo';
 import styles from './styles.module.css';
 
 const ONE = 1;
-
-const IconMapping = {
-	true  : IcCFtick,
-	false : IcMPlusInCircle,
-};
 
 const CURRENCY_OPTIONS = [
 	GLOBAL_CONSTANTS.currency_code.USD,
@@ -39,22 +36,28 @@ function SelectServices({
 	services: selectedServices = [],
 	rate = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
 }) {
-	const { detail = {}, checkout_id = '', conversions = {} } = useContext(CheckoutContext);
+	const {
+		detail = {},
+		checkout_id = '',
+		conversions = {},
+	} = useContext(CheckoutContext);
+
+	const { primary_service = '', services: allServices = {} } = detail;
 
 	const { PAYMENT_MODES, loading } = useGetPaymentModes({
-		invoicingParties: [selectedAddress],
+		invoicingParties      : [selectedAddress],
 		detail,
 		paymentModes,
-		setPaymentModes,
+		setEditInvoiceDetails : setSelectedAddress,
+		editInvoiceDetails    : selectedAddress,
 	});
 
-	const {
-		createCheckoutInvoice,
-		loading: createLoading,
-	} = useCreateCheckoutInvoice({ setShowAddInvoicingPartyModal, getCheckoutInvoices });
+	const { createCheckoutInvoice, loading: createLoading } = useCreateCheckoutInvoice({
+		setShowAddInvoicingPartyModal,
+		getCheckoutInvoices,
+	});
 
 	const saveInvoicingParty = () => {
 		const {
@@ -66,12 +69,27 @@ function SelectServices({
 			credit_option = {},
 			freight_invoice_currency = '',
 			invoice_currency = '',
+			paymentModes:currPaymentModes,
+			documentCategory = '',
+			documentType = '',
+			documentDeliveryMode = '',
 			...restBillingAddress
 		} = selectedAddress;
 
-		const [, currPaymentModes] = Object.entries(paymentModes).find(([key]) => key === id);
+		const documentDetailsPresent = !isEmpty(documentCategory || documentType || documentDeliveryMode);
 
-		const { credit_days = 0, paymentMethods = '', paymentMode = '', paymentTerms = '' } = currPaymentModes || {};
+		const fcl_freight_services = {
+			bl_category      : documentCategory || undefined,
+			bl_type          : documentType || undefined,
+			bl_delivery_mode : documentDeliveryMode || undefined,
+		};
+
+		const {
+			credit_days = 0,
+			paymentMethods = '',
+			paymentMode = '',
+			paymentTerms = '',
+		} = currPaymentModes || {};
 
 		const payload = {
 			billing_address      : restBillingAddress,
@@ -87,6 +105,7 @@ function SelectServices({
 				payment_term   : paymentTerms,
 				payment_method : paymentMethods,
 			},
+			...(documentDetailsPresent ? { document_attributes: { fcl_freight_services } } : null),
 			additional_info,
 			freight_invoice_currency: freight_invoice_currency || null,
 			invoice_currency,
@@ -129,6 +148,10 @@ function SelectServices({
 
 	const currSelectedServiceIds = services.map((item) => item.service_id);
 
+	const primaryServicesLength = Object.values(allServices).filter(
+		(item) => item.service_type === primary_service,
+	).length;
+
 	return (
 		<div key={loading} className={styles.container}>
 			<div className={styles.currency}>
@@ -145,11 +168,13 @@ function SelectServices({
 			</div>
 
 			<div className={styles.label}>
-				Please select all the services that you would want to invoice to this trade partner -
+				Please select all the services that you would want to invoice to this
+				trade partner -
 			</div>
 
 			<div className={cl`${styles.label} ${styles.light}`}>
-				We have automatically split the invoices basis incoterm, you can modify it.
+				We have automatically split the invoices basis incoterm, you can modify
+				it.
 			</div>
 
 			<div className={styles.services}>
@@ -162,14 +187,12 @@ function SelectServices({
 
 					const isServiceSelected = currSelectedServiceIds.includes(id);
 
-					const IconToShow = IconMapping[isServiceSelected];
-
 					return (
 						<div
 							key={id}
 							className={cl`${styles.service_container} ${
 								!isServiceSelected ? styles.inactive : styles.active
-							}`}
+							} ${primaryServicesLength > ONE ? styles.multiple : styles.single}`}
 							role="presentation"
 							onClick={() => {
 								if (!isServiceSelected) {
@@ -198,7 +221,30 @@ function SelectServices({
 								currency={selectedAddress.invoice_currency}
 							/>
 
-							<IconToShow width={20} height={20} className={styles.icon} />
+							{primaryServicesLength > ONE ? (
+								<div className={styles.service_details}>
+									{getDetails({ item: serviceDetail, primary_service }).map(
+										(item) => (
+											<Pill
+												key={item}
+												size="md"
+												color="#cfeaed"
+												style={{ border: '1px solid #ececec' }}
+											>
+												{item}
+											</Pill>
+										),
+									)}
+								</div>
+							) : null}
+
+							<IcMPlusInCircle
+								width={20}
+								height={20}
+								className={cl`${styles.icon} ${
+									!isServiceSelected ? styles.inactive : styles.active
+								}`}
+							/>
 						</div>
 					);
 				})}

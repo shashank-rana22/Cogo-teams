@@ -118,7 +118,8 @@ const useGetPaymentModes = ({
 	invoicingParties,
 	detail = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
+	setEditInvoiceDetails = () => {},
+	editInvoiceDetails,
 }) => {
 	const {
 		services = {},
@@ -169,7 +170,7 @@ const useGetPaymentModes = ({
 		documentCategory = '',
 		documentType = '',
 		documentDeliveryMode = '',
-	} = paymentModes || {};
+	} = editInvoiceDetails || {};
 
 	const optionsObj = Object.entries(data).reduce((acc, [orgTradePartyId, orgTradePartyData]) => {
 		const modes = Object.keys(orgTradePartyData) || [];
@@ -322,7 +323,7 @@ const useGetPaymentModes = ({
 			paymentMode = 'cash',
 			paymentTerms = '',
 			paymentMethods = '',
-		} = paymentModes[id] || {};
+		} = editInvoiceDetails.paymentModes || {};
 
 		const { creditDetails = {}, options = [] } = optionsObj[organization_trade_party_id] || {};
 
@@ -334,11 +335,12 @@ const useGetPaymentModes = ({
 					options,
 					value    : paymentMode,
 					style    : { flexBasis: '16%', paddingRight: '20px' },
+					name     : 'paymentMode',
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 								...creditDetails,
 								paymentMode  : i,
 								paymentTerms : finalPaymentTerms?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
@@ -350,12 +352,13 @@ const useGetPaymentModes = ({
 					label    : 'Terms of Payment',
 					options  : finalPaymentTerms[paymentMode] || [],
 					value    : paymentTerms,
+					name     : 'paymentTerms',
 					style    : { flexBasis: '16%', paddingRight: '20px' },
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 								...creditDetails,
 								paymentTerms   : i,
 								paymentMethods : finalPaymentMethods?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
@@ -367,12 +370,13 @@ const useGetPaymentModes = ({
 					label    : 'Methods of payment',
 					options  : finalPaymentMethods[paymentTerms] || [],
 					value    : paymentMethods,
+					name     : 'paymentMethods',
 					style    : { flexBasis: '16%', paddingRight: '20px' },
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 								paymentMethods: i,
 							},
 						}));
@@ -382,12 +386,13 @@ const useGetPaymentModes = ({
 					label    : 'Document Category',
 					options  : documentCategoryPreference[paymentMethods] || [],
 					value    : documentCategory,
+					name     : 'documentCategory',
 					style    : { flexBasis: '16%', paddingRight: '20px' },
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 								documentType:
 										documentTypePreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 							},
@@ -400,12 +405,13 @@ const useGetPaymentModes = ({
 					label    : 'Document Type',
 					options  : documentTypePreference[documentCategory] || [],
 					value    : documentType,
+					name     : 'documentType',
 					style    : { flexBasis: '16%', paddingRight: '20px' },
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 								documentDeliveryMode:
 										documentDeliveryPreference?.[i]?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 							},
@@ -419,13 +425,14 @@ const useGetPaymentModes = ({
 					label    : 'Document Delivery Preference',
 					options  : documentDeliveryPreference[documentType] || [],
 					value    : documentDeliveryMode,
+					name     : 'documentDeliveryMode',
 					style    : { flexBasis: '20%' },
 					span     : 4,
 					onChange : (i) => {
-						setPaymentModes((pv = {}) => ({
+						setEditInvoiceDetails((pv = {}) => ({
 							...pv,
-							[id]: {
-								...(pv[id] || {}),
+							paymentModes: {
+								...(pv.paymentModes || {}),
 							},
 							documentDeliveryMode: i,
 						}));
@@ -438,6 +445,7 @@ const useGetPaymentModes = ({
 	return {
 		loading,
 		PAYMENT_MODES,
+		paymentModes,
 	};
 };
 

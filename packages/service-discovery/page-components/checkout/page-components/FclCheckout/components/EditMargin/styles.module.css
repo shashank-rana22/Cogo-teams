@@ -12,3 +12,9 @@
 	margin-bottom: 6px;
 	font-weight: 600;
 }
+
+.error {
+	margin-left: 16px;
+	font-size: 12px;
+	color: #f00;
+}

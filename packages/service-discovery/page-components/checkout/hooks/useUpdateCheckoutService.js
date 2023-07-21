@@ -5,6 +5,7 @@ const useUpdateCheckoutService = ({
 	detail,
 	checkout_id,
 	refetch = () => {},
+	setNoRatesPresent = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -45,6 +46,7 @@ const useUpdateCheckoutService = ({
 
 			await trigger({ data: payload });
 
+			setNoRatesPresent(false);
 			Toast.success('Service deleted successfully!');
 			refetch();
 		} catch (err) {

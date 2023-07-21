@@ -1,5 +1,4 @@
 import { Pill, cl } from '@cogoport/components';
-import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -7,24 +6,28 @@ import { CheckoutContext } from '../../../../../../context';
 import SelectedServicesInvoiceTo from '../SelectedServicesInvoiceTo';
 import TotalCost from '../TotalCost';
 
+import HandleButtons from './HandleButtons';
 import PaymentModes from './PaymentModes';
 import styles from './styles.module.css';
-
-const ICON_MAPPING = {
-	true  : IcMCrossInCircle,
-	false : IcMEdit,
-};
 
 const TRADE_PARTY_TYPE_MAPPING = {
 	self: {
 		color : '#fff8f5',
 		label : 'SELF',
-		style : { border: '1px solid  #FFD9D6', color: '#ee3425', marginLeft: '8px' },
+		style : {
+			border     : '1px solid  #FFD9D6',
+			color      : '#ee3425',
+			marginLeft : '8px',
+		},
 	},
 	paying_party: {
 		color : '#ced1ed',
 		label : 'TRADE PARTNER',
-		style : { border: '1px solid  #888FD1', color: '#7278ad', marginLeft: '8px' },
+		style : {
+			border     : '1px solid  #888FD1',
+			color      : '#7278ad',
+			marginLeft : '8px',
+		},
 	},
 };
 
@@ -37,6 +40,11 @@ function CurrentInvoicingParty({
 	length = 0,
 	updateCheckoutInvoice = () => {},
 	updateLoading = false,
+	editInvoiceDetails = {},
+	setEditInvoiceDetails = () => {},
+	allServices = [],
+	paymentModeValues = {},
+	paymentModesLoading = false,
 }) {
 	const { rate, conversions, detail = {} } = useContext(CheckoutContext);
 
@@ -51,7 +59,7 @@ function CurrentInvoicingParty({
 
 	const { tax_number = '', address = '' } = billing_address || {};
 
-	const IconToShow = ICON_MAPPING[editInvoice[id]];
+	const isEditMode = editInvoice[id];
 
 	const tradePartyObj = TRADE_PARTY_TYPE_MAPPING[trade_party_type] || TRADE_PARTY_TYPE_MAPPING.self;
 
@@ -66,10 +74,7 @@ function CurrentInvoicingParty({
 					<div className={cl`${styles.flex} ${styles[trade_party_type]}`}>
 						<div className={styles.org_name}>{startCase(business_name)}</div>
 
-						<Pill
-							{...tradePartyObj}
-							size="md"
-						>
+						<Pill {...tradePartyObj} size="md">
 							{tradePartyObj.label}
 						</Pill>
 					</div>
@@ -82,41 +87,44 @@ function CurrentInvoicingParty({
 				</div>
 
 				<div className={styles.right_content}>
-					<SelectedServicesInvoiceTo services={services} />
+					<SelectedServicesInvoiceTo
+						services={services}
+						isEditMode={isEditMode}
+						allServices={allServices}
+						editInvoiceDetails={editInvoiceDetails}
+						setEditInvoiceDetails={setEditInvoiceDetails}
+					/>
 
 					<TotalCost
 						conversions={conversions}
 						rate={rate}
 						invoicingParty={invoiceParty}
 						detail={detail}
+						editInvoiceDetails={editInvoiceDetails}
+						setEditInvoiceDetails={setEditInvoiceDetails}
+						isEditMode={isEditMode}
 					/>
 				</div>
 			</div>
 
-			<div className={styles.icon_container}>
-				<IconToShow
-					height={18}
-					width={18}
-					className={styles.icon}
-					onClick={() => setEditInvoice((prev) => ({ ...prev, [id]: !prev[id] }))}
-				/>
-
-				{length > 1 ? (
-					<IcMDelete
-						height={18}
-						width={18}
-						className={styles.icon}
-						onClick={() => {
-							updateCheckoutInvoice({ values: { id, status: 'inactive' } });
-						}}
-					/>
-				) : null}
-			</div>
+			<HandleButtons
+				isEditMode={isEditMode}
+				length={length}
+				invoiceParty={invoiceParty}
+				updateCheckoutInvoice={updateCheckoutInvoice}
+				editInvoiceDetails={editInvoiceDetails}
+				setEditInvoice={setEditInvoice}
+				setEditInvoiceDetails={setEditInvoiceDetails}
+				paymentModeValues={paymentModeValues}
+				updateLoading={updateLoading}
+			/>
 
 			<div className={styles.payment_modes}>
 				<PaymentModes
 					paymentModes={paymentModes}
-					editMode={editInvoice[id]}
+					editMode={isEditMode}
+					paymentModeValues={paymentModeValues}
+					paymentModesLoading={paymentModesLoading}
 				/>
 			</div>
 		</div>

@@ -1,22 +1,20 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcACarriageInsurancePaidTo, IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import CargoInsurance from '../CargoInsurance';
-import useDeleteCargoInsurance from '../CargoInsurance/hooks/useDeleteCargoInsurance';
 import DeleteServiceModal from '../DeleteServiceModal';
 
+import CargoInsuranceModal from './CargoInsuranceModal';
+import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
 import styles from './styles.module.css';
 
 const isCargoInsurancePresent = (services) => {
-	const isAlreadyPresent = Object.values(services || {}).find(
+	const isAlreadyPresent = Object.values(services || {}).some(
 		(item) => item.service_type === 'cargo_insurance',
 	);
 	return isAlreadyPresent;
 };
 
-function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id = '' }) {
+function CargoInsurance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -43,7 +41,7 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 
 	const isCargoInsuranceAlreadyTaken = isCargoInsurancePresent(service_details);
 
-	const [cargoInsurance, setCargoInsurance] = useState(isCargoInsuranceAlreadyTaken);
+	const [isSelected, setIsSelected] = useState(isCargoInsuranceAlreadyTaken);
 
 	const primaryServiceDetails = Object.values(service_details || {}).find(
 		(item) => item.service_type === primary_service,
@@ -62,7 +60,7 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 	const SelectedIcon = isHovered ? IcMMinusInCircle : IcCFtick;
 
 	useEffect(() => {
-		setCargoInsurance(isCargoInsuranceAlreadyTaken);
+		setIsSelected(isCargoInsuranceAlreadyTaken);
 	}, [isCargoInsuranceAlreadyTaken]);
 
 	return (
@@ -81,23 +79,9 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 				</div>
 
 				<div className={styles.right_section}>
-					<div className={styles.starting_at_price}>
-						{cargoInsurance && !isEmpty(cargoInsurance) ? (
-							<div className={styles.rate_found}>
-								{formatAmount({
-									amount   : cargoInsurance?.saas_rate?.totalCharges,
-									currency : cargoInsurance?.saas_rate?.currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 0,
-									},
-								})}
-							</div>
-						) : 'Starting at $0.25/km'}
-					</div>
+					<div className={styles.starting_at_price}>Starting at $0.25/km</div>
 
-					{cargoInsurance && !isEmpty(cargoInsurance) ? (
+					{isSelected ? (
 						<SelectedIcon
 							onMouseEnter={handleMouseEnter}
 							onMouseLeave={handleMouseLeave}
@@ -119,7 +103,7 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 			</div>
 
 			{showModal && (
-				<CargoInsurance
+				<CargoInsuranceModal
 					destination_country_id={destination_country_id}
 					origin_country_id={origin_country_id}
 					trade_type={trade_type}
@@ -131,10 +115,9 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 					importer_exporter={importer_exporter}
 					addCargoInsurance={showModal}
 					setAddCargoInsurance={setShowModal}
-					setDone={setCargoInsurance}
+					setDone={setIsSelected}
 					service_details={service_details}
 					checkout_id={checkout_id}
-					rate_card_id={rate_card_id}
 				/>
 			)}
 
@@ -151,4 +134,4 @@ function CargoInsuranceContainer({ data = {}, refetch = () => {}, rate_card_id =
 	);
 }
 
-export default CargoInsuranceContainer;
+export default CargoInsurance;

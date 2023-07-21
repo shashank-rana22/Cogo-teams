@@ -27,7 +27,7 @@ function BookingConfirmation() {
 	);
 	const iscommercialInvoicePresent = !isEmpty(
 		controlledBookingServices?.[GLOBAL_CONSTANTS.zeroth_index]
-			.commercial_invoice_url || '',
+			?.commercial_invoice_url || '',
 	);
 
 	const [isControlBookingDetailsFilled, setIsControlBookingDetailsFilled] = useState(iscommercialInvoicePresent);

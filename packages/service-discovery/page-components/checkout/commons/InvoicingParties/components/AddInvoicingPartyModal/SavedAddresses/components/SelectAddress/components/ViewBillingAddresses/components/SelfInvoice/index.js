@@ -13,7 +13,6 @@ function SelfInvoice({
 	optionsDisabled = {},
 	setSelectedAddress = () => {},
 	setCurrentView = () => {},
-	setPaymentModes = () => {},
 }) {
 	const {
 		billing_addresses,
@@ -68,16 +67,12 @@ function SelfInvoice({
 									credit_option,
 									freight_invoice_currency : null,
 									invoice_currency         : GLOBAL_CONSTANTS.currency_code.INR,
-								});
-
-								setPaymentModes((pv) => ({
-									...pv,
-									[id]: {
+									paymentModes             : {
 										credit_days : 0,
 										interest    : 0,
 										paymentMode : 'cash',
 									},
-								}));
+								});
 
 								setCurrentView('select_services');
 							}}

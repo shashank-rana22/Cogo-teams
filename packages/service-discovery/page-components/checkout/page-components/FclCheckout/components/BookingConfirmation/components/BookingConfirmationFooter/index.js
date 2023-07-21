@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { useRef, useEffect } from 'react';
 
+import useBookShipment from '../../../../../../hooks/useBookShipment';
 import useControlBookingApproval from '../../../../../../hooks/useControlBookingApproval';
 import handleTimer from '../../../../../../utils/handleTimer';
 
@@ -59,6 +60,7 @@ function BookingConfirmationFooter({
 		checkout_approvals = [],
 		importer_exporter_id,
 		importer_exporter,
+		id,
 	} = detail;
 
 	const {
@@ -72,10 +74,18 @@ function BookingConfirmationFooter({
 		importer_exporter,
 	});
 
+	const {
+		bookShipment,
+		loading:bookCheckoutLoading,
+	} = useBookShipment({ checkout_id: id });
+
 	const handleSubmit = () => {
 		if (checkoutMethod === 'controlled_checkout') {
 			controlBookingApproval();
+			return;
 		}
+
+		bookShipment();
 	};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
@@ -131,7 +141,7 @@ function BookingConfirmationFooter({
 						type="button"
 						size="lg"
 						onClick={handleSubmit}
-						loading={loading}
+						loading={loading || bookCheckoutLoading}
 						disabled={getDisabledCondition({
 							checkoutMethod,
 							booking_status,

@@ -27,8 +27,12 @@ function InvoicingParties() {
 		editInvoice,
 		setEditInvoice,
 		paymentModes,
-		setPaymentModes,
 		getCheckoutInvoices,
+		editInvoiceDetails,
+		setEditInvoiceDetails,
+		allServices,
+		paymentModeValuesObj,
+		paymentModesLoading = false,
 	} = useInvoicingParties({ detail, invoice });
 
 	const {
@@ -50,11 +54,15 @@ function InvoicingParties() {
 				services={selectedServices}
 				rate={rate}
 				paymentModes={paymentModes}
-				setPaymentModes={setPaymentModes}
 				getCheckoutInvoices={getCheckoutInvoices}
 				updateCheckoutInvoice={updateCheckoutInvoice}
 				updateLoading={updateLoading}
 				loading={loading}
+				editInvoiceDetails={editInvoiceDetails}
+				setEditInvoiceDetails={setEditInvoiceDetails}
+				allServices={allServices}
+				paymentModeValuesObj={paymentModeValuesObj}
+				paymentModesLoading={paymentModesLoading}
 			/>
 		</div>
 	);

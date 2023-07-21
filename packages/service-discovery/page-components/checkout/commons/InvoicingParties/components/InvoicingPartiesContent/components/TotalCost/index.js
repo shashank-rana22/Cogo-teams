@@ -1,11 +1,64 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import { convertCurrencyValue } from '../../../../../../helpers/dynamic-values';
+import StyledSelect from '../../../../../StyledSelect';
+
 import styles from './styles.module.css';
 
 const MAX_PERCENT_VALUE = 100;
 
 const DELTA_VALUE = 1;
+
+const CURRENCY_OPTIONS = [
+	GLOBAL_CONSTANTS.currency_code.USD,
+	GLOBAL_CONSTANTS.currency_code.INR,
+	GLOBAL_CONSTANTS.currency_code.VND,
+].map((currencyCode) => ({
+	value : currencyCode,
+	label : currencyCode,
+}));
+
+function PriceComponent({
+	isEditMode = false,
+	totalDisplayString = '',
+	invoicingPartyPrice = 0,
+	invoicingPartyCurrency = '',
+	editInvoiceDetails = {},
+	conversions = {},
+	setEditInvoiceDetails = () => {},
+}) {
+	if (isEditMode) {
+		const { invoice_currency } = editInvoiceDetails;
+
+		const finalConvertedValue = convertCurrencyValue(
+			invoicingPartyPrice,
+			invoicingPartyCurrency,
+			invoice_currency,
+			conversions,
+		);
+
+		return (
+			<div className={styles.flex}>
+				<StyledSelect
+					defaultValue={invoice_currency}
+					onChange={({ selectedValue }) => {
+						setEditInvoiceDetails((prev) => ({
+							...prev,
+							invoice_currency: selectedValue,
+						}));
+					}}
+					options={CURRENCY_OPTIONS}
+					size="lg"
+				/>
+
+				<div className={styles.value}>{finalConvertedValue.toFixed(2)}</div>
+			</div>
+		);
+	}
+
+	return <div className={styles.total_price}>{totalDisplayString}</div>;
+}
 
 function getInvoicingPartyPrice({
 	serviceRates,
@@ -100,6 +153,9 @@ function TotalCost({
 	conversions = {},
 	invoicingParty = {},
 	detail = {},
+	setEditInvoiceDetails = () => {},
+	editInvoiceDetails = {},
+	isEditMode = false,
 }) {
 	const {
 		cogofx_currencies = {},
@@ -113,7 +169,7 @@ function TotalCost({
 
 	const { primary_service = '' } = detail;
 
-	const { invoice_currency: invoicingPartyCurrency, services = [] } = invoicingParty;
+	const { invoice_currency: invoicingPartyCurrency, services = [] } =		invoicingParty;
 
 	const invoiceServices = (services || []).map((item) => item.service_id);
 
@@ -167,7 +223,15 @@ function TotalCost({
 		<div className={styles.container}>
 			<div className={styles.text}>Total</div>
 
-			<div className={styles.total_price}>{totalDisplayString}</div>
+			<PriceComponent
+				totalDisplayString={totalDisplayString}
+				isEditMode={isEditMode}
+				invoicingPartyPrice={invoicingPartyPrice}
+				editInvoiceDetails={editInvoiceDetails}
+				invoicingPartyCurrency={invoicingPartyCurrency}
+				conversions={conversions}
+				setEditInvoiceDetails={setEditInvoiceDetails}
+			/>
 		</div>
 	);
 }

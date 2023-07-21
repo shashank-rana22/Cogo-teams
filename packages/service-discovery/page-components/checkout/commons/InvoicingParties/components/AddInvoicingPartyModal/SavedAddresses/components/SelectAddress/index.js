@@ -79,11 +79,9 @@ function SelectAddress({
 	disabledInvoicingParties = [],
 	activeState = '',
 	setActiveState = () => {},
-	selectedAddress = {},
 	setSelectedAddress = () => {},
 	source = '',
 	setCurrentView = () => {},
-	setPaymentModes = () => {},
 }) {
 	const { orgData = {} } = useContext(CheckoutContext);
 
@@ -114,7 +112,6 @@ function SelectAddress({
 			loading,
 			data,
 			setCurrentView,
-			setPaymentModes,
 		},
 		create_billing_address: {
 			organization: orgData?.data,

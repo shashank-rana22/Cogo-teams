@@ -38,6 +38,7 @@ function AdditionalContent({
 				getCheckout={getCheckout}
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
+				servicesLength={rateDetails.length}
 			/>
 
 			<div className={styles.sub_heading}>Cancellation Policy</div>
