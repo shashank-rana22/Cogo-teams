@@ -1,13 +1,18 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button, Loader, Tabs, TabPanel } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
+import groupedSimilarServicesData from '../../../../helpers/groupSimilarServices';
 import getStep0Controls from '../../helpers/getStep0Controls';
 
 import BookingPreferenceCard from './BookingPreferenceCard';
 import styles from './styles.module.css';
 
-function Step0({ data = {}, onCancel = () => {}, setStep }) {
+function Step0({ data = {}, onCancel = () => {}, setStep = () => {}, servicesList = [], task = {} }) {
+	const ONE = 1;
+	const { similarServiceIds, title } = groupedSimilarServicesData(servicesList, task.service_type, task.service_id);
+	const [activeTab, setActiveTab] = useState(similarServiceIds[GLOBAL_CONSTANTS.zeroth_index]);
 	const {
 		formProps = {}, listBookingPreferences = [], bookingPreferenceLoading, shipment_data,
 	} = data || {};
@@ -33,9 +38,31 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 	return (
 		<div>
 			<div>
-				{bookingPreferenceLoading ? <div><Loader /></div> : listBookingPreferences?.map((item, i) => (
-					<BookingPreferenceCard item={item} step0_data={data} key={keysForPreference[i]} />
-				))}
+				{bookingPreferenceLoading ? <div><Loader /></div>
+					: (
+						<Tabs activeTab={activeTab} onChange={setActiveTab}>
+							{(similarServiceIds || []).map((service_id) => (
+								<TabPanel
+									name={service_id}
+									title={title[service_id]}
+									key={service_id}
+								>
+									{(listBookingPreferences || []).map((item, i) => (
+										item?.service_id === service_id ? (
+											<BookingPreferenceCard
+												item={item}
+												step0_data={data}
+												key={keysForPreference[i]}
+												similarServiceIds={similarServiceIds}
+												setStep={setStep}
+											/>
+										) : null
+									))}
+
+								</TabPanel>
+							))}
+						</Tabs>
+					)}
 			</div>
 
 			<div className={styles.custom_service_provider_container}>
@@ -58,7 +85,7 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={onCancel}>Cancel</Button>
 
-				<Button themeType="primary" onClick={handleSubmit(() => setStep(1))}>Next</Button>
+				<Button themeType="primary" onClick={handleSubmit(() => setStep(ONE))}>Next</Button>
 			</div>
 
 		</div>

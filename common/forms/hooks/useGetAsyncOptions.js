@@ -1,5 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { merge } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect, useState, useCallback, useRef } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
@@ -11,6 +12,7 @@ function useGetAsyncOptions({
 	labelKey = '',
 	params = {},
 	onOptionsChange = () => {},
+	getModifiedOptions,
 	searchByKey = 'q',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
@@ -21,7 +23,11 @@ function useGetAsyncOptions({
 		method : 'GET',
 		params : merge(params, { filters: { [searchByKey]: query || undefined } }),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || [];
+	let options = data?.list || [];
+
+	if (typeof getModifiedOptions === 'function' && !isEmpty(options)) {
+		options = getModifiedOptions({ options });
+	}
 
 	const optionValues = options.map((item) => item[valueKey]);
 
@@ -54,19 +60,19 @@ function useGetAsyncOptions({
 	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
 			let unorderedHydratedValue = [];
-			const toBeFetched = [];
+			const TO_BE_FETCHED = [];
 			value.forEach((v) => {
 				const singleHydratedValue = storeoptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
-					toBeFetched.push(v);
+					TO_BE_FETCHED.push(v);
 				}
 			});
 			let res;
-			if (toBeFetched.length) {
+			if (TO_BE_FETCHED.length) {
 				res = await triggerSingle({
-					params: merge(params, { filters: { [valueKey]: toBeFetched } }),
+					params: merge(params, { filters: { [valueKey]: TO_BE_FETCHED } }),
 				});
 				storeoptions.push(...res?.data?.list || []);
 			}
@@ -82,13 +88,13 @@ function useGetAsyncOptions({
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
-		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
+		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index];
 
 		try {
 			const res = await triggerSingle({
 				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			return res?.data?.list?.[0] || null;
+			return res?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};

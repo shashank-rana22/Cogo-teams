@@ -1,3 +1,8 @@
+const TIME_BASED_TASK = ['mark_containers_departed',
+	'mark_containers_arrived',
+	'upload_proof_of_delivery',
+	'mark_containers_handed_over'];
+
 const mutateControls = (
 	controls,
 	setValue,
@@ -76,6 +81,39 @@ const mutateControls = (
 					? 'At least one field is required'
 					: undefined),
 			};
+		}
+		if (task.task === 'confirmation_of_booking_with_service_provider') {
+			newControl.dateFormate = 'MM/dd/yyyy HH:mm';
+			newControl.showTimeSelect = true;
+		}
+		if ([...TIME_BASED_TASK, 'mark_rail_cargo_picked_up'].includes(task.task)) {
+			if (control.type === 'datepicker') {
+				newControl.isPreviousDaysAllowed = true;
+				newControl.showTimeSelect = true;
+				newControl.dateFormat = 'MM/dd/yyyy HH:mm';
+			}
+		}
+
+		if (TIME_BASED_TASK.includes(task.task)
+			&& control.type === 'datepicker') {
+			newControl.value = '';
+		}
+		if (task.task === 'confirm_booking_with_customer') {
+			// consignee/consignor will be the substring of control.name
+			if (
+				!(control.name || '').includes('consignee') && !(control.name || '').includes('consignor')) {
+				if (control.type === 'pills') {
+					newControl.options = (control?.options || []).map((option) => ({
+						...option,
+						disabled: true,
+					}));
+				} else if (control.type === 'datepicker') {
+					newControl.disabled = true;
+					newControl.dateFormat = 'MM/dd/yyyy HH:mm';
+				} else {
+					newControl.disabled = true;
+				}
+			}
 		}
 
 		finalControls = [...finalControls, newControl];

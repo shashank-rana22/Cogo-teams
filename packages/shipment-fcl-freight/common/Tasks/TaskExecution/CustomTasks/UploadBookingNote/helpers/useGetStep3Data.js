@@ -22,25 +22,26 @@ const useGetStep3Data = ({
 	onCancel = () => {},
 	task = {},
 	taskListRefetch = () => {},
-	primary_service = {},
+	formattedRate = {},
 }) => {
-	const { trade_type } = primary_service || {};
-
 	let notMainService = false;
 	const SERVICE_IDS = [];
+	let trade_type;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service'
-			&& trade_type === 'import' && serviceObj.trade_type === 'export')
-		) {
+		if ((serviceObj.service_type === 'fcl_freight_service'
+			|| serviceObj.service_type === 'fcl_freight_local_service')
+			&& task.service_type === 'fcl_freight_service') {
 			notMainService = true;
 			SERVICE_IDS.push(serviceObj.id);
+		}
+		if (serviceObj.id === task.service_id) {
+			trade_type = serviceObj?.trade_type;
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (!notMainService) {
+		if (!notMainService && task.service_type === serviceObj.service_type && trade_type === serviceObj?.trade_type) {
 			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
@@ -48,7 +49,7 @@ const useGetStep3Data = ({
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			SERVICE_IDS,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -91,30 +92,43 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-
 	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
-			code     : line_item?.code,
-			currency : line_item?.currency,
-			price    : line_item?.price,
-			quantity : line_item?.quantity,
-			unit     : line_item?.unit,
-			total    : line_item?.total,
-		}));
+		if (Object.keys(formattedRate).includes(service_charge?.service_id)
+		&& (formattedRate?.[service_charge?.service_id]?.line_items || []).length) {
+			DEFAULT_VALUES[service_charge?.service_id] = formattedRate?.[service_charge?.service_id]
+				?.line_items?.map((line_item) => ({
+					code     : line_item?.code,
+					currency : line_item?.currency,
+					price    : line_item?.price,
+					quantity : line_item?.quantity,
+					unit     : line_item?.unit,
+					total    : line_item?.total,
+				}));
+		} else {
+			DEFAULT_VALUES[service_charge?.service_id] = service_charge?.line_items?.map((line_item) => ({
+				code     : line_item?.code,
+				currency : line_item?.currency,
+				price    : line_item?.price,
+				quantity : line_item?.quantity,
+				unit     : line_item?.unit,
+				total    : line_item?.total,
+			}));
+		}
 	});
 
 	const onSubmit = async (values) => {
-		let quotation = {};
+		const QUOTATIONS = [];
+
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 
-			quotation = {
-				id         : key,
-				service_id : (service_charges || []).find((charge) => charge?.id === key)
-					?.service_id,
-				line_items: items.map((line_item) => ({
+			const newQuote = {
+				id: (service_charges || []).find((charge) => charge?.service_id === key)
+					?.id,
+				service_id : key,
+				line_items : items.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',
@@ -123,15 +137,17 @@ const useGetStep3Data = ({
 					unit     : line_item.unit,
 				})),
 			};
+
+			QUOTATIONS.push(newQuote);
 		});
 
-		const checkSum = checkLineItemsSum(quotation);
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ ...quotation });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
 				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
@@ -148,7 +164,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		DEFAULT_VALUES,
+		defaultValues: DEFAULT_VALUES,
 	};
 };
 

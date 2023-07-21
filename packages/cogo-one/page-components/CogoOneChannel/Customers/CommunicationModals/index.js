@@ -1,9 +1,10 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlus } from '@cogoport/icons-react';
+import { IcMPlus, IcMAppPoc } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import useReplyMail from '../../../../hooks/useReplyMail';
 import DialCallModal from '../../DialCallModal';
 import MailModal from '../MailList/MailModal';
@@ -11,10 +12,16 @@ import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
-function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
+function CommunicationModals({
+	mailProps = {},
+	setModalType = () => {},
+	modalType = {},
+	userId = '',
+	viewType = '',
+	setOpenKamContacts = () => {},
+}) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
-	const [attachments, setAttachments] = useState([]);
 
 	const {
 		replyMailApi = () => {},
@@ -76,22 +83,32 @@ function CommunicationModals({ mailProps, setModalType, modalType, userId }) {
 									width={60}
 								/>
 							</div>
+							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.global_contacts && (
+								<div className={cl`${styles.action} ${styles.contacts_icon}`}>
+									<IcMAppPoc
+										onClick={() => setOpenKamContacts(true)}
+										height={25}
+										width={25}
+										fill="#432609"
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<NewWhatsappMessage
+				key={modalType?.type}
 				setModalType={setModalType}
 				modalType={modalType}
+				viewType={viewType}
 			/>
 
 			{!!buttonType && (
 				<MailModal
 					mailProps={mailProps}
 					userId={userId}
-					attachments={attachments}
-					setAttachments={setAttachments}
 					activeMail={activeMail}
 					replyMailApi={replyMailApi}
 					replyLoading={replyLoading}

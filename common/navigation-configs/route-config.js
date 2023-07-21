@@ -1,4 +1,5 @@
 import airRepository from './config/air-repository';
+import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
@@ -6,6 +7,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
+import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -27,11 +29,14 @@ import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
+import locations from './config/location';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
+import printingDesk from './config/printing-desk';
 import referral from './config/referral';
+import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
@@ -60,6 +65,7 @@ import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...locations,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
@@ -110,6 +116,7 @@ const routeConfig = {
 	...chakravyuh,
 	...riskManagement,
 	...awbInventory,
+	...revenueDesk,
 	...shipmentFclCustom,
 	...shipmentFclFreightLocal,
 	...shipmentFtlFreight,
@@ -117,7 +124,10 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...printingDesk,
 	...ftlAdmin,
+	...airlinePluginBooking,
+	...bookingDeskSurface,
 	...serviceDiscovery,
 };
 

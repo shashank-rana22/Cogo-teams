@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -23,13 +24,13 @@ const showRemarksStatus = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
-	status,
+	item = {},
+	setAddRate = () => {},
+	status = {},
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
@@ -88,7 +89,7 @@ function AddRate({
 	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
 
 	const onAddRate = (data) => {
-		const payload = getPayload(data, item, preProps, filters, billToCustomer);
+		const payload = getPayload(data, item, preProps, filters, billToCustomer, whoIsAddingRate);
 
 		if (preProps.api === '/create_shipment_additional_service') {
 			apiTriggerCreate(payload);
@@ -133,8 +134,8 @@ function AddRate({
 			{showRemarksStatus.includes(status?.status) ? (
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
-					&nbsp;
-					{item?.remarks[0]}
+					{' '}
+					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
 

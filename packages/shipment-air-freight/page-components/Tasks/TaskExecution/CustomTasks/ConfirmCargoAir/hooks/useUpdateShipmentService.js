@@ -35,7 +35,7 @@ const useUpdateShipmentService = ({
 		let formatData = {};
 		formatData = {
 			flight_number        : data?.flight_number || null,
-			number_of_stops      : data?.no_of_stops1 || DEFAULT_NUMBER_OF_STOP,
+			number_of_stops      : data?.no_of_stops || DEFAULT_NUMBER_OF_STOP,
 			contact_with_agent   : data?.contact_with_agent,
 			cargo_readiness_date : data?.cargo_ready_date,
 			schedule_arrival     : data?.flight_arrival,
