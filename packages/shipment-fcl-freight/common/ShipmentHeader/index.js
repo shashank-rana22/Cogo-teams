@@ -59,12 +59,14 @@ function ShipmentHeader() {
 		<div className={styles.heading}>
 			<span>CFS Address:</span>
 			<div className={styles.cfs_details}>
-				RSP Tower, Plot No.28-P, Urban Estate, Sector - 44 ,Gurgaon – 122003, Haryana, India
+				NA
 			</div>
-			<IcMCopy
-				onClick={() => handleCopy(primary_service?.cfs_service)}
-				style={STYLE_ICON}
-			/>
+			{primary_service?.cfs_service ? (
+				<IcMCopy
+					onClick={() => handleCopy(primary_service?.cfs_service)}
+					style={STYLE_ICON}
+				/>
+			) : null }
 		</div>
 	);
 

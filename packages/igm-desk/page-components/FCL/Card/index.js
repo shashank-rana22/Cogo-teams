@@ -27,7 +27,7 @@ export default function Card({ item = {}, activeTab = '' }) {
 				<div className={styles.heading}>
 					<span>CFS Address:</span>
 					<span className={styles.cfs_details}>
-						RSP Tower, Plot No.28-P, Urban Estate, Sector - 44 ,Gurgaon – 122003, Haryana, India
+						NA
 					</span>
 				</div>
 			</section>
