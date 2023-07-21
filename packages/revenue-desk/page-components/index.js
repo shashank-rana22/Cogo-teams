@@ -18,6 +18,7 @@ function RevenueDesk() {
 		shipmentList,
 		filters,
 		setFilters,
+		fetchShipments,
 	} = useGetRDShipmentList();
 	return (
 		<div>
@@ -25,6 +26,7 @@ function RevenueDesk() {
 				<DetailPage
 					setShowDetailPage={setShowDetailPage}
 					showDetailPage={showDetailPage}
+					fetchShipments={fetchShipments}
 				/>
 			) : (
 				<div>
@@ -114,6 +116,7 @@ function RevenueDesk() {
 								shipmentList={shipmentList?.list}
 								loading={loading}
 								setShowDetailPage={setShowDetailPage}
+								filters={filters}
 							/>
 						</div>
 					</div>
