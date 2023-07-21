@@ -46,6 +46,8 @@ interface Props {
 	setNonRecurringData?: (obj) => void;
 }
 
+const MAX_LENGTH = 18;
+
 function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () => {} }: Props) {
 	const {
 		periodOfTransaction,
@@ -118,12 +120,12 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, 18) : '-',
+			value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
 		},
 		{
 			title : 'Expense Category',
 			value : expenseCategory
-				? showOverflowingNumber(startCase(expenseCategory), 18)
+				? showOverflowingNumber(startCase(expenseCategory), MAX_LENGTH)
 				: '-',
 		},
 		{
@@ -133,7 +135,7 @@ function NonRecurringSummary({ nonRecurringData = {}, setNonRecurringData = () =
 		{
 			title : 'Branch ',
 			value : branch
-				? showOverflowingNumber(JSON.parse(branch)?.name, 18)
+				? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
 				: '-',
 		},
 	];

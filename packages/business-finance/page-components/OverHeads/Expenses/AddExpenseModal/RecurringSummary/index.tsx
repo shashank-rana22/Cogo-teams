@@ -1,4 +1,5 @@
 import { Placeholder, Stepper } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -72,7 +73,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
+	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
 		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
 		incidentSubType : categoryName,
 		entityId        : entityObject?.id,
@@ -117,10 +118,10 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	}, [stakeholdersData, setExpenseData]);
 
 	useEffect(() => {
-		if (tradePartyData?.length > 0) {
+		if (!isEmpty(tradePartyData)) {
 			setExpenseData((prev: object) => ({
 				...prev,
-				tradeParty: tradePartyData?.[0],
+				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
 			}));
 		}
 	}, [tradePartyData, setExpenseData]);
@@ -131,10 +132,10 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 			const branchData = officeLocations?.filter(
 				(location: any) => JSON.parse(location?.value)?.branchId === branchId,
 			);
-			if (branchData?.length > 0) {
+			if (!isEmpty(branchData)) {
 				setExpenseData((p: object) => ({
 					...p,
-					branch: JSON.parse(branchData[0]?.value || '{}'),
+					branch: JSON.parse(branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}'),
 				}));
 			}
 		}

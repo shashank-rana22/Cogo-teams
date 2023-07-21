@@ -1,7 +1,10 @@
 /* eslint-disable max-len */
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
@@ -234,7 +237,7 @@ function ShowMore({ vendorId }:Props) {
 									background="#FFFAEB"
 								/>
 							</div>
-							{(listData && listData?.list?.length > 0) ? (
+							{(listData && !isEmpty(listData?.list?.length)) ? (
 								<List
 									config={EXPENSE_CONFIG}
 									itemData={listData}
@@ -248,8 +251,8 @@ function ShowMore({ vendorId }:Props) {
 							) : (
 								<div className={styles.no_data}>
 									<div>No data found</div>
-									<img
-										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg"
+									<Image
+										src={GLOBAL_CONSTANTS.image_url.empty_no_data}
 										alt="no data"
 									/>
 								</div>

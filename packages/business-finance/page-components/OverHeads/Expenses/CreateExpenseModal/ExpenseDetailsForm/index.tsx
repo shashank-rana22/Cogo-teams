@@ -1,4 +1,4 @@
-import { startCase, getMonth } from '@cogoport/utils';
+import { startCase, getMonth, isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -112,7 +112,7 @@ function ExpenseDetailsForm({
 
 	useEffect(() => {
 		// calling list_cogo_entities and setting entity options
-		if (entityList?.length > 0) {
+		if (!isEmpty(entityList)) {
 			const ENTITIES = [];
 			(entityList || []).forEach((entity) => {
 				const {
@@ -161,7 +161,7 @@ function ExpenseDetailsForm({
 				&& branch
 				&& agreementNumber
 				&& description
-				&& uploadedInvoice?.length > 0;
+				&& !isEmpty(uploadedInvoice);
 			if (recurringValidated) {
 				setIsFormValidated(true);
 			} else {
@@ -216,7 +216,7 @@ function ExpenseDetailsForm({
 			(service) => service?.cogoport_office_id,
 		);
 
-		if (branchIds?.length > 0) {
+		if (!isEmpty(branchIds)) {
 			const BRANCHES = [];
 
 			branchIds.forEach((id) => {

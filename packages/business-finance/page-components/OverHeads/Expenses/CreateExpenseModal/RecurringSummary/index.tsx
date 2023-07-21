@@ -49,6 +49,8 @@ interface Props {
 	setRecurringData?: (p: any) => void;
 }
 
+const MAX_LENGTH = 18;
+
 function RecurringSummary({
 	recurringData = {},
 	setRecurringData = () => {},
@@ -114,7 +116,7 @@ function RecurringSummary({
 	}, [stakeholdersData, setRecurringData]);
 
 	useEffect(() => {
-		if (tradePartyData?.length > 0) {
+		if (!isEmpty(tradePartyData)) {
 			setRecurringData((prev: object) => ({
 				...prev,
 				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
@@ -125,7 +127,7 @@ function RecurringSummary({
 	const summaryDataFirst = [
 		{
 			title : 'Vendor Name',
-			value : vendorName ? showOverflowingNumber(vendorName, 18) : '-',
+			value : vendorName ? showOverflowingNumber(vendorName, MAX_LENGTH) : '-',
 		},
 		{
 			title : 'Expense Category',
@@ -138,7 +140,7 @@ function RecurringSummary({
 		{
 			title : 'Branch ',
 			value : branch
-				? showOverflowingNumber(JSON.parse(branch)?.name, 18)
+				? showOverflowingNumber(JSON.parse(branch)?.name, MAX_LENGTH)
 				: '-',
 		},
 	];

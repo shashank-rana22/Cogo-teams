@@ -1,5 +1,7 @@
 import { useFieldArray, useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
@@ -10,6 +12,8 @@ import styles from './styles.module.css';
 import TotalAfterTax from './TotalAfterTax';
 import TotalColumn from './TotalColumn';
 
+const PERCENTAGE = 100;
+
 function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
 	const { lineItemsList, loading } = useGetListItemTaxes({ formData });
@@ -17,7 +21,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const { control, watch, setValue } = useForm(
 		{
 			defaultValues: {
-				line_items: lineItemsListData.length > 0 ? lineItemsListData : [
+				line_items: !isEmpty(lineItemsListData) ? lineItemsListData : [
 					{ new: true, price: 0, quantity: 0 },
 				],
 			},
@@ -31,7 +35,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 
 	useEffect(() => {
 		const TAX_LIST = [];
-		if (lineItemsList?.length > 0) {
+		if (!isEmpty(lineItemsList)) {
 			lineItemsList.forEach((item) => {
 				TAX_LIST.push({
 					label : `${item?.taxPercent}%-${item?.itemName}`,
@@ -52,7 +56,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const stringifiedControlledFields = JSON.stringify(controlledFields);
 
 	useEffect(() => {
-		if (watchFieldArray?.length > 0) {
+		if (!isEmpty(watchFieldArray)) {
 			setFormData((prev:object) => ({ ...prev, lineItemsList: watchFieldArray }));
 		}
 		const fieldsLength = (controlledFields).length || 0;
@@ -65,14 +69,18 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 			if (tax) {
 				const taxPercent = JSON.parse(tax || '')?.taxPercent;
 				if (beforeTax && +taxPercent >= 0) {
-					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / 100));
+					const amountAfterTax = beforeTax + (beforeTax * (taxPercent / PERCENTAGE));
 					setValue(`line_items.${index}.amount_after_tax`, +amountAfterTax);
 					const tds = +watch(`line_items.${index}.tds`);
 					if (geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds) {
 						setValue(`line_items.${index}.payable_amount`, +amountAfterTax);
-					} else if (!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds && tds >= 0) {
-						setValue(`line_items.${index}.payable_amount`, +amountAfterTax - (beforeTax * tds) / 100);
-						setValue(`line_items.${index}.tdsAmount`, (beforeTax * tds) / 100);
+					} else if (!geo.navigations.over_heads.expense_non_recurring_upload_invoice_tds
+						&& tds >= GLOBAL_CONSTANTS.zeroth_index) {
+						setValue(
+							`line_items.${index}.payable_amount`,
+							+amountAfterTax - (beforeTax * tds) / PERCENTAGE,
+						);
+						setValue(`line_items.${index}.tdsAmount`, (beforeTax * tds) / PERCENTAGE);
 					}
 				}
 			}

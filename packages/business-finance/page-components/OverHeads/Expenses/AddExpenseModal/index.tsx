@@ -1,4 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import { SummaryInterface } from '../../commons/Interfaces';
@@ -39,17 +41,17 @@ function AddExpenseModal({
 	const { vendorList } = useGetVendor(vendorId);
 
 	useEffect(() => {
-		if (vendorList?.length > 0) {
-			setExpenseData((p) => ({ ...p, vendorData: vendorList[0] }));
+		if (!isEmpty(vendorList)) {
+			setExpenseData((p) => ({ ...p, vendorData: vendorList[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
 	}, [vendorList]);
 
 	useEffect(() => {
-		if (entityList?.length > 0) {
-			setExpenseData((p) => ({ ...p, entityObject: entityList[0] }));
+		if (!isEmpty(entityList)) {
+			setExpenseData((p) => ({ ...p, entityObject: entityList[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
-		if (tradePartyData?.length > 0) {
-			setExpenseData((p) => ({ ...p, tradeParty: tradePartyData[0] }));
+		if (!isEmpty(tradePartyData)) {
+			setExpenseData((p) => ({ ...p, tradeParty: tradePartyData[GLOBAL_CONSTANTS.zeroth_index] }));
 		}
 	}, [entityList, tradePartyData]);
 

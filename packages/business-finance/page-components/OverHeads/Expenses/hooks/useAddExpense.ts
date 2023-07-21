@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getPayload from '../utils/getPayload';
@@ -78,8 +80,8 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	} = entityObject || {};
 
 	useEffect(() => {
-		if (addresses?.length > 0) {
-			const singleAddress = addresses?.[0];
+		if (!isEmpty(addresses)) {
+			const singleAddress = addresses?.[GLOBAL_CONSTANTS.zeroth_index];
 			if (singleAddress) {
 				setAddressData({
 					pincode     : singleAddress?.pin_code,
@@ -125,7 +127,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		account_number: accountNumber,
 		id: bankId,
 		vendor_id: collectionPartyId,
-	} = bankDetails?.[0] || {};
+	} = bankDetails?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const payload = getPayload({
 		vendorID,
