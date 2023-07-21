@@ -85,8 +85,7 @@ function Header({
 
 				<div
 					className={styles.icon_wrapper}
-					role="button"
-					tabIndex={0}
+					role="presentation"
 					onClick={() => setOpen(!open)}
 					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
