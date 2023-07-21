@@ -61,7 +61,7 @@ function ShipmentHeader() {
 			<div className={styles.cfs_details}>
 				NA
 			</div>
-			{primary_service?.cfs_service ? (
+			{showPocDetails && primary_service?.cfs_service ? (
 				<IcMCopy
 					onClick={() => handleCopy(primary_service?.cfs_service)}
 					style={STYLE_ICON}
