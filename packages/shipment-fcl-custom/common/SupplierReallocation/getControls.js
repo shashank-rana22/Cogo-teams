@@ -15,8 +15,8 @@ export default function getControls({
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
-	const serviceType = serviceObj?.service_type.split('_', SPLIT_SERVICE_TEXT).join('_');
-	const shipmentType = shipment_type.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const serviceType = serviceObj?.service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const shipmentType = shipment_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
 	let services = [];
 
 	if (primary_service?.service_type !== service_type) {
