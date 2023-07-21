@@ -23,9 +23,8 @@ export default function getControls({
 	if (primary_service?.service_type !== service_type) {
 		services = [shipmentType, serviceType];
 	}
-	if (serviceObj?.service_type === 'trailer_freight_service'
-	|| serviceObj?.service_type === 'haulage_freight_service'
-	|| serviceObj?.service_type === 'ftl_freight_service') {
+	const validServiceTypes = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
+	if (validServiceTypes.includes(serviceObj?.service_type)) {
 		services = ['ftl_freight', 'haulage_freight'];
 	}
 

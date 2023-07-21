@@ -32,9 +32,8 @@ export default function getControls({
 			services = [shipmentType, 'fcl_freight_local_agent'];
 		}
 	}
-	if (serviceObj?.service_type === 'trailer_freight_service'
-	|| serviceObj?.service_type === 'haulage_freight_service'
-	|| serviceObj?.service_type === 'ftl_freight_service') {
+	const validServiceTypes = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
+	if (validServiceTypes.includes(serviceObj?.service_type)) {
 		services = ['ftl_freight', 'haulage_freight'];
 	}
 
