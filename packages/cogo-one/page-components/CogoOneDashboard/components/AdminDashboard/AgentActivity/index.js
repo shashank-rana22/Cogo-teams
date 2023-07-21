@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 const TAB_MAPPING = {
 	active   : styles.online,
 	inactive : styles.offline,
+	break    : styles.break,
 };
 
 function AgentActivity({ activeTab = '', setActiveTab = () => {} }) {

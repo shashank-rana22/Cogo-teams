@@ -1,53 +1,46 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format, isEmpty } from '@cogoport/utils';
-
-import { emptyChartData } from './empty-chart-data';
-
-const DATE_INDEX = 1;
+import { format } from '@cogoport/utils';
 
 const FORMAT_TYPE = {
 	day: {
-		label: 'HH',
+		label: GLOBAL_CONSTANTS.formats.time['hh aaa'],
 	},
 	week: {
-		label: 'dd',
+		label: GLOBAL_CONSTANTS.formats.date['dd MMM'],
 	},
 	month: {
-		label: 'dd',
+		label: GLOBAL_CONSTANTS.formats.date['dd MMM'],
 	},
 };
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const chartData = ({ cogoOneDashboardGraph = {}, timeline }) => {
-	const data = isEmpty(cogoOneDashboardGraph)
-		? emptyChartData[timeline]
-		: cogoOneDashboardGraph;
-	const { message_graph_data = {}, call_graph_data = {} }	= data || {};
-
-	const messageChatKeys = Object.keys(message_graph_data);
-	const callChatKeys = Object.keys(call_graph_data);
-
+const chartData = ({ graph = {}, timeline }) => {
 	function getDateValue(date) {
-		return Number(format(date, FORMAT_TYPE[timeline]?.label));
+		return format(date, FORMAT_TYPE[timeline]?.label);
 	}
 
-	const messageData = messageChatKeys.map((key, index) => {
-		const dates = key.split(' to ');
+	const X_AXIS_LABEL_MAPPING = ({ start, end, index }) => ({
+		day   : `${getDateValue(start)}-${getDateValue(end)}`,
+		week  : daysOfWeek[index],
+		month : `${getDateValue(start)}-${getDateValue(end)}`,
+	});
+
+	const messageData = (Object.keys(graph) || []).map((key, index) => {
+		const [start, end] = JSON.parse(key);
+
 		return {
-			x: timeline === 'week'
-				? daysOfWeek[index]
-				: `${getDateValue(dates[GLOBAL_CONSTANTS.zeroth_index])}-${getDateValue(dates[DATE_INDEX])}`,
-			y: message_graph_data[key],
+			x : X_AXIS_LABEL_MAPPING({ start, end, index })[timeline],
+			y : graph[key]?.msg_customers,
 		};
 	});
-	const callData = callChatKeys.map((key, index) => {
-		const dates = key.split(' to ');
+
+	const callData = (Object.keys(graph) || []).map((key, index) => {
+		const [start, end] = JSON.parse(key);
+
 		return {
-			x: timeline === 'week'
-				? daysOfWeek[index]
-				: `${getDateValue(dates[GLOBAL_CONSTANTS.zeroth_index])}-${getDateValue(dates[DATE_INDEX])}`,
-			y: call_graph_data[key],
+			x : X_AXIS_LABEL_MAPPING({ start, end, index })[timeline],
+			y : graph[key]?.call_customers,
 		};
 	});
 

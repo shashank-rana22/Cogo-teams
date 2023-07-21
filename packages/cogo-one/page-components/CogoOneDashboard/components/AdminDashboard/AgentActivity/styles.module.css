@@ -24,7 +24,7 @@
 .agent_nos_box {
 	display: flex;
 	flex-direction: column;
-	width: 12%;
+	width: fit-content;
 	padding: 0 6px 0 8px;
 	margin-right: 10px;
 	cursor: pointer;
@@ -133,6 +133,10 @@
 
 .offline {
 	background: #828282;
+}
+
+.break {
+	background: #ee3425;
 }
 
 .profile_box_right {

@@ -1,11 +1,14 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import chartData from '../../configurations/line-chart-data';
 import { LABLE_TYPE } from '../../constants';
 
+import Header from './Header';
 import LineChartLoader from './LoaderLineChart';
 import styles from './styles.module.css';
 
@@ -14,7 +17,7 @@ function LineChart({
 	timeline = '',
 	loading = false,
 }) {
-	const GraphData = chartData({ graph, timeline }) || [];
+	const data = chartData({ graph, timeline }) || [];
 
 	function CustomToolTip({ point = {} }) {
 		return (
@@ -37,38 +40,27 @@ function LineChart({
 		);
 	}
 
+	if (loading) {
+		return <LineChartLoader />;
+	}
+
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.chart_legends_box}>
-				<div className={styles.legend}>
-					<div className={styles.legend_left_box}>
-						<div className={cl`${styles.color_dot} ${styles.grey_color}`} />
-						<div className={styles.legend_text}>On Message</div>
-					</div>
-					<div className={styles.users_nos}>
-						{graph?.on_message_users || GLOBAL_CONSTANTS.zeroth_index}
-						<span>Users</span>
-					</div>
-				</div>
-				<div className={styles.legend}>
-					<div className={styles.legend_left_box}>
-						<div className={cl`${styles.color_dot} ${styles.orange_color}`} />
-						<div className={styles.legend_text}>On Call</div>
-					</div>
-					<div className={styles.users_nos}>
-						{graph?.on_call_users || GLOBAL_CONSTANTS.zeroth_index}
-						<span>Users</span>
-					</div>
-				</div>
-			</div>
+			<Header graph={graph} />
 
-			{loading ? (
-				<LineChartLoader />
+			{isEmpty(data) ? (
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
+					alt="empty"
+					width={200}
+					height={200}
+					className={styles.graph_empty}
+				/>
 			) : (
 				<div className={styles.chart_container}>
 					<ResponsiveLine
-						data={GraphData}
-						margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+						data={data}
+						margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
 						xScale={{ type: 'point' }}
 						yFormat=" >-.2f"
 						axisTop={null}

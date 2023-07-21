@@ -83,12 +83,7 @@
 }
 
 .rank {
-	width: fit-content;
-	padding: 3px 9px;
-	margin-right: 10px;
-	font-size: 10px;
-	font-weight: 600;
-	color: #fff;
-	background: #ee3425;
-	border-radius: 7px;
+	margin: 10px;
+	font-size: 16px;
+	color: #000;
 }

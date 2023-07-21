@@ -34,7 +34,9 @@ function PerformanceTab() {
 
 							return (
 								<div className={styles.performance_list} key={id}>
-									<div className={styles.rank}>{index + INCREASE_RANKING}</div>
+									<div className={styles.rank}>
+										{index + INCREASE_RANKING}
+									</div>
 									<div className={styles.picture_name_kam_box}>
 										<div className={styles.agent_picture}>
 											<Image
@@ -45,8 +47,8 @@ function PerformanceTab() {
 											/>
 										</div>
 										<div className={styles.details}>
-											<div className={styles.agent_name}>{startCase(name) || 'gerger'}</div>
-											<div className={styles.email_content}>{email || 'fdgdfjkgndf'}</div>
+											<div className={styles.agent_name}>{startCase(name)}</div>
+											<div className={styles.email_content}>{email}</div>
 										</div>
 									</div>
 								</div>

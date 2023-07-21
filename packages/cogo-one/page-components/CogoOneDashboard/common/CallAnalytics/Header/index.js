@@ -19,13 +19,15 @@ function Header({ callsAnalytics = {}, calls = [], loading = false }) {
 							: (
 								<div className={styles.time_durations_header}>
 									<span className={styles.time_durations_value}>
-										{(callsAnalytics[key] || GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE
-											? ((callsAnalytics[key]
+										{(callsAnalytics[GLOBAL_CONSTANTS.zeroth_index]?.[key]
+										|| GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE
+											? ((callsAnalytics[GLOBAL_CONSTANTS.zeroth_index]?.[key]
 													|| GLOBAL_CONSTANTS.zeroth_index) / ONE_MINUTE).toFixed(ROUND_UP)
-											: (callsAnalytics[key] || GLOBAL_CONSTANTS.zeroth_index)}
+											: (callsAnalytics[GLOBAL_CONSTANTS.zeroth_index]?.[key]
+											|| GLOBAL_CONSTANTS.zeroth_index)}
 									</span>
 									<span>
-										{(callsAnalytics[key]
+										{(callsAnalytics[GLOBAL_CONSTANTS.zeroth_index]?.[key]
 											|| GLOBAL_CONSTANTS.zeroth_index) >= ONE_MINUTE ? 'hr' : 'min'}
 									</span>
 								</div>

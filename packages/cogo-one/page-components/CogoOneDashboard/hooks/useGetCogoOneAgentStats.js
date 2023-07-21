@@ -3,8 +3,14 @@ import { useEffect, useCallback } from 'react';
 
 import DATE_MAPPING from '../utils/formatPayload';
 
+const DURATION_TYPE = {
+	day   : 'hours',
+	week  : 'days',
+	month : 'weeks',
+};
+
 const getParams = ({ timeline, startDate, endDate }) => ({
-	duration_type : timeline,
+	duration_type : DURATION_TYPE[timeline],
 	start_date    : !startDate
 		? new Date(DATE_MAPPING[timeline].startDate) : new Date(startDate),
 	end_date: !endDate

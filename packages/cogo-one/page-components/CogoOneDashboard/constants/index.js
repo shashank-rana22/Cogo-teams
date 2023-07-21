@@ -78,6 +78,11 @@ export const STATUS_WISE_AGENTS_MAPPING = [
 		name  : 'inactive',
 		total : 0,
 	},
+	{
+		label : 'On Break Agents',
+		name  : 'break',
+		total : 0,
+	},
 ];
 
 export const ESCALATION_ACTIVITY = [
@@ -139,7 +144,7 @@ export const LABLE_TYPE = {
 		label: 'Day',
 	},
 	month: {
-		label: 'Week',
+		label: 'Month',
 	},
 };
 
