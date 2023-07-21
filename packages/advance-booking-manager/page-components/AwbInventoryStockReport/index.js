@@ -32,7 +32,6 @@ function AwbInventoryStockReport({
 
 			<header className={styles.header_container}>
 				Inventory Stock
-				{/* <div className={styles.heading}>Inventory Stock</div> */}
 			</header>
 
 			<Layout

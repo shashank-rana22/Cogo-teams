@@ -60,18 +60,10 @@ function AwbNumber({
 						<Tooltip
 							content={(
 								<div className={styles.tooltip_container}>
-									<div>
-										{`Clearance Date: ${singleItem.customClearanceDate || '-'},`}
-									</div>
-									<div>
-										{`Booking Date: ${singleItem.bookingDate || '-'},`}
-									</div>
-									<div>
-										{`Commodity: ${singleItem?.commodityDetails?.commodity || '-'},`}
-									</div>
-									<div>
-										{`Chargeable Weight: ${singleItem.chargeableWeight || '-'}`}
-									</div>
+									{`Clearance Date: ${singleItem.customClearanceDate || '-'},\n`}
+									{`Booking Date: ${singleItem.bookingDate || '-'},\n`}
+									{`Commodity: ${singleItem?.commodityDetails?.commodity || '-'},\n`}
+									{`Chargeable Weight: ${singleItem.chargeableWeight || '-'}\n`}
 								</div>
 							)}
 							placement="top"
