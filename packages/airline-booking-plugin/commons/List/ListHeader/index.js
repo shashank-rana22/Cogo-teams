@@ -12,7 +12,7 @@ function Header({ fields = [] }) {
 			<div className={styles.header_row}>
 				{(fields || []).map((field) => (
 					<div
-						className={styles.col}
+						className={`${styles.col}`}
 						style={{ '--span': field.span || DEFAULT_SPAN }}
 						key={field.key}
 					>
