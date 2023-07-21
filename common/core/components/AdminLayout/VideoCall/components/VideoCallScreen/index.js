@@ -1,12 +1,14 @@
 import { Avatar, cl } from '@cogoport/components';
 import { IcMMinus } from '@cogoport/icons-react';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import useVideocallOptions from '../../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
 import VideoCallOptions from './VideoCallOptions';
 import VideoCallTimer from './VideoCallTimer';
+
+const INIT_TIME_ZERO = 0;
 
 function VideoCallScreen({
 	options = {},
@@ -16,6 +18,8 @@ function VideoCallScreen({
 	callDetails = {},
 	firestore = {},
 }, ref) {
+	const [time, setTime] = useState(INIT_TIME_ZERO);
+
 	const { calling_type, peer_details, my_details, calling_details = {} } = callDetails || {};
 	const {
 		my_details: room_my_details = {},
@@ -57,7 +61,7 @@ function VideoCallScreen({
 				onClick={() => setOptions((prev) => ({ ...prev, isMinimize: false }))}
 			>
 				<div className={styles.timer}>
-					<VideoCallTimer callingDetails={calling_details} />
+					<VideoCallTimer callingDetails={calling_details} time={time} setTime={setTime} />
 				</div>
 				<div className={styles.calling_options}>
 					<VideoCallOptions
@@ -105,7 +109,7 @@ function VideoCallScreen({
 					{streams.peer_stream ? (
 						<div className={styles.call_text}>
 							On Call
-							<VideoCallTimer callingDetails={calling_details} />
+							<VideoCallTimer callingDetails={calling_details} time={time} setTime={setTime} />
 						</div>
 					) : (
 						<div className={styles.call_text}>

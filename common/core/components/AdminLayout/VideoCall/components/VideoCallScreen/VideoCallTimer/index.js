@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -7,11 +7,9 @@ const TIMER_SLICE = -2;
 const TIME_SEC = 60;
 const MILI_SEC = 1000;
 const MIN_IN_MILI_SEC = 60000;
-const INIT_TIME_ZERO = 0;
 
-function VideoCallTimer({ callingDetails = {} }) {
+function VideoCallTimer({ callingDetails = {}, time = 0, setTime = () => {} }) {
 	const { call_status = '' } = callingDetails || {};
-	const [time, setTime] = useState(INIT_TIME_ZERO);
 
 	useEffect(() => {
 		let interval = null;
@@ -24,7 +22,7 @@ function VideoCallTimer({ callingDetails = {} }) {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [call_status]);
+	}, [call_status, setTime]);
 
 	return (
 		<div className={styles.stop_watch}>
