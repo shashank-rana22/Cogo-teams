@@ -23,6 +23,7 @@ function InputEmployeeManualTarget({ item, data, selectCycle, employeeKraDetails
 			/>
 
 			<Button
+				themeType="accent"
 				size="sm"
 				style={{ marginLeft: '12px' }}
 				loading={updateLoading}
