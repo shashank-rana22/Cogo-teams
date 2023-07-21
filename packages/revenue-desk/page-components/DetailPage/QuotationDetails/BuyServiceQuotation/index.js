@@ -105,7 +105,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 						itemData?.shipment_type === 'fcl_freight' ? (
 							<div className={styles.text1}>
 								<div style={{ marginLeft: '5px', display: 'flex' }}>
-									{!data?.net_pre_tax_total
+									{loading
 										? <Placeholder width="150px" height="25px" />
 										: formatAmount({
 											amount: Number(data?.net_pre_tax_total)
@@ -119,7 +119,7 @@ function BuyServiceQuotation({ data, loading, profitPercentage, priceData, itemD
 										})}
 									/Contr.
 									<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
-									{!data?.net_pre_tax_total
+									{loading
 										? <Placeholder width="150px" height="25px" />
 										: formatAmount({
 											amount: (Number(data?.net_pre_tax_total)

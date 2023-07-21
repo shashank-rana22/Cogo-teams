@@ -20,7 +20,7 @@ import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
 const IMAGE_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png';
-function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
+function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipments }) {
 	const [isPillSelected, setIsPillSelected] = useState(false);
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
@@ -39,7 +39,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					<div
 						className={styles.heading}
 						role="presentation"
-						onClick={() => setShowDetailPage(null)}
+						onClick={() => { setShowDetailPage(null); fetchShipments(); }}
 					>
 						<IcMArrowBack height="25px" width="40px" />
 					</div>
