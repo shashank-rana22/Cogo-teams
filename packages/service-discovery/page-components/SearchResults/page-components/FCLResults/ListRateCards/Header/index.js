@@ -32,9 +32,7 @@ function Header({
 					filters={filters}
 					setFilters={setFilters}
 				/>
-
 			</div>
-
 		</div>
 
 	);

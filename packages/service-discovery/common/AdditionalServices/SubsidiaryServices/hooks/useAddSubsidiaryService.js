@@ -8,6 +8,7 @@ const useAddSubsidiaryService = ({
 	refetch = () => [],
 	data = {},
 	checkout_id = '',
+	rate_card_id = '',
 }) => {
 	const URL = data?.checkout_id || checkout_id ? '/create_checkout_service' : '/add_spot_search_service';
 
@@ -45,15 +46,16 @@ const useAddSubsidiaryService = ({
 
 		try {
 			let payload = {};
-			if (!data?.checkout_id || checkout_id) {
+			if (!data?.checkout_id && !checkout_id) {
 				payload = {
 					spot_search_id      : data?.spot_search_id,
+					rate_card_id,
 					service             : 'subsidiary',
 					subsidiary_services : subsidiaryServicesArr,
 				};
 			} else {
 				payload = {
-					spot_search_id                 : data?.checkout_id,
+					id                             : data?.checkout_id || checkout_id,
 					service                        : 'subsidiary',
 					subsidiary_services_attributes : subsidiaryServicesArr,
 				};

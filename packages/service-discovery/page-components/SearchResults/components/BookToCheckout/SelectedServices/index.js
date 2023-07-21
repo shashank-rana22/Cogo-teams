@@ -5,19 +5,22 @@ import ServiceItem from './ServiceItem';
 import PrimaryService from './ServiceItem/primaryService';
 import styles from './styles.module.css';
 
-const SERVICES_CANNOT_BE_REMOVED = ['origin_fcl_freight_local'];
-
 function SelectedServices({ rateDetails = {}, details = {} }) {
 	const { service_rates = [] } = rateDetails || {};
 
-	const { service_details = {}, service_type = '' } = details || {};
+	console.log('rateDetails', rateDetails);
 
-	const primaryService = Object.values(service_details).find((service) => service.service_type === service_type);
+	const { service_details = {}, service_type = '', trade_type = '' } = details || {};
+
+	const primaryServiceData = Object.values(service_details).find((service) => service.service_type === service_type);
 
 	const { selectedServices, servicesMapping } = getMapping({
-		primaryService,
-		otherServices: service_details,
+		primaryService : primaryServiceData,
+		otherServices  : service_details,
 	});
+
+	const SERVICE_CANNOT_BE_REMOVED = trade_type === 'export'
+		? 'origin_fcl_freight_local' : 'destination_fcl_freight_local';
 
 	const [addedServices, setAddedServices] = useState(selectedServices);
 
@@ -45,7 +48,7 @@ function SelectedServices({ rateDetails = {}, details = {} }) {
 						addedServices={addedServices}
 						setAddedServices={setAddedServices}
 						service_rates={service_rates}
-						SERVICES_CANNOT_BE_REMOVED={SERVICES_CANNOT_BE_REMOVED}
+						SERVICE_CANNOT_BE_REMOVED={SERVICE_CANNOT_BE_REMOVED}
 					/>
 				);
 			})}

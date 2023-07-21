@@ -20,6 +20,7 @@ function ServiceItem({
 	refetch = () => {},
 	disabled = false,
 	setIsDisabled = () => {},
+	rate_card_id = '',
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDelete, setShowDelete] = useState(false);
@@ -31,6 +32,7 @@ function ServiceItem({
 		possible_subsidiary_services,
 		data,
 		refetch,
+		rate_card_id,
 	});
 
 	const { loading: deleteLoading, handleDeleteService } = useDeleteSubsidiaryService({

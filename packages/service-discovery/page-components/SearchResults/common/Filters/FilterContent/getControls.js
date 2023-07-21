@@ -9,12 +9,26 @@ export const MAIN_CONTROLS_MAPPING = {
 	fcl_freight: {
 		label         : 'Container Details',
 		mainControls  : fclControls,
-		extraControls : ['detention', 'operator', 'readiness_date', 'rate_type', 'payment_type', 'offers'],
+		extraControls : [
+			'shipping_line_id',
+			'detention_demurrage',
+			'source',
+			'shipment_type',
+			'payment_term',
+			'offers',
+		],
 	},
 	lcl_freight: {
 		label         : 'Package Details',
 		mainControls  : lclControls,
-		extraControls : ['operator', 'readiness_date', 'rate_type', 'payment_type', 'offers'],
+		extraControls : [
+			'shipping_line_id',
+			'detention_demurrage',
+			'source',
+			'shipment_type',
+			'payment_term',
+			'offers',
+		],
 	},
 	air_freight: {
 		label         : 'Container Details',

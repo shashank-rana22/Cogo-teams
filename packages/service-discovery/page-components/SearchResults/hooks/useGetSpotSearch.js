@@ -7,9 +7,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 const useGetSpotSearch = () => {
 	const { general: { query = {} } } = useSelector((state) => state);
-	const { spot_search_id = '' } = query;
+	const { spot_search_id = '', rate_card_id } = query;
 
-	const [screen, setScreen] = useState('listRateCard');
+	const [screen, setScreen] = useState(rate_card_id ? 'selectedCard' : 'listRateCard');
 	const [selectedCard, setSelectedCard] = useState({});
 	const [filters, setFilters] = useState({
 		page             : 1,
@@ -22,18 +22,28 @@ const useGetSpotSearch = () => {
 		url    : '/list_spot_search_rate_cards',
 	}, { manual: true });
 
-	const getSearch = useCallback(async ({ firstScreen = 'listRateCard' }) => {
+	const getSearch = useCallback(async () => {
+		const { page } = filters;
+		delete filters.page;
+
+		let finalFilters = {};
+
+		Object.keys(filters).forEach((key) => {
+			finalFilters = {
+				...finalFilters,
+				[key]: filters[key] || undefined,
+			};
+		});
+
 		try {
 			await trigger({
 				params: {
 					spot_search_id,
-					page       : filters.page,
+					page,
 					page_limit : 10,
-					filters    : { ...filters },
+					filters    : { ...finalFilters },
 				},
 			});
-
-			setScreen(firstScreen);
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
@@ -42,8 +52,12 @@ const useGetSpotSearch = () => {
 	}, [filters, spot_search_id, trigger]);
 
 	useEffect(() => {
-		getSearch({ firstScreen: 'listRateCard' });
+		getSearch();
 	}, [getSearch, filters]);
+
+	useEffect(() => {
+		setScreen(rate_card_id ? 'selectedCard' : 'listRateCard');
+	}, [rate_card_id]);
 
 	const refetch = async ({ screenObj = {} } = {}) => {
 		try {
@@ -52,7 +66,9 @@ const useGetSpotSearch = () => {
 					spot_search_id,
 					page       : filters.page,
 					page_limit : 100,
-					filters    : { ...filters },
+					filters    : {
+						...filters.reduce((obj, key) => ({ ...obj, [key]: filters[key] || undefined }), {}),
+					},
 				},
 			});
 

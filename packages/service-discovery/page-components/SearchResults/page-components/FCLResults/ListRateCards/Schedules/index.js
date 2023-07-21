@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useGetWeeklySchedules from '../../../../hooks/useGetWeeklySchedules';
@@ -29,7 +30,9 @@ function Schedules({
 	useEffect(() => {
 		const alreadyApplied = isAlreadyApplied(filters, schedules);
 
-		setSelectedWeek(alreadyApplied || {});
+		if (alreadyApplied && !isEmpty(alreadyApplied)) {
+			setSelectedWeek(alreadyApplied || {});
+		}
 	}, [filters, schedules]);
 
 	return (

@@ -63,3 +63,9 @@
 		max-width: 200px; /* For larger screens, set a maximum width of 200px */
 	}
 }
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

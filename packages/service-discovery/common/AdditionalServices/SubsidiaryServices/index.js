@@ -16,6 +16,7 @@ function SubsidiaryServices({
 	possible_subsidiary_services = [],
 	data = {},
 	refetch = () => {},
+	rate_card_id = '',
 	...rest
 }) {
 	const [searchValue, setSearchValue] = useState('');
@@ -129,6 +130,7 @@ function SubsidiaryServices({
 							refetch={refetch}
 							setIsDisabled={setIsDisabled}
 							disabled={disabled && item.value !== disabled}
+							rate_card_id={rate_card_id}
 						/>
 					))}
 				</div>

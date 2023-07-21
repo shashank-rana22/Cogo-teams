@@ -6,6 +6,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ONE_VALUE = 1;
+
 function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {} }) {
 	const { page, page_limit, total_count } = paginationProps;
 
@@ -15,7 +17,7 @@ function Footer({ paginationProps = {}, selectedWeek = {}, setFilters = () => {}
 				<div className={styles.rates_count}>
 					{selectedWeek?.count}
 					{' '}
-					Options available
+					{selectedWeek?.count > ONE_VALUE ? 'Options available' : 'Option available'}
 					{'  '}
 					<span>
 						between

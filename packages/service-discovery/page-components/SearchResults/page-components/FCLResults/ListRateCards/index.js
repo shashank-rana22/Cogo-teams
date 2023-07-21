@@ -92,7 +92,7 @@ function ListRateCards({
 	return (
 		<div className={styles.container}>
 			<HeaderTop
-				details={detail}
+				detail={detail}
 				filters={filters}
 				setFilters={setFilters}
 				total_count={paginationProps?.total_count}

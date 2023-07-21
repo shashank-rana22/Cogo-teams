@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+// import { IcMFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import FilterModal from './FilterModal';
@@ -6,6 +7,7 @@ import styles from './styles.module.css';
 
 function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
+	// const [filtersApplied, setFiltersApplied] = useState(false);
 
 	return (
 		<>
@@ -24,6 +26,7 @@ function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 					style={{ marginRight: 12 }}
 				/>
 				Filters
+				{/* {filtersApplied && <IcMFtick width={20} height={20} fill="#ee3425" />} */}
 			</Button>
 
 			{showFilterModal ? (
@@ -34,6 +37,7 @@ function Filters({ data = {}, filters = {}, setFilters = () => {} }) {
 					filters={filters}
 					setFilters={setFilters}
 					showFiltersOnly
+					// setFiltersApplied={setFiltersApplied}
 				/>
 			) : null}
 		</>

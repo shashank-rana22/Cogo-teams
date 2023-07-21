@@ -59,3 +59,8 @@
 	color: #ee3425;
 	cursor: pointer;
 }
+
+.rate_found {
+	font-size: 14px;
+	font-weight: 600;
+}

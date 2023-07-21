@@ -5,11 +5,14 @@ const getSearchResultsPayload = ({
 	additionalFormInfo,
 	detail,
 	service_name = '',
+	rateCardData = {},
 }) => {
 	const {
 		destination_cargo_handling_type = '',
 		origin_cargo_handling_type = '',
 	} = additionalFormInfo;
+
+	const rate_card_id = rateCardData?.id;
 
 	const tradeType = service_name.includes('export') ? 'export' : 'import';
 
@@ -79,6 +82,7 @@ const getSearchResultsPayload = ({
 	});
 
 	return {
+		rate_card_id,
 		spot_search_id,
 		service                          : finalServiceName,
 		[`${finalServiceName}_services`] : serviceWiseValues,

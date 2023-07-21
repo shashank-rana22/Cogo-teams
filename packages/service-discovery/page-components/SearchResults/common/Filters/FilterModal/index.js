@@ -41,6 +41,7 @@ function FilterModal({
 	setShow = () => {},
 	filters = {},
 	setFilters = () => {},
+	setFiltersApplied = () => {},
 	showLoadControlsOnly = false,
 	showFiltersOnly = false,
 }) {
@@ -106,6 +107,7 @@ function FilterModal({
 		}
 
 		setFilters({ ...filters, ...filterObj });
+		setFiltersApplied(true);
 		setShow(false);
 	};
 
