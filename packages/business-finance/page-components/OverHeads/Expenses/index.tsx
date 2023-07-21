@@ -154,27 +154,31 @@ function ExpenseComponent() {
 				)}
 			</div>
 			<div className={styles.right_container}>
-				<Input
-					size="md"
-					placeholder={`Search by Vendor Name/${startCase(
-						geo.others.pan_number.label,
-					)}/Organization ID/Sage ID`}
-					suffix={<IcMSearchlight />}
-					value={expenseFilters.searchValue}
-					onChange={(e: any) => handleChange(e)}
-					className={styles.search}
-				/>
-				<Button
-					size="lg"
-					themeType="secondary"
-					onClick={() => {
-						setCreateExpenseType(recurringState);
-						setShowModal(true);
-					}}
-					className={styles.cta_button}
-				>
-					{BUTTON_TEXT[recurringState]}
-				</Button>
+				<div className={styles.input_container}>
+					<Input
+						size="md"
+						placeholder={`Search by Vendor Name/${startCase(
+							geo.others.pan_number.label,
+						)}/Organization ID/Sage ID`}
+						suffix={<IcMSearchlight />}
+						value={expenseFilters.searchValue}
+						onChange={(e: any) => handleChange(e)}
+						className={styles.search}
+					/>
+				</div>
+				<div>
+					<Button
+						size="lg"
+						themeType="secondary"
+						onClick={() => {
+							setCreateExpenseType(recurringState);
+							setShowModal(true);
+						}}
+						className={styles.cta_button}
+					>
+						{BUTTON_TEXT[recurringState]}
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

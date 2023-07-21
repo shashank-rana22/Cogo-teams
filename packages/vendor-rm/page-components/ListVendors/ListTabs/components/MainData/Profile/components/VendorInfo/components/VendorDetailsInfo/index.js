@@ -1,5 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -52,8 +53,10 @@ function VendorDetailsInfo({
 									</a>
 
 									<div>
-										<img
+										<Image
 											src={GLOBAL_CONSTANTS.image_url.download_icon_svg}
+											width={30}
+											height={30}
 											alt="icon"
 										/>
 									</div>

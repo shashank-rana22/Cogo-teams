@@ -11,7 +11,6 @@
 
 .left_container {
 	display: flex;
-	gap: 8px;
 
 	:global {
 		.ui_select_display_container {
@@ -26,7 +25,10 @@
 
 .right_container {
 	display: flex;
-	gap: 8px;
+}
+
+.input_container {
+	margin-right: 8px;
 }
 
 .select {

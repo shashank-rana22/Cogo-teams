@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -31,7 +32,7 @@ function PaymentDetails({
 					rel="noreferrer"
 				>
 					{shortName}
-					<img src={GLOBAL_CONSTANTS.image_url.download_icon_svg} alt="" />
+					<Image src={GLOBAL_CONSTANTS.image_url.download_icon_svg} width={30} height={30} />
 				</a>
 			);
 		}
