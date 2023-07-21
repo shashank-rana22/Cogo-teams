@@ -1,0 +1,30 @@
+.container {
+	border-bottom: 10px solid #fafafa;
+}
+
+.heading_card {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.card_body {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.single_component {
+	width: 33%;
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+	.single_component {
+		width: 50%;
+	}
+}
+@media (max-width: 425px) {
+	.single_component {
+		width: 100%;
+	}
+}
