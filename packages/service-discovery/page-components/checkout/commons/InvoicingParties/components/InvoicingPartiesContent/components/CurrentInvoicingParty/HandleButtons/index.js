@@ -4,6 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+
 const ICON_MAPPING = {
 	true  : IcMCrossInCircle,
 	false : IcMEdit,
@@ -88,7 +90,7 @@ function HandleButtons({
 				/>
 			),
 			type    : 'icon',
-			visible : !isEditMode && length > 1,
+			visible : !isEditMode && length > ONE,
 		},
 		{
 			key       : 'save',
