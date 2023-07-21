@@ -73,15 +73,15 @@
 	background-color: #221f20;
 	border-radius: 50%;
 
-	&.supply_rates {
+	&.pie_chart_key_1 {
 		background-color: #63bec8;
 	}
 
-	&.predicted_rates {
+	&.pie_chart_key_2 {
 		background-color: #f9ae64;
 	}
 
-	&.extended_rates {
+	&.pie_chart_key_3 {
 		background-color: #9ba0cb;
 	}
 }
