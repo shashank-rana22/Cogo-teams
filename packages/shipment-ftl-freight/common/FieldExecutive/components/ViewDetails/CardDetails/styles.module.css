@@ -1,0 +1,65 @@
+.container {
+	padding: 5px 20px;
+	margin: 5px 0 10px;
+	border: 1px solid #e6e6e6;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.card_field {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.single_field {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	width: 33.3%;
+	margin-block: 10px;
+}
+
+.field_title {
+	width: 45%;
+	color: #828282;
+}
+
+.field_mid {
+	width: 10%;
+	color: #828282;
+}
+
+.field_value {
+	width: 45%;
+}
+
+.field_docs {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.document {
+	display: flex;
+	flex-direction: column;
+}
+
+.tooltip_container {
+	display: flex;
+	justify-content: center;
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+	.single_field {
+		width: 50%;
+	}
+}
+@media (max-width: 425px) {
+	.single_field {
+		width: 100%;
+	}
+}

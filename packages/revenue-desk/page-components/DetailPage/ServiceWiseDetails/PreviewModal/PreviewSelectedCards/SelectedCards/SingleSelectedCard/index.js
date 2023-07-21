@@ -87,7 +87,7 @@ function SingleSelectedCard({ data, shipmentType, priority, fromKey }) {
 								Total Buy Price :
 								<div className={styles.total_price_text}>
 									{formatAmount({
-										amount   : data?.rowData?.price,
+										amount   : data?.rowData?.total_price,
 										currency : data?.rowData?.currency,
 										options  : {
 											style                 : 'currency',

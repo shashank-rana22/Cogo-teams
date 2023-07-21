@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	padding: 4px;
+	font-size: var(--font-size-lg);
+}

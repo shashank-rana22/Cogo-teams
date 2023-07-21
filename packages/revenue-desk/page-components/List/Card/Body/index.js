@@ -20,7 +20,7 @@ function Body({ data }) {
 					{
 						total_revert_count > VALUE_ZERO ? (
 							<div className={styles.text1}>
-								<Pill size="md" color="#E0E0E0">{`${total_revert_count} Reverts`}</Pill>
+								<Pill size="md" color="rgb(132, 189, 76)">{`${total_revert_count} Reverts`}</Pill>
 							</div>
 						) : null
 					}

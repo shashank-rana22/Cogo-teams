@@ -1,0 +1,17 @@
+.sub_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 260px;
+}
+
+.date_time {
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.amount_text {
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+}
