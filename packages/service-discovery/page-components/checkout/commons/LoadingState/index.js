@@ -66,7 +66,7 @@ export function LoadingState() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.loading_text}>
-				Here are some fun facts while we prepare your checkout
+				<div style={{ marginRight: '32px' }}>Here are some fun facts while we prepare your checkout</div>
 
 				<DotLoader />
 			</div>

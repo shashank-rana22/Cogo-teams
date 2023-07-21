@@ -1,10 +1,12 @@
+import { cl } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
-function DotLoader({ dotsLegth = 6 }) {
+function DotLoader({ dotsLegth = 6, size = 'md' }) {
 	return (
-		<div className={styles.wave}>
+		<div className={cl`${styles.wave} ${styles[size]}`}>
 			{[...Array(dotsLegth).keys()].map((key) => (
-				<span key={key} className={styles.dot} />
+				<span key={key} className={cl`${styles.dot} ${styles[size]}`} />
 			))}
 		</div>
 	);

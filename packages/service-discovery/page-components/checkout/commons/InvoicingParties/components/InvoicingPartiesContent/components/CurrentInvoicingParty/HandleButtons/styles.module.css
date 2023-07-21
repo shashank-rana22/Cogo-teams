@@ -1,0 +1,19 @@
+.container {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_loader {
+			margin: unset;
+			margin-left: 20px;
+		}
+	}
+}
+
+.icon {
+	margin-left: 20px;
+	cursor: pointer;
+}

@@ -24,11 +24,15 @@ function InvoicingPartiesContent({
 	services = [],
 	rate = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
 	updateCheckoutInvoice = () => {},
 	updateLoading = false,
 	loading = false,
+	editInvoiceDetails = {},
+	setEditInvoiceDetails = () => {},
+	allServices = [],
+	paymentModeValuesObj = {},
+	paymentModesLoading = false,
 }) {
 	if (loading) {
 		return (
@@ -52,7 +56,6 @@ function InvoicingPartiesContent({
 					services={services}
 					rate={rate}
 					paymentModes={paymentModes}
-					setPaymentModes={setPaymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 				/>
 			</div>
@@ -63,6 +66,10 @@ function InvoicingPartiesContent({
 		<div>
 			{invoicingParties.map((invoiceParty, index) => {
 				const [, currPaymentModes = []] = Object.entries(PAYMENT_MODES).find(
+					([key]) => key === invoiceParty.id,
+				) || [];
+
+				const [, paymentModeValues = {}] = Object.entries(paymentModeValuesObj).find(
 					([key]) => key === invoiceParty.id,
 				) || [];
 
@@ -88,6 +95,11 @@ function InvoicingPartiesContent({
 						length={invoicingParties.length}
 						updateCheckoutInvoice={updateCheckoutInvoice}
 						updateLoading={updateLoading}
+						editInvoiceDetails={editInvoiceDetails}
+						setEditInvoiceDetails={setEditInvoiceDetails}
+						allServices={allServices}
+						paymentModeValues={paymentModeValues}
+						paymentModesLoading={paymentModesLoading}
 					/>
 				);
 			})}
@@ -100,7 +112,6 @@ function InvoicingPartiesContent({
 				rate={rate}
 				services={services}
 				paymentModes={paymentModes}
-				setPaymentModes={setPaymentModes}
 				getCheckoutInvoices={getCheckoutInvoices}
 			/>
 		</div>

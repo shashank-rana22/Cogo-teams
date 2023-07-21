@@ -20,8 +20,8 @@ function SavedAddresses({
 	services = [],
 	rate = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
+	primary_service = '',
 }) {
 	const componentProps = {
 		select_address: {
@@ -30,10 +30,8 @@ function SavedAddresses({
 			activeState,
 			setActiveState,
 			setCurrentView,
-			selectedAddress,
 			setSelectedAddress,
 			source,
-			setPaymentModes,
 		},
 		select_services: {
 			selectedAddress,
@@ -42,9 +40,8 @@ function SavedAddresses({
 			setShowAddInvoicingPartyModal,
 			services,
 			rate,
-			paymentModes,
-			setPaymentModes,
 			getCheckoutInvoices,
+			primary_service,
 		},
 	};
 

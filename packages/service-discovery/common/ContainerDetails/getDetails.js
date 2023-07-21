@@ -1,5 +1,13 @@
 import { startCase } from '@cogoport/utils';
 
+const getContainerType = ({ container_type }) => {
+	if (container_type === 'standard') {
+		return 'Std.';
+	}
+
+	return startCase(container_type);
+};
+
 const getDetails = ({ item, primary_service }) => {
 	const {
 		containers_count,
@@ -17,7 +25,7 @@ const getDetails = ({ item, primary_service }) => {
 	const MAPPING = {
 		fcl_freight: [
 			`${containers_count} x ${container_size} FT`,
-			`${startCase(container_type)} ${startCase(commodity)}`,
+			`${getContainerType({ container_type })} ${startCase(commodity)}`,
 		],
 		lcl_freight: [
 			`${packages_count} packages`,

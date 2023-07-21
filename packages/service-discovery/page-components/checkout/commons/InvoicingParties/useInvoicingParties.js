@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import useGetPaymentModes from './hooks/useGetPaymentModes';
 
@@ -49,10 +49,11 @@ const formatServices = ({ savedServicesInvoiceTo, invoicingPartyServices }) => {
 };
 
 const useInvoicingParties = ({ detail = {} }) => {
-	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =	useState(false);
+	const [showAddInvoicingPartyModal, setShowAddInvoicingPartyModal] =		useState(false);
 
 	const [invoicingParties, setInvoicingParties] = useState([]);
-	const [editInvoice, setEditInvoice] = useState([]);
+	const [editInvoice, setEditInvoice] = useState({});
+	const [editInvoiceDetails, setEditInvoiceDetails] = useState({});
 
 	const [paymentModes, setPaymentModes] = useState({});
 
@@ -69,74 +70,79 @@ const useInvoicingParties = ({ detail = {} }) => {
 
 	const { services = {} } = detail;
 
-	const savedServicesInvoiceTo = formatSavedServicesInvoiceTo({
+	const savedServicesInvoiceTo = useMemo(() => formatSavedServicesInvoiceTo({
 		services: Object.values(services),
-	});
+	}), [services]);
 
 	const getCheckoutInvoices = () => {
-		trigger({ params: { filters: { checkout_id: detail.id, status: 'active' } } });
+		trigger({
+			params: { filters: { checkout_id: detail.id, status: 'active' } },
+		});
 	};
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			setInvoicingParties(list.map((savedInvoicingParty) => ({
-				...savedInvoicingParty,
-				services: formatServices({
-					savedServicesInvoiceTo,
-					invoicingPartyServices: savedInvoicingParty?.services || [],
-				}),
+			setInvoicingParties(
+				list.map((savedInvoicingParty) => ({
+					...savedInvoicingParty,
+					services: formatServices({
+						savedServicesInvoiceTo,
+						invoicingPartyServices: savedInvoicingParty?.services || [],
+					}),
+				})),
+			);
 
-				state: {
-					isSaved           : true,
-					toDelete          : false,
-					showHiddenContent : false,
-				},
-			})));
+			setEditInvoice(
+				list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}),
+			);
 
-			setEditInvoice(list.reduce((acc, { id }) => ({ ...acc, [id]: false }), {}));
+			setPaymentModes(list.reduce((acc, savedInvoicingParty) => {
+				const {
+					credit_option = {},
+					organization_trade_party_id = '',
+					id = '',
+					payment_mode_details = {},
+				} = savedInvoicingParty;
 
-			setPaymentModes(() => {
-				let mode = {};
-				list.forEach((savedInvoicingParty) => {
-					const {
-						payment_mode = '',
-						payment_term = '',
-						payment_method = '',
-						documentCategory = '',
-						documentType = '',
-						documentDeliveryMode = '',
-					} = savedInvoicingParty?.payment_mode_details || {};
+				const {
+					payment_mode = '',
+					payment_term = '',
+					payment_method = '',
+					documentCategory = '',
+					documentType = '',
+					documentDeliveryMode = '',
+				} = payment_mode_details;
 
-					const { credit_option = {}, organization_trade_party_id = '', id = '' } = savedInvoicingParty;
+				const { selected_credit_days = 0, interest_percent = 0 } = credit_option;
 
-					console.log('savedInvoicingParty', savedInvoicingParty);
-
-					mode = {
-						...mode,
-						[id || savedInvoicingParty.length]: {
-							credit_days    : credit_option?.selected_credit_days || 0,
-							interest       : credit_option?.interest_percent || 0,
-							paymentMode    : payment_mode || 'cash',
-							paymentTerms   : payment_term,
-							paymentMethods : payment_method,
-							documentCategory,
-							documentType,
-							documentDeliveryMode,
-							organization_trade_party_id,
-						},
-					};
-				});
-				return mode;
-			});
+				return {
+					...acc,
+					[id || savedInvoicingParty.length]: {
+						credit_days    : selected_credit_days,
+						interest       : interest_percent,
+						paymentMode    : payment_mode || 'cash',
+						paymentTerms   : payment_term,
+						paymentMethods : payment_method,
+						documentCategory,
+						documentType,
+						documentDeliveryMode,
+						organization_trade_party_id,
+					},
+				};
+			}, {}));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [list]);
+	}, [list, savedServicesInvoiceTo]);
 
-	const { PAYMENT_MODES, loading } = useGetPaymentModes({
+	const {
+		PAYMENT_MODES,
+		loading,
+		paymentModes: paymentModeValuesObj,
+	} = useGetPaymentModes({
 		invoicingParties,
 		detail,
 		paymentModes,
-		setPaymentModes,
+		setEditInvoiceDetails,
+		editInvoiceDetails,
 	});
 
 	return {
@@ -145,11 +151,15 @@ const useInvoicingParties = ({ detail = {} }) => {
 		setShowAddInvoicingPartyModal,
 		PAYMENT_MODES,
 		editInvoice,
-		loading: loading || listLoading,
+		loading             : listLoading,
+		paymentModesLoading : loading,
 		setEditInvoice,
 		paymentModes,
-		setPaymentModes,
 		getCheckoutInvoices,
+		editInvoiceDetails,
+		setEditInvoiceDetails,
+		allServices         : savedServicesInvoiceTo,
+		paymentModeValuesObj,
 	};
 };
 

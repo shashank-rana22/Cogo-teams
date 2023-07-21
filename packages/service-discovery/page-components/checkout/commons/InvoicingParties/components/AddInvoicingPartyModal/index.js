@@ -32,14 +32,12 @@ const CHIPS_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
 
 function AddInvoicingPartyModal({
 	disabledInvoicingParties = [],
-	isInvoicingPartiesSaved = true,
 	setShowAddInvoicingPartyModal = () => {},
 	showAddInvoicingPartyModal = false,
 	source = '',
 	services = [],
 	rate = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
 }) {
 	const {
@@ -117,7 +115,6 @@ function AddInvoicingPartyModal({
 					services={services}
 					rate={rate}
 					paymentModes={paymentModes}
-					setPaymentModes={setPaymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 					{...activeComponentProps}
 				/>
