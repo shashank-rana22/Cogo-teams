@@ -19,7 +19,7 @@
 	padding: 20px;
 }
 
-.tooltip_container{
-	word-break: break-word;
+.tooltip_container {
 	min-width: 250px;
+	word-break: break-word;
 }
