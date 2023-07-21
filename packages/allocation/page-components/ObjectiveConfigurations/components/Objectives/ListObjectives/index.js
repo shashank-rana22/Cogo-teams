@@ -1,14 +1,30 @@
 import Body from './Body';
 import Header from './Header';
+import useGetListObjectives from './useGetListObjectives';
 
 function ListObjectives(props) {
-	const { ...rest } = props;
+	const { ...restProps } = props;
+
+	const {
+		setParams,
+		loading,
+		list,
+		paginationData,
+		getNextPage,
+	} = useGetListObjectives();
 
 	return (
 		<>
-			<Header {...rest} />
+			<Header {...restProps} />
 
-			<Body {...rest} />
+			<Body
+				setParams={setParams}
+				loading={loading}
+				list={list}
+				paginationData={paginationData}
+				getNextPage={getNextPage}
+				{...restProps}
+			/>
 		</>
 	);
 }
