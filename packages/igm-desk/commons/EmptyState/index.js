@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 export default function EmptyState() {
 	return (
 		<section className={styles.container}>
-			<div>
+			<div className={styles.empty_state_text}>
 				<h1 className={styles.header}>No Shipments found !!</h1>
 				<h3>Looks like no results were found...</h3>
 			</div>

@@ -23,29 +23,29 @@ function Header({ serviceData = [] }) {
 	const statusText = state === 'init' ? 'Not Allocated' : startCase(state);
 
 	return (
-		<div className={cl`${styles[state]} ${styles.main_container}`}>
-			<div className={cl` ${styles.container}`}>
+		<header className={cl`${styles[state]} ${styles.main_container}`}>
+			<section className={cl` ${styles.container}`}>
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
-					<div className={styles.service_name}>
+					<span className={styles.service_name}>
 						{display_label}
-					</div>
-
-					<div className={styles.service_provider}>
+					</span>
+					{': '}
+					<span className={styles.service_provider}>
 						{service_provider?.business_name}
-					</div>
+					</span>
 				</div>
 
 				<div className={styles.secondary_details}>
 					<div>
 						{payment_term
 							? (
-								<div className={styles.payment_term}>
+								<span className={styles.payment_term}>
 									{payment_term}
-								</div>
+								</span>
 							)
 							: null}
 
-						<div className={styles.state}>{statusText}</div>
+						<span className={styles.state}>{statusText}</span>
 					</div>
 
 					<div className={styles.extra_details}>
@@ -66,12 +66,12 @@ function Header({ serviceData = [] }) {
 						) : null }
 					</div>
 				</div>
-			</div>
+			</section>
 
 			{showDetails[SERVICE_DATA_FIRST.display_label]
 				? <Details serviceData={serviceData} />
 				: null}
-		</div>
+		</header>
 
 	);
 }

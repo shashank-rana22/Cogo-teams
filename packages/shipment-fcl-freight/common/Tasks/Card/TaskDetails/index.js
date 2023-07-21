@@ -30,7 +30,7 @@ function TaskDetails({
 	const taskName = getTaskDisplayName({ shipment_data, task, REQUIRED_SERVICE_ARR });
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 			<div className={styles.task_and_icon}>
 				<div className={styles.icon}>
 					{task?.status === 'completed' ? (
@@ -47,7 +47,7 @@ function TaskDetails({
 
 			<div>
 				<div className={styles.details}>
-					<div className={styles.task_name}>{taskName}</div>
+					<span className={styles.task_name}>{taskName}</span>
 
 					<div className={styles.task_date_details}>
 						{task?.status !== 'completed' && task?.deadline ? (
@@ -119,7 +119,7 @@ function TaskDetails({
 					</div>
 				) : null}
 			</div>
-		</div>
+		</section>
 	);
 }
 

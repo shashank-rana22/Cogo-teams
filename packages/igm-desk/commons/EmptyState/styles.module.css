@@ -6,3 +6,9 @@
 	padding-top: 10%;
 	margin: auto;
 }
+
+.empty_state_text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

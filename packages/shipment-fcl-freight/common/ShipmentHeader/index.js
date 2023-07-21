@@ -69,7 +69,7 @@ function ShipmentHeader() {
 	);
 
 	return (
-		<div className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
+		<header className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
 			<div className={cl`${styles.customer} ${!showPocDetails ? styles.igm_desk : ''}`}>
 				<Tooltip
 					theme="light"
@@ -94,11 +94,11 @@ function ShipmentHeader() {
 				{showPoNumber ? (
 					<div>
 						{po_number ? (
-							<div className={styles.po_number}>
+							<span className={styles.po_number}>
 								PO Number:
 								{' '}
 								{po_number}
-							</div>
+							</span>
 						) : (
 							<Button
 								className={styles.button}
@@ -148,7 +148,7 @@ function ShipmentHeader() {
 			{showModal === 'cancel_shipment' ? (
 				<CancelShipment setShow={setShowModal} />
 			) : null}
-		</div>
+		</header>
 	);
 }
 

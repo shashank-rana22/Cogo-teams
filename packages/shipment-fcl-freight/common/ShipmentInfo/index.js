@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import styles from './styles.module.css';
 

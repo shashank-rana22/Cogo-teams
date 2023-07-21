@@ -60,7 +60,7 @@
 	font-weight: 400;
 	color: var(--color-secondary-greyscale-3);
 
-	& > span {
+	& > span:first-child {
 		white-space: nowrap;
 	}
 }

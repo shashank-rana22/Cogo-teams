@@ -32,11 +32,11 @@ function Header({
 	const supplyRemarks = primary_service?.booking_preferences?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks;
 
 	return (
-		<div className={styles.container}>
+		<header className={styles.container}>
 			<div className={styles.top_panel}>
-				<div className={styles.left_content}>
+				<span className={styles.left_content}>
 					{`${completedTaskCount} / ${count} Tasks Completed`}
-				</div>
+				</span>
 
 				<div className={styles.right_content}>
 					{showSupplyRemarks && supplyRemarks ? (
@@ -53,7 +53,7 @@ function Header({
 
 					{show_others_tasks ? (
 						<div className={styles.toggle_container}>
-							<div>Hide completed tasks</div>
+							<span>Hide completed tasks</span>
 							<Toggle
 								checked={hideCompletedTasks}
 								onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
@@ -63,7 +63,7 @@ function Header({
 
 					{show_others_tasks ? (
 						<div className={styles.toggle_container}>
-							<div>Show only my tasks</div>
+							<span>Show only my tasks</span>
 							<Toggle
 								checked={showMyTasks}
 								onChange={() => setShowMyTasks(!showMyTasks)}
@@ -76,13 +76,13 @@ function Header({
 			{showBookingRequirementsCondition
 				? (
 					<div className={styles.booking_req_heading}>
-						<div>Booking Requirements</div>
+						<span>Booking Requirements</span>
 						<Button
 							size="sm"
 							themeType="linkUi"
 							onClick={() => setShowBookingReq(!showBookingReq)}
 						>
-							<div className={styles.booking_req_button_text}>View</div>
+							<span className={styles.booking_req_button_text}>View</span>
 						</Button>
 					</div>
 				)
@@ -96,7 +96,7 @@ function Header({
 					/>
 				)
 				: null}
-		</div>
+		</header>
 	);
 }
 

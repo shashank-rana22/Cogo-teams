@@ -65,18 +65,18 @@ function MarkIgmShipmentConfirm({
 	const list = taskConfigData?.apis_data?.list_shipment_bl_details;
 
 	return (
-		<div>
+		<>
 			<div>
 				{isEmpty(list)
-					? <div className={styles.bl_not_uploaded}>BL is not uploaded yet!!</div>
+					? <span className={styles.bl_not_uploaded}>BL is not uploaded yet!!</span>
 					:			(
 						<div>
 							{
 				(list || []).map((item) => {
 					if (hbl.includes(item?.bl_document_type)) {
-						return <div key={item?.id}>{getBLContainerDetails('HBL Number', item?.bl_number)}</div>;
+						return <span key={item?.id}>{getBLContainerDetails('HBL Number', item?.bl_number)}</span>;
 					}
-					return <div key={item?.id}>{getBLContainerDetails('MBL Number', item?.bl_number)}</div>;
+					return <span key={item?.id}>{getBLContainerDetails('MBL Number', item?.bl_number)}</span>;
 				})
 			}
 						</div>
@@ -99,7 +99,7 @@ function MarkIgmShipmentConfirm({
 					Confirm
 				</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 

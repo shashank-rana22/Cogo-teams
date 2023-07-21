@@ -91,7 +91,7 @@ function Documents() {
 	};
 
 	return (
-		<div className={styles.main_container}>
+		<section className={styles.main_container}>
 			{!showIgmDocs ? (
 				<HeaderComponent
 					activeToggle={activeToggle}
@@ -135,7 +135,7 @@ function Documents() {
 					setShowDoc={setShowDoc}
 				/>
 			) : null }
-		</div>
+		</section>
 	);
 }
 

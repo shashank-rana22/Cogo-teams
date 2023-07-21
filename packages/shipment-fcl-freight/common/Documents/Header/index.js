@@ -35,8 +35,8 @@ function Header({
 	const can_edit_documents = !!stakeholderConfig?.documents?.can_edit_documents;
 
 	return (
-		<div className={styles.heading}>
-			<div className={styles.sub_heading}>
+		<header className={styles.heading}>
+			<section className={styles.sub_heading}>
 
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
@@ -84,7 +84,7 @@ function Header({
 						<TabPanel name="organization_documents" title="Organization Documents" />
 					</Tabs>
 				) : null}
-			</div>
+			</section>
 
 			{showModal && can_edit_documents ? (
 				<GenericUpload
@@ -106,7 +106,7 @@ function Header({
 						onClick={() => handleGenericUpload()}
 					>
 						<IcMUpload />
-						<div className={styles.upload}>Upload</div>
+						<span className={styles.upload}>Upload</span>
 					</div>
 
 					<Toggle
@@ -121,7 +121,7 @@ function Header({
 				</div>
 			) : null}
 
-		</div>
+		</header>
 	);
 }
 

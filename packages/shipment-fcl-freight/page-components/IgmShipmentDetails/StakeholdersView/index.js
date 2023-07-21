@@ -47,16 +47,16 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
-			<div className={styles.loader}>
+			<section className={styles.loader}>
 				Loading Shipment Data....
 				<Loader themeType="primary" className={styles.loader_icon} />
-			</div>
+			</section>
 		);
 	}
 
 	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
-			<div className={styles.shipment_not_found}>
+			<section className={styles.shipment_not_found}>
 				<div className={styles.section}>
 					<h2 className={styles.error}>Something Went Wrong!</h2>
 
@@ -71,35 +71,35 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 						Refresh
 					</Button>
 				</div>
-			</div>
+			</section>
 		);
 	}
 
 	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
-			<div className={styles.shipment_not_found}>
+			<section className={styles.shipment_not_found}>
 				<div className={styles.page}>
 					You don&apos;t have permission to visit this page.
 					Please contact at +91 7208083747
 				</div>
-			</div>
+			</section>
 		);
 	}
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
-				<div className={styles.top_header}>
+			<main>
+				<header className={styles.top_header}>
 					<ShipmentInfo />
-				</div>
+				</header>
 
-				<div className={styles.header}>
+				<header className={styles.header}>
 					<ShipmentHeader />
-				</div>
+				</header>
 
 				<Timeline />
 
-				<div className={styles.container}>
+				<section className={styles.container}>
 					<Tabs
 						activeTab={activeTab}
 						fullWidth
@@ -118,8 +118,8 @@ function IGMDesk({ get = {}, activeStakeholder = '' }) {
 							<Documents />
 						</TabPanel>
 					</Tabs>
-				</div>
-			</div>
+				</section>
+			</main>
 		</ShipmentDetailContext.Provider>
 	);
 }
