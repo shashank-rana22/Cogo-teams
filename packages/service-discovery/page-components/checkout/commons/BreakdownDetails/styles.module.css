@@ -86,13 +86,13 @@
 
 	:global {
 		.ui_pill_container {
-			margin-right: 12px;
 			height: 24px;
+			margin-right: 12px;
 		}
 
 		.ui_pill_text {
-			font-weight: 600;
 			font-size: 12px;
+			font-weight: 600;
 		}
 	}
 }

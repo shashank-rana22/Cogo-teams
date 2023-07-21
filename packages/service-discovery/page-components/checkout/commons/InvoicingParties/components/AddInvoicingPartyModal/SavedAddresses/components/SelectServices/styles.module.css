@@ -142,11 +142,10 @@
 	}
 }
 
-
 .service_details {
 	position: absolute;
-	left: 4px;
 	top: -4px;
+	left: 4px;
 
 	:global {
 		.ui_pill_container {
@@ -157,10 +156,9 @@
 		.ui_pill_text {
 			max-width: 80px;
 			overflow: hidden;
+			font-size: 10px;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			font-size: 10px;
-			
 		}
 	}
 }

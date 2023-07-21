@@ -3,7 +3,7 @@
 	top: 12px;
 	right: 12px;
 	display: flex;
-    align-items: center;
+	align-items: center;
 
 	:global {
 		.ui_loader {

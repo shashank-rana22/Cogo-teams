@@ -36,8 +36,8 @@
 }
 
 .service_type {
-	font-weight: 600;
 	display: flex;
-	align-items: center;
 	gap: 12px;
+	align-items: center;
+	font-weight: 600;
 }

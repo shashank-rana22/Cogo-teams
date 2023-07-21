@@ -30,8 +30,8 @@
 
 .flex {
 	display: flex;
-	margin-left: 4px;
 	align-items: center;
+	margin-left: 4px;
 }
 
 .popover {

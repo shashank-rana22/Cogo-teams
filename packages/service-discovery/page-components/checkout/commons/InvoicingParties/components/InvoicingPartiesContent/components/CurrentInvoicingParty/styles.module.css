@@ -2,8 +2,9 @@
 	position: relative;
 	padding: 20px;
 	margin: 8px 0 20px;
-	background-color: #fbfbff;
+	background-color: #dadcf1;
 	border: 1px solid #f7f7fd;
+	border-radius: 8px;
 }
 
 .invoice_content {
