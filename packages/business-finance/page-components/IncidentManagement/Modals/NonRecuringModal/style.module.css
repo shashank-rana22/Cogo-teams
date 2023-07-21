@@ -50,6 +50,7 @@
 }
 
 .view {
+	margin-right: 4px;
 	color: #0f0;
 	text-decoration: underline;
 	background-color: transparent;
@@ -61,7 +62,6 @@
 
 .view_flex {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 }
 
@@ -162,10 +162,4 @@
 .line_item_empty {
 	font-weight: 600;
 	color: #f68b21;
-}
-
-.credit {
-	display: flex;
-	gap: 8px;
-	align-items: center;
 }

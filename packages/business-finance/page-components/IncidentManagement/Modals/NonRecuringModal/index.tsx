@@ -128,7 +128,9 @@ function NonRecuringModal({ id = '', refetch = () => {}, row = {} as RowData, is
 									<div className={styles.view}>
 										View Document
 									</div>
-									<IcMEyeopen />
+									<div>
+										<IcMEyeopen />
+									</div>
 								</div>
 							</a>
 						) : (
