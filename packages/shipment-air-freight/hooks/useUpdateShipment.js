@@ -22,8 +22,8 @@ export default function useUpdateShipment({
 		try {
 			await trigger({ data: payload });
 
-			if (shipment_data?.tags.includes('cargo_ai') && payload?.state === '"cancelled"') {
-				cancelEBooking();
+			if (shipment_data?.tags.includes('cargo_ai') && payload?.state === 'cancelled') {
+				await cancelEBooking();
 			}
 
 			refetch();

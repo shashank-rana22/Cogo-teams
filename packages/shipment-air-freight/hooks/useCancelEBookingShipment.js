@@ -5,7 +5,7 @@ import { useRequestAir } from '@cogoport/request';
 const useCancelEBookingShipment = (shipment_data) => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/e-booking',
+			url     : '/air-coe/e-booking/cancel',
 			method  : 'PUT',
 			authKey : 'put_air_coe_e_booking_cancel',
 		},
@@ -22,9 +22,7 @@ const useCancelEBookingShipment = (shipment_data) => {
 		try {
 			await trigger({
 				data: {
-					req: {
-						...payload,
-					},
+					...payload,
 				},
 			});
 
