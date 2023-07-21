@@ -14,7 +14,7 @@ const getPayload = ({ data, item, val, selectCycle }) => {
 		employee_id           : data?.employee_details?.employee_id,
 		manager_id            : data?.employee_details?.manager_id,
 		kra_id                : item.kra_id,
-		target_achieved_value : val,
+		target_achieved_value : parseInt(val, 10),
 		start_date            : formattedDate(start_date),
 		end_date              : formattedDate(end_date),
 	};

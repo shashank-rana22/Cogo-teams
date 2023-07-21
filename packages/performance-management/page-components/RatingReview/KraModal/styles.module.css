@@ -16,14 +16,8 @@
 
 .squad_name {
 	display: flex;
+	flex-direction: column;
 	margin-right: 15px;
-	font-size: 15px;
-}
-
-.squad_span {
-	padding-left: 6px;
-	font-size: 15px;
-	font-weight: 600;
 }
 
 .modal_body_container {
@@ -31,45 +25,62 @@
 	width: 100%;
 }
 
-.body {
-	background-color: var(--color-tertiary-beige-4);
+.employee_name {
+	display: flex;
+	font-size: medium;
 }
 
 .left_section {
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-	padding: 15px;
+	height: 470px;
+	padding: 0 15px 15px 0;
 	overflow-y: scroll;
 }
 
 .right_section {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-around;
 	width: 50%;
-	padding: 15px;
-	border-left: 1px solid black;
+	padding-left: 15px;
+	border-left: 1px solid #edd7a9;
+}
+
+.average_overall_rating_value {
+	padding-left: 5px;
+	font-size: medium;
+	font-style: bold;
 }
 
 .overall_rating {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-around;
 	width: 100%;
-	max-height: 40%;
+	padding: 8px 12px 8px 8px;
+	color: #828282;
+	background-color: #e0e0e0;
+	border: 1px solid;
+	border-color: #e0e0e0;
+	border-radius: 6px;
 }
 
 .remarks {
 	display: flex;
 	flex-direction: column;
-	margin-top: 5px;
-	border-color: #000;
+	padding: 15px;
+	margin-top: 10px;
+	border: 1px solid grey;
+	border-color: #edd7a9;
 	border-radius: 15px;
 }
 
 .comments {
 	display: flex;
 	align-items: center;
-	padding: 10px;
+	padding-bottom: 10px;
 }
 
 .revised_rating {
@@ -81,10 +92,6 @@
 	padding-left: 10px;
 
 	:global {
-		.ui_ps_themeType_primary {
-			background-color: var(--color-tertiary-beige-4);
-		}
-
 		.ui_star_rating_container {
 			:hover {
 				background-color: var(--color-tertiary-beige-4);
@@ -104,6 +111,7 @@
 	width: 100%;
 	padding: 10px;
 	margin-right: 15px;
+	color: #828282;
 }
 
 .sub_section {
@@ -120,14 +128,18 @@
 }
 
 .modification_history {
+	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	width: 100%;
 	max-height: 200px;
-	padding: 10px;
+	padding: 8px 12px 8px 8px;
+	margin-bottom: 10px;
 	overflow-y: scroll;
 	background-color: #fff;
-	border: 1px solid #000;
-	border-radius: 10px;
+	border: 1px solid;
+	border-color: #e0e0e0;
+	border-radius: 6px;
 }
 
 .modification {
@@ -139,20 +151,20 @@
 	align-items: center;
 	justify-content: flex-start;
 	width: 50%;
-	padding-bottom: 15px;
+	background-color: transparent;
 }
 
 .rating_obtained {
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	width: 50%;
-	padding-bottom: 15px;
 }
 
 .modal {
 	:global {
 		.ui_modal_body_container {
-			max-height: 58vh;
+			max-height: 68vh;
 		}
 	}
 }
@@ -168,7 +180,7 @@
 
 	:global {
 		.ui_text_area_control {
-			padding: 12px;
+			padding: 6px;
 		}
 	}
 }
@@ -183,6 +195,47 @@
 			height: 10px;
 		}
 	}
+}
+
+.employee_details {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 8px 100px 12px 8px;
+	color: #828282;
+	background-color: #e0e0e0;
+	border: 1px solid;
+	border-color: #e0e0e0;
+	border-radius: 6px;
+}
+
+.table {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 15px;
+}
+
+.table_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.description {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: flex-start;
+	width: fit-content;
+	color: #828282;
+	background-color: #e0e0e0;
+	border: 1px solid;
+	border-color: #e0e0e0;
+	border-radius: 6px;
 }
 
 .loader {
