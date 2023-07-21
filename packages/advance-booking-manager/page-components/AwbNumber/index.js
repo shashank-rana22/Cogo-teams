@@ -60,25 +60,16 @@ function AwbNumber({
 							content={(
 								<div style={{ wordBreak: 'break-word', minWidth: '250px' }}>
 									<div>
-										Clearance Date:
-										{' '}
-										{singleItem.customClearanceDate || '-'}
-										,
+										{`Clearance Date: ${singleItem.customClearanceDate || '-'},`}
 									</div>
 									<div>
-										Booking Date:
-										{' '}
-										{singleItem.bookingDate || '-'}
-										,
+										{`Booking Date: ${singleItem.bookingDate || '-'},`}
 									</div>
 									<div>
-										Commodity:
-										{singleItem?.commodityDetails?.commodity || '-'}
-										,
+										{`Commodity: ${singleItem?.commodityDetails?.commodity || '-'},`}
 									</div>
 									<div>
-										Chargeable Weight:
-										{singleItem.chargeableWeight || '-'}
+										{`Chargeable Weight: ${singleItem.chargeableWeight || '-'}`}
 									</div>
 								</div>
 							)}

@@ -48,16 +48,18 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						<div className={styles.text}>
 							{serviceLabelMapping[itemData?.shipment_type]}
 						</div>
-						<Pill
-							size="md"
-							color="#F9F9F9"
+						<div style={{
+							fontSize   : '14px',
+							fontWeight : '400',
+							color      : '#221F20',
+							marginLeft : '4px',
+							cursor     : 'pointer',
+						}}
 						>
-							<div style={{ fontSize: '14px', fontWeight: '400', color: '#221F20' }}>
-								SID :
-								{' '}
-								{itemData?.serial_id}
-							</div>
-						</Pill>
+							SID :
+							{' '}
+							{itemData?.serial_id}
+						</div>
 					</div>
 					<div className={styles.port_pair_container}>
 						<div className={styles.header_container}>

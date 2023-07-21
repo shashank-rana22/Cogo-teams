@@ -114,6 +114,9 @@ importers:
       '@cogoport/booking-desk-air':
         specifier: workspace:1.0.0
         version: link:../packages/booking-desk-air
+      '@cogoport/booking-desk-surface':
+        specifier: workspace:1.0.0
+        version: link:../packages/booking-desk-surface
       '@cogoport/business-finance':
         specifier: workspace:0.1.0
         version: link:../packages/business-finance
@@ -1222,6 +1225,45 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+
+  packages/booking-desk-surface:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.322
+        version: 1.0.423(@babel/core@7.22.5)(@cogoport/icons-react@1.0.81)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.51
+        version: 1.0.81(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/scope-select':
+        specifier: workspace:*
+        version: link:../../common/scope-select
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/surface-modules':
+        specifier: workspace:0.1.0
+        version: link:../../common/surface-modules
+      '@cogoport/utils':
+        specifier: ^1.2.2
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/business-finance:
     dependencies:

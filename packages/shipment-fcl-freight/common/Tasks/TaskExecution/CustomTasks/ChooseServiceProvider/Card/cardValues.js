@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 
 const getBuyPrice = (item) => {
 	const price = item?.price;
-	const currency = item?.currency;
+	const currency = item?.buy_currency || item?.currency;
 
 	return formatAmount({
 		amount  : price,
