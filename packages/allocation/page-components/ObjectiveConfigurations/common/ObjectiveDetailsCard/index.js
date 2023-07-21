@@ -12,7 +12,7 @@ function ObjectiveDetailsCard(props) {
 		organization_details: organizationDetails = {},
 		stats_details: statsDetails = {},
 		service_requirement_operator = '',
-	} = objectiveData;
+	} = objectiveData || {};
 
 	return (
 		<>

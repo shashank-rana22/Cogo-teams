@@ -95,7 +95,7 @@ const getListColumnMapping = (props) => {
 						</Tooltip>
 						<Pill size="md">{roles.length}</Pill>
 					</>
-				) : null
+				) : '___'
 			),
 		},
 		{
