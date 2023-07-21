@@ -66,6 +66,7 @@ function ShipmentDetailsCard({
 		address = '',
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
+		tdsRate = '',
 	} = buyerDetail || {};
 	const {
 		organizationName = '', taxNumber = '', registrationNumber = '',
@@ -87,6 +88,8 @@ function ShipmentDetailsCard({
 		isProforma = false,
 		billDocumentUrl,
 		grandTotal,
+		paidTds,
+		subTotal,
 	} = bill || {};
 
 	const {
@@ -231,6 +234,10 @@ function ShipmentDetailsCard({
 					setLineItem={setLineItem}
 					invoiceType={invoiceType}
 					isInvoiceApproved={isInvoiceApproved}
+					shipmentType={shipmentType}
+					subTotal={subTotal}
+					tdsRate={tdsRate}
+					paidTds={paidTds}
 				/>
 			) : (
 				<div>

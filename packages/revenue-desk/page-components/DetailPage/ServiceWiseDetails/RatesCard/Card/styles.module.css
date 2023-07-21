@@ -1,0 +1,210 @@
+.container {
+	display: flex;
+	align-items: center;
+	padding: 5px 5px 0;
+	margin: 14px 0;
+	cursor: pointer;
+	background-color: #f9f9f9;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.selected_rate_card_container {
+	display: flex;
+	align-items: center;
+	padding: 5px 5px 0;
+	margin: 14px 0;
+	background-color: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.upper_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 7px 24px 12px;
+	border-bottom: 1px dashed #bdbdbd;
+}
+
+.lower_section {
+	display: flex;
+	justify-content: space-around;
+}
+
+.upper_left_section {
+	display: flex;
+	align-items: center;
+}
+
+.upper_right_section {
+	display: flex;
+	align-items: center;
+}
+
+.left_section_container {
+	display: flex;
+	justify-content: center;
+	width: 25px;
+}
+
+.right_section_container {
+	flex: 1;
+	border-left: 1px solid #e0e0e0;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.text1 {
+	font-size: 12px;
+	font-weight: 500;
+	color: #6fa5ab;
+}
+
+.text2 {
+	font-size: 12px;
+	font-weight: 500;
+	color: #f37166;
+}
+
+.progress_bar_section {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 16px;
+	border-left: 1px dashed #bdbdbd;
+}
+
+.price_text_section {
+	gap: 10px;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.total_price_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 16px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+	border-left: 1px dashed #bdbdbd;
+}
+
+.first_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 20%;
+	padding: 10px 16px;
+}
+
+.price_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 8px 20px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+	border-left: 1px dashed #bdbdbd;
+}
+
+.price_value {
+	margin-right: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.service_provider_heading {
+	margin-right: 38px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.edit_price_section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 12%;
+	padding: 20px;
+	border-left: 1px dashed #bdbdbd;
+}
+
+.progress_bar_container {
+	:global {
+		.ui_progressbar_container {
+			width: 140px;
+
+			.ui_progressbar_filename {
+				position: absolute;
+				padding-left: 52px;
+				font-size: 12px;
+			}
+		}
+
+		.ui_progressbar_bar {
+			height: 20px;
+		}
+
+		.ui_progressbar_progress {
+			height: 20px;
+			background-color: #ddebc0;
+		}
+	}
+}
+
+.edit_price_heading {
+	padding-bottom: 4px;
+	margin-left: 4px;
+	font-size: 12px;
+}
+
+.positive_profit {
+	font-size: 14px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.negative_profit {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.total_price_text {
+	font-size: 16px;
+	font-weight: 700;
+	color: #221f20;
+}
+
+.updated_at {
+	margin-left: 10px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.source {
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #454545;
+}
+
+.infoicon {
+	margin-left: 3px;
+}

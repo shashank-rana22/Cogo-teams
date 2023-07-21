@@ -71,7 +71,10 @@ const eachFeatureCheck = ({ feature, permissions }) => {
 
 const useGetDefaultViewValues = () => {
 	const user_profile = useSelector(({ profile }) => profile);
-	const navigation = new URLSearchParams(window?.location?.search)?.get('navigation');
+	let navigation;
+	if (typeof window !== 'undefined') {
+		navigation = new URLSearchParams(window?.location?.search)?.get('navigation');
+	}
 
 	if (!navigation) return {};
 
