@@ -1,6 +1,5 @@
 function formatContainerValues({ val = [] }) {
-	const UPDATE_DATA = [];
-	(val?.container_details || []).forEach((item) => {
+	const UPDATE_DATA = (val?.container_details || []).map((item) => {
 		const {
 			id,
 			container_number = '',
@@ -18,7 +17,7 @@ function formatContainerValues({ val = [] }) {
 			eway_bill_number = '',
 		} = item;
 
-		UPDATE_DATA.push({
+		return ({
 			id,
 			data: {
 				container_number,
@@ -36,7 +35,6 @@ function formatContainerValues({ val = [] }) {
 				eway_bill_number            : eway_bill_number || undefined,
 			},
 		});
-		return null;
 	});
 	return UPDATE_DATA;
 }

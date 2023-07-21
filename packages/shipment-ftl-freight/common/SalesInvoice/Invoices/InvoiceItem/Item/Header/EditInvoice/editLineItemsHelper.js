@@ -117,7 +117,7 @@ const useEditLineItems = ({
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
 			if (key && formValues?.[key]) {
-				allFormValues[key] = (allFormValues[key] || [])?.map((value) => ({
+				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
