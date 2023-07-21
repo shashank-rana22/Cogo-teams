@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -21,6 +22,8 @@ function useComingCall({
 	callEnd,
 }) {
 	const { saveInACallStatus } = useSetInACall();
+	const callCommingSnapshotRef = useRef(null);
+	const tokenSnapshotRef = useRef(null);
 
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
@@ -120,42 +123,9 @@ function useComingCall({
 		setCallComing(false);
 	}, [callDetails?.calling_room_id, firestore, setCallComing]);
 
-	useEffect(() => {
-		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
-			const tokenDocRef = doc(
-				firestore,
-				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
-				callDetails.webrtc_token_room_id,
-			);
-			onSnapshot(tokenDocRef, (dop) => {
-				const room_data = dop.data();
-				setWebrtcToken((prev) => ({
-					...prev,
-					peer_token : room_data?.peer_token,
-					user_token : room_data?.user_token,
-				}));
-			});
-		}
-	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
+	const getCallingRoomData = useCallback(() => {
+		callCommingSnapshotRef?.current?.();
 
-	useEffect(() => {
-		const room_data = callDetails?.calling_details;
-		const notCallingCallStatus = ['rejected', 'end_call', 'miss_call', 'technical_error'];
-		const stopCallStatus = ['rejected', 'end_call', 'technical_error'];
-		if (
-			room_data?.call_status
-			&& stopCallStatus.includes(room_data?.call_status)
-			&& callDetails?.calling_room_id
-		) {
-			callEnd();
-		}
-
-		if (notCallingCallStatus.includes(room_data?.call_status)) {
-			setCallComing(false);
-		}
-	}, [callDetails?.calling_details, callDetails?.calling_room_id, callEnd, setCallComing]);
-
-	useEffect(() => {
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
 		const videoCallComingQuery = query(
 			videoCallRef,
@@ -164,9 +134,9 @@ function useComingCall({
 			where('peer_id', '==', userId),
 		);
 
-		onSnapshot(videoCallComingQuery, (querySnapshot) => {
+		callCommingSnapshotRef.current = onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
-				if (inVideoCall === false) {
+				if (inVideoCall === false && isEmpty(callDetails.calling_room_id)) {
 					const room_data = val.data();
 					setCallDetails((prev) => ({
 						...prev,
@@ -182,7 +152,62 @@ function useComingCall({
 				}
 			});
 		});
-	}, [firestore, inVideoCall, setCallComing, setCallDetails, userId]);
+	}, [callDetails.calling_room_id, firestore, inVideoCall, setCallComing, setCallDetails, userId]);
+
+	useEffect(() => {
+		getCallingRoomData();
+
+		return () => {
+			callCommingSnapshotRef?.current?.();
+		};
+	}, [getCallingRoomData]);
+
+	const getTokenData = useCallback(() => {
+		tokenSnapshotRef?.current?.();
+
+		if (callDetails?.webrtc_token_room_id && callDetails?.calling_room_id) {
+			const tokenDocRef = doc(
+				firestore,
+				`${FIRESTORE_PATH.video_calls}/${callDetails.calling_room_id}/${FIRESTORE_PATH.webrtc_token}`,
+				callDetails.webrtc_token_room_id,
+			);
+			tokenSnapshotRef.current = onSnapshot(tokenDocRef, (dop) => {
+				const room_data = dop.data();
+				setWebrtcToken((prev) => ({
+					...prev,
+					peer_token : room_data?.peer_token,
+					user_token : room_data?.user_token,
+				}));
+			});
+		}
+	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id, firestore, setWebrtcToken]);
+
+	useEffect(() => {
+		getTokenData();
+
+		return () => {
+			tokenSnapshotRef?.current?.();
+		};
+	}, [getTokenData]);
+
+	useEffect(() => {
+		const room_data = callDetails?.calling_details;
+		const notCallingCallStatus = ['rejected', 'end_call', 'miss_call', 'technical_error'];
+		const stopCallStatus = ['rejected', 'end_call', 'technical_error'];
+
+		if (
+			room_data?.call_status
+			&& room_data?.call_status !== 'calling'
+			&& stopCallStatus.includes(room_data?.call_status)
+			&& callDetails?.calling_room_id
+		) {
+			callEnd();
+		}
+
+		if (notCallingCallStatus.includes(room_data?.call_status)) {
+			setCallComing(false);
+		}
+	}, [callDetails?.calling_details, callDetails?.calling_room_id, callEnd, setCallComing]);
 
 	return {
 		answerOfCall,

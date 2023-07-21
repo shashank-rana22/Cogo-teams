@@ -16,13 +16,19 @@ function VideoCallScreen({
 	callDetails = {},
 	firestore = {},
 }, ref) {
-	const { calling_type, peer_details, calling_details = {} } = callDetails || {};
-	const { user_name = 'Unknown' } = peer_details || {};
+	const { calling_type, peer_details, my_details, calling_details = {} } = callDetails || {};
 	const { isVideoActive = false, isScreenShareActive = false } = calling_details?.user_call_options || {};
-
 	const { isMinimize } = options || {};
 
 	const tempRef = ref;
+
+	const getUserName = () => {
+		if (calling_type === 'outgoing') {
+			return peer_details?.user_name || 'Unknown user';
+		}
+
+		return my_details?.user_name || 'Unknown user';
+	};
 
 	const { stopCall, shareScreen, micOn, videoOn } = useVideocallOptions({
 		options,
@@ -66,9 +72,9 @@ function VideoCallScreen({
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />
 				<div className={(isVideoActive || isScreenShareActive) ? styles.peer_screen : styles.call_screen}>
 					<div className={styles.avatar_screen}>
-						<div className={styles.header}>{user_name}</div>
+						<div className={styles.header}>{getUserName()}</div>
 						<Avatar
-							personName={user_name}
+							personName={getUserName()}
 							size="250px"
 							className={styles.styled_avatar}
 						/>
