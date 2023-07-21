@@ -16,12 +16,12 @@ import useUpdateComponent from '../commons/useUpdateComponent';
 import chapterControls from './Chapter/controls';
 import getChapterColumns from './Chapter/getColumns';
 import getEmployeesColumns from './Employees/getColumns';
-import SquadControls from './Squad/controls';
+import squadControls from './Squad/controls';
 import getSquadColumns from './Squad/getColumns';
 import styles from './styles.module.css';
-import SubChapterControls from './SubChapter/controls';
+import subChapterControls from './SubChapter/controls';
 import getSubChapterColumns from './SubChapter/getColumns';
-import TribeControls from './Tribe/controls';
+import tribeControls from './Tribe/controls';
 import getTribeColumns from './Tribe/getColumns';
 
 const MAPPING = {
@@ -33,9 +33,9 @@ const MAPPING = {
 };
 
 const CONTROLS_MAPPING = {
-	tribe       : TribeControls,
-	squad       : SquadControls,
-	sub_chapter : SubChapterControls,
+	tribe       : tribeControls,
+	squad       : squadControls,
+	sub_chapter : subChapterControls,
 	chapter     : chapterControls,
 };
 
