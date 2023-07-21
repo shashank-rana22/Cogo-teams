@@ -151,7 +151,7 @@ const getLeaderBoardColumns = ({
 						service_type    : item.service_type,
 					})}
 				>
-					<ScoreTrendChart trend={item.trend} data={item.data} source="leaderboard" />
+					<ScoreTrendChart trend={item.trend} data={item.data || []} source="leaderboard" />
 				</div>
 			),
 		},
