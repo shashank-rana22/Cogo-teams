@@ -4,7 +4,7 @@ import {
 	doc,
 	onSnapshot,
 } from 'firebase/firestore';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -23,6 +23,8 @@ function useVideoCallFirebase({
 	setStreams,
 	peerRef,
 }) {
+	const newRoomRef = useRef(null);
+
 	const { saveInACallStatus } = useSetInACall();
 
 	const { user_data } = useSelector((state) => ({
@@ -33,6 +35,7 @@ function useVideoCallFirebase({
 	const callEnd = useCallback(() => {
 		saveInACallStatus(false);
 		setCallComing(false);
+		console.log('call ended calling');
 
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
@@ -62,9 +65,9 @@ function useVideoCallFirebase({
 		});
 
 		setStreams((prev) => {
-			stopStream('user_stream', prev);
-			stopStream('video_stream', prev);
-			stopStream('screen_stream', prev);
+			stopStream({ stream_type: 'user_stream', current_stream: prev });
+			stopStream({ stream_type: 'video_stream', current_stream: prev });
+			stopStream({ stream_type: 'screen_stream', current_stream: prev });
 			return {
 				user_stream   : null,
 				peer_stream   : null,
@@ -161,14 +164,16 @@ function useVideoCallFirebase({
 		[setCallDetails, callingToMediaStream, userName, userId],
 	);
 
-	useEffect(() => {
+	const updateCallRoom = useCallback(() => {
+		newRoomRef?.current?.();
+
 		if (callDetails?.calling_room_id) {
 			const videoCallDocRef = doc(
 				firestore,
 				FIRESTORE_PATH.video_calls,
 				callDetails?.calling_room_id,
 			);
-			onSnapshot(videoCallDocRef, (dop) => {
+			newRoomRef.current = onSnapshot(videoCallDocRef, (dop) => {
 				const room_data = dop.data();
 				setCallDetails((prev) => ({
 					...prev,
@@ -177,12 +182,19 @@ function useVideoCallFirebase({
 				}));
 			});
 		}
-	}, [callDetails?.calling_room_id, callEnd, firestore, setCallDetails]);
+	}, [callDetails?.calling_room_id, firestore, setCallDetails]);
+
+	useEffect(() => {
+		updateCallRoom();
+
+		return () => {
+			newRoomRef?.current?.();
+		};
+	}, [updateCallRoom]);
 
 	return {
 		callingTo,
 		callEnd,
-		stopStream,
 	};
 }
 

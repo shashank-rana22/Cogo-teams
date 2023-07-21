@@ -19,7 +19,7 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const [callComing, setCallComing] = useState(false);
+	const [callComing, setCallComing] = useState(true);
 	const [webrtcToken, setWebrtcToken] = useState({
 		user_token : null,
 		peer_token : null,
@@ -45,8 +45,7 @@ function VideoCall({
 	});
 
 	const streamRef = useRef({
-		user : null,
-		peer : null,
+		peer: null,
 	});
 	const peerRef = useRef(null);
 
@@ -102,11 +101,6 @@ function VideoCall({
 	);
 
 	useEffect(() => {
-		if (streams.screen_stream && streamRef.current.user) {
-			streamRef.current.user.srcObject = streams.screen_stream;
-		} else if (streams.user_stream && streamRef.current.user) {
-			streamRef.current.user.srcObject = streams.user_stream;
-		}
 		if (streams.peer_stream && streamRef.current.peer) {
 			streamRef.current.peer.srcObject = streams.peer_stream;
 		}
@@ -116,7 +110,7 @@ function VideoCall({
 		if (webrtcToken?.peer_token && callDetails?.calling_type === 'outgoing') {
 			if (peerRef.current) {
 				try {
-					peerRef.current.signal(webrtcToken?.peer_token);
+					peerRef.current?.signal?.(webrtcToken?.peer_token);
 				} catch (error) {
 					console.error('not able to load signal', error);
 				}
@@ -127,13 +121,11 @@ function VideoCall({
 	return (
 		<div>
 			{callComing ? (
-				<div>
-					<CallComing
-						rejectOfCall={rejectOfCall}
-						answerOfCall={answerOfCall}
-						callDetails={callDetails}
-					/>
-				</div>
+				<CallComing
+					rejectOfCall={rejectOfCall}
+					answerOfCall={answerOfCall}
+					callDetails={callDetails}
+				/>
 			) : null}
 			{inVideoCall ? (
 				<VideoCallScreen
