@@ -65,7 +65,7 @@ function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
 	const { NAVIGATION_KEY, API_NAME } = PERMISSION_BUTTON.upload_invoice || {};
 
 	const NAVIGATION = PERMISSION_NAVIGATION
-		?.[NAVIGATION_KEY]?.[API_NAME][GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
+		?.[NAVIGATION_KEY]?.[API_NAME]?.[GLOBAL_CONSTANTS.zeroth_index]?.type !== 'none';
 
 	const { id: partnerId = '' } = partner;
 
