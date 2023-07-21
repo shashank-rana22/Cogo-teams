@@ -9,12 +9,12 @@
 .minimize_btn {
 	position: absolute;
 	top: 10px;
+}
 
-	svg {
-		width: 30px;
-		height: 30px;
-		cursor: pointer;
-	}
+.minimize_icon {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 }
 
 .call_comming_body {
@@ -40,22 +40,22 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 5px;
-
-	svg {
-		width: 45px;
-		height: 45px;
-		padding: 7px;
-		margin: 4px;
-		border-radius: 50%;
-		fill: white;
-	}
 }
 
-.call_comming_btn .reject svg {
+.minimize_call_icon {
+	width: 45px;
+	height: 45px;
+	padding: 7px;
+	margin: 4px;
+	border-radius: 50%;
+	fill: white;
+}
+
+.minimize_reject_icon {
 	background-color: #bf291e;
 }
 
-.call_comming_btn .accept svg {
+.minmize_accept_icon {
 	background-color: #849e4c;
 }
 

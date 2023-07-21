@@ -2,7 +2,7 @@ import { Avatar, cl } from '@cogoport/components';
 import { IcMMinus } from '@cogoport/icons-react';
 import { forwardRef } from 'react';
 
-import useVideocallOptions from '../hooks/useVideocallOptions';
+import useVideocallOptions from '../../hooks/useVideocallOptions';
 
 import styles from './styles.module.css';
 import VideoCallOptions from './VideoCallOptions';

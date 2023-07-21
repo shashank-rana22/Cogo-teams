@@ -3,11 +3,12 @@ import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 export const stopStream = ({ stream_type, current_stream }) => {
-	if (!current_stream) return;
-
-	if (!current_stream[stream_type]) return;
+	if (!current_stream || !current_stream[stream_type]) {
+		return;
+	}
 
 	const tracks = current_stream[stream_type].getTracks();
+
 	tracks.forEach((track) => {
 		track.stop();
 	});
@@ -22,8 +23,8 @@ export const callUpdate = ({ data, firestore, calling_room_id }) => {
 			);
 
 			updateDoc(videCallRoomDoc, {
-				updated_at: Date.now(),
 				...data,
+				updated_at: Date.now(),
 			});
 		} catch (error) {
 			console.error(error);

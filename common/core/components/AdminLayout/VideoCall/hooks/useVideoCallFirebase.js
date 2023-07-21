@@ -9,7 +9,7 @@ import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { ICESERVER } from '../constants';
-import { callUpdate, saveCallingData, saveWebrtcToken, stopStream } from '../utils';
+import { callUpdate, saveCallingData, saveWebrtcToken, stopStream } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
 

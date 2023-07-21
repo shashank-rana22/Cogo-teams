@@ -11,9 +11,10 @@ function CallComing({
 	answerOfCall = () => {},
 	callDetails = {},
 }) {
-	const { my_details } = callDetails?.calling_details || {};
-	const [isMaximize, setIsMaximize] = useState(true);
 	const audioRef = useRef(null);
+	const [isMaximize, setIsMaximize] = useState(true);
+
+	const { my_details } = callDetails?.calling_details || {};
 
 	useEffect(() => {
 		if (audioRef.current) {
@@ -27,6 +28,7 @@ function CallComing({
 				ref={audioRef}
 				src={GLOBAL_CONSTANTS.video_call_ring_tone_url}
 			/>
+
 			{isMaximize ? (
 				<div className={styles.big_call_comming}>
 					<div
@@ -34,7 +36,7 @@ function CallComing({
 						className={styles.minimize_btn}
 						onClick={() => setIsMaximize(false)}
 					>
-						<IcMMinus />
+						<IcMMinus className={styles.minimize_icon} />
 					</div>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
@@ -63,8 +65,8 @@ function CallComing({
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 						alt="avatar-placeholder"
-						height={60}
-						width={60}
+						height={50}
+						width={50}
 						className={styles.user_avatar}
 					/>
 					<div
@@ -75,18 +77,18 @@ function CallComing({
 						{my_details?.name || 'UnKnown'}
 					</div>
 					<div className={styles.call_comming_btn}>
-						<div role="presentation" onClick={rejectOfCall} className={styles.reject}>
-							<IcMCall />
-						</div>
-						<div role="presentation" onClick={answerOfCall} className={styles.accept}>
-							<IcMVideoCall />
-						</div>
+						<IcMCall
+							onClick={rejectOfCall}
+							className={cl`${styles.minimize_call_icon} ${styles.minimize_reject_icon}`}
+						/>
+						<IcMVideoCall
+							onClick={answerOfCall}
+							className={cl`${styles.minimize_call_icon} ${styles.minmize_accept_icon}`}
+						/>
 					</div>
 				</div>
 			)}
-
 		</div>
-
 	);
 }
 

@@ -3,14 +3,13 @@ import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
-import CallComing from './CallComing';
+import CallComing from './components/CallComing';
+import VideoCallScreen from './components/VideoCallScreen';
 import { firebaseConfig } from './configurations/firebase-config';
+import { CALL_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
-import { callUpdate } from './utils';
-import VideoCallScreen from './VideoCallScreen';
-
-const CALL_TIME_LIMIT = 60000;
+import { callUpdate } from './utils/callFunctions';
 
 function VideoCall({
 	videoCallRecipientData = {},
@@ -19,7 +18,7 @@ function VideoCall({
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
-	const [callComing, setCallComing] = useState(true);
+	const [callComing, setCallComing] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
 		user_token : null,
 		peer_token : null,
@@ -76,11 +75,9 @@ function VideoCall({
 	const missCallHandel = useCallback(() => {
 		if (callDetails?.calling_details?.call_status === 'calling') {
 			callUpdate({
-				data: {
-					call_status: 'miss_call',
-				},
+				data            : { call_status: 'miss_call' },
 				firestore,
-				calling_room_id: callDetails?.calling_room_id,
+				calling_room_id : callDetails?.calling_room_id,
 			});
 			callEnd();
 		}
@@ -91,11 +88,10 @@ function VideoCall({
 			if (inVideoCall && videoCallRecipientData?.user_id) {
 				callingTo(videoCallRecipientData);
 			}
-			const r = setTimeout(() => {
-				missCallHandel();
-			}, CALL_TIME_LIMIT);
 
-			return () => clearTimeout(r);
+			const timeoutFunc = setTimeout(missCallHandel, CALL_TIME_LIMIT);
+
+			return () => clearTimeout(timeoutFunc);
 		},
 		[inVideoCall, videoCallRecipientData, callingTo, missCallHandel],
 	);
@@ -107,13 +103,15 @@ function VideoCall({
 	}, [streams]);
 
 	useEffect(() => {
-		if (webrtcToken?.peer_token && callDetails?.calling_type === 'outgoing') {
-			if (peerRef.current) {
-				try {
-					peerRef.current?.signal?.(webrtcToken?.peer_token);
-				} catch (error) {
-					console.error('not able to load signal', error);
-				}
+		if (
+			webrtcToken?.peer_token
+			&& callDetails?.calling_type === 'outgoing'
+			&& peerRef.current
+		) {
+			try {
+				peerRef.current?.signal?.(webrtcToken?.peer_token);
+			} catch (error) {
+				console.error('not able to load signal', error);
 			}
 		}
 	}, [callDetails?.calling_type, webrtcToken?.peer_token]);

@@ -5,7 +5,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import Peer from 'simple-peer';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import { callUpdate, saveWebrtcToken } from '../utils';
+import { callUpdate, saveWebrtcToken } from '../utils/callFunctions';
 
 import { useSetInACall } from './useSetInACall';
 

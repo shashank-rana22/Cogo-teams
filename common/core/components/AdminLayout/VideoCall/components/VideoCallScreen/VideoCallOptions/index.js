@@ -10,7 +10,7 @@ import {
 } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
-import { callUpdate } from '../../utils';
+import { callUpdate } from '../../../utils/callFunctions';
 
 import styles from './styles.module.css';
 

@@ -34,3 +34,5 @@ export const ICESERVER = [
 		username   : '28224511:1379330808',
 	},
 ];
+
+export const CALL_TIME_LIMIT = 60000;
