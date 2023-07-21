@@ -18,6 +18,9 @@ function CommunicationModals({
 	modalType = {},
 	userId = '',
 	viewType = '',
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
+	setAutoAssignChats = () => {},
 	setOpenKamContacts = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
@@ -103,6 +106,9 @@ function CommunicationModals({
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}
+				selectedAutoAssign={selectedAutoAssign}
+				setSelectedAutoAssign={setSelectedAutoAssign}
+				setAutoAssignChats={setAutoAssignChats}
 			/>
 
 			{!!buttonType && (

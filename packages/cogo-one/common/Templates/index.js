@@ -20,10 +20,14 @@ function Templates({
 	dialNumber = '',
 	setDialNumber = () => {},
 	viewType = '',
+	selectedAutoAssign = {},
 	userName = '',
 }) {
 	const [customizableData, setCustomizableData] = useState({});
-	const [activeCard, setActiveCard] = useState({ show: type === 'whatsapp_new_message_modal', data: {} });
+	const [activeCard, setActiveCard] = useState({
+		show : type === 'whatsapp_new_message_modal',
+		data : {},
+	});
 
 	const {
 		sendCommunicationTemplate = () => {},
@@ -85,6 +89,7 @@ function Templates({
 						setDialNumber={setDialNumber}
 						maskedMobileNumber={maskedMobileNumber}
 						userName={userName}
+						selectedAutoAssign={selectedAutoAssign}
 					/>
 					<div className={styles.container}>
 						<Input

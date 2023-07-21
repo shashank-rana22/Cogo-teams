@@ -1,0 +1,42 @@
+.template_heading {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 6px 10px;
+	font-size: 16px;
+}
+
+.icon_whatsapp {
+	width: 16px;
+	height: 16px;
+	margin-left: 6px;
+}
+
+.user_names {
+	margin: 0 4px;
+	font-size: 14px;
+	color: #2b2b2b;
+}
+
+.more_names {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #4f4f4f;
+	background: #c4dc91;
+	border-radius: 50%;
+}
+
+.tooltip_box {
+	:global {
+		.tippy-content {
+			max-height: 116px;
+			padding: 4px 0;
+			overflow-y: auto;
+		}
+	}
+}

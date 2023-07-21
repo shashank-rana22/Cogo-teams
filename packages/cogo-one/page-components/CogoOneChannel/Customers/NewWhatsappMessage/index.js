@@ -3,6 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import React, { useState } from 'react';
 
 import Templates from '../../../../common/Templates';
+import useSendUsersBulkCommunication from '../../../../hooks/useSendUsersBulkCommunication';
 import useSendUserWhatsappTemplate from '../../../../hooks/useSendUserWhatsappTemplate';
 
 import styles from './styles.module.css';
@@ -15,6 +16,9 @@ function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
 	viewType = '',
+	selectedAutoAssign = {},
+	setSelectedAutoAssign = () => {},
+	setAutoAssignChats = () => {},
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -41,6 +45,12 @@ function NewWhatsappMessage({
 		},
 	);
 
+	const { bulkCommunicationChat } = useSendUsersBulkCommunication({
+		callbackfunc: closeModal,
+		setSelectedAutoAssign,
+		setAutoAssignChats,
+	});
+
 	const sendWhatsappCommunication = (args = {}) => {
 		const { country_code = '', number = '' } = dialNumber;
 		if (!number) {
@@ -57,10 +67,16 @@ function NewWhatsappMessage({
 		});
 	};
 
+	const bulkCommunication = (args) => {
+		const { template_name, variables } = args;
+		bulkCommunicationChat({ selectedAutoAssign, variables, template_name });
+	};
+
 	const data = {
-		sendCommunicationTemplate : sendWhatsappCommunication,
+		sendCommunicationTemplate : type === 'bulk_communication' ? bulkCommunication : sendWhatsappCommunication,
 		communicationLoading      : loading,
 	};
+
 	return (
 		<Modal
 			show={type}
@@ -85,6 +101,7 @@ function NewWhatsappMessage({
 				setDialNumber={setDialNumber}
 				dialNumber={dialNumber}
 				key={type}
+				selectedAutoAssign={selectedAutoAssign}
 				userName={userName}
 			/>
 		</Modal>

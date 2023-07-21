@@ -34,6 +34,8 @@ function Customers({
 	setOpenKamContacts = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -50,6 +52,11 @@ function Customers({
 			isBotSession,
 			setIsBotSession,
 			tagOptions,
+			setModalType,
+			selectedAutoAssign,
+			setSelectedAutoAssign,
+			autoAssignChats,
+			setAutoAssignChats,
 			workPrefernceLoading,
 		},
 		voice: {
@@ -144,6 +151,9 @@ function Customers({
 				modalType={modalType}
 				userId={userId}
 				viewType={viewType}
+				selectedAutoAssign={selectedAutoAssign}
+				setSelectedAutoAssign={setSelectedAutoAssign}
+				setAutoAssignChats={setAutoAssignChats}
 				setOpenKamContacts={setOpenKamContacts}
 			/>
 		</div>
