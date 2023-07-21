@@ -32,9 +32,11 @@ function TransactionInsights({ itemData }) {
 							{startCase(itemData?.trade_type)
 						|| startCase(incoTermMapping[itemData?.inco_term])}
 						</div>
-						<div className={styles.port_pair_container}>
-							<PortDetails data={itemData} />
-						</div>
+						{['fcl_freight', 'lcl_freight', 'air_freight'].includes(itemData?.shipment_type) && (
+							<div className={styles.port_pair_container}>
+								<PortDetails data={itemData} />
+							</div>
+						)}
 						<div className={styles.single_box}>
 							Total Transaction
 						</div>

@@ -145,11 +145,9 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 					<TabPanel name="transaction_insights" title="Transaction Insights">
 						{showDetail === true ? (
 							<div>
-								{['air_freight', 'lcl_freight', 'fcl_freight'].includes(
-									itemData?.shipment_type,
-								) ? (
-									<TransactionInsights itemData={itemData} />
-									) : null}
+
+								<TransactionInsights itemData={itemData} />
+
 								<div
 									role="presentation"
 									className={styles.show_detail_tab}
