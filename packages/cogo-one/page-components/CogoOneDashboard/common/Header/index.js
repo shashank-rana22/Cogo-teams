@@ -4,13 +4,9 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { FILTER_TAB_OPTIONS } from '../../constants';
 
-const FILTER_TAB_OPTIONS = [
-	{ label: 'Day', name: 'day' },
-	{ label: 'Week', name: 'week' },
-	{ label: 'Month', name: 'month' },
-];
+import styles from './styles.module.css';
 
 function Header({ timeline = '', setTimeline = () => {}, setSelectedDate = () => {} }) {
 	const { query, back } = useRouter();

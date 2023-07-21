@@ -121,7 +121,7 @@ function Calendar({ props = {} }) {
 					setSelectedDate={setSelectedDate}
 				/>
 			</div>
-			<button disabled className={`${styles.nav_btn}`}>
+			<button disabled className={styles.nav_btn}>
 				<IcMArrowDoubleLeft />
 			</button>
 		</div>

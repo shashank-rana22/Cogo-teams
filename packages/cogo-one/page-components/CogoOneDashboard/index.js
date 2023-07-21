@@ -29,13 +29,6 @@ function CogoOneDashboard() {
 
 	const isAgentView = userRoleId.includes(GLOBAL_CONSTANTS.uuid.kam_agent_role_id);
 
-	// const selectedTimeline = useCallback(() => (calendarData || []).filter(
-	// 	(d) => format(d.date, GLOBAL_CONSTANTS.formats.date['dd MMM YYYY']) === format(
-	// 		selectedItem,
-	// 		GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
-	// 	),
-	// )?.[GLOBAL_CONSTANTS.zeroth_index], [calendarData, selectedItem]);
-
 	const {
 		loading = false,
 		data = {},

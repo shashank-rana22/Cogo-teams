@@ -131,17 +131,6 @@ export const AGENT_ACTIVITY = [
 	},
 ];
 
-export 	const PERFORMANCE_BUTTON_MAPPING = [
-	{
-		key   : 'best_performance',
-		label : 'Best Performance',
-	},
-	{
-		key   : 'worst_performance',
-		label : 'Worst Performance',
-	},
-];
-
 export const LABLE_TYPE = {
 	day: {
 		label: 'Hour',
@@ -168,3 +157,9 @@ export const FORMAT_TYPE = {
 		subLabel : GLOBAL_CONSTANTS.formats.date.yyyy,
 	},
 };
+
+export const FILTER_TAB_OPTIONS = [
+	{ label: 'Day', name: 'day' },
+	{ label: 'Week', name: 'week' },
+	{ label: 'Month', name: 'month' },
+];

@@ -16,7 +16,6 @@
 
 .heading {
 	display: flex;
-	cursor: default;
 }
 
 .heading .heading_name {

@@ -3,7 +3,6 @@
 	flex-direction: column;
 	padding: 20px 10px 20px 16px;
 	margin-bottom: 12px;
-	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -21,9 +20,8 @@
 
 .improvement_text_box {
 	display: flex;
-	justify-content: row;
+	justify-content: center;
 	padding: 3px;
-	margin-top: -16px;
 }
 
 .improvement_text {
@@ -48,7 +46,6 @@
 
 .text_placeholder {
 	display: inline-block;
-	margin-bottom: -5px;
 	border-radius: 4px;
 }
 
@@ -64,7 +61,6 @@
 	left: 1px;
 	width: 100%;
 	height: 1px;
-	content: "";
 	background-color: #000;
 	transition: transform 0.25s ease-out;
 	transform: scaleX(0);

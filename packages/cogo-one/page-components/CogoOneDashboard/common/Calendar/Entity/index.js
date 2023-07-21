@@ -19,8 +19,9 @@ export function CalendarEntity({
 	timeline = 'day',
 	setSelectedDate = () => {},
 }) {
-	const isWeek = timeline === 'week';
 	const middle = useRef();
+
+	const isWeek = timeline === 'week';
 
 	const handleClick = (item) => {
 		const { date, endDate } = item || {};

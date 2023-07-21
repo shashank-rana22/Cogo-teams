@@ -16,7 +16,6 @@ function Improvement({ loading = false, agentDelay = '' }) {
 					<div className={styles.dot} />
 					<div className={styles.improvement_text}>
 						Your chat reply time was
-						{' '}
 						{loading
 							? (
 								<Placeholder
@@ -32,13 +31,11 @@ function Improvement({ loading = false, agentDelay = '' }) {
 											? ((agentDelay || GLOBAL_CONSTANTS) / ONE_MINUTE).toFixed(MIN_ROUND_UP)
 											: (agentDelay || GLOBAL_CONSTANTS)}
 									</span>
-									{' '}
 									<span className={styles.unit}>
 										{(agentDelay || GLOBAL_CONSTANTS) >= ONE_MINUTE ? 'hr' : 'min'}
 									</span>
 								</>
 							)}
-						{' '}
 						slower than your peers
 					</div>
 				</div>

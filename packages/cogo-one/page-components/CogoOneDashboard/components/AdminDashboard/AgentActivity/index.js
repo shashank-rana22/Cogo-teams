@@ -18,17 +18,6 @@ function AgentActivity({ activeTab = '', setActiveTab = () => {} }) {
 
 	const { list = [] } = data || {};
 
-	// const redirectToAgentView = ({ agentId = '', name = '' }) => {
-	// 	if (!agentId) return;
-	// 	push(
-	// 		`/cogo-one/dashboard/[id]?view=agent&agentName=${name}`,
-	// 		`/cogo-one/dashboard/${agentId}?view=agent&agentName=${name}`,
-	// 	);
-	// 	if (agentId) {
-	// 		getCogoOneDashboard(); // pass agentId to getCogoOneDashboard
-	// 	}
-	// };
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.activity_name}>Your Agents</div>

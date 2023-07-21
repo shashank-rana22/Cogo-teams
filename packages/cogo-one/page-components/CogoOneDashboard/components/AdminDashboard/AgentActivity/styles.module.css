@@ -89,7 +89,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	overflow-y: scroll;
-	cursor: default;
 	background: #fbf7f1;
 }
 

@@ -3,7 +3,6 @@
 	flex-direction: column;
 	width: 45%;
 	padding: 13px;
-	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -24,7 +23,6 @@
 
 .icon_plus_number {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 }
 
@@ -32,7 +30,7 @@
 	position: relative;
 	display: inline-block;
 	padding: 4px;
-	padding-left: 7px;
+	padding-left: 8px;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 20px;

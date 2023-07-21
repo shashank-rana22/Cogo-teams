@@ -2,14 +2,20 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 48%;
 	padding: 10px;
+	margin-bottom: 8px;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
-}
 
-.chatstatistics_box_agent {
-	margin: 0;
+	&:nth-child(3) {
+		margin-bottom: 0 !important;
+	}
+
+	&:nth-child(4) {
+		margin-bottom: 0 !important;
+	}
 }
 
 .small_data_box {

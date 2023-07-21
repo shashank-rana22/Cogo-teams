@@ -4,7 +4,6 @@
 	width: 52%;
 	height: 280px;
 	padding: 13px;
-	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
@@ -34,8 +33,6 @@
 	bottom: 0;
 	left: 1px;
 	width: 7%;
-	height: 1px;
-	content: "";
 	background-color: #000;
 	transition: transform 0.25s ease-out;
 	transform: scaleX(0);

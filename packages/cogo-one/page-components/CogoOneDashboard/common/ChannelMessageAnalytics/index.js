@@ -10,7 +10,6 @@ function ChannelMessageAnalytic({ loading = false, channelsMessageAnalytics = {}
 	return (
 		<div className={styles.statistics}>
 			<div className={styles.heading}>Channels Messages Analytics</div>
-
 			<div className={styles.socoal_icons_and_data_list}>
 				{(CHANNEL_STATS || []).map((stat) => {
 					const { key, channel, static_data, icon } = stat;
