@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequestAir } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -19,7 +20,7 @@ const useGetManifest = () => {
 				},
 			});
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [trigger]);
 

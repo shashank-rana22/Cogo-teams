@@ -110,23 +110,20 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'create_chat_message',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'create_chat_message',
+		access_type : 'private',
 	},
 	{
-		api          : 'list_chat_channels',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'list_chat_channels',
+		access_type : 'private',
 	},
 	{
 		api         : 'delete_chat_message',
 		access_type : 'private',
 	},
 	{
-		api          : 'update_chat_message',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'update_chat_message',
+		access_type : 'private',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -137,9 +134,8 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'update_chat_channel_seen',
-		access_type  : 'private',
-		service_name : 'chat',
+		api         : 'update_chat_channel_seen',
+		access_type : 'private',
 
 	},
 	{
