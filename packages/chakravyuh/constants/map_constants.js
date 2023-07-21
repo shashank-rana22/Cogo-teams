@@ -28,11 +28,7 @@ export const MAX_BOUNDS = [
 ];
 export const LAYOUT_WIDTH = 408;
 export const TIME_LIMIT = 200;
-export const ICON_SIZE = 40;
-export const ICON_ANCHORX = 30;
-export const ICON_ANCHORY = 50;
 export const PADDING_TOP = 10;
-export const PREFFERED_ZOOM = 4;
 export const ONE = 1;
 export const ITEMS = [
 	{ label: 'NA', spectrumStyle: { backgroundColor: '#f4f4f4', borderColor: '#828282' }, key: 'na' },
