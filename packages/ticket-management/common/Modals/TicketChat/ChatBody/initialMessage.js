@@ -2,15 +2,16 @@ import React from 'react';
 
 import TicketComment from './TicketComment';
 
-function InitialMessage({ ticketData, userId }) {
+function InitialMessage({ ticketData = {}, userId = '' }) {
+	const { AgentName: agentName = '', Ticket: ticket = {}, TicketUser: ticketUser = {} } = ticketData || {};
 	const {
 		Description: description = '',
 		CreatedAt: createdAt = '',
 		Data: data = {},
 		UserID : activityUserId = '',
-	} = ticketData?.Ticket || {};
+	} = ticket || {};
 	const { Attachment: mediaUrls = [], ...restData } = data || {};
-	const { SystemUserID: systemUserID = '', Name:name = '' } = ticketData?.TicketUser || {};
+	const { SystemUserID: systemUserID = '', Name:name = '' } = ticketUser || {};
 
 	return (
 		<TicketComment
@@ -20,6 +21,7 @@ function InitialMessage({ ticketData, userId }) {
 			mediaUrls={mediaUrls}
 			userId={userId}
 			name={name}
+			agentName={agentName}
 			systemUserID={systemUserID}
 			restData={restData}
 			activityUserId={activityUserId}
