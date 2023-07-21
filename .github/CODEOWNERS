@@ -45,3 +45,5 @@ packages/shipment-air-customs @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-air-freight-local @Cogoport/platform-engineering @Arpit-Cogoport
 packages/shipment-domestic-air-freight @Cogoport/platform-engineering @Arpit-Cogoport
 packages/ihls @Cogoport/platform-engineering @sagar-paliwal
+packages/printing-desk @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport
+packages/airline-booking-plugin @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport

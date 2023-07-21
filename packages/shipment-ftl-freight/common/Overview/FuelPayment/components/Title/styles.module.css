@@ -1,0 +1,12 @@
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #4f4f4f;
+}
+
+.message {
+	margin-top: 5px;
+	font-size: 10px;
+	color: #ee3425;
+}

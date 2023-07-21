@@ -1,0 +1,44 @@
+.title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.message {
+	font-size: 11px;
+}
+
+.banner {
+	padding: 12px;
+	margin-top: 5px;
+	background: #fff;
+	border: 1px dashed #e0e0e0;
+	border-radius: 8px;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		border: 1px dashed #f1d605;
+		transition: 0.3s ease-in-out;
+	}
+}
+
+.user_name {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.sender_email {
+	font-size: 12px;
+}
+
+.subject_name {
+	margin: 5% 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.eye_icon {
+	margin-right: 5px;
+}
