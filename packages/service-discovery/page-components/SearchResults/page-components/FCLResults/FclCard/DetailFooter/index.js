@@ -1,5 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Detention from '../../../../common/Detention';
@@ -56,6 +57,27 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 		};
 	});
 
+	const {
+		origin_detention = {},
+		origin_demurrage = {},
+		destination_detention = {},
+		destination_demurrage = {},
+	} = rateCardData;
+
+	const howMuchToShowInDnD = {
+		origin_detention      : origin_detention?.slabs && !isEmpty(origin_detention.slabs),
+		origin_demurrage      : origin_demurrage?.slabs && !isEmpty(origin_demurrage.slabs),
+		destination_detention : destination_detention?.slabs && !isEmpty(destination_detention.slabs),
+		destination_demurrage : destination_demurrage?.slabs && !isEmpty(destination_demurrage.slabs),
+	};
+
+	const notToShowDnD = Object.values(howMuchToShowInDnD).every((val) => {
+		if (!val) {
+			return true;
+		}
+		return false;
+	});
+
 	const onAddAdditionaldays = (values) => {
 		onSubmit(values);
 	};
@@ -84,20 +106,23 @@ function DetailFooter({ rateCardData, detail, refetchSearch }) {
 					{' '}
 					days
 
-					<Popover
-						placement="bottom"
-						render={(
-							<Detention
-								heading="Update No. of Free Days"
-								buttonTitle="Update"
-								values={addDaysValue}
-								handleSave={onAddAdditionaldays}
-							/>
-						)}
-						caret={false}
-					>
-						<IcMPlusInCircle className={styles.plusIcon} />
-					</Popover>
+					{notToShowDnD ? null : (
+						<Popover
+							placement="bottom"
+							render={(
+								<Detention
+									howMuchToShowInDnD={howMuchToShowInDnD}
+									heading="Update No. of Free Days"
+									buttonTitle="Update"
+									values={addDaysValue}
+									handleSave={onAddAdditionaldays}
+								/>
+							)}
+							caret={false}
+						>
+							<IcMPlusInCircle className={styles.plusIcon} />
+						</Popover>
+					)}
 
 				</div>
 

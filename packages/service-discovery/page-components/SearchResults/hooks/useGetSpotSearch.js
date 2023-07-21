@@ -23,12 +23,11 @@ const useGetSpotSearch = () => {
 	}, { manual: true });
 
 	const getSearch = useCallback(async () => {
-		const { page } = filters;
-		delete filters.page;
-
 		let finalFilters = {};
 
 		Object.keys(filters).forEach((key) => {
+			if (key === 'page') return;
+
 			finalFilters = {
 				...finalFilters,
 				[key]: filters[key] || undefined,
@@ -39,7 +38,7 @@ const useGetSpotSearch = () => {
 			await trigger({
 				params: {
 					spot_search_id,
-					page,
+					page       : filters.page,
 					page_limit : 10,
 					filters    : { ...finalFilters },
 				},
@@ -52,8 +51,9 @@ const useGetSpotSearch = () => {
 	}, [filters, spot_search_id, trigger]);
 
 	useEffect(() => {
+		if (rate_card_id) return;
 		getSearch();
-	}, [getSearch, filters]);
+	}, [getSearch, filters, rate_card_id]);
 
 	useEffect(() => {
 		setScreen(rate_card_id ? 'selectedCard' : 'listRateCard');
@@ -72,12 +72,7 @@ const useGetSpotSearch = () => {
 				},
 			});
 
-			console.log('res', res);
-
 			setScreen(screenObj?.screen || 'listRateCard');
-			console.log('inAPi', res.data.list.filter(
-				(item) => item.id === screenObj?.card_id,
-			)?.[GLOBAL_CONSTANTS.zeroth_index]);
 
 			if (screenObj?.screen === 'selectedCard') {
 				setSelectedCard(res.data.list.filter(

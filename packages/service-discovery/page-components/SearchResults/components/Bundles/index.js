@@ -1,37 +1,25 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import OfferBundle from './OfferBundle';
+import { sampleData } from './sampleData';
 import styles from './styles.module.css';
 
-const ARRAY = [
-	{
-		bg_color   : '#CED1ED',
-		box_shadow : '0px 2px 4px 0px rgba(114, 120, 173, 0.60)',
-		discount   : 20,
-		days       : 5,
-	},
-	{
-		bg_color   : '#F8AEA8',
-		box_shadow : '0px 2px 4px 0px rgba(248, 174, 168, 0.70)',
-		discount   : 34,
-		days       : 3,
-	},
-];
+const RANDOM_THRESHOLD_VALUE = 0.5;
+
+function shuffleArray(array) {
+	return array.sort(() => Math.random() - RANDOM_THRESHOLD_VALUE);
+}
 
 function Bundles() {
+	const shuffledArray = useMemo(() => shuffleArray(sampleData), []);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Pre-curated Offers (Coming Soon)</div>
-			{ARRAY.map((item, index) => (
-				<div
-					key={item.bg_color}
-					style={{ marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '20px' }}
-				>
-					<OfferBundle data={item} />
-				</div>
-			))}
 
+			{shuffledArray.map((item) => (
+				<OfferBundle key={item.key} data={item} />
+			))}
 		</div>
 	);
 }

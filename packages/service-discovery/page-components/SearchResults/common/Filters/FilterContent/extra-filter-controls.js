@@ -4,6 +4,7 @@ const EXTRA_FILTERS = {
 		controls : [
 			{
 				name        : 'shipping_line_id',
+				label       : 'Select Shipping Line',
 				type        : 'async-select',
 				asyncKey    : 'list_operators',
 				initialCall : true,
@@ -125,11 +126,11 @@ const EXTRA_FILTERS = {
 			},
 		],
 	},
-	shipment_type: {
+	schedule_type: {
 		label    : 'Shipment Type',
 		controls : [
 			{
-				name    : 'shipment_type',
+				name    : 'schedule_type',
 				type    : 'chips',
 				options : [
 					{

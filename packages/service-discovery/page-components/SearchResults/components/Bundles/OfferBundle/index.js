@@ -9,7 +9,7 @@ function OfferBundle({ data }) {
 	return (
 		<div
 			className={styles.container}
-			style={{ background: data.bg_color, boxShadow: data.box_shadow, border: `1px solid ${data.bg_color}` }}
+			style={data.style}
 		>
 			<span className={styles.tag}>TRANSPORT</span>
 
@@ -25,7 +25,6 @@ function OfferBundle({ data }) {
 						formatType : 'date',
 					})}
 					. T&C Apply.
-
 				</span>
 			</div>
 
