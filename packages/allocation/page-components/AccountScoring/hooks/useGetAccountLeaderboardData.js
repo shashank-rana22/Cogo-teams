@@ -52,7 +52,9 @@ const useGetAccountLeaderboardData = () => {
 		if (newControl.name === 'warmth' && bulkDeallocateFilter) {
 			newControl = {
 				...newControl,
-				disabled: true,
+				options: [
+					{ label: 'Ice Cold', value: 'ice_cold' },
+					{ label: 'Cold', value: 'cold' }],
 			};
 		}
 
