@@ -92,10 +92,6 @@
 	padding-left: 10px;
 
 	:global {
-		/* .ui_ps_themeType_primary {
-			background-color: var(--color-tertiary-beige-4);
-		} */
-
 		.ui_star_rating_container {
 			:hover {
 				background-color: var(--color-tertiary-beige-4);
@@ -242,17 +238,9 @@
 	border-radius: 6px;
 }
 
-.heading {
-	position: relative;
-	width: fit-content;
-	margin-top: -1px;
-	letter-spacing: 0;
-	white-space: nowrap;
-}
-
-.headings {
-	position: relative;
-	width: fit-content;
-	font-size: medium;
-	white-space: nowrap;
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
 }

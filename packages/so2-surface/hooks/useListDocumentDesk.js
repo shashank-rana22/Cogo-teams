@@ -37,7 +37,7 @@ const useListDocumentDesk = () => {
 			sort_type                         : filters?.order,
 			task_stats_required               : true,
 			pagination_data_required          : true,
-			is_collection_party_data_required : true,
+			is_collection_party_data_required : payloadMapping[stepperTab][activeTab]?.shipment_type !== 'ftl_freight',
 			page,
 			page_limit                        : PAGE_SIZE,
 		},

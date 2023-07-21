@@ -1369,6 +1369,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_surface_so2_dashboard_shipments'],
 				possible_apis : apis.so2_surface,
 			},
+			{
+				key           : 'coe-shipment_surface',
+				title         : 'Surface Booking Desk',
+				href          : '/v2/booking-desk/surface',
+				as            : '/v2/booking-desk/surface',
+				type          : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : [...apis.shipment],
+			},
 		],
 	},
 	terms_and_conditions: {
@@ -1859,8 +1868,8 @@ const navigationMappingAdmin = {
 	airline_booking_plugin: {
 		key           : 'airline_booking_plugin',
 		title         : 'Airline Booking Plugin',
-		href          : '/airline-booking-plugin',
-		as            : '/airline-booking-plugin',
+		href          : '/v2/airline-booking-plugin',
+		as            : '/v2/airline-booking-plugin',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.airline_booking_plugin,

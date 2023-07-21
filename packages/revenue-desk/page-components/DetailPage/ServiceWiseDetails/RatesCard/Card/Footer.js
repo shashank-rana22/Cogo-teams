@@ -129,6 +129,18 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 								maximumFractionDigits : 2,
 							},
 						})}
+						{' '}
+						|
+						{' '}
+						{formatAmount({
+							amount   : data?.rowData?.total_price_in_preferred_currency,
+							currency : data?.rowData?.preferred_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
 					</div>
 					{isDisplayLineItems ? (
 						<Popover
@@ -173,7 +185,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 								</div>
 							</div>
 						) : null}
-					{data?.rowData?.destinatoion_locals_price
+					{data?.rowData?.destination_locals_price
 						? (
 							<div style={{ display: 'flex' }}>
 								Destination Local Price :
