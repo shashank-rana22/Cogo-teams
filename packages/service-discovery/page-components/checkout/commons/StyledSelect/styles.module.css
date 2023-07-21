@@ -22,9 +22,24 @@
 	color: #5936f0;
 	text-decoration: underline;
 	cursor: pointer;
+
+	&.lg {
+		font-size: 22px;
+	}
 }
 
 .flex {
 	display: flex;
 	margin-left: 4px;
+	align-items: center;
+}
+
+.popover {
+	flex-direction: column;
+
+	:global {
+		.tippy-content {
+			padding: unset;
+		}
+	}
 }

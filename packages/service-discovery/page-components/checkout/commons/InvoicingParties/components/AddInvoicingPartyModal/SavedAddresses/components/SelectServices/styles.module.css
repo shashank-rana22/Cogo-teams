@@ -24,19 +24,22 @@
 
 .service_container {
 	position: relative;
-	flex-basis: 31%;
-	height: 140px;
-	padding: 14px;
+	flex-basis: 23%;
+	padding: 12px;
 	margin-top: 20px;
 	margin-right: 20px;
 	cursor: pointer;
 	background-color: #fff;
 	border: 1px solid #cfeaed;
 	border-radius: 8px;
+	transition: background-color 0.5s ease-out 100ms;
+
+	&.multiple {
+		padding-top: 32px;
+	}
 
 	&:hover {
-		background-color: #f3fafa;
-		transform: scale(1.04);
+		background-color: #cfeaed;
 	}
 
 	&.inactive {
@@ -46,13 +49,22 @@
 	}
 
 	&.active {
-		background-color: #cfeaed;
+		background-color: #acdadf;
+
+		svg {
+			color: #ee3425;
+		}
 	}
 
 	.icon {
 		position: absolute;
 		top: 8px;
 		right: 8px;
+		transition: 0.5s;
+
+		&.active {
+			transform: rotate(135deg);
+		}
 	}
 }
 
@@ -127,5 +139,28 @@
 
 	&.light {
 		font-weight: 500;
+	}
+}
+
+
+.service_details {
+	position: absolute;
+	left: 4px;
+	top: -4px;
+
+	:global {
+		.ui_pill_container {
+			margin-top: unset;
+			line-height: unset;
+		}
+
+		.ui_pill_text {
+			max-width: 80px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			font-size: 10px;
+			
+		}
 	}
 }

@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, cl } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -6,7 +6,18 @@ import { useState } from 'react';
 import StyledOptions from './StyledOptions';
 import styles from './styles.module.css';
 
-function StyledSelect({ defaultValue, onChange = () => {}, options = [], disabled = false }) {
+const ICON_MAPPING = {
+	sm: {
+		height : '12px',
+		width  : '12px',
+	},
+	lg: {
+		height : '18px',
+		width  : '18px',
+	},
+};
+
+function StyledSelect({ defaultValue = '', onChange = () => {}, options = [], disabled = false, size = 'sm' }) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
@@ -20,6 +31,7 @@ function StyledSelect({ defaultValue, onChange = () => {}, options = [], disable
 					options={options}
 				/>
 			)}
+			className={styles.popover}
 			onClickOutside={() => setShowPopover(false)}
 			interactive
 		>
@@ -27,14 +39,14 @@ function StyledSelect({ defaultValue, onChange = () => {}, options = [], disable
 				className={styles.flex}
 				role="presentation"
 			>
-				<div className={styles.styled_text}>{startCase(defaultValue)}</div>
+				<div className={cl`${styles.styled_text} ${styles[size]}`}>{startCase(defaultValue)}</div>
 
 				{!disabled ? (
 					<IcMArrowDown
 						onClick={() => {
 							setShowPopover(!showPopover);
 						}}
-						style={{ margin: '2px 0px 0px 4px', cursor: 'pointer' }}
+						style={{ margin: '2px 0px 0px 4px', cursor: 'pointer', ...ICON_MAPPING[size] }}
 					/>
 				) : null}
 			</div>

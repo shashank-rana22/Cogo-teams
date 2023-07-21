@@ -12,15 +12,10 @@ function AddInvoicingParty({
 	services = [],
 	rate = {},
 	paymentModes = {},
-	setPaymentModes = () => {},
 	getCheckoutInvoices = () => {},
 }) {
 	const disabledInvoicingParties = invoicingParties.map(
 		(invoicingParty) => invoicingParty?.billing_address?.tax_number,
-	);
-
-	const isInvoicingPartiesSaved = invoicingParties.every(
-		(invoicingParty) => invoicingParty.state.isSaved,
 	);
 
 	return (
@@ -39,13 +34,11 @@ function AddInvoicingParty({
 				<AddInvoicingPartyModal
 					disabledInvoicingParties={disabledInvoicingParties}
 					showAddInvoicingPartyModal={showAddInvoicingPartyModal}
-					isInvoicingPartiesSaved={isInvoicingPartiesSaved}
 					source={source}
 					setShowAddInvoicingPartyModal={setShowAddInvoicingPartyModal}
 					services={services}
 					rate={rate}
 					paymentModes={paymentModes}
-					setPaymentModes={setPaymentModes}
 					getCheckoutInvoices={getCheckoutInvoices}
 				/>
 			) : null}

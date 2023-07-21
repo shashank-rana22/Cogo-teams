@@ -1,6 +1,5 @@
 .wave {
 	width: 100px;
-	margin-left: 32px;
 }
 
 .wave .dot {
@@ -10,6 +9,11 @@
 	margin-right: 6px;
 	border-radius: 50%;
 	animation: blink 1.5s infinite, shrink 1.5s infinite;
+
+	&.sm {
+		width: 8px;
+		height: 8px;
+	}
 }
 
 .wave .dot:nth-child(1) {
@@ -32,12 +36,12 @@
 	animation-delay: 0s;
 }
 
-.wave .dot:nth-child(5) {
+.wave .dot.md:nth-child(5) {
 	background-color: #888fd1;
 	animation-delay: 0.2s;
 }
 
-.wave .dot:nth-child(6) {
+.wave .dot.md:nth-child(6) {
 	background-color: #888fd1;
 	animation-delay: 0.4s;
 }

@@ -8,7 +8,7 @@ const useUpdateCheckoutInvoice = ({ getCheckoutInvoices = () => {} }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCheckoutInvoice = async ({ values }) => {
+	const updateCheckoutInvoice = async ({ values, toastMessage = 'deleted' }) => {
 		try {
 			await trigger({
 				data: values,
@@ -16,7 +16,7 @@ const useUpdateCheckoutInvoice = ({ getCheckoutInvoices = () => {} }) => {
 
 			getCheckoutInvoices();
 
-			Toast.success('Invoice deleted successfully');
+			Toast.success(`Invoice ${toastMessage} successfully`);
 		} catch (err) {
 			if (err.response) {
 				Toast.error(getApiErrorString(err.response?.data));

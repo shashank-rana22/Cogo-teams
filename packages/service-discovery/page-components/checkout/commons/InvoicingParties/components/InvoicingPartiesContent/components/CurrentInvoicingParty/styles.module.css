@@ -12,6 +12,7 @@
 
 .left_content {
 	flex-basis: 54%;
+	height: 136px;
 }
 
 .right_content {
@@ -19,6 +20,7 @@
 	flex-basis: 56%;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 136px;
 }
 
 .text {
@@ -110,16 +112,4 @@
 	font-size: 12px;
 	font-weight: 600;
 	text-align: left;
-}
-
-.icon_container {
-	position: absolute;
-	top: 12px;
-	right: 12px;
-	display: flex;
-}
-
-.icon {
-	margin-left: 20px;
-	cursor: pointer;
 }
