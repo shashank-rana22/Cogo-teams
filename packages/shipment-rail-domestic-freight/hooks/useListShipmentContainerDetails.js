@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useListShipmentContainerDetails = ({ defaultParams = {}, defaultFilters = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_shipment_documents',
+		url    : 'list_shipment_container_details',
 		method : 'GET',
 		params : {
 			filters: {

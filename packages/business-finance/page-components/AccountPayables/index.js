@@ -10,19 +10,23 @@ import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
 import Dashboard from './Dashboard/index.tsx';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
+import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState(
-		query?.active_tab || 'dashboard',
-	);
+
 	const profile = useSelector((state) => state);
 	const {
 		profile: { partner },
 	} = profile || {};
 	const { id: partnerId } = partner || {};
+
+	const [activePayables, setActivePayables] = useState(
+		query?.active_tab || 'dashboard',
+	);
+
 	const { loading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
@@ -32,7 +36,7 @@ function AccountPayables() {
 
 	const handleTabChange = (v) => {
 		if (
-			['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)
+			['invoices', 'payruns', 'outstanding'].includes(v)
 		) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
 			return;
@@ -104,7 +108,7 @@ function AccountPayables() {
 						<h1>Outstandings</h1>
 					</TabPanel>
 					<TabPanel name="treasury-chest" title="TREASURY">
-						<h1>Treasury</h1>
+						<Treasury />
 					</TabPanel>
 				</Tabs>
 			</div>

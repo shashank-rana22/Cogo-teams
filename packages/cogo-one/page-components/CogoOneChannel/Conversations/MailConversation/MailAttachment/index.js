@@ -1,4 +1,4 @@
-import { Placeholder, Modal } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -7,10 +7,9 @@ import saveByteArray from '../../../../../utils/mailAttachment';
 import base64ToArrayBuffer from '../../../../../utils/mailAttachmentToBytes';
 
 import styles from './styles.module.css';
+import ViewModal from './ViewModal';
 
 const INCREASE_COUNT_BY_ONE = 1;
-
-const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,${showPreview?.contentBytes}`;
 
 function RenderFileName({ name = '' }) {
 	const lastDotIndex = name.lastIndexOf('.');
@@ -27,19 +26,6 @@ function RenderFileName({ name = '' }) {
 				{extension}
 			</div>
 		</>
-	);
-}
-
-function RenderTitle({ item = '', handleDownload = () => {} }) {
-	return (
-		<div className={styles.title}>
-			<div>{decodeURI(item?.name)}</div>
-
-			<IcMDownload
-				onClick={() => handleDownload(item)}
-				className={styles.download_icon}
-			/>
-		</div>
 	);
 }
 
@@ -88,30 +74,11 @@ function MailAttachments({
 			)}
 
 			{activeAttachmentData && (
-				<Modal
-					show={activeAttachmentData}
-					onClose={() => setActiveAttachmentData(null)}
-					size="fullscreen"
-					placement="fullscreen"
-					onOuterClick={() => setActiveAttachmentData(null)}
-					className={styles.styled_ui_modal_dialog}
-				>
-					<Modal.Header
-						title={(
-							<RenderTitle
-								item={activeAttachmentData}
-								handleDownload={handleDownload}
-							/>
-						)}
-					/>
-					<Modal.Body>
-						<object
-							className={styles.media_styles}
-							aria-label="Doc Preview"
-							data={renderContent(activeAttachmentData)}
-						/>
-					</Modal.Body>
-				</Modal>
+				<ViewModal
+					handleDownload={handleDownload}
+					activeAttachmentData={activeAttachmentData}
+					setActiveAttachmentData={setActiveAttachmentData}
+				/>
 			)}
 		</div>
 	);

@@ -1,9 +1,10 @@
-import { Placeholder, Table } from '@cogoport/components';
+import { Placeholder, Table, Popover } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PERCENTAGE_CHECK } from '../../../constants';
+import ShowLineItems from '../../ServiceWiseDetails/RatesCard/Card/ShowLineItems';
 
 import styles from './styles.module.css';
 
@@ -11,12 +12,15 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
 		{ Header: 'Services Charge', accessor: 'total_price_discounted' },
+		{ Header: 'Line Items', accessor: 'details' },
 		{ Header: 'Source', accessor: 'source' },
 	];
 	const service_charges = data?.service_charges || [];
+	const [showLineItems, setShowLineItems] = useState(false);
+
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
-		.map(({ service_type, total_price_discounted, source, currency, service_id }) => ({
+		.map(({ service_type, total_price_discounted, source, currency, service_id, line_items }) => ({
 			service_type: `${startCase(service_type)} (${(servicesList || [])
 				.find((service) => service?.id === service_id)?.trade_type === 'export'
 				? 'Origin' : 'Destination'})`,
@@ -33,8 +37,67 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 			service_id,
 			currency,
 			total_price_discount : total_price_discounted,
-
+			details:
+	<Popover
+		placement="top"
+		trigger="mouseenter"
+		render={(
+			<ShowLineItems
+				serviceType={service_type}
+				lineItems={line_items}
+			/>
+		)}
+	>
+		<div
+			onClick={() => setShowLineItems(!showLineItems)}
+			style={{ textDecoration: 'underline' }}
+			role="button"
+			tabIndex={0}
+		>
+			view more
+		</div>
+	</Popover>,
 		}));
+
+	const other_charges = (service_charges || [])
+		.filter((item) => !item.service_type)
+		.map(({ total_price_discounted, source, currency, service_id, line_items }) => ({
+			service_type           : 'Miscellaneous Fees',
+			total_price_discounted : formatAmount({
+				amount  : total_price_discounted,
+				currency,
+				options : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+			source               : startCase(source),
+			service_id,
+			currency,
+			total_price_discount : total_price_discounted,
+			details:
+	<Popover
+		placement="top"
+		trigger="mouseenter"
+		render={(
+			<ShowLineItems
+				serviceType="Conv. Charges"
+				lineItems={line_items}
+			/>
+		)}
+	>
+		<div
+			onClick={() => setShowLineItems(!showLineItems)}
+			style={{ textDecoration: 'underline' }}
+			role="button"
+			tabIndex={0}
+		>
+			view more
+		</div>
+	</Popover>,
+		}));
+
 	const UPDATED_PRICE_DATA = {};
 	useEffect(() => {
 		(chargesData || []).forEach((item) => {
@@ -47,6 +110,9 @@ function SellServiceQuotation({ setPriceData, data, loading, profitAmount, profi
 		setPriceData(UPDATED_PRICE_DATA);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
+
+	chargesData.push(...other_charges);
+
 	return (
 		<>
 			<div className={styles.container}>

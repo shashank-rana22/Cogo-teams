@@ -30,7 +30,12 @@ function PreviewModal({
 
 	const consBuyPrice = Object.values(supplierPayload)
 		.flatMap((arr) => (arr.length > VALUE_ZERO
-			? arr[DEFAULT_INDEX]?.data?.rowData?.total_price_in_preferred_currency || VALUE_ZERO : []))
+			? Number(arr[DEFAULT_INDEX]?.data?.rowData?.total_price_in_preferred_currency || VALUE_ZERO)
+			+ (Number(arr[DEFAULT_INDEX]?.data?.rowData?.origin_locals?.total_price_in_preferred_currency
+				|| VALUE_ZERO))
+			+ Number(arr[DEFAULT_INDEX]?.data?.rowData?.destination_locals?.total_price_in_preferred_currency
+				|| VALUE_ZERO)
+			|| VALUE_ZERO : []))
 		.reduce((sum, price) => sum + price, VALUE_ZERO);
 
 	const preferredCurrency = Object.values(supplierPayload)
