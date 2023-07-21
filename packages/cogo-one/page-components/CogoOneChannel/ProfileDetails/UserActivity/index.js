@@ -3,25 +3,28 @@ import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMPlatformDemo } from '@cogopo
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
-import getUserActivityComponent from '../../../../utils/getUserActivityComponent';
 
+import ActiveComponent from './ActiveComponent';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
+const DEFAULT_PAGE_COUNT = 1;
 
-function UserActivities({
-	activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard, showMore,
-}) {
+function UserActivities(props) {
+	const {
+		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
+		setRaiseTicketModal = () => {},
+	} = props || {};
+
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
-	const [pagination, setPagination] = useState(1);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE_COUNT);
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
 	const { mobile_no, channel_type = '' } = activeMessageCard;
@@ -34,7 +37,6 @@ function UserActivities({
 
 	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
 	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
-	const ActiveComp = getUserActivityComponent(activityTab, activeSubTab) || null;
 
 	const {
 		loading = false,
@@ -85,8 +87,6 @@ function UserActivities({
 		channel_type,
 	});
 
-	const { communication = {}, platform = {}, transactional = {} } = data || {};
-
 	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
 	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
 
@@ -116,7 +116,7 @@ function UserActivities({
 	useEffect(() => {
 		setFilters(null);
 		setDateFilters(null);
-		setPagination(1);
+		setPagination(DEFAULT_PAGE_COUNT);
 		if (activityTab !== 'communication') {
 			setActiveSubTab('channels');
 		}
@@ -128,7 +128,7 @@ function UserActivities({
 		} else {
 			setFilters(val);
 		}
-		setPagination(1);
+		setPagination(DEFAULT_PAGE_COUNT);
 		setFilterVisible(false);
 	};
 
@@ -152,27 +152,6 @@ function UserActivities({
 		emptyCheck = isEmpty(timeLineList);
 	}
 
-	function ShowData() {
-		return emptyCheck ? (
-			<div className={styles.empty}>
-				<EmptyState type="activities" />
-			</div>
-		) : (
-			<div
-				className={styles.list_container}
-			>
-				{ActiveComp && (
-					<ActiveComp
-						communication={communication}
-						platform={platform}
-						transactional={transactional}
-						timeLineList={timeLineList}
-						chatDataList={chatDataList}
-					/>
-				)}
-			</div>
-		);
-	}
 	useEffect(() => {
 		if (showMore) {
 			setActivityTab('communication');
@@ -261,8 +240,15 @@ function UserActivities({
 			{(loading || timeLineLoading) ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
-				<ShowData />
-
+				<ActiveComponent
+					emptyCheck={emptyCheck}
+					activityTab={activityTab}
+					activeSubTab={activeSubTab}
+					data={data}
+					chatDataList={chatDataList}
+					timeLineList={timeLineList}
+					setRaiseTicketModal={setRaiseTicketModal}
+				/>
 			)}
 
 			{(!loading || !timeLineLoading) && (
