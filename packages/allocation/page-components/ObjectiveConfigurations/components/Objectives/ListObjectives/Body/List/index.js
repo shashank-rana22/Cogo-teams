@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 // 		partner : {
 // 			business_name: 'COGO FREIGHT INDIA PVT. LTD. INDIA',
 // 		},
-// 		channel : ['SME', 'CP'],
+// 		channels : ['SME', 'CP'],
 // 		roles   : [
 // 			{
 // 				name: 'KAM SME Demand',
@@ -41,7 +41,7 @@ import styles from './styles.module.css';
 // 		partner : {
 // 			business_name: 'COGO INDIA',
 // 		},
-// 		channel : ['CP'],
+// 		channels : ['CP'],
 // 		roles   : [
 // 			{
 // 				name: 'KAM SME Demand',
@@ -64,7 +64,7 @@ import styles from './styles.module.css';
 // 		partner : {
 // 			business_name: 'COGO VIETNAM',
 // 		},
-// 		channel : ['SME'],
+// 		channels : ['SME'],
 // 		roles   : [
 // 			{
 // 				name: 'KAM SME Demand',
@@ -81,7 +81,7 @@ import styles from './styles.module.css';
 // 		partner : {
 // 			business_name: 'COGO INDIA',
 // 		},
-// 		channel : ['CP', 'SME'],
+// 		channels : ['CP', 'SME'],
 // 		roles   : [
 // 			{
 // 				name: 'KAM SME Demand',
@@ -109,8 +109,8 @@ const objectiveData = {
 	partner : {
 		business_name: 'COGO FREIGHT INDIA PVT. LTD. INDIA',
 	},
-	channel : ['SME', 'CP'],
-	roles   : [
+	channels : ['SME', 'CP'],
+	roles    : [
 		{
 			name: 'KAM SME Demand',
 		},

@@ -52,12 +52,12 @@ const getListColumnMapping = (props) => {
 					<div className={styles.sub_heading}>Channel</div>
 				</>
 			),
-			accessor: ({ partner, channel }) => (
+			accessor: ({ partner, channels }) => (
 				<>
-					<div className={styles.business_name}>{startCase(partner.business_name || '___')}</div>
+					<div className={styles.business_name}>{startCase(partner?.business_name || '___')}</div>
 					<div>
-						{!isEmpty(channel)
-                         && channel.map((item) => <Pill key={item} size="md">{item}</Pill>)}
+						{!isEmpty(channels)
+                         && channels.map((item) => <Pill key={item} size="md">{item}</Pill>)}
 					</div>
 				</>
 			),

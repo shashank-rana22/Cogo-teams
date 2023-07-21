@@ -42,7 +42,7 @@ const getObjectiveFilterControls = () => {
 			],
 		},
 		{
-			name     : 'channel',
+			name     : 'channels',
 			type     : 'chips',
 			label    : 'Channel',
 			multiple : true,

@@ -17,12 +17,12 @@ const CARD_DATA_MAPPING = [
 		accessor : ({ partner }) => <div>{partner.business_name}</div>,
 	},
 	{
-		name     : 'channel',
-		label    : 'Channel',
-		accessor : ({ channel }) => (
+		name     : 'channels',
+		label    : 'Channels',
+		accessor : ({ channels }) => (
 			<div>
-				{channel.map((item, index) => ((
-					index === channel.length - INDEX_LENGTH_NORMALIZATION_VALUE
+				{channels.map((item, index) => ((
+					index === channels.length - INDEX_LENGTH_NORMALIZATION_VALUE
 						? item.toUpperCase()
 						: `${item.toUpperCase()}, `
 				)))}

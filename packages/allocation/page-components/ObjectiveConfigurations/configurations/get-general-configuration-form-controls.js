@@ -65,7 +65,7 @@ const getGeneralConfiguratioFormControls = (props) => {
 			disabled,
 		},
 		{
-			name  : 'channel',
+			name  : 'channels',
 			label : (
 				<>
 					Select Channel

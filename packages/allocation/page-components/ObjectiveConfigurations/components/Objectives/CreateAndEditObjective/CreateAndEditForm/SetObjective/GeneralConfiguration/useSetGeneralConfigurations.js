@@ -15,7 +15,7 @@ const useSetGeneralConfiguration = (props) => {
 			type,
 			name,
 			partner:{ id: partner_id, business_name: partner_name } = {},
-			channel,
+			channels,
 			roles: agentRoles,
 			lifecycle_stage,
 		},
@@ -28,14 +28,14 @@ const useSetGeneralConfiguration = (props) => {
 			type,
 			name,
 			partner : (partner_id && partner_name) ? `${partner_id}_${partner_name}` : '',
-			channel,
+			channels,
 			roles   : !isEmpty(agentRoles) ? agentRoles.map((role) => `${role.id}_${role.name}`) : [],
 			lifecycle_stage,
 		},
 	});
 
 	const watchPartner = watch('partner');
-	const watchChannel = watch('channel');
+	const watchChannel = watch('channels');
 	const watchRoles = watch('roles');
 
 	const controls = getGeneralConfiguratioFormControls({ watchPartner, watchChannel, disabled });
@@ -68,7 +68,7 @@ const useSetGeneralConfiguration = (props) => {
 
 	useEffect(() => {
 		const subscription = watch((_, { name: controlName }) => {
-			if (controlName === 'partner' || controlName === 'channel') {
+			if (controlName === 'partner' || controlName === 'channels') {
 				setValue('roles', []);
 			}
 
