@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -6,7 +7,7 @@ import { RenderFlashedAt, RenderShipmentType } from './renderTableHeaders';
 import styles from './styles.module.css';
 
 const getLogsColumns = (props) => {
-	const { filtersParams } = props;
+	const { filtersParams, reverted_shipments } = props;
 	console.log('setFilterParams:', filtersParams);
 
 	return [
@@ -14,8 +15,14 @@ const getLogsColumns = (props) => {
 			id       : 'sid',
 			Header   : () => <div className={styles.title}>SID No.</div>,
 			accessor : (value) => (
-				<div className={styles.sid_container}>
-					{value?.data?.shipment_serial_id}
+				// const isIdRevertedShipment = reverted_shipments.includes(value?.shipment_details?.serial_id);
+				<div className={cl`${styles.sid_container}
+				 ${reverted_shipments.includes(value?.shipment_details?.serial_id)
+					? styles.shipment_id
+					: ''}`}
+				>
+					{/* {value?.data?.shipment_serial_id} */}
+					{value?.shipment_details?.serial_id}
 				</div>
 			),
 		},
@@ -40,11 +47,11 @@ const getLogsColumns = (props) => {
 		{
 			id       : 'reverted_by',
 			Header   : () => <div className={styles.title}>Reverted By</div>,
-			accessor : (value) => (
-				<div>
-					{value.reverted_by}
-				</div>
-			),
+			accessor : (value) => (value?.is_reverted ? (
+				<div>{value.reverted_by}</div>
+			) : (
+				''
+			)),
 		},
 		{
 			id       : 'flashed_at',

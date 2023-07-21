@@ -50,6 +50,7 @@ export function RenderShipmentType({ setFilterParams = () => {}, filtersParams =
 							{ label: 'AIR Freight', value: 'air_freight_service' }]}
 					/>
 				)}
+				className={styles.popover_filter}
 			>
 				<>
 					<div className={cl`${styles.applied_filter} 

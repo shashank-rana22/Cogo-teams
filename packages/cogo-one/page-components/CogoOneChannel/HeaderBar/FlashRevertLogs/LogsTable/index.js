@@ -16,8 +16,6 @@ function LogsTable() {
 
 	const { logsLoading, logsData, setPagination } = useListCogooneFlashRatesLogs({ filtersParams, sidQuery });
 
-	const logColumns = getLogsColumns({ setFilterParams, filtersParams });
-
 	const reducedFilters = Object.keys(filtersParams).reduce((prev, itm) => {
 		if (filtersParams[itm]) {
 			return { ...prev, [itm]: filtersParams[itm] };
@@ -25,7 +23,9 @@ function LogsTable() {
 		return prev;
 	}, {});
 
-	const { list = [], page, total_count, page_limit } = logsData || {};
+	const { list = [], page, total_count, page_limit, reverted_shipments } = logsData || {};
+
+	const logColumns = getLogsColumns({ setFilterParams, filtersParams, reverted_shipments });
 
 	return (
 		<div className={styles.container}>

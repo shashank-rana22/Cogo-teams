@@ -6,11 +6,38 @@
 		.ui_table_body_cell {
 			font-size: 14px;
 		}
+
+		.ui_table_head_row {
+			.ui_table_head_cell:nth-child(1) {
+				width: 10%;
+			}
+
+			.ui_table_head_cell:nth-child(2) {
+				width: 20%;
+			}
+
+			.ui_table_head_cell:nth-child(3) {
+				width: 20%;
+			}
+
+			.ui_table_head_cell:nth-child(4) {
+				width: 15%;
+			}
+
+			.ui_table_head_cell:nth-child(5) {
+				width: 20%;
+			}
+
+			.ui_table_head_cell:nth-child(6) {
+				width: 15%;
+			}
+		}
 	}
 }
 
 .sid_container {
 	font-weight: 600;
+	color: #ee3425;
 }
 
 .header {
@@ -44,6 +71,14 @@
 	:global {
 		.ui_badge_container_main {
 			align-items: center;
+		}
+	}
+}
+
+.popover_filter {
+	:global {
+		.ui_select_container {
+			width: 30vh !important;
 		}
 	}
 }
@@ -96,4 +131,8 @@
 	justify-content: flex-end;
 	width: 100%;
 	padding-block: 8px;
+}
+
+.shipment_id {
+	color: #000;
 }

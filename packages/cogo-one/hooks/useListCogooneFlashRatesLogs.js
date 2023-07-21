@@ -23,7 +23,7 @@ const useListCogooneFlashRatesLogs = ({ sidQuery, filtersParams }) => {
 					sort_type                    : 'desc',
 					shipment_serial_id           : sidQuery || undefined,
 					filters                      : {
-						shipment_state          : ['confirmed_by_importer_exporter', 'in_progress'],
+						// status                  : 'active',
 						service_type            : filtersParams?.service_type || undefined,
 						created_at_greater_than : filtersParams?.flashed_at || undefined,
 					},
