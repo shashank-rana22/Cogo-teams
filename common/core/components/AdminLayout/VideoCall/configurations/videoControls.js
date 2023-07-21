@@ -10,9 +10,9 @@ import {
 const getVideoControls = ({
 	handleRequestScreenShare = () => {},
 	isScreenShareActive = false,
-	micOn = () => {},
+	toggleMic = () => {},
 	isMicActive = false,
-	videoOn = () => {},
+	toggleVideo = () => {},
 	isVideoActive = false,
 }) => [
 	{
@@ -26,7 +26,7 @@ const getVideoControls = ({
 	},
 	{
 		name            : 'mic_on',
-		clickFunc       : micOn,
+		clickFunc       : toggleMic,
 		condition       : isMicActive,
 		ActiveIcon      : IcMMicrophone,
 		InactiveIcon    : IcMMicrophoneMute,
@@ -35,7 +35,7 @@ const getVideoControls = ({
 	},
 	{
 		name            : 'video_on',
-		clickFunc       : videoOn,
+		clickFunc       : toggleVideo,
 		condition       : isVideoActive,
 		ActiveIcon      : IcMVideoCall,
 		InactiveIcon    : IcMVideoCallMute,

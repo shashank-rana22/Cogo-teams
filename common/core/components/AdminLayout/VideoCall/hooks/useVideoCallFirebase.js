@@ -25,17 +25,17 @@ function useVideoCallFirebase({
 }) {
 	const newRoomRef = useRef(null);
 
-	const { saveInACallStatus } = useSetInACall();
-
 	const { user_data } = useSelector((state) => ({
 		user_data: state.profile.user,
 	}));
+
+	const { saveInACallStatus } = useSetInACall();
+
 	const { id: userId, name: userName } = user_data || {};
 
 	const callEnd = useCallback(() => {
 		saveInACallStatus(false);
 		setCallComing(false);
-		console.log('call ended calling');
 
 		const localPeerRef = peerRef;
 		if (localPeerRef.current) {
@@ -143,7 +143,9 @@ function useVideoCallFirebase({
 
 	const callingTo = useCallback(
 		(peer_details = {}) => {
-			if (isEmpty(peer_details?.user_id)) return;
+			if (isEmpty(peer_details?.user_id)) {
+				return;
+			}
 
 			setCallDetails((prev) => ({
 				...prev,

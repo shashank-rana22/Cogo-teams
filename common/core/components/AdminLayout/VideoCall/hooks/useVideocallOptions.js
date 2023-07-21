@@ -25,7 +25,7 @@ function useVideocallOptions({
 		});
 	}, [callDetails?.calling_room_id, callEnd, firestore]);
 
-	const micOn = useCallback(({ e, clickType }) => {
+	const toggleMic = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
@@ -36,7 +36,7 @@ function useVideocallOptions({
 		}
 	}, [options.isMicActive, setOptions, streams]);
 
-	const videoOn = useCallback(({ e, clickType }) => {
+	const toggleVideo = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
@@ -47,7 +47,7 @@ function useVideocallOptions({
 		}
 	}, [options.isVideoActive, setOptions, streams]);
 
-	return { stopCall, micOn, videoOn };
+	return { stopCall, toggleMic, toggleVideo };
 }
 
 export default useVideocallOptions;

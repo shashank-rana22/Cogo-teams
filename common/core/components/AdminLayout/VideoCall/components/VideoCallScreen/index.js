@@ -35,7 +35,7 @@ function VideoCallScreen({
 		return my_details?.user_name || room_my_details?.user_name || 'Unknown user';
 	};
 
-	const { stopCall, shareScreen, micOn, videoOn } = useVideocallOptions({
+	const { stopCall, shareScreen, toggleMic, toggleVideo } = useVideocallOptions({
 		options,
 		setOptions,
 		streams,
@@ -67,8 +67,8 @@ function VideoCallScreen({
 						shareScreen={shareScreen}
 						options={options}
 						setOptions={setOptions}
-						micOn={micOn}
-						videoOn={videoOn}
+						toggleMic={toggleMic}
+						toggleVideo={toggleVideo}
 						callingDetails={calling_details}
 						type="mini_screen"
 					/>
@@ -109,7 +109,7 @@ function VideoCallScreen({
 						</div>
 					) : (
 						<div className={styles.call_text}>
-							{calling_type === 'incoming' ? 'Conecting...' : 'Ringing...'}
+							{calling_type === 'incoming' ? 'Connecting...' : 'Ringing...'}
 						</div>
 					)}
 
@@ -121,8 +121,8 @@ function VideoCallScreen({
 							shareScreen={shareScreen}
 							options={options}
 							setOptions={setOptions}
-							micOn={micOn}
-							videoOn={videoOn}
+							toggleMic={toggleMic}
+							toggleVideo={toggleVideo}
 							callingDetails={calling_details}
 						/>
 					</div>

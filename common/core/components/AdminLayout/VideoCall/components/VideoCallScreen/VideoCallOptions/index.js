@@ -32,8 +32,8 @@ function VideoCallOptions({
 	stopCall = () => {},
 	options = {},
 	setOptions = () => {},
-	micOn = () => {},
-	videoOn = () => {},
+	toggleMic = () => {},
+	toggleVideo = () => {},
 	callingDetails = {},
 	type = '',
 }) {
@@ -54,9 +54,9 @@ function VideoCallOptions({
 	const controlMapping = getVideoControls({
 		handleRequestScreenShare,
 		isScreenShareActive,
-		micOn,
+		toggleMic,
 		isMicActive,
-		videoOn,
+		toggleVideo,
 		isVideoActive,
 	});
 
