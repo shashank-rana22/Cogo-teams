@@ -206,7 +206,6 @@ const useFilterData = ({
 		setSelectedPayrun(null);
 		setCheckedRow(null);
 		setSelectedIds([]);
-		setSort({});
 		setGlobalFilters({
 			search    : undefined,
 			pageIndex : 1,
