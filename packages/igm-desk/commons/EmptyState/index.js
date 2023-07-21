@@ -12,7 +12,7 @@ export default function EmptyState() {
 
 			<img
 				src={GLOBAL_CONSTANTS.image_url.empty_state}
-				alt="empty_page"
+				alt="emptyPage"
 				height="50%"
 				width="50%"
 			/>
