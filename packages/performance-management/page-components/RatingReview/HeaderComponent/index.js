@@ -1,5 +1,6 @@
 import { Button, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetRatingCycles from '../hooks/useGetRatingCycles';
 import useGetRatingReviewDetails from '../hooks/useGetRatingReviewDetails';
@@ -26,6 +27,10 @@ function HeaderComponent({ props = {} }) {
 	const { data, fetchRatingReviewDetails, loading: getRatingApiLoading } = useGetRatingReviewDetails(
 		{ selectValue, level, selectCycle, activeTab },
 	);
+
+	useEffect(() => {
+		setSelectedEmployees({});
+	}, [activeTab, setSelectedEmployees]);
 
 	const {
 		loading: publishButtonLoading,

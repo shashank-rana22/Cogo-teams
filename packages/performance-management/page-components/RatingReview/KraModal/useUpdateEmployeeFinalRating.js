@@ -32,6 +32,9 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 
 	const { final_rating } = data || {};
 
+	// const ratingCondition = (final_rating > MIN_RATING)
+	// && (starRating > final_rating + RATING_THRESHOLD || starRating < final_rating - RATING_THRESHOLD);
+
 	const updateEmployeeFinalRating = async () => {
 		if (starRating === MIN_RATING) {
 			Toast.error('Rating is required');
@@ -42,6 +45,7 @@ const useUpdateEmployeeFinalRating = ({ data, selectCycle, setShow, fetchRatingR
 			return;
 		}
 		if (starRating > final_rating + RATING_THRESHOLD || starRating < final_rating - RATING_THRESHOLD) {
+		// if (ratingCondition) {
 			Toast.error("Can't change rating more or less than 1");
 			return;
 		}
