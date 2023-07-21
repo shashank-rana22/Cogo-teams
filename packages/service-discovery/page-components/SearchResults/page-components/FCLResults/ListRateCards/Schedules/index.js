@@ -1,6 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useGetWeeklySchedules from '../../../../hooks/useGetWeeklySchedules';
 
@@ -10,30 +9,17 @@ import styles from './styles.module.css';
 
 const LOADING_ARRAY_LENGTH = 5;
 
-const isAlreadyApplied = (filters, data) => {
-	if (!filters.departure_after || !filters.departure_before) {
-		return false;
-	}
-	const key = `${filters.departure_after} ${filters.departure_before}`;
-	return data.find((item) => `${item.start_date} ${item.end_date}` === key);
-};
-
 function Schedules({
 	paginationProps = {},
 	filters = {},
 	setFilters = () => {},
 }) {
-	const { schedules = [], loading } = useGetWeeklySchedules();
-
 	const [selectedWeek, setSelectedWeek] = useState({});
 
-	useEffect(() => {
-		const alreadyApplied = isAlreadyApplied(filters, schedules);
-
-		if (alreadyApplied && !isEmpty(alreadyApplied)) {
-			setSelectedWeek(alreadyApplied || {});
-		}
-	}, [filters, schedules]);
+	const { schedules = [], loading } = useGetWeeklySchedules({
+		filters,
+		setSelectedWeek,
+	});
 
 	return (
 		<div className={styles.container}>

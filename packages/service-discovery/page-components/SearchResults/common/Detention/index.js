@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const suffix = <span style={{ paddingRight: 12, fontSize: 12 }}>Days</span>;
 
-const renderFormItem = ({ name, control }) => (
+const renderFormItem = ({ name, control, howMuchToShowInDnD = {} }) => (
 	<div className={styles.form_subgroup}>
 		<div className={styles.label}>{` Total ${startCase(name)} Days `}</div>
 
@@ -17,10 +17,11 @@ const renderFormItem = ({ name, control }) => (
 
 				<InputNumberController
 					name={`origin_${name}`}
-					control={control}
 					suffix={suffix}
-					arrow={false}
 					max="21"
+					disabled={!howMuchToShowInDnD[`origin_${name}`]}
+					arrow={false}
+					control={control}
 				/>
 			</div>
 
@@ -29,10 +30,11 @@ const renderFormItem = ({ name, control }) => (
 
 				<InputNumberController
 					name={`destination_${name}`}
-					control={control}
 					suffix={suffix}
-					arrow={false}
 					max="21"
+					disabled={!howMuchToShowInDnD[`destination_${name}`]}
+					arrow={false}
+					control={control}
 				/>
 			</div>
 		</div>
@@ -41,6 +43,7 @@ const renderFormItem = ({ name, control }) => (
 
 function Detention({
 	values = {},
+	howMuchToShowInDnD = {},
 	handleSave = () => {},
 	handleReset = () => {},
 	action = 'update',
@@ -56,9 +59,9 @@ function Detention({
 
 			<div className={styles.form}>
 
-				{renderFormItem({ name: 'detention', control })}
+				{renderFormItem({ name: 'detention', control, howMuchToShowInDnD })}
 
-				{renderFormItem({ name: 'demurrage', control })}
+				{renderFormItem({ name: 'demurrage', control, howMuchToShowInDnD })}
 
 				{action === 'filter' ? (
 					<CheckboxController
