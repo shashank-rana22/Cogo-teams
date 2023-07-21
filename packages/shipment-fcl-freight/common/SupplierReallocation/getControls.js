@@ -1,5 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
+const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
+const displayServiceType = ['ftl_freight', 'haulage_freight'];
 const SPLICE_FIRST_PARAMETER = 0;
 const SPLICE_SECOND_PARAMETER = 1;
 const SPLIT_SERVICE_TEXT = 2;
@@ -32,9 +34,9 @@ export default function getControls({
 			services = [shipmentType, 'fcl_freight_local_agent'];
 		}
 	}
-	if (['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service']
-		.includes(serviceObj?.service_type)) {
-		services = ['ftl_freight', 'haulage_freight'];
+
+	if (validServiceType.includes(serviceObj?.service_type)) {
+		services = displayServiceType;
 	}
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'

@@ -1,3 +1,5 @@
+const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
+const displayServiceType = ['ftl_freight', 'haulage_freight'];
 const SPLIT_SERVICE_TEXT = 2;
 
 export default function getControls({
@@ -9,9 +11,8 @@ export default function getControls({
 
 	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
 	let services = primary_service_type !== service_type ? [shipment_type, serviceType] : serviceType;
-	if (['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service']
-		.includes(serviceObj?.service_type)) {
-		services = ['ftl_freight', 'haulage_freight'];
+	if (validServiceType.includes(serviceObj?.service_type)) {
+		services = displayServiceType;
 	}
 
 	const controls = [
