@@ -24,8 +24,8 @@ const getObjectiveFilterControls = () => {
 			multiple : true,
 			options  : [
 				{
-					label : 'Active',
-					value : 'active',
+					label : 'Live',
+					value : 'live',
 				},
 				{
 					label : 'Verified',
@@ -36,8 +36,8 @@ const getObjectiveFilterControls = () => {
 					value : 'verification_pending',
 				},
 				{
-					label : 'Live',
-					value : 'live',
+					label : 'Rejected',
+					value : 'rejected',
 				},
 			],
 		},

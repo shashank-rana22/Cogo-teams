@@ -1,10 +1,15 @@
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useGetListObjectives = () => {
+	const [toggleValue, setToggleValue] = useState('active');
+
 	const [params, setParams] = useState({
 		page       : 1,
 		page_limit : 10,
+		filters    : {
+			excluding_status: 'inactive',
+		},
 	});
 
 	const [{ data, loading }] = useAllocationRequest({
@@ -23,12 +28,25 @@ const useGetListObjectives = () => {
 		}));
 	};
 
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				excluding_status: toggleValue === 'active'
+					? 'inactive' : ['live', 'verified', 'verification_pending', 'rejected'],
+			},
+		}));
+	}, [toggleValue]);
+
 	return {
 		setParams,
 		loading,
 		list,
 		paginationData,
 		getNextPage,
+		toggleValue,
+		setToggleValue,
 	};
 };
 

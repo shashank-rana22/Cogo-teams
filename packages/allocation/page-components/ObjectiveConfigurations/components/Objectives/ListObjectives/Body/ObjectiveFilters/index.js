@@ -9,7 +9,7 @@ import useFilterContent from './useFilterContent';
 const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 function ObjectiveFilters(props) {
-	const { setParams, disabled } = props;
+	const { setParams, toggleValue } = props;
 
 	const {
 		controls,
@@ -19,7 +19,7 @@ function ObjectiveFilters(props) {
 		handleReset,
 		applyFilters,
 		filtersApplied,
-	} = useFilterContent({ setParams });
+	} = useFilterContent({ setParams, toggleValue });
 
 	return (
 		<div className={styles.filter_container}>
@@ -40,8 +40,8 @@ function ObjectiveFilters(props) {
 					themeType="secondary"
 					type="button"
 					onClick={() => setShowFilters(!showFilters)}
-					disabled={disabled}
 				>
+					Filter
 					<ConditionalWrapper
 						condition={filtersApplied}
 						wrapper={(children) => (
@@ -54,8 +54,6 @@ function ObjectiveFilters(props) {
 							<IcMFilter style={{ marginLeft: '4px' }} />
 						</div>
 					</ConditionalWrapper>
-
-					Filter
 				</Button>
 			</Filters>
 		</div>

@@ -3,11 +3,22 @@ import ObjectiveFilters from './ObjectiveFilters';
 // import styles from './styles.module.css';
 
 function Body(props) {
-	const { setParams, loading, list, paginationData, getNextPage, setActiveTabDetails } = props;
+	const {
+		setParams,
+		toggleValue,
+		loading,
+		list,
+		paginationData,
+		getNextPage,
+		setActiveTabDetails,
+	} = props;
 
 	return (
 		<section>
-			<ObjectiveFilters setParams={setParams} />
+			<ObjectiveFilters
+				setParams={setParams}
+				toggleValue={toggleValue}
+			/>
 
 			<List
 				setActiveTabDetails={setActiveTabDetails}

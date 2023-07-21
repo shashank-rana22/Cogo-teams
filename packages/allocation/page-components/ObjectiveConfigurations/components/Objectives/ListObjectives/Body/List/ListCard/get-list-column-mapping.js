@@ -36,10 +36,10 @@ const getListColumnMapping = (props) => {
 					<div className={styles.sub_heading}>Type</div>
 				</>
 			),
-			accessor: ({ name, type }) => (
+			accessor: ({ name, objective_type }) => (
 				<>
 					<div>{name || '___'}</div>
-					<Pill size="md">{startCase(type || '___')}</Pill>
+					<Pill size="md">{startCase(objective_type || '___')}</Pill>
 				</>
 			),
 		},
@@ -57,7 +57,7 @@ const getListColumnMapping = (props) => {
 					<div className={styles.business_name}>{startCase(partner?.business_name || '___')}</div>
 					<div>
 						{!isEmpty(channels)
-                         && channels.map((item) => <Pill key={item} size="md">{item}</Pill>)}
+                         && channels.map((item) => <Pill key={item} size="md">{(item || '').toUpperCase()}</Pill>)}
 					</div>
 				</>
 			),

@@ -19,6 +19,14 @@ const useFilterContent = (props) => {
 
 	const { reset, getValues } = formProps;
 
+	const resetParams = () => {
+		const FILTER_VALUES = {};
+		controls.forEach((control) => {
+			FILTER_VALUES[control.name] = undefined;
+		});
+		return FILTER_VALUES;
+	};
+
 	useEffect(() => {
 		if (!isEmpty(filters)) {
 			setParams((previousParams) => ({
@@ -45,23 +53,14 @@ const useFilterContent = (props) => {
 	};
 
 	const handleReset = () => {
-		if (!isEmpty(filters)) {
-			setParams((previousParams) => ({
-				...previousParams,
-				sort_type : 'desc',
-				sort_by   : 'created_at',
-				page      : 1,
-				filters   : {
-					status: [
-						'active',
-						'draft',
-						'publishable',
-						'checking',
-						'not_publishable',
-					],
-				},
-			}));
-		}
+		setParams((previousParams) => ({
+			...previousParams,
+			page    : 1,
+			filters : {
+				...(previousParams.filters || {}),
+				...(resetParams()),
+			},
+		}));
 
 		reset();
 

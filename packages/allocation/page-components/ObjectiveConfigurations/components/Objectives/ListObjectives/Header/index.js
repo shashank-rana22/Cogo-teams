@@ -3,7 +3,10 @@ import { Button, Toggle } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { setActiveTabDetails } = props;
+	const {
+		setToggleValue,
+		setActiveTabDetails,
+	} = props;
 
 	return (
 		<section className={styles.container}>
@@ -13,7 +16,7 @@ function Header(props) {
 				name="active_status"
 				offLabel="Active"
 				onLabel="Inactive"
-				onChange={(item) => console.log('item :: ', item)}
+				onChange={(event) => (event.target.checked ? setToggleValue('inactive') : setToggleValue('active'))}
 			/>
 
 			<Button

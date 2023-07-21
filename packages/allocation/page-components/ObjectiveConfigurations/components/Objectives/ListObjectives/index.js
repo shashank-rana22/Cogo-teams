@@ -11,14 +11,20 @@ function ListObjectives(props) {
 		list,
 		paginationData,
 		getNextPage,
+		toggleValue,
+		setToggleValue,
 	} = useGetListObjectives();
 
 	return (
 		<>
-			<Header {...restProps} />
+			<Header
+				setToggleValue={setToggleValue}
+				{...restProps}
+			/>
 
 			<Body
 				setParams={setParams}
+				toggleValue={toggleValue}
 				loading={loading}
 				list={list}
 				paginationData={paginationData}
