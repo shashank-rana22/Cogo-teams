@@ -37,9 +37,17 @@ function getActionType({ ticketStatus, isClosureAuthorizer }) {
 }
 
 function RenderContent({
-	filteredActions = [], isModal = false, isCurrentReviewer = false,
+	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
 }) {
+	const handleConfirmation = (e, { item }) => {
+		if (isModal) {
+			handleAction(e, item);
+		} else {
+			setConfirmationConfig({ show: true, actionType: item });
+		}
+	};
+
 	return (
 		<div className={cl`${isModal ? styles.modal_wrapper : styles.action_wrapper}`}>
 			{filteredActions.map((item) => {
@@ -51,7 +59,7 @@ function RenderContent({
 						size="sm"
 						themeType={isModal ? 'primary' : 'linkUi'}
 						className={cl`${styles.action_button} ${isModal ? styles.modal_button : ''}`}
-						onClick={() => setConfirmationConfig({ show: true, actionType: item })}
+						onClick={(e) => handleConfirmation(e, { item })}
 						loading={updateLoading && actionLoading === item}
 						disabled={updateLoading && actionLoading !== item}
 					>
