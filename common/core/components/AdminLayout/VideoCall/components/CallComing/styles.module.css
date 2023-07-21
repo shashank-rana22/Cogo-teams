@@ -107,11 +107,11 @@
 }
 
 .accept_call {
-	background-color: green;
+	background-color: #849e4c;
 }
 
 .reject_call {
-	background-color: red;
+	background-color: #bf291e;
 	rotate: 135deg;
 }
 

@@ -35,11 +35,15 @@ function VideoCallOptions({
 	micOn = () => {},
 	videoOn = () => {},
 	callingDetails = {},
+	type = '',
 }) {
 	const { isScreenShareActive = false, isMicActive = false, isVideoActive = false } = options || {};
 	const { request_screen_share = false } = callingDetails || {};
 
-	const handleRequestScreenShare = () => {
+	const handleRequestScreenShare = ({ e, clickType }) => {
+		if (clickType === 'mini_screen') {
+			e.stopPropagation();
+		}
 		callUpdate({
 			data            : { request_screen_share: !request_screen_share },
 			firestore,
@@ -66,13 +70,21 @@ function VideoCallOptions({
 	return (
 		<>
 			{controlMapping.map((itm) => {
-				const { ActiveIcon, InactiveIcon, condition, activeContet, inActiveContent } = itm;
+				const {
+					ActiveIcon,
+					InactiveIcon,
+					name,
+					condition,
+					clickFunc,
+					activeContet,
+					inActiveContent,
+				} = itm;
 
 				return (
 					<div
 						role="presentation"
-						key={itm.name}
-						onClick={itm.clickFunc}
+						key={name}
+						onClick={(e) => clickFunc({ e, clickType: type })}
 						className={styles.call_options_icons}
 					>
 						<CustomTootTipContent
@@ -85,7 +97,7 @@ function VideoCallOptions({
 
 			<div
 				role="presentation"
-				onClick={stopCall}
+				onClick={(e) => stopCall({ e, clickType: type })}
 				className={styles.hangup_icon}
 			>
 				<IcMCall className={styles.end_call_icon} />

@@ -8,12 +8,6 @@
 	cursor: pointer;
 	background-color: white;
 	border-radius: 50%;
-
-	svg {
-		width: 22px;
-		height: 22px;
-		fill: #2c3e50;
-	}
 }
 
 .end_call_icon {
@@ -38,4 +32,10 @@
 .icon_div {
 	display: flex;
 	align-self: center;
+
+	svg {
+		width: 22px;
+		height: 22px;
+		fill: #2c3e50;
+	}
 }

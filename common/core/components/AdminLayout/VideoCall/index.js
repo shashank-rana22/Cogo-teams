@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import CallComing from './components/CallComing';
 import VideoCallScreen from './components/VideoCallScreen';
 import { firebaseConfig } from './configurations/firebase-config';
-import { CALL_TIME_LIMIT } from './constants';
+import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useVideoCallFirebase from './hooks/useVideoCallFirebase';
 import { callUpdate } from './utils/callFunctions';
@@ -43,9 +43,7 @@ function VideoCall({
 		isMinimize          : false,
 	});
 
-	const streamRef = useRef({
-		peer: null,
-	});
+	const streamRef = useRef(null);
 	const peerRef = useRef(null);
 
 	const { callingTo, callEnd } = useVideoCallFirebase({
@@ -72,7 +70,7 @@ function VideoCall({
 		callEnd,
 	});
 
-	const missCallHandel = useCallback(() => {
+	const missCallHandle = useCallback(() => {
 		if (callDetails?.calling_details?.call_status === 'calling') {
 			callUpdate({
 				data            : { call_status: 'miss_call' },
@@ -89,16 +87,16 @@ function VideoCall({
 				callingTo(videoCallRecipientData);
 			}
 
-			const timeoutFunc = setTimeout(missCallHandel, CALL_TIME_LIMIT);
+			const timeoutFunc = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
 
 			return () => clearTimeout(timeoutFunc);
 		},
-		[inVideoCall, videoCallRecipientData, callingTo, missCallHandel],
+		[inVideoCall, videoCallRecipientData, callingTo, missCallHandle],
 	);
 
 	useEffect(() => {
-		if (streams.peer_stream && streamRef.current.peer) {
-			streamRef.current.peer.srcObject = streams.peer_stream;
+		if (streams.peer_stream && streamRef.current) {
+			streamRef.current.srcObject = streams.peer_stream;
 		}
 	}, [streams]);
 

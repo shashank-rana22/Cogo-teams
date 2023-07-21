@@ -51,7 +51,7 @@ export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
 	}
 };
 
-export const saveWebrtcToken = async ({ data, calling_room_id, path, firestore }) => {
+export const saveWebrtcToken = ({ data, calling_room_id, path, firestore }) => {
 	if (calling_room_id) {
 		const WebrtcTokenRoomDoc = doc(
 			firestore,
@@ -59,7 +59,7 @@ export const saveWebrtcToken = async ({ data, calling_room_id, path, firestore }
 		);
 
 		try {
-			await setDoc(
+			setDoc(
 				WebrtcTokenRoomDoc,
 				{
 					...data,

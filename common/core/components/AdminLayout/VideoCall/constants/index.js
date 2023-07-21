@@ -35,4 +35,4 @@ export const ICESERVER = [
 	},
 ];
 
-export const CALL_TIME_LIMIT = 60000;
+export const CALL_RING_TIME_LIMIT = 60000;

@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcMMinus, IcMVideoCall } from '@cogoport/icons-react';
+import { IcMCall, IcMMinus } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState, useRef, useEffect } from 'react';
 
@@ -46,8 +46,8 @@ function CallComing({
 						className={styles.user_avatar}
 					/>
 					<div className={styles.comming_call_text}>
-						Incoming Call from
-						<div className={styles.agent_name}>{my_details?.name || 'UnKnown'}</div>
+						Incoming call from
+						<div className={styles.agent_name}>{my_details?.user_name || 'UnKnown'}</div>
 					</div>
 					<div className={styles.comming_call_options}>
 						<IcMCall
@@ -74,14 +74,14 @@ function CallComing({
 						className={styles.call_comming_text}
 						onClick={() => setIsMaximize(true)}
 					>
-						{my_details?.name || 'UnKnown'}
+						{my_details?.user_name || 'UnKnown'}
 					</div>
 					<div className={styles.call_comming_btn}>
 						<IcMCall
 							onClick={rejectOfCall}
 							className={cl`${styles.minimize_call_icon} ${styles.minimize_reject_icon}`}
 						/>
-						<IcMVideoCall
+						<IcMCall
 							onClick={answerOfCall}
 							className={cl`${styles.minimize_call_icon} ${styles.minmize_accept_icon}`}
 						/>

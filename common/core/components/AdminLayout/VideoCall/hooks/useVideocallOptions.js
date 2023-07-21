@@ -11,7 +11,10 @@ function useVideocallOptions({
 	callDetails,
 	firestore,
 }) {
-	const stopCall = useCallback(() => {
+	const stopCall = useCallback(({ e, clickType }) => {
+		if (clickType === 'mini_screen') {
+			e.stopPropagation();
+		}
 		callEnd();
 		callUpdate({
 			data: {
@@ -22,7 +25,10 @@ function useVideocallOptions({
 		});
 	}, [callDetails?.calling_room_id, callEnd, firestore]);
 
-	const micOn = useCallback(() => {
+	const micOn = useCallback(({ e, clickType }) => {
+		if (clickType === 'mini_screen') {
+			e.stopPropagation();
+		}
 		setOptions((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));
 		const loaclStream = streams;
 		if (loaclStream?.user_stream) {
@@ -30,7 +36,10 @@ function useVideocallOptions({
 		}
 	}, [options.isMicActive, setOptions, streams]);
 
-	const videoOn = useCallback(() => {
+	const videoOn = useCallback(({ e, clickType }) => {
+		if (clickType === 'mini_screen') {
+			e.stopPropagation();
+		}
 		setOptions((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
 		const loaclStream = streams;
 		if (loaclStream?.user_stream) {

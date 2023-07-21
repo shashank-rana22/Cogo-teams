@@ -17,17 +17,22 @@ function VideoCallScreen({
 	firestore = {},
 }, ref) {
 	const { calling_type, peer_details, my_details, calling_details = {} } = callDetails || {};
-	const { isVideoActive = false, isScreenShareActive = false } = calling_details?.user_call_options || {};
+	const {
+		my_details: room_my_details = {},
+		peer_details: room_peer_details = {},
+		user_call_options = {},
+	} = calling_details || {};
+	const { isVideoActive = false, isScreenShareActive = false } = user_call_options || {};
 	const { isMinimize } = options || {};
 
 	const tempRef = ref;
 
 	const getUserName = () => {
 		if (calling_type === 'outgoing') {
-			return peer_details?.user_name || 'Unknown user';
+			return peer_details?.user_name || room_peer_details?.user_name || 'Unknown user';
 		}
 
-		return my_details?.user_name || 'Unknown user';
+		return my_details?.user_name || room_my_details?.user_name || 'Unknown user';
 	};
 
 	const { stopCall, shareScreen, micOn, videoOn } = useVideocallOptions({
@@ -48,7 +53,7 @@ function VideoCallScreen({
 			<div
 				role="presentation"
 				type="button"
-				className={styles.minimize_video_call}
+				className={isMinimize ? styles.minimize_video_call : styles.hide_container}
 				onClick={() => setOptions((prev) => ({ ...prev, isMinimize: false }))}
 			>
 				<div className={styles.timer}>
@@ -65,13 +70,19 @@ function VideoCallScreen({
 						micOn={micOn}
 						videoOn={videoOn}
 						callingDetails={calling_details}
+						type="mini_screen"
 					/>
 				</div>
 			</div>
-			<div className={styles.content}>
+			<div className={!isMinimize ? styles.content : styles.hide_container}>
 				<IcMMinus className={styles.minus_icon} onClick={handleMinimize} />
-				<div className={(isVideoActive || isScreenShareActive) ? styles.peer_screen : styles.call_screen}>
-					<div className={styles.avatar_screen}>
+				<div className={(isVideoActive || isScreenShareActive)
+					? styles.peer_screen : styles.call_screen}
+				>
+					<div
+						className={(isVideoActive || isScreenShareActive)
+							? styles.hide_container : styles.avatar_screen}
+					>
 						<div className={styles.header}>{getUserName()}</div>
 						<Avatar
 							personName={getUserName()}
@@ -79,10 +90,12 @@ function VideoCallScreen({
 							className={styles.styled_avatar}
 						/>
 					</div>
-					<div className={styles.peer_video_stream}>
+					<div className={(isVideoActive || isScreenShareActive)
+						? styles.peer_video_stream : styles.hide_container}
+					>
 						<video
 							ref={(e) => {
-								tempRef.current.peer = e;
+								tempRef.current = e;
 							}}
 							autoPlay
 						/>
@@ -96,7 +109,7 @@ function VideoCallScreen({
 						</div>
 					) : (
 						<div className={styles.call_text}>
-							{calling_type === 'incoming' ? 'Conecting..' : 'Ringing...'}
+							{calling_type === 'incoming' ? 'Conecting...' : 'Ringing...'}
 						</div>
 					)}
 
