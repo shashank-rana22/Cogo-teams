@@ -80,7 +80,7 @@ function Header({
 						<Button
 							size="sm"
 							themeType="linkUi"
-							onClick={() => setShowBookingReq(!showBookingReq)}
+							onClick={(prev) => setShowBookingReq(!prev)}
 						>
 							<span className={styles.booking_req_button_text}>View</span>
 						</Button>

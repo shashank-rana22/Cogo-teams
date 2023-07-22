@@ -13,9 +13,9 @@ export default function Tabs({ tabs = [] }) {
 			return;
 		}
 
-		setTabState((p) => ({ ...p, activeTab: val }));
-		setFilters((p) => ({
-			...p,
+		setTabState((prev) => ({ ...prev, activeTab: val }));
+		setFilters((prev) => ({
+			...prev,
 			page: 1,
 		}));
 	};

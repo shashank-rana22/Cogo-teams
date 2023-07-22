@@ -18,6 +18,29 @@ const STYLE_ICON = {
 	width  : 25,
 };
 
+const handleCopy = (val) => {
+	navigator.clipboard
+		.writeText(val)
+		.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+};
+
+function CfsDetails({ showPocDetails = true, primary_service = {} }) {
+	return (
+		<div className={styles.heading}>
+			<span>CFS Address:</span>
+			<div className={styles.cfs_details}>
+				NA
+			</div>
+			{showPocDetails && primary_service?.cfs_service ? (
+				<IcMCopy
+					onClick={() => handleCopy(primary_service?.cfs_service)}
+					style={STYLE_ICON}
+				/>
+			) : null }
+		</div>
+	);
+}
+
 function ShipmentHeader() {
 	const user_data = useSelector((({ profile }) => profile?.user));
 
@@ -48,27 +71,6 @@ function ShipmentHeader() {
 	});
 
 	const showPocDetails = !!stakeholderConfig?.shipment_header?.show_poc_details;
-
-	const handleCopy = async (val) => {
-		navigator.clipboard
-			.writeText(val)
-			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
-	};
-
-	const cfsDetails = () => (
-		<div className={styles.heading}>
-			<span>CFS Address:</span>
-			<div className={styles.cfs_details}>
-				NA
-			</div>
-			{showPocDetails && primary_service?.cfs_service ? (
-				<IcMCopy
-					onClick={() => handleCopy(primary_service?.cfs_service)}
-					style={STYLE_ICON}
-				/>
-			) : null }
-		</div>
-	);
 
 	return (
 		<header className={cl`${styles.container} ${!showPocDetails ? styles.igm_desk : ''}`}>
@@ -118,7 +120,12 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			{showCfsDetails ? <CargoDetails primary_service={primary_service} /> : <div>{cfsDetails()}</div>}
+			{showCfsDetails ? <CargoDetails primary_service={primary_service} /> : (
+				<CfsDetails
+					primary_service={primary_service}
+					showPocDetails={showPocDetails}
+				/>
+			)}
 
 			{showCancelShipmentIcon
 				? (

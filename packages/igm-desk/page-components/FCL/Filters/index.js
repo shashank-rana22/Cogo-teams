@@ -12,10 +12,61 @@ const STYLES_ICON = {
 	marginLeft : '8px',
 };
 
-const Icon = {
+const ICON = {
 	IcMAscending  : <IcMAscending style={STYLES_ICON} />,
 	IcMDescending : <IcMDescending style={STYLES_ICON} />,
 };
+
+const handleSortState = (state, setState, sort_by, showCurrentFilter, setShowCurrentFilter, setFilters) => {
+	let sort_type;
+	if (sort_by === 'schedule_arrival') {
+		sort_type = state ? 'asc' : 'desc';
+	}
+	if (sort_by === 'schedule_departure') {
+		sort_type = state ? 'asc' : 'desc';
+	}
+
+	setState(!state);
+	setShowCurrentFilter(sort_by);
+	setFilters((prev) => ({
+		...prev,
+		sort_by,
+		sort_type,
+		current_filter: showCurrentFilter,
+	}));
+};
+
+function ButtonFilter({
+	value = false, setState = () => {}, sort_by = '', btn_text = '',
+	showCurrentFilter = '', setShowCurrentFilter = () => {}, setFilters = () => {},
+}) {
+	return (
+		<div className={styles.btn_div}>
+			<Button
+				onClick={(val) => handleSortState(
+					val,
+					setState,
+					sort_by,
+					showCurrentFilter,
+					setShowCurrentFilter,
+					setFilters,
+				)}
+				size="md"
+				themeType="secondary"
+				className={styles.button_div}
+			>
+				{btn_text}
+				{' '}
+				{value ? (
+					ICON.IcMDescending
+				) : (
+					ICON.IcMAscending
+				)}
+			</Button>
+			{sort_by === showCurrentFilter ? <div className={styles.circle} /> : null}
+		</div>
+	);
+}
 
 function Filters() {
 	const { filters = {}, setFilters = () => {}, tabState = {} } = useContext(IGMDeskContext);
@@ -26,46 +77,6 @@ function Filters() {
 	const [showDepartureDesc, setShowDepartureDesc] = useState(true);
 	const [showCurrentFilter, setShowCurrentFilter] = useState(current_filter || 'schedule_arrival');
 
-	const handleSortState = (state, setState, sort_by) => {
-		let sort_type;
-		if (sort_by === 'schedule_arrival') {
-			sort_type = showArrivalDesc ? 'asc' : 'desc';
-		}
-		if (sort_by === 'schedule_departure') {
-			sort_type = showDepartureDesc ? 'asc' : 'desc';
-		}
-
-		setState(!state);
-		setShowCurrentFilter(sort_by);
-		setFilters({
-			...filters,
-			sort_by,
-			sort_type,
-			current_filter: showCurrentFilter,
-		});
-	};
-
-	function ButtonFilter(state, setState, sort_by, btn_text) {
-		return (
-			<div className={styles.btn_div}>
-				<Button
-					onClick={(val) => handleSortState(val, setState, sort_by)}
-					size="md"
-					themeType="secondary"
-					className={styles.button_div}
-				>
-					{btn_text}
-					{' '}
-					{state ? (
-						Icon.IcMDescending
-					) : (
-						Icon.IcMAscending
-					)}
-				</Button>
-				{sort_by === showCurrentFilter ? <div className={styles.circle} /> : null}
-			</div>
-		);
-	}
 	return (
 		<div className={styles.container}>
 
@@ -81,8 +92,24 @@ function Filters() {
 						onChange={() => setFilters({ ...filters, fileType: !fileType, page: 1 })}
 					/>
 					<div className={styles.filter_container}>
-						{ButtonFilter(showDepartureDesc, setShowDepartureDesc, 'schedule_departure', 'Departure')}
-						{ButtonFilter(showArrivalDesc, setShowArrivalDesc, 'schedule_arrival', 'Arrival')}
+						<ButtonFilter
+							value={showDepartureDesc}
+							setState={setShowDepartureDesc}
+							sort_by="schedule_departure"
+							btn_text="Departure"
+							showCurrentFilter={showCurrentFilter}
+							setShowCurrentFilter={setShowCurrentFilter}
+							setFilters={setFilters}
+						/>
+						<ButtonFilter
+							value={showArrivalDesc}
+							setState={setShowArrivalDesc}
+							sort_by="schedule_arrival"
+							btn_text="Arrival"
+							showCurrentFilter={showCurrentFilter}
+							setShowCurrentFilter={setShowCurrentFilter}
+							setFilters={setFilters}
+						/>
 					</div>
 				</div>
 			) }
@@ -94,7 +121,7 @@ function Filters() {
 					size="sm"
 					suffix={<IcMSearchlight />}
 					value={q}
-					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+					onChange={(val) => setFilters((prev) => ({ ...prev, q: val, page: 1 }))}
 				/>
 			</div>
 		</div>

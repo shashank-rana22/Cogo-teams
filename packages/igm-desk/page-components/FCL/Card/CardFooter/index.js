@@ -6,6 +6,11 @@ import styles from './styles.module.css';
 
 const DOC_LABEL_INDEX = 1;
 
+const getDocLabel = (label) => {
+	const updatedLabel = label.split('Upload')?.[DOC_LABEL_INDEX];
+	return updatedLabel;
+};
+
 export default function CardFooter({ item = {} }) {
 	const FREE_DAYS = [];
 
@@ -14,11 +19,6 @@ export default function CardFooter({ item = {} }) {
 			FREE_DAYS.push({ key, value: item[key] });
 		}
 	});
-
-	const getDocLabel = (label) => {
-		const updatedLabel = label.split('Upload')?.[DOC_LABEL_INDEX];
-		return updatedLabel;
-	};
 
 	return (
 		<section className={styles.card_footer}>

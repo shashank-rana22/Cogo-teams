@@ -19,14 +19,14 @@ function Header({
 	setActiveWallet = () => {},
 	refetch = () => {},
 }) {
-	const { shipment_data, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const { shipment_data: shipmentData, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
 		? (data || [])?.map((e) => ({ label: e?.business_name, value: e?.id }))
 		: [];
 
-	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
+	const serviceOptions = shipmentData?.services?.map((service) => ({ label: startCase(service), value: service }));
 
 	const handleGenericUpload = () => {
 		setShowModal(true);
@@ -91,7 +91,7 @@ function Header({
 					showModal={showModal}
 					setShowModal={setShowModal}
 					data={data}
-					shipment_data={shipment_data}
+					shipment_data={shipmentData}
 					activeStakeholder={activeStakeholder}
 					refetch={refetch}
 				/>
@@ -116,7 +116,7 @@ function Header({
 						onLabel="Wallet"
 						value={activeToggle}
 						className={styles.custom_toggle}
-						onChange={() => setActiveToggle((p) => !p)}
+						onChange={() => setActiveToggle((prev) => !prev)}
 					/>
 				</div>
 			) : null}

@@ -14,6 +14,35 @@ import styles from './styles.module.css';
 import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
+function RenderContent({
+	loading = true, activeToggle = true, canEditDocuments = true, filteredTaskList = [], emailList = [],
+	completedDocs = {}, setShowDoc = () => {}, setShowApproved = () => {},
+	showIgmDocs = false, refetch = () => {}, activeStakeholder = '',
+	bl_details = [], activeWallet = '',
+}) {
+	if (loading) {
+		return <LoadingState />;
+	}
+	if (!activeToggle && !canEditDocuments) {
+		return (
+			<CheckList
+				taskList={filteredTaskList}
+				emailDocs={emailList}
+				completedDocs={completedDocs?.list}
+				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
+				canEditDocuments={canEditDocuments}
+				showIgmDocs={showIgmDocs}
+				shipmentDocumentRefetch={refetch}
+				activeStakeholder={activeStakeholder}
+				bl_details={bl_details}
+			/>
+		);
+	}
+	if (canEditDocuments) { return <Wallet activeWallet={activeWallet} />; }
+	return null;
+}
+
 function Documents() {
 	const { shipment_data, primary_service, stakeholderConfig, activeStakeholder } = useContext(ShipmentDetailContext);
 
@@ -66,30 +95,6 @@ function Documents() {
 	const canEditDocuments = !!stakeholderConfig?.documents?.can_edit_documents;
 	const showIgmDocs = !!stakeholderConfig?.documents?.show_igm_docs;
 
-	const renderContent = () => {
-		if (loading) {
-			return <LoadingState />;
-		}
-		if (!activeToggle && !canEditDocuments) {
-			return (
-				<CheckList
-					taskList={filteredTaskList}
-					emailDocs={emailList}
-					completedDocs={completedDocs?.list}
-					setShowDoc={setShowDoc}
-					setShowApproved={setShowApproved}
-					canEditDocuments={canEditDocuments}
-					showIgmDocs={showIgmDocs}
-					shipmentDocumentRefetch={refetch}
-					activeStakeholder={activeStakeholder}
-					bl_details={bl_details}
-				/>
-			);
-		}
-		if (canEditDocuments) { return <Wallet activeWallet={activeWallet} />; }
-		return null;
-	};
-
 	return (
 		<section className={styles.main_container}>
 			{!showIgmDocs ? (
@@ -123,7 +128,21 @@ function Documents() {
 				/>
 			</Modal>
 
-			{renderContent()}
+			<RenderContent
+				loading={loading}
+				activeToggle={activeToggle}
+				canEditDocuments={canEditDocuments}
+				filteredTaskList={filteredTaskList}
+				emailList={emailList}
+				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
+				activeStakeholder={activeStakeholder}
+				showIgmDocs={showIgmDocs}
+				completedDocs={completedDocs}
+				refetch={refetch}
+				bl_details={bl_details}
+				activeWallet={activeWallet}
+			/>
 
 			{canEditDocuments ? (
 				<Approve

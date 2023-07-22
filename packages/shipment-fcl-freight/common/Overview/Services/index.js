@@ -13,6 +13,15 @@ import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
+function Heading({ serviceCategory = '', canUpsell = false }) {
+	if (!canUpsell && serviceCategory === 'originServices') return null;
+	return (
+		<div className={styles.header}>
+			{startCase(serviceCategory)}
+		</div>
+	);
+}
+
 function Services() {
 	const {
 		shipment_data,
@@ -40,26 +49,17 @@ function Services() {
 
 	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
-	const heading = (serviceCategory) => {
-		if (!canUpsell && serviceCategory === 'originServices') return null;
-		return (
-			<div className={styles.header}>
-				{startCase(serviceCategory)}
-			</div>
-		);
-	};
-
 	return !servicesLoading && !isGettingShipment
 		? (
 			<div className={styles.container}>
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{!isKam ? heading(serviceCategory) : null}
+							{!isKam ? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							{isKam
 							&& showTradeHeading[`${serviceCategory.split('Services')[GLOBAL_CONSTANTS.zeroth_index]}`]
-								? heading(serviceCategory) : null}
+								? <Heading serviceCategory={serviceCategory} canUpsell={canUpsell} /> : null}
 
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (
