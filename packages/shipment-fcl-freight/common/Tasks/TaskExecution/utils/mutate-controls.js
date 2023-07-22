@@ -1,11 +1,14 @@
 const mutateControls = (
-	controls,
-	setValue,
-	task,
-	shipment_data,
-	formValues,
-	options,
-	subCommodityOptions,
+	{
+		controls,
+		setValue,
+		task,
+		shipment_data,
+		formValues,
+		allCommodity,
+		options,
+		commodityUnit,
+	},
 ) => {
 	let finalControls = [];
 
@@ -13,12 +16,27 @@ const mutateControls = (
 		const newControl = control;
 
 		if (control?.name === 'commodity_category') {
-			newControl.options = options;
-			newControl.value = shipment_data?.commodity_category;
+			newControl.options = options || [];
+		}
+		if (control?.name === 'commodity_subtype') {
+			newControl.options = (allCommodity || [])
+				.find((item) => item?.commodity === formValues?.commodity_category)
+				?.subCommodityClassification?.map((ele) => ({
+					label : ele?.subCommodityDisplayName,
+					value : ele?.subCommodity,
+				}));
 		}
 
-		if (control?.name === 'commodity_subtype') {
-			newControl.options = subCommodityOptions;
+		if (task?.task === 'mark_confirmed' && control?.name === 'hs_code') {
+			newControl.params = {
+				service      : 'OCEAN',
+				commodity    : formValues?.commodity_category,
+				subCommodity : formValues?.commodity_subtype,
+			};
+		}
+
+		if (task?.task === 'mark_confirmed' && control?.name === 'unit' && commodityUnit?.units?.length) {
+			newControl.options = commodityUnit?.units?.map((i) => ({ label: i, value: i }));
 		}
 
 		if (control?.name === 'shipper_contact_status') {

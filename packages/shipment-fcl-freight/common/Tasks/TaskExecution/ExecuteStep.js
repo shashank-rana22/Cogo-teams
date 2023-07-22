@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
@@ -20,25 +20,8 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
-	shipment_data = {},
 }) {
-	const [commodityDetails, setCommodityDetails] = useState({
-		commodity    : '',
-		subCommodity : '',
-		unit         : '',
-	});
-
-	const { options, allCommodity } = useGetCommodityOptions();
-
-	const subCommodityOptions = (allCommodity || [])
-		.find(
-			(item) => item?.commodity
-			=== (shipment_data?.commodity_category || commodityDetails?.commodity),
-		)
-		?.subCommodityClassification?.map((ele) => ({
-			label : ele?.subCommodityDisplayName,
-			value : ele?.subCommodity,
-		}));
+	const { options, allCommodity } = useGetCommodityOptions({ task });
 
 	const {
 		formProps,
@@ -49,10 +32,10 @@ function ExecuteStep({
 		stepConfig,
 		getApisData,
 		selectedMail,
-		setCommodityDetails,
 		options,
-		subCommodityOptions,
+		allCommodity,
 	});
+
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
 	const { editBookingParams } = showElements || {};
@@ -71,8 +54,6 @@ function ExecuteStep({
 		isLastStep,
 		getApisData,
 		showElements,
-		commodityDetails,
-		setCommodityDetails,
 	});
 
 	const handleTaskSubmit = async () => {

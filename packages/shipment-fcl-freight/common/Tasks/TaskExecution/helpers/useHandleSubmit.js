@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import extraApiPayload from '../utils/extra-api-payload';
+import formatDataForCargoDetail from '../utils/format-cargo-data-payload';
 import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
@@ -92,6 +93,10 @@ function useHandleSubmit({
 		);
 
 		let finalPayload = { id: task?.id, data: payload };
+
+		if (task?.task === 'mark_confirmed' && task?.state === 'shipment_received') {
+			finalPayload = { ...finalPayload, cargo_detail: formatDataForCargoDetail({ dataToSend, rawValues }) };
+		}
 
 		if (finalConfig?.end_point) {
 			finalPayload = extraApiPayload(

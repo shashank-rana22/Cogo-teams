@@ -2,7 +2,8 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const MODE = 'OCEAN';
-function useGetCommodityOptions() {
+
+function useGetCommodityOptions({ task }) {
 	const [{ loading, data }, trigger] = useRequestBf({
 		url     : '/saas/hs-code/list-commodities',
 		method  : 'get',
@@ -10,12 +11,14 @@ function useGetCommodityOptions() {
 	}, { manual: true, autoCancel: false });
 
 	useEffect(() => {
-		trigger({
-			params: {
-				service: MODE,
-			},
-		});
-	}, [trigger]);
+		if (task?.task === 'mark_confirmed' && task?.state === 'shipment_received') {
+			trigger({
+				params: {
+					service: MODE,
+				},
+			});
+		}
+	}, [trigger, task]);
 
 	const options = (data || []).map((item) => ({
 		label : item?.commodityDisplayName,

@@ -12,7 +12,7 @@ const injectValues = ({
 	getApisData,
 	shipment_data,
 	stepConfig,
-	setCommodityDetails = () => {},
+	setCommodityUnit = () => {},
 }) => {
 	const controls = populatedControls || [];
 
@@ -135,16 +135,17 @@ const injectValues = ({
 				controls[index].value = shipment_data?.bl_category || 'hbl';
 			}
 
-			if (ctrl?.name === 'hs_code') {
-				controls[index].handleChange = (obj) => {
-					setCommodityDetails((prev) => ({ ...prev, unit: obj?.units }));
-				};
-			}
-
 			if (ctrl?.name === 'commodity_category') {
 				if (shipment_data?.commodity_category) {
 					controls[index].value = shipment_data?.commodity_category;
+					controls[index].disabled = true;
 				}
+			}
+
+			if (ctrl?.name === 'hs_code') {
+				controls[index].onChange = (val, obj) => {
+					setCommodityUnit(obj);
+				};
 			}
 
 			if (ctrl?.name === 'bl_type') {
