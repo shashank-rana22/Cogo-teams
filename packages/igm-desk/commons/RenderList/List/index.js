@@ -11,20 +11,22 @@ export default function List({ data = {}, Card = null }) {
 	const { filters, setFilters, tabState = {} } = useContext(IGMDeskContext) || {};
 	const { list = [], total } = data || {};
 
-	const renderPagination = () => (
-		<Pagination
-			type="table"
-			totalItems={total}
-			pageSize={10}
-			currentPage={filters.page}
-			onPageChange={(val) => setFilters({ ...filters, page: val })}
-		/>
-	);
+	function RenderPagination() {
+		return (
+			<Pagination
+				type="table"
+				totalItems={total}
+				pageSize={10}
+				currentPage={filters.page}
+				onPageChange={(val) => setFilters({ ...filters, page: val })}
+			/>
+		);
+	}
 
 	return (
 		isEmpty(list) ? <EmptyState /> : (
 			<>
-				{renderPagination}
+				{RenderPagination}
 
 				<div className={styles.list_container}>
 					{list.map((item) => (
@@ -39,7 +41,7 @@ export default function List({ data = {}, Card = null }) {
 
 				</div>
 
-				{renderPagination}
+				{RenderPagination}
 			</>
 		)
 	);

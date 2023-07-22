@@ -13,7 +13,8 @@ import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
 import config from '../../../stakeholderConfig';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const FORBIDDEN_STATUS_CODE = 403;

@@ -66,7 +66,7 @@ function Header({
 							<span>Show only my tasks</span>
 							<Toggle
 								checked={showMyTasks}
-								onChange={() => setShowMyTasks(!showMyTasks)}
+								onChange={(val) => setShowMyTasks(!val)}
 							/>
 						</div>
 					) : null }

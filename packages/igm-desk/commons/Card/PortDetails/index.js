@@ -6,30 +6,32 @@ import ServiceIcon from '../ServiceIcon';
 
 import styles from './styles.module.css';
 
-const handleLocationDetails = (location) => (
-	<>
-		<div className={styles.port_code}>
-			<span className={styles.code}>
-				(
-				{location?.port_code || location?.postal_code}
-				)
-			</span>
+function HandleLocationDetails(location) {
+	return (
+		<div>
+			<div className={styles.port_code}>
+				<span className={styles.code}>
+					(
+					{location?.port_code || location?.postal_code}
+					)
+				</span>
 
-			<span className={styles.country}>
-				{location?.country_code}
-			</span>
+				<span className={styles.country}>
+					{location?.country_code}
+				</span>
+			</div>
+
+			<Tooltip
+				placement="bottom"
+				theme="light"
+				interactive
+				content={location?.display_name}
+			>
+				<div className={styles.ellipsis_text}>{location?.name}</div>
+			</Tooltip>
 		</div>
-
-		<Tooltip
-			placement="bottom"
-			theme="light"
-			interactive
-			content={location?.display_name}
-		>
-			<div className={styles.ellipsis_text}>{location?.name}</div>
-		</Tooltip>
-	</>
-);
+	);
+}
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date
 	? formatDate({
@@ -46,7 +48,7 @@ function PortDetails({ data = {}, icon = {} }) {
 			<ServiceIcon {...icon} />
 
 			<div className={styles.port_detail}>
-				{handleLocationDetails(origin_port)}
+				{HandleLocationDetails(origin_port)}
 				{estimated_departure ? (
 					<span className={styles.eta_etd}>
 						ETD:
@@ -61,7 +63,7 @@ function PortDetails({ data = {}, icon = {} }) {
 			</i>
 
 			<div className={styles.port_detail}>
-				{handleLocationDetails(destination_port)}
+				{HandleLocationDetails(destination_port)}
 				{estimated_arrival ? (
 					<span className={styles.eta_etd}>
 						ETA:

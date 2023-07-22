@@ -4,9 +4,9 @@ import { Link } from '@cogoport/next';
 import PortDetails from '../../../commons/Card/PortDetails';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
 import CONSTANTS from '../../../config/constants.json';
-import styles from '../card.module.css';
 
 import CardFooter from './CardFooter';
+import styles from './styles.module.css';
 
 export default function Card({ item = {}, activeTab = '' }) {
 	return (

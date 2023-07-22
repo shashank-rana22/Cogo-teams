@@ -49,7 +49,7 @@ function Filters() {
 		return (
 			<div className={styles.btn_div}>
 				<Button
-					onClick={() => handleSortState(state, setState, sort_by)}
+					onClick={(val) => handleSortState(val, setState, sort_by)}
 					size="md"
 					themeType="secondary"
 					className={styles.button_div}

@@ -6,7 +6,7 @@ import IGMDeskContext from '../../context/IGMDeskContext';
 import styles from './styles.module.css';
 
 export default function Tabs({ tabs = [] }) {
-	const { tabState = {}, setTabState, filters, setFilters } = useContext(IGMDeskContext) || {};
+	const { tabState = {}, setTabState, setFilters } = useContext(IGMDeskContext) || {};
 
 	const handleActiveTabChange = (val) => {
 		if (val === tabState?.activeTab) {
@@ -14,10 +14,10 @@ export default function Tabs({ tabs = [] }) {
 		}
 
 		setTabState((p) => ({ ...p, activeTab: val }));
-		setFilters({
-			...filters,
+		setFilters((p) => ({
+			...p,
 			page: 1,
-		});
+		}));
 	};
 
 	return (
