@@ -7,21 +7,17 @@ import { RenderFlashedAt, RenderShipmentType } from './renderTableHeaders';
 import styles from './styles.module.css';
 
 const getLogsColumns = (props) => {
-	const { filtersParams, reverted_shipments } = props;
-	console.log('setFilterParams:', filtersParams);
+	const { reverted_shipments } = props;
 
 	return [
 		{
 			id       : 'sid',
 			Header   : () => <div className={styles.title}>SID No.</div>,
 			accessor : (value) => (
-				// const isIdRevertedShipment = reverted_shipments.includes(value?.shipment_details?.serial_id);
 				<div className={cl`${styles.sid_container}
-				 ${reverted_shipments.includes(value?.shipment_details?.serial_id)
-					? styles.shipment_id
-					: ''}`}
+					${reverted_shipments.includes(value?.shipment_details?.serial_id)
+					? styles.shipment_id : ''}`}
 				>
-					{/* {value?.data?.shipment_serial_id} */}
 					{value?.shipment_details?.serial_id}
 				</div>
 			),
@@ -31,7 +27,7 @@ const getLogsColumns = (props) => {
 			Header   : <RenderShipmentType {...props} />,
 			accessor : (value) => (
 				<div>
-					{startCase(value?.service_type)}
+					{startCase(value?.shipment_details?.shipment_type)}
 				</div>
 			),
 		},
@@ -39,7 +35,7 @@ const getLogsColumns = (props) => {
 			id       : 'business_name',
 			Header   : () => <div className={styles.title}>Business Name</div>,
 			accessor : (value) => (
-				<div>
+				<div className={styles.business_name_class}>
 					{value?.service_provider?.business_name}
 				</div>
 			),
@@ -47,11 +43,20 @@ const getLogsColumns = (props) => {
 		{
 			id       : 'reverted_by',
 			Header   : () => <div className={styles.title}>Reverted By</div>,
-			accessor : (value) => (value?.is_reverted ? (
-				<div>{value.reverted_by}</div>
-			) : (
-				''
-			)),
+			accessor : (value) => (
+				<div className={styles.business_name_class}>
+					{value?.is_reverted ? value?.performed_by_user?.name : ''}
+				</div>
+			),
+		},
+		{
+			id       : 'platform',
+			Header   : () => <div className={styles.title}>Platform</div>,
+			accessor : (value) => (
+				<div>
+					{value?.platform || ''}
+				</div>
+			),
 		},
 		{
 			id       : 'flashed_at',

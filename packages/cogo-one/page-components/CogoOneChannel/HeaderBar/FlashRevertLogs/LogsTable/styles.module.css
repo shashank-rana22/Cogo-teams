@@ -4,33 +4,8 @@
 
 	:global {
 		.ui_table_body_cell {
+			height: 38px;
 			font-size: 14px;
-		}
-
-		.ui_table_head_row {
-			.ui_table_head_cell:nth-child(1) {
-				width: 10%;
-			}
-
-			.ui_table_head_cell:nth-child(2) {
-				width: 20%;
-			}
-
-			.ui_table_head_cell:nth-child(3) {
-				width: 20%;
-			}
-
-			.ui_table_head_cell:nth-child(4) {
-				width: 15%;
-			}
-
-			.ui_table_head_cell:nth-child(5) {
-				width: 20%;
-			}
-
-			.ui_table_head_cell:nth-child(6) {
-				width: 15%;
-			}
 		}
 	}
 }
@@ -38,41 +13,6 @@
 .sid_container {
 	font-weight: 600;
 	color: #ee3425;
-}
-
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.input_container {
-	width: 20%;
-}
-
-.button_container {
-	margin-left: 4px;
-	font-size: 12px !important;
-	font-weight: 600;
-}
-
-.search_icon {
-	width: 18px;
-	height: 18px;
-	fill: #4f4f4f;
-}
-
-.header_container {
-	display: flex;
-	align-items: center;
-
-	:global {
-		.ui_badge_container_main {
-			align-items: center;
-		}
-	}
 }
 
 .popover_filter {
@@ -106,26 +46,6 @@
 	margin-top: 4px;
 }
 
-.delete_icon {
-	width: 12px;
-	height: 12px;
-	margin-left: 4px;
-	cursor: pointer;
-}
-
-.filters_view {
-	display: flex;
-	align-items: center;
-	margin-left: 8px;
-
-	:global {
-		.ui_pill_text {
-			display: flex;
-			align-items: center;
-		}
-	}
-}
-
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;
@@ -135,4 +55,22 @@
 
 .shipment_id {
 	color: #000;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_badge_container_main {
+			align-items: center;
+		}
+	}
+}
+
+.business_name_class {
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

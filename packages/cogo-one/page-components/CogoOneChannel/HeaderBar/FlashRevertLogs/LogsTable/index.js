@@ -1,104 +1,65 @@
-import { Table, Input, Button, ButtonIcon, Pagination, Pill } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDelete, IcMSearchlight } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { Table, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useListCogooneFlashRatesLogs from '../../../../../hooks/useListCogooneFlashRatesLogs';
 
 import getLogsColumns from './getLogsColumns';
+import Header from './Header';
 import styles from './styles.module.css';
+
+const NO_OF_ROWS_TO_BE_LOADED = 10;
 
 function LogsTable() {
 	const [sidQuery, setSidQuery] = useState('');
-	const [filtersParams, setFilterParams] = useState({});
+	const [filtersParams, setFilterParams] = useState({ service_type: '', flashed_at: null });
 
-	const { logsLoading, logsData, setPagination } = useListCogooneFlashRatesLogs({ filtersParams, sidQuery });
+	const {
+		logsLoading,
+		logsData,
+		getFlashRateLogs,
+		sQuery,
+	} = useListCogooneFlashRatesLogs({ filtersParams, sidQuery });
 
-	const reducedFilters = Object.keys(filtersParams).reduce((prev, itm) => {
-		if (filtersParams[itm]) {
-			return { ...prev, [itm]: filtersParams[itm] };
-		}
-		return prev;
-	}, {});
-
-	const { list = [], page, total_count, page_limit, reverted_shipments } = logsData || {};
+	const {
+		list = [],
+		page,
+		total_count,
+		page_limit,
+		reverted_shipments,
+	} = logsData || {};
 
 	const logColumns = getLogsColumns({ setFilterParams, filtersParams, reverted_shipments });
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<Input
-					size="sm"
-					value={sidQuery || ''}
-					placeholder="Search sid no.."
-					className={styles.input_container}
-					onChange={setSidQuery}
-					prefix={<IcMSearchlight className={styles.search_icon} />}
-					suffix={sidQuery && (
-						<ButtonIcon
-							size="sm"
-							icon={<IcMDelete />}
-							disabled={false}
-							themeType="primary"
-							onClick={() => setSidQuery('')}
-						/>
-					)}
-				/>
-
-				{Object.keys(reducedFilters).length ? (
-					<div className={styles.filters_view}>
-						{Object.entries(reducedFilters).map(
-							([key, value]) => (
-								<Pill key={key} color="#FAD1A5">
-									{key === 'flashed_at'
-										? `Flashed after ${formatDate({
-											date       : value,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-											formatType : 'date',
-											separator  : ', ',
-										})}`
-										: startCase(value)}
-									<IcMDelete
-										className={styles.delete_icon}
-										onClick={() => setFilterParams(
-											(prev) => ({
-												...prev,
-												[key]: undefined,
-											}),
-										)}
-									/>
-								</Pill>
-							),
-						)}
-						<Button
-							size="sm"
-							themeType="tertiary"
-							className={styles.button_container}
-							onClick={() => setFilterParams({})}
-						>
-							Clear All
-						</Button>
-					</div>
-				) : null}
-			</div>
+			<Header
+				setSidQuery={setSidQuery}
+				sidQuery={sidQuery}
+				filtersParams={filtersParams}
+				setFilterParams={setFilterParams}
+			/>
 
 			<Table
 				columns={logColumns}
 				data={list}
 				layoutType="table"
 				loading={logsLoading}
-				loadingRowsCount={10}
+				loadingRowsCount={NO_OF_ROWS_TO_BE_LOADED}
 			/>
+
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
 					currentPage={page}
 					totalItems={total_count}
 					pageSize={page_limit}
-					onPageChange={setPagination}
+					onPageChange={
+						(nextPage) => getFlashRateLogs({
+							filters : filtersParams,
+							query   : sQuery,
+							page    : nextPage,
+						})
+}
 				/>
 			</div>
 		</div>

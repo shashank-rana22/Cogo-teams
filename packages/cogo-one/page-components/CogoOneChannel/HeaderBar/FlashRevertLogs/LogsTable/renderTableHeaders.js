@@ -14,10 +14,13 @@ export function RenderFlashedAt({ setFilterParams = () => {}, filtersParams = {}
 						Flashed after
 						<Datepicker
 							name="date"
+							size="sm"
+							placeholder="select date"
 							onChange={(val) => setFilterParams((prev) => ({ ...prev, flashed_at: val }))}
 							value={filtersParams?.flashed_at}
 							isPreviousDaysAllowed
 							maxDate={new Date()}
+							shouldCloseOnSelect
 						/>
 					</>
 				)}
@@ -43,6 +46,7 @@ export function RenderShipmentType({ setFilterParams = () => {}, filtersParams =
 					<Select
 						placeholder="service type"
 						name="service_type"
+						isClearable
 						onChange={(val) => setFilterParams((prev) => ({ ...prev, service_type: val }))}
 						value={filtersParams?.service_type}
 						options={[{ label: 'FCL Freight', value: 'fcl_freight_service' },

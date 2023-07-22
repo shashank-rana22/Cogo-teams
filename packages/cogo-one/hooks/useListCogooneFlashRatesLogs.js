@@ -1,49 +1,69 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 const DEFAULT_PAGE = 1;
 const ITEMS_TO_BE_FETCHED = 10;
 
+const getParams = ({ filters, query, page }) => ({
+	is_indicative_price_required : true,
+	page_limit                   : ITEMS_TO_BE_FETCHED,
+	page,
+	sort_type                    : 'desc',
+	shipment_serial_id           : query || undefined,
+	filters                      : {
+		status                  : 'active',
+		service_type            : filters?.service_type || undefined,
+		created_at_greater_than : filters?.flashed_at || undefined,
+	},
+
+});
+
 const useListCogooneFlashRatesLogs = ({ sidQuery, filtersParams }) => {
 	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 
+	const { debounceQuery, query: sQuery } = useDebounceQuery();
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_flash_rates_logs',
-		// url    : '/list_shipment_flash_booking_rates',
 		method : 'get',
 	}, { manual: true });
 
-	const getFlashRateLogs = useCallback(async () => {
-		try {
-			await trigger({
-				params: {
-					is_indicative_price_required : true,
-					page_limit                   : ITEMS_TO_BE_FETCHED,
-					page                         : pagination,
-					sort_type                    : 'desc',
-					shipment_serial_id           : sidQuery || undefined,
-					filters                      : {
-						// status                  : 'active',
-						service_type            : filtersParams?.service_type || undefined,
-						created_at_greater_than : filtersParams?.flashed_at || undefined,
-					},
-
-				},
-			});
-		} catch (error) {
-			console.log('error:', error);
-		}
-	}, [trigger, pagination, filtersParams, sidQuery]);
+	const getFlashRateLogs = useCallback(
+		async ({ filters, query, page = 1 }) => {
+			try {
+				await trigger({
+					params: getParams({ filters, query, page }),
+				});
+				setPagination(page);
+			} catch (error) {
+				console.log('error:', error);
+			}
+		},
+		[trigger],
+	);
 
 	useEffect(() => {
-		getFlashRateLogs();
-	}, [getFlashRateLogs]);
+		debounceQuery(sidQuery?.trim());
+	}, [debounceQuery, sidQuery]);
+
+	useEffect(() => {
+		console.log('filtersParams:', filtersParams);
+		console.log('sQuery:', sQuery);
+		getFlashRateLogs({
+			filters : filtersParams,
+			query   : sQuery,
+			page    : 1,
+		});
+	}, [getFlashRateLogs, filtersParams, sQuery]);
 
 	return {
 		logsLoading : loading,
 		logsData    : data,
 		getFlashRateLogs,
-		setPagination,
+		pagination,
+		sQuery,
 	};
 };
+
 export default useListCogooneFlashRatesLogs;
