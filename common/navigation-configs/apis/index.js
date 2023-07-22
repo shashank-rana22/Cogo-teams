@@ -15,6 +15,7 @@ import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
 import cost_booking_desk from './cost-booking-desk-apis';
+import customer_service_desk_management from './customer-service-desk-management-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
@@ -151,6 +152,7 @@ const apis = {
 	...saas_subscription,
 	...chakravyuh,
 	risk_management,
+	customer_service_desk_management,
 };
 
 export default apis;

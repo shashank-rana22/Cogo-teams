@@ -2424,6 +2424,17 @@ const navigationMappingAdmin = {
 		as            : '/v2/ftl-admin',
 		possible_apis : apis.ftl_admin,
 	},
+	customer_service_desk_management: {
+		key           : 'customer_service_desk_management',
+		title         : 'Customer Service Desk Management',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/customer-service-desk-management',
+		as            : '/v2/customer-service-desk-management',
+		main_apis     : [],
+		possible_apis : apis.customer_service_desk_management,
+		icon          : IcMDashboard,
+	},
 };
 
 export default navigationMappingAdmin;

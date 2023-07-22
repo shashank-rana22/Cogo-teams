@@ -1,0 +1,11 @@
+.container {
+	:global {
+		.ui_stepper_container {
+			justify-content: center;
+			width: 100%;
+			padding: 12px 0;
+			margin: unset;
+			margin-bottom: 30px;
+		}
+	}
+}
