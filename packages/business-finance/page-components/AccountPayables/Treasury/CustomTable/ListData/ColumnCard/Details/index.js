@@ -86,7 +86,7 @@ function Details({
 									{`${singleitem?.bankName.substring(MIN_LENGTH, MAX_BANK_NAME_LENGTH)}...`}
 								</div>
 								<div className={styles.text}>
-									{singleitem?.accountNumber.substring(MIN_LENGTH, MAX_BANK_ACCOUNT_LENGTH)}
+									{`${singleitem?.accountNumber.substring(MIN_LENGTH, MAX_BANK_ACCOUNT_LENGTH)}`}
 								</div>
 							</Popover>
 						</div>
