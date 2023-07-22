@@ -1,4 +1,4 @@
-import { Table, Pagination } from '@cogoport/components';
+import { Table, Pagination, Placeholder } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useListCogooneFlashRatesLogs from '../../../../../hooks/useListCogooneFlashRatesLogs';
@@ -22,10 +22,10 @@ function LogsTable() {
 
 	const {
 		list = [],
-		page,
-		total_count,
-		page_limit,
-		reverted_shipments,
+		page = 1,
+		total_count = 0,
+		page_limit = 10,
+		reverted_shipments = [],
 	} = logsData || {};
 
 	const logColumns = getLogsColumns({ setFilterParams, filtersParams, reverted_shipments });
@@ -48,20 +48,22 @@ function LogsTable() {
 			/>
 
 			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={
-						(nextPage) => getFlashRateLogs({
-							filters : filtersParams,
-							query   : sQuery,
-							page    : nextPage,
-						})
-}
-				/>
+				{logsLoading
+					? <Placeholder height="20px" width="250px" /> : (
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={total_count}
+							pageSize={page_limit}
+							onPageChange={(nextPage) => getFlashRateLogs({
+								filters : filtersParams,
+								query   : sQuery,
+								page    : nextPage,
+							})}
+						/>
+					)}
 			</div>
+
 		</div>
 	);
 }

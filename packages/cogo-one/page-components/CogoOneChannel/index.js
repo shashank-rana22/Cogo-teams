@@ -130,8 +130,8 @@ function CogoOne() {
 					) : (
 						<>
 							<div
-								className={`${activeTab?.tab === 'mail'
-									? styles.mail_layout : styles.chats_layout}`}
+								className={activeTab?.tab === 'mail'
+									? styles.mail_layout : styles.chats_layout}
 							>
 								<Conversations
 									activeTab={activeTab}

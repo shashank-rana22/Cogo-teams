@@ -48,8 +48,6 @@ const useListCogooneFlashRatesLogs = ({ sidQuery, filtersParams }) => {
 	}, [debounceQuery, sidQuery]);
 
 	useEffect(() => {
-		console.log('filtersParams:', filtersParams);
-		console.log('sQuery:', sQuery);
 		getFlashRateLogs({
 			filters : filtersParams,
 			query   : sQuery,

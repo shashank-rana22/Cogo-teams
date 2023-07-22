@@ -348,7 +348,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			has_permission_to_edit      : true,
 			send_promotional_rate       : true,
 			agent_type_filter           : true,
-			flash_revert_logs           : true,
+			flash_revert_logs           : false,
 			global_contacts             : true,
 		},
 	},

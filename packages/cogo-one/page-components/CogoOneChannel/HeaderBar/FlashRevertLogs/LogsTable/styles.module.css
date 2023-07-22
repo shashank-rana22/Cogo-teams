@@ -7,6 +7,19 @@
 			height: 38px;
 			font-size: 14px;
 		}
+
+		.ui_table_head_cell {
+			padding: 4px;
+			font-size: 14px;
+		}
+
+		.ui_table_head_row {
+			background: #e0e0e0;
+		}
+
+		.ui_table_container {
+			padding: 0;
+		}
 	}
 }
 

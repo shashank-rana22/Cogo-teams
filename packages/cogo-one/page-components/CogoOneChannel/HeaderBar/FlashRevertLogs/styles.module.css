@@ -6,18 +6,5 @@
 			height: 70vh;
 			max-height: none !important;
 		}
-
-		.ui_table_head_cell {
-			padding: 8px;
-			font-size: 14px;
-		}
-
-		.ui_table_head_row {
-			background: #e0e0e0;
-		}
-
-		.ui_table_container {
-			padding: 0;
-		}
 	}
 }
