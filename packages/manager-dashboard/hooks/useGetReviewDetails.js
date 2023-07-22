@@ -38,9 +38,10 @@ const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
 					label      : isReportingManager && level === 'vertical_head'
 						? 'reporting_manager_wise' : 'all_employee',
 					level,
-					end_date   : formattedDate(lastDate),
-					start_date : formattedDate(firstDate),
-					filters    : { ...filters },
+					end_date                 : formattedDate(lastDate),
+					start_date               : formattedDate(firstDate),
+					is_status_not_considered : true,
+					filters                  : { ...filters },
 				},
 			});
 		} catch (error) {
