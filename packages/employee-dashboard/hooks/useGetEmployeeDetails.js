@@ -51,7 +51,7 @@ function useGetEmployeeDetails(ratingCycle) {
 	return {
 		loading,
 		data,
-		refetch: () => {},
+		refetch: getEmployeeDetails,
 		openRatingForm,
 		setOpenRatingForm,
 	};

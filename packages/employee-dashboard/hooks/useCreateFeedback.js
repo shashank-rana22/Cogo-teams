@@ -26,8 +26,8 @@ function useCreateFeedback({ ratingCycle, refetch, onHide }) {
 					employee_user_id : userId,
 				},
 			});
-			Toast.success('Self Rating form submitted Successfully');
 			refetch();
+			Toast.success('Self Rating form submitted Successfully');
 			onHide();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

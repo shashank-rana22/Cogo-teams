@@ -65,7 +65,7 @@ function EmployeePerformance({
 			</div>
 
 			<Data
-				loading={loading}
+				loading={loading || ratingLoading}
 				is_rating_published={is_rating_published}
 				current_month_feedback_given={current_month_feedback_given}
 				setOpenRatingForm={setOpenRatingForm}
@@ -79,7 +79,7 @@ function EmployeePerformance({
 				<div className={styles.heading}>
 					System Recommended Rating :
 				</div>
-				<StyledTable columns={columns} data={kra_with_rating} loading={loading} />
+				<StyledTable columns={columns} data={kra_with_rating} loading={loading || ratingLoading} />
 			</div>
 
 			{openHistory && (
