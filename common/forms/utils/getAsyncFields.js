@@ -673,7 +673,7 @@ function asyncListEmployeeDetails() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	};
 }
@@ -688,7 +688,7 @@ function asyncListAllSquads() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	};
 }
@@ -703,7 +703,7 @@ function asyncListAllTribes() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	};
 }
@@ -718,7 +718,7 @@ function asyncListAllChapters() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	};
 }
@@ -733,7 +733,7 @@ function asyncListAllManagers() {
 			filters: {
 				status: 'active',
 			},
-			page_limit: 100,
+			page_limit: 20,
 		},
 	};
 }
