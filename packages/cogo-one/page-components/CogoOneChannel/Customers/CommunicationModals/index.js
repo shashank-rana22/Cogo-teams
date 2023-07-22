@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPlus, IcMAppPoc } from '@cogoport/icons-react';
+import { IcMPlus, IcMAppPoc, IcMAppAddAccount } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -22,6 +22,7 @@ function CommunicationModals({
 	setSelectedAutoAssign = () => {},
 	setAutoAssignChats = () => {},
 	setOpenKamContacts = () => {},
+	setOpenSpContacts = () => {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -96,6 +97,17 @@ function CommunicationModals({
 									/>
 								</div>
 							)}
+
+							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.sp_contacts ? (
+								<div className={cl`${styles.action} ${styles.sp_contacts}`}>
+									<IcMAppAddAccount
+										onClick={() => setOpenSpContacts(true)}
+										height={25}
+										width={25}
+										fill="#432609"
+									/>
+								</div>
+							) : null}
 						</div>
 					</div>
 				</div>

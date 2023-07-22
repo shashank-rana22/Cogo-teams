@@ -111,6 +111,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
 			global_contacts             : true,
+			sp_contacts                 : false,
 		},
 	},
 	sales_admin: {
@@ -145,6 +146,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
 			global_contacts             : true,
+			sp_contacts                 : false,
 		},
 	},
 	support: {
@@ -180,6 +182,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
 		},
 	},
 	support_admin: {
@@ -213,6 +216,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
 		},
 	},
 	supply: {
@@ -250,6 +254,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
 			global_contacts             : false,
+			sp_contacts                 : true,
 		},
 	},
 	supply_admin: {
@@ -286,6 +291,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : false,
 			agent_type_filter           : false,
 			global_contacts             : false,
+			sp_contacts                 : true,
 		},
 	},
 	shipment_specialist: {
@@ -317,6 +323,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : false,
 			global_contacts             : false,
+			sp_contacts                 : false,
 		},
 	},
 	cogoone_admin: {
@@ -350,6 +357,7 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 			send_promotional_rate       : true,
 			agent_type_filter           : true,
 			global_contacts             : true,
+			sp_contacts                 : true,
 		},
 	},
 };

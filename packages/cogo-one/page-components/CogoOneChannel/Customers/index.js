@@ -32,6 +32,7 @@ function Customers({
 	viewType = '',
 	workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
+	setOpenSpContacts = () => {},
 }) {
 	const [isBotSession, setIsBotSession] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
@@ -155,6 +156,7 @@ function Customers({
 				setSelectedAutoAssign={setSelectedAutoAssign}
 				setAutoAssignChats={setAutoAssignChats}
 				setOpenKamContacts={setOpenKamContacts}
+				setOpenSpContacts={setOpenSpContacts}
 			/>
 		</div>
 	);

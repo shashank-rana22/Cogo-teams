@@ -12638,6 +12638,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_available_service_providers',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	analytics_dashboard: [
 		{

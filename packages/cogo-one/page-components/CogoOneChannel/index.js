@@ -57,6 +57,7 @@ function CogoOne() {
 	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
+	const [openSpContacts, setOpenSpContacts] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -123,6 +124,7 @@ function CogoOne() {
 						suggestions={suggestions}
 						workPrefernceLoading={workPrefernceLoading}
 						setOpenKamContacts={setOpenKamContacts}
+						setOpenSpContacts={setOpenSpContacts}
 					/>
 				</div>
 
@@ -210,6 +212,8 @@ function CogoOne() {
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
+				openSpContacts={openSpContacts}
+				setOpenSpContacts={setOpenSpContacts}
 			/>
 		</>
 	);

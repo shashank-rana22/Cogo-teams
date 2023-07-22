@@ -3,6 +3,7 @@ import FeedbackModal from '../FeedbackModal';
 import ReminderModal from '../ReminderModal';
 
 import OrgUsers from './OrgUsers';
+import SpOrganizationUsers from './SpOrganizationUsers';
 
 function ModalComp({
 	raiseTicketModal = {},
@@ -13,6 +14,8 @@ function ModalComp({
 	setOpenKamContacts = () => {},
 	openKamContacts = false,
 	setActiveTab = () => {},
+	openSpContacts = false,
+	setOpenSpContacts = () => {},
 }) {
 	return (
 		<>
@@ -38,6 +41,15 @@ function ModalComp({
 					setActiveTab={setActiveTab}
 				/>
 			)}
+
+			{openSpContacts && (
+				<SpOrganizationUsers
+					openSpContacts={openSpContacts}
+					setOpenSpContacts={setOpenSpContacts}
+					setActiveTab={setActiveTab}
+				/>
+			)}
+
 		</>
 	);
 }
