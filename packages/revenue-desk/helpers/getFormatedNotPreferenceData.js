@@ -24,12 +24,15 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 			sell_price_per_container : Number(validities?.total_price) / Number(container_count),
 			active_booking           : element?.data?.active_bookings || DEFAULT_VALUE,
 			profit                   : validities?.profit || data?.profit || DEFAULT_VALUE,
-			profit_percentage        : validities?.profit_percentage || data?.profit_percentage || DEFAULT_VALUE,
-			line_items               : validities?.line_items,
-			origin_locals            : element?.origin_locals,
-			destination_locals       : element?.destination_locals,
-			source                   : element?.source || undefined,
-			api                      : 'showed_rates',
+			profit_percentage        : validities?.profit_percentage
+			|| data?.profit_percentage || DEFAULT_VALUE,
+			line_items                        : validities?.line_items,
+			origin_locals                     : element?.origin_locals,
+			destination_locals                : element?.destination_locals,
+			source                            : element?.source || undefined,
+			api                               : 'showed_rates',
+			total_price_in_preferred_currency : validities?.total_price_in_preferred_currency,
+			preferred_currency                : validities?.preferred_currency,
 		};
 
 		let allocation_ratio = null;

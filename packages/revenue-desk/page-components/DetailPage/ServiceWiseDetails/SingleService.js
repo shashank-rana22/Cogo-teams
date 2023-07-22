@@ -167,7 +167,7 @@ function SingleService({
 						<RatesCard
 							type={item?.type}
 							ratesData={item?.data}
-							key={item}
+							key={item?.id}
 							prefrences={supplierPayload}
 							setPrefrences={setSupplierPayload}
 							singleServiceData={singleServiceData}

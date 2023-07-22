@@ -1,0 +1,7 @@
+.modal_container {
+	:global {
+		.ui_modal_header_container {
+			padding: 10px 16px;
+		}
+	}
+}

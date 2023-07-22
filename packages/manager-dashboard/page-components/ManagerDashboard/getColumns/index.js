@@ -146,7 +146,9 @@ const getColumns = ({
 		return level === 'vertical_head' ? [...columns, ...surpriseGift] : columns;
 	};
 
-	return getTableColumns();
+	const tableColumns = getTableColumns();
+
+	return tableColumns;
 };
 
 export default getColumns;

@@ -33,7 +33,6 @@ function ShipmentCard({ itemData, priceData }) {
 						{' '}
 						mins
 						{' '}
-						left
 					</div>
 				</div>
 			</div>
@@ -162,18 +161,6 @@ function ShipmentCard({ itemData, priceData }) {
 							{formatAmount({
 								amount   : itemData?.discount_amount,
 								currency : itemData?.discount_amount_currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</span>
-						<div style={{ color: '#221F20', margin: '0 4px' }}>|</div>
-						<span>
-							{formatAmount({
-								amount   : Number(itemData?.discount_amount) / Number(priceData?.exchange_rate),
-								currency : 'USD',
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'code',
