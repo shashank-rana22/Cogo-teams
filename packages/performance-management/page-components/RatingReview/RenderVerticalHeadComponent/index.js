@@ -100,7 +100,7 @@ function RenderVerticalHeadComponent({
 			<div key={label} className={styles.single_accordian}>
 				<Accordion
 					type="text"
-					isOpen={label === 'all_employees'}
+					isOpen={label === 'all employees'}
 					title={startCase(label)}
 				>
 					<RenderStyledTable
