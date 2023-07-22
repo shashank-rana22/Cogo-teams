@@ -4,7 +4,7 @@ import PlatformActivity from '../page-components/CogoOneChannel/ProfileDetails/U
 import Summary from '../page-components/CogoOneChannel/ProfileDetails/UserActivity/Summary';
 import TransactionalActivity from '../page-components/CogoOneChannel/ProfileDetails/UserActivity/TransactionalActivity';
 
-function getUserActivityComponent(activityTab, activeSubTab) {
+function getUserActivityComponent({ activityTab = '', activeSubTab = '' }) {
 	if (activityTab === 'platform') {
 		return PlatformActivity;
 	}

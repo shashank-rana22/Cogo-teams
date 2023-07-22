@@ -1,4 +1,5 @@
 import airRepository from './config/air-repository';
+import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
 import authorityDesk from './config/authority-desk';
 import awbInventory from './config/awb-inventory';
@@ -6,6 +7,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
+import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -125,6 +127,8 @@ const routeConfig = {
 	...employeeDashboard,
 	...printingDesk,
 	...ftlAdmin,
+	...airlinePluginBooking,
+	...bookingDeskSurface,
 };
 
 export default routeConfig;
