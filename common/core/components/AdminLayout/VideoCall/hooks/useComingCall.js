@@ -80,7 +80,8 @@ function useComingCall({
 				peer.on('error', () => {
 					callUpdate({
 						data: {
-							call_status: 'technical_error',
+							call_status   : 'technical_error',
+							error_message : 'peer js technical error',
 						},
 						firestore,
 						calling_room_id: callDetails?.calling_room_id,
@@ -90,6 +91,15 @@ function useComingCall({
 			})
 			.catch((error) => {
 				console.error('user stream is not working', error);
+				callUpdate({
+					data: {
+						call_status   : 'technical_error',
+						error_message : 'peer video audio is not working',
+					},
+					calling_room_id: callDetails?.calling_room_id,
+					firestore,
+				});
+				callEnd();
 			});
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id,
 		callEnd, firestore, peerRef, setStreams, webrtcToken.user_token]);

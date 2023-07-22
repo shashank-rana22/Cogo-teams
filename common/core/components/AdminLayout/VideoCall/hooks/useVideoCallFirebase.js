@@ -132,11 +132,25 @@ function useVideoCallFirebase({
 				peer.on('error', () => {
 					callEnd();
 					callUpdate({
-						data            : { call_status: 'technical_error' },
-						calling_room_id : callDetails?.calling_room_id,
+						data: {
+							call_status   : 'technical_error',
+							error_message : 'peer js technical error',
+						},
+						calling_room_id: callDetails?.calling_room_id,
 						firestore,
 					});
 				});
+			}).catch((err) => {
+				console.error('my user stream error', err);
+				callUpdate({
+					data: {
+						call_status   : 'technical_error',
+						error_message : 'peer video audio is not working',
+					},
+					calling_room_id: callDetails?.calling_room_id,
+					firestore,
+				});
+				callEnd();
 			});
 	}, [callDetails?.calling_room_id, callEnd, firestore,
 		peerRef, saveInACallStatus, setCallDetails, setStreams, userId, userName]);
