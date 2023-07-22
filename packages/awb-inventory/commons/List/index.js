@@ -75,7 +75,8 @@ function List({
 				setFinalList((prev) => prev.concat(list));
 			}
 		}
-	}, [list, page, setFinalList]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	return (
 		<section>
