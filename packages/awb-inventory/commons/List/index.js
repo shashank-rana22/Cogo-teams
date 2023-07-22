@@ -18,11 +18,11 @@ function List({
 	fields = [],
 	data:listData = {},
 	loading = false,
-	page,
-	setPage,
-	functions,
-	finalList,
-	setFinalList,
+	page = 1,
+	setPage = () => {},
+	functions = {},
+	finalList = [],
+	setFinalList = () => {},
 }) {
 	const [isMobile, setIsMobile] = useState(false);
 	const { list = [], total_count:totalCount } = listData;
