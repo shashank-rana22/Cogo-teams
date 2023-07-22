@@ -29,7 +29,7 @@ const useAssignKRAs = ({
 		}
 		try {
 			await trigger({
-				data: { kras_assigned: inputValue, employee_ids: selectArray, kra_removed: deletedKraArray },
+				data: { kras_assigned: inputValue, employee_ids: selectArray, kras_removed: deletedKraArray },
 			});
 
 			getEmployeesWithLowWeightage();
