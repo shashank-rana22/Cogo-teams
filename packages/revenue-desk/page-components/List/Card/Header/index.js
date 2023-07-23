@@ -8,7 +8,7 @@ import serviceLabelMapping from '../../../../helpers/serviceLabelMapping';
 
 import styles from './styles.module.css';
 
-function Header({ data }) {
+function Header({ data, filters }) {
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.left_section}>
@@ -66,19 +66,20 @@ function Header({ data }) {
 				</div>
 			</div>
 
-			<div style={{ color: 'red', display: 'flex', alignItems: 'center', width: '20%', fontWeight: '600' }}>
-				<IcMTimer fill="red" width="15" height="15" />
-				<div style={{ marginLeft: '3px' }}>
-					{format(data?.confirmed_by_importer_exporter_at, 'hh')}
-					{' '}
-					Hrs :
-					{' '}
-					{format(data?.confirmed_by_importer_exporter_at, 'mm')}
-					{' '}
-					mins
-					left
+			{filters?.rd_state === 'active' && (
+				<div style={{ color: 'red', display: 'flex', alignItems: 'center', width: '20%', fontWeight: '600' }}>
+					<IcMTimer fill="red" width="15" height="15" />
+					<div style={{ marginLeft: '3px' }}>
+						{format(data?.confirmed_by_importer_exporter_at, 'hh')}
+						{' '}
+						Hrs :
+						{' '}
+						{format(data?.confirmed_by_importer_exporter_at, 'mm')}
+						{' '}
+						mins
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }

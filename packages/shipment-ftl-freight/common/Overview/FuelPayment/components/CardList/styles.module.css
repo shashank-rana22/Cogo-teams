@@ -1,0 +1,17 @@
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #f9ae64;
+}
+
+.loader {
+	width: 30px;
+	height: 30px;
+}
+
+.loading_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

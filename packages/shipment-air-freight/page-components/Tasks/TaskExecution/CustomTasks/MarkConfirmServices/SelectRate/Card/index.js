@@ -12,7 +12,7 @@ const CONFIRM_RATE_STEP = 2;
 const PRIORITY_DEFAULT = 1;
 const getBuyPrice = (dataObj) => {
 	const price = dataObj?.price;
-	const currency = dataObj?.currency;
+	const currency = dataObj?.buy_currency || dataObj?.currency;
 
 	return formatAmount({
 		amount  : price || GLOBAL_CONSTANTS.zeroth_index,

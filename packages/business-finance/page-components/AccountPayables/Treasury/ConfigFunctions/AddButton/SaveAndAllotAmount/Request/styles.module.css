@@ -1,0 +1,51 @@
+.request_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+	margin-top: 10px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: rgb(9 30 66 / 25%) 0 4px 8px -2px, rgb(9 30 66 / 8%) 0 0 0 1px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.column1 {
+	display: flex;
+	align-items: center;
+	padding-left: 16px;
+}
+
+.column2 {
+	display: flex;
+}
+
+.request_text {
+	padding: 8px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.requested_by {
+	padding: 8px;
+	margin-left: 8px;
+	font-size: var(--font-size-md);
+	color: var(--color-secondary-greyscale-3);
+	border-right: 1px solid #333;
+}
+
+.created {
+	padding: 8px;
+	margin-left: 8px;
+	font-size: var(--font-size-md);
+	color: var(--color-secondary-greyscale-3);
+}
+
+.remarks_div {
+	align-items: center;
+	margin-top: 6px;
+	cursor: pointer;
+}

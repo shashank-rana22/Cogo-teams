@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from 'react';
 import ToastApiError from '../common/ToastApiError';
 
 const DEFAULT_PAGE = 1;
-const MAX_ITEMS_PER_PAGE = 10;
+const MAX_ITEMS_PER_PAGE = 20;
 
 function useListShipmentInvoicePreferences() {
 	const [filters, setFilters] = useState({});

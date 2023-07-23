@@ -1,9 +1,15 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
 import { VALUE_ZERO, VALUE_TWO } from '../page-components/constants';
 
 const useGetRDShipmentList = () => {
+	const { profile = {} } = useSelector((state) => state);
+
+	const { partner = {} } = profile;
+	const { id: cogo_entity_id = '' } = partner;
+
 	const [filters, setFilters] = useState({
 		service  : 'fcl_freight',
 		sort_by  : 'created_at_desc',
@@ -69,6 +75,7 @@ const useGetRDShipmentList = () => {
 						page      : undefined,
 						sort_by   : undefined,
 						sort_type : undefined,
+						cogo_entity_id,
 					},
 					page               : requiredFilterChange?.page,
 					sort_by            : requiredFilterChange?.sort_by || undefined,
@@ -82,13 +89,14 @@ const useGetRDShipmentList = () => {
 		} catch (err) {
 			setShipmentList([]);
 		}
-	}, [trigger, filters]);
+	}, [trigger, filters, cogo_entity_id]);
 
 	useEffect(() => {
 		fetchShipments();
 	}, [fetchShipments, filters.service]);
 
 	return {
+		fetchShipments,
 		shipmentList,
 		loading,
 		setFilters,

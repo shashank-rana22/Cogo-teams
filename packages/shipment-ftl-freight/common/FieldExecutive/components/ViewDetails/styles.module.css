@@ -1,0 +1,53 @@
+.stepper_container {
+	padding: 20px 10px;
+	margin: 20px 0;
+	overflow-x: auto;
+	background-color: #fafafa;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
+
+.tracking {
+	display: flex;
+	align-items: flex-end;
+	margin-top: 20px;
+}
+
+.tracking_label {
+	font-weight: 500;
+}
+
+.tracking_input {
+	width: 200px;
+	margin: 0 30px;
+
+	.sub_input {
+		width: 100%;
+	}
+
+	.sub_select {
+		width: 200px;
+	}
+}
+
+.history_btn {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-block: 10px;
+}
+
+@media (max-width: 767px) {
+	.tracking {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.tracking_input {
+		top: 0;
+	}
+}
