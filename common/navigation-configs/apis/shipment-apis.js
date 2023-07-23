@@ -1672,6 +1672,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'download_container_details_as_csv',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
