@@ -17,14 +17,14 @@ function HeaderBar({
 
 	return (
 		<div className={styles.container}>
-			{flash_revert_logs && (
+			{flash_revert_logs ? (
 				<FlashRevertLogs />
-			)}
-			{toggle_agent_status && (
+			) : null}
+			{toggle_agent_status ? (
 				<AgentStatusToggle
 					firestore={firestore}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }
