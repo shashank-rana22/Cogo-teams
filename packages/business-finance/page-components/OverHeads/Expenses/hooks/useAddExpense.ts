@@ -16,7 +16,7 @@ interface AddressInterface {
 	branchId?: number | string;
 }
 
-const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
+const useAddExpense = ({ expenseData, setShowModal, getList, incidentApprovalManagementId, rowData }) => {
 	const {
 		vendorId: vendorID,
 		businessName: vendorName,
@@ -24,7 +24,6 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		categoryId,
 		category: expenseCategory,
 		categoryName,
-		incidentApprovalManagementId,
 	} = rowData || {};
 
 	const [addressData, setAddressData] = useState<AddressInterface>({});

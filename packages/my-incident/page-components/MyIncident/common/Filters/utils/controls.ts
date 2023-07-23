@@ -87,11 +87,11 @@ export const filterControls = (activeTab) => {
 						},
 						{
 							value : 'RECURRING_EXPENSE_APPROVAL',
-							label : 'EXPENSE APPROVAL',
+							label : 'Expense Configuration Approval',
 						},
 						{
 							value : 'OVERHEAD_APPROVAL',
-							label : 'NON Recurring EXpense Approval',
+							label : 'Expense Approval',
 						},
 					],
 				},
@@ -145,11 +145,11 @@ export const filterControls = (activeTab) => {
 						},
 						{
 							value : 'RECURRING_EXPENSE_APPROVAL',
-							label : 'EXPENSE APPROVAL',
+							label : 'Expense Configuration Approval',
 						},
 						{
 							value : 'OVERHEAD_APPROVAL',
-							label : 'NON Recurring EXpense Approval',
+							label : 'Expense Approval',
 						},
 					],
 				},

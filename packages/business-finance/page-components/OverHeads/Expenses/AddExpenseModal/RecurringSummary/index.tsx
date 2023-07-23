@@ -49,9 +49,15 @@ interface Props {
 	expenseData?: Data;
 	setExpenseData?: (p: any) => void;
 	rowData?: SummaryInterface;
+	setIncidentApprovalManagementId?: (a) => void;
 }
 
-function Summary({ expenseData, setExpenseData, rowData }: Props) {
+function Summary({
+	expenseData,
+	setExpenseData,
+	rowData,
+	setIncidentApprovalManagementId = () => {},
+}: Props) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code: entityCode } = entityObject || {};
 	const { name: branchName } = branch || {};
@@ -72,63 +78,77 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 		payableAmount,
 		invoiceCurrency: currency,
 	} = expenseData || {};
-	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders({
+	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
 		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
 		incidentSubType : categoryName,
 		entityId        : entityObject?.id,
 	});
 
+	useEffect(() => {
+		setIncidentApprovalManagementId(stakeholdersData?.id);
+	}, [stakeholdersData, setIncidentApprovalManagementId]);
+
 	const { level3, level2, level1 } = stakeholdersData || {};
-	const { stakeholder: stakeholder3, status:status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status:status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status:status1 } = level1 || {};
+	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
+	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
+	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
 
 	const stakeHolderTimeLine = () => {
 		if (!isEmpty(level3)) {
 			return [
 				{
-					...(stakeholder1 ? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					} : {}),
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
 				},
 				{
-					...(stakeholder2 ? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					} : {}),
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
 				},
 				{
-					...(stakeholder3 ? {
-						email   : stakeholder3?.userEmail,
-						name    : stakeholder3?.userName,
-						remarks : level3?.remarks,
-						status  : status3,
-					} : {}),
+					...(stakeholder3
+						? {
+							email   : stakeholder3?.userEmail,
+							name    : stakeholder3?.userName,
+							remarks : level3?.remarks,
+							status  : status3,
+						}
+						: {}),
 				},
 			];
 		}
 		if (!isEmpty(level2)) {
 			return [
 				{
-					...(stakeholder1 ? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					} : {}),
+					...(stakeholder1
+						? {
+							email   : stakeholder1?.userEmail,
+							name    : stakeholder1?.userName,
+							remarks : level1?.remarks,
+							status  : status1,
+						}
+						: {}),
 				},
 				{
-					...(stakeholder2 ? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					} : {}),
+					...(stakeholder2
+						? {
+							email   : stakeholder2?.userEmail,
+							name    : stakeholder2?.userName,
+							remarks : level2?.remarks,
+							status  : status2,
+						}
+						: {}),
 				},
 			];
 		}
@@ -306,7 +326,6 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 							) : (
 								<StakeHolderTimeline
 									timeline={stakeHolderTimeLine()}
-
 								/>
 							)}
 						</div>

@@ -31,6 +31,7 @@ function AddExpenseModal({
 	const [taxOptions, setTaxOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 	const [isFormValidated, setIsFormValidated] = useState(false);
+	const [incidentApprovalManagementId, setIncidentApprovalManagementId] =		useState(null);
 
 	const { cogoEntityId, vendorId } = rowData;
 
@@ -80,13 +81,19 @@ function AddExpenseModal({
 						isUploadConfirm={isUploadConfirm}
 						setIsUploadConfirm={setIsUploadConfirm}
 						setIsFormValidated={setIsFormValidated}
-						isTaxApplicable={tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]?.is_tax_applicable}
+						isTaxApplicable={
+							tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.is_tax_applicable
+						}
 					/>
 				) : (
 					<Summary
 						expenseData={expenseData}
 						setExpenseData={setExpenseData}
 						rowData={rowData}
+						setIncidentApprovalManagementId={
+						setIncidentApprovalManagementId
+						}
 					/>
 				)}
 			</Modal.Body>
@@ -118,6 +125,9 @@ function AddExpenseModal({
 						setShowModal={setShowExpenseModal}
 						getList={() => {}}
 						rowData={rowData}
+						incidentApprovalManagementId={
+						incidentApprovalManagementId
+						}
 					/>
 				</Modal.Body>
 			</Modal>
