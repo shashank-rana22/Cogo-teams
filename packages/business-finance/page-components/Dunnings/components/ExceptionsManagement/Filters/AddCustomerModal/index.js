@@ -47,17 +47,18 @@ function AddCustomerModal({
 	};
 
 	const isSubmitDisable = showEntityFilter
-		? (isEmpty(excludedNums) || !fileValue || isEmpty(entity) || uploadListLoading)
-		: (isEmpty(excludedNums) || !fileValue || uploadListLoading);
+		? ((isEmpty(excludedNums) && !fileValue) || isEmpty(entity) || uploadListLoading)
+		: ((isEmpty(excludedNums) && !fileValue) || uploadListLoading);
 
 	return (
 		<Modal
 			size="md"
 			show={show}
 			onClose={handleClose}
+			placement="top"
 		>
 			<Modal.Header title="Add To List - Upload List" />
-			<Modal.Body>
+			<Modal.Body style={{ overflow: 'visible' }}>
 				<div className={styles.body_container}>
 					{showEntityFilter && (
 						<div>
