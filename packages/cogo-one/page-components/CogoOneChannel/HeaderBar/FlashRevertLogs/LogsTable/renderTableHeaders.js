@@ -3,6 +3,21 @@ import { IcMFilter } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
+const SERVICE_TYPES = [
+	{
+		label : 'FCL Freight',
+		value : 'fcl_freight_service',
+	},
+	{
+		label : 'LCL Freight',
+		value : 'lcl_freight_service',
+	},
+	{
+		label : 'AIR Freight',
+		value : 'air_freight_service',
+	},
+];
+
 export function RenderFlashedAt({ setFilterParams = () => {}, filtersParams = {} }) {
 	return (
 		<div className={styles.header_container}>
@@ -29,7 +44,7 @@ export function RenderFlashedAt({ setFilterParams = () => {}, filtersParams = {}
 					<div className={cl`${styles.applied_filter} 
 						${filtersParams?.flashed_at ? '' : styles.empty_filter_badge}`}
 					/>
-					<IcMFilter className={styles.filter_icon} onClick={() => {}} />
+					<IcMFilter className={styles.filter_icon} />
 				</>
 			</Popover>
 		</div>
@@ -49,9 +64,7 @@ export function RenderShipmentType({ setFilterParams = () => {}, filtersParams =
 						isClearable
 						onChange={(val) => setFilterParams((prev) => ({ ...prev, service_type: val }))}
 						value={filtersParams?.service_type}
-						options={[{ label: 'FCL Freight', value: 'fcl_freight_service' },
-							{ label: 'LCL Freight', value: 'lcl_freight_service' },
-							{ label: 'AIR Freight', value: 'air_freight_service' }]}
+						options={SERVICE_TYPES}
 					/>
 				)}
 				className={styles.popover_filter}
@@ -60,7 +73,7 @@ export function RenderShipmentType({ setFilterParams = () => {}, filtersParams =
 					<div className={cl`${styles.applied_filter} 
 						${filtersParams?.service_type ? '' : styles.empty_filter_badge}`}
 					/>
-					<IcMFilter className={styles.filter_icon} onClick={() => {}} />
+					<IcMFilter className={styles.filter_icon} />
 				</>
 			</Popover>
 		</div>

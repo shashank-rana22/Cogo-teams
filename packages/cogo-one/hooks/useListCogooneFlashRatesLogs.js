@@ -10,6 +10,7 @@ const getParams = ({ filters, query, page }) => ({
 	page_limit                   : ITEMS_TO_BE_FETCHED,
 	page,
 	sort_type                    : 'desc',
+	sort_by                      : 'updated_at',
 	shipment_serial_id           : query || undefined,
 	filters                      : {
 		status                  : 'active',

@@ -7,7 +7,7 @@ import { RenderFlashedAt, RenderShipmentType } from './renderTableHeaders';
 import styles from './styles.module.css';
 
 const getLogsColumns = (props) => {
-	const { reverted_shipments } = props;
+	const { reverted_shipments = [] } = props;
 
 	return [
 		{
@@ -15,7 +15,7 @@ const getLogsColumns = (props) => {
 			Header   : () => <div className={styles.title}>SID No.</div>,
 			accessor : (value) => (
 				<div className={cl`${styles.sid_container}
-					${reverted_shipments.includes(value?.shipment_details?.serial_id)
+					${reverted_shipments?.includes(value?.shipment_details?.serial_id)
 					? styles.shipment_id : ''}`}
 				>
 					{value?.shipment_details?.serial_id}

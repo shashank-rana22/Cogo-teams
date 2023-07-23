@@ -14,10 +14,10 @@ function LogsTable() {
 	const [filtersParams, setFilterParams] = useState({ service_type: '', flashed_at: null });
 
 	const {
-		logsLoading,
-		logsData,
-		getFlashRateLogs,
-		sQuery,
+		logsLoading = false,
+		logsData = {},
+		getFlashRateLogs = () => {},
+		sQuery = '',
 	} = useListCogooneFlashRatesLogs({ filtersParams, sidQuery });
 
 	const {
