@@ -55,6 +55,7 @@ interface ItemDataInterface {
 	billCurrency?: string;
 	approvedByName?: string;
 	payableTds?: number;
+	categoryName?: string;
 }
 
 function ExpenseComponent() {
@@ -194,10 +195,10 @@ function ExpenseComponent() {
 			</Button>
 		),
 		renderCategory: (itemData: ItemDataInterface) => {
-			const { category = '' } = itemData || {};
+			const { categoryName = '', category = '' } = itemData || {};
 			return (
 				<div style={{ fontSize: '14px' }}>
-					{category.replaceAll('_', ' ')}
+					{startCase(categoryName || category)}
 				</div>
 			);
 		},
@@ -275,7 +276,11 @@ function ExpenseComponent() {
 			);
 		},
 		renderLedgerAmount: (itemData) => {
-			const { ledgerMaxPayoutAllowed, ledgerCurrency = '', ledgerTotal } = itemData || {};
+			const {
+				ledgerMaxPayoutAllowed,
+				ledgerCurrency = '',
+				ledgerTotal,
+			} = itemData || {};
 			return (
 				<div className={styles.data_container}>
 					<div className={styles.recurring_amount_data}>
@@ -574,6 +579,7 @@ function ExpenseComponent() {
 					}}
 					showPagination
 					renderDropdown={showDropDown}
+					showRibbon
 				/>
 			</div>
 

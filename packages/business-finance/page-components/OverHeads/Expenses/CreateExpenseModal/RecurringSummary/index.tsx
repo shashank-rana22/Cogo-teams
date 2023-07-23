@@ -72,7 +72,7 @@ function RecurringSummary({
 	} = recurringData || {};
 
 	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders({
-		incidentType    : 'OVERHEAD_APPROVAL',
+		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
 		entityId        : entityObject?.id,
 		incidentSubType : categoryName,
 	});

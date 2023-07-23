@@ -79,7 +79,7 @@ function Summary({
 		invoiceCurrency: currency,
 	} = expenseData || {};
 	const { stakeholdersData, loading: stakeholdersLoading } =		useGetStakeholders({
-		incidentType    : 'RECURRING_EXPENSE_APPROVAL',
+		incidentType    : 'OVERHEAD_APPROVAL',
 		incidentSubType : categoryName,
 		entityId        : entityObject?.id,
 	});
