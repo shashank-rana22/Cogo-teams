@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
@@ -11,7 +12,7 @@ function EmptyState({
 	textSize = '16px',
 }) {
 	return (
-		<div className={`${styles.container} ${styles[flexDirection]}`}>
+		<div className={cl`${styles.container} ${styles[flexDirection]}`}>
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				width={width}

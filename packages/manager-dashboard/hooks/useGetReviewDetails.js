@@ -16,8 +16,8 @@ const formattedDate = (item) => formatDate({
 });
 
 const useGetRatingReviewDetails = ({ level, ratingCycle }) => {
-	const [filters, setFilters] = useState({});
 	const { user }	 = useSelector((state) => state?.profile || {});
+	const [filters, setFilters] = useState({});
 
 	const { id } = user || {};
 

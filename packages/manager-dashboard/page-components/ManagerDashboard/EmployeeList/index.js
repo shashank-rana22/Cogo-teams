@@ -5,17 +5,16 @@ import StyledTableList from './StyledTableList';
 import styles from './styles.module.css';
 
 const ARRAY_LENGTH = 8;
-const ARRAY_MAP_KEY = 1;
 
 function EmployeeList({ data = [], level, setEmployeeId, setOpenKraModal, loading }) {
 	const { list = [] } = data || {};
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{[...Array(ARRAY_LENGTH)]
-					.map((_, index) => (
+				{[...Array(ARRAY_LENGTH).keys()]
+					.map((key) => (
 						<Placeholder
-							key={`${index + ARRAY_MAP_KEY}`}
+							key={key}
 							height="20px"
 							width="100%"
 							style={{ marginBottom: '20px' }}

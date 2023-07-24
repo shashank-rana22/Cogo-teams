@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Title({ data, list }) {
+function Title({ data = {}, list = [] }) {
 	const { employee_details } = data || {};
 	return (
 		<div className={styles.container}>

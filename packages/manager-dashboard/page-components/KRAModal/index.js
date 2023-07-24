@@ -10,7 +10,7 @@ import useEmployeeKraDetails from '../../hooks/useGetKraDetails';
 import styles from './styles.module.css';
 import Title from './Title';
 
-function KraModal({ show, onHide, employeeId, ratingCycle }) {
+function KraModal({ show = false, onHide = () => {}, employeeId = '', ratingCycle = '' }) {
 	const {
 		data = [],
 		loading,
