@@ -470,6 +470,11 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'get_allocation_objective_user_mappings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',

@@ -3,10 +3,13 @@ import { isEmpty } from '@cogoport/utils';
 
 import SearchInput from '../../../../../../../../../common/SearchInput';
 import EDIT_AGENTS_RADIO_OPTIONS from '../../../../../../../configurations/edit-agent-select-type-radio-options';
+import SELECT_AGENTS_KEYS_MAPPING from '../../../../../../../constants/select-agents-keys-mapping';
 
 import getListColumns from './get-list-columns';
 import styles from './styles.module.css';
 import useEditApplicableAgents from './useEditApplicableAgents';
+
+const { SELECT_ALL } = SELECT_AGENTS_KEYS_MAPPING;
 
 function EditApplicableAgentsModal(props) {
 	const { showEditAgentsModal, setShowEditAgentsModal, watchRoles, formValues, setFormValues } = props;
@@ -93,7 +96,7 @@ function EditApplicableAgentsModal(props) {
 					type="button"
 					themeType="accent"
 					onClick={onApplyChanges}
-					disabled={loading || (selectMode === 'custom' && isEmpty(selectedAgentIds))}
+					disabled={loading || (selectMode !== SELECT_ALL && isEmpty(selectedAgentIds))}
 				>
 					Apply Changes
 				</Button>

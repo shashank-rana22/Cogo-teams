@@ -64,7 +64,7 @@ const MODE_BASIS_BUTTON_MAPPING = {
 function SetObjectiveWeightage(props) {
 	const { activeTabDetails, setActiveStep, formValues } = props;
 
-	const { list } = useGetObjectiveUserMappings();
+	const { list, getNextPage, paginationData } = useGetObjectiveUserMappings({ formValues });
 
 	const { control } = useForm();
 
@@ -93,6 +93,8 @@ function SetObjectiveWeightage(props) {
 				list={list}
 				control={control}
 				formValues={formValues}
+				getNextPage={getNextPage}
+				paginationData={paginationData}
 			/>
 
 			<div className={styles.footer}>
