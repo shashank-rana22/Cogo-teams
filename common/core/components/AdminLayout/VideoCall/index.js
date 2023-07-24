@@ -101,40 +101,44 @@ function VideoCall({
 
 	useEffect(() => {
 		if (
-			webrtcToken?.peerToken
-			&& callDetails?.callingType === 'outgoing'
-			&& peerRef.current
+			!webrtcToken.peerToken || !peerRef.current
+			|| callDetails?.callingType !== 'outgoing'
 		) {
-			try {
-				peerRef.current?.signal?.(webrtcToken?.peerToken);
-			} catch (error) {
-				console.error('not able to load signal', error);
-			}
+			return;
+		}
+
+		try {
+			peerRef.current?.signal?.(webrtcToken?.peerToken);
+		} catch (error) {
+			console.error('not able to load signal', error);
 		}
 	}, [callDetails?.callingType, webrtcToken?.peerToken]);
 
-	return (
-		<div>
-			{callComing ? (
-				<IncomingCall
-					rejectCall={rejectCall}
-					answerCall={answerCall}
-					callDetails={callDetails}
-				/>
-			) : null}
-			{inVideoCall ? (
-				<VideoCallScreen
-					toggleState={toggleState}
-					setToggleState={setToggleState}
-					streams={streams}
-					handleCallEnd={handleCallEnd}
-					callDetails={callDetails}
-					firestore={firestore}
-					ref={streamRef}
-				/>
-			) : null}
-		</div>
-	);
+	if (callComing) {
+		return (
+			<IncomingCall
+				rejectCall={rejectCall}
+				answerCall={answerCall}
+				callDetails={callDetails}
+			/>
+		);
+	}
+
+	if (inVideoCall) {
+		return (
+			<VideoCallScreen
+				toggleState={toggleState}
+				setToggleState={setToggleState}
+				streams={streams}
+				handleCallEnd={handleCallEnd}
+				callDetails={callDetails}
+				firestore={firestore}
+				ref={streamRef}
+			/>
+		);
+	}
+
+	return null;
 }
 
 export default VideoCall;

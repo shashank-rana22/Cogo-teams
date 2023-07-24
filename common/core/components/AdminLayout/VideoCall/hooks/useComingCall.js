@@ -68,9 +68,9 @@ function useComingCall({
 			peer.on('signal', (data) => {
 				saveWebrtcToken(
 					{
-						data : { peer_token: data },
+						data    : { peer_token: data },
 						callingRoomId,
-						path : webrtcTokenRoomId,
+						tokenId : webrtcTokenRoomId,
 						firestore,
 					},
 				);

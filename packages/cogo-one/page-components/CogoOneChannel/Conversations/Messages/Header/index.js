@@ -96,7 +96,7 @@ function Header({
 		}
 	};
 
-	const unmountVideoCall = useCallback(() => {
+	const mountVideoCall = useCallback(() => {
 		dispatch(
 			setProfileState({
 				video_call_recipient_data: {
@@ -200,7 +200,7 @@ function Header({
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
 						{user_type === 'cp' ? (
-							<div role="presentation" className={styles.video_call_btn} onClick={unmountVideoCall}>
+							<div role="presentation" className={styles.video_call_btn} onClick={mountVideoCall}>
 								<IcMCallmonitor />
 							</div>
 

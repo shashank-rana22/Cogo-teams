@@ -107,7 +107,7 @@ function useVideoCallFirebase({
 						saveWebrtcToken({
 							data          : { user_token: data },
 							callingRoomId : getCallingRoomId,
-							path          : userId,
+							tokenId       : userId,
 							firestore,
 						});
 						setCallDetails((prev) => ({
