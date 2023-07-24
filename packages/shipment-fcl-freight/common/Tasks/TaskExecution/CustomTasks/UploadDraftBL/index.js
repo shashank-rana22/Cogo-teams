@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { useRef, useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -160,7 +160,13 @@ function UploadDraftBL({
 				<section>
 					{showSwitchGenerate ? (
 						<>
-							{Array(blCount)
+							{createTradeDocLoading ? 
+								<div className={styles.create_hbl_loader}>
+									<Loader/>
+										Creating Draft HBL Document...
+								</div> 
+							: 
+							Array(blCount)
 								.fill(null)
 								.map((n, i) => (
 									<div className={styles.flex_container} key={uuid()}>
@@ -177,14 +183,16 @@ function UploadDraftBL({
 											primaryService={primaryService}
 										/>
 									</div>
-								))}
+								))
+								}
+								
 							{!isAllHBLUploaded ? (
 								<div className={styles.flex_end}>
 									<Button
 										disabled={hblData?.length !== blCount || createTradeDocLoading}
 										onClick={saveAllBls}
 									>
-										Save All HBLs
+										Save All HBL
 									</Button>
 								</div>
 							) : null}
