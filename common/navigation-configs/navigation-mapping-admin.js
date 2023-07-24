@@ -2418,7 +2418,16 @@ const navigationMappingAdmin = {
 				possible_apis : apis.pricing_trends,
 			},
 		],
-
+	},
+	manager_dashboard: {
+		key           : 'manager_dashboard',
+		title         : 'Manager Dashboard',
+		icon          : IcMDashboard,
+		href          : '/v2/manager-dashboard',
+		as            : '/v2/manager-dashboard',
+		type          : 'link',
+		possible_apis : apis.performance_manager_dashboard,
+		module_type   : 'dashboards',
 	},
 	ftl_admin: {
 		key           : 'ftl_admin',
