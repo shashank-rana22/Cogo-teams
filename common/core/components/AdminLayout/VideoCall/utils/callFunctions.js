@@ -7,7 +7,7 @@ export const stopStream = ({ streamType, currentStream }) => {
 		return;
 	}
 
-	const tracks = currentStream[streamType].getTracks();
+	const tracks = currentStream[streamType]?.getTracks();
 
 	tracks.forEach((track) => {
 		track.stop();
@@ -55,24 +55,26 @@ export const saveCallData = async ({ data, callBackFunc, firestore }) => {
 };
 
 export const saveWebrtcToken = ({ data, callingRoomId, tokenId, firestore }) => {
-	if (callingRoomId) {
-		const webrtcTokenRoomDoc = doc(
-			firestore,
-			`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
-			tokenId,
-		);
+	if (!callingRoomId) {
+		return;
+	}
 
-		try {
-			setDoc(
-				webrtcTokenRoomDoc,
-				{
-					...data,
-					updated_at: Date.now(),
-				},
-				{ merge: true },
-			);
-		} catch (error) {
-			console.error(error);
-		}
+	const webrtcTokenRoomDoc = doc(
+		firestore,
+		`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
+		tokenId,
+	);
+
+	try {
+		setDoc(
+			webrtcTokenRoomDoc,
+			{
+				...data,
+				updated_at: Date.now(),
+			},
+			{ merge: true },
+		);
+	} catch (error) {
+		console.error(error);
 	}
 };

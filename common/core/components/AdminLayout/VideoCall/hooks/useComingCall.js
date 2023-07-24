@@ -36,17 +36,20 @@ function useComingCall({
 	const tokenSnapshotRef = useRef(null);
 
 	const getWebrtcToken = useCallback(async () => {
-		if (webrtcTokenRoomId && callingRoomId) {
-			const tokenDocRef = doc(
-				firestore,
-				`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
-				webrtcTokenRoomId,
-			);
-			const docSnap = await getDoc(tokenDocRef);
-			if (docSnap.exists()) {
-				const token = docSnap.data();
-				setWebrtcToken((prev) => ({ ...prev, userToken: token?.user_token }));
-			}
+		if (!webrtcTokenRoomId || !callingRoomId) {
+			return;
+		}
+
+		const tokenDocRef = doc(
+			firestore,
+			`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
+			webrtcTokenRoomId,
+		);
+		const docSnap = await getDoc(tokenDocRef);
+
+		if (docSnap.exists()) {
+			const token = docSnap.data();
+			setWebrtcToken((prev) => ({ ...prev, userToken: token?.user_token }));
 		}
 	}, [webrtcTokenRoomId, callingRoomId, firestore, setWebrtcToken]);
 
