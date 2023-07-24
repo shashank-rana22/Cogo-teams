@@ -59,9 +59,9 @@ const ObjectiveRequirements = forwardRef((props, ref) => {
 
 				<div className={styles.button_container}>
 					<Button
+						size="lg"
 						type="submit"
 						themeType="primary"
-						size="md"
 						disabled={disabled}
 					>
 						Proceed & Review

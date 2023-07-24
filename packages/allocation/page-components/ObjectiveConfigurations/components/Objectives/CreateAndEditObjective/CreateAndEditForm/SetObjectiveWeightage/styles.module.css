@@ -1,0 +1,27 @@
+.container {
+	margin: 24px 0;
+}
+
+.header_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading_container {
+	width: 75%;
+	margin-bottom: 36px;
+}
+
+.subheading {
+	font-size: 12px;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.button_container {
+	display: flex;
+}

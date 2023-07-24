@@ -35,6 +35,7 @@ function ReviewObjective(props) {
 
 			<div className={styles.button_container}>
 				<Button
+					size="lg"
 					type="button"
 					themeType="link"
 					onClick={() => setActiveStep(SET_OBJECTIVE)}
@@ -44,6 +45,7 @@ function ReviewObjective(props) {
 				</Button>
 
 				<Button
+					size="lg"
 					type="button"
 					themeType="primary"
 					// loading={loading}
