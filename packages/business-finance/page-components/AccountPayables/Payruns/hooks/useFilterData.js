@@ -25,6 +25,7 @@ import useGetPayrunBillListView from './useGetPayrunBillListView';
 import useGetUploadHistoryList from './useGetUploadHistoryList';
 import useGetViewInvoices from './useGetViewInvoices';
 
+const PAYRUN_INNER_TAB_NAME = ['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'];
 const useFilterData = ({
 	isInvoiceView, activePayrunTab, overseasData,
 	setOverseasData, setViewId, setCheckedRow,
@@ -87,7 +88,7 @@ const useFilterData = ({
 	}, [debounceQuery, search]);
 
 	useEffect(() => {
-		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
+		if ((PAYRUN_INNER_TAB_NAME).includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				getAdvancePaymentInvoiceList();
 				setRefetch(() => () => {
@@ -139,7 +140,7 @@ const useFilterData = ({
 		} else {
 			filteredConfig = initiatedConfig;
 		}
-		if (['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'].includes(activePayrunTab)) {
+		if ((PAYRUN_INNER_TAB_NAME).includes(activePayrunTab)) {
 			if (overseasData === 'ADVANCE_PAYMENT' && isInvoiceView) {
 				setApiData({
 					listData    : advancePaymentInvoiceList,
