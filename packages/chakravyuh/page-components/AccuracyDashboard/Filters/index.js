@@ -65,7 +65,9 @@ function Filters(props) {
 				{
 					LOCATION_KEYS.map((key) => (
 						<div key={key} className={styles[`${key}_location`]}>
-							<div className={cl`${styles.single_filter} ${styles[key]}`}>
+							<div className={cl`${styles.single_filter} ${styles[key]}
+							${globalFilters?.[`is_${key}_icd`] && styles.shrink_select}`}
+							>
 								<p className={styles.title_label}>{startCase(key)}</p>
 								<AsyncSelect
 									onChange={(value, obj) => {
