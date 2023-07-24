@@ -160,12 +160,6 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'list_shipment_booking_confirmation_preferences',
-		access_type  : 'private',
-		service_name : 'shipment',
-		feature      : 'confirm_bookings',
-	},
-	{
 		api          : 'get_shipment_fault_alarm_description',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -174,16 +168,6 @@ const apis = [
 		api          : 'list_shipment_stakeholders',
 		access_type  : 'private',
 		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_booking_confirmation_preferences',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api         : 'get_shipment_quotation',
-		access_type : 'private',
-		feature     : 'revenue_desk',
 	},
 	{
 		api          : 'list_shipment_trade_partners',
