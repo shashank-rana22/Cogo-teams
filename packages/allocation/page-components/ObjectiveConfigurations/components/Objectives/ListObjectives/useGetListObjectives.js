@@ -45,7 +45,6 @@ const useGetListObjectives = () => {
 		list,
 		paginationData,
 		getNextPage,
-		toggleValue,
 		setToggleValue,
 	};
 };

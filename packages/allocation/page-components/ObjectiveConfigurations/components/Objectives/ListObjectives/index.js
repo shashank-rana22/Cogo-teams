@@ -11,7 +11,6 @@ function ListObjectives(props) {
 		list,
 		paginationData,
 		getNextPage,
-		toggleValue,
 		setToggleValue,
 	} = useGetListObjectives();
 
@@ -24,7 +23,6 @@ function ListObjectives(props) {
 
 			<Body
 				setParams={setParams}
-				toggleValue={toggleValue}
 				loading={loading}
 				list={list}
 				paginationData={paginationData}

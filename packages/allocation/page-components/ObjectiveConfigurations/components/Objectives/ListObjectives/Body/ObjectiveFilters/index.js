@@ -9,7 +9,7 @@ import useFilterContent from './useFilterContent';
 const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 function ObjectiveFilters(props) {
-	const { setParams, toggleValue } = props;
+	const { setParams } = props;
 
 	const {
 		controls,
@@ -19,7 +19,7 @@ function ObjectiveFilters(props) {
 		handleReset,
 		applyFilters,
 		filtersApplied,
-	} = useFilterContent({ setParams, toggleValue });
+	} = useFilterContent({ setParams });
 
 	return (
 		<div className={styles.filter_container}>
@@ -50,9 +50,7 @@ function ObjectiveFilters(props) {
 							</Badge>
 						)}
 					>
-						<div>
-							<IcMFilter style={{ marginLeft: '4px' }} />
-						</div>
+						<IcMFilter style={{ marginLeft: '4px' }} />
 					</ConditionalWrapper>
 				</Button>
 			</Filters>

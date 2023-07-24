@@ -5,7 +5,6 @@ import ObjectiveFilters from './ObjectiveFilters';
 function Body(props) {
 	const {
 		setParams,
-		toggleValue,
 		loading,
 		list,
 		paginationData,
@@ -17,7 +16,6 @@ function Body(props) {
 		<section>
 			<ObjectiveFilters
 				setParams={setParams}
-				toggleValue={toggleValue}
 			/>
 
 			<List
