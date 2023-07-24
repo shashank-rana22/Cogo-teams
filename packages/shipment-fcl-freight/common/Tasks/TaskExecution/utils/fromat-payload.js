@@ -15,13 +15,13 @@ const formatForPayload = (
 
 	Object.keys(dataToSend || {}).forEach((key) => {
 		if (key?.includes('service')) {
-			FINAL_PAYLOAD[key] = formatDataForService(
-				dataToSend[key],
+			FINAL_PAYLOAD[key] = formatDataForService({
+				dataToSend: dataToSend[key],
 				rawValues,
 				taskData,
 				serviceIdMapping,
 				primaryService,
-			);
+			});
 		}
 
 		if (key === 'documents') {
