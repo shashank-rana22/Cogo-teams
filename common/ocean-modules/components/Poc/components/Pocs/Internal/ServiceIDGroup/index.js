@@ -5,9 +5,10 @@ import Stakeholders from '../Stakeholders';
 
 import styles from './styles.module.css';
 
+const DATA_BY_SERVICE_ID = {};
+const INDEX_0 = 0;
+
 function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {}, shipment_type = '' }) {
-	const DATA_BY_SERVICE_ID = {};
-	const INDEX_0 = 0;
 	data.forEach((item) => {
 		const { service_id, ...rest } = item;
 
@@ -16,6 +17,18 @@ function ServiceIDGroup({ data = [], setAddPoc = () => {}, rolesPermission = {},
 		}
 
 		DATA_BY_SERVICE_ID[service_id].push({ service_id, ...rest });
+	});
+
+	data.forEach((item) => {
+		const { service_id, ...rest } = item;
+
+		if (service_id !== null && service_id !== undefined) {
+			if (!DATA_BY_SERVICE_ID[service_id]) {
+				DATA_BY_SERVICE_ID[service_id] = [];
+			}
+
+			DATA_BY_SERVICE_ID[service_id].push({ service_id, ...rest });
+		}
 	});
 
 	return (
