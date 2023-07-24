@@ -30,13 +30,13 @@ function VideoCallOptions({
 	firestore = {},
 	callDetails = {},
 	stopCall = () => {},
-	options = {},
-	setOptions = () => {},
+	toggleState = {},
+	setToggleState = () => {},
 	toggleMic = () => {},
 	callingRoomDetails = {},
 	type = '',
 }) {
-	const { isScreenShareActive = false, isMicActive = false } = options || {};
+	const { isScreenShareActive = false, isMicActive = false } = toggleState || {};
 	const { request_screen_share = false } = callingRoomDetails || {};
 
 	const handleRequestScreenShare = ({ e, clickType }) => {
@@ -58,11 +58,11 @@ function VideoCallOptions({
 	});
 
 	useEffect(() => {
-		setOptions((prev) => ({
+		setToggleState((prev) => ({
 			...prev,
 			isScreenShareActive: request_screen_share,
 		}));
-	}, [request_screen_share, setOptions]);
+	}, [request_screen_share, setToggleState]);
 
 	return (
 		<>

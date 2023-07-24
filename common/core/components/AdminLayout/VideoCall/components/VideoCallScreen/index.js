@@ -11,8 +11,8 @@ import VideoCallTimer from './VideoCallTimer';
 const INIT_TIME_ZERO = 0;
 
 function VideoCallScreen({
-	options = {},
-	setOptions = () => {},
+	toggleState = {},
+	setToggleState = () => {},
 	streams = {},
 	callEnd = () => {},
 	callDetails = {},
@@ -32,7 +32,7 @@ function VideoCallScreen({
 		user_call_options = {},
 	} = callingRoomDetails || {};
 	const { isVideoActive = false, isScreenShareActive = false } = user_call_options || {};
-	const { isMinimize } = options || {};
+	const { isMinimize } = toggleState || {};
 
 	const tempRef = ref;
 
@@ -45,8 +45,8 @@ function VideoCallScreen({
 	};
 
 	const { stopCall, shareScreen, toggleMic } = useVideocallOptions({
-		options,
-		setOptions,
+		toggleState,
+		setToggleState,
 		streams,
 		callEnd,
 		callDetails,
@@ -54,7 +54,7 @@ function VideoCallScreen({
 	});
 
 	const handleMinimize = () => {
-		setOptions((prev) => ({ ...prev, isMinimize: true }));
+		setToggleState((prev) => ({ ...prev, isMinimize: true }));
 	};
 
 	const avaterUserName = getUserName();
@@ -65,7 +65,7 @@ function VideoCallScreen({
 				role="presentation"
 				type="button"
 				className={isMinimize ? styles.minimize_video_call : styles.hide_container}
-				onClick={() => setOptions((prev) => ({ ...prev, isMinimize: false }))}
+				onClick={() => setToggleState((prev) => ({ ...prev, isMinimize: false }))}
 			>
 				<div className={styles.timer}>
 					<VideoCallTimer callingRoomDetails={callingRoomDetails} time={time} setTime={setTime} />
@@ -76,8 +76,8 @@ function VideoCallScreen({
 						callDetails={callDetails}
 						stopCall={stopCall}
 						shareScreen={shareScreen}
-						options={options}
-						setOptions={setOptions}
+						toggleState={toggleState}
+						setToggleState={setToggleState}
 						toggleMic={toggleMic}
 						callingRoomDetails={callingRoomDetails}
 						type="mini_screen"
@@ -127,8 +127,8 @@ function VideoCallScreen({
 							callDetails={callDetails}
 							stopCall={stopCall}
 							shareScreen={shareScreen}
-							options={options}
-							setOptions={setOptions}
+							toggleState={toggleState}
+							setToggleState={setToggleState}
 							toggleMic={toggleMic}
 							callingRoomDetails={callingRoomDetails}
 						/>

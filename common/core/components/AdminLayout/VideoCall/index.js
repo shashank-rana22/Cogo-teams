@@ -15,9 +15,6 @@ function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 }) {
-	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
-	const firestore = getFirestore(app);
-
 	const [callComing, setCallComing] = useState(false);
 	const [webrtcToken, setWebrtcToken] = useState({
 		userToken : null,
@@ -35,7 +32,7 @@ function VideoCall({
 		userStream : null,
 		peerStream : null,
 	});
-	const [options, setOptions] = useState({
+	const [toggleState, setToggleState] = useState({
 		isMicActive         : true,
 		isVideoActive       : true,
 		isScreenShareActive : false,
@@ -45,12 +42,15 @@ function VideoCall({
 	const streamRef = useRef(null);
 	const peerRef = useRef(null);
 
+	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
+	const firestore = getFirestore(app);
+
 	const { callingTo, callEnd } = useVideoCallFirebase({
 		firestore,
 		setCallComing,
 		setCallDetails,
 		setWebrtcToken,
-		setOptions,
+		setToggleState,
 		callDetails,
 		setStreams,
 		peerRef,
@@ -86,9 +86,9 @@ function VideoCall({
 				callingTo(videoCallRecipientData);
 			}
 
-			const timeoutFunc = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
+			const timeoutMissCallId = setTimeout(missCallHandle, CALL_RING_TIME_LIMIT);
 
-			return () => clearTimeout(timeoutFunc);
+			return () => clearTimeout(timeoutMissCallId);
 		},
 		[inVideoCall, videoCallRecipientData, callingTo, missCallHandle],
 	);
@@ -124,8 +124,8 @@ function VideoCall({
 			) : null}
 			{inVideoCall ? (
 				<VideoCallScreen
-					options={options}
-					setOptions={setOptions}
+					toggleState={toggleState}
+					setToggleState={setToggleState}
 					streams={streams}
 					callEnd={callEnd}
 					callDetails={callDetails}

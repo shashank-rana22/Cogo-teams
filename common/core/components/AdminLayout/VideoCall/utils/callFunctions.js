@@ -19,7 +19,8 @@ export const callUpdate = ({ data, firestore, callingRoomId }) => {
 		try {
 			const videCallRoomDoc = doc(
 				firestore,
-				`${FIRESTORE_PATH.video_calls}/${callingRoomId}`,
+				FIRESTORE_PATH.video_calls,
+				callingRoomId,
 			);
 
 			updateDoc(videCallRoomDoc, {
@@ -39,13 +40,13 @@ export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
 	);
 
 	try {
-		const data_to_save = {
+		const dataToSave = {
 			...data,
 			updated_at : Date.now(),
 			created_at : Date.now(),
 		};
-		const doc_data = await addDoc(videoCallRoomCollection, data_to_save);
-		callBackFunc(doc_data.id);
+		const docData = await addDoc(videoCallRoomCollection, dataToSave);
+		callBackFunc(docData.id);
 	} catch (error) {
 		console.error(error);
 	}
@@ -53,14 +54,15 @@ export const saveCallingData = async ({ data, callBackFunc, firestore }) => {
 
 export const saveWebrtcToken = ({ data, callingRoomId, path, firestore }) => {
 	if (callingRoomId) {
-		const WebrtcTokenRoomDoc = doc(
+		const webrtcTokenRoomDoc = doc(
 			firestore,
-			`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}/${path}`,
+			`${FIRESTORE_PATH.video_calls}/${callingRoomId}/${FIRESTORE_PATH.webrtc_token}`,
+			path,
 		);
 
 		try {
 			setDoc(
-				WebrtcTokenRoomDoc,
+				webrtcTokenRoomDoc,
 				{
 					...data,
 					updated_at: Date.now(),

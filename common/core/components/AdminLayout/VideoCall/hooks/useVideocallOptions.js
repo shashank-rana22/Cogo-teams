@@ -4,8 +4,8 @@ import { useCallback } from 'react';
 import { callUpdate } from '../utils/callFunctions';
 
 function useVideocallOptions({
-	options,
-	setOptions,
+	toggleState,
+	setToggleState,
 	streams,
 	callEnd,
 	callDetails,
@@ -29,23 +29,23 @@ function useVideocallOptions({
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
-		setOptions((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));
+		setToggleState((prev) => ({ ...prev, isMicActive: !prev.isMicActive }));
 		const loaclStream = streams;
 		if (loaclStream?.userStream) {
-			loaclStream.userStream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isMicActive;
+			loaclStream.userStream.getAudioTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isMicActive;
 		}
-	}, [options.isMicActive, setOptions, streams]);
+	}, [toggleState.isMicActive, setToggleState, streams]);
 
 	const toggleVideo = useCallback(({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
-		setOptions((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
+		setToggleState((prev) => ({ ...prev, isVideoActive: !prev.isVideoActive }));
 		const loaclStream = streams;
 		if (loaclStream?.userStream) {
-			loaclStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !options.isVideoActive;
+			loaclStream.userStream.getVideoTracks()[GLOBAL_CONSTANTS.zeroth_index].enabled = !toggleState.isVideoActive;
 		}
-	}, [options.isVideoActive, setOptions, streams]);
+	}, [toggleState.isVideoActive, setToggleState, streams]);
 
 	return { stopCall, toggleMic, toggleVideo };
 }

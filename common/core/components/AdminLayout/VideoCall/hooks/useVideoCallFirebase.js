@@ -18,7 +18,7 @@ function useVideoCallFirebase({
 	setCallComing,
 	setCallDetails,
 	setWebrtcToken,
-	setOptions,
+	setToggleState,
 	callDetails,
 	setStreams,
 	peerRef,
@@ -57,7 +57,7 @@ function useVideoCallFirebase({
 			peerToken : null,
 		});
 
-		setOptions({
+		setToggleState({
 			isMicActive         : true,
 			isVideoActive       : true,
 			isScreenShareActive : false,
@@ -71,7 +71,7 @@ function useVideoCallFirebase({
 				peerStream : null,
 			};
 		});
-	}, [saveInACallStatus, setCallComing, peerRef, setCallDetails, setWebrtcToken, setOptions, setStreams]);
+	}, [saveInACallStatus, setCallComing, peerRef, setCallDetails, setWebrtcToken, setToggleState, setStreams]);
 
 	const callingToMediaStream = useCallback(async (peerDetails) => {
 		try {
@@ -177,7 +177,7 @@ function useVideoCallFirebase({
 		[setCallDetails, callingToMediaStream, userName, userId],
 	);
 
-	const updateCallRoom = useCallback(() => {
+	const updateCallDetails = useCallback(() => {
 		newRoomRef?.current?.();
 
 		if (callDetails?.callingRoomId) {
@@ -186,24 +186,24 @@ function useVideoCallFirebase({
 				FIRESTORE_PATH.video_calls,
 				callDetails?.callingRoomId,
 			);
-			newRoomRef.current = onSnapshot(videoCallDocRef, (dop) => {
-				const room_data = dop.data();
+			newRoomRef.current = onSnapshot(videoCallDocRef, (roomDocument) => {
+				const roomData = roomDocument.data();
 				setCallDetails((prev) => ({
 					...prev,
-					callingRoomDetails : room_data,
-					webrtcTokenRoomId  : room_data?.webrtc_token_room_id,
+					callingRoomDetails : roomData,
+					webrtcTokenRoomId  : roomData?.webrtc_token_room_id,
 				}));
 			});
 		}
 	}, [callDetails?.callingRoomId, firestore, setCallDetails]);
 
 	useEffect(() => {
-		updateCallRoom();
+		updateCallDetails();
 
 		return () => {
 			newRoomRef?.current?.();
 		};
-	}, [updateCallRoom]);
+	}, [updateCallDetails]);
 
 	return {
 		callingTo,

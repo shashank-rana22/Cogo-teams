@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CallComing({
+function IncomingCall({
 	rejectCall = () => {},
 	answerCall = () => {},
 	callDetails = {},
@@ -98,4 +98,4 @@ function CallComing({
 	);
 }
 
-export default CallComing;
+export default IncomingCall;
