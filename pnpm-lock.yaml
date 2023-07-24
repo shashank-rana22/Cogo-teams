@@ -153,6 +153,9 @@ importers:
       '@cogoport/document-desk':
         specifier: workspace:0.1.0
         version: link:../packages/document-desk
+      '@cogoport/employee-dashboard':
+        specifier: workspace:0.1.0
+        version: link:../packages/employee-dashboard
       '@cogoport/employee-portal':
         specifier: workspace:0.1.0
         version: link:../packages/employee-portal
@@ -1664,6 +1667,42 @@ importers:
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
+
+  packages/employee-dashboard:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.428
+        version: 1.0.431(@babel/core@7.22.9)(@cogoport/icons-react@1.0.85)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/constants':
+        specifier: workspace:^0.1.0
+        version: link:../../common/constants
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.80
+        version: 1.0.85(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.10
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      stylelint:
+        specifier: ^14.16.1
+        version: 14.16.1
 
   packages/employee-portal:
     dependencies:

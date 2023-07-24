@@ -430,6 +430,33 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
+	employee_performance_dashboard: [
+		{
+			api          : 'get_employee_dashboard_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_employee_feedback',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_modification_history_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_rating_cycles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_dashboard_employee_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default HRMS;
