@@ -7,8 +7,8 @@ import { useState, useRef, useEffect } from 'react';
 import styles from './styles.module.css';
 
 function CallComing({
-	rejectOfCall = () => {},
-	answerOfCall = () => {},
+	rejectCall = () => {},
+	answerCall = () => {},
 	callDetails = {},
 }) {
 	const audioRef = useRef(null);
@@ -17,20 +17,26 @@ function CallComing({
 	const { my_details } = callDetails?.calling_details || {};
 
 	useEffect(() => {
+		const audioRefCopy = audioRef;
+
 		if (audioRef.current) {
 			audioRef.current.play();
 		}
+
+		return () => {
+			audioRefCopy?.current?.pause();
+		};
 	}, []);
 
 	return (
-		<div className={styles.call_comming}>
+		<div className={styles.call_coming}>
 			<audio
 				ref={audioRef}
 				src={GLOBAL_CONSTANTS.video_call_ring_tone_url}
 			/>
 
 			{isMaximize ? (
-				<div className={styles.big_call_comming}>
+				<div className={styles.big_call_coming}>
 					<div
 						role="presentation"
 						className={styles.minimize_btn}
@@ -45,23 +51,23 @@ function CallComing({
 						width={90}
 						className={styles.user_avatar}
 					/>
-					<div className={styles.comming_call_text}>
+					<div className={styles.coming_call_text}>
 						Incoming call from
 						<div className={styles.agent_name}>{my_details?.user_name || 'UnKnown'}</div>
 					</div>
-					<div className={styles.comming_call_options}>
+					<div className={styles.coming_call_options}>
 						<IcMCall
-							onClick={answerOfCall}
+							onClick={answerCall}
 							className={cl`${styles.call_icon} ${styles.accept_call}`}
 						/>
 						<IcMCall
-							onClick={rejectOfCall}
+							onClick={rejectCall}
 							className={cl`${styles.call_icon} ${styles.reject_call}`}
 						/>
 					</div>
 				</div>
 			) : (
-				<div className={styles.call_comming_body}>
+				<div className={styles.call_coming_body}>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 						alt="avatar-placeholder"
@@ -71,18 +77,18 @@ function CallComing({
 					/>
 					<div
 						role="presentation"
-						className={styles.call_comming_text}
+						className={styles.call_coming_text}
 						onClick={() => setIsMaximize(true)}
 					>
 						{my_details?.user_name || 'UnKnown'}
 					</div>
-					<div className={styles.call_comming_btn}>
+					<div className={styles.call_coming_btn}>
 						<IcMCall
-							onClick={rejectOfCall}
+							onClick={rejectCall}
 							className={cl`${styles.minimize_call_icon} ${styles.minimize_reject_icon}`}
 						/>
 						<IcMCall
-							onClick={answerOfCall}
+							onClick={answerCall}
 							className={cl`${styles.minimize_call_icon} ${styles.minmize_accept_icon}`}
 						/>
 					</div>

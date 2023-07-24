@@ -20,10 +20,15 @@ function VideoCallScreen({
 }, ref) {
 	const [time, setTime] = useState(INIT_TIME_ZERO);
 
-	const { calling_type, peer_details, my_details, calling_details = {} } = callDetails || {};
 	const {
-		my_details: room_my_details = {},
-		peer_details: room_peer_details = {},
+		calling_type,
+		peer_details : peerDetails = {},
+		my_details: myDetails = {},
+		calling_details = {},
+	} = callDetails || {};
+	const {
+		my_details: roomMyDetails = {},
+		peer_details: roomPeerDetails = {},
 		user_call_options = {},
 	} = calling_details || {};
 	const { isVideoActive = false, isScreenShareActive = false } = user_call_options || {};
@@ -33,10 +38,10 @@ function VideoCallScreen({
 
 	const getUserName = () => {
 		if (calling_type === 'outgoing') {
-			return peer_details?.user_name || room_peer_details?.user_name || 'Unknown user';
+			return peerDetails?.user_name || roomPeerDetails?.user_name || 'Unknown user';
 		}
 
-		return my_details?.user_name || room_my_details?.user_name || 'Unknown user';
+		return myDetails?.user_name || roomMyDetails?.user_name || 'Unknown user';
 	};
 
 	const { stopCall, shareScreen, toggleMic, toggleVideo } = useVideocallOptions({
@@ -51,6 +56,8 @@ function VideoCallScreen({
 	const handleMinimize = () => {
 		setOptions((prev) => ({ ...prev, isMinimize: true }));
 	};
+
+	const avaterUserName = getUserName();
 
 	return (
 		<div className={cl`${!isMinimize ? styles.container : styles.minimize_container}`}>
@@ -87,9 +94,9 @@ function VideoCallScreen({
 						className={(isVideoActive || isScreenShareActive)
 							? styles.hide_container : styles.avatar_screen}
 					>
-						<div className={styles.header}>{getUserName()}</div>
+						<div className={styles.header}>{avaterUserName}</div>
 						<Avatar
-							personName={getUserName()}
+							personName={avaterUserName}
 							size="250px"
 							className={styles.styled_avatar}
 						/>

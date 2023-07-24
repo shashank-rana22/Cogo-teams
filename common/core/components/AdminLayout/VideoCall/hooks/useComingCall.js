@@ -22,7 +22,7 @@ function useComingCall({
 	callEnd,
 }) {
 	const { saveInACallStatus } = useSetInACall();
-	const callCommingSnapshotRef = useRef(null);
+	const callComingSnapshotRef = useRef(null);
 	const tokenSnapshotRef = useRef(null);
 
 	const { user_data } = useSelector((state) => ({
@@ -104,7 +104,7 @@ function useComingCall({
 	}, [callDetails.calling_room_id, callDetails.webrtc_token_room_id,
 		callEnd, firestore, peerRef, setStreams, webrtcToken.user_token]);
 
-	const answerOfCall = useCallback(() => {
+	const answerCall = useCallback(() => {
 		getWebrtcToken().then(() => {
 			saveInACallStatus(true);
 			setCallComing(false);
@@ -121,7 +121,7 @@ function useComingCall({
 		});
 	}, [accepteCallMedia, callDetails?.calling_room_id, firestore, getWebrtcToken, saveInACallStatus, setCallComing]);
 
-	const rejectOfCall = useCallback(() => {
+	const rejectCall = useCallback(() => {
 		callUpdate({
 			data: {
 				call_status: 'rejected',
@@ -134,7 +134,7 @@ function useComingCall({
 	}, [callDetails?.calling_room_id, firestore, setCallComing]);
 
 	const getCallingRoomData = useCallback(() => {
-		callCommingSnapshotRef?.current?.();
+		callComingSnapshotRef?.current?.();
 
 		const videoCallRef = collection(firestore, FIRESTORE_PATH.video_calls);
 		const videoCallComingQuery = query(
@@ -144,7 +144,7 @@ function useComingCall({
 			where('peer_id', '==', userId),
 		);
 
-		callCommingSnapshotRef.current = onSnapshot(videoCallComingQuery, (querySnapshot) => {
+		callComingSnapshotRef.current = onSnapshot(videoCallComingQuery, (querySnapshot) => {
 			querySnapshot.forEach((val) => {
 				if (inVideoCall === false && isEmpty(callDetails.calling_room_id)) {
 					const room_data = val.data();
@@ -186,7 +186,7 @@ function useComingCall({
 		getCallingRoomData();
 
 		return () => {
-			callCommingSnapshotRef?.current?.();
+			callComingSnapshotRef?.current?.();
 		};
 	}, [getCallingRoomData]);
 
@@ -218,8 +218,8 @@ function useComingCall({
 	}, [callDetails?.calling_details, callDetails?.calling_room_id, callEnd, setCallComing]);
 
 	return {
-		answerOfCall,
-		rejectOfCall,
+		answerCall,
+		rejectCall,
 	};
 }
 

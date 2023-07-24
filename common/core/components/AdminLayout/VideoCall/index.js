@@ -3,7 +3,7 @@ import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
-import CallComing from './components/CallComing';
+import IncomingCall from './components/IncomingCall';
 import VideoCallScreen from './components/VideoCallScreen';
 import { firebaseConfig } from './configurations/firebase-config';
 import { CALL_RING_TIME_LIMIT } from './constants';
@@ -57,7 +57,7 @@ function VideoCall({
 		peerRef,
 	});
 
-	const { rejectOfCall, answerOfCall } = useComingCall({
+	const { rejectCall, answerCall } = useComingCall({
 		firestore,
 		setCallDetails,
 		callDetails,
@@ -117,9 +117,9 @@ function VideoCall({
 	return (
 		<div>
 			{callComing ? (
-				<CallComing
-					rejectOfCall={rejectOfCall}
-					answerOfCall={answerOfCall}
+				<IncomingCall
+					rejectCall={rejectCall}
+					answerCall={answerCall}
 					callDetails={callDetails}
 				/>
 			) : null}

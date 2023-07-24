@@ -1,4 +1,4 @@
-.call_comming {
+.call_coming {
 	position: fixed;
 	top: 35px;
 	right: 35px;
@@ -17,7 +17,7 @@
 	cursor: pointer;
 }
 
-.call_comming_body {
+.call_coming_body {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -29,13 +29,13 @@
 	border-radius: 10px;
 }
 
-.call_comming_text {
+.call_coming_text {
 	padding: 5px;
 	font-size: 18px;
 	text-transform: capitalize;
 }
 
-.call_comming_btn {
+.call_coming_btn {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -59,7 +59,7 @@
 	background-color: #849e4c;
 }
 
-.big_call_comming {
+.big_call_coming {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -78,7 +78,7 @@
 	width: 100%;
 }
 
-.comming_call_text {
+.coming_call_text {
 	font-size: 18px;
 	text-align: center;
 }
@@ -88,7 +88,7 @@
 	font-weight: 500;
 }
 
-.comming_call_options {
+.coming_call_options {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

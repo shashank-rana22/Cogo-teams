@@ -18,7 +18,7 @@ const getVideoControls = ({
 	{
 		name            : 'screen_share',
 		clickFunc       : handleRequestScreenShare,
-		condition       : isScreenShareActive,
+		isActive        : isScreenShareActive,
 		ActiveIcon      : IcMStopShare,
 		InactiveIcon    : IcMScreenShare,
 		activeContet    : 'Stop Request',
@@ -27,7 +27,7 @@ const getVideoControls = ({
 	{
 		name            : 'mic_on',
 		clickFunc       : toggleMic,
-		condition       : isMicActive,
+		isActive        : isMicActive,
 		ActiveIcon      : IcMMicrophone,
 		InactiveIcon    : IcMMicrophoneMute,
 		activeContet    : 'Mute',
@@ -36,7 +36,7 @@ const getVideoControls = ({
 	{
 		name            : 'video_on',
 		clickFunc       : toggleVideo,
-		condition       : isVideoActive,
+		isActive        : isVideoActive,
 		ActiveIcon      : IcMVideoCall,
 		InactiveIcon    : IcMVideoCallMute,
 		activeContet    : 'Turn off Camera',

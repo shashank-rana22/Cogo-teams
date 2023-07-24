@@ -74,7 +74,7 @@ function VideoCallOptions({
 					ActiveIcon,
 					InactiveIcon,
 					name,
-					condition,
+					isActive,
 					clickFunc,
 					activeContet,
 					inActiveContent,
@@ -88,8 +88,8 @@ function VideoCallOptions({
 						className={styles.call_options_icons}
 					>
 						<CustomTootTipContent
-							Icon={condition ? ActiveIcon : InactiveIcon}
-							content={condition ? activeContet : inActiveContent}
+							Icon={isActive ? ActiveIcon : InactiveIcon}
+							content={isActive ? activeContet : inActiveContent}
 						/>
 					</div>
 				);
