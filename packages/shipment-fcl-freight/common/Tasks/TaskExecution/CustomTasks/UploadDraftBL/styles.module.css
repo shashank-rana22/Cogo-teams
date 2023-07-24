@@ -63,7 +63,7 @@
 	color: red;
 }
 
-.create_hbl_loader{
+.create_hbl_loader {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
