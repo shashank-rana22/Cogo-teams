@@ -193,8 +193,6 @@ function CogoOne() {
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
 				setActiveTab={setActiveTab}
-				openSpContacts={openSpContacts}
-				setOpenSpContacts={setOpenSpContacts}
 			/>
 		</>
 	);

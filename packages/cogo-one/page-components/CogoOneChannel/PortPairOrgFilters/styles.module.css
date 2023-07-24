@@ -9,7 +9,7 @@
 	border-radius: 6px;
 	box-shadow: 0 0 44px 0 rgb(98 127 172 / 20%);
 	transition: 0.5s ease;
-	animation: 0.3s filter-card both;
+	animation: 0.5s filter-card both;
 
 	@keyframes filter-card {
 		0% {
@@ -44,7 +44,7 @@
 	z-index: 1;
 	display: flex;
 	align-items: center;
-	animation: 1.2s form both;
+	animation: 0.8s form both;
 
 	@keyframes form {
 		0% {
