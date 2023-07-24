@@ -30,7 +30,7 @@ const useCreateAwbNumber = (
 			});
 			Toast.success('AWB Number is successfully added.');
 			setFinalList([]);
-			setActiveTab('awb_number');
+			setActiveTab('inventory_stock');
 			setShow(false);
 			if (page === START_PAGE) {
 				awbList();

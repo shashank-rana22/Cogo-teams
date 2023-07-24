@@ -78,13 +78,15 @@ const awbControls = [
 	},
 	{
 		name        : 'chargeable_weight',
-		type        : 'text',
+		type        : 'select',
 		label       : 'Add Chargeable Weight',
 		placeholder : 'Enter Weight',
 		span        : 6,
-		rules       : {
-			required: true,
-		},
+		options     : [
+			{ label: '>500', value: 'greater' },
+			{ label: '<500', value: 'smaller' },
+		],
+		isClearable: true,
 	},
 	{
 		name        : 'awbNumber',
