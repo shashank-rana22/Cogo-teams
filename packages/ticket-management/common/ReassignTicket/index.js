@@ -6,15 +6,16 @@ import { useReassignTicketsControls } from '../../configurations/reassign-contro
 import { REQUIRED_ROLES } from '../../constants';
 import useReassignTicket from '../../hooks/useReassignTicket';
 import { getFieldController } from '../../utils/getFieldController';
+import Confirmation from '../Confirmation';
 
 import styles from './styles.module.css';
 
 function ReassignTicket({
-	ticketId, showReassign, setShowReassign, getTicketActivity,
-	getTicketDetails,
-	setListData,
+	ticketId = '', showReassign = true, setShowReassign = () => {}, getTicketActivity = () => {},
+	getTicketDetails = () => {}, setListData = () => {},
 }) {
 	const [userData, setUserData] = useState({});
+	const [showConfirmation, setShowConfirmation] = useState(false);
 
 	const { control, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
 
@@ -30,6 +31,7 @@ function ReassignTicket({
 	});
 
 	const handleClose = () => {
+		setShowConfirmation(false);
 		setShowReassign(false);
 		reset();
 	};
@@ -84,9 +86,17 @@ function ReassignTicket({
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button size="md" type="submit" loading={reassignLoading}>
-						Submit
-					</Button>
+					{showConfirmation
+						? (
+							<Confirmation
+								loading={reassignLoading}
+								handleChange={setShowConfirmation}
+							/>
+						) : (
+							<Button size="md" onClick={() => setShowConfirmation(true)} loading={reassignLoading}>
+								Submit
+							</Button>
+						)}
 				</Modal.Footer>
 			</form>
 		</Modal>
