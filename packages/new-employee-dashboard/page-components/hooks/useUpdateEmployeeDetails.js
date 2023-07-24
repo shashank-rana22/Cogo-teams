@@ -2,17 +2,34 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails = () => {} }) => {
+const getPayload = ({ SOURCE, companyPolicyValue, status, id }) => {
+	const payload = { id };
+
+	if (SOURCE === 'save') {
+		payload.share_company_policies = companyPolicyValue === 'Yes' ? true : null;
+	}
+
+	if (SOURCE === 'reject') {
+		payload.status = status === 'active' ? 'inactive' : 'active';
+	}
+
+	return payload;
+};
+
+const useUpdateEmployeeDeatils = ({
+	id,
+	status,
+	getEmployeeDetails = () => {},
+	companyPolicyValue = null,
+	SOURCE = 'save',
+}) => {
 	const [{ btnloading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_detail',
 		method : 'POST',
 	}, { manual: true });
 
 	const updateEmployeeStatus = async () => {
-		const payload = {
-			id,
-			status: status === 'active' ? 'inactive' : 'active',
-		};
+		const payload = getPayload({ SOURCE, id, companyPolicyValue, status });
 
 		try {
 			await trigger({

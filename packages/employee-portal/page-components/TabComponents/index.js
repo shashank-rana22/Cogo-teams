@@ -41,8 +41,8 @@ const KEY_COMPONENT_MAPPING = {
 
 function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { progress_stats, signed_documents, offer_letter, detail } = data || {};
-	const { share_company_policies } = detail || {};
-	const { is_offer_letter_applicable } = offer_letter || {};
+	const { share_company_policies, is_offer_letter_applicable } = detail || {};
+
 	const {
 		// offer_letter_signed,
 		documents_signed, additional_info_added = {},
