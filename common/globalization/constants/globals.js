@@ -276,9 +276,9 @@ const GLOBAL_CONSTANTS = {
 			copy_12:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
 		},
+		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 		awb_docs_tnc_page:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg',
-		alarm_snooze: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-snooze.svg',
 	},
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
