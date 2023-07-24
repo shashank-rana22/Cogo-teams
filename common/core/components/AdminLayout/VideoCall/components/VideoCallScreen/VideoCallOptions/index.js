@@ -37,14 +37,14 @@ function VideoCallOptions({
 	type = '',
 }) {
 	const { isScreenShareActive = false, isMicActive = false } = toggleState || {};
-	const { request_screen_share = false } = callingRoomDetails || {};
+	const { request_screen_share: requestScreenShare = false } = callingRoomDetails || {};
 
 	const handleRequestScreenShare = ({ e, clickType }) => {
 		if (clickType === 'mini_screen') {
 			e.stopPropagation();
 		}
 		callUpdate({
-			data          : { request_screen_share: !request_screen_share },
+			data          : { request_screen_share: !requestScreenShare },
 			firestore,
 			callingRoomId : callDetails?.callingRoomId,
 		});
@@ -60,9 +60,9 @@ function VideoCallOptions({
 	useEffect(() => {
 		setToggleState((prev) => ({
 			...prev,
-			isScreenShareActive: request_screen_share,
+			isScreenShareActive: requestScreenShare,
 		}));
-	}, [request_screen_share, setToggleState]);
+	}, [requestScreenShare, setToggleState]);
 
 	return (
 		<>

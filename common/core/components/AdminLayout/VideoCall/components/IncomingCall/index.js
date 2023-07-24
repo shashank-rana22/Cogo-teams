@@ -20,7 +20,7 @@ function IncomingCall({
 		const audioRefCopy = audioRef;
 
 		if (audioRef.current) {
-			audioRef.current.play();
+			audioRef.current?.play();
 		}
 
 		return () => {
