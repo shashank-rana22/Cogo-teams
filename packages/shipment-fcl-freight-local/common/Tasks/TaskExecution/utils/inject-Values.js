@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-const ONE = 1;
+const FALLBACK_VALUE = 1;
 const injectValues = ({
 	selectedMail,
 	populatedControls,
@@ -53,7 +53,7 @@ const injectValues = ({
 	) {
 		(controls || []).forEach((control, index) => {
 			if (control?.type === 'fieldArray') {
-				controls[index].value = Array(shipment_data.bls_count || ONE)
+				controls[index].value = Array(shipment_data.bls_count || FALLBACK_VALUE)
 					.fill(GLOBAL_CONSTANTS.zeroth_index)
 					?.map(() => ({
 						description : '',
