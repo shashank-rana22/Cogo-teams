@@ -33,10 +33,10 @@ function Timeline() {
 	let consecutivelyCompleted = true;
 
 	useEffect(() => {
-		if (shipment_data?.id) {
+		if (shipment_data?.id && !showEditSchedule) {
 			getShipmentTimeline();
 		}
-	}, [getShipmentTimeline, shipment_data?.id]);
+	}, [getShipmentTimeline, shipment_data?.id, showEditSchedule]);
 
 	if (loading) {
 		return (
