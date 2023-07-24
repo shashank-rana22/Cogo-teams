@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const DEFAULT_TIME = 10;
+const DEFAULT_TIME = 500;
 const TIMER_SLICE = -2;
 const TIME_SEC = 60;
 const MILI_SEC = 1000;
