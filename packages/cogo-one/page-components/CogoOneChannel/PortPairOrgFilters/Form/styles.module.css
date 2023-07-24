@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.each_element {
+	width: 250px;
+	margin-right: 8px;
+
+	@media (max-width: 1280px) {
+		width: 230px;
+	}
+}
+
+.label_styles {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+	animation: field-name 0.5s both;
+
+	@keyframes field-name {
+		0% {
+			opacity: 0;
+			transform: translate3d(-100px, 0, 0);
+		}
+
+		100% {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}
+
+.error_text {
+	display: flex;
+	justify-content: flex-start;
+	height: 10px;
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+	text-align: center;
+}
+
+.action {
+	margin-top: 16px;
+}

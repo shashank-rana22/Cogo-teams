@@ -20,6 +20,9 @@ const getControls = ({
 	serviceType,
 	setPortDetails = () => {},
 	handleReset = () => {},
+	setModalType = () => {},
+	setSelectedUsers = () => {},
+	setListServiceProviders = () => {},
 }) => [
 	{
 		name        : 'service_type',
@@ -27,7 +30,7 @@ const getControls = ({
 		controlType : 'select',
 		placeholder : 'Select Service Type',
 		size        : 'sm',
-		onChange    : () => { handleReset(); },
+		onChange    : (val) => { handleReset({ val }); },
 		rules       : { required: 'Please Select Service' },
 		options     : [
 			{ label: 'FCL Freight', value: 'fcl_freight' },
@@ -48,6 +51,9 @@ const getControls = ({
 				...prevState,
 				originDetails: obj,
 			}));
+			setModalType('');
+			setSelectedUsers({});
+			setListServiceProviders([]);
 		},
 		initialCall : true,
 		params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },
@@ -65,6 +71,9 @@ const getControls = ({
 				...prevState,
 				destinationDetails: obj,
 			}));
+			setModalType('');
+			setSelectedUsers({});
+			setListServiceProviders([]);
 		},
 		initialCall : true,
 		params      : { filters: { type: [ROUTE_MAPPING[serviceType]] } },

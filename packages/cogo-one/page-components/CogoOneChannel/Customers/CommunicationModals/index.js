@@ -101,7 +101,7 @@ function CommunicationModals({
 							{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.sp_contacts ? (
 								<div className={cl`${styles.action} ${styles.sp_contacts}`}>
 									<IcMAppAddAccount
-										onClick={() => setOpenSpContacts(true)}
+										onClick={() => setOpenSpContacts((prevVal) => !prevVal)}
 										height={25}
 										width={25}
 										fill="#432609"

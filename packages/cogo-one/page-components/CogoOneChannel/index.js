@@ -23,6 +23,7 @@ import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
 import ModalComp from './ModalComps';
+import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
@@ -127,6 +128,14 @@ function CogoOne() {
 						setOpenSpContacts={setOpenSpContacts}
 					/>
 				</div>
+
+				{openSpContacts ? (
+					<PortPairOrgFilters
+						setOpenSpContacts={setOpenSpContacts}
+						setActiveTab={setActiveTab}
+						openSpContacts={openSpContacts}
+					/>
+				) : null}
 
 				{isEmpty(activeTab?.data)
 					? (
