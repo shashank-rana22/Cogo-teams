@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import EmptyState from '../../common/EmptyState';
@@ -16,14 +16,20 @@ import ListHeader from './ListHeader';
 import ListLoader from './ListLoader';
 import styles from './styles.module.css';
 
+const TIME_DURATION_FOR_SET_TME_OUT = 200;
+const PAGE_FACTOR = 1;
+const MSG_COUNT = 0;
+
 function List({
 	setShow = () => { },
 	messageContentArr = [],
 	user_id = '',
 	setSeenLoading = () => { },
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const refOuter = useRef(null);
-	const [id, setId] = useState();
+	const [id, setId] = useState('');
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
 	const [list, setList] = useState({
@@ -45,9 +51,8 @@ function List({
 	const states = { list, setList };
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
-	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
+	const channelId = defaultChannel ? defaultChannel?.id : listData[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	const updateSeenPayload = { id, showUnreadChat };
 	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
@@ -94,9 +99,9 @@ function List({
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
 			if (!loading) {
-				setFilters({ ...filters, page: page + 1 });
+				setFilters({ ...filters, page: page + PAGE_FACTOR });
 			}
-		}, 200);
+		}, TIME_DURATION_FOR_SET_TME_OUT);
 	}, [loading, filters, setFilters, page]);
 
 	const renderContent = () => {
@@ -122,7 +127,7 @@ function List({
 
 					<div className={styles.updated_at}>
 						{formatDate({
-							date       : item?.updatedAt,
+							date       : item?.updated_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'dateTime',
@@ -132,7 +137,7 @@ function List({
 				</div>
 
 				{(messageContentArr || []).map((obj) => (
-					obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
+					obj?.mainKey === item?.id && obj[user_id] > MSG_COUNT && id !== item?.id ? (
 						<div key={item?.id} className={styles.circle}>{obj[user_id]}</div>
 					) : null))}
 			</div>
@@ -174,7 +179,7 @@ function List({
 			{!id ? (
 				<div className={styles.initial_state}>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg"
+						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
 						alt="empty"
 					/>
 

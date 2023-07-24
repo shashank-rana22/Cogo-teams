@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
@@ -10,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
+import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -32,15 +34,17 @@ function CogoOne() {
 		},
 	} = useRouter();
 
-	const { userId, token, emailAddress } = useSelector(({ profile, general }) => ({
-		userId       : profile?.user?.id,
-		token        : general.firestoreToken,
-		emailAddress : profile?.user?.email,
+	const { userId, token, userEmailAddress } = useSelector(({ profile, general }) => ({
+		userId           : profile?.user?.id,
+		token            : general.firestoreToken,
+		userEmailAddress : profile?.user?.email,
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab  : 'message',
-		data : assigned_chat ? {
+		tab               : 'message',
+		subTab            : 'all',
+		hasNoFireBaseRoom : false,
+		data              : assigned_chat ? {
 			id: assigned_chat,
 			channel_type,
 		} : {},
@@ -49,13 +53,10 @@ function CogoOne() {
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const [recipientArray, setRecipientArray] = useState([]);
-	const [bccArray, setBccArray] = useState([]);
 	const [buttonType, setButtonType] = useState('');
-	const [emailState, setEmailState] = useState({
-		subject : '',
-		body    : '',
-	});
+	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
+	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
+	const [openKamContacts, setOpenKamContacts] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -65,7 +66,8 @@ function CogoOne() {
 		agentId           : userId,
 	});
 
-	const { viewType } = useAgentWorkPrefernce();
+	const { viewType, loading: workPrefernceLoading = false } = useAgentWorkPrefernce();
+
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 
@@ -74,20 +76,20 @@ function CogoOne() {
 	const firestore = getFirestore(app);
 
 	const mailProps = {
-		recipientArray,
-		setRecipientArray,
-		bccArray,
-		setBccArray,
 		buttonType,
 		setButtonType,
 		emailState,
 		setEmailState,
-		emailAddress,
+		userEmailAddress,
+		activeMailAddress,
+		setActiveMailAddress,
+		viewType,
 		activeMail    : activeTab?.data,
 		setActiveMail : (val) => {
 			setActiveTab((prev) => ({ ...prev, data: val }));
 		},
 	};
+	const { hasNoFireBaseRoom = false } = activeTab || {};
 
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -103,7 +105,7 @@ function CogoOne() {
 		<>
 			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions.toggle_agent_status && (
 				<div className={styles.settings}>
-					<AgentStatusToggle />
+					<AgentStatusToggle firestore={firestore} />
 				</div>
 			)}
 			<div className={styles.layout_container}>
@@ -119,16 +121,15 @@ function CogoOne() {
 						mailProps={mailProps}
 						firestore={firestore}
 						suggestions={suggestions}
+						workPrefernceLoading={workPrefernceLoading}
+						setOpenKamContacts={setOpenKamContacts}
 					/>
 				</div>
 
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
-							<EmptyChatPage
-								displayMessage={activeTab?.tab === 'message'
-									? 'chat' : 'call log'}
-							/>
+							<EmptyChatPage activeTab={activeTab} />
 						</div>
 					) : (
 						<>
@@ -146,11 +147,14 @@ function CogoOne() {
 									mailProps={mailProps}
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
+									setModalType={setModalType}
 								/>
 							</div>
 
 							{activeTab?.tab !== 'mail' && (
-								<div className={styles.user_profile_layout}>
+								<div className={cl`${styles.user_profile_layout} 
+								${hasNoFireBaseRoom ? styles.disable_user_profile : ''}`}
+								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
 										activeTab={activeTab?.tab}
@@ -165,6 +169,7 @@ function CogoOne() {
 										userId={userId}
 										setActiveTab={setActiveTab}
 									/>
+									{hasNoFireBaseRoom && <div className={styles.overlay_div} />}
 								</div>
 							)}
 						</>
@@ -172,8 +177,7 @@ function CogoOne() {
 
 				<div className={styles.download_apk}>
 					<div
-						role="button"
-						tabIndex={0}
+						role="presentation"
 						className={styles.download_div}
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>
@@ -203,6 +207,9 @@ function CogoOne() {
 				refetchTickets={refetchTickets}
 				firestore={firestore}
 				userId={userId}
+				openKamContacts={openKamContacts}
+				setOpenKamContacts={setOpenKamContacts}
+				setActiveTab={setActiveTab}
 			/>
 		</>
 	);

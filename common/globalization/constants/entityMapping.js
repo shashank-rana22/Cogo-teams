@@ -14,7 +14,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['compliance', 'post_to_sage'],
+		feature_supported   : ['compliance', 'post_to_sage', 'dunning'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -40,7 +40,7 @@ const ENTITY_MAPPING = {
 		icon                : IcCCountryIndia,
 		currency            : 'INR',
 		default_entity_code : '301',
-		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance'],
+		feature_supported   : ['cogo_books', 'post_to_sage', 'cancel_irn', 'compliance', 'dunning'],
 		labels              : {
 			irn_label: 'IRN',
 		},
@@ -70,7 +70,8 @@ const ENTITY_MAPPING = {
 			'freight_sales_invoice_restricted_enitity',
 			'cancel_e_invoice',
 			'upload_invoice',
-			'is_revoked'],
+			'dunning',
+		],
 		labels: {
 			irn_label: 'E-invoice',
 		},

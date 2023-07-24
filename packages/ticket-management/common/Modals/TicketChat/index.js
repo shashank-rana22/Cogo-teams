@@ -28,19 +28,18 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 55px)';
+		return 'calc(100% - 82px)';
 	}
 	return 'calc(100% - 75px)';
 };
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
-	setShowReassign = () => {},
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
 }) {
 	const { ticketId = '' } = modalData || {};
 
 	const messageRef = useRef(null);
-	const [isInternal, setIsInternal] = useState(false);
 	const [file, setFile] = useState('');
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
@@ -68,7 +67,7 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '' } = ticket || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
 
 	const {
 		listData = {},
@@ -183,14 +182,16 @@ function TicketChat({
 									setMessage={setMessage}
 									setUploading={setUploading}
 									setIsInternal={setIsInternal}
+									createLoading={createLoading}
 									isInternal={isInternal}
+									notifyCustomer={notifyCustomer}
 									handleKeyPress={handleKeyPress}
 									handleSendComment={handleSendComment}
 								/>
 							)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} />
+						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
 					</div>
 				)}
 
