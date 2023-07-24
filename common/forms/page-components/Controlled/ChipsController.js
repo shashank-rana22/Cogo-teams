@@ -26,7 +26,12 @@ function ChipsController(props) {
 						label    : undefined,
 					}))}
 					selectedItems={newValue}
-					onItemChange={onChange}
+					onItemChange={(val, obj) => {
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(val, obj);
+						}
+						onChange(val, obj);
+					}}
 					enableMultiSelect={multiple}
 				/>
 			)}
