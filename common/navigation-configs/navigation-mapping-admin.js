@@ -1250,7 +1250,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/igm-desk',
 				type          : 'link',
 				main_apis     : ['list_igm_desk_shipments'],
-				possible_apis : [...apis.shipment, ...apis.igm_desk],
+				possible_apis : [...apis.igm_shipment, ...apis.igm_desk],
 			},
 			{
 				key       : 'coe-bl_do',
