@@ -116,7 +116,7 @@ function OrgUsersList({
 						onClick={() => setModalType('bulk_communication')}
 						type="button"
 					>
-						Chose Template
+						Choose Template
 					</Button>
 				</div>
 			) : null}

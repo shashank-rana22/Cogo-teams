@@ -75,12 +75,25 @@ function SpOrganizationUsers({
 		sendCommunicationTemplate : bulkCommunication,
 		communicationLoading      : false,
 	};
+
 	const onSubmit = (values) => {
 		getServiceProviders({ values, portDetails });
 	};
 
+	const handleReset = () => {
+		reset({
+			origin_port_id      : '',
+			destination_port_id : '',
+		});
+		setPortDetails((prevState) => ({
+			...prevState,
+			originDetails      : {},
+			destinationDetails : {},
+		}));
+	};
+
 	const isPortData = destinationLocation || originLocation;
-	const controls = getControls({ serviceType, setPortDetails });
+	const controls = getControls({ serviceType, setPortDetails, handleReset });
 
 	const handleClear = () => {
 		setListServiceProviders([]);

@@ -19,6 +19,7 @@ export const ROUTE_MAPPING = {
 const getControls = ({
 	serviceType,
 	setPortDetails = () => {},
+	handleReset = () => {},
 }) => [
 	{
 		name        : 'service_type',
@@ -26,6 +27,7 @@ const getControls = ({
 		controlType : 'select',
 		placeholder : 'Select Service Type',
 		size        : 'sm',
+		onChange    : () => { handleReset(); },
 		rules       : { required: 'Please Select Service' },
 		options     : [
 			{ label: 'FCL Freight', value: 'fcl_freight' },
